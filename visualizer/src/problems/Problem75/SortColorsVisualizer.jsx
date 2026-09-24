@@ -1,412 +1,955 @@
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
+
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
-import "./SortColorsVisualizer.css";
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import { getSolutionCode } from '../../config/solutionCodeRegistry'
-const SOLUTION_CODE = getSolutionCode('sort-colors')
-const COLOR_LABEL = ["🔴", "⚪", "🔵"];
-const COLOR_NAME = ["Red", "White", "Blue"];
-const COLOR_HEX = ["#ef4444", "#f3f4f6", "#3b82f6"];
 
-const SORTCOLORS_PATTERNS = ['check', 'done', 'init', 'place_lo', 'place_hi', 'skip'];
+import { getExamples } from "../../config/examplesRegistry";
+import { getSolutionCode } from "../../config/solutionCodeRegistry";
+
+import "./SortColorsVisualizer.css";
+
+const SOLUTION_CODE = getSolutionCode("sort-colors");
+
+const EXAMPLES = getExamples("sort-colors");
+
+const SORTCOLORS_PATTERNS = [
+  "init",
+  "check",
+  "place_lo",
+  "skip",
+  "place_hi",
+  "done",
+];
 
 const LINE_PATTERN_MAP = {
-  2: 'init',
-  3: 'check',
-  4: 'place_lo',
-  6: 'skip',
-  9: 'place_hi',
-  11: 'done',
+  2: "init",
+  3: "check",
+  4: "place_lo",
+  6: "place_lo",
+  7: "skip",
+  9: "place_hi",
+  11: "place_hi",
+};
+
+const COLOR_META = {
+  0: {
+    name: "Red",
+    short: "R",
+  },
+  1: {
+    name: "White",
+    short: "W",
+  },
+  2: {
+    name: "Blue",
+    short: "B",
+  },
 };
 
 function generateSteps(initial) {
-    const steps = [];
-    const nums = [...initial];
-    let lo = 0, mid = 0, hi = nums.length - 1;
+  const steps = [];
+  const nums = [...initial];
 
-    steps.push({ phase: 'init', activeLine: 2, nums: [...nums], lo, mid, hi, message: `Dutch National Flag. lo=0, mid=0, hi=${hi}` });
+  let lo = 0;
+  let mid = 0;
+  let hi = nums.length - 1;
 
-    while (mid <= hi) {
-        steps.push({ phase: 'check', activeLine: 3, nums: [...nums], lo, mid, hi, message: `mid=${mid} ≤ hi=${hi}. nums[mid]=${nums[mid]}` });
+  steps.push({
+    phase: "init",
+    action: "init",
+    activeLine: 2,
+    nums: [...nums],
+    lo,
+    mid,
+    hi,
+    inspectIndex: null,
+    swapA: null,
+    swapB: null,
+    message:
+      `Initialize lo = 0, mid = 0, hi = ${hi}. ` +
+      "Everything is initially in the unknown region.",
+  });
 
-        if (nums[mid] === 0) {
-            steps.push({ phase: 'place_lo', activeLine: 4, nums: [...nums], lo, mid, hi, message: `nums[mid]=0 → swap with lo=${lo}` });
-            [nums[lo], nums[mid]] = [nums[mid], nums[lo]];
-            lo++; mid++;
-            steps.push({ phase: 'place_lo', activeLine: 6, nums: [...nums], lo, mid, hi, message: `After swap. lo=${lo}, mid=${mid}` });
-        } else if (nums[mid] === 1) {
-            steps.push({ phase: 'skip', activeLine: 7, nums: [...nums], lo, mid, hi, message: `nums[mid]=1 → already white, mid++` });
-            mid++;
-        } else {
-            steps.push({ phase: 'place_hi', activeLine: 9, nums: [...nums], lo, mid, hi, message: `nums[mid]=2 → swap with hi=${hi}` });
-            [nums[mid], nums[hi]] = [nums[hi], nums[mid]];
-            hi--;
-            steps.push({ phase: 'place_hi', activeLine: 11, nums: [...nums], lo, mid, hi, message: `After swap. hi=${hi} (don't move mid yet)` });
-        }
-    }
+  while (mid <= hi) {
+    const current = nums[mid];
 
-    steps.push({ phase: 'done', activeLine: 11, nums: [...nums], lo, mid, hi, message: `Done! Sorted: [${nums.join(",")}]` });
-    return steps;
-}
-
-function DutchFlagVisualization({ nums, step }) {
-  const lo = step?.lo ?? 0, mid = step?.mid ?? 0, hi = step?.hi ?? (nums.length - 1);
-  const redCount = lo;
-  const whiteCount = mid - lo;
-  const blueCount = nums.length - 1 - hi;
-  const unknownCount = hi - mid + 1;
-
-  // Partition into lanes
-  const reds = nums.slice(0, lo);
-  const whites = nums.slice(lo, mid);
-  const unknown = nums.slice(mid, hi + 1);
-  const blues = nums.slice(hi + 1);
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 16 }}>
-      {/* Three-lane visualization */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
-        {/* Red lane */}
-        <div style={{
-          padding: 16,
-          backgroundColor: '#fee2e2',
-          borderRadius: 8,
-          border: '2px solid #ef4444'
-        }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#991b1b', marginBottom: 8 }}>🔴 Red Lane</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 60 }}>
-            <AnimatePresence>
-              {reds.map((v, i) => (
-                <motion.div
-                  key={`red-${i}`}
-                  layout
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 6,
-                    backgroundColor: 'var(--error-glow)',
-                    color: 'var(--text)',
-                    border: '2px solid var(--error)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 'bold',
-                    fontSize: 18
-                  }}
-                >
-                  {COLOR_LABEL[v]}
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          <div style={{ marginTop: 12, fontSize: 13, color: '#991b1b', fontWeight: 600 }}>
-            ✓ {redCount}
-          </div>
-        </div>
-
-        {/* White lane */}
-        <div style={{
-          padding: 16,
-          backgroundColor: '#f3f4f6',
-          borderRadius: 8,
-          border: '2px solid #6b7280'
-        }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#374151', marginBottom: 8 }}>⚪ White Lane</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 60 }}>
-            <AnimatePresence>
-              {whites.map((v, i) => (
-                <motion.div
-                  key={`white-${i}`}
-                  layout
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 6,
-                    backgroundColor: '#e5e7eb',
-                    color: '#1f2937',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    border: '2px solid #9ca3af'
-                  }}
-                >
-                  {COLOR_LABEL[v]}
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          <div style={{ marginTop: 12, fontSize: 13, color: '#374151', fontWeight: 600 }}>
-            ✓ {whiteCount}
-          </div>
-        </div>
-
-        {/* Blue lane */}
-        <div style={{
-          padding: 16,
-          backgroundColor: '#dbeafe',
-          borderRadius: 8,
-          border: '2px solid #3b82f6'
-        }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#1e40af', marginBottom: 8 }}>🔵 Blue Lane</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, minHeight: 60 }}>
-            <AnimatePresence>
-              {blues.map((v, i) => (
-                <motion.div
-                  key={`blue-${i}`}
-                  layout
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 6,
-                    backgroundColor: 'var(--primary-glow)',
-                    color: 'var(--text)',
-                    border: '2px solid var(--primary)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 'bold',
-                    fontSize: 18
-                  }}
-                >
-                  {COLOR_LABEL[v]}
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          <div style={{ marginTop: 12, fontSize: 13, color: '#1e40af', fontWeight: 600 }}>
-            ✓ {blueCount}
-          </div>
-        </div>
-      </div>
-
-      {/* Unknown/processing area */}
-      {unknownCount > 0 && (
-        <div style={{
-          padding: 12,
-          backgroundColor: '#fef3c7',
-          borderRadius: 8,
-          border: '2px dashed #f59e0b'
-        }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#92400e', marginBottom: 8 }}>⚙️ Processing {unknownCount} elements</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-            <AnimatePresence>
-              {unknown.map((v, i) => (
-                <motion.div
-                  key={`unknown-${mid + i}`}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 6,
-                    backgroundColor: '#fbbf24',
-                    color: '#78350f',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    border: mid + i === step?.cur ? '3px solid #f59e0b' : '2px solid transparent'
-                  }}
-                >
-                  {COLOR_LABEL[v]}
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        </div>
-      )}
-
-      {/* Pointers status */}
-      <div style={{ padding: 12, backgroundColor: '#f0fdf4', borderRadius: 6, border: '1px solid #86efac' }}>
-        <div style={{ fontSize: 12, fontWeight: 600, color: '#15803d', marginBottom: 8 }}>Pointers</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, fontSize: 12 }}>
-          <div>lo = <strong>{lo}</strong></div>
-          <div>mid = <strong>{mid}</strong></div>
-          <div>hi = <strong>{hi}</strong></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function VisualizationPanel({ nums, step, applyExample }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((e, i) => (
-            <button
-              key={e.label}
-              onClick={() => applyExample(i)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid var(--border)',
-                cursor: 'pointer',
-                fontSize: 12,
-                backgroundColor: 'var(--surface2)'
-              }}
-            >
-              {e.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <DutchFlagVisualization nums={nums} step={step} />
-    </div>
-  );
-}
-
-const EXAMPLES = getExamples('sort-colors');
-
-export default function SortColorsVisualizer() {
-    const [sel, setSel] = useState(0);
-  const [initialInput, setInitialInput] = useState(JSON.stringify(EXAMPLES[0]?.["nums"] ?? null));
-  const { initial, inputError } = useMemo(() => {
-    try {
-      const parsedInitial = JSON.parse(initialInput); if (!Array.isArray(parsedInitial)) throw new Error('initial must be an array');
-      return { initial: parsedInitial, inputError: '' };
-    } catch (e) {
-      return { initial: EXAMPLES[sel]?.nums, inputError: e.message };
-    }
-  }, [initialInput]);;
-    const [panelDivs, setPanelDivs] = useState(null);
-    const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
-
-        const steps = useMemo(() => generateSteps(initial), [initial]);
-    const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-        usePlaybackState(steps.length);
-    const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
-    const applyExample = useCallback((i) => { setSel(i); setInitialInput(JSON.stringify(EXAMPLES[i].nums)); handleReset(); }, [handleReset]);
-    const connectivity = useCodeVisualConnectivity({
-      steps,
-      stepIndex,
-      onStepJump: setStepIndex,
+    steps.push({
+      phase: "check",
+      action: "inspect",
+      activeLine: 3,
+      nums: [...nums],
+      lo,
+      mid,
+      hi,
+      inspectIndex: mid,
+      swapA: null,
+      swapB: null,
+      message:
+        `Inspect nums[${mid}] = ${current}. ` +
+        `It represents ${COLOR_META[current].name}.`,
     });
 
-    const nums = step?.nums ?? initial;
+    if (current === 0) {
+      steps.push({
+        phase: "place_lo",
+        action: "swap-preview",
+        activeLine: 4,
+        nums: [...nums],
+        lo,
+        mid,
+        hi,
+        inspectIndex: mid,
+        swapA: lo,
+        swapB: mid,
+        message:
+          `nums[mid] is 0 (Red). Swap indices ${mid} and ${lo} ` +
+          "so this value joins the red region.",
+      });
+      [nums[lo], nums[mid]] = [nums[mid], nums[lo]];
 
-    const codePanel = (
-      <div style={{ position: 'relative', height: '100%' }}>
-        <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-          disableResizer
-        />
-        {showPatternOverlay && (
-          <CodePatternAnnotations
-            linePatterns={LINE_PATTERN_MAP}
-            currentPhase={step?.phase}
-            activeLineDom={activeLineDom}
-            activeLine={step?.activeLine}
-          />
-        )}
+      const oldLo = lo;
+      const oldMid = mid;
+
+      lo += 1;
+      mid += 1;
+
+      steps.push({
+        phase: "place_lo",
+        action: "swap-complete",
+        activeLine: 6,
+        nums: [...nums],
+        lo,
+        mid,
+        hi,
+        inspectIndex: null,
+        swapA: oldLo,
+        swapB: oldMid,
+        message:
+          `Swap complete. The red region grows. ` +
+          `Move lo to ${lo} and mid to ${mid}.`,
+      });
+    } else if (current === 1) {
+      steps.push({
+        phase: "skip",
+        action: "skip",
+        activeLine: 7,
+        nums: [...nums],
+        lo,
+        mid,
+        hi,
+        inspectIndex: mid,
+        swapA: null,
+        swapB: null,
+        message:
+          `nums[${mid}] is 1 (White). It already belongs between ` +
+          "the red and unknown regions, so only mid moves right.",
+      });
+
+      mid += 1;
+
+      steps.push({
+        phase: "skip",
+        action: "advance",
+        activeLine: 7,
+        nums: [...nums],
+        lo,
+        mid,
+        hi,
+        inspectIndex: null,
+        swapA: null,
+        swapB: null,
+        message: `White value accepted. mid = ${mid}.`,
+      });
+    } else {
+      steps.push({
+        phase: "place_hi",
+        action: "swap-preview",
+        activeLine: 9,
+        nums: [...nums],
+        lo,
+        mid,
+        hi,
+        inspectIndex: mid,
+        swapA: mid,
+        swapB: hi,
+        message:
+          `nums[mid] is 2 (Blue). Swap indices ${mid} and ${hi} ` +
+          "so this value joins the blue region.",
+      });
+
+      const oldMid = mid;
+      const oldHi = hi;
+
+      [nums[mid], nums[hi]] = [nums[hi], nums[mid]];
+
+      hi -= 1;
+
+      steps.push({
+        phase: "place_hi",
+        action: "swap-complete",
+        activeLine: 11,
+        nums: [...nums],
+        lo,
+        mid,
+        hi,
+        inspectIndex: mid,
+        swapA: oldMid,
+        swapB: oldHi,
+        message:
+          `Swap complete. The blue region grows and hi becomes ${hi}. ` +
+          `mid stays at ${mid} because the value swapped in from the right ` +
+          "has not been inspected yet.",
+      });
+    }
+  }
+
+  steps.push({
+    phase: "done",
+    action: "done",
+    activeLine: 11,
+    nums: [...nums],
+    lo,
+    mid,
+    hi,
+    inspectIndex: null,
+    swapA: null,
+    swapB: null,
+    message:
+      `mid (${mid}) is now greater than hi (${hi}). ` +
+      `The unknown region is empty. Sorted array: [${nums.join(", ")}].`,
+  });
+
+  return steps;
+}
+
+function RegionBracket({ label, description, count, tone, empty = false }) {
+  return (
+    <div
+      className={[
+        "sc-region-card",
+        `sc-region-card--${tone}`,
+        empty ? "is-empty" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <div className="sc-region-card__top">
+        <span className="sc-region-card__label">{label}</span>
+
+        <span className="sc-region-card__count">{count}</span>
       </div>
-    );
 
-    const vizPanel = (
-      <>
-        <ManualInputPanel
-          fields={[{"key":"initial","label":"initial","type":"string"}]}
-          values={{ initial: initialInput }}
-          onChange={(k, v) => { if (k === 'initial') setInitialInput(v); handleReset() }}
-          examples={EXAMPLES}
-          activeLabel={EXAMPLES[sel]?.label}
-          applyExample={(e) => applyExample(EXAMPLES.indexOf(e))}
-          inputError={inputError}
+      <span className="sc-region-card__description">{description}</span>
+    </div>
+  );
+}
+
+function PointerBadge({ name, value, tone }) {
+  return (
+    <div className={`sc-pointer-card sc-pointer-card--${tone}`}>
+      <span className="sc-pointer-card__name">{name}</span>
+
+      <strong className="sc-pointer-card__value">{value}</strong>
+    </div>
+  );
+}
+
+function DutchFlagArray({ nums, step }) {
+  const lo = step?.lo ?? 0;
+  const mid = step?.mid ?? 0;
+  const hi = step?.hi ?? nums.length - 1;
+
+  const redCount = Math.max(0, Math.min(lo, nums.length));
+
+  const whiteStart = Math.max(0, Math.min(lo, nums.length));
+  const whiteEnd = Math.max(whiteStart, Math.min(mid, nums.length));
+
+  const whiteCount = Math.max(0, whiteEnd - whiteStart);
+
+  const unknownStart = Math.max(0, Math.min(mid, nums.length));
+
+  const unknownEnd = Math.max(unknownStart, Math.min(hi + 1, nums.length));
+
+  const unknownCount = Math.max(0, unknownEnd - unknownStart);
+
+  const blueStart = Math.max(0, Math.min(hi + 1, nums.length));
+
+  const blueCount = Math.max(0, nums.length - blueStart);
+
+  const getRegion = (index) => {
+    if (index < lo) {
+      return "red";
+    }
+
+    if (index < mid) {
+      return "white";
+    }
+
+    if (index <= hi) {
+      return "unknown";
+    }
+
+    return "blue";
+  };
+
+  return (
+    <div className="sc-algorithm">
+      <div className="sc-explanation">
+        <div className="sc-explanation__title">
+          Dutch National Flag invariant
+        </div>
+
+        <div className="sc-explanation__formula">
+          <span className="red">[0 .. lo-1] = Red</span>
+
+          <span className="white">[lo .. mid-1] = White</span>
+
+          <span className="unknown">[mid .. hi] = Unknown</span>
+
+          <span className="blue">[hi+1 .. n-1] = Blue</span>
+        </div>
+      </div>
+
+      <div className="sc-region-summary">
+        <RegionBracket
+          label="Red"
+          description="[0 .. lo-1]"
+          count={redCount}
+          tone="red"
+          empty={redCount === 0}
         />
-      <VisualizationPanel
-        nums={nums}
-        step={step}
-        applyExample={applyExample}
+
+        <RegionBracket
+          label="White"
+          description="[lo .. mid-1]"
+          count={whiteCount}
+          tone="white"
+          empty={whiteCount === 0}
+        />
+
+        <RegionBracket
+          label="Unknown"
+          description="[mid .. hi]"
+          count={unknownCount}
+          tone="unknown"
+          empty={unknownCount === 0}
+        />
+
+        <RegionBracket
+          label="Blue"
+          description="[hi+1 .. n-1]"
+          count={blueCount}
+          tone="blue"
+          empty={blueCount === 0}
+        />
+      </div>
+
+      <section className="sc-array-panel">
+        <div className="sc-array-panel__head">
+          <div>
+            <div className="sc-array-panel__title">In-place array</div>
+
+            <div className="sc-array-panel__subtitle">
+              The regions change by moving lo, mid and hi. No secondary arrays
+              are created.
+            </div>
+          </div>
+
+          <div className="sc-array-panel__size">n = {nums.length}</div>
+        </div>
+
+        <div className="sc-array-scroll">
+          <div className="sc-array">
+            {nums.map((value, index) => {
+              const region = getRegion(index);
+
+              const isLo = index === lo && lo < nums.length;
+
+              const isMid = index === mid && mid < nums.length;
+
+              const isHi = index === hi && hi >= 0 && hi < nums.length;
+
+              const isInspect = index === step?.inspectIndex;
+
+              const isSwapA = index === step?.swapA;
+
+              const isSwapB = index === step?.swapB;
+
+              const isSwap = isSwapA || isSwapB;
+
+              return (
+                <div key={index} className="sc-cell-column">
+                  <span className="sc-index">{index}</span>
+
+                  <motion.div
+                    layout
+                    className={[
+                      "sc-array-cell",
+                      `sc-array-cell--${region}`,
+                      isInspect ? "is-inspecting" : "",
+                      isSwap ? "is-swapping" : "",
+                      isMid ? "has-mid" : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    animate={{
+                      y: isInspect ? -7 : 0,
+                      scale: isSwap ? 1.1 : isInspect ? 1.07 : 1,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 25,
+                    }}
+                  >
+                    <span className="sc-array-cell__value">{value}</span>
+
+                    <span className="sc-array-cell__name">
+                      {COLOR_META[value].name}
+                    </span>
+
+                    {isInspect && (
+                      <span className="sc-inspect-badge">inspect</span>
+                    )}
+
+                    {isSwap && <span className="sc-swap-badge">swap</span>}
+                  </motion.div>
+
+                  <div className="sc-cell-pointers">
+                    {isLo && (
+                      <span className="sc-cell-pointer sc-cell-pointer--lo">
+                        lo
+                      </span>
+                    )}
+
+                    {isMid && (
+                      <span className="sc-cell-pointer sc-cell-pointer--mid">
+                        mid
+                      </span>
+                    )}
+
+                    {isHi && (
+                      <span className="sc-cell-pointer sc-cell-pointer--hi">
+                        hi
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+
+            {mid === nums.length && (
+              <div className="sc-end-pointer">
+                <span>mid</span>
+
+                <strong>{mid}</strong>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="sc-array-brackets">
+          <div
+            className="sc-array-bracket sc-array-bracket--red"
+            style={{
+              flexGrow: redCount,
+              display: redCount > 0 ? "flex" : "none",
+            }}
+          >
+            <span>Red</span>
+          </div>
+
+          <div
+            className="sc-array-bracket sc-array-bracket--white"
+            style={{
+              flexGrow: whiteCount,
+              display: whiteCount > 0 ? "flex" : "none",
+            }}
+          >
+            <span>White</span>
+          </div>
+
+          <div
+            className="sc-array-bracket sc-array-bracket--unknown"
+            style={{
+              flexGrow: unknownCount,
+              display: unknownCount > 0 ? "flex" : "none",
+            }}
+          >
+            <span>Unknown</span>
+          </div>
+
+          <div
+            className="sc-array-bracket sc-array-bracket--blue"
+            style={{
+              flexGrow: blueCount,
+              display: blueCount > 0 ? "flex" : "none",
+            }}
+          >
+            <span>Blue</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="sc-pointer-row">
+        <PointerBadge name="lo" value={lo} tone="lo" />
+
+        <PointerBadge name="mid" value={mid} tone="mid" />
+
+        <PointerBadge name="hi" value={hi} tone="hi" />
+      </div>
+
+      <AnimatePresence mode="wait">
+        {step?.action === "inspect" && step?.inspectIndex != null && (
+          <motion.div
+            key={`inspect-${stepIndexKey(step)}`}
+            className="sc-decision"
+            initial={{
+              opacity: 0,
+              y: 6,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: -4,
+            }}
+          >
+            <div className="sc-decision__eyebrow">Inspect nums[mid]</div>
+
+            <div className="sc-decision__expression">
+              nums[{mid}]<span>=</span>
+              <strong className={`value-${nums[mid]}`}>{nums[mid]}</strong>
+            </div>
+
+            <div className="sc-decision__branches">
+              <div
+                className={[
+                  "sc-branch",
+                  nums[mid] === 0 ? "is-active" : "",
+                  "sc-branch--red",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <strong>0</strong>
+
+                <span>swap(mid, lo)</span>
+              </div>
+
+              <div
+                className={[
+                  "sc-branch",
+                  nums[mid] === 1 ? "is-active" : "",
+                  "sc-branch--white",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <strong>1</strong>
+
+                <span>mid++</span>
+              </div>
+
+              <div
+                className={[
+                  "sc-branch",
+                  nums[mid] === 2 ? "is-active" : "",
+                  "sc-branch--blue",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <strong>2</strong>
+
+                <span>swap(mid, hi)</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {step?.action === "swap-preview" && (
+          <motion.div
+            key={`swap-${step.swapA}-${step.swapB}`}
+            className="sc-operation sc-operation--swap"
+            initial={{
+              opacity: 0,
+              y: 6,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <div className="sc-operation__label">Swap operation</div>
+
+            <div className="sc-swap-expression">
+              <div>
+                <span>index</span>
+
+                <strong>{step.swapA}</strong>
+
+                <small>{COLOR_META[nums[step.swapA]]?.name}</small>
+              </div>
+
+              <div className="sc-swap-arrow">⇄</div>
+
+              <div>
+                <span>index</span>
+
+                <strong>{step.swapB}</strong>
+
+                <small>{COLOR_META[nums[step.swapB]]?.name}</small>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {step?.action === "swap-complete" && (
+          <motion.div
+            key={`complete-${step.lo}-${step.mid}-${step.hi}`}
+            className="sc-operation sc-operation--complete"
+            initial={{
+              opacity: 0,
+              y: 6,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+          >
+            <span className="sc-operation__check">✓</span>
+
+            <div>
+              <strong>Partition updated</strong>
+
+              <span>The array was modified in place.</span>
+            </div>
+          </motion.div>
+        )}
+
+        {step?.action === "done" && (
+          <motion.div
+            key="done"
+            className="sc-operation sc-operation--done"
+            initial={{
+              opacity: 0,
+              y: 6,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+          >
+            <span className="sc-operation__check">✓</span>
+
+            <div>
+              <strong>All regions resolved</strong>
+
+              <span>Unknown region is empty. The array is sorted.</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function stepIndexKey(step) {
+  return [step?.lo, step?.mid, step?.hi, step?.inspectIndex].join("-");
+}
+
+function VisualizationPanel({ nums, step }) {
+  return (
+    <div className="sc-viz">
+      <DutchFlagArray nums={nums} step={step} />
+    </div>
+  );
+}
+
+export default function SortColorsVisualizer() {
+  const [sel, setSel] = useState(0);
+
+  const [initialInput, setInitialInput] = useState(
+    JSON.stringify(
+      EXAMPLES[0]?.nums ?? EXAMPLES[0]?.input ?? [2, 0, 2, 1, 1, 0],
+    ),
+  );
+
+  const [panelDivs, setPanelDivs] = useState(null);
+
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
+
+  const { initial, inputError } = useMemo(() => {
+    try {
+      const parsedInitial = JSON.parse(initialInput);
+
+      if (!Array.isArray(parsedInitial)) {
+        throw new Error("Enter a JSON array containing only 0, 1, and 2.");
+      }
+
+      if (parsedInitial.length === 0) {
+        throw new Error("Array must contain at least one value.");
+      }
+
+      if (parsedInitial.length > 24) {
+        throw new Error("Use at most 24 elements for visualization clarity.");
+      }
+
+      const normalized = parsedInitial.map(Number);
+
+      if (
+        normalized.some(
+          (value) => !Number.isInteger(value) || ![0, 1, 2].includes(value),
+        )
+      ) {
+        throw new Error("Enter a JSON array containing only 0, 1, and 2.");
+      }
+
+      return {
+        initial: normalized,
+        inputError: "",
+      };
+    } catch (error) {
+      return {
+        initial: EXAMPLES[sel]?.nums ??
+          EXAMPLES[sel]?.input ?? [2, 0, 2, 1, 1, 0],
+
+        inputError: error.message || "Invalid input.",
+      };
+    }
+  }, [initialInput, sel]);
+
+  const steps = useMemo(
+    () =>
+      generateSteps(initial).map((current) => ({
+        ...current,
+        relatedLines:
+          current.relatedLines ??
+          (current.activeLine != null ? [current.activeLine] : []),
+      })),
+    [initial],
+  );
+
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
+
+  const step = stepIndex >= 0 ? steps[stepIndex] : steps[0];
+
+  const connectivity = useCodeVisualConnectivity({
+    steps,
+    stepIndex,
+    onStepJump: setStepIndex,
+  });
+
+  const applyExample = useCallback(
+    (index) => {
+      const example = EXAMPLES[index];
+
+      if (!example) {
+        return;
+      }
+
+      setSel(index);
+
+      setInitialInput(JSON.stringify(example.nums ?? example.input ?? []));
+
+      handleReset();
+    },
+    [handleReset],
+  );
+
+  const nums = step?.nums ?? initial;
+
+  const inputPanel = (
+    <div className="sc-input-panel">
+      <ManualInputPanel
+        fields={[
+          {
+            key: "initial",
+            label: "Colors",
+            type: "array",
+          },
+        ]}
+        values={{
+          initial: initialInput,
+        }}
+        onChange={(key, value) => {
+          if (key === "initial") {
+            setInitialInput(value);
+          }
+
+          handleReset();
+        }}
+        examples={EXAMPLES}
+        activeLabel={EXAMPLES[sel]?.label}
+        applyExample={(example) => applyExample(EXAMPLES.indexOf(example))}
+        inputError={inputError}
       />
-    
-    </>);
+    </div>
+  );
 
-    const statusPanel = (
-      <div className="sc-status" style={{ display: 'flex', alignItems: 'center', padding: '8px 12px' }}>
-        <span>{step?.message || 'Ready to start'}</span>
-      </div>
-    );
+  const codePanel = (
+    <div
+      style={{
+        position: "relative",
+        height: "100%",
+      }}
+    >
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        highlightedLines={connectivity.highlightedLines}
+        onLineSelect={connectivity.handleLineSelect}
+        onActiveLineDomChange={setActiveLineDom}
+        disableResizer
+      />
 
-    const playbackPanel = (
-      <>
-        <PlaybackControls
-          isPlaying={isPlaying}
-          isDone={isDone}
-          speed={speed}
-          onPlayToggle={togglePlay}
-          onPrev={stepBack}
-          onNext={stepForward}
-          onReset={handleReset}
-          prevDisabled={stepIndex <= 0}
-          nextDisabled={isDone}
-          resetDisabled={stepIndex <= 0}
-          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
-          showPatternOverlay={showPatternOverlay}
-          onShowPatternOverlayChange={setShowPatternOverlay}
-          patternOverlayLabel="Show pattern overlay"
-          showPatternOverlayToggle
+      {showPatternOverlay && (
+        <CodePatternAnnotations
+          linePatterns={LINE_PATTERN_MAP}
+          currentPhase={step?.phase}
+          activeLineDom={activeLineDom}
+          activeLine={step?.activeLine}
         />
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={SORTCOLORS_PATTERNS} />
-        )}
-      </>
-    );
+      )}
+    </div>
+  );
 
-    const panelConfigs = useMemo(
-      () => [
-        { id: 'code', title: 'Code', dockMode: 'split-right' },
-        { id: 'viz', title: '🌈 Three Lanes', dockMode: 'split-right' },
-        { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
-      ],
-      []
-    );
+  const vizPanel = <VisualizationPanel nums={nums} step={step} />;
 
-    const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
+  const statusPanel = (
+    <div
+      className={["sc-status", step?.phase === "done" ? "is-done" : ""]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      <span className="sc-status__phase">
+        {step?.phase ? step.phase.replaceAll("_", " ") : "ready"}
+      </span>
 
-    return (
-      <div className="sc-shell">
-        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
-        {panelDivs && (
-          <>
-            {panelDivs.code && createPortal(codePanel, panelDivs.code)}
-            {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
-            {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
-          </>
-        )}
-        {createPortal(
-          <FloatingPanel title="Playback Controls">{playbackPanel}</FloatingPanel>,
-          document.body
-        )}
-      </div>
-    );
+      <span className="sc-status__message">
+        {step?.message ?? "Press Play or Step to begin."}
+      </span>
+    </div>
+  );
+
+  const playbackPanel = (
+    <>
+      <PlaybackControls
+        isPlaying={isPlaying}
+        isDone={isDone}
+        speed={speed}
+        onPlayToggle={togglePlay}
+        onPrev={stepBack}
+        onNext={stepForward}
+        onReset={handleReset}
+        prevDisabled={stepIndex < 0}
+        nextDisabled={isDone}
+        resetDisabled={stepIndex < 0}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+        showPatternOverlay={showPatternOverlay}
+        onShowPatternOverlayChange={setShowPatternOverlay}
+        patternOverlayLabel="Show pattern overlay"
+        showPatternOverlayToggle
+      />
+
+      {showPatternOverlay && (
+        <PatternLegend
+          currentPhase={step?.phase}
+          usedPatterns={SORTCOLORS_PATTERNS}
+        />
+      )}
+    </>
+  );
+
+  const panelConfigs = useMemo(
+    () => [
+      {
+        id: "input",
+        title: "Input",
+        size: "compact",
+      },
+      {
+        id: "viz",
+        title: "Visualization",
+        dockMode: "split-bottom",
+      },
+      {
+        id: "code",
+        title: "Code",
+        dockMode: "split-right",
+      },
+      {
+        id: "status",
+        title: "Status",
+        dockMode: "split-bottom",
+        size: "status",
+      },
+    ],
+    [],
+  );
+
+  const handlePanelReady = useCallback((divs) => {
+    setPanelDivs(divs);
+  }, []);
+
+  return (
+    <div className="sc-shell">
+      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+
+      {panelDivs && (
+        <>
+          {panelDivs.viz && createPortal(vizPanel, panelDivs.viz)}
+
+          {panelDivs.code && createPortal(codePanel, panelDivs.code)}
+
+          {panelDivs.input && createPortal(inputPanel, panelDivs.input)}
+
+          {panelDivs.status && createPortal(statusPanel, panelDivs.status)}
+        </>
+      )}
+
+      {createPortal(
+        <FloatingPanel title="Playback Controls">
+          {playbackPanel}
+        </FloatingPanel>,
+        document.body,
+      )}
+    </div>
+  );
 }
