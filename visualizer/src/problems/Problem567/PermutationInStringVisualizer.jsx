@@ -1,12 +1,17 @@
 ﻿import { useState, useMemo, useCallback } from "react";
+
 import { createPortal } from "react-dom";
 
 import LuminoDockPanel from "../../components/LuminoDockPanel";
-import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
+import FloatingPanel from "../../components/shared/FloatingPanel";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import PointerRail from "../../components/shared/PointerRail";
+import PointerStateBand from "../../components/shared/PointerStateBand";
+import ProgressBand from "../../components/shared/ProgressBand";
+import FrequencyComparison from "../../components/shared/FrequencyComparison";
 
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
@@ -17,21 +22,93 @@ import { getExamples } from "../../config/examplesRegistry";
 import "./PermutationInStringVisualizer.css";
 
 const SOLUTION_CODE = [
-  { line: 1, text: "def checkInclusion(s1, s2):" },
-  { line: 2, text: "    if len(s1) > len(s2): return False" },
-  { line: 3, text: "    need = Counter(s1)" },
-  { line: 4, text: "    have = Counter(s2[:len(s1)])" },
-  { line: 5, text: "    if have == need: return True" },
-  { line: 6, text: "    for i in range(len(s1), len(s2)):" },
-  { line: 7, text: "        have[s2[i]] += 1" },
-  { line: 8, text: "        out = s2[i - len(s1)]" },
-  { line: 9, text: "        have[out] -= 1" },
-  { line: 10, text: "        if have[out] == 0: del have[out]" },
-  { line: 11, text: "        if have == need: return True" },
-  { line: 12, text: "    return False" },
+  {
+    line: 1,
+    text: "def checkInclusion(s1, s2):",
+  },
+  {
+    line: 2,
+    text: "    if len(s1) > len(s2): return False",
+  },
+  {
+    line: 3,
+    text: "    need = Counter(s1)",
+  },
+  {
+    line: 4,
+    text: "    have = Counter(s2[:len(s1)])",
+  },
+  {
+    line: 5,
+    text: "    if have == need: return True",
+  },
+  {
+    line: 6,
+    text: "    for i in range(len(s1), len(s2)):",
+  },
+  {
+    line: 7,
+    text: "        have[s2[i]] += 1",
+  },
+  {
+    line: 8,
+    text: "        out = s2[i - len(s1)]",
+  },
+  {
+    line: 9,
+    text: "        have[out] -= 1",
+  },
+  {
+    line: 10,
+    text: "        if have[out] == 0: del have[out]",
+  },
+  {
+    line: 11,
+    text: "        if have == need: return True",
+  },
+  {
+    line: 12,
+    text: "    return False",
+  },
 ];
 
 const EXAMPLES = getExamples("permutation-in-string");
+
+const PHASE_META = {
+  initialize: {
+    label: "Initialize",
+    color: "info",
+  },
+
+  expand: {
+    label: "Expand",
+    color: "primary",
+  },
+
+  shrink: {
+    label: "Shrink",
+    color: "warning",
+  },
+
+  compare: {
+    label: "Compare",
+    color: "info",
+  },
+
+  match: {
+    label: "Match Found",
+    color: "success",
+  },
+
+  done: {
+    label: "Complete",
+    color: "success",
+  },
+};
+
+function cloneCounter(counter) {
+  return { ...counter };
+}
 
 function countEq(a, b) {
   const ka = Object.keys(a);
@@ -41,8 +118,8 @@ function countEq(a, b) {
     return false;
   }
 
-  for (const k of ka) {
-    if (a[k] !== b[k]) {
+  for (const key of ka) {
+    if (a[key] !== b[key]) {
       return false;
     }
   }
@@ -53,73 +130,230 @@ function countEq(a, b) {
 function generateSteps(s1, s2) {
   const steps = [];
 
+  /*
+   * s1 cannot be a permutation contained in a shorter s2.
+   */
   if (s1.length > s2.length) {
     steps.push({
-      activeLine: 2,
-      winStart: -1,
-      winEnd: -1,
-      have: {},
+      phase: "done",
+
+      left: -1,
+      right: -1,
+
+      addedIndex: null,
+      removedIndex: null,
+
       need: {},
+      have: {},
+
+      match: false,
       result: false,
-      matchWin: false,
-      message: "s1 longer than s2 → false",
+
+      activeLine: 2,
+
+      message: "s1 is longer than s2, so no permutation can exist.",
     });
 
     return steps;
   }
 
-  const need = {};
+  /*
+   * Empty s1.
+   *
+   * This also avoids awkward pointer values when there is no
+   * window to display.
+   */
+  if (s1.length === 0) {
+    steps.push({
+      phase: "match",
 
-  for (const c of s1) {
-    need[c] = (need[c] || 0) + 1;
-  }
+      left: -1,
+      right: -1,
 
-  const have = {};
+      addedIndex: null,
+      removedIndex: null,
 
-  for (let i = 0; i < s1.length; i++) {
-    have[s2[i]] = (have[s2[i]] || 0) + 1;
-  }
+      need: {},
+      have: {},
 
-  const initMatch = countEq(have, need);
+      match: true,
+      result: true,
 
-  steps.push({
-    activeLine: 5,
-    winStart: 0,
-    winEnd: s1.length - 1,
-    have: { ...have },
-    need: { ...need },
-    result: initMatch ? true : null,
-    matchWin: initMatch,
-    message: `Initial window [0..${s1.length - 1}]. Match=${initMatch}`,
-  });
+      activeLine: 5,
 
-  if (initMatch) {
+      message: "The empty string is trivially contained.",
+    });
+
     return steps;
   }
 
-  for (let i = s1.length; i < s2.length; i++) {
-    have[s2[i]] = (have[s2[i]] || 0) + 1;
+  /*
+   * Build required frequencies.
+   */
+  const need = {};
 
-    const out = s2[i - s1.length];
+  for (const char of s1) {
+    need[char] = (need[char] || 0) + 1;
+  }
 
-    have[out]--;
+  /*
+   * Build initial fixed-size window.
+   */
+  const have = {};
 
-    if (have[out] === 0) {
-      delete have[out];
+  for (let i = 0; i < s1.length; i++) {
+    const char = s2[i];
+
+    have[char] = (have[char] || 0) + 1;
+  }
+
+  steps.push({
+    phase: "initialize",
+
+    left: 0,
+    right: s1.length - 1,
+
+    addedIndex: null,
+    removedIndex: null,
+
+    need: cloneCounter(need),
+    have: cloneCounter(have),
+
+    match: false,
+    result: null,
+
+    activeLine: 4,
+
+    message: `Create the initial window s2[0..${s1.length - 1}].`,
+  });
+
+  /*
+   * Compare initial window.
+   */
+  const initialMatch = countEq(have, need);
+
+  steps.push({
+    phase: initialMatch ? "match" : "compare",
+
+    left: 0,
+    right: s1.length - 1,
+
+    addedIndex: null,
+    removedIndex: null,
+
+    need: cloneCounter(need),
+    have: cloneCounter(have),
+
+    match: initialMatch,
+    result: initialMatch ? true : null,
+
+    activeLine: 5,
+
+    message: initialMatch
+      ? "The initial window has exactly the required frequencies."
+      : "The initial window does not match s1.",
+  });
+
+  if (initialMatch) {
+    return steps;
+  }
+
+  /*
+   * Slide the fixed-size window.
+   */
+  for (let right = s1.length; right < s2.length; right++) {
+    const previousLeft = right - s1.length;
+
+    const nextLeft = previousLeft + 1;
+
+    const addedChar = s2[right];
+
+    /*
+     * EXPAND
+     *
+     * Temporarily the visual range contains one extra
+     * character. This makes the window movement easy to see.
+     */
+    have[addedChar] = (have[addedChar] || 0) + 1;
+
+    steps.push({
+      phase: "expand",
+
+      left: previousLeft,
+      right,
+
+      addedIndex: right,
+      removedIndex: null,
+
+      need: cloneCounter(need),
+      have: cloneCounter(have),
+
+      match: false,
+      result: null,
+
+      activeLine: 7,
+
+      message: `Add '${addedChar}' at index ${right}.`,
+    });
+
+    /*
+     * SHRINK
+     */
+    const removedIndex = previousLeft;
+
+    const removedChar = s2[removedIndex];
+
+    have[removedChar]--;
+
+    if (have[removedChar] === 0) {
+      delete have[removedChar];
     }
 
-    const winStart = i - s1.length + 1;
+    steps.push({
+      phase: "shrink",
+
+      left: nextLeft,
+      right,
+
+      addedIndex: null,
+      removedIndex,
+
+      need: cloneCounter(need),
+      have: cloneCounter(have),
+
+      match: false,
+      result: null,
+
+      activeLine: have[removedChar] == null ? 10 : 9,
+
+      message: `Remove '${removedChar}' at index ${removedIndex}.`,
+    });
+
+    /*
+     * COMPARE
+     */
     const match = countEq(have, need);
 
     steps.push({
-      activeLine: match ? 11 : 10,
-      winStart,
-      winEnd: i,
-      have: { ...have },
-      need: { ...need },
+      phase: match ? "match" : "compare",
+
+      left: nextLeft,
+      right,
+
+      addedIndex: null,
+      removedIndex: null,
+
+      need: cloneCounter(need),
+      have: cloneCounter(have),
+
+      match,
       result: match ? true : null,
-      matchWin: match,
-      message: `Window [${winStart}..${i}]: add '${s2[i]}', remove '${out}'. Match=${match}`,
+
+      activeLine: 11,
+
+      message: match
+        ? `Window [${nextLeft}..${right}] matches s1.`
+        : `Window [${nextLeft}..${right}] does not match s1.`,
     });
 
     if (match) {
@@ -127,38 +361,53 @@ function generateSteps(s1, s2) {
     }
   }
 
+  /*
+   * No window matched.
+   */
   steps.push({
-    activeLine: 12,
-    winStart: -1,
-    winEnd: -1,
-    have: { ...have },
-    need: { ...need },
+    phase: "done",
+
+    left: s2.length >= s1.length ? s2.length - s1.length : -1,
+
+    right: s2.length > 0 ? s2.length - 1 : -1,
+
+    addedIndex: null,
+    removedIndex: null,
+
+    need: cloneCounter(need),
+    have: cloneCounter(have),
+
+    match: false,
     result: false,
-    matchWin: false,
-    message: "No permutation found → return false.",
+
+    activeLine: 12,
+
+    message: "All windows were checked. No permutation was found.",
   });
 
   return steps;
 }
 
 export default function PermutationInStringVisualizer() {
-  const initialExample = EXAMPLES[0];
-
-  const [ex, setEx] = useState(initialExample);
-
-  const [s1Input, setS1Input] = useState(
-    initialExample?.s1 != null ? String(initialExample.s1) : "ab",
-  );
-
-  const [s2Input, setS2Input] = useState(
-    initialExample?.s2 != null ? String(initialExample.s2) : "eidbaooo",
-  );
+  const initialExample = EXAMPLES[0] ?? {
+    label: "Default",
+    s1: "ab",
+    s2: "eidbaooo",
+  };
 
   /*
    * ------------------------------------------------------------
-   * Parsed input
+   * Input
    * ------------------------------------------------------------
    */
+
+  const [ex, setEx] = useState(initialExample);
+
+  const [s1Input, setS1Input] = useState(String(initialExample.s1 ?? "ab"));
+
+  const [s2Input, setS2Input] = useState(
+    String(initialExample.s2 ?? "eidbaooo"),
+  );
 
   const { s1, s2, inputError } = useMemo(() => {
     try {
@@ -171,14 +420,14 @@ export default function PermutationInStringVisualizer() {
       return {
         s1: "",
         s2: "",
-        inputError: error.message,
+        inputError: error instanceof Error ? error.message : "Invalid input",
       };
     }
   }, [s1Input, s2Input]);
 
   /*
    * ------------------------------------------------------------
-   * Algorithm steps
+   * Steps
    * ------------------------------------------------------------
    */
 
@@ -217,15 +466,18 @@ export default function PermutationInStringVisualizer() {
 
   /*
    * ------------------------------------------------------------
-   * Examples / input
+   * Input handlers
    * ------------------------------------------------------------
    */
 
   const applyEx = useCallback(
     (example) => {
       setEx(example);
+
       setS1Input(String(example.s1 ?? ""));
+
       setS2Input(String(example.s2 ?? ""));
+
       handleReset();
     },
     [handleReset],
@@ -234,8 +486,8 @@ export default function PermutationInStringVisualizer() {
   const handleInputChange = useCallback(
     (key, value) => {
       /*
-       * Once the user manually edits an input, it is no longer
-       * necessarily identical to the selected example.
+       * A manual change means the current values no
+       * longer necessarily correspond to an example.
        */
       setEx(null);
 
@@ -254,26 +506,7 @@ export default function PermutationInStringVisualizer() {
 
   /*
    * ------------------------------------------------------------
-   * Frequency characters
-   * ------------------------------------------------------------
-   */
-
-  const relevantChars = useMemo(() => {
-    if (!step) {
-      return [];
-    }
-
-    return [
-      ...new Set([
-        ...Object.keys(step.need || {}),
-        ...Object.keys(step.have || {}),
-      ]),
-    ];
-  }, [step]);
-
-  /*
-   * ------------------------------------------------------------
-   * Pattern overlay / code connectivity
+   * Pattern overlay
    * ------------------------------------------------------------
    */
 
@@ -284,6 +517,12 @@ export default function PermutationInStringVisualizer() {
     setActiveLineDom,
   } = usePatternOverlay();
 
+  /*
+   * ------------------------------------------------------------
+   * Code ↔ visualization connectivity
+   * ------------------------------------------------------------
+   */
+
   const connectivity = useCodeVisualConnectivity({
     steps,
     stepIndex,
@@ -291,14 +530,68 @@ export default function PermutationInStringVisualizer() {
   });
 
   /*
+   * ------------------------------------------------------------
+   * Progress
+   * ------------------------------------------------------------
+   */
+
+  const progress =
+    steps.length > 0 && stepIndex >= 0
+      ? Math.min(100, ((stepIndex + 1) / steps.length) * 100)
+      : 0;
+
+  const phaseMeta = step?.phase ? PHASE_META[step.phase] : null;
+
+  /*
+   * ------------------------------------------------------------
+   * PointerRail
+   * ------------------------------------------------------------
+   */
+
+  const pointers = useMemo(() => {
+    if (!step) {
+      return [];
+    }
+
+    const result = [];
+
+    if (Number.isFinite(step.left) && step.left >= 0) {
+      result.push({
+        id: "left",
+        label: "L",
+        index: step.left,
+        tone: step.phase === "shrink" ? "warning" : "primary",
+      });
+    }
+
+    if (Number.isFinite(step.right) && step.right >= 0) {
+      result.push({
+        id: "right",
+        label: "R",
+        index: step.right,
+        tone: step.match
+          ? "success"
+          : step.phase === "expand"
+            ? "primary"
+            : "warning",
+      });
+    }
+
+    return result;
+  }, [step]);
+
+  const range =
+    step && step.left >= 0 && step.right >= 0
+      ? {
+          start: step.left,
+          end: step.right,
+        }
+      : null;
+
+  /*
    * ============================================================
    * INPUT PANEL
    * ============================================================
-   *
-   * Input belongs here and ONLY here.
-   *
-   * Do not render example buttons or editable inputs again inside
-   * the visualization panel.
    */
 
   const inputPanel = (
@@ -349,122 +642,100 @@ export default function PermutationInStringVisualizer() {
    * ============================================================
    * VISUALIZATION PANEL
    * ============================================================
-   *
-   * No inputs.
-   * No example buttons.
-   *
-   * This panel only visualizes the current algorithm state.
    */
 
   const vizPanel = (
     <div className="pis-shell">
-      {/* Current strings */}
+      <ProgressBand
+        progress={progress}
+        stepIndex={stepIndex}
+        stepCount={steps.length}
+        isDone={isDone}
+        resultText={
+          step?.result === true
+            ? "Permutation found"
+            : step?.result === false
+              ? "No permutation found"
+              : undefined
+        }
+        phaseMeta={phaseMeta}
+      />
 
-      <div className="pis-strings">
-        <div>
-          <span className="pis-lbl s1">s1:</span>
+      <div className="pis-problem-summary">
+        <div className="pis-string-summary">
+          <span className="pis-string-label">Pattern</span>
 
-          <span className="pis-val">{s1}</span>
+          <code>{s1}</code>
         </div>
 
-        <div>
-          <span className="pis-lbl s2">s2:</span>
+        <div className="pis-string-summary">
+          <span className="pis-string-label">Search string</span>
 
-          <span className="pis-val">{s2}</span>
-        </div>
-      </div>
-
-      {/* Sliding window */}
-
-      <div className="pis-panel">
-        <div className="pis-panel-label">Sliding Window</div>
-
-        <div className="pis-chars-row">
-          {s2.split("").map((ch, i) => {
-            const inWindow = step && i >= step.winStart && i <= step.winEnd;
-
-            const isMatch = inWindow && step?.matchWin;
-
-            let className = "pis-ch";
-
-            if (inWindow) {
-              className += " window";
-            }
-
-            if (isMatch) {
-              className += " match";
-            }
-
-            return (
-              <div key={`${ch}-${i}`} className={className}>
-                {ch}
-              </div>
-            );
-          })}
+          <code>{s2}</code>
         </div>
       </div>
 
-      {/* Frequency counters */}
+      {step && <PointerStateBand step={step} />}
 
-      {step && (
-        <div className="pis-freq-row">
-          {/* NEED */}
+      <PointerRail
+        title="Sliding Window"
+        values={s2.split("")}
+        pointers={pointers}
+        range={range}
+        note={step?.message ?? "Press Play or step forward to begin."}
+      />
 
-          <div className="pis-panel pis-freq-panel">
-            <div className="pis-panel-label">Need — s1</div>
+      <div className="pis-section">
+        <div className="pis-section-heading">Frequency comparison</div>
 
-            <div className="pis-freq-items">
-              {relevantChars.map((char) => (
-                <div key={char} className="pis-freq-item">
-                  <div className="pis-freq-char">{char}</div>
+        <FrequencyComparison
+          leftTitle="Need"
+          rightTitle="Window"
+          left={step?.need ?? {}}
+          right={step?.have ?? {}}
+          emptyText="Start the visualization to compare frequencies."
+        />
+      </div>
 
-                  <div className="pis-freq-val need">
-                    {step.need?.[char] ?? 0}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {step?.phase === "expand" && step.addedIndex != null && (
+        <div className="pis-operation-card add">
+          <span className="pis-operation-symbol">+</span>
 
-          {/* HAVE */}
+          <div>
+            <strong>Add</strong>
 
-          <div className="pis-panel pis-freq-panel">
-            <div className="pis-panel-label">Have — current window</div>
-
-            <div className="pis-freq-items">
-              {relevantChars.map((char) => {
-                const need = step.need?.[char] ?? 0;
-
-                const have = step.have?.[char] ?? 0;
-
-                const matches = need === have;
-
-                return (
-                  <div key={char} className="pis-freq-item">
-                    <div className="pis-freq-char">{char}</div>
-
-                    <div
-                      className={`pis-freq-val have ${matches ? "ok" : "diff"}`}
-                    >
-                      {have}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <span>
+              {" "}
+              s2[
+              {step.addedIndex}] = "{s2[step.addedIndex]}"
+            </span>
           </div>
         </div>
       )}
 
-      {/* Current step explanation */}
+      {step?.phase === "shrink" && step.removedIndex != null && (
+        <div className="pis-operation-card remove">
+          <span className="pis-operation-symbol">−</span>
 
-      {step?.message && <div className="pis-status">{step.message}</div>}
+          <div>
+            <strong>Remove</strong>
 
-      {/* Final result */}
+            <span>
+              {" "}
+              s2[
+              {step.removedIndex}] = "{s2[step.removedIndex]}"
+            </span>
+          </div>
+        </div>
+      )}
 
       {step?.result != null && (
         <div className={`pis-result ${step.result ? "true" : "false"}`}>
-          {step.result ? "✓ Permutation found!" : "✗ No permutation found"}
+          <span className="pis-result-icon">{step.result ? "✓" : "✗"}</span>
+
+          <span>
+            {step.result ? "Permutation found" : "No permutation found"}
+          </span>
         </div>
       )}
     </div>

@@ -1,208 +1,243 @@
 .problem-shell {
     position: relative;
+
     display: flex;
     flex-direction: column;
+
     height: 100%;
+
     overflow: hidden;
 }
+
+/*
+ * ============================================================
+ * Input panel
+ * ============================================================
+ */
+
+.pis-input-panel {
+    height: 100%;
+
+    padding: 12px;
+
+    overflow: auto;
+}
+
+/*
+ * ============================================================
+ * Visualization shell
+ * ============================================================
+ */
 
 .pis-shell {
     display: flex;
     flex-direction: column;
+
+    height: 100%;
+    min-height: 0;
+
     gap: 12px;
-    padding: 16px;
+
+    padding: 14px;
+
+    overflow: auto;
+
     font-family: inherit;
 }
 
-.pis-examples {
+/*
+ * ============================================================
+ * Current problem values
+ * ============================================================
+ */
+
+.pis-problem-summary {
+    display: grid;
+    grid-template-columns:
+        minmax(0, auto)
+        minmax(0, 1fr);
+
+    gap: 10px;
+}
+
+.pis-string-summary {
     display: flex;
+    align-items: center;
+
+    min-width: 0;
+
     gap: 8px;
-    flex-wrap: wrap;
-}
 
-.pis-chip {
-    background: var(--code-line);
-    color: var(--code-text);
-    border: 2px solid var(--code-line);
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 12px;
-    cursor: pointer;
-}
+    padding: 7px 10px;
 
-.pis-chip.active,
-.pis-chip:hover {
-    border-color: #89b4fa;
-    color: #1a6df5;
-}
-
-.pis-strings {
-    display: flex;
-    gap: 14px;
-    font-size: 14px;
-    flex-wrap: wrap;
-}
-
-.pis-lbl {
-    font-weight: 700;
-    margin-right: 3px;
-}
-
-.pis-lbl.s1 {
-    color: #1a6df5;
-}
-
-.pis-lbl.s2 {
-    color: #996d0c;
-}
-
-.pis-val {
-    font-family: monospace;
-    color: #4f6ed8;
-}
-
-.pis-panel {
     background: var(--code-bg);
     border: 1px solid var(--code-line);
-    border-radius: 10px;
-    padding: 12px 14px;
+    border-radius: 7px;
 }
 
-.pis-panel-label {
-    font-size: 11px;
-    font-weight: 700;
+.pis-string-label {
+    flex: 0 0 auto;
+
     color: var(--code-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-}
 
-.pis-chars-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
-.pis-ch {
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
+    font-size: 10px;
     font-weight: 700;
-    border-radius: 6px;
-    border: 2px solid var(--code-line);
-    background: var(--code-line);
+
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.pis-string-summary code {
+    min-width: 0;
+
+    overflow: hidden;
+
     color: var(--code-text);
-    font-family: monospace;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.pis-ch.window {
-    border-color: #89b4fa;
-    background: #0d1424;
-    color: #89b4fa;
-}
+/*
+ * ============================================================
+ * Sections
+ * ============================================================
+ */
 
-.pis-ch.match {
-    border-color: #a6e3a1;
-    background: #002010;
-    color: #a6e3a1;
-    box-shadow: 0 0 10px #a6e3a155;
-}
-
-.pis-freq-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.pis-freq-panel {
-    flex: 1;
-    min-width: 140px;
-}
-
-.pis-freq-items {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.pis-freq-item {
+.pis-section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 3px;
+
+    min-width: 0;
+
+    gap: 6px;
 }
 
-.pis-freq-char {
-    font-size: 14px;
-    font-weight: 700;
+.pis-section-heading {
     color: var(--code-dim);
-    font-family: monospace;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
 }
 
-.pis-freq-val {
-    width: 32px;
-    height: 32px;
+/*
+ * ============================================================
+ * Current operation
+ * ============================================================
+ */
+
+.pis-operation-card {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px 11px;
+
+    border: 1px solid var(--code-line);
+    border-radius: 8px;
+
+    background: var(--code-bg);
+
+    color: var(--code-text);
+
+    font-size: 12px;
+}
+
+.pis-operation-symbol {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 26px;
+    height: 26px;
+
+    flex: 0 0 26px;
+
     border-radius: 6px;
-    font-size: 15px;
-    font-weight: 700;
+
+    font-size: 17px;
+    font-weight: 800;
 }
 
-.pis-freq-val.need {
+.pis-operation-card.add {
+    border-color: #89b4fa66;
+}
+
+.pis-operation-card.add
+.pis-operation-symbol {
     background: #0d1424;
-    border: 2px solid #89b4fa;
     color: #89b4fa;
 }
 
-.pis-freq-val.have.ok {
-    background: #002010;
-    border: 2px solid #a6e3a1;
-    color: #a6e3a1;
+.pis-operation-card.remove {
+    border-color: #fab38766;
 }
 
-.pis-freq-val.have.diff {
+.pis-operation-card.remove
+.pis-operation-symbol {
     background: #2a1000;
-    border: 2px solid #fab387;
     color: #fab387;
 }
 
+/*
+ * ============================================================
+ * Result
+ * ============================================================
+ */
+
 .pis-result {
-    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border: 2px solid;
     border-radius: 8px;
+
+    font-size: 13px;
     font-weight: 700;
-    font-size: 15px;
-    text-align: center;
+}
+
+.pis-result-icon {
+    font-size: 16px;
+    line-height: 1;
 }
 
 .pis-result.true {
     background: #002010;
-    border: 2px solid #a6e3a1;
+    border-color: #a6e3a1;
     color: #a6e3a1;
 }
 
 .pis-result.false {
     background: #3d0000;
-    border: 2px solid #f38ba8;
+    border-color: #f38ba8;
     color: #f38ba8;
 }
 
-.pis-status {
-    padding: 8px 12px;
-    background: var(--code-bg);
-    border: 1px solid var(--code-line);
-    border-radius: 8px;
-    font-size: 13px;
-    color: var(--code-dim);
-    min-height: 36px;
-}
+/*
+ * ============================================================
+ * Responsive
+ * ============================================================
+ */
 
-.pis-input-panel {
-    height: 100%;
-    overflow: auto;
-    padding: 12px;
+@media (max-width: 700px) {
+    .pis-shell {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .pis-problem-summary {
+        grid-template-columns: 1fr;
+    }
 }
