@@ -79,7 +79,11 @@ export function minimizeMotion(container, source, targetId, complete) {
       const x2 = (to.left + to.width / 2 - bounds.left) / scaleX;
       const y2 = (to.top - bounds.top) / scaleY;
       const path = document.createElementNS(ns, 'path');
-      path.setAttribute('d', `M ${x1} ${y1} Q ${x1} ${y2 - 35} ${x2} ${y2} M ${x2 - 7} ${y2 - 12} L ${x2} ${y2} L ${x2 + 7} ${y2 - 12}`);
+      // The final tangent of this quadratic runs from its control point to its endpoint.
+      const tangentLength = Math.hypot(x2 - x1, 35);
+      const ux = (x2 - x1) / tangentLength, uy = 35 / tangentLength;
+      const baseX = x2 - 12 * ux, baseY = y2 - 12 * uy;
+      path.setAttribute('d', `M ${x1} ${y1} Q ${x1} ${y2 - 35} ${x2} ${y2} M ${baseX - 7 * uy} ${baseY + 7 * ux} L ${x2} ${y2} L ${baseX + 7 * uy} ${baseY - 7 * ux}`);
       guide.appendChild(path);
       container.appendChild(guide);
       notice = document.createElement('div');
