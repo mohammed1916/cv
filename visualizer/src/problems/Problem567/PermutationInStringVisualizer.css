@@ -200,3 +200,9 @@
     color: var(--code-dim);
     min-height: 36px;
 }
+
+.pis-input-panel {
+    height: 100%;
+    overflow: auto;
+    padding: 12px;
+}
