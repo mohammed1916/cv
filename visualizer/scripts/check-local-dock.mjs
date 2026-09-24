@@ -121,12 +121,14 @@ try {
   await click(`document.querySelector('button[aria-label="Collapse Code"]')`);
   await delay(150);
   await click(`document.querySelector('[data-restore-panel="code"]')`);
-  await delay(900);
+  await delay(2300);
   assert.equal(await evaluate(`!document.querySelector('.local-dock-minimize-flight') && Boolean(document.querySelector('.local-dock-layout [data-panel-id="code"]'))`), true);
   await command('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
   await click(`document.querySelector('button[aria-label="Collapse Code"]')`);
   await delay(100);
-  assert.equal(await evaluate(`!document.querySelector('.local-dock-minimize-flight') && !document.querySelector('.local-dock-layout [data-dock-tab="code"]')`), true);
+  assert.equal(await evaluate(`Boolean(document.querySelector('.local-dock-minimize-guide')) && document.querySelector('.local-dock-minimize-flight').style.visibility === 'hidden'`), true);
+  await waitFor(() => evaluate(`!document.querySelector('.local-dock-minimize-guide')`));
+  assert.equal(await evaluate(`!document.querySelector('.local-dock-layout [data-dock-tab="code"]')`), true);
   await click(`document.querySelector('[data-restore-panel="code"]')`);
   console.log('PASS visible minimize flight, early restore cancellation, and reduced motion');
   await mkdir('.tmp', { recursive: true });

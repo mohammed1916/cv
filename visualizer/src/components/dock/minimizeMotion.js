@@ -42,6 +42,9 @@ export function minimizeMotion(container, source, targetId, complete) {
   // Hide the real panel only after the ghost is in place.
   source.style.visibility = "hidden";
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let guide = null;
+  let notice = null;
   let animation = null;
   let cancelled = false;
   let frame1 = 0;
@@ -67,6 +70,31 @@ export function minimizeMotion(container, source, targetId, complete) {
       }
 
       const to = target.getBoundingClientRect();
+      const ns = 'http://www.w3.org/2000/svg';
+      guide = document.createElementNS(ns, 'svg');
+      guide.classList.add('local-dock-minimize-guide');
+      guide.setAttribute('aria-hidden', 'true');
+      const x1 = (from.left + from.width / 2 - bounds.left) / scaleX;
+      const y1 = (from.top + from.height / 2 - bounds.top) / scaleY;
+      const x2 = (to.left + to.width / 2 - bounds.left) / scaleX;
+      const y2 = (to.top - bounds.top) / scaleY;
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute('d', `M ${x1} ${y1} Q ${x1} ${y2 - 35} ${x2} ${y2} M ${x2 - 7} ${y2 - 12} L ${x2} ${y2} L ${x2 + 7} ${y2 - 12}`);
+      guide.appendChild(path);
+      container.appendChild(guide);
+      notice = document.createElement('div');
+      notice.className = 'local-dock-minimize-notice';
+      notice.setAttribute('role', 'status');
+      notice.textContent = `${source.querySelector('[aria-selected="true"]')?.textContent || 'Panel'} ? restore here below`;
+      notice.style.left = `${Math.max(8, Math.min((to.left - bounds.left) / scaleX, container.clientWidth - 280))}px`;
+      container.appendChild(notice);
+      if (reducedMotion) {
+        // Retain the spatial cue without moving or shrinking a large panel.
+        ghost.style.visibility = 'hidden';
+        animation = guide.animate([{ opacity: 1 }, { opacity: 1 }], { duration: 2200 });
+        animation.onfinish = finish;
+        return;
+      }
 
       /*
        * Coordinates are relative to the original panel position.
@@ -209,6 +237,8 @@ export function minimizeMotion(container, source, targetId, complete) {
   function finish() {
     if (cancelled) return;
 
+    guide?.remove();
+    notice?.remove();
     ghost.remove();
 
     source.style.visibility = previousVisibility;
@@ -224,6 +254,8 @@ export function minimizeMotion(container, source, targetId, complete) {
 
     animation?.cancel();
 
+    guide?.remove();
+    notice?.remove();
     ghost.remove();
 
     source.style.visibility = previousVisibility;

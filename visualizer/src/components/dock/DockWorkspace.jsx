@@ -64,7 +64,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
     }
     const workspace = container.current;
     const source = workspace?.querySelector(`[data-dock-tab="${CSS.escape(id)}"]`)?.closest('.local-dock-group');
-    if (!collapsed || !source || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { commit(); return; }
+    if (!collapsed || !source) { commit(); return; }
     setMinimizing(current => new Set([...current, id]));
     const cancel = minimizeMotion(workspace, source, id, () => {
       flights.current.delete(id);
