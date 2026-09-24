@@ -1,16 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import SumNumbersStory from './SumNumbersStory';
 import { CODE, buildSumNumbersStory } from './algorithm';
 import './SumRootToLeafNumbersVisualizer.css';
 
-const EXAMPLES = [
-  { label: 'Example 1: [1, 2, 3]', input: '[1, 2, 3]' },
-  { label: 'Example 2: [4, 9, 0, 5, 1]', input: '[4, 9, 0, 5, 1]' },
-  { label: 'Single Node: [5]', input: '[5]' },
-  { label: 'Single Zero: [0]', input: '[0]' },
-  { label: 'Sparse Tree: [1, null, 3]', input: '[1, null, 3]' },
-  { label: 'Full Tree: [1, 2, 3, 4, 5, 6, 7]', input: '[1, 2, 3, 4, 5, 6, 7]' },
-];
+const EXAMPLES = getExamples("sum-root-to-leaf-numbers");
 
 const LINE_PATTERN_MAP = {
   1: 'init',

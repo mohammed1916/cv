@@ -1,38 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreak2Story from "./WordBreak2Story";
 import { CODE, buildWordBreak2Story } from "./algorithm";
 import "./WordBreakIIVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "catsanddog (cats and dog)",
-    values: {
-      s: "catsanddog",
-      wordDict: '["cat", "cats", "and", "sand", "dog"]',
-    },
-  },
-  {
-    label: "pineapplepenapple (multi-splits)",
-    values: {
-      s: "pineapplepenapple",
-      wordDict: '["apple", "pen", "applepen", "pine", "pineapple"]',
-    },
-  },
-  {
-    label: "catsandog (no sentences)",
-    values: {
-      s: "catsandog",
-      wordDict: '["cats", "dog", "sand", "and", "cat"]',
-    },
-  },
-  {
-    label: "apple (single word)",
-    values: {
-      s: "apple",
-      wordDict: '["apple"]',
-    },
-  },
-];
+const EXAMPLES = getExamples("word-break-ii");
 
 const definition = {
   title: "Word Break II",

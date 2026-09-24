@@ -1,3 +1,4 @@
+import { getExamples } from "../../config/examplesRegistry";
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -29,11 +30,7 @@ const LINE_PATTERN_MAP = {
   10: "done",
 };
 
-const EXAMPLES = [
-  { label: "Example 1", path: "/home//foo/" },
-  { label: "Example 2", path: "/a/./b/../../c/" },
-  { label: "Example 3", path: "/../" },
-];
+const EXAMPLES = getExamples("simplify-path");
 
 const SOLUTION_CODE = [
   { line: 1, text: "def simplifyPath(path: str) -> str:" },

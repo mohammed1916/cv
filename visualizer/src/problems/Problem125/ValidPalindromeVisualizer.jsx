@@ -1,42 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PalindromeStory from "./PalindromeStory";
 import { PALINDROME_CODE, buildPalindromeStory } from "./algorithm";
 import "./ValidPalindromeVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "A man, a plan...",
-    input: "A man, a plan, a canal: Panama",
-  },
-  {
-    label: "race a car",
-    input: "race a car",
-  },
-  {
-    label: "Whitespace \" \"",
-    input: " ",
-  },
-  {
-    label: "Alphanumeric \"0P\"",
-    input: "0P",
-  },
-  {
-    label: "Was it a car...",
-    input: "Was it a car or a cat I saw?",
-  },
-  {
-    label: "No 'x' in Nixon",
-    input: "No 'x' in Nixon",
-  },
-  {
-    label: "Single char \"a\"",
-    input: "a",
-  },
-  {
-    label: "Symbols only \",;!\"",
-    input: ",;!",
-  },
-];
+const EXAMPLES = getExamples("valid-palindrome");
 
 const definition = {
   title: "Valid Palindrome",

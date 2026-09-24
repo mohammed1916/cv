@@ -1,30 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SingleNumber2Story from "./SingleNumber2Story";
 import { CODE, buildSingleNumber2Story } from "./algorithm";
 import "./SingleNumberIIVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "Example 1: [2, 2, 3, 2]",
-    input: "[2, 2, 3, 2]",
-  },
-  {
-    label: "Example 2: [0, 1, 0, 1, 0, 1, 99]",
-    input: "[0, 1, 0, 1, 0, 1, 99]",
-  },
-  {
-    label: "Single Element: [42]",
-    input: "[42]",
-  },
-  {
-    label: "With Negatives: [-2, -2, 1, 1, -3, 1, -2]",
-    input: "[-2, -2, 1, 1, -3, 1, -2]",
-  },
-  {
-    label: "Negative Target: [-4, -1, -4, -4]",
-    input: "[-4, -1, -4, -4]",
-  },
-];
+const EXAMPLES = getExamples("single-number-ii");
 
 const definition = {
   title: "Single Number II (Modulo 3 Bit Counter)",

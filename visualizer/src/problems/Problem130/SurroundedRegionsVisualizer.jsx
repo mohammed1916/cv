@@ -1,60 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SurroundedStory from "./SurroundedStory";
 import { CODE, buildSurroundedStory } from "./algorithm";
 import "./SurroundedRegionsVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "Example 1 (Standard 4×4)",
-    input: JSON.stringify([
-      ["X", "X", "X", "X"],
-      ["X", "O", "O", "X"],
-      ["X", "X", "O", "X"],
-      ["X", "O", "X", "X"],
-    ]),
-  },
-  {
-    label: "Example 2 (3×3 Border 'O')",
-    input: JSON.stringify([
-      ["X", "O", "X"],
-      ["O", "X", "O"],
-      ["X", "O", "X"],
-    ]),
-  },
-  {
-    label: "Example 3 (5×5 Enclosed Donut)",
-    input: JSON.stringify([
-      ["X", "X", "X", "X", "X"],
-      ["X", "O", "O", "O", "X"],
-      ["X", "O", "X", "O", "X"],
-      ["X", "O", "O", "O", "X"],
-      ["X", "X", "X", "X", "X"],
-    ]),
-  },
-  {
-    label: "Example 4 (Border Chain 5×5)",
-    input: JSON.stringify([
-      ["O", "X", "X", "X", "X"],
-      ["O", "O", "X", "O", "X"],
-      ["X", "O", "X", "O", "X"],
-      ["X", "X", "X", "X", "X"],
-      ["X", "X", "X", "X", "X"],
-    ]),
-  },
-  {
-    label: "Example 5 (Single 'O' 1×1)",
-    input: JSON.stringify([["O"]]),
-  },
-  {
-    label: "Example 6 (All 'X' 4×4)",
-    input: JSON.stringify([
-      ["X", "X", "X", "X"],
-      ["X", "X", "X", "X"],
-      ["X", "X", "X", "X"],
-      ["X", "X", "X", "X"],
-    ]),
-  },
-];
+const EXAMPLES = getExamples("surrounded-regions");
 
 const definition = {
   title: "Surrounded Regions",

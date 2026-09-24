@@ -1,3 +1,4 @@
+import { getExamples } from "../../config/examplesRegistry";
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { buildFlattenStory } from './algorithm';
@@ -33,11 +34,7 @@ const SOLUTION_CODE = [
   { line: 13, text: "        cur = cur.right" },
 ];
 
-const EXAMPLES = [
-  {label: 'Two branches', arr: [1,2,5,3,4,null,6]},
-  {label: 'Sparse tree', arr: [1,null,2,3]},
-  {label: 'Empty', arr: []},
-];
+const EXAMPLES = getExamples("flatten-binary-tree-to-linked-list");
 
 export default function FlattenBinaryTreeVisualizer() {
   const [arrInput, setArrInput] = useState('[1,2,5,3,4,null,6]');

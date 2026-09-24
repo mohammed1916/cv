@@ -1,12 +1,9 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import TriangleStory from "./TriangleStory";
 import { TRIANGLE_CODE, buildTriangleStory } from "./algorithm";
 
-const EXAMPLES = [
-  { label: "Example 1", input: "[[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]" },
-  { label: "Example 2 (Single)", input: "[[-10]]" },
-  { label: "Example 3 (Negative)", input: "[[-1], [2, 3], [1, -1, -3]]" },
-];
+const EXAMPLES = getExamples("triangle");
 
 const definition = {
   title: "Triangle: Minimum Path Sum",

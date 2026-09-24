@@ -1,16 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import StockStory2 from "./StockStory2";
 import { STOCK_CODE, buildStock2Story } from "./algorithm";
 import "./BestTimeToBuyAndSellStockIIVisualizer.css";
 
-const EXAMPLES = [
-  { label: "Example 1 (Peaks & Valleys)", input: "[7, 1, 5, 3, 6, 4]" },
-  { label: "Example 2 (Strictly Increasing)", input: "[1, 2, 3, 4, 5]" },
-  { label: "Example 3 (Strictly Decreasing)", input: "[7, 6, 4, 3, 1]" },
-  { label: "Example 4 (Flat Prices)", input: "[3, 3, 3, 3, 3]" },
-  { label: "Example 5 (Single Peak)", input: "[2, 4, 1]" },
-  { label: "Example 6 (Multiple Swings)", input: "[2, 1, 4, 5, 2, 9, 7]" },
-];
+const EXAMPLES = getExamples("best-time-to-buy-and-sell-stock-ii");
 
 const definition = {
   title: "Best Time to Buy and Sell Stock II",

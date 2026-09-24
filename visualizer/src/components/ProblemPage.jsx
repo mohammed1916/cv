@@ -5,19 +5,24 @@ import LayoutControls from "./LayoutControls";
 import ProblemScaffold from "./panels/ProblemScaffold";
 import ProblemInfoPanel from "./ProblemInfoPanel";
 import { getProblemDescriptionText } from "../services/problemDescriptions";
-
 import { useProblemDescription } from "../hooks/useProblemDescription";
 import { useVisualizationContext } from "../context/VisualizationContext";
-import { isPremiumProblem } from "../data/premiumProblems";
 
-export default function ProblemPage({ problem, onBack, layoutWidth, onLayoutChange }) {
+export default function ProblemPage({
+  problem,
+  onBack,
+  layoutWidth,
+  onLayoutChange,
+}) {
   const Component = problem.component;
-  const { description } = useProblemDescription(isPremiumProblem(problem.number) ? null : problem.slug);
+  const { description } = useProblemDescription(problem.slug);
   const { publishDescription } = useVisualizationContext();
   useEffect(() => {
-    publishDescription(getProblemDescriptionText(description));
+    publishDescription(
+      getProblemDescriptionText(description) || problem.description || null,
+    );
     return () => publishDescription(null);
-  }, [description, publishDescription]);
+  }, [description, problem.description, publishDescription]);
 
   return (
     <motion.div
@@ -60,10 +65,7 @@ export default function ProblemPage({ problem, onBack, layoutWidth, onLayoutChan
           compact
         />
       </header>
-      <ProblemInfoPanel
-        slug={problem.slug}
-        number={problem.number}
-      />
+      <ProblemInfoPanel slug={problem.slug} number={problem.number} />
       <div className="problem-content" data-visualizer-root>
         <ErrorBoundary key={problem.id}>
           {Component ? (
@@ -76,5 +78,3 @@ export default function ProblemPage({ problem, onBack, layoutWidth, onLayoutChan
     </motion.div>
   );
 }
-
-

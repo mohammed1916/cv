@@ -1,40 +1,51 @@
-import { useState, useMemo, useCallback } from 'react'
-import { motion } from 'framer-motion'
-import LuminoDockPanel from '../../components/LuminoDockPanel'
-import FloatingPanel from '../../components/shared/FloatingPanel'
-import CodeTracePanel from '../../components/CodeTracePanel'
-import PlaybackControls from '../../components/PlaybackControls'
+import { useState, useMemo, useCallback } from "react";
+import { motion } from "framer-motion";
+import LuminoDockPanel from "../../components/LuminoDockPanel";
+import FloatingPanel from "../../components/shared/FloatingPanel";
+import CodeTracePanel from "../../components/CodeTracePanel";
+import PlaybackControls from "../../components/PlaybackControls";
 
-import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
-import './EncodeAndDecodeTinyURLVisualizer.css'
-import CodePatternAnnotations from '../../components/CodePatternAnnotations'
-import PatternLegend from '../../components/PatternLegend'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
-import { getSolutionCode } from '../../config/solutionCodeRegistry'
-import { createPortal } from 'react-dom'
-const SOLUTION_CODE = getSolutionCode('encode-and-decode-tinyurl')
+import { usePlaybackState } from "../../hooks/usePlaybackState";
+import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
+import { usePatternOverlay } from "../../hooks/usePatternOverlay";
+import { getExamples } from "../../config/examplesRegistry";
+import "./EncodeAndDecodeTinyURLVisualizer.css";
+import CodePatternAnnotations from "../../components/CodePatternAnnotations";
+import PatternLegend from "../../components/PatternLegend";
+import ManualInputPanel from "../../components/shared/ManualInputPanel";
+import { getSolutionCode } from "../../config/solutionCodeRegistry";
+import { createPortal } from "react-dom";
+const SOLUTION_CODE = getSolutionCode("encode-and-decode-tinyurl");
 
-const PATTERNS = ['decode_done', 'decode_start', 'encode_done', 'encode_start', 'extract_code', 'generate_code', 'init']
+const PATTERNS = [
+  "decode_done",
+  "decode_start",
+  "encode_done",
+  "encode_start",
+  "extract_code",
+  "generate_code",
+  "init",
+];
 
 const LINE_PATTERN_MAP = {
-  1: 'init',
-  6: 'encode_start',
-  8: 'process',
-  12: 'check',
-  13: 'check',
-  14: 'check',
-  15: 'check'
-}
+  1: "init",
+  6: "encode_start",
+  8: "process",
+  12: "check",
+  13: "check",
+  14: "check",
+  15: "check",
+};
 
-const EXAMPLES = getExamples('encode-and-decode-tinyurl')
+const EXAMPLES = getExamples("encode-and-decode-tinyurl");
 
-const DEFAULT_EX = EXAMPLES[0] || { label: 'Default', url: 'https://leetcode.com/problems/design-tinyurl' }
+const DEFAULT_EX = EXAMPLES[0] || {
+  label: "Default",
+  url: "https://example.org/articles/url-shortening-service",
+};
 
 function generateSteps(url) {
-  const steps = []
+  const steps = [];
 
   steps.push({
     activeLine: 1,
@@ -42,14 +53,14 @@ function generateSteps(url) {
     urlToCode: new Map(),
     codeToUrl: new Map(),
     counter: 0,
-    phase: 'init',
-    message: 'Initialize Codec',
-    relatedLines: [1]
-  })
+    phase: "init",
+    message: "Initialize Codec",
+    relatedLines: [1],
+  });
 
-  const urlToCode = new Map()
-  const codeToUrl = new Map()
-  let counter = 0
+  const urlToCode = new Map();
+  const codeToUrl = new Map();
+  let counter = 0;
 
   steps.push({
     activeLine: 6,
@@ -57,15 +68,15 @@ function generateSteps(url) {
     urlToCode,
     codeToUrl,
     counter,
-    phase: 'encode_start',
+    phase: "encode_start",
     message: `Encode URL: ${url.slice(0, 30)}...`,
-    relatedLines: [6]
-  })
+    relatedLines: [6],
+  });
 
   if (!urlToCode.has(url)) {
-    const code = String(counter)
-    urlToCode.set(url, code)
-    codeToUrl.set(code, url)
+    const code = String(counter);
+    urlToCode.set(url, code);
+    codeToUrl.set(code, url);
 
     steps.push({
       activeLine: 8,
@@ -74,15 +85,15 @@ function generateSteps(url) {
       urlToCode: new Map(urlToCode),
       codeToUrl: new Map(codeToUrl),
       counter,
-      phase: 'generate_code',
+      phase: "generate_code",
       message: `Generate code: ${code}`,
-      relatedLines: [8]
-    })
+      relatedLines: [8],
+    });
 
-    counter++
+    counter++;
   }
 
-  const tinyUrl = `http://tinyurl.com/${urlToCode.get(url)}`
+  const tinyUrl = `http://tinyurl.com/${urlToCode.get(url)}`;
 
   steps.push({
     activeLine: 12,
@@ -91,10 +102,10 @@ function generateSteps(url) {
     urlToCode: new Map(urlToCode),
     codeToUrl: new Map(codeToUrl),
     counter,
-    phase: 'encode_done',
+    phase: "encode_done",
     message: `Encoded: ${tinyUrl}`,
-    relatedLines: [12]
-  })
+    relatedLines: [12],
+  });
 
   steps.push({
     activeLine: 13,
@@ -103,12 +114,12 @@ function generateSteps(url) {
     urlToCode: new Map(urlToCode),
     codeToUrl: new Map(codeToUrl),
     counter,
-    phase: 'decode_start',
+    phase: "decode_start",
     message: `Decode: ${tinyUrl}`,
-    relatedLines: [13]
-  })
+    relatedLines: [13],
+  });
 
-  const code = tinyUrl.split('/').pop()
+  const code = tinyUrl.split("/").pop();
 
   steps.push({
     activeLine: 14,
@@ -118,12 +129,12 @@ function generateSteps(url) {
     urlToCode: new Map(urlToCode),
     codeToUrl: new Map(codeToUrl),
     counter,
-    phase: 'extract_code',
+    phase: "extract_code",
     message: `Extract code: ${code}`,
-    relatedLines: [14]
-  })
+    relatedLines: [14],
+  });
 
-  const decodedUrl = codeToUrl.get(code)
+  const decodedUrl = codeToUrl.get(code);
 
   steps.push({
     activeLine: 15,
@@ -133,41 +144,60 @@ function generateSteps(url) {
     urlToCode: new Map(urlToCode),
     codeToUrl: new Map(codeToUrl),
     counter,
-    phase: 'decode_done',
+    phase: "decode_done",
     message: `Decoded: ${decodedUrl}`,
     relatedLines: [15],
     done: true,
-    result: { original: url, tiny: tinyUrl, decoded: decodedUrl }
-  })
+    result: { original: url, tiny: tinyUrl, decoded: decodedUrl },
+  });
 
-  return steps
+  return steps;
 }
 
 function VisualizationPanel({ step, applyEx }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", gap: 20, padding: 16 }}
+    >
       {/* Story */}
-      <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, borderLeft: '4px solid #0284c7' }}>
-        <div style={{ fontSize: 12, color: '#075985', fontStyle: 'italic' }}>
-          "Design a codec to encode and decode URLs using hash maps for bidirectional lookup."
+      <div
+        style={{
+          padding: 12,
+          backgroundColor: "#f0f9ff",
+          borderRadius: 6,
+          borderLeft: "4px solid #0284c7",
+        }}
+      >
+        <div style={{ fontSize: 12, color: "#075985", fontStyle: "italic" }}>
+          "Design a codec to encode and decode URLs using hash maps for
+          bidirectional lookup."
         </div>
       </div>
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map(e => (
+        <div
+          style={{
+            fontSize: 13,
+            fontWeight: 600,
+            color: "var(--text)",
+            marginBottom: 8,
+          }}
+        >
+          Examples
+        </div>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          {EXAMPLES.map((e) => (
             <button
               key={e.label}
               onClick={() => applyEx(e)}
               style={{
-                padding: '6px 12px',
+                padding: "6px 12px",
                 borderRadius: 4,
-                border: '1px solid var(--border)',
-                cursor: 'pointer',
+                border: "1px solid var(--border)",
+                cursor: "pointer",
                 fontSize: 12,
-                backgroundColor: 'var(--surface2)'
+                backgroundColor: "var(--surface2)",
               }}
             >
               {e.label}
@@ -178,65 +208,99 @@ function VisualizationPanel({ step, applyEx }) {
 
       {/* URL Mapping */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>URL Mappings</div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {step?.urlToCode && Array.from(step.urlToCode.entries()).map(([originalUrl, code]) => (
-            <motion.div
-              key={`map-${code}`}
-              style={{
-                padding: '10px 12px',
-                borderRadius: 6,
-                border: '2px solid var(--border)',
-                backgroundColor: 'var(--surface2)',
-                fontFamily: 'monospace',
-                fontSize: 11
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              <div style={{ color: 'var(--border)', marginBottom: 4, wordBreak: 'break-all' }}>
-                {originalUrl.slice(0, 40)}...
-              </div>
-              <div style={{ color: '#027bba', fontWeight: 600 }}>
-                → http://tinyurl.com/{code}
-              </div>
-            </motion.div>
-          ))}
+        <div
+          style={{
+            fontSize: 13,
+            fontWeight: 600,
+            color: "var(--text)",
+            marginBottom: 8,
+          }}
+        >
+          URL Mappings
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {step?.urlToCode &&
+            Array.from(step.urlToCode.entries()).map(([originalUrl, code]) => (
+              <motion.div
+                key={`map-${code}`}
+                style={{
+                  padding: "10px 12px",
+                  borderRadius: 6,
+                  border: "2px solid var(--border)",
+                  backgroundColor: "var(--surface2)",
+                  fontFamily: "monospace",
+                  fontSize: 11,
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <div
+                  style={{
+                    color: "var(--border)",
+                    marginBottom: 4,
+                    wordBreak: "break-all",
+                  }}
+                >
+                  {originalUrl.slice(0, 40)}...
+                </div>
+                <div style={{ color: "#027bba", fontWeight: 600 }}>
+                  → http://tinyurl.com/{code}
+                </div>
+              </motion.div>
+            ))}
         </div>
       </div>
 
       {/* Current Operation */}
-      {step?.phase === 'encode_done' && (
+      {step?.phase === "encode_done" && (
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#dbeafe',
+            backgroundColor: "#dbeafe",
             borderRadius: 6,
-            border: '1px solid #0284c7'
+            border: "1px solid #0284c7",
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div style={{ color: '#0c4a6e', fontWeight: 600, marginBottom: 8 }}>Encoded URL</div>
-          <div style={{ color: '#027bba', fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
+          <div style={{ color: "#0c4a6e", fontWeight: 600, marginBottom: 8 }}>
+            Encoded URL
+          </div>
+          <div
+            style={{
+              color: "#027bba",
+              fontFamily: "monospace",
+              fontSize: 12,
+              wordBreak: "break-all",
+            }}
+          >
             {step.tinyUrl}
           </div>
         </motion.div>
       )}
 
-      {step?.phase === 'decode_done' && (
+      {step?.phase === "decode_done" && (
         <motion.div
           style={{
             padding: 12,
-            backgroundColor: '#dbeafe',
+            backgroundColor: "#dbeafe",
             borderRadius: 6,
-            border: '1px solid #0284c7'
+            border: "1px solid #0284c7",
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div style={{ color: '#0c4a6e', fontWeight: 600, marginBottom: 8 }}>Decoded URL</div>
-          <div style={{ color: '#027bba', fontFamily: 'monospace', fontSize: 11, wordBreak: 'break-all' }}>
+          <div style={{ color: "#0c4a6e", fontWeight: 600, marginBottom: 8 }}>
+            Decoded URL
+          </div>
+          <div
+            style={{
+              color: "#027bba",
+              fontFamily: "monospace",
+              fontSize: 11,
+              wordBreak: "break-all",
+            }}
+          >
             {step.url}
           </div>
         </motion.div>
@@ -246,153 +310,182 @@ function VisualizationPanel({ step, applyEx }) {
       <motion.div
         style={{
           padding: 16,
-          backgroundColor: '#f0f9ff',
+          backgroundColor: "#f0f9ff",
           borderRadius: 6,
-          border: '2px solid #0284c7',
-          textAlign: 'center'
+          border: "2px solid #0284c7",
+          textAlign: "center",
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <div style={{ fontSize: 13, fontWeight: 600, color: '#0c4a6e', marginBottom: 8 }}>Status</div>
-        <div style={{ fontSize: 12, color: '#027bba' }}>
-          {step?.message || ''}
+        <div
+          style={{
+            fontSize: 13,
+            fontWeight: 600,
+            color: "#0c4a6e",
+            marginBottom: 8,
+          }}
+        >
+          Status
+        </div>
+        <div style={{ fontSize: 12, color: "#027bba" }}>
+          {step?.message || ""}
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
 
 export default function EncodeAndDecodeTinyURLVisualizer() {
-  const [urlInput, setUrlInput] = useState(DEFAULT_EX.url)
-  const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
+  const [urlInput, setUrlInput] = useState(DEFAULT_EX.url);
+  const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label);
 
   // Plain string input - no JSON parsing, just validation.
   const { url, inputError } = useMemo(() => {
-    const trimmed = urlInput.trim()
-    if (!trimmed) return { url: DEFAULT_EX.url, inputError: 'url must not be empty' }
-    return { url: trimmed, inputError: '' }
-  }, [urlInput])
+    const trimmed = urlInput.trim();
+    if (!trimmed)
+      return { url: DEFAULT_EX.url, inputError: "url must not be empty" };
+    return { url: trimmed, inputError: "" };
+  }, [urlInput]);
 
   const steps = useMemo(
     () =>
       generateSteps(url).map((current) => ({
         ...current,
-        relatedLines: current.relatedLines ?? (current.activeLine != null ? [current.activeLine] : []),
+        relatedLines:
+          current.relatedLines ??
+          (current.activeLine != null ? [current.activeLine] : []),
       })),
-    [url]
-  )
+    [url],
+  );
 
-  const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
-    usePlaybackState(steps.length)
+  const {
+    stepIndex,
+    setStepIndex,
+    stepForward,
+    stepBack,
+    togglePlay,
+    handleReset,
+    isPlaying,
+    speed,
+    setSpeed,
+    isDone,
+  } = usePlaybackState(steps.length);
 
-  const step = stepIndex >= 0 ? steps[stepIndex] : null
+  const step = stepIndex >= 0 ? steps[stepIndex] : null;
 
-  const applyEx = useCallback((e) => {
-    setUrlInput(e.url)
-    setActiveLabel(e.label)
-    handleReset()
-  }, [handleReset])
+  const applyEx = useCallback(
+    (e) => {
+      setUrlInput(e.url);
+      setActiveLabel(e.label);
+      handleReset();
+    },
+    [handleReset],
+  );
 
-  const handleFieldChange = useCallback((key, text) => {
-    if (key === 'url') setUrlInput(text)
-    setActiveLabel('')
-    handleReset()
-  }, [handleReset])
+  const handleFieldChange = useCallback(
+    (key, text) => {
+      if (key === "url") setUrlInput(text);
+      setActiveLabel("");
+      handleReset();
+    },
+    [handleReset],
+  );
 
   const connectivity = useCodeVisualConnectivity({
     steps,
     stepIndex,
     onStepJump: setStepIndex,
-  })
+  });
 
-  const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
+  const {
+    showPatternOverlay,
+    setShowPatternOverlay,
+    activeLineDom,
+    setActiveLineDom,
+  } = usePatternOverlay();
 
-  const panelConfigs = useMemo(() => [
-    { id: 'code', title: 'Code' },
-    { id: 'viz', title: '🔗 Encode/Decode Tiny URL', dockMode: 'split-right' },
-  ], [])
-  const panelContents = useMemo(() => ({
-    code: (<div style={{ position: 'relative' }}>
-
-          <div style={{ position: 'relative' }}>
-
-
+  const panelConfigs = useMemo(
+    () => [
+      { id: "code", title: "Code" },
+      {
+        id: "viz",
+        title: "🔗 Encode/Decode Tiny URL",
+        dockMode: "split-right",
+      },
+    ],
+    [],
+  );
+  const panelContents = useMemo(
+    () => ({
+      code: (
+        <div style={{ position: "relative" }}>
+          <div style={{ position: "relative" }}>
             <CodeTracePanel
-          step={step}
-          codeLines={SOLUTION_CODE}
-          highlightedLines={connectivity.highlightedLines}
-          onLineSelect={connectivity.handleLineSelect}
-          onActiveLineDomChange={setActiveLineDom}
-        />
-
-
-
-            {showPatternOverlay && (
-
-
-              <CodePatternAnnotations
-
-
-                linePatterns={LINE_PATTERN_MAP}
-
-
-                currentPhase={step?.phase}
-
-
-                activeLineDom={activeLineDom}
-
-
-                activeLine={step?.activeLine}
-
-
-              />
-
-
-            )}
-
-
-          </div>
-          {showPatternOverlay && (
-
-            <CodePatternAnnotations
-
-              linePatterns={LINE_PATTERN_MAP}
-
-              currentPhase={step?.phase}
-
-              activeLineDom={activeLineDom}
-
-              activeLine={step?.activeLine}
-
+              step={step}
+              codeLines={SOLUTION_CODE}
+              highlightedLines={connectivity.highlightedLines}
+              onLineSelect={connectivity.handleLineSelect}
+              onActiveLineDomChange={setActiveLineDom}
             />
 
+            {showPatternOverlay && (
+              <CodePatternAnnotations
+                linePatterns={LINE_PATTERN_MAP}
+                currentPhase={step?.phase}
+                activeLineDom={activeLineDom}
+                activeLine={step?.activeLine}
+              />
+            )}
+          </div>
+          {showPatternOverlay && (
+            <CodePatternAnnotations
+              linePatterns={LINE_PATTERN_MAP}
+              currentPhase={step?.phase}
+              activeLineDom={activeLineDom}
+              activeLine={step?.activeLine}
+            />
           )}
-
-        </div>),
-    viz: (<>
-        <ManualInputPanel
-          fields={[{ key: 'url', label: 'url', type: 'string' }]}
-          values={{ url: urlInput }}
-          onChange={handleFieldChange}
-          examples={EXAMPLES}
-          activeLabel={activeLabel}
-          applyExample={applyEx}
-          inputError={inputError}
-        />
-        <VisualizationPanel
-          step={step}
-          applyEx={applyEx}
-        />
-      </>),
-  }), [step, connectivity, setActiveLineDom, urlInput, activeLabel, inputError, handleFieldChange, applyEx, showPatternOverlay, activeLineDom])
-  const [panelDivs, setPanelDivs] = useState(null)
-  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
+        </div>
+      ),
+      viz: (
+        <>
+          <ManualInputPanel
+            fields={[{ key: "url", label: "url", type: "string" }]}
+            values={{ url: urlInput }}
+            onChange={handleFieldChange}
+            examples={EXAMPLES}
+            activeLabel={activeLabel}
+            applyExample={applyEx}
+            inputError={inputError}
+          />
+          <VisualizationPanel step={step} applyEx={applyEx} />
+        </>
+      ),
+    }),
+    [
+      step,
+      connectivity,
+      setActiveLineDom,
+      urlInput,
+      activeLabel,
+      inputError,
+      handleFieldChange,
+      applyEx,
+      showPatternOverlay,
+      activeLineDom,
+    ],
+  );
+  const [panelDivs, setPanelDivs] = useState(null);
+  const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
     <div className="problem-shell">
       <>
-        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+        <LuminoDockPanel
+          panels={panelConfigs}
+          onPanelReady={handlePanelReady}
+        />
         {panelDivs && (
           <>
             {panelDivs.code && createPortal(panelContents.code, panelDivs.code)}
@@ -412,7 +505,7 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
           prevDisabled={stepIndex < 0}
           nextDisabled={isDone}
           resetDisabled={stepIndex < 0}
-          onSpeedChange={e => setSpeed(Number(e.target.value))}
+          onSpeedChange={(e) => setSpeed(Number(e.target.value))}
           showPatternOverlay={showPatternOverlay}
           onShowPatternOverlayChange={setShowPatternOverlay}
           patternOverlayLabel="Show pattern overlay"
@@ -422,7 +515,6 @@ export default function EncodeAndDecodeTinyURLVisualizer() {
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
         )}
       </FloatingPanel>
-      
     </div>
-  )
+  );
 }

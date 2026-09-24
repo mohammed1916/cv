@@ -1,3 +1,4 @@
+import { getExamples } from "../../config/examplesRegistry";
 import { useState, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -147,12 +148,7 @@ function generateSteps(num1, num2) {
   return steps;
 }
 
-const EXAMPLES = [
-  { label: "2 × 3", num1: "2", num2: "3" },
-  { label: "123 × 456", num1: "123", num2: "456" },
-  { label: "9 × 9", num1: "9", num2: "9" },
-  { label: "0 × 5", num1: "0", num2: "5" },
-];
+const EXAMPLES = getExamples("multiply-strings");
 
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState("123");

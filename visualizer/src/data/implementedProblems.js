@@ -18,6 +18,8 @@ const problemModules = import.meta.glob("../problems/**/meta.js", {
   eager: true,
 });
 
+import { getProblemSummary } from "./problemSummaries.js";
+
 function slugFromPath(path) {
   const parts = path.split("/").filter(Boolean);
   const folder = parts[parts.length - 2];
@@ -37,7 +39,7 @@ function inferFromModule(path, mod) {
     number: meta.number || "",
     title,
     slug,
-    description: meta.description || "Auto-generated visualizer entry.",
+    description: meta.description || getProblemSummary(slug),
     difficulty: meta.difficulty || "Medium",
     tags: meta.tags || [],
     accent: meta.accent || "#64748b",

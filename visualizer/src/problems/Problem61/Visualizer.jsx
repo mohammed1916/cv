@@ -1,3 +1,4 @@
+import { getExamples } from "../../config/examplesRegistry";
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -56,12 +57,7 @@ const LINE_PATTERN_MAP = {
   14: "done",
 };
 
-const EXAMPLES = [
-  { label: "Example 1: [1,2,3,4,5], k=2", list: [1, 2, 3, 4, 5], k: 2 },
-  { label: "Example 2: [0,1,2], k=4", list: [0, 1, 2], k: 4 },
-  { label: "Example 3: [1,2,3], k=3 (full cycle)", list: [1, 2, 3], k: 3 },
-  { label: "Example 4: [7], k=5 (single node)", list: [7], k: 5 },
-];
+const EXAMPLES = getExamples("rotate-list");
 
 function generateSteps(list, k) {
   const steps = [];

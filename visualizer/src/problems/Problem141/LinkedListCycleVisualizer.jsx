@@ -1,50 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CycleStory from "./CycleStory";
 import { CODE, buildCycleStory } from "./algorithm";
 import "./LinkedListCycleVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "Cycle pos 1 ([3,2,0,-4])",
-    input: "[3, 2, 0, -4] | pos = 1",
-  },
-  {
-    label: "Cycle pos 0 ([1,2])",
-    input: "[1, 2] | pos = 0",
-  },
-  {
-    label: "Single node ([1], pos -1)",
-    input: "[1] | pos = -1",
-  },
-  {
-    label: "Self loop ([1], pos 0)",
-    input: "[1] | pos = 0",
-  },
-  {
-    label: "Linear list ([1,2,3,4,5])",
-    input: "[1, 2, 3, 4, 5] | pos = -1",
-  },
-  {
-    label: "Long loop ([10..60], pos 2)",
-    input: "[10, 20, 30, 40, 50, 60] | pos = 2",
-  },
-  {
-    label: "Full cycle ([5,10,15,20], pos 0)",
-    input: "[5, 10, 15, 20] | pos = 0",
-  },
-  {
-    label: "Duplicates ([2,2,2,2], pos 1)",
-    input: "[2, 2, 2, 2] | pos = 1",
-  },
-  {
-    label: "Negative values ([0,-4,-8,12])",
-    input: "[0, -4, -8, 12] | pos = 2",
-  },
-  {
-    label: "Empty list ([] | pos -1)",
-    input: "[] | pos = -1",
-  },
-];
+const EXAMPLES = getExamples("linked-list-cycle");
 
 const definition = {
   title: "Linked List Cycle",

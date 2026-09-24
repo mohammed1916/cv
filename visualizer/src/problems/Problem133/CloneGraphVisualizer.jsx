@@ -1,38 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CloneGraphStory from "./CloneGraphStory";
 import { CODE, buildCloneGraphStory } from "./algorithm";
 import "./CloneGraphVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "Example 1 (4-node cycle)",
-    input: "[[2,4],[1,3],[2,4],[1,3]]",
-  },
-  {
-    label: "Example 2 (Single node)",
-    input: "[[]]",
-  },
-  {
-    label: "Example 3 (Empty graph)",
-    input: "[]",
-  },
-  {
-    label: "Example 4 (2 connected nodes)",
-    input: "[[2],[1]]",
-  },
-  {
-    label: "Example 5 (3-node triangle)",
-    input: "[[2,3],[1,3],[1,2]]",
-  },
-  {
-    label: "Example 6 (Star graph 4 nodes)",
-    input: "[[2,3,4],[1],[1],[1]]",
-  },
-  {
-    label: "Example 7 (Linear 4-node chain)",
-    input: "[[2],[1,3],[2,4],[3]]",
-  },
-];
+const EXAMPLES = getExamples("clone-graph");
 
 const definition = {
   title: "Clone Graph",

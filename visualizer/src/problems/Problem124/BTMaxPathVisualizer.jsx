@@ -1,16 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import MaxPathStory from './MaxPathStory';
 import { CODE, buildMaxPathStory } from './algorithm';
 import './BTMaxPathVisualizer.css';
 
-const EXAMPLES = [
-  { label: 'Example 1', input: '[-10, 9, 20, null, null, 15, 7]' },
-  { label: 'Example 2 (Simple)', input: '[1, 2, 3]' },
-  { label: 'Example 3 (Single Negative)', input: '[-3]' },
-  { label: 'Example 4 (All Negative)', input: '[-10, -20, -30, -5, -40]' },
-  { label: 'Example 5 (Subtree Dominant)', input: '[-100, 10, 20, 30, 40]' },
-  { label: 'Example 6 (Branching)', input: '[5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1]' },
-];
+const EXAMPLES = getExamples("binary-tree-maximum-path-sum");
 
 const LINE_PATTERN_MAP = {
   2: 'init',

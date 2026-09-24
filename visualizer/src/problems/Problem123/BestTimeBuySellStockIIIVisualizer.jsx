@@ -1,13 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import StockStory3 from "./StockStory3";
 import { STOCK_CODE, buildStock3Story } from "./algorithm";
 import "./BestTimeBuySellStockIIIVisualizer.css";
 
-const EXAMPLES = [
-  { label: "Example 1 [3,3,5,0,0,3,1,4]", input: "[3, 3, 5, 0, 0, 3, 1, 4]" },
-  { label: "Example 2 [1,2,3,4,5]", input: "[1, 2, 3, 4, 5]" },
-  { label: "Example 3 [7,6,4,3,1]", input: "[7, 6, 4, 3, 1]" },
-];
+const EXAMPLES = getExamples("best-time-to-buy-and-sell-stock-iii");
 
 const definition = {
   title: "Best Time to Buy and Sell Stock III",

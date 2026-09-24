@@ -1,3 +1,4 @@
+import { getExamples } from "../../config/examplesRegistry";
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { buildSortedArrayStory } from "./algorithm";
@@ -31,12 +32,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return build(0, len(nums))" },
 ];
 
-const EXAMPLES = [
-  { label: "Example 1", arr: [-10, -3, 0, 5, 9] },
-  { label: "Example 2", arr: [0, 1, 2, 3] },
-  { label: "Example 3", arr: [1, 2, 3, 4, 5] },
-  { label: "Example 4", arr: [-100, -50, 0, 50, 100] },
-];
+const EXAMPLES = getExamples("convert-sorted-array-to-binary-search-tree");
 
 export default function ConvertSortedArrayToBinarySearchTreeVisualizer() {
   const [arrInput, setArrInput] = useState("[-10, -3, 0, 5, 9]");

@@ -1,3 +1,4 @@
+import { getExamples } from "../../config/examplesRegistry";
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -16,32 +17,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
 const PATTERNS = ['done', 'init', 'merge', 'transform']
 
-const EXAMPLES = [
-  {
-    label: "U-shaped (a=1, b=-4, c=3)",
-    nums: [-4, -2, 2, 4],
-    a: 1,
-    b: -4,
-    c: 3,
-    description: "Positive parabola: largest values at edges"
-  },
-  {
-    label: "Inverted (a=-1, b=4, c=-3)",
-    nums: [-4, -2, 2, 4],
-    a: -1,
-    b: 4,
-    c: -3,
-    description: "Negative parabola: largest values in middle"
-  },
-  {
-    label: "Linear (a=0, b=2, c=0)",
-    nums: [-2, -1, 0, 1, 2],
-    a: 0,
-    b: 2,
-    c: 0,
-    description: "Linear transformation: monotonic"
-  }
-];
+const EXAMPLES = getExamples("sort-transformed-array");
 
 function generateSteps(nums, a, b, c) {
   const steps = [];

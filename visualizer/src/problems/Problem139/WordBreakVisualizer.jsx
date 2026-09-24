@@ -1,42 +1,10 @@
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreakStory from "./WordBreakStory";
 import { CODE, buildWordBreakStory } from "./algorithm";
 import "./WordBreakVisualizer.css";
 
-const EXAMPLES = [
-  {
-    label: "leetcode (leet, code)",
-    input: "leetcode | leet, code",
-  },
-  {
-    label: "applepenapple (apple, pen)",
-    input: "applepenapple | apple, pen",
-  },
-  {
-    label: "catsandog (cats, dog, sand, and, cat)",
-    input: "catsandog | cats, dog, sand, and, cat",
-  },
-  {
-    label: "cars (car, ca, rs)",
-    input: "cars | car, ca, rs",
-  },
-  {
-    label: "single char match (a | a)",
-    input: "a | a",
-  },
-  {
-    label: "single char mismatch (a | b)",
-    input: "a | b",
-  },
-  {
-    label: "repeated letters (aaaaaaa | aaaa, aaa)",
-    input: "aaaaaaa | aaaa, aaa",
-  },
-  {
-    label: "goalspecial (go, goal, goals, special)",
-    input: "goalspecial | go, goal, goals, special",
-  },
-];
+const EXAMPLES = getExamples("word-break");
 
 const LINE_PATTERN_MAP = {
   1: "init",

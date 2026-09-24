@@ -483,6 +483,17 @@ function SettingsMenu({
             <a href="https://teemtreat.com">teemtreat.com</a>
           </p>
           <a href="/privacy.html">Privacy Policy</a>
+          <p
+            className="trademark-disclaimer"
+            style={{
+              fontSize: "0.75rem",
+              color: "var(--text-muted, #71717a)",
+              marginTop: "1rem",
+            }}
+          >
+            LeetCode is a trademark of LeetCode LLC. This site is not affiliated
+            with or endorsed by LeetCode.
+          </p>
         </section>
       </div>
     </details>
