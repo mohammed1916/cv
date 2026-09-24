@@ -104,11 +104,11 @@ export default function TwoSumTour({ panels, playbackRef }) {
           panel !== "playback"
             ? Array.from(
                 node
-                  .closest(".lm-DockPanel")
+                  .closest(".local-dock-workspace")
                   ?.querySelectorAll('[role="tab"]') || [],
               ).find(
                 (item) =>
-                  item.querySelector(".lm-TabBar-tabLabel")?.textContent ===
+                  item.textContent ===
                   tabTitle,
               )
             : null;

@@ -19,6 +19,7 @@ export default function FloatingPanel({
   const panelRef = useRef(null);
   const [host] = useState(() => document.createElement('div'));
   const [docked, setDocked] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const [canDock, setCanDock] = useState(false);
   const undockRef = useRef(null);
   useLayoutEffect(() => {
@@ -32,6 +33,11 @@ export default function FloatingPanel({
       host, title, side, done: (undock) => { undockRef.current = undock; setDocked(true); setCollapsed(false); },
     } }));
   };
+  useEffect(() => {
+    const restore = () => setCollapsed(false);
+    host.addEventListener('cpviz-restore-panel', restore);
+    return () => host.removeEventListener('cpviz-restore-panel', restore);
+  }, [host]);
   const floatPanel = () => {
     undockRef.current?.(); undockRef.current = null; setDocked(false);
   };
@@ -44,7 +50,6 @@ export default function FloatingPanel({
   const resizeState = useRef(null);
 
   const [position, setPosition] = useState(null);
-  const [collapsed, setCollapsed] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
   const [controlScale, setControlScale] = useState(100);
 
@@ -379,11 +384,10 @@ export default function FloatingPanel({
         <button
           type="button"
           className="floating-panel-collapse"
-          onClick={() =>
-            setCollapsed(
-              (current) => !current,
-            )
-          }
+          onClick={() => {
+            if (docked) host.dispatchEvent(new CustomEvent('cpviz-collapse-panel', { bubbles: true, detail: { collapsed: true } }));
+            else setCollapsed(current => !current);
+          }}
           aria-label={
             collapsed
               ? "Expand panel"

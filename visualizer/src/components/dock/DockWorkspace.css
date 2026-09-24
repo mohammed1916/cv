@@ -1,0 +1,34 @@
+.local-dock-workspace { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; color: var(--text); background: var(--surface); }
+.local-dock-layout { flex: 1; min-height: 0; min-width: 0; display: flex; }
+.local-dock-split { display: flex; flex: 1; min-width: 0; min-height: 0; overflow: hidden; }
+.local-dock-split.vertical { flex-direction: column; }
+.local-dock-branch { display: flex; min-width: 0; min-height: 0; overflow: hidden; }
+.local-dock-divider { flex: 0 0 7px; background: var(--surface2); border: 2px solid var(--surface); cursor: col-resize; touch-action: none; }
+.vertical > .local-dock-divider { cursor: row-resize; }
+.local-dock-divider:hover, .local-dock-divider:focus-visible { background: var(--primary); outline: none; }
+.local-dock-group { display: flex; flex-direction: column; flex: 1; position: relative; min-width: 0; min-height: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.local-dock-header { display: flex; align-items: center; flex: 0 0 36px; min-width: 0; background: var(--surface2); border-bottom: 1px solid var(--border); gap: 3px; }
+.local-dock-tabs { display: flex; flex: 1; overflow-x: auto; min-width: 0; height: 36px; }
+.local-dock-header button, .local-dock-header select, .local-dock-restore button { color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 5px 8px; font-size: 12px; cursor: pointer; }
+.local-dock-header > button { margin-right: 5px; font-size: 18px; line-height: 16px; }
+.local-dock-header select { width: 58px; }
+.local-dock-tabs button { border: 0; border-radius: 0; border-bottom: 2px solid transparent; white-space: nowrap; cursor: grab; }
+.local-dock-tabs button[aria-selected=true] { border-bottom-color: var(--primary); background: var(--surface); }
+.local-dock-body, .local-dock-slot, .local-dock-content, .local-dock-code { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.local-dock-slot[hidden] { display: none; }
+.local-dock-slot { position: relative; }
+.local-dock-content { overflow: auto; }
+.local-dock-code > * { flex: 1; min-height: 0; }
+.local-dock-status { flex: 0 0 auto; border-bottom: 1px solid var(--border); background: var(--surface2); }
+.local-dock-restore { flex: 0 0 auto; min-height: 28px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; padding: 4px 6px; border-top: 1px solid var(--border); }
+.local-dock-restore span { font-size: 11px; color: var(--text-muted); }
+.local-dock-empty { padding: 20px; }
+.local-dock-zones { position: absolute; inset: 36px 0 0; display: grid; grid-template-columns: 24% 1fr 24%; grid-template-rows: 24% 1fr 24%; z-index: 100; }
+.local-dock-zone { display: grid; place-items: center; background: color-mix(in srgb, var(--surface) 85%, var(--primary)); border: 1px dashed var(--primary); color: var(--text); font-size: 12px; }
+.local-dock-zone:hover { background: var(--primary); color: var(--text-on-primary, white); }
+.local-dock-zone.left { grid-column: 1; grid-row: 1 / 4; }.local-dock-zone.right { grid-column: 3; grid-row: 1 / 4; }
+.local-dock-zone.top { grid-column: 2; grid-row: 1; }.local-dock-zone.bottom { grid-column: 2; grid-row: 3; }.local-dock-zone.tab { grid-column: 2; grid-row: 2; }
+.workspace-drop-targets { display: none; position: absolute; inset: 36px 8px 36px; z-index: 2001; pointer-events: none; }
+.dragging-floating-panel .workspace-drop-targets { display: block; }
+.workspace-drop-target { position: absolute; display: grid; place-items: center; border: 2px dashed var(--primary); border-radius: 10px; background: var(--surface2); color: var(--text); }
+.workspace-drop-target.left { left: 0; top: 0; bottom: 84px; width: 100px; }.workspace-drop-target.right { right: 0; top: 0; bottom: 84px; width: 100px; }.workspace-drop-target.bottom { left: 0; right: 0; bottom: 0; height: 76px; }
