@@ -35,6 +35,7 @@ try {
     return result.result.value;
   };
   await command('Runtime.enable');
+  await command('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
   await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
   const click = expression => evaluate(`(${expression}).click()`);
   await command('Page.navigate', { url: `${base}/#sort-colors` });
@@ -45,7 +46,10 @@ try {
   await delay(100);
   const before = await evaluate(`(()=>{window.dockInput=document.querySelector('[data-panel-id="input"] input'); window.codeHost=document.querySelector('[data-panel-id="code"]'); return document.querySelector('[data-panel-id="viz"]').getBoundingClientRect().width})()`);
   await click(`document.querySelector('button[aria-label="Collapse Code"]')`);
-  await delay(100);
+  await delay(200);
+  assert.equal(await evaluate(`Boolean(document.querySelector('.local-dock-minimize-flight')?.getAnimations().length)`), true);
+  assert.equal(await evaluate(`document.querySelector('[data-restore-panel="code"]').classList.contains('is-arriving')`), true);
+  await waitFor(() => evaluate(`!document.querySelector('.local-dock-minimize-flight')`));
   assert.equal(await evaluate(`document.querySelector('.local-dock-layout [data-dock-tab="code"]') === null`), true);
   assert.ok(await evaluate(`document.querySelector('[data-panel-id="viz"]').getBoundingClientRect().width`) > before + 100);
   await click(`[...document.querySelectorAll('.local-dock-restore button')].find(b=>b.textContent==='Restore Code')`);
@@ -56,7 +60,7 @@ try {
   console.log('PASS collapse frees layout space; restore preserves hosts, input values, and proportions');
   const originalHeight = await evaluate(`document.querySelector('[data-panel-id="viz"]').getBoundingClientRect().height`);
   await click(`document.querySelector('button[aria-label="Collapse Input"]')`);
-  await delay(100);
+  await waitFor(() => evaluate(`!document.querySelector('.local-dock-minimize-flight')`));
   assert.ok(await evaluate(`document.querySelector('[data-panel-id="viz"]').getBoundingClientRect().height`) > originalHeight + 30);
   await click(`[...document.querySelectorAll('.local-dock-restore button')].find(b=>b.textContent==='Restore Input')`);
   await delay(100);
@@ -67,7 +71,7 @@ try {
   await delay(100);
   assert.equal(await evaluate(`document.querySelector('[data-dock-tab="code"]').closest('.local-dock-group').querySelectorAll('[role="tab"]').length`), 2);
   await click(`document.querySelector('button[aria-label="Collapse Code"]')`);
-  await delay(80);
+  await waitFor(() => evaluate(`!document.querySelector('.local-dock-minimize-flight')`));
   assert.equal(await evaluate(`document.querySelector('[data-dock-tab="viz"]').getAttribute('aria-selected')`), 'true');
   await click(`[...document.querySelectorAll('.local-dock-restore button')].find(b=>b.textContent==='Restore Code')`);
   await delay(80);
@@ -100,7 +104,7 @@ try {
   await click(`document.querySelector('button[title="Dock panel below workspace"]')`);
   await waitFor(() => evaluate(`Boolean(document.querySelector('.local-dock-layout .floating-panel.is-docked'))`));
   await click(`document.querySelector('.local-dock-layout .floating-panel-collapse')`);
-  await waitFor(() => evaluate(`Boolean([...document.querySelectorAll('.local-dock-restore button')].find(b=>b.textContent.includes('Playback')))`));
+  await waitFor(() => evaluate(`Boolean([...document.querySelectorAll('.local-dock-restore button')].find(b=>b.textContent.startsWith('Restore') && b.textContent.includes('Playback')))`));
   await click(`[...document.querySelectorAll('.local-dock-restore button')].find(b=>b.textContent.includes('Playback'))`);
   await waitFor(() => evaluate(`Boolean(document.querySelector('.local-dock-layout .floating-panel-body'))`));
   await click(`document.querySelector('button[title="Float panel over workspace"]')`);
@@ -109,11 +113,22 @@ try {
   console.log('PASS dock, collapse, restore, and float playback');
 
   await evaluate(`(()=>{document.querySelectorAll('.local-dock-header > button').forEach(button=>button.click())})()`);
-  await delay(100);
+  await waitFor(() => evaluate(`!document.querySelector('.local-dock-minimize-flight')`));
   assert.equal(await evaluate(`Boolean(document.querySelector('.local-dock-empty'))`), true);
   await evaluate(`document.querySelectorAll('.local-dock-restore button').forEach(button=>button.click())`);
   await delay(100);
   assert.equal(await evaluate(`window.dockInput === document.querySelector('[data-panel-id="input"] input')`), true);
+  await click(`document.querySelector('button[aria-label="Collapse Code"]')`);
+  await delay(150);
+  await click(`document.querySelector('[data-restore-panel="code"]')`);
+  await delay(900);
+  assert.equal(await evaluate(`!document.querySelector('.local-dock-minimize-flight') && Boolean(document.querySelector('.local-dock-layout [data-panel-id="code"]'))`), true);
+  await command('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+  await click(`document.querySelector('button[aria-label="Collapse Code"]')`);
+  await delay(100);
+  assert.equal(await evaluate(`!document.querySelector('.local-dock-minimize-flight') && !document.querySelector('.local-dock-layout [data-dock-tab="code"]')`), true);
+  await click(`document.querySelector('[data-restore-panel="code"]')`);
+  console.log('PASS visible minimize flight, early restore cancellation, and reduced motion');
   await mkdir('.tmp', { recursive: true });
   const screenshot = await command('Page.captureScreenshot', { format: 'png' });
   await writeFile('.tmp/local-dock.png', Buffer.from(screenshot.data, 'base64'));

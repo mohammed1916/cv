@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createLayout, findGroup, ids, insert, move, remove, update, visible } from './layout';
 import './DockWorkspace.css';
+import { minimizeMotion } from './minimizeMotion';
 
 // Move stable DOM hosts, never React portal destinations. Inputs, editors, and
 // playback survive regrouping, collapse, and floating without remounting.
@@ -48,11 +49,36 @@ export default function DockWorkspace({ panels, onPanelReady }) {
   const external = useRef(new Map()), serial = useRef(0);
   const [tree, setTree] = useState(null), [hidden, setHidden] = useState(new Set()), [dragged, setDragged] = useState(null);
   const [entries, setEntries] = useState(new Map());
+  const [minimizing, setMinimizing] = useState(new Set());
+  const flights = useRef(new Map());
   const signature = JSON.stringify(panels);
   useLayoutEffect(() => { ready.current = onPanelReady; }, [onPanelReady]);
-  const collapse = (id, collapsed = true) => setHidden(current => {
-    const next = new Set(current); if (collapsed) next.add(id); else next.delete(id); return next;
-  });
+  const collapse = (id, collapsed = true) => {
+    const commit = () => setHidden(current => {
+      const next = new Set(current); if (collapsed) next.add(id); else next.delete(id); return next;
+    });
+    if (flights.current.has(id)) {
+      if (collapsed) return;
+      flights.current.get(id)(); flights.current.delete(id);
+      setMinimizing(current => { const next = new Set(current); next.delete(id); return next; });
+    }
+    const workspace = container.current;
+    const source = workspace?.querySelector(`[data-dock-tab="${CSS.escape(id)}"]`)?.closest('.local-dock-group');
+    if (!collapsed || !source || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { commit(); return; }
+    setMinimizing(current => new Set([...current, id]));
+    const cancel = minimizeMotion(workspace, source, id, () => {
+      flights.current.delete(id);
+      commit();
+      setMinimizing(current => { const next = new Set(current); next.delete(id); return next; });
+      const button = workspace.querySelector(`[data-restore-panel="${CSS.escape(id)}"]`);
+      button?.animate([{ boxShadow: '0 0 0 3px var(--primary)', background: 'var(--primary)' }, { boxShadow: '0 0 0 0px transparent', background: 'var(--surface2)' }], { duration: 1400, easing: 'ease-out' });
+    });
+    flights.current.set(id, cancel);
+  };
+  useEffect(() => {
+    const active = flights.current;
+    return () => { active.forEach(cancel => cancel()); active.clear(); };
+  }, []);
 
   useLayoutEffect(() => {
     const configs = JSON.parse(signature);
@@ -157,7 +183,7 @@ export default function DockWorkspace({ panels, onPanelReady }) {
   return <div ref={container} className="local-dock-workspace lumino-dock-container" data-layout-panels={entries.size}>
     <div className="local-dock-layout">{layout ? renderNode(layout) : <p className="local-dock-empty">All panels are collapsed. Restore one below.</p>}</div>
     <footer className="local-dock-restore" aria-label="Collapsed panels">
-      {[...hidden].filter(id => recordFor(id)).map(id => <button type="button" key={id} onClick={() => restore(id)}>Restore {recordFor(id).title}</button>)}
+      {[...new Set([...hidden, ...minimizing])].filter(id => recordFor(id)).map(id => <button type="button" key={id} data-restore-panel={id} className={minimizing.has(id) ? 'is-arriving' : ''} onClick={() => restore(id)}>{minimizing.has(id) ? '↓ Minimizing' : 'Restore'} {recordFor(id).title}</button>)}
       <span>Drag a tab or use Move to arrange panels · Drag dividers to resize</span>
     </footer>
     <div ref={parking} hidden />
