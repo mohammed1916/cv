@@ -54,3 +54,32 @@
 .problem-list-content nav button[aria-current] { background: var(--surface2); border-color: var(--primary); font-weight: 700; }
 .problem-list-content small { margin-left: auto; white-space: nowrap; color: var(--text-muted); font-size: 11px; }
 @media (max-width: 480px) { .problem-info-bar { padding: 8px; } }
+
+.problem-list-content > nav > button:nth-child(odd) {
+  background: var(--surface1);
+}
+
+.problem-list-content > nav > button:nth-child(even) {
+  background: var(--surface2);
+}
+
+.problem-list-content > nav > button:nth-child(odd) {
+  background: var(--surface1);
+}
+
+.problem-list-content > nav > button:nth-child(even) {
+  background: var(--surface2);
+}
+
+.problem-list-content > nav > button:hover {
+  background: var(--code-line);
+}
+
+.problem-list-content > nav > button[aria-current="page"] {
+  background: var(--accent);
+  color: white;
+}
+
+.problem-list-content > nav > button[aria-current="page"]:hover {
+  background: var(--accent);
+}
