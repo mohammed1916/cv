@@ -1,13 +1,14 @@
 /* =========================================================
-   Panel layout
-   One padding rule for every problem-owned dock panel.
+   Main problem-owned panel bodies
    ========================================================= */
 
 .bei-panel-body {
   box-sizing: border-box;
+
   width: 100%;
   height: 100%;
   min-width: 0;
+
   overflow: auto;
 
   display: flex;
@@ -15,11 +16,27 @@
   gap: 14px;
 
   padding: 14px;
+
+  container-type: inline-size;
+}
+
+.bei-parser-panel {
+  overflow-x: hidden;
+}
+
+.bei-code-panel {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  overflow: hidden;
 }
 
 
 /* =========================================================
-   Shared local section treatment
+   Sections
    ========================================================= */
 
 .bei-section {
@@ -45,6 +62,7 @@
 
 .bei-section-title {
   color: var(--text);
+
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -54,13 +72,14 @@
   flex: 0 0 auto;
 
   color: var(--muted);
+
   font-size: 11px;
   font-weight: 600;
 }
 
 
 /* =========================================================
-   Input panel
+   Input
    ========================================================= */
 
 .bei-input-panel {
@@ -71,6 +90,7 @@
   padding: 12px;
 
   background: var(--surface2);
+
   border: 1px solid var(--border);
   border-radius: 8px;
 }
@@ -111,6 +131,7 @@
 
 .bei-example-chip.active {
   border-color: var(--primary);
+
   background: var(--primary);
   color: white;
 }
@@ -130,12 +151,14 @@
   gap: 10px;
 
   color: var(--muted);
+
   font-size: 11px;
   font-weight: 600;
 }
 
 .bei-input {
   box-sizing: border-box;
+
   width: 100%;
   min-width: 0;
 
@@ -149,8 +172,15 @@
   background: var(--surface);
   color: var(--text);
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
   font-size: 13px;
 
   transition:
@@ -160,7 +190,14 @@
 
 .bei-input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 18%, transparent);
+
+  box-shadow:
+    0 0 0 2px
+    color-mix(
+      in srgb,
+      var(--primary) 18%,
+      transparent
+    );
 }
 
 
@@ -194,7 +231,13 @@
 
   border-radius: 4px;
 
-  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 14%,
+      transparent
+    );
+
   color: var(--primary);
 
   font-size: 10px;
@@ -205,12 +248,14 @@
 
 
 /* =========================================================
-   Set state
+   Parser state
    ========================================================= */
 
 .bei-state-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 8px;
 }
 
@@ -219,7 +264,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 
   padding: 10px;
 
@@ -231,35 +276,71 @@
 
 .bei-state-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
-
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
 }
 
-.bei-state-header strong {
+.bei-state-header > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bei-state-header span {
   color: var(--text);
+
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.bei-state-header code {
+  width: fit-content;
+
+  color: var(--muted);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.bei-state-header > strong {
+  flex: 0 0 auto;
+
+  color: var(--text);
+
   font-size: 15px;
 }
 
+.bei-state-description {
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
 .bei-state.union {
-  border-top: 2px solid var(--primary);
+  border-top:
+    2px solid var(--primary);
 }
 
 .bei-state.product {
-  border-top: 2px solid #a78bfa;
-}
-
-.bei-state.group {
-  border-top: 2px solid #22c55e;
+  border-top:
+    2px solid #a78bfa;
 }
 
 
 /* =========================================================
-   Set tokens
+   Sets
    ========================================================= */
 
 .bei-set {
@@ -285,29 +366,34 @@
   background: var(--surface);
   color: var(--text);
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
   font-size: 11px;
   font-weight: 600;
 }
 
 .bei-set-empty {
   color: var(--muted);
+
   font-size: 11px;
   font-style: italic;
 }
 
 
 /* =========================================================
-   Set operation
+   group explanation
    ========================================================= */
 
-.bei-operation {
+.bei-group-empty,
+.bei-group-explanation {
   min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 
   padding: 10px;
 
@@ -317,119 +403,109 @@
   background: var(--surface2);
 }
 
-.bei-operation-row {
-  min-width: 0;
-
-  display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    auto
-    minmax(0, 1fr)
-    auto
-    minmax(0, 1fr);
-
-  align-items: center;
-  gap: 8px;
-}
-
-.bei-operation-set {
-  min-width: 0;
-
+.bei-group-empty {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
-.bei-operation-set > span {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.bei-operation-result {
-  padding: 7px;
-
-  border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--border));
-  border-radius: 6px;
-
-  background: color-mix(in srgb, var(--primary) 7%, var(--surface));
-}
-
-.bei-operation-symbol {
-  color: var(--primary);
-  font-size: 17px;
-  text-align: center;
-}
-
-.bei-operation-empty {
-  padding: 12px;
-
-  border: 1px dashed var(--border);
-  border-radius: 7px;
-
-  color: var(--muted);
+.bei-group-empty strong {
+  color: var(--text);
 
   font-size: 11px;
-  line-height: 1.45;
-  text-align: center;
 }
 
+.bei-group-empty span {
+  color: var(--muted);
 
-/* =========================================================
-   Cartesian-product pair details
-   ========================================================= */
-
-.bei-product-pairs {
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-
-  padding-top: 9px;
-
-  border-top: 1px solid var(--border);
+  font-size: 10px;
+  line-height: 1.5;
 }
 
-.bei-product-pair {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.bei-group-empty code,
+.bei-group-source code {
+  padding: 1px 4px;
 
-  padding: 4px 6px;
-
-  border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 4px;
 
   background: var(--surface);
 
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 0.95em;
+}
+
+.bei-group-explanation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  border-left:
+    3px solid #22c55e;
+}
+
+.bei-group-explanation-header {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bei-group-explanation-header > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bei-group-explanation-header strong {
+  color: var(--text);
+
+  font-size: 11px;
+}
+
+.bei-group-explanation-header code {
   color: var(--muted);
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.bei-group-source {
+  padding-top: 7px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+
   font-size: 10px;
-}
-
-.bei-product-pair strong {
-  color: var(--text);
-}
-
-.bei-product-pair span {
-  opacity: 0.72;
+  line-height: 1.5;
 }
 
 
 /* =========================================================
-   Recursive parser
+   Union operation
    ========================================================= */
 
-.bei-frame-list {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 8px;
-}
-
-.bei-frame {
+.bei-union-operation {
   min-width: 0;
 
   display: flex;
@@ -444,68 +520,194 @@
   background: var(--surface2);
 }
 
-.bei-frame.active {
-  border-color: var(--primary);
-  box-shadow: inset 3px 0 0 var(--primary);
-}
-
-.bei-frame-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.bei-frame-header strong {
-  color: var(--text);
-
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
-  font-size: 11px;
-}
-
-.bei-frame-header span {
+.bei-union-explanation {
   color: var(--muted);
+
   font-size: 10px;
+  line-height: 1.45;
 }
 
-.bei-frame-index {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.bei-frame-index strong {
-  color: var(--text);
-}
-
-.bei-frame-values {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.bei-frame-values > div {
+.bei-union-row {
   min-width: 0;
 
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+  gap: 7px;
+}
+
+.bei-union-side {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bei-union-side > span {
+  color: var(--muted);
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.bei-union-symbol {
+  color: var(--primary);
+
+  font-size: 17px;
+  text-align: center;
+}
+
+.bei-union-result {
+  padding: 7px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--primary) 45%,
+      var(--border)
+    );
+
+  border-radius: 6px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 6%,
+      var(--surface)
+    );
+}
+
+
+/* =========================================================
+   Operation empty state
+   ========================================================= */
+
+.bei-operation-empty {
+  padding: 12px;
+
+  border: 1px dashed var(--border);
+  border-radius: 7px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+
+/* =========================================================
+   Call tree supporting explanation
+   ========================================================= */
+
+.bei-call-tree-help {
+  padding: 8px 9px;
+
+  border-left:
+    3px solid var(--primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 5%,
+      var(--surface)
+    );
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.bei-call-tree-help code {
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+
+/* =========================================================
+   Active stack
+   ========================================================= */
+
+.bei-stack-path {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.bei-mini-label {
-  color: var(--muted);
+.bei-stack-frame {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 7px 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface2);
+}
+
+.bei-stack-frame.active {
+  border-color: var(--primary);
+
+  box-shadow:
+    inset 3px 0 0 var(--primary);
+}
+
+.bei-stack-frame > div {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.bei-stack-frame strong {
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
   font-size: 10px;
-  font-weight: 700;
+}
+
+.bei-stack-frame div > span,
+.bei-stack-frame > span {
+  color: var(--muted);
+
+  font-size: 9px;
 }
 
 
 /* =========================================================
-   Expanded words / result
+   Result
    ========================================================= */
 
 .bei-result-set {
@@ -514,11 +716,13 @@
 
 .bei-result-set .bei-set-token {
   padding: 5px 9px;
+
   font-size: 12px;
 }
 
 .bei-answer {
   box-sizing: border-box;
+
   width: 100%;
 
   padding: 10px;
@@ -531,8 +735,15 @@
   background: var(--code-line);
   color: var(--code-text);
 
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", monospace;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
   font-size: 11px;
   line-height: 1.55;
 }
@@ -547,6 +758,7 @@
   place-items: center;
 
   min-height: 72px;
+
   padding: 12px;
 
   border: 1px dashed var(--border);
@@ -561,47 +773,51 @@
 
 
 /* =========================================================
-   Responsive dock sizes
-   Dock panels can become narrow when the user drags dividers.
+   Narrow dock panels
    ========================================================= */
 
-@container (max-width: 520px) {
+@container (max-width: 560px) {
   .bei-state-grid {
     grid-template-columns: 1fr;
   }
 
-  .bei-operation-row {
+  .bei-union-row {
     grid-template-columns: 1fr;
   }
 
-  .bei-operation-symbol {
+  .bei-union-symbol {
     transform: rotate(90deg);
   }
 
-  .bei-frame-values {
-    grid-template-columns: 1fr;
+  .bei-group-explanation-header {
+    flex-direction: column;
   }
 }
 
+
+/* =========================================================
+   Page-level responsive fallback
+   ========================================================= */
+
 @media (max-width: 720px) {
+  .bei-panel-body {
+    padding: 10px;
+    gap: 12px;
+  }
+
   .bei-state-grid {
     grid-template-columns: 1fr;
   }
 
-  .bei-operation-row {
+  .bei-union-row {
     grid-template-columns: 1fr;
   }
 
-  .bei-operation-symbol {
+  .bei-union-symbol {
     transform: rotate(90deg);
   }
 
-  .bei-frame-values {
-    grid-template-columns: 1fr;
-  }
-
-  .bei-panel-body {
-    padding: 10px;
-    gap: 12px;
+  .bei-group-explanation-header {
+    flex-direction: column;
   }
 }

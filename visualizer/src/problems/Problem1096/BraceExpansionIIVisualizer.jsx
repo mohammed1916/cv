@@ -1,13 +1,16 @@
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
+
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import PointerRail from "../../components/shared/PointerRail";
+import RecursiveCallTree from "../../components/shared/RecursiveCallTree";
+import CartesianExpansion from "../../components/shared/CartesianExpansion";
 
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
@@ -61,7 +64,9 @@ const SOLUTION_CODE_INLINE = [
 ];
 
 const SOLUTION_CODE = SOLUTION_CODE_INLINE;
+
 const EXAMPLES = getExamples("brace-expansion-ii");
+
 const MAX_LEN = 60;
 
 function sorted(values) {
@@ -75,9 +80,9 @@ function copySet(values) {
 function concatenate(left, right) {
   const result = new Set();
 
-  for (const a of left) {
-    for (const b of right) {
-      result.add(a + b);
+  for (const prefix of left) {
+    for (const choice of right) {
+      result.add(prefix + choice);
     }
   }
 
@@ -90,23 +95,72 @@ function displayWord(word) {
 
 function formatSet(values) {
   if (!values?.length) return "∅";
+
   return `{${values.map(displayWord).join(", ")}}`;
+}
+
+function getCallSlice(expression, start) {
+  if (start >= expression.length) return "";
+
+  let depth = 0;
+  let end = start;
+
+  while (end < expression.length) {
+    const char = expression[end];
+
+    if (char === "{") {
+      depth += 1;
+    } else if (char === "}") {
+      if (depth === 0) break;
+      depth -= 1;
+    }
+
+    end += 1;
+  }
+
+  return expression.slice(start, end);
+}
+
+function cloneCallNodes(nodes) {
+  return nodes.map((node) => ({
+    ...node,
+    children: [...(node.children ?? [])],
+    union: [...(node.union ?? [])],
+    product: [...(node.product ?? [])],
+    returnValue: [...(node.returnValue ?? [])],
+  }));
 }
 
 function generateSteps(expression) {
   if (!expression) return [];
 
   const steps = [];
+
   const frames = [];
+  const calls = [];
+
+  let nextCallId = 0;
+  let activeCallId = null;
 
   const snapshotFrames = () =>
     frames.map((frame) => ({
+      callId: frame.callId,
       depth: frame.depth,
       start: frame.start,
       index: frame.index,
       union: sorted(frame.union),
       product: sorted(frame.product),
     }));
+
+  const snapshotCalls = () => cloneCallNodes(calls);
+
+  const updateCall = (id, updates) => {
+    const call = calls.find((candidate) => candidate.id === id);
+
+    if (!call) return;
+
+    Object.assign(call, updates);
+  };
 
   const push = ({
     phase,
@@ -116,37 +170,79 @@ function generateSteps(expression) {
     union,
     product,
     group = new Set(),
+    groupSource = null,
     operation = null,
     leftSet = new Set(),
     rightSet = new Set(),
     resultSet = new Set(),
     message,
     result = null,
+    callId = activeCallId,
   }) => {
     steps.push({
       phase,
       activeLine,
       index,
       depth,
+
       union: sorted(union),
       product: sorted(product),
       group: sorted(group),
+
+      groupSource,
+
       operation,
       leftSet: sorted(leftSet),
       rightSet: sorted(rightSet),
       resultSet: sorted(resultSet),
+
       frames: snapshotFrames(),
+      calls: snapshotCalls(),
+      activeCallId: callId,
+
       message,
+
       result: result ? sorted(result) : null,
     });
   };
 
-  function parse(start, depth) {
+  function parse(start, depth, parentCallId = null) {
     let i = start;
+
     let union = new Set();
     let product = new Set([""]);
 
+    const callId = `call-${nextCallId++}`;
+
+    const call = {
+      id: callId,
+      parentId: parentCallId,
+      children: [],
+      depth,
+      start,
+      index: i,
+      source: getCallSlice(expression, start),
+      union: [],
+      product: [""],
+      returnValue: [],
+      status: "active",
+    };
+
+    calls.push(call);
+
+    if (parentCallId !== null) {
+      const parent = calls.find((candidate) => candidate.id === parentCallId);
+
+      if (parent) {
+        parent.children.push(callId);
+        parent.status = "waiting";
+      }
+    }
+
+    activeCallId = callId;
+
     const frame = {
+      callId,
       depth,
       start,
       index: i,
@@ -160,6 +256,12 @@ function generateSteps(expression) {
       frame.index = i;
       frame.union = copySet(union);
       frame.product = copySet(product);
+
+      updateCall(callId, {
+        index: i,
+        union: sorted(union),
+        product: sorted(product),
+      });
     };
 
     sync();
@@ -171,10 +273,11 @@ function generateSteps(expression) {
       depth,
       union,
       product,
+      callId,
       message:
         depth === 0
-          ? "Start parsing the complete expression."
-          : `Enter nested expression at recursion depth ${depth}.`,
+          ? "Start parse(0) for the complete expression."
+          : `Enter parse(${start}) for the nested expression starting at index ${start}.`,
     });
 
     push({
@@ -184,7 +287,9 @@ function generateSteps(expression) {
       depth,
       union,
       product,
-      message: "Initialize union = ∅ and product = {ε}.",
+      callId,
+      message:
+        "Start this call with no completed alternatives and one empty prefix ε.",
     });
 
     while (i < expression.length && expression[i] !== "}") {
@@ -199,6 +304,7 @@ function generateSteps(expression) {
         depth,
         union,
         product,
+        callId,
         message: `Inspect expression[${i}] = '${char}'.`,
       });
 
@@ -210,13 +316,16 @@ function generateSteps(expression) {
           depth,
           union,
           product,
-          message: "Comma ends the current concatenation branch.",
+          callId,
+          message:
+            "The comma ends this concatenation alternative. Its completed prefixes now belong to the union.",
         });
 
         const oldUnion = copySet(union);
         const oldProduct = copySet(product);
 
         union = new Set([...union, ...product]);
+
         sync();
 
         push({
@@ -230,10 +339,13 @@ function generateSteps(expression) {
           leftSet: oldUnion,
           rightSet: oldProduct,
           resultSet: union,
-          message: "Merge the completed branch into the union.",
+          callId,
+          message:
+            "Add every completed prefix from this alternative to the union.",
         });
 
         product = new Set([""]);
+
         sync();
 
         push({
@@ -243,10 +355,12 @@ function generateSteps(expression) {
           depth,
           union,
           product,
-          message: "Reset product to {ε} for the next alternative.",
+          callId,
+          message: "Begin the next alternative with the empty prefix ε.",
         });
 
         i += 1;
+
         sync();
 
         push({
@@ -256,7 +370,8 @@ function generateSteps(expression) {
           depth,
           union,
           product,
-          message: "Advance past the comma.",
+          callId,
+          message: "Move the parser past the comma.",
         });
 
         continue;
@@ -270,14 +385,30 @@ function generateSteps(expression) {
           depth,
           union,
           product,
-          message: "Opening brace starts a nested expression.",
+          callId,
+          message:
+            "This opening brace contains another expression. Parse it recursively to discover its choices.",
         });
 
         const oldProduct = copySet(product);
-        const nested = parse(i + 1, depth + 1);
+        const nestedStart = i + 1;
+
+        updateCall(callId, {
+          status: "waiting",
+        });
+
+        const nested = parse(nestedStart, depth + 1, callId);
+
         const group = nested.values;
 
         i = nested.index;
+
+        activeCallId = callId;
+
+        updateCall(callId, {
+          status: "active",
+        });
+
         sync();
 
         push({
@@ -288,10 +419,20 @@ function generateSteps(expression) {
           union,
           product,
           group,
-          message: `Nested expression returns ${formatSet(sorted(group))}.`,
+          groupSource: {
+            type: "nested",
+            start: nestedStart,
+            callId: nested.callId,
+            expression: getCallSlice(expression, nestedStart),
+          },
+          callId,
+          message:
+            `The nested call returned ${formatSet(sorted(group))}. ` +
+            "These returned words are the choices stored in group.",
         });
 
         product = concatenate(product, group);
+
         sync();
 
         push({
@@ -302,11 +443,19 @@ function generateSteps(expression) {
           union,
           product,
           group,
+          groupSource: {
+            type: "nested",
+            start: nestedStart,
+            callId: nested.callId,
+            expression: getCallSlice(expression, nestedStart),
+          },
           operation: "product",
           leftSet: oldProduct,
           rightSet: group,
           resultSet: product,
-          message: "Concatenate every current word with every nested result.",
+          callId,
+          message:
+            "Expand every prefix built so far with every choice returned by the nested expression.",
         });
 
         continue;
@@ -322,12 +471,19 @@ function generateSteps(expression) {
         union,
         product,
         group,
-        message: `'${char}' represents the singleton set {'${char}'}.`,
+        groupSource: {
+          type: "literal",
+          index: i,
+          expression: char,
+        },
+        callId,
+        message: `The literal '${char}' gives one current operand choice: {'${char}'}.`,
       });
 
       const oldProduct = copySet(product);
 
       i += 1;
+
       sync();
 
       push({
@@ -338,10 +494,17 @@ function generateSteps(expression) {
         union,
         product,
         group,
-        message: "Advance to the next character.",
+        groupSource: {
+          type: "literal",
+          index: i - 1,
+          expression: char,
+        },
+        callId,
+        message: `Move past the literal '${char}'.`,
       });
 
       product = concatenate(product, group);
+
       sync();
 
       push({
@@ -352,11 +515,17 @@ function generateSteps(expression) {
         union,
         product,
         group,
+        groupSource: {
+          type: "literal",
+          index: i - 1,
+          expression: char,
+        },
         operation: "product",
         leftSet: oldProduct,
         rightSet: group,
         resultSet: product,
-        message: `Append '${char}' to every word in the current product.`,
+        callId,
+        message: `Append the literal '${char}' to every prefix built so far.`,
       });
     }
 
@@ -364,6 +533,7 @@ function generateSteps(expression) {
     const oldProduct = copySet(product);
 
     union = new Set([...union, ...product]);
+
     sync();
 
     push({
@@ -377,7 +547,9 @@ function generateSteps(expression) {
       leftSet: oldUnion,
       rightSet: oldProduct,
       resultSet: union,
-      message: "Merge the final product into this expression’s union.",
+      callId,
+      message:
+        "There is no more input in this alternative. Add its final prefixes to the union.",
     });
 
     if (i < expression.length && expression[i] === "}") {
@@ -388,10 +560,13 @@ function generateSteps(expression) {
         depth,
         union,
         product,
-        message: "The closing brace finishes this nested expression.",
+        callId,
+        message:
+          "The closing brace marks the end of this recursive expression.",
       });
 
       i += 1;
+
       sync();
 
       push({
@@ -401,11 +576,21 @@ function generateSteps(expression) {
         depth,
         union,
         product,
-        message: "Advance past the closing brace.",
+        callId,
+        message:
+          "Advance beyond the closing brace before returning to the parent call.",
       });
     }
 
     const result = copySet(union);
+
+    updateCall(callId, {
+      index: i,
+      union: sorted(union),
+      product: sorted(product),
+      returnValue: sorted(result),
+      status: "returned",
+    });
 
     push({
       phase: "return",
@@ -416,18 +601,34 @@ function generateSteps(expression) {
       product,
       group: result,
       resultSet: result,
-      message: `Return ${formatSet(sorted(result))} from depth ${depth}.`,
+      result,
+      callId,
+      message:
+        `parse(${start}) returns ${formatSet(sorted(result))} ` +
+        `and cursor i = ${i}.`,
     });
 
     frames.pop();
 
+    if (parentCallId !== null) {
+      activeCallId = parentCallId;
+
+      updateCall(parentCallId, {
+        status: "active",
+      });
+    } else {
+      activeCallId = null;
+    }
+
     return {
       values: result,
       index: i,
+      callId,
     };
   }
 
   const parsed = parse(0, 0);
+
   const result = sorted(parsed.values);
 
   steps.push({
@@ -435,16 +636,26 @@ function generateSteps(expression) {
     activeLine: 28,
     index: expression.length,
     depth: 0,
+
     union: result,
     product: [],
     group: result,
+
+    groupSource: null,
+
     operation: null,
     leftSet: [],
     rightSet: [],
     resultSet: result,
+
     frames: [],
+    calls: snapshotCalls(),
+    activeCallId: null,
+
     result,
-    message: "The complete expression has been evaluated.",
+
+    message:
+      "The outer parse call has returned the complete set of distinct expanded words.",
   });
 
   steps.push({
@@ -452,16 +663,27 @@ function generateSteps(expression) {
     activeLine: 29,
     index: expression.length,
     depth: 0,
+
     union: result,
     product: [],
     group: result,
+
+    groupSource: null,
+
     operation: null,
     leftSet: [],
     rightSet: [],
     resultSet: result,
+
     frames: [],
+    calls: snapshotCalls(),
+    activeCallId: null,
+
     result,
-    message: `Return ${result.length} distinct word${result.length === 1 ? "" : "s"} in sorted order.`,
+
+    message:
+      `Sort and return ${result.length} distinct ` +
+      `word${result.length === 1 ? "" : "s"}.`,
   });
 
   return steps;
@@ -476,6 +698,7 @@ function Section({ title, meta, children, className = "" }) {
     <section className={`bei-section ${className}`}>
       <div className="bei-section-header">
         <span className="bei-section-title">{title}</span>
+
         {meta !== undefined && meta !== null && (
           <span className="bei-section-meta">{meta}</span>
         )}
@@ -496,15 +719,26 @@ function SetTokens({ values = [], emptyLabel = "∅", className = "" }) {
   return (
     <div className={`bei-set ${className}`}>
       <AnimatePresence initial={false}>
-        {values.map((value) => (
+        {values.map((value, index) => (
           <motion.span
             layout
-            key={value === "" ? "__epsilon__" : value}
+            key={`${value === "" ? "__epsilon__" : value}-${index}`}
             className="bei-set-token"
-            initial={{ opacity: 0, scale: 0.86 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.86 }}
-            transition={{ duration: 0.16 }}
+            initial={{
+              opacity: 0,
+              scale: 0.86,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.86,
+            }}
+            transition={{
+              duration: 0.16,
+            }}
           >
             {displayWord(value)}
           </motion.span>
@@ -514,16 +748,68 @@ function SetTokens({ values = [], emptyLabel = "∅", className = "" }) {
   );
 }
 
-function SetState({ title, symbol, values, tone }) {
+function SetState({ title, codeName, description, symbol, values, tone }) {
   return (
     <div className={`bei-state ${tone || ""}`}>
       <div className="bei-state-header">
-        <span>{title}</span>
+        <div>
+          <span>{title}</span>
+
+          {codeName && <code>{codeName}</code>}
+        </div>
+
         <strong>{symbol}</strong>
       </div>
 
+      {description && (
+        <div className="bei-state-description">{description}</div>
+      )}
+
       <SetTokens values={values} />
     </div>
+  );
+}
+
+function UnionOperation({ step }) {
+  return (
+    <motion.div
+      key={`${step.phase}-${step.index}-${step.depth}`}
+      className="bei-union-operation"
+      initial={{
+        opacity: 0,
+        y: 5,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+    >
+      <div className="bei-union-explanation">
+        A comma separates alternatives. Completed words from both alternatives
+        belong to the same result set.
+      </div>
+
+      <div className="bei-union-row">
+        <div className="bei-union-side">
+          <span>Words already collected</span>
+          <SetTokens values={step.leftSet} />
+        </div>
+
+        <strong className="bei-union-symbol">∪</strong>
+
+        <div className="bei-union-side">
+          <span>Completed current alternative</span>
+          <SetTokens values={step.rightSet} />
+        </div>
+
+        <strong className="bei-union-symbol">→</strong>
+
+        <div className="bei-union-side bei-union-result">
+          <span>All alternatives so far</span>
+          <SetTokens values={step.resultSet} />
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -531,57 +817,94 @@ function OperationView({ step }) {
   if (!step?.operation) {
     return (
       <div className="bei-operation-empty">
-        Set union and concatenation will appear here when performed.
+        When the parser performs a union or expands prefixes with another
+        operand, the transformation will appear here.
       </div>
     );
   }
 
-  const isUnion = step.operation === "union";
+  if (step.operation === "union") {
+    return <UnionOperation step={step} />;
+  }
+
+  const source = step.groupSource;
+
+  const rightDescription =
+    source?.type === "nested"
+      ? `Returned by recursive call parse(${source.start}) for "${source.expression}".`
+      : source?.type === "literal"
+        ? `The current literal '${source.expression}' represents one possible choice.`
+        : "Values supplied by the current operand.";
 
   return (
-    <motion.div
-      key={`${step.phase}-${step.index}-${step.depth}`}
-      className="bei-operation"
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-    >
-      <div className="bei-operation-row">
-        <div className="bei-operation-set">
-          <span>Left</span>
-          <SetTokens values={step.leftSet} />
+    <CartesianExpansion
+      left={step.leftSet}
+      right={step.rightSet}
+      result={step.resultSet}
+      leftTitle="Prefixes built so far"
+      rightTitle="Current operand choices"
+      resultTitle="New prefixes"
+      leftDescription={
+        "product before this operation — partial words already constructed."
+      }
+      rightDescription={rightDescription}
+      leftItemName="prefix"
+      rightItemName="choice"
+      resultItemName="prefix"
+      operationLabel="append"
+      combine={(prefix, choice) => prefix + choice}
+      emptyLabel="The Cartesian-product expansion will appear when an operand is concatenated."
+    />
+  );
+}
+
+function GroupExplanation({ step }) {
+  const values = step?.group ?? [];
+
+  if (!values.length) {
+    return (
+      <div className="bei-group-empty">
+        <strong>What is group?</strong>
+
+        <span>
+          <code>group</code> is the set of choices produced by the current
+          operand. It can come from one literal or from a completed recursive
+          call.
+        </span>
+      </div>
+    );
+  }
+
+  const source = step.groupSource;
+
+  return (
+    <div className="bei-group-explanation">
+      <div className="bei-group-explanation-header">
+        <div>
+          <strong>Current operand choices</strong>
+          <code>group</code>
         </div>
 
-        <strong className="bei-operation-symbol">{isUnion ? "∪" : "×"}</strong>
-
-        <div className="bei-operation-set">
-          <span>Right</span>
-          <SetTokens values={step.rightSet} />
-        </div>
-
-        <strong className="bei-operation-symbol">→</strong>
-
-        <div className="bei-operation-set bei-operation-result">
-          <span>Result</span>
-          <SetTokens values={step.resultSet} />
-        </div>
+        <SetTokens values={values} />
       </div>
 
-      {!isUnion && step.leftSet?.length > 0 && step.rightSet?.length > 0 && (
-        <div className="bei-product-pairs">
-          {step.leftSet.flatMap((left) =>
-            step.rightSet.map((right) => (
-              <span key={`${left}:${right}`} className="bei-product-pair">
-                {displayWord(left)}
-                <span>+</span>
-                {displayWord(right)}
-                <span>→</span>
-                <strong>{displayWord(left + right)}</strong>
-              </span>
-            )),
-          )}
-        </div>
-      )}
-    </motion.div>
+      <div className="bei-group-source">
+        {source?.type === "nested" ? (
+          <>
+            The parser recursively evaluated <code>parse({source.start})</code>{" "}
+            for <code>{source.expression}</code>. Its returned words become{" "}
+            <code>group</code>.
+          </>
+        ) : source?.type === "literal" ? (
+          <>
+            The literal <code>{source.expression}</code> is one operand, so it
+            creates the singleton set <code>{formatSet(values)}</code>.
+          </>
+        ) : (
+          <>These are the choices available from the current operand.</>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -600,14 +923,14 @@ function ExpressionPanel({
       <div className="bei-input-panel">
         <div className="bei-example-row">
           {EXAMPLES.map((example, index) => {
-            const value = example.expression ?? example.input ?? "";
+            const exampleValue = example.expression ?? example.input ?? "";
 
             return (
               <button
-                key={example.label ?? `${value}-${index}`}
+                key={example.label ?? `${exampleValue}-${index}`}
                 type="button"
                 className={`bei-example-chip ${
-                  expression === value ? "active" : ""
+                  expression === exampleValue ? "active" : ""
                 }`}
                 onClick={() => applyExample(example)}
               >
@@ -620,6 +943,7 @@ function ExpressionPanel({
         <label className="bei-field">
           <div className="bei-field-header">
             <span>expression</span>
+
             <span>
               {expression.length}/{MAX_LEN}
             </span>
@@ -677,34 +1001,35 @@ function ExpressionPanel({
       <Section title="Parser state">
         <div className="bei-state-grid">
           <SetState
-            title="Union"
+            title="Completed alternatives"
+            codeName="union"
+            description="Words completed before or at a comma."
             symbol="∪"
             values={step?.union ?? []}
             tone="union"
           />
 
           <SetState
-            title="Product"
+            title="Prefixes built so far"
+            codeName="product"
+            description="Partial words in the current alternative."
             symbol="×"
             values={step?.product ?? []}
             tone="product"
           />
-
-          <SetState
-            title="Group"
-            symbol="{ }"
-            values={step?.group ?? []}
-            tone="group"
-          />
         </div>
+      </Section>
+
+      <Section title="Current operand" meta="group">
+        <GroupExplanation step={step} />
       </Section>
 
       <Section
         title={
           step?.operation === "union"
-            ? "Set union"
+            ? "Combine alternatives"
             : step?.operation === "product"
-              ? "Cartesian-product concatenation"
+              ? "Expand prefixes"
               : "Set operation"
         }
         meta={
@@ -721,58 +1046,75 @@ function ExpressionPanel({
   );
 }
 
-function ParserPanel({ step }) {
-  const frames = step?.frames ?? [];
+function ParserPanel({ step, expression }) {
+  const calls = step?.calls ?? [];
 
   return (
-    <PanelBody>
+    <PanelBody className="bei-parser-panel">
       <Section
-        title="Call stack"
-        meta={`${frames.length} frame${frames.length === 1 ? "" : "s"}`}
+        title="Recursive call tree"
+        meta={
+          calls.length
+            ? `${calls.length} call${calls.length === 1 ? "" : "s"}`
+            : "waiting"
+        }
       >
-        {!frames.length ? (
-          <div className="bei-empty">No active recursive call.</div>
+        <div className="bei-call-tree-help">
+          Each box is one <code>parse(start)</code> call. A child appears when
+          its parent encounters an opening brace. Completed children keep their
+          return value so you can follow that value back into the parent.
+        </div>
+
+        <RecursiveCallTree
+          nodes={calls}
+          activeNodeId={step?.activeCallId}
+          getTitle={(node) => `parse(${node.start})`}
+          getSubtitle={(node) => {
+            const source = node.source || getCallSlice(expression, node.start);
+
+            return source ? `"${source}"` : "end of expression";
+          }}
+          getState={(node) => [
+            {
+              label: "union",
+              values: node.union ?? [],
+            },
+            {
+              label: "product",
+              values: node.product ?? [],
+            },
+          ]}
+          getReturnValue={(node) => node.returnValue ?? []}
+          emptyLabel="Step forward to create the first parse(0) call."
+        />
+      </Section>
+
+      <Section
+        title="Active stack"
+        meta={`${step?.frames?.length ?? 0} active`}
+      >
+        {!step?.frames?.length ? (
+          <div className="bei-empty">
+            No recursive calls are currently executing.
+          </div>
         ) : (
-          <div className="bei-frame-list">
-            <AnimatePresence initial={false}>
-              {frames.map((frame, index) => {
-                const active = index === frames.length - 1;
+          <div className="bei-stack-path">
+            {step.frames.map((frame, index) => (
+              <div
+                key={frame.callId}
+                className={`bei-stack-frame ${
+                  index === step.frames.length - 1 ? "active" : ""
+                }`}
+              >
+                <div>
+                  <strong>parse({frame.start})</strong>
 
-                return (
-                  <motion.div
-                    layout
-                    key={`${frame.depth}-${frame.start}`}
-                    className={`bei-frame ${active ? "active" : ""}`}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 10 }}
-                  >
-                    <div className="bei-frame-header">
-                      <strong>parse({frame.start})</strong>
+                  <span>depth {frame.depth}</span>
+                </div>
 
-                      <span>depth {frame.depth}</span>
-                    </div>
-
-                    <div className="bei-frame-index">
-                      <span>cursor</span>
-                      <strong>i = {frame.index}</strong>
-                    </div>
-
-                    <div className="bei-frame-values">
-                      <div>
-                        <span className="bei-mini-label">union</span>
-                        <SetTokens values={frame.union} />
-                      </div>
-
-                      <div>
-                        <span className="bei-mini-label">product</span>
-                        <SetTokens values={frame.product} />
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+                <span>i = {frame.index}</span>
+              </div>
+            ))}
           </div>
         )}
       </Section>
@@ -812,7 +1154,8 @@ function ResultPanel({ step }) {
 }
 
 export default function BraceExpansionIIVisualizer() {
-  const initialExpression = EXAMPLES[0]?.expression ?? EXAMPLES[0]?.input ?? "";
+  const initialExpression =
+    EXAMPLES[0]?.expression ?? EXAMPLES[0]?.input ?? "{a,b}{c,{d,e}}";
 
   const [expression, setExpression] = useState(initialExpression);
 
@@ -862,44 +1205,56 @@ export default function BraceExpansionIIVisualizer() {
     />
   );
 
-  const parserPanel = <ParserPanel step={step} />;
+  const parserPanel = <ParserPanel step={step} expression={value} />;
 
   const resultPanel = <ResultPanel step={step} />;
 
   const codePanel = (
-    <CodeTracePanel
-      step={step}
-      codeLines={SOLUTION_CODE}
-      onActiveLineDomChange={setActiveLineDom}
-      autoScroll={autoScrollCode}
-    />
+    <div className="bei-code-panel">
+      <CodeTracePanel
+        step={step}
+        codeLines={SOLUTION_CODE}
+        onActiveLineDomChange={setActiveLineDom}
+        autoScroll={autoScrollCode}
+      />
+
+      {showPatternOverlay && step && (
+        <PatternOverlay step={step} activeLineDom={activeLineDom} />
+      )}
+    </div>
   );
 
   const [panelDivs, setPanelDivs] = useState(null);
 
+  /*
+   * Keep the visual explanation on the left and code on the right.
+   *
+   * DockWorkspace insertion semantics build the left-side visual
+   * column first. Code is then split to its right.
+   */
   const panelConfigs = useMemo(
     () => [
       {
-        id: "code",
-        title: "Code Trace",
-      },
-      {
         id: "expression",
         title: "Expression Expansion",
-        dockMode: "split-right",
-        ratio: 0.38,
       },
       {
         id: "parser",
         title: "Recursive Parser",
         dockMode: "split-bottom",
-        ratio: 0.6,
+        ratio: 0.54,
       },
       {
         id: "result",
         title: "Expanded Words",
         dockMode: "split-bottom",
-        ratio: 0.72,
+        ratio: 0.78,
+      },
+      {
+        id: "code",
+        title: "Code Trace",
+        dockMode: "split-right",
+        ratio: 0.62,
       },
     ],
     [],
@@ -949,10 +1304,6 @@ export default function BraceExpansionIIVisualizer() {
           />
         </FloatingPanel>,
         document.body,
-      )}
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
       )}
     </div>
   );
