@@ -1,6 +1,9 @@
 .pattern-overlay {
-  position: fixed;
-  z-index: 800;
+  position: absolute;
+  right: 8px;
+  max-width: calc(100% - 16px);
+  overflow: hidden;
+  z-index: 5;
   pointer-events: none;
   animation: pattern-fade-in 0.2s ease;
 }
@@ -60,10 +63,6 @@
   animation: pattern-fade-in 0.2s ease, pattern-pulse 0.6s ease-out;
 }
 
-/* Mobile: adjust position for smaller screens */
-@media (max-width: 900px) {
-  .pattern-overlay {
-    left: auto !important;
-    right: 12px !important;
-  }
-}
+
+.pattern-overlay .pattern-badge { box-sizing: border-box; max-width: 100%; }
+.pattern-overlay .pattern-label { overflow: hidden; text-overflow: ellipsis; }
