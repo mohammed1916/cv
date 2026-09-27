@@ -603,9 +603,9 @@ function generateSteps(expression) {
       resultSet: result,
       result,
       callId,
-      message:
-        `parse(${start}) returns ${formatSet(sorted(result))} ` +
-        `and cursor i = ${i}.`,
+      message: `parse(${start}) returns ${formatSet(
+        sorted(result),
+      )} and cursor i = ${i}.`,
     });
 
     frames.pop();
@@ -792,6 +792,7 @@ function UnionOperation({ step }) {
       <div className="bei-union-row">
         <div className="bei-union-side">
           <span>Words already collected</span>
+
           <SetTokens values={step.leftSet} />
         </div>
 
@@ -799,6 +800,7 @@ function UnionOperation({ step }) {
 
         <div className="bei-union-side">
           <span>Completed current alternative</span>
+
           <SetTokens values={step.rightSet} />
         </div>
 
@@ -806,6 +808,7 @@ function UnionOperation({ step }) {
 
         <div className="bei-union-side bei-union-result">
           <span>All alternatives so far</span>
+
           <SetTokens values={step.resultSet} />
         </div>
       </div>
@@ -844,9 +847,7 @@ function OperationView({ step }) {
       leftTitle="Prefixes built so far"
       rightTitle="Current operand choices"
       resultTitle="New prefixes"
-      leftDescription={
-        "product before this operation — partial words already constructed."
-      }
+      leftDescription="product before this operation — partial words already constructed."
       rightDescription={rightDescription}
       leftItemName="prefix"
       rightItemName="choice"
@@ -882,6 +883,7 @@ function GroupExplanation({ step }) {
       <div className="bei-group-explanation-header">
         <div>
           <strong>Current operand choices</strong>
+
           <code>group</code>
         </div>
 
@@ -905,6 +907,38 @@ function GroupExplanation({ step }) {
         )}
       </div>
     </div>
+  );
+}
+
+/*
+ * Compact final-result presentation.
+ *
+ * The result is deliberately part of the expression
+ * visualization instead of owning another Lumino split.
+ */
+function InlineResult({ step }) {
+  const complete = step?.phase === "parsed" || step?.phase === "done";
+
+  if (!complete) {
+    return null;
+  }
+
+  const result = step?.result ?? [];
+
+  return (
+    <Section
+      title="Expanded words"
+      meta={`${result.length} distinct`}
+      className="bei-inline-result"
+    >
+      <SetTokens values={result} className="bei-result-set" />
+
+      {step.phase === "done" && (
+        <div className="bei-answer">
+          [{result.map((word) => `"${word}"`).join(", ")}]
+        </div>
+      )}
+    </Section>
   );
 }
 
@@ -1042,6 +1076,8 @@ function ExpressionPanel({
       >
         <OperationView step={step} />
       </Section>
+
+      <InlineResult step={step} />
     </PanelBody>
   );
 }
@@ -1122,37 +1158,6 @@ function ParserPanel({ step, expression }) {
   );
 }
 
-function ResultPanel({ step }) {
-  const complete = step?.phase === "parsed" || step?.phase === "done";
-
-  const result = complete ? (step?.result ?? []) : [];
-
-  return (
-    <PanelBody>
-      <Section
-        title="Expanded words"
-        meta={complete ? `${result.length} distinct` : "waiting"}
-      >
-        {complete ? (
-          <SetTokens values={result} className="bei-result-set" />
-        ) : (
-          <div className="bei-empty">
-            The sorted expansion appears after parsing completes.
-          </div>
-        )}
-      </Section>
-
-      {step?.phase === "done" && (
-        <Section title="Return value">
-          <div className="bei-answer">
-            [{result.map((word) => `"${word}"`).join(", ")}]
-          </div>
-        </Section>
-      )}
-    </PanelBody>
-  );
-}
-
 export default function BraceExpansionIIVisualizer() {
   const initialExpression =
     EXAMPLES[0]?.expression ?? EXAMPLES[0]?.input ?? "{a,b}{c,{d,e}}";
@@ -1207,8 +1212,14 @@ export default function BraceExpansionIIVisualizer() {
 
   const parserPanel = <ParserPanel step={step} expression={value} />;
 
-  const resultPanel = <ResultPanel step={step} />;
-
+  /*
+   * PatternOverlay deliberately does NOT live in
+   * this portal anymore.
+   *
+   * CodeTracePanel can be docked anywhere without
+   * forcing the overlay to inherit the code panel's
+   * clipping/positioning context.
+   */
   const codePanel = (
     <div className="bei-code-panel">
       <CodeTracePanel
@@ -1217,20 +1228,25 @@ export default function BraceExpansionIIVisualizer() {
         onActiveLineDomChange={setActiveLineDom}
         autoScroll={autoScrollCode}
       />
-
-      {showPatternOverlay && step && (
-        <PatternOverlay step={step} activeLineDom={activeLineDom} />
-      )}
     </div>
   );
 
   const [panelDivs, setPanelDivs] = useState(null);
 
   /*
-   * Keep the visual explanation on the left and code on the right.
+   * Main workspace:
    *
-   * DockWorkspace insertion semantics build the left-side visual
-   * column first. Code is then split to its right.
+   * ┌─────────────────────────┬──────────────┐
+   * │ Expression Expansion    │              │
+   * │                         │              │
+   * ├─────────────────────────┤  Code Trace  │
+   * │ Recursive Parser        │              │
+   * │                         │              │
+   * └─────────────────────────┴──────────────┘
+   *
+   * Expanded Words is intentionally rendered
+   * inside Expression Expansion instead of
+   * consuming a third Lumino split.
    */
   const panelConfigs = useMemo(
     () => [
@@ -1245,15 +1261,9 @@ export default function BraceExpansionIIVisualizer() {
         ratio: 0.54,
       },
       {
-        id: "result",
-        title: "Expanded Words",
-        dockMode: "split-bottom",
-        ratio: 0.78,
-      },
-      {
         id: "code",
         title: "Code Trace",
-        dockMode: "split-right",
+        dockMode: "split-left",
         ratio: 0.62,
       },
     ],
@@ -1263,7 +1273,7 @@ export default function BraceExpansionIIVisualizer() {
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), []);
 
   return (
-    <div className="problem-shell">
+    <div className="problem-shell bei-problem-shell">
       <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
 
       {panelDivs && (
@@ -1273,10 +1283,23 @@ export default function BraceExpansionIIVisualizer() {
 
           {panelDivs.parser && createPortal(parserPanel, panelDivs.parser)}
 
-          {panelDivs.result && createPortal(resultPanel, panelDivs.result)}
-
           {panelDivs.code && createPortal(codePanel, panelDivs.code)}
         </>
+      )}
+
+      {/*
+       * Workspace-level overlay.
+       *
+       * activeLineDom still points to the actual
+       * line inside the CodeTracePanel portal.
+       * getBoundingClientRect() remains valid across
+       * portals because all DOM nodes share the same
+       * document coordinate system.
+       */}
+      {showPatternOverlay && step && activeLineDom && (
+        <div className="bei-pattern-overlay-host">
+          <PatternOverlay step={step} activeLineDom={activeLineDom} />
+        </div>
       )}
 
       {createPortal(
