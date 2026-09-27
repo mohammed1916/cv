@@ -1633,3 +1633,218 @@ body.chat-select-mode .selectable.selected {
 .chat-drawer--floating .chat-header {
   padding-top: 44px !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Chat Generation / Stop Control
+───────────────────────────────────────────────────────────── */
+
+.chat-generating-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  min-width: 0;
+
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+
+  user-select: none;
+}
+
+.chat-generating-label::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  animation: chat-generating-pulse 1.15s ease-in-out infinite;
+}
+
+@keyframes chat-generating-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Composer stays usable while the model generates. */
+
+.chat-composer-row {
+  align-items: flex-end;
+}
+
+.chat-composer-row .chat-textarea {
+  min-width: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Stop Generation Button
+
+   Uses the same footprint as Send so switching Send -> Stop
+   does not move the textarea.
+───────────────────────────────────────────────────────────── */
+
+.chat-stop-btn {
+  position: relative;
+
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid color-mix(
+    in srgb,
+    var(--danger, #ef4444) 65%,
+    var(--border)
+  );
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--danger, #ef4444) 92%,
+        white
+      ),
+      var(--danger, #dc2626)
+    );
+
+  color: #fff;
+
+  cursor: pointer;
+
+  opacity: 1;
+
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    box-shadow 120ms ease,
+    border-color 120ms ease;
+}
+
+.chat-stop-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  filter: brightness(1.06);
+
+  border-color: var(--danger, #ef4444);
+
+  box-shadow:
+    0 10px 24px
+    color-mix(
+      in srgb,
+      var(--danger, #ef4444) 30%,
+      transparent
+    );
+}
+
+.chat-stop-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+
+/* Actual stop glyph. */
+
+.chat-stop-square {
+  display: block;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 2px;
+
+  background: currentColor;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+
+/* Don't make the composer look disabled while generating.
+   User may prepare their next question while waiting. */
+
+.chat-textarea.chat-textarea--streaming {
+  opacity: 1;
+}
+
+
+/* The streaming assistant bubble gets a subtle active indicator. */
+
+.chat-msg-text.streaming {
+  border-right:
+    2px solid var(--primary);
+
+  box-shadow:
+    inset -1px 0 0
+    color-mix(
+      in srgb,
+      var(--primary) 18%,
+      transparent
+    );
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Floating Chat
+───────────────────────────────────────────────────────────── */
+
+.chat-drawer--floating .chat-stop-btn {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Docked Chat
+───────────────────────────────────────────────────────────── */
+
+.chat-drawer--docked .chat-generating-label {
+  font-size: 10px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile
+───────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .chat-stop-btn {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+
+    border-radius: 12px;
+  }
+
+  .chat-stop-square {
+    width: 11px;
+    height: 11px;
+  }
+
+  .chat-generating-label {
+    font-size: 10px;
+  }
+}
