@@ -135,7 +135,6 @@ function generateSteps(expression) {
   if (!expression) return [];
 
   const steps = [];
-
   const frames = [];
   const calls = [];
 
@@ -289,7 +288,7 @@ function generateSteps(expression) {
       product,
       callId,
       message:
-        "Start this call with no completed alternatives and one empty prefix ε.",
+        "Start this alternative with ε. ε is the neutral starting prefix: appending any operand to ε gives that operand.",
     });
 
     while (i < expression.length && expression[i] !== "}") {
@@ -318,7 +317,7 @@ function generateSteps(expression) {
           product,
           callId,
           message:
-            "The comma ends this concatenation alternative. Its completed prefixes now belong to the union.",
+            "Comma means OR. The current concatenation alternative is complete, so merge it into union.",
         });
 
         const oldUnion = copySet(union);
@@ -341,7 +340,7 @@ function generateSteps(expression) {
           resultSet: union,
           callId,
           message:
-            "Add every completed prefix from this alternative to the union.",
+            "OR / union: keep every word already collected and every word from the completed alternative.",
         });
 
         product = new Set([""]);
@@ -356,7 +355,7 @@ function generateSteps(expression) {
           union,
           product,
           callId,
-          message: "Begin the next alternative with the empty prefix ε.",
+          message: "Start the next comma-separated alternative from ε.",
         });
 
         i += 1;
@@ -387,7 +386,7 @@ function generateSteps(expression) {
           product,
           callId,
           message:
-            "This opening brace contains another expression. Parse it recursively to discover its choices.",
+            "A brace is one operand. Recursively evaluate everything inside it to obtain all choices produced by that operand.",
         });
 
         const oldProduct = copySet(product);
@@ -427,8 +426,8 @@ function generateSteps(expression) {
           },
           callId,
           message:
-            `The nested call returned ${formatSet(sorted(group))}. ` +
-            "These returned words are the choices stored in group.",
+            `The nested operand produced ${formatSet(sorted(group))}. ` +
+            "Those choices are stored in group.",
         });
 
         product = concatenate(product, group);
@@ -455,7 +454,7 @@ function generateSteps(expression) {
           resultSet: product,
           callId,
           message:
-            "Expand every prefix built so far with every choice returned by the nested expression.",
+            "Adjacency means AND: concatenate every prefix already built with every choice from this operand.",
         });
 
         continue;
@@ -477,7 +476,7 @@ function generateSteps(expression) {
           expression: char,
         },
         callId,
-        message: `The literal '${char}' gives one current operand choice: {'${char}'}.`,
+        message: `The literal '${char}' is one operand with one choice, so group = {'${char}'}.`,
       });
 
       const oldProduct = copySet(product);
@@ -525,7 +524,7 @@ function generateSteps(expression) {
         rightSet: group,
         resultSet: product,
         callId,
-        message: `Append the literal '${char}' to every prefix built so far.`,
+        message: `Adjacency means AND: append '${char}' to every prefix in product.`,
       });
     }
 
@@ -549,7 +548,7 @@ function generateSteps(expression) {
       resultSet: union,
       callId,
       message:
-        "There is no more input in this alternative. Add its final prefixes to the union.",
+        "This alternative has ended. Merge its completed words into the OR / union result.",
     });
 
     if (i < expression.length && expression[i] === "}") {
@@ -561,8 +560,7 @@ function generateSteps(expression) {
         union,
         product,
         callId,
-        message:
-          "The closing brace marks the end of this recursive expression.",
+        message: "The closing brace ends this recursive operand.",
       });
 
       i += 1;
@@ -578,7 +576,7 @@ function generateSteps(expression) {
         product,
         callId,
         message:
-          "Advance beyond the closing brace before returning to the parent call.",
+          "Move past the closing brace. The complete set can now be returned to the parent as one group of choices.",
       });
     }
 
@@ -603,9 +601,9 @@ function generateSteps(expression) {
       resultSet: result,
       result,
       callId,
-      message: `parse(${start}) returns ${formatSet(
-        sorted(result),
-      )} and cursor i = ${i}.`,
+      message:
+        `parse(${start}) returns ${formatSet(sorted(result))} ` +
+        `and cursor i = ${i}. The parent treats this returned set as one operand's choices.`,
     });
 
     frames.pop();
@@ -655,7 +653,7 @@ function generateSteps(expression) {
     result,
 
     message:
-      "The outer parse call has returned the complete set of distinct expanded words.",
+      "The complete expression has been reduced using only two ideas: comma = OR / union, adjacency = AND / concatenation.",
   });
 
   steps.push({
@@ -682,7 +680,7 @@ function generateSteps(expression) {
     result,
 
     message:
-      `Sort and return ${result.length} distinct ` +
+      `Remove duplicates naturally with sets, sort, and return ${result.length} distinct ` +
       `word${result.length === 1 ? "" : "s"}.`,
   });
 
@@ -748,7 +746,150 @@ function SetTokens({ values = [], emptyLabel = "∅", className = "" }) {
   );
 }
 
-function SetState({ title, codeName, description, symbol, values, tone }) {
+/*
+ * The conceptual layer.
+ *
+ * This deliberately comes before the implementation-state cards.
+ * A learner should understand:
+ *
+ * comma      -> OR  -> union
+ * adjacency  -> AND -> Cartesian concatenation -> product
+ * operand    -> choices -> group
+ *
+ * before being asked to understand the Python variable names.
+ */
+function ConceptModel({ step }) {
+  const operation = step?.operation;
+
+  const isUnion =
+    operation === "union" ||
+    step?.phase === "comma" ||
+    step?.phase === "final-union" ||
+    step?.phase === "reset-product";
+
+  const isProduct =
+    operation === "product" ||
+    step?.phase === "literal" ||
+    step?.phase === "group-return";
+
+  let headline = "Two operations solve the expression";
+  let explanation =
+    "A comma means choose either alternative. Adjacent operands mean combine every choice from both sides.";
+
+  if (isUnion) {
+    headline = "Comma means OR";
+    explanation =
+      "The current alternative is finished. Keep its words together with all previously completed alternatives.";
+  } else if (isProduct) {
+    headline = "Adjacency means AND";
+    explanation =
+      "The next operand continues the same alternative. Combine every prefix already built with every choice from that operand.";
+  } else if (step?.phase === "open-brace") {
+    headline = "A brace becomes one operand";
+    explanation =
+      "First solve the expression inside the brace. The complete returned set then becomes the choices of one operand.";
+  } else if (step?.phase === "return") {
+    headline = "Return choices to the parent";
+    explanation =
+      "This recursive expression is finished. Its complete union becomes one group that the parent can concatenate.";
+  } else if (step?.phase === "done" || step?.phase === "parsed") {
+    headline = "OR + AND produced the answer";
+    explanation =
+      "Union handled comma-separated alternatives; Cartesian concatenation handled adjacent operands.";
+  }
+
+  return (
+    <div className="bei-concept-model">
+      <div className="bei-concept-intro">
+        <div>
+          <span className="bei-concept-kicker">Core intuition</span>
+          <strong>{headline}</strong>
+        </div>
+
+        <span className="bei-concept-depth">
+          {step ? `recursive depth ${step.depth ?? 0}` : "before parsing"}
+        </span>
+      </div>
+
+      <p className="bei-concept-explanation">{explanation}</p>
+
+      <div className="bei-concept-rules">
+        <motion.div
+          className={`bei-concept-rule bei-concept-rule--or ${
+            isUnion ? "active" : ""
+          }`}
+          animate={{
+            scale: isUnion ? 1.015 : 1,
+          }}
+        >
+          <div className="bei-concept-symbol">,</div>
+
+          <div className="bei-concept-rule-copy">
+            <strong>OR</strong>
+            <span>Choose alternatives</span>
+            <code>union</code>
+          </div>
+
+          <div className="bei-concept-rule-example">{"{a,b} → {a,b}"}</div>
+        </motion.div>
+
+        <motion.div
+          className={`bei-concept-rule bei-concept-rule--and ${
+            isProduct ? "active" : ""
+          }`}
+          animate={{
+            scale: isProduct ? 1.015 : 1,
+          }}
+        >
+          <div className="bei-concept-symbol">×</div>
+
+          <div className="bei-concept-rule-copy">
+            <strong>AND</strong>
+            <span>Concatenate adjacent operands</span>
+            <code>product</code>
+          </div>
+
+          <div className="bei-concept-rule-example">
+            {"{a,b}{c,d} → {ac,ad,bc,bd}"}
+          </div>
+        </motion.div>
+      </div>
+
+      <div className="bei-concept-translation">
+        <div className="bei-concept-translation-item">
+          <span>one operand</span>
+          <strong>→</strong>
+          <code>group</code>
+          <small>choices produced by that operand</small>
+        </div>
+
+        <div className="bei-concept-translation-item">
+          <span>same alternative</span>
+          <strong>→</strong>
+          <code>product</code>
+          <small>prefixes built by concatenation</small>
+        </div>
+
+        <div className="bei-concept-translation-item">
+          <span>different alternatives</span>
+          <strong>→</strong>
+          <code>union</code>
+          <small>completed choices joined by OR</small>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SetState({
+  title,
+  codeName,
+  description,
+  symbol,
+  values,
+  tone,
+  concept,
+}) {
   return (
     <div className={`bei-state ${tone || ""}`}>
       <div className="bei-state-header">
@@ -760,6 +901,8 @@ function SetState({ title, codeName, description, symbol, values, tone }) {
 
         <strong>{symbol}</strong>
       </div>
+
+      {concept && <div className="bei-state-concept">{concept}</div>}
 
       {description && (
         <div className="bei-state-description">{description}</div>
@@ -784,14 +927,22 @@ function UnionOperation({ step }) {
         y: 0,
       }}
     >
+      <div className="bei-operation-concept-label">
+        <strong>OR</strong>
+        <span>
+          The comma separates alternatives, so we keep the results from both
+          sides.
+        </span>
+      </div>
+
       <div className="bei-union-explanation">
-        A comma separates alternatives. Completed words from both alternatives
-        belong to the same result set.
+        A comma does not concatenate these words. It says that words from either
+        alternative are valid answers.
       </div>
 
       <div className="bei-union-row">
         <div className="bei-union-side">
-          <span>Words already collected</span>
+          <span>Previous alternatives</span>
 
           <SetTokens values={step.leftSet} />
         </div>
@@ -799,7 +950,7 @@ function UnionOperation({ step }) {
         <strong className="bei-union-symbol">∪</strong>
 
         <div className="bei-union-side">
-          <span>Completed current alternative</span>
+          <span>Current alternative</span>
 
           <SetTokens values={step.rightSet} />
         </div>
@@ -807,12 +958,66 @@ function UnionOperation({ step }) {
         <strong className="bei-union-symbol">→</strong>
 
         <div className="bei-union-side bei-union-result">
-          <span>All alternatives so far</span>
+          <span>All valid alternatives</span>
 
           <SetTokens values={step.resultSet} />
         </div>
       </div>
+
+      <div className="bei-operation-code-map">
+        Concept: <strong>OR</strong>
+        <span>→</span>
+        Code: <code>union |= product</code>
+      </div>
     </motion.div>
+  );
+}
+
+function ProductOperation({ step }) {
+  const source = step.groupSource;
+
+  const rightDescription =
+    source?.type === "nested"
+      ? `The recursive operand returned ${formatSet(step.rightSet)}. Every returned word is one possible choice.`
+      : source?.type === "literal"
+        ? `The literal '${source.expression}' is one operand with one possible choice.`
+        : "These are the choices supplied by the current operand.";
+
+  return (
+    <div className="bei-product-operation">
+      <div className="bei-operation-concept-label">
+        <strong>AND</strong>
+        <span>
+          These operands are adjacent, so every existing prefix must be combined
+          with every current choice.
+        </span>
+      </div>
+
+      <CartesianExpansion
+        left={step.leftSet}
+        right={step.rightSet}
+        result={step.resultSet}
+        leftTitle="Prefixes built so far"
+        rightTitle="Current operand choices"
+        resultTitle="New prefixes"
+        leftDescription={
+          "product before this operand — every partial word built in the current alternative."
+        }
+        rightDescription={rightDescription}
+        leftItemName="prefix"
+        rightItemName="choice"
+        resultItemName="prefix"
+        operationLabel="append"
+        combine={(prefix, choice) => prefix + choice}
+        emptyLabel="The Cartesian-product expansion appears when two operands are concatenated."
+      />
+
+      <div className="bei-operation-code-map">
+        Concept: <strong>AND / concatenate</strong>
+        <span>→</span>
+        Code: <code>{"{a + b for a in product for b in group}"}</code>
+      </div>
+    </div>
   );
 }
 
@@ -820,8 +1025,13 @@ function OperationView({ step }) {
   if (!step?.operation) {
     return (
       <div className="bei-operation-empty">
-        When the parser performs a union or expands prefixes with another
-        operand, the transformation will appear here.
+        <strong>No set operation on this step.</strong>
+
+        <span>
+          When a comma completes an alternative, you will see OR / union here.
+          When another operand continues the same alternative, you will see AND
+          / Cartesian concatenation.
+        </span>
       </div>
     );
   }
@@ -830,33 +1040,7 @@ function OperationView({ step }) {
     return <UnionOperation step={step} />;
   }
 
-  const source = step.groupSource;
-
-  const rightDescription =
-    source?.type === "nested"
-      ? `Returned by recursive call parse(${source.start}) for "${source.expression}".`
-      : source?.type === "literal"
-        ? `The current literal '${source.expression}' represents one possible choice.`
-        : "Values supplied by the current operand.";
-
-  return (
-    <CartesianExpansion
-      left={step.leftSet}
-      right={step.rightSet}
-      result={step.resultSet}
-      leftTitle="Prefixes built so far"
-      rightTitle="Current operand choices"
-      resultTitle="New prefixes"
-      leftDescription="product before this operation — partial words already constructed."
-      rightDescription={rightDescription}
-      leftItemName="prefix"
-      rightItemName="choice"
-      resultItemName="prefix"
-      operationLabel="append"
-      combine={(prefix, choice) => prefix + choice}
-      emptyLabel="The Cartesian-product expansion will appear when an operand is concatenated."
-    />
-  );
+  return <ProductOperation step={step} />;
 }
 
 function GroupExplanation({ step }) {
@@ -865,13 +1049,32 @@ function GroupExplanation({ step }) {
   if (!values.length) {
     return (
       <div className="bei-group-empty">
-        <strong>What is group?</strong>
+        <div className="bei-group-empty-symbol">?</div>
 
-        <span>
-          <code>group</code> is the set of choices produced by the current
-          operand. It can come from one literal or from a completed recursive
-          call.
-        </span>
+        <div>
+          <strong>
+            <code>group</code> means one operand&apos;s choices
+          </strong>
+
+          <span>
+            It is not a special part of the brace syntax. It is simply the
+            temporary set produced by whatever operand we just read.
+          </span>
+
+          <div className="bei-group-examples">
+            <span>
+              literal <code>a</code>
+              {" → "}
+              <code>{"{a}"}</code>
+            </span>
+
+            <span>
+              brace <code>{"{b,c}"}</code>
+              {" → "}
+              <code>{"{b,c}"}</code>
+            </span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -879,11 +1082,22 @@ function GroupExplanation({ step }) {
   const source = step.groupSource;
 
   return (
-    <div className="bei-group-explanation">
+    <motion.div
+      key={`${source?.type}-${source?.index ?? source?.start}-${values.join("-")}`}
+      className="bei-group-explanation"
+      initial={{
+        opacity: 0,
+        y: 4,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+    >
       <div className="bei-group-explanation-header">
         <div>
-          <strong>Current operand choices</strong>
-
+          <span className="bei-group-concept-label">ONE OPERAND</span>
+          <strong>Choices produced by this operand</strong>
           <code>group</code>
         </div>
 
@@ -893,29 +1107,39 @@ function GroupExplanation({ step }) {
       <div className="bei-group-source">
         {source?.type === "nested" ? (
           <>
-            The parser recursively evaluated <code>parse({source.start})</code>{" "}
-            for <code>{source.expression}</code>. Its returned words become{" "}
-            <code>group</code>.
+            The brace was evaluated recursively.{" "}
+            <code>parse({source.start})</code> returned{" "}
+            <code>{formatSet(values)}</code>. The parent now treats that entire
+            returned set as the choices of <strong>one operand</strong>.
           </>
         ) : source?.type === "literal" ? (
           <>
-            The literal <code>{source.expression}</code> is one operand, so it
-            creates the singleton set <code>{formatSet(values)}</code>.
+            The operand is the literal <code>{source.expression}</code>. A
+            literal has exactly one choice, so{" "}
+            <code>group = {formatSet(values)}</code>.
           </>
         ) : (
-          <>These are the choices available from the current operand.</>
+          <>These values are all choices produced by the current operand.</>
         )}
       </div>
-    </div>
+
+      <div className="bei-group-next">
+        <span>Next question:</span>
+
+        <strong>
+          Should these choices be concatenated with the current{" "}
+          <code>product</code>?
+        </strong>
+
+        <span>
+          Yes — if this operand is adjacent to the previous operand in the same
+          alternative.
+        </span>
+      </div>
+    </motion.div>
   );
 }
 
-/*
- * Compact final-result presentation.
- *
- * The result is deliberately part of the expression
- * visualization instead of owning another Lumino split.
- */
 function InlineResult({ step }) {
   const complete = step?.phase === "parsed" || step?.phase === "done";
 
@@ -931,6 +1155,12 @@ function InlineResult({ step }) {
       meta={`${result.length} distinct`}
       className="bei-inline-result"
     >
+      <div className="bei-final-explanation">
+        All comma-separated alternatives have been unioned, all adjacent
+        operands have been concatenated, and duplicate words have been removed
+        by the sets.
+      </div>
+
       <SetTokens values={result} className="bei-result-set" />
 
       {step.phase === "done" && (
@@ -1001,6 +1231,10 @@ function ExpressionPanel({
         </label>
       </div>
 
+      <Section title="How to read the expression" meta="OR vs AND">
+        <ConceptModel step={step} />
+      </Section>
+
       <Section
         title="Expression scan"
         meta={pointerIndex === null ? "—" : `i = ${pointerIndex}`}
@@ -1032,21 +1266,23 @@ function ExpressionPanel({
         </span>
       </div>
 
-      <Section title="Parser state">
+      <Section title="Algorithm state" meta="concept → code">
         <div className="bei-state-grid">
           <SetState
-            title="Completed alternatives"
+            title="OR results"
             codeName="union"
-            description="Words completed before or at a comma."
+            concept="Different comma-separated alternatives"
+            description="Completed words from alternatives we have already finished."
             symbol="∪"
             values={step?.union ?? []}
             tone="union"
           />
 
           <SetState
-            title="Prefixes built so far"
+            title="AND combinations"
             codeName="product"
-            description="Partial words in the current alternative."
+            concept="Adjacent operands in the current alternative"
+            description="Partial words currently being constructed by concatenation."
             symbol="×"
             values={step?.product ?? []}
             tone="product"
@@ -1061,10 +1297,10 @@ function ExpressionPanel({
       <Section
         title={
           step?.operation === "union"
-            ? "Combine alternatives"
+            ? "OR — combine alternatives"
             : step?.operation === "product"
-              ? "Expand prefixes"
-              : "Set operation"
+              ? "AND — expand combinations"
+              : "Current operation"
         }
         meta={
           step?.operation === "union"
@@ -1087,6 +1323,28 @@ function ParserPanel({ step, expression }) {
 
   return (
     <PanelBody className="bei-parser-panel">
+      <Section title="Why recursion?" meta="nested braces">
+        <div className="bei-recursion-intuition">
+          <div className="bei-recursion-flow">
+            <span className="bei-recursion-box">see {"{"}</span>
+            <strong>→</strong>
+            <span className="bei-recursion-box">parse inside</span>
+            <strong>→</strong>
+            <span className="bei-recursion-box">get choices</span>
+            <strong>→</strong>
+            <span className="bei-recursion-box">
+              use as <code>group</code>
+            </span>
+          </div>
+
+          <p>
+            A nested brace is itself a complete brace-expansion problem. Solve
+            it first, then return all of its possible words to the parent as one
+            operand&apos;s choices.
+          </p>
+        </div>
+      </Section>
+
       <Section
         title="Recursive call tree"
         meta={
@@ -1097,8 +1355,8 @@ function ParserPanel({ step, expression }) {
       >
         <div className="bei-call-tree-help">
           Each box is one <code>parse(start)</code> call. A child appears when
-          its parent encounters an opening brace. Completed children keep their
-          return value so you can follow that value back into the parent.
+          its parent encounters an opening brace. The child&apos;s return value
+          becomes the parent&apos;s <code>group</code>.
         </div>
 
         <RecursiveCallTree
@@ -1112,11 +1370,11 @@ function ParserPanel({ step, expression }) {
           }}
           getState={(node) => [
             {
-              label: "union",
+              label: "OR · union",
               values: node.union ?? [],
             },
             {
-              label: "product",
+              label: "AND · product",
               values: node.product ?? [],
             },
           ]}
@@ -1135,22 +1393,33 @@ function ParserPanel({ step, expression }) {
           </div>
         ) : (
           <div className="bei-stack-path">
-            {step.frames.map((frame, index) => (
-              <div
-                key={frame.callId}
-                className={`bei-stack-frame ${
-                  index === step.frames.length - 1 ? "active" : ""
-                }`}
-              >
-                <div>
-                  <strong>parse({frame.start})</strong>
+            {step.frames.map((frame, index) => {
+              const active = index === step.frames.length - 1;
 
-                  <span>depth {frame.depth}</span>
+              return (
+                <div
+                  key={frame.callId}
+                  className={`bei-stack-frame ${active ? "active" : ""}`}
+                >
+                  <div>
+                    <strong>parse({frame.start})</strong>
+
+                    <span>
+                      depth {frame.depth}
+                      {active ? " · executing" : " · waiting"}
+                    </span>
+                  </div>
+
+                  <div className="bei-stack-frame-state">
+                    <span>i = {frame.index}</span>
+
+                    <span>union = {formatSet(frame.union)}</span>
+
+                    <span>product = {formatSet(frame.product)}</span>
+                  </div>
                 </div>
-
-                <span>i = {frame.index}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </Section>
@@ -1212,14 +1481,6 @@ export default function BraceExpansionIIVisualizer() {
 
   const parserPanel = <ParserPanel step={step} expression={value} />;
 
-  /*
-   * PatternOverlay deliberately does NOT live in
-   * this portal anymore.
-   *
-   * CodeTracePanel can be docked anywhere without
-   * forcing the overlay to inherit the code panel's
-   * clipping/positioning context.
-   */
   const codePanel = (
     <div className="bei-code-panel">
       <CodeTracePanel
@@ -1238,15 +1499,16 @@ export default function BraceExpansionIIVisualizer() {
    *
    * ┌─────────────────────────┬──────────────┐
    * │ Expression Expansion    │              │
-   * │                         │              │
-   * ├─────────────────────────┤  Code Trace  │
+   * │ OR / AND intuition      │              │
+   * │ live operation          │  Code Trace  │
+   * ├─────────────────────────┤              │
    * │ Recursive Parser        │              │
-   * │                         │              │
+   * │ call tree + stack       │              │
    * └─────────────────────────┴──────────────┘
    *
-   * Expanded Words is intentionally rendered
-   * inside Expression Expansion instead of
-   * consuming a third Lumino split.
+   * Code stays on the right.
+   * Results remain inline so they never consume
+   * a large independent panel.
    */
   const panelConfigs = useMemo(
     () => [
@@ -1287,15 +1549,6 @@ export default function BraceExpansionIIVisualizer() {
         </>
       )}
 
-      {/*
-       * Workspace-level overlay.
-       *
-       * activeLineDom still points to the actual
-       * line inside the CodeTracePanel portal.
-       * getBoundingClientRect() remains valid across
-       * portals because all DOM nodes share the same
-       * document coordinate system.
-       */}
       {showPatternOverlay && step && activeLineDom && (
         <div className="bei-pattern-overlay-host">
           <PatternOverlay step={step} activeLineDom={activeLineDom} />

@@ -202,6 +202,309 @@
 
 
 /* =========================================================
+   Core intuition
+   ========================================================= */
+
+.bei-concept-model {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 11px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--surface2);
+}
+
+.bei-concept-intro {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bei-concept-intro > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bei-concept-kicker {
+  color: var(--primary);
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bei-concept-intro strong {
+  color: var(--text);
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.bei-concept-depth {
+  flex: 0 0 auto;
+
+  padding: 3px 6px;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  background: var(--surface);
+
+  color: var(--muted);
+
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bei-concept-explanation {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   OR / AND intuition cards
+   ========================================================= */
+
+.bei-concept-rules {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.bei-concept-rule {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 8px;
+
+  align-items: center;
+
+  padding: 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface);
+
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.bei-concept-rule.active {
+  border-color:
+    color-mix(
+      in srgb,
+      var(--primary) 70%,
+      var(--border)
+    );
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 6%,
+      var(--surface)
+    );
+
+  box-shadow:
+    inset 3px 0 0 var(--primary);
+}
+
+.bei-concept-symbol {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface2);
+  color: var(--text);
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.bei-concept-rule.active .bei-concept-symbol {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.bei-concept-rule-copy {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 2px 7px;
+}
+
+.bei-concept-rule-copy strong {
+  color: var(--text);
+
+  font-size: 11px;
+}
+
+.bei-concept-rule-copy span {
+  min-width: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.35;
+}
+
+.bei-concept-rule-copy code {
+  grid-column: 1 / -1;
+
+  width: fit-content;
+
+  padding: 1px 4px;
+
+  border-radius: 4px;
+
+  background: var(--surface2);
+  color: var(--primary);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.bei-concept-rule-example {
+  grid-column: 1 / -1;
+
+  padding-top: 7px;
+
+  border-top: 1px solid var(--border);
+
+  color: var(--muted);
+
+  overflow-wrap: anywhere;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   Concept -> variable translation
+   ========================================================= */
+
+.bei-concept-translation {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 6px;
+}
+
+.bei-concept-translation-item {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    auto;
+
+  align-items: center;
+  gap: 4px;
+
+  padding: 7px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface);
+}
+
+.bei-concept-translation-item > span {
+  min-width: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.bei-concept-translation-item > strong {
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.bei-concept-translation-item > code {
+  color: var(--primary);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.bei-concept-translation-item > small {
+  grid-column: 1 / -1;
+
+  color: var(--muted);
+
+  font-size: 8px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
    Current-step status
    ========================================================= */
 
@@ -248,7 +551,7 @@
 
 
 /* =========================================================
-   Parser state
+   Algorithm / parser state
    ========================================================= */
 
 .bei-state-grid {
@@ -319,6 +622,14 @@
   color: var(--text);
 
   font-size: 15px;
+}
+
+.bei-state-concept {
+  color: var(--text);
+
+  font-size: 9px;
+  font-weight: 650;
+  line-height: 1.4;
 }
 
 .bei-state-description {
@@ -404,6 +715,32 @@
 }
 
 .bei-group-empty {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 9px;
+  align-items: flex-start;
+}
+
+.bei-group-empty-symbol {
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
+
+  background: var(--surface);
+  color: var(--primary);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.bei-group-empty > div:last-child {
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -423,7 +760,8 @@
 }
 
 .bei-group-empty code,
-.bei-group-source code {
+.bei-group-source code,
+.bei-group-next code {
   padding: 1px 4px;
 
   border-radius: 4px;
@@ -442,6 +780,26 @@
     monospace;
 
   font-size: 0.95em;
+}
+
+.bei-group-examples {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+
+  padding-top: 2px;
+}
+
+.bei-group-examples > span {
+  padding: 4px 6px;
+
+  border: 1px solid var(--border);
+  border-radius: 5px;
+
+  background: var(--surface);
+
+  font-size: 9px;
 }
 
 .bei-group-explanation {
@@ -463,9 +821,19 @@
 }
 
 .bei-group-explanation-header > div {
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+.bei-group-concept-label {
+  color: #22c55e;
+
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
 }
 
 .bei-group-explanation-header strong {
@@ -498,6 +866,90 @@
 
   font-size: 10px;
   line-height: 1.5;
+}
+
+.bei-group-next {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  padding: 7px 8px;
+
+  border-radius: 6px;
+
+  background: var(--surface);
+}
+
+.bei-group-next > span:first-child {
+  color: var(--primary);
+
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bei-group-next strong {
+  color: var(--text);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.bei-group-next > span:last-child {
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   Shared operation concept label
+   ========================================================= */
+
+.bei-operation-concept-label {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 8px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface);
+}
+
+.bei-operation-concept-label strong {
+  flex: 0 0 auto;
+
+  padding: 2px 6px;
+
+  border-radius: 4px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 14%,
+      transparent
+    );
+
+  color: var(--primary);
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.bei-operation-concept-label span {
+  min-width: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.4;
 }
 
 
@@ -588,10 +1040,89 @@
 
 
 /* =========================================================
+   Product / Cartesian operation
+   ========================================================= */
+
+.bei-product-operation {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bei-operation-code-map {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+
+  padding: 7px 8px;
+
+  border-left:
+    3px solid var(--primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 5%,
+      var(--surface)
+    );
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.bei-operation-code-map strong {
+  color: var(--text);
+}
+
+.bei-operation-code-map > span {
+  color: var(--primary);
+
+  font-weight: 800;
+}
+
+.bei-operation-code-map code {
+  max-width: 100%;
+
+  overflow-wrap: anywhere;
+
+  padding: 2px 5px;
+
+  border-radius: 4px;
+
+  background: var(--surface2);
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
    Operation empty state
    ========================================================= */
 
 .bei-operation-empty {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
   padding: 12px;
 
   border: 1px dashed var(--border);
@@ -602,6 +1133,82 @@
   font-size: 10px;
   line-height: 1.5;
   text-align: center;
+}
+
+.bei-operation-empty strong {
+  color: var(--text);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   Recursion intuition
+   ========================================================= */
+
+.bei-recursion-intuition {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface2);
+}
+
+.bei-recursion-flow {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.bei-recursion-flow > strong {
+  color: var(--primary);
+
+  font-size: 11px;
+}
+
+.bei-recursion-box {
+  padding: 4px 7px;
+
+  border: 1px solid var(--border);
+  border-radius: 5px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  font-size: 9px;
+  font-weight: 650;
+}
+
+.bei-recursion-box code {
+  color: var(--primary);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+}
+
+.bei-recursion-intuition p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 
@@ -656,11 +1263,11 @@
   min-width: 0;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
 
-  padding: 7px 9px;
+  padding: 8px 9px;
 
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -675,12 +1282,12 @@
     inset 3px 0 0 var(--primary);
 }
 
-.bei-stack-frame > div {
+.bei-stack-frame > div:first-child {
   min-width: 0;
 
   display: flex;
-  align-items: center;
-  gap: 7px;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .bei-stack-frame strong {
@@ -698,17 +1305,72 @@
   font-size: 10px;
 }
 
-.bei-stack-frame div > span,
-.bei-stack-frame > span {
+.bei-stack-frame > div:first-child > span {
   color: var(--muted);
 
   font-size: 9px;
 }
 
+.bei-stack-frame-state {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 2px;
+
+  color: var(--muted);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 8px;
+}
+
+.bei-stack-frame-state span {
+  max-width: 100%;
+
+  overflow-wrap: anywhere;
+}
+
 
 /* =========================================================
-   Result
+   Inline final result
    ========================================================= */
+
+.bei-inline-result {
+  padding: 10px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      var(--primary) 45%,
+      var(--border)
+    );
+
+  border-radius: 7px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 4%,
+      var(--surface)
+    );
+}
+
+.bei-final-explanation {
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.5;
+}
 
 .bei-result-set {
   align-content: flex-start;
@@ -750,6 +1412,30 @@
 
 
 /* =========================================================
+   Pattern overlay host
+
+   The overlay is workspace-level rather than a child of the
+   Code Trace portal. This prevents the code dock from clipping
+   the overlay when code is positioned on the right.
+   ========================================================= */
+
+.bei-problem-shell {
+  position: relative;
+}
+
+.bei-pattern-overlay-host {
+  position: absolute;
+  inset: 0;
+
+  z-index: 30;
+
+  pointer-events: none;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
    Generic empty state
    ========================================================= */
 
@@ -774,10 +1460,23 @@
 
 /* =========================================================
    Narrow dock panels
+
+   Lumino panels can become narrow even on a wide desktop, so
+   container queries matter more here than viewport queries.
    ========================================================= */
+
+@container (max-width: 680px) {
+  .bei-concept-translation {
+    grid-template-columns: 1fr;
+  }
+}
 
 @container (max-width: 560px) {
   .bei-state-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bei-concept-rules {
     grid-template-columns: 1fr;
   }
 
@@ -791,6 +1490,46 @@
 
   .bei-group-explanation-header {
     flex-direction: column;
+  }
+
+  .bei-stack-frame {
+    flex-direction: column;
+  }
+
+  .bei-stack-frame-state {
+    width: 100%;
+
+    align-items: flex-start;
+  }
+}
+
+@container (max-width: 390px) {
+  .bei-concept-intro {
+    flex-direction: column;
+  }
+
+  .bei-concept-depth {
+    align-self: flex-start;
+  }
+
+  .bei-concept-rule {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .bei-concept-symbol {
+    width: 28px;
+    height: 28px;
+
+    font-size: 14px;
+  }
+
+  .bei-operation-concept-label {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bei-group-empty {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -809,6 +1548,14 @@
     grid-template-columns: 1fr;
   }
 
+  .bei-concept-rules {
+    grid-template-columns: 1fr;
+  }
+
+  .bei-concept-translation {
+    grid-template-columns: 1fr;
+  }
+
   .bei-union-row {
     grid-template-columns: 1fr;
   }
@@ -819,5 +1566,15 @@
 
   .bei-group-explanation-header {
     flex-direction: column;
+  }
+
+  .bei-stack-frame {
+    flex-direction: column;
+  }
+
+  .bei-stack-frame-state {
+    width: 100%;
+
+    align-items: flex-start;
   }
 }
