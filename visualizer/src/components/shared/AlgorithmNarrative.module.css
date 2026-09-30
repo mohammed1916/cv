@@ -1,0 +1,11 @@
+.narrative { flex: none; padding: 16px; border: 1px solid var(--border, #475569); border-radius: 12px; background: var(--bg-secondary, #172033); color: var(--text, #e2e8f0); }
+.goal { margin: 0; line-height: 1.6; font-size: 14px; overflow-wrap: anywhere; }
+.goal strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent, #a5b4fc); }
+.chapters { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 14px 0; list-style: none; }
+.chapters li { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid transparent; border-radius: 6px; font-size: 12px; }
+.chapters li[aria-current] { border-color: var(--accent, #a5b4fc); background: #818cf81a; font-weight: 700; }
+.chapters span { font-variant-numeric: tabular-nums; }
+.scope { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.details { display: grid; gap: 12px; margin: 14px 0 0; }
+.details dt { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
+.details dd { margin: 0; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }

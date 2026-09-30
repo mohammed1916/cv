@@ -11,6 +11,8 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import PointerRail from "../../components/shared/PointerRail";
 import RecursiveCallTree from "../../components/shared/RecursiveCallTree";
 import CartesianExpansion from "../../components/shared/CartesianExpansion";
+import AlgorithmNarrative from "../../components/shared/AlgorithmNarrative";
+import { braceNarrative } from "./braceNarrative";
 
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
@@ -1230,6 +1232,8 @@ function ExpressionPanel({
           />
         </label>
       </div>
+
+      <AlgorithmNarrative {...braceNarrative(step, expression)} />
 
       <Section title="How to read the expression" meta="OR vs AND">
         <ConceptModel step={step} />
