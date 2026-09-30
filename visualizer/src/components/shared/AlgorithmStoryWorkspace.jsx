@@ -10,6 +10,7 @@ import FloatingPanel from "./FloatingPanel";
 import CodePatternAnnotations from "../CodePatternAnnotations";
 import PatternLegend from "../PatternLegend";
 import LuminoDockPanel from "../LuminoDockPanel";
+import AlgorithmNarrative from "./AlgorithmNarrative";
 
 function fieldValues(definition, example) {
   const source = example?.values ?? example?.input ?? example ?? {};
@@ -111,6 +112,15 @@ export default function AlgorithmStoryWorkspace({ definition }) {
         applyExample={applyExample}
         inputError={inputError}
       />
+      {story && definition.narrative && (
+        <AlgorithmNarrative
+          definition={definition.narrative}
+          step={step}
+          stepIndex={stepIndex}
+          story={story}
+          input={inputValues}
+        />
+      )}
       {story &&
         definition.renderStory({
           story,

@@ -1233,7 +1233,7 @@ function ExpressionPanel({
         </label>
       </div>
 
-      <AlgorithmNarrative {...braceNarrative(step, expression)} />
+      <AlgorithmNarrative definition={braceNarrative} step={step} input={expression} />
 
       <Section title="How to read the expression" meta="OR vs AND">
         <ConceptModel step={step} />

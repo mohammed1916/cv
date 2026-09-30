@@ -1,10 +1,11 @@
 const chapters = ['Resolve an operand', 'Build an alternative', 'Collect the answers'];
 const words = (values = []) => `{${values.slice(0, 8).map(value => value === '' ? 'ε' : value).join(', ')}${values.length > 8 ? ', …' : ''}}`;
 
-export function braceNarrative(step, expression) {
+export function braceNarrative({ step, input: expression }) {
   const base = {
     goal: 'Turn the expression into every distinct word it represents, then return those words in sorted order.',
     chapters,
+    strategyLabel: 'Strategy (repeated for each nested group)',
     chapter: 0,
     scope: step ? `Current scope: ${step.depth === 0 ? 'whole expression' : `nested group at depth ${step.depth}`} (these chapters repeat inside braces)` : 'Ready to explore',
     activeLine: step?.activeLine,
