@@ -1,4 +1,4 @@
-﻿import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
+import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import { LookupMap, AccumulationLane } from '../../components/shared/LookupAccumulator';
 import { getExamples } from '../../config/examplesRegistry';
 import { SOLUTION_CODE, LINE_PATTERN_MAP, R2I_PATTERNS, VAL_MAP, generateSteps } from './algorithm';
