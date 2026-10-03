@@ -1,3 +1,4 @@
+import { sumRootLeafNarrative } from './sumRootLeafNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import SumNumbersStory from './SumNumbersStory';
@@ -20,6 +21,7 @@ const LINE_PATTERN_MAP = {
 const PATTERNS = ['init', 'compute', 'leaf', 'recurse', 'null', 'done'];
 
 const definition = {
+  narrative: sumRootLeafNarrative,
   title: 'Sum Root to Leaf Numbers',
   inputLabel: 'Binary tree (level-order array)',
   inputType: 'string',

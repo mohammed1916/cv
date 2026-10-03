@@ -1,3 +1,4 @@
+import { maxPathNarrative } from './maxPathNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import MaxPathStory from './MaxPathStory';
@@ -21,6 +22,7 @@ const LINE_PATTERN_MAP = {
 const PATTERNS = ['init', 'recurse', 'compute', 'update', 'return', 'done'];
 
 const definition = {
+  narrative: maxPathNarrative,
   title: 'Binary Tree Maximum Path Sum',
   inputLabel: 'Binary tree (level-order array)',
   inputType: 'string',

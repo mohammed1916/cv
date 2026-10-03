@@ -1,4 +1,9 @@
 export const stockNarrative = {
+  edgeCases: [
+    'One day cannot complete a buy followed by a later sale.',
+    'Flat or decreasing prices return zero; trading is optional.',
+    'The cheapest price must precede the sale; the global minimum and maximum alone do not determine the answer.',
+  ],
   goal: 'Find the largest profit from buying once and selling on a later day, or choose no trade for a profit of zero.',
   chapters: ['Keep the cheapest buy', 'Evaluate a sale', 'Keep the best profit'],
   ready: {

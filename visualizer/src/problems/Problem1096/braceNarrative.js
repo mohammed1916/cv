@@ -5,6 +5,12 @@ export function braceNarrative({ step, input: expression }) {
   const base = {
     goal: 'Turn the expression into every distinct word it represents, then return those words in sorted order.',
     chapters,
+    edgeCases: [
+      'Repeated alternatives collapse to one word because results are sets.',
+      'Adjacent groups form all prefix-choice combinations, not pairwise matches.',
+      'Nested groups finish before their choices can extend the outer prefixes.',
+      'Use a valid brace expression; the trace assumes balanced braces and nonempty alternatives.',
+    ],
     strategyLabel: 'Strategy (repeated for each nested group)',
     chapter: 0,
     scope: step ? `Current scope: ${step.depth === 0 ? 'whole expression' : `nested group at depth ${step.depth}`} (these chapters repeat inside braces)` : 'Ready to explore',

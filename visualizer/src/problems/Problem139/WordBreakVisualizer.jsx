@@ -1,3 +1,4 @@
+import { wordBreakNarrative } from './wordBreakNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreakStory from "./WordBreakStory";
@@ -22,6 +23,7 @@ const LINE_PATTERN_MAP = {
 const PATTERNS = ["init", "loop", "check", "dp", "done"];
 
 const definition = {
+  narrative: wordBreakNarrative,
   title: "Word Break",
   inputLabel: 'String s | wordDict (e.g. "leetcode | leet, code")',
   inputType: "string",

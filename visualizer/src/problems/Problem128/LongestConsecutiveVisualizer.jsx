@@ -1,6 +1,7 @@
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import ConsecutiveStory from "./ConsecutiveStory";
 import { CODE, buildConsecutiveStory } from "./algorithm";
+import { consecutiveNarrative } from "./consecutiveNarrative";
 import { getExamples } from "../../config/examplesRegistry";
 import "./LongestConsecutiveVisualizer.css";
 
@@ -37,6 +38,7 @@ const EXAMPLES = [
 ];
 
 const definition = {
+  narrative: consecutiveNarrative,
   title: "Longest Consecutive Sequence",
   inputLabel: "Numbers array (JSON array or comma-separated)",
   inputType: "string",

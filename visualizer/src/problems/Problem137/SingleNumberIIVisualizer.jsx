@@ -2,11 +2,13 @@ import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SingleNumber2Story from "./SingleNumber2Story";
 import { CODE, buildSingleNumber2Story } from "./algorithm";
+import { singleNumber2Narrative } from "./singleNumber2Narrative";
 import "./SingleNumberIIVisualizer.css";
 
 const EXAMPLES = getExamples("single-number-ii");
 
 const definition = {
+  narrative: singleNumber2Narrative,
   title: "Single Number II (Modulo 3 Bit Counter)",
   inputLabel: "Integer array (elements appear 3× except 1 appearing once)",
   inputType: "string",
@@ -22,7 +24,9 @@ const definition = {
   },
   patterns: ["init", "loop", "update", "done"],
   build: (input) => buildSingleNumber2Story(input),
-  renderStory: ({ story, step }) => <SingleNumber2Story story={story} step={step} />,
+  renderStory: ({ story, step }) => (
+    <SingleNumber2Story story={story} step={step} />
+  ),
 };
 
 export default function SingleNumberIIVisualizer() {

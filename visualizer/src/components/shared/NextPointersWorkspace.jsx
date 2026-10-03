@@ -1,8 +1,10 @@
 import AlgorithmStoryWorkspace from './AlgorithmStoryWorkspace';
 import NextPointersStory from './NextPointersStory';
+import { perfectPointerNarrative, sparsePointerNarrative } from './nextPointerNarrative';
 import { buildNextPointerStory, NEXT_POINTER_CODE } from './nextPointerStory';
 
 const definitions = Object.fromEntries(['perfect','sparse'].map(mode=>[mode,{
+  narrative: mode === 'perfect' ? perfectPointerNarrative : sparsePointerNarrative,
   title:'Tree & Next Pointers', inputLabel:'Level-order tree', inputType:'array',
   initialInput:mode==='perfect'?'[1,2,3,4,5,6,7]':'[1,2,3,4,5,null,7]',
   examples:[{label:'Example',input:mode==='perfect'?'[1,2,3,4,5,6,7]':'[1,2,3,4,5,null,7]'},{label:'Repeated values',input:'[1,1,1]'},{label:'Empty',input:'[]'}],

@@ -2,6 +2,7 @@ import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import MinCutStory from "./MinCutStory";
 import { CODE, buildMinCutStory } from "./algorithm";
+import { minCutNarrative } from "./minCutNarrative";
 import "./PalindromePartitioningIIVisualizer.css";
 
 const EXAMPLES = getExamples("palindrome-partitioning-ii");
@@ -27,6 +28,7 @@ const LINE_PATTERN_MAP = {
 const PATTERNS = ["init", "loop", "check", "dp", "done"];
 
 const definition = {
+  narrative: minCutNarrative,
   title: "Palindrome Partitioning II",
   inputLabel: "Input string s",
   inputType: "string",

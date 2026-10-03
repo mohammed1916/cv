@@ -1,3 +1,4 @@
+import { copyRandomNarrative } from './copyRandomNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CopyRandomStory from "./CopyRandomStory";
 import {
@@ -28,6 +29,7 @@ const EXAMPLES = [
 ];
 
 const definition = {
+  narrative: copyRandomNarrative,
   title: "Copy List with Random Pointer",
   inputLabel: "Linked list nodes [[val, random], ...]",
   inputType: "string",

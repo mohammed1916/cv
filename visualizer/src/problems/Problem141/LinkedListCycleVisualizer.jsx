@@ -1,3 +1,4 @@
+import { hasCycleNarrative } from './hasCycleNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CycleStory from "./CycleStory";
@@ -7,6 +8,7 @@ import "./LinkedListCycleVisualizer.css";
 const EXAMPLES = getExamples("linked-list-cycle");
 
 const definition = {
+  narrative: hasCycleNarrative,
   title: "Linked List Cycle",
   inputLabel: "List values & cycle pos (e.g. [3,2,0,-4] | pos=1)",
   inputType: "string",

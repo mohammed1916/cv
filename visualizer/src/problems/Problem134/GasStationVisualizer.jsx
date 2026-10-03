@@ -1,3 +1,4 @@
+import { gasStationNarrative } from './gasStationNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import GasStationStory from "./GasStationStory";
 import { CODE, buildGasStationStory } from "./algorithm";
@@ -75,6 +76,7 @@ if (!EXAMPLES.some((e) => e.label === "Exact Fuel (Start 0)")) {
 }
 
 const definition = {
+  narrative: gasStationNarrative,
   title: "Gas Station: Circular Circuit",
   fields: [
     { key: "gas", label: "Gas available [gas]", type: "array" },

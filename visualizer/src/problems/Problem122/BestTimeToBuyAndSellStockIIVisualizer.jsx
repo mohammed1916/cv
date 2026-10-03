@@ -1,3 +1,4 @@
+import { stock2Narrative } from './stock2Narrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import StockStory2 from "./StockStory2";
@@ -7,6 +8,7 @@ import "./BestTimeToBuyAndSellStockIIVisualizer.css";
 const EXAMPLES = getExamples("best-time-to-buy-and-sell-stock-ii");
 
 const definition = {
+  narrative: stock2Narrative,
   title: "Best Time to Buy and Sell Stock II",
   inputLabel: "Stock prices (JSON array or comma-separated)",
   inputType: "string",

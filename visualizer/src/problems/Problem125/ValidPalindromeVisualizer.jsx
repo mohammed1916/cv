@@ -1,3 +1,4 @@
+import { palindromeNarrative } from './palindromeNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PalindromeStory from "./PalindromeStory";
@@ -7,6 +8,7 @@ import "./ValidPalindromeVisualizer.css";
 const EXAMPLES = getExamples("valid-palindrome");
 
 const definition = {
+  narrative: palindromeNarrative,
   title: "Valid Palindrome",
   inputLabel: "Input string s",
   inputType: "string",

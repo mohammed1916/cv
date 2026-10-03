@@ -1,3 +1,4 @@
+import { singleNumberNarrative } from './singleNumberNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SingleNumberStory from "./SingleNumberStory";
 import { CODE, buildSingleNumberStory } from "./algorithm";
@@ -16,6 +17,7 @@ const EXAMPLES = [
 ];
 
 const definition = {
+  narrative: singleNumberNarrative,
   title: "Single Number",
   inputLabel: "Numbers array (JSON or comma-separated)",
   inputType: "string",

@@ -1,3 +1,4 @@
+import { surroundedNarrative } from './surroundedNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SurroundedStory from "./SurroundedStory";
@@ -7,6 +8,7 @@ import "./SurroundedRegionsVisualizer.css";
 const EXAMPLES = getExamples("surrounded-regions");
 
 const definition = {
+  narrative: surroundedNarrative,
   title: "Surrounded Regions",
   inputLabel: "2D Board matrix (JSON array of 'X' and 'O')",
   inputType: "string",

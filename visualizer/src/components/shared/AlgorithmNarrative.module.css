@@ -9,3 +9,6 @@
 .details { display: grid; gap: 12px; margin: 14px 0 0; }
 .details dt { font-size: 12px; font-weight: 700; margin-bottom: 3px; }
 .details dd { margin: 0; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.edgeCases { margin-top: 14px; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+.edgeCases summary { cursor: pointer; font-weight: 700; }
+.edgeCases ul { padding-left: 20px; margin-bottom: 0; }

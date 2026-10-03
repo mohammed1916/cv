@@ -1,3 +1,4 @@
+import { permuteUniqueNarrative } from './permuteUniqueNarrative.js';
 import { useState } from 'react';
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import { buildPermutations, code, linePatterns, TRACE_LIMIT } from './algorithm';
@@ -15,6 +16,7 @@ function Results({ results, count }) {
 }
 
 const definition = {
+  narrative: permuteUniqueNarrative,
   title: 'Permutations II: unique backtracking', code, linePatterns,
   patterns: ['init', 'skip', 'add', 'remove', 'result', 'done'],
   fields: [{ key: 'nums', label: 'Numbers', type: 'string' }], initialValues: { nums: '[1,1,2]' },

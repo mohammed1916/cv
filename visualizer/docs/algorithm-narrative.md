@@ -50,10 +50,21 @@ definitions); custom workspaces may pass their own input shape. `story` contains
 the parsed input and trace. Never reveal a future result from that trace while
 describing what the current frame has achieved.
 
-Current adopters: Brace Expansion II (custom workspace) and Best Time to Buy and
-Sell Stock (shared workspace). Other workspace consumers opt in by supplying
-content; absent definitions render nothing. This avoids inventing generic
-explanations for algorithms that have not yet been authored.
+Current adopters: every existing AlgorithmStoryWorkspace consumer (29 problems)
+and Brace Expansion II in its custom workspace. These are Problems 12, 13, 29,
+47, 116-125, 128-142 and 1096. This does not cover every problem in the catalog.
+
+For code-block stories, `createTraceNarrative` accepts a goal, strategy,
+chapters, blocks and edgeCases. Each block supplies a zero-based chapter,
+code `lines` or `phases`, `why`, and `next`. The current frame's `message`
+supplies the concrete achievement, without reading a future result.
+Blocks are matched in order. Put phase-specific exceptions first if one code
+line represents both entering and returning from recursion. Alternatively use
+the existing callback/phase API, as Partitioning does.
+
+`edgeCases` is a list of problem-specific assumptions and behaviors, presented
+in a collapsible section. It describes cases to consider, not an assertion that
+the current input is that case. Respect each visualizer's actual accepted inputs.
 
 Run the contract checks with:
-`node --test src/components/shared/resolveNarrative.test.mjs`.
+`node --test src/components/shared/resolveNarrative.test.mjs src/components/shared/narrativeBatch.test.mjs`.

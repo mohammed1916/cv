@@ -1,3 +1,4 @@
+import { wordBreak2Narrative } from './wordBreak2Narrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreak2Story from "./WordBreak2Story";
@@ -7,6 +8,7 @@ import "./WordBreakIIVisualizer.css";
 const EXAMPLES = getExamples("word-break-ii");
 
 const definition = {
+  narrative: wordBreak2Narrative,
   title: "Word Break II",
   fields: [
     { key: "s", label: "s", type: "string" },

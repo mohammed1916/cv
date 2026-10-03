@@ -5,7 +5,7 @@ import { resolveNarrative } from './resolveNarrative';
 export default function AlgorithmNarrative({ definition, step = null, stepIndex = -1, story, input }) {
   const narrative = resolveNarrative(definition, { step, stepIndex, story, input });
   if (!narrative) return null;
-  const { goal, chapters = [], chapter, why, achieved, next, scope, activeLine, strategyLabel = 'Algorithm strategy' } = narrative;
+  const { goal, chapters = [], chapter, why, achieved, next, scope, activeLine, edgeCases = [], strategyLabel = 'Algorithm strategy' } = narrative;
   return (
     <section className={styles.narrative} aria-label="Algorithm story">
       {goal && <p className={styles.goal}><strong>Our goal</strong>{goal}</p>}
@@ -22,6 +22,10 @@ export default function AlgorithmNarrative({ definition, step = null, stepIndex 
         {achieved && <div><dt>What we have achieved</dt><dd>{achieved}</dd></div>}
         {next && <div><dt>What comes next</dt><dd>{next}</dd></div>}
       </dl>
+      {edgeCases.length > 0 && <details className={styles.edgeCases}>
+        <summary>Edge cases and assumptions</summary>
+        <ul>{edgeCases.map(item => <li key={item}>{item}</li>)}</ul>
+      </details>}
     </section>
   );
 }

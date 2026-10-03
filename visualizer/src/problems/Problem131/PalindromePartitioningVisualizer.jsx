@@ -1,3 +1,4 @@
+import { partitionNarrative } from './partitionNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PartitionStory from "./PartitionStory";
 import { CODE, buildPartitionStory } from "./algorithm";
@@ -16,6 +17,7 @@ const EXAMPLES = [
 ];
 
 const definition = {
+  narrative: partitionNarrative,
   title: "Palindrome Partitioning",
   inputLabel: "Input string s (length 1 to 16)",
   inputType: "string",

@@ -1,3 +1,4 @@
+import { triangleNarrative } from './triangleNarrative.js';
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import TriangleStory from "./TriangleStory";
@@ -6,6 +7,7 @@ import { TRIANGLE_CODE, buildTriangleStory } from "./algorithm";
 const EXAMPLES = getExamples("triangle");
 
 const definition = {
+  narrative: triangleNarrative,
   title: "Triangle: Minimum Path Sum",
   inputLabel: "Triangle rows (JSON array)",
   inputType: "string",

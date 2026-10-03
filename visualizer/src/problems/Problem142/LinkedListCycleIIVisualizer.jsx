@@ -1,3 +1,4 @@
+import { detectCycle2Narrative } from './detectCycle2Narrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import Cycle2Story from "./Cycle2Story";
 import { CODE, buildCycle2Story } from "./algorithm";
@@ -54,6 +55,7 @@ const EXAMPLES =
     : DEFAULT_EXAMPLES;
 
 const definition = {
+  narrative: detectCycle2Narrative,
   title: "Linked List Cycle II",
   fields: [
     { key: "nodes", label: "nodes", type: "array" },
