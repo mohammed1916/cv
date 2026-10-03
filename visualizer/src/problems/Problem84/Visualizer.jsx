@@ -127,11 +127,7 @@ function generateSteps(heights) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('largest-rectangle-in-histogram', [
-  { label: '[2,1,5,6,2,3]', heights: [2, 1, 5, 6, 2, 3] },
-  { label: '[2,4]', heights: [2, 4] },
-  { label: '[0,9]', heights: [0, 9] },
-])
+const EXAMPLES = getExamplesOr('largest-rectangle-in-histogram', [])
 
 function HistogramVisualization({ step, heights, inputError, input, setInput, handleReset, applyExample }) {
   return (

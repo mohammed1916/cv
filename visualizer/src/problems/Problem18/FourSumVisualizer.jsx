@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('four-sum')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -173,8 +175,8 @@ function generateSteps(nums, target) {
 const EXAMPLES = getExamples('four-sum')
 
 export default function FourSumVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1000000000,1000000000,1000000000,1000000000]')
-    const [targetInput, setTargetInput] = useState('-294967296')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+    const [targetInput, setTargetInput] = useState(JSON.stringify(AUTHORED_INITIAL.target))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, target, inputError } = useMemo(() => {

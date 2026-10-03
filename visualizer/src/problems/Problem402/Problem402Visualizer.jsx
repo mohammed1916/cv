@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('remove-k-digits')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -210,15 +212,11 @@ function generateSteps(numStr, kStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('remove-k-digits', [
-  { label: 'Example 1', num: '1432219', k: '3' },
-  { label: 'Example 2', num: '10200', k: '1' },
-  { label: 'Example 3', num: '112', k: '1' },
-])
+const EXAMPLES = getExamplesOr('remove-k-digits', [])
 
 export default function Problem402Visualizer() {
-  const [numInput, setNumInput] = useState('1432219')
-  const [kInput, setKInput] = useState('3')
+  const [numInput, setNumInput] = useState(AUTHORED_INITIAL.num)
+  const [kInput, setKInput] = useState(AUTHORED_INITIAL.k)
 
   const { num, k, inputError } = useMemo(() => {
     try {

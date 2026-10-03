@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('minimum-size-subarray-sum')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -125,15 +127,11 @@ function generateSteps(targetText, numsText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('minimum-size-subarray-sum', [
-  { label: 'Example 1', target: '7', nums: '2,3,1,2,4,3' },
-  { label: 'Example 2', target: '4', nums: '1,4,4' },
-  { label: 'Example 3', target: '11', nums: '1,1,1,1,1,1,1,1' },
-])
+const EXAMPLES = getExamplesOr('minimum-size-subarray-sum', [])
 
 export default function Problem209Visualizer() {
-  const [targetInput, setTargetInput] = useState('7')
-  const [numsInput, setNumsInput] = useState('2,3,1,2,4,3')
+  const [targetInput, setTargetInput] = useState(AUTHORED_INITIAL.target)
+  const [numsInput, setNumsInput] = useState(AUTHORED_INITIAL.nums)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(

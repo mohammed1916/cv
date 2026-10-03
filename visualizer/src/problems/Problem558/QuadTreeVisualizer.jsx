@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('quad-tree')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -426,7 +428,7 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
 export default function QuadTreeVisualizer() {
   const examples = useMemo(() => getExamplesOr('quad-tree', []), [])
   const [gridSize, setGridSize] = useState(4)
-  const [gridInput, setGridInput] = useState('[[1,1,0,0],[1,1,0,0],[1,1,1,1],[1,1,1,1]]')
+  const [gridInput, setGridInput] = useState(JSON.stringify(AUTHORED_INITIAL.grid || AUTHORED_INITIAL))
 
   const { grid, inputError } = useMemo(() => {
     try {

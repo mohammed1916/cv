@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -210,36 +211,7 @@ function generateSteps(scenario) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Simple Timeline',
-    operations: ['postTweet', 'follow', 'postTweet', 'getNewsFeed'],
-    params: {
-      postTweet: [[1, 1], [2, 2]],
-      follow: [[1, 2]],
-      getNewsFeed: [1],
-    },
-  },
-  {
-    label: 'Example 2: Following Chain',
-    operations: ['postTweet', 'postTweet', 'follow', 'follow', 'getNewsFeed'],
-    params: {
-      postTweet: [[1, 10], [2, 20]],
-      follow: [[1, 2], [1, 3]],
-      getNewsFeed: [1],
-    },
-  },
-  {
-    label: 'Example 3: Complex Network',
-    operations: ['postTweet', 'postTweet', 'postTweet', 'follow', 'follow', 'unfollow', 'postTweet', 'getNewsFeed'],
-    params: {
-      postTweet: [[1, 100], [2, 200], [3, 300]],
-      follow: [[1, 2], [1, 3]],
-      unfollow: [[1, 3]],
-      getNewsFeed: [1],
-    },
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:355')
 
 export default function Problem355Visualizer() {
   const [exIdx, setExIdx] = useState(0)

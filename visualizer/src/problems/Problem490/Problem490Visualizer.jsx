@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('the-maze')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -45,10 +47,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('the-maze', [
-  { label: 'Example 1', maze: [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start: [0,4], destination: [4,4] },
-  { label: 'Example 2', maze: [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start: [0,4], destination: [3,2] },
-])
+const EXAMPLES = getExamplesOr('the-maze', [])
 
 function generateSteps(maze, start, destination) {
   const steps = []
@@ -248,9 +247,9 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
 
 export default function Problem490Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [mazeInput, setMazeInput] = useState("[[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]]");
-  const [startInput, setStartInput] = useState("[0,0]");
-  const [destinationInput, setDestinationInput] = useState("[4,4]");
+  const [mazeInput, setMazeInput] = useState(JSON.stringify(AUTHORED_INITIAL.maze));
+  const [startInput, setStartInput] = useState(JSON.stringify(AUTHORED_INITIAL.start));
+  const [destinationInput, setDestinationInput] = useState(JSON.stringify(AUTHORED_INITIAL.destination));
   const { maze, start, destination, inputError } = useMemo(() => {
     try {
       const parsedMaze = JSON.parse(mazeInput); if (!Array.isArray(parsedMaze)) throw new Error('maze must be an array');

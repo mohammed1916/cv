@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -41,12 +42,7 @@ const SOLUTION_CODE = [
   { line: 21, text: "    board[i][j] = char" },
 ]
 
-const EXAMPLES = [
-  { label: 'Classic matches', board: [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]], words: ["oath","pea","eat","rain"] },
-  { label: 'Single cell', board: [["a"]], words: ["a", "b"] },
-  { label: 'No matches', board: [["a","b"],["c","d"]], words: ["ef", "gh"] },
-  { label: 'Shared prefix', board: [["a","b"],["a","a"]], words: ["aba", "aaa", "ab"] },
-]
+const EXAMPLES = getAuthoredExamples('local:212')
 
 function buildTrie(words) {
   const root = { children: {}, word: null }

@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:86')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -29,10 +32,7 @@ const LINE_PATTERN_MAP = {
   12: 'done',       // return lessDummy.next
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', list: [1, 4, 3, 2, 5, 2], x: 3 },
-  { label: 'Example 2', list: [2, 1], x: 2 },
-]
+const EXAMPLES = getAuthoredExamples('local:86')
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def partition(head, x):' },
@@ -257,8 +257,8 @@ function VisualizationPanel({ step }) {
 
 export default function Problem86Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [listInput, setListInput] = useState("[1,4,3,2,5,2]");
-  const [xInput, setXInput] = useState(3);
+  const [listInput, setListInput] = useState(JSON.stringify(AUTHORED_INITIAL.list));
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x));
   const { list, x, inputError } = useMemo(() => {
     try {
       const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');

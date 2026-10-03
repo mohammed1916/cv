@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('spiral-matrix-ii')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -210,15 +212,10 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('spiral-matrix-ii', [
-  { label: 'n=1', n: 1 },
-  { label: 'n=2', n: 2 },
-  { label: 'n=3', n: 3 },
-  { label: 'n=4', n: 4 },
-])
+const EXAMPLES = getExamplesOr('spiral-matrix-ii', [])
 
 export default function SpiralMatrixIIVisualizer() {
-  const [nInput, setNInput] = useState('3')
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

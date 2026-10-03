@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('palindrome-linked-list')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -167,7 +169,7 @@ function VisualizationPanel({ step, ex, nums, onExampleChange }) {
 
 export default function PalindromeLinkedListVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,2,2,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

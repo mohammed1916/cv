@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('minimum-path-sum')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -230,7 +232,7 @@ function MinimumPathSumVisualization({
 }
 
 export default function MinimumPathSumVisualizer() {
-  const [gridInput, setGridInput] = useState('[[1,3,1],[1,5,1],[4,2,1]]')
+  const [gridInput, setGridInput] = useState(JSON.stringify(AUTHORED_INITIAL.grid))
 
 
   const { grid, m, n, inputError } = useMemo(() => {

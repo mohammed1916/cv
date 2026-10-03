@@ -39,11 +39,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('sort-characters-by-frequency', [
-  { label: 'Example 1', s: 'tree', expected: 'eert' },
-  { label: 'Example 2', s: 'cccaabb', expected: 'cccaabb' },
-  { label: 'Example 3', s: 'aabbccdd', expected: 'aabbccdd' },
-])
+const EXAMPLES = getExamplesOr('sort-characters-by-frequency', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },

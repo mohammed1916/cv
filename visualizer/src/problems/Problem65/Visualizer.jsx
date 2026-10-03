@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:65')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -223,12 +226,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Valid decimal', s: '3.14' },
-  { label: 'Sci notation', s: '2e10' },
-  { label: 'Invalid', s: '1a' },
-  { label: 'Sign+dot', s: '+.8' },
-]
+const EXAMPLES = getAuthoredExamples('local:65')
 
 function FlagBadge({ label, value }) {
   return (
@@ -379,7 +377,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem65Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("3.14");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

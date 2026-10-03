@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('zuma-game')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -39,11 +41,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('zuma-game', [
-  { label: 'Example 1', board: 'WWWWW', hand: 'W' },
-  { label: 'Example 2', board: 'WRRBBW', hand: 'RB' },
-  { label: 'Example 3', board: 'WBWBW', hand: 'WB' },
-])
+const EXAMPLES = getExamplesOr('zuma-game', [])
 
 function generateSteps(board, hand) {
   const steps = []
@@ -218,8 +216,8 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
 
 export default function Problem488Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [boardInput, setBoardInput] = useState("WWWWW");
-  const [handInput, setHandInput] = useState("WWWWW");
+  const [boardInput, setBoardInput] = useState(String(AUTHORED_INITIAL.board));
+  const [handInput, setHandInput] = useState(String(AUTHORED_INITIAL.hand));
   const { board, hand, inputError } = useMemo(() => {
     try {
       const parsedBoard = boardInput;

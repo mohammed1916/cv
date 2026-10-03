@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-uncommon-subsequence-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -224,7 +226,7 @@ function VisualizationPanel({ step }) {
 
 export default function LongestUncommonSubsequenceIIVisualizer() {
   const [strsInput, setStrsInput] = useState(
-    JSON.stringify(EXAMPLES?.[0]?.nums ?? EXAMPLES?.[0]?.strs ?? ['abcdefg', 'abc', 'abcd'])
+    JSON.stringify(AUTHORED_INITIAL.nums ?? AUTHORED_INITIAL.strs ?? [])
   )
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 

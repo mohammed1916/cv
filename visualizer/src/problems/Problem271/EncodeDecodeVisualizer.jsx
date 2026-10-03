@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('encode-decode-strings')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -112,7 +114,7 @@ function generateSteps(strs) {
 const EXAMPLES = getExamples('encode-decode-strings');
 
 export default function EncodeDecodeVisualizer() {
-    const [strsInput, setStrsInput] = useState('["lint","code","love","you"]');
+    const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs));
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { strs, inputErr } = useMemo(() => {

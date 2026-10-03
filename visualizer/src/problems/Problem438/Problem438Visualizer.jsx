@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-all-anagrams-in-string')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -20,9 +22,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('find-all-anagrams-in-string', [
-  { label: 'Example 1', s: 'cbaebabacd', p: 'abc' },
-])
+const EXAMPLES = getExamplesOr('find-all-anagrams-in-string', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findAnagrams(s,p):' },
@@ -268,8 +268,8 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
 
 export default function Problem438Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("cbaebabacd");
-  const [pInput, setPInput] = useState("abc");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+  const [pInput, setPInput] = useState(String(AUTHORED_INITIAL.p));
   const { s, p, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

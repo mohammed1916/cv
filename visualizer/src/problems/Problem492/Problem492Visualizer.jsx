@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('construct-the-rectangle')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -39,11 +41,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('construct-the-rectangle', [
-  { label: 'Example 1', area: 8 },
-  { label: 'Example 2', area: 37 },
-  { label: 'Example 3', area: 122122 },
-])
+const EXAMPLES = getExamplesOr('construct-the-rectangle', [])
 
 function generateSteps(area) {
   const steps = []
@@ -102,7 +100,7 @@ function VisualizationPanel({ area, step, applyEx }) {
 
 export default function Problem492Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [areaInput, setAreaInput] = useState(8);
+  const [areaInput, setAreaInput] = useState(String(AUTHORED_INITIAL.area));
   const { area, inputError } = useMemo(() => {
     try {
       const parsedArea = Number(areaInput); if (isNaN(parsedArea)) throw new Error('area must be a number');

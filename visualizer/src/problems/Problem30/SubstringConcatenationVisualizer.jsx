@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('substring-concatenation')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -182,8 +184,8 @@ function VisualizationPanel({ wlen, window, wordStart, wordEnd, seen, result, ph
 
 export default function SubstringConcatenationVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const [sInput, setSInput] = useState("barfoothefoobarman");
-    const [wordsInput, setWordsInput] = useState("[\"foo\",\"bar\"]");
+    const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+    const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words));
     const { s, words, inputError } = useMemo(() => {
         try {
             const parsedS = sInput;

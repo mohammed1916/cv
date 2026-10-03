@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry.js';
 export const I2R_PATTERNS = ['init', 'check', 'loop', 'append', 'subtract', 'done']
 
 // Map which code line corresponds to which pattern
@@ -25,23 +26,7 @@ export const SOLUTION_CODE = [
   { line: 9, text: '    return result' },
 ]
 
-export const EXAMPLES = [
-  {
-    label: '3',
-    num: 3,
-    note: 'Simple: III',
-  },
-  {
-    label: '58',
-    num: 58,
-    note: 'Mixed: LVIII',
-  },
-  {
-    label: '1994',
-    num: 1994,
-    note: 'Complex: MCMXCIV',
-  },
-]
+export const EXAMPLES = getAuthoredExamples('local:12')
 
 export const VALUE_SYMBOL_PAIRS = [
   { value: 1000, symbol: 'M' },

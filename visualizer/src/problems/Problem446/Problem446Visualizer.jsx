@@ -40,11 +40,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('arithmetic-slices-ii', [
-  { label: 'Example 1', nums: [1, 2, 3, 4], expected: 6 },
-  { label: 'Example 2', nums: [1, 2, 3, 5, 7, 9], expected: 3 },
-  { label: 'Example 3', nums: [1, 2, 3, 4, 5, 6], expected: 9 },
-])
+const EXAMPLES = getExamplesOr('arithmetic-slices-ii', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2, 3, 4, 5] },

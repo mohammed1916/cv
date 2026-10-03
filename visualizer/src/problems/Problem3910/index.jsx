@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -16,12 +17,7 @@ const definition = {
     { id: 'decide', label: 'Count / reject', description: 'Require even parity and connectivity.' },
     { id: 'done', label: 'Complete', description: 'Return the count over all non-empty subsets.' },
   ],
-  examples: [
-    { label: 'Three-node path', input: '{"nums":[1,0,1],"edges":[[0,1],[1,2]]}' },
-    { label: 'Odd singleton', input: '{"nums":[1],"edges":[]}' },
-    { label: 'Disconnected zeros', input: '{"nums":[0,0,0],"edges":[]}' },
-    { label: 'Even triangle', input: '{"nums":[0,0,0],"edges":[[0,1],[0,2],[1,2]]}' },
-  ],
+  examples: getAuthoredExamples('local:3910'),
 }
 
 function EvenConnectedSubgraphs() {

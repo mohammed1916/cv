@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('lrucache')[0];
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -594,11 +596,11 @@ const EXAMPLES = getExamples("lrucache");
 
 export default function LRUCacheVisualizer() {
   const [commandsInput, setCommandsInput] = useState(
-    '["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]',
+    JSON.stringify(AUTHORED_INITIAL.commands),
   );
 
   const [argsInput, setArgsInput] = useState(
-    "[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]",
+    JSON.stringify(AUTHORED_INITIAL.argsList),
   );
 
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();

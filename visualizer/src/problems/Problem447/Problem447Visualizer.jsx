@@ -44,11 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('number-of-boomerangs', [
-  { label: 'Example 1', points: [[0, 0], [1, 0], [2, 0]], expected: 2 },
-  { label: 'Example 2', points: [[1, 1], [2, 2], [3, 3]], expected: 2 },
-  { label: 'Example 3', points: [[0, 0], [1, 1], [1, 1]], expected: 2 },
-])
+const EXAMPLES = getExamplesOr('number-of-boomerangs', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },

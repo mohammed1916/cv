@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('string-compression')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -334,7 +336,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem443Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [charsInput, setCharsInput] = useState("[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]");
+  const [charsInput, setCharsInput] = useState(JSON.stringify(AUTHORED_INITIAL.chars));
   const { chars, inputError } = useMemo(() => {
     try {
       const parsedChars = JSON.parse(charsInput); if (!Array.isArray(parsedChars)) throw new Error('chars must be an array');

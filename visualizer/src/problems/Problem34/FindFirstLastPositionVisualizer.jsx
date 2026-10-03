@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-first-last-position')[0];
+import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -855,9 +857,9 @@ function generateSteps(nums, target) {
 const EXAMPLES = getExamples("find-first-last-position");
 
 export default function FindFirstLastPositionVisualizer() {
-  const [numsInput, setNumsInput] = useState("[5, 7, 7, 8, 8, 10]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
 
-  const [targetInput, setTargetInput] = useState("8");
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target));
 
   const { nums, target, inputError } = useMemo(() => {
     try {

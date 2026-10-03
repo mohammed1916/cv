@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -14,11 +15,7 @@ const definition = {
     { id: 'red', label: '(30, 90]?', description: 'Red excludes 30 and includes 90.' },
     { id: 'done', label: 'Return', description: 'Return the matched color or Invalid.' },
   ],
-  examples: [
-    { label: 'Red: 60', input: '60' }, { label: 'Invalid: 5', input: '5' },
-    { label: 'Green: 0', input: '0' }, { label: 'Orange: 30', input: '30' },
-    { label: 'Red boundary: 90', input: '90' }, { label: 'Beyond red: 91', input: '91' },
-  ],
+  examples: getAuthoredExamples('local:3894'),
 }
 function TrafficSignal() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('median-of-two-sorted-arrays')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -590,8 +592,8 @@ function PartitionPointerRail({ step, searchValues, otherValues, searchName, oth
 }
 
 export default function MedianOfTwoSortedArraysVisualizer() {
-  const [nums1Input, setNums1Input] = useState("[1, 3]");
-  const [nums2Input, setNums2Input] = useState("[2]");
+  const [nums1Input, setNums1Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums1));
+  const [nums2Input, setNums2Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums2));
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   const prepared = useMemo(() => {

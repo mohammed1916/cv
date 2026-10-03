@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('regular-expression-matching')[0];
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -303,43 +305,7 @@ function generateSteps(s, p) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("regular-expression-matching", [
-  {
-    label: '"a", "a"',
-    s: "a",
-    p: "a",
-  },
-  {
-    label: '"aa", "a"',
-    s: "aa",
-    p: "a",
-  },
-  {
-    label: '"aa", "."',
-    s: "aa",
-    p: ".",
-  },
-  {
-    label: '"aa", "a*"',
-    s: "aa",
-    p: "a*",
-  },
-  {
-    label: '"ab", ".*"',
-    s: "ab",
-    p: ".*",
-  },
-  {
-    label: '"aab", "c*a*b"',
-    s: "aab",
-    p: "c*a*b",
-  },
-  {
-    label: '"mississippi", "mis*is*p*."',
-    s: "mississippi",
-    p: "mis*is*p*.",
-  },
-]);
+const EXAMPLES = getExamplesOr("regular-expression-matching", []);
 
 function VisualizationPanel({ s, p, step }) {
   const m = s.length;
@@ -619,8 +585,8 @@ function VisualizationPanel({ s, p, step }) {
 }
 
 export default function RegularExpressionMatchingVisualizer() {
-  const [sInput, setSInput] = useState('"a"');
-  const [pInput, setPInput] = useState('"a"');
+  const [sInput, setSInput] = useState(`"${AUTHORED_INITIAL.s}"`);
+  const [pInput, setPInput] = useState(`"${AUTHORED_INITIAL.p}"`);
   const [panelDivs, setPanelDivs] = useState(null);
 
   const { s, p, inputError } = useMemo(() => {

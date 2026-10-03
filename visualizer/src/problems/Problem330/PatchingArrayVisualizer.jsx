@@ -42,7 +42,7 @@ function generateSteps({ nums, n }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('patching-array', [{ label: '[1,3], n=6', nums: [1, 3], n: 6 }, { label: '[1,5,10], n=20', nums: [1, 5, 10], n: 20 }])
+const EXAMPLES = getExamplesOr('patching-array', [])
 
 export default function PatchingArrayVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

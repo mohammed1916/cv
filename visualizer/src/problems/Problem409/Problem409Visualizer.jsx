@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +19,7 @@ const SOLUTION_CODE = getSolutionCode('longest-palindrome')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', s: 'abccccdd', expected: 7 },
-  { label: 'Ex2', s: 'Aa', expected: 1 },
-  { label: 'Ex3', s: 'a', expected: 1 },
-]
+const EXAMPLES = getAuthoredExamples('local:409')
 
 function generateSteps(s) {
   const steps = []

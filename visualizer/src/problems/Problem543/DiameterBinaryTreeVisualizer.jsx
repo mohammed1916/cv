@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('diameter-binary-tree')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -177,7 +179,7 @@ function generateSteps(arr) {
 const EXAMPLES = getExamples('diameter-binary-tree')
 
 export default function DiameterBinaryTreeVisualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3,4,5]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { arr, inputError } = useMemo(() => {

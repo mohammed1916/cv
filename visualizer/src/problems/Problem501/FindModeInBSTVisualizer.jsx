@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-mode-bst')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -231,7 +233,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function FindModeInBSTVisualizer() {
   const examples = useMemo(() => getExamplesOr('find-mode-bst', []), [])
-  const [treeInput, setTreeInput] = useState('[1,null,2,2]')
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree || AUTHORED_INITIAL))
 
   const { tree, inputError } = useMemo(() => {
     try {

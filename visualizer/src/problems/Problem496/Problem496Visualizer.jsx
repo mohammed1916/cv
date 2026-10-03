@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('next-greater-element-i')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -61,10 +63,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('next-greater-element-i', [
-  { label: 'Example 1', nums1: [4, 1, 2], nums2: [1, 3, 4, 2] },
-  { label: 'Example 2', nums1: [2, 4], nums2: [1, 2, 3, 4] },
-])
+const EXAMPLES = getExamplesOr('next-greater-element-i', [])
 
 function generateSteps(nums1, nums2) {
   const steps = []
@@ -289,8 +288,8 @@ const SOLUTION_CODE_INLINE = [
 
 export default function Problem496Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nums1Input, setNums1Input] = useState("[4,1,2]");
-  const [nums2Input, setNums2Input] = useState("[1,3,4,2]");
+  const [nums1Input, setNums1Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums1));
+  const [nums2Input, setNums2Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums2));
   const { nums1, nums2, inputError } = useMemo(() => {
     try {
       const parsedNums1 = JSON.parse(nums1Input); if (!Array.isArray(parsedNums1)) throw new Error('nums1 must be an array');

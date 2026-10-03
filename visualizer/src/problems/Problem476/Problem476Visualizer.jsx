@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('number-complement')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -206,7 +208,7 @@ function VisualizationPanel({ num, step, applyEx }) {
 
 export default function Problem476Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numInput, setNumInput] = useState(5);
+  const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.num));
   const { num, inputError } = useMemo(() => {
     try {
       const parsedNum = Number(numInput); if (isNaN(parsedNum)) throw new Error('num must be a number');

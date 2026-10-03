@@ -1,41 +1,12 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import ConsecutiveStory from "./ConsecutiveStory";
 import { CODE, buildConsecutiveStory } from "./algorithm";
 import { consecutiveNarrative } from "./consecutiveNarrative";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./LongestConsecutiveVisualizer.css";
 
-const registryExamples = getExamples("longest-consecutive-sequence") || [];
-const EXAMPLES = [
-  ...registryExamples.map((ex) => ({
-    label: ex.label,
-    input: JSON.stringify(ex.nums),
-  })),
-  {
-    label: "Classic [100,4,200,1,3,2]",
-    input: "[100, 4, 200, 1, 3, 2]",
-  },
-  {
-    label: "Long chain [0..8]",
-    input: "[0, 3, 7, 2, 5, 8, 4, 6, 0, 1]",
-  },
-  {
-    label: "Negative numbers",
-    input: "[-2, -3, -1, 10, 11]",
-  },
-  {
-    label: "Duplicates [1,2,0,1]",
-    input: "[1, 2, 0, 1]",
-  },
-  {
-    label: "Single element",
-    input: "[42]",
-  },
-  {
-    label: "Empty array",
-    input: "[]",
-  },
-];
+const EXAMPLES = getAuthoredExamples('local:128');
 
 const definition = {
   narrative: consecutiveNarrative,

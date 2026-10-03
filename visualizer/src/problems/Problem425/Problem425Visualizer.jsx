@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('word-squares')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -20,9 +22,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('word-squares', [
-  { label: 'Example 1', words: ['ball', 'area', 'lead', 'lady'] },
-])
+const EXAMPLES = getExamplesOr('word-squares', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def wordSquares(words):' },
@@ -257,7 +257,7 @@ function VisualizationPanel({ words, step, applyEx }) {
 
 export default function Problem425Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [wordsInput, setWordsInput] = useState("[\"abat\",\"baba\",\"atan\",\"tata\"]");
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words));
   const { words, inputError } = useMemo(() => {
     try {
       const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');

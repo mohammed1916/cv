@@ -1,4 +1,6 @@
-﻿import { createPortal } from 'react-dom'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('distinct-subsequences')[0];
+import { createPortal } from 'react-dom'
 import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity"
@@ -36,8 +38,8 @@ const EXAMPLES = getExamples('distinct-subsequences');
 
 export default function DistinctSubsequencesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("rabbbit");
-  const [tInput, setTInput] = useState("rabbit");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+  const [tInput, setTInput] = useState(String(AUTHORED_INITIAL.t));
   const {story,inputError}=useMemo(()=>{
     try{return {story:buildSubsequenceStory(sInput,tInput),inputError:''};}
     catch(error){return {story:null,inputError:error.message};}

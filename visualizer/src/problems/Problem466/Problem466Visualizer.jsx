@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('count-the-repetitions')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -247,8 +249,8 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 
 export default function Problem466Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [s1Input, setS1Input] = useState("acb");
-  const [s2Input, setS2Input] = useState("ab");
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1));
+  const [s2Input, setS2Input] = useState(String(AUTHORED_INITIAL.s2));
   const { s1, s2, inputError } = useMemo(() => {
     try {
       const parsedS1 = s1Input;

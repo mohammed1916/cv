@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('split-strings')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -324,7 +326,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function SplitStringsVisualizer() {
   const examples = useMemo(() => getExamplesOr('split-strings', []), [])
-  const [strsInput, setStrsInput] = useState('["ab1de","xyz"]')
+  const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs || AUTHORED_INITIAL))
 
   const { strs, inputError } = useMemo(() => {
     try {

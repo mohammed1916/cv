@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('palindromic-substrings')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -123,7 +125,7 @@ function VisualizationPanel({ s, step, getCharClass, found, applyExample }) {
 }
 
 export default function PalindromicSubstringsVisualizer() {
-    const [sInput, setSInput] = useState('abc')
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
     const s = sInput.slice(0, 12)
 

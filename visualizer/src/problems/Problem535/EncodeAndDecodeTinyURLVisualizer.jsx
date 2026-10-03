@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('encode-and-decode-tinyurl')[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -337,7 +339,7 @@ function VisualizationPanel({ step, applyEx }) {
 }
 
 export default function EncodeAndDecodeTinyURLVisualizer() {
-  const [urlInput, setUrlInput] = useState(DEFAULT_EX.url);
+  const [urlInput, setUrlInput] = useState(AUTHORED_INITIAL.url);
   const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label);
 
   // Plain string input - no JSON parsing, just validation.

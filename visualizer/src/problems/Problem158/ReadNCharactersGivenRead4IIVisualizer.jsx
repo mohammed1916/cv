@@ -19,10 +19,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('read-n-characters-given-read4-ii', [
-  { label: 'Example 1', file: 'abcdefghij', calls: [[3], [2], [4]] },
-  { label: 'Example 2', file: 'abcdefghij', calls: [[1], [0], [4], [5]] },
-])
+const EXAMPLES = getExamplesOr('read-n-characters-given-read4-ii', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'class Solution:' },

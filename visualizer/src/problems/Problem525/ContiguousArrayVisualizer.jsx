@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('contiguous-array')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -260,9 +262,9 @@ function VisualizationPanel({ arr, step, applyEx }) {
 }
 
 export default function ContiguousArrayVisualizer() {
-  const DEFAULT_NUMS = EXAMPLES[0]?.nums ?? [0, 1]
 
-  const [numsInput, setNumsInput] = useState(JSON.stringify(DEFAULT_NUMS))
+
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { nums, inputError } = useMemo(() => {
@@ -395,7 +397,7 @@ export default function ContiguousArrayVisualizer() {
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
         )}
       </FloatingPanel>
-      
+
     </div>
   )
 }

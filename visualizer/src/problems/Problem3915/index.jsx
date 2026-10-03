@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -16,12 +17,7 @@ const definition = {
     { id: 'fall', label: 'Query larger ↓', description: 'Extend a rising state with a strictly larger endpoint.' },
     { id: 'done', label: 'Complete', description: 'Reconstruct an optimal alternating path.' },
   ],
-  examples: [
-    { label: 'Distance two', input: '{"nums":[5,4,2],"k":2}' },
-    { label: 'Alternating path', input: '{"nums":[3,5,4,2,4],"k":1}' },
-    { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":1}' },
-    { label: 'Singleton', input: '{"nums":[5],"k":1}' },
-  ],
+  examples: getAuthoredExamples('local:3915'),
 }
 
 function AlternatingSubsequence() {

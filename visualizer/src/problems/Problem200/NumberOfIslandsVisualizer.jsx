@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('number-of-islands')[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -167,7 +169,7 @@ const ISLAND_COLORS = [
 ]
 
 export default function NumberOfIslandsVisualizer() {
-  const [gridInput, setGridInput] = useState(EXAMPLES[1].gridStr)
+  const [gridInput, setGridInput] = useState(AUTHORED_INITIAL.gridStr)
 
   const { grid, inputError } = useMemo(() => {
     try {

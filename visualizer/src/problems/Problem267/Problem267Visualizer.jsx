@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -30,12 +31,7 @@ const SOLUTION_CODE = [
     { line: 12, text: '    backtrack("", half); return result' },
 ]
 
-const FALLBACK_EXAMPLES = [
-    { label: 'Two pairs', input: ['aabb'] },
-    { label: 'Middle character', input: ['aabbc'] },
-    { label: 'Impossible', input: ['abc'] },
-    { label: 'Repeated character', input: ['aaa'] },
-]
+const FALLBACK_EXAMPLES = getAuthoredExamples('local:267')
 
 function generateSteps(input) {
     const text = String(Array.isArray(input) ? (input[0] ?? '') : input ?? '')

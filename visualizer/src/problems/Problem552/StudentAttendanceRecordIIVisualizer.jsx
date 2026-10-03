@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('student-attendance-record-ii')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -244,16 +246,12 @@ function generateSteps(nStr) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("student-attendance-record-ii", [
-  { label: "Example 1", n: "2" },
-  { label: "Example 2", n: "1" },
-  { label: "Example 3", n: "10" },
-]);
+const EXAMPLES = getExamplesOr("student-attendance-record-ii", []);
 
 const RUN_LABELS = ["l=0", "l=1", "l=2"];
 
 export default function StudentAttendanceRecordIIVisualizer() {
-  const [nInput, setNInput] = useState("2");
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
   const [panelDivs, setPanelDivs] = useState(null);
 
   const inputError = useMemo(() => {

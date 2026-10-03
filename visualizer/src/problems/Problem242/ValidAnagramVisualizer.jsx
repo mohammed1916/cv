@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('valid-anagram')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -104,8 +106,8 @@ function generateSteps(s, t) {
 const EXAMPLES = getExamples('valid-anagram')
 
 export default function ValidAnagramVisualizer() {
-    const [sInput, setSInput] = useState('anagram')
-    const [tInput, setTInput] = useState('nagaram')
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+    const [tInput, setTInput] = useState(AUTHORED_INITIAL.t)
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

@@ -190,20 +190,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('max-area-of-island', [
-  {
-    label: 'Basic',
-    gridStr: '[[1,1,0,0,0],[1,1,0,0,0],[0,0,1,0,0],[0,0,0,1,1]]',
-  },
-  {
-    label: 'Dense',
-    gridStr: '[[1,1,1],[0,1,0],[1,1,1]]',
-  },
-  {
-    label: 'Sparse',
-    gridStr: '[[0,0,0],[0,1,0],[0,0,0]]',
-  },
-])
+const EXAMPLES = getExamplesOr('max-area-of-island', [])
 
 const ISLAND_COLORS = [
   '#3b82f6',

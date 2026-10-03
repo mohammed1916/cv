@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-kgroup')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -137,8 +139,8 @@ function generateSteps(listIn, k) {
 
 export default function ReverseKGroupVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [listInput, setListInput] = useState("[1,2,3,4,5]");
-  const [kInput, setKInput] = useState(2);
+  const [listInput, setListInput] = useState(JSON.stringify(AUTHORED_INITIAL.list));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { list, k, inputError } = useMemo(() => {
     try {
       const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');

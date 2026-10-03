@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:90')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -27,10 +30,7 @@ const LINE_PATTERN_MAP = {
   13: 'done',
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', nums: [1, 2, 2] },
-  { label: 'Example 2', nums: [0] },
-]
+const EXAMPLES = getAuthoredExamples('local:90')
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def subsetsWithDup(nums):' },
@@ -275,7 +275,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem90Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,2,2]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

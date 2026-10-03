@@ -19,10 +19,7 @@ import PathSumStory from './PathSumStory'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 1: 'init', 2: 'done', 3: 'visit', 4: 'check', 5: 'recurse', 6: 'recurse', 7: 'backtrack' }
 const PATTERNS = ['init', 'visit', 'descend', 'reject', 'found', 'backtrack', 'done']
-const EXAMPLES = getExamplesOr('path-sum', [
-  { label: 'Example 1', root: [5, 4, 8, 11, null, 13, 4, 7, 2, null, 1], targetSum: 22 },
-  { label: 'Example 2', root: [1, 2, 3], targetSum: 5 },
-])
+const EXAMPLES = getExamplesOr('path-sum', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def hasPathSum(root, targetSum):' },

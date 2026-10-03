@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-increasing-path')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -193,7 +195,7 @@ function VisualizationPanel({ EXAMPLES, ex, matrix, dpGrid, activeCell, neighbor
 
 export default function LongestIncreasingPathVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [matrixInput, setMatrixInput] = useState("[[9,9,4],[6,6,8],[2,1,1]]");
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix));
   const { matrix, inputError } = useMemo(() => {
     try {
       const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');

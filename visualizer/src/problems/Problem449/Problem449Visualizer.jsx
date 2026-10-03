@@ -59,11 +59,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('serialize-and-deserialize-bst', [
-  { label: 'Example 1', tree: [2, 1, 3], expected: '2,1,3,#,#,#,#' },
-  { label: 'Example 2', tree: [1, 0, 50, null, null, 25, 75], expected: '1,0,50,#,#,25,75' },
-  { label: 'Example 3', tree: [5, 3, 7], expected: '5,3,7,#,#,#,#' },
-])
+const EXAMPLES = getExamplesOr('serialize-and-deserialize-bst', [])
 
 const SNIPPETS = [
   { id: 'serialize', label: 'Serialize (DFS)', lines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },

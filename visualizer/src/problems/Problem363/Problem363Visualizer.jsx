@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -186,34 +187,7 @@ function generateSteps(matrix, K) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple 2×2',
-    matrix: [
-      [1, 0],
-      [0, -2],
-    ],
-    K: 0,
-  },
-  {
-    label: 'Constraint Binding',
-    matrix: [
-      [5, -4, -3],
-      [4, -3, 4],
-      [-3, 3, -4],
-    ],
-    K: 3,
-  },
-  {
-    label: 'Optimization',
-    matrix: [
-      [2, 1, -1],
-      [-1, -1, 2],
-      [1, 0, -1],
-    ],
-    K: 2,
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:363')
 
 export default function Problem363Visualizer() {
   const [exIdx, setExIdx] = useState(0)

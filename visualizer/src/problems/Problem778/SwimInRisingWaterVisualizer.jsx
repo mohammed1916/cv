@@ -1,4 +1,5 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -45,11 +46,7 @@ const SOLUTION_CODE = [
   { line: 30, text: '        return left' },
 ]
 
-const EXAMPLES = [
-  { label: '2 × 2 baseline', input: [[0, 2], [1, 3]] },
-  { label: 'Single cell', input: [[0]] },
-  { label: '3 × 3 winding path', input: [[0, 1, 2], [5, 4, 3], [6, 7, 8]] },
-]
+const EXAMPLES = getAuthoredExamples('local:778')
 
 function generateSteps(grid) {
   const steps = []

@@ -404,13 +404,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 export default function PalindromeSubsequenceVisualizer() {
   const examples = useMemo(
     () =>
-      getExamplesOr('palindrome-subsequence', [
-        { label: 'bbbab', s: 'bbbab' },
-        { label: 'cbbd', s: 'cbbd' },
-        { label: 'a', s: 'a' },
-        { label: 'ac', s: 'ac' },
-        { label: 'racecar', s: 'racecar' },
-      ]),
+      getExamplesOr('palindrome-subsequence', []),
     []
   )
 

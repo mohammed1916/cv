@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +19,7 @@ const SOLUTION_CODE = getSolutionCode('sum-of-left-leaves')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', tree: { val: 3, left: { val: 9 }, right: { val: 20, left: { val: 15 }, right: { val: 7 } } }, expected: 24 },
-  { label: 'Single', tree: { val: 1 }, expected: 0 },
-  { label: 'Left Only', tree: { val: 1, left: { val: 2 } }, expected: 2 },
-]
+const EXAMPLES = getAuthoredExamples('local:404')
 
 function generateSteps(tree) {
   const steps = []

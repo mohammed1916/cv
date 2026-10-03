@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('array-nesting')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -358,7 +360,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function ArrayNestingVisualizer() {
   const examples = useMemo(() => getExamplesOr('array-nesting', []), [])
-  const [arrayInput, setArrayInput] = useState("[5,4,0,3,1,6,2]");
+  const [arrayInput, setArrayInput] = useState(JSON.stringify(AUTHORED_INITIAL.array || AUTHORED_INITIAL));
   const { array, inputError } = useMemo(() => {
     try {
       const arr = JSON.parse(arrayInput)

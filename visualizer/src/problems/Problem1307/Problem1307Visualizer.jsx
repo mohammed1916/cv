@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('verbal-arithmetic-puzzle')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -20,9 +22,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('verbal-arithmetic-puzzle', [
-  { label: 'Example 1', equation: 'SEND+MORE=MONEY' },
-])
+const EXAMPLES = getExamplesOr('verbal-arithmetic-puzzle', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def isValidWordSquare(equation):' },
@@ -180,7 +180,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem1307Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [equationInput, setEquationInput] = useState("SEND+MORE=MONEY");
+  const [equationInput, setEquationInput] = useState(String(AUTHORED_INITIAL.equation));
   const { equation, inputError } = useMemo(() => {
     try {
       const parsedEquation = equationInput;

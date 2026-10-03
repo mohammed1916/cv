@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('search-insert-position')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -128,8 +130,8 @@ function generateSteps(nums, target) {
 const EXAMPLES = getExamples('search-insert-position')
 
 export default function SearchInsertPositionVisualizer() {
-  const [numsInput, setNumsInput] = useState('[1, 3, 5, 6]')
-  const [targetInput, setTargetInput] = useState('5')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { nums, target, inputError } = useMemo(() => {
     try {

@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-substring-k-repeating')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -136,15 +138,11 @@ function generateSteps(s, k) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('longest-substring-k-repeating', [
-  { label: 'Example 1', s: 'aaab', k: 3 },
-  { label: 'Example 2', s: 'ababbc', k: 2 },
-  { label: 'Example 3', s: 'aaabccccaabbaac', k: 3 },
-])
+const EXAMPLES = getExamplesOr('longest-substring-k-repeating', [])
 
 export default function Problem395Visualizer() {
-  const [sInput, setSInput] = useState('aaab')
-  const [kInput, setKInput] = useState('3')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
 
   const { s, k, inputError } = useMemo(() => {
     try {

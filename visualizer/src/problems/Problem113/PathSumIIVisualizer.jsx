@@ -1,6 +1,8 @@
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { generateSteps } from './algorithm'
+import { getExamples } from '../../config/examplesRegistry'
+const EXAMPLES = getExamples('path-sum-ii');
 import StoryPanel from '../../components/shared/StoryPanel'
 import TreeDiagram from '../../components/shared/TreeDiagram'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -83,8 +85,8 @@ function StatePanel({ step }) {
 }
 
 export default function PathSumIIVisualizer() {
-    const [arrInput, setArrInput] = useState('[5,4,8,11,null,13,4,7,2,null,null,5,1]')
-    const [targetInput, setTargetInput] = useState('22')
+    const [arrInput, setArrInput] = useState(JSON.stringify(EXAMPLES[0].root))
+    const [targetInput, setTargetInput] = useState(String(EXAMPLES[0].targetSum))
 
     const { steps, inputError } = useMemo(() => {
         try {
@@ -125,7 +127,12 @@ export default function PathSumIIVisualizer() {
                         handleReset()
                     }}
                     inputError={inputError}
-                    showExamples={false}
+                    examples={EXAMPLES}
+                    applyExample={example => {
+                        setArrInput(JSON.stringify(example.root));
+                        setTargetInput(String(example.targetSum));
+                        handleReset();
+                    }}
                 />
                 <TreeVisualizationPanel step={step} positions={positions} edges={edges} allNodes={allNodes} />
             </div>

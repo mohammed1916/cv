@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('combination-sum')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -221,8 +223,8 @@ function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, li
 }
 
 export default function CombinationSumVisualizer() {
-  const [candidatesInput, setCandidatesInput] = useState('[2, 3, 6, 7]')
-  const [targetInput, setTargetInput] = useState('7')
+  const [candidatesInput, setCandidatesInput] = useState(JSON.stringify(AUTHORED_INITIAL.candidates))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

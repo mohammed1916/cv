@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-permutation')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -116,7 +118,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
 export default function Problem484Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("DI");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('robot-room-cleaner')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -45,10 +47,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('robot-room-cleaner', [
-  { label: 'Example 1', room: [[1, 1, 1], [1, 1, 1], [1, 1, 1]] },
-  { label: 'Example 2', room: [[1, 0, 1], [1, 1, 1], [1, 0, 1]] },
-])
+const EXAMPLES = getExamplesOr('robot-room-cleaner', [])
 
 function generateSteps(room) {
   const steps = []
@@ -232,7 +231,7 @@ function VisualizationPanel({ room, step, applyEx }) {
 
 export default function Problem489Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [roomInput, setRoomInput] = useState("[[1,1,1,0],[1,0,1,0],[1,1,1,1]]");
+  const [roomInput, setRoomInput] = useState(JSON.stringify(AUTHORED_INITIAL.room));
   const { room, inputError } = useMemo(() => {
     try {
       const parsedRoom = JSON.parse(roomInput); if (!Array.isArray(parsedRoom)) throw new Error('room must be an array');

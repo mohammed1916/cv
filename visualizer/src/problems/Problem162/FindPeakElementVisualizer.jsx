@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-peak-element')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -57,7 +59,7 @@ const BAR_MAX_H = 120;
 
 export default function FindPeakElementVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,2,3,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

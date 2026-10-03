@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:367')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -204,13 +207,7 @@ function generateSteps(num) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Perfect Square (16)', value: 16 },
-    { label: 'Not Square (17)', value: 17 },
-    { label: 'Edge Case (1)', value: 1 },
-    { label: 'Large Perfect (10000)', value: 10000 },
-    { label: 'Not Perfect (99)', value: 99 },
-]
+const EXAMPLES = getAuthoredExamples('local:367')
 
 function SearchVisualizationPanel({ step, numInput, setNumInput, applyExample, handleReset }) {
     const numVal = Math.max(1, Math.floor(Number(numInput) || 1))
@@ -472,7 +469,7 @@ function ResultPanel({ step }) {
 }
 
 export default function Problem367Visualizer() {
-    const [numInput, setNumInput] = useState('16')
+    const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.value))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

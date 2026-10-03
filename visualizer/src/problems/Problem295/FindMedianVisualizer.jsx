@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-median-data-stream')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -282,7 +284,7 @@ function VisualizationPanel({ step, heapView, setHeapView, EXAMPLES, applyExampl
 }
 
 export default function FindMedianVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,2,3]");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
     const [heapView, setHeapView] = useState("tree"); // "tree" | "list"
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 

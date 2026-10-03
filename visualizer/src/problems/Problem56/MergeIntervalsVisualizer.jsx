@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('merge-intervals')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -138,7 +140,7 @@ function generateSteps(originalIntervals) {
 const EXAMPLES = getExamples('merge-intervals')
 
 export default function MergeIntervalsVisualizer() {
-  const [intervalsInput, setIntervalsInput] = useState('[[1,3],[2,6],[8,10],[15,18]]')
+  const [intervalsInput, setIntervalsInput] = useState(JSON.stringify(AUTHORED_INITIAL.intervals))
 
   const { originalIntervals, inputError } = useMemo(() => {
     try {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('random-flip-matrix')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -207,8 +209,8 @@ function VisualizationPanel({ m, n, flips, step }) {
 }
 
 export default function RandomFlipMatrixVisualizer() {
-  const [mInput, setMInput] = useState(String(EXAMPLES?.[0]?.m ?? FALLBACK.m))
-  const [nInput, setNInput] = useState(String(EXAMPLES?.[0]?.n ?? FALLBACK.n))
+  const [mInput, setMInput] = useState(String(AUTHORED_INITIAL.m ?? FALLBACK.m))
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n ?? FALLBACK.n))
   const [flipsInput, setFlipsInput] = useState(
     JSON.stringify(EXAMPLES?.[0]?.flips ?? FALLBACK.flips)
   )

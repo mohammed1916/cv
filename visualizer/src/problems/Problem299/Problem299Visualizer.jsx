@@ -142,11 +142,7 @@ function generateSteps(secret, guess) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('bulls-and-cows', [
-  { label: 'Example 1', secret: '1807', guess: '7810' },
-  { label: 'Example 2', secret: '1123', guess: '0111' },
-  { label: 'All bulls', secret: '1234', guess: '1234' },
-])
+const EXAMPLES = getExamplesOr('bulls-and-cows', [])
 
 export default function Problem299Visualizer() {
   const [secret, setSecret] = useState('1807')

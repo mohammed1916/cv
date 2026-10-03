@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -123,26 +124,7 @@ function generateSteps(n, k, times) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    n: 4,
-    k: 2,
-    times: [[2, 1, 1], [2, 3, 1], [3, 4, 1]],
-  },
-  {
-    label: 'Example 2',
-    n: 2,
-    k: 1,
-    times: [[1, 2, 1]],
-  },
-  {
-    label: 'Example 3',
-    n: 4,
-    k: 1,
-    times: [[1, 2, 1], [1, 4, 4], [2, 3, 2], [3, 4, 1]],
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:743')
 
 export default function NetworkDelayTimeVisualizer() {
   const [timesInput, setTimesInput] = useState(JSON.stringify(EXAMPLES[0].times))

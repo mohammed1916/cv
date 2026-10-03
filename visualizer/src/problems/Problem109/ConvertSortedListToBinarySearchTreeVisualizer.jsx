@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('convert-sorted-list-to-binary-search-tree')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { parseSortedList, buildSortedListStory } from "./algorithm";
@@ -19,11 +21,7 @@ import PatternLegend from "../../components/PatternLegend";
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 3: "return", 4: "compare", 5: "update", 6: "visit", 7: "visit", 8: "return", 12: "visit", 14: "done" };
 const PATTERNS = ["visit", "compare", "update", "return", "done"];
-const EXAMPLES = getExamplesOr("convert-sorted-list-to-binary-search-tree", [
-  { label: "Example 1", list: [1, 2, 3, 4, 5, 6] },
-  { label: "Example 2", list: [-10, -3, 0, 5, 9] },
-  { label: "Example 3", list: [] },
-]);
+const EXAMPLES = getExamplesOr("convert-sorted-list-to-binary-search-tree", []);
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def sortedListToBST(head):" },
@@ -45,7 +43,7 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
 export default function ConvertSortedListToBinarySearchTreeVisualizer() {
-  const [listInput, setListInput] = useState("[1, 2, 3, 4, 5, 6]");
+  const [listInput, setListInput] = useState(JSON.stringify(AUTHORED_INITIAL.list));
 
   const { list, inputError } = useMemo(() => {
     try {

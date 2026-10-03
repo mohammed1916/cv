@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('basic-calculator-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -160,14 +162,10 @@ function generateSteps(exprRaw) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('basic-calculator-ii', [
-  { label: 'Example 1', expr: '3+2*2' },
-  { label: 'Example 2', expr: ' 3/2 ' },
-  { label: 'Example 3', expr: ' 3+5 / 2 ' },
-])
+const EXAMPLES = getExamplesOr('basic-calculator-ii', [])
 
 export default function Problem227Visualizer() {
-  const [exprInput, setExprInput] = useState('3+2*2')
+  const [exprInput, setExprInput] = useState(AUTHORED_INITIAL.expr)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(

@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +19,7 @@ const SOLUTION_CODE = getSolutionCode('queue-reconstruction-by-height')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', people: [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]], expected: [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] },
-  { label: 'Ex2', people: [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]], expected: [[4,0],[5,0],[2,2],[3,2],[1,4],[6,0]] },
-  { label: 'Simple', people: [[1,0]], expected: [[1,0]] },
-]
+const EXAMPLES = getAuthoredExamples('local:406')
 
 function generateSteps(people) {
   const steps = []

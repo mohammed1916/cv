@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('lfucache')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -72,6 +74,10 @@ function generateSteps(capacity, ops) {
     steps.push({ activeLine: 3, ...getState(), activeKey: null, result: null, op: "init", phase: "init", evicted: null, message: `LFUCache(capacity=${capacity})` });
 
     for (const op of ops) {
+          if (capacity === 0 && op.type === 'put') {
+              steps.push({ activeLine: 12, ...getState(), activeKey: op.key, result: null, op: `put(${op.key},${op.val})`, phase: 'skip', evicted: null, message: 'Zero capacity: this write stores no entry.' });
+              continue;
+          }
         if (op.type === "get") {
             if (!(op.key in keyVal)) {
                 steps.push({ activeLine: 8, ...getState(), activeKey: op.key, result: -1, op: `get(${op.key})`, phase: "miss", evicted: null, message: `get(${op.key}) → miss, return -1` });
@@ -108,8 +114,8 @@ function generateSteps(capacity, ops) {
 
 export default function LFUCacheVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [capacityInput, setCapacityInput] = useState(2);
-  const [opsInput, setOpsInput] = useState("[{\"type\":\"put\",\"key\":1,\"val\":1},{\"type\":\"put\",\"key\":2,\"val\":2},{\"type\":\"get\",\"key\":1},{\"type\":\"put\",\"key\":3,\"val\":3},{\"type\":\"get\",\"key\":2},{\"type\":\"get\",\"key\":3},{\"type\":\"put\",\"key\":4,\"val\":4},{\"type\":\"get\",\"key\":1},{\"type\":\"get\",\"key\":3},{\"type\":\"get\",\"key\":4}]");
+  const [capacityInput, setCapacityInput] = useState(String(AUTHORED_INITIAL.capacity));
+  const [opsInput, setOpsInput] = useState(JSON.stringify(AUTHORED_INITIAL.ops));
   const { capacity, ops, inputError } = useMemo(() => {
     try {
       const parsedCapacity = Number(capacityInput); if (isNaN(parsedCapacity)) throw new Error('capacity must be a number');

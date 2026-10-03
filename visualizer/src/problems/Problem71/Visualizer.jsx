@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('simplify-path')[0];
 import { getExamples } from "../../config/examplesRegistry";
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
@@ -388,7 +390,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem71Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [pathInput, setPathInput] = useState("/home//foo/");
+  const [pathInput, setPathInput] = useState(String(AUTHORED_INITIAL.path));
   const { path, inputError } = useMemo(() => {
     try {
       const parsedPath = pathInput;

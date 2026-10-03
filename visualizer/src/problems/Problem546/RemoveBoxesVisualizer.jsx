@@ -49,11 +49,7 @@ const SOLUTION_CODE = [
   { line: 21, text: '    return dp(0, len(boxes) - 1, 0)' },
 ]
 
-const EXAMPLES = getExamplesOr('remove-boxes', [
-  { label: 'Example 1', text: '1,3,2,2,2,3,4,3,1' },
-  { label: 'Example 2', text: '1,1,1' },
-  { label: 'Merge pays', text: '1,2,1,2,1' },
-]).map((ex) => ({
+const EXAMPLES = getExamplesOr('remove-boxes', []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.boxes ?? []).join(','),
 }))

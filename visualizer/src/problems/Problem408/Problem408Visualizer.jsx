@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +19,7 @@ const SOLUTION_CODE = getSolutionCode('valid-word-abbreviation')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Valid', word: 'internationalization', abbr: 'i18n', expected: true },
-  { label: 'Invalid', word: 'apple', abbr: 'apl', expected: false },
-  { label: 'Simple', word: 'abc', abbr: 'a1c', expected: true },
-]
+const EXAMPLES = getAuthoredExamples('local:408')
 
 function generateSteps(word, abbr) {
   const steps = []

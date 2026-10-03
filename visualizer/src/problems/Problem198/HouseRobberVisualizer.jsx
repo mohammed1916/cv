@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('house-robber')[0];
+import { useState, useMemo, useCallback } from 'react'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import AnimatedIterationList from '../../components/shared/AnimatedIterationList'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -97,7 +99,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('house-robber')
 
 export default function HouseRobberVisualizer({ problem }) {
-  const [numsInput, setNumsInput] = useState('[2,7,9,3,1]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
   const codeLines = useProblemCode(problem, 'house-robber')
 
   const { value: nums, error: inputError } = useParsedInput(

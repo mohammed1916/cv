@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:505')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -117,11 +120,7 @@ function generateSteps(n, k) {
 }
 
 function VisualizationPanel({ n, k, step, applyEx }) {
-  const EXAMPLES_LIST = [
-    { label: 'n=10, k=3', n: 10, k: 3 },
-    { label: 'n=100, k=2', n: 100, k: 2 },
-    { label: 'n=7, k=4', n: 7, k: 4 },
-  ]
+  const EXAMPLES_LIST = getAuthoredExamples('local:505')
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
@@ -224,8 +223,8 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
 export default function DistributeCandiesPeopleVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","candies":7,"num_people":4});
-  const [nInput, setNInput] = useState("");
-  const [kInput, setKInput] = useState("");
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { n, k, inputError } = useMemo(() => {
     try {
       const parsedN = nInput;

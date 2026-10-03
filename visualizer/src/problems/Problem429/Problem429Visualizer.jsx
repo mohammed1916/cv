@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('nary-tree-level-order')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -22,9 +24,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('nary-tree-level-order', [
-  { label: 'Example 1', root: [1, null, 3, 2, 4, null, 5, 6] },
-])
+const EXAMPLES = getExamplesOr('nary-tree-level-order', [])
 
 // Build an N-ary tree from LeetCode level-order-with-null-separators encoding.
 function buildTree(arr) {
@@ -196,7 +196,7 @@ function VisualizationPanel({ root, step }) {
 
 export default function Problem429Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [rootInput, setRootInput] = useState("[1,null,3,2,4,null,5,6]");
+  const [rootInput, setRootInput] = useState(JSON.stringify(AUTHORED_INITIAL.root));
   const { root: inputRoot, inputError } = useMemo(() => {
     try {
       const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('keyboard-row')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -241,7 +243,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function KeyboardRowVisualizer() {
   const examples = useMemo(() => getExamplesOr('keyboard-row', []), [])
-  const [wordsInput, setWordsInput] = useState('["Hello","Alaska","Dad","Peace"]')
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words || AUTHORED_INITIAL))
 
   const { words, inputError } = useMemo(() => {
     try {

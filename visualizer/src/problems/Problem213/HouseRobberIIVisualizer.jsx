@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('house-robber-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -107,7 +109,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('house-robber-ii')
 
 export default function HouseRobberIIVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,3,2]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

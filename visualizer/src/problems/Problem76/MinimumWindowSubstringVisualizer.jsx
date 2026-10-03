@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('minimum-window-substring')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
@@ -93,8 +95,8 @@ function snippetIdForPhase(phase) {
 export default function MinimumWindowSubstringVisualizer() {
   // Load solution code from registry
 
-  const [sInput, setSInput] = useState('ADOBECODEBANC')
-  const [tInput, setTInput] = useState('ABC')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [tInput, setTInput] = useState(AUTHORED_INITIAL.t)
   const s = sInput ?? ''
   const t = tInput ?? ''
 

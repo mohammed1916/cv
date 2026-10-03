@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('rotate-function')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -190,14 +192,10 @@ function generateSteps(numsStr) {
   }
 }
 
-const EXAMPLES = getExamplesOr('rotate-function', [
-  { label: 'Example 1', nums: '1,2,3,4' },
-  { label: 'Example 2', nums: '6,9,28,34,14' },
-  { label: 'Example 3', nums: '100,200,300' },
-])
+const EXAMPLES = getExamplesOr('rotate-function', [])
 
 export default function Problem396Visualizer() {
-  const [numsInput, setNumsInput] = useState('1,2,3,4')
+  const [numsInput, setNumsInput] = useState(AUTHORED_INITIAL.nums)
 
   const { nums, inputError } = useMemo(() => {
     try {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-leaves-of-binary-tree')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -235,11 +237,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamplesOr('find-leaves-of-binary-tree', [
-    { label: 'Simple', arr: [1, 2, 3] },
-    { label: 'Unbalanced', arr: [1, 2, null, 3, null, 4] },
-    { label: 'Single Node', arr: [1] },
-])
+const EXAMPLES = getExamplesOr('find-leaves-of-binary-tree', [])
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes, EXAMPLES, arrInput, setArrInput, applyExample, handleReset }) {
     return (
@@ -341,7 +339,7 @@ function ResultPanel({ step, inputError, collectedLeaves }) {
 }
 
 export default function Problem366Visualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3,4,5]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

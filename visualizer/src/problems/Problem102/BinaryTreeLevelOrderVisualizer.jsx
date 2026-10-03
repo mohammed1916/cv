@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('binary-tree-level-order')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -71,7 +73,7 @@ function ResultPanel({ step, inputError, LEVEL_COLORS }) {
 }
 
 export default function BinaryTreeLevelOrderVisualizer() {
-  const [arrInput, setArrInput] = useState("[3,9,20,null,null,15,7]");
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr));
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const {
     showPatternOverlay,

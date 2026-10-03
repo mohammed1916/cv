@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-line')[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -656,7 +658,7 @@ function VisualizationPanel({
 
 export default function LongestLineVisualizer() {
   const examples = useMemo(() => getExamplesOr("longest-line", []), []);
-  const [matrixInput, setMatrixInput] = useState("[[1,1,0],[0,1,1],[1,0,1]]");
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix || AUTHORED_INITIAL));
 
   const { matrix, inputError } = useMemo(() => {
     try {

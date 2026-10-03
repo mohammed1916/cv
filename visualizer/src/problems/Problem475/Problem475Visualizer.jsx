@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('heaters')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -192,8 +194,8 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
 
 export default function Problem475Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [housesInput, setHousesInput] = useState("[1,2,3]");
-  const [heatersInput, setHeatersInput] = useState("[2]");
+  const [housesInput, setHousesInput] = useState(JSON.stringify(AUTHORED_INITIAL.houses));
+  const [heatersInput, setHeatersInput] = useState(JSON.stringify(AUTHORED_INITIAL.heaters));
   const { houses, heaters, inputError } = useMemo(() => {
     try {
       const parsedHouses = JSON.parse(housesInput); if (!Array.isArray(parsedHouses)) throw new Error('houses must be an array');

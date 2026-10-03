@@ -39,7 +39,7 @@ function generateSteps({ nums1, nums2 }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('intersection-of-two-arrays', [{ label: 'Classic', nums1: [1, 2, 2, 1], nums2: [2, 2] }, { label: 'Two matches', nums1: [4, 9, 5], nums2: [9, 4, 9, 8, 4] }])
+const EXAMPLES = getExamplesOr('intersection-of-two-arrays', [])
 
 export default function IntersectionofTwoArraysVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

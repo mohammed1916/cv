@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('coin-change')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -115,8 +117,8 @@ function generateSteps(coins, amount) {
 const EXAMPLES = getExamples('coin-change')
 
 export default function CoinChangeVisualizer() {
-    const [coinsInput, setCoinsInput] = useState('[1,5,6,9]')
-    const [amountInput, setAmountInput] = useState('11')
+    const [coinsInput, setCoinsInput] = useState(JSON.stringify(AUTHORED_INITIAL.coins))
+    const [amountInput, setAmountInput] = useState(String(AUTHORED_INITIAL.amount))
 
     const { coins, amount, inputError } = useMemo(() => {
         try {

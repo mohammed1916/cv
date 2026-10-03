@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback, useEffect } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('maximum-gap')[0];
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -78,7 +80,7 @@ function generateSteps(nums) {
 
 export default function MaximumGapVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[3,6,9,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

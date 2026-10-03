@@ -1,4 +1,6 @@
-﻿import{useState,useMemo,useCallback}from'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('convert-bst-to-greater-tree')[0];
+import{useState,useMemo,useCallback}from'react'
 import{motion}from'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from'../../components/shared/FloatingPanel'
@@ -50,7 +52,7 @@ dfs(0);steps.push({activeLine:10,root,reversedSequence:seq,accumulated:acc,phase
 return steps}
 function VisualizationPanel({step,applyEx}){return(<div style={{display:'flex',flexDirection:'column',gap:20,padding:16}}><div style={{padding:12,backgroundColor:'#f0f9ff',borderRadius:6,borderLeft:'4px solid #0284c7'}}><div style={{fontSize:12,color:'#075985',fontStyle:'italic'}}>Transform BST to greater tree via reverse inorder traversal.</div></div><div><div style={{fontSize:13,fontWeight:600,color:'var(--text)',marginBottom:8}}>Examples</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{EXAMPLES.map(e=>(<button key={e.label}onClick={()=>applyEx(e)}style={{padding:'6px 12px',borderRadius:4,border:'1px solid var(--border)',cursor:'pointer',fontSize:12,backgroundColor:'var(--surface2)'}}>{e.label}</button>))}</div></div><div><div style={{fontSize:13,fontWeight:600,color:'var(--text)',marginBottom:8}}>Reverse Inorder Sequence</div><div style={{display:'flex',gap:6,flexWrap:'wrap'}}>{step?.reversedSequence?.map((val,idx)=>(<motion.div key={`val-${idx}`}style={{padding:'10px 14px',borderRadius:6,border:'2px solid',fontFamily:'monospace',fontSize:13,fontWeight:600,backgroundColor:'#dbeafe',borderColor:'#0284c7',color:'#0c4a6e'}}animate={{scale:1}}>{val}</motion.div>))}</div></div><motion.div style={{padding:16,backgroundColor:'#f0f9ff',borderRadius:6,border:'2px solid #0284c7',textAlign:'center'}}initial={{opacity:0}}animate={{opacity:1}}><div style={{fontSize:13,fontWeight:600,color:'#0c4a6e',marginBottom:8}}>Accumulated Sum</div><div style={{fontSize:28,fontWeight:'bold',color:'#027bba'}}>{step?.accumulated||0}</div><div style={{fontSize:12,color:'#027bba',marginTop:8}}>{step?.message||''}</div></motion.div></div>)}
 export default function ConvertBSTToGreaterTreeVisualizer(){
-const [rootInput, setRootInput] = useState(JSON.stringify(DEFAULT_EX.root))
+const [rootInput, setRootInput] = useState(JSON.stringify(AUTHORED_INITIAL.root))
 const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
 
 const { root, inputError } = useMemo(() => {

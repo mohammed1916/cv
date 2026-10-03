@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('arranging-coins')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -309,7 +311,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem441Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(5);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

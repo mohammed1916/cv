@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-substring-without-repeating')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -119,7 +121,7 @@ function generateSteps(s) {
 const EXAMPLES = getExamples('longest-substring-without-repeating')
 
 export default function LongestSubstringWithoutRepeatingVisualizer() {
-  const [strInput, setStrInput] = useState('abcabcbb')
+  const [strInput, setStrInput] = useState(AUTHORED_INITIAL.s)
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

@@ -124,11 +124,7 @@ function generateSteps(vals) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('rectangle-area', [
-  { label: 'Example 1', vals: { ax1: '-3', ay1: '0', ax2: '3', ay2: '4', bx1: '0', by1: '-1', bx2: '9', by2: '2' } },
-  { label: 'Example 2', vals: { ax1: '-2', ay1: '-2', ax2: '2', ay2: '2', bx1: '-2', by1: '-2', bx2: '2', by2: '2' } },
-  { label: 'Disjoint', vals: { ax1: '0', ay1: '0', ax2: '2', ay2: '2', bx1: '4', by1: '4', bx2: '6', by2: '6' } },
-])
+const EXAMPLES = getExamplesOr('rectangle-area', [])
 
 const DEFAULT_VALS = { ax1: '-3', ay1: '0', ax2: '3', ay2: '4', bx1: '0', by1: '-1', bx2: '9', by2: '2' }
 

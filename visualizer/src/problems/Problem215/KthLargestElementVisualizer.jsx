@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('kth-largest-element')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -59,8 +61,8 @@ function generateSteps(nums, k) {
 const EXAMPLES = getExamples('kth-largest-element')
 
 export default function KthLargestElementVisualizer() {
-  const [numsInput, setNumsInput] = useState('[3,2,1,5,6,4]')
-  const [kInput, setKInput] = useState('2')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

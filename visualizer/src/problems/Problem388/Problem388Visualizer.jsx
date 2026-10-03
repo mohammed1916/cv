@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -165,20 +166,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple Dir',
-    input: 'dir\n\tfile.txt',
-  },
-  {
-    label: 'Nested',
-    input: 'dir1\n\tfile1.txt\ndir2\n\tdir3\n\t\tfile2.txt',
-  },
-  {
-    label: 'Complex',
-    input: 'a\n\tb.txt\n\tc.txt\nd\n\te.txt',
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:388')
 
 export default function Problem388Visualizer() {
   const [exIdx, setExIdx] = useState(0)

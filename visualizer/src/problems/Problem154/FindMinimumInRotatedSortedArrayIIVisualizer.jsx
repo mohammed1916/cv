@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-minimum-in-rotated-sorted-array-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -19,10 +21,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('find-minimum-in-rotated-sorted-array-ii', [
-  { label: 'Example 1', nums: [1, 3, 5] },
-  { label: 'Example 2', nums: [2, 2, 2, 0, 1] },
-])
+const EXAMPLES = getExamplesOr('find-minimum-in-rotated-sorted-array-ii', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMin(nums):' },
@@ -266,7 +265,7 @@ function VisualizationPanel({ step }) {
 
 export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","nums":[1,3,5]});
-  const [numsInput, setNumsInput] = useState("[1,3,5]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -28,36 +29,7 @@ const SOLUTION_CODE = [
     { line: 13, text: "    return True" },
 ];
 
-const EXAMPLES = {
-    valid: {
-        label: "Valid",
-        board: [
-            ["5", "3", ".", ".", "7", ".", ".", ".", "."],
-            ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-            [".", "9", "8", ".", ".", ".", ".", "6", "."],
-            ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-            ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-            ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-            [".", "6", ".", ".", ".", ".", "2", "8", "."],
-            [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-            [".", ".", ".", ".", "8", ".", ".", "7", "9"],
-        ],
-    },
-    invalid: {
-        label: "Invalid (dup col)",
-        board: [
-            ["8", "3", ".", ".", "7", ".", ".", ".", "."],
-            ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-            [".", "9", "8", ".", ".", ".", ".", "6", "."],
-            ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-            ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-            ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-            [".", "6", ".", ".", ".", ".", "2", "8", "."],
-            [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-            [".", ".", ".", ".", "8", ".", ".", "7", "9"],
-        ],
-    },
-};
+const EXAMPLES = Object.fromEntries(getExamples('valid-sudoku').map((example,index)=>[index===0?'valid':`case${index}`,example]));
 
 const EXAMPLE_LIST = Object.values(EXAMPLES);
 

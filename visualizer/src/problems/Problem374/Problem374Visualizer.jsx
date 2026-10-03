@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -23,12 +24,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = ['adjust_left', 'adjust_right', 'calc_guess', 'call_guess', 'check_condition', 'done', 'equal', 'higher', 'init', 'lower']
 
 const EXAMPLES = getExamples('guess-number-higher-or-lower')
-const FALLBACK_EXAMPLES = [
-  { label: 'Middle target', input: { n: 10, pick: 6 } },
-  { label: 'Lower boundary', input: { n: 10, pick: 1 } },
-  { label: 'Upper boundary', input: { n: 10, pick: 10 } },
-  { label: 'Single number', input: { n: 1, pick: 1 } },
-]
+const FALLBACK_EXAMPLES = getAuthoredExamples('local:374')
 
 function generateSteps(n, pick) {
   const steps = []

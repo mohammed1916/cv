@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('kth-smallest-lexicographical-order')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -346,8 +348,8 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem440Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(13);
-  const [kInput, setKInput] = useState(2);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { n, k, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

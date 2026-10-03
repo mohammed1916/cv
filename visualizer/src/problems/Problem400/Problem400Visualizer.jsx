@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('nth-digit')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -193,14 +195,10 @@ function generateSteps(nStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('nth-digit', [
-  { label: 'Example 1', n: '3' },
-  { label: 'Example 2', n: '10' },
-  { label: 'Example 3', n: '15' },
-])
+const EXAMPLES = getExamplesOr('nth-digit', [])
 
 export default function Problem400Visualizer() {
-  const [nInput, setNInput] = useState('3')
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
   const [panelDivs, setPanelDivs] = useState(null)
 
   // Validates the input for the inline hint; generateSteps re-parses nInput

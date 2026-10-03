@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('shortest-palindrome')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -128,14 +130,10 @@ function generateSteps(sRaw) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('shortest-palindrome', [
-  { label: 'Example 1', s: 'aacecaaa' },
-  { label: 'Example 2', s: 'abcd' },
-  { label: 'Example 3', s: 'aabba' },
-])
+const EXAMPLES = getExamplesOr('shortest-palindrome', [])
 
 export default function Problem214Visualizer() {
-  const [sInput, setSInput] = useState('aacecaaa')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(

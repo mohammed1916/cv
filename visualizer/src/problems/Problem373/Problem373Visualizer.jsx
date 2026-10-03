@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-k-pairs-with-smallest-sums')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -156,16 +158,12 @@ function generateSteps(t1, t2, kText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('find-k-pairs-with-smallest-sums', [
-  { label: 'Example 1', nums1: '1,7,11', nums2: '2,4,6', k: '3' },
-  { label: 'Example 2', nums1: '1,1,2', nums2: '1,2,3', k: '2' },
-  { label: 'Example 3', nums1: '1,2', nums2: '3', k: '3' },
-])
+const EXAMPLES = getExamplesOr('find-k-pairs-with-smallest-sums', [])
 
 export default function Problem373Visualizer() {
   const [t1, setT1] = useState('1,7,11')
   const [t2, setT2] = useState('2,4,6')
-  const [kText, setKText] = useState('3')
+  const [kText, setKText] = useState(AUTHORED_INITIAL.k)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const inputError = useMemo(() => {

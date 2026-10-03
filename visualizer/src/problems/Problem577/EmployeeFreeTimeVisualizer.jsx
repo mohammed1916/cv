@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('employee-free-time')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -393,7 +395,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function EmployeeFreeTimeVisualizer() {
   const examples = useMemo(() => getExamplesOr('employee-free-time', []), [])
-  const [schedulesInput, setSchedulesInput] = useState('[[[1,2],[5,6]],[[1,3]],[[4,6]]]')
+  const [schedulesInput, setSchedulesInput] = useState(JSON.stringify(AUTHORED_INITIAL.schedules || AUTHORED_INITIAL))
 
   const { schedules, inputError } = useMemo(() => {
     try {

@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('perfect-rectangles')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -147,14 +149,10 @@ function generateSteps(rectangles) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('perfect-rectangles', [
-  { label: 'Example 1', rectangles: [[1,1,3,3],[2,0,3,1]] },
-  { label: 'Example 2', rectangles: [[1,1,2,3],[1,3,2,4],[3,1,4,2],[3,2,4,4]] },
-  { label: 'Example 3', rectangles: [[1,1,3,3],[2,0,3,2]] },
-])
+const EXAMPLES = getExamplesOr('perfect-rectangles', [])
 
 export default function Problem391Visualizer() {
-  const [rectanglesInput, setRectanglesInput] = useState('[[1,1,3,3],[2,0,3,1]]')
+  const [rectanglesInput, setRectanglesInput] = useState(JSON.stringify(AUTHORED_INITIAL.rectangles))
 
   const { rectangles, inputError } = useMemo(() => {
     try {

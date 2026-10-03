@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('ipo')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -93,10 +95,10 @@ function generateSteps(k, initW, profits, capital) {
 
 export default function IPOVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [kInput, setKInput] = useState(1);
-  const [wInput, setWInput] = useState(0);
-  const [profitsInput, setProfitsInput] = useState("[1,2,3]");
-  const [capitalInput, setCapitalInput] = useState("[0,1,1]");
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
+  const [wInput, setWInput] = useState(String(AUTHORED_INITIAL.w));
+  const [profitsInput, setProfitsInput] = useState(JSON.stringify(AUTHORED_INITIAL.profits));
+  const [capitalInput, setCapitalInput] = useState(JSON.stringify(AUTHORED_INITIAL.capital));
   const { k, w: inputW, profits, capital, inputError } = useMemo(() => {
     try {
       const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');

@@ -44,11 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('4sum-ii', [
-  { label: 'Example 1', nums1: [1, 2], nums2: [-2, -1], nums3: [-1, 2], nums4: [0, 2], expected: 2 },
-  { label: 'Example 2', nums1: [0], nums2: [0], nums3: [0], nums4: [0], expected: 1 },
-  { label: 'Example 3', nums1: [1, 0], nums2: [1, 0], nums3: [-1, 0], nums4: [0, 1], expected: 5 },
-])
+const EXAMPLES = getExamplesOr('4sum-ii', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },

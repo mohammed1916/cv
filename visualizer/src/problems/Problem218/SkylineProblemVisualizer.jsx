@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -35,12 +36,7 @@ const SOLUTION_CODE = [
   { line: 15, text: "    return result" },
 ]
 
-const EXAMPLES = [
-  { label: 'Overlapping', input: [[0,2,3],[2,5,3],[1,3,5]] },
-  { label: 'Disjoint', input: [[0,2,3],[4,6,4]] },
-  { label: 'Same height', input: [[1,3,2],[3,5,2]] },
-  { label: 'Single building', input: [[2,9,6]] },
-]
+const EXAMPLES = getAuthoredExamples('local:218')
 
 function generateSteps(buildings) {
   const steps = []

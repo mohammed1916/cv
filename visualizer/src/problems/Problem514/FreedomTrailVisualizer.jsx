@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('freedom-trail')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -297,8 +299,8 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
 export default function FreedomTrailVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [ringInput, setRingInput] = useState("godding");
-  const [keyInput, setKeyInput] = useState("gd");
+  const [ringInput, setRingInput] = useState(String(AUTHORED_INITIAL.ring));
+  const [keyInput, setKeyInput] = useState(String(AUTHORED_INITIAL.key));
   const { ring, key, inputError } = useMemo(() => {
     try {
       const parsedRing = ringInput;

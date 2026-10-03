@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('nqueensii')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -104,7 +106,7 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
 
 export default function NQueensIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(4);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (!Number.isInteger(parsedN) || parsedN < 1 || parsedN > 9) throw new Error('Use an integer n from 1 to 9.');

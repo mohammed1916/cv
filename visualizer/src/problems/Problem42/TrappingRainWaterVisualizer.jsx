@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('trapping-rain-water')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -135,7 +137,7 @@ function generateSteps(height) {
 const EXAMPLES = getExamples('trapping-rain-water')
 
 export default function TrappingRainWaterVisualizer() {
-  const [heightInput, setHeightInput] = useState('[0,1,0,2,1,0,1,3,2,1,2,1]')
+  const [heightInput, setHeightInput] = useState(JSON.stringify(AUTHORED_INITIAL.height))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

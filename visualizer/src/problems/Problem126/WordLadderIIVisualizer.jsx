@@ -18,10 +18,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('word-ladder-ii', [
-  { label: 'Example 1', beginWord: 'hit', endWord: 'cog', wordList: ['hot', 'dot', 'dog', 'lot', 'log', 'cog'] },
-  { label: 'Example 2', beginWord: 'hit', endWord: 'cog', wordList: ['hot', 'dot', 'dog', 'lot', 'log'] },
-])
+const EXAMPLES = getExamplesOr('word-ladder-ii', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findLadders(begin, end, wordList):' },

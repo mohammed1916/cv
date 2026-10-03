@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -42,7 +43,7 @@ const SOLUTION_CODE = SOLUTION_CODE_INLINE
 function generateSteps(prices) {
   const steps = []
   const n = prices.length
-  if (n <= 1) return steps
+  if (n <= 1) return [{ phase: 'done', activeLine: 3, i: 0, prices, hold: n ? [-prices[0]] : [], sold: n ? [0] : [], result: 0, message: 'At most one trading day: no completed transaction, so profit is zero.' }]
 
   const hold = Array(n).fill(0)
   const sold = Array(n).fill(0)
@@ -87,11 +88,7 @@ function generateSteps(prices) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Ex1', prices: [3, 3] },
-  { label: 'Ex2', prices: [3, 2, 6, 5, 0, 3] },
-  { label: 'Ex3', prices: [1, 2, 3, 0, 2] },
-]
+const EXAMPLES = getAuthoredExamples('local:309')
 
 export default function BestTimeBuySellStockCooldownVisualizer() {
   const [exIdx, setExIdx] = useState(1)

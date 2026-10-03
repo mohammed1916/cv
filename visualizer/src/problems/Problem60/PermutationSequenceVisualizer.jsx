@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('permutation-sequence')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -57,14 +59,7 @@ const LINE_PATTERN_MAP = {
   13: "done",
 };
 
-const EXAMPLES = getExamplesOr("permutation-sequence", [
-  { label: "n=4, k=9", n: 4, k: 9 },
-  { label: "n=3, k=3", n: 3, k: 3 },
-  { label: "n=4, k=14", n: 4, k: 14 },
-  { label: "n=3, k=1 (1st)", n: 3, k: 1 },
-  { label: "n=3, k=6 (last)", n: 3, k: 6 },
-  { label: "n=5, k=60", n: 5, k: 60 },
-]);
+const EXAMPLES = getExamplesOr("permutation-sequence", []);
 
 function generateSteps(n, k) {
   const steps = [];
@@ -531,8 +526,8 @@ function VisualizationPanel({ n, k, step }) {
 
 export default function PermutationSequenceVisualizer() {
   const [example, setExample] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(example.n);
-  const [kInput, setKInput] = useState(example.k);
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
+  const [kInput, setKInput] = useState(AUTHORED_INITIAL.k);
 
   const maxPerms = useMemo(() => {
     let res = 1;

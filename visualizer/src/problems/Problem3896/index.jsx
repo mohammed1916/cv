@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -14,12 +15,7 @@ const definition = {
     { id: 'apply', label: 'Pay increments', description: 'Apply the exact value difference to this position.' },
     { id: 'done', label: 'Return minimum', description: 'Sum the independent minimum costs.' },
   ],
-  examples: [
-    { label: 'Two consecutive primes', input: '[1,2,3,4]' },
-    { label: 'Already alternating', input: '[5,6,7,8]' },
-    { label: 'One increment', input: '[4,4]' },
-    { label: 'Prime gap', input: '[90,97]' },
-  ],
+  examples: getAuthoredExamples('local:3896'),
 }
 function AlternatingPrime() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {

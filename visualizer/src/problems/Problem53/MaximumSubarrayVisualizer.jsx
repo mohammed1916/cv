@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('maximum-subarray')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -116,7 +118,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('maximum-subarray')
 
 export default function MaximumSubarrayVisualizer() {
-  const [numsInput, setNumsInput] = useState('[-2, 1, -3, 4, -1, 2, 1, -5, 4]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

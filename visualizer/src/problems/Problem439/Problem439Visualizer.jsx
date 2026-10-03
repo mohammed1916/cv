@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('ternary-expression-parser')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -312,7 +314,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem439Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [expressionInput, setExpressionInput] = useState("T?2:3");
+  const [expressionInput, setExpressionInput] = useState(String(AUTHORED_INITIAL.expression));
   const { expression, inputError } = useMemo(() => {
     try {
       const parsedExpression = expressionInput;

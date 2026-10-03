@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -27,23 +28,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  {
-    label: 'Small',
-    board: [['X', 'X', '.', 'X'], ['.', '.', '.', '.'], ['.', '.', '.', '.']],
-    expected: 2
-  },
-  {
-    label: 'Medium',
-    board: [['X', 'X', '.', 'X'], ['X', '.', '.', '.'], ['.', '.', '.', '.']],
-    expected: 2
-  },
-  {
-    label: 'Large',
-    board: [['X', '.', '.', 'X'], ['.', '.', '.', '.'], ['.', '.', '.', 'X']],
-    expected: 3
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:419')
 
 function generateSteps(board) {
   const steps = []

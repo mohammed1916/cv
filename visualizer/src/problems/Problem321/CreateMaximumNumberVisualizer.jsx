@@ -86,11 +86,7 @@ function generateSteps({ nums1, nums2, k }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('create-maximum-number', [
-  { label: 'Classic', nums1: [3, 4, 6, 5], nums2: [9, 1, 2, 5, 8, 3], k: 5 },
-  { label: 'All digits', nums1: [6, 7], nums2: [6, 0, 4], k: 5 },
-  { label: 'Tie break', nums1: [3, 9], nums2: [8, 9], k: 3 },
-])
+const EXAMPLES = getExamplesOr('create-maximum-number', [])
 
 export default function CreateMaximumNumberVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('intersection-two-linked-lists')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -151,10 +153,10 @@ function renderList(nodes, label, ptrIdx, ptrList, intersectStart, accent) {
 
 export default function IntersectionTwoLinkedListsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [listAInput, setListAInput] = useState("[4,1]");
-  const [listBInput, setListBInput] = useState("[5,6,1]");
-  const [sharedInput, setSharedInput] = useState("[8,4,5]");
-  const [intersectValInput, setIntersectValInput] = useState(8);
+  const [listAInput, setListAInput] = useState(JSON.stringify(AUTHORED_INITIAL.listA));
+  const [listBInput, setListBInput] = useState(JSON.stringify(AUTHORED_INITIAL.listB));
+  const [sharedInput, setSharedInput] = useState(JSON.stringify(AUTHORED_INITIAL.shared));
+  const [intersectValInput, setIntersectValInput] = useState(String(AUTHORED_INITIAL.intersectVal));
   const { listA, listB, shared, intersectVal, inputError } = useMemo(() => {
     try {
       const parsedListA = JSON.parse(listAInput); if (!Array.isArray(parsedListA)) throw new Error('listA must be an array');

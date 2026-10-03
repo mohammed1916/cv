@@ -43,11 +43,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '    return result' },
 ]
 
-const EXAMPLES = getExamplesOr('next-greater-element-ii', [
-  { label: 'Example 1', text: '1,2,1' },
-  { label: 'Example 2', text: '1,2,3,4,3' },
-  { label: 'Decreasing', text: '5,4,3,2,1' },
-]).map((ex) => ({
+const EXAMPLES = getExamplesOr('next-greater-element-ii', []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.nums ?? []).join(','),
 }))

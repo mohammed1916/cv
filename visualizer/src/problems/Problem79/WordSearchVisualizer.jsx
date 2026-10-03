@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('word-search')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -206,8 +208,8 @@ function generateSteps(board, word) {
 const EXAMPLES = getExamples('word-search')
 
 export default function WordSearchVisualizer() {
-  const [boardInput, setBoardInput] = useState('[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]')
-  const [wordInput, setWordInput] = useState('ABCCED')
+  const [boardInput, setBoardInput] = useState(JSON.stringify(AUTHORED_INITIAL.board))
+  const [wordInput, setWordInput] = useState(AUTHORED_INITIAL.word)
 
   const { board, word, inputError } = useMemo(() => {
     try {

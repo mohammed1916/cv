@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -119,42 +120,7 @@ function generateSteps(isConnected) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Two Provinces',
-    isConnected: [
-      [1, 1, 0],
-      [1, 1, 0],
-      [0, 0, 1],
-    ],
-  },
-  {
-    label: 'Example 2: Three Provinces',
-    isConnected: [
-      [1, 0, 0],
-      [0, 1, 0],
-      [0, 0, 1],
-    ],
-  },
-  {
-    label: 'Example 3: One Province',
-    isConnected: [
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-    ],
-  },
-  {
-    label: 'Example 4: Complex',
-    isConnected: [
-      [1, 0, 0, 1],
-      [0, 1, 1, 0],
-      [0, 1, 1, 1],
-      [1, 0, 1, 1],
-    ],
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:547')
 
 export default function NumberOfProvincesVisualizer() {
   const [isConnectedInput, setIsConnectedInput] = useState(JSON.stringify(EXAMPLES[0].isConnected))

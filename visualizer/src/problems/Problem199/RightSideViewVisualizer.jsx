@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('right-side-view')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -128,7 +130,7 @@ function generateSteps(arr) {
 const EXAMPLES = getExamples('right-side-view')
 
 export default function RightSideViewVisualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3,null,5,null,4]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { arr, inputError } = useMemo(() => {

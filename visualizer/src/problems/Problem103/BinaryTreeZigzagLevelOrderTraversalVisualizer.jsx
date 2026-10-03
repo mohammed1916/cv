@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('binary-tree-zigzag-level-order-traversal')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { generateSteps } from "./algorithm";
@@ -18,11 +20,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 4: "init", 7: "loop", 10: "visit", 11: "update", 12: "update", 13: "update", 14: "reverse", 15: "update", 16: "update", 17: "done" };
 const PATTERNS = ["init", "loop", "visit", "reverse", "update", "done"];
-const EXAMPLES = getExamplesOr("binary-tree-zigzag-level-order-traversal", [
-  { label: "Example 1", root: [3, 9, 20, null, null, 15, 7] },
-  { label: "Example 2", root: [1] },
-  { label: "Example 3", root: [] },
-]);
+const EXAMPLES = getExamplesOr("binary-tree-zigzag-level-order-traversal", []);
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def zigzagLevelOrder(root):" },
@@ -47,7 +45,7 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
 export default function BinaryTreeZigzagLevelOrderTraversalVisualizer() {
-  const [rootInput, setRootInput] = useState("[3,9,20,null,null,15,7]");
+  const [rootInput, setRootInput] = useState(JSON.stringify(AUTHORED_INITIAL.root));
   const { steps, inputError } = useMemo(() => {
     try { return { steps: generateSteps(rootInput), inputError: '' }; }
     catch (error) { return { steps: [], inputError: error.message }; }

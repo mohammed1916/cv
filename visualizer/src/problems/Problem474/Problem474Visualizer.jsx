@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('ones-and-zeroes')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,9 +20,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('ones-and-zeroes', [
-  { label: 'Example 1', strs: ['10', '0001', '111001', '1', '0'], m: 5, n: 3 },
-])
+const EXAMPLES = getExamplesOr('ones-and-zeroes', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMaxForm(strs, m, n):' },
@@ -207,9 +207,9 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
 
 export default function Problem474Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [strsInput, setStrsInput] = useState("[\"10\",\"0001\",\"111001\",\"1\",\"0\"]");
-  const [mInput, setMInput] = useState(5);
-  const [nInput, setNInput] = useState(3);
+  const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs));
+  const [mInput, setMInput] = useState(String(AUTHORED_INITIAL.m));
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { strs, m, n, inputError } = useMemo(() => {
     try {
       const parsedStrs = JSON.parse(strsInput); if (!Array.isArray(parsedStrs)) throw new Error('strs must be an array');

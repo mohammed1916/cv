@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('generate-random-point-in-a-circle')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,10 +20,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('generate-random-point-in-a-circle', [
-  { label: 'Example 1', radius: 1 },
-  { label: 'Example 2', radius: 2.5 },
-])
+const EXAMPLES = getExamplesOr('generate-random-point-in-a-circle', [])
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def __init__(self, radius, x_center, y_center):' },
   { line: 2, text: '    self.radius = radius' },
@@ -224,7 +223,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
 
 export default function Problem478Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [radiusInput, setRadiusInput] = useState(1);
+  const [radiusInput, setRadiusInput] = useState(String(AUTHORED_INITIAL.radius));
   const [x_centerInput, setX_centerInput] = useState(0);
   const [y_centerInput, setY_centerInput] = useState(0);
   const { radius, x_center, y_center, inputError } = useMemo(() => {

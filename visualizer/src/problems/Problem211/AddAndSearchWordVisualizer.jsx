@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -44,12 +45,7 @@ const SOLUTION_CODE = [
   { line: 24, text: "        return dfs(0, self.root)" },
 ]
 
-const EXAMPLES = [
-  { label: 'Wildcard match', word: '.ad', isAdd: 'false' },
-  { label: 'Exact match', word: 'bad', isAdd: 'false' },
-  { label: 'Missing word', word: 'pad', isAdd: 'false' },
-  { label: 'Add word', word: 'sad', isAdd: 'true' },
-]
+const EXAMPLES = getAuthoredExamples('local:211')
 
 function buildWordTrie(words) {
   const root = { children: {}, isWord: false, val: "ROOT" }
@@ -67,6 +63,7 @@ function buildWordTrie(words) {
 function generateSteps(word, isAdd, trie, addedWords) {
   const steps = []
   const action = isAdd ? "Add" : "Search"
+  const found = addedWords.some((candidate) => candidate.length === word.length && [...word].every((char, index) => char === '.' || char === candidate[index]))
   steps.push({
     activeLine: isAdd ? 6 : 13,
     word,
@@ -76,7 +73,6 @@ function generateSteps(word, isAdd, trie, addedWords) {
   })
 
   if (isAdd) {
-    const found = addedWords.some((candidate) => candidate.length === word.length && [...word].every((char, index) => char === '.' || char === candidate[index]))
     steps.push({
       activeLine: 7,
       word,

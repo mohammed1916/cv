@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -17,7 +18,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = [{ label: "Example 1", n: 19 }]
+const EXAMPLES = getAuthoredExamples('local:202')
 const SOLUTION_CODE = [
   { line: 1, text: "def isHappy(n):" },
   { line: 2, text: "    seen = set()" },

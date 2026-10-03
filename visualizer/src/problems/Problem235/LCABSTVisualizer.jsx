@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('lcabst')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -192,9 +194,9 @@ function TreeVisualizationPanel({
 }
 
 export default function LCABSTVisualizer() {
-    const [arrInput, setArrInput] = useState('[6,2,8,0,4,7,9,null,null,3,5]')
-    const [pInput, setPInput] = useState('2')
-    const [qInput, setQInput] = useState('8')
+    const [arrInput, setArrInput] = useState(AUTHORED_INITIAL.arrInput)
+    const [pInput, setPInput] = useState(String(AUTHORED_INITIAL.p))
+    const [qInput, setQInput] = useState(String(AUTHORED_INITIAL.q))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

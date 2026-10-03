@@ -18,10 +18,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('one-edit-distance', [
-  { label: 'Example 1', s1: 'ab', s2: 'acb' },
-  { label: 'Example 2', s1: 'cab', s2: 'ab' },
-])
+const EXAMPLES = getExamplesOr('one-edit-distance', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def isOneEditDistance(s1, s2):' },

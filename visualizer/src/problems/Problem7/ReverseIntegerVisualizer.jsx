@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-integer')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -130,7 +132,7 @@ function generateSteps(initialX) {
 const EXAMPLES = getExamples('reverse-integer')
 
 export default function ReverseIntegerVisualizer() {
-  const [xInput, setXInput] = useState('123')
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x))
   const [panelDivs, setPanelDivs] = useState(null)
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

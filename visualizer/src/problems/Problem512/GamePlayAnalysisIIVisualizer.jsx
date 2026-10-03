@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('game-play-analysis-ii')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -231,8 +233,8 @@ function VisualizationPanel({ events, step, inputPanel }) {
 }
 
 export default function GamePlayAnalysisIIVisualizer() {
-  const DEFAULT_ACTIVITY = EXAMPLES[0]?.activity ?? [{ player_id: 1, device_id: 2, event_date: '2016-03-01' }]
-  const [activityInput, setActivityInput] = useState(JSON.stringify(DEFAULT_ACTIVITY))
+
+  const [activityInput, setActivityInput] = useState(JSON.stringify(AUTHORED_INITIAL.activity))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 

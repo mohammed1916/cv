@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('is-subsequence')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -112,15 +114,11 @@ function generateSteps(s, t) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('is-subsequence', [
-  { label: 'Example 1', s: 'abc', t: 'ahbgdc' },
-  { label: 'Example 2', s: 'axc', t: 'ahbgdc' },
-  { label: 'Example 3', s: '', t: 'abc' },
-])
+const EXAMPLES = getExamplesOr('is-subsequence', [])
 
 export default function Problem392Visualizer() {
-  const [sInput, setSInput] = useState('abc')
-  const [tInput, setTInput] = useState('ahbgdc')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [tInput, setTInput] = useState(AUTHORED_INITIAL.t)
 
   const { s, t, inputError } = useMemo(() => {
     try {

@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { detectCycle2Narrative } from './detectCycle2Narrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import Cycle2Story from "./Cycle2Story";
@@ -5,38 +6,7 @@ import { CODE, buildCycle2Story } from "./algorithm";
 import { getExamplesOr } from "../../config/examplesRegistry";
 import "./LinkedListCycleIIVisualizer.css";
 
-const DEFAULT_EXAMPLES = [
-  {
-    label: "Example 1: [3,2,0,-4], pos=1",
-    values: { nodes: "[3, 2, 0, -4]", pos: 1 },
-    input: { nodes: "[3, 2, 0, -4]", pos: 1 },
-  },
-  {
-    label: "Example 2: [1,2], pos=0",
-    values: { nodes: "[1, 2]", pos: 0 },
-    input: { nodes: "[1, 2]", pos: 0 },
-  },
-  {
-    label: "Example 3: [1], pos=-1",
-    values: { nodes: "[1]", pos: -1 },
-    input: { nodes: "[1]", pos: -1 },
-  },
-  {
-    label: "Self Loop: [42], pos=0",
-    values: { nodes: "[42]", pos: 0 },
-    input: { nodes: "[42]", pos: 0 },
-  },
-  {
-    label: "Tail + Loop: [1..7], pos=3",
-    values: { nodes: "[1, 2, 3, 4, 5, 6, 7]", pos: 3 },
-    input: { nodes: "[1, 2, 3, 4, 5, 6, 7]", pos: 3 },
-  },
-  {
-    label: "Pure Cycle: [10,20,30], pos=0",
-    values: { nodes: "[10, 20, 30]", pos: 0 },
-    input: { nodes: "[10, 20, 30]", pos: 0 },
-  },
-];
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:142');
 
 const registryExamples = getExamplesOr("linked-list-cycle-ii", []);
 const EXAMPLES =

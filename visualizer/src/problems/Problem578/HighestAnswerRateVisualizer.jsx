@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('highest-answer-rate')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -38,23 +40,9 @@ const LINE_PATTERN_MAP = {
   10: 'done',
 }
 
-const DEFAULT_QUESTIONS = [
-  { id: 1, submissions: 3 },
-  { id: 2, submissions: 5 },
-  { id: 3, submissions: 2 },
-]
 
-const DEFAULT_ANSWERS = [
-  { id: 1, question_id: 1, is_accepted: 1 },
-  { id: 2, question_id: 1, is_accepted: 0 },
-  { id: 3, question_id: 1, is_accepted: 1 },
-  { id: 4, question_id: 2, is_accepted: 1 },
-  { id: 5, question_id: 2, is_accepted: 0 },
-  { id: 6, question_id: 2, is_accepted: 1 },
-  { id: 7, question_id: 2, is_accepted: 1 },
-  { id: 8, question_id: 3, is_accepted: 0 },
-  { id: 9, question_id: 3, is_accepted: 1 },
-]
+
+
 
 function aggregateData(questions, answers) {
   const aggregation = {}
@@ -297,8 +285,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function HighestAnswerRateVisualizer() {
   const examples = useMemo(() => getExamplesOr('highest-answer-rate', []), [])
-  const [questionsInput, setQuestionsInput] = useState(JSON.stringify(DEFAULT_QUESTIONS))
-  const [answersInput, setAnswersInput] = useState(JSON.stringify(DEFAULT_ANSWERS))
+  const [questionsInput, setQuestionsInput] = useState(JSON.stringify(AUTHORED_INITIAL.questions))
+  const [answersInput, setAnswersInput] = useState(JSON.stringify(AUTHORED_INITIAL.answers))
 
   const { questions, answers, inputError } = useMemo(() => {
     try {

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('course-schedule-ii')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -187,8 +189,8 @@ function generateSteps(numCourses, prerequisites) {
 const EXAMPLES = getExamples('course-schedule-ii')
 
 export default function CourseScheduleIIVisualizer() {
-  const [numInput, setNumInput] = useState('4')
-  const [preInput, setPreInput] = useState('[[1,0],[2,0],[3,1],[3,2]]')
+  const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.n))
+  const [preInput, setPreInput] = useState(JSON.stringify(AUTHORED_INITIAL.p))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { numCourses, prerequisites, inputError } = useMemo(() => {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-substring-k-distinct')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -244,8 +246,8 @@ function VisualizationPanel({ step, s, k, inputError, handleReset }) {
 }
 
 export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer() {
-  const [sInput, setSInput] = useState('eceba')
-  const [kInput, setKInput] = useState('2')
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s ?? ''))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k ?? 0))
 
   const inputError = useMemo(() => {
     const trimmed = kInput.trim()

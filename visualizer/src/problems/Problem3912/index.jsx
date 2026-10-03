@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -15,7 +16,7 @@ const definition = {
     { id: 'select', label: 'Keep / reject', description: 'Keep values that beat at least one side.' },
     { id: 'done', label: 'Complete', description: 'Return values in original order.' },
   ],
-  examples: [{ label: 'Mixed records', input: '[1,2,4,2,3,2]' }, { label: 'All equal', input: '[5,5,5,5]' }, { label: 'Singleton', input: '[1]' }],
+  examples: getAuthoredExamples('local:3912'),
 }
 
 function ValidElements() {

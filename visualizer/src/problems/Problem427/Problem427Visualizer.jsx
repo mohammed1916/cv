@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('expression-tree-from-tokens')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -22,9 +24,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('expression-tree-from-tokens', [
-  { label: 'Example 1', tokens: ['2', '1', '+', '3', '*'] },
-])
+const EXAMPLES = getExamplesOr('expression-tree-from-tokens', [])
 
 const isOp = (t) => t === '+' || t === '-' || t === '*' || t === '/'
 
@@ -157,7 +157,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem427Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [tokensInput, setTokensInput] = useState("[\"2\",\"1\",\"+\",\"3\",\"*\"]");
+  const [tokensInput, setTokensInput] = useState(JSON.stringify(AUTHORED_INITIAL.tokens));
   const { tokens, inputError } = useMemo(() => {
     try {
       const parsedTokens = JSON.parse(tokensInput); if (!Array.isArray(parsedTokens)) throw new Error('tokens must be an array');

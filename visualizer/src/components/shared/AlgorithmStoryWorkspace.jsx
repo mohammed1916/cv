@@ -32,9 +32,9 @@ export default function AlgorithmStoryWorkspace({ definition }) {
   );
   const [inputValues, setInputValues] = useState(() => {
     if (isMultiField) {
-      return fieldValues(definition, definition.initialValues ?? EXAMPLES?.[0]);
+      return fieldValues(definition, EXAMPLES?.[0] ?? definition.initialValues);
     }
-    return { arr: definition.initialInput };
+    return { arr: EXAMPLES?.[0]?.input ?? definition.initialInput };
   });
   const [activeLabel, setActiveLabel] = useState(definition.initialLabel ?? EXAMPLES?.[0]?.label);
 

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-largest-value-each-row')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -340,7 +342,7 @@ function VisualizationPanel({ arr, step, applyEx }) {
 
 export default function FindLargestValueEachRowVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [arrInput, setArrInput] = useState("[1,3,2,5,3,null,9]");
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr));
   const { arr, inputError } = useMemo(() => {
     try {
       const parsedArr = JSON.parse(arrInput); if (!Array.isArray(parsedArr)) throw new Error('arr must be an array');

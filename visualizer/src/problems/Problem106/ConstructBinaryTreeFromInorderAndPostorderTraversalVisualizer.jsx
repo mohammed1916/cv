@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('construct-binary-tree-from-inorder-and-postorder-traversal')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { reconstructTreeStory } from "../../components/shared/reconstructTreeStory";
@@ -20,14 +22,7 @@ const LINE_PATTERN_MAP = { 3: "visit", 4: "update", 5: "compare", 6: "visit", 9:
 const PATTERNS = ["visit", "compare", "update", "return"];
 const EXAMPLES = getExamplesOr(
   "construct-binary-tree-from-inorder-and-postorder-traversal",
-  [
-    {
-      label: "Example 1",
-      inorder: [9, 3, 15, 20, 7],
-      postorder: [9, 15, 7, 20, 3],
-    },
-    { label: "Example 2", inorder: [1], postorder: [1] },
-  ],
+  [],
 );
 
 const SOLUTION_CODE_INLINE = [
@@ -48,8 +43,8 @@ const SOLUTION_CODE_INLINE = [
 const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
 export default function ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer() {
-  const [inorderInput, setInorderInput] = useState("[9,3,15,20,7]");
-  const [postorderInput, setPostorderInput] = useState("[9,15,7,20,3]");
+  const [inorderInput, setInorderInput] = useState(JSON.stringify(AUTHORED_INITIAL.inorder));
+  const [postorderInput, setPostorderInput] = useState(JSON.stringify(AUTHORED_INITIAL.postorder));
   const { story, inputError } = useMemo(() => {
     try { return { story: reconstructTreeStory(inorderInput, postorderInput, 'postorder'), inputError: '' }; }
     catch(error) { return { story: null, inputError: error.message }; }

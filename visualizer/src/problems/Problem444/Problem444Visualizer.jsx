@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('sequence-reconstruction')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -406,8 +408,8 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem444Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [orgInput, setOrgInput] = useState("[1,2,3]");
-  const [seqsInput, setSeqsInput] = useState("[[1,2],[1,3],[2,3]]");
+  const [orgInput, setOrgInput] = useState(JSON.stringify(AUTHORED_INITIAL.org));
+  const [seqsInput, setSeqsInput] = useState(JSON.stringify(AUTHORED_INITIAL.seqs));
   const { org, seqs, inputError } = useMemo(() => {
     try {
       const parsedOrg = JSON.parse(orgInput); if (!Array.isArray(parsedOrg)) throw new Error('org must be an array');

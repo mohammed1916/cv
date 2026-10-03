@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:82')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -14,13 +17,7 @@ import PatternLegend from "../../components/PatternLegend"
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css"
 
-const EXAMPLES = [
-  { label: 'Mixed duplicates', input: [1, 2, 3, 3, 4, 4, 5] },
-  { label: 'Leading run', input: [1, 1, 1, 2, 3] },
-  { label: 'Trailing run', input: [1, 2, 2, 2] },
-  { label: 'No duplicates', input: [1, 2, 3] },
-  { label: 'Empty list', input: [] },
-]
+const EXAMPLES = getAuthoredExamples('local:82')
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
   { line: 2, text: "    def deleteDuplicates(self, head: ListNode) -> ListNode:" },
@@ -400,7 +397,7 @@ function RemoveDuplicatesFromListState({ step }) {
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function RemoveDuplicatesFromListVisualizer() {
-  const [inputStr, setInputStr] = useState("[1,2,3,3,4,4,5]")
+  const [inputStr, setInputStr] = useState(JSON.stringify(AUTHORED_INITIAL.input))
 
   const { list, inputError } = useMemo(() => {
     try {

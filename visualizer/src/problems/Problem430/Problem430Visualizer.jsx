@@ -20,9 +20,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('flatten-multilevel-dll', [
-  { label: 'Example 1', structure: '1->2->3->null with child [7->null] at 3' },
-])
+const EXAMPLES = getExamplesOr('flatten-multilevel-dll', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def flatten(head):' },

@@ -41,11 +41,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('assign-cookies', [
-  { label: 'Example 1', greed: [1, 2, 3], size: [1, 1], expected: 1 },
-  { label: 'Example 2', greed: [1, 2], size: [1, 2, 3], expected: 2 },
-  { label: 'Example 3', greed: [10, 9, 8, 7], size: [5, 6, 7, 8], expected: 2 },
-])
+const EXAMPLES = getExamplesOr('assign-cookies', [])
 
 const SNIPPETS = [
   { id: 'sort', label: 'Sort', lines: [2, 3] },

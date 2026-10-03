@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('generate-parentheses')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -85,7 +87,7 @@ const EXAMPLES = getExamples('generate-parentheses');
 
 
 export default function GenerateParenthesesVisualizer() {
-    const [nInput, setNInput] = useState(3);
+    const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

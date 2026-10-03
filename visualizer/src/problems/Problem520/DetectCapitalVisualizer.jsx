@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('detect-capital')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -225,7 +227,7 @@ function VisualizationPanel({ word, step }) {
 }
 
 export default function DetectCapitalVisualizer() {
-  const [wordInput, setWordInput] = useState(EXAMPLES?.[0]?.word ?? 'FiCc')
+  const [wordInput, setWordInput] = useState(AUTHORED_INITIAL.word ?? '')
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 
   const { word, inputError } = useMemo(() => {

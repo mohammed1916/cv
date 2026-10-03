@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -17,7 +18,7 @@ import { createPortal } from 'react-dom'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = [{ label: "Example 1", n: 10 }, { label: "Example 2", n: 20 }]
+const EXAMPLES = getAuthoredExamples('local:204')
 const SOLUTION_CODE = [
   { line: 1, text: "def countPrimes(n):" },
   { line: 2, text: "    if n <= 2: return 0" },

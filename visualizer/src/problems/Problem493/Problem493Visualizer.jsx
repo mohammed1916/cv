@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-pairs')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -57,10 +59,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('reverse-pairs', [
-  { label: 'Example 1', nums: [1, 2, 3, 4, 5] },
-  { label: 'Example 2', nums: [40, 26, 26, 2, 6, 4, 85] },
-])
+const EXAMPLES = getExamplesOr('reverse-pairs', [])
 
 function generateSteps(nums) {
   const steps = []
@@ -242,7 +241,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function Problem493Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,3,2,3,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

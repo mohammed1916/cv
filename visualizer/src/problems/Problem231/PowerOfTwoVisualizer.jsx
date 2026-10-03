@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('power-of-two')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -200,7 +202,7 @@ function AndRow({ andBits, highlightBit, bits }) {
 
 export default function PowerOfTwoVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(1);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const [descInput, setDescInput] = useState("2⁰ = 1");
   const { n: inputN, desc, inputError } = useMemo(() => {
     try {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('count-complete-tree-nodes')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -180,14 +182,10 @@ function spine(id, n, dir) {
   return out
 }
 
-const EXAMPLES = getExamplesOr('count-complete-tree-nodes', [
-  { label: 'Example 1', n: '6' },
-  { label: 'Example 2', n: '1' },
-  { label: 'Example 3', n: '13' },
-])
+const EXAMPLES = getExamplesOr('count-complete-tree-nodes', [])
 
 export default function Problem222Visualizer() {
-  const [nInput, setNInput] = useState('6')
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(

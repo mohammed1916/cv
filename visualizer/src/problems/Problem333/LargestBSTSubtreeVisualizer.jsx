@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import { buildTree, buildEdges, collectNodes, computeLayout, parseTreeInput } from '../../components/treeUtils'
 import './LargestBSTSubtreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -31,15 +32,9 @@ const SOLUTION_CODE = [
   { line: 16, text: '    return best' },
 ]
 
-const DEFAULT_EXAMPLES = [
-  { label: 'Classic [10,5,15,1,8,null,7]', inputs: [10, 5, 15, 1, 8, null, 7] },
-  { label: 'Whole tree is a BST', inputs: [5, 3, 8, 1, 4, 7, 9] },
-  { label: 'Only leaves valid', inputs: [3, 2, 4, 5] },
-  { label: 'Single node', inputs: [42] },
-]
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:333')
 
-const registryExamples = getExamples('largest-bst-subtree')
-const EXAMPLES = registryExamples && registryExamples.length ? registryExamples : DEFAULT_EXAMPLES
+const EXAMPLES = DEFAULT_EXAMPLES
 
 const fmt = (v) => (v === Infinity ? '+inf' : v === -Infinity ? '-inf' : String(v))
 

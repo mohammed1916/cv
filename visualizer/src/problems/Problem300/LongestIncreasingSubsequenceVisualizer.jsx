@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-increasing-subsequence')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -92,7 +94,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('longest-increasing-subsequence')
 
 export default function LongestIncreasingSubsequenceVisualizer() {
-    const [numsInput, setNumsInput] = useState('[10,9,2,5,3,7,101,18]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

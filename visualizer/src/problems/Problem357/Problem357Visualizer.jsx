@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -138,23 +139,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'n = 0',
-    n: 0,
-    description: 'Only 0',
-  },
-  {
-    label: 'n = 1',
-    n: 1,
-    description: '0-9 (10 numbers)',
-  },
-  {
-    label: 'n = 2',
-    n: 2,
-    description: '0-99: 1-digit (10) + 2-digit (81) = 91',
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:357')
 
 function DigitChoiceTree({ length, choicesPerPosition }) {
   if (!choicesPerPosition) return null

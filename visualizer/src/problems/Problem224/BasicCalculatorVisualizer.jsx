@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('basic-calculator')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -80,7 +82,7 @@ function generateSteps(s) {
 
 export default function BasicCalculatorVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("1 + 1");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('predict-the-winner')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -48,10 +50,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('predict-the-winner', [
-  { label: 'Example 1', nums: [1, 5, 233, 7] },
-  { label: 'Example 2', nums: [12, 3, 1, 5, 6, 4] },
-])
+const EXAMPLES = getExamplesOr('predict-the-winner', [])
 
 function generateSteps(nums) {
   const steps = []
@@ -273,7 +272,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function Problem486Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,5,233,7]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

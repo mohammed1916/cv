@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('balanced-binary-tree')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "framer-motion";
@@ -166,7 +168,7 @@ function StatePanel({ step, allNodes }) {
 }
 
 export default function BalancedBinaryTreeVisualizer() {
-  const [arrInput, setArrInput] = useState("[3,9,20,null,null,15,7]");
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr));
 
   const { arr, inputError } = useMemo(() => {
     try {

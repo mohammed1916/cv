@@ -214,11 +214,7 @@ const DEFAULT_TABLE = [
   '12,B,234',
 ].join('\n')
 
-const EXAMPLES = getExamplesOr('median-employee-salary', [
-  { label: 'LeetCode sample', table: DEFAULT_TABLE },
-  { label: 'Odd counts', table: '1,A,100\n2,A,200\n3,A,300\n4,B,50\n5,B,60\n6,B,70' },
-  { label: 'Single row', table: '1,A,999' },
-])
+const EXAMPLES = getExamplesOr('median-employee-salary', [])
 
 export default function MedianEmployeeSalaryVisualizer() {
   const [tableInput, setTableInput] = useState(DEFAULT_TABLE);

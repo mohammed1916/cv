@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('unique-paths')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -163,8 +165,8 @@ function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, 
 }
 
 export default function UniquePathsVisualizer() {
-    const [mInput, setMInput] = useState(3)
-    const [nInput, setNInput] = useState(7)
+    const [mInput, setMInput] = useState(AUTHORED_INITIAL.m)
+    const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
 
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

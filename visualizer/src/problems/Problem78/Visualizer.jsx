@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('subsets')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -184,7 +186,7 @@ function VisualizationPanel({ nums, inputError, step }) {
 const LINE_PATTERN_MAP = {};
 
 export default function SubsetsVisualizer() {
-  const [numsInput, setNumsInput] = useState("[1,2,3]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
 
   const { nums, inputError } = useMemo(() => {
     try {

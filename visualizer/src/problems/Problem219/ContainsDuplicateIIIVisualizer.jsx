@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -30,12 +31,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return False" },
 ]
 
-const EXAMPLES = [
-  { label: 'Outside window', nums: [1, 2, 3, 1, 2, 3], k: 2, t: 0 },
-  { label: 'Exact nearby duplicate', nums: [1, 0, 1, 1], k: 1, t: 0 },
-  { label: 'Within value range', nums: [1, 5, 9, 1, 5, 9], k: 2, t: 3 },
-  { label: 'Negative t', nums: [1, 2], k: 1, t: -1 },
-]
+const EXAMPLES = getAuthoredExamples('local:219')
 
 function generateSteps(nums, k, t) {
   const steps = []

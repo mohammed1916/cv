@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('distribute-candies')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -282,7 +284,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
 
 export default function DistributeCandiesVisualizer() {
   const examples = useMemo(() => getExamplesOr('distribute-candies', []), [])
-  const [candiesInput, setCandiesInput] = useState('[1,1,2,2,3,3]')
+  const [candiesInput, setCandiesInput] = useState(JSON.stringify(AUTHORED_INITIAL.candies || AUTHORED_INITIAL))
 
   const { candies, inputError } = useMemo(() => {
     try {

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('search-in-rotated-sorted-array-ii')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -162,15 +164,11 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = getExamplesOr('search-in-rotated-sorted-array-ii', [
-    { label: 'Find True', nums: [1, 0, 1, 1, 1], target: 0 },
-    { label: 'Find False', nums: [1, 3], target: 3 },
-    { label: 'With Duplicates', nums: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1], target: 2 },
-])
+const EXAMPLES = getExamplesOr('search-in-rotated-sorted-array-ii', [])
 
 export default function SearchRotatedArrayIIVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,0,1,1,1]')
-    const [targetInput, setTargetInput] = useState('0')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+    const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

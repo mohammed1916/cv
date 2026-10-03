@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('cumulative-salary')[0];
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -164,30 +166,11 @@ function generateSteps(employees) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('cumulative-salary', [
-  {
-    label: 'Example 1',
-    employees: [
-      { id: 1, month: 1, salary: 5000 },
-      { id: 1, month: 2, salary: 5000 },
-      { id: 1, month: 3, salary: 5000 },
-      { id: 2, month: 1, salary: 3500 },
-      { id: 2, month: 2, salary: 3500 },
-    ],
-  },
-  {
-    label: 'Example 2',
-    employees: [
-      { id: 1, month: 1, salary: 4000 },
-      { id: 1, month: 2, salary: 4000 },
-      { id: 2, month: 1, salary: 6000 },
-    ],
-  },
-])
+const EXAMPLES = getExamplesOr('cumulative-salary', [])
 
 export default function CumulativeSalaryVisualizer() {
   const [employeesInput, setEmployeesInput] = useState(
-    JSON.stringify(DEFAULT_EMPLOYEES)
+    JSON.stringify(AUTHORED_INITIAL.employees)
   )
   const [inputError, setInputError] = useState('')
 

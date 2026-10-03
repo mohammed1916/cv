@@ -20,9 +20,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('minimum-genetic-mutation', [
-  { label: 'Example 1', start: 'AACCCCCC', end: 'AACCCCTA', bank: ['AACCCCTA'] },
-])
+const EXAMPLES = getExamplesOr('minimum-genetic-mutation', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minMutation(start, end, bank):' },

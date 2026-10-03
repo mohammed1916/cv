@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('burst-balloons')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -72,7 +74,7 @@ function generateSteps(numsOrig) {
 
 export default function BurstBalloonsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[3,1,5,8]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums: inputNums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -90,7 +92,7 @@ export default function BurstBalloonsVisualizer() {
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
     const [panelDivs, setPanelDivs] = useState(null);
 
-    const nums = [1, ...nums, 1];
+    const nums = [1, ...inputNums, 1];
     const n = nums.length;
     const dp = step?.dp ?? Array.from({ length: n }, () => Array(n).fill(0));
     const activeL = step?.left ?? -1;

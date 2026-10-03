@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('split-array-with-equal-sum')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -298,16 +300,12 @@ function generateSteps(input) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("split-array-with-equal-sum", [
-  { label: "Example 1", nums: "1,2,1,2,1,2,1" },
-  { label: "Example 2", nums: "1,2,1,2,1,2,1,2" },
-  { label: "No split", nums: "3,1,4,1,5,9,2,6" },
-]);
+const EXAMPLES = getExamplesOr("split-array-with-equal-sum", []);
 
 const PART_NAMES = ["part 1", "part 2", "part 3", "part 4"];
 
 export default function SplitArrayEqualSumVisualizer() {
-  const [numsInput, setNumsInput] = useState("1,2,1,2,1,2,1");
+  const [numsInput, setNumsInput] = useState(AUTHORED_INITIAL.nums);
   const [panelDivs, setPanelDivs] = useState(null);
 
   const inputError = useMemo(() => {

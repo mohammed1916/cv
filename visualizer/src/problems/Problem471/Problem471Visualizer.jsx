@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('encode-string-with-shortest-length')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -187,7 +189,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
 export default function Problem471Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("aabcb");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

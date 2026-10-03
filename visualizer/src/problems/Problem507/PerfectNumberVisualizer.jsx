@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:507')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -38,12 +41,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = [
-  { label: '6 · smallest perfect', n: 6 },
-  { label: '28 · perfect', n: 28 },
-  { label: '1 · edge case', n: 1 },
-  { label: '12 · not perfect', n: 12 },
-]
+const EXAMPLES = getAuthoredExamples('local:507')
 
 function generateSteps(n) {
   const steps = []
@@ -210,7 +208,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function PerfectNumberVisualizer() {
-  const [nInput, setNInput] = useState(6);
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

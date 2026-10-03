@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('trapping-rain-water-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -14,9 +16,7 @@ import './Problem407Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
 
-const EXAMPLES = getExamplesOr('trapping-rain-water-ii', [
-  { label: 'Example', heightMap: [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]] },
-])
+const EXAMPLES = getExamplesOr('trapping-rain-water-ii', [])
 
 const PATTERNS = []
 
@@ -148,7 +148,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem407Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [heightMapInput, setHeightMapInput] = useState("[[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]");
+  const [heightMapInput, setHeightMapInput] = useState(JSON.stringify(AUTHORED_INITIAL.heightMap));
   const { heightMap, inputError } = useMemo(() => {
     try {
       const parsedHeightMap = JSON.parse(heightMapInput); if (!Array.isArray(parsedHeightMap)) throw new Error('heightMap must be an array');

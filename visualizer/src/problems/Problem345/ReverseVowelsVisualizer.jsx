@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:345')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,11 +31,7 @@ const LINE_PATTERN_MAP = {
   12: 'done',
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', s: 'leetcode' },
-  { label: 'Example 2', s: 'IceCreAm' },
-  { label: 'hello', s: 'hello' },
-]
+const EXAMPLES = getAuthoredExamples('local:345')
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def reverseVowels(s: str) -> str:' },
@@ -278,7 +277,7 @@ function VisualizationPanel({ step }) {
 
 export default function ReverseVowelsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("leetcode");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

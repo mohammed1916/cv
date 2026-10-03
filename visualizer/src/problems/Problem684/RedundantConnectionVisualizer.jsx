@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('redundant-connection')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -120,7 +122,7 @@ function generateSteps(edges) {
 const EXAMPLES = getExamples("redundant-connection");
 
 export default function RedundantConnectionVisualizer() {
-  const [edgesInput, setEdgesInput] = useState("[[1,2],[1,3],[2,3]]");
+  const [edgesInput, setEdgesInput] = useState(JSON.stringify(AUTHORED_INITIAL.edges));
   const { edges, inputError } = useMemo(() => {
     try {
       return { edges: parseEdges(edgesInput), inputError: "" };

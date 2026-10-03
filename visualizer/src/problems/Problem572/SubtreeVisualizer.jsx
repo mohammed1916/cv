@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('subtree-of-another-tree')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -149,8 +151,8 @@ function VisualizationPanel({ root, sub, step, matchId, rootError, subError, app
 }
 
 export default function SubtreeVisualizer() {
-    const [rootInput, setRootInput] = useState('[3,4,5,1,2]')
-    const [subInput, setSubInput] = useState('[4,1,2]')
+    const [rootInput, setRootInput] = useState(JSON.stringify(AUTHORED_INITIAL.root))
+    const [subInput, setSubInput] = useState(JSON.stringify(AUTHORED_INITIAL.sub))
 
     const { arr: rootArr, err: rootErr } = useMemo(() => parseArr(rootInput), [rootInput])
     const { arr: subArr, err: subErr } = useMemo(() => parseArr(subInput), [subInput])

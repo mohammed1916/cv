@@ -45,7 +45,7 @@ function generateSteps({ values }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('odd-even-linked-list', [{ label: '1 → 2 → 3 → 4 → 5', values: [1, 2, 3, 4, 5] }, { label: 'Even length', values: [2, 1, 3, 5, 6, 4, 7] }])
+const EXAMPLES = getExamplesOr('odd-even-linked-list', [])
 
 export default function OddEvenLinkedListVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('flatten-binary-tree-to-linked-list')[0];
 import { getExamples } from "../../config/examplesRegistry";
-﻿import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { buildFlattenStory } from './algorithm';
 import FlattenStory from './FlattenStory';
@@ -37,7 +39,7 @@ const SOLUTION_CODE = [
 const EXAMPLES = getExamples("flatten-binary-tree-to-linked-list");
 
 export default function FlattenBinaryTreeVisualizer() {
-  const [arrInput, setArrInput] = useState('[1,2,5,3,4,null,6]');
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr));
   const {story,inputError} = useMemo(()=>{
     try {return {story:buildFlattenStory(arrInput),inputError:''};}
     catch(error){return {story:null,inputError:error.message};}

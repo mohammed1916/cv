@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('min-cost-climbing-stairs')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -109,7 +111,7 @@ function generateSteps(cost) {
 }
 
 export default function MinCostClimbingStairsVisualizer() {
-  const [costInput, setCostInput] = useState('[10,15,20]');
+  const [costInput, setCostInput] = useState(JSON.stringify(AUTHORED_INITIAL.input));
   const { cost, inputError } = useMemo(() => {
     try {
       const parsedCost = JSON.parse(costInput);
@@ -128,9 +130,7 @@ export default function MinCostClimbingStairsVisualizer() {
         setCurrentStep(0)
     }, [setCurrentStep])
 
-    if (steps.length === 0) return null
-
-    const step = steps[currentStep]
+    const step = steps[currentStep ?? 0] || steps[0]
 
     const panelConfigs = useMemo(() => [
       { id: 'input', title: 'Input', dockMode: 'split-top' },

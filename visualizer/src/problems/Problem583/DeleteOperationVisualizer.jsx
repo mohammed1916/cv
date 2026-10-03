@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('delete-operation')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -299,8 +301,8 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
 
 export default function DeleteOperationVisualizer() {
   const examples = useMemo(() => getExamplesOr('delete-operation', []), [])
-  const [s1Input, setS1Input] = useState('"sea"')
-  const [s2Input, setS2Input] = useState('"eat"')
+  const [s1Input, setS1Input] = useState(`"${AUTHORED_INITIAL.s1 || AUTHORED_INITIAL[0]}"`)
+  const [s2Input, setS2Input] = useState(`"${AUTHORED_INITIAL.s2 || AUTHORED_INITIAL[1]}"`)
 
   const { s1, s2, inputError } = useMemo(() => {
     try {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-linked-list')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -60,7 +62,7 @@ function generateSteps(values) {
     const arrows = forwardArrows.map(a => ({ ...a, reversed: false, active: false }))
     let curr = 0
 
-    while (curr < n) {
+    while (curr >= 0 && curr < n) {
         const nxt = curr + 1 < n ? curr + 1 : -1
 
         steps.push({
@@ -235,7 +237,7 @@ function ReverseLinkedListPointerState({ step, nodes }) {
 }
 
 export default function ReverseLinkedListVisualizer() {
-    const [valInput, setValInput] = useState('[1,2,3,4,5]')
+    const [valInput, setValInput] = useState(JSON.stringify(AUTHORED_INITIAL.values))
 
     const { values, inputError } = useMemo(() => {
         try {

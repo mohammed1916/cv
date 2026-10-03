@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-the-celebrity-564')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -361,7 +363,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
 export default function FindCelebrityVisualizer() {
   const examples = useMemo(() => getExamplesOr('find-the-celebrity-564', []), [])
   const [n, setN] = useState(3)
-  const [matrixInput, setMatrixInput] = useState('[[1,1,0],[0,1,0],[1,1,1]]')
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix || AUTHORED_INITIAL))
 
   const { matrix, inputError } = useMemo(() => {
     try {

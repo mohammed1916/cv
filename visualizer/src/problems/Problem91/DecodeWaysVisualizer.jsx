@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('decode-ways')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -123,7 +125,7 @@ function generateSteps(s) {
 const EXAMPLES = getExamples('decode-ways')
 
 export default function DecodeWaysVisualizer() {
-    const [sInput, setSInput] = useState('226')
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
     const { s, inputError } = useMemo(() => {
         const v = sInput.trim()

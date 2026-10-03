@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:343')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -117,14 +120,7 @@ function generateSteps(n) {
 }
 
 const REGISTRY_EXAMPLES = getExamplesOr('integer-break', [])
-const DEFAULT_EXAMPLES = [
-  { label: 'n = 2', n: 2 },
-  { label: 'n = 4', n: 4 },
-  { label: 'n = 7', n: 7 },
-  { label: 'n = 10', n: 10 },
-  { label: 'n = 15', n: 15 },
-  { label: 'n = 20', n: 20 },
-]
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:343')
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 const COLORS = {
@@ -186,7 +182,7 @@ function cellStyle(idx, value, step) {
 }
 
 export default function IntegerBreakVisualizer() {
-  const [nInput, setNInput] = useState('10')
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n ?? 10))
 
   const { n, inputError } = useMemo(() => {
     const raw = nInput.trim()

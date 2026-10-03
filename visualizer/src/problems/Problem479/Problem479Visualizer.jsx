@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('largest-palindrome-product')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,9 +20,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('largest-palindrome-product', [
-  { label: 'Example 1', n: 2 },
-])
+const EXAMPLES = getExamplesOr('largest-palindrome-product', [])
 
 function generateSteps(n) {
   const steps = []
@@ -207,7 +207,7 @@ const SOLUTION_CODE_INLINE = [
 
 export default function Problem479Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(1);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

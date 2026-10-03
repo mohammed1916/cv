@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('all-o1-data-structure')[0];
+import { generateSteps, CODE as SOLUTION_CODE_INLINE } from './algorithm';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -20,81 +23,11 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('all-o1-data-structure', [
-  { label: 'Example 1', operations: ['add-2', 'add-3', 'add-5', 'getRandom', 'remove-3'] },
-])
+const EXAMPLES = getExamplesOr('all-o1-data-structure', [])
 
-const SOLUTION_CODE_INLINE = [
-  { line: 1, text: 'class RandomizedSet:' },
-  { line: 2, text: '    def __init__(self):' },
-  { line: 3, text: '        self.map = {}' },
-  { line: 4, text: '        self.list = []' },
-  { line: 5, text: '    def add(self, val):' },
-  { line: 6, text: '        if val in self.map: return False' },
-  { line: 7, text: '        self.map[val] = len(self.list)' },
-  { line: 8, text: '        self.list.append(val)' },
-  { line: 9, text: '        return True' },
-  { line: 10, text: '    def remove(self, val):' },
-  { line: 11, text: '        if val not in self.map: return False' },
-  { line: 12, text: '        last = self.list[-1]' },
-  { line: 13, text: '        self.list[self.map[val]] = last' },
-  { line: 14, text: '        del self.map[val]' },
-]
 
-function generateSteps(operations) {
-  const steps = []
 
-  steps.push({ activeLine: 1, message: `Initialize O(1) RandomSet: map for val→idx, array for values`, map: new Map(), array: [] })
 
-  const map = new Map()
-  const array = []
-
-  for (let i = 0; i < Math.min(operations.length, 6); i++) {
-    const op = operations[i]
-
-    steps.push({ activeLine: 2, message: `Process operation: ${op}`, currentOp: op })
-
-    if (op.startsWith('add')) {
-      const val = parseInt(op.split('-')[1])
-      steps.push({ activeLine: 3, message: `add(${val}): check if exists in map`, val, inMap: map.has(val) })
-
-      if (!map.has(val)) {
-        map.set(val, array.length)
-        array.push(val)
-        steps.push({ activeLine: 4, message: `Not in map → append to array at idx ${array.length - 1}`, val, array: [...array], map: new Map(map) })
-        steps.push({ activeLine: 5, message: `Map[${val}] = ${array.length - 1}`, val, array: [...array], map: new Map(map) })
-      } else {
-        steps.push({ activeLine: 6, message: `Already exists → skip (return false)`, val })
-      }
-    } else if (op === 'getRandom') {
-      steps.push({ activeLine: 7, message: `getRandom(): generate random index [0, ${array.length - 1}]`, array: [...array] })
-      const randomIdx = Math.floor(Math.random() * array.length)
-      steps.push({ activeLine: 8, message: `Random idx=${randomIdx} → return array[${randomIdx}] = ${array[randomIdx]}`, randomVal: array[randomIdx], array: [...array] })
-    } else if (op.startsWith('remove')) {
-      const val = parseInt(op.split('-')[1])
-      steps.push({ activeLine: 9, message: `remove(${val}): check if in map`, val, inMap: map.has(val) })
-
-      if (map.has(val)) {
-        const idx = map.get(val)
-        steps.push({ activeLine: 10, message: `Found at idx ${idx} → swap with last element`, val, idx, lastVal: array[array.length - 1] })
-
-        const last = array[array.length - 1]
-        array[idx] = last
-        map.set(last, idx)
-        steps.push({ activeLine: 11, message: `After swap: array[${idx}] = ${last}, update map[${last}] = ${idx}`, array: [...array], map: new Map(map) })
-
-        array.pop()
-        map.delete(val)
-        steps.push({ activeLine: 12, message: `Remove last and delete from map`, array: [...array], map: new Map(map) })
-      } else {
-        steps.push({ activeLine: 13, message: `Not in map → skip (return false)`, val })
-      }
-    }
-  }
-
-  steps.push({ activeLine: 14, message: `Final state: array=${JSON.stringify(array)}, map=${JSON.stringify(Array.from(map.entries()))}`, done: true, array: [...array], map: new Map(map) })
-  return steps
-}
 
 function VisualizationPanel({ step, applyEx }) {
   return (
@@ -130,13 +63,13 @@ function VisualizationPanel({ step, applyEx }) {
       <div style={{ padding: 12, backgroundColor: '#f0f9ff', borderRadius: 6, border: '1px solid #bfdbfe' }}>
         <div style={{ fontSize: 12, fontWeight: 600, color: '#0c4a6e', marginBottom: 6 }}>Key Insight</div>
         <div style={{ fontSize: 11, color: '#075985', lineHeight: 1.5 }}>
-          Use a map (val→index) and array. On remove, swap target with last element, update map, then pop array.
+          Keep keys in linked count buckets. Move a key to its neighboring bucket on each update; read the first or last bucket for an extreme count.
         </div>
       </div>
 
       {step?.array && step.array.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Array (Values)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Active keys</div>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
             {step.array.map((val, i) => (
               <motion.div
@@ -168,7 +101,7 @@ function VisualizationPanel({ step, applyEx }) {
 
       {step?.map && step.map.size > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Map (val → idx)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Map (key → count)</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {Array.from(step.map.entries()).slice(0, 5).map(([val, idx], i) => (
               <div
@@ -215,7 +148,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem432Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [operationsInput, setOperationsInput] = useState("[[\"inc\",\"a\"],[\"inc\",\"b\"],[\"getMaxKey\"],[\"getMinKey\"],[\"inc\",\"a\"],[\"getMaxKey\"],[\"getMinKey\"]]");
+  const [operationsInput, setOperationsInput] = useState(JSON.stringify(AUTHORED_INITIAL.operations));
   const { operations, inputError } = useMemo(() => {
     try {
       const parsedOperations = JSON.parse(operationsInput); if (!Array.isArray(parsedOperations)) throw new Error('operations must be an array');

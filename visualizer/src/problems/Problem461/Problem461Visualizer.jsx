@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('hamming-distance')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -39,11 +41,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('hamming-distance', [
-  { label: 'Example 1', x: 1, y: 4, expected: 2 },
-  { label: 'Example 2', x: 3, y: 1, expected: 1 },
-  { label: 'Example 3', x: 15, y: 8, expected: 2 },
-])
+const EXAMPLES = getExamplesOr('hamming-distance', [])
 
 const SNIPPETS = [
   { id: 'xor', label: 'XOR', lines: [2] },
@@ -369,8 +367,8 @@ function VisualizationPanel({ step, x, y, EXAMPLES, handleExampleClick, xInput, 
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem461Visualizer() {
-  const [xInput, setXInput] = useState('1')
-  const [yInput, setYInput] = useState('4')
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x))
+  const [yInput, setYInput] = useState(String(AUTHORED_INITIAL.y))
 
   const { x, y } = useMemo(() => {
     const xVal = parseInt(xInput.trim())

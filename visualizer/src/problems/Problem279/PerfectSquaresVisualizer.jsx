@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('perfect-squares')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -103,7 +105,7 @@ function generateSteps(n) {
 const EXAMPLES = getExamples('perfect-squares')
 
 export default function PerfectSquaresVisualizer() {
-    const [nInput, setNInput] = useState('7')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
 
     const { n, inputError } = useMemo(() => {
         try {

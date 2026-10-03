@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('three-sum-closest')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -131,8 +133,8 @@ function generateSteps(nums, target) {
 const EXAMPLES = getExamples('three-sum-closest')
 
 export default function ThreeSumClosestVisualizer() {
-    const [numsInput, setNumsInput] = useState('[-1,2,1,-4]')
-    const [targetInput, setTargetInput] = useState('1')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+    const [targetInput, setTargetInput] = useState(JSON.stringify(AUTHORED_INITIAL.target))
     const [panelDivs, setPanelDivs] = useState(null)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

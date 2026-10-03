@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('insertion-sort-list')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -23,16 +25,7 @@ import "./InsertionSortListVisualizer.css";
 const LINE_PATTERN_MAP = {};
 const PATTERNS = [];
 
-const EXAMPLES = getExamplesOr("insertion-sort-list", [
-  {
-    label: "Example 1",
-    head: [4, 2, 1, 3],
-  },
-  {
-    label: "Example 2",
-    head: [-1, 5, 3, 4, 0],
-  },
-]);
+const EXAMPLES = getExamplesOr("insertion-sort-list", []);
 
 const SOLUTION_CODE = [
   { line: 1, text: "def insertionSortList(head):" },
@@ -910,7 +903,7 @@ function VisualizationPanel({ step }) {
 // ─── Main component ────────────────────────────────────────────────────────
 
 export default function InsertionSortListVisualizer() {
-  const [headInput, setHeadInput] = useState(JSON.stringify([4, 2, 1, 3]));
+  const [headInput, setHeadInput] = useState(JSON.stringify(AUTHORED_INITIAL.head ?? []));
 
   const { head, inputError } = useMemo(() => {
     try {

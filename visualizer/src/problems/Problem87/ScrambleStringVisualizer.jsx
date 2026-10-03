@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('scramble-string')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -522,8 +524,8 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 
 export default function ScrambleStringVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [s1Input, setS1Input] = useState("great");
-  const [s2Input, setS2Input] = useState("rgeat");
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1));
+  const [s2Input, setS2Input] = useState(String(AUTHORED_INITIAL.s2));
   const { s1, s2, inputError } = useMemo(() => {
     try {
       const parsedS1 = s1Input;

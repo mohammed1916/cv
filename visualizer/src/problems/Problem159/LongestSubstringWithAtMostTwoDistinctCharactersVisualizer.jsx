@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-substring-with-at-most-two-distinct-characters')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -19,10 +21,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('longest-substring-with-at-most-two-distinct-characters', [
-  { label: 'Example 1', s: 'eceba' },
-  { label: 'Example 2', s: 'ccaabbb' },
-])
+const EXAMPLES = getExamplesOr('longest-substring-with-at-most-two-distinct-characters', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def lengthOfLongestSubstring(s):' },
@@ -299,7 +298,7 @@ function VisualizationPanel({ step }) {
 
 export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","s":"eceba"});
-  const [sInput, setSInput] = useState("eceba");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

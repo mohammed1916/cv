@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('binary-tree-longest-consecutive-sequence-ii')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -306,14 +308,10 @@ function generateSteps(input) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("binary-tree-longest-consecutive-sequence-ii", [
-  { label: "Example 1", tree: "1,2,3" },
-  { label: "Example 2", tree: "2,1,3" },
-  { label: "Longer path", tree: "3,2,4,1,null,null,5" },
-]);
+const EXAMPLES = getExamplesOr("binary-tree-longest-consecutive-sequence-ii", []);
 
 export default function BTLongestConsecutiveIIVisualizer() {
-  const [treeInput, setTreeInput] = useState("2,1,3");
+  const [treeInput, setTreeInput] = useState(AUTHORED_INITIAL.tree);
   const [panelDivs, setPanelDivs] = useState(null);
 
   const { inputError, tree } = useMemo(() => {

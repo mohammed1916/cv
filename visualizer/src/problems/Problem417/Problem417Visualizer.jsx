@@ -1,4 +1,5 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -52,11 +53,7 @@ const SOLUTION_CODE = [
   { line: 30, text: '        return list(pacific & atlantic)' },
 ]
 
-const EXAMPLES = [
-  { label: 'Classic 5 × 5', input: [[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2, 4]] },
-  { label: 'Single cell', input: [[7]] },
-  { label: 'Flat grid', input: [[1, 1, 1], [1, 1, 1], [1, 1, 1]] },
-]
+const EXAMPLES = getAuthoredExamples('local:417')
 
 function generateSteps(heights) {
   const steps = []

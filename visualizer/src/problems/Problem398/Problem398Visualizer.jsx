@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('random-pick-index')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -147,14 +149,10 @@ function generateSteps(numsStr, targetStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('random-pick-index', [
-  { label: 'Example 1', nums: '[1,2,3,3,3]', target: '3' },
-  { label: 'Example 2', nums: '[1]', target: '1' },
-  { label: 'Example 3', nums: '[1,2,3,1,1,1]', target: '1' },
-])
+const EXAMPLES = getExamplesOr('random-pick-index', [])
 
 export default function Problem398Visualizer() {
-  const [numsInput, setNumsInput] = useState('[1,2,3,3,3]')
+  const [numsInput, setNumsInput] = useState(AUTHORED_INITIAL.nums)
   const [targetInput, setTargetInput] = useState('3')
 
   const { nums, target, inputError } = useMemo(() => {

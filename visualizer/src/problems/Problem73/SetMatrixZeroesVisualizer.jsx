@@ -70,9 +70,7 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = getExamplesOr('set-matrix-zeroes', [
-    { label: 'Ex1', matrix: [[1, 1, 1], [1, 0, 1], [1, 1, 1]] },
-]);
+const EXAMPLES = getExamplesOr('set-matrix-zeroes', []);
 
 export default function SetMatrixZeroesVisualizer() {
     const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0].matrix));

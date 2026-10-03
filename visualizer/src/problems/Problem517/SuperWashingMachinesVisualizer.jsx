@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('super-washing-machines')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -205,7 +207,7 @@ function VisualizationPanel({ machines, step }) {
 
 export default function SuperWashingMachinesVisualizer() {
   const [machinesInput, setMachinesInput] = useState(
-    JSON.stringify(EXAMPLES?.[0]?.machines ?? [1, 0, 5])
+    JSON.stringify(AUTHORED_INITIAL.machines ?? [])
   )
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 

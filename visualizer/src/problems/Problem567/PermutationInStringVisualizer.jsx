@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('permutation-in-string')[0];
+import { useState, useMemo, useCallback } from "react";
 
 import { createPortal } from "react-dom";
 
@@ -403,10 +405,10 @@ export default function PermutationInStringVisualizer() {
 
   const [ex, setEx] = useState(initialExample);
 
-  const [s1Input, setS1Input] = useState(String(initialExample.s1 ?? "ab"));
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1 ?? ""));
 
   const [s2Input, setS2Input] = useState(
-    String(initialExample.s2 ?? "eidbaooo"),
+    String(AUTHORED_INITIAL.s2 ?? ""),
   );
 
   const { s1, s2, inputError } = useMemo(() => {

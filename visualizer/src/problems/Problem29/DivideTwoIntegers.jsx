@@ -1,17 +1,11 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { divideNarrative } from './divideNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import { AccumulationLane } from "../../components/shared/LookupAccumulator";
 import { buildDivision, code, linePatterns } from "./algorithm";
 import "./DivideTwoIntegers.css";
 
-const examples = [
-  { label: "10 / 3", values: { dividend: "10", divisor: "3" } },
-  { label: "43 / 5", values: { dividend: "43", divisor: "5" } },
-  { label: "7 / -3", values: { dividend: "7", divisor: "-3" } },
-  { label: "Smaller dividend", values: { dividend: "2", divisor: "5" } },
-  { label: "Zero", values: { dividend: "0", divisor: "3" } },
-  { label: "Overflow", values: { dividend: "-2147483648", divisor: "-1" } },
-];
+const examples = getAuthoredExamples('local:29');
 const definition = {
   narrative: divideNarrative,
   title: "Divide by doubling and subtracting",

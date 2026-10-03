@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('subarray-sum-equals-k')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -118,8 +120,8 @@ function parseNums(str) {
 }
 
 export default function SubarraySumKVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,1,1]");
-    const [kInput, setKInput] = useState("2");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
 
     const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
     const k = useMemo(() => parseInt(kInput, 10) || 0, [kInput]);

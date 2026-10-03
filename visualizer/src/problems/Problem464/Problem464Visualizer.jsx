@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('can-i-win')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -49,11 +51,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('can-i-win', [
-  { label: 'Example 1', maxChoosable: 10, desiredTotal: 40, expected: true },
-  { label: 'Example 2', maxChoosable: 10, desiredTotal: 1, expected: true },
-  { label: 'Example 3', maxChoosable: 4, desiredTotal: 6, expected: true },
-])
+const EXAMPLES = getExamplesOr('can-i-win', [])
 
 const SNIPPETS = [
   { id: 'check', label: 'Check Cases', lines: [2, 3, 4] },
@@ -372,7 +370,7 @@ const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem464Visualizer() {
   const [maxChoosableInput, setMaxChoosableInput] = useState('10')
-  const [desiredTotalInput, setDesiredTotalInput] = useState('40')
+  const [desiredTotalInput, setDesiredTotalInput] = useState(String(AUTHORED_INITIAL.desiredTotal))
 
   const { maxChoosable, desiredTotal } = useMemo(() => {
     const m = parseInt(maxChoosableInput.trim())

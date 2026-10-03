@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('convex-polygon')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -222,7 +224,7 @@ function VisualizationPanel({ points, step, applyEx }) {
 
 export default function Problem469Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [pointsInput, setPointsInput] = useState("[[0,0],[0,1],[1,1],[1,0]]");
+  const [pointsInput, setPointsInput] = useState(JSON.stringify(AUTHORED_INITIAL.points));
   const { points, inputError } = useMemo(() => {
     try {
       const parsedPoints = JSON.parse(pointsInput); if (!Array.isArray(parsedPoints)) throw new Error('points must be an array');

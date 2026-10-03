@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('rotate-list')[0];
 import { getExamples } from "../../config/examplesRegistry";
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
@@ -462,8 +464,8 @@ function VisualizationPanel({ step }) {
 
 export default function Problem61Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [listInput, setListInput] = useState("[1,2,3,4,5]");
-  const [kInput, setKInput] = useState(2);
+  const [listInput, setListInput] = useState(JSON.stringify(AUTHORED_INITIAL.list));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
 
   const { list, k, inputError } = useMemo(() => {
     try {

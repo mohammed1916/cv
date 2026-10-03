@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('construct-binary-tree')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { reconstructTreeStory } from "../../components/shared/reconstructTreeStory";
@@ -36,8 +38,8 @@ const SOLUTION_CODE = [
 const EXAMPLES = getExamples("construct-binary-tree");
 
 export default function ConstructBTVisualizer() {
-  const [preInput, setPreInput] = useState("[3,9,20,15,7]");
-  const [inoInput, setInoInput] = useState("[9,3,15,20,7]");
+  const [preInput, setPreInput] = useState(JSON.stringify(AUTHORED_INITIAL.pre));
+  const [inoInput, setInoInput] = useState(JSON.stringify(AUTHORED_INITIAL.ino));
 
   const { story, inputError } = useMemo(() => {
     try { return { story: reconstructTreeStory(inoInput, preInput), inputError: '' }; }

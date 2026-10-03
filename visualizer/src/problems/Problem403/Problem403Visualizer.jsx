@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +19,7 @@ const SOLUTION_CODE = getSolutionCode('frog-jump')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', stones: [0, 1, 3, 5, 6, 8, 12, 17], expected: true },
-  { label: 'Ex2', stones: [0, 1, 2, 3, 4, 8, 9, 11], expected: false },
-  { label: 'Simple', stones: [0, 1, 2], expected: true },
-]
+const EXAMPLES = getAuthoredExamples('local:403')
 
 function generateSteps(stones) {
   const steps = []

@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -33,11 +34,7 @@ const SOLUTION_CODE = [
   { line: 13, text: '        return node.val' },
 ]
 
-const EXAMPLES = [
-  { label: 'Balanced BST', input: [3, 1, 6, null, 2, 4, 7] },
-  { label: 'Single node', input: [1] },
-  { label: 'Right chain', input: [1, null, 2, null, null, null, 3] },
-]
+const EXAMPLES = getAuthoredExamples('local:173')
 
 function generateSteps(treeValues) {
   const steps = []

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('climbing-stairs')[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -245,7 +247,7 @@ function VisualizationPanel({
 const LINE_PATTERN_MAP = {}
 
 export default function ClimbingStairsVisualizer() {
-  const [nInput, setNInput] = useState('5')
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
 
   // Load solution code from registry
 

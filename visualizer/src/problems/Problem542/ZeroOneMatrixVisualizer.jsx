@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('01-matrix')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -230,9 +232,9 @@ function VisualizationPanel({ matrix, step, applyExample, examples }) {
 }
 
 export default function ZeroOneMatrixVisualizer() {
-  const defaultMatrix = [[0, 0, 0], [0, 1, 0], [1, 1, 1]]
+
   const examples = useMemo(() => getExamplesOr('01-matrix', []), [])
-  const [matrixInput, setMatrixInput] = useState(JSON.stringify(defaultMatrix))
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.mat || AUTHORED_INITIAL))
 
   const { matrix, inputError } = useMemo(() => {
     try {

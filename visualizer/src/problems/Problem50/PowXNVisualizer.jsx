@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('powx-n')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -30,11 +32,7 @@ const SOLUTION_CODE = [
   { line: 5, text: '    else: return half * half * x' },
 ]
 
-const EXAMPLES = getExamplesOr('powx-n', [
-  { label: '2^10', x: 2, n: 10 },
-  { label: '2.1^3', x: 2.1, n: 3 },
-  { label: '2^-2', x: 2, n: -2 },
-])
+const EXAMPLES = getExamplesOr('powx-n', [])
 
 function generateSteps(x, n) {
   const steps = []
@@ -44,8 +42,8 @@ function generateSteps(x, n) {
 
 export default function PowXNVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [xInput, setXInput] = useState(2);
-  const [nInput, setNInput] = useState(10);
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x));
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { x, n, inputError } = useMemo(() => {
     try {
       const parsedX = Number(xInput); if (isNaN(parsedX)) throw new Error('x must be a number');

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('shortest-distance-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -359,7 +361,7 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
 
 export default function ShortestWordDistanceVisualizer() {
   const examples = useMemo(() => getExamplesOr('shortest-distance-ii', []), [])
-  const [wordsInput, setWordsInput] = useState('["practice","can","do","coding","now"]')
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words || AUTHORED_INITIAL))
   const [word1, setWord1] = useState('practice')
   const [word2, setWord2] = useState('now')
 

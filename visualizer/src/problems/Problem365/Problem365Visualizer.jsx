@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -230,29 +231,7 @@ function generateSteps(a, b, z) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Achievable',
-    a: 3,
-    b: 5,
-    z: 4,
-    description: 'gcd(3,5)=1, 4%1=0 → Possible (famous puzzle)',
-  },
-  {
-    label: 'Example 2: Impossible',
-    a: 2,
-    b: 2,
-    z: 3,
-    description: 'gcd(2,2)=2, 3%2=1 → Impossible',
-  },
-  {
-    label: 'Example 3: Edge Case',
-    a: 1,
-    b: 2,
-    z: 0,
-    description: 'Target is 0, always achievable (empty both)',
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:365')
 
 export default function Problem365Visualizer() {
   const [exIdx, setExIdx] = useState(0)

@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -13,12 +14,7 @@ const definition = {
     { id: 'leading', label: 'Check first digit', description: 'The leading digit must differ from x.' },
     { id: 'done', label: 'AND / return', description: 'Both conditions must pass.' },
   ],
-  examples: [
-    { label: 'Valid zero inside', input: '{"n":101,"x":0}' },
-    { label: 'Leading match', input: '{"n":232,"x":2}' },
-    { label: 'Target absent', input: '{"n":5,"x":1}' },
-    { label: 'Number zero', input: '{"n":0,"x":0}' },
-  ],
+  examples: getAuthoredExamples('local:3908'),
 }
 function ValidDigitNumber() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

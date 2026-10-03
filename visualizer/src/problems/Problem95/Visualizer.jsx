@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:95')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -45,12 +48,7 @@ const SOLUTION_CODE = [
 ]
 
 // n is capped at 4 for rendering sanity (n=4 already yields 14 trees).
-const EXAMPLES = [
-  { label: 'n = 3', n: 3 },
-  { label: 'n = 2', n: 2 },
-  { label: 'n = 1', n: 1 },
-  { label: 'n = 4', n: 4 },
-]
+const EXAMPLES = getAuthoredExamples('local:95')
 
 // ─── Pure BST generation (real algorithm) ───────────────────────────────────
 function generate(start, end) {
@@ -404,7 +402,7 @@ function VisualizationPanel({ step }) {
 // ─── Default export ───────────────────────────────────────────────────────────
 export default function Problem95Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(3);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

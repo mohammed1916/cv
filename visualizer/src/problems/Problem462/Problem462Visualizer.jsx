@@ -39,11 +39,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('minimum-moves-to-equal-array-elements-ii', [
-  { label: 'Example 1', nums: [1, 0, 0, 8, 6], expected: 14 },
-  { label: 'Example 2', nums: [1, 2, 3], expected: 2 },
-  { label: 'Example 3', nums: [1, 1, 1, 1], expected: 0 },
-])
+const EXAMPLES = getExamplesOr('minimum-moves-to-equal-array-elements-ii', [])
 
 const SNIPPETS = [
   { id: 'sort', label: 'Sort', lines: [2] },

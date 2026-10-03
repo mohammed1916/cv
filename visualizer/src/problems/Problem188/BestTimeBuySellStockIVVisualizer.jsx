@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('best-time-buy-sell-stock-iv')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -66,8 +68,8 @@ function generateSteps(k, prices) {
 
 export default function BestTimeBuySellStockIVVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [kInput, setKInput] = useState(2);
-  const [pricesInput, setPricesInput] = useState("[3,2,6,5,0,3]");
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
+  const [pricesInput, setPricesInput] = useState(JSON.stringify(AUTHORED_INITIAL.prices));
   const { k, prices, inputError } = useMemo(() => {
     try {
       const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');

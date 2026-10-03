@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('target-sum')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -39,10 +41,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('target-sum', [
-  { label: 'Example 1', nums: [1,1,1,1,1], target: 3 },
-  { label: 'Example 2', nums: [1,0], target: 1 },
-])
+const EXAMPLES = getExamplesOr('target-sum', [])
 
 function generateSteps(nums, target) {
   const steps = []
@@ -82,8 +81,8 @@ function VisualizationPanel({ nums, target, step, applyEx }) {
 
 export default function Problem494Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,1,1,1,1]");
-  const [targetInput, setTargetInput] = useState(3);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target));
   const { nums, target, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

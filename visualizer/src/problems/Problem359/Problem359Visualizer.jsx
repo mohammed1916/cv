@@ -43,41 +43,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('logger-rate-limiter', [
-  {
-    label: 'Example 1',
-    requests: [
-      { timestamp: 1, message: 'foo' },
-      { timestamp: 1, message: 'bar' },
-      { timestamp: 3, message: 'foo' },
-      { timestamp: 8, message: 'bar' },
-      { timestamp: 10, message: 'foo' },
-      { timestamp: 11, message: 'foo' },
-    ],
-    threshold: 5,
-  },
-  {
-    label: 'Example 2',
-    requests: [
-      { timestamp: 0, message: 'a' },
-      { timestamp: 0, message: 'b' },
-      { timestamp: 0, message: 'c' },
-      { timestamp: 2, message: 'a' },
-      { timestamp: 5, message: 'a' },
-    ],
-    threshold: 2,
-  },
-  {
-    label: 'Example 3',
-    requests: [
-      { timestamp: 0, message: 'msg' },
-      { timestamp: 5, message: 'msg' },
-      { timestamp: 10, message: 'msg' },
-      { timestamp: 15, message: 'msg' },
-    ],
-    threshold: 10,
-  },
-])
+const EXAMPLES = getExamplesOr('logger-rate-limiter', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3, 4] },

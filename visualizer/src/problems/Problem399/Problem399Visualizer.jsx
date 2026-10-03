@@ -1,4 +1,6 @@
-﻿import { Fragment, useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('evaluate-division')[0];
+import { Fragment, useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -198,14 +200,11 @@ function generateSteps(equationsStr, valuesStr, queryStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('evaluate-division', [
-  { label: 'Example 1', equations: '[["a","b"],["b","c"]]', values: '[2.0,3.0]', query: '[["a","c"],["b","a"],["a","e"]]' },
-  { label: 'Example 2', equations: '[["a","b"],["b","c"],["bc","cd"]]', values: '[1.5,2.5,5.0]', query: '[["a","c"],["c","b"],["bc","cd"],["cd","bc"]]' },
-])
+const EXAMPLES = getExamplesOr('evaluate-division', [])
 
 export default function Problem399Visualizer() {
-  const [equationsInput, setEquationsInput] = useState('[["a","b"],["b","c"]]')
-  const [valuesInput, setValuesInput] = useState('[2.0,3.0]')
+  const [equationsInput, setEquationsInput] = useState(AUTHORED_INITIAL.equations)
+  const [valuesInput, setValuesInput] = useState(AUTHORED_INITIAL.values)
   const [queryInput, setQueryInput] = useState('[["a","c"],["b","a"],["a","e"]]')
   const [panelDivs, setPanelDivs] = useState(null)
 

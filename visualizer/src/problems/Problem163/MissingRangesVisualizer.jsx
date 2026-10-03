@@ -19,10 +19,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('missing-ranges', [
-  { label: 'Example 1', nums: [0, 1, 3, 50, 75], lower: 0, upper: 99 },
-  { label: 'Example 2', nums: [], lower: 1, upper: 1 },
-])
+const EXAMPLES = getExamplesOr('missing-ranges', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMissingRanges(nums, lower, upper):' },

@@ -39,7 +39,7 @@ function generateSteps({ nums, left, right }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('range-sum-query-immutable', [{ label: 'Classic query', nums: [-2, 0, 3, -5, 2, -1], left: 0, right: 2 }, { label: 'Middle range', nums: [-2, 0, 3, -5, 2, -1], left: 2, right: 5 }])
+const EXAMPLES = getExamplesOr('range-sum-query-immutable', [])
 
 export default function RangeSumQueryImmutableVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

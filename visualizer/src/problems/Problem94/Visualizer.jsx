@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:94')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -40,11 +43,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '    return result' },
 ]
 
-const EXAMPLES = [
-  { label: 'Example 1', tree: [1, null, 2, 3] },
-  { label: 'Example 2', tree: [4, 2, 6, 1, 3, 5, 7] },
-  { label: 'Left chain', tree: [3, 2, null, 1] },
-]
+const EXAMPLES = getAuthoredExamples('local:94')
 
 // ─── Canvas / layout constants ───────────────────────────────────────────────
 const CANVAS_W = 520
@@ -336,7 +335,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem94Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [treeInput, setTreeInput] = useState("[1,null,2,3]");
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree));
   const { tree, inputError } = useMemo(() => {
     try {
       const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');

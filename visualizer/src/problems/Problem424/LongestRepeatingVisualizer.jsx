@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-repeating-char-replace')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -68,8 +70,8 @@ function generateSteps(s, k) {
 const EXAMPLES = getExamples('longest-repeating-char-replace');
 
 export default function LongestRepeatingVisualizer() {
-    const [sInput, setSInput] = useState("AABABBA");
-    const [kInput, setKInput] = useState("1");
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s);
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
 
     const k = useMemo(() => Math.max(0, parseInt(kInput, 10) || 0), [kInput]);
     const steps = useMemo(() => generateSteps(sInput.toUpperCase(), k), [sInput, k]);

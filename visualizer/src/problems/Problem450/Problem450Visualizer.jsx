@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('delete-node-in-a-bst')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -50,11 +52,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('delete-node-in-a-bst', [
-  { label: 'Example 1', tree: [5, 3, 6, 2, 4, null, 7], key: 3, expected: [5, 4, 6, 2, null, null, 7] },
-  { label: 'Example 2', tree: [5, 3, 6], key: 0, expected: [5, 3, 6] },
-  { label: 'Example 3', tree: [5], key: 5, expected: [] },
-])
+const EXAMPLES = getExamplesOr('delete-node-in-a-bst', [])
 
 const SNIPPETS = [
   { id: 'base', label: 'Base Cases', lines: [2] },
@@ -341,7 +339,7 @@ const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem450Visualizer() {
   const [treeInput, setTreeInput] = useState('5,3,6,2,4,null,7')
-  const [keyInput, setKeyInput] = useState('3')
+  const [keyInput, setKeyInput] = useState(String(AUTHORED_INITIAL.key))
 
   const { treeValues, key } = useMemo(() => {
     const parseTree = (str) => {

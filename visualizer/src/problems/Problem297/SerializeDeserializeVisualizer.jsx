@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('serialize-deserialize')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -222,7 +224,7 @@ function VisualizationPanel({ layout, step, serialized, phase, highlightIdx, ptr
 
 export default function SerializeDeserializeVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [treeInput, setTreeInput] = useState("[1,2,3,null,null,4,5]");
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree));
   const { tree, inputError } = useMemo(() => {
     try {
       const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('continuous-subarray-sum')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -301,11 +303,11 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function ContinuousSubarraySumVisualizer() {
-  const DEFAULT_NUMS = EXAMPLES[0]?.nums ?? [23, 2, 4, 6, 7]
-  const DEFAULT_K = EXAMPLES[0]?.k ?? 6
 
-  const [numsInput, setNumsInput] = useState(JSON.stringify(DEFAULT_NUMS))
-  const [kInput, setKInput] = useState(String(DEFAULT_K))
+
+
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { nums, k, inputError } = useMemo(() => {
@@ -448,7 +450,7 @@ export default function ContinuousSubarraySumVisualizer() {
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
         )}
       </FloatingPanel>
-      
+
     </div>
   )
 }

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('magical-string')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -61,10 +63,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('magical-string', [
-  { label: 'Example 1', n: 6 },
-  { label: 'Example 2', n: 15 },
-])
+const EXAMPLES = getExamplesOr('magical-string', [])
 
 function generateSteps(n) {
   const steps = []
@@ -242,7 +241,7 @@ const SOLUTION_CODE_INLINE = [
 
 export default function Problem481Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(6);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

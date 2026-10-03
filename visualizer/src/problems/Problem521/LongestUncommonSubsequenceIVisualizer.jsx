@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-uncommon-subsequence-i')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -175,8 +177,8 @@ function VisualizationPanel({ a, b, step }) {
 }
 
 export default function LongestUncommonSubsequenceIVisualizer() {
-  const [aInput, setAInput] = useState(EXAMPLES?.[0]?.a ?? 'aba')
-  const [bInput, setBInput] = useState(EXAMPLES?.[0]?.b ?? 'cdc')
+  const [aInput, setAInput] = useState(AUTHORED_INITIAL.a ?? '')
+  const [bInput, setBInput] = useState(AUTHORED_INITIAL.b ?? '')
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 
   const { a, b, inputError } = useMemo(() => {

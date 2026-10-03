@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('merge-sorted-array')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -96,10 +98,10 @@ function generateSteps(nums1Init, m, nums2, n) {
 
 export default function MergeSortedArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nums1Input, setNums1Input] = useState("[1,2,3,0,0,0]");
-  const [mInput, setMInput] = useState(3);
-  const [nums2Input, setNums2Input] = useState("[2,5,6]");
-  const [nInput, setNInput] = useState(3);
+  const [nums1Input, setNums1Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums1));
+  const [mInput, setMInput] = useState(String(AUTHORED_INITIAL.m));
+  const [nums2Input, setNums2Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums2));
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { nums1, m, nums2, n, inputError } = useMemo(() => {
     try {
       const parsedNums1 = JSON.parse(nums1Input); if (!Array.isArray(parsedNums1)) throw new Error('nums1 must be an array');

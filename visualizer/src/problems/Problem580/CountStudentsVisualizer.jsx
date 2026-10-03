@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('count-students')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -197,13 +199,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 export default function CountStudentsVisualizer() {
   const examples = useMemo(() => getExamplesOr('count-students', []), [])
   const [studentsInput, setStudentsInput] = useState(
-    JSON.stringify([
-      { student_id: 1, student_name: 'Alice', department_id: 1 },
-      { student_id: 2, student_name: 'Bob', department_id: 1 },
-      { student_id: 3, student_name: 'Charlie', department_id: 2 },
-      { student_id: 4, student_name: 'Diana', department_id: 2 },
-      { student_id: 5, student_name: 'Eve', department_id: 3 },
-    ])
+    JSON.stringify(AUTHORED_INITIAL.students || AUTHORED_INITIAL)
   )
 
   const { students, inputError } = useMemo(() => {

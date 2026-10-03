@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('bst-to-doubly-linked-list')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -22,9 +24,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('bst-to-doubly-linked-list', [
-  { label: 'Example 1', root: [4, 2, 6, 1, 3, 5, 7] },
-])
+const EXAMPLES = getExamplesOr('bst-to-doubly-linked-list', [])
 
 // Build a BST from level-order array (null = missing).
 function buildTree(arr) {
@@ -212,7 +212,7 @@ function VisualizationPanel({ root, step }) {
 
 export default function Problem426Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [rootInput, setRootInput] = useState("[4,2,6,1,3,5,7]");
+  const [rootInput, setRootInput] = useState(JSON.stringify(AUTHORED_INITIAL.root));
   const { root: inputRoot, inputError } = useMemo(() => {
     try {
       const parsedRoot = JSON.parse(rootInput); if (!Array.isArray(parsedRoot)) throw new Error('root must be an array');

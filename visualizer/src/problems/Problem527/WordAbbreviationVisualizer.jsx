@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('word-abbreviation')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -285,9 +287,9 @@ function VisualizationPanel({ dict, step, applyEx }) {
 }
 
 export default function WordAbbreviationVisualizer() {
-  const DEFAULT_DICT = EXAMPLES[0]?.dict ?? ['like', 'god', 'internal']
 
-  const [dictInput, setDictInput] = useState(JSON.stringify(DEFAULT_DICT))
+
+  const [dictInput, setDictInput] = useState(JSON.stringify(AUTHORED_INITIAL.dict))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { dict, inputError } = useMemo(() => {
@@ -420,7 +422,7 @@ export default function WordAbbreviationVisualizer() {
           <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
         )}
       </FloatingPanel>
-      
+
     </div>
   )
 }

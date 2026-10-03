@@ -1,19 +1,12 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import StockStory from "./StockStory";
 import { stockNarrative } from "./stockNarrative";
 import { STOCK_CODE, buildStock1Story } from "./algorithm";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./BestTimeBuySellStockVisualizer.css";
 
-const registryExamples = getExamples("best-time-buy-sell-stock") || [];
-const EXAMPLES = [
-  ...registryExamples.map((ex) => ({
-    label: ex.label,
-    input: JSON.stringify(ex.prices),
-  })),
-  { label: "Single day", input: "[5]" },
-  { label: "Flat prices", input: "[3, 3, 3, 3]" },
-];
+const EXAMPLES = getAuthoredExamples('local:121');
 
 const definition = {
   narrative: stockNarrative,

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reshape-matrix')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -446,7 +448,7 @@ function VisualizationPanel({ step }) {
 
 export default function ReshapeMatrixVisualizer() {
   const examples = useMemo(() => getExamplesOr('reshape-matrix', []), [])
-  const [matrixInput, setMatrixInput] = useState('[[1,2,3,4]]')
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.mat || AUTHORED_INITIAL.matrix || [[1, 2, 3, 4]]))
   const [r, setR] = useState(2)
   const [c, setC] = useState(2)
 

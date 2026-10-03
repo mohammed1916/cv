@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('implement-rand10')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -189,7 +191,7 @@ function VisualizationPanel({ calls, step, applyEx }) {
 
 export default function Problem470Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [callsInput, setCallsInput] = useState(5);
+  const [callsInput, setCallsInput] = useState(String(AUTHORED_INITIAL.calls));
   const { calls, inputError } = useMemo(() => {
     try {
       const parsedCalls = Number(callsInput); if (isNaN(parsedCalls)) throw new Error('calls must be a number');

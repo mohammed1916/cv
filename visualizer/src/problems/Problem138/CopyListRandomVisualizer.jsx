@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { copyRandomNarrative } from './copyRandomNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CopyRandomStory from "./CopyRandomStory";
@@ -7,26 +8,10 @@ import {
   PATTERNS,
   buildCopyRandomListStory,
 } from "./algorithm";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./CopyListRandomVisualizer.css";
 
-const registryExamples = getExamples("copy-list-random") || [];
-const EXAMPLES = [
-  ...registryExamples.map((ex) => ({
-    label: `${ex.label}: ${JSON.stringify(
-      ex.nodes.map((n) => [n.val, n.random])
-    )}`,
-    input: JSON.stringify(ex.nodes.map((n) => [n.val, n.random])),
-  })),
-  {
-    label: "Single Self-Loop: [[1, 0]]",
-    input: "[[1, 0]]",
-  },
-  {
-    label: "Empty List: []",
-    input: "[]",
-  },
-];
+const EXAMPLES = getAuthoredExamples('local:138');
 
 const definition = {
   narrative: copyRandomNarrative,

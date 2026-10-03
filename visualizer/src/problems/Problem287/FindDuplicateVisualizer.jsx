@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-duplicate')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -160,7 +162,7 @@ function MetricsPanel({ step }) {
 }
 
 export default function FindDuplicateVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,3,4,2,2]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 

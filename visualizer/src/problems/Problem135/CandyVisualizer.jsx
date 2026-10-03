@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CandyStory from "./CandyStory";
 import { CODE, buildCandyStory } from "./algorithm";
@@ -5,16 +6,7 @@ import { candyNarrative } from "./candyNarrative";
 import { getExamplesOr } from "../../config/examplesRegistry";
 import "./CandyVisualizer.css";
 
-const DEFAULT_EXAMPLES = [
-  { label: "Example 1: Valley", input: "[1, 0, 2]" },
-  { label: "Example 2: Plateau", input: "[1, 2, 2]" },
-  { label: "Two Peaks", input: "[1, 3, 2, 2, 1]" },
-  { label: "Steep Valley & Peak", input: "[1, 2, 5, 4, 3, 2, 1]" },
-  { label: "Strictly Decreasing", input: "[5, 4, 3, 2, 1]" },
-  { label: "Strictly Increasing", input: "[1, 2, 3, 4, 5]" },
-  { label: "All Equal Ratings", input: "[3, 3, 3, 3]" },
-  { label: "Single Child", input: "[5]" },
-];
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:135');
 
 const registryExamples = getExamplesOr("candy", []);
 const EXAMPLES =

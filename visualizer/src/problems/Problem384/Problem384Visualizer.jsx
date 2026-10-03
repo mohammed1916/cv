@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -122,20 +123,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Small Array',
-    nums: [1, 2, 3],
-  },
-  {
-    label: 'Larger Array',
-    nums: [1, 2, 3, 4, 5],
-  },
-  {
-    label: 'Single Element',
-    nums: [42],
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:384')
 
 export default function Problem384Visualizer() {
   const [exIdx, setExIdx] = useState(0)

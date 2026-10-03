@@ -23,11 +23,7 @@ const SOLUTION_CODE = [
     { line: 8, text: '    return max(len(tasks), formula_result)' },
 ]
 
-const EXAMPLES = getExamplesOr('task-scheduler', [
-    { label: 'Example 1', tasks: ['A', 'A', 'A', 'B', 'B', 'B'], n: 2 },
-    { label: 'Example 2', tasks: ['A', 'A', 'A', 'B', 'B', 'B', 'C', 'C', 'C'], n: 3 },
-    { label: 'Example 3', tasks: ['A', 'B', 'C', 'D', 'E'], n: 2 },
-])
+const EXAMPLES = getExamplesOr('task-scheduler', [])
 
 function generateSteps(tasks, n) {
     const steps = []
@@ -321,7 +317,7 @@ export default function TaskSchedulerVisualizer() {
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     // Code visual connectivity hook
-    const { highlightedElements, setHighlightedElements } = useCodeVisualConnectivity()
+    const { highlightedElements, setHighlightedElements } = useCodeVisualConnectivity({ steps, stepIndex })
 
     const applyExample = useCallback((example) => {
         setTasks(example.tasks)

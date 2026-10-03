@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -13,13 +14,7 @@ const definition = {
     { id: 'angle', label: 'Law of cosines', description: 'Compute each opposite angle in degrees.' },
     { id: 'done', label: 'Return sorted', description: 'Return sorted angles, or an empty array for invalid geometry.' },
   ],
-  examples: [
-    { label: 'Right triangle', input: '[3,4,5]' },
-    { label: 'Degenerate', input: '[2,4,2]' },
-    { label: 'Equilateral', input: '[5,5,5]' },
-    { label: 'Obtuse', input: '[2,3,4]' },
-    { label: 'Cannot close', input: '[1,2,10]' },
-  ],
+  examples: getAuthoredExamples('local:3899'),
 }
 
 function TriangleDiagram({ sides, active }) {

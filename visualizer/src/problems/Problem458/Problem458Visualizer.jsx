@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('poor-pigs')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -36,11 +38,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('poor-pigs', [
-  { label: 'Example 1', buckets: 1000, minutesToDie: 15, minutesToTest: 60, expected: 5 },
-  { label: 'Example 2', buckets: 8, minutesToDie: 5, minutesToTest: 20, expected: 2 },
-  { label: 'Example 3', buckets: 125, minutesToDie: 1, minutesToTest: 40, expected: 3 },
-])
+const EXAMPLES = getExamplesOr('poor-pigs', [])
 
 const SNIPPETS = [
   { id: 'calc_states', label: 'Calculate States', lines: [2] },
@@ -303,9 +301,9 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, bucketsInput, 
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem458Visualizer() {
-  const [bucketsInput, setBucketsInput] = useState('1000')
-  const [minutesToDieInput, setMinutesToDieInput] = useState('15')
-  const [minutesToTestInput, setMinutesToTestInput] = useState('60')
+  const [bucketsInput, setBucketsInput] = useState(String(AUTHORED_INITIAL.buckets))
+  const [minutesToDieInput, setMinutesToDieInput] = useState(String(AUTHORED_INITIAL.minutesToDie))
+  const [minutesToTestInput, setMinutesToTestInput] = useState(String(AUTHORED_INITIAL.minutesToTest))
 
   const { buckets, minutesToDie, minutesToTest } = useMemo(() => {
     const b = parseInt(bucketsInput.trim())

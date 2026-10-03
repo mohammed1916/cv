@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-right-interval')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -291,7 +293,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem436Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [intervalsInput, setIntervalsInput] = useState("[[1,2]]");
+  const [intervalsInput, setIntervalsInput] = useState(JSON.stringify(AUTHORED_INITIAL.intervals));
   const { intervals, inputError } = useMemo(() => {
     try {
       const parsedIntervals = JSON.parse(intervalsInput); if (!Array.isArray(parsedIntervals)) throw new Error('intervals must be an array');

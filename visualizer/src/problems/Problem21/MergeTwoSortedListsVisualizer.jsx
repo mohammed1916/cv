@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('merge-two-sorted-lists')[0];
+import { useState, useCallback, useMemo } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -217,8 +219,8 @@ function generateSteps(arr1, arr2) {
 const EXAMPLES = getExamples('merge-two-sorted-lists');
 
 export default function MergeTwoSortedListsVisualizer() {
-  const [l1Input, setL1Input] = useState("[1, 2, 4]");
-  const [l2Input, setL2Input] = useState("[1, 3, 4]");
+  const [l1Input, setL1Input] = useState(JSON.stringify(AUTHORED_INITIAL.list1));
+  const [l2Input, setL2Input] = useState(JSON.stringify(AUTHORED_INITIAL.list2));
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   const { list1, list2, inputError } = useMemo(() => {

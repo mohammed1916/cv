@@ -1,4 +1,5 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -17,7 +18,7 @@ import { createPortal } from 'react-dom'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = [{ label: "Example", head: [1, 2, 6, 3, 4, 5, 6], val: 6 }]
+const EXAMPLES = getAuthoredExamples('local:203')
 const SOLUTION_CODE = [
   { line: 1, text: "def removeElements(head, val):" },
   { line: 2, text: "    dummy = ListNode(0)" },

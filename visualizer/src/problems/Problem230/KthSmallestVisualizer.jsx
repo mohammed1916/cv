@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('kth-smallest')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -109,8 +111,8 @@ function generateSteps(arr, k) {
 const EXAMPLES = getExamples('kth-smallest')
 
 export default function KthSmallestVisualizer() {
-    const [arrInput, setArrInput] = useState('[3,1,4,null,2]')
-    const [kInput, setKInput] = useState('1')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { arr, k } = useMemo(() => {

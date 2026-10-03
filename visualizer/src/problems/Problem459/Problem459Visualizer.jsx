@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('repeated-substring-pattern')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -41,11 +43,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('repeated-substring-pattern', [
-  { label: 'Example 1', s: 'abab', expected: true },
-  { label: 'Example 2', s: 'aba', expected: false },
-  { label: 'Example 3', s: 'abcabcabcabc', expected: true },
-])
+const EXAMPLES = getExamplesOr('repeated-substring-pattern', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2] },
@@ -371,7 +369,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem459Visualizer() {
-  const [sInput, setSInput] = useState('abab')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
   const s = useMemo(() => {
     return sInput ? String(sInput) : ''

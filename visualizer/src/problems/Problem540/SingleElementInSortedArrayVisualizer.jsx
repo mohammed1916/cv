@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('single-element-in-sorted-array')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -245,7 +247,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 
 export default function SingleElementInSortedArrayVisualizer() {
   const examples = useMemo(() => getExamplesOr('single-element-in-sorted-array', []), [])
-  const [numsInput, setNumsInput] = useState('[1,1,2,3,3,4,4,8,8]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums || AUTHORED_INITIAL))
 
   const { nums, inputError } = useMemo(() => {
     try {

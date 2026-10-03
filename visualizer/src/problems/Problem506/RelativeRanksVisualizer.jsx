@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:506')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -88,11 +91,7 @@ function generateSteps(nums) {
 }
 
 function VisualizationPanel({ nums, step, applyEx }) {
-  const examples = [
-    { label: '[10,3,8,9,4]', nums: [10, 3, 8, 9, 4] },
-    { label: '[100,90,80,70]', nums: [100, 90, 80, 70] },
-    { label: '[5,4,3,2,1]', nums: [5, 4, 3, 2, 1] },
-  ]
+  const examples = getAuthoredExamples('local:506')
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
@@ -204,7 +203,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
 }
 
 export default function RelativeRanksVisualizer() {
-  const [numsInput, setNumsInput] = useState("[10,3,8,9,4]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

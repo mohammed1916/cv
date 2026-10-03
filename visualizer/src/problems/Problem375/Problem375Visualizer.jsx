@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('guess-number-higher-or-lower-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -157,14 +159,10 @@ function generateSteps(nText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('guess-number-higher-or-lower-ii', [
-  { label: 'Example 1', n: '5' },
-  { label: 'Example 2', n: '1' },
-  { label: 'Example 3', n: '3' },
-])
+const EXAMPLES = getExamplesOr('guess-number-higher-or-lower-ii', [])
 
 export default function Problem375Visualizer() {
-  const [nText, setNText] = useState('5')
+  const [nText, setNText] = useState(AUTHORED_INITIAL.n)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const inputError = useMemo(() => {

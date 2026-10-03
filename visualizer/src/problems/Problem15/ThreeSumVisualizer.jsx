@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('three-sum')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -217,7 +219,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('three-sum')
 
 export default function ThreeSumVisualizer() {
-  const [numsInput, setNumsInput] = useState('[-1,0,1,2,-1,-4]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { nums, inputError } = useMemo(() => {

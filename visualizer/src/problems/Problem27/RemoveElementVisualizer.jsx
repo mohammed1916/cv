@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('remove-element')[0];
+import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -132,8 +134,8 @@ const LINE_PATTERN_MAP = {
 };
 
 export default function RemoveElementVisualizer() {
-  const [numsInput, setNumsInput] = useState("[3, 2, 2, 3]");
-  const [valInput, setValInput] = useState("3");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [valInput, setValInput] = useState(String(AUTHORED_INITIAL.val));
 
   const { nums, val } = useMemo(() => {
     try {

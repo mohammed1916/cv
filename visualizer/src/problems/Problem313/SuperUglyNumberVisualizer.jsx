@@ -54,11 +54,7 @@ function generateSteps({ n, primes }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('super-ugly-number', [
-  { label: '12th with 2, 7, 13, 19', n: 12, primes: [2, 7, 13, 19] },
-  { label: '12th with 2, 3, 5', n: 12, primes: [2, 3, 5] },
-  { label: 'First number', n: 1, primes: [2, 3, 5] },
-])
+const EXAMPLES = getExamplesOr('super-ugly-number', [])
 
 export default function SuperUglyNumberVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

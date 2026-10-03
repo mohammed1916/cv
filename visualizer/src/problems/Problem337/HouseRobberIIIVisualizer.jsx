@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -159,12 +160,7 @@ function generateSteps(treeArray) {
 }
 
 const REGISTRY_EXAMPLES = getExamplesOr('house-robber-iii', [])
-const DEFAULT_EXAMPLES = [
-  { label: 'Example 1 (=7)', inputs: [3, 2, 3, null, 3, null, 1] },
-  { label: 'Example 2 (=9)', inputs: [3, 4, 5, 1, 3, null, 1] },
-  { label: 'Left chain', inputs: [4, 1, null, 2, null, 3] },
-  { label: 'Single node', inputs: [5] },
-]
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:337')
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 export default function HouseRobberIIIVisualizer() {

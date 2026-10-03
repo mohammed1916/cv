@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:examples": "node --test src/config/authoredExamples.test.mjs",
+    "audit:examples": "node scripts/check-authored-examples.mjs && node scripts/verify-workspace-presets.mjs",
     "test:narratives": "node --test src/components/shared/resolveNarrative.test.mjs src/components/shared/narrativeBatch.test.mjs src/components/shared/catalogNarrative.test.mjs",
     "build:narratives": "node scripts/build-catalog-stories.mjs",
     "audit:narratives": "node scripts/audit-narratives.mjs",

@@ -39,10 +39,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('teemo-attacking', [
-  { label: 'Example 1', timeSeries: [1,4], duration: 2 },
-  { label: 'Example 2', timeSeries: [1,2], duration: 2 },
-])
+const EXAMPLES = getExamplesOr('teemo-attacking', [])
 
 function generateSteps(timeSeries, duration) {
   const steps = []

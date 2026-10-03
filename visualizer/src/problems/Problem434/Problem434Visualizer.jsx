@@ -102,12 +102,7 @@ function generateSteps(text) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('number-of-segments-in-a-string', [
-  { label: 'Example 1', s: 'Hello, my name is John' },
-  { label: 'Example 2', s: 'Hello' },
-  { label: 'Padded', s: '   love   live!  mu   ' },
-  { label: 'Empty', s: '' },
-])
+const EXAMPLES = getExamplesOr('number-of-segments-in-a-string', [])
 
 export default function Problem434Visualizer() {
   const [text, setText] = useState('Hello, my name is John')

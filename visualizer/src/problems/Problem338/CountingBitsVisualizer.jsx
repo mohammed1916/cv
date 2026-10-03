@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('counting-bits')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -58,7 +60,7 @@ function generateSteps(n) {
 const EXAMPLES = getExamples('counting-bits')
 
 export default function CountingBitsVisualizer() {
-    const [nInput, setNInput] = useState('5')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {

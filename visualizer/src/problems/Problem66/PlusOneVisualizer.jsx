@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('plus-one')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -186,7 +188,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function PlusOneVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [digitsInput, setDigitsInput] = useState("[1,2,3]");
+  const [digitsInput, setDigitsInput] = useState(JSON.stringify(AUTHORED_INITIAL.digits));
   const [descInput, setDescInput] = useState("123");
   const { digits, desc, inputError } = useMemo(() => {
     try {

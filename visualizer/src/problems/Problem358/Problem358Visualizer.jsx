@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('rearrange-string-k-distance-apart')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -50,11 +52,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('rearrange-string-k-distance-apart', [
-  { label: 'Example 1', s: 'ABABAB', k: 2 },
-  { label: 'Example 2', s: 'AAABBBCCD', k: 2 },
-  { label: 'Example 3', s: 'A', k: 0 },
-])
+const EXAMPLES = getExamplesOr('rearrange-string-k-distance-apart', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [3, 4, 5, 6, 7, 8, 9, 10] },
@@ -552,8 +550,8 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem358Visualizer() {
-  const [sInput, setSInput] = useState('ABABAB')
-  const [kInput, setKInput] = useState(2)
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [kInput, setKInput] = useState(AUTHORED_INITIAL.k)
 
   const { s, k } = useMemo(() => ({
     s: sInput ?? '',

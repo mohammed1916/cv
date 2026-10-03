@@ -37,11 +37,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('minimum-moves-to-equal-array-elements', [
-  { label: 'Example 1', nums: [1, 0, 0, 8, 6], expected: 14 },
-  { label: 'Example 2', nums: [1, 2, 3], expected: 3 },
-  { label: 'Example 3', nums: [5, 5, 5], expected: 0 },
-])
+const EXAMPLES = getExamplesOr('minimum-moves-to-equal-array-elements', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Find Minimum', lines: [1, 2, 3, 4, 5] },

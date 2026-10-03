@@ -131,35 +131,7 @@ function generateSteps(customers, targetRefereeId = 2) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('find-customer-referee', [
-  {
-    label: 'Standard',
-    customers: [
-      { id: 1, name: 'Will', referee_id: null },
-      { id: 2, name: 'Jane', referee_id: null },
-      { id: 3, name: 'Alex', referee_id: 2 },
-      { id: 4, name: 'Bill', referee_id: null },
-      { id: 5, name: 'Zack', referee_id: 1 },
-    ],
-    refereeId: 2,
-  },
-  {
-    label: 'Minimal',
-    customers: [
-      { id: 1, name: 'Alice', referee_id: null },
-      { id: 2, name: 'Bob', referee_id: 1 },
-    ],
-    refereeId: 1,
-  },
-  {
-    label: 'All referred',
-    customers: [
-      { id: 1, name: 'Ann', referee_id: 2 },
-      { id: 2, name: 'Ben', referee_id: 2 },
-    ],
-    refereeId: 2,
-  },
-])
+const EXAMPLES = getExamplesOr('find-customer-referee', [])
 
 function VisualizationPanel({ step, allCustomers, targetRefereeId, inputPanel }) {
   const customers = step?.result || []

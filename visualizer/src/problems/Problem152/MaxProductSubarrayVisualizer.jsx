@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('max-product-subarray')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -77,7 +79,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('max-product-subarray')
 
 export default function MaxProductSubarrayVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,3,-2,4]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, inputError } = useMemo(() => {

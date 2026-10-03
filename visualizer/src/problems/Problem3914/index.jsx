@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -14,7 +15,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/minimum-operations-to-make-array-non-decreasing/',
   complexity: 'The solver uses O(n) time and O(1) extra space. This visualization stores O(n) events and cumulative offsets, not a full array copy per step.',
-  examples: [{ label: 'Two drops', input: '[3,3,2,1]' }, { label: 'One suffix', input: '[5,1,2,3]' }, { label: 'Repeated valleys', input: '[5,1,5,1]' }, { label: 'Already sorted', input: '[1,2,2,4]' }],
+  examples: getAuthoredExamples('local:3914'),
 }
 function MinimumIncrementCost() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

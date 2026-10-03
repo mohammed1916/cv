@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +19,7 @@ const SOLUTION_CODE = getSolutionCode('convert-number-to-hex')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', num: 26, expected: '1a' },
-  { label: 'Ex2', num: -1, expected: 'ffffffff' },
-  { label: 'Zero', num: 0, expected: '0' },
-]
+const EXAMPLES = getAuthoredExamples('local:405')
 
 const HEX_CHARS = '0123456789abcdef'
 

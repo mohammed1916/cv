@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:99')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -46,10 +49,7 @@ const SOLUTION_CODE = [
   { line: 12, text: '    first.val, second.val = second.val, first.val' },
 ]
 
-const EXAMPLES = [
-  { label: 'Example 1', tree: [1, 3, null, null, 2] },
-  { label: 'Example 2', tree: [3, 1, 4, null, null, 2] },
-]
+const EXAMPLES = getAuthoredExamples('local:99')
 
 // ─── Layout constants ──────────────────────────────────────────────────────
 const CANVAS_W = 520
@@ -349,7 +349,7 @@ function LegendDot({ color, label }) {
 
 export default function Problem99Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [treeInput, setTreeInput] = useState("[1,3,null,null,2]");
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree));
   const { tree, inputError } = useMemo(() => {
     try {
       const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');

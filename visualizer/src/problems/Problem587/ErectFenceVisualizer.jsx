@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('erect-fence')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -407,7 +409,7 @@ function VisualizationPanel({ points, hull, step, applyExample, examples }) {
 
 export default function ErectFenceVisualizer() {
   const examples = useMemo(() => getExamplesOr('erect-fence', []), [])
-  const [pointsInput, setPointsInput] = useState('[[1,1],[2,2],[2,0],[2,4],[3,3],[4,2]]')
+  const [pointsInput, setPointsInput] = useState(JSON.stringify(AUTHORED_INITIAL.points || AUTHORED_INITIAL))
 
   // Parse points from input
   const points = useMemo(() => {

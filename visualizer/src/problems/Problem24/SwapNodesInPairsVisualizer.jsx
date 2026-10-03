@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:24')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -11,7 +14,7 @@ import LinkedListGraph from "../../components/shared/LinkedListGraph";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./SwapNodesInPairsVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
@@ -55,13 +58,7 @@ const LINE_PATTERN_MAP = {
   12: "done",
 };
 
-const EXAMPLES = [
-  ...getExamples("swap-nodes-in-pairs"),
-  { label: "Example: [1,2,3,4]", values: [1, 2, 3, 4] },
-  { label: "Example: [1,2,3,4,5]", values: [1, 2, 3, 4, 5] },
-  { label: "Single node [1]", values: [1] },
-  { label: "Empty list []", values: [] },
-];
+const EXAMPLES = getAuthoredExamples('local:24');
 
 function generateSteps(values) {
   const steps = [];
@@ -321,7 +318,7 @@ function generateSteps(values) {
 }
 
 export default function SwapNodesInPairsVisualizer() {
-  const [valInput, setValInput] = useState("[1,2,3,4,5]");
+  const [valInput, setValInput] = useState(JSON.stringify(AUTHORED_INITIAL.values));
 
   const { values, inputError } = useMemo(() => {
     try {

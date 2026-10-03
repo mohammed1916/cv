@@ -61,11 +61,7 @@ function generateSteps({ words }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('max-product-word-lengths', [
-  { label: 'Classic', words: ['abcw', 'baz', 'foo', 'bar', 'xtfn', 'abcdef'] },
-  { label: 'No disjoint pair', words: ['a', 'aa', 'aaa', 'aaaa'] },
-  { label: 'Two words', words: ['abc', 'def'] },
-])
+const EXAMPLES = getExamplesOr('max-product-word-lengths', [])
 
 export default function MaximumProductofWordLengthsVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

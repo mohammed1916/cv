@@ -1,20 +1,12 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { partitionNarrative } from './partitionNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PartitionStory from "./PartitionStory";
 import { CODE, buildPartitionStory } from "./algorithm";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./PalindromePartitioningVisualizer.css";
 
-const registryExamples = getExamples("palindrome-partitioning") || [];
-const EXAMPLES = [
-  ...registryExamples.map((ex) => ({
-    label: ex.label,
-    input: ex.s ?? ex.input ?? "aab",
-  })),
-  { label: "\"abc\" (no multi-char)", input: "abc" },
-  { label: "\"racecar\" (full palindrome)", input: "racecar" },
-  { label: "\"abba\" (even palindrome)", input: "abba" },
-];
+const EXAMPLES = getAuthoredExamples('local:131');
 
 const definition = {
   narrative: partitionNarrative,

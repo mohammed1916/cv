@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('base-7')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -239,7 +241,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function Base7Visualizer() {
   const examples = useMemo(() => getExamplesOr('base-7', []), [])
-  const [numInput, setNumInput] = useState('100')
+  const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.num || AUTHORED_INITIAL.input || 100))
 
   const steps = useMemo(() => generateSteps(numInput), [numInput])
 
@@ -262,7 +264,7 @@ export default function Base7Visualizer() {
 
   const applyExample = useCallback(
     (ex) => {
-      setNumInput(String(ex.num || ex.input || 100))
+      setNumInput(String(ex.num ?? ex.input ?? 100))
       handleReset()
     },
     [handleReset]

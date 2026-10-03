@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('binary-watch')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -124,14 +126,10 @@ function generateSteps(nStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('binary-watch', [
-  { label: 'Example 1: n=1', n: '1' },
-  { label: 'Example 2: n=0', n: '0' },
-  { label: 'Example 3: n=3', n: '3' },
-])
+const EXAMPLES = getExamplesOr('binary-watch', [])
 
 export default function Problem401Visualizer() {
-  const [nInput, setNInput] = useState('1')
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
 
   const { n, inputError } = useMemo(() => {
     try {

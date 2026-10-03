@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:63')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -168,32 +171,7 @@ function generateSteps(m, n, obstacleGrid) {
     return steps
 }
 
-const DEFAULT_EXAMPLES = [
-    {
-        label: '3×3 (clear)',
-        m: 3,
-        n: 3,
-        obstacleGrid: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-    },
-    {
-        label: '3×3 (1 obstacle)',
-        m: 3,
-        n: 3,
-        obstacleGrid: [[0, 0, 0], [0, 1, 0], [0, 0, 0]],
-    },
-    {
-        label: '2×2 (corner)',
-        m: 2,
-        n: 2,
-        obstacleGrid: [[0, 1], [0, 0]],
-    },
-    {
-        label: '4×4 (varied)',
-        m: 4,
-        n: 4,
-        obstacleGrid: [[0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 0, 0]],
-    },
-]
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:63')
 
 function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, mInput, nInput, setMInput, setNInput, obstacleGridInput, setObstacleGridInput, handleReset }) {
     const dp = step?.dp ?? []
@@ -327,13 +305,9 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
 }
 
 export default function UniquePathsIIVisualizer() {
-    const [mInput, setMInput] = useState(3)
-    const [nInput, setNInput] = useState(3)
-    const [obstacleGridInput, setObstacleGridInput] = useState([
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0],
-    ])
+    const [mInput, setMInput] = useState(AUTHORED_INITIAL.m)
+    const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
+    const [obstacleGridInput, setObstacleGridInput] = useState(AUTHORED_INITIAL.obstacleGrid)
 
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

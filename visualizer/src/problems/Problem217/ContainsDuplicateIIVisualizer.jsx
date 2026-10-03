@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:217')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -130,12 +133,7 @@ function generateSteps(nums, k) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: "Duplicate found", nums: [1, 2, 3, 1], k: 3 },
-  { label: "No duplicate", nums: [1, 2, 3, 1, 2, 3], k: 2 },
-  { label: "Adjacent duplicate", nums: [99, 99, 2, 4, 5, 3, 9], k: 3 },
-  { label: "Duplicate too far apart", nums: [1, 0, 1, 1], k: 1 },
-]
+const EXAMPLES = getAuthoredExamples('local:217')
 
 function ArrayDisplay({ nums, windowStart, windowEnd, highlighted }) {
   return (
@@ -274,8 +272,8 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateIIVisualizer() {
-  const [numsInput, setNumsInput] = useState("[99,99,2,4,5,3,9]")
-  const [kInput, setKInput] = useState("3")
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
 
   const { nums, k, inputError } = useMemo(() => {
     try {

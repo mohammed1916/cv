@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -139,12 +140,7 @@ function generateSteps(num1, num2) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: '2 × 3', num1: '2', num2: '3' },
-  { label: '123 × 456', num1: '123', num2: '456' },
-  { label: '9 × 9', num1: '9', num2: '9' },
-  { label: '0 × 5', num1: '0', num2: '5' },
-]
+const EXAMPLES = getAuthoredExamples('local:43')
 
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState('123')

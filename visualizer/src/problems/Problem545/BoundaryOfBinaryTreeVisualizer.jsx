@@ -63,11 +63,7 @@ const SOLUTION_CODE = [
   { line: 33, text: '    return boundary + right[::-1]' },
 ]
 
-const EXAMPLES = getExamplesOr('boundary-of-binary-tree', [
-  { label: 'Example 1', text: '1,null,2,3,4' },
-  { label: 'Example 2', text: '1,2,3,4,5,6,null,null,null,7,8,9,10' },
-  { label: 'Left chain', text: '1,2,null,3,null,4' },
-]).map((ex) => ({
+const EXAMPLES = getExamplesOr('boundary-of-binary-tree', []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.root ?? ex.tree ?? []).join(','),
 }))

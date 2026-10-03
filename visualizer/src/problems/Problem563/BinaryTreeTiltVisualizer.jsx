@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('binary-tree-tilt')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -262,7 +264,7 @@ function VisualizationPanel({ step, positions, nodes, applyExample, examples }) 
 
 export default function BinaryTreeTiltVisualizer() {
   const examples = useMemo(() => getExamplesOr('binary-tree-tilt', []), [])
-  const [arrInput, setArrInput] = useState('[1,0,1]')
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr || AUTHORED_INITIAL))
 
   const { arr, inputError } = useMemo(() => {
     try {

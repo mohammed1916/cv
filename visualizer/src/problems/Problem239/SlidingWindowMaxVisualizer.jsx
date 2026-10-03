@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('sliding-window-maximum')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -89,8 +91,8 @@ function parseNums(str) {
 }
 
 export default function SlidingWindowMaxVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,3,-1,-3,5,3,6,7]");
-    const [kInput, setKInput] = useState("3");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
 
     const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
     const k = useMemo(() => Math.max(1, parseInt(kInput, 10) || 1), [kInput]);

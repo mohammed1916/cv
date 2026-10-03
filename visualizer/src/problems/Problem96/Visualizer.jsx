@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:96')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -26,11 +29,7 @@ const LINE_PATTERN_MAP = {
   8: 'done',
 }
 
-const EXAMPLES = [
-  { label: 'n = 3', n: 3 },
-  { label: 'n = 4', n: 4 },
-  { label: 'n = 5', n: 5 },
-]
+const EXAMPLES = getAuthoredExamples('local:96')
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def numTrees(n):' },
@@ -246,7 +245,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem96Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(3);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

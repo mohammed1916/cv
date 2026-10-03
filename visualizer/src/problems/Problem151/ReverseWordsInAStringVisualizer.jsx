@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-words-in-a-string')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -19,10 +21,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('reverse-words-in-a-string', [
-  { label: 'Example 1', s: '  Hello World  ' },
-  { label: 'Example 2', s: 'a good   example' },
-])
+const EXAMPLES = getExamplesOr('reverse-words-in-a-string', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def reverseWords(s):' },
@@ -210,7 +209,7 @@ function VisualizationPanel({ step }) {
 
 export default function ReverseWordsInAStringVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","s":"  Hello World  "});
-  const [sInput, setSInput] = useState("  Hello World  ");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

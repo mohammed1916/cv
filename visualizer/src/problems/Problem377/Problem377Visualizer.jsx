@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -89,23 +90,7 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    nums: [1, 2, 3],
-    target: 4,
-  },
-  {
-    label: 'Example 2',
-    nums: [1, 3, 4],
-    target: 5,
-  },
-  {
-    label: 'Example 3',
-    nums: [1, 2],
-    target: 3,
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:377')
 
 export default function Problem377Visualizer() {
   const [exIdx, setExIdx] = useState(0)

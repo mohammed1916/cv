@@ -43,7 +43,7 @@ function generateSteps({ size, stream }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('moving-average-data-stream', [{ label: 'Classic window', size: 3, stream: [1, 10, 3, 5] }, { label: 'Size two', size: 2, stream: [4, 2, 8, 6] }])
+const EXAMPLES = getExamplesOr('moving-average-data-stream', [])
 
 export default function MovingAveragefromDataStreamVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

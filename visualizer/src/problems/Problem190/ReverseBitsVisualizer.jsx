@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-bits')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -53,7 +55,7 @@ function generateSteps(nIn) {
 
 export default function ReverseBitsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(43261596);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const [descInput, setDescInput] = useState("43261596");
   const { n, desc, inputError } = useMemo(() => {
     try {

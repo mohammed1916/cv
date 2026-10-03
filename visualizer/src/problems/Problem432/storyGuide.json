@@ -8,21 +8,15 @@
   "edgeCases": [
     "Keys disappear at zero count; empty buckets must be removed without breaking minimum and maximum lookup."
   ],
-  "checks": [
-    {
-      "condition": "val in self.map",
-      "outcome": "return False"
-    },
-    {
-      "condition": "val not in self.map",
-      "outcome": "return False"
-    }
-  ],
+  "checks": [],
   "inputRules": [
-    "operations must be an array"
+    "operations must be an array",
+    "A count update needs a nonempty key.",
+    "Cannot decrement an absent key."
   ],
   "source": [
     "src/problems/Problem432/index.jsx",
-    "src/problems/Problem432/Problem432Visualizer.jsx"
+    "src/problems/Problem432/Problem432Visualizer.jsx",
+    "src/problems/Problem432/algorithm.js"
   ]
 }

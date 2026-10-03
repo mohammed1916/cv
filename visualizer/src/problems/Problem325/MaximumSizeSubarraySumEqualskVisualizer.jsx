@@ -34,7 +34,7 @@ function generateSteps({ nums, k }) {
   steps.push({ phase: 'done', activeLine: 10, message: `The longest subarray with sum ${k} has length ${best}.`, prefix, best, first: Object.fromEntries(first), index: null })
   return steps
 }
-const EXAMPLES = getExamplesOr('max-size-subarray-sum-k', [{ label: 'Classic', nums: [1, -1, 5, -2, 3], k: 3 }])
+const EXAMPLES = getExamplesOr('max-size-subarray-sum-k', [])
 function parseInput(raw) { try { const data = JSON.parse(raw); if (!Array.isArray(data.nums) || !data.nums.every(Number.isFinite) || !Number.isFinite(data.k)) throw new Error('Use { "nums": [numbers], "k": number }.'); return { input: data, inputError: '' } } catch (error) { return { input: null, inputError: error.message } } }
 
 export default function MaximumSizeSubarraySumEqualskVisualizer() {

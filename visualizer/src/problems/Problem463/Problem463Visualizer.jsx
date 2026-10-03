@@ -44,11 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('island-perimeter', [
-  { label: 'Example 1', grid: [[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 1], [1, 1, 0, 0]], expected: 16 },
-  { label: 'Example 2', grid: [[1]], expected: 4 },
-  { label: 'Example 3', grid: [[1, 1], [1, 1]], expected: 8 },
-])
+const EXAMPLES = getExamplesOr('island-perimeter', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3] },

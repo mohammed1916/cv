@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('brick-wall')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -382,7 +384,7 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
 export default function BrickWallVisualizer() {
   const examples = useMemo(() => getExamplesOr('brick-wall', []), [])
-  const [wallInput, setWallInput] = useState('[[1,1],[2],[1,1]]');
+  const [wallInput, setWallInput] = useState(JSON.stringify(AUTHORED_INITIAL.wall || AUTHORED_INITIAL));
   const { wall, inputError } = useMemo(() => {
     try {
       const parsed = JSON.parse(wallInput)

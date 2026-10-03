@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -160,20 +161,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Powers of 2',
-    input: [1, 2, 4, 8],
-  },
-  {
-    label: 'Example 2: Mixed divisors',
-    input: [1, 2, 3, 4, 6],
-  },
-  {
-    label: 'Example 3: Simple case',
-    input: [1, 2],
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:368')
 
 function DivisibilityArrows({ sorted, highlighted, currentIdx }) {
   const elementWidth = 60

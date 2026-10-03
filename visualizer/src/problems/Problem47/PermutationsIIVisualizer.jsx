@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('permutations-ii')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -344,7 +346,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 
 export default function PermutationsIIVisualizer() {
   const examples = useMemo(() => getExamplesOr("permutations-ii", []), []);
-  const [numsInput, setNumsInput] = useState("[1,1,2]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums || AUTHORED_INITIAL));
 
   const { nums, inputError } = useMemo(() => {
     try {

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('top-kfrequent')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -105,8 +107,8 @@ function parseNums(str) {
 }
 
 export default function TopKFrequentVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,1,1,2,2,3]");
-    const [kInput, setKInput] = useState("2");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { nums, err: numsError } = useMemo(() => parseNums(numsInput), [numsInput]);

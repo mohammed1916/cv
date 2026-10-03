@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -166,13 +167,7 @@ function generateSteps(preorder) {
 }
 
 const REGISTRY_EXAMPLES = getExamplesOr('verify-preorder-serialization-tree', [])
-const FALLBACK_EXAMPLES = [
-  { label: 'Valid tree', preorder: '9,3,4,#,#,1,#,#,2,#,6,#,#' },
-  { label: 'Single node', preorder: '1,#,#' },
-  { label: 'Only null', preorder: '#' },
-  { label: 'Invalid (extra node)', preorder: '9,#,#,1' },
-  { label: 'Invalid (incomplete)', preorder: '1,#' },
-]
+const FALLBACK_EXAMPLES = getAuthoredExamples('local:331')
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 const MAX_SLOT_BOXES = 16

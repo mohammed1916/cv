@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('sliding-window-median')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,9 +20,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('sliding-window-median', [
-  { label: 'Example 1', nums: [1, 3, -1, -3, 5, 3, 6, 7], k: 3 },
-])
+const EXAMPLES = getExamplesOr('sliding-window-median', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def medianSlidingWindow(nums, k):' },
@@ -179,8 +179,8 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
 export default function Problem480Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,3,-1,-3,5,3,6,7]");
-  const [kInput, setKInput] = useState(3);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { nums, k, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

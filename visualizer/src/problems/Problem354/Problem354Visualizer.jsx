@@ -59,7 +59,7 @@ function generateSteps(envelopes) {
 
   // Step 1: Sort envelopes
   let sorted = [...envelopes]
-    .map((e, idx) => ({ ...e, origIdx: idx }))
+    .map((e, idx) => Object.assign([...e], { origIdx: idx }))
     .sort((a, b) => a[0] - b[0] || b[1] - a[1])
 
   steps.push({

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('container-with-most-water')[0];
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { generateSteps } from "./algorithm";
@@ -53,7 +55,7 @@ const SOLUTION_CODE = [
 const EXAMPLES = getExamples("container-with-most-water");
 
 export default function ContainerWithMostWaterVisualizer() {
-  const [heightInput, setHeightInput] = useState("[1, 8, 6, 2, 5, 4, 8, 3, 7]");
+  const [heightInput, setHeightInput] = useState(JSON.stringify(AUTHORED_INITIAL.height));
   const {
     showPatternOverlay,
     setShowPatternOverlay,

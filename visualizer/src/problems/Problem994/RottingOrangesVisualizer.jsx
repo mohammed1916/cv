@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('rotting-oranges')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -215,7 +217,7 @@ function VisualizationPanel({ grid, step, inputError, applyExample }) {
 }
 
 export default function RottingOrangesVisualizer() {
-  const [gridInput, setGridInput] = useState('[[2,1,1],[1,1,0],[0,1,1]]')
+  const [gridInput, setGridInput] = useState(JSON.stringify(AUTHORED_INITIAL.grid))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { grid, inputError } = useMemo(() => {

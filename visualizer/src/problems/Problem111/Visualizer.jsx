@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:111')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { createPortal } from "react-dom";
 import { useState, useMemo, useCallback } from "react";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -8,7 +11,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./Visualizer.css";
 import { buildMinimumDepth, parseMinimumDepth } from "./algorithm";
 import MinimumDepthStory, { MinimumDepthComparison } from "./MinimumDepthStory";
@@ -38,13 +41,10 @@ const SOLUTION_CODE = [
     text: "    return 1 + min(minDepth(root.left), minDepth(root.right))",
   },
 ];
-const EXAMPLES = [...getExamplesOr("minimum-depth-of-binary-tree", [
-  { label: "Unequal routes", arr: [3,9,20,null,null,15,7] },
-  { label: "Empty tree", arr: [] },
-]), { label: "Missing child trap", arr: [2,null,3,null,4,null,5] }, { label: "Equal routes", arr: [1,1,1] }];
+const EXAMPLES = getAuthoredExamples('local:111');
 
 export default function MinimumDepthOfBinaryTreeVisualizer() {
-  const [arrInput, setArrInput] = useState("[3,9,20,null,null,15,7]");
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr));
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const {
     showPatternOverlay,

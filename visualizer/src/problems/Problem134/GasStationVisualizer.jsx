@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { gasStationNarrative } from './gasStationNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import GasStationStory from "./GasStationStory";
@@ -5,43 +6,7 @@ import { CODE, buildGasStationStory } from "./algorithm";
 import { getExamplesOr } from "../../config/examplesRegistry";
 import "./GasStationVisualizer.css";
 
-const DEFAULT_EXAMPLES = [
-  {
-    label: "Example 1 (Start 3)",
-    values: {
-      gas: "[1, 2, 3, 4, 5]",
-      cost: "[3, 4, 5, 1, 2]",
-    },
-  },
-  {
-    label: "Example 2 (Impossible)",
-    values: {
-      gas: "[2, 3, 4]",
-      cost: "[3, 4, 3]",
-    },
-  },
-  {
-    label: "Example 3 (Ex 3)",
-    values: {
-      gas: "[5, 1, 2, 3, 4]",
-      cost: "[4, 4, 1, 5, 1]",
-    },
-  },
-  {
-    label: "Single Station",
-    values: {
-      gas: "[2]",
-      cost: "[2]",
-    },
-  },
-  {
-    label: "Exact Fuel (Start 0)",
-    values: {
-      gas: "[3, 1, 1]",
-      cost: "[1, 2, 2]",
-    },
-  },
-];
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:134');
 
 const registryExamples = getExamplesOr("gas-station", []);
 const EXAMPLES =

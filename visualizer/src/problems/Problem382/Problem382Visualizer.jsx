@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -77,7 +78,7 @@ function generateSteps(values) {
       values,
       currentIdx: idx,
       count: idx + 1,
-      result,
+      result: steps[steps.length - 1].result,
       message: `Visit node ${idx}: count = ${idx + 1}`,
     })
 
@@ -124,20 +125,7 @@ function generateSteps(values) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple List',
-    values: [1, 2, 3],
-  },
-  {
-    label: 'Longer List',
-    values: [1, 2, 3, 4, 5],
-  },
-  {
-    label: 'Single Node',
-    values: [7],
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:382')
 
 export default function Problem382Visualizer() {
   const [exIdx, setExIdx] = useState(0)

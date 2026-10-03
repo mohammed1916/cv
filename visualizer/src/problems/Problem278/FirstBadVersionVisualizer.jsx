@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('first-bad-version')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -112,8 +114,8 @@ function generateSteps(n, bad) {
 
 export default function FirstBadVersionVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(5);
-  const [badInput, setBadInput] = useState(4);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
+  const [badInput, setBadInput] = useState(String(AUTHORED_INITIAL.bad));
   const { n, bad, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

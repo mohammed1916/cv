@@ -1,0 +1,825 @@
+{
+  "checks": [
+    {
+      "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
+      "label": "Several subtractive pairs"
+    },
+    {
+      "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
+      "label": "Upper boundary"
+    },
+    {
+      "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
+      "label": "Smallest value"
+    },
+    {
+      "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
+      "label": "Subtractive hundreds and tens"
+    },
+    {
+      "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
+      "label": "Only additive groups"
+    },
+    {
+      "file": "src/problems/Problem120/TriangleVisualizer.jsx",
+      "label": "Five levels with competing choices"
+    },
+    {
+      "file": "src/problems/Problem120/TriangleVisualizer.jsx",
+      "label": "Negative route"
+    },
+    {
+      "file": "src/problems/Problem120/TriangleVisualizer.jsx",
+      "label": "Single value"
+    },
+    {
+      "file": "src/problems/Problem120/TriangleVisualizer.jsx",
+      "label": "All zero"
+    },
+    {
+      "file": "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
+      "label": "Several rallies and a late low"
+    },
+    {
+      "file": "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
+      "label": "Strictly falling"
+    },
+    {
+      "file": "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
+      "label": "Strictly rising"
+    },
+    {
+      "file": "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
+      "label": "Flat market"
+    },
+    {
+      "file": "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
+      "label": "One day"
+    },
+    {
+      "file": "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.jsx",
+      "label": "Competing rallies"
+    },
+    {
+      "file": "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.jsx",
+      "label": "Falling prices"
+    },
+    {
+      "file": "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.jsx",
+      "label": "One long rally"
+    },
+    {
+      "file": "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.jsx",
+      "label": "Flat market"
+    },
+    {
+      "file": "src/problems/Problem122/BestTimeToBuyAndSellStockIIVisualizer.jsx",
+      "label": "One day"
+    },
+    {
+      "file": "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.jsx",
+      "label": "Competing rallies"
+    },
+    {
+      "file": "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.jsx",
+      "label": "Falling prices"
+    },
+    {
+      "file": "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.jsx",
+      "label": "One long rally"
+    },
+    {
+      "file": "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.jsx",
+      "label": "Flat market"
+    },
+    {
+      "file": "src/problems/Problem123/BestTimeBuySellStockIIIVisualizer.jsx",
+      "label": "One day"
+    },
+    {
+      "file": "src/problems/Problem124/BTMaxPathVisualizer.jsx",
+      "label": "Best path excludes a negative ancestor"
+    },
+    {
+      "file": "src/problems/Problem124/BTMaxPathVisualizer.jsx",
+      "label": "All negative"
+    },
+    {
+      "file": "src/problems/Problem124/BTMaxPathVisualizer.jsx",
+      "label": "Chain"
+    },
+    {
+      "file": "src/problems/Problem124/BTMaxPathVisualizer.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem125/ValidPalindromeVisualizer.jsx",
+      "label": "Punctuation and case"
+    },
+    {
+      "file": "src/problems/Problem125/ValidPalindromeVisualizer.jsx",
+      "label": "Mismatch inside"
+    },
+    {
+      "file": "src/problems/Problem125/ValidPalindromeVisualizer.jsx",
+      "label": "Only punctuation"
+    },
+    {
+      "file": "src/problems/Problem125/ValidPalindromeVisualizer.jsx",
+      "label": "Mixed alphanumeric"
+    },
+    {
+      "file": "src/problems/Problem125/ValidPalindromeVisualizer.jsx",
+      "label": "Single letter"
+    },
+    {
+      "file": "src/problems/Problem128/LongestConsecutiveVisualizer.jsx",
+      "label": "Runs merge out of order"
+    },
+    {
+      "file": "src/problems/Problem128/LongestConsecutiveVisualizer.jsx",
+      "label": "Negatives cross zero"
+    },
+    {
+      "file": "src/problems/Problem128/LongestConsecutiveVisualizer.jsx",
+      "label": "Only duplicates"
+    },
+    {
+      "file": "src/problems/Problem128/LongestConsecutiveVisualizer.jsx",
+      "label": "Separated values"
+    },
+    {
+      "file": "src/problems/Problem128/LongestConsecutiveVisualizer.jsx",
+      "label": "Empty"
+    },
+    {
+      "file": "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
+      "label": "Several digit paths"
+    },
+    {
+      "file": "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
+      "label": "Leading zero"
+    },
+    {
+      "file": "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
+      "label": "Zero node"
+    },
+    {
+      "file": "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
+      "label": "Single digit"
+    },
+    {
+      "file": "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
+      "label": "One-sided path"
+    },
+    {
+      "file": "src/problems/Problem13/RomanToIntegerVisualizer.jsx",
+      "label": "Several subtractive pairs"
+    },
+    {
+      "file": "src/problems/Problem13/RomanToIntegerVisualizer.jsx",
+      "label": "Upper boundary"
+    },
+    {
+      "file": "src/problems/Problem13/RomanToIntegerVisualizer.jsx",
+      "label": "Smallest value"
+    },
+    {
+      "file": "src/problems/Problem13/RomanToIntegerVisualizer.jsx",
+      "label": "Additive groups"
+    },
+    {
+      "file": "src/problems/Problem13/RomanToIntegerVisualizer.jsx",
+      "label": "Subtractive hundreds and tens"
+    },
+    {
+      "file": "src/problems/Problem130/SurroundedRegionsVisualizer.jsx",
+      "label": "Border channel and enclosed pocket"
+    },
+    {
+      "file": "src/problems/Problem130/SurroundedRegionsVisualizer.jsx",
+      "label": "All regions reach border"
+    },
+    {
+      "file": "src/problems/Problem130/SurroundedRegionsVisualizer.jsx",
+      "label": "No open cells"
+    },
+    {
+      "file": "src/problems/Problem130/SurroundedRegionsVisualizer.jsx",
+      "label": "One enclosed cell"
+    },
+    {
+      "file": "src/problems/Problem130/SurroundedRegionsVisualizer.jsx",
+      "label": "One row cannot be captured"
+    },
+    {
+      "file": "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+      "label": "Separate palindrome islands"
+    },
+    {
+      "file": "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+      "label": "Whole odd palindrome"
+    },
+    {
+      "file": "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+      "label": "Nested even palindrome"
+    },
+    {
+      "file": "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+      "label": "Every cut competes"
+    },
+    {
+      "file": "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+      "label": "Only single letters"
+    },
+    {
+      "file": "src/problems/Problem131/PalindromePartitioningVisualizer.jsx",
+      "label": "Single letter"
+    },
+    {
+      "file": "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+      "label": "Separate palindrome islands"
+    },
+    {
+      "file": "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+      "label": "Whole odd palindrome"
+    },
+    {
+      "file": "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+      "label": "Nested even palindrome"
+    },
+    {
+      "file": "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+      "label": "Every cut competes"
+    },
+    {
+      "file": "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+      "label": "Only single letters"
+    },
+    {
+      "file": "src/problems/Problem132/PalindromePartitioningIIVisualizer.jsx",
+      "label": "Single letter"
+    },
+    {
+      "file": "src/problems/Problem133/CloneGraphVisualizer.jsx",
+      "label": "Cycles and shared neighbors"
+    },
+    {
+      "file": "src/problems/Problem133/CloneGraphVisualizer.jsx",
+      "label": "One isolated vertex"
+    },
+    {
+      "file": "src/problems/Problem133/CloneGraphVisualizer.jsx",
+      "label": "One edge"
+    },
+    {
+      "file": "src/problems/Problem133/CloneGraphVisualizer.jsx",
+      "label": "Empty graph"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "Failures before a feasible start"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "Total fuel too small"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "Exactly balanced"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "One feasible station"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "One impossible station"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "Single Station"
+    },
+    {
+      "file": "src/problems/Problem134/GasStationVisualizer.jsx",
+      "label": "Exact Fuel (Start 0)"
+    },
+    {
+      "file": "src/problems/Problem135/CandyVisualizer.jsx",
+      "label": "Peaks valleys and plateaus"
+    },
+    {
+      "file": "src/problems/Problem135/CandyVisualizer.jsx",
+      "label": "All tied"
+    },
+    {
+      "file": "src/problems/Problem135/CandyVisualizer.jsx",
+      "label": "Long ascent"
+    },
+    {
+      "file": "src/problems/Problem135/CandyVisualizer.jsx",
+      "label": "Long descent"
+    },
+    {
+      "file": "src/problems/Problem135/CandyVisualizer.jsx",
+      "label": "One child"
+    },
+    {
+      "file": "src/problems/Problem136/SingleNumberVisualizer.jsx",
+      "label": "Pairs cancel across distance"
+    },
+    {
+      "file": "src/problems/Problem136/SingleNumberVisualizer.jsx",
+      "label": "Unique zero"
+    },
+    {
+      "file": "src/problems/Problem136/SingleNumberVisualizer.jsx",
+      "label": "Negative survivor"
+    },
+    {
+      "file": "src/problems/Problem136/SingleNumberVisualizer.jsx",
+      "label": "One number"
+    },
+    {
+      "file": "src/problems/Problem137/SingleNumberIIVisualizer.jsx",
+      "label": "Triples interleaved"
+    },
+    {
+      "file": "src/problems/Problem137/SingleNumberIIVisualizer.jsx",
+      "label": "Negative unique"
+    },
+    {
+      "file": "src/problems/Problem137/SingleNumberIIVisualizer.jsx",
+      "label": "Zero unique"
+    },
+    {
+      "file": "src/problems/Problem137/SingleNumberIIVisualizer.jsx",
+      "label": "One number"
+    },
+    {
+      "file": "src/problems/Problem138/CopyListRandomVisualizer.jsx",
+      "label": "Forward backward self and null pointers"
+    },
+    {
+      "file": "src/problems/Problem138/CopyListRandomVisualizer.jsx",
+      "label": "All random pointers absent"
+    },
+    {
+      "file": "src/problems/Problem138/CopyListRandomVisualizer.jsx",
+      "label": "One self-pointer"
+    },
+    {
+      "file": "src/problems/Problem138/CopyListRandomVisualizer.jsx",
+      "label": "Empty list"
+    },
+    {
+      "file": "src/problems/Problem139/WordBreakVisualizer.jsx",
+      "label": "Overlapping dictionary prefixes"
+    },
+    {
+      "file": "src/problems/Problem139/WordBreakVisualizer.jsx",
+      "label": "Unsegmentable suffix"
+    },
+    {
+      "file": "src/problems/Problem139/WordBreakVisualizer.jsx",
+      "label": "Reuse a word"
+    },
+    {
+      "file": "src/problems/Problem139/WordBreakVisualizer.jsx",
+      "label": "Whole word"
+    },
+    {
+      "file": "src/problems/Problem139/WordBreakVisualizer.jsx",
+      "label": "No initial match"
+    },
+    {
+      "file": "src/problems/Problem140/WordBreakIIVisualizer.jsx",
+      "label": "Several complete sentences"
+    },
+    {
+      "file": "src/problems/Problem140/WordBreakIIVisualizer.jsx",
+      "label": "No full sentence"
+    },
+    {
+      "file": "src/problems/Problem140/WordBreakIIVisualizer.jsx",
+      "label": "Repeated choices"
+    },
+    {
+      "file": "src/problems/Problem140/WordBreakIIVisualizer.jsx",
+      "label": "One full word"
+    },
+    {
+      "file": "src/problems/Problem141/LinkedListCycleVisualizer.jsx",
+      "label": "Long prefix enters interior cycle"
+    },
+    {
+      "file": "src/problems/Problem141/LinkedListCycleVisualizer.jsx",
+      "label": "Cycle enters at head"
+    },
+    {
+      "file": "src/problems/Problem141/LinkedListCycleVisualizer.jsx",
+      "label": "No cycle"
+    },
+    {
+      "file": "src/problems/Problem141/LinkedListCycleVisualizer.jsx",
+      "label": "Self-loop"
+    },
+    {
+      "file": "src/problems/Problem141/LinkedListCycleVisualizer.jsx",
+      "label": "One acyclic node"
+    },
+    {
+      "file": "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
+      "label": "Long prefix before entry"
+    },
+    {
+      "file": "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
+      "label": "Entry at head"
+    },
+    {
+      "file": "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
+      "label": "No cycle"
+    },
+    {
+      "file": "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
+      "label": "Self-loop"
+    },
+    {
+      "file": "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
+      "label": "Empty"
+    },
+    {
+      "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
+      "label": "Several quotient bits"
+    },
+    {
+      "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
+      "label": "Negative truncates toward zero"
+    },
+    {
+      "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
+      "label": "Smaller magnitude"
+    },
+    {
+      "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
+      "label": "Zero dividend"
+    },
+    {
+      "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
+      "label": "Overflow clamp"
+    },
+    {
+      "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
+      "label": "Minimum signed value"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "Inside red interval"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "Green boundary"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "Before orange"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "Orange boundary"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "First red"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "Last red"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "After red"
+    },
+    {
+      "file": "src/problems/Problem3894/index.jsx",
+      "label": "Upper input bound"
+    },
+    {
+      "file": "src/problems/Problem3895/index.jsx",
+      "label": "Repeated matches in several positions"
+    },
+    {
+      "file": "src/problems/Problem3895/index.jsx",
+      "label": "Digit absent"
+    },
+    {
+      "file": "src/problems/Problem3895/index.jsx",
+      "label": "Internal zeroes"
+    },
+    {
+      "file": "src/problems/Problem3895/index.jsx",
+      "label": "Single digit"
+    },
+    {
+      "file": "src/problems/Problem3896/index.jsx",
+      "label": "Mixed prime and nonprime runs"
+    },
+    {
+      "file": "src/problems/Problem3896/index.jsx",
+      "label": "Already alternating"
+    },
+    {
+      "file": "src/problems/Problem3896/index.jsx",
+      "label": "Impossible imbalance"
+    },
+    {
+      "file": "src/problems/Problem3896/index.jsx",
+      "label": "No prime"
+    },
+    {
+      "file": "src/problems/Problem3896/index.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem3899/index.jsx",
+      "label": "Larger scalene triangle"
+    },
+    {
+      "file": "src/problems/Problem3899/index.jsx",
+      "label": "Right triangle"
+    },
+    {
+      "file": "src/problems/Problem3899/index.jsx",
+      "label": "Degenerate sum"
+    },
+    {
+      "file": "src/problems/Problem3899/index.jsx",
+      "label": "Cannot form triangle"
+    },
+    {
+      "file": "src/problems/Problem3899/index.jsx",
+      "label": "All equal"
+    },
+    {
+      "file": "src/problems/Problem3903/index.jsx",
+      "label": "Several prefix and suffix updates"
+    },
+    {
+      "file": "src/problems/Problem3903/index.jsx",
+      "label": "No stable index"
+    },
+    {
+      "file": "src/problems/Problem3903/index.jsx",
+      "label": "Equality at threshold"
+    },
+    {
+      "file": "src/problems/Problem3903/index.jsx",
+      "label": "Singleton zero"
+    },
+    {
+      "file": "src/problems/Problem3904/index.jsx",
+      "label": "Several prefix and suffix updates"
+    },
+    {
+      "file": "src/problems/Problem3904/index.jsx",
+      "label": "No stable index"
+    },
+    {
+      "file": "src/problems/Problem3904/index.jsx",
+      "label": "Equality at threshold"
+    },
+    {
+      "file": "src/problems/Problem3904/index.jsx",
+      "label": "Singleton zero"
+    },
+    {
+      "file": "src/problems/Problem3905/index.jsx",
+      "label": "Several competing source regions"
+    },
+    {
+      "file": "src/problems/Problem3905/index.jsx",
+      "label": "One source"
+    },
+    {
+      "file": "src/problems/Problem3905/index.jsx",
+      "label": "Equal-distance tie"
+    },
+    {
+      "file": "src/problems/Problem3905/index.jsx",
+      "label": "Single cell"
+    },
+    {
+      "file": "src/problems/Problem3908/index.jsx",
+      "label": "Repeated digit inside"
+    },
+    {
+      "file": "src/problems/Problem3908/index.jsx",
+      "label": "Zero inside"
+    },
+    {
+      "file": "src/problems/Problem3908/index.jsx",
+      "label": "Digit absent"
+    },
+    {
+      "file": "src/problems/Problem3908/index.jsx",
+      "label": "Single digit"
+    },
+    {
+      "file": "src/problems/Problem3908/index.jsx",
+      "label": "Zero itself"
+    },
+    {
+      "file": "src/problems/Problem3909/index.jsx",
+      "label": "Long unequal sides"
+    },
+    {
+      "file": "src/problems/Problem3909/index.jsx",
+      "label": "Increasing only"
+    },
+    {
+      "file": "src/problems/Problem3909/index.jsx",
+      "label": "Decreasing only"
+    },
+    {
+      "file": "src/problems/Problem3909/index.jsx",
+      "label": "Equal side sums"
+    },
+    {
+      "file": "src/problems/Problem3909/index.jsx",
+      "label": "Minimum length"
+    },
+    {
+      "file": "src/problems/Problem3910/index.jsx",
+      "label": "Branched tree with competing paths"
+    },
+    {
+      "file": "src/problems/Problem3910/index.jsx",
+      "label": "All zero"
+    },
+    {
+      "file": "src/problems/Problem3910/index.jsx",
+      "label": "All one"
+    },
+    {
+      "file": "src/problems/Problem3910/index.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem3912/index.jsx",
+      "label": "Repeated records and several changes"
+    },
+    {
+      "file": "src/problems/Problem3912/index.jsx",
+      "label": "All equal"
+    },
+    {
+      "file": "src/problems/Problem3912/index.jsx",
+      "label": "Increasing"
+    },
+    {
+      "file": "src/problems/Problem3912/index.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem3913/index.jsx",
+      "label": "Several vowel groups"
+    },
+    {
+      "file": "src/problems/Problem3913/index.jsx",
+      "label": "No vowels"
+    },
+    {
+      "file": "src/problems/Problem3913/index.jsx",
+      "label": "Only vowels"
+    },
+    {
+      "file": "src/problems/Problem3913/index.jsx",
+      "label": "Single vowel"
+    },
+    {
+      "file": "src/problems/Problem3914/index.jsx",
+      "label": "Several descending boundaries"
+    },
+    {
+      "file": "src/problems/Problem3914/index.jsx",
+      "label": "Already increasing"
+    },
+    {
+      "file": "src/problems/Problem3914/index.jsx",
+      "label": "All equal"
+    },
+    {
+      "file": "src/problems/Problem3914/index.jsx",
+      "label": "Single descent"
+    },
+    {
+      "file": "src/problems/Problem3914/index.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem3915/index.jsx",
+      "label": "Spacing competes with alternating gains"
+    },
+    {
+      "file": "src/problems/Problem3915/index.jsx",
+      "label": "Spacing permits only singleton"
+    },
+    {
+      "file": "src/problems/Problem3915/index.jsx",
+      "label": "Equal values cannot alternate"
+    },
+    {
+      "file": "src/problems/Problem3915/index.jsx",
+      "label": "Adjacent alternation"
+    },
+    {
+      "file": "src/problems/Problem3915/index.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem47/PermutationStory.jsx",
+      "label": "[1,1,2]"
+    },
+    {
+      "file": "src/problems/Problem47/PermutationStory.jsx",
+      "label": "[1,2,3]"
+    },
+    {
+      "file": "src/problems/Problem47/PermutationStory.jsx",
+      "label": "[2,2,2]"
+    },
+    {
+      "file": "src/problems/Problem47/PermutationStory.jsx",
+      "label": "[-1,-1,2,2]"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Cross-parent links on four levels"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Repeated values still have separate links"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Single root"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Empty tree"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Cross several missing children"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Single-child chain"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Repeated values"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Single root"
+    },
+    {
+      "file": "src/components/shared/NextPointersWorkspace.jsx",
+      "label": "Empty tree"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "Several interior recurrences"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "First row"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "First interior coefficient"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "Even row count"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "Several in-place updates"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "Zero index"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "One index"
+    },
+    {
+      "file": "src/components/shared/PascalWorkspace.jsx",
+      "label": "Even middle index"
+    }
+  ],
+  "failures": []
+}

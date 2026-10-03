@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('binary-tree-paths')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -230,7 +232,7 @@ function InputPanel({ arrInput, setArrInput, applyExample, inputError }) {
 }
 
 export default function BinaryTreePathsVisualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
 
     const { arr, inputError } = useMemo(() => {
         try {

@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -181,14 +182,7 @@ function generateSteps(n) {
 }
 
 const REGISTRY_EXAMPLES = getExamples('power-of-four')
-const FALLBACK_EXAMPLES = [
-  { label: 'n = 16', n: 16, desc: '4² = 16 → true' },
-  { label: 'n = 1', n: 1, desc: '4⁰ = 1 → true' },
-  { label: 'n = 64', n: 64, desc: '4³ = 64 → true' },
-  { label: 'n = 8', n: 8, desc: '2³, odd bit → false' },
-  { label: 'n = 5', n: 5, desc: 'not power of 2 → false' },
-  { label: 'n = 0', n: 0, desc: 'n ≤ 0 → false' },
-]
+const FALLBACK_EXAMPLES = getAuthoredExamples('local:342')
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 function parseN(raw) {

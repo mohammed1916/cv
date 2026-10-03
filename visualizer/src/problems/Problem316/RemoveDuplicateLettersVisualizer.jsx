@@ -18,7 +18,7 @@ function makeSteps({ s }) {
     stack.push(char); used.add(char); steps.push({ activeLine: 8, phase: 'process', message: `Push ${char}; it is the best available next letter.`, stack: [...stack], used: [...used], index, last }) }
   steps.push({ activeLine: 9, phase: 'done', message: `Result: ${stack.join('')}.`, stack: [...stack], used: [...used], index: null, last }); return steps
 }
-const EXAMPLES = getExamplesOr('remove-duplicate-letters', [{ label: 'bcabc', s: 'bcabc' }, { label: 'cbacdcbc', s: 'cbacdcbc' }])
+const EXAMPLES = getExamplesOr('remove-duplicate-letters', [])
 function parse(raw) { try { const data = JSON.parse(raw); if (typeof data.s !== 'string' || !/^[a-z]+$/.test(data.s)) throw new Error('Use { "s": "lowercase letters" }.'); return { input: data, inputError: '' } } catch (error) { return { input: null, inputError: error.message } } }
 export default function RemoveDuplicateLettersVisualizer() {
   const [raw, setRaw] = useState(JSON.stringify(EXAMPLES[0])); const { input, inputError } = useMemo(() => parse(raw), [raw]); const steps = useMemo(() => input ? makeSteps(input).map((step) => ({ ...step, relatedLines: [step.activeLine] })) : [], [input])

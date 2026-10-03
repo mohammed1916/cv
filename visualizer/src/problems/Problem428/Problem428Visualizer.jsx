@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('serialize-deserialize-nary-tree')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -22,9 +24,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('serialize-deserialize-nary-tree', [
-  { label: 'Example 1', tree: { val: 1, children: [{ val: 3, children: [{ val: 5 }, { val: 6 }] }, { val: 2 }, { val: 4 }] } },
-])
+const EXAMPLES = getExamplesOr('serialize-deserialize-nary-tree', [])
 
 // Assign ids and normalize children arrays.
 function normalize(node, ctx = { id: 0 }) {
@@ -170,7 +170,7 @@ function VisualizationPanel({ root, step }) {
 
 export default function Problem428Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [treeInput, setTreeInput] = useState("[object Object]");
+  const [treeInput, setTreeInput] = useState(String(AUTHORED_INITIAL.tree));
   const { tree, inputError } = useMemo(() => {
     try {
       const parsedTree = treeInput;

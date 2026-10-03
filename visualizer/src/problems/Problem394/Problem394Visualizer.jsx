@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('decode-string')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -70,7 +72,7 @@ function generateSteps(s) {
 const EXAMPLES = getExamples('decode-string');
 
 export default function Problem394Visualizer() {
-    const [sInput, setSInput] = useState("3[a]2[bc]");
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const steps = useMemo(() => { try { return generateSteps(sInput).map((current) => ({

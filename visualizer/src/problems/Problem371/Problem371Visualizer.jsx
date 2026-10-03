@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('sum-of-two-integers')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -460,8 +462,8 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 
 export default function Problem371Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [aInput, setAInput] = useState(1);
-  const [bInput, setBInput] = useState(1);
+  const [aInput, setAInput] = useState(String(AUTHORED_INITIAL.a));
+  const [bInput, setBInput] = useState(String(AUTHORED_INITIAL.b));
   const { a, b, inputError } = useMemo(() => {
     try {
       const parsedA = Number(aInput); if (isNaN(parsedA)) throw new Error('a must be a number');

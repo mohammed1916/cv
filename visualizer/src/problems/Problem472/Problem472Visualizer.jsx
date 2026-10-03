@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('concatenated-words')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -185,7 +187,7 @@ function VisualizationPanel({ words, step, applyEx }) {
 
 export default function Problem472Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [wordsInput, setWordsInput] = useState("[\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"catscat\",\"ratcatdogcat\"]");
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words));
   const { words, inputError } = useMemo(() => {
     try {
       const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('sort-list')[0];
 import LinkedListGraph from "../../components/shared/LinkedListGraph";
 import { createPortal } from "react-dom";
 import { useState, useMemo, useCallback } from "react";
@@ -519,9 +521,9 @@ function SortListVisualization({ step }) {
 }
 
 export default function SortListVisualizer() {
-  const defaultArray = EXAMPLES?.[0]?.arr ?? [4, 2, 1, 3];
+  const defaultArray = AUTHORED_INITIAL.arr;
 
-  const [arrInput, setArrInput] = useState(JSON.stringify(defaultArray));
+  const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr ?? []));
 
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? "");
 

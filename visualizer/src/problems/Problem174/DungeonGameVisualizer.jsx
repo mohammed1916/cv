@@ -1,4 +1,6 @@
-﻿import { createPortal } from 'react-dom';
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('dungeon-game')[0];
+import { createPortal } from 'react-dom';
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -147,7 +149,7 @@ function VizPanel({ EXAMPLES, ex, dungeon, R, C, CELL_W, CELL_H, dp, activeR, ac
 
 export default function DungeonGameVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [dungeonInput, setDungeonInput] = useState("[[-2,-3,3],[-5,-10,1],[10,30,-5]]");
+  const [dungeonInput, setDungeonInput] = useState(JSON.stringify(AUTHORED_INITIAL.dungeon));
   const { dungeon, inputError } = useMemo(() => {
     try {
       const parsedDungeon = JSON.parse(dungeonInput); if (!Array.isArray(parsedDungeon)) throw new Error('dungeon must be an array');

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('game-play-analysis')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -195,7 +197,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 
 export default function GamePlayAnalysisVisualizer() {
   const examples = useMemo(() => getExamplesOr('game-play-analysis', []), [])
-  const [activityInput, setActivityInput] = useState('[{"playerId":1,"eventDate":"2016-03-01"},{"playerId":1,"eventDate":"2016-05-02"},{"playerId":2,"eventDate":"2017-06-25"}]')
+  const [activityInput, setActivityInput] = useState(JSON.stringify(AUTHORED_INITIAL.activity || AUTHORED_INITIAL))
 
   const { activity, inputError } = useMemo(() => {
     try {

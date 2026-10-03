@@ -1,5 +1,7 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('utf-8-validation')[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -153,14 +155,10 @@ function generateSteps(data) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('utf-8-validation', [
-  { label: 'Example 1', data: [197, 130, 1] },
-  { label: 'Example 2', data: [235, 140, 4] },
-  { label: 'Example 3', data: [145] },
-])
+const EXAMPLES = getExamplesOr('utf-8-validation', [])
 
 export default function Problem393Visualizer() {
-  const [dataInput, setDataInput] = useState('[197, 130, 1]')
+  const [dataInput, setDataInput] = useState(JSON.stringify(AUTHORED_INITIAL.data))
 
   const { data, inputError } = useMemo(() => {
     try {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('beautiful-arrangement')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -321,7 +323,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 export default function BeautifulArrangementVisualizer() {
   const DEFAULT_N = EXAMPLES[0]?.n ?? 2
 
-  const [nInput, setNInput] = useState(String(DEFAULT_N))
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { n, inputError } = useMemo(() => {

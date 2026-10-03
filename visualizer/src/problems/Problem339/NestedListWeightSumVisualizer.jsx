@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -188,11 +189,7 @@ function renderNode(node, step) {
 }
 
 const REGISTRY_EXAMPLES = getExamplesOr('nested-list-weight-sum', [])
-const FALLBACK_EXAMPLES = [
-  { label: '[[1,1],2,[1,1]]  → 10', inputs: [[1, 1], 2, [1, 1]] },
-  { label: '[1,[4,[6]]]  → 27', inputs: [1, [4, [6]]] },
-  { label: '[[[3]],2,1]  → 12', inputs: [[[3]], 2, 1] },
-]
+const FALLBACK_EXAMPLES = getAuthoredExamples('local:339')
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 function isNestedNumberList(value) {

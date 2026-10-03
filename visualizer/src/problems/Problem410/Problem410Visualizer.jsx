@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,10 +19,7 @@ const SOLUTION_CODE = getSolutionCode('split-array-largest-sum')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', nums: [1,2,3,4,5], m: 2, expected: 9 },
-  { label: 'Ex2', nums: [1,4,4], m: 3, expected: 4 },
-]
+const EXAMPLES = getAuthoredExamples('local:410')
 
 function canSplit(nums, m, maxSum) {
   let count = 1

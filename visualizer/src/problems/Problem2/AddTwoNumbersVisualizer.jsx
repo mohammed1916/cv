@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('add-two-numbers')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -105,8 +107,8 @@ function generateSteps(list1, list2) {
 const EXAMPLES = getExamples('add-two-numbers')
 
 export default function AddTwoNumbersVisualizer({ problem }) {
-  const [l1Input, setL1Input] = useState('[2, 4, 3]')
-  const [l2Input, setL2Input] = useState('[5, 6, 4]')
+  const [l1Input, setL1Input] = useState(JSON.stringify(AUTHORED_INITIAL.l1))
+  const [l2Input, setL2Input] = useState(JSON.stringify(AUTHORED_INITIAL.l2))
   const codeLines = useProblemCode(problem, 'add-two-numbers')
 
   const { list1, list2, inputError } = useMemo(() => {

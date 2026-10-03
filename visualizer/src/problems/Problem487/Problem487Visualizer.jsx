@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('max-consecutive-ones-iii')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -45,10 +47,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('max-consecutive-ones-iii', [
-  { label: 'Example 1', nums: [1, 0, 1, 1, 0], k: 1 },
-  { label: 'Example 2', nums: [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], k: 3 },
-])
+const EXAMPLES = getExamplesOr('max-consecutive-ones-iii', [])
 
 function generateSteps(nums, k) {
   const steps = []
@@ -222,8 +221,8 @@ function VisualizationPanel({ nums, step, applyEx, k }) {
 
 export default function Problem487Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,1,1,0,0,0,1,1,1,1,0]");
-  const [kInput, setKInput] = useState(2);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { nums: inputNums, k: inputK, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

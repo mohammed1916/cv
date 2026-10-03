@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('two-sum-ii')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -97,8 +99,8 @@ function generateSteps(numbers, target) {
 const EXAMPLES = getExamples('two-sum-ii')
 
 export default function TwoSumIIVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,7,11,15]')
-    const [targetInput, setTargetInput] = useState('9')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.numbers))
+    const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 

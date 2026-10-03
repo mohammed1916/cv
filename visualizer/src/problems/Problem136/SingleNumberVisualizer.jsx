@@ -1,20 +1,12 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { singleNumberNarrative } from './singleNumberNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SingleNumberStory from "./SingleNumberStory";
 import { CODE, buildSingleNumberStory } from "./algorithm";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./SingleNumberVisualizer.css";
 
-const registryExamples = getExamples("single-number") || [];
-const EXAMPLES = [
-  ...registryExamples.map((ex) => ({
-    label: ex.label,
-    input: JSON.stringify(ex.nums),
-  })),
-  { label: "Single [1]", input: "[1]" },
-  { label: "Negative [-2, 1, -2]", input: "[-2, 1, -2]" },
-  { label: "Alternating [10, 25, 10, 8, 25]", input: "[10, 25, 10, 8, 25]" },
-];
+const EXAMPLES = getAuthoredExamples('local:136');
 
 const definition = {
   narrative: singleNumberNarrative,

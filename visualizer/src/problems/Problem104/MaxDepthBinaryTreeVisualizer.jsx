@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('max-depth-binary-tree')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { generateSteps } from './algorithm'
 import TreeDiagram from '../../components/shared/TreeDiagram'
@@ -44,7 +46,7 @@ function snippetIdForPhase(phase) {
 export default function MaxDepthBinaryTreeVisualizer() {
     // Load solution code from registry
 
-    const [arrInput, setArrInput] = useState('[3,9,20,null,null,15,7]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
 
     const { steps, positions, edges, nodes, inputError } = useMemo(() => {
         try {

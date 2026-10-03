@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -106,26 +107,7 @@ function generateSteps(accounts) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    accounts: [
-      ['John', 'j1@com', 'j2@com'],
-      ['John', 'j1@com', 'j3@com'],
-      ['Mary', 'm1@com'],
-    ],
-  },
-  {
-    label: 'Example 2',
-    accounts: [
-      ['David', 'd0@com', 'd1@com'],
-      ['David', 'd3@com', 'd4@com'],
-      ['David', 'd4@com', 'd5@com'],
-      ['David', 'd2@com', 'd3@com'],
-      ['David', 'd1@com', 'd2@com'],
-    ],
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:721')
 
 export default function AccountsMergeVisualizer() {
   const [accountsInput, setAccountsInput] = useState(JSON.stringify(EXAMPLES[0].accounts))

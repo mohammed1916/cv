@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('gray-code')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -95,7 +97,7 @@ function generateSteps(n) {
 const EXAMPLES = getExamples('gray-code')
 
 export default function GrayCodeVisualizer() {
-    const [nInput, setNInput] = useState('3')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {

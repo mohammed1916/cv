@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('lonely-pixel-ii')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -276,8 +278,8 @@ function VisualizationPanel({ N, step, applyEx }) {
 }
 
 export default function LonelyPixelIIVisualizer() {
-  const [pictureInput, setPictureInput] = useState(JSON.stringify(DEFAULT_EX.picture))
-  const [nInput, setNInput] = useState(String(DEFAULT_EX.N))
+  const [pictureInput, setPictureInput] = useState(JSON.stringify(AUTHORED_INITIAL.picture))
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.N))
   const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
 
   const { picture, N, inputError } = useMemo(() => {

@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('minimum-time-difference')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -232,7 +234,7 @@ function VisualizationPanel({ timePoints, step, applyExample, examples }) {
 
 export default function MinimumTimeDifferenceVisualizer() {
   const examples = useMemo(() => getExamplesOr('minimum-time-difference', []), [])
-  const [timesInput, setTimesInput] = useState('["23:59","00:00"]')
+  const [timesInput, setTimesInput] = useState(JSON.stringify(AUTHORED_INITIAL.timePoints || AUTHORED_INITIAL))
 
   const { times, inputError } = useMemo(() => {
     try {

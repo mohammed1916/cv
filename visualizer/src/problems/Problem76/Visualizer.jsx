@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('minimum-window-substring')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -41,11 +43,7 @@ const SOLUTION_CODE = [
   { line: 24, text: '    return s[best[0]:best[1]+1] if best else ""' },
 ]
 
-const EXAMPLES = getExamplesOr('minimum-window-substring', [
-  { label: 'Example 1', s: 'ADOBECODEBANC', t: 'ABC' },
-  { label: 'Example 2', s: 'a', t: 'a' },
-  { label: 'Example 3', s: 'a', t: 'aa' },
-])
+const EXAMPLES = getExamplesOr('minimum-window-substring', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [4, 5, 6, 7, 8, 9, 10] },
@@ -305,8 +303,8 @@ const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 const LINE_PATTERN_MAP = {}
 
 export default function MinimumWindowSubstringVisualizer() {
-  const [sInput, setSInput] = useState('ADOBECODEBANC')
-  const [tInput, setTInput] = useState('ABC')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [tInput, setTInput] = useState(AUTHORED_INITIAL.t)
 
   const { s, t } = useMemo(() => ({
     s: sInput ?? '',

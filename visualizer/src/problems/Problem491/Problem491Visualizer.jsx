@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('increasing-subsequences')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -64,10 +66,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('increasing-subsequences', [
-  { label: 'Example 1', nums: [4, 6, 7, 7] },
-  { label: 'Example 2', nums: [4, 4, 3, 2, 1] },
-])
+const EXAMPLES = getExamplesOr('increasing-subsequences', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findIncreasingSubsequences(nums):' },
@@ -286,7 +285,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem491Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[4,6,7,7]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

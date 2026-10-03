@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -149,23 +150,7 @@ function formatIntervals(intervals) {
   return '[' + intervals.map(([a, b]) => a === b ? a.toString() : `${a}->${b}`).join(', ') + ']'
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Gaps',
-    nums: [1, 3, 7, 9],
-    description: 'Numbers with gaps form separate intervals',
-  },
-  {
-    label: 'Example 2: Merging',
-    nums: [1, 2, 3, 5, 6, 8],
-    description: 'Adjacent numbers merge into ranges',
-  },
-  {
-    label: 'Example 3: Complex',
-    nums: [1, 2, 4, 5, 7],
-    description: 'Mixed gaps and merges',
-  },
-]
+const EXAMPLES = getAuthoredExamples('local:351')
 
 export default function Problem351Visualizer() {
   const [exIdx, setExIdx] = useState(0)

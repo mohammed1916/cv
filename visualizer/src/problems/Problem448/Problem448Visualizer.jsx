@@ -38,11 +38,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('find-all-numbers-disappeared-in-array', [
-  { label: 'Example 1', nums: [4, 3, 2, 7, 8, 2, 3, 1], expected: [5, 6] },
-  { label: 'Example 2', nums: [1, 1], expected: [2] },
-  { label: 'Example 3', nums: [1, 2, 3], expected: [] },
-])
+const EXAMPLES = getExamplesOr('find-all-numbers-disappeared-in-array', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2, 3] },

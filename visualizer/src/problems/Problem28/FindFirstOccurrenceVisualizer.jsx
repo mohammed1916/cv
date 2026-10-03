@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('find-first-occurrence')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -123,8 +125,8 @@ function generateSteps(haystack, needle) {
 const EXAMPLES = getExamples('find-first-occurrence')
 
 export default function FindFirstOccurrenceVisualizer({ problem }) {
-  const [haystackInput, setHaystackInput] = useState('"sadbutsad"')
-  const [needleInput, setNeedleInput] = useState('"sad"')
+  const [haystackInput, setHaystackInput] = useState(`"${AUTHORED_INITIAL.haystack}"`)
+  const [needleInput, setNeedleInput] = useState(`"${AUTHORED_INITIAL.needle}"`)
 
   const { haystack, needle, inputError } = useMemo(() => {
     try {

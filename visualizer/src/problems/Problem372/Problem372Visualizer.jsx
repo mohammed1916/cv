@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('super-power')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -331,8 +333,8 @@ function VisualizationPanel({ base, exponents, step, inputPanel }) {
 
 export default function Problem372Visualizer() {
   const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label ?? '')
-  const [baseInput, setBaseInput] = useState(String(DEFAULT_EX.base))
-  const [exponentsInput, setExponentsInput] = useState(JSON.stringify(DEFAULT_EX.exponents))
+  const [baseInput, setBaseInput] = useState(String(AUTHORED_INITIAL.base))
+  const [exponentsInput, setExponentsInput] = useState(JSON.stringify(AUTHORED_INITIAL.exponents))
 
   const { base, exponents, inputError } = useMemo(() => {
     try {

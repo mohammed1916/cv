@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-palindrome')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -191,7 +193,7 @@ function generateSteps(s) {
 const EXAMPLES = getExamples('longest-palindrome')
 
 export default function LongestPalindromeVisualizer() {
-  const [sInput, setSInput] = useState('babad')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
   const { s, inputError } = useMemo(() => {
     return { s: sInput, inputError: '' }

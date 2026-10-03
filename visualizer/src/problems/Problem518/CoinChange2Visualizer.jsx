@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('coin-change-2')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -233,8 +235,8 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
 export default function CoinChange2Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [amountInput, setAmountInput] = useState(5);
-  const [coinsInput, setCoinsInput] = useState("[1,2,5]");
+  const [amountInput, setAmountInput] = useState(String(AUTHORED_INITIAL.amount));
+  const [coinsInput, setCoinsInput] = useState(JSON.stringify(AUTHORED_INITIAL.coins));
   const { amount, coins, inputError } = useMemo(() => {
     try {
       const parsedAmount = Number(amountInput); if (isNaN(parsedAmount)) throw new Error('amount must be a number');

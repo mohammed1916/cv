@@ -40,12 +40,7 @@ const SOLUTION_CODE = [
 
 // Registry entries carry `nums` arrays; normalise everything to the comma
 // string the input field edits so both shapes drive the same control.
-const EXAMPLES = getExamplesOr('max-consecutive-ones', [
-  { label: 'Example 1', nums: [1, 1, 0, 1, 1, 1] },
-  { label: 'Example 2', nums: [1, 0, 1, 1, 0, 1] },
-  { label: 'All ones', nums: [1, 1, 1, 1] },
-  { label: 'All zeros', nums: [0, 0, 0] },
-]).map((ex) => ({
+const EXAMPLES = getExamplesOr('max-consecutive-ones', []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.nums ?? ex.arr ?? []).join(','),
 }))

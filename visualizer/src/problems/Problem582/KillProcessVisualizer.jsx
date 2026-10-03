@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('kill-process')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
@@ -186,20 +188,7 @@ function generateSteps(pid, ppid, kill_pid) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('kill-process', [
-  {
-    label: 'Example 1',
-    pid: [1, 3, 3, 3, 5, 6],
-    ppid: [3, 1, 3, 3, 1, 5],
-    kill: 5,
-  },
-  {
-    label: 'Example 2',
-    pid: [1],
-    ppid: [-1],
-    kill: 1,
-  },
-])
+const EXAMPLES = getExamplesOr('kill-process', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Build Tree', lines: [2, 3, 4, 5] },
@@ -283,9 +272,9 @@ function ProcessTreeVisualization({ pid, ppid, step, children, onNodeClick }) {
 }
 
 export default function KillProcessVisualizer() {
-  const [pidInput, setPidInput] = useState('[1,3,3,3,5,6]')
-  const [ppidInput, setPpidInput] = useState('[3,1,3,3,1,5]')
-  const [killInput, setKillInput] = useState('5')
+  const [pidInput, setPidInput] = useState(JSON.stringify(AUTHORED_INITIAL.pid))
+  const [ppidInput, setPpidInput] = useState(JSON.stringify(AUTHORED_INITIAL.ppid))
+  const [killInput, setKillInput] = useState(String(AUTHORED_INITIAL.kill))
 
   const { value: pid, error: pidError } = useParsedInput(
     pidInput,

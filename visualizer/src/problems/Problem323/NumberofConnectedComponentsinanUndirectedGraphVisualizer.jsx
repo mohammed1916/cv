@@ -63,11 +63,7 @@ function generateSteps({ n, edges }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('connected-components-undirected', [
-  { label: 'Two components', n: 5, edges: [[0, 1], [1, 2], [3, 4]] },
-  { label: 'One component', n: 5, edges: [[0, 1], [1, 2], [2, 3], [3, 4]] },
-  { label: 'Isolated nodes', n: 4, edges: [[0, 1]] },
-])
+const EXAMPLES = getExamplesOr('connected-components-undirected', [])
 
 export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('product-of-array-except-self')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -124,7 +126,7 @@ function generateSteps(nums) {
 const EXAMPLES = getExamples('product-of-array-except-self')
 
 export default function ProductOfArrayExceptSelfVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,2,3,4]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, inputError } = useMemo(() => {

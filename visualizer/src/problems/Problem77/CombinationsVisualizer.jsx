@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('combinations')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -165,8 +167,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
 }
 
 export default function CombinationsVisualizer() {
-    const [nInput, setNInput] = useState('4')
-    const [kInput, setKInput] = useState('2')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
 
     const { n, k, inputError } = useMemo(() => {
         try {

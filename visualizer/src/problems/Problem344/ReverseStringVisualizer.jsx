@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('reverse-string')[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -150,7 +152,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function ReverseStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("[\"h\",\"e\",\"l\",\"l\",\"o\"]");
+  const [sInput, setSInput] = useState(JSON.stringify(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = JSON.parse(sInput); if (!Array.isArray(parsedS)) throw new Error('s must be an array');

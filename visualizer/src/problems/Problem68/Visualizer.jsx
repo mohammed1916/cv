@@ -1,3 +1,6 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('local:68')[0];
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -179,10 +182,7 @@ function generateSteps(words, maxWidth) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', words: ['This', 'is', 'an', 'example', 'of', 'text', 'justification.'], maxWidth: 16 },
-  { label: 'Example 2', words: ['What', 'must', 'be', 'acknowledgment', 'shall', 'be'], maxWidth: 16 },
-]
+const EXAMPLES = getAuthoredExamples('local:68')
 
 const ACCENT = '#ec4899'
 
@@ -323,8 +323,8 @@ function VisualizationPanel({ step }) {
 
 export default function Problem68Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [wordsInput, setWordsInput] = useState("[\"This\",\"is\",\"an\",\"example\",\"of\",\"text\",\"justification\"]");
-  const [maxWidthInput, setMaxWidthInput] = useState(16);
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words));
+  const [maxWidthInput, setMaxWidthInput] = useState(String(AUTHORED_INITIAL.maxWidth));
   const { words, maxWidth, inputError } = useMemo(() => {
     try {
       const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');

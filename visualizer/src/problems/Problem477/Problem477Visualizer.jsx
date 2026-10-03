@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('total-hamming-distance')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,10 +20,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('total-hamming-distance', [
-  { label: 'Example 1', nums: [4, 14, 2] },
-  { label: 'Example 2', nums: [1, 3, 5] },
-])
+const EXAMPLES = getExamplesOr('total-hamming-distance', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def totalHammingDistance(nums):' },
@@ -270,7 +269,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function Problem477Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[4,14,2]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

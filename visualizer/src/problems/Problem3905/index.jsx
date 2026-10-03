@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -15,12 +16,7 @@ const definition = {
     { id: 'commit', label: 'Commit wave', description: 'Apply each winning color simultaneously.' },
     { id: 'done', label: 'Complete', description: 'Inspect the final grid.' },
   ],
-  examples: [
-    { label: 'Competing corners', input: '{"n":3,"m":3,"sources":[[0,0,1],[2,2,2]]}' },
-    { label: 'Adjacent sources', input: '{"n":3,"m":3,"sources":[[0,1,3],[1,1,5]]}' },
-    { label: 'Single source', input: '{"n":2,"m":2,"sources":[[1,1,5]]}' },
-    { label: 'Already filled', input: '{"n":1,"m":2,"sources":[[0,0,1],[0,1,9]]}' },
-  ],
+  examples: getAuthoredExamples('local:3905'),
 }
 
 function MultiSourceFloodFill() {

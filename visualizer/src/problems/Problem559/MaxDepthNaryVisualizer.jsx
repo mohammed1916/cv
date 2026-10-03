@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('max-depth-nary-tree')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -435,7 +437,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
 
 export default function MaxDepthNaryVisualizer() {
   const examples = useMemo(() => getExamplesOr('max-depth-nary-tree', []), [])
-  const [treeInput, setTreeInput] = useState('[1,[3,5,6],[2,4]]')
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree || AUTHORED_INITIAL))
 
   const { tree, nodeMap, inputError } = useMemo(() => {
     try {
@@ -448,7 +450,8 @@ export default function MaxDepthNaryVisualizer() {
     }
   }, [treeInput])
 
-  const { steps } = useMemo(() => generateSteps(tree ? treeInput : []), [treeInput, tree])
+  const trace = useMemo(() => generateSteps(tree ? JSON.parse(treeInput) : []), [treeInput, tree])
+  const steps = Array.isArray(trace) ? trace : trace.steps
 
   const {
     stepIndex,

@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -29,20 +30,7 @@ const SOLUTION_CODE = [
 ]
 
 // Default + fallback examples (slug has no registry entry yet).
-const DEFAULT_EXAMPLES = [
-  {
-    label: 'Classic (JFK loop)',
-    tickets: [['JFK', 'SFO'], ['JFK', 'ATL'], ['SFO', 'ATL'], ['ATL', 'JFK'], ['ATL', 'SFO']],
-  },
-  {
-    label: 'Linear path',
-    tickets: [['MUC', 'LHR'], ['JFK', 'MUC'], ['SFO', 'SJC'], ['LHR', 'SFO']],
-  },
-  {
-    label: 'Tie-break',
-    tickets: [['JFK', 'KUL'], ['JFK', 'NRT'], ['NRT', 'JFK']],
-  },
-]
+const DEFAULT_EXAMPLES = getAuthoredExamples('local:332')
 
 const REGISTRY_EXAMPLES = getExamplesOr('reconstruct-itinerary', [])
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES

@@ -342,11 +342,7 @@ function DirectionArrow({ direction }) {
   )
 }
 
-const EXAMPLES = getExamplesOr('design-snake-game', [
-  { label: 'Straight Move', value: 'RRRRU', moves: ['R', 'R', 'R', 'R', 'U'] },
-  { label: 'Food Eating', value: 'RRUULL', moves: ['R', 'R', 'U', 'U', 'L', 'L'] },
-  { label: 'Self-Collision', value: 'RRRUUULL', moves: ['R', 'R', 'R', 'U', 'U', 'U', 'L', 'L'] },
-])
+const EXAMPLES = getExamplesOr('design-snake-game', [])
 
 export default function DesignSnakeGameVisualizer() {
   const [movementsInput, setMovementsInput] = useState('RRDDR')

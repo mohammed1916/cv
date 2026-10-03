@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('two-sum')[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -106,8 +108,8 @@ const EXAMPLES = getExamples('two-sum')
 
 export default function TwoSumVisualizer() {
   const tourPlaybackRef = useRef(null)
-  const [numsInput, setNumsInput] = useState('[2, 7, 11, 15]')
-  const [targetInput, setTargetInput] = useState('9')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { nums, target, inputError } = useMemo(() => {
     try {

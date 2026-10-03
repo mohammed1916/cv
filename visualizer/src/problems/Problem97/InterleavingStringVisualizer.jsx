@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('interleaving-string')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -89,9 +91,9 @@ function generateSteps(s1, s2, s3) {
 
 export default function InterleavingStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [s1Input, setS1Input] = useState("aabcc");
-  const [s2Input, setS2Input] = useState("dbbca");
-  const [s3Input, setS3Input] = useState("aadbbcbcac");
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1));
+  const [s2Input, setS2Input] = useState(String(AUTHORED_INITIAL.s2));
+  const [s3Input, setS3Input] = useState(String(AUTHORED_INITIAL.s3));
   const { s1, s2, s3, inputError } = useMemo(() => {
     try {
       const parsedS1 = s1Input;

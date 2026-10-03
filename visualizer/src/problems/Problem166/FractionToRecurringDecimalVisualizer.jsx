@@ -19,10 +19,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('fraction-to-recurring-decimal', [
-  { label: 'Example 1', numerator: 1, denominator: 2 },
-  { label: 'Example 2', numerator: 1, denominator: 6 },
-])
+const EXAMPLES = getExamplesOr('fraction-to-recurring-decimal', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def fractionToDecimal(num, denom):' },

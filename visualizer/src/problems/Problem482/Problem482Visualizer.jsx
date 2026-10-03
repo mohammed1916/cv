@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('license-key-formatting')[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -55,10 +57,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('license-key-formatting', [
-  { label: 'Example 1', s: '5F3Z-2e-9-w', k: 4 },
-  { label: 'Example 2', s: '2-4A0r-4k', k: 4 },
-])
+const EXAMPLES = getExamplesOr('license-key-formatting', [])
 
 function generateSteps(s, k) {
   const steps = []
@@ -244,8 +243,8 @@ const SOLUTION_CODE_INLINE = [
 
 export default function Problem482Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("5F3Z-2e-9-w");
-  const [kInput, setKInput] = useState(4);
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { s, k, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

@@ -37,7 +37,7 @@ function generateSteps({ n }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('power-of-three', [{ label: '27 = 3³', n: 27 }, { label: '45 is not', n: 45 }, { label: '1 = 3⁰', n: 1 }])
+const EXAMPLES = getExamplesOr('power-of-three', [])
 
 export default function PowerofThreeVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

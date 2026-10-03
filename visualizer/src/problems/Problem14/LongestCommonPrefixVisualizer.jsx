@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('longest-common-prefix')[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -349,7 +351,7 @@ function StatusPanel({ step }) {
 }
 
 export default function LongestCommonPrefixVisualizer() {
-  const [strsInput, setStrsInput] = useState('["flower", "flow", "flight"]');
+  const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs));
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll();
   const [panelDivs, setPanelDivs] = useState({});
   const {

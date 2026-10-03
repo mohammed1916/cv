@@ -20,9 +20,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('encode-nary-to-binary-tree', [
-  { label: 'Example 1', naryStructure: '1->2,3,4->5,6' },
-])
+const EXAMPLES = getExamplesOr('encode-nary-to-binary-tree', [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def encode(root):' },

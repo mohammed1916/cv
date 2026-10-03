@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('number-of1-bits')[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -52,7 +54,7 @@ function generateSteps(nIn) {
 
 export default function NumberOf1BitsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(11);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const [descInput, setDescInput] = useState("11 (0b1011)");
   const { n, desc, inputError } = useMemo(() => {
     try {

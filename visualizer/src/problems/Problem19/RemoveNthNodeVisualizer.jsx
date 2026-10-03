@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('remove-nth-node')[0];
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -381,7 +383,7 @@ function RemoveNthNodeState({ step }) {
 }
 
 export default function RemoveNthNodeVisualizer() {
-  const [inputStr, setInputStr] = useState("[1,2,3,4,5]; 2")
+  const [inputStr, setInputStr] = useState(AUTHORED_INITIAL.input)
 
   const { list, n, inputError } = useMemo(() => {
     try {

@@ -149,13 +149,7 @@ function generateSteps(s) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("longest-valid-parentheses", [
-  { label: "Simple", s: "()" },
-  { label: "Complex", s: ")()())" },
-  { label: "Nested", s: "(())" },
-  { label: "Multiple", s: "()(())" },
-  { label: "Invalid Start", s: "()(()" },
-]);
+const EXAMPLES = getExamplesOr("longest-valid-parentheses", []);
 
 export default function LongestValidParenthesesVisualizer() {
   const [input, setInput] = useState('")()())"');

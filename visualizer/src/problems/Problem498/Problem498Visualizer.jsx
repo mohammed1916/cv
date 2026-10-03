@@ -39,9 +39,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('diagonal-traverse', [
-  { label: 'Example', mat: [[1,2,3],[4,5,6],[7,8,9]] },
-])
+const EXAMPLES = getExamplesOr('diagonal-traverse', [])
 
 function generateSteps(mat) {
     const steps = []
@@ -84,9 +82,9 @@ export default function Problem498Visualizer() {
       return { mat: [[1,2,3],[4,5,6],[7,8,9]], inputError: e.message };
     }
   }, [matInput]);
-  const applyEx = useCallback((e) => { setEx(e); setMatInput(JSON.stringify(e.mat)); handleReset(); }, [handleReset]);
   const steps = useMemo(() => generateSteps(mat).map((c) => ({ ...c, relatedLines: c.relatedLines ?? (c.activeLine != null ? [c.activeLine] : []) })), [mat])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length)
+  const applyEx = useCallback((e) => { setEx(e); setMatInput(JSON.stringify(e.mat)); handleReset(); }, [handleReset]);
   const step = stepIndex >= 0 ? steps[stepIndex] : null
   const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex })
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()

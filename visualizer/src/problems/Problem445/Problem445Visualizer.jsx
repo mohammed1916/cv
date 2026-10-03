@@ -51,11 +51,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('add-two-numbers-ii', [
-  { label: 'Example 1', list1: [7, 2, 4, 3], list2: [5, 6, 4], expected: [7, 8, 0, 7] },
-  { label: 'Example 2', list1: [2, 4, 3], list2: [5, 6, 4], expected: [7, 0, 8] },
-  { label: 'Example 3', list1: [9, 9, 9], list2: [9, 9, 9, 9], expected: [1, 0, 0, 0, 9] },
-])
+const EXAMPLES = getExamplesOr('add-two-numbers-ii', [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize Stacks', lines: [1, 2] },

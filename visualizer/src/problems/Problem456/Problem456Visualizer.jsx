@@ -127,11 +127,7 @@ function generateSteps(text) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('132-pattern', [
-  { label: 'Example 1', nums: '1,2,3,4' },
-  { label: 'Example 2', nums: '3,1,4,2' },
-  { label: 'Example 3', nums: '-1,3,2,0' },
-])
+const EXAMPLES = getExamplesOr('132-pattern', [])
 
 export default function Problem456Visualizer() {
   const [text, setText] = useState('3,1,4,2')

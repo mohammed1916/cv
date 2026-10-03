@@ -280,12 +280,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('restore-ip-addresses', [
-  { label: '101023', s: '101023' },
-  { label: '0000', s: '0000' },
-  { label: '1111', s: '1111' },
-  { label: '25525511135', s: '25525511135' },
-])
+const EXAMPLES = getExamplesOr('restore-ip-addresses', [])
 
 export default function RestoreIPAddressesVisualizer() {
   const [input, setInput] = useState('25525511135')

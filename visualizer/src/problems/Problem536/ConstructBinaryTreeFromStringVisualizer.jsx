@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('construct-binary-tree-from-string')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -197,7 +199,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 }
 
 export default function ConstructBinaryTreeFromStringVisualizer() {
-  const [sInput, setSInput] = useState(DEFAULT_EX.s)
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
   const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
 
   // Plain string input - no JSON parsing, just validation.

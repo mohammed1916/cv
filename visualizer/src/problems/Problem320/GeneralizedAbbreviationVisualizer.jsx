@@ -1,3 +1,4 @@
+import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -134,12 +135,7 @@ function generateSteps(word) {
   return steps
 }
 
-const WORD_EXAMPLES = [
-  { label: '"word"', word: 'word' },
-  { label: '"abc"', word: 'abc' },
-  { label: '"ab"', word: 'ab' },
-  { label: '"a"', word: 'a' },
-]
+const WORD_EXAMPLES = getAuthoredExamples('local:320')
 
 const REGISTRY_EXAMPLES = getExamples('generalized-abbreviation')
 const EXAMPLES =

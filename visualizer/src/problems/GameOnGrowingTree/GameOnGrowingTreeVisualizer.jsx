@@ -1,4 +1,6 @@
-﻿import { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('game-on-growing-tree')[0];
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -708,8 +710,8 @@ function simulateTreeGameWithTrace(treeData) {
 }
 
 export default function GameOnGrowingTreeVisualizer() {
-  const [qInput, setQInput] = useState("9");
-  const [parentsInput, setParentsInput] = useState("1 1 3 3 1 2 1 2 8");
+  const [qInput, setQInput] = useState(AUTHORED_INITIAL.q);
+  const [parentsInput, setParentsInput] = useState(AUTHORED_INITIAL.parents);
   const [previewSize, setPreviewSize] = useState(null);
   const [parsedParentSnapshot, setParsedParentSnapshot] = useState([]);
   const [viewMode, setViewMode] = useState('panels'); // 'panels' or 'dual-rep'

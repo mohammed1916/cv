@@ -1,3 +1,5 @@
+import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
+const AUTHORED_INITIAL = getInitialExamples('lcabinary-tree')[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -114,9 +116,9 @@ function generateSteps(arr, pVal, qVal) {
 const EXAMPLES = getExamples('lcabinary-tree')
 
 export default function LCABinaryTreeVisualizer() {
-    const [arrInput, setArrInput] = useState('[3,5,1,6,2,0,8,null,null,7,4]')
-    const [pInput, setPInput] = useState('5')
-    const [qInput, setQInput] = useState('1')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
+    const [pInput, setPInput] = useState(String(AUTHORED_INITIAL.p))
+    const [qInput, setQInput] = useState(String(AUTHORED_INITIAL.q))
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
