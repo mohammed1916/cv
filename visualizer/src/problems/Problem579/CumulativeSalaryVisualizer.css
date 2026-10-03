@@ -1,121 +1,322 @@
 .cumulative-salary-shell {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
-  gap: 16px;
+  min-width: 0;
+  min-height: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+.cumulative-salary-workspace {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
 }
 
 .cumulative-salary-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
-}
-
-.cumulative-salary-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  gap: 8px;
+  background: var(--surface);
 }
 
 .cumulative-salary-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
+  box-sizing: border-box;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
   gap: 12px;
+  padding: 14px;
+  overflow: auto;
 }
 
-.cumulative-salary-input-group {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+.cumulative-salary-code-panel {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.cumulative-salary-input-row {
+/* Examples */
+
+.cumulative-salary-example-row {
   display: flex;
-  gap: 8px;
   align-items: center;
-}
-
-.cumulative-salary-label {
-  font-size: 12px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  min-width: 80px;
-}
-
-.cumulative-salary-input {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--code-bg);
-  color: var(--text);
-  font-family: monospace;
-  font-size: 14px;
-  flex: 1;
-  min-width: 120px;
-}
-
-.cumulative-salary-input:focus {
-  outline: none;
-  border-color: var(--accent);
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .cumulative-salary-example-btn {
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  background: var(--surface2);
+  appearance: none;
+  padding: 5px 10px;
   border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface2);
   color: var(--text-muted);
-  transition: all 0.2s ease;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease,
+    color 120ms ease;
 }
 
 .cumulative-salary-example-btn:hover {
-  background: var(--border);
+  border-color: var(--primary);
+  background: var(--primary-glow);
   color: var(--text);
 }
 
-.cumulative-salary-table-container {
-  background: var(--surface-3);
-  border-radius: 8px;
+/* Summary */
+
+.cumulative-salary-summary {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(110px, 1fr)
+  );
+  gap: 8px;
+  padding: 10px;
+  margin: 0;
   border: 1px solid var(--border);
-  overflow: hidden;
+  border-radius: 7px;
+  background: var(--surface2);
+}
+
+.cumulative-salary-summary-item {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  gap: 3px;
+}
+
+.cumulative-salary-summary-label {
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cumulative-salary-summary-value {
+  overflow: hidden;
+  color: var(--text);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
+
+/* Status */
+
+.cumulative-salary-status {
+  flex: 0 0 auto;
+  min-height: 0;
+  padding: 9px 10px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.cumulative-salary-status.processing {
+  color: var(--primary);
+}
+
+.cumulative-salary-status.complete {
+  border-left-color: #22c55e;
+  color: #22c55e;
+}
+
+/* Current row */
+
+.cumulative-salary-current {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface2);
+}
+
+.cumulative-salary-current-title,
+.cumulative-salary-window-title {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cumulative-salary-current-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(80px, 1fr)
+  );
+  gap: 7px;
+}
+
+.cumulative-salary-current-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+.cumulative-salary-current-grid span {
+  color: var(--text-muted);
+  font-size: 9px;
+}
+
+.cumulative-salary-current-grid strong {
+  color: var(--text);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 11px;
+}
+
+/* Current cumulative window */
+
+.cumulative-salary-window {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface2);
+}
+
+.cumulative-salary-window-items {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cumulative-salary-window-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 7px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: 10px;
+}
+
+.cumulative-salary-window-item span {
+  color: var(--text-muted);
+}
+
+.cumulative-salary-window-item strong {
+  color: var(--text);
+}
+
+.cumulative-salary-window-equals {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.cumulative-salary-window-total {
+  padding: 5px 8px;
+  border: 1px solid #22c55e;
+  border-radius: 5px;
+  background:
+    color-mix(
+      in srgb,
+      #22c55e 10%,
+      var(--surface)
+    );
+  color: #22c55e;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 11px;
+}
+
+/* Tables */
+
+.cumulative-salary-table-container {
+  min-width: 0;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface2);
+}
+
+.cumulative-salary-table-header,
+.cumulative-salary-row {
+  min-width: 520px;
+  display: grid;
+  grid-template-columns:
+    70px
+    70px
+    minmax(100px, 1fr)
+    minmax(110px, 1fr)
+    80px;
 }
 
 .cumulative-salary-table-header {
-  display: grid;
-  grid-template-columns: 80px 100px 120px 120px 120px;
-  gap: 1px;
-  background: var(--border);
-  padding: 0;
-  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
 }
 
 .cumulative-salary-header-cell {
-  padding: 10px 12px;
-  background: var(--surface-3);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  padding: 8px 9px;
+  border-right: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
   text-align: right;
 }
 
@@ -123,112 +324,181 @@
   text-align: left;
 }
 
+.cumulative-salary-header-cell:last-child {
+  border-right: 0;
+}
+
 .cumulative-salary-table-body {
-  flex: 1;
-  overflow-y: auto;
+  min-width: 0;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
 }
 
 .cumulative-salary-row {
-  display: grid;
-  grid-template-columns: 80px 100px 120px 120px 120px;
-  gap: 1px;
-  background: var(--border);
-  padding: 0;
-  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.cumulative-salary-row:last-child {
+  border-bottom: 0;
+}
+
+.cumulative-salary-row.active {
+  box-shadow:
+    inset 3px 0 0 var(--primary);
 }
 
 .cumulative-salary-cell {
-  padding: 10px 12px;
-  background: var(--surface-2);
-  font-size: 13px;
-  color: var(--text-main);
-  text-align: right;
+  min-width: 0;
+  padding: 8px 9px;
+  overflow: hidden;
   border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 11px;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cumulative-salary-cell:first-child {
   text-align: left;
-  background: var(--surface-2);
 }
 
-.cumulative-salary-cell.active {
-  background: #1e3a8a;
-  color: #93c5fd;
-  font-weight: 600;
-}
-
-.cumulative-salary-cell.cumulative {
-  background: #064e3b;
-  color: #6ee7b7;
-  font-weight: 600;
+.cumulative-salary-cell:last-child {
+  border-right: 0;
 }
 
 .cumulative-salary-cell.employee-id {
-  background: var(--surface2);
-  color: var(--border);
-  font-weight: 500;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.cumulative-salary-cell.cumulative {
+  background:
+    color-mix(
+      in srgb,
+      #22c55e 7%,
+      transparent
+    );
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.cumulative-salary-row.active
+  .cumulative-salary-cell {
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 7%,
+      var(--surface)
+    );
+}
+
+.cumulative-salary-row.active
+  .cumulative-salary-cell.cumulative {
+  background:
+    color-mix(
+      in srgb,
+      #22c55e 11%,
+      var(--surface)
+    );
 }
 
 .cumulative-salary-empty {
-  padding: 24px 16px;
-  text-align: center;
-  color: var(--text-secondary);
-  font-size: 13px;
-}
-
-.cumulative-salary-summary {
-  background: var(--surface-3);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.cumulative-salary-summary-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.cumulative-salary-summary-label {
+  place-items: center;
+  min-height: 120px;
+  padding: 16px;
+  color: var(--text-muted);
   font-size: 11px;
-  color: var(--text-secondary);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-align: center;
 }
 
-.cumulative-salary-summary-value {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-main);
-  font-family: monospace;
+/* Source employee table */
+
+.cumulative-salary-source-header,
+.cumulative-salary-source-row {
+  min-width: 300px;
+  display: grid;
+  grid-template-columns:
+    minmax(70px, 1fr)
+    minmax(70px, 1fr)
+    minmax(100px, 1fr);
 }
 
-.cumulative-salary-status {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-top: 1px solid var(--border);
+.cumulative-salary-source-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--text-main);
-  min-height: 20px;
-  flex-shrink: 0;
+  background: var(--surface2);
 }
 
-.cumulative-salary-status.processing {
-  color: #1b6df5;
+.cumulative-salary-source-header > div {
+  padding: 8px 10px;
+  border-right: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-align: right;
 }
 
-.cumulative-salary-status.complete {
-  color: #0c865d;
+.cumulative-salary-source-header > div:first-child {
+  text-align: left;
 }
 
-.cumulative-salary-status.error {
-  color: #e91414;
+.cumulative-salary-source-header > div:last-child {
+  border-right: 0;
+}
+
+.cumulative-salary-source-row {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.cumulative-salary-source-row:last-child {
+  border-bottom: 0;
+}
+
+.cumulative-salary-source-row > div {
+  padding: 8px 10px;
+  border-right: 1px solid var(--border);
+  color: var(--text);
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size: 11px;
+  text-align: right;
+}
+
+.cumulative-salary-source-row > div:first-child {
+  color: var(--primary);
+  font-weight: 700;
+  text-align: left;
+}
+
+.cumulative-salary-source-row > div:last-child {
+  border-right: 0;
+}
+
+@media (max-width: 720px) {
+  .cumulative-salary-panel-body {
+    padding: 10px;
+  }
+
+  .cumulative-salary-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .cumulative-salary-current-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
 }
