@@ -173,7 +173,7 @@ export default function MultiplyStringsVisualizer() {
     [num1, num2]
   );
 
-  const { currentStep, isPlaying, setCurrentStep, setIsPlaying } =
+  const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, setIsPlaying, togglePlay, handleReset, speed, setSpeed, isDone } =
     usePlaybackState(steps);
 
   const currentStepData = steps[currentStep] || {};
@@ -328,12 +328,15 @@ export default function MultiplyStringsVisualizer() {
       </div>
 
       <PlaybackControls
-        currentStep={currentStep}
+        activeStep={currentStep}
         totalSteps={steps.length}
         isPlaying={isPlaying}
         onStepChange={setCurrentStep}
-        onPlayPause={setIsPlaying}
-        speed={1}
+        onPlayToggle={togglePlay}
+        onReset={handleReset}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
         showPatternOverlay={showPatternOverlay}
         onShowPatternOverlayChange={setShowPatternOverlay}
         patternOverlayLabel="Show pattern overlay"

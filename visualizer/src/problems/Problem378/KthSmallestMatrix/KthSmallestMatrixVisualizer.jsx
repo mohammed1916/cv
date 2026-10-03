@@ -201,7 +201,7 @@ function KthSmallestMatrixVisualizer() {
         return generateSteps(matrix, k)
     }, [matrix, k, error])
 
-    const { currentStep, isPlaying, setIsPlaying, setCurrentStep } =
+    const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, togglePlay, handleReset, speed, setSpeed, isDone } =
         usePlaybackState(steps.length)
     const { lineConnections } = useCodeVisualConnectivity(
         currentStep < steps.length ? steps[currentStep]?.activeLine : -1
@@ -394,14 +394,16 @@ function KthSmallestMatrixVisualizer() {
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
-                currentStep={currentStep}
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            isDone={isDone}
+                activeStep={currentStep}
                 totalSteps={steps.length}
                 isPlaying={isPlaying}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onStepForward={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-                onStepBackward={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-                onReset={() => setCurrentStep(0)}
+                onPlayToggle={togglePlay}
+                onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
+                onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
+                onReset={handleReset}
                 showPatternOverlay={showPatternOverlay}
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"

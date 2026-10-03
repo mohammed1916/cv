@@ -2169,4 +2169,4 @@ adapt('count-and-say',e=>({input:[e.n]}));
 adapt('median-employee-salary',e=>({table:e.employees.map(r=>`${r.id},${r.company},${r.salary}`).join('\n')}));
 adapt('managers-with-at-least-5-direct-reports',e=>({table:e.employees.map(r=>`${r.id},${r.name},${r.managerId??'null'}`).join('\n')}));
 for(const key of ['nth-digit','student-attendance-record-ii'])adapt(key,e=>({n:String(e.n)}));
-adapt('highest-answer-rate',e=>({questions:e.questions.map((q,i)=>({id:q.question_id,submissions:3+i*2})),answers:e.answers.map(a=>({...a,accepted:true}))}));
+adapt('highest-answer-rate',e=>({questions:e.questions.map((q,i)=>({id:q.question_id,submissions:3+i*2})),answers:e.answers.map((a,i)=>({...a,id:i+1,is_accepted:1}))}));

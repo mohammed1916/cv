@@ -383,7 +383,7 @@ export default function HighestAnswerRateVisualizer() {
           onReset={handleReset}
           isPlaying={isPlaying}
           speed={speed}
-          onSpeedChange={setSpeed}
+          onSpeedChange={(event) => setSpeed(Number(event.target.value))}
           currentStep={stepIndex + 1}
           totalSteps={steps.length}
           isDone={isDone}

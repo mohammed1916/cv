@@ -56,7 +56,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
       const steps = useMemo(() => generateSteps(input), [input])
     const step = steps[currentStep] || steps[0]
 
-    const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
+    const { isPlaying, canNext, canPrev, speed, setSpeed, togglePlay, handleReset, isDone } = usePlaybackState(steps, currentStep, setCurrentStep)
     const { pattern, togglePattern } = usePatternOverlay(false)
 
     const vizPanel = (
@@ -97,11 +97,15 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
 
     const playbackPanel = (
         <PlaybackControls
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            isDone={isDone}
+            onReset={handleReset}
             currentStep={currentStep}
             totalSteps={steps.length}
             onNext={() => setCurrentStep(c => c + 1)}
             onPrev={() => setCurrentStep(c => c - 1)}
-            onPlayToggle={() => setIsPlaying(!isPlaying)}
+            onPlayToggle={togglePlay}
             isPlaying={isPlaying}
             canNext={canNext}
             canPrev={canPrev}

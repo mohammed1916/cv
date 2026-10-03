@@ -6,6 +6,17 @@ import {parse} from '@babel/parser';
 import {AUTHORED_EXAMPLES as suites} from './authoredExamples.js';
 import {generateSteps as allOne} from '../problems/Problem432/algorithm.js';
 
+test('answer-rate presets match the accepted-answer table schema', () => {
+ for (const example of suites['highest-answer-rate']) {
+  for (const answer of example.answers) {
+   assert.equal(answer.is_accepted, 1);
+   assert.ok(Number.isInteger(answer.id));
+   assert.ok(example.questions.some(q => q.id === answer.question_id));
+  }
+ }
+ assert.equal(suites['highest-answer-rate'][0].answers.filter(a => a.question_id === 11 && a.is_accepted).length, 2);
+});
+
 test('every suite has named distinct cases and fully defined data',()=>{
  for(const [key,examples] of Object.entries(suites)){
   assert.ok(examples.length>=3,key);

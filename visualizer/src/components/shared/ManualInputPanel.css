@@ -7,6 +7,28 @@
   gap: 8px;
 }
 
+/* Legacy pages place inputs beside the dock instead of inside a dock panel.
+   Reserve space for both; an absolute inset dock covers the input otherwise. */
+.problem-content *:has(> .mip-root):has(> .local-dock-workspace) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.problem-content .mip-root:has(~ .local-dock-workspace) {
+  flex: 0 0 auto;
+  max-height: 40%;
+  overflow: auto;
+  padding: 8px;
+}
+
+.problem-content .mip-root ~ .local-dock-workspace {
+  position: relative;
+  inset: auto;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
 .mip-examples {
   display: flex;
   gap: 6px;

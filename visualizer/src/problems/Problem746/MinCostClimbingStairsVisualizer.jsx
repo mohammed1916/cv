@@ -122,7 +122,7 @@ export default function MinCostClimbingStairsVisualizer() {
       return { cost: [10, 15, 20], inputError: e.message };
     }
   }, [costInput]);    const steps = useMemo(() => generateSteps(cost), [cost])
-    const { currentStep, isPlaying, setCurrentStep, setIsPlaying } = usePlaybackState(steps.length)
+    const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, togglePlay, handleReset, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const handleExample = useCallback((ex) => {
@@ -218,11 +218,15 @@ export default function MinCostClimbingStairsVisualizer() {
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
-                currentStep={currentStep}
+                activeStep={currentStep}
                 totalSteps={steps.length}
                 onStepChange={setCurrentStep}
                 isPlaying={isPlaying}
-                onPlayingChange={setIsPlaying}
+                onPlayToggle={togglePlay}
+                onReset={handleReset}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
                 showPatternOverlay={showPatternOverlay}
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"

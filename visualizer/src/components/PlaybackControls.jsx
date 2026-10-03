@@ -17,6 +17,8 @@ export default function PlaybackControls({
   onPrev,
   onPlayToggle,
   onTogglePlayback,
+  onPlay,
+  onPause,
   onStepChange,
   onNext,
   resetDisabled,
@@ -113,7 +115,7 @@ export default function PlaybackControls({
     ? () => onStepChange(Math.max(0, activeStep - 1)) : undefined)
   const resolvedNext = onNext ?? (onStepChange && Number.isInteger(activeStep)
     ? () => onStepChange(Number.isInteger(totalSteps) ? Math.min(totalSteps - 1, activeStep + 1) : activeStep + 1) : undefined)
-  const resolvedPlayToggle = onPlayToggle ?? onTogglePlayback
+  const resolvedPlayToggle = onPlayToggle ?? onTogglePlayback ?? (isPlaying ? onPause : onPlay)
 
   return (
     <div className={resolvedRootClass} style={{ padding: '8px' }}>
