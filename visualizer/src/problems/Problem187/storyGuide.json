@@ -1,0 +1,21 @@
+{
+  "number": "187",
+  "title": "Repeated DNA Sequences",
+  "goal": "Solve Repeated DNA Sequences: Find all 10-letter DNA sequences appearing 2+ times using rolling hash.",
+  "strategy": "Find all 10-letter DNA sequences appearing 2+ times using rolling hash.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Overlapping ten-character windows count. Report a repeated sequence once rather than once per repeated occurrence."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem187/index.jsx",
+    "src/problems/Problem187/RepeatedDnaSequencesVisualizer.jsx"
+  ]
+}

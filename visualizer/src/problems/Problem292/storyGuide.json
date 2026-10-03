@@ -1,0 +1,22 @@
+{
+  "number": "292",
+  "title": "Nim Game",
+  "goal": "Solve Nim Game: Determine winning move in Nim game.",
+  "strategy": "Determine winning move in Nim game.",
+  "phases": [
+    "init",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A pile size divisible by four is losing under optimal play; the final legal removal wins."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem292/index.jsx",
+    "src/problems/Problem292/Problem292Visualizer.jsx"
+  ]
+}

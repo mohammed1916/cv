@@ -1,0 +1,26 @@
+{
+  "number": "276",
+  "title": "Paint Fence",
+  "goal": "Solve Paint Fence: Count ways to paint n posts with k colors.",
+  "strategy": "Count ways to paint n posts with k colors.",
+  "phases": [
+    "done",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 0",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem276/index.jsx",
+    "src/problems/Problem276/Problem276Visualizer.jsx"
+  ]
+}

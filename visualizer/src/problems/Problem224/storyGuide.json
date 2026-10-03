@@ -1,0 +1,24 @@
+{
+  "number": "224",
+  "title": "Basic Calculator",
+  "goal": "Solve Basic Calculator: Use a stack to handle nested parentheses, signs, and integer parsing in a left-to-right expression.",
+  "strategy": "Use a stack to handle nested parentheses, signs, and integer parsing in a left-to-right expression.",
+  "phases": [
+    "init",
+    "digit",
+    "op",
+    "open",
+    "close",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Nested parentheses restore the outer accumulated value and sign; a minus before parentheses applies to the whole nested result."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem224/index.jsx",
+    "src/problems/Problem224/BasicCalculatorVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "556",
+  "title": "Next Greater Element III",
+  "goal": "Solve Next Greater Element III: Find the smallest integer greater than the given integer that is a permutation of its digits.",
+  "strategy": "Find the smallest integer greater than the given integer that is a permutation of its digits.",
+  "phases": [
+    "convert",
+    "find_pivot",
+    "find_successor",
+    "swap",
+    "reverse",
+    "result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "i < 0",
+      "outcome": "return -1"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem556/index.jsx",
+    "src/problems/Problem556/NextGreaterVisualizer.jsx"
+  ]
+}

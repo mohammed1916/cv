@@ -1,0 +1,27 @@
+{
+  "number": "107",
+  "title": "Binary Tree Level Order Traversal II",
+  "goal": "Solve Binary Tree Level Order Traversal II: Return the level order traversal of a binary tree from bottom to top (reverse level order).",
+  "strategy": "Return the level order traversal of a binary tree from bottom to top (reverse level order).",
+  "phases": [
+    "init",
+    "loop",
+    "visit",
+    "update",
+    "reverse"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem107/index.jsx",
+    "src/problems/Problem107/BinaryTreeLevelOrderTraversalIIVisualizer.jsx",
+    "src/problems/Problem107/algorithm.js"
+  ]
+}

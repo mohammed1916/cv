@@ -1,0 +1,31 @@
+{
+  "number": "222",
+  "title": "Count Complete Tree Nodes",
+  "goal": "Solve Count Complete Tree Nodes: Count the nodes of a complete binary tree in O(log^2 n) by comparing spine heights.",
+  "strategy": "Count the nodes of a complete binary tree in O(log^2 n) by comparing spine heights.",
+  "phases": [
+    "init",
+    "measure",
+    "perfect",
+    "recurse",
+    "accumulate",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Node count must be a non-negative integer",
+    "Use at most 31 nodes so the tree stays readable"
+  ],
+  "source": [
+    "src/problems/Problem222/index.jsx",
+    "src/problems/Problem222/Problem222Visualizer.jsx"
+  ]
+}

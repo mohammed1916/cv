@@ -1,0 +1,21 @@
+{
+  "number": "194",
+  "title": "Transpose File",
+  "goal": "Solve Transpose File: Shell script to transpose rows and columns of file.",
+  "strategy": "Shell script to transpose rows and columns of file.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The ith field from every row forms output row i; row/column indexing must not be interchanged twice."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem194/index.jsx",
+    "src/problems/Problem194/TransposeFileVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "number": "464",
+  "title": "Can I Win",
+  "goal": "Solve Can I Win: Search available-number choices with a memoized used-number state; a state wins if some move wins immediately or leaves the opponent losing.",
+  "strategy": "Search available-number choices with a memoized used-number state; a state wins if some move wins immediately or leaves the opponent losing.",
+  "phases": [
+    "check_sum",
+    "dfs_start",
+    "done",
+    "exploring",
+    "impossible",
+    "init_memo",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "If the total available sum is too small, the target is unreachable; reaching the target ends the game immediately."
+  ],
+  "checks": [
+    {
+      "condition": "desiredTotal <= 0",
+      "outcome": "return True"
+    },
+    {
+      "condition": "(1 + maxChoosableInteger) * maxChoosableInteger / 2 < desiredTotal",
+      "outcome": "return False"
+    },
+    {
+      "condition": "current_sum >= desiredTotal",
+      "outcome": "return False"
+    },
+    {
+      "condition": "available in memo",
+      "outcome": "return memo[available]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem464/index.jsx",
+    "src/problems/Problem464/Problem464Visualizer.jsx"
+  ]
+}

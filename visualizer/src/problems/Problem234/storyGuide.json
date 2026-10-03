@@ -1,0 +1,22 @@
+{
+  "number": "234",
+  "title": "Palindrome Linked List",
+  "goal": "Solve Palindrome Linked List: Find mid with slow/fast pointers, reverse the second half, then compare both halves.",
+  "strategy": "Find mid with slow/fast pointers, reverse the second half, then compare both halves.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "left.val != right.val",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem234/index.jsx",
+    "src/problems/Problem234/PalindromeLinkedListVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "428",
+  "title": "Serialize and Deserialize N-ary Tree",
+  "goal": "Solve Serialize and Deserialize N-ary Tree: Encode each N-ary node together with enough child-structure information to rebuild the same ordered tree.",
+  "strategy": "Encode each N-ary node together with enough child-structure information to rebuild the same ordered tree.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated values cannot identify structure by themselves; leaf and empty-tree representations must be unambiguous."
+  ],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return ''"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem428/index.jsx",
+    "src/problems/Problem428/Problem428Visualizer.jsx"
+  ]
+}

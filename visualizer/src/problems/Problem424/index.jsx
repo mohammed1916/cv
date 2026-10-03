@@ -1,1 +1,5 @@
-export { default } from './LongestRepeatingVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./LongestRepeatingVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

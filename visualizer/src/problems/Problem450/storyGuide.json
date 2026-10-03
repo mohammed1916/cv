@@ -1,0 +1,39 @@
+{
+  "number": "450",
+  "title": "Delete Node in a BST",
+  "goal": "Solve Delete Node in a BST: Locate the BST key and preserve ordering while replacing a deleted node with its child or an inorder successor.",
+  "strategy": "Locate the BST key and preserve ordering while replacing a deleted node with its child or an inorder successor.",
+  "phases": [
+    "checking",
+    "delete_node",
+    "done",
+    "found_node",
+    "go_left",
+    "go_right",
+    "not_found",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Deleting the root can change the tree head; a node with two children needs ordered replacement rather than simple unlinking."
+  ],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return None"
+    },
+    {
+      "condition": "not root.left",
+      "outcome": "return root.right"
+    },
+    {
+      "condition": "not root.right",
+      "outcome": "return root.left"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem450/index.jsx",
+    "src/problems/Problem450/Problem450Visualizer.jsx"
+  ]
+}

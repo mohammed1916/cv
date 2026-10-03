@@ -1,1 +1,5 @@
-export { default } from "./RepeatedDnaSequencesVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./RepeatedDnaSequencesVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

@@ -1,0 +1,26 @@
+{
+  "number": "443",
+  "title": "String Compression",
+  "goal": "Solve String Compression: Read each maximal character run and write its character and count into a compact prefix of the same array.",
+  "strategy": "Read each maximal character run and write its character and count into a compact prefix of the same array.",
+  "phases": [
+    "complete",
+    "count_chars",
+    "init",
+    "start_group",
+    "write_char",
+    "write_count"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A run of one omits its count; multi-digit counts occupy multiple output characters."
+  ],
+  "checks": [],
+  "inputRules": [
+    "chars must be an array"
+  ],
+  "source": [
+    "src/problems/Problem443/index.jsx",
+    "src/problems/Problem443/Problem443Visualizer.jsx"
+  ]
+}

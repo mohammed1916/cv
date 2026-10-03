@@ -1,0 +1,20 @@
+{
+  "number": "145",
+  "title": "Binary Tree Postorder Traversal",
+  "goal": "Solve Binary Tree Postorder Traversal: Traverse a tree in postorder (left, right, root) using iteration.",
+  "strategy": "Traverse a tree in postorder (left, right, root) using iteration.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem145/index.jsx",
+    "src/problems/Problem145/BinaryTreePostorderTraversalVisualizer.jsx"
+  ]
+}

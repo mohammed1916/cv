@@ -1,0 +1,29 @@
+{
+  "number": "242",
+  "title": "Valid Anagram",
+  "goal": "Solve Valid Anagram: Count character frequencies in both strings; anagram iff counts match.",
+  "strategy": "Count character frequencies in both strings; anagram iff counts match.",
+  "phases": [
+    "check_len",
+    "done",
+    "init",
+    "incr"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(s) != len(t)",
+      "outcome": "return False"
+    },
+    {
+      "condition": "count[c] < 0",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem242/index.jsx",
+    "src/problems/Problem242/ValidAnagramVisualizer.jsx"
+  ]
+}

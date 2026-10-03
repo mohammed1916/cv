@@ -1,0 +1,21 @@
+{
+  "number": "196",
+  "title": "Delete Duplicate Emails",
+  "goal": "Solve Delete Duplicate Emails: SQL DELETE query to remove duplicate emails keeping lowest id.",
+  "strategy": "SQL DELETE query to remove duplicate emails keeping lowest id.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "For each duplicate email group, retain the record with the smallest ID rather than deleting every member."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem196/index.jsx",
+    "src/problems/Problem196/DeleteDuplicateEmailsVisualizer.jsx"
+  ]
+}

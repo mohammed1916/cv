@@ -1,0 +1,26 @@
+{
+  "number": "255",
+  "title": "Verify Preorder Serialization of a BST",
+  "goal": "Solve Verify Preorder Serialization of a BST: Verify if preorder serialization of BST is valid.",
+  "strategy": "Verify if preorder serialization of BST is valid.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "value < lower_bound",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem255/index.jsx",
+    "src/problems/Problem255/Problem255Visualizer.jsx"
+  ]
+}

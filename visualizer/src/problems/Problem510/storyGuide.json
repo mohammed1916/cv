@@ -1,0 +1,20 @@
+{
+  "number": "510",
+  "title": "Inorder Successor in Binary Search Tree II",
+  "goal": "Solve Inorder Successor in Binary Search Tree II: Find the inorder successor of a node in a BST with parent pointers.",
+  "strategy": "Find the inorder successor of a node in a BST with parent pointers.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "With no right subtree, climb parent links until leaving a left child; the maximum node has no successor."
+  ],
+  "checks": [],
+  "inputRules": [
+    "values must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem510/index.jsx",
+    "src/problems/Problem510/InorderSuccessorBSTVisualizer.jsx"
+  ]
+}

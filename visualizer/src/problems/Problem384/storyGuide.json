@@ -1,0 +1,25 @@
+{
+  "number": "384",
+  "title": "Shuffle an Array",
+  "goal": "Solve Shuffle an Array: Randomize array in-place using Fisher-Yates shuffle algorithm.",
+  "strategy": "Randomize array in-place using Fisher-Yates shuffle algorithm.",
+  "phases": [
+    "complete",
+    "init",
+    "select",
+    "shuffle",
+    "swap"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reset restores the original order; a shuffle must choose among the correct remaining positions to avoid bias."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem384/index.jsx",
+    "src/problems/Problem384/Problem384Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "463",
+  "title": "Island Perimeter",
+  "goal": "Solve Island Perimeter: Count each land cell’s four sides and remove sides shared with neighboring land cells.",
+  "strategy": "Count each land cell’s four sides and remove sides shared with neighboring land cells.",
+  "phases": [
+    "add_perimeter",
+    "adjust_left",
+    "adjust_up",
+    "checking_cell",
+    "done",
+    "found_land",
+    "init",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Shared edges are internal; grid boundaries and adjacent water contribute perimeter."
+  ],
+  "checks": [
+    {
+      "condition": "not grid",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem463/index.jsx",
+    "src/problems/Problem463/Problem463Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "number": "193",
+  "title": "Valid Phone Numbers",
+  "goal": "Solve Valid Phone Numbers: Shell script to print valid phone numbers matching pattern.",
+  "strategy": "Shell script to print valid phone numbers matching pattern.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only the supported full phone-number formats qualify; a valid-looking substring inside a longer line is insufficient."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem193/index.jsx",
+    "src/problems/Problem193/ValidPhoneNumbersVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "number": "159",
+  "title": "Longest Substring with At Most Two Distinct Characters",
+  "goal": "Solve Longest Substring with At Most Two Distinct Characters: Find the longest substring with at most two distinct characters.",
+  "strategy": "Find the longest substring with at most two distinct characters.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A third distinct character forces shrinking until one character count reaches zero; repeated characters alone do not violate the limit."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem159/index.jsx",
+    "src/problems/Problem159/LongestSubstringWithAtMostTwoDistinctCharactersVisualizer.jsx"
+  ]
+}

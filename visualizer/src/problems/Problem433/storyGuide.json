@@ -1,0 +1,32 @@
+{
+  "number": "433",
+  "title": "Minimum Genetic Mutation",
+  "goal": "Solve Minimum Genetic Mutation: Search mutations in increasing number of edits, changing one gene position at a time and visiting only allowed unseen strings.",
+  "strategy": "Search mutations in increasing number of edits, changing one gene position at a time and visiting only allowed unseen strings.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An unreachable target returns failure; revisiting the same gene must not create an endless search."
+  ],
+  "checks": [
+    {
+      "condition": "not bank",
+      "outcome": "return -1"
+    },
+    {
+      "condition": "start == end",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "next_gene == end",
+      "outcome": "return steps + 1"
+    }
+  ],
+  "inputRules": [
+    "bank must be an array"
+  ],
+  "source": [
+    "src/problems/Problem433/index.jsx",
+    "src/problems/Problem433/Problem433Visualizer.jsx"
+  ]
+}

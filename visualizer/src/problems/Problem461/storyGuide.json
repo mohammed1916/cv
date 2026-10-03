@@ -1,0 +1,27 @@
+{
+  "number": "461",
+  "title": "Hamming Distance",
+  "goal": "Solve Hamming Distance: XOR the two integers so differing positions become one bits, then count those set bits.",
+  "strategy": "XOR the two integers so differing positions become one bits, then count those set bits.",
+  "phases": [
+    "binary",
+    "checking_bit",
+    "done",
+    "extract_bit",
+    "increment_count",
+    "init_count",
+    "shift_right",
+    "start",
+    "xor_computed"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal integers have distance zero; leading zero positions add nothing."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem461/index.jsx",
+    "src/problems/Problem461/Problem461Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "number": "568",
+  "title": "Palindrome Subsequence",
+  "goal": "Solve Palindrome Subsequence: Find the length of the longest palindromic subsequence in a given string using dynamic programming.",
+  "strategy": "Find the length of the longest palindromic subsequence in a given string using dynamic programming.",
+  "phases": [
+    "initialization",
+    "base_case",
+    "fill_table",
+    "compare",
+    "match",
+    "no_match",
+    "return_result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A subsequence need not be contiguous; matching outer characters extend an inner solution while mismatches require excluding an end."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem568/index.jsx",
+    "src/problems/Problem568/PalindromeSubsequenceVisualizer.jsx"
+  ]
+}

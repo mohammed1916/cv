@@ -1,0 +1,26 @@
+{
+  "number": "263",
+  "title": "Ugly Number",
+  "goal": "Solve Ugly Number: Check if number only has factors 2, 3, 5.",
+  "strategy": "Check if number only has factors 2, 3, 5.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n <= 0",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem263/index.jsx",
+    "src/problems/Problem263/Problem263Visualizer.jsx"
+  ]
+}

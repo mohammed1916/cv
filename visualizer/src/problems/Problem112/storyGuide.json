@@ -1,0 +1,39 @@
+{
+  "number": "112",
+  "title": "Path Sum",
+  "goal": "Solve Path Sum: Determine if a binary tree has a root-to-leaf path that sums to a target value.",
+  "strategy": "Determine if a binary tree has a root-to-leaf path that sums to a target value.",
+  "phases": [
+    "init",
+    "visit",
+    "descend",
+    "reject",
+    "found",
+    "backtrack",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return False"
+    },
+    {
+      "condition": "not root.left and not root.right",
+      "outcome": "return root.val == targetSum"
+    }
+  ],
+  "inputRules": [
+    "Use a level-order array of integers and nulls.",
+    "Target must be an integer.",
+    "Some values have no parent. Check the level-order input.",
+    "An empty root cannot have children."
+  ],
+  "source": [
+    "src/problems/Problem112/index.jsx",
+    "src/problems/Problem112/PathSumVisualizer.jsx",
+    "src/problems/Problem112/algorithm.js",
+    "src/problems/Problem112/PathSumStory.jsx"
+  ]
+}

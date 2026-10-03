@@ -1,0 +1,49 @@
+{
+  "number": "37",
+  "title": "Sudoku Solver",
+  "goal": "Solve Sudoku Solver: Fill empty Sudoku cells with digits allowed by their row, column and box, undoing a choice when its remaining search fails.",
+  "strategy": "Fill empty Sudoku cells with digits allowed by their row, column and box, undoing a choice when its remaining search fails.",
+  "phases": [
+    "backtrack",
+    "done",
+    "init",
+    "place",
+    "recurse",
+    "skip"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Fixed clues cannot be changed; a locally valid digit may still lead to a dead end later."
+  ],
+  "checks": [
+    {
+      "condition": "d in board[r]",
+      "outcome": "return False"
+    },
+    {
+      "condition": "d in [board[i][c] for i in range(9)]",
+      "outcome": "return False"
+    },
+    {
+      "condition": "d in [board[br+i][bc+j] ...]",
+      "outcome": "return False"
+    },
+    {
+      "condition": "board[r][c] != '.'",
+      "outcome": "continue"
+    },
+    {
+      "condition": "backtrack()",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "board must be an array of 9 rows",
+    "each row must be an array of 9 cells",
+    "each cell must be \"1\"-\"9\" or \".\""
+  ],
+  "source": [
+    "src/problems/Problem37/index.jsx",
+    "src/problems/Problem37/SudokuSolverVisualizer.jsx"
+  ]
+}

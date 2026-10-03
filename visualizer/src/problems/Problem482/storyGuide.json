@@ -1,0 +1,22 @@
+{
+  "number": "482",
+  "title": "License Key Formatting",
+  "goal": "Solve License Key Formatting: Format license key by removing dashes, uppercasing, and grouping every k characters.",
+  "strategy": "Format license key by removing dashes, uppercasing, and grouping every k characters.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not s",
+      "outcome": "return \"\""
+    }
+  ],
+  "inputRules": [
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem482/index.jsx",
+    "src/problems/Problem482/Problem482Visualizer.jsx"
+  ]
+}

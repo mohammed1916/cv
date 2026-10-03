@@ -1,0 +1,25 @@
+{
+  "number": "318",
+  "title": "Maximum Product of Word Lengths",
+  "goal": "Solve Maximum Product of Word Lengths: Find product of lengths of words with no common letters.",
+  "strategy": "Find product of lengths of words with no common letters.",
+  "phases": [
+    "init",
+    "encode",
+    "compare",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Words with repeated letters still use one membership bit per letter; any shared letter disqualifies a pair."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"words\": [\"lowercase\", \"words\"] }.",
+    "Use at most 10 words so every comparison stays visible."
+  ],
+  "source": [
+    "src/problems/Problem318/index.jsx",
+    "src/problems/Problem318/MaximumProductofWordLengthsVisualizer.jsx"
+  ]
+}

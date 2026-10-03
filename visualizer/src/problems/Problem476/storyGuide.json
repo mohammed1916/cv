@@ -1,0 +1,19 @@
+{
+  "number": "476",
+  "title": "Number Complement",
+  "goal": "Solve Number Complement: Find the complement of a number by flipping all bits within its binary representation.",
+  "strategy": "Find the complement of a number by flipping all bits within its binary representation.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Flip only the significant bits of the positive number; leading machine-word zeros are not part of its complement."
+  ],
+  "checks": [],
+  "inputRules": [
+    "num must be a number"
+  ],
+  "source": [
+    "src/problems/Problem476/index.jsx",
+    "src/problems/Problem476/Problem476Visualizer.jsx"
+  ]
+}

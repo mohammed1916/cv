@@ -1,0 +1,24 @@
+{
+  "number": "44",
+  "title": "Wildcard Matching",
+  "goal": "Solve Wildcard Matching: 2D DP: '*' can match empty or extend by reusing the dp[i-1][j] state.",
+  "strategy": "2D DP: '*' can match empty or extend by reusing the dp[i-1][j] state.",
+  "phases": [
+    "base",
+    "done",
+    "init",
+    "match",
+    "no-match",
+    "star"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A question mark matches one character, while a star may match zero or many; empty text can match only a pattern reducible to empty."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem44/index.jsx",
+    "src/problems/Problem44/WildcardMatchingVisualizer.jsx"
+  ]
+}

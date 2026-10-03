@@ -1,0 +1,27 @@
+{
+  "number": "77",
+  "title": "Combinations",
+  "goal": "Solve Combinations: Choose increasing values recursively so each size-k subset appears once, pruning when too few candidates remain.",
+  "strategy": "Choose increasing values recursively so each size-k subset appears once, pruning when too few candidates remain.",
+  "phases": [
+    "choose",
+    "done",
+    "init",
+    "record",
+    "recurse",
+    "unchoose"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Order within a combination is irrelevant; a completed path must contain exactly k values."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be 1-20",
+    "k must be 1 to n"
+  ],
+  "source": [
+    "src/problems/Problem77/index.jsx",
+    "src/problems/Problem77/CombinationsVisualizer.jsx"
+  ]
+}

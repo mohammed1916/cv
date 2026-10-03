@@ -1,0 +1,27 @@
+{
+  "number": "581",
+  "title": "Shortest Unsorted Continuous Subarray",
+  "goal": "Solve Shortest Unsorted Continuous Subarray: Find the shortest continuous subarray that needs to be sorted",
+  "strategy": "Find the shortest continuous subarray that needs to be sorted",
+  "phases": [
+    "init",
+    "scan_right",
+    "scan_left",
+    "found_bounds",
+    "calculate_length",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An already sorted array needs length zero; out-of-order interior values can extend both boundaries beyond the first inversion."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array",
+    "Array must contain only numbers"
+  ],
+  "source": [
+    "src/problems/Problem581/index.jsx",
+    "src/problems/Problem581/ShortestUnsortedVisualizer.jsx"
+  ]
+}

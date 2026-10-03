@@ -1,0 +1,23 @@
+{
+  "number": "495",
+  "title": "Teemo Attacking",
+  "goal": "Solve Teemo Attacking: Calculate total damage dealt with attack cooldown mechanics.",
+  "strategy": "Calculate total damage dealt with attack cooldown mechanics.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not timeSeries",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "timeSeries must be an array",
+    "duration must be a number"
+  ],
+  "source": [
+    "src/problems/Problem495/index.jsx",
+    "src/problems/Problem495/Problem495Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "number": "87",
+  "title": "Scramble String",
+  "goal": "Solve Scramble String: Split both strings into matching-length parts and test whether corresponding parts match with or without swapping the split sides.",
+  "strategy": "Split both strings into matching-length parts and test whether corresponding parts match with or without swapping the split sides.",
+  "phases": [
+    "check",
+    "memo",
+    "base",
+    "char_check",
+    "recurse",
+    "not_found"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Unequal character counts rule out a state before recursion; both split orientations must be considered."
+  ],
+  "checks": [
+    {
+      "condition": "s1==s2",
+      "outcome": "return True"
+    },
+    {
+      "condition": "sorted(s1)!=sorted(s2)",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem87/index.jsx",
+    "src/problems/Problem87/ScrambleStringVisualizer.jsx"
+  ]
+}

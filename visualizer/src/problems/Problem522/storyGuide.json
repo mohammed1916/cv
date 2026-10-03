@@ -1,0 +1,27 @@
+{
+  "number": "522",
+  "title": "Longest Uncommon Subsequence II",
+  "goal": "Solve Longest Uncommon Subsequence II: Find the longest uncommon subsequence among an array of strings.",
+  "strategy": "Find the longest uncommon subsequence among an array of strings.",
+  "phases": [
+    "init",
+    "loop",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "all(s not in t for j, t in enumerate(strs) if i != j)",
+      "outcome": "return len(s)"
+    }
+  ],
+  "inputRules": [
+    "strs must be a non-empty array, e.g. [\"aba\",\"cdc\",\"eae\"]",
+    "strs must contain only strings"
+  ],
+  "source": [
+    "src/problems/Problem522/index.jsx",
+    "src/problems/Problem522/LongestUncommonSubsequenceIIVisualizer.jsx"
+  ]
+}

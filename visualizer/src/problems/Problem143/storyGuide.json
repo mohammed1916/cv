@@ -1,0 +1,27 @@
+{
+  "number": "143",
+  "title": "Reorder List",
+  "goal": "Solve Reorder List: Find mid, reverse the second half, then interleave the two halves.",
+  "strategy": "Find mid, reverse the second half, then interleave the two halves.",
+  "phases": [
+    "find_mid",
+    "split",
+    "reverse_start",
+    "reversing",
+    "merge_start",
+    "merging",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Split and reverse the second half before interleaving; an odd-length list leaves one extra node in the first half."
+  ],
+  "checks": [],
+  "inputRules": [
+    "arr must be an array"
+  ],
+  "source": [
+    "src/problems/Problem143/index.jsx",
+    "src/problems/Problem143/ReorderListVisualizer.jsx"
+  ]
+}

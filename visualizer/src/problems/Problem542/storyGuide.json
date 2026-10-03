@@ -1,0 +1,25 @@
+{
+  "number": "542",
+  "title": "01 Matrix",
+  "goal": "Solve 01 Matrix: Find distance of nearest 0 for every cell in binary matrix.",
+  "strategy": "Find distance of nearest 0 for every cell in binary matrix.",
+  "phases": [
+    "init",
+    "init_queue",
+    "processing",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All zero cells are simultaneous BFS sources; distance is to the nearest zero, not the first source processed alone."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Invalid matrix format"
+  ],
+  "source": [
+    "src/problems/Problem542/index.jsx",
+    "src/problems/Problem542/ZeroOneMatrixVisualizer.jsx"
+  ]
+}

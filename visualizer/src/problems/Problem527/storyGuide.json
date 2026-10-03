@@ -1,0 +1,28 @@
+{
+  "number": "527",
+  "title": "Word Abbreviation",
+  "goal": "Solve Word Abbreviation: Generate unique abbreviations for words by incrementally increasing the prefix length.",
+  "strategy": "Generate unique abbreviations for words by incrementally increasing the prefix length.",
+  "phases": [
+    "compute_abbr",
+    "done",
+    "finalize",
+    "init",
+    "init_result",
+    "length_done",
+    "process_group",
+    "start_length"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An abbreviation must remain unique and shorter than the original; conflicting prefixes need additional distinguishing characters."
+  ],
+  "checks": [],
+  "inputRules": [
+    "dict must be an array of non-empty strings, e.g. [\"like\",\"god\"]"
+  ],
+  "source": [
+    "src/problems/Problem527/index.jsx",
+    "src/problems/Problem527/WordAbbreviationVisualizer.jsx"
+  ]
+}

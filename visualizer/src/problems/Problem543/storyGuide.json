@@ -1,0 +1,25 @@
+{
+  "number": "543",
+  "title": "Diameter of Binary Tree",
+  "goal": "Solve Diameter of Binary Tree: DFS returns depth; global max tracks the widest path as left depth + right depth at each node.",
+  "strategy": "DFS returns depth; global max tracks the widest path as left depth + right depth at each node.",
+  "phases": [
+    "call",
+    "done",
+    "return",
+    "right"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem543/index.jsx",
+    "src/problems/Problem543/DiameterBinaryTreeVisualizer.jsx"
+  ]
+}

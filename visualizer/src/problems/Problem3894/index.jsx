@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -18,7 +20,7 @@ const definition = {
     { label: 'Red boundary: 90', input: '90' }, { label: 'Beyond red: 91', input: '91' },
   ],
 }
-export default function TrafficSignal() {
+function TrafficSignal() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Timer (unchanged during evaluation)" length={1} valueAt={() => run.input} />
     <svg width={220} height={260} role="img" aria-label={`Traffic signal: ${step.result || 'not decided'}`}>
@@ -38,3 +40,5 @@ export default function TrafficSignal() {
     <p>The signal names and ON labels convey the result without depending on color perception.</p>
   </>} />
 }
+
+export default withProblemStory(TrafficSignal, storyGuide);

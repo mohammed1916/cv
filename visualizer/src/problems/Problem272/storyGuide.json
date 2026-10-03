@@ -1,0 +1,23 @@
+{
+  "number": "272",
+  "title": "Closest Binary Search Tree Value II",
+  "goal": "Find k closest values in BST.",
+  "strategy": "Compare BST candidates by their distance to the target while retaining only the requested number of closest values.",
+  "phases": [
+    "init",
+    "pick",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The target need not exist in the tree; candidates can come from both sides of it."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem272/index.jsx",
+    "src/problems/Problem272/Problem272Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "number": "177",
+  "title": "Nth Highest Salary",
+  "goal": "Solve Nth Highest Salary: SQL query to find Nth highest salary using OFFSET.",
+  "strategy": "SQL query to find Nth highest salary using OFFSET.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Duplicate salaries share a rank; if fewer than n distinct salaries exist, no nth salary is available."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem177/index.jsx",
+    "src/problems/Problem177/NthHighestSalaryVisualizer.jsx"
+  ]
+}

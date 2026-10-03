@@ -1,0 +1,24 @@
+{
+  "number": "67",
+  "title": "Add Binary",
+  "goal": "Solve Add Binary: Add binary strings from right to left, emitting the low bit and carrying the remaining bit into the next column.",
+  "strategy": "Add binary strings from right to left, emitting the low bit and carrying the remaining bit into the next column.",
+  "phases": [
+    "init",
+    "check_loop",
+    "get_vals",
+    "sum",
+    "append",
+    "advance"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Different lengths use zero for missing digits; a leftover carry must be emitted."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem67/index.jsx",
+    "src/problems/Problem67/AddBinaryVisualizer.jsx"
+  ]
+}

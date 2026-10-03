@@ -1,0 +1,23 @@
+{
+  "number": "517",
+  "title": "Super Washing Machines",
+  "goal": "Solve Super Washing Machines: Find minimum number of operations to make each washing machine have same number of dresses.",
+  "strategy": "Find minimum number of operations to make each washing machine have same number of dresses.",
+  "phases": [
+    "init",
+    "loop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "If total load is not divisible by machine count, balancing is impossible; both local surplus and cross-boundary flow constrain moves."
+  ],
+  "checks": [],
+  "inputRules": [
+    "machines must be a non-empty array, e.g. [1,0,5]",
+    "machines must contain non-negative numbers"
+  ],
+  "source": [
+    "src/problems/Problem517/index.jsx",
+    "src/problems/Problem517/SuperWashingMachinesVisualizer.jsx"
+  ]
+}

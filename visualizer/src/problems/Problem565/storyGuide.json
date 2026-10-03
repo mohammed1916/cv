@@ -1,0 +1,27 @@
+{
+  "number": "565",
+  "title": "Array Nesting",
+  "goal": "Solve Array Nesting: Find the longest cycle in an array where each element points to another index.",
+  "strategy": "Find the longest cycle in an array where each element points to another index.",
+  "phases": [
+    "init",
+    "traversal",
+    "jump",
+    "mark_visited",
+    "update_max",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each index belongs to a cycle under the permutation mapping; already visited indices must not be recounted indefinitely."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array",
+    "All elements must be 0 <= x < length"
+  ],
+  "source": [
+    "src/problems/Problem565/index.jsx",
+    "src/problems/Problem565/ArrayNestingVisualizer.jsx"
+  ]
+}

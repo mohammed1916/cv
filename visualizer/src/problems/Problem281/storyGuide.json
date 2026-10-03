@@ -1,0 +1,23 @@
+{
+  "number": "281",
+  "title": "Zigzag Iterator",
+  "goal": "Solve Zigzag Iterator: Iterate vectors in zigzag pattern.",
+  "strategy": "Iterate vectors in zigzag pattern.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "When one input ends, continue returning values from the other without trying to alternate into an empty source."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem281/index.jsx",
+    "src/problems/Problem281/Problem281Visualizer.jsx"
+  ]
+}

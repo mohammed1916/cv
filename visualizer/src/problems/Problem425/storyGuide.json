@@ -1,0 +1,19 @@
+{
+  "number": "425",
+  "title": "Word Squares",
+  "goal": "Solve Word Squares: Build the square row by row, restricting each next word to the prefix forced by the current column.",
+  "strategy": "Build the square row by row, restricting each next word to the prefix forced by the current column.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each chosen row constrains future columns; matching word lengths alone does not guarantee a square."
+  ],
+  "checks": [],
+  "inputRules": [
+    "words must be an array"
+  ],
+  "source": [
+    "src/problems/Problem425/index.jsx",
+    "src/problems/Problem425/Problem425Visualizer.jsx"
+  ]
+}

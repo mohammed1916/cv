@@ -1,0 +1,30 @@
+{
+  "number": "386",
+  "title": "Lexicographical Numbers",
+  "goal": "Solve Lexicographical Numbers: Generate numbers in lexicographical order using DFS digit-by-digit traversal.",
+  "strategy": "Generate numbers in lexicographical order using DFS digit-by-digit traversal.",
+  "phases": [
+    "add_number",
+    "backtrack",
+    "complete",
+    "init",
+    "start_dfs",
+    "start_digit",
+    "try_digit"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num > n",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem386/index.jsx",
+    "src/problems/Problem386/Problem386Visualizer.jsx"
+  ]
+}

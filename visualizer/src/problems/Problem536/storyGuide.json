@@ -1,0 +1,26 @@
+{
+  "number": "536",
+  "title": "Construct Binary Tree from String",
+  "goal": "Solve Construct Binary Tree from String: Construct a binary tree from parenthesized string representation.",
+  "strategy": "Construct a binary tree from parenthesized string representation.",
+  "phases": [
+    "done",
+    "init",
+    "number",
+    "open",
+    "pop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not s",
+      "outcome": "return None"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem536/index.jsx",
+    "src/problems/Problem536/ConstructBinaryTreeFromStringVisualizer.jsx"
+  ]
+}

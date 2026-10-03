@@ -1,0 +1,30 @@
+{
+  "number": "574",
+  "title": "Shortest Word Distance II",
+  "goal": "Solve Shortest Word Distance II: Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and return the shortest distance between these two words in the list.",
+  "strategy": "Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and return the shortest distance between these two words in the list.",
+  "phases": [
+    "init",
+    "track_indices",
+    "retrieve",
+    "two_pointers",
+    "calculate",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not indices1 or not indices2",
+      "outcome": "return -1"
+    }
+  ],
+  "inputRules": [
+    "Input must be array",
+    "All items must be strings"
+  ],
+  "source": [
+    "src/problems/Problem574/index.jsx",
+    "src/problems/Problem574/ShortestWordDistanceVisualizer.jsx"
+  ]
+}

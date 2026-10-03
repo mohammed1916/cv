@@ -1,0 +1,26 @@
+{
+  "number": "2",
+  "title": "Add Two Numbers",
+  "goal": "Add two numbers represented by linked lists node by node, carrying over tens.",
+  "strategy": "Add the reversed digit lists column by column, carrying overflow to the next digit and building a new result list.",
+  "phases": [
+    "init",
+    "check_loop",
+    "get_vals",
+    "sum",
+    "carry",
+    "append",
+    "advance",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Unequal lengths use zero for the exhausted list; a final carry creates one more node."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem2/index.jsx",
+    "src/problems/Problem2/AddTwoNumbersVisualizer.jsx"
+  ]
+}

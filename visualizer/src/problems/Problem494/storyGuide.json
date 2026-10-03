@@ -1,0 +1,20 @@
+{
+  "number": "494",
+  "title": "Target Sum",
+  "goal": "Solve Target Sum: Find ways to assign +/- to numbers to reach target sum.",
+  "strategy": "Find ways to assign +/- to numbers to reach target sum.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Zero has two sign assignments even though both yield the same numeric sum; multiplicities must be counted."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem494/index.jsx",
+    "src/problems/Problem494/Problem494Visualizer.jsx"
+  ]
+}

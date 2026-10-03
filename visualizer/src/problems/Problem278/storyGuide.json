@@ -1,0 +1,20 @@
+{
+  "number": "278",
+  "title": "First Bad Version",
+  "goal": "Solve First Bad Version: Binary search the smallest bad version: if mid is bad, search left; otherwise search right.",
+  "strategy": "Binary search the smallest bad version: if mid is bad, search left; otherwise search right.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Keep the first failing version inside the search interval; finding any failing version is not enough."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number",
+    "bad must be a number"
+  ],
+  "source": [
+    "src/problems/Problem278/index.jsx",
+    "src/problems/Problem278/FirstBadVersionVisualizer.jsx"
+  ]
+}

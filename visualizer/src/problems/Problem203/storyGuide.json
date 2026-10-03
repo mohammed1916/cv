@@ -1,0 +1,20 @@
+{
+  "number": "203",
+  "title": "Remove Linked List Elements",
+  "goal": "Solve Remove Linked List Elements: Remove all nodes with a specific value from a linked list.",
+  "strategy": "Remove all nodes with a specific value from a linked list.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Several consecutive matches may include the head; removing one must not skip inspecting the next node."
+  ],
+  "checks": [],
+  "inputRules": [
+    "head must be an array",
+    "val must be a number"
+  ],
+  "source": [
+    "src/problems/Problem203/index.jsx",
+    "src/problems/Problem203/RemoveLinkedListElementsVisualizer.jsx"
+  ]
+}

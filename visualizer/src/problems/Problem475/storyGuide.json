@@ -1,0 +1,20 @@
+{
+  "number": "475",
+  "title": "Heaters",
+  "goal": "Solve Heaters: Find minimum radius heater to cover all houses on a line.",
+  "strategy": "Find minimum radius heater to cover all houses on a line.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each house chooses its nearest heater, but the common radius is the maximum of those nearest distances."
+  ],
+  "checks": [],
+  "inputRules": [
+    "houses must be an array",
+    "heaters must be an array"
+  ],
+  "source": [
+    "src/problems/Problem475/index.jsx",
+    "src/problems/Problem475/Problem475Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "number": "191",
+  "title": "Number of 1 Bits",
+  "goal": "Solve Number of 1 Bits: n & (n-1) removes the lowest set bit; count iterations until n is zero.",
+  "strategy": "n & (n-1) removes the lowest set bit; count iterations until n is zero.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Zero contains no one bits; clearing the lowest set bit must eventually terminate for the chosen fixed width."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem191/index.jsx",
+    "src/problems/Problem191/NumberOf1BitsVisualizer.jsx"
+  ]
+}

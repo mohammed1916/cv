@@ -1,0 +1,26 @@
+{
+  "number": "401",
+  "title": "Binary Watch",
+  "goal": "Solve Binary Watch: Generate all possible times on a binary watch with exactly n LEDs lit.",
+  "strategy": "Generate all possible times on a binary watch with exactly n LEDs lit.",
+  "phases": [
+    "done",
+    "error",
+    "hour_bits",
+    "init",
+    "match_found"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A bit-count match is not enough if hours exceed 11 or minutes exceed 59."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be between 0 and 11",
+    "n must be 0-11"
+  ],
+  "source": [
+    "src/problems/Problem401/index.jsx",
+    "src/problems/Problem401/Problem401Visualizer.jsx"
+  ]
+}

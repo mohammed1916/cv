@@ -1,0 +1,21 @@
+{
+  "number": "232",
+  "title": "Implement Queue using Stacks",
+  "goal": "Solve Implement Queue using Stacks: Implement FIFO queue behavior using two LIFO stacks through clever re-stacking.",
+  "strategy": "Implement FIFO queue behavior using two LIFO stacks through clever re-stacking.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Transfer into the output stack only when it is empty; transferring on every operation would disturb FIFO order."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem232/index.jsx",
+    "src/problems/Problem232/ImplementQueueUsingStacks.jsx"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "number": "198",
+  "title": "House Robber",
+  "goal": "Solve House Robber: Use rolling dynamic programming states to choose between robbing the current house or skipping it.",
+  "strategy": "Use rolling dynamic programming states to choose between robbing the current house or skipping it.",
+  "phases": [
+    "done",
+    "init",
+    "calc",
+    "advance"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not nums",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Input must be an array",
+    "Values must be non-negative numbers"
+  ],
+  "source": [
+    "src/problems/Problem198/index.jsx",
+    "src/problems/Problem198/HouseRobberVisualizer.jsx"
+  ]
+}

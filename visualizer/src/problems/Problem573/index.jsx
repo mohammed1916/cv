@@ -1,1 +1,5 @@
-export { default } from './SquirrelDistributionVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./SquirrelDistributionVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

@@ -1,0 +1,30 @@
+{
+  "number": "413",
+  "title": "Arithmetic Slices",
+  "goal": "Solve Arithmetic Slices: Count subarrays with arithmetic progression.",
+  "strategy": "Count subarrays with arithmetic progression.",
+  "phases": [
+    "arith_found",
+    "check_i",
+    "done",
+    "init",
+    "init_dp",
+    "not_arith",
+    "update_dp"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(A)<3",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem413/index.jsx",
+    "src/problems/Problem413/Problem413Visualizer.jsx"
+  ]
+}

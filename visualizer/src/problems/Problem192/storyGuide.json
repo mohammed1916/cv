@@ -1,0 +1,21 @@
+{
+  "number": "192",
+  "title": "Word Frequency",
+  "goal": "Solve Word Frequency: Shell script to count word frequency in file and sort by count.",
+  "strategy": "Shell script to count word frequency in file and sort by count.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated whitespace does not create empty words; word counts must aggregate occurrences before frequency ordering."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem192/index.jsx",
+    "src/problems/Problem192/WordFrequencyVisualizer.jsx"
+  ]
+}

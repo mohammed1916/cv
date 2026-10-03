@@ -1,0 +1,40 @@
+{
+  "number": "69",
+  "title": "Sqrt(x)",
+  "goal": "Solve Sqrt(x): Find the greatest integer whose square does not exceed x by narrowing a monotone search interval.",
+  "strategy": "Find the greatest integer whose square does not exceed x by narrowing a monotone search interval.",
+  "phases": [
+    "calc-mid",
+    "calc-square",
+    "check-greater",
+    "check-less",
+    "done",
+    "early-return",
+    "found",
+    "init",
+    "update-left",
+    "update-right",
+    "while-check"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Non-perfect squares return the floor; multiplication or division comparisons must avoid overflow in fixed-width implementations."
+  ],
+  "checks": [
+    {
+      "condition": "x < 2",
+      "outcome": "return x"
+    },
+    {
+      "condition": "square == x",
+      "outcome": "return mid"
+    }
+  ],
+  "inputRules": [
+    "x must be a number"
+  ],
+  "source": [
+    "src/problems/Problem69/index.jsx",
+    "src/problems/Problem69/SqrtxVisualizer.jsx"
+  ]
+}

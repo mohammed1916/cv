@@ -1,0 +1,28 @@
+{
+  "number": "432",
+  "title": "All O(1) Data Structure",
+  "goal": "Solve All O(1) Data Structure: Maintain ordered frequency buckets and move each key only between neighboring counts after an increment or decrement.",
+  "strategy": "Maintain ordered frequency buckets and move each key only between neighboring counts after an increment or decrement.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Keys disappear at zero count; empty buckets must be removed without breaking minimum and maximum lookup."
+  ],
+  "checks": [
+    {
+      "condition": "val in self.map",
+      "outcome": "return False"
+    },
+    {
+      "condition": "val not in self.map",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "operations must be an array"
+  ],
+  "source": [
+    "src/problems/Problem432/index.jsx",
+    "src/problems/Problem432/Problem432Visualizer.jsx"
+  ]
+}

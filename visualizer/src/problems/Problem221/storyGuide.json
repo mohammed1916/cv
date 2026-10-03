@@ -1,0 +1,22 @@
+{
+  "number": "221",
+  "title": "Maximal Square",
+  "goal": "Solve Maximal Square: Find largest square of 1s in binary matrix.",
+  "strategy": "Find largest square of 1s in binary matrix.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not matrix",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Enter a non-empty rectangular JSON matrix containing \"0\" and \"1\"."
+  ],
+  "source": [
+    "src/problems/Problem221/index.jsx",
+    "src/problems/Problem221/MaximalSquareVisualizer.jsx"
+  ]
+}

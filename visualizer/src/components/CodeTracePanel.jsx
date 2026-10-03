@@ -4,6 +4,7 @@ import "./CodeTracePanel.css";
 import ResizerHandle from "./ResizerHandle";
 import { resolvePattern } from "./patternCatalog";
 import PointerStateBand from "./shared/PointerStateBand";
+import { useNarrativeTrace } from './shared/NarrativeTraceContext';
 
 import OpenProblemInPlayground from "../playground/OpenProblemInPlayground";
 
@@ -39,6 +40,7 @@ export default function CodeTracePanel({
         : [];
   const resolvedHighlightedLines = Array.isArray(highlightLines) ? highlightLines : highlightedLines;
   const resolvedStep = useMemo(() => step || (Number.isFinite(activeLine) ? { activeLine } : undefined), [step, activeLine]);
+  useNarrativeTrace(resolvedStep, resolvedCodeLines);
   const codeRef = useRef(null);
   const lastManualScrollTsRef = useRef(0);
   const [copied, setCopied] = useState(false);

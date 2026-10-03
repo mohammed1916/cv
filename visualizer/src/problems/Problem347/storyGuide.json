@@ -1,0 +1,26 @@
+{
+  "number": "347",
+  "title": "Top K Frequent Elements",
+  "goal": "Solve Top K Frequent Elements: Count frequencies then bucket by frequency; scan buckets from high to low to collect top-k.",
+  "strategy": "Count frequencies then bucket by frequency; scan buckets from high to low to collect top-k.",
+  "phases": [
+    "buckets",
+    "count",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(res) == k",
+      "outcome": "return res"
+    }
+  ],
+  "inputRules": [
+    "Enter a non-empty JSON array of finite numbers."
+  ],
+  "source": [
+    "src/problems/Problem347/index.jsx",
+    "src/problems/Problem347/TopKFrequentVisualizer.jsx"
+  ]
+}

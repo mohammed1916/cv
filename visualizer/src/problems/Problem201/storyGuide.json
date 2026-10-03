@@ -1,0 +1,21 @@
+{
+  "number": "201",
+  "title": "Bitwise AND of Numbers Range",
+  "goal": "Solve Bitwise AND of Numbers Range: Find bitwise AND of all numbers in a range efficiently by eliminating differing bits.",
+  "strategy": "Find bitwise AND of all numbers in a range efficiently by eliminating differing bits.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only the common high-bit prefix survives across a range; a singleton range returns its own value."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem201/index.jsx",
+    "src/problems/Problem201/BitwiseAndOfNumbersRange.jsx"
+  ]
+}

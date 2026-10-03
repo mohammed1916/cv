@@ -1,0 +1,30 @@
+{
+  "number": "238",
+  "title": "Product of Array Except Self",
+  "goal": "Solve Product of Array Except Self: Left-pass prefix products × right-pass suffix products, all in O(n) without division.",
+  "strategy": "Left-pass prefix products × right-pass suffix products, all in O(n) without division.",
+  "phases": [
+    "done",
+    "init",
+    "left_start",
+    "left_assign",
+    "left_update",
+    "right_start",
+    "right_assign",
+    "right_update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Zero values prevent a division-based solution; prefix and suffix products naturally handle one or multiple zeros."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "Max 10 elements for clarity",
+    "Need at least 2 elements"
+  ],
+  "source": [
+    "src/problems/Problem238/index.jsx",
+    "src/problems/Problem238/ProductOfArrayExceptSelfVisualizer.jsx"
+  ]
+}

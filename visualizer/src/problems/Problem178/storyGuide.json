@@ -1,0 +1,21 @@
+{
+  "number": "178",
+  "title": "Rank Scores",
+  "goal": "Solve Rank Scores: SQL query to rank scores densely (skip no ranks on ties).",
+  "strategy": "SQL query to rank scores densely (skip no ranks on ties).",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal scores receive the same dense rank and do not create a gap before the next score."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem178/index.jsx",
+    "src/problems/Problem178/RankScoresVisualizer.jsx"
+  ]
+}

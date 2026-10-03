@@ -1,0 +1,24 @@
+{
+  "number": "586",
+  "title": "Customer Placing Largest Orders",
+  "goal": "Solve Customer Placing Largest Orders: Find customers placing the largest orders",
+  "strategy": "Find customers placing the largest orders",
+  "phases": [
+    "parse",
+    "join",
+    "aggregate",
+    "filter",
+    "sort",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Count orders per customer before choosing the maximum; the query’s tie assumptions determine whether multiple customers can qualify."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem586/index.jsx",
+    "src/problems/Problem586/LargestOrdersVisualizer.jsx"
+  ]
+}

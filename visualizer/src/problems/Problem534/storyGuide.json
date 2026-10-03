@@ -1,0 +1,31 @@
+{
+  "number": "534",
+  "title": "Design Log Storage System",
+  "goal": "Solve Design Log Storage System: Design a log storage system with put and retrieve operations supporting granularities.",
+  "strategy": "Design a log storage system with put and retrieve operations supporting granularities.",
+  "phases": [
+    "done",
+    "filter",
+    "init",
+    "match",
+    "put",
+    "retrieve",
+    "set_precision",
+    "truncate"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Truncate timestamps to the requested granularity before the inclusive range comparison."
+  ],
+  "checks": [],
+  "inputRules": [
+    "logs must be a non-empty array of { \"id\": number, \"timestamp\": \"Y:M:D:h:m:s\" }",
+    "each log must be an object",
+    "each log needs an \"id\"",
+    "each log needs a string \"timestamp\""
+  ],
+  "source": [
+    "src/problems/Problem534/index.jsx",
+    "src/problems/Problem534/DesignLogStorageSystemVisualizer.jsx"
+  ]
+}

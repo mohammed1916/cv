@@ -1,0 +1,26 @@
+{
+  "number": "415",
+  "title": "Add Strings",
+  "goal": "Solve Add Strings: Add two non-negative integers represented as strings.",
+  "strategy": "Add two non-negative integers represented as strings.",
+  "phases": [
+    "compute",
+    "done",
+    "get_digits",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Digits are processed from the least significant end; different lengths and final carry must be preserved without numeric conversion overflow."
+  ],
+  "checks": [],
+  "inputRules": [
+    "num1 must be an array",
+    "num2 must be an array"
+  ],
+  "source": [
+    "src/problems/Problem415/index.jsx",
+    "src/problems/Problem415/Problem415Visualizer.jsx"
+  ]
+}

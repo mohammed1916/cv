@@ -1,0 +1,26 @@
+{
+  "number": "235",
+  "title": "Lowest Common Ancestor of a Binary Search Tree",
+  "goal": "Solve Lowest Common Ancestor of a Binary Search Tree: Walk down: if both nodes are smaller go left, both larger go right; split point is the LCA.",
+  "strategy": "Walk down: if both nodes are smaller go left, both larger go right; split point is the LCA.",
+  "phases": [
+    "done",
+    "init",
+    "go-left",
+    "move",
+    "go-right",
+    "found"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "If the current node equals either target, it can be the ancestor; otherwise use BST ordering to choose a side or the split point."
+  ],
+  "checks": [],
+  "inputRules": [
+    "p and q must be integers"
+  ],
+  "source": [
+    "src/problems/Problem235/index.jsx",
+    "src/problems/Problem235/LCABSTVisualizer.jsx"
+  ]
+}

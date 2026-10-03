@@ -1,1 +1,5 @@
-export { default } from './MinimumPathSumVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MinimumPathSumVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

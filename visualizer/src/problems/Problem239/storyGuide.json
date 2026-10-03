@@ -1,0 +1,24 @@
+{
+  "number": "239",
+  "title": "Sliding Window Maximum",
+  "goal": "Solve Sliding Window Maximum: Monotonic deque stores indices in decreasing value order; dequeue expired and smaller elements per step.",
+  "strategy": "Monotonic deque stores indices in decreasing value order; dequeue expired and smaller elements per step.",
+  "phases": [
+    "init",
+    "pop_back",
+    "push",
+    "pop_front",
+    "record",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Expired indices must leave the deque even if their values are large; equal values at different indices expire at different times."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem239/index.jsx",
+    "src/problems/Problem239/SlidingWindowMaxVisualizer.jsx"
+  ]
+}

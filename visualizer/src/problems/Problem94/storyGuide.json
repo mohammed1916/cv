@@ -1,0 +1,25 @@
+{
+  "number": "94",
+  "title": "Binary Tree Inorder Traversal",
+  "goal": "Solve Binary Tree Inorder Traversal: Binary Tree Inorder Traversal visualization",
+  "strategy": "Binary Tree Inorder Traversal visualization",
+  "phases": [
+    "init",
+    "go_left",
+    "pop_visit",
+    "go_right",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A node is emitted after its entire left subtree and before its right subtree; pending ancestors must remain available."
+  ],
+  "checks": [],
+  "inputRules": [
+    "tree must be an array"
+  ],
+  "source": [
+    "src/problems/Problem94/index.jsx",
+    "src/problems/Problem94/Visualizer.jsx"
+  ]
+}

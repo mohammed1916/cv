@@ -1,0 +1,29 @@
+{
+  "number": "573",
+  "title": "Squirrel Distribution",
+  "goal": "Solve Squirrel Distribution: Find minimum distance for squirrel to visit all chairs by jumping between positions.",
+  "strategy": "Find minimum distance for squirrel to visit all chairs by jumping between positions.",
+  "phases": [
+    "input_sort",
+    "initialize",
+    "iterate",
+    "calculate_dist",
+    "dynamic_prog",
+    "final_calc",
+    "return"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only the first nut trip starts at the squirrel; later trips start and end at the tree, so optimize the first-trip saving."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Trees must be array",
+    "Chairs must be array",
+    "Squirrel must be number"
+  ],
+  "source": [
+    "src/problems/Problem573/index.jsx",
+    "src/problems/Problem573/SquirrelDistributionVisualizer.jsx"
+  ]
+}

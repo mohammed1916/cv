@@ -1,0 +1,28 @@
+{
+  "number": "398",
+  "title": "Random Pick Index",
+  "goal": "Solve Random Pick Index: Pick a random index with value equal to target. All indices with target value are equally likely.",
+  "strategy": "Pick a random index with value equal to target. All indices with target value are equally likely.",
+  "phases": [
+    "done",
+    "error",
+    "found",
+    "init",
+    "pick",
+    "skip"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated target values must have equal selection probability; selecting the first occurrence is biased."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be an array",
+    "Target must be a number",
+    "Array format invalid"
+  ],
+  "source": [
+    "src/problems/Problem398/index.jsx",
+    "src/problems/Problem398/Problem398Visualizer.jsx"
+  ]
+}

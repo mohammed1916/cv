@@ -1,0 +1,39 @@
+{
+  "number": "147",
+  "title": "Insertion Sort List",
+  "goal": "Solve Insertion Sort List: Sort a linked list using insertion sort algorithm.",
+  "strategy": "Sort a linked list using insertion sort algorithm.",
+  "phases": [
+    "create-dummy",
+    "initialize-pointers",
+    "loop",
+    "compare-in-order",
+    "advance-prev",
+    "advance-cur",
+    "needs-insert",
+    "pos-dummy",
+    "scan-position",
+    "advance-pos",
+    "position-found",
+    "detach",
+    "redirect-cur",
+    "insert",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not head or not head.next",
+      "outcome": "return head"
+    }
+  ],
+  "inputRules": [
+    "head must be an array.",
+    "head must contain only numbers."
+  ],
+  "source": [
+    "src/problems/Problem147/index.jsx",
+    "src/problems/Problem147/InsertionSortListVisualizer.jsx"
+  ]
+}

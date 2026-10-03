@@ -1,0 +1,30 @@
+{
+  "number": "257",
+  "title": "Binary Tree Paths",
+  "goal": "Solve Binary Tree Paths: Generate all root-to-leaf paths in a binary tree.",
+  "strategy": "Generate all root-to-leaf paths in a binary tree.",
+  "phases": [
+    "done",
+    "init",
+    "null",
+    "visit",
+    "leaf",
+    "branch",
+    "no-left",
+    "no-right",
+    "backtrack"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem257/index.jsx",
+    "src/problems/Problem257/BinaryTreePathsVisualizer.jsx"
+  ]
+}

@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './CodePanel.css'
+import { useNarrativeTrace } from './NarrativeTraceContext'
 
 /**
  * Shared code-panel component.
@@ -17,6 +18,7 @@ import './CodePanel.css'
  *                                  access/push/failure-related/failure-active states.
  */
 export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) {
+  useNarrativeTrace(step, code)
   const scrollRef = useRef(null)
   const [copied, setCopied] = useState(false)
 

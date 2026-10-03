@@ -1,0 +1,28 @@
+{
+  "number": "188",
+  "title": "Best Time to Buy and Sell Stock IV",
+  "goal": "Solve Best Time to Buy and Sell Stock IV: Generalize two-transaction DP to k transactions, collapsing to O(n) when k exceeds n/2.",
+  "strategy": "Generalize two-transaction DP to k transactions, collapsing to O(n) when k exceeds n/2.",
+  "phases": [
+    "init",
+    "t-init",
+    "fill",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "k >= n//2",
+      "outcome": "return greedy(prices)"
+    }
+  ],
+  "inputRules": [
+    "k must be a number",
+    "prices must be an array"
+  ],
+  "source": [
+    "src/problems/Problem188/index.jsx",
+    "src/problems/Problem188/BestTimeBuySellStockIVVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "number": "550",
+  "title": "Game Play Analysis I",
+  "goal": "Solve Game Play Analysis I: Find the first login date for each player.",
+  "strategy": "Find the first login date for each player.",
+  "phases": [
+    "parse",
+    "group",
+    "aggregate",
+    "sort",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The first activity date is chosen per player; later activity records must not replace that earliest date."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem550/index.jsx",
+    "src/problems/Problem550/GamePlayAnalysisVisualizer.jsx"
+  ]
+}

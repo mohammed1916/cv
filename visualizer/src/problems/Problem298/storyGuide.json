@@ -1,0 +1,19 @@
+{
+  "number": "298",
+  "title": "Binary Tree Longest Consecutive Sequence",
+  "goal": "Solve Binary Tree Longest Consecutive Sequence: Find longest consecutive sequence in tree.",
+  "strategy": "Find longest consecutive sequence in tree.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only parent-to-child values increasing by exactly one extend the current run; other edges restart its length."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem298/index.jsx",
+    "src/problems/Problem298/Problem298Visualizer.jsx"
+  ]
+}

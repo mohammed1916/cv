@@ -1,0 +1,25 @@
+{
+  "number": "535",
+  "title": "Encode and Decode TinyURL",
+  "goal": "Solve Encode and Decode TinyURL: Design a codec to encode long URLs to short URLs and decode them back.",
+  "strategy": "Design a codec to encode long URLs to short URLs and decode them back.",
+  "phases": [
+    "decode_done",
+    "decode_start",
+    "encode_done",
+    "encode_start",
+    "extract_code",
+    "generate_code",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Different long URLs must not collide under a reused short code; decoding an unknown code must not invent a destination."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem535/index.jsx",
+    "src/problems/Problem535/EncodeAndDecodeTinyURLVisualizer.jsx"
+  ]
+}

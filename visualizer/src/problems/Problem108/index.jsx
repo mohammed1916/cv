@@ -1,1 +1,5 @@
-export { default } from './ConvertSortedArrayToBinarySearchTreeVisualizer';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ConvertSortedArrayToBinarySearchTreeVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

@@ -1,0 +1,19 @@
+{
+  "number": "369",
+  "title": "Plus One Linked List",
+  "goal": "Solve Plus One Linked List: Propagate a one-digit increment through the linked number, turning trailing nines into zeros and extending the head only when necessary.",
+  "strategy": "Propagate a one-digit increment through the linked number, turning trailing nines into zeros and extending the head only when necessary.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An all-nine number creates a new leading one; a non-nine suffix stops the carry."
+  ],
+  "checks": [],
+  "inputRules": [
+    "values must be an array"
+  ],
+  "source": [
+    "src/problems/Problem369/index.jsx",
+    "src/problems/Problem369/Problem369Visualizer.jsx"
+  ]
+}

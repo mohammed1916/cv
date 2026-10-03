@@ -1,0 +1,19 @@
+{
+  "number": "88",
+  "title": "Merge Sorted Array",
+  "goal": "Solve Merge Sorted Array: Merge from the largest ends into the spare tail of the first array so unread values are not overwritten.",
+  "strategy": "Merge from the largest ends into the spare tail of the first array so unread values are not overwritten.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "If the second array still has values, copy them; leftover first-array values are already in place."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use {nums1, m, nums2, n}; nums1 must have m+n slots and nums2 must have n items."
+  ],
+  "source": [
+    "src/problems/Problem88/index.jsx",
+    "src/problems/Problem88/Visualizer.jsx"
+  ]
+}

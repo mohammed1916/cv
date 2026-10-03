@@ -1,1 +1,5 @@
-export { default } from './SpiralMatrixVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./SpiralMatrixVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

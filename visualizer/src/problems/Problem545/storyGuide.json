@@ -1,0 +1,37 @@
+{
+  "number": "545",
+  "title": "Boundary of Binary Tree",
+  "goal": "Solve Boundary of Binary Tree: Return the values of the boundary of a binary tree in anti-clockwise order: the root, then the left boundary, then the leaves left-to-right, then the right boundary in reverse.",
+  "strategy": "Return the values of the boundary of a binary tree in anti-clockwise order: the root, then the left boundary, then the leaves left-to-right, then the right boundary in reverse.",
+  "phases": [
+    "init",
+    "root",
+    "left_boundary",
+    "leaves",
+    "right_boundary",
+    "reverse",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    },
+    {
+      "condition": "not n",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "Enter a level-order tree, e.g. 1,null,2,3,4",
+    "Keep the tree to 40 nodes or fewer",
+    "The root cannot be null"
+  ],
+  "source": [
+    "src/problems/Problem545/index.jsx",
+    "src/problems/Problem545/BoundaryOfBinaryTreeVisualizer.jsx"
+  ]
+}

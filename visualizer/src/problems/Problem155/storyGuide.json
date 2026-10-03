@@ -1,0 +1,26 @@
+{
+  "number": "155",
+  "title": "Min Stack",
+  "goal": "Solve Min Stack: Pair each push with the running minimum so getMin() is always O(1).",
+  "strategy": "Pair each push with the running minimum so getMin() is always O(1).",
+  "phases": [
+    "init",
+    "push_start",
+    "push_min",
+    "push_done",
+    "pop_start",
+    "pop_done",
+    "top",
+    "getMin"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated minima need independent history so popping one minimum does not lose the next minimum."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem155/index.jsx",
+    "src/problems/Problem155/MinStackVisualizer.jsx"
+  ]
+}

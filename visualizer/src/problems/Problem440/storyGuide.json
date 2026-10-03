@@ -1,0 +1,27 @@
+{
+  "number": "440",
+  "title": "K-th Smallest in Lexicographical Order",
+  "goal": "Solve K-th Smallest in Lexicographical Order: Count how many integers lie beneath each decimal prefix to skip lexicographic subtrees instead of enumerating every number.",
+  "strategy": "Count how many integers lie beneath each decimal prefix to skip lexicographic subtrees instead of enumerating every number.",
+  "phases": [
+    "backtrack",
+    "check",
+    "complete",
+    "go_deeper",
+    "go_next",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A prefix subtree is clipped by n; moving to a sibling differs from descending by appending a zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem440/index.jsx",
+    "src/problems/Problem440/Problem440Visualizer.jsx"
+  ]
+}

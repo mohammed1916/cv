@@ -1,0 +1,17 @@
+{
+  "number": "467",
+  "title": "Unique Substrings in Wraparound String",
+  "goal": "Solve Unique Substrings in Wraparound String: Count unique substrings of a wraparound string where letters are consecutive (a-z with z→a).",
+  "strategy": "Count unique substrings of a wraparound string where letters are consecutive (a-z with z→a).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Wraparound adjacency includes z followed by a. Counting only the longest valid run ending in each letter avoids duplicate substrings."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem467/index.jsx",
+    "src/problems/Problem467/Problem467Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "number": "566",
+  "title": "Reshape the Matrix",
+  "goal": "Solve Reshape the Matrix: Reshape an m x n matrix to r x c matrix where m*n == r*c.",
+  "strategy": "Reshape an m x n matrix to r x c matrix where m*n == r*c.",
+  "phases": [
+    "flattening",
+    "iteration",
+    "indexing",
+    "reshaping",
+    "done",
+    "init",
+    "validation"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "m * n != r * c",
+      "outcome": "return mat  # Cannot reshape"
+    }
+  ],
+  "inputRules": [
+    "Invalid matrix format"
+  ],
+  "source": [
+    "src/problems/Problem566/index.jsx",
+    "src/problems/Problem566/ReshapeMatrixVisualizer.jsx"
+  ]
+}

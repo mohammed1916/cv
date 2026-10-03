@@ -1,0 +1,28 @@
+{
+  "number": "501",
+  "title": "Find Mode in Binary Search Tree",
+  "goal": "Solve Find Mode in Binary Search Tree: Find all modes (most frequently occurring values) in a binary search tree",
+  "strategy": "Find all modes (most frequently occurring values) in a binary search tree",
+  "phases": [
+    "init",
+    "traverse",
+    "count",
+    "max_update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem501/index.jsx",
+    "src/problems/Problem501/FindModeInBSTVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "number": "CF-F",
+  "title": "Game on Growing Tree",
+  "goal": "Solve Game on Growing Tree: After each insertion in a growing tree, compute Alice's optimal final score against Bob using a compressed DP strategy.",
+  "strategy": "After each insertion in a growing tree, compute Alice's optimal final score against Bob using a compressed DP strategy.",
+  "phases": [
+    "parse-parent",
+    "parse-parent-done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each insertion adds a new node beneath an existing parent; use the tree state after that insertion rather than reusing a score from a different prefix."
+  ],
+  "checks": [],
+  "inputRules": [
+    "q must be an integer in [1, 200000]."
+  ],
+  "source": [
+    "src/problems/GameOnGrowingTree/index.jsx",
+    "src/problems/GameOnGrowingTree/GameOnGrowingTreeVisualizer.jsx",
+    "src/problems/GameOnGrowingTree/TreeStatePanel.jsx",
+    "src/problems/GameOnGrowingTree/TreeDPLinking.jsx",
+    "src/problems/GameOnGrowingTree/TraversalTrail.jsx",
+    "src/problems/GameOnGrowingTree/EnhancedTreeVisualization.jsx",
+    "src/problems/GameOnGrowingTree/usePruningAnalysis.js",
+    "src/problems/GameOnGrowingTree/DPDetailPanel.jsx",
+    "src/problems/GameOnGrowingTree/ComparisonBox.jsx",
+    "src/problems/GameOnGrowingTree/RankHighlightOverlay.jsx",
+    "src/problems/GameOnGrowingTree/EdgeFlowOverlay.jsx",
+    "src/problems/GameOnGrowingTree/InsertTop3Breakdown.jsx",
+    "src/problems/GameOnGrowingTree/BottomUpDetailsPanel.jsx",
+    "src/problems/GameOnGrowingTree/ValueSourceTracking.jsx",
+    "src/problems/GameOnGrowingTree/TreeDPConnector.jsx",
+    "src/problems/GameOnGrowingTree/SituationOverlay.jsx",
+    "src/problems/GameOnGrowingTree/useSituationAnalysis.js",
+    "src/problems/GameOnGrowingTree/DualRepresentationView.jsx"
+  ]
+}

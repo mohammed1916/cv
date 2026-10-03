@@ -1,1 +1,5 @@
-export { default } from "./LongestWordDictionaryVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./LongestWordDictionaryVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

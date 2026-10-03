@@ -1,0 +1,31 @@
+{
+  "number": "211",
+  "title": "Add and Search Word",
+  "goal": "Solve Add and Search Word: Design a data structure supporting add word and search with wildcards.",
+  "strategy": "Design a data structure supporting add word and search with wildcards.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "idx == len(word)",
+      "outcome": "return node.is_word"
+    },
+    {
+      "condition": "dfs(idx + 1, child)",
+      "outcome": "return True"
+    },
+    {
+      "condition": "char in node.children",
+      "outcome": "return dfs(idx + 1, node.children[char])"
+    }
+  ],
+  "inputRules": [
+    "isAdd must be true or false.",
+    "Use lowercase letters and . only."
+  ],
+  "source": [
+    "src/problems/Problem211/index.jsx",
+    "src/problems/Problem211/AddAndSearchWordVisualizer.jsx"
+  ]
+}

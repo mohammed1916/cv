@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import IndexedSequence from '../../components/shared/IndexedSequence'
@@ -21,7 +23,7 @@ const definition = {
   ],
 }
 
-export default function MultiSourceFloodFill() {
+function MultiSourceFloodFill() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <p>Time {step.time} · {step.colored} / {run.n * run.m} committed cells. “?” marks a proposal, not a committed color.</p>
     <PagedGrid rows={run.n} columns={run.m} cellAt={(r, c) => cellAtStep(run, step, r, c)} label="Flood fill grid" />
@@ -35,3 +37,5 @@ export default function MultiSourceFloodFill() {
     <p>Select any grid cell to inspect its incoming colors and arrival time. Row and column pages retain the grid geometry; every coordinate is accessible.</p>
   </>} />
 }
+
+export default withProblemStory(MultiSourceFloodFill, storyGuide);

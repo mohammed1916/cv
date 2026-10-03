@@ -1,0 +1,17 @@
+{
+  "number": "483",
+  "title": "Smallest Good Base",
+  "goal": "Solve Smallest Good Base: Find the smallest base k where n = x^m (m >= 2) using binary search.",
+  "strategy": "Find the smallest base k where n = x^m (m >= 2) using binary search.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A good base represents n using only ones; n-1 is always the two-digit fallback base."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem483/index.jsx",
+    "src/problems/Problem483/Problem483Visualizer.jsx"
+  ]
+}

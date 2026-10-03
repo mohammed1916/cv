@@ -1,0 +1,21 @@
+{
+  "number": "490",
+  "title": "The Maze",
+  "goal": "Solve The Maze: Find if ball can reach destination in maze using BFS or DFS.",
+  "strategy": "Find if ball can reach destination in maze using BFS or DFS.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The ball can stop only at a wall or boundary; passing over the destination without stopping does not finish the route."
+  ],
+  "checks": [],
+  "inputRules": [
+    "maze must be an array",
+    "start must be an array",
+    "destination must be an array"
+  ],
+  "source": [
+    "src/problems/Problem490/index.jsx",
+    "src/problems/Problem490/Problem490Visualizer.jsx"
+  ]
+}

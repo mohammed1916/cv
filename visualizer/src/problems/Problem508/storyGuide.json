@@ -1,0 +1,22 @@
+{
+  "number": "508",
+  "title": "Most Frequent Subtree Sum",
+  "goal": "Solve Most Frequent Subtree Sum: Find the most frequent subtree sum in a binary tree.",
+  "strategy": "Find the most frequent subtree sum in a binary tree.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "arr must be an array"
+  ],
+  "source": [
+    "src/problems/Problem508/index.jsx",
+    "src/problems/Problem508/MostFrequentSubtreeSumVisualizer.jsx"
+  ]
+}

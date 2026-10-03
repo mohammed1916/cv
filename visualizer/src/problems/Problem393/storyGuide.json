@@ -1,0 +1,38 @@
+{
+  "number": "393",
+  "title": "UTF-8 Validation",
+  "goal": "Solve UTF-8 Validation: Determine if an array of bytes represents a valid UTF-8 encoding.",
+  "strategy": "Determine if an array of bytes represents a valid UTF-8 encoding.",
+  "phases": [
+    "ascii",
+    "check_start",
+    "continuation",
+    "decrement",
+    "done",
+    "final_check",
+    "init",
+    "invalid",
+    "loop",
+    "multibyte"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "(byte >> 7) & 1 == 0",
+      "outcome": "continue  # 1-byte char"
+    },
+    {
+      "condition": "(byte >> 6) & 0b11 != 0b10",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "Input must be an array",
+    "Each element must be 0-255"
+  ],
+  "source": [
+    "src/problems/Problem393/index.jsx",
+    "src/problems/Problem393/Problem393Visualizer.jsx"
+  ]
+}

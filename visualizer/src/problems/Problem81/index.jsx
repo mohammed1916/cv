@@ -1,1 +1,5 @@
-export { default } from './SearchRotatedArrayIIVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./SearchRotatedArrayIIVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

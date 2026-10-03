@@ -1,0 +1,29 @@
+{
+  "number": "558",
+  "title": "Quad Tree Construction",
+  "goal": "Solve Quad Tree Construction: Construct a quad tree from an N x N matrix by recursively subdividing regions where all values are the same into leaf nodes.",
+  "strategy": "Construct a quad tree from an N x N matrix by recursively subdividing regions where all values are the same into leaf nodes.",
+  "phases": [
+    "check",
+    "subdivide",
+    "leaf",
+    "recurse",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "allSame",
+      "outcome": "return Node(val=val, isLeaf=True)"
+    }
+  ],
+  "inputRules": [
+    "Grid must be non-empty array",
+    "Grid must be square matrix"
+  ],
+  "source": [
+    "src/problems/Problem558/index.jsx",
+    "src/problems/Problem558/QuadTreeVisualizer.jsx"
+  ]
+}

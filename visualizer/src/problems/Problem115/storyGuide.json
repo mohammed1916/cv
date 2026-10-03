@@ -1,0 +1,29 @@
+{
+  "number": "115",
+  "title": "Distinct Subsequences",
+  "goal": "Solve Distinct Subsequences: 2D DP: dp[i][j] counts ways to form t[0..j-1] from s[0..i-1] using or skipping matched characters.",
+  "strategy": "2D DP: dp[i][j] counts ways to form t[0..j-1] from s[0..i-1] using or skipping matched characters.",
+  "phases": [
+    "init",
+    "update",
+    "compare",
+    "done",
+    "base",
+    "skip",
+    "match"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An empty target has one matching subsequence. Repeated source characters create different index choices even when their text is identical."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use at most 64 characters per string for the visual trace."
+  ],
+  "source": [
+    "src/problems/Problem115/index.jsx",
+    "src/problems/Problem115/DistinctSubsequencesVisualizer.jsx",
+    "src/problems/Problem115/algorithm.js",
+    "src/problems/Problem115/SubsequenceStory.jsx"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "number": "453",
+  "title": "Minimum Moves to Equal Array Elements",
+  "goal": "Solve Minimum Moves to Equal Array Elements: View incrementing all but one element as decreasing that one relative to the others, reducing the target to the minimum value.",
+  "strategy": "View incrementing all but one element as decreasing that one relative to the others, reducing the target to the minimum value.",
+  "phases": [
+    "calculating",
+    "done",
+    "found_min",
+    "start",
+    "updated"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal arrays need zero moves; the total counts distances from the minimum, not the average."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem453/index.jsx",
+    "src/problems/Problem453/Problem453Visualizer.jsx"
+  ]
+}

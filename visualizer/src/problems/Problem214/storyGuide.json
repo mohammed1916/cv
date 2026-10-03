@@ -1,0 +1,28 @@
+{
+  "number": "214",
+  "title": "Shortest Palindrome",
+  "goal": "Solve Shortest Palindrome: Prepend the fewest characters to make the string a palindrome using the KMP failure function.",
+  "strategy": "Prepend the fewest characters to make the string a palindrome using the KMP failure function.",
+  "phases": [
+    "init",
+    "build_combined",
+    "match",
+    "fallback",
+    "advance",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only the longest palindromic prefix can remain untouched when characters may be added at the front only."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use at most 24 characters for a readable trace",
+    "\"#\" is used as the separator — pick other characters"
+  ],
+  "source": [
+    "src/problems/Problem214/index.jsx",
+    "src/problems/Problem214/Problem214Visualizer.jsx"
+  ]
+}

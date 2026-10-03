@@ -1,0 +1,35 @@
+{
+  "number": "546",
+  "title": "Remove Boxes",
+  "goal": "Solve Remove Boxes: Given boxes of different colours, repeatedly remove a run of k continuous boxes of the same colour for k*k points. Return the maximum total points obtainable.",
+  "strategy": "Given boxes of different colours, repeatedly remove a run of k continuous boxes of the same colour for k*k points. Return the maximum total points obtainable.",
+  "phases": [
+    "init",
+    "enter",
+    "memo_hit",
+    "absorb",
+    "base",
+    "take",
+    "split",
+    "best",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "i > j",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Enter box colours, e.g. 1,3,2,2,2,3,4,3,1",
+    "Colours must be positive integers",
+    "Keep it to 12 boxes or fewer (the DP is O(n^4))"
+  ],
+  "source": [
+    "src/problems/Problem546/index.jsx",
+    "src/problems/Problem546/RemoveBoxesVisualizer.jsx"
+  ]
+}

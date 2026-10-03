@@ -1,0 +1,41 @@
+{
+  "number": "365",
+  "title": "Water and Jug Problem",
+  "goal": "Solve Water and Jug Problem: Determine whether the target amount can be reached from the two jug capacities using the allowed filling, emptying and pouring operations.",
+  "strategy": "Determine whether the target amount can be reached from the two jug capacities using the allowed filling, emptying and pouring operations.",
+  "phases": [
+    "bezout-explanation",
+    "check-divisibility",
+    "complete",
+    "edge-case-capacity",
+    "edge-case-empty",
+    "gcd-calculate",
+    "gcd-complete",
+    "gcd-init",
+    "invalid-capacity",
+    "invalid-empty"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The target cannot exceed combined capacity; zero target requires no operation."
+  ],
+  "checks": [
+    {
+      "condition": "z > a + b",
+      "outcome": "return False"
+    },
+    {
+      "condition": "a == 0 and b == 0",
+      "outcome": "return z == 0"
+    }
+  ],
+  "inputRules": [
+    "a must be an array",
+    "b must be an array",
+    "z must be an array"
+  ],
+  "source": [
+    "src/problems/Problem365/index.jsx",
+    "src/problems/Problem365/Problem365Visualizer.jsx"
+  ]
+}

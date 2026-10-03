@@ -1,0 +1,28 @@
+{
+  "number": "426",
+  "title": "Convert BST to Sorted Doubly Linked List",
+  "goal": "Solve Convert BST to Sorted Doubly Linked List: Traverse the BST in sorted order and connect consecutive nodes with predecessor and successor links before closing the cycle.",
+  "strategy": "Traverse the BST in sorted order and connect consecutive nodes with predecessor and successor links before closing the cycle.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A single node links to itself in both directions; the first and last nodes must also be joined."
+  ],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return None"
+    },
+    {
+      "condition": "not node",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "root must be an array"
+  ],
+  "source": [
+    "src/problems/Problem426/index.jsx",
+    "src/problems/Problem426/Problem426Visualizer.jsx"
+  ]
+}

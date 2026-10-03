@@ -1,0 +1,35 @@
+{
+  "number": "549",
+  "title": "Binary Tree Longest Consecutive Sequence II",
+  "goal": "Solve Binary Tree Longest Consecutive Sequence II: Given the root of a binary tree, return the length of the longest consecutive path, where the path may be increasing or decreasing and may travel child -> parent -> child.",
+  "strategy": "Given the root of a binary tree, return the length of the longest consecutive path, where the path may be increasing or decreasing and may travel child -> parent -> child.",
+  "phases": [
+    "init",
+    "visit",
+    "base",
+    "recurse_left",
+    "recurse_right",
+    "extend",
+    "combine",
+    "update_best",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return (0, 0)   # (inc, dec) lengths"
+    }
+  ],
+  "inputRules": [
+    "Enter a level-order array, e.g. 1,2,3",
+    "Keep the tree to 31 nodes or fewer",
+    "Root cannot be null"
+  ],
+  "source": [
+    "src/problems/Problem549/index.jsx",
+    "src/problems/Problem549/BTLongestConsecutiveIIVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "number": "381",
+  "title": "Random Pick with Blacklist",
+  "goal": "Solve Random Pick with Blacklist: Efficiently pick random integers avoiding a blacklist using hash mapping.",
+  "strategy": "Efficiently pick random integers avoiding a blacklist using hash mapping.",
+  "phases": [
+    "build_map",
+    "complete",
+    "init",
+    "pick",
+    "remap"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Sampling must be uniform over allowed values; blacklisted values need a mapping that does not introduce collisions."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number",
+    "blacklist must be an array"
+  ],
+  "source": [
+    "src/problems/Problem381/index.jsx",
+    "src/problems/Problem381/Problem381Visualizer.jsx"
+  ]
+}

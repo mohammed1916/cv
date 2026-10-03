@@ -1,0 +1,26 @@
+{
+  "number": "571",
+  "title": "Maximum Distance in Arrays",
+  "goal": "Solve Maximum Distance in Arrays: Find the maximum distance between two elements from different arrays, where distance is the absolute difference between elements from two different rows.",
+  "strategy": "Find the maximum distance between two elements from different arrays, where distance is the absolute difference between elements from two different rows.",
+  "phases": [
+    "init",
+    "iterate",
+    "calculate",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The two chosen values must come from different arrays; two extremes in one array are not an eligible pair."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array of arrays",
+    "All elements must be arrays"
+  ],
+  "source": [
+    "src/problems/Problem571/index.jsx",
+    "src/problems/Problem571/MaxDistanceVisualizer.jsx"
+  ]
+}

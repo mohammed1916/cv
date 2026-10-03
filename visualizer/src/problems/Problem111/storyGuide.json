@@ -1,0 +1,46 @@
+{
+  "number": "111",
+  "title": "Minimum Depth of Binary Tree",
+  "goal": "Solve Minimum Depth of Binary Tree: Find the minimum depth of a binary tree (shortest path from root to leaf).",
+  "strategy": "Find the minimum depth of a binary tree (shortest path from root to leaf).",
+  "phases": [
+    "init",
+    "visit",
+    "missing_child",
+    "leaf",
+    "compare",
+    "return",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "not root.left and not root.right",
+      "outcome": "return 1"
+    },
+    {
+      "condition": "not root.left",
+      "outcome": "return 1 + minDepth(root.right)"
+    },
+    {
+      "condition": "not root.right",
+      "outcome": "return 1 + minDepth(root.left)"
+    }
+  ],
+  "inputRules": [
+    "Use a level-order array of integers and nulls.",
+    "Some values have no parent. Check the level-order array.",
+    "An empty root cannot have children."
+  ],
+  "source": [
+    "src/problems/Problem111/index.jsx",
+    "src/problems/Problem111/Visualizer.jsx",
+    "src/problems/Problem111/algorithm.js",
+    "src/problems/Problem111/MinimumDepthStory.jsx"
+  ]
+}

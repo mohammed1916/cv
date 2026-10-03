@@ -1,0 +1,28 @@
+{
+  "number": "231",
+  "title": "Power of Two",
+  "goal": "Solve Power of Two: n > 0 and (n & (n-1)) == 0: a power of two has exactly one set bit.",
+  "strategy": "n > 0 and (n & (n-1)) == 0: a power of two has exactly one set bit.",
+  "phases": [
+    "check",
+    "early-false",
+    "show-nminus1",
+    "and-bit",
+    "result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n <= 0",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem231/index.jsx",
+    "src/problems/Problem231/PowerOfTwoVisualizer.jsx"
+  ]
+}

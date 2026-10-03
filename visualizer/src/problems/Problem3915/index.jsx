@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import SubsequencePath from '../../components/shared/SubsequencePath'
@@ -22,7 +24,7 @@ const definition = {
   ],
 }
 
-export default function AlternatingSubsequence() {
+function AlternatingSubsequence() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const known = (index, direction) => step.phase === 'done' || index < step.index || index === step.index && (step.phase === 'fall' || direction === 'up' && step.phase === 'rise')
     return <>
@@ -47,3 +49,5 @@ export default function AlternatingSubsequence() {
     <p>Fenwick trees summarize the best endpoint over value ranges. Reversing value coordinates turns a greater-than query into another prefix query. Each endpoint is inserted only when it becomes far enough away.</p>
   </>} />
 }
+
+export default withProblemStory(AlternatingSubsequence, storyGuide);

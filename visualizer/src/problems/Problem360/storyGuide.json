@@ -1,0 +1,27 @@
+{
+  "number": "360",
+  "title": "Sort Transformed Array",
+  "goal": "Transform sorted values with a quadratic and compare endpoint candidates to construct the transformed array in sorted order.",
+  "strategy": "Apply the quadratic transformation to a sorted array and choose from its two ends in the order implied by the parabola direction.",
+  "phases": [
+    "done",
+    "init",
+    "merge",
+    "transform"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A zero quadratic coefficient makes the transformation linear; negative coefficients reverse which extremes are chosen first."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "a must be an array",
+    "b must be an array",
+    "c must be an array"
+  ],
+  "source": [
+    "src/problems/Problem360/index.jsx",
+    "src/problems/Problem360/Problem360Visualizer.jsx"
+  ]
+}

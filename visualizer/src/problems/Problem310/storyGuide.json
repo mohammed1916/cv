@@ -1,0 +1,20 @@
+{
+  "number": "310",
+  "title": "Minimum Height Trees",
+  "goal": "Solve Minimum Height Trees: Find nodes that minimize tree height.",
+  "strategy": "Find nodes that minimize tree height.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "One or two centers can remain after leaf peeling; a single-node tree needs no peeling round."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use n and valid [from, to] edges.",
+    "Minimum Height Trees requires a tree (n − 1 edges)."
+  ],
+  "source": [
+    "src/problems/Problem310/index.jsx",
+    "src/problems/Problem310/MinimumHeightTreesVisualizer.jsx"
+  ]
+}

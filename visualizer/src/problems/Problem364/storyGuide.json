@@ -1,0 +1,25 @@
+{
+  "number": "364",
+  "title": "Nested List Weight Sum II",
+  "goal": "Solve Nested List Weight Sum II: Accumulate nested integer contributions so shallower values receive larger inverse-depth weights.",
+  "strategy": "Accumulate nested integer contributions so shallower values receive larger inverse-depth weights.",
+  "phases": [
+    "calculate-weight",
+    "complete",
+    "max-depth",
+    "parse",
+    "traverse-nested"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Empty nested lists contribute no integers; the deepest integer level determines the inverse weights."
+  ],
+  "checks": [],
+  "inputRules": [
+    "list must be an array"
+  ],
+  "source": [
+    "src/problems/Problem364/index.jsx",
+    "src/problems/Problem364/Problem364Visualizer.jsx"
+  ]
+}

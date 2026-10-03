@@ -1,0 +1,23 @@
+{
+  "number": "319",
+  "title": "Bulb Switcher",
+  "goal": "Solve Bulb Switcher: Count bulbs that are on after n rounds of switching.",
+  "strategy": "Count bulbs that are on after n rounds of switching.",
+  "phases": [
+    "init",
+    "check",
+    "count",
+    "exit",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only perfect-square positions have an odd number of divisors and remain on; zero rounds leave no bulb on."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem319/index.jsx",
+    "src/problems/Problem319/BulbSwitcherVisualizer.jsx"
+  ]
+}

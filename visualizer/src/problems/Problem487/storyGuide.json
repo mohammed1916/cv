@@ -1,0 +1,20 @@
+{
+  "number": "487",
+  "title": "Max Consecutive Ones III",
+  "goal": "Solve Max Consecutive Ones III: Find maximum consecutive ones after flipping at most k zeros in a binary array.",
+  "strategy": "Find maximum consecutive ones after flipping at most k zeros in a binary array.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Track the allowed zero replacements inside the active window; exceeding the limit forces the left boundary forward."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem487/index.jsx",
+    "src/problems/Problem487/Problem487Visualizer.jsx"
+  ]
+}

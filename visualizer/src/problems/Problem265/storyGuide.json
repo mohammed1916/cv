@@ -1,0 +1,23 @@
+{
+  "number": "265",
+  "title": "Paint House II",
+  "goal": "Solve Paint House II: Minimize cost with k colors for n houses.",
+  "strategy": "Minimize cost with k colors for n houses.",
+  "phases": [
+    "done",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The cheapest previous color cannot be reused for the same current color; retain the second-best alternative too."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem265/index.jsx",
+    "src/problems/Problem265/Problem265Visualizer.jsx"
+  ]
+}

@@ -1,1 +1,5 @@
-export { default } from './NQueensVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./NQueensVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

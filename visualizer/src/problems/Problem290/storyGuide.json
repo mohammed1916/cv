@@ -1,0 +1,34 @@
+{
+  "number": "290",
+  "title": "Word Pattern",
+  "goal": "Solve Word Pattern: Check if word sequence matches pattern.",
+  "strategy": "Check if word sequence matches pattern.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(pattern) != len(words)",
+      "outcome": "return False"
+    },
+    {
+      "condition": "forward.get(char, word) != word",
+      "outcome": "return False"
+    },
+    {
+      "condition": "reverse.get(word, char) != char",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem290/index.jsx",
+    "src/problems/Problem290/Problem290Visualizer.jsx"
+  ]
+}

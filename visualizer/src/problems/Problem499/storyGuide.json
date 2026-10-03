@@ -1,0 +1,28 @@
+{
+  "number": "499",
+  "title": "The Maze III",
+  "goal": "Solve The Maze III: Find path in maze with directional rolling ball returning lexicographically smallest path.",
+  "strategy": "Find path in maze with directional rolling ball returning lexicographically smallest path.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "(r, c) in seen",
+      "outcome": "continue"
+    },
+    {
+      "condition": "[nr, nc] == hole",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "maze must be an array",
+    "ball must be an array",
+    "hole must be an array"
+  ],
+  "source": [
+    "src/problems/Problem499/index.jsx",
+    "src/problems/Problem499/Problem499Visualizer.jsx"
+  ]
+}

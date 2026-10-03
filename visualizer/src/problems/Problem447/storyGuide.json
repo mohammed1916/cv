@@ -1,0 +1,28 @@
+{
+  "number": "447",
+  "title": "Number of Boomerangs",
+  "goal": "Solve Number of Boomerangs: For each pivot, group other points by squared distance and count ordered pairs from each equal-distance group.",
+  "strategy": "For each pivot, group other points by squared distance and count ordered pairs from each equal-distance group.",
+  "phases": [
+    "boomerang_found",
+    "checking",
+    "done",
+    "outer_loop",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The two partners are ordered, so a group of m contributes m times m minus one; the pivot is excluded."
+  ],
+  "checks": [
+    {
+      "condition": "i == j",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem447/index.jsx",
+    "src/problems/Problem447/Problem447Visualizer.jsx"
+  ]
+}

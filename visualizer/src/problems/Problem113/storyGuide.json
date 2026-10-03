@@ -1,0 +1,38 @@
+{
+  "number": "113",
+  "title": "Path Sum II",
+  "goal": "Solve Path Sum II: Find all root-to-leaf paths in a binary tree where the path sum equals a target value.",
+  "strategy": "Find all root-to-leaf paths in a binary tree where the path sum equals a target value.",
+  "phases": [
+    "init",
+    "visit",
+    "check",
+    "compare",
+    "found",
+    "backtrack",
+    "done",
+    "null",
+    "leaf",
+    "match",
+    "no-match",
+    "branch",
+    "no-left",
+    "no-right"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "Target must be an integer."
+  ],
+  "source": [
+    "src/problems/Problem113/index.jsx",
+    "src/problems/Problem113/PathSumIIVisualizer.jsx",
+    "src/problems/Problem113/algorithm.js"
+  ]
+}

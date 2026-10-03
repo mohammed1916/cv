@@ -1,0 +1,37 @@
+{
+  "number": "36",
+  "title": "Valid Sudoku",
+  "goal": "Solve Valid Sudoku: Check row, column and box membership independently for every filled Sudoku cell.",
+  "strategy": "Check row, column and box membership independently for every filled Sudoku cell.",
+  "phases": [
+    "check",
+    "continue",
+    "duplicate",
+    "done",
+    "init",
+    "mark"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Empty cells are ignored; a valid partial board is not necessarily a solved or solvable board."
+  ],
+  "checks": [
+    {
+      "condition": "v == '.'",
+      "outcome": "continue"
+    },
+    {
+      "condition": "v in rows[r] or v in cols[c] or v in boxes[b]",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "board must be an array of 9 rows",
+    "each row must be an array of 9 cells",
+    "each cell must be \"1\"-\"9\" or \".\""
+  ],
+  "source": [
+    "src/problems/Problem36/index.jsx",
+    "src/problems/Problem36/ValidSudokuVisualizer.jsx"
+  ]
+}

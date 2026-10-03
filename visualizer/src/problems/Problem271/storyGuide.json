@@ -1,0 +1,27 @@
+{
+  "number": "271",
+  "title": "Encode and Decode Strings",
+  "goal": "Solve Encode and Decode Strings: Prefix each string with its length and a delimiter so decoding is unambiguous.",
+  "strategy": "Prefix each string with its length and a delimiter so decoding is unambiguous.",
+  "phases": [
+    "encode_init",
+    "encode_word",
+    "encode_done",
+    "decode_init",
+    "decode_find_hash",
+    "decode_extract",
+    "decode_done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Empty strings and delimiter characters inside strings must round-trip; length information must distinguish data from separators."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be array"
+  ],
+  "source": [
+    "src/problems/Problem271/index.jsx",
+    "src/problems/Problem271/EncodeDecodeVisualizer.jsx"
+  ]
+}

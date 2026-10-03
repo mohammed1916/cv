@@ -1,0 +1,28 @@
+{
+  "number": "564",
+  "title": "Find the Celebrity",
+  "goal": "Solve Find the Celebrity: Find the celebrity in a group where a celebrity is a person who is known by all others but knows nobody.",
+  "strategy": "Find the celebrity in a group where a celebrity is a person who is known by all others but knows nobody.",
+  "phases": [
+    "elimination",
+    "pointers",
+    "verify",
+    "check_knows",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "i != candidate and (knows(candidate, i) or not knows(i, candidate))",
+      "outcome": "return -1"
+    }
+  ],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem564/index.jsx",
+    "src/problems/Problem564/FindCelebrityVisualizer.jsx"
+  ]
+}

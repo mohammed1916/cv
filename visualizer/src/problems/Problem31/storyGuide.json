@@ -1,0 +1,26 @@
+{
+  "number": "31",
+  "title": "Next Permutation",
+  "goal": "Solve Next Permutation: Find the rightmost ascent, exchange its pivot with the next larger suffix value, and reverse the suffix to make the smallest possible increase.",
+  "strategy": "Find the rightmost ascent, exchange its pivot with the next larger suffix value, and reverse the suffix to make the smallest possible increase.",
+  "phases": [
+    "find-pivot",
+    "found-pivot",
+    "found-swap",
+    "swapped",
+    "reverse",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A fully descending permutation wraps to ascending order; equal values must not create a false ascent."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem31/index.jsx",
+    "src/problems/Problem31/NextPermutationVisualizer.jsx"
+  ]
+}

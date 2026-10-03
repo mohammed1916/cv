@@ -1,0 +1,25 @@
+{
+  "number": "455",
+  "title": "Assign Cookies",
+  "goal": "Solve Assign Cookies: Match the smallest remaining appetite with the smallest cookie that satisfies it, preserving larger cookies for harder demands.",
+  "strategy": "Match the smallest remaining appetite with the smallest cookie that satisfies it, preserving larger cookies for harder demands.",
+  "phases": [
+    "checking",
+    "done",
+    "init_pointers",
+    "matched",
+    "skip_cookie",
+    "sorted",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A cookie can satisfy only one child; an undersized cookie can be skipped without losing a possible match."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem455/index.jsx",
+    "src/problems/Problem455/Problem455Visualizer.jsx"
+  ]
+}

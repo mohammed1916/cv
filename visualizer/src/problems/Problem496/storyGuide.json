@@ -1,0 +1,20 @@
+{
+  "number": "496",
+  "title": "Next Greater Element I",
+  "goal": "Solve Next Greater Element I: Find next greater element for each using monotonic stack.",
+  "strategy": "Find next greater element for each using monotonic stack.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The next greater value must be strictly larger and occur to the right; absence returns the sentinel."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums1 must be an array",
+    "nums2 must be an array"
+  ],
+  "source": [
+    "src/problems/Problem496/index.jsx",
+    "src/problems/Problem496/Problem496Visualizer.jsx"
+  ]
+}

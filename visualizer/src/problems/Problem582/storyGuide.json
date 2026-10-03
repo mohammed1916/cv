@@ -1,0 +1,27 @@
+{
+  "number": "582",
+  "title": "Kill Process",
+  "goal": "Solve Kill Process: Kill a process in a tree and cascade kill to all children",
+  "strategy": "Kill a process in a tree and cascade kill to all children",
+  "phases": [
+    "init",
+    "traverse",
+    "kill",
+    "cascade",
+    "done",
+    "return"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Killing a process includes every descendant, not just its immediate children; preserve parent-to-children direction."
+  ],
+  "checks": [],
+  "inputRules": [
+    "pid must be array",
+    "ppid must be array"
+  ],
+  "source": [
+    "src/problems/Problem582/index.jsx",
+    "src/problems/Problem582/KillProcessVisualizer.jsx"
+  ]
+}

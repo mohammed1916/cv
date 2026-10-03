@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -19,7 +21,7 @@ const definition = {
     { label: 'Prime gap', input: '[90,97]' },
   ],
 }
-export default function AlternatingPrime() {
+function AlternatingPrime() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const committed = i => step.phase === 'done' || i < step.index || i === step.index && step.phase === 'apply'
     return <>
@@ -40,3 +42,5 @@ export default function AlternatingPrime() {
     {['choose', 'apply'].includes(step.phase) && <p>Current target: {step.target}. The candidate row shows every intervening value; the operation batch represents exactly {step.cost} unit increments.</p>}
   </>} />
 }
+
+export default withProblemStory(AlternatingPrime, storyGuide);

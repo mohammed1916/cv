@@ -1,0 +1,25 @@
+{
+  "number": "96",
+  "title": "Unique Binary Search Trees",
+  "goal": "Solve Unique Binary Search Trees: Unique Binary Search Trees visualization",
+  "strategy": "Unique Binary Search Trees visualization",
+  "phases": [
+    "init",
+    "outer",
+    "term",
+    "commit",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An empty subtree contributes one structural choice, allowing roots with no left or right child to count."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem96/index.jsx",
+    "src/problems/Problem96/Visualizer.jsx"
+  ]
+}

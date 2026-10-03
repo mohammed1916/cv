@@ -1,0 +1,41 @@
+{
+  "number": "40",
+  "title": "Combination Sum II",
+  "goal": "Solve Combination Sum II: Sort candidates, choose each index at most once, and skip equal alternatives at the same recursion depth.",
+  "strategy": "Sort candidates, choose each index at most once, and skip equal alternatives at the same recursion depth.",
+  "phases": [
+    "call_dfs",
+    "call_include",
+    "call_skip",
+    "check_bound",
+    "check_target",
+    "done",
+    "enter_dfs",
+    "found",
+    "include",
+    "init",
+    "init_res",
+    "pop",
+    "return_bound",
+    "return_target",
+    "skip_dup"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal values at different indices can be used together, but duplicate result combinations must not be emitted."
+  ],
+  "checks": [
+    {
+      "condition": "i >= len(candidates) or total > target",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "Candidates must be positive integers.",
+    "Target must be a positive integer."
+  ],
+  "source": [
+    "src/problems/Problem40/index.jsx",
+    "src/problems/Problem40/CombinationSumIIVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "number": "33",
+  "title": "Search in Rotated Sorted Array",
+  "goal": "Solve Search in Rotated Sorted Array: Binary search with extra checks: determine which half is sorted, then decide which side the target is in.",
+  "strategy": "Binary search with extra checks: determine which half is sorted, then decide which side the target is in.",
+  "phases": [
+    "calc_mid",
+    "check_loop",
+    "found",
+    "init",
+    "move_hi",
+    "move_lo",
+    "not_found",
+    "check_left_range",
+    "check_right_range"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "nums[mid] == target",
+      "outcome": "return mid"
+    }
+  ],
+  "inputRules": [
+    "nums must be a non-empty array",
+    "Max 14 elements for clarity",
+    "nums must contain only numbers",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem33/index.jsx",
+    "src/problems/Problem33/SearchInRotatedSortedArrayVisualizer.jsx"
+  ]
+}

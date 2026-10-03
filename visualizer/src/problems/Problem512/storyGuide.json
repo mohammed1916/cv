@@ -1,0 +1,19 @@
+{
+  "number": "512",
+  "title": "Game Play Analysis II",
+  "goal": "Solve Game Play Analysis II: Find the first device each player logs in with.",
+  "strategy": "Find the first device each player logs in with.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The device must come from the same record as the player’s earliest login date, not an independently chosen minimum device ID."
+  ],
+  "checks": [],
+  "inputRules": [
+    "activity must be an array of rows"
+  ],
+  "source": [
+    "src/problems/Problem512/index.jsx",
+    "src/problems/Problem512/GamePlayAnalysisIIVisualizer.jsx"
+  ]
+}

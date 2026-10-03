@@ -1,0 +1,23 @@
+{
+  "number": "343",
+  "title": "Integer Break",
+  "goal": "Solve Integer Break: Break integer into parts with maximum product.",
+  "strategy": "Break integer into parts with maximum product.",
+  "phases": [
+    "init",
+    "outer",
+    "try",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "At least one split is required: returning n unchanged is not valid even if it exceeds a small split product."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem343/index.jsx",
+    "src/problems/Problem343/IntegerBreakVisualizer.jsx"
+  ]
+}

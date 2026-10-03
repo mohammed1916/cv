@@ -1,0 +1,25 @@
+{
+  "number": "215",
+  "title": "Kth Largest Element in an Array",
+  "goal": "Solve Kth Largest Element in an Array: Maintain a size-k min-heap while scanning numbers; heap root is the kth largest.",
+  "strategy": "Maintain a size-k min-heap while scanning numbers; heap root is the kth largest.",
+  "phases": [
+    "init",
+    "push",
+    "pop",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Duplicates occupy separate ranks; kth largest is not kth distinct largest."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be array",
+    "k must be between 1 and len(nums)"
+  ],
+  "source": [
+    "src/problems/Problem215/index.jsx",
+    "src/problems/Problem215/KthLargestElementVisualizer.jsx"
+  ]
+}

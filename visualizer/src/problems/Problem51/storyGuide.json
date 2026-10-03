@@ -1,0 +1,35 @@
+{
+  "number": "51",
+  "title": "N-Queens",
+  "goal": "Solve N-Queens: Place one queen per row while excluding occupied columns and diagonals, undoing each placement before trying another.",
+  "strategy": "Place one queen per row while excluding occupied columns and diagonals, undoing each placement before trying another.",
+  "phases": [
+    "state_setup",
+    "candidate_loop",
+    "conflict_check",
+    "prune_conflict",
+    "place",
+    "recursive_search",
+    "remove",
+    "solution",
+    "done",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A row with no legal column ends that branch; some board sizes have no solutions."
+  ],
+  "checks": [
+    {
+      "condition": "col in cols or (row-col) in diag1 or (row+col) in diag2",
+      "outcome": "continue  # under attack"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem51/index.jsx",
+    "src/problems/Problem51/NQueensVisualizer.jsx"
+  ]
+}

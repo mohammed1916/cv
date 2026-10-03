@@ -1,0 +1,28 @@
+{
+  "number": "547",
+  "title": "Number of Provinces",
+  "goal": "Solve Number of Provinces: Count connected components using Union-Find.",
+  "strategy": "Count connected components using Union-Find.",
+  "phases": [
+    "setup_sets",
+    "find_root",
+    "path_compression",
+    "scan_edges",
+    "union_roots",
+    "count_components"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Count connected components rather than individual friendship edges; symmetric entries describe one undirected relationship."
+  ],
+  "checks": [],
+  "inputRules": [
+    "isConnected must be a non-empty 2D array",
+    "isConnected must be a square matrix (n x n)",
+    "isConnected entries must be 0 or 1"
+  ],
+  "source": [
+    "src/problems/Problem547/index.jsx",
+    "src/problems/Problem547/NumberOfProvincesVisualizer.jsx"
+  ]
+}

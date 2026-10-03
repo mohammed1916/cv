@@ -1,0 +1,26 @@
+{
+  "number": "311",
+  "title": "Sparse Matrix Multiplication",
+  "goal": "Solve Sparse Matrix Multiplication: Efficient multiplication of sparse matrices.",
+  "strategy": "Efficient multiplication of sparse matrices.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "value == 0",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Use compatible rectangular numeric mat1 and mat2."
+  ],
+  "source": [
+    "src/problems/Problem311/index.jsx",
+    "src/problems/Problem311/SparseMatrixMultiplicationVisualizer.jsx"
+  ]
+}

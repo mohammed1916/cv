@@ -1,0 +1,31 @@
+{
+  "number": "45",
+  "title": "Jump Game II",
+  "goal": "Solve Jump Game II: Treat reachable positions as layers: extend the farthest reach within the current jump range, then commit the next jump at its boundary.",
+  "strategy": "Treat reachable positions as layers: extend the farthest reach within the current jump range, then commit the next jump at its boundary.",
+  "phases": [
+    "break",
+    "check",
+    "done",
+    "init",
+    "jump",
+    "reach"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The final index needs no outgoing jump; the problem assumes the end is reachable."
+  ],
+  "checks": [
+    {
+      "condition": "curEnd >= len(nums)-1",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem45/index.jsx",
+    "src/problems/Problem45/JumpGameIIVisualizer.jsx"
+  ]
+}

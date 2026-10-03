@@ -1,0 +1,19 @@
+{
+  "number": "506",
+  "title": "Relative Ranks",
+  "goal": "Solve Relative Ranks: Assign ranks to competitors based on their scores.",
+  "strategy": "Assign ranks to competitors based on their scores.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Rank by score while writing labels back to original positions; the first three ranks have special medal labels."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem506/index.jsx",
+    "src/problems/Problem506/RelativeRanksVisualizer.jsx"
+  ]
+}

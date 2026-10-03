@@ -1,0 +1,21 @@
+{
+  "number": "249",
+  "title": "Group Shifted Strings",
+  "goal": "Solve Group Shifted Strings: Group strings by their shift pattern (difference between consecutive chars).",
+  "strategy": "Group strings by their shift pattern (difference between consecutive chars).",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Character shifts wrap modulo 26. Single-character strings share the same empty-difference signature."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem249/index.jsx",
+    "src/problems/Problem249/GroupShiftedStrings.jsx"
+  ]
+}

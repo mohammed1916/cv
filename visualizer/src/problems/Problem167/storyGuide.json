@@ -1,0 +1,32 @@
+{
+  "number": "167",
+  "title": "Two Sum II - Input Array Is Sorted",
+  "goal": "Solve Two Sum II - Input Array Is Sorted: Two pointers from both ends: move left if sum too small, right if too large.",
+  "strategy": "Two pointers from both ends: move left if sum too small, right if too large.",
+  "phases": [
+    "init",
+    "loop",
+    "calc",
+    "found",
+    "move_lo",
+    "move_hi",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "s == target",
+      "outcome": "return [lo + 1, hi + 1]"
+    }
+  ],
+  "inputRules": [
+    "Need at least 2 elements",
+    "Max 14 elements for clarity",
+    "Target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem167/index.jsx",
+    "src/problems/Problem167/TwoSumIIVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "number": "48",
+  "title": "Rotate Image",
+  "goal": "Solve Rotate Image: Rotate a square matrix in place by moving each position to its quarter-turn destination while preserving values needed by later moves.",
+  "strategy": "Rotate a square matrix in place by moving each position to its quarter-turn destination while preserving values needed by later moves.",
+  "phases": [
+    "transpose",
+    "swap",
+    "reverse",
+    "done",
+    "start",
+    "swap-pre",
+    "swap-post",
+    "reverse-start",
+    "reverse-row-pre",
+    "reverse-row-post"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The center of an odd-sized matrix stays fixed; each four-position cycle must avoid overwriting an unread value."
+  ],
+  "checks": [],
+  "inputRules": [
+    "matrix must be a non-empty array of rows",
+    "matrix must be square (n x n)",
+    "matrix must contain only numbers",
+    "matrix must be 8x8 or smaller"
+  ],
+  "source": [
+    "src/problems/Problem48/index.jsx",
+    "src/problems/Problem48/RotateImageVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "number": "285",
+  "title": "Inorder Successor in BST",
+  "goal": "Solve Inorder Successor in BST: Find inorder successor in BST.",
+  "strategy": "Find inorder successor in BST.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A right subtree supplies its leftmost node; otherwise the successor is an ancestor reached from a left branch."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem285/index.jsx",
+    "src/problems/Problem285/Problem285Visualizer.jsx"
+  ]
+}

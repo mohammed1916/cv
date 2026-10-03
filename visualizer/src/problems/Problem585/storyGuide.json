@@ -1,0 +1,21 @@
+{
+  "number": "585",
+  "title": "Investments in 2016",
+  "goal": "Solve Investments in 2016: Find the sum of tiv_2016 for investments where tiv_2015 is not unique and location is unique.",
+  "strategy": "Find the sum of tiv_2016 for investments where tiv_2015 is not unique and location is unique.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A policy qualifies only if its previous-year value is shared and its location pair is unique; both conditions must hold."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem585/index.jsx",
+    "src/problems/Problem585/InvestmentsVisualizer.jsx"
+  ]
+}

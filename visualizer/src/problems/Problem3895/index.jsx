@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -19,7 +21,7 @@ const definition = {
     { label: 'All digits match', input: '{"nums":[777777,7],"digit":7}' },
   ],
 }
-export default function CountDigitAppearances() {
+function CountDigitAppearances() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const digits = step.index < 0 ? '' : String(run.input[step.index])
     const active = step.phase === 'extract' ? digits.length - 1 - step.position : -1
@@ -41,3 +43,5 @@ export default function CountDigitAppearances() {
     <p>A zero remainder counts when the target is zero. A zero quotient ends the loop; it is not an additional leading zero. Input numbers are positive under this problem's constraints.</p>
   </>} />
 }
+
+export default withProblemStory(CountDigitAppearances, storyGuide);

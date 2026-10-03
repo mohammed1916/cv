@@ -1,0 +1,28 @@
+{
+  "number": "410",
+  "title": "Split Array Largest Sum",
+  "goal": "Solve Split Array Largest Sum: Split array into m subarrays minimizing the largest subarray sum using binary search.",
+  "strategy": "Split array into m subarrays minimizing the largest subarray sum using binary search.",
+  "phases": [
+    "done",
+    "init",
+    "init_range",
+    "check_mid",
+    "split_result",
+    "adjust_right",
+    "adjust_left"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The feasibility check asks whether a bound permits at most the allowed number of parts; zeros and exact-bound sums must not force extra splits."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "m must be a number"
+  ],
+  "source": [
+    "src/problems/Problem410/index.jsx",
+    "src/problems/Problem410/Problem410Visualizer.jsx"
+  ]
+}

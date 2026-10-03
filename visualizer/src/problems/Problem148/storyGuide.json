@@ -1,0 +1,40 @@
+{
+  "number": "148",
+  "title": "Sort List",
+  "goal": "Solve Sort List: Bottom-up merge sort on a linked list using slow/fast pointer to find midpoints.",
+  "strategy": "Bottom-up merge sort on a linked list using slow/fast pointer to find midpoints.",
+  "phases": [
+    "base",
+    "find-middle",
+    "split",
+    "recurse-left",
+    "recurse-right",
+    "merge-init",
+    "compare",
+    "choose-left",
+    "append-left",
+    "choose-right",
+    "append-right",
+    "advance-cur",
+    "append-rest",
+    "return-merged",
+    "start",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not head or not head.next",
+      "outcome": "return head"
+    }
+  ],
+  "inputRules": [
+    "arr must be an array.",
+    "arr must contain only numbers."
+  ],
+  "source": [
+    "src/problems/Problem148/index.jsx",
+    "src/problems/Problem148/SortListVisualizer.jsx"
+  ]
+}

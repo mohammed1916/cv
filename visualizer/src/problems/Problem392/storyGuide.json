@@ -1,0 +1,32 @@
+{
+  "number": "392",
+  "title": "Is Subsequence",
+  "goal": "Solve Is Subsequence: Given two strings s and t, determine if s is a subsequence of t.",
+  "strategy": "Given two strings s and t, determine if s is a subsequence of t.",
+  "phases": [
+    "done",
+    "found",
+    "increment",
+    "init",
+    "loop",
+    "match",
+    "no_match"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not s",
+      "outcome": "return True"
+    },
+    {
+      "condition": "s_idx == len(s)",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem392/index.jsx",
+    "src/problems/Problem392/Problem392Visualizer.jsx"
+  ]
+}

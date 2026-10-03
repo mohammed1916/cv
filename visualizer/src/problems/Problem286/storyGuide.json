@@ -1,0 +1,23 @@
+{
+  "number": "286",
+  "title": "Walls and Gates",
+  "goal": "Solve Walls and Gates: Fill grid with distance to gate.",
+  "strategy": "Fill grid with distance to gate.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All gates are simultaneous distance-zero sources; walls remain impassable and unreachable rooms keep their sentinel."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem286/index.jsx",
+    "src/problems/Problem286/Problem286Visualizer.jsx"
+  ]
+}

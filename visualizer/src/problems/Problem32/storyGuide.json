@@ -1,0 +1,27 @@
+{
+  "number": "32",
+  "title": "Longest Valid Parentheses",
+  "goal": "Solve Longest Valid Parentheses: Track boundaries of unmatched parentheses so each closing bracket can measure a valid contiguous span.",
+  "strategy": "Track boundaries of unmatched parentheses so each closing bracket can measure a valid contiguous span.",
+  "phases": [
+    "calculate_len",
+    "check",
+    "check_close",
+    "done",
+    "init",
+    "pop",
+    "push_current",
+    "push_open",
+    "stack_empty"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An unmatched closing bracket resets the usable boundary; separated valid spans cannot always be joined."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem32/index.jsx",
+    "src/problems/Problem32/LongestValidParenthesesVisualizer.jsx"
+  ]
+}

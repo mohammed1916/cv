@@ -1,0 +1,21 @@
+{
+  "number": "179",
+  "title": "Largest Number",
+  "goal": "Solve Largest Number: Arrange numbers to form the largest possible number using custom comparator.",
+  "strategy": "Arrange numbers to form the largest possible number using custom comparator.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Compare concatenations a+b and b+a, not ordinary numeric order. An all-zero input must produce a single zero."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem179/index.jsx",
+    "src/problems/Problem179/LargestNumberVisualizer.jsx"
+  ]
+}

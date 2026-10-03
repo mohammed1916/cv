@@ -1,0 +1,26 @@
+{
+  "number": "472",
+  "title": "Concatenated Words",
+  "goal": "Solve Concatenated Words: Find all words that can be formed by concatenating other words from the list.",
+  "strategy": "Find all words that can be formed by concatenating other words from the list.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "word in memo",
+      "outcome": "return memo[word]"
+    },
+    {
+      "condition": "word in word_set",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "words must be an array"
+  ],
+  "source": [
+    "src/problems/Problem472/index.jsx",
+    "src/problems/Problem472/Problem472Visualizer.jsx"
+  ]
+}

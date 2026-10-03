@@ -1,0 +1,26 @@
+{
+  "number": "104",
+  "title": "Maximum Depth of Binary Tree",
+  "goal": "Solve Maximum Depth of Binary Tree: Return 1 + max(left depth, right depth) in a simple DFS.",
+  "strategy": "Return 1 + max(left depth, right depth) in a simple DFS.",
+  "phases": [
+    "call",
+    "right",
+    "return",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem104/index.jsx",
+    "src/problems/Problem104/MaxDepthBinaryTreeVisualizer.jsx",
+    "src/problems/Problem104/algorithm.js"
+  ]
+}

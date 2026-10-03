@@ -1,0 +1,27 @@
+{
+  "number": "434",
+  "title": "Number of Segments in a String",
+  "goal": "Solve Number of Segments in a String: Count transitions from whitespace into non-whitespace runs instead of counting individual characters.",
+  "strategy": "Count transitions from whitespace into non-whitespace runs instead of counting individual characters.",
+  "phases": [
+    "init",
+    "scan",
+    "segment_start",
+    "inside",
+    "space",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Leading, trailing and repeated spaces do not create extra segments."
+  ],
+  "checks": [],
+  "inputRules": [
+    "keep the string to 80 characters or fewer"
+  ],
+  "source": [
+    "src/problems/Problem434/index.jsx",
+    "src/problems/Problem434/Problem434Visualizer.jsx"
+  ]
+}

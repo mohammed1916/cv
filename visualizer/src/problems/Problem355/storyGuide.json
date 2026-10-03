@@ -1,0 +1,20 @@
+{
+  "number": "355",
+  "title": "Design Twitter",
+  "goal": "Solve Design Twitter: Maintain user relationships and timestamped posts, then merge recent posts from the user and followed accounts into a feed.",
+  "strategy": "Maintain user relationships and timestamped posts, then merge recent posts from the user and followed accounts into a feed.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Following or unfollowing changes future feeds; a user still sees their own posts."
+  ],
+  "checks": [],
+  "inputRules": [
+    "operations must be an array of strings, e.g. [\"postTweet\",\"getNewsFeed\"]",
+    "params must be an object, e.g. {\"postTweet\":[[1,1]]}"
+  ],
+  "source": [
+    "src/problems/Problem355/index.jsx",
+    "src/problems/Problem355/Problem355Visualizer.jsx"
+  ]
+}

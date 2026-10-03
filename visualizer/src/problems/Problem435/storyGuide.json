@@ -1,0 +1,25 @@
+{
+  "number": "435",
+  "title": "Non-overlapping Intervals",
+  "goal": "Solve Non-overlapping Intervals: Keep compatible intervals with early finishing times so more room remains for later intervals.",
+  "strategy": "Keep compatible intervals with early finishing times so more room remains for later intervals.",
+  "phases": [
+    "complete",
+    "init",
+    "keep",
+    "remove",
+    "sorted"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Touching endpoints do not overlap; equal end times must not cause an extra retained overlapping interval."
+  ],
+  "checks": [],
+  "inputRules": [
+    "intervals must be an array"
+  ],
+  "source": [
+    "src/problems/Problem435/index.jsx",
+    "src/problems/Problem435/Problem435Visualizer.jsx"
+  ]
+}

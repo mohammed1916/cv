@@ -1,0 +1,32 @@
+{
+  "number": "64",
+  "title": "Minimum Path Sum",
+  "goal": "Solve Minimum Path Sum: Store the cheapest right/down path to each cell using its value plus the cheaper reachable predecessor.",
+  "strategy": "Store the cheapest right/down path to each cell using its value plus the cheaper reachable predecessor.",
+  "phases": [
+    "done",
+    "fill",
+    "fill-col",
+    "fill-row",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The first row and column have only one predecessor; their costs must accumulate rather than reset."
+  ],
+  "checks": [
+    {
+      "condition": "i==0 and j==0",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Grid must be 2D array of numbers",
+    "Grid must be between 1x1 and 15x15",
+    "All values must be non-negative numbers"
+  ],
+  "source": [
+    "src/problems/Problem64/index.jsx",
+    "src/problems/Problem64/MinimumPathSumVisualizer.jsx"
+  ]
+}

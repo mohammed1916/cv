@@ -1,0 +1,23 @@
+{
+  "number": "219",
+  "title": "Contains Duplicate II",
+  "goal": "Solve Contains Duplicate II: Check if array has duplicate with index difference <= k.",
+  "strategy": "Check if array has duplicate with index difference <= k.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "nums[i] in window",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array of numbers",
+    "k must be a non-negative integer"
+  ],
+  "source": [
+    "src/problems/Problem217/index.jsx",
+    "src/problems/Problem217/ContainsDuplicateIIVisualizer.jsx"
+  ]
+}

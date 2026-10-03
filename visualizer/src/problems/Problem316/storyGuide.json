@@ -1,0 +1,26 @@
+{
+  "number": "316",
+  "title": "Remove Duplicate Letters",
+  "goal": "Solve Remove Duplicate Letters: Remove duplicates keeping lexicographically smallest string.",
+  "strategy": "Remove duplicates keeping lexicographically smallest string.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "char in used",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Use { \"s\": \"lowercase letters\" }."
+  ],
+  "source": [
+    "src/problems/Problem316/index.jsx",
+    "src/problems/Problem316/RemoveDuplicateLettersVisualizer.jsx"
+  ]
+}

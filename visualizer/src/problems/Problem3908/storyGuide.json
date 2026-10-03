@@ -1,0 +1,29 @@
+{
+  "number": "3908",
+  "title": "Valid Digit Number",
+  "goal": "Solve Valid Digit Number: Scan decimal digits, test the leading-digit restriction, and combine both conditions.",
+  "strategy": "Scan decimal digits, test the leading-digit restriction, and combine both conditions.",
+  "phases": [
+    "start",
+    "scan",
+    "leading",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert the number to its decimal digits.",
+    "scan": "Track whether any scanned digit matches x.",
+    "leading": "The leading digit must differ from x.",
+    "done": "Both conditions must pass."
+  },
+  "edgeCases": [
+    "The target digit must occur but must not be the leading digit. Zero is represented by a single zero, so n=0 and x=0 fails the leading-digit rule."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter {\"n\":101,\"x\":0}: integer n from 0 to 100,000 and digit x from 0 to 9."
+  ],
+  "source": [
+    "src/problems/Problem3908/index.jsx",
+    "src/problems/Problem3908/algorithm.js"
+  ]
+}

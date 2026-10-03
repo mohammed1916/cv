@@ -1,0 +1,32 @@
+{
+  "number": "227",
+  "title": "Basic Calculator II",
+  "goal": "Solve Basic Calculator II: Evaluate an expression with + - * / respecting operator precedence, without parentheses.",
+  "strategy": "Evaluate an expression with + - * / respecting operator precedence, without parentheses.",
+  "phases": [
+    "init",
+    "read_digit",
+    "push",
+    "apply_high",
+    "negate",
+    "sum",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Multiplication and division bind before addition and subtraction; integer division truncates toward zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter an expression, e.g. 3+2*2",
+    "LC 227 has no parentheses — use only + - * /",
+    "Only digits, spaces and + - * / are allowed",
+    "Keep the expression under 40 characters",
+    "Division by zero"
+  ],
+  "source": [
+    "src/problems/Problem227/index.jsx",
+    "src/problems/Problem227/Problem227Visualizer.jsx"
+  ]
+}

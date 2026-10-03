@@ -1,0 +1,31 @@
+{
+  "number": "3912",
+  "title": "Valid Elements in an Array",
+  "goal": "Solve Valid Elements in an Array: Compare exclusive left and right maxima to keep valid elements in their original order.",
+  "strategy": "Compare exclusive left and right maxima to keep valid elements in their original order.",
+  "phases": [
+    "start",
+    "left",
+    "right",
+    "select",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Initialize exclusive maxima.",
+    "left": "Track the largest value strictly before each index.",
+    "right": "Track the largest value strictly after each index.",
+    "select": "Keep values that beat at least one side.",
+    "done": "Return values in original order."
+  },
+  "edgeCases": [
+    "A value qualifies by beating all values on either side, not necessarily both; equality fails the strict comparison."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON array of 1–100 integers, each between 1 and 100."
+  ],
+  "source": [
+    "src/problems/Problem3912/index.jsx",
+    "src/problems/Problem3912/algorithm.js"
+  ]
+}

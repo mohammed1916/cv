@@ -1,1 +1,5 @@
-export { default } from "./MaximumGapVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MaximumGapVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

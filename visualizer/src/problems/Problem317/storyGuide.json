@@ -1,0 +1,23 @@
+{
+  "number": "317",
+  "title": "Shortest Distance from All Buildings",
+  "goal": "Solve Shortest Distance from All Buildings: Find optimal location for meeting with minimum total distance.",
+  "strategy": "Find optimal location for meeting with minimum total distance.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An empty cell qualifies only if every building can reach it; a low partial distance from one building is insufficient."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use a grid of 0 empty, 1 building, and 2 obstacle."
+  ],
+  "source": [
+    "src/problems/Problem317/index.jsx",
+    "src/problems/Problem317/ShortestDistancefromAllBuildingsVisualizer.jsx"
+  ]
+}

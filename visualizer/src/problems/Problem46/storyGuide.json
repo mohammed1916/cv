@@ -1,0 +1,30 @@
+{
+  "number": "46",
+  "title": "Permutations",
+  "goal": "Solve Permutations: Build permutations by choosing one unused index at each depth and undoing that choice after its subtree is explored.",
+  "strategy": "Build permutations by choosing one unused index at each depth and undoing that choice after its subtree is explored.",
+  "phases": [
+    "choose",
+    "done",
+    "init",
+    "record",
+    "unchoose"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A completed path must use every index exactly once; this version assumes distinct input values."
+  ],
+  "checks": [
+    {
+      "condition": "used[i]",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Must be array"
+  ],
+  "source": [
+    "src/problems/Problem46/index.jsx",
+    "src/problems/Problem46/PermutationsVisualizer.jsx"
+  ]
+}

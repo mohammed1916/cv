@@ -1,0 +1,23 @@
+{
+  "number": "216",
+  "title": "Combination Sum III",
+  "goal": "Solve Combination Sum III: Find all combinations of k numbers summing to n (digits 1-9, no repeats).",
+  "strategy": "Find all combinations of k numbers summing to n (digits 1-9, no repeats).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "target <= 0",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "k must be an integer from 1 through 9",
+    "n must be an integer from 1 through 45"
+  ],
+  "source": [
+    "src/problems/Problem216/index.jsx",
+    "src/problems/Problem216/CombinationSumIIIVisualizer.jsx"
+  ]
+}

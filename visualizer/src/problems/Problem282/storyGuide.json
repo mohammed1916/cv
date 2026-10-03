@@ -1,0 +1,19 @@
+{
+  "number": "282",
+  "title": "Expression Add Operators",
+  "goal": "Solve Expression Add Operators: Find all expressions evaluating to target.",
+  "strategy": "Find all expressions evaluating to target.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A multi-digit operand cannot have a leading zero; multiplication must adjust the previous term to preserve precedence."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem282/index.jsx",
+    "src/problems/Problem282/Problem282Visualizer.jsx"
+  ]
+}

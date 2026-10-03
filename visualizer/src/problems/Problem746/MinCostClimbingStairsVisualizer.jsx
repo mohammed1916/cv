@@ -206,7 +206,7 @@ export default function MinCostClimbingStairsVisualizer() {
             </div>
 
     </div>
-    const codePanel = <><div className="mcs-panel"><div className="mcs-head">Status</div><div className="mcs-status">{step.message}</div></div><CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} /></>
+    const codePanel = <><div className="mcs-panel"><div className="mcs-head">Status</div><div className="mcs-status">{step.message}</div></div><CodeTracePanel step={step} code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} /></>
     return (
         <>
           <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />

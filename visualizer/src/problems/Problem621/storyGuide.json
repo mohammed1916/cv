@@ -1,0 +1,24 @@
+{
+  "number": "621",
+  "title": "Task Scheduler",
+  "goal": "Solve Task Scheduler: Minimum time to execute all tasks with cooldown using greedy.",
+  "strategy": "Minimum time to execute all tasks with cooldown using greedy.",
+  "phases": [
+    "init",
+    "counting",
+    "max-freq",
+    "max-count",
+    "formula",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The cooldown separates equal tasks, not all tasks. Idle slots are unnecessary when other tasks can fill the gaps."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem621/index.jsx",
+    "src/problems/Problem621/TaskSchedulerVisualizer.jsx"
+  ]
+}

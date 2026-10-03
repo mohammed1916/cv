@@ -1,0 +1,26 @@
+{
+  "number": "439",
+  "title": "Ternary Expression Parser",
+  "goal": "Solve Ternary Expression Parser: Resolve nested conditional expressions while preserving the association between each condition and its true and false branches.",
+  "strategy": "Resolve nested conditional expressions while preserving the association between each condition and its true and false branches.",
+  "phases": [
+    "complete",
+    "init",
+    "process_ternary",
+    "push_char",
+    "push_ternary",
+    "read_char",
+    "skip_colon",
+    "start_from_end"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Nested ternaries associate rightward; selecting a branch must skip the entire other nested expression."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem439/index.jsx",
+    "src/problems/Problem439/Problem439Visualizer.jsx"
+  ]
+}

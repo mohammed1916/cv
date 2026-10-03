@@ -1,1 +1,5 @@
-export { default } from "./SymmetricTreeVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./SymmetricTreeVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

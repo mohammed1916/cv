@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, trianglePoints } from './algorithm'
@@ -34,7 +36,7 @@ function TriangleDiagram({ sides, active }) {
   </div>
 }
 
-export default function TriangleAngles() {
+function TriangleAngles() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Sorted sides a, b, c" length={3} active={step.index} valueAt={i => run.sides[i]} roleAt={i => `opposite ${'ABC'[i]}`} />
     {step.phase !== 'start' && (run.valid ? <TriangleDiagram sides={run.sides} active={step.index} /> : <p role="status">No positive-area triangle: {run.sides[0]} + {run.sides[1]} ≤ {run.sides[2]}.</p>)}
@@ -49,3 +51,5 @@ export default function TriangleAngles() {
     {step.phase === 'done' && run.valid && <p>Angle sum check: {run.result.reduce((a, b) => a + b, 0).toFixed(8)}°.</p>}
   </>} />
 }
+
+export default withProblemStory(TriangleAngles, storyGuide);

@@ -1,0 +1,34 @@
+{
+  "number": "3899",
+  "title": "Angles of a Triangle",
+  "goal": "Solve Angles of a Triangle: Validate positive area, map opposite sides to vertices, and derive sorted angles with the law of cosines.",
+  "strategy": "Validate positive area, map opposite sides to vertices, and derive sorted angles with the law of cosines.",
+  "phases": [
+    "start",
+    "check",
+    "angle",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Associate sorted sides a, b, c with opposite vertices A, B, C.",
+    "check": "Require a + b > c, not equality.",
+    "angle": "Compute each opposite angle in degrees.",
+    "done": "Return sorted angles, or an empty array for invalid geometry."
+  },
+  "edgeCases": [
+    "The two shorter sides must sum strictly above the longest; equality gives a degenerate triangle, not valid angles."
+  ],
+  "checks": [
+    {
+      "condition": "a + b <= c",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [
+    "Enter exactly three integer side lengths between 1 and 1000, for example [3,4,5]."
+  ],
+  "source": [
+    "src/problems/Problem3899/index.jsx",
+    "src/problems/Problem3899/algorithm.js"
+  ]
+}

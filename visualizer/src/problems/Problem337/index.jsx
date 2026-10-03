@@ -1,1 +1,5 @@
-export { default } from "./HouseRobberIIIVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./HouseRobberIIIVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

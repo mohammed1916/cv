@@ -1,0 +1,22 @@
+{
+  "number": "357",
+  "title": "Count Numbers with Unique Digits",
+  "goal": "Solve Count Numbers with Unique Digits: Count numbers with unique digits (no repeated digits) from 0 to 10^n.",
+  "strategy": "Count numbers with unique digits (no repeated digits) from 0 to 10^n.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 0",
+      "outcome": "return 1"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem357/index.jsx",
+    "src/problems/Problem357/Problem357Visualizer.jsx"
+  ]
+}

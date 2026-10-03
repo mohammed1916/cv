@@ -1,0 +1,26 @@
+{
+  "number": "419",
+  "title": "Battleships in a Board",
+  "goal": "Solve Battleships in a Board: Count number of battleships (no adjacent touching).",
+  "strategy": "Count number of battleships (no adjacent touching).",
+  "phases": [
+    "done",
+    "found_ship",
+    "init",
+    "mark_connected",
+    "mark_visited",
+    "scan_start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Under the valid-board assumptions, count only the start of each ship so long ships are not counted once per cell."
+  ],
+  "checks": [],
+  "inputRules": [
+    "board must be an array"
+  ],
+  "source": [
+    "src/problems/Problem419/index.jsx",
+    "src/problems/Problem419/Problem419Visualizer.jsx"
+  ]
+}

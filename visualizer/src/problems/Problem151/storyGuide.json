@@ -1,0 +1,17 @@
+{
+  "number": "151",
+  "title": "Reverse Words in a String",
+  "goal": "Solve Reverse Words in a String: Reverse the order of words in a string.",
+  "strategy": "Reverse the order of words in a string.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Leading, trailing and repeated spaces must not become extra output words."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem151/index.jsx",
+    "src/problems/Problem151/ReverseWordsInAStringVisualizer.jsx"
+  ]
+}

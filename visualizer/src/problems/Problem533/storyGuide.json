@@ -1,0 +1,28 @@
+{
+  "number": "533",
+  "title": "Lonely Pixel II",
+  "goal": "Solve Lonely Pixel II: Find black pixels with exactly N black pixels in both their row and column.",
+  "strategy": "Find black pixels with exactly N black pixels in both their row and column.",
+  "phases": [
+    "check",
+    "count_done",
+    "done",
+    "init",
+    "lonely"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Row and column black counts alone are insufficient; the required rows sharing a candidate column must also have identical patterns."
+  ],
+  "checks": [],
+  "inputRules": [
+    "picture must be a non-empty 2D array, e.g. [[\"W\",\"B\"],[\"B\",\"W\"]]",
+    "every picture row must have the same length",
+    "picture cells must be strings like \"B\" or \"W\"",
+    "N must be a non-negative number"
+  ],
+  "source": [
+    "src/problems/Problem533/index.jsx",
+    "src/problems/Problem533/LonelyPixelIIVisualizer.jsx"
+  ]
+}

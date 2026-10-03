@@ -1,0 +1,21 @@
+{
+  "number": "184",
+  "title": "Department Highest Salary",
+  "goal": "Solve Department Highest Salary: SQL query to find highest salary per department with employee name.",
+  "strategy": "SQL query to find highest salary per department with employee name.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All employees tied at their department maximum must be returned, rather than arbitrarily choosing one."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem184/index.jsx",
+    "src/problems/Problem184/DepartmentHighestSalaryVisualizer.jsx"
+  ]
+}

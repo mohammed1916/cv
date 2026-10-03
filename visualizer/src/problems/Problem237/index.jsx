@@ -1,1 +1,5 @@
-export { default } from "./DeleteNodeInALinkedList";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./DeleteNodeInALinkedList";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

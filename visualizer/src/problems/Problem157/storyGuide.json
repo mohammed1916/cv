@@ -1,0 +1,22 @@
+{
+  "number": "157",
+  "title": "Read N Characters Given Read4",
+  "goal": "Solve Read N Characters Given Read4: Read N characters using a read4 function that reads at most 4 chars.",
+  "strategy": "Read N characters using a read4 function that reads at most 4 chars.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not chunk",
+      "outcome": "break  # EOF"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem157/index.jsx",
+    "src/problems/Problem157/ReadNCharactersGivenRead4Visualizer.jsx"
+  ]
+}

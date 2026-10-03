@@ -1,0 +1,25 @@
+{
+  "number": "23",
+  "title": "Merge K Sorted Lists",
+  "goal": "Solve Merge K Sorted Lists: Use a min-heap over current list heads to repeatedly pick the global minimum in O(N log k).",
+  "strategy": "Use a min-heap over current list heads to repeatedly pick the global minimum in O(N log k).",
+  "phases": [
+    "done",
+    "init",
+    "pop",
+    "push_next"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Some input lists may be empty; every chosen minimum must expose only that list’s next candidate."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be list of lists",
+    "Each list must be an array"
+  ],
+  "source": [
+    "src/problems/Problem23/index.jsx",
+    "src/problems/Problem23/MergeKSortedListsVisualizer.jsx"
+  ]
+}

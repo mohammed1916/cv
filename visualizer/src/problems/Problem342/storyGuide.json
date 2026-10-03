@@ -1,0 +1,30 @@
+{
+  "number": "342",
+  "title": "Power of Four",
+  "goal": "Solve Power of Four: Check if number is power of four.",
+  "strategy": "Check if number is power of four.",
+  "phases": [
+    "init",
+    "check-positive",
+    "result",
+    "check-pot",
+    "check-even"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n <= 0",
+      "outcome": "return False"
+    },
+    {
+      "condition": "n & (n - 1) != 0",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem342/index.jsx",
+    "src/problems/Problem342/PowerofFourVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "number": "53",
+  "title": "Maximum Subarray",
+  "goal": "Solve Maximum Subarray: Keep the best sum ending at the current position and decide whether extending the previous segment is better than starting anew.",
+  "strategy": "Keep the best sum ending at the current position and decide whether extending the previous segment is better than starting anew.",
+  "phases": [
+    "add",
+    "check_cur",
+    "done",
+    "init",
+    "keep_cur",
+    "loop",
+    "reset_cur",
+    "update_max"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "For an all-negative array the answer is its largest element, not an empty sum of zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem53/index.jsx",
+    "src/problems/Problem53/MaximumSubarrayVisualizer.jsx"
+  ]
+}

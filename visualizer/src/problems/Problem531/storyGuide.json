@@ -1,0 +1,29 @@
+{
+  "number": "531",
+  "title": "Lonely Pixel I",
+  "goal": "Solve Lonely Pixel I: Find black pixels that are the only black pixel in their row and column.",
+  "strategy": "Find black pixels that are the only black pixel in their row and column.",
+  "phases": [
+    "check",
+    "count",
+    "count_done",
+    "done",
+    "init",
+    "lonely",
+    "scan"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A black pixel qualifies only when both its entire row and entire column contain exactly one black pixel."
+  ],
+  "checks": [],
+  "inputRules": [
+    "picture must be a non-empty 2D array",
+    "picture rows must be non-empty arrays",
+    "picture rows must be equal-length arrays of 'B' or 'W'"
+  ],
+  "source": [
+    "src/problems/Problem531/index.jsx",
+    "src/problems/Problem531/LonelyPixelIVisualizer.jsx"
+  ]
+}

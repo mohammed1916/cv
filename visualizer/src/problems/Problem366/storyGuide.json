@@ -1,0 +1,30 @@
+{
+  "number": "366",
+  "title": "Find Leaves of Binary Tree",
+  "goal": "Solve Find Leaves of Binary Tree: Remove leaves level by level and return leaf values at each iteration.",
+  "strategy": "Remove leaves level by level and return leaf values at each iteration.",
+  "phases": [
+    "collect-leaf",
+    "compute-height",
+    "done",
+    "init",
+    "null",
+    "recurse-left",
+    "recurse-right",
+    "return-height",
+    "visit"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem366/index.jsx",
+    "src/problems/Problem366/Problem366Visualizer.jsx"
+  ]
+}

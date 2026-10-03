@@ -1,0 +1,23 @@
+{
+  "number": "327",
+  "title": "Count of Range Sum",
+  "goal": "Solve Count of Range Sum: Count subarrays with sum in given range using merge sort.",
+  "strategy": "Count subarrays with sum in given range using merge sort.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Count prefix-sum differences in the inclusive lower-to-upper range; equal prefixes represent distinct endpoints."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use nums, lower, and upper with lower ≤ upper."
+  ],
+  "source": [
+    "src/problems/Problem327/index.jsx",
+    "src/problems/Problem327/CountofRangeSumVisualizer.jsx"
+  ]
+}

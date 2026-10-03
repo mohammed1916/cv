@@ -1,0 +1,32 @@
+{
+  "number": "90",
+  "title": "Subsets II",
+  "goal": "Subsets II visualization",
+  "strategy": "Sort values and skip equal sibling choices during subset construction so duplicates do not repeat the same subset.",
+  "phases": [
+    "init",
+    "record",
+    "skip",
+    "choose",
+    "recurse",
+    "unchoose",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Several copies may appear together in one subset; only equivalent choices at the same depth are skipped."
+  ],
+  "checks": [
+    {
+      "condition": "i > start and nums[i] == nums[i-1]",
+      "outcome": "continue  # skip duplicate"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem90/index.jsx",
+    "src/problems/Problem90/Visualizer.jsx"
+  ]
+}

@@ -1,1 +1,5 @@
-export { default } from "./MaxPointsOnALineVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MaxPointsOnALineVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

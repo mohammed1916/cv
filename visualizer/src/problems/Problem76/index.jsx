@@ -1,1 +1,5 @@
-export { default } from './MinimumWindowSubstringVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MinimumWindowSubstringVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

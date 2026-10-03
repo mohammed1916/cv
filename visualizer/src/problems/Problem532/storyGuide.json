@@ -1,0 +1,27 @@
+{
+  "number": "532",
+  "title": "K-Diff Pairs in Array",
+  "goal": "Solve K-Diff Pairs in Array: Count the number of unique k-diff pairs in an array.",
+  "strategy": "Count the number of unique k-diff pairs in an array.",
+  "phases": [
+    "check_num",
+    "count",
+    "done",
+    "found_pair",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "For k zero, a value needs at least two occurrences; for positive k count distinct value pairs rather than index pairs."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be a non-empty array",
+    "nums must contain numbers",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem532/index.jsx",
+    "src/problems/Problem532/KDiffPairsInArrayVisualizer.jsx"
+  ]
+}

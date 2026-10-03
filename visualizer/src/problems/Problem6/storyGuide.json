@@ -1,0 +1,24 @@
+{
+  "number": "6",
+  "title": "Zigzag Conversion",
+  "goal": "Solve Zigzag Conversion: Trace how characters bounce between rows and then merge row buckets into the final answer.",
+  "strategy": "Trace how characters bounce between rows and then merge row buckets into the final answer.",
+  "phases": [
+    "walk",
+    "early_return",
+    "early-return"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "numRows == 1 or numRows >= len(s)",
+      "outcome": "return s"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem6/index.jsx",
+    "src/problems/Problem6/ZigzagVisualizer.jsx"
+  ]
+}

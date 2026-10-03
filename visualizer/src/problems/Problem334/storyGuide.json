@@ -1,0 +1,22 @@
+{
+  "number": "334",
+  "title": "Increasing Triplet Subsequence",
+  "goal": "Solve Increasing Triplet Subsequence: Check if array contains increasing triplet subsequence.",
+  "strategy": "Check if array contains increasing triplet subsequence.",
+  "phases": [
+    "init",
+    "loop",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The triplet requires strict increases at increasing indices; equal values must not count as an increase."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem334/index.jsx",
+    "src/problems/Problem334/IncreasingTripletSubsequenceVisualizer.jsx"
+  ]
+}

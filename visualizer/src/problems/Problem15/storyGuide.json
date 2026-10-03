@@ -1,0 +1,35 @@
+{
+  "number": "15",
+  "title": "3Sum",
+  "goal": "Solve 3Sum: Sort values, fix one member of each triple, and move two pointers to find the remaining sum while skipping duplicate choices.",
+  "strategy": "Sort values, fix one member of each triple, and move two pointers to find the remaining sum while skipping duplicate choices.",
+  "phases": [
+    "sort",
+    "fix_i",
+    "skip_i",
+    "calc",
+    "found",
+    "move_l",
+    "skip_l",
+    "move_r",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated values may form a valid triple, but equal triples must appear only once."
+  ],
+  "checks": [
+    {
+      "condition": "i > 0 and nums[i] == nums[i - 1]",
+      "outcome": "continue  # skip i-duplicates"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "Max 12 elements for clarity"
+  ],
+  "source": [
+    "src/problems/Problem15/index.jsx",
+    "src/problems/Problem15/ThreeSumVisualizer.jsx"
+  ]
+}

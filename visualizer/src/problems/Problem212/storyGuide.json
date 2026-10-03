@@ -1,0 +1,25 @@
+{
+  "number": "212",
+  "title": "Word Search II",
+  "goal": "Solve Word Search II: Find all words from a dictionary in a 2D grid with adjacent traversal.",
+  "strategy": "Find all words from a dictionary in a 2D grid with adjacent traversal.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "char not in node.children",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "board must be a non-empty array of rows, e.g. [[\"a\",\"b\"],[\"c\",\"d\"]]",
+    "board rows must all be the same non-zero length",
+    "board cells must be strings",
+    "words must be an array of strings, e.g. [\"oath\",\"eat\"]"
+  ],
+  "source": [
+    "src/problems/Problem212/index.jsx",
+    "src/problems/Problem212/WordSearchIIVisualizer.jsx"
+  ]
+}

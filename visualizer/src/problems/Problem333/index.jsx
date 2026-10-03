@@ -1,1 +1,5 @@
-export { default } from "./LargestBSTSubtreeVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./LargestBSTSubtreeVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

@@ -1,0 +1,19 @@
+{
+  "number": "470",
+  "title": "Implement Rand10()",
+  "goal": "Solve Implement Rand10(): Implement rand10() using rand7() with rejection sampling to generate uniform random 1-10.",
+  "strategy": "Implement rand10() using rand7() with rejection sampling to generate uniform random 1-10.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reject excess source outcomes instead of applying a biased modulo mapping to an uneven-sized sample space."
+  ],
+  "checks": [],
+  "inputRules": [
+    "calls must be a number"
+  ],
+  "source": [
+    "src/problems/Problem470/index.jsx",
+    "src/problems/Problem470/Problem470Visualizer.jsx"
+  ]
+}

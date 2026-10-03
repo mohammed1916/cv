@@ -1,0 +1,30 @@
+{
+  "number": "994",
+  "title": "Rotting Oranges",
+  "goal": "Solve Rotting Oranges: Run multi-source BFS over the grid, propagating rotting level by level until all fresh oranges are processed.",
+  "strategy": "Run multi-source BFS over the grid, propagating rotting level by level until all fresh oranges are processed.",
+  "phases": [
+    "init",
+    "scan_done",
+    "minute_start",
+    "pop",
+    "check_neighbor",
+    "rot_neighbor",
+    "minute_end",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All initially rotten oranges spread simultaneously; fresh oranges isolated from every source make completion impossible."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Grid must be a 2D array",
+    "Grid rows must be same length",
+    "Cell values must be 0, 1, or 2"
+  ],
+  "source": [
+    "src/problems/Problem994/index.jsx",
+    "src/problems/Problem994/RottingOrangesVisualizer.jsx"
+  ]
+}

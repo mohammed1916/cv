@@ -1,0 +1,28 @@
+{
+  "number": "563",
+  "title": "Binary Tree Tilt",
+  "goal": "Solve Binary Tree Tilt: Given the root of a binary tree, return the sum of every tree node's tilt, where tilt is the absolute difference between left and right subtree sums.",
+  "strategy": "Given the root of a binary tree, return the sum of every tree node's tilt, where tilt is the absolute difference between left and right subtree sums.",
+  "phases": [
+    "traverse",
+    "calculate_sums",
+    "compute_tilt",
+    "accumulate",
+    "return_sum",
+    "done",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem563/index.jsx",
+    "src/problems/Problem563/BinaryTreeTiltVisualizer.jsx"
+  ]
+}

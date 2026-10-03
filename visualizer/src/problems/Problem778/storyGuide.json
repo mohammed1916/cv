@@ -1,0 +1,28 @@
+{
+  "number": "778",
+  "title": "Swim in Rising Water",
+  "goal": "Solve Swim in Rising Water: Binary search on time t; BFS to check if destination reachable with cells <= t.",
+  "strategy": "Binary search on time t; BFS to check if destination reachable with cells <= t.",
+  "phases": [
+    "done",
+    "init",
+    "binary_search",
+    "bfs_check",
+    "binary_search_narrow"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "r == n - 1 and c == n - 1",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "Enter a square JSON grid of numbers."
+  ],
+  "source": [
+    "src/problems/Problem778/index.jsx",
+    "src/problems/Problem778/SwimInRisingWaterVisualizer.jsx"
+  ]
+}

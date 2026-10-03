@@ -1,0 +1,28 @@
+{
+  "number": "11",
+  "title": "Container With Most Water",
+  "goal": "Solve Container With Most Water: Use two pointers shrinking from the outside in to find the maximum area between two lines.",
+  "strategy": "Use two pointers shrinking from the outside in to find the maximum area between two lines.",
+  "phases": [
+    "init",
+    "compute",
+    "update",
+    "skip",
+    "move",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The shorter endpoint limits the water height; moving the taller endpoint alone cannot improve that pair at a smaller width."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Array must have at least 2 elements"
+  ],
+  "source": [
+    "src/problems/Problem11/index.jsx",
+    "src/problems/Problem11/ContainerWithMostWaterVisualizer.jsx",
+    "src/problems/Problem11/algorithm.js",
+    "src/problems/Problem11/WaterContainerStory.jsx"
+  ]
+}

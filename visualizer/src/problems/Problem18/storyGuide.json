@@ -1,0 +1,42 @@
+{
+  "number": "18",
+  "title": "4Sum",
+  "goal": "Solve 4Sum: Sort values, fix the first two choices, and search the remaining pair with opposing pointers while avoiding duplicate quadruplets.",
+  "strategy": "Sort values, fix the first two choices, and search the remaining pair with opposing pointers while avoiding duplicate quadruplets.",
+  "phases": [
+    "sort",
+    "fix_i",
+    "skip_i",
+    "fix_j",
+    "skip_j",
+    "calc",
+    "found",
+    "move_l",
+    "move_r",
+    "done",
+    "skip_l"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Duplicate values can be used at distinct indices; repeated quadruplets must be suppressed."
+  ],
+  "checks": [
+    {
+      "condition": "i > 0 and nums[i] == nums[i - 1]",
+      "outcome": "continue  # skip i-duplicates"
+    },
+    {
+      "condition": "j > i + 1 and nums[j] == nums[j - 1]",
+      "outcome": "continue  # skip j-duplicates"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number",
+    "Max 12 elements for clarity"
+  ],
+  "source": [
+    "src/problems/Problem18/index.jsx",
+    "src/problems/Problem18/FourSumVisualizer.jsx"
+  ]
+}

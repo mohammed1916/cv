@@ -1,0 +1,30 @@
+{
+  "number": "530",
+  "title": "Minimum Absolute Difference in BST",
+  "goal": "Solve Minimum Absolute Difference in BST: Find the minimum absolute difference between any two values in a binary search tree.",
+  "strategy": "Find the minimum absolute difference between any two values in a binary search tree.",
+  "phases": [
+    "compute_diff",
+    "done",
+    "init",
+    "update_min",
+    "visit_node"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "root must be a non-empty array",
+    "root must contain numbers or null",
+    "root node cannot be null"
+  ],
+  "source": [
+    "src/problems/Problem530/index.jsx",
+    "src/problems/Problem530/MinimumAbsoluteDifferenceInBSTVisualizer.jsx"
+  ]
+}

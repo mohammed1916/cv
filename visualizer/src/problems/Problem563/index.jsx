@@ -1,1 +1,5 @@
-export { default } from './BinaryTreeTiltVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./BinaryTreeTiltVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

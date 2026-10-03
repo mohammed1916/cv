@@ -1,0 +1,29 @@
+{
+  "number": "403",
+  "title": "Frog Jump",
+  "goal": "Solve Frog Jump: Determine if frog can reach the last stone by jumping k-1, k, or k+1 stones ahead from current position.",
+  "strategy": "Determine if frog can reach the last stone by jumping k-1, k, or k+1 stones ahead from current position.",
+  "phases": [
+    "init",
+    "explore",
+    "found",
+    "jump_option",
+    "add_queue",
+    "not_found"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "stones[1]!=1",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "stones must be an array"
+  ],
+  "source": [
+    "src/problems/Problem403/index.jsx",
+    "src/problems/Problem403/Problem403Visualizer.jsx"
+  ]
+}

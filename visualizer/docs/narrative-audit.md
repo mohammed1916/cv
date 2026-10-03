@@ -1,5 +1,8 @@
 # Storytelling repair audit — 2026-10-03
 
+Historical batch report: catalog coverage was subsequently completed. See
+`catalog-story-completion.md` and the current `narrative-coverage.json`.
+
 Compared commit `5f5df0f0` (story) with the working changes already present.
 That commit created 26 empty narrative modules; the working tree filled some
 but left others empty, including several already imported by visualizers.

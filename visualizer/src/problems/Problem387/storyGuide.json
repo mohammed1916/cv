@@ -1,0 +1,26 @@
+{
+  "number": "387",
+  "title": "First Unique Character in String",
+  "goal": "Solve First Unique Character in String: Find first non-repeating character using frequency counting and position tracking.",
+  "strategy": "Find first non-repeating character using frequency counting and position tracking.",
+  "phases": [
+    "complete",
+    "count",
+    "found",
+    "init",
+    "search"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "char_count[char] == 1",
+      "outcome": "return i"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem387/index.jsx",
+    "src/problems/Problem387/Problem387Visualizer.jsx"
+  ]
+}

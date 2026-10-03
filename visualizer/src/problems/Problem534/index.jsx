@@ -1,1 +1,5 @@
-export { default } from "./DesignLogStorageSystemVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./DesignLogStorageSystemVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

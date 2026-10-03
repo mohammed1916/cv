@@ -1,0 +1,28 @@
+{
+  "number": "56",
+  "title": "Merge Intervals",
+  "goal": "Solve Merge Intervals: Sort intervals by start and extend the current merged end while the next interval overlaps it.",
+  "strategy": "Sort intervals by start and extend the current merged end while the next interval overlaps it.",
+  "phases": [
+    "append",
+    "check",
+    "done",
+    "eval",
+    "init",
+    "merge",
+    "sorted"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A contained interval cannot shorten the merged end; touching endpoints merge for closed intervals."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be an array of [start, end] pairs.",
+    "Start time cannot be greater than end time."
+  ],
+  "source": [
+    "src/problems/Problem56/index.jsx",
+    "src/problems/Problem56/MergeIntervalsVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "number": "287",
+  "title": "Find the Duplicate Number",
+  "goal": "Solve Find the Duplicate Number: Floyd's cycle detection on the implicit linked list where index i points to nums[i].",
+  "strategy": "Floyd's cycle detection on the implicit linked list where index i points to nums[i].",
+  "phases": [
+    "init",
+    "phase1",
+    "phase1-done",
+    "phase2",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "slow == fast",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "Must be an array"
+  ],
+  "source": [
+    "src/problems/Problem287/index.jsx",
+    "src/problems/Problem287/FindDuplicateVisualizer.jsx"
+  ]
+}

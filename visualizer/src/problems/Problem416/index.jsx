@@ -1,1 +1,5 @@
-export { default } from "./PartitionEqualSubsetVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./PartitionEqualSubsetVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

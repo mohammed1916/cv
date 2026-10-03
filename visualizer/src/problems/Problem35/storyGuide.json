@@ -1,0 +1,36 @@
+{
+  "number": "35",
+  "title": "Search Insert Position",
+  "goal": "Solve Search Insert Position: Find the first sorted-array position whose value is at least the target; that boundary is also its insertion position.",
+  "strategy": "Find the first sorted-array position whose value is at least the target; that boundary is also its insertion position.",
+  "phases": [
+    "calc_mid",
+    "check_greater",
+    "check_less",
+    "check_target",
+    "done",
+    "found",
+    "init",
+    "update_left",
+    "update_right",
+    "while_check"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The insertion point may be zero or the array length when the target lies outside all values."
+  ],
+  "checks": [
+    {
+      "condition": "nums[mid] == target",
+      "outcome": "return mid"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem35/index.jsx",
+    "src/problems/Problem35/SearchInsertPositionVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "number": "275",
+  "title": "H-Index II",
+  "goal": "Find H-Index in sorted array.",
+  "strategy": "Binary-search the sorted citation array for the earliest position whose citation count supports the number of papers to its right.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "No qualifying position means h-index zero; the count of qualifying papers, not the citation value, defines h."
+  ],
+  "checks": [
+    {
+      "condition": "citations[middle] == papers",
+      "outcome": "return papers"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem275/index.jsx",
+    "src/problems/Problem275/Problem275Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "513",
+  "title": "Find Bottom Left Tree Value",
+  "goal": "Solve Find Bottom Left Tree Value: Find the leftmost value in the bottom row of a binary tree.",
+  "strategy": "Find the leftmost value in the bottom row of a binary tree.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return None"
+    }
+  ],
+  "inputRules": [
+    "arr must be an array"
+  ],
+  "source": [
+    "src/problems/Problem513/index.jsx",
+    "src/problems/Problem513/FindBottomLeftTreeValueVisualizer.jsx"
+  ]
+}

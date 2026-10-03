@@ -1,0 +1,28 @@
+{
+  "number": "153",
+  "title": "Find Minimum in Rotated Sorted Array",
+  "goal": "Solve Find Minimum in Rotated Sorted Array: Binary search: if mid > right the minimum is in the right half, otherwise in the left.",
+  "strategy": "Binary search: if mid > right the minimum is in the right half, otherwise in the left.",
+  "phases": [
+    "init",
+    "loop",
+    "calc_mid",
+    "go_right",
+    "go_left",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The array may already be sorted; comparing against the right boundary still retains the minimum."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be JSON array of integers",
+    "Need at least 1 element",
+    "Max 14 elements for clarity"
+  ],
+  "source": [
+    "src/problems/Problem153/index.jsx",
+    "src/problems/Problem153/FindMinRotatedVisualizer.jsx"
+  ]
+}

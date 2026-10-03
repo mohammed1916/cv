@@ -1,0 +1,25 @@
+{
+  "number": "300",
+  "title": "Longest Increasing Subsequence",
+  "goal": "Solve Longest Increasing Subsequence: Patience sorting with binary search on a tails array to maintain O(n log n) time.",
+  "strategy": "Patience sorting with binary search on a tails array to maintain O(n log n) time.",
+  "phases": [
+    "done",
+    "init",
+    "outer",
+    "check"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Strictly increasing subsequences cannot extend with an equal value; replacing a tail need not mean that tail list itself is the final witness."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "Max 12 elements for clarity"
+  ],
+  "source": [
+    "src/problems/Problem300/index.jsx",
+    "src/problems/Problem300/LongestIncreasingSubsequenceVisualizer.jsx"
+  ]
+}

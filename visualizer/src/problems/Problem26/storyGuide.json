@@ -1,0 +1,26 @@
+{
+  "number": "26",
+  "title": "Remove Duplicates from Sorted Array",
+  "goal": "Solve Remove Duplicates from Sorted Array: Use read/write pointers to compact unique values in-place and return the new length.",
+  "strategy": "Use read/write pointers to compact unique values in-place and return the new length.",
+  "phases": [
+    "check",
+    "duplicate",
+    "init",
+    "new",
+    "write",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only the compacted prefix is the result; equal adjacent values must not advance the write position."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem26/index.jsx",
+    "src/problems/Problem26/RemoveDuplicatesVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "number": "197",
+  "title": "Rising Temperature",
+  "goal": "Solve Rising Temperature: SQL query to find dates with temperature rise vs previous day.",
+  "strategy": "SQL query to find dates with temperature rise vs previous day.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Compare consecutive calendar dates, not simply consecutive stored rows when a date is missing."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem197/index.jsx",
+    "src/problems/Problem197/RisingTemperatureVisualizer.jsx"
+  ]
+}

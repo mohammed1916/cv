@@ -1,0 +1,39 @@
+{
+  "number": "358",
+  "title": "Rearrange String k Distance Apart",
+  "goal": "Schedule frequent available characters while keeping recently used characters in cooldown until their required separation has passed.",
+  "strategy": "Schedule the most frequent available character while holding recently used characters out until their separation requirement expires.",
+  "phases": [
+    "cooldown_ready",
+    "cooldown_set",
+    "done",
+    "fill_gap",
+    "impossible",
+    "init",
+    "placement",
+    "ready"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "If unfinished characters exist but none is eligible, the requested spacing is impossible."
+  ],
+  "checks": [
+    {
+      "condition": "k == 0",
+      "outcome": "return s"
+    },
+    {
+      "condition": "(max_freq - 1) * k + 1 > len(s)",
+      "outcome": "return \"\"  # impossible"
+    },
+    {
+      "condition": "not queue",
+      "outcome": "return \"\""
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem358/index.jsx",
+    "src/problems/Problem358/Problem358Visualizer.jsx"
+  ]
+}

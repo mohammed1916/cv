@@ -1,1 +1,5 @@
-export { default } from "./DesignTic-Tac-ToeVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./DesignTic-Tac-ToeVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

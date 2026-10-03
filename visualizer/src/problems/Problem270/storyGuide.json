@@ -1,0 +1,19 @@
+{
+  "number": "270",
+  "title": "Closest Binary Search Tree Value",
+  "goal": "Solve Closest Binary Search Tree Value: Find BST value closest to target.",
+  "strategy": "Find BST value closest to target.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The target need not be stored in the BST; retain the closest candidate before following the next search branch."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem270/index.jsx",
+    "src/problems/Problem270/Problem270Visualizer.jsx"
+  ]
+}

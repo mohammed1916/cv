@@ -376,7 +376,7 @@ function AddSearchWordsVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
+            <CodeTracePanel step={currentStepData} code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls

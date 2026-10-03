@@ -1,0 +1,31 @@
+{
+  "number": "523",
+  "title": "Continuous Subarray Sum",
+  "goal": "Solve Continuous Subarray Sum: Check if subarray of size >= 2 exists with sum divisible by k.",
+  "strategy": "Check if subarray of size >= 2 exists with sum divisible by k.",
+  "phases": [
+    "init",
+    "loop",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "nums[i] == 0 and nums[i + 1] == 0",
+      "outcome": "return True"
+    },
+    {
+      "condition": "mod in sumMod and i - sumMod[mod] >= 2",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array of numbers, e.g. [23,2,4,6,13]",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem523/index.jsx",
+    "src/problems/Problem523/ContinuousSubarraySumVisualizer.jsx"
+  ]
+}

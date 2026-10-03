@@ -1,0 +1,35 @@
+{
+  "number": "457",
+  "title": "Circular Array Loop",
+  "goal": "Solve Circular Array Loop: Follow circular jumps while requiring one consistent direction, and distinguish a genuine multi-index cycle from a self-loop.",
+  "strategy": "Follow circular jumps while requiring one consistent direction, and distinguish a genuine multi-index cycle from a self-loop.",
+  "phases": [
+    "cycle_detected",
+    "direction_change",
+    "done",
+    "invalid_cycle",
+    "moving",
+    "start",
+    "start_iteration",
+    "valid_cycle"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Mixed directions invalidate a cycle; returning to the same index in one jump does not qualify."
+  ],
+  "checks": [
+    {
+      "condition": "slow == i",
+      "outcome": "return True"
+    },
+    {
+      "condition": "(nums[slow] > 0) != (nums[i] > 0)",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem457/index.jsx",
+    "src/problems/Problem457/Problem457Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "372",
+  "title": "Super Power",
+  "goal": "Solve Super Power: Process exponent digits while reducing intermediate powers modulo 1337, avoiding construction of the enormous exponent.",
+  "strategy": "Process exponent digits while reducing intermediate powers modulo 1337, avoiding construction of the enormous exponent.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A zero exponent digit still shifts the preceding exponent by a factor of ten."
+  ],
+  "checks": [],
+  "inputRules": [
+    "base must be a positive integer",
+    "exponents must be a non-empty array of digits",
+    "exponents is limited to 12 digits in this visualizer",
+    "each exponent entry must be a single digit 0-9"
+  ],
+  "source": [
+    "src/problems/Problem372/index.jsx",
+    "src/problems/Problem372/Problem372Visualizer.jsx"
+  ]
+}

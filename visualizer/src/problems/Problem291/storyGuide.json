@@ -1,0 +1,19 @@
+{
+  "number": "291",
+  "title": "Word Pattern II",
+  "goal": "Solve Word Pattern II: Match pattern with multiple character mappings.",
+  "strategy": "Match pattern with multiple character mappings.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The character-to-substring mapping is bijective: different pattern characters cannot share a substring."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem291/index.jsx",
+    "src/problems/Problem291/Problem291Visualizer.jsx"
+  ]
+}

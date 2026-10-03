@@ -1,0 +1,28 @@
+{
+  "number": "205",
+  "title": "Isomorphic Strings",
+  "goal": "Solve Isomorphic Strings: Check if two strings are isomorphic with character mapping.",
+  "strategy": "Check if two strings are isomorphic with character mapping.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(s) != len(t)",
+      "outcome": "return False"
+    },
+    {
+      "condition": "s_map[c1] != c2",
+      "outcome": "return False"
+    },
+    {
+      "condition": "t_map[c2] != c1",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem205/index.jsx",
+    "src/problems/Problem205/IsomorphicStringsVisualizer.jsx"
+  ]
+}

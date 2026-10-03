@@ -1,0 +1,31 @@
+{
+  "number": "3896",
+  "title": "Minimum Operations to Transform Array into Alternating Prime",
+  "goal": "Solve Minimum Operations to Transform Array into Alternating Prime: Classify index requirements, choose nearest allowed values, and accumulate independently optimal increments.",
+  "strategy": "Classify index requirements, choose nearest allowed values, and accumulate independently optimal increments.",
+  "phases": [
+    "start",
+    "classify",
+    "choose",
+    "apply",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build sieve and next-valid-value tables.",
+    "classify": "Even indices need prime; odd indices need non-prime.",
+    "choose": "Choose the first valid value reachable by increments.",
+    "apply": "Apply the exact value difference to this position.",
+    "done": "Sum the independent minimum costs."
+  },
+  "edgeCases": [
+    "Even indices require prime values and odd indices non-prime values; only increments are allowed, and one is non-prime."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter 1–100,000 positive integers, each at most 100,000."
+  ],
+  "source": [
+    "src/problems/Problem3896/index.jsx",
+    "src/problems/Problem3896/algorithm.js"
+  ]
+}

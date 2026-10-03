@@ -1,0 +1,25 @@
+{
+  "number": "405",
+  "title": "Convert Number to Hex",
+  "goal": "Solve Convert Number to Hex: Convert a non-negative integer to its hexadecimal representation.",
+  "strategy": "Convert a non-negative integer to its hexadecimal representation.",
+  "phases": [
+    "done",
+    "init",
+    "negative_handling",
+    "extract_digit",
+    "shift"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Zero needs an explicit digit; negative values use the specified 32-bit two’s-complement representation."
+  ],
+  "checks": [],
+  "inputRules": [
+    "num must be a number"
+  ],
+  "source": [
+    "src/problems/Problem405/index.jsx",
+    "src/problems/Problem405/Problem405Visualizer.jsx"
+  ]
+}

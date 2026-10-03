@@ -1,0 +1,28 @@
+{
+  "number": "20",
+  "title": "Valid Parentheses",
+  "goal": "Solve Valid Parentheses: Validate balanced parentheses using a stack to achieve O(n) time.",
+  "strategy": "Validate balanced parentheses using a stack to achieve O(n) time.",
+  "phases": [
+    "init",
+    "check",
+    "is_closing",
+    "is_opening",
+    "match",
+    "invalid",
+    "valid"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not stack or stack[-1] != pairs[char]",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem20/index.jsx",
+    "src/problems/Problem20/ValidParenthesesVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "524",
+  "title": "Longest Word in Dictionary through Deleting Letters",
+  "goal": "Solve Longest Word in Dictionary through Deleting Letters: Find the longest word in dictionary that can be formed by deleting letters from string.",
+  "strategy": "Find the longest word in dictionary that can be formed by deleting letters from string.",
+  "phases": [
+    "init",
+    "loop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Candidates must be subsequences, not substrings; equal maximum lengths use the stated lexicographic tie-break."
+  ],
+  "checks": [],
+  "inputRules": [
+    "dictionary must be an array of strings, e.g. [\"ale\",\"apple\"]"
+  ],
+  "source": [
+    "src/problems/Problem524/index.jsx",
+    "src/problems/Problem524/LongestWordDictionaryVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "number": "429",
+  "title": "N-ary Tree Level Order Traversal",
+  "goal": "Solve N-ary Tree Level Order Traversal: Process one queue layer at a time so each output list contains exactly one tree depth.",
+  "strategy": "Process one queue layer at a time so each output list contains exactly one tree depth.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An empty root has no levels; a level can contain any number of children."
+  ],
+  "checks": [],
+  "inputRules": [
+    "root must be an array"
+  ],
+  "source": [
+    "src/problems/Problem429/index.jsx",
+    "src/problems/Problem429/Problem429Visualizer.jsx"
+  ]
+}

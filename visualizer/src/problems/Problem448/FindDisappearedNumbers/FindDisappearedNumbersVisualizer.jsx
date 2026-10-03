@@ -248,7 +248,7 @@ export default function FindDisappearedNumbersVisualizer() {
     </div>
     const codePanel = <>
       <div className="fdn-panel"><div className="fdn-head">Status</div><div className="fdn-status">{step.message}</div></div>
-      <CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
+      <CodeTracePanel step={step} code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
     </>
     return (
         <>

@@ -1,0 +1,23 @@
+{
+  "number": "253",
+  "title": "Meeting Rooms II",
+  "goal": "Solve Meeting Rooms II: Find minimum conference rooms needed for all meetings.",
+  "strategy": "Find minimum conference rooms needed for all meetings.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A room can be reused when a meeting ends exactly as another begins; the peak concurrent count determines capacity."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem253/index.jsx",
+    "src/problems/Problem253/Problem253Visualizer.jsx"
+  ]
+}

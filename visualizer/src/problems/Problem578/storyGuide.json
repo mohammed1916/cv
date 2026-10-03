@@ -1,0 +1,28 @@
+{
+  "number": "578",
+  "title": "Get Highest Answer Rate Question",
+  "goal": "Solve Get Highest Answer Rate Question: Find the question with the highest answer rate by aggregating submission data",
+  "strategy": "Find the question with the highest answer rate by aggregating submission data",
+  "phases": [
+    "load_questions",
+    "load_answers",
+    "join_data",
+    "aggregate",
+    "calculate_rate",
+    "find_highest",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Answer rate needs both answers and shows; a zero-show denominator cannot be treated as an ordinary ratio."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Questions must be array",
+    "Answers must be array"
+  ],
+  "source": [
+    "src/problems/Problem578/index.jsx",
+    "src/problems/Problem578/HighestAnswerRateVisualizer.jsx"
+  ]
+}

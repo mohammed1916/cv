@@ -1,0 +1,21 @@
+{
+  "number": "180",
+  "title": "Consecutive Numbers",
+  "goal": "Solve Consecutive Numbers: SQL query to find consecutive numbers appearing at least 3 times.",
+  "strategy": "SQL query to find consecutive numbers appearing at least 3 times.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A value must repeat in consecutive records, not merely appear three times anywhere."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem180/index.jsx",
+    "src/problems/Problem180/ConsecutiveNumbersVisualizer.jsx"
+  ]
+}

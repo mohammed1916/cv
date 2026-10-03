@@ -1,0 +1,17 @@
+{
+  "number": "423",
+  "title": "Reconstruct Original Digits from English",
+  "goal": "Solve Reconstruct Original Digits from English: Use distinguishing letter counts to recover digit frequencies, subtracting letters consumed by each identified digit.",
+  "strategy": "Use distinguishing letter counts to recover digit frequencies, subtracting letters consumed by each identified digit.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated digits contribute repeated letters; shared letters become useful only after earlier digit counts are removed."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem423/index.jsx",
+    "src/problems/Problem423/Problem423Visualizer.jsx"
+  ]
+}

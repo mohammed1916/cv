@@ -1,0 +1,22 @@
+{
+  "number": "473",
+  "title": "Matchsticks to Square",
+  "goal": "Solve Matchsticks to Square: Determine if matchsticks can form a square by distributing them equally to 4 sides.",
+  "strategy": "Determine if matchsticks can form a square by distributing them equally to 4 sides.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "sum(matchsticks)%4",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem473/index.jsx",
+    "src/problems/Problem473/Problem473Visualizer.jsx"
+  ]
+}

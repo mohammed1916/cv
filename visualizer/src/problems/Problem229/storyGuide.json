@@ -1,0 +1,21 @@
+{
+  "number": "229",
+  "title": "Majority Element II",
+  "goal": "Solve Majority Element II: Find all elements appearing more than n/3 times using Boyer-Moore voting.",
+  "strategy": "Find all elements appearing more than n/3 times using Boyer-Moore voting.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "There can be at most two values occurring more than n/3 times; candidate voting must be followed by frequency verification."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem229/index.jsx",
+    "src/problems/Problem229/MajorityElementIi.jsx"
+  ]
+}

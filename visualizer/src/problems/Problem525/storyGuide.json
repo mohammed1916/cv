@@ -1,0 +1,23 @@
+{
+  "number": "525",
+  "title": "Contiguous Array",
+  "goal": "Solve Contiguous Array: Find the maximum length of contiguous subarray with equal number of 0s and 1s using hash map and running count.",
+  "strategy": "Find the maximum length of contiguous subarray with equal number of 0s and 1s using hash map and running count.",
+  "phases": [
+    "init",
+    "loop",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Treat zeros as minus one so equal prefix balances delimit equal-count subarrays; keep the earliest index for maximum length."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array of 0s and 1s, e.g. [0,1,0]"
+  ],
+  "source": [
+    "src/problems/Problem525/index.jsx",
+    "src/problems/Problem525/ContiguousArrayVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "541",
+  "title": "Reverse String II",
+  "goal": "Solve Reverse String II: Reverse every first k characters in the string.",
+  "strategy": "Reverse every first k characters in the string.",
+  "phases": [
+    "init",
+    "process",
+    "reverse",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "In a final partial block, reverse up to k available characters; leave the remainder of a 2k block unchanged."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem541/index.jsx",
+    "src/problems/Problem541/ReverseStringIIVisualizer.jsx"
+  ]
+}

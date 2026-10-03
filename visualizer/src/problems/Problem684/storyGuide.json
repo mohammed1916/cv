@@ -1,0 +1,31 @@
+{
+  "number": "684",
+  "title": "Redundant Connection",
+  "goal": "Solve Redundant Connection: Use Union-Find to detect the first edge that forms a cycle in an undirected graph.",
+  "strategy": "Use Union-Find to detect the first edge that forms a cycle in an undirected graph.",
+  "phases": [
+    "init",
+    "check",
+    "done",
+    "union"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "ra == rb",
+      "outcome": "return False"
+    },
+    {
+      "condition": "not union(u, v)",
+      "outcome": "return [u, v]"
+    }
+  ],
+  "inputRules": [
+    "edges must be 2D array"
+  ],
+  "source": [
+    "src/problems/Problem684/index.jsx",
+    "src/problems/Problem684/RedundantConnectionVisualizer.jsx"
+  ]
+}

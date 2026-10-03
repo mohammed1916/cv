@@ -1,0 +1,23 @@
+{
+  "number": "348",
+  "title": "Design Tic-Tac-Toe",
+  "goal": "Solve Design Tic-Tac-Toe: Design Tic-Tac-Toe game with efficient winner detection.",
+  "strategy": "Design Tic-Tac-Toe game with efficient winner detection.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A winning line must belong to one player; moves are assumed to be legal and placed on previously empty cells."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use n and moves as [row, col, player]."
+  ],
+  "source": [
+    "src/problems/Problem348/index.jsx",
+    "src/problems/Problem348/DesignTic-Tac-ToeVisualizer.jsx"
+  ]
+}

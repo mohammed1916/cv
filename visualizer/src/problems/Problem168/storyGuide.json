@@ -1,0 +1,21 @@
+{
+  "number": "168",
+  "title": "Excel Sheet Column Title",
+  "goal": "Solve Excel Sheet Column Title: Convert column number to letter representation (1->A, 26->Z, 27->AA).",
+  "strategy": "Convert column number to letter representation (1->A, 26->Z, 27->AA).",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Column names are one-based: 26 is Z and 27 is AA. Subtract one before taking a base-26 remainder."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem168/index.jsx",
+    "src/problems/Problem168/ExcelSheetColumnTitleVisualizer.jsx"
+  ]
+}

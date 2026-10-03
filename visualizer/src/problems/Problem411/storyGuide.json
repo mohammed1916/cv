@@ -1,0 +1,42 @@
+{
+  "number": "411",
+  "title": "Minimum Unique Word Abbreviation",
+  "goal": "Solve Minimum Unique Word Abbreviation: Find the shortest unique abbreviation for a word that does not match any dictionary words.",
+  "strategy": "Find the shortest unique abbreviation for a word that does not match any dictionary words.",
+  "phases": [
+    "check_abbr",
+    "done",
+    "found_unique",
+    "generate_len",
+    "init",
+    "match_check",
+    "not_unique"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(word) != len(target)",
+      "outcome": "continue"
+    },
+    {
+      "condition": "match and j == len(word)",
+      "outcome": "return False"
+    },
+    {
+      "condition": "idx == len(target)",
+      "outcome": "return abbr if isUnique(abbr) else None"
+    },
+    {
+      "condition": "res",
+      "outcome": "return res"
+    }
+  ],
+  "inputRules": [
+    "dictionary must be an array"
+  ],
+  "source": [
+    "src/problems/Problem411/index.jsx",
+    "src/problems/Problem411/Problem411Visualizer.jsx"
+  ]
+}

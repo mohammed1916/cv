@@ -1,0 +1,26 @@
+{
+  "number": "479",
+  "title": "Largest Palindrome Product",
+  "goal": "Solve Largest Palindrome Product: Find the largest palindromic number that is a product of two n-digit numbers.",
+  "strategy": "Find the largest palindromic number that is a product of two n-digit numbers.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n==1",
+      "outcome": "return 9"
+    },
+    {
+      "condition": "i*i<product",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem479/index.jsx",
+    "src/problems/Problem479/Problem479Visualizer.jsx"
+  ]
+}

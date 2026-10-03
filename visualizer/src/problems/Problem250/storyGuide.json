@@ -1,0 +1,21 @@
+{
+  "number": "250",
+  "title": "Count Univalue Subtrees",
+  "goal": "Solve Count Univalue Subtrees: Count subtrees where all nodes have the same value using DFS.",
+  "strategy": "Count subtrees where all nodes have the same value using DFS.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal values at a parent and child are insufficient if a deeper descendant breaks uniformity; both child subtrees must already qualify."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem250/index.jsx",
+    "src/problems/Problem250/CountUnivalueSubtrees.jsx"
+  ]
+}

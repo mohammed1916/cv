@@ -1,0 +1,20 @@
+{
+  "number": "97",
+  "title": "Interleaving String",
+  "goal": "Solve Interleaving String: 2D DP: dp[i][j] is true if s3[0..i+j-1] can be formed by interleaving s1[0..i-1] and s2[0..j-1].",
+  "strategy": "2D DP: dp[i][j] is true if s3[0..i+j-1] can be formed by interleaving s1[0..i-1] and s2[0..j-1].",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "m + n != len(s3)",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem97/index.jsx",
+    "src/problems/Problem97/InterleavingStringVisualizer.jsx"
+  ]
+}

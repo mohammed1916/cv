@@ -1,0 +1,24 @@
+{
+  "number": "514",
+  "title": "Freedom Trail",
+  "goal": "Solve Freedom Trail: Find minimum steps to spell a keyword on a rotational lock dial.",
+  "strategy": "Find minimum steps to spell a keyword on a rotational lock dial.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "keyIdx == len(key)",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "(pos, keyIdx) in memo",
+      "outcome": "return memo[(pos, keyIdx)]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem514/index.jsx",
+    "src/problems/Problem514/FreedomTrailVisualizer.jsx"
+  ]
+}

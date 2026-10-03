@@ -1,0 +1,20 @@
+{
+  "number": "480",
+  "title": "Sliding Window Median",
+  "goal": "Solve Sliding Window Median: Find the median of each sliding window using two heaps.",
+  "strategy": "Find the median of each sliding window using two heaps.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Expired values can be buried inside heaps; lazy deletion must preserve heap sizes and expose valid middle values."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem480/index.jsx",
+    "src/problems/Problem480/Problem480Visualizer.jsx"
+  ]
+}

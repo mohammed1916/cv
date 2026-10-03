@@ -1,1 +1,5 @@
-export { default } from "./EvalRPNVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./EvalRPNVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

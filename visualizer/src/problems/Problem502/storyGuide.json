@@ -1,0 +1,25 @@
+{
+  "number": "502",
+  "title": "IPO",
+  "goal": "Solve IPO: Sort projects by capital; greedily push affordable profits into a max-heap and pick the best each round.",
+  "strategy": "Sort projects by capital; greedily push affordable profits into a max-heap and pick the best each round.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not available",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "k must be a number",
+    "w must be a number",
+    "profits must be an array",
+    "capital must be an array"
+  ],
+  "source": [
+    "src/problems/Problem502/index.jsx",
+    "src/problems/Problem502/IPOVisualizer.jsx"
+  ]
+}

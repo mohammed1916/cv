@@ -1,0 +1,26 @@
+{
+  "number": "84",
+  "title": "Largest Rectangle in Histogram",
+  "goal": "Solve Largest Rectangle in Histogram: Keep increasing bar heights on a stack; a shorter bar closes rectangles whose maximal right boundary has now been found.",
+  "strategy": "Keep increasing bar heights on a stack; a shorter bar closes rectangles whose maximal right boundary has now been found.",
+  "phases": [
+    "done",
+    "finalize",
+    "init",
+    "iterate",
+    "pop",
+    "push"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Remaining bars need a final flush; equal heights and zero-height bars must not create negative widths."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem84/index.jsx",
+    "src/problems/Problem84/LargestRectangleInHistogramVisualizer.jsx"
+  ]
+}

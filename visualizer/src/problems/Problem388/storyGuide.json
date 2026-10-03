@@ -1,0 +1,25 @@
+{
+  "number": "388",
+  "title": "Longest Absolute File Path",
+  "goal": "Solve Longest Absolute File Path: Find longest file path in directory structure using stack-based parsing.",
+  "strategy": "Find longest file path in directory structure using stack-based parsing.",
+  "phases": [
+    "complete",
+    "directory",
+    "file",
+    "init",
+    "parse",
+    "process",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Directory names contribute to later path lengths, but only file paths compete for the answer; tab depth determines the parent."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem388/index.jsx",
+    "src/problems/Problem388/Problem388Visualizer.jsx"
+  ]
+}

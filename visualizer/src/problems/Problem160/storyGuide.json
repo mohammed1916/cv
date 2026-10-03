@@ -1,0 +1,22 @@
+{
+  "number": "160",
+  "title": "Intersection of Two Linked Lists",
+  "goal": "Solve Intersection of Two Linked Lists: Two pointers that swap to the other list's head on reaching null — they meet at the intersection after equal total distance.",
+  "strategy": "Two pointers that swap to the other list's head on reaching null — they meet at the intersection after equal total distance.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Intersection means the same node object, not merely equal values; two disjoint lists eventually align at null."
+  ],
+  "checks": [],
+  "inputRules": [
+    "listA must be an array",
+    "listB must be an array",
+    "shared must be an array",
+    "intersectVal must be a number"
+  ],
+  "source": [
+    "src/problems/Problem160/index.jsx",
+    "src/problems/Problem160/IntersectionTwoLinkedListsVisualizer.jsx"
+  ]
+}

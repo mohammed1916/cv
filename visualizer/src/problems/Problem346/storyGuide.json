@@ -1,0 +1,24 @@
+{
+  "number": "346",
+  "title": "Moving Average from Data Stream",
+  "goal": "Solve Moving Average from Data Stream: Calculate moving average from data stream.",
+  "strategy": "Calculate moving average from data stream.",
+  "phases": [
+    "init",
+    "enqueue",
+    "evict",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Before the window fills, divide by the number of values actually seen, not the maximum window size."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"size\": 3, \"stream\": [1, 10, 3, 5] }."
+  ],
+  "source": [
+    "src/problems/Problem346/index.jsx",
+    "src/problems/Problem346/MovingAveragefromDataStreamVisualizer.jsx"
+  ]
+}

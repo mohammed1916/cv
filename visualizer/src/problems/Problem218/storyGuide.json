@@ -1,0 +1,19 @@
+{
+  "number": "218",
+  "title": "The Skyline Problem",
+  "goal": "Solve The Skyline Problem: Return key points in a skyline formed by buildings.",
+  "strategy": "Return key points in a skyline formed by buildings.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Process events at the same x coordinate together so temporary height changes do not create spurious skyline points."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter buildings as [[left,right,height], …] with left < right and positive height."
+  ],
+  "source": [
+    "src/problems/Problem218/index.jsx",
+    "src/problems/Problem218/SkylineProblemVisualizer.jsx"
+  ]
+}

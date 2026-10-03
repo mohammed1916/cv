@@ -1,1 +1,5 @@
-export { default } from "./PowerofFourVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./PowerofFourVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

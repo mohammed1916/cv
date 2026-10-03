@@ -1,0 +1,26 @@
+{
+  "number": "333",
+  "title": "Largest BST Subtree",
+  "goal": "Solve Largest BST Subtree: Find largest binary search tree subtree.",
+  "strategy": "Find largest binary search tree subtree.",
+  "phases": [
+    "done",
+    "init",
+    "visit",
+    "valid",
+    "invalid"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return (True, inf, -inf, 0)"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem333/index.jsx",
+    "src/problems/Problem333/LargestBSTSubtreeVisualizer.jsx"
+  ]
+}

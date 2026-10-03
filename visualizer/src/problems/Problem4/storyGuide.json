@@ -1,0 +1,31 @@
+{
+  "number": "4",
+  "title": "Median of Two Sorted Arrays",
+  "goal": "Solve Median of Two Sorted Arrays: Find median of two sorted arrays. Binary search on the smaller array’s partition point.",
+  "strategy": "Find median of two sorted arrays. Binary search on the smaller array’s partition point.",
+  "phases": [
+    "init",
+    "partition",
+    "evaluate",
+    "found",
+    "move_left",
+    "move_right",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "(m + n) % 2 == 0",
+      "outcome": "return (max(left1, left2) + min(right1, right2)) / 2"
+    }
+  ],
+  "inputRules": [
+    "Input must be an array.",
+    "Arrays may only contain numbers."
+  ],
+  "source": [
+    "src/problems/Problem4/index.jsx",
+    "src/problems/Problem4/MedianOfTwoSortedArraysVisualizer.jsx"
+  ]
+}

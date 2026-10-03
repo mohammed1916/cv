@@ -1,0 +1,21 @@
+{
+  "number": "175",
+  "title": "Combine Two Tables",
+  "goal": "Solve Combine Two Tables: SQL query to combine Person and Address tables with LEFT JOIN.",
+  "strategy": "SQL query to combine Person and Address tables with LEFT JOIN.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A person with no address must remain in a LEFT JOIN result with null address columns."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem175/index.jsx",
+    "src/problems/Problem175/CombineTwoTablesVisualizer.jsx"
+  ]
+}

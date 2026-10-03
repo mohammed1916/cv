@@ -1,0 +1,23 @@
+{
+  "number": "280",
+  "title": "Wiggle Sort",
+  "goal": "Solve Wiggle Sort: Rearrange array in wiggle fashion.",
+  "strategy": "Rearrange array in wiggle fashion.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Adjacent inequalities alternate; equal values can satisfy non-strict wiggle ordering."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem280/index.jsx",
+    "src/problems/Problem280/Problem280Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "number": "254",
+  "title": "Factor Combinations",
+  "goal": "Solve Factor Combinations: Find all combinations of factors of a number.",
+  "strategy": "Find all combinations of factors of a number.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Exclude the trivial factorization containing only n, and keep factors nondecreasing to avoid reordered duplicates."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem254/index.jsx",
+    "src/problems/Problem254/Problem254Visualizer.jsx"
+  ]
+}

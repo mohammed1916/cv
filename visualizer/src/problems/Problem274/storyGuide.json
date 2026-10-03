@@ -1,0 +1,26 @@
+{
+  "number": "274",
+  "title": "H-Index",
+  "goal": "Solve H-Index: Find H-Index in citation counts.",
+  "strategy": "Find H-Index in citation counts.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "count < index",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem274/index.jsx",
+    "src/problems/Problem274/Problem274Visualizer.jsx"
+  ]
+}

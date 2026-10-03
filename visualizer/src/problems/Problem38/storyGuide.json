@@ -1,0 +1,23 @@
+{
+  "number": "38",
+  "title": "Count and Say",
+  "goal": "Solve Count and Say: Generate the next sequence by counting consecutive digits.",
+  "strategy": "Generate the next sequence by counting consecutive digits.",
+  "phases": [
+    "init",
+    "iteration",
+    "count_digit",
+    "append",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each term describes runs in the preceding term, not counts across the entire string; the initial term is one."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem38/index.jsx",
+    "src/problems/Problem38/CountAndSayVisualizer.jsx"
+  ]
+}

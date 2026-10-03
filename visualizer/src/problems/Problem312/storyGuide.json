@@ -1,0 +1,23 @@
+{
+  "number": "312",
+  "title": "Burst Balloons",
+  "goal": "Solve Burst Balloons: Interval DP: choose which balloon to burst last in each subrange to maximize coins.",
+  "strategy": "Interval DP: choose which balloon to burst last in each subrange to maximize coins.",
+  "phases": [
+    "done",
+    "fill",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Choose the last balloon inside an interval so its two surviving outside neighbors are known; choosing the first does not separate subproblems."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem312/index.jsx",
+    "src/problems/Problem312/BurstBalloonsVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "number": "466",
+  "title": "Count The Repetitions",
+  "goal": "Solve Count The Repetitions: Count how many times s2 appears as a substring in an infinite repetition of s1.",
+  "strategy": "Count how many times s2 appears as a substring in an infinite repetition of s1.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Partial matches carry across repeated source blocks; an impossible required character prevents completing any target copy."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem466/index.jsx",
+    "src/problems/Problem466/Problem466Visualizer.jsx"
+  ]
+}

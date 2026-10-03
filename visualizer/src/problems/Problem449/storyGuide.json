@@ -1,0 +1,26 @@
+{
+  "number": "449",
+  "title": "Serialize and Deserialize BST",
+  "goal": "Solve Serialize and Deserialize BST: Serialize BST order information and rebuild nodes within value bounds so the BST property restores structure.",
+  "strategy": "Serialize BST order information and rebuild nodes within value bounds so the BST property restores structure.",
+  "phases": [
+    "deserialize_start",
+    "done",
+    "null_node",
+    "process_node",
+    "read_node",
+    "reading",
+    "serialized",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An empty tree must round-trip; a value outside the current subtree bounds belongs to a later subtree."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem449/index.jsx",
+    "src/problems/Problem449/Problem449Visualizer.jsx"
+  ]
+}

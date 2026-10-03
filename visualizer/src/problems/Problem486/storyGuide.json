@@ -1,0 +1,22 @@
+{
+  "number": "486",
+  "title": "Predict the Winner",
+  "goal": "Solve Predict the Winner: Determine if player 1 can win a game where players take turns picking numbers from array ends.",
+  "strategy": "Determine if player 1 can win a game where players take turns picking numbers from array ends.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "left == right",
+      "outcome": "return nums[left]"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem486/index.jsx",
+    "src/problems/Problem486/Problem486Visualizer.jsx"
+  ]
+}

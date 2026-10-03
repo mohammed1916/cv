@@ -1,0 +1,26 @@
+{
+  "number": "436",
+  "title": "Find Right Interval",
+  "goal": "Solve Find Right Interval: For each interval end, search ordered starts for the smallest start that is at least that end.",
+  "strategy": "For each interval end, search ordered starts for the smallest start that is at least that end.",
+  "phases": [
+    "binary_search",
+    "complete",
+    "extract_starts",
+    "found",
+    "init",
+    "search_start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "No eligible start means no right interval; an exact endpoint match is eligible."
+  ],
+  "checks": [],
+  "inputRules": [
+    "intervals must be an array"
+  ],
+  "source": [
+    "src/problems/Problem436/index.jsx",
+    "src/problems/Problem436/Problem436Visualizer.jsx"
+  ]
+}

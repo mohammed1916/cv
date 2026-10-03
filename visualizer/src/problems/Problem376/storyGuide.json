@@ -1,0 +1,24 @@
+{
+  "number": "376",
+  "title": "Wiggle Subsequence",
+  "goal": "Solve Wiggle Subsequence: Track the best subsequence ending with a rise and with a fall, extending only when a new difference changes direction.",
+  "strategy": "Track the best subsequence ending with a rise and with a fall, extending only when a new difference changes direction.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal adjacent values do not create a wiggle; either direction can start the sequence."
+  ],
+  "checks": [
+    {
+      "condition": "len(nums) <= 1",
+      "outcome": "return len(nums)"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem376/index.jsx",
+    "src/problems/Problem376/Problem376Visualizer.jsx"
+  ]
+}

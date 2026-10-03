@@ -1,0 +1,20 @@
+{
+  "number": "377",
+  "title": "Combination Sum IV",
+  "goal": "Solve Combination Sum IV: Count ordered constructions of each target sum by considering every allowed last number.",
+  "strategy": "Count ordered constructions of each target sum by considering every allowed last number.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Order matters: different orders of the same values are distinct constructions; positive values keep the recurrence well-founded."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem377/index.jsx",
+    "src/problems/Problem377/Problem377Visualizer.jsx"
+  ]
+}

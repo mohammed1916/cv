@@ -1,0 +1,21 @@
+{
+  "number": "240",
+  "title": "Search a 2D Matrix II",
+  "goal": "Solve Search a 2D Matrix II: Find a target efficiently in sorted rows and columns by starting at a corner.",
+  "strategy": "Find a target efficiently in sorted rows and columns by starting at a corner.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "From a sorted-matrix corner, each comparison removes one whole row or column. The target can be absent."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem240/index.jsx",
+    "src/problems/Problem240/SearchA2dMatrixIi.jsx"
+  ]
+}

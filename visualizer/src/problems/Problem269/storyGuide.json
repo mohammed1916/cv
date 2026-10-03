@@ -1,0 +1,23 @@
+{
+  "number": "269",
+  "title": "Alien Dictionary",
+  "goal": "Solve Alien Dictionary: Derive alien alphabet order from word list.",
+  "strategy": "Derive alien alphabet order from word list.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A longer word before its exact prefix makes the ordering invalid; a cycle also prevents an alphabet order."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem269/index.jsx",
+    "src/problems/Problem269/Problem269Visualizer.jsx"
+  ]
+}

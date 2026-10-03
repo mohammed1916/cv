@@ -1,0 +1,23 @@
+{
+  "number": "5",
+  "title": "Longest Palindromic Substring",
+  "goal": "Solve Longest Palindromic Substring: Find the longest palindromic substring. Bottom-up DP with O(n²) time & space.",
+  "strategy": "Find the longest palindromic substring. Bottom-up DP with O(n²) time & space.",
+  "phases": [
+    "init",
+    "check"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 0",
+      "outcome": "return \"\""
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem5/index.jsx",
+    "src/problems/Problem5/PalindromeVisualizer.jsx"
+  ]
+}

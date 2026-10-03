@@ -1,0 +1,30 @@
+{
+  "number": "570",
+  "title": "Managers with at Least 5 Direct Reports",
+  "goal": "Solve Managers with at Least 5 Direct Reports: Write a SQL query to report the names of all managers who have at least five direct reports, given an Employee table with a self-referencing managerId column.",
+  "strategy": "Write a SQL query to report the names of all managers who have at least five direct reports, given an Employee table with a self-referencing managerId column.",
+  "phases": [
+    "init",
+    "scan",
+    "group",
+    "having_pass",
+    "having_fail",
+    "join",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Count direct reports rather than all descendants in the management tree; the threshold is inclusive."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter at least one row: id,name,managerId",
+    "Keep the table to 40 rows or fewer",
+    "Employee ids must be unique"
+  ],
+  "source": [
+    "src/problems/Problem570/index.jsx",
+    "src/problems/Problem570/FiveDirectReportsVisualizer.jsx"
+  ]
+}

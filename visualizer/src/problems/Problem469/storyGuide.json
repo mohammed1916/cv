@@ -1,0 +1,19 @@
+{
+  "number": "469",
+  "title": "Convex Polygon",
+  "goal": "Solve Convex Polygon: Determine if a polygon is convex by checking cross products at each vertex.",
+  "strategy": "Determine if a polygon is convex by checking cross products at each vertex.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Consistent turn orientation is required around the polygon; collinear triples need handling without treating zero as an opposite turn."
+  ],
+  "checks": [],
+  "inputRules": [
+    "points must be an array"
+  ],
+  "source": [
+    "src/problems/Problem469/index.jsx",
+    "src/problems/Problem469/Problem469Visualizer.jsx"
+  ]
+}

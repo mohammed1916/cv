@@ -1,0 +1,22 @@
+{
+  "number": "58",
+  "title": "Length of Last Word",
+  "goal": "Solve Length of Last Word: Skip trailing spaces and count the final contiguous run of non-space characters.",
+  "strategy": "Skip trailing spaces and count the final contiguous run of non-space characters.",
+  "phases": [
+    "count",
+    "done",
+    "init",
+    "skip"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Trailing spaces are not part of the last word; earlier words do not affect its length."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem58/index.jsx",
+    "src/problems/Problem58/LengthOfLastWordVisualizer.jsx"
+  ]
+}

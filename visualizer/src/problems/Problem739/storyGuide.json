@@ -1,0 +1,25 @@
+{
+  "number": "739",
+  "title": "Daily Temperatures",
+  "goal": "Solve Daily Temperatures: Use a decreasing monotonic stack of indices to resolve the next warmer day in linear time.",
+  "strategy": "Use a decreasing monotonic stack of indices to resolve the next warmer day in linear time.",
+  "phases": [
+    "init",
+    "iterate",
+    "resolve",
+    "push",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An equal temperature is not warmer; unresolved days at the end keep zero waiting time."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem739/index.jsx",
+    "src/problems/Problem739/DailyTemperaturesVisualizer.jsx"
+  ]
+}

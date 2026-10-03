@@ -1,0 +1,30 @@
+{
+  "number": "437",
+  "title": "Path Sum III",
+  "goal": "Solve Path Sum III: Track prefix sums along the current root-to-node path; a prior prefix difference identifies each downward path with the target sum.",
+  "strategy": "Track prefix sums along the current root-to-node path; a prior prefix difference identifies each downward path with the target sum.",
+  "phases": [
+    "complete",
+    "found",
+    "init",
+    "visit"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Paths need not start at the root; prefix counts must be removed on backtracking so sibling paths are not mixed."
+  ],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "tree must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem437/index.jsx",
+    "src/problems/Problem437/Problem437Visualizer.jsx"
+  ]
+}

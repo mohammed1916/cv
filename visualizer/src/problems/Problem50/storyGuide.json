@@ -1,0 +1,31 @@
+{
+  "number": "50",
+  "title": "Pow(x, n)",
+  "goal": "Solve Pow(x, n): Compute x raised to power n efficiently using binary exponentiation.",
+  "strategy": "Compute x raised to power n efficiently using binary exponentiation.",
+  "phases": [
+    "base-case",
+    "recursion",
+    "multiplication"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 0",
+      "outcome": "return 1"
+    },
+    {
+      "condition": "n % 2 == 0",
+      "outcome": "return half * half"
+    }
+  ],
+  "inputRules": [
+    "x must be a number",
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem50/index.jsx",
+    "src/problems/Problem50/PowXNVisualizer.jsx"
+  ]
+}

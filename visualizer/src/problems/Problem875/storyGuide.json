@@ -1,0 +1,19 @@
+{
+  "number": "875",
+  "title": "Koko Eating Bananas",
+  "goal": "Solve Koko Eating Bananas: Find minimum eating speed using binary search.",
+  "strategy": "Find minimum eating speed using binary search.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each pile requires a ceiling division in hours; the minimum feasible integer speed is the first passing boundary."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use {\"piles\": positive integers, \"h\": integer at least the pile count}."
+  ],
+  "source": [
+    "src/problems/Problem875/index.jsx",
+    "src/problems/Problem875/KokoEatingBananasVisualizer.jsx"
+  ]
+}

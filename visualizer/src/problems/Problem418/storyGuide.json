@@ -1,0 +1,28 @@
+{
+  "number": "418",
+  "title": "Sentence Screen Fitting",
+  "goal": "Solve Sentence Screen Fitting: How many times sentence fits in rows of given width?",
+  "strategy": "How many times sentence fits in rows of given width?",
+  "phases": [
+    "add_word",
+    "done",
+    "init",
+    "init_screen",
+    "process_row",
+    "sentence_done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A word cannot be split across rows; a word wider than the screen prevents placing a complete sentence cycle."
+  ],
+  "checks": [],
+  "inputRules": [
+    "sentence must be an array",
+    "rows must be an array",
+    "cols must be an array"
+  ],
+  "source": [
+    "src/problems/Problem418/index.jsx",
+    "src/problems/Problem418/Problem418Visualizer.jsx"
+  ]
+}

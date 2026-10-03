@@ -1,0 +1,31 @@
+{
+  "number": "395",
+  "title": "Longest Substring with At Least K Repeating Characters",
+  "goal": "Solve Longest Substring with At Least K Repeating Characters: Find the longest substring where every character appears at least k times.",
+  "strategy": "Find the longest substring where every character appears at least k times.",
+  "phases": [
+    "count",
+    "done",
+    "init",
+    "invalid",
+    "recurse",
+    "sub_invalid",
+    "sub_valid",
+    "valid"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(s) < k",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "k must be a positive number"
+  ],
+  "source": [
+    "src/problems/Problem395/index.jsx",
+    "src/problems/Problem395/Problem395Visualizer.jsx"
+  ]
+}

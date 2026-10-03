@@ -1,0 +1,26 @@
+{
+  "number": "3",
+  "title": "Longest Substring Without Repeating Characters",
+  "goal": "Use a sliding window and a hash map to track characters and dynamically adjust the window size to find the longest substring without duplicates.",
+  "strategy": "Keep a window with no repeated character; move its left boundary past a conflicting occurrence before extending the answer.",
+  "phases": [
+    "init",
+    "check_right",
+    "check_collision",
+    "move_left",
+    "update_map",
+    "update_max",
+    "skip_max",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A previous occurrence outside the current window must not move the left boundary backward."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem3/index.jsx",
+    "src/problems/Problem3/LongestSubstringWithoutRepeatingVisualizer.jsx"
+  ]
+}

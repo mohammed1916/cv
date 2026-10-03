@@ -1,0 +1,23 @@
+{
+  "number": "560",
+  "title": "Subarray Sum Equals K",
+  "goal": "Solve Subarray Sum Equals K: Prefix sum with a hash map: count[prefixSum - k] gives the number of valid subarrays ending here.",
+  "strategy": "Prefix sum with a hash map: count[prefixSum - k] gives the number of valid subarrays ending here.",
+  "phases": [
+    "init",
+    "add",
+    "check",
+    "store",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Negative values invalidate a simple shrinking-window approach. Count all prior matching prefix sums, including the empty prefix."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem560/index.jsx",
+    "src/problems/Problem560/SubarraySumKVisualizer.jsx"
+  ]
+}

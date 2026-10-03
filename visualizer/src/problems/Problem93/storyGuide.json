@@ -1,0 +1,38 @@
+{
+  "number": "93",
+  "title": "Restore IP Addresses",
+  "goal": "Solve Restore IP Addresses: Use backtracking to partition string into 4 segments, each forming a valid IP octet (0-255, no leading zeros).",
+  "strategy": "Use backtracking to partition string into 4 segments, each forming a valid IP octet (0-255, no leading zeros).",
+  "phases": [
+    "backtrack_return",
+    "check_dots",
+    "check_valid",
+    "done",
+    "dots_complete",
+    "enter_backtrack",
+    "extra_chars",
+    "init",
+    "invalid_chars",
+    "invalid_length",
+    "no_valid_parts",
+    "recurse",
+    "return_complete",
+    "start_backtrack",
+    "try_part",
+    "valid_ip",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(s) > 12 or len(s) < 4",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem93/index.jsx",
+    "src/problems/Problem93/RestoreIPAddressesVisualizer.jsx"
+  ]
+}

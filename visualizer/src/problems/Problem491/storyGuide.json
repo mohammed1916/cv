@@ -1,0 +1,26 @@
+{
+  "number": "491",
+  "title": "Increasing Subsequences",
+  "goal": "Solve Increasing Subsequences: Find all increasing subsequences of length >= 2.",
+  "strategy": "Find all increasing subsequences of length >= 2.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "nums[i] in used",
+      "outcome": "continue"
+    },
+    {
+      "condition": "nums[i] < last",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem491/index.jsx",
+    "src/problems/Problem491/Problem491Visualizer.jsx"
+  ]
+}

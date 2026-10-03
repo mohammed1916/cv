@@ -1,0 +1,29 @@
+{
+  "number": "460",
+  "title": "LFU Cache",
+  "goal": "Solve LFU Cache: Three hash maps tracking key→value, key→freq, and freq→LRU list; O(1) get/put.",
+  "strategy": "Three hash maps tracking key→value, key→freq, and freq→LRU list; O(1) get/put.",
+  "phases": [
+    "done",
+    "hit",
+    "init",
+    "miss",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "key not in self.key_val",
+      "outcome": "return -1"
+    }
+  ],
+  "inputRules": [
+    "capacity must be a number",
+    "ops must be an array"
+  ],
+  "source": [
+    "src/problems/Problem460/index.jsx",
+    "src/problems/Problem460/LFUCacheVisualizer.jsx"
+  ]
+}

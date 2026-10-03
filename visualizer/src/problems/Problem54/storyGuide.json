@@ -1,0 +1,39 @@
+{
+  "number": "54",
+  "title": "Spiral Matrix",
+  "goal": "Solve Spiral Matrix: Traverse the top, right, bottom and left boundaries, shrinking the unvisited rectangle after each side.",
+  "strategy": "Traverse the top, right, bottom and left boundaries, shrinking the unvisited rectangle after each side.",
+  "phases": [
+    "check_left_right",
+    "check_top_bottom",
+    "check_while",
+    "done",
+    "init",
+    "start_down",
+    "start_left",
+    "start_right",
+    "start_up",
+    "update_bottom",
+    "update_left",
+    "update_right",
+    "update_top",
+    "visit"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A final single row or column must be visited once rather than repeated by opposite sides."
+  ],
+  "checks": [
+    {
+      "condition": "not matrix",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [
+    "Must be a 2D array."
+  ],
+  "source": [
+    "src/problems/Problem54/index.jsx",
+    "src/problems/Problem54/SpiralMatrixVisualizer.jsx"
+  ]
+}

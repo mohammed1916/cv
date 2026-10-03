@@ -1,0 +1,25 @@
+{
+  "number": "80",
+  "title": "Remove Duplicates from Sorted Array II",
+  "goal": "Solve Remove Duplicates from Sorted Array II: Remove Duplicates from Sorted Array II visualization",
+  "strategy": "Remove Duplicates from Sorted Array II visualization",
+  "phases": [
+    "init",
+    "scan",
+    "keep",
+    "skip",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The sorted array may retain at most two copies of each value; the write boundary, not the read index, determines the valid prefix."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem80/index.jsx",
+    "src/problems/Problem80/Visualizer.jsx"
+  ]
+}

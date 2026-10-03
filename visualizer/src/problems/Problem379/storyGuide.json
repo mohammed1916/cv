@@ -1,0 +1,29 @@
+{
+  "number": "379",
+  "title": "Design Phone Directory",
+  "goal": "Solve Design Phone Directory: Track available and allocated phone numbers so allocation, availability checks and releases preserve exclusive ownership.",
+  "strategy": "Track available and allocated phone numbers so allocation, availability checks and releases preserve exclusive ownership.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Exhaustion returns no number; releasing an already-free number must not duplicate availability."
+  ],
+  "checks": [
+    {
+      "condition": "self.released",
+      "outcome": "return self.released.pop()"
+    },
+    {
+      "condition": "self.available",
+      "outcome": "return self.available.pop()"
+    }
+  ],
+  "inputRules": [
+    "maxNumbers must be an array",
+    "operations must be an array"
+  ],
+  "source": [
+    "src/problems/Problem379/index.jsx",
+    "src/problems/Problem379/Problem379Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "number": "85",
+  "title": "Maximal Rectangle",
+  "goal": "Solve Maximal Rectangle: Turn each matrix row into consecutive vertical heights and solve a largest-rectangle histogram for that row.",
+  "strategy": "Turn each matrix row into consecutive vertical heights and solve a largest-rectangle histogram for that row.",
+  "phases": [
+    "area_calc",
+    "area_final",
+    "done",
+    "height_update",
+    "init",
+    "row_end",
+    "row_start",
+    "stack_push"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A zero resets its column height; rectangles may start in earlier rows but must remain all ones."
+  ],
+  "checks": [
+    {
+      "condition": "not matrix",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Enter a non-empty rectangular JSON matrix containing only 0 or 1."
+  ],
+  "source": [
+    "src/problems/Problem85/index.jsx",
+    "src/problems/Problem85/MaximalRectangleVisualizer.jsx"
+  ]
+}

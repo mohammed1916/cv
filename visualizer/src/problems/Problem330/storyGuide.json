@@ -1,0 +1,24 @@
+{
+  "number": "330",
+  "title": "Patching Array",
+  "goal": "Solve Patching Array: Minimum patches needed to cover range [1, n].",
+  "strategy": "Minimum patches needed to cover range [1, n].",
+  "phases": [
+    "init",
+    "consume",
+    "patch",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "When all sums below miss are representable, adding miss doubles the covered prefix; a larger gap cannot be skipped."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"nums\": [1, 3], \"n\": 6 }."
+  ],
+  "source": [
+    "src/problems/Problem330/index.jsx",
+    "src/problems/Problem330/PatchingArrayVisualizer.jsx"
+  ]
+}

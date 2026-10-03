@@ -1,0 +1,21 @@
+{
+  "number": "245",
+  "title": "Shortest Word Distance III",
+  "goal": "Solve Shortest Word Distance III: Find shortest distance between any two distinct words (even if they're the same).",
+  "strategy": "Find shortest distance between any two distinct words (even if they're the same).",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "When the two query words are equal, use two distinct occurrences rather than comparing an occurrence with itself."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem245/index.jsx",
+    "src/problems/Problem245/ShortestWordDistanceIii.jsx"
+  ]
+}

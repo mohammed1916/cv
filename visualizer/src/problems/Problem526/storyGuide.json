@@ -1,0 +1,31 @@
+{
+  "number": "526",
+  "title": "Beautiful Arrangement",
+  "goal": "Solve Beautiful Arrangement: Count the number of beautiful arrangements where each position i is divisible by the number placed there.",
+  "strategy": "Count the number of beautiful arrangements where each position i is divisible by the number placed there.",
+  "phases": [
+    "backtrack",
+    "check",
+    "done",
+    "found",
+    "init",
+    "loop",
+    "recurse"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "pos == n + 1",
+      "outcome": "return 1"
+    }
+  ],
+  "inputRules": [
+    "n must be an integer",
+    "n must be between 1 and 8 (backtracking blows up beyond that)"
+  ],
+  "source": [
+    "src/problems/Problem526/index.jsx",
+    "src/problems/Problem526/BeautifulArrangementVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "number": "152",
+  "title": "Maximum Product Subarray",
+  "goal": "Solve Maximum Product Subarray: Track both running max and min products since a negative min can become the new max.",
+  "strategy": "Track both running max and min products since a negative min can become the new max.",
+  "phases": [
+    "done",
+    "init",
+    "calc"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A negative value exchanges the roles of maximum and minimum ending products; zero can restart a segment."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be an array",
+    "Values must be numbers"
+  ],
+  "source": [
+    "src/problems/Problem152/index.jsx",
+    "src/problems/Problem152/MaxProductSubarrayVisualizer.jsx"
+  ]
+}

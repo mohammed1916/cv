@@ -1,0 +1,19 @@
+{
+  "number": "296",
+  "title": "Best Meeting Point",
+  "goal": "Solve Best Meeting Point: Find best meeting point in grid.",
+  "strategy": "Find best meeting point in grid.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Row and column travel costs separate, and each is minimized at a median; the meeting point need not contain a person."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem296/index.jsx",
+    "src/problems/Problem296/Problem296Visualizer.jsx"
+  ]
+}

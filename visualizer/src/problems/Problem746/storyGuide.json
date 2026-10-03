@@ -1,0 +1,26 @@
+{
+  "number": "746",
+  "title": "Min Cost Climbing Stairs",
+  "goal": "Solve Min Cost Climbing Stairs: dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2]); answer is min(dp[n-1], dp[n]).",
+  "strategy": "dp[i] = min(dp[i-1] + cost[i-1], dp[i-2] + cost[i-2]); answer is min(dp[n-1], dp[n]).",
+  "phases": [
+    "init",
+    "loop",
+    "compute-one",
+    "compute-two",
+    "assign",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The top is beyond the final stair, and the climb may start at either of the first two steps."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON array with at least two numeric costs."
+  ],
+  "source": [
+    "src/problems/Problem746/index.jsx",
+    "src/problems/Problem746/MinCostClimbingStairsVisualizer.jsx"
+  ]
+}

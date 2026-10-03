@@ -1,0 +1,27 @@
+{
+  "number": "561",
+  "title": "Array Partition I",
+  "goal": "Solve Array Partition I: Partition an array into n/2 pairs and maximize the sum of minimum values in each pair.",
+  "strategy": "Partition an array into n/2 pairs and maximize the sum of minimum values in each pair.",
+  "phases": [
+    "sort",
+    "iterate",
+    "sum_pair",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "After sorting, pairing adjacent values maximizes the sum of pair minima; every value is used exactly once."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be an array",
+    "Array cannot be empty",
+    "Array length must be even",
+    "All elements must be numbers"
+  ],
+  "source": [
+    "src/problems/Problem561/index.jsx",
+    "src/problems/Problem561/ArrayPartitionVisualizer.jsx"
+  ]
+}

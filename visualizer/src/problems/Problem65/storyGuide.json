@@ -1,0 +1,38 @@
+{
+  "number": "65",
+  "title": "Valid Number",
+  "goal": "Valid Number visualization",
+  "strategy": "Validate the permitted order of signs, digits, decimal point and exponent, tracking whether each required numeric part has digits.",
+  "phases": [
+    "init",
+    "digit",
+    "sign",
+    "dot",
+    "exp",
+    "invalid",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A sign or decimal point alone is not a number; an exponent needs digits and cannot contain a decimal point."
+  ],
+  "checks": [
+    {
+      "condition": "i > 0 and s[i-1] not in 'eE'",
+      "outcome": "return False"
+    },
+    {
+      "condition": "seenDot or seenExp",
+      "outcome": "return False"
+    },
+    {
+      "condition": "seenExp or not seenDigit",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem65/index.jsx",
+    "src/problems/Problem65/Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "204",
+  "title": "Count Primes",
+  "goal": "Solve Count Primes: Count the number of prime numbers less than n using Sieve of Eratosthenes.",
+  "strategy": "Count the number of prime numbers less than n using Sieve of Eratosthenes.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n <= 2",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem204/index.jsx",
+    "src/problems/Problem204/CountPrimesVisualizer.jsx"
+  ]
+}

@@ -1,3 +1,5 @@
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import InducedGraph from '../../components/shared/InducedGraph'
@@ -22,7 +24,7 @@ const definition = {
   ],
 }
 
-export default function EvenConnectedSubgraphs() {
+function EvenConnectedSubgraphs() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <p>Subset mask: {step.mask.toString(2).padStart(run.input.length, '0')} (rightmost bit = node 0). {step.phase === 'done' ? 'All subsets processed.' : `Sum: ${step.sum}.`}</p>
     <InducedGraph values={run.input} edges={run.edges} mask={step.mask} reached={step.reached} active={step.node} />
@@ -43,3 +45,5 @@ export default function EvenConnectedSubgraphs() {
     </tbody></table>}
   </>} />
 }
+
+export default withProblemStory(EvenConnectedSubgraphs, storyGuide);

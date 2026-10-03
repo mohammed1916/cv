@@ -347,7 +347,7 @@ export default function HighestAnswerRateVisualizer() {
     { id: 'bottom', title: "bottom", dockMode: 'split-bottom' },
   ], [])
   const panelContents = {
-    left: (<CodeTracePanel
+    left: (<CodeTracePanel step={step}
               codeLines={SOLUTION_CODE}
               currentLineNumber={step?.activeLine}
               relatedLineNumbers={step?.relatedLines || []}

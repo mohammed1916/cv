@@ -88,7 +88,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
     </>)
 
     const codePanel = (
-        <CodeTracePanel
+        <CodeTracePanel step={step}
             code={SOLUTION_CODE}
             activeLine={step.activeLine}
             onTogglePattern={togglePattern}

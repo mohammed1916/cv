@@ -1,0 +1,27 @@
+{
+  "number": "10",
+  "title": "Regular Expression Matching",
+  "goal": "Solve Regular Expression Matching: Match string and pattern prefixes with dynamic programming; a starred token can represent zero copies or consume another matching character.",
+  "strategy": "Match string and pattern prefixes with dynamic programming; a starred token can represent zero copies or consume another matching character.",
+  "phases": [
+    "init",
+    "check",
+    "char_or_dot",
+    "char_result",
+    "star_check",
+    "star_zero",
+    "star_multi",
+    "star_result",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A star modifies its preceding token. Empty text may match a sequence of zero-copy starred tokens."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem10/index.jsx",
+    "src/problems/Problem10/RegularExpressionMatchingVisualizer.jsx"
+  ]
+}

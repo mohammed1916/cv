@@ -1,0 +1,27 @@
+{
+  "number": "82",
+  "title": "Remove Duplicates from Linked List II",
+  "goal": "Solve Remove Duplicates from Linked List II: Detect equal-value runs in the sorted list and link past the entire run whenever its value is duplicated.",
+  "strategy": "Detect equal-value runs in the sorted list and link past the entire run whenever its value is duplicated.",
+  "phases": [
+    "building",
+    "counting",
+    "done",
+    "init_count",
+    "init_result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All copies of a repeated value are removed, including duplicates at the head."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Array required",
+    "All integers required",
+    "Max 10 elements"
+  ],
+  "source": [
+    "src/problems/Problem82/index.jsx",
+    "src/problems/Problem82/Visualizer.jsx"
+  ]
+}

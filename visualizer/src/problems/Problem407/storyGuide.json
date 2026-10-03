@@ -1,0 +1,22 @@
+{
+  "number": "407",
+  "title": "Trapping Rain Water II",
+  "goal": "Solve Trapping Rain Water II: Calculate total trapped rainwater in 2D elevation map using priority queue and boundary traversal.",
+  "strategy": "Calculate total trapped rainwater in 2D elevation map using priority queue and boundary traversal.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not heightMap",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "heightMap must be an array"
+  ],
+  "source": [
+    "src/problems/Problem407/index.jsx",
+    "src/problems/Problem407/Problem407Visualizer.jsx"
+  ]
+}

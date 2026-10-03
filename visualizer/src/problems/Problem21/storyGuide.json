@@ -1,0 +1,34 @@
+{
+  "number": "21",
+  "title": "Merge Two Sorted Lists",
+  "goal": "Solve Merge Two Sorted Lists: Compare the two current list heads and append the smaller node, preserving the sorted order of the merged prefix.",
+  "strategy": "Compare the two current list heads and append the smaller node, preserving the sorted order of the merged prefix.",
+  "phases": [
+    "advance_l1",
+    "advance_l2",
+    "advance_tail",
+    "append_l1",
+    "append_l2",
+    "append_rem_l1",
+    "append_rem_l2",
+    "check_rem_l1",
+    "check_rem_l2",
+    "compare",
+    "done",
+    "init",
+    "while_check",
+    "while_end"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "When one list ends, the other remaining suffix is already sorted and can be attached directly."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Both inputs must be arrays"
+  ],
+  "source": [
+    "src/problems/Problem21/index.jsx",
+    "src/problems/Problem21/MergeTwoSortedListsVisualizer.jsx"
+  ]
+}

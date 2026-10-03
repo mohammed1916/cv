@@ -1,0 +1,23 @@
+{
+  "number": "424",
+  "title": "Longest Repeating Character Replacement",
+  "goal": "Solve Longest Repeating Character Replacement: Sliding window: expand right, shrink left when (window size − max frequency) > k.",
+  "strategy": "Sliding window: expand right, shrink left when (window size − max frequency) > k.",
+  "phases": [
+    "init",
+    "expand",
+    "shrink",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A valid window needs at most k replacements after keeping its most frequent character; repeated expansion must still respect the best-window invariant."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem424/index.jsx",
+    "src/problems/Problem424/LongestRepeatingVisualizer.jsx"
+  ]
+}
