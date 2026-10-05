@@ -1,0 +1,31 @@
+{
+  "number": "1592",
+  "title": "Rearrange Spaces Between Words",
+  "goal": "Redistribute spaces evenly between words and put leftovers at the end.",
+  "strategy": "Count original spaces independently from words. Divide by the number of word gaps, with all spaces trailing when there is only one word.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Redistribute spaces evenly between words and put leftovers at the end.",
+    "inspect": "Count original spaces independently from words. Divide by the number of word gaps, with all spaces trailing when there is only one word.",
+    "update": "Count original spaces independently from words. Divide by the number of word gaps, with all spaces trailing when there is only one word.",
+    "done": "Redistribute spaces evenly between words and put leftovers at the end."
+  },
+  "edgeCases": [
+    "One word gets trailing spaces",
+    "No spaces to move",
+    "Remainder follows the last word"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

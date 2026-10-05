@@ -1,0 +1,31 @@
+{
+  "number": "1498",
+  "title": "Number of Subsequences That Satisfy the Given Sum Condition",
+  "goal": "Count nonempty subsequences whose minimum plus maximum does not exceed target.",
+  "strategy": "After sorting, fix each possible minimum. If the current maximum fits, every subset of eligible interior positions is allowed; otherwise lower the maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nonempty subsequences whose minimum plus maximum does not exceed target.",
+    "inspect": "After sorting, fix each possible minimum. If the current maximum fits, every subset of eligible interior positions is allowed; otherwise lower the maximum.",
+    "update": "After sorting, fix each possible minimum. If the current maximum fits, every subset of eligible interior positions is allowed; otherwise lower the maximum.",
+    "done": "Count nonempty subsequences whose minimum plus maximum does not exceed target."
+  },
+  "edgeCases": [
+    "No minimum qualifies",
+    "All subsets qualify",
+    "One qualifying entry"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

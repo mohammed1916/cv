@@ -1,0 +1,31 @@
+{
+  "number": "1510",
+  "title": "Stone Game IV",
+  "goal": "Decide whether the first player wins by repeatedly removing a nonzero square number of stones.",
+  "strategy": "A state is winning if any square removal reaches a losing state. Build states in increasing size so each opponent result is already known.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether the first player wins by repeatedly removing a nonzero square number of stones.",
+    "inspect": "A state is winning if any square removal reaches a losing state. Build states in increasing size so each opponent result is already known.",
+    "update": "A state is winning if any square removal reaches a losing state. Build states in increasing size so each opponent result is already known.",
+    "done": "Decide whether the first player wins by repeatedly removing a nonzero square number of stones."
+  },
+  "edgeCases": [
+    "One stone",
+    "No winning square from two",
+    "Perfect square can finish"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

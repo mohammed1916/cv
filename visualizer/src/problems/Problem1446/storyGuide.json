@@ -1,0 +1,31 @@
+{
+  "number": "1446",
+  "title": "Consecutive Characters",
+  "goal": "Find the longest run of one repeated character.",
+  "strategy": "A character either extends the immediately preceding equal run or starts a fresh run of length one. Retain the greatest observed run.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest run of one repeated character.",
+    "inspect": "A character either extends the immediately preceding equal run or starts a fresh run of length one. Retain the greatest observed run.",
+    "update": "A character either extends the immediately preceding equal run or starts a fresh run of length one. Retain the greatest observed run.",
+    "done": "Find the longest run of one repeated character."
+  },
+  "edgeCases": [
+    "All characters differ",
+    "All characters equal",
+    "One character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

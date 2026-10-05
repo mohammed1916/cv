@@ -1,0 +1,31 @@
+{
+  "number": "1504",
+  "title": "Count Submatrices With All Ones",
+  "goal": "Count every all-one rectangular submatrix.",
+  "strategy": "Maintain consecutive one heights for each bottom row. For a fixed column interval, its minimum height counts every possible all-one rectangle ending on that row.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count every all-one rectangular submatrix.",
+    "inspect": "Maintain consecutive one heights for each bottom row. For a fixed column interval, its minimum height counts every possible all-one rectangle ending on that row.",
+    "update": "Maintain consecutive one heights for each bottom row. For a fixed column interval, its minimum height counts every possible all-one rectangle ending on that row.",
+    "done": "Count every all-one rectangular submatrix."
+  },
+  "edgeCases": [
+    "All zero cells",
+    "Single row of runs",
+    "Solid square"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

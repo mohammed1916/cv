@@ -1,0 +1,31 @@
+{
+  "number": "1413",
+  "title": "Minimum Value to Get Positive Step by Step Sum",
+  "goal": "Find the least positive starting value keeping every prefix accumulation positive.",
+  "strategy": "The lowest prefix deficit determines the required reserve. Include the empty prefix so a wholly positive sequence still starts at one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the least positive starting value keeping every prefix accumulation positive.",
+    "inspect": "The lowest prefix deficit determines the required reserve. Include the empty prefix so a wholly positive sequence still starts at one.",
+    "update": "The lowest prefix deficit determines the required reserve. Include the empty prefix so a wholly positive sequence still starts at one.",
+    "done": "Find the least positive starting value keeping every prefix accumulation positive."
+  },
+  "edgeCases": [
+    "Positive prefixes need only one",
+    "The empty-prefix bound matters for zero",
+    "One negative value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

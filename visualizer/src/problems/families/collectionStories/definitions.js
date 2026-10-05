@@ -1,3 +1,4 @@
+import { continuingSpecs, validateContinuing } from './expansionNextSpecs.js';
 import { solvers } from './algorithms.js';
 import { specs } from './specs.js';
 import { collectionStoryMetadata } from './metadata.js';
@@ -6,6 +7,7 @@ import { nextSpecs, validateNext } from './nextSpecs.js';
 import { expansionSpecs, validateExpansion } from './expansionSpecs.js';
 import { dpSpecs, validateDP } from './expansionDPSpecs.js';
 import { moreSpecs, validateMore } from './expansionMoreSpecs.js';
+import { laterSpecs, validateLater } from './expansionLaterSpecs.js';
 
 function validate(id, input) {
   const require = (condition, message) => { if (!condition) throw new Error(message); };
@@ -15,6 +17,8 @@ function validate(id, input) {
   if (id in expansionSpecs) return validateExpansion(id,input);
   if (id in dpSpecs) return validateDP(id,input);
   if (id in moreSpecs) return validateMore(id,input);
+  if (id in continuingSpecs) return validateContinuing(id,input);
+  if (id in laterSpecs) return validateLater(id,input);
   const integer = (v, min = -10000, max = 10000) => Number.isSafeInteger(v) && v >= min && v <= max;
   const vector = (v, minLength = 1, maxLength = 80) => Array.isArray(v) && v.length >= minLength && v.length <= maxLength && v.every(n => integer(n));
   const text = v => typeof v === 'string' && v.length >= 1 && v.length <= 120;
@@ -96,6 +100,7 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
       let sequence = input[fields.split(' ')[0]];
       if (typeof sequence === 'number') sequence = [...String(sequence)];
       if (id === 973) sequence = input.points.map(p => `(${p})`);
+      if (id === 1424) sequence = input.nums.map(row => `[${row}]`);
       const emit = (message,state = {},phase = 'inspect') => frames.push(structuredClone({sequence,index:-1,metrics:{},...state,message,phase,activeLine:{start:1,inspect:3,update:4}[phase]}));
       emit(goal,{},'start');
       const result = solvers[id](input,emit);

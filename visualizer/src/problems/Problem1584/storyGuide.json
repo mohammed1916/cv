@@ -1,0 +1,31 @@
+{
+  "number": "1584",
+  "title": "Min Cost to Connect All Points",
+  "goal": "Connect all points at minimum total Manhattan edge cost.",
+  "strategy": "Prim maintains each unconnected point cheapest attachment to the current tree. Choose the least attachment and update costs using the newly connected point.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Connect all points at minimum total Manhattan edge cost.",
+    "inspect": "Prim maintains each unconnected point cheapest attachment to the current tree. Choose the least attachment and update costs using the newly connected point.",
+    "update": "Prim maintains each unconnected point cheapest attachment to the current tree. Choose the least attachment and update costs using the newly connected point.",
+    "done": "Connect all points at minimum total Manhattan edge cost."
+  },
+  "edgeCases": [
+    "One point has zero cost",
+    "Two points",
+    "Collinear points"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

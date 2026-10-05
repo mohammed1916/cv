@@ -1,0 +1,31 @@
+{
+  "number": "1460",
+  "title": "Make Two Arrays Equal by Reversing Subarrays",
+  "goal": "Decide whether reversing subarrays can transform one array into the other.",
+  "strategy": "Length-two reversals permit arbitrary rearrangements. The exact requirement is matching multiplicities, not matching current order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether reversing subarrays can transform one array into the other.",
+    "inspect": "Length-two reversals permit arbitrary rearrangements. The exact requirement is matching multiplicities, not matching current order.",
+    "update": "Length-two reversals permit arbitrary rearrangements. The exact requirement is matching multiplicities, not matching current order.",
+    "done": "Decide whether reversing subarrays can transform one array into the other."
+  },
+  "edgeCases": [
+    "One differing multiplicity prevents equality",
+    "Already equal arrays",
+    "One value each"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

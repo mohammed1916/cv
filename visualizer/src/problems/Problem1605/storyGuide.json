@@ -1,0 +1,31 @@
+{
+  "number": "1605",
+  "title": "Find Valid Matrix Given Row and Column Sums",
+  "goal": "Construct a nonnegative matrix matching all row and column totals.",
+  "strategy": "Place the smaller current unmet row or column demand. This satisfies at least one boundary and preserves equality of remaining total demand.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct a nonnegative matrix matching all row and column totals.",
+    "inspect": "Place the smaller current unmet row or column demand. This satisfies at least one boundary and preserves equality of remaining total demand.",
+    "update": "Place the smaller current unmet row or column demand. This satisfies at least one boundary and preserves equality of remaining total demand.",
+    "done": "Construct a nonnegative matrix matching all row and column totals."
+  },
+  "edgeCases": [
+    "Zero-demand rows and columns",
+    "Single cell",
+    "All demands zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1558",
+  "title": "Minimum Numbers of Function Calls to Make Target Array",
+  "goal": "Minimize individual increments and global doublings needed to build the target array.",
+  "strategy": "Each one bit requires an individual increment. Doublings are shared across entries, so their count is the greatest binary length minus one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize individual increments and global doublings needed to build the target array.",
+    "inspect": "Each one bit requires an individual increment. Doublings are shared across entries, so their count is the greatest binary length minus one.",
+    "update": "Each one bit requires an individual increment. Doublings are shared across entries, so their count is the greatest binary length minus one.",
+    "done": "Minimize individual increments and global doublings needed to build the target array."
+  },
+  "edgeCases": [
+    "All zero targets",
+    "Only one increments needed",
+    "Powers of two share shifts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

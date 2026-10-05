@@ -1,0 +1,31 @@
+{
+  "number": "1417",
+  "title": "Reformat The String",
+  "goal": "Rearrange digits and lowercase letters so their types alternate.",
+  "strategy": "The type counts may differ by at most one. Start with the larger class and interleave in order, leaving its possible extra character last.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rearrange digits and lowercase letters so their types alternate.",
+    "inspect": "The type counts may differ by at most one. Start with the larger class and interleave in order, leaving its possible extra character last.",
+    "update": "The type counts may differ by at most one. Start with the larger class and interleave in order, leaving its possible extra character last.",
+    "done": "Rearrange digits and lowercase letters so their types alternate."
+  },
+  "edgeCases": [
+    "Digits outnumber letters by exactly one",
+    "Only letters cannot alternate at this length",
+    "Single digit is already valid"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

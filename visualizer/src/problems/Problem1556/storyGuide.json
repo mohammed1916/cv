@@ -1,0 +1,31 @@
+{
+  "number": "1556",
+  "title": "Thousand Separator",
+  "goal": "Format a nonnegative integer with dot-separated groups of three digits.",
+  "strategy": "Group from the right so place-value boundaries remain correct. The leftmost group may contain fewer than three digits.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Format a nonnegative integer with dot-separated groups of three digits.",
+    "inspect": "Group from the right so place-value boundaries remain correct. The leftmost group may contain fewer than three digits.",
+    "update": "Group from the right so place-value boundaries remain correct. The leftmost group may contain fewer than three digits.",
+    "done": "Format a nonnegative integer with dot-separated groups of three digits."
+  },
+  "edgeCases": [
+    "Zero",
+    "No separator needed",
+    "Exact thousand boundary"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

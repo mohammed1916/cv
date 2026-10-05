@@ -1,0 +1,31 @@
+{
+  "number": "1570",
+  "title": "Dot Product of Two Sparse Vectors",
+  "goal": "Compute the dot product of two vectors using their nonzero entries.",
+  "strategy": "Zero entries contribute nothing. Index one vector sparsely and multiply only when the other has a nonzero value at the same index.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the dot product of two vectors using their nonzero entries.",
+    "inspect": "Zero entries contribute nothing. Index one vector sparsely and multiply only when the other has a nonzero value at the same index.",
+    "update": "Zero entries contribute nothing. Index one vector sparsely and multiply only when the other has a nonzero value at the same index.",
+    "done": "Compute the dot product of two vectors using their nonzero entries."
+  },
+  "edgeCases": [
+    "Disjoint support",
+    "Zero vector",
+    "Single coordinate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

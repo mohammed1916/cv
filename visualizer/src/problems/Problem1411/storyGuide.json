@@ -1,0 +1,31 @@
+{
+  "number": "1411",
+  "title": "Number of Ways to Paint N × 3 Grid",
+  "goal": "Count valid three-column grid colorings with adjacent cells different.",
+  "strategy": "A row either uses two colors in an ABA pattern or three in an ABC pattern. Track these categories and their different compatible transition counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count valid three-column grid colorings with adjacent cells different.",
+    "inspect": "A row either uses two colors in an ABA pattern or three in an ABC pattern. Track these categories and their different compatible transition counts.",
+    "update": "A row either uses two colors in an ABA pattern or three in an ABC pattern. Track these categories and their different compatible transition counts.",
+    "done": "Count valid three-column grid colorings with adjacent cells different."
+  },
+  "edgeCases": [
+    "Only the first row",
+    "One transition between adjacent rows",
+    "Longer modular accumulation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

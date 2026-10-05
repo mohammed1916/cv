@@ -1,0 +1,31 @@
+{
+  "number": "1534",
+  "title": "Count Good Triplets",
+  "goal": "Count index triples satisfying all three absolute-difference limits.",
+  "strategy": "Reject an invalid first pair before trying its third index. For surviving pairs, check both remaining distances independently.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count index triples satisfying all three absolute-difference limits.",
+    "inspect": "Reject an invalid first pair before trying its third index. For surviving pairs, check both remaining distances independently.",
+    "update": "Reject an invalid first pair before trying its third index. For surviving pairs, check both remaining distances independently.",
+    "done": "Count index triples satisfying all three absolute-difference limits."
+  },
+  "edgeCases": [
+    "Equal values satisfy zero bounds",
+    "No triple fits",
+    "Every triple fits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

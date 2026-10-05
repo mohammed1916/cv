@@ -1,0 +1,31 @@
+{
+  "number": "1441",
+  "title": "Build an Array With Stack Operations",
+  "goal": "Produce Push and Pop operations that build the target from stream values one through n.",
+  "strategy": "Read stream values in order. Keep requested values and immediately pop skipped ones; stop as soon as the full target is constructed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Produce Push and Pop operations that build the target from stream values one through n.",
+    "inspect": "Read stream values in order. Keep requested values and immediately pop skipped ones; stop as soon as the full target is constructed.",
+    "update": "Read stream values in order. Keep requested values and immediately pop skipped ones; stop as soon as the full target is constructed.",
+    "done": "Produce Push and Pop operations that build the target from stream values one through n."
+  },
+  "edgeCases": [
+    "Target starts with the first stream value",
+    "Every read value is retained",
+    "Single late target"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

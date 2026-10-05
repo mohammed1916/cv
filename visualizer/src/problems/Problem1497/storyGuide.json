@@ -1,0 +1,31 @@
+{
+  "number": "1497",
+  "title": "Check If Array Pairs Are Divisible by k",
+  "goal": "Pair all array positions so each pair sum is divisible by k.",
+  "strategy": "Remainder r pairs with k-r. Complementary buckets need equal sizes; a bucket pairing with itself needs an even size.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Pair all array positions so each pair sum is divisible by k.",
+    "inspect": "Remainder r pairs with k-r. Complementary buckets need equal sizes; a bucket pairing with itself needs an even size.",
+    "update": "Remainder r pairs with k-r. Complementary buckets need equal sizes; a bucket pairing with itself needs an even size.",
+    "done": "Pair all array positions so each pair sum is divisible by k."
+  },
+  "edgeCases": [
+    "Self-complement count is odd",
+    "Every integer divisible by one",
+    "Zero remainder needs pairs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

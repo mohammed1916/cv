@@ -1,0 +1,31 @@
+{
+  "number": "1450",
+  "title": "Number of Students Doing Homework at a Given Time",
+  "goal": "Count students whose homework interval contains the query time.",
+  "strategy": "Both interval endpoints are inclusive. Compare the query independently with each matching start/end pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count students whose homework interval contains the query time.",
+    "inspect": "Both interval endpoints are inclusive. Compare the query independently with each matching start/end pair.",
+    "update": "Both interval endpoints are inclusive. Compare the query independently with each matching start/end pair.",
+    "done": "Count students whose homework interval contains the query time."
+  },
+  "edgeCases": [
+    "Query equals both interval boundaries",
+    "No interval has started",
+    "One active student"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

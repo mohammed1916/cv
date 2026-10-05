@@ -1,0 +1,31 @@
+{
+  "number": "1414",
+  "title": "Find the Minimum Number of Fibonacci Numbers Whose Sum Is K",
+  "goal": "Use the fewest Fibonacci numbers whose sum equals k.",
+  "strategy": "Choose the greatest Fibonacci value no larger than the remaining target. Repeating on the remainder yields a minimal greedy decomposition.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Use the fewest Fibonacci numbers whose sum equals k.",
+    "inspect": "Choose the greatest Fibonacci value no larger than the remaining target. Repeating on the remainder yields a minimal greedy decomposition.",
+    "update": "Choose the greatest Fibonacci value no larger than the remaining target. Repeating on the remainder yields a minimal greedy decomposition.",
+    "done": "Use the fewest Fibonacci numbers whose sum equals k."
+  },
+  "edgeCases": [
+    "An exact Fibonacci number",
+    "Smallest target",
+    "Target lies just below a large Fibonacci number"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

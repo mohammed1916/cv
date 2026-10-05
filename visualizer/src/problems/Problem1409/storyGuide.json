@@ -1,0 +1,31 @@
+{
+  "number": "1409",
+  "title": "Queries on a Permutation With Key",
+  "goal": "Answer permutation positions while moving each requested value to the front.",
+  "strategy": "Each answer uses the current position before mutation. Moving a value shifts earlier entries right, affecting later query results.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer permutation positions while moving each requested value to the front.",
+    "inspect": "Each answer uses the current position before mutation. Moving a value shifts earlier entries right, affecting later query results.",
+    "update": "Each answer uses the current position before mutation. Moving a value shifts earlier entries right, affecting later query results.",
+    "done": "Answer permutation positions while moving each requested value to the front."
+  },
+  "edgeCases": [
+    "Request the current front repeatedly",
+    "Single-item permutation",
+    "Walk backward through the initial order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1418",
+  "title": "Display Table of Food Orders in a Restaurant",
+  "goal": "Build a restaurant display table grouped by table number and food name.",
+  "strategy": "Food columns sort alphabetically while table rows sort numerically. Group counts ignore customer names and fill missing table-food combinations with zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build a restaurant display table grouped by table number and food name.",
+    "inspect": "Food columns sort alphabetically while table rows sort numerically. Group counts ignore customer names and fill missing table-food combinations with zero.",
+    "update": "Food columns sort alphabetically while table rows sort numerically. Group counts ignore customer names and fill missing table-food combinations with zero.",
+    "done": "Build a restaurant display table grouped by table number and food name."
+  },
+  "edgeCases": [
+    "Only one table and one food",
+    "Same food ordered by several customers",
+    "Table numbers sort numerically"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

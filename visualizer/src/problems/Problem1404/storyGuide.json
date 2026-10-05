@@ -1,0 +1,31 @@
+{
+  "number": "1404",
+  "title": "Number of Steps to Reduce a Number in Binary Representation to One",
+  "goal": "Count add-one and halve steps needed to reduce a binary number to one.",
+  "strategy": "Scan low bits while tracking carry. An effective odd bit requires an increment followed by division; an effective even bit requires division alone.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count add-one and halve steps needed to reduce a binary number to one.",
+    "inspect": "Scan low bits while tracking carry. An effective odd bit requires an increment followed by division; an effective even bit requires division alone.",
+    "update": "Scan low bits while tracking carry. An effective odd bit requires an increment followed by division; an effective even bit requires division alone.",
+    "done": "Count add-one and halve steps needed to reduce a binary number to one."
+  },
+  "edgeCases": [
+    "Already one",
+    "A binary power of two only divides",
+    "All ones create a final leading carry"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

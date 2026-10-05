@@ -1,0 +1,31 @@
+{
+  "number": "1437",
+  "title": "Check If All 1's Are at Least Length K Places Away",
+  "goal": "Check whether consecutive ones have at least k zeros between them.",
+  "strategy": "Only neighboring one positions need comparison. Subtract one from their index difference to exclude the endpoints themselves.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether consecutive ones have at least k zeros between them.",
+    "inspect": "Only neighboring one positions need comparison. Subtract one from their index difference to exclude the endpoints themselves.",
+    "update": "Only neighboring one positions need comparison. Subtract one from their index difference to exclude the endpoints themselves.",
+    "done": "Check whether consecutive ones have at least k zeros between them."
+  },
+  "edgeCases": [
+    "Adjacent ones fail a positive gap",
+    "No ones vacuously satisfy the rule",
+    "Zero required spacing allows adjacency"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

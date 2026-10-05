@@ -1,0 +1,31 @@
+{
+  "number": "1471",
+  "title": "The k Strongest Values in an Array",
+  "goal": "Select the k strongest values relative to the lower middle median.",
+  "strategy": "Strength is absolute distance from the median, with greater values breaking equal-distance ties. Sort by those keys in descending order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Select the k strongest values relative to the lower middle median.",
+    "inspect": "Strength is absolute distance from the median, with greater values breaking equal-distance ties. Sort by those keys in descending order.",
+    "update": "Strength is absolute distance from the median, with greater values breaking equal-distance ties. Sort by those keys in descending order.",
+    "done": "Select the k strongest values relative to the lower middle median."
+  },
+  "edgeCases": [
+    "Equal distances prefer larger value",
+    "Even-length input uses the lower middle median",
+    "Select the entire array"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

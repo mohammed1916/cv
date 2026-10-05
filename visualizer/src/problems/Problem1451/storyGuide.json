@@ -1,0 +1,31 @@
+{
+  "number": "1451",
+  "title": "Rearrange Words in a Sentence",
+  "goal": "Order sentence words by length while preserving ties and sentence capitalization.",
+  "strategy": "Lowercase before sorting, use original index as a stable secondary key, and capitalize only the first output character.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Order sentence words by length while preserving ties and sentence capitalization.",
+    "inspect": "Lowercase before sorting, use original index as a stable secondary key, and capitalize only the first output character.",
+    "update": "Lowercase before sorting, use original index as a stable secondary key, and capitalize only the first output character.",
+    "done": "Order sentence words by length while preserving ties and sentence capitalization."
+  },
+  "edgeCases": [
+    "All words have the same length",
+    "Single word preserves sentence form",
+    "A short late word moves to the beginning"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

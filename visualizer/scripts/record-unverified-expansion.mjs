@@ -5,7 +5,9 @@ import path from 'node:path';
 import { expansionSpecs } from '../src/problems/families/collectionStories/expansionSpecs.js';
 import { dpSpecs } from '../src/problems/families/collectionStories/expansionDPSpecs.js';
 import { moreSpecs } from '../src/problems/families/collectionStories/expansionMoreSpecs.js';
-const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs});
+import { laterSpecs } from '../src/problems/families/collectionStories/expansionLaterSpecs.js';
+import { continuingSpecs } from '../src/problems/families/collectionStories/expansionNextSpecs.js';
+const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs,...laterSpecs,...continuingSpecs});
 const inventoryFile='docs/catalog-story-inventory.json';
 const inventory=JSON.parse(fs.readFileSync(inventoryFile,'utf8'));
 for(const id of ids){

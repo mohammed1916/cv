@@ -1,0 +1,31 @@
+{
+  "number": "1475",
+  "title": "Final Prices With a Special Discount in a Shop",
+  "goal": "Apply the first subsequent no-greater price as each item discount.",
+  "strategy": "A monotonic stack holds indices still waiting for a qualifying discount. The current price resolves all larger-or-equal waiting prices it reaches first.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Apply the first subsequent no-greater price as each item discount.",
+    "inspect": "A monotonic stack holds indices still waiting for a qualifying discount. The current price resolves all larger-or-equal waiting prices it reaches first.",
+    "update": "A monotonic stack holds indices still waiting for a qualifying discount. The current price resolves all larger-or-equal waiting prices it reaches first.",
+    "done": "Apply the first subsequent no-greater price as each item discount."
+  },
+  "edgeCases": [
+    "Increasing prices never receive a discount",
+    "Equal next price is a valid discount",
+    "One final undiscounted item"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

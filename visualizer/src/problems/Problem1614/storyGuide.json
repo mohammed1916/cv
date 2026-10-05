@@ -1,0 +1,31 @@
+{
+  "number": "1614",
+  "title": "Maximum Nesting Depth of the Parentheses",
+  "goal": "Find the greatest parentheses nesting depth in an arithmetic expression.",
+  "strategy": "Opening parentheses raise active depth and closing parentheses lower it. Other expression characters have no effect on nesting.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest parentheses nesting depth in an arithmetic expression.",
+    "inspect": "Opening parentheses raise active depth and closing parentheses lower it. Other expression characters have no effect on nesting.",
+    "update": "Opening parentheses raise active depth and closing parentheses lower it. Other expression characters have no effect on nesting.",
+    "done": "Find the greatest parentheses nesting depth in an arithmetic expression."
+  },
+  "edgeCases": [
+    "No parentheses",
+    "Separate groups share maximum depth",
+    "Deep chain"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

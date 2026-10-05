@@ -1,0 +1,31 @@
+{
+  "number": "1424",
+  "title": "Diagonal Traverse II",
+  "goal": "Traverse a ragged list of rows in diagonal order.",
+  "strategy": "Cells with equal row-plus-column share a diagonal. Top-down collection reverses the desired within-diagonal direction, so emit each bucket backward.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Traverse a ragged list of rows in diagonal order.",
+    "inspect": "Cells with equal row-plus-column share a diagonal. Top-down collection reverses the desired within-diagonal direction, so emit each bucket backward.",
+    "update": "Cells with equal row-plus-column share a diagonal. Top-down collection reverses the desired within-diagonal direction, so emit each bucket backward.",
+    "done": "Traverse a ragged list of rows in diagonal order."
+  },
+  "edgeCases": [
+    "One row follows normal order",
+    "One column follows row order",
+    "Late long row extends beyond earlier diagonals"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

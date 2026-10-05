@@ -1,0 +1,31 @@
+{
+  "number": "1461",
+  "title": "Check If a String Contains All Binary Codes of Size K",
+  "goal": "Check whether every length-k binary code appears as a substring.",
+  "strategy": "There are exactly two to the power k codes. Reject immediately if there are too few windows, otherwise count distinct windows.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether every length-k binary code appears as a substring.",
+    "inspect": "There are exactly two to the power k codes. Reject immediately if there are too few windows, otherwise count distinct windows.",
+    "update": "There are exactly two to the power k codes. Reject immediately if there are too few windows, otherwise count distinct windows.",
+    "done": "Check whether every length-k binary code appears as a substring."
+  },
+  "edgeCases": [
+    "Not enough windows exist",
+    "Both single-bit codes are present",
+    "Repeated windows miss other codes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

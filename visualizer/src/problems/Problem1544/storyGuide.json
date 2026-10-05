@@ -1,0 +1,31 @@
+{
+  "number": "1544",
+  "title": "Make The String Great",
+  "goal": "Repeatedly remove adjacent copies of the same letter in opposite cases.",
+  "strategy": "A stack retains the reduced prefix. A new character cancels only with an opposite-case copy at the top, exposing earlier characters for future cancellations.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Repeatedly remove adjacent copies of the same letter in opposite cases.",
+    "inspect": "A stack retains the reduced prefix. A new character cancels only with an opposite-case copy at the top, exposing earlier characters for future cancellations.",
+    "update": "A stack retains the reduced prefix. A new character cancels only with an opposite-case copy at the top, exposing earlier characters for future cancellations.",
+    "done": "Repeatedly remove adjacent copies of the same letter in opposite cases."
+  },
+  "edgeCases": [
+    "Entire string cancels",
+    "Same case letters survive",
+    "Single character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

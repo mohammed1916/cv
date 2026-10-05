@@ -1,0 +1,31 @@
+{
+  "number": "1572",
+  "title": "Matrix Diagonal Sum",
+  "goal": "Sum the primary and secondary matrix diagonals without counting the center twice.",
+  "strategy": "Each row contributes its matching-column and mirrored-column entries. In an odd-sized matrix those coordinates coincide only at the center.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the primary and secondary matrix diagonals without counting the center twice.",
+    "inspect": "Each row contributes its matching-column and mirrored-column entries. In an odd-sized matrix those coordinates coincide only at the center.",
+    "update": "Each row contributes its matching-column and mirrored-column entries. In an odd-sized matrix those coordinates coincide only at the center.",
+    "done": "Sum the primary and secondary matrix diagonals without counting the center twice."
+  },
+  "edgeCases": [
+    "One cell",
+    "Even square has no shared center",
+    "Off-diagonal values do not contribute"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

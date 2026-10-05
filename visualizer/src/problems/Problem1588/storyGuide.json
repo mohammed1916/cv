@@ -1,0 +1,31 @@
+{
+  "number": "1588",
+  "title": "Sum of All Odd Length Subarrays",
+  "goal": "Sum all odd-length contiguous subarrays.",
+  "strategy": "Count how many odd-length intervals contain each position, then add that many copies of its value. Half of its possible start/end combinations, rounded up, have odd length.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum all odd-length contiguous subarrays.",
+    "inspect": "Count how many odd-length intervals contain each position, then add that many copies of its value. Half of its possible start/end combinations, rounded up, have odd length.",
+    "update": "Count how many odd-length intervals contain each position, then add that many copies of its value. Half of its possible start/end combinations, rounded up, have odd length.",
+    "done": "Sum all odd-length contiguous subarrays."
+  },
+  "edgeCases": [
+    "One element",
+    "Two elements only use singleton intervals",
+    "Repeated values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

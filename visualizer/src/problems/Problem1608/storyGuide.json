@@ -1,0 +1,31 @@
+{
+  "number": "1608",
+  "title": "Special Array With X Elements Greater Than or Equal X",
+  "goal": "Find x such that exactly x array entries are at least x.",
+  "strategy": "A valid count cannot exceed the array length. Enumerate only that bounded candidate range and compare each candidate with its actual qualifying count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find x such that exactly x array entries are at least x.",
+    "inspect": "A valid count cannot exceed the array length. Enumerate only that bounded candidate range and compare each candidate with its actual qualifying count.",
+    "update": "A valid count cannot exceed the array length. Enumerate only that bounded candidate range and compare each candidate with its actual qualifying count.",
+    "done": "Find x such that exactly x array entries are at least x."
+  },
+  "edgeCases": [
+    "All zeros have no solution",
+    "Every value exceeds length",
+    "Count jumps over candidate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

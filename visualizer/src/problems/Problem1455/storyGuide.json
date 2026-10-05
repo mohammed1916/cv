@@ -1,0 +1,31 @@
+{
+  "number": "1455",
+  "title": "Check If a Word Occurs As a Prefix of Any Word in a Sentence",
+  "goal": "Find the first one-based word position with the requested prefix.",
+  "strategy": "Prefix comparison must start at a word boundary. Scan in sentence order and return immediately at the earliest matching word.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the first one-based word position with the requested prefix.",
+    "inspect": "Prefix comparison must start at a word boundary. Scan in sentence order and return immediately at the earliest matching word.",
+    "update": "Prefix comparison must start at a word boundary. Scan in sentence order and return immediately at the earliest matching word.",
+    "done": "Find the first one-based word position with the requested prefix."
+  },
+  "edgeCases": [
+    "Prefix appears inside a word but not at its start",
+    "First word matches",
+    "No word matches"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

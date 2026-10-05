@@ -1,0 +1,31 @@
+{
+  "number": "1539",
+  "title": "Kth Missing Positive Number",
+  "goal": "Find the kth positive integer missing from a strictly increasing array.",
+  "strategy": "At index i, arr[i]-i-1 counts missing positives before that value. Binary search the first index where this count reaches k.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the kth positive integer missing from a strictly increasing array.",
+    "inspect": "At index i, arr[i]-i-1 counts missing positives before that value. Binary search the first index where this count reaches k.",
+    "update": "At index i, arr[i]-i-1 counts missing positives before that value. Binary search the first index where this count reaches k.",
+    "done": "Find the kth positive integer missing from a strictly increasing array."
+  },
+  "edgeCases": [
+    "Missing values before first entry",
+    "Answer after final entry",
+    "Single entry gap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1465",
+  "title": "Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts",
+  "goal": "Find the greatest rectangle area after full horizontal and vertical cake cuts.",
+  "strategy": "Cuts divide each axis independently. The greatest possible piece combines the largest horizontal interval with the largest vertical interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest rectangle area after full horizontal and vertical cake cuts.",
+    "inspect": "Cuts divide each axis independently. The greatest possible piece combines the largest horizontal interval with the largest vertical interval.",
+    "update": "Cuts divide each axis independently. The greatest possible piece combines the largest horizontal interval with the largest vertical interval.",
+    "done": "Find the greatest rectangle area after full horizontal and vertical cake cuts."
+  },
+  "edgeCases": [
+    "Boundary gaps are the largest",
+    "Evenly spaced cuts create equal pieces",
+    "Large dimensions require exact modular area"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

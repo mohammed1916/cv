@@ -1,0 +1,31 @@
+{
+  "number": "1508",
+  "title": "Range Sum of Sorted Subarray Sums",
+  "goal": "Sum the requested rank range of sorted contiguous-subarray sums.",
+  "strategy": "Enumerate each start and extend its running sum. Equal sums remain separate entries because they represent different subarrays.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the requested rank range of sorted contiguous-subarray sums.",
+    "inspect": "Enumerate each start and extend its running sum. Equal sums remain separate entries because they represent different subarrays.",
+    "update": "Enumerate each start and extend its running sum. Equal sums remain separate entries because they represent different subarrays.",
+    "done": "Sum the requested rank range of sorted contiguous-subarray sums."
+  },
+  "edgeCases": [
+    "Single subarray",
+    "Equal sums keep multiplicity",
+    "Include every rank"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

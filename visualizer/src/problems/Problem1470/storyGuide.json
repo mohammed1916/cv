@@ -1,0 +1,31 @@
+{
+  "number": "1470",
+  "title": "Shuffle the Array",
+  "goal": "Interleave corresponding values from the two array halves.",
+  "strategy": "Pair index i with index n+i. This preserves the order of both halves while placing each pair together.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Interleave corresponding values from the two array halves.",
+    "inspect": "Pair index i with index n+i. This preserves the order of both halves while placing each pair together.",
+    "update": "Pair index i with index n+i. This preserves the order of both halves while placing each pair together.",
+    "done": "Interleave corresponding values from the two array halves."
+  },
+  "edgeCases": [
+    "One pair",
+    "Repeated values preserve positions",
+    "Distinct ordered halves"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

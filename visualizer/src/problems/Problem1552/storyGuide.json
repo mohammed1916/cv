@@ -1,0 +1,31 @@
+{
+  "number": "1552",
+  "title": "Magnetic Force Between Two Balls",
+  "goal": "Place m balls to maximize the minimum distance between any pair.",
+  "strategy": "For a candidate gap, placing each ball at the earliest fitting basket leaves maximal room for later balls. Feasibility is monotone as the required gap grows.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Place m balls to maximize the minimum distance between any pair.",
+    "inspect": "For a candidate gap, placing each ball at the earliest fitting basket leaves maximal room for later balls. Feasibility is monotone as the required gap grows.",
+    "update": "For a candidate gap, placing each ball at the earliest fitting basket leaves maximal room for later balls. Feasibility is monotone as the required gap grows.",
+    "done": "Place m balls to maximize the minimum distance between any pair."
+  },
+  "edgeCases": [
+    "Two balls use endpoints",
+    "Every basket is used",
+    "Unsorted positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

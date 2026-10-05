@@ -1,0 +1,31 @@
+{
+  "number": "1410",
+  "title": "HTML Entity Parser",
+  "goal": "Decode the six supported HTML entities once while preserving other text.",
+  "strategy": "Recognize supported sequences only in the original input. Do not rescan decoded ampersands, which would incorrectly decode nested entity text twice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decode the six supported HTML entities once while preserving other text.",
+    "inspect": "Recognize supported sequences only in the original input. Do not rescan decoded ampersands, which would incorrectly decode nested entity text twice.",
+    "update": "Recognize supported sequences only in the original input. Do not rescan decoded ampersands, which would incorrectly decode nested entity text twice.",
+    "done": "Decode the six supported HTML entities once while preserving other text."
+  },
+  "edgeCases": [
+    "Decoded ampersand must not trigger another pass",
+    "Unknown entity remains literal",
+    "Apostrophe and a trailing ampersand"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

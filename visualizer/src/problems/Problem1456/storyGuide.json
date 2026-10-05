@@ -1,0 +1,31 @@
+{
+  "number": "1456",
+  "title": "Maximum Number of Vowels in a Substring of Given Length",
+  "goal": "Find the greatest vowel count among length-k substrings.",
+  "strategy": "One entering and one leaving character update the window count. Compare only completed windows of the requested width.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest vowel count among length-k substrings.",
+    "inspect": "One entering and one leaving character update the window count. Compare only completed windows of the requested width.",
+    "update": "One entering and one leaving character update the window count. Compare only completed windows of the requested width.",
+    "done": "Find the greatest vowel count among length-k substrings."
+  },
+  "edgeCases": [
+    "No vowels",
+    "Only vowels",
+    "Whole-string window"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

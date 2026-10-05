@@ -1,0 +1,31 @@
+{
+  "number": "1427",
+  "title": "Perform String Shifts",
+  "goal": "Apply all left and right cyclic string shifts.",
+  "strategy": "Rotations compose by adding signed offsets. Normalize once modulo the string length instead of moving characters after every instruction.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Apply all left and right cyclic string shifts.",
+    "inspect": "Rotations compose by adding signed offsets. Normalize once modulo the string length instead of moving characters after every instruction.",
+    "update": "Rotations compose by adding signed offsets. Normalize once modulo the string length instead of moving characters after every instruction.",
+    "done": "Apply all left and right cyclic string shifts."
+  },
+  "edgeCases": [
+    "Opposite shifts cancel exactly",
+    "Whole-length rotation changes nothing",
+    "Single-character string remains fixed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

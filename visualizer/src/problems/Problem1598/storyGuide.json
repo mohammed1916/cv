@@ -1,0 +1,31 @@
+{
+  "number": "1598",
+  "title": "Crawler Log Folder",
+  "goal": "Find how many parent-folder moves return to the main folder after navigation logs.",
+  "strategy": "Only folder depth matters. Child moves add one, current-folder moves do nothing, and parent moves cannot reduce depth below zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find how many parent-folder moves return to the main folder after navigation logs.",
+    "inspect": "Only folder depth matters. Child moves add one, current-folder moves do nothing, and parent moves cannot reduce depth below zero.",
+    "update": "Only folder depth matters. Child moves add one, current-folder moves do nothing, and parent moves cannot reduce depth below zero.",
+    "done": "Find how many parent-folder moves return to the main folder after navigation logs."
+  },
+  "edgeCases": [
+    "Parent cannot pass root",
+    "Only descend",
+    "Return exactly to root"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -6,17 +6,17 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 879 local routes, of which 863 match catalog slugs
-or unique normalized titles. **3,210 catalog entries remain unmatched.** Route
+After the continued implementation there are 974 local routes, of which 958 match catalog slugs
+or unique normalized titles. **3,115 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
 
 ## Added in this batch
 
-### Current unverified continuation: 105 additional problems
+### Current unverified continuation: 200 additional problems
 
-This continuation adds 105 explicit algorithms with 420 original example inputs
+This continuation adds 200 explicit algorithms with 800 original example inputs
 across scanning, strings, counting, windows, prefix sums, matrix DP, connectivity,
 topological traversal, and backtracking. Full IDs are recorded in
 `unverified-expansion.json`. Each route uses the existing collection workspace
@@ -157,3 +157,4 @@ remaining problem needs verified requirements, original examples, an actual
 algorithm trace and appropriate scene, explanatory narrative, domain validation,
 independent algorithm tests, and interaction checks. Shared semantic families
 can reduce duplication without marking unimplemented algorithms as complete.
+

@@ -1,0 +1,31 @@
+{
+  "number": "1590",
+  "title": "Make Sum Divisible by P",
+  "goal": "Remove the shortest proper subarray so the remaining sum is divisible by p.",
+  "strategy": "The removed interval needs the same remainder as the total. Preserve the latest index per prefix remainder to make future matching removals shortest.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the shortest proper subarray so the remaining sum is divisible by p.",
+    "inspect": "The removed interval needs the same remainder as the total. Preserve the latest index per prefix remainder to make future matching removals shortest.",
+    "update": "The removed interval needs the same remainder as the total. Preserve the latest index per prefix remainder to make future matching removals shortest.",
+    "done": "Remove the shortest proper subarray so the remaining sum is divisible by p."
+  },
+  "edgeCases": [
+    "Already divisible",
+    "Only entire array would work",
+    "One-element removal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

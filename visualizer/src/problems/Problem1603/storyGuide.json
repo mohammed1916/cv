@@ -1,0 +1,31 @@
+{
+  "number": "1603",
+  "title": "Design Parking System",
+  "goal": "Process parking requests with separate fixed capacities for three car types.",
+  "strategy": "A request consumes one slot only from its exact type. Rejecting a full category must leave every capacity unchanged.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Process parking requests with separate fixed capacities for three car types.",
+    "inspect": "A request consumes one slot only from its exact type. Rejecting a full category must leave every capacity unchanged.",
+    "update": "A request consumes one slot only from its exact type. Rejecting a full category must leave every capacity unchanged.",
+    "done": "Process parking requests with separate fixed capacities for three car types."
+  },
+  "edgeCases": [
+    "No available slots",
+    "Unused large capacity cannot hold a different type",
+    "Exact small capacity"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

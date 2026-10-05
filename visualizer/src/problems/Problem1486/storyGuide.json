@@ -1,0 +1,31 @@
+{
+  "number": "1486",
+  "title": "XOR Operation in an Array",
+  "goal": "Compute the XOR of n values defined by start plus twice their index.",
+  "strategy": "Generate terms directly and fold them into one XOR accumulator. Each term contributes once in the prescribed arithmetic sequence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the XOR of n values defined by start plus twice their index.",
+    "inspect": "Generate terms directly and fold them into one XOR accumulator. Each term contributes once in the prescribed arithmetic sequence.",
+    "update": "Generate terms directly and fold them into one XOR accumulator. Each term contributes once in the prescribed arithmetic sequence.",
+    "done": "Compute the XOR of n values defined by start plus twice their index."
+  },
+  "edgeCases": [
+    "Single zero",
+    "Single positive term",
+    "Even starting sequence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

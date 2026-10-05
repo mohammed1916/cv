@@ -1,0 +1,31 @@
+{
+  "number": "1426",
+  "title": "Counting Elements",
+  "goal": "Count array occurrences whose value plus one also appears.",
+  "strategy": "Membership is global, but counting is per occurrence. Repeated values each count when their successor exists at least once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count array occurrences whose value plus one also appears.",
+    "inspect": "Membership is global, but counting is per occurrence. Repeated values each count when their successor exists at least once.",
+    "update": "Membership is global, but counting is per occurrence. Repeated values each count when their successor exists at least once.",
+    "done": "Count array occurrences whose value plus one also appears."
+  },
+  "edgeCases": [
+    "No value has its successor",
+    "A full chain excludes only its maximum",
+    "Duplicate maximum values do not qualify"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

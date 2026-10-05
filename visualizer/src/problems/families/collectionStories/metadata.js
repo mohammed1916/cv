@@ -1280,5 +1280,670 @@ export const collectionStoryMetadata = {
     "slug": "construct-k-palindrome-strings",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/construct-k-palindrome-strings/"
+  },
+  "1401": {
+    "number": "1401",
+    "title": "Circle and Rectangle Overlapping",
+    "slug": "circle-and-rectangle-overlapping",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/circle-and-rectangle-overlapping/"
+  },
+  "1402": {
+    "number": "1402",
+    "title": "Reducing Dishes",
+    "slug": "reducing-dishes",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/reducing-dishes/"
+  },
+  "1403": {
+    "number": "1403",
+    "title": "Minimum Subsequence in Non-Increasing Order",
+    "slug": "minimum-subsequence-in-non-increasing-order",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/"
+  },
+  "1404": {
+    "number": "1404",
+    "title": "Number of Steps to Reduce a Number in Binary Representation to One",
+    "slug": "number-of-steps-to-reduce-a-number-in-binary-representation-to-one",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/"
+  },
+  "1405": {
+    "number": "1405",
+    "title": "Longest Happy String",
+    "slug": "longest-happy-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-happy-string/"
+  },
+  "1406": {
+    "number": "1406",
+    "title": "Stone Game III",
+    "slug": "stone-game-iii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/stone-game-iii/"
+  },
+  "1408": {
+    "number": "1408",
+    "title": "String Matching in an Array",
+    "slug": "string-matching-in-an-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/string-matching-in-an-array/"
+  },
+  "1409": {
+    "number": "1409",
+    "title": "Queries on a Permutation With Key",
+    "slug": "queries-on-a-permutation-with-key",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/queries-on-a-permutation-with-key/"
+  },
+  "1410": {
+    "number": "1410",
+    "title": "HTML Entity Parser",
+    "slug": "html-entity-parser",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/html-entity-parser/"
+  },
+  "1411": {
+    "number": "1411",
+    "title": "Number of Ways to Paint N × 3 Grid",
+    "slug": "number-of-ways-to-paint-n-3-grid",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid/"
+  },
+  "1413": {
+    "number": "1413",
+    "title": "Minimum Value to Get Positive Step by Step Sum",
+    "slug": "minimum-value-to-get-positive-step-by-step-sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/"
+  },
+  "1414": {
+    "number": "1414",
+    "title": "Find the Minimum Number of Fibonacci Numbers Whose Sum Is K",
+    "slug": "find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k/"
+  },
+  "1415": {
+    "number": "1415",
+    "title": "The k-th Lexicographical String of All Happy Strings of Length n",
+    "slug": "the-k-th-lexicographical-string-of-all-happy-strings-of-length-n",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/"
+  },
+  "1417": {
+    "number": "1417",
+    "title": "Reformat The String",
+    "slug": "reformat-the-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/reformat-the-string/"
+  },
+  "1418": {
+    "number": "1418",
+    "title": "Display Table of Food Orders in a Restaurant",
+    "slug": "display-table-of-food-orders-in-a-restaurant",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/display-table-of-food-orders-in-a-restaurant/"
+  },
+  "1419": {
+    "number": "1419",
+    "title": "Minimum Number of Frogs Croaking",
+    "slug": "minimum-number-of-frogs-croaking",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-frogs-croaking/"
+  },
+  "1422": {
+    "number": "1422",
+    "title": "Maximum Score After Splitting a String",
+    "slug": "maximum-score-after-splitting-a-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-score-after-splitting-a-string/"
+  },
+  "1423": {
+    "number": "1423",
+    "title": "Maximum Points You Can Obtain from Cards",
+    "slug": "maximum-points-you-can-obtain-from-cards",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/"
+  },
+  "1424": {
+    "number": "1424",
+    "title": "Diagonal Traverse II",
+    "slug": "diagonal-traverse-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/diagonal-traverse-ii/"
+  },
+  "1426": {
+    "number": "1426",
+    "title": "Counting Elements",
+    "slug": "counting-elements",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/counting-elements/"
+  },
+  "1427": {
+    "number": "1427",
+    "title": "Perform String Shifts",
+    "slug": "perform-string-shifts",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/perform-string-shifts/"
+  },
+  "1433": {
+    "number": "1433",
+    "title": "Check If a String Can Break Another String",
+    "slug": "check-if-a-string-can-break-another-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-a-string-can-break-another-string/"
+  },
+  "1436": {
+    "number": "1436",
+    "title": "Destination City",
+    "slug": "destination-city",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/destination-city/"
+  },
+  "1437": {
+    "number": "1437",
+    "title": "Check If All 1's Are at Least Length K Places Away",
+    "slug": "check-if-all-1s-are-at-least-length-k-places-away",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-all-1s-are-at-least-length-k-places-away/"
+  },
+  "1438": {
+    "number": "1438",
+    "title": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit",
+    "slug": "longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/"
+  },
+  "1441": {
+    "number": "1441",
+    "title": "Build an Array With Stack Operations",
+    "slug": "build-an-array-with-stack-operations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/build-an-array-with-stack-operations/"
+  },
+  "1442": {
+    "number": "1442",
+    "title": "Count Triplets That Can Form Two Arrays of Equal XOR",
+    "slug": "count-triplets-that-can-form-two-arrays-of-equal-xor",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/"
+  },
+  "1446": {
+    "number": "1446",
+    "title": "Consecutive Characters",
+    "slug": "consecutive-characters",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/consecutive-characters/"
+  },
+  "1447": {
+    "number": "1447",
+    "title": "Simplified Fractions",
+    "slug": "simplified-fractions",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/simplified-fractions/"
+  },
+  "1450": {
+    "number": "1450",
+    "title": "Number of Students Doing Homework at a Given Time",
+    "slug": "number-of-students-doing-homework-at-a-given-time",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/number-of-students-doing-homework-at-a-given-time/"
+  },
+  "1451": {
+    "number": "1451",
+    "title": "Rearrange Words in a Sentence",
+    "slug": "rearrange-words-in-a-sentence",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/rearrange-words-in-a-sentence/"
+  },
+  "1455": {
+    "number": "1455",
+    "title": "Check If a Word Occurs As a Prefix of Any Word in a Sentence",
+    "slug": "check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-a-word-occurs-as-a-prefix-of-any-word-in-a-sentence/"
+  },
+  "1456": {
+    "number": "1456",
+    "title": "Maximum Number of Vowels in a Substring of Given Length",
+    "slug": "maximum-number-of-vowels-in-a-substring-of-given-length",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/"
+  },
+  "1460": {
+    "number": "1460",
+    "title": "Make Two Arrays Equal by Reversing Subarrays",
+    "slug": "make-two-arrays-equal-by-reversing-subarrays",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/make-two-arrays-equal-by-reversing-subarrays/"
+  },
+  "1461": {
+    "number": "1461",
+    "title": "Check If a String Contains All Binary Codes of Size K",
+    "slug": "check-if-a-string-contains-all-binary-codes-of-size-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/"
+  },
+  "1464": {
+    "number": "1464",
+    "title": "Maximum Product of Two Elements in an Array",
+    "slug": "maximum-product-of-two-elements-in-an-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/"
+  },
+  "1465": {
+    "number": "1465",
+    "title": "Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts",
+    "slug": "maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/"
+  },
+  "1470": {
+    "number": "1470",
+    "title": "Shuffle the Array",
+    "slug": "shuffle-the-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/shuffle-the-array/"
+  },
+  "1471": {
+    "number": "1471",
+    "title": "The k Strongest Values in an Array",
+    "slug": "the-k-strongest-values-in-an-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-k-strongest-values-in-an-array/"
+  },
+  "1475": {
+    "number": "1475",
+    "title": "Final Prices With a Special Discount in a Shop",
+    "slug": "final-prices-with-a-special-discount-in-a-shop",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/"
+  },
+  "1481": {
+    "number": "1481",
+    "title": "Least Number of Unique Integers after K Removals",
+    "slug": "least-number-of-unique-integers-after-k-removals",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/"
+  },
+  "1482": {
+    "number": "1482",
+    "title": "Minimum Number of Days to Make m Bouquets",
+    "slug": "minimum-number-of-days-to-make-m-bouquets",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/"
+  },
+  "1486": {
+    "number": "1486",
+    "title": "XOR Operation in an Array",
+    "slug": "xor-operation-in-an-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/xor-operation-in-an-array/"
+  },
+  "1487": {
+    "number": "1487",
+    "title": "Making File Names Unique",
+    "slug": "making-file-names-unique",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/making-file-names-unique/"
+  },
+  "1491": {
+    "number": "1491",
+    "title": "Average Salary Excluding the Minimum and Maximum Salary",
+    "slug": "average-salary-excluding-the-minimum-and-maximum-salary",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/"
+  },
+  "1492": {
+    "number": "1492",
+    "title": "The kth Factor of n",
+    "slug": "the-kth-factor-of-n",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-kth-factor-of-n/"
+  },
+  "1493": {
+    "number": "1493",
+    "title": "Longest Subarray of 1's After Deleting One Element",
+    "slug": "longest-subarray-of-1s-after-deleting-one-element",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/"
+  },
+  "1496": {
+    "number": "1496",
+    "title": "Path Crossing",
+    "slug": "path-crossing",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/path-crossing/"
+  },
+  "1497": {
+    "number": "1497",
+    "title": "Check If Array Pairs Are Divisible by k",
+    "slug": "check-if-array-pairs-are-divisible-by-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/"
+  },
+  "1498": {
+    "number": "1498",
+    "title": "Number of Subsequences That Satisfy the Given Sum Condition",
+    "slug": "number-of-subsequences-that-satisfy-the-given-sum-condition",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/"
+  },
+  "1502": {
+    "number": "1502",
+    "title": "Can Make Arithmetic Progression From Sequence",
+    "slug": "can-make-arithmetic-progression-from-sequence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/"
+  },
+  "1503": {
+    "number": "1503",
+    "title": "Last Moment Before All Ants Fall Out of a Plank",
+    "slug": "last-moment-before-all-ants-fall-out-of-a-plank",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/"
+  },
+  "1504": {
+    "number": "1504",
+    "title": "Count Submatrices With All Ones",
+    "slug": "count-submatrices-with-all-ones",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-submatrices-with-all-ones/"
+  },
+  "1508": {
+    "number": "1508",
+    "title": "Range Sum of Sorted Subarray Sums",
+    "slug": "range-sum-of-sorted-subarray-sums",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/"
+  },
+  "1509": {
+    "number": "1509",
+    "title": "Minimum Difference Between Largest and Smallest Value in Three Moves",
+    "slug": "minimum-difference-between-largest-and-smallest-value-in-three-moves",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/"
+  },
+  "1510": {
+    "number": "1510",
+    "title": "Stone Game IV",
+    "slug": "stone-game-iv",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/stone-game-iv/"
+  },
+  "1513": {
+    "number": "1513",
+    "title": "Number of Substrings With Only 1s",
+    "slug": "number-of-substrings-with-only-1s",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-substrings-with-only-1s/"
+  },
+  "1518": {
+    "number": "1518",
+    "title": "Water Bottles",
+    "slug": "water-bottles",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/water-bottles/"
+  },
+  "1523": {
+    "number": "1523",
+    "title": "Count Odd Numbers in an Interval Range",
+    "slug": "count-odd-numbers-in-an-interval-range",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/"
+  },
+  "1524": {
+    "number": "1524",
+    "title": "Number of Sub-arrays With Odd Sum",
+    "slug": "number-of-sub-arrays-with-odd-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/"
+  },
+  "1525": {
+    "number": "1525",
+    "title": "Number of Good Ways to Split a String",
+    "slug": "number-of-good-ways-to-split-a-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-good-ways-to-split-a-string/"
+  },
+  "1526": {
+    "number": "1526",
+    "title": "Minimum Number of Increments on Subarrays to Form a Target Array",
+    "slug": "minimum-number-of-increments-on-subarrays-to-form-a-target-array",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/"
+  },
+  "1528": {
+    "number": "1528",
+    "title": "Shuffle String",
+    "slug": "shuffle-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/shuffle-string/"
+  },
+  "1529": {
+    "number": "1529",
+    "title": "Minimum Suffix Flips",
+    "slug": "minimum-suffix-flips",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-suffix-flips/"
+  },
+  "1534": {
+    "number": "1534",
+    "title": "Count Good Triplets",
+    "slug": "count-good-triplets",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-good-triplets/"
+  },
+  "1535": {
+    "number": "1535",
+    "title": "Find the Winner of an Array Game",
+    "slug": "find-the-winner-of-an-array-game",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-winner-of-an-array-game/"
+  },
+  "1539": {
+    "number": "1539",
+    "title": "Kth Missing Positive Number",
+    "slug": "kth-missing-positive-number",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/kth-missing-positive-number/"
+  },
+  "1540": {
+    "number": "1540",
+    "title": "Can Convert String in K Moves",
+    "slug": "can-convert-string-in-k-moves",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/can-convert-string-in-k-moves/"
+  },
+  "1544": {
+    "number": "1544",
+    "title": "Make The String Great",
+    "slug": "make-the-string-great",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/make-the-string-great/"
+  },
+  "1545": {
+    "number": "1545",
+    "title": "Find Kth Bit in Nth Binary String",
+    "slug": "find-kth-bit-in-nth-binary-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/"
+  },
+  "1546": {
+    "number": "1546",
+    "title": "Maximum Number of Non-Overlapping Subarrays With Sum Equals Target",
+    "slug": "maximum-number-of-non-overlapping-subarrays-with-sum-equals-target",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-non-overlapping-subarrays-with-sum-equals-target/"
+  },
+  "1550": {
+    "number": "1550",
+    "title": "Three Consecutive Odds",
+    "slug": "three-consecutive-odds",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/three-consecutive-odds/"
+  },
+  "1551": {
+    "number": "1551",
+    "title": "Minimum Operations to Make Array Equal",
+    "slug": "minimum-operations-to-make-array-equal",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-operations-to-make-array-equal/"
+  },
+  "1552": {
+    "number": "1552",
+    "title": "Magnetic Force Between Two Balls",
+    "slug": "magnetic-force-between-two-balls",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/magnetic-force-between-two-balls/"
+  },
+  "1556": {
+    "number": "1556",
+    "title": "Thousand Separator",
+    "slug": "thousand-separator",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/thousand-separator/"
+  },
+  "1557": {
+    "number": "1557",
+    "title": "Minimum Number of Vertices to Reach All Nodes",
+    "slug": "minimum-number-of-vertices-to-reach-all-nodes",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/"
+  },
+  "1558": {
+    "number": "1558",
+    "title": "Minimum Numbers of Function Calls to Make Target Array",
+    "slug": "minimum-numbers-of-function-calls-to-make-target-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-numbers-of-function-calls-to-make-target-array/"
+  },
+  "1560": {
+    "number": "1560",
+    "title": "Most Visited Sector in  a Circular Track",
+    "slug": "most-visited-sector-in-a-circular-track",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/most-visited-sector-in-a-circular-track/"
+  },
+  "1561": {
+    "number": "1561",
+    "title": "Maximum Number of Coins You Can Get",
+    "slug": "maximum-number-of-coins-you-can-get",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-coins-you-can-get/"
+  },
+  "1566": {
+    "number": "1566",
+    "title": "Detect Pattern of Length M Repeated K or More Times",
+    "slug": "detect-pattern-of-length-m-repeated-k-or-more-times",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/detect-pattern-of-length-m-repeated-k-or-more-times/"
+  },
+  "1567": {
+    "number": "1567",
+    "title": "Maximum Length of Subarray With Positive Product",
+    "slug": "maximum-length-of-subarray-with-positive-product",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/"
+  },
+  "1570": {
+    "number": "1570",
+    "title": "Dot Product of Two Sparse Vectors",
+    "slug": "dot-product-of-two-sparse-vectors",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/dot-product-of-two-sparse-vectors/"
+  },
+  "1572": {
+    "number": "1572",
+    "title": "Matrix Diagonal Sum",
+    "slug": "matrix-diagonal-sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/matrix-diagonal-sum/"
+  },
+  "1576": {
+    "number": "1576",
+    "title": "Replace All ?'s to Avoid Consecutive Repeating Characters",
+    "slug": "replace-all-s-to-avoid-consecutive-repeating-characters",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/"
+  },
+  "1578": {
+    "number": "1578",
+    "title": "Minimum Time to Make Rope Colorful",
+    "slug": "minimum-time-to-make-rope-colorful",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-time-to-make-rope-colorful/"
+  },
+  "1582": {
+    "number": "1582",
+    "title": "Special Positions in a Binary Matrix",
+    "slug": "special-positions-in-a-binary-matrix",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/special-positions-in-a-binary-matrix/"
+  },
+  "1584": {
+    "number": "1584",
+    "title": "Min Cost to Connect All Points",
+    "slug": "min-cost-to-connect-all-points",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/min-cost-to-connect-all-points/"
+  },
+  "1588": {
+    "number": "1588",
+    "title": "Sum of All Odd Length Subarrays",
+    "slug": "sum-of-all-odd-length-subarrays",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sum-of-all-odd-length-subarrays/"
+  },
+  "1590": {
+    "number": "1590",
+    "title": "Make Sum Divisible by P",
+    "slug": "make-sum-divisible-by-p",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/make-sum-divisible-by-p/"
+  },
+  "1592": {
+    "number": "1592",
+    "title": "Rearrange Spaces Between Words",
+    "slug": "rearrange-spaces-between-words",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/rearrange-spaces-between-words/"
+  },
+  "1598": {
+    "number": "1598",
+    "title": "Crawler Log Folder",
+    "slug": "crawler-log-folder",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/crawler-log-folder/"
+  },
+  "1603": {
+    "number": "1603",
+    "title": "Design Parking System",
+    "slug": "design-parking-system",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/design-parking-system/"
+  },
+  "1605": {
+    "number": "1605",
+    "title": "Find Valid Matrix Given Row and Column Sums",
+    "slug": "find-valid-matrix-given-row-and-column-sums",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/"
+  },
+  "1608": {
+    "number": "1608",
+    "title": "Special Array With X Elements Greater Than or Equal X",
+    "slug": "special-array-with-x-elements-greater-than-or-equal-x",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/"
+  },
+  "1614": {
+    "number": "1614",
+    "title": "Maximum Nesting Depth of the Parentheses",
+    "slug": "maximum-nesting-depth-of-the-parentheses",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/"
   }
 };

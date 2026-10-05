@@ -1,0 +1,31 @@
+{
+  "number": "1576",
+  "title": "Replace All ?'s to Avoid Consecutive Repeating Characters",
+  "goal": "Replace question marks so no neighboring characters are equal.",
+  "strategy": "Each unknown position excludes at most its two neighbors. Trying three letters guarantees a choice while preserving all fixed characters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace question marks so no neighboring characters are equal.",
+    "inspect": "Each unknown position excludes at most its two neighbors. Trying three letters guarantees a choice while preserving all fixed characters.",
+    "update": "Each unknown position excludes at most its two neighbors. Trying three letters guarantees a choice while preserving all fixed characters.",
+    "done": "Replace question marks so no neighboring characters are equal."
+  },
+  "edgeCases": [
+    "Every position unknown",
+    "No replacements needed",
+    "Single unknown"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

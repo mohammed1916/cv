@@ -1,0 +1,31 @@
+{
+  "number": "1509",
+  "title": "Minimum Difference Between Largest and Smallest Value in Three Moves",
+  "goal": "Minimize the array range after changing at most three entries.",
+  "strategy": "Only sorted extremes need modification. Distribute three changes across the smallest and largest ends in four possible ways.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the array range after changing at most three entries.",
+    "inspect": "Only sorted extremes need modification. Distribute three changes across the smallest and largest ends in four possible ways.",
+    "update": "Only sorted extremes need modification. Distribute three changes across the smallest and largest ends in four possible ways.",
+    "done": "Minimize the array range after changing at most three entries."
+  },
+  "edgeCases": [
+    "Four entries can become equal",
+    "Already equal",
+    "Outliers at one end"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

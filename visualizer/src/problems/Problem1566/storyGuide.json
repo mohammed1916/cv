@@ -1,0 +1,31 @@
+{
+  "number": "1566",
+  "title": "Detect Pattern of Length M Repeated K or More Times",
+  "goal": "Detect a consecutive pattern of length m repeated at least k times without overlap.",
+  "strategy": "Comparing entries m positions apart measures continuity between adjacent copies. A run of (k-1)*m equal comparisons certifies the required repeated blocks.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Detect a consecutive pattern of length m repeated at least k times without overlap.",
+    "inspect": "Comparing entries m positions apart measures continuity between adjacent copies. A run of (k-1)*m equal comparisons certifies the required repeated blocks.",
+    "update": "Comparing entries m positions apart measures continuity between adjacent copies. A run of (k-1)*m equal comparisons certifies the required repeated blocks.",
+    "done": "Detect a consecutive pattern of length m repeated at least k times without overlap."
+  },
+  "edgeCases": [
+    "Insufficient room",
+    "Length one pattern",
+    "One mismatch breaks the run"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1561",
+  "title": "Maximum Number of Coins You Can Get",
+  "goal": "Maximize your coins when Alice takes the largest and Bob the smallest of each chosen triple.",
+  "strategy": "Reserve the smallest piles for Bob. Pair each of your choices with the largest remaining pile for Alice, taking the second-largest yourself.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize your coins when Alice takes the largest and Bob the smallest of each chosen triple.",
+    "inspect": "Reserve the smallest piles for Bob. Pair each of your choices with the largest remaining pile for Alice, taking the second-largest yourself.",
+    "update": "Reserve the smallest piles for Bob. Pair each of your choices with the largest remaining pile for Alice, taking the second-largest yourself.",
+    "done": "Maximize your coins when Alice takes the largest and Bob the smallest of each chosen triple."
+  },
+  "edgeCases": [
+    "One round",
+    "Equal piles",
+    "Large gaps between tiers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

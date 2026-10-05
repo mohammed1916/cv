@@ -1,0 +1,31 @@
+{
+  "number": "1408",
+  "title": "String Matching in an Array",
+  "goal": "Find words that occur as substrings of another input word.",
+  "strategy": "Compare distinct word entries. A substring match anywhere qualifies, but matching a word with itself would incorrectly accept everything.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find words that occur as substrings of another input word.",
+    "inspect": "Compare distinct word entries. A substring match anywhere qualifies, but matching a word with itself would incorrectly accept everything.",
+    "update": "Compare distinct word entries. A substring match anywhere qualifies, but matching a word with itself would incorrectly accept everything.",
+    "done": "Find words that occur as substrings of another input word."
+  },
+  "edgeCases": [
+    "No word is contained in another",
+    "Containment can cross several lengths",
+    "A lone word cannot match itself"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

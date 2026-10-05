@@ -1,0 +1,31 @@
+{
+  "number": "1482",
+  "title": "Minimum Number of Days to Make m Bouquets",
+  "goal": "Find the earliest day that supplies m disjoint bouquets of k adjacent flowers.",
+  "strategy": "For one candidate day, consecutive bloomed flowers form disjoint greedy groups. Feasibility only improves with time, allowing a binary search on days.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the earliest day that supplies m disjoint bouquets of k adjacent flowers.",
+    "inspect": "For one candidate day, consecutive bloomed flowers form disjoint greedy groups. Feasibility only improves with time, allowing a binary search on days.",
+    "update": "For one candidate day, consecutive bloomed flowers form disjoint greedy groups. Feasibility only improves with time, allowing a binary search on days.",
+    "done": "Find the earliest day that supplies m disjoint bouquets of k adjacent flowers."
+  },
+  "edgeCases": [
+    "Insufficient flowers",
+    "All bloom together",
+    "One flower bouquet"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

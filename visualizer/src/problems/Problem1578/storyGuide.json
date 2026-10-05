@@ -1,0 +1,31 @@
+{
+  "number": "1578",
+  "title": "Minimum Time to Make Rope Colorful",
+  "goal": "Remove minimum total cost so adjacent retained balloons have different colors.",
+  "strategy": "In every maximal equal-color run, exactly one balloon should remain. Keep the one with greatest removal cost and pay for all others.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove minimum total cost so adjacent retained balloons have different colors.",
+    "inspect": "In every maximal equal-color run, exactly one balloon should remain. Keep the one with greatest removal cost and pay for all others.",
+    "update": "In every maximal equal-color run, exactly one balloon should remain. Keep the one with greatest removal cost and pay for all others.",
+    "done": "Remove minimum total cost so adjacent retained balloons have different colors."
+  },
+  "edgeCases": [
+    "No adjacent equal colors",
+    "One repeated run",
+    "One balloon"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

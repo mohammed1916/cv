@@ -1,0 +1,31 @@
+{
+  "number": "1529",
+  "title": "Minimum Suffix Flips",
+  "goal": "Minimize suffix flips turning an all-zero binary string into target.",
+  "strategy": "All previous suffix flips give the current position one shared effective state. A mismatch forces a flip starting here; equality needs no action.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize suffix flips turning an all-zero binary string into target.",
+    "inspect": "All previous suffix flips give the current position one shared effective state. A mismatch forces a flip starting here; equality needs no action.",
+    "update": "All previous suffix flips give the current position one shared effective state. A mismatch forces a flip starting here; equality needs no action.",
+    "done": "Minimize suffix flips turning an all-zero binary string into target."
+  },
+  "edgeCases": [
+    "No flips",
+    "One flip covers everything",
+    "Flip at final position"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
