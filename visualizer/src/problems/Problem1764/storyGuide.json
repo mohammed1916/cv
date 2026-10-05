@@ -1,0 +1,31 @@
+{
+  "number": "1764",
+  "title": "Form Array by Concatenating Subarrays of Another Array",
+  "goal": "Match all groups as ordered, nonoverlapping contiguous blocks inside nums.",
+  "strategy": "Find each group earliest possible occurrence after the preceding match. Any later occurrence would leave no more room for remaining groups.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Match all groups as ordered, nonoverlapping contiguous blocks inside nums.",
+    "inspect": "Find each group earliest possible occurrence after the preceding match. Any later occurrence would leave no more room for remaining groups.",
+    "update": "Find each group earliest possible occurrence after the preceding match. Any later occurrence would leave no more room for remaining groups.",
+    "done": "Match all groups as ordered, nonoverlapping contiguous blocks inside nums."
+  },
+  "edgeCases": [
+    "Matching groups cannot overlap",
+    "Groups match back to back",
+    "Later group missing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

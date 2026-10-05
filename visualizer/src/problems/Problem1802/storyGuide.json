@@ -1,0 +1,31 @@
+{
+  "number": "1802",
+  "title": "Maximum Value at a Given Index in a Bounded Array",
+  "goal": "Maximize one array position under positive-value, adjacent-difference, and total-sum limits.",
+  "strategy": "For a candidate peak, the cheapest sides descend by one down to a floor of one. Compute their arithmetic-series sums and binary search the greatest affordable peak.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize one array position under positive-value, adjacent-difference, and total-sum limits.",
+    "inspect": "For a candidate peak, the cheapest sides descend by one down to a floor of one. Compute their arithmetic-series sums and binary search the greatest affordable peak.",
+    "update": "For a candidate peak, the cheapest sides descend by one down to a floor of one. Compute their arithmetic-series sums and binary search the greatest affordable peak.",
+    "done": "Maximize one array position under positive-value, adjacent-difference, and total-sum limits."
+  },
+  "edgeCases": [
+    "Budget only covers all ones",
+    "Boundary peak has only one descending side",
+    "One position consumes entire budget"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

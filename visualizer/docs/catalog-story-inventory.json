@@ -1,5 +1,5 @@
 {
-  "routes": 1049,
+  "routes": 1093,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -3536,6 +3536,60 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1762",
+      "number": "1762",
+      "title": "Buildings With an Ocean View",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1763",
+      "number": "1763",
+      "title": "Longest Nice Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1764",
+      "number": "1764",
+      "title": "Form Array by Concatenating Subarrays of Another Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1765",
+      "number": "1765",
+      "title": "Map of Highest Peak",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1768",
+      "number": "1768",
+      "title": "Merge Strings Alternately",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1769",
+      "number": "1769",
+      "title": "Minimum Number of Operations to Move All Balls to Each Box",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem177",
       "number": "177",
       "title": "Nth Highest Salary",
@@ -3543,6 +3597,51 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1770",
+      "number": "1770",
+      "title": "Maximum Score from Performing Multiplication Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1773",
+      "number": "1773",
+      "title": "Count Items Matching a Rule",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1774",
+      "number": "1774",
+      "title": "Closest Dessert Cost",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1775",
+      "number": "1775",
+      "title": "Equal Sum Arrays With Minimum Number of Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1779",
+      "number": "1779",
+      "title": "Find Nearest Point That Has the Same X or Y Coordinate",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem178",
@@ -3554,6 +3653,42 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1780",
+      "number": "1780",
+      "title": "Check if Number is a Sum of Powers of Three",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1781",
+      "number": "1781",
+      "title": "Sum of Beauty of All Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1784",
+      "number": "1784",
+      "title": "Check if Binary String Has at Most One Segment of Ones",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1785",
+      "number": "1785",
+      "title": "Minimum Elements to Add to Form a Given Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem179",
       "number": "179",
       "title": "Largest Number",
@@ -3561,6 +3696,78 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1790",
+      "number": "1790",
+      "title": "Check if One String Swap Can Make Strings Equal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1791",
+      "number": "1791",
+      "title": "Find Center of Star Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1792",
+      "number": "1792",
+      "title": "Maximum Average Pass Ratio",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1793",
+      "number": "1793",
+      "title": "Maximum Score of a Good Subarray",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1796",
+      "number": "1796",
+      "title": "Second Largest Digit in a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1797",
+      "number": "1797",
+      "title": "Design Authentication Manager",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1798",
+      "number": "1798",
+      "title": "Maximum Number of Consecutive Values You Can Make",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1799",
+      "number": "1799",
+      "title": "Maximize Score After N Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem18",
@@ -3581,6 +3788,51 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1800",
+      "number": "1800",
+      "title": "Maximum Ascending Subarray Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1802",
+      "number": "1802",
+      "title": "Maximum Value at a Given Index in a Bounded Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1805",
+      "number": "1805",
+      "title": "Number of Different Integers in a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1806",
+      "number": "1806",
+      "title": "Minimum Number of Operations to Reinitialize a Permutation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1807",
+      "number": "1807",
+      "title": "Evaluate the Bracket Pairs of a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem181",
       "number": "181",
       "title": "Employees Earning More Than Their Managers",
@@ -3588,6 +3840,60 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1812",
+      "number": "1812",
+      "title": "Determine Color of a Chessboard Square",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1813",
+      "number": "1813",
+      "title": "Sentence Similarity III",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1814",
+      "number": "1814",
+      "title": "Count Nice Pairs in an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1816",
+      "number": "1816",
+      "title": "Truncate Sentence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1817",
+      "number": "1817",
+      "title": "Finding the Users Active Minutes",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1818",
+      "number": "1818",
+      "title": "Minimum Absolute Sum Difference",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem182",
@@ -3599,6 +3905,69 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1820",
+      "number": "1820",
+      "title": "Maximum Number of Accepted Invitations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1822",
+      "number": "1822",
+      "title": "Sign of the Product of an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1823",
+      "number": "1823",
+      "title": "Find the Winner of the Circular Game",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1824",
+      "number": "1824",
+      "title": "Minimum Sideway Jumps",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1827",
+      "number": "1827",
+      "title": "Minimum Operations to Make the Array Increasing",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1828",
+      "number": "1828",
+      "title": "Queries on Number of Points Inside a Circle",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1829",
+      "number": "1829",
+      "title": "Maximum XOR for Each Query",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem183",
       "number": "183",
       "title": "Customers Who Never Order",
@@ -3606,6 +3975,33 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1832",
+      "number": "1832",
+      "title": "Check if the Sentence Is Pangram",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1833",
+      "number": "1833",
+      "title": "Maximum Ice Cream Bars",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1834",
+      "number": "1834",
+      "title": "Single-Threaded CPU",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem184",

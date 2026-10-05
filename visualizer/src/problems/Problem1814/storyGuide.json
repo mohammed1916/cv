@@ -1,0 +1,31 @@
+{
+  "number": "1814",
+  "title": "Count Nice Pairs in an Array",
+  "goal": "Count pairs satisfying nums[i]+reverse(nums[j]) = nums[j]+reverse(nums[i]).",
+  "strategy": "Rearrange the equation to equal differences value minus reversed value. Count earlier occurrences of each difference to add pairs once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs satisfying nums[i]+reverse(nums[j]) = nums[j]+reverse(nums[i]).",
+    "inspect": "Rearrange the equation to equal differences value minus reversed value. Count earlier occurrences of each difference to add pairs once.",
+    "update": "Rearrange the equation to equal differences value minus reversed value. Count earlier occurrences of each difference to add pairs once.",
+    "done": "Count pairs satisfying nums[i]+reverse(nums[j]) = nums[j]+reverse(nums[i])."
+  },
+  "edgeCases": [
+    "Palindromes all have difference zero",
+    "No shared reverse difference",
+    "Trailing zeros vanish on reversal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

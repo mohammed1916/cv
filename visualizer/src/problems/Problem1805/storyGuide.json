@@ -1,0 +1,31 @@
+{
+  "number": "1805",
+  "title": "Number of Different Integers in a String",
+  "goal": "Count distinct integers embedded in a mixed lowercase-and-digit string.",
+  "strategy": "Read maximal digit runs and remove leading zeros. Compare normalized text rather than numeric conversion so arbitrarily long integers retain their exact identity.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct integers embedded in a mixed lowercase-and-digit string.",
+    "inspect": "Read maximal digit runs and remove leading zeros. Compare normalized text rather than numeric conversion so arbitrarily long integers retain their exact identity.",
+    "update": "Read maximal digit runs and remove leading zeros. Compare normalized text rather than numeric conversion so arbitrarily long integers retain their exact identity.",
+    "done": "Count distinct integers embedded in a mixed lowercase-and-digit string."
+  },
+  "edgeCases": [
+    "All-zero runs are one integer",
+    "No digit runs",
+    "Adjacent digits form one complete integer"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

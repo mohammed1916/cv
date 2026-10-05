@@ -1,0 +1,31 @@
+{
+  "number": "1816",
+  "title": "Truncate Sentence",
+  "goal": "Return exactly the first k words of a sentence.",
+  "strategy": "Split at the defined single-space word boundaries and keep the first k whole words, preserving order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return exactly the first k words of a sentence.",
+    "inspect": "Split at the defined single-space word boundaries and keep the first k whole words, preserving order.",
+    "update": "Split at the defined single-space word boundaries and keep the first k whole words, preserving order.",
+    "done": "Return exactly the first k words of a sentence."
+  },
+  "edgeCases": [
+    "Keep only first word",
+    "Keep the entire sentence",
+    "One-word sentence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

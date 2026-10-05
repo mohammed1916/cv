@@ -1,0 +1,31 @@
+{
+  "number": "1781",
+  "title": "Sum of Beauty of All Substrings",
+  "goal": "Sum the difference between highest and lowest positive character frequencies over all substrings.",
+  "strategy": "For each starting position, extend the substring while updating letter counts. Ignore absent letters when finding the minimum positive count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the difference between highest and lowest positive character frequencies over all substrings.",
+    "inspect": "For each starting position, extend the substring while updating letter counts. Ignore absent letters when finding the minimum positive count.",
+    "update": "For each starting position, extend the substring while updating letter counts. Ignore absent letters when finding the minimum positive count.",
+    "done": "Sum the difference between highest and lowest positive character frequencies over all substrings."
+  },
+  "edgeCases": [
+    "All characters identical",
+    "All characters distinct",
+    "One dominant run with a second letter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

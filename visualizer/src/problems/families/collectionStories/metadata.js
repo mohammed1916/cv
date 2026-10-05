@@ -2470,5 +2470,313 @@ export const collectionStoryMetadata = {
     "slug": "minimum-limit-of-balls-in-a-bag",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/"
+  },
+  "1762": {
+    "number": "1762",
+    "title": "Buildings With an Ocean View",
+    "slug": "buildings-with-an-ocean-view",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/buildings-with-an-ocean-view/"
+  },
+  "1763": {
+    "number": "1763",
+    "title": "Longest Nice Substring",
+    "slug": "longest-nice-substring",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/longest-nice-substring/"
+  },
+  "1764": {
+    "number": "1764",
+    "title": "Form Array by Concatenating Subarrays of Another Array",
+    "slug": "form-array-by-concatenating-subarrays-of-another-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/form-array-by-concatenating-subarrays-of-another-array/"
+  },
+  "1765": {
+    "number": "1765",
+    "title": "Map of Highest Peak",
+    "slug": "map-of-highest-peak",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/map-of-highest-peak/"
+  },
+  "1768": {
+    "number": "1768",
+    "title": "Merge Strings Alternately",
+    "slug": "merge-strings-alternately",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/merge-strings-alternately/"
+  },
+  "1769": {
+    "number": "1769",
+    "title": "Minimum Number of Operations to Move All Balls to Each Box",
+    "slug": "minimum-number-of-operations-to-move-all-balls-to-each-box",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/"
+  },
+  "1770": {
+    "number": "1770",
+    "title": "Maximum Score from Performing Multiplication Operations",
+    "slug": "maximum-score-from-performing-multiplication-operations",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/"
+  },
+  "1773": {
+    "number": "1773",
+    "title": "Count Items Matching a Rule",
+    "slug": "count-items-matching-a-rule",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-items-matching-a-rule/"
+  },
+  "1774": {
+    "number": "1774",
+    "title": "Closest Dessert Cost",
+    "slug": "closest-dessert-cost",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/closest-dessert-cost/"
+  },
+  "1775": {
+    "number": "1775",
+    "title": "Equal Sum Arrays With Minimum Number of Operations",
+    "slug": "equal-sum-arrays-with-minimum-number-of-operations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations/"
+  },
+  "1779": {
+    "number": "1779",
+    "title": "Find Nearest Point That Has the Same X or Y Coordinate",
+    "slug": "find-nearest-point-that-has-the-same-x-or-y-coordinate",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/"
+  },
+  "1780": {
+    "number": "1780",
+    "title": "Check if Number is a Sum of Powers of Three",
+    "slug": "check-if-number-is-a-sum-of-powers-of-three",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/"
+  },
+  "1781": {
+    "number": "1781",
+    "title": "Sum of Beauty of All Substrings",
+    "slug": "sum-of-beauty-of-all-substrings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sum-of-beauty-of-all-substrings/"
+  },
+  "1784": {
+    "number": "1784",
+    "title": "Check if Binary String Has at Most One Segment of Ones",
+    "slug": "check-if-binary-string-has-at-most-one-segment-of-ones",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-binary-string-has-at-most-one-segment-of-ones/"
+  },
+  "1785": {
+    "number": "1785",
+    "title": "Minimum Elements to Add to Form a Given Sum",
+    "slug": "minimum-elements-to-add-to-form-a-given-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-elements-to-add-to-form-a-given-sum/"
+  },
+  "1790": {
+    "number": "1790",
+    "title": "Check if One String Swap Can Make Strings Equal",
+    "slug": "check-if-one-string-swap-can-make-strings-equal",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-one-string-swap-can-make-strings-equal/"
+  },
+  "1791": {
+    "number": "1791",
+    "title": "Find Center of Star Graph",
+    "slug": "find-center-of-star-graph",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-center-of-star-graph/"
+  },
+  "1792": {
+    "number": "1792",
+    "title": "Maximum Average Pass Ratio",
+    "slug": "maximum-average-pass-ratio",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-average-pass-ratio/"
+  },
+  "1793": {
+    "number": "1793",
+    "title": "Maximum Score of a Good Subarray",
+    "slug": "maximum-score-of-a-good-subarray",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-score-of-a-good-subarray/"
+  },
+  "1796": {
+    "number": "1796",
+    "title": "Second Largest Digit in a String",
+    "slug": "second-largest-digit-in-a-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/second-largest-digit-in-a-string/"
+  },
+  "1797": {
+    "number": "1797",
+    "title": "Design Authentication Manager",
+    "slug": "design-authentication-manager",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/design-authentication-manager/"
+  },
+  "1798": {
+    "number": "1798",
+    "title": "Maximum Number of Consecutive Values You Can Make",
+    "slug": "maximum-number-of-consecutive-values-you-can-make",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-consecutive-values-you-can-make/"
+  },
+  "1799": {
+    "number": "1799",
+    "title": "Maximize Score After N Operations",
+    "slug": "maximize-score-after-n-operations",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximize-score-after-n-operations/"
+  },
+  "1800": {
+    "number": "1800",
+    "title": "Maximum Ascending Subarray Sum",
+    "slug": "maximum-ascending-subarray-sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-ascending-subarray-sum/"
+  },
+  "1802": {
+    "number": "1802",
+    "title": "Maximum Value at a Given Index in a Bounded Array",
+    "slug": "maximum-value-at-a-given-index-in-a-bounded-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/"
+  },
+  "1805": {
+    "number": "1805",
+    "title": "Number of Different Integers in a String",
+    "slug": "number-of-different-integers-in-a-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/number-of-different-integers-in-a-string/"
+  },
+  "1806": {
+    "number": "1806",
+    "title": "Minimum Number of Operations to Reinitialize a Permutation",
+    "slug": "minimum-number-of-operations-to-reinitialize-a-permutation",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/"
+  },
+  "1807": {
+    "number": "1807",
+    "title": "Evaluate the Bracket Pairs of a String",
+    "slug": "evaluate-the-bracket-pairs-of-a-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/evaluate-the-bracket-pairs-of-a-string/"
+  },
+  "1812": {
+    "number": "1812",
+    "title": "Determine Color of a Chessboard Square",
+    "slug": "determine-color-of-a-chessboard-square",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/determine-color-of-a-chessboard-square/"
+  },
+  "1813": {
+    "number": "1813",
+    "title": "Sentence Similarity III",
+    "slug": "sentence-similarity-iii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sentence-similarity-iii/"
+  },
+  "1814": {
+    "number": "1814",
+    "title": "Count Nice Pairs in an Array",
+    "slug": "count-nice-pairs-in-an-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-nice-pairs-in-an-array/"
+  },
+  "1816": {
+    "number": "1816",
+    "title": "Truncate Sentence",
+    "slug": "truncate-sentence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/truncate-sentence/"
+  },
+  "1817": {
+    "number": "1817",
+    "title": "Finding the Users Active Minutes",
+    "slug": "finding-the-users-active-minutes",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/finding-the-users-active-minutes/"
+  },
+  "1818": {
+    "number": "1818",
+    "title": "Minimum Absolute Sum Difference",
+    "slug": "minimum-absolute-sum-difference",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-absolute-sum-difference/"
+  },
+  "1820": {
+    "number": "1820",
+    "title": "Maximum Number of Accepted Invitations",
+    "slug": "maximum-number-of-accepted-invitations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-accepted-invitations/"
+  },
+  "1822": {
+    "number": "1822",
+    "title": "Sign of the Product of an Array",
+    "slug": "sign-of-the-product-of-an-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sign-of-the-product-of-an-array/"
+  },
+  "1823": {
+    "number": "1823",
+    "title": "Find the Winner of the Circular Game",
+    "slug": "find-the-winner-of-the-circular-game",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-winner-of-the-circular-game/"
+  },
+  "1824": {
+    "number": "1824",
+    "title": "Minimum Sideway Jumps",
+    "slug": "minimum-sideway-jumps",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-sideway-jumps/"
+  },
+  "1827": {
+    "number": "1827",
+    "title": "Minimum Operations to Make the Array Increasing",
+    "slug": "minimum-operations-to-make-the-array-increasing",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-operations-to-make-the-array-increasing/"
+  },
+  "1828": {
+    "number": "1828",
+    "title": "Queries on Number of Points Inside a Circle",
+    "slug": "queries-on-number-of-points-inside-a-circle",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/queries-on-number-of-points-inside-a-circle/"
+  },
+  "1829": {
+    "number": "1829",
+    "title": "Maximum XOR for Each Query",
+    "slug": "maximum-xor-for-each-query",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-xor-for-each-query/"
+  },
+  "1832": {
+    "number": "1832",
+    "title": "Check if the Sentence Is Pangram",
+    "slug": "check-if-the-sentence-is-pangram",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-the-sentence-is-pangram/"
+  },
+  "1833": {
+    "number": "1833",
+    "title": "Maximum Ice Cream Bars",
+    "slug": "maximum-ice-cream-bars",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-ice-cream-bars/"
+  },
+  "1834": {
+    "number": "1834",
+    "title": "Single-Threaded CPU",
+    "slug": "single-threaded-cpu",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/single-threaded-cpu/"
   }
 };

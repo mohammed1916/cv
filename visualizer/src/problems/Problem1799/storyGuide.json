@@ -1,0 +1,31 @@
+{
+  "number": "1799",
+  "title": "Maximize Score After N Operations",
+  "goal": "Pair all values to maximize the sum of operation-index times pair GCD.",
+  "strategy": "A used-value mask determines how many operations have occurred. Try every pair as the latest operation and combine its weighted GCD with the optimal smaller mask.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Pair all values to maximize the sum of operation-index times pair GCD.",
+    "inspect": "A used-value mask determines how many operations have occurred. Try every pair as the latest operation and combine its weighted GCD with the optimal smaller mask.",
+    "update": "A used-value mask determines how many operations have occurred. Try every pair as the latest operation and combine its weighted GCD with the optimal smaller mask.",
+    "done": "Pair all values to maximize the sum of operation-index times pair GCD."
+  },
+  "edgeCases": [
+    "Only one pair",
+    "Equal values have equal pair GCDs",
+    "Pairing choices compete across shared factors"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

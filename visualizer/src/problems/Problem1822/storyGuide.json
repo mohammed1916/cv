@@ -1,0 +1,31 @@
+{
+  "number": "1822",
+  "title": "Sign of the Product of an Array",
+  "goal": "Return the sign of the array product without multiplying its magnitudes.",
+  "strategy": "A zero fixes the answer immediately. Otherwise only the parity of the negative-factor count changes the product sign.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the sign of the array product without multiplying its magnitudes.",
+    "inspect": "A zero fixes the answer immediately. Otherwise only the parity of the negative-factor count changes the product sign.",
+    "update": "A zero fixes the answer immediately. Otherwise only the parity of the negative-factor count changes the product sign.",
+    "done": "Return the sign of the array product without multiplying its magnitudes."
+  },
+  "edgeCases": [
+    "A zero overrides earlier signs",
+    "Odd number of negatives",
+    "Single positive factor"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

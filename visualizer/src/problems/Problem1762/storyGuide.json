@@ -1,0 +1,31 @@
+{
+  "number": "1762",
+  "title": "Buildings With an Ocean View",
+  "goal": "Find building indices with an unobstructed view of the ocean to the right.",
+  "strategy": "Scan from the ocean side and retain the tallest building already seen. Equality blocks the view just like a taller building.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find building indices with an unobstructed view of the ocean to the right.",
+    "inspect": "Scan from the ocean side and retain the tallest building already seen. Equality blocks the view just like a taller building.",
+    "update": "Scan from the ocean side and retain the tallest building already seen. Equality blocks the view just like a taller building.",
+    "done": "Find building indices with an unobstructed view of the ocean to the right."
+  },
+  "edgeCases": [
+    "Every building sees the ocean",
+    "Only last building sees the ocean",
+    "Equal heights block earlier buildings"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

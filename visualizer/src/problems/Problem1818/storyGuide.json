@@ -1,0 +1,31 @@
+{
+  "number": "1818",
+  "title": "Minimum Absolute Sum Difference",
+  "goal": "Minimize absolute sum difference by replacing at most one first-array entry with another value from that array.",
+  "strategy": "For each partner value, binary search the closest available replacement in sorted nums1. Subtract the single greatest possible saving from the original total.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize absolute sum difference by replacing at most one first-array entry with another value from that array.",
+    "inspect": "For each partner value, binary search the closest available replacement in sorted nums1. Subtract the single greatest possible saving from the original total.",
+    "update": "For each partner value, binary search the closest available replacement in sorted nums1. Subtract the single greatest possible saving from the original total.",
+    "done": "Minimize absolute sum difference by replacing at most one first-array entry with another value from that array."
+  },
+  "edgeCases": [
+    "Arrays already equal",
+    "Single value cannot improve itself",
+    "Duplicate candidate values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

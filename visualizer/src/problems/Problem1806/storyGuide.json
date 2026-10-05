@@ -1,0 +1,31 @@
+{
+  "number": "1806",
+  "title": "Minimum Number of Operations to Reinitialize a Permutation",
+  "goal": "Find the positive number of shuffle operations needed to restore the initial even-length permutation.",
+  "strategy": "Follow the specified index mapping starting at index one. Its return period equals the order of this perfect-shuffle permutation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the positive number of shuffle operations needed to restore the initial even-length permutation.",
+    "inspect": "Follow the specified index mapping starting at index one. Its return period equals the order of this perfect-shuffle permutation.",
+    "update": "Follow the specified index mapping starting at index one. Its return period equals the order of this perfect-shuffle permutation.",
+    "done": "Find the positive number of shuffle operations needed to restore the initial even-length permutation."
+  },
+  "edgeCases": [
+    "Smallest even permutation",
+    "Power-of-two permutation",
+    "A different even period"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

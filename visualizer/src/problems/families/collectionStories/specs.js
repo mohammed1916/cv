@@ -1,3 +1,5 @@
+import { continuedSpecs } from './expansionContinuedSpecs.js';
+import { forwardSpecs } from './expansionForwardSpecs.js';
 import { advanceSpecs } from './expansionAdvanceSpecs.js';
 import { progressSpecs } from './expansionProgressSpecs.js';
 import { continuingSpecs } from './expansionNextSpecs.js';
@@ -16,6 +18,8 @@ export const specs = {
 ...continuingSpecs,
 ...progressSpecs,
 ...advanceSpecs,
+...forwardSpecs,
+...continuedSpecs,
 860:['bills','Serve every customer with exact change.','Keep fives available: a ten plus a five is preferable to three fives when changing twenty.','five = ten = 0|for bill in bills:|    choose change using available denominations|    update counts; reject a shortage|return true','O(n) time; O(1) state.'],
 861:['grid','Maximize the sum of binary row values after flips.','A leading one outweighs every lower bit combined. Fix row leaders first, then maximize each column independently.','copy grid|make every row start with one|for each remaining column:|    flip when zeros outnumber ones|return sum of binary rows','O(rc) time and copied-grid space.'],
 868:['n','Find the largest distance between adjacent set bits.','Only the previous one is needed; zero runs create distance but do not become endpoints.','last = -1; best = 0|for each binary digit:|    if digit is one and last exists, measure gap|    update best and last position|return best','O(log n) time and digit space.'],

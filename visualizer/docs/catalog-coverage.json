@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1049,
-  "matchedCatalogRoutes": 1033,
-  "remaining": 3040,
+  "routes": 1093,
+  "matchedCatalogRoutes": 1077,
+  "remaining": 2996,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -12429,29 +12429,29 @@
       "number": "1762",
       "title": "Buildings With an Ocean View",
       "slug": "buildings-with-an-ocean-view",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1762"
     },
     {
       "number": "1763",
       "title": "Longest Nice Substring",
       "slug": "longest-nice-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1763"
     },
     {
       "number": "1764",
       "title": "Form Array by Concatenating Subarrays of Another Array",
       "slug": "form-array-by-concatenating-subarrays-of-another-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1764"
     },
     {
       "number": "1765",
       "title": "Map of Highest Peak",
       "slug": "map-of-highest-peak",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1765"
     },
     {
       "number": "1766",
@@ -12471,22 +12471,22 @@
       "number": "1768",
       "title": "Merge Strings Alternately",
       "slug": "merge-strings-alternately",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1768"
     },
     {
       "number": "1769",
       "title": "Minimum Number of Operations to Move All Balls to Each Box",
       "slug": "minimum-number-of-operations-to-move-all-balls-to-each-box",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1769"
     },
     {
       "number": "1770",
       "title": "Maximum Score from Performing Multiplication Operations",
       "slug": "maximum-score-from-performing-multiplication-operations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1770"
     },
     {
       "number": "1771",
@@ -12506,22 +12506,22 @@
       "number": "1773",
       "title": "Count Items Matching a Rule",
       "slug": "count-items-matching-a-rule",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1773"
     },
     {
       "number": "1774",
       "title": "Closest Dessert Cost",
       "slug": "closest-dessert-cost",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1774"
     },
     {
       "number": "1775",
       "title": "Equal Sum Arrays With Minimum Number of Operations",
       "slug": "equal-sum-arrays-with-minimum-number-of-operations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1775"
     },
     {
       "number": "1776",
@@ -12548,22 +12548,22 @@
       "number": "1779",
       "title": "Find Nearest Point That Has the Same X or Y Coordinate",
       "slug": "find-nearest-point-that-has-the-same-x-or-y-coordinate",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1779"
     },
     {
       "number": "1780",
       "title": "Check if Number is a Sum of Powers of Three",
       "slug": "check-if-number-is-a-sum-of-powers-of-three",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1780"
     },
     {
       "number": "1781",
       "title": "Sum of Beauty of All Substrings",
       "slug": "sum-of-beauty-of-all-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1781"
     },
     {
       "number": "1782",
@@ -12583,15 +12583,15 @@
       "number": "1784",
       "title": "Check if Binary String Has at Most One Segment of Ones",
       "slug": "check-if-binary-string-has-at-most-one-segment-of-ones",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1784"
     },
     {
       "number": "1785",
       "title": "Minimum Elements to Add to Form a Given Sum",
       "slug": "minimum-elements-to-add-to-form-a-given-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1785"
     },
     {
       "number": "1786",
@@ -12625,29 +12625,29 @@
       "number": "1790",
       "title": "Check if One String Swap Can Make Strings Equal",
       "slug": "check-if-one-string-swap-can-make-strings-equal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1790"
     },
     {
       "number": "1791",
       "title": "Find Center of Star Graph",
       "slug": "find-center-of-star-graph",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1791"
     },
     {
       "number": "1792",
       "title": "Maximum Average Pass Ratio",
       "slug": "maximum-average-pass-ratio",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1792"
     },
     {
       "number": "1793",
       "title": "Maximum Score of a Good Subarray",
       "slug": "maximum-score-of-a-good-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1793"
     },
     {
       "number": "1794",
@@ -12667,36 +12667,36 @@
       "number": "1796",
       "title": "Second Largest Digit in a String",
       "slug": "second-largest-digit-in-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1796"
     },
     {
       "number": "1797",
       "title": "Design Authentication Manager",
       "slug": "design-authentication-manager",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1797"
     },
     {
       "number": "1798",
       "title": "Maximum Number of Consecutive Values You Can Make",
       "slug": "maximum-number-of-consecutive-values-you-can-make",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1798"
     },
     {
       "number": "1799",
       "title": "Maximize Score After N Operations",
       "slug": "maximize-score-after-n-operations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1799"
     },
     {
       "number": "1800",
       "title": "Maximum Ascending Subarray Sum",
       "slug": "maximum-ascending-subarray-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1800"
     },
     {
       "number": "1801",
@@ -12709,8 +12709,8 @@
       "number": "1802",
       "title": "Maximum Value at a Given Index in a Bounded Array",
       "slug": "maximum-value-at-a-given-index-in-a-bounded-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1802"
     },
     {
       "number": "1803",
@@ -12730,22 +12730,22 @@
       "number": "1805",
       "title": "Number of Different Integers in a String",
       "slug": "number-of-different-integers-in-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1805"
     },
     {
       "number": "1806",
       "title": "Minimum Number of Operations to Reinitialize a Permutation",
       "slug": "minimum-number-of-operations-to-reinitialize-a-permutation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1806"
     },
     {
       "number": "1807",
       "title": "Evaluate the Bracket Pairs of a String",
       "slug": "evaluate-the-bracket-pairs-of-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1807"
     },
     {
       "number": "1808",
@@ -12779,22 +12779,22 @@
       "number": "1812",
       "title": "Determine Color of a Chessboard Square",
       "slug": "determine-color-of-a-chessboard-square",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1812"
     },
     {
       "number": "1813",
       "title": "Sentence Similarity III",
       "slug": "sentence-similarity-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1813"
     },
     {
       "number": "1814",
       "title": "Count Nice Pairs in an Array",
       "slug": "count-nice-pairs-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1814"
     },
     {
       "number": "1815",
@@ -12807,22 +12807,22 @@
       "number": "1816",
       "title": "Truncate Sentence",
       "slug": "truncate-sentence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1816"
     },
     {
       "number": "1817",
       "title": "Finding the Users Active Minutes",
       "slug": "finding-the-users-active-minutes",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1817"
     },
     {
       "number": "1818",
       "title": "Minimum Absolute Sum Difference",
       "slug": "minimum-absolute-sum-difference",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1818"
     },
     {
       "number": "1819",
@@ -12835,8 +12835,8 @@
       "number": "1820",
       "title": "Maximum Number of Accepted Invitations",
       "slug": "maximum-number-of-accepted-invitations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1820"
     },
     {
       "number": "1821",
@@ -12849,22 +12849,22 @@
       "number": "1822",
       "title": "Sign of the Product of an Array",
       "slug": "sign-of-the-product-of-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1822"
     },
     {
       "number": "1823",
       "title": "Find the Winner of the Circular Game",
       "slug": "find-the-winner-of-the-circular-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1823"
     },
     {
       "number": "1824",
       "title": "Minimum Sideway Jumps",
       "slug": "minimum-sideway-jumps",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1824"
     },
     {
       "number": "1825",
@@ -12884,22 +12884,22 @@
       "number": "1827",
       "title": "Minimum Operations to Make the Array Increasing",
       "slug": "minimum-operations-to-make-the-array-increasing",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1827"
     },
     {
       "number": "1828",
       "title": "Queries on Number of Points Inside a Circle",
       "slug": "queries-on-number-of-points-inside-a-circle",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1828"
     },
     {
       "number": "1829",
       "title": "Maximum XOR for Each Query",
       "slug": "maximum-xor-for-each-query",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1829"
     },
     {
       "number": "1830",
@@ -12919,22 +12919,22 @@
       "number": "1832",
       "title": "Check if the Sentence Is Pangram",
       "slug": "check-if-the-sentence-is-pangram",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1832"
     },
     {
       "number": "1833",
       "title": "Maximum Ice Cream Bars",
       "slug": "maximum-ice-cream-bars",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1833"
     },
     {
       "number": "1834",
       "title": "Single-Threaded CPU",
       "slug": "single-threaded-cpu",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1834"
     },
     {
       "number": "1835",

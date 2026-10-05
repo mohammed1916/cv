@@ -1,0 +1,31 @@
+{
+  "number": "1793",
+  "title": "Maximum Score of a Good Subarray",
+  "goal": "Maximize minimum-value times length over subarrays containing index k.",
+  "strategy": "Start at the required index and expand toward the larger available neighbor. This delays lowering the current minimum while exploring increasingly wide eligible intervals.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize minimum-value times length over subarrays containing index k.",
+    "inspect": "Start at the required index and expand toward the larger available neighbor. This delays lowering the current minimum while exploring increasingly wide eligible intervals.",
+    "update": "Start at the required index and expand toward the larger available neighbor. This delays lowering the current minimum while exploring increasingly wide eligible intervals.",
+    "done": "Maximize minimum-value times length over subarrays containing index k."
+  },
+  "edgeCases": [
+    "Required index at left boundary",
+    "All equal values prefer full width",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

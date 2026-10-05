@@ -1,0 +1,31 @@
+{
+  "number": "1774",
+  "title": "Closest Dessert Cost",
+  "goal": "Choose one dessert base and up to two of each topping closest to a target cost.",
+  "strategy": "Build all reachable topping totals using zero, one, or two copies of each topping. Combine them with every base and minimize distance, breaking ties toward lower cost.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose one dessert base and up to two of each topping closest to a target cost.",
+    "inspect": "Build all reachable topping totals using zero, one, or two copies of each topping. Combine them with every base and minimize distance, breaking ties toward lower cost.",
+    "update": "Build all reachable topping totals using zero, one, or two copies of each topping. Combine them with every base and minimize distance, breaking ties toward lower cost.",
+    "done": "Choose one dessert base and up to two of each topping closest to a target cost."
+  },
+  "edgeCases": [
+    "All bases exceed target",
+    "Equal distance favors lower total",
+    "Exact base needs no topping"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

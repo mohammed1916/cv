@@ -9,7 +9,9 @@ import { laterSpecs } from '../src/problems/families/collectionStories/expansion
 import { continuingSpecs } from '../src/problems/families/collectionStories/expansionNextSpecs.js';
 import { progressSpecs } from '../src/problems/families/collectionStories/expansionProgressSpecs.js';
 import { advanceSpecs } from '../src/problems/families/collectionStories/expansionAdvanceSpecs.js';
-const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs,...laterSpecs,...continuingSpecs,...progressSpecs,...advanceSpecs});
+import { forwardSpecs } from '../src/problems/families/collectionStories/expansionForwardSpecs.js';
+import { continuedSpecs } from '../src/problems/families/collectionStories/expansionContinuedSpecs.js';
+const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs,...laterSpecs,...continuingSpecs,...progressSpecs,...advanceSpecs,...forwardSpecs,...continuedSpecs});
 const inventoryFile='docs/catalog-story-inventory.json';
 const inventory=JSON.parse(fs.readFileSync(inventoryFile,'utf8'));
 for(const id of ids){

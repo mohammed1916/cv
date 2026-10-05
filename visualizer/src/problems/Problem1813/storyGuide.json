@@ -1,0 +1,31 @@
+{
+  "number": "1813",
+  "title": "Sentence Similarity III",
+  "goal": "Decide whether inserting one contiguous block of words can make two sentences identical.",
+  "strategy": "Match a common word prefix and then a nonoverlapping common suffix. The shorter sentence must be fully covered; unmatched longer words then form one middle block.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether inserting one contiguous block of words can make two sentences identical.",
+    "inspect": "Match a common word prefix and then a nonoverlapping common suffix. The shorter sentence must be fully covered; unmatched longer words then form one middle block.",
+    "update": "Match a common word prefix and then a nonoverlapping common suffix. The shorter sentence must be fully covered; unmatched longer words then form one middle block.",
+    "done": "Decide whether inserting one contiguous block of words can make two sentences identical."
+  },
+  "edgeCases": [
+    "Insertion at the beginning",
+    "Insertion at the end",
+    "Two separate gaps cannot be one insertion"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1796",
+  "title": "Second Largest Digit in a String",
+  "goal": "Find the second greatest distinct decimal digit present in a mixed string.",
+  "strategy": "Track two different digit values in descending order. Ignore letters and duplicate appearances of the maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the second greatest distinct decimal digit present in a mixed string.",
+    "inspect": "Track two different digit values in descending order. Ignore letters and duplicate appearances of the maximum.",
+    "update": "Track two different digit values in descending order. Ignore letters and duplicate appearances of the maximum.",
+    "done": "Find the second greatest distinct decimal digit present in a mixed string."
+  },
+  "edgeCases": [
+    "Only one distinct digit",
+    "No digits",
+    "Zero is a valid second digit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

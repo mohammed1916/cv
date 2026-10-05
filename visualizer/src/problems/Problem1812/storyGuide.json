@@ -1,0 +1,31 @@
+{
+  "number": "1812",
+  "title": "Determine Color of a Chessboard Square",
+  "goal": "Determine whether a named chessboard square is white.",
+  "strategy": "Files and ranks alternate colors independently. With a1 black, the parity of zero-based file plus zero-based rank determines the color.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether a named chessboard square is white.",
+    "inspect": "Files and ranks alternate colors independently. With a1 black, the parity of zero-based file plus zero-based rank determines the color.",
+    "update": "Files and ranks alternate colors independently. With a1 black, the parity of zero-based file plus zero-based rank determines the color.",
+    "done": "Determine whether a named chessboard square is white."
+  },
+  "edgeCases": [
+    "Black origin",
+    "Opposite corner remains black",
+    "Adjacent square flips color"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

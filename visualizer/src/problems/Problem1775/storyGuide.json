@@ -1,0 +1,31 @@
+{
+  "number": "1775",
+  "title": "Equal Sum Arrays With Minimum Number of Operations",
+  "goal": "Make two dice-valued arrays have equal sums using as few value changes as possible.",
+  "strategy": "Each smaller-side value can increase to six, and each larger-side value can decrease to one. Use those independent gains in decreasing order to close the sum gap fastest.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Make two dice-valued arrays have equal sums using as few value changes as possible.",
+    "inspect": "Each smaller-side value can increase to six, and each larger-side value can decrease to one. Use those independent gains in decreasing order to close the sum gap fastest.",
+    "update": "Each smaller-side value can increase to six, and each larger-side value can decrease to one. Use those independent gains in decreasing order to close the sum gap fastest.",
+    "done": "Make two dice-valued arrays have equal sums using as few value changes as possible."
+  },
+  "edgeCases": [
+    "Already equal sums",
+    "Different lengths make equality impossible",
+    "One change can close the remaining gap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1829",
+  "title": "Maximum XOR for Each Query",
+  "goal": "Choose a bounded integer maximizing XOR for each shrinking-array query.",
+  "strategy": "The best result is an all-one value within the allowed bit width. XOR the current array total with that mask, then remove the final value from the total using XOR again.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose a bounded integer maximizing XOR for each shrinking-array query.",
+    "inspect": "The best result is an all-one value within the allowed bit width. XOR the current array total with that mask, then remove the final value from the total using XOR again.",
+    "update": "The best result is an all-one value within the allowed bit width. XOR the current array total with that mask, then remove the final value from the total using XOR again.",
+    "done": "Choose a bounded integer maximizing XOR for each shrinking-array query."
+  },
+  "edgeCases": [
+    "All zero values",
+    "Full-mask singleton",
+    "Smallest bit width"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

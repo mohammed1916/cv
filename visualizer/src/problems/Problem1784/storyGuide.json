@@ -1,0 +1,31 @@
+{
+  "number": "1784",
+  "title": "Check if Binary String Has at Most One Segment of Ones",
+  "goal": "Check whether a binary string has at most one contiguous segment of ones.",
+  "strategy": "Count positions where a one starts after zero or at the beginning. A second such start means separated one segments exist.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether a binary string has at most one contiguous segment of ones.",
+    "inspect": "Count positions where a one starts after zero or at the beginning. A second such start means separated one segments exist.",
+    "update": "Count positions where a one starts after zero or at the beginning. A second such start means separated one segments exist.",
+    "done": "Check whether a binary string has at most one contiguous segment of ones."
+  },
+  "edgeCases": [
+    "One segment followed by zeros",
+    "All ones form one segment",
+    "Single one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

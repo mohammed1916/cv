@@ -1,0 +1,31 @@
+{
+  "number": "1773",
+  "title": "Count Items Matching a Rule",
+  "goal": "Count items whose selected type, color, or name matches the requested rule value.",
+  "strategy": "Map the rule key to one column and compare that field in each item. Matches in other columns do not satisfy this rule.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count items whose selected type, color, or name matches the requested rule value.",
+    "inspect": "Map the rule key to one column and compare that field in each item. Matches in other columns do not satisfy this rule.",
+    "update": "Map the rule key to one column and compare that field in each item. Matches in other columns do not satisfy this rule.",
+    "done": "Count items whose selected type, color, or name matches the requested rule value."
+  },
+  "edgeCases": [
+    "Matching another field does not count",
+    "No matching value",
+    "Match by name"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1800",
+  "title": "Maximum Ascending Subarray Sum",
+  "goal": "Find the greatest sum of a strictly ascending contiguous subarray.",
+  "strategy": "A greater current value extends the previous ascending suffix. Equal or smaller values break that run and start a new one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest sum of a strictly ascending contiguous subarray.",
+    "inspect": "A greater current value extends the previous ascending suffix. Equal or smaller values break that run and start a new one.",
+    "update": "A greater current value extends the previous ascending suffix. Equal or smaller values break that run and start a new one.",
+    "done": "Find the greatest sum of a strictly ascending contiguous subarray."
+  },
+  "edgeCases": [
+    "Strictly decreasing values",
+    "Equal neighbors break runs",
+    "Entire array ascending"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

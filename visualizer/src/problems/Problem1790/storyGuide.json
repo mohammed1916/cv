@@ -1,0 +1,31 @@
+{
+  "number": "1790",
+  "title": "Check if One String Swap Can Make Strings Equal",
+  "goal": "Decide whether at most one character swap in a string can make the two strings equal.",
+  "strategy": "Zero mismatches already succeeds. Otherwise exactly two positions must differ, and swapping their characters must repair both.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether at most one character swap in a string can make the two strings equal.",
+    "inspect": "Zero mismatches already succeeds. Otherwise exactly two positions must differ, and swapping their characters must repair both.",
+    "update": "Zero mismatches already succeeds. Otherwise exactly two positions must differ, and swapping their characters must repair both.",
+    "done": "Decide whether at most one character swap in a string can make the two strings equal."
+  },
+  "edgeCases": [
+    "Already identical",
+    "One mismatch cannot be repaired by a swap",
+    "Several mismatches exceed one swap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

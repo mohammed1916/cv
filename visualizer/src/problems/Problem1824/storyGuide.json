@@ -1,0 +1,31 @@
+{
+  "number": "1824",
+  "title": "Minimum Sideway Jumps",
+  "goal": "Reach the road end from lane two using the fewest sideways jumps.",
+  "strategy": "Maintain the best side-jump count for each lane. Invalidate the blocked lane before allowing transitions among currently open lanes at the same position.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach the road end from lane two using the fewest sideways jumps.",
+    "inspect": "Maintain the best side-jump count for each lane. Invalidate the blocked lane before allowing transitions among currently open lanes at the same position.",
+    "update": "Maintain the best side-jump count for each lane. Invalidate the blocked lane before allowing transitions among currently open lanes at the same position.",
+    "done": "Reach the road end from lane two using the fewest sideways jumps."
+  },
+  "edgeCases": [
+    "Completely clear road",
+    "Only the starting lane is blocked ahead",
+    "Shortest road"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
