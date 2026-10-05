@@ -1,0 +1,27 @@
+{
+  "number": "1089",
+  "title": "Duplicate Zeros",
+  "goal": "Produce the fixed-length array after duplicating each zero and discarding overflow.",
+  "strategy": "Count virtual expanded positions, then read and write backward in the same working array. Ignore destinations beyond the original length; backward writes preserve unread values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Produce the fixed-length array after duplicating each zero and discarding overflow.",
+    "inspect": "Count virtual expanded positions, then read and write backward in the same working array. Ignore destinations beyond the original length; backward writes preserve unread values.",
+    "update": "Count virtual expanded positions, then read and write backward in the same working array. Ignore destinations beyond the original length; backward writes preserve unread values.",
+    "done": "Produce the fixed-length array after duplicating each zero and discarding overflow."
+  },
+  "edgeCases": [
+    "Last-slot zero cannot duplicate beyond the boundary",
+    "All zeros retain the same length",
+    "No zeros leave the array unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "1094",
+  "title": "Car Pooling",
+  "goal": "Decide whether all passenger trips fit the vehicle capacity.",
+  "strategy": "Combine pickup and drop-off changes at each location, then sweep locations in order. End locations release capacity before onward travel.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether all passenger trips fit the vehicle capacity.",
+    "inspect": "Combine pickup and drop-off changes at each location, then sweep locations in order. End locations release capacity before onward travel.",
+    "update": "Combine pickup and drop-off changes at each location, then sweep locations in order. End locations release capacity before onward travel.",
+    "done": "Decide whether all passenger trips fit the vehicle capacity."
+  },
+  "edgeCases": [
+    "Drop-off and pickup at the same stop",
+    "Overlapping load exceeds capacity",
+    "Single trip exactly fills the car"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

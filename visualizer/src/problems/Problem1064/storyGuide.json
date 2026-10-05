@@ -1,0 +1,27 @@
+{
+  "number": "1064",
+  "title": "Fixed Point",
+  "goal": "Find the smallest index whose array value equals that index.",
+  "strategy": "In strictly increasing integer arrays, value minus index is nondecreasing. Binary search can discard one side, but equality continues left to find the first answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest index whose array value equals that index.",
+    "inspect": "In strictly increasing integer arrays, value minus index is nondecreasing. Binary search can discard one side, but equality continues left to find the first answer.",
+    "update": "In strictly increasing integer arrays, value minus index is nondecreasing. Binary search can discard one side, but equality continues left to find the first answer.",
+    "done": "Find the smallest index whose array value equals that index."
+  },
+  "edgeCases": [
+    "Several fixed points require the earliest",
+    "All values stay below their indices",
+    "First position is fixed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

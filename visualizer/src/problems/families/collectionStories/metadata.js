@@ -489,5 +489,61 @@ export const collectionStoryMetadata = {
     "slug": "grumpy-bookstore-owner",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/grumpy-bookstore-owner/"
+  },
+  "1053": {
+    "number": "1053",
+    "title": "Previous Permutation With One Swap",
+    "slug": "previous-permutation-with-one-swap",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/previous-permutation-with-one-swap/"
+  },
+  "1064": {
+    "number": "1064",
+    "title": "Fixed Point",
+    "slug": "fixed-point",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/fixed-point/"
+  },
+  "1071": {
+    "number": "1071",
+    "title": "Greatest Common Divisor of Strings",
+    "slug": "greatest-common-divisor-of-strings",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/greatest-common-divisor-of-strings/"
+  },
+  "1078": {
+    "number": "1078",
+    "title": "Occurrences After Bigram",
+    "slug": "occurrences-after-bigram",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/occurrences-after-bigram/"
+  },
+  "1085": {
+    "number": "1085",
+    "title": "Sum of Digits in the Minimum Number",
+    "slug": "sum-of-digits-in-the-minimum-number",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sum-of-digits-in-the-minimum-number/"
+  },
+  "1089": {
+    "number": "1089",
+    "title": "Duplicate Zeros",
+    "slug": "duplicate-zeros",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/duplicate-zeros/"
+  },
+  "1094": {
+    "number": "1094",
+    "title": "Car Pooling",
+    "slug": "car-pooling",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/car-pooling/"
+  },
+  "1099": {
+    "number": "1099",
+    "title": "Two Sum Less Than K",
+    "slug": "two-sum-less-than-k",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/two-sum-less-than-k/"
   }
 };

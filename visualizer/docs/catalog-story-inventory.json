@@ -1,5 +1,5 @@
 {
-  "routes": 766,
+  "routes": 774,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -299,6 +299,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1053",
+      "number": "1053",
+      "title": "Previous Permutation With One Swap",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem106",
       "number": "106",
       "title": "Construct Binary Tree from Inorder and Postorder Traversal",
@@ -306,6 +315,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1064",
+      "number": "1064",
+      "title": "Fixed Point",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem107",
@@ -317,6 +335,24 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1071",
+      "number": "1071",
+      "title": "Greatest Common Divisor of Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1078",
+      "number": "1078",
+      "title": "Occurrences After Bigram",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem108",
       "number": "108",
       "title": "Convert Sorted Array to Binary Search Tree",
@@ -324,6 +360,24 @@
       "checks": 1,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1085",
+      "number": "1085",
+      "title": "Sum of Digits in the Minimum Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1089",
+      "number": "1089",
+      "title": "Duplicate Zeros",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem109",
@@ -335,10 +389,28 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1094",
+      "number": "1094",
+      "title": "Car Pooling",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1096",
       "number": "1096",
       "title": "Brace Expansion II",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1099",
+      "number": "1099",
+      "title": "Two Sum Less Than K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem11",

@@ -6,15 +6,27 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 766 local routes, of which 750 match catalog slugs
-or unique normalized titles. **3,323 catalog entries remain unmatched.** Route
+After the continued implementation there are 774 local routes, of which 758 match catalog slugs
+or unique normalized titles. **3,315 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
 
 ## Added in this batch
 
-### Latest continuation: 20 additional problems
+### Latest continuation: 8 additional problems
+
+1053, 1064, 1071, 1078, 1085, 1089, 1094, and 1099.
+
+These extend the same shared collection components with 32 original examples
+and 1,600 generated reference comparisons. Stories show the previous-permutation
+pivot and duplicate choice, binary-search bounds for the earliest fixed point,
+gcd length reductions, overlapping bigrams, minimum-value digit sums, backward
+zero duplication, occupancy changes at trip boundaries, and strict pair-sum
+comparisons. Duplicate Zeros performs backward writes with constant algorithm
+auxiliary state; the UI separately copies the input and saves replay frames.
+
+### Previous continuation: 20 additional problems
 
 1006, 1007, 1009, 1010, 1011, 1013, 1014, 1015, 1017, 1018, 1021,
 1023, 1025, 1029, 1030, 1037, 1041, 1046, 1051, and 1052.
@@ -91,17 +103,17 @@ with other examples; provenance does not imply mathematical uniqueness.
 
 ## Current validation
 
-- Combined family tests: 168 passing tests, including 16,900 deterministic
-  generated-input oracle comparisons across 149 algorithms (4,000 added in
+- Combined family tests: 176 passing tests, including 18,500 deterministic
+  generated-input oracle comparisons across 157 algorithms (1,600 added in
   this continuation).
-- 4,655 real scene frames render successfully on the server, including tree
+- 4,820 real scene frames render successfully on the server, including tree
   diagrams with stable IDs and independent snapshots across rewiring.
-- 12 authored-example tests and 774 narrative tests pass.
-- Catalog example audit covers 766 routes and executes 1,726 legacy traces
-  and 804 shared-workspace builds. 332 legacy helper/adapter checks remain
+- 12 authored-example tests and 782 narrative tests pass.
+- Catalog example audit covers 774 routes and executes 1,726 legacy traces
+  and 836 shared-workspace builds. 332 legacy helper/adapter checks remain
   explicitly skipped.
 - Production build passes and changed-source lint introduces no new findings.
-- Static interaction contracts report no failures across 1,598 components;
+- Static interaction contracts report no failures across 1,606 components;
   this checks source contracts, not actual timer or click behavior.
 - Browser layout, clicking, timer playback, and responsive behavior remain
   unverified in this continuation. Server rendering is not a substitute for

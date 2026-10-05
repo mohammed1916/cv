@@ -5,6 +5,14 @@ import { nextSolvers } from './nextAlgorithms.js';
 
 const sum=a=>a.reduce((x,y)=>x+y,0);
 const references={
+1053:({arr})=>{const less=(a,b)=>{for(let i=0;i<a.length;i++)if(a[i]!==b[i])return a[i]<b[i];return false;};let best=null;for(let i=0;i<arr.length;i++)for(let j=i+1;j<arr.length;j++){const a=[...arr];[a[i],a[j]]=[a[j],a[i]];if(less(a,arr)&&(!best||less(best,a)))best=a;}return best??arr;},
+1064:({arr})=>arr.findIndex((v,i)=>v===i),
+1071:({str1,str2})=>{for(let n=Math.min(str1.length,str2.length);n>=1;n--){const s=str1.slice(0,n);if(str1.length%n===0&&str2.length%n===0&&s.repeat(str1.length/n)===str1&&s.repeat(str2.length/n)===str2)return s;}return '';},
+1078:({text,first,second})=>{const a=text.split(' ');return a.filter((_,i)=>i>=2&&a[i-2]===first&&a[i-1]===second);},
+1085:({nums})=>{let n=[...nums].sort((a,b)=>a-b)[0],sum=0;while(n){sum+=n%10;n=Math.floor(n/10);}return sum%2===0?1:0;},
+1089:({arr})=>arr.flatMap(v=>v===0?[0,0]:[v]).slice(0,arr.length),
+1094:({trips,capacity})=>Array.from({length:Math.max(...trips.map(t=>t[2]))},(_,location)=>sum(trips.filter(([,a,b])=>a<=location&&location<b).map(t=>t[0]))).every(n=>n<=capacity),
+1099:({nums,k})=>Math.max(-1,...nums.flatMap((v,i)=>nums.slice(i+1).map(w=>v+w)).filter(n=>n<k)),
 1006:({n})=>{let answer=0;for(let start=n,group=0;start>=1;start-=4,group++){let term=start;if(start>=2)term*=start-1;if(start>=3)term=Math.floor(term/(start-2));answer+=(group===0?term:-term);if(start>=4)answer+=start-3;}return answer;},
 1007:({tops,bottoms})=>{let best=Infinity;for(let mask=0;mask<2**tops.length;mask++){const a=tops.map((v,i)=>mask>>i&1?bottoms[i]:v),b=bottoms.map((v,i)=>mask>>i&1?tops[i]:v);if(new Set(a).size===1||new Set(b).size===1)best=Math.min(best,[...mask.toString(2)].filter(c=>c==='1').length);}return best===Infinity?-1:best;},
 1009:({n})=>{let mask=1;while(mask<=n)mask*=2;return n===0?1:mask-1-n;},
@@ -50,9 +58,10 @@ const random=max=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%max
 const vector=(n,max=10)=>Array.from({length:n},()=>random(max));
 const word=(n,alphabet)=>vector(n,alphabet.length).map(i=>alphabet[i]).join('');
 const generators={
+1053:()=>({arr:vector(9,6).map(v=>v+1)}),1064:()=>({arr:[...new Set(vector(16,30).map(v=>v-10))].sort((a,b)=>a-b)}),1071:()=>{const base=word(3,'ABC');return{str1:base.repeat(1+random(5)),str2:random(3)?base.repeat(1+random(5)):word(8,'ABC')};},1078:()=>({text:Array.from({length:14},()=>word(2,'ab')).join(' '),first:word(2,'ab'),second:word(2,'ab')}),1085:()=>({nums:vector(12,10000).map(v=>v+1)}),1089:()=>({arr:vector(14,4)}),1094:()=>({trips:Array.from({length:7},()=>{const start=random(12);return[1+random(5),start,start+1+random(8)];}),capacity:1+random(15)}),1099:()=>({nums:vector(10,50).map(v=>v+1),k:1+random(100)}),
 1006:()=>({n:1+random(80)}),1007:()=>({tops:vector(2+random(7),6).map(v=>v+1),bottoms:[]}),1009:()=>({n:random(1000000001)}),1010:()=>({time:vector(12,500).map(v=>v+1)}),1011:()=>({weights:vector(8,12).map(v=>v+1),days:1+random(8)}),1013:()=>({arr:vector(10,9).map(v=>v-4)}),1014:()=>({values:vector(10,30).map(v=>v+1)}),1015:()=>({k:1+random(150)}),1017:()=>({n:random(1000000001)}),1018:()=>({nums:vector(80,2)}),1021:()=>{let s='',depth=0;for(let i=0;i<20;i++){if(depth&&random(2)){s+=')';depth--;}else{s+='(';depth++;}}return{s:s+')'.repeat(depth)};},1023:()=>({queries:Array.from({length:8},()=>word(8,'abAB')),pattern:word(3,'abAB')}),1025:()=>({n:1+random(60)}),1029:()=>({costs:Array.from({length:8},()=>vector(2,300).map(v=>v+1))}),1030:()=>{const rows=1+random(7),cols=1+random(7);return{rows,cols,rCenter:random(rows),cCenter:random(cols)};},1037:()=>({points:Array.from({length:3},()=>vector(2,101))}),1041:()=>({instructions:word(20,'GLR')}),1046:()=>({stones:vector(12,80).map(v=>v+1)}),1051:()=>({heights:vector(20,100).map(v=>v+1)}),1052:()=>({customers:vector(12,20),grumpy:vector(12,2),minutes:1+random(12)}),
 };
-test('4000 generated cases match independent calculations',()=>{
+test('5600 generated cases match independent calculations',()=>{
   for(let round=0;round<200;round++)for(const key of Object.keys(nextSolvers)){
     const id=Number(key),input=generators[id]();if(id===1007)input.bottoms=vector(input.tops.length,6).map(v=>v+1);
     try{verify(id,input);}catch(error){error.message=`${id}, round ${round}, ${JSON.stringify(input)}: ${error.message}`;throw error;}
@@ -60,6 +69,7 @@ test('4000 generated cases match independent calculations',()=>{
 });
 test('every new problem rejects malformed domain inputs',()=>{
   const invalid={1006:{n:0},1007:{tops:[1,2],bottoms:[3]},1009:{n:-1},1010:{time:[0]},1011:{weights:[1,2],days:3},1013:{arr:[0,0]},1014:{values:[7]},1015:{k:0},1017:{n:1.5},1018:{nums:[0,2]},1021:{s:')('},1023:{queries:['a1'],pattern:'a'},1025:{n:61},1029:{costs:[[1,2],[3,4],[5,6]]},1030:{rows:2,cols:2,rCenter:2,cCenter:0},1037:{points:[[1,2],[3,4]]},1041:{instructions:'GGF'},1046:{stones:[0]},1051:{heights:[101]},1052:{customers:[1,2],grumpy:[0,1],minutes:0}};
+  Object.assign(invalid,{1053:{arr:[0]},1064:{arr:[1,1]},1071:{str1:'abc',str2:'ABC'},1078:{text:'two  spaces',first:'two',second:'spaces'},1085:{nums:[0]},1089:{arr:[10]},1094:{trips:[[2,4,4]],capacity:3},1099:{nums:[1,2],k:0}});
   assert.deepEqual(Object.keys(invalid),Object.keys(nextSolvers));for(const [id,input]of Object.entries(invalid))assert.throws(()=>definitions[id].build(input),`Problem ${id}`);
 });
 test('snapshots preserve intermediate stacks and binary-search feasibility bounds',()=>{

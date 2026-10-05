@@ -1,4 +1,40 @@
 export const nextSolvers = {
+  1053({arr},emit) {
+    const a=[...arr];let left=a.length-2;while(left>=0&&a[left]<=a[left+1])left--;
+    if(left<0){emit('The whole sequence is nondecreasing. No single swap can make it lexicographically smaller.');return a;}
+    let right=a.length-1;while(a[right]>=a[left]||(right>left+1&&a[right]===a[right-1]))right--;
+    emit(`The rightmost descent starts at ${left}. Swap with the leftmost copy of the largest smaller suffix value at ${right}, preserving the greatest possible suffix.`,{sequence:a,marks:{[left]:'pivot',[right]:'replacement'}});
+    [a[left],a[right]]=[a[right],a[left]];emit('The earlier prefix stays fixed; this is the greatest smaller arrangement obtainable with one swap.',{sequence:a,marks:{[left]:'swapped',[right]:'swapped'}},'update');return a;
+  },
+  1064({arr},emit) {
+    let low=0,high=arr.length-1,answer=-1;
+    while(low<=high){const mid=Math.floor((low+high)/2);if(arr[mid]===mid)answer=mid;emit(`At index ${mid}, value ${arr[mid]} is ${arr[mid]<mid?'below':'at least'} the index. Strictly increasing integers make value-minus-index nondecreasing; equality still searches left for an earlier match.`,{sequence:arr,index:mid,window:[low,high],metrics:{low,high,answer}},'inspect');if(arr[mid]>=mid)high=mid-1;else low=mid+1;}
+    return answer;
+  },
+  1071({str1,str2},emit) {
+    if(str1+str2!==str2+str1){emit('Joining the strings in opposite orders differs. They cannot both repeat a common base string.');return '';}
+    let a=str1.length,b=str2.length;while(b){const remainder=a%b;emit(`Common repetition lengths divide both lengths. Euclid reduces (${a}, ${b}) to (${b}, ${remainder}).`,{sequence:str1,metrics:{a,b,remainder}},'update');a=b;b=remainder;}return str1.slice(0,a);
+  },
+  1078({text,first,second},emit) {
+    const words=text.split(' '),output=[];for(let i=2;i<words.length;i++){const match=words[i-2]===first&&words[i-1]===second;if(match)output.push(words[i]);emit(`Words ${i-2} and ${i-1} ${match?'match':'do not match'} the requested bigram. Overlapping occurrences are checked independently.`,{sequence:words,index:i,window:[i-2,i],output},'update');}return output;
+  },
+  1085({nums},emit) {
+    const minimum=Math.min(...nums);let total=0;[...String(minimum)].forEach((digit,index)=>{total+=Number(digit);emit(`The smallest value is ${minimum}. Add its digit ${digit}; only this value determines the parity answer.`,{sequence:String(minimum),index,metrics:{minimum,digitSum:total}},'update');});return total%2===0?1:0;
+  },
+  1089({arr},emit) {
+    const working=[...arr];let write=arr.length+arr.reduce((count,v)=>count+(v===0?1:0),0)-1;
+    for(let read=arr.length-1;read>=0;read--){const value=working[read],destination=write;if(write<working.length)working[write]=value;write--;if(value===0){if(write<working.length)working[write]=0;write--;}emit(`Read ${value} at ${read} and fill virtual destination ${destination}${value===0?' plus its duplicate slot':''}. Write only destinations inside the original length. Moving backward protects all unread source values.`,{sequence:arr,index:read,output:working,outputIndex:Math.min(destination,working.length-1),metrics:{read,nextWrite:write,virtualDestination:destination}},'update');}
+    return working;
+  },
+  1094({trips,capacity},emit) {
+    const changes=new Map();for(const[count,start,end]of trips){changes.set(start,(changes.get(start)||0)+count);changes.set(end,(changes.get(end)||0)-count);}let passengers=0;
+    for(const[location,change]of [...changes].sort((a,b)=>a[0]-b[0])){passengers+=change;emit(`At location ${location}, net passenger change is ${change}. Drop-offs and pickups share this boundary, so seats freed here can be reused immediately.`,{sequence:trips.map(t=>`[${t}]`),metrics:{location,change,passengers,capacity}},'update');if(passengers>capacity)return false;}return true;
+  },
+  1099({nums,k},emit) {
+    const a=[...nums].sort((x,y)=>x-y);let left=0,right=a.length-1,best=-1;
+    while(left<right){const sum=a[left]+a[right];if(sum<k)best=Math.max(best,sum);emit(`Pair ${a[left]} and ${a[right]} sums to ${sum}. ${sum<k?'It fits strictly below k; seek a larger left value.':'It reaches or exceeds k; reduce the right value.'}`,{sequence:a,marks:{[left]:'left',[right]:'right'},metrics:{sum,k,best}},'update');if(sum<k)left++;else right--;}
+    return best;
+  },
   1006({n}, emit) {
     const stack=[n],sequence=Array.from({length:n},(_,i)=>n-i);
     for(let value=n-1,operation=0;value>=1;value--,operation++) {

@@ -1,0 +1,27 @@
+{
+  "number": "1071",
+  "title": "Greatest Common Divisor of Strings",
+  "goal": "Find the longest string that repeats to form both inputs.",
+  "strategy": "Commuting concatenations establish a common repeating base. The greatest valid block length is the gcd of the two lengths.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest string that repeats to form both inputs.",
+    "inspect": "Commuting concatenations establish a common repeating base. The greatest valid block length is the gcd of the two lengths.",
+    "update": "Commuting concatenations establish a common repeating base. The greatest valid block length is the gcd of the two lengths.",
+    "done": "Find the longest string that repeats to form both inputs."
+  },
+  "edgeCases": [
+    "Concatenations disagree",
+    "Single-letter repeating base",
+    "Equal strings return the whole string"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

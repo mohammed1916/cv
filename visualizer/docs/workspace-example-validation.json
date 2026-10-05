@@ -369,6 +369,134 @@
       "label": "Zero-customer minutes can enter and leave the window"
     },
     {
+      "file": "src/problems/Problem1053/index.jsx",
+      "label": "A late descent preserves the earlier prefix"
+    },
+    {
+      "file": "src/problems/Problem1053/index.jsx",
+      "label": "Leftmost duplicate replacement maximizes the suffix"
+    },
+    {
+      "file": "src/problems/Problem1053/index.jsx",
+      "label": "Already the smallest arrangement"
+    },
+    {
+      "file": "src/problems/Problem1053/index.jsx",
+      "label": "Single value cannot be swapped"
+    },
+    {
+      "file": "src/problems/Problem1064/index.jsx",
+      "label": "Search across negative values and several candidate regions"
+    },
+    {
+      "file": "src/problems/Problem1064/index.jsx",
+      "label": "Several fixed points require the earliest"
+    },
+    {
+      "file": "src/problems/Problem1064/index.jsx",
+      "label": "All values stay below their indices"
+    },
+    {
+      "file": "src/problems/Problem1064/index.jsx",
+      "label": "First position is fixed"
+    },
+    {
+      "file": "src/problems/Problem1071/index.jsx",
+      "label": "Different repeat counts share a longer base"
+    },
+    {
+      "file": "src/problems/Problem1071/index.jsx",
+      "label": "Concatenations disagree"
+    },
+    {
+      "file": "src/problems/Problem1071/index.jsx",
+      "label": "Single-letter repeating base"
+    },
+    {
+      "file": "src/problems/Problem1071/index.jsx",
+      "label": "Equal strings return the whole string"
+    },
+    {
+      "file": "src/problems/Problem1078/index.jsx",
+      "label": "The phrase recurs with different following words"
+    },
+    {
+      "file": "src/problems/Problem1078/index.jsx",
+      "label": "Overlapping equal-word phrase"
+    },
+    {
+      "file": "src/problems/Problem1078/index.jsx",
+      "label": "Phrase at the end has no following word"
+    },
+    {
+      "file": "src/problems/Problem1078/index.jsx",
+      "label": "No matching phrase"
+    },
+    {
+      "file": "src/problems/Problem1085/index.jsx",
+      "label": "The minimum is surrounded by larger digit sums"
+    },
+    {
+      "file": "src/problems/Problem1085/index.jsx",
+      "label": "Even digit sum"
+    },
+    {
+      "file": "src/problems/Problem1085/index.jsx",
+      "label": "Odd digit sum"
+    },
+    {
+      "file": "src/problems/Problem1085/index.jsx",
+      "label": "One number"
+    },
+    {
+      "file": "src/problems/Problem1089/index.jsx",
+      "label": "Several zeros overflow the fixed-length destination"
+    },
+    {
+      "file": "src/problems/Problem1089/index.jsx",
+      "label": "Last-slot zero cannot duplicate beyond the boundary"
+    },
+    {
+      "file": "src/problems/Problem1089/index.jsx",
+      "label": "All zeros retain the same length"
+    },
+    {
+      "file": "src/problems/Problem1089/index.jsx",
+      "label": "No zeros leave the array unchanged"
+    },
+    {
+      "file": "src/problems/Problem1094/index.jsx",
+      "label": "Overlapping trips reuse seats at shared locations"
+    },
+    {
+      "file": "src/problems/Problem1094/index.jsx",
+      "label": "Drop-off and pickup at the same stop"
+    },
+    {
+      "file": "src/problems/Problem1094/index.jsx",
+      "label": "Overlapping load exceeds capacity"
+    },
+    {
+      "file": "src/problems/Problem1094/index.jsx",
+      "label": "Single trip exactly fills the car"
+    },
+    {
+      "file": "src/problems/Problem1099/index.jsx",
+      "label": "Two pointers improve the best pair several times"
+    },
+    {
+      "file": "src/problems/Problem1099/index.jsx",
+      "label": "An exact threshold is not allowed"
+    },
+    {
+      "file": "src/problems/Problem1099/index.jsx",
+      "label": "Repeated values may use different positions"
+    },
+    {
+      "file": "src/problems/Problem1099/index.jsx",
+      "label": "One value supplies no pair"
+    },
+    {
       "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
       "label": "Several subtractive pairs"
     },

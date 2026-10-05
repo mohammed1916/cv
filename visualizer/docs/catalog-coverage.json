@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 766,
-  "matchedCatalogRoutes": 750,
-  "remaining": 3323,
+  "routes": 774,
+  "matchedCatalogRoutes": 758,
+  "remaining": 3315,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -7464,8 +7464,8 @@
       "number": "1053",
       "title": "Previous Permutation With One Swap",
       "slug": "previous-permutation-with-one-swap",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1053"
     },
     {
       "number": "1054",
@@ -7541,8 +7541,8 @@
       "number": "1064",
       "title": "Fixed Point",
       "slug": "fixed-point",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1064"
     },
     {
       "number": "1065",
@@ -7590,8 +7590,8 @@
       "number": "1071",
       "title": "Greatest Common Divisor of Strings",
       "slug": "greatest-common-divisor-of-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1071"
     },
     {
       "number": "1072",
@@ -7639,8 +7639,8 @@
       "number": "1078",
       "title": "Occurrences After Bigram",
       "slug": "occurrences-after-bigram",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1078"
     },
     {
       "number": "1079",
@@ -7688,8 +7688,8 @@
       "number": "1085",
       "title": "Sum of Digits in the Minimum Number",
       "slug": "sum-of-digits-in-the-minimum-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1085"
     },
     {
       "number": "1086",
@@ -7716,8 +7716,8 @@
       "number": "1089",
       "title": "Duplicate Zeros",
       "slug": "duplicate-zeros",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1089"
     },
     {
       "number": "1090",
@@ -7751,8 +7751,8 @@
       "number": "1094",
       "title": "Car Pooling",
       "slug": "car-pooling",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1094"
     },
     {
       "number": "1095",
@@ -7786,8 +7786,8 @@
       "number": "1099",
       "title": "Two Sum Less Than K",
       "slug": "two-sum-less-than-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1099"
     },
     {
       "number": "1100",
