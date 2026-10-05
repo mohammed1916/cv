@@ -37,6 +37,6 @@ export default function SequenceStory({ definition }) {
     renderReasoning={() => <>
       <h3>What this achieves</h3><p>{definition.strategy}</p>
       <h3>Try the boundaries</h3><ul>{definition.examples.slice(1).map(e => <li key={e.label}>{e.label}</li>)}</ul>
-      <p>The code panel shows teaching pseudocode. Complexity describes the algorithm; the visualizer additionally saves immutable snapshots for replay.</p>
+      <p>Pseudocode follows the playback steps. The Python view, when available, contains a complete solution. Complexity describes the algorithm; replay also stores state snapshots.</p>
     </>} />;
 }

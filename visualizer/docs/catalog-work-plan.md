@@ -19,14 +19,17 @@ states; do not count catalog listings or empty shells as implementations.
 - Refresh the metadata-only catalog inventory as implementation progresses.
 - Checkpoint implementation on `host`, then proceed to another missing group.
 
-## Deferred at the user's request
+## Code-language correction requested during expansion
 
-The code panel should default to **complete Python solutions**, with
-**Pseudocode** available as an alternate language/view. Continue the current
-catalog expansion first; finish the language conversion afterward. A source
-draft for 50 collection problems is in
-`src/problems/families/python/collectionPython.js`; it is not wired into the UI.
-Keep execution-line highlighting truthful when adding the alternate views.
+The user subsequently requested the missing option immediately. The shared
+workspace now exposes **Python** and **Pseudocode** buttons. Complete Python
+solutions are wired for the original 50 collection problems and the 40
+additions spanning 1401-1475. Python is the default where supplied; missing
+implementations are explicitly unavailable instead of relabeling pseudocode.
+Pseudocode retains playback line highlighting. Python does not reuse those
+line numbers. Copy and Code Playground use the selected complete source.
+Continue adding complete Python implementations to the remaining definitions.
+The in-progress `expansionRangeAlgorithms.js` catalog batch is not registered.
 
 Runtime validation, browser interactions, and final correctness review remain
 outstanding. Skipping checks accelerates source authoring, not verification.

@@ -1,4 +1,6 @@
 import { continuedSpecs, validateContinued } from './expansionContinuedSpecs.js';
+import { collectionPython } from '../python/collectionPython.js';
+import { laterPython } from '../python/laterPython.js';
 import { forwardSpecs, validateForward } from './expansionForwardSpecs.js';
 import { advanceSpecs, validateAdvance } from './expansionAdvanceSpecs.js';
 import { progressSpecs, validateProgress } from './expansionProgressSpecs.js';
@@ -100,6 +102,7 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
     ...collectionStoryMetadata[id], goal, strategy, complexity,
     inputLabel: `${fields} (JSON; bounded for readable playback)`,
     code: code.split('|').map((text,i) => ({line:i+1,text})),
+    python: collectionPython[id] ?? laterPython[id],
     examples: collectionStoryExamples[id],
     phases: [{id:'start',label:'Set up',description:goal},{id:'inspect',label:'Decide',description:strategy},{id:'update',label:'Record progress',description:strategy},{id:'done',label:'Return',description:goal}],
     parse: text => validate(id,JSON.parse(text)),

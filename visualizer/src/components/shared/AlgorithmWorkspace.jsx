@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../LuminoDockPanel'
 import PlaybackControls from '../PlaybackControls'
-import CodeTracePanel from '../CodeTracePanel'
+import AlgorithmCodePanel from './AlgorithmCodePanel'
 import FloatingPanel from './FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import './AlgorithmWorkspace.css'
@@ -48,7 +48,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       <p>{definition.complexity}</p>
       <a href={definition.url} target="_blank" rel="noreferrer">Official problem statement</a>
     </>,
-    code: <CodeTracePanel codeLines={definition.code} step={step} disableResizer />,
+    code: <AlgorithmCodePanel key={definition.number} definition={definition} step={step} input={draft} />,
   } : {}
   const controls = <div className="algorithm-workspace__playback">
     <button type="button" onClick={() => setFloating(value => !value)}>{floating ? 'Dock controls' : 'Float controls'}</button>
@@ -60,7 +60,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
           onClick={() => seek(phaseStarts.get(phase.id))}>{phase.label}</button>)}
       </nav>
       <p role="status" className="algorithm-workspace__current-state">
-        {definition.phases.find(phase => phase.id === step.phase)?.label} · Code line {step.activeLine}: {step.message}
+        {definition.phases.find(phase => phase.id === step.phase)?.label} · Pseudocode line {step.activeLine}: {step.message}
       </p>
       <PlaybackControls onReset={() => seek(0)} onPrev={() => seek(Math.max(0, playback.stepIndex - 1))}
         onNext={() => seek(Math.min(run.frames.length - 1, Math.max(0, playback.stepIndex) + 1))}

@@ -25,9 +25,9 @@ and shared story, code, input, playback, and scene components.
 **Tests, builds, example execution, and browser verification were skipped at the
 user's explicit request.** These additions are implemented but unverified.
 The source-only inventory was refreshed; prior validation reports below do not
-cover this expansion. The Python-default/Pseudocode-alternate code-panel work
-is deferred at the user's request until after the current progression; see
-`catalog-work-plan.md`.
+cover this expansion. The shared code panel now offers Python and Pseudocode.
+Complete Python is wired for 90 collection problems, including 1404 and 1405;
+remaining conversions are pending. See `catalog-work-plan.md`.
 
 ### Latest continuation: 8 additional problems
 

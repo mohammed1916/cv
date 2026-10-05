@@ -17,6 +17,6 @@ export default function TreeStory({definition}) {
  </>} renderReasoning={()=><>
   <h3>Goal</h3><p>{definition.goal}</p><h3>Why these steps work</h3><p>{definition.strategy}</p>
   <h3>Boundary cases to compare</h3><ul>{definition.examples.slice(1).map(e=><li key={e.label}>{e.label}</li>)}</ul>
-  <p>The code panel shows teaching pseudocode. Diagrams preserve node identity, including repeated values; playback snapshots are independent of later mutations.</p>
+  <p>Pseudocode follows the playback steps. The Python view, when available, contains a complete solution. Diagrams preserve node identity, including repeated values; playback snapshots are independent of later mutations.</p>
  </>}/>;
 }
