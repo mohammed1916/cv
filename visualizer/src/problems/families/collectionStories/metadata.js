@@ -349,5 +349,145 @@ export const collectionStoryMetadata = {
     "slug": "maximize-sum-of-array-after-k-negations",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/"
+  },
+  "1006": {
+    "number": "1006",
+    "title": "Clumsy Factorial",
+    "slug": "clumsy-factorial",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/clumsy-factorial/"
+  },
+  "1007": {
+    "number": "1007",
+    "title": "Minimum Domino Rotations For Equal Row",
+    "slug": "minimum-domino-rotations-for-equal-row",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/"
+  },
+  "1009": {
+    "number": "1009",
+    "title": "Complement of Base 10 Integer",
+    "slug": "complement-of-base-10-integer",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/complement-of-base-10-integer/"
+  },
+  "1010": {
+    "number": "1010",
+    "title": "Pairs of Songs With Total Durations Divisible by 60",
+    "slug": "pairs-of-songs-with-total-durations-divisible-by-60",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/"
+  },
+  "1011": {
+    "number": "1011",
+    "title": "Capacity To Ship Packages Within D Days",
+    "slug": "capacity-to-ship-packages-within-d-days",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/"
+  },
+  "1013": {
+    "number": "1013",
+    "title": "Partition Array Into Three Parts With Equal Sum",
+    "slug": "partition-array-into-three-parts-with-equal-sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/"
+  },
+  "1014": {
+    "number": "1014",
+    "title": "Best Sightseeing Pair",
+    "slug": "best-sightseeing-pair",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/best-sightseeing-pair/"
+  },
+  "1015": {
+    "number": "1015",
+    "title": "Smallest Integer Divisible by K",
+    "slug": "smallest-integer-divisible-by-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/smallest-integer-divisible-by-k/"
+  },
+  "1017": {
+    "number": "1017",
+    "title": "Convert to Base -2",
+    "slug": "convert-to-base-2",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/convert-to-base-2/"
+  },
+  "1018": {
+    "number": "1018",
+    "title": "Binary Prefix Divisible By 5",
+    "slug": "binary-prefix-divisible-by-5",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/binary-prefix-divisible-by-5/"
+  },
+  "1021": {
+    "number": "1021",
+    "title": "Remove Outermost Parentheses",
+    "slug": "remove-outermost-parentheses",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/remove-outermost-parentheses/"
+  },
+  "1023": {
+    "number": "1023",
+    "title": "Camelcase Matching",
+    "slug": "camelcase-matching",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/camelcase-matching/"
+  },
+  "1025": {
+    "number": "1025",
+    "title": "Divisor Game",
+    "slug": "divisor-game",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/divisor-game/"
+  },
+  "1029": {
+    "number": "1029",
+    "title": "Two City Scheduling",
+    "slug": "two-city-scheduling",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/two-city-scheduling/"
+  },
+  "1030": {
+    "number": "1030",
+    "title": "Matrix Cells in Distance Order",
+    "slug": "matrix-cells-in-distance-order",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/matrix-cells-in-distance-order/"
+  },
+  "1037": {
+    "number": "1037",
+    "title": "Valid Boomerang",
+    "slug": "valid-boomerang",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/valid-boomerang/"
+  },
+  "1041": {
+    "number": "1041",
+    "title": "Robot Bounded In Circle",
+    "slug": "robot-bounded-in-circle",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/robot-bounded-in-circle/"
+  },
+  "1046": {
+    "number": "1046",
+    "title": "Last Stone Weight",
+    "slug": "last-stone-weight",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/last-stone-weight/"
+  },
+  "1051": {
+    "number": "1051",
+    "title": "Height Checker",
+    "slug": "height-checker",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/height-checker/"
+  },
+  "1052": {
+    "number": "1052",
+    "title": "Grumpy Bookstore Owner",
+    "slug": "grumpy-bookstore-owner",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/grumpy-bookstore-owner/"
   }
 };

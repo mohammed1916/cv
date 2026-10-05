@@ -1,5 +1,5 @@
 {
-  "routes": 746,
+  "routes": 766,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -65,6 +65,33 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1006",
+      "number": "1006",
+      "title": "Clumsy Factorial",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1007",
+      "number": "1007",
+      "title": "Minimum Domino Rotations For Equal Row",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1009",
+      "number": "1009",
+      "title": "Complement of Base 10 Integer",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem101",
       "number": "101",
       "title": "Symmetric Tree",
@@ -72,6 +99,69 @@
       "checks": 3,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1010",
+      "number": "1010",
+      "title": "Pairs of Songs With Total Durations Divisible by 60",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1011",
+      "number": "1011",
+      "title": "Capacity To Ship Packages Within D Days",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1013",
+      "number": "1013",
+      "title": "Partition Array Into Three Parts With Equal Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1014",
+      "number": "1014",
+      "title": "Best Sightseeing Pair",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1015",
+      "number": "1015",
+      "title": "Smallest Integer Divisible by K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1017",
+      "number": "1017",
+      "title": "Convert to Base -2",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1018",
+      "number": "1018",
+      "title": "Binary Prefix Divisible By 5",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem102",
@@ -83,6 +173,42 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1021",
+      "number": "1021",
+      "title": "Remove Outermost Parentheses",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1023",
+      "number": "1023",
+      "title": "Camelcase Matching",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1025",
+      "number": "1025",
+      "title": "Divisor Game",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1029",
+      "number": "1029",
+      "title": "Two City Scheduling",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem103",
       "number": "103",
       "title": "Binary Tree Zigzag Level Order Traversal",
@@ -92,6 +218,24 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1030",
+      "number": "1030",
+      "title": "Matrix Cells in Distance Order",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1037",
+      "number": "1037",
+      "title": "Valid Boomerang",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem104",
       "number": "104",
       "title": "Maximum Depth of Binary Tree",
@@ -99,6 +243,24 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1041",
+      "number": "1041",
+      "title": "Robot Bounded In Circle",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1046",
+      "number": "1046",
+      "title": "Last Stone Weight",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1047",
@@ -117,6 +279,24 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1051",
+      "number": "1051",
+      "title": "Height Checker",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1052",
+      "number": "1052",
+      "title": "Grumpy Bookstore Owner",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem106",

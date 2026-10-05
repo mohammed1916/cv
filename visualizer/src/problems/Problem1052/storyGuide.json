@@ -1,0 +1,27 @@
+{
+  "number": "1052",
+  "title": "Grumpy Bookstore Owner",
+  "goal": "Maximize satisfied customers using one contiguous calm interval.",
+  "strategy": "Count naturally satisfied customers once. Slide a window over only otherwise-lost customers and add the best recoverable amount to that baseline.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize satisfied customers using one contiguous calm interval.",
+    "inspect": "Count naturally satisfied customers once. Slide a window over only otherwise-lost customers and add the best recoverable amount to that baseline.",
+    "update": "Count naturally satisfied customers once. Slide a window over only otherwise-lost customers and add the best recoverable amount to that baseline.",
+    "done": "Maximize satisfied customers using one contiguous calm interval."
+  },
+  "edgeCases": [
+    "Nobody was grumpy, so recovery adds nothing",
+    "The interval covers every minute",
+    "Zero-customer minutes can enter and leave the window"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

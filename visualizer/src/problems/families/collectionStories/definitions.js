@@ -2,11 +2,13 @@ import { solvers } from './algorithms.js';
 import { specs } from './specs.js';
 import { collectionStoryMetadata } from './metadata.js';
 import { collectionStoryExamples } from '../../../config/collectionStoryExamples.js';
+import { nextSpecs, validateNext } from './nextSpecs.js';
 
 function validate(id, input) {
   const require = (condition, message) => { if (!condition) throw new Error(message); };
   require(input && typeof input === 'object' && !Array.isArray(input), 'Use a JSON object.');
   for (const key of specs[id][0].split(' ')) require(key in input, `Missing ${key}.`);
+  if (id in nextSpecs) return validateNext(id,input);
   const integer = (v, min = -10000, max = 10000) => Number.isSafeInteger(v) && v >= min && v <= max;
   const vector = (v, minLength = 1, maxLength = 80) => Array.isArray(v) && v.length >= minLength && v.length <= maxLength && v.every(n => integer(n));
   const text = v => typeof v === 'string' && v.length >= 1 && v.length <= 120;

@@ -1,0 +1,27 @@
+{
+  "number": "1015",
+  "title": "Smallest Integer Divisible by K",
+  "goal": "Find the shortest all-ones decimal number divisible by k, or report none.",
+  "strategy": "Appending a one transforms the remainder without storing a huge integer. Repeating a nonzero remainder proves a cycle that will never reach zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest all-ones decimal number divisible by k, or report none.",
+    "inspect": "Appending a one transforms the remainder without storing a huge integer. Repeating a nonzero remainder proves a cycle that will never reach zero.",
+    "update": "Appending a one transforms the remainder without storing a huge integer. Repeating a nonzero remainder proves a cycle that will never reach zero.",
+    "done": "Find the shortest all-ones decimal number divisible by k, or report none."
+  },
+  "edgeCases": [
+    "One digit suffices",
+    "An even divisor cycles without success",
+    "A factor of five prevents success"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "1051",
+  "title": "Height Checker",
+  "goal": "Count positions whose height differs from the sorted lineup.",
+  "strategy": "Compare against a sorted copy so original positions stay visible. The answer measures mismatched positions, not the number of exchanges.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count positions whose height differs from the sorted lineup.",
+    "inspect": "Compare against a sorted copy so original positions stay visible. The answer measures mismatched positions, not the number of exchanges.",
+    "update": "Compare against a sorted copy so original positions stay visible. The answer measures mismatched positions, not the number of exchanges.",
+    "done": "Count positions whose height differs from the sorted lineup."
+  },
+  "edgeCases": [
+    "Already nondecreasing",
+    "All equal heights",
+    "Reversed odd length preserves the middle position"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -6,15 +6,34 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 746 local routes, of which 730 match catalog slugs
-or unique normalized titles. **3,343 catalog entries remain unmatched.** Route
+After the continued implementation there are 766 local routes, of which 750 match catalog slugs
+or unique normalized titles. **3,323 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
 
 ## Added in this batch
 
-### Latest continuation: 50 additional problems
+### Latest continuation: 20 additional problems
+
+1006, 1007, 1009, 1010, 1011, 1013, 1014, 1015, 1017, 1018, 1021,
+1023, 1025, 1029, 1030, 1037, 1041, 1046, 1051, and 1052.
+
+These add 80 independently authored examples and reuse the existing collection
+definitions, `SequenceStory`, and `AlgorithmWorkspace`. Separate implementation
+and outline modules keep this addition bounded without introducing a new UI
+shell. Stories expose shipping assignments and binary-search bounds, domino
+rotation counts, song remainder frequencies, signed arithmetic terms, city
+cost differences, and sliding-window recovery totals. Examples include longer
+walkthroughs and three named boundaries per problem; coverage is not exhaustive.
+
+The 20 algorithms have 4,000 generated reference comparisons, domain rejection
+checks, immutable-stack snapshots, and shipping-bound invariants. Distance-order
+outputs are validated by uniqueness, valid coordinates, and sorted distances
+rather than requiring one arbitrary order for ties. Negative-base numerals are
+validated by canonical digits and decoding back to the input value.
+
+### Previous continuation: 50 additional problems
 
 860, 861, 868, 869, 881, 883, 884, 888, 890, 892, 893, 898, 899, 901,
 904, 908, 914, 915, 917, 918, 921, 925, 926, 929, 930, 931, 933, 941,
@@ -72,17 +91,17 @@ with other examples; provenance does not imply mathematical uniqueness.
 
 ## Current validation
 
-- Combined family tests: 145 passing tests, including 12,900 deterministic
-  generated-input oracle comparisons across 129 algorithms (5,000 added in
+- Combined family tests: 168 passing tests, including 16,900 deterministic
+  generated-input oracle comparisons across 149 algorithms (4,000 added in
   this continuation).
-- 3,929 real scene frames render successfully on the server, including tree
+- 4,655 real scene frames render successfully on the server, including tree
   diagrams with stable IDs and independent snapshots across rewiring.
-- 12 authored-example tests and 754 narrative tests pass.
-- Catalog example audit covers 746 routes and executes 1,726 legacy traces
-  and 724 shared-workspace builds. 332 legacy helper/adapter checks remain
+- 12 authored-example tests and 774 narrative tests pass.
+- Catalog example audit covers 766 routes and executes 1,726 legacy traces
+  and 804 shared-workspace builds. 332 legacy helper/adapter checks remain
   explicitly skipped.
 - Production build passes and changed-source lint introduces no new findings.
-- Static interaction contracts report no failures across 1,578 components;
+- Static interaction contracts report no failures across 1,598 components;
   this checks source contracts, not actual timer or click behavior.
 - Browser layout, clicking, timer playback, and responsive behavior remain
   unverified in this continuation. Server rendering is not a substitute for

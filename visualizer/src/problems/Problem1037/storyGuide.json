@@ -1,0 +1,27 @@
+{
+  "number": "1037",
+  "title": "Valid Boomerang",
+  "goal": "Determine whether three points form a nondegenerate triangle.",
+  "strategy": "Subtract one point to get two direction vectors. A zero cross product means collinearity, including repeated points, without dividing by slope.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether three points form a nondegenerate triangle.",
+    "inspect": "Subtract one point to get two direction vectors. A zero cross product means collinearity, including repeated points, without dividing by slope.",
+    "update": "Subtract one point to get two direction vectors. A zero cross product means collinearity, including repeated points, without dividing by slope.",
+    "done": "Determine whether three points form a nondegenerate triangle."
+  },
+  "edgeCases": [
+    "Vertical points are collinear without needing division",
+    "Repeated coordinates cannot make a triangle",
+    "Diagonal points remain collinear"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

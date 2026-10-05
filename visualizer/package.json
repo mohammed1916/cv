@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test:sequence-stories": "node --test src/problems/families/sequenceStories/algorithms.test.mjs src/problems/families/scanStories/algorithms.test.mjs src/problems/families/treeStories/algorithms.test.mjs src/problems/families/collectionStories/algorithms.test.mjs src/data/catalogCoverage.test.mjs && node scripts/verify-sequence-scenes.mjs",
+    "test:sequence-stories": "node --test src/problems/families/sequenceStories/algorithms.test.mjs src/problems/families/scanStories/algorithms.test.mjs src/problems/families/treeStories/algorithms.test.mjs src/problems/families/collectionStories/algorithms.test.mjs src/problems/families/collectionStories/nextAlgorithms.test.mjs src/data/catalogCoverage.test.mjs && node scripts/verify-sequence-scenes.mjs",
     "build:authored-routes": "node scripts/register-authored-stories.mjs",
     "audit:catalog": "node scripts/audit-catalog-coverage.mjs",
     "test:interactions": "node scripts/check-interaction-contracts.mjs",

@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 746,
-  "matchedCatalogRoutes": 730,
-  "remaining": 3343,
+  "routes": 766,
+  "matchedCatalogRoutes": 750,
+  "remaining": 3323,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -7135,15 +7135,15 @@
       "number": "1006",
       "title": "Clumsy Factorial",
       "slug": "clumsy-factorial",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1006"
     },
     {
       "number": "1007",
       "title": "Minimum Domino Rotations For Equal Row",
       "slug": "minimum-domino-rotations-for-equal-row",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1007"
     },
     {
       "number": "1008",
@@ -7156,22 +7156,22 @@
       "number": "1009",
       "title": "Complement of Base 10 Integer",
       "slug": "complement-of-base-10-integer",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1009"
     },
     {
       "number": "1010",
       "title": "Pairs of Songs With Total Durations Divisible by 60",
       "slug": "pairs-of-songs-with-total-durations-divisible-by-60",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1010"
     },
     {
       "number": "1011",
       "title": "Capacity To Ship Packages Within D Days",
       "slug": "capacity-to-ship-packages-within-d-days",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1011"
     },
     {
       "number": "1012",
@@ -7184,22 +7184,22 @@
       "number": "1013",
       "title": "Partition Array Into Three Parts With Equal Sum",
       "slug": "partition-array-into-three-parts-with-equal-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1013"
     },
     {
       "number": "1014",
       "title": "Best Sightseeing Pair",
       "slug": "best-sightseeing-pair",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1014"
     },
     {
       "number": "1015",
       "title": "Smallest Integer Divisible by K",
       "slug": "smallest-integer-divisible-by-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1015"
     },
     {
       "number": "1016",
@@ -7212,15 +7212,15 @@
       "number": "1017",
       "title": "Convert to Base -2",
       "slug": "convert-to-base-2",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1017"
     },
     {
       "number": "1018",
       "title": "Binary Prefix Divisible By 5",
       "slug": "binary-prefix-divisible-by-5",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1018"
     },
     {
       "number": "1019",
@@ -7240,8 +7240,8 @@
       "number": "1021",
       "title": "Remove Outermost Parentheses",
       "slug": "remove-outermost-parentheses",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1021"
     },
     {
       "number": "1022",
@@ -7254,8 +7254,8 @@
       "number": "1023",
       "title": "Camelcase Matching",
       "slug": "camelcase-matching",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1023"
     },
     {
       "number": "1024",
@@ -7268,8 +7268,8 @@
       "number": "1025",
       "title": "Divisor Game",
       "slug": "divisor-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1025"
     },
     {
       "number": "1026",
@@ -7296,15 +7296,15 @@
       "number": "1029",
       "title": "Two City Scheduling",
       "slug": "two-city-scheduling",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1029"
     },
     {
       "number": "1030",
       "title": "Matrix Cells in Distance Order",
       "slug": "matrix-cells-in-distance-order",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1030"
     },
     {
       "number": "1031",
@@ -7352,8 +7352,8 @@
       "number": "1037",
       "title": "Valid Boomerang",
       "slug": "valid-boomerang",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1037"
     },
     {
       "number": "1038",
@@ -7380,8 +7380,8 @@
       "number": "1041",
       "title": "Robot Bounded In Circle",
       "slug": "robot-bounded-in-circle",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1041"
     },
     {
       "number": "1042",
@@ -7415,8 +7415,8 @@
       "number": "1046",
       "title": "Last Stone Weight",
       "slug": "last-stone-weight",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1046"
     },
     {
       "number": "1047",
@@ -7450,15 +7450,15 @@
       "number": "1051",
       "title": "Height Checker",
       "slug": "height-checker",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1051"
     },
     {
       "number": "1052",
       "title": "Grumpy Bookstore Owner",
       "slug": "grumpy-bookstore-owner",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1052"
     },
     {
       "number": "1053",

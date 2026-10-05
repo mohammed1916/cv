@@ -1,6 +1,8 @@
+import { nextCollectionCases } from './nextCollectionExamples.js';
 const rookBoard=(pieces)=>{const board=Array.from({length:8},()=>Array(8).fill('.'));for(const[r,c,v]of pieces)board[r][c]=v;return board;};
 // Independently authored walkthroughs and named decision boundaries.
 const cases={
+  ...nextCollectionCases,
   860:[['Conserve fives across several customers',{bills:[5,5,10,5,20,5,10,5,5,20]}],['First customer needs unavailable change',{bills:[10]}],['Three fives make change',{bills:[5,5,5,20]}],['Too few fives after earlier sale',{bills:[5,10,20]}]],
   861:[['Rows and columns prefer different flips',{grid:[[0,1,0,1,1],[1,0,1,0,0],[0,0,1,1,0],[1,1,0,0,1]]}],['Single zero bit',{grid:[[0]]}],['Already maximal',{grid:[[1,1,1],[1,1,1]]}],['Column tie needs no flip',{grid:[[1,0],[1,1]]}]],
   868:[['Several unequal zero gaps',{n:1161}],['Only one set bit',{n:128}],['All bits set',{n:127}],['Two widely separated bits',{n:513}]],
@@ -50,6 +52,6 @@ const cases={
   997:[['Many trust edges with one judge',{n:6,trust:[[1,4],[2,4],[3,4],[5,4],[6,4],[1,2],[2,3],[5,6]]}],['Candidate trusts someone else',{n:3,trust:[[1,3],[2,3],[3,1]]}],['Single person needs no trust',{n:1,trust:[]}],['Nobody has enough incoming trust',{n:4,trust:[[1,2],[2,3],[3,4]]}]],
   999:[['Rays encounter pawns and blocking bishops',{board:rookBoard([[3,4,'R'],[0,4,'p'],[3,7,'p'],[6,4,'p'],[4,4,'B'],[3,1,'p'],[3,2,'B']])}],['Rook in a corner',{board:rookBoard([[0,0,'R'],[0,5,'p'],[7,0,'p']])}],['Only diagonal pawns',{board:rookBoard([[4,4,'R'],[3,3,'p'],[5,5,'p']])}],['Bishops block all directions',{board:rookBoard([[3,3,'R'],[2,3,'B'],[4,3,'B'],[3,2,'B'],[3,4,'B']])}]],
   1002:[['Common letters have different multiplicities',{words:['peppermint','temperament','perimeter']}],['No common letter',{words:['oak','fern','moss']}],['Repeated common characters',{words:['aabbb','abbbb','aaabb']}],['One word preserves every character',{words:['cedar']}]],
-  1005:[['Several negatives and odd leftover parity',{nums:[-9,4,-3,7,-6,2,0,5],k:5}],['Odd leftover flips smallest magnitude',{nums:[2,7,4],k:3}],['Even operations cancel',{nums:[3,8,5],k:4}],['More negatives than available flips',{nums:[-8,-5,-2,6],k:2}]],
+  1005:[['Several negatives followed by canceling leftover flips',{nums:[-9,4,-3,7,-6,2,0,5],k:5}],['Odd leftover flips smallest magnitude',{nums:[2,7,4],k:3}],['Even operations cancel',{nums:[3,8,5],k:4}],['More negatives than available flips',{nums:[-8,-5,-2,6],k:2}]],
 };
 export const collectionStoryExamples=Object.fromEntries(Object.entries(cases).map(([id,rows])=>[id,rows.map(([label,input])=>({label,input:JSON.stringify(input)}))]));

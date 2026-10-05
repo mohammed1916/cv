@@ -1,0 +1,27 @@
+{
+  "number": "1007",
+  "title": "Minimum Domino Rotations For Equal Row",
+  "goal": "Find the fewest domino rotations that make either row uniform.",
+  "strategy": "The target must be on the first domino. For each candidate, every later domino must contain it; count rotations toward each row separately.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest domino rotations that make either row uniform.",
+    "inspect": "The target must be on the first domino. For each candidate, every later domino must contain it; count rotations toward each row separately.",
+    "update": "The target must be on the first domino. For each candidate, every later domino must contain it; count rotations toward each row separately.",
+    "done": "Find the fewest domino rotations that make either row uniform."
+  },
+  "edgeCases": [
+    "A later domino blocks both first candidates",
+    "Top row already uniform",
+    "Either direction needs one rotation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -18,7 +18,7 @@
     },
     {
       "file": "src/problems/Problem1005/index.jsx",
-      "label": "Several negatives and odd leftover parity"
+      "label": "Several negatives followed by canceling leftover flips"
     },
     {
       "file": "src/problems/Problem1005/index.jsx",
@@ -31,6 +31,294 @@
     {
       "file": "src/problems/Problem1005/index.jsx",
       "label": "More negatives than available flips"
+    },
+    {
+      "file": "src/problems/Problem1006/index.jsx",
+      "label": "Several full operation cycles with a partial final group"
+    },
+    {
+      "file": "src/problems/Problem1006/index.jsx",
+      "label": "Single term needs no operation"
+    },
+    {
+      "file": "src/problems/Problem1006/index.jsx",
+      "label": "Multiplication and division precede addition"
+    },
+    {
+      "file": "src/problems/Problem1006/index.jsx",
+      "label": "Subtraction followed by a product"
+    },
+    {
+      "file": "src/problems/Problem1007/index.jsx",
+      "label": "Both target rows require different numbers of rotations"
+    },
+    {
+      "file": "src/problems/Problem1007/index.jsx",
+      "label": "A later domino blocks both first candidates"
+    },
+    {
+      "file": "src/problems/Problem1007/index.jsx",
+      "label": "Top row already uniform"
+    },
+    {
+      "file": "src/problems/Problem1007/index.jsx",
+      "label": "Either direction needs one rotation"
+    },
+    {
+      "file": "src/problems/Problem1009/index.jsx",
+      "label": "Mixed bit runs within a fixed binary width"
+    },
+    {
+      "file": "src/problems/Problem1009/index.jsx",
+      "label": "Zero still has one binary digit"
+    },
+    {
+      "file": "src/problems/Problem1009/index.jsx",
+      "label": "All written bits are ones"
+    },
+    {
+      "file": "src/problems/Problem1009/index.jsx",
+      "label": "Only the highest bit is set"
+    },
+    {
+      "file": "src/problems/Problem1010/index.jsx",
+      "label": "Complement buckets repeat across a longer playlist"
+    },
+    {
+      "file": "src/problems/Problem1010/index.jsx",
+      "label": "Zero remainders pair with earlier zeros"
+    },
+    {
+      "file": "src/problems/Problem1010/index.jsx",
+      "label": "Thirty remainders pair with each other"
+    },
+    {
+      "file": "src/problems/Problem1010/index.jsx",
+      "label": "One song cannot pair with itself"
+    },
+    {
+      "file": "src/problems/Problem1011/index.jsx",
+      "label": "Several capacities move packages to different days"
+    },
+    {
+      "file": "src/problems/Problem1011/index.jsx",
+      "label": "One day must carry everything"
+    },
+    {
+      "file": "src/problems/Problem1011/index.jsx",
+      "label": "One day per package needs only the largest weight"
+    },
+    {
+      "file": "src/problems/Problem1011/index.jsx",
+      "label": "Single indivisible package"
+    },
+    {
+      "file": "src/problems/Problem1013/index.jsx",
+      "label": "Negative values and zeros inside the three sections"
+    },
+    {
+      "file": "src/problems/Problem1013/index.jsx",
+      "label": "Zero total still requires three nonempty parts"
+    },
+    {
+      "file": "src/problems/Problem1013/index.jsx",
+      "label": "Total is not divisible by three"
+    },
+    {
+      "file": "src/problems/Problem1013/index.jsx",
+      "label": "Divisible total but no valid pair of cuts"
+    },
+    {
+      "file": "src/problems/Problem1014/index.jsx",
+      "label": "The strongest left contribution changes during the scan"
+    },
+    {
+      "file": "src/problems/Problem1014/index.jsx",
+      "label": "Two spots are the only possible pair"
+    },
+    {
+      "file": "src/problems/Problem1014/index.jsx",
+      "label": "Equal values favor adjacent spots"
+    },
+    {
+      "file": "src/problems/Problem1014/index.jsx",
+      "label": "A large early value remains useful"
+    },
+    {
+      "file": "src/problems/Problem1015/index.jsx",
+      "label": "Several remainders before an all-ones multiple"
+    },
+    {
+      "file": "src/problems/Problem1015/index.jsx",
+      "label": "One digit suffices"
+    },
+    {
+      "file": "src/problems/Problem1015/index.jsx",
+      "label": "An even divisor cycles without success"
+    },
+    {
+      "file": "src/problems/Problem1015/index.jsx",
+      "label": "A factor of five prevents success"
+    },
+    {
+      "file": "src/problems/Problem1017/index.jsx",
+      "label": "Alternating-sign quotients build a longer numeral"
+    },
+    {
+      "file": "src/problems/Problem1017/index.jsx",
+      "label": "Zero needs one digit"
+    },
+    {
+      "file": "src/problems/Problem1017/index.jsx",
+      "label": "Single positive unit"
+    },
+    {
+      "file": "src/problems/Problem1017/index.jsx",
+      "label": "An even value requires a negative intermediate quotient"
+    },
+    {
+      "file": "src/problems/Problem1018/index.jsx",
+      "label": "Long binary prefixes preserve only their remainder"
+    },
+    {
+      "file": "src/problems/Problem1018/index.jsx",
+      "label": "Leading zero prefixes are divisible"
+    },
+    {
+      "file": "src/problems/Problem1018/index.jsx",
+      "label": "Repeated ones cycle through remainders"
+    },
+    {
+      "file": "src/problems/Problem1018/index.jsx",
+      "label": "One zero bit"
+    },
+    {
+      "file": "src/problems/Problem1021/index.jsx",
+      "label": "Multiple primitives with different internal nesting"
+    },
+    {
+      "file": "src/problems/Problem1021/index.jsx",
+      "label": "Every primitive is an empty pair"
+    },
+    {
+      "file": "src/problems/Problem1021/index.jsx",
+      "label": "One deeply nested primitive"
+    },
+    {
+      "file": "src/problems/Problem1021/index.jsx",
+      "label": "Only one outer pair"
+    },
+    {
+      "file": "src/problems/Problem1023/index.jsx",
+      "label": "Mixed valid insertions and forbidden extra capitals"
+    },
+    {
+      "file": "src/problems/Problem1023/index.jsx",
+      "label": "Lowercase pattern characters must also be consumed"
+    },
+    {
+      "file": "src/problems/Problem1023/index.jsx",
+      "label": "Extra lowercase letters are allowed"
+    },
+    {
+      "file": "src/problems/Problem1023/index.jsx",
+      "label": "An unmatched capital cannot be inserted"
+    },
+    {
+      "file": "src/problems/Problem1025/index.jsx",
+      "label": "Explain winning moves using earlier losing states"
+    },
+    {
+      "file": "src/problems/Problem1025/index.jsx",
+      "label": "No proper positive divisor is available"
+    },
+    {
+      "file": "src/problems/Problem1025/index.jsx",
+      "label": "Smallest winning state"
+    },
+    {
+      "file": "src/problems/Problem1025/index.jsx",
+      "label": "An odd state leaves winning responses"
+    },
+    {
+      "file": "src/problems/Problem1029/index.jsx",
+      "label": "Absolute prices differ from relative city savings"
+    },
+    {
+      "file": "src/problems/Problem1029/index.jsx",
+      "label": "Two people must split between cities"
+    },
+    {
+      "file": "src/problems/Problem1029/index.jsx",
+      "label": "Equal differences admit several optimal assignments"
+    },
+    {
+      "file": "src/problems/Problem1029/index.jsx",
+      "label": "Every person prefers A but half must go to B"
+    },
+    {
+      "file": "src/problems/Problem1030/index.jsx",
+      "label": "Off-center rings reach different matrix edges"
+    },
+    {
+      "file": "src/problems/Problem1030/index.jsx",
+      "label": "Only one cell"
+    },
+    {
+      "file": "src/problems/Problem1030/index.jsx",
+      "label": "A single row with distance ties"
+    },
+    {
+      "file": "src/problems/Problem1030/index.jsx",
+      "label": "Center in the corner"
+    },
+    {
+      "file": "src/problems/Problem1037/index.jsx",
+      "label": "Slanted edges enclose a nonzero area"
+    },
+    {
+      "file": "src/problems/Problem1037/index.jsx",
+      "label": "Vertical points are collinear without needing division"
+    },
+    {
+      "file": "src/problems/Problem1037/index.jsx",
+      "label": "Repeated coordinates cannot make a triangle"
+    },
+    {
+      "file": "src/problems/Problem1037/index.jsx",
+      "label": "Diagonal points remain collinear"
+    },
+    {
+      "file": "src/problems/Problem1041/index.jsx",
+      "label": "Several turns leave a heading that bounds future cycles"
+    },
+    {
+      "file": "src/problems/Problem1041/index.jsx",
+      "label": "Returns to origin facing the original direction"
+    },
+    {
+      "file": "src/problems/Problem1041/index.jsx",
+      "label": "Northward displacement repeats forever"
+    },
+    {
+      "file": "src/problems/Problem1041/index.jsx",
+      "label": "Turns without moving stay at the origin"
+    },
+    {
+      "file": "src/problems/Problem1046/index.jsx",
+      "label": "Differences rejoin a changing pool of heavy stones"
+    },
+    {
+      "file": "src/problems/Problem1046/index.jsx",
+      "label": "Equal final stones both vanish"
+    },
+    {
+      "file": "src/problems/Problem1046/index.jsx",
+      "label": "Only one stone remains untouched"
+    },
+    {
+      "file": "src/problems/Problem1046/index.jsx",
+      "label": "Repeated weights cancel in pairs"
     },
     {
       "file": "src/problems/Problem1047/index.jsx",
@@ -47,6 +335,38 @@
     {
       "file": "src/problems/Problem1047/index.jsx",
       "label": "Odd run leaves one"
+    },
+    {
+      "file": "src/problems/Problem1051/index.jsx",
+      "label": "Repeated heights and several displaced positions"
+    },
+    {
+      "file": "src/problems/Problem1051/index.jsx",
+      "label": "Already nondecreasing"
+    },
+    {
+      "file": "src/problems/Problem1051/index.jsx",
+      "label": "All equal heights"
+    },
+    {
+      "file": "src/problems/Problem1051/index.jsx",
+      "label": "Reversed odd length preserves the middle position"
+    },
+    {
+      "file": "src/problems/Problem1052/index.jsx",
+      "label": "A sliding calm interval competes across several busy periods"
+    },
+    {
+      "file": "src/problems/Problem1052/index.jsx",
+      "label": "Nobody was grumpy, so recovery adds nothing"
+    },
+    {
+      "file": "src/problems/Problem1052/index.jsx",
+      "label": "The interval covers every minute"
+    },
+    {
+      "file": "src/problems/Problem1052/index.jsx",
+      "label": "Zero-customer minutes can enter and leave the window"
     },
     {
       "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",

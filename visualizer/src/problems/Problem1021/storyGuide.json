@@ -1,0 +1,27 @@
+{
+  "number": "1021",
+  "title": "Remove Outermost Parentheses",
+  "goal": "Remove the outermost pair from each primitive balanced-parentheses section.",
+  "strategy": "Depth identifies primitive boundaries. An opener at depth zero and a closer returning to zero are outer brackets; retain the brackets inside them.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the outermost pair from each primitive balanced-parentheses section.",
+    "inspect": "Depth identifies primitive boundaries. An opener at depth zero and a closer returning to zero are outer brackets; retain the brackets inside them.",
+    "update": "Depth identifies primitive boundaries. An opener at depth zero and a closer returning to zero are outer brackets; retain the brackets inside them.",
+    "done": "Remove the outermost pair from each primitive balanced-parentheses section."
+  },
+  "edgeCases": [
+    "Every primitive is an empty pair",
+    "One deeply nested primitive",
+    "Only one outer pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

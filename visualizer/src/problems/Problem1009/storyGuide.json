@@ -1,0 +1,27 @@
+{
+  "number": "1009",
+  "title": "Complement of Base 10 Integer",
+  "goal": "Complement every digit of the binary representation without introducing leading bits.",
+  "strategy": "The written width matters: complement only significant digits, while zero is represented by one zero digit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Complement every digit of the binary representation without introducing leading bits.",
+    "inspect": "The written width matters: complement only significant digits, while zero is represented by one zero digit.",
+    "update": "The written width matters: complement only significant digits, while zero is represented by one zero digit.",
+    "done": "Complement every digit of the binary representation without introducing leading bits."
+  },
+  "edgeCases": [
+    "Zero still has one binary digit",
+    "All written bits are ones",
+    "Only the highest bit is set"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

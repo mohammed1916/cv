@@ -1,0 +1,27 @@
+{
+  "number": "1010",
+  "title": "Pairs of Songs With Total Durations Divisible by 60",
+  "goal": "Count pairs of distinct songs whose total duration is divisible by sixty.",
+  "strategy": "A remainder r needs (60-r) modulo 60. Count earlier partners before adding the current song, including the special zero and thirty buckets.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs of distinct songs whose total duration is divisible by sixty.",
+    "inspect": "A remainder r needs (60-r) modulo 60. Count earlier partners before adding the current song, including the special zero and thirty buckets.",
+    "update": "A remainder r needs (60-r) modulo 60. Count earlier partners before adding the current song, including the special zero and thirty buckets.",
+    "done": "Count pairs of distinct songs whose total duration is divisible by sixty."
+  },
+  "edgeCases": [
+    "Zero remainders pair with earlier zeros",
+    "Thirty remainders pair with each other",
+    "One song cannot pair with itself"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}
