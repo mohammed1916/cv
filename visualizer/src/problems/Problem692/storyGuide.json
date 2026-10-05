@@ -1,0 +1,27 @@
+{
+  "number": "692",
+  "title": "Top K Frequent Words",
+  "goal": "Return the k most frequent words, resolving ties alphabetically.",
+  "strategy": "Count exact words first, then sort frequency descending and word ascending. Ranking without the secondary key gives incorrect ties.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the k most frequent words, resolving ties alphabetically.",
+    "inspect": "Count exact words first, then sort frequency descending and word ascending. Ranking without the secondary key gives incorrect ties.",
+    "update": "Count exact words first, then sort frequency descending and word ascending. Ranking without the secondary key gives incorrect ties.",
+    "done": "Return the k most frequent words, resolving ties alphabetically."
+  },
+  "edgeCases": [
+    "All equally frequent",
+    "Only one distinct word",
+    "Ask for all distinct words"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

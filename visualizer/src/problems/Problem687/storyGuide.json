@@ -1,0 +1,27 @@
+{
+  "number": "687",
+  "title": "Longest Univalue Path",
+  "goal": "Find the greatest number of edges on a path whose node values are all equal.",
+  "strategy": "Return one extendable equal-value arm to a parent. At each node, combine its left and right arms to test a path passing through that node.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest number of edges on a path whose node values are all equal.",
+    "inspect": "Return one extendable equal-value arm to a parent. At each node, combine its left and right arms to test a path passing through that node.",
+    "update": "Return one extendable equal-value arm to a parent. At each node, combine its left and right arms to test a path passing through that node.",
+    "done": "Find the greatest number of edges on a path whose node values are all equal."
+  },
+  "edgeCases": [
+    "All values match",
+    "Every edge differs",
+    "Empty tree"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "654",
+  "title": "Maximum Binary Tree",
+  "goal": "Construct the tree whose root is the maximum and whose subtrees represent the original left and right ranges.",
+  "strategy": "A decreasing stack stores the right spine of the processed prefix. Each new value adopts popped smaller roots as its left subtree.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct the tree whose root is the maximum and whose subtrees represent the original left and right ranges.",
+    "inspect": "A decreasing stack stores the right spine of the processed prefix. Each new value adopts popped smaller roots as its left subtree.",
+    "update": "A decreasing stack stores the right spine of the processed prefix. Each new value adopts popped smaller roots as its left subtree.",
+    "done": "Construct the tree whose root is the maximum and whose subtrees represent the original left and right ranges."
+  },
+  "edgeCases": [
+    "Increasing input makes a left chain",
+    "Decreasing input makes a right chain",
+    "Single element"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "671",
+  "title": "Second Minimum Node In a Binary Tree",
+  "goal": "Find the second smallest distinct value in a tree whose parent equals the minimum of its children.",
+  "strategy": "The root is the minimum. Explore below equal-valued nodes; once a larger candidate appears, descendants cannot improve it within that branch.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the second smallest distinct value in a tree whose parent equals the minimum of its children.",
+    "inspect": "The root is the minimum. Explore below equal-valued nodes; once a larger candidate appears, descendants cannot improve it within that branch.",
+    "update": "The root is the minimum. Explore below equal-valued nodes; once a larger candidate appears, descendants cannot improve it within that branch.",
+    "done": "Find the second smallest distinct value in a tree whose parent equals the minimum of its children."
+  },
+  "edgeCases": [
+    "No second distinct value",
+    "Only root",
+    "Candidate in a deeper branch"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

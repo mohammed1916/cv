@@ -1,7 +1,7 @@
 {
-  "routes": 641,
-  "suites": 705,
-  "examples": 3043,
+  "routes": 696,
+  "suites": 760,
+  "examples": 3263,
   "traceChecks": 1726,
   "failures": [],
   "skipped": [
@@ -8464,14 +8464,14 @@
       "file": "Problem382Visualizer.jsx",
       "key": "local:382",
       "label": "Long list with repeated values",
-      "frames": 23
+      "frames": 24
     },
     {
       "folder": "Problem382",
       "file": "Problem382Visualizer.jsx",
       "key": "local:382",
       "label": "Two nodes",
-      "frames": 8
+      "frames": 9
     },
     {
       "folder": "Problem382",

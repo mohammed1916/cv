@@ -1,0 +1,27 @@
+{
+  "number": "796",
+  "title": "Rotate String",
+  "goal": "Decide whether repeatedly moving the first character to the end can produce goal.",
+  "strategy": "A rotation preserves length and cyclic order. Compare every cut position, including the unchanged string.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether repeatedly moving the first character to the end can produce goal.",
+    "inspect": "A rotation preserves length and cyclic order. Compare every cut position, including the unchanged string.",
+    "update": "A rotation preserves length and cyclic order. Compare every cut position, including the unchanged string.",
+    "done": "Decide whether repeatedly moving the first character to the end can produce goal."
+  },
+  "edgeCases": [
+    "Same characters but wrong order",
+    "Already equal",
+    "Different lengths"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "849",
+  "title": "Maximize Distance to Closest Person",
+  "goal": "Choose an empty seat maximizing its distance to the nearest occupied seat.",
+  "strategy": "Leading and trailing gaps have one occupied boundary. Interior gaps have two, so the best possible minimum distance is half their endpoint spacing.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose an empty seat maximizing its distance to the nearest occupied seat.",
+    "inspect": "Leading and trailing gaps have one occupied boundary. Interior gaps have two, so the best possible minimum distance is half their endpoint spacing.",
+    "update": "Leading and trailing gaps have one occupied boundary. Interior gaps have two, so the best possible minimum distance is half their endpoint spacing.",
+    "done": "Choose an empty seat maximizing its distance to the nearest occupied seat."
+  },
+  "edgeCases": [
+    "Only leading empty seats",
+    "Only trailing empty seats",
+    "One interior choice"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

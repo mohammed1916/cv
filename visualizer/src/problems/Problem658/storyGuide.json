@@ -1,0 +1,27 @@
+{
+  "number": "658",
+  "title": "Find K Closest Elements",
+  "goal": "Return the k closest values in sorted order, preferring smaller values on distance ties.",
+  "strategy": "Trim the worse endpoint of a sorted range until exactly k values remain. On a tie remove the larger endpoint.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the k closest values in sorted order, preferring smaller values on distance ties.",
+    "inspect": "Trim the worse endpoint of a sorted range until exactly k values remain. On a tie remove the larger endpoint.",
+    "update": "Trim the worse endpoint of a sorted range until exactly k values remain. On a tie remove the larger endpoint.",
+    "done": "Return the k closest values in sorted order, preferring smaller values on distance ties."
+  },
+  "edgeCases": [
+    "Ties prefer smaller numbers",
+    "Target beyond right end",
+    "Keep entire array"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

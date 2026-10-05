@@ -1,0 +1,27 @@
+{
+  "number": "740",
+  "title": "Delete and Earn",
+  "goal": "Maximize points when taking a value removes all occurrences of its neighboring values.",
+  "strategy": "Combine equal values into one reward bucket. The sorted distinct values then form a take-or-skip DP with conflicts only between consecutive numbers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize points when taking a value removes all occurrences of its neighboring values.",
+    "inspect": "Combine equal values into one reward bucket. The sorted distinct values then form a take-or-skip DP with conflicts only between consecutive numbers.",
+    "update": "Combine equal values into one reward bucket. The sorted distinct values then form a take-or-skip DP with conflicts only between consecutive numbers.",
+    "done": "Maximize points when taking a value removes all occurrences of its neighboring values."
+  },
+  "edgeCases": [
+    "Every value equal",
+    "No conflicting neighbors",
+    "Choosing a smaller group wins"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

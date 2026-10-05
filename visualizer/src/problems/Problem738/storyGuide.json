@@ -1,0 +1,27 @@
+{
+  "number": "738",
+  "title": "Monotone Increasing Digits",
+  "goal": "Find the largest integer no greater than n with nondecreasing decimal digits.",
+  "strategy": "Repair descents right to left so a decrement can propagate. Fill the affected suffix with nines to maximize the remaining value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest integer no greater than n with nondecreasing decimal digits.",
+    "inspect": "Repair descents right to left so a decrement can propagate. Fill the affected suffix with nines to maximize the remaining value.",
+    "update": "Repair descents right to left so a decrement can propagate. Fill the affected suffix with nines to maximize the remaining value.",
+    "done": "Find the largest integer no greater than n with nondecreasing decimal digits."
+  },
+  "edgeCases": [
+    "Already monotone",
+    "Power of ten",
+    "Zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

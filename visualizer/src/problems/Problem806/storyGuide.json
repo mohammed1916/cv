@@ -1,0 +1,27 @@
+{
+  "number": "806",
+  "title": "Number of Lines To Write String",
+  "goal": "Return the number of lines and final-line width when writing letters into 100-unit lines.",
+  "strategy": "Test whether each next letter fits before writing it. Exactly 100 units fits; only a strictly larger width wraps.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the number of lines and final-line width when writing letters into 100-unit lines.",
+    "inspect": "Test whether each next letter fits before writing it. Exactly 100 units fits; only a strictly larger width wraps.",
+    "update": "Test whether each next letter fits before writing it. Exactly 100 units fits; only a strictly larger width wraps.",
+    "done": "Return the number of lines and final-line width when writing letters into 100-unit lines."
+  },
+  "edgeCases": [
+    "Exact line boundary",
+    "One character beyond full line",
+    "Single narrow letter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

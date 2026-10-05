@@ -1,0 +1,27 @@
+{
+  "number": "686",
+  "title": "Repeated String Match",
+  "goal": "Find the fewest repeats of a that contain b as a contiguous substring.",
+  "strategy": "Try enough copies to cover the target length plus one extra for a target that crosses copy boundaries. More copies cannot create a new alignment.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest repeats of a that contain b as a contiguous substring.",
+    "inspect": "Try enough copies to cover the target length plus one extra for a target that crosses copy boundaries. More copies cannot create a new alignment.",
+    "update": "Try enough copies to cover the target length plus one extra for a target that crosses copy boundaries. More copies cannot create a new alignment.",
+    "done": "Find the fewest repeats of a that contain b as a contiguous substring."
+  },
+  "edgeCases": [
+    "Absent character",
+    "Target shorter than base",
+    "Single-letter repetition"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

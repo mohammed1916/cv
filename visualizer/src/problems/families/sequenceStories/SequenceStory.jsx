@@ -22,13 +22,13 @@ export default function SequenceStory({ definition }) {
       const sequence = typeof step.sequence === 'string' ? [...step.sequence] : step.sequence;
       const matrix = step.matrix ?? (Array.isArray(sequence?.[0]) ? sequence : null);
       return <>
-        {matrix ? <Matrix values={matrix} label="Source matrix" cell={step.cell} otherCell={step.otherCell} /> :
+        {matrix ? <Matrix values={matrix} label={step.matrixLabel ?? 'Source matrix'} cell={step.cell} otherCell={step.otherCell} /> :
           <IndexedSequence label="Input / working sequence" length={sequence.length} valueAt={i => display(sequence[i])} active={step.index}
             roleAt={i => step.marks?.[i] ?? (step.window && i >= step.window[0] && i <= step.window[1] ? 'in window' : '')} />}
         {step.outputMatrix && <Matrix values={step.outputMatrix} label="Output matrix — dots are unwritten cells" cell={step.outputCell} />}
         {step.output && <IndexedSequence label="Output / stack — dots are unwritten slots" length={step.output.length} active={step.outputIndex ?? step.output.length - 1} valueAt={i => display(step.output[i])} />}
-        {step.table && <table><caption>{definition.title === 'Degree of an Array' ? 'Value, frequency, and enclosing span' : 'Occurrence counts'}</caption>
-          <thead><tr>{(step.table[0]?.length === 4 ? ['Value','Count','First','Last'] : ['Value','Count']).map(label => <th key={label}>{label}</th>)}</tr></thead>
+        {step.table && <table><caption>{step.tableCaption ?? (definition.title === 'Degree of an Array' ? 'Value, frequency, and enclosing span' : step.tableHeaders ? 'Algorithm state' : 'Occurrence counts')}</caption>
+          <thead><tr>{(step.tableHeaders ?? (step.table[0]?.length === 4 ? ['Value','Count','First','Last'] : ['Value','Count'])).map(label => <th key={label}>{label}</th>)}</tr></thead>
           <tbody>{step.table.map((row,i) => <tr key={i}>{row.map((value,j) => <td key={j}>{display(value)}</td>)}</tr>)}</tbody></table>}
         {Object.keys(step.metrics).length > 0 && <dl className={styles.metrics}>{Object.entries(step.metrics).map(([key,value]) => <div key={key}><dt>{key.replace(/([a-z])([A-Z])/g, '$1 $2')}</dt><dd>{display(value)}</dd></div>)}</dl>}
         {step.phase === 'done' && <output aria-label="Algorithm result">Result: {display(step.result)}</output>}

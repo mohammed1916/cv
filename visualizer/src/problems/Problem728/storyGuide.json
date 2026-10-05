@@ -1,0 +1,27 @@
+{
+  "number": "728",
+  "title": "Self Dividing Numbers",
+  "goal": "List numbers in the inclusive interval divisible by every one of their own digits.",
+  "strategy": "Reject zero digits immediately. Every other digit must divide the original whole number, not the remaining quotient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List numbers in the inclusive interval divisible by every one of their own digits.",
+    "inspect": "Reject zero digits immediately. Every other digit must divide the original whole number, not the remaining quotient.",
+    "update": "Reject zero digits immediately. Every other digit must divide the original whole number, not the remaining quotient.",
+    "done": "List numbers in the inclusive interval divisible by every one of their own digits."
+  },
+  "edgeCases": [
+    "Interval crosses zero digits",
+    "Single accepted candidate",
+    "Single rejected candidate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

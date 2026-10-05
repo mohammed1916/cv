@@ -1,0 +1,27 @@
+{
+  "number": "856",
+  "title": "Score of Parentheses",
+  "goal": "Compute the recursive score of a balanced parentheses string.",
+  "strategy": "Only primitive empty pairs contribute directly. Each enclosing pair doubles that contribution, so add two to the power of the enclosing depth.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the recursive score of a balanced parentheses string.",
+    "inspect": "Only primitive empty pairs contribute directly. Each enclosing pair doubles that contribution, so add two to the power of the enclosing depth.",
+    "update": "Only primitive empty pairs contribute directly. Each enclosing pair doubles that contribution, so add two to the power of the enclosing depth.",
+    "done": "Compute the recursive score of a balanced parentheses string."
+  },
+  "edgeCases": [
+    "One primitive pair",
+    "Only concatenation",
+    "Deep nesting"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

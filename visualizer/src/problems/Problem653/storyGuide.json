@@ -1,0 +1,27 @@
+{
+  "number": "653",
+  "title": "Two Sum IV - Input is a BST",
+  "goal": "Find whether two distinct tree nodes sum to k.",
+  "strategy": "Before adding a node to the seen set, look for its complement among earlier nodes. This prevents matching the node with itself.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find whether two distinct tree nodes sum to k.",
+    "inspect": "Before adding a node to the seen set, look for its complement among earlier nodes. This prevents matching the node with itself.",
+    "update": "Before adding a node to the seen set, look for its complement among earlier nodes. This prevents matching the node with itself.",
+    "done": "Find whether two distinct tree nodes sum to k."
+  },
+  "edgeCases": [
+    "No two values can reach target",
+    "Single node cannot be used twice",
+    "Two values at extremes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

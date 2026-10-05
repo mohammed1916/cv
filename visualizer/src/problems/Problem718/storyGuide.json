@@ -1,0 +1,27 @@
+{
+  "number": "718",
+  "title": "Maximum Length of Repeated Subarray",
+  "goal": "Find the length of the longest contiguous block shared by both arrays.",
+  "strategy": "DP cell (i,j) stores the common suffix length ending at those prefixes. Matching values extend the northwest cell; a mismatch resets to zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the length of the longest contiguous block shared by both arrays.",
+    "inspect": "DP cell (i,j) stores the common suffix length ending at those prefixes. Matching values extend the northwest cell; a mismatch resets to zero.",
+    "update": "DP cell (i,j) stores the common suffix length ending at those prefixes. Matching values extend the northwest cell; a mismatch resets to zero.",
+    "done": "Find the length of the longest contiguous block shared by both arrays."
+  },
+  "edgeCases": [
+    "No shared value",
+    "Entire arrays match",
+    "Repeated equal values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

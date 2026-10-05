@@ -865,6 +865,54 @@
       "label": "[-1,-1,2,2]"
     },
     {
+      "file": "src/problems/Problem594/index.jsx",
+      "label": "Competing adjacent value groups"
+    },
+    {
+      "file": "src/problems/Problem594/index.jsx",
+      "label": "Only one distinct value"
+    },
+    {
+      "file": "src/problems/Problem594/index.jsx",
+      "label": "Gaps exceed one"
+    },
+    {
+      "file": "src/problems/Problem594/index.jsx",
+      "label": "Negative adjacent values"
+    },
+    {
+      "file": "src/problems/Problem598/index.jsx",
+      "label": "Shrinking shared rectangle"
+    },
+    {
+      "file": "src/problems/Problem598/index.jsx",
+      "label": "No operations"
+    },
+    {
+      "file": "src/problems/Problem598/index.jsx",
+      "label": "Full-grid operation"
+    },
+    {
+      "file": "src/problems/Problem598/index.jsx",
+      "label": "One maximum cell"
+    },
+    {
+      "file": "src/problems/Problem599/index.jsx",
+      "label": "Common choices at different ranks"
+    },
+    {
+      "file": "src/problems/Problem599/index.jsx",
+      "label": "Tie in combined rank"
+    },
+    {
+      "file": "src/problems/Problem599/index.jsx",
+      "label": "Only last choice matches"
+    },
+    {
+      "file": "src/problems/Problem599/index.jsx",
+      "label": "Identical first choices"
+    },
+    {
       "file": "src/problems/Problem605/index.jsx",
       "label": "Several separated planting opportunities"
     },
@@ -885,6 +933,22 @@
       "label": "Not enough space"
     },
     {
+      "file": "src/problems/Problem606/index.jsx",
+      "label": "Sparse branches need structural parentheses"
+    },
+    {
+      "file": "src/problems/Problem606/index.jsx",
+      "label": "Only a right child"
+    },
+    {
+      "file": "src/problems/Problem606/index.jsx",
+      "label": "Only a left child"
+    },
+    {
+      "file": "src/problems/Problem606/index.jsx",
+      "label": "Single node"
+    },
+    {
       "file": "src/problems/Problem611/index.jsx",
       "label": "Repeated sides and several valid ranges"
     },
@@ -899,6 +963,38 @@
     {
       "file": "src/problems/Problem611/index.jsx",
       "label": "Fewer than three sides"
+    },
+    {
+      "file": "src/problems/Problem617/index.jsx",
+      "label": "Different shapes overlap at several levels"
+    },
+    {
+      "file": "src/problems/Problem617/index.jsx",
+      "label": "One input is empty"
+    },
+    {
+      "file": "src/problems/Problem617/index.jsx",
+      "label": "Overlapping single nodes"
+    },
+    {
+      "file": "src/problems/Problem617/index.jsx",
+      "label": "Unmatched opposite branches"
+    },
+    {
+      "file": "src/problems/Problem623/index.jsx",
+      "label": "Insert across a wide middle frontier"
+    },
+    {
+      "file": "src/problems/Problem623/index.jsx",
+      "label": "Replace the root"
+    },
+    {
+      "file": "src/problems/Problem623/index.jsx",
+      "label": "Insert below deepest nodes"
+    },
+    {
+      "file": "src/problems/Problem623/index.jsx",
+      "label": "Sparse frontier"
     },
     {
       "file": "src/problems/Problem628/index.jsx",
@@ -937,6 +1033,22 @@
       "label": "One square is zero"
     },
     {
+      "file": "src/problems/Problem637/index.jsx",
+      "label": "Several levels with mixed magnitudes"
+    },
+    {
+      "file": "src/problems/Problem637/index.jsx",
+      "label": "Fractional average"
+    },
+    {
+      "file": "src/problems/Problem637/index.jsx",
+      "label": "Negative values"
+    },
+    {
+      "file": "src/problems/Problem637/index.jsx",
+      "label": "Only one level"
+    },
+    {
       "file": "src/problems/Problem643/index.jsx",
       "label": "Best window lies inside the array"
     },
@@ -969,6 +1081,182 @@
       "label": "Smallest mismatch"
     },
     {
+      "file": "src/problems/Problem646/index.jsx",
+      "label": "Unsorted pairs competing for room"
+    },
+    {
+      "file": "src/problems/Problem646/index.jsx",
+      "label": "Touching does not chain"
+    },
+    {
+      "file": "src/problems/Problem646/index.jsx",
+      "label": "Nested intervals"
+    },
+    {
+      "file": "src/problems/Problem646/index.jsx",
+      "label": "Negative endpoints"
+    },
+    {
+      "file": "src/problems/Problem653/index.jsx",
+      "label": "Complement found across two branches"
+    },
+    {
+      "file": "src/problems/Problem653/index.jsx",
+      "label": "No two values can reach target"
+    },
+    {
+      "file": "src/problems/Problem653/index.jsx",
+      "label": "Single node cannot be used twice"
+    },
+    {
+      "file": "src/problems/Problem653/index.jsx",
+      "label": "Two values at extremes"
+    },
+    {
+      "file": "src/problems/Problem654/index.jsx",
+      "label": "Several decreasing-stack pops"
+    },
+    {
+      "file": "src/problems/Problem654/index.jsx",
+      "label": "Increasing input makes a left chain"
+    },
+    {
+      "file": "src/problems/Problem654/index.jsx",
+      "label": "Decreasing input makes a right chain"
+    },
+    {
+      "file": "src/problems/Problem654/index.jsx",
+      "label": "Single element"
+    },
+    {
+      "file": "src/problems/Problem657/index.jsx",
+      "label": "Balanced route with several turns"
+    },
+    {
+      "file": "src/problems/Problem657/index.jsx",
+      "label": "One unmatched axis"
+    },
+    {
+      "file": "src/problems/Problem657/index.jsx",
+      "label": "Repeated closed loops"
+    },
+    {
+      "file": "src/problems/Problem657/index.jsx",
+      "label": "One move"
+    },
+    {
+      "file": "src/problems/Problem658/index.jsx",
+      "label": "Target between central entries"
+    },
+    {
+      "file": "src/problems/Problem658/index.jsx",
+      "label": "Ties prefer smaller numbers"
+    },
+    {
+      "file": "src/problems/Problem658/index.jsx",
+      "label": "Target beyond right end"
+    },
+    {
+      "file": "src/problems/Problem658/index.jsx",
+      "label": "Keep entire array"
+    },
+    {
+      "file": "src/problems/Problem661/index.jsx",
+      "label": "Edges and interior use different counts"
+    },
+    {
+      "file": "src/problems/Problem661/index.jsx",
+      "label": "One row"
+    },
+    {
+      "file": "src/problems/Problem661/index.jsx",
+      "label": "Single pixel"
+    },
+    {
+      "file": "src/problems/Problem661/index.jsx",
+      "label": "Uniform image"
+    },
+    {
+      "file": "src/problems/Problem665/index.jsx",
+      "label": "One repair inside a long prefix"
+    },
+    {
+      "file": "src/problems/Problem665/index.jsx",
+      "label": "Must raise the current value"
+    },
+    {
+      "file": "src/problems/Problem665/index.jsx",
+      "label": "Two repairs required"
+    },
+    {
+      "file": "src/problems/Problem665/index.jsx",
+      "label": "Already nondecreasing"
+    },
+    {
+      "file": "src/problems/Problem669/index.jsx",
+      "label": "Prune both outer regions"
+    },
+    {
+      "file": "src/problems/Problem669/index.jsx",
+      "label": "Root itself must disappear"
+    },
+    {
+      "file": "src/problems/Problem669/index.jsx",
+      "label": "Keep one exact value"
+    },
+    {
+      "file": "src/problems/Problem669/index.jsx",
+      "label": "Everything excluded"
+    },
+    {
+      "file": "src/problems/Problem670/index.jsx",
+      "label": "Best swap uses a distant repeated digit"
+    },
+    {
+      "file": "src/problems/Problem670/index.jsx",
+      "label": "Nonincreasing digits"
+    },
+    {
+      "file": "src/problems/Problem670/index.jsx",
+      "label": "Zero input"
+    },
+    {
+      "file": "src/problems/Problem670/index.jsx",
+      "label": "Repeated best suffix digit"
+    },
+    {
+      "file": "src/problems/Problem671/index.jsx",
+      "label": "Minimum repeated above distinct candidates"
+    },
+    {
+      "file": "src/problems/Problem671/index.jsx",
+      "label": "No second distinct value"
+    },
+    {
+      "file": "src/problems/Problem671/index.jsx",
+      "label": "Only root"
+    },
+    {
+      "file": "src/problems/Problem671/index.jsx",
+      "label": "Candidate in a deeper branch"
+    },
+    {
+      "file": "src/problems/Problem673/index.jsx",
+      "label": "Several routes to the longest length"
+    },
+    {
+      "file": "src/problems/Problem673/index.jsx",
+      "label": "Equal elements are distinct singleton choices"
+    },
+    {
+      "file": "src/problems/Problem673/index.jsx",
+      "label": "Descending input"
+    },
+    {
+      "file": "src/problems/Problem673/index.jsx",
+      "label": "One increasing route"
+    },
+    {
       "file": "src/problems/Problem674/index.jsx",
       "label": "Competing runs with a plateau"
     },
@@ -985,6 +1273,134 @@
       "label": "One value"
     },
     {
+      "file": "src/problems/Problem678/index.jsx",
+      "label": "Stars with several possible roles"
+    },
+    {
+      "file": "src/problems/Problem678/index.jsx",
+      "label": "Unrepairable early close"
+    },
+    {
+      "file": "src/problems/Problem678/index.jsx",
+      "label": "Only stars"
+    },
+    {
+      "file": "src/problems/Problem678/index.jsx",
+      "label": "Too many fixed openers"
+    },
+    {
+      "file": "src/problems/Problem680/index.jsx",
+      "label": "One interior distraction"
+    },
+    {
+      "file": "src/problems/Problem680/index.jsx",
+      "label": "Already symmetric"
+    },
+    {
+      "file": "src/problems/Problem680/index.jsx",
+      "label": "Remove an endpoint"
+    },
+    {
+      "file": "src/problems/Problem680/index.jsx",
+      "label": "Two deletions would be needed"
+    },
+    {
+      "file": "src/problems/Problem682/index.jsx",
+      "label": "Cancellations and derived rounds"
+    },
+    {
+      "file": "src/problems/Problem682/index.jsx",
+      "label": "Cancel the only round"
+    },
+    {
+      "file": "src/problems/Problem682/index.jsx",
+      "label": "Negative doubled score"
+    },
+    {
+      "file": "src/problems/Problem682/index.jsx",
+      "label": "Several sums"
+    },
+    {
+      "file": "src/problems/Problem686/index.jsx",
+      "label": "Target crosses both copy boundaries"
+    },
+    {
+      "file": "src/problems/Problem686/index.jsx",
+      "label": "Absent character"
+    },
+    {
+      "file": "src/problems/Problem686/index.jsx",
+      "label": "Target shorter than base"
+    },
+    {
+      "file": "src/problems/Problem686/index.jsx",
+      "label": "Single-letter repetition"
+    },
+    {
+      "file": "src/problems/Problem687/index.jsx",
+      "label": "Matching arms combine below the root"
+    },
+    {
+      "file": "src/problems/Problem687/index.jsx",
+      "label": "All values match"
+    },
+    {
+      "file": "src/problems/Problem687/index.jsx",
+      "label": "Every edge differs"
+    },
+    {
+      "file": "src/problems/Problem687/index.jsx",
+      "label": "Empty tree"
+    },
+    {
+      "file": "src/problems/Problem692/index.jsx",
+      "label": "Frequency ranking with lexical ties"
+    },
+    {
+      "file": "src/problems/Problem692/index.jsx",
+      "label": "All equally frequent"
+    },
+    {
+      "file": "src/problems/Problem692/index.jsx",
+      "label": "Only one distinct word"
+    },
+    {
+      "file": "src/problems/Problem692/index.jsx",
+      "label": "Ask for all distinct words"
+    },
+    {
+      "file": "src/problems/Problem693/index.jsx",
+      "label": "Long alternating representation"
+    },
+    {
+      "file": "src/problems/Problem693/index.jsx",
+      "label": "Repeated middle bits"
+    },
+    {
+      "file": "src/problems/Problem693/index.jsx",
+      "label": "One bit"
+    },
+    {
+      "file": "src/problems/Problem693/index.jsx",
+      "label": "Repeated low bits"
+    },
+    {
+      "file": "src/problems/Problem696/index.jsx",
+      "label": "Several run lengths"
+    },
+    {
+      "file": "src/problems/Problem696/index.jsx",
+      "label": "Alternating bits"
+    },
+    {
+      "file": "src/problems/Problem696/index.jsx",
+      "label": "Only one run"
+    },
+    {
+      "file": "src/problems/Problem696/index.jsx",
+      "label": "Unequal adjacent runs"
+    },
+    {
       "file": "src/problems/Problem697/index.jsx",
       "label": "Equal frequencies with different spans"
     },
@@ -999,6 +1415,118 @@
     {
       "file": "src/problems/Problem697/index.jsx",
       "label": "Single element"
+    },
+    {
+      "file": "src/problems/Problem700/index.jsx",
+      "label": "Search a deep interior node"
+    },
+    {
+      "file": "src/problems/Problem700/index.jsx",
+      "label": "Target is absent"
+    },
+    {
+      "file": "src/problems/Problem700/index.jsx",
+      "label": "Return the whole tree"
+    },
+    {
+      "file": "src/problems/Problem700/index.jsx",
+      "label": "Return a leaf"
+    },
+    {
+      "file": "src/problems/Problem701/index.jsx",
+      "label": "Insert between existing values"
+    },
+    {
+      "file": "src/problems/Problem701/index.jsx",
+      "label": "Empty tree"
+    },
+    {
+      "file": "src/problems/Problem701/index.jsx",
+      "label": "New minimum"
+    },
+    {
+      "file": "src/problems/Problem701/index.jsx",
+      "label": "New maximum"
+    },
+    {
+      "file": "src/problems/Problem709/index.jsx",
+      "label": "Mixed letters and punctuation"
+    },
+    {
+      "file": "src/problems/Problem709/index.jsx",
+      "label": "Already lowercase"
+    },
+    {
+      "file": "src/problems/Problem709/index.jsx",
+      "label": "No letters"
+    },
+    {
+      "file": "src/problems/Problem709/index.jsx",
+      "label": "Alphabet endpoints"
+    },
+    {
+      "file": "src/problems/Problem713/index.jsx",
+      "label": "Window expands and shrinks repeatedly"
+    },
+    {
+      "file": "src/problems/Problem713/index.jsx",
+      "label": "Threshold one"
+    },
+    {
+      "file": "src/problems/Problem713/index.jsx",
+      "label": "Many products stay one"
+    },
+    {
+      "file": "src/problems/Problem713/index.jsx",
+      "label": "Single excessive value"
+    },
+    {
+      "file": "src/problems/Problem714/index.jsx",
+      "label": "Several rises compete with fees"
+    },
+    {
+      "file": "src/problems/Problem714/index.jsx",
+      "label": "Fee erases every gain"
+    },
+    {
+      "file": "src/problems/Problem714/index.jsx",
+      "label": "Descending prices"
+    },
+    {
+      "file": "src/problems/Problem714/index.jsx",
+      "label": "No selling day"
+    },
+    {
+      "file": "src/problems/Problem717/index.jsx",
+      "label": "Several one and two bit symbols"
+    },
+    {
+      "file": "src/problems/Problem717/index.jsx",
+      "label": "Final zero belongs to a pair"
+    },
+    {
+      "file": "src/problems/Problem717/index.jsx",
+      "label": "Only one bit"
+    },
+    {
+      "file": "src/problems/Problem717/index.jsx",
+      "label": "Consecutive zeros"
+    },
+    {
+      "file": "src/problems/Problem718/index.jsx",
+      "label": "Repeated blocks with different prefixes"
+    },
+    {
+      "file": "src/problems/Problem718/index.jsx",
+      "label": "No shared value"
+    },
+    {
+      "file": "src/problems/Problem718/index.jsx",
+      "label": "Entire arrays match"
+    },
+    {
+      "file": "src/problems/Problem718/index.jsx",
+      "label": "Repeated equal values"
     },
     {
       "file": "src/problems/Problem724/index.jsx",
@@ -1019,6 +1547,102 @@
     {
       "file": "src/problems/Problem724/index.jsx",
       "label": "Negative values"
+    },
+    {
+      "file": "src/problems/Problem728/index.jsx",
+      "label": "Mixed decimal candidates"
+    },
+    {
+      "file": "src/problems/Problem728/index.jsx",
+      "label": "Interval crosses zero digits"
+    },
+    {
+      "file": "src/problems/Problem728/index.jsx",
+      "label": "Single accepted candidate"
+    },
+    {
+      "file": "src/problems/Problem728/index.jsx",
+      "label": "Single rejected candidate"
+    },
+    {
+      "file": "src/problems/Problem733/index.jsx",
+      "label": "Irregular connected region and isolated islands"
+    },
+    {
+      "file": "src/problems/Problem733/index.jsx",
+      "label": "Replacement equals original"
+    },
+    {
+      "file": "src/problems/Problem733/index.jsx",
+      "label": "Diagonals are not connected"
+    },
+    {
+      "file": "src/problems/Problem733/index.jsx",
+      "label": "Single pixel"
+    },
+    {
+      "file": "src/problems/Problem735/index.jsx",
+      "label": "Incoming asteroid removes several survivors"
+    },
+    {
+      "file": "src/problems/Problem735/index.jsx",
+      "label": "Moving apart"
+    },
+    {
+      "file": "src/problems/Problem735/index.jsx",
+      "label": "Equal magnitudes disappear"
+    },
+    {
+      "file": "src/problems/Problem735/index.jsx",
+      "label": "Large right mover survives"
+    },
+    {
+      "file": "src/problems/Problem738/index.jsx",
+      "label": "A descent propagates leftward"
+    },
+    {
+      "file": "src/problems/Problem738/index.jsx",
+      "label": "Already monotone"
+    },
+    {
+      "file": "src/problems/Problem738/index.jsx",
+      "label": "Power of ten"
+    },
+    {
+      "file": "src/problems/Problem738/index.jsx",
+      "label": "Zero"
+    },
+    {
+      "file": "src/problems/Problem740/index.jsx",
+      "label": "Adjacent conflicts separated by gaps"
+    },
+    {
+      "file": "src/problems/Problem740/index.jsx",
+      "label": "Every value equal"
+    },
+    {
+      "file": "src/problems/Problem740/index.jsx",
+      "label": "No conflicting neighbors"
+    },
+    {
+      "file": "src/problems/Problem740/index.jsx",
+      "label": "Choosing a smaller group wins"
+    },
+    {
+      "file": "src/problems/Problem744/index.jsx",
+      "label": "Search among duplicated sorted letters"
+    },
+    {
+      "file": "src/problems/Problem744/index.jsx",
+      "label": "Wrap beyond maximum"
+    },
+    {
+      "file": "src/problems/Problem744/index.jsx",
+      "label": "Strictly greater excludes equals"
+    },
+    {
+      "file": "src/problems/Problem744/index.jsx",
+      "label": "Before the first letter"
     },
     {
       "file": "src/problems/Problem747/index.jsx",
@@ -1053,6 +1677,102 @@
       "label": "Single column"
     },
     {
+      "file": "src/problems/Problem771/index.jsx",
+      "label": "Case-sensitive membership across many stones"
+    },
+    {
+      "file": "src/problems/Problem771/index.jsx",
+      "label": "No jewel matches"
+    },
+    {
+      "file": "src/problems/Problem771/index.jsx",
+      "label": "Every stone matches"
+    },
+    {
+      "file": "src/problems/Problem771/index.jsx",
+      "label": "One jewel and stone"
+    },
+    {
+      "file": "src/problems/Problem796/index.jsx",
+      "label": "Rotation across a long word"
+    },
+    {
+      "file": "src/problems/Problem796/index.jsx",
+      "label": "Same characters but wrong order"
+    },
+    {
+      "file": "src/problems/Problem796/index.jsx",
+      "label": "Already equal"
+    },
+    {
+      "file": "src/problems/Problem796/index.jsx",
+      "label": "Different lengths"
+    },
+    {
+      "file": "src/problems/Problem804/index.jsx",
+      "label": "Distinct words may share a code"
+    },
+    {
+      "file": "src/problems/Problem804/index.jsx",
+      "label": "One word"
+    },
+    {
+      "file": "src/problems/Problem804/index.jsx",
+      "label": "Repeated words"
+    },
+    {
+      "file": "src/problems/Problem804/index.jsx",
+      "label": "Short distinct transformations"
+    },
+    {
+      "file": "src/problems/Problem806/index.jsx",
+      "label": "Several wraps with uneven widths"
+    },
+    {
+      "file": "src/problems/Problem806/index.jsx",
+      "label": "Exact line boundary"
+    },
+    {
+      "file": "src/problems/Problem806/index.jsx",
+      "label": "One character beyond full line"
+    },
+    {
+      "file": "src/problems/Problem806/index.jsx",
+      "label": "Single narrow letter"
+    },
+    {
+      "file": "src/problems/Problem821/index.jsx",
+      "label": "Targets scattered through a long word"
+    },
+    {
+      "file": "src/problems/Problem821/index.jsx",
+      "label": "Target only at left"
+    },
+    {
+      "file": "src/problems/Problem821/index.jsx",
+      "label": "Target only at right"
+    },
+    {
+      "file": "src/problems/Problem821/index.jsx",
+      "label": "Every character is a target"
+    },
+    {
+      "file": "src/problems/Problem830/index.jsx",
+      "label": "Several long and short groups"
+    },
+    {
+      "file": "src/problems/Problem830/index.jsx",
+      "label": "Final group qualifies"
+    },
+    {
+      "file": "src/problems/Problem830/index.jsx",
+      "label": "Every group too short"
+    },
+    {
+      "file": "src/problems/Problem830/index.jsx",
+      "label": "Whole string is one group"
+    },
+    {
       "file": "src/problems/Problem832/index.jsx",
       "label": "Asymmetric image with both bit values"
     },
@@ -1067,6 +1787,102 @@
     {
       "file": "src/problems/Problem832/index.jsx",
       "label": "Odd center bit"
+    },
+    {
+      "file": "src/problems/Problem836/index.jsx",
+      "label": "Positive overlap with negative coordinates"
+    },
+    {
+      "file": "src/problems/Problem836/index.jsx",
+      "label": "Touching vertical edge"
+    },
+    {
+      "file": "src/problems/Problem836/index.jsx",
+      "label": "One rectangle contained"
+    },
+    {
+      "file": "src/problems/Problem836/index.jsx",
+      "label": "Separated on one axis"
+    },
+    {
+      "file": "src/problems/Problem844/index.jsx",
+      "label": "Several backspaces erase intermediate work"
+    },
+    {
+      "file": "src/problems/Problem844/index.jsx",
+      "label": "Everything erased"
+    },
+    {
+      "file": "src/problems/Problem844/index.jsx",
+      "label": "Backspace on empty buffer"
+    },
+    {
+      "file": "src/problems/Problem844/index.jsx",
+      "label": "Same length different survivors"
+    },
+    {
+      "file": "src/problems/Problem849/index.jsx",
+      "label": "Leading, interior, and trailing gaps compete"
+    },
+    {
+      "file": "src/problems/Problem849/index.jsx",
+      "label": "Only leading empty seats"
+    },
+    {
+      "file": "src/problems/Problem849/index.jsx",
+      "label": "Only trailing empty seats"
+    },
+    {
+      "file": "src/problems/Problem849/index.jsx",
+      "label": "One interior choice"
+    },
+    {
+      "file": "src/problems/Problem852/index.jsx",
+      "label": "Uneven slopes around a unique peak"
+    },
+    {
+      "file": "src/problems/Problem852/index.jsx",
+      "label": "Peak near left boundary"
+    },
+    {
+      "file": "src/problems/Problem852/index.jsx",
+      "label": "Peak near right boundary"
+    },
+    {
+      "file": "src/problems/Problem852/index.jsx",
+      "label": "Smallest mountain"
+    },
+    {
+      "file": "src/problems/Problem856/index.jsx",
+      "label": "Nested and concatenated groups"
+    },
+    {
+      "file": "src/problems/Problem856/index.jsx",
+      "label": "One primitive pair"
+    },
+    {
+      "file": "src/problems/Problem856/index.jsx",
+      "label": "Only concatenation"
+    },
+    {
+      "file": "src/problems/Problem856/index.jsx",
+      "label": "Deep nesting"
+    },
+    {
+      "file": "src/problems/Problem859/index.jsx",
+      "label": "One swap repairs a long word"
+    },
+    {
+      "file": "src/problems/Problem859/index.jsx",
+      "label": "Identical with duplicate letters"
+    },
+    {
+      "file": "src/problems/Problem859/index.jsx",
+      "label": "Identical without duplicates"
+    },
+    {
+      "file": "src/problems/Problem859/index.jsx",
+      "label": "Two positions exchange"
     },
     {
       "file": "src/problems/Problem867/index.jsx",
@@ -1085,6 +1901,22 @@
       "label": "Single cell"
     },
     {
+      "file": "src/problems/Problem872/index.jsx",
+      "label": "Different internal structure, same leaf order"
+    },
+    {
+      "file": "src/problems/Problem872/index.jsx",
+      "label": "Only leaf order differs"
+    },
+    {
+      "file": "src/problems/Problem872/index.jsx",
+      "label": "Equal single leaves"
+    },
+    {
+      "file": "src/problems/Problem872/index.jsx",
+      "label": "Different leaf counts"
+    },
+    {
       "file": "src/problems/Problem896/index.jsx",
       "label": "Plateaus inside an increasing sequence"
     },
@@ -1099,6 +1931,22 @@
     {
       "file": "src/problems/Problem896/index.jsx",
       "label": "Decreasing with equality"
+    },
+    {
+      "file": "src/problems/Problem897/index.jsx",
+      "label": "Wide BST becomes a sorted right chain"
+    },
+    {
+      "file": "src/problems/Problem897/index.jsx",
+      "label": "Already a right chain"
+    },
+    {
+      "file": "src/problems/Problem897/index.jsx",
+      "label": "Left chain"
+    },
+    {
+      "file": "src/problems/Problem897/index.jsx",
+      "label": "Single node"
     },
     {
       "file": "src/problems/Problem905/index.jsx",
@@ -1131,6 +1979,38 @@
     {
       "file": "src/problems/Problem922/index.jsx",
       "label": "Two values reversed"
+    },
+    {
+      "file": "src/problems/Problem938/index.jsx",
+      "label": "Range crosses the root and several branches"
+    },
+    {
+      "file": "src/problems/Problem938/index.jsx",
+      "label": "Inclusive endpoints"
+    },
+    {
+      "file": "src/problems/Problem938/index.jsx",
+      "label": "No value in range"
+    },
+    {
+      "file": "src/problems/Problem938/index.jsx",
+      "label": "Single exact match"
+    },
+    {
+      "file": "src/problems/Problem965/index.jsx",
+      "label": "Deep tree with one late mismatch"
+    },
+    {
+      "file": "src/problems/Problem965/index.jsx",
+      "label": "All nodes agree"
+    },
+    {
+      "file": "src/problems/Problem965/index.jsx",
+      "label": "Root differs from child"
+    },
+    {
+      "file": "src/problems/Problem965/index.jsx",
+      "label": "One node"
     },
     {
       "file": "src/problems/Problem977/index.jsx",

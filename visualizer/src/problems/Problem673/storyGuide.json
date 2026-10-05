@@ -1,0 +1,27 @@
+{
+  "number": "673",
+  "title": "Number of Longest Increasing Subsequence",
+  "goal": "Count the longest strictly increasing subsequences by index choices.",
+  "strategy": "For each ending position track both the best length and its number of constructions. A better length replaces the count; an equal length adds ways.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count the longest strictly increasing subsequences by index choices.",
+    "inspect": "For each ending position track both the best length and its number of constructions. A better length replaces the count; an equal length adds ways.",
+    "update": "For each ending position track both the best length and its number of constructions. A better length replaces the count; an equal length adds ways.",
+    "done": "Count the longest strictly increasing subsequences by index choices."
+  },
+  "edgeCases": [
+    "Equal elements are distinct singleton choices",
+    "Descending input",
+    "One increasing route"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

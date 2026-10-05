@@ -1,0 +1,27 @@
+{
+  "number": "938",
+  "title": "Range Sum of BST",
+  "goal": "Sum BST node values within an inclusive range.",
+  "strategy": "BST ordering lets a boundary exclude whole branches. Add in-range nodes, explore left only above the lower bound, and right only below the upper bound.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum BST node values within an inclusive range.",
+    "inspect": "BST ordering lets a boundary exclude whole branches. Add in-range nodes, explore left only above the lower bound, and right only below the upper bound.",
+    "update": "BST ordering lets a boundary exclude whole branches. Add in-range nodes, explore left only above the lower bound, and right only below the upper bound.",
+    "done": "Sum BST node values within an inclusive range."
+  },
+  "edgeCases": [
+    "Inclusive endpoints",
+    "No value in range",
+    "Single exact match"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

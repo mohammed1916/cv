@@ -1,0 +1,27 @@
+{
+  "number": "872",
+  "title": "Leaf-Similar Trees",
+  "goal": "Decide whether two trees have identical left-to-right leaf sequences.",
+  "strategy": "Internal values and tree shape do not determine leaf similarity. Traverse left before right and record only nodes with no children.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether two trees have identical left-to-right leaf sequences.",
+    "inspect": "Internal values and tree shape do not determine leaf similarity. Traverse left before right and record only nodes with no children.",
+    "update": "Internal values and tree shape do not determine leaf similarity. Traverse left before right and record only nodes with no children.",
+    "done": "Decide whether two trees have identical left-to-right leaf sequences."
+  },
+  "edgeCases": [
+    "Only leaf order differs",
+    "Equal single leaves",
+    "Different leaf counts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

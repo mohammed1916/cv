@@ -1,0 +1,27 @@
+{
+  "number": "646",
+  "title": "Maximum Length of Pair Chain",
+  "goal": "Find the maximum number of strictly nonoverlapping pairs in a chain.",
+  "strategy": "Take available pairs by earliest finish. Leaving the earliest possible endpoint gives later pairs the most room.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the maximum number of strictly nonoverlapping pairs in a chain.",
+    "inspect": "Take available pairs by earliest finish. Leaving the earliest possible endpoint gives later pairs the most room.",
+    "update": "Take available pairs by earliest finish. Leaving the earliest possible endpoint gives later pairs the most room.",
+    "done": "Find the maximum number of strictly nonoverlapping pairs in a chain."
+  },
+  "edgeCases": [
+    "Touching does not chain",
+    "Nested intervals",
+    "Negative endpoints"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

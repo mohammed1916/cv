@@ -1,0 +1,27 @@
+{
+  "number": "735",
+  "title": "Asteroid Collision",
+  "goal": "Return the surviving asteroids after all collisions.",
+  "strategy": "A stack contains survivors in order. A collision is possible only when its top moves right and the next asteroid moves left.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the surviving asteroids after all collisions.",
+    "inspect": "A stack contains survivors in order. A collision is possible only when its top moves right and the next asteroid moves left.",
+    "update": "A stack contains survivors in order. A collision is possible only when its top moves right and the next asteroid moves left.",
+    "done": "Return the surviving asteroids after all collisions."
+  },
+  "edgeCases": [
+    "Moving apart",
+    "Equal magnitudes disappear",
+    "Large right mover survives"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

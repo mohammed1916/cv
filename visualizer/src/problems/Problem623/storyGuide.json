@@ -1,0 +1,27 @@
+{
+  "number": "623",
+  "title": "Add One Row to Tree",
+  "goal": "Insert a new row while attaching original left and right subtrees to the correct sides.",
+  "strategy": "Find nodes one level above the insertion depth. Their old left branches go under new left nodes, and old right branches go under new right nodes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Insert a new row while attaching original left and right subtrees to the correct sides.",
+    "inspect": "Find nodes one level above the insertion depth. Their old left branches go under new left nodes, and old right branches go under new right nodes.",
+    "update": "Find nodes one level above the insertion depth. Their old left branches go under new left nodes, and old right branches go under new right nodes.",
+    "done": "Insert a new row while attaching original left and right subtrees to the correct sides."
+  },
+  "edgeCases": [
+    "Replace the root",
+    "Insert below deepest nodes",
+    "Sparse frontier"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

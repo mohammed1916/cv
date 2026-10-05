@@ -1,0 +1,27 @@
+{
+  "number": "700",
+  "title": "Search in a Binary Search Tree",
+  "goal": "Find a target in a BST and return the entire matching subtree.",
+  "strategy": "A smaller target can occur only on the left and a larger target only on the right. Follow one search path until a match or missing child.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find a target in a BST and return the entire matching subtree.",
+    "inspect": "A smaller target can occur only on the left and a larger target only on the right. Follow one search path until a match or missing child.",
+    "update": "A smaller target can occur only on the left and a larger target only on the right. Follow one search path until a match or missing child.",
+    "done": "Find a target in a BST and return the entire matching subtree."
+  },
+  "edgeCases": [
+    "Target is absent",
+    "Return the whole tree",
+    "Return a leaf"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

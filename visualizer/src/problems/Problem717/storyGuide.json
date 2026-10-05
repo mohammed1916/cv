@@ -1,0 +1,27 @@
+{
+  "number": "717",
+  "title": "1-bit and 2-bit Characters",
+  "goal": "Decide whether the last zero is a one-bit character.",
+  "strategy": "Decode from the beginning: zero consumes one bit and one consumes two. The last zero stands alone only if decoding lands exactly on it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether the last zero is a one-bit character.",
+    "inspect": "Decode from the beginning: zero consumes one bit and one consumes two. The last zero stands alone only if decoding lands exactly on it.",
+    "update": "Decode from the beginning: zero consumes one bit and one consumes two. The last zero stands alone only if decoding lands exactly on it.",
+    "done": "Decide whether the last zero is a one-bit character."
+  },
+  "edgeCases": [
+    "Final zero belongs to a pair",
+    "Only one bit",
+    "Consecutive zeros"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

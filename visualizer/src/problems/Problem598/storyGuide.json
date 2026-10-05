@@ -1,0 +1,27 @@
+{
+  "number": "598",
+  "title": "Range Addition II",
+  "goal": "Count cells that attain the maximum after origin-anchored rectangle increments.",
+  "strategy": "Every operation includes the origin. The intersection of all rectangles receives every increment, so only its dimensions matter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count cells that attain the maximum after origin-anchored rectangle increments.",
+    "inspect": "Every operation includes the origin. The intersection of all rectangles receives every increment, so only its dimensions matter.",
+    "update": "Every operation includes the origin. The intersection of all rectangles receives every increment, so only its dimensions matter.",
+    "done": "Count cells that attain the maximum after origin-anchored rectangle increments."
+  },
+  "edgeCases": [
+    "No operations",
+    "Full-grid operation",
+    "One maximum cell"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

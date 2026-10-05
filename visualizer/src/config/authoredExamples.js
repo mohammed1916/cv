@@ -1,7 +1,11 @@
 // Independently designed walkthroughs. Small boundary inputs are intentional:
 // a singleton, zero, or empty result cannot be made longer without losing the case.
 import { sequenceStoryExamples } from './sequenceStoryExamples.js';
+import { scanStoryExamples } from './scanStoryExamples.js';
+import { treeStoryExamples } from './treeStoryExamples.js';
 export const AUTHORED_EXAMPLES = Object.fromEntries(Object.entries(sequenceStoryExamples).map(([id, examples]) => [`sequence:${id}`, examples]));
+Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(scanStoryExamples).map(([id, examples]) => [`scan:${id}`, examples])));
+Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(treeStoryExamples).map(([id, examples]) => [`tree:${id}`, examples])));
 function suite(slugs, fields, rows) {
   const keys = fields.split(' ');
   const examples = rows.map(([label, ...values]) => Object.fromEntries([

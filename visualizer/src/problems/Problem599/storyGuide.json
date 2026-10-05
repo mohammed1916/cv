@@ -1,0 +1,27 @@
+{
+  "number": "599",
+  "title": "Minimum Index Sum of Two Lists",
+  "goal": "Return all common strings with the least combined index.",
+  "strategy": "Index the first list, then scan the second. Replace winners on a lower sum and append on an equal sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return all common strings with the least combined index.",
+    "inspect": "Index the first list, then scan the second. Replace winners on a lower sum and append on an equal sum.",
+    "update": "Index the first list, then scan the second. Replace winners on a lower sum and append on an equal sum.",
+    "done": "Return all common strings with the least combined index."
+  },
+  "edgeCases": [
+    "Tie in combined rank",
+    "Only last choice matches",
+    "Identical first choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "637",
+  "title": "Average of Levels in Binary Tree",
+  "goal": "Compute the average node value separately at each depth.",
+  "strategy": "A breadth-first frontier contains exactly one level. Complete its sum and count before constructing the next frontier.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the average node value separately at each depth.",
+    "inspect": "A breadth-first frontier contains exactly one level. Complete its sum and count before constructing the next frontier.",
+    "update": "A breadth-first frontier contains exactly one level. Complete its sum and count before constructing the next frontier.",
+    "done": "Compute the average node value separately at each depth."
+  },
+  "edgeCases": [
+    "Fractional average",
+    "Negative values",
+    "Only one level"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

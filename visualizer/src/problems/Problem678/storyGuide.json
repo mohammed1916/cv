@@ -1,0 +1,27 @@
+{
+  "number": "678",
+  "title": "Valid Parenthesis String",
+  "goal": "Decide whether stars can represent empty strings or parentheses to balance the string.",
+  "strategy": "Track the minimum and maximum feasible number of unmatched openers. Negative maximum means failure; final minimum zero means success.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether stars can represent empty strings or parentheses to balance the string.",
+    "inspect": "Track the minimum and maximum feasible number of unmatched openers. Negative maximum means failure; final minimum zero means success.",
+    "update": "Track the minimum and maximum feasible number of unmatched openers. Negative maximum means failure; final minimum zero means success.",
+    "done": "Decide whether stars can represent empty strings or parentheses to balance the string."
+  },
+  "edgeCases": [
+    "Unrepairable early close",
+    "Only stars",
+    "Too many fixed openers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

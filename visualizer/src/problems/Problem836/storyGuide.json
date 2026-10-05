@@ -1,0 +1,27 @@
+{
+  "number": "836",
+  "title": "Rectangle Overlap",
+  "goal": "Decide whether two axis-aligned rectangles overlap with positive area.",
+  "strategy": "Intersect projections independently on both axes. A zero-width or zero-height intersection is only touching, not positive-area overlap.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether two axis-aligned rectangles overlap with positive area.",
+    "inspect": "Intersect projections independently on both axes. A zero-width or zero-height intersection is only touching, not positive-area overlap.",
+    "update": "Intersect projections independently on both axes. A zero-width or zero-height intersection is only touching, not positive-area overlap.",
+    "done": "Decide whether two axis-aligned rectangles overlap with positive area."
+  },
+  "edgeCases": [
+    "Touching vertical edge",
+    "One rectangle contained",
+    "Separated on one axis"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

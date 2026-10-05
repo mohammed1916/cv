@@ -1,0 +1,27 @@
+{
+  "number": "821",
+  "title": "Shortest Distance to a Character",
+  "goal": "Find each position’s distance to its nearest occurrence of c.",
+  "strategy": "A left-to-right pass finds the nearest target on the left. A right-to-left pass compares the nearest target on the right.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find each position’s distance to its nearest occurrence of c.",
+    "inspect": "A left-to-right pass finds the nearest target on the left. A right-to-left pass compares the nearest target on the right.",
+    "update": "A left-to-right pass finds the nearest target on the left. A right-to-left pass compares the nearest target on the right.",
+    "done": "Find each position’s distance to its nearest occurrence of c."
+  },
+  "edgeCases": [
+    "Target only at left",
+    "Target only at right",
+    "Every character is a target"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

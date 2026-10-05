@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 641,
-  "matchedCatalogRoutes": 625,
-  "remaining": 3448,
+  "routes": 696,
+  "matchedCatalogRoutes": 680,
+  "remaining": 3393,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -4245,8 +4245,8 @@
       "number": "594",
       "title": "Longest Harmonious Subsequence",
       "slug": "longest-harmonious-subsequence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem594"
     },
     {
       "number": "595",
@@ -4273,15 +4273,15 @@
       "number": "598",
       "title": "Range Addition II",
       "slug": "range-addition-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem598"
     },
     {
       "number": "599",
       "title": "Minimum Index Sum of Two Lists",
       "slug": "minimum-index-sum-of-two-lists",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem599"
     },
     {
       "number": "600",
@@ -4329,8 +4329,8 @@
       "number": "606",
       "title": "Construct String from Binary Tree",
       "slug": "construct-string-from-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem606"
     },
     {
       "number": "607",
@@ -4406,8 +4406,8 @@
       "number": "617",
       "title": "Merge Two Binary Trees",
       "slug": "merge-two-binary-trees",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem617"
     },
     {
       "number": "618",
@@ -4448,8 +4448,8 @@
       "number": "623",
       "title": "Add One Row to Tree",
       "slug": "add-one-row-to-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem623"
     },
     {
       "number": "624",
@@ -4548,8 +4548,8 @@
       "number": "637",
       "title": "Average of Levels in Binary Tree",
       "slug": "average-of-levels-in-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem637"
     },
     {
       "number": "638",
@@ -4611,8 +4611,8 @@
       "number": "646",
       "title": "Maximum Length of Pair Chain",
       "slug": "maximum-length-of-pair-chain",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem646"
     },
     {
       "number": "647",
@@ -4660,15 +4660,15 @@
       "number": "653",
       "title": "Two Sum IV - Input is a BST",
       "slug": "two-sum-iv-input-is-a-bst",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem653"
     },
     {
       "number": "654",
       "title": "Maximum Binary Tree",
       "slug": "maximum-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem654"
     },
     {
       "number": "655",
@@ -4688,15 +4688,15 @@
       "number": "657",
       "title": "Robot Return to Origin",
       "slug": "robot-return-to-origin",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem657"
     },
     {
       "number": "658",
       "title": "Find K Closest Elements",
       "slug": "find-k-closest-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem658"
     },
     {
       "number": "659",
@@ -4716,8 +4716,8 @@
       "number": "661",
       "title": "Image Smoother",
       "slug": "image-smoother",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem661"
     },
     {
       "number": "662",
@@ -4744,8 +4744,8 @@
       "number": "665",
       "title": "Non-decreasing Array",
       "slug": "non-decreasing-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem665"
     },
     {
       "number": "666",
@@ -4772,22 +4772,22 @@
       "number": "669",
       "title": "Trim a Binary Search Tree",
       "slug": "trim-a-binary-search-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem669"
     },
     {
       "number": "670",
       "title": "Maximum Swap",
       "slug": "maximum-swap",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem670"
     },
     {
       "number": "671",
       "title": "Second Minimum Node In a Binary Tree",
       "slug": "second-minimum-node-in-a-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem671"
     },
     {
       "number": "672",
@@ -4800,8 +4800,8 @@
       "number": "673",
       "title": "Number of Longest Increasing Subsequence",
       "slug": "number-of-longest-increasing-subsequence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem673"
     },
     {
       "number": "674",
@@ -4835,8 +4835,8 @@
       "number": "678",
       "title": "Valid Parenthesis String",
       "slug": "valid-parenthesis-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem678"
     },
     {
       "number": "679",
@@ -4849,8 +4849,8 @@
       "number": "680",
       "title": "Valid Palindrome II",
       "slug": "valid-palindrome-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem680"
     },
     {
       "number": "681",
@@ -4863,8 +4863,8 @@
       "number": "682",
       "title": "Baseball Game",
       "slug": "baseball-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem682"
     },
     {
       "number": "683",
@@ -4891,15 +4891,15 @@
       "number": "686",
       "title": "Repeated String Match",
       "slug": "repeated-string-match",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem686"
     },
     {
       "number": "687",
       "title": "Longest Univalue Path",
       "slug": "longest-univalue-path",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem687"
     },
     {
       "number": "688",
@@ -4933,15 +4933,15 @@
       "number": "692",
       "title": "Top K Frequent Words",
       "slug": "top-k-frequent-words",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem692"
     },
     {
       "number": "693",
       "title": "Binary Number with Alternating Bits",
       "slug": "binary-number-with-alternating-bits",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem693"
     },
     {
       "number": "694",
@@ -4961,8 +4961,8 @@
       "number": "696",
       "title": "Count Binary Substrings",
       "slug": "count-binary-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem696"
     },
     {
       "number": "697",
@@ -4989,15 +4989,15 @@
       "number": "700",
       "title": "Search in a Binary Search Tree",
       "slug": "search-in-a-binary-search-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem700"
     },
     {
       "number": "701",
       "title": "Insert into a Binary Search Tree",
       "slug": "insert-into-a-binary-search-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem701"
     },
     {
       "number": "702",
@@ -5052,8 +5052,8 @@
       "number": "709",
       "title": "To Lower Case",
       "slug": "to-lower-case",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem709"
     },
     {
       "number": "710",
@@ -5081,15 +5081,15 @@
       "number": "713",
       "title": "Subarray Product Less Than K",
       "slug": "subarray-product-less-than-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem713"
     },
     {
       "number": "714",
       "title": "Best Time to Buy and Sell Stock with Transaction Fee",
       "slug": "best-time-to-buy-and-sell-stock-with-transaction-fee",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem714"
     },
     {
       "number": "715",
@@ -5109,15 +5109,15 @@
       "number": "717",
       "title": "1-bit and 2-bit Characters",
       "slug": "1-bit-and-2-bit-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem717"
     },
     {
       "number": "718",
       "title": "Maximum Length of Repeated Subarray",
       "slug": "maximum-length-of-repeated-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem718"
     },
     {
       "number": "719",
@@ -5187,8 +5187,8 @@
       "number": "728",
       "title": "Self Dividing Numbers",
       "slug": "self-dividing-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem728"
     },
     {
       "number": "729",
@@ -5222,8 +5222,8 @@
       "number": "733",
       "title": "Flood Fill",
       "slug": "flood-fill",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem733"
     },
     {
       "number": "734",
@@ -5236,8 +5236,8 @@
       "number": "735",
       "title": "Asteroid Collision",
       "slug": "asteroid-collision",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem735"
     },
     {
       "number": "736",
@@ -5257,8 +5257,8 @@
       "number": "738",
       "title": "Monotone Increasing Digits",
       "slug": "monotone-increasing-digits",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem738"
     },
     {
       "number": "739",
@@ -5271,8 +5271,8 @@
       "number": "740",
       "title": "Delete and Earn",
       "slug": "delete-and-earn",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem740"
     },
     {
       "number": "741",
@@ -5299,8 +5299,8 @@
       "number": "744",
       "title": "Find Smallest Letter Greater Than Target",
       "slug": "find-smallest-letter-greater-than-target",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem744"
     },
     {
       "number": "745",
@@ -5489,8 +5489,8 @@
       "number": "771",
       "title": "Jewels and Stones",
       "slug": "jewels-and-stones",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem771"
     },
     {
       "number": "772",
@@ -5664,8 +5664,8 @@
       "number": "796",
       "title": "Rotate String",
       "slug": "rotate-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem796"
     },
     {
       "number": "797",
@@ -5720,8 +5720,8 @@
       "number": "804",
       "title": "Unique Morse Code Words",
       "slug": "unique-morse-code-words",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem804"
     },
     {
       "number": "805",
@@ -5734,8 +5734,8 @@
       "number": "806",
       "title": "Number of Lines To Write String",
       "slug": "number-of-lines-to-write-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem806"
     },
     {
       "number": "807",
@@ -5839,8 +5839,8 @@
       "number": "821",
       "title": "Shortest Distance to a Character",
       "slug": "shortest-distance-to-a-character",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem821"
     },
     {
       "number": "822",
@@ -5902,8 +5902,8 @@
       "number": "830",
       "title": "Positions of Large Groups",
       "slug": "positions-of-large-groups",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem830"
     },
     {
       "number": "831",
@@ -5944,8 +5944,8 @@
       "number": "836",
       "title": "Rectangle Overlap",
       "slug": "rectangle-overlap",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem836"
     },
     {
       "number": "837",
@@ -6000,8 +6000,8 @@
       "number": "844",
       "title": "Backspace String Compare",
       "slug": "backspace-string-compare",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem844"
     },
     {
       "number": "845",
@@ -6035,8 +6035,8 @@
       "number": "849",
       "title": "Maximize Distance to Closest Person",
       "slug": "maximize-distance-to-closest-person",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem849"
     },
     {
       "number": "850",
@@ -6056,8 +6056,8 @@
       "number": "852",
       "title": "Peak Index in a Mountain Array",
       "slug": "peak-index-in-a-mountain-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem852"
     },
     {
       "number": "853",
@@ -6084,8 +6084,8 @@
       "number": "856",
       "title": "Score of Parentheses",
       "slug": "score-of-parentheses",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem856"
     },
     {
       "number": "857",
@@ -6105,8 +6105,8 @@
       "number": "859",
       "title": "Buddy Strings",
       "slug": "buddy-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem859"
     },
     {
       "number": "860",
@@ -6196,8 +6196,8 @@
       "number": "872",
       "title": "Leaf-Similar Trees",
       "slug": "leaf-similar-trees",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem872"
     },
     {
       "number": "873",
@@ -6371,8 +6371,8 @@
       "number": "897",
       "title": "Increasing Order Search Tree",
       "slug": "increasing-order-search-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem897"
     },
     {
       "number": "898",
@@ -6658,8 +6658,8 @@
       "number": "938",
       "title": "Range Sum of BST",
       "slug": "range-sum-of-bst",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem938"
     },
     {
       "number": "939",
@@ -6847,8 +6847,8 @@
       "number": "965",
       "title": "Univalued Binary Tree",
       "slug": "univalued-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem965"
     },
     {
       "number": "966",

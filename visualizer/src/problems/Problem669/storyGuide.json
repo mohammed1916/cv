@@ -1,0 +1,27 @@
+{
+  "number": "669",
+  "title": "Trim a Binary Search Tree",
+  "goal": "Remove out-of-range BST nodes while preserving the relative structure of retained nodes.",
+  "strategy": "If a node is too small, its left subtree is also too small; keep searching right. Symmetrically skip right subtrees of nodes that are too large.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove out-of-range BST nodes while preserving the relative structure of retained nodes.",
+    "inspect": "If a node is too small, its left subtree is also too small; keep searching right. Symmetrically skip right subtrees of nodes that are too large.",
+    "update": "If a node is too small, its left subtree is also too small; keep searching right. Symmetrically skip right subtrees of nodes that are too large.",
+    "done": "Remove out-of-range BST nodes while preserving the relative structure of retained nodes."
+  },
+  "edgeCases": [
+    "Root itself must disappear",
+    "Keep one exact value",
+    "Everything excluded"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "696",
+  "title": "Count Binary Substrings",
+  "goal": "Count substrings with equal-sized consecutive runs of zeros and ones.",
+  "strategy": "A boundary between runs of lengths a and b contributes min(a,b) valid substrings. Nonadjacent runs cannot combine into a grouped substring.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings with equal-sized consecutive runs of zeros and ones.",
+    "inspect": "A boundary between runs of lengths a and b contributes min(a,b) valid substrings. Nonadjacent runs cannot combine into a grouped substring.",
+    "update": "A boundary between runs of lengths a and b contributes min(a,b) valid substrings. Nonadjacent runs cannot combine into a grouped substring.",
+    "done": "Count substrings with equal-sized consecutive runs of zeros and ones."
+  },
+  "edgeCases": [
+    "Alternating bits",
+    "Only one run",
+    "Unequal adjacent runs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}
