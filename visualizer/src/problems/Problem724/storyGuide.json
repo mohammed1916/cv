@@ -1,0 +1,28 @@
+{
+  "title": "Find Pivot Index",
+  "goal": "Find the leftmost index whose strictly left and strictly right sums are equal.",
+  "strategy": "Compute the total once. Before consuming each value, compare the completed left sum with the remaining right sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Compute the total once. Before consuming each value, compare the completed left sum with the remaining right sum.",
+    "update": "The pivot itself belongs to neither side sum.",
+    "done": "The pivot itself belongs to neither side sum."
+  },
+  "edgeCases": [
+    "Left boundary pivot",
+    "Several pivots: take first",
+    "No pivot",
+    "Negative values"
+  ],
+  "number": "724",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

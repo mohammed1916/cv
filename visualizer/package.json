@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "test:sequence-stories": "node --test src/problems/families/sequenceStories/algorithms.test.mjs src/data/catalogCoverage.test.mjs && node scripts/verify-sequence-scenes.mjs",
+    "audit:catalog": "node scripts/audit-catalog-coverage.mjs",
     "test:interactions": "node scripts/check-interaction-contracts.mjs",
     "test:examples": "node --test src/config/authoredExamples.test.mjs",
     "audit:examples": "node scripts/check-authored-examples.mjs && node scripts/verify-workspace-presets.mjs",

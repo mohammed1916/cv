@@ -1,0 +1,27 @@
+{
+  "title": "Maximum Product of Three Numbers",
+  "goal": "Find the greatest product obtainable from three different array positions.",
+  "strategy": "Keep only the extremes that can participate in an optimal triple; a pair of negative values can turn positive.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Keep only the extremes that can participate in an optimal triple; a pair of negative values can turn positive.",
+    "update": "The winner includes either the three largest values or two negative values and the largest positive value.",
+    "done": "The winner includes either the three largest values or two negative values and the largest positive value."
+  },
+  "edgeCases": [
+    "Exactly three negative values",
+    "Zero beats negative product",
+    "Equal maxima"
+  ],
+  "number": "628",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Richest Customer Wealth",
+  "goal": "Find the greatest total bank balance held by one customer.",
+  "strategy": "Sum bank balances separately for each customer. Compare completed row totals rather than individual balances.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Sum bank balances separately for each customer. Compare completed row totals rather than individual balances.",
+    "update": "Each row total is one customer’s wealth; the maximum total wins.",
+    "done": "Each row total is one customer’s wealth; the maximum total wins."
+  },
+  "edgeCases": [
+    "Equal row totals",
+    "One customer",
+    "One bank"
+  ],
+  "number": "1672",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

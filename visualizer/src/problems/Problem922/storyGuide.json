@@ -1,0 +1,27 @@
+{
+  "title": "Sort Array By Parity II",
+  "goal": "Place even values at even indices and odd values at odd indices.",
+  "strategy": "Use independent write pointers for even and odd output indices. Each pointer advances by two.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Use independent write pointers for even and odd output indices. Each pointer advances by two.",
+    "update": "Every output index has the same parity as its value.",
+    "done": "Every output index has the same parity as its value."
+  },
+  "edgeCases": [
+    "Already arranged",
+    "All even values first",
+    "Two values reversed"
+  ],
+  "number": "922",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

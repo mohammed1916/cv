@@ -1,0 +1,27 @@
+{
+  "title": "Running Sum of 1d Array",
+  "goal": "Return the sum of each array prefix.",
+  "strategy": "Maintain one accumulator. Each output position records the complete prefix ending there.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Maintain one accumulator. Each output position records the complete prefix ending there.",
+    "update": "Output i is the sum of input positions 0 through i.",
+    "done": "Output i is the sum of input positions 0 through i."
+  },
+  "edgeCases": [
+    "All zeros",
+    "Negative prefixes",
+    "Single value"
+  ],
+  "number": "1480",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

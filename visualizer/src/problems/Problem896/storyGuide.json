@@ -1,0 +1,27 @@
+{
+  "title": "Monotonic Array",
+  "goal": "Decide whether the entire array is nondecreasing or nonincreasing.",
+  "strategy": "Track two candidates: nondecreasing and nonincreasing. Each strict comparison can eliminate one candidate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Track two candidates: nondecreasing and nonincreasing. Each strict comparison can eliminate one candidate.",
+    "update": "Equal adjacent values do not break either monotonic direction.",
+    "done": "Equal adjacent values do not break either monotonic direction."
+  },
+  "edgeCases": [
+    "Direction changes late",
+    "Only equal values",
+    "Decreasing with equality"
+  ],
+  "number": "896",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

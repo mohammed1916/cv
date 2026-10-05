@@ -1,5 +1,5 @@
 {
-  "routes": 617,
+  "routes": 641,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -81,6 +81,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1047",
+      "number": "1047",
+      "title": "Remove All Adjacent Duplicates In String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem105",
@@ -242,6 +251,15 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1207",
+      "number": "1207",
+      "title": "Unique Number of Occurrences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem121",
       "number": "121",
       "title": "Best Time to Buy and Sell Stock",
@@ -291,6 +309,15 @@
       "number": "129",
       "title": "Sum Root to Leaf Numbers",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1295",
+      "number": "1295",
+      "title": "Find Numbers with Even Number of Digits",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem13",
@@ -404,6 +431,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1431",
+      "number": "1431",
+      "title": "Kids With the Greatest Number of Candies",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem144",
       "number": "144",
       "title": "Binary Tree Preorder Traversal",
@@ -449,6 +485,15 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1480",
+      "number": "1480",
+      "title": "Running Sum of 1d Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem149",
       "number": "149",
       "title": "Max Points on a Line",
@@ -483,6 +528,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1512",
+      "number": "1512",
+      "title": "Number of Good Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem152",
@@ -636,6 +690,15 @@
       "checks": 1,
       "rules": 3,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1672",
+      "number": "1672",
+      "title": "Richest Customer Wealth",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem168",
@@ -4979,6 +5042,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem605",
+      "number": "605",
+      "title": "Can Place Flowers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 4
+    },
+    {
       "folder": "Problem61",
       "number": "61",
       "title": "Rotate List",
@@ -4986,6 +5058,15 @@
       "checks": 1,
       "rules": 3,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem611",
+      "number": "611",
+      "title": "Valid Triangle Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem62",
@@ -5006,6 +5087,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem628",
+      "number": "628",
+      "title": "Maximum Product of Three Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem63",
       "number": "63",
       "title": "Unique Paths II",
@@ -5015,6 +5105,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem633",
+      "number": "633",
+      "title": "Sum of Square Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 4
+    },
+    {
       "folder": "Problem64",
       "number": "64",
       "title": "Minimum Path Sum",
@@ -5022,6 +5121,24 @@
       "checks": 1,
       "rules": 3,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem643",
+      "number": "643",
+      "title": "Maximum Average Subarray I",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem645",
+      "number": "645",
+      "title": "Set Mismatch",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem647",
@@ -5060,6 +5177,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem674",
+      "number": "674",
+      "title": "Longest Continuous Increasing Subsequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem68",
       "number": "68",
       "title": "Text Justification",
@@ -5094,6 +5220,15 @@
       "checks": 3,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem697",
+      "number": "697",
+      "title": "Degree of an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem7",
@@ -5150,6 +5285,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem724",
+      "number": "724",
+      "title": "Find Pivot Index",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 4
+    },
+    {
       "folder": "Problem73",
       "number": "73",
       "title": "Set Matrix Zeroes",
@@ -5195,6 +5339,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem747",
+      "number": "747",
+      "title": "Largest Number At Least Twice of Others",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem75",
       "number": "75",
       "title": "Sort Colors",
@@ -5211,6 +5364,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem766",
+      "number": "766",
+      "title": "Toeplitz Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem77",
@@ -5294,6 +5456,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem832",
+      "number": "832",
+      "title": "Flipping an Image",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem84",
       "number": "84",
       "title": "Largest Rectangle in Histogram",
@@ -5319,6 +5490,15 @@
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem867",
+      "number": "867",
+      "title": "Transpose Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem87",
@@ -5357,6 +5537,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem896",
+      "number": "896",
+      "title": "Monotonic Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem9",
       "number": "9",
       "title": "Palindrome Number",
@@ -5375,6 +5564,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem905",
+      "number": "905",
+      "title": "Sort Array By Parity",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem91",
       "number": "91",
       "title": "Decode Ways",
@@ -5391,6 +5589,15 @@
       "checks": 0,
       "rules": 3,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem922",
+      "number": "922",
+      "title": "Sort Array By Parity II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem93",
@@ -5436,6 +5643,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem977",
+      "number": "977",
+      "title": "Squares of a Sorted Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem98",

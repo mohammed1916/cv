@@ -1,0 +1,28 @@
+{
+  "title": "Sum of Square Numbers",
+  "goal": "Decide whether c is the sum of two nonnegative integer squares.",
+  "strategy": "Compare the smallest and largest remaining squares. Move the endpoint whose change brings their sum toward the target.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Compare the smallest and largest remaining squares. Move the endpoint whose change brings their sum toward the target.",
+    "update": "The two pointers exhaust the possible nonnegative square pairs.",
+    "done": "The two pointers exhaust the possible nonnegative square pairs."
+  },
+  "edgeCases": [
+    "No representation",
+    "Zero square pair",
+    "Equal square pair",
+    "One square is zero"
+  ],
+  "number": "633",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

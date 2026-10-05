@@ -1,0 +1,27 @@
+{
+  "title": "Kids With the Greatest Number of Candies",
+  "goal": "For each child, decide whether giving them all extra candies would reach the greatest count.",
+  "strategy": "Find the original maximum once. Give the extra candies hypothetically to one child at a time, allowing ties.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Find the original maximum once. Give the extra candies hypothetically to one child at a time, allowing ties.",
+    "update": "Each child is compared independently against the original maximum.",
+    "done": "Each child is compared independently against the original maximum."
+  },
+  "edgeCases": [
+    "All tied initially",
+    "Exact tie with maximum",
+    "One child"
+  ],
+  "number": "1431",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

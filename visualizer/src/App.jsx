@@ -22,6 +22,7 @@ import "./components/Chatbot/chatbot.css";
 const ChatDrawer = React.lazy(() => import("./components/Chatbot/ChatDrawer"));
 import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
+import { mergeCatalog } from './data/catalogCoverage';
 import { useAccess } from "./access/useAccess";
 import { isFreeProblem, accessLabel } from "./access/policy";
 import {
@@ -332,20 +333,7 @@ const NEETCODE150_PROBLEMS = NEETCODE150_ENTRIES.map(([number, title]) => {
 });
 
 function buildCatalogProblems(catalogProblems) {
-  return catalogProblems.map((problem) => {
-    const implemented = IMPLEMENTED_BY_NUMBER.get(problem.number);
-    if (!implemented) {
-      return {
-        ...problem,
-        accent: "#64748b",
-        description:
-          "Cataloged in explorer. Visualizer shell is ready; implementation can be plugged into reusable panels.",
-        component: null,
-        implemented: false,
-      };
-    }
-    return { ...problem, ...implemented, implemented: true };
-  });
+  return mergeCatalog(catalogProblems, ALL_PROBLEMS.filter(problem => problem.implemented));
 }
 
 /* ── Error Boundary ──────────────────────────────────────────────────── */

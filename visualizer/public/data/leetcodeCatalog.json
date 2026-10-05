@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-04-29T14:47:59.152Z",
-  "count": 3497,
+  "generatedAt": "2026-10-05T09:48:48.663Z",
+  "count": 4073,
   "problems": [
     {
       "id": "lc-1",
@@ -2038,6 +2038,50 @@
       ]
     },
     {
+      "id": "lc-175",
+      "number": "175",
+      "title": "Combine Two Tables",
+      "slug": "combine-two-tables",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-176",
+      "number": "176",
+      "title": "Second Highest Salary",
+      "slug": "second-highest-salary",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-177",
+      "number": "177",
+      "title": "Nth Highest Salary",
+      "slug": "nth-highest-salary",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-178",
+      "number": "178",
+      "title": "Rank Scores",
+      "slug": "rank-scores",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-179",
       "number": "179",
       "title": "Largest Number",
@@ -2046,6 +2090,72 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-180",
+      "number": "180",
+      "title": "Consecutive Numbers",
+      "slug": "consecutive-numbers",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-181",
+      "number": "181",
+      "title": "Employees Earning More Than Their Managers",
+      "slug": "employees-earning-more-than-their-managers",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-182",
+      "number": "182",
+      "title": "Duplicate Emails",
+      "slug": "duplicate-emails",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-183",
+      "number": "183",
+      "title": "Customers Who Never Order",
+      "slug": "customers-who-never-order",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-184",
+      "number": "184",
+      "title": "Department Highest Salary",
+      "slug": "department-highest-salary",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-185",
+      "number": "185",
+      "title": "Department Top Three Salaries",
+      "slug": "department-top-three-salaries",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -2114,6 +2224,73 @@
       "tags": [
         "Math",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-192",
+      "number": "192",
+      "title": "Word Frequency",
+      "slug": "word-frequency",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-193",
+      "number": "193",
+      "title": "Valid Phone Numbers",
+      "slug": "valid-phone-numbers",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-194",
+      "number": "194",
+      "title": "Transpose File",
+      "slug": "transpose-file",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-195",
+      "number": "195",
+      "title": "Tenth Line",
+      "slug": "tenth-line",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-196",
+      "number": "196",
+      "title": "Delete Duplicate Emails",
+      "slug": "delete-duplicate-emails",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-197",
+      "number": "197",
+      "title": "Rising Temperature",
+      "slug": "rising-temperature",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -2404,7 +2581,7 @@
       "number": "222",
       "title": "Count Complete Tree Nodes",
       "slug": "count-complete-tree-nodes",
-      "difficulty": "Easy",
+      "difficulty": "Medium",
       "paidOnly": false,
       "tags": [
         "Graph",
@@ -2859,6 +3036,17 @@
       "tags": [
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-262",
+      "number": "262",
+      "title": "Trips and Users",
+      "slug": "trips-and-users",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -5695,6 +5883,28 @@
       ]
     },
     {
+      "id": "lc-511",
+      "number": "511",
+      "title": "Game Play Analysis I",
+      "slug": "game-play-analysis-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-512",
+      "number": "512",
+      "title": "Game Play Analysis II",
+      "slug": "game-play-analysis-ii",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-513",
       "number": "513",
       "title": "Find Bottom Left Tree Value",
@@ -5933,6 +6143,17 @@
       ]
     },
     {
+      "id": "lc-534",
+      "number": "534",
+      "title": "Game Play Analysis III",
+      "slug": "game-play-analysis-iii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-535",
       "number": "535",
       "title": "Encode and Decode TinyURL",
@@ -6104,6 +6325,17 @@
         "Dynamic Programming",
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-550",
+      "number": "550",
+      "title": "Game Play Analysis IV",
+      "slug": "game-play-analysis-iv",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -6315,6 +6547,40 @@
       ]
     },
     {
+      "id": "lc-569",
+      "number": "569",
+      "title": "Median Employee Salary",
+      "slug": "median-employee-salary",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Heap"
+      ]
+    },
+    {
+      "id": "lc-570",
+      "number": "570",
+      "title": "Managers with at Least 5 Direct Reports",
+      "slug": "managers-with-at-least-5-direct-reports",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-571",
+      "number": "571",
+      "title": "Find Median Given Frequency of Numbers",
+      "slug": "find-median-given-frequency-of-numbers",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math",
+        "Heap"
+      ]
+    },
+    {
       "id": "lc-572",
       "number": "572",
       "title": "Subtree of Another Tree",
@@ -6338,6 +6604,17 @@
       ]
     },
     {
+      "id": "lc-574",
+      "number": "574",
+      "title": "Winning Candidate",
+      "slug": "winning-candidate",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-575",
       "number": "575",
       "title": "Distribute Candies",
@@ -6357,6 +6634,50 @@
       "paidOnly": false,
       "tags": [
         "Graph"
+      ]
+    },
+    {
+      "id": "lc-577",
+      "number": "577",
+      "title": "Employee Bonus",
+      "slug": "employee-bonus",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-578",
+      "number": "578",
+      "title": "Get Highest Answer Rate Question",
+      "slug": "get-highest-answer-rate-question",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-579",
+      "number": "579",
+      "title": "Find Cumulative Salary of an Employee",
+      "slug": "find-cumulative-salary-of-an-employee",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-580",
+      "number": "580",
+      "title": "Count Student Number in Departments",
+      "slug": "count-student-number-in-departments",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math"
       ]
     },
     {
@@ -6392,6 +6713,40 @@
       "paidOnly": false,
       "tags": [
         "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-584",
+      "number": "584",
+      "title": "Find Customer Referee",
+      "slug": "find-customer-referee",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-585",
+      "number": "585",
+      "title": "Investments in 2016",
+      "slug": "investments-in-2016",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-586",
+      "number": "586",
+      "title": "Customer Placing the Largest Number of Orders",
+      "slug": "customer-placing-the-largest-number-of-orders",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math",
         "Bit Manipulation"
       ]
     },
@@ -6490,6 +6845,39 @@
       ]
     },
     {
+      "id": "lc-595",
+      "number": "595",
+      "title": "Big Countries",
+      "slug": "big-countries",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Tree"
+      ]
+    },
+    {
+      "id": "lc-596",
+      "number": "596",
+      "title": "Classes With at Least 5 Students",
+      "slug": "classes-with-at-least-5-students",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-597",
+      "number": "597",
+      "title": "Friend Requests I: Overall Acceptance Rate",
+      "slug": "friend-requests-i-overall-acceptance-rate",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-598",
       "number": "598",
       "title": "Range Addition II",
@@ -6521,6 +6909,39 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-601",
+      "number": "601",
+      "title": "Human Traffic of Stadium",
+      "slug": "human-traffic-of-stadium",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-602",
+      "number": "602",
+      "title": "Friend Requests II: Who Has the Most Friends",
+      "slug": "friend-requests-ii-who-has-the-most-friends",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-603",
+      "number": "603",
+      "title": "Consecutive Available Seats",
+      "slug": "consecutive-available-seats",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -6561,11 +6982,45 @@
       ]
     },
     {
+      "id": "lc-607",
+      "number": "607",
+      "title": "Sales Person",
+      "slug": "sales-person",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-608",
+      "number": "608",
+      "title": "Tree Node",
+      "slug": "tree-node",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Tree"
+      ]
+    },
+    {
       "id": "lc-609",
       "number": "609",
       "title": "Find Duplicate File in System",
       "slug": "find-duplicate-file-in-system",
       "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-610",
+      "number": "610",
+      "title": "Triangle Judgement",
+      "slug": "triangle-judgement",
+      "difficulty": "Easy",
       "paidOnly": false,
       "tags": [
         "General"
@@ -6580,6 +7035,50 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-612",
+      "number": "612",
+      "title": "Shortest Distance in a Plane",
+      "slug": "shortest-distance-in-a-plane",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-613",
+      "number": "613",
+      "title": "Shortest Distance in a Line",
+      "slug": "shortest-distance-in-a-line",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-614",
+      "number": "614",
+      "title": "Second Degree Follower",
+      "slug": "second-degree-follower",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-615",
+      "number": "615",
+      "title": "Average Salary: Departments VS Company",
+      "slug": "average-salary-departments-vs-company",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -6604,6 +7103,40 @@
         "Graph",
         "Tree",
         "Array"
+      ]
+    },
+    {
+      "id": "lc-618",
+      "number": "618",
+      "title": "Students Report By Geography",
+      "slug": "students-report-by-geography",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Graph",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-619",
+      "number": "619",
+      "title": "Biggest Single Number",
+      "slug": "biggest-single-number",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-620",
+      "number": "620",
+      "title": "Not Boring Movies",
+      "slug": "not-boring-movies",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -6662,6 +7195,28 @@
       "tags": [
         "Greedy",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-626",
+      "number": "626",
+      "title": "Exchange Seats",
+      "slug": "exchange-seats",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-627",
+      "number": "627",
+      "title": "Swap Sex of Employees",
+      "slug": "swap-sex-of-employees",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -11452,6 +12007,17 @@
       ]
     },
     {
+      "id": "lc-1045",
+      "number": "1045",
+      "title": "Customers Who Bought All Products",
+      "slug": "customers-who-bought-all-products",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1046",
       "number": "1046",
       "title": "Last Stone Weight",
@@ -11494,6 +12060,17 @@
       "paidOnly": false,
       "tags": [
         "General"
+      ]
+    },
+    {
+      "id": "lc-1050",
+      "number": "1050",
+      "title": "Actors and Directors Who Cooperated At Least Three Times",
+      "slug": "actors-and-directors-who-cooperated-at-least-three-times",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -11692,6 +12269,39 @@
       ]
     },
     {
+      "id": "lc-1068",
+      "number": "1068",
+      "title": "Product Sales Analysis I",
+      "slug": "product-sales-analysis-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1069",
+      "number": "1069",
+      "title": "Product Sales Analysis II",
+      "slug": "product-sales-analysis-ii",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1070",
+      "number": "1070",
+      "title": "Product Sales Analysis III",
+      "slug": "product-sales-analysis-iii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1071",
       "number": "1071",
       "title": "Greatest Common Divisor of Strings",
@@ -11740,6 +12350,39 @@
       ]
     },
     {
+      "id": "lc-1075",
+      "number": "1075",
+      "title": "Project Employees I",
+      "slug": "project-employees-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1076",
+      "number": "1076",
+      "title": "Project Employees II",
+      "slug": "project-employees-ii",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1077",
+      "number": "1077",
+      "title": "Project Employees III",
+      "slug": "project-employees-iii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1078",
       "number": "1078",
       "title": "Occurrences After Bigram",
@@ -11781,6 +12424,39 @@
       "paidOnly": false,
       "tags": [
         "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "lc-1082",
+      "number": "1082",
+      "title": "Sales Analysis I",
+      "slug": "sales-analysis-i",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1083",
+      "number": "1083",
+      "title": "Sales Analysis II",
+      "slug": "sales-analysis-ii",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1084",
+      "number": "1084",
+      "title": "Sales Analysis III",
+      "slug": "sales-analysis-iii",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -11920,6 +12596,28 @@
       ]
     },
     {
+      "id": "lc-1097",
+      "number": "1097",
+      "title": "Game Play Analysis V",
+      "slug": "game-play-analysis-v",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1098",
+      "number": "1098",
+      "title": "Unpopular Books",
+      "slug": "unpopular-books",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1099",
       "number": "1099",
       "title": "Two Sum Less Than K",
@@ -12013,6 +12711,17 @@
       ]
     },
     {
+      "id": "lc-1107",
+      "number": "1107",
+      "title": "New Users Daily Count",
+      "slug": "new-users-daily-count",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1108",
       "number": "1108",
       "title": "Defanging an IP Address",
@@ -12055,6 +12764,72 @@
       "tags": [
         "String",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1112",
+      "number": "1112",
+      "title": "Highest Grade For Each Student",
+      "slug": "highest-grade-for-each-student",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1113",
+      "number": "1113",
+      "title": "Reported Posts",
+      "slug": "reported-posts",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1114",
+      "number": "1114",
+      "title": "Print in Order",
+      "slug": "print-in-order",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1115",
+      "number": "1115",
+      "title": "Print FooBar Alternately",
+      "slug": "print-foobar-alternately",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1116",
+      "number": "1116",
+      "title": "Print Zero Even Odd",
+      "slug": "print-zero-even-odd",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1117",
+      "number": "1117",
+      "title": "Building H2O",
+      "slug": "building-h2o",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -12152,6 +12927,28 @@
       ]
     },
     {
+      "id": "lc-1126",
+      "number": "1126",
+      "title": "Active Businesses",
+      "slug": "active-businesses",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1127",
+      "number": "1127",
+      "title": "User Purchase Platform",
+      "slug": "user-purchase-platform",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1128",
       "number": "1128",
       "title": "Number of Equivalent Domino Pairs",
@@ -12197,6 +12994,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1132",
+      "number": "1132",
+      "title": "Reported Posts II",
+      "slug": "reported-posts-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -12289,6 +13097,28 @@
       ]
     },
     {
+      "id": "lc-1141",
+      "number": "1141",
+      "title": "User Activity for the Past 30 Days I",
+      "slug": "user-activity-for-the-past-30-days-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1142",
+      "number": "1142",
+      "title": "User Activity for the Past 30 Days II",
+      "slug": "user-activity-for-the-past-30-days-ii",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1143",
       "number": "1143",
       "title": "Longest Common Subsequence",
@@ -12345,6 +13175,28 @@
       "tags": [
         "Dynamic Programming",
         "String"
+      ]
+    },
+    {
+      "id": "lc-1148",
+      "number": "1148",
+      "title": "Article Views I",
+      "slug": "article-views-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1149",
+      "number": "1149",
+      "title": "Article Views II",
+      "slug": "article-views-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -12445,6 +13297,28 @@
       ]
     },
     {
+      "id": "lc-1158",
+      "number": "1158",
+      "title": "Market Analysis I",
+      "slug": "market-analysis-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1159",
+      "number": "1159",
+      "title": "Market Analysis II",
+      "slug": "market-analysis-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1160",
       "number": "1160",
       "title": "Find Words That Can Be Formed by Characters",
@@ -12493,6 +13367,17 @@
         "Tree",
         "String",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1164",
+      "number": "1164",
+      "title": "Product Price at a Given Date",
+      "slug": "product-price-at-a-given-date",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -12585,6 +13470,28 @@
       ]
     },
     {
+      "id": "lc-1173",
+      "number": "1173",
+      "title": "Immediate Food Delivery I",
+      "slug": "immediate-food-delivery-i",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1174",
+      "number": "1174",
+      "title": "Immediate Food Delivery II",
+      "slug": "immediate-food-delivery-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1175",
       "number": "1175",
       "title": "Prime Arrangements",
@@ -12629,6 +13536,17 @@
       "tags": [
         "String",
         "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1179",
+      "number": "1179",
+      "title": "Reformat Department Table",
+      "slug": "reformat-department-table",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
         "Bit Manipulation"
       ]
     },
@@ -12724,6 +13642,17 @@
       ]
     },
     {
+      "id": "lc-1188",
+      "number": "1188",
+      "title": "Design Bounded Blocking Queue",
+      "slug": "design-bounded-blocking-queue",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Design"
+      ]
+    },
+    {
       "id": "lc-1189",
       "number": "1189",
       "title": "Maximum Number of Balloons",
@@ -12769,6 +13698,39 @@
       "tags": [
         "Graph",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1193",
+      "number": "1193",
+      "title": "Monthly Transactions I",
+      "slug": "monthly-transactions-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1194",
+      "number": "1194",
+      "title": "Tournament Winners",
+      "slug": "tournament-winners",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1195",
+      "number": "1195",
+      "title": "Fizz Buzz Multithreaded",
+      "slug": "fizz-buzz-multithreaded",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -12860,6 +13822,28 @@
       ]
     },
     {
+      "id": "lc-1204",
+      "number": "1204",
+      "title": "Last Person to Fit in the Bus",
+      "slug": "last-person-to-fit-in-the-bus",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1205",
+      "number": "1205",
+      "title": "Monthly Transactions II",
+      "slug": "monthly-transactions-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1206",
       "number": "1206",
       "title": "Design Skiplist",
@@ -12913,6 +13897,28 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1211",
+      "number": "1211",
+      "title": "Queries Quality and Percentage",
+      "slug": "queries-quality-and-percentage",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1212",
+      "number": "1212",
+      "title": "Team Scores in Football Tournament",
+      "slug": "team-scores-in-football-tournament",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -13051,6 +14057,28 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1225",
+      "number": "1225",
+      "title": "Report Contiguous Dates",
+      "slug": "report-contiguous-dates",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1226",
+      "number": "1226",
+      "title": "The Dining Philosophers",
+      "slug": "the-dining-philosophers",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -13212,6 +14240,28 @@
       ]
     },
     {
+      "id": "lc-1241",
+      "number": "1241",
+      "title": "Number of Comments per Post",
+      "slug": "number-of-comments-per-post",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-1242",
+      "number": "1242",
+      "title": "Web Crawler Multithreaded",
+      "slug": "web-crawler-multithreaded",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1243",
       "number": "1243",
       "title": "Array Transformation",
@@ -13302,6 +14352,17 @@
       "paidOnly": false,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-1251",
+      "number": "1251",
+      "title": "Average Selling Price",
+      "slug": "average-selling-price",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -13443,6 +14504,17 @@
       ]
     },
     {
+      "id": "lc-1264",
+      "number": "1264",
+      "title": "Page Recommendations",
+      "slug": "page-recommendations",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1265",
       "number": "1265",
       "title": "Print Immutable Linked List in Reverse",
@@ -13495,6 +14567,17 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1270",
+      "number": "1270",
+      "title": "All People Report to the Given Manager",
+      "slug": "all-people-report-to-the-given-manager",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -13588,6 +14671,29 @@
       ]
     },
     {
+      "id": "lc-1279",
+      "number": "1279",
+      "title": "Traffic Light Controlled Intersection",
+      "slug": "traffic-light-controlled-intersection",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1280",
+      "number": "1280",
+      "title": "Students and Examinations",
+      "slug": "students-and-examinations",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1281",
       "number": "1281",
       "title": "Subtract the Product and Sum of Digits of an Integer",
@@ -13633,6 +14739,18 @@
         "Array",
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1285",
+      "number": "1285",
+      "title": "Find the Start and End Number of Continuous Ranges",
+      "slug": "find-the-start-and-end-number-of-continuous-ranges",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math",
+        "Bit Manipulation"
       ]
     },
     {
@@ -13736,6 +14854,17 @@
       ]
     },
     {
+      "id": "lc-1294",
+      "number": "1294",
+      "title": "Weather Type in Each Country",
+      "slug": "weather-type-in-each-country",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1295",
       "number": "1295",
       "title": "Find Numbers with Even Number of Digits",
@@ -13832,6 +14961,17 @@
       ]
     },
     {
+      "id": "lc-1303",
+      "number": "1303",
+      "title": "Find the Team Size",
+      "slug": "find-the-team-size",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1304",
       "number": "1304",
       "title": "Find N Unique Integers Sum up to Zero",
@@ -13876,6 +15016,17 @@
       "paidOnly": false,
       "tags": [
         "General"
+      ]
+    },
+    {
+      "id": "lc-1308",
+      "number": "1308",
+      "title": "Running Total for Different Genders",
+      "slug": "running-total-for-different-genders",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -14024,6 +15175,28 @@
       ]
     },
     {
+      "id": "lc-1321",
+      "number": "1321",
+      "title": "Restaurant Growth",
+      "slug": "restaurant-growth",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1322",
+      "number": "1322",
+      "title": "Ads Performance",
+      "slug": "ads-performance",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1323",
       "number": "1323",
       "title": "Maximum 69 Number",
@@ -14068,6 +15241,17 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1327",
+      "number": "1327",
+      "title": "List the Products Ordered in a Period",
+      "slug": "list-the-products-ordered-in-a-period",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -14164,6 +15348,17 @@
       ]
     },
     {
+      "id": "lc-1336",
+      "number": "1336",
+      "title": "Number of Transactions per Visit",
+      "slug": "number-of-transactions-per-visit",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-1337",
       "number": "1337",
       "title": "The K Weakest Rows in a Matrix",
@@ -14207,6 +15402,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1341",
+      "number": "1341",
+      "title": "Movie Rating",
+      "slug": "movie-rating",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -14302,6 +15508,17 @@
       ]
     },
     {
+      "id": "lc-1350",
+      "number": "1350",
+      "title": "Students With Invalid Departments",
+      "slug": "students-with-invalid-departments",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1351",
       "number": "1351",
       "title": "Count Negative Numbers in a Sorted Matrix",
@@ -14347,6 +15564,17 @@
       "paidOnly": false,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-1355",
+      "number": "1355",
+      "title": "Activity Participants",
+      "slug": "activity-participants",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -14442,6 +15670,17 @@
       ]
     },
     {
+      "id": "lc-1364",
+      "number": "1364",
+      "title": "Number of Trusted Contacts of a Customer",
+      "slug": "number-of-trusted-contacts-of-a-customer",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-1365",
       "number": "1365",
       "title": "How Many Numbers Are Smaller Than the Current Number",
@@ -14486,6 +15725,17 @@
       "tags": [
         "Graph",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1369",
+      "number": "1369",
+      "title": "Get the Second Most Recent Activity",
+      "slug": "get-the-second-most-recent-activity",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -14587,6 +15837,17 @@
       ]
     },
     {
+      "id": "lc-1378",
+      "number": "1378",
+      "title": "Replace Employee ID With The Unique Identifier",
+      "slug": "replace-employee-id-with-the-unique-identifier",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1379",
       "number": "1379",
       "title": "Find a Corresponding Node of a Binary Tree in a Clone of That Tree",
@@ -14645,6 +15906,17 @@
       "tags": [
         "Greedy",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1384",
+      "number": "1384",
+      "title": "Total Sales Amount by Year",
+      "slug": "total-sales-amount-by-year",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -14739,6 +16011,17 @@
       ]
     },
     {
+      "id": "lc-1393",
+      "number": "1393",
+      "title": "Capital Gain/Loss",
+      "slug": "capital-gainloss",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1394",
       "number": "1394",
       "title": "Find Lucky Integer in an Array",
@@ -14781,6 +16064,17 @@
       "paidOnly": false,
       "tags": [
         "String"
+      ]
+    },
+    {
+      "id": "lc-1398",
+      "number": "1398",
+      "title": "Customers Who Bought Products A and B but Not C",
+      "slug": "customers-who-bought-products-a-and-b-but-not-c",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -14876,6 +16170,17 @@
       ]
     },
     {
+      "id": "lc-1407",
+      "number": "1407",
+      "title": "Top Travellers",
+      "slug": "top-travellers",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1408",
       "number": "1408",
       "title": "String Matching in an Array",
@@ -14918,6 +16223,17 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1412",
+      "number": "1412",
+      "title": "Find the Quiet Students in All Exams",
+      "slug": "find-the-quiet-students-in-all-exams",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -15014,6 +16330,17 @@
       "tags": [
         "Array",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1421",
+      "number": "1421",
+      "title": "NPV Queries",
+      "slug": "npv-queries",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -15168,6 +16495,17 @@
       ]
     },
     {
+      "id": "lc-1435",
+      "number": "1435",
+      "title": "Create a Session Bar Chart",
+      "slug": "create-a-session-bar-chart",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1436",
       "number": "1436",
       "title": "Destination City",
@@ -15217,6 +16555,17 @@
       ]
     },
     {
+      "id": "lc-1440",
+      "number": "1440",
+      "title": "Evaluate Boolean Expression",
+      "slug": "evaluate-boolean-expression",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1441",
       "number": "1441",
       "title": "Build an Array With Stack Operations",
@@ -15262,6 +16611,17 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1445",
+      "number": "1445",
+      "title": "Apples & Oranges",
+      "slug": "apples-oranges",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -15359,6 +16719,17 @@
       ]
     },
     {
+      "id": "lc-1454",
+      "number": "1454",
+      "title": "Active Users",
+      "slug": "active-users",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1455",
       "number": "1455",
       "title": "Check If a Word Occurs As a Prefix of Any Word in a Sentence",
@@ -15407,6 +16778,17 @@
       "tags": [
         "Dynamic Programming",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1459",
+      "number": "1459",
+      "title": "Rectangles Area",
+      "slug": "rectangles-area",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -15499,6 +16881,17 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1468",
+      "number": "1468",
+      "title": "Calculate Salaries",
+      "slug": "calculate-salaries",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -15613,6 +17006,17 @@
       ]
     },
     {
+      "id": "lc-1479",
+      "number": "1479",
+      "title": "Sales by Day of the Week",
+      "slug": "sales-by-day-of-the-week",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1480",
       "number": "1480",
       "title": "Running Sum of 1d Array",
@@ -15658,6 +17062,17 @@
         "Tree",
         "Heap",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1484",
+      "number": "1484",
+      "title": "Group Sold Products By The Date",
+      "slug": "group-sold-products-by-the-date",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -15781,6 +17196,17 @@
       ]
     },
     {
+      "id": "lc-1495",
+      "number": "1495",
+      "title": "Friendly Movies Streamed Last Month",
+      "slug": "friendly-movies-streamed-last-month",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Design"
+      ]
+    },
+    {
       "id": "lc-1496",
       "number": "1496",
       "title": "Path Crossing",
@@ -15835,6 +17261,17 @@
       "paidOnly": true,
       "tags": [
         "Design"
+      ]
+    },
+    {
+      "id": "lc-1501",
+      "number": "1501",
+      "title": "Countries You Can Safely Invest In",
+      "slug": "countries-you-can-safely-invest-in",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Tree"
       ]
     },
     {
@@ -15942,6 +17379,17 @@
       ]
     },
     {
+      "id": "lc-1511",
+      "number": "1511",
+      "title": "Customer Order Frequency",
+      "slug": "customer-order-frequency",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1512",
       "number": "1512",
       "title": "Number of Good Pairs",
@@ -15998,6 +17446,17 @@
       "tags": [
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-1517",
+      "number": "1517",
+      "title": "Find Users With Valid E-Mails",
+      "slug": "find-users-with-valid-e-mails",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -16112,6 +17571,17 @@
       ]
     },
     {
+      "id": "lc-1527",
+      "number": "1527",
+      "title": "Patients With a Condition",
+      "slug": "patients-with-a-condition",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1528",
       "number": "1528",
       "title": "Shuffle String",
@@ -16153,6 +17623,17 @@
       "paidOnly": false,
       "tags": [
         "String"
+      ]
+    },
+    {
+      "id": "lc-1532",
+      "number": "1532",
+      "title": "The Most Recent Three Orders",
+      "slug": "the-most-recent-three-orders",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -16272,6 +17753,17 @@
       ]
     },
     {
+      "id": "lc-1543",
+      "number": "1543",
+      "title": "Fix Product Name Format",
+      "slug": "fix-product-name-format",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1544",
       "number": "1544",
       "title": "Make The String Great",
@@ -16331,6 +17823,17 @@
       ]
     },
     {
+      "id": "lc-1549",
+      "number": "1549",
+      "title": "The Most Recent Orders for Each Product",
+      "slug": "the-most-recent-orders-for-each-product",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1550",
       "number": "1550",
       "title": "Three Consecutive Odds",
@@ -16386,6 +17889,17 @@
       "paidOnly": true,
       "tags": [
         "String"
+      ]
+    },
+    {
+      "id": "lc-1555",
+      "number": "1555",
+      "title": "Bank Account Summary",
+      "slug": "bank-account-summary",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array"
       ]
     },
     {
@@ -16492,6 +18006,17 @@
       ]
     },
     {
+      "id": "lc-1565",
+      "number": "1565",
+      "title": "Unique Orders and Customers Per Month",
+      "slug": "unique-orders-and-customers-per-month",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1566",
       "number": "1566",
       "title": "Detect Pattern of Length M Repeated K or More Times",
@@ -16552,6 +18077,17 @@
       "paidOnly": true,
       "tags": [
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1571",
+      "number": "1571",
+      "title": "Warehouse Manager",
+      "slug": "warehouse-manager",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -16660,6 +18196,17 @@
       ]
     },
     {
+      "id": "lc-1581",
+      "number": "1581",
+      "title": "Customer Who Visited but Did Not Make Any Transactions",
+      "slug": "customer-who-visited-but-did-not-make-any-transactions",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1582",
       "number": "1582",
       "title": "Special Positions in a Binary Matrix",
@@ -16717,6 +18264,17 @@
         "Tree",
         "Design",
         "Binary Search"
+      ]
+    },
+    {
+      "id": "lc-1587",
+      "number": "1587",
+      "title": "Bank Account Summary II",
+      "slug": "bank-account-summary-ii",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
       ]
     },
     {
@@ -16812,6 +18370,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1596",
+      "number": "1596",
+      "title": "The Most Frequently Ordered Products for Each Customer",
+      "slug": "the-most-frequently-ordered-products-for-each-customer",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -16930,6 +18499,17 @@
       ]
     },
     {
+      "id": "lc-1607",
+      "number": "1607",
+      "title": "Sellers With No Sales",
+      "slug": "sellers-with-no-sales",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1608",
       "number": "1608",
       "title": "Special Array With X Elements Greater Than or Equal X",
@@ -16988,6 +18568,17 @@
       "tags": [
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-1613",
+      "number": "1613",
+      "title": "Find the Missing IDs",
+      "slug": "find-the-missing-ids",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -17092,6 +18683,17 @@
       "slug": "fancy-sequence",
       "difficulty": "Hard",
       "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1623",
+      "number": "1623",
+      "title": "All Valid Triplets That Can Represent a Country",
+      "slug": "all-valid-triplets-that-can-represent-a-country",
+      "difficulty": "Easy",
+      "paidOnly": true,
       "tags": [
         "General"
       ]
@@ -17203,6 +18805,17 @@
       ]
     },
     {
+      "id": "lc-1633",
+      "number": "1633",
+      "title": "Percentage of Users Attended a Contest",
+      "slug": "percentage-of-users-attended-a-contest",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1634",
       "number": "1634",
       "title": "Add Two Polynomials Represented as Linked Lists",
@@ -17211,6 +18824,17 @@
       "paidOnly": true,
       "tags": [
         "Linked List"
+      ]
+    },
+    {
+      "id": "lc-1635",
+      "number": "1635",
+      "title": "Hopper Company Queries I",
+      "slug": "hopper-company-queries-i",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -17322,6 +18946,17 @@
       ]
     },
     {
+      "id": "lc-1645",
+      "number": "1645",
+      "title": "Hopper Company Queries II",
+      "slug": "hopper-company-queries-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1646",
       "number": "1646",
       "title": "Get Maximum in Generated Array",
@@ -17380,6 +19015,17 @@
         "Graph",
         "Tree",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1651",
+      "number": "1651",
+      "title": "Hopper Company Queries III",
+      "slug": "hopper-company-queries-iii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -17487,6 +19133,17 @@
       ]
     },
     {
+      "id": "lc-1661",
+      "number": "1661",
+      "title": "Average Time of Process per Machine",
+      "slug": "average-time-of-process-per-machine",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1662",
       "number": "1662",
       "title": "Check If Two String Arrays are Equivalent",
@@ -17541,6 +19198,17 @@
       "tags": [
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-1667",
+      "number": "1667",
+      "title": "Fix Names in a Table",
+      "slug": "fix-names-in-a-table",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -17652,6 +19320,17 @@
       ]
     },
     {
+      "id": "lc-1677",
+      "number": "1677",
+      "title": "Product's Worth Over Invoices",
+      "slug": "products-worth-over-invoices",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1678",
       "number": "1678",
       "title": "Goal Parser Interpretation",
@@ -17706,6 +19385,17 @@
       "paidOnly": true,
       "tags": [
         "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "lc-1683",
+      "number": "1683",
+      "title": "Invalid Tweets",
+      "slug": "invalid-tweets",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -17814,6 +19504,17 @@
       ]
     },
     {
+      "id": "lc-1693",
+      "number": "1693",
+      "title": "Daily Leads and Partners",
+      "slug": "daily-leads-and-partners",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1694",
       "number": "1694",
       "title": "Reformat Phone Number",
@@ -17868,6 +19569,17 @@
       "tags": [
         "Tree",
         "String",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-1699",
+      "number": "1699",
+      "title": "Number of Calls Between Two Persons",
+      "slug": "number-of-calls-between-two-persons",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
         "Math"
       ]
     },
@@ -17977,6 +19689,17 @@
       ]
     },
     {
+      "id": "lc-1709",
+      "number": "1709",
+      "title": "Biggest Window Between Visits",
+      "slug": "biggest-window-between-visits",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Two Pointers"
+      ]
+    },
+    {
       "id": "lc-1710",
       "number": "1710",
       "title": "Maximum Units on a Truck",
@@ -18030,6 +19753,17 @@
       "paidOnly": true,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-1715",
+      "number": "1715",
+      "title": "Count Apples and Oranges",
+      "slug": "count-apples-and-oranges",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -18184,6 +19918,17 @@
       ]
     },
     {
+      "id": "lc-1729",
+      "number": "1729",
+      "title": "Find Followers Count",
+      "slug": "find-followers-count",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1730",
       "number": "1730",
       "title": "Shortest Path to Get Food",
@@ -18192,6 +19937,18 @@
       "paidOnly": true,
       "tags": [
         "Graph",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-1731",
+      "number": "1731",
+      "title": "The Number of Employees Which Report to Each Employee",
+      "slug": "the-number-of-employees-which-report-to-each-employee",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math",
         "Bit Manipulation"
       ]
     },
@@ -18299,6 +20056,17 @@
       ]
     },
     {
+      "id": "lc-1741",
+      "number": "1741",
+      "title": "Find Total Time Spent by Each Employee",
+      "slug": "find-total-time-spent-by-each-employee",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1742",
       "number": "1742",
       "title": "Maximum Number of Balls in a Box",
@@ -18355,6 +20123,17 @@
       "tags": [
         "Array",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1747",
+      "number": "1747",
+      "title": "Leetflex Banned Accounts",
+      "slug": "leetflex-banned-accounts",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -18462,6 +20241,17 @@
       "paidOnly": true,
       "tags": [
         "Design"
+      ]
+    },
+    {
+      "id": "lc-1757",
+      "number": "1757",
+      "title": "Recyclable and Low Fat Products",
+      "slug": "recyclable-and-low-fat-products",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -18573,6 +20363,17 @@
       ]
     },
     {
+      "id": "lc-1767",
+      "number": "1767",
+      "title": "Find the Subtasks That Did Not Execute",
+      "slug": "find-the-subtasks-that-did-not-execute",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1768",
       "number": "1768",
       "title": "Merge Strings Alternately",
@@ -18679,6 +20480,17 @@
       ]
     },
     {
+      "id": "lc-1777",
+      "number": "1777",
+      "title": "Product's Price for Each Store",
+      "slug": "products-price-for-each-store",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1778",
       "number": "1778",
       "title": "Shortest Path in a Hidden Grid",
@@ -18735,6 +20547,17 @@
       "paidOnly": false,
       "tags": [
         "General"
+      ]
+    },
+    {
+      "id": "lc-1783",
+      "number": "1783",
+      "title": "Grand Slam Titles",
+      "slug": "grand-slam-titles",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -18796,6 +20619,17 @@
       ]
     },
     {
+      "id": "lc-1789",
+      "number": "1789",
+      "title": "Primary Department for Each Employee",
+      "slug": "primary-department-for-each-employee",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1790",
       "number": "1790",
       "title": "Check if One String Swap Can Make Strings Equal",
@@ -18852,6 +20686,17 @@
         "Tree",
         "String",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1795",
+      "number": "1795",
+      "title": "Rearrange Products Table",
+      "slug": "rearrange-products-table",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -19010,6 +20855,17 @@
       ]
     },
     {
+      "id": "lc-1809",
+      "number": "1809",
+      "title": "Ad-Free Sessions",
+      "slug": "ad-free-sessions",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1810",
       "number": "1810",
       "title": "Minimum Path Cost in a Hidden Grid",
@@ -19019,6 +20875,17 @@
       "tags": [
         "Graph",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1811",
+      "number": "1811",
+      "title": "Find Interview Candidates",
+      "slug": "find-interview-candidates",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -19126,6 +20993,17 @@
       ]
     },
     {
+      "id": "lc-1821",
+      "number": "1821",
+      "title": "Find Customers With Positive Revenue this Year",
+      "slug": "find-customers-with-positive-revenue-this-year",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1822",
       "number": "1822",
       "title": "Sign of the Product of an Array",
@@ -19227,6 +21105,17 @@
         "Greedy",
         "Math",
         "Binary Search"
+      ]
+    },
+    {
+      "id": "lc-1831",
+      "number": "1831",
+      "title": "Maximum Transaction Each Day",
+      "slug": "maximum-transaction-each-day",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Greedy"
       ]
     },
     {
@@ -19336,6 +21225,17 @@
       ]
     },
     {
+      "id": "lc-1841",
+      "number": "1841",
+      "title": "League Statistics",
+      "slug": "league-statistics",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1842",
       "number": "1842",
       "title": "Next Palindrome Using Same Digits",
@@ -19345,6 +21245,17 @@
       "tags": [
         "Dynamic Programming",
         "String"
+      ]
+    },
+    {
+      "id": "lc-1843",
+      "number": "1843",
+      "title": "Suspicious Bank Accounts",
+      "slug": "suspicious-bank-accounts",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -19449,6 +21360,17 @@
       "tags": [
         "Array",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1853",
+      "number": "1853",
+      "title": "Convert Date Format",
+      "slug": "convert-date-format",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -19605,6 +21527,18 @@
       ]
     },
     {
+      "id": "lc-1867",
+      "number": "1867",
+      "title": "Orders With Maximum Quantity Above Average",
+      "slug": "orders-with-maximum-quantity-above-average",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1868",
       "number": "1868",
       "title": "Product of Two Run-Length Encoded Arrays",
@@ -19660,6 +21594,17 @@
       ]
     },
     {
+      "id": "lc-1873",
+      "number": "1873",
+      "title": "Calculate Special Bonus",
+      "slug": "calculate-special-bonus",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1874",
       "number": "1874",
       "title": "Minimize Product Sum of Two Arrays",
@@ -19669,6 +21614,17 @@
       "tags": [
         "Array",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1875",
+      "number": "1875",
+      "title": "Group Employees of the Same Salary",
+      "slug": "group-employees-of-the-same-salary",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -19835,11 +21791,33 @@
       ]
     },
     {
+      "id": "lc-1890",
+      "number": "1890",
+      "title": "The Latest Login in 2020",
+      "slug": "the-latest-login-in-2020",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1891",
       "number": "1891",
       "title": "Cutting Ribbons",
       "slug": "cutting-ribbons",
       "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-1892",
+      "number": "1892",
+      "title": "Page Recommendations II",
+      "slug": "page-recommendations-ii",
+      "difficulty": "Hard",
       "paidOnly": true,
       "tags": [
         "General"
@@ -20005,6 +21983,17 @@
       ]
     },
     {
+      "id": "lc-1907",
+      "number": "1907",
+      "title": "Count Salary Categories",
+      "slug": "count-salary-categories",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1908",
       "number": "1908",
       "title": "Game of Nim",
@@ -20109,6 +22098,17 @@
       ]
     },
     {
+      "id": "lc-1917",
+      "number": "1917",
+      "title": "Leetcodify Friends Recommendations",
+      "slug": "leetcodify-friends-recommendations",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1918",
       "number": "1918",
       "title": "Kth Smallest Subarray Sum",
@@ -20118,6 +22118,17 @@
       "tags": [
         "Array",
         "Heap"
+      ]
+    },
+    {
+      "id": "lc-1919",
+      "number": "1919",
+      "title": "Leetcodify Similar Friends",
+      "slug": "leetcodify-similar-friends",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -20280,6 +22291,17 @@
       ]
     },
     {
+      "id": "lc-1934",
+      "number": "1934",
+      "title": "Confirmation Rate",
+      "slug": "confirmation-rate",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1935",
       "number": "1935",
       "title": "Maximum Number of Words You Can Type",
@@ -20326,6 +22348,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1939",
+      "number": "1939",
+      "title": "Users That Actively Request Confirmation Messages",
+      "slug": "users-that-actively-request-confirmation-messages",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -20437,6 +22470,17 @@
       ]
     },
     {
+      "id": "lc-1949",
+      "number": "1949",
+      "title": "Strong Friendship",
+      "slug": "strong-friendship",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-1950",
       "number": "1950",
       "title": "Maximum of Minimum Values in All Subarrays",
@@ -20446,6 +22490,18 @@
       "tags": [
         "Array",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-1951",
+      "number": "1951",
+      "title": "All the Pairs With the Maximum Number of Common Followers",
+      "slug": "all-the-pairs-with-the-maximum-number-of-common-followers",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Greedy",
+        "Math"
       ]
     },
     {
@@ -20603,6 +22659,17 @@
       ]
     },
     {
+      "id": "lc-1965",
+      "number": "1965",
+      "title": "Employees With Missing Information",
+      "slug": "employees-with-missing-information",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1966",
       "number": "1966",
       "title": "Binary Searchable Numbers in an Unsorted Array",
@@ -20677,6 +22744,17 @@
       ]
     },
     {
+      "id": "lc-1972",
+      "number": "1972",
+      "title": "First and Last Call On the Same Day",
+      "slug": "first-and-last-call-on-the-same-day",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1973",
       "number": "1973",
       "title": "Count Nodes Equal to Sum of Descendants",
@@ -20732,6 +22810,17 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-1978",
+      "number": "1978",
+      "title": "Employees Whose Manager Left the Company",
+      "slug": "employees-whose-manager-left-the-company",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -20843,6 +22932,17 @@
       ]
     },
     {
+      "id": "lc-1988",
+      "number": "1988",
+      "title": "Find Cutoff Score for Each School",
+      "slug": "find-cutoff-score-for-each-school",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-1989",
       "number": "1989",
       "title": "Maximum Number of People That Can Be Caught in Tag",
@@ -20851,6 +22951,17 @@
       "paidOnly": true,
       "tags": [
         "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-1990",
+      "number": "1990",
+      "title": "Count the Number of Experiments",
+      "slug": "count-the-number-of-experiments",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
         "Math"
       ]
     },
@@ -21006,6 +23117,18 @@
       ]
     },
     {
+      "id": "lc-2004",
+      "number": "2004",
+      "title": "The Number of Seniors and Juniors to Join the Company",
+      "slug": "the-number-of-seniors-and-juniors-to-join-the-company",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-2005",
       "number": "2005",
       "title": "Subtree Removal Game with Fibonacci Tree",
@@ -21062,6 +23185,18 @@
         "Array",
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2010",
+      "number": "2010",
+      "title": "The Number of Seniors and Juniors to Join the Company II",
+      "slug": "the-number-of-seniors-and-juniors-to-join-the-company-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math",
+        "Bit Manipulation"
       ]
     },
     {
@@ -21167,6 +23302,18 @@
       ]
     },
     {
+      "id": "lc-2020",
+      "number": "2020",
+      "title": "Number of Accounts That Did Not Stream",
+      "slug": "number-of-accounts-that-did-not-stream",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Design",
+        "Math"
+      ]
+    },
+    {
       "id": "lc-2021",
       "number": "2021",
       "title": "Brightest Position on Street",
@@ -21224,6 +23371,17 @@
         "Array",
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2026",
+      "number": "2026",
+      "title": "Low-Quality Problems",
+      "slug": "low-quality-problems",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -21391,6 +23549,17 @@
       ]
     },
     {
+      "id": "lc-2041",
+      "number": "2041",
+      "title": "Accepted Candidates From the Interviews",
+      "slug": "accepted-candidates-from-the-interviews",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-2042",
       "number": "2042",
       "title": "Check if Numbers Are Ascending in a Sentence",
@@ -21494,6 +23663,17 @@
       "paidOnly": false,
       "tags": [
         "Graph"
+      ]
+    },
+    {
+      "id": "lc-2051",
+      "number": "2051",
+      "title": "The Category of Each Member in the Store",
+      "slug": "the-category-of-each-member-in-the-store",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -21662,6 +23842,17 @@
       ]
     },
     {
+      "id": "lc-2066",
+      "number": "2066",
+      "title": "Account Balance",
+      "slug": "account-balance",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2067",
       "number": "2067",
       "title": "Number of Equal Count Substrings",
@@ -21717,6 +23908,17 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2072",
+      "number": "2072",
+      "title": "The Winner University",
+      "slug": "the-winner-university",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -21821,6 +24023,17 @@
       ]
     },
     {
+      "id": "lc-2082",
+      "number": "2082",
+      "title": "The Number of Rich Customers",
+      "slug": "the-number-of-rich-customers",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-2083",
       "number": "2083",
       "title": "Substrings That Begin and End With the Same Letter",
@@ -21830,6 +24043,17 @@
       "tags": [
         "Tree",
         "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2084",
+      "number": "2084",
+      "title": "Drop Type 1 Orders for Customers With Type 0 Orders",
+      "slug": "drop-type-1-orders-for-customers-with-type-0-orders",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
         "Bit Manipulation"
       ]
     },
@@ -22143,6 +24367,17 @@
       ]
     },
     {
+      "id": "lc-2112",
+      "number": "2112",
+      "title": "The Airport With the Most Traffic",
+      "slug": "the-airport-with-the-most-traffic",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-2113",
       "number": "2113",
       "title": "Elements in Array After Removing and Replacing Elements",
@@ -22197,6 +24432,17 @@
       "slug": "abbreviating-the-product-of-a-range",
       "difficulty": "Hard",
       "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2118",
+      "number": "2118",
+      "title": "Build the Equation",
+      "slug": "build-the-equation",
+      "difficulty": "Hard",
+      "paidOnly": true,
       "tags": [
         "General"
       ]
@@ -22464,6 +24710,17 @@
       ]
     },
     {
+      "id": "lc-2142",
+      "number": "2142",
+      "title": "The Number of Passengers in Each Bus I",
+      "slug": "the-number-of-passengers-in-each-bus-i",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-2143",
       "number": "2143",
       "title": "Choose Numbers From Two Arrays in Range",
@@ -22579,6 +24836,17 @@
       ]
     },
     {
+      "id": "lc-2153",
+      "number": "2153",
+      "title": "The Number of Passengers in Each Bus II",
+      "slug": "the-number-of-passengers-in-each-bus-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-2154",
       "number": "2154",
       "title": "Keep Multiplying Found Values by Two",
@@ -22633,6 +24901,17 @@
       "paidOnly": true,
       "tags": [
         "General"
+      ]
+    },
+    {
+      "id": "lc-2159",
+      "number": "2159",
+      "title": "Order Two Columns Independently",
+      "slug": "order-two-columns-independently",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -22790,6 +25069,17 @@
       ]
     },
     {
+      "id": "lc-2173",
+      "number": "2173",
+      "title": "Longest Winning Streak",
+      "slug": "longest-winning-streak",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Dynamic Programming"
+      ]
+    },
+    {
       "id": "lc-2174",
       "number": "2174",
       "title": "Remove All Ones With Row and Column Flips II",
@@ -22798,6 +25088,17 @@
       "paidOnly": true,
       "tags": [
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2175",
+      "number": "2175",
+      "title": "The Change in Global Rankings",
+      "slug": "the-change-in-global-rankings",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -23073,6 +25374,17 @@
       ]
     },
     {
+      "id": "lc-2199",
+      "number": "2199",
+      "title": "Finding the Topic of Each Post",
+      "slug": "finding-the-topic-of-each-post",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2200",
       "number": "2200",
       "title": "Find All K-Distant Indices in an Array",
@@ -23127,6 +25439,18 @@
       "tags": [
         "Graph",
         "Linked List"
+      ]
+    },
+    {
+      "id": "lc-2205",
+      "number": "2205",
+      "title": "The Number of Users That Are Eligible for Discount",
+      "slug": "the-number-of-users-that-are-eligible-for-discount",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Math",
+        "Bit Manipulation"
       ]
     },
     {
@@ -23390,6 +25714,17 @@
       ]
     },
     {
+      "id": "lc-2228",
+      "number": "2228",
+      "title": "Users With Two Purchases Within Seven Days",
+      "slug": "users-with-two-purchases-within-seven-days",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2229",
       "number": "2229",
       "title": "Check if an Array Is Consecutive",
@@ -23398,6 +25733,17 @@
       "paidOnly": true,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-2230",
+      "number": "2230",
+      "title": "The Users That Are Eligible for Discount",
+      "slug": "the-users-that-are-eligible-for-discount",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -23477,6 +25823,17 @@
       "tags": [
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-2238",
+      "number": "2238",
+      "title": "Number of Times a Driver Was a Passenger",
+      "slug": "number-of-times-a-driver-was-a-passenger",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math"
       ]
     },
     {
@@ -23626,6 +25983,28 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2252",
+      "number": "2252",
+      "title": "Dynamic Pivoting of a Table",
+      "slug": "dynamic-pivoting-of-a-table",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2253",
+      "number": "2253",
+      "title": "Dynamic Unpivoting of a Table",
+      "slug": "dynamic-unpivoting-of-a-table",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -24068,6 +26447,17 @@
       ]
     },
     {
+      "id": "lc-2292",
+      "number": "2292",
+      "title": "Products With Three or More Orders in Two Consecutive Years",
+      "slug": "products-with-three-or-more-orders-in-two-consecutive-years",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-2293",
       "number": "2293",
       "title": "Min Max Game",
@@ -24123,6 +26513,17 @@
       "paidOnly": true,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-2298",
+      "number": "2298",
+      "title": "Tasks Count in the Weekend",
+      "slug": "tasks-count-in-the-weekend",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -24229,6 +26630,17 @@
       ]
     },
     {
+      "id": "lc-2308",
+      "number": "2308",
+      "title": "Arrange Table by Gender",
+      "slug": "arrange-table-by-gender",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2309",
       "number": "2309",
       "title": "Greatest English Letter in Upper and Lower Case",
@@ -24285,6 +26697,18 @@
         "Graph",
         "Tree",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-2314",
+      "number": "2314",
+      "title": "The First Day of the Maximum Recorded Degree in Each City",
+      "slug": "the-first-day-of-the-maximum-recorded-degree-in-each-city",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Greedy",
+        "Bit Manipulation"
       ]
     },
     {
@@ -24393,6 +26817,17 @@
       ]
     },
     {
+      "id": "lc-2324",
+      "number": "2324",
+      "title": "Product Sales Analysis IV",
+      "slug": "product-sales-analysis-iv",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2325",
       "number": "2325",
       "title": "Decode the Message",
@@ -24435,6 +26870,17 @@
       "tags": [
         "Graph",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2329",
+      "number": "2329",
+      "title": "Product Sales Analysis V",
+      "slug": "product-sales-analysis-v",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -24541,6 +26987,17 @@
       ]
     },
     {
+      "id": "lc-2339",
+      "number": "2339",
+      "title": "All the Matches of the League",
+      "slug": "all-the-matches-of-the-league",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2340",
       "number": "2340",
       "title": "Minimum Adjacent Swaps to Make a Valid Array",
@@ -24610,6 +27067,17 @@
       "paidOnly": true,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2346",
+      "number": "2346",
+      "title": "Compute the Rank as a Percentage",
+      "slug": "compute-the-rank-as-a-percentage",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -24716,6 +27184,17 @@
       ]
     },
     {
+      "id": "lc-2356",
+      "number": "2356",
+      "title": "Number of Unique Subjects Taught by Each Teacher",
+      "slug": "number-of-unique-subjects-taught-by-each-teacher",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-2357",
       "number": "2357",
       "title": "Make Array Zero by Subtracting Equal Amounts",
@@ -24771,6 +27250,17 @@
       "paidOnly": true,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-2362",
+      "number": "2362",
+      "title": "Generate the Invoice",
+      "slug": "generate-the-invoice",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -24877,6 +27367,17 @@
       ]
     },
     {
+      "id": "lc-2372",
+      "number": "2372",
+      "title": "Calculate the Influence of Each Salesperson",
+      "slug": "calculate-the-influence-of-each-salesperson",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2373",
       "number": "2373",
       "title": "Largest Local Values in a Matrix",
@@ -24919,6 +27420,17 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2377",
+      "number": "2377",
+      "title": "Sort the Olympic Table",
+      "slug": "sort-the-olympic-table",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -25042,6 +27554,17 @@
       ]
     },
     {
+      "id": "lc-2388",
+      "number": "2388",
+      "title": "Change Null Values in a Table to the Previous Value",
+      "slug": "change-null-values-in-a-table-to-the-previous-value",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2389",
       "number": "2389",
       "title": "Longest Subsequence With Limited Sum",
@@ -25095,6 +27618,17 @@
       "paidOnly": true,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-2394",
+      "number": "2394",
+      "title": "Employees With Deductions",
+      "slug": "employees-with-deductions",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -25251,7 +27785,7 @@
       "title": "Design SQL",
       "slug": "design-sql",
       "difficulty": "Medium",
-      "paidOnly": true,
+      "paidOnly": false,
       "tags": [
         "Design"
       ]
@@ -26022,6 +28556,17 @@
       ]
     },
     {
+      "id": "lc-2474",
+      "number": "2474",
+      "title": "Customers With Strictly Increasing Purchases",
+      "slug": "customers-with-strictly-increasing-purchases",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2475",
       "number": "2475",
       "title": "Number of Unequal Triplets in Array",
@@ -26081,6 +28626,17 @@
         "Graph",
         "Tree",
         "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2480",
+      "number": "2480",
+      "title": "Form a Chemical Bond",
+      "slug": "form-a-chemical-bond",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
         "Bit Manipulation"
       ]
     },
@@ -26236,6 +28792,17 @@
       ]
     },
     {
+      "id": "lc-2494",
+      "number": "2494",
+      "title": "Merge Overlapping Events in the Same Hall",
+      "slug": "merge-overlapping-events-in-the-same-hall",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
       "id": "lc-2495",
       "number": "2495",
       "title": "Number of Subarrays Having Even Product",
@@ -26341,6 +28908,17 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2504",
+      "number": "2504",
+      "title": "Concatenate the Name and the Profession",
+      "slug": "concatenate-the-name-and-the-profession",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -27669,6 +30247,228 @@
       ]
     },
     {
+      "id": "lc-2618",
+      "number": "2618",
+      "title": "Check if Object Instance of Class",
+      "slug": "check-if-object-instance-of-class",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2619",
+      "number": "2619",
+      "title": "Array Prototype Last",
+      "slug": "array-prototype-last",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2620",
+      "number": "2620",
+      "title": "Counter",
+      "slug": "counter",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2621",
+      "number": "2621",
+      "title": "Sleep",
+      "slug": "sleep",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2622",
+      "number": "2622",
+      "title": "Cache With Time Limit",
+      "slug": "cache-with-time-limit",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Design"
+      ]
+    },
+    {
+      "id": "lc-2623",
+      "number": "2623",
+      "title": "Memoize",
+      "slug": "memoize",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2624",
+      "number": "2624",
+      "title": "Snail Traversal",
+      "slug": "snail-traversal",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2625",
+      "number": "2625",
+      "title": "Flatten Deeply Nested Array",
+      "slug": "flatten-deeply-nested-array",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2626",
+      "number": "2626",
+      "title": "Array Reduce Transformation",
+      "slug": "array-reduce-transformation",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2627",
+      "number": "2627",
+      "title": "Debounce",
+      "slug": "debounce",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2628",
+      "number": "2628",
+      "title": "JSON Deep Equal",
+      "slug": "json-deep-equal",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2629",
+      "number": "2629",
+      "title": "Function Composition",
+      "slug": "function-composition",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2630",
+      "number": "2630",
+      "title": "Memoize II",
+      "slug": "memoize-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2631",
+      "number": "2631",
+      "title": "Group By",
+      "slug": "group-by",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2632",
+      "number": "2632",
+      "title": "Curry",
+      "slug": "curry",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2633",
+      "number": "2633",
+      "title": "Convert Object to JSON String",
+      "slug": "convert-object-to-json-string",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "String"
+      ]
+    },
+    {
+      "id": "lc-2634",
+      "number": "2634",
+      "title": "Filter Elements from Array",
+      "slug": "filter-elements-from-array",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2635",
+      "number": "2635",
+      "title": "Apply Transform Over Each Element in Array",
+      "slug": "apply-transform-over-each-element-in-array",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2636",
+      "number": "2636",
+      "title": "Promise Pool",
+      "slug": "promise-pool",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2637",
+      "number": "2637",
+      "title": "Promise Time Limit",
+      "slug": "promise-time-limit",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2638",
       "number": "2638",
       "title": "Count the Number of K-Free Subsets",
@@ -27783,6 +30583,40 @@
       "paidOnly": true,
       "tags": [
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2648",
+      "number": "2648",
+      "title": "Generate Fibonacci Sequence",
+      "slug": "generate-fibonacci-sequence",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2649",
+      "number": "2649",
+      "title": "Nested Array Generator",
+      "slug": "nested-array-generator",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2650",
+      "number": "2650",
+      "title": "Design Cancellable Function",
+      "slug": "design-cancellable-function",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Design"
       ]
     },
     {
@@ -27946,6 +30780,61 @@
       ]
     },
     {
+      "id": "lc-2665",
+      "number": "2665",
+      "title": "Counter II",
+      "slug": "counter-ii",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2666",
+      "number": "2666",
+      "title": "Allow One Function Call",
+      "slug": "allow-one-function-call",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2667",
+      "number": "2667",
+      "title": "Create Hello World Function",
+      "slug": "create-hello-world-function",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2668",
+      "number": "2668",
+      "title": "Find Latest Salaries",
+      "slug": "find-latest-salaries",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2669",
+      "number": "2669",
+      "title": "Count Artist Occurrences On Spotify Ranking List",
+      "slug": "count-artist-occurrences-on-spotify-ranking-list",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2670",
       "number": "2670",
       "title": "Find the Distinct Difference Array",
@@ -28000,6 +30889,39 @@
       "paidOnly": true,
       "tags": [
         "Linked List"
+      ]
+    },
+    {
+      "id": "lc-2675",
+      "number": "2675",
+      "title": "Array of Objects to Matrix",
+      "slug": "array-of-objects-to-matrix",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2676",
+      "number": "2676",
+      "title": "Throttle",
+      "slug": "throttle",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2677",
+      "number": "2677",
+      "title": "Chunk Array",
+      "slug": "chunk-array",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
       ]
     },
     {
@@ -28095,6 +31017,39 @@
       ]
     },
     {
+      "id": "lc-2686",
+      "number": "2686",
+      "title": "Immediate Food Delivery III",
+      "slug": "immediate-food-delivery-iii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2687",
+      "number": "2687",
+      "title": "Bikes Last Time Used ",
+      "slug": "bikes-last-time-used",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2688",
+      "number": "2688",
+      "title": "Find Active Users",
+      "slug": "find-active-users",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2689",
       "number": "2689",
       "title": "Extract Kth Character From The Rope Tree",
@@ -28105,6 +31060,72 @@
         "Graph",
         "Tree",
         "Heap"
+      ]
+    },
+    {
+      "id": "lc-2690",
+      "number": "2690",
+      "title": "Infinite Method Object",
+      "slug": "infinite-method-object",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2691",
+      "number": "2691",
+      "title": "Immutability Helper",
+      "slug": "immutability-helper",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2692",
+      "number": "2692",
+      "title": "Make Object Immutable",
+      "slug": "make-object-immutable",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2693",
+      "number": "2693",
+      "title": "Call Function with Custom Context",
+      "slug": "call-function-with-custom-context",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2694",
+      "number": "2694",
+      "title": "Event Emitter",
+      "slug": "event-emitter",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2695",
+      "number": "2695",
+      "title": "Array Wrapper",
+      "slug": "array-wrapper",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
       ]
     },
     {
@@ -28156,6 +31177,28 @@
       ]
     },
     {
+      "id": "lc-2700",
+      "number": "2700",
+      "title": "Differences Between Two Objects",
+      "slug": "differences-between-two-objects",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2701",
+      "number": "2701",
+      "title": "Consecutive Transactions with Increasing Amounts",
+      "slug": "consecutive-transactions-with-increasing-amounts",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2702",
       "number": "2702",
       "title": "Minimum Operations to Make Numbers Non-positive",
@@ -28165,6 +31208,39 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2703",
+      "number": "2703",
+      "title": "Return Length of Arguments Passed",
+      "slug": "return-length-of-arguments-passed",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2704",
+      "number": "2704",
+      "title": "To Be Or Not To Be",
+      "slug": "to-be-or-not-to-be",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2705",
+      "number": "2705",
+      "title": "Compact Object",
+      "slug": "compact-object",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -28269,6 +31345,17 @@
       ]
     },
     {
+      "id": "lc-2715",
+      "number": "2715",
+      "title": "Timeout Cancellation",
+      "slug": "timeout-cancellation",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2716",
       "number": "2716",
       "title": "Minimize String Length",
@@ -28312,6 +31399,94 @@
       "paidOnly": false,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2720",
+      "number": "2720",
+      "title": "Popularity Percentage",
+      "slug": "popularity-percentage",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2721",
+      "number": "2721",
+      "title": "Execute Asynchronous Functions in Parallel",
+      "slug": "execute-asynchronous-functions-in-parallel",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2722",
+      "number": "2722",
+      "title": "Join Two Arrays by ID",
+      "slug": "join-two-arrays-by-id",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2723",
+      "number": "2723",
+      "title": "Add Two Promises",
+      "slug": "add-two-promises",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2724",
+      "number": "2724",
+      "title": "Sort By",
+      "slug": "sort-by",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2725",
+      "number": "2725",
+      "title": "Interval Cancellation",
+      "slug": "interval-cancellation",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2726",
+      "number": "2726",
+      "title": "Calculator with Method Chaining",
+      "slug": "calculator-with-method-chaining",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2727",
+      "number": "2727",
+      "title": "Is Object Empty",
+      "slug": "is-object-empty",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -28426,6 +31601,17 @@
       "number": "2737",
       "title": "Find the Closest Marked Node",
       "slug": "find-the-closest-marked-node",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2738",
+      "number": "2738",
+      "title": "Count Occurrences in Text",
+      "slug": "count-occurrences-in-text",
       "difficulty": "Medium",
       "paidOnly": true,
       "tags": [
@@ -28581,6 +31767,18 @@
       ]
     },
     {
+      "id": "lc-2752",
+      "number": "2752",
+      "title": "Customers with Maximum Number of Transactions on Consecutive Days",
+      "slug": "customers-with-maximum-number-of-transactions-on-consecutive-days",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
       "id": "lc-2753",
       "number": "2753",
       "title": "Count Houses in a Circular Street II",
@@ -28590,6 +31788,72 @@
       "tags": [
         "Graph",
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-2754",
+      "number": "2754",
+      "title": "Bind Function to Context",
+      "slug": "bind-function-to-context",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2755",
+      "number": "2755",
+      "title": "Deep Merge of Two Objects",
+      "slug": "deep-merge-of-two-objects",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2756",
+      "number": "2756",
+      "title": "Query Batching",
+      "slug": "query-batching",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2757",
+      "number": "2757",
+      "title": "Generate Circular Array Values",
+      "slug": "generate-circular-array-values",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2758",
+      "number": "2758",
+      "title": "Next Day",
+      "slug": "next-day",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2759",
+      "number": "2759",
+      "title": "Convert JSON String to Object",
+      "slug": "convert-json-string-to-object",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "String"
       ]
     },
     {
@@ -28761,6 +32025,51 @@
       ]
     },
     {
+      "id": "lc-2774",
+      "number": "2774",
+      "title": "Array Upper Bound",
+      "slug": "array-upper-bound",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Binary Search"
+      ]
+    },
+    {
+      "id": "lc-2775",
+      "number": "2775",
+      "title": "Undefined to Null",
+      "slug": "undefined-to-null",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2776",
+      "number": "2776",
+      "title": "Convert Callback Based Function to Promise Based Function",
+      "slug": "convert-callback-based-function-to-promise-based-function",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2777",
+      "number": "2777",
+      "title": "Date Range Generator",
+      "slug": "date-range-generator",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-2778",
       "number": "2778",
       "title": "Sum of Squares of Special Elements ",
@@ -28816,6 +32125,17 @@
       "paidOnly": true,
       "tags": [
         "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2783",
+      "number": "2783",
+      "title": "Flight Occupancy and Waitlist Analysis",
+      "slug": "flight-occupancy-and-waitlist-analysis",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
         "Bit Manipulation"
       ]
     },
@@ -28928,6 +32248,62 @@
       ]
     },
     {
+      "id": "lc-2793",
+      "number": "2793",
+      "title": "Status of Flight Tickets",
+      "slug": "status-of-flight-tickets",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2794",
+      "number": "2794",
+      "title": "Create Object from Two Arrays",
+      "slug": "create-object-from-two-arrays",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-2795",
+      "number": "2795",
+      "title": "Parallel Execution of Promises for Individual Results Retrieval",
+      "slug": "parallel-execution-of-promises-for-individual-results-retrieval",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Tree",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2796",
+      "number": "2796",
+      "title": "Repeat String",
+      "slug": "repeat-string",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "String"
+      ]
+    },
+    {
+      "id": "lc-2797",
+      "number": "2797",
+      "title": "Partial Function with Placeholders",
+      "slug": "partial-function-with-placeholders",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2798",
       "number": "2798",
       "title": "Number of Employees Who Met the Target",
@@ -28981,6 +32357,40 @@
       "paidOnly": true,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2803",
+      "number": "2803",
+      "title": "Factorial Generator",
+      "slug": "factorial-generator",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2804",
+      "number": "2804",
+      "title": "Array Prototype ForEach",
+      "slug": "array-prototype-foreach",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2805",
+      "number": "2805",
+      "title": "Custom Interval",
+      "slug": "custom-interval",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array"
       ]
     },
     {
@@ -29145,6 +32555,50 @@
       ]
     },
     {
+      "id": "lc-2820",
+      "number": "2820",
+      "title": "Election Results",
+      "slug": "election-results",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2821",
+      "number": "2821",
+      "title": "Delay the Resolution of Each Promise",
+      "slug": "delay-the-resolution-of-each-promise",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2822",
+      "number": "2822",
+      "title": "Inversion of Object",
+      "slug": "inversion-of-object",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2823",
+      "number": "2823",
+      "title": "Deep Object Filter",
+      "slug": "deep-object-filter",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2824",
       "number": "2824",
       "title": "Count Pairs Whose Sum is Less than Target",
@@ -29293,6 +32747,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-2837",
+      "number": "2837",
+      "title": "Total Traveled Distance",
+      "slug": "total-traveled-distance",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -29465,6 +32930,28 @@
       "paidOnly": true,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-2853",
+      "number": "2853",
+      "title": "Highest Salaries Difference",
+      "slug": "highest-salaries-difference",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2854",
+      "number": "2854",
+      "title": "Rolling Average Steps",
+      "slug": "rolling-average-steps",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -29729,6 +33216,171 @@
       ]
     },
     {
+      "id": "lc-2877",
+      "number": "2877",
+      "title": "Create a DataFrame from List",
+      "slug": "create-a-dataframe-from-list",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2878",
+      "number": "2878",
+      "title": "Get the Size of a DataFrame",
+      "slug": "get-the-size-of-a-dataframe",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2879",
+      "number": "2879",
+      "title": "Display the First Three Rows",
+      "slug": "display-the-first-three-rows",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2880",
+      "number": "2880",
+      "title": "Select Data",
+      "slug": "select-data",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2881",
+      "number": "2881",
+      "title": "Create a New Column",
+      "slug": "create-a-new-column",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2882",
+      "number": "2882",
+      "title": "Drop Duplicate Rows",
+      "slug": "drop-duplicate-rows",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2883",
+      "number": "2883",
+      "title": "Drop Missing Data",
+      "slug": "drop-missing-data",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2884",
+      "number": "2884",
+      "title": "Modify Columns",
+      "slug": "modify-columns",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2885",
+      "number": "2885",
+      "title": "Rename Columns",
+      "slug": "rename-columns",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2886",
+      "number": "2886",
+      "title": "Change Data Type",
+      "slug": "change-data-type",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2887",
+      "number": "2887",
+      "title": "Fill Missing Data",
+      "slug": "fill-missing-data",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2888",
+      "number": "2888",
+      "title": "Reshape Data: Concatenate",
+      "slug": "reshape-data-concatenate",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2889",
+      "number": "2889",
+      "title": "Reshape Data: Pivot",
+      "slug": "reshape-data-pivot",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2890",
+      "number": "2890",
+      "title": "Reshape Data: Melt",
+      "slug": "reshape-data-melt",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2891",
+      "number": "2891",
+      "title": "Method Chaining",
+      "slug": "method-chaining",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2892",
       "number": "2892",
       "title": "Minimizing Array After Replacing Pairs With Their Product",
@@ -29738,6 +33390,18 @@
       "tags": [
         "Array",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-2893",
+      "number": "2893",
+      "title": "Calculate Orders Within Each Interval",
+      "slug": "calculate-orders-within-each-interval",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
       ]
     },
     {
@@ -30062,6 +33726,17 @@
       "paidOnly": true,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-2922",
+      "number": "2922",
+      "title": "Market Analysis III",
+      "slug": "market-analysis-iii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -30712,6 +34387,17 @@
       ]
     },
     {
+      "id": "lc-2978",
+      "number": "2978",
+      "title": "Symmetric Coordinates",
+      "slug": "symmetric-coordinates",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-2979",
       "number": "2979",
       "title": "Most Expensive Item That Can Not Be Bought",
@@ -30773,6 +34459,94 @@
       ]
     },
     {
+      "id": "lc-2984",
+      "number": "2984",
+      "title": "Find Peak Calling Hours for Each City",
+      "slug": "find-peak-calling-hours-for-each-city",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2985",
+      "number": "2985",
+      "title": "Calculate Compressed Mean",
+      "slug": "calculate-compressed-mean",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2986",
+      "number": "2986",
+      "title": "Find Third Transaction",
+      "slug": "find-third-transaction",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2987",
+      "number": "2987",
+      "title": "Find Expensive Cities",
+      "slug": "find-expensive-cities",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2988",
+      "number": "2988",
+      "title": "Manager of the Largest Department",
+      "slug": "manager-of-the-largest-department",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2989",
+      "number": "2989",
+      "title": "Class Performance",
+      "slug": "class-performance",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-2990",
+      "number": "2990",
+      "title": "Loan Types",
+      "slug": "loan-types",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2991",
+      "number": "2991",
+      "title": "Top Three Wineries ",
+      "slug": "top-three-wineries",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-2992",
       "number": "2992",
       "title": "Number of Self-Divisible Permutations",
@@ -30782,6 +34556,39 @@
       "tags": [
         "Backtracking",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-2993",
+      "number": "2993",
+      "title": "Friday Purchases I",
+      "slug": "friday-purchases-i",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2994",
+      "number": "2994",
+      "title": "Friday Purchases II ",
+      "slug": "friday-purchases-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-2995",
+      "number": "2995",
+      "title": "Viewers Turned Streamers",
+      "slug": "viewers-turned-streamers",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Design"
       ]
     },
     {
@@ -31431,6 +35238,139 @@
       ]
     },
     {
+      "id": "lc-3050",
+      "number": "3050",
+      "title": "Pizza Toppings Cost Analysis",
+      "slug": "pizza-toppings-cost-analysis",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3051",
+      "number": "3051",
+      "title": "Find Candidates for Data Scientist Position",
+      "slug": "find-candidates-for-data-scientist-position",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3052",
+      "number": "3052",
+      "title": "Maximize Items",
+      "slug": "maximize-items",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3053",
+      "number": "3053",
+      "title": "Classifying Triangles by Lengths",
+      "slug": "classifying-triangles-by-lengths",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3054",
+      "number": "3054",
+      "title": "Binary Tree Nodes",
+      "slug": "binary-tree-nodes",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Graph",
+        "Tree"
+      ]
+    },
+    {
+      "id": "lc-3055",
+      "number": "3055",
+      "title": "Top Percentile Fraud",
+      "slug": "top-percentile-fraud",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3056",
+      "number": "3056",
+      "title": "Snaps Analysis",
+      "slug": "snaps-analysis",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3057",
+      "number": "3057",
+      "title": "Employees Project Allocation",
+      "slug": "employees-project-allocation",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3058",
+      "number": "3058",
+      "title": "Friends With No Mutual Friends",
+      "slug": "friends-with-no-mutual-friends",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3059",
+      "number": "3059",
+      "title": "Find All Unique Email Domains",
+      "slug": "find-all-unique-email-domains",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3060",
+      "number": "3060",
+      "title": "User Activities within Time Bounds",
+      "slug": "user-activities-within-time-bounds",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3061",
+      "number": "3061",
+      "title": "Calculate Trapping Rain Water",
+      "slug": "calculate-trapping-rain-water",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Two Pointers"
+      ]
+    },
+    {
       "id": "lc-3062",
       "number": "3062",
       "title": "Winner of the Linked List Game",
@@ -31727,6 +35667,17 @@
       ]
     },
     {
+      "id": "lc-3087",
+      "number": "3087",
+      "title": "Find Trending Hashtags",
+      "slug": "find-trending-hashtags",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3088",
       "number": "3088",
       "title": "Make String Anti-palindrome",
@@ -31736,6 +35687,17 @@
       "tags": [
         "Dynamic Programming",
         "String"
+      ]
+    },
+    {
+      "id": "lc-3089",
+      "number": "3089",
+      "title": "Find Bursty Behavior",
+      "slug": "find-bursty-behavior",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -31888,6 +35850,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3103",
+      "number": "3103",
+      "title": "Find Trending Hashtags II ",
+      "slug": "find-trending-hashtags-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -32060,6 +36033,17 @@
       ]
     },
     {
+      "id": "lc-3118",
+      "number": "3118",
+      "title": "Friday Purchase III ",
+      "slug": "friday-purchase-iii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3119",
       "number": "3119",
       "title": "Maximum Number of Potholes That Can Be Fixed",
@@ -32118,6 +36102,17 @@
       ]
     },
     {
+      "id": "lc-3124",
+      "number": "3124",
+      "title": "Find Longest Calls",
+      "slug": "find-longest-calls",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Dynamic Programming"
+      ]
+    },
+    {
       "id": "lc-3125",
       "number": "3125",
       "title": "Maximum Number That Makes Result of Bitwise AND Zero",
@@ -32128,6 +36123,17 @@
         "Greedy",
         "Math",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3126",
+      "number": "3126",
+      "title": "Server Utilization Time",
+      "slug": "server-utilization-time",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -32285,6 +36291,17 @@
       ]
     },
     {
+      "id": "lc-3140",
+      "number": "3140",
+      "title": "Consecutive Available Seats II",
+      "slug": "consecutive-available-seats-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3141",
       "number": "3141",
       "title": "Maximum Hamming Distances",
@@ -32392,6 +36409,17 @@
       ]
     },
     {
+      "id": "lc-3150",
+      "number": "3150",
+      "title": "Invalid Tweets II",
+      "slug": "invalid-tweets-ii",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3151",
       "number": "3151",
       "title": "Special Array I",
@@ -32445,6 +36473,17 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-3156",
+      "number": "3156",
+      "title": "Employee Task Duration and Concurrent Tasks",
+      "slug": "employee-task-duration-and-concurrent-tasks",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -32554,6 +36593,17 @@
       ]
     },
     {
+      "id": "lc-3166",
+      "number": "3166",
+      "title": "Calculate Parking Fees and Duration",
+      "slug": "calculate-parking-fees-and-duration",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-3167",
       "number": "3167",
       "title": "Better Compression of String",
@@ -32611,6 +36661,17 @@
         "Array",
         "Math",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3172",
+      "number": "3172",
+      "title": "Second Day Verification",
+      "slug": "second-day-verification",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -32716,6 +36777,17 @@
       ]
     },
     {
+      "id": "lc-3182",
+      "number": "3182",
+      "title": "Find Top Scoring Students",
+      "slug": "find-top-scoring-students",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-3183",
       "number": "3183",
       "title": "The Number of Ways to Make the Sum",
@@ -32769,6 +36841,17 @@
       "paidOnly": false,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-3188",
+      "number": "3188",
+      "title": "Find Top Scoring Students II",
+      "slug": "find-top-scoring-students-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -32875,6 +36958,17 @@
       ]
     },
     {
+      "id": "lc-3198",
+      "number": "3198",
+      "title": "Find Cities in Each State",
+      "slug": "find-cities-in-each-state",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3199",
       "number": "3199",
       "title": "Count Triplets with Even XOR Set Bits I",
@@ -32931,6 +37025,18 @@
         "Graph",
         "Tree",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3204",
+      "number": "3204",
+      "title": "Bitwise User Permissions Analysis",
+      "slug": "bitwise-user-permissions-analysis",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math",
+        "Bit Manipulation"
       ]
     },
     {
@@ -33038,6 +37144,17 @@
       ]
     },
     {
+      "id": "lc-3214",
+      "number": "3214",
+      "title": "Year on Year Growth Rate",
+      "slug": "year-on-year-growth-rate",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3215",
       "number": "3215",
       "title": "Count Triplets with Even XOR Set Bits II",
@@ -33093,6 +37210,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3220",
+      "number": "3220",
+      "title": "Odd and Even Transactions",
+      "slug": "odd-and-even-transactions",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
         "Bit Manipulation"
       ]
     },
@@ -33204,6 +37332,17 @@
       ]
     },
     {
+      "id": "lc-3230",
+      "number": "3230",
+      "title": "Customer Purchasing Behavior Analysis",
+      "slug": "customer-purchasing-behavior-analysis",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-3231",
       "number": "3231",
       "title": "Minimum Number of Increasing Subsequence to Be Removed",
@@ -33259,6 +37398,17 @@
       "slug": "check-if-the-rectangle-corner-is-reachable",
       "difficulty": "Hard",
       "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3236",
+      "number": "3236",
+      "title": "CEO Subordinate Hierarchy",
+      "slug": "ceo-subordinate-hierarchy",
+      "difficulty": "Hard",
+      "paidOnly": true,
       "tags": [
         "Bit Manipulation"
       ]
@@ -33367,6 +37517,17 @@
       ]
     },
     {
+      "id": "lc-3246",
+      "number": "3246",
+      "title": "Premier League Table Ranking",
+      "slug": "premier-league-table-ranking",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3247",
       "number": "3247",
       "title": "Number of Subsequences with Odd Sum",
@@ -33419,6 +37580,17 @@
       "slug": "find-the-count-of-monotonic-pairs-ii",
       "difficulty": "Hard",
       "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3252",
+      "number": "3252",
+      "title": "Premier League Table Ranking II",
+      "slug": "premier-league-table-ranking-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
       "tags": [
         "General"
       ]
@@ -33531,6 +37703,17 @@
       ]
     },
     {
+      "id": "lc-3262",
+      "number": "3262",
+      "title": "Find Overlapping Shifts",
+      "slug": "find-overlapping-shifts",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3263",
       "number": "3263",
       "title": "Convert Doubly Linked List to Array I",
@@ -33582,6 +37765,17 @@
       "slug": "count-almost-equal-pairs-ii",
       "difficulty": "Hard",
       "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3268",
+      "number": "3268",
+      "title": "Find Overlapping Shifts II",
+      "slug": "find-overlapping-shifts-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
       "tags": [
         "General"
       ]
@@ -33685,6 +37879,17 @@
       "tags": [
         "Array",
         "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3278",
+      "number": "3278",
+      "title": "Find Candidates for Data Scientist Position II",
+      "slug": "find-candidates-for-data-scientist-position-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
         "Bit Manipulation"
       ]
     },
@@ -33857,6 +38062,17 @@
       ]
     },
     {
+      "id": "lc-3293",
+      "number": "3293",
+      "title": "Calculate Product Final Price",
+      "slug": "calculate-product-final-price",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3294",
       "number": "3294",
       "title": "Convert Doubly Linked List to Array II",
@@ -34022,6 +38238,18 @@
       ]
     },
     {
+      "id": "lc-3308",
+      "number": "3308",
+      "title": "Find Top Performing Driver",
+      "slug": "find-top-performing-driver",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-3309",
       "number": "3309",
       "title": "Maximum Possible Number by Binary Concatenation",
@@ -34178,6 +38406,17 @@
       ]
     },
     {
+      "id": "lc-3322",
+      "number": "3322",
+      "title": "Premier League Table Ranking III",
+      "slug": "premier-league-table-ranking-iii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3323",
       "number": "3323",
       "title": "Minimize Connected Groups by Inserting Interval",
@@ -34235,6 +38474,17 @@
         "Dynamic Programming",
         "Graph",
         "String"
+      ]
+    },
+    {
+      "id": "lc-3328",
+      "number": "3328",
+      "title": "Find Cities in Each State II",
+      "slug": "find-cities-in-each-state-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -34343,6 +38593,17 @@
       "tags": [
         "String",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3338",
+      "number": "3338",
+      "title": "Second Highest Salary II",
+      "slug": "second-highest-salary-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -34563,6 +38824,17 @@
       ]
     },
     {
+      "id": "lc-3358",
+      "number": "3358",
+      "title": "Books with NULL Ratings",
+      "slug": "books-with-null-ratings",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3359",
       "number": "3359",
       "title": "Find Sorted Submatrices With Maximum Element at Most K",
@@ -34671,6 +38943,17 @@
       ]
     },
     {
+      "id": "lc-3368",
+      "number": "3368",
+      "title": "First Letter Capitalization",
+      "slug": "first-letter-capitalization",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3369",
       "number": "3369",
       "title": "Design an Array Statistics Tracker ",
@@ -34731,6 +39014,17 @@
         "Tree",
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-3374",
+      "number": "3374",
+      "title": "First Letter Capitalization II",
+      "slug": "first-letter-capitalization-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -34836,6 +39130,17 @@
       ]
     },
     {
+      "id": "lc-3384",
+      "number": "3384",
+      "title": "Team Dominance by Pass Success",
+      "slug": "team-dominance-by-pass-success",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
       "id": "lc-3385",
       "number": "3385",
       "title": "Minimum Time to Break Locks II",
@@ -34888,6 +39193,17 @@
       "paidOnly": false,
       "tags": [
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3390",
+      "number": "3390",
+      "title": "Longest Team Pass Streak",
+      "slug": "longest-team-pass-streak",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Dynamic Programming"
       ]
     },
     {
@@ -35006,6 +39322,17 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-3401",
+      "number": "3401",
+      "title": "Find Circular Gift Exchange Chains",
+      "slug": "find-circular-gift-exchange-chains",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -35161,6 +39488,17 @@
       ]
     },
     {
+      "id": "lc-3415",
+      "number": "3415",
+      "title": "Find Products with Three Consecutive Digits ",
+      "slug": "find-products-with-three-consecutive-digits",
+      "difficulty": "Easy",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3416",
       "number": "3416",
       "title": "Subsequences with a Unique Middle Mode II",
@@ -35214,6 +39552,17 @@
       "paidOnly": false,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-3421",
+      "number": "3421",
+      "title": "Find Students Who Improved",
+      "slug": "find-students-who-improved",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -35383,6 +39732,17 @@
       ]
     },
     {
+      "id": "lc-3436",
+      "number": "3436",
+      "title": "Find Valid Emails",
+      "slug": "find-valid-emails",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3437",
       "number": "3437",
       "title": "Permutations III",
@@ -35546,6 +39906,17 @@
       ]
     },
     {
+      "id": "lc-3451",
+      "number": "3451",
+      "title": "Find Invalid IP Addresses",
+      "slug": "find-invalid-ip-addresses",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3452",
       "number": "3452",
       "title": "Sum of Good Numbers",
@@ -35696,6 +40067,17 @@
       ]
     },
     {
+      "id": "lc-3465",
+      "number": "3465",
+      "title": "Find Products with Valid Serial Numbers",
+      "slug": "find-products-with-valid-serial-numbers",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
       "id": "lc-3466",
       "number": "3466",
       "title": "Maximum Coin Collection ",
@@ -35799,6 +40181,17 @@
       ]
     },
     {
+      "id": "lc-3475",
+      "number": "3475",
+      "title": "DNA Pattern Recognition ",
+      "slug": "dna-pattern-recognition",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String"
+      ]
+    },
+    {
       "id": "lc-3476",
       "number": "3476",
       "title": "Maximize Profit from Task Assignment",
@@ -35864,6 +40257,17 @@
       "paidOnly": true,
       "tags": [
         "Tree"
+      ]
+    },
+    {
+      "id": "lc-3482",
+      "number": "3482",
+      "title": "Analyze Organization Hierarchy",
+      "slug": "analyze-organization-hierarchy",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -36027,6 +40431,17 @@
       "tags": [
         "Greedy",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3497",
+      "number": "3497",
+      "title": "Analyze Subscription Conversion ",
+      "slug": "analyze-subscription-conversion",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -36298,6 +40713,17 @@
       "tags": [
         "Greedy",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3521",
+      "number": "3521",
+      "title": "Find Product Recommendation Pairs",
+      "slug": "find-product-recommendation-pairs",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -36672,6 +41098,17 @@
       ]
     },
     {
+      "id": "lc-3554",
+      "number": "3554",
+      "title": "Find Category Recommendation Pairs",
+      "slug": "find-category-recommendation-pairs",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
       "id": "lc-3555",
       "number": "3555",
       "title": "Smallest Subarray to Sort in Every Sliding Window",
@@ -36783,6 +41220,17 @@
       ]
     },
     {
+      "id": "lc-3564",
+      "number": "3564",
+      "title": "Seasonal Sales Analysis",
+      "slug": "seasonal-sales-analysis",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3565",
       "number": "3565",
       "title": "Sequential Grid Path Cover",
@@ -36839,6 +41287,17 @@
       "tags": [
         "Greedy",
         "Math"
+      ]
+    },
+    {
+      "id": "lc-3570",
+      "number": "3570",
+      "title": "Find Books with No Available Copies",
+      "slug": "find-books-with-no-available-copies",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -36953,6 +41412,17 @@
       ]
     },
     {
+      "id": "lc-3580",
+      "number": "3580",
+      "title": "Find Consistently Improving Employees",
+      "slug": "find-consistently-improving-employees",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3581",
       "number": "3581",
       "title": "Count Odd Letters from Number",
@@ -37009,6 +41479,17 @@
         "Graph",
         "Tree",
         "Heap"
+      ]
+    },
+    {
+      "id": "lc-3586",
+      "number": "3586",
+      "title": "Find COVID Recovery Patients",
+      "slug": "find-covid-recovery-patients",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -37182,6 +41663,17 @@
       ]
     },
     {
+      "id": "lc-3601",
+      "number": "3601",
+      "title": "Find Drivers with Improved Fuel Efficiency",
+      "slug": "find-drivers-with-improved-fuel-efficiency",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3602",
       "number": "3602",
       "title": "Hexadecimal and Hexatrigesimal Conversion",
@@ -37288,6 +41780,17 @@
       ]
     },
     {
+      "id": "lc-3611",
+      "number": "3611",
+      "title": "Find Overbooked Employees",
+      "slug": "find-overbooked-employees",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3612",
       "number": "3612",
       "title": "Process String with Special Operations I",
@@ -37341,6 +41844,17 @@
       "paidOnly": true,
       "tags": [
         "Math"
+      ]
+    },
+    {
+      "id": "lc-3617",
+      "number": "3617",
+      "title": "Find Students with Study Spiral Pattern",
+      "slug": "find-students-with-study-spiral-pattern",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "String"
       ]
     },
     {
@@ -37435,6 +41949,17 @@
       "tags": [
         "Math",
         "Two Pointers"
+      ]
+    },
+    {
+      "id": "lc-3626",
+      "number": "3626",
+      "title": "Find Stores with Inventory Imbalance",
+      "slug": "find-stores-with-inventory-imbalance",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
       ]
     },
     {
@@ -37617,6 +42142,17 @@
       ]
     },
     {
+      "id": "lc-3642",
+      "number": "3642",
+      "title": "Find Books with Polarized Opinions",
+      "slug": "find-books-with-polarized-opinions",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3643",
       "number": "3643",
       "title": "Flip Square Submatrix Vertically",
@@ -37779,6 +42315,17 @@
       "tags": [
         "Graph",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3657",
+      "number": "3657",
+      "title": "Find Loyal Customers",
+      "slug": "find-loyal-customers",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -37953,6 +42500,17 @@
       "paidOnly": true,
       "tags": [
         "Array"
+      ]
+    },
+    {
+      "id": "lc-3673",
+      "number": "3673",
+      "title": "Find Zombie Sessions",
+      "slug": "find-zombie-sessions",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -38325,6 +42883,17 @@
       ]
     },
     {
+      "id": "lc-3705",
+      "number": "3705",
+      "title": "Find Golden Hour Customers",
+      "slug": "find-golden-hour-customers",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3706",
       "number": "3706",
       "title": "Maximum Distance Between Unequal Words in Array II",
@@ -38446,6 +43015,17 @@
       "tags": [
         "Array",
         "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3716",
+      "number": "3716",
+      "title": "Find Churn Risk Customers",
+      "slug": "find-churn-risk-customers",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -39008,6 +43588,17 @@
       ]
     },
     {
+      "id": "lc-3764",
+      "number": "3764",
+      "title": "Most Common Course Pairs",
+      "slug": "most-common-course-pairs",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph"
+      ]
+    },
+    {
       "id": "lc-3765",
       "number": "3765",
       "title": "Complete Prime Number",
@@ -39341,6 +43932,17 @@
       ]
     },
     {
+      "id": "lc-3793",
+      "number": "3793",
+      "title": "Find Users with High Token Usage",
+      "slug": "find-users-with-high-token-usage",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
       "id": "lc-3794",
       "number": "3794",
       "title": "Reverse String Prefix",
@@ -39503,6 +44105,17 @@
       "tags": [
         "Graph",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3808",
+      "number": "3808",
+      "title": "Find Emotionally Consistent Users",
+      "slug": "find-emotionally-consistent-users",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
       ]
     },
     {
@@ -39777,6 +44390,18 @@
         "Tree",
         "Heap",
         "Binary Search"
+      ]
+    },
+    {
+      "id": "lc-3832",
+      "number": "3832",
+      "title": "Find Users with Persistent Behavior Patterns",
+      "slug": "find-users-with-persistent-behavior-patterns",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Bit Manipulation"
       ]
     },
     {
@@ -40742,6 +45367,1842 @@
         "Dynamic Programming",
         "Array",
         "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3916",
+      "number": "3916",
+      "title": "Number of ZigZag Arrays III",
+      "slug": "number-of-zigzag-arrays-iii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "String",
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3917",
+      "number": "3917",
+      "title": "Count Indices With Opposite Parity",
+      "slug": "count-indices-with-opposite-parity",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3918",
+      "number": "3918",
+      "title": "Sum of Primes Between Number and Its Reverse",
+      "slug": "sum-of-primes-between-number-and-its-reverse",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3919",
+      "number": "3919",
+      "title": "Minimum Cost to Move Between Indices",
+      "slug": "minimum-cost-to-move-between-indices",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3920",
+      "number": "3920",
+      "title": "Maximize Fixed Points After Deletions",
+      "slug": "maximize-fixed-points-after-deletions",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3921",
+      "number": "3921",
+      "title": "Score Validator",
+      "slug": "score-validator",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3922",
+      "number": "3922",
+      "title": "Minimum Flips to Make Binary String Coherent",
+      "slug": "minimum-flips-to-make-binary-string-coherent",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3923",
+      "number": "3923",
+      "title": "Minimum Generations to Target Point",
+      "slug": "minimum-generations-to-target-point",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3924",
+      "number": "3924",
+      "title": "Minimum Threshold Path With Limited Heavy Edges",
+      "slug": "minimum-threshold-path-with-limited-heavy-edges",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3925",
+      "number": "3925",
+      "title": "Concatenate Array With Reverse",
+      "slug": "concatenate-array-with-reverse",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3926",
+      "number": "3926",
+      "title": "Count Valid Word Occurrences",
+      "slug": "count-valid-word-occurrences",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3927",
+      "number": "3927",
+      "title": "Minimize Array Sum Using Divisible Replacements",
+      "slug": "minimize-array-sum-using-divisible-replacements",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3928",
+      "number": "3928",
+      "title": "Minimum Cost to Buy Apples II",
+      "slug": "minimum-cost-to-buy-apples-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3929",
+      "number": "3929",
+      "title": "Minimum Partition Score II",
+      "slug": "minimum-partition-score-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Dynamic Programming",
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3930",
+      "number": "3930",
+      "title": "Power Update After K-th Largest Insertion II",
+      "slug": "power-update-after-k-th-largest-insertion-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3931",
+      "number": "3931",
+      "title": "Check Adjacent Digit Differences",
+      "slug": "check-adjacent-digit-differences",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3932",
+      "number": "3932",
+      "title": "Count K-th Roots in a Range",
+      "slug": "count-k-th-roots-in-a-range",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3933",
+      "number": "3933",
+      "title": "Largest Local Values in a Matrix II",
+      "slug": "largest-local-values-in-a-matrix-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3934",
+      "number": "3934",
+      "title": "Smallest Unique Subarray",
+      "slug": "smallest-unique-subarray",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3935",
+      "number": "3935",
+      "title": "Power Update After K-th Largest Insertion I",
+      "slug": "power-update-after-k-th-largest-insertion-i",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3936",
+      "number": "3936",
+      "title": "Minimum Swaps to Move Zeros to End",
+      "slug": "minimum-swaps-to-move-zeros-to-end",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3937",
+      "number": "3937",
+      "title": "Minimum Operations to Make Array Modulo Alternating I",
+      "slug": "minimum-operations-to-make-array-modulo-alternating-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3938",
+      "number": "3938",
+      "title": "Maximum Path Intersection Sum in a Grid",
+      "slug": "maximum-path-intersection-sum-in-a-grid",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3939",
+      "number": "3939",
+      "title": "Count Non Adjacent Subsets in a Rooted Tree",
+      "slug": "count-non-adjacent-subsets-in-a-rooted-tree",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Tree",
+        "Backtracking"
+      ]
+    },
+    {
+      "id": "lc-3940",
+      "number": "3940",
+      "title": "Limit Occurrences in Sorted Array",
+      "slug": "limit-occurrences-in-sorted-array",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Binary Search",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3941",
+      "number": "3941",
+      "title": "Password Strength",
+      "slug": "password-strength",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3942",
+      "number": "3942",
+      "title": "Minimum Operations to Sort a Permutation",
+      "slug": "minimum-operations-to-sort-a-permutation",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Backtracking",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3943",
+      "number": "3943",
+      "title": "Number of Pairs After Increment",
+      "slug": "number-of-pairs-after-increment",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3944",
+      "number": "3944",
+      "title": "Minimum Operations to Make Array Modulo Alternating II",
+      "slug": "minimum-operations-to-make-array-modulo-alternating-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3945",
+      "number": "3945",
+      "title": "Digit Frequency Score",
+      "slug": "digit-frequency-score",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3946",
+      "number": "3946",
+      "title": "Maximum Number of Items From Sale I",
+      "slug": "maximum-number-of-items-from-sale-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3947",
+      "number": "3947",
+      "title": "Maximum Number of Items From Sale II",
+      "slug": "maximum-number-of-items-from-sale-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3948",
+      "number": "3948",
+      "title": "Lexicographically Maximum MEX Array",
+      "slug": "lexicographically-maximum-mex-array",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3949",
+      "number": "3949",
+      "title": "Subtree Inversion Sum II",
+      "slug": "subtree-inversion-sum-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Graph",
+        "Tree",
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3950",
+      "number": "3950",
+      "title": "Exactly One Consecutive Set Bits Pair",
+      "slug": "exactly-one-consecutive-set-bits-pair",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3951",
+      "number": "3951",
+      "title": "Minimum Energy to Maintain Brightness",
+      "slug": "minimum-energy-to-maintain-brightness",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3952",
+      "number": "3952",
+      "title": "Maximum Total Value of Covered Indices",
+      "slug": "maximum-total-value-of-covered-indices",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3953",
+      "number": "3953",
+      "title": "Maximum Score with Co-Prime Element",
+      "slug": "maximum-score-with-co-prime-element",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3954",
+      "number": "3954",
+      "title": "Sum of Compatible Numbers in Range I",
+      "slug": "sum-of-compatible-numbers-in-range-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3955",
+      "number": "3955",
+      "title": "Valid Binary Strings With Cost Limit",
+      "slug": "valid-binary-strings-with-cost-limit",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String"
+      ]
+    },
+    {
+      "id": "lc-3956",
+      "number": "3956",
+      "title": "Maximum Sum of M Non-Overlapping Subarrays I",
+      "slug": "maximum-sum-of-m-non-overlapping-subarrays-i",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3957",
+      "number": "3957",
+      "title": "Maximum Sum of M Non-Overlapping Subarrays II",
+      "slug": "maximum-sum-of-m-non-overlapping-subarrays-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3958",
+      "number": "3958",
+      "title": "Minimum Cost to Split into Ones II",
+      "slug": "minimum-cost-to-split-into-ones-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3959",
+      "number": "3959",
+      "title": "Check Good Integer",
+      "slug": "check-good-integer",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3960",
+      "number": "3960",
+      "title": "Frequency Balance Subarray",
+      "slug": "frequency-balance-subarray",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3961",
+      "number": "3961",
+      "title": "Maximize Sum of Device Ratings",
+      "slug": "maximize-sum-of-device-ratings",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3962",
+      "number": "3962",
+      "title": "Maximum Subarray Sum After at Most K Swaps",
+      "slug": "maximum-subarray-sum-after-at-most-k-swaps",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3963",
+      "number": "3963",
+      "title": "Create Grid With Exactly One Path",
+      "slug": "create-grid-with-exactly-one-path",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Graph"
+      ]
+    },
+    {
+      "id": "lc-3964",
+      "number": "3964",
+      "title": "Minimum Lights to Illuminate a Road",
+      "slug": "minimum-lights-to-illuminate-a-road",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3965",
+      "number": "3965",
+      "title": "Finish Time of Tasks I",
+      "slug": "finish-time-of-tasks-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3966",
+      "number": "3966",
+      "title": "Count Good Integers in a Range",
+      "slug": "count-good-integers-in-a-range",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3967",
+      "number": "3967",
+      "title": "Finish Time of Tasks II",
+      "slug": "finish-time-of-tasks-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3968",
+      "number": "3968",
+      "title": "Maximum Manhattan Distance After All Moves",
+      "slug": "maximum-manhattan-distance-after-all-moves",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3969",
+      "number": "3969",
+      "title": "Valid Subarrays With Matching Sum Digits I",
+      "slug": "valid-subarrays-with-matching-sum-digits-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3970",
+      "number": "3970",
+      "title": "Shortest Path With At Most K Consecutive Identical Characters",
+      "slug": "shortest-path-with-at-most-k-consecutive-identical-characters",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3971",
+      "number": "3971",
+      "title": "Maximum Total Value",
+      "slug": "maximum-total-value",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3972",
+      "number": "3972",
+      "title": "Valid Subarrays With Matching Sum Digits II",
+      "slug": "valid-subarrays-with-matching-sum-digits-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3973",
+      "number": "3973",
+      "title": "Distinct Gate Paths to LCA",
+      "slug": "distinct-gate-paths-to-lca",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Graph"
+      ]
+    },
+    {
+      "id": "lc-3974",
+      "number": "3974",
+      "title": "Maximum Total Sum of K Selected Elements",
+      "slug": "maximum-total-sum-of-k-selected-elements",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3975",
+      "number": "3975",
+      "title": "Filter Occupied Intervals",
+      "slug": "filter-occupied-intervals",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3976",
+      "number": "3976",
+      "title": "Maximum Subarray Sum After Multiplier",
+      "slug": "maximum-subarray-sum-after-multiplier",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3977",
+      "number": "3977",
+      "title": "Minimum Time to Reach Target With Limited Power",
+      "slug": "minimum-time-to-reach-target-with-limited-power",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3978",
+      "number": "3978",
+      "title": "Unique Middle Element",
+      "slug": "unique-middle-element",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3979",
+      "number": "3979",
+      "title": "Maximum Valid Pair Sum",
+      "slug": "maximum-valid-pair-sum",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3980",
+      "number": "3980",
+      "title": "Minimum Operations to Transform Binary String",
+      "slug": "minimum-operations-to-transform-binary-string",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3981",
+      "number": "3981",
+      "title": "Count Distinct Ways to Form Target from Two Strings",
+      "slug": "count-distinct-ways-to-form-target-from-two-strings",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3982",
+      "number": "3982",
+      "title": "Sum of Integers with Maximum Digit Range",
+      "slug": "sum-of-integers-with-maximum-digit-range",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3983",
+      "number": "3983",
+      "title": "Subsequence After One Replacement",
+      "slug": "subsequence-after-one-replacement",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming"
+      ]
+    },
+    {
+      "id": "lc-3984",
+      "number": "3984",
+      "title": "Divisible Game",
+      "slug": "divisible-game",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-3985",
+      "number": "3985",
+      "title": "Palindromic Subarray Sum",
+      "slug": "palindromic-subarray-sum",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-3986",
+      "number": "3986",
+      "title": "Number of Elapsed Seconds Between Two Times",
+      "slug": "number-of-elapsed-seconds-between-two-times",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3987",
+      "number": "3987",
+      "title": "Minimum Total Cost to Process All Elements",
+      "slug": "minimum-total-cost-to-process-all-elements",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3988",
+      "number": "3988",
+      "title": "Create Grid With Exactly K Paths I",
+      "slug": "create-grid-with-exactly-k-paths-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph"
+      ]
+    },
+    {
+      "id": "lc-3989",
+      "number": "3989",
+      "title": "Maximum Consistent Columns in a Grid",
+      "slug": "maximum-consistent-columns-in-a-grid",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3990",
+      "number": "3990",
+      "title": "Create Grid With Exactly K Paths II",
+      "slug": "create-grid-with-exactly-k-paths-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Graph"
+      ]
+    },
+    {
+      "id": "lc-3991",
+      "number": "3991",
+      "title": "Sort Array Using Prefix Reversals",
+      "slug": "sort-array-using-prefix-reversals",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3992",
+      "number": "3992",
+      "title": "Rearrange String to Avoid Character Pair",
+      "slug": "rearrange-string-to-avoid-character-pair",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "String"
+      ]
+    },
+    {
+      "id": "lc-3993",
+      "number": "3993",
+      "title": "Maximum Value of an Alternating Sequence",
+      "slug": "maximum-value-of-an-alternating-sequence",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3994",
+      "number": "3994",
+      "title": "Minimum Adjacent Swaps to Partition Array",
+      "slug": "minimum-adjacent-swaps-to-partition-array",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3995",
+      "number": "3995",
+      "title": "Minimum Cost to Convert String III",
+      "slug": "minimum-cost-to-convert-string-iii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3996",
+      "number": "3996",
+      "title": "Even Number of Knight Moves",
+      "slug": "even-number-of-knight-moves",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-3997",
+      "number": "3997",
+      "title": "Count Dominant Nodes in a Binary Tree",
+      "slug": "count-dominant-nodes-in-a-binary-tree",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Tree",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-3998",
+      "number": "3998",
+      "title": "Transform Binary String Using Subsequence Sort",
+      "slug": "transform-binary-string-using-subsequence-sort",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-3999",
+      "number": "3999",
+      "title": "Minimum Number of String Groups Through Transformations",
+      "slug": "minimum-number-of-string-groups-through-transformations",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "String",
+        "Greedy",
+        "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4000",
+      "number": "4000",
+      "title": "Largest Integer With Given Digit Sum",
+      "slug": "largest-integer-with-given-digit-sum",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4001",
+      "number": "4001",
+      "title": "Aggregate Two Time Series",
+      "slug": "aggregate-two-time-series",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4002",
+      "number": "4002",
+      "title": "Count Valid Sequences",
+      "slug": "count-valid-sequences",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4003",
+      "number": "4003",
+      "title": "Minimum Cost Path with Alternating Directions III",
+      "slug": "minimum-cost-path-with-alternating-directions-iii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4004",
+      "number": "4004",
+      "title": "Minimum Moves to Balance Circular Array II",
+      "slug": "minimum-moves-to-balance-circular-array-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4005",
+      "number": "4005",
+      "title": "Minimum Operations to Make Array Equal III",
+      "slug": "minimum-operations-to-make-array-equal-iii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4006",
+      "number": "4006",
+      "title": "Count Valid Prefixes",
+      "slug": "count-valid-prefixes",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4007",
+      "number": "4007",
+      "title": "Widest Possible Fence",
+      "slug": "widest-possible-fence",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4008",
+      "number": "4008",
+      "title": "Minimum Initial Strength to Defeat All Monsters",
+      "slug": "minimum-initial-strength-to-defeat-all-monsters",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4009",
+      "number": "4009",
+      "title": "Minimum Possible Maximum Waiting Time",
+      "slug": "minimum-possible-maximum-waiting-time",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4010",
+      "number": "4010",
+      "title": "Maximize Pair Strength Using GCD",
+      "slug": "maximize-pair-strength-using-gcd",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4011",
+      "number": "4011",
+      "title": "Count Subarrays With Even Odd Ratio I",
+      "slug": "count-subarrays-with-even-odd-ratio-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4012",
+      "number": "4012",
+      "title": "Count of Unfinished Tasks After Each Shift",
+      "slug": "count-of-unfinished-tasks-after-each-shift",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4013",
+      "number": "4013",
+      "title": "Count Subarrays With Even Odd Ratio II",
+      "slug": "count-subarrays-with-even-odd-ratio-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4014",
+      "number": "4014",
+      "title": "Minimum Total Price After Applying Discounts",
+      "slug": "minimum-total-price-after-applying-discounts",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4015",
+      "number": "4015",
+      "title": "Weighted Sum of a Tree",
+      "slug": "weighted-sum-of-a-tree",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Tree",
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4016",
+      "number": "4016",
+      "title": "Maximum Area of Two Non-Overlapping Square Submatrices",
+      "slug": "maximum-area-of-two-non-overlapping-square-submatrices",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4017",
+      "number": "4017",
+      "title": "Peaks in Array II",
+      "slug": "peaks-in-array-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4018",
+      "number": "4018",
+      "title": "Total Sum of Interaction Cost in Tree Groups II",
+      "slug": "total-sum-of-interaction-cost-in-tree-groups-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Graph",
+        "Tree",
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4019",
+      "number": "4019",
+      "title": "Merge Close Characters II",
+      "slug": "merge-close-characters-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4020",
+      "number": "4020",
+      "title": "Elevator Requests I",
+      "slug": "elevator-requests-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4021",
+      "number": "4021",
+      "title": "Minimum Operations to Make a Rotated Palindrome I",
+      "slug": "minimum-operations-to-make-a-rotated-palindrome-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "String",
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4022",
+      "number": "4022",
+      "title": "K-th Digit in Infinite String",
+      "slug": "k-th-digit-in-infinite-string",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "String"
+      ]
+    },
+    {
+      "id": "lc-4023",
+      "number": "4023",
+      "title": "Elevator Requests II",
+      "slug": "elevator-requests-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4024",
+      "number": "4024",
+      "title": "Nearest Available Drone",
+      "slug": "nearest-available-drone",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4025",
+      "number": "4025",
+      "title": "Minimize the Maximum Waiting Time at Synchronized Traffic Lights",
+      "slug": "minimize-the-maximum-waiting-time-at-synchronized-traffic-lights",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4026",
+      "number": "4026",
+      "title": "Maximum Gap Between Stations",
+      "slug": "maximum-gap-between-stations",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4027",
+      "number": "4027",
+      "title": "Elevator Requests III",
+      "slug": "elevator-requests-iii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4028",
+      "number": "4028",
+      "title": "Minimum Operations to Make a Rotated Palindrome II",
+      "slug": "minimum-operations-to-make-a-rotated-palindrome-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Dynamic Programming",
+        "String",
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4029",
+      "number": "4029",
+      "title": "Elevator Requests IV",
+      "slug": "elevator-requests-iv",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4030",
+      "number": "4030",
+      "title": "Check ASCII Palindromic",
+      "slug": "check-ascii-palindromic",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4031",
+      "number": "4031",
+      "title": "Find All Numbers Disappeared in an Array II",
+      "slug": "find-all-numbers-disappeared-in-an-array-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4032",
+      "number": "4032",
+      "title": "Longest Subarray With at Most K Distinct Prime Factors",
+      "slug": "longest-subarray-with-at-most-k-distinct-prime-factors",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "Array",
+        "Math",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4033",
+      "number": "4033",
+      "title": "Valid K-Unique Subarrays I",
+      "slug": "valid-k-unique-subarrays-i",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4034",
+      "number": "4034",
+      "title": "Minimum Bishop Moves to Reach Target",
+      "slug": "minimum-bishop-moves-to-reach-target",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4035",
+      "number": "4035",
+      "title": "Maximum Valid Split Positions I",
+      "slug": "maximum-valid-split-positions-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4036",
+      "number": "4036",
+      "title": "Lexicographically Largest String After Pair Transformations",
+      "slug": "lexicographically-largest-string-after-pair-transformations",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "String",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4037",
+      "number": "4037",
+      "title": "Maximum Valid Split Positions II",
+      "slug": "maximum-valid-split-positions-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4038",
+      "number": "4038",
+      "title": "Count Integers Appearing in a Single Block",
+      "slug": "count-integers-appearing-in-a-single-block",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4039",
+      "number": "4039",
+      "title": "Sum of Decoded Numbers",
+      "slug": "sum-of-decoded-numbers",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4040",
+      "number": "4040",
+      "title": "Minimum Operations to Form Subset Sum I",
+      "slug": "minimum-operations-to-form-subset-sum-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy",
+        "Backtracking",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4041",
+      "number": "4041",
+      "title": "Minimum Operations to Form Subset Sum II",
+      "slug": "minimum-operations-to-form-subset-sum-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy",
+        "Backtracking",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4042",
+      "number": "4042",
+      "title": "Valid K-Unique Subarrays II",
+      "slug": "valid-k-unique-subarrays-ii",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4043",
+      "number": "4043",
+      "title": "Count Rotations With Exactly K Equal Adjacent Pairs",
+      "slug": "count-rotations-with-exactly-k-equal-adjacent-pairs",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4044",
+      "number": "4044",
+      "title": "Count Good Cyclic Rotations",
+      "slug": "count-good-cyclic-rotations",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4045",
+      "number": "4045",
+      "title": "Count Robot Groups",
+      "slug": "count-robot-groups",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4046",
+      "number": "4046",
+      "title": "Minimum Cost Path With At Most K Turns",
+      "slug": "minimum-cost-path-with-at-most-k-turns",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4047",
+      "number": "4047",
+      "title": "Minimum Operations to Make XOR of All Elements Zero",
+      "slug": "minimum-operations-to-make-xor-of-all-elements-zero",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4048",
+      "number": "4048",
+      "title": "Count Values With Equally Spaced Occurrences I",
+      "slug": "count-values-with-equally-spaced-occurrences-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4049",
+      "number": "4049",
+      "title": "Count Values With Equally Spaced Occurrences II",
+      "slug": "count-values-with-equally-spaced-occurrences-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4050",
+      "number": "4050",
+      "title": "Minimum Days to Score Exactly N Points",
+      "slug": "minimum-days-to-score-exactly-n-points",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4051",
+      "number": "4051",
+      "title": "Count Subarrays with Distant Sums",
+      "slug": "count-subarrays-with-distant-sums",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4052",
+      "number": "4052",
+      "title": "Cyclically Shift Rows and Columns",
+      "slug": "cyclically-shift-rows-and-columns",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4053",
+      "number": "4053",
+      "title": "Minimum Operations to Make Every Element Palindromic",
+      "slug": "minimum-operations-to-make-every-element-palindromic",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4054",
+      "number": "4054",
+      "title": "Count Shadow Pairs I",
+      "slug": "count-shadow-pairs-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4055",
+      "number": "4055",
+      "title": "Count Shadow Pairs II",
+      "slug": "count-shadow-pairs-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "General"
+      ]
+    },
+    {
+      "id": "lc-4056",
+      "number": "4056",
+      "title": "Number of Intersecting Interval Pairs I",
+      "slug": "number-of-intersecting-interval-pairs-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4057",
+      "number": "4057",
+      "title": "Number of Intersecting Interval Pairs II",
+      "slug": "number-of-intersecting-interval-pairs-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4058",
+      "number": "4058",
+      "title": "Maximum Pulse Value After One Subarray Rotation",
+      "slug": "maximum-pulse-value-after-one-subarray-rotation",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4059",
+      "number": "4059",
+      "title": "Lexicographically Largest Power Array",
+      "slug": "lexicographically-largest-power-array",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Graph",
+        "Array",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4060",
+      "number": "4060",
+      "title": "Count Evenly Good Integers",
+      "slug": "count-evenly-good-integers",
+      "difficulty": "Hard",
+      "paidOnly": true,
+      "tags": [
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4061",
+      "number": "4061",
+      "title": "Minimum Queen Moves to Reach Target",
+      "slug": "minimum-queen-moves-to-reach-target",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4062",
+      "number": "4062",
+      "title": "Transform Array Using Pair Operations",
+      "slug": "transform-array-using-pair-operations",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4063",
+      "number": "4063",
+      "title": "Longest Subarray Divisible by K with At Most One Negation I",
+      "slug": "longest-subarray-divisible-by-k-with-at-most-one-negation-i",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4064",
+      "number": "4064",
+      "title": "Longest Subarray Divisible by K with At Most One Negation II",
+      "slug": "longest-subarray-divisible-by-k-with-at-most-one-negation-ii",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4065",
+      "number": "4065",
+      "title": "Rearrange Array by Removing Distinct Values",
+      "slug": "rearrange-array-by-removing-distinct-values",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4066",
+      "number": "4066",
+      "title": "Maximum Equal Adjacent Pairs After at Most One Replacement",
+      "slug": "maximum-equal-adjacent-pairs-after-at-most-one-replacement",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4067",
+      "number": "4067",
+      "title": "Longest Subarray With Restricted Pair Sums",
+      "slug": "longest-subarray-with-restricted-pair-sums",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Dynamic Programming",
+        "Array"
+      ]
+    },
+    {
+      "id": "lc-4068",
+      "number": "4068",
+      "title": "Maximize Meeting Earnings with Idle Gaps",
+      "slug": "maximize-meeting-earnings-with-idle-gaps",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4069",
+      "number": "4069",
+      "title": "Best Time to Buy and Sell Stock with Cooldown II",
+      "slug": "best-time-to-buy-and-sell-stock-with-cooldown-ii",
+      "difficulty": "Medium",
+      "paidOnly": true,
+      "tags": [
+        "Bit Manipulation"
+      ]
+    },
+    {
+      "id": "lc-4070",
+      "number": "4070",
+      "title": "Minimum Rotations to Dial a Number I",
+      "slug": "minimum-rotations-to-dial-a-number-i",
+      "difficulty": "Easy",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4071",
+      "number": "4071",
+      "title": "Minimum Rotations to Dial a Number II",
+      "slug": "minimum-rotations-to-dial-a-number-ii",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Greedy",
+        "Math"
+      ]
+    },
+    {
+      "id": "lc-4072",
+      "number": "4072",
+      "title": "Maximum Alternating Subarray Sum With One Deletion",
+      "slug": "maximum-alternating-subarray-sum-with-one-deletion",
+      "difficulty": "Medium",
+      "paidOnly": false,
+      "tags": [
+        "Array",
+        "Greedy"
+      ]
+    },
+    {
+      "id": "lc-4073",
+      "number": "4073",
+      "title": "Count Good Strings",
+      "slug": "count-good-strings",
+      "difficulty": "Hard",
+      "paidOnly": false,
+      "tags": [
+        "String"
       ]
     }
   ]

@@ -1,0 +1,27 @@
+{
+  "title": "Degree of an Array",
+  "goal": "Find the shortest contiguous subarray with the same maximum frequency as the full array.",
+  "strategy": "For every value retain count, first index, and last index. Among values with the greatest count choose the shortest enclosing span.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "For every value retain count, first index, and last index. Among values with the greatest count choose the shortest enclosing span.",
+    "update": "A shortest interval achieving the degree spans a most frequent value from its first to last occurrence.",
+    "done": "A shortest interval achieving the degree spans a most frequent value from its first to last occurrence."
+  },
+  "edgeCases": [
+    "All values distinct",
+    "One repeated value",
+    "Single element"
+  ],
+  "number": "697",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

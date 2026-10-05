@@ -1,6 +1,7 @@
 // Independently designed walkthroughs. Small boundary inputs are intentional:
 // a singleton, zero, or empty result cannot be made longer without losing the case.
-export const AUTHORED_EXAMPLES = {};
+import { sequenceStoryExamples } from './sequenceStoryExamples.js';
+export const AUTHORED_EXAMPLES = Object.fromEntries(Object.entries(sequenceStoryExamples).map(([id, examples]) => [`sequence:${id}`, examples]));
 function suite(slugs, fields, rows) {
   const keys = fields.split(' ');
   const examples = rows.map(([label, ...values]) => Object.fromEntries([

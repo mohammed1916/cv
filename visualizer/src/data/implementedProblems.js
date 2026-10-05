@@ -19,6 +19,7 @@ const problemModules = import.meta.glob("../problems/**/meta.js", {
 });
 
 import { getProblemSummary } from "./problemSummaries.js";
+import { mergeCatalog } from './catalogCoverage.js';
 
 function slugFromPath(path) {
   const parts = path.split("/").filter(Boolean);
@@ -76,26 +77,5 @@ export const BASICS_PROBLEMS = [
 ];
 
 export function buildCatalogProblems(catalogProblems) {
-  return catalogProblems.map((problem) => {
-    // Catalog data uses numeric IDs while meta.js commonly stores them as
-    // strings. Normalize before lookup so existing visualizers (for example,
-    // #8 String to Integer) are not incorrectly shown as catalog-only.
-    const implemented = IMPLEMENTED_BY_NUMBER.get(String(problem.number));
-    if (!implemented) {
-      return {
-        ...problem,
-        accent: "#64748b",
-        description:
-          "Cataloged in explorer. Visualizer shell is ready; implementation can be plugged into reusable panels.",
-        component: null,
-        implemented: false,
-      };
-    }
-
-    return {
-      ...problem,
-      ...implemented,
-      implemented: true,
-    };
-  });
+  return mergeCatalog(catalogProblems, IMPLEMENTED_PROBLEMS);
 }

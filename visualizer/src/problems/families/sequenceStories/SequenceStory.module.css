@@ -1,0 +1,8 @@
+.matrix { overflow: auto; max-width: 100%; }
+.matrix caption { text-align: left; padding: 8px 0; font-weight: 700; }
+.matrix .active { background: var(--primary); color: var(--text-inverse); outline: 2px solid var(--primary); }
+.matrix .compared { outline: 2px dashed var(--primary); outline-offset: -3px; }
+.metrics { display: flex; flex-wrap: wrap; gap: 12px; }
+.metrics > div { padding: 8px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; }
+.metrics dt { font-size: .8rem; text-transform: capitalize; color: var(--text-muted); }
+.metrics dd { margin: 4px 0 0; font-weight: 700; overflow-wrap: anywhere; }

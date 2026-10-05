@@ -1,6 +1,22 @@
 {
   "checks": [
     {
+      "file": "src/problems/Problem1047/index.jsx",
+      "label": "Cascading removals across several groups"
+    },
+    {
+      "file": "src/problems/Problem1047/index.jsx",
+      "label": "Whole string disappears"
+    },
+    {
+      "file": "src/problems/Problem1047/index.jsx",
+      "label": "No adjacent duplicates"
+    },
+    {
+      "file": "src/problems/Problem1047/index.jsx",
+      "label": "Odd run leaves one"
+    },
+    {
       "file": "src/problems/Problem12/IntegerToRomanVisualizer.jsx",
       "label": "Several subtractive pairs"
     },
@@ -35,6 +51,22 @@
     {
       "file": "src/problems/Problem120/TriangleVisualizer.jsx",
       "label": "All zero"
+    },
+    {
+      "file": "src/problems/Problem1207/index.jsx",
+      "label": "Four distinct frequencies"
+    },
+    {
+      "file": "src/problems/Problem1207/index.jsx",
+      "label": "Two values share frequency"
+    },
+    {
+      "file": "src/problems/Problem1207/index.jsx",
+      "label": "One distinct value"
+    },
+    {
+      "file": "src/problems/Problem1207/index.jsx",
+      "label": "Negative and zero values"
     },
     {
       "file": "src/problems/Problem121/BestTimeBuySellStockVisualizer.jsx",
@@ -171,6 +203,22 @@
     {
       "file": "src/problems/Problem129/SumRootToLeafNumbersVisualizer.jsx",
       "label": "One-sided path"
+    },
+    {
+      "file": "src/problems/Problem1295/index.jsx",
+      "label": "Crossing decimal length boundaries"
+    },
+    {
+      "file": "src/problems/Problem1295/index.jsx",
+      "label": "Powers of ten"
+    },
+    {
+      "file": "src/problems/Problem1295/index.jsx",
+      "label": "No even digit lengths"
+    },
+    {
+      "file": "src/problems/Problem1295/index.jsx",
+      "label": "Two digits only"
     },
     {
       "file": "src/problems/Problem13/RomanToIntegerVisualizer.jsx",
@@ -447,6 +495,70 @@
     {
       "file": "src/problems/Problem142/LinkedListCycleIIVisualizer.jsx",
       "label": "Empty"
+    },
+    {
+      "file": "src/problems/Problem1431/index.jsx",
+      "label": "Children below, at, and above threshold"
+    },
+    {
+      "file": "src/problems/Problem1431/index.jsx",
+      "label": "All tied initially"
+    },
+    {
+      "file": "src/problems/Problem1431/index.jsx",
+      "label": "Exact tie with maximum"
+    },
+    {
+      "file": "src/problems/Problem1431/index.jsx",
+      "label": "One child"
+    },
+    {
+      "file": "src/problems/Problem1480/index.jsx",
+      "label": "Positive and negative contributions"
+    },
+    {
+      "file": "src/problems/Problem1480/index.jsx",
+      "label": "All zeros"
+    },
+    {
+      "file": "src/problems/Problem1480/index.jsx",
+      "label": "Negative prefixes"
+    },
+    {
+      "file": "src/problems/Problem1480/index.jsx",
+      "label": "Single value"
+    },
+    {
+      "file": "src/problems/Problem1512/index.jsx",
+      "label": "Interleaved repeated values"
+    },
+    {
+      "file": "src/problems/Problem1512/index.jsx",
+      "label": "All equal"
+    },
+    {
+      "file": "src/problems/Problem1512/index.jsx",
+      "label": "All distinct"
+    },
+    {
+      "file": "src/problems/Problem1512/index.jsx",
+      "label": "One value"
+    },
+    {
+      "file": "src/problems/Problem1672/index.jsx",
+      "label": "Different distributions of wealth"
+    },
+    {
+      "file": "src/problems/Problem1672/index.jsx",
+      "label": "Equal row totals"
+    },
+    {
+      "file": "src/problems/Problem1672/index.jsx",
+      "label": "One customer"
+    },
+    {
+      "file": "src/problems/Problem1672/index.jsx",
+      "label": "One bank"
     },
     {
       "file": "src/problems/Problem29/DivideTwoIntegers.jsx",
@@ -751,6 +863,290 @@
     {
       "file": "src/problems/Problem47/PermutationStory.jsx",
       "label": "[-1,-1,2,2]"
+    },
+    {
+      "file": "src/problems/Problem605/index.jsx",
+      "label": "Several separated planting opportunities"
+    },
+    {
+      "file": "src/problems/Problem605/index.jsx",
+      "label": "Both boundaries available"
+    },
+    {
+      "file": "src/problems/Problem605/index.jsx",
+      "label": "No flowers requested"
+    },
+    {
+      "file": "src/problems/Problem605/index.jsx",
+      "label": "Only one slot"
+    },
+    {
+      "file": "src/problems/Problem605/index.jsx",
+      "label": "Not enough space"
+    },
+    {
+      "file": "src/problems/Problem611/index.jsx",
+      "label": "Repeated sides and several valid ranges"
+    },
+    {
+      "file": "src/problems/Problem611/index.jsx",
+      "label": "Zeros cannot be sides"
+    },
+    {
+      "file": "src/problems/Problem611/index.jsx",
+      "label": "Equality is not a triangle"
+    },
+    {
+      "file": "src/problems/Problem611/index.jsx",
+      "label": "Fewer than three sides"
+    },
+    {
+      "file": "src/problems/Problem628/index.jsx",
+      "label": "Two negatives challenge positive triple"
+    },
+    {
+      "file": "src/problems/Problem628/index.jsx",
+      "label": "Exactly three negative values"
+    },
+    {
+      "file": "src/problems/Problem628/index.jsx",
+      "label": "Zero beats negative product"
+    },
+    {
+      "file": "src/problems/Problem628/index.jsx",
+      "label": "Equal maxima"
+    },
+    {
+      "file": "src/problems/Problem633/index.jsx",
+      "label": "Several pointer decisions"
+    },
+    {
+      "file": "src/problems/Problem633/index.jsx",
+      "label": "No representation"
+    },
+    {
+      "file": "src/problems/Problem633/index.jsx",
+      "label": "Zero square pair"
+    },
+    {
+      "file": "src/problems/Problem633/index.jsx",
+      "label": "Equal square pair"
+    },
+    {
+      "file": "src/problems/Problem633/index.jsx",
+      "label": "One square is zero"
+    },
+    {
+      "file": "src/problems/Problem643/index.jsx",
+      "label": "Best window lies inside the array"
+    },
+    {
+      "file": "src/problems/Problem643/index.jsx",
+      "label": "All negative"
+    },
+    {
+      "file": "src/problems/Problem643/index.jsx",
+      "label": "Window is entire input"
+    },
+    {
+      "file": "src/problems/Problem643/index.jsx",
+      "label": "Single-value windows"
+    },
+    {
+      "file": "src/problems/Problem645/index.jsx",
+      "label": "Unsorted input with distant missing slot"
+    },
+    {
+      "file": "src/problems/Problem645/index.jsx",
+      "label": "Missing first"
+    },
+    {
+      "file": "src/problems/Problem645/index.jsx",
+      "label": "Missing last"
+    },
+    {
+      "file": "src/problems/Problem645/index.jsx",
+      "label": "Smallest mismatch"
+    },
+    {
+      "file": "src/problems/Problem674/index.jsx",
+      "label": "Competing runs with a plateau"
+    },
+    {
+      "file": "src/problems/Problem674/index.jsx",
+      "label": "All equal"
+    },
+    {
+      "file": "src/problems/Problem674/index.jsx",
+      "label": "Strict descent"
+    },
+    {
+      "file": "src/problems/Problem674/index.jsx",
+      "label": "One value"
+    },
+    {
+      "file": "src/problems/Problem697/index.jsx",
+      "label": "Equal frequencies with different spans"
+    },
+    {
+      "file": "src/problems/Problem697/index.jsx",
+      "label": "All values distinct"
+    },
+    {
+      "file": "src/problems/Problem697/index.jsx",
+      "label": "One repeated value"
+    },
+    {
+      "file": "src/problems/Problem697/index.jsx",
+      "label": "Single element"
+    },
+    {
+      "file": "src/problems/Problem724/index.jsx",
+      "label": "Pivot after a long prefix"
+    },
+    {
+      "file": "src/problems/Problem724/index.jsx",
+      "label": "Left boundary pivot"
+    },
+    {
+      "file": "src/problems/Problem724/index.jsx",
+      "label": "Several pivots: take first"
+    },
+    {
+      "file": "src/problems/Problem724/index.jsx",
+      "label": "No pivot"
+    },
+    {
+      "file": "src/problems/Problem724/index.jsx",
+      "label": "Negative values"
+    },
+    {
+      "file": "src/problems/Problem747/index.jsx",
+      "label": "Dominant value near the end"
+    },
+    {
+      "file": "src/problems/Problem747/index.jsx",
+      "label": "Exactly twice"
+    },
+    {
+      "file": "src/problems/Problem747/index.jsx",
+      "label": "Unique largest but not dominant"
+    },
+    {
+      "file": "src/problems/Problem747/index.jsx",
+      "label": "Zeros beside maximum"
+    },
+    {
+      "file": "src/problems/Problem766/index.jsx",
+      "label": "Several parallel diagonals"
+    },
+    {
+      "file": "src/problems/Problem766/index.jsx",
+      "label": "Late mismatch"
+    },
+    {
+      "file": "src/problems/Problem766/index.jsx",
+      "label": "Single row"
+    },
+    {
+      "file": "src/problems/Problem766/index.jsx",
+      "label": "Single column"
+    },
+    {
+      "file": "src/problems/Problem832/index.jsx",
+      "label": "Asymmetric image with both bit values"
+    },
+    {
+      "file": "src/problems/Problem832/index.jsx",
+      "label": "All zeros"
+    },
+    {
+      "file": "src/problems/Problem832/index.jsx",
+      "label": "Single bit"
+    },
+    {
+      "file": "src/problems/Problem832/index.jsx",
+      "label": "Odd center bit"
+    },
+    {
+      "file": "src/problems/Problem867/index.jsx",
+      "label": "Wide rectangle"
+    },
+    {
+      "file": "src/problems/Problem867/index.jsx",
+      "label": "Single row becomes column"
+    },
+    {
+      "file": "src/problems/Problem867/index.jsx",
+      "label": "Single column becomes row"
+    },
+    {
+      "file": "src/problems/Problem867/index.jsx",
+      "label": "Single cell"
+    },
+    {
+      "file": "src/problems/Problem896/index.jsx",
+      "label": "Plateaus inside an increasing sequence"
+    },
+    {
+      "file": "src/problems/Problem896/index.jsx",
+      "label": "Direction changes late"
+    },
+    {
+      "file": "src/problems/Problem896/index.jsx",
+      "label": "Only equal values"
+    },
+    {
+      "file": "src/problems/Problem896/index.jsx",
+      "label": "Decreasing with equality"
+    },
+    {
+      "file": "src/problems/Problem905/index.jsx",
+      "label": "Alternating and repeated parity values"
+    },
+    {
+      "file": "src/problems/Problem905/index.jsx",
+      "label": "All odd"
+    },
+    {
+      "file": "src/problems/Problem905/index.jsx",
+      "label": "All even"
+    },
+    {
+      "file": "src/problems/Problem905/index.jsx",
+      "label": "Singleton"
+    },
+    {
+      "file": "src/problems/Problem922/index.jsx",
+      "label": "Shuffled balanced parity"
+    },
+    {
+      "file": "src/problems/Problem922/index.jsx",
+      "label": "Already arranged"
+    },
+    {
+      "file": "src/problems/Problem922/index.jsx",
+      "label": "All even values first"
+    },
+    {
+      "file": "src/problems/Problem922/index.jsx",
+      "label": "Two values reversed"
+    },
+    {
+      "file": "src/problems/Problem977/index.jsx",
+      "label": "Negative and positive endpoints compete"
+    },
+    {
+      "file": "src/problems/Problem977/index.jsx",
+      "label": "All negative"
+    },
+    {
+      "file": "src/problems/Problem977/index.jsx",
+      "label": "Equal magnitudes"
+    },
+    {
+      "file": "src/problems/Problem977/index.jsx",
+      "label": "Single zero"
     },
     {
       "file": "src/components/shared/NextPointersWorkspace.jsx",

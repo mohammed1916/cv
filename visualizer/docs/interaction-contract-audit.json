@@ -1,6 +1,6 @@
 {
-  "componentsScanned": 1447,
-  "controls": 615,
+  "componentsScanned": 1472,
+  "controls": 616,
   "splitHandlers": [
     "problems\\Problem578\\HighestAnswerRateVisualizer.jsx"
   ],
@@ -180,7 +180,6 @@
     "problems\\Problem575\\DistributeCandiesVisualizer.jsx",
     "problems\\Problem577\\EmployeeFreeTimeVisualizer.jsx",
     "problems\\Problem578\\HighestAnswerRateVisualizer.jsx",
-    "problems\\Problem579\\CumulativeSalaryVisualizer.jsx",
     "problems\\Problem580\\CountStudentsVisualizer.jsx",
     "problems\\Problem581\\ShortestUnsortedVisualizer.jsx",
     "problems\\Problem583\\DeleteOperationVisualizer.jsx"

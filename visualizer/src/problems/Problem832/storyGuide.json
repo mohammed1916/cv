@@ -1,0 +1,27 @@
+{
+  "title": "Flipping an Image",
+  "goal": "Reverse each image row and invert every binary pixel.",
+  "strategy": "For destination column c, read the mirrored source column and invert that bit exactly once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "For destination column c, read the mirrored source column and invert that bit exactly once.",
+    "update": "Each row was reversed and each bit was inverted.",
+    "done": "Each row was reversed and each bit was inverted."
+  },
+  "edgeCases": [
+    "All zeros",
+    "Single bit",
+    "Odd center bit"
+  ],
+  "number": "832",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

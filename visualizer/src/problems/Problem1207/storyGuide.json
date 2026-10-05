@@ -1,0 +1,27 @@
+{
+  "title": "Unique Number of Occurrences",
+  "goal": "Decide whether all distinct array values have distinct occurrence counts.",
+  "strategy": "Count each value first. Then check whether a frequency is claimed by more than one value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Count each value first. Then check whether a frequency is claimed by more than one value.",
+    "update": "No two distinct values share the same frequency.",
+    "done": "No two distinct values share the same frequency."
+  },
+  "edgeCases": [
+    "Two values share frequency",
+    "One distinct value",
+    "Negative and zero values"
+  ],
+  "number": "1207",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}
