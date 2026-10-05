@@ -1,0 +1,27 @@
+{
+  "number": "860",
+  "title": "Lemonade Change",
+  "goal": "Serve every customer with exact change.",
+  "strategy": "Keep fives available: a ten plus a five is preferable to three fives when changing twenty.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Serve every customer with exact change.",
+    "inspect": "Keep fives available: a ten plus a five is preferable to three fives when changing twenty.",
+    "update": "Keep fives available: a ten plus a five is preferable to three fives when changing twenty.",
+    "done": "Serve every customer with exact change."
+  },
+  "edgeCases": [
+    "First customer needs unavailable change",
+    "Three fives make change",
+    "Too few fives after earlier sale"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

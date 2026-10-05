@@ -1,0 +1,27 @@
+{
+  "number": "933",
+  "title": "Number of Recent Calls",
+  "goal": "Count requests in each inclusive trailing 3000-unit window.",
+  "strategy": "Increasing timestamps let the oldest-valid pointer move only forward. A request exactly 3000 units old still counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count requests in each inclusive trailing 3000-unit window.",
+    "inspect": "Increasing timestamps let the oldest-valid pointer move only forward. A request exactly 3000 units old still counts.",
+    "update": "Increasing timestamps let the oldest-valid pointer move only forward. A request exactly 3000 units old still counts.",
+    "done": "Count requests in each inclusive trailing 3000-unit window."
+  },
+  "edgeCases": [
+    "Exact boundary stays",
+    "Large gaps remove every prior call",
+    "One call"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

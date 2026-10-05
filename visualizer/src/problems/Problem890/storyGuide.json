@@ -1,0 +1,27 @@
+{
+  "number": "890",
+  "title": "Find and Replace Pattern",
+  "goal": "Select words having exactly the pattern repetition structure.",
+  "strategy": "A one-way map is insufficient: two pattern letters must not collapse into the same word letter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Select words having exactly the pattern repetition structure.",
+    "inspect": "A one-way map is insufficient: two pattern letters must not collapse into the same word letter.",
+    "update": "A one-way map is insufficient: two pattern letters must not collapse into the same word letter.",
+    "done": "Select words having exactly the pattern repetition structure."
+  },
+  "edgeCases": [
+    "All positions distinct",
+    "Repeated single letter",
+    "One-character words"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

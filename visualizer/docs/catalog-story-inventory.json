@@ -1,5 +1,5 @@
 {
-  "routes": 696,
+  "routes": 746,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -45,6 +45,24 @@
       "checks": 3,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1002",
+      "number": "1002",
+      "title": "Find Common Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1005",
+      "number": "1005",
+      "title": "Maximize Sum Of Array After K Negations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem101",
@@ -5951,9 +5969,45 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem860",
+      "number": "860",
+      "title": "Lemonade Change",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem861",
+      "number": "861",
+      "title": "Score After Flipping Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem867",
       "number": "867",
       "title": "Transpose Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem868",
+      "number": "868",
+      "title": "Binary Gap",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem869",
+      "number": "869",
+      "title": "Reordered Power of 2",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -5996,6 +6050,42 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem881",
+      "number": "881",
+      "title": "Boats to Save People",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem883",
+      "number": "883",
+      "title": "Projection Area of 3D Shapes",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem884",
+      "number": "884",
+      "title": "Uncommon Words from Two Sentences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem888",
+      "number": "888",
+      "title": "Fair Candy Swap",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem89",
       "number": "89",
       "title": "Gray Code",
@@ -6003,6 +6093,33 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem890",
+      "number": "890",
+      "title": "Find and Replace Pattern",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem892",
+      "number": "892",
+      "title": "Surface Area of 3D Shapes",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem893",
+      "number": "893",
+      "title": "Groups of Special-Equivalent Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem896",
@@ -6017,6 +6134,24 @@
       "folder": "Problem897",
       "number": "897",
       "title": "Increasing Order Search Tree",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem898",
+      "number": "898",
+      "title": "Bitwise ORs of Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem899",
+      "number": "899",
+      "title": "Orderly Queue",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -6041,9 +6176,36 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem901",
+      "number": "901",
+      "title": "Online Stock Span",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem904",
+      "number": "904",
+      "title": "Fruit Into Baskets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem905",
       "number": "905",
       "title": "Sort Array By Parity",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem908",
+      "number": "908",
+      "title": "Smallest Range I",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -6059,6 +6221,42 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem914",
+      "number": "914",
+      "title": "X of a Kind in a Deck of Cards",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem915",
+      "number": "915",
+      "title": "Partition Array into Disjoint Intervals",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem917",
+      "number": "917",
+      "title": "Reverse Only Letters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem918",
+      "number": "918",
+      "title": "Maximum Sum Circular Subarray",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem92",
       "number": "92",
       "title": "Reverse Linked List II",
@@ -6068,9 +6266,45 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem921",
+      "number": "921",
+      "title": "Minimum Add to Make Parentheses Valid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem922",
       "number": "922",
       "title": "Sort Array By Parity II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem925",
+      "number": "925",
+      "title": "Long Pressed Name",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem926",
+      "number": "926",
+      "title": "Flip String to Monotone Increasing",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem929",
+      "number": "929",
+      "title": "Unique Email Addresses",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -6084,6 +6318,33 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem930",
+      "number": "930",
+      "title": "Binary Subarrays With Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem931",
+      "number": "931",
+      "title": "Minimum Falling Path Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem933",
+      "number": "933",
+      "title": "Number of Recent Calls",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem938",
@@ -6104,6 +6365,60 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem941",
+      "number": "941",
+      "title": "Valid Mountain Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem942",
+      "number": "942",
+      "title": "DI String Match",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem944",
+      "number": "944",
+      "title": "Delete Columns to Make Sorted",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem945",
+      "number": "945",
+      "title": "Minimum Increment to Make Array Unique",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem946",
+      "number": "946",
+      "title": "Validate Stack Sequences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem948",
+      "number": "948",
+      "title": "Bag of Tokens",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem95",
       "number": "95",
       "title": "Unique Binary Search Trees II",
@@ -6113,6 +6428,24 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem950",
+      "number": "950",
+      "title": "Reveal Cards In Increasing Order",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem953",
+      "number": "953",
+      "title": "Verifying an Alien Dictionary",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem96",
       "number": "96",
       "title": "Unique Binary Search Trees",
@@ -6120,6 +6453,24 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem961",
+      "number": "961",
+      "title": "N-Repeated Element in Size 2N Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem962",
+      "number": "962",
+      "title": "Maximum Width Ramp",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem965",
@@ -6140,9 +6491,54 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem970",
+      "number": "970",
+      "title": "Powerful Integers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem973",
+      "number": "973",
+      "title": "K Closest Points to Origin",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem974",
+      "number": "974",
+      "title": "Subarray Sums Divisible by K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem976",
+      "number": "976",
+      "title": "Largest Perimeter Triangle",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem977",
       "number": "977",
       "title": "Squares of a Sorted Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem978",
+      "number": "978",
+      "title": "Longest Turbulent Subarray",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -6158,6 +6554,33 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem983",
+      "number": "983",
+      "title": "Minimum Cost For Tickets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem985",
+      "number": "985",
+      "title": "Sum of Even Numbers After Queries",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem989",
+      "number": "989",
+      "title": "Add to Array-Form of Integer",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem99",
       "number": "99",
       "title": "Recover Binary Search Tree",
@@ -6167,6 +6590,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem991",
+      "number": "991",
+      "title": "Broken Calculator",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem994",
       "number": "994",
       "title": "Rotting Oranges",
@@ -6174,6 +6606,24 @@
       "checks": 0,
       "rules": 3,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem997",
+      "number": "997",
+      "title": "Find the Town Judge",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem999",
+      "number": "999",
+      "title": "Available Captures for Rook",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     }
   ],
   "missing": []

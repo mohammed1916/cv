@@ -1,0 +1,27 @@
+{
+  "number": "950",
+  "title": "Reveal Cards In Increasing Order",
+  "goal": "Arrange the deck so alternating reveal and rotate yields increasing cards.",
+  "strategy": "Simulate positions rather than card values. Assign sorted cards to the exact order in which slots will be revealed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Arrange the deck so alternating reveal and rotate yields increasing cards.",
+    "inspect": "Simulate positions rather than card values. Assign sorted cards to the exact order in which slots will be revealed.",
+    "update": "Simulate positions rather than card values. Assign sorted cards to the exact order in which slots will be revealed.",
+    "done": "Arrange the deck so alternating reveal and rotate yields increasing cards."
+  },
+  "edgeCases": [
+    "Two cards",
+    "One card",
+    "Initially increasing deck"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

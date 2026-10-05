@@ -3,9 +3,11 @@
 import { sequenceStoryExamples } from './sequenceStoryExamples.js';
 import { scanStoryExamples } from './scanStoryExamples.js';
 import { treeStoryExamples } from './treeStoryExamples.js';
+import { collectionStoryExamples } from './collectionStoryExamples.js';
 export const AUTHORED_EXAMPLES = Object.fromEntries(Object.entries(sequenceStoryExamples).map(([id, examples]) => [`sequence:${id}`, examples]));
 Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(scanStoryExamples).map(([id, examples]) => [`scan:${id}`, examples])));
 Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(treeStoryExamples).map(([id, examples]) => [`tree:${id}`, examples])));
+Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(collectionStoryExamples).map(([id, examples]) => [`collection:${id}`, examples])));
 function suite(slugs, fields, rows) {
   const keys = fields.split(' ');
   const examples = rows.map(([label, ...values]) => Object.fromEntries([

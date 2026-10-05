@@ -1,0 +1,27 @@
+{
+  "number": "983",
+  "title": "Minimum Cost For Tickets",
+  "goal": "Cover all travel days at minimum ticket cost.",
+  "strategy": "A pass covers a consecutive interval starting at the current uncovered day. Compare each pass plus the optimal suffix after its expiry.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Cover all travel days at minimum ticket cost.",
+    "inspect": "A pass covers a consecutive interval starting at the current uncovered day. Compare each pass plus the optimal suffix after its expiry.",
+    "update": "A pass covers a consecutive interval starting at the current uncovered day. Compare each pass plus the optimal suffix after its expiry.",
+    "done": "Cover all travel days at minimum ticket cost."
+  },
+  "edgeCases": [
+    "One travel day",
+    "A week fits one pass",
+    "Widely spaced trips"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

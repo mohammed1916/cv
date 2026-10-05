@@ -1,0 +1,27 @@
+{
+  "number": "962",
+  "title": "Maximum Width Ramp",
+  "goal": "Find the widest pair i < j with nums[i] <= nums[j].",
+  "strategy": "Only decreasing record lows can be useful left endpoints. Scan right endpoints backward to give each candidate its widest valid match.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the widest pair i < j with nums[i] <= nums[j].",
+    "inspect": "Only decreasing record lows can be useful left endpoints. Scan right endpoints backward to give each candidate its widest valid match.",
+    "update": "Only decreasing record lows can be useful left endpoints. Scan right endpoints backward to give each candidate its widest valid match.",
+    "done": "Find the widest pair i < j with nums[i] <= nums[j]."
+  },
+  "edgeCases": [
+    "Strictly descending",
+    "Equal endpoints give full width",
+    "Smallest pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

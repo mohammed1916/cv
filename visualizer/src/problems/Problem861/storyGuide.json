@@ -1,0 +1,27 @@
+{
+  "number": "861",
+  "title": "Score After Flipping Matrix",
+  "goal": "Maximize the sum of binary row values after flips.",
+  "strategy": "A leading one outweighs every lower bit combined. Fix row leaders first, then maximize each column independently.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the sum of binary row values after flips.",
+    "inspect": "A leading one outweighs every lower bit combined. Fix row leaders first, then maximize each column independently.",
+    "update": "A leading one outweighs every lower bit combined. Fix row leaders first, then maximize each column independently.",
+    "done": "Maximize the sum of binary row values after flips."
+  },
+  "edgeCases": [
+    "Single zero bit",
+    "Already maximal",
+    "Column tie needs no flip"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

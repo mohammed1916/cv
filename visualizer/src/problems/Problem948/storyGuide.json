@@ -1,0 +1,27 @@
+{
+  "number": "948",
+  "title": "Bag of Tokens",
+  "goal": "Maximize token score with the available power.",
+  "strategy": "Buy the cheapest score and sell the most expensive token for power. Record the best score before any sale lowers it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize token score with the available power.",
+    "inspect": "Buy the cheapest score and sell the most expensive token for power. Record the best score before any sale lowers it.",
+    "update": "Buy the cheapest score and sell the most expensive token for power. Record the best score before any sale lowers it.",
+    "done": "Maximize token score with the available power."
+  },
+  "edgeCases": [
+    "Cannot buy any token",
+    "Can buy them all",
+    "Single affordable token"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

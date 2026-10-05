@@ -1,0 +1,27 @@
+{
+  "number": "908",
+  "title": "Smallest Range I",
+  "goal": "Minimize the range after independently adjusting each value by at most k.",
+  "strategy": "Move the extremes toward each other. If their reachable intervals meet, the whole array can share a value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the range after independently adjusting each value by at most k.",
+    "inspect": "Move the extremes toward each other. If their reachable intervals meet, the whole array can share a value.",
+    "update": "Move the extremes toward each other. If their reachable intervals meet, the whole array can share a value.",
+    "done": "Minimize the range after independently adjusting each value by at most k."
+  },
+  "edgeCases": [
+    "Reachable intervals overlap",
+    "No adjustment allowed",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

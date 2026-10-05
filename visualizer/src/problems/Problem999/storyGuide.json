@@ -1,0 +1,27 @@
+{
+  "number": "999",
+  "title": "Available Captures for Rook",
+  "goal": "Count pawns the rook can capture in one move.",
+  "strategy": "Inspect four orthogonal rays. Only the first occupied square can matter on each ray; bishops block further sight.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pawns the rook can capture in one move.",
+    "inspect": "Inspect four orthogonal rays. Only the first occupied square can matter on each ray; bishops block further sight.",
+    "update": "Inspect four orthogonal rays. Only the first occupied square can matter on each ray; bishops block further sight.",
+    "done": "Count pawns the rook can capture in one move."
+  },
+  "edgeCases": [
+    "Rook in a corner",
+    "Only diagonal pawns",
+    "Bishops block all directions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

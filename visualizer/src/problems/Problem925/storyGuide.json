@@ -1,0 +1,27 @@
+{
+  "number": "925",
+  "title": "Long Pressed Name",
+  "goal": "Check whether repeated key presses explain the typed name.",
+  "strategy": "A typed character must consume the next name character or repeat the previous typed character. All name characters must eventually be consumed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether repeated key presses explain the typed name.",
+    "inspect": "A typed character must consume the next name character or repeat the previous typed character. All name characters must eventually be consumed.",
+    "update": "A typed character must consume the next name character or repeat the previous typed character. All name characters must eventually be consumed.",
+    "done": "Check whether repeated key presses explain the typed name."
+  },
+  "edgeCases": [
+    "Missing final letter",
+    "Unexpected character",
+    "Identical input"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

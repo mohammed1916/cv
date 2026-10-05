@@ -4,7 +4,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { definitions as sequenceDefinitions } from '../src/problems/families/sequenceStories/definitions.js';
 import { definitions as scanDefinitions } from '../src/problems/families/scanStories/definitions.js';
 import { definitions as treeDefinitions } from '../src/problems/families/treeStories/definitions.js';
-const definitions={...sequenceDefinitions,...scanDefinitions,...treeDefinitions};
+import { definitions as collectionDefinitions } from '../src/problems/families/collectionStories/definitions.js';
+const definitions={...sequenceDefinitions,...scanDefinitions,...treeDefinitions,...collectionDefinitions};
 const server=await createServer({server:{middlewareMode:true},appType:'custom',optimizeDeps:{noDiscovery:true,include:[]}});
 let frames=0;
 try {

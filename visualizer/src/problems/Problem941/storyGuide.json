@@ -1,0 +1,27 @@
+{
+  "number": "941",
+  "title": "Valid Mountain Array",
+  "goal": "Decide whether an array forms one strict mountain.",
+  "strategy": "There must be a genuine ascent followed by a genuine descent. Plateaus and second climbs break the shape.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether an array forms one strict mountain.",
+    "inspect": "There must be a genuine ascent followed by a genuine descent. Plateaus and second climbs break the shape.",
+    "update": "There must be a genuine ascent followed by a genuine descent. Plateaus and second climbs break the shape.",
+    "done": "Decide whether an array forms one strict mountain."
+  },
+  "edgeCases": [
+    "Plateau at summit",
+    "Only ascending",
+    "Multiple peaks"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

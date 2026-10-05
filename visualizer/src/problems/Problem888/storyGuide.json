@@ -1,0 +1,27 @@
+{
+  "number": "888",
+  "title": "Fair Candy Swap",
+  "goal": "Exchange one box each so both candy totals agree.",
+  "strategy": "An exchange changes the total difference by twice the size difference. Look up the required partner instead of trying all pairs.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Exchange one box each so both candy totals agree.",
+    "inspect": "An exchange changes the total difference by twice the size difference. Look up the required partner instead of trying all pairs.",
+    "update": "An exchange changes the total difference by twice the size difference. Look up the required partner instead of trying all pairs.",
+    "done": "Exchange one box each so both candy totals agree."
+  },
+  "edgeCases": [
+    "Equal totals allow equal exchange",
+    "Only one box each",
+    "Repeated box sizes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

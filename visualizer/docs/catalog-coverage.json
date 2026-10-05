@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 696,
-  "matchedCatalogRoutes": 680,
-  "remaining": 3393,
+  "routes": 746,
+  "matchedCatalogRoutes": 730,
+  "remaining": 3343,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -6112,15 +6112,15 @@
       "number": "860",
       "title": "Lemonade Change",
       "slug": "lemonade-change",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem860"
     },
     {
       "number": "861",
       "title": "Score After Flipping Matrix",
       "slug": "score-after-flipping-matrix",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem861"
     },
     {
       "number": "862",
@@ -6168,15 +6168,15 @@
       "number": "868",
       "title": "Binary Gap",
       "slug": "binary-gap",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem868"
     },
     {
       "number": "869",
       "title": "Reordered Power of 2",
       "slug": "reordered-power-of-2",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem869"
     },
     {
       "number": "870",
@@ -6259,8 +6259,8 @@
       "number": "881",
       "title": "Boats to Save People",
       "slug": "boats-to-save-people",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem881"
     },
     {
       "number": "882",
@@ -6273,15 +6273,15 @@
       "number": "883",
       "title": "Projection Area of 3D Shapes",
       "slug": "projection-area-of-3d-shapes",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem883"
     },
     {
       "number": "884",
       "title": "Uncommon Words from Two Sentences",
       "slug": "uncommon-words-from-two-sentences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem884"
     },
     {
       "number": "885",
@@ -6308,8 +6308,8 @@
       "number": "888",
       "title": "Fair Candy Swap",
       "slug": "fair-candy-swap",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem888"
     },
     {
       "number": "889",
@@ -6322,8 +6322,8 @@
       "number": "890",
       "title": "Find and Replace Pattern",
       "slug": "find-and-replace-pattern",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem890"
     },
     {
       "number": "891",
@@ -6336,15 +6336,15 @@
       "number": "892",
       "title": "Surface Area of 3D Shapes",
       "slug": "surface-area-of-3d-shapes",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem892"
     },
     {
       "number": "893",
       "title": "Groups of Special-Equivalent Strings",
       "slug": "groups-of-special-equivalent-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem893"
     },
     {
       "number": "894",
@@ -6378,15 +6378,15 @@
       "number": "898",
       "title": "Bitwise ORs of Subarrays",
       "slug": "bitwise-ors-of-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem898"
     },
     {
       "number": "899",
       "title": "Orderly Queue",
       "slug": "orderly-queue",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem899"
     },
     {
       "number": "900",
@@ -6399,8 +6399,8 @@
       "number": "901",
       "title": "Online Stock Span",
       "slug": "online-stock-span",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem901"
     },
     {
       "number": "902",
@@ -6420,8 +6420,8 @@
       "number": "904",
       "title": "Fruit Into Baskets",
       "slug": "fruit-into-baskets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem904"
     },
     {
       "number": "905",
@@ -6448,8 +6448,8 @@
       "number": "908",
       "title": "Smallest Range I",
       "slug": "smallest-range-i",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem908"
     },
     {
       "number": "909",
@@ -6490,15 +6490,15 @@
       "number": "914",
       "title": "X of a Kind in a Deck of Cards",
       "slug": "x-of-a-kind-in-a-deck-of-cards",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem914"
     },
     {
       "number": "915",
       "title": "Partition Array into Disjoint Intervals",
       "slug": "partition-array-into-disjoint-intervals",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem915"
     },
     {
       "number": "916",
@@ -6511,15 +6511,15 @@
       "number": "917",
       "title": "Reverse Only Letters",
       "slug": "reverse-only-letters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem917"
     },
     {
       "number": "918",
       "title": "Maximum Sum Circular Subarray",
       "slug": "maximum-sum-circular-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem918"
     },
     {
       "number": "919",
@@ -6539,8 +6539,8 @@
       "number": "921",
       "title": "Minimum Add to Make Parentheses Valid",
       "slug": "minimum-add-to-make-parentheses-valid",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem921"
     },
     {
       "number": "922",
@@ -6567,15 +6567,15 @@
       "number": "925",
       "title": "Long Pressed Name",
       "slug": "long-pressed-name",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem925"
     },
     {
       "number": "926",
       "title": "Flip String to Monotone Increasing",
       "slug": "flip-string-to-monotone-increasing",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem926"
     },
     {
       "number": "927",
@@ -6595,22 +6595,22 @@
       "number": "929",
       "title": "Unique Email Addresses",
       "slug": "unique-email-addresses",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem929"
     },
     {
       "number": "930",
       "title": "Binary Subarrays With Sum",
       "slug": "binary-subarrays-with-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem930"
     },
     {
       "number": "931",
       "title": "Minimum Falling Path Sum",
       "slug": "minimum-falling-path-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem931"
     },
     {
       "number": "932",
@@ -6623,8 +6623,8 @@
       "number": "933",
       "title": "Number of Recent Calls",
       "slug": "number-of-recent-calls",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem933"
     },
     {
       "number": "934",
@@ -6679,15 +6679,15 @@
       "number": "941",
       "title": "Valid Mountain Array",
       "slug": "valid-mountain-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem941"
     },
     {
       "number": "942",
       "title": "DI String Match",
       "slug": "di-string-match",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem942"
     },
     {
       "number": "943",
@@ -6700,22 +6700,22 @@
       "number": "944",
       "title": "Delete Columns to Make Sorted",
       "slug": "delete-columns-to-make-sorted",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem944"
     },
     {
       "number": "945",
       "title": "Minimum Increment to Make Array Unique",
       "slug": "minimum-increment-to-make-array-unique",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem945"
     },
     {
       "number": "946",
       "title": "Validate Stack Sequences",
       "slug": "validate-stack-sequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem946"
     },
     {
       "number": "947",
@@ -6728,8 +6728,8 @@
       "number": "948",
       "title": "Bag of Tokens",
       "slug": "bag-of-tokens",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem948"
     },
     {
       "number": "949",
@@ -6742,8 +6742,8 @@
       "number": "950",
       "title": "Reveal Cards In Increasing Order",
       "slug": "reveal-cards-in-increasing-order",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem950"
     },
     {
       "number": "951",
@@ -6763,8 +6763,8 @@
       "number": "953",
       "title": "Verifying an Alien Dictionary",
       "slug": "verifying-an-alien-dictionary",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem953"
     },
     {
       "number": "954",
@@ -6819,15 +6819,15 @@
       "number": "961",
       "title": "N-Repeated Element in Size 2N Array",
       "slug": "n-repeated-element-in-size-2n-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem961"
     },
     {
       "number": "962",
       "title": "Maximum Width Ramp",
       "slug": "maximum-width-ramp",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem962"
     },
     {
       "number": "963",
@@ -6882,8 +6882,8 @@
       "number": "970",
       "title": "Powerful Integers",
       "slug": "powerful-integers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem970"
     },
     {
       "number": "971",
@@ -6903,15 +6903,15 @@
       "number": "973",
       "title": "K Closest Points to Origin",
       "slug": "k-closest-points-to-origin",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem973"
     },
     {
       "number": "974",
       "title": "Subarray Sums Divisible by K",
       "slug": "subarray-sums-divisible-by-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem974"
     },
     {
       "number": "975",
@@ -6924,8 +6924,8 @@
       "number": "976",
       "title": "Largest Perimeter Triangle",
       "slug": "largest-perimeter-triangle",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem976"
     },
     {
       "number": "977",
@@ -6938,8 +6938,8 @@
       "number": "978",
       "title": "Longest Turbulent Subarray",
       "slug": "longest-turbulent-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem978"
     },
     {
       "number": "979",
@@ -6973,8 +6973,8 @@
       "number": "983",
       "title": "Minimum Cost For Tickets",
       "slug": "minimum-cost-for-tickets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem983"
     },
     {
       "number": "984",
@@ -6987,8 +6987,8 @@
       "number": "985",
       "title": "Sum of Even Numbers After Queries",
       "slug": "sum-of-even-numbers-after-queries",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem985"
     },
     {
       "number": "986",
@@ -7015,8 +7015,8 @@
       "number": "989",
       "title": "Add to Array-Form of Integer",
       "slug": "add-to-array-form-of-integer",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem989"
     },
     {
       "number": "990",
@@ -7029,8 +7029,8 @@
       "number": "991",
       "title": "Broken Calculator",
       "slug": "broken-calculator",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem991"
     },
     {
       "number": "992",
@@ -7071,8 +7071,8 @@
       "number": "997",
       "title": "Find the Town Judge",
       "slug": "find-the-town-judge",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem997"
     },
     {
       "number": "998",
@@ -7085,8 +7085,8 @@
       "number": "999",
       "title": "Available Captures for Rook",
       "slug": "available-captures-for-rook",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem999"
     },
     {
       "number": "1000",
@@ -7106,8 +7106,8 @@
       "number": "1002",
       "title": "Find Common Characters",
       "slug": "find-common-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1002"
     },
     {
       "number": "1003",
@@ -7128,8 +7128,8 @@
       "number": "1005",
       "title": "Maximize Sum Of Array After K Negations",
       "slug": "maximize-sum-of-array-after-k-negations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1005"
     },
     {
       "number": "1006",

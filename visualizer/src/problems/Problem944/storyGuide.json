@@ -1,0 +1,27 @@
+{
+  "number": "944",
+  "title": "Delete Columns to Make Sorted",
+  "goal": "Count columns that must be deleted to make every column sorted.",
+  "strategy": "Columns are independent. One descending adjacent row pair proves that column cannot remain.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count columns that must be deleted to make every column sorted.",
+    "inspect": "Columns are independent. One descending adjacent row pair proves that column cannot remain.",
+    "update": "Columns are independent. One descending adjacent row pair proves that column cannot remain.",
+    "done": "Count columns that must be deleted to make every column sorted."
+  },
+  "edgeCases": [
+    "All columns sorted",
+    "Only one row",
+    "Equal characters are allowed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "918",
+  "title": "Maximum Sum Circular Subarray",
+  "goal": "Find the greatest nonempty subarray sum on a circular array.",
+  "strategy": "A wrapping segment excludes an ordinary minimum-sum block. All-negative input must use the ordinary maximum to avoid an empty answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest nonempty subarray sum on a circular array.",
+    "inspect": "A wrapping segment excludes an ordinary minimum-sum block. All-negative input must use the ordinary maximum to avoid an empty answer.",
+    "update": "A wrapping segment excludes an ordinary minimum-sum block. All-negative input must use the ordinary maximum to avoid an empty answer.",
+    "done": "Find the greatest nonempty subarray sum on a circular array."
+  },
+  "edgeCases": [
+    "All negative",
+    "Whole array is best",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

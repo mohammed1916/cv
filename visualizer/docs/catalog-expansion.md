@@ -6,13 +6,36 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 696 local routes, of which 680 match catalog slugs
-or unique normalized titles. **3,393 catalog entries remain unmatched.** Route
+After the continued implementation there are 746 local routes, of which 730 match catalog slugs
+or unique normalized titles. **3,343 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
 
 ## Added in this batch
+
+### Latest continuation: 50 additional problems
+
+860, 861, 868, 869, 881, 883, 884, 888, 890, 892, 893, 898, 899, 901,
+904, 908, 914, 915, 917, 918, 921, 925, 926, 929, 930, 931, 933, 941,
+942, 944, 945, 946, 948, 950, 953, 961, 962, 970, 973, 974, 976, 978,
+983, 985, 989, 991, 997, 999, 1002, and 1005.
+
+Each adds an explicit algorithm and four independently authored examples: a
+walkthrough and three named boundary cases, for 200 new examples. These use
+the existing `SequenceStory` scene and `AlgorithmWorkspace` input, code,
+story, docking, and playback components. Per-problem outlines explain the
+goal and invariant; immutable frames expose actual decisions, matrices,
+prefix frequencies, active windows, stack contents, and accumulated results.
+These examples cover selected important boundaries, not an exhaustive proof
+of every possible edge case. No official examples or editorial prose were
+copied into these new definitions.
+
+The 50 algorithms each have an independent reference or result-invariant
+check, with 5,000 additional generated inputs and invalid-domain checks.
+Inputs without a promised valid candy exchange or array partition are
+rejected before running. Alternative valid permutations, balancing swaps,
+and equal-distance point selections are checked by their required properties.
 
 ### Continued implementation: 55 additional problems
 
@@ -49,16 +72,18 @@ with other examples; provenance does not imply mathematical uniqueness.
 
 ## Current validation
 
-- Combined family tests: 93 passing tests, including 7,900 deterministic
-  generated-input oracle comparisons across 79 algorithms (5,500 added in
+- Combined family tests: 145 passing tests, including 12,900 deterministic
+  generated-input oracle comparisons across 129 algorithms (5,000 added in
   this continuation).
-- 2,571 real scene frames render successfully on the server, including tree
+- 3,929 real scene frames render successfully on the server, including tree
   diagrams with stable IDs and independent snapshots across rewiring.
-- 12 authored-example tests and 704 narrative tests pass.
-- Catalog example audit covers 696 routes and executes 1,726 legacy traces
-  and 524 shared-workspace builds. 332 legacy helper/adapter checks remain
+- 12 authored-example tests and 754 narrative tests pass.
+- Catalog example audit covers 746 routes and executes 1,726 legacy traces
+  and 724 shared-workspace builds. 332 legacy helper/adapter checks remain
   explicitly skipped.
 - Production build passes and changed-source lint introduces no new findings.
+- Static interaction contracts report no failures across 1,578 components;
+  this checks source contracts, not actual timer or click behavior.
 - Browser layout, clicking, timer playback, and responsive behavior remain
   unverified in this continuation. Server rendering is not a substitute for
   browser interaction testing.

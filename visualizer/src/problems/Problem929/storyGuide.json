@@ -1,0 +1,27 @@
+{
+  "number": "929",
+  "title": "Unique Email Addresses",
+  "goal": "Count distinct delivery addresses under local-name normalization.",
+  "strategy": "Dots and plus suffixes affect only the local name. Domain spelling stays significant.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct delivery addresses under local-name normalization.",
+    "inspect": "Dots and plus suffixes affect only the local name. Domain spelling stays significant.",
+    "update": "Dots and plus suffixes affect only the local name. Domain spelling stays significant.",
+    "done": "Count distinct delivery addresses under local-name normalization."
+  },
+  "edgeCases": [
+    "Dots in domains remain significant",
+    "Plus suffix is ignored only locally",
+    "One ordinary address"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

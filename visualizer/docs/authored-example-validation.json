@@ -1,7 +1,7 @@
 {
-  "routes": 696,
-  "suites": 760,
-  "examples": 3263,
+  "routes": 746,
+  "suites": 810,
+  "examples": 3463,
   "traceChecks": 1726,
   "failures": [],
   "skipped": [
@@ -8471,7 +8471,7 @@
       "file": "Problem382Visualizer.jsx",
       "key": "local:382",
       "label": "Two nodes",
-      "frames": 9
+      "frames": 8
     },
     {
       "folder": "Problem382",

@@ -1,0 +1,27 @@
+{
+  "number": "931",
+  "title": "Minimum Falling Path Sum",
+  "goal": "Find the cheapest falling path from top row to bottom row.",
+  "strategy": "Each cell depends only on up-left, up, and up-right predecessors that exist. Store accumulated cost, not just the smallest local value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the cheapest falling path from top row to bottom row.",
+    "inspect": "Each cell depends only on up-left, up, and up-right predecessors that exist. Store accumulated cost, not just the smallest local value.",
+    "update": "Each cell depends only on up-left, up, and up-right predecessors that exist. Store accumulated cost, not just the smallest local value.",
+    "done": "Find the cheapest falling path from top row to bottom row."
+  },
+  "edgeCases": [
+    "Single cell",
+    "Equal costs",
+    "Boundary path wins"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "945",
+  "title": "Minimum Increment to Make Array Unique",
+  "goal": "Make every integer unique with the fewest increments.",
+  "strategy": "In sorted order, the cheapest valid next value is its original value or one beyond its assigned predecessor.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Make every integer unique with the fewest increments.",
+    "inspect": "In sorted order, the cheapest valid next value is its original value or one beyond its assigned predecessor.",
+    "update": "In sorted order, the cheapest valid next value is its original value or one beyond its assigned predecessor.",
+    "done": "Make every integer unique with the fewest increments."
+  },
+  "edgeCases": [
+    "Already unique",
+    "All equal",
+    "Single zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

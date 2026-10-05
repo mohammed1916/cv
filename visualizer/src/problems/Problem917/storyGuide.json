@@ -1,0 +1,27 @@
+{
+  "number": "917",
+  "title": "Reverse Only Letters",
+  "goal": "Reverse letters while keeping all nonletter positions fixed.",
+  "strategy": "Skip punctuation independently at each end. Swap only after both pointers identify letters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reverse letters while keeping all nonletter positions fixed.",
+    "inspect": "Skip punctuation independently at each end. Swap only after both pointers identify letters.",
+    "update": "Skip punctuation independently at each end. Swap only after both pointers identify letters.",
+    "done": "Reverse letters while keeping all nonletter positions fixed."
+  },
+  "edgeCases": [
+    "No letters",
+    "Only letters",
+    "Letters only at boundaries"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

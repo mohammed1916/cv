@@ -1,0 +1,27 @@
+{
+  "number": "868",
+  "title": "Binary Gap",
+  "goal": "Find the largest distance between adjacent set bits.",
+  "strategy": "Only the previous one is needed; zero runs create distance but do not become endpoints.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest distance between adjacent set bits.",
+    "inspect": "Only the previous one is needed; zero runs create distance but do not become endpoints.",
+    "update": "Only the previous one is needed; zero runs create distance but do not become endpoints.",
+    "done": "Find the largest distance between adjacent set bits."
+  },
+  "edgeCases": [
+    "Only one set bit",
+    "All bits set",
+    "Two widely separated bits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

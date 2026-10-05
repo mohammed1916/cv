@@ -1,0 +1,27 @@
+{
+  "number": "970",
+  "title": "Powerful Integers",
+  "goal": "List distinct sums of one power of x and one power of y within the bound.",
+  "strategy": "Generate powers directly and deduplicate sums. Base one needs an explicit stop because its powers never grow.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List distinct sums of one power of x and one power of y within the bound.",
+    "inspect": "Generate powers directly and deduplicate sums. Base one needs an explicit stop because its powers never grow.",
+    "update": "Generate powers directly and deduplicate sums. Base one needs an explicit stop because its powers never grow.",
+    "done": "List distinct sums of one power of x and one power of y within the bound."
+  },
+  "edgeCases": [
+    "Both bases one",
+    "Only one base grows",
+    "Bound too small"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "973",
+  "title": "K Closest Points to Origin",
+  "goal": "Select k points nearest the origin.",
+  "strategy": "Squared distance preserves distance order and avoids square roots. Any selection tied at the cutoff is valid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Select k points nearest the origin.",
+    "inspect": "Squared distance preserves distance order and avoids square roots. Any selection tied at the cutoff is valid.",
+    "update": "Squared distance preserves distance order and avoids square roots. Any selection tied at the cutoff is valid.",
+    "done": "Select k points nearest the origin."
+  },
+  "edgeCases": [
+    "Equal distances are valid alternatives",
+    "Include origin",
+    "Keep every point"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

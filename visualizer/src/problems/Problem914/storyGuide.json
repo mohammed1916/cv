@@ -1,0 +1,27 @@
+{
+  "number": "914",
+  "title": "X of a Kind in a Deck of Cards",
+  "goal": "Decide whether cards divide into equal-size identical-value groups of size at least two.",
+  "strategy": "Every frequency must be divisible by the chosen group size. Their greatest common divisor captures all shared divisors.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether cards divide into equal-size identical-value groups of size at least two.",
+    "inspect": "Every frequency must be divisible by the chosen group size. Their greatest common divisor captures all shared divisors.",
+    "update": "Every frequency must be divisible by the chosen group size. Their greatest common divisor captures all shared divisors.",
+    "done": "Decide whether cards divide into equal-size identical-value groups of size at least two."
+  },
+  "edgeCases": [
+    "Coprime frequencies",
+    "All cards identical",
+    "Singleton deck"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

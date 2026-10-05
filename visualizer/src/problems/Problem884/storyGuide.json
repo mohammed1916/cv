@@ -1,0 +1,27 @@
+{
+  "number": "884",
+  "title": "Uncommon Words from Two Sentences",
+  "goal": "Collect words occurring exactly once across both sentences.",
+  "strategy": "A word repeated inside one sentence is also disqualified. Count globally before choosing winners.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Collect words occurring exactly once across both sentences.",
+    "inspect": "A word repeated inside one sentence is also disqualified. Count globally before choosing winners.",
+    "update": "A word repeated inside one sentence is also disqualified. Count globally before choosing winners.",
+    "done": "Collect words occurring exactly once across both sentences."
+  },
+  "edgeCases": [
+    "Same repeated word",
+    "Disjoint short sentences",
+    "Repeated only within one sentence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

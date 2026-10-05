@@ -1,0 +1,27 @@
+{
+  "number": "991",
+  "title": "Broken Calculator",
+  "goal": "Minimize doublings and decrements needed to reach the target.",
+  "strategy": "Reverse the operations: above the start, odd targets must increase before halving; even targets benefit from halving. Below the start, finish with decrements.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize doublings and decrements needed to reach the target.",
+    "inspect": "Reverse the operations: above the start, odd targets must increase before halving; even targets benefit from halving. Below the start, finish with decrements.",
+    "update": "Reverse the operations: above the start, odd targets must increase before halving; even targets benefit from halving. Below the start, finish with decrements.",
+    "done": "Minimize doublings and decrements needed to reach the target."
+  },
+  "edgeCases": [
+    "Target already smaller",
+    "Equal start and target",
+    "Exact repeated doubling"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

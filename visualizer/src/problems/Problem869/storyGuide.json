@@ -1,0 +1,27 @@
+{
+  "number": "869",
+  "title": "Reordered Power of 2",
+  "goal": "Decide whether rearranging digits can form a power of two.",
+  "strategy": "Equal digit multisets establish a rearrangement without enumerating permutations or permitting leading zeros.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether rearranging digits can form a power of two.",
+    "inspect": "Equal digit multisets establish a rearrangement without enumerating permutations or permitting leading zeros.",
+    "update": "Equal digit multisets establish a rearrangement without enumerating permutations or permitting leading zeros.",
+    "done": "Decide whether rearranging digits can form a power of two."
+  },
+  "edgeCases": [
+    "Repeated digits cannot form a power",
+    "Already a power",
+    "Leading-zero rearrangement is not enough"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}
