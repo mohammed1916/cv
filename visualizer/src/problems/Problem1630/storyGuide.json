@@ -1,0 +1,31 @@
+{
+  "number": "1630",
+  "title": "Arithmetic Subarrays",
+  "goal": "Determine which queried subarrays can be rearranged into arithmetic progressions.",
+  "strategy": "Each query is independent. Sort its values and compare every adjacent gap with the first gap, allowing zero differences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine which queried subarrays can be rearranged into arithmetic progressions.",
+    "inspect": "Each query is independent. Sort its values and compare every adjacent gap with the first gap, allowing zero differences.",
+    "update": "Each query is independent. Sort its values and compare every adjacent gap with the first gap, allowing zero differences.",
+    "done": "Determine which queried subarrays can be rearranged into arithmetic progressions."
+  },
+  "edgeCases": [
+    "Constant subarray",
+    "Two positions always qualify",
+    "One inconsistent gap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

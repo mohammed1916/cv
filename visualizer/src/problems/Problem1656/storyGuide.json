@@ -1,0 +1,31 @@
+{
+  "number": "1656",
+  "title": "Design an Ordered Stream",
+  "goal": "Emit consecutive ordered-stream values as out-of-order insertions fill gaps.",
+  "strategy": "Store values by their one-based IDs and remember the first unread position. An insertion may release nothing or an entire waiting chain.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Emit consecutive ordered-stream values as out-of-order insertions fill gaps.",
+    "inspect": "Store values by their one-based IDs and remember the first unread position. An insertion may release nothing or an entire waiting chain.",
+    "update": "Store values by their one-based IDs and remember the first unread position. An insertion may release nothing or an entire waiting chain.",
+    "done": "Emit consecutive ordered-stream values as out-of-order insertions fill gaps."
+  },
+  "edgeCases": [
+    "First slot remains empty",
+    "Arrive in exact order",
+    "Single slot"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

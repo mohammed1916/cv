@@ -1,0 +1,31 @@
+{
+  "number": "1636",
+  "title": "Sort Array by Increasing Frequency",
+  "goal": "Sort values by increasing frequency and by decreasing value when frequencies tie.",
+  "strategy": "Count occurrences before sorting. The comparison key is the pair of frequency ascending and numeric value descending.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sort values by increasing frequency and by decreasing value when frequencies tie.",
+    "inspect": "Count occurrences before sorting. The comparison key is the pair of frequency ascending and numeric value descending.",
+    "update": "Count occurrences before sorting. The comparison key is the pair of frequency ascending and numeric value descending.",
+    "done": "Sort values by increasing frequency and by decreasing value when frequencies tie."
+  },
+  "edgeCases": [
+    "All values unique",
+    "One repeated value",
+    "Two equal-frequency groups"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

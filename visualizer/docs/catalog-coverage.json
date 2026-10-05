@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 974,
-  "matchedCatalogRoutes": 958,
-  "remaining": 3115,
+  "routes": 1049,
+  "matchedCatalogRoutes": 1033,
+  "remaining": 3040,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -11400,15 +11400,15 @@
       "number": "1615",
       "title": "Maximal Network Rank",
       "slug": "maximal-network-rank",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1615"
     },
     {
       "number": "1616",
       "title": "Split Two Strings to Make Palindrome",
       "slug": "split-two-strings-to-make-palindrome",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1616"
     },
     {
       "number": "1617",
@@ -11428,8 +11428,8 @@
       "number": "1619",
       "title": "Mean of Array After Removing Some Elements",
       "slug": "mean-of-array-after-removing-some-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1619"
     },
     {
       "number": "1620",
@@ -11463,8 +11463,8 @@
       "number": "1624",
       "title": "Largest Substring Between Two Equal Characters",
       "slug": "largest-substring-between-two-equal-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1624"
     },
     {
       "number": "1625",
@@ -11477,8 +11477,8 @@
       "number": "1626",
       "title": "Best Team With No Conflicts",
       "slug": "best-team-with-no-conflicts",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1626"
     },
     {
       "number": "1627",
@@ -11498,15 +11498,15 @@
       "number": "1629",
       "title": "Slowest Key",
       "slug": "slowest-key",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1629"
     },
     {
       "number": "1630",
       "title": "Arithmetic Subarrays",
       "slug": "arithmetic-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1630"
     },
     {
       "number": "1631",
@@ -11547,22 +11547,22 @@
       "number": "1636",
       "title": "Sort Array by Increasing Frequency",
       "slug": "sort-array-by-increasing-frequency",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1636"
     },
     {
       "number": "1637",
       "title": "Widest Vertical Area Between Two Points Containing No Points",
       "slug": "widest-vertical-area-between-two-points-containing-no-points",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1637"
     },
     {
       "number": "1638",
       "title": "Count Substrings That Differ by One Character",
       "slug": "count-substrings-that-differ-by-one-character",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1638"
     },
     {
       "number": "1639",
@@ -11575,22 +11575,22 @@
       "number": "1640",
       "title": "Check Array Formation Through Concatenation",
       "slug": "check-array-formation-through-concatenation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1640"
     },
     {
       "number": "1641",
       "title": "Count Sorted Vowel Strings",
       "slug": "count-sorted-vowel-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1641"
     },
     {
       "number": "1642",
       "title": "Furthest Building You Can Reach",
       "slug": "furthest-building-you-can-reach",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1642"
     },
     {
       "number": "1643",
@@ -11617,15 +11617,15 @@
       "number": "1646",
       "title": "Get Maximum in Generated Array",
       "slug": "get-maximum-in-generated-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1646"
     },
     {
       "number": "1647",
       "title": "Minimum Deletions to Make Character Frequencies Unique",
       "slug": "minimum-deletions-to-make-character-frequencies-unique",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1647"
     },
     {
       "number": "1648",
@@ -11659,15 +11659,15 @@
       "number": "1652",
       "title": "Defuse the Bomb",
       "slug": "defuse-the-bomb",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1652"
     },
     {
       "number": "1653",
       "title": "Minimum Deletions to Make String Balanced",
       "slug": "minimum-deletions-to-make-string-balanced",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1653"
     },
     {
       "number": "1654",
@@ -11687,22 +11687,22 @@
       "number": "1656",
       "title": "Design an Ordered Stream",
       "slug": "design-an-ordered-stream",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1656"
     },
     {
       "number": "1657",
       "title": "Determine if Two Strings Are Close",
       "slug": "determine-if-two-strings-are-close",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1657"
     },
     {
       "number": "1658",
       "title": "Minimum Operations to Reduce X to Zero",
       "slug": "minimum-operations-to-reduce-x-to-zero",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1658"
     },
     {
       "number": "1659",
@@ -11729,22 +11729,22 @@
       "number": "1662",
       "title": "Check If Two String Arrays are Equivalent",
       "slug": "check-if-two-string-arrays-are-equivalent",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1662"
     },
     {
       "number": "1663",
       "title": "Smallest String With A Given Numeric Value",
       "slug": "smallest-string-with-a-given-numeric-value",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1663"
     },
     {
       "number": "1664",
       "title": "Ways to Make a Fair Array",
       "slug": "ways-to-make-a-fair-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1664"
     },
     {
       "number": "1665",
@@ -11771,8 +11771,8 @@
       "number": "1668",
       "title": "Maximum Repeating Substring",
       "slug": "maximum-repeating-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1668"
     },
     {
       "number": "1669",
@@ -11806,8 +11806,8 @@
       "number": "1673",
       "title": "Find the Most Competitive Subsequence",
       "slug": "find-the-most-competitive-subsequence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1673"
     },
     {
       "number": "1674",
@@ -11841,22 +11841,22 @@
       "number": "1678",
       "title": "Goal Parser Interpretation",
       "slug": "goal-parser-interpretation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1678"
     },
     {
       "number": "1679",
       "title": "Max Number of K-Sum Pairs",
       "slug": "max-number-of-k-sum-pairs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1679"
     },
     {
       "number": "1680",
       "title": "Concatenation of Consecutive Binary Numbers",
       "slug": "concatenation-of-consecutive-binary-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1680"
     },
     {
       "number": "1681",
@@ -11883,22 +11883,22 @@
       "number": "1684",
       "title": "Count the Number of Consistent Strings",
       "slug": "count-the-number-of-consistent-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1684"
     },
     {
       "number": "1685",
       "title": "Sum of Absolute Differences in a Sorted Array",
       "slug": "sum-of-absolute-differences-in-a-sorted-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1685"
     },
     {
       "number": "1686",
       "title": "Stone Game VI",
       "slug": "stone-game-vi",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1686"
     },
     {
       "number": "1687",
@@ -11911,29 +11911,29 @@
       "number": "1688",
       "title": "Count of Matches in Tournament",
       "slug": "count-of-matches-in-tournament",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1688"
     },
     {
       "number": "1689",
       "title": "Partitioning Into Minimum Number Of Deci-Binary Numbers",
       "slug": "partitioning-into-minimum-number-of-deci-binary-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1689"
     },
     {
       "number": "1690",
       "title": "Stone Game VII",
       "slug": "stone-game-vii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1690"
     },
     {
       "number": "1691",
       "title": "Maximum Height by Stacking Cuboids ",
       "slug": "maximum-height-by-stacking-cuboids",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1691"
     },
     {
       "number": "1692",
@@ -11953,36 +11953,36 @@
       "number": "1694",
       "title": "Reformat Phone Number",
       "slug": "reformat-phone-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1694"
     },
     {
       "number": "1695",
       "title": "Maximum Erasure Value",
       "slug": "maximum-erasure-value",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1695"
     },
     {
       "number": "1696",
       "title": "Jump Game VI",
       "slug": "jump-game-vi",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1696"
     },
     {
       "number": "1697",
       "title": "Checking Existence of Edge Length Limited Paths",
       "slug": "checking-existence-of-edge-length-limited-paths",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1697"
     },
     {
       "number": "1698",
       "title": "Number of Distinct Substrings in a String",
       "slug": "number-of-distinct-substrings-in-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1698"
     },
     {
       "number": "1699",
@@ -11995,22 +11995,22 @@
       "number": "1700",
       "title": "Number of Students Unable to Eat Lunch",
       "slug": "number-of-students-unable-to-eat-lunch",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1700"
     },
     {
       "number": "1701",
       "title": "Average Waiting Time",
       "slug": "average-waiting-time",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1701"
     },
     {
       "number": "1702",
       "title": "Maximum Binary String After Change",
       "slug": "maximum-binary-string-after-change",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1702"
     },
     {
       "number": "1703",
@@ -12023,22 +12023,22 @@
       "number": "1704",
       "title": "Determine if String Halves Are Alike",
       "slug": "determine-if-string-halves-are-alike",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1704"
     },
     {
       "number": "1705",
       "title": "Maximum Number of Eaten Apples",
       "slug": "maximum-number-of-eaten-apples",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1705"
     },
     {
       "number": "1706",
       "title": "Where Will the Ball Fall",
       "slug": "where-will-the-ball-fall",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1706"
     },
     {
       "number": "1707",
@@ -12051,8 +12051,8 @@
       "number": "1708",
       "title": "Largest Subarray Length K",
       "slug": "largest-subarray-length-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1708"
     },
     {
       "number": "1709",
@@ -12065,15 +12065,15 @@
       "number": "1710",
       "title": "Maximum Units on a Truck",
       "slug": "maximum-units-on-a-truck",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1710"
     },
     {
       "number": "1711",
       "title": "Count Good Meals",
       "slug": "count-good-meals",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1711"
     },
     {
       "number": "1712",
@@ -12107,15 +12107,15 @@
       "number": "1716",
       "title": "Calculate Money in Leetcode Bank",
       "slug": "calculate-money-in-leetcode-bank",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1716"
     },
     {
       "number": "1717",
       "title": "Maximum Score From Removing Substrings",
       "slug": "maximum-score-from-removing-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1717"
     },
     {
       "number": "1718",
@@ -12135,8 +12135,8 @@
       "number": "1720",
       "title": "Decode XORed Array",
       "slug": "decode-xored-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1720"
     },
     {
       "number": "1721",
@@ -12149,8 +12149,8 @@
       "number": "1722",
       "title": "Minimize Hamming Distance After Swap Operations",
       "slug": "minimize-hamming-distance-after-swap-operations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1722"
     },
     {
       "number": "1723",
@@ -12170,22 +12170,22 @@
       "number": "1725",
       "title": "Number Of Rectangles That Can Form The Largest Square",
       "slug": "number-of-rectangles-that-can-form-the-largest-square",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1725"
     },
     {
       "number": "1726",
       "title": "Tuple with Same Product",
       "slug": "tuple-with-same-product",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1726"
     },
     {
       "number": "1727",
       "title": "Largest Submatrix With Rearrangements",
       "slug": "largest-submatrix-with-rearrangements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1727"
     },
     {
       "number": "1728",
@@ -12205,8 +12205,8 @@
       "number": "1730",
       "title": "Shortest Path to Get Food",
       "slug": "shortest-path-to-get-food",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1730"
     },
     {
       "number": "1731",
@@ -12219,8 +12219,8 @@
       "number": "1732",
       "title": "Find the Highest Altitude",
       "slug": "find-the-highest-altitude",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1732"
     },
     {
       "number": "1733",
@@ -12233,8 +12233,8 @@
       "number": "1734",
       "title": "Decode XORed Permutation",
       "slug": "decode-xored-permutation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1734"
     },
     {
       "number": "1735",
@@ -12247,8 +12247,8 @@
       "number": "1736",
       "title": "Latest Time by Replacing Hidden Digits",
       "slug": "latest-time-by-replacing-hidden-digits",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1736"
     },
     {
       "number": "1737",
@@ -12261,8 +12261,8 @@
       "number": "1738",
       "title": "Find Kth Largest XOR Coordinate Value",
       "slug": "find-kth-largest-xor-coordinate-value",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1738"
     },
     {
       "number": "1739",
@@ -12289,22 +12289,22 @@
       "number": "1742",
       "title": "Maximum Number of Balls in a Box",
       "slug": "maximum-number-of-balls-in-a-box",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1742"
     },
     {
       "number": "1743",
       "title": "Restore the Array From Adjacent Pairs",
       "slug": "restore-the-array-from-adjacent-pairs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1743"
     },
     {
       "number": "1744",
       "title": "Can You Eat Your Favorite Candy on Your Favorite Day?",
       "slug": "can-you-eat-your-favorite-candy-on-your-favorite-day",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1744"
     },
     {
       "number": "1745",
@@ -12317,8 +12317,8 @@
       "number": "1746",
       "title": "Maximum Subarray Sum After One Operation",
       "slug": "maximum-subarray-sum-after-one-operation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1746"
     },
     {
       "number": "1747",
@@ -12331,22 +12331,22 @@
       "number": "1748",
       "title": "Sum of Unique Elements",
       "slug": "sum-of-unique-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1748"
     },
     {
       "number": "1749",
       "title": "Maximum Absolute Sum of Any Subarray",
       "slug": "maximum-absolute-sum-of-any-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1749"
     },
     {
       "number": "1750",
       "title": "Minimum Length of String After Deleting Similar Ends",
       "slug": "minimum-length-of-string-after-deleting-similar-ends",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1750"
     },
     {
       "number": "1751",
@@ -12359,22 +12359,22 @@
       "number": "1752",
       "title": "Check if Array Is Sorted and Rotated",
       "slug": "check-if-array-is-sorted-and-rotated",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1752"
     },
     {
       "number": "1753",
       "title": "Maximum Score From Removing Stones",
       "slug": "maximum-score-from-removing-stones",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1753"
     },
     {
       "number": "1754",
       "title": "Largest Merge Of Two Strings",
       "slug": "largest-merge-of-two-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1754"
     },
     {
       "number": "1755",
@@ -12387,8 +12387,8 @@
       "number": "1756",
       "title": "Design Most Recently Used Queue",
       "slug": "design-most-recently-used-queue",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1756"
     },
     {
       "number": "1757",
@@ -12401,22 +12401,22 @@
       "number": "1758",
       "title": "Minimum Changes To Make Alternating Binary String",
       "slug": "minimum-changes-to-make-alternating-binary-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1758"
     },
     {
       "number": "1759",
       "title": "Count Number of Homogenous Substrings",
       "slug": "count-number-of-homogenous-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1759"
     },
     {
       "number": "1760",
       "title": "Minimum Limit of Balls in a Bag",
       "slug": "minimum-limit-of-balls-in-a-bag",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1760"
     },
     {
       "number": "1761",

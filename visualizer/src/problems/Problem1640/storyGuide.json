@@ -1,0 +1,31 @@
+{
+  "number": "1640",
+  "title": "Check Array Formation Through Concatenation",
+  "goal": "Decide whether whole pieces can be reordered to form the target array.",
+  "strategy": "Values are distinct, so the next target value uniquely identifies its piece. Match that whole piece without changing its internal order before moving to the next one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether whole pieces can be reordered to form the target array.",
+    "inspect": "Values are distinct, so the next target value uniquely identifies its piece. Match that whole piece without changing its internal order before moving to the next one.",
+    "update": "Values are distinct, so the next target value uniquely identifies its piece. Match that whole piece without changing its internal order before moving to the next one.",
+    "done": "Decide whether whole pieces can be reordered to form the target array."
+  },
+  "edgeCases": [
+    "Internal piece order cannot change",
+    "Missing target value",
+    "One whole matching piece"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

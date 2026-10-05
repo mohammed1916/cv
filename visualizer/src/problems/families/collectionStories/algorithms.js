@@ -1,3 +1,5 @@
+import { advanceSolvers } from './expansionAdvanceAlgorithms.js';
+import { progressSolvers } from './expansionProgressAlgorithms.js';
 import { continuingSolvers } from './expansionNextAlgorithms.js';
 import { nextSolvers } from './nextAlgorithms.js';
 import { expansionSolvers } from './expansionAlgorithms.js';
@@ -15,6 +17,8 @@ export const solvers = {
   ...moreSolvers,
   ...laterSolvers,
 ...continuingSolvers,
+...progressSolvers,
+...advanceSolvers,
   860({bills}, emit) {
     let five=0,ten=0;
     for(let i=0;i<bills.length;i++) { const bill=bills[i];let possible=true;

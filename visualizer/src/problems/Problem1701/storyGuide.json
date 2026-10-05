@@ -1,0 +1,31 @@
+{
+  "number": "1701",
+  "title": "Average Waiting Time",
+  "goal": "Compute average waiting time for customers served by one cook in arrival order.",
+  "strategy": "Each preparation starts at the later of the arrival and previous completion. Waiting includes both queue delay and the customer own cooking time.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute average waiting time for customers served by one cook in arrival order.",
+    "inspect": "Each preparation starts at the later of the arrival and previous completion. Waiting includes both queue delay and the customer own cooking time.",
+    "update": "Each preparation starts at the later of the arrival and previous completion. Waiting includes both queue delay and the customer own cooking time.",
+    "done": "Compute average waiting time for customers served by one cook in arrival order."
+  },
+  "edgeCases": [
+    "Customers arrive together",
+    "Cook is always idle on arrival",
+    "Single customer"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

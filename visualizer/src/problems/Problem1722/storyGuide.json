@@ -1,0 +1,31 @@
+{
+  "number": "1722",
+  "title": "Minimize Hamming Distance After Swap Operations",
+  "goal": "Minimize Hamming distance using any number of allowed index swaps.",
+  "strategy": "Swap edges connect freely permutable components. For each component, match target values against its source multiset; unmatched demand is unavoidable mismatch.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize Hamming distance using any number of allowed index swaps.",
+    "inspect": "Swap edges connect freely permutable components. For each component, match target values against its source multiset; unmatched demand is unavoidable mismatch.",
+    "update": "Swap edges connect freely permutable components. For each component, match target values against its source multiset; unmatched demand is unavoidable mismatch.",
+    "done": "Minimize Hamming distance using any number of allowed index swaps."
+  },
+  "edgeCases": [
+    "No swaps permitted",
+    "One connected component matches a permutation",
+    "Repeated value supplies are limited"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

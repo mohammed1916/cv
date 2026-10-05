@@ -1,0 +1,31 @@
+{
+  "number": "1706",
+  "title": "Where Will the Ball Fall",
+  "goal": "Find the exit column of a ball dropped above each column, or minus one when trapped.",
+  "strategy": "A row allows a ball to move diagonally only when the current board and its neighbor slope together. A wall or V-shaped opposing pair traps the ball.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the exit column of a ball dropped above each column, or minus one when trapped.",
+    "inspect": "A row allows a ball to move diagonally only when the current board and its neighbor slope together. A wall or V-shaped opposing pair traps the ball.",
+    "update": "A row allows a ball to move diagonally only when the current board and its neighbor slope together. A wall or V-shaped opposing pair traps the ball.",
+    "done": "Find the exit column of a ball dropped above each column, or minus one when trapped."
+  },
+  "edgeCases": [
+    "Every ball hits a wall in one column",
+    "A V traps both balls",
+    "Parallel slopes then return"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

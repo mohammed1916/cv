@@ -1,0 +1,31 @@
+{
+  "number": "1685",
+  "title": "Sum of Absolute Differences in a Sorted Array",
+  "goal": "Compute the sum of absolute differences from every value to all other sorted-array values.",
+  "strategy": "Sorted order lets left differences use value minus earlier entries and right differences use later entries minus value. Prefix totals evaluate both sides without rescanning.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the sum of absolute differences from every value to all other sorted-array values.",
+    "inspect": "Sorted order lets left differences use value minus earlier entries and right differences use later entries minus value. Prefix totals evaluate both sides without rescanning.",
+    "update": "Sorted order lets left differences use value minus earlier entries and right differences use later entries minus value. Prefix totals evaluate both sides without rescanning.",
+    "done": "Compute the sum of absolute differences from every value to all other sorted-array values."
+  },
+  "edgeCases": [
+    "One value",
+    "All equal values",
+    "Two extremes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

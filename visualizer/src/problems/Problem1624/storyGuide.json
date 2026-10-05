@@ -1,0 +1,31 @@
+{
+  "number": "1624",
+  "title": "Largest Substring Between Two Equal Characters",
+  "goal": "Find the longest substring strictly between equal endpoint characters.",
+  "strategy": "Remember the earliest index for each character. Every later copy can use that farthest-left endpoint; exclude both endpoints from the measured length.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest substring strictly between equal endpoint characters.",
+    "inspect": "Remember the earliest index for each character. Every later copy can use that farthest-left endpoint; exclude both endpoints from the measured length.",
+    "update": "Remember the earliest index for each character. Every later copy can use that farthest-left endpoint; exclude both endpoints from the measured length.",
+    "done": "Find the longest substring strictly between equal endpoint characters."
+  },
+  "edgeCases": [
+    "No repeated character",
+    "Adjacent repeated endpoints",
+    "Same endpoints span the whole interior"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

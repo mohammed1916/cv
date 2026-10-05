@@ -1,3 +1,5 @@
+import { advanceSpecs, validateAdvance } from './expansionAdvanceSpecs.js';
+import { progressSpecs, validateProgress } from './expansionProgressSpecs.js';
 import { continuingSpecs, validateContinuing } from './expansionNextSpecs.js';
 import { solvers } from './algorithms.js';
 import { specs } from './specs.js';
@@ -17,6 +19,8 @@ function validate(id, input) {
   if (id in expansionSpecs) return validateExpansion(id,input);
   if (id in dpSpecs) return validateDP(id,input);
   if (id in moreSpecs) return validateMore(id,input);
+  if (id in advanceSpecs) return validateAdvance(id,input);
+  if (id in progressSpecs) return validateProgress(id,input);
   if (id in continuingSpecs) return validateContinuing(id,input);
   if (id in laterSpecs) return validateLater(id,input);
   const integer = (v, min = -10000, max = 10000) => Number.isSafeInteger(v) && v >= min && v <= max;

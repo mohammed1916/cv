@@ -1,0 +1,31 @@
+{
+  "number": "1695",
+  "title": "Maximum Erasure Value",
+  "goal": "Find the greatest sum of a contiguous subarray containing no repeated values.",
+  "strategy": "Keep a set and running sum for the current unique window. On a repeated incoming value, remove left entries through its old occurrence; positive values make the longest valid suffix best.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest sum of a contiguous subarray containing no repeated values.",
+    "inspect": "Keep a set and running sum for the current unique window. On a repeated incoming value, remove left entries through its old occurrence; positive values make the longest valid suffix best.",
+    "update": "Keep a set and running sum for the current unique window. On a repeated incoming value, remove left entries through its old occurrence; positive values make the longest valid suffix best.",
+    "done": "Find the greatest sum of a contiguous subarray containing no repeated values."
+  },
+  "edgeCases": [
+    "All values unique",
+    "All equal values",
+    "One value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "routes": 974,
+  "routes": 1049,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -2708,6 +2708,33 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1615",
+      "number": "1615",
+      "title": "Maximal Network Rank",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1616",
+      "number": "1616",
+      "title": "Split Two Strings to Make Palindrome",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1619",
+      "number": "1619",
+      "title": "Mean of Array After Removing Some Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem162",
       "number": "162",
       "title": "Find Peak Element",
@@ -2715,6 +2742,33 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1624",
+      "number": "1624",
+      "title": "Largest Substring Between Two Equal Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1626",
+      "number": "1626",
+      "title": "Best Team With No Conflicts",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1629",
+      "number": "1629",
+      "title": "Slowest Key",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem163",
@@ -2726,6 +2780,42 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1630",
+      "number": "1630",
+      "title": "Arithmetic Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1636",
+      "number": "1636",
+      "title": "Sort Array by Increasing Frequency",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1637",
+      "number": "1637",
+      "title": "Widest Vertical Area Between Two Points Containing No Points",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1638",
+      "number": "1638",
+      "title": "Count Substrings That Differ by One Character",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem164",
       "number": "164",
       "title": "Maximum Gap",
@@ -2733,6 +2823,51 @@
       "checks": 2,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1640",
+      "number": "1640",
+      "title": "Check Array Formation Through Concatenation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1641",
+      "number": "1641",
+      "title": "Count Sorted Vowel Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1642",
+      "number": "1642",
+      "title": "Furthest Building You Can Reach",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1646",
+      "number": "1646",
+      "title": "Get Maximum in Generated Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1647",
+      "number": "1647",
+      "title": "Minimum Deletions to Make Character Frequencies Unique",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem165",
@@ -2744,6 +2879,51 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1652",
+      "number": "1652",
+      "title": "Defuse the Bomb",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1653",
+      "number": "1653",
+      "title": "Minimum Deletions to Make String Balanced",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1656",
+      "number": "1656",
+      "title": "Design an Ordered Stream",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1657",
+      "number": "1657",
+      "title": "Determine if Two Strings Are Close",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1658",
+      "number": "1658",
+      "title": "Minimum Operations to Reduce X to Zero",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem166",
       "number": "166",
       "title": "Fraction to Recurring Decimal",
@@ -2751,6 +2931,42 @@
       "checks": 1,
       "rules": 2,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1662",
+      "number": "1662",
+      "title": "Check If Two String Arrays are Equivalent",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1663",
+      "number": "1663",
+      "title": "Smallest String With A Given Numeric Value",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1664",
+      "number": "1664",
+      "title": "Ways to Make a Fair Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1668",
+      "number": "1668",
+      "title": "Maximum Repeating Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem167",
@@ -2771,6 +2987,33 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1673",
+      "number": "1673",
+      "title": "Find the Most Competitive Subsequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1678",
+      "number": "1678",
+      "title": "Goal Parser Interpretation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1679",
+      "number": "1679",
+      "title": "Max Number of K-Sum Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem168",
       "number": "168",
       "title": "Excel Sheet Column Title",
@@ -2780,6 +3023,60 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1680",
+      "number": "1680",
+      "title": "Concatenation of Consecutive Binary Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1684",
+      "number": "1684",
+      "title": "Count the Number of Consistent Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1685",
+      "number": "1685",
+      "title": "Sum of Absolute Differences in a Sorted Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1686",
+      "number": "1686",
+      "title": "Stone Game VI",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1688",
+      "number": "1688",
+      "title": "Count of Matches in Tournament",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1689",
+      "number": "1689",
+      "title": "Partitioning Into Minimum Number Of Deci-Binary Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem169",
       "number": "169",
       "title": "Majority Element",
@@ -2787,6 +3084,69 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1690",
+      "number": "1690",
+      "title": "Stone Game VII",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1691",
+      "number": "1691",
+      "title": "Maximum Height by Stacking Cuboids ",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1694",
+      "number": "1694",
+      "title": "Reformat Phone Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1695",
+      "number": "1695",
+      "title": "Maximum Erasure Value",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1696",
+      "number": "1696",
+      "title": "Jump Game VI",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1697",
+      "number": "1697",
+      "title": "Checking Existence of Edge Length Limited Paths",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1698",
+      "number": "1698",
+      "title": "Number of Distinct Substrings in a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem17",
@@ -2807,6 +3167,69 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1700",
+      "number": "1700",
+      "title": "Number of Students Unable to Eat Lunch",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1701",
+      "number": "1701",
+      "title": "Average Waiting Time",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1702",
+      "number": "1702",
+      "title": "Maximum Binary String After Change",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1704",
+      "number": "1704",
+      "title": "Determine if String Halves Are Alike",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1705",
+      "number": "1705",
+      "title": "Maximum Number of Eaten Apples",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1706",
+      "number": "1706",
+      "title": "Where Will the Ball Fall",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1708",
+      "number": "1708",
+      "title": "Largest Subarray Length K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem171",
       "number": "171",
       "title": "Excel Sheet Column Number",
@@ -2814,6 +3237,42 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1710",
+      "number": "1710",
+      "title": "Maximum Units on a Truck",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1711",
+      "number": "1711",
+      "title": "Count Good Meals",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1716",
+      "number": "1716",
+      "title": "Calculate Money in Leetcode Bank",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1717",
+      "number": "1717",
+      "title": "Maximum Score From Removing Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem172",
@@ -2825,6 +3284,51 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1720",
+      "number": "1720",
+      "title": "Decode XORed Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1722",
+      "number": "1722",
+      "title": "Minimize Hamming Distance After Swap Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1725",
+      "number": "1725",
+      "title": "Number Of Rectangles That Can Form The Largest Square",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1726",
+      "number": "1726",
+      "title": "Tuple with Same Product",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1727",
+      "number": "1727",
+      "title": "Largest Submatrix With Rearrangements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem173",
       "number": "173",
       "title": "Binary Search Tree Iterator",
@@ -2832,6 +3336,51 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1730",
+      "number": "1730",
+      "title": "Shortest Path to Get Food",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1732",
+      "number": "1732",
+      "title": "Find the Highest Altitude",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1734",
+      "number": "1734",
+      "title": "Decode XORed Permutation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1736",
+      "number": "1736",
+      "title": "Latest Time by Replacing Hidden Digits",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1738",
+      "number": "1738",
+      "title": "Find Kth Largest XOR Coordinate Value",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem174",
@@ -2843,6 +3392,60 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1742",
+      "number": "1742",
+      "title": "Maximum Number of Balls in a Box",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1743",
+      "number": "1743",
+      "title": "Restore the Array From Adjacent Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1744",
+      "number": "1744",
+      "title": "Can You Eat Your Favorite Candy on Your Favorite Day?",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1746",
+      "number": "1746",
+      "title": "Maximum Subarray Sum After One Operation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1748",
+      "number": "1748",
+      "title": "Sum of Unique Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1749",
+      "number": "1749",
+      "title": "Maximum Absolute Sum of Any Subarray",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem175",
       "number": "175",
       "title": "Combine Two Tables",
@@ -2852,6 +3455,69 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1750",
+      "number": "1750",
+      "title": "Minimum Length of String After Deleting Similar Ends",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1752",
+      "number": "1752",
+      "title": "Check if Array Is Sorted and Rotated",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1753",
+      "number": "1753",
+      "title": "Maximum Score From Removing Stones",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1754",
+      "number": "1754",
+      "title": "Largest Merge Of Two Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1756",
+      "number": "1756",
+      "title": "Design Most Recently Used Queue",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1758",
+      "number": "1758",
+      "title": "Minimum Changes To Make Alternating Binary String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1759",
+      "number": "1759",
+      "title": "Count Number of Homogenous Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem176",
       "number": "176",
       "title": "Second Highest Salary",
@@ -2859,6 +3525,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1760",
+      "number": "1760",
+      "title": "Minimum Limit of Balls in a Bag",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem177",

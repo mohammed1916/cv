@@ -1,0 +1,31 @@
+{
+  "number": "1673",
+  "title": "Find the Most Competitive Subsequence",
+  "goal": "Choose the lexicographically smallest subsequence of exactly k values.",
+  "strategy": "Maintain increasing choices when possible. Remove a larger previous choice only if enough remaining positions can still complete k selections.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose the lexicographically smallest subsequence of exactly k values.",
+    "inspect": "Maintain increasing choices when possible. Remove a larger previous choice only if enough remaining positions can still complete k selections.",
+    "update": "Maintain increasing choices when possible. Remove a larger previous choice only if enough remaining positions can still complete k selections.",
+    "done": "Choose the lexicographically smallest subsequence of exactly k values."
+  },
+  "edgeCases": [
+    "Keep every element",
+    "Only one smallest choice",
+    "Equal values preserve enough positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

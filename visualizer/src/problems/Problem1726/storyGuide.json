@@ -1,0 +1,31 @@
+{
+  "number": "1726",
+  "title": "Tuple with Same Product",
+  "goal": "Count ordered distinct-value tuples whose first two values have the same product as the last two.",
+  "strategy": "Count unordered pairs by product. Each collision with an earlier pair yields eight ordered tuples: swap within either pair and swap the pairs.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count ordered distinct-value tuples whose first two values have the same product as the last two.",
+    "inspect": "Count unordered pairs by product. Each collision with an earlier pair yields eight ordered tuples: swap within either pair and swap the pairs.",
+    "update": "Count unordered pairs by product. Each collision with an earlier pair yields eight ordered tuples: swap within either pair and swap the pairs.",
+    "done": "Count ordered distinct-value tuples whose first two values have the same product as the last two."
+  },
+  "edgeCases": [
+    "No equal pair products",
+    "One product collision",
+    "Several powers of two"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1760",
+  "title": "Minimum Limit of Balls in a Bag",
+  "goal": "Minimize the greatest bag size after a limited number of bag splits.",
+  "strategy": "For a candidate maximum, each original bag needs ceil(size/maximum)-1 splits. Required operations decrease as the candidate grows, enabling binary search.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the greatest bag size after a limited number of bag splits.",
+    "inspect": "For a candidate maximum, each original bag needs ceil(size/maximum)-1 splits. Required operations decrease as the candidate grows, enabling binary search.",
+    "update": "For a candidate maximum, each original bag needs ceil(size/maximum)-1 splits. Required operations decrease as the candidate grows, enabling binary search.",
+    "done": "Minimize the greatest bag size after a limited number of bag splits."
+  },
+  "edgeCases": [
+    "No splits allowed",
+    "Enough splits make every bag unit-sized",
+    "One large bag"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

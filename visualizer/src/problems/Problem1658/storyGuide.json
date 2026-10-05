@@ -1,0 +1,31 @@
+{
+  "number": "1658",
+  "title": "Minimum Operations to Reduce X to Zero",
+  "goal": "Remove the fewest values from the array ends whose sum is x.",
+  "strategy": "The values left behind form one contiguous middle. Since inputs are positive, a sliding window finds the longest middle with sum total minus x.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the fewest values from the array ends whose sum is x.",
+    "inspect": "The values left behind form one contiguous middle. Since inputs are positive, a sliding window finds the longest middle with sum total minus x.",
+    "update": "The values left behind form one contiguous middle. Since inputs are positive, a sliding window finds the longest middle with sum total minus x.",
+    "done": "Remove the fewest values from the array ends whose sum is x."
+  },
+  "edgeCases": [
+    "Remove every value",
+    "Target exceeds total",
+    "No exact end-removal sum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

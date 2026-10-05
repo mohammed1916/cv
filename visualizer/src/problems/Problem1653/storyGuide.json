@@ -1,0 +1,31 @@
+{
+  "number": "1653",
+  "title": "Minimum Deletions to Make String Balanced",
+  "goal": "Delete the fewest characters so every a appears before every b.",
+  "strategy": "Track earlier b characters and the cheapest balanced prefix. A new a can be deleted, or all earlier b characters can be deleted instead.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Delete the fewest characters so every a appears before every b.",
+    "inspect": "Track earlier b characters and the cheapest balanced prefix. A new a can be deleted, or all earlier b characters can be deleted instead.",
+    "update": "Track earlier b characters and the cheapest balanced prefix. A new a can be deleted, or all earlier b characters can be deleted instead.",
+    "done": "Delete the fewest characters so every a appears before every b."
+  },
+  "edgeCases": [
+    "Already balanced",
+    "All b characters",
+    "One a after many b characters"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

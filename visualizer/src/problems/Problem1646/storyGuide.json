@@ -1,0 +1,31 @@
+{
+  "number": "1646",
+  "title": "Get Maximum in Generated Array",
+  "goal": "Find the maximum value in the specified recursively generated array through index n.",
+  "strategy": "Even indices copy their half-index; odd indices add the two surrounding half-indices. Increasing index order always computes dependencies first.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the maximum value in the specified recursively generated array through index n.",
+    "inspect": "Even indices copy their half-index; odd indices add the two surrounding half-indices. Increasing index order always computes dependencies first.",
+    "update": "Even indices copy their half-index; odd indices add the two surrounding half-indices. Increasing index order always computes dependencies first.",
+    "done": "Find the maximum value in the specified recursively generated array through index n."
+  },
+  "edgeCases": [
+    "Only index zero",
+    "Both base values",
+    "Power-of-two endpoint"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

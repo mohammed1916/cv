@@ -1,0 +1,31 @@
+{
+  "number": "1716",
+  "title": "Calculate Money in Leetcode Bank",
+  "goal": "Compute savings after n days of the increasing weekly deposit schedule.",
+  "strategy": "Deposits increase by one within a week. Each new Monday starts one greater than the preceding Monday, so week index plus weekday index determines every deposit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute savings after n days of the increasing weekly deposit schedule.",
+    "inspect": "Deposits increase by one within a week. Each new Monday starts one greater than the preceding Monday, so week index plus weekday index determines every deposit.",
+    "update": "Deposits increase by one within a week. Each new Monday starts one greater than the preceding Monday, so week index plus weekday index determines every deposit.",
+    "done": "Compute savings after n days of the increasing weekly deposit schedule."
+  },
+  "edgeCases": [
+    "First day",
+    "End of first week",
+    "First higher Monday"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

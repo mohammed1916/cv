@@ -1,0 +1,31 @@
+{
+  "number": "1727",
+  "title": "Largest Submatrix With Rearrangements",
+  "goal": "Find the largest all-one submatrix when columns may be rearranged.",
+  "strategy": "At each row, compute consecutive-one heights. Sorting those heights shows which columns can form a rectangle of each width ending at this row.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest all-one submatrix when columns may be rearranged.",
+    "inspect": "At each row, compute consecutive-one heights. Sorting those heights shows which columns can form a rectangle of each width ending at this row.",
+    "update": "At each row, compute consecutive-one heights. Sorting those heights shows which columns can form a rectangle of each width ending at this row.",
+    "done": "Find the largest all-one submatrix when columns may be rearranged."
+  },
+  "edgeCases": [
+    "All zero cells",
+    "Single row gathers all ones",
+    "Solid rectangle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

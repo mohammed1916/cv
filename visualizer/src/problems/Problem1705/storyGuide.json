@@ -1,0 +1,31 @@
+{
+  "number": "1705",
+  "title": "Maximum Number of Eaten Apples",
+  "goal": "Eat the maximum number of apples when one can be eaten per day and batches expire.",
+  "strategy": "Maintain available batches by expiration day. Discard rotten batches, then eat from the earliest expiration so longer-lived fruit remains available later.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Eat the maximum number of apples when one can be eaten per day and batches expire.",
+    "inspect": "Maintain available batches by expiration day. Discard rotten batches, then eat from the earliest expiration so longer-lived fruit remains available later.",
+    "update": "Maintain available batches by expiration day. Discard rotten batches, then eat from the earliest expiration so longer-lived fruit remains available later.",
+    "done": "Eat the maximum number of apples when one can be eaten per day and batches expire."
+  },
+  "edgeCases": [
+    "No production",
+    "All apples expire next day",
+    "Continue eating after production ends"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

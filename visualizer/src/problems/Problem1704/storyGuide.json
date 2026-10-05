@@ -1,0 +1,31 @@
+{
+  "number": "1704",
+  "title": "Determine if String Halves Are Alike",
+  "goal": "Determine whether the two equal-length halves contain the same number of vowels.",
+  "strategy": "Count both uppercase and lowercase vowels in each half. Equal character counts or matching letters are unnecessary; only vowel totals matter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether the two equal-length halves contain the same number of vowels.",
+    "inspect": "Count both uppercase and lowercase vowels in each half. Equal character counts or matching letters are unnecessary; only vowel totals matter.",
+    "update": "Count both uppercase and lowercase vowels in each half. Equal character counts or matching letters are unnecessary; only vowel totals matter.",
+    "done": "Determine whether the two equal-length halves contain the same number of vowels."
+  },
+  "edgeCases": [
+    "Only consonants in both halves",
+    "Different vowel totals",
+    "Smallest equal halves"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

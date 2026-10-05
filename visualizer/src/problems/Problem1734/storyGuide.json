@@ -1,0 +1,31 @@
+{
+  "number": "1734",
+  "title": "Decode XORed Permutation",
+  "goal": "Recover an odd-length permutation from XORs of adjacent values.",
+  "strategy": "XOR odd-indexed encoded entries to obtain every original value except the first. XOR with all integers one through n to recover the first, then decode sequentially.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Recover an odd-length permutation from XORs of adjacent values.",
+    "inspect": "XOR odd-indexed encoded entries to obtain every original value except the first. XOR with all integers one through n to recover the first, then decode sequentially.",
+    "update": "XOR odd-indexed encoded entries to obtain every original value except the first. XOR with all integers one through n to recover the first, then decode sequentially.",
+    "done": "Recover an odd-length permutation from XORs of adjacent values."
+  },
+  "edgeCases": [
+    "Shortest nontrivial odd permutation",
+    "Consecutive five-value permutation",
+    "Descending five-value permutation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

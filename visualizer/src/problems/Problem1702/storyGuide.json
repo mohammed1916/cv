@@ -1,0 +1,31 @@
+{
+  "number": "1702",
+  "title": "Maximum Binary String After Change",
+  "goal": "Find the greatest binary string reachable by the permitted 00-to-10 and 10-to-01 transformations.",
+  "strategy": "A prefix before the first zero stays all ones. The remaining zeros consolidate into one zero at firstZero+zeroCount-1, with ones at every other position.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest binary string reachable by the permitted 00-to-10 and 10-to-01 transformations.",
+    "inspect": "A prefix before the first zero stays all ones. The remaining zeros consolidate into one zero at firstZero+zeroCount-1, with ones at every other position.",
+    "update": "A prefix before the first zero stays all ones. The remaining zeros consolidate into one zero at firstZero+zeroCount-1, with ones at every other position.",
+    "done": "Find the greatest binary string reachable by the permitted 00-to-10 and 10-to-01 transformations."
+  },
+  "edgeCases": [
+    "Already all ones",
+    "Exactly one zero cannot be improved",
+    "All zeros leave a final zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

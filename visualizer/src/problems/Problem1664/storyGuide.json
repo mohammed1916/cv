@@ -1,0 +1,31 @@
+{
+  "number": "1664",
+  "title": "Ways to Make a Fair Array",
+  "goal": "Count deletions that leave equal sums at even and odd indices.",
+  "strategy": "Removing an entry shifts every later entry left, swapping its parity. Combine unchanged left-side sums with opposite-parity right-side sums.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count deletions that leave equal sums at even and odd indices.",
+    "inspect": "Removing an entry shifts every later entry left, swapping its parity. Combine unchanged left-side sums with opposite-parity right-side sums.",
+    "update": "Removing an entry shifts every later entry left, swapping its parity. Combine unchanged left-side sums with opposite-parity right-side sums.",
+    "done": "Count deletions that leave equal sums at even and odd indices."
+  },
+  "edgeCases": [
+    "One removal leaves two empty sums",
+    "Every position works in odd uniform length",
+    "No fair removal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

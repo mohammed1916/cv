@@ -1,3 +1,5 @@
+import { advanceCases } from './expansionAdvanceExamples.js';
+import { progressCases } from './expansionProgressExamples.js';
 import { continuingCases } from './expansionNextExamples.js';
 import { nextCollectionCases } from './nextCollectionExamples.js';
 import { expansionCollectionCases } from './expansionCollectionExamples.js';
@@ -13,6 +15,8 @@ const cases={
   ...moreCases,
   ...laterCases,
   ...continuingCases,
+  ...progressCases,
+  ...advanceCases,
   860:[['Conserve fives across several customers',{bills:[5,5,10,5,20,5,10,5,5,20]}],['First customer needs unavailable change',{bills:[10]}],['Three fives make change',{bills:[5,5,5,20]}],['Too few fives after earlier sale',{bills:[5,10,20]}]],
   861:[['Rows and columns prefer different flips',{grid:[[0,1,0,1,1],[1,0,1,0,0],[0,0,1,1,0],[1,1,0,0,1]]}],['Single zero bit',{grid:[[0]]}],['Already maximal',{grid:[[1,1,1],[1,1,1]]}],['Column tie needs no flip',{grid:[[1,0],[1,1]]}]],
   868:[['Several unequal zero gaps',{n:1161}],['Only one set bit',{n:128}],['All bits set',{n:127}],['Two widely separated bits',{n:513}]],

@@ -1,0 +1,31 @@
+{
+  "number": "1752",
+  "title": "Check if Array Is Sorted and Rotated",
+  "goal": "Decide whether an array is a rotation of a nondecreasing array.",
+  "strategy": "Include the last-to-first comparison. A valid rotation has at most one strict circular decrease; duplicates introduce no extra decrease.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether an array is a rotation of a nondecreasing array.",
+    "inspect": "Include the last-to-first comparison. A valid rotation has at most one strict circular decrease; duplicates introduce no extra decrease.",
+    "update": "Include the last-to-first comparison. A valid rotation has at most one strict circular decrease; duplicates introduce no extra decrease.",
+    "done": "Decide whether an array is a rotation of a nondecreasing array."
+  },
+  "edgeCases": [
+    "Already sorted",
+    "Multiple decreases invalidate rotation",
+    "All values equal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1711",
+  "title": "Count Good Meals",
+  "goal": "Count pairs of meals whose total deliciousness is a positive power of two.",
+  "strategy": "For each current value, inspect power-of-two target sums and count complements among earlier values. This counts each pair once even when values repeat.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs of meals whose total deliciousness is a positive power of two.",
+    "inspect": "For each current value, inspect power-of-two target sums and count complements among earlier values. This counts each pair once even when values repeat.",
+    "update": "For each current value, inspect power-of-two target sums and count complements among earlier values. This counts each pair once even when values repeat.",
+    "done": "Count pairs of meals whose total deliciousness is a positive power of two."
+  },
+  "edgeCases": [
+    "Zero plus zero is not a power of two",
+    "Repeated self-complements",
+    "No valid pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

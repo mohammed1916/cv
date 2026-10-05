@@ -1,0 +1,31 @@
+{
+  "number": "1679",
+  "title": "Max Number of K-Sum Pairs",
+  "goal": "Maximize disjoint pairs whose values sum to k.",
+  "strategy": "Keep counts of unmatched values. Matching an available complement immediately consumes two positions without reducing the number of future possible pairs.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize disjoint pairs whose values sum to k.",
+    "inspect": "Keep counts of unmatched values. Matching an available complement immediately consumes two positions without reducing the number of future possible pairs.",
+    "update": "Keep counts of unmatched values. Matching an available complement immediately consumes two positions without reducing the number of future possible pairs.",
+    "done": "Maximize disjoint pairs whose values sum to k."
+  },
+  "edgeCases": [
+    "Self-complement requires two copies",
+    "No possible complement",
+    "Single unused value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1945,5 +1945,530 @@ export const collectionStoryMetadata = {
     "slug": "maximum-nesting-depth-of-the-parentheses",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/"
+  },
+  "1615": {
+    "number": "1615",
+    "title": "Maximal Network Rank",
+    "slug": "maximal-network-rank",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximal-network-rank/"
+  },
+  "1616": {
+    "number": "1616",
+    "title": "Split Two Strings to Make Palindrome",
+    "slug": "split-two-strings-to-make-palindrome",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/split-two-strings-to-make-palindrome/"
+  },
+  "1619": {
+    "number": "1619",
+    "title": "Mean of Array After Removing Some Elements",
+    "slug": "mean-of-array-after-removing-some-elements",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/mean-of-array-after-removing-some-elements/"
+  },
+  "1624": {
+    "number": "1624",
+    "title": "Largest Substring Between Two Equal Characters",
+    "slug": "largest-substring-between-two-equal-characters",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/largest-substring-between-two-equal-characters/"
+  },
+  "1626": {
+    "number": "1626",
+    "title": "Best Team With No Conflicts",
+    "slug": "best-team-with-no-conflicts",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/best-team-with-no-conflicts/"
+  },
+  "1629": {
+    "number": "1629",
+    "title": "Slowest Key",
+    "slug": "slowest-key",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/slowest-key/"
+  },
+  "1630": {
+    "number": "1630",
+    "title": "Arithmetic Subarrays",
+    "slug": "arithmetic-subarrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/arithmetic-subarrays/"
+  },
+  "1636": {
+    "number": "1636",
+    "title": "Sort Array by Increasing Frequency",
+    "slug": "sort-array-by-increasing-frequency",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sort-array-by-increasing-frequency/"
+  },
+  "1637": {
+    "number": "1637",
+    "title": "Widest Vertical Area Between Two Points Containing No Points",
+    "slug": "widest-vertical-area-between-two-points-containing-no-points",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/widest-vertical-area-between-two-points-containing-no-points/"
+  },
+  "1638": {
+    "number": "1638",
+    "title": "Count Substrings That Differ by One Character",
+    "slug": "count-substrings-that-differ-by-one-character",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-substrings-that-differ-by-one-character/"
+  },
+  "1640": {
+    "number": "1640",
+    "title": "Check Array Formation Through Concatenation",
+    "slug": "check-array-formation-through-concatenation",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-array-formation-through-concatenation/"
+  },
+  "1641": {
+    "number": "1641",
+    "title": "Count Sorted Vowel Strings",
+    "slug": "count-sorted-vowel-strings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-sorted-vowel-strings/"
+  },
+  "1642": {
+    "number": "1642",
+    "title": "Furthest Building You Can Reach",
+    "slug": "furthest-building-you-can-reach",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/furthest-building-you-can-reach/"
+  },
+  "1646": {
+    "number": "1646",
+    "title": "Get Maximum in Generated Array",
+    "slug": "get-maximum-in-generated-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/get-maximum-in-generated-array/"
+  },
+  "1647": {
+    "number": "1647",
+    "title": "Minimum Deletions to Make Character Frequencies Unique",
+    "slug": "minimum-deletions-to-make-character-frequencies-unique",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/"
+  },
+  "1652": {
+    "number": "1652",
+    "title": "Defuse the Bomb",
+    "slug": "defuse-the-bomb",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/defuse-the-bomb/"
+  },
+  "1653": {
+    "number": "1653",
+    "title": "Minimum Deletions to Make String Balanced",
+    "slug": "minimum-deletions-to-make-string-balanced",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/"
+  },
+  "1656": {
+    "number": "1656",
+    "title": "Design an Ordered Stream",
+    "slug": "design-an-ordered-stream",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/design-an-ordered-stream/"
+  },
+  "1657": {
+    "number": "1657",
+    "title": "Determine if Two Strings Are Close",
+    "slug": "determine-if-two-strings-are-close",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/determine-if-two-strings-are-close/"
+  },
+  "1658": {
+    "number": "1658",
+    "title": "Minimum Operations to Reduce X to Zero",
+    "slug": "minimum-operations-to-reduce-x-to-zero",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/"
+  },
+  "1662": {
+    "number": "1662",
+    "title": "Check If Two String Arrays are Equivalent",
+    "slug": "check-if-two-string-arrays-are-equivalent",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/"
+  },
+  "1663": {
+    "number": "1663",
+    "title": "Smallest String With A Given Numeric Value",
+    "slug": "smallest-string-with-a-given-numeric-value",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/"
+  },
+  "1664": {
+    "number": "1664",
+    "title": "Ways to Make a Fair Array",
+    "slug": "ways-to-make-a-fair-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/ways-to-make-a-fair-array/"
+  },
+  "1668": {
+    "number": "1668",
+    "title": "Maximum Repeating Substring",
+    "slug": "maximum-repeating-substring",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-repeating-substring/"
+  },
+  "1673": {
+    "number": "1673",
+    "title": "Find the Most Competitive Subsequence",
+    "slug": "find-the-most-competitive-subsequence",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-most-competitive-subsequence/"
+  },
+  "1678": {
+    "number": "1678",
+    "title": "Goal Parser Interpretation",
+    "slug": "goal-parser-interpretation",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/goal-parser-interpretation/"
+  },
+  "1679": {
+    "number": "1679",
+    "title": "Max Number of K-Sum Pairs",
+    "slug": "max-number-of-k-sum-pairs",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/max-number-of-k-sum-pairs/"
+  },
+  "1680": {
+    "number": "1680",
+    "title": "Concatenation of Consecutive Binary Numbers",
+    "slug": "concatenation-of-consecutive-binary-numbers",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/"
+  },
+  "1684": {
+    "number": "1684",
+    "title": "Count the Number of Consistent Strings",
+    "slug": "count-the-number-of-consistent-strings",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-the-number-of-consistent-strings/"
+  },
+  "1685": {
+    "number": "1685",
+    "title": "Sum of Absolute Differences in a Sorted Array",
+    "slug": "sum-of-absolute-differences-in-a-sorted-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/"
+  },
+  "1686": {
+    "number": "1686",
+    "title": "Stone Game VI",
+    "slug": "stone-game-vi",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/stone-game-vi/"
+  },
+  "1688": {
+    "number": "1688",
+    "title": "Count of Matches in Tournament",
+    "slug": "count-of-matches-in-tournament",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-of-matches-in-tournament/"
+  },
+  "1689": {
+    "number": "1689",
+    "title": "Partitioning Into Minimum Number Of Deci-Binary Numbers",
+    "slug": "partitioning-into-minimum-number-of-deci-binary-numbers",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/"
+  },
+  "1690": {
+    "number": "1690",
+    "title": "Stone Game VII",
+    "slug": "stone-game-vii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/stone-game-vii/"
+  },
+  "1691": {
+    "number": "1691",
+    "title": "Maximum Height by Stacking Cuboids ",
+    "slug": "maximum-height-by-stacking-cuboids",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-height-by-stacking-cuboids/"
+  },
+  "1694": {
+    "number": "1694",
+    "title": "Reformat Phone Number",
+    "slug": "reformat-phone-number",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/reformat-phone-number/"
+  },
+  "1695": {
+    "number": "1695",
+    "title": "Maximum Erasure Value",
+    "slug": "maximum-erasure-value",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-erasure-value/"
+  },
+  "1696": {
+    "number": "1696",
+    "title": "Jump Game VI",
+    "slug": "jump-game-vi",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/jump-game-vi/"
+  },
+  "1697": {
+    "number": "1697",
+    "title": "Checking Existence of Edge Length Limited Paths",
+    "slug": "checking-existence-of-edge-length-limited-paths",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/"
+  },
+  "1698": {
+    "number": "1698",
+    "title": "Number of Distinct Substrings in a String",
+    "slug": "number-of-distinct-substrings-in-a-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-distinct-substrings-in-a-string/"
+  },
+  "1700": {
+    "number": "1700",
+    "title": "Number of Students Unable to Eat Lunch",
+    "slug": "number-of-students-unable-to-eat-lunch",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/"
+  },
+  "1701": {
+    "number": "1701",
+    "title": "Average Waiting Time",
+    "slug": "average-waiting-time",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/average-waiting-time/"
+  },
+  "1702": {
+    "number": "1702",
+    "title": "Maximum Binary String After Change",
+    "slug": "maximum-binary-string-after-change",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-binary-string-after-change/"
+  },
+  "1704": {
+    "number": "1704",
+    "title": "Determine if String Halves Are Alike",
+    "slug": "determine-if-string-halves-are-alike",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/determine-if-string-halves-are-alike/"
+  },
+  "1705": {
+    "number": "1705",
+    "title": "Maximum Number of Eaten Apples",
+    "slug": "maximum-number-of-eaten-apples",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-eaten-apples/"
+  },
+  "1706": {
+    "number": "1706",
+    "title": "Where Will the Ball Fall",
+    "slug": "where-will-the-ball-fall",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/where-will-the-ball-fall/"
+  },
+  "1708": {
+    "number": "1708",
+    "title": "Largest Subarray Length K",
+    "slug": "largest-subarray-length-k",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/largest-subarray-length-k/"
+  },
+  "1710": {
+    "number": "1710",
+    "title": "Maximum Units on a Truck",
+    "slug": "maximum-units-on-a-truck",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-units-on-a-truck/"
+  },
+  "1711": {
+    "number": "1711",
+    "title": "Count Good Meals",
+    "slug": "count-good-meals",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-good-meals/"
+  },
+  "1716": {
+    "number": "1716",
+    "title": "Calculate Money in Leetcode Bank",
+    "slug": "calculate-money-in-leetcode-bank",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/calculate-money-in-leetcode-bank/"
+  },
+  "1717": {
+    "number": "1717",
+    "title": "Maximum Score From Removing Substrings",
+    "slug": "maximum-score-from-removing-substrings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-score-from-removing-substrings/"
+  },
+  "1720": {
+    "number": "1720",
+    "title": "Decode XORed Array",
+    "slug": "decode-xored-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/decode-xored-array/"
+  },
+  "1722": {
+    "number": "1722",
+    "title": "Minimize Hamming Distance After Swap Operations",
+    "slug": "minimize-hamming-distance-after-swap-operations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/"
+  },
+  "1725": {
+    "number": "1725",
+    "title": "Number Of Rectangles That Can Form The Largest Square",
+    "slug": "number-of-rectangles-that-can-form-the-largest-square",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/"
+  },
+  "1726": {
+    "number": "1726",
+    "title": "Tuple with Same Product",
+    "slug": "tuple-with-same-product",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/tuple-with-same-product/"
+  },
+  "1727": {
+    "number": "1727",
+    "title": "Largest Submatrix With Rearrangements",
+    "slug": "largest-submatrix-with-rearrangements",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/largest-submatrix-with-rearrangements/"
+  },
+  "1730": {
+    "number": "1730",
+    "title": "Shortest Path to Get Food",
+    "slug": "shortest-path-to-get-food",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/shortest-path-to-get-food/"
+  },
+  "1732": {
+    "number": "1732",
+    "title": "Find the Highest Altitude",
+    "slug": "find-the-highest-altitude",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-the-highest-altitude/"
+  },
+  "1734": {
+    "number": "1734",
+    "title": "Decode XORed Permutation",
+    "slug": "decode-xored-permutation",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/decode-xored-permutation/"
+  },
+  "1736": {
+    "number": "1736",
+    "title": "Latest Time by Replacing Hidden Digits",
+    "slug": "latest-time-by-replacing-hidden-digits",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/latest-time-by-replacing-hidden-digits/"
+  },
+  "1738": {
+    "number": "1738",
+    "title": "Find Kth Largest XOR Coordinate Value",
+    "slug": "find-kth-largest-xor-coordinate-value",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/"
+  },
+  "1742": {
+    "number": "1742",
+    "title": "Maximum Number of Balls in a Box",
+    "slug": "maximum-number-of-balls-in-a-box",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-number-of-balls-in-a-box/"
+  },
+  "1743": {
+    "number": "1743",
+    "title": "Restore the Array From Adjacent Pairs",
+    "slug": "restore-the-array-from-adjacent-pairs",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/"
+  },
+  "1744": {
+    "number": "1744",
+    "title": "Can You Eat Your Favorite Candy on Your Favorite Day?",
+    "slug": "can-you-eat-your-favorite-candy-on-your-favorite-day",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/"
+  },
+  "1746": {
+    "number": "1746",
+    "title": "Maximum Subarray Sum After One Operation",
+    "slug": "maximum-subarray-sum-after-one-operation",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-subarray-sum-after-one-operation/"
+  },
+  "1748": {
+    "number": "1748",
+    "title": "Sum of Unique Elements",
+    "slug": "sum-of-unique-elements",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sum-of-unique-elements/"
+  },
+  "1749": {
+    "number": "1749",
+    "title": "Maximum Absolute Sum of Any Subarray",
+    "slug": "maximum-absolute-sum-of-any-subarray",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/"
+  },
+  "1750": {
+    "number": "1750",
+    "title": "Minimum Length of String After Deleting Similar Ends",
+    "slug": "minimum-length-of-string-after-deleting-similar-ends",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/"
+  },
+  "1752": {
+    "number": "1752",
+    "title": "Check if Array Is Sorted and Rotated",
+    "slug": "check-if-array-is-sorted-and-rotated",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/"
+  },
+  "1753": {
+    "number": "1753",
+    "title": "Maximum Score From Removing Stones",
+    "slug": "maximum-score-from-removing-stones",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-score-from-removing-stones/"
+  },
+  "1754": {
+    "number": "1754",
+    "title": "Largest Merge Of Two Strings",
+    "slug": "largest-merge-of-two-strings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/largest-merge-of-two-strings/"
+  },
+  "1756": {
+    "number": "1756",
+    "title": "Design Most Recently Used Queue",
+    "slug": "design-most-recently-used-queue",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/design-most-recently-used-queue/"
+  },
+  "1758": {
+    "number": "1758",
+    "title": "Minimum Changes To Make Alternating Binary String",
+    "slug": "minimum-changes-to-make-alternating-binary-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-changes-to-make-alternating-binary-string/"
+  },
+  "1759": {
+    "number": "1759",
+    "title": "Count Number of Homogenous Substrings",
+    "slug": "count-number-of-homogenous-substrings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-number-of-homogenous-substrings/"
+  },
+  "1760": {
+    "number": "1760",
+    "title": "Minimum Limit of Balls in a Bag",
+    "slug": "minimum-limit-of-balls-in-a-bag",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-limit-of-balls-in-a-bag/"
   }
 };

@@ -1,0 +1,31 @@
+{
+  "number": "1619",
+  "title": "Mean of Array After Removing Some Elements",
+  "goal": "Average the array after removing its smallest and largest five percent.",
+  "strategy": "Sort so both trimmed tails occupy known positions. Average exactly the remaining ninety percent, retaining repeated values by their positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Average the array after removing its smallest and largest five percent.",
+    "inspect": "Sort so both trimmed tails occupy known positions. Average exactly the remaining ninety percent, retaining repeated values by their positions.",
+    "update": "Sort so both trimmed tails occupy known positions. Average exactly the remaining ninety percent, retaining repeated values by their positions.",
+    "done": "Average the array after removing its smallest and largest five percent."
+  },
+  "edgeCases": [
+    "Equal values survive positional trimming",
+    "Two outliers are removed",
+    "Ordered twenty-entry sequence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

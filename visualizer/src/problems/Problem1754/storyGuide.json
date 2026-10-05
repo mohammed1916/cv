@@ -1,0 +1,31 @@
+{
+  "number": "1754",
+  "title": "Largest Merge Of Two Strings",
+  "goal": "Build the lexicographically greatest merge while preserving each word internal order.",
+  "strategy": "At each step compare the remaining suffixes. Choosing from the greater suffix resolves equal-leading-character ties using their later differing characters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build the lexicographically greatest merge while preserving each word internal order.",
+    "inspect": "At each step compare the remaining suffixes. Choosing from the greater suffix resolves equal-leading-character ties using their later differing characters.",
+    "update": "At each step compare the remaining suffixes. Choosing from the greater suffix resolves equal-leading-character ties using their later differing characters.",
+    "done": "Build the lexicographically greatest merge while preserving each word internal order."
+  },
+  "edgeCases": [
+    "One word has uniformly greater letters",
+    "Equal words still preserve both copies",
+    "One suffix is a prefix of the other"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

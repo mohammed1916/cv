@@ -1,0 +1,31 @@
+{
+  "number": "1748",
+  "title": "Sum of Unique Elements",
+  "goal": "Sum values that occur exactly once.",
+  "strategy": "Determine final frequencies before adding values. An early unique appearance may later become repeated and must not contribute.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum values that occur exactly once.",
+    "inspect": "Determine final frequencies before adding values. An early unique appearance may later become repeated and must not contribute.",
+    "update": "Determine final frequencies before adding values. An early unique appearance may later become repeated and must not contribute.",
+    "done": "Sum values that occur exactly once."
+  },
+  "edgeCases": [
+    "Every value repeats",
+    "All values unique",
+    "Single entry"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

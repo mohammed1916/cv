@@ -1,0 +1,31 @@
+{
+  "number": "1698",
+  "title": "Number of Distinct Substrings in a String",
+  "goal": "Count distinct nonempty substrings rather than their occurrences.",
+  "strategy": "Enumerate every start and end, adding substring text to a set. Identical text from different positions contributes only once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct nonempty substrings rather than their occurrences.",
+    "inspect": "Enumerate every start and end, adding substring text to a set. Identical text from different positions contributes only once.",
+    "update": "Enumerate every start and end, adding substring text to a set. Identical text from different positions contributes only once.",
+    "done": "Count distinct nonempty substrings rather than their occurrences."
+  },
+  "edgeCases": [
+    "Every character the same",
+    "All characters distinct",
+    "Single character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

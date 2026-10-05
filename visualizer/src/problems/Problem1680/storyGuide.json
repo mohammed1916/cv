@@ -1,0 +1,31 @@
+{
+  "number": "1680",
+  "title": "Concatenation of Consecutive Binary Numbers",
+  "goal": "Concatenate binary representations from one through n and return the result modulo 1000000007.",
+  "strategy": "Appending a binary word shifts the existing number by that word length and adds its value. Modular reduction preserves the requested remainder while keeping arithmetic bounded.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Concatenate binary representations from one through n and return the result modulo 1000000007.",
+    "inspect": "Appending a binary word shifts the existing number by that word length and adds its value. Modular reduction preserves the requested remainder while keeping arithmetic bounded.",
+    "update": "Appending a binary word shifts the existing number by that word length and adds its value. Modular reduction preserves the requested remainder while keeping arithmetic bounded.",
+    "done": "Concatenate binary representations from one through n and return the result modulo 1000000007."
+  },
+  "edgeCases": [
+    "First number only",
+    "Cross from three-bit to four-bit terms",
+    "Larger modular accumulation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

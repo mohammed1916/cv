@@ -1,0 +1,31 @@
+{
+  "number": "1743",
+  "title": "Restore the Array From Adjacent Pairs",
+  "goal": "Restore an array of distinct values from its unordered adjacent pairs.",
+  "strategy": "The adjacency graph is a path. Start at an endpoint and repeatedly choose the neighbor other than the preceding value; either direction is valid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Restore an array of distinct values from its unordered adjacent pairs.",
+    "inspect": "The adjacency graph is a path. Start at an endpoint and repeatedly choose the neighbor other than the preceding value; either direction is valid.",
+    "update": "The adjacency graph is a path. Start at an endpoint and repeatedly choose the neighbor other than the preceding value; either direction is valid.",
+    "done": "Restore an array of distinct values from its unordered adjacent pairs."
+  },
+  "edgeCases": [
+    "Single pair can be restored either way",
+    "Negative and zero values",
+    "Pairs arrive in reverse path order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
