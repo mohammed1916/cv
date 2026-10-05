@@ -6,17 +6,24 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1093 local routes, of which 1077 match catalog slugs
-or unique normalized titles. **2,996 catalog entries remain unmatched.** Route
+After the continued implementation there are 1100 local routes, of which 1084 match catalog slugs
+or unique normalized titles. **2,989 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
 
+## Latest completed trie batch
+
+648, 677, 720, 820, 1032, 1268, and 1804 now have Python, pseudocode,
+explicit step-to-line mappings, a shared trie diagram, and 28 original examples.
+The pre-existing Problem 524 slug was corrected to avoid conflicting with 720.
+The user requested stopping after this batch; no further catalog batch is active.
+
 ## Added in this batch
 
-### Current unverified continuation: 319 additional problems
+### Current unverified continuation: 326 additional problems
 
-This continuation adds 319 explicit algorithms with 1,276 original example inputs
+This continuation adds 326 explicit algorithms with 1,304 original example inputs
 across scanning, strings, counting, windows, prefix sums, matrix DP, connectivity,
 topological traversal, and backtracking. Full IDs are recorded in
 `unverified-expansion.json`. Each route uses the existing collection workspace
@@ -26,7 +33,7 @@ and shared story, code, input, playback, and scene components.
 user's explicit request.** These additions are implemented but unverified.
 The source-only inventory was refreshed; prior validation reports below do not
 cover this expansion. The shared code panel now offers Python and Pseudocode.
-Complete Python is wired for 90 collection problems, including 1404 and 1405;
+Complete Python is wired for 97 collection problems, including the seven trie additions;
 remaining conversions are pending. See `catalog-work-plan.md`.
 
 ### Latest continuation: 8 additional problems

@@ -1,0 +1,10 @@
+.trie-state { margin: 12px 0; }
+.trie-state figcaption { margin-bottom: 8px; font-size: .85rem; }
+.trie-state__viewport { overflow: auto; max-height: 430px; border: 1px solid var(--border); border-radius: 8px; }
+.trie-state__viewport:focus-visible { outline: 2px solid var(--primary); }
+.trie-state svg { display: block; }
+.trie-state line { stroke: var(--text-muted); stroke-width: 1.5; }
+.trie-state rect { fill: var(--surface2); stroke: var(--border); stroke-width: 2; }
+.trie-state text { fill: var(--text); font-size: 15px; }
+.trie-state .trie-state__details { font-size: 10px; }
+.trie-state [data-active="true"] rect { stroke: var(--primary); stroke-width: 4; }

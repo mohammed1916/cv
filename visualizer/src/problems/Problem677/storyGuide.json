@@ -1,0 +1,31 @@
+{
+  "number": "677",
+  "title": "Map Sum Pairs",
+  "goal": "Maintain key values and answer sums over every key sharing a prefix.",
+  "strategy": "Each node stores the aggregate of complete keys beneath it. Replacing a key changes every ancestor by new value minus old value, preventing double counting.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain key values and answer sums over every key sharing a prefix.",
+    "inspect": "Each node stores the aggregate of complete keys beneath it. Replacing a key changes every ancestor by new value minus old value, preventing double counting.",
+    "update": "Each node stores the aggregate of complete keys beneath it. Replacing a key changes every ancestor by new value minus old value, preventing double counting.",
+    "done": "Maintain key values and answer sums over every key sharing a prefix."
+  },
+  "edgeCases": [
+    "Missing prefix returns zero",
+    "A complete key can also be a prefix",
+    "Same-value overwrite adds nothing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

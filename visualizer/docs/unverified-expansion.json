@@ -2,6 +2,11 @@
   "status": "implemented-unverified",
   "instruction": "Continue implementing; skip tests and builds.",
   "problemNumbers": [
+    648,
+    677,
+    720,
+    820,
+    1032,
     1100,
     1101,
     1105,
@@ -65,6 +70,7 @@
     1260,
     1262,
     1266,
+    1268,
     1275,
     1276,
     1277,
@@ -302,6 +308,7 @@
     1799,
     1800,
     1802,
+    1804,
     1805,
     1806,
     1807,
@@ -322,8 +329,8 @@
     1833,
     1834
   ],
-  "problems": 319,
-  "originalExamples": 1276,
+  "problems": 326,
+  "originalExamples": 1304,
   "testsRun": false,
   "buildRun": false,
   "browserVerified": false

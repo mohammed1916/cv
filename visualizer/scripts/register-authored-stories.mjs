@@ -4,6 +4,7 @@ import { definitions as trees } from '../src/problems/families/treeStories/defin
 import { definitions as collections } from '../src/problems/families/collectionStories/definitions.js';
 const definitions={...scans,...trees,...collections};
 const collectionTags={
+  648:['Trie','String'],677:['Trie','Design'],720:['Trie'],820:['Trie','String'],1032:['Trie','Design'],1268:['Trie','Sorting'],1804:['Trie','Design'],
 1805:["String","Hash Table"],1806:["Simulation"],1807:["String","Hash Table"],1812:["Math"],1813:["Two Pointers"],1814:["Hash Table"],1816:["String"],1817:["Hash Table"],1818:["Binary Search"],1820:["Bipartite Matching"],1822:["Math"],1823:["Simulation"],1824:["Dynamic Programming"],1827:["Greedy"],1828:["Geometry"],1829:["Bit Manipulation"],1832:["String"],1833:["Greedy"],1834:["Simulation","Sorting"],
 
 1762:["Array"],1763:["String","Enumeration"],1764:["Greedy"],1765:["Breadth-First Search","Matrix"],1768:["String"],1769:["Prefix Sum"],1770:["Dynamic Programming"],1773:["String"],1774:["Enumeration"],1775:["Greedy"],1779:["Array"],1780:["Math"],1781:["Counting"],1784:["String"],1785:["Math"],1790:["String"],1791:["Graph"],1792:["Greedy"],1793:["Greedy","Two Pointers"],1796:["String"],1797:["Design"],1798:["Greedy"],1799:["Dynamic Programming","Bitmask"],1800:["Array"],1802:["Binary Search"],

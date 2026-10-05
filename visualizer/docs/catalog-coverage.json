@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1093,
-  "matchedCatalogRoutes": 1077,
-  "remaining": 2996,
+  "routes": 1100,
+  "matchedCatalogRoutes": 1084,
+  "remaining": 2989,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -3755,8 +3755,8 @@
       "number": "524",
       "title": "Longest Word in Dictionary through Deleting",
       "slug": "longest-word-in-dictionary-through-deleting",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem524"
     },
     {
       "number": "525",
@@ -4625,8 +4625,8 @@
       "number": "648",
       "title": "Replace Words",
       "slug": "replace-words",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem648"
     },
     {
       "number": "649",
@@ -4828,8 +4828,8 @@
       "number": "677",
       "title": "Map Sum Pairs",
       "slug": "map-sum-pairs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem677"
     },
     {
       "number": "678",
@@ -5131,8 +5131,7 @@
       "title": "Longest Word in Dictionary",
       "slug": "longest-word-in-dictionary",
       "status": "route-present",
-      "folder": "Problem524",
-      "legacyRouteNumber": "524"
+      "folder": "Problem720"
     },
     {
       "number": "721",
@@ -5832,8 +5831,8 @@
       "number": "820",
       "title": "Short Encoding of Words",
       "slug": "short-encoding-of-words",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem820"
     },
     {
       "number": "821",
@@ -7317,8 +7316,8 @@
       "number": "1032",
       "title": "Stream of Characters",
       "slug": "stream-of-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1032"
     },
     {
       "number": "1033",
@@ -8970,8 +8969,8 @@
       "number": "1268",
       "title": "Search Suggestions System",
       "slug": "search-suggestions-system",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1268"
     },
     {
       "number": "1269",
@@ -12723,8 +12722,8 @@
       "number": "1804",
       "title": "Implement Trie II (Prefix Tree)",
       "slug": "implement-trie-ii-prefix-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1804"
     },
     {
       "number": "1805",

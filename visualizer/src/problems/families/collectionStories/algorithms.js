@@ -1,3 +1,4 @@
+import { trieSolvers } from './trieAlgorithms.js';
 import { continuedSolvers } from './expansionContinuedAlgorithms.js';
 import { forwardSolvers } from './expansionForwardAlgorithms.js';
 import { advanceSolvers } from './expansionAdvanceAlgorithms.js';
@@ -23,6 +24,7 @@ export const solvers = {
 ...advanceSolvers,
 ...forwardSolvers,
 ...continuedSolvers,
+...trieSolvers,
   860({bills}, emit) {
     let five=0,ten=0;
     for(let i=0;i<bills.length;i++) { const bill=bills[i];let possible=true;

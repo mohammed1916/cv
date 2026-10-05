@@ -1,0 +1,31 @@
+{
+  "number": "648",
+  "title": "Replace Words",
+  "goal": "Replace each sentence word by its shortest dictionary root.",
+  "strategy": "A shared prefix trie makes the first terminal node the shortest matching root. Stop immediately there; missing edges leave the original word unchanged.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace each sentence word by its shortest dictionary root.",
+    "inspect": "A shared prefix trie makes the first terminal node the shortest matching root. Stop immediately there; missing edges leave the original word unchanged.",
+    "update": "A shared prefix trie makes the first terminal node the shortest matching root. Stop immediately there; missing edges leave the original word unchanged.",
+    "done": "Replace each sentence word by its shortest dictionary root."
+  },
+  "edgeCases": [
+    "One-letter root wins",
+    "No root matches",
+    "Exact roots remain unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,5 +1,33 @@
 // Catalog identities; stories, implementations, and examples are independently authored.
 export const collectionStoryMetadata = {
+  "648": {
+    "number": "648",
+    "title": "Replace Words",
+    "slug": "replace-words",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/replace-words/"
+  },
+  "677": {
+    "number": "677",
+    "title": "Map Sum Pairs",
+    "slug": "map-sum-pairs",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/map-sum-pairs/"
+  },
+  "720": {
+    "number": "720",
+    "title": "Longest Word in Dictionary",
+    "slug": "longest-word-in-dictionary",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-word-in-dictionary/"
+  },
+  "820": {
+    "number": "820",
+    "title": "Short Encoding of Words",
+    "slug": "short-encoding-of-words",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/short-encoding-of-words/"
+  },
   "860": {
     "number": "860",
     "title": "Lemonade Change",
@@ -454,6 +482,13 @@ export const collectionStoryMetadata = {
     "slug": "matrix-cells-in-distance-order",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/matrix-cells-in-distance-order/"
+  },
+  "1032": {
+    "number": "1032",
+    "title": "Stream of Characters",
+    "slug": "stream-of-characters",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/stream-of-characters/"
   },
   "1037": {
     "number": "1037",
@@ -986,6 +1021,13 @@ export const collectionStoryMetadata = {
     "slug": "minimum-time-visiting-all-points",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/minimum-time-visiting-all-points/"
+  },
+  "1268": {
+    "number": "1268",
+    "title": "Search Suggestions System",
+    "slug": "search-suggestions-system",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/search-suggestions-system/"
   },
   "1275": {
     "number": "1275",
@@ -2645,6 +2687,13 @@ export const collectionStoryMetadata = {
     "slug": "maximum-value-at-a-given-index-in-a-bounded-array",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/"
+  },
+  "1804": {
+    "number": "1804",
+    "title": "Implement Trie II (Prefix Tree)",
+    "slug": "implement-trie-ii-prefix-tree",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/implement-trie-ii-prefix-tree/"
   },
   "1805": {
     "number": "1805",

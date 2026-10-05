@@ -1,6 +1,7 @@
 # Persistent catalog work plan
 
-Continue implementing missing catalog problems in shared semantic families.
+Stopped at the user request after the seven-problem trie batch.
+Resume catalog expansion only when requested.
 The user requested continuous progress and explicitly waived tests and builds
 for this expansion. Preserve original authored examples and actual algorithm
 states; do not count catalog listings or empty shells as implementations.
@@ -17,14 +18,16 @@ states; do not count catalog listings or empty shells as implementations.
 - Keep prior test reports as historical evidence; do not imply that new routes
   passed those reports. No tests, builds, or browser verification are running.
 - Refresh the metadata-only catalog inventory as implementation progresses.
-- Checkpoint implementation on `host`, then proceed to another missing group.
+- The current batch is complete and saved on `host`; do not start another group until asked.
 
 ## Code-language correction requested during expansion
 
 The user subsequently requested the missing option immediately. The shared
 workspace now exposes **Python** and **Pseudocode** buttons. Complete Python
 solutions are wired for the original 50 collection problems and the 40
-additions spanning 1401-1475. Python is the default where supplied; missing
+additions spanning 1401-1475, plus seven trie problems (97 total). The trie
+batch includes explicit Python and pseudocode step mappings and shared node diagrams.
+Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.
 Pseudocode retains playback line highlighting. Python does not reuse those
 line numbers. Copy and Code Playground use the selected complete source.

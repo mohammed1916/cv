@@ -1,0 +1,31 @@
+{
+  "number": "720",
+  "title": "Longest Word in Dictionary",
+  "goal": "Find the longest dictionary word buildable one character at a time from other dictionary words.",
+  "strategy": "Every prefix along a candidate path must be terminal. Among valid candidates prefer length first and then the smaller lexicographic word.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest dictionary word buildable one character at a time from other dictionary words.",
+    "inspect": "Every prefix along a candidate path must be terminal. Among valid candidates prefer length first and then the smaller lexicographic word.",
+    "update": "Every prefix along a candidate path must be terminal. Among valid candidates prefer length first and then the smaller lexicographic word.",
+    "done": "Find the longest dictionary word buildable one character at a time from other dictionary words."
+  },
+  "edgeCases": [
+    "Missing intermediate prefix blocks longer word",
+    "Equal lengths choose lexicographically smaller",
+    "No one-letter starting word"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

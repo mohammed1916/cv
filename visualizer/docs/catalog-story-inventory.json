@@ -1,5 +1,5 @@
 {
-  "routes": 1093,
+  "routes": 1100,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -221,6 +221,15 @@
       "folder": "Problem1030",
       "number": "1030",
       "title": "Matrix Cells in Distance Order",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1032",
+      "number": "1032",
+      "title": "Stream of Characters",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -1130,6 +1139,15 @@
       "folder": "Problem1266",
       "number": "1266",
       "title": "Minimum Time Visiting All Points",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1268",
+      "number": "1268",
+      "title": "Search Suggestions System",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -3800,6 +3818,15 @@
       "folder": "Problem1802",
       "number": "1802",
       "title": "Maximum Value at a Given Index in a Bounded Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1804",
+      "number": "1804",
+      "title": "Implement Trie II (Prefix Tree)",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -8363,6 +8390,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem648",
+      "number": "648",
+      "title": "Replace Words",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem65",
       "number": "65",
       "title": "Valid Number",
@@ -8483,6 +8519,15 @@
       "folder": "Problem674",
       "number": "674",
       "title": "Longest Continuous Increasing Subsequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem677",
+      "number": "677",
+      "title": "Map Sum Pairs",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -8712,6 +8757,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem720",
+      "number": "720",
+      "title": "Longest Word in Dictionary",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem721",
@@ -8973,6 +9027,15 @@
       "checks": 0,
       "rules": 3,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem820",
+      "number": "820",
+      "title": "Short Encoding of Words",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem821",

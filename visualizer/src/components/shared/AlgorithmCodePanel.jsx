@@ -6,6 +6,7 @@ export default function AlgorithmCodePanel({ definition, step, input }) {
   const [preferredLanguage, setPreferredLanguage] = useState('python')
   const hasPython = typeof definition.python === 'string' && definition.python.trim().length > 0
   const language = hasPython ? preferredLanguage : 'pseudocode'
+  const pythonLine = definition.pythonStages?.[step?.codeStage]
   const codeLines = language === 'python'
     ? definition.python.trim().split('\n').map((text, index) => ({ line: index + 1, text }))
     : definition.code
@@ -22,9 +23,9 @@ export default function AlgorithmCodePanel({ definition, step, input }) {
     </div>
     {!hasPython && <p className="algorithm-workspace__code-note">Python implementation is not available for this problem yet.</p>}
     <CodeTracePanel key={language} codeLines={codeLines}
-      step={language === 'pseudocode' ? step : undefined}
+      step={language === 'pseudocode' ? step : pythonLine ? { ...step, activeLine: pythonLine } : undefined}
       title={language === 'python' ? 'Python solution' : 'Pseudocode'}
-      subtitle={language === 'python' ? 'Complete Python implementation · use the JSON input fields as function arguments.' : null}
+      subtitle={language === 'python' && !pythonLine ? 'Complete Python implementation · use the JSON input fields as function arguments.' : null}
       playgroundInput={playgroundInput} playgroundDisabled={language !== 'python' || playgroundInput === undefined} disableResizer />
   </div>
 }

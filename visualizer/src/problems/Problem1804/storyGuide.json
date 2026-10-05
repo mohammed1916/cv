@@ -1,0 +1,31 @@
+{
+  "number": "1804",
+  "title": "Implement Trie II (Prefix Tree)",
+  "goal": "Support repeated word insertion, exact and prefix counts, and single-occurrence erasure.",
+  "strategy": "Passing counts include every occurrence below a node; terminal counts include only words ending there. Erase decrements one occurrence without removing shared paths.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Support repeated word insertion, exact and prefix counts, and single-occurrence erasure.",
+    "inspect": "Passing counts include every occurrence below a node; terminal counts include only words ending there. Erase decrements one occurrence without removing shared paths.",
+    "update": "Passing counts include every occurrence below a node; terminal counts include only words ending there. Erase decrements one occurrence without removing shared paths.",
+    "done": "Support repeated word insertion, exact and prefix counts, and single-occurrence erasure."
+  },
+  "edgeCases": [
+    "Counts on an empty trie",
+    "Erasing a prefix preserves its longer word",
+    "Erase final occurrence then reuse its path"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

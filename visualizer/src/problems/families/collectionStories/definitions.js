@@ -1,3 +1,5 @@
+import { trieSpecs, validateTrie, triePseudocodeStages } from './trieSpecs.js';
+import { triePython, triePythonStages } from '../python/triePython.js';
 import { continuedSpecs, validateContinued } from './expansionContinuedSpecs.js';
 import { collectionPython } from '../python/collectionPython.js';
 import { laterPython } from '../python/laterPython.js';
@@ -19,6 +21,7 @@ function validate(id, input) {
   const require = (condition, message) => { if (!condition) throw new Error(message); };
   require(input && typeof input === 'object' && !Array.isArray(input), 'Use a JSON object.');
   for (const key of specs[id][0].split(' ')) require(key in input, `Missing ${key}.`);
+  if (id in trieSpecs) return validateTrie(id,input);
   if (id in nextSpecs) return validateNext(id,input);
   if (id in expansionSpecs) return validateExpansion(id,input);
   if (id in dpSpecs) return validateDP(id,input);
@@ -102,7 +105,8 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
     ...collectionStoryMetadata[id], goal, strategy, complexity,
     inputLabel: `${fields} (JSON; bounded for readable playback)`,
     code: code.split('|').map((text,i) => ({line:i+1,text})),
-    python: collectionPython[id] ?? laterPython[id],
+    python: triePython[id] ?? collectionPython[id] ?? laterPython[id],
+    pythonStages: triePythonStages[id],
     examples: collectionStoryExamples[id],
     phases: [{id:'start',label:'Set up',description:goal},{id:'inspect',label:'Decide',description:strategy},{id:'update',label:'Record progress',description:strategy},{id:'done',label:'Return',description:goal}],
     parse: text => validate(id,JSON.parse(text)),
@@ -110,12 +114,13 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
       const input = validate(id,raw), frames = [];
       let sequence = input[fields.split(' ')[0]];
       if (typeof sequence === 'number') sequence = [...String(sequence)];
+      if (id in trieSpecs && Array.isArray(sequence?.[0])) sequence = sequence.map(row => JSON.stringify(row));
       if (id === 973) sequence = input.points.map(p => `(${p})`);
       if (id === 1424) sequence = input.nums.map(row => `[${row}]`);
-      const emit = (message,state = {},phase = 'inspect') => frames.push(structuredClone({sequence,index:-1,metrics:{},...state,message,phase,activeLine:{start:1,inspect:3,update:4}[phase]}));
+      const emit = (message,state = {},phase = 'inspect') => frames.push(structuredClone({sequence,index:-1,metrics:{},...state,message,phase,activeLine:triePseudocodeStages[id]?.[state.codeStage] ?? {start:1,inspect:3,update:4}[phase]}));
       emit(goal,{},'start');
       const result = solvers[id](input,emit);
-      frames.push(structuredClone({...frames.at(-1),phase:'done',activeLine:5,message:`Return ${JSON.stringify(result)}. ${goal}`,result}));
+      frames.push(structuredClone({...frames.at(-1),phase:'done',codeStage:'return',activeLine:5,message:`Return ${JSON.stringify(result)}. ${goal}`,result}));
       return {frames,result};
     },
   }];
