@@ -1,0 +1,31 @@
+{
+  "number": "1180",
+  "title": "Count Substrings with Only One Distinct Letter",
+  "goal": "Count substrings consisting of one repeated character.",
+  "strategy": "A run of length r ending at the current position contributes r valid suffixes. Reset the run when the character changes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings consisting of one repeated character.",
+    "inspect": "A run of length r ending at the current position contributes r valid suffixes. Reset the run when the character changes.",
+    "update": "A run of length r ending at the current position contributes r valid suffixes. Reset the run when the character changes.",
+    "done": "Count substrings consisting of one repeated character."
+  },
+  "edgeCases": [
+    "Every character differs",
+    "One long run",
+    "One character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

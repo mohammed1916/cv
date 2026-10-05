@@ -1,0 +1,31 @@
+{
+  "number": "1399",
+  "title": "Count Largest Group",
+  "goal": "Count digit-sum groups tied for the largest size among integers one through n.",
+  "strategy": "Accumulate the population of each digit-sum bucket. Then count every bucket whose population matches the global maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count digit-sum groups tied for the largest size among integers one through n.",
+    "inspect": "Accumulate the population of each digit-sum bucket. Then count every bucket whose population matches the global maximum.",
+    "update": "Accumulate the population of each digit-sum bucket. Then count every bucket whose population matches the global maximum.",
+    "done": "Count digit-sum groups tied for the largest size among integers one through n."
+  },
+  "edgeCases": [
+    "One group only",
+    "Single digits create equal-sized groups",
+    "A decimal carry changes bucket distribution"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

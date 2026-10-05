@@ -1,0 +1,31 @@
+{
+  "number": "1119",
+  "title": "Remove Vowels from a String",
+  "goal": "Remove lowercase vowels while preserving the other characters.",
+  "strategy": "Each character makes an independent keep-or-skip decision. Appending survivors in scan order preserves their relative positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove lowercase vowels while preserving the other characters.",
+    "inspect": "Each character makes an independent keep-or-skip decision. Appending survivors in scan order preserves their relative positions.",
+    "update": "Each character makes an independent keep-or-skip decision. Appending survivors in scan order preserves their relative positions.",
+    "done": "Remove lowercase vowels while preserving the other characters."
+  },
+  "edgeCases": [
+    "Only vowels",
+    "No vowels",
+    "Single retained character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

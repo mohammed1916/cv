@@ -1,0 +1,31 @@
+{
+  "number": "1202",
+  "title": "Smallest String With Swaps",
+  "goal": "Find the lexicographically smallest string reachable through allowed index swaps.",
+  "strategy": "Paths of swaps connect mutually interchangeable positions. Sort characters separately within each connected component and assign them to increasing indices.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the lexicographically smallest string reachable through allowed index swaps.",
+    "inspect": "Paths of swaps connect mutually interchangeable positions. Sort characters separately within each connected component and assign them to increasing indices.",
+    "update": "Paths of swaps connect mutually interchangeable positions. Sort characters separately within each connected component and assign them to increasing indices.",
+    "done": "Find the lexicographically smallest string reachable through allowed index swaps."
+  },
+  "edgeCases": [
+    "No allowed swaps",
+    "Every position joins one component",
+    "Repeated pair changes no component"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

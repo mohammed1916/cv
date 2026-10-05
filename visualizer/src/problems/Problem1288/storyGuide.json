@@ -1,0 +1,31 @@
+{
+  "number": "1288",
+  "title": "Remove Covered Intervals",
+  "goal": "Count intervals not covered by another interval.",
+  "strategy": "Sort by start ascending and end descending. An end no farther than the greatest earlier end is fully covered, including equal-start intervals.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count intervals not covered by another interval.",
+    "inspect": "Sort by start ascending and end descending. An end no farther than the greatest earlier end is fully covered, including equal-start intervals.",
+    "update": "Sort by start ascending and end descending. An end no farther than the greatest earlier end is fully covered, including equal-start intervals.",
+    "done": "Count intervals not covered by another interval."
+  },
+  "edgeCases": [
+    "Same start favors the longest interval",
+    "Disjoint intervals all remain",
+    "Same end leaves the earliest start"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

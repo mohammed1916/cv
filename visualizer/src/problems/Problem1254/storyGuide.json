@@ -1,0 +1,31 @@
+{
+  "number": "1254",
+  "title": "Number of Closed Islands",
+  "goal": "Count zero-valued land components enclosed away from every grid boundary.",
+  "strategy": "Flood each component completely and remember whether any cell touches an edge. One boundary contact makes the entire component open.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count zero-valued land components enclosed away from every grid boundary.",
+    "inspect": "Flood each component completely and remember whether any cell touches an edge. One boundary contact makes the entire component open.",
+    "update": "Flood each component completely and remember whether any cell touches an edge. One boundary contact makes the entire component open.",
+    "done": "Count zero-valued land components enclosed away from every grid boundary."
+  },
+  "edgeCases": [
+    "All water",
+    "All land touches the boundary",
+    "One enclosed cell"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

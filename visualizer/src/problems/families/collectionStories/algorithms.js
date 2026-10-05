@@ -1,10 +1,16 @@
 import { nextSolvers } from './nextAlgorithms.js';
+import { expansionSolvers } from './expansionAlgorithms.js';
+import { dpSolvers } from './expansionDPAlgorithms.js';
+import { moreSolvers } from './expansionMoreAlgorithms.js';
 const sum = values => values.reduce((a, b) => a + b, 0);
 const frequencies = values => { const counts = new Map(); for (const v of values) counts.set(v, (counts.get(v) || 0) + 1); return counts; };
 const gcd = (a, b) => b ? gcd(b, a % b) : a;
 
 export const solvers = {
   ...nextSolvers,
+  ...expansionSolvers,
+  ...dpSolvers,
+  ...moreSolvers,
   860({bills}, emit) {
     let five=0,ten=0;
     for(let i=0;i<bills.length;i++) { const bill=bills[i];let possible=true;

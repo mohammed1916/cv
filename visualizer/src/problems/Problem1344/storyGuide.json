@@ -1,0 +1,31 @@
+{
+  "number": "1344",
+  "title": "Angle Between Hands of a Clock",
+  "goal": "Find the smaller angle between the clock hands.",
+  "strategy": "The hour hand advances within the hour as minutes pass. Compute both absolute angles, then choose the smaller of the direct and complementary gaps.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smaller angle between the clock hands.",
+    "inspect": "The hour hand advances within the hour as minutes pass. Compute both absolute angles, then choose the smaller of the direct and complementary gaps.",
+    "update": "The hour hand advances within the hour as minutes pass. Compute both absolute angles, then choose the smaller of the direct and complementary gaps.",
+    "done": "Find the smaller angle between the clock hands."
+  },
+  "edgeCases": [
+    "Hands coincide at noon",
+    "Straight angle",
+    "Near the wraparound boundary"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

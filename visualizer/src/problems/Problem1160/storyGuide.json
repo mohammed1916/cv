@@ -1,0 +1,31 @@
+{
+  "number": "1160",
+  "title": "Find Words That Can Be Formed by Characters",
+  "goal": "Sum the lengths of words constructible from the supplied character multiset.",
+  "strategy": "Every word independently receives the complete supply. Each needed letter count must fit; unused letters do not matter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the lengths of words constructible from the supplied character multiset.",
+    "inspect": "Every word independently receives the complete supply. Each needed letter count must fit; unused letters do not matter.",
+    "update": "Every word independently receives the complete supply. Each needed letter count must fit; unused letters do not matter.",
+    "done": "Sum the lengths of words constructible from the supplied character multiset."
+  },
+  "edgeCases": [
+    "Every word gets a fresh supply",
+    "A repeated letter is missing",
+    "No word fits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1346",
+  "title": "Check If N and Its Double Exist",
+  "goal": "Decide whether two distinct positions contain a value and its double.",
+  "strategy": "Before inserting the current value, look for its double or integer half among earlier values. This handles either order and requires two zero occurrences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether two distinct positions contain a value and its double.",
+    "inspect": "Before inserting the current value, look for its double or integer half among earlier values. This handles either order and requires two zero occurrences.",
+    "update": "Before inserting the current value, look for its double or integer half among earlier values. This handles either order and requires two zero occurrences.",
+    "done": "Decide whether two distinct positions contain a value and its double."
+  },
+  "edgeCases": [
+    "A single zero cannot match itself",
+    "Two zeros are distinct positions",
+    "Odd values without doubles"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1232",
+  "title": "Check If It Is a Straight Line",
+  "goal": "Decide whether all points lie on one straight line.",
+  "strategy": "Fix a direction from the first two distinct points. Every later displacement must have zero cross product with it, avoiding division by slope.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether all points lie on one straight line.",
+    "inspect": "Fix a direction from the first two distinct points. Every later displacement must have zero cross product with it, avoiding division by slope.",
+    "update": "Fix a direction from the first two distinct points. Every later displacement must have zero cross product with it, avoiding division by slope.",
+    "done": "Decide whether all points lie on one straight line."
+  },
+  "edgeCases": [
+    "Vertical line",
+    "Last point leaves the line",
+    "Any two distinct points define a line"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

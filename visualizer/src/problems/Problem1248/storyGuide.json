@@ -1,0 +1,31 @@
+{
+  "number": "1248",
+  "title": "Count Number of Nice Subarrays",
+  "goal": "Count contiguous subarrays containing exactly k odd numbers.",
+  "strategy": "Replace values conceptually by oddness. Earlier prefixes with k fewer odd values form all valid subarrays ending here.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count contiguous subarrays containing exactly k odd numbers.",
+    "inspect": "Replace values conceptually by oddness. Earlier prefixes with k fewer odd values form all valid subarrays ending here.",
+    "update": "Replace values conceptually by oddness. Earlier prefixes with k fewer odd values form all valid subarrays ending here.",
+    "done": "Count contiguous subarrays containing exactly k odd numbers."
+  },
+  "edgeCases": [
+    "Only even values",
+    "Every value odd",
+    "One odd value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

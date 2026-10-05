@@ -1,0 +1,31 @@
+{
+  "number": "1276",
+  "title": "Number of Burgers with No Waste of Ingredients",
+  "goal": "Find nonnegative jumbo and small burger counts that use all ingredients.",
+  "strategy": "Cheese fixes the total burger count. Two tomatoes per burger form the baseline; every additional pair converts one small burger into a jumbo.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find nonnegative jumbo and small burger counts that use all ingredients.",
+    "inspect": "Cheese fixes the total burger count. Two tomatoes per burger form the baseline; every additional pair converts one small burger into a jumbo.",
+    "update": "Cheese fixes the total burger count. Two tomatoes per burger form the baseline; every additional pair converts one small burger into a jumbo.",
+    "done": "Find nonnegative jumbo and small burger counts that use all ingredients."
+  },
+  "edgeCases": [
+    "Odd tomato count is impossible",
+    "All small burgers",
+    "No ingredients makes no burgers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

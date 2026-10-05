@@ -1,0 +1,31 @@
+{
+  "number": "1299",
+  "title": "Replace Elements with Greatest Element on Right Side",
+  "goal": "Replace each element with the greatest element strictly to its right.",
+  "strategy": "Scanning backward makes the suffix maximum available before updating it with the current value. The last output is minus one because its suffix is empty.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace each element with the greatest element strictly to its right.",
+    "inspect": "Scanning backward makes the suffix maximum available before updating it with the current value. The last output is minus one because its suffix is empty.",
+    "update": "Scanning backward makes the suffix maximum available before updating it with the current value. The last output is minus one because its suffix is empty.",
+    "done": "Replace each element with the greatest element strictly to its right."
+  },
+  "edgeCases": [
+    "Strictly increasing input",
+    "Strictly decreasing input",
+    "Single value gets the empty-suffix marker"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1137",
+  "title": "N-th Tribonacci Number",
+  "goal": "Compute the requested Tribonacci term.",
+  "strategy": "Every term after the three bases depends on the preceding three values. Build in increasing index order so dependencies are ready.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the requested Tribonacci term.",
+    "inspect": "Every term after the three bases depends on the preceding three values. Build in increasing index order so dependencies are ready.",
+    "update": "Every term after the three bases depends on the preceding three values. Build in increasing index order so dependencies are ready.",
+    "done": "Compute the requested Tribonacci term."
+  },
+  "edgeCases": [
+    "Zero base",
+    "First one base",
+    "Second one base"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

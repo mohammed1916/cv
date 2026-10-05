@@ -1,5 +1,5 @@
 {
-  "routes": 774,
+  "routes": 879,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -431,6 +431,51 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1100",
+      "number": "1100",
+      "title": "Find K-Length Substrings With No Repeated Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1101",
+      "number": "1101",
+      "title": "The Earliest Moment When Everyone Become Friends",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1105",
+      "number": "1105",
+      "title": "Filling Bookcase Shelves",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1108",
+      "number": "1108",
+      "title": "Defanging an IP Address",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1109",
+      "number": "1109",
+      "title": "Corporate Flight Bookings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem111",
       "number": "111",
       "title": "Minimum Depth of Binary Tree",
@@ -438,6 +483,33 @@
       "checks": 4,
       "rules": 3,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1111",
+      "number": "1111",
+      "title": "Maximum Nesting Depth of Two Valid Parentheses Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1118",
+      "number": "1118",
+      "title": "Number of Days in a Month",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1119",
+      "number": "1119",
+      "title": "Remove Vowels from a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem112",
@@ -449,6 +521,33 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1122",
+      "number": "1122",
+      "title": "Relative Sort Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1124",
+      "number": "1124",
+      "title": "Longest Well-Performing Interval",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1128",
+      "number": "1128",
+      "title": "Number of Equivalent Domino Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem113",
       "number": "113",
       "title": "Path Sum II",
@@ -456,6 +555,78 @@
       "checks": 1,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1130",
+      "number": "1130",
+      "title": "Minimum Cost Tree From Leaf Values",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1131",
+      "number": "1131",
+      "title": "Maximum of Absolute Value Expression",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1133",
+      "number": "1133",
+      "title": "Largest Unique Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1134",
+      "number": "1134",
+      "title": "Armstrong Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1135",
+      "number": "1135",
+      "title": "Connecting Cities With Minimum Cost",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1136",
+      "number": "1136",
+      "title": "Parallel Courses",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1137",
+      "number": "1137",
+      "title": "N-th Tribonacci Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1139",
+      "number": "1139",
+      "title": "Largest 1-Bordered Square",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem114",
@@ -476,6 +647,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1144",
+      "number": "1144",
+      "title": "Decrease Elements To Make Array Zigzag",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem115",
       "number": "115",
       "title": "Distinct Subsequences",
@@ -485,10 +665,82 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1150",
+      "number": "1150",
+      "title": "Check If a Number Is Majority Element in a Sorted Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1151",
+      "number": "1151",
+      "title": "Minimum Swaps to Group All 1's Together",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1154",
+      "number": "1154",
+      "title": "Day of the Year",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1155",
+      "number": "1155",
+      "title": "Number of Dice Rolls With Target Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem116",
       "number": "116",
       "title": "Populating Next Right Pointers in Each Node",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1160",
+      "number": "1160",
+      "title": "Find Words That Can Be Formed by Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1162",
+      "number": "1162",
+      "title": "As Far from Land as Possible",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1165",
+      "number": "1165",
+      "title": "Single-Row Keyboard",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1167",
+      "number": "1167",
+      "title": "Minimum Cost to Connect Sticks",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem117",
@@ -497,16 +749,124 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1170",
+      "number": "1170",
+      "title": "Compare Strings by Frequency of the Smallest Character",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1175",
+      "number": "1175",
+      "title": "Prime Arrangements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1176",
+      "number": "1176",
+      "title": "Diet Plan Performance",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1177",
+      "number": "1177",
+      "title": "Can Make Palindrome from Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem118",
       "number": "118",
       "title": "Pascal's Triangle",
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1180",
+      "number": "1180",
+      "title": "Count Substrings with Only One Distinct Letter",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1182",
+      "number": "1182",
+      "title": "Shortest Distance to Target Color",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1184",
+      "number": "1184",
+      "title": "Distance Between Bus Stops",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1186",
+      "number": "1186",
+      "title": "Maximum Subarray Sum with One Deletion",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1189",
+      "number": "1189",
+      "title": "Maximum Number of Balloons",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem119",
       "number": "119",
       "title": "Pascal's Triangle II",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1190",
+      "number": "1190",
+      "title": "Reverse Substrings Between Each Pair of Parentheses",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1191",
+      "number": "1191",
+      "title": "K-Concatenation Maximum Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1196",
+      "number": "1196",
+      "title": "How Many Apples Can You Put into the Basket",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem12",
@@ -521,9 +881,45 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1200",
+      "number": "1200",
+      "title": "Minimum Absolute Difference",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1202",
+      "number": "1202",
+      "title": "Smallest String With Swaps",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1207",
       "number": "1207",
       "title": "Unique Number of Occurrences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1208",
+      "number": "1208",
+      "title": "Get Equal Substrings Within Budget",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1209",
+      "number": "1209",
+      "title": "Remove All Adjacent Duplicates in String II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -536,10 +932,82 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1213",
+      "number": "1213",
+      "title": "Intersection of Three Sorted Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1217",
+      "number": "1217",
+      "title": "Minimum Cost to Move Chips to The Same Position",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1218",
+      "number": "1218",
+      "title": "Longest Arithmetic Subsequence of Given Difference",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1219",
+      "number": "1219",
+      "title": "Path with Maximum Gold",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem122",
       "number": "122",
       "title": "Best Time to Buy and Sell Stock II",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1220",
+      "number": "1220",
+      "title": "Count Vowels Permutation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1221",
+      "number": "1221",
+      "title": "Split a String in Balanced Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1222",
+      "number": "1222",
+      "title": "Queens That Can Attack the King",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1227",
+      "number": "1227",
+      "title": "Airplane Seat Assignment Probability",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem123",
@@ -548,16 +1016,88 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1232",
+      "number": "1232",
+      "title": "Check If It Is a Straight Line",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1239",
+      "number": "1239",
+      "title": "Maximum Length of a Concatenated String with Unique Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem124",
       "number": "124",
       "title": "Binary Tree Maximum Path Sum",
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1247",
+      "number": "1247",
+      "title": "Minimum Swaps to Make Strings Equal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1248",
+      "number": "1248",
+      "title": "Count Number of Nice Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1249",
+      "number": "1249",
+      "title": "Minimum Remove to Make Valid Parentheses",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem125",
       "number": "125",
       "title": "Valid Palindrome",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1250",
+      "number": "1250",
+      "title": "Check If It Is a Good Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1252",
+      "number": "1252",
+      "title": "Cells with Odd Values in a Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1254",
+      "number": "1254",
+      "title": "Number of Closed Islands",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem126",
@@ -569,10 +1109,100 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1260",
+      "number": "1260",
+      "title": "Shift 2D Grid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1262",
+      "number": "1262",
+      "title": "Greatest Sum Divisible by Three",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1266",
+      "number": "1266",
+      "title": "Minimum Time Visiting All Points",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1275",
+      "number": "1275",
+      "title": "Find Winner on a Tic Tac Toe Game",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1276",
+      "number": "1276",
+      "title": "Number of Burgers with No Waste of Ingredients",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1277",
+      "number": "1277",
+      "title": "Count Square Submatrices with All Ones",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem128",
       "number": "128",
       "title": "Longest Consecutive Sequence",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1281",
+      "number": "1281",
+      "title": "Subtract the Product and Sum of Digits of an Integer",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1282",
+      "number": "1282",
+      "title": "Group the People Given the Group Size They Belong To",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1287",
+      "number": "1287",
+      "title": "Element Appearing More Than 25% In Sorted Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1288",
+      "number": "1288",
+      "title": "Remove Covered Intervals",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem129",
@@ -581,9 +1211,45 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1291",
+      "number": "1291",
+      "title": "Sequential Digits",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1292",
+      "number": "1292",
+      "title": "Maximum Side Length of a Square with Sum Less than or Equal to Threshold",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1295",
       "number": "1295",
       "title": "Find Numbers with Even Number of Digits",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1296",
+      "number": "1296",
+      "title": "Divide Array in Sets of K Consecutive Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1299",
+      "number": "1299",
+      "title": "Replace Elements with Greatest Element on Right Side",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -602,6 +1268,33 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1300",
+      "number": "1300",
+      "title": "Sum of Mutated Array Closest to Target",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1304",
+      "number": "1304",
+      "title": "Find N Unique Integers Sum up to Zero",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1306",
+      "number": "1306",
+      "title": "Jump Game III",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1307",
       "number": "1307",
       "title": "Verbal Arithmetic Puzzle",
@@ -611,10 +1304,64 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1309",
+      "number": "1309",
+      "title": "Decrypt String from Alphabet to Integer Mapping",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem131",
       "number": "131",
       "title": "Palindrome Partitioning",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1310",
+      "number": "1310",
+      "title": "XOR Queries of a Subarray",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1313",
+      "number": "1313",
+      "title": "Decompress Run-Length Encoded List",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1314",
+      "number": "1314",
+      "title": "Matrix Block Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1317",
+      "number": "1317",
+      "title": "Convert Integer to the Sum of Two No-Zero Integers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1318",
+      "number": "1318",
+      "title": "Minimum Flips to Make a OR b Equal to c",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem132",
@@ -623,10 +1370,55 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1323",
+      "number": "1323",
+      "title": "Maximum 69 Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1328",
+      "number": "1328",
+      "title": "Break a Palindrome",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem133",
       "number": "133",
       "title": "Clone Graph",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1331",
+      "number": "1331",
+      "title": "Rank Transform of an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1332",
+      "number": "1332",
+      "title": "Remove Palindromic Subsequences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1337",
+      "number": "1337",
+      "title": "The K Weakest Rows in a Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem134",
@@ -635,10 +1427,73 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1342",
+      "number": "1342",
+      "title": "Number of Steps to Reduce a Number to Zero",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1343",
+      "number": "1343",
+      "title": "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1344",
+      "number": "1344",
+      "title": "Angle Between Hands of a Clock",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1346",
+      "number": "1346",
+      "title": "Check If N and Its Double Exist",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1347",
+      "number": "1347",
+      "title": "Minimum Number of Steps to Make Two Strings Anagram",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem135",
       "number": "135",
       "title": "Candy",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1351",
+      "number": "1351",
+      "title": "Count Negative Numbers in a Sorted Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1356",
+      "number": "1356",
+      "title": "Sort Integers by The Number of 1 Bits",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem136",
@@ -647,10 +1502,46 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1360",
+      "number": "1360",
+      "title": "Number of Days Between Two Dates",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1365",
+      "number": "1365",
+      "title": "How Many Numbers Are Smaller Than the Current Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem137",
       "number": "137",
       "title": "Single Number II",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1370",
+      "number": "1370",
+      "title": "Increasing Decreasing String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1374",
+      "number": "1374",
+      "title": "Generate a String With Characters That Have Odd Counts",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem138",
@@ -659,10 +1550,55 @@
       "kind": "authored-workspace"
     },
     {
+      "folder": "Problem1380",
+      "number": "1380",
+      "title": "Lucky Numbers in a Matrix",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1385",
+      "number": "1385",
+      "title": "Find the Distance Value Between Two Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1389",
+      "number": "1389",
+      "title": "Create Target Array in the Given Order",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem139",
       "number": "139",
       "title": "Word Break",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1394",
+      "number": "1394",
+      "title": "Find Lucky Integer in an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1399",
+      "number": "1399",
+      "title": "Count Largest Group",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem14",
@@ -678,6 +1614,15 @@
       "number": "140",
       "title": "Word Break II",
       "kind": "authored-workspace"
+    },
+    {
+      "folder": "Problem1400",
+      "number": "1400",
+      "title": "Construct K Palindrome Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem141",

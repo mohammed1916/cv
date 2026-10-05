@@ -1,0 +1,31 @@
+{
+  "number": "1291",
+  "title": "Sequential Digits",
+  "goal": "List all numbers within the range whose digits increase consecutively by one.",
+  "strategy": "Every such number is a contiguous slice of 123456789. Enumerate valid lengths and starts, then retain the inclusive range matches.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List all numbers within the range whose digits increase consecutively by one.",
+    "inspect": "Every such number is a contiguous slice of 123456789. Enumerate valid lengths and starts, then retain the inclusive range matches.",
+    "update": "Every such number is a contiguous slice of 123456789. Enumerate valid lengths and starts, then retain the inclusive range matches.",
+    "done": "List all numbers within the range whose digits increase consecutively by one."
+  },
+  "edgeCases": [
+    "No sequential number in the interval",
+    "A candidate exactly matches both bounds",
+    "Highest possible sequential value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

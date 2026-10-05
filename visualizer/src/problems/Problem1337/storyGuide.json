@@ -1,0 +1,31 @@
+{
+  "number": "1337",
+  "title": "The K Weakest Rows in a Matrix",
+  "goal": "Return the k weakest matrix rows, resolving equal strength by row index.",
+  "strategy": "A row strength is its soldier count. Sorting by the pair of strength and original index establishes both the main order and deterministic ties.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the k weakest matrix rows, resolving equal strength by row index.",
+    "inspect": "A row strength is its soldier count. Sorting by the pair of strength and original index establishes both the main order and deterministic ties.",
+    "update": "A row strength is its soldier count. Sorting by the pair of strength and original index establishes both the main order and deterministic ties.",
+    "done": "Return the k weakest matrix rows, resolving equal strength by row index."
+  },
+  "edgeCases": [
+    "Empty soldier row is weakest",
+    "All rows tie",
+    "Select every row"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1136",
+  "title": "Parallel Courses",
+  "goal": "Find the fewest semesters needed when all available courses can run together.",
+  "strategy": "Courses with zero remaining prerequisites form the next semester. A cycle leaves some courses locked forever.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest semesters needed when all available courses can run together.",
+    "inspect": "Courses with zero remaining prerequisites form the next semester. A cycle leaves some courses locked forever.",
+    "update": "Courses with zero remaining prerequisites form the next semester. A cycle leaves some courses locked forever.",
+    "done": "Find the fewest semesters needed when all available courses can run together."
+  },
+  "edgeCases": [
+    "All courses available immediately",
+    "Directed cycle blocks completion",
+    "One prerequisite chain"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

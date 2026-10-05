@@ -1,0 +1,31 @@
+{
+  "number": "1130",
+  "title": "Minimum Cost Tree From Leaf Values",
+  "goal": "Build an ordered leaf tree with minimum total nonleaf cost.",
+  "strategy": "Every interval can split between two adjacent leaves. Its root cost is the product of the two side maxima, plus the best costs for both smaller intervals.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build an ordered leaf tree with minimum total nonleaf cost.",
+    "inspect": "Every interval can split between two adjacent leaves. Its root cost is the product of the two side maxima, plus the best costs for both smaller intervals.",
+    "update": "Every interval can split between two adjacent leaves. Its root cost is the product of the two side maxima, plus the best costs for both smaller intervals.",
+    "done": "Build an ordered leaf tree with minimum total nonleaf cost."
+  },
+  "edgeCases": [
+    "Only one internal node",
+    "Equal leaf maxima",
+    "Large leaf at one end"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

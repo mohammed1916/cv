@@ -1,0 +1,31 @@
+{
+  "number": "1208",
+  "title": "Get Equal Substrings Within Budget",
+  "goal": "Find the longest aligned substring whose character replacement cost fits the budget.",
+  "strategy": "Per-position costs are nonnegative. Expand right and remove left costs only when over budget to keep the longest feasible ending.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest aligned substring whose character replacement cost fits the budget.",
+    "inspect": "Per-position costs are nonnegative. Expand right and remove left costs only when over budget to keep the longest feasible ending.",
+    "update": "Per-position costs are nonnegative. Expand right and remove left costs only when over budget to keep the longest feasible ending.",
+    "done": "Find the longest aligned substring whose character replacement cost fits the budget."
+  },
+  "edgeCases": [
+    "Zero budget keeps only equal positions",
+    "All positions fit",
+    "No position fits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

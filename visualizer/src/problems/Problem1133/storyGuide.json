@@ -1,0 +1,31 @@
+{
+  "number": "1133",
+  "title": "Largest Unique Number",
+  "goal": "Find the greatest value that occurs exactly once.",
+  "strategy": "Frequency, not position, determines eligibility. Compare only singleton buckets and return minus one if none remain.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest value that occurs exactly once.",
+    "inspect": "Frequency, not position, determines eligibility. Compare only singleton buckets and return minus one if none remain.",
+    "update": "Frequency, not position, determines eligibility. Compare only singleton buckets and return minus one if none remain.",
+    "done": "Find the greatest value that occurs exactly once."
+  },
+  "edgeCases": [
+    "Every value repeats",
+    "Zero is a valid unique answer",
+    "One value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1328",
+  "title": "Break a Palindrome",
+  "goal": "Replace one character to create the lexicographically smallest nonpalindrome.",
+  "strategy": "Lower the earliest non-a in the first half, avoiding an odd middle character. If none exists, raise the last character to b. A single character is impossible.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace one character to create the lexicographically smallest nonpalindrome.",
+    "inspect": "Lower the earliest non-a in the first half, avoiding an odd middle character. If none exists, raise the last character to b. A single character is impossible.",
+    "update": "Lower the earliest non-a in the first half, avoiding an odd middle character. If none exists, raise the last character to b. A single character is impossible.",
+    "done": "Replace one character to create the lexicographically smallest nonpalindrome."
+  },
+  "edgeCases": [
+    "All a characters require changing the end",
+    "Only the odd center differs",
+    "Single character is impossible"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1222",
+  "title": "Queens That Can Attack the King",
+  "goal": "Find all queens that can attack the king on an eight-by-eight board.",
+  "strategy": "Only the first queen on each of eight outward rays can attack. A nearer queen blocks every farther queen in that direction.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find all queens that can attack the king on an eight-by-eight board.",
+    "inspect": "Only the first queen on each of eight outward rays can attack. A nearer queen blocks every farther queen in that direction.",
+    "update": "Only the first queen on each of eight outward rays can attack. A nearer queen blocks every farther queen in that direction.",
+    "done": "Find all queens that can attack the king on an eight-by-eight board."
+  },
+  "edgeCases": [
+    "King in the corner",
+    "No queen shares a ray",
+    "One nearest queen on the row"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

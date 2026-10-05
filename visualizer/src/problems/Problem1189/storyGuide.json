@@ -1,0 +1,31 @@
+{
+  "number": "1189",
+  "title": "Maximum Number of Balloons",
+  "goal": "Count complete copies of balloon obtainable from the available letters.",
+  "strategy": "Each copy needs two l characters and two o characters. Divide each letter supply by its demand and take the bottleneck.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count complete copies of balloon obtainable from the available letters.",
+    "inspect": "Each copy needs two l characters and two o characters. Divide each letter supply by its demand and take the bottleneck.",
+    "update": "Each copy needs two l characters and two o characters. Divide each letter supply by its demand and take the bottleneck.",
+    "done": "Count complete copies of balloon obtainable from the available letters."
+  },
+  "edgeCases": [
+    "Missing a required letter",
+    "Only one pair of l letters limits production",
+    "Unrelated characters"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

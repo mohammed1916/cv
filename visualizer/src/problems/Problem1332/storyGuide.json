@@ -1,0 +1,31 @@
+{
+  "number": "1332",
+  "title": "Remove Palindromic Subsequences",
+  "goal": "Minimize removals of palindromic subsequences from an a/b string.",
+  "strategy": "One removal suffices exactly when the whole string is palindromic. Otherwise, all a characters and then all b characters form two removable subsequences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize removals of palindromic subsequences from an a/b string.",
+    "inspect": "One removal suffices exactly when the whole string is palindromic. Otherwise, all a characters and then all b characters form two removable subsequences.",
+    "update": "One removal suffices exactly when the whole string is palindromic. Otherwise, all a characters and then all b characters form two removable subsequences.",
+    "done": "Minimize removals of palindromic subsequences from an a/b string."
+  },
+  "edgeCases": [
+    "Whole string is a palindrome",
+    "Only one character kind",
+    "Two different letters require two removals"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

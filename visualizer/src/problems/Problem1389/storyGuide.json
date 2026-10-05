@@ -1,0 +1,31 @@
+{
+  "number": "1389",
+  "title": "Create Target Array in the Given Order",
+  "goal": "Construct a target array by inserting each value at its supplied current index.",
+  "strategy": "Apply insertions in order. Every insertion shifts the existing suffix, and subsequent indices address the updated array.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct a target array by inserting each value at its supplied current index.",
+    "inspect": "Apply insertions in order. Every insertion shifts the existing suffix, and subsequent indices address the updated array.",
+    "update": "Apply insertions in order. Every insertion shifts the existing suffix, and subsequent indices address the updated array.",
+    "done": "Construct a target array by inserting each value at its supplied current index."
+  },
+  "edgeCases": [
+    "Always insert at front",
+    "Always append",
+    "Single insertion"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

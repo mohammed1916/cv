@@ -1,0 +1,31 @@
+{
+  "number": "1385",
+  "title": "Find the Distance Value Between Two Arrays",
+  "goal": "Count first-array values farther than d from every second-array value.",
+  "strategy": "One close second-array value disqualifies a candidate. Distance equal to d is still too close because the requirement is strictly greater.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count first-array values farther than d from every second-array value.",
+    "inspect": "One close second-array value disqualifies a candidate. Distance equal to d is still too close because the requirement is strictly greater.",
+    "update": "One close second-array value disqualifies a candidate. Distance equal to d is still too close because the requirement is strictly greater.",
+    "done": "Count first-array values farther than d from every second-array value."
+  },
+  "edgeCases": [
+    "Equality at the boundary disqualifies",
+    "Zero distance only rejects exact matches",
+    "Every candidate is too close"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

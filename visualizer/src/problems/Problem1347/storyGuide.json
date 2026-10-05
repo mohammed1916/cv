@@ -1,0 +1,31 @@
+{
+  "number": "1347",
+  "title": "Minimum Number of Steps to Make Two Strings Anagram",
+  "goal": "Minimize replacements in t needed to make it an anagram of s.",
+  "strategy": "Positive count deficits measure the letters t lacks. Since lengths agree, its surplus characters can supply exactly those replacements.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize replacements in t needed to make it an anagram of s.",
+    "inspect": "Positive count deficits measure the letters t lacks. Since lengths agree, its surplus characters can supply exactly those replacements.",
+    "update": "Positive count deficits measure the letters t lacks. Since lengths agree, its surplus characters can supply exactly those replacements.",
+    "done": "Minimize replacements in t needed to make it an anagram of s."
+  },
+  "edgeCases": [
+    "Already anagrams",
+    "Every position needs a different letter supply",
+    "Single replacement"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

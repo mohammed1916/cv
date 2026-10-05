@@ -1,8 +1,14 @@
 import { nextCollectionCases } from './nextCollectionExamples.js';
+import { expansionCollectionCases } from './expansionCollectionExamples.js';
+import { dpCases } from './expansionDPExamples.js';
+import { moreCases } from './expansionMoreExamples.js';
 const rookBoard=(pieces)=>{const board=Array.from({length:8},()=>Array(8).fill('.'));for(const[r,c,v]of pieces)board[r][c]=v;return board;};
 // Independently authored walkthroughs and named decision boundaries.
 const cases={
   ...nextCollectionCases,
+  ...expansionCollectionCases,
+  ...dpCases,
+  ...moreCases,
   860:[['Conserve fives across several customers',{bills:[5,5,10,5,20,5,10,5,5,20]}],['First customer needs unavailable change',{bills:[10]}],['Three fives make change',{bills:[5,5,5,20]}],['Too few fives after earlier sale',{bills:[5,10,20]}]],
   861:[['Rows and columns prefer different flips',{grid:[[0,1,0,1,1],[1,0,1,0,0],[0,0,1,1,0],[1,1,0,0,1]]}],['Single zero bit',{grid:[[0]]}],['Already maximal',{grid:[[1,1,1],[1,1,1]]}],['Column tie needs no flip',{grid:[[1,0],[1,1]]}]],
   868:[['Several unequal zero gaps',{n:1161}],['Only one set bit',{n:128}],['All bits set',{n:127}],['Two widely separated bits',{n:513}]],

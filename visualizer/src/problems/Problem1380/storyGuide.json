@@ -1,0 +1,31 @@
+{
+  "number": "1380",
+  "title": "Lucky Numbers in a Matrix",
+  "goal": "Find values that are minimum in their row and maximum in their column.",
+  "strategy": "Row minima and column maxima impose independent requirements. A lucky cell must satisfy both at the same coordinates.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find values that are minimum in their row and maximum in their column.",
+    "inspect": "Row minima and column maxima impose independent requirements. A lucky cell must satisfy both at the same coordinates.",
+    "update": "Row minima and column maxima impose independent requirements. A lucky cell must satisfy both at the same coordinates.",
+    "done": "Find values that are minimum in their row and maximum in their column."
+  },
+  "edgeCases": [
+    "One row chooses its minimum",
+    "One column chooses its maximum",
+    "A single cell is lucky"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

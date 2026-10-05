@@ -1,0 +1,31 @@
+{
+  "number": "1190",
+  "title": "Reverse Substrings Between Each Pair of Parentheses",
+  "goal": "Reverse the contents of every matched parenthesis pair, starting from nested effects.",
+  "strategy": "Precompute bracket partners, then walk the string with a direction. Jumping to a partner and reversing direction implements nested reversals in one traversal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reverse the contents of every matched parenthesis pair, starting from nested effects.",
+    "inspect": "Precompute bracket partners, then walk the string with a direction. Jumping to a partner and reversing direction implements nested reversals in one traversal.",
+    "update": "Precompute bracket partners, then walk the string with a direction. Jumping to a partner and reversing direction implements nested reversals in one traversal.",
+    "done": "Reverse the contents of every matched parenthesis pair, starting from nested effects."
+  },
+  "edgeCases": [
+    "No brackets",
+    "Empty pair contributes nothing",
+    "Deeply nested short text"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1309",
+  "title": "Decrypt String from Alphabet to Integer Mapping",
+  "goal": "Decode one-digit and hash-terminated two-digit alphabet codes.",
+  "strategy": "Look ahead for a hash two positions later before consuming a digit. It identifies the two-digit codes for letters j through z.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decode one-digit and hash-terminated two-digit alphabet codes.",
+    "inspect": "Look ahead for a hash two positions later before consuming a digit. It identifies the two-digit codes for letters j through z.",
+    "update": "Look ahead for a hash two positions later before consuming a digit. It identifies the two-digit codes for letters j through z.",
+    "done": "Decode one-digit and hash-terminated two-digit alphabet codes."
+  },
+  "edgeCases": [
+    "Only one-digit codes",
+    "Only two-digit codes",
+    "One letter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

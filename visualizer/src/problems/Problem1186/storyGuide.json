@@ -1,0 +1,31 @@
+{
+  "number": "1186",
+  "title": "Maximum Subarray Sum with One Deletion",
+  "goal": "Find the maximum nonempty subarray sum after at most one deletion.",
+  "strategy": "Maintain states ending here with no deletion and with one deletion. The latter either extends a prior deleted state or deletes the current value from the previous kept state.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the maximum nonempty subarray sum after at most one deletion.",
+    "inspect": "Maintain states ending here with no deletion and with one deletion. The latter either extends a prior deleted state or deletes the current value from the previous kept state.",
+    "update": "Maintain states ending here with no deletion and with one deletion. The latter either extends a prior deleted state or deletes the current value from the previous kept state.",
+    "done": "Find the maximum nonempty subarray sum after at most one deletion."
+  },
+  "edgeCases": [
+    "All negative keeps one element",
+    "No deletion improves all-positive input",
+    "Single negative cannot be deleted to empty"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

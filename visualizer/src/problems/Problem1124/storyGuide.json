@@ -1,0 +1,31 @@
+{
+  "number": "1124",
+  "title": "Longest Well-Performing Interval",
+  "goal": "Find the longest interval with more tiring days than other days.",
+  "strategy": "Encode hours greater than eight as one and other days as minus one. Preserve earliest prefix occurrences to maximize the length of a positive-sum interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest interval with more tiring days than other days.",
+    "inspect": "Encode hours greater than eight as one and other days as minus one. Preserve earliest prefix occurrences to maximize the length of a positive-sum interval.",
+    "update": "Encode hours greater than eight as one and other days as minus one. Preserve earliest prefix occurrences to maximize the length of a positive-sum interval.",
+    "done": "Find the longest interval with more tiring days than other days."
+  },
+  "edgeCases": [
+    "Eight hours is not tiring",
+    "Every day is tiring",
+    "Single tiring day"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

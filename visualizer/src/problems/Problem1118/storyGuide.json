@@ -1,0 +1,31 @@
+{
+  "number": "1118",
+  "title": "Number of Days in a Month",
+  "goal": "Find the number of days in a Gregorian calendar month.",
+  "strategy": "Months have fixed lengths except February. Leap years follow the divisible-by-four rule with the century and four-hundred-year exceptions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the number of days in a Gregorian calendar month.",
+    "inspect": "Months have fixed lengths except February. Leap years follow the divisible-by-four rule with the century and four-hundred-year exceptions.",
+    "update": "Months have fixed lengths except February. Leap years follow the divisible-by-four rule with the century and four-hundred-year exceptions.",
+    "done": "Find the number of days in a Gregorian calendar month."
+  },
+  "edgeCases": [
+    "Century exception removes leap day",
+    "Ordinary leap year",
+    "Thirty-day month"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

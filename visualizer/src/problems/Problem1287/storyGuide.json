@@ -1,0 +1,31 @@
+{
+  "number": "1287",
+  "title": "Element Appearing More Than 25% In Sorted Array",
+  "goal": "Find the unique value occurring in more than a quarter of a sorted array.",
+  "strategy": "Equal values occupy consecutive positions. Matching endpoints separated by floor(n/4) certify a run longer than one quarter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the unique value occurring in more than a quarter of a sorted array.",
+    "inspect": "Equal values occupy consecutive positions. Matching endpoints separated by floor(n/4) certify a run longer than one quarter.",
+    "update": "Equal values occupy consecutive positions. Matching endpoints separated by floor(n/4) certify a run longer than one quarter.",
+    "done": "Find the unique value occurring in more than a quarter of a sorted array."
+  },
+  "edgeCases": [
+    "One value array",
+    "The large run starts at zero",
+    "The large run ends at the final index"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

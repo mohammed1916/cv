@@ -1,0 +1,31 @@
+{
+  "number": "1191",
+  "title": "K-Concatenation Maximum Sum",
+  "goal": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray.",
+  "strategy": "At most two copies are needed to capture a boundary-crossing suffix and prefix. Additional complete middle copies help only if one copy has positive total.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray.",
+    "inspect": "At most two copies are needed to capture a boundary-crossing suffix and prefix. Additional complete middle copies help only if one copy has positive total.",
+    "update": "At most two copies are needed to capture a boundary-crossing suffix and prefix. Additional complete middle copies help only if one copy has positive total.",
+    "done": "Find the maximum subarray sum in k concatenated copies, allowing an empty subarray."
+  },
+  "edgeCases": [
+    "Negative total makes extra copies unhelpful",
+    "All negative allows the empty subarray",
+    "One copy has no wraparound"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1122",
+  "title": "Relative Sort Array",
+  "goal": "Sort values according to an explicit relative order, then sort the unlisted tail.",
+  "strategy": "Count multiplicities first. Consume requested buckets in arr2 order, then place remaining buckets numerically.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sort values according to an explicit relative order, then sort the unlisted tail.",
+    "inspect": "Count multiplicities first. Consume requested buckets in arr2 order, then place remaining buckets numerically.",
+    "update": "Count multiplicities first. Consume requested buckets in arr2 order, then place remaining buckets numerically.",
+    "done": "Sort values according to an explicit relative order, then sort the unlisted tail."
+  },
+  "edgeCases": [
+    "Every value is listed",
+    "One requested bucket",
+    "One repeated value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

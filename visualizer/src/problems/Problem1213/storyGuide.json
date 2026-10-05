@@ -1,0 +1,31 @@
+{
+  "number": "1213",
+  "title": "Intersection of Three Sorted Arrays",
+  "goal": "Return the common values in three strictly increasing arrays.",
+  "strategy": "When current values differ, the smallest cannot match a later value of the arrays already ahead. Advance only pointers at that smallest value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the common values in three strictly increasing arrays.",
+    "inspect": "When current values differ, the smallest cannot match a later value of the arrays already ahead. Advance only pointers at that smallest value.",
+    "update": "When current values differ, the smallest cannot match a later value of the arrays already ahead. Advance only pointers at that smallest value.",
+    "done": "Return the common values in three strictly increasing arrays."
+  },
+  "edgeCases": [
+    "No shared value",
+    "All values shared",
+    "Only final value matches"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

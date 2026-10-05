@@ -1,0 +1,31 @@
+{
+  "number": "1310",
+  "title": "XOR Queries of a Subarray",
+  "goal": "Answer inclusive subarray XOR queries.",
+  "strategy": "XOR is self-canceling. The XOR of two prefix values removes the common earlier prefix and retains exactly the requested interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer inclusive subarray XOR queries.",
+    "inspect": "XOR is self-canceling. The XOR of two prefix values removes the common earlier prefix and retains exactly the requested interval.",
+    "update": "XOR is self-canceling. The XOR of two prefix values removes the common earlier prefix and retains exactly the requested interval.",
+    "done": "Answer inclusive subarray XOR queries."
+  },
+  "edgeCases": [
+    "Single element query",
+    "Equal values cancel across an even range",
+    "Zero entries leave XOR unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1196",
+  "title": "How Many Apples Can You Put into the Basket",
+  "goal": "Take the most apples without exceeding weight five thousand.",
+  "strategy": "Selecting lighter apples first maximizes count. Once the lightest remaining apple does not fit, no later apple can fit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Take the most apples without exceeding weight five thousand.",
+    "inspect": "Selecting lighter apples first maximizes count. Once the lightest remaining apple does not fit, no later apple can fit.",
+    "update": "Selecting lighter apples first maximizes count. Once the lightest remaining apple does not fit, no later apple can fit.",
+    "done": "Take the most apples without exceeding weight five thousand."
+  },
+  "edgeCases": [
+    "One apple exactly fills capacity",
+    "Every apple is too heavy",
+    "All apples fit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

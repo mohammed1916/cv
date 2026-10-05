@@ -1,0 +1,31 @@
+{
+  "number": "1227",
+  "title": "Airplane Seat Assignment Probability",
+  "goal": "Find the probability the last passenger occupies their own seat.",
+  "strategy": "For more than one passenger, intermediate displaced choices leave the decisive first and last seats symmetric. With one passenger there is only one outcome.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the probability the last passenger occupies their own seat.",
+    "inspect": "For more than one passenger, intermediate displaced choices leave the decisive first and last seats symmetric. With one passenger there is only one outcome.",
+    "update": "For more than one passenger, intermediate displaced choices leave the decisive first and last seats symmetric. With one passenger there is only one outcome.",
+    "done": "Find the probability the last passenger occupies their own seat."
+  },
+  "edgeCases": [
+    "One passenger has no competing seat",
+    "Two equally likely seat choices",
+    "Larger count changes no probability"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

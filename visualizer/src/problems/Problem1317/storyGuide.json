@@ -1,0 +1,31 @@
+{
+  "number": "1317",
+  "title": "Convert Integer to the Sum of Two No-Zero Integers",
+  "goal": "Split n into two positive integers containing no zero digits.",
+  "strategy": "Try a positive first addend and derive the other by subtraction. Check both decimal representations before returning any valid pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split n into two positive integers containing no zero digits.",
+    "inspect": "Try a positive first addend and derive the other by subtraction. Check both decimal representations before returning any valid pair.",
+    "update": "Try a positive first addend and derive the other by subtraction. Check both decimal representations before returning any valid pair.",
+    "done": "Split n into two positive integers containing no zero digits."
+  },
+  "edgeCases": [
+    "Smallest valid input",
+    "Carry across a decimal boundary",
+    "A small split without zeros"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

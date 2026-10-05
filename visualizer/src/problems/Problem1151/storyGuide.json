@@ -1,0 +1,31 @@
+{
+  "number": "1151",
+  "title": "Minimum Swaps to Group All 1's Together",
+  "goal": "Minimize arbitrary swaps needed to group all ones together.",
+  "strategy": "The destination block width equals the total number of ones. Every zero inside that block can exchange with an outside one, so maximize ones already inside.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize arbitrary swaps needed to group all ones together.",
+    "inspect": "The destination block width equals the total number of ones. Every zero inside that block can exchange with an outside one, so maximize ones already inside.",
+    "update": "The destination block width equals the total number of ones. Every zero inside that block can exchange with an outside one, so maximize ones already inside.",
+    "done": "Minimize arbitrary swaps needed to group all ones together."
+  },
+  "edgeCases": [
+    "No ones",
+    "Already grouped",
+    "Every position is one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

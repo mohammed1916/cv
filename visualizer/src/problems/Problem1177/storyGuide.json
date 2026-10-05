@@ -1,0 +1,31 @@
+{
+  "number": "1177",
+  "title": "Can Make Palindrome from Substring",
+  "goal": "For each substring, decide whether rearrangement and at most k replacements can form a palindrome.",
+  "strategy": "A parity mask reveals odd character counts. Every replacement can fix two odd counts, and one odd character may occupy the center.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For each substring, decide whether rearrangement and at most k replacements can form a palindrome.",
+    "inspect": "A parity mask reveals odd character counts. Every replacement can fix two odd counts, and one odd character may occupy the center.",
+    "update": "A parity mask reveals odd character counts. Every replacement can fix two odd counts, and one odd character may occupy the center.",
+    "done": "For each substring, decide whether rearrangement and at most k replacements can form a palindrome."
+  },
+  "edgeCases": [
+    "Single character is always palindromic",
+    "All counts already even",
+    "Two odd counts need one replacement"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

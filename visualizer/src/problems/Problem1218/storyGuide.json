@@ -1,0 +1,31 @@
+{
+  "number": "1218",
+  "title": "Longest Arithmetic Subsequence of Given Difference",
+  "goal": "Find the longest subsequence with the specified fixed adjacent difference.",
+  "strategy": "Store the best length ending at each value. The only possible predecessor is current minus difference, including repeated values when difference is zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest subsequence with the specified fixed adjacent difference.",
+    "inspect": "Store the best length ending at each value. The only possible predecessor is current minus difference, including repeated values when difference is zero.",
+    "update": "Store the best length ending at each value. The only possible predecessor is current minus difference, including repeated values when difference is zero.",
+    "done": "Find the longest subsequence with the specified fixed adjacent difference."
+  },
+  "edgeCases": [
+    "Zero difference extends repeated values",
+    "Positive difference chain",
+    "No predecessor ever appears"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
