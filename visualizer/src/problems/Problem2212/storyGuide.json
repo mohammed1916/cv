@@ -1,0 +1,31 @@
+{
+  "number": "2212",
+  "title": "Maximum Points in an Archery Competition",
+  "goal": "Allocate Bob arrows to maximize the points won against Alice.",
+  "strategy": "Winning a section requires exactly one more arrow than Alice used there. Enumerate subsets of won sections, keep the best affordable score, and place unused arrows in the zero-point section.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Allocate Bob arrows to maximize the points won against Alice.",
+    "inspect": "Winning a section requires exactly one more arrow than Alice used there. Enumerate subsets of won sections, keep the best affordable score, and place unused arrows in the zero-point section.",
+    "update": "Winning a section requires exactly one more arrow than Alice used there. Enumerate subsets of won sections, keep the best affordable score, and place unused arrows in the zero-point section.",
+    "done": "Allocate Bob arrows to maximize the points won against Alice."
+  },
+  "edgeCases": [
+    "One arrow can win the highest unguarded section",
+    "Equal defense costs favor the highest scoring sections",
+    "Alice places every arrow in the zero-point section"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

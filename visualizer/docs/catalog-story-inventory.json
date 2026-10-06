@@ -1,5 +1,5 @@
 {
-  "routes": 1404,
+  "routes": 1424,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -7145,6 +7145,78 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2201",
+      "number": "2201",
+      "title": "Count Artifacts That Can Be Extracted",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2202",
+      "number": "2202",
+      "title": "Maximize the Topmost Element After K Moves",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2203",
+      "number": "2203",
+      "title": "Minimum Weighted Subgraph With the Required Paths",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2204",
+      "number": "2204",
+      "title": "Distance to a Cycle in Undirected Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2206",
+      "number": "2206",
+      "title": "Divide Array Into Equal Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2207",
+      "number": "2207",
+      "title": "Maximize Number of Subsequences in a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2208",
+      "number": "2208",
+      "title": "Minimum Operations to Halve Array Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2209",
+      "number": "2209",
+      "title": "Minimum White Tiles After Covering With Carpets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem221",
       "number": "221",
       "title": "Maximal Square",
@@ -7154,6 +7226,87 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem2210",
+      "number": "2210",
+      "title": "Count Hills and Valleys in an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2211",
+      "number": "2211",
+      "title": "Count Collisions on a Road",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2212",
+      "number": "2212",
+      "title": "Maximum Points in an Archery Competition",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2213",
+      "number": "2213",
+      "title": "Longest Substring of One Repeating Character",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2214",
+      "number": "2214",
+      "title": "Minimum Health to Beat Game",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2215",
+      "number": "2215",
+      "title": "Find the Difference of Two Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2216",
+      "number": "2216",
+      "title": "Minimum Deletions to Make Array Beautiful",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2217",
+      "number": "2217",
+      "title": "Find Palindrome With Fixed Length",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2218",
+      "number": "2218",
+      "title": "Maximum Value of K Coins From Piles",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem222",
       "number": "222",
       "title": "Count Complete Tree Nodes",
@@ -7161,6 +7314,33 @@
       "checks": 1,
       "rules": 2,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2220",
+      "number": "2220",
+      "title": "Minimum Bit Flips to Convert Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2221",
+      "number": "2221",
+      "title": "Find Triangular Sum of an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2222",
+      "number": "2222",
+      "title": "Number of Ways to Select Buildings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem223",

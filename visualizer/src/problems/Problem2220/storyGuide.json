@@ -1,0 +1,31 @@
+{
+  "number": "2220",
+  "title": "Minimum Bit Flips to Convert Number",
+  "goal": "Count bit positions that must flip to transform start into goal.",
+  "strategy": "XOR marks exactly the differing positions. Count its set bits while scanning from the least significant position upward; matching positions require no flip.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count bit positions that must flip to transform start into goal.",
+    "inspect": "XOR marks exactly the differing positions. Count its set bits while scanning from the least significant position upward; matching positions require no flip.",
+    "update": "XOR marks exactly the differing positions. Count its set bits while scanning from the least significant position upward; matching positions require no flip.",
+    "done": "Count bit positions that must flip to transform start into goal."
+  },
+  "edgeCases": [
+    "Equal values require no flips",
+    "Zero to a power of two changes one bit",
+    "Many low bits differ simultaneously"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

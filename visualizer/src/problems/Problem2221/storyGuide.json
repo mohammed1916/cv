@@ -1,0 +1,31 @@
+{
+  "number": "2221",
+  "title": "Find Triangular Sum of an Array",
+  "goal": "Reduce adjacent digit sums modulo ten until one value remains.",
+  "strategy": "Every new row is computed from neighboring pairs of the previous row. Build a fresh row before replacing the old one so earlier updates cannot contaminate later sums.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reduce adjacent digit sums modulo ten until one value remains.",
+    "inspect": "Every new row is computed from neighboring pairs of the previous row. Build a fresh row before replacing the old one so earlier updates cannot contaminate later sums.",
+    "update": "Every new row is computed from neighboring pairs of the previous row. Build a fresh row before replacing the old one so earlier updates cannot contaminate later sums.",
+    "done": "Reduce adjacent digit sums modulo ten until one value remains."
+  },
+  "edgeCases": [
+    "A singleton is already the result",
+    "Two digits wrap their sum modulo ten",
+    "All-zero rows remain zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1404,
-  "matchedCatalogRoutes": 1388,
-  "remaining": 2685,
+  "routes": 1424,
+  "matchedCatalogRoutes": 1408,
+  "remaining": 2665,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -15501,29 +15501,29 @@
       "number": "2201",
       "title": "Count Artifacts That Can Be Extracted",
       "slug": "count-artifacts-that-can-be-extracted",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2201"
     },
     {
       "number": "2202",
       "title": "Maximize the Topmost Element After K Moves",
       "slug": "maximize-the-topmost-element-after-k-moves",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2202"
     },
     {
       "number": "2203",
       "title": "Minimum Weighted Subgraph With the Required Paths",
       "slug": "minimum-weighted-subgraph-with-the-required-paths",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2203"
     },
     {
       "number": "2204",
       "title": "Distance to a Cycle in Undirected Graph",
       "slug": "distance-to-a-cycle-in-undirected-graph",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2204"
     },
     {
       "number": "2205",
@@ -15536,92 +15536,92 @@
       "number": "2206",
       "title": "Divide Array Into Equal Pairs",
       "slug": "divide-array-into-equal-pairs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2206"
     },
     {
       "number": "2207",
       "title": "Maximize Number of Subsequences in a String",
       "slug": "maximize-number-of-subsequences-in-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2207"
     },
     {
       "number": "2208",
       "title": "Minimum Operations to Halve Array Sum",
       "slug": "minimum-operations-to-halve-array-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2208"
     },
     {
       "number": "2209",
       "title": "Minimum White Tiles After Covering With Carpets",
       "slug": "minimum-white-tiles-after-covering-with-carpets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2209"
     },
     {
       "number": "2210",
       "title": "Count Hills and Valleys in an Array",
       "slug": "count-hills-and-valleys-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2210"
     },
     {
       "number": "2211",
       "title": "Count Collisions on a Road",
       "slug": "count-collisions-on-a-road",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2211"
     },
     {
       "number": "2212",
       "title": "Maximum Points in an Archery Competition",
       "slug": "maximum-points-in-an-archery-competition",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2212"
     },
     {
       "number": "2213",
       "title": "Longest Substring of One Repeating Character",
       "slug": "longest-substring-of-one-repeating-character",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2213"
     },
     {
       "number": "2214",
       "title": "Minimum Health to Beat Game",
       "slug": "minimum-health-to-beat-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2214"
     },
     {
       "number": "2215",
       "title": "Find the Difference of Two Arrays",
       "slug": "find-the-difference-of-two-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2215"
     },
     {
       "number": "2216",
       "title": "Minimum Deletions to Make Array Beautiful",
       "slug": "minimum-deletions-to-make-array-beautiful",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2216"
     },
     {
       "number": "2217",
       "title": "Find Palindrome With Fixed Length",
       "slug": "find-palindrome-with-fixed-length",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2217"
     },
     {
       "number": "2218",
       "title": "Maximum Value of K Coins From Piles",
       "slug": "maximum-value-of-k-coins-from-piles",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2218"
     },
     {
       "number": "2219",
@@ -15634,22 +15634,22 @@
       "number": "2220",
       "title": "Minimum Bit Flips to Convert Number",
       "slug": "minimum-bit-flips-to-convert-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2220"
     },
     {
       "number": "2221",
       "title": "Find Triangular Sum of an Array",
       "slug": "find-triangular-sum-of-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2221"
     },
     {
       "number": "2222",
       "title": "Number of Ways to Select Buildings",
       "slug": "number-of-ways-to-select-buildings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2222"
     },
     {
       "number": "2223",

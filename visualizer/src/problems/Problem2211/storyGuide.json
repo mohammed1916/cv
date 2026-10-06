@@ -1,0 +1,31 @@
+{
+  "number": "2211",
+  "title": "Count Collisions on a Road",
+  "goal": "Count collisions among cars moving left right or staying still.",
+  "strategy": "Leading left-moving cars and trailing right-moving cars escape forever. Within the remaining interval, every moving car eventually collides and contributes one, while stationary cars contribute zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count collisions among cars moving left right or staying still.",
+    "inspect": "Leading left-moving cars and trailing right-moving cars escape forever. Within the remaining interval, every moving car eventually collides and contributes one, while stationary cars contribute zero.",
+    "update": "Leading left-moving cars and trailing right-moving cars escape forever. Within the remaining interval, every moving car eventually collides and contributes one, while stationary cars contribute zero.",
+    "done": "Count collisions among cars moving left right or staying still."
+  },
+  "edgeCases": [
+    "All cars moving outward escape",
+    "Stationary cars contribute no moving-car collisions",
+    "Cars on both sides eventually meet a stationary barrier"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

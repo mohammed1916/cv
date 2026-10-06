@@ -1,0 +1,31 @@
+{
+  "number": "2202",
+  "title": "Maximize the Topmost Element After K Moves",
+  "goal": "Maximize the stack top after exactly k remove-or-restore moves.",
+  "strategy": "A final restored item can come from the first k-1 removals, while removing exactly k original items exposes index k. A singleton is special because its stack alternates between empty and occupied.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the stack top after exactly k remove-or-restore moves.",
+    "inspect": "A final restored item can come from the first k-1 removals, while removing exactly k original items exposes index k. A singleton is special because its stack alternates between empty and occupied.",
+    "update": "A final restored item can come from the first k-1 removals, while removing exactly k original items exposes index k. A singleton is special because its stack alternates between empty and occupied.",
+    "done": "Maximize the stack top after exactly k remove-or-restore moves."
+  },
+  "edgeCases": [
+    "Zero moves preserves the original top",
+    "An odd number of moves empties a singleton stack",
+    "More moves than items can still restore the largest value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

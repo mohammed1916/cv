@@ -1,0 +1,31 @@
+{
+  "number": "2201",
+  "title": "Count Artifacts That Can Be Extracted",
+  "goal": "Count artifacts whose every covered cell has been excavated.",
+  "strategy": "Store dug cells as a set, then inspect each artifact rectangle. Duplicate excavation coordinates add no coverage; an artifact is extractable only when none of its cells is missing.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count artifacts whose every covered cell has been excavated.",
+    "inspect": "Store dug cells as a set, then inspect each artifact rectangle. Duplicate excavation coordinates add no coverage; an artifact is extractable only when none of its cells is missing.",
+    "update": "Store dug cells as a set, then inspect each artifact rectangle. Duplicate excavation coordinates add no coverage; an artifact is extractable only when none of its cells is missing.",
+    "done": "Count artifacts whose every covered cell has been excavated."
+  },
+  "edgeCases": [
+    "One remaining covered cell prevents extraction",
+    "A single-cell artifact needs one excavation",
+    "Digging elsewhere does not uncover the artifact"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

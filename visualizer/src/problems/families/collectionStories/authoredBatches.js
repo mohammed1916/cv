@@ -23,9 +23,11 @@ import selectionAndBitset from './selectionAndBitsetBatch.js';
 import capacityAndFrequency from './capacityAndFrequencyBatch.js';
 import rankAndConstruction from './rankAndConstructionBatch.js';
 import raceAndAncestry from './raceAndAncestryBatch.js';
+import pathsAndCoverage from './pathsAndCoverageBatch.js';
+import updatesAndChoices from './updatesAndChoicesBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
-const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry];
+const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices];
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

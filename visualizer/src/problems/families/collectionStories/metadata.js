@@ -4955,5 +4955,145 @@ export const collectionStoryMetadata = {
     "slug": "find-all-k-distant-indices-in-an-array",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/find-all-k-distant-indices-in-an-array/"
+  },
+  "2201": {
+    "number": "2201",
+    "title": "Count Artifacts That Can Be Extracted",
+    "slug": "count-artifacts-that-can-be-extracted",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-artifacts-that-can-be-extracted/"
+  },
+  "2202": {
+    "number": "2202",
+    "title": "Maximize the Topmost Element After K Moves",
+    "slug": "maximize-the-topmost-element-after-k-moves",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximize-the-topmost-element-after-k-moves/"
+  },
+  "2203": {
+    "number": "2203",
+    "title": "Minimum Weighted Subgraph With the Required Paths",
+    "slug": "minimum-weighted-subgraph-with-the-required-paths",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths/"
+  },
+  "2204": {
+    "number": "2204",
+    "title": "Distance to a Cycle in Undirected Graph",
+    "slug": "distance-to-a-cycle-in-undirected-graph",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/"
+  },
+  "2206": {
+    "number": "2206",
+    "title": "Divide Array Into Equal Pairs",
+    "slug": "divide-array-into-equal-pairs",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/divide-array-into-equal-pairs/"
+  },
+  "2207": {
+    "number": "2207",
+    "title": "Maximize Number of Subsequences in a String",
+    "slug": "maximize-number-of-subsequences-in-a-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximize-number-of-subsequences-in-a-string/"
+  },
+  "2208": {
+    "number": "2208",
+    "title": "Minimum Operations to Halve Array Sum",
+    "slug": "minimum-operations-to-halve-array-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-operations-to-halve-array-sum/"
+  },
+  "2209": {
+    "number": "2209",
+    "title": "Minimum White Tiles After Covering With Carpets",
+    "slug": "minimum-white-tiles-after-covering-with-carpets",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-white-tiles-after-covering-with-carpets/"
+  },
+  "2210": {
+    "number": "2210",
+    "title": "Count Hills and Valleys in an Array",
+    "slug": "count-hills-and-valleys-in-an-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-hills-and-valleys-in-an-array/"
+  },
+  "2211": {
+    "number": "2211",
+    "title": "Count Collisions on a Road",
+    "slug": "count-collisions-on-a-road",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-collisions-on-a-road/"
+  },
+  "2212": {
+    "number": "2212",
+    "title": "Maximum Points in an Archery Competition",
+    "slug": "maximum-points-in-an-archery-competition",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-points-in-an-archery-competition/"
+  },
+  "2213": {
+    "number": "2213",
+    "title": "Longest Substring of One Repeating Character",
+    "slug": "longest-substring-of-one-repeating-character",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/longest-substring-of-one-repeating-character/"
+  },
+  "2214": {
+    "number": "2214",
+    "title": "Minimum Health to Beat Game",
+    "slug": "minimum-health-to-beat-game",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-health-to-beat-game/"
+  },
+  "2215": {
+    "number": "2215",
+    "title": "Find the Difference of Two Arrays",
+    "slug": "find-the-difference-of-two-arrays",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-the-difference-of-two-arrays/"
+  },
+  "2216": {
+    "number": "2216",
+    "title": "Minimum Deletions to Make Array Beautiful",
+    "slug": "minimum-deletions-to-make-array-beautiful",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/"
+  },
+  "2217": {
+    "number": "2217",
+    "title": "Find Palindrome With Fixed Length",
+    "slug": "find-palindrome-with-fixed-length",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-palindrome-with-fixed-length/"
+  },
+  "2218": {
+    "number": "2218",
+    "title": "Maximum Value of K Coins From Piles",
+    "slug": "maximum-value-of-k-coins-from-piles",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/"
+  },
+  "2220": {
+    "number": "2220",
+    "title": "Minimum Bit Flips to Convert Number",
+    "slug": "minimum-bit-flips-to-convert-number",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-bit-flips-to-convert-number/"
+  },
+  "2221": {
+    "number": "2221",
+    "title": "Find Triangular Sum of an Array",
+    "slug": "find-triangular-sum-of-an-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-triangular-sum-of-an-array/"
+  },
+  "2222": {
+    "number": "2222",
+    "title": "Number of Ways to Select Buildings",
+    "slug": "number-of-ways-to-select-buildings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-ways-to-select-buildings/"
   }
 };

@@ -1,0 +1,31 @@
+{
+  "number": "2222",
+  "title": "Number of Ways to Select Buildings",
+  "goal": "Count three-building selections whose types alternate.",
+  "strategy": "Choose each position as the middle building. Its two endpoints must both have the opposite type, so multiply opposite-type counts on its left and right.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count three-building selections whose types alternate.",
+    "inspect": "Choose each position as the middle building. Its two endpoints must both have the opposite type, so multiply opposite-type counts on its left and right.",
+    "update": "Choose each position as the middle building. Its two endpoints must both have the opposite type, so multiply opposite-type counts on its left and right.",
+    "done": "Count three-building selections whose types alternate."
+  },
+  "edgeCases": [
+    "A single building type has no alternating triple",
+    "Exactly one alternating triple exists",
+    "Two buildings cannot form a triple"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

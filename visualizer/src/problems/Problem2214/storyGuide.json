@@ -1,0 +1,31 @@
+{
+  "number": "2214",
+  "title": "Minimum Health to Beat Game",
+  "goal": "Find the minimum starting health needed to survive every damage event.",
+  "strategy": "Armor can prevent at most its capacity on one event, so spend it on a largest hit. Health must stay strictly positive; total unavoidable damage plus one is sufficient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the minimum starting health needed to survive every damage event.",
+    "inspect": "Armor can prevent at most its capacity on one event, so spend it on a largest hit. Health must stay strictly positive; total unavoidable damage plus one is sufficient.",
+    "update": "Armor can prevent at most its capacity on one event, so spend it on a largest hit. Health must stay strictly positive; total unavoidable damage plus one is sufficient.",
+    "done": "Find the minimum starting health needed to survive every damage event."
+  },
+  "edgeCases": [
+    "Armor larger than every hit still applies only once",
+    "No armor leaves total damage plus one",
+    "A fully blocked single hit still requires positive health"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

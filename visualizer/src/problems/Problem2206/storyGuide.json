@@ -1,0 +1,31 @@
+{
+  "number": "2206",
+  "title": "Divide Array Into Equal Pairs",
+  "goal": "Decide whether all elements can be partitioned into equal-value pairs.",
+  "strategy": "Pairing never mixes values, so each distinct value must appear an even number of times. Checking frequency parity is both necessary and sufficient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether all elements can be partitioned into equal-value pairs.",
+    "inspect": "Pairing never mixes values, so each distinct value must appear an even number of times. Checking frequency parity is both necessary and sufficient.",
+    "update": "Pairing never mixes values, so each distinct value must appear an even number of times. Checking frequency parity is both necessary and sufficient.",
+    "done": "Decide whether all elements can be partitioned into equal-value pairs."
+  },
+  "edgeCases": [
+    "An even total length does not guarantee even individual counts",
+    "One repeated value forms several pairs",
+    "The smallest valid input is one equal pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
