@@ -1,5 +1,75 @@
 // Catalog identities; stories, implementations, and examples are independently authored.
 export const collectionStoryMetadata = {
+  "82": {
+    "number": "82",
+    "title": "Remove Duplicates from Sorted List II",
+    "slug": "remove-duplicates-from-sorted-list-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/"
+  },
+  "127": {
+    "number": "127",
+    "title": "Word Ladder",
+    "slug": "word-ladder",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/word-ladder/"
+  },
+  "255": {
+    "number": "255",
+    "title": "Verify Preorder Sequence in Binary Search Tree",
+    "slug": "verify-preorder-sequence-in-binary-search-tree",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/"
+  },
+  "351": {
+    "number": "351",
+    "title": "Android Unlock Patterns",
+    "slug": "android-unlock-patterns",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/android-unlock-patterns/"
+  },
+  "381": {
+    "number": "381",
+    "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+    "slug": "insert-delete-getrandom-o1-duplicates-allowed",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/"
+  },
+  "426": {
+    "number": "426",
+    "title": "Convert Binary Search Tree to Sorted Doubly Linked List",
+    "slug": "convert-binary-search-tree-to-sorted-doubly-linked-list",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/"
+  },
+  "427": {
+    "number": "427",
+    "title": "Construct Quad Tree",
+    "slug": "construct-quad-tree",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/construct-quad-tree/"
+  },
+  "432": {
+    "number": "432",
+    "title": "All O(1) Data Structure",
+    "slug": "all-oone-data-structure",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/all-oone-data-structure/"
+  },
+  "487": {
+    "number": "487",
+    "title": "Max Consecutive Ones II",
+    "slug": "max-consecutive-ones-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/max-consecutive-ones-ii/"
+  },
+  "491": {
+    "number": "491",
+    "title": "Non-decreasing Subsequences",
+    "slug": "non-decreasing-subsequences",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/non-decreasing-subsequences/"
+  },
   "648": {
     "number": "648",
     "title": "Replace Words",

@@ -5,16 +5,17 @@ import RecordStateTable from '../../../components/shared/RecordStateTable';
 import PointStateDiagram from '../../../components/shared/PointStateDiagram';
 import LinkedListGraph from '../../../components/shared/LinkedListGraph';
 import TreeDiagram from '../../../components/shared/TreeDiagram';
+import DoublyLinkedListState from '../../../components/shared/DoublyLinkedListState';
 import styles from './SequenceStory.module.css';
 
 const display = value => value === null ? '·' : typeof value === 'object' ? JSON.stringify(value) : String(value);
 
-function Matrix({ values, label, cell, otherCell }) {
+function Matrix({ values, label, cell, otherCell, rectangle }) {
   return <div className={styles.matrix}><table>
     <caption>{label}</caption>
     <thead><tr><th scope="col">row / col</th>{values[0].map((_, c) => <th scope="col" key={c}>{c}</th>)}</tr></thead>
     <tbody>{values.map((row, r) => <tr key={r}><th scope="row">{r}</th>{row.map((value, c) => {
-      const active = cell?.[0] === r && cell?.[1] === c;
+      const active = (cell?.[0] === r && cell?.[1] === c) || (rectangle && r>=rectangle[0] && c>=rectangle[1] && r<=rectangle[2] && c<=rectangle[3]);
       const compared = otherCell?.[0] === r && otherCell?.[1] === c;
       return <td key={c} className={active ? styles.active : compared ? styles.compared : ''} aria-label={`row ${r}, column ${c}: ${display(value)}${active ? ', current' : compared ? ', comparison' : ''}`}>{display(value)}</td>;
     })}</tr>)}</tbody>
@@ -31,7 +32,8 @@ export default function SequenceStory({ definition }) {
         {step.pointState && <PointStateDiagram {...step.pointState} />}
         {step.linkedList && <LinkedListGraph {...step.linkedList} />}
         {step.treeDiagram && <TreeDiagram {...step.treeDiagram} />}
-        {step.sourceRecords ? <RecordStateTable {...step.sourceRecords} /> : matrix ? <Matrix values={matrix} label={step.matrixLabel ?? 'Source matrix'} cell={step.cell} otherCell={step.otherCell} /> :
+        {step.doublyLinkedList && <DoublyLinkedListState {...step.doublyLinkedList} />}
+        {step.sourceRecords ? <RecordStateTable {...step.sourceRecords} /> : matrix ? <Matrix values={matrix} label={step.matrixLabel ?? 'Source matrix'} cell={step.cell} otherCell={step.otherCell} rectangle={step.region} /> :
           <IndexedSequence label="Input / working sequence" length={sequence.length} valueAt={i => display(sequence[i])} active={step.index}
             roleAt={i => step.marks?.[i] ?? (step.window && i >= step.window[0] && i <= step.window[1] ? 'in window' : '')} />}
         {step.outputMatrix && <Matrix values={step.outputMatrix} label={step.outputMatrixLabel ?? 'Output matrix (dots are unwritten cells)'} cell={step.outputCell} />}

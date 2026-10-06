@@ -1,26 +1,31 @@
 {
   "number": "255",
-  "title": "Verify Preorder Serialization of a BST",
-  "goal": "Solve Verify Preorder Serialization of a BST: Verify if preorder serialization of BST is valid.",
-  "strategy": "Verify if preorder serialization of BST is valid.",
+  "title": "Verify Preorder Sequence in Binary Search Tree",
+  "goal": "Verify that a sequence can be the preorder traversal of a binary search tree with distinct values.",
+  "strategy": "A monotonic stack tracks unfinished ancestors. Popping smaller ancestors means entering their right subtrees, which establishes a lower bound that all later values must respect.",
   "phases": [
-    "init",
-    "done",
-    "process"
+    "start",
+    "inspect",
+    "update",
+    "done"
   ],
-  "phasePurposes": {},
-  "edgeCases": [],
-  "checks": [
-    {
-      "condition": "value < lower_bound",
-      "outcome": "return False"
-    }
+  "phasePurposes": {
+    "start": "Verify that a sequence can be the preorder traversal of a binary search tree with distinct values.",
+    "inspect": "A monotonic stack tracks unfinished ancestors. Popping smaller ancestors means entering their right subtrees, which establishes a lower bound that all later values must respect.",
+    "update": "A monotonic stack tracks unfinished ancestors. Popping smaller ancestors means entering their right subtrees, which establishes a lower bound that all later values must respect.",
+    "done": "Verify that a sequence can be the preorder traversal of a binary search tree with distinct values."
+  },
+  "edgeCases": [
+    "A late value crosses an established lower bound",
+    "Ascending preorder describes a right-only chain",
+    "Descending preorder describes a left-only chain"
   ],
+  "checks": [],
   "inputRules": [
-    "input must be an array"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem255/index.jsx",
-    "src/problems/Problem255/Problem255Visualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

@@ -1,5 +1,9 @@
+import { getExamples } from '../../config/examplesRegistry';
+import Story from '../families/sequenceStories/SequenceStory';
+import { definitions } from '../families/collectionStories/definitions';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
-import CatalogVisualizer from "./Problem255Visualizer";
 
-export default withProblemStory(CatalogVisualizer, storyGuide);
+const definition = { ...definitions[255], examples: getExamples('collection:255') };
+function Visualizer() { return <Story definition={definition} />; }
+export default withProblemStory(Visualizer, storyGuide);

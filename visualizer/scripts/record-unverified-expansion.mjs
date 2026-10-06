@@ -1,4 +1,5 @@
 import { authoredSpecs } from '../src/problems/families/collectionStories/authoredBatches.js';
+import { authoredRouteFolder } from '../src/problems/families/collectionStories/authoredRouteFolders.js';
 import { nextSequenceSpecs } from '../src/problems/families/collectionStories/nextSequenceBatch.js';
 // Inventory maintenance only: does not execute parsers, algorithms, tests, or builds.
 import fs from 'node:fs';
@@ -22,12 +23,14 @@ const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs,...laterSpecs,.
 const inventoryFile='docs/catalog-story-inventory.json';
 const inventory=JSON.parse(fs.readFileSync(inventoryFile,'utf8'));
 for(const id of ids){
- const folder=`Problem${id}`,base=`src/problems/${folder}`;
+ const folder=authoredRouteFolder(id),base=`src/problems/${folder}`;
  const {meta}=await import(pathToFileURL(path.resolve(base,'meta.js')));
  const guide=JSON.parse(fs.readFileSync(`${base}/storyGuide.json`,'utf8'));
  guide.verification={status:'not-run',reason:'User requested implementation without tests or builds.'};
  fs.writeFileSync(`${base}/storyGuide.json`,JSON.stringify(guide,null,2)+'\n');
- if(!inventory.entries.some(e=>e.folder===folder))inventory.entries.push({folder,number:String(meta.number),title:meta.title,kind:'catalog-story',checks:guide.checks.length,rules:guide.inputRules.length,edgeNotes:guide.edgeCases.length});
+ const entry={folder,number:String(meta.number),title:meta.title,kind:'catalog-story',checks:guide.checks.length,rules:guide.inputRules.length,edgeNotes:guide.edgeCases.length};
+ const existing=inventory.entries.findIndex(e=>e.folder===folder);
+ if(existing<0)inventory.entries.push(entry);else inventory.entries[existing]=entry;
 }
 inventory.entries.sort((a,b)=>a.folder.localeCompare(b.folder));inventory.routes=inventory.entries.length;
 fs.writeFileSync(inventoryFile,JSON.stringify(inventory,null,2)+'\n');

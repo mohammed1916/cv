@@ -4,6 +4,6 @@ import { definitions } from '../families/collectionStories/definitions';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 
-const definition = { ...definitions[426], examples: getExamples('collection:426') };
+const definition = { ...definitions[351], examples: getExamples('collection:351') };
 function Visualizer() { return <Story definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);

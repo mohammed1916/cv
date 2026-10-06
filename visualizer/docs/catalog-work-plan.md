@@ -6,6 +6,10 @@ The user requested continuous progress and explicitly waived tests and builds
 for this expansion. Preserve original authored examples and actual algorithm
 states; do not count catalog listings or empty shells as implementations.
 
+## Current requested milestone
+
+The user clarified on 2026-10-06: finish every catalog problem numbered through #2500, including earlier gaps. This is not a request for 2,500 total routes. At this checkpoint, 1,424 of those 2,500 entries have matching routes and 1,076 are missing. Route presence remains unverified and does not certify old implementations. Track the full range in `catalog-through-2500.json`; prioritize canonical gaps and replace outdated same-problem screens where the shared implementation is better.
+
 ## Current working mode
 
 - Keep using the existing `host` branch and remote.
@@ -40,8 +44,8 @@ Eighteen subsequent additions bring complete Python coverage to 252.
 Fifteen further additions bring complete Python coverage to 267.
 Twenty further additions bring complete Python coverage to 287.
 Fourteen subsequent additions bring complete Python coverage to 301.
-Current catalog coverage is 1,428 of 4,073; 2,645 entries remain unmatched
-across 1,444 local routes. New linked-list stories reuse LinkedListGraph and a
+Current catalog coverage is 1,438 of 4,073; 2,635 entries remain unmatched
+across 1,449 local routes. New linked-list stories reuse LinkedListGraph and a
 shared stable-ID snapshot helper. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
@@ -68,6 +72,8 @@ Twenty ranking, construction, race, ancestry, and tree stories add 80 original e
 Twenty path, coverage, segment-tree, exact-choice, and counting stories add 80 original examples. This resumed run now totals 248 additions and 992 examples, with 421 complete collection Python implementations. The cumulative unverified expansion is 650 problems and 2,600 examples.
 
 Twenty prefix, encryption, garden, transaction, and corner-path stories add 80 original examples. This resumed run now totals 268 additions and 1,072 examples, with 441 complete collection Python implementations. The cumulative unverified expansion is 670 problems and 2,680 examples.
+
+Ten early canonical stories close every catalog-identity gap through #500. Five replace older same-problem entrypoints and five add missing canonical routes. They supply forty original examples and complete Python/pseudocode. This run has authored 278 implementations (273 added routes and five replacements), with 1,112 examples; complete collection Python coverage is 451. The cumulative unverified expansion is 680 problems and 2,720 examples. The requested #1-2500 range has 1,424 matched entries and 1,076 remaining gaps.
 
 ## Machine-readable progress
 

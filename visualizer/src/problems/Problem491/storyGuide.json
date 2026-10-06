@@ -1,26 +1,31 @@
 {
   "number": "491",
-  "title": "Increasing Subsequences",
-  "goal": "Solve Increasing Subsequences: Find all increasing subsequences of length >= 2.",
-  "strategy": "Find all increasing subsequences of length >= 2.",
-  "phases": [],
-  "phasePurposes": {},
-  "edgeCases": [],
-  "checks": [
-    {
-      "condition": "nums[i] in used",
-      "outcome": "continue"
-    },
-    {
-      "condition": "nums[i] < last",
-      "outcome": "continue"
-    }
+  "title": "Non-decreasing Subsequences",
+  "goal": "List all distinct nondecreasing subsequences of length at least two.",
+  "strategy": "Backtracking preserves source order and permits equal values. A fresh used-value set at each recursion depth prevents duplicate choices at that depth without blocking equal values later in a subsequence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
   ],
+  "phasePurposes": {
+    "start": "List all distinct nondecreasing subsequences of length at least two.",
+    "inspect": "Backtracking preserves source order and permits equal values. A fresh used-value set at each recursion depth prevents duplicate choices at that depth without blocking equal values later in a subsequence.",
+    "update": "Backtracking preserves source order and permits equal values. A fresh used-value set at each recursion depth prevents duplicate choices at that depth without blocking equal values later in a subsequence.",
+    "done": "List all distinct nondecreasing subsequences of length at least two."
+  },
+  "edgeCases": [
+    "Equal values may extend a nondecreasing subsequence",
+    "Strictly decreasing values have no length-two result",
+    "A singleton cannot produce a qualifying subsequence"
+  ],
+  "checks": [],
   "inputRules": [
-    "nums must be an array"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem491/index.jsx",
-    "src/problems/Problem491/Problem491Visualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

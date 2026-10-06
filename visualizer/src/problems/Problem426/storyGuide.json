@@ -1,28 +1,31 @@
 {
   "number": "426",
-  "title": "Convert BST to Sorted Doubly Linked List",
-  "goal": "Solve Convert BST to Sorted Doubly Linked List: Traverse the BST in sorted order and connect consecutive nodes with predecessor and successor links before closing the cycle.",
-  "strategy": "Traverse the BST in sorted order and connect consecutive nodes with predecessor and successor links before closing the cycle.",
-  "phases": [],
-  "phasePurposes": {},
+  "title": "Convert Binary Search Tree to Sorted Doubly Linked List",
+  "goal": "Convert a binary search tree into a sorted circular doubly linked list using the original nodes.",
+  "strategy": "Inorder traversal gives sorted node order. Reuse each node by linking its left pointer to its predecessor and right pointer to its successor, then close the first and last links into a circle.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert a binary search tree into a sorted circular doubly linked list using the original nodes.",
+    "inspect": "Inorder traversal gives sorted node order. Reuse each node by linking its left pointer to its predecessor and right pointer to its successor, then close the first and last links into a circle.",
+    "update": "Inorder traversal gives sorted node order. Reuse each node by linking its left pointer to its predecessor and right pointer to its successor, then close the first and last links into a circle.",
+    "done": "Convert a binary search tree into a sorted circular doubly linked list using the original nodes."
+  },
   "edgeCases": [
-    "A single node links to itself in both directions; the first and last nodes must also be joined."
+    "One original node links to itself in both directions",
+    "A skewed tree still produces sorted circular order",
+    "An empty tree produces an empty list"
   ],
-  "checks": [
-    {
-      "condition": "not root",
-      "outcome": "return None"
-    },
-    {
-      "condition": "not node",
-      "outcome": "return"
-    }
-  ],
+  "checks": [],
   "inputRules": [
-    "root must be an array"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem426/index.jsx",
-    "src/problems/Problem426/Problem426Visualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

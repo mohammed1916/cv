@@ -1,22 +1,31 @@
 {
   "number": "432",
   "title": "All O(1) Data Structure",
-  "goal": "Solve All O(1) Data Structure: Maintain ordered frequency buckets and move each key only between neighboring counts after an increment or decrement.",
-  "strategy": "Maintain ordered frequency buckets and move each key only between neighboring counts after an increment or decrement.",
-  "phases": [],
-  "phasePurposes": {},
+  "goal": "Maintain string counts with constant-time updates and minimum/maximum-key queries.",
+  "strategy": "Link nonempty count buckets in increasing order and map each key to its bucket. An increment or decrement moves a key only to a neighboring count bucket; the two list ends expose the extremes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain string counts with constant-time updates and minimum/maximum-key queries.",
+    "inspect": "Link nonempty count buckets in increasing order and map each key to its bucket. An increment or decrement moves a key only to a neighboring count bucket; the two list ends expose the extremes.",
+    "update": "Link nonempty count buckets in increasing order and map each key to its bucket. An increment or decrement moves a key only to a neighboring count bucket; the two list ends expose the extremes.",
+    "done": "Maintain string counts with constant-time updates and minimum/maximum-key queries."
+  },
   "edgeCases": [
-    "Keys disappear at zero count; empty buckets must be removed without breaking minimum and maximum lookup."
+    "Empty extreme queries return empty strings",
+    "Several keys can share one count bucket",
+    "Decrementing can recreate a missing intermediate bucket"
   ],
   "checks": [],
   "inputRules": [
-    "operations must be an array",
-    "A count update needs a nonempty key.",
-    "Cannot decrement an absent key."
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem432/index.jsx",
-    "src/problems/Problem432/Problem432Visualizer.jsx",
-    "src/problems/Problem432/algorithm.js"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

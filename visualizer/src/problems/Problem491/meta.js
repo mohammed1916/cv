@@ -1,1 +1,11 @@
-export const meta = { number: "491", title: "Increasing Subsequences", slug: "increasing-subsequences", difficulty: "Medium", tags: ["Backtracking"], description: "Find all increasing subsequences of length >= 2.", accent: "#f97316" }
+export const meta = {
+  "number": "491",
+  "title": "Non-decreasing Subsequences",
+  "slug": "non-decreasing-subsequences",
+  "difficulty": "Medium",
+  "tags": [
+    "Backtracking"
+  ],
+  "accent": "#0891b2",
+  "description": "List all distinct nondecreasing subsequences of length at least two."
+};

@@ -1,5 +1,5 @@
 {
-  "routes": 1444,
+  "routes": 1449,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -1148,6 +1148,15 @@
       "folder": "Problem1268",
       "number": "1268",
       "title": "Search Suggestions System",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem127",
+      "number": "127",
+      "title": "Word Ladder",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -7840,11 +7849,11 @@
     {
       "folder": "Problem255",
       "number": "255",
-      "title": "Verify Preorder Serialization of a BST",
+      "title": "Verify Preorder Sequence in Binary Search Tree",
       "kind": "catalog-story",
-      "checks": 1,
+      "checks": 0,
       "rules": 1,
-      "edgeNotes": 0
+      "edgeNotes": 3
     },
     {
       "folder": "Problem256",
@@ -8807,6 +8816,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem351Canonical",
+      "number": "351",
+      "title": "Android Unlock Patterns",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem352",
       "number": "352",
       "title": "Design Snake Game",
@@ -9102,6 +9120,15 @@
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem381Canonical",
+      "number": "381",
+      "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem382",
@@ -9673,11 +9700,11 @@
     {
       "folder": "Problem426",
       "number": "426",
-      "title": "Convert BST to Sorted Doubly Linked List",
+      "title": "Convert Binary Search Tree to Sorted Doubly Linked List",
       "kind": "catalog-story",
-      "checks": 2,
+      "checks": 0,
       "rules": 1,
-      "edgeNotes": 1
+      "edgeNotes": 3
     },
     {
       "folder": "Problem427",
@@ -9687,6 +9714,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem427Canonical",
+      "number": "427",
+      "title": "Construct Quad Tree",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem428",
@@ -9738,9 +9774,9 @@
       "number": "432",
       "title": "All O(1) Data Structure",
       "kind": "catalog-story",
-      "checks": 2,
+      "checks": 0,
       "rules": 1,
-      "edgeNotes": 1
+      "edgeNotes": 3
     },
     {
       "folder": "Problem433",
@@ -10280,6 +10316,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem487Canonical",
+      "number": "487",
+      "title": "Max Consecutive Ones II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem488",
       "number": "488",
       "title": "Zuma Game",
@@ -10318,11 +10363,11 @@
     {
       "folder": "Problem491",
       "number": "491",
-      "title": "Increasing Subsequences",
+      "title": "Non-decreasing Subsequences",
       "kind": "catalog-story",
-      "checks": 2,
+      "checks": 0,
       "rules": 1,
-      "edgeNotes": 0
+      "edgeNotes": 3
     },
     {
       "folder": "Problem492",
@@ -12118,11 +12163,11 @@
     {
       "folder": "Problem82",
       "number": "82",
-      "title": "Remove Duplicates from Linked List II",
+      "title": "Remove Duplicates from Sorted List II",
       "kind": "catalog-story",
       "checks": 0,
-      "rules": 3,
-      "edgeNotes": 1
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem820",

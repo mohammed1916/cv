@@ -28,9 +28,11 @@ import updatesAndChoices from './updatesAndChoicesBatch.js';
 import prefixAndEncryption from './prefixAndEncryptionBatch.js';
 import gardenAndProduct from './gardenAndProductBatch.js';
 import transactionsAndCorners from './transactionsAndCornersBatch.js';
+import earlyCanonical from './earlyCanonicalBatch.js';
+import structureCanonical from './structureCanonicalBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
-const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices,prefixAndEncryption,gardenAndProduct,transactionsAndCorners];
+const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices,prefixAndEncryption,gardenAndProduct,transactionsAndCorners,earlyCanonical,structureCanonical];
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

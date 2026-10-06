@@ -1,0 +1,31 @@
+{
+  "number": "381",
+  "title": "Insert Delete GetRandom O(1) - Duplicates allowed",
+  "goal": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection.",
+  "strategy": "A dense occurrence array supports random indexing. A value-to-index-set map locates removals; swapping the last occurrence into a removed slot preserves density while repairing only the affected index sets.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection.",
+    "inspect": "A dense occurrence array supports random indexing. A value-to-index-set map locates removals; swapping the last occurrence into a removed slot preserves density while repairing only the affected index sets.",
+    "update": "A dense occurrence array supports random indexing. A value-to-index-set map locates removals; swapping the last occurrence into a removed slot preserves density while repairing only the affected index sets.",
+    "done": "Maintain duplicate values with constant-time insert remove and occurrence-weighted random selection."
+  },
+  "edgeCases": [
+    "Removing one duplicate does not erase the remaining occurrence",
+    "Removing the last array slot requires no swap",
+    "An absent removal leaves the collection unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
