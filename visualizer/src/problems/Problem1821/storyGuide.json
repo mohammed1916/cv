@@ -1,0 +1,31 @@
+{
+  "number": "1821",
+  "title": "Find Customers With Positive Revenue this Year",
+  "goal": "Select customers with positive revenue in 2021.",
+  "strategy": "Year filtering and strictly positive revenue must both hold. The input customer/year key identifies one revenue record.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Select customers with positive revenue in 2021.",
+    "inspect": "Year filtering and strictly positive revenue must both hold. The input customer/year key identifies one revenue record.",
+    "update": "Year filtering and strictly positive revenue must both hold. The input customer/year key identifies one revenue record.",
+    "done": "Select customers with positive revenue in 2021."
+  },
+  "edgeCases": [
+    "Zero is not positive",
+    "Other years are excluded",
+    "No customer records"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

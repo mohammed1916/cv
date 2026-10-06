@@ -1,0 +1,31 @@
+{
+  "number": "1907",
+  "title": "Count Salary Categories",
+  "goal": "Count accounts in all three income categories, including empty categories.",
+  "strategy": "Precreate the categories. Low is below 20000, average includes 20000 through 50000, and high is above 50000.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count accounts in all three income categories, including empty categories.",
+    "inspect": "Precreate the categories. Low is below 20000, average includes 20000 through 50000, and high is above 50000.",
+    "update": "Precreate the categories. Low is below 20000, average includes 20000 through 50000, and high is above 50000.",
+    "done": "Count accounts in all three income categories, including empty categories."
+  },
+  "edgeCases": [
+    "Only high salaries still produces three rows",
+    "Only average salaries",
+    "Empty Accounts retains three zero counts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

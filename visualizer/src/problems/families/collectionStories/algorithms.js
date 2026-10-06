@@ -1,3 +1,4 @@
+import { databaseSolvers } from './databaseAlgorithms.js';
 import { broadSolvers } from './expansionBroadAlgorithms.js';
 import { rangeSolvers } from './expansionRangeAlgorithms.js';
 import { trieSolvers } from './trieAlgorithms.js';
@@ -29,6 +30,7 @@ export const solvers = {
 ...trieSolvers,
 ...rangeSolvers,
 ...broadSolvers,
+...databaseSolvers,
   860({bills}, emit) {
     let five=0,ten=0;
     for(let i=0;i<bills.length;i++) { const bill=bills[i];let possible=true;

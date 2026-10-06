@@ -1,5 +1,5 @@
 {
-  "routes": 1148,
+  "routes": 1158,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -2978,6 +2978,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1667",
+      "number": "1667",
+      "title": "Fix Names in a Table",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1668",
       "number": "1668",
       "title": "Maximum Repeating Substring",
@@ -3050,6 +3059,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1683",
+      "number": "1683",
+      "title": "Invalid Tweets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1684",
       "number": "1684",
       "title": "Count the Number of Consistent Strings",
@@ -3116,6 +3134,15 @@
       "folder": "Problem1691",
       "number": "1691",
       "title": "Maximum Height by Stacking Cuboids ",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1693",
+      "number": "1693",
+      "title": "Daily Leads and Partners",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -3347,6 +3374,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1729",
+      "number": "1729",
+      "title": "Find Followers Count",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem173",
       "number": "173",
       "title": "Binary Search Tree Iterator",
@@ -3408,6 +3444,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1741",
+      "number": "1741",
+      "title": "Find Total Time Spent by Each Employee",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1742",
@@ -3512,6 +3557,15 @@
       "folder": "Problem1756",
       "number": "1756",
       "title": "Design Most Recently Used Queue",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1757",
+      "number": "1757",
+      "title": "Recyclable and Low Fat Products",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -3941,6 +3995,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1821",
+      "number": "1821",
+      "title": "Find Customers With Positive Revenue this Year",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1822",
       "number": "1822",
       "title": "Sign of the Product of an Array",
@@ -4319,6 +4382,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1873",
+      "number": "1873",
+      "title": "Calculate Special Bonus",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1874",
       "number": "1874",
       "title": "Minimize Product Sum of Two Arrays",
@@ -4445,6 +4517,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1890",
+      "number": "1890",
+      "title": "The Latest Login in 2020",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1891",
       "number": "1891",
       "title": "Cutting Ribbons",
@@ -4520,6 +4601,15 @@
       "folder": "Problem1905",
       "number": "1905",
       "title": "Count Sub Islands",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1907",
+      "number": "1907",
+      "title": "Count Salary Categories",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,

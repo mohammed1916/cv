@@ -29,7 +29,8 @@ workspace now exposes **Python** and **Pseudocode** buttons. Complete Python
 solutions are wired for the original 50 collection problems and the 40
 additions spanning 1401-1475, plus seven trie problems (97 total). The trie
 batch includes explicit Python and pseudocode step mappings and shared node diagrams.
-The subsequent 48 range/broad additions bring complete Python coverage to 145.
+The subsequent 48 range/broad and 10 database additions bring complete Python
+coverage to 155. Database problems also provide SQL queries and table playback.
 Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.
 Pseudocode retains playback line highlighting. Python does not reuse those

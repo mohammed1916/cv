@@ -1,0 +1,31 @@
+{
+  "number": "1757",
+  "title": "Recyclable and Low Fat Products",
+  "goal": "Select product IDs that are both low-fat and recyclable.",
+  "strategy": "Use a conjunction of the two Y flags. Projection removes the flag columns from selected result rows.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Select product IDs that are both low-fat and recyclable.",
+    "inspect": "Use a conjunction of the two Y flags. Projection removes the flag columns from selected result rows.",
+    "update": "Use a conjunction of the two Y flags. Projection removes the flag columns from selected result rows.",
+    "done": "Select product IDs that are both low-fat and recyclable."
+  },
+  "edgeCases": [
+    "All products qualify",
+    "One true flag is insufficient",
+    "Empty Products table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

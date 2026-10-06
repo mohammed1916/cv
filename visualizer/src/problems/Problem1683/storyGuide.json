@@ -1,0 +1,31 @@
+{
+  "number": "1683",
+  "title": "Invalid Tweets",
+  "goal": "Return IDs of tweets longer than fifteen characters.",
+  "strategy": "Length greater than fifteen is the filtering boundary. Project only the tweet ID for rows that fail the length limit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return IDs of tweets longer than fifteen characters.",
+    "inspect": "Length greater than fifteen is the filtering boundary. Project only the tweet ID for rows that fail the length limit.",
+    "update": "Length greater than fifteen is the filtering boundary. Project only the tweet ID for rows that fail the length limit.",
+    "done": "Return IDs of tweets longer than fifteen characters."
+  },
+  "edgeCases": [
+    "Exact fifteen-character boundary",
+    "No invalid tweets",
+    "Empty Tweets table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

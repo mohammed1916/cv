@@ -1,0 +1,31 @@
+{
+  "number": "1729",
+  "title": "Find Followers Count",
+  "goal": "Count followers of each user and order the results by user ID.",
+  "strategy": "Each input relationship contributes once to its followed user. Group user_id values and count their distinct primary-key rows.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count followers of each user and order the results by user ID.",
+    "inspect": "Each input relationship contributes once to its followed user. Group user_id values and count their distinct primary-key rows.",
+    "update": "Each input relationship contributes once to its followed user. Group user_id values and count their distinct primary-key rows.",
+    "done": "Count followers of each user and order the results by user ID."
+  },
+  "edgeCases": [
+    "One follower may follow different users",
+    "Single relationship",
+    "No relationships"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

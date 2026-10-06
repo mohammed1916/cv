@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1148,
-  "matchedCatalogRoutes": 1132,
-  "remaining": 2941,
+  "routes": 1158,
+  "matchedCatalogRoutes": 1142,
+  "remaining": 2931,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -11763,8 +11763,8 @@
       "number": "1667",
       "title": "Fix Names in a Table",
       "slug": "fix-names-in-a-table",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1667"
     },
     {
       "number": "1668",
@@ -11875,8 +11875,8 @@
       "number": "1683",
       "title": "Invalid Tweets",
       "slug": "invalid-tweets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1683"
     },
     {
       "number": "1684",
@@ -11945,8 +11945,8 @@
       "number": "1693",
       "title": "Daily Leads and Partners",
       "slug": "daily-leads-and-partners",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1693"
     },
     {
       "number": "1694",
@@ -12197,8 +12197,8 @@
       "number": "1729",
       "title": "Find Followers Count",
       "slug": "find-followers-count",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1729"
     },
     {
       "number": "1730",
@@ -12281,8 +12281,8 @@
       "number": "1741",
       "title": "Find Total Time Spent by Each Employee",
       "slug": "find-total-time-spent-by-each-employee",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1741"
     },
     {
       "number": "1742",
@@ -12393,8 +12393,8 @@
       "number": "1757",
       "title": "Recyclable and Low Fat Products",
       "slug": "recyclable-and-low-fat-products",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1757"
     },
     {
       "number": "1758",
@@ -12841,8 +12841,8 @@
       "number": "1821",
       "title": "Find Customers With Positive Revenue this Year",
       "slug": "find-customers-with-positive-revenue-this-year",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1821"
     },
     {
       "number": "1822",
@@ -13205,8 +13205,8 @@
       "number": "1873",
       "title": "Calculate Special Bonus",
       "slug": "calculate-special-bonus",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1873"
     },
     {
       "number": "1874",
@@ -13324,8 +13324,8 @@
       "number": "1890",
       "title": "The Latest Login in 2020",
       "slug": "the-latest-login-in-2020",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1890"
     },
     {
       "number": "1891",
@@ -13443,8 +13443,8 @@
       "number": "1907",
       "title": "Count Salary Categories",
       "slug": "count-salary-categories",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1907"
     },
     {
       "number": "1908",

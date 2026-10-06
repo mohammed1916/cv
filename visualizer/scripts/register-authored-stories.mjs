@@ -4,6 +4,8 @@ import { definitions as trees } from '../src/problems/families/treeStories/defin
 import { definitions as collections } from '../src/problems/families/collectionStories/definitions.js';
 const definitions={...scans,...trees,...collections};
 const collectionTags={
+1667:['Database'],1683:['Database'],1693:['Database'],1729:['Database'],1741:['Database'],1757:['Database'],1821:['Database'],1873:['Database'],1890:['Database'],1907:['Database'],
+
 1870:["Binary Search"],1871:["Sliding Window"],1872:["Dynamic Programming","Game Theory"],1874:["Greedy"],1876:["String"],1877:["Greedy"],1879:["Bitmask","Dynamic Programming"],1880:["String"],1881:["Greedy"],1882:["Simulation"],1884:["Math"],1885:["Two Pointers"],1886:["Matrix"],1887:["Sorting"],1888:["Sliding Window"],1891:["Binary Search"],1893:["Sorting"],1894:["Prefix Sum"],1897:["Counting"],1898:["Binary Search"],1899:["Greedy"],1905:["Breadth-First Search","Matrix"],1915:["Prefix Sum","Bit Manipulation"],
 
 1835:["Bit Manipulation"],1837:["Math"],1838:["Sliding Window"],1839:["String"],1844:["String"],1845:["Design"],1846:["Greedy"],1848:["Array"],1849:["Backtracking"],1851:["Sorting"],1852:["Sliding Window"],1854:["Prefix Sum"],1855:["Two Pointers"],1856:["Monotonic Stack"],1857:["Graph","Topological Sort"],1858:["Hash Table"],1859:["String"],1860:["Simulation"],1861:["Matrix"],1863:["Bit Manipulation"],1864:["Greedy"],1865:["Design"],1866:["Dynamic Programming"],1868:["Two Pointers"],1869:["String"],
@@ -38,6 +40,7 @@ for(const [id,d] of Object.entries(definitions)) {
   if(!index.includes(`../families/${family}/definitions`))throw new Error(`Refusing to replace existing ${folder}`);
   continue;
  }
+ if(typeof d.python!=='string'||!d.python.trim()||!Array.isArray(d.code)||!d.code.length)throw new Error(`New route ${folder} requires complete Python and pseudocode before registration.`);
  if(!process.argv.includes('--skip-example-validation'))for(const example of d.examples)d.build(d.parse(example.input));
  fs.mkdirSync(folder);
  const tags=collectionTags[id]??(id in trees?['Tree','Binary Tree']:[661,718,733].includes(+id)?['Array','Matrix']:[673,714,740].includes(+id)?['Dynamic Programming']:[682,735,844,856].includes(+id)?['Stack']:[594,599,692,771,804].includes(+id)?['Hash Table']:[658,744,852].includes(+id)?['Binary Search']:['Array','String']);

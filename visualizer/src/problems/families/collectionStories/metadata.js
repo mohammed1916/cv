@@ -2149,6 +2149,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/ways-to-make-a-fair-array/"
   },
+  "1667": {
+    "number": "1667",
+    "title": "Fix Names in a Table",
+    "slug": "fix-names-in-a-table",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/fix-names-in-a-table/"
+  },
   "1668": {
     "number": "1668",
     "title": "Maximum Repeating Substring",
@@ -2183,6 +2190,13 @@ export const collectionStoryMetadata = {
     "slug": "concatenation-of-consecutive-binary-numbers",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/"
+  },
+  "1683": {
+    "number": "1683",
+    "title": "Invalid Tweets",
+    "slug": "invalid-tweets",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/invalid-tweets/"
   },
   "1684": {
     "number": "1684",
@@ -2232,6 +2246,13 @@ export const collectionStoryMetadata = {
     "slug": "maximum-height-by-stacking-cuboids",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/maximum-height-by-stacking-cuboids/"
+  },
+  "1693": {
+    "number": "1693",
+    "title": "Daily Leads and Partners",
+    "slug": "daily-leads-and-partners",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/daily-leads-and-partners/"
   },
   "1694": {
     "number": "1694",
@@ -2380,6 +2401,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/largest-submatrix-with-rearrangements/"
   },
+  "1729": {
+    "number": "1729",
+    "title": "Find Followers Count",
+    "slug": "find-followers-count",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-followers-count/"
+  },
   "1730": {
     "number": "1730",
     "title": "Shortest Path to Get Food",
@@ -2414,6 +2442,13 @@ export const collectionStoryMetadata = {
     "slug": "find-kth-largest-xor-coordinate-value",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/"
+  },
+  "1741": {
+    "number": "1741",
+    "title": "Find Total Time Spent by Each Employee",
+    "slug": "find-total-time-spent-by-each-employee",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-total-time-spent-by-each-employee/"
   },
   "1742": {
     "number": "1742",
@@ -2491,6 +2526,13 @@ export const collectionStoryMetadata = {
     "slug": "design-most-recently-used-queue",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/design-most-recently-used-queue/"
+  },
+  "1757": {
+    "number": "1757",
+    "title": "Recyclable and Low Fat Products",
+    "slug": "recyclable-and-low-fat-products",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/recyclable-and-low-fat-products/"
   },
   "1758": {
     "number": "1758",
@@ -2765,6 +2807,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-number-of-accepted-invitations/"
   },
+  "1821": {
+    "number": "1821",
+    "title": "Find Customers With Positive Revenue this Year",
+    "slug": "find-customers-with-positive-revenue-this-year",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-customers-with-positive-revenue-this-year/"
+  },
   "1822": {
     "number": "1822",
     "title": "Sign of the Product of an Array",
@@ -3024,6 +3073,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/stone-game-viii/"
   },
+  "1873": {
+    "number": "1873",
+    "title": "Calculate Special Bonus",
+    "slug": "calculate-special-bonus",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/calculate-special-bonus/"
+  },
   "1874": {
     "number": "1874",
     "title": "Minimize Product Sum of Two Arrays",
@@ -3108,6 +3164,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/"
   },
+  "1890": {
+    "number": "1890",
+    "title": "The Latest Login in 2020",
+    "slug": "the-latest-login-in-2020",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/the-latest-login-in-2020/"
+  },
   "1891": {
     "number": "1891",
     "title": "Cutting Ribbons",
@@ -3156,6 +3219,13 @@ export const collectionStoryMetadata = {
     "slug": "count-sub-islands",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/count-sub-islands/"
+  },
+  "1907": {
+    "number": "1907",
+    "title": "Count Salary Categories",
+    "slug": "count-salary-categories",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-salary-categories/"
   },
   "1915": {
     "number": "1915",

@@ -1,0 +1,4 @@
+.record-state { max-width: 100%; overflow: auto; max-height: 350px; }
+.record-state caption { text-align: left; font-weight: 600; padding: 6px 0; }
+.record-state .record-state__active td { background: var(--surface2); border-top-color: var(--primary); border-bottom-color: var(--primary); }
+.record-state .record-state__active td:first-child { border-left: 3px solid var(--primary); }

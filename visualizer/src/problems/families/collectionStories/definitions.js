@@ -1,3 +1,6 @@
+import { databaseSpecs, validateDatabase } from './databaseSpecs.js';
+import { databaseSchemas, databaseInput } from './databaseAlgorithms.js';
+import { databasePython, databasePythonStages, databaseSql } from '../python/databasePython.js';
 import { broadSpecs, validateBroad, broadResultStage } from './expansionBroadSpecs.js';
 import { broadPython, broadPythonStages } from '../python/broadPython.js';
 import { rangeSpecs, validateRange, rangeCodeStage, rangePseudocodeStages } from './expansionRangeSpecs.js';
@@ -25,6 +28,7 @@ function validate(id, input) {
   const require = (condition, message) => { if (!condition) throw new Error(message); };
   require(input && typeof input === 'object' && !Array.isArray(input), 'Use a JSON object.');
   for (const key of specs[id][0].split(' ')) require(key in input, `Missing ${key}.`);
+  if (id in databaseSpecs) return validateDatabase(id,input);
   if (id in broadSpecs) return validateBroad(id,input);
   if (id in rangeSpecs) return validateRange(id,input);
   if (id in trieSpecs) return validateTrie(id,input);
@@ -111,8 +115,9 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
     ...collectionStoryMetadata[id], goal, strategy, complexity,
     inputLabel: `${fields} (JSON; bounded for readable playback)`,
     code: code.split('|').map((text,i) => ({line:i+1,text})),
-    python: broadPython[id] ?? rangePython[id] ?? triePython[id] ?? collectionPython[id] ?? laterPython[id],
-    pythonStages: broadPythonStages[id] ?? rangePythonStages[id] ?? triePythonStages[id],
+    python: databasePython[id] ?? broadPython[id] ?? rangePython[id] ?? triePython[id] ?? collectionPython[id] ?? laterPython[id],
+    sql: databaseSql[id],
+    pythonStages: databasePythonStages[id] ?? broadPythonStages[id] ?? rangePythonStages[id] ?? triePythonStages[id],
     examples: collectionStoryExamples[id],
     phases: [{id:'start',label:'Set up',description:goal},{id:'inspect',label:'Decide',description:strategy},{id:'update',label:'Record progress',description:strategy},{id:'done',label:'Return',description:goal}],
     parse: text => validate(id,JSON.parse(text)),
@@ -127,9 +132,9 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
         const codeStage = state.codeStage ?? (id in rangeSpecs ? rangeCodeStage(id,state,phase) : undefined);
         frames.push(structuredClone({sequence,index:-1,metrics:{},...state,message,phase,codeStage,activeLine:rangePseudocodeStages[id]?.[codeStage] ?? triePseudocodeStages[id]?.[codeStage] ?? {start:1,inspect:3,update:4}[phase]}));
       };
-      emit(goal,{},'start');
+      emit(goal,id in databaseSpecs ? {sourceRecords:databaseInput(id,input.rows)} : {},'start');
       const result = solvers[id](input,emit);
-      frames.push(structuredClone({...frames.at(-1),phase:'done',codeStage:(id in broadSpecs ? broadResultStage(id,result,frames.at(-1)) : [1857,1864].includes(id) && result === -1 ? 'failed' : 'return'),activeLine:5,message:`Return ${JSON.stringify(result)}. ${goal}`,result}));
+      frames.push(structuredClone({...frames.at(-1),...(id in databaseSpecs ? {resultRecords:{label:'Final result',columns:databaseSchemas[id].result,rows:result}} : {}),phase:'done',codeStage:(id in broadSpecs ? broadResultStage(id,result,frames.at(-1)) : [1857,1864].includes(id) && result === -1 ? 'failed' : 'return'),activeLine:5,message:`Return ${JSON.stringify(result)}. ${goal}`,result}));
       return {frames,result};
     },
   }];
