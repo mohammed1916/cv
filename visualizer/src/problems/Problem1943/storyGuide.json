@@ -1,0 +1,31 @@
+{
+  "number": "1943",
+  "title": "Describe the Painting",
+  "goal": "Describe each painted interval and its mixed color sum.",
+  "strategy": "Record color additions at starts and removals at ends. Sweep every endpoint, outputting the preceding interval with its active sum; even net-zero events remain boundaries when color membership changes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Describe each painted interval and its mixed color sum.",
+    "inspect": "Record color additions at starts and removals at ends. Sweep every endpoint, outputting the preceding interval with its active sum; even net-zero events remain boundaries when color membership changes.",
+    "update": "Record color additions at starts and removals at ends. Sweep every endpoint, outputting the preceding interval with its active sum; even net-zero events remain boundaries when color membership changes.",
+    "done": "Describe each painted interval and its mixed color sum."
+  },
+  "edgeCases": [
+    "Distinct color sets have equal sums across a boundary",
+    "One painted segment",
+    "Several colors share both endpoints"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

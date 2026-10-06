@@ -1,0 +1,31 @@
+{
+  "number": "1950",
+  "title": "Maximum of Minimum Values in All Subarrays",
+  "goal": "For every window length, maximize the minimum value among all windows.",
+  "strategy": "A monotonic stack finds the widest span for which each value can be a minimum. Store that value at its span length, then propagate larger-window answers backward to fill missing lengths.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For every window length, maximize the minimum value among all windows.",
+    "inspect": "A monotonic stack finds the widest span for which each value can be a minimum. Store that value at its span length, then propagate larger-window answers backward to fill missing lengths.",
+    "update": "A monotonic stack finds the widest span for which each value can be a minimum. Store that value at its span length, then propagate larger-window answers backward to fill missing lengths.",
+    "done": "For every window length, maximize the minimum value among all windows."
+  },
+  "edgeCases": [
+    "Equal values share overlapping spans",
+    "Monotone increasing input",
+    "One window exists"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

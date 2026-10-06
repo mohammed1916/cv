@@ -1,3 +1,4 @@
+import { authoredSpecs } from './authoredBatches.js';
 import { nextSequenceSpecs } from './nextSequenceBatch.js';
 import { graphGridSpecs } from './graphGridSpecs.js';
 import { databaseSpecs } from './databaseSpecs.js';
@@ -30,6 +31,7 @@ export const specs = {
 ...rangeSpecs,
 ...broadSpecs,
 ...databaseSpecs,
+...authoredSpecs,
 ...nextSequenceSpecs,
 ...graphGridSpecs,
 860:['bills','Serve every customer with exact change.','Keep fives available: a ten plus a five is preferable to three fives when changing twenty.','five = ten = 0|for bill in bills:|    choose change using available denominations|    update counts; reject a shortage|return true','O(n) time; O(1) state.'],

@@ -1,0 +1,31 @@
+{
+  "number": "1967",
+  "title": "Number of Strings That Appear as Substrings in Word",
+  "goal": "Count how many supplied patterns occur as substrings of word.",
+  "strategy": "Check each pattern independently. Duplicate entries count separately, and a pattern appearing multiple times contributes only once for that entry.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count how many supplied patterns occur as substrings of word.",
+    "inspect": "Check each pattern independently. Duplicate entries count separately, and a pattern appearing multiple times contributes only once for that entry.",
+    "update": "Check each pattern independently. Duplicate entries count separately, and a pattern appearing multiple times contributes only once for that entry.",
+    "done": "Count how many supplied patterns occur as substrings of word."
+  },
+  "edgeCases": [
+    "Duplicate entries each contribute",
+    "A longer pattern cannot fit",
+    "Repeated occurrences still count once per entry"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

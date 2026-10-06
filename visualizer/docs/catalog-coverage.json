@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1176,
-  "matchedCatalogRoutes": 1160,
-  "remaining": 2913,
+  "routes": 1200,
+  "matchedCatalogRoutes": 1184,
+  "remaining": 2889,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -13646,15 +13646,15 @@
       "number": "1936",
       "title": "Add Minimum Number of Rungs",
       "slug": "add-minimum-number-of-rungs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1936"
     },
     {
       "number": "1937",
       "title": "Maximum Number of Points with Cost",
       "slug": "maximum-number-of-points-with-cost",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1937"
     },
     {
       "number": "1938",
@@ -13674,57 +13674,57 @@
       "number": "1940",
       "title": "Longest Common Subsequence Between Sorted Arrays",
       "slug": "longest-common-subsequence-between-sorted-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1940"
     },
     {
       "number": "1941",
       "title": "Check if All Characters Have Equal Number of Occurrences",
       "slug": "check-if-all-characters-have-equal-number-of-occurrences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1941"
     },
     {
       "number": "1942",
       "title": "The Number of the Smallest Unoccupied Chair",
       "slug": "the-number-of-the-smallest-unoccupied-chair",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1942"
     },
     {
       "number": "1943",
       "title": "Describe the Painting",
       "slug": "describe-the-painting",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1943"
     },
     {
       "number": "1944",
       "title": "Number of Visible People in a Queue",
       "slug": "number-of-visible-people-in-a-queue",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1944"
     },
     {
       "number": "1945",
       "title": "Sum of Digits of String After Convert",
       "slug": "sum-of-digits-of-string-after-convert",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1945"
     },
     {
       "number": "1946",
       "title": "Largest Number After Mutating Substring",
       "slug": "largest-number-after-mutating-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1946"
     },
     {
       "number": "1947",
       "title": "Maximum Compatibility Score Sum",
       "slug": "maximum-compatibility-score-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1947"
     },
     {
       "number": "1948",
@@ -13744,8 +13744,8 @@
       "number": "1950",
       "title": "Maximum of Minimum Values in All Subarrays",
       "slug": "maximum-of-minimum-values-in-all-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1950"
     },
     {
       "number": "1951",
@@ -13758,29 +13758,29 @@
       "number": "1952",
       "title": "Three Divisors",
       "slug": "three-divisors",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1952"
     },
     {
       "number": "1953",
       "title": "Maximum Number of Weeks for Which You Can Work",
       "slug": "maximum-number-of-weeks-for-which-you-can-work",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1953"
     },
     {
       "number": "1954",
       "title": "Minimum Garden Perimeter to Collect Enough Apples",
       "slug": "minimum-garden-perimeter-to-collect-enough-apples",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1954"
     },
     {
       "number": "1955",
       "title": "Count Number of Special Subsequences",
       "slug": "count-number-of-special-subsequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1955"
     },
     {
       "number": "1956",
@@ -13793,22 +13793,22 @@
       "number": "1957",
       "title": "Delete Characters to Make Fancy String",
       "slug": "delete-characters-to-make-fancy-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1957"
     },
     {
       "number": "1958",
       "title": "Check if Move is Legal",
       "slug": "check-if-move-is-legal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1958"
     },
     {
       "number": "1959",
       "title": "Minimum Total Space Wasted With K Resizing Operations",
       "slug": "minimum-total-space-wasted-with-k-resizing-operations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1959"
     },
     {
       "number": "1960",
@@ -13821,29 +13821,29 @@
       "number": "1961",
       "title": "Check If String Is a Prefix of Array",
       "slug": "check-if-string-is-a-prefix-of-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1961"
     },
     {
       "number": "1962",
       "title": "Remove Stones to Minimize the Total",
       "slug": "remove-stones-to-minimize-the-total",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1962"
     },
     {
       "number": "1963",
       "title": "Minimum Number of Swaps to Make the String Balanced",
       "slug": "minimum-number-of-swaps-to-make-the-string-balanced",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1963"
     },
     {
       "number": "1964",
       "title": "Find the Longest Valid Obstacle Course at Each Position",
       "slug": "find-the-longest-valid-obstacle-course-at-each-position",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1964"
     },
     {
       "number": "1965",
@@ -13856,15 +13856,15 @@
       "number": "1966",
       "title": "Binary Searchable Numbers in an Unsorted Array",
       "slug": "binary-searchable-numbers-in-an-unsorted-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1966"
     },
     {
       "number": "1967",
       "title": "Number of Strings That Appear as Substrings in Word",
       "slug": "number-of-strings-that-appear-as-substrings-in-word",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1967"
     },
     {
       "number": "1968",

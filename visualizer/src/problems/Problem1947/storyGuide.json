@@ -1,0 +1,31 @@
+{
+  "number": "1947",
+  "title": "Maximum Compatibility Score Sum",
+  "goal": "Pair students and mentors to maximize agreement across answers.",
+  "strategy": "A used-mentor bitmask determines the next student. Try each unused mentor and memoize the best remaining assignment score.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Pair students and mentors to maximize agreement across answers.",
+    "inspect": "A used-mentor bitmask determines the next student. Try each unused mentor and memoize the best remaining assignment score.",
+    "update": "A used-mentor bitmask determines the next student. Try each unused mentor and memoize the best remaining assignment score.",
+    "done": "Pair students and mentors to maximize agreement across answers."
+  },
+  "edgeCases": [
+    "All pairings have equal scores",
+    "One student and one mentor",
+    "Perfect matches appear in reverse order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1964",
+  "title": "Find the Longest Valid Obstacle Course at Each Position",
+  "goal": "Find the longest nondecreasing obstacle course ending at every position.",
+  "strategy": "Maintain the smallest possible tail for every course length. Upper-bound search places a new height after all equal tails, allowing equality to extend a course.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest nondecreasing obstacle course ending at every position.",
+    "inspect": "Maintain the smallest possible tail for every course length. Upper-bound search places a new height after all equal tails, allowing equality to extend a course.",
+    "update": "Maintain the smallest possible tail for every course length. Upper-bound search places a new height after all equal tails, allowing equality to extend a course.",
+    "done": "Find the longest nondecreasing obstacle course ending at every position."
+  },
+  "edgeCases": [
+    "Equal heights all extend",
+    "Strictly decreasing heights",
+    "One obstacle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

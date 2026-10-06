@@ -1,0 +1,31 @@
+{
+  "number": "1940",
+  "title": "Longest Common Subsequence Between Sorted Arrays",
+  "goal": "Find the longest common subsequence of strictly increasing arrays.",
+  "strategy": "Sorted unique values have a shared order. Intersect the candidate values with each next array; the remaining sorted values are the full common subsequence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest common subsequence of strictly increasing arrays.",
+    "inspect": "Sorted unique values have a shared order. Intersect the candidate values with each next array; the remaining sorted values are the full common subsequence.",
+    "update": "Sorted unique values have a shared order. Intersect the candidate values with each next array; the remaining sorted values are the full common subsequence.",
+    "done": "Find the longest common subsequence of strictly increasing arrays."
+  },
+  "edgeCases": [
+    "No value belongs to every row",
+    "Identical arrays retain every value",
+    "A single array is its own subsequence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

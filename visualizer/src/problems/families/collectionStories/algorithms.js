@@ -1,3 +1,4 @@
+import { authoredSolvers } from './authoredBatches.js';
 import { nextSequenceSolvers } from './nextSequenceBatch.js';
 import { graphGridSolvers } from './graphGridAlgorithms.js';
 import { databaseSolvers } from './databaseAlgorithms.js';
@@ -33,6 +34,7 @@ export const solvers = {
 ...rangeSolvers,
 ...broadSolvers,
 ...databaseSolvers,
+...authoredSolvers,
 ...nextSequenceSolvers,
 ...graphGridSolvers,
   860({bills}, emit) {

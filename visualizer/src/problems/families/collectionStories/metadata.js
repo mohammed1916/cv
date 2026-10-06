@@ -3346,6 +3346,174 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/maximum-number-of-words-you-can-type/"
   },
+  "1936": {
+    "number": "1936",
+    "title": "Add Minimum Number of Rungs",
+    "slug": "add-minimum-number-of-rungs",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/add-minimum-number-of-rungs/"
+  },
+  "1937": {
+    "number": "1937",
+    "title": "Maximum Number of Points with Cost",
+    "slug": "maximum-number-of-points-with-cost",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-points-with-cost/"
+  },
+  "1940": {
+    "number": "1940",
+    "title": "Longest Common Subsequence Between Sorted Arrays",
+    "slug": "longest-common-subsequence-between-sorted-arrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-common-subsequence-between-sorted-arrays/"
+  },
+  "1941": {
+    "number": "1941",
+    "title": "Check if All Characters Have Equal Number of Occurrences",
+    "slug": "check-if-all-characters-have-equal-number-of-occurrences",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/"
+  },
+  "1942": {
+    "number": "1942",
+    "title": "The Number of the Smallest Unoccupied Chair",
+    "slug": "the-number-of-the-smallest-unoccupied-chair",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/"
+  },
+  "1943": {
+    "number": "1943",
+    "title": "Describe the Painting",
+    "slug": "describe-the-painting",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/describe-the-painting/"
+  },
+  "1944": {
+    "number": "1944",
+    "title": "Number of Visible People in a Queue",
+    "slug": "number-of-visible-people-in-a-queue",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-visible-people-in-a-queue/"
+  },
+  "1945": {
+    "number": "1945",
+    "title": "Sum of Digits of String After Convert",
+    "slug": "sum-of-digits-of-string-after-convert",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sum-of-digits-of-string-after-convert/"
+  },
+  "1946": {
+    "number": "1946",
+    "title": "Largest Number After Mutating Substring",
+    "slug": "largest-number-after-mutating-substring",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/largest-number-after-mutating-substring/"
+  },
+  "1947": {
+    "number": "1947",
+    "title": "Maximum Compatibility Score Sum",
+    "slug": "maximum-compatibility-score-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-compatibility-score-sum/"
+  },
+  "1950": {
+    "number": "1950",
+    "title": "Maximum of Minimum Values in All Subarrays",
+    "slug": "maximum-of-minimum-values-in-all-subarrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-of-minimum-values-in-all-subarrays/"
+  },
+  "1952": {
+    "number": "1952",
+    "title": "Three Divisors",
+    "slug": "three-divisors",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/three-divisors/"
+  },
+  "1953": {
+    "number": "1953",
+    "title": "Maximum Number of Weeks for Which You Can Work",
+    "slug": "maximum-number-of-weeks-for-which-you-can-work",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-weeks-for-which-you-can-work/"
+  },
+  "1954": {
+    "number": "1954",
+    "title": "Minimum Garden Perimeter to Collect Enough Apples",
+    "slug": "minimum-garden-perimeter-to-collect-enough-apples",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-garden-perimeter-to-collect-enough-apples/"
+  },
+  "1955": {
+    "number": "1955",
+    "title": "Count Number of Special Subsequences",
+    "slug": "count-number-of-special-subsequences",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/count-number-of-special-subsequences/"
+  },
+  "1957": {
+    "number": "1957",
+    "title": "Delete Characters to Make Fancy String",
+    "slug": "delete-characters-to-make-fancy-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/delete-characters-to-make-fancy-string/"
+  },
+  "1958": {
+    "number": "1958",
+    "title": "Check if Move is Legal",
+    "slug": "check-if-move-is-legal",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-move-is-legal/"
+  },
+  "1959": {
+    "number": "1959",
+    "title": "Minimum Total Space Wasted With K Resizing Operations",
+    "slug": "minimum-total-space-wasted-with-k-resizing-operations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-total-space-wasted-with-k-resizing-operations/"
+  },
+  "1961": {
+    "number": "1961",
+    "title": "Check If String Is a Prefix of Array",
+    "slug": "check-if-string-is-a-prefix-of-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-string-is-a-prefix-of-array/"
+  },
+  "1962": {
+    "number": "1962",
+    "title": "Remove Stones to Minimize the Total",
+    "slug": "remove-stones-to-minimize-the-total",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/remove-stones-to-minimize-the-total/"
+  },
+  "1963": {
+    "number": "1963",
+    "title": "Minimum Number of Swaps to Make the String Balanced",
+    "slug": "minimum-number-of-swaps-to-make-the-string-balanced",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/"
+  },
+  "1964": {
+    "number": "1964",
+    "title": "Find the Longest Valid Obstacle Course at Each Position",
+    "slug": "find-the-longest-valid-obstacle-course-at-each-position",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/"
+  },
+  "1966": {
+    "number": "1966",
+    "title": "Binary Searchable Numbers in an Unsorted Array",
+    "slug": "binary-searchable-numbers-in-an-unsorted-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/binary-searchable-numbers-in-an-unsorted-array/"
+  },
+  "1967": {
+    "number": "1967",
+    "title": "Number of Strings That Appear as Substrings in Word",
+    "slug": "number-of-strings-that-appear-as-substrings-in-word",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/"
+  },
   "1971": {
     "number": "1971",
     "title": "Find if Path Exists in Graph",

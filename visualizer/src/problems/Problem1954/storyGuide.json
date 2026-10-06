@@ -1,0 +1,31 @@
+{
+  "number": "1954",
+  "title": "Minimum Garden Perimeter to Collect Enough Apples",
+  "goal": "Find the smallest square garden perimeter yielding enough apples.",
+  "strategy": "A centered square with coordinate radius r contains 2*r*(r+1)*(2*r+1) apples. Binary search the smallest sufficient integer radius and multiply it by eight.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest square garden perimeter yielding enough apples.",
+    "inspect": "A centered square with coordinate radius r contains 2*r*(r+1)*(2*r+1) apples. Binary search the smallest sufficient integer radius and multiply it by eight.",
+    "update": "A centered square with coordinate radius r contains 2*r*(r+1)*(2*r+1) apples. Binary search the smallest sufficient integer radius and multiply it by eight.",
+    "done": "Find the smallest square garden perimeter yielding enough apples."
+  },
+  "edgeCases": [
+    "One apple still needs a positive radius",
+    "An exact radius count",
+    "Just above that exact count"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

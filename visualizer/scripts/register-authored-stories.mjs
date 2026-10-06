@@ -1,9 +1,11 @@
+import { authoredTags } from '../src/problems/families/collectionStories/authoredBatches.js';
 import fs from 'node:fs';
 import { definitions as scans } from '../src/problems/families/scanStories/definitions.js';
 import { definitions as trees } from '../src/problems/families/treeStories/definitions.js';
 import { definitions as collections } from '../src/problems/families/collectionStories/definitions.js';
 const definitions={...scans,...trees,...collections};
 const collectionTags={
+...authoredTags,
 1925:['Math','Enumeration'],1929:['Array'],1930:['String','Hash Table'],1935:['String','Hash Table'],
 1903:['String','Greedy'],1909:['Array','Greedy'],1910:['String','Stack'],1911:['Dynamic Programming'],1913:['Sorting'],1920:['Array'],1921:['Greedy','Sorting'],1922:['Math'],
 1901:['Binary Search','Matrix'],1914:['Matrix','Simulation'],1916:['Tree','Dynamic Programming'],1926:['Breadth-First Search'],1971:['Graph'],1976:['Graph','Shortest Path'],

@@ -1,3 +1,4 @@
+import { authoredSpecs } from '../src/problems/families/collectionStories/authoredBatches.js';
 import { nextSequenceSpecs } from '../src/problems/families/collectionStories/nextSequenceBatch.js';
 // Inventory maintenance only: does not execute parsers, algorithms, tests, or builds.
 import fs from 'node:fs';
@@ -17,7 +18,7 @@ import { rangeSpecs } from '../src/problems/families/collectionStories/expansion
 import { broadSpecs } from '../src/problems/families/collectionStories/expansionBroadSpecs.js';
 import { databaseSpecs } from '../src/problems/families/collectionStories/databaseSpecs.js';
 import { graphGridSpecs } from '../src/problems/families/collectionStories/graphGridSpecs.js';
-const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs,...laterSpecs,...continuingSpecs,...progressSpecs,...advanceSpecs,...forwardSpecs,...continuedSpecs,...trieSpecs,...rangeSpecs,...broadSpecs,...databaseSpecs,...graphGridSpecs,...nextSequenceSpecs});
+const ids=Object.keys({...expansionSpecs,...dpSpecs,...moreSpecs,...laterSpecs,...continuingSpecs,...progressSpecs,...advanceSpecs,...forwardSpecs,...continuedSpecs,...trieSpecs,...rangeSpecs,...broadSpecs,...databaseSpecs,...graphGridSpecs,...nextSequenceSpecs,...authoredSpecs});
 const inventoryFile='docs/catalog-story-inventory.json';
 const inventory=JSON.parse(fs.readFileSync(inventoryFile,'utf8'));
 for(const id of ids){

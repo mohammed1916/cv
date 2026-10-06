@@ -1,0 +1,31 @@
+{
+  "number": "1966",
+  "title": "Binary Searchable Numbers in an Unsorted Array",
+  "goal": "Count values guaranteed to be found by binary search despite the array being unsorted.",
+  "strategy": "A value is safe exactly when all values to its left are smaller and all values to its right are larger. Prefix maxima and suffix minima certify both sides.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count values guaranteed to be found by binary search despite the array being unsorted.",
+    "inspect": "A value is safe exactly when all values to its left are smaller and all values to its right are larger. Prefix maxima and suffix minima certify both sides.",
+    "update": "A value is safe exactly when all values to its left are smaller and all values to its right are larger. Prefix maxima and suffix minima certify both sides.",
+    "done": "Count values guaranteed to be found by binary search despite the array being unsorted."
+  },
+  "edgeCases": [
+    "Sorted input certifies every position",
+    "Reverse order certifies none",
+    "Singleton has no outside constraints"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

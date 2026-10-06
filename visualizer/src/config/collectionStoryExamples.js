@@ -1,3 +1,4 @@
+import { authoredCases } from '../problems/families/collectionStories/authoredBatches.js';
 import { nextSequenceCases } from '../problems/families/collectionStories/nextSequenceBatch.js';
 import { graphGridCases } from './graphGridExamples.js';
 import { databaseCases } from './databaseStoryExamples.js';
@@ -31,6 +32,7 @@ const cases={
   ...rangeCases,
   ...broadCases,
   ...databaseCases,
+  ...authoredCases,
   ...nextSequenceCases,
   ...graphGridCases,
   860:[['Conserve fives across several customers',{bills:[5,5,10,5,20,5,10,5,5,20]}],['First customer needs unavailable change',{bills:[10]}],['Three fives make change',{bills:[5,5,5,20]}],['Too few fives after earlier sale',{bills:[5,10,20]}]],

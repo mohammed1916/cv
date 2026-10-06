@@ -1,0 +1,31 @@
+{
+  "number": "1962",
+  "title": "Remove Stones to Minimize the Total",
+  "goal": "Minimize remaining stones after exactly k removals.",
+  "strategy": "Each operation removes floor(pile/2). A largest pile offers the greatest immediate reduction, so repeatedly select a maximum and replace it with ceil(pile/2).",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize remaining stones after exactly k removals.",
+    "inspect": "Each operation removes floor(pile/2). A largest pile offers the greatest immediate reduction, so repeatedly select a maximum and replace it with ceil(pile/2).",
+    "update": "Each operation removes floor(pile/2). A largest pile offers the greatest immediate reduction, so repeatedly select a maximum and replace it with ceil(pile/2).",
+    "done": "Minimize remaining stones after exactly k removals."
+  },
+  "edgeCases": [
+    "An odd pile leaves the extra stone",
+    "Unit piles cannot lose stones",
+    "Tied maxima offer interchangeable choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

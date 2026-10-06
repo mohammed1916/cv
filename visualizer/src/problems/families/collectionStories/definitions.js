@@ -1,3 +1,4 @@
+import { authoredSpecs, validateAuthored, authoredPython, authoredPythonStages, authoredPseudocodeStages, authoredResultStage } from './authoredBatches.js';
 import { nextSequenceSpecs, validateNextSequence, nextSequencePython, nextSequencePythonStages } from './nextSequenceBatch.js';
 import { graphGridSpecs, validateGraphGrid } from './graphGridSpecs.js';
 import { graphGridPython, graphGridPythonStages } from '../python/graphGridPython.js';
@@ -31,6 +32,7 @@ function validate(id, input) {
   const require = (condition, message) => { if (!condition) throw new Error(message); };
   require(input && typeof input === 'object' && !Array.isArray(input), 'Use a JSON object.');
   for (const key of specs[id][0].split(' ')) require(key in input, `Missing ${key}.`);
+  if (id in authoredSpecs) return validateAuthored(id,input);
   if (id in nextSequenceSpecs) return validateNextSequence(id,input);
   if (id in graphGridSpecs) return validateGraphGrid(id,input);
   if (id in databaseSpecs) return validateDatabase(id,input);
@@ -120,9 +122,9 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
     ...collectionStoryMetadata[id], goal, strategy, complexity,
     inputLabel: `${fields} (JSON; bounded for readable playback)`,
     code: code.split('|').map((text,i) => ({line:i+1,text})),
-    python: nextSequencePython[id] ?? graphGridPython[id] ?? databasePython[id] ?? broadPython[id] ?? rangePython[id] ?? triePython[id] ?? collectionPython[id] ?? laterPython[id],
+    python: authoredPython[id] ?? nextSequencePython[id] ?? graphGridPython[id] ?? databasePython[id] ?? broadPython[id] ?? rangePython[id] ?? triePython[id] ?? collectionPython[id] ?? laterPython[id],
     sql: databaseSql[id],
-    pythonStages: nextSequencePythonStages[id] ?? graphGridPythonStages[id] ?? databasePythonStages[id] ?? broadPythonStages[id] ?? rangePythonStages[id] ?? triePythonStages[id],
+    pythonStages: authoredPythonStages[id] ?? nextSequencePythonStages[id] ?? graphGridPythonStages[id] ?? databasePythonStages[id] ?? broadPythonStages[id] ?? rangePythonStages[id] ?? triePythonStages[id],
     examples: collectionStoryExamples[id],
     phases: [{id:'start',label:'Set up',description:goal},{id:'inspect',label:'Decide',description:strategy},{id:'update',label:'Record progress',description:strategy},{id:'done',label:'Return',description:goal}],
     parse: text => validate(id,JSON.parse(text)),
@@ -135,11 +137,11 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
       if (id === 1424) sequence = input.nums.map(row => `[${row}]`);
       const emit = (message,state = {},phase = 'inspect') => {
         const codeStage = state.codeStage ?? (id in rangeSpecs ? rangeCodeStage(id,state,phase) : undefined);
-        frames.push(structuredClone({sequence,index:-1,metrics:{},...state,message,phase,codeStage,activeLine:rangePseudocodeStages[id]?.[codeStage] ?? triePseudocodeStages[id]?.[codeStage] ?? {start:1,inspect:3,update:4}[phase]}));
+        frames.push(structuredClone({sequence,index:-1,metrics:{},...state,message,phase,codeStage,activeLine:authoredPseudocodeStages[id]?.[codeStage] ?? rangePseudocodeStages[id]?.[codeStage] ?? triePseudocodeStages[id]?.[codeStage] ?? {start:1,inspect:3,update:4}[phase]}));
       };
       emit(goal,id in databaseSpecs ? {sourceRecords:databaseInput(id,input.rows)} : {},'start');
       const result = solvers[id](input,emit);
-      frames.push(structuredClone({...frames.at(-1),...(id in databaseSpecs ? {resultRecords:{label:'Final result',columns:databaseSchemas[id].result,rows:result}} : {}),phase:'done',codeStage:(id in broadSpecs ? broadResultStage(id,result,frames.at(-1)) : [1857,1864,1926].includes(id) && result === -1 ? 'failed' : 'return'),activeLine:5,message:`Return ${JSON.stringify(result)}. ${goal}`,result}));
+      frames.push(structuredClone({...frames.at(-1),...(id in databaseSpecs ? {resultRecords:{label:'Final result',columns:databaseSchemas[id].result,rows:result}} : {}),phase:'done',codeStage:(id in authoredSpecs ? authoredResultStage(id,result,input) : id in broadSpecs ? broadResultStage(id,result,frames.at(-1)) : [1857,1864,1926].includes(id) && result === -1 ? 'failed' : 'return'),activeLine:5,message:`Return ${JSON.stringify(result)}. ${goal}`,result}));
       return {frames,result};
     },
   }];

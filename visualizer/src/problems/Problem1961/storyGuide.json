@@ -1,0 +1,31 @@
+{
+  "number": "1961",
+  "title": "Check If String Is a Prefix of Array",
+  "goal": "Determine whether s equals the concatenation of a nonempty prefix of words.",
+  "strategy": "Append whole words in order. Stop once the built text is at least as long as s; a match that ends inside a word is insufficient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether s equals the concatenation of a nonempty prefix of words.",
+    "inspect": "Append whole words in order. Stop once the built text is at least as long as s; a match that ends inside a word is insufficient.",
+    "update": "Append whole words in order. Stop once the built text is at least as long as s; a match that ends inside a word is insufficient.",
+    "done": "Determine whether s equals the concatenation of a nonempty prefix of words."
+  },
+  "edgeCases": [
+    "Target ends inside a word",
+    "All words together are still too short",
+    "The first complete word matches"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

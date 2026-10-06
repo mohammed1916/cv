@@ -1,5 +1,5 @@
 {
-  "routes": 1176,
+  "routes": 1200,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -4796,6 +4796,24 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1936",
+      "number": "1936",
+      "title": "Add Minimum Number of Rungs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1937",
+      "number": "1937",
+      "title": "Maximum Number of Points with Cost",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem194",
       "number": "194",
       "title": "Transpose File",
@@ -4803,6 +4821,78 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1940",
+      "number": "1940",
+      "title": "Longest Common Subsequence Between Sorted Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1941",
+      "number": "1941",
+      "title": "Check if All Characters Have Equal Number of Occurrences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1942",
+      "number": "1942",
+      "title": "The Number of the Smallest Unoccupied Chair",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1943",
+      "number": "1943",
+      "title": "Describe the Painting",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1944",
+      "number": "1944",
+      "title": "Number of Visible People in a Queue",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1945",
+      "number": "1945",
+      "title": "Sum of Digits of String After Convert",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1946",
+      "number": "1946",
+      "title": "Largest Number After Mutating Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1947",
+      "number": "1947",
+      "title": "Maximum Compatibility Score Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem195",
@@ -4814,6 +4904,78 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1950",
+      "number": "1950",
+      "title": "Maximum of Minimum Values in All Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1952",
+      "number": "1952",
+      "title": "Three Divisors",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1953",
+      "number": "1953",
+      "title": "Maximum Number of Weeks for Which You Can Work",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1954",
+      "number": "1954",
+      "title": "Minimum Garden Perimeter to Collect Enough Apples",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1955",
+      "number": "1955",
+      "title": "Count Number of Special Subsequences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1957",
+      "number": "1957",
+      "title": "Delete Characters to Make Fancy String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1958",
+      "number": "1958",
+      "title": "Check if Move is Legal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1959",
+      "number": "1959",
+      "title": "Minimum Total Space Wasted With K Resizing Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem196",
       "number": "196",
       "title": "Delete Duplicate Emails",
@@ -4821,6 +4983,60 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1961",
+      "number": "1961",
+      "title": "Check If String Is a Prefix of Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1962",
+      "number": "1962",
+      "title": "Remove Stones to Minimize the Total",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1963",
+      "number": "1963",
+      "title": "Minimum Number of Swaps to Make the String Balanced",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1964",
+      "number": "1964",
+      "title": "Find the Longest Valid Obstacle Course at Each Position",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1966",
+      "number": "1966",
+      "title": "Binary Searchable Numbers in an Unsorted Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1967",
+      "number": "1967",
+      "title": "Number of Strings That Appear as Substrings in Word",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem197",

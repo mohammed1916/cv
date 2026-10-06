@@ -1,0 +1,31 @@
+{
+  "number": "1958",
+  "title": "Check if Move is Legal",
+  "goal": "Determine whether placing a piece captures at least one straight line.",
+  "strategy": "In any of eight directions, a valid capture contains one or more opponent pieces immediately followed by a same-color piece, without crossing an empty square or board edge.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether placing a piece captures at least one straight line.",
+    "inspect": "In any of eight directions, a valid capture contains one or more opponent pieces immediately followed by a same-color piece, without crossing an empty square or board edge.",
+    "update": "In any of eight directions, a valid capture contains one or more opponent pieces immediately followed by a same-color piece, without crossing an empty square or board edge.",
+    "done": "Determine whether placing a piece captures at least one straight line."
+  },
+  "edgeCases": [
+    "Opponent run reaches the edge without closure",
+    "Immediate own-color neighbor captures nothing",
+    "Diagonal capture from a corner"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
