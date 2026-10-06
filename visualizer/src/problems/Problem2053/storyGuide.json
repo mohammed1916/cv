@@ -1,0 +1,31 @@
+{
+  "number": "2053",
+  "title": "Kth Distinct String in an Array",
+  "goal": "Return the kth string that appears exactly once, preserving input order.",
+  "strategy": "Count all occurrences before selecting anything. Then scan the original order, advancing the distinct-string rank only for frequency-one entries.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the kth string that appears exactly once, preserving input order.",
+    "inspect": "Count all occurrences before selecting anything. Then scan the original order, advancing the distinct-string rank only for frequency-one entries.",
+    "update": "Count all occurrences before selecting anything. Then scan the original order, advancing the distinct-string rank only for frequency-one entries.",
+    "done": "Return the kth string that appears exactly once, preserving input order."
+  },
+  "edgeCases": [
+    "Too few distinct strings yield an empty result",
+    "All values distinct preserve original order",
+    "Every value repeats"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2057",
+  "title": "Smallest Index With Equal Value",
+  "goal": "Find the smallest index whose last decimal digit equals its value.",
+  "strategy": "Scan indices in order and compare i modulo ten with nums[i]. Stop at the first equality to preserve the smallest-index requirement.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest index whose last decimal digit equals its value.",
+    "inspect": "Scan indices in order and compare i modulo ten with nums[i]. Stop at the first equality to preserve the smallest-index requirement.",
+    "update": "Scan indices in order and compare i modulo ten with nums[i]. Stop at the first equality to preserve the smallest-index requirement.",
+    "done": "Find the smallest index whose last decimal digit equals its value."
+  },
+  "edgeCases": [
+    "Modulo ten wraps at later indices",
+    "No stored digit matches its index",
+    "Index zero can be the first match"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2052",
+  "title": "Minimum Cost to Separate Sentence Into Rows",
+  "goal": "Wrap whole words into rows with minimum squared unused-space cost, excluding the last row.",
+  "strategy": "DP over suffixes tries every fitting next row. Its cost is unused columns squared plus the best remaining suffix cost, except the final row contributes zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Wrap whole words into rows with minimum squared unused-space cost, excluding the last row.",
+    "inspect": "DP over suffixes tries every fitting next row. Its cost is unused columns squared plus the best remaining suffix cost, except the final row contributes zero.",
+    "update": "DP over suffixes tries every fitting next row. Its cost is unused columns squared plus the best remaining suffix cost, except the final row contributes zero.",
+    "done": "Wrap whole words into rows with minimum squared unused-space cost, excluding the last row."
+  },
+  "edgeCases": [
+    "The entire sentence fits in the free final row",
+    "Each long word fills one row exactly",
+    "One short final word is not penalized"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

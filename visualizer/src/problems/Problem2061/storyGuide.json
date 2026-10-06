@@ -1,0 +1,31 @@
+{
+  "number": "2061",
+  "title": "Number of Spaces Cleaning Robot Cleaned",
+  "goal": "Count cells cleaned by a robot that moves forward or turns clockwise when blocked.",
+  "strategy": "A full robot state includes row, column, and direction. Once that state repeats, future behavior repeats too; count distinct visited cells separately from the state set.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count cells cleaned by a robot that moves forward or turns clockwise when blocked.",
+    "inspect": "A full robot state includes row, column, and direction. Once that state repeats, future behavior repeats too; count distinct visited cells separately from the state set.",
+    "update": "A full robot state includes row, column, and direction. Once that state repeats, future behavior repeats too; count distinct visited cells separately from the state set.",
+    "done": "Count cells cleaned by a robot that moves forward or turns clockwise when blocked."
+  },
+  "edgeCases": [
+    "One open cell repeats four facing directions",
+    "Walls box the start into one cell",
+    "An open rectangle repeats its perimeter route"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

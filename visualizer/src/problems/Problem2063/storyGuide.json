@@ -1,0 +1,31 @@
+{
+  "number": "2063",
+  "title": "Vowels of All Substrings",
+  "goal": "Sum vowel counts across every substring of a word.",
+  "strategy": "A vowel at position i belongs to (i+1)*(n-i) substrings. Count its choices of left and right boundaries instead of enumerating substrings.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum vowel counts across every substring of a word.",
+    "inspect": "A vowel at position i belongs to (i+1)*(n-i) substrings. Count its choices of left and right boundaries instead of enumerating substrings.",
+    "update": "A vowel at position i belongs to (i+1)*(n-i) substrings. Count its choices of left and right boundaries instead of enumerating substrings.",
+    "done": "Sum vowel counts across every substring of a word."
+  },
+  "edgeCases": [
+    "No vowel contributes anything",
+    "Every position is a vowel",
+    "One vowel belongs to one substring"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

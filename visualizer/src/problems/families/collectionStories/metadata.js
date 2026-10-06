@@ -4017,5 +4017,145 @@ export const collectionStoryMetadata = {
     "slug": "kth-smallest-product-of-two-sorted-arrays",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/kth-smallest-product-of-two-sorted-arrays/"
+  },
+  "2042": {
+    "number": "2042",
+    "title": "Check if Numbers Are Ascending in a Sentence",
+    "slug": "check-if-numbers-are-ascending-in-a-sentence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-numbers-are-ascending-in-a-sentence/"
+  },
+  "2043": {
+    "number": "2043",
+    "title": "Simple Bank System",
+    "slug": "simple-bank-system",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/simple-bank-system/"
+  },
+  "2044": {
+    "number": "2044",
+    "title": "Count Number of Maximum Bitwise-OR Subsets",
+    "slug": "count-number-of-maximum-bitwise-or-subsets",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/"
+  },
+  "2045": {
+    "number": "2045",
+    "title": "Second Minimum Time to Reach Destination",
+    "slug": "second-minimum-time-to-reach-destination",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/second-minimum-time-to-reach-destination/"
+  },
+  "2046": {
+    "number": "2046",
+    "title": "Sort Linked List Already Sorted Using Absolute Values",
+    "slug": "sort-linked-list-already-sorted-using-absolute-values",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sort-linked-list-already-sorted-using-absolute-values/"
+  },
+  "2047": {
+    "number": "2047",
+    "title": "Number of Valid Words in a Sentence",
+    "slug": "number-of-valid-words-in-a-sentence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/number-of-valid-words-in-a-sentence/"
+  },
+  "2048": {
+    "number": "2048",
+    "title": "Next Greater Numerically Balanced Number",
+    "slug": "next-greater-numerically-balanced-number",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/next-greater-numerically-balanced-number/"
+  },
+  "2049": {
+    "number": "2049",
+    "title": "Count Nodes With the Highest Score",
+    "slug": "count-nodes-with-the-highest-score",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-nodes-with-the-highest-score/"
+  },
+  "2050": {
+    "number": "2050",
+    "title": "Parallel Courses III",
+    "slug": "parallel-courses-iii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/parallel-courses-iii/"
+  },
+  "2052": {
+    "number": "2052",
+    "title": "Minimum Cost to Separate Sentence Into Rows",
+    "slug": "minimum-cost-to-separate-sentence-into-rows",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-cost-to-separate-sentence-into-rows/"
+  },
+  "2053": {
+    "number": "2053",
+    "title": "Kth Distinct String in an Array",
+    "slug": "kth-distinct-string-in-an-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/kth-distinct-string-in-an-array/"
+  },
+  "2054": {
+    "number": "2054",
+    "title": "Two Best Non-Overlapping Events",
+    "slug": "two-best-non-overlapping-events",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/two-best-non-overlapping-events/"
+  },
+  "2055": {
+    "number": "2055",
+    "title": "Plates Between Candles",
+    "slug": "plates-between-candles",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/plates-between-candles/"
+  },
+  "2057": {
+    "number": "2057",
+    "title": "Smallest Index With Equal Value",
+    "slug": "smallest-index-with-equal-value",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/smallest-index-with-equal-value/"
+  },
+  "2058": {
+    "number": "2058",
+    "title": "Find the Minimum and Maximum Number of Nodes Between Critical Points",
+    "slug": "find-the-minimum-and-maximum-number-of-nodes-between-critical-points",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/"
+  },
+  "2059": {
+    "number": "2059",
+    "title": "Minimum Operations to Convert Number",
+    "slug": "minimum-operations-to-convert-number",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-operations-to-convert-number/"
+  },
+  "2061": {
+    "number": "2061",
+    "title": "Number of Spaces Cleaning Robot Cleaned",
+    "slug": "number-of-spaces-cleaning-robot-cleaned",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-spaces-cleaning-robot-cleaned/"
+  },
+  "2062": {
+    "number": "2062",
+    "title": "Count Vowel Substrings of a String",
+    "slug": "count-vowel-substrings-of-a-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-vowel-substrings-of-a-string/"
+  },
+  "2063": {
+    "number": "2063",
+    "title": "Vowels of All Substrings",
+    "slug": "vowels-of-all-substrings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/vowels-of-all-substrings/"
+  },
+  "2074": {
+    "number": "2074",
+    "title": "Reverse Nodes in Even Length Groups",
+    "slug": "reverse-nodes-in-even-length-groups",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/reverse-nodes-in-even-length-groups/"
   }
 };

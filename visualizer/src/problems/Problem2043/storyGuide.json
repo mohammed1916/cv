@@ -1,0 +1,31 @@
+{
+  "number": "2043",
+  "title": "Simple Bank System",
+  "goal": "Process bank transfers, deposits, and withdrawals with valid-account and sufficient-funds checks.",
+  "strategy": "Accounts are one-based. Validate every requirement before changing balances so failed operations are atomic; a transfer requires both accounts and enough funds in its source.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Process bank transfers, deposits, and withdrawals with valid-account and sufficient-funds checks.",
+    "inspect": "Accounts are one-based. Validate every requirement before changing balances so failed operations are atomic; a transfer requires both accounts and enough funds in its source.",
+    "update": "Accounts are one-based. Validate every requirement before changing balances so failed operations are atomic; a transfer requires both accounts and enough funds in its source.",
+    "done": "Process bank transfers, deposits, and withdrawals with valid-account and sufficient-funds checks."
+  },
+  "edgeCases": [
+    "An invalid destination must not debit the source",
+    "Zero money still requires a valid account",
+    "Exact balance may be withdrawn completely"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

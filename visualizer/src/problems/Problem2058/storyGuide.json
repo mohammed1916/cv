@@ -1,0 +1,31 @@
+{
+  "number": "2058",
+  "title": "Find the Minimum and Maximum Number of Nodes Between Critical Points",
+  "goal": "Find minimum and maximum index distances between linked-list critical points.",
+  "strategy": "A critical point is a strict local peak or valley. Adjacent critical positions give the minimum distance, while the first and last give the maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find minimum and maximum index distances between linked-list critical points.",
+    "inspect": "A critical point is a strict local peak or valley. Adjacent critical positions give the minimum distance, while the first and last give the maximum.",
+    "update": "A critical point is a strict local peak or valley. Adjacent critical positions give the minimum distance, while the first and last give the maximum.",
+    "done": "Find minimum and maximum index distances between linked-list critical points."
+  },
+  "edgeCases": [
+    "Equal neighboring values do not create critical points",
+    "One critical point is insufficient",
+    "Two nodes have no interior positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2044",
+  "title": "Count Number of Maximum Bitwise-OR Subsets",
+  "goal": "Count nonempty subsets achieving the maximum possible bitwise OR.",
+  "strategy": "The OR of all values is the target. A frequency DP maps each attainable OR to the number of subsets producing it; each new value may be skipped or included.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nonempty subsets achieving the maximum possible bitwise OR.",
+    "inspect": "The OR of all values is the target. A frequency DP maps each attainable OR to the number of subsets producing it; each new value may be skipped or included.",
+    "update": "The OR of all values is the target. A frequency DP maps each attainable OR to the number of subsets producing it; each new value may be skipped or included.",
+    "done": "Count nonempty subsets achieving the maximum possible bitwise OR."
+  },
+  "edgeCases": [
+    "Repeated values still represent distinct subset choices",
+    "Every independent bit is required",
+    "A single value has one nonempty subset"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

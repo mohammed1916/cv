@@ -1,5 +1,5 @@
 {
-  "routes": 1270,
+  "routes": 1290,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -5777,6 +5777,78 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2042",
+      "number": "2042",
+      "title": "Check if Numbers Are Ascending in a Sentence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2043",
+      "number": "2043",
+      "title": "Simple Bank System",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2044",
+      "number": "2044",
+      "title": "Count Number of Maximum Bitwise-OR Subsets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2045",
+      "number": "2045",
+      "title": "Second Minimum Time to Reach Destination",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2046",
+      "number": "2046",
+      "title": "Sort Linked List Already Sorted Using Absolute Values",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2047",
+      "number": "2047",
+      "title": "Number of Valid Words in a Sentence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2048",
+      "number": "2048",
+      "title": "Next Greater Numerically Balanced Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2049",
+      "number": "2049",
+      "title": "Count Nodes With the Highest Score",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem205",
       "number": "205",
       "title": "Isomorphic Strings",
@@ -5784,6 +5856,78 @@
       "checks": 3,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2050",
+      "number": "2050",
+      "title": "Parallel Courses III",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2052",
+      "number": "2052",
+      "title": "Minimum Cost to Separate Sentence Into Rows",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2053",
+      "number": "2053",
+      "title": "Kth Distinct String in an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2054",
+      "number": "2054",
+      "title": "Two Best Non-Overlapping Events",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2055",
+      "number": "2055",
+      "title": "Plates Between Candles",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2057",
+      "number": "2057",
+      "title": "Smallest Index With Equal Value",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2058",
+      "number": "2058",
+      "title": "Find the Minimum and Maximum Number of Nodes Between Critical Points",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2059",
+      "number": "2059",
+      "title": "Minimum Operations to Convert Number",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem206",
@@ -5795,6 +5939,33 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2061",
+      "number": "2061",
+      "title": "Number of Spaces Cleaning Robot Cleaned",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2062",
+      "number": "2062",
+      "title": "Count Vowel Substrings of a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2063",
+      "number": "2063",
+      "title": "Vowels of All Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem207",
       "number": "207",
       "title": "Course Schedule",
@@ -5802,6 +5973,15 @@
       "checks": 4,
       "rules": 2,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2074",
+      "number": "2074",
+      "title": "Reverse Nodes in Even Length Groups",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem208",

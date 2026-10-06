@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1270,
-  "matchedCatalogRoutes": 1254,
-  "remaining": 2819,
+  "routes": 1290,
+  "matchedCatalogRoutes": 1274,
+  "remaining": 2799,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -14388,64 +14388,64 @@
       "number": "2042",
       "title": "Check if Numbers Are Ascending in a Sentence",
       "slug": "check-if-numbers-are-ascending-in-a-sentence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2042"
     },
     {
       "number": "2043",
       "title": "Simple Bank System",
       "slug": "simple-bank-system",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2043"
     },
     {
       "number": "2044",
       "title": "Count Number of Maximum Bitwise-OR Subsets",
       "slug": "count-number-of-maximum-bitwise-or-subsets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2044"
     },
     {
       "number": "2045",
       "title": "Second Minimum Time to Reach Destination",
       "slug": "second-minimum-time-to-reach-destination",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2045"
     },
     {
       "number": "2046",
       "title": "Sort Linked List Already Sorted Using Absolute Values",
       "slug": "sort-linked-list-already-sorted-using-absolute-values",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2046"
     },
     {
       "number": "2047",
       "title": "Number of Valid Words in a Sentence",
       "slug": "number-of-valid-words-in-a-sentence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2047"
     },
     {
       "number": "2048",
       "title": "Next Greater Numerically Balanced Number",
       "slug": "next-greater-numerically-balanced-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2048"
     },
     {
       "number": "2049",
       "title": "Count Nodes With the Highest Score",
       "slug": "count-nodes-with-the-highest-score",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2049"
     },
     {
       "number": "2050",
       "title": "Parallel Courses III",
       "slug": "parallel-courses-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2050"
     },
     {
       "number": "2051",
@@ -14458,29 +14458,29 @@
       "number": "2052",
       "title": "Minimum Cost to Separate Sentence Into Rows",
       "slug": "minimum-cost-to-separate-sentence-into-rows",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2052"
     },
     {
       "number": "2053",
       "title": "Kth Distinct String in an Array",
       "slug": "kth-distinct-string-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2053"
     },
     {
       "number": "2054",
       "title": "Two Best Non-Overlapping Events",
       "slug": "two-best-non-overlapping-events",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2054"
     },
     {
       "number": "2055",
       "title": "Plates Between Candles",
       "slug": "plates-between-candles",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2055"
     },
     {
       "number": "2056",
@@ -14493,22 +14493,22 @@
       "number": "2057",
       "title": "Smallest Index With Equal Value",
       "slug": "smallest-index-with-equal-value",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2057"
     },
     {
       "number": "2058",
       "title": "Find the Minimum and Maximum Number of Nodes Between Critical Points",
       "slug": "find-the-minimum-and-maximum-number-of-nodes-between-critical-points",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2058"
     },
     {
       "number": "2059",
       "title": "Minimum Operations to Convert Number",
       "slug": "minimum-operations-to-convert-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2059"
     },
     {
       "number": "2060",
@@ -14521,22 +14521,22 @@
       "number": "2061",
       "title": "Number of Spaces Cleaning Robot Cleaned",
       "slug": "number-of-spaces-cleaning-robot-cleaned",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2061"
     },
     {
       "number": "2062",
       "title": "Count Vowel Substrings of a String",
       "slug": "count-vowel-substrings-of-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2062"
     },
     {
       "number": "2063",
       "title": "Vowels of All Substrings",
       "slug": "vowels-of-all-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2063"
     },
     {
       "number": "2064",
@@ -14612,8 +14612,8 @@
       "number": "2074",
       "title": "Reverse Nodes in Even Length Groups",
       "slug": "reverse-nodes-in-even-length-groups",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2074"
     },
     {
       "number": "2075",

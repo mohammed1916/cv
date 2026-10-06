@@ -6,8 +6,8 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1270 local routes, of which 1254 match catalog slugs
-or unique normalized titles. **2,819 catalog entries remain unmatched.** Route
+After the continued implementation there are 1290 local routes, of which 1274 match catalog slugs
+or unique normalized titles. **2,799 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
@@ -48,11 +48,15 @@ The resumed run totals 79 problems and 316 original examples.
 Fifteen partition, constraint, streaming, and search problems add 60 examples.
 The resumed run totals 94 problems and 376 original examples; all remain unverified.
 
+Twenty traffic, tree, linked-list, query, and traversal problems add 80 examples.
+Three linked-list additions reuse LinkedListGraph with stable node IDs and pointers.
+The resumed run totals 114 problems and 456 original examples.
+
 ## Added in this batch
 
-### Current unverified continuation: 496 additional problems
+### Current unverified continuation: 516 additional problems
 
-This continuation adds 496 explicit algorithms with 1,984 original example inputs
+This continuation adds 516 explicit algorithms with 2,064 original example inputs
 across scanning, strings, counting, windows, prefix sums, matrix DP, connectivity,
 topological traversal, and backtracking. Full IDs are recorded in
 `unverified-expansion.json`. Each route uses the existing collection workspace
@@ -62,7 +66,7 @@ and shared story, code, input, playback, and scene components.
 user's explicit request.** These additions are implemented but unverified.
 The source-only inventory was refreshed; prior validation reports below do not
 cover this expansion. The shared code panel now offers Python and Pseudocode.
-Complete Python is wired for 267 collection problems;
+Complete Python is wired for 287 collection problems;
 remaining conversions are pending. See `catalog-work-plan.md`.
 
 ### Latest continuation: 8 additional problems

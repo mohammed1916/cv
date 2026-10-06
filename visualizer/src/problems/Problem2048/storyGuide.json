@@ -1,0 +1,31 @@
+{
+  "number": "2048",
+  "title": "Next Greater Numerically Balanced Number",
+  "goal": "Find the smallest integer greater than n whose digit frequencies equal the digit values.",
+  "strategy": "Choose which nonzero digits occur; selected digit d must appear exactly d times. Enumerate unique permutations for feasible lengths in increasing length order and retain the smallest value above n.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest integer greater than n whose digit frequencies equal the digit values.",
+    "inspect": "Choose which nonzero digits occur; selected digit d must appear exactly d times. Enumerate unique permutations for feasible lengths in increasing length order and retain the smallest value above n.",
+    "update": "Choose which nonzero digits occur; selected digit d must appear exactly d times. Enumerate unique permutations for feasible lengths in increasing length order and retain the smallest value above n.",
+    "done": "Find the smallest integer greater than n whose digit frequencies equal the digit values."
+  },
+  "edgeCases": [
+    "Zero is below the smallest balanced positive value",
+    "An already balanced input still needs a strictly greater result",
+    "The largest permitted input crosses into seven digits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -38,8 +38,10 @@ Another 25 additions bring complete Python coverage to 222.
 Twelve structural/database additions bring complete Python coverage to 234.
 Eighteen subsequent additions bring complete Python coverage to 252.
 Fifteen further additions bring complete Python coverage to 267.
-Current catalog coverage is 1,254 of 4,073; 2,819 entries remain unmatched
-across 1,270 local routes. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
+Twenty further additions bring complete Python coverage to 287.
+Current catalog coverage is 1,274 of 4,073; 2,799 entries remain unmatched
+across 1,290 local routes. New linked-list stories reuse LinkedListGraph and a
+shared stable-ID snapshot helper. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.

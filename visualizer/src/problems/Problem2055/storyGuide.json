@@ -1,0 +1,31 @@
+{
+  "number": "2055",
+  "title": "Plates Between Candles",
+  "goal": "Count plates strictly between the outermost candles inside each query range.",
+  "strategy": "Prefix plate counts answer distances, while nearest-candle arrays find the first candle at or after the left bound and the last candle at or before the right bound.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count plates strictly between the outermost candles inside each query range.",
+    "inspect": "Prefix plate counts answer distances, while nearest-candle arrays find the first candle at or after the left bound and the last candle at or before the right bound.",
+    "update": "Prefix plate counts answer distances, while nearest-candle arrays find the first candle at or after the left bound and the last candle at or before the right bound.",
+    "done": "Count plates strictly between the outermost candles inside each query range."
+  },
+  "edgeCases": [
+    "No candle can enclose a plate",
+    "Candle-only intervals contain no plates",
+    "One candle is insufficient"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
