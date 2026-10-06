@@ -6,8 +6,8 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1364 local routes, of which 1348 match catalog slugs
-or unique normalized titles. **2,725 catalog entries remain unmatched.** Route
+After the continued implementation there are 1384 local routes, of which 1368 match catalog slugs
+or unique normalized titles. **2,705 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
@@ -16,7 +16,9 @@ Twenty further palindrome, meeting, path, tree, and ranking problems add 80 orig
 
 Twenty window, ordering, dependency, recovery, and simulation stories add another 80 original examples. This resumed run now totals 168 additions and 672 examples, with 341 complete collection Python implementations. All new routes remain unverified.
 
-Twenty stamp, scheduling, corridor, ranking, and consistency stories add 80 original examples. This resumed run now totals 188 additions and 752 examples, with 361 complete collection Python implementations. The cumulative unverified expansion is 590 problems and 2,360 examples.
+Twenty stamp, scheduling, corridor, ranking, and consistency stories add 80 original examples. This resumed run now totals 188 additions and 752 examples, with 361 complete collection Python implementations. The cumulative unverified expansion is 610 problems and 2,440 examples.
+
+Twenty hash, painting, heap, bitset, capacity, and frequency stories add 80 original examples. This resumed run now totals 208 additions and 832 examples, with 381 complete collection Python implementations. The cumulative unverified expansion is 610 problems and 2,440 examples.
 
 ## Latest completed trie batch
 

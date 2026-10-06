@@ -1,0 +1,31 @@
+{
+  "number": "2164",
+  "title": "Sort Even and Odd Indices Independently",
+  "goal": "Sort even-index values ascending and odd-index values descending.",
+  "strategy": "The two parity groups never exchange positions. Sort each group independently, then consume their sorted values at matching index parity.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sort even-index values ascending and odd-index values descending.",
+    "inspect": "The two parity groups never exchange positions. Sort each group independently, then consume their sorted values at matching index parity.",
+    "update": "The two parity groups never exchange positions. Sort each group independently, then consume their sorted values at matching index parity.",
+    "done": "Sort even-index values ascending and odd-index values descending."
+  },
+  "edgeCases": [
+    "One value has no odd-index group",
+    "Duplicates remain in their original parity group",
+    "Already ordered parity groups remain unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

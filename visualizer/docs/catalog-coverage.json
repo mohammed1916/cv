@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1364,
-  "matchedCatalogRoutes": 1348,
-  "remaining": 2725,
+  "routes": 1384,
+  "matchedCatalogRoutes": 1368,
+  "remaining": 2705,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -15172,36 +15172,36 @@
       "number": "2154",
       "title": "Keep Multiplying Found Values by Two",
       "slug": "keep-multiplying-found-values-by-two",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2154"
     },
     {
       "number": "2155",
       "title": "All Divisions With the Highest Score of a Binary Array",
       "slug": "all-divisions-with-the-highest-score-of-a-binary-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2155"
     },
     {
       "number": "2156",
       "title": "Find Substring With Given Hash Value",
       "slug": "find-substring-with-given-hash-value",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2156"
     },
     {
       "number": "2157",
       "title": "Groups of Strings",
       "slug": "groups-of-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2157"
     },
     {
       "number": "2158",
       "title": "Amount of New Area Painted Each Day",
       "slug": "amount-of-new-area-painted-each-day",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2158"
     },
     {
       "number": "2159",
@@ -15214,92 +15214,92 @@
       "number": "2160",
       "title": "Minimum Sum of Four Digit Number After Splitting Digits",
       "slug": "minimum-sum-of-four-digit-number-after-splitting-digits",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2160"
     },
     {
       "number": "2161",
       "title": "Partition Array According to Given Pivot",
       "slug": "partition-array-according-to-given-pivot",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2161"
     },
     {
       "number": "2162",
       "title": "Minimum Cost to Set Cooking Time",
       "slug": "minimum-cost-to-set-cooking-time",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2162"
     },
     {
       "number": "2163",
       "title": "Minimum Difference in Sums After Removal of Elements",
       "slug": "minimum-difference-in-sums-after-removal-of-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2163"
     },
     {
       "number": "2164",
       "title": "Sort Even and Odd Indices Independently",
       "slug": "sort-even-and-odd-indices-independently",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2164"
     },
     {
       "number": "2165",
       "title": "Smallest Value of the Rearranged Number",
       "slug": "smallest-value-of-the-rearranged-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2165"
     },
     {
       "number": "2166",
       "title": "Design Bitset",
       "slug": "design-bitset",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2166"
     },
     {
       "number": "2167",
       "title": "Minimum Time to Remove All Cars Containing Illegal Goods",
       "slug": "minimum-time-to-remove-all-cars-containing-illegal-goods",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2167"
     },
     {
       "number": "2168",
       "title": "Unique Substrings With Equal Digit Frequency",
       "slug": "unique-substrings-with-equal-digit-frequency",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2168"
     },
     {
       "number": "2169",
       "title": "Count Operations to Obtain Zero",
       "slug": "count-operations-to-obtain-zero",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2169"
     },
     {
       "number": "2170",
       "title": "Minimum Operations to Make the Array Alternating",
       "slug": "minimum-operations-to-make-the-array-alternating",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2170"
     },
     {
       "number": "2171",
       "title": "Removing Minimum Number of Magic Beans",
       "slug": "removing-minimum-number-of-magic-beans",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2171"
     },
     {
       "number": "2172",
       "title": "Maximum AND Sum of Array",
       "slug": "maximum-and-sum-of-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2172"
     },
     {
       "number": "2173",
@@ -15326,15 +15326,15 @@
       "number": "2176",
       "title": "Count Equal and Divisible Pairs in an Array",
       "slug": "count-equal-and-divisible-pairs-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2176"
     },
     {
       "number": "2177",
       "title": "Find Three Consecutive Integers That Sum to a Given Number",
       "slug": "find-three-consecutive-integers-that-sum-to-a-given-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2177"
     },
     {
       "number": "2178",

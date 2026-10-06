@@ -1,0 +1,31 @@
+{
+  "number": "2158",
+  "title": "Amount of New Area Painted Each Day",
+  "goal": "Measure the newly painted length each day despite overlapping half-open intervals.",
+  "strategy": "Compress interval endpoints into elementary segments. A successor disjoint-set skips segments already painted, so each physical segment contributes its width only on the first day that reaches it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Measure the newly painted length each day despite overlapping half-open intervals.",
+    "inspect": "Compress interval endpoints into elementary segments. A successor disjoint-set skips segments already painted, so each physical segment contributes its width only on the first day that reaches it.",
+    "update": "Compress interval endpoints into elementary segments. A successor disjoint-set skips segments already painted, so each physical segment contributes its width only on the first day that reaches it.",
+    "done": "Measure the newly painted length each day despite overlapping half-open intervals."
+  },
+  "edgeCases": [
+    "Repeating the same interval adds nothing after day one",
+    "Touching intervals share no positive-length overlap",
+    "A nested later interval is already fully painted"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

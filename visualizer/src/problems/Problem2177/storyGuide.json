@@ -1,0 +1,31 @@
+{
+  "number": "2177",
+  "title": "Find Three Consecutive Integers That Sum to a Given Number",
+  "goal": "Find three consecutive integers whose sum equals the requested number.",
+  "strategy": "Three consecutive integers centered at x sum to 3x. A solution exists precisely when the target is divisible by three, and then the middle value is fixed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find three consecutive integers whose sum equals the requested number.",
+    "inspect": "Three consecutive integers centered at x sum to 3x. A solution exists precisely when the target is divisible by three, and then the middle value is fixed.",
+    "update": "Three consecutive integers centered at x sum to 3x. A solution exists precisely when the target is divisible by three, and then the middle value is fixed.",
+    "done": "Find three consecutive integers whose sum equals the requested number."
+  },
+  "edgeCases": [
+    "A nonmultiple has no integer middle",
+    "Zero permits a negative predecessor",
+    "The smallest positive multiple has a zero predecessor"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

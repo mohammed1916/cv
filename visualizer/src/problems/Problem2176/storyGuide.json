@@ -1,0 +1,31 @@
+{
+  "number": "2176",
+  "title": "Count Equal and Divisible Pairs in an Array",
+  "goal": "Count equal-value index pairs whose index product is divisible by k.",
+  "strategy": "Check each pair with the earlier index strictly smaller. Values must match and their zero-based index product must be a multiple of k; index zero makes the product zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count equal-value index pairs whose index product is divisible by k.",
+    "inspect": "Check each pair with the earlier index strictly smaller. Values must match and their zero-based index product must be a multiple of k; index zero makes the product zero.",
+    "update": "Check each pair with the earlier index strictly smaller. Values must match and their zero-based index product must be a multiple of k; index zero makes the product zero.",
+    "done": "Count equal-value index pairs whose index product is divisible by k."
+  },
+  "edgeCases": [
+    "A divisor of one accepts every equal-value pair",
+    "Distinct values have no equal pair",
+    "Index zero makes its product divisible by any positive k"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

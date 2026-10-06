@@ -1,0 +1,31 @@
+{
+  "number": "2154",
+  "title": "Keep Multiplying Found Values by Two",
+  "goal": "Repeatedly double a value while it is present in the input.",
+  "strategy": "The array is a membership set, not a consumable sequence. Each successful lookup doubles the current value; the first absent value ends the process.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Repeatedly double a value while it is present in the input.",
+    "inspect": "The array is a membership set, not a consumable sequence. Each successful lookup doubles the current value; the first absent value ends the process.",
+    "update": "The array is a membership set, not a consumable sequence. Each successful lookup doubles the current value; the first absent value ends the process.",
+    "done": "Repeatedly double a value while it is present in the input."
+  },
+  "edgeCases": [
+    "The initial value is absent",
+    "Repeated occurrences do not repeat the same doubling",
+    "A large final doubling leaves the membership set"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

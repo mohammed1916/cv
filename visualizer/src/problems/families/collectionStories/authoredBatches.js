@@ -18,9 +18,12 @@ import windowAndOrder from './windowAndOrderBatch.js';
 import dependencyAndRecovery from './dependencyAndRecoveryBatch.js';
 import stampAndSchedule from './stampAndScheduleBatch.js';
 import corridorAndEvidence from './corridorAndEvidenceBatch.js';
+import hashAndPainting from './hashAndPaintingBatch.js';
+import selectionAndBitset from './selectionAndBitsetBatch.js';
+import capacityAndFrequency from './capacityAndFrequencyBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
-const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence];
+const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency];
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

@@ -40,8 +40,8 @@ Eighteen subsequent additions bring complete Python coverage to 252.
 Fifteen further additions bring complete Python coverage to 267.
 Twenty further additions bring complete Python coverage to 287.
 Fourteen subsequent additions bring complete Python coverage to 301.
-Current catalog coverage is 1,348 of 4,073; 2,725 entries remain unmatched
-across 1,364 local routes. New linked-list stories reuse LinkedListGraph and a
+Current catalog coverage is 1,368 of 4,073; 2,705 entries remain unmatched
+across 1,384 local routes. New linked-list stories reuse LinkedListGraph and a
 shared stable-ID snapshot helper. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
@@ -59,7 +59,9 @@ Twenty further palindrome, meeting, path, tree, and ranking problems add 80 orig
 
 Twenty window, ordering, dependency, recovery, and simulation stories add another 80 original examples. This resumed run now totals 168 additions and 672 examples, with 341 complete collection Python implementations. All new routes remain unverified.
 
-Twenty stamp, scheduling, corridor, ranking, and consistency stories add 80 original examples. This resumed run now totals 188 additions and 752 examples, with 361 complete collection Python implementations. The cumulative unverified expansion is 590 problems and 2,360 examples.
+Twenty stamp, scheduling, corridor, ranking, and consistency stories add 80 original examples. This resumed run now totals 188 additions and 752 examples, with 361 complete collection Python implementations. The cumulative unverified expansion is 610 problems and 2,440 examples.
+
+Twenty hash, painting, heap, bitset, capacity, and frequency stories add 80 original examples. This resumed run now totals 208 additions and 832 examples, with 381 complete collection Python implementations. The cumulative unverified expansion is 610 problems and 2,440 examples.
 
 ## Machine-readable progress
 

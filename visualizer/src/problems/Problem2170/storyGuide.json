@@ -1,0 +1,31 @@
+{
+  "number": "2170",
+  "title": "Minimum Operations to Make the Array Alternating",
+  "goal": "Change the fewest values so every even index shares one value and every odd index another.",
+  "strategy": "Keep the most frequent value in each parity group unless those values conflict. Comparing the top two candidates from each side is sufficient to find the best distinct pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Change the fewest values so every even index shares one value and every odd index another.",
+    "inspect": "Keep the most frequent value in each parity group unless those values conflict. Comparing the top two candidates from each side is sufficient to find the best distinct pair.",
+    "update": "Keep the most frequent value in each parity group unless those values conflict. Comparing the top two candidates from each side is sufficient to find the best distinct pair.",
+    "done": "Change the fewest values so every even index shares one value and every odd index another."
+  },
+  "edgeCases": [
+    "An alternating array already satisfies both rules",
+    "All equal values force one parity group to change",
+    "A singleton needs no change"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

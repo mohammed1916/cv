@@ -1,0 +1,31 @@
+{
+  "number": "2172",
+  "title": "Maximum AND Sum of Array",
+  "goal": "Assign numbers to slots of capacity two to maximize the sum of number AND slot.",
+  "strategy": "Encode each slot occupancy as a base-three digit: zero one or two. The total occupancy tells which input number comes next, and each available slot yields one transition.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign numbers to slots of capacity two to maximize the sum of number AND slot.",
+    "inspect": "Encode each slot occupancy as a base-three digit: zero one or two. The total occupancy tells which input number comes next, and each available slot yields one transition.",
+    "update": "Encode each slot occupancy as a base-three digit: zero one or two. The total occupancy tells which input number comes next, and each available slot yields one transition.",
+    "done": "Assign numbers to slots of capacity two to maximize the sum of number AND slot."
+  },
+  "edgeCases": [
+    "One slot accepts at most two values",
+    "More slots than values leaves some unused",
+    "Repeated values still consume separate capacity"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

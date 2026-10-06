@@ -1,0 +1,31 @@
+{
+  "number": "2169",
+  "title": "Count Operations to Obtain Zero",
+  "goal": "Count repeated larger-minus-smaller operations until one number reaches zero.",
+  "strategy": "A run of identical subtractions is one division quotient. Add that quotient to the operation count and replace the larger value with its remainder, following the Euclidean algorithm.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count repeated larger-minus-smaller operations until one number reaches zero.",
+    "inspect": "A run of identical subtractions is one division quotient. Add that quotient to the operation count and replace the larger value with its remainder, following the Euclidean algorithm.",
+    "update": "A run of identical subtractions is one division quotient. Add that quotient to the operation count and replace the larger value with its remainder, following the Euclidean algorithm.",
+    "done": "Count repeated larger-minus-smaller operations until one number reaches zero."
+  },
+  "edgeCases": [
+    "One number already zero needs no operation",
+    "Equal positive numbers reach zero in one subtraction",
+    "A small divisor compresses a long subtraction run"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

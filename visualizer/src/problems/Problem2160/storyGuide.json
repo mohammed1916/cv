@@ -1,0 +1,31 @@
+{
+  "number": "2160",
+  "title": "Minimum Sum of Four Digit Number After Splitting Digits",
+  "goal": "Split four digits into two numbers with the smallest possible sum.",
+  "strategy": "Each digit contributes either a tens or units place. Put the two smallest digits in the tens positions and the two larger digits in units positions; leading zeros are allowed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split four digits into two numbers with the smallest possible sum.",
+    "inspect": "Each digit contributes either a tens or units place. Put the two smallest digits in the tens positions and the two larger digits in units positions; leading zeros are allowed.",
+    "update": "Each digit contributes either a tens or units place. Put the two smallest digits in the tens positions and the two larger digits in units positions; leading zeros are allowed.",
+    "done": "Split four digits into two numbers with the smallest possible sum."
+  },
+  "edgeCases": [
+    "Two zeros can become leading zeros",
+    "Repeated digits still occupy four positions",
+    "Three zeros leave one single-digit contribution"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
