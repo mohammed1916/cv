@@ -1,0 +1,31 @@
+{
+  "number": "1858",
+  "title": "Longest Word With All Prefixes",
+  "goal": "Find the longest word whose every nonempty prefix is also present.",
+  "strategy": "Check each prefix against the dictionary set. Select only complete prefix chains, breaking equal-length ties lexicographically.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest word whose every nonempty prefix is also present.",
+    "inspect": "Check each prefix against the dictionary set. Select only complete prefix chains, breaking equal-length ties lexicographically.",
+    "update": "Check each prefix against the dictionary set. Select only complete prefix chains, breaking equal-length ties lexicographically.",
+    "done": "Find the longest word whose every nonempty prefix is also present."
+  },
+  "edgeCases": [
+    "No complete first prefix",
+    "Equal lengths prefer smaller spelling",
+    "Single one-letter word"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1859",
+  "title": "Sorting the Sentence",
+  "goal": "Restore a shuffled sentence using each word trailing position digit.",
+  "strategy": "The final digit identifies the original one-based slot. Remove it and place the word directly, independent of input order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Restore a shuffled sentence using each word trailing position digit.",
+    "inspect": "The final digit identifies the original one-based slot. Remove it and place the word directly, independent of input order.",
+    "update": "The final digit identifies the original one-based slot. Remove it and place the word directly, independent of input order.",
+    "done": "Restore a shuffled sentence using each word trailing position digit."
+  },
+  "edgeCases": [
+    "Already ordered tokens",
+    "One word",
+    "Reverse token order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1839",
+  "title": "Longest Substring Of All Vowels in Order",
+  "goal": "Find the longest substring containing all five vowels in nondecreasing order.",
+  "strategy": "A descending vowel starts a new run. In a nondecreasing run count distinct vowel groups; five groups means all required vowels appear.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest substring containing all five vowels in nondecreasing order.",
+    "inspect": "A descending vowel starts a new run. In a nondecreasing run count distinct vowel groups; five groups means all required vowels appear.",
+    "update": "A descending vowel starts a new run. In a nondecreasing run count distinct vowel groups; five groups means all required vowels appear.",
+    "done": "Find the longest substring containing all five vowels in nondecreasing order."
+  },
+  "edgeCases": [
+    "One vowel type cannot qualify",
+    "All five appear in wrong order",
+    "Shortest complete ordered run"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "routes": 1100,
+  "routes": 1148,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -4031,6 +4031,42 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1835",
+      "number": "1835",
+      "title": "Find XOR Sum of All Pairs Bitwise AND",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1837",
+      "number": "1837",
+      "title": "Sum of Digits in Base K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1838",
+      "number": "1838",
+      "title": "Frequency of the Most Frequent Element",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1839",
+      "number": "1839",
+      "title": "Longest Substring Of All Vowels in Order",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem184",
       "number": "184",
       "title": "Department Highest Salary",
@@ -4038,6 +4074,51 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1844",
+      "number": "1844",
+      "title": "Replace All Digits with Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1845",
+      "number": "1845",
+      "title": "Seat Reservation Manager",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1846",
+      "number": "1846",
+      "title": "Maximum Element After Decreasing and Rearranging",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1848",
+      "number": "1848",
+      "title": "Minimum Distance to the Target Element",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1849",
+      "number": "1849",
+      "title": "Splitting a String Into Descending Consecutive Values",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem185",
@@ -4049,6 +4130,78 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1851",
+      "number": "1851",
+      "title": "Minimum Interval to Include Each Query",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1852",
+      "number": "1852",
+      "title": "Distinct Numbers in Each Subarray",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1854",
+      "number": "1854",
+      "title": "Maximum Population Year",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1855",
+      "number": "1855",
+      "title": "Maximum Distance Between a Pair of Values",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1856",
+      "number": "1856",
+      "title": "Maximum Subarray Min-Product",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1857",
+      "number": "1857",
+      "title": "Largest Color Value in a Directed Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1858",
+      "number": "1858",
+      "title": "Longest Word With All Prefixes",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1859",
+      "number": "1859",
+      "title": "Sorting the Sentence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem186",
       "number": "186",
       "title": "Reverse Words in a String II",
@@ -4056,6 +4209,78 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1860",
+      "number": "1860",
+      "title": "Incremental Memory Leak",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1861",
+      "number": "1861",
+      "title": "Rotating the Box",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1863",
+      "number": "1863",
+      "title": "Sum of All Subset XOR Totals",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1864",
+      "number": "1864",
+      "title": "Minimum Number of Swaps to Make the Binary String Alternating",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1865",
+      "number": "1865",
+      "title": "Finding Pairs With a Certain Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1866",
+      "number": "1866",
+      "title": "Number of Ways to Rearrange Sticks With K Sticks Visible",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1868",
+      "number": "1868",
+      "title": "Product of Two Run-Length Encoded Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1869",
+      "number": "1869",
+      "title": "Longer Contiguous Segments of Ones than Zeros",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem187",
@@ -4067,6 +4292,69 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1870",
+      "number": "1870",
+      "title": "Minimum Speed to Arrive on Time",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1871",
+      "number": "1871",
+      "title": "Jump Game VII",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1872",
+      "number": "1872",
+      "title": "Stone Game VIII",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1874",
+      "number": "1874",
+      "title": "Minimize Product Sum of Two Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1876",
+      "number": "1876",
+      "title": "Substrings of Size Three with Distinct Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1877",
+      "number": "1877",
+      "title": "Minimize Maximum Pair Sum in Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1879",
+      "number": "1879",
+      "title": "Minimum XOR Sum of Two Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem188",
       "number": "188",
       "title": "Best Time to Buy and Sell Stock IV",
@@ -4076,6 +4364,78 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1880",
+      "number": "1880",
+      "title": "Check if Word Equals Summation of Two Words",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1881",
+      "number": "1881",
+      "title": "Maximum Value after Insertion",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1882",
+      "number": "1882",
+      "title": "Process Tasks Using Servers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1884",
+      "number": "1884",
+      "title": "Egg Drop With 2 Eggs and N Floors",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1885",
+      "number": "1885",
+      "title": "Count Pairs in Two Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1886",
+      "number": "1886",
+      "title": "Determine Whether Matrix Can Be Obtained By Rotation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1887",
+      "number": "1887",
+      "title": "Reduction Operations to Make the Array Elements Equal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1888",
+      "number": "1888",
+      "title": "Minimum Number of Flips to Make the Binary String Alternating",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem189",
       "number": "189",
       "title": "Rotate Array",
@@ -4083,6 +4443,60 @@
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1891",
+      "number": "1891",
+      "title": "Cutting Ribbons",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1893",
+      "number": "1893",
+      "title": "Check if All the Integers in a Range Are Covered",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1894",
+      "number": "1894",
+      "title": "Find the Student that Will Replace the Chalk",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1897",
+      "number": "1897",
+      "title": "Redistribute Characters to Make All Strings Equal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1898",
+      "number": "1898",
+      "title": "Maximum Number of Removable Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1899",
+      "number": "1899",
+      "title": "Merge Triplets to Form Target Triplet",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem19",
@@ -4103,6 +4517,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1905",
+      "number": "1905",
+      "title": "Count Sub Islands",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem191",
       "number": "191",
       "title": "Number of 1 Bits",
@@ -4110,6 +4533,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1915",
+      "number": "1915",
+      "title": "Number of Wonderful Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem192",

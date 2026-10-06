@@ -1,0 +1,31 @@
+{
+  "number": "1861",
+  "title": "Rotating the Box",
+  "goal": "Rotate the box clockwise and let stones fall against obstacles and the bottom.",
+  "strategy": "Before rotation, gravity corresponds to rightward movement within each row. Pack stones against each compartment right boundary, then rotate the settled grid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rotate the box clockwise and let stones fall against obstacles and the bottom.",
+    "inspect": "Before rotation, gravity corresponds to rightward movement within each row. Pack stones against each compartment right boundary, then rotate the settled grid.",
+    "update": "Before rotation, gravity corresponds to rightward movement within each row. Pack stones against each compartment right boundary, then rotate the settled grid.",
+    "done": "Rotate the box clockwise and let stones fall against obstacles and the bottom."
+  },
+  "edgeCases": [
+    "No stones to move",
+    "One row settles before rotating",
+    "Obstacle traps a stone above it after rotation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

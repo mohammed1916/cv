@@ -1,0 +1,31 @@
+{
+  "number": "1882",
+  "title": "Process Tasks Using Servers",
+  "goal": "Assign arriving tasks to servers using weight and index priority while preserving task order.",
+  "strategy": "Track each server next-free time. Process tasks in arrival order, waiting for the first completion if necessary, then choose the lowest-weight available server and smallest index.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign arriving tasks to servers using weight and index priority while preserving task order.",
+    "inspect": "Track each server next-free time. Process tasks in arrival order, waiting for the first completion if necessary, then choose the lowest-weight available server and smallest index.",
+    "update": "Track each server next-free time. Process tasks in arrival order, waiting for the first completion if necessary, then choose the lowest-weight available server and smallest index.",
+    "done": "Assign arriving tasks to servers using weight and index priority while preserving task order."
+  },
+  "edgeCases": [
+    "Weight tie uses smaller index",
+    "One server serializes every task",
+    "Short tasks allow idle time"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1838",
+  "title": "Frequency of the Most Frequent Element",
+  "goal": "Maximize an element frequency using at most k increments.",
+  "strategy": "In sorted order, raise a contiguous window to its greatest value. The exact cost is target times count minus the window sum; shrink whenever that cost exceeds the budget.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize an element frequency using at most k increments.",
+    "inspect": "In sorted order, raise a contiguous window to its greatest value. The exact cost is target times count minus the window sum; shrink whenever that cost exceeds the budget.",
+    "update": "In sorted order, raise a contiguous window to its greatest value. The exact cost is target times count minus the window sum; shrink whenever that cost exceeds the budget.",
+    "done": "Maximize an element frequency using at most k increments."
+  },
+  "edgeCases": [
+    "No increments allowed",
+    "Budget makes all values equal",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1851",
+  "title": "Minimum Interval to Include Each Query",
+  "goal": "Find the shortest inclusive interval containing each query point.",
+  "strategy": "Sort queries and activate intervals when their left endpoint is reached. Remove expired intervals, then select the shortest remaining interval and store the answer in original query order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest inclusive interval containing each query point.",
+    "inspect": "Sort queries and activate intervals when their left endpoint is reached. Remove expired intervals, then select the shortest remaining interval and store the answer in original query order.",
+    "update": "Sort queries and activate intervals when their left endpoint is reached. Remove expired intervals, then select the shortest remaining interval and store the answer in original query order.",
+    "done": "Find the shortest inclusive interval containing each query point."
+  },
+  "edgeCases": [
+    "Inclusive singleton interval",
+    "No interval reaches any query",
+    "Equal-length intervals overlap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

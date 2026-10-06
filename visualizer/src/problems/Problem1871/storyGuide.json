@@ -1,0 +1,31 @@
+{
+  "number": "1871",
+  "title": "Jump Game VII",
+  "goal": "Reach the final zero using jumps within the allowed length interval.",
+  "strategy": "Keep a sliding count of reachable predecessor indices. A zero position is reachable when at least one legal predecessor is reachable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach the final zero using jumps within the allowed length interval.",
+    "inspect": "Keep a sliding count of reachable predecessor indices. A zero position is reachable when at least one legal predecessor is reachable.",
+    "update": "Keep a sliding count of reachable predecessor indices. A zero position is reachable when at least one legal predecessor is reachable.",
+    "done": "Reach the final zero using jumps within the allowed length interval."
+  },
+  "edgeCases": [
+    "Last position is blocked",
+    "No legal first landing",
+    "Fixed jump distance"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

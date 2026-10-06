@@ -1,0 +1,31 @@
+{
+  "number": "1870",
+  "title": "Minimum Speed to Arrive on Time",
+  "goal": "Find the smallest integer train speed that meets a time budget with whole-hour departures.",
+  "strategy": "Every nonfinal ride rounds up to a whole hour. Feasibility improves with speed, so binary search using exact hundredth-hour comparisons.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest integer train speed that meets a time budget with whole-hour departures.",
+    "inspect": "Every nonfinal ride rounds up to a whole hour. Feasibility improves with speed, so binary search using exact hundredth-hour comparisons.",
+    "update": "Every nonfinal ride rounds up to a whole hour. Feasibility improves with speed, so binary search using exact hundredth-hour comparisons.",
+    "done": "Find the smallest integer train speed that meets a time budget with whole-hour departures."
+  },
+  "edgeCases": [
+    "No time remains for the last ride",
+    "One ride has no rounded transfer",
+    "A tiny final fraction requires high speed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -27,7 +27,7 @@ export default function SequenceStory({ definition }) {
         {matrix ? <Matrix values={matrix} label={step.matrixLabel ?? 'Source matrix'} cell={step.cell} otherCell={step.otherCell} /> :
           <IndexedSequence label="Input / working sequence" length={sequence.length} valueAt={i => display(sequence[i])} active={step.index}
             roleAt={i => step.marks?.[i] ?? (step.window && i >= step.window[0] && i <= step.window[1] ? 'in window' : '')} />}
-        {step.outputMatrix && <Matrix values={step.outputMatrix} label="Output matrix — dots are unwritten cells" cell={step.outputCell} />}
+        {step.outputMatrix && <Matrix values={step.outputMatrix} label={step.outputMatrixLabel ?? 'Output matrix ? dots are unwritten cells'} cell={step.outputCell} />}
         {step.output && <IndexedSequence label="Output / stack — dots are unwritten slots" length={step.output.length} active={step.outputIndex ?? step.output.length - 1} valueAt={i => display(step.output[i])} />}
         {step.table && <table><caption>{step.tableCaption ?? (definition.title === 'Degree of an Array' ? 'Value, frequency, and enclosing span' : step.tableHeaders ? 'Algorithm state' : 'Occurrence counts')}</caption>
           <thead><tr>{(step.tableHeaders ?? (step.table[0]?.length === 4 ? ['Value','Count','First','Last'] : ['Value','Count'])).map(label => <th key={label}>{label}</th>)}</tr></thead>

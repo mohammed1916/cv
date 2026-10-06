@@ -2827,5 +2827,341 @@ export const collectionStoryMetadata = {
     "slug": "single-threaded-cpu",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/single-threaded-cpu/"
+  },
+  "1835": {
+    "number": "1835",
+    "title": "Find XOR Sum of All Pairs Bitwise AND",
+    "slug": "find-xor-sum-of-all-pairs-bitwise-and",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-xor-sum-of-all-pairs-bitwise-and/"
+  },
+  "1837": {
+    "number": "1837",
+    "title": "Sum of Digits in Base K",
+    "slug": "sum-of-digits-in-base-k",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sum-of-digits-in-base-k/"
+  },
+  "1838": {
+    "number": "1838",
+    "title": "Frequency of the Most Frequent Element",
+    "slug": "frequency-of-the-most-frequent-element",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/frequency-of-the-most-frequent-element/"
+  },
+  "1839": {
+    "number": "1839",
+    "title": "Longest Substring Of All Vowels in Order",
+    "slug": "longest-substring-of-all-vowels-in-order",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/"
+  },
+  "1844": {
+    "number": "1844",
+    "title": "Replace All Digits with Characters",
+    "slug": "replace-all-digits-with-characters",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/replace-all-digits-with-characters/"
+  },
+  "1845": {
+    "number": "1845",
+    "title": "Seat Reservation Manager",
+    "slug": "seat-reservation-manager",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/seat-reservation-manager/"
+  },
+  "1846": {
+    "number": "1846",
+    "title": "Maximum Element After Decreasing and Rearranging",
+    "slug": "maximum-element-after-decreasing-and-rearranging",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/"
+  },
+  "1848": {
+    "number": "1848",
+    "title": "Minimum Distance to the Target Element",
+    "slug": "minimum-distance-to-the-target-element",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-distance-to-the-target-element/"
+  },
+  "1849": {
+    "number": "1849",
+    "title": "Splitting a String Into Descending Consecutive Values",
+    "slug": "splitting-a-string-into-descending-consecutive-values",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/splitting-a-string-into-descending-consecutive-values/"
+  },
+  "1851": {
+    "number": "1851",
+    "title": "Minimum Interval to Include Each Query",
+    "slug": "minimum-interval-to-include-each-query",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-interval-to-include-each-query/"
+  },
+  "1852": {
+    "number": "1852",
+    "title": "Distinct Numbers in Each Subarray",
+    "slug": "distinct-numbers-in-each-subarray",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/distinct-numbers-in-each-subarray/"
+  },
+  "1854": {
+    "number": "1854",
+    "title": "Maximum Population Year",
+    "slug": "maximum-population-year",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-population-year/"
+  },
+  "1855": {
+    "number": "1855",
+    "title": "Maximum Distance Between a Pair of Values",
+    "slug": "maximum-distance-between-a-pair-of-values",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-distance-between-a-pair-of-values/"
+  },
+  "1856": {
+    "number": "1856",
+    "title": "Maximum Subarray Min-Product",
+    "slug": "maximum-subarray-min-product",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-subarray-min-product/"
+  },
+  "1857": {
+    "number": "1857",
+    "title": "Largest Color Value in a Directed Graph",
+    "slug": "largest-color-value-in-a-directed-graph",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/largest-color-value-in-a-directed-graph/"
+  },
+  "1858": {
+    "number": "1858",
+    "title": "Longest Word With All Prefixes",
+    "slug": "longest-word-with-all-prefixes",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-word-with-all-prefixes/"
+  },
+  "1859": {
+    "number": "1859",
+    "title": "Sorting the Sentence",
+    "slug": "sorting-the-sentence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sorting-the-sentence/"
+  },
+  "1860": {
+    "number": "1860",
+    "title": "Incremental Memory Leak",
+    "slug": "incremental-memory-leak",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/incremental-memory-leak/"
+  },
+  "1861": {
+    "number": "1861",
+    "title": "Rotating the Box",
+    "slug": "rotating-the-box",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/rotating-the-box/"
+  },
+  "1863": {
+    "number": "1863",
+    "title": "Sum of All Subset XOR Totals",
+    "slug": "sum-of-all-subset-xor-totals",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sum-of-all-subset-xor-totals/"
+  },
+  "1864": {
+    "number": "1864",
+    "title": "Minimum Number of Swaps to Make the Binary String Alternating",
+    "slug": "minimum-number-of-swaps-to-make-the-binary-string-alternating",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/"
+  },
+  "1865": {
+    "number": "1865",
+    "title": "Finding Pairs With a Certain Sum",
+    "slug": "finding-pairs-with-a-certain-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/finding-pairs-with-a-certain-sum/"
+  },
+  "1866": {
+    "number": "1866",
+    "title": "Number of Ways to Rearrange Sticks With K Sticks Visible",
+    "slug": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-ways-to-rearrange-sticks-with-k-sticks-visible/"
+  },
+  "1868": {
+    "number": "1868",
+    "title": "Product of Two Run-Length Encoded Arrays",
+    "slug": "product-of-two-run-length-encoded-arrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/product-of-two-run-length-encoded-arrays/"
+  },
+  "1869": {
+    "number": "1869",
+    "title": "Longer Contiguous Segments of Ones than Zeros",
+    "slug": "longer-contiguous-segments-of-ones-than-zeros",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/longer-contiguous-segments-of-ones-than-zeros/"
+  },
+  "1870": {
+    "number": "1870",
+    "title": "Minimum Speed to Arrive on Time",
+    "slug": "minimum-speed-to-arrive-on-time",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-speed-to-arrive-on-time/"
+  },
+  "1871": {
+    "number": "1871",
+    "title": "Jump Game VII",
+    "slug": "jump-game-vii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/jump-game-vii/"
+  },
+  "1872": {
+    "number": "1872",
+    "title": "Stone Game VIII",
+    "slug": "stone-game-viii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/stone-game-viii/"
+  },
+  "1874": {
+    "number": "1874",
+    "title": "Minimize Product Sum of Two Arrays",
+    "slug": "minimize-product-sum-of-two-arrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimize-product-sum-of-two-arrays/"
+  },
+  "1876": {
+    "number": "1876",
+    "title": "Substrings of Size Three with Distinct Characters",
+    "slug": "substrings-of-size-three-with-distinct-characters",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/"
+  },
+  "1877": {
+    "number": "1877",
+    "title": "Minimize Maximum Pair Sum in Array",
+    "slug": "minimize-maximum-pair-sum-in-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/"
+  },
+  "1879": {
+    "number": "1879",
+    "title": "Minimum XOR Sum of Two Arrays",
+    "slug": "minimum-xor-sum-of-two-arrays",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-xor-sum-of-two-arrays/"
+  },
+  "1880": {
+    "number": "1880",
+    "title": "Check if Word Equals Summation of Two Words",
+    "slug": "check-if-word-equals-summation-of-two-words",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/"
+  },
+  "1881": {
+    "number": "1881",
+    "title": "Maximum Value after Insertion",
+    "slug": "maximum-value-after-insertion",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-value-after-insertion/"
+  },
+  "1882": {
+    "number": "1882",
+    "title": "Process Tasks Using Servers",
+    "slug": "process-tasks-using-servers",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/process-tasks-using-servers/"
+  },
+  "1884": {
+    "number": "1884",
+    "title": "Egg Drop With 2 Eggs and N Floors",
+    "slug": "egg-drop-with-2-eggs-and-n-floors",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/egg-drop-with-2-eggs-and-n-floors/"
+  },
+  "1885": {
+    "number": "1885",
+    "title": "Count Pairs in Two Arrays",
+    "slug": "count-pairs-in-two-arrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-pairs-in-two-arrays/"
+  },
+  "1886": {
+    "number": "1886",
+    "title": "Determine Whether Matrix Can Be Obtained By Rotation",
+    "slug": "determine-whether-matrix-can-be-obtained-by-rotation",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/"
+  },
+  "1887": {
+    "number": "1887",
+    "title": "Reduction Operations to Make the Array Elements Equal",
+    "slug": "reduction-operations-to-make-the-array-elements-equal",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/reduction-operations-to-make-the-array-elements-equal/"
+  },
+  "1888": {
+    "number": "1888",
+    "title": "Minimum Number of Flips to Make the Binary String Alternating",
+    "slug": "minimum-number-of-flips-to-make-the-binary-string-alternating",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/"
+  },
+  "1891": {
+    "number": "1891",
+    "title": "Cutting Ribbons",
+    "slug": "cutting-ribbons",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/cutting-ribbons/"
+  },
+  "1893": {
+    "number": "1893",
+    "title": "Check if All the Integers in a Range Are Covered",
+    "slug": "check-if-all-the-integers-in-a-range-are-covered",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-all-the-integers-in-a-range-are-covered/"
+  },
+  "1894": {
+    "number": "1894",
+    "title": "Find the Student that Will Replace the Chalk",
+    "slug": "find-the-student-that-will-replace-the-chalk",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/"
+  },
+  "1897": {
+    "number": "1897",
+    "title": "Redistribute Characters to Make All Strings Equal",
+    "slug": "redistribute-characters-to-make-all-strings-equal",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/redistribute-characters-to-make-all-strings-equal/"
+  },
+  "1898": {
+    "number": "1898",
+    "title": "Maximum Number of Removable Characters",
+    "slug": "maximum-number-of-removable-characters",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-removable-characters/"
+  },
+  "1899": {
+    "number": "1899",
+    "title": "Merge Triplets to Form Target Triplet",
+    "slug": "merge-triplets-to-form-target-triplet",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/merge-triplets-to-form-target-triplet/"
+  },
+  "1905": {
+    "number": "1905",
+    "title": "Count Sub Islands",
+    "slug": "count-sub-islands",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-sub-islands/"
+  },
+  "1915": {
+    "number": "1915",
+    "title": "Number of Wonderful Substrings",
+    "slug": "number-of-wonderful-substrings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-wonderful-substrings/"
   }
 };

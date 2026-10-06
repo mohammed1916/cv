@@ -1,0 +1,31 @@
+{
+  "number": "1893",
+  "title": "Check if All the Integers in a Range Are Covered",
+  "goal": "Check that every integer in an inclusive target interval is covered by some input range.",
+  "strategy": "Track the next uncovered integer while reading sorted ranges. Overlapping or adjacent ranges extend coverage; a range starting later exposes a permanent gap.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check that every integer in an inclusive target interval is covered by some input range.",
+    "inspect": "Track the next uncovered integer while reading sorted ranges. Overlapping or adjacent ranges extend coverage; a range starting later exposes a permanent gap.",
+    "update": "Track the next uncovered integer while reading sorted ranges. Overlapping or adjacent ranges extend coverage; a range starting later exposes a permanent gap.",
+    "done": "Check that every integer in an inclusive target interval is covered by some input range."
+  },
+  "edgeCases": [
+    "One integer gap prevents coverage",
+    "Single point exactly covered",
+    "Ranges beyond target do not help"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

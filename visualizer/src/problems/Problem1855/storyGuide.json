@@ -1,0 +1,31 @@
+{
+  "number": "1855",
+  "title": "Maximum Distance Between a Pair of Values",
+  "goal": "Maximize j-i subject to i <= j and nums1[i] <= nums2[j].",
+  "strategy": "Both arrays are nonincreasing. A valid pair can extend its right index; an invalid value comparison must advance the left index because later right values cannot be larger.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize j-i subject to i <= j and nums1[i] <= nums2[j].",
+    "inspect": "Both arrays are nonincreasing. A valid pair can extend its right index; an invalid value comparison must advance the left index because later right values cannot be larger.",
+    "update": "Both arrays are nonincreasing. A valid pair can extend its right index; an invalid value comparison must advance the left index because later right values cannot be larger.",
+    "done": "Maximize j-i subject to i <= j and nums1[i] <= nums2[j]."
+  },
+  "edgeCases": [
+    "No eligible value pair",
+    "Equal values allow farthest span",
+    "Second array ends before later left indices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,5 @@
+import { broadSolvers } from './expansionBroadAlgorithms.js';
+import { rangeSolvers } from './expansionRangeAlgorithms.js';
 import { trieSolvers } from './trieAlgorithms.js';
 import { continuedSolvers } from './expansionContinuedAlgorithms.js';
 import { forwardSolvers } from './expansionForwardAlgorithms.js';
@@ -25,6 +27,8 @@ export const solvers = {
 ...forwardSolvers,
 ...continuedSolvers,
 ...trieSolvers,
+...rangeSolvers,
+...broadSolvers,
   860({bills}, emit) {
     let five=0,ten=0;
     for(let i=0;i<bills.length;i++) { const bill=bills[i];let possible=true;

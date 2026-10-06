@@ -1,7 +1,7 @@
 # Persistent catalog work plan
 
-Stopped at the user request after the seven-problem trie batch.
-Resume catalog expansion only when requested.
+Resumed on 2026-10-06 at the user request. Finish missing catalog problems
+first, then repair existing problems that provide only Python or only pseudocode.
 The user requested continuous progress and explicitly waived tests and builds
 for this expansion. Preserve original authored examples and actual algorithm
 states; do not count catalog listings or empty shells as implementations.
@@ -18,7 +18,9 @@ states; do not count catalog listings or empty shells as implementations.
 - Keep prior test reports as historical evidence; do not imply that new routes
   passed those reports. No tests, builds, or browser verification are running.
 - Refresh the metadata-only catalog inventory as implementation progresses.
-- The current batch is complete and saved on `host`; do not start another group until asked.
+- Continue missing catalog batches and checkpoint them on `host`.
+- Every new problem must include complete Python, pseudocode, authored examples,
+  and meaningful step states; defer the old one-language backlog until coverage is complete.
 
 ## Code-language correction requested during expansion
 
@@ -27,12 +29,14 @@ workspace now exposes **Python** and **Pseudocode** buttons. Complete Python
 solutions are wired for the original 50 collection problems and the 40
 additions spanning 1401-1475, plus seven trie problems (97 total). The trie
 batch includes explicit Python and pseudocode step mappings and shared node diagrams.
+The subsequent 48 range/broad additions bring complete Python coverage to 145.
 Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.
 Pseudocode retains playback line highlighting. Python does not reuse those
 line numbers. Copy and Code Playground use the selected complete source.
 Continue adding complete Python implementations to the remaining definitions.
-The in-progress `expansionRangeAlgorithms.js` catalog batch is not registered.
+The range batch is now registered with both languages. Additional batches
+continue through the same explicit-definition registration path.
 
 Runtime validation, browser interactions, and final correctness review remain
 outstanding. Skipping checks accelerates source authoring, not verification.

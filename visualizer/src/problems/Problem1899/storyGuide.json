@@ -1,0 +1,31 @@
+{
+  "number": "1899",
+  "title": "Merge Triplets to Form Target Triplet",
+  "goal": "Decide whether coordinatewise maximum merges can produce the target triplet.",
+  "strategy": "Any triplet exceeding the target in one coordinate is unusable. Merge all compatible triplets; success requires reaching each target coordinate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether coordinatewise maximum merges can produce the target triplet.",
+    "inspect": "Any triplet exceeding the target in one coordinate is unusable. Merge all compatible triplets; success requires reaching each target coordinate.",
+    "update": "Any triplet exceeding the target in one coordinate is unusable. Merge all compatible triplets; success requires reaching each target coordinate.",
+    "done": "Decide whether coordinatewise maximum merges can produce the target triplet."
+  },
+  "edgeCases": [
+    "Overshooting coordinate makes a tempting triplet unusable",
+    "Target already present",
+    "One target coordinate never reached"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

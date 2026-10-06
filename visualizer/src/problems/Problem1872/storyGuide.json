@@ -1,0 +1,31 @@
+{
+  "number": "1872",
+  "title": "Stone Game VIII",
+  "goal": "Find the optimal score difference in a game merging at least two leftmost stones each turn.",
+  "strategy": "Prefix sums represent all possible merged values. Scan legal first-move boundaries backward, comparing the existing best with current prefix sum minus opponent continuation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the optimal score difference in a game merging at least two leftmost stones each turn.",
+    "inspect": "Prefix sums represent all possible merged values. Scan legal first-move boundaries backward, comparing the existing best with current prefix sum minus opponent continuation.",
+    "update": "Prefix sums represent all possible merged values. Scan legal first-move boundaries backward, comparing the existing best with current prefix sum minus opponent continuation.",
+    "done": "Find the optimal score difference in a game merging at least two leftmost stones each turn."
+  },
+  "edgeCases": [
+    "Only two stones force the total",
+    "All negative values",
+    "All zeros tie"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

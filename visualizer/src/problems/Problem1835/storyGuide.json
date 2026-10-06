@@ -1,0 +1,31 @@
+{
+  "number": "1835",
+  "title": "Find XOR Sum of All Pairs Bitwise AND",
+  "goal": "Compute the XOR of every pairwise bitwise AND between two arrays.",
+  "strategy": "Bitwise AND distributes over XOR. Reduce each array independently, then AND the two totals instead of enumerating the cross product.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the XOR of every pairwise bitwise AND between two arrays.",
+    "inspect": "Bitwise AND distributes over XOR. Reduce each array independently, then AND the two totals instead of enumerating the cross product.",
+    "update": "Bitwise AND distributes over XOR. Reduce each array independently, then AND the two totals instead of enumerating the cross product.",
+    "done": "Compute the XOR of every pairwise bitwise AND between two arrays."
+  },
+  "edgeCases": [
+    "Repeated values cancel before AND",
+    "Zero first reduction",
+    "One pair only"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

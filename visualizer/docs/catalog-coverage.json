@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1100,
-  "matchedCatalogRoutes": 1084,
-  "remaining": 2989,
+  "routes": 1148,
+  "matchedCatalogRoutes": 1132,
+  "remaining": 2941,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -12939,8 +12939,8 @@
       "number": "1835",
       "title": "Find XOR Sum of All Pairs Bitwise AND",
       "slug": "find-xor-sum-of-all-pairs-bitwise-and",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1835"
     },
     {
       "number": "1836",
@@ -12953,22 +12953,22 @@
       "number": "1837",
       "title": "Sum of Digits in Base K",
       "slug": "sum-of-digits-in-base-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1837"
     },
     {
       "number": "1838",
       "title": "Frequency of the Most Frequent Element",
       "slug": "frequency-of-the-most-frequent-element",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1838"
     },
     {
       "number": "1839",
       "title": "Longest Substring Of All Vowels in Order",
       "slug": "longest-substring-of-all-vowels-in-order",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1839"
     },
     {
       "number": "1840",
@@ -13002,22 +13002,22 @@
       "number": "1844",
       "title": "Replace All Digits with Characters",
       "slug": "replace-all-digits-with-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1844"
     },
     {
       "number": "1845",
       "title": "Seat Reservation Manager",
       "slug": "seat-reservation-manager",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1845"
     },
     {
       "number": "1846",
       "title": "Maximum Element After Decreasing and Rearranging",
       "slug": "maximum-element-after-decreasing-and-rearranging",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1846"
     },
     {
       "number": "1847",
@@ -13030,15 +13030,15 @@
       "number": "1848",
       "title": "Minimum Distance to the Target Element",
       "slug": "minimum-distance-to-the-target-element",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1848"
     },
     {
       "number": "1849",
       "title": "Splitting a String Into Descending Consecutive Values",
       "slug": "splitting-a-string-into-descending-consecutive-values",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1849"
     },
     {
       "number": "1850",
@@ -13051,15 +13051,15 @@
       "number": "1851",
       "title": "Minimum Interval to Include Each Query",
       "slug": "minimum-interval-to-include-each-query",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1851"
     },
     {
       "number": "1852",
       "title": "Distinct Numbers in Each Subarray",
       "slug": "distinct-numbers-in-each-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1852"
     },
     {
       "number": "1853",
@@ -13072,57 +13072,57 @@
       "number": "1854",
       "title": "Maximum Population Year",
       "slug": "maximum-population-year",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1854"
     },
     {
       "number": "1855",
       "title": "Maximum Distance Between a Pair of Values",
       "slug": "maximum-distance-between-a-pair-of-values",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1855"
     },
     {
       "number": "1856",
       "title": "Maximum Subarray Min-Product",
       "slug": "maximum-subarray-min-product",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1856"
     },
     {
       "number": "1857",
       "title": "Largest Color Value in a Directed Graph",
       "slug": "largest-color-value-in-a-directed-graph",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1857"
     },
     {
       "number": "1858",
       "title": "Longest Word With All Prefixes",
       "slug": "longest-word-with-all-prefixes",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1858"
     },
     {
       "number": "1859",
       "title": "Sorting the Sentence",
       "slug": "sorting-the-sentence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1859"
     },
     {
       "number": "1860",
       "title": "Incremental Memory Leak",
       "slug": "incremental-memory-leak",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1860"
     },
     {
       "number": "1861",
       "title": "Rotating the Box",
       "slug": "rotating-the-box",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1861"
     },
     {
       "number": "1862",
@@ -13135,29 +13135,29 @@
       "number": "1863",
       "title": "Sum of All Subset XOR Totals",
       "slug": "sum-of-all-subset-xor-totals",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1863"
     },
     {
       "number": "1864",
       "title": "Minimum Number of Swaps to Make the Binary String Alternating",
       "slug": "minimum-number-of-swaps-to-make-the-binary-string-alternating",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1864"
     },
     {
       "number": "1865",
       "title": "Finding Pairs With a Certain Sum",
       "slug": "finding-pairs-with-a-certain-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1865"
     },
     {
       "number": "1866",
       "title": "Number of Ways to Rearrange Sticks With K Sticks Visible",
       "slug": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1866"
     },
     {
       "number": "1867",
@@ -13170,36 +13170,36 @@
       "number": "1868",
       "title": "Product of Two Run-Length Encoded Arrays",
       "slug": "product-of-two-run-length-encoded-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1868"
     },
     {
       "number": "1869",
       "title": "Longer Contiguous Segments of Ones than Zeros",
       "slug": "longer-contiguous-segments-of-ones-than-zeros",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1869"
     },
     {
       "number": "1870",
       "title": "Minimum Speed to Arrive on Time",
       "slug": "minimum-speed-to-arrive-on-time",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1870"
     },
     {
       "number": "1871",
       "title": "Jump Game VII",
       "slug": "jump-game-vii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1871"
     },
     {
       "number": "1872",
       "title": "Stone Game VIII",
       "slug": "stone-game-viii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1872"
     },
     {
       "number": "1873",
@@ -13212,8 +13212,8 @@
       "number": "1874",
       "title": "Minimize Product Sum of Two Arrays",
       "slug": "minimize-product-sum-of-two-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1874"
     },
     {
       "number": "1875",
@@ -13226,15 +13226,15 @@
       "number": "1876",
       "title": "Substrings of Size Three with Distinct Characters",
       "slug": "substrings-of-size-three-with-distinct-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1876"
     },
     {
       "number": "1877",
       "title": "Minimize Maximum Pair Sum in Array",
       "slug": "minimize-maximum-pair-sum-in-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1877"
     },
     {
       "number": "1878",
@@ -13247,29 +13247,29 @@
       "number": "1879",
       "title": "Minimum XOR Sum of Two Arrays",
       "slug": "minimum-xor-sum-of-two-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1879"
     },
     {
       "number": "1880",
       "title": "Check if Word Equals Summation of Two Words",
       "slug": "check-if-word-equals-summation-of-two-words",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1880"
     },
     {
       "number": "1881",
       "title": "Maximum Value after Insertion",
       "slug": "maximum-value-after-insertion",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1881"
     },
     {
       "number": "1882",
       "title": "Process Tasks Using Servers",
       "slug": "process-tasks-using-servers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1882"
     },
     {
       "number": "1883",
@@ -13282,36 +13282,36 @@
       "number": "1884",
       "title": "Egg Drop With 2 Eggs and N Floors",
       "slug": "egg-drop-with-2-eggs-and-n-floors",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1884"
     },
     {
       "number": "1885",
       "title": "Count Pairs in Two Arrays",
       "slug": "count-pairs-in-two-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1885"
     },
     {
       "number": "1886",
       "title": "Determine Whether Matrix Can Be Obtained By Rotation",
       "slug": "determine-whether-matrix-can-be-obtained-by-rotation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1886"
     },
     {
       "number": "1887",
       "title": "Reduction Operations to Make the Array Elements Equal",
       "slug": "reduction-operations-to-make-the-array-elements-equal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1887"
     },
     {
       "number": "1888",
       "title": "Minimum Number of Flips to Make the Binary String Alternating",
       "slug": "minimum-number-of-flips-to-make-the-binary-string-alternating",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1888"
     },
     {
       "number": "1889",
@@ -13331,8 +13331,8 @@
       "number": "1891",
       "title": "Cutting Ribbons",
       "slug": "cutting-ribbons",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1891"
     },
     {
       "number": "1892",
@@ -13345,15 +13345,15 @@
       "number": "1893",
       "title": "Check if All the Integers in a Range Are Covered",
       "slug": "check-if-all-the-integers-in-a-range-are-covered",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1893"
     },
     {
       "number": "1894",
       "title": "Find the Student that Will Replace the Chalk",
       "slug": "find-the-student-that-will-replace-the-chalk",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1894"
     },
     {
       "number": "1895",
@@ -13373,22 +13373,22 @@
       "number": "1897",
       "title": "Redistribute Characters to Make All Strings Equal",
       "slug": "redistribute-characters-to-make-all-strings-equal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1897"
     },
     {
       "number": "1898",
       "title": "Maximum Number of Removable Characters",
       "slug": "maximum-number-of-removable-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1898"
     },
     {
       "number": "1899",
       "title": "Merge Triplets to Form Target Triplet",
       "slug": "merge-triplets-to-form-target-triplet",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1899"
     },
     {
       "number": "1900",
@@ -13429,8 +13429,8 @@
       "number": "1905",
       "title": "Count Sub Islands",
       "slug": "count-sub-islands",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1905"
     },
     {
       "number": "1906",
@@ -13499,8 +13499,8 @@
       "number": "1915",
       "title": "Number of Wonderful Substrings",
       "slug": "number-of-wonderful-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1915"
     },
     {
       "number": "1916",

@@ -1,0 +1,31 @@
+{
+  "number": "1897",
+  "title": "Redistribute Characters to Make All Strings Equal",
+  "goal": "Decide whether redistributing characters can make all words equal.",
+  "strategy": "Only total frequency matters because characters may move across word boundaries. Every letter count must be divisible by the number of words.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether redistributing characters can make all words equal.",
+    "inspect": "Only total frequency matters because characters may move across word boundaries. Every letter count must be divisible by the number of words.",
+    "update": "Only total frequency matters because characters may move across word boundaries. Every letter count must be divisible by the number of words.",
+    "done": "Decide whether redistributing characters can make all words equal."
+  },
+  "edgeCases": [
+    "One leftover character prevents equality",
+    "One word is always redistributable",
+    "Already equal words"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

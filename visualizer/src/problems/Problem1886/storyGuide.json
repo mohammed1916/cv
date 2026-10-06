@@ -1,0 +1,31 @@
+{
+  "number": "1886",
+  "title": "Determine Whether Matrix Can Be Obtained By Rotation",
+  "goal": "Decide whether rotating a square matrix by quarter-turns can match the target.",
+  "strategy": "Compare all cells at each of the four possible orientations. Rotate coordinates clockwise between comparisons.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether rotating a square matrix by quarter-turns can match the target.",
+    "inspect": "Compare all cells at each of the four possible orientations. Rotate coordinates clockwise between comparisons.",
+    "update": "Compare all cells at each of the four possible orientations. Rotate coordinates clockwise between comparisons.",
+    "done": "Decide whether rotating a square matrix by quarter-turns can match the target."
+  },
+  "edgeCases": [
+    "Already equal at zero turns",
+    "Different counts cannot match",
+    "Half-turn match"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1868",
+  "title": "Product of Two Run-Length Encoded Arrays",
+  "goal": "Multiply two run-length encoded arrays and keep the result maximally compressed.",
+  "strategy": "Consume the shorter remaining run from both inputs. Equal adjacent result products must merge even when an input run boundary caused the split.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Multiply two run-length encoded arrays and keep the result maximally compressed.",
+    "inspect": "Consume the shorter remaining run from both inputs. Equal adjacent result products must merge even when an input run boundary caused the split.",
+    "update": "Consume the shorter remaining run from both inputs. Equal adjacent result products must merge even when an input run boundary caused the split.",
+    "done": "Multiply two run-length encoded arrays and keep the result maximally compressed."
+  },
+  "edgeCases": [
+    "Products merge across both input boundaries",
+    "One long run spans many other runs",
+    "Single pair of runs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

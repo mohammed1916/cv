@@ -4,6 +4,10 @@ import { definitions as trees } from '../src/problems/families/treeStories/defin
 import { definitions as collections } from '../src/problems/families/collectionStories/definitions.js';
 const definitions={...scans,...trees,...collections};
 const collectionTags={
+1870:["Binary Search"],1871:["Sliding Window"],1872:["Dynamic Programming","Game Theory"],1874:["Greedy"],1876:["String"],1877:["Greedy"],1879:["Bitmask","Dynamic Programming"],1880:["String"],1881:["Greedy"],1882:["Simulation"],1884:["Math"],1885:["Two Pointers"],1886:["Matrix"],1887:["Sorting"],1888:["Sliding Window"],1891:["Binary Search"],1893:["Sorting"],1894:["Prefix Sum"],1897:["Counting"],1898:["Binary Search"],1899:["Greedy"],1905:["Breadth-First Search","Matrix"],1915:["Prefix Sum","Bit Manipulation"],
+
+1835:["Bit Manipulation"],1837:["Math"],1838:["Sliding Window"],1839:["String"],1844:["String"],1845:["Design"],1846:["Greedy"],1848:["Array"],1849:["Backtracking"],1851:["Sorting"],1852:["Sliding Window"],1854:["Prefix Sum"],1855:["Two Pointers"],1856:["Monotonic Stack"],1857:["Graph","Topological Sort"],1858:["Hash Table"],1859:["String"],1860:["Simulation"],1861:["Matrix"],1863:["Bit Manipulation"],1864:["Greedy"],1865:["Design"],1866:["Dynamic Programming"],1868:["Two Pointers"],1869:["String"],
+
   648:['Trie','String'],677:['Trie','Design'],720:['Trie'],820:['Trie','String'],1032:['Trie','Design'],1268:['Trie','Sorting'],1804:['Trie','Design'],
 1805:["String","Hash Table"],1806:["Simulation"],1807:["String","Hash Table"],1812:["Math"],1813:["Two Pointers"],1814:["Hash Table"],1816:["String"],1817:["Hash Table"],1818:["Binary Search"],1820:["Bipartite Matching"],1822:["Math"],1823:["Simulation"],1824:["Dynamic Programming"],1827:["Greedy"],1828:["Geometry"],1829:["Bit Manipulation"],1832:["String"],1833:["Greedy"],1834:["Simulation","Sorting"],
 

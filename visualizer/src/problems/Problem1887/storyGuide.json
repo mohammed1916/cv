@@ -1,0 +1,31 @@
+{
+  "number": "1887",
+  "title": "Reduction Operations to Make the Array Elements Equal",
+  "goal": "Count reductions needed to make every value equal by repeatedly lowering a maximum to the next distinct value.",
+  "strategy": "After sorting, a value crosses one reduction level for each distinct smaller value. Add its level count once per occurrence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count reductions needed to make every value equal by repeatedly lowering a maximum to the next distinct value.",
+    "inspect": "After sorting, a value crosses one reduction level for each distinct smaller value. Add its level count once per occurrence.",
+    "update": "After sorting, a value crosses one reduction level for each distinct smaller value. Add its level count once per occurrence.",
+    "done": "Count reductions needed to make every value equal by repeatedly lowering a maximum to the next distinct value."
+  },
+  "edgeCases": [
+    "All equal requires no reductions",
+    "Three distinct levels",
+    "One element"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
