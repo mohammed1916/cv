@@ -4151,11 +4151,109 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/vowels-of-all-substrings/"
   },
+  "2064": {
+    "number": "2064",
+    "title": "Minimized Maximum of Products Distributed to Any Store",
+    "slug": "minimized-maximum-of-products-distributed-to-any-store",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/"
+  },
+  "2065": {
+    "number": "2065",
+    "title": "Maximum Path Quality of a Graph",
+    "slug": "maximum-path-quality-of-a-graph",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-path-quality-of-a-graph/"
+  },
+  "2067": {
+    "number": "2067",
+    "title": "Number of Equal Count Substrings",
+    "slug": "number-of-equal-count-substrings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-equal-count-substrings/"
+  },
+  "2068": {
+    "number": "2068",
+    "title": "Check Whether Two Strings are Almost Equivalent",
+    "slug": "check-whether-two-strings-are-almost-equivalent",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-whether-two-strings-are-almost-equivalent/"
+  },
+  "2069": {
+    "number": "2069",
+    "title": "Walking Robot Simulation II",
+    "slug": "walking-robot-simulation-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/walking-robot-simulation-ii/"
+  },
+  "2070": {
+    "number": "2070",
+    "title": "Most Beautiful Item for Each Query",
+    "slug": "most-beautiful-item-for-each-query",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/most-beautiful-item-for-each-query/"
+  },
+  "2071": {
+    "number": "2071",
+    "title": "Maximum Number of Tasks You Can Assign",
+    "slug": "maximum-number-of-tasks-you-can-assign",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-number-of-tasks-you-can-assign/"
+  },
+  "2073": {
+    "number": "2073",
+    "title": "Time Needed to Buy Tickets",
+    "slug": "time-needed-to-buy-tickets",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/time-needed-to-buy-tickets/"
+  },
   "2074": {
     "number": "2074",
     "title": "Reverse Nodes in Even Length Groups",
     "slug": "reverse-nodes-in-even-length-groups",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/reverse-nodes-in-even-length-groups/"
+  },
+  "2075": {
+    "number": "2075",
+    "title": "Decode the Slanted Ciphertext",
+    "slug": "decode-the-slanted-ciphertext",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/decode-the-slanted-ciphertext/"
+  },
+  "2076": {
+    "number": "2076",
+    "title": "Process Restricted Friend Requests",
+    "slug": "process-restricted-friend-requests",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/process-restricted-friend-requests/"
+  },
+  "2077": {
+    "number": "2077",
+    "title": "Paths in Maze That Lead to Same Room",
+    "slug": "paths-in-maze-that-lead-to-same-room",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/"
+  },
+  "2078": {
+    "number": "2078",
+    "title": "Two Furthest Houses With Different Colors",
+    "slug": "two-furthest-houses-with-different-colors",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/two-furthest-houses-with-different-colors/"
+  },
+  "2079": {
+    "number": "2079",
+    "title": "Watering Plants",
+    "slug": "watering-plants",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/watering-plants/"
+  },
+  "2080": {
+    "number": "2080",
+    "title": "Range Frequency Queries",
+    "slug": "range-frequency-queries",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/range-frequency-queries/"
   }
 };

@@ -1,0 +1,31 @@
+{
+  "number": "2071",
+  "title": "Maximum Number of Tasks You Can Assign",
+  "goal": "Assign the largest number of tasks using one optional strength pill per worker.",
+  "strategy": "Binary search the count using easiest tasks and strongest workers. Process those workers from weakest upward: use an easy task without a pill when possible, otherwise spend a pill on the hardest currently reachable task.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign the largest number of tasks using one optional strength pill per worker.",
+    "inspect": "Binary search the count using easiest tasks and strongest workers. Process those workers from weakest upward: use an easy task without a pill when possible, otherwise spend a pill on the hardest currently reachable task.",
+    "update": "Binary search the count using easiest tasks and strongest workers. Process those workers from weakest upward: use an easy task without a pill when possible, otherwise spend a pill on the hardest currently reachable task.",
+    "done": "Assign the largest number of tasks using one optional strength pill per worker."
+  },
+  "edgeCases": [
+    "No pills means only natural worker strength matters",
+    "One large boost should cover the hardest reachable task",
+    "Zero boost cannot change a failed assignment"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

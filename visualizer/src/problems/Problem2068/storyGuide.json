@@ -1,0 +1,31 @@
+{
+  "number": "2068",
+  "title": "Check Whether Two Strings are Almost Equivalent",
+  "goal": "Check whether the frequency difference of every letter is at most three.",
+  "strategy": "Count each word separately and compare all letter counts. Matching overall length does not guarantee that any individual letter stays within the allowed difference.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether the frequency difference of every letter is at most three.",
+    "inspect": "Count each word separately and compare all letter counts. Matching overall length does not guarantee that any individual letter stays within the allowed difference.",
+    "update": "Count each word separately and compare all letter counts. Matching overall length does not guarantee that any individual letter stays within the allowed difference.",
+    "done": "Check whether the frequency difference of every letter is at most three."
+  },
+  "edgeCases": [
+    "A difference of exactly three remains allowed",
+    "A difference of four fails",
+    "Identical words trivially satisfy every bound"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

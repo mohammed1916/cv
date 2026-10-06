@@ -10,9 +10,11 @@ import partitionAndConstraint from './partitionAndConstraintBatch.js';
 import streamAndSearch from './streamAndSearchBatch.js';
 import trafficAndTree from './trafficAndTreeBatch.js';
 import queryAndTraversal from './queryAndTraversalBatch.js';
+import distributionAndRobot from './distributionAndRobotBatch.js';
+import requestsAndFrequency from './requestsAndFrequencyBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
-const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal];
+const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency];
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

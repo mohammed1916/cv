@@ -1,5 +1,5 @@
 {
-  "routes": 1290,
+  "routes": 1304,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -5966,6 +5966,51 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2064",
+      "number": "2064",
+      "title": "Minimized Maximum of Products Distributed to Any Store",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2065",
+      "number": "2065",
+      "title": "Maximum Path Quality of a Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2067",
+      "number": "2067",
+      "title": "Number of Equal Count Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2068",
+      "number": "2068",
+      "title": "Check Whether Two Strings are Almost Equivalent",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2069",
+      "number": "2069",
+      "title": "Walking Robot Simulation II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem207",
       "number": "207",
       "title": "Course Schedule",
@@ -5975,9 +6020,81 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem2070",
+      "number": "2070",
+      "title": "Most Beautiful Item for Each Query",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2071",
+      "number": "2071",
+      "title": "Maximum Number of Tasks You Can Assign",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2073",
+      "number": "2073",
+      "title": "Time Needed to Buy Tickets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem2074",
       "number": "2074",
       "title": "Reverse Nodes in Even Length Groups",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2075",
+      "number": "2075",
+      "title": "Decode the Slanted Ciphertext",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2076",
+      "number": "2076",
+      "title": "Process Restricted Friend Requests",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2077",
+      "number": "2077",
+      "title": "Paths in Maze That Lead to Same Room",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2078",
+      "number": "2078",
+      "title": "Two Furthest Houses With Different Colors",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2079",
+      "number": "2079",
+      "title": "Watering Plants",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -5991,6 +6108,15 @@
       "checks": 1,
       "rules": 2,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2080",
+      "number": "2080",
+      "title": "Range Frequency Queries",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem209",

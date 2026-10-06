@@ -1,0 +1,31 @@
+{
+  "number": "2064",
+  "title": "Minimized Maximum of Products Distributed to Any Store",
+  "goal": "Distribute product types across stores while minimizing the largest store load.",
+  "strategy": "For a proposed load cap, each product type needs ceil(quantity/cap) stores because a store holds only one type. Binary search the smallest cap whose total required stores fits n.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Distribute product types across stores while minimizing the largest store load.",
+    "inspect": "For a proposed load cap, each product type needs ceil(quantity/cap) stores because a store holds only one type. Binary search the smallest cap whose total required stores fits n.",
+    "update": "For a proposed load cap, each product type needs ceil(quantity/cap) stores because a store holds only one type. Binary search the smallest cap whose total required stores fits n.",
+    "done": "Distribute product types across stores while minimizing the largest store load."
+  },
+  "edgeCases": [
+    "One store per type forces the largest quantity",
+    "Enough stores allow one product per store",
+    "One product type is split across many stores"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

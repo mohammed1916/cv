@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1290,
-  "matchedCatalogRoutes": 1274,
-  "remaining": 2799,
+  "routes": 1304,
+  "matchedCatalogRoutes": 1288,
+  "remaining": 2785,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -14542,15 +14542,15 @@
       "number": "2064",
       "title": "Minimized Maximum of Products Distributed to Any Store",
       "slug": "minimized-maximum-of-products-distributed-to-any-store",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2064"
     },
     {
       "number": "2065",
       "title": "Maximum Path Quality of a Graph",
       "slug": "maximum-path-quality-of-a-graph",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2065"
     },
     {
       "number": "2066",
@@ -14563,36 +14563,36 @@
       "number": "2067",
       "title": "Number of Equal Count Substrings",
       "slug": "number-of-equal-count-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2067"
     },
     {
       "number": "2068",
       "title": "Check Whether Two Strings are Almost Equivalent",
       "slug": "check-whether-two-strings-are-almost-equivalent",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2068"
     },
     {
       "number": "2069",
       "title": "Walking Robot Simulation II",
       "slug": "walking-robot-simulation-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2069"
     },
     {
       "number": "2070",
       "title": "Most Beautiful Item for Each Query",
       "slug": "most-beautiful-item-for-each-query",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2070"
     },
     {
       "number": "2071",
       "title": "Maximum Number of Tasks You Can Assign",
       "slug": "maximum-number-of-tasks-you-can-assign",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2071"
     },
     {
       "number": "2072",
@@ -14605,8 +14605,8 @@
       "number": "2073",
       "title": "Time Needed to Buy Tickets",
       "slug": "time-needed-to-buy-tickets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2073"
     },
     {
       "number": "2074",
@@ -14619,43 +14619,43 @@
       "number": "2075",
       "title": "Decode the Slanted Ciphertext",
       "slug": "decode-the-slanted-ciphertext",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2075"
     },
     {
       "number": "2076",
       "title": "Process Restricted Friend Requests",
       "slug": "process-restricted-friend-requests",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2076"
     },
     {
       "number": "2077",
       "title": "Paths in Maze That Lead to Same Room",
       "slug": "paths-in-maze-that-lead-to-same-room",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2077"
     },
     {
       "number": "2078",
       "title": "Two Furthest Houses With Different Colors",
       "slug": "two-furthest-houses-with-different-colors",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2078"
     },
     {
       "number": "2079",
       "title": "Watering Plants",
       "slug": "watering-plants",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2079"
     },
     {
       "number": "2080",
       "title": "Range Frequency Queries",
       "slug": "range-frequency-queries",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2080"
     },
     {
       "number": "2081",

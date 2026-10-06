@@ -1,0 +1,31 @@
+{
+  "number": "2067",
+  "title": "Number of Equal Count Substrings",
+  "goal": "Count substrings in which every present character occurs exactly count times.",
+  "strategy": "A valid substring with d distinct letters has length d*count. For each possible d, slide that fixed-length window while tracking how many character frequencies equal count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings in which every present character occurs exactly count times.",
+    "inspect": "A valid substring with d distinct letters has length d*count. For each possible d, slide that fixed-length window while tracking how many character frequencies equal count.",
+    "update": "A valid substring with d distinct letters has length d*count. For each possible d, slide that fixed-length window while tracking how many character frequencies equal count.",
+    "done": "Count substrings in which every present character occurs exactly count times."
+  },
+  "edgeCases": [
+    "One repeated letter creates overlapping valid windows",
+    "Count one requires every present letter to be distinct",
+    "The required count exceeds the string length"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

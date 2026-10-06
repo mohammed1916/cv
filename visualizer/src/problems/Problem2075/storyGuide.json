@@ -1,0 +1,31 @@
+{
+  "number": "2075",
+  "title": "Decode the Slanted Ciphertext",
+  "goal": "Decode text written diagonally and read row by row.",
+  "strategy": "Recover the rectangular character grid. Read down-right diagonals starting at successive columns of the top row, then remove only trailing padding spaces.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decode text written diagonally and read row by row.",
+    "inspect": "Recover the rectangular character grid. Read down-right diagonals starting at successive columns of the top row, then remove only trailing padding spaces.",
+    "update": "Recover the rectangular character grid. Read down-right diagonals starting at successive columns of the top row, then remove only trailing padding spaces.",
+    "done": "Decode text written diagonally and read row by row."
+  },
+  "edgeCases": [
+    "One row preserves internal spaces",
+    "Only padding decodes to an empty message",
+    "A diagonal stops at the right edge before the last row"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

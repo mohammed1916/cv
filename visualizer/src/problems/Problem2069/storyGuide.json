@@ -1,0 +1,31 @@
+{
+  "number": "2069",
+  "title": "Walking Robot Simulation II",
+  "goal": "Simulate a robot moving counterclockwise around a rectangular boundary.",
+  "strategy": "Represent its location by distance along the perimeter. Reduce large moves modulo the perimeter, while remembering whether it has moved so returning to the origin faces south rather than the initial east.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Simulate a robot moving counterclockwise around a rectangular boundary.",
+    "inspect": "Represent its location by distance along the perimeter. Reduce large moves modulo the perimeter, while remembering whether it has moved so returning to the origin faces south rather than the initial east.",
+    "update": "Represent its location by distance along the perimeter. Reduce large moves modulo the perimeter, while remembering whether it has moved so returning to the origin faces south rather than the initial east.",
+    "done": "Simulate a robot moving counterclockwise around a rectangular boundary."
+  },
+  "edgeCases": [
+    "A full lap returns to the origin facing south",
+    "Zero steps preserve the untouched initial direction",
+    "Huge commands reduce modulo a small perimeter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
