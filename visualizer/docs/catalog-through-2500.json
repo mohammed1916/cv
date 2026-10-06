@@ -2,8 +2,8 @@
   "scope": "Every catalog problem numbered 1 through 2500",
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 2500,
-  "routePresent": 1532,
-  "missing": 968,
+  "routePresent": 1542,
+  "missing": 958,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "bands": [
     {
@@ -19,12 +19,12 @@
     {
       "from": 501,
       "through": 750,
-      "missing": 63
+      "missing": 60
     },
     {
       "from": 751,
       "through": 1000,
-      "missing": 154
+      "missing": 149
     },
     {
       "from": 1001,
@@ -34,7 +34,7 @@
     {
       "from": 1251,
       "through": 1500,
-      "missing": 140
+      "missing": 138
     },
     {
       "from": 1501,
@@ -4875,8 +4875,8 @@
       "number": "688",
       "title": "Knight Probability in Chessboard",
       "slug": "knight-probability-in-chessboard",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem688"
     },
     {
       "number": "689",
@@ -5247,8 +5247,8 @@
       "number": "741",
       "title": "Cherry Pickup",
       "slug": "cherry-pickup",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem741"
     },
     {
       "number": "742",
@@ -5310,8 +5310,8 @@
       "number": "750",
       "title": "Number Of Corner Rectangles",
       "slug": "number-of-corner-rectangles",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem750"
     },
     {
       "number": "751",
@@ -5409,8 +5409,8 @@
       "number": "764",
       "title": "Largest Plus Sign",
       "slug": "largest-plus-sign",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem764"
     },
     {
       "number": "765",
@@ -5654,8 +5654,8 @@
       "number": "799",
       "title": "Champagne Tower",
       "slug": "champagne-tower",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem799"
     },
     {
       "number": "800",
@@ -5717,8 +5717,8 @@
       "number": "808",
       "title": "Soup Servings",
       "slug": "soup-servings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem808"
     },
     {
       "number": "809",
@@ -5920,8 +5920,8 @@
       "number": "837",
       "title": "New 21 Game",
       "slug": "new-21-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem837"
     },
     {
       "number": "838",
@@ -6921,8 +6921,8 @@
       "number": "980",
       "title": "Unique Paths III",
       "slug": "unique-paths-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem980"
     },
     {
       "number": "981",
@@ -10172,8 +10172,8 @@
       "number": "1444",
       "title": "Number of Ways of Cutting a Pizza",
       "slug": "number-of-ways-of-cutting-a-pizza",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1444"
     },
     {
       "number": "1445",
@@ -10305,8 +10305,8 @@
       "number": "1463",
       "title": "Cherry Pickup II",
       "slug": "cherry-pickup-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1463"
     },
     {
       "number": "1464",

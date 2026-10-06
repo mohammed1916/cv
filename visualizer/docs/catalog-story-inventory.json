@@ -1,5 +1,5 @@
 {
-  "routes": 1557,
+  "routes": 1567,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -2078,6 +2078,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1444",
+      "number": "1444",
+      "title": "Number of Ways of Cutting a Pizza",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1446",
       "number": "1446",
       "title": "Consecutive Characters",
@@ -2171,6 +2180,15 @@
       "folder": "Problem1461",
       "number": "1461",
       "title": "Check If a String Contains All Binary Codes of Size K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1463",
+      "number": "1463",
+      "title": "Cherry Pickup II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12512,6 +12530,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem688",
+      "number": "688",
+      "title": "Knight Probability in Chessboard",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem69",
       "number": "69",
       "title": "Sqrt(x)",
@@ -12791,6 +12818,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem741",
+      "number": "741",
+      "title": "Cherry Pickup",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem743",
       "number": "743",
       "title": "Network Delay Time",
@@ -12836,6 +12872,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem750",
+      "number": "750",
+      "title": "Number Of Corner Rectangles",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem76",
       "number": "76",
       "title": "Minimum Window Substring",
@@ -12843,6 +12888,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem764",
+      "number": "764",
+      "title": "Largest Plus Sign",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem765",
@@ -12935,6 +12989,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem799",
+      "number": "799",
+      "title": "Champagne Tower",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem8",
       "number": "8",
       "title": "String to Integer (atoi)",
@@ -12974,6 +13037,15 @@
       "folder": "Problem806",
       "number": "806",
       "title": "Number of Lines To Write String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem808",
+      "number": "808",
+      "title": "Soup Servings",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -13073,6 +13145,15 @@
       "folder": "Problem836",
       "number": "836",
       "title": "Rectangle Overlap",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem837",
+      "number": "837",
+      "title": "New 21 Game",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -13833,6 +13914,15 @@
       "checks": 2,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem980",
+      "number": "980",
+      "title": "Unique Paths III",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem983",

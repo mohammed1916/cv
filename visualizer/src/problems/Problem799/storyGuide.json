@@ -1,0 +1,31 @@
+{
+  "number": "799",
+  "title": "Champagne Tower",
+  "goal": "Find how full a queried champagne glass is after overflow settles.",
+  "strategy": "Each glass holds one unit. Any excess splits equally between the two glasses below; propagating row by row accumulates contributions from both parents before the next overflow calculation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find how full a queried champagne glass is after overflow settles.",
+    "inspect": "Each glass holds one unit. Any excess splits equally between the two glasses below; propagating row by row accumulates contributions from both parents before the next overflow calculation.",
+    "update": "Each glass holds one unit. Any excess splits equally between the two glasses below; propagating row by row accumulates contributions from both parents before the next overflow calculation.",
+    "done": "Find how full a queried champagne glass is after overflow settles."
+  },
+  "edgeCases": [
+    "No poured champagne leaves every glass empty",
+    "Exactly one unit fills the top without overflow",
+    "A heavily supplied queried glass caps at one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

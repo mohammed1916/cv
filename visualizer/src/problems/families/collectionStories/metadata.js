@@ -406,6 +406,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/redundant-connection-ii/"
   },
+  "688": {
+    "number": "688",
+    "title": "Knight Probability in Chessboard",
+    "slug": "knight-probability-in-chessboard",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/knight-probability-in-chessboard/"
+  },
   "712": {
     "number": "712",
     "title": "Minimum ASCII Delete Sum for Two Strings",
@@ -426,6 +433,27 @@ export const collectionStoryMetadata = {
     "slug": "sentence-similarity-ii",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/sentence-similarity-ii/"
+  },
+  "741": {
+    "number": "741",
+    "title": "Cherry Pickup",
+    "slug": "cherry-pickup",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/cherry-pickup/"
+  },
+  "750": {
+    "number": "750",
+    "title": "Number Of Corner Rectangles",
+    "slug": "number-of-corner-rectangles",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-corner-rectangles/"
+  },
+  "764": {
+    "number": "764",
+    "title": "Largest Plus Sign",
+    "slug": "largest-plus-sign",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/largest-plus-sign/"
   },
   "765": {
     "number": "765",
@@ -448,12 +476,26 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/"
   },
+  "799": {
+    "number": "799",
+    "title": "Champagne Tower",
+    "slug": "champagne-tower",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/champagne-tower/"
+  },
   "801": {
     "number": "801",
     "title": "Minimum Swaps To Make Sequences Increasing",
     "slug": "minimum-swaps-to-make-sequences-increasing",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/"
+  },
+  "808": {
+    "number": "808",
+    "title": "Soup Servings",
+    "slug": "soup-servings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/soup-servings/"
   },
   "813": {
     "number": "813",
@@ -482,6 +524,13 @@ export const collectionStoryMetadata = {
     "slug": "making-a-large-island",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/making-a-large-island/"
+  },
+  "837": {
+    "number": "837",
+    "title": "New 21 Game",
+    "slug": "new-21-game",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/new-21-game/"
   },
   "839": {
     "number": "839",
@@ -853,6 +902,13 @@ export const collectionStoryMetadata = {
     "slug": "longest-turbulent-subarray",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/longest-turbulent-subarray/"
+  },
+  "980": {
+    "number": "980",
+    "title": "Unique Paths III",
+    "slug": "unique-paths-iii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/unique-paths-iii/"
   },
   "983": {
     "number": "983",
@@ -2170,6 +2226,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/"
   },
+  "1444": {
+    "number": "1444",
+    "title": "Number of Ways of Cutting a Pizza",
+    "slug": "number-of-ways-of-cutting-a-pizza",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/"
+  },
   "1446": {
     "number": "1446",
     "title": "Consecutive Characters",
@@ -2232,6 +2295,13 @@ export const collectionStoryMetadata = {
     "slug": "check-if-a-string-contains-all-binary-codes-of-size-k",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/"
+  },
+  "1463": {
+    "number": "1463",
+    "title": "Cherry Pickup II",
+    "slug": "cherry-pickup-ii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/cherry-pickup-ii/"
   },
   "1464": {
     "number": "1464",

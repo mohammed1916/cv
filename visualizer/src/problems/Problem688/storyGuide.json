@@ -1,0 +1,31 @@
+{
+  "number": "688",
+  "title": "Knight Probability in Chessboard",
+  "goal": "Find the probability that a knight remains on the board after exactly k random moves.",
+  "strategy": "Each of the eight knight moves is equally likely, including moves that leave the board. Transfer one eighth of each square probability only to on-board destinations; escaped probability never returns.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the probability that a knight remains on the board after exactly k random moves.",
+    "inspect": "Each of the eight knight moves is equally likely, including moves that leave the board. Transfer one eighth of each square probability only to on-board destinations; escaped probability never returns.",
+    "update": "Each of the eight knight moves is equally likely, including moves that leave the board. Transfer one eighth of each square probability only to on-board destinations; escaped probability never returns.",
+    "done": "Find the probability that a knight remains on the board after exactly k random moves."
+  },
+  "edgeCases": [
+    "Zero moves preserves the starting probability",
+    "A one-square board loses all probability on the first move",
+    "A corner starts with fewer on-board moves"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

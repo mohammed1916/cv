@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1557,
-  "matchedCatalogRoutes": 1554,
-  "remaining": 2519,
+  "routes": 1567,
+  "matchedCatalogRoutes": 1564,
+  "remaining": 2509,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -4840,8 +4840,8 @@
       "number": "688",
       "title": "Knight Probability in Chessboard",
       "slug": "knight-probability-in-chessboard",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem688"
     },
     {
       "number": "689",
@@ -5212,8 +5212,8 @@
       "number": "741",
       "title": "Cherry Pickup",
       "slug": "cherry-pickup",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem741"
     },
     {
       "number": "742",
@@ -5275,8 +5275,8 @@
       "number": "750",
       "title": "Number Of Corner Rectangles",
       "slug": "number-of-corner-rectangles",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem750"
     },
     {
       "number": "751",
@@ -5374,8 +5374,8 @@
       "number": "764",
       "title": "Largest Plus Sign",
       "slug": "largest-plus-sign",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem764"
     },
     {
       "number": "765",
@@ -5619,8 +5619,8 @@
       "number": "799",
       "title": "Champagne Tower",
       "slug": "champagne-tower",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem799"
     },
     {
       "number": "800",
@@ -5682,8 +5682,8 @@
       "number": "808",
       "title": "Soup Servings",
       "slug": "soup-servings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem808"
     },
     {
       "number": "809",
@@ -5885,8 +5885,8 @@
       "number": "837",
       "title": "New 21 Game",
       "slug": "new-21-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem837"
     },
     {
       "number": "838",
@@ -6886,8 +6886,8 @@
       "number": "980",
       "title": "Unique Paths III",
       "slug": "unique-paths-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem980"
     },
     {
       "number": "981",
@@ -10137,8 +10137,8 @@
       "number": "1444",
       "title": "Number of Ways of Cutting a Pizza",
       "slug": "number-of-ways-of-cutting-a-pizza",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1444"
     },
     {
       "number": "1445",
@@ -10270,8 +10270,8 @@
       "number": "1463",
       "title": "Cherry Pickup II",
       "slug": "cherry-pickup-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1463"
     },
     {
       "number": "1464",

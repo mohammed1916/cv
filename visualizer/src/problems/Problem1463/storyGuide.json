@@ -1,0 +1,31 @@
+{
+  "number": "1463",
+  "title": "Cherry Pickup II",
+  "goal": "Maximize cherries collected by two robots descending from opposite top corners.",
+  "strategy": "A row state stores both robot columns. Each robot may shift by minus one zero or one before the next row, giving nine transitions; when both occupy one cell, collect that cell once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize cherries collected by two robots descending from opposite top corners.",
+    "inspect": "A row state stores both robot columns. Each robot may shift by minus one zero or one before the next row, giving nine transitions; when both occupy one cell, collect that cell once.",
+    "update": "A row state stores both robot columns. Each robot may shift by minus one zero or one before the next row, giving nine transitions; when both occupy one cell, collect that cell once.",
+    "done": "Maximize cherries collected by two robots descending from opposite top corners."
+  },
+  "edgeCases": [
+    "An all-zero board yields zero cherries",
+    "Two columns allow both robots to collect every row",
+    "A valuable center cell must not be counted twice"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

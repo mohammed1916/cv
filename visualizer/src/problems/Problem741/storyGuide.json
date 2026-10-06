@@ -1,0 +1,31 @@
+{
+  "number": "741",
+  "title": "Cherry Pickup",
+  "goal": "Collect the most cherries on a round trip without counting a cell twice.",
+  "strategy": "Reverse the return trip so both journeys move right and down together. At each shared step, track both row coordinates; columns follow from step minus row. Shared cells contribute their cherry only once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Collect the most cherries on a round trip without counting a cell twice.",
+    "inspect": "Reverse the return trip so both journeys move right and down together. At each shared step, track both row coordinates; columns follow from step minus row. Shared cells contribute their cherry only once.",
+    "update": "Reverse the return trip so both journeys move right and down together. At each shared step, track both row coordinates; columns follow from step minus row. Shared cells contribute their cherry only once.",
+    "done": "Collect the most cherries on a round trip without counting a cell twice."
+  },
+  "edgeCases": [
+    "A blocked corridor makes a round trip impossible",
+    "One cherry cell is counted once for both walkers",
+    "A cherry-filled square rewards two boundary routes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
