@@ -1,5 +1,5 @@
 {
-  "routes": 1502,
+  "routes": 1522,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -710,6 +710,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1156",
+      "number": "1156",
+      "title": "Swap For Longest Repeated Character Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem116",
       "number": "116",
       "title": "Populating Next Right Pointers in Each Node",
@@ -1043,6 +1052,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1234",
+      "number": "1234",
+      "title": "Replace the Substring for Balanced String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1239",
       "number": "1239",
       "title": "Maximum Length of a Concatenated String with Unique Characters",
@@ -1277,6 +1295,15 @@
       "folder": "Problem1296",
       "number": "1296",
       "title": "Divide Array in Sets of K Consecutive Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1297",
+      "number": "1297",
+      "title": "Maximum Number of Occurrences of a Substring",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -1541,6 +1568,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1358",
+      "number": "1358",
+      "title": "Number of Substrings Containing All Three Characters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem136",
       "number": "136",
       "title": "Single Number",
@@ -1574,6 +1610,15 @@
       "folder": "Problem1370",
       "number": "1370",
       "title": "Increasing Decreasing String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1371",
+      "number": "1371",
+      "title": "Find the Longest Substring Containing Vowels in Even Counts",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -2438,6 +2483,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1542",
+      "number": "1542",
+      "title": "Find Longest Awesome Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1544",
       "number": "1544",
       "title": "Make The String Great",
@@ -2594,6 +2648,15 @@
       "folder": "Problem1572",
       "number": "1572",
       "title": "Matrix Diagonal Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1574",
+      "number": "1574",
+      "title": "Shortest Subarray to be Removed to Make Array Sorted",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -7640,6 +7703,15 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem2302",
+      "number": "2302",
+      "title": "Count Subarrays With Score Less Than K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem231",
       "number": "231",
       "title": "Power of Two",
@@ -7674,6 +7746,15 @@
       "checks": 1,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2348",
+      "number": "2348",
+      "title": "Number of Zero-Filled Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem235",
@@ -7721,6 +7802,24 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2393",
+      "number": "2393",
+      "title": "Count Strictly Increasing Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2395",
+      "number": "2395",
+      "title": "Find Subarrays With Equal Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem24",
       "number": "24",
       "title": "Swap Nodes in Pairs",
@@ -7739,6 +7838,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2401",
+      "number": "2401",
+      "title": "Longest Nice Subarray",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem241",
       "number": "241",
       "title": "Different Ways to Add Parentheses",
@@ -7746,6 +7854,24 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2414",
+      "number": "2414",
+      "title": "Length of the Longest Alphabetical Continuous Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2419",
+      "number": "2419",
+      "title": "Longest Subarray With Maximum Bitwise AND",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem242",
@@ -7784,6 +7910,24 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2444",
+      "number": "2444",
+      "title": "Count Subarrays With Fixed Bounds",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2447",
+      "number": "2447",
+      "title": "Number of Subarrays With GCD Equal to K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem245",
       "number": "245",
       "title": "Shortest Word Distance III",
@@ -7802,6 +7946,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2461",
+      "number": "2461",
+      "title": "Maximum Sum of Distinct Subarrays With Length K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem247",
       "number": "247",
       "title": "Strobogrammatic Number II",
@@ -7809,6 +7962,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2470",
+      "number": "2470",
+      "title": "Number of Subarrays With LCM Equal to K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem248",
@@ -12512,6 +12674,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem795",
+      "number": "795",
+      "title": "Number of Subarrays with Bounded Maximum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem796",
       "number": "796",
       "title": "Rotate String",
@@ -13397,6 +13568,15 @@
       "folder": "Problem991",
       "number": "991",
       "title": "Broken Calculator",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem992",
+      "number": "992",
+      "title": "Subarrays with K Different Integers",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,

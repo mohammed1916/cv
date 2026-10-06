@@ -1,0 +1,31 @@
+{
+  "number": "1371",
+  "title": "Find the Longest Substring Containing Vowels in Even Counts",
+  "goal": "Find the longest substring in which each vowel occurs an even number of times.",
+  "strategy": "A five-bit prefix mask records vowel-count parity. Equal masks at two prefix boundaries mean every vowel changed an even number of times between them; keep each mask earliest index for maximum length.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest substring in which each vowel occurs an even number of times.",
+    "inspect": "A five-bit prefix mask records vowel-count parity. Equal masks at two prefix boundaries mean every vowel changed an even number of times between them; keep each mask earliest index for maximum length.",
+    "update": "A five-bit prefix mask records vowel-count parity. Equal masks at two prefix boundaries mean every vowel changed an even number of times between them; keep each mask earliest index for maximum length.",
+    "done": "Find the longest substring in which each vowel occurs an even number of times."
+  },
+  "edgeCases": [
+    "No vowels means the entire string qualifies",
+    "Every vowel paired allows the full string",
+    "A single vowel has no nonempty even-count substring"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

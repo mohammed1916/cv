@@ -1,0 +1,31 @@
+{
+  "number": "2401",
+  "title": "Longest Nice Subarray",
+  "goal": "Find the longest subarray whose different elements have pairwise disjoint set bits.",
+  "strategy": "Within a valid window each set bit belongs to at most one element. Its OR mask detects conflicts with the next value; removing an element with XOR is safe because its bits are unique inside the window.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest subarray whose different elements have pairwise disjoint set bits.",
+    "inspect": "Within a valid window each set bit belongs to at most one element. Its OR mask detects conflicts with the next value; removing an element with XOR is safe because its bits are unique inside the window.",
+    "update": "Within a valid window each set bit belongs to at most one element. Its OR mask detects conflicts with the next value; removing an element with XOR is safe because its bits are unique inside the window.",
+    "done": "Find the longest subarray whose different elements have pairwise disjoint set bits."
+  },
+  "edgeCases": [
+    "Repeated set bits force length one",
+    "Different powers of two all coexist",
+    "A singleton is always nice"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

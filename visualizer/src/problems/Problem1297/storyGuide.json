@@ -1,0 +1,31 @@
+{
+  "number": "1297",
+  "title": "Maximum Number of Occurrences of a Substring",
+  "goal": "Find the greatest frequency of an allowed repeated substring.",
+  "strategy": "Only minSize needs counting: any longer valid substring has a valid minSize prefix appearing at least as often. Slide a fixed-length frequency window, counting text keys only when their distinct-letter count fits the limit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest frequency of an allowed repeated substring.",
+    "inspect": "Only minSize needs counting: any longer valid substring has a valid minSize prefix appearing at least as often. Slide a fixed-length frequency window, counting text keys only when their distinct-letter count fits the limit.",
+    "update": "Only minSize needs counting: any longer valid substring has a valid minSize prefix appearing at least as often. Slide a fixed-length frequency window, counting text keys only when their distinct-letter count fits the limit.",
+    "done": "Find the greatest frequency of an allowed repeated substring."
+  },
+  "edgeCases": [
+    "Repeated letters produce overlapping counted windows",
+    "Every candidate violates the distinct-letter limit",
+    "The entire string can be the only allowed window"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

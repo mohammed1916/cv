@@ -1,0 +1,31 @@
+{
+  "number": "2444",
+  "title": "Count Subarrays With Fixed Bounds",
+  "goal": "Count subarrays whose minimum is minK and maximum is maxK.",
+  "strategy": "Track the latest out-of-range value and latest occurrences of both required bounds. For each end, valid starts lie after the barrier and no later than the earlier bound occurrence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose minimum is minK and maximum is maxK.",
+    "inspect": "Track the latest out-of-range value and latest occurrences of both required bounds. For each end, valid starts lie after the barrier and no later than the earlier bound occurrence.",
+    "update": "Track the latest out-of-range value and latest occurrences of both required bounds. For each end, valid starts lie after the barrier and no later than the earlier bound occurrence.",
+    "done": "Count subarrays whose minimum is minK and maximum is maxK."
+  },
+  "edgeCases": [
+    "Equal bounds count runs of the one required value",
+    "A missing required maximum gives zero",
+    "Every out-of-range value blocks all crossing windows"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

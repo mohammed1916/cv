@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1502,
-  "matchedCatalogRoutes": 1499,
-  "remaining": 2574,
+  "routes": 1522,
+  "matchedCatalogRoutes": 1519,
+  "remaining": 2554,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -5591,8 +5591,8 @@
       "number": "795",
       "title": "Number of Subarrays with Bounded Maximum",
       "slug": "number-of-subarrays-with-bounded-maximum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem795"
     },
     {
       "number": "796",
@@ -6970,8 +6970,8 @@
       "number": "992",
       "title": "Subarrays with K Different Integers",
       "slug": "subarrays-with-k-different-integers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem992"
     },
     {
       "number": "993",
@@ -8120,8 +8120,8 @@
       "number": "1156",
       "title": "Swap For Longest Repeated Character Substring",
       "slug": "swap-for-longest-repeated-character-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1156"
     },
     {
       "number": "1157",
@@ -8666,8 +8666,8 @@
       "number": "1234",
       "title": "Replace the Substring for Balanced String",
       "slug": "replace-the-substring-for-balanced-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1234"
     },
     {
       "number": "1235",
@@ -9107,8 +9107,8 @@
       "number": "1297",
       "title": "Maximum Number of Occurrences of a Substring",
       "slug": "maximum-number-of-occurrences-of-a-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1297"
     },
     {
       "number": "1298",
@@ -9534,8 +9534,8 @@
       "number": "1358",
       "title": "Number of Substrings Containing All Three Characters",
       "slug": "number-of-substrings-containing-all-three-characters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1358"
     },
     {
       "number": "1359",
@@ -9625,8 +9625,8 @@
       "number": "1371",
       "title": "Find the Longest Substring Containing Vowels in Even Counts",
       "slug": "find-the-longest-substring-containing-vowels-in-even-counts",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1371"
     },
     {
       "number": "1372",
@@ -10823,8 +10823,8 @@
       "number": "1542",
       "title": "Find Longest Awesome Substring",
       "slug": "find-longest-awesome-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1542"
     },
     {
       "number": "1543",
@@ -11047,8 +11047,8 @@
       "number": "1574",
       "title": "Shortest Subarray to be Removed to Make Array Sorted",
       "slug": "shortest-subarray-to-be-removed-to-make-array-sorted",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1574"
     },
     {
       "number": "1575",
@@ -16143,8 +16143,8 @@
       "number": "2302",
       "title": "Count Subarrays With Score Less Than K",
       "slug": "count-subarrays-with-score-less-than-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2302"
     },
     {
       "number": "2303",
@@ -16465,8 +16465,8 @@
       "number": "2348",
       "title": "Number of Zero-Filled Subarrays",
       "slug": "number-of-zero-filled-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2348"
     },
     {
       "number": "2349",
@@ -16780,8 +16780,8 @@
       "number": "2393",
       "title": "Count Strictly Increasing Subarrays",
       "slug": "count-strictly-increasing-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2393"
     },
     {
       "number": "2394",
@@ -16794,8 +16794,8 @@
       "number": "2395",
       "title": "Find Subarrays With Equal Sum",
       "slug": "find-subarrays-with-equal-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2395"
     },
     {
       "number": "2396",
@@ -16836,8 +16836,8 @@
       "number": "2401",
       "title": "Longest Nice Subarray",
       "slug": "longest-nice-subarray",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2401"
     },
     {
       "number": "2402",
@@ -16927,8 +16927,8 @@
       "number": "2414",
       "title": "Length of the Longest Alphabetical Continuous Substring",
       "slug": "length-of-the-longest-alphabetical-continuous-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2414"
     },
     {
       "number": "2415",
@@ -16962,8 +16962,8 @@
       "number": "2419",
       "title": "Longest Subarray With Maximum Bitwise AND",
       "slug": "longest-subarray-with-maximum-bitwise-and",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2419"
     },
     {
       "number": "2420",
@@ -17137,8 +17137,8 @@
       "number": "2444",
       "title": "Count Subarrays With Fixed Bounds",
       "slug": "count-subarrays-with-fixed-bounds",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2444"
     },
     {
       "number": "2445",
@@ -17158,8 +17158,8 @@
       "number": "2447",
       "title": "Number of Subarrays With GCD Equal to K",
       "slug": "number-of-subarrays-with-gcd-equal-to-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2447"
     },
     {
       "number": "2448",
@@ -17256,8 +17256,8 @@
       "number": "2461",
       "title": "Maximum Sum of Distinct Subarrays With Length K",
       "slug": "maximum-sum-of-distinct-subarrays-with-length-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2461"
     },
     {
       "number": "2462",
@@ -17319,8 +17319,8 @@
       "number": "2470",
       "title": "Number of Subarrays With LCM Equal to K",
       "slug": "number-of-subarrays-with-lcm-equal-to-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2470"
     },
     {
       "number": "2471",

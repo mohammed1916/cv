@@ -399,6 +399,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/couples-holding-hands/"
   },
+  "795": {
+    "number": "795",
+    "title": "Number of Subarrays with Bounded Maximum",
+    "slug": "number-of-subarrays-with-bounded-maximum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/"
+  },
   "820": {
     "number": "820",
     "title": "Short Encoding of Words",
@@ -783,6 +790,13 @@ export const collectionStoryMetadata = {
     "slug": "broken-calculator",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/broken-calculator/"
+  },
+  "992": {
+    "number": "992",
+    "title": "Subarrays with K Different Integers",
+    "slug": "subarrays-with-k-different-integers",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/subarrays-with-k-different-integers/"
   },
   "997": {
     "number": "997",
@@ -1183,6 +1197,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-dice-rolls-with-target-sum/"
   },
+  "1156": {
+    "number": "1156",
+    "title": "Swap For Longest Repeated Character Substring",
+    "slug": "swap-for-longest-repeated-character-substring",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/swap-for-longest-repeated-character-substring/"
+  },
   "1160": {
     "number": "1160",
     "title": "Find Words That Can Be Formed by Characters",
@@ -1393,6 +1414,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/check-if-it-is-a-straight-line/"
   },
+  "1234": {
+    "number": "1234",
+    "title": "Replace the Substring for Balanced String",
+    "slug": "replace-the-substring-for-balanced-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/replace-the-substring-for-balanced-string/"
+  },
   "1239": {
     "number": "1239",
     "title": "Maximum Length of a Concatenated String with Unique Characters",
@@ -1539,6 +1567,13 @@ export const collectionStoryMetadata = {
     "slug": "divide-array-in-sets-of-k-consecutive-numbers",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/"
+  },
+  "1297": {
+    "number": "1297",
+    "title": "Maximum Number of Occurrences of a Substring",
+    "slug": "maximum-number-of-occurrences-of-a-substring",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-occurrences-of-a-substring/"
   },
   "1299": {
     "number": "1299",
@@ -1701,6 +1736,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/"
   },
+  "1358": {
+    "number": "1358",
+    "title": "Number of Substrings Containing All Three Characters",
+    "slug": "number-of-substrings-containing-all-three-characters",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/"
+  },
   "1360": {
     "number": "1360",
     "title": "Number of Days Between Two Dates",
@@ -1721,6 +1763,13 @@ export const collectionStoryMetadata = {
     "slug": "increasing-decreasing-string",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/increasing-decreasing-string/"
+  },
+  "1371": {
+    "number": "1371",
+    "title": "Find the Longest Substring Containing Vowels in Even Counts",
+    "slug": "find-the-longest-substring-containing-vowels-in-even-counts",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/"
   },
   "1374": {
     "number": "1374",
@@ -2247,6 +2296,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/can-convert-string-in-k-moves/"
   },
+  "1542": {
+    "number": "1542",
+    "title": "Find Longest Awesome Substring",
+    "slug": "find-longest-awesome-substring",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-longest-awesome-substring/"
+  },
   "1544": {
     "number": "1544",
     "title": "Make The String Great",
@@ -2351,6 +2407,13 @@ export const collectionStoryMetadata = {
     "slug": "matrix-diagonal-sum",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/matrix-diagonal-sum/"
+  },
+  "1574": {
+    "number": "1574",
+    "title": "Shortest Subarray to be Removed to Make Array Sorted",
+    "slug": "shortest-subarray-to-be-removed-to-make-array-sorted",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/shortest-subarray-to-be-removed-to-make-array-sorted/"
   },
   "1576": {
     "number": "1576",
@@ -5691,12 +5754,89 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/"
   },
+  "2302": {
+    "number": "2302",
+    "title": "Count Subarrays With Score Less Than K",
+    "slug": "count-subarrays-with-score-less-than-k",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/count-subarrays-with-score-less-than-k/"
+  },
+  "2348": {
+    "number": "2348",
+    "title": "Number of Zero-Filled Subarrays",
+    "slug": "number-of-zero-filled-subarrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-zero-filled-subarrays/"
+  },
+  "2393": {
+    "number": "2393",
+    "title": "Count Strictly Increasing Subarrays",
+    "slug": "count-strictly-increasing-subarrays",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-strictly-increasing-subarrays/"
+  },
+  "2395": {
+    "number": "2395",
+    "title": "Find Subarrays With Equal Sum",
+    "slug": "find-subarrays-with-equal-sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-subarrays-with-equal-sum/"
+  },
+  "2401": {
+    "number": "2401",
+    "title": "Longest Nice Subarray",
+    "slug": "longest-nice-subarray",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-nice-subarray/"
+  },
+  "2414": {
+    "number": "2414",
+    "title": "Length of the Longest Alphabetical Continuous Substring",
+    "slug": "length-of-the-longest-alphabetical-continuous-substring",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/length-of-the-longest-alphabetical-continuous-substring/"
+  },
+  "2419": {
+    "number": "2419",
+    "title": "Longest Subarray With Maximum Bitwise AND",
+    "slug": "longest-subarray-with-maximum-bitwise-and",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/"
+  },
   "2421": {
     "number": "2421",
     "title": "Number of Good Paths",
     "slug": "number-of-good-paths",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/number-of-good-paths/"
+  },
+  "2444": {
+    "number": "2444",
+    "title": "Count Subarrays With Fixed Bounds",
+    "slug": "count-subarrays-with-fixed-bounds",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/count-subarrays-with-fixed-bounds/"
+  },
+  "2447": {
+    "number": "2447",
+    "title": "Number of Subarrays With GCD Equal to K",
+    "slug": "number-of-subarrays-with-gcd-equal-to-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-subarrays-with-gcd-equal-to-k/"
+  },
+  "2461": {
+    "number": "2461",
+    "title": "Maximum Sum of Distinct Subarrays With Length K",
+    "slug": "maximum-sum-of-distinct-subarrays-with-length-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/"
+  },
+  "2470": {
+    "number": "2470",
+    "title": "Number of Subarrays With LCM Equal to K",
+    "slug": "number-of-subarrays-with-lcm-equal-to-k",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-subarrays-with-lcm-equal-to-k/"
   },
   "2492": {
     "number": "2492",

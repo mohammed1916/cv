@@ -1,0 +1,31 @@
+{
+  "number": "1234",
+  "title": "Replace the Substring for Balanced String",
+  "goal": "Find the shortest substring whose replacement makes Q W E and R equally frequent.",
+  "strategy": "Track counts outside a candidate replacement window. The window is sufficient once every outside count is at most one quarter of the total length; its replacement can supply all missing characters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest substring whose replacement makes Q W E and R equally frequent.",
+    "inspect": "Track counts outside a candidate replacement window. The window is sufficient once every outside count is at most one quarter of the total length; its replacement can supply all missing characters.",
+    "update": "Track counts outside a candidate replacement window. The window is sufficient once every outside count is at most one quarter of the total length; its replacement can supply all missing characters.",
+    "done": "Find the shortest substring whose replacement makes Q W E and R equally frequent."
+  },
+  "edgeCases": [
+    "An already balanced string needs no replacement",
+    "One repeated character needs three quarters replaced",
+    "A tiny replacement can repair one surplus and deficit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

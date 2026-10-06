@@ -1,0 +1,31 @@
+{
+  "number": "2414",
+  "title": "Length of the Longest Alphabetical Continuous Substring",
+  "goal": "Find the longest substring whose letters advance consecutively through the alphabet.",
+  "strategy": "Track the run ending at each character. It extends only when the current letter code is exactly one greater than the preceding code; repeated letters, gaps, and z-to-a reset it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest substring whose letters advance consecutively through the alphabet.",
+    "inspect": "Track the run ending at each character. It extends only when the current letter code is exactly one greater than the preceding code; repeated letters, gaps, and z-to-a reset it.",
+    "update": "Track the run ending at each character. It extends only when the current letter code is exactly one greater than the preceding code; repeated letters, gaps, and z-to-a reset it.",
+    "done": "Find the longest substring whose letters advance consecutively through the alphabet."
+  },
+  "edgeCases": [
+    "Alphabet wrapping does not extend a run",
+    "Repeated letters reset every step",
+    "A complete alphabet is one continuous run"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

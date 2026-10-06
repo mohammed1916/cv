@@ -1,0 +1,31 @@
+{
+  "number": "1156",
+  "title": "Swap For Longest Repeated Character Substring",
+  "goal": "Find the longest repeated-character substring obtainable with at most one swap.",
+  "strategy": "For each target letter, maintain a window containing at most one different letter. A swap can repair that one position only if enough target copies exist globally, so cap the candidate by the target total count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest repeated-character substring obtainable with at most one swap.",
+    "inspect": "For each target letter, maintain a window containing at most one different letter. A swap can repair that one position only if enough target copies exist globally, so cap the candidate by the target total count.",
+    "update": "For each target letter, maintain a window containing at most one different letter. A swap can repair that one position only if enough target copies exist globally, so cap the candidate by the target total count.",
+    "done": "Find the longest repeated-character substring obtainable with at most one swap."
+  },
+  "edgeCases": [
+    "All copies already belong to one run",
+    "A missing spare copy caps a one-gap window",
+    "All distinct characters permit no longer repeated run"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

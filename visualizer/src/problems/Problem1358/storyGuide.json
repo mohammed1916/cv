@@ -1,0 +1,31 @@
+{
+  "number": "1358",
+  "title": "Number of Substrings Containing All Three Characters",
+  "goal": "Count substrings containing at least one a one b and one c.",
+  "strategy": "Keep the most recent index of each required character. At a given ending index, every start at or before the smallest of those last positions includes all three.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings containing at least one a one b and one c.",
+    "inspect": "Keep the most recent index of each required character. At a given ending index, every start at or before the smallest of those last positions includes all three.",
+    "update": "Keep the most recent index of each required character. At a given ending index, every start at or before the smallest of those last positions includes all three.",
+    "done": "Count substrings containing at least one a one b and one c."
+  },
+  "edgeCases": [
+    "Missing one required character yields no valid substring",
+    "The minimal three-character coverage contributes one",
+    "Repeated complete cycles produce many overlapping substrings"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

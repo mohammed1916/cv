@@ -1,0 +1,31 @@
+{
+  "number": "2470",
+  "title": "Number of Subarrays With LCM Equal to K",
+  "goal": "Count subarrays whose least common multiple is exactly k.",
+  "strategy": "Extend each start with a rolling LCM computed using GCD. LCM only gains factors, so stop once it no longer divides k; no longer extension can return to the target.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose least common multiple is exactly k.",
+    "inspect": "Extend each start with a rolling LCM computed using GCD. LCM only gains factors, so stop once it no longer divides k; no longer extension can return to the target.",
+    "update": "Extend each start with a rolling LCM computed using GCD. LCM only gains factors, so stop once it no longer divides k; no longer extension can return to the target.",
+    "done": "Count subarrays whose least common multiple is exactly k."
+  },
+  "edgeCases": [
+    "Every one-only subarray has LCM one",
+    "An extra prime makes a start permanently impossible",
+    "A target singleton and its extensions are counted separately"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
