@@ -6,8 +6,8 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1237 local routes, of which 1221 match catalog slugs
-or unique normalized titles. **2,852 catalog entries remain unmatched.** Route
+After the continued implementation there are 1255 local routes, of which 1239 match catalog slugs
+or unique normalized titles. **2,834 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
@@ -40,11 +40,16 @@ Six structural hard problems and six database problems add another 48 examples.
 Multi-table inputs now reuse the shared record tables, and the new database routes
 include Python, pseudocode, and MySQL source. The resumed run totals 61 additions.
 
+Eighteen genetics, design, grid, expression, and window problems add 72 examples.
+Detect Squares uses a shared Cartesian point diagram with multiplicities and
+candidate-square geometry. This diagram has not been browser-verified.
+The resumed run totals 79 problems and 316 original examples.
+
 ## Added in this batch
 
-### Current unverified continuation: 463 additional problems
+### Current unverified continuation: 481 additional problems
 
-This continuation adds 463 explicit algorithms with 1,852 original example inputs
+This continuation adds 481 explicit algorithms with 1,924 original example inputs
 across scanning, strings, counting, windows, prefix sums, matrix DP, connectivity,
 topological traversal, and backtracking. Full IDs are recorded in
 `unverified-expansion.json`. Each route uses the existing collection workspace
@@ -54,7 +59,7 @@ and shared story, code, input, playback, and scene components.
 user's explicit request.** These additions are implemented but unverified.
 The source-only inventory was refreshed; prior validation reports below do not
 cover this expansion. The shared code panel now offers Python and Pseudocode.
-Complete Python is wired for 234 collection problems;
+Complete Python is wired for 252 collection problems;
 remaining conversions are pending. See `catalog-work-plan.md`.
 
 ### Latest continuation: 8 additional problems

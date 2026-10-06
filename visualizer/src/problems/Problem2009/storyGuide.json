@@ -1,0 +1,31 @@
+{
+  "number": "2009",
+  "title": "Minimum Number of Operations to Make Array Continuous",
+  "goal": "Replace the fewest entries to obtain n distinct consecutive integers.",
+  "strategy": "Deduplicate and sort. Keep as many existing distinct values as possible inside any integer interval of width n-1; every other original position must be replaced.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace the fewest entries to obtain n distinct consecutive integers.",
+    "inspect": "Deduplicate and sort. Keep as many existing distinct values as possible inside any integer interval of width n-1; every other original position must be replaced.",
+    "update": "Deduplicate and sort. Keep as many existing distinct values as possible inside any integer interval of width n-1; every other original position must be replaced.",
+    "done": "Replace the fewest entries to obtain n distinct consecutive integers."
+  },
+  "edgeCases": [
+    "Already continuous despite input order",
+    "All entries are equal",
+    "A singleton is already continuous"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2021",
+  "title": "Brightest Position on Street",
+  "goal": "Find the smallest integer street position with maximum brightness.",
+  "strategy": "Each light contributes on an inclusive integer interval. Add one at its left edge and remove one just after its right edge; scanning endpoints in increasing order preserves the smallest position on ties.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest integer street position with maximum brightness.",
+    "inspect": "Each light contributes on an inclusive integer interval. Add one at its left edge and remove one just after its right edge; scanning endpoints in increasing order preserves the smallest position on ties.",
+    "update": "Each light contributes on an inclusive integer interval. Add one at its left edge and remove one just after its right edge; scanning endpoints in increasing order preserves the smallest position on ties.",
+    "done": "Find the smallest integer street position with maximum brightness."
+  },
+  "edgeCases": [
+    "Equal separated peaks choose the smaller position",
+    "Right endpoints remain illuminated",
+    "A zero-radius light covers one integer point"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

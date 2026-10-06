@@ -1,0 +1,31 @@
+{
+  "number": "2024",
+  "title": "Maximize the Confusion of an Exam",
+  "goal": "Create the longest equal-answer run using at most k flips.",
+  "strategy": "A window can become uniform by flipping all minority answers. Grow right, shrink left until minority count fits the budget, and record the longest valid window.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Create the longest equal-answer run using at most k flips.",
+    "inspect": "A window can become uniform by flipping all minority answers. Grow right, shrink left until minority count fits the budget, and record the longest valid window.",
+    "update": "A window can become uniform by flipping all minority answers. Grow right, shrink left until minority count fits the budget, and record the longest valid window.",
+    "done": "Create the longest equal-answer run using at most k flips."
+  },
+  "edgeCases": [
+    "Already uniform input needs no flips",
+    "The budget can cover the entire input",
+    "Alternating answers with a small budget"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

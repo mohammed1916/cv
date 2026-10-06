@@ -1,0 +1,31 @@
+{
+  "number": "2019",
+  "title": "The Score of Students Solving Math Expression",
+  "goal": "Score student answers to a single-digit addition and multiplication expression.",
+  "strategy": "Compute the correct precedence result separately. Interval DP enumerates results from alternative parenthesizations; correct answers earn five, other attainable answers earn two, and remaining answers earn zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Score student answers to a single-digit addition and multiplication expression.",
+    "inspect": "Compute the correct precedence result separately. Interval DP enumerates results from alternative parenthesizations; correct answers earn five, other attainable answers earn two, and remaining answers earn zero.",
+    "update": "Compute the correct precedence result separately. Interval DP enumerates results from alternative parenthesizations; correct answers earn five, other attainable answers earn two, and remaining answers earn zero.",
+    "done": "Score student answers to a single-digit addition and multiplication expression."
+  },
+  "edgeCases": [
+    "Every parenthesization agrees for addition only",
+    "Multiplication by zero changes alternate results",
+    "One operation still scores repeated answers independently"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

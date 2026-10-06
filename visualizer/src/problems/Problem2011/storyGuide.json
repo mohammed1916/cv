@@ -1,0 +1,31 @@
+{
+  "number": "2011",
+  "title": "Final Value of Variable After Performing Operations",
+  "goal": "Compute the value after a sequence of increment and decrement operations.",
+  "strategy": "The middle character identifies plus or minus regardless of whether the operator is written before or after X. Update the running integer once per operation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the value after a sequence of increment and decrement operations.",
+    "inspect": "The middle character identifies plus or minus regardless of whether the operator is written before or after X. Update the running integer once per operation.",
+    "update": "The middle character identifies plus or minus regardless of whether the operator is written before or after X. Update the running integer once per operation.",
+    "done": "Compute the value after a sequence of increment and decrement operations."
+  },
+  "edgeCases": [
+    "All decrements produce a negative result",
+    "Operations cancel completely",
+    "One increment"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2013",
+  "title": "Detect Squares",
+  "goal": "Maintain points and count axis-aligned squares with a requested corner.",
+  "strategy": "For each stored horizontal partner, its distance fixes both possible square heights. Multiply the occurrence counts of the three stored corners; the requested corner itself need not be stored.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain points and count axis-aligned squares with a requested corner.",
+    "inspect": "For each stored horizontal partner, its distance fixes both possible square heights. Multiply the occurrence counts of the three stored corners; the requested corner itself need not be stored.",
+    "update": "For each stored horizontal partner, its distance fixes both possible square heights. Multiply the occurrence counts of the three stored corners; the requested corner itself need not be stored.",
+    "done": "Maintain points and count axis-aligned squares with a requested corner."
+  },
+  "edgeCases": [
+    "A query corner need not be stored",
+    "Three collinear points make no square",
+    "Counting an empty structure returns zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

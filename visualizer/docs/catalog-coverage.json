@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1237,
-  "matchedCatalogRoutes": 1221,
-  "remaining": 2852,
+  "routes": 1255,
+  "matchedCatalogRoutes": 1239,
+  "remaining": 2834,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -14115,8 +14115,8 @@
       "number": "2003",
       "title": "Smallest Missing Genetic Value in Each Subtree",
       "slug": "smallest-missing-genetic-value-in-each-subtree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2003"
     },
     {
       "number": "2004",
@@ -14136,29 +14136,29 @@
       "number": "2006",
       "title": "Count Number of Pairs With Absolute Difference K",
       "slug": "count-number-of-pairs-with-absolute-difference-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2006"
     },
     {
       "number": "2007",
       "title": "Find Original Array From Doubled Array",
       "slug": "find-original-array-from-doubled-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2007"
     },
     {
       "number": "2008",
       "title": "Maximum Earnings From Taxi",
       "slug": "maximum-earnings-from-taxi",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2008"
     },
     {
       "number": "2009",
       "title": "Minimum Number of Operations to Make Array Continuous",
       "slug": "minimum-number-of-operations-to-make-array-continuous",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2009"
     },
     {
       "number": "2010",
@@ -14171,64 +14171,64 @@
       "number": "2011",
       "title": "Final Value of Variable After Performing Operations",
       "slug": "final-value-of-variable-after-performing-operations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2011"
     },
     {
       "number": "2012",
       "title": "Sum of Beauty in the Array",
       "slug": "sum-of-beauty-in-the-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2012"
     },
     {
       "number": "2013",
       "title": "Detect Squares",
       "slug": "detect-squares",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2013"
     },
     {
       "number": "2014",
       "title": "Longest Subsequence Repeated k Times",
       "slug": "longest-subsequence-repeated-k-times",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2014"
     },
     {
       "number": "2015",
       "title": "Average Height of Buildings in Each Segment",
       "slug": "average-height-of-buildings-in-each-segment",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2015"
     },
     {
       "number": "2016",
       "title": "Maximum Difference Between Increasing Elements",
       "slug": "maximum-difference-between-increasing-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2016"
     },
     {
       "number": "2017",
       "title": "Grid Game",
       "slug": "grid-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2017"
     },
     {
       "number": "2018",
       "title": "Check if Word Can Be Placed In Crossword",
       "slug": "check-if-word-can-be-placed-in-crossword",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2018"
     },
     {
       "number": "2019",
       "title": "The Score of Students Solving Math Expression",
       "slug": "the-score-of-students-solving-math-expression",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2019"
     },
     {
       "number": "2020",
@@ -14241,29 +14241,29 @@
       "number": "2021",
       "title": "Brightest Position on Street",
       "slug": "brightest-position-on-street",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2021"
     },
     {
       "number": "2022",
       "title": "Convert 1D Array Into 2D Array",
       "slug": "convert-1d-array-into-2d-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2022"
     },
     {
       "number": "2023",
       "title": "Number of Pairs of Strings With Concatenation Equal to Target",
       "slug": "number-of-pairs-of-strings-with-concatenation-equal-to-target",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2023"
     },
     {
       "number": "2024",
       "title": "Maximize the Confusion of an Exam",
       "slug": "maximize-the-confusion-of-an-exam",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2024"
     },
     {
       "number": "2025",

@@ -2,6 +2,7 @@ import AlgorithmWorkspace from '../../../components/shared/AlgorithmWorkspace';
 import IndexedSequence from '../../../components/shared/IndexedSequence';
 import TrieStateDiagram from '../../../components/shared/TrieStateDiagram';
 import RecordStateTable from '../../../components/shared/RecordStateTable';
+import PointStateDiagram from '../../../components/shared/PointStateDiagram';
 import styles from './SequenceStory.module.css';
 
 const display = value => value === null ? '·' : typeof value === 'object' ? JSON.stringify(value) : String(value);
@@ -25,6 +26,7 @@ export default function SequenceStory({ definition }) {
       const matrix = step.matrix ?? (Array.isArray(sequence?.[0]) ? sequence : null);
       return <>
         {step.trieNodes && <TrieStateDiagram nodes={step.trieNodes} activeNode={step.activeNode} />}
+        {step.pointState && <PointStateDiagram {...step.pointState} />}
         {step.sourceRecords ? <RecordStateTable {...step.sourceRecords} /> : matrix ? <Matrix values={matrix} label={step.matrixLabel ?? 'Source matrix'} cell={step.cell} otherCell={step.otherCell} /> :
           <IndexedSequence label="Input / working sequence" length={sequence.length} valueAt={i => display(sequence[i])} active={step.index}
             roleAt={i => step.marks?.[i] ?? (step.window && i >= step.window[0] && i <= step.window[1] ? 'in window' : '')} />}

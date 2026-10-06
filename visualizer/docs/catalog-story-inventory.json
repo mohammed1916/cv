@@ -1,5 +1,5 @@
 {
-  "routes": 1237,
+  "routes": 1255,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -5444,6 +5444,51 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2003",
+      "number": "2003",
+      "title": "Smallest Missing Genetic Value in Each Subtree",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2006",
+      "number": "2006",
+      "title": "Count Number of Pairs With Absolute Difference K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2007",
+      "number": "2007",
+      "title": "Find Original Array From Doubled Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2008",
+      "number": "2008",
+      "title": "Maximum Earnings From Taxi",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2009",
+      "number": "2009",
+      "title": "Minimum Number of Operations to Make Array Continuous",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem201",
       "number": "201",
       "title": "Bitwise AND of Numbers Range",
@@ -5453,6 +5498,87 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2011",
+      "number": "2011",
+      "title": "Final Value of Variable After Performing Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2012",
+      "number": "2012",
+      "title": "Sum of Beauty in the Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2013",
+      "number": "2013",
+      "title": "Detect Squares",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2014",
+      "number": "2014",
+      "title": "Longest Subsequence Repeated k Times",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2015",
+      "number": "2015",
+      "title": "Average Height of Buildings in Each Segment",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2016",
+      "number": "2016",
+      "title": "Maximum Difference Between Increasing Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2017",
+      "number": "2017",
+      "title": "Grid Game",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2018",
+      "number": "2018",
+      "title": "Check if Word Can Be Placed In Crossword",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2019",
+      "number": "2019",
+      "title": "The Score of Students Solving Math Expression",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem202",
       "number": "202",
       "title": "Happy Number",
@@ -5460,6 +5586,42 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2021",
+      "number": "2021",
+      "title": "Brightest Position on Street",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2022",
+      "number": "2022",
+      "title": "Convert 1D Array Into 2D Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2023",
+      "number": "2023",
+      "title": "Number of Pairs of Strings With Concatenation Equal to Target",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2024",
+      "number": "2024",
+      "title": "Maximize the Confusion of an Exam",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem203",

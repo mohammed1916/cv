@@ -1,0 +1,31 @@
+{
+  "number": "2018",
+  "title": "Check if Word Can Be Placed In Crossword",
+  "goal": "Check whether a word fits exactly in a horizontal or vertical crossword slot.",
+  "strategy": "A valid slot is bounded by the board edge or blocked cells and has exactly the word length. Check both reading directions, allowing blanks and requiring existing letters to match.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether a word fits exactly in a horizontal or vertical crossword slot.",
+    "inspect": "A valid slot is bounded by the board edge or blocked cells and has exactly the word length. Check both reading directions, allowing blanks and requiring existing letters to match.",
+    "update": "A valid slot is bounded by the board edge or blocked cells and has exactly the word length. Check both reading directions, allowing blanks and requiring existing letters to match.",
+    "done": "Check whether a word fits exactly in a horizontal or vertical crossword slot."
+  },
+  "edgeCases": [
+    "Only the reversed direction fits",
+    "An open slot longer than the word is invalid",
+    "An existing letter conflicts with both directions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

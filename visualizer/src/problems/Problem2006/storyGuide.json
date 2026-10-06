@@ -1,0 +1,31 @@
+{
+  "number": "2006",
+  "title": "Count Number of Pairs With Absolute Difference K",
+  "goal": "Count index pairs whose absolute difference is k.",
+  "strategy": "As each value arrives, earlier values equal to value-k or value+k form new pairs. Add their frequencies before recording the current occurrence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count index pairs whose absolute difference is k.",
+    "inspect": "As each value arrives, earlier values equal to value-k or value+k form new pairs. Add their frequencies before recording the current occurrence.",
+    "update": "As each value arrives, earlier values equal to value-k or value+k form new pairs. Add their frequencies before recording the current occurrence.",
+    "done": "Count index pairs whose absolute difference is k."
+  },
+  "edgeCases": [
+    "No values differ by the requested amount",
+    "Both smaller and larger prior values contribute",
+    "One entry cannot form a pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

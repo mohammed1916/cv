@@ -1,0 +1,31 @@
+{
+  "number": "2023",
+  "title": "Number of Pairs of Strings With Concatenation Equal to Target",
+  "goal": "Count ordered pairs of distinct indices whose strings concatenate to target.",
+  "strategy": "Split target at every nonempty boundary. Multiply the frequencies of the two pieces; if both pieces are identical, exclude choosing the same index twice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count ordered pairs of distinct indices whose strings concatenate to target.",
+    "inspect": "Split target at every nonempty boundary. Multiply the frequencies of the two pieces; if both pieces are identical, exclude choosing the same index twice.",
+    "update": "Split target at every nonempty boundary. Multiply the frequencies of the two pieces; if both pieces are identical, exclude choosing the same index twice.",
+    "done": "Count ordered pairs of distinct indices whose strings concatenate to target."
+  },
+  "edgeCases": [
+    "Equal halves exclude self-pairing",
+    "No pair can form the target",
+    "A single-character target has no nonempty split"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

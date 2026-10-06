@@ -3786,5 +3786,131 @@ export const collectionStoryMetadata = {
     "slug": "maximum-product-of-the-length-of-two-palindromic-subsequences",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/"
+  },
+  "2003": {
+    "number": "2003",
+    "title": "Smallest Missing Genetic Value in Each Subtree",
+    "slug": "smallest-missing-genetic-value-in-each-subtree",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/smallest-missing-genetic-value-in-each-subtree/"
+  },
+  "2006": {
+    "number": "2006",
+    "title": "Count Number of Pairs With Absolute Difference K",
+    "slug": "count-number-of-pairs-with-absolute-difference-k",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/"
+  },
+  "2007": {
+    "number": "2007",
+    "title": "Find Original Array From Doubled Array",
+    "slug": "find-original-array-from-doubled-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-original-array-from-doubled-array/"
+  },
+  "2008": {
+    "number": "2008",
+    "title": "Maximum Earnings From Taxi",
+    "slug": "maximum-earnings-from-taxi",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-earnings-from-taxi/"
+  },
+  "2009": {
+    "number": "2009",
+    "title": "Minimum Number of Operations to Make Array Continuous",
+    "slug": "minimum-number-of-operations-to-make-array-continuous",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/"
+  },
+  "2011": {
+    "number": "2011",
+    "title": "Final Value of Variable After Performing Operations",
+    "slug": "final-value-of-variable-after-performing-operations",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/final-value-of-variable-after-performing-operations/"
+  },
+  "2012": {
+    "number": "2012",
+    "title": "Sum of Beauty in the Array",
+    "slug": "sum-of-beauty-in-the-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sum-of-beauty-in-the-array/"
+  },
+  "2013": {
+    "number": "2013",
+    "title": "Detect Squares",
+    "slug": "detect-squares",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/detect-squares/"
+  },
+  "2014": {
+    "number": "2014",
+    "title": "Longest Subsequence Repeated k Times",
+    "slug": "longest-subsequence-repeated-k-times",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/longest-subsequence-repeated-k-times/"
+  },
+  "2015": {
+    "number": "2015",
+    "title": "Average Height of Buildings in Each Segment",
+    "slug": "average-height-of-buildings-in-each-segment",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/average-height-of-buildings-in-each-segment/"
+  },
+  "2016": {
+    "number": "2016",
+    "title": "Maximum Difference Between Increasing Elements",
+    "slug": "maximum-difference-between-increasing-elements",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-difference-between-increasing-elements/"
+  },
+  "2017": {
+    "number": "2017",
+    "title": "Grid Game",
+    "slug": "grid-game",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/grid-game/"
+  },
+  "2018": {
+    "number": "2018",
+    "title": "Check if Word Can Be Placed In Crossword",
+    "slug": "check-if-word-can-be-placed-in-crossword",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/"
+  },
+  "2019": {
+    "number": "2019",
+    "title": "The Score of Students Solving Math Expression",
+    "slug": "the-score-of-students-solving-math-expression",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/the-score-of-students-solving-math-expression/"
+  },
+  "2021": {
+    "number": "2021",
+    "title": "Brightest Position on Street",
+    "slug": "brightest-position-on-street",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/brightest-position-on-street/"
+  },
+  "2022": {
+    "number": "2022",
+    "title": "Convert 1D Array Into 2D Array",
+    "slug": "convert-1d-array-into-2d-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/convert-1d-array-into-2d-array/"
+  },
+  "2023": {
+    "number": "2023",
+    "title": "Number of Pairs of Strings With Concatenation Equal to Target",
+    "slug": "number-of-pairs-of-strings-with-concatenation-equal-to-target",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target/"
+  },
+  "2024": {
+    "number": "2024",
+    "title": "Maximize the Confusion of an Exam",
+    "slug": "maximize-the-confusion-of-an-exam",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximize-the-confusion-of-an-exam/"
   }
 };

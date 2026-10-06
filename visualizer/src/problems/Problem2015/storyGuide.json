@@ -1,0 +1,31 @@
+{
+  "number": "2015",
+  "title": "Average Height of Buildings in Each Segment",
+  "goal": "Describe street segments by the floored average height of covering buildings.",
+  "strategy": "Sweep start and end events while tracking height sum and active count. Emit the floor of their ratio on each covered span, merging adjacent spans with the same reported average.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Describe street segments by the floored average height of covering buildings.",
+    "inspect": "Sweep start and end events while tracking height sum and active count. Emit the floor of their ratio on each covered span, merging adjacent spans with the same reported average.",
+    "update": "Sweep start and end events while tracking height sum and active count. Emit the floor of their ratio on each covered span, merging adjacent spans with the same reported average.",
+    "done": "Describe street segments by the floored average height of covering buildings."
+  },
+  "edgeCases": [
+    "Changing building membership can preserve the floored average",
+    "A gap prevents merging equal averages",
+    "One building supplies one segment"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
