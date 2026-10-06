@@ -1,0 +1,31 @@
+{
+  "number": "577",
+  "title": "Employee Bonus",
+  "goal": "List employees with a bonus below 1000, including employees without a bonus row.",
+  "strategy": "Start from every employee and look up their optional bonus. A missing row is a null bonus, not a reason to lose that employee; keep null bonuses and numeric bonuses below the threshold.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List employees with a bonus below 1000, including employees without a bonus row.",
+    "inspect": "Start from every employee and look up their optional bonus. A missing row is a null bonus, not a reason to lose that employee; keep null bonuses and numeric bonuses below the threshold.",
+    "update": "Start from every employee and look up their optional bonus. A missing row is a null bonus, not a reason to lose that employee; keep null bonuses and numeric bonuses below the threshold.",
+    "done": "List employees with a bonus below 1000, including employees without a bonus row."
+  },
+  "edgeCases": [
+    "No bonus rows preserves every employee",
+    "Exactly 1000 does not qualify",
+    "No employee rows means no output"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

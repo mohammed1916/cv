@@ -1,30 +1,31 @@
 {
   "number": "574",
-  "title": "Shortest Word Distance II",
-  "goal": "Solve Shortest Word Distance II: Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and return the shortest distance between these two words in the list.",
-  "strategy": "Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and return the shortest distance between these two words in the list.",
+  "title": "Winning Candidate",
+  "goal": "Return the name of the candidate receiving the most votes.",
+  "strategy": "Count vote records by candidate ID, select the unique largest group, and join that ID to its candidate name. Names are labels and need not be unique.",
   "phases": [
-    "init",
-    "track_indices",
-    "retrieve",
-    "two_pointers",
-    "calculate",
+    "start",
+    "inspect",
+    "update",
     "done"
   ],
-  "phasePurposes": {},
-  "edgeCases": [],
-  "checks": [
-    {
-      "condition": "not indices1 or not indices2",
-      "outcome": "return -1"
-    }
+  "phasePurposes": {
+    "start": "Return the name of the candidate receiving the most votes.",
+    "inspect": "Count vote records by candidate ID, select the unique largest group, and join that ID to its candidate name. Names are labels and need not be unique.",
+    "update": "Count vote records by candidate ID, select the unique largest group, and join that ID to its candidate name. Names are labels and need not be unique.",
+    "done": "Return the name of the candidate receiving the most votes."
+  },
+  "edgeCases": [
+    "A single ballot is enough to select a winner",
+    "Duplicate names still use separate candidate IDs",
+    "Candidates without votes do not create winning groups"
   ],
+  "checks": [],
   "inputRules": [
-    "Input must be array",
-    "All items must be strings"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem574/index.jsx",
-    "src/problems/Problem574/ShortestWordDistanceVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

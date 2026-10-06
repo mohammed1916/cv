@@ -1,5 +1,5 @@
 {
-  "routes": 1449,
+  "routes": 1461,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -10514,6 +10514,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem505Canonical",
+      "number": "505",
+      "title": "The Maze II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem506",
       "number": "506",
       "title": "Relative Ranks",
@@ -10561,11 +10570,11 @@
     {
       "folder": "Problem510",
       "number": "510",
-      "title": "Inorder Successor in Binary Search Tree II",
+      "title": "Inorder Successor in BST II",
       "kind": "catalog-story",
       "checks": 0,
-      "rules": 2,
-      "edgeNotes": 1
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem511",
@@ -10802,6 +10811,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem534Canonical",
+      "number": "534",
+      "title": "Game Play Analysis III",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem535",
       "number": "535",
       "title": "Encode and Decode TinyURL",
@@ -10956,12 +10974,12 @@
     },
     {
       "folder": "Problem550",
-      "number": 550,
-      "title": "Game Play Analysis I",
+      "number": "550",
+      "title": "Game Play Analysis IV",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
-      "edgeNotes": 1
+      "edgeNotes": 3
     },
     {
       "folder": "Problem551",
@@ -11028,12 +11046,12 @@
     },
     {
       "folder": "Problem558",
-      "number": 558,
-      "title": "Quad Tree Construction",
+      "number": "558",
+      "title": "Logical OR of Two Binary Grids Represented as Quad-Trees",
       "kind": "catalog-story",
-      "checks": 1,
-      "rules": 2,
-      "edgeNotes": 0
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem559",
@@ -11091,12 +11109,12 @@
     },
     {
       "folder": "Problem564",
-      "number": 564,
-      "title": "Find the Celebrity",
+      "number": "564",
+      "title": "Find the Closest Palindrome",
       "kind": "catalog-story",
-      "checks": 1,
+      "checks": 0,
       "rules": 1,
-      "edgeNotes": 0
+      "edgeNotes": 3
     },
     {
       "folder": "Problem565",
@@ -11127,12 +11145,12 @@
     },
     {
       "folder": "Problem568",
-      "number": 568,
-      "title": "Palindrome Subsequence",
+      "number": "568",
+      "title": "Maximum Vacation Days",
       "kind": "catalog-story",
       "checks": 0,
-      "rules": 0,
-      "edgeNotes": 1
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem569",
@@ -11171,6 +11189,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem571Canonical",
+      "number": "571",
+      "title": "Find Median Given Frequency of Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem572",
       "number": "572",
       "title": "Subtree of Another Tree",
@@ -11181,21 +11208,21 @@
     },
     {
       "folder": "Problem573",
-      "number": 573,
-      "title": "Squirrel Distribution",
+      "number": "573",
+      "title": "Squirrel Simulation",
       "kind": "catalog-story",
       "checks": 0,
-      "rules": 3,
-      "edgeNotes": 1
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem574",
-      "number": 574,
-      "title": "Shortest Word Distance II",
+      "number": "574",
+      "title": "Winning Candidate",
       "kind": "catalog-story",
-      "checks": 1,
-      "rules": 2,
-      "edgeNotes": 0
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem575",
@@ -11223,6 +11250,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem577Canonical",
+      "number": "577",
+      "title": "Employee Bonus",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem578",
@@ -11307,12 +11343,12 @@
     },
     {
       "folder": "Problem586",
-      "number": 586,
-      "title": "Customer Placing Largest Orders",
+      "number": "586",
+      "title": "Customer Placing the Largest Number of Orders",
       "kind": "catalog-story",
       "checks": 0,
-      "rules": 0,
-      "edgeNotes": 1
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem587",
@@ -11324,6 +11360,24 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem588",
+      "number": "588",
+      "title": "Design In-Memory File System",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem589",
+      "number": "589",
+      "title": "N-ary Tree Preorder Traversal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem59",
       "number": "59",
       "title": "Spiral Matrix II",
@@ -11333,9 +11387,63 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem590",
+      "number": "590",
+      "title": "N-ary Tree Postorder Traversal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem591",
+      "number": "591",
+      "title": "Tag Validator",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem592",
+      "number": "592",
+      "title": "Fraction Addition and Subtraction",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem593",
+      "number": "593",
+      "title": "Valid Square",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem594",
       "number": "594",
       "title": "Longest Harmonious Subsequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem595",
+      "number": "595",
+      "title": "Big Countries",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem596",
+      "number": "596",
+      "title": "Classes With at Least 5 Students",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,

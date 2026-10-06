@@ -70,6 +70,146 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/non-decreasing-subsequences/"
   },
+  "505": {
+    "number": "505",
+    "title": "The Maze II",
+    "slug": "the-maze-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-maze-ii/"
+  },
+  "510": {
+    "number": "510",
+    "title": "Inorder Successor in BST II",
+    "slug": "inorder-successor-in-bst-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/inorder-successor-in-bst-ii/"
+  },
+  "534": {
+    "number": "534",
+    "title": "Game Play Analysis III",
+    "slug": "game-play-analysis-iii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/game-play-analysis-iii/"
+  },
+  "550": {
+    "number": "550",
+    "title": "Game Play Analysis IV",
+    "slug": "game-play-analysis-iv",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/game-play-analysis-iv/"
+  },
+  "558": {
+    "number": "558",
+    "title": "Logical OR of Two Binary Grids Represented as Quad-Trees",
+    "slug": "logical-or-of-two-binary-grids-represented-as-quad-trees",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/logical-or-of-two-binary-grids-represented-as-quad-trees/"
+  },
+  "564": {
+    "number": "564",
+    "title": "Find the Closest Palindrome",
+    "slug": "find-the-closest-palindrome",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-the-closest-palindrome/"
+  },
+  "568": {
+    "number": "568",
+    "title": "Maximum Vacation Days",
+    "slug": "maximum-vacation-days",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-vacation-days/"
+  },
+  "571": {
+    "number": "571",
+    "title": "Find Median Given Frequency of Numbers",
+    "slug": "find-median-given-frequency-of-numbers",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-median-given-frequency-of-numbers/"
+  },
+  "573": {
+    "number": "573",
+    "title": "Squirrel Simulation",
+    "slug": "squirrel-simulation",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/squirrel-simulation/"
+  },
+  "574": {
+    "number": "574",
+    "title": "Winning Candidate",
+    "slug": "winning-candidate",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/winning-candidate/"
+  },
+  "577": {
+    "number": "577",
+    "title": "Employee Bonus",
+    "slug": "employee-bonus",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/employee-bonus/"
+  },
+  "586": {
+    "number": "586",
+    "title": "Customer Placing the Largest Number of Orders",
+    "slug": "customer-placing-the-largest-number-of-orders",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/"
+  },
+  "588": {
+    "number": "588",
+    "title": "Design In-Memory File System",
+    "slug": "design-in-memory-file-system",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/design-in-memory-file-system/"
+  },
+  "589": {
+    "number": "589",
+    "title": "N-ary Tree Preorder Traversal",
+    "slug": "n-ary-tree-preorder-traversal",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/n-ary-tree-preorder-traversal/"
+  },
+  "590": {
+    "number": "590",
+    "title": "N-ary Tree Postorder Traversal",
+    "slug": "n-ary-tree-postorder-traversal",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/n-ary-tree-postorder-traversal/"
+  },
+  "591": {
+    "number": "591",
+    "title": "Tag Validator",
+    "slug": "tag-validator",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/tag-validator/"
+  },
+  "592": {
+    "number": "592",
+    "title": "Fraction Addition and Subtraction",
+    "slug": "fraction-addition-and-subtraction",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/fraction-addition-and-subtraction/"
+  },
+  "593": {
+    "number": "593",
+    "title": "Valid Square",
+    "slug": "valid-square",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/valid-square/"
+  },
+  "595": {
+    "number": "595",
+    "title": "Big Countries",
+    "slug": "big-countries",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/big-countries/"
+  },
+  "596": {
+    "number": "596",
+    "title": "Classes With at Least 5 Students",
+    "slug": "classes-with-at-least-5-students",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/classes-with-at-least-5-students/"
+  },
   "648": {
     "number": "648",
     "title": "Replace Words",

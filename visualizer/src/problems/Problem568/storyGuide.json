@@ -1,25 +1,31 @@
 {
   "number": "568",
-  "title": "Palindrome Subsequence",
-  "goal": "Solve Palindrome Subsequence: Find the length of the longest palindromic subsequence in a given string using dynamic programming.",
-  "strategy": "Find the length of the longest palindromic subsequence in a given string using dynamic programming.",
+  "title": "Maximum Vacation Days",
+  "goal": "Choose weekly cities to maximize vacation days starting from city zero.",
+  "strategy": "Before each week, stay in the current city or take one direct flight. Keep only the best total for each ending city: every future choice depends on that city, so smaller totals at the same city can be discarded.",
   "phases": [
-    "initialization",
-    "base_case",
-    "fill_table",
-    "compare",
-    "match",
-    "no_match",
-    "return_result"
+    "start",
+    "inspect",
+    "update",
+    "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Choose weekly cities to maximize vacation days starting from city zero.",
+    "inspect": "Before each week, stay in the current city or take one direct flight. Keep only the best total for each ending city: every future choice depends on that city, so smaller totals at the same city can be discarded.",
+    "update": "Before each week, stay in the current city or take one direct flight. Keep only the best total for each ending city: every future choice depends on that city, so smaller totals at the same city can be discarded.",
+    "done": "Choose weekly cities to maximize vacation days starting from city zero."
+  },
   "edgeCases": [
-    "A subsequence need not be contiguous; matching outer characters extend an inner solution while mismatches require excluding an end."
+    "Rich unreachable cities cannot contribute vacation days",
+    "One city means staying every week",
+    "A two-flight chain cannot be completed in a single week"
   ],
   "checks": [],
-  "inputRules": [],
-  "source": [
-    "src/problems/Problem568/index.jsx",
-    "src/problems/Problem568/PalindromeSubsequenceVisualizer.jsx"
-  ]
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

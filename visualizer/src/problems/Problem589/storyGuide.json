@@ -1,0 +1,31 @@
+{
+  "number": "589",
+  "title": "N-ary Tree Preorder Traversal",
+  "goal": "Visit an N-ary tree in root-first order while preserving left-to-right child order.",
+  "strategy": "A stack supplies the next node. Output the node immediately, then push its children in reverse order so the leftmost child becomes the next stack top.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Visit an N-ary tree in root-first order while preserving left-to-right child order.",
+    "inspect": "A stack supplies the next node. Output the node immediately, then push its children in reverse order so the leftmost child becomes the next stack top.",
+    "update": "A stack supplies the next node. Output the node immediately, then push its children in reverse order so the leftmost child becomes the next stack top.",
+    "done": "Visit an N-ary tree in root-first order while preserving left-to-right child order."
+  },
+  "edgeCases": [
+    "An empty tree has no traversal values",
+    "Repeated values retain distinct node identities",
+    "A single long child chain exposes reversed traversal order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

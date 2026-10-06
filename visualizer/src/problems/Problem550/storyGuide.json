@@ -1,25 +1,31 @@
 {
   "number": "550",
-  "title": "Game Play Analysis I",
-  "goal": "Solve Game Play Analysis I: Find the first login date for each player.",
-  "strategy": "Find the first login date for each player.",
+  "title": "Game Play Analysis IV",
+  "goal": "Measure the fraction of players who return exactly one day after their first login.",
+  "strategy": "First isolate each player first date. A later login counts only if it is the next calendar day after that first date; multiple later consecutive dates do not create extra retained players.",
   "phases": [
-    "parse",
-    "group",
-    "aggregate",
-    "sort",
+    "start",
+    "inspect",
+    "update",
     "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Measure the fraction of players who return exactly one day after their first login.",
+    "inspect": "First isolate each player first date. A later login counts only if it is the next calendar day after that first date; multiple later consecutive dates do not create extra retained players.",
+    "update": "First isolate each player first date. A later login counts only if it is the next calendar day after that first date; multiple later consecutive dates do not create extra retained players.",
+    "done": "Measure the fraction of players who return exactly one day after their first login."
+  },
   "edgeCases": [
-    "The first activity date is chosen per player; later activity records must not replace that earliest date."
+    "The next day can cross a leap-year month boundary",
+    "Later consecutive sessions do not repair a missed first-day return",
+    "One retained player among three requires rounding"
   ],
   "checks": [],
   "inputRules": [
-    "Input must be array"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem550/index.jsx",
-    "src/problems/Problem550/GamePlayAnalysisVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

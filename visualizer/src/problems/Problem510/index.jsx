@@ -1,5 +1,9 @@
+import { getExamples } from '../../config/examplesRegistry';
+import Story from '../families/sequenceStories/SequenceStory';
+import { definitions } from '../families/collectionStories/definitions';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
-import CatalogVisualizer from "./InorderSuccessorBSTVisualizer";
 
-export default withProblemStory(CatalogVisualizer, storyGuide);
+const definition = { ...definitions[510], examples: getExamples('collection:510') };
+function Visualizer() { return <Story definition={definition} />; }
+export default withProblemStory(Visualizer, storyGuide);

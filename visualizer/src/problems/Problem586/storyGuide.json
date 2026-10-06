@@ -1,24 +1,31 @@
 {
   "number": "586",
-  "title": "Customer Placing Largest Orders",
-  "goal": "Solve Customer Placing Largest Orders: Find customers placing the largest orders",
-  "strategy": "Find customers placing the largest orders",
+  "title": "Customer Placing the Largest Number of Orders",
+  "goal": "Find the customer who placed the most orders.",
+  "strategy": "Group order records by customer, count every order once, then select the largest count. The input contract guarantees a unique winning customer.",
   "phases": [
-    "parse",
-    "join",
-    "aggregate",
-    "filter",
-    "sort",
+    "start",
+    "inspect",
+    "update",
     "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Find the customer who placed the most orders.",
+    "inspect": "Group order records by customer, count every order once, then select the largest count. The input contract guarantees a unique winning customer.",
+    "update": "Group order records by customer, count every order once, then select the largest count. The input contract guarantees a unique winning customer.",
+    "done": "Find the customer who placed the most orders."
+  },
   "edgeCases": [
-    "Count orders per customer before choosing the maximum; the query’s tie assumptions determine whether multiple customers can qualify."
+    "One order has one winning customer",
+    "Every order can belong to the same customer",
+    "Large order IDs do not outweigh a larger group"
   ],
   "checks": [],
-  "inputRules": [],
-  "source": [
-    "src/problems/Problem586/index.jsx",
-    "src/problems/Problem586/LargestOrdersVisualizer.jsx"
-  ]
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

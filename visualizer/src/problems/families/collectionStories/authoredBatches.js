@@ -30,9 +30,20 @@ import gardenAndProduct from './gardenAndProductBatch.js';
 import transactionsAndCorners from './transactionsAndCornersBatch.js';
 import earlyCanonical from './earlyCanonicalBatch.js';
 import structureCanonical from './structureCanonicalBatch.js';
+import rollingAndPalindrome from './rollingAndPalindromeBatch.js';
+import vacationPlanning from './vacationPlanningBatch.js';
+import parentSuccessor from './parentSuccessorBatch.js';
+import activityAndBonus from './activityAndBonusBatch.js';
+import quadUnion from './quadUnionBatch.js';
+import squirrelAndSquare from './squirrelAndSquareBatch.js';
+import medianAndGroups from './medianAndGroupsBatch.js';
+import naryTraversal from './naryTraversalBatch.js';
+import tagAndFraction from './tagAndFractionBatch.js';
+import fileSystem from './fileSystemBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
 const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices,prefixAndEncryption,gardenAndProduct,transactionsAndCorners,earlyCanonical,structureCanonical];
+batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem);
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

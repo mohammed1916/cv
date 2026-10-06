@@ -1,0 +1,31 @@
+{
+  "number": "595",
+  "title": "Big Countries",
+  "goal": "List countries meeting either the area threshold or the population threshold.",
+  "strategy": "Evaluate the two thresholds independently and keep a country when either succeeds. Project only its name, population, and area; GDP does not affect eligibility.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List countries meeting either the area threshold or the population threshold.",
+    "inspect": "Evaluate the two thresholds independently and keep a country when either succeeds. Project only its name, population, and area; GDP does not affect eligibility.",
+    "update": "Evaluate the two thresholds independently and keep a country when either succeeds. Project only its name, population, and area; GDP does not affect eligibility.",
+    "done": "List countries meeting either the area threshold or the population threshold."
+  },
+  "edgeCases": [
+    "Exact thresholds are inclusive",
+    "Just below both thresholds fails",
+    "An empty world table returns no rows"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -8,7 +8,7 @@ states; do not count catalog listings or empty shells as implementations.
 
 ## Current requested milestone
 
-The user clarified on 2026-10-06: finish every catalog problem numbered through #2500, including earlier gaps. This is not a request for 2,500 total routes. At this checkpoint, 1,424 of those 2,500 entries have matching routes and 1,076 are missing. Route presence remains unverified and does not certify old implementations. Track the full range in `catalog-through-2500.json`; prioritize canonical gaps and replace outdated same-problem screens where the shared implementation is better.
+The user clarified on 2026-10-06: finish every catalog problem numbered through #2500, including earlier gaps. This is not a request for 2,500 total routes. At this checkpoint, 1,444 of those 2,500 entries have matching routes and 1,056 are missing. Route presence remains unverified and does not certify old implementations. Track the full range in `catalog-through-2500.json`; after the #505-596 batch, prioritize unwritten problems only and defer improvements to existing visualizers, per the latest user steering.
 
 ## Current working mode
 

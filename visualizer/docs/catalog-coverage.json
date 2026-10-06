@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1449,
-  "matchedCatalogRoutes": 1438,
-  "remaining": 2635,
+  "routes": 1461,
+  "matchedCatalogRoutes": 1458,
+  "remaining": 2615,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -20,46 +20,6 @@
       "folder": "Problem427",
       "title": "Build an Expression Tree from Tokens",
       "number": "427"
-    },
-    {
-      "folder": "Problem510",
-      "title": "Inorder Successor in Binary Search Tree II",
-      "number": "510"
-    },
-    {
-      "folder": "Problem550",
-      "title": "Game Play Analysis I",
-      "number": 550
-    },
-    {
-      "folder": "Problem558",
-      "title": "Quad Tree Construction",
-      "number": 558
-    },
-    {
-      "folder": "Problem564",
-      "title": "Find the Celebrity",
-      "number": 564
-    },
-    {
-      "folder": "Problem568",
-      "title": "Palindrome Subsequence",
-      "number": 568
-    },
-    {
-      "folder": "Problem573",
-      "title": "Squirrel Distribution",
-      "number": 573
-    },
-    {
-      "folder": "Problem574",
-      "title": "Shortest Word Distance II",
-      "number": 574
-    },
-    {
-      "folder": "Problem586",
-      "title": "Customer Placing Largest Orders",
-      "number": 586
     }
   ],
   "entries": [
@@ -3597,8 +3557,8 @@
       "number": "505",
       "title": "The Maze II",
       "slug": "the-maze-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem505Canonical"
     },
     {
       "number": "506",
@@ -3632,8 +3592,8 @@
       "number": "510",
       "title": "Inorder Successor in BST II",
       "slug": "inorder-successor-in-bst-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem510"
     },
     {
       "number": "511",
@@ -3800,8 +3760,8 @@
       "number": "534",
       "title": "Game Play Analysis III",
       "slug": "game-play-analysis-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem534Canonical"
     },
     {
       "number": "535",
@@ -3912,8 +3872,8 @@
       "number": "550",
       "title": "Game Play Analysis IV",
       "slug": "game-play-analysis-iv",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem550"
     },
     {
       "number": "551",
@@ -3968,8 +3928,8 @@
       "number": "558",
       "title": "Logical OR of Two Binary Grids Represented as Quad-Trees",
       "slug": "logical-or-of-two-binary-grids-represented-as-quad-trees",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem558"
     },
     {
       "number": "559",
@@ -4010,8 +3970,8 @@
       "number": "564",
       "title": "Find the Closest Palindrome",
       "slug": "find-the-closest-palindrome",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem564"
     },
     {
       "number": "565",
@@ -4038,8 +3998,8 @@
       "number": "568",
       "title": "Maximum Vacation Days",
       "slug": "maximum-vacation-days",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem568"
     },
     {
       "number": "569",
@@ -4059,8 +4019,8 @@
       "number": "571",
       "title": "Find Median Given Frequency of Numbers",
       "slug": "find-median-given-frequency-of-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem571Canonical"
     },
     {
       "number": "572",
@@ -4073,15 +4033,15 @@
       "number": "573",
       "title": "Squirrel Simulation",
       "slug": "squirrel-simulation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem573"
     },
     {
       "number": "574",
       "title": "Winning Candidate",
       "slug": "winning-candidate",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem574"
     },
     {
       "number": "575",
@@ -4101,8 +4061,8 @@
       "number": "577",
       "title": "Employee Bonus",
       "slug": "employee-bonus",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem577Canonical"
     },
     {
       "number": "578",
@@ -4164,8 +4124,8 @@
       "number": "586",
       "title": "Customer Placing the Largest Number of Orders",
       "slug": "customer-placing-the-largest-number-of-orders",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem586"
     },
     {
       "number": "587",
@@ -4178,43 +4138,43 @@
       "number": "588",
       "title": "Design In-Memory File System",
       "slug": "design-in-memory-file-system",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem588"
     },
     {
       "number": "589",
       "title": "N-ary Tree Preorder Traversal",
       "slug": "n-ary-tree-preorder-traversal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem589"
     },
     {
       "number": "590",
       "title": "N-ary Tree Postorder Traversal",
       "slug": "n-ary-tree-postorder-traversal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem590"
     },
     {
       "number": "591",
       "title": "Tag Validator",
       "slug": "tag-validator",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem591"
     },
     {
       "number": "592",
       "title": "Fraction Addition and Subtraction",
       "slug": "fraction-addition-and-subtraction",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem592"
     },
     {
       "number": "593",
       "title": "Valid Square",
       "slug": "valid-square",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem593"
     },
     {
       "number": "594",
@@ -4227,15 +4187,15 @@
       "number": "595",
       "title": "Big Countries",
       "slug": "big-countries",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem595"
     },
     {
       "number": "596",
       "title": "Classes With at Least 5 Students",
       "slug": "classes-with-at-least-5-students",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem596"
     },
     {
       "number": "597",

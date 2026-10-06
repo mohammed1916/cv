@@ -1,29 +1,31 @@
 {
   "number": "573",
-  "title": "Squirrel Distribution",
-  "goal": "Solve Squirrel Distribution: Find minimum distance for squirrel to visit all chairs by jumping between positions.",
-  "strategy": "Find minimum distance for squirrel to visit all chairs by jumping between positions.",
+  "title": "Squirrel Simulation",
+  "goal": "Minimize the squirrel travel needed to carry every nut individually to the tree.",
+  "strategy": "Imagine every nut trip starting and ending at the tree. Only the first trip differs: it starts at the squirrel instead. Choose the nut with the greatest saved distance, even if every saving is negative.",
   "phases": [
-    "input_sort",
-    "initialize",
-    "iterate",
-    "calculate_dist",
-    "dynamic_prog",
-    "final_calc",
-    "return"
+    "start",
+    "inspect",
+    "update",
+    "done"
   ],
-  "phasePurposes": {},
+  "phasePurposes": {
+    "start": "Minimize the squirrel travel needed to carry every nut individually to the tree.",
+    "inspect": "Imagine every nut trip starting and ending at the tree. Only the first trip differs: it starts at the squirrel instead. Choose the nut with the greatest saved distance, even if every saving is negative.",
+    "update": "Imagine every nut trip starting and ending at the tree. Only the first trip differs: it starts at the squirrel instead. Choose the nut with the greatest saved distance, even if every saving is negative.",
+    "done": "Minimize the squirrel travel needed to carry every nut individually to the tree."
+  },
   "edgeCases": [
-    "Only the first nut trip starts at the squirrel; later trips start and end at the tree, so optimize the first-trip saving."
+    "Every first choice costs more than starting from the tree",
+    "One nut still includes its final trip to the tree",
+    "Equal savings permit either optimal first nut"
   ],
   "checks": [],
   "inputRules": [
-    "Trees must be array",
-    "Chairs must be array",
-    "Squirrel must be number"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem573/index.jsx",
-    "src/problems/Problem573/SquirrelDistributionVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }

@@ -1,29 +1,31 @@
 {
   "number": "558",
-  "title": "Quad Tree Construction",
-  "goal": "Solve Quad Tree Construction: Construct a quad tree from an N x N matrix by recursively subdividing regions where all values are the same into leaf nodes.",
-  "strategy": "Construct a quad tree from an N x N matrix by recursively subdividing regions where all values are the same into leaf nodes.",
+  "title": "Logical OR of Two Binary Grids Represented as Quad-Trees",
+  "goal": "Compute logical OR of two compressed binary images and compress the result.",
+  "strategy": "A true leaf makes its entire region true, while a false leaf contributes nothing and can reuse the other subtree. Only two mixed regions require four recursive comparisons. Equal result leaves collapse back into one leaf.",
   "phases": [
-    "check",
-    "subdivide",
-    "leaf",
-    "recurse",
+    "start",
+    "inspect",
+    "update",
     "done"
   ],
-  "phasePurposes": {},
-  "edgeCases": [],
-  "checks": [
-    {
-      "condition": "allSame",
-      "outcome": "return Node(val=val, isLeaf=True)"
-    }
+  "phasePurposes": {
+    "start": "Compute logical OR of two compressed binary images and compress the result.",
+    "inspect": "A true leaf makes its entire region true, while a false leaf contributes nothing and can reuse the other subtree. Only two mixed regions require four recursive comparisons. Equal result leaves collapse back into one leaf.",
+    "update": "A true leaf makes its entire region true, while a false leaf contributes nothing and can reuse the other subtree. Only two mixed regions require four recursive comparisons. Equal result leaves collapse back into one leaf.",
+    "done": "Compute logical OR of two compressed binary images and compress the result."
+  },
+  "edgeCases": [
+    "Complementary quadrants collapse into one true leaf",
+    "An all-zero image reuses the other compressed image",
+    "Two false single-cell leaves stay false"
   ],
+  "checks": [],
   "inputRules": [
-    "Grid must be non-empty array",
-    "Grid must be square matrix"
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
   ],
-  "source": [
-    "src/problems/Problem558/index.jsx",
-    "src/problems/Problem558/QuadTreeVisualizer.jsx"
-  ]
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
 }
