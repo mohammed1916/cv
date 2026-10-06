@@ -5095,5 +5095,145 @@ export const collectionStoryMetadata = {
     "slug": "number-of-ways-to-select-buildings",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-ways-to-select-buildings/"
+  },
+  "2223": {
+    "number": "2223",
+    "title": "Sum of Scores of Built Strings",
+    "slug": "sum-of-scores-of-built-strings",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/sum-of-scores-of-built-strings/"
+  },
+  "2224": {
+    "number": "2224",
+    "title": "Minimum Number of Operations to Convert Time",
+    "slug": "minimum-number-of-operations-to-convert-time",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/"
+  },
+  "2225": {
+    "number": "2225",
+    "title": "Find Players With Zero or One Losses",
+    "slug": "find-players-with-zero-or-one-losses",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-players-with-zero-or-one-losses/"
+  },
+  "2226": {
+    "number": "2226",
+    "title": "Maximum Candies Allocated to K Children",
+    "slug": "maximum-candies-allocated-to-k-children",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-candies-allocated-to-k-children/"
+  },
+  "2227": {
+    "number": "2227",
+    "title": "Encrypt and Decrypt Strings",
+    "slug": "encrypt-and-decrypt-strings",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/encrypt-and-decrypt-strings/"
+  },
+  "2229": {
+    "number": "2229",
+    "title": "Check if an Array Is Consecutive",
+    "slug": "check-if-an-array-is-consecutive",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-an-array-is-consecutive/"
+  },
+  "2231": {
+    "number": "2231",
+    "title": "Largest Number After Digit Swaps by Parity",
+    "slug": "largest-number-after-digit-swaps-by-parity",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/"
+  },
+  "2232": {
+    "number": "2232",
+    "title": "Minimize Result by Adding Parentheses to Expression",
+    "slug": "minimize-result-by-adding-parentheses-to-expression",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/"
+  },
+  "2233": {
+    "number": "2233",
+    "title": "Maximum Product After K Increments",
+    "slug": "maximum-product-after-k-increments",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-product-after-k-increments/"
+  },
+  "2234": {
+    "number": "2234",
+    "title": "Maximum Total Beauty of the Gardens",
+    "slug": "maximum-total-beauty-of-the-gardens",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-total-beauty-of-the-gardens/"
+  },
+  "2235": {
+    "number": "2235",
+    "title": "Add Two Integers",
+    "slug": "add-two-integers",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/add-two-integers/"
+  },
+  "2236": {
+    "number": "2236",
+    "title": "Root Equals Sum of Children",
+    "slug": "root-equals-sum-of-children",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/root-equals-sum-of-children/"
+  },
+  "2237": {
+    "number": "2237",
+    "title": "Count Positions on Street With Required Brightness",
+    "slug": "count-positions-on-street-with-required-brightness",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-positions-on-street-with-required-brightness/"
+  },
+  "2239": {
+    "number": "2239",
+    "title": "Find Closest Number to Zero",
+    "slug": "find-closest-number-to-zero",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-closest-number-to-zero/"
+  },
+  "2240": {
+    "number": "2240",
+    "title": "Number of Ways to Buy Pens and Pencils",
+    "slug": "number-of-ways-to-buy-pens-and-pencils",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-ways-to-buy-pens-and-pencils/"
+  },
+  "2241": {
+    "number": "2241",
+    "title": "Design an ATM Machine",
+    "slug": "design-an-atm-machine",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/design-an-atm-machine/"
+  },
+  "2242": {
+    "number": "2242",
+    "title": "Maximum Score of a Node Sequence",
+    "slug": "maximum-score-of-a-node-sequence",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-score-of-a-node-sequence/"
+  },
+  "2243": {
+    "number": "2243",
+    "title": "Calculate Digit Sum of a String",
+    "slug": "calculate-digit-sum-of-a-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/calculate-digit-sum-of-a-string/"
+  },
+  "2244": {
+    "number": "2244",
+    "title": "Minimum Rounds to Complete All Tasks",
+    "slug": "minimum-rounds-to-complete-all-tasks",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/"
+  },
+  "2245": {
+    "number": "2245",
+    "title": "Maximum Trailing Zeros in a Cornered Path",
+    "slug": "maximum-trailing-zeros-in-a-cornered-path",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/"
   }
 };

@@ -1,0 +1,31 @@
+{
+  "number": "2237",
+  "title": "Count Positions on Street With Required Brightness",
+  "goal": "Count street positions meeting their individual brightness requirements.",
+  "strategy": "Each light adds one across a clipped interval. A difference array records only interval boundaries, and its prefix sum gives the brightness at every street position.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count street positions meeting their individual brightness requirements.",
+    "inspect": "Each light adds one across a clipped interval. A difference array records only interval boundaries, and its prefix sum gives the brightness at every street position.",
+    "update": "Each light adds one across a clipped interval. A difference array records only interval boundaries, and its prefix sum gives the brightness at every street position.",
+    "done": "Count street positions meeting their individual brightness requirements."
+  },
+  "edgeCases": [
+    "No lights still meets zero requirements",
+    "A large radius is clipped to both street ends",
+    "A zero-radius light affects only its own position"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

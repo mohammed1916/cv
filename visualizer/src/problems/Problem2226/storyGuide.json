@@ -1,0 +1,31 @@
+{
+  "number": "2226",
+  "title": "Maximum Candies Allocated to K Children",
+  "goal": "Give each of k children the largest equal pile size without combining source piles.",
+  "strategy": "For a proposed portion size, a pile supplies its size divided by the portion rounded down. Feasibility decreases as the portion grows, so binary search the largest size yielding enough portions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Give each of k children the largest equal pile size without combining source piles.",
+    "inspect": "For a proposed portion size, a pile supplies its size divided by the portion rounded down. Feasibility decreases as the portion grows, so binary search the largest size yielding enough portions.",
+    "update": "For a proposed portion size, a pile supplies its size divided by the portion rounded down. Feasibility decreases as the portion grows, so binary search the largest size yielding enough portions.",
+    "done": "Give each of k children the largest equal pile size without combining source piles."
+  },
+  "edgeCases": [
+    "More children than total candies forces zero",
+    "One child can take the largest whole source pile",
+    "Equal piles split into equal portions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

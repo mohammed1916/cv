@@ -1,0 +1,31 @@
+{
+  "number": "2242",
+  "title": "Maximum Score of a Node Sequence",
+  "goal": "Find the highest-scoring sequence of four distinct adjacent vertices.",
+  "strategy": "Treat each edge as the middle pair. Each endpoint needs one extra neighbor; retaining its top three neighbors is sufficient because at most two conflicting vertices are forbidden.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the highest-scoring sequence of four distinct adjacent vertices.",
+    "inspect": "Treat each edge as the middle pair. Each endpoint needs one extra neighbor; retaining its top three neighbors is sufficient because at most two conflicting vertices are forbidden.",
+    "update": "Treat each edge as the middle pair. Each endpoint needs one extra neighbor; retaining its top three neighbors is sufficient because at most two conflicting vertices are forbidden.",
+    "done": "Find the highest-scoring sequence of four distinct adjacent vertices."
+  },
+  "edgeCases": [
+    "A star has no four-distinct-vertex simple path",
+    "One chain supplies exactly one four-node sequence",
+    "Disconnected short components cannot supply four vertices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

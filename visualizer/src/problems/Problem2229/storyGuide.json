@@ -1,0 +1,31 @@
+{
+  "number": "2229",
+  "title": "Check if an Array Is Consecutive",
+  "goal": "Check whether distinct input values form one consecutive integer interval.",
+  "strategy": "An interval with n distinct integers has maximum minus minimum equal to n minus one. Check both distinctness and span; span alone can hide duplicate values and missing interior values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether distinct input values form one consecutive integer interval.",
+    "inspect": "An interval with n distinct integers has maximum minus minimum equal to n minus one. Check both distinctness and span; span alone can hide duplicate values and missing interior values.",
+    "update": "An interval with n distinct integers has maximum minus minimum equal to n minus one. Check both distinctness and span; span alone can hide duplicate values and missing interior values.",
+    "done": "Check whether distinct input values form one consecutive integer interval."
+  },
+  "edgeCases": [
+    "A duplicate hides a missing interior value",
+    "Distinct values with an interior gap fail the span test",
+    "One value forms a consecutive singleton interval"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

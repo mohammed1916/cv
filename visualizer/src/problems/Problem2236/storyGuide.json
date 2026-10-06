@@ -1,0 +1,31 @@
+{
+  "number": "2236",
+  "title": "Root Equals Sum of Children",
+  "goal": "Check whether a three-node tree root equals the sum of its children.",
+  "strategy": "Read both child values, add them, and compare the result with the root. The condition concerns the child sum, not equality with either child separately.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether a three-node tree root equals the sum of its children.",
+    "inspect": "Read both child values, add them, and compare the result with the root. The condition concerns the child sum, not equality with either child separately.",
+    "update": "Read both child values, add them, and compare the result with the root. The condition concerns the child sum, not equality with either child separately.",
+    "done": "Check whether a three-node tree root equals the sum of its children."
+  },
+  "edgeCases": [
+    "A near match still fails exact equality",
+    "Signed children may cancel to a zero root",
+    "A negative root can equal two negative children"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

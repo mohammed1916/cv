@@ -1,0 +1,31 @@
+{
+  "number": "2231",
+  "title": "Largest Number After Digit Swaps by Parity",
+  "goal": "Maximize a number by swapping only digits with the same parity.",
+  "strategy": "Each position retains its original digit parity. Sort even and odd digits independently in descending order, then use the largest remaining digit of the required parity at each position.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize a number by swapping only digits with the same parity.",
+    "inspect": "Each position retains its original digit parity. Sort even and odd digits independently in descending order, then use the largest remaining digit of the required parity at each position.",
+    "update": "Each position retains its original digit parity. Sort even and odd digits independently in descending order, then use the largest remaining digit of the required parity at each position.",
+    "done": "Maximize a number by swapping only digits with the same parity."
+  },
+  "edgeCases": [
+    "Only even digits may be freely rearranged",
+    "Only odd digits use one shared pool",
+    "Repeated digits preserve their occurrence counts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

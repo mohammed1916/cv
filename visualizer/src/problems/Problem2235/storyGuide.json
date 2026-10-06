@@ -1,0 +1,31 @@
+{
+  "number": "2235",
+  "title": "Add Two Integers",
+  "goal": "Return the sum of two signed integers.",
+  "strategy": "Addition combines the two signed quantities. A negative second value lowers the first, a positive value raises it, and opposite values can cancel completely.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the sum of two signed integers.",
+    "inspect": "Addition combines the two signed quantities. A negative second value lowers the first, a positive value raises it, and opposite values can cancel completely.",
+    "update": "Addition combines the two signed quantities. A negative second value lowers the first, a positive value raises it, and opposite values can cancel completely.",
+    "done": "Return the sum of two signed integers."
+  },
+  "edgeCases": [
+    "A negative second quantity reduces the first",
+    "Opposite quantities cancel exactly",
+    "Zero leaves the other quantity unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2224",
+  "title": "Minimum Number of Operations to Convert Time",
+  "goal": "Convert the current clock time to the later target using the fewest allowed minute increments.",
+  "strategy": "Compute the minute difference, then consume increments of 60 15 5 and 1 in descending order. For these denominations, replacing a larger increment with smaller ones cannot reduce the number of operations.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert the current clock time to the later target using the fewest allowed minute increments.",
+    "inspect": "Compute the minute difference, then consume increments of 60 15 5 and 1 in descending order. For these denominations, replacing a larger increment with smaller ones cannot reduce the number of operations.",
+    "update": "Compute the minute difference, then consume increments of 60 15 5 and 1 in descending order. For these denominations, replacing a larger increment with smaller ones cannot reduce the number of operations.",
+    "done": "Convert the current clock time to the later target using the fewest allowed minute increments."
+  },
+  "edgeCases": [
+    "Equal times need no operation",
+    "A difference below five uses one-minute steps",
+    "A nearly full day still uses the same four denominations"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2245",
+  "title": "Maximum Trailing Zeros in a Cornered Path",
+  "goal": "Maximize trailing zeros in the product along a path with at most one corner.",
+  "strategy": "Trailing zeros depend on the minimum of total factors of two and five. Row and column prefix sums evaluate four boundary-reaching L shapes at every corner, subtracting the corner factor once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize trailing zeros in the product along a path with at most one corner.",
+    "inspect": "Trailing zeros depend on the minimum of total factors of two and five. Row and column prefix sums evaluate four boundary-reaching L shapes at every corner, subtracting the corner factor once.",
+    "update": "Trailing zeros depend on the minimum of total factors of two and five. Row and column prefix sums evaluate four boundary-reaching L shapes at every corner, subtracting the corner factor once.",
+    "done": "Maximize trailing zeros in the product along a path with at most one corner."
+  },
+  "edgeCases": [
+    "A grid with no factor five has no trailing zero product",
+    "One row is a degenerate cornered path",
+    "One cell contributes its own trailing zeros"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

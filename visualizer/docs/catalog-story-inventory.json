@@ -1,5 +1,5 @@
 {
-  "routes": 1424,
+  "routes": 1444,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -7343,6 +7343,60 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2223",
+      "number": "2223",
+      "title": "Sum of Scores of Built Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2224",
+      "number": "2224",
+      "title": "Minimum Number of Operations to Convert Time",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2225",
+      "number": "2225",
+      "title": "Find Players With Zero or One Losses",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2226",
+      "number": "2226",
+      "title": "Maximum Candies Allocated to K Children",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2227",
+      "number": "2227",
+      "title": "Encrypt and Decrypt Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2229",
+      "number": "2229",
+      "title": "Check if an Array Is Consecutive",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem223",
       "number": "223",
       "title": "Rectangle Area",
@@ -7352,6 +7406,78 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2231",
+      "number": "2231",
+      "title": "Largest Number After Digit Swaps by Parity",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2232",
+      "number": "2232",
+      "title": "Minimize Result by Adding Parentheses to Expression",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2233",
+      "number": "2233",
+      "title": "Maximum Product After K Increments",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2234",
+      "number": "2234",
+      "title": "Maximum Total Beauty of the Gardens",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2235",
+      "number": "2235",
+      "title": "Add Two Integers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2236",
+      "number": "2236",
+      "title": "Root Equals Sum of Children",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2237",
+      "number": "2237",
+      "title": "Count Positions on Street With Required Brightness",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2239",
+      "number": "2239",
+      "title": "Find Closest Number to Zero",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem224",
       "number": "224",
       "title": "Basic Calculator",
@@ -7359,6 +7485,60 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2240",
+      "number": "2240",
+      "title": "Number of Ways to Buy Pens and Pencils",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2241",
+      "number": "2241",
+      "title": "Design an ATM Machine",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2242",
+      "number": "2242",
+      "title": "Maximum Score of a Node Sequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2243",
+      "number": "2243",
+      "title": "Calculate Digit Sum of a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2244",
+      "number": "2244",
+      "title": "Minimum Rounds to Complete All Tasks",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2245",
+      "number": "2245",
+      "title": "Maximum Trailing Zeros in a Cornered Path",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem225",

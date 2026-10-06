@@ -1,0 +1,31 @@
+{
+  "number": "2232",
+  "title": "Minimize Result by Adding Parentheses to Expression",
+  "goal": "Place one pair of parentheses around the plus sign to minimize the expression value.",
+  "strategy": "Enumerate every left cut before the plus and right cut after it. Missing outside factors equal one; evaluate the two outside factors times the enclosed sum and retain the smallest result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Place one pair of parentheses around the plus sign to minimize the expression value.",
+    "inspect": "Enumerate every left cut before the plus and right cut after it. Missing outside factors equal one; evaluate the two outside factors times the enclosed sum and retain the smallest result.",
+    "update": "Enumerate every left cut before the plus and right cut after it. Missing outside factors equal one; evaluate the two outside factors times the enclosed sum and retain the smallest result.",
+    "done": "Place one pair of parentheses around the plus sign to minimize the expression value."
+  },
+  "edgeCases": [
+    "Single-digit operands force the only parentheses placement",
+    "One side has several cuts while the other has one digit",
+    "Symmetric operands still allow different outside factors"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

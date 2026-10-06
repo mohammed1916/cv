@@ -1,0 +1,31 @@
+{
+  "number": "2240",
+  "title": "Number of Ways to Buy Pens and Pencils",
+  "goal": "Count affordable combinations of two item types, including buying none.",
+  "strategy": "Fix a count of the more expensive item to reduce the number of iterations. The remaining budget allows every count from zero through the affordable maximum of the other item.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count affordable combinations of two item types, including buying none.",
+    "inspect": "Fix a count of the more expensive item to reduce the number of iterations. The remaining budget allows every count from zero through the affordable maximum of the other item.",
+    "update": "Fix a count of the more expensive item to reduce the number of iterations. The remaining budget allows every count from zero through the affordable maximum of the other item.",
+    "done": "Count affordable combinations of two item types, including buying none."
+  },
+  "edgeCases": [
+    "A zero budget still permits buying nothing",
+    "Both items cost more than the budget",
+    "Equal prices still represent distinct item-count combinations"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

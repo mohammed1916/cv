@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1424,
-  "matchedCatalogRoutes": 1408,
-  "remaining": 2665,
+  "routes": 1444,
+  "matchedCatalogRoutes": 1428,
+  "remaining": 2645,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -15655,36 +15655,36 @@
       "number": "2223",
       "title": "Sum of Scores of Built Strings",
       "slug": "sum-of-scores-of-built-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2223"
     },
     {
       "number": "2224",
       "title": "Minimum Number of Operations to Convert Time",
       "slug": "minimum-number-of-operations-to-convert-time",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2224"
     },
     {
       "number": "2225",
       "title": "Find Players With Zero or One Losses",
       "slug": "find-players-with-zero-or-one-losses",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2225"
     },
     {
       "number": "2226",
       "title": "Maximum Candies Allocated to K Children",
       "slug": "maximum-candies-allocated-to-k-children",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2226"
     },
     {
       "number": "2227",
       "title": "Encrypt and Decrypt Strings",
       "slug": "encrypt-and-decrypt-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2227"
     },
     {
       "number": "2228",
@@ -15697,8 +15697,8 @@
       "number": "2229",
       "title": "Check if an Array Is Consecutive",
       "slug": "check-if-an-array-is-consecutive",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2229"
     },
     {
       "number": "2230",
@@ -15711,50 +15711,50 @@
       "number": "2231",
       "title": "Largest Number After Digit Swaps by Parity",
       "slug": "largest-number-after-digit-swaps-by-parity",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2231"
     },
     {
       "number": "2232",
       "title": "Minimize Result by Adding Parentheses to Expression",
       "slug": "minimize-result-by-adding-parentheses-to-expression",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2232"
     },
     {
       "number": "2233",
       "title": "Maximum Product After K Increments",
       "slug": "maximum-product-after-k-increments",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2233"
     },
     {
       "number": "2234",
       "title": "Maximum Total Beauty of the Gardens",
       "slug": "maximum-total-beauty-of-the-gardens",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2234"
     },
     {
       "number": "2235",
       "title": "Add Two Integers",
       "slug": "add-two-integers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2235"
     },
     {
       "number": "2236",
       "title": "Root Equals Sum of Children",
       "slug": "root-equals-sum-of-children",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2236"
     },
     {
       "number": "2237",
       "title": "Count Positions on Street With Required Brightness",
       "slug": "count-positions-on-street-with-required-brightness",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2237"
     },
     {
       "number": "2238",
@@ -15767,50 +15767,50 @@
       "number": "2239",
       "title": "Find Closest Number to Zero",
       "slug": "find-closest-number-to-zero",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2239"
     },
     {
       "number": "2240",
       "title": "Number of Ways to Buy Pens and Pencils",
       "slug": "number-of-ways-to-buy-pens-and-pencils",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2240"
     },
     {
       "number": "2241",
       "title": "Design an ATM Machine",
       "slug": "design-an-atm-machine",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2241"
     },
     {
       "number": "2242",
       "title": "Maximum Score of a Node Sequence",
       "slug": "maximum-score-of-a-node-sequence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2242"
     },
     {
       "number": "2243",
       "title": "Calculate Digit Sum of a String",
       "slug": "calculate-digit-sum-of-a-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2243"
     },
     {
       "number": "2244",
       "title": "Minimum Rounds to Complete All Tasks",
       "slug": "minimum-rounds-to-complete-all-tasks",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2244"
     },
     {
       "number": "2245",
       "title": "Maximum Trailing Zeros in a Cornered Path",
       "slug": "maximum-trailing-zeros-in-a-cornered-path",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2245"
     },
     {
       "number": "2246",

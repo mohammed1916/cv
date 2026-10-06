@@ -1,0 +1,31 @@
+{
+  "number": "2227",
+  "title": "Encrypt and Decrypt Strings",
+  "goal": "Encrypt words and count dictionary words matching a ciphertext.",
+  "strategy": "Encryption maps each character to its code. Pre-encrypt the dictionary into a frequency table so code collisions are counted correctly; decryption returns a count rather than attempting to choose one plaintext.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Encrypt words and count dictionary words matching a ciphertext.",
+    "inspect": "Encryption maps each character to its code. Pre-encrypt the dictionary into a frequency table so code collisions are counted correctly; decryption returns a count rather than attempting to choose one plaintext.",
+    "update": "Encryption maps each character to its code. Pre-encrypt the dictionary into a frequency table so code collisions are counted correctly; decryption returns a count rather than attempting to choose one plaintext.",
+    "done": "Encrypt words and count dictionary words matching a ciphertext."
+  },
+  "edgeCases": [
+    "An unmapped character cannot be encrypted",
+    "Unique codes distinguish reversed words",
+    "A ciphertext absent from the dictionary has zero candidates"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

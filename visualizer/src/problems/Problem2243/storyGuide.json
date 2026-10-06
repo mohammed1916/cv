@@ -1,0 +1,31 @@
+{
+  "number": "2243",
+  "title": "Calculate Digit Sum of a String",
+  "goal": "Repeatedly replace groups of k digits by their digit sums until the string is short enough.",
+  "strategy": "Read each round from an unchanged source string. Each group sum may have more than one digit, so concatenate decimal sums before deciding whether another round is needed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Repeatedly replace groups of k digits by their digit sums until the string is short enough.",
+    "inspect": "Read each round from an unchanged source string. Each group sum may have more than one digit, so concatenate decimal sums before deciding whether another round is needed.",
+    "update": "Read each round from an unchanged source string. Each group sum may have more than one digit, so concatenate decimal sums before deciding whether another round is needed.",
+    "done": "Repeatedly replace groups of k digits by their digit sums until the string is short enough."
+  },
+  "edgeCases": [
+    "A short enough input is returned unchanged",
+    "All-zero groups may shorten without gaining digits",
+    "Two-digit group sums can initially preserve length"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
