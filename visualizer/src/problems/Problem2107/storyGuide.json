@@ -1,0 +1,31 @@
+{
+  "number": "2107",
+  "title": "Number of Unique Flavors After Sharing K Candies",
+  "goal": "Keep the most distinct flavors after giving away one contiguous block of k candies.",
+  "strategy": "Maintain frequencies outside the shared block. Moving that block right restores its old left candy and removes its new right candy; the number of positive counts is the remaining variety.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Keep the most distinct flavors after giving away one contiguous block of k candies.",
+    "inspect": "Maintain frequencies outside the shared block. Moving that block right restores its old left candy and removes its new right candy; the number of positive counts is the remaining variety.",
+    "update": "Maintain frequencies outside the shared block. Moving that block right restores its old left candy and removes its new right candy; the number of positive counts is the remaining variety.",
+    "done": "Keep the most distinct flavors after giving away one contiguous block of k candies."
+  },
+  "edgeCases": [
+    "Sharing none preserves every flavor",
+    "Sharing the full array leaves no flavors",
+    "One repeated flavor survives any proper block"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

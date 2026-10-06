@@ -1,0 +1,31 @@
+{
+  "number": "2104",
+  "title": "Sum of Subarray Ranges",
+  "goal": "Sum the difference between maximum and minimum over every contiguous subarray.",
+  "strategy": "Count each value contribution as a maximum and as a minimum using monotonic stacks. Opposite strictness on the two sides assigns tied extrema to exactly one occurrence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the difference between maximum and minimum over every contiguous subarray.",
+    "inspect": "Count each value contribution as a maximum and as a minimum using monotonic stacks. Opposite strictness on the two sides assigns tied extrema to exactly one occurrence.",
+    "update": "Count each value contribution as a maximum and as a minimum using monotonic stacks. Opposite strictness on the two sides assigns tied extrema to exactly one occurrence.",
+    "done": "Sum the difference between maximum and minimum over every contiguous subarray."
+  },
+  "edgeCases": [
+    "Equal values have zero range in every subarray",
+    "A singleton has no maximum-minus-minimum gap",
+    "Strictly descending values flush one stack direction repeatedly"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

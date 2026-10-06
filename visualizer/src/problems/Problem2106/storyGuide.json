@@ -1,0 +1,31 @@
+{
+  "number": "2106",
+  "title": "Maximum Fruits Harvested After at Most K Steps",
+  "goal": "Harvest the most fruit within a travel budget on a number line.",
+  "strategy": "A visited interval can be covered by turning at most once. Its cheapest route is interval width plus the smaller distance from the start to either endpoint; slide a window while this cost exceeds the budget.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Harvest the most fruit within a travel budget on a number line.",
+    "inspect": "A visited interval can be covered by turning at most once. Its cheapest route is interval width plus the smaller distance from the start to either endpoint; slide a window while this cost exceeds the budget.",
+    "update": "A visited interval can be covered by turning at most once. Its cheapest route is interval width plus the smaller distance from the start to either endpoint; slide a window while this cost exceeds the budget.",
+    "done": "Harvest the most fruit within a travel budget on a number line."
+  },
+  "edgeCases": [
+    "Zero steps can harvest only the starting location",
+    "All fruit lies on one side of the start",
+    "Every location is outside the travel budget"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

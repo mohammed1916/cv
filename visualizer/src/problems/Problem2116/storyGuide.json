@@ -1,0 +1,31 @@
+{
+  "number": "2116",
+  "title": "Check if a Parentheses String Can Be Valid",
+  "goal": "Decide whether changing unlocked parentheses can produce a valid string.",
+  "strategy": "Every prefix must be able to provide enough opens, and every suffix enough closes. Treat unlocked positions as the helpful direction in each scan; even length plus both capacity checks is sufficient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether changing unlocked parentheses can produce a valid string.",
+    "inspect": "Every prefix must be able to provide enough opens, and every suffix enough closes. Treat unlocked positions as the helpful direction in each scan; even length plus both capacity checks is sufficient.",
+    "update": "Every prefix must be able to provide enough opens, and every suffix enough closes. Treat unlocked positions as the helpful direction in each scan; even length plus both capacity checks is sufficient.",
+    "done": "Decide whether changing unlocked parentheses can produce a valid string."
+  },
+  "edgeCases": [
+    "Odd length cannot be repaired",
+    "A locked closing prefix fails the forward check",
+    "A locked opening suffix fails the backward check"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

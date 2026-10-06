@@ -1,0 +1,31 @@
+{
+  "number": "2115",
+  "title": "Find All Possible Recipes from Given Supplies",
+  "goal": "Find all recipes that can eventually be prepared from the initial supplies.",
+  "strategy": "Ingredients become available events. Track each recipe unresolved count and reverse dependencies; when its count reaches zero, that recipe becomes a new available ingredient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find all recipes that can eventually be prepared from the initial supplies.",
+    "inspect": "Ingredients become available events. Track each recipe unresolved count and reverse dependencies; when its count reaches zero, that recipe becomes a new available ingredient.",
+    "update": "Ingredients become available events. Track each recipe unresolved count and reverse dependencies; when its count reaches zero, that recipe becomes a new available ingredient.",
+    "done": "Find all recipes that can eventually be prepared from the initial supplies."
+  },
+  "edgeCases": [
+    "A dependency cycle cannot create its own starting ingredient",
+    "A missing raw ingredient blocks only its dependent branch",
+    "One supplied ingredient unlocks several recipes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

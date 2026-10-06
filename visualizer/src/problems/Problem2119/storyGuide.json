@@ -1,0 +1,31 @@
+{
+  "number": "2119",
+  "title": "A Number After a Double Reversal",
+  "goal": "Determine whether reversing decimal digits twice restores the original number.",
+  "strategy": "The first reversal drops original trailing zeros because they become leading zeros. Other digits survive both reversals; zero itself is a special preserved value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether reversing decimal digits twice restores the original number.",
+    "inspect": "The first reversal drops original trailing zeros because they become leading zeros. Other digits survive both reversals; zero itself is a special preserved value.",
+    "update": "The first reversal drops original trailing zeros because they become leading zeros. Other digits survive both reversals; zero itself is a special preserved value.",
+    "done": "Determine whether reversing decimal digits twice restores the original number."
+  },
+  "edgeCases": [
+    "Trailing zeros are lost permanently",
+    "Zero remains zero",
+    "A single nonzero digit is unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

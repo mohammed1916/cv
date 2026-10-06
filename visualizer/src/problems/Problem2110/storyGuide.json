@@ -1,0 +1,31 @@
+{
+  "number": "2110",
+  "title": "Number of Smooth Descent Periods of a Stock",
+  "goal": "Count periods where each price is exactly one lower than the previous price.",
+  "strategy": "The length of the current smooth-descent suffix equals the number of valid periods ending today. Extend it on a difference of exactly one; otherwise restart at one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count periods where each price is exactly one lower than the previous price.",
+    "inspect": "The length of the current smooth-descent suffix equals the number of valid periods ending today. Extend it on a difference of exactly one; otherwise restart at one.",
+    "update": "The length of the current smooth-descent suffix equals the number of valid periods ending today. Extend it on a difference of exactly one; otherwise restart at one.",
+    "done": "Count periods where each price is exactly one lower than the previous price."
+  },
+  "edgeCases": [
+    "A fully smooth run contributes a triangular number",
+    "Equal prices produce only singleton periods",
+    "One day is one period"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "routes": 1324,
+  "routes": 1344,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -6326,6 +6326,69 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2103",
+      "number": "2103",
+      "title": "Rings and Rods",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2104",
+      "number": "2104",
+      "title": "Sum of Subarray Ranges",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2105",
+      "number": "2105",
+      "title": "Watering Plants II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2106",
+      "number": "2106",
+      "title": "Maximum Fruits Harvested After at Most K Steps",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2107",
+      "number": "2107",
+      "title": "Number of Unique Flavors After Sharing K Candies",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2108",
+      "number": "2108",
+      "title": "Find First Palindromic String in the Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2109",
+      "number": "2109",
+      "title": "Adding Spaces to a String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem211",
       "number": "211",
       "title": "Add and Search Word",
@@ -6335,6 +6398,60 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem2110",
+      "number": "2110",
+      "title": "Number of Smooth Descent Periods of a Stock",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2111",
+      "number": "2111",
+      "title": "Minimum Operations to Make the Array K-Increasing",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2114",
+      "number": "2114",
+      "title": "Maximum Number of Words Found in Sentences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2115",
+      "number": "2115",
+      "title": "Find All Possible Recipes from Given Supplies",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2116",
+      "number": "2116",
+      "title": "Check if a Parentheses String Can Be Valid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2119",
+      "number": "2119",
+      "title": "A Number After a Double Reversal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem212",
       "number": "212",
       "title": "Word Search II",
@@ -6342,6 +6459,69 @@
       "checks": 1,
       "rules": 4,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2120",
+      "number": "2120",
+      "title": "Execution of All Suffix Instructions Staying in a Grid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2121",
+      "number": "2121",
+      "title": "Intervals Between Identical Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2122",
+      "number": "2122",
+      "title": "Recover the Original Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2124",
+      "number": "2124",
+      "title": "Check if All A's Appears Before All B's",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2125",
+      "number": "2125",
+      "title": "Number of Laser Beams in a Bank",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2126",
+      "number": "2126",
+      "title": "Destroying Asteroids",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2129",
+      "number": "2129",
+      "title": "Capitalize the Title",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem213",

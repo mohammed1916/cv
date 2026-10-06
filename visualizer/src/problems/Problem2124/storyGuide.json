@@ -1,0 +1,31 @@
+{
+  "number": "2124",
+  "title": "Check if All A's Appears Before All B's",
+  "goal": "Check that no a appears after any b.",
+  "strategy": "Once the scan enters the b suffix, another a violates the required order. A string containing only one letter type satisfies the rule.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check that no a appears after any b.",
+    "inspect": "Once the scan enters the b suffix, another a violates the required order. A string containing only one letter type satisfies the rule.",
+    "update": "Once the scan enters the b suffix, another a violates the required order. A string containing only one letter type satisfies the rule.",
+    "done": "Check that no a appears after any b."
+  },
+  "edgeCases": [
+    "An a after several bs breaks the order",
+    "Only a letters satisfies the rule",
+    "Only b letters satisfies the rule"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

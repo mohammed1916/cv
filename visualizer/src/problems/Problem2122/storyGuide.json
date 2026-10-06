@@ -1,0 +1,31 @@
+{
+  "number": "2122",
+  "title": "Recover the Original Array",
+  "goal": "Recover an array whose values produced the shuffled lower and higher observations.",
+  "strategy": "The smallest observation must be a lower value. Try each positive even difference as twice k, then greedily pair the smallest remaining observation with its partner that difference above it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Recover an array whose values produced the shuffled lower and higher observations.",
+    "inspect": "The smallest observation must be a lower value. Try each positive even difference as twice k, then greedily pair the smallest remaining observation with its partner that difference above it.",
+    "update": "The smallest observation must be a lower value. Try each positive even difference as twice k, then greedily pair the smallest remaining observation with its partner that difference above it.",
+    "done": "Recover an array whose values produced the shuffled lower and higher observations."
+  },
+  "edgeCases": [
+    "Repeated original values require occurrence counts",
+    "Only two observations recover one midpoint",
+    "A smaller even candidate fails before the valid pairing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -4395,5 +4395,145 @@ export const collectionStoryMetadata = {
     "slug": "sequentially-ordinal-rank-tracker",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/sequentially-ordinal-rank-tracker/"
+  },
+  "2103": {
+    "number": "2103",
+    "title": "Rings and Rods",
+    "slug": "rings-and-rods",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/rings-and-rods/"
+  },
+  "2104": {
+    "number": "2104",
+    "title": "Sum of Subarray Ranges",
+    "slug": "sum-of-subarray-ranges",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sum-of-subarray-ranges/"
+  },
+  "2105": {
+    "number": "2105",
+    "title": "Watering Plants II",
+    "slug": "watering-plants-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/watering-plants-ii/"
+  },
+  "2106": {
+    "number": "2106",
+    "title": "Maximum Fruits Harvested After at Most K Steps",
+    "slug": "maximum-fruits-harvested-after-at-most-k-steps",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/"
+  },
+  "2107": {
+    "number": "2107",
+    "title": "Number of Unique Flavors After Sharing K Candies",
+    "slug": "number-of-unique-flavors-after-sharing-k-candies",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-unique-flavors-after-sharing-k-candies/"
+  },
+  "2108": {
+    "number": "2108",
+    "title": "Find First Palindromic String in the Array",
+    "slug": "find-first-palindromic-string-in-the-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-first-palindromic-string-in-the-array/"
+  },
+  "2109": {
+    "number": "2109",
+    "title": "Adding Spaces to a String",
+    "slug": "adding-spaces-to-a-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/adding-spaces-to-a-string/"
+  },
+  "2110": {
+    "number": "2110",
+    "title": "Number of Smooth Descent Periods of a Stock",
+    "slug": "number-of-smooth-descent-periods-of-a-stock",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/"
+  },
+  "2111": {
+    "number": "2111",
+    "title": "Minimum Operations to Make the Array K-Increasing",
+    "slug": "minimum-operations-to-make-the-array-k-increasing",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-operations-to-make-the-array-k-increasing/"
+  },
+  "2114": {
+    "number": "2114",
+    "title": "Maximum Number of Words Found in Sentences",
+    "slug": "maximum-number-of-words-found-in-sentences",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/"
+  },
+  "2115": {
+    "number": "2115",
+    "title": "Find All Possible Recipes from Given Supplies",
+    "slug": "find-all-possible-recipes-from-given-supplies",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/"
+  },
+  "2116": {
+    "number": "2116",
+    "title": "Check if a Parentheses String Can Be Valid",
+    "slug": "check-if-a-parentheses-string-can-be-valid",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/"
+  },
+  "2119": {
+    "number": "2119",
+    "title": "A Number After a Double Reversal",
+    "slug": "a-number-after-a-double-reversal",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/a-number-after-a-double-reversal/"
+  },
+  "2120": {
+    "number": "2120",
+    "title": "Execution of All Suffix Instructions Staying in a Grid",
+    "slug": "execution-of-all-suffix-instructions-staying-in-a-grid",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/execution-of-all-suffix-instructions-staying-in-a-grid/"
+  },
+  "2121": {
+    "number": "2121",
+    "title": "Intervals Between Identical Elements",
+    "slug": "intervals-between-identical-elements",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/intervals-between-identical-elements/"
+  },
+  "2122": {
+    "number": "2122",
+    "title": "Recover the Original Array",
+    "slug": "recover-the-original-array",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/recover-the-original-array/"
+  },
+  "2124": {
+    "number": "2124",
+    "title": "Check if All A's Appears Before All B's",
+    "slug": "check-if-all-as-appears-before-all-bs",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/check-if-all-as-appears-before-all-bs/"
+  },
+  "2125": {
+    "number": "2125",
+    "title": "Number of Laser Beams in a Bank",
+    "slug": "number-of-laser-beams-in-a-bank",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-laser-beams-in-a-bank/"
+  },
+  "2126": {
+    "number": "2126",
+    "title": "Destroying Asteroids",
+    "slug": "destroying-asteroids",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/destroying-asteroids/"
+  },
+  "2129": {
+    "number": "2129",
+    "title": "Capitalize the Title",
+    "slug": "capitalize-the-title",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/capitalize-the-title/"
   }
 };

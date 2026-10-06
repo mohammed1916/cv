@@ -1,0 +1,31 @@
+{
+  "number": "2121",
+  "title": "Intervals Between Identical Elements",
+  "goal": "For each position, sum its distances to positions with the same value.",
+  "strategy": "A forward pass adds distances to equal values on the left using count and index sum. A backward pass adds the corresponding right-side distances without comparing every pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For each position, sum its distances to positions with the same value.",
+    "inspect": "A forward pass adds distances to equal values on the left using count and index sum. A backward pass adds the corresponding right-side distances without comparing every pair.",
+    "update": "A forward pass adds distances to equal values on the left using count and index sum. A backward pass adds the corresponding right-side distances without comparing every pair.",
+    "done": "For each position, sum its distances to positions with the same value."
+  },
+  "edgeCases": [
+    "Distinct values have no matching partners",
+    "Every position belongs to one large group",
+    "A singleton has zero total distance"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2129",
+  "title": "Capitalize the Title",
+  "goal": "Capitalize title words according to their lengths.",
+  "strategy": "Normalize every word to lowercase first. Words longer than two letters then uppercase only their first letter; short words remain entirely lowercase.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Capitalize title words according to their lengths.",
+    "inspect": "Normalize every word to lowercase first. Words longer than two letters then uppercase only their first letter; short words remain entirely lowercase.",
+    "update": "Normalize every word to lowercase first. Words longer than two letters then uppercase only their first letter; short words remain entirely lowercase.",
+    "done": "Capitalize title words according to their lengths."
+  },
+  "edgeCases": [
+    "One-letter and two-letter words stay lowercase",
+    "A single long word is normalized",
+    "Already normalized words remain stable"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
