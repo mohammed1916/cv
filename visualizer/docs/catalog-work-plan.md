@@ -35,8 +35,9 @@ Six graph/grid additions bring complete Python coverage to 161, with 24 more
 original examples and step mappings. The next twelve sequence/string/math additions bring complete Python coverage
 to 173 with 48 further examples. The next 24 additions bring complete Python coverage to 197 and add 96 examples.
 Another 25 additions bring complete Python coverage to 222.
-Current catalog coverage is 1,209 of 4,073; 2,864 entries remain unmatched
-across 1,225 local routes. Subsequent batches use authoredBatches.js to combine
+Twelve structural/database additions bring complete Python coverage to 234.
+Current catalog coverage is 1,221 of 4,073; 2,852 entries remain unmatched
+across 1,237 local routes. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.

@@ -1,0 +1,31 @@
+{
+  "number": "1982",
+  "title": "Find Array Given Subset Sums",
+  "goal": "Recover an integer array from its multiset of subset sums.",
+  "strategy": "The two smallest sums differ by the magnitude of one array element. Pair sums at that distance; the half containing zero determines whether to recover the positive or negative sign. Recurse on that half.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Recover an integer array from its multiset of subset sums.",
+    "inspect": "The two smallest sums differ by the magnitude of one array element. Pair sums at that distance; the half containing zero determines whether to recover the positive or negative sign. Recurse on that half.",
+    "update": "The two smallest sums differ by the magnitude of one array element. Pair sums at that distance; the half containing zero determines whether to recover the positive or negative sign. Recurse on that half.",
+    "done": "Recover an integer array from its multiset of subset sums."
+  },
+  "edgeCases": [
+    "Every recovered element is zero",
+    "Negative elements require selecting the upper half",
+    "Repeated positive elements preserve multiplicities"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

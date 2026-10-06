@@ -1,0 +1,31 @@
+{
+  "number": "1949",
+  "title": "Strong Friendship",
+  "goal": "Find existing friendships with at least three mutual friends.",
+  "strategy": "Build undirected neighbor sets, then intersect the two sets for each existing friendship. Sharing friends alone is insufficient unless the two users are already friends.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find existing friendships with at least three mutual friends.",
+    "inspect": "Build undirected neighbor sets, then intersect the two sets for each existing friendship. Sharing friends alone is insufficient unless the two users are already friends.",
+    "update": "Build undirected neighbor sets, then intersect the two sets for each existing friendship. Sharing friends alone is insufficient unless the two users are already friends.",
+    "done": "Find existing friendships with at least three mutual friends."
+  },
+  "edgeCases": [
+    "Exactly three common friends meet the boundary",
+    "Common neighbors without a direct friendship are excluded",
+    "No friendships produce no result"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

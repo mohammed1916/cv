@@ -1,0 +1,31 @@
+{
+  "number": "1965",
+  "title": "Employees With Missing Information",
+  "goal": "Find employee IDs missing either their name record or salary record.",
+  "strategy": "An ID present in exactly one source table is missing information. Use the symmetric difference of employee-ID sets and sort the result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find employee IDs missing either their name record or salary record.",
+    "inspect": "An ID present in exactly one source table is missing information. Use the symmetric difference of employee-ID sets and sort the result.",
+    "update": "An ID present in exactly one source table is missing information. Use the symmetric difference of employee-ID sets and sort the result.",
+    "done": "Find employee IDs missing either their name record or salary record."
+  },
+  "edgeCases": [
+    "Every employee has both records",
+    "An empty name table leaves every salary incomplete",
+    "Both source tables are empty"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

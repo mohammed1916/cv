@@ -1,0 +1,31 @@
+{
+  "number": "1948",
+  "title": "Delete Duplicate Folders in System",
+  "goal": "Delete all folders having duplicate nonempty subtree structures in one simultaneous pass.",
+  "strategy": "Canonical signatures describe each folder by sorted child names and child signatures. Mark every repeated nonempty signature before deleting anything, then collect paths whose ancestry contains no marked folder.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Delete all folders having duplicate nonempty subtree structures in one simultaneous pass.",
+    "inspect": "Canonical signatures describe each folder by sorted child names and child signatures. Mark every repeated nonempty signature before deleting anything, then collect paths whose ancestry contains no marked folder.",
+    "update": "Canonical signatures describe each folder by sorted child names and child signatures. Mark every repeated nonempty signature before deleting anything, then collect paths whose ancestry contains no marked folder.",
+    "done": "Delete all folders having duplicate nonempty subtree structures in one simultaneous pass."
+  },
+  "edgeCases": [
+    "Empty leaves alone are not duplicate structures",
+    "Deletion-created duplicates must survive the single pass",
+    "All top-level trees are duplicate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -29,6 +29,7 @@ export default function SequenceStory({ definition }) {
           <IndexedSequence label="Input / working sequence" length={sequence.length} valueAt={i => display(sequence[i])} active={step.index}
             roleAt={i => step.marks?.[i] ?? (step.window && i >= step.window[0] && i <= step.window[1] ? 'in window' : '')} />}
         {step.outputMatrix && <Matrix values={step.outputMatrix} label={step.outputMatrixLabel ?? 'Output matrix (dots are unwritten cells)'} cell={step.outputCell} />}
+        {step.additionalSourceRecords?.map((records,index) => <RecordStateTable key={`${records.label}-${index}`} {...records} />)}
         {step.resultRecords && <RecordStateTable {...step.resultRecords} />}
         {step.output && <IndexedSequence label="Output / stack — dots are unwritten slots" length={step.output.length} active={step.outputIndex ?? step.output.length - 1} valueAt={i => display(step.output[i])} />}
         {step.table && <table><caption>{step.tableCaption ?? (definition.title === 'Degree of an Array' ? 'Value, frequency, and enclosing span' : step.tableHeaders ? 'Algorithm state' : 'Occurrence counts')}</caption>

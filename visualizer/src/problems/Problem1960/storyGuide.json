@@ -1,0 +1,31 @@
+{
+  "number": "1960",
+  "title": "Maximum Product of the Length of Two Palindromic Substrings",
+  "goal": "Maximize the product of lengths of two nonoverlapping odd-length palindromic substrings.",
+  "strategy": "Manacher radii locate the longest odd palindrome at each center. Propagate nested lengths to every endpoint, then combine the best left and right palindrome at each split.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the product of lengths of two nonoverlapping odd-length palindromic substrings.",
+    "inspect": "Manacher radii locate the longest odd palindrome at each center. Propagate nested lengths to every endpoint, then combine the best left and right palindrome at each split.",
+    "update": "Manacher radii locate the longest odd palindrome at each center. Propagate nested lengths to every endpoint, then combine the best left and right palindrome at each split.",
+    "done": "Maximize the product of lengths of two nonoverlapping odd-length palindromic substrings."
+  },
+  "edgeCases": [
+    "Nested palindromes must be split without overlap",
+    "An even palindrome cannot count as an odd one",
+    "Two singleton palindromes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1938",
+  "title": "Maximum Genetic Difference Query",
+  "goal": "Maximize each query value XOR an ancestor label, including the queried node.",
+  "strategy": "Depth-first traversal keeps exactly the current root-to-node labels in a counted binary trie. Prefer the opposite bit during each query, then remove the node label when leaving its subtree.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize each query value XOR an ancestor label, including the queried node.",
+    "inspect": "Depth-first traversal keeps exactly the current root-to-node labels in a counted binary trie. Prefer the opposite bit during each query, then remove the node label when leaving its subtree.",
+    "update": "Depth-first traversal keeps exactly the current root-to-node labels in a counted binary trie. Prefer the opposite bit during each query, then remove the node label when leaving its subtree.",
+    "done": "Maximize each query value XOR an ancestor label, including the queried node."
+  },
+  "edgeCases": [
+    "A sibling label must not leak into the active ancestor trie",
+    "The root is the only permitted ancestor",
+    "A chain allows every earlier label"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

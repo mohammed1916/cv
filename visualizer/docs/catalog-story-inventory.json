@@ -1,5 +1,5 @@
 {
-  "routes": 1225,
+  "routes": 1237,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -4814,6 +4814,24 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1938",
+      "number": "1938",
+      "title": "Maximum Genetic Difference Query",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1939",
+      "number": "1939",
+      "title": "Users That Actively Request Confirmation Messages",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem194",
       "number": "194",
       "title": "Transpose File",
@@ -4889,6 +4907,24 @@
       "folder": "Problem1947",
       "number": "1947",
       "title": "Maximum Compatibility Score Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1948",
+      "number": "1948",
+      "title": "Delete Duplicate Folders in System",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1949",
+      "number": "1949",
+      "title": "Strong Friendship",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -4985,6 +5021,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1960",
+      "number": "1960",
+      "title": "Maximum Product of the Length of Two Palindromic Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1961",
       "number": "1961",
       "title": "Check If String Is a Prefix of Array",
@@ -5015,6 +5060,15 @@
       "folder": "Problem1964",
       "number": "1964",
       "title": "Find the Longest Valid Obstacle Course at Each Position",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1965",
+      "number": "1965",
+      "title": "Employees With Missing Information",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -5120,6 +5174,24 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1977",
+      "number": "1977",
+      "title": "Number of Ways to Separate Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1978",
+      "number": "1978",
+      "title": "Employees Whose Manager Left the Company",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1979",
       "number": "1979",
       "title": "Find Greatest Common Divisor of Array",
@@ -5150,6 +5222,15 @@
       "folder": "Problem1981",
       "number": "1981",
       "title": "Minimize the Difference Between Target and Chosen Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1982",
+      "number": "1982",
+      "title": "Find Array Given Subset Sums",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -5201,6 +5282,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1988",
+      "number": "1988",
+      "title": "Find Cutoff Score for Each School",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1989",
       "number": "1989",
       "title": "Maximum Number of People That Can Be Caught in Tag",
@@ -5217,6 +5307,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1990",
+      "number": "1990",
+      "title": "Count the Number of Experiments",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1991",
@@ -5330,6 +5429,15 @@
       "folder": "Problem2001",
       "number": "2001",
       "title": "Number of Pairs of Interchangeable Rectangles",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2002",
+      "number": "2002",
+      "title": "Maximum Product of the Length of Two Palindromic Subsequences",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,

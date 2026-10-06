@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1225,
-  "matchedCatalogRoutes": 1209,
-  "remaining": 2864,
+  "routes": 1237,
+  "matchedCatalogRoutes": 1221,
+  "remaining": 2852,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -13660,15 +13660,15 @@
       "number": "1938",
       "title": "Maximum Genetic Difference Query",
       "slug": "maximum-genetic-difference-query",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1938"
     },
     {
       "number": "1939",
       "title": "Users That Actively Request Confirmation Messages",
       "slug": "users-that-actively-request-confirmation-messages",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1939"
     },
     {
       "number": "1940",
@@ -13730,15 +13730,15 @@
       "number": "1948",
       "title": "Delete Duplicate Folders in System",
       "slug": "delete-duplicate-folders-in-system",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1948"
     },
     {
       "number": "1949",
       "title": "Strong Friendship",
       "slug": "strong-friendship",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1949"
     },
     {
       "number": "1950",
@@ -13814,8 +13814,8 @@
       "number": "1960",
       "title": "Maximum Product of the Length of Two Palindromic Substrings",
       "slug": "maximum-product-of-the-length-of-two-palindromic-substrings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1960"
     },
     {
       "number": "1961",
@@ -13849,8 +13849,8 @@
       "number": "1965",
       "title": "Employees With Missing Information",
       "slug": "employees-with-missing-information",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1965"
     },
     {
       "number": "1966",
@@ -13933,15 +13933,15 @@
       "number": "1977",
       "title": "Number of Ways to Separate Numbers",
       "slug": "number-of-ways-to-separate-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1977"
     },
     {
       "number": "1978",
       "title": "Employees Whose Manager Left the Company",
       "slug": "employees-whose-manager-left-the-company",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1978"
     },
     {
       "number": "1979",
@@ -13968,8 +13968,8 @@
       "number": "1982",
       "title": "Find Array Given Subset Sums",
       "slug": "find-array-given-subset-sums",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1982"
     },
     {
       "number": "1983",
@@ -14010,8 +14010,8 @@
       "number": "1988",
       "title": "Find Cutoff Score for Each School",
       "slug": "find-cutoff-score-for-each-school",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1988"
     },
     {
       "number": "1989",
@@ -14024,8 +14024,8 @@
       "number": "1990",
       "title": "Count the Number of Experiments",
       "slug": "count-the-number-of-experiments",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1990"
     },
     {
       "number": "1991",
@@ -14108,8 +14108,8 @@
       "number": "2002",
       "title": "Maximum Product of the Length of Two Palindromic Subsequences",
       "slug": "maximum-product-of-the-length-of-two-palindromic-subsequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2002"
     },
     {
       "number": "2003",

@@ -3360,6 +3360,20 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-number-of-points-with-cost/"
   },
+  "1938": {
+    "number": "1938",
+    "title": "Maximum Genetic Difference Query",
+    "slug": "maximum-genetic-difference-query",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-genetic-difference-query/"
+  },
+  "1939": {
+    "number": "1939",
+    "title": "Users That Actively Request Confirmation Messages",
+    "slug": "users-that-actively-request-confirmation-messages",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/users-that-actively-request-confirmation-messages/"
+  },
   "1940": {
     "number": "1940",
     "title": "Longest Common Subsequence Between Sorted Arrays",
@@ -3415,6 +3429,20 @@ export const collectionStoryMetadata = {
     "slug": "maximum-compatibility-score-sum",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-compatibility-score-sum/"
+  },
+  "1948": {
+    "number": "1948",
+    "title": "Delete Duplicate Folders in System",
+    "slug": "delete-duplicate-folders-in-system",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/delete-duplicate-folders-in-system/"
+  },
+  "1949": {
+    "number": "1949",
+    "title": "Strong Friendship",
+    "slug": "strong-friendship",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/strong-friendship/"
   },
   "1950": {
     "number": "1950",
@@ -3472,6 +3500,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimum-total-space-wasted-with-k-resizing-operations/"
   },
+  "1960": {
+    "number": "1960",
+    "title": "Maximum Product of the Length of Two Palindromic Substrings",
+    "slug": "maximum-product-of-the-length-of-two-palindromic-substrings",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-substrings/"
+  },
   "1961": {
     "number": "1961",
     "title": "Check If String Is a Prefix of Array",
@@ -3499,6 +3534,13 @@ export const collectionStoryMetadata = {
     "slug": "find-the-longest-valid-obstacle-course-at-each-position",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/find-the-longest-valid-obstacle-course-at-each-position/"
+  },
+  "1965": {
+    "number": "1965",
+    "title": "Employees With Missing Information",
+    "slug": "employees-with-missing-information",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/employees-with-missing-information/"
   },
   "1966": {
     "number": "1966",
@@ -3570,6 +3612,20 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/"
   },
+  "1977": {
+    "number": "1977",
+    "title": "Number of Ways to Separate Numbers",
+    "slug": "number-of-ways-to-separate-numbers",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-ways-to-separate-numbers/"
+  },
+  "1978": {
+    "number": "1978",
+    "title": "Employees Whose Manager Left the Company",
+    "slug": "employees-whose-manager-left-the-company",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/employees-whose-manager-left-the-company/"
+  },
   "1979": {
     "number": "1979",
     "title": "Find Greatest Common Divisor of Array",
@@ -3590,6 +3646,13 @@ export const collectionStoryMetadata = {
     "slug": "minimize-the-difference-between-target-and-chosen-elements",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/"
+  },
+  "1982": {
+    "number": "1982",
+    "title": "Find Array Given Subset Sums",
+    "slug": "find-array-given-subset-sums",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-array-given-subset-sums/"
   },
   "1983": {
     "number": "1983",
@@ -3626,12 +3689,26 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/number-of-unique-good-subsequences/"
   },
+  "1988": {
+    "number": "1988",
+    "title": "Find Cutoff Score for Each School",
+    "slug": "find-cutoff-score-for-each-school",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-cutoff-score-for-each-school/"
+  },
   "1989": {
     "number": "1989",
     "title": "Maximum Number of People That Can Be Caught in Tag",
     "slug": "maximum-number-of-people-that-can-be-caught-in-tag",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-number-of-people-that-can-be-caught-in-tag/"
+  },
+  "1990": {
+    "number": "1990",
+    "title": "Count the Number of Experiments",
+    "slug": "count-the-number-of-experiments",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-the-number-of-experiments/"
   },
   "1991": {
     "number": "1991",
@@ -3702,5 +3779,12 @@ export const collectionStoryMetadata = {
     "slug": "number-of-pairs-of-interchangeable-rectangles",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/"
+  },
+  "2002": {
+    "number": "2002",
+    "title": "Maximum Product of the Length of Two Palindromic Subsequences",
+    "slug": "maximum-product-of-the-length-of-two-palindromic-subsequences",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/"
   }
 };
