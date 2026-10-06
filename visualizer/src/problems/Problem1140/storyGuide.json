@@ -1,0 +1,31 @@
+{
+  "number": "1140",
+  "title": "Stone Game II",
+  "goal": "Find how many stones the first player can guarantee in Stone Game II.",
+  "strategy": "The state is the current pile index and limit M. Taking X piles leaves the opponent an optimal suffix state with max(M,X); subtract that opponent result from the suffix total and maximize over legal X.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find how many stones the first player can guarantee in Stone Game II.",
+    "inspect": "The state is the current pile index and limit M. Taking X piles leaves the opponent an optimal suffix state with max(M,X); subtract that opponent result from the suffix total and maximize over legal X.",
+    "update": "The state is the current pile index and limit M. Taking X piles leaves the opponent an optimal suffix state with max(M,X); subtract that opponent result from the suffix total and maximize over legal X.",
+    "done": "Find how many stones the first player can guarantee in Stone Game II."
+  },
+  "edgeCases": [
+    "A single pile is taken immediately",
+    "The first player can take both initial piles",
+    "Equal piles still require planning around the move limit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

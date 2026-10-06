@@ -357,12 +357,26 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/swap-sex-of-employees/"
   },
+  "629": {
+    "number": "629",
+    "title": "K Inverse Pairs Array",
+    "slug": "k-inverse-pairs-array",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/k-inverse-pairs-array/"
+  },
   "634": {
     "number": "634",
     "title": "Find the Derangement of An Array",
     "slug": "find-the-derangement-of-an-array",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/find-the-derangement-of-an-array/"
+  },
+  "638": {
+    "number": "638",
+    "title": "Shopping Offers",
+    "slug": "shopping-offers",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/shopping-offers/"
   },
   "639": {
     "number": "639",
@@ -391,6 +405,13 @@ export const collectionStoryMetadata = {
     "slug": "4-keys-keyboard",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/4-keys-keyboard/"
+  },
+  "664": {
+    "number": "664",
+    "title": "Strange Printer",
+    "slug": "strange-printer",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/strange-printer/"
   },
   "677": {
     "number": "677",
@@ -426,6 +447,13 @@ export const collectionStoryMetadata = {
     "slug": "longest-word-in-dictionary",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/longest-word-in-dictionary/"
+  },
+  "727": {
+    "number": "727",
+    "title": "Minimum Window Subsequence",
+    "slug": "minimum-window-subsequence",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-window-subsequence/"
   },
   "737": {
     "number": "737",
@@ -574,6 +602,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/reordered-power-of-2/"
   },
+  "879": {
+    "number": "879",
+    "title": "Profitable Schemes",
+    "slug": "profitable-schemes",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/profitable-schemes/"
+  },
   "881": {
     "number": "881",
     "title": "Boats to Save People",
@@ -594,6 +629,13 @@ export const collectionStoryMetadata = {
     "slug": "uncommon-words-from-two-sentences",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/uncommon-words-from-two-sentences/"
+  },
+  "887": {
+    "number": "887",
+    "title": "Super Egg Drop",
+    "slug": "super-egg-drop",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/super-egg-drop/"
   },
   "888": {
     "number": "888",
@@ -847,6 +889,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/verifying-an-alien-dictionary/"
   },
+  "956": {
+    "number": "956",
+    "title": "Tallest Billboard",
+    "slug": "tallest-billboard",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/tallest-billboard/"
+  },
   "959": {
     "number": "959",
     "title": "Regions Cut By Slashes",
@@ -965,6 +1014,13 @@ export const collectionStoryMetadata = {
     "slug": "available-captures-for-rook",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/available-captures-for-rook/"
+  },
+  "1000": {
+    "number": "1000",
+    "title": "Minimum Cost to Merge Stones",
+    "slug": "minimum-cost-to-merge-stones",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-cost-to-merge-stones/"
   },
   "1002": {
     "number": "1002",
@@ -1350,6 +1406,13 @@ export const collectionStoryMetadata = {
     "slug": "largest-1-bordered-square",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/largest-1-bordered-square/"
+  },
+  "1140": {
+    "number": "1140",
+    "title": "Stone Game II",
+    "slug": "stone-game-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/stone-game-ii/"
   },
   "1144": {
     "number": "1144",
@@ -2001,6 +2064,13 @@ export const collectionStoryMetadata = {
     "slug": "find-the-distance-value-between-two-arrays",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/find-the-distance-value-between-two-arrays/"
+  },
+  "1388": {
+    "number": "1388",
+    "title": "Pizza With 3n Slices",
+    "slug": "pizza-with-3n-slices",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/pizza-with-3n-slices/"
   },
   "1389": {
     "number": "1389",

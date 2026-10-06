@@ -1,0 +1,31 @@
+{
+  "number": "956",
+  "title": "Tallest Billboard",
+  "goal": "Build two disjoint rod supports of equal height with the greatest possible height.",
+  "strategy": "Map height difference to the best shorter-support height. Each rod can be skipped, added to the taller side, or added to the shorter side; only the best shorter height for a given difference matters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build two disjoint rod supports of equal height with the greatest possible height.",
+    "inspect": "Map height difference to the best shorter-support height. Each rod can be skipped, added to the taller side, or added to the shorter side; only the best shorter height for a given difference matters.",
+    "update": "Map height difference to the best shorter-support height. Each rod can be skipped, added to the taller side, or added to the shorter side; only the best shorter height for a given difference matters.",
+    "done": "Build two disjoint rod supports of equal height with the greatest possible height."
+  },
+  "edgeCases": [
+    "Equal rods make two matching supports directly",
+    "No nonempty equal supports leaves height zero",
+    "The tallest equal result may skip a long outlier"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

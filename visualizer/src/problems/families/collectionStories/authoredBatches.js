@@ -57,10 +57,11 @@ import countingRecurrences from './countingRecurrencesBatch.js';
 import choiceTables from './choiceTablesBatch.js';
 import probabilityBoards from './probabilityBoardsBatch.js';
 import gridChoice from './gridChoiceBatch.js';
+import intervalAndBudget from './intervalAndBudgetBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
 const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices,prefixAndEncryption,gardenAndProduct,transactionsAndCorners,earlyCanonical,structureCanonical];
-batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem,bitsAndText,friendsAndRuns,recordSelection,relationalTransforms,unionRelations,malwareComponents,unionRegions,unionPaths,windowCounting,windowBounds,monotonicWindows,monotonicProfiles,monotonicAdvanced,countingRecurrences,choiceTables,probabilityBoards,gridChoice);
+batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem,bitsAndText,friendsAndRuns,recordSelection,relationalTransforms,unionRelations,malwareComponents,unionRegions,unionPaths,windowCounting,windowBounds,monotonicWindows,monotonicProfiles,monotonicAdvanced,countingRecurrences,choiceTables,probabilityBoards,gridChoice,intervalAndBudget);
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

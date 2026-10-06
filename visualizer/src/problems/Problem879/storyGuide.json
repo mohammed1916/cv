@@ -1,0 +1,31 @@
+{
+  "number": "879",
+  "title": "Profitable Schemes",
+  "goal": "Count job subsets using at most n people and earning at least minProfit.",
+  "strategy": "DP tracks people used and profit capped at the target. Process each job once using descending people counts so it cannot be reused; all larger profits share the capped qualifying state.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count job subsets using at most n people and earning at least minProfit.",
+    "inspect": "DP tracks people used and profit capped at the target. Process each job once using descending people counts so it cannot be reused; all larger profits share the capped qualifying state.",
+    "update": "DP tracks people used and profit capped at the target. Process each job once using descending people counts so it cannot be reused; all larger profits share the capped qualifying state.",
+    "done": "Count job subsets using at most n people and earning at least minProfit."
+  },
+  "edgeCases": [
+    "Zero target profit includes the empty scheme",
+    "Jobs requiring too many people cannot be used",
+    "Different jobs with equal attributes remain separate choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

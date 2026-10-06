@@ -1,0 +1,31 @@
+{
+  "number": "664",
+  "title": "Strange Printer",
+  "goal": "Print a string using the fewest turns when one turn paints one character over a contiguous interval.",
+  "strategy": "Interval DP first considers printing the left character separately. If that character occurs again inside the interval, the same printing turn can cover both occurrences while the intervening interval is repaired separately.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Print a string using the fewest turns when one turn paints one character over a contiguous interval.",
+    "inspect": "Interval DP first considers printing the left character separately. If that character occurs again inside the interval, the same printing turn can cover both occurrences while the intervening interval is repaired separately.",
+    "update": "Interval DP first considers printing the left character separately. If that character occurs again inside the interval, the same printing turn can cover both occurrences while the intervening interval is repaired separately.",
+    "done": "Print a string using the fewest turns when one turn paints one character over a contiguous interval."
+  },
+  "edgeCases": [
+    "One repeated run prints in one turn",
+    "Distinct letters each need a turn",
+    "A repeated outer letter can share a turn around the middle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

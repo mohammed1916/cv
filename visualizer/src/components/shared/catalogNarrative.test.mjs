@@ -12,7 +12,7 @@ test('every implemented route has a story, boundary evidence and a reachable fra
   assert.deepEqual(audit.failures, []);
   assert.equal(audit.routes, inventory.routes);
   assert.equal(audit.covered, audit.routes);
-  assert.equal(audit.routes, 1567, 'Update the route contract when adding or removing catalog entries');
+  assert.equal(audit.routes, 1577, 'Update the route contract when adding or removing catalog entries');
 });
 
 for (const route of inventory.entries.filter(entry=>entry.kind==='catalog-story')) {

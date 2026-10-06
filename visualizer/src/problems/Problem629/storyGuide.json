@@ -1,0 +1,31 @@
+{
+  "number": "629",
+  "title": "K Inverse Pairs Array",
+  "goal": "Count permutations of one through n with exactly k inverse pairs.",
+  "strategy": "Insert the new largest value into a smaller permutation. Its position creates zero through size-minus-one new inversions; a sliding sum combines those previous counts without iterating every insertion position for every state.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count permutations of one through n with exactly k inverse pairs.",
+    "inspect": "Insert the new largest value into a smaller permutation. Its position creates zero through size-minus-one new inversions; a sliding sum combines those previous counts without iterating every insertion position for every state.",
+    "update": "Insert the new largest value into a smaller permutation. Its position creates zero through size-minus-one new inversions; a sliding sum combines those previous counts without iterating every insertion position for every state.",
+    "done": "Count permutations of one through n with exactly k inverse pairs."
+  },
+  "edgeCases": [
+    "Zero inversions has only increasing order",
+    "The maximum inversion count has only decreasing order",
+    "An unattainable inversion count returns zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

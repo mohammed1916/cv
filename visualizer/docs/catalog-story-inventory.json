@@ -1,5 +1,5 @@
 {
-  "routes": 1567,
+  "routes": 1577,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -45,6 +45,15 @@
       "checks": 3,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1000",
+      "number": "1000",
+      "title": "Minimum Cost to Merge Stones",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1002",
@@ -690,6 +699,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1140",
+      "number": "1140",
+      "title": "Stone Game II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1143",
@@ -1724,6 +1742,15 @@
       "folder": "Problem1385",
       "number": "1385",
       "title": "Find the Distance Value Between Two Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1388",
+      "number": "1388",
+      "title": "Pizza With 3n Slices",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12206,6 +12233,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem629",
+      "number": "629",
+      "title": "K Inverse Pairs Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem63",
       "number": "63",
       "title": "Unique Paths II",
@@ -12236,6 +12272,15 @@
       "folder": "Problem637",
       "number": "637",
       "title": "Average of Levels in Binary Tree",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem638",
+      "number": "638",
+      "title": "Shopping Offers",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12380,6 +12425,15 @@
       "folder": "Problem661",
       "number": "661",
       "title": "Image Smoother",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem664",
+      "number": "664",
+      "title": "Strange Printer",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12735,6 +12789,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 4
+    },
+    {
+      "folder": "Problem727",
+      "number": "727",
+      "title": "Minimum Window Subsequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem728",
@@ -13322,6 +13385,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem879",
+      "number": "879",
+      "title": "Profitable Schemes",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem88",
       "number": "88",
       "title": "Merge Sorted Array",
@@ -13352,6 +13424,15 @@
       "folder": "Problem884",
       "number": "884",
       "title": "Uncommon Words from Two Sentences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem887",
+      "number": "887",
+      "title": "Super Egg Drop",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -13793,6 +13874,15 @@
       "folder": "Problem953",
       "number": "953",
       "title": "Verifying an Alien Dictionary",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem956",
+      "number": "956",
+      "title": "Tallest Billboard",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,

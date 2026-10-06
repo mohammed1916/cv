@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1567,
-  "matchedCatalogRoutes": 1564,
-  "remaining": 2509,
+  "routes": 1577,
+  "matchedCatalogRoutes": 1574,
+  "remaining": 2499,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -4426,8 +4426,8 @@
       "number": "629",
       "title": "K Inverse Pairs Array",
       "slug": "k-inverse-pairs-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem629"
     },
     {
       "number": "630",
@@ -4490,8 +4490,8 @@
       "number": "638",
       "title": "Shopping Offers",
       "slug": "shopping-offers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem638"
     },
     {
       "number": "639",
@@ -4672,8 +4672,8 @@
       "number": "664",
       "title": "Strange Printer",
       "slug": "strange-printer",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem664"
     },
     {
       "number": "665",
@@ -5114,8 +5114,8 @@
       "number": "727",
       "title": "Minimum Window Subsequence",
       "slug": "minimum-window-subsequence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem727"
     },
     {
       "number": "728",
@@ -6179,8 +6179,8 @@
       "number": "879",
       "title": "Profitable Schemes",
       "slug": "profitable-schemes",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem879"
     },
     {
       "number": "880",
@@ -6235,8 +6235,8 @@
       "number": "887",
       "title": "Super Egg Drop",
       "slug": "super-egg-drop",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem887"
     },
     {
       "number": "888",
@@ -6718,8 +6718,8 @@
       "number": "956",
       "title": "Tallest Billboard",
       "slug": "tallest-billboard",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem956"
     },
     {
       "number": "957",
@@ -7026,8 +7026,8 @@
       "number": "1000",
       "title": "Minimum Cost to Merge Stones",
       "slug": "minimum-cost-to-merge-stones",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1000"
     },
     {
       "number": "1001",
@@ -8008,8 +8008,8 @@
       "number": "1140",
       "title": "Stone Game II",
       "slug": "stone-game-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1140"
     },
     {
       "number": "1141",
@@ -9744,8 +9744,8 @@
       "number": "1388",
       "title": "Pizza With 3n Slices",
       "slug": "pizza-with-3n-slices",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1388"
     },
     {
       "number": "1389",

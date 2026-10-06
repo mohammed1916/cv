@@ -1,0 +1,31 @@
+{
+  "number": "1388",
+  "title": "Pizza With 3n Slices",
+  "goal": "Choose the greatest total from one third of a circular pizza slices under the neighboring-removal rule.",
+  "strategy": "The chosen slices can be modeled as a fixed-size nonadjacent selection on a cycle. An optimum excludes either the first or last slice; solve both linear fixed-count selections and take the better total.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose the greatest total from one third of a circular pizza slices under the neighboring-removal rule.",
+    "inspect": "The chosen slices can be modeled as a fixed-size nonadjacent selection on a cycle. An optimum excludes either the first or last slice; solve both linear fixed-count selections and take the better total.",
+    "update": "The chosen slices can be modeled as a fixed-size nonadjacent selection on a cycle. An optimum excludes either the first or last slice; solve both linear fixed-count selections and take the better total.",
+    "done": "Choose the greatest total from one third of a circular pizza slices under the neighboring-removal rule."
+  },
+  "edgeCases": [
+    "Three slices permit selecting only the largest",
+    "Equal slices make every legal fixed-count choice equal",
+    "Large values at both cycle ends cannot both be selected"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

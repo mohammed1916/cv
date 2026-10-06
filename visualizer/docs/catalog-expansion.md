@@ -6,8 +6,8 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1567 local routes, of which 1564 match catalog slugs
-or unique normalized titles. **2,509 catalog entries remain unmatched.** Route
+After the continued implementation there are 1577 local routes, of which 1574 match catalog slugs
+or unique normalized titles. **2,499 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
@@ -238,3 +238,5 @@ Fifteen monotonic stack/deque, profile, collision, and bit-window stories add 60
 Twenty counting-recurrence, alignment, partition, and scheduling DP stories add 80 original examples with complete Python/pseudocode. Coverage reaches 1,554 catalog matches overall and 1,532 through #2500, leaving 968 gaps in the milestone. Complete collection Python coverage is 567. Cumulative unverified expansion: 796 problems / 3,184 examples. This resumed run totals 394 implementations (381 additions and 13 replacements), with 1,576 examples. Tests, builds, examples, and browser behavior remain unexecuted.
 
 Ten board-state and probability stories add 40 original examples and complete Python/pseudocode. Coverage is 1,564 catalog matches overall, with 1,542 through #2500 and 958 gaps remaining in that milestone. Complete collection Python coverage is 577. Cumulative unverified expansion: 806 problems / 3,224 examples. This resumed run: 404 implementations (391 additions, 13 replacements), 1,616 examples. Runtime and solver verification remain skipped.
+
+Ten interval, resource-budget, and game DP stories add 40 original examples with complete Python/pseudocode. Coverage reaches 1,574 catalog matches overall and 1,552 through #2500, leaving 948 gaps in that milestone. Complete collection Python coverage is 587. Cumulative unverified expansion: 816 problems / 3,264 examples. This resumed run: 414 implementations (401 additions, 13 replacements), 1,656 examples. No runtime or algorithm verification was performed.
