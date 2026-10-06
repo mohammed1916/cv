@@ -50,10 +50,13 @@ import unionRegions from './unionRegionsBatch.js';
 import unionPaths from './unionPathsBatch.js';
 import windowCounting from './windowCountingBatch.js';
 import windowBounds from './windowBoundsBatch.js';
+import monotonicWindows from './monotonicWindowsBatch.js';
+import monotonicProfiles from './monotonicProfilesBatch.js';
+import monotonicAdvanced from './monotonicAdvancedBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
 const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices,prefixAndEncryption,gardenAndProduct,transactionsAndCorners,earlyCanonical,structureCanonical];
-batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem,bitsAndText,friendsAndRuns,recordSelection,relationalTransforms,unionRelations,malwareComponents,unionRegions,unionPaths,windowCounting,windowBounds);
+batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem,bitsAndText,friendsAndRuns,recordSelection,relationalTransforms,unionRelations,malwareComponents,unionRegions,unionPaths,windowCounting,windowBounds,monotonicWindows,monotonicProfiles,monotonicAdvanced);
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

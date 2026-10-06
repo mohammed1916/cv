@@ -1,0 +1,31 @@
+{
+  "number": "2334",
+  "title": "Subarray With Elements Greater Than Varying Threshold",
+  "goal": "Find any subarray length k whose every element is greater than threshold divided by k.",
+  "strategy": "Use each element as a candidate minimum. Monotonic-stack boundaries reveal a span where every value is at least that minimum. The span qualifies exactly when minimum times length exceeds the threshold.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find any subarray length k whose every element is greater than threshold divided by k.",
+    "inspect": "Use each element as a candidate minimum. Monotonic-stack boundaries reveal a span where every value is at least that minimum. The span qualifies exactly when minimum times length exceeds the threshold.",
+    "update": "Use each element as a candidate minimum. Monotonic-stack boundaries reveal a span where every value is at least that minimum. The span qualifies exactly when minimum times length exceeds the threshold.",
+    "done": "Find any subarray length k whose every element is greater than threshold divided by k."
+  },
+  "edgeCases": [
+    "Strict equality is not enough",
+    "A single large value can be the answer",
+    "The full plateau qualifies when the threshold is slightly lower"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

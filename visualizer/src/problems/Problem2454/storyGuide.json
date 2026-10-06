@@ -1,0 +1,31 @@
+{
+  "number": "2454",
+  "title": "Next Greater Element IV",
+  "goal": "Find for each index the second later value that is strictly greater than its value.",
+  "strategy": "Use one decreasing stack for indices awaiting their first greater value and another for indices awaiting their second. Resolve second-stage indices first, then transfer newly promoted first-stage indices in reverse pop order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find for each index the second later value that is strictly greater than its value.",
+    "inspect": "Use one decreasing stack for indices awaiting their first greater value and another for indices awaiting their second. Resolve second-stage indices first, then transfer newly promoted first-stage indices in reverse pop order.",
+    "update": "Use one decreasing stack for indices awaiting their first greater value and another for indices awaiting their second. Resolve second-stage indices first, then transfer newly promoted first-stage indices in reverse pop order.",
+    "done": "Find for each index the second later value that is strictly greater than its value."
+  },
+  "edgeCases": [
+    "Equal values do not count as greater",
+    "A decreasing array has no second greater values",
+    "Two increasing values still leave both answers absent"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

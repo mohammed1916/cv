@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1522,
-  "matchedCatalogRoutes": 1519,
-  "remaining": 2554,
+  "routes": 1537,
+  "matchedCatalogRoutes": 1534,
+  "remaining": 2539,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -6060,8 +6060,8 @@
       "number": "862",
       "title": "Shortest Subarray with Sum at Least K",
       "slug": "shortest-subarray-with-sum-at-least-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem862"
     },
     {
       "number": "863",
@@ -6375,8 +6375,8 @@
       "number": "907",
       "title": "Sum of Subarray Minimums",
       "slug": "sum-of-subarray-minimums",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem907"
     },
     {
       "number": "908",
@@ -7468,8 +7468,8 @@
       "number": "1063",
       "title": "Number of Valid Subarrays",
       "slug": "number-of-valid-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1063"
     },
     {
       "number": "1064",
@@ -10004,8 +10004,8 @@
       "number": "1425",
       "title": "Constrained Subsequence Sum",
       "slug": "constrained-subsequence-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1425"
     },
     {
       "number": "1426",
@@ -12461,8 +12461,8 @@
       "number": "1776",
       "title": "Car Fleet II",
       "slug": "car-fleet-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1776"
     },
     {
       "number": "1777",
@@ -15996,8 +15996,8 @@
       "number": "2281",
       "title": "Sum of Total Strength of Wizards",
       "slug": "sum-of-total-strength-of-wizards",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2281"
     },
     {
       "number": "2282",
@@ -16367,8 +16367,8 @@
       "number": "2334",
       "title": "Subarray With Elements Greater Than Varying Threshold",
       "slug": "subarray-with-elements-greater-than-varying-threshold",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2334"
     },
     {
       "number": "2335",
@@ -16514,8 +16514,8 @@
       "number": "2355",
       "title": "Maximum Number of Books You Can Take",
       "slug": "maximum-number-of-books-you-can-take",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2355"
     },
     {
       "number": "2356",
@@ -16906,8 +16906,8 @@
       "number": "2411",
       "title": "Smallest Subarrays With Maximum Bitwise OR",
       "slug": "smallest-subarrays-with-maximum-bitwise-or",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2411"
     },
     {
       "number": "2412",
@@ -17207,8 +17207,8 @@
       "number": "2454",
       "title": "Next Greater Element IV",
       "slug": "next-greater-element-iv",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2454"
     },
     {
       "number": "2455",
@@ -17438,8 +17438,8 @@
       "number": "2487",
       "title": "Remove Nodes From Linked List",
       "slug": "remove-nodes-from-linked-list",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2487"
     },
     {
       "number": "2488",
@@ -20084,15 +20084,15 @@
       "number": "2865",
       "title": "Beautiful Towers I",
       "slug": "beautiful-towers-i",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2865"
     },
     {
       "number": "2866",
       "title": "Beautiful Towers II",
       "slug": "beautiful-towers-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2866"
     },
     {
       "number": "2867",
@@ -20609,8 +20609,8 @@
       "number": "2940",
       "title": "Find Building Where Alice and Bob Can Meet",
       "slug": "find-building-where-alice-and-bob-can-meet",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2940"
     },
     {
       "number": "2941",
@@ -21820,8 +21820,8 @@
       "number": "3113",
       "title": "Find the Number of Subarrays Where Boundary Elements Are Maximum",
       "slug": "find-the-number-of-subarrays-where-boundary-elements-are-maximum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem3113"
     },
     {
       "number": "3114",

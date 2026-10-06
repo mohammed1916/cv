@@ -1,0 +1,31 @@
+{
+  "number": "3113",
+  "title": "Find the Number of Subarrays Where Boundary Elements Are Maximum",
+  "goal": "Count subarrays whose two boundary values equal the maximum value anywhere inside.",
+  "strategy": "A decreasing stack groups equal candidate maxima. Smaller groups become invalid when a larger value arrives; an equal surviving group contributes one new subarray for each earlier equal endpoint plus the current singleton.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose two boundary values equal the maximum value anywhere inside.",
+    "inspect": "A decreasing stack groups equal candidate maxima. Smaller groups become invalid when a larger value arrives; an equal surviving group contributes one new subarray for each earlier equal endpoint plus the current singleton.",
+    "update": "A decreasing stack groups equal candidate maxima. Smaller groups become invalid when a larger value arrives; an equal surviving group contributes one new subarray for each earlier equal endpoint plus the current singleton.",
+    "done": "Count subarrays whose two boundary values equal the maximum value anywhere inside."
+  },
+  "edgeCases": [
+    "Every subarray of an equal run qualifies",
+    "Strictly increasing values allow only singletons",
+    "A larger interior value blocks equal outer boundaries"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

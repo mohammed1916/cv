@@ -1,0 +1,31 @@
+{
+  "number": "2866",
+  "title": "Beautiful Towers II",
+  "goal": "Maximize a capped mountain height sum without rebuilding every possible peak.",
+  "strategy": "Monotonic stacks compute optimal left and right mountain-arm sums. Popping taller caps reveals a span flattened to the current height; combine both arm totals at each peak and subtract its double-counted height.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize a capped mountain height sum without rebuilding every possible peak.",
+    "inspect": "Monotonic stacks compute optimal left and right mountain-arm sums. Popping taller caps reveals a span flattened to the current height; combine both arm totals at each peak and subtract its double-counted height.",
+    "update": "Monotonic stacks compute optimal left and right mountain-arm sums. Popping taller caps reveals a span flattened to the current height; combine both arm totals at each peak and subtract its double-counted height.",
+    "done": "Maximize a capped mountain height sum without rebuilding every possible peak."
+  },
+  "edgeCases": [
+    "Equal caps retain valid no-taller stack anchors",
+    "A descending skyline can peak at its left boundary",
+    "One cap is counted once after combining both arms"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

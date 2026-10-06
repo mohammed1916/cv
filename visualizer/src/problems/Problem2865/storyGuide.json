@@ -1,0 +1,31 @@
+{
+  "number": "2865",
+  "title": "Beautiful Towers I",
+  "goal": "Choose tower heights under their individual caps to maximize a mountain-shaped total.",
+  "strategy": "Try every possible peak. Starting at its cap, walk outward and clamp each next tower to the previous chosen height and its own cap; this gives the largest mountain for that fixed peak.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose tower heights under their individual caps to maximize a mountain-shaped total.",
+    "inspect": "Try every possible peak. Starting at its cap, walk outward and clamp each next tower to the previous chosen height and its own cap; this gives the largest mountain for that fixed peak.",
+    "update": "Try every possible peak. Starting at its cap, walk outward and clamp each next tower to the previous chosen height and its own cap; this gives the largest mountain for that fixed peak.",
+    "done": "Choose tower heights under their individual caps to maximize a mountain-shaped total."
+  },
+  "edgeCases": [
+    "A flat plateau can be kept entirely",
+    "A rising profile can peak at the right boundary",
+    "One tower is already a mountain"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

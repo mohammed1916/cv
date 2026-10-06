@@ -1,0 +1,31 @@
+{
+  "number": "1425",
+  "title": "Constrained Subsequence Sum",
+  "goal": "Find the largest sum of a nonempty subsequence whose consecutive selected indices differ by at most k.",
+  "strategy": "DP at i is nums[i] plus the best positive DP among the preceding k indices. A decreasing deque keeps that sliding maximum, removing expired indices and values dominated by the new DP result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest sum of a nonempty subsequence whose consecutive selected indices differ by at most k.",
+    "inspect": "DP at i is nums[i] plus the best positive DP among the preceding k indices. A decreasing deque keeps that sliding maximum, removing expired indices and values dominated by the new DP result.",
+    "update": "DP at i is nums[i] plus the best positive DP among the preceding k indices. A decreasing deque keeps that sliding maximum, removing expired indices and values dominated by the new DP result.",
+    "done": "Find the largest sum of a nonempty subsequence whose consecutive selected indices differ by at most k."
+  },
+  "edgeCases": [
+    "All negative values still require a nonempty answer",
+    "k one becomes a contiguous maximum-sum choice",
+    "A wide gap allowance can skip all negative entries"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

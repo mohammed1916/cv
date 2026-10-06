@@ -1,0 +1,31 @@
+{
+  "number": "907",
+  "title": "Sum of Subarray Minimums",
+  "goal": "Sum the minimum value of every subarray modulo 1000000007.",
+  "strategy": "Assign each subarray to one minimum occurrence using asymmetric equal-value boundaries. Popping a monotonic stack reveals the previous strictly smaller index and the next smaller-or-equal index, giving the number of subarrays owned by that occurrence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the minimum value of every subarray modulo 1000000007.",
+    "inspect": "Assign each subarray to one minimum occurrence using asymmetric equal-value boundaries. Popping a monotonic stack reveals the previous strictly smaller index and the next smaller-or-equal index, giving the number of subarrays owned by that occurrence.",
+    "update": "Assign each subarray to one minimum occurrence using asymmetric equal-value boundaries. Popping a monotonic stack reveals the previous strictly smaller index and the next smaller-or-equal index, giving the number of subarrays owned by that occurrence.",
+    "done": "Sum the minimum value of every subarray modulo 1000000007."
+  },
+  "edgeCases": [
+    "Equal minima require one consistent tie owner",
+    "Increasing values wait for the final stack flush",
+    "One value contributes exactly itself"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -2,8 +2,8 @@
   "scope": "Every catalog problem numbered 1 through 2500",
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 2500,
-  "routePresent": 1501,
-  "missing": 999,
+  "routePresent": 1512,
+  "missing": 988,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "bands": [
     {
@@ -24,17 +24,17 @@
     {
       "from": 751,
       "through": 1000,
-      "missing": 163
+      "missing": 161
     },
     {
       "from": 1001,
       "through": 1250,
-      "missing": 152
+      "missing": 151
     },
     {
       "from": 1251,
       "through": 1500,
-      "missing": 143
+      "missing": 142
     },
     {
       "from": 1501,
@@ -44,7 +44,7 @@
     {
       "from": 1751,
       "through": 2000,
-      "missing": 68
+      "missing": 67
     },
     {
       "from": 2001,
@@ -54,7 +54,7 @@
     {
       "from": 2251,
       "through": 2500,
-      "missing": 237
+      "missing": 231
     }
   ],
   "entries": [
@@ -6095,8 +6095,8 @@
       "number": "862",
       "title": "Shortest Subarray with Sum at Least K",
       "slug": "shortest-subarray-with-sum-at-least-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem862"
     },
     {
       "number": "863",
@@ -6410,8 +6410,8 @@
       "number": "907",
       "title": "Sum of Subarray Minimums",
       "slug": "sum-of-subarray-minimums",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem907"
     },
     {
       "number": "908",
@@ -7503,8 +7503,8 @@
       "number": "1063",
       "title": "Number of Valid Subarrays",
       "slug": "number-of-valid-subarrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1063"
     },
     {
       "number": "1064",
@@ -10039,8 +10039,8 @@
       "number": "1425",
       "title": "Constrained Subsequence Sum",
       "slug": "constrained-subsequence-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1425"
     },
     {
       "number": "1426",
@@ -12496,8 +12496,8 @@
       "number": "1776",
       "title": "Car Fleet II",
       "slug": "car-fleet-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1776"
     },
     {
       "number": "1777",
@@ -16031,8 +16031,8 @@
       "number": "2281",
       "title": "Sum of Total Strength of Wizards",
       "slug": "sum-of-total-strength-of-wizards",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2281"
     },
     {
       "number": "2282",
@@ -16402,8 +16402,8 @@
       "number": "2334",
       "title": "Subarray With Elements Greater Than Varying Threshold",
       "slug": "subarray-with-elements-greater-than-varying-threshold",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2334"
     },
     {
       "number": "2335",
@@ -16549,8 +16549,8 @@
       "number": "2355",
       "title": "Maximum Number of Books You Can Take",
       "slug": "maximum-number-of-books-you-can-take",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2355"
     },
     {
       "number": "2356",
@@ -16941,8 +16941,8 @@
       "number": "2411",
       "title": "Smallest Subarrays With Maximum Bitwise OR",
       "slug": "smallest-subarrays-with-maximum-bitwise-or",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2411"
     },
     {
       "number": "2412",
@@ -17242,8 +17242,8 @@
       "number": "2454",
       "title": "Next Greater Element IV",
       "slug": "next-greater-element-iv",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2454"
     },
     {
       "number": "2455",
@@ -17473,8 +17473,8 @@
       "number": "2487",
       "title": "Remove Nodes From Linked List",
       "slug": "remove-nodes-from-linked-list",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2487"
     },
     {
       "number": "2488",

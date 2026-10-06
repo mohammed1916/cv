@@ -1,0 +1,31 @@
+{
+  "number": "2355",
+  "title": "Maximum Number of Books You Can Take",
+  "goal": "Take the most books from a contiguous shelf range while taking a strictly increasing positive count from left to right.",
+  "strategy": "At an ending shelf, take its cap and step downward by one to the left. A stack of increasing books[i]-i finds where that arithmetic progression meets a smaller cap; DP reuses the optimal earlier segment there.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Take the most books from a contiguous shelf range while taking a strictly increasing positive count from left to right.",
+    "inspect": "At an ending shelf, take its cap and step downward by one to the left. A stack of increasing books[i]-i finds where that arithmetic progression meets a smaller cap; DP reuses the optimal earlier segment there.",
+    "update": "At an ending shelf, take its cap and step downward by one to the left. A stack of increasing books[i]-i finds where that arithmetic progression meets a smaller cap; DP reuses the optimal earlier segment there.",
+    "done": "Take the most books from a contiguous shelf range while taking a strictly increasing positive count from left to right."
+  },
+  "edgeCases": [
+    "Zero-cap shelves cannot belong to a positive selection",
+    "Equal caps force a rising arithmetic selection",
+    "A rising cap sequence can be taken in full"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

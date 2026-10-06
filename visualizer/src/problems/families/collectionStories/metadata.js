@@ -441,6 +441,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/score-after-flipping-matrix/"
   },
+  "862": {
+    "number": "862",
+    "title": "Shortest Subarray with Sum at Least K",
+    "slug": "shortest-subarray-with-sum-at-least-k",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/"
+  },
   "868": {
     "number": "868",
     "title": "Binary Gap",
@@ -531,6 +538,13 @@ export const collectionStoryMetadata = {
     "slug": "fruit-into-baskets",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/fruit-into-baskets/"
+  },
+  "907": {
+    "number": "907",
+    "title": "Sum of Subarray Minimums",
+    "slug": "sum-of-subarray-minimums",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sum-of-subarray-minimums/"
   },
   "908": {
     "number": "908",
@@ -979,6 +993,13 @@ export const collectionStoryMetadata = {
     "slug": "previous-permutation-with-one-swap",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/previous-permutation-with-one-swap/"
+  },
+  "1063": {
+    "number": "1063",
+    "title": "Number of Valid Subarrays",
+    "slug": "number-of-valid-subarrays",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-valid-subarrays/"
   },
   "1064": {
     "number": "1064",
@@ -1952,6 +1973,13 @@ export const collectionStoryMetadata = {
     "slug": "diagonal-traverse-ii",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/diagonal-traverse-ii/"
+  },
+  "1425": {
+    "number": "1425",
+    "title": "Constrained Subsequence Sum",
+    "slug": "constrained-subsequence-sum",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/constrained-subsequence-sum/"
   },
   "1426": {
     "number": "1426",
@@ -3142,6 +3170,13 @@ export const collectionStoryMetadata = {
     "slug": "equal-sum-arrays-with-minimum-number-of-operations",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations/"
+  },
+  "1776": {
+    "number": "1776",
+    "title": "Car Fleet II",
+    "slug": "car-fleet-ii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/car-fleet-ii/"
   },
   "1779": {
     "number": "1779",
@@ -5754,6 +5789,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/"
   },
+  "2281": {
+    "number": "2281",
+    "title": "Sum of Total Strength of Wizards",
+    "slug": "sum-of-total-strength-of-wizards",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/sum-of-total-strength-of-wizards/"
+  },
   "2302": {
     "number": "2302",
     "title": "Count Subarrays With Score Less Than K",
@@ -5761,12 +5803,26 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/count-subarrays-with-score-less-than-k/"
   },
+  "2334": {
+    "number": "2334",
+    "title": "Subarray With Elements Greater Than Varying Threshold",
+    "slug": "subarray-with-elements-greater-than-varying-threshold",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/subarray-with-elements-greater-than-varying-threshold/"
+  },
   "2348": {
     "number": "2348",
     "title": "Number of Zero-Filled Subarrays",
     "slug": "number-of-zero-filled-subarrays",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-zero-filled-subarrays/"
+  },
+  "2355": {
+    "number": "2355",
+    "title": "Maximum Number of Books You Can Take",
+    "slug": "maximum-number-of-books-you-can-take",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-number-of-books-you-can-take/"
   },
   "2393": {
     "number": "2393",
@@ -5788,6 +5844,13 @@ export const collectionStoryMetadata = {
     "slug": "longest-nice-subarray",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/longest-nice-subarray/"
+  },
+  "2411": {
+    "number": "2411",
+    "title": "Smallest Subarrays With Maximum Bitwise OR",
+    "slug": "smallest-subarrays-with-maximum-bitwise-or",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/"
   },
   "2414": {
     "number": "2414",
@@ -5824,6 +5887,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-subarrays-with-gcd-equal-to-k/"
   },
+  "2454": {
+    "number": "2454",
+    "title": "Next Greater Element IV",
+    "slug": "next-greater-element-iv",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/next-greater-element-iv/"
+  },
   "2461": {
     "number": "2461",
     "title": "Maximum Sum of Distinct Subarrays With Length K",
@@ -5837,6 +5907,13 @@ export const collectionStoryMetadata = {
     "slug": "number-of-subarrays-with-lcm-equal-to-k",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-subarrays-with-lcm-equal-to-k/"
+  },
+  "2487": {
+    "number": "2487",
+    "title": "Remove Nodes From Linked List",
+    "slug": "remove-nodes-from-linked-list",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/remove-nodes-from-linked-list/"
   },
   "2492": {
     "number": "2492",
@@ -5859,6 +5936,27 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/greatest-common-divisor-traversal/"
   },
+  "2865": {
+    "number": "2865",
+    "title": "Beautiful Towers I",
+    "slug": "beautiful-towers-i",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/beautiful-towers-i/"
+  },
+  "2866": {
+    "number": "2866",
+    "title": "Beautiful Towers II",
+    "slug": "beautiful-towers-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/beautiful-towers-ii/"
+  },
+  "2940": {
+    "number": "2940",
+    "title": "Find Building Where Alice and Bob Can Meet",
+    "slug": "find-building-where-alice-and-bob-can-meet",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-building-where-alice-and-bob-can-meet/"
+  },
   "2948": {
     "number": "2948",
     "title": "Make Lexicographically Smallest Array by Swapping Elements",
@@ -5872,5 +5970,12 @@ export const collectionStoryMetadata = {
     "slug": "minimum-cost-walk-in-weighted-graph",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/"
+  },
+  "3113": {
+    "number": "3113",
+    "title": "Find the Number of Subarrays Where Boundary Elements Are Maximum",
+    "slug": "find-the-number-of-subarrays-where-boundary-elements-are-maximum",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-the-number-of-subarrays-where-boundary-elements-are-maximum/"
   }
 };

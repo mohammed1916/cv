@@ -1,0 +1,31 @@
+{
+  "number": "2411",
+  "title": "Smallest Subarrays With Maximum Bitwise OR",
+  "goal": "For each start find the shortest subarray attaining that start suffix maximum bitwise OR.",
+  "strategy": "Scan from right to left and remember the nearest occurrence of every set bit. To collect every bit available in the suffix, the end must reach the farthest of those nearest occurrences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For each start find the shortest subarray attaining that start suffix maximum bitwise OR.",
+    "inspect": "Scan from right to left and remember the nearest occurrence of every set bit. To collect every bit available in the suffix, the end must reach the farthest of those nearest occurrences.",
+    "update": "Scan from right to left and remember the nearest occurrence of every set bit. To collect every bit available in the suffix, the end must reach the farthest of those nearest occurrences.",
+    "done": "For each start find the shortest subarray attaining that start suffix maximum bitwise OR."
+  },
+  "edgeCases": [
+    "All zeros need only their singleton windows",
+    "Identical masks already attain every suffix OR",
+    "A unique far-right bit forces earlier windows to reach it"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

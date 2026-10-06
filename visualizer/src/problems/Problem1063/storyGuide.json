@@ -1,0 +1,31 @@
+{
+  "number": "1063",
+  "title": "Number of Valid Subarrays",
+  "goal": "Count subarrays whose first value is no greater than every later value in that subarray.",
+  "strategy": "For each starting index, the first strictly smaller value ends its valid range. A nondecreasing stack waits for that boundary; equal values do not end a range.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose first value is no greater than every later value in that subarray.",
+    "inspect": "For each starting index, the first strictly smaller value ends its valid range. A nondecreasing stack waits for that boundary; equal values do not end a range.",
+    "update": "For each starting index, the first strictly smaller value ends its valid range. A nondecreasing stack waits for that boundary; equal values do not end a range.",
+    "done": "Count subarrays whose first value is no greater than every later value in that subarray."
+  },
+  "edgeCases": [
+    "Equal values never violate the first-value condition",
+    "A decreasing array permits only singleton ranges",
+    "An increasing array permits every subarray"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

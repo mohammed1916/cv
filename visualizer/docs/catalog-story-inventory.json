@@ -1,5 +1,5 @@
 {
-  "routes": 1522,
+  "routes": 1537,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -324,6 +324,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1063",
+      "number": "1063",
+      "title": "Number of Valid Subarrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1064",
@@ -1892,6 +1901,15 @@
       "folder": "Problem1424",
       "number": "1424",
       "title": "Diagonal Traverse II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1425",
+      "number": "1425",
+      "title": "Constrained Subsequence Sum",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -3800,6 +3818,15 @@
       "folder": "Problem1775",
       "number": "1775",
       "title": "Equal Sum Arrays With Minimum Number of Operations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1776",
+      "number": "1776",
+      "title": "Car Fleet II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -7676,6 +7703,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2281",
+      "number": "2281",
+      "title": "Sum of Total Strength of Wizards",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem229",
       "number": "229",
       "title": "Majority Element II",
@@ -7739,6 +7775,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2334",
+      "number": "2334",
+      "title": "Subarray With Elements Greater Than Varying Threshold",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem234",
       "number": "234",
       "title": "Palindrome Linked List",
@@ -7764,6 +7809,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2355",
+      "number": "2355",
+      "title": "Maximum Number of Books You Can Take",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem236",
@@ -7856,6 +7910,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2411",
+      "number": "2411",
+      "title": "Smallest Subarrays With Maximum Bitwise OR",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem2414",
       "number": "2414",
       "title": "Length of the Longest Alphabetical Continuous Substring",
@@ -7937,6 +8000,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2454",
+      "number": "2454",
+      "title": "Next Greater Element IV",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem246",
       "number": "246",
       "title": "Strobogrammatic Number",
@@ -7980,6 +8052,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2487",
+      "number": "2487",
+      "title": "Remove Nodes From Linked List",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem249",
@@ -8387,6 +8468,24 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2865",
+      "number": "2865",
+      "title": "Beautiful Towers I",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2866",
+      "number": "2866",
+      "title": "Beautiful Towers II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem287",
       "number": "287",
       "title": "Find the Duplicate Number",
@@ -8463,6 +8562,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2940",
+      "number": "2940",
+      "title": "Find Building Where Alice and Bob Can Meet",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem2948",
@@ -8661,6 +8769,15 @@
       "checks": 1,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem3113",
+      "number": "3113",
+      "title": "Find the Number of Subarrays Where Boundary Elements Are Maximum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem312",
@@ -12908,6 +13025,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem862",
+      "number": "862",
+      "title": "Shortest Subarray with Sum at Least K",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem867",
       "number": "867",
       "title": "Transpose Matrix",
@@ -13118,6 +13244,15 @@
       "folder": "Problem905",
       "number": "905",
       "title": "Sort Array By Parity",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem907",
+      "number": "907",
+      "title": "Sum of Subarray Minimums",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
