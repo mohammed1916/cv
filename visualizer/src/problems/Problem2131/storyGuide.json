@@ -1,0 +1,31 @@
+{
+  "number": "2131",
+  "title": "Longest Palindrome by Concatenating Two Letter Words",
+  "goal": "Build the longest palindrome by arranging selected two-letter words.",
+  "strategy": "A nonsymmetric word pairs with its reverse on the opposite side. Symmetric words pair with themselves, and at most one leftover symmetric word can occupy the center.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build the longest palindrome by arranging selected two-letter words.",
+    "inspect": "A nonsymmetric word pairs with its reverse on the opposite side. Symmetric words pair with themselves, and at most one leftover symmetric word can occupy the center.",
+    "update": "A nonsymmetric word pairs with its reverse on the opposite side. Symmetric words pair with themselves, and at most one leftover symmetric word can occupy the center.",
+    "done": "Build the longest palindrome by arranging selected two-letter words."
+  },
+  "edgeCases": [
+    "Unmatched nonsymmetric words contribute nothing",
+    "Only one leftover symmetric word fits the center",
+    "Repeated symmetric words form outer pairs plus a center"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

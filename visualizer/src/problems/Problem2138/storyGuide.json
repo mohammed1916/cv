@@ -1,0 +1,31 @@
+{
+  "number": "2138",
+  "title": "Divide a String Into Groups of Size k",
+  "goal": "Split a string into groups of length k, padding only the final short group.",
+  "strategy": "Read nonoverlapping blocks in original order. A block already of length k is unchanged; only missing positions in the last block use the fill character.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split a string into groups of length k, padding only the final short group.",
+    "inspect": "Read nonoverlapping blocks in original order. A block already of length k is unchanged; only missing positions in the last block use the fill character.",
+    "update": "Read nonoverlapping blocks in original order. A block already of length k is unchanged; only missing positions in the last block use the fill character.",
+    "done": "Split a string into groups of length k, padding only the final short group."
+  },
+  "edgeCases": [
+    "Exact division adds no fill characters",
+    "Group size one preserves every character",
+    "The group is wider than the whole input"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

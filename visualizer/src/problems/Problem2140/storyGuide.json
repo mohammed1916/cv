@@ -1,0 +1,31 @@
+{
+  "number": "2140",
+  "title": "Solving Questions With Brainpower",
+  "goal": "Earn the most points while respecting forced skips after answered questions.",
+  "strategy": "A suffix DP compares skipping the current question with answering it and jumping beyond its brainpower cooldown. Both choices lead to already solved later suffixes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Earn the most points while respecting forced skips after answered questions.",
+    "inspect": "A suffix DP compares skipping the current question with answering it and jumping beyond its brainpower cooldown. Both choices lead to already solved later suffixes.",
+    "update": "A suffix DP compares skipping the current question with answering it and jumping beyond its brainpower cooldown. Both choices lead to already solved later suffixes.",
+    "done": "Earn the most points while respecting forced skips after answered questions."
+  },
+  "edgeCases": [
+    "Zero cooldown permits every positive reward",
+    "A cooldown extending beyond the input still earns its points",
+    "One question is answered once"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

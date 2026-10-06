@@ -1,0 +1,31 @@
+{
+  "number": "2147",
+  "title": "Number of Ways to Divide a Long Corridor",
+  "goal": "Count divider placements that give every corridor section exactly two seats.",
+  "strategy": "Seat pairs determine the sections. Between the second seat of one pair and the first seat of the next pair, every boundary is a possible divider; multiply these independent gap counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count divider placements that give every corridor section exactly two seats.",
+    "inspect": "Seat pairs determine the sections. Between the second seat of one pair and the first seat of the next pair, every boundary is a possible divider; multiply these independent gap counts.",
+    "update": "Seat pairs determine the sections. Between the second seat of one pair and the first seat of the next pair, every boundary is a possible divider; multiply these independent gap counts.",
+    "done": "Count divider placements that give every corridor section exactly two seats."
+  },
+  "edgeCases": [
+    "No seats cannot make a valid section",
+    "An odd seat count cannot split into pairs",
+    "Exactly two seats need no internal divider"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

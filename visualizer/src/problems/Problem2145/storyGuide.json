@@ -1,0 +1,31 @@
+{
+  "number": "2145",
+  "title": "Count the Hidden Sequences",
+  "goal": "Count integer sequences within bounds having the supplied adjacent differences.",
+  "strategy": "Every sequence is a translation of the prefix sums starting at zero. The prefix range consumes part of the allowed value range; the remaining room counts possible starting values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count integer sequences within bounds having the supplied adjacent differences.",
+    "inspect": "Every sequence is a translation of the prefix sums starting at zero. The prefix range consumes part of the allowed value range; the remaining room counts possible starting values.",
+    "update": "Every sequence is a translation of the prefix sums starting at zero. The prefix range consumes part of the allowed value range; the remaining room counts possible starting values.",
+    "done": "Count integer sequences within bounds having the supplied adjacent differences."
+  },
+  "edgeCases": [
+    "A prefix range wider than the bounds is impossible",
+    "Zero differences allow every bounded starting value",
+    "Exactly one translation fits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

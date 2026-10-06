@@ -1,0 +1,31 @@
+{
+  "number": "2137",
+  "title": "Pour Water Between Buckets to Make Water Levels Equal",
+  "goal": "Find the highest common water level achievable when transfers lose a percentage.",
+  "strategy": "For a proposed level, excess water above it becomes supply after loss, while deficits below it are demand. Binary search the boundary where effective supply can still fill every deficit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the highest common water level achievable when transfers lose a percentage.",
+    "inspect": "For a proposed level, excess water above it becomes supply after loss, while deficits below it are demand. Binary search the boundary where effective supply can still fill every deficit.",
+    "update": "For a proposed level, excess water above it becomes supply after loss, while deficits below it are demand. Binary search the boundary where effective supply can still fill every deficit.",
+    "done": "Find the highest common water level achievable when transfers lose a percentage."
+  },
+  "edgeCases": [
+    "No loss makes the common level the average",
+    "Equal buckets need no transfer",
+    "High transfer loss keeps the target near the lowest bucket"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

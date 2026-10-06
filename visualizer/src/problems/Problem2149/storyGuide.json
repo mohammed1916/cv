@@ -1,0 +1,31 @@
+{
+  "number": "2149",
+  "title": "Rearrange Array Elements by Sign",
+  "goal": "Alternate positive and negative values while preserving each sign order.",
+  "strategy": "Positive values occupy even output indices and negative values odd indices. Separate write pointers preserve encounter order within each sign group.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Alternate positive and negative values while preserving each sign order.",
+    "inspect": "Positive values occupy even output indices and negative values odd indices. Separate write pointers preserve encounter order within each sign group.",
+    "update": "Positive values occupy even output indices and negative values odd indices. Separate write pointers preserve encounter order within each sign group.",
+    "done": "Alternate positive and negative values while preserving each sign order."
+  },
+  "edgeCases": [
+    "An already alternating array remains in the same order",
+    "All negatives arrive before all positives",
+    "The smallest balanced input starts with the positive"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

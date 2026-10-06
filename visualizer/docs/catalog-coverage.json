@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1344,
-  "matchedCatalogRoutes": 1328,
-  "remaining": 2745,
+  "routes": 1364,
+  "matchedCatalogRoutes": 1348,
+  "remaining": 2725,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -15004,85 +15004,85 @@
       "number": "2130",
       "title": "Maximum Twin Sum of a Linked List",
       "slug": "maximum-twin-sum-of-a-linked-list",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2130"
     },
     {
       "number": "2131",
       "title": "Longest Palindrome by Concatenating Two Letter Words",
       "slug": "longest-palindrome-by-concatenating-two-letter-words",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2131"
     },
     {
       "number": "2132",
       "title": "Stamping the Grid",
       "slug": "stamping-the-grid",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2132"
     },
     {
       "number": "2133",
       "title": "Check if Every Row and Column Contains All Numbers",
       "slug": "check-if-every-row-and-column-contains-all-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2133"
     },
     {
       "number": "2134",
       "title": "Minimum Swaps to Group All 1's Together II",
       "slug": "minimum-swaps-to-group-all-1s-together-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2134"
     },
     {
       "number": "2135",
       "title": "Count Words Obtained After Adding a Letter",
       "slug": "count-words-obtained-after-adding-a-letter",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2135"
     },
     {
       "number": "2136",
       "title": "Earliest Possible Day of Full Bloom",
       "slug": "earliest-possible-day-of-full-bloom",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2136"
     },
     {
       "number": "2137",
       "title": "Pour Water Between Buckets to Make Water Levels Equal",
       "slug": "pour-water-between-buckets-to-make-water-levels-equal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2137"
     },
     {
       "number": "2138",
       "title": "Divide a String Into Groups of Size k",
       "slug": "divide-a-string-into-groups-of-size-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2138"
     },
     {
       "number": "2139",
       "title": "Minimum Moves to Reach Target Score",
       "slug": "minimum-moves-to-reach-target-score",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2139"
     },
     {
       "number": "2140",
       "title": "Solving Questions With Brainpower",
       "slug": "solving-questions-with-brainpower",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2140"
     },
     {
       "number": "2141",
       "title": "Maximum Running Time of N Computers",
       "slug": "maximum-running-time-of-n-computers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2141"
     },
     {
       "number": "2142",
@@ -15102,57 +15102,57 @@
       "number": "2144",
       "title": "Minimum Cost of Buying Candies With Discount",
       "slug": "minimum-cost-of-buying-candies-with-discount",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2144"
     },
     {
       "number": "2145",
       "title": "Count the Hidden Sequences",
       "slug": "count-the-hidden-sequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2145"
     },
     {
       "number": "2146",
       "title": "K Highest Ranked Items Within a Price Range",
       "slug": "k-highest-ranked-items-within-a-price-range",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2146"
     },
     {
       "number": "2147",
       "title": "Number of Ways to Divide a Long Corridor",
       "slug": "number-of-ways-to-divide-a-long-corridor",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2147"
     },
     {
       "number": "2148",
       "title": "Count Elements With Strictly Smaller and Greater Elements ",
       "slug": "count-elements-with-strictly-smaller-and-greater-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2148"
     },
     {
       "number": "2149",
       "title": "Rearrange Array Elements by Sign",
       "slug": "rearrange-array-elements-by-sign",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2149"
     },
     {
       "number": "2150",
       "title": "Find All Lonely Numbers in the Array",
       "slug": "find-all-lonely-numbers-in-the-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2150"
     },
     {
       "number": "2151",
       "title": "Maximum Good People Based on Statements",
       "slug": "maximum-good-people-based-on-statements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2151"
     },
     {
       "number": "2152",

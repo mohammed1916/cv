@@ -1,0 +1,31 @@
+{
+  "number": "2146",
+  "title": "K Highest Ranked Items Within a Price Range",
+  "goal": "Return the highest-ranked reachable items by distance price row and column.",
+  "strategy": "BFS assigns shortest walking distances through non-wall cells. Gather in-range items, then order the candidates by the full ranking tuple before taking k.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the highest-ranked reachable items by distance price row and column.",
+    "inspect": "BFS assigns shortest walking distances through non-wall cells. Gather in-range items, then order the candidates by the full ranking tuple before taking k.",
+    "update": "BFS assigns shortest walking distances through non-wall cells. Gather in-range items, then order the candidates by the full ranking tuple before taking k.",
+    "done": "Return the highest-ranked reachable items by distance price row and column."
+  },
+  "edgeCases": [
+    "The starting cell itself can be the first ranked item",
+    "Unreachable items do not enter the ranking",
+    "No reachable item lies inside the requested price range"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

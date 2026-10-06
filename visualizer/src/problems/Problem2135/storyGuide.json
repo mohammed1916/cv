@@ -1,0 +1,31 @@
+{
+  "number": "2135",
+  "title": "Count Words Obtained After Adding a Letter",
+  "goal": "Count target words obtainable by adding one letter and rearranging a start word.",
+  "strategy": "With no repeated letter within a word, its character set is a bitmask. Remove one target letter at a time and check whether the remaining mask is a start-word mask.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count target words obtainable by adding one letter and rearranging a start word.",
+    "inspect": "With no repeated letter within a word, its character set is a bitmask. Remove one target letter at a time and check whether the remaining mask is a start-word mask.",
+    "update": "With no repeated letter within a word, its character set is a bitmask. Remove one target letter at a time and check whether the remaining mask is a start-word mask.",
+    "done": "Count target words obtainable by adding one letter and rearranging a start word."
+  },
+  "edgeCases": [
+    "A target with no matching reduced set is rejected",
+    "A one-letter source can gain one distinct letter",
+    "Rearrangement alone is insufficient without an added letter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

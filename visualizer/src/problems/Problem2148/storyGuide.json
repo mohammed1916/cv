@@ -1,0 +1,31 @@
+{
+  "number": "2148",
+  "title": "Count Elements With Strictly Smaller and Greater Elements ",
+  "goal": "Count elements having both a strictly smaller and a strictly larger value somewhere in the array.",
+  "strategy": "An element qualifies exactly when it lies strictly between the global minimum and maximum. Equal copies of either extreme remain excluded.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count elements having both a strictly smaller and a strictly larger value somewhere in the array.",
+    "inspect": "An element qualifies exactly when it lies strictly between the global minimum and maximum. Equal copies of either extreme remain excluded.",
+    "update": "An element qualifies exactly when it lies strictly between the global minimum and maximum. Equal copies of either extreme remain excluded.",
+    "done": "Count elements having both a strictly smaller and a strictly larger value somewhere in the array."
+  },
+  "edgeCases": [
+    "Equal values have no strict witnesses",
+    "Two distinct extremes leave no interior value",
+    "Negative interior values qualify normally"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

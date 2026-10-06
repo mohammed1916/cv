@@ -1,0 +1,31 @@
+{
+  "number": "2134",
+  "title": "Minimum Swaps to Group All 1's Together II",
+  "goal": "Group all ones into one circular block using the fewest arbitrary swaps.",
+  "strategy": "The final block must have length equal to the number of ones. For each circular window of that length, every zero inside needs one swap with a one outside.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Group all ones into one circular block using the fewest arbitrary swaps.",
+    "inspect": "The final block must have length equal to the number of ones. For each circular window of that length, every zero inside needs one swap with a one outside.",
+    "update": "The final block must have length equal to the number of ones. For each circular window of that length, every zero inside needs one swap with a one outside.",
+    "done": "Group all ones into one circular block using the fewest arbitrary swaps."
+  },
+  "edgeCases": [
+    "No ones need no swaps",
+    "An all-one circle is already grouped",
+    "A wraparound group is already contiguous"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
