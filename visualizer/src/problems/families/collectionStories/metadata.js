@@ -371,6 +371,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/map-sum-pairs/"
   },
+  "685": {
+    "number": "685",
+    "title": "Redundant Connection II",
+    "slug": "redundant-connection-ii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/redundant-connection-ii/"
+  },
   "720": {
     "number": "720",
     "title": "Longest Word in Dictionary",
@@ -378,12 +385,40 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/longest-word-in-dictionary/"
   },
+  "737": {
+    "number": "737",
+    "title": "Sentence Similarity II",
+    "slug": "sentence-similarity-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/sentence-similarity-ii/"
+  },
+  "765": {
+    "number": "765",
+    "title": "Couples Holding Hands",
+    "slug": "couples-holding-hands",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/couples-holding-hands/"
+  },
   "820": {
     "number": "820",
     "title": "Short Encoding of Words",
     "slug": "short-encoding-of-words",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/short-encoding-of-words/"
+  },
+  "827": {
+    "number": "827",
+    "title": "Making A Large Island",
+    "slug": "making-a-large-island",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/making-a-large-island/"
+  },
+  "839": {
+    "number": "839",
+    "title": "Similar String Groups",
+    "slug": "similar-string-groups",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/similar-string-groups/"
   },
   "860": {
     "number": "860",
@@ -532,6 +567,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/"
   },
+  "924": {
+    "number": "924",
+    "title": "Minimize Malware Spread",
+    "slug": "minimize-malware-spread",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimize-malware-spread/"
+  },
   "925": {
     "number": "925",
     "title": "Long Pressed Name",
@@ -545,6 +587,13 @@ export const collectionStoryMetadata = {
     "slug": "flip-string-to-monotone-increasing",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/flip-string-to-monotone-increasing/"
+  },
+  "928": {
+    "number": "928",
+    "title": "Minimize Malware Spread II",
+    "slug": "minimize-malware-spread-ii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimize-malware-spread-ii/"
   },
   "929": {
     "number": "929",
@@ -609,6 +658,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/validate-stack-sequences/"
   },
+  "947": {
+    "number": "947",
+    "title": "Most Stones Removed with Same Row or Column",
+    "slug": "most-stones-removed-with-same-row-or-column",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/"
+  },
   "948": {
     "number": "948",
     "title": "Bag of Tokens",
@@ -623,12 +679,26 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/reveal-cards-in-increasing-order/"
   },
+  "952": {
+    "number": "952",
+    "title": "Largest Component Size by Common Factor",
+    "slug": "largest-component-size-by-common-factor",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/largest-component-size-by-common-factor/"
+  },
   "953": {
     "number": "953",
     "title": "Verifying an Alien Dictionary",
     "slug": "verifying-an-alien-dictionary",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/verifying-an-alien-dictionary/"
+  },
+  "959": {
+    "number": "959",
+    "title": "Regions Cut By Slashes",
+    "slug": "regions-cut-by-slashes",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/regions-cut-by-slashes/"
   },
   "961": {
     "number": "961",
@@ -699,6 +769,13 @@ export const collectionStoryMetadata = {
     "slug": "add-to-array-form-of-integer",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/add-to-array-form-of-integer/"
+  },
+  "990": {
+    "number": "990",
+    "title": "Satisfiability of Equality Equations",
+    "slug": "satisfiability-of-equality-equations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/satisfiability-of-equality-equations/"
   },
   "991": {
     "number": "991",
@@ -1134,6 +1211,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimum-cost-to-connect-sticks/"
   },
+  "1168": {
+    "number": "1168",
+    "title": "Optimize Water Distribution in a Village",
+    "slug": "optimize-water-distribution-in-a-village",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/optimize-water-distribution-in-a-village/"
+  },
   "1170": {
     "number": "1170",
     "title": "Compare Strings by Frequency of the Smallest Character",
@@ -1525,6 +1609,13 @@ export const collectionStoryMetadata = {
     "slug": "minimum-flips-to-make-a-or-b-equal-to-c",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/"
+  },
+  "1319": {
+    "number": "1319",
+    "title": "Number of Operations to Make Network Connected",
+    "slug": "number-of-operations-to-make-network-connected",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-operations-to-make-network-connected/"
   },
   "1323": {
     "number": "1323",
@@ -2379,6 +2470,13 @@ export const collectionStoryMetadata = {
     "slug": "best-team-with-no-conflicts",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/best-team-with-no-conflicts/"
+  },
+  "1627": {
+    "number": "1627",
+    "title": "Graph Connectivity With Threshold",
+    "slug": "graph-connectivity-with-threshold",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/graph-connectivity-with-threshold/"
   },
   "1629": {
     "number": "1629",
@@ -5592,5 +5690,47 @@ export const collectionStoryMetadata = {
     "slug": "maximum-trailing-zeros-in-a-cornered-path",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/"
+  },
+  "2421": {
+    "number": "2421",
+    "title": "Number of Good Paths",
+    "slug": "number-of-good-paths",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-good-paths/"
+  },
+  "2492": {
+    "number": "2492",
+    "title": "Minimum Score of a Path Between Two Cities",
+    "slug": "minimum-score-of-a-path-between-two-cities",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/"
+  },
+  "2685": {
+    "number": "2685",
+    "title": "Count the Number of Complete Components",
+    "slug": "count-the-number-of-complete-components",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-the-number-of-complete-components/"
+  },
+  "2709": {
+    "number": "2709",
+    "title": "Greatest Common Divisor Traversal",
+    "slug": "greatest-common-divisor-traversal",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/greatest-common-divisor-traversal/"
+  },
+  "2948": {
+    "number": "2948",
+    "title": "Make Lexicographically Smallest Array by Swapping Elements",
+    "slug": "make-lexicographically-smallest-array-by-swapping-elements",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/"
+  },
+  "3108": {
+    "number": "3108",
+    "title": "Minimum Cost Walk in Weighted Graph",
+    "slug": "minimum-cost-walk-in-weighted-graph",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/"
   }
 };

@@ -1,0 +1,31 @@
+{
+  "number": "2709",
+  "title": "Greatest Common Divisor Traversal",
+  "goal": "Determine whether every array index can reach every other using pairs with gcd greater than one.",
+  "strategy": "Prime factors connect indices rather than distinct numeric values. Join each index to the first owner of its factors; repeated values remain separate nodes, and a value of one has no connecting factor.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether every array index can reach every other using pairs with gcd greater than one.",
+    "inspect": "Prime factors connect indices rather than distinct numeric values. Join each index to the first owner of its factors; repeated values remain separate nodes, and a value of one has no connecting factor.",
+    "update": "Prime factors connect indices rather than distinct numeric values. Join each index to the first owner of its factors; repeated values remain separate nodes, and a value of one has no connecting factor.",
+    "done": "Determine whether every array index can reach every other using pairs with gcd greater than one."
+  },
+  "edgeCases": [
+    "One in a larger array has no usable gcd link",
+    "A singleton one is trivially connected to itself",
+    "Repeated values connect indices but a coprime value stays separate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

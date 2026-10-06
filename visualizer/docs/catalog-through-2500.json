@@ -2,8 +2,8 @@
   "scope": "Every catalog problem numbered 1 through 2500",
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 2500,
-  "routePresent": 1465,
-  "missing": 1035,
+  "routePresent": 1481,
+  "missing": 1019,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "bands": [
     {
@@ -19,27 +19,27 @@
     {
       "from": 501,
       "through": 750,
-      "missing": 70
+      "missing": 68
     },
     {
       "from": 751,
       "through": 1000,
-      "missing": 174
+      "missing": 165
     },
     {
       "from": 1001,
       "through": 1250,
-      "missing": 155
+      "missing": 154
     },
     {
       "from": 1251,
       "through": 1500,
-      "missing": 147
+      "missing": 146
     },
     {
       "from": 1501,
       "through": 1750,
-      "missing": 130
+      "missing": 129
     },
     {
       "from": 1751,
@@ -54,7 +54,7 @@
     {
       "from": 2251,
       "through": 2500,
-      "missing": 250
+      "missing": 248
     }
   ],
   "entries": [
@@ -4854,8 +4854,8 @@
       "number": "685",
       "title": "Redundant Connection II",
       "slug": "redundant-connection-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem685"
     },
     {
       "number": "686",
@@ -5219,8 +5219,8 @@
       "number": "737",
       "title": "Sentence Similarity II",
       "slug": "sentence-similarity-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem737"
     },
     {
       "number": "738",
@@ -5416,8 +5416,8 @@
       "number": "765",
       "title": "Couples Holding Hands",
       "slug": "couples-holding-hands",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem765"
     },
     {
       "number": "766",
@@ -5850,8 +5850,8 @@
       "number": "827",
       "title": "Making A Large Island",
       "slug": "making-a-large-island",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem827"
     },
     {
       "number": "828",
@@ -5934,8 +5934,8 @@
       "number": "839",
       "title": "Similar String Groups",
       "slug": "similar-string-groups",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem839"
     },
     {
       "number": "840",
@@ -6529,8 +6529,8 @@
       "number": "924",
       "title": "Minimize Malware Spread",
       "slug": "minimize-malware-spread",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem924"
     },
     {
       "number": "925",
@@ -6557,8 +6557,8 @@
       "number": "928",
       "title": "Minimize Malware Spread II",
       "slug": "minimize-malware-spread-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem928"
     },
     {
       "number": "929",
@@ -6690,8 +6690,8 @@
       "number": "947",
       "title": "Most Stones Removed with Same Row or Column",
       "slug": "most-stones-removed-with-same-row-or-column",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem947"
     },
     {
       "number": "948",
@@ -6725,8 +6725,8 @@
       "number": "952",
       "title": "Largest Component Size by Common Factor",
       "slug": "largest-component-size-by-common-factor",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem952"
     },
     {
       "number": "953",
@@ -6774,8 +6774,8 @@
       "number": "959",
       "title": "Regions Cut By Slashes",
       "slug": "regions-cut-by-slashes",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem959"
     },
     {
       "number": "960",
@@ -6991,8 +6991,8 @@
       "number": "990",
       "title": "Satisfiability of Equality Equations",
       "slug": "satisfiability-of-equality-equations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem990"
     },
     {
       "number": "991",
@@ -8239,8 +8239,8 @@
       "number": "1168",
       "title": "Optimize Water Distribution in a Village",
       "slug": "optimize-water-distribution-in-a-village",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1168"
     },
     {
       "number": "1169",
@@ -9296,8 +9296,8 @@
       "number": "1319",
       "title": "Number of Operations to Make Network Connected",
       "slug": "number-of-operations-to-make-network-connected",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1319"
     },
     {
       "number": "1320",
@@ -11453,8 +11453,8 @@
       "number": "1627",
       "title": "Graph Connectivity With Threshold",
       "slug": "graph-connectivity-with-threshold",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1627"
     },
     {
       "number": "1628",
@@ -17011,8 +17011,8 @@
       "number": "2421",
       "title": "Number of Good Paths",
       "slug": "number-of-good-paths",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2421"
     },
     {
       "number": "2422",
@@ -17508,8 +17508,8 @@
       "number": "2492",
       "title": "Minimum Score of a Path Between Two Cities",
       "slug": "minimum-score-of-a-path-between-two-cities",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2492"
     },
     {
       "number": "2493",

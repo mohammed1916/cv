@@ -1,5 +1,5 @@
 {
-  "routes": 1482,
+  "routes": 1502,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -752,6 +752,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1168",
+      "number": "1168",
+      "title": "Optimize Water Distribution in a Village",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem117",
       "number": "117",
       "title": "Populating Next Right Pointers in Each Node II",
@@ -1385,6 +1394,15 @@
       "folder": "Problem1318",
       "number": "1318",
       "title": "Minimum Flips to Make a OR b Equal to c",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1319",
+      "number": "1319",
+      "title": "Number of Operations to Make Network Connected",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -2783,6 +2801,15 @@
       "folder": "Problem1626",
       "number": "1626",
       "title": "Best Team With No Conflicts",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1627",
+      "number": "1627",
+      "title": "Graph Connectivity With Threshold",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -7730,6 +7757,15 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem2421",
+      "number": "2421",
+      "title": "Number of Good Paths",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem243",
       "number": "243",
       "title": "Shortest Word Distance",
@@ -7791,6 +7827,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2492",
+      "number": "2492",
+      "title": "Minimum Score of a Path Between Two Cities",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem25",
@@ -7982,6 +8027,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2685",
+      "number": "2685",
+      "title": "Count the Number of Complete Components",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem269",
       "number": "269",
       "title": "Alien Dictionary",
@@ -8007,6 +8061,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2709",
+      "number": "2709",
+      "title": "Greatest Common Divisor Traversal",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem271",
@@ -8240,6 +8303,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2948",
+      "number": "2948",
+      "title": "Make Lexicographically Smallest Array by Swapping Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem295",
       "number": "295",
       "title": "Find Median from Data Stream",
@@ -8409,6 +8481,15 @@
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem3108",
+      "number": "3108",
+      "title": "Minimum Cost Walk in Weighted Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem311",
@@ -12017,6 +12098,15 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem685",
+      "number": "685",
+      "title": "Redundant Connection II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem686",
       "number": "686",
       "title": "Repeated String Match",
@@ -12260,6 +12350,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem737",
+      "number": "737",
+      "title": "Sentence Similarity II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem738",
       "number": "738",
       "title": "Monotone Increasing Digits",
@@ -12348,6 +12447,15 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem765",
+      "number": "765",
+      "title": "Couples Holding Hands",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem766",
@@ -12485,6 +12593,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem827",
+      "number": "827",
+      "title": "Making A Large Island",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem83",
       "number": "83",
       "title": "Remove Duplicates from Sorted List",
@@ -12515,6 +12632,15 @@
       "folder": "Problem836",
       "number": "836",
       "title": "Rectangle Overlap",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem839",
+      "number": "839",
+      "title": "Similar String Groups",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12908,6 +13034,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem924",
+      "number": "924",
+      "title": "Minimize Malware Spread",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem925",
       "number": "925",
       "title": "Long Pressed Name",
@@ -12920,6 +13055,15 @@
       "folder": "Problem926",
       "number": "926",
       "title": "Flip String to Monotone Increasing",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem928",
+      "number": "928",
+      "title": "Minimize Malware Spread II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -13034,6 +13178,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem947",
+      "number": "947",
+      "title": "Most Stones Removed with Same Row or Column",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem948",
       "number": "948",
       "title": "Bag of Tokens",
@@ -13061,9 +13214,27 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem952",
+      "number": "952",
+      "title": "Largest Component Size by Common Factor",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem953",
       "number": "953",
       "title": "Verifying an Alien Dictionary",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem959",
+      "number": "959",
+      "title": "Regions Cut By Slashes",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -13212,6 +13383,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem990",
+      "number": "990",
+      "title": "Satisfiability of Equality Equations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem991",

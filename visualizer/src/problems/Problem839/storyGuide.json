@@ -1,0 +1,31 @@
+{
+  "number": "839",
+  "title": "Similar String Groups",
+  "goal": "Count connected groups of anagram strings linked by one allowed character swap.",
+  "strategy": "Two strings are directly similar if they are equal or differ in exactly two mutually reversed positions. Union those pairs; transitive chains form groups even when the chain endpoints are not directly similar.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count connected groups of anagram strings linked by one allowed character swap.",
+    "inspect": "Two strings are directly similar if they are equal or differ in exactly two mutually reversed positions. Union those pairs; transitive chains form groups even when the chain endpoints are not directly similar.",
+    "update": "Two strings are directly similar if they are equal or differ in exactly two mutually reversed positions. Union those pairs; transitive chains form groups even when the chain endpoints are not directly similar.",
+    "done": "Count connected groups of anagram strings linked by one allowed character swap."
+  },
+  "edgeCases": [
+    "Repeated identical strings form one group",
+    "Two anagrams requiring more than one swap stay separate",
+    "One string starts and ends in one group"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

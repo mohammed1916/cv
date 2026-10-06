@@ -1,0 +1,31 @@
+{
+  "number": "827",
+  "title": "Making A Large Island",
+  "goal": "Find the largest island obtainable by changing at most one water cell into land.",
+  "strategy": "Union neighboring land, then consider each zero. Sum the sizes of its distinct adjacent island roots plus one; deduplication prevents counting one surrounding island repeatedly.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest island obtainable by changing at most one water cell into land.",
+    "inspect": "Union neighboring land, then consider each zero. Sum the sizes of its distinct adjacent island roots plus one; deduplication prevents counting one surrounding island repeatedly.",
+    "update": "Union neighboring land, then consider each zero. Sum the sizes of its distinct adjacent island roots plus one; deduplication prevents counting one surrounding island repeatedly.",
+    "done": "Find the largest island obtainable by changing at most one water cell into land."
+  },
+  "edgeCases": [
+    "All land already occupies the full area",
+    "All water gains exactly one land cell",
+    "The same surrounding island must not count four times"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

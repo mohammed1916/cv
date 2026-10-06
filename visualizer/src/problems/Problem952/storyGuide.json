@@ -1,0 +1,31 @@
+{
+  "number": "952",
+  "title": "Largest Component Size by Common Factor",
+  "goal": "Find the largest component when numbers are connected by a common factor greater than one.",
+  "strategy": "Factor each number into distinct primes. The first owner of each prime is a representative; union every later number carrying that prime. Transitive factor chains combine into full connected components.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest component when numbers are connected by a common factor greater than one.",
+    "inspect": "Factor each number into distinct primes. The first owner of each prime is a representative; union every later number carrying that prime. Transitive factor chains combine into full connected components.",
+    "update": "Factor each number into distinct primes. The first owner of each prime is a representative; union every later number carrying that prime. Transitive factor chains combine into full connected components.",
+    "done": "Find the largest component when numbers are connected by a common factor greater than one."
+  },
+  "edgeCases": [
+    "Distinct prime numbers are isolated",
+    "Prime powers share one component",
+    "One has no common factor greater than one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -6,8 +6,8 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1482 local routes, of which 1479 match catalog slugs
-or unique normalized titles. **2,594 catalog entries remain unmatched.** Route
+After the continued implementation there are 1502 local routes, of which 1499 match catalog slugs
+or unique normalized titles. **2,574 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
@@ -228,3 +228,5 @@ Latest user steering: after this batch, prioritize unwritten problems through #2
 The next related-problem batch adds 21 previously unwritten routes (16 database queries and five bit/string/math stories), with 84 original examples and complete Python/pseudocode. SQL is included for the database routes. Totals: 1,465 route-present entries through #2500, 1,035 gaps in that range, 492 complete collection Python implementations, and 721 cumulative unverified problems with 2,884 examples. This resumed run has 319 authored implementations (306 additions and 13 replacements), with 1,276 examples.
 
 Latest direction: group unwritten problems by algorithm family across the catalog for faster progress. The full catalog remains the goal; #2500 is an intermediate milestone. Existing implementation improvements stay deferred.
+
+A twenty-problem union-find family batch adds 80 original examples and complete Python/pseudocode: #685, #737, #765, #827, #839, #924, #928, #947, #952, #959, #990, #1168, #1319, #1627, #2421, #2492, #2685, #2709, #2948, and #3108. Shared union-by-size/path-compression code and component tables support distinct problem-specific logic. Coverage is now 1,481 through #2500 with 1,019 gaps, and 1,499 catalog matches overall. Complete collection Python coverage is 512. Cumulative unverified expansion: 741 problems / 2,964 examples. This resumed run: 339 implementations (326 additions, 13 replacements), 1,356 examples. No tests, builds, or browser checks were run.

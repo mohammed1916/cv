@@ -1,0 +1,31 @@
+{
+  "number": "737",
+  "title": "Sentence Similarity II",
+  "goal": "Decide whether two sentences match position by position under transitive word similarity.",
+  "strategy": "Union all supplied similar-word pairs into equivalence classes. Equal words match even without a pair; otherwise the two words at each position must belong to the same class.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether two sentences match position by position under transitive word similarity.",
+    "inspect": "Union all supplied similar-word pairs into equivalence classes. Equal words match even without a pair; otherwise the two words at each position must belong to the same class.",
+    "update": "Union all supplied similar-word pairs into equivalence classes. Equal words match even without a pair; otherwise the two words at each position must belong to the same class.",
+    "done": "Decide whether two sentences match position by position under transitive word similarity."
+  },
+  "edgeCases": [
+    "Identical unseen words need no pairs",
+    "Different sentence lengths cannot align",
+    "One unmatched position rejects the whole sentence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

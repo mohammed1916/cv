@@ -1,0 +1,31 @@
+{
+  "number": "765",
+  "title": "Couples Holding Hands",
+  "goal": "Find the minimum swaps of seated people needed to place every couple together.",
+  "strategy": "Treat each couple as one node and union the couple IDs sharing each seat pair. A component with k couples needs k-1 swaps, so the answer is total couples minus the number of components.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the minimum swaps of seated people needed to place every couple together.",
+    "inspect": "Treat each couple as one node and union the couple IDs sharing each seat pair. A component with k couples needs k-1 swaps, so the answer is total couples minus the number of components.",
+    "update": "Treat each couple as one node and union the couple IDs sharing each seat pair. A component with k couples needs k-1 swaps, so the answer is total couples minus the number of components.",
+    "done": "Find the minimum swaps of seated people needed to place every couple together."
+  },
+  "edgeCases": [
+    "Every couple is already seated together",
+    "One long couple cycle needs one fewer swap than couples",
+    "A single couple needs no swaps"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

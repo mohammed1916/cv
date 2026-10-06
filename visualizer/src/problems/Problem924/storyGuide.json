@@ -1,0 +1,31 @@
+{
+  "number": "924",
+  "title": "Minimize Malware Spread",
+  "goal": "Choose one initial infection to clear so the final malware spread is smallest.",
+  "strategy": "The graph remains intact. A connected component is saved only when it has exactly one initially infected node and that node is cleared. Maximize the saved component size, breaking ties by the smallest node index.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose one initial infection to clear so the final malware spread is smallest.",
+    "inspect": "The graph remains intact. A connected component is saved only when it has exactly one initially infected node and that node is cleared. Maximize the saved component size, breaking ties by the smallest node index.",
+    "update": "The graph remains intact. A connected component is saved only when it has exactly one initially infected node and that node is cleared. Maximize the saved component size, breaking ties by the smallest node index.",
+    "done": "Choose one initial infection to clear so the final malware spread is smallest."
+  },
+  "edgeCases": [
+    "Two infected nodes cannot save their shared component by clearing one",
+    "Equal saved sizes choose the smaller node index",
+    "A single infection can save its whole connected component"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

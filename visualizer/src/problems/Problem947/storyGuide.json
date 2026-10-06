@@ -1,0 +1,31 @@
+{
+  "number": "947",
+  "title": "Most Stones Removed with Same Row or Column",
+  "goal": "Remove as many stones as possible while every removed stone shares a row or column with another remaining stone.",
+  "strategy": "Union stones sharing a row or a column. Each connected component can be reduced to one stone by removing leaves of a spanning tree, but its final stone cannot be removed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove as many stones as possible while every removed stone shares a row or column with another remaining stone.",
+    "inspect": "Union stones sharing a row or a column. Each connected component can be reduced to one stone by removing leaves of a spanning tree, but its final stone cannot be removed.",
+    "update": "Union stones sharing a row or a column. Each connected component can be reduced to one stone by removing leaves of a spanning tree, but its final stone cannot be removed.",
+    "done": "Remove as many stones as possible while every removed stone shares a row or column with another remaining stone."
+  },
+  "edgeCases": [
+    "A single stone cannot be removed",
+    "Distinct rows and columns keep every stone isolated",
+    "One shared row permits all but one removal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

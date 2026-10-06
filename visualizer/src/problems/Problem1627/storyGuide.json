@@ -1,0 +1,31 @@
+{
+  "number": "1627",
+  "title": "Graph Connectivity With Threshold",
+  "goal": "Answer which city pairs are connected through links sharing a divisor greater than the threshold.",
+  "strategy": "For each divisor above the threshold, union it with all of its multiples. Those unions represent every qualifying common-divisor link and automatically capture paths through intermediate cities.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer which city pairs are connected through links sharing a divisor greater than the threshold.",
+    "inspect": "For each divisor above the threshold, union it with all of its multiples. Those unions represent every qualifying common-divisor link and automatically capture paths through intermediate cities.",
+    "update": "For each divisor above the threshold, union it with all of its multiples. Those unions represent every qualifying common-divisor link and automatically capture paths through intermediate cities.",
+    "done": "Answer which city pairs are connected through links sharing a divisor greater than the threshold."
+  },
+  "edgeCases": [
+    "Threshold zero makes every city share divisor one",
+    "Threshold n permits only self connectivity",
+    "A common divisor equal to the threshold does not qualify"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -44,10 +44,14 @@ import bitsAndText from './bitsAndTextBatch.js';
 import friendsAndRuns from './friendsAndRunsBatch.js';
 import recordSelection from './recordSelectionBatch.js';
 import relationalTransforms from './relationalTransformsBatch.js';
+import unionRelations from './unionRelationsBatch.js';
+import malwareComponents from './malwareComponentsBatch.js';
+import unionRegions from './unionRegionsBatch.js';
+import unionPaths from './unionPathsBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
 const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor,structuralHard,relational,geneticsAndDesign,gridAndExpression,partitionAndConstraint,streamAndSearch,trafficAndTree,queryAndTraversal,distributionAndRobot,requestsAndFrequency,palindromeAndMeeting,pathAndRanking,windowAndOrder,dependencyAndRecovery,stampAndSchedule,corridorAndEvidence,hashAndPainting,selectionAndBitset,capacityAndFrequency,rankAndConstruction,raceAndAncestry,pathsAndCoverage,updatesAndChoices,prefixAndEncryption,gardenAndProduct,transactionsAndCorners,earlyCanonical,structureCanonical];
-batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem,bitsAndText,friendsAndRuns,recordSelection,relationalTransforms);
+batches.push(rollingAndPalindrome,vacationPlanning,parentSuccessor,activityAndBonus,quadUnion,squirrelAndSquare,medianAndGroups,naryTraversal,tagAndFraction,fileSystem,bitsAndText,friendsAndRuns,recordSelection,relationalTransforms,unionRelations,malwareComponents,unionRegions,unionPaths);
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');

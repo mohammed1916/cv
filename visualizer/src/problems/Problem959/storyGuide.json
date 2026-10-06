@@ -1,0 +1,31 @@
+{
+  "number": "959",
+  "title": "Regions Cut By Slashes",
+  "goal": "Count regions formed by slash boundaries inside a square grid.",
+  "strategy": "Split each cell into top right bottom and left triangles. Join triangles across open internal space and shared neighboring cell edges. The remaining connected components are the regions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count regions formed by slash boundaries inside a square grid.",
+    "inspect": "Split each cell into top right bottom and left triangles. Join triangles across open internal space and shared neighboring cell edges. The remaining connected components are the regions.",
+    "update": "Split each cell into top right bottom and left triangles. Join triangles across open internal space and shared neighboring cell edges. The remaining connected components are the regions.",
+    "done": "Count regions formed by slash boundaries inside a square grid."
+  },
+  "edgeCases": [
+    "A blank grid has one connected region",
+    "A single slash splits one cell into two regions",
+    "Opposite slash corners enclose a central region"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

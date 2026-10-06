@@ -1,0 +1,31 @@
+{
+  "number": "2948",
+  "title": "Make Lexicographically Smallest Array by Swapping Elements",
+  "goal": "Produce the lexicographically smallest array using swaps of values differing by at most limit.",
+  "strategy": "Sort value-index pairs. Consecutive values separated by at most limit form a swappable component through a chain; larger gaps split components. Assign each component sorted values to its sorted original indices.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Produce the lexicographically smallest array using swaps of values differing by at most limit.",
+    "inspect": "Sort value-index pairs. Consecutive values separated by at most limit form a swappable component through a chain; larger gaps split components. Assign each component sorted values to its sorted original indices.",
+    "update": "Sort value-index pairs. Consecutive values separated by at most limit form a swappable component through a chain; larger gaps split components. Assign each component sorted values to its sorted original indices.",
+    "done": "Produce the lexicographically smallest array using swaps of values differing by at most limit."
+  },
+  "edgeCases": [
+    "A gap beyond the limit separates reorderable components",
+    "Equal values do not require a positive limit",
+    "A sufficiently large limit permits complete sorting"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
