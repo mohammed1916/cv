@@ -1,0 +1,31 @@
+{
+  "number": "2034",
+  "title": "Stock Price Fluctuation ",
+  "goal": "Maintain corrected stock prices and answer current, minimum, and maximum queries.",
+  "strategy": "Store the latest price per timestamp, overwriting corrections. Current means the greatest timestamp, while extrema must be computed from all corrected values rather than historical updates.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain corrected stock prices and answer current, minimum, and maximum queries.",
+    "inspect": "Store the latest price per timestamp, overwriting corrections. Current means the greatest timestamp, while extrema must be computed from all corrected values rather than historical updates.",
+    "update": "Store the latest price per timestamp, overwriting corrections. Current means the greatest timestamp, while extrema must be computed from all corrected values rather than historical updates.",
+    "done": "Maintain corrected stock prices and answer current, minimum, and maximum queries."
+  },
+  "edgeCases": [
+    "Replacing the only timestamp changes every query",
+    "The latest operation need not have the latest timestamp",
+    "Equal prices at distinct timestamps remain separate records"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2031",
+  "title": "Count Subarrays With More Ones Than Zeros",
+  "goal": "Count subarrays containing more ones than zeroes.",
+  "strategy": "Map one to +1 and zero to -1. A subarray has positive sum when its ending prefix is greater than its starting prefix; a Fenwick tree counts earlier prefixes strictly below the current value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays containing more ones than zeroes.",
+    "inspect": "Map one to +1 and zero to -1. A subarray has positive sum when its ending prefix is greater than its starting prefix; a Fenwick tree counts earlier prefixes strictly below the current value.",
+    "update": "Map one to +1 and zero to -1. A subarray has positive sum when its ending prefix is greater than its starting prefix; a Fenwick tree counts earlier prefixes strictly below the current value.",
+    "done": "Count subarrays containing more ones than zeroes."
+  },
+  "edgeCases": [
+    "All ones make every nonempty subarray valid",
+    "All zeroes produce no valid subarray",
+    "Equal prefix sums must not count ties"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

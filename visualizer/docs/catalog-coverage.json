@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1255,
-  "matchedCatalogRoutes": 1239,
-  "remaining": 2834,
+  "routes": 1270,
+  "matchedCatalogRoutes": 1254,
+  "remaining": 2819,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -14269,8 +14269,8 @@
       "number": "2025",
       "title": "Maximum Number of Ways to Partition an Array",
       "slug": "maximum-number-of-ways-to-partition-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2025"
     },
     {
       "number": "2026",
@@ -14283,99 +14283,99 @@
       "number": "2027",
       "title": "Minimum Moves to Convert String",
       "slug": "minimum-moves-to-convert-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2027"
     },
     {
       "number": "2028",
       "title": "Find Missing Observations",
       "slug": "find-missing-observations",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2028"
     },
     {
       "number": "2029",
       "title": "Stone Game IX",
       "slug": "stone-game-ix",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2029"
     },
     {
       "number": "2030",
       "title": "Smallest K-Length Subsequence With Occurrences of a Letter",
       "slug": "smallest-k-length-subsequence-with-occurrences-of-a-letter",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2030"
     },
     {
       "number": "2031",
       "title": "Count Subarrays With More Ones Than Zeros",
       "slug": "count-subarrays-with-more-ones-than-zeros",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2031"
     },
     {
       "number": "2032",
       "title": "Two Out of Three",
       "slug": "two-out-of-three",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2032"
     },
     {
       "number": "2033",
       "title": "Minimum Operations to Make a Uni-Value Grid",
       "slug": "minimum-operations-to-make-a-uni-value-grid",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2033"
     },
     {
       "number": "2034",
       "title": "Stock Price Fluctuation ",
       "slug": "stock-price-fluctuation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2034"
     },
     {
       "number": "2035",
       "title": "Partition Array Into Two Arrays to Minimize Sum Difference",
       "slug": "partition-array-into-two-arrays-to-minimize-sum-difference",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2035"
     },
     {
       "number": "2036",
       "title": "Maximum Alternating Subarray Sum",
       "slug": "maximum-alternating-subarray-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2036"
     },
     {
       "number": "2037",
       "title": "Minimum Number of Moves to Seat Everyone",
       "slug": "minimum-number-of-moves-to-seat-everyone",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2037"
     },
     {
       "number": "2038",
       "title": "Remove Colored Pieces if Both Neighbors are the Same Color",
       "slug": "remove-colored-pieces-if-both-neighbors-are-the-same-color",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2038"
     },
     {
       "number": "2039",
       "title": "The Time When the Network Becomes Idle",
       "slug": "the-time-when-the-network-becomes-idle",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2039"
     },
     {
       "number": "2040",
       "title": "Kth Smallest Product of Two Sorted Arrays",
       "slug": "kth-smallest-product-of-two-sorted-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2040"
     },
     {
       "number": "2041",

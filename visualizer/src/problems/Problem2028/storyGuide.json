@@ -1,0 +1,31 @@
+{
+  "number": "2028",
+  "title": "Find Missing Observations",
+  "goal": "Construct n missing die rolls that achieve the requested overall mean.",
+  "strategy": "The required missing sum is fixed by the total count and mean. It must lie between n and 6n; distribute it as evenly as possible using a quotient and remainder.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct n missing die rolls that achieve the requested overall mean.",
+    "inspect": "The required missing sum is fixed by the total count and mean. It must lie between n and 6n; distribute it as evenly as possible using a quotient and remainder.",
+    "update": "The required missing sum is fixed by the total count and mean. It must lie between n and 6n; distribute it as evenly as possible using a quotient and remainder.",
+    "done": "Construct n missing die rolls that achieve the requested overall mean."
+  },
+  "edgeCases": [
+    "The missing rolls must all be ones",
+    "The missing rolls must all be sixes",
+    "Requested mean exceeds the missing-roll capacity"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

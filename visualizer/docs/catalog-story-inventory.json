@@ -1,5 +1,5 @@
 {
-  "routes": 1255,
+  "routes": 1270,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -5624,6 +5624,42 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2025",
+      "number": "2025",
+      "title": "Maximum Number of Ways to Partition an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2027",
+      "number": "2027",
+      "title": "Minimum Moves to Convert String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2028",
+      "number": "2028",
+      "title": "Find Missing Observations",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2029",
+      "number": "2029",
+      "title": "Stone Game IX",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem203",
       "number": "203",
       "title": "Remove Linked List Elements",
@@ -5633,6 +5669,96 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem2030",
+      "number": "2030",
+      "title": "Smallest K-Length Subsequence With Occurrences of a Letter",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2031",
+      "number": "2031",
+      "title": "Count Subarrays With More Ones Than Zeros",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2032",
+      "number": "2032",
+      "title": "Two Out of Three",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2033",
+      "number": "2033",
+      "title": "Minimum Operations to Make a Uni-Value Grid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2034",
+      "number": "2034",
+      "title": "Stock Price Fluctuation ",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2035",
+      "number": "2035",
+      "title": "Partition Array Into Two Arrays to Minimize Sum Difference",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2036",
+      "number": "2036",
+      "title": "Maximum Alternating Subarray Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2037",
+      "number": "2037",
+      "title": "Minimum Number of Moves to Seat Everyone",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2038",
+      "number": "2038",
+      "title": "Remove Colored Pieces if Both Neighbors are the Same Color",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2039",
+      "number": "2039",
+      "title": "The Time When the Network Becomes Idle",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem204",
       "number": "204",
       "title": "Count Primes",
@@ -5640,6 +5766,15 @@
       "checks": 1,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2040",
+      "number": "2040",
+      "title": "Kth Smallest Product of Two Sorted Arrays",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem205",

@@ -1,0 +1,31 @@
+{
+  "number": "2036",
+  "title": "Maximum Alternating Subarray Sum",
+  "goal": "Maximize an alternating sum over a nonempty contiguous subarray.",
+  "strategy": "Track the best subarray ending here with its last term added or subtracted. A new added state may start at this value or extend a subtracted state; a subtracted state must extend the previous added state.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize an alternating sum over a nonempty contiguous subarray.",
+    "inspect": "Track the best subarray ending here with its last term added or subtracted. A new added state may start at this value or extend a subtracted state; a subtracted state must extend the previous added state.",
+    "update": "Track the best subarray ending here with its last term added or subtracted. A new added state may start at this value or extend a subtracted state; a subtracted state must extend the previous added state.",
+    "done": "Maximize an alternating sum over a nonempty contiguous subarray."
+  },
+  "edgeCases": [
+    "An even-length winner subtracts a negative value",
+    "All negative values still require a nonempty subarray",
+    "A single negative value is the only choice"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

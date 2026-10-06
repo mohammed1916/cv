@@ -1,0 +1,31 @@
+{
+  "number": "2037",
+  "title": "Minimum Number of Moves to Seat Everyone",
+  "goal": "Assign each student to one seat with minimum total movement.",
+  "strategy": "Sort both coordinate lists and pair them in order. Crossing assignments can be uncrossed without increasing total distance, so matching equal ranks is optimal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign each student to one seat with minimum total movement.",
+    "inspect": "Sort both coordinate lists and pair them in order. Crossing assignments can be uncrossed without increasing total distance, so matching equal ranks is optimal.",
+    "update": "Sort both coordinate lists and pair them in order. Crossing assignments can be uncrossed without increasing total distance, so matching equal ranks is optimal.",
+    "done": "Assign each student to one seat with minimum total movement."
+  },
+  "edgeCases": [
+    "Duplicate positions still represent distinct seats",
+    "Students already occupy all seat coordinates",
+    "One student travels to one seat"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

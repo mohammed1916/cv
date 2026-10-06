@@ -1,0 +1,31 @@
+{
+  "number": "2032",
+  "title": "Two Out of Three",
+  "goal": "Return values present in at least two of three arrays.",
+  "strategy": "Deduplicate each array before recording membership. A value needs two distinct source arrays, not merely two occurrences inside one array.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return values present in at least two of three arrays.",
+    "inspect": "Deduplicate each array before recording membership. A value needs two distinct source arrays, not merely two occurrences inside one array.",
+    "update": "Deduplicate each array before recording membership. A value needs two distinct source arrays, not merely two occurrences inside one array.",
+    "done": "Return values present in at least two of three arrays."
+  },
+  "edgeCases": [
+    "Many copies in one array are still one membership",
+    "Every value appears in all sources",
+    "Only two sources share a value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

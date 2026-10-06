@@ -1,0 +1,31 @@
+{
+  "number": "2030",
+  "title": "Smallest K-Length Subsequence With Occurrences of a Letter",
+  "goal": "Find the lexicographically smallest length-k subsequence containing enough copies of a required letter.",
+  "strategy": "Use a monotonic stack, but pop only if enough total characters and required letters remain to finish. Reserve available slots for still-needed required letters before accepting other characters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the lexicographically smallest length-k subsequence containing enough copies of a required letter.",
+    "inspect": "Use a monotonic stack, but pop only if enough total characters and required letters remain to finish. Reserve available slots for still-needed required letters before accepting other characters.",
+    "update": "Use a monotonic stack, but pop only if enough total characters and required letters remain to finish. Reserve available slots for still-needed required letters before accepting other characters.",
+    "done": "Find the lexicographically smallest length-k subsequence containing enough copies of a required letter."
+  },
+  "edgeCases": [
+    "Every output slot is reserved for the required letter",
+    "Taking the whole string forbids every deletion",
+    "A late required letter must keep an available slot"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

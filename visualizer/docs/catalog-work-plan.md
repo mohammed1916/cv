@@ -37,8 +37,9 @@ to 173 with 48 further examples. The next 24 additions bring complete Python cov
 Another 25 additions bring complete Python coverage to 222.
 Twelve structural/database additions bring complete Python coverage to 234.
 Eighteen subsequent additions bring complete Python coverage to 252.
-Current catalog coverage is 1,239 of 4,073; 2,834 entries remain unmatched
-across 1,255 local routes. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
+Fifteen further additions bring complete Python coverage to 267.
+Current catalog coverage is 1,254 of 4,073; 2,819 entries remain unmatched
+across 1,270 local routes. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.

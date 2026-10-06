@@ -3912,5 +3912,110 @@ export const collectionStoryMetadata = {
     "slug": "maximize-the-confusion-of-an-exam",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximize-the-confusion-of-an-exam/"
+  },
+  "2025": {
+    "number": "2025",
+    "title": "Maximum Number of Ways to Partition an Array",
+    "slug": "maximum-number-of-ways-to-partition-an-array",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/maximum-number-of-ways-to-partition-an-array/"
+  },
+  "2027": {
+    "number": "2027",
+    "title": "Minimum Moves to Convert String",
+    "slug": "minimum-moves-to-convert-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-moves-to-convert-string/"
+  },
+  "2028": {
+    "number": "2028",
+    "title": "Find Missing Observations",
+    "slug": "find-missing-observations",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-missing-observations/"
+  },
+  "2029": {
+    "number": "2029",
+    "title": "Stone Game IX",
+    "slug": "stone-game-ix",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/stone-game-ix/"
+  },
+  "2030": {
+    "number": "2030",
+    "title": "Smallest K-Length Subsequence With Occurrences of a Letter",
+    "slug": "smallest-k-length-subsequence-with-occurrences-of-a-letter",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/smallest-k-length-subsequence-with-occurrences-of-a-letter/"
+  },
+  "2031": {
+    "number": "2031",
+    "title": "Count Subarrays With More Ones Than Zeros",
+    "slug": "count-subarrays-with-more-ones-than-zeros",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-subarrays-with-more-ones-than-zeros/"
+  },
+  "2032": {
+    "number": "2032",
+    "title": "Two Out of Three",
+    "slug": "two-out-of-three",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/two-out-of-three/"
+  },
+  "2033": {
+    "number": "2033",
+    "title": "Minimum Operations to Make a Uni-Value Grid",
+    "slug": "minimum-operations-to-make-a-uni-value-grid",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-operations-to-make-a-uni-value-grid/"
+  },
+  "2034": {
+    "number": "2034",
+    "title": "Stock Price Fluctuation ",
+    "slug": "stock-price-fluctuation",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/stock-price-fluctuation/"
+  },
+  "2035": {
+    "number": "2035",
+    "title": "Partition Array Into Two Arrays to Minimize Sum Difference",
+    "slug": "partition-array-into-two-arrays-to-minimize-sum-difference",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/"
+  },
+  "2036": {
+    "number": "2036",
+    "title": "Maximum Alternating Subarray Sum",
+    "slug": "maximum-alternating-subarray-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-alternating-subarray-sum/"
+  },
+  "2037": {
+    "number": "2037",
+    "title": "Minimum Number of Moves to Seat Everyone",
+    "slug": "minimum-number-of-moves-to-seat-everyone",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-number-of-moves-to-seat-everyone/"
+  },
+  "2038": {
+    "number": "2038",
+    "title": "Remove Colored Pieces if Both Neighbors are the Same Color",
+    "slug": "remove-colored-pieces-if-both-neighbors-are-the-same-color",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/remove-colored-pieces-if-both-neighbors-are-the-same-color/"
+  },
+  "2039": {
+    "number": "2039",
+    "title": "The Time When the Network Becomes Idle",
+    "slug": "the-time-when-the-network-becomes-idle",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-time-when-the-network-becomes-idle/"
+  },
+  "2040": {
+    "number": "2040",
+    "title": "Kth Smallest Product of Two Sorted Arrays",
+    "slug": "kth-smallest-product-of-two-sorted-arrays",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/kth-smallest-product-of-two-sorted-arrays/"
   }
 };

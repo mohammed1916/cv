@@ -1,0 +1,31 @@
+{
+  "number": "2033",
+  "title": "Minimum Operations to Make a Uni-Value Grid",
+  "goal": "Make every grid value equal with the fewest additions or subtractions of x.",
+  "strategy": "Reachability requires every value to share the same remainder modulo x. Among reachable targets, a median minimizes the sum of absolute distances; divide those distances by x.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Make every grid value equal with the fewest additions or subtractions of x.",
+    "inspect": "Reachability requires every value to share the same remainder modulo x. Among reachable targets, a median minimizes the sum of absolute distances; divide those distances by x.",
+    "update": "Reachability requires every value to share the same remainder modulo x. Among reachable targets, a median minimizes the sum of absolute distances; divide those distances by x.",
+    "done": "Make every grid value equal with the fewest additions or subtractions of x."
+  },
+  "edgeCases": [
+    "Different remainders make equality impossible",
+    "All cells already agree",
+    "One cell needs no operations"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2035",
+  "title": "Partition Array Into Two Arrays to Minimize Sum Difference",
+  "goal": "Split an even-length array into two equally sized groups with minimum sum difference.",
+  "strategy": "Enumerate subset sums separately for each half, grouped by selected count. Pair complementary counts and binary-search the right-half sum closest to half the total minus the chosen left sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split an even-length array into two equally sized groups with minimum sum difference.",
+    "inspect": "Enumerate subset sums separately for each half, grouped by selected count. Pair complementary counts and binary-search the right-half sum closest to half the total minus the chosen left sum.",
+    "update": "Enumerate subset sums separately for each half, grouped by selected count. Pair complementary counts and binary-search the right-half sum closest to half the total minus the chosen left sum.",
+    "done": "Split an even-length array into two equally sized groups with minimum sum difference."
+  },
+  "edgeCases": [
+    "Two values form two singleton groups",
+    "Repeated equal values permit an exact balance",
+    "Odd total cannot be split into equal integer sums"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
