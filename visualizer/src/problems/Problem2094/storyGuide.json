@@ -1,0 +1,31 @@
+{
+  "number": "2094",
+  "title": "Finding 3-Digit Even Numbers",
+  "goal": "List every distinct three-digit even number constructible from the digit occurrences.",
+  "strategy": "Enumerate numeric positions in ascending order. The hundreds digit cannot be zero, the units digit must be even, and repeated digits consume separate occurrences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List every distinct three-digit even number constructible from the digit occurrences.",
+    "inspect": "Enumerate numeric positions in ascending order. The hundreds digit cannot be zero, the units digit must be even, and repeated digits consume separate occurrences.",
+    "update": "Enumerate numeric positions in ascending order. The hundreds digit cannot be zero, the units digit must be even, and repeated digits consume separate occurrences.",
+    "done": "List every distinct three-digit even number constructible from the digit occurrences."
+  },
+  "edgeCases": [
+    "Zero cannot lead but may occupy both other slots",
+    "Repeated positions require separate digit occurrences",
+    "All odd digits leave no even ending"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

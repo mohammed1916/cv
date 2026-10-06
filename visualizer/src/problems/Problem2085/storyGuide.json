@@ -1,0 +1,31 @@
+{
+  "number": "2085",
+  "title": "Count Common Words With One Occurrence",
+  "goal": "Count words appearing exactly once in each of two arrays.",
+  "strategy": "Build separate frequency tables. A word qualifies only when both final counts are one, so repetition in either source disqualifies it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count words appearing exactly once in each of two arrays.",
+    "inspect": "Build separate frequency tables. A word qualifies only when both final counts are one, so repetition in either source disqualifies it.",
+    "update": "Build separate frequency tables. A word qualifies only when both final counts are one, so repetition in either source disqualifies it.",
+    "done": "Count words appearing exactly once in each of two arrays."
+  },
+  "edgeCases": [
+    "A word repeated only in the first source does not qualify",
+    "The sources have no common word",
+    "One shared singleton word"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2097",
+  "title": "Valid Arrangement of Pairs",
+  "goal": "Arrange all directed pairs into one continuous edge trail.",
+  "strategy": "Hierholzer follows unused outgoing edges until stuck, then writes vertices during backtracking. Reversing that postorder splices every excursion into a trail using each pair once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Arrange all directed pairs into one continuous edge trail.",
+    "inspect": "Hierholzer follows unused outgoing edges until stuck, then writes vertices during backtracking. Reversing that postorder splices every excursion into a trail using each pair once.",
+    "update": "Hierholzer follows unused outgoing edges until stuck, then writes vertices during backtracking. Reversing that postorder splices every excursion into a trail using each pair once.",
+    "done": "Arrange all directed pairs into one continuous edge trail."
+  },
+  "edgeCases": [
+    "A balanced directed cycle can start at any origin",
+    "One pair is already a complete arrangement",
+    "Input order does not identify the required first edge"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

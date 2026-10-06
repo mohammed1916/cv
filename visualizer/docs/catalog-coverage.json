@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1304,
-  "matchedCatalogRoutes": 1288,
-  "remaining": 2785,
+  "routes": 1324,
+  "matchedCatalogRoutes": 1308,
+  "remaining": 2765,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -14661,8 +14661,8 @@
       "number": "2081",
       "title": "Sum of k-Mirror Numbers",
       "slug": "sum-of-k-mirror-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2081"
     },
     {
       "number": "2082",
@@ -14675,8 +14675,8 @@
       "number": "2083",
       "title": "Substrings That Begin and End With the Same Letter",
       "slug": "substrings-that-begin-and-end-with-the-same-letter",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2083"
     },
     {
       "number": "2084",
@@ -14689,127 +14689,127 @@
       "number": "2085",
       "title": "Count Common Words With One Occurrence",
       "slug": "count-common-words-with-one-occurrence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2085"
     },
     {
       "number": "2086",
       "title": "Minimum Number of Food Buckets to Feed the Hamsters",
       "slug": "minimum-number-of-food-buckets-to-feed-the-hamsters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2086"
     },
     {
       "number": "2087",
       "title": "Minimum Cost Homecoming of a Robot in a Grid",
       "slug": "minimum-cost-homecoming-of-a-robot-in-a-grid",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2087"
     },
     {
       "number": "2088",
       "title": "Count Fertile Pyramids in a Land",
       "slug": "count-fertile-pyramids-in-a-land",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2088"
     },
     {
       "number": "2089",
       "title": "Find Target Indices After Sorting Array",
       "slug": "find-target-indices-after-sorting-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2089"
     },
     {
       "number": "2090",
       "title": "K Radius Subarray Averages",
       "slug": "k-radius-subarray-averages",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2090"
     },
     {
       "number": "2091",
       "title": "Removing Minimum and Maximum From Array",
       "slug": "removing-minimum-and-maximum-from-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2091"
     },
     {
       "number": "2092",
       "title": "Find All People With Secret",
       "slug": "find-all-people-with-secret",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2092"
     },
     {
       "number": "2093",
       "title": "Minimum Cost to Reach City With Discounts",
       "slug": "minimum-cost-to-reach-city-with-discounts",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2093"
     },
     {
       "number": "2094",
       "title": "Finding 3-Digit Even Numbers",
       "slug": "finding-3-digit-even-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2094"
     },
     {
       "number": "2095",
       "title": "Delete the Middle Node of a Linked List",
       "slug": "delete-the-middle-node-of-a-linked-list",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2095"
     },
     {
       "number": "2096",
       "title": "Step-By-Step Directions From a Binary Tree Node to Another",
       "slug": "step-by-step-directions-from-a-binary-tree-node-to-another",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2096"
     },
     {
       "number": "2097",
       "title": "Valid Arrangement of Pairs",
       "slug": "valid-arrangement-of-pairs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2097"
     },
     {
       "number": "2098",
       "title": "Subsequence of Size K With the Largest Even Sum",
       "slug": "subsequence-of-size-k-with-the-largest-even-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2098"
     },
     {
       "number": "2099",
       "title": "Find Subsequence of Length K With the Largest Sum",
       "slug": "find-subsequence-of-length-k-with-the-largest-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2099"
     },
     {
       "number": "2100",
       "title": "Find Good Days to Rob the Bank",
       "slug": "find-good-days-to-rob-the-bank",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2100"
     },
     {
       "number": "2101",
       "title": "Detonate the Maximum Bombs",
       "slug": "detonate-the-maximum-bombs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2101"
     },
     {
       "number": "2102",
       "title": "Sequentially Ordinal Rank Tracker",
       "slug": "sequentially-ordinal-rank-tracker",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2102"
     },
     {
       "number": "2103",

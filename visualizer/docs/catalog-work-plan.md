@@ -40,8 +40,8 @@ Eighteen subsequent additions bring complete Python coverage to 252.
 Fifteen further additions bring complete Python coverage to 267.
 Twenty further additions bring complete Python coverage to 287.
 Fourteen subsequent additions bring complete Python coverage to 301.
-Current catalog coverage is 1,288 of 4,073; 2,785 entries remain unmatched
-across 1,304 local routes. New linked-list stories reuse LinkedListGraph and a
+Current catalog coverage is 1,308 of 4,073; 2,765 entries remain unmatched
+across 1,324 local routes. New linked-list stories reuse LinkedListGraph and a
 shared stable-ID snapshot helper. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
@@ -54,6 +54,8 @@ continue through the same explicit-definition registration path.
 
 Runtime validation, browser interactions, and final correctness review remain
 outstanding. Skipping checks accelerates source authoring, not verification.
+
+Twenty further palindrome, meeting, path, tree, and ranking problems add 80 original examples, bringing this resumed run to 148 additions and 592 examples. Complete collection Python coverage is now 321. Tree paths reuse TreeDiagram; bomb chains extend the shared Cartesian scene with radius geometry. All remain unverified.
 
 ## Machine-readable progress
 

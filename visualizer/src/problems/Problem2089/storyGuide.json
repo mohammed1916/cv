@@ -1,0 +1,31 @@
+{
+  "number": "2089",
+  "title": "Find Target Indices After Sorting Array",
+  "goal": "Return target positions after sorting the array.",
+  "strategy": "Sorting is unnecessary: count values smaller than target and values equal to it. Those counts define the consecutive block of target indices in sorted order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return target positions after sorting the array.",
+    "inspect": "Sorting is unnecessary: count values smaller than target and values equal to it. Those counts define the consecutive block of target indices in sorted order.",
+    "update": "Sorting is unnecessary: count values smaller than target and values equal to it. Those counts define the consecutive block of target indices in sorted order.",
+    "done": "Return target positions after sorting the array."
+  },
+  "edgeCases": [
+    "An absent target has no indices",
+    "All values equal the target",
+    "The target is the smallest value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

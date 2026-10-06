@@ -1,0 +1,31 @@
+{
+  "number": "2101",
+  "title": "Detonate the Maximum Bombs",
+  "goal": "Find the largest chain reaction triggered by a single bomb.",
+  "strategy": "Reach is directed: one bomb may cover another without being covered in return. Build edges with squared-distance comparisons, then explore the reachable set from each possible starting bomb.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest chain reaction triggered by a single bomb.",
+    "inspect": "Reach is directed: one bomb may cover another without being covered in return. Build edges with squared-distance comparisons, then explore the reachable set from each possible starting bomb.",
+    "update": "Reach is directed: one bomb may cover another without being covered in return. Build edges with squared-distance comparisons, then explore the reachable set from each possible starting bomb.",
+    "done": "Find the largest chain reaction triggered by a single bomb."
+  },
+  "edgeCases": [
+    "Reach in one direction need not work in reverse",
+    "Isolated bombs only detonate themselves",
+    "Coincident centers remain separate bombs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

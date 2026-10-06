@@ -6,11 +6,13 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1304 local routes, of which 1288 match catalog slugs
-or unique normalized titles. **2,785 catalog entries remain unmatched.** Route
+After the continued implementation there are 1324 local routes, of which 1308 match catalog slugs
+or unique normalized titles. **2,765 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
+
+Twenty further palindrome, meeting, path, tree, and ranking problems add 80 original examples, bringing this resumed run to 148 additions and 592 examples. Complete collection Python coverage is now 321. Tree paths reuse TreeDiagram; bomb chains extend the shared Cartesian scene with radius geometry. All remain unverified.
 
 ## Latest completed trie batch
 
@@ -58,9 +60,9 @@ The resumed run totals 128 problems and 512 original examples.
 
 ## Added in this batch
 
-### Current unverified continuation: 530 additional problems
+### Current unverified continuation: 550 additional problems
 
-This continuation adds 530 explicit algorithms with 2,120 original example inputs
+This continuation adds 550 explicit algorithms with 2,200 original example inputs
 across scanning, strings, counting, windows, prefix sums, matrix DP, connectivity,
 topological traversal, and backtracking. Full IDs are recorded in
 `unverified-expansion.json`. Each route uses the existing collection workspace

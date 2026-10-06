@@ -1,0 +1,31 @@
+{
+  "number": "2086",
+  "title": "Minimum Number of Food Buckets to Feed the Hamsters",
+  "goal": "Place the fewest food buckets so every hamster has an adjacent bucket.",
+  "strategy": "Reuse a bucket immediately to the left when possible. Otherwise prefer placing one on the right, where it may also serve the next hamster; use the left empty cell only as a fallback.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Place the fewest food buckets so every hamster has an adjacent bucket.",
+    "inspect": "Reuse a bucket immediately to the left when possible. Otherwise prefer placing one on the right, where it may also serve the next hamster; use the left empty cell only as a fallback.",
+    "update": "Reuse a bucket immediately to the left when possible. Otherwise prefer placing one on the right, where it may also serve the next hamster; use the left empty cell only as a fallback.",
+    "done": "Place the fewest food buckets so every hamster has an adjacent bucket."
+  },
+  "edgeCases": [
+    "An interior hamster trapped by neighbors is impossible",
+    "A final hamster must use its left neighbor",
+    "No hamster needs a bucket"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

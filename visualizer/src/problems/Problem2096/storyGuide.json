@@ -1,0 +1,31 @@
+{
+  "number": "2096",
+  "title": "Step-By-Step Directions From a Binary Tree Node to Another",
+  "goal": "Describe the shortest route between two tree nodes using U L and R.",
+  "strategy": "Root-to-node paths share their route through the lowest common ancestor. Remove that common prefix, go up for the remaining start path, then follow the remaining destination path.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Describe the shortest route between two tree nodes using U L and R.",
+    "inspect": "Root-to-node paths share their route through the lowest common ancestor. Remove that common prefix, go up for the remaining start path, then follow the remaining destination path.",
+    "update": "Root-to-node paths share their route through the lowest common ancestor. Remove that common prefix, go up for the remaining start path, then follow the remaining destination path.",
+    "done": "Describe the shortest route between two tree nodes using U L and R."
+  },
+  "edgeCases": [
+    "Start is the root so no upward step is needed",
+    "Destination is an ancestor of the start",
+    "A skewed tree preserves missing child positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

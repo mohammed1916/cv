@@ -1,5 +1,5 @@
 {
-  "routes": 1304,
+  "routes": 1324,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -6119,6 +6119,69 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem2081",
+      "number": "2081",
+      "title": "Sum of k-Mirror Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2083",
+      "number": "2083",
+      "title": "Substrings That Begin and End With the Same Letter",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2085",
+      "number": "2085",
+      "title": "Count Common Words With One Occurrence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2086",
+      "number": "2086",
+      "title": "Minimum Number of Food Buckets to Feed the Hamsters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2087",
+      "number": "2087",
+      "title": "Minimum Cost Homecoming of a Robot in a Grid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2088",
+      "number": "2088",
+      "title": "Count Fertile Pyramids in a Land",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2089",
+      "number": "2089",
+      "title": "Find Target Indices After Sorting Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem209",
       "number": "209",
       "title": "Minimum Size Subarray Sum",
@@ -6126,6 +6189,96 @@
       "checks": 0,
       "rules": 3,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2090",
+      "number": "2090",
+      "title": "K Radius Subarray Averages",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2091",
+      "number": "2091",
+      "title": "Removing Minimum and Maximum From Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2092",
+      "number": "2092",
+      "title": "Find All People With Secret",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2093",
+      "number": "2093",
+      "title": "Minimum Cost to Reach City With Discounts",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2094",
+      "number": "2094",
+      "title": "Finding 3-Digit Even Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2095",
+      "number": "2095",
+      "title": "Delete the Middle Node of a Linked List",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2096",
+      "number": "2096",
+      "title": "Step-By-Step Directions From a Binary Tree Node to Another",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2097",
+      "number": "2097",
+      "title": "Valid Arrangement of Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2098",
+      "number": "2098",
+      "title": "Subsequence of Size K With the Largest Even Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2099",
+      "number": "2099",
+      "title": "Find Subsequence of Length K With the Largest Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem21",
@@ -6144,6 +6297,33 @@
       "checks": 0,
       "rules": 2,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem2100",
+      "number": "2100",
+      "title": "Find Good Days to Rob the Bank",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2101",
+      "number": "2101",
+      "title": "Detonate the Maximum Bombs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2102",
+      "number": "2102",
+      "title": "Sequentially Ordinal Rank Tracker",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem211",

@@ -1,0 +1,31 @@
+{
+  "number": "2087",
+  "title": "Minimum Cost Homecoming of a Robot in a Grid",
+  "goal": "Return a robot home with minimum entered-row and entered-column cost.",
+  "strategy": "Any route must cross every intervening row and column. With nonnegative entry costs, a monotone route pays each required crossing once and avoids unnecessary detours.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return a robot home with minimum entered-row and entered-column cost.",
+    "inspect": "Any route must cross every intervening row and column. With nonnegative entry costs, a monotone route pays each required crossing once and avoids unnecessary detours.",
+    "update": "Any route must cross every intervening row and column. With nonnegative entry costs, a monotone route pays each required crossing once and avoids unnecessary detours.",
+    "done": "Return a robot home with minimum entered-row and entered-column cost."
+  },
+  "edgeCases": [
+    "Starting at home costs nothing",
+    "Only row costs are needed",
+    "Zero-cost required crossings remain free"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

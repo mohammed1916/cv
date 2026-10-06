@@ -1,0 +1,31 @@
+{
+  "number": "2093",
+  "title": "Minimum Cost to Reach City With Discounts",
+  "goal": "Reach the last city at minimum toll while spending at most the available discounts.",
+  "strategy": "A city alone is not a complete state: arriving with discounts left can be more useful than arriving slightly cheaper without them. Run Dijkstra on city and discounts-used pairs.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach the last city at minimum toll while spending at most the available discounts.",
+    "inspect": "A city alone is not a complete state: arriving with discounts left can be more useful than arriving slightly cheaper without them. Run Dijkstra on city and discounts-used pairs.",
+    "update": "A city alone is not a complete state: arriving with discounts left can be more useful than arriving slightly cheaper without them. Run Dijkstra on city and discounts-used pairs.",
+    "done": "Reach the last city at minimum toll while spending at most the available discounts."
+  },
+  "edgeCases": [
+    "No discount reduces to ordinary shortest paths",
+    "An odd toll is halved with integer rounding",
+    "Disconnected destination cannot be reached"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

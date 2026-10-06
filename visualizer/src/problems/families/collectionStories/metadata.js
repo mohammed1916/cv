@@ -4255,5 +4255,145 @@ export const collectionStoryMetadata = {
     "slug": "range-frequency-queries",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/range-frequency-queries/"
+  },
+  "2081": {
+    "number": "2081",
+    "title": "Sum of k-Mirror Numbers",
+    "slug": "sum-of-k-mirror-numbers",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/sum-of-k-mirror-numbers/"
+  },
+  "2083": {
+    "number": "2083",
+    "title": "Substrings That Begin and End With the Same Letter",
+    "slug": "substrings-that-begin-and-end-with-the-same-letter",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/substrings-that-begin-and-end-with-the-same-letter/"
+  },
+  "2085": {
+    "number": "2085",
+    "title": "Count Common Words With One Occurrence",
+    "slug": "count-common-words-with-one-occurrence",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-common-words-with-one-occurrence/"
+  },
+  "2086": {
+    "number": "2086",
+    "title": "Minimum Number of Food Buckets to Feed the Hamsters",
+    "slug": "minimum-number-of-food-buckets-to-feed-the-hamsters",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-food-buckets-to-feed-the-hamsters/"
+  },
+  "2087": {
+    "number": "2087",
+    "title": "Minimum Cost Homecoming of a Robot in a Grid",
+    "slug": "minimum-cost-homecoming-of-a-robot-in-a-grid",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-cost-homecoming-of-a-robot-in-a-grid/"
+  },
+  "2088": {
+    "number": "2088",
+    "title": "Count Fertile Pyramids in a Land",
+    "slug": "count-fertile-pyramids-in-a-land",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/count-fertile-pyramids-in-a-land/"
+  },
+  "2089": {
+    "number": "2089",
+    "title": "Find Target Indices After Sorting Array",
+    "slug": "find-target-indices-after-sorting-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-target-indices-after-sorting-array/"
+  },
+  "2090": {
+    "number": "2090",
+    "title": "K Radius Subarray Averages",
+    "slug": "k-radius-subarray-averages",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/k-radius-subarray-averages/"
+  },
+  "2091": {
+    "number": "2091",
+    "title": "Removing Minimum and Maximum From Array",
+    "slug": "removing-minimum-and-maximum-from-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/removing-minimum-and-maximum-from-array/"
+  },
+  "2092": {
+    "number": "2092",
+    "title": "Find All People With Secret",
+    "slug": "find-all-people-with-secret",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/find-all-people-with-secret/"
+  },
+  "2093": {
+    "number": "2093",
+    "title": "Minimum Cost to Reach City With Discounts",
+    "slug": "minimum-cost-to-reach-city-with-discounts",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-cost-to-reach-city-with-discounts/"
+  },
+  "2094": {
+    "number": "2094",
+    "title": "Finding 3-Digit Even Numbers",
+    "slug": "finding-3-digit-even-numbers",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/finding-3-digit-even-numbers/"
+  },
+  "2095": {
+    "number": "2095",
+    "title": "Delete the Middle Node of a Linked List",
+    "slug": "delete-the-middle-node-of-a-linked-list",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/"
+  },
+  "2096": {
+    "number": "2096",
+    "title": "Step-By-Step Directions From a Binary Tree Node to Another",
+    "slug": "step-by-step-directions-from-a-binary-tree-node-to-another",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/"
+  },
+  "2097": {
+    "number": "2097",
+    "title": "Valid Arrangement of Pairs",
+    "slug": "valid-arrangement-of-pairs",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/valid-arrangement-of-pairs/"
+  },
+  "2098": {
+    "number": "2098",
+    "title": "Subsequence of Size K With the Largest Even Sum",
+    "slug": "subsequence-of-size-k-with-the-largest-even-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/subsequence-of-size-k-with-the-largest-even-sum/"
+  },
+  "2099": {
+    "number": "2099",
+    "title": "Find Subsequence of Length K With the Largest Sum",
+    "slug": "find-subsequence-of-length-k-with-the-largest-sum",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-subsequence-of-length-k-with-the-largest-sum/"
+  },
+  "2100": {
+    "number": "2100",
+    "title": "Find Good Days to Rob the Bank",
+    "slug": "find-good-days-to-rob-the-bank",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-good-days-to-rob-the-bank/"
+  },
+  "2101": {
+    "number": "2101",
+    "title": "Detonate the Maximum Bombs",
+    "slug": "detonate-the-maximum-bombs",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/detonate-the-maximum-bombs/"
+  },
+  "2102": {
+    "number": "2102",
+    "title": "Sequentially Ordinal Rank Tracker",
+    "slug": "sequentially-ordinal-rank-tracker",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/sequentially-ordinal-rank-tracker/"
   }
 };
