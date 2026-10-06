@@ -6,8 +6,8 @@ The public `https://leetcode.com/api/problems/all/` endpoint returned 4,073
 entries on 2026-10-05. The earlier refresh script requested only the algorithms
 category; it now requests the complete catalog, including database problems.
 
-After the continued implementation there are 1461 local routes, of which 1458 match catalog slugs
-or unique normalized titles. **2,615 catalog entries remain unmatched.** Route
+After the continued implementation there are 1482 local routes, of which 1479 match catalog slugs
+or unique normalized titles. **2,594 catalog entries remain unmatched.** Route
 presence does not certify every old implementation. See `catalog-coverage.json`
 for the complete per-problem inventory, legacy number differences, and unmatched
 local routes. Run `npm run audit:catalog` to regenerate it.
@@ -224,3 +224,7 @@ can reduce duplication without marking unimplemented algorithms as complete.
 Twenty canonical gaps from #505 through #596 now have explicit shared stories, complete Python and pseudocode, and 80 original examples. Eight database stories also include SQL. This batch added twelve routes and replaced eight existing entrypoints; it remains unverified. The resumed run now totals 298 authored implementations (285 added routes and 13 replacements) and 1,192 examples. Complete collection Python coverage is 471. The cumulative unverified expansion contains 700 problems and 2,800 examples.
 
 Latest user steering: after this batch, prioritize unwritten problems through #2500 and defer improvements to existing visualizers. The range inventory has 1,444 route-present entries and 1,056 missing entries; route presence does not certify runtime behavior.
+
+The next related-problem batch adds 21 previously unwritten routes (16 database queries and five bit/string/math stories), with 84 original examples and complete Python/pseudocode. SQL is included for the database routes. Totals: 1,465 route-present entries through #2500, 1,035 gaps in that range, 492 complete collection Python implementations, and 721 cumulative unverified problems with 2,884 examples. This resumed run has 319 authored implementations (306 additions and 13 replacements), with 1,276 examples.
+
+Latest direction: group unwritten problems by algorithm family across the catalog for faster progress. The full catalog remains the goal; #2500 is an intermediate milestone. Existing implementation improvements stay deferred.

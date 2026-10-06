@@ -210,6 +210,153 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/classes-with-at-least-5-students/"
   },
+  "597": {
+    "number": "597",
+    "title": "Friend Requests I: Overall Acceptance Rate",
+    "slug": "friend-requests-i-overall-acceptance-rate",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/"
+  },
+  "600": {
+    "number": "600",
+    "title": "Non-negative Integers without Consecutive Ones",
+    "slug": "non-negative-integers-without-consecutive-ones",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/"
+  },
+  "601": {
+    "number": "601",
+    "title": "Human Traffic of Stadium",
+    "slug": "human-traffic-of-stadium",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/human-traffic-of-stadium/"
+  },
+  "602": {
+    "number": "602",
+    "title": "Friend Requests II: Who Has the Most Friends",
+    "slug": "friend-requests-ii-who-has-the-most-friends",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/"
+  },
+  "603": {
+    "number": "603",
+    "title": "Consecutive Available Seats",
+    "slug": "consecutive-available-seats",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/consecutive-available-seats/"
+  },
+  "604": {
+    "number": "604",
+    "title": "Design Compressed String Iterator",
+    "slug": "design-compressed-string-iterator",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/design-compressed-string-iterator/"
+  },
+  "607": {
+    "number": "607",
+    "title": "Sales Person",
+    "slug": "sales-person",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/sales-person/"
+  },
+  "608": {
+    "number": "608",
+    "title": "Tree Node",
+    "slug": "tree-node",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/tree-node/"
+  },
+  "609": {
+    "number": "609",
+    "title": "Find Duplicate File in System",
+    "slug": "find-duplicate-file-in-system",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-duplicate-file-in-system/"
+  },
+  "610": {
+    "number": "610",
+    "title": "Triangle Judgement",
+    "slug": "triangle-judgement",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/triangle-judgement/"
+  },
+  "612": {
+    "number": "612",
+    "title": "Shortest Distance in a Plane",
+    "slug": "shortest-distance-in-a-plane",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/shortest-distance-in-a-plane/"
+  },
+  "613": {
+    "number": "613",
+    "title": "Shortest Distance in a Line",
+    "slug": "shortest-distance-in-a-line",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/shortest-distance-in-a-line/"
+  },
+  "614": {
+    "number": "614",
+    "title": "Second Degree Follower",
+    "slug": "second-degree-follower",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/second-degree-follower/"
+  },
+  "615": {
+    "number": "615",
+    "title": "Average Salary: Departments VS Company",
+    "slug": "average-salary-departments-vs-company",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/average-salary-departments-vs-company/"
+  },
+  "616": {
+    "number": "616",
+    "title": "Add Bold Tag in String",
+    "slug": "add-bold-tag-in-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/add-bold-tag-in-string/"
+  },
+  "618": {
+    "number": "618",
+    "title": "Students Report By Geography",
+    "slug": "students-report-by-geography",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/students-report-by-geography/"
+  },
+  "619": {
+    "number": "619",
+    "title": "Biggest Single Number",
+    "slug": "biggest-single-number",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/biggest-single-number/"
+  },
+  "620": {
+    "number": "620",
+    "title": "Not Boring Movies",
+    "slug": "not-boring-movies",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/not-boring-movies/"
+  },
+  "625": {
+    "number": "625",
+    "title": "Minimum Factorization",
+    "slug": "minimum-factorization",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-factorization/"
+  },
+  "626": {
+    "number": "626",
+    "title": "Exchange Seats",
+    "slug": "exchange-seats",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/exchange-seats/"
+  },
+  "627": {
+    "number": "627",
+    "title": "Swap Sex of Employees",
+    "slug": "swap-sex-of-employees",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/swap-sex-of-employees/"
+  },
   "648": {
     "number": "648",
     "title": "Replace Words",

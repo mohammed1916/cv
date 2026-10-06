@@ -1,0 +1,31 @@
+{
+  "number": "614",
+  "title": "Second Degree Follower",
+  "goal": "Count followers of users who themselves follow at least one other user.",
+  "strategy": "The same person plays two different roles: they must appear as a follower somewhere, and their own follower count comes from rows where they are the followee. Keep only people present in both roles.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count followers of users who themselves follow at least one other user.",
+    "inspect": "The same person plays two different roles: they must appear as a follower somewhere, and their own follower count comes from rows where they are the followee. Keep only people present in both roles.",
+    "update": "The same person plays two different roles: they must appear as a follower somewhere, and their own follower count comes from rows where they are the followee. Keep only people present in both roles.",
+    "done": "Count followers of users who themselves follow at least one other user."
+  },
+  "edgeCases": [
+    "A simple chain has one second-degree user",
+    "A star has no user in both roles",
+    "Mutual followers both satisfy the role condition"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

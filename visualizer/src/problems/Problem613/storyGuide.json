@@ -1,0 +1,31 @@
+{
+  "number": "613",
+  "title": "Shortest Distance in a Line",
+  "goal": "Find the shortest distance between two distinct points on a line.",
+  "strategy": "After sorting coordinates, the closest pair must be adjacent: any point between a wider pair creates a no-larger gap. Compare only neighboring sorted coordinates.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest distance between two distinct points on a line.",
+    "inspect": "After sorting coordinates, the closest pair must be adjacent: any point between a wider pair creates a no-larger gap. Compare only neighboring sorted coordinates.",
+    "update": "After sorting coordinates, the closest pair must be adjacent: any point between a wider pair creates a no-larger gap. Compare only neighboring sorted coordinates.",
+    "done": "Find the shortest distance between two distinct points on a line."
+  },
+  "edgeCases": [
+    "Two coordinates have one candidate gap",
+    "Equal minimum gaps can occur several times",
+    "The smallest gap can occur at the far end"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

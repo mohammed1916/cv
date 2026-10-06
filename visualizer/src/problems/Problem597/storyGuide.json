@@ -1,0 +1,31 @@
+{
+  "number": "597",
+  "title": "Friend Requests I: Overall Acceptance Rate",
+  "goal": "Compute the overall acceptance rate using distinct directed request and acceptance pairs.",
+  "strategy": "Repeated records for the same sender and receiver count once, regardless of date. Divide distinct accepted pairs by distinct requested pairs, round to two decimals, and return zero if there are no requests.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the overall acceptance rate using distinct directed request and acceptance pairs.",
+    "inspect": "Repeated records for the same sender and receiver count once, regardless of date. Divide distinct accepted pairs by distinct requested pairs, round to two decimals, and return zero if there are no requests.",
+    "update": "Repeated records for the same sender and receiver count once, regardless of date. Divide distinct accepted pairs by distinct requested pairs, round to two decimals, and return zero if there are no requests.",
+    "done": "Compute the overall acceptance rate using distinct directed request and acceptance pairs."
+  },
+  "edgeCases": [
+    "No requests yields zero instead of division by zero",
+    "Unaccepted requests contribute only to the denominator",
+    "One accepted pair out of three requires decimal rounding"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

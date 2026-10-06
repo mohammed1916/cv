@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1461,
-  "matchedCatalogRoutes": 1458,
-  "remaining": 2615,
+  "routes": 1482,
+  "matchedCatalogRoutes": 1479,
+  "remaining": 2594,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -4201,8 +4201,8 @@
       "number": "597",
       "title": "Friend Requests I: Overall Acceptance Rate",
       "slug": "friend-requests-i-overall-acceptance-rate",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem597"
     },
     {
       "number": "598",
@@ -4222,36 +4222,36 @@
       "number": "600",
       "title": "Non-negative Integers without Consecutive Ones",
       "slug": "non-negative-integers-without-consecutive-ones",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem600"
     },
     {
       "number": "601",
       "title": "Human Traffic of Stadium",
       "slug": "human-traffic-of-stadium",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem601"
     },
     {
       "number": "602",
       "title": "Friend Requests II: Who Has the Most Friends",
       "slug": "friend-requests-ii-who-has-the-most-friends",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem602"
     },
     {
       "number": "603",
       "title": "Consecutive Available Seats",
       "slug": "consecutive-available-seats",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem603"
     },
     {
       "number": "604",
       "title": "Design Compressed String Iterator",
       "slug": "design-compressed-string-iterator",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem604"
     },
     {
       "number": "605",
@@ -4271,29 +4271,29 @@
       "number": "607",
       "title": "Sales Person",
       "slug": "sales-person",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem607"
     },
     {
       "number": "608",
       "title": "Tree Node",
       "slug": "tree-node",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem608"
     },
     {
       "number": "609",
       "title": "Find Duplicate File in System",
       "slug": "find-duplicate-file-in-system",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem609"
     },
     {
       "number": "610",
       "title": "Triangle Judgement",
       "slug": "triangle-judgement",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem610"
     },
     {
       "number": "611",
@@ -4306,36 +4306,36 @@
       "number": "612",
       "title": "Shortest Distance in a Plane",
       "slug": "shortest-distance-in-a-plane",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem612"
     },
     {
       "number": "613",
       "title": "Shortest Distance in a Line",
       "slug": "shortest-distance-in-a-line",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem613"
     },
     {
       "number": "614",
       "title": "Second Degree Follower",
       "slug": "second-degree-follower",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem614"
     },
     {
       "number": "615",
       "title": "Average Salary: Departments VS Company",
       "slug": "average-salary-departments-vs-company",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem615"
     },
     {
       "number": "616",
       "title": "Add Bold Tag in String",
       "slug": "add-bold-tag-in-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem616"
     },
     {
       "number": "617",
@@ -4348,22 +4348,22 @@
       "number": "618",
       "title": "Students Report By Geography",
       "slug": "students-report-by-geography",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem618"
     },
     {
       "number": "619",
       "title": "Biggest Single Number",
       "slug": "biggest-single-number",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem619"
     },
     {
       "number": "620",
       "title": "Not Boring Movies",
       "slug": "not-boring-movies",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem620"
     },
     {
       "number": "621",
@@ -4398,22 +4398,22 @@
       "number": "625",
       "title": "Minimum Factorization",
       "slug": "minimum-factorization",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem625"
     },
     {
       "number": "626",
       "title": "Exchange Seats",
       "slug": "exchange-seats",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem626"
     },
     {
       "number": "627",
       "title": "Swap Sex of Employees",
       "slug": "swap-sex-of-employees",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem627"
     },
     {
       "number": "628",

@@ -1,0 +1,31 @@
+{
+  "number": "603",
+  "title": "Consecutive Available Seats",
+  "goal": "List free seats that belong to a consecutive available group of at least two.",
+  "strategy": "A free seat qualifies exactly when the seat immediately before or after it is also free. Looking up numeric neighbors avoids confusing adjacent input rows with adjacent seat numbers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List free seats that belong to a consecutive available group of at least two.",
+    "inspect": "A free seat qualifies exactly when the seat immediately before or after it is also free. Looking up numeric neighbors avoids confusing adjacent input rows with adjacent seat numbers.",
+    "update": "A free seat qualifies exactly when the seat immediately before or after it is also free. Looking up numeric neighbors avoids confusing adjacent input rows with adjacent seat numbers.",
+    "done": "List free seats that belong to a consecutive available group of at least two."
+  },
+  "edgeCases": [
+    "No free seats means no output",
+    "A two-seat run includes both endpoints",
+    "Alternating availability leaves every free seat isolated"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

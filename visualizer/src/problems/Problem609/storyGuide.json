@@ -1,0 +1,31 @@
+{
+  "number": "609",
+  "title": "Find Duplicate File in System",
+  "goal": "Group file paths whose stored contents are identical.",
+  "strategy": "Parse each directory record into file names and their parenthesized contents. Contents become hash keys; append full paths to their group and emit only groups containing at least two files.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Group file paths whose stored contents are identical.",
+    "inspect": "Parse each directory record into file names and their parenthesized contents. Contents become hash keys; append full paths to their group and emit only groups containing at least two files.",
+    "update": "Parse each directory record into file names and their parenthesized contents. Contents become hash keys; append full paths to their group and emit only groups containing at least two files.",
+    "done": "Group file paths whose stored contents are identical."
+  },
+  "edgeCases": [
+    "Identical filenames with different contents are not duplicates",
+    "Duplicates can share one directory",
+    "Every distinct content group can remain a singleton"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

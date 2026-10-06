@@ -8,7 +8,7 @@ states; do not count catalog listings or empty shells as implementations.
 
 ## Current requested milestone
 
-The user clarified on 2026-10-06: finish every catalog problem numbered through #2500, including earlier gaps. This is not a request for 2,500 total routes. At this checkpoint, 1,444 of those 2,500 entries have matching routes and 1,056 are missing. Route presence remains unverified and does not certify old implementations. Track the full range in `catalog-through-2500.json`; after the #505-596 batch, prioritize unwritten problems only and defer improvements to existing visualizers, per the latest user steering.
+The user clarified on 2026-10-06: finish every catalog problem numbered through #2500, including earlier gaps. This is not a request for 2,500 total routes. At this checkpoint, 1,465 of those 2,500 entries have matching routes and 1,035 are missing. Route presence remains unverified and does not certify old implementations. Track the full range in `catalog-through-2500.json`; after the #505-596 batch, prioritize unwritten problems only and defer improvements to existing visualizers, per the latest user steering.
 
 ## Current working mode
 
@@ -84,3 +84,7 @@ Ten early canonical stories close every catalog-identity gap through #500. Five 
 Remaining catalog entries are not restricted to the next numerical ID range.
 Fill semantic families where appropriate, while tracking harder graph, tree,
 design, concurrency, and database problems as separate implementation work.
+
+## Latest prioritization
+
+Group unwritten problems by shared algorithm family (database, union-find, windows, DP, and others). The complete catalog is the broader goal, with every problem through #2500 an intermediate milestone. Do not spend subsequent batches improving already-written visualizers. Continue to include original examples, problem-specific narratives, and complete Python plus pseudocode step mappings. Skip tests and builds as requested.

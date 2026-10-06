@@ -1,0 +1,31 @@
+{
+  "number": "615",
+  "title": "Average Salary: Departments VS Company",
+  "goal": "Compare each department monthly average salary with the company average for that same month.",
+  "strategy": "Join payments to departments and aggregate sums and counts by month. Compare department sum times company count with company sum times department count, so unequal group sizes and rounding cannot distort the comparison.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compare each department monthly average salary with the company average for that same month.",
+    "inspect": "Join payments to departments and aggregate sums and counts by month. Compare department sum times company count with company sum times department count, so unequal group sizes and rounding cannot distort the comparison.",
+    "update": "Join payments to departments and aggregate sums and counts by month. Compare department sum times company count with company sum times department count, so unequal group sizes and rounding cannot distort the comparison.",
+    "done": "Compare each department monthly average salary with the company average for that same month."
+  },
+  "edgeCases": [
+    "One department always matches its company month",
+    "A department with no payment in a month has no group",
+    "No payment records produce no comparisons"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
