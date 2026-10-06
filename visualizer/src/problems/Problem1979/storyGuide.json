@@ -1,0 +1,31 @@
+{
+  "number": "1979",
+  "title": "Find Greatest Common Divisor of Array",
+  "goal": "Find the greatest common divisor of the smallest and largest array values.",
+  "strategy": "Only the two extrema affect the requested answer. Repeatedly replace the larger Euclidean argument by its remainder until the other argument becomes zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest common divisor of the smallest and largest array values.",
+    "inspect": "Only the two extrema affect the requested answer. Repeatedly replace the larger Euclidean argument by its remainder until the other argument becomes zero.",
+    "update": "Only the two extrema affect the requested answer. Repeatedly replace the larger Euclidean argument by its remainder until the other argument becomes zero.",
+    "done": "Find the greatest common divisor of the smallest and largest array values."
+  },
+  "edgeCases": [
+    "Coprime extrema",
+    "Equal values give that same gcd",
+    "One is the smallest value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

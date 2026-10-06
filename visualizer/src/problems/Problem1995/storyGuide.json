@@ -1,0 +1,31 @@
+{
+  "number": "1995",
+  "title": "Count Special Quadruplets",
+  "goal": "Count ordered index quadruplets with three earlier values summing to the fourth.",
+  "strategy": "Sweep the second index backward. Maintain counts of nums[d]-nums[c] for all eligible later pairs; every earlier nums[a]+nums[b] lookup then counts valid completions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count ordered index quadruplets with three earlier values summing to the fourth.",
+    "inspect": "Sweep the second index backward. Maintain counts of nums[d]-nums[c] for all eligible later pairs; every earlier nums[a]+nums[b] lookup then counts valid completions.",
+    "update": "Sweep the second index backward. Maintain counts of nums[d]-nums[c] for all eligible later pairs; every earlier nums[a]+nums[b] lookup then counts valid completions.",
+    "done": "Count ordered index quadruplets with three earlier values summing to the fourth."
+  },
+  "edgeCases": [
+    "The smallest valid input has one candidate",
+    "Repeated values count distinct index choices",
+    "No earlier triple reaches a later value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

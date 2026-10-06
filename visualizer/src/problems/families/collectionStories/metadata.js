@@ -3514,6 +3514,27 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/"
   },
+  "1968": {
+    "number": "1968",
+    "title": "Array With Elements Not Equal to Average of Neighbors",
+    "slug": "array-with-elements-not-equal-to-average-of-neighbors",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/"
+  },
+  "1969": {
+    "number": "1969",
+    "title": "Minimum Non-Zero Product of the Array Elements",
+    "slug": "minimum-non-zero-product-of-the-array-elements",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-non-zero-product-of-the-array-elements/"
+  },
+  "1970": {
+    "number": "1970",
+    "title": "Last Day Where You Can Still Cross",
+    "slug": "last-day-where-you-can-still-cross",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/last-day-where-you-can-still-cross/"
+  },
   "1971": {
     "number": "1971",
     "title": "Find if Path Exists in Graph",
@@ -3521,11 +3542,165 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/find-if-path-exists-in-graph/"
   },
+  "1973": {
+    "number": "1973",
+    "title": "Count Nodes Equal to Sum of Descendants",
+    "slug": "count-nodes-equal-to-sum-of-descendants",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-nodes-equal-to-sum-of-descendants/"
+  },
+  "1974": {
+    "number": "1974",
+    "title": "Minimum Time to Type Word Using Special Typewriter",
+    "slug": "minimum-time-to-type-word-using-special-typewriter",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-time-to-type-word-using-special-typewriter/"
+  },
+  "1975": {
+    "number": "1975",
+    "title": "Maximum Matrix Sum",
+    "slug": "maximum-matrix-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-matrix-sum/"
+  },
   "1976": {
     "number": "1976",
     "title": "Number of Ways to Arrive at Destination",
     "slug": "number-of-ways-to-arrive-at-destination",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/"
+  },
+  "1979": {
+    "number": "1979",
+    "title": "Find Greatest Common Divisor of Array",
+    "slug": "find-greatest-common-divisor-of-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-greatest-common-divisor-of-array/"
+  },
+  "1980": {
+    "number": "1980",
+    "title": "Find Unique Binary String",
+    "slug": "find-unique-binary-string",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-unique-binary-string/"
+  },
+  "1981": {
+    "number": "1981",
+    "title": "Minimize the Difference Between Target and Chosen Elements",
+    "slug": "minimize-the-difference-between-target-and-chosen-elements",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/"
+  },
+  "1983": {
+    "number": "1983",
+    "title": "Widest Pair of Indices With Equal Range Sum",
+    "slug": "widest-pair-of-indices-with-equal-range-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/widest-pair-of-indices-with-equal-range-sum/"
+  },
+  "1984": {
+    "number": "1984",
+    "title": "Minimum Difference Between Highest and Lowest of K Scores",
+    "slug": "minimum-difference-between-highest-and-lowest-of-k-scores",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/"
+  },
+  "1985": {
+    "number": "1985",
+    "title": "Find the Kth Largest Integer in the Array",
+    "slug": "find-the-kth-largest-integer-in-the-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/"
+  },
+  "1986": {
+    "number": "1986",
+    "title": "Minimum Number of Work Sessions to Finish the Tasks",
+    "slug": "minimum-number-of-work-sessions-to-finish-the-tasks",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/"
+  },
+  "1987": {
+    "number": "1987",
+    "title": "Number of Unique Good Subsequences",
+    "slug": "number-of-unique-good-subsequences",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-unique-good-subsequences/"
+  },
+  "1989": {
+    "number": "1989",
+    "title": "Maximum Number of People That Can Be Caught in Tag",
+    "slug": "maximum-number-of-people-that-can-be-caught-in-tag",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-number-of-people-that-can-be-caught-in-tag/"
+  },
+  "1991": {
+    "number": "1991",
+    "title": "Find the Middle Index in Array",
+    "slug": "find-the-middle-index-in-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-the-middle-index-in-array/"
+  },
+  "1992": {
+    "number": "1992",
+    "title": "Find All Groups of Farmland",
+    "slug": "find-all-groups-of-farmland",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-all-groups-of-farmland/"
+  },
+  "1993": {
+    "number": "1993",
+    "title": "Operations on Tree",
+    "slug": "operations-on-tree",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/operations-on-tree/"
+  },
+  "1994": {
+    "number": "1994",
+    "title": "The Number of Good Subsets",
+    "slug": "the-number-of-good-subsets",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/the-number-of-good-subsets/"
+  },
+  "1995": {
+    "number": "1995",
+    "title": "Count Special Quadruplets",
+    "slug": "count-special-quadruplets",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-special-quadruplets/"
+  },
+  "1996": {
+    "number": "1996",
+    "title": "The Number of Weak Characters in the Game",
+    "slug": "the-number-of-weak-characters-in-the-game",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/"
+  },
+  "1997": {
+    "number": "1997",
+    "title": "First Day Where You Have Been in All the Rooms",
+    "slug": "first-day-where-you-have-been-in-all-the-rooms",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/first-day-where-you-have-been-in-all-the-rooms/"
+  },
+  "1998": {
+    "number": "1998",
+    "title": "GCD Sort of an Array",
+    "slug": "gcd-sort-of-an-array",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/gcd-sort-of-an-array/"
+  },
+  "2000": {
+    "number": "2000",
+    "title": "Reverse Prefix of Word",
+    "slug": "reverse-prefix-of-word",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/reverse-prefix-of-word/"
+  },
+  "2001": {
+    "number": "2001",
+    "title": "Number of Pairs of Interchangeable Rectangles",
+    "slug": "number-of-pairs-of-interchangeable-rectangles",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/"
   }
 };

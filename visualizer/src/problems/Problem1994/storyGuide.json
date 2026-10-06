@@ -1,0 +1,31 @@
+{
+  "number": "1994",
+  "title": "The Number of Good Subsets",
+  "goal": "Count subsets whose product is a product of distinct primes.",
+  "strategy": "Reject values containing squared prime factors. A prime-mask DP combines only disjoint factor sets; duplicate values multiply the choice count, and any subset of ones may accompany a nonempty prime product.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subsets whose product is a product of distinct primes.",
+    "inspect": "Reject values containing squared prime factors. A prime-mask DP combines only disjoint factor sets; duplicate values multiply the choice count, and any subset of ones may accompany a nonempty prime product.",
+    "update": "Reject values containing squared prime factors. A prime-mask DP combines only disjoint factor sets; duplicate values multiply the choice count, and any subset of ones may accompany a nonempty prime product.",
+    "done": "Count subsets whose product is a product of distinct primes."
+  },
+  "edgeCases": [
+    "Only ones never create a nonempty prime product",
+    "Squared prime factors disqualify every value",
+    "Repeated prime values are alternative choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

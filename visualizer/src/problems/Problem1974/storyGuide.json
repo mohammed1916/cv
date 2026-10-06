@@ -1,0 +1,31 @@
+{
+  "number": "1974",
+  "title": "Minimum Time to Type Word Using Special Typewriter",
+  "goal": "Type a word on a circular alphabet with minimum movement and keypress time.",
+  "strategy": "For each requested letter choose the shorter clockwise or counterclockwise distance from the current pointer, then add one second to type.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Type a word on a circular alphabet with minimum movement and keypress time.",
+    "inspect": "For each requested letter choose the shorter clockwise or counterclockwise distance from the current pointer, then add one second to type.",
+    "update": "For each requested letter choose the shorter clockwise or counterclockwise distance from the current pointer, then add one second to type.",
+    "done": "Type a word on a circular alphabet with minimum movement and keypress time."
+  },
+  "edgeCases": [
+    "Repeated letters need only keypresses",
+    "A wraparound step is shorter",
+    "Opposite alphabet positions tie"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "routes": 1200,
+  "routes": 1225,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -5039,6 +5039,24 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1968",
+      "number": "1968",
+      "title": "Array With Elements Not Equal to Average of Neighbors",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1969",
+      "number": "1969",
+      "title": "Minimum Non-Zero Product of the Array Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem197",
       "number": "197",
       "title": "Rising Temperature",
@@ -5048,9 +5066,45 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1970",
+      "number": "1970",
+      "title": "Last Day Where You Can Still Cross",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1971",
       "number": "1971",
       "title": "Find if Path Exists in Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1973",
+      "number": "1973",
+      "title": "Count Nodes Equal to Sum of Descendants",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1974",
+      "number": "1974",
+      "title": "Minimum Time to Type Word Using Special Typewriter",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1975",
+      "number": "1975",
+      "title": "Maximum Matrix Sum",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -5066,6 +5120,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1979",
+      "number": "1979",
+      "title": "Find Greatest Common Divisor of Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem198",
       "number": "198",
       "title": "House Robber",
@@ -5075,6 +5138,78 @@
       "edgeNotes": 0
     },
     {
+      "folder": "Problem1980",
+      "number": "1980",
+      "title": "Find Unique Binary String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1981",
+      "number": "1981",
+      "title": "Minimize the Difference Between Target and Chosen Elements",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1983",
+      "number": "1983",
+      "title": "Widest Pair of Indices With Equal Range Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1984",
+      "number": "1984",
+      "title": "Minimum Difference Between Highest and Lowest of K Scores",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1985",
+      "number": "1985",
+      "title": "Find the Kth Largest Integer in the Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1986",
+      "number": "1986",
+      "title": "Minimum Number of Work Sessions to Finish the Tasks",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1987",
+      "number": "1987",
+      "title": "Number of Unique Good Subsequences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1989",
+      "number": "1989",
+      "title": "Maximum Number of People That Can Be Caught in Tag",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem199",
       "number": "199",
       "title": "Binary Tree Right Side View",
@@ -5082,6 +5217,78 @@
       "checks": 1,
       "rules": 0,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem1991",
+      "number": "1991",
+      "title": "Find the Middle Index in Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1992",
+      "number": "1992",
+      "title": "Find All Groups of Farmland",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1993",
+      "number": "1993",
+      "title": "Operations on Tree",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1994",
+      "number": "1994",
+      "title": "The Number of Good Subsets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1995",
+      "number": "1995",
+      "title": "Count Special Quadruplets",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1996",
+      "number": "1996",
+      "title": "The Number of Weak Characters in the Game",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1997",
+      "number": "1997",
+      "title": "First Day Where You Have Been in All the Rooms",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1998",
+      "number": "1998",
+      "title": "GCD Sort of an Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem2",
@@ -5109,6 +5316,24 @@
       "checks": 1,
       "rules": 1,
       "edgeNotes": 0
+    },
+    {
+      "folder": "Problem2000",
+      "number": "2000",
+      "title": "Reverse Prefix of Word",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem2001",
+      "number": "2001",
+      "title": "Number of Pairs of Interchangeable Rectangles",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem201",

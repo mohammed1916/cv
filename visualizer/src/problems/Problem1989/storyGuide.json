@@ -1,0 +1,31 @@
+{
+  "number": "1989",
+  "title": "Maximum Number of People That Can Be Caught in Tag",
+  "goal": "Match as many people as possible to distinct taggers within reach.",
+  "strategy": "List taggers and people in index order. Match the earliest pair when reachable; otherwise discard only the earlier index that is too far away to reach any remaining partner.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Match as many people as possible to distinct taggers within reach.",
+    "inspect": "List taggers and people in index order. Match the earliest pair when reachable; otherwise discard only the earlier index that is too far away to reach any remaining partner.",
+    "update": "List taggers and people in index order. Match the earliest pair when reachable; otherwise discard only the earlier index that is too far away to reach any remaining partner.",
+    "done": "Match as many people as possible to distinct taggers within reach."
+  },
+  "edgeCases": [
+    "Earlier unreachable people must be skipped",
+    "No tagger is present",
+    "One tagger can catch only one person"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

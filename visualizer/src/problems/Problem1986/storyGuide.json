@@ -1,0 +1,31 @@
+{
+  "number": "1986",
+  "title": "Minimum Number of Work Sessions to Finish the Tasks",
+  "goal": "Finish every task using the fewest bounded work sessions.",
+  "strategy": "For each completed-task mask keep the lexicographically smallest pair of session count and current-session load. Fewer sessions is better; for a tie, less load leaves more room.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Finish every task using the fewest bounded work sessions.",
+    "inspect": "For each completed-task mask keep the lexicographically smallest pair of session count and current-session load. Fewer sessions is better; for a tie, less load leaves more room.",
+    "update": "For each completed-task mask keep the lexicographically smallest pair of session count and current-session load. Fewer sessions is better; for a tie, less load leaves more room.",
+    "done": "Finish every task using the fewest bounded work sessions."
+  },
+  "edgeCases": [
+    "Every task fills a whole session",
+    "All tasks fit together exactly",
+    "A single task needs one session"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

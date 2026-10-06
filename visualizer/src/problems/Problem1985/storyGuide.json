@@ -1,0 +1,31 @@
+{
+  "number": "1985",
+  "title": "Find the Kth Largest Integer in the Array",
+  "goal": "Find the kth largest nonnegative integer represented as a decimal string.",
+  "strategy": "Compare lengths first, then lexicographic order for equal lengths. This matches integer order without converting potentially huge values into imprecise machine numbers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the kth largest nonnegative integer represented as a decimal string.",
+    "inspect": "Compare lengths first, then lexicographic order for equal lengths. This matches integer order without converting potentially huge values into imprecise machine numbers.",
+    "update": "Compare lengths first, then lexicographic order for equal lengths. This matches integer order without converting potentially huge values into imprecise machine numbers.",
+    "done": "Find the kth largest nonnegative integer represented as a decimal string."
+  },
+  "edgeCases": [
+    "Duplicates occupy different ranks",
+    "Zero is a valid decimal value",
+    "One exact large value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1980",
+  "title": "Find Unique Binary String",
+  "goal": "Construct a binary string absent from the supplied equal-length strings.",
+  "strategy": "Flip the ith bit of the ith string. The resulting string differs from every input string at its own diagonal position, so no membership search is necessary.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct a binary string absent from the supplied equal-length strings.",
+    "inspect": "Flip the ith bit of the ith string. The resulting string differs from every input string at its own diagonal position, so no membership search is necessary.",
+    "update": "Flip the ith bit of the ith string. The resulting string differs from every input string at its own diagonal position, so no membership search is necessary.",
+    "done": "Construct a binary string absent from the supplied equal-length strings."
+  },
+  "edgeCases": [
+    "A one-bit input has one opposite answer",
+    "Two different rows",
+    "A four-row collection sharing prefixes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

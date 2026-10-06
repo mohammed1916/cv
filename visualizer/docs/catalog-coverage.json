@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1200,
-  "matchedCatalogRoutes": 1184,
-  "remaining": 2889,
+  "routes": 1225,
+  "matchedCatalogRoutes": 1209,
+  "remaining": 2864,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -13870,22 +13870,22 @@
       "number": "1968",
       "title": "Array With Elements Not Equal to Average of Neighbors",
       "slug": "array-with-elements-not-equal-to-average-of-neighbors",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1968"
     },
     {
       "number": "1969",
       "title": "Minimum Non-Zero Product of the Array Elements",
       "slug": "minimum-non-zero-product-of-the-array-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1969"
     },
     {
       "number": "1970",
       "title": "Last Day Where You Can Still Cross",
       "slug": "last-day-where-you-can-still-cross",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1970"
     },
     {
       "number": "1971",
@@ -13905,22 +13905,22 @@
       "number": "1973",
       "title": "Count Nodes Equal to Sum of Descendants",
       "slug": "count-nodes-equal-to-sum-of-descendants",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1973"
     },
     {
       "number": "1974",
       "title": "Minimum Time to Type Word Using Special Typewriter",
       "slug": "minimum-time-to-type-word-using-special-typewriter",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1974"
     },
     {
       "number": "1975",
       "title": "Maximum Matrix Sum",
       "slug": "maximum-matrix-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1975"
     },
     {
       "number": "1976",
@@ -13947,22 +13947,22 @@
       "number": "1979",
       "title": "Find Greatest Common Divisor of Array",
       "slug": "find-greatest-common-divisor-of-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1979"
     },
     {
       "number": "1980",
       "title": "Find Unique Binary String",
       "slug": "find-unique-binary-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1980"
     },
     {
       "number": "1981",
       "title": "Minimize the Difference Between Target and Chosen Elements",
       "slug": "minimize-the-difference-between-target-and-chosen-elements",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1981"
     },
     {
       "number": "1982",
@@ -13975,36 +13975,36 @@
       "number": "1983",
       "title": "Widest Pair of Indices With Equal Range Sum",
       "slug": "widest-pair-of-indices-with-equal-range-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1983"
     },
     {
       "number": "1984",
       "title": "Minimum Difference Between Highest and Lowest of K Scores",
       "slug": "minimum-difference-between-highest-and-lowest-of-k-scores",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1984"
     },
     {
       "number": "1985",
       "title": "Find the Kth Largest Integer in the Array",
       "slug": "find-the-kth-largest-integer-in-the-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1985"
     },
     {
       "number": "1986",
       "title": "Minimum Number of Work Sessions to Finish the Tasks",
       "slug": "minimum-number-of-work-sessions-to-finish-the-tasks",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1986"
     },
     {
       "number": "1987",
       "title": "Number of Unique Good Subsequences",
       "slug": "number-of-unique-good-subsequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1987"
     },
     {
       "number": "1988",
@@ -14017,8 +14017,8 @@
       "number": "1989",
       "title": "Maximum Number of People That Can Be Caught in Tag",
       "slug": "maximum-number-of-people-that-can-be-caught-in-tag",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1989"
     },
     {
       "number": "1990",
@@ -14031,57 +14031,57 @@
       "number": "1991",
       "title": "Find the Middle Index in Array",
       "slug": "find-the-middle-index-in-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1991"
     },
     {
       "number": "1992",
       "title": "Find All Groups of Farmland",
       "slug": "find-all-groups-of-farmland",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1992"
     },
     {
       "number": "1993",
       "title": "Operations on Tree",
       "slug": "operations-on-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1993"
     },
     {
       "number": "1994",
       "title": "The Number of Good Subsets",
       "slug": "the-number-of-good-subsets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1994"
     },
     {
       "number": "1995",
       "title": "Count Special Quadruplets",
       "slug": "count-special-quadruplets",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1995"
     },
     {
       "number": "1996",
       "title": "The Number of Weak Characters in the Game",
       "slug": "the-number-of-weak-characters-in-the-game",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1996"
     },
     {
       "number": "1997",
       "title": "First Day Where You Have Been in All the Rooms",
       "slug": "first-day-where-you-have-been-in-all-the-rooms",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1997"
     },
     {
       "number": "1998",
       "title": "GCD Sort of an Array",
       "slug": "gcd-sort-of-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1998"
     },
     {
       "number": "1999",
@@ -14094,15 +14094,15 @@
       "number": "2000",
       "title": "Reverse Prefix of Word",
       "slug": "reverse-prefix-of-word",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2000"
     },
     {
       "number": "2001",
       "title": "Number of Pairs of Interchangeable Rectangles",
       "slug": "number-of-pairs-of-interchangeable-rectangles",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2001"
     },
     {
       "number": "2002",

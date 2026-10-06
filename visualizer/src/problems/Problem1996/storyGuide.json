@@ -1,0 +1,31 @@
+{
+  "number": "1996",
+  "title": "The Number of Weak Characters in the Game",
+  "goal": "Count characters dominated in both attack and defense.",
+  "strategy": "Sort by decreasing attack and increasing defense for ties. A running maximum defense then represents stronger-attack candidates without allowing equal-attack characters to falsely dominate each other.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count characters dominated in both attack and defense.",
+    "inspect": "Sort by decreasing attack and increasing defense for ties. A running maximum defense then represents stronger-attack candidates without allowing equal-attack characters to falsely dominate each other.",
+    "update": "Sort by decreasing attack and increasing defense for ties. A running maximum defense then represents stronger-attack candidates without allowing equal-attack characters to falsely dominate each other.",
+    "done": "Count characters dominated in both attack and defense."
+  },
+  "edgeCases": [
+    "Equal attack alone never dominates",
+    "Equal defense alone never dominates",
+    "One character has no dominator"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

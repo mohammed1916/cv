@@ -1,0 +1,31 @@
+{
+  "number": "1973",
+  "title": "Count Nodes Equal to Sum of Descendants",
+  "goal": "Count tree nodes whose value equals the sum of all descendants.",
+  "strategy": "Decode the level-order input, then visit children before their parent. Each returned subtree total lets a parent obtain its descendant sum by adding its child totals.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count tree nodes whose value equals the sum of all descendants.",
+    "inspect": "Decode the level-order input, then visit children before their parent. Each returned subtree total lets a parent obtain its descendant sum by adding its child totals.",
+    "update": "Decode the level-order input, then visit children before their parent. Each returned subtree total lets a parent obtain its descendant sum by adding its child totals.",
+    "done": "Count tree nodes whose value equals the sum of all descendants."
+  },
+  "edgeCases": [
+    "A zero leaf equals its empty descendant sum",
+    "An ordinary nonzero leaf does not match",
+    "Missing children preserve level-order positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

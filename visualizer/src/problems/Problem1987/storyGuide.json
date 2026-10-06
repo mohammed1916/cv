@@ -1,0 +1,31 @@
+{
+  "number": "1987",
+  "title": "Number of Unique Good Subsequences",
+  "goal": "Count distinct good binary subsequences without leading zeroes except the single zero.",
+  "strategy": "Track distinct valid subsequences ending in zero and one. Appending the current bit replaces that ending count with all prior valid endings; one additionally starts a new subsequence. Count the single zero separately.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct good binary subsequences without leading zeroes except the single zero.",
+    "inspect": "Track distinct valid subsequences ending in zero and one. Appending the current bit replaces that ending count with all prior valid endings; one additionally starts a new subsequence. Count the single zero separately.",
+    "update": "Track distinct valid subsequences ending in zero and one. Appending the current bit replaces that ending count with all prior valid endings; one additionally starts a new subsequence. Count the single zero separately.",
+    "done": "Count distinct good binary subsequences without leading zeroes except the single zero."
+  },
+  "edgeCases": [
+    "All zeroes contribute only the single zero",
+    "All ones contribute one string per length",
+    "Only one leading-one subsequence exists"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

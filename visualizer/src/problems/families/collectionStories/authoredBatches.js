@@ -1,8 +1,10 @@
 import sweepAndDp from './sweepAndDpBatch.js';
 import resourceAndDp from './resourceAndDpBatch.js';
+import connectivityAndMatrix from './connectivityAndMatrixBatch.js';
+import stateAndFactor from './stateAndFactorBatch.js';
 
 // One registration point for explicit authored modules; no inferred algorithms.
-const batches=[sweepAndDp,resourceAndDp];
+const batches=[sweepAndDp,resourceAndDp,connectivityAndMatrix,stateAndFactor];
 const merge=key=>Object.assign({},...batches.map(batch=>batch[key]??{}));
 export const authoredSpecs=merge('specs');
 export const authoredSolvers=merge('solvers');
