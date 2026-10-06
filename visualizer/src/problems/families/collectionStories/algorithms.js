@@ -1,3 +1,4 @@
+import { graphGridSolvers } from './graphGridAlgorithms.js';
 import { databaseSolvers } from './databaseAlgorithms.js';
 import { broadSolvers } from './expansionBroadAlgorithms.js';
 import { rangeSolvers } from './expansionRangeAlgorithms.js';
@@ -31,6 +32,7 @@ export const solvers = {
 ...rangeSolvers,
 ...broadSolvers,
 ...databaseSolvers,
+...graphGridSolvers,
   860({bills}, emit) {
     let five=0,ten=0;
     for(let i=0;i<bills.length;i++) { const bill=bills[i];let possible=true;

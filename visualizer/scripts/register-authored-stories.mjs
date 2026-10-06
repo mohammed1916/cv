@@ -4,6 +4,8 @@ import { definitions as trees } from '../src/problems/families/treeStories/defin
 import { definitions as collections } from '../src/problems/families/collectionStories/definitions.js';
 const definitions={...scans,...trees,...collections};
 const collectionTags={
+1901:['Binary Search','Matrix'],1914:['Matrix','Simulation'],1916:['Tree','Dynamic Programming'],1926:['Breadth-First Search'],1971:['Graph'],1976:['Graph','Shortest Path'],
+
 1667:['Database'],1683:['Database'],1693:['Database'],1729:['Database'],1741:['Database'],1757:['Database'],1821:['Database'],1873:['Database'],1890:['Database'],1907:['Database'],
 
 1870:["Binary Search"],1871:["Sliding Window"],1872:["Dynamic Programming","Game Theory"],1874:["Greedy"],1876:["String"],1877:["Greedy"],1879:["Bitmask","Dynamic Programming"],1880:["String"],1881:["Greedy"],1882:["Simulation"],1884:["Math"],1885:["Two Pointers"],1886:["Matrix"],1887:["Sorting"],1888:["Sliding Window"],1891:["Binary Search"],1893:["Sorting"],1894:["Prefix Sum"],1897:["Counting"],1898:["Binary Search"],1899:["Greedy"],1905:["Breadth-First Search","Matrix"],1915:["Prefix Sum","Bit Manipulation"],

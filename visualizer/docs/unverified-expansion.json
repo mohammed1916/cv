@@ -383,12 +383,18 @@
     1897,
     1898,
     1899,
+    1901,
     1905,
     1907,
-    1915
+    1914,
+    1915,
+    1916,
+    1926,
+    1971,
+    1976
   ],
-  "problems": 384,
-  "originalExamples": 1536,
+  "problems": 390,
+  "originalExamples": 1560,
   "testsRun": false,
   "buildRun": false,
   "browserVerified": false

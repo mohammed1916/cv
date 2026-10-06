@@ -1,5 +1,5 @@
 {
-  "routes": 1158,
+  "routes": 1164,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -4598,6 +4598,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1901",
+      "number": "1901",
+      "title": "Find a Peak Element II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1905",
       "number": "1905",
       "title": "Count Sub Islands",
@@ -4625,9 +4634,27 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1914",
+      "number": "1914",
+      "title": "Cyclically Rotating a Grid",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1915",
       "number": "1915",
       "title": "Number of Wonderful Substrings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1916",
+      "number": "1916",
+      "title": "Count Ways to Build Rooms in an Ant Colony",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -4641,6 +4668,15 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1926",
+      "number": "1926",
+      "title": "Nearest Exit from Entrance in Maze",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem193",
@@ -4686,6 +4722,24 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1971",
+      "number": "1971",
+      "title": "Find if Path Exists in Graph",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1976",
+      "number": "1976",
+      "title": "Number of Ways to Arrive at Destination",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem198",

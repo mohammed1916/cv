@@ -1,0 +1,31 @@
+{
+  "number": "1926",
+  "title": "Nearest Exit from Entrance in Maze",
+  "goal": "Find the shortest path to an exit other than the entrance.",
+  "strategy": "Breadth-first search discovers cells by increasing distance. Open boundary cells qualify except the starting cell, even if the entrance itself is on the boundary.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest path to an exit other than the entrance.",
+    "inspect": "Breadth-first search discovers cells by increasing distance. Open boundary cells qualify except the starting cell, even if the entrance itself is on the boundary.",
+    "update": "Breadth-first search discovers cells by increasing distance. Open boundary cells qualify except the starting cell, even if the entrance itself is on the boundary.",
+    "done": "Find the shortest path to an exit other than the entrance."
+  },
+  "edgeCases": [
+    "Boundary entrance does not count itself",
+    "No other open boundary cell",
+    "Only one open cell at the entrance"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

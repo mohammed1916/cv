@@ -1,0 +1,31 @@
+{
+  "number": "1914",
+  "title": "Cyclically Rotating a Grid",
+  "goal": "Rotate every rectangular ring counterclockwise by k positions.",
+  "strategy": "List ring coordinates counterclockwise. Reduce k modulo ring length and write each original value to its shifted destination in a separate result grid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rotate every rectangular ring counterclockwise by k positions.",
+    "inspect": "List ring coordinates counterclockwise. Reduce k modulo ring length and write each original value to its shifted destination in a separate result grid.",
+    "update": "List ring coordinates counterclockwise. Reduce k modulo ring length and write each original value to its shifted destination in a separate result grid.",
+    "done": "Rotate every rectangular ring counterclockwise by k positions."
+  },
+  "edgeCases": [
+    "A full outer revolution leaves one ring unchanged",
+    "Smallest ring",
+    "Very large k reduces by ring length"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

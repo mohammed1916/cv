@@ -3213,6 +3213,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/merge-triplets-to-form-target-triplet/"
   },
+  "1901": {
+    "number": "1901",
+    "title": "Find a Peak Element II",
+    "slug": "find-a-peak-element-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-a-peak-element-ii/"
+  },
   "1905": {
     "number": "1905",
     "title": "Count Sub Islands",
@@ -3227,11 +3234,46 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/count-salary-categories/"
   },
+  "1914": {
+    "number": "1914",
+    "title": "Cyclically Rotating a Grid",
+    "slug": "cyclically-rotating-a-grid",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/cyclically-rotating-a-grid/"
+  },
   "1915": {
     "number": "1915",
     "title": "Number of Wonderful Substrings",
     "slug": "number-of-wonderful-substrings",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-wonderful-substrings/"
+  },
+  "1916": {
+    "number": "1916",
+    "title": "Count Ways to Build Rooms in an Ant Colony",
+    "slug": "count-ways-to-build-rooms-in-an-ant-colony",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/count-ways-to-build-rooms-in-an-ant-colony/"
+  },
+  "1926": {
+    "number": "1926",
+    "title": "Nearest Exit from Entrance in Maze",
+    "slug": "nearest-exit-from-entrance-in-maze",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/"
+  },
+  "1971": {
+    "number": "1971",
+    "title": "Find if Path Exists in Graph",
+    "slug": "find-if-path-exists-in-graph",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/find-if-path-exists-in-graph/"
+  },
+  "1976": {
+    "number": "1976",
+    "title": "Number of Ways to Arrive at Destination",
+    "slug": "number-of-ways-to-arrive-at-destination",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/"
   }
 };

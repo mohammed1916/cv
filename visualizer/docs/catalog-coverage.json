@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1158,
-  "matchedCatalogRoutes": 1142,
-  "remaining": 2931,
+  "routes": 1164,
+  "matchedCatalogRoutes": 1148,
+  "remaining": 2925,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -13401,8 +13401,8 @@
       "number": "1901",
       "title": "Find a Peak Element II",
       "slug": "find-a-peak-element-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1901"
     },
     {
       "number": "1902",
@@ -13492,8 +13492,8 @@
       "number": "1914",
       "title": "Cyclically Rotating a Grid",
       "slug": "cyclically-rotating-a-grid",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1914"
     },
     {
       "number": "1915",
@@ -13506,8 +13506,8 @@
       "number": "1916",
       "title": "Count Ways to Build Rooms in an Ant Colony",
       "slug": "count-ways-to-build-rooms-in-an-ant-colony",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1916"
     },
     {
       "number": "1917",
@@ -13576,8 +13576,8 @@
       "number": "1926",
       "title": "Nearest Exit from Entrance in Maze",
       "slug": "nearest-exit-from-entrance-in-maze",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1926"
     },
     {
       "number": "1927",
@@ -13891,8 +13891,8 @@
       "number": "1971",
       "title": "Find if Path Exists in Graph",
       "slug": "find-if-path-exists-in-graph",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1971"
     },
     {
       "number": "1972",
@@ -13926,8 +13926,8 @@
       "number": "1976",
       "title": "Number of Ways to Arrive at Destination",
       "slug": "number-of-ways-to-arrive-at-destination",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1976"
     },
     {
       "number": "1977",

@@ -1,0 +1,31 @@
+{
+  "number": "1901",
+  "title": "Find a Peak Element II",
+  "goal": "Find any cell strictly greater than its orthogonal neighbors.",
+  "strategy": "Binary search columns. The maximum of the current column already dominates vertical neighbors; a greater horizontal neighbor determines which half still contains a peak.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find any cell strictly greater than its orthogonal neighbors.",
+    "inspect": "Binary search columns. The maximum of the current column already dominates vertical neighbors; a greater horizontal neighbor determines which half still contains a peak.",
+    "update": "Binary search columns. The maximum of the current column already dominates vertical neighbors; a greater horizontal neighbor determines which half still contains a peak.",
+    "done": "Find any cell strictly greater than its orthogonal neighbors."
+  },
+  "edgeCases": [
+    "One row peak",
+    "One column peak",
+    "Single cell"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
