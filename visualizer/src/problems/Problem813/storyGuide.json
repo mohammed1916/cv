@@ -1,0 +1,31 @@
+{
+  "number": "813",
+  "title": "Largest Sum of Averages",
+  "goal": "Partition positive values into at most k contiguous groups to maximize the sum of group averages.",
+  "strategy": "With positive values, splitting a group cannot decrease the total average sum, so an optimum uses k groups. Prefix sums price each final group while DP tries all earlier split positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Partition positive values into at most k contiguous groups to maximize the sum of group averages.",
+    "inspect": "With positive values, splitting a group cannot decrease the total average sum, so an optimum uses k groups. Prefix sums price each final group while DP tries all earlier split positions.",
+    "update": "With positive values, splitting a group cannot decrease the total average sum, so an optimum uses k groups. Prefix sums price each final group while DP tries all earlier split positions.",
+    "done": "Partition positive values into at most k contiguous groups to maximize the sum of group averages."
+  },
+  "edgeCases": [
+    "One group is simply the whole-array average",
+    "One group per value yields the original sum",
+    "Equal values make every same-group-count partition equivalent"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

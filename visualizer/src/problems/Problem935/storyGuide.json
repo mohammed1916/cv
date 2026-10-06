@@ -1,0 +1,31 @@
+{
+  "number": "935",
+  "title": "Knight Dialer",
+  "goal": "Count length-n phone-number sequences made by knight moves on a keypad.",
+  "strategy": "Store counts ending on each digit. Every legal knight edge transfers all sequences from its source to its destination; five has no outgoing moves, while zero connects to four and six.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count length-n phone-number sequences made by knight moves on a keypad.",
+    "inspect": "Store counts ending on each digit. Every legal knight edge transfers all sequences from its source to its destination; five has no outgoing moves, while zero connects to four and six.",
+    "update": "Store counts ending on each digit. Every legal knight edge transfers all sequences from its source to its destination; five has no outgoing moves, while zero connects to four and six.",
+    "done": "Count length-n phone-number sequences made by knight moves on a keypad."
+  },
+  "edgeCases": [
+    "One press may start at any digit including five",
+    "The isolated center disappears after moving",
+    "Many steps require modular count accumulation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

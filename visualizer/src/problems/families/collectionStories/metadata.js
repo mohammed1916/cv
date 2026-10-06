@@ -357,12 +357,40 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/swap-sex-of-employees/"
   },
+  "634": {
+    "number": "634",
+    "title": "Find the Derangement of An Array",
+    "slug": "find-the-derangement-of-an-array",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/find-the-derangement-of-an-array/"
+  },
+  "639": {
+    "number": "639",
+    "title": "Decode Ways II",
+    "slug": "decode-ways-ii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/decode-ways-ii/"
+  },
   "648": {
     "number": "648",
     "title": "Replace Words",
     "slug": "replace-words",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/replace-words/"
+  },
+  "650": {
+    "number": "650",
+    "title": "2 Keys Keyboard",
+    "slug": "2-keys-keyboard",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/2-keys-keyboard/"
+  },
+  "651": {
+    "number": "651",
+    "title": "4 Keys Keyboard",
+    "slug": "4-keys-keyboard",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/4-keys-keyboard/"
   },
   "677": {
     "number": "677",
@@ -377,6 +405,13 @@ export const collectionStoryMetadata = {
     "slug": "redundant-connection-ii",
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/redundant-connection-ii/"
+  },
+  "712": {
+    "number": "712",
+    "title": "Minimum ASCII Delete Sum for Two Strings",
+    "slug": "minimum-ascii-delete-sum-for-two-strings",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/"
   },
   "720": {
     "number": "720",
@@ -399,6 +434,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/couples-holding-hands/"
   },
+  "790": {
+    "number": "790",
+    "title": "Domino and Tromino Tiling",
+    "slug": "domino-and-tromino-tiling",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/domino-and-tromino-tiling/"
+  },
   "795": {
     "number": "795",
     "title": "Number of Subarrays with Bounded Maximum",
@@ -406,12 +448,33 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/"
   },
+  "801": {
+    "number": "801",
+    "title": "Minimum Swaps To Make Sequences Increasing",
+    "slug": "minimum-swaps-to-make-sequences-increasing",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/"
+  },
+  "813": {
+    "number": "813",
+    "title": "Largest Sum of Averages",
+    "slug": "largest-sum-of-averages",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/largest-sum-of-averages/"
+  },
   "820": {
     "number": "820",
     "title": "Short Encoding of Words",
     "slug": "short-encoding-of-words",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/short-encoding-of-words/"
+  },
+  "823": {
+    "number": "823",
+    "title": "Binary Trees With Factors",
+    "slug": "binary-trees-with-factors",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/binary-trees-with-factors/"
   },
   "827": {
     "number": "827",
@@ -581,6 +644,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-sum-circular-subarray/"
   },
+  "920": {
+    "number": "920",
+    "title": "Number of Music Playlists",
+    "slug": "number-of-music-playlists",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/number-of-music-playlists/"
+  },
   "921": {
     "number": "921",
     "title": "Minimum Add to Make Parentheses Valid",
@@ -643,6 +713,20 @@ export const collectionStoryMetadata = {
     "slug": "number-of-recent-calls",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/number-of-recent-calls/"
+  },
+  "935": {
+    "number": "935",
+    "title": "Knight Dialer",
+    "slug": "knight-dialer",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/knight-dialer/"
+  },
+  "940": {
+    "number": "940",
+    "title": "Distinct Subsequences II",
+    "slug": "distinct-subsequences-ii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/distinct-subsequences-ii/"
   },
   "941": {
     "number": "941",
@@ -931,6 +1015,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/divisor-game/"
   },
+  "1027": {
+    "number": "1027",
+    "title": "Longest Arithmetic Subsequence",
+    "slug": "longest-arithmetic-subsequence",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/longest-arithmetic-subsequence/"
+  },
   "1029": {
     "number": "1029",
     "title": "Two City Scheduling",
@@ -952,6 +1043,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/stream-of-characters/"
   },
+  "1035": {
+    "number": "1035",
+    "title": "Uncrossed Lines",
+    "slug": "uncrossed-lines",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/uncrossed-lines/"
+  },
   "1037": {
     "number": "1037",
     "title": "Valid Boomerang",
@@ -966,12 +1064,26 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/robot-bounded-in-circle/"
   },
+  "1043": {
+    "number": "1043",
+    "title": "Partition Array for Maximum Sum",
+    "slug": "partition-array-for-maximum-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/partition-array-for-maximum-sum/"
+  },
   "1046": {
     "number": "1046",
     "title": "Last Stone Weight",
     "slug": "last-stone-weight",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/last-stone-weight/"
+  },
+  "1049": {
+    "number": "1049",
+    "title": "Last Stone Weight II",
+    "slug": "last-stone-weight-ii",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/last-stone-weight-ii/"
   },
   "1051": {
     "number": "1051",
@@ -1379,6 +1491,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/intersection-of-three-sorted-arrays/"
   },
+  "1216": {
+    "number": "1216",
+    "title": "Valid Palindrome III",
+    "slug": "valid-palindrome-iii",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/valid-palindrome-iii/"
+  },
   "1217": {
     "number": "1217",
     "title": "Minimum Cost to Move Chips to The Same Position",
@@ -1420,6 +1539,13 @@ export const collectionStoryMetadata = {
     "slug": "queens-that-can-attack-the-king",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/queens-that-can-attack-the-king/"
+  },
+  "1223": {
+    "number": "1223",
+    "title": "Dice Roll Simulation",
+    "slug": "dice-roll-simulation",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/dice-roll-simulation/"
   },
   "1227": {
     "number": "1227",
@@ -1700,6 +1826,13 @@ export const collectionStoryMetadata = {
     "slug": "remove-palindromic-subsequences",
     "difficulty": "Easy",
     "url": "https://leetcode.com/problems/remove-palindromic-subsequences/"
+  },
+  "1335": {
+    "number": "1335",
+    "title": "Minimum Difficulty of a Job Schedule",
+    "slug": "minimum-difficulty-of-a-job-schedule",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/"
   },
   "1337": {
     "number": "1337",
@@ -2078,6 +2211,13 @@ export const collectionStoryMetadata = {
     "slug": "maximum-number-of-vowels-in-a-substring-of-given-length",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/"
+  },
+  "1458": {
+    "number": "1458",
+    "title": "Max Dot Product of Two Subsequences",
+    "slug": "max-dot-product-of-two-subsequences",
+    "difficulty": "Hard",
+    "url": "https://leetcode.com/problems/max-dot-product-of-two-subsequences/"
   },
   "1460": {
     "number": "1460",

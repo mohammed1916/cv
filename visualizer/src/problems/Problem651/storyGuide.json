@@ -1,0 +1,31 @@
+{
+  "number": "651",
+  "title": "4 Keys Keyboard",
+  "goal": "Maximize the number of A characters produced by n presses on a four-key keyboard.",
+  "strategy": "Either type directly or finish with Select All, Copy, and several Pastes. Try every earlier breakpoint whose best screen count is copied; multiply it by the number of final copies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the number of A characters produced by n presses on a four-key keyboard.",
+    "inspect": "Either type directly or finish with Select All, Copy, and several Pastes. Try every earlier breakpoint whose best screen count is copied; multiply it by the number of final copies.",
+    "update": "Either type directly or finish with Select All, Copy, and several Pastes. Try every earlier breakpoint whose best screen count is copied; multiply it by the number of final copies.",
+    "done": "Maximize the number of A characters produced by n presses on a four-key keyboard."
+  },
+  "edgeCases": [
+    "Too few presses favor typing directly",
+    "A copy block begins to outperform typing",
+    "Longer budgets combine multiple multiplication stages"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

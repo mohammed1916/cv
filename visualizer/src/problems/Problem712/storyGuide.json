@@ -1,0 +1,31 @@
+{
+  "number": "712",
+  "title": "Minimum ASCII Delete Sum for Two Strings",
+  "goal": "Delete characters from two strings at minimum ASCII cost until the strings are equal.",
+  "strategy": "DP over prefix pairs either keeps matching final characters for free or deletes one final character and pays its ASCII value. Empty-prefix borders accumulate all necessary deletions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Delete characters from two strings at minimum ASCII cost until the strings are equal.",
+    "inspect": "DP over prefix pairs either keeps matching final characters for free or deletes one final character and pays its ASCII value. Empty-prefix borders accumulate all necessary deletions.",
+    "update": "DP over prefix pairs either keeps matching final characters for free or deletes one final character and pays its ASCII value. Empty-prefix borders accumulate all necessary deletions.",
+    "done": "Delete characters from two strings at minimum ASCII cost until the strings are equal."
+  },
+  "edgeCases": [
+    "Identical text costs nothing to retain",
+    "No shared letters requires deleting both strings",
+    "Repeated letters permit several alignments"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

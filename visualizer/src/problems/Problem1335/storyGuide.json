@@ -1,0 +1,31 @@
+{
+  "number": "1335",
+  "title": "Minimum Difficulty of a Job Schedule",
+  "goal": "Schedule ordered jobs across exactly d nonempty days to minimize the sum of daily maximum difficulty.",
+  "strategy": "Try every possible final-day starting job. Its cost is the maximum difficulty in that suffix block, added to the best valid schedule for earlier jobs on one fewer day.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Schedule ordered jobs across exactly d nonempty days to minimize the sum of daily maximum difficulty.",
+    "inspect": "Try every possible final-day starting job. Its cost is the maximum difficulty in that suffix block, added to the best valid schedule for earlier jobs on one fewer day.",
+    "update": "Try every possible final-day starting job. Its cost is the maximum difficulty in that suffix block, added to the best valid schedule for earlier jobs on one fewer day.",
+    "done": "Schedule ordered jobs across exactly d nonempty days to minimize the sum of daily maximum difficulty."
+  },
+  "edgeCases": [
+    "More days than jobs is impossible",
+    "One day pays only the maximum difficulty",
+    "One job per day pays the sum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

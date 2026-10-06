@@ -1,0 +1,31 @@
+{
+  "number": "940",
+  "title": "Distinct Subsequences II",
+  "goal": "Count distinct nonempty subsequences of a lowercase string.",
+  "strategy": "Appending a character creates total+1 subsequences ending in that character. Replace the old ending-character contribution rather than adding it again, which removes duplicates caused by earlier copies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct nonempty subsequences of a lowercase string.",
+    "inspect": "Appending a character creates total+1 subsequences ending in that character. Replace the old ending-character contribution rather than adding it again, which removes duplicates caused by earlier copies.",
+    "update": "Appending a character creates total+1 subsequences ending in that character. Replace the old ending-character contribution rather than adding it again, which removes duplicates caused by earlier copies.",
+    "done": "Count distinct nonempty subsequences of a lowercase string."
+  },
+  "edgeCases": [
+    "One repeated letter creates one subsequence per length",
+    "Distinct characters generate every nonempty selection",
+    "Alternating repeats create overlapping duplicate texts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

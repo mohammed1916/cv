@@ -1,5 +1,5 @@
 {
-  "routes": 1537,
+  "routes": 1557,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -200,6 +200,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1027",
+      "number": "1027",
+      "title": "Longest Arithmetic Subsequence",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1029",
       "number": "1029",
       "title": "Two City Scheduling",
@@ -236,6 +245,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1035",
+      "number": "1035",
+      "title": "Uncrossed Lines",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1037",
       "number": "1037",
       "title": "Valid Boomerang",
@@ -263,6 +281,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1043",
+      "number": "1043",
+      "title": "Partition Array for Maximum Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1046",
       "number": "1046",
       "title": "Last Stone Weight",
@@ -275,6 +302,15 @@
       "folder": "Problem1047",
       "number": "1047",
       "title": "Remove All Adjacent Duplicates In String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1049",
+      "number": "1049",
+      "title": "Last Stone Weight II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -977,6 +1013,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1216",
+      "number": "1216",
+      "title": "Valid Palindrome III",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1217",
       "number": "1217",
       "title": "Minimum Cost to Move Chips to The Same Position",
@@ -1031,6 +1076,15 @@
       "folder": "Problem1222",
       "number": "1222",
       "title": "Queens That Can Attack the King",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1223",
+      "number": "1223",
+      "title": "Dice Roll Simulation",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -1487,6 +1541,15 @@
       "folder": "Problem1332",
       "number": "1332",
       "title": "Remove Palindromic Subsequences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1335",
+      "number": "1335",
+      "title": "Minimum Difficulty of a Job Schedule",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -2072,6 +2135,15 @@
       "folder": "Problem1456",
       "number": "1456",
       "title": "Maximum Number of Vowels in a Substring of Given Length",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1458",
+      "number": "1458",
+      "title": "Max Dot Product of Two Subsequences",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12134,9 +12206,27 @@
       "edgeNotes": 4
     },
     {
+      "folder": "Problem634",
+      "number": "634",
+      "title": "Find the Derangement of An Array",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem637",
       "number": "637",
       "title": "Average of Levels in Binary Tree",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem639",
+      "number": "639",
+      "title": "Decode Ways II",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -12204,6 +12294,24 @@
       "checks": 3,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem650",
+      "number": "650",
+      "title": "2 Keys Keyboard",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem651",
+      "number": "651",
+      "title": "4 Keys Keyboard",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem653",
@@ -12521,6 +12629,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem712",
+      "number": "712",
+      "title": "Minimum ASCII Delete Sum for Two Strings",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem713",
       "number": "713",
       "title": "Subarray Product Less Than K",
@@ -12791,6 +12908,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem790",
+      "number": "790",
+      "title": "Domino and Tromino Tiling",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem795",
       "number": "795",
       "title": "Number of Subarrays with Bounded Maximum",
@@ -12827,6 +12953,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem801",
+      "number": "801",
+      "title": "Minimum Swaps To Make Sequences Increasing",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem804",
       "number": "804",
       "title": "Unique Morse Code Words",
@@ -12854,6 +12989,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem813",
+      "number": "813",
+      "title": "Largest Sum of Averages",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem82",
       "number": "82",
       "title": "Remove Duplicates from Sorted List II",
@@ -12875,6 +13019,15 @@
       "folder": "Problem821",
       "number": "821",
       "title": "Shortest Distance to a Character",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem823",
+      "number": "823",
+      "title": "Binary Trees With Factors",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -13322,6 +13475,15 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem920",
+      "number": "920",
+      "title": "Number of Music Playlists",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem921",
       "number": "921",
       "title": "Minimum Add to Make Parentheses Valid",
@@ -13421,6 +13583,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem935",
+      "number": "935",
+      "title": "Knight Dialer",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem938",
       "number": "938",
       "title": "Range Sum of BST",
@@ -13437,6 +13608,15 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem940",
+      "number": "940",
+      "title": "Distinct Subsequences II",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem941",

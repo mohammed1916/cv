@@ -1,0 +1,31 @@
+{
+  "number": "1216",
+  "title": "Valid Palindrome III",
+  "goal": "Decide whether removing at most k characters can leave a palindrome.",
+  "strategy": "Interval DP stores the fewest deletions needed for each substring. Equal ends can remain around the inner solution; unequal ends require deleting one endpoint and choosing the cheaper remaining interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether removing at most k characters can leave a palindrome.",
+    "inspect": "Interval DP stores the fewest deletions needed for each substring. Equal ends can remain around the inner solution; unequal ends require deleting one endpoint and choosing the cheaper remaining interval.",
+    "update": "Interval DP stores the fewest deletions needed for each substring. Equal ends can remain around the inner solution; unequal ends require deleting one endpoint and choosing the cheaper remaining interval.",
+    "done": "Decide whether removing at most k characters can leave a palindrome."
+  },
+  "edgeCases": [
+    "An existing palindrome needs zero deletions",
+    "Distinct letters need all but one removed",
+    "One allowed deletion can remove a mismatched endpoint"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

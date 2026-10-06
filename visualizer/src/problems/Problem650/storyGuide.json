@@ -1,0 +1,31 @@
+{
+  "number": "650",
+  "title": "2 Keys Keyboard",
+  "goal": "Reach exactly n letters using the fewest Copy All and Paste operations.",
+  "strategy": "A copy followed by pastes multiplies the current count. Splitting a composite multiplier into its prime factors never costs more operations, so the optimum is the sum of prime factors with multiplicity.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach exactly n letters using the fewest Copy All and Paste operations.",
+    "inspect": "A copy followed by pastes multiplies the current count. Splitting a composite multiplier into its prime factors never costs more operations, so the optimum is the sum of prime factors with multiplicity.",
+    "update": "A copy followed by pastes multiplies the current count. Splitting a composite multiplier into its prime factors never costs more operations, so the optimum is the sum of prime factors with multiplicity.",
+    "done": "Reach exactly n letters using the fewest Copy All and Paste operations."
+  },
+  "edgeCases": [
+    "The initial single letter requires no operations",
+    "A prime target needs one copy then repeated paste",
+    "A power of two repeatedly doubles"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

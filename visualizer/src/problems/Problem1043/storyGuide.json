@@ -1,0 +1,31 @@
+{
+  "number": "1043",
+  "title": "Partition Array for Maximum Sum",
+  "goal": "Partition the array into blocks of length at most k to maximize the sum after each block is replaced by its maximum.",
+  "strategy": "For each prefix end, try all allowed final-block lengths. Track that block maximum while extending backward, then combine its replaced sum with the best earlier prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Partition the array into blocks of length at most k to maximize the sum after each block is replaced by its maximum.",
+    "inspect": "For each prefix end, try all allowed final-block lengths. Track that block maximum while extending backward, then combine its replaced sum with the best earlier prefix.",
+    "update": "For each prefix end, try all allowed final-block lengths. Track that block maximum while extending backward, then combine its replaced sum with the best earlier prefix.",
+    "done": "Partition the array into blocks of length at most k to maximize the sum after each block is replaced by its maximum."
+  },
+  "edgeCases": [
+    "Length-one blocks leave the original sum",
+    "One whole-array block can use the global maximum",
+    "Equal values make every partition score identical"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -2,8 +2,8 @@
   "scope": "Every catalog problem numbered 1 through 2500",
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 2500,
-  "routePresent": 1512,
-  "missing": 988,
+  "routePresent": 1532,
+  "missing": 968,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "bands": [
     {
@@ -19,22 +19,22 @@
     {
       "from": 501,
       "through": 750,
-      "missing": 68
+      "missing": 63
     },
     {
       "from": 751,
       "through": 1000,
-      "missing": 161
+      "missing": 154
     },
     {
       "from": 1001,
       "through": 1250,
-      "missing": 151
+      "missing": 145
     },
     {
       "from": 1251,
       "through": 1500,
-      "missing": 142
+      "missing": 140
     },
     {
       "from": 1501,
@@ -4496,8 +4496,8 @@
       "number": "634",
       "title": "Find the Derangement of An Array",
       "slug": "find-the-derangement-of-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem634"
     },
     {
       "number": "635",
@@ -4532,8 +4532,8 @@
       "number": "639",
       "title": "Decode Ways II",
       "slug": "decode-ways-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem639"
     },
     {
       "number": "640",
@@ -4609,15 +4609,15 @@
       "number": "650",
       "title": "2 Keys Keyboard",
       "slug": "2-keys-keyboard",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem650"
     },
     {
       "number": "651",
       "title": "4 Keys Keyboard",
       "slug": "4-keys-keyboard",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem651"
     },
     {
       "number": "652",
@@ -5044,8 +5044,8 @@
       "number": "712",
       "title": "Minimum ASCII Delete Sum for Two Strings",
       "slug": "minimum-ascii-delete-sum-for-two-strings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem712"
     },
     {
       "number": "713",
@@ -5591,8 +5591,8 @@
       "number": "790",
       "title": "Domino and Tromino Tiling",
       "slug": "domino-and-tromino-tiling",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem790"
     },
     {
       "number": "791",
@@ -5668,8 +5668,8 @@
       "number": "801",
       "title": "Minimum Swaps To Make Sequences Increasing",
       "slug": "minimum-swaps-to-make-sequences-increasing",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem801"
     },
     {
       "number": "802",
@@ -5752,8 +5752,8 @@
       "number": "813",
       "title": "Largest Sum of Averages",
       "slug": "largest-sum-of-averages",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem813"
     },
     {
       "number": "814",
@@ -5822,8 +5822,8 @@
       "number": "823",
       "title": "Binary Trees With Factors",
       "slug": "binary-trees-with-factors",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem823"
     },
     {
       "number": "824",
@@ -6501,8 +6501,8 @@
       "number": "920",
       "title": "Number of Music Playlists",
       "slug": "number-of-music-playlists",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem920"
     },
     {
       "number": "921",
@@ -6606,8 +6606,8 @@
       "number": "935",
       "title": "Knight Dialer",
       "slug": "knight-dialer",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem935"
     },
     {
       "number": "936",
@@ -6641,8 +6641,8 @@
       "number": "940",
       "title": "Distinct Subsequences II",
       "slug": "distinct-subsequences-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem940"
     },
     {
       "number": "941",
@@ -7251,8 +7251,8 @@
       "number": "1027",
       "title": "Longest Arithmetic Subsequence",
       "slug": "longest-arithmetic-subsequence",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1027"
     },
     {
       "number": "1028",
@@ -7307,8 +7307,8 @@
       "number": "1035",
       "title": "Uncrossed Lines",
       "slug": "uncrossed-lines",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1035"
     },
     {
       "number": "1036",
@@ -7363,8 +7363,8 @@
       "number": "1043",
       "title": "Partition Array for Maximum Sum",
       "slug": "partition-array-for-maximum-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1043"
     },
     {
       "number": "1044",
@@ -7405,8 +7405,8 @@
       "number": "1049",
       "title": "Last Stone Weight II",
       "slug": "last-stone-weight-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1049"
     },
     {
       "number": "1050",
@@ -8575,8 +8575,8 @@
       "number": "1216",
       "title": "Valid Palindrome III",
       "slug": "valid-palindrome-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1216"
     },
     {
       "number": "1217",
@@ -8624,8 +8624,8 @@
       "number": "1223",
       "title": "Dice Roll Simulation",
       "slug": "dice-roll-simulation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1223"
     },
     {
       "number": "1224",
@@ -9408,8 +9408,8 @@
       "number": "1335",
       "title": "Minimum Difficulty of a Job Schedule",
       "slug": "minimum-difficulty-of-a-job-schedule",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1335"
     },
     {
       "number": "1336",
@@ -10270,8 +10270,8 @@
       "number": "1458",
       "title": "Max Dot Product of Two Subsequences",
       "slug": "max-dot-product-of-two-subsequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1458"
     },
     {
       "number": "1459",

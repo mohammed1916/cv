@@ -1,0 +1,31 @@
+{
+  "number": "1223",
+  "title": "Dice Roll Simulation",
+  "goal": "Count die sequences obeying a separate maximum consecutive-run length for each face.",
+  "strategy": "DP remembers the last face and its run length. Switching faces starts a length-one run; repeating a face shifts its count to the next run length only when that face limit permits it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count die sequences obeying a separate maximum consecutive-run length for each face.",
+    "inspect": "DP remembers the last face and its run length. Switching faces starts a length-one run; repeating a face shifts its count to the next run length only when that face limit permits it.",
+    "update": "DP remembers the last face and its run length. Switching faces starts a length-one run; repeating a face shifts its count to the next run length only when that face limit permits it.",
+    "done": "Count die sequences obeying a separate maximum consecutive-run length for each face."
+  },
+  "edgeCases": [
+    "A single roll always offers all six faces",
+    "No face may repeat immediately",
+    "Limits longer than the sequence impose no restriction"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
