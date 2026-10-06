@@ -1,3 +1,4 @@
+import { nextSequenceSpecs, validateNextSequence, nextSequencePython, nextSequencePythonStages } from './nextSequenceBatch.js';
 import { graphGridSpecs, validateGraphGrid } from './graphGridSpecs.js';
 import { graphGridPython, graphGridPythonStages } from '../python/graphGridPython.js';
 import { databaseSpecs, validateDatabase } from './databaseSpecs.js';
@@ -30,6 +31,7 @@ function validate(id, input) {
   const require = (condition, message) => { if (!condition) throw new Error(message); };
   require(input && typeof input === 'object' && !Array.isArray(input), 'Use a JSON object.');
   for (const key of specs[id][0].split(' ')) require(key in input, `Missing ${key}.`);
+  if (id in nextSequenceSpecs) return validateNextSequence(id,input);
   if (id in graphGridSpecs) return validateGraphGrid(id,input);
   if (id in databaseSpecs) return validateDatabase(id,input);
   if (id in broadSpecs) return validateBroad(id,input);
@@ -118,9 +120,9 @@ export const definitions = Object.fromEntries(Object.entries(specs).map(([key,[f
     ...collectionStoryMetadata[id], goal, strategy, complexity,
     inputLabel: `${fields} (JSON; bounded for readable playback)`,
     code: code.split('|').map((text,i) => ({line:i+1,text})),
-    python: graphGridPython[id] ?? databasePython[id] ?? broadPython[id] ?? rangePython[id] ?? triePython[id] ?? collectionPython[id] ?? laterPython[id],
+    python: nextSequencePython[id] ?? graphGridPython[id] ?? databasePython[id] ?? broadPython[id] ?? rangePython[id] ?? triePython[id] ?? collectionPython[id] ?? laterPython[id],
     sql: databaseSql[id],
-    pythonStages: graphGridPythonStages[id] ?? databasePythonStages[id] ?? broadPythonStages[id] ?? rangePythonStages[id] ?? triePythonStages[id],
+    pythonStages: nextSequencePythonStages[id] ?? graphGridPythonStages[id] ?? databasePythonStages[id] ?? broadPythonStages[id] ?? rangePythonStages[id] ?? triePythonStages[id],
     examples: collectionStoryExamples[id],
     phases: [{id:'start',label:'Set up',description:goal},{id:'inspect',label:'Decide',description:strategy},{id:'update',label:'Record progress',description:strategy},{id:'done',label:'Return',description:goal}],
     parse: text => validate(id,JSON.parse(text)),

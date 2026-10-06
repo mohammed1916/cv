@@ -1,3 +1,4 @@
+import { nextSequenceSolvers } from './nextSequenceBatch.js';
 import { graphGridSolvers } from './graphGridAlgorithms.js';
 import { databaseSolvers } from './databaseAlgorithms.js';
 import { broadSolvers } from './expansionBroadAlgorithms.js';
@@ -32,6 +33,7 @@ export const solvers = {
 ...rangeSolvers,
 ...broadSolvers,
 ...databaseSolvers,
+...nextSequenceSolvers,
 ...graphGridSolvers,
   860({bills}, emit) {
     let five=0,ten=0;

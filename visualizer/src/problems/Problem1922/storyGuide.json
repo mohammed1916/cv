@@ -1,0 +1,31 @@
+{
+  "number": "1922",
+  "title": "Count Good Numbers",
+  "goal": "Count length-n digit strings with even digits at even indices and prime digits at odd indices.",
+  "strategy": "There are five even choices and four prime choices. Compute their powers modulo 1000000007 by repeatedly squaring, so huge lengths need only logarithmic work.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count length-n digit strings with even digits at even indices and prime digits at odd indices.",
+    "inspect": "There are five even choices and four prime choices. Compute their powers modulo 1000000007 by repeatedly squaring, so huge lengths need only logarithmic work.",
+    "update": "There are five even choices and four prime choices. Compute their powers modulo 1000000007 by repeatedly squaring, so huge lengths need only logarithmic work.",
+    "done": "Count length-n digit strings with even digits at even indices and prime digits at odd indices."
+  },
+  "edgeCases": [
+    "One even-indexed digit",
+    "Equal counts of even and odd positions",
+    "Largest supported length"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

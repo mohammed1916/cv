@@ -3220,6 +3220,13 @@ export const collectionStoryMetadata = {
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/find-a-peak-element-ii/"
   },
+  "1903": {
+    "number": "1903",
+    "title": "Largest Odd Number in String",
+    "slug": "largest-odd-number-in-string",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/largest-odd-number-in-string/"
+  },
   "1905": {
     "number": "1905",
     "title": "Count Sub Islands",
@@ -3233,6 +3240,34 @@ export const collectionStoryMetadata = {
     "slug": "count-salary-categories",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/count-salary-categories/"
+  },
+  "1909": {
+    "number": "1909",
+    "title": "Remove One Element to Make the Array Strictly Increasing",
+    "slug": "remove-one-element-to-make-the-array-strictly-increasing",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/remove-one-element-to-make-the-array-strictly-increasing/"
+  },
+  "1910": {
+    "number": "1910",
+    "title": "Remove All Occurrences of a Substring",
+    "slug": "remove-all-occurrences-of-a-substring",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/remove-all-occurrences-of-a-substring/"
+  },
+  "1911": {
+    "number": "1911",
+    "title": "Maximum Alternating Subsequence Sum",
+    "slug": "maximum-alternating-subsequence-sum",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/maximum-alternating-subsequence-sum/"
+  },
+  "1913": {
+    "number": "1913",
+    "title": "Maximum Product Difference Between Two Pairs",
+    "slug": "maximum-product-difference-between-two-pairs",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-product-difference-between-two-pairs/"
   },
   "1914": {
     "number": "1914",
@@ -3255,12 +3290,61 @@ export const collectionStoryMetadata = {
     "difficulty": "Hard",
     "url": "https://leetcode.com/problems/count-ways-to-build-rooms-in-an-ant-colony/"
   },
+  "1920": {
+    "number": "1920",
+    "title": "Build Array from Permutation",
+    "slug": "build-array-from-permutation",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/build-array-from-permutation/"
+  },
+  "1921": {
+    "number": "1921",
+    "title": "Eliminate Maximum Number of Monsters",
+    "slug": "eliminate-maximum-number-of-monsters",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/eliminate-maximum-number-of-monsters/"
+  },
+  "1922": {
+    "number": "1922",
+    "title": "Count Good Numbers",
+    "slug": "count-good-numbers",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/count-good-numbers/"
+  },
+  "1925": {
+    "number": "1925",
+    "title": "Count Square Sum Triples",
+    "slug": "count-square-sum-triples",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/count-square-sum-triples/"
+  },
   "1926": {
     "number": "1926",
     "title": "Nearest Exit from Entrance in Maze",
     "slug": "nearest-exit-from-entrance-in-maze",
     "difficulty": "Medium",
     "url": "https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/"
+  },
+  "1929": {
+    "number": "1929",
+    "title": "Concatenation of Array",
+    "slug": "concatenation-of-array",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/concatenation-of-array/"
+  },
+  "1930": {
+    "number": "1930",
+    "title": "Unique Length-3 Palindromic Subsequences",
+    "slug": "unique-length-3-palindromic-subsequences",
+    "difficulty": "Medium",
+    "url": "https://leetcode.com/problems/unique-length-3-palindromic-subsequences/"
+  },
+  "1935": {
+    "number": "1935",
+    "title": "Maximum Number of Words You Can Type",
+    "slug": "maximum-number-of-words-you-can-type",
+    "difficulty": "Easy",
+    "url": "https://leetcode.com/problems/maximum-number-of-words-you-can-type/"
   },
   "1971": {
     "number": "1971",

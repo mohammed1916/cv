@@ -32,8 +32,9 @@ batch includes explicit Python and pseudocode step mappings and shared node diag
 The subsequent 48 range/broad and 10 database additions bring complete Python
 coverage to 155. Database problems also provide SQL queries and table playback.
 Six graph/grid additions bring complete Python coverage to 161, with 24 more
-original examples and step mappings. Current catalog coverage is 1,148 of 4,073;
-2,925 entries remain unmatched across 1,164 local routes.
+original examples and step mappings. The next twelve sequence/string/math additions bring complete Python coverage
+to 173 with 48 further examples. Current catalog coverage is 1,160 of 4,073;
+2,913 entries remain unmatched across 1,176 local routes.
 Python is the default where supplied; missing
 implementations are explicitly unavailable instead of relabeling pseudocode.
 Pseudocode retains playback line highlighting. Python does not reuse those

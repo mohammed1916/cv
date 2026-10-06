@@ -1,3 +1,4 @@
+import { nextSequenceSpecs } from './nextSequenceBatch.js';
 import { graphGridSpecs } from './graphGridSpecs.js';
 import { databaseSpecs } from './databaseSpecs.js';
 import { broadSpecs } from './expansionBroadSpecs.js';
@@ -29,6 +30,7 @@ export const specs = {
 ...rangeSpecs,
 ...broadSpecs,
 ...databaseSpecs,
+...nextSequenceSpecs,
 ...graphGridSpecs,
 860:['bills','Serve every customer with exact change.','Keep fives available: a ten plus a five is preferable to three fives when changing twenty.','five = ten = 0|for bill in bills:|    choose change using available denominations|    update counts; reject a shortage|return true','O(n) time; O(1) state.'],
 861:['grid','Maximize the sum of binary row values after flips.','A leading one outweighs every lower bit combined. Fix row leaders first, then maximize each column independently.','copy grid|make every row start with one|for each remaining column:|    flip when zeros outnumber ones|return sum of binary rows','O(rc) time and copied-grid space.'],

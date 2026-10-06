@@ -1,0 +1,31 @@
+{
+  "number": "1921",
+  "title": "Eliminate Maximum Number of Monsters",
+  "goal": "Eliminate as many approaching monsters as possible before any arrives.",
+  "strategy": "Sort integer arrival deadlines. The weapon fires at minutes 0,1,2,...; a monster whose deadline is at or before its firing minute has already arrived.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Eliminate as many approaching monsters as possible before any arrives.",
+    "inspect": "Sort integer arrival deadlines. The weapon fires at minutes 0,1,2,...; a monster whose deadline is at or before its firing minute has already arrived.",
+    "update": "Sort integer arrival deadlines. The weapon fires at minutes 0,1,2,...; a monster whose deadline is at or before its firing minute has already arrived.",
+    "done": "Eliminate as many approaching monsters as possible before any arrives."
+  },
+  "edgeCases": [
+    "Two arrivals compete for the same shot",
+    "Arrival exactly at firing time loses",
+    "One monster can always be shot immediately"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

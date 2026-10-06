@@ -1,0 +1,31 @@
+{
+  "number": "1925",
+  "title": "Count Square Sum Triples",
+  "goal": "Count ordered positive integer triples satisfying a squared plus b squared equals c squared.",
+  "strategy": "Enumerate each unordered pair of distinct legs once. A perfect-square sum within the bound contributes both leg orders; equal positive legs cannot have an integer hypotenuse.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count ordered positive integer triples satisfying a squared plus b squared equals c squared.",
+    "inspect": "Enumerate each unordered pair of distinct legs once. A perfect-square sum within the bound contributes both leg orders; equal positive legs cannot have an integer hypotenuse.",
+    "update": "Enumerate each unordered pair of distinct legs once. A perfect-square sum within the bound contributes both leg orders; equal positive legs cannot have an integer hypotenuse.",
+    "done": "Count ordered positive integer triples satisfying a squared plus b squared equals c squared."
+  },
+  "edgeCases": [
+    "No positive triple fits",
+    "An exact hypotenuse reaches the boundary",
+    "Smallest allowed bound"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

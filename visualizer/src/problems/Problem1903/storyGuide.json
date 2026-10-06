@@ -1,0 +1,31 @@
+{
+  "number": "1903",
+  "title": "Largest Odd Number in String",
+  "goal": "Keep the largest odd-valued substring of a decimal number.",
+  "strategy": "An odd number must end in an odd digit. The rightmost odd digit allows the longest prefix, which dominates every shorter candidate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Keep the largest odd-valued substring of a decimal number.",
+    "inspect": "An odd number must end in an odd digit. The rightmost odd digit allows the longest prefix, which dominates every shorter candidate.",
+    "update": "An odd number must end in an odd digit. The rightmost odd digit allows the longest prefix, which dominates every shorter candidate.",
+    "done": "Keep the largest odd-valued substring of a decimal number."
+  },
+  "edgeCases": [
+    "Every digit is even",
+    "The final digit is already odd",
+    "One odd digit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

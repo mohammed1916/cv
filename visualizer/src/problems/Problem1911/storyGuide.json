@@ -1,0 +1,31 @@
+{
+  "number": "1911",
+  "title": "Maximum Alternating Subsequence Sum",
+  "goal": "Maximize the alternating sum of a subsequence.",
+  "strategy": "Maintain the best sums with an even or odd number of selected elements. Read both previous states before deciding whether to skip, add, or subtract the next value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the alternating sum of a subsequence.",
+    "inspect": "Maintain the best sums with an even or odd number of selected elements. Read both previous states before deciding whether to skip, add, or subtract the next value.",
+    "update": "Maintain the best sums with an even or odd number of selected elements. Read both previous states before deciding whether to skip, add, or subtract the next value.",
+    "done": "Maximize the alternating sum of a subsequence."
+  },
+  "edgeCases": [
+    "Strictly decreasing values",
+    "Repeated equal values",
+    "One selected value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

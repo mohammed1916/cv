@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1164,
-  "matchedCatalogRoutes": 1148,
-  "remaining": 2925,
+  "routes": 1176,
+  "matchedCatalogRoutes": 1160,
+  "remaining": 2913,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -13415,8 +13415,8 @@
       "number": "1903",
       "title": "Largest Odd Number in String",
       "slug": "largest-odd-number-in-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1903"
     },
     {
       "number": "1904",
@@ -13457,22 +13457,22 @@
       "number": "1909",
       "title": "Remove One Element to Make the Array Strictly Increasing",
       "slug": "remove-one-element-to-make-the-array-strictly-increasing",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1909"
     },
     {
       "number": "1910",
       "title": "Remove All Occurrences of a Substring",
       "slug": "remove-all-occurrences-of-a-substring",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1910"
     },
     {
       "number": "1911",
       "title": "Maximum Alternating Subsequence Sum",
       "slug": "maximum-alternating-subsequence-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1911"
     },
     {
       "number": "1912",
@@ -13485,8 +13485,8 @@
       "number": "1913",
       "title": "Maximum Product Difference Between Two Pairs",
       "slug": "maximum-product-difference-between-two-pairs",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1913"
     },
     {
       "number": "1914",
@@ -13534,22 +13534,22 @@
       "number": "1920",
       "title": "Build Array from Permutation",
       "slug": "build-array-from-permutation",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1920"
     },
     {
       "number": "1921",
       "title": "Eliminate Maximum Number of Monsters",
       "slug": "eliminate-maximum-number-of-monsters",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1921"
     },
     {
       "number": "1922",
       "title": "Count Good Numbers",
       "slug": "count-good-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1922"
     },
     {
       "number": "1923",
@@ -13569,8 +13569,8 @@
       "number": "1925",
       "title": "Count Square Sum Triples",
       "slug": "count-square-sum-triples",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1925"
     },
     {
       "number": "1926",
@@ -13597,15 +13597,15 @@
       "number": "1929",
       "title": "Concatenation of Array",
       "slug": "concatenation-of-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1929"
     },
     {
       "number": "1930",
       "title": "Unique Length-3 Palindromic Subsequences",
       "slug": "unique-length-3-palindromic-subsequences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1930"
     },
     {
       "number": "1931",
@@ -13639,8 +13639,8 @@
       "number": "1935",
       "title": "Maximum Number of Words You Can Type",
       "slug": "maximum-number-of-words-you-can-type",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1935"
     },
     {
       "number": "1936",

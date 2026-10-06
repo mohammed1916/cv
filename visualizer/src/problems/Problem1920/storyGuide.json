@@ -1,0 +1,31 @@
+{
+  "number": "1920",
+  "title": "Build Array from Permutation",
+  "goal": "Compose a permutation with itself.",
+  "strategy": "For each output position, first read the input value as an address, then read the value at that address. Keep the original permutation intact while writing the result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compose a permutation with itself.",
+    "inspect": "For each output position, first read the input value as an address, then read the value at that address. Keep the original permutation intact while writing the result.",
+    "update": "For each output position, first read the input value as an address, then read the value at that address. Keep the original permutation intact while writing the result.",
+    "done": "Compose a permutation with itself."
+  },
+  "edgeCases": [
+    "Identity permutation",
+    "One cycle advances by two positions",
+    "Singleton permutation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

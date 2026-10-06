@@ -1,0 +1,31 @@
+{
+  "number": "1910",
+  "title": "Remove All Occurrences of a Substring",
+  "goal": "Repeatedly erase the leftmost occurrence of part.",
+  "strategy": "Build a surviving-character stack. Whenever its suffix becomes part, erase that suffix immediately, allowing future characters to expose new matches.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Repeatedly erase the leftmost occurrence of part.",
+    "inspect": "Build a surviving-character stack. Whenever its suffix becomes part, erase that suffix immediately, allowing future characters to expose new matches.",
+    "update": "Build a surviving-character stack. Whenever its suffix becomes part, erase that suffix immediately, allowing future characters to expose new matches.",
+    "done": "Repeatedly erase the leftmost occurrence of part."
+  },
+  "edgeCases": [
+    "A deletion exposes a new overlapping boundary",
+    "No occurrence exists",
+    "All characters disappear"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

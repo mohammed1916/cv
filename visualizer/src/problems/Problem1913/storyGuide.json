@@ -1,0 +1,31 @@
+{
+  "number": "1913",
+  "title": "Maximum Product Difference Between Two Pairs",
+  "goal": "Maximize the difference between two products using four distinct positions.",
+  "strategy": "Sort the positive values. The two largest maximize the first product; the two smallest minimize the second, using disjoint positions even when values repeat.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the difference between two products using four distinct positions.",
+    "inspect": "Sort the positive values. The two largest maximize the first product; the two smallest minimize the second, using disjoint positions even when values repeat.",
+    "update": "Sort the positive values. The two largest maximize the first product; the two smallest minimize the second, using disjoint positions even when values repeat.",
+    "done": "Maximize the difference between two products using four distinct positions."
+  },
+  "edgeCases": [
+    "Four entries require using every position",
+    "Distinct positions may have identical values",
+    "Repeated minimum and maximum values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

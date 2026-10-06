@@ -1,0 +1,31 @@
+{
+  "number": "1909",
+  "title": "Remove One Element to Make the Array Strictly Increasing",
+  "goal": "Decide whether deleting exactly one element can leave a strictly increasing array.",
+  "strategy": "At the first non-increasing pair, remove the larger predecessor if the earlier prefix permits it; otherwise remove the current value. A second conflict exhausts the deletion budget.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether deleting exactly one element can leave a strictly increasing array.",
+    "inspect": "At the first non-increasing pair, remove the larger predecessor if the earlier prefix permits it; otherwise remove the current value. A second conflict exhausts the deletion budget.",
+    "update": "At the first non-increasing pair, remove the larger predecessor if the earlier prefix permits it; otherwise remove the current value. A second conflict exhausts the deletion budget.",
+    "done": "Decide whether deleting exactly one element can leave a strictly increasing array."
+  },
+  "edgeCases": [
+    "Remove the current value rather than its predecessor",
+    "Two conflicts exhaust the budget",
+    "Two equal entries become a singleton"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

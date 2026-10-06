@@ -1,5 +1,5 @@
 {
-  "routes": 1164,
+  "routes": 1176,
   "entries": [
     {
       "folder": "GameOnGrowingTree",
@@ -4607,6 +4607,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1903",
+      "number": "1903",
+      "title": "Largest Odd Number in String",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1905",
       "number": "1905",
       "title": "Count Sub Islands",
@@ -4625,6 +4634,15 @@
       "edgeNotes": 3
     },
     {
+      "folder": "Problem1909",
+      "number": "1909",
+      "title": "Remove One Element to Make the Array Strictly Increasing",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem191",
       "number": "191",
       "title": "Number of 1 Bits",
@@ -4632,6 +4650,33 @@
       "checks": 0,
       "rules": 1,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1910",
+      "number": "1910",
+      "title": "Remove All Occurrences of a Substring",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1911",
+      "number": "1911",
+      "title": "Maximum Alternating Subsequence Sum",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1913",
+      "number": "1913",
+      "title": "Maximum Product Difference Between Two Pairs",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem1914",
@@ -4670,9 +4715,54 @@
       "edgeNotes": 1
     },
     {
+      "folder": "Problem1920",
+      "number": "1920",
+      "title": "Build Array from Permutation",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1921",
+      "number": "1921",
+      "title": "Eliminate Maximum Number of Monsters",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1922",
+      "number": "1922",
+      "title": "Count Good Numbers",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1925",
+      "number": "1925",
+      "title": "Count Square Sum Triples",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
       "folder": "Problem1926",
       "number": "1926",
       "title": "Nearest Exit from Entrance in Maze",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1929",
+      "number": "1929",
+      "title": "Concatenation of Array",
       "kind": "catalog-story",
       "checks": 0,
       "rules": 1,
@@ -4686,6 +4776,24 @@
       "checks": 0,
       "rules": 0,
       "edgeNotes": 1
+    },
+    {
+      "folder": "Problem1930",
+      "number": "1930",
+      "title": "Unique Length-3 Palindromic Subsequences",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
+    },
+    {
+      "folder": "Problem1935",
+      "number": "1935",
+      "title": "Maximum Number of Words You Can Type",
+      "kind": "catalog-story",
+      "checks": 0,
+      "rules": 1,
+      "edgeNotes": 3
     },
     {
       "folder": "Problem194",
