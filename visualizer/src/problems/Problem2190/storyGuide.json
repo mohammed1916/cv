@@ -1,0 +1,31 @@
+{
+  "number": "2190",
+  "title": "Most Frequent Number Following Key In an Array",
+  "goal": "Find the most frequent value immediately following the key.",
+  "strategy": "Only adjacent successors of key occurrences contribute. Count those values and retain the largest frequency; a key at the final position has no successor.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the most frequent value immediately following the key.",
+    "inspect": "Only adjacent successors of key occurrences contribute. Count those values and retain the largest frequency; a key at the final position has no successor.",
+    "update": "Only adjacent successors of key occurrences contribute. Count those values and retain the largest frequency; a key at the final position has no successor.",
+    "done": "Find the most frequent value immediately following the key."
+  },
+  "edgeCases": [
+    "A final key has no following value",
+    "Consecutive keys can make the key its own successor",
+    "One qualifying adjacent pair determines the answer"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

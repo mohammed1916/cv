@@ -40,8 +40,8 @@ Eighteen subsequent additions bring complete Python coverage to 252.
 Fifteen further additions bring complete Python coverage to 267.
 Twenty further additions bring complete Python coverage to 287.
 Fourteen subsequent additions bring complete Python coverage to 301.
-Current catalog coverage is 1,368 of 4,073; 2,705 entries remain unmatched
-across 1,384 local routes. New linked-list stories reuse LinkedListGraph and a
+Current catalog coverage is 1,388 of 4,073; 2,685 entries remain unmatched
+across 1,404 local routes. New linked-list stories reuse LinkedListGraph and a
 shared stable-ID snapshot helper. Detect Squares uses the shared PointStateDiagram. Shared record tables now render multi-table inputs. Subsequent batches use authoredBatches.js to combine
 explicit per-problem implementations and validators.
 Python is the default where supplied; missing
@@ -62,6 +62,8 @@ Twenty window, ordering, dependency, recovery, and simulation stories add anothe
 Twenty stamp, scheduling, corridor, ranking, and consistency stories add 80 original examples. This resumed run now totals 188 additions and 752 examples, with 361 complete collection Python implementations. The cumulative unverified expansion is 610 problems and 2,440 examples.
 
 Twenty hash, painting, heap, bitset, capacity, and frequency stories add 80 original examples. This resumed run now totals 208 additions and 832 examples, with 381 complete collection Python implementations. The cumulative unverified expansion is 610 problems and 2,440 examples.
+
+Twenty ranking, construction, race, ancestry, and tree stories add 80 original examples. This resumed run now totals 228 additions and 912 examples, with 401 complete collection Python implementations. The cumulative unverified expansion is 630 problems and 2,520 examples.
 
 ## Machine-readable progress
 

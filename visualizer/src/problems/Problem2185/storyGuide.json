@@ -1,0 +1,31 @@
+{
+  "number": "2185",
+  "title": "Counting Words With a Given Prefix",
+  "goal": "Count words beginning with the supplied prefix.",
+  "strategy": "Compare only the leading prefix-length characters of each word. Words shorter than the prefix fail naturally, and duplicate words count as separate occurrences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count words beginning with the supplied prefix.",
+    "inspect": "Compare only the leading prefix-length characters of each word. Words shorter than the prefix fail naturally, and duplicate words count as separate occurrences.",
+    "update": "Compare only the leading prefix-length characters of each word. Words shorter than the prefix fail naturally, and duplicate words count as separate occurrences.",
+    "done": "Count words beginning with the supplied prefix."
+  },
+  "edgeCases": [
+    "The prefix can be longer than every word",
+    "An exact word match also starts with the prefix",
+    "An internal fragment does not count as a prefix"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

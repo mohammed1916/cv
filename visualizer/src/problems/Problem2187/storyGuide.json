@@ -1,0 +1,31 @@
+{
+  "number": "2187",
+  "title": "Minimum Time to Complete Trips",
+  "goal": "Find the earliest time at which all buses together complete enough trips.",
+  "strategy": "At a proposed time, each bus completes floor(time divided by its trip duration) trips. This count is monotone, so binary search the first feasible time.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the earliest time at which all buses together complete enough trips.",
+    "inspect": "At a proposed time, each bus completes floor(time divided by its trip duration) trips. This count is monotone, so binary search the first feasible time.",
+    "update": "At a proposed time, each bus completes floor(time divided by its trip duration) trips. This count is monotone, so binary search the first feasible time.",
+    "done": "Find the earliest time at which all buses together complete enough trips."
+  },
+  "edgeCases": [
+    "One bus must finish every requested trip",
+    "The first completed trip comes from the fastest bus",
+    "Equal-duration buses complete trips simultaneously"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

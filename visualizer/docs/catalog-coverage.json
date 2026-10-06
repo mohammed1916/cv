@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1384,
-  "matchedCatalogRoutes": 1368,
-  "remaining": 2705,
+  "routes": 1404,
+  "matchedCatalogRoutes": 1388,
+  "remaining": 2685,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -15340,78 +15340,78 @@
       "number": "2178",
       "title": "Maximum Split of Positive Even Integers",
       "slug": "maximum-split-of-positive-even-integers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2178"
     },
     {
       "number": "2179",
       "title": "Count Good Triplets in an Array",
       "slug": "count-good-triplets-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2179"
     },
     {
       "number": "2180",
       "title": "Count Integers With Even Digit Sum",
       "slug": "count-integers-with-even-digit-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2180"
     },
     {
       "number": "2181",
       "title": "Merge Nodes in Between Zeros",
       "slug": "merge-nodes-in-between-zeros",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2181"
     },
     {
       "number": "2182",
       "title": "Construct String With Repeat Limit",
       "slug": "construct-string-with-repeat-limit",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2182"
     },
     {
       "number": "2183",
       "title": "Count Array Pairs Divisible by K",
       "slug": "count-array-pairs-divisible-by-k",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2183"
     },
     {
       "number": "2184",
       "title": "Number of Ways to Build Sturdy Brick Wall",
       "slug": "number-of-ways-to-build-sturdy-brick-wall",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2184"
     },
     {
       "number": "2185",
       "title": "Counting Words With a Given Prefix",
       "slug": "counting-words-with-a-given-prefix",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2185"
     },
     {
       "number": "2186",
       "title": "Minimum Number of Steps to Make Two Strings Anagram II",
       "slug": "minimum-number-of-steps-to-make-two-strings-anagram-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2186"
     },
     {
       "number": "2187",
       "title": "Minimum Time to Complete Trips",
       "slug": "minimum-time-to-complete-trips",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2187"
     },
     {
       "number": "2188",
       "title": "Minimum Time to Finish the Race",
       "slug": "minimum-time-to-finish-the-race",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2188"
     },
     {
       "number": "2189",
@@ -15424,57 +15424,57 @@
       "number": "2190",
       "title": "Most Frequent Number Following Key In an Array",
       "slug": "most-frequent-number-following-key-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2190"
     },
     {
       "number": "2191",
       "title": "Sort the Jumbled Numbers",
       "slug": "sort-the-jumbled-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2191"
     },
     {
       "number": "2192",
       "title": "All Ancestors of a Node in a Directed Acyclic Graph",
       "slug": "all-ancestors-of-a-node-in-a-directed-acyclic-graph",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2192"
     },
     {
       "number": "2193",
       "title": "Minimum Number of Moves to Make Palindrome",
       "slug": "minimum-number-of-moves-to-make-palindrome",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2193"
     },
     {
       "number": "2194",
       "title": "Cells in a Range on an Excel Sheet",
       "slug": "cells-in-a-range-on-an-excel-sheet",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2194"
     },
     {
       "number": "2195",
       "title": "Append K Integers With Minimal Sum",
       "slug": "append-k-integers-with-minimal-sum",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2195"
     },
     {
       "number": "2196",
       "title": "Create Binary Tree From Descriptions",
       "slug": "create-binary-tree-from-descriptions",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2196"
     },
     {
       "number": "2197",
       "title": "Replace Non-Coprime Numbers in Array",
       "slug": "replace-non-coprime-numbers-in-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2197"
     },
     {
       "number": "2198",
@@ -15494,8 +15494,8 @@
       "number": "2200",
       "title": "Find All K-Distant Indices in an Array",
       "slug": "find-all-k-distant-indices-in-an-array",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem2200"
     },
     {
       "number": "2201",

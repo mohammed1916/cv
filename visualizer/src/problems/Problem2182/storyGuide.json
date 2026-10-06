@@ -1,0 +1,31 @@
+{
+  "number": "2182",
+  "title": "Construct String With Repeat Limit",
+  "goal": "Build the lexicographically largest string without exceeding consecutive-repeat limits.",
+  "strategy": "Use the largest remaining letter up to its allowed run length. If more copies remain, insert the largest available smaller letter as one separator; stop if no separator exists.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build the lexicographically largest string without exceeding consecutive-repeat limits.",
+    "inspect": "Use the largest remaining letter up to its allowed run length. If more copies remain, insert the largest available smaller letter as one separator; stop if no separator exists.",
+    "update": "Use the largest remaining letter up to its allowed run length. If more copies remain, insert the largest available smaller letter as one separator; stop if no separator exists.",
+    "done": "Build the lexicographically largest string without exceeding consecutive-repeat limits."
+  },
+  "edgeCases": [
+    "One distinct letter leaves excess copies unused",
+    "A limit of one forbids all equal neighbors",
+    "A generous limit permits ordinary descending order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

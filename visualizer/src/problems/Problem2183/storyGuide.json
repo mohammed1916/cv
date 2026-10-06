@@ -1,0 +1,31 @@
+{
+  "number": "2183",
+  "title": "Count Array Pairs Divisible by K",
+  "goal": "Count pairs whose value product is divisible by k.",
+  "strategy": "Only each value gcd with k matters. A prior gcd category pairs with the current value exactly when the product of the two gcds is divisible by k.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs whose value product is divisible by k.",
+    "inspect": "Only each value gcd with k matters. A prior gcd category pairs with the current value exactly when the product of the two gcds is divisible by k.",
+    "update": "Only each value gcd with k matters. A prior gcd category pairs with the current value exactly when the product of the two gcds is divisible by k.",
+    "done": "Count pairs whose value product is divisible by k."
+  },
+  "edgeCases": [
+    "Divisor one accepts every pair",
+    "Prime divisor requires a multiple in each qualifying pair",
+    "No pair supplies the necessary factors"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

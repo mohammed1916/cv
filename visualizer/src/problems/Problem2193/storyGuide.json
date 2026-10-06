@@ -1,0 +1,31 @@
+{
+  "number": "2193",
+  "title": "Minimum Number of Moves to Make Palindrome",
+  "goal": "Form a palindrome using the fewest adjacent swaps.",
+  "strategy": "Pair the leftmost unsettled letter with its rightmost available match and bubble that match to the right boundary. If the letter has no partner, move it one step toward the center and retry.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Form a palindrome using the fewest adjacent swaps.",
+    "inspect": "Pair the leftmost unsettled letter with its rightmost available match and bubble that match to the right boundary. If the letter has no partner, move it one step toward the center and retry.",
+    "update": "Pair the leftmost unsettled letter with its rightmost available match and bubble that match to the right boundary. If the letter has no partner, move it one step toward the center and retry.",
+    "done": "Form a palindrome using the fewest adjacent swaps."
+  },
+  "edgeCases": [
+    "An existing palindrome needs no swaps",
+    "The unique odd letter starts at an outer boundary",
+    "One pair is already a palindrome"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

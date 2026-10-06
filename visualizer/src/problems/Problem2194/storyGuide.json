@@ -1,0 +1,31 @@
+{
+  "number": "2194",
+  "title": "Cells in a Range on an Excel Sheet",
+  "goal": "Enumerate spreadsheet cells in a rectangular range by column then row.",
+  "strategy": "Decode the two column letters and row digits. Nested loops over columns first and rows second produce the required order, including both endpoints.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Enumerate spreadsheet cells in a rectangular range by column then row.",
+    "inspect": "Decode the two column letters and row digits. Nested loops over columns first and rows second produce the required order, including both endpoints.",
+    "update": "Decode the two column letters and row digits. Nested loops over columns first and rows second produce the required order, including both endpoints.",
+    "done": "Enumerate spreadsheet cells in a rectangular range by column then row."
+  },
+  "edgeCases": [
+    "One cell is both endpoints",
+    "One row spans several columns",
+    "One column spans every supported row"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

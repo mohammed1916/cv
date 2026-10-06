@@ -1,0 +1,31 @@
+{
+  "number": "2178",
+  "title": "Maximum Split of Positive Even Integers",
+  "goal": "Split an even total into as many distinct positive even values as possible.",
+  "strategy": "Choose the smallest unused even values while they fit. Any leftover even amount is smaller than the next candidate, so adding it to the last chosen value preserves distinctness without reducing the count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split an even total into as many distinct positive even values as possible.",
+    "inspect": "Choose the smallest unused even values while they fit. Any leftover even amount is smaller than the next candidate, so adding it to the last chosen value preserves distinctness without reducing the count.",
+    "update": "Choose the smallest unused even values while they fit. Any leftover even amount is smaller than the next candidate, so adding it to the last chosen value preserves distinctness without reducing the count.",
+    "done": "Split an even total into as many distinct positive even values as possible."
+  },
+  "edgeCases": [
+    "Odd totals cannot be split into even values",
+    "The smallest positive even total forms one term",
+    "An exact consecutive-even sum needs no remainder adjustment"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

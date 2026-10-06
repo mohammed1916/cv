@@ -1,0 +1,31 @@
+{
+  "number": "2196",
+  "title": "Create Binary Tree From Descriptions",
+  "goal": "Construct the binary tree described by parent child and side triples.",
+  "strategy": "Create one node per value and attach each edge to its specified side. The unique value that never appears as a child is the root.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct the binary tree described by parent child and side triples.",
+    "inspect": "Create one node per value and attach each edge to its specified side. The unique value that never appears as a child is the root.",
+    "update": "Create one node per value and attach each edge to its specified side. The unique value that never appears as a child is the root.",
+    "done": "Construct the binary tree described by parent child and side triples."
+  },
+  "edgeCases": [
+    "One edge forms the smallest described tree",
+    "A right-only chain preserves null left positions",
+    "The root need not be the smallest or first parent"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

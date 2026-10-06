@@ -1,0 +1,31 @@
+{
+  "number": "2195",
+  "title": "Append K Integers With Minimal Sum",
+  "goal": "Append k distinct absent positive integers with minimum total sum.",
+  "strategy": "Sorted existing values reveal gaps of missing positive integers. Consume the smallest available gaps first and sum each arithmetic run without enumerating every appended value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Append k distinct absent positive integers with minimum total sum.",
+    "inspect": "Sorted existing values reveal gaps of missing positive integers. Consume the smallest available gaps first and sum each arithmetic run without enumerating every appended value.",
+    "update": "Sorted existing values reveal gaps of missing positive integers. Consume the smallest available gaps first and sum each arithmetic run without enumerating every appended value.",
+    "done": "Append k distinct absent positive integers with minimum total sum."
+  },
+  "edgeCases": [
+    "The first missing values lie entirely before the smallest existing value",
+    "A consecutive existing prefix forces the tail to start later",
+    "Repeated existing values block only one positive integer"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

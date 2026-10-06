@@ -1,0 +1,31 @@
+{
+  "number": "2186",
+  "title": "Minimum Number of Steps to Make Two Strings Anagram II",
+  "goal": "Append the fewest characters to make two strings anagrams.",
+  "strategy": "For each letter, the deficient string needs exactly the difference between the two counts. Summing absolute frequency differences counts all necessary appends on both sides.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Append the fewest characters to make two strings anagrams.",
+    "inspect": "For each letter, the deficient string needs exactly the difference between the two counts. Summing absolute frequency differences counts all necessary appends on both sides.",
+    "update": "For each letter, the deficient string needs exactly the difference between the two counts. Summing absolute frequency differences counts all necessary appends on both sides.",
+    "done": "Append the fewest characters to make two strings anagrams."
+  },
+  "edgeCases": [
+    "Existing anagrams need no appended letters",
+    "Disjoint alphabets require appending both full strings",
+    "One repeated-letter deficit has a direct count"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}
