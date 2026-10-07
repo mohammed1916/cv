@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('game-play-analysis-ii')[0];
+import authoredExamples0 from '../../config/examples/game-play-analysis-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './GamePlayAnalysisIIVisualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -42,7 +43,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('game-play-analysis-ii')
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def gamePlayAnalysisII(events):' },

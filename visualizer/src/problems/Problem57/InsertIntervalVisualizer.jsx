@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/insert-interval.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +11,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./InsertIntervalVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -77,7 +78,7 @@ function generateSteps(intervals, newInterval) {
     return steps;
 }
 
-const EXAMPLES = getExamples('insert-interval');
+const EXAMPLES = authoredExamples0;
 
 const BAR_SCALE = 14; // px per unit
 

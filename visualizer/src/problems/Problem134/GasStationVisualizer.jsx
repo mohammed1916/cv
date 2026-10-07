@@ -1,14 +1,16 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--134.js';
+import authoredExamples1 from '../../config/examples/gas-station.js';
+
 import { gasStationNarrative } from './gasStationNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import GasStationStory from "./GasStationStory";
 import { CODE, buildGasStationStory } from "./algorithm";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./GasStationVisualizer.css";
 
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:134');
+const DEFAULT_EXAMPLES = authoredExamples0;
 
-const registryExamples = getExamplesOr("gas-station", []);
+const registryExamples = (authoredExamples1.length ? authoredExamples1 : []);
 const EXAMPLES =
   registryExamples.length > 0
     ? registryExamples.map((ex) => ({

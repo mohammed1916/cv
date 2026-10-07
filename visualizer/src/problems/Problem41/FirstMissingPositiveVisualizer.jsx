@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('first-missing-positive')[0];
+import authoredExamples0 from '../../config/examples/first-missing-positive.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
@@ -9,7 +10,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./FirstMissingPositiveVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -44,7 +45,7 @@ const SOLUTION_CODE = [
     { line: 12, text: "    return n + 1" },
 ];
 
-const EXAMPLES = getExamples('first-missing-positive');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(numsIn) {
     const steps = [];

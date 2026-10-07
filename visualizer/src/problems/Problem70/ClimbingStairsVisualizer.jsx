@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('climbing-stairs')[0];
+import authoredExamples0 from '../../config/examples/climbing-stairs.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -14,7 +15,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './ClimbingStairsVisualizer.css'
@@ -89,7 +90,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamples('climbing-stairs')
+const EXAMPLES = authoredExamples0
 
 function VariablesPanel({ step }) {
   return (

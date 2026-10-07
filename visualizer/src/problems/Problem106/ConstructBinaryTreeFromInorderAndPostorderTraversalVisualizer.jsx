@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('construct-binary-tree-from-inorder-and-postorder-traversal')[0];
+import authoredExamples0 from '../../config/examples/construct-binary-tree-from-inorder-and-postorder-traversal.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { reconstructTreeStory } from "../../components/shared/reconstructTreeStory";
@@ -11,7 +12,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -20,10 +21,7 @@ import PatternLegend from "../../components/PatternLegend";
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 3: "visit", 4: "update", 5: "compare", 6: "visit", 9: "visit", 12: "return" };
 const PATTERNS = ["visit", "compare", "update", "return"];
-const EXAMPLES = getExamplesOr(
-  "construct-binary-tree-from-inorder-and-postorder-traversal",
-  [],
-);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def buildTree(inorder, postorder):" },

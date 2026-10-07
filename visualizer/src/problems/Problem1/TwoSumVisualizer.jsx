@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('two-sum')[0];
+import authoredExamples0 from '../../config/examples/two-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -12,7 +13,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './TwoSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useRef } from 'react'
@@ -104,7 +105,7 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = getExamples('two-sum')
+const EXAMPLES = authoredExamples0
 
 export default function TwoSumVisualizer() {
   const tourPlaybackRef = useRef(null)

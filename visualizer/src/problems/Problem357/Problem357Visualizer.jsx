@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--357.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -139,7 +140,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:357')
+const EXAMPLES = authoredExamples0
 
 function DigitChoiceTree({ length, choicesPerPosition }) {
   if (!choicesPerPosition) return null

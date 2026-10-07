@@ -1,6 +1,8 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:505')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--505.js';
+import authoredExamples1 from '../../config/examples/distribute-candies-to-people.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -12,7 +14,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DistributeCandiesPeopleVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -43,7 +45,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('distribute-candies-to-people')
+const EXAMPLES = authoredExamples1
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def distributeCandies(n, k):' },
@@ -120,7 +122,7 @@ function generateSteps(n, k) {
 }
 
 function VisualizationPanel({ n, k, step, applyEx }) {
-  const EXAMPLES_LIST = getAuthoredExamples('local:505')
+  const EXAMPLES_LIST = authoredExamples0
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>

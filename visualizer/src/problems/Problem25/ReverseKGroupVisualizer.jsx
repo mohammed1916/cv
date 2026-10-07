@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('reverse-kgroup')[0];
+import authoredExamples0 from '../../config/examples/reverse-kgroup.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +10,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import "./ReverseKGroupVisualizer.css";
@@ -49,7 +50,7 @@ const SOLUTION_CODE = [
     { line: 17, text: "    return dummy.next" },
 ];
 
-const EXAMPLES = getExamples('reverse-kgroup');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(listIn, k) {
     const steps = [];

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--121.js';
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import StockStory from "./StockStory";
 import { stockNarrative } from "./stockNarrative";
@@ -6,7 +7,7 @@ import { STOCK_CODE, buildStock1Story } from "./algorithm";
 
 import "./BestTimeBuySellStockVisualizer.css";
 
-const EXAMPLES = getAuthoredExamples('local:121');
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: stockNarrative,

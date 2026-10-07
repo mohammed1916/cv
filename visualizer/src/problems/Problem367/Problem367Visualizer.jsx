@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:367')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--367.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -207,7 +208,7 @@ function generateSteps(num) {
     return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:367')
+const EXAMPLES = authoredExamples0
 
 function SearchVisualizationPanel({ step, numInput, setNumInput, applyExample, handleReset }) {
     const numVal = Math.max(1, Math.floor(Number(numInput) || 1))

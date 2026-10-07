@@ -1,6 +1,8 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:343')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--343.js';
+import authoredExamples1 from '../../config/examples/integer-break.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './IntegerBreakVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -119,8 +121,8 @@ function generateSteps(n) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('integer-break', [])
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:343')
+const REGISTRY_EXAMPLES = (authoredExamples1.length ? authoredExamples1 : [])
+const DEFAULT_EXAMPLES = authoredExamples0
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 const COLORS = {

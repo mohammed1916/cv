@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/sudoku-solver.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
@@ -7,7 +8,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SudokuSolverVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel';
 import LuminoDockPanel from '../../components/LuminoDockPanel';
@@ -46,7 +47,7 @@ const SOLUTION_CODE = [
   { line: 18, text: "        return True  # all filled" },
 ];
 
-const EXAMPLES = getExamples('sudoku-solver');
+const EXAMPLES = authoredExamples0;
 
 // Guard against pathological user-supplied boards blowing up the browser.
 const MAX_STEPS = 20000;

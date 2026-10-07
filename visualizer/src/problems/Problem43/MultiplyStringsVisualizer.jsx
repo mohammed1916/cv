@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--43.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -140,7 +141,7 @@ function generateSteps(num1, num2) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:43')
+const EXAMPLES = authoredExamples0
 
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState('123')

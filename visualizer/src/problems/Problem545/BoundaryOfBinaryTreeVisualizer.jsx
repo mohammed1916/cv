@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/boundary-of-binary-tree.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -5,7 +6,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -63,7 +64,7 @@ const SOLUTION_CODE = [
   { line: 33, text: '    return boundary + right[::-1]' },
 ]
 
-const EXAMPLES = getExamplesOr('boundary-of-binary-tree', []).map((ex) => ({
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.root ?? ex.tree ?? []).join(','),
 }))

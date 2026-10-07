@@ -1,4 +1,5 @@
-import { getExamples } from "../../config/examplesRegistry";
+import authoredExamples0 from '../../config/examples/multiply-strings.js';
+
 import { useState, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -148,7 +149,7 @@ function generateSteps(num1, num2) {
   return steps;
 }
 
-const EXAMPLES = getExamples("multiply-strings");
+const EXAMPLES = authoredExamples0;
 
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState("123");

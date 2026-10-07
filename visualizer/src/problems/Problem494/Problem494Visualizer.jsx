@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('target-sum')[0];
+import authoredExamples0 from '../../config/examples/target-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -12,7 +13,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem494Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -41,7 +42,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('target-sum', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(nums, target) {
   const steps = []

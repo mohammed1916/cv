@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('minimum-window-substring')[0];
+import authoredExamples0 from '../../config/examples/minimum-window-substring.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -12,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MinimumWindowSubstring.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -43,7 +44,7 @@ const SOLUTION_CODE = [
   { line: 24, text: '    return s[best[0]:best[1]+1] if best else ""' },
 ]
 
-const EXAMPLES = getExamplesOr('minimum-window-substring', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [4, 5, 6, 7, 8, 9, 10] },

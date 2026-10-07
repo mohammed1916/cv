@@ -1,10 +1,11 @@
+import authoredExamples0 from '../../config/examples/roman-to-integer.js';
 import { romanToIntNarrative } from './romanToIntNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import {
   LookupMap,
   AccumulationLane,
 } from "../../components/shared/LookupAccumulator";
-import { getExamples } from "../../config/examplesRegistry";
+
 import {
   SOLUTION_CODE,
   LINE_PATTERN_MAP,
@@ -22,7 +23,7 @@ const definition = {
   fields: [{ key: "s", label: "Roman numeral", type: "string" }],
   initialValues: { s: "MCMXCIV" },
   initialLabel: "Complex",
-  examples: getExamples("roman-to-integer").map((example) => ({
+  examples: authoredExamples0.map((example) => ({
     ...example,
     values: { s: example.s },
   })),

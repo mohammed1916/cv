@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('simplify-path')[0];
-import { getExamples } from "../../config/examplesRegistry";
+import authoredExamples0 from '../../config/examples/simplify-path.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -32,7 +33,7 @@ const LINE_PATTERN_MAP = {
   10: "done",
 };
 
-const EXAMPLES = getExamples("simplify-path");
+const EXAMPLES = authoredExamples0;
 
 const SOLUTION_CODE = [
   { line: 1, text: "def simplifyPath(path: str) -> str:" },

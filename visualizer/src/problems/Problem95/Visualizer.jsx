@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:95')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--95.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -48,7 +49,7 @@ const SOLUTION_CODE = [
 ]
 
 // n is capped at 4 for rendering sanity (n=4 already yields 14 trees).
-const EXAMPLES = getAuthoredExamples('local:95')
+const EXAMPLES = authoredExamples0
 
 // ─── Pure BST generation (real algorithm) ───────────────────────────────────
 function generate(start, end) {

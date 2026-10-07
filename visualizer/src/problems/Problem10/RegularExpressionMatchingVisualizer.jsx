@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('regular-expression-matching')[0];
+import authoredExamples0 from '../../config/examples/regular-expression-matching.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -22,7 +23,7 @@ import { useVisualizationFeatures } from "../../hooks/useVisualizationFeatures";
 import { useGridRayOverlay } from "../../hooks/useGridRayOverlay";
 
 import { getVisualizationFeatures } from "../../config/visualizationRegistry";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 
 import "./RegularExpressionMatchingVisualizer.css";
 
@@ -305,7 +306,7 @@ function generateSteps(s, p) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("regular-expression-matching", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 function VisualizationPanel({ s, p, step }) {
   const m = s.length;

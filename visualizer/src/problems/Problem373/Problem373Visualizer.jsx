@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-k-pairs-with-smallest-sums')[0];
+import authoredExamples0 from '../../config/examples/find-k-pairs-with-smallest-sums.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -158,7 +159,7 @@ function generateSteps(t1, t2, kText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('find-k-pairs-with-smallest-sums', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem373Visualizer() {
   const [t1, setT1] = useState('1,7,11')

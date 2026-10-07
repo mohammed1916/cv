@@ -1,10 +1,11 @@
 # Authored catalog examples
 
-All 617 catalog routes now obtain their example presets from
-`src/config/authoredExamples.js`, through `examplesRegistry.js`. The library
-contains 681 suites and 2,944 presets, including aliases and adapters for the
-different renderers. Those totals include reusable suites; they are not a count
-of distinct mathematical inputs.
+Browser visualizers import individual presets from `src/config/examples/`.
+`src/config/authoredExamples.js` and `examplesRegistry.js` aggregate suites for
+tooling only. The audit covers 1,577 catalog routes, 1,654 suites, and 6,839 presets.
+Those totals include reusable suites; they are not a count of distinct
+mathematical inputs. See [payload boundaries](payload-boundaries.md) before adding
+imports or changing collection batches.
 
 The first preset generally provides a longer walkthrough. Remaining presets
 exercise meaningful boundaries: minimal inputs, ties, repeated values, absent
@@ -22,12 +23,14 @@ syntax: malformed JSON is not presented as an ordinary algorithm example.
 
 ## Validation
 
-- `npm run test:examples`: 11 data-contract and regression tests.
-- `npm run audit:examples`: route coverage, unique labels/inputs, 1,726 real legacy
-  trace executions, and 205 shared-workspace parser/build executions.
-- Existing narrative, visual-story, recent-visualizer, and early-visualizer
-  suites: 921 passing checks. The early suite requires a working Python binary.
-- Production build passes with existing large-chunk/Pyodide warnings.
+- `npm run test:examples`: 12 data-contract and regression tests.
+- `npm run audit:examples`: route coverage, unique labels/inputs, 942 legacy trace
+  executions and 4,100 shared-workspace parser/build executions. The legacy
+  extractor skips 405 cases requiring dependencies it cannot isolate.
+- `npm run test:sequence-stories`: 176 algorithm/catalog tests and server rendering
+  of 35,085 frames across 973 algorithms.
+- Production build and `npm run check:bundles` pass with every JavaScript chunk
+  under 500 kB. Existing Pyodide browser externalization warnings remain.
 - Changed-source lint was compared with the previous commit; inherited warnings
   were kept separate from new findings.
 

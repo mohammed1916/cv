@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/create-maximum-number.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './CreateMaximumNumberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { StackLane } from '../../components/shared'
@@ -86,7 +87,7 @@ function generateSteps({ nums1, nums2, k }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('create-maximum-number', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function CreateMaximumNumberVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

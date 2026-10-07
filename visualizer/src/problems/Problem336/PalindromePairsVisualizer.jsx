@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/palindrome-pairs.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PalindromePairsVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -125,7 +126,7 @@ function generateSteps(words) {
 }
 
 const DEFAULT_WORDS = ['abcd', 'dcba', 'lls', 's', 'sssll']
-const REGISTRY_EXAMPLES = getExamplesOr('palindrome-pairs', [])
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : [
   { label: 'Classic', inputs: DEFAULT_WORDS },
   { label: 'bat / tab', inputs: ['bat', 'tab', 'cat'] },

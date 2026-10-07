@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--547.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -120,7 +121,7 @@ function generateSteps(isConnected) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:547')
+const EXAMPLES = authoredExamples0
 
 export default function NumberOfProvincesVisualizer() {
   const [isConnectedInput, setIsConnectedInput] = useState(JSON.stringify(EXAMPLES[0].isConnected))

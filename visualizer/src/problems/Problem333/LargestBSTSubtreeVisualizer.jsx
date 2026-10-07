@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--333.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -32,7 +33,7 @@ const SOLUTION_CODE = [
   { line: 16, text: '    return best' },
 ]
 
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:333')
+const DEFAULT_EXAMPLES = authoredExamples0
 
 const EXAMPLES = DEFAULT_EXAMPLES
 

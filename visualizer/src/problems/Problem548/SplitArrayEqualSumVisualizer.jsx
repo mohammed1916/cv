@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('split-array-with-equal-sum')[0];
+import authoredExamples0 from '../../config/examples/split-array-with-equal-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -8,7 +9,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
@@ -300,7 +301,7 @@ function generateSteps(input) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("split-array-with-equal-sum", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 const PART_NAMES = ["part 1", "part 2", "part 3", "part 4"];
 

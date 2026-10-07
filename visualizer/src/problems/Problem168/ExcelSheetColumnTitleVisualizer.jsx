@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/excel-sheet-column-title.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ExcelSheetColumnTitleVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -53,7 +54,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('excel-sheet-column-title')
+const EXAMPLES = authoredExamples0
 
 export default function ExcelSheetColumnTitleVisualizer() {
   const [input, setInput] = useState('')

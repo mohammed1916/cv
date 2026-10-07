@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('arranging-coins')[0];
+import authoredExamples0 from '../../config/examples/arranging-coins.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem441Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -28,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('arranging-coins')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(n) {
   const steps = []

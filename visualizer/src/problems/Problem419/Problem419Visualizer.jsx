@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--419.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getAuthoredExamples('local:419')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(board) {
   const steps = []

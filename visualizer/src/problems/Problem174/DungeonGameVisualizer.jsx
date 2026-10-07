@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('dungeon-game')[0];
+import authoredExamples0 from '../../config/examples/dungeon-game.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { createPortal } from 'react-dom';
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
@@ -10,7 +11,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./DungeonGameVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -32,7 +33,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('dungeon-game');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(dungeon) {
     const R = dungeon.length, C = dungeon[0].length;

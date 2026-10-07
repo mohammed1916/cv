@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('fibonacci-number')[0];
+import authoredExamples0 from '../../config/examples/fibonacci-number.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FibonacciNumberVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -53,7 +54,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('fibonacci-number')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(n) {
   const steps = []

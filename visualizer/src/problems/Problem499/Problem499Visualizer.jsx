@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('the-maze-iii')[0];
+import authoredExamples0 from '../../config/examples/the-maze-iii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem499Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -50,7 +51,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('the-maze-iii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const DIRS = [[-1, 0, 'u'], [0, -1, 'l'], [0, 1, 'r'], [1, 0, 'd']]
 

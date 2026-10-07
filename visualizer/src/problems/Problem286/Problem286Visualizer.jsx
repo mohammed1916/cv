@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/286.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem286Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -38,7 +39,7 @@ function generateSteps(input) {
 }
 
 export default function Problem286Visualizer() {
-    const examples = useMemo(() => getExamplesOr('286', []), [])
+    const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
     const [currentExample, setCurrentExample] = useState(0)
   const [inputInput, setInputInput] = useState(JSON.stringify(examples[0]?.input ?? []));
   const { input, inputError } = useMemo(() => {

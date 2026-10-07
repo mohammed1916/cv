@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('convert-sorted-list-to-binary-search-tree')[0];
+import authoredExamples0 from '../../config/examples/convert-sorted-list-to-binary-search-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { parseSortedList, buildSortedListStory } from "./algorithm";
@@ -12,7 +13,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./ConvertSortedListToBinarySearchTreeVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -21,7 +22,7 @@ import PatternLegend from "../../components/PatternLegend";
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 3: "return", 4: "compare", 5: "update", 6: "visit", 7: "visit", 8: "return", 12: "visit", 14: "done" };
 const PATTERNS = ["visit", "compare", "update", "return", "done"];
-const EXAMPLES = getExamplesOr("convert-sorted-list-to-binary-search-tree", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def sortedListToBST(head):" },

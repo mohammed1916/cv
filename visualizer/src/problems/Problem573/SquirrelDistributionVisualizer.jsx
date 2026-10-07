@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/squirrel-distribution.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SquirrelDistributionVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -362,7 +363,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function SquirrelDistributionVisualizer() {
-  const examples = useMemo(() => getExamplesOr('squirrel-distribution', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [trees, setTrees] = useState('[1,3]')
   const [chairs, setChairs] = useState('[1,3]')
   const [squirrel, setSquirrel] = useState('2')

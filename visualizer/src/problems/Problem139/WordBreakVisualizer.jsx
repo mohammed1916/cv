@@ -1,11 +1,12 @@
+import authoredExamples0 from '../../config/examples/word-break.js';
 import { wordBreakNarrative } from './wordBreakNarrative.js';
-import { getExamples } from "../../config/examplesRegistry";
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreakStory from "./WordBreakStory";
 import { CODE, buildWordBreakStory } from "./algorithm";
 import "./WordBreakVisualizer.css";
 
-const EXAMPLES = getExamples("word-break");
+const EXAMPLES = authoredExamples0;
 
 const LINE_PATTERN_MAP = {
   1: "init",

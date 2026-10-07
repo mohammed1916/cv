@@ -13,7 +13,7 @@ import { usePatternOverlay } from '../hooks/usePatternOverlay'
 import { useAutoScroll } from '../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../config/visualizationRegistry'
-import { getExamples } from '../config/examplesRegistry'
+
 import './Visualizer.css'
 /**
  * Generic Visualizer template for algorithm visualization problems.
@@ -320,7 +320,7 @@ export default function YourProblemVisualizer() {
         inputErrors={validatedInputs.errors}
         onInputChange={handleInputChange}
         applyExample={applyExample}
-        examples={getExamples('your-problem-slug') || []}
+        examples={[] || []}
         step={step}
         handleReset={handleReset}
       />

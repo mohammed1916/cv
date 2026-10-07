@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/word-ladder-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './WordLadderIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -18,7 +19,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('word-ladder-ii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findLadders(begin, end, wordList):' },

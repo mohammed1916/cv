@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/find-customer-referee.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './FindCustomerRefereeVisualizer.css'
 
@@ -131,7 +132,7 @@ function generateSteps(customers, targetRefereeId = 2) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('find-customer-referee', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function VisualizationPanel({ step, allCustomers, targetRefereeId, inputPanel }) {
   const customers = step?.result || []

@@ -1,6 +1,6 @@
 import { AUTHORED_EXAMPLES } from './authoredExamples.js';
 
-/** Shared, independently authored walkthrough and boundary-case presets. */
+/** Tooling-only aggregate. Browser code must import a suite from ./examples. */
 export const EXAMPLES_REGISTRY = AUTHORED_EXAMPLES;
 
 export function getExamples(problemSlug) {

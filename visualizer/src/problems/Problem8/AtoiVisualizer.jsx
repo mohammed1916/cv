@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/string-to-integer-atoi.js';
 ﻿import { useCallback, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,13 +8,13 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './AtoiVisualizer.css'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
 import { INT_MIN, INT_MAX, ATOI_PATTERNS, LINE_PATTERN_MAP, SOLUTION_CODE, generateAtoiSteps, isDigit } from './algorithm'
-const EXAMPLES = getExamples('string-to-integer-atoi')
+const EXAMPLES = authoredExamples0
 const DEFAULT_INPUT = '   -042'
 
 function Scanner({ input, step }) {

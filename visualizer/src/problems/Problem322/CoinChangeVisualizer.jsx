@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('coin-change')[0];
+import authoredExamples0 from '../../config/examples/coin-change.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -11,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CoinChangeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -114,7 +115,7 @@ function generateSteps(coins, amount) {
     return steps
 }
 
-const EXAMPLES = getExamples('coin-change')
+const EXAMPLES = authoredExamples0
 
 export default function CoinChangeVisualizer() {
     const [coinsInput, setCoinsInput] = useState(JSON.stringify(AUTHORED_INITIAL.coins))

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/minimum-absolute-difference-in-bst.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './MinimumAbsoluteDifferenceInBSTVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -27,7 +28,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('minimum-absolute-difference-in-bst')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK_ROOT = [4, 2, 6, 1, 3]
 

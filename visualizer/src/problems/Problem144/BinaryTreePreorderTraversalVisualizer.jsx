@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/binary-tree-preorder-traversal.js';
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -9,7 +10,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./BinaryTreePreorderTraversalVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -18,7 +19,7 @@ import PatternLegend from "../../components/PatternLegend";
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}; // Auto-generated: maps line numbers to phase names
 const PATTERNS = []; // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr("binary-tree-preorder-traversal", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: "def preorderTraversal(root):" },

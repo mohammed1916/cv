@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-increasing-path')[0];
+import authoredExamples0 from '../../config/examples/longest-increasing-path.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -11,7 +12,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LongestIncreasingPathVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -32,7 +33,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "    return max(dfs(r,c) for r,c in all_cells)" },
 ];
 
-const EXAMPLES = getExamples('longest-increasing-path');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(matrix) {
     const steps = [];

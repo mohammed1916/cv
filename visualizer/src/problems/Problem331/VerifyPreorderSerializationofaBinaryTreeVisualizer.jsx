@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/verify-preorder-serialization-tree.js';
+import authoredExamples1 from '../../config/examples/local--331.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './VerifyPreorderSerializationofaBinaryTreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -166,8 +168,8 @@ function generateSteps(preorder) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('verify-preorder-serialization-tree', [])
-const FALLBACK_EXAMPLES = getAuthoredExamples('local:331')
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
+const FALLBACK_EXAMPLES = authoredExamples1
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 const MAX_SLOT_BOXES = 16

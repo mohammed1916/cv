@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/serialize-and-deserialize-bst.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -59,7 +60,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('serialize-and-deserialize-bst', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'serialize', label: 'Serialize (DFS)', lines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },

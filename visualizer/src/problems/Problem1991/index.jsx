@@ -1,9 +1,10 @@
-import { getExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/collection--1991.js';
+
 import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitions';
+import { definitions } from '../families/collectionStories/definitionGroups/stateAndFactorBatch.js';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 
-const definition = { ...definitions[1991], examples: getExamples('collection:1991') };
+const definition = { ...definitions[1991], examples: authoredExamples0 };
 function Visualizer() { return <Story definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);

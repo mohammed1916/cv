@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/power-of-four.js';
+import authoredExamples1 from '../../config/examples/local--342.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +11,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './PowerofFourVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -181,8 +183,8 @@ function generateSteps(n) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamples('power-of-four')
-const FALLBACK_EXAMPLES = getAuthoredExamples('local:342')
+const REGISTRY_EXAMPLES = authoredExamples0
+const FALLBACK_EXAMPLES = authoredExamples1
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 function parseN(raw) {

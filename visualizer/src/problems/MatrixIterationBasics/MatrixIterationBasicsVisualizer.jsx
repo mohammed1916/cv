@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/matrix-iteration-basics.js';
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useCallback, useMemo, useState } from 'react'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MatrixIterationBasicsVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -50,7 +51,7 @@ const MODE_META = {
   },
 }
 
-const EXAMPLES = getExamples('matrix-iteration-basics')
+const EXAMPLES = authoredExamples0
 
 function makeCodeLines(mode) {
   return [

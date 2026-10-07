@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('single-element-in-sorted-array')[0];
+import authoredExamples0 from '../../config/examples/single-element-in-sorted-array.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SingleElementInSortedArrayVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -246,7 +247,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 }
 
 export default function SingleElementInSortedArrayVisualizer() {
-  const examples = useMemo(() => getExamplesOr('single-element-in-sorted-array', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums || AUTHORED_INITIAL))
 
   const { nums, inputError } = useMemo(() => {

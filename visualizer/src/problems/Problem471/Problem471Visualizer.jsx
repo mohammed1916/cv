@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('encode-string-with-shortest-length')[0];
+import authoredExamples0 from '../../config/examples/encode-string-with-shortest-length.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem471Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -22,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('encode-string-with-shortest-length')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('encode-string-with-shortest-length')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(s) {
   const steps = []

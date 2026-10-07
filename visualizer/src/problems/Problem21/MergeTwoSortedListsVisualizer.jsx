@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('merge-two-sorted-lists')[0];
+import authoredExamples0 from '../../config/examples/merge-two-sorted-lists.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +10,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MergeTwoSortedListsVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -216,7 +217,7 @@ function generateSteps(arr1, arr2) {
   return steps;
 }
 
-const EXAMPLES = getExamples('merge-two-sorted-lists');
+const EXAMPLES = authoredExamples0;
 
 export default function MergeTwoSortedListsVisualizer() {
   const [l1Input, setL1Input] = useState(JSON.stringify(AUTHORED_INITIAL.list1));

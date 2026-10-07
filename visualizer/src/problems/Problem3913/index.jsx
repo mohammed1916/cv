@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3913.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -16,7 +17,7 @@ const definition = {
   parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/sort-vowels-by-frequency/',
   complexity: 'O(n) time and O(n) space. Only five vowel kinds need ranking. Every execution step is retained; long sequences are paged.',
-  examples: getAuthoredExamples('local:3913'),
+  examples: authoredExamples0,
 }
 function SortVowelsByFrequency() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

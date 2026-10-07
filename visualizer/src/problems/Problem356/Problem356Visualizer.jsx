@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--356.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -193,7 +194,7 @@ function generateSteps(points) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:356')
+const EXAMPLES = authoredExamples0
 
 export default function Problem356Visualizer() {
   const [exIdx, setExIdx] = useState(0)

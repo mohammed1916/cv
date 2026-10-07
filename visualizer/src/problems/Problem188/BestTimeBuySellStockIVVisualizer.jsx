@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('best-time-buy-sell-stock-iv')[0];
+import authoredExamples0 from '../../config/examples/best-time-buy-sell-stock-iv.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./BestTimeBuySellStockIVVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -38,7 +39,7 @@ const SOLUTION_CODE_INLINE = [
 
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('best-time-buy-sell-stock-iv');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(k, prices) {
   const n = prices.length;

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--83.js';
+
 import { useCallback, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import './Visualizer.css'
 
-const EXAMPLES = getAuthoredExamples('local:83')
+const EXAMPLES = authoredExamples0
 const CODE = [
   { line: 1, text: 'def deleteDuplicates(head):' }, { line: 2, text: '    current = head' },
   { line: 3, text: '    while current and current.next:' }, { line: 4, text: '        if current.val == current.next.val:' },

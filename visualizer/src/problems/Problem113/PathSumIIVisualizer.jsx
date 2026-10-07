@@ -1,8 +1,9 @@
+import authoredExamples0 from '../../config/examples/path-sum-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { generateSteps } from './algorithm'
-import { getExamples } from '../../config/examplesRegistry'
-const EXAMPLES = getExamples('path-sum-ii');
+
+const EXAMPLES = authoredExamples0;
 import StoryPanel from '../../components/shared/StoryPanel'
 import TreeDiagram from '../../components/shared/TreeDiagram'
 import CodeTracePanel from '../../components/CodeTracePanel'

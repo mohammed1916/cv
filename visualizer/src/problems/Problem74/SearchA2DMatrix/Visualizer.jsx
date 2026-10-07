@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/search-a-2d-matrix.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../../config/examplesRegistry'
+
 import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { createPortal } from 'react-dom'
@@ -60,7 +61,7 @@ function generateSteps(matrix, target) {
     return steps;
 }
 
-const EXAMPLES = getExamples('search-a-2d-matrix');
+const EXAMPLES = authoredExamples0;
 
 export default function SearchA2DMatrixVisualizer() {
     const [sel, setSel] = useState(0);

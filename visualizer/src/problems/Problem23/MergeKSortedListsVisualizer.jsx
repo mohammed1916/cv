@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/merge-ksorted-lists.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MergeKSortedListsVisualizer.css'
 
 const SOLUTION_CODE_INLINE = [
@@ -95,7 +96,7 @@ function generateSteps(lists) {
   return steps
 }
 
-const EXAMPLES = getExamples('merge-ksorted-lists')
+const EXAMPLES = authoredExamples0
 
 // Visualization component for the k lists and heap state
 function HeapVisualizationPanel({ step, lists, inputError, input, onInputChange, onApplyExample }) {

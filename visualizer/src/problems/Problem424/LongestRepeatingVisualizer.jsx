@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-repeating-char-replace')[0];
+import authoredExamples0 from '../../config/examples/longest-repeating-char-replace.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -11,7 +12,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LongestRepeatingVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
@@ -67,7 +68,7 @@ function generateSteps(s, k) {
     return steps;
 }
 
-const EXAMPLES = getExamples('longest-repeating-char-replace');
+const EXAMPLES = authoredExamples0;
 
 export default function LongestRepeatingVisualizer() {
     const [sInput, setSInput] = useState(AUTHORED_INITIAL.s);

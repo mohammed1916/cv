@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('generate-parentheses')[0];
+import authoredExamples0 from '../../config/examples/generate-parentheses.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +13,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./GenerateParenthesesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE_INLINE = [
@@ -82,7 +83,7 @@ function generateSteps(n) {
     return steps;
 }
 
-const EXAMPLES = getExamples('generate-parentheses');
+const EXAMPLES = authoredExamples0;
 
 
 

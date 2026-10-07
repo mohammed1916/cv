@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('encode-and-decode-tinyurl')[0];
+import authoredExamples0 from '../../config/examples/encode-and-decode-tinyurl.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -10,7 +11,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./EncodeAndDecodeTinyURLVisualizer.css";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
@@ -39,7 +40,7 @@ const LINE_PATTERN_MAP = {
   15: "check",
 };
 
-const EXAMPLES = getExamples("encode-and-decode-tinyurl");
+const EXAMPLES = authoredExamples0;
 
 const DEFAULT_EX = EXAMPLES[0] || {
   label: "Default",

@@ -13,7 +13,7 @@ import { useAutoScroll } from '../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../hooks/useVisualizationFeatures'
 import { useSolutionCode } from '../hooks/useSolutionCode'
 import { getVisualizationFeatures } from '../config/visualizationRegistry'
-import { getExamples } from '../config/examplesRegistry'
+
 import './Visualizer.css'
 
 /**

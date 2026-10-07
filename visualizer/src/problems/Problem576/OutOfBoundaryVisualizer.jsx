@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/out-of-boundary.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './OutOfBoundaryVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -443,7 +444,7 @@ function VisualizationPanel({ step, m, n, maxMove, startRow, startCol, applyExam
 }
 
 export default function OutOfBoundaryVisualizer() {
-  const examples = useMemo(() => getExamplesOr('out-of-boundary', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [m, setM] = useState(2)
   const [n, setN] = useState(2)
   const [maxMove, setMaxMove] = useState(2)

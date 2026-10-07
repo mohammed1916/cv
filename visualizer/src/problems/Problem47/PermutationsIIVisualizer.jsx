@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('permutations-ii')[0];
+import authoredExamples0 from '../../config/examples/permutations-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,7 +13,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./PermutationsIIVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
@@ -345,7 +346,7 @@ function VisualizationPanel({ nums, step, applyExample, examples }) {
 }
 
 export default function PermutationsIIVisualizer() {
-  const examples = useMemo(() => getExamplesOr("permutations-ii", []), []);
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), []);
   const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums || AUTHORED_INITIAL));
 
   const { nums, inputError } = useMemo(() => {

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('ipo')[0];
+import authoredExamples0 from '../../config/examples/ipo.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -9,7 +10,7 @@ import PatternLegend from "../../components/PatternLegend";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./IPOVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -59,7 +60,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('ipo');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(k, initW, profits, capital) {
     const steps = [];

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/logger-rate-limiter.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './Problem359.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -43,7 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('logger-rate-limiter', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3, 4] },

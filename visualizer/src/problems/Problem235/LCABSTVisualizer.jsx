@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('lcabst')[0];
+import authoredExamples0 from '../../config/examples/lcabst.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -12,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LCABSTVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -107,7 +108,7 @@ function parseInputs(arrInput, pInput, qInput) {
     return { arr, p, q }
 }
 
-const EXAMPLES = getExamples('lcabst')
+const EXAMPLES = authoredExamples0
 
 function TreeVisualizationPanel({
     positions,

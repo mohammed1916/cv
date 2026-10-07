@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--207.js';
+
 import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
@@ -37,7 +38,7 @@ const SOLUTION_CODE = [
   { line: 16, text: "    return True" },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:207')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(numCourses, prerequisites) {
   const steps = []

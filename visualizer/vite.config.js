@@ -1,6 +1,8 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import process from "node:process";
+import fs from "node:fs";
+import path from "node:path";
 
 function chatApiPlugin(env) {
   return {
@@ -94,6 +96,25 @@ function chatApiPlugin(env) {
   };
 }
 
+function bundleReportPlugin() {
+  return {
+    name: "bundle-module-report",
+    writeBundle(options, bundle) {
+      const chunks = Object.values(bundle).filter(item => item.type === "chunk");
+      const reportDir = path.join(options.dir, ".vite");
+      fs.mkdirSync(reportDir, { recursive: true });
+      fs.writeFileSync(path.join(reportDir, "bundle-report.json"),
+        JSON.stringify(Object.fromEntries(chunks.map(chunk => [chunk.fileName, {
+          modules: Object.fromEntries(Object.entries(chunk.modules).map(([id, info]) => [
+            id.replaceAll("\\", "/").replace(process.cwd().replaceAll("\\", "/") + "/", ""),
+            info.renderedLength,
+          ])),
+        }]))),
+      );
+    },
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Vite does not automatically expose `.env` values to code running inside
@@ -102,7 +123,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    plugins: [react(), chatApiPlugin(env)],
+    plugins: [react(), chatApiPlugin(env), bundleReportPlugin()],
     optimizeDeps: {
       include: ["@monaco-editor/react", "monaco-editor"],
       exclude: ["pyodide"],
@@ -120,6 +141,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
+      manifest: true,
       rolldownOptions: {
         output: {
           codeSplitting: {
@@ -127,7 +149,24 @@ export default defineConfig(({ mode }) => {
             // dynamically loaded problem visualizers into one vendor bundle.
             groups: [
               {
+                name: "problem-routes",
+                test: /src[\\/]data[\\/]problemRoutes\.js$/,
+                priority: 0,
+                maxSize: 350000,
+              },
+              {
+                name: "problem-catalog",
+                priority: 20,
+                test: /src[\\/]problems[\\/][^\\/]+[\\/]meta\.js$/,
+                maxSize: 180000,
+              },
+              {
+                name: "firebase-vendor",
+                test: /node_modules[\\/](@firebase|firebase)[\\/]/,
+              },
+              {
                 name: "react-vendor",
+                priority: 20,
                 test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/,
               },
               {

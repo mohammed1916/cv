@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--743.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -124,7 +125,7 @@ function generateSteps(n, k, times) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:743')
+const EXAMPLES = authoredExamples0
 
 export default function NetworkDelayTimeVisualizer() {
   const [timesInput, setTimesInput] = useState(JSON.stringify(EXAMPLES[0].times))

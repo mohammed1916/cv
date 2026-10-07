@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('subarray-sum-equals-k')[0];
+import authoredExamples0 from '../../config/examples/subarray-sum-equals-k.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SubarraySumKVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -65,7 +66,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = getExamples('subarray-sum-equals-k');
+const EXAMPLES = authoredExamples0;
 
 function VizPanel({ nums, step, k }) {
     return (

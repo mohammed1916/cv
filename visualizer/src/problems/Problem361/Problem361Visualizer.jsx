@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--361.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -208,7 +209,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:361')
+const EXAMPLES = authoredExamples0
 
 const CELL_SIZE = 50
 const PADDING = 20

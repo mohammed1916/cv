@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-uncommon-subsequence-ii')[0];
+import authoredExamples0 from '../../config/examples/longest-uncommon-subsequence-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestUncommonSubsequenceIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -31,7 +32,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('longest-uncommon-subsequence-ii')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(strs) {
   const steps = []

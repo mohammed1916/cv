@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('trapping-rain-water')[0];
+import authoredExamples0 from '../../config/examples/trapping-rain-water.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +8,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './TrappingRainWaterVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -134,7 +135,7 @@ function generateSteps(height) {
   return steps
 }
 
-const EXAMPLES = getExamples('trapping-rain-water')
+const EXAMPLES = authoredExamples0
 
 export default function TrappingRainWaterVisualizer() {
   const [heightInput, setHeightInput] = useState(JSON.stringify(AUTHORED_INITIAL.height))

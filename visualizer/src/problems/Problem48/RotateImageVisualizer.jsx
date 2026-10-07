@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/rotate-image.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -7,7 +8,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./RotateImageVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -68,7 +69,7 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = getExamples('rotate-image');
+const EXAMPLES = authoredExamples0;
 
 const ACCENT = "#f9e2af";
 

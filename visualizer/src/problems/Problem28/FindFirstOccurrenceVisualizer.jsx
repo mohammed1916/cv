@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-first-occurrence')[0];
+import authoredExamples0 from '../../config/examples/find-first-occurrence.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FindFirstOccurrenceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -122,7 +123,7 @@ function generateSteps(haystack, needle) {
   return steps
 }
 
-const EXAMPLES = getExamples('find-first-occurrence')
+const EXAMPLES = authoredExamples0
 
 export default function FindFirstOccurrenceVisualizer({ problem }) {
   const [haystackInput, setHaystackInput] = useState(`"${AUTHORED_INITIAL.haystack}"`)

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('reverse-linked-list')[0];
+import authoredExamples0 from '../../config/examples/reverse-linked-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -11,7 +12,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ReverseLinkedListVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -118,7 +119,7 @@ function generateSteps(values) {
     return steps
 }
 
-const EXAMPLES = getExamples('reverse-linked-list')
+const EXAMPLES = authoredExamples0
 
 function ReverseLinkedListViz({ step, values, nodes, arrows, EXAMPLES, valInput, setValInput, handleReset, inputError }) {
     const handleExampleClick = useCallback((ex) => {

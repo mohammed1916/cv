@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('evaluate-division')[0];
+import authoredExamples0 from '../../config/examples/evaluate-division.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { Fragment, useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import SvgViewport from '../../components/shared/SvgViewport'
@@ -200,7 +201,7 @@ function generateSteps(equationsStr, valuesStr, queryStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('evaluate-division', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem399Visualizer() {
   const [equationsInput, setEquationsInput] = useState(AUTHORED_INITIAL.equations)

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('diameter-binary-tree')[0];
+import authoredExamples0 from '../../config/examples/diameter-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DiameterBinaryTreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -176,7 +177,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('diameter-binary-tree')
+const EXAMPLES = authoredExamples0
 
 export default function DiameterBinaryTreeVisualizer() {
     const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))

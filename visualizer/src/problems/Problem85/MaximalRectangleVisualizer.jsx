@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--85.js';
+
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -29,7 +30,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '            max_area = max(max_area, largestRectangleArea(heights))' },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:85')
+const EXAMPLES = authoredExamples0
 
 const MAXIMALRECTANGLE_PATTERNS = ['area_calc', 'area_final', 'done', 'height_update', 'init', 'row_end', 'row_start']
 

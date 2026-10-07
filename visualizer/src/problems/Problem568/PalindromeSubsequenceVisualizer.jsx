@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/palindrome-subsequence.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PalindromeSubsequenceVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -404,7 +405,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 export default function PalindromeSubsequenceVisualizer() {
   const examples = useMemo(
     () =>
-      getExamplesOr('palindrome-subsequence', []),
+      (authoredExamples0.length ? authoredExamples0 : []),
     []
   )
 

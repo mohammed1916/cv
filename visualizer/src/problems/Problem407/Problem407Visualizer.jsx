@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('trapping-rain-water-ii')[0];
+import authoredExamples0 from '../../config/examples/trapping-rain-water-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,12 +12,12 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem407Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
 
-const EXAMPLES = getExamplesOr('trapping-rain-water-ii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const PATTERNS = []
 

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--221.js';
+
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -35,7 +36,7 @@ const SOLUTION_CODE = [
   { line: 14, text: "    return max_side * max_side" },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:221')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(matrix) {
   const steps = []

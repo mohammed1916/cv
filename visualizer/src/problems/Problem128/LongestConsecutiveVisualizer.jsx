@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--128.js';
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import ConsecutiveStory from "./ConsecutiveStory";
 import { CODE, buildConsecutiveStory } from "./algorithm";
@@ -6,7 +7,7 @@ import { consecutiveNarrative } from "./consecutiveNarrative";
 
 import "./LongestConsecutiveVisualizer.css";
 
-const EXAMPLES = getAuthoredExamples('local:128');
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: consecutiveNarrative,

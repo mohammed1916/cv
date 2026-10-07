@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('counting-bits')[0];
+import authoredExamples0 from '../../config/examples/counting-bits.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -11,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CountingBitsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -57,7 +58,7 @@ function generateSteps(n) {
     return steps
 }
 
-const EXAMPLES = getExamples('counting-bits')
+const EXAMPLES = authoredExamples0
 
 export default function CountingBitsVisualizer() {
     const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3909.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -17,7 +18,7 @@ const definition = {
     { id: 'right', label: 'Sum descending', description: 'Include the peak through the last index.' },
     { id: 'done', label: 'Compare', description: 'Return 0, 1, or −1 according to the larger sum.' },
   ],
-  examples: getAuthoredExamples('local:3909'),
+  examples: authoredExamples0,
 }
 
 function CompareBitonicSums() {

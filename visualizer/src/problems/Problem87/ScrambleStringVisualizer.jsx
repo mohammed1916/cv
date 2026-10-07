@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('scramble-string')[0];
+import authoredExamples0 from '../../config/examples/scramble-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -12,13 +13,13 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ScrambleStringVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('scramble-string')
 
-const EXAMPLES = getExamples('scramble-string')
+const EXAMPLES = authoredExamples0
 
 const SCRAMBLESTRING_PATTERNS = ['check', 'memo', 'base', 'char_check', 'recurse', 'not_found']
 

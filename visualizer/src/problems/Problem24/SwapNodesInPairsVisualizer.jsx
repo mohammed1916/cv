@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:24')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--24.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -58,7 +59,7 @@ const LINE_PATTERN_MAP = {
   12: "done",
 };
 
-const EXAMPLES = getAuthoredExamples('local:24');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(values) {
   const steps = [];

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3908.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -14,7 +15,7 @@ const definition = {
     { id: 'leading', label: 'Check first digit', description: 'The leading digit must differ from x.' },
     { id: 'done', label: 'AND / return', description: 'Both conditions must pass.' },
   ],
-  examples: getAuthoredExamples('local:3908'),
+  examples: authoredExamples0,
 }
 function ValidDigitNumber() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('min-cost-climbing-stairs')[0];
+import authoredExamples0 from '../../config/examples/min-cost-climbing-stairs.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MinCostClimbingStairsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -23,7 +24,7 @@ const SOLUTION_CODE = [
     { line: 6, text: '    return min(dp[n-1], dp[n])' },
 ]
 
-const EXAMPLES = getExamples('min-cost-climbing-stairs')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(cost) {
       const steps = []

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('palindrome-linked-list')[0];
+import authoredExamples0 from '../../config/examples/palindrome-linked-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./PalindromeLinkedListVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -39,7 +40,7 @@ const SOLUTION_CODE = [
     { line: 16, text: "    return True" },
 ];
 
-const EXAMPLES = getExamples('palindrome-linked-list');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
     const steps = [];

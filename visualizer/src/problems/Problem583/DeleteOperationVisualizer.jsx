@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('delete-operation')[0];
+import authoredExamples0 from '../../config/examples/delete-operation.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './DeleteOperationVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -300,7 +301,7 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
 }
 
 export default function DeleteOperationVisualizer() {
-  const examples = useMemo(() => getExamplesOr('delete-operation', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [s1Input, setS1Input] = useState(`"${AUTHORED_INITIAL.s1 || AUTHORED_INITIAL[0]}"`)
   const [s2Input, setS2Input] = useState(`"${AUTHORED_INITIAL.s2 || AUTHORED_INITIAL[1]}"`)
 

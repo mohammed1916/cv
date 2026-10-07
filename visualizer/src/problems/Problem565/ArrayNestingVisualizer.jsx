@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('array-nesting')[0];
+import authoredExamples0 from '../../config/examples/array-nesting.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ArrayNestingVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -359,7 +360,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function ArrayNestingVisualizer() {
-  const examples = useMemo(() => getExamplesOr('array-nesting', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [arrayInput, setArrayInput] = useState(JSON.stringify(AUTHORED_INITIAL.array || AUTHORED_INITIAL));
   const { array, inputError } = useMemo(() => {
     try {

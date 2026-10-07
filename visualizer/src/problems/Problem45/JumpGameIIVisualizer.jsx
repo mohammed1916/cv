@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('jump-game-ii')[0];
+import authoredExamples0 from '../../config/examples/jump-game-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -12,7 +13,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./JumpGameIIVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -41,7 +42,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('jump-game-ii');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
   const steps = [];

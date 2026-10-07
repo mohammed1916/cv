@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('substring-concatenation')[0];
+import authoredExamples0 from '../../config/examples/substring-concatenation.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -10,7 +11,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SubstringConcatenationVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -46,7 +47,7 @@ const SOLUTION_CODE = [
     { line: 14, text: "    return result" },
 ];
 
-const EXAMPLES = getExamples('substring-concatenation');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(s, words) {
     const wlen = words[0].length;

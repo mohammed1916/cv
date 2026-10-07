@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/zigzag-conversion.js';
 import { useCallback, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -8,7 +9,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./ZigzagVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import { createPortal } from "react-dom";
@@ -58,7 +59,7 @@ const SOLUTION_CODE = [
 const DEFAULT_INPUT = "PAYPALISHIRING";
 const DEFAULT_ROWS = 4;
 
-const EXAMPLES = getExamples("zigzag-conversion");
+const EXAMPLES = authoredExamples0;
 
 function getCodeHighlight(step) {
   if (!step) return { activeLine: 3, relatedLines: [3, 4] };

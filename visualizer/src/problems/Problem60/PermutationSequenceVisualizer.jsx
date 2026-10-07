@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('permutation-sequence')[0];
+import authoredExamples0 from '../../config/examples/permutation-sequence.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +11,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
@@ -59,7 +60,7 @@ const LINE_PATTERN_MAP = {
   13: "done",
 };
 
-const EXAMPLES = getExamplesOr("permutation-sequence", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 function generateSteps(n, k) {
   const steps = [];

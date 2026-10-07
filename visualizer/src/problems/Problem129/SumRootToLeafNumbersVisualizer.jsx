@@ -1,11 +1,12 @@
+import authoredExamples0 from '../../config/examples/sum-root-to-leaf-numbers.js';
 import { sumRootLeafNarrative } from './sumRootLeafNarrative.js';
-import { getExamples } from "../../config/examplesRegistry";
+
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import SumNumbersStory from './SumNumbersStory';
 import { CODE, buildSumNumbersStory } from './algorithm';
 import './SumRootToLeafNumbersVisualizer.css';
 
-const EXAMPLES = getExamples("sum-root-to-leaf-numbers");
+const EXAMPLES = authoredExamples0;
 
 const LINE_PATTERN_MAP = {
   1: 'init',

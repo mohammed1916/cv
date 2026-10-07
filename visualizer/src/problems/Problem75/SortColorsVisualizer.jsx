@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/sort-colors.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,14 +15,14 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 
-import { getExamples } from "../../config/examplesRegistry";
+
 import { getSolutionCode } from "../../config/solutionCodeRegistry";
 
 import "./SortColorsVisualizer.css";
 
 const SOLUTION_CODE = getSolutionCode("sort-colors");
 
-const EXAMPLES = getExamples("sort-colors");
+const EXAMPLES = authoredExamples0;
 
 const SORTCOLORS_PATTERNS = [
   "init",

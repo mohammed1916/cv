@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('base-7')[0];
+import authoredExamples0 from '../../config/examples/base-7.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Base7Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -240,7 +241,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function Base7Visualizer() {
-  const examples = useMemo(() => getExamplesOr('base-7', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.num || AUTHORED_INITIAL.input || 100))
 
   const steps = useMemo(() => generateSteps(numInput), [numInput])

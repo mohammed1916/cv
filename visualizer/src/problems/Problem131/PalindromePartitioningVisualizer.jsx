@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--131.js';
+
 import { partitionNarrative } from './partitionNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PartitionStory from "./PartitionStory";
@@ -6,7 +7,7 @@ import { CODE, buildPartitionStory } from "./algorithm";
 
 import "./PalindromePartitioningVisualizer.css";
 
-const EXAMPLES = getAuthoredExamples('local:131');
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: partitionNarrative,

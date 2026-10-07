@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/edit-distance.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -13,7 +14,7 @@ import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+
 
 import "./EditDistanceVisualizer.css";
 
@@ -54,7 +55,7 @@ const SOLUTION_CODE_INLINE = [
 
 const SOLUTION_CODE = SOLUTION_CODE_INLINE;
 
-const EXAMPLES = getExamples("edit-distance");
+const EXAMPLES = authoredExamples0;
 
 function DPTablePanel({ step, w1, w2, dpTable, maxVal }) {
   if (!step) {

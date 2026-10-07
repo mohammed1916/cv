@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-duplicate')[0];
+import authoredExamples0 from '../../config/examples/find-duplicate.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -11,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FindDuplicateVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -98,7 +99,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('find-duplicate')
+const EXAMPLES = authoredExamples0
 
 // Visualization component for array and pointers
 function ArrayVisualizationPanel({ nums, step }) {

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/letter-combinations.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +12,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LetterCombinationsVisualizer.css";
 
 const LC_PATTERNS = ['init', 'choose', 'record', 'unchoose', 'done']
@@ -95,7 +96,7 @@ function generateSteps(digits) {
     return steps;
 }
 
-const EXAMPLES = getExamples('letter-combinations');
+const EXAMPLES = authoredExamples0;
 
 export default function LetterCombinationsVisualizer() {
     const [digits, setDigits] = useState("23");

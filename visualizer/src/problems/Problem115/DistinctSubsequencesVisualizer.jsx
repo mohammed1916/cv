@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('distinct-subsequences')[0];
+import authoredExamples0 from '../../config/examples/distinct-subsequences.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from "../../components/LuminoDockPanel"
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -11,7 +12,7 @@ import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./DistinctSubsequencesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -34,7 +35,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('distinct-subsequences');
+const EXAMPLES = authoredExamples0;
 
 export default function DistinctSubsequencesVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);

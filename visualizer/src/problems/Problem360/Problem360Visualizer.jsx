@@ -1,4 +1,5 @@
-import { getExamples } from "../../config/examplesRegistry";
+import authoredExamples0 from '../../config/examples/sort-transformed-array.js';
+
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -17,7 +18,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
 const PATTERNS = ['done', 'init', 'merge', 'transform']
 
-const EXAMPLES = getExamples("sort-transformed-array");
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums, a, b, c) {
   const steps = [];

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--388.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -166,7 +167,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:388')
+const EXAMPLES = authoredExamples0
 
 export default function Problem388Visualizer() {
   const [exIdx, setExIdx] = useState(0)

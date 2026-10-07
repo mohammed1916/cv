@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('search-insert-position')[0];
+import authoredExamples0 from '../../config/examples/search-insert-position.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SearchInsertPositionVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -127,7 +128,7 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = getExamples('search-insert-position')
+const EXAMPLES = authoredExamples0
 
 export default function SearchInsertPositionVisualizer() {
   const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('utf-8-validation')[0];
+import authoredExamples0 from '../../config/examples/utf-8-validation.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -155,7 +156,7 @@ function generateSteps(data) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('utf-8-validation', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem393Visualizer() {
   const [dataInput, setDataInput] = useState(JSON.stringify(AUTHORED_INITIAL.data))

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/reconstruct-original-digits.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem423Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -21,7 +22,7 @@ const PATTERNS = []
 
 
 
-const EXAMPLES = getExamplesOr('reconstruct-original-digits', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def originalDigits(s):' },

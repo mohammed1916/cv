@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from "../../config/examplesRegistry";
+import authoredExamples0 from '../../config/examples/kill-process.js';
 
-const AUTHORED_INITIAL = getInitialExamples("kill-process")[0];
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
@@ -21,7 +22,7 @@ import { useParsedInput } from "../../hooks/useParsedInput";
 import { useApplyExample } from "../../hooks/useApplyExample";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 
 import "./KillProcessVisualizer.css";
 
@@ -67,7 +68,7 @@ const SOLUTION_CODE = [
   { line: 11, text: "    return killed" },
 ];
 
-const EXAMPLES = getExamplesOr("kill-process", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 /* =========================================================
    Helpers

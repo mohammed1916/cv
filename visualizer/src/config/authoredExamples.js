@@ -1,2179 +1,3311 @@
-// Independently designed walkthroughs. Small boundary inputs are intentional:
-// a singleton, zero, or empty result cannot be made longer without losing the case.
-import { sequenceStoryExamples } from './sequenceStoryExamples.js';
-import { scanStoryExamples } from './scanStoryExamples.js';
-import { treeStoryExamples } from './treeStoryExamples.js';
-import { collectionStoryExamples } from './collectionStoryExamples.js';
-export const AUTHORED_EXAMPLES = Object.fromEntries(Object.entries(sequenceStoryExamples).map(([id, examples]) => [`sequence:${id}`, examples]));
-Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(scanStoryExamples).map(([id, examples]) => [`scan:${id}`, examples])));
-Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(treeStoryExamples).map(([id, examples]) => [`tree:${id}`, examples])));
-Object.assign(AUTHORED_EXAMPLES, Object.fromEntries(Object.entries(collectionStoryExamples).map(([id, examples]) => [`collection:${id}`, examples])));
-function suite(slugs, fields, rows) {
-  const keys = fields.split(' ');
-  const examples = rows.map(([label, ...values]) => Object.fromEntries([
-    ['label', label], ...keys.map((key, i) => [key, values[i]]),
-  ]));
-  for (const slug of slugs.split('|')) AUTHORED_EXAMPLES[slug] = examples;
-}
-
-suite('two-sum', 'nums target', [
- ['Late complement', [14,-6,23,8,31,5,-2,19,11],17],
- ['Same value, two indices',[8,8],16], ['Zero and negative',[-9,0,12,4],-9],
- ['Pair at both ends',[13,2,6,9,15,-4],9],
-]);
-suite('add-two-numbers|add-two-numbers-ii','l1 l2',[
- ['Unequal lengths and carry chain',[7,9,9,4,8,6,2],[8,6,5,9]],
- ['Carry creates a node',[9,9,9,9,9],[1]], ['Zero identity',[0],[4,8,3,2]],
- ['Both zero',[0],[0]], ['No carries',[1,2,3,1],[2,1,2,2]],
-]);
-suite('add-binary','a b',[
- ['Interleaved carries','11010110101','101111011'], ['Carry grows the answer','11111111','1'],
- ['Zero identity','0','1011010'], ['Both zero','0','0'], ['Unequal lengths','100000001','11'],
-]);
-suite('longest-substring-without-repeating','s',[
- ['Repeated window resets','pqrsptuvqwxypz'], ['All distinct','hijklmno'],
- ['One repeated symbol','zzzzzzz'], ['Empty string',''], ['Spaces count','a b c a d'],
-]);
-suite('palindrome-partitioning|palindrome-partitioning-ii|palindromic-substrings|longest-palindromic-subsequence|palindrome-subsequence','s',[
- ['Separate palindrome islands','noonxabbay'], ['Whole odd palindrome','rotator'],
- ['Nested even palindrome','deffed'], ['Every cut competes','zzzzz'],
- ['Only single letters','qwerty'], ['Single letter','v'],
-]);
-suite('longest-palindrome','s',[
- ['Pairs and odd leftovers','mmmnnnooopqqrrsst'], ['Only distinct','qwerty'],
- ['All one letter','zzzzzzz'], ['Case matters','aAbBcCa'], ['Single letter','v'],
-]);
-suite('valid-palindrome','s',[
- ['Punctuation and case','Was it a car or a cat I saw?'], ['Mismatch inside','A quiet garden, not a palindrome.'],
- ['Only punctuation','... ! ?'], ['Mixed alphanumeric','7Rotor7'], ['Single letter','Q'],
-]);
-suite('valid-parentheses','s',[
- ['Nested and adjacent groups','{[()()]([])}([]{})'], ['Wrong closing order','{[(])}'],
- ['Unclosed prefix','(([]{})'], ['Closer without opener',']()'], ['Empty stack throughout',''],
-]);
-suite('generate-parentheses','n', [['Four pairs, many branches',4],['One pair',1],['Two pairs',2],['Three pairs',3]]);
-suite('letter-combinations','digits',[
- ['Mixed three- and four-letter keys','274'], ['Four-way key','9'], ['Two four-way keys','79'], ['No digits',''],
-]);
-suite('remove-duplicates','nums',[
- ['Runs at both ends',[-7,-7,-7,-2,0,0,4,4,4,9,12,12]], ['All equal',[8,8,8,8]],
- ['Already unique',[-9,-3,2,7,11]], ['Single value',[6]], ['Empty',[]],
-]);
-suite('remove-element','nums val',[
- ['Remove scattered matches',[7,3,7,4,5,7,9,7,2,7],7], ['Remove everything',[4,4,4],4],
- ['Absent target',[3,6,9,12],5], ['Single match',[8],8], ['Empty',[],2],
-]);
-suite('next-permutation','nums',[
- ['Long nonincreasing suffix',[2,6,8,7,5,4,4,1]], ['Wrap to first',[9,7,5,3]],
- ['Repeated suffix',[2,4,4,3,3]], ['Already first',[2,5,7,9]], ['Singleton',[6]],
-]);
-suite('search-insert-position|binary-search','nums target',[
- ['Interior search',[-18,-11,-5,0,4,9,16,23,31,42],16], ['Before first',[4,8,12],1],
- ['After last',[4,8,12],19], ['Between entries',[4,8,12],10], ['Single exact match',[7],7],
-]);
-suite('search-in-rotated-sorted-array','nums target',[
- ['Across the pivot',[17,23,31,42,-8,-3,2,6,11],-3], ['Missing target',[8,12,19,2,5],9],
- ['Unrotated',[-4,0,5,9,17],9], ['Single hit',[6],6], ['Single miss',[6],4],
-]);
-suite('search-in-rotated-sorted-array-ii','nums target',[
- ['Duplicates hide the pivot',[6,6,9,12,12,1,1,3,6],1], ['All equal hit',[4,4,4,4],4],
- ['All equal miss',[4,4,4,4],5], ['One exception',[7,7,7,2,7,7],2], ['Singleton',[9],9],
-]);
-suite('find-first-last-position','nums target',[
- ['Interior run',[-5,-2,0,4,4,4,4,8,11,15],4], ['Absent',[2,2,6,8],4],
- ['All match',[9,9,9,9],9], ['At left edge',[3,3,6,8],3], ['At right edge',[3,6,8,8],8],
-]);
-suite('find-min-rotated-sorted-array|find-minimum-in-rotated-sorted-array-ii','nums',[
- ['Pivot near the middle',[21,28,35,42,-8,-1,6,13]], ['Already sorted',[-9,-4,3,11,18]],
- ['Minimum last',[4,7,12,19,-3]], ['Minimum second',[19,-3,4,7,12]], ['Singleton',[13]],
-]);
-suite('three-sum','nums',[
- ['Several unique triples',[-9,-6,-3,-3,0,2,4,6,7,9]], ['All zero',[0,0,0,0,0]],
- ['No solution',[2,5,8,11]], ['Duplicate suppression',[-4,-4,2,2,2,8]], ['Minimum length',[-7,2,5]],
-]);
-suite('three-sum-closest','nums target',[
- ['Competing close totals',[-12,-5,-1,3,8,14,19],10], ['Exact total',[-8,2,7,12],6],
- ['Below every total',[4,6,8,10],-9], ['Above every total',[-9,-7,-3,1],20], ['Only triple',[-4,6,11],9],
-]);
-suite('four-sum','nums target',[
- ['Several quadruplets',[-8,-5,-3,-1,0,2,4,6,9],3], ['Repeated values',[3,3,3,3,3,3],12],
- ['Impossible target',[1,4,7,10,13],-8], ['Exactly four',[-6,-2,3,11],6],
-]);
-suite('container-with-most-water','height',[
- ['Width versus height',[5,12,3,9,4,14,2,8,11,6,10]], ['Two walls',[7,13]],
- ['Flat walls',[6,6,6,6,6]], ['Increasing',[1,3,5,7,9,11]], ['Zero interiors',[8,0,0,0,8]],
-]);
-suite('trapping-rain-water','height',[
- ['Several basins',[6,1,4,0,3,7,2,5,1,4,6]], ['No basin',[1,3,5,7,9]],
- ['Flat roof',[5,5,5,5]], ['Single deep basin',[9,0,0,0,9]], ['Too short',[4,2]],
-]);
-suite('largest-rectangle-in-histogram','heights',[
- ['Competing plateaus',[4,4,2,7,8,8,3,5,5,1]], ['Increasing bars',[2,4,6,8,10]],
- ['Decreasing bars',[10,8,6,4,2]], ['Equal bars',[7,7,7,7]], ['Zero separates',[4,4,0,6,6]], ['Single bar',[9]],
-]);
-suite('jump-game|jump-game-ii','nums',[
- ['Several frontier extensions',[3,1,2,1,4,1,0,2,1,0]], ['One jump',[7,0,0,0,0,0]],
- ['Every position needed',[1,1,1,1,1,1]], ['Already at destination',[0]],
-]);
-AUTHORED_EXAMPLES['jump-game'].push({label:'Blocked before the end',nums:[2,1,0,4,2,1]});
-// These two problems share successful inputs, but only Jump Game accepts failure.
-AUTHORED_EXAMPLES['jump-game-ii']=AUTHORED_EXAMPLES['jump-game-ii'].filter(e=>e.label!=='Blocked before the end');
-suite('permutations','nums',[
- ['Four distinct choices',[2,5,8,11]], ['Negative values',[-3,4,9]], ['Two choices',[6,12]], ['Singleton',[7]],
-]);
-suite('permutations-ii','nums',[
- ['Two duplicate groups',[2,2,5,5,8]], ['All identical',[6,6,6,6]], ['All distinct',[3,7,11]], ['Singleton',[9]],
-]);
-suite('subsets','nums',[
- ['Five independent choices',[-4,1,6,11,16]], ['Single choice',[9]], ['Two choices',[-2,7]], ['Empty set',[]],
-]);
-suite('combinations','n k',[
- ['Several remaining-choice branches',7,3], ['Choose everything',5,5], ['Choose one',6,1], ['One available',1,1],
-]);
-suite('combination-sum','candidates target',[
- ['Reuse and competing decompositions',[3,5,8,11],19], ['No combination',[4,7],9],
- ['Exact candidate',[5,9,13],13], ['Repeated use',[4],20], ['Above target',[8,11],5],
-]);
-suite('combination-sum-ii','candidates target',[
- ['Duplicate groups, single use',[2,2,3,3,4,6,7,9],12], ['All equal',[4,4,4,4],8],
- ['No solution',[3,7,11],5], ['Use every element',[2,5,8],15],
-]);
-suite('coin-change','coins amount',[
- ['Greedy choice loses',[1,6,9],26], ['Unreachable residue',[4,10],17],
- ['Zero amount',[3,7],0], ['Exact coin',[5,11,17],17], ['Only one denomination',[7],35],
-]);
-suite('coin-change-2','amount coins',[
- ['Many unordered combinations',24,[2,3,7]], ['No combination',13,[4,6]],
- ['Empty combination',0,[3,8]], ['One denomination',21,[7]], ['Exact coin',11,[11,17]],
-]);
-suite('house-robber|house-robber-ii','nums',[
- ['Alternating tempting houses',[6,13,4,9,18,3,12,7,15]], ['One house',[17]],
- ['Two houses',[8,19]], ['All equal',[5,5,5,5,5]], ['Zero streets',[0,0,0,0]],
-]);
-suite('best-time-buy-sell-stock|best-time-to-buy-and-sell-stock|best-time-buy-sell-stock-iii','prices',[
- ['Several rallies and a late low',[12,7,15,4,11,18,3,9,16,8]], ['Strictly falling',[19,15,11,6,2]],
- ['Strictly rising',[2,6,10,14,18]], ['Flat market',[8,8,8,8]], ['One day',[13]],
-]);
-suite('best-time-to-buy-and-sell-stock-ii|best-time-to-buy-and-sell-stock-iii','input',[
- ['Competing rallies','[12,7,15,4,11,18,3,9,16,8]'], ['Falling prices','[19,15,11,6,2]'],
- ['One long rally','[2,6,10,14,18]'], ['Flat market','[8,8,8,8]'], ['One day','[13]'],
-]);
-suite('best-time-buy-sell-stock-iv','k prices',[
- ['Transaction budget binds',2,[12,7,15,4,11,18,3,9,16,8]], ['Unlimited regime',8,[9,3,7,2,11,4,13]],
- ['No transactions',0,[4,9,2,12]], ['No profit',3,[16,12,8,3]], ['One day',1,[7]],
-]);
-suite('candy','ratings',[
- ['Peaks valleys and plateaus',[4,7,7,3,1,5,8,6,6,2]], ['All tied',[4,4,4,4]],
- ['Long ascent',[1,3,5,7,9]], ['Long descent',[9,7,5,3,1]], ['One child',[8]],
-]);
-suite('gas-station','gas cost',[
- ['Failures before a feasible start',[2,7,1,6,3,9,2,5],[5,3,4,5,6,2,4,3]],
- ['Total fuel too small',[2,3,1,4],[3,4,2,5]], ['Exactly balanced',[4,1,7,2],[2,5,3,4]],
- ['One feasible station',[6],[4]], ['One impossible station',[2],[3]],
-]);
-suite('single-number','nums',[
- ['Pairs cancel across distance',[12,-7,5,12,0,9,-7,5,9]], ['Unique zero',[4,-3,4,-3,0]],
- ['Negative survivor',[-11,6,2,6,2]], ['One number',[23]],
-]);
-suite('single-number-ii','input',[
- ['Triples interleaved','[6,-4,9,6,9,-4,17,6,-4,9]'], ['Negative unique','[5,5,-13,5]'],
- ['Zero unique','[7,7,0,7]'], ['One number','[21]'],
-]);
-suite('longest-consecutive-sequence','nums',[
- ['Runs merge out of order',[14,3,8,5,12,4,13,7,6,8,15]], ['Negatives cross zero',[-3,2,-1,0,-2,1]],
- ['Only duplicates',[9,9,9,9]], ['Separated values',[2,6,10,14]], ['Empty',[]],
-]);
-suite('longest-increasing-subsequence|300','nums',[
- ['Replace tails before extending',[8,3,11,5,9,2,6,12,7,14]], ['Strict descent',[15,12,9,6,3]],
- ['Equal values',[4,4,4,4]], ['Already increasing',[-8,-3,2,7,12]], ['Singleton',[19]],
-]);
-suite('contains-duplicate','nums',[
- ['Late duplicate',[12,5,19,3,8,24,7,16,5]], ['All distinct',[-6,0,4,11,18]],
- ['All equal',[8,8,8,8]], ['One value',[14]], ['Empty',[]],
-]);
-suite('product-of-array-except-self','nums',[
- ['Mixed signs',[-2,3,1,-4,2,5]], ['Exactly one zero',[3,0,-2,4,5]],
- ['Two zeroes',[0,4,0,-3]], ['Two elements',[-7,9]], ['All ones',[1,1,1,1]],
-]);
-suite('move-zeroes','nums',[
- ['Zeroes at every position',[0,5,0,-2,7,0,0,9,3,0]], ['All zeroes',[0,0,0,0]],
- ['No zeroes',[4,-2,8,11]], ['Single zero',[0]], ['Already compact',[6,3,9,0,0]],
-]);
-suite('sort-colors','nums',[
- ['All three colors interleaved',[2,0,2,1,0,1,2,0,1,2,1,0]], ['Already sorted',[0,0,1,1,2,2]],
- ['Reverse order',[2,2,1,1,0,0]], ['One color',[1,1,1,1]], ['Singleton',[2]],
-]);
-suite('rotate-array','nums k',[
- ['Wrapped displacement',[3,8,13,18,23,28,33,38,43],4], ['More than length',[2,5,8,11],10],
- ['Full revolution',[4,7,10],3], ['No rotation',[5,9,13],0], ['Singleton',[17],20],
-]);
-suite('sliding-window-maximum|sliding-window-median','nums k',[
- ['Entering and expiring extremes',[8,-3,12,5,5,-7,14,2,9,-1,6],4], ['One-wide windows',[4,-2,9,3],1],
- ['Whole array',[7,1,8,2,6],5], ['Duplicate values',[6,6,6,6,6],3], ['Descending',[12,9,6,3,0],2],
-]);
-suite('subarray-sum-equals-k','nums k',[
- ['Repeated prefix sums',[4,-2,3,-5,2,4,-1,1,-2,3],4], ['Zero combinations',[0,0,0,0],0],
- ['Negative target',[-3,1,-2,4,-4],-4], ['No matching sum',[2,4,6],5], ['Single match',[9],9],
-]);
-suite('minimum-size-subarray-sum|min-size-subarray-sum','target nums',[
- ['Window repeatedly shrinks',23,[4,9,2,7,3,11,1,8,5]], ['Single element wins',10,[2,3,12,4]],
- ['Whole array required',20,[3,4,6,7]], ['Unreachable',30,[2,5,8]], ['First element wins',6,[9,2,3]],
-]);
-suite('daily-temperatures','temps',[
- ['Several unresolved days',[64,68,67,72,71,70,75,69,76,74]], ['Never warmer',[81,78,74,70]],
- ['Every next day warmer',[51,56,61,66]], ['Equal is not warmer',[70,70,70,73]], ['One day',[63]],
-]);
-suite('132-pattern','nums',[
- ['Candidate is replaced',[8,3,11,5,9,2,7,4]], ['No pattern, ascending',[-4,0,3,7,12]],
- ['No pattern, descending',[14,10,6,2]], ['Equal values are not strict',[5,5,5,5]], ['Negative pattern',[-9,-2,-6]],
-]);
-suite('first-missing-positive','nums',[
- ['Displacements and duplicates',[7,3,1,8,2,-4,0,3,5,11]], ['Complete prefix',[1,2,3,4,5]],
- ['No positive',[0,-3,-8]], ['One absent',[4,7,9]], ['Singleton one',[1]],
-]);
-suite('missing-number','nums',[
- ['Missing interior',[9,0,7,2,10,4,1,8,5,3]], ['Missing zero',[1,2,3,4]],
- ['Missing upper bound',[3,0,2,1]], ['Only zero',[0]], ['Only one',[1]],
-]);
-suite('find-duplicate','nums',[
- ['Long tail into a cycle',[5,8,2,6,9,3,7,4,1,6]], ['Repeated many times',[3,3,3,3]],
- ['Duplicate smallest',[1,4,2,3,1]], ['Minimum size',[1,1]],
-]);
-suite('find-all-duplicates-in-array|find-all-numbers-disappeared-in-an-array|find-all-numbers-disappeared-in-array','nums',[
- ['Several duplicated and missing slots',[8,3,5,8,2,6,3,9,1,5]], ['Nothing missing',[4,1,3,2]],
- ['One repeated pair',[2,2]], ['Single slot',[1]],
-]);
-suite('find-disappeared-numbers','input',AUTHORED_EXAMPLES['find-all-duplicates-in-array'].map(e=>[e.label,e.nums]));
-suite('single-element-in-sorted-array','nums',[
- ['Singleton after several pairs',[-8,-8,-3,-3,2,2,5,9,9,14,14]], ['Singleton first',[1,4,4,7,7]],
- ['Singleton last',[2,2,5,5,11]], ['Only element',[17]],
-]);
-suite('majority-element','nums',[
- ['Candidate changes before majority',[4,9,4,7,4,9,4,4,2,4,4]], ['All equal',[6,6,6,6]],
- ['Negative majority',[-3,8,-3,-3,8,-3,-3]], ['Singleton',[12]],
-]);
-suite('contiguous-array','nums',[
- ['Balanced intervals overlap',[1,1,0,1,0,0,0,1,1,0,1,0]], ['All zero',[0,0,0,0]],
- ['All one',[1,1,1,1]], ['Minimum balanced',[1,0]], ['Odd length',[0,1,0,1,1]],
-]);
-suite('partition-equal-subset','nums',[
- ['Several routes to half',[3,7,2,8,6,4,5,9]], ['Odd total',[2,4,7]],
- ['Even but impossible',[2,2,2,8]], ['Two equal values',[11,11]], ['Single value',[9]],
-]);
-suite('target-sum','nums target',[
- ['Many sign decisions',[2,3,1,4,2,5,1,2],6], ['Zero doubles choices',[0,0,2,0,3],1],
- ['Unreachable magnitude',[2,3,4],15], ['Parity blocks target',[2,4,6],3], ['Single negative sign',[7],-7],
-]);
-suite('burst-balloons','nums',[
- ['Interior versus last burst',[2,7,4,9,3,6]], ['Zero balloons',[0,4,0,7,0]],
- ['All ones',[1,1,1,1]], ['One balloon',[8]], ['Two balloons',[3,9]],
-]);
-suite('reverse-pairs','nums',[
- ['Cross-half pairs',[19,4,12,2,25,7,1,16,3]], ['Ascending positives',[2,4,7,11,18]],
- ['Negative values',[-2,-8,-3,-12,-5]], ['Equal negatives',[-4,-4,-4,-4]], ['Singleton',[9]],
-]);
-suite('count-of-smaller-after-self|count-of-smaller-numbers-after-self','nums',[
- ['Repeated values across halves',[12,4,9,2,7,4,15,1,6]], ['Increasing',[1,4,7,10]],
- ['Decreasing',[13,9,5,1]], ['All equal',[6,6,6,6]], ['Mixed negatives',[-1,-8,3,-4,0]],
-]);
-suite('count-of-range-sum','nums lower upper',[
- ['Many overlapping ranges',[4,-6,3,8,-5,2,-1,7],-2,5], ['Exact zero range',[0,0,0],0,0],
- ['No qualifying range',[2,5,8],20,25], ['Negative range',[-3,-4,2,-6],-9,-4],
-]);
-suite('k-diff-pairs-in-array','nums k',[
- ['Duplicates do not duplicate pairs',[8,3,5,11,6,3,9,14,8],3], ['Zero distance',[4,4,7,7,7,9],0],
- ['No matching distance',[2,6,10],3], ['Negative values',[-8,-5,-2,1,4],3],
-]);
-suite('arithmetic-slices-ii|arithmetic-slices-ii-subsequence','nums',[
- ['Overlapping arithmetic subsequences',[2,5,8,11,14,17,20]], ['All equal',[6,6,6,6,6]],
- ['No three-term progression',[1,2,4,8]], ['Descending',[15,11,7,3,-1]], ['Too short',[4,9]],
-]);
-suite('increasing-subsequences','nums',[
- ['Duplicate choices at several levels',[3,5,3,7,5,8,8]], ['All equal',[4,4,4,4]],
- ['Strict descent',[9,7,5,3]], ['Strict ascent',[-2,1,4,7]], ['Singleton',[12]],
-]);
-suite('predict-the-winner','nums',[
- ['Look beyond the larger endpoint',[8,3,15,6,2,11,4]], ['One score',[13]],
- ['Equal choices',[6,6,6,6]], ['Large middle trap',[2,19,4]], ['Even length',[5,12,3,8,7,9]],
-]);
-suite('minimum-moves-to-equal-array-elements|minimum-moves-to-equal-array-elements-ii','nums',[
- ['Outlier and repeated center',[4,9,6,9,2,18,7,9]], ['Already equal',[8,8,8,8]],
- ['Negative values',[-9,-3,-6,0,5]], ['Singleton',[17]], ['Two distant values',[-12,23]],
-]);
-suite('rotate-function','nums',[
- ['Several competing rotations',[7,-3,11,4,-2,9]], ['All equal',[5,5,5,5]],
- ['All zero',[0,0,0]], ['Singleton',[13]], ['Negative values',[-4,-7,-1,-9]],
-]);
-suite('find-peak-element','nums',[
- ['Several peaks',[3,9,5,12,7,4,11,2]], ['Peak first',[19,13,8,2]],
- ['Peak last',[2,6,11,17]], ['Singleton',[9]], ['Two values',[4,7]],
-]);
-suite('kth-largest-element','nums k',[
- ['Repeated values around rank',[12,5,18,7,12,3,9,21,6],4], ['Largest rank',[4,9,2,7],1],
- ['Smallest rank',[4,9,2,7],4], ['All equal',[6,6,6,6],3], ['Singleton',[15],1],
-]);
-suite('top-kfrequent','nums k',[
- ['Three distinct frequencies',[8,3,8,5,3,8,9,5,8,3,5,3,3],2], ['One distinct',[7,7,7],1],
- ['Return every distinct',[2,2,2,4,4,9],3], ['Negative keys',[-3,-3,-3,0,0,6],2],
-]);
-suite('wiggle-sort-ii','nums',[
- ['Repeated median values',[2,2,3,3,4,5,6,7]], ['Two values',[8,3]],
- ['Two repeated groups',[2,2,2,7,7,7]], ['Already wiggling',[1,8,3,9,5,10]], ['Singleton',[6]],
-]);
-suite('continuous-subarray-sum','nums k',[
- ['Matching remainder far apart',[4,8,3,7,2,11,6],9], ['Consecutive zeroes',[0,0],7],
- ['Length one is insufficient',[14],7], ['No qualifying pair',[1,2,4],13], ['Zero modulus',[5,0,0,3],0],
-]);
-suite('patching-array','nums n',[
- ['Several gaps in reachable coverage',[1,4,13,25],90], ['Already covers bound',[1,2,4,8],15],
- ['Must patch one first',[3,7],24], ['One value',[1],17],
-]);
-suite('teemo-attacking','attackTime duration',[
- ['Overlapping and separated attacks',[2,4,5,11,14,15,22],4], ['Exact touching',[1,5,9],4],
- ['Single attack',[7],6], ['No duration',[3,8,12],0],
-]);
-
-suite('find-first-occurrence','haystack needle',[
- ['Repeated prefixes before match','abacababacabadabacaba','abacabad'], ['Absent pattern','copperpaperproper','pepper'],
- ['Whole text','riverbank','riverbank'], ['Suffix match','silverriver','river'], ['Needle longer','oak','oakwood'],
-]);
-suite('longest-common-prefix','strs',[
- ['Prefix shrinks gradually',['transplant','transport','translate','transit','transfer']],
- ['No shared prefix',['maple','cedar','birch']], ['One word',['waterfall']], ['Empty member',['stone','','story']],
- ['One word is the prefix',['art','artist','article']],
-]);
-suite('group-anagrams','strs',[
- ['Several groups and repeats',['care','stone','race','tones','acre','notes','care','reed','deer']],
- ['Empty words',['','','a']], ['Single-letter groups',['q','r','q','s','r']], ['No anagrams',['birch','maple','cedar']],
-]);
-suite('valid-anagram','s t',[
- ['Several repeated letters','mississippi','imississipp'], ['One count differs','aabbccdde','aabbccddd'],
- ['Different lengths','cedar','cedars'], ['Identical','moonlight','moonlight'], ['Empty','', ''],
-]);
-suite('is-subsequence','s t',[
- ['Characters far apart','river','rainyislandvalleyendroad'], ['Order matters','abc','acb'],
- ['Empty candidate','','mountain'], ['Repeated requirement','aaa','abca'], ['Equal strings','cedar','cedar'],
-]);
-suite('edit-distance','w1 w2',[
- ['Insertion deletion replacement','stonework','stormward'], ['Only insertions','','meadow'],
- ['Only deletions','harbor',''], ['Already equal','lantern','lantern'], ['One replacement','lake','late'],
-]);
-suite('lcs','t1 t2',[
- ['Competing subsequences','cabdacefbg','abcafdbg'], ['Disjoint alphabets','mnop','abcd'],
- ['Repeated letters','aaaabbaa','baaaab'], ['Identical','river','river'], ['One empty','','cedar'],
-]);
-suite('distinct-subsequences','s t',[
- ['Several repeated matching choices','bananabandana','banana'], ['Every choice matches','mmmmmm','mmm'],
- ['Target absent','forest','stone'], ['Equal strings','cedar','cedar'], ['Target longer','oak','oaks'],
-]);
-suite('interleaving-string','s1 s2 s3',[
- ['Switch sources several times','maple','river','mraipvleer'], ['Wrong symbol','pine','oak','poiaknx'],
- ['Only first string','cedar','','cedar'], ['Only second string','','birch','birch'], ['Length mismatch','ab','cd','abc'],
-]);
-suite('scramble-string','s1 s2',[
- ['Nested splits','planet','netpla'], ['Same letters wrong splits','fghij','hfjgi'],
- ['Already equal','harbor','harbor'], ['Different counts','abbc','abcc'], ['Singleton','q','q'],
-]);
-suite('minimum-window-substring','s t',[
- ['Repeated requirements','QABRACQABBCARBA','AABC'], ['No complete window','cedarforest','zz'],
- ['Whole input required','qrrs','srqr'], ['One-character target','oakwood','w'], ['Target longer','ab','aba'],
-]);
-suite('find-all-anagrams|find-all-anagrams-in-a-string|find-all-anagrams-in-string','s p',[
- ['Overlapping anagrams','abacbabcaaabcbac','aabc'], ['Repeated letter windows','zzzzzz','zzz'],
- ['No window matches','riverbank','abc'], ['Pattern longer','ab','abcd'], ['Exact full window','bca','abc'],
-]);
-suite('permutation-in-string','s1 s2',[
- ['Repeated letters in a late window','aabc','zzabxacaabyy'], ['No permutation','aabc','abacccdd'],
- ['Whole text','cabb','bbac'], ['Pattern longer','abcd','abc'], ['Single letter','q','riverqbank'],
-]);
-suite('longest-repeating-char-replace','s k',[
- ['Best window moves between runs','AABACCCBACCCBBBA',2], ['No replacement','AABBBAAAC',0],
- ['All one letter','QQQQQQ',1], ['Budget covers whole input','ABCDE',5], ['Singleton','Z',0],
-]);
-suite('longest-substring-k-repeating|longest-substring-with-at-least-k-repeating-characters','s k',[
- ['Rare letters split valid runs','aaabbbxccccdddyeee',3], ['Whole input valid','aabbccaabb',2],
- ['No character repeats enough','abcdef',2], ['Threshold one','forest',1], ['Threshold too large','aaabb',6],
-]);
-suite('longest-substring-with-at-most-two-distinct-characters','s',[
- ['Several window resets','aabccbbdddeeeffef'], ['All distinct','abcdefg'], ['One letter','zzzzzz'],
- ['Exactly two letters','xyxyxyxy'], ['Empty',''],
-]);
-suite('longest-substring-k-distinct','s k',[
- ['Several evictions','aabacccddeeddffg',3], ['Zero budget','cedar',0], ['One distinct','xxxyyyzz',1],
- ['Budget above alphabet','maple',8], ['Empty','',2],
-]);
-suite('word-break','s dict',[
- ['Overlapping dictionary prefixes','rainbowraincloud',['rain','rainbow','bow','cloud','raincloud']],
- ['Unsegmentable suffix','pineconex',['pine','cone','pinecone']], ['Reuse a word','mossmossmoss',['moss','mo','ss']],
- ['Whole word','meadow',['meadow']], ['No initial match','river',['lake','stream']],
-]);
-suite('word-break-ii','values',[
- ['Several complete sentences',{s:'rainbowraincloud',wordDict:'["rain","rainbow","bow","cloud","raincloud"]'}],
- ['No full sentence',{s:'pineconex',wordDict:'["pine","cone","pinecone"]'}],
- ['Repeated choices',{s:'ababab',wordDict:'["a","b","ab","aba"]'}],
- ['One full word',{s:'meadow',wordDict:'["meadow"]'}],
-]);
-suite('concatenated-words','words',[
- ['Build words from earlier words',['rain','bow','cloud','rainbow','raincloud','bowrain','rainbowcloud','stone']],
- ['No composite',['oak','pine','birch']], ['Repeated component',['moss','mossmoss','mossmossmoss']],
- ['One word',['river']],
-]);
-suite('substring-concatenation','s words',[
- ['Several offsets and repeated words','redblueredredblue',['red','blu']],
- ['Adjacent valid windows','sunmoonsunmoon',['sun','moo']],
- ['Repeated token needed','catdogcatcatdog',['cat','cat','dog']], ['Missing token','redredred',['red','sun']],
-]);
-// Equal token lengths are part of this problem's contract.
-AUTHORED_EXAMPLES['substring-concatenation'][0]={label:'Overlapping token windows',s:'redbluredredbluredblu',words:['red','blu','red']};
-AUTHORED_EXAMPLES['substring-concatenation'][1]={label:'Adjacent valid windows',s:'sunmoosunmoo',words:['sun','moo']};
-suite('decode-ways','s',[
- ['Several two-digit choices','1213122116'], ['Zero must pair','101201'], ['Leading zero','0712'],
- ['Impossible zero pair','1304'], ['One digit','7'], ['Only single choices','373737'],
-]);
-suite('decode-string','s',[
- ['Nested and adjacent groups','2[ab3[c]]x3[de]'], ['Multi-digit count','12[q]'],
- ['Plain letters','river'], ['Single repetition','1[maple]'], ['Nested empty-free groups','3[a2[b2[c]]]'],
-]);
-suite('basic-calculator','s',[
- ['Nested signs and subtraction','28-(6+(14-9))+(12-(7-3))'], ['Leading negative','-(8-13)+4'],
- ['Spaces and zero',' 0 - ( 9 - 9 ) '], ['Single number','347'], ['Nested subtraction','19-(8-(6-2))'],
-]);
-suite('basic-calculator-ii','expr',[
- ['Precedence and truncation','42-17/3+6*4-9/2'], ['Only addition','12+7+23+8'],
- ['Multiplication before subtraction','19-4*6'], ['Division truncates','29/6'], ['Single number','281'],
-]);
-suite('eval-rpn','tokens',[
- ['Nested arithmetic',['12','5','-','3','*','8','2','/','+']], ['Negative division',['-17','4','/']],
- ['Operand order',['7','19','-']], ['Single operand',['23']], ['Zero result',['9','9','-']],
-]);
-suite('expression-tree-from-tokens','tokens',AUTHORED_EXAMPLES['eval-rpn'].map(e=>[e.label,e.tokens]));
-suite('longest-valid-parentheses','s',[
- ['Several valid islands',')(()())())((()))(()'], ['All open','((((('], ['All closed',')))))'],
- ['Whole string valid','(()(()))()'], ['Empty',''],
-]);
-suite('remove-invalid-parentheses','s',[
- ['Letters and competing removals','(a(b))c)()(d'], ['Already valid','(map)(le)'], ['Only invalid brackets',')((('],
- ['No brackets','cedar'], ['Two-sided excess',')ab(c)d('],
-]);
-suite('remove-duplicate-letters','s',[
- ['Small letters arrive late','dbacdbcabed'], ['Already unique','planet'], ['One repeated letter','qqqqqq'],
- ['Reverse alphabet repeats','edcbaedcba'], ['Single letter','z'],
-]);
-suite('remove-k-digits','num k',[
- ['Several cascading pops','5830274916',4], ['Leading zero after removal','4001203',2],
- ['Remove everything','7351',4], ['Already increasing','1234679',3], ['No removals','90817',0],
-]);
-suite('additive-number','num',[
- ['Many valid terms','2358132134'], ['Zero terms','000000'], ['Leading zero blocks split','02134'],
- ['Late mismatch','2358132135'], ['Multi-digit first terms','1212243660'],
-]);
-suite('multiply-strings','num1 num2',[
- ['Several carry columns','70839','4067'], ['Zero product','0','918273'], ['Identity','52741','1'],
- ['Carry chain','9999','999'], ['Unequal lengths','83017','6'],
-]);
-suite('compare-version-numbers','version1 version2',[
- ['Late differing revision','12.004.7.0.13','12.4.7.0.9'], ['Trailing zero equality','3.07.0.0','3.7'],
- ['Leading zero equality','0008.0002','8.2'], ['Shorter is smaller','4.9','4.9.1'], ['First revision decides','11.0','9.99'],
-]);
-suite('complex-number-multiplication','num1 num2',[
- ['Both parts contribute','7+-4i','-3+8i'], ['Pure imaginary','0+6i','0+-5i'],
- ['Zero','0+0i','9+2i'], ['Real identity','1+0i','-4+7i'], ['Conjugates','3+5i','3+-5i'],
-]);
-suite('fraction-to-recurring-decimal','numerator denominator',[
- ['Nonrepeating prefix then cycle',17,66], ['Long repeating cycle',5,17], ['Terminating',29,16],
- ['Negative result',-23,12], ['Exact integer',42,7], ['Zero numerator',0,19],
-]);
-suite('repeated-substring-pattern','s',[
- ['Long repeated unit','mossrivermossrivermossriver'], ['Almost repeated','pinepinepinx'],
- ['One symbol repeats','qqqqqq'], ['Single character','z'], ['No repeat','lantern'],
-]);
-suite('shortest-palindrome','s',[
- ['Long palindromic prefix','rotatorpine'], ['No prefix beyond one','garden'],
- ['Already palindrome','deffed'], ['Repeated letters','zzzzzz'], ['Empty',''],
-]);
-suite('reverse-words-in-a-string','s',[
- ['Uneven whitespace','  lanterns   beside the quiet   river  '], ['One word','  meadow  '],
- ['Two words','silver birch'], ['Already compact','clouds cross distant hills'],
-]);
-suite('length-of-last-word','s',[
- ['Trailing spaces','  lanterns glow beside the riverbank   '], ['One word','meadow'],
- ['One-letter final word','walk toward a'], ['Several separators','pine   oak     cedar  '],
-]);
-suite('reverse-vowels','input',[
- ['Mixed case vowels','An unusual OCEAN breeze'], ['No vowels','rhythms'], ['Only vowels','aEiOuUoIeA'], ['Singleton','q'],
-]);
-suite('reverse-string','s',[
- ['Long character array',Array.from('lantern river')], ['Palindrome',Array.from('rotator')],
- ['One character',['Q']], ['Empty',[]],
-]);
-suite('reverse-string-ii','s k',[
- ['Several full blocks and a tail','abcdefghijklmnopq',3], ['Shorter than k','cedar',8],
- ['Between k and twice k','lantern',5], ['Unit blocks','meadow',1],
-]);
-suite('string-compression','chars',[
- ['Long run and scattered repeats',Array.from('mmmmmmmmmmmmnnopppppqq')], ['No repeats',Array.from('planet')],
- ['One character',['z']], ['Two-digit count',Array(14).fill('q')],
-]);
-suite('number-of-segments-in-a-string','s',[
- ['Uneven gaps','  clouds   drift over  quiet hills  '], ['Empty',''], ['Spaces only','     '],
- ['One segment','river-bank'], ['Single spaces','oak pine birch cedar'],
-]);
-suite('license-key-formatting','s k',[
- ['Many groups and separators','ab-9cD--72-efG-5h',3], ['Short first group','q1w2e3r4',3],
- ['Only dashes','-----',4], ['One group','a-b-c',7], ['Unit groups','q-9-z',1],
-]);
-suite('detect-capital','word',[
- ['Capitalized longer word','Waterfall'], ['All capitals','MOUNTAIN'], ['All lowercase','riverbank'],
- ['Interior uppercase','riVerbank'], ['Single uppercase','Q'],
-]);
-suite('reconstruct-original-digits|reconstruct-original-digits-from-english','s',[
- ['Several shuffled number words','owteerhtxiseninorez'], ['Repeated digit','sevensevenseven'],
- ['Zero only','orez'], ['No unique-marker digits first','ninefiveone'],
-]);
-suite('unique-substrings-in-wraparound-string','s',[
- ['Several runs across z to a','wxyzabcdeabxyzabc'], ['One repeated letter','qqqqqq'],
- ['No consecutive transitions','acegik'], ['Whole short run','rstuvw'], ['Singleton','z'],
-]);
-suite('word-abbreviation','dict',[
- ['Shared lengths and prefix collisions',['internal','interval','internet','intense','intake','island','instead']],
- ['Short words stay whole',['oak','ox','at','a']], ['Unique lengths',['pine','cedar','forest','lantern']],
-]);
-suite('longest-word-dictionary','words',[
- ['Competing buildable chains',['p','pl','pla','plan','plane','plant','s','st','sto','ston','stone']],
- ['Missing middle prefix',['a','ab','abcd','abcde']], ['No starting letter',['river','road']], ['Tie by spelling',['a','at','an']],
-]);
-suite('text-justification','words maxWidth',[
- ['Uneven spaces and final line',['Soft','lanterns','illuminate','the','quiet','path','beside','our','river'],18],
- ['Single word line',['extraordinary','oak','pine'],13], ['Exact fit',['red','sun','sky'],11],
- ['Only one short word',['moss'],8],
-]);
-suite('simplify-path','path',[
- ['Several parent and current segments','/archive//photos/../drafts/./2026/../../notes/'],
- ['Cannot go above root','/../../..'], ['Dots inside names','/a/.../b/.hidden/../c'], ['Already canonical','/forest/river'], ['Root','/'],
-]);
-suite('restore-ip-addresses','s',[
- ['Several viable splits','172162541'], ['All zeroes','0000'], ['Leading-zero choices','001001'],
- ['Parts exceed 255','999999999999'], ['Too short','123'], ['Long valid boundary','255254253252'],
-]);
-suite('validate-ip-address','queryIP',[
- ['IPv6 mixed groups','2a01:0db8:0000:0042:0000:8a2e:0370:7abc'], ['IPv4','172.19.204.8'],
- ['IPv4 leading zero','172.019.204.8'], ['IPv4 overflow','172.19.256.8'],
- ['Too few IPv6 groups','2a01:db8:0:42:0:7abc'], ['Non-hex IPv6','2a01:db8:0:42:0:8a2e:370:7abg'],
-]);
-suite('regular-expression-matching','s p',[
- ['Skip and consume starred groups','mmmnnopqq','m*n*o.p*.*'], ['Zero repetitions','river','r.*z*'],
- ['Whole string must match','cedar','ced'], ['Dot consumes one','oak','o.k'], ['Empty through stars','','a*b*'],
-]);
-suite('wildcard-matching','s p',[
- ['Several stars and single-character slots','silverriverbank','s*?r*bank'], ['Star matches empty','cedar','ce*dar'],
- ['Whole string mismatch','riverbank','river'], ['Empty with stars','','***'], ['Question needs a character','','?'],
-]);
-suite('ternary-expression-parser','expression',[
- ['Nested true and false branches','F?T?4:7:T?F?8:3:9'], ['True branch','T?6:2'],
- ['False branch','F?8:5'], ['Nested false branch','F?1:F?2:T?7:4'],
-]);
-suite('bulls-and-cows','secret guess',[
- ['Exact matches and displaced repeats','50775026','75020576'], ['All exact','448822','448822'],
- ['All displaced','123456','654321'], ['No shared digits','112233','778899'], ['Repeated counts differ','1112','1222'],
-]);
-suite('encode-decode-strings','strs',[
- ['Empty strings and delimiters',['river#bank','','12:pine','a/b/c','two words','007']],
- ['Empty collection',[]], ['Only empties',['','','']], ['One string',['lantern']],
-]);
-suite('read-n-characters-given-read4','file n',[
- ['Several full reads plus a partial','lanterns_by_the_river',13], ['Beyond end','cedar',12],
- ['Exact block','pinewood',8], ['Zero requested','meadow',0], ['Empty file','',5],
-]);
-suite('read-n-characters-given-read4-ii','file calls',[
- ['Reuse leftovers across calls','lanterns_by_the_river',[3,2,6,1,9,4]], ['After end','cedar',[4,4,2]],
- ['Zero-length request','pinewood',[0,3,0,5]], ['Empty file','',[1,4]],
-]);
-
-suite('integer-to-roman','num',[
- ['Several subtractive pairs',2949], ['Upper boundary',3999], ['Smallest value',1],
- ['Subtractive hundreds and tens',944], ['Only additive groups',2778],
-]);
-suite('roman-to-integer','s',[
- ['Several subtractive pairs','MMCMXLIX'], ['Upper boundary','MMMCMXCIX'], ['Smallest value','I'],
- ['Additive groups','MMDCCLXXVIII'], ['Subtractive hundreds and tens','CMXLIV'],
-]);
-suite('palindrome-number','value',[
- ['Long even palindrome','73133137'], ['Long odd palindrome','4829284'], ['Interior mismatch','73143137'],
- ['Negative sign','-4224'], ['Trailing zero','840'], ['Zero','0'],
-]);
-suite('reverse-integer','x',[
- ['Many digit extractions',708304126], ['Negative with trailing zero',-483700], ['Overflow',1563847412],
- ['Zero',0], ['Single digit',7],
-]);
-suite('string-to-integer-atoi','value',[
- ['Whitespace sign digits and suffix','   -00043821river'], ['Positive overflow','934567891234'],
- ['Negative overflow','-934567891234'], ['No leading digits','river438'], ['Conflicting signs','+-72'], ['Only whitespace','   '],
-]);
-suite('sqrtx','x',[
- ['Several binary-search refinements',73548], ['Exact square',1369], ['Just below square',1368],
- ['Just above square',1370], ['Zero',0], ['One',1],
-]);
-suite('powx-n','x n',[
- ['Mixed exponent bits',1.25,13], ['Negative exponent',2,-7], ['Zero exponent',7.5,0],
- ['Negative odd power',-3,5], ['Negative even power',-3,6], ['Zero base',0,9],
-]);
-suite('divide-two-integers','values',[
- ['Several quotient bits',{dividend:'937',divisor:'17'}], ['Negative truncates toward zero',{dividend:'-83',divisor:'9'}],
- ['Smaller magnitude',{dividend:'5',divisor:'19'}], ['Zero dividend',{dividend:'0',divisor:'7'}],
- ['Overflow clamp',{dividend:'-2147483648',divisor:'-1'}], ['Minimum signed value',{dividend:'-2147483648',divisor:'1'}],
-]);
-suite('plus-one','digits',[
- ['Carry across the trailing run',[4,8,2,9,9,9,9]], ['Extra leading digit',[9,9,9,9,9]],
- ['No carry',[3,0,5,7,2]], ['Zero',[0]], ['Interior nines unchanged',[9,9,4,2]],
-]);
-suite('plus-one-linked-list','values',AUTHORED_EXAMPLES['plus-one'].map(e=>[e.label,e.digits]));
-suite('sum-of-two-integers','a b',[
- ['Long carry propagation',127,65], ['Opposite signs',-37,19], ['Cancel to zero',-83,83],
- ['Both negative',-24,-39], ['Zero identity',0,57],
-]);
-suite('hamming-distance','x y',[
- ['Separated differing bits',341,682], ['Equal values',173,173], ['Against zero',0,255], ['One bit differs',64,65],
-]);
-suite('total-hamming-distance','nums',[
- ['Several bit columns',[3,10,21,36,57,82,127]], ['All identical',[19,19,19,19]],
- ['Zero and all low bits',[0,31]], ['Singleton',[47]],
-]);
-suite('number-complement','num',[
- ['Alternating significant bits',341], ['All significant bits set',127], ['Power of two',256], ['Smallest positive',1],
-]);
-suite('reverse-bits','n',[
- ['Separated groups of set bits',152672921], ['All bits clear',0], ['All bits set',4294967295],
- ['Only high bit',2147483648], ['Only low bit',1],
-]);
-suite('number-of1-bits','n',[
- ['Sparse and dense groups',15371], ['No set bits',0], ['All 32 bits',4294967295], ['Only high bit',2147483648],
-]);
-suite('power-of-two','n',[
- ['Large exact power',4096], ['One below',4095], ['One above',4097], ['Zero',0], ['Negative',-16], ['Identity',1],
-]);
-suite('power-of-three','n',[
- ['Several divisions',6561], ['Adjacent nonpower',6562], ['Zero',0], ['Negative',-27], ['Identity',1],
-]);
-suite('power-of-four','n',[
- ['Several divisions',1024], ['Power of two but not four',128], ['Adjacent nonpower',1025], ['Zero',0], ['Identity',1],
-]);
-suite('climbing-stairs','n',[
- ['Longer recurrence',12], ['One step',1], ['Two steps',2], ['Several choices',7],
-]);
-suite('fibonacci-number','n',[
- ['Longer recurrence',14], ['Zero',0], ['One',1], ['First sum',2], ['Middle recurrence',9],
-]);
-suite('counting-bits','n',[
- ['Across two power boundaries',37], ['Zero only',0], ['At power boundary',16], ['Below power boundary',15], ['One',1],
-]);
-suite('pascals-triangle','numRows',[
- ['Several interior rows',8], ['One row',1], ['Two rows',2], ['Interior begins',3],
-]);
-suite('perfect-squares','n',[
- ['Several candidate decompositions',43], ['Perfect square',49], ['Needs four terms',31], ['Two squares',41], ['One',1],
-]);
-suite('ugly-number-ii|264','n',[
- ['Several merged-factor frontiers',24], ['First ugly number',1], ['Small frontier',7], ['Repeated generated products',15],
-]);
-suite('super-ugly-number','n primes',[
- ['Four prime frontiers',18,[2,3,11,17]], ['First number',1,[3,7]],
- ['One prime',7,[3]], ['Overlapping products',14,[2,3,5]],
-]);
-suite('happy-number','n',[
- ['Several digit-square transitions',989], ['Known convergent chain',82], ['Cycle without one',116], ['Already one',1],
-]);
-suite('arranging-coins','n',[
- ['Many full rows and a remainder',83], ['Exact triangle',78], ['Just below triangle',77], ['One coin',1], ['Zero',0],
-]);
-suite('nth-digit','n',[
- ['Inside three-digit numbers',734], ['Last one-digit position',9], ['First two-digit position',10],
- ['Last two-digit position',189], ['First three-digit position',190],
-]);
-suite('beautiful-arrangement','n',[
- ['Several compatible placements',6], ['One position',1], ['Two positions',2], ['Odd size',5],
-]);
-suite('nqueens|nqueensii','n',[
- ['Several symmetric solutions',5], ['One queen',1], ['No solution, two rows',2], ['No solution, three rows',3], ['Six rows',6],
-]);
-suite('gray-code','n',[
- ['Several reflection rounds',4], ['One bit',1], ['Two bits',2], ['Three bits',3],
-]);
-suite('permutation-sequence','n k',[
- ['Several factorial blocks',6,437], ['First ordering',5,1], ['Last ordering',5,120], ['Single element',1,1],
-]);
-suite('construct-the-rectangle','area',[
- ['Several factor tests',432], ['Perfect square',361], ['Prime area',97], ['Unit area',1], ['Narrow factor pair',34],
-]);
-suite('poor-pigs','buckets minutesToDie minutesToTest',[
- ['Several base digits',125,12,48], ['Only one bucket',1,10,30], ['Exactly one round',17,15,15], ['Exact state power',64,10,30],
-]);
-suite('can-i-win','maxChoosableInteger desiredTotal',[
- ['Several competing game states',8,22], ['Immediate win',7,6], ['Unreachable total',6,23], ['Nothing needed',5,0],
-]);
-suite('guess-number|guess-number-higher-or-lower','n pick',[
- ['Several narrowing steps',73,46], ['First candidate',41,1], ['Last candidate',41,41], ['Single candidate',1,1],
-]);
-suite('first-bad-version','n bad',[
- ['Several boundary refinements',83,57], ['First is bad',29,1], ['Only last is bad',29,29], ['Single bad version',1,1],
-]);
-suite('guess-number-higher-or-lower-ii','n',[
- ['Several minimax intervals',12], ['No paid guess',1], ['Two candidates',2], ['Uneven intervals',7],
-]);
-suite('smallest-good-base','n',[
- ['Many possible exponent lengths','4681'], ['Binary all-ones representation','8191'],
- ['Three-digit representation','73'], ['Smallest valid value','3'],
-]);
-suite('magical-string','n',[
- ['Several generated runs',37], ['Empty prefix',0], ['First symbol',1], ['Seed prefix',3], ['Cut inside a run',14],
-]);
-suite('binary-watch','n',[
- ['Many bit placements',3], ['All lights off',0], ['One light',1], ['Impossible valid time',9],
-]);
-suite('output-contest-matches','n',[
- ['Four pairing rounds',16], ['One final',2], ['Two rounds',4], ['Three rounds',8],
-]);
-suite('super-power','base exponents',[
- ['Several decimal exponent digits',47,[1,2,3,4]], ['Exponent zero',29,[0]],
- ['Base one',1,[9,8,7]], ['Modulus multiple',1337,[2,5]],
-]);
-suite('integer-break','n',[
- ['Several candidate splits',14], ['Smallest splittable',2], ['First beneficial split',4], ['Remainder one',10], ['Remainder two',11],
-]);
-suite('bulb-switcher','n',[
- ['Several perfect-square survivors',63], ['Exact square',64], ['Zero bulbs',0], ['One bulb',1],
-]);
-suite('count-and-say','n',[
- ['Several description rounds',7], ['Seed',1], ['First run',2], ['Mixed runs',5],
-]);
-suite('excel-sheet-column-title','n',[
- ['Several base-26 carries',1829], ['Last single letter',26], ['First double letter',27], ['Before triple letters',702], ['First triple letters',703],
-]);
-suite('factorial-trailing-zeroes','n',[
- ['Several powers of five',130], ['Below first factor five',4], ['Exactly power of five',125], ['Zero factorial',0],
-]);
-suite('number-of-digit-one','n',[
- ['Several decimal positions',3141], ['No positive numbers',0], ['Around a ten boundary',101], ['All ones',1111],
-]);
-suite('bitwise-and-of-numbers-range','left right',[
- ['Shared high-bit prefix',600,639], ['Cross a power of two',511,512], ['One value',73,73], ['Contains zero',0,127],
-]);
-
-const branchingTree=[18,7,29,3,12,24,35,null,5,10,15,21,null,32,41];
-const sparseTree=[18,7,29,null,12,24,null,10,null,null,26];
-const leftChain=[19,14,null,9,null,4];
-const treeShapes=[['Several levels and branches',branchingTree],['Uneven missing children',sparseTree],
- ['Only left children',leftChain],['One node',[23]],['Empty tree',[]]];
-suite('binary-tree-level-order|binary-tree-preorder-traversal|binary-tree-postorder-traversal|binary-tree-paths|right-side-view|invert-binary-tree|flatten-binary-tree-to-linked-list|max-depth-binary-tree|diameter-binary-tree|find-leaves-of-binary-tree|binary-tree-tilt','arr',treeShapes);
-suite('binary-tree-level-order-ii|binary-tree-level-order-traversal-ii|binary-tree-zigzag-level-order-traversal|diameter-of-binary-tree','root',treeShapes);
-suite('binary-tree-vertical-order|serialize-deserialize','tree',treeShapes);
-suite('boundary-of-binary-tree','text',treeShapes.map(([l,v])=>[l,JSON.stringify(v)]));
-suite('balanced-binary-tree','arr',[
- ['Balanced several levels',branchingTree], ['Deep imbalance away from root',[8,4,12,2,null,10,14,1,null,null,null,null,null,0]],
- ['One-sided chain',leftChain], ['Single node',[17]], ['Empty tree',[]],
-]);
-suite('minimum-depth-of-binary-tree','arr',[
- ['Short leaf competes with deep branch',[12,5,19,null,null,16,25,14,null,22,28]],
- ['Missing child is not a leaf',[8,null,13,null,21,null,34]], ['Equal leaf depths',branchingTree], ['One node',[17]], ['Empty',[]],
-]);
-suite('symmetric-tree','tree',[
- ['Three mirrored levels',[8,3,3,1,6,6,1,null,2,5,null,null,5,2]],
- ['Same values, asymmetric shape',[8,3,3,null,6,null,6]], ['Value mismatch',[8,3,3,1,6,7,1]],
- ['One node',[17]], ['Empty',[]],
-]);
-suite('same-tree','p q',[
- ['Identical sparse trees',sparseTree,sparseTree], ['Deep value mismatch',[8,3,14,1,6,10,19],[8,3,14,1,7,10,19]],
- ['Equal values, different shape',[8,3,null],[8,null,3]], ['Only one empty',[],[17]], ['Both empty',[],[]],
-]);
-suite('validate-bst','arr',[
- ['Several valid ancestor bounds',branchingTree], ['Locally valid, globally invalid',[20,10,30,5,25,24,35]],
- ['Duplicate violates strictness',[8,4,12,null,8]], ['Negative keys',[-5,-12,3,-18,-8,0,7]], ['One node',[17]],
-]);
-suite('convert-sorted-array-to-binary-search-tree','arr',[
- ['Odd-sized balanced construction',[-19,-12,-8,-3,0,4,9,15,21,28,36]], ['Even-sized choice',[-8,-2,5,11,18,24]],
- ['Singleton',[13]], ['Two entries',[-4,9]], ['Empty',[]],
-]);
-suite('convert-sorted-list-to-binary-search-tree','list',AUTHORED_EXAMPLES['convert-sorted-array-to-binary-search-tree'].map(e=>[e.label,e.arr]));
-suite('construct-binary-tree','pre ino',[
- ['Several recursive subtrees',[18,7,3,12,29,24,35],[3,7,12,18,24,29,35]],
- ['Right-only chain',[4,9,15,22],[4,9,15,22]], ['Left-only chain',[22,15,9,4],[4,9,15,22]], ['Singleton',[17],[17]],
-]);
-suite('construct-binary-tree-from-inorder-and-postorder-traversal','inorder postorder',[
- ['Several recursive subtrees',[3,7,12,18,24,29,35],[3,12,7,24,35,29,18]],
- ['Right-only chain',[4,9,15,22],[22,15,9,4]], ['Left-only chain',[4,9,15,22],[4,9,15,22]], ['Singleton',[17],[17]],
-]);
-suite('path-sum|path-sum-ii','root targetSum',[
- ['Several root-to-leaf routes',[8,4,13,3,7,9,17,2,null,1,5],24],
- ['No matching leaf',branchingTree,999], ['Internal prefix is insufficient',[7,4,9,2,5],11],
- ['Negative cancellation',[4,-6,8,5,-2,-3,1],3], ['Single matching node',[17],17], ['Empty',[],0],
-]);
-suite('path-sum-iii','root targetSum',[
- ['Paths may start below root',[6,3,-2,1,5,4,7,2,null,-1,3],6], ['Many zero paths',[0,0,0,0,0,0,0],0],
- ['Negative sums',[-4,-2,3,-5,1,-6,2],-6], ['No match',branchingTree,999], ['Singleton',[17],17],
-]);
-suite('binary-tree-max-path|binary-tree-maximum-path-sum','input',[
- ['Best path excludes a negative ancestor','[-12,8,17,4,11,-9,23,null,6,-3,5]'],
- ['All negative','[-8,-3,-14,-9,-6]'], ['Chain','[4,null,-2,null,9,null,7]'], ['Singleton','[17]'],
-]);
-suite('sum-root-to-leaf-numbers','input',[
- ['Several digit paths','[4,2,7,0,5,1,8,null,3,6,9]'], ['Leading zero','[0,3,6,2,null,null,8]'],
- ['Zero node','[0]'], ['Single digit','[7]'], ['One-sided path','[2,null,4,null,6]'],
-]);
-suite('kth-smallest','arr k',[
- ['Interior inorder rank',branchingTree,8], ['Minimum',branchingTree,1], ['Maximum',branchingTree,13],
- ['Skewed tree',[2,null,5,null,9,null,14],3], ['Singleton',[17],1],
-]);
-suite('lcabinary-tree','arr p q',[
- ['Deep nodes in one subtree',branchingTree,10,15], ['Across root',branchingTree,5,32],
- ['One node is ancestor',branchingTree,7,10], ['Direct siblings',[18,7,29],7,29],
-]);
-suite('lcabst','arrInput p q',AUTHORED_EXAMPLES['lcabinary-tree'].map(e=>[e.label,JSON.stringify(e.arr),e.p,e.q]));
-suite('inorder-successor-bst','tree p',[
- ['Successor in right subtree',branchingTree,18], ['Successor is ancestor',branchingTree,15],
- ['Maximum has no successor',branchingTree,41], ['Minimum key',branchingTree,3],
-]);
-suite('delete-node-in-a-bst','root key',[
- ['Delete node with two children',branchingTree,7], ['Delete root',branchingTree,18],
- ['Delete leaf',branchingTree,21], ['Absent key',branchingTree,99], ['Delete only node',[17],17],
-]);
-suite('bst-to-doubly-linked-list|convert-bst-to-greater-tree|minimum-absolute-difference-in-bst','root',[
- ['Several inorder transitions',branchingTree], ['Right-only chain',[3,null,8,null,15,null,24]],
- ['Two entries',[7,2]], ['Mixed signs',[0,-8,12,-13,-3,7,19]],
-]);
-suite('subtree-of-another-tree','root sub',[
- ['Exact interior subtree',branchingTree,[12,10,15]], ['Same root value, wrong shape',branchingTree,[12,10]],
- ['Whole tree matches',sparseTree,sparseTree], ['Leaf subtree',branchingTree,[21]], ['Absent value',branchingTree,[99]],
-]);
-suite('most-frequent-subtree-sum','tree',[
- ['Repeated sums in separate branches',[8,3,-3,2,1,4,-1]], ['Every sum different',[4,7,12]],
- ['All zero sums',[0,0,0,0,0]], ['Single value',[-17]],
-]);
-suite('count-complete-tree-nodes','n',[
- ['Partly filled last level',26], ['Perfect tree',31], ['First on next level',16], ['Singleton',1], ['Empty',0],
-]);
-suite('construct-binary-tree-from-string','s',[
- ['Nested signed values','18(7(3)(12(10)(15)))(29(24)(35))'], ['Only left children','9(6(3(1)))'],
- ['Negative root','-8(4)(-3(2))'], ['Singleton','27'],
-]);
-suite('binary-tree-longest-consecutive-sequence-ii','tree',[
- ['Increasing and decreasing branches','[5,4,6,3,8,7,2,2,null,null,null,null,8]'],
- ['No consecutive neighbors','[8,3,14,1,6,10,19]'], ['Duplicates break chain','[4,4,4]'], ['Singleton','[17]'],
-]);
-suite('binary-tree-upside-down','input',[
- ['Several left-spine pivots',[8,4,12,2,6, null,null,1,3]], ['No left child',[17]],
- ['One pivot',[9,5,13]], ['Left chain',[9,6,null,3]],
-]);
-const listRows=[['Long list with repeated values',[12,5,19,5,3,14,8,21,6]],['Two nodes',[7,13]],['Singleton',[17]],['Empty',[]]];
-suite('reverse-linked-list|swap-nodes-in-pairs|odd-even-linked-list','values',listRows);
-suite('reorder-list','arr', [...listRows,['Even length',[3,7,11,15,19,23,27,31]]]);
-suite('sort-list','arr', [...listRows,['Already sorted',[-8,-2,4,9,15]],['Reverse order',[17,12,7,2,-3]]]);
-suite('insertion-sort-list','head',AUTHORED_EXAMPLES['sort-list'].map(e=>[e.label,e.arr]));
-suite('palindrome-linked-list','nums',[
- ['Long odd palindrome',[4,9,2,7,2,9,4]], ['Even palindrome',[3,8,5,5,8,3]],
- ['Mismatch near middle',[4,9,2,7,3,9,4]], ['Singleton',[17]], ['Two unequal',[3,8]],
-]);
-suite('reverse-kgroup','list k',[
- ['Several groups plus remainder',[3,7,11,15,19,23,27,31,35,39],3], ['One group',[2,6,10,14],4],
- ['Group size one',[5,9,13,17],1], ['No complete group',[4,8],3],
-]);
-suite('rotate-list','list k',[
- ['Several links cross the seam',[3,7,11,15,19,23,27,31],3], ['Larger than length',[2,6,10,14],11],
- ['Full rotation',[4,9,14],3], ['No rotation',[4,9,14],0], ['Singleton',[17],8],
-]);
-suite('merge-two-sorted-lists','list1 list2',[
- ['Alternating and tied heads',[-9,-2,4,11,18],[-7,4,6,15,23]], ['One empty',[],[3,8,13]],
- ['Both empty',[],[]], ['Disjoint ranges',[2,5,8],[11,14,17]], ['All equal',[6,6],[6,6,6]],
-]);
-suite('merge-ksorted-lists','lists',[
- ['Four interleaving streams',[[-9,2,14],[-7,4,19],[-3,8,12],[0,6,21]]],
- ['Empty streams mixed in',[[],[3,8],[],[-2,9]]], ['No streams',[]], ['One stream',[[2,6,11]]], ['All equal',[[4,4],[4],[4,4]]],
-]);
-suite('merge-sorted-array','nums1 m nums2 n',[
- ['Interleaving with ties',[-8,-2,4,11,18,0,0,0,0],5,[-5,4,9,23],4],
- ['First input empty',[0,0,0],0,[3,7,12],3], ['Second input empty',[2,5,9],3,[],0],
- ['All incoming values smaller',[8,12,16,0,0],3,[1,4],2],
-]);
-suite('median-of-two-sorted-arrays','nums1 nums2',[
- ['Uneven lengths and interleaving',[-12,-3,4,9,18,27,36],[-8,2,11,23]],
- ['Even total',[-7,5,17],[1,8,24]], ['One empty',[],[3,7,11,15]],
- ['Repeated medians',[6,6,6],[6,6]], ['Disjoint ranges',[-9,-7,-5],[12,18,24,30]],
-]);
-suite('intersection-of-two-arrays|intersection-of-two-arrays-ii','nums1 nums2',[
- ['Repeated intersections',[8,3,8,5,11,3,14,8],[3,8,8,2,14,14]], ['Disjoint',[2,6,10],[3,7,11]],
- ['Different multiplicities',[4,4,4,4],[4,4]], ['One empty',[],[5,9]],
-]);
-suite('intersection-two-linked-lists','listA listB shared intersectVal',[
- ['Different prefixes meet late',[3,7,11,15],[2,6],[19,23,27,31],19], ['No shared nodes',[4,8,12],[4,8,12],[],0],
- ['Shared from both heads',[],[],[5,9,13],5], ['One starts at intersection',[],[2,4,6],[17,21],17],
-]);
-suite('linked-list-cycle','nodeCount tail',[
- ['Long prefix enters interior cycle',9,4], ['Cycle enters at head',7,0], ['No cycle',8,-1], ['Self-loop',1,0], ['One acyclic node',1,-1],
-]);
-suite('linked-list-cycle-ii','values',[
- ['Long prefix before entry',{nodes:'[4,8,12,16,20,24,28,32,36]',pos:4}],
- ['Entry at head',{nodes:'[3,7,11,15,19]',pos:0}], ['No cycle',{nodes:'[5,9,13,17]',pos:-1}],
- ['Self-loop',{nodes:'[23]',pos:0}], ['Empty',{nodes:'[]',pos:-1}],
-]);
-suite('copy-list-random|copy-list-with-random-pointer','nodes',[
- ['Forward backward self and null pointers',[{val:4,random:3},{val:8,random:0},{val:12,random:2},{val:16,random:null},{val:20,random:1},{val:24,random:4}]],
- ['All random pointers absent',[{val:3,random:null},{val:7,random:null},{val:11,random:null}]],
- ['One self-pointer',[{val:17,random:0}]], ['Empty list',[]],
-]);
-suite('two-sum-ii','numbers target',[
- ['Several pointer moves',[-12,-7,-2,3,8,14,21,29],19], ['Both ends',[-8,-3,2,7,12],4],
- ['Duplicate pair',[2,5,5,9],10], ['Two elements',[-4,13],9],
-]);
-
-const rectangular=[[3,8,13,18,23],[28,33,38,43,48],[53,58,63,68,73],[78,83,88,93,98]];
-suite('spiral-matrix|diagonal-traverse|matrix-iteration-basics','matrix',[
- ['Four by five traversal',rectangular], ['Single row',[[4,9,14,19,24]]], ['Single column',[[4],[9],[14],[19]]],
- ['One cell',[[17]]], ['Two by three',[[2,7,12],[17,22,27]]],
-]);
-suite('rotate-image','matrix',[
- ['Four layers of positions',[[3,8,13,18],[23,28,33,38],[43,48,53,58],[63,68,73,78]]],
- ['Odd center remains',[[2,7,12],[17,22,27],[32,37,42]]], ['One cell',[[17]]], ['Two by two',[[3,9],[15,21]]],
-]);
-suite('spiral-matrix-ii','n',[['Several rings',5],['Single cell',1],['Small even square',2],['Larger even square',6]]);
-suite('set-matrix-zeroes','matrix',[
- ['Zero markers collide',[[4,7,0,9,2],[3,5,8,6,1],[0,2,4,7,3],[8,6,5,0,4]]],
- ['No zeroes',[[2,4,6],[8,10,12]]], ['All zeroes',[[0,0],[0,0]]],
- ['First row and column',[[0,4,7],[3,5,8],[6,9,2]]], ['One row',[[3,0,7,9]]],
-]);
-suite('01-matrix','mat',[
- ['Several zero-source frontiers',[[1,1,1,0,1],[1,0,1,1,1],[1,1,1,1,1],[0,1,1,1,0]]],
- ['One corner zero',[[0,1,1,1],[1,1,1,1],[1,1,1,1]]], ['All zeroes',[[0,0,0],[0,0,0]]],
- ['One row',[[1,1,0,1,1,1]]], ['Single zero',[[0]]],
-]);
-suite('minimum-path-sum','grid',[
- ['Locally cheap moves compete',[[4,1,8,2,3],[7,2,1,9,4],[3,8,2,1,7],[6,1,4,2,3]]],
- ['One row',[[3,7,2,9,4]]], ['One column',[[4],[8],[1],[6]]], ['Zero-cost route',[[0,7,4],[0,0,5],[8,0,0]]], ['Single cell',[[17]]],
-]);
-suite('dungeon-game','dungeon',[
- ['Healing competes with future damage',[[-4,7,-8,2],[-6,-3,9,-5],[4,-12,-2,6],[-3,5,-7,-4]]],
- ['All healing',[[3,5],[7,2]]], ['All damage',[[-2,-3],[-4,-5]]], ['One damaging room',[[-17]]], ['Neutral room',[[0]]],
-]);
-suite('longest-increasing-path','matrix',[
- ['Winding increasing route',[[4,5,6,7],[3,12,11,8],[2,13,10,9],[1,14,15,16]]],
- ['Plateau blocks strict increase',[[6,6,6],[6,6,6]]], ['One row',[[2,5,3,7,9]]], ['One cell',[[17]]],
-]);
-suite('search-a-2d-matrix|search2-dmatrix','matrix target',[
- ['Interior target',rectangular,63], ['Missing between neighbors',rectangular,64],
- ['Below minimum',rectangular,-1], ['Above maximum',rectangular,100], ['Single cell',[[17]],17],
-]);
-suite('search-a-2d-matrix-ii','matrix target',[
- ['Rows and columns both sorted',[[2,7,12,18],[5,9,15,23],[8,14,21,28],[11,19,26,35]],21],
- ['Absent interior value',[[2,7,12],[5,9,15],[8,14,21]],13], ['Smallest',[[3,8],[6,12]],3],
- ['Largest',[[3,8],[6,12]],12], ['Single cell',[[17]],19],
-]);
-suite('reshape-matrix','mat r c',[
- ['Rectangular reshape',[[2,5,8,11],[14,17,20,23],[26,29,32,35]],2,6],
- ['Incompatible cell count',[[3,7,11],[15,19,23]],4,2], ['Unchanged shape',[[4,8],[12,16]],2,2],
- ['Flatten to row',[[2,6],[10,14],[18,22]],1,6],
-]);
-suite('sparse-matrix-multiplication','mat1 mat2',[
- ['Several zero-skipping opportunities',[[0,3,0,2],[4,0,-1,0],[0,0,5,0]],[[2,0,1],[0,6,0],[3,0,0],[0,1,4]]],
- ['All zero product',[[0,0],[0,0]],[[2,4],[6,8]]], ['Identity',[[3,7],[11,15]],[[1,0],[0,1]]],
- ['Row by column',[[2,0,-3,4]],[[5],[7],[2],[1]]],
-]);
-suite('unique-paths','m n',[
- ['Many overlapping subproblems',5,7], ['One row',1,9], ['One column',8,1], ['One cell',1,1], ['Square grid',6,6],
-]);
-suite('triangle','input',[
- ['Five levels with competing choices','[[4],[7,2],[3,8,5],[9,1,6,4],[2,7,3,8,1]]'],
- ['Negative route','[[-3],[4,-2],[-5,7,-6],[2,-1,3,4]]'], ['Single value','[[17]]'], ['All zero','[[0],[0,0],[0,0,0]]'],
-]);
-const islands=[[1,1,0,0,1,0],[1,0,0,1,1,0],[0,0,1,0,0,1],[1,1,1,0,1,1],[0,1,0,0,0,0]];
-suite('max-area-of-island','grid',[
- ['Several competing island sizes',islands], ['All water',[[0,0,0],[0,0,0]]], ['One solid island',[[1,1,1],[1,1,1]]],
- ['Diagonals stay separate',[[1,0,1],[0,1,0],[1,0,1]]], ['Single land cell',[[1]]],
-]);
-suite('number-of-islands','gridStr',AUTHORED_EXAMPLES['max-area-of-island'].map(e=>[e.label,e.grid.map(r=>r.join('')).join('\n')]));
-suite('island-perimeter','grid',[
- ['Jagged connected shoreline',[[0,1,1,0,0],[1,1,0,0,0],[0,1,1,1,0],[0,0,1,0,0]]],
- ['Solid rectangle',[[1,1,1,1],[1,1,1,1]]], ['Single land cell',[[1]]], ['One-cell-wide strip',[[1,1,1,1,1,1]]],
-]);
-suite('rotting-oranges','grid',[
- ['Several infection frontiers',[[2,1,1,0,1],[1,1,0,1,1],[0,1,1,1,2],[1,1,0,1,1]]],
- ['Isolated fresh orange',[[2,1,0],[0,0,0],[1,0,1]]], ['No fresh fruit',[[2,0,2],[0,2,0]]],
- ['No rotten source',[[1,1],[1,1]]], ['Single rotten',[[2]]],
-]);
-suite('surrounded-regions','input',[
- ['Border channel and enclosed pocket','["XXXXXXX","XOOXXOX","XXOXXOX","OOOXXOX","XXXXXOX","XXXXXXX"]'],
- ['All regions reach border','["OOOO","OOOO","OOOO"]'], ['No open cells','["XXXX","XXXX"]'],
- ['One enclosed cell','["XXX","XOX","XXX"]'], ['One row cannot be captured','["XOOXOOX"]'],
-]);
-suite('longest-line','matrix',[
- ['Competing directions',[[1,0,1,1,0],[0,1,1,0,1],[1,1,1,1,0],[0,0,1,1,1]]],
- ['All zero',[[0,0],[0,0]]], ['All one',[[1,1,1],[1,1,1]]], ['One row',[[1,1,0,1,1,1]]],
-]);
-suite('lonely-pixel-i','picture',[
- ['Isolated pixels and shared rows',['BWWWW','WWBWW','WBWBW','WWWWB'].map(r=>r.split(''))],
- ['All white',['WWW','WWW'].map(r=>r.split(''))], ['All black',['BB','BB'].map(r=>r.split(''))], ['Single black',[['B']]],
-]);
-suite('lonely-pixel-ii','picture N',[
- ['Matching rows with qualified columns',['BWBWW','BWBWW','WBWBW','WWWWB'].map(r=>r.split('')),2],
- ['No black pixels',[['W','W'],['W','W']],1], ['Identical dense rows',[['B','B'],['B','B']],2], ['Single black',[['B']],1],
-]);
-suite('minesweeper','board click',[
- ['Blank expansion meets numbered frontier',['EEEEEE','EEMEEE','EEEEEM','MEEEEE','EEEEEE'].map(r=>r.split('')),[0,0]],
- ['Click a mine',[['E','M'],['E','E']],[0,1]], ['Adjacent count',[['M','E','M'],['E','E','E']],[1,1]],
- ['No mines',[['E','E','E'],['E','E','E']],[0,1]],
-]);
-suite('trapping-rain-water-ii','heightMap',[
- ['Two basins and a lower outlet',[[7,7,7,7,7],[7,1,5,2,7],[7,2,6,1,4],[7,7,7,7,7]]],
- ['Flat surface',[[4,4,4],[4,4,4],[4,4,4]]], ['No interior',[[3,1,5,2]]],
- ['Single basin',[[6,6,6],[6,1,6],[6,6,6]]],
-]);
-const rollingMaze=[[0,0,0,1,0],[0,1,0,0,0],[0,0,0,1,0],[1,0,1,0,0],[0,0,0,0,0]];
-suite('the-maze','maze start destination',[
- ['Turns and stopping points',rollingMaze,[0,0],[4,4]], ['Pass-through is not a stop',[[0,0,0,0,0]],[0,0],[0,2]],
- ['Disconnected rooms',[[0,1,0],[0,1,0],[0,1,0]],[0,0],[2,2]], ['Already at destination',[[0,0],[0,0]],[0,0],[0,0]],
-]);
-suite('the-maze-iii','maze ball hole',[
- ['Several rolling routes',rollingMaze,[0,0],[4,4]], ['Hole stops mid-roll',[[0,0,0,0,0]],[0,0],[0,2]],
- ['Unreachable hole',[[0,1,0],[0,1,0],[0,1,0]],[0,0],[2,2]], ['Short roll',[[0,0],[0,0]],[1,1],[0,1]],
-]);
-suite('shortest-distance-buildings|shortest-distance-from-all-buildings','grid',[
- ['Three buildings and obstacles',[[1,0,0,2,0],[0,0,0,0,1],[0,2,0,0,0],[0,0,1,0,0]]],
- ['No common reachable land',[[1,2,0],[2,2,2],[0,2,1]]], ['One building',[[1,0,0],[0,0,0]]],
- ['No empty land',[[1,1],[1,1]]],
-]);
-suite('robot-room-cleaner','room',[
- ['Narrow passages and branches',[[1,1,1,0,1],[1,0,1,1,1],[1,1,0,1,0],[0,1,1,1,1]]],
- ['Open room',[[1,1,1],[1,1,1],[1,1,1]]], ['Single cell',[[1]]], ['Narrow corridor',[[1,1,1,1,1,1]]],
-]);
-suite('course-schedule','numCourses prerequisites',[
- ['Branches merge before the final course',8,[[1,0],[2,0],[3,1],[4,1],[4,2],[5,3],[6,4],[7,5],[7,6]]],
- ['Cycle blocks completion',5,[[1,0],[2,1],[3,2],[1,3],[4,0]]], ['Independent courses',5,[]],
- ['Disconnected chains',6,[[1,0],[2,1],[4,3],[5,4]]], ['Single course',1,[]],
-]);
-suite('course-schedule-ii','n p',AUTHORED_EXAMPLES['course-schedule'].map(e=>[e.label,e.numCourses,e.prerequisites]));
-suite('connected-components-undirected','n edges',[
- ['Several components and a cycle',9,[[0,1],[1,2],[2,0],[3,4],[4,5],[6,7]]],
- ['All isolated',5,[]], ['One connected chain',6,[[0,1],[1,2],[2,3],[3,4],[4,5]]], ['One vertex',1,[]],
-]);
-suite('clone-graph','input',[
- ['Cycles and shared neighbors','[[2,3],[1,3,4],[1,2,5],[2,5,6],[3,4,6],[4,5]]'],
- ['One isolated vertex','[[]]'], ['One edge','[[2],[1]]'], ['Empty graph','[]'],
-]);
-suite('minimum-height-trees','n edges',[
- ['Uneven branches, iterative leaf trimming',9,[[0,1],[1,2],[2,3],[3,4],[2,5],[5,6],[5,7],[7,8]]],
- ['Two centers',6,[[0,1],[1,2],[2,3],[3,4],[4,5]]], ['Star center',6,[[0,1],[0,2],[0,3],[0,4],[0,5]]],
- ['Single node',1,[]], ['Two nodes',2,[[0,1]]],
-]);
-suite('redundant-connection','edges',[
- ['Late edge closes a long cycle',[[1,2],[2,3],[3,4],[4,5],[2,6],[6,7],[5,7]]],
- ['Small cycle',[[1,2],[2,3],[1,3]]], ['Cycle with a tail',[[1,2],[2,3],[3,4],[4,2],[4,5]]],
-]);
-suite('number-of-islands-ii','m n positions',[
- ['Several components merge',4,5,[[0,0],[0,2],[2,2],[3,4],[0,1],[1,2],[2,3],[2,4],[3,3]]],
- ['Duplicate additions',2,3,[[0,0],[0,0],[1,2],[1,2]]], ['Single cell',1,1,[[0,0]]],
- ['Diagonal separation',3,3,[[0,0],[1,1],[2,2]]],
-]);
-suite('evaluate-division','equations values queries',[
- ['Chain ratios and disconnected component',[['oak','pine'],['pine','birch'],['birch','cedar'],['lake','sea']],[2,3,4,5],[['oak','cedar'],['cedar','oak'],['oak','oak'],['oak','lake'],['mist','mist']]],
- ['Reciprocal and identity',[['x','y']],[7],[['y','x'],['x','x'],['y','z']]],
- ['Fractional ratios',[['a','b'],['b','c']],[0.5,0.25],[['a','c'],['c','a']]],
-]);
-suite('word-ladder|word-ladder-ii','beginWord endWord wordList',[
- ['Several competing transformation routes','cold','warm',['cord','card','ward','warm','wold','word','worm','sold']],
- ['End word absent','cold','warm',['cord','card','ward']], ['End present but unreachable','cold','warm',['cord','card','warm']],
- ['One transformation','pine','wine',['wine','line','fine']],
-]);
-suite('minimum-genetic-mutation','start end bank',[
- ['Several successive mutations','ACGTACGT','TCGAACGA',['TCGTACGT','TCGAACGT','TCGAACGA','ACGAACGT']],
- ['Target missing','GATTACAA','GATTACAG',['GATTACAT']], ['One mutation','CCGGAATT','CCGGAATC',['CCGGAATC']],
- ['Target isolated','AAAACCCC','GGGGTTTT',['GGGGTTTT','AAAACCCA']],
-]);
-suite('kill-process','pid ppid kill',[
- ['Several descendant levels',[10,14,18,22,26,30,34,38],[0,10,10,14,14,22,18,30],14],
- ['Kill root',[11,17,23,29],[0,11,11,17],11], ['Kill leaf',[11,17,23,29],[0,11,11,17],29],
- ['Single process',[41],[0],41],
-]);
-suite('sequence-reconstruction','org seqs',[
- ['Constraints establish one long ordering',[1,2,3,4,5,6],[[1,2,3],[2,4],[3,4],[4,5],[5,6]]],
- ['Ambiguous middle',[1,2,3,4],[[1,2],[1,3],[2,4],[3,4]]],
- ['Cycle in constraints',[1,2,3],[[1,2],[2,3],[3,1]]], ['Missing vertex',[1,2,3,4],[[1,2],[2,3]]],
-]);
-
-suite('maximum-subarray','nums',[
- ['Several restarts before the winning run',[4,-9,7,-2,6,-11,8,3,-2,5,-7]], ['All negative',[-8,-3,-11,-5]],
- ['All positive',[3,7,2,9,4]], ['Zero competes',[0,-4,0,-2,0]], ['Singleton',[-17]],
-]);
-suite('max-product-subarray','nums',[
- ['Sign flips and zero reset',[-2,3,-4,0,-3,-2,5,-1,2]], ['Odd negatives',[-2,-3,-4]],
- ['Even negatives',[-2,-3,-4,-5]], ['Zero wins',[-7,0,-2]], ['Singleton',[-13]],
-]);
-suite('max-size-subarray-sum-k','nums k',[
- ['Repeated prefix sums favor earliest index',[3,-2,5,-3,1,4,-4,2,6,-2],6],
- ['Whole array sums to zero',[4,-4,7,-7],0], ['No match',[2,4,6],7], ['Single match',[13],13],
-]);
-suite('maximum-gap','nums',[
- ['Several occupied and empty buckets',[19,3,47,8,22,61,24,9]], ['All equal',[7,7,7,7]],
- ['Uniform spacing',[4,9,14,19,24]], ['Two values',[2,31]], ['Singleton',[17]],
-]);
-suite('max-consecutive-ones','nums',[
- ['Several competing runs',[1,1,0,1,1,1,0,1,1,1,1,0,1]], ['All ones',[1,1,1,1,1]],
- ['All zeroes',[0,0,0,0]], ['Alternating',[1,0,1,0,1,0]],
-]);
-suite('max-consecutive-ones-iii','nums k',[
- ['Several zeroes enter and leave',[1,0,1,1,0,0,1,1,1,0,1,0,1],2], ['No flips',[1,0,1,1,0,1],0],
- ['Flip every zero',[0,1,0,1,0],3], ['All zeroes',[0,0,0,0,0],2],
-]);
-suite('next-greater-element-i','nums1 nums2',[
- ['Greater values at different distances',[5,12,3,15],[5,2,12,3,9,15,7,18]],
- ['No greater values',[9,5,1],[9,7,5,3,1]], ['All next values greater',[2,6,10],[2,6,10,14]], ['Singleton',[17],[17]],
-]);
-suite('next-greater-element-ii','text',[
- ['Several values need wraparound','[8,3,11,5,2,9,4,7]'], ['Descending','[15,12,9,6,3]'],
- ['All equal','[6,6,6,6]'], ['Singleton','[17]'],
-]);
-suite('circular-array-loop','nums',[
- ['Forward cycle inside a longer array',[2,3,1,2,2,1,3]], ['Mixed directions invalidate loop',[1,-1,2,-2]],
- ['Self-loop excluded',[4,4,4,4]], ['Backward cycle',[-2,-2,-2,-2,-2]],
-]);
-suite('assign-cookies','greed cookies',[
- ['Several skipped cookies',[2,5,8,3,7,11],[1,3,4,6,8,10,12]], ['None fit',[5,8,11],[1,2,3]],
- ['More cookies than children',[3,6],[2,3,5,6,9]], ['No cookies',[2,7],[]],
-]);
-suite('ipo','k w profits capital',[
- ['Unlocked projects compete',4,1,[3,7,2,9,5,11],[0,3,1,8,4,13]], ['Nothing affordable',3,0,[5,8],[2,4]],
- ['Zero selections',0,7,[3,9],[0,5]], ['One project',1,2,[6],[2]],
-]);
-suite('create-maximum-number','nums1 nums2 k',[
- ['Choose and merge competing suffixes',[5,2,9,1,7],[6,8,3,9,4],7], ['Use every digit',[7,2],[6,9],4],
- ['Repeated leading ties',[8,8,2],[8,8,6],4], ['One empty array',[],[3,7,2,9],3],
-]);
-suite('find-k-pairs-with-smallest-sums','nums1 nums2 k',[
- ['Several heap frontiers',[-6,-1,4,9,15],[-3,2,8,13],8], ['Duplicate sums',[2,2,5],[1,1,4],6],
- ['k exceeds pair count',[3,8],[7],5], ['One pair',[4],[9],1],
-]);
-suite('4sum-ii','nums target',[
- ['Several complementary pair sums',[[2,-3,5,0],[-2,4,1,-5],[3,-1,2,-4],[-3,0,4,1]],0],
- ['All zeroes',[[0,0],[0,0],[0,0],[0,0]],0], ['No cancellation',[[2,3],[4,5],[6,7],[8,9]],0],
- ['One tuple',[[4],[-7],[2],[1]],0],
-]);
-suite('merge-intervals','intervals',[
- ['Overlaps touching ends and gaps',[[12,17],[2,6],[5,9],[20,24],[9,13],[27,31],[23,26]]],
- ['Nested intervals',[[2,20],[4,7],[8,12],[3,18]]], ['Already disjoint',[[1,3],[6,8],[11,15]]], ['Single interval',[[4,9]]],
-]);
-suite('insert-interval','intervals newInterval',[
- ['Bridge several existing intervals',[[1,3],[6,8],[11,14],[17,20],[24,28]],[7,25]],
- ['Before all',[[5,8],[12,16]],[1,3]], ['After all',[[2,5],[8,11]],[15,19]],
- ['Contained interval',[[2,12],[16,20]],[5,8]], ['Empty list',[],[4,9]],
-]);
-suite('non-overlapping-intervals','val',[
- ['Several competing endings','[[1,5],[2,3],[3,7],[6,9],[8,11],[11,14]]'],
- ['Touching is allowed','[[1,3],[3,6],[6,10]]'], ['All overlap','[[2,9],[3,8],[4,7]]'], ['One interval','[[4,9]]'],
-]);
-suite('minimum-number-of-arrows-to-burst-balloons','points',[
- ['Several overlap groups',[[2,8],[5,11],[10,15],[17,22],[20,26],[29,34]]],
- ['Shared endpoint',[[1,5],[5,9],[9,13]]], ['All share one point',[[2,12],[4,10],[6,8]]], ['One balloon',[[4,9]]],
-]);
-suite('employee-free-time','schedules',[
- ['Three calendars with shared gaps',[[[1,4],[9,12]],[[2,5],[13,16]],[[3,6],[10,14]]]],
- ['No bounded shared gap',[[[1,8]],[[3,12]]]], ['Several gaps',[[[1,3],[7,9],[13,15]],[[2,4],[8,10],[14,16]]]],
-]);
-suite('missing-ranges','nums lower upper',[
- ['Missing values and longer gaps',[-8,-3,-2,4,11,18],-12,23], ['Entire range missing',[],3,14],
- ['No missing values',[4,5,6,7],4,7], ['Single missing value',[2,3,5,6],2,6],
-]);
-suite('russian-doll-envelopes','envelopes',[
- ['Equal widths must not chain',[[3,5],[6,8],[4,7],[6,9],[8,12],[9,11],[11,14],[4,4]]],
- ['All equal',[[5,7],[5,7],[5,7]]], ['No nesting',[[2,9],[4,7],[6,5],[8,3]]], ['One envelope',[[4,9]]],
-]);
-suite('skyline-problem','buildings',[
- ['Nested roofs gaps and shared endpoints',[[1,6,5],[3,9,9],[5,7,12],[9,13,6],[11,16,8],[19,23,4]]],
- ['Adjacent equal roofs',[[2,5,7],[5,9,7],[9,12,7]]], ['One building',[[4,11,8]]], ['Same starting coordinate',[[2,8,5],[2,6,11],[2,10,7]]],
-]);
-suite('max-points-on-aline|number-of-boomerangs','points',[
- ['Several lines share a pivot',[[0,0],[2,2],[4,4],[6,6],[2,0],[2,4],[0,4],[4,0]]],
- ['Vertical line',[[3,-4],[3,0],[3,5],[3,9]]], ['Horizontal line',[[-5,2],[0,2],[4,2],[9,2]]], ['One point',[[7,11]]],
-]);
-suite('convex-polygon','points',[
- ['Six-sided convex boundary',[[0,2],[2,0],[5,0],[7,3],[5,6],[1,5]]],
- ['Concave indentation',[[0,0],[6,0],[6,6],[3,2],[0,6]]], ['Collinear edge points',[[0,0],[2,0],[4,0],[4,4],[0,4]]], ['Triangle',[[1,1],[7,2],[3,8]]],
-]);
-suite('perfect-rectangle|perfect-rectangles','rectangles',[
- ['Several tiles make one rectangle',[[0,0,2,3],[2,0,5,1],[2,1,4,3],[4,1,5,3],[0,3,5,5]]],
- ['Gap between tiles',[[0,0,2,3],[3,0,5,3]]], ['Overlapping tiles',[[0,0,3,3],[2,0,5,3]]], ['One rectangle',[[2,4,7,9]]],
-]);
-suite('rectangle-area','vals',[
- ['Partial overlap',{ax1:-4,ay1:-2,ax2:5,ay2:6,bx1:1,by1:3,bx2:9,by2:8}],
- ['One contains the other',{ax1:0,ay1:0,ax2:9,ay2:9,bx1:2,by1:3,bx2:6,by2:7}],
- ['Touching edge',{ax1:0,ay1:0,ax2:4,ay2:5,bx1:4,by1:0,bx2:8,by2:5}],
- ['Disjoint',{ax1:-5,ay1:-5,ax2:-2,ay2:-1,bx1:2,by1:3,bx2:7,by2:8}],
-]);
-suite('sort-transformed-array','nums a b c',[
- ['Convex function crosses its vertex',[-9,-6,-2,1,4,8,13],2,-5,3],
- ['Concave parabola',[-7,-3,0,4,9],-2,3,5], ['Linear decreasing',[-5,-1,2,6],0,-3,7], ['Constant output',[-4,0,5,9],0,0,11],
-]);
-suite('minimum-time-difference','timePoints',[
- ['Several times and midnight wrap',['05:47','18:23','00:08','11:36','23:52']],
- ['Duplicate time',['07:19','16:42','07:19']], ['Across midnight',['23:58','00:03']], ['Opposite times',['04:17','16:17']],
-]);
-suite('one-edit-distance','s1 s2',[
- ['One insertion inside a longer word','riverbank','riverbanks'], ['One replacement','lantern','lantorn'],
- ['Equal is zero edits','meadow','meadow'], ['Two mismatches','cedar','cider'], ['Empty to one','','q'],
-]);
-suite('ones-and-zeroes','strs m n',[
- ['Competing resource costs',['01','001','110','0001','11','0','1010','1'],6,5],
- ['Zero zero-budget',['1','11','0','01'],0,3], ['Zero one-budget',['0','00','1','10'],3,0],
- ['Nothing fits',['000','111'],1,1],
-]);
-suite('task-scheduler','tasks n',[
- ['Competing frequencies need idle slots',Array.from('AAAAABBBBCCCDD'),3], ['No cooldown',Array.from('AAAABBBCC'),0],
- ['One task kind',Array.from('QQQQQ'),2], ['Enough distinct fillers',Array.from('AABBCCDDEEFF'),2],
-]);
-suite('rearrange-string-k-distance-apart','s k',[
- ['Several equally frequent choices','aaaabbbbccccdd',3], ['Impossible spacing','aaaaabbc',3],
- ['No spacing restriction','aabbccc',0], ['Already unique','planet',4],
-]);
-suite('super-washing-machines','machines',[
- ['Imbalances propagate both directions',[0,6,2,8,1,7]], ['Impossible average',[1,3,4]],
- ['Already balanced',[5,5,5,5]], ['One-sided surplus',[0,0,0,16]], ['Single machine',[9]],
-]);
-suite('sort-characters-by-frequency','s',[
- ['Several frequencies and case','mmmnnnnopppppQQrr'], ['All equal frequency','qwerty'],
- ['One character','z'], ['One repeated symbol','vvvvvv'],
-]);
-suite('max-product-word-lengths|maximum-product-of-word-lengths','words',[
- ['Long words compete for disjoint letters',['brick','stone','flame','quest','pond','rhythm','jazz']],
- ['Every pair overlaps',['aaa','ab','ac','ad']], ['One word',['river']], ['Repeated letters do not change mask',['aaaa','bbbbb','cc']],
-]);
-suite('min-cost-climbing-stairs','input',[
- ['Skipping expensive steps',[4,17,6,3,21,5,9,2,18,7]], ['Two steps',[13,8]],
- ['Zero-cost route',[0,7,0,9,0,12,0]], ['Equal costs',[6,6,6,6,6]],
-]);
-suite('student-attendance-record-ii','n',[
- ['Several recurrence transitions',9], ['One day',1], ['Two days',2], ['First forbidden triple',3], ['Longer bounded trace',14],
-]);
-suite('split-array-with-equal-sum','nums',[
- ['Four equal blocks with ignored separators','[2,3,9,1,4,8,5,7,2,3]'],
- ['Minimum valid split','[4,9,4,8,4,7,4]'], ['Impossible totals','[1,2,3,4,5,6,7]'], ['All zeroes','[0,0,0,0,0,0,0,0,0]'],
-]);
-suite('split-strings','strs',[
- ['Compare cyclic concatenation choices',['river','oak','cedar','birch']], ['Single string',['lantern']],
- ['Repeated strings',['ab','ab','ab']], ['One-letter words',['q','z','m','a']],
-]);
-suite('freedom-trail','ring key',[
- ['Repeated targets on both sides','abacdbecad','decab'], ['Same key repeated','pqprsp','pppp'],
- ['Single ring letter','q','qqq'], ['Opposite rotations compete','abcdefghi','iaei'],
-]);
-suite('count-the-repetitions','s1 n1 s2 n2',[
- ['Several cycle repetitions','abac',8,'aac',2], ['Missing required letter','pine',5,'oak',1],
- ['Exact repeated blocks','moss',6,'moss',2], ['Too few complete blocks','ab',2,'aabb',2],
-]);
-suite('brace-expansion-ii','expression',[
- ['Three products with nested alternatives','{m,n{o,p}}{q,{r,s}}{t,u}'],
- ['Duplicates merge across unions','{{ma,mb},{mb,mc},m{a,c}}'], ['Nested unions','{p,{q,{r,{s,t}}}}'],
- ['Literal prefix and suffix','pre{a,b{c,d}}post'], ['Single literal','maple'], ['Single alternative','{oak}'],
-]);
-suite('utf-8-validation','data',[
- ['Mixed valid byte lengths',[65,194,162,226,130,172,240,159,146,169]], ['Missing continuation',[226,130]],
- ['Unexpected continuation',[128]], ['Bad continuation prefix',[194,65]], ['ASCII only',[72,101,108,112]],
-]);
-suite('word-search','board word',[
- ['Turn several times without reusing cells',['RIVER','AXXXB','NXXXA','STONE'].map(r=>r.split('')),'RIVERBAENOTS'],
- ['Would require reusing a cell',[['A','B'],['C','D']],'ABAC'],
- ['Word absent',[['M','O','S'],['P','I','N']],'OAK'], ['Single cell match',[['Q']],'Q'],
-]);
-suite('word-search-ii','board words',[
- ['Shared prefixes and intersecting paths',['pine','axar','thiv','moss'].map(r=>r.split('')),['pine','pin','path','moss','river','oak']],
- ['No dictionary word',[['q','r'],['s','t']],['oak','pine']],
- ['Same word has several paths',[['a','a'],['a','a']],['a','aa','aaa','aaaa']], ['Single cell',[['z']],['z','zz']],
-]);
-suite('word-squares','words',[
- ['Several possible starting words',['maps','aret','peno','stow','amap']],
- ['One-letter squares',['q','r','s']], ['No complete square',['pine','moss','bark']], ['Symmetric two-word square',['ab','ba']],
-]);
-suite('zuma-game','board hand',[
- ['Bridge groups before collapse','RRYBBYYRR','YBR'], ['Already paired colors','RRBBYY','RBY'],
- ['Missing needed color','RRBB','YYY'], ['One ball','G','GG'],
-]);
-suite('remove-boxes','text',[
- ['Merge distant equal groups','[2,2,5,3,3,3,5,2,2]'], ['All equal','[7,7,7,7,7]'],
- ['All distinct','[2,4,6,8]'], ['Singleton','[9]'],
-]);
-
-suite('remove-nth-node','input',[
- ['Remove an interior node','[4,8,12,16,20,24,28,32]; 4'], ['Remove head','[3,7,11,15]; 4'],
- ['Remove tail','[5,9,13,17]; 1'], ['Remove only node','[23]; 1'],
-]);
-suite('find-median-data-stream','nums',[
- ['Alternating extremes rebalance heaps',[18,3,27,-4,12,35,7,21,0,16]], ['Increasing stream',[2,5,8,11,14,17]],
- ['Decreasing stream',[19,15,11,7,3]], ['Repeated medians',[6,6,6,6,6]], ['One value',[17]],
-]);
-suite('moving-average-data-stream','size stream',[
- ['Several evictions change the average',4,[12,3,18,-2,7,21,5,9,16]], ['Window one',1,[4,9,-3,12]],
- ['Stream shorter than window',7,[3,8,13]], ['Zeros and negatives',3,[-6,0,3,-9,0,12]],
-]);
-suite('min-stack','ops',[
- ['Repeated minima survive one pop',[{type:'push',val:8},{type:'push',val:3},{type:'push',val:3},{type:'getMin'},{type:'pop'},{type:'getMin'},{type:'push',val:-4},{type:'top'},{type:'getMin'},{type:'pop'},{type:'getMin'}]],
- ['Increasing stack',[{type:'push',val:2},{type:'push',val:7},{type:'push',val:12},{type:'getMin'},{type:'pop'},{type:'top'}]],
- ['Drain and reuse',[{type:'push',val:9},{type:'pop'},{type:'push',val:-6},{type:'getMin'}]],
-]);
-suite('lrucache','commands argsList',[
- ['Reads and updates change eviction order',['LRUCache','put','put','put','get','put','get','put','get','get','get'],[[3],[11,41],[22,52],[33,63],[11],[44,74],[22],[33,99],[44],[11],[33]]],
- ['Capacity one',['LRUCache','put','get','put','get','get'],[[1],[7,17],[7],[8,18],[7],[8]]],
- ['Overwrite existing key',['LRUCache','put','put','get','get'],[[2],[5,15],[5,35],[5],[9]]],
-]);
-suite('lfucache','capacity ops',[
- ['Frequency then recency breaks ties',3,[{type:'put',key:11,val:41},{type:'put',key:22,val:52},{type:'put',key:33,val:63},{type:'get',key:11},{type:'get',key:22},{type:'put',key:44,val:74},{type:'get',key:33},{type:'put',key:55,val:85},{type:'get',key:44},{type:'get',key:11}]],
- ['Zero capacity',0,[{type:'put',key:7,val:17},{type:'get',key:7}]],
- ['Update existing value',1,[{type:'put',key:5,val:15},{type:'put',key:5,val:35},{type:'get',key:5},{type:'put',key:8,val:18},{type:'get',key:5}]],
-]);
-suite('implement-trie','ops',[
- ['Shared prefixes and exact-word distinction',[['insert','rain'],['insert','rainbow'],['insert','river'],['search','rai'],['startsWith','rai'],['search','rain'],['insert','rai'],['search','rai'],['search','road']]],
- ['Duplicate insertion',[['insert','moss'],['insert','moss'],['search','moss'],['startsWith','mo']]],
- ['Missing prefix',[['insert','cedar'],['startsWith','oak'],['search','cedar']]],
-]);
-suite('all-o1-data-structure','operations',[
- ['Counts cross and keys disappear',[['inc','oak'],['inc','pine'],['inc','oak'],['inc','birch'],['inc','pine'],['inc','pine'],['getMaxKey'],['dec','oak'],['getMinKey'],['dec','oak'],['getMinKey'],['getMaxKey']]],
- ['Drain one key',[['inc','moss'],['dec','moss'],['getMaxKey'],['getMinKey']]],
- ['Repeated count changes',[['inc','river'],['inc','river'],['inc','river'],['dec','river'],['getMaxKey']]],
-]);
-suite('randomized-collection','ops',[
- ['Duplicate slots and removal swaps',[{type:'insert',val:7},{type:'insert',val:12},{type:'insert',val:7},{type:'insert',val:19},{type:'remove',val:12},{type:'insert',val:19},{type:'remove',val:7},{type:'getRandom'},{type:'remove',val:99},{type:'getRandom'}]],
- ['One value with duplicates',[{type:'insert',val:5},{type:'insert',val:5},{type:'remove',val:5},{type:'getRandom'}]],
- ['Drain then reinsert',[{type:'insert',val:8},{type:'remove',val:8},{type:'insert',val:14},{type:'getRandom'}]],
-]);
-suite('logger-rate-limiter|problem359','requests threshold',[
- ['Independent messages and exact expiry',[{timestamp:2,message:'rain'},{timestamp:4,message:'wind'},{timestamp:7,message:'rain'},{timestamp:11,message:'rain'},{timestamp:12,message:'rain'},{timestamp:14,message:'wind'},{timestamp:22,message:'rain'}],10],
- ['Same timestamp',[{timestamp:5,message:'oak'},{timestamp:5,message:'oak'},{timestamp:5,message:'pine'}],10],
- ['Every request expires',[{timestamp:3,message:'moss'},{timestamp:8,message:'moss'},{timestamp:13,message:'moss'}],5],
-]);
-suite('design-tic-tac-toe','n moves',[
- ['Row column and diagonal counts compete',4,[[0,0,1],[1,0,2],[1,1,1],[0,3,2],[2,2,1],[2,0,2],[3,3,1]]],
- ['Player two completes a column',3,[[0,0,1],[0,2,2],[1,0,1],[1,2,2],[2,1,1],[2,2,2]]],
- ['Single cell win',1,[[0,0,1]]],
-]);
-suite('design-snake-game','width height food commands',[
- ['Grow turn and follow the tail',5,4,[[0,1],[0,2],[1,2],[2,2],[2,1]],['R','R','D','D','L','U','L','D','D','R']],
- ['Wall collision',3,2,[],['R','R','R']], ['Food not on the route',4,3,[[2,3]],['R','D','L','U']],
-]);
-suite('random-pick-index','nums',[
- ['Repeated targets at distant indices',[8,3,8,12,5,8,3,17,8,5]], ['Every value unique',[2,6,10,14,18]],
- ['Every index eligible',[7,7,7,7,7]], ['Singleton',[19]],
-]);
-suite('random-pick-with-weight','w',[
- ['Uneven cumulative intervals',[2,7,1,9,4,6]], ['Equal weights',[3,3,3,3]], ['One dominant weight',[1,1,17,1]], ['Single index',[13]],
-]);
-suite('random-flip-matrix','m n',[
- ['Several rows and columns',4,5], ['One row',1,7], ['One column',6,1], ['Single available cell',1,1],
-]);
-suite('generate-random-point-in-a-circle','radius',[
- ['Larger sampling disk',7], ['Unit disk',1], ['Fractional radius',0.5], ['Small nonzero disk',0.1],
-]);
-suite('random-point-in-non-overlapping-rectangles','rects',[
- ['Different lattice-point weights',[[-6,-3,-3,1],[1,2,5,4],[8,-2,9,3]]], ['One lattice point',[[4,7,4,7]]],
- ['Thin rectangles',[[0,0,0,4],[3,1,7,1]]], ['Negative coordinates only',[[-9,-8,-6,-4]]],
-]);
-suite('range-sum-query-immutable','nums left right',[
- ['Interior query with negatives',[4,-7,12,3,-2,9,5,-6,8],2,7], ['Whole array',[-3,8,2,-5,11],0,4],
- ['Single position',[4,9,-2,7],2,2], ['Prefix includes index zero',[6,-3,8,2],0,2],
-]);
-suite('range-sum-query-mutable','nums operations',[
- ['Updates change overlapping queries',[4,-7,12,3,-2,9,5,-6],[{type:'sumRange',left:1,right:6},{type:'update',index:3,value:17},{type:'sumRange',left:2,right:5},{type:'update',index:0,value:-8},{type:'sumRange',left:0,right:7}]],
- ['Single cell update',[13],[{type:'sumRange',left:0,right:0},{type:'update',index:0,value:-4},{type:'sumRange',left:0,right:0}]],
- ['Repeated update',[2,6,10],[{type:'update',index:1,value:8},{type:'update',index:1,value:3},{type:'sumRange',left:0,right:2}]],
-]);
-suite('range-sum-query-2d-immutable','matrix row1 col1 row2 col2',[
- ['Interior rectangle',[[3,-2,7,4,9],[8,1,-5,6,2],[4,9,3,-1,7],[2,5,8,4,-3]],1,1,3,3],
- ['Whole matrix',[[2,5,8],[11,14,17]],0,0,1,2], ['Single cell',[[4,7],[9,12]],1,0,1,0],
- ['First row',[[3,8,13],[18,23,28]],0,0,0,2],
-]);
-suite('range-sum-query-2d-mutable','matrix operations',[
- ['Updates affect several rectangles',[[3,8,1,7],[4,-2,9,5],[6,0,2,11]],[{type:'sumRegion',row1:0,col1:1,row2:2,col2:3},{type:'update',row:1,col:2,value:-4},{type:'sumRegion',row1:1,col1:0,row2:2,col2:2},{type:'update',row:0,col:0,value:13},{type:'sumRegion',row1:0,col1:0,row2:2,col2:3}]],
- ['Single cell',[[7]],[{type:'update',row:0,col:0,value:-2},{type:'sumRegion',row1:0,col1:0,row2:0,col2:0}]],
- ['Unchanged update and full rectangle',[[2,5],[8,11]],[{type:'update',row:0,col:1,value:5},{type:'sumRegion',row1:0,col1:0,row2:1,col2:1}]],
-]);
-suite('n-ary-tree-level-order-traversal|nary-tree-level-order','root',[
- ['Several children with unequal depths',[10,null,20,30,40,null,50,60,null,70,null,80,90,null,100]],
- ['Single root',[17]], ['Wide root',[3,null,5,7,9,11,13]], ['Empty',[]],
-]);
-suite('serialize-deserialize-nary-tree','tree',[
- ['Uneven nested child groups',{val:10,children:[{val:20,children:[{val:50},{val:60,children:[{val:90}]}]},{val:30},{val:40,children:[{val:70},{val:80}]}]}],
- ['Single node',{val:17}], ['Wide root',{val:3,children:[{val:5},{val:7},{val:9},{val:11}]}],
-]);
-suite('serialize-and-deserialize-bst','tree',[
- ['Several recursive ranges',{val:18,left:{val:7,left:{val:3},right:{val:12}},right:{val:29,left:{val:24},right:{val:35}}}],
- ['Right chain',{val:3,right:{val:8,right:{val:15,right:{val:24}}}}], ['Single node',{val:17}],
-]);
-suite('flatten-a-multilevel-doubly-linked-list|flatten-multilevel-dll','structure',[
- ['Child chain interrupts a longer level','4->8->12->16->20->null with child [24->28->32->null] at 12'],
- ['No child chain','3->7->11->15->null'], ['Child at head','9->13->null with child [17->21->null] at 9'],
-]);
-suite('encode-nary-to-binary-tree','naryStructure',[
- ['Several sibling and child links','10->20,30,40->50,60,70->80,90'], ['Single root','17'],
- ['Wide sibling group','3->5,7,9,11,13'],
-]);
-suite('game-on-growing-tree','q parents',[
- ['Alternating branches and deeper descendants','12','1 1 2 2 3 4 4 6 3 8 8 10 11'],
- ['Long chain','7','1 2 3 4 5 6 7 8'], ['Wide star','7','1 1 1 1 1 1 1 1'],
-]);
-suite('encode-and-decode-tinyurl','url',[
- ['Path query and fragment','https://example.org/field-notes/river-walk?season=autumn&day=12#map'],
- ['Root URL','https://example.org/'], ['Encoded path','https://example.org/notes/quiet%20garden'],
-]);
-suite('smallest-rectangle-black-pixels','image x y',[
- ['Jagged connected region',['000000','001100','011110','000100','000000'],2,2],
- ['Single black pixel',['000','010','000'],1,1], ['Full image',['1111','1111','1111'],1,2],
- ['One column',['0','1','1','1','0'],2,0],
-]);
-suite('optimal-account-balancing','text',[
- ['Several debts cancel indirectly','[[0,1,12],[2,0,7],[1,3,5],[3,2,9],[4,1,6]]'],
- ['Already balanced','[[0,1,8],[1,0,8]]'], ['One debt','[[2,5,17]]'], ['Shared creditor','[[0,3,4],[1,3,7],[2,3,9]]'],
-]);
-suite('largest-palindrome-product','n',[['Two-digit factors',2],['One-digit factors',1],['Three-digit factors',3]]);
-suite('verbal-arithmetic-puzzle','equation',[
- ['Repeated letters and column carries','BASE + BALL = GAMES'], ['Small carry','I + BB = ILL'],
- ['Repeated addends','A + A = B'], ['No valid distinct-digit solution','A + B = AA'],
-]);
-
-suite('251','input',[
- ['Uneven rows and empty gaps',[[3,7,11],[],[15],[19,23,27,31],[],[35,39]]], ['Only empty rows',[[],[],[]]],
- ['One row',[[4,8,12,16]]], ['One item',[[17]]],
-]);
-suite('252|253','input',[
- ['Nested meetings and touching ends',[[2,9],[4,6],[6,11],[10,14],[15,18],[16,20]]],
- ['All disjoint',[[1,3],[5,7],[9,11]]], ['All overlap',[[1,12],[2,10],[3,8],[4,6]]], ['One meeting',[[4,9]]], ['No meetings',[]],
-]);
-suite('254','input', [['Several factorization depths',[72]],['Prime has no split',[43]],['Perfect square',[49]],['One has no factors',[1]]]);
-suite('255','input',[
- ['Several ancestor pops',[18,7,3,12,10,15,29,24,35]], ['Violates an ancestor bound',[18,7,3,12,29,10]],
- ['Right chain',[3,7,11,15]], ['Left chain',[15,11,7,3]],
-]);
-suite('256|265','input',[
- ['Competing colors across six houses',[[4,9,7],[8,3,6],[5,11,2],[9,4,7],[3,8,6],[7,5,12]]],
- ['Equal costs',[[5,5,5],[5,5,5],[5,5,5]]], ['One house',[[8,3,11]]], ['No houses',[]],
-]);
-suite('258','input',[['Several digit-sum rounds',[98765]],['Single digit',[7]],['Zero',[0]],['Multiple of nine',[9999]]]);
-suite('259','input',[
- ['Many qualifying triples',[[-7,-3,1,4,8,12],9]], ['No triple',[[4,7,10],3]],
- ['Every triple qualifies',[[1,2,3,4],20]], ['Too few values',[[3,8],12]],
-]);
-suite('260','input',[
- ['Pairs cancel leaving two signs',[7,-3,12,7,5,12,9,5]], ['One unique is zero',[4,4,0,-8]],
- ['Two values',[13,27]], ['Different low bits',[-6,2,-6,9]],
-]);
-suite('261','input',[
- ['Several branches form one tree',[7,[[0,1],[0,2],[1,3],[1,4],[2,5],[5,6]]]],
- ['Cycle',[4,[[0,1],[1,2],[2,0],[2,3]]]], ['Disconnected',[5,[[0,1],[1,2],[3,4]]]], ['One vertex',[1,[]]],
-]);
-suite('263','input',[['Several allowed factors',[540]],['Other prime remains',[154]],['One',[1]],['Zero is excluded',[0]],['Negative is excluded',[-30]]]);
-AUTHORED_EXAMPLES['264']=AUTHORED_EXAMPLES['ugly-number-ii'].map(e=>({label:e.label,input:[e.n]}));
-suite('266','input',[
- ['Several pairs and one odd count',['mmnnooppq']], ['Two odd counts',['aabbcd']], ['Even counts',['xxyyzz']], ['Empty',['']],
-]);
-suite('267','input',[
- ['Several half-string permutations',['aabbccd']], ['All identical',['zzzzzz']], ['Two odd counts impossible',['aabbcd']], ['Singleton',['q']],
-]);
-suite('269','input',[
- ['Several ordering constraints',['za','zb','ca','cb','da','db']], ['Invalid prefix order',['pine','pin']],
- ['Cycle',['ax','bx','ay']], ['Only one word',['cedar']],
-]);
-suite('270','input',[
- ['Target between deep BST keys',[branchingTree,13.4]], ['Target below minimum',[branchingTree,-10]],
- ['Exact key',[branchingTree,24]], ['Single node',[[17],20]],
-]);
-suite('272','input',[
- ['Several values around target',[branchingTree,13.4,5]], ['One closest',[branchingTree,28.2,1]],
- ['Target outside range',[[8,3,14,1,6,10,19],30,3]], ['All nodes',[[8,3,14],9,3]],
-]);
-suite('273','input',[['Several nonzero scale groups',[704019208]],['Zero',[0]],['Internal zero groups',[5000007]],['Teen and tens',[1918]]]);
-suite('274','input',[
- ['Several candidate h boundaries',[8,1,12,4,0,7,3,9]], ['No citations',[0,0,0,0]], ['Every paper qualifies',[7,8,9,10]], ['One paper',[12]],
-]);
-suite('275','input',AUTHORED_EXAMPLES['274'].map(e=>[e.label,[...e.input].sort((a,b)=>a-b)]));
-suite('276','input',[['Several recurrence transitions',[8,3]],['One color becomes impossible',[4,1]],['One post',[1,5]],['Zero posts',[0,3]]]);
-suite('277','input',[
- ['Celebrity after candidate replacements',[[[0,1,1,0],[0,0,1,1],[0,0,0,0],[1,0,1,0]]]],
- ['No celebrity',[[[0,1,0],[0,0,1],[1,0,0]]]], ['Single person',[[[0]]]],
-]);
-suite('280','input',[
- ['Several local swaps',[9,2,7,4,11,3,8,5,12]], ['Already wiggling',[2,8,3,9,4,10]], ['All equal',[6,6,6,6]], ['Singleton',[17]],
-]);
-suite('281','input',[
- ['Uneven vector exhaustion',[[3,7,11,15,19],[2,6,10]]], ['First empty',[[],[4,8,12]]], ['Both empty',[[],[]]], ['One each',[[5],[9]]],
-]);
-suite('282','input',[
- ['Several expression branches',['2345',17]], ['Zero restricts concatenation',['204',8]], ['No expression',['123',97]], ['Single digit',['7',7]],
-]);
-suite('284','input',[
- ['Repeated peeks do not advance',[[3,7,11,15],['peek','peek','next','peek','next','hasNext','next','next','hasNext']]],
- ['One value',[[17],['hasNext','peek','next','hasNext']]], ['Empty iterator',[[],['hasNext']]],
-]);
-suite('285','input',AUTHORED_EXAMPLES['inorder-successor-bst'].map(e=>[e.label,[e.tree,e.p]]));
-const INF=2147483647;
-suite('286','input',[
- ['Multiple gates separated by walls',[[[INF,-1,0,INF,INF],[INF,INF,INF,-1,INF],[INF,-1,INF,-1,INF],[0,INF,INF,INF,INF]]]],
- ['No gate',[[[INF,INF],[-1,INF]]]], ['Only gates',[[[0,0],[0,0]]]], ['One room beside gate',[[[0,INF]]]],
-]);
-suite('288','input',[
- ['Colliding abbreviations and exact matches',[['stone','stove','river','rider','oak'],['stone','style','river','oak','pine']]],
- ['Repeated dictionary word', [['moss','moss'],['moss','mess']]], ['Short words',[['a','an','at'],['a','as','at']]],
-]);
-suite('289','input',[
- ['Birth survival and overcrowding',[[0,1,0,0,0],[0,0,1,1,0],[1,1,1,0,0],[0,0,0,1,1],[0,0,0,1,1]]],
- ['Stable block',[[0,0,0,0],[0,1,1,0],[0,1,1,0],[0,0,0,0]]], ['Oscillator',[[0,1,0],[0,1,0],[0,1,0]]], ['Single cell dies',[[1]]],
-]);
-suite('290','input',[
- ['Repeated mappings in a longer pattern',['abacabad','oak pine oak moss oak pine oak reed']],
- ['Two symbols cannot share a word',['ab','oak oak']], ['Length mismatch',['aba','oak pine']], ['Consistent bijection',['abba','moss reed reed moss']],
-]);
-suite('291','input',[
- ['Several substring assignments',['abca','pineoakmosspine']], ['Repeated symbol',['aaaa','mossmossmossmoss']],
- ['Distinct symbols cannot share',['ab','qq']], ['No matching assignment',['aba','xyz']],
-]);
-suite('292','input',[['Several groups of four',[29]],['Losing multiple of four',[28]],['One stone',[1]],['Three stones',[3]]]);
-suite('293|294','input',[
- ['Several separated playable runs',['++++-++-+++']], ['No legal move',['+-+-+-']], ['Only one move',['++']], ['All minus',['------']],
-]);
-suite('296','input',[
- ['Homes spread across the grid',[[[1,0,0,0,1],[0,0,1,0,0],[1,0,0,1,0],[0,1,0,0,1]]]],
- ['One home',[[[0,0,0],[0,1,0]]]], ['One row',[[[1,0,1,0,0,1]]]],
-]);
-suite('298','input',[
- ['Different branches restart counts',[[7,8,4,9,3,5,2,10,null,null,null,6]]],
- ['No consecutive edge',[[9,3,17,1,6]]], ['One chain',[[3,null,4,null,null,null,5]]], ['Singleton',[[17]]],
-]);
-AUTHORED_EXAMPLES['300']=AUTHORED_EXAMPLES['longest-increasing-subsequence'].map(e=>({label:e.label,input:e.nums}));
-suite('reconstruct-itinerary','tickets',[
- ['Lexical choices with a necessary return',[['JFK','OSL'],['OSL','JFK'],['JFK','AMS'],['AMS','BER'],['BER','JFK'],['OSL','ROM'],['ROM','OSL']]],
- ['Repeated tickets',[['JFK','OSL'],['OSL','JFK'],['JFK','OSL']]], ['Single flight',[['JFK','LIS']]],
-]);
-suite('largest-bst-subtree','inputs',[
- ['One broken ancestor leaves a large BST',[18,7,29,3,12,10,35,1,5,9,15]], ['Whole tree is BST',branchingTree],
- ['Every duplicate breaks strictness',[6,6,6,6,6]], ['Singleton',[17]],
-]);
-suite('self-crossing','distances',[
- ['Spiral eventually closes inward',[3,5,7,9,8,6,4,2]], ['Expanding spiral',[2,4,6,8,10,12]],
- ['Touches starting edge',[3,3,3,3]], ['Too few segments',[4,7,9]],
-]);
-suite('house-robber-iii','inputs',[
- ['Grandchildren compete with parents',[8,13,6,4,7,12,3,9,null,2,11]], ['One node',[17]],
- ['All zero',[0,0,0,0,0]], ['Alternating chain',[4,9,null,3,null,12]],
-]);
-suite('nested-list-weight-sum|flatten-nested-list-iterator','inputs',[
- ['Several depths and empty groups',[3,[7,[],[2,-4]],[],5,[1,[6]]]], ['Flat list',[4,8,12]], ['Empty nesting',[[],[[]],[]]], ['Negative values',[-3,[-5,[-7]]]],
-]);
-suite('verify-preorder-serialization-tree','preorder',[
- ['Several completed subtrees','18,7,3,#,#,12,#,#,29,24,#,#,35,#,#'],
- ['Slots remain','8,3,#,#'], ['Extra node after complete tree','8,#,#,12'], ['Null tree','#'], ['Single node','17,#,#'],
-]);
-suite('increasing-triplet-subsequence','nums',[
- ['Both candidates replaced',[12,7,9,3,8,2,6,11]], ['Descending',[19,15,11,7,3]], ['Equal values',[6,6,6,6]], ['Triplet at end',[9,8,7,1,2,3]],
-]);
-suite('palindrome-pairs','words',[
- ['Reverse words palindromes and empty word',['moss','ssom','level','','ab','ba','aba']],
- ['No pair',['pine','oak','cedar']], ['Empty combines with palindrome',['','rotator','noon','abc']],
-]);
-suite('generalized-abbreviation','word',[
- ['Five independent abbreviation choices','plant'], ['One letter','q'], ['Two letters','ox'], ['Four letters','moss'],
-]);
-suite('find-right-interval','intervals',[
- ['Several successor searches',[[12,17],[2,6],[8,11],[18,23],[6,8]]], ['Touching endpoints',[[1,4],[4,9],[9,13]]],
- ['No successor',[[1,12],[3,10],[5,8]]], ['Single interval',[[4,9]]],
-]);
-suite('kth-smallest-lexicographical-order','n k',[
- ['Skip and descend prefix subtrees',734,219], ['First lexicographic value',91,1], ['Last rank',91,91], ['Singleton',1,1],
-]);
-suite('encode-string-with-shortest-length','s',[
- ['Repeated block within repeated block','ababcababcababc'], ['Encoding is not shorter','abcd'], ['Long single run','qqqqqqqqqqqq'], ['No repetitions','lantern'],
-]);
-suite('matchsticks-to-square','matchsticks',[
- ['Several assignments to four sides',[2,2,3,3,4,4,5,5]], ['Not divisible by four',[2,3,4,5,7]],
- ['Long stick cannot fit',[13,1,1,1]], ['Four equal sticks',[6,6,6,6]],
-]);
-suite('heaters','houses heaters',[
- ['Several nearest-heater regions',[1,3,7,10,14,18,23,29],[4,15,26]], ['One heater',[2,6,10,14],[8]],
- ['Heater at every house',[3,7,11],[3,7,11]], ['All houses on one side',[2,5,8],[17]],
-]);
-suite('find-permutation','s',[
- ['Several descending runs','IDDDIIDDI'], ['All increasing','IIIII'], ['All decreasing','DDDDD'], ['One relation','D'],
-]);
-
-suite('two-sum-iii','input',[
- ['Repeated additions and several queries',[['add',4],['add',9],['add',4],['find',8],['add',15],['find',24],['find',30]]],
- ['Cannot reuse one occurrence',[['add',7],['find',14]]], ['Negative pair',[['add',-4],['add',11],['find',7]]],
-]);
-suite('largest-number','input',[
- ['Prefix ordering differs from numeric order',[82,8,821,90,909,34,343,0]], ['All zeroes',[0,0,0]],
- ['Common prefix',[12,121,1212]], ['One value',[731]],
-]);
-suite('reverse-words-in-string-ii','input',[
- ['Several unequal words',Array.from('lanterns light the quiet river')], ['One word',Array.from('meadow')],
- ['Two short words',Array.from('oak pine')],
-]);
-suite('repeated-dna-sequences','input',[
- ['Overlapping repeated motifs',['ACGTACGTACGTACGTACGTACGT']], ['Disjoint repetition',['GATTACAGTAGGGGATTACAGTA']],
- ['Shorter than a window',['ACGTAC']], ['One window',['ACGTACGTAA']],
-]);
-suite('implement-stack-using-queues|implement-queue-using-stacks','input',[
- ['Interleaved writes and removals',[['push',4],['push',8],['peek'],['pop'],['push',12],['push',16],['pop'],['peek'],['empty']]],
- ['Drain and reuse',[['push',7],['pop'],['empty'],['push',19],['peek']]], ['Initially empty',[['empty']]],
-]);
-suite('summary-ranges','input',[
- ['Several runs and singletons',[-8,-7,-6,-2,1,2,3,7,11,12]], ['One whole run',[3,4,5,6,7]],
- ['All isolated',[2,5,8,11]], ['Empty',[]],
-]);
-suite('majority-element-ii','input',[
- ['Two candidates survive',[4,9,4,7,9,4,9,4,9]], ['No majority',[1,2,3,4,5,6]],
- ['One majority',[8,8,8,2,3]], ['Singleton',[17]],
-]);
-suite('delete-node-in-a-linked-list','input',[
- ['Delete an interior node',[[3,7,11,15,19,23],11]], ['Delete the head',[[4,8,12,16],4]],
- ['Delete the penultimate node',[[5,9,13,17],13]],
-]);
-suite('different-ways-to-add-parentheses','input',[
- ['Several split points',['3*5-2*4+7']], ['One operator',['8-3']], ['One number',['17']], ['Repeated values',['4+4*4']],
-]);
-suite('shortest-word-distance|shortest-word-distance-ii|shortest-word-distance-iii','input',[
- ['Several candidate position pairs',[['oak','pine','moss','oak','reed','pine','oak','moss','pine'],'oak','pine']],
- ['Only distant occurrences',[['oak','moss','reed','pine'],'oak','pine']],
- ['Adjacent words',[['cedar','pine','oak'],'pine','oak']],
-]);
-suite('strobogrammatic-number','input',[
- ['Several mirrored pairs',['619080619']], ['Invalid mirrored order',['619018619']], ['Invalid digit',['12321']], ['Zero',['0']],
-]);
-suite('strobogrammatic-number-ii','input',[['Several mirrored positions',[4]],['Odd center',[3]],['Single digit',[1]],['One pair',[2]]]);
-suite('strobogrammatic-number-iii','input',[
- ['Several digit lengths',['80','2000']], ['Single valid point',['818','818']], ['No valid values',['12','15']], ['Includes zero',['0','11']],
-]);
-suite('group-shifted-strings','input',[
- ['Wraparound and repeated shift signatures',['bdf','ceg','xyz','yza','ace','a','q','ba','az']],
- ['Single-letter group',['m','n','z']], ['Distinct lengths',['a','ab','abc','abcd']],
-]);
-suite('count-univalue-subtrees','input',[
- ['Equal child roots hide a mismatch',[6,6,6,6,3,6,6,6,6]], ['Whole tree equal',[4,4,4,4,4,4,4]],
- ['Only leaves qualify',[8,3,14,1,6,10,19]], ['Single node',[17]],
-]);
-suite('zigzag-conversion','s numRows',[
- ['Several down-and-up cycles','LANTERNSBESIDETHERIVER',5], ['One row','SILVERBIRCH',1],
- ['More rows than characters','MOSS',7], ['Two rows','QUIETGARDEN',2],
-]);
-suite('implement-rand10','calls',[['Several rejection opportunities',16],['One sample',1],['Short sample',7]]);
-suite('keyboard-row','words',[
- ['Mixed case and row membership',['Typewriter','Flask','Salsa','Zxcv','Moss','Qwerty','Hash']],
- ['No word fits',['pine','oak','cedar']], ['Single letters',['q','A','z']], ['Empty list',[]],
-]);
-suite('find-mode-bst','tree',[
- ['Two repeated modes',[8,4,12,4,6,12,15,4,null,null,null,12]], ['Every value tied',branchingTree],
- ['All equal',[7,7,7,7,7]], ['One node',[17]],
-]);
-suite('base-7','num',[['Several digits',2358],['Negative input',-782],['Zero',0],['Power of seven',2401]]);
-suite('distribute-candies-to-people','n k',[
- ['Several rounds and final partial gift',83,5], ['One recipient',37,1], ['Fewer candies than people',3,7], ['Exact round total',36,4],
-]);
-suite('find-bottom-left-tree-value|find-largest-value-each-row','arr',treeShapes.filter(([,v])=>v.length));
-suite('longest-uncommon-subsequence-i','a b',[
- ['Different longer strings','riverbank','silveroak'], ['Identical','lantern','lantern'],
- ['One empty','','meadow'], ['Equal lengths different values','pine','moss'],
-]);
-suite('longest-uncommon-subsequence-ii','strs',[
- ['Duplicates suppress long candidates',['river','river','rivr','pine','pin','oak']], ['All identical',['moss','moss','moss']],
- ['Longest is unique',['forest','rest','for','oak']], ['Same length distinct',['pine','reed','moss']],
-]);
-suite('student-attendance','s',[
- ['Late streaks reset before limit','PLLPPLAPLLPPL'], ['Two absences','PPALPPAP'], ['Three consecutive late','PPLLLPP'],
- ['One absence at the end','PPLLPPPA'], ['No late or absent','PPPPPP'],
-]);
-suite('optimal-division','array',[
- ['Several denominator factors','[840,7,3,5,2]'], ['Two values','[81,9]'], ['Single value','[17]'], ['Equal factors','[8,8,8,8]'],
-]);
-suite('brick-wall','wall',[
- ['Several competing internal seams',[[2,3,1,2],[4,2,2],[1,4,3],[2,2,4],[5,1,2]]],
- ['No internal seam',[[8],[8],[8]]], ['Perfectly aligned',[[2,3,3],[2,3,3],[2,3,3]]], ['One row',[[3,2,4]]],
-]);
-suite('next-greater-iii','n',[
- ['Long descending suffix',2476531], ['No larger permutation',97531], ['Repeated digits',1334221], ['Overflow on rearrangement',1999999999],
-]);
-suite('reverse-words-iii','s',[
- ['Unequal word lengths','Quiet lanterns illuminate river banks'], ['One word','meadow'], ['Single-letter words','a b c d'],
-]);
-suite('quad-tree','grid',[
- ['Uniform and mixed quadrants',[[1,1,0,1],[1,1,1,0],[0,0,1,1],[0,0,1,1]]], ['Uniform whole grid',[[1,1],[1,1]]],
- ['Checkerboard',[[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]]], ['One cell',[[0]]],
-]);
-suite('max-depth-nary-tree','tree',AUTHORED_EXAMPLES['nary-tree-level-order'].map(e=>[e.label,e.root]));
-suite('array-partition','array',[
- ['Pairing after several reorderings',[12,3,19,5,8,14,2,17,6,11]], ['Negative values',[-9,-3,-7,-1]],
- ['All equal',[6,6,6,6]], ['One pair',[4,13]],
-]);
-suite('find-the-celebrity-564','matrix',AUTHORED_EXAMPLES['277'].map(e=>[e.label,e.input[0]]));
-suite('array-nesting','array',[
- ['Cycles of different lengths',[2,0,4,6,1,7,3,5]], ['One long cycle',[1,2,3,4,5,0]],
- ['Only self-cycles',[0,1,2,3,4]], ['Singleton',[0]],
-]);
-suite('max-distance','array',[
- ['Global extrema in different sorted arrays',[[-12,-4,3],[2,8,17],[-7,5,21],[0,6,11]]],
- ['Extrema in the same array',[[-9,19],[2,7],[4,11]]], ['Single-entry arrays',[[3],[17],[-5]]],
-]);
-suite('shortest-distance-ii','words word1 word2',[
- ['Several closer occurrences',['oak','pine','moss','oak','reed','pine','oak','moss'],'oak','pine'],
- ['Endpoints only',['oak','reed','moss','pine'],'oak','pine'], ['Adjacent',['pine','oak'],'pine','oak'],
-]);
-suite('distribute-candies','candies',[
- ['Several repeated types',[2,5,2,7,9,5,11,7,13,2]], ['Only one type',[8,8,8,8]],
- ['Every type unique',[2,4,6,8,10,12]], ['Two candies',[3,9]],
-]);
-suite('out-of-boundary','m n maxMove startRow startCol',[
- ['Several interior and boundary states',4,5,5,1,2], ['No moves',3,4,0,0,0],
- ['Single cell',1,1,3,0,0], ['One row',1,6,4,0,2],
-]);
-suite('shortest-unsorted','array',[
- ['Disorder expands past local inversions',[1,3,8,6,7,4,9,12,11,15]], ['Already sorted',[-3,0,4,9]],
- ['Descending',[17,12,7,2]], ['Equal values',[6,6,6,6]], ['Singleton',[19]],
-]);
-suite('delete-operation','s1 s2',[
- ['Several subsequence choices','riverbank','silverbranch'], ['Identical','lantern','lantern'],
- ['No shared characters','xyz','abc'], ['One empty','','cedar'],
-]);
-suite('erect-fence','points',[
- ['Boundary collinearity and interior points',[[0,0],[2,0],[5,0],[6,3],[5,6],[2,6],[0,4],[2,2],[4,3],[3,4]]],
- ['All collinear',[[1,2],[3,4],[5,6],[7,8]]], ['Triangle',[[0,0],[5,1],[2,6]]], ['Single point',[[4,7]]],
-]);
-suite('maximal-rectangle','matrix',[
- ['Competing wide and tall rectangles',['101110','111110','111011','011111','011110'].map(r=>r.split(''))],
- ['All ones',['1111','1111','1111'].map(r=>r.split(''))], ['All zeroes',[['0','0'],['0','0']]], ['One row',[['1','1','0','1','1','1']]],
-]);
-
-const employees=[
- {id:11,name:'Mira',salary:7200,managerId:null,departmentId:1},
- {id:12,name:'Oren',salary:8600,managerId:11,departmentId:1},
- {id:13,name:'Tara',salary:7200,managerId:11,departmentId:1},
- {id:14,name:'Ivo',salary:6400,managerId:11,departmentId:1},
- {id:15,name:'Nila',salary:8100,managerId:11,departmentId:2},
- {id:16,name:'Soren',salary:9300,managerId:11,departmentId:2},
- {id:17,name:'Eli',salary:8100,managerId:15,departmentId:2},
- {id:18,name:'Uma',salary:5900,managerId:15,departmentId:2},
-];
-const departments=[{id:1,name:'Design'},{id:2,name:'Research'},{id:3,name:'Operations'}];
-suite('second-highest-salary|nth-highest-salary','employees n',[
- ['Repeated salaries and several ranks',employees,3], ['Every salary tied',employees.slice(0,3).map(e=>({...e,salary:7200})),2],
- ['Rank missing',employees.slice(0,2),5], ['One employee',employees.slice(0,1),1],
-]);
-suite('employees-earning-more|department-highest-salary|department-top-three-salaries','employees departments',[
- ['Ties managers and several departments',employees,departments], ['One department',employees.filter(e=>e.departmentId===1),departments.slice(0,1)],
- ['No employees',[],departments], ['Only one employee',employees.slice(0,1),departments],
-]);
-suite('managers-with-at-least-5-direct-reports','employees',[
- ['Exactly five direct reports',employees], ['Below the threshold',employees.filter(e=>e.id!==16)],
- ['No manager relationships',employees.map(e=>({...e,managerId:null}))],
-]);
-suite('median-employee-salary','employees',[
- ['Odd and even company groups',employees.map((e,i)=>({...e,company:i<5?'North':'South'}))],
- ['Tied salaries',employees.slice(0,4).map(e=>({...e,company:'West',salary:7000}))],
- ['Singleton company',[{id:21,name:'Arin',company:'East',salary:8300}]],
-]);
-suite('rank-scores','scores',[
- ['Several dense-rank ties',[{id:11,score:7.5},{id:12,score:9.2},{id:13,score:7.5},{id:14,score:8.1},{id:15,score:9.2},{id:16,score:6.8}]],
- ['All tied',[{id:21,score:8},{id:22,score:8},{id:23,score:8}]], ['One score',[{id:31,score:7.3}]],
-]);
-suite('consecutive-numbers','logs',[
- ['Several repeated runs',[7,7,7,3,3,9,9,9,9,7,2,2].map((num,i)=>({id:i+1,num}))],
- ['Repeated but not consecutive',[4,8,4,8,4,8].map((num,i)=>({id:i+1,num}))],
- ['Only two repeats',[{id:1,num:6},{id:2,num:6}]],
-]);
-const people=[{id:11,email:'mira@example.org'},{id:12,email:'oren@example.org'},{id:13,email:'mira@example.org'},{id:14,email:'tara@example.org'},{id:15,email:'oren@example.org'},{id:16,email:'mira@example.org'}];
-suite('duplicate-emails|delete-duplicate-emails','person',[
- ['Several duplicate groups',people], ['All distinct',people.slice(0,2)], ['One record',people.slice(0,1)], ['Empty table',[]],
-]);
-suite('combine-two-tables','person address',[
- ['Matched missing and multiple addresses',[{personId:11,firstName:'Mira',lastName:'Vale'},{personId:12,firstName:'Oren',lastName:'Pine'},{personId:13,firstName:'Tara',lastName:'Reed'},{personId:14,firstName:'Ivo',lastName:'Lake'}],[{addressId:21,personId:11,city:'York',state:'North'},{addressId:22,personId:11,city:'Bath',state:'West'},{addressId:23,personId:13,city:'Leeds',state:'North'}]],
- ['No addresses',[{personId:31,firstName:'Nila',lastName:'Stone'}],[]], ['No people',[],[]],
-]);
-suite('customers-never-order','customers orders',[
- ['Some customers order repeatedly',[{id:11,name:'Mira'},{id:12,name:'Oren'},{id:13,name:'Tara'},{id:14,name:'Ivo'}],[{id:21,customerId:11},{id:22,customerId:11},{id:23,customerId:13}]],
- ['Nobody orders',[{id:31,name:'Nila'},{id:32,name:'Soren'}],[]],
- ['Everyone orders',[{id:41,name:'Eli'}],[{id:51,customerId:41}]],
-]);
-suite('rising-temperature','weather',[
- ['Rises falls and missing dates',[{id:11,recordDate:'2025-04-02',temperature:14},{id:12,recordDate:'2025-04-03',temperature:19},{id:13,recordDate:'2025-04-04',temperature:16},{id:14,recordDate:'2025-04-06',temperature:23},{id:15,recordDate:'2025-04-07',temperature:23},{id:16,recordDate:'2025-04-08',temperature:26}]],
- ['One day',[{id:21,recordDate:'2025-05-12',temperature:18}]], ['Empty table',[]],
-]);
-suite('word-frequency','input',[
- ['Several counts and whitespace',['moss pine moss\nriver pine moss\ncedar river pine moss']], ['All distinct',['oak birch reed']], ['One word repeated',['mist mist mist mist']],
-]);
-suite('valid-phone-numbers','input',[
- ['Valid formats and near misses',['415-738-2096\n(628) 471-8302\n628 471 8302\n(415)738-2096\n415-73-2096']],
- ['One valid number',['(312) 640-9758']], ['No valid line',['12345\nphone unavailable']],
-]);
-suite('transpose-file','input',[
- ['Several rows and columns',['name season score\nMira autumn 17\nOren spring 23\nTara winter 19']],
- ['One row',['oak pine birch cedar']], ['One column',['moss\nreed\nfern']],
-]);
-suite('tenth-line','input',[
- ['Before and after the tenth line',[Array.from({length:14},(_,i)=>`field note ${i+1}`).join('\n')]],
- ['Fewer than ten lines',['oak\npine\ncedar']], ['Exactly ten lines',[Array.from({length:10},(_,i)=>`entry ${i+1}`).join('\n')]],
-]);
-const activity=[{player_id:11,device_id:21,event_date:'2025-03-12',games_played:4},{player_id:12,device_id:22,event_date:'2025-03-11',games_played:0},{player_id:11,device_id:23,event_date:'2025-03-13',games_played:7},{player_id:13,device_id:24,event_date:'2025-03-10',games_played:3},{player_id:12,device_id:22,event_date:'2025-03-15',games_played:6},{player_id:13,device_id:25,event_date:'2025-03-11',games_played:8}];
-suite('game-play-analysis-i|game-play-analysis-ii|game-play-analysis','activity',[
- ['Unsorted dates and device changes',activity], ['One login per player',activity.filter((_,i)=>[0,1,3].includes(i))],
- ['One player several days',activity.filter(a=>a.player_id===11)], ['Empty activity',[]],
-]);
-suite('design-log-storage-system','operations values',[
- ['Several timestamps and granularities',['LogSystem','put','put','put','put','retrieve','retrieve'],[[],[11,'2025:03:14:09:20:31'],[12,'2025:03:14:18:47:02'],[13,'2025:03:15:00:00:00'],[14,'2025:04:01:08:13:19'],['2025:03:14:12:00:00','2025:03:15:12:00:00','Day'],['2025:03:14:10:00:00','2025:03:14:19:00:00','Hour']]],
- ['Empty retrieval',['LogSystem','retrieve'],[[],['2025:01:01:00:00:00','2025:12:31:23:59:59','Year']]],
- ['Exact second',['LogSystem','put','retrieve'],[[],[21,'2025:06:12:13:14:15'],['2025:06:12:13:14:15','2025:06:12:13:14:15','Second']]],
-]);
-suite('find-customer-referee','customers refereeId',[
- ['Null allowed and excluded referee',[{id:11,name:'Mira',referee_id:null},{id:12,name:'Oren',referee_id:7},{id:13,name:'Tara',referee_id:3},{id:14,name:'Ivo',referee_id:7},{id:15,name:'Nila',referee_id:11}],7],
- ['All null referees',[{id:21,name:'Eli',referee_id:null},{id:22,name:'Uma',referee_id:null}],7], ['Empty table',[],7],
-]);
-suite('investments-2016','data',[
- ['Shared prior values and duplicate locations',[{pid:11,tiv_2015:120,tiv_2016:180,lat:1,lon:3},{pid:12,tiv_2015:120,tiv_2016:240,lat:2,lon:4},{pid:13,tiv_2015:170,tiv_2016:260,lat:1,lon:3},{pid:14,tiv_2015:170,tiv_2016:310,lat:5,lon:7},{pid:15,tiv_2015:220,tiv_2016:340,lat:8,lon:9}]],
- ['No shared prior value',[{pid:21,tiv_2015:130,tiv_2016:200,lat:0,lon:1},{pid:22,tiv_2015:180,tiv_2016:300,lat:2,lon:3}]], ['Empty table',[]],
-]);
-suite('cumulative-salary','employees',[
- ['Several months and a missing month',[{id:11,month:1,salary:4100},{id:11,month:2,salary:4300},{id:11,month:4,salary:4700},{id:11,month:5,salary:4900},{id:12,month:1,salary:3800},{id:12,month:2,salary:4200},{id:12,month:3,salary:4600}]],
- ['Only latest month',[{id:21,month:7,salary:5300}]], ['Empty table',[]],
-]);
-suite('count-students','students',[
- ['Unequal department populations',[{student_id:11,student_name:'Mira',department_id:1},{student_id:12,student_name:'Oren',department_id:1},{student_id:13,student_name:'Tara',department_id:2},{student_id:14,student_name:'Ivo',department_id:1},{student_id:15,student_name:'Nila',department_id:3},{student_id:16,student_name:'Eli',department_id:2}]],
- ['One department',[{student_id:21,student_name:'Uma',department_id:4}]], ['No students',[]],
-]);
-suite('largest-orders','orders customers',[
- ['Different order counts and totals',[{orderId:11,customerId:1,amount:70},{orderId:12,customerId:2,amount:180},{orderId:13,customerId:1,amount:90},{orderId:14,customerId:3,amount:240},{orderId:15,customerId:2,amount:130},{orderId:16,customerId:1,amount:110}],{1:'Mira',2:'Oren',3:'Tara'}],
- ['One order',[{orderId:21,customerId:4,amount:170}],{4:'Nila'}], ['No orders',[],{5:'Eli'}],
-]);
-suite('highest-answer-rate','questions answers',[
- ['Several questions with different responses',[{question_id:11},{question_id:12},{question_id:13}],[{question_id:11,answer_id:21},{question_id:11,answer_id:22},{question_id:12,answer_id:23}]],
- ['No answers',[{question_id:31},{question_id:32}],[]], ['One answered question',[{question_id:41}],[{question_id:41,answer_id:51}]],
-]);
-suite('262','input',[
- ['Banned users and cancellation categories',[[{id:11,client_id:1,driver_id:4,status:'completed',request_at:'2013-10-01'},{id:12,client_id:2,driver_id:4,status:'cancelled_by_client',request_at:'2013-10-01'},{id:13,client_id:3,driver_id:5,status:'cancelled_by_driver',request_at:'2013-10-02'},{id:14,client_id:1,driver_id:5,status:'completed',request_at:'2013-10-02'}],[{users_id:1,banned:'No'},{users_id:2,banned:'Yes'},{users_id:3,banned:'No'},{users_id:4,banned:'No'},{users_id:5,banned:'No'}]]],
- ['No trips',[[],[{users_id:7,banned:'No'}]]], ['All users banned',[[{id:21,client_id:1,driver_id:2,status:'completed',request_at:'2013-10-03'}],[{users_id:1,banned:'Yes'},{users_id:2,banned:'Yes'}]]],
-]);
-// A completed Latin-pattern Sudoku is independently constructed, then selected
-// cells are removed. Each preset therefore has at least one valid completion.
-const solvedSudoku=Array.from({length:9},(_,r)=>Array.from({length:9},(_,c)=>String((r*3+Math.floor(r/3)+c+4)%9+1)));
-suite('sudoku-solver','board',[
- ['Several boxes rows and columns',solvedSudoku.map((row,r)=>row.map((v,c)=>(r*7+c*5)%4===0?'.':v))],
- ['Only one missing cell',solvedSudoku.map((row,r)=>row.map((v,c)=>r===7&&c===4?'.':v))],
- ['Already solved',solvedSudoku], ['One missing diagonal',solvedSudoku.map((row,r)=>row.map((v,c)=>r===c?'.':v))],
-]);
-
-function local(number, slug, map = e => e) {
-  AUTHORED_EXAMPLES[`local:${number}`]=AUTHORED_EXAMPLES[slug].map(e=>({label:e.label,...map(e)}));
-}
-for(const [n,k] of Object.entries({12:'integer-to-roman',24:'swap-nodes-in-pairs',29:'divide-two-integers',43:'multiply-strings',68:'text-justification',111:'minimum-depth-of-binary-tree',142:'linked-list-cycle-ii',202:'happy-number',207:'course-schedule',212:'word-search-ii',267:'267',320:'generalized-abbreviation',331:'verify-preorder-serialization-tree',332:'reconstruct-itinerary',333:'largest-bst-subtree',335:'self-crossing',337:'house-robber-iii',339:'nested-list-weight-sum',341:'flatten-nested-list-iterator',342:'power-of-four',343:'integer-break',409:'longest-palindrome',505:'distribute-candies-to-people'}))local(n,k);
-for(const [n,k,field] of [[121,'best-time-buy-sell-stock','prices'],[128,'longest-consecutive-sequence','nums'],[135,'candy','ratings'],[136,'single-number','nums']])local(n,k,e=>({input:JSON.stringify(e[field])}));
-local(131,'palindrome-partitioning',e=>({input:e.s}));
-local(134,'gas-station',e=>({values:{gas:JSON.stringify(e.gas),cost:JSON.stringify(e.cost)}}));
-local(138,'copy-list-random',e=>({input:JSON.stringify(e.nodes.map(n=>[n.val,n.random]))}));
-local(173,'validate-bst',e=>({input:e.arr}));
-AUTHORED_EXAMPLES['local:173']=AUTHORED_EXAMPLES['local:173'].filter(e=>!e.label.includes('invalid')&&!e.label.includes('Duplicate'));
-local(218,'skyline-problem',e=>({input:e.buildings}));
-local(220,'contains-duplicate',e=>({input:e.nums}));
-local(345,'reverse-vowels',e=>({s:e.input}));
-local(364,'nested-list-weight-sum',e=>({list:e.inputs}));
-local(374,'guess-number',e=>({input:{n:e.n,pick:e.pick}}));
-local(382,'reverse-linked-list');
-local(384,'contains-duplicate');
-AUTHORED_EXAMPLES['local:384']=AUTHORED_EXAMPLES['local:384'].map(e=>({...e,nums:[...new Set(e.nums)]}));
-local(404,'serialize-and-deserialize-bst');
-local(414,'kth-largest-element',e=>({nums:e.nums}));
-local(415,'multiply-strings');
-local(421,'total-hamming-distance');
-local(82,'remove-duplicates',e=>({input:e.nums}));
-local(83,'remove-duplicates',e=>({input:e.nums}));
-local(85,'maximal-rectangle',e=>({input:e.matrix}));
-local(94,'serialize-deserialize');
-local(90,'permutations-ii');
-suite('local:5','value note',[
- ['Several palindrome islands','abnoonxcdedcypq','The longest candidate is internal; compare odd and even centers.'],
- ['Whole even palindrome','deffed','Expansion reaches both ends.'], ['Equal-length winners','abacdc','Compare how ties are retained.'],
- ['No repeated letter','qwerty','Every best candidate has length one.'],
-]);
-suite('local:171','s',[['Several base-26 positions','BQXZ'],['Last single letter','Z'],['First double letter','AA'],['Triple boundary','AAA']]);
-suite('local:203','head val',[
- ['Matching head interior and tail',[7,7,3,11,7,15,19,7],7], ['Remove all',[4,4,4,4],4], ['No match',[2,6,10,14],8], ['Empty',[],5],
-]);
-suite('local:204','n',[['Several sieve passes',73],['Below first prime',2],['One above a prime',30],['Zero',0]]);
-suite('local:205','s t',[
- ['Repeated patterns remain bijective','abacabad','xyxzxyxw'], ['Two sources share one target','abca','xxxx'], ['One mapping changes','moss','peep'], ['Equal strings','river','river'],
-]);
-suite('local:208','word operation',[
- ['Insert longer shared prefix','apricot','insert'], ['Exact stored word','apple','search'], ['Prefix without word ending','appl','search'], ['Missing branch','cedar','search'],
-]);
-suite('local:211','word isAdd',[
- ['Wildcard across stored words','b..','false'], ['Exact missing word','reed','false'], ['Insert longer word','river','true'], ['Several wildcard positions','.a.','false'],
-]);
-suite('local:216','k n',[
- ['Several distinct combinations',4,24], ['Smallest possible sum',3,6], ['Too small',4,7], ['All digits',9,45],
-]);
-suite('local:217','nums k',[
- ['Duplicate exactly at window boundary',[8,3,12,5,8,7,3,9],4], ['Outside the window',[4,7,10,13,4],3], ['Zero window',[6,6],0], ['Adjacent duplicates',[9,2,2,7],1],
-]);
-suite('local:219','nums k t',[
- ['Nearby values in sliding buckets',[4,12,7,19,9,24,15],3,2], ['Equal at exact distance',[8,3,12,8],3,0], ['Value difference too large',[2,9,16,23],2,3], ['No allowed distance',[5,5],0,0],
-]);
-suite('local:221','input',[
- ['Several growing square candidates',['101111','111111','011110','111110','011011'].map(r=>r.split(''))],
- ['All zeroes',[['0','0'],['0','0']]], ['All ones',[['1','1','1'],['1','1','1'],['1','1','1']]], ['One row',[['1','1','1','1']]],
-]);
-suite('local:309','prices',[
- ['Cooldown changes which rallies can combine',[8,3,9,2,7,1,12,4,10]], ['Strict decline',[17,12,8,3]], ['Flat market',[6,6,6,6]], ['One day',[13]],
-]);
-suite('local:351','nums',[
- ['Late bridges merge existing ranges',[8,2,12,4,10,3,9,11,7,6,5]], ['Repeated insertion',[4,4,7,7,5,6]], ['Descending contiguous',[9,8,7,6,5]], ['Singleton',[17]],
-]);
-suite('local:353','events',[
- ['Interleaved trips on several routes',[{type:'checkIn',id:11,stationName:'Pine',t:2},{type:'checkIn',id:12,stationName:'Pine',t:4},{type:'checkOut',id:11,stationName:'River',t:14},{type:'checkOut',id:12,stationName:'River',t:20},{type:'checkIn',id:11,stationName:'River',t:24},{type:'checkOut',id:11,stationName:'Hill',t:33}]],
- ['One completed journey',[{type:'checkIn',id:21,stationName:'Lake',t:7},{type:'checkOut',id:21,stationName:'Garden',t:26}]],
- ['Journey still active',[{type:'checkIn',id:31,stationName:'Harbor',t:5}]],
-]);
-suite('local:355','operations params',[
- ['Several authors and follow changes',['postTweet','postTweet','follow','postTweet','getNewsFeed','unfollow','getNewsFeed'],{postTweet:[[11,101],[12,202],[12,203]],follow:[[11,12]],unfollow:[[11,12]],getNewsFeed:[11,11]}],
- ['Only own posts',['postTweet','postTweet','getNewsFeed'],{postTweet:[[21,301],[21,302]],getNewsFeed:[21]}], ['Empty feed',['getNewsFeed'],{getNewsFeed:[31]}],
-]);
-suite('local:356','points',[
- ['Pairs reflect around a nonzero axis',[[1,2],[9,2],[3,5],[7,5],[5,8],[2,-1],[8,-1]]], ['One missing partner',[[1,2],[9,2],[3,5]]], ['Points on axis',[[4,1],[4,5],[4,9]]], ['Duplicate positions',[[2,3],[8,3],[2,3]]],
-]);
-suite('local:357','n',[['Several place-value choices',5],['Zero-digit bound',0],['One digit',1],['Two digits',2]]);
-suite('local:361','grid',[
- ['Walls split enemy sight lines',['0E00W0','E0E0E0','00W0E0','E0000E'].map(r=>r.split(''))],
- ['No enemy',[['0','0'],['0','0']]], ['No placement cell',[['E','W'],['W','E']]], ['One row',[['E','0','E','W','E','0']]],
-]);
-suite('local:362','hits timestamp windowSize',[
- ['Hits on both sides of exact expiry',[2,50,101,199,200,201,350,499,500],500,300], ['Repeated timestamp',[7,7,7,7],7,300], ['All expired',[2,8,14],400,300], ['No hits',[],30,300],
-]);
-suite('local:363','matrix K',[
- ['Several row-pair compressions',[[3,-5,7,2],[-4,6,-2,1],[8,-3,4,-6]],9], ['Exact bound',[[2,5],[-3,4]],8], ['Negative bound',[[-7,-2],[-4,-5]],-3], ['One cell',[[6]],7],
-]);
-suite('local:365','a b z',[
- ['Several gcd reductions',9,14,11], ['Not divisible by gcd',8,12,7], ['Beyond total capacity',4,7,12], ['Zero target',6,10,0], ['One empty jug',0,9,9],
-]);
-suite('local:367','value',[['Larger perfect square',1369],['Just below',1368],['Just above',1370],['One',1]]);
-suite('local:368','input',[
- ['Competing divisibility chains',[2,3,4,6,8,12,24,48]], ['Pairwise coprime',[5,7,11,13]], ['One long chain',[3,9,27,81]], ['Singleton',[17]],
-]);
-suite('local:370','length updates',[
- ['Overlapping positive and negative updates',10,[[1,6,4],[3,8,-2],[0,2,7],[7,9,5]]], ['Whole array',6,[[0,5,3]]], ['Single index',5,[[2,2,9]]], ['No updates',7,[]],
-]);
-suite('local:376','nums',[
- ['Several direction changes and plateaus',[8,3,11,11,5,14,2,9,6,13]], ['Increasing only',[2,5,8,11]], ['All equal',[6,6,6,6]], ['Singleton',[17]],
-]);
-suite('local:377','nums target',[
- ['Ordering creates several answers',[2,3,5],12], ['No exact total',[4,6],9], ['Zero target',[3,7],0], ['One denomination',[3],12],
-]);
-suite('local:378','matrix k',[
- ['Rank spans several sorted rows',[[2,6,11,18],[4,9,15,22],[8,13,19,27],[12,17,24,35]],10],
- ['Duplicate boundary',[[3,3],[3,8]],3], ['First rank',[[4,7],[6,11]],1], ['Last rank',[[4,7],[6,11]],4],
-]);
-suite('local:379','maxNumbers operations',[
- ['Exhaust release and reuse',3,[{type:'get'},{type:'get'},{type:'get'},{type:'get'},{type:'release',number:1},{type:'check',number:1},{type:'get'},{type:'check',number:1}]],
- ['Duplicate release',2,[{type:'get'},{type:'release',number:0},{type:'release',number:0},{type:'get'},{type:'get'}]],
- ['One number',1,[{type:'get'},{type:'check',number:0},{type:'get'}]],
-]);
-suite('local:380','operations',[
- ['Duplicates absent removals and slot swaps',[{type:'insert',val:7},{type:'insert',val:12},{type:'insert',val:7},{type:'insert',val:19},{type:'delete',val:12},{type:'delete',val:99},{type:'getRandom'}]],
- ['Drain then reuse',[{type:'insert',val:8},{type:'delete',val:8},{type:'insert',val:17},{type:'getRandom'}]],
- ['One member',[{type:'insert',val:23},{type:'getRandom'}]],
-]);
-suite('local:381','n blacklist',[
- ['Low blocked indices remap to high slots',15,[1,3,5,9,12]], ['No blocked index',7,[]], ['Only one allowed',5,[0,1,3,4]], ['Only high indices blocked',9,[6,7,8]],
-]);
-suite('local:383','ransomNote magazine',[
- ['Repeated requirements use separate letters','moonstone','stonemoonriver'], ['One count short','mossmoss','mossmos'], ['No letters available','oak',''], ['Extra letters allowed','pine','pineforest'],
-]);
-suite('local:385','input',[
- ['Several nesting depths and empty lists','[27,[-4,[],[8,13]],0,[6,[-9]]]'], ['Single signed number','-482'], ['Empty list','[]'], ['Nested empty list','[[],[[]]]'],
-]);
-suite('local:386','n',[['Several decimal prefix branches',137],['Cross first decimal boundary',12],['Single number',1],['Exact hundred',100]]);
-suite('local:387','s',[
- ['Unique letter appears late','mmnnooppqrrsstt'], ['No unique letter','aabbccddeeff'], ['First character unique','zaabbcc'], ['Singleton','v'],
-]);
-suite('local:388','input',[
- ['Several branches and nested files','archive\n\tphotos\n\t\tautumn.png\n\tnotes\n\t\tfield\n\t\t\triver.txt\nreadme.md'],
- ['Only directories','forest\n\tpine\n\t\tcedar'], ['One root file','lantern.txt'], ['Sibling files','notes\n\ta.md\n\tlong-report.txt'],
-]);
-suite('local:389','s t',[
- ['Repeated letters and shuffled insertion','mississippi','imississippr'], ['Empty original','','q'], ['Repeated extra letter','moss','sosms'], ['Extra at front','river','ariver'],
-]);
-suite('local:390','n',[['Several direction reversals',73],['Power-of-two length',64],['One survivor initially',1],['Odd length',19]]);
-suite('local:397','n',[['Several odd-even decisions',123],['Power of two',128],['Small odd exception',3],['Already one',1],['Signed upper bound',2147483647]]);
-suite('local:403','stones expected',[
- ['Increasing jumps with alternatives',[0,1,2,4,7,11,16,22],true], ['Large gap blocks progress',[0,1,3,6,10,20],false], ['First jump unavailable',[0,2],false], ['Two stones',[0,1],true],
-]);
-suite('local:405','num', [['Several hex digits',731045],['Negative two-complement',-482],['Zero',0],['Signed minimum',-2147483648]]);
-const queueHeights=[9,5,7,5,11,8,6,10];
-const queuePeople=queueHeights.map((h,i)=>[h,queueHeights.slice(0,i).filter(x=>x>=h).length]);
-suite('local:406','people',[
- ['Repeated heights and several insertion positions',[...queuePeople].reverse()], ['All equal',[[6,2],[6,0],[6,3],[6,1]]], ['One person',[[17,0]]], ['Strict heights',[[4,0],[8,0],[12,0]]],
-]);
-suite('local:408','word abbr expected',[
- ['Several skip groups','characterization','c4c3i5n',true], ['Leading zero is invalid','riverbank','r07k',false],
- ['Skip whole word','lantern','7',true], ['Skip beyond end','meadow','m9w',false], ['No abbreviation','pine','pine',true],
-]);
-suite('local:410','nums m',[
- ['Several competing cut positions',[9,3,14,2,8,11,5,7],3], ['One partition',[4,8,12,16],1], ['Each element separate',[3,9,2,7],4], ['Equal values',[6,6,6,6,6,6],3],
-]);
-suite('local:411','word dictionary',[
- ['Several conflicting positions','planet',['planer','placer','plated','plates','plants']], ['No equal-length competitor','moss',['river','oak']], ['One mismatch','pine',['wine']],
-]);
-suite('local:412','n',[['Several shared multiples',32],['Only ordinary values',2],['First shared multiple',15],['One value',1]]);
-suite('local:413','nums',[
- ['Several contiguous arithmetic runs',[2,5,8,11,7,3,-1,4,9,14]], ['All equal',[6,6,6,6,6]], ['No arithmetic triple',[1,2,4,8]], ['Too short',[4,9]],
-]);
-suite('local:417','input',[
- ['Plateaus and ridges',[[4,4,5,7,9],[3,6,6,8,7],[2,5,9,6,5],[1,4,7,4,3]]], ['Flat terrain',[[6,6,6],[6,6,6]]], ['One row',[[3,8,2,9,4]]], ['Single cell',[[17]]],
-]);
-suite('local:418','sentence rows cols',[
- ['Several wraps and partial final sentence',['moss','by','river'],7,13], ['Word wider than row',['lantern'],4,5], ['Exact word boundary',['oak','pine'],3,8], ['One short word',['reed'],5,10],
-]);
-suite('local:419','board',[
- ['Several separated horizontal and vertical ships',['XX...X','. ...X'.replace(' ','.'),'...X..','...X..','X.....'].map(r=>r.split(''))],
- ['No ships',[['.','.'],['.','.']]], ['One long ship',[['X','X','X','X','X']]], ['Single ship cell',[['X']]],
-]);
-suite('local:420','password',[
- ['Too long with several repeating runs','aaaaBBBB1111ccccDDDD2222'], ['Already meets conditions','River7!bank'], ['Too short','q2'], ['Missing digit','QuietGarden'], ['Only one repeated kind','mmmmmmm'],
-]);
-suite('local:422','words',[
- ['Synthetic symmetric character square',['maps','aret','peno','stow']], ['One off-diagonal mismatch',['maps','aret','pano','stow']], ['Ragged invalid shape',['moss','oak','reed']], ['Single letter',['q']],
-]);
-
-suite('squirrel-distribution','trees squirrel chairs',[
- ['Several candidate assignments',[2,7,12,18,23],9,[1,6,11,17,24]], ['One destination',[14],3,[8]],
- ['Already aligned',[4,9,15],9,[4,9,15]],
-]);
-suite('local:506','nums',[
- ['Ranks differ from original positions',[42,17,89,63,28,75,51,96]], ['Already descending',[90,70,50,30]], ['Two athletes',[35,81]], ['One athlete',[67]],
-]);
-suite('local:507','n',[['Several divisor pairs',496],['Larger perfect number',8128],['Abundant number',36],['Deficient number',29],['One',1]]);
-suite('local:547','isConnected',[
- ['Three components of different sizes',[[1,1,0,0,0,0],[1,1,1,0,0,0],[0,1,1,0,0,0],[0,0,0,1,1,0],[0,0,0,1,1,0],[0,0,0,0,0,1]]],
- ['All isolated',[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]], ['One chain',[[1,1,0,0],[1,1,1,0],[0,1,1,1],[0,0,1,1]]], ['One city',[[1]]],
-]);
-suite('local:63','m n obstacleGrid',[
- ['Several detours',4,6,[[0,0,0,0,0,0],[0,1,0,1,0,0],[0,0,0,0,1,0],[0,1,0,0,0,0]]],
- ['Blocked start',2,3,[[1,0,0],[0,0,0]]], ['Blocked end',2,3,[[0,0,0],[0,0,1]]],
- ['Single blocked corridor',1,5,[[0,0,1,0,0]]], ['Open single cell',1,1,[[0]]],
-]);
-suite('local:65','s',[
- ['Signed decimal exponent','-734.062e+12'], ['Leading decimal point','+.729'], ['Trailing decimal point','83.'],
- ['Missing exponent digits','7.3e+'], ['Double sign','--42'], ['Embedded letter','93q2'], ['Decimal exponent invalid','7e2.5'],
-]);
-local(695,'max-area-of-island');
-suite('local:721','accounts',[
- ['Transitive merges and same-name separation',[['Mira','m1@example.org','m2@example.org'],['Mira','m3@example.org','m4@example.org'],['Mira','m2@example.org','m3@example.org'],['Mira','m9@example.org'],['Oren','o1@example.org','o2@example.org']]],
- ['Repeated email in one account',[['Tara','t1@example.org','t1@example.org']]], ['Disjoint accounts',[['Ivo','i1@example.org'],['Nila','n1@example.org']]],
-]);
-suite('local:743','n k times',[
- ['Later relaxation improves an earlier route',6,1,[[1,2,8],[1,3,2],[3,2,3],[2,4,2],[3,5,7],[4,5,1],[5,6,4],[1,6,20]]],
- ['Unreachable node',4,1,[[1,2,3],[2,3,4]]], ['Cycle',3,2,[[2,1,4],[1,3,2],[3,2,1]]], ['One node',1,1,[]],
-]);
-suite('local:778','input',[
- ['Several competing elevation routes',[[0,7,12,15],[1,6,11,14],[2,5,10,13],[3,4,8,9]]],
- ['High start',[[3,0],[2,1]]], ['High destination',[[0,2],[1,3]]], ['Single cell',[[0]]],
-]);
-suite('local:80','nums',[
- ['Several runs exceed two copies',[-4,-4,-4,-1,2,2,2,2,7,7,11,11,11]], ['All equal',[6,6,6,6,6]],
- ['No excess copies',[2,2,5,5,8,8]], ['One value',[17]],
-]);
-suite('local:86','list x',[
- ['Both partitions interleaved',[9,3,12,5,7,2,11,6,4],7], ['All below',[2,4,6],9],
- ['All at least pivot',[8,11,14],5], ['Several equal to pivot',[5,2,5,7,5,1],5],
-]);
-suite('local:875','piles h',[
- ['Several binary-search refinements',[17,8,29,13,24,6,31],18], ['One hour per pile',[9,15,23,7],4],
- ['Enough time for speed one',[4,7,9],20], ['One large pile',[173],19],
-]);
-suite('local:92','list left right',[
- ['Reverse an interior segment',[3,7,11,15,19,23,27,31],3,7], ['Whole list',[4,8,12,16],1,4],
- ['One-position segment',[5,9,13,17],2,2], ['Suffix',[2,6,10,14,18],3,5],
-]);
-suite('local:95','n',[['Several subtree combinations',4],['Single tree',1],['Two root choices',2],['Three-key combinations',3]]);
-suite('local:96','n',[['Several Catalan recurrence rows',8],['Single key',1],['Two keys',2],['Larger count',12]]);
-suite('local:99','tree',[
- ['Nonadjacent inorder values swapped',[18,29,7,3,12,24,35]], ['Adjacent inorder swap',[12,7,29,3,18,24,35]],
- ['Root and leaf swapped',[3,7,29,18,12,24,35]], ['Two-node reversal',[4,9]],
-]);
-function jsonSuite(number,rows){suite(`local:${number}`,'input',rows.map(([label,value])=>[label,JSON.stringify(value)]));}
-jsonSuite(3894,[['Inside red interval',74],['Green boundary',0],['Before orange',29],['Orange boundary',30],['First red',31],['Last red',90],['After red',91],['Upper input bound',1000]]);
-jsonSuite(3895,[['Repeated matches in several positions',{nums:[70707,1727,700,987,77,2702,471],digit:7}],['Digit absent',{nums:[123,456,891],digit:7}],['Internal zeroes',{nums:[10001,20200,300],digit:0}],['Single digit',{nums:[8],digit:8}]]);
-jsonSuite(3896,[['Mixed prime and nonprime runs',[4,9,2,5,8,11,13,6,15,17]],['Already alternating',[2,4,5,6,7,8]],['Impossible imbalance',[2,3,5,7,4]],['No prime',[4,6,8,9]],['Singleton',[13]]]);
-jsonSuite(3899,[['Larger scalene triangle',[17,25,31]],['Right triangle',[8,15,17]],['Degenerate sum',[7,12,19]],['Cannot form triangle',[4,9,20]],['All equal',[11,11,11]]]);
-jsonSuite(3905,[['Several competing source regions',{n:5,m:6,sources:[[0,0,2],[4,5,7],[1,4,4],[3,1,9]]}],['One source',{n:3,m:5,sources:[[1,2,6]]}],['Equal-distance tie',{n:1,m:5,sources:[[0,0,3],[0,4,8]]}],['Single cell',{n:1,m:1,sources:[[0,0,5]]}]]);
-jsonSuite(3908,[['Several repeated digits',{n:7071707,x:7}],['Zero inside',{n:3020405,x:0}],['Digit absent',{n:8642,x:3}],['Single digit',{n:8,x:8}]]);
-jsonSuite(3909,[['Several competing runs',[7,3,5,8,2,6,9,4,1,10]],['Increasing',[2,5,8,11,14]],['Decreasing',[19,15,11,7,3]],['All equal',[6,6,6,6]],['Singleton',[17]]]);
-jsonSuite(3910,[['Branched tree with competing paths',{nums:[1,0,1,1,0,0,1,1,0],edges:[[0,1],[0,2],[1,3],[1,4],[2,5],[2,6],[5,7],[5,8]]}],['All zero',{nums:[0,0,0,0],edges:[[0,1],[1,2],[2,3]]}],['All one',{nums:[1,1,1,1],edges:[[0,1],[0,2],[0,3]]}],['Singleton',{nums:[1],edges:[]}]]);
-jsonSuite(3912,[['Repeated records and several changes',[4,7,7,2,9,4,11,3,11,8]],['All equal',[6,6,6,6]],['Increasing',[2,5,8,11]],['Singleton',[17]]]);
-jsonSuite(3913,[['Several vowel groups','quietautumnrivermeadow'],['No vowels','rhythms'],['Only vowels','uoieaaiou'],['Single vowel','e']]);
-jsonSuite(3914,[['Several descending boundaries',[8,8,6,7,4,5,2,3,1]],['Already increasing',[2,5,8,11]],['All equal',[6,6,6,6]],['Single descent',[3,7,2,5]],['Singleton',[17]]]);
-jsonSuite(3915,[['Spacing competes with alternating gains',{nums:[8,3,14,6,11,2,17,5,13,7],k:2}],['Spacing permits only singleton',{nums:[4,9,2,7],k:4}],['Equal values cannot alternate',{nums:[6,6,6,6,6],k:1}],['Adjacent alternation',{nums:[3,12,4,15,5,18],k:1}],['Singleton',{nums:[17],k:1}]]);
-jsonSuite('stableIndex',[['Several prefix and suffix updates',{nums:[9,2,5,1,7,4,11,8,13],k:5}],['No stable index',{nums:[9,7,5,3],k:1}],['Equality at threshold',{nums:[7,3,5],k:4}],['Singleton zero',{nums:[0],k:0}]]);
-
-suite('next-pointers-perfect','input',[
- ['Cross-parent links on four levels','[18,7,29,3,12,24,35,1,5,10,15,21,26,32,41]'],
- ['Repeated values still have separate links','[6,6,6,6,6,6,6]'], ['Single root','[17]'], ['Empty tree','[]'],
-]);
-suite('next-pointers-sparse','input',[
- ['Cross several missing children',JSON.stringify(sparseTree)], ['Single-child chain',JSON.stringify(leftChain)],
- ['Repeated values','[6,6,6,null,6,6]'], ['Single root','[17]'], ['Empty tree','[]'],
-]);
-suite('pascal-triangle','input',[['Several interior recurrences','9'],['First row','1'],['First interior coefficient','3'],['Even row count','6']]);
-suite('pascal-row','input',[['Several in-place updates','11'],['Zero index','0'],['One index','1'],['Even middle index','8']]);
-suite('valid-sudoku','board',[
- ['Valid partially filled board',AUTHORED_EXAMPLES['sudoku-solver'][0].board],
- ['Duplicate in a row',solvedSudoku.map((row,r)=>row.map((v,c)=>r===0&&c===1?row[0]:v))],
- ['Duplicate in a column',solvedSudoku.map((row,r)=>row.map((v,c)=>r===1&&c===0?solvedSudoku[0][0]:v))],
- ['Only a box collision',Array.from({length:9},(_,r)=>Array.from({length:9},(_,c)=>(r===0&&c===0)||(r===1&&c===1)?'7':'.'))],
- ['Empty valid board',Array.from({length:9},()=>Array(9).fill('.'))],
-]);
-// Rank parameters are intentionally absent for Third Maximum Number.
-AUTHORED_EXAMPLES['local:414']=AUTHORED_EXAMPLES['local:414'].filter((e,i,a)=>a.findIndex(other=>JSON.stringify(other.nums)===JSON.stringify(e.nums))===i);
-AUTHORED_EXAMPLES['surrounded-regions']=AUTHORED_EXAMPLES['surrounded-regions'].map(e=>({...e,input:JSON.stringify(JSON.parse(e.input).map(row=>row.split('')))}));
-for(const key of ['valid-palindrome','palindrome-partitioning-ii'])AUTHORED_EXAMPLES[key]=AUTHORED_EXAMPLES[key].map(e=>({...e,input:e.s}));
-AUTHORED_EXAMPLES['word-break']=AUTHORED_EXAMPLES['word-break'].map(e=>({...e,input:`${e.s} | ${e.dict.join(', ')}`}));
-AUTHORED_EXAMPLES['linked-list-cycle']=AUTHORED_EXAMPLES['linked-list-cycle'].map(e=>({...e,input:`${JSON.stringify(Array.from({length:e.nodeCount},(_,i)=>4+i*3))} | pos=${e.tail}`}));
-AUTHORED_EXAMPLES['linked-list-cycle-ii']=AUTHORED_EXAMPLES['linked-list-cycle-ii'].map(e=>({label:e.label,nodes:JSON.parse(e.values.nodes),pos:e.values.pos}));
-jsonSuite(3908,[['Repeated digit inside',{n:27077,x:7}],['Zero inside',{n:30204,x:0}],['Digit absent',{n:8642,x:3}],['Single digit',{n:8,x:8}],['Zero itself',{n:0,x:0}]]);
-jsonSuite(3909,[['Long unequal sides',[2,5,9,14,21,18,13,8,4]],['Increasing only',[2,5,8,11,14]],['Decreasing only',[19,15,11,7,3]],['Equal side sums',[3,8,15,8,3]],['Minimum length',[4,9,2]]]);
-
-// Adapter aliases reflect actual input contracts of legacy and newer consumers.
-// Keep one authored input while both renderers are still present in the repo.
-function adapt(key,fn){AUTHORED_EXAMPLES[key]=AUTHORED_EXAMPLES[key].map(e=>({...e,...fn(e)}));}
-adapt('binary-tree-level-order-ii',e=>({arr:e.root}));
-adapt('binary-tree-level-order-traversal-ii',e=>({arr:e.root}));
-adapt('valid-parentheses',e=>({input:e.s}));
-adapt('bitwise-and-of-numbers-range',e=>({input:[e.left,e.right]}));
-adapt('invert-binary-tree',e=>({input:e.arr}));
-adapt('number-of-digit-one',e=>({input:[e.n]}));
-adapt('search-a-2d-matrix-ii',e=>({input:[e.matrix,e.target]}));
-adapt('local:309',e=>({input:e.prices}));
-adapt('increasing-triplet-subsequence',e=>({inputs:e.nums}));
-adapt('palindrome-pairs',e=>({inputs:e.words}));
-adapt('design-snake-game',e=>({moves:e.commands}));
-adapt('non-overlapping-intervals',e=>({intervals:JSON.parse(e.val)}));
-adapt('path-sum-iii',e=>({tree:e.root,target:e.targetSum}));
-adapt('add-two-numbers-ii',e=>({list1:e.l1,list2:e.l2}));
-adapt('delete-node-in-a-bst',e=>({tree:e.root}));
-adapt('4sum-ii',e=>({nums1:e.nums[0],nums2:e.nums[1],nums3:e.nums[2],nums4:e.nums[3]}));
-adapt('assign-cookies',e=>({size:e.cookies}));
-adapt('can-i-win',e=>({maxChoosable:e.maxChoosableInteger}));
-adapt('validate-ip-address',e=>({ip:e.queryIP}));
-adapt('matchsticks-to-square',e=>({nums:e.matchsticks}));
-adapt('generate-random-point-in-a-circle',()=>({x_center:3,y_center:-2}));
-adapt('teemo-attacking',e=>({timeSeries:e.attackTime}));
-adapt('diagonal-traverse',e=>({mat:e.matrix}));
-adapt('most-frequent-subtree-sum',e=>({arr:e.tree}));
-adapt('inorder-successor-bst',e=>({values:e.tree,target:e.p}));
-adapt('random-flip-matrix',e=>({flips:Array.from({length:Math.min(e.m*e.n,8)},(_,i)=>[Math.floor(i/e.n),i%e.n])}));
-adapt('longest-word-dictionary',e=>({s:'plantstonetransport',dictionary:e.words}));
-adapt('optimal-division',e=>({nums:JSON.parse(e.array)}));
-adapt('reverse-words-iii',e=>({input:e.s}));
-adapt('array-partition',e=>({nums:e.array}));
-adapt('find-the-celebrity-564',e=>({n:e.matrix.length}));
-adapt('max-distance',e=>({arrays:e.array}));
-adapt('shortest-unsorted',e=>({nums:e.array}));
-adapt('zigzag-conversion',e=>({value:e.s,rows:e.numRows}));
-adapt('max-area-of-island',e=>({gridStr:JSON.stringify(e.grid)}));
-adapt('string-to-integer-atoi',e=>({s:e.value}));
-adapt('local:875',e=>({input:{piles:e.piles,h:e.h}}));
-adapt('count-and-say',e=>({input:[e.n]}));
-adapt('median-employee-salary',e=>({table:e.employees.map(r=>`${r.id},${r.company},${r.salary}`).join('\n')}));
-adapt('managers-with-at-least-5-direct-reports',e=>({table:e.employees.map(r=>`${r.id},${r.name},${r.managerId??'null'}`).join('\n')}));
-for(const key of ['nth-digit','student-attendance-record-ii'])adapt(key,e=>({n:String(e.n)}));
-adapt('highest-answer-rate',e=>({questions:e.questions.map((q,i)=>({id:q.question_id,submissions:3+i*2})),answers:e.answers.map((a,i)=>({...a,id:i+1,is_accepted:1}))}));
+// Tooling-only aggregate. Browser routes import individual files from ./examples.
+import suite0 from './examples/251.js';
+import suite1 from './examples/252.js';
+import suite2 from './examples/253.js';
+import suite3 from './examples/254.js';
+import suite4 from './examples/255.js';
+import suite5 from './examples/256.js';
+import suite6 from './examples/258.js';
+import suite7 from './examples/259.js';
+import suite8 from './examples/260.js';
+import suite9 from './examples/261.js';
+import suite10 from './examples/262.js';
+import suite11 from './examples/263.js';
+import suite12 from './examples/264.js';
+import suite13 from './examples/265.js';
+import suite14 from './examples/266.js';
+import suite15 from './examples/267.js';
+import suite16 from './examples/269.js';
+import suite17 from './examples/270.js';
+import suite18 from './examples/272.js';
+import suite19 from './examples/273.js';
+import suite20 from './examples/274.js';
+import suite21 from './examples/275.js';
+import suite22 from './examples/276.js';
+import suite23 from './examples/277.js';
+import suite24 from './examples/280.js';
+import suite25 from './examples/281.js';
+import suite26 from './examples/282.js';
+import suite27 from './examples/284.js';
+import suite28 from './examples/285.js';
+import suite29 from './examples/286.js';
+import suite30 from './examples/288.js';
+import suite31 from './examples/289.js';
+import suite32 from './examples/290.js';
+import suite33 from './examples/291.js';
+import suite34 from './examples/292.js';
+import suite35 from './examples/293.js';
+import suite36 from './examples/294.js';
+import suite37 from './examples/296.js';
+import suite38 from './examples/298.js';
+import suite39 from './examples/300.js';
+import suite40 from './examples/sequence--605.js';
+import suite41 from './examples/sequence--611.js';
+import suite42 from './examples/sequence--628.js';
+import suite43 from './examples/sequence--633.js';
+import suite44 from './examples/sequence--643.js';
+import suite45 from './examples/sequence--645.js';
+import suite46 from './examples/sequence--674.js';
+import suite47 from './examples/sequence--697.js';
+import suite48 from './examples/sequence--724.js';
+import suite49 from './examples/sequence--747.js';
+import suite50 from './examples/sequence--766.js';
+import suite51 from './examples/sequence--832.js';
+import suite52 from './examples/sequence--867.js';
+import suite53 from './examples/sequence--896.js';
+import suite54 from './examples/sequence--905.js';
+import suite55 from './examples/sequence--922.js';
+import suite56 from './examples/sequence--977.js';
+import suite57 from './examples/sequence--1047.js';
+import suite58 from './examples/sequence--1207.js';
+import suite59 from './examples/sequence--1295.js';
+import suite60 from './examples/sequence--1431.js';
+import suite61 from './examples/sequence--1480.js';
+import suite62 from './examples/sequence--1512.js';
+import suite63 from './examples/sequence--1672.js';
+import suite64 from './examples/scan--594.js';
+import suite65 from './examples/scan--598.js';
+import suite66 from './examples/scan--599.js';
+import suite67 from './examples/scan--646.js';
+import suite68 from './examples/scan--657.js';
+import suite69 from './examples/scan--658.js';
+import suite70 from './examples/scan--661.js';
+import suite71 from './examples/scan--665.js';
+import suite72 from './examples/scan--670.js';
+import suite73 from './examples/scan--673.js';
+import suite74 from './examples/scan--678.js';
+import suite75 from './examples/scan--680.js';
+import suite76 from './examples/scan--682.js';
+import suite77 from './examples/scan--686.js';
+import suite78 from './examples/scan--692.js';
+import suite79 from './examples/scan--693.js';
+import suite80 from './examples/scan--696.js';
+import suite81 from './examples/scan--709.js';
+import suite82 from './examples/scan--713.js';
+import suite83 from './examples/scan--714.js';
+import suite84 from './examples/scan--717.js';
+import suite85 from './examples/scan--718.js';
+import suite86 from './examples/scan--728.js';
+import suite87 from './examples/scan--733.js';
+import suite88 from './examples/scan--735.js';
+import suite89 from './examples/scan--738.js';
+import suite90 from './examples/scan--740.js';
+import suite91 from './examples/scan--744.js';
+import suite92 from './examples/scan--771.js';
+import suite93 from './examples/scan--796.js';
+import suite94 from './examples/scan--804.js';
+import suite95 from './examples/scan--806.js';
+import suite96 from './examples/scan--821.js';
+import suite97 from './examples/scan--830.js';
+import suite98 from './examples/scan--836.js';
+import suite99 from './examples/scan--844.js';
+import suite100 from './examples/scan--849.js';
+import suite101 from './examples/scan--852.js';
+import suite102 from './examples/scan--856.js';
+import suite103 from './examples/scan--859.js';
+import suite104 from './examples/tree--606.js';
+import suite105 from './examples/tree--617.js';
+import suite106 from './examples/tree--623.js';
+import suite107 from './examples/tree--637.js';
+import suite108 from './examples/tree--653.js';
+import suite109 from './examples/tree--654.js';
+import suite110 from './examples/tree--669.js';
+import suite111 from './examples/tree--671.js';
+import suite112 from './examples/tree--687.js';
+import suite113 from './examples/tree--700.js';
+import suite114 from './examples/tree--701.js';
+import suite115 from './examples/tree--872.js';
+import suite116 from './examples/tree--897.js';
+import suite117 from './examples/tree--938.js';
+import suite118 from './examples/tree--965.js';
+import suite119 from './examples/collection--82.js';
+import suite120 from './examples/collection--127.js';
+import suite121 from './examples/collection--255.js';
+import suite122 from './examples/collection--351.js';
+import suite123 from './examples/collection--381.js';
+import suite124 from './examples/collection--426.js';
+import suite125 from './examples/collection--427.js';
+import suite126 from './examples/collection--432.js';
+import suite127 from './examples/collection--487.js';
+import suite128 from './examples/collection--491.js';
+import suite129 from './examples/collection--505.js';
+import suite130 from './examples/collection--510.js';
+import suite131 from './examples/collection--534.js';
+import suite132 from './examples/collection--550.js';
+import suite133 from './examples/collection--558.js';
+import suite134 from './examples/collection--564.js';
+import suite135 from './examples/collection--568.js';
+import suite136 from './examples/collection--571.js';
+import suite137 from './examples/collection--573.js';
+import suite138 from './examples/collection--574.js';
+import suite139 from './examples/collection--577.js';
+import suite140 from './examples/collection--586.js';
+import suite141 from './examples/collection--588.js';
+import suite142 from './examples/collection--589.js';
+import suite143 from './examples/collection--590.js';
+import suite144 from './examples/collection--591.js';
+import suite145 from './examples/collection--592.js';
+import suite146 from './examples/collection--593.js';
+import suite147 from './examples/collection--595.js';
+import suite148 from './examples/collection--596.js';
+import suite149 from './examples/collection--597.js';
+import suite150 from './examples/collection--600.js';
+import suite151 from './examples/collection--601.js';
+import suite152 from './examples/collection--602.js';
+import suite153 from './examples/collection--603.js';
+import suite154 from './examples/collection--604.js';
+import suite155 from './examples/collection--607.js';
+import suite156 from './examples/collection--608.js';
+import suite157 from './examples/collection--609.js';
+import suite158 from './examples/collection--610.js';
+import suite159 from './examples/collection--612.js';
+import suite160 from './examples/collection--613.js';
+import suite161 from './examples/collection--614.js';
+import suite162 from './examples/collection--615.js';
+import suite163 from './examples/collection--616.js';
+import suite164 from './examples/collection--618.js';
+import suite165 from './examples/collection--619.js';
+import suite166 from './examples/collection--620.js';
+import suite167 from './examples/collection--625.js';
+import suite168 from './examples/collection--626.js';
+import suite169 from './examples/collection--627.js';
+import suite170 from './examples/collection--629.js';
+import suite171 from './examples/collection--634.js';
+import suite172 from './examples/collection--638.js';
+import suite173 from './examples/collection--639.js';
+import suite174 from './examples/collection--648.js';
+import suite175 from './examples/collection--650.js';
+import suite176 from './examples/collection--651.js';
+import suite177 from './examples/collection--664.js';
+import suite178 from './examples/collection--677.js';
+import suite179 from './examples/collection--685.js';
+import suite180 from './examples/collection--688.js';
+import suite181 from './examples/collection--712.js';
+import suite182 from './examples/collection--720.js';
+import suite183 from './examples/collection--727.js';
+import suite184 from './examples/collection--737.js';
+import suite185 from './examples/collection--741.js';
+import suite186 from './examples/collection--750.js';
+import suite187 from './examples/collection--764.js';
+import suite188 from './examples/collection--765.js';
+import suite189 from './examples/collection--790.js';
+import suite190 from './examples/collection--795.js';
+import suite191 from './examples/collection--799.js';
+import suite192 from './examples/collection--801.js';
+import suite193 from './examples/collection--808.js';
+import suite194 from './examples/collection--813.js';
+import suite195 from './examples/collection--820.js';
+import suite196 from './examples/collection--823.js';
+import suite197 from './examples/collection--827.js';
+import suite198 from './examples/collection--837.js';
+import suite199 from './examples/collection--839.js';
+import suite200 from './examples/collection--860.js';
+import suite201 from './examples/collection--861.js';
+import suite202 from './examples/collection--862.js';
+import suite203 from './examples/collection--868.js';
+import suite204 from './examples/collection--869.js';
+import suite205 from './examples/collection--879.js';
+import suite206 from './examples/collection--881.js';
+import suite207 from './examples/collection--883.js';
+import suite208 from './examples/collection--884.js';
+import suite209 from './examples/collection--887.js';
+import suite210 from './examples/collection--888.js';
+import suite211 from './examples/collection--890.js';
+import suite212 from './examples/collection--892.js';
+import suite213 from './examples/collection--893.js';
+import suite214 from './examples/collection--898.js';
+import suite215 from './examples/collection--899.js';
+import suite216 from './examples/collection--901.js';
+import suite217 from './examples/collection--904.js';
+import suite218 from './examples/collection--907.js';
+import suite219 from './examples/collection--908.js';
+import suite220 from './examples/collection--914.js';
+import suite221 from './examples/collection--915.js';
+import suite222 from './examples/collection--917.js';
+import suite223 from './examples/collection--918.js';
+import suite224 from './examples/collection--920.js';
+import suite225 from './examples/collection--921.js';
+import suite226 from './examples/collection--924.js';
+import suite227 from './examples/collection--925.js';
+import suite228 from './examples/collection--926.js';
+import suite229 from './examples/collection--928.js';
+import suite230 from './examples/collection--929.js';
+import suite231 from './examples/collection--930.js';
+import suite232 from './examples/collection--931.js';
+import suite233 from './examples/collection--933.js';
+import suite234 from './examples/collection--935.js';
+import suite235 from './examples/collection--940.js';
+import suite236 from './examples/collection--941.js';
+import suite237 from './examples/collection--942.js';
+import suite238 from './examples/collection--944.js';
+import suite239 from './examples/collection--945.js';
+import suite240 from './examples/collection--946.js';
+import suite241 from './examples/collection--947.js';
+import suite242 from './examples/collection--948.js';
+import suite243 from './examples/collection--950.js';
+import suite244 from './examples/collection--952.js';
+import suite245 from './examples/collection--953.js';
+import suite246 from './examples/collection--956.js';
+import suite247 from './examples/collection--959.js';
+import suite248 from './examples/collection--961.js';
+import suite249 from './examples/collection--962.js';
+import suite250 from './examples/collection--970.js';
+import suite251 from './examples/collection--973.js';
+import suite252 from './examples/collection--974.js';
+import suite253 from './examples/collection--976.js';
+import suite254 from './examples/collection--978.js';
+import suite255 from './examples/collection--980.js';
+import suite256 from './examples/collection--983.js';
+import suite257 from './examples/collection--985.js';
+import suite258 from './examples/collection--989.js';
+import suite259 from './examples/collection--990.js';
+import suite260 from './examples/collection--991.js';
+import suite261 from './examples/collection--992.js';
+import suite262 from './examples/collection--997.js';
+import suite263 from './examples/collection--999.js';
+import suite264 from './examples/collection--1000.js';
+import suite265 from './examples/collection--1002.js';
+import suite266 from './examples/collection--1005.js';
+import suite267 from './examples/collection--1006.js';
+import suite268 from './examples/collection--1007.js';
+import suite269 from './examples/collection--1009.js';
+import suite270 from './examples/collection--1010.js';
+import suite271 from './examples/collection--1011.js';
+import suite272 from './examples/collection--1013.js';
+import suite273 from './examples/collection--1014.js';
+import suite274 from './examples/collection--1015.js';
+import suite275 from './examples/collection--1017.js';
+import suite276 from './examples/collection--1018.js';
+import suite277 from './examples/collection--1021.js';
+import suite278 from './examples/collection--1023.js';
+import suite279 from './examples/collection--1025.js';
+import suite280 from './examples/collection--1027.js';
+import suite281 from './examples/collection--1029.js';
+import suite282 from './examples/collection--1030.js';
+import suite283 from './examples/collection--1032.js';
+import suite284 from './examples/collection--1035.js';
+import suite285 from './examples/collection--1037.js';
+import suite286 from './examples/collection--1041.js';
+import suite287 from './examples/collection--1043.js';
+import suite288 from './examples/collection--1046.js';
+import suite289 from './examples/collection--1049.js';
+import suite290 from './examples/collection--1051.js';
+import suite291 from './examples/collection--1052.js';
+import suite292 from './examples/collection--1053.js';
+import suite293 from './examples/collection--1063.js';
+import suite294 from './examples/collection--1064.js';
+import suite295 from './examples/collection--1071.js';
+import suite296 from './examples/collection--1078.js';
+import suite297 from './examples/collection--1085.js';
+import suite298 from './examples/collection--1089.js';
+import suite299 from './examples/collection--1094.js';
+import suite300 from './examples/collection--1099.js';
+import suite301 from './examples/collection--1100.js';
+import suite302 from './examples/collection--1101.js';
+import suite303 from './examples/collection--1105.js';
+import suite304 from './examples/collection--1108.js';
+import suite305 from './examples/collection--1109.js';
+import suite306 from './examples/collection--1111.js';
+import suite307 from './examples/collection--1118.js';
+import suite308 from './examples/collection--1119.js';
+import suite309 from './examples/collection--1122.js';
+import suite310 from './examples/collection--1124.js';
+import suite311 from './examples/collection--1128.js';
+import suite312 from './examples/collection--1130.js';
+import suite313 from './examples/collection--1131.js';
+import suite314 from './examples/collection--1133.js';
+import suite315 from './examples/collection--1134.js';
+import suite316 from './examples/collection--1135.js';
+import suite317 from './examples/collection--1136.js';
+import suite318 from './examples/collection--1137.js';
+import suite319 from './examples/collection--1139.js';
+import suite320 from './examples/collection--1140.js';
+import suite321 from './examples/collection--1144.js';
+import suite322 from './examples/collection--1150.js';
+import suite323 from './examples/collection--1151.js';
+import suite324 from './examples/collection--1154.js';
+import suite325 from './examples/collection--1155.js';
+import suite326 from './examples/collection--1156.js';
+import suite327 from './examples/collection--1160.js';
+import suite328 from './examples/collection--1162.js';
+import suite329 from './examples/collection--1165.js';
+import suite330 from './examples/collection--1167.js';
+import suite331 from './examples/collection--1168.js';
+import suite332 from './examples/collection--1170.js';
+import suite333 from './examples/collection--1175.js';
+import suite334 from './examples/collection--1176.js';
+import suite335 from './examples/collection--1177.js';
+import suite336 from './examples/collection--1180.js';
+import suite337 from './examples/collection--1182.js';
+import suite338 from './examples/collection--1184.js';
+import suite339 from './examples/collection--1186.js';
+import suite340 from './examples/collection--1189.js';
+import suite341 from './examples/collection--1190.js';
+import suite342 from './examples/collection--1191.js';
+import suite343 from './examples/collection--1196.js';
+import suite344 from './examples/collection--1200.js';
+import suite345 from './examples/collection--1202.js';
+import suite346 from './examples/collection--1208.js';
+import suite347 from './examples/collection--1209.js';
+import suite348 from './examples/collection--1213.js';
+import suite349 from './examples/collection--1216.js';
+import suite350 from './examples/collection--1217.js';
+import suite351 from './examples/collection--1218.js';
+import suite352 from './examples/collection--1219.js';
+import suite353 from './examples/collection--1220.js';
+import suite354 from './examples/collection--1221.js';
+import suite355 from './examples/collection--1222.js';
+import suite356 from './examples/collection--1223.js';
+import suite357 from './examples/collection--1227.js';
+import suite358 from './examples/collection--1232.js';
+import suite359 from './examples/collection--1234.js';
+import suite360 from './examples/collection--1239.js';
+import suite361 from './examples/collection--1247.js';
+import suite362 from './examples/collection--1248.js';
+import suite363 from './examples/collection--1249.js';
+import suite364 from './examples/collection--1250.js';
+import suite365 from './examples/collection--1252.js';
+import suite366 from './examples/collection--1254.js';
+import suite367 from './examples/collection--1260.js';
+import suite368 from './examples/collection--1262.js';
+import suite369 from './examples/collection--1266.js';
+import suite370 from './examples/collection--1268.js';
+import suite371 from './examples/collection--1275.js';
+import suite372 from './examples/collection--1276.js';
+import suite373 from './examples/collection--1277.js';
+import suite374 from './examples/collection--1281.js';
+import suite375 from './examples/collection--1282.js';
+import suite376 from './examples/collection--1287.js';
+import suite377 from './examples/collection--1288.js';
+import suite378 from './examples/collection--1291.js';
+import suite379 from './examples/collection--1292.js';
+import suite380 from './examples/collection--1296.js';
+import suite381 from './examples/collection--1297.js';
+import suite382 from './examples/collection--1299.js';
+import suite383 from './examples/collection--1300.js';
+import suite384 from './examples/collection--1304.js';
+import suite385 from './examples/collection--1306.js';
+import suite386 from './examples/collection--1309.js';
+import suite387 from './examples/collection--1310.js';
+import suite388 from './examples/collection--1313.js';
+import suite389 from './examples/collection--1314.js';
+import suite390 from './examples/collection--1317.js';
+import suite391 from './examples/collection--1318.js';
+import suite392 from './examples/collection--1319.js';
+import suite393 from './examples/collection--1323.js';
+import suite394 from './examples/collection--1328.js';
+import suite395 from './examples/collection--1331.js';
+import suite396 from './examples/collection--1332.js';
+import suite397 from './examples/collection--1335.js';
+import suite398 from './examples/collection--1337.js';
+import suite399 from './examples/collection--1342.js';
+import suite400 from './examples/collection--1343.js';
+import suite401 from './examples/collection--1344.js';
+import suite402 from './examples/collection--1346.js';
+import suite403 from './examples/collection--1347.js';
+import suite404 from './examples/collection--1351.js';
+import suite405 from './examples/collection--1356.js';
+import suite406 from './examples/collection--1358.js';
+import suite407 from './examples/collection--1360.js';
+import suite408 from './examples/collection--1365.js';
+import suite409 from './examples/collection--1370.js';
+import suite410 from './examples/collection--1371.js';
+import suite411 from './examples/collection--1374.js';
+import suite412 from './examples/collection--1380.js';
+import suite413 from './examples/collection--1385.js';
+import suite414 from './examples/collection--1388.js';
+import suite415 from './examples/collection--1389.js';
+import suite416 from './examples/collection--1394.js';
+import suite417 from './examples/collection--1399.js';
+import suite418 from './examples/collection--1400.js';
+import suite419 from './examples/collection--1401.js';
+import suite420 from './examples/collection--1402.js';
+import suite421 from './examples/collection--1403.js';
+import suite422 from './examples/collection--1404.js';
+import suite423 from './examples/collection--1405.js';
+import suite424 from './examples/collection--1406.js';
+import suite425 from './examples/collection--1408.js';
+import suite426 from './examples/collection--1409.js';
+import suite427 from './examples/collection--1410.js';
+import suite428 from './examples/collection--1411.js';
+import suite429 from './examples/collection--1413.js';
+import suite430 from './examples/collection--1414.js';
+import suite431 from './examples/collection--1415.js';
+import suite432 from './examples/collection--1417.js';
+import suite433 from './examples/collection--1418.js';
+import suite434 from './examples/collection--1419.js';
+import suite435 from './examples/collection--1422.js';
+import suite436 from './examples/collection--1423.js';
+import suite437 from './examples/collection--1424.js';
+import suite438 from './examples/collection--1425.js';
+import suite439 from './examples/collection--1426.js';
+import suite440 from './examples/collection--1427.js';
+import suite441 from './examples/collection--1433.js';
+import suite442 from './examples/collection--1436.js';
+import suite443 from './examples/collection--1437.js';
+import suite444 from './examples/collection--1438.js';
+import suite445 from './examples/collection--1441.js';
+import suite446 from './examples/collection--1442.js';
+import suite447 from './examples/collection--1444.js';
+import suite448 from './examples/collection--1446.js';
+import suite449 from './examples/collection--1447.js';
+import suite450 from './examples/collection--1450.js';
+import suite451 from './examples/collection--1451.js';
+import suite452 from './examples/collection--1455.js';
+import suite453 from './examples/collection--1456.js';
+import suite454 from './examples/collection--1458.js';
+import suite455 from './examples/collection--1460.js';
+import suite456 from './examples/collection--1461.js';
+import suite457 from './examples/collection--1463.js';
+import suite458 from './examples/collection--1464.js';
+import suite459 from './examples/collection--1465.js';
+import suite460 from './examples/collection--1470.js';
+import suite461 from './examples/collection--1471.js';
+import suite462 from './examples/collection--1475.js';
+import suite463 from './examples/collection--1481.js';
+import suite464 from './examples/collection--1482.js';
+import suite465 from './examples/collection--1486.js';
+import suite466 from './examples/collection--1487.js';
+import suite467 from './examples/collection--1491.js';
+import suite468 from './examples/collection--1492.js';
+import suite469 from './examples/collection--1493.js';
+import suite470 from './examples/collection--1496.js';
+import suite471 from './examples/collection--1497.js';
+import suite472 from './examples/collection--1498.js';
+import suite473 from './examples/collection--1502.js';
+import suite474 from './examples/collection--1503.js';
+import suite475 from './examples/collection--1504.js';
+import suite476 from './examples/collection--1508.js';
+import suite477 from './examples/collection--1509.js';
+import suite478 from './examples/collection--1510.js';
+import suite479 from './examples/collection--1513.js';
+import suite480 from './examples/collection--1518.js';
+import suite481 from './examples/collection--1523.js';
+import suite482 from './examples/collection--1524.js';
+import suite483 from './examples/collection--1525.js';
+import suite484 from './examples/collection--1526.js';
+import suite485 from './examples/collection--1528.js';
+import suite486 from './examples/collection--1529.js';
+import suite487 from './examples/collection--1534.js';
+import suite488 from './examples/collection--1535.js';
+import suite489 from './examples/collection--1539.js';
+import suite490 from './examples/collection--1540.js';
+import suite491 from './examples/collection--1542.js';
+import suite492 from './examples/collection--1544.js';
+import suite493 from './examples/collection--1545.js';
+import suite494 from './examples/collection--1546.js';
+import suite495 from './examples/collection--1550.js';
+import suite496 from './examples/collection--1551.js';
+import suite497 from './examples/collection--1552.js';
+import suite498 from './examples/collection--1556.js';
+import suite499 from './examples/collection--1557.js';
+import suite500 from './examples/collection--1558.js';
+import suite501 from './examples/collection--1560.js';
+import suite502 from './examples/collection--1561.js';
+import suite503 from './examples/collection--1566.js';
+import suite504 from './examples/collection--1567.js';
+import suite505 from './examples/collection--1570.js';
+import suite506 from './examples/collection--1572.js';
+import suite507 from './examples/collection--1574.js';
+import suite508 from './examples/collection--1576.js';
+import suite509 from './examples/collection--1578.js';
+import suite510 from './examples/collection--1582.js';
+import suite511 from './examples/collection--1584.js';
+import suite512 from './examples/collection--1588.js';
+import suite513 from './examples/collection--1590.js';
+import suite514 from './examples/collection--1592.js';
+import suite515 from './examples/collection--1598.js';
+import suite516 from './examples/collection--1603.js';
+import suite517 from './examples/collection--1605.js';
+import suite518 from './examples/collection--1608.js';
+import suite519 from './examples/collection--1614.js';
+import suite520 from './examples/collection--1615.js';
+import suite521 from './examples/collection--1616.js';
+import suite522 from './examples/collection--1619.js';
+import suite523 from './examples/collection--1624.js';
+import suite524 from './examples/collection--1626.js';
+import suite525 from './examples/collection--1627.js';
+import suite526 from './examples/collection--1629.js';
+import suite527 from './examples/collection--1630.js';
+import suite528 from './examples/collection--1636.js';
+import suite529 from './examples/collection--1637.js';
+import suite530 from './examples/collection--1638.js';
+import suite531 from './examples/collection--1640.js';
+import suite532 from './examples/collection--1641.js';
+import suite533 from './examples/collection--1642.js';
+import suite534 from './examples/collection--1646.js';
+import suite535 from './examples/collection--1647.js';
+import suite536 from './examples/collection--1652.js';
+import suite537 from './examples/collection--1653.js';
+import suite538 from './examples/collection--1656.js';
+import suite539 from './examples/collection--1657.js';
+import suite540 from './examples/collection--1658.js';
+import suite541 from './examples/collection--1662.js';
+import suite542 from './examples/collection--1663.js';
+import suite543 from './examples/collection--1664.js';
+import suite544 from './examples/collection--1667.js';
+import suite545 from './examples/collection--1668.js';
+import suite546 from './examples/collection--1673.js';
+import suite547 from './examples/collection--1678.js';
+import suite548 from './examples/collection--1679.js';
+import suite549 from './examples/collection--1680.js';
+import suite550 from './examples/collection--1683.js';
+import suite551 from './examples/collection--1684.js';
+import suite552 from './examples/collection--1685.js';
+import suite553 from './examples/collection--1686.js';
+import suite554 from './examples/collection--1688.js';
+import suite555 from './examples/collection--1689.js';
+import suite556 from './examples/collection--1690.js';
+import suite557 from './examples/collection--1691.js';
+import suite558 from './examples/collection--1693.js';
+import suite559 from './examples/collection--1694.js';
+import suite560 from './examples/collection--1695.js';
+import suite561 from './examples/collection--1696.js';
+import suite562 from './examples/collection--1697.js';
+import suite563 from './examples/collection--1698.js';
+import suite564 from './examples/collection--1700.js';
+import suite565 from './examples/collection--1701.js';
+import suite566 from './examples/collection--1702.js';
+import suite567 from './examples/collection--1704.js';
+import suite568 from './examples/collection--1705.js';
+import suite569 from './examples/collection--1706.js';
+import suite570 from './examples/collection--1708.js';
+import suite571 from './examples/collection--1710.js';
+import suite572 from './examples/collection--1711.js';
+import suite573 from './examples/collection--1716.js';
+import suite574 from './examples/collection--1717.js';
+import suite575 from './examples/collection--1720.js';
+import suite576 from './examples/collection--1722.js';
+import suite577 from './examples/collection--1725.js';
+import suite578 from './examples/collection--1726.js';
+import suite579 from './examples/collection--1727.js';
+import suite580 from './examples/collection--1729.js';
+import suite581 from './examples/collection--1730.js';
+import suite582 from './examples/collection--1732.js';
+import suite583 from './examples/collection--1734.js';
+import suite584 from './examples/collection--1736.js';
+import suite585 from './examples/collection--1738.js';
+import suite586 from './examples/collection--1741.js';
+import suite587 from './examples/collection--1742.js';
+import suite588 from './examples/collection--1743.js';
+import suite589 from './examples/collection--1744.js';
+import suite590 from './examples/collection--1746.js';
+import suite591 from './examples/collection--1748.js';
+import suite592 from './examples/collection--1749.js';
+import suite593 from './examples/collection--1750.js';
+import suite594 from './examples/collection--1752.js';
+import suite595 from './examples/collection--1753.js';
+import suite596 from './examples/collection--1754.js';
+import suite597 from './examples/collection--1756.js';
+import suite598 from './examples/collection--1757.js';
+import suite599 from './examples/collection--1758.js';
+import suite600 from './examples/collection--1759.js';
+import suite601 from './examples/collection--1760.js';
+import suite602 from './examples/collection--1762.js';
+import suite603 from './examples/collection--1763.js';
+import suite604 from './examples/collection--1764.js';
+import suite605 from './examples/collection--1765.js';
+import suite606 from './examples/collection--1768.js';
+import suite607 from './examples/collection--1769.js';
+import suite608 from './examples/collection--1770.js';
+import suite609 from './examples/collection--1773.js';
+import suite610 from './examples/collection--1774.js';
+import suite611 from './examples/collection--1775.js';
+import suite612 from './examples/collection--1776.js';
+import suite613 from './examples/collection--1779.js';
+import suite614 from './examples/collection--1780.js';
+import suite615 from './examples/collection--1781.js';
+import suite616 from './examples/collection--1784.js';
+import suite617 from './examples/collection--1785.js';
+import suite618 from './examples/collection--1790.js';
+import suite619 from './examples/collection--1791.js';
+import suite620 from './examples/collection--1792.js';
+import suite621 from './examples/collection--1793.js';
+import suite622 from './examples/collection--1796.js';
+import suite623 from './examples/collection--1797.js';
+import suite624 from './examples/collection--1798.js';
+import suite625 from './examples/collection--1799.js';
+import suite626 from './examples/collection--1800.js';
+import suite627 from './examples/collection--1802.js';
+import suite628 from './examples/collection--1804.js';
+import suite629 from './examples/collection--1805.js';
+import suite630 from './examples/collection--1806.js';
+import suite631 from './examples/collection--1807.js';
+import suite632 from './examples/collection--1812.js';
+import suite633 from './examples/collection--1813.js';
+import suite634 from './examples/collection--1814.js';
+import suite635 from './examples/collection--1816.js';
+import suite636 from './examples/collection--1817.js';
+import suite637 from './examples/collection--1818.js';
+import suite638 from './examples/collection--1820.js';
+import suite639 from './examples/collection--1821.js';
+import suite640 from './examples/collection--1822.js';
+import suite641 from './examples/collection--1823.js';
+import suite642 from './examples/collection--1824.js';
+import suite643 from './examples/collection--1827.js';
+import suite644 from './examples/collection--1828.js';
+import suite645 from './examples/collection--1829.js';
+import suite646 from './examples/collection--1832.js';
+import suite647 from './examples/collection--1833.js';
+import suite648 from './examples/collection--1834.js';
+import suite649 from './examples/collection--1835.js';
+import suite650 from './examples/collection--1837.js';
+import suite651 from './examples/collection--1838.js';
+import suite652 from './examples/collection--1839.js';
+import suite653 from './examples/collection--1844.js';
+import suite654 from './examples/collection--1845.js';
+import suite655 from './examples/collection--1846.js';
+import suite656 from './examples/collection--1848.js';
+import suite657 from './examples/collection--1849.js';
+import suite658 from './examples/collection--1851.js';
+import suite659 from './examples/collection--1852.js';
+import suite660 from './examples/collection--1854.js';
+import suite661 from './examples/collection--1855.js';
+import suite662 from './examples/collection--1856.js';
+import suite663 from './examples/collection--1857.js';
+import suite664 from './examples/collection--1858.js';
+import suite665 from './examples/collection--1859.js';
+import suite666 from './examples/collection--1860.js';
+import suite667 from './examples/collection--1861.js';
+import suite668 from './examples/collection--1863.js';
+import suite669 from './examples/collection--1864.js';
+import suite670 from './examples/collection--1865.js';
+import suite671 from './examples/collection--1866.js';
+import suite672 from './examples/collection--1868.js';
+import suite673 from './examples/collection--1869.js';
+import suite674 from './examples/collection--1870.js';
+import suite675 from './examples/collection--1871.js';
+import suite676 from './examples/collection--1872.js';
+import suite677 from './examples/collection--1873.js';
+import suite678 from './examples/collection--1874.js';
+import suite679 from './examples/collection--1876.js';
+import suite680 from './examples/collection--1877.js';
+import suite681 from './examples/collection--1879.js';
+import suite682 from './examples/collection--1880.js';
+import suite683 from './examples/collection--1881.js';
+import suite684 from './examples/collection--1882.js';
+import suite685 from './examples/collection--1884.js';
+import suite686 from './examples/collection--1885.js';
+import suite687 from './examples/collection--1886.js';
+import suite688 from './examples/collection--1887.js';
+import suite689 from './examples/collection--1888.js';
+import suite690 from './examples/collection--1890.js';
+import suite691 from './examples/collection--1891.js';
+import suite692 from './examples/collection--1893.js';
+import suite693 from './examples/collection--1894.js';
+import suite694 from './examples/collection--1897.js';
+import suite695 from './examples/collection--1898.js';
+import suite696 from './examples/collection--1899.js';
+import suite697 from './examples/collection--1901.js';
+import suite698 from './examples/collection--1903.js';
+import suite699 from './examples/collection--1905.js';
+import suite700 from './examples/collection--1907.js';
+import suite701 from './examples/collection--1909.js';
+import suite702 from './examples/collection--1910.js';
+import suite703 from './examples/collection--1911.js';
+import suite704 from './examples/collection--1913.js';
+import suite705 from './examples/collection--1914.js';
+import suite706 from './examples/collection--1915.js';
+import suite707 from './examples/collection--1916.js';
+import suite708 from './examples/collection--1920.js';
+import suite709 from './examples/collection--1921.js';
+import suite710 from './examples/collection--1922.js';
+import suite711 from './examples/collection--1925.js';
+import suite712 from './examples/collection--1926.js';
+import suite713 from './examples/collection--1929.js';
+import suite714 from './examples/collection--1930.js';
+import suite715 from './examples/collection--1935.js';
+import suite716 from './examples/collection--1936.js';
+import suite717 from './examples/collection--1937.js';
+import suite718 from './examples/collection--1938.js';
+import suite719 from './examples/collection--1939.js';
+import suite720 from './examples/collection--1940.js';
+import suite721 from './examples/collection--1941.js';
+import suite722 from './examples/collection--1942.js';
+import suite723 from './examples/collection--1943.js';
+import suite724 from './examples/collection--1944.js';
+import suite725 from './examples/collection--1945.js';
+import suite726 from './examples/collection--1946.js';
+import suite727 from './examples/collection--1947.js';
+import suite728 from './examples/collection--1948.js';
+import suite729 from './examples/collection--1949.js';
+import suite730 from './examples/collection--1950.js';
+import suite731 from './examples/collection--1952.js';
+import suite732 from './examples/collection--1953.js';
+import suite733 from './examples/collection--1954.js';
+import suite734 from './examples/collection--1955.js';
+import suite735 from './examples/collection--1957.js';
+import suite736 from './examples/collection--1958.js';
+import suite737 from './examples/collection--1959.js';
+import suite738 from './examples/collection--1960.js';
+import suite739 from './examples/collection--1961.js';
+import suite740 from './examples/collection--1962.js';
+import suite741 from './examples/collection--1963.js';
+import suite742 from './examples/collection--1964.js';
+import suite743 from './examples/collection--1965.js';
+import suite744 from './examples/collection--1966.js';
+import suite745 from './examples/collection--1967.js';
+import suite746 from './examples/collection--1968.js';
+import suite747 from './examples/collection--1969.js';
+import suite748 from './examples/collection--1970.js';
+import suite749 from './examples/collection--1971.js';
+import suite750 from './examples/collection--1973.js';
+import suite751 from './examples/collection--1974.js';
+import suite752 from './examples/collection--1975.js';
+import suite753 from './examples/collection--1976.js';
+import suite754 from './examples/collection--1977.js';
+import suite755 from './examples/collection--1978.js';
+import suite756 from './examples/collection--1979.js';
+import suite757 from './examples/collection--1980.js';
+import suite758 from './examples/collection--1981.js';
+import suite759 from './examples/collection--1982.js';
+import suite760 from './examples/collection--1983.js';
+import suite761 from './examples/collection--1984.js';
+import suite762 from './examples/collection--1985.js';
+import suite763 from './examples/collection--1986.js';
+import suite764 from './examples/collection--1987.js';
+import suite765 from './examples/collection--1988.js';
+import suite766 from './examples/collection--1989.js';
+import suite767 from './examples/collection--1990.js';
+import suite768 from './examples/collection--1991.js';
+import suite769 from './examples/collection--1992.js';
+import suite770 from './examples/collection--1993.js';
+import suite771 from './examples/collection--1994.js';
+import suite772 from './examples/collection--1995.js';
+import suite773 from './examples/collection--1996.js';
+import suite774 from './examples/collection--1997.js';
+import suite775 from './examples/collection--1998.js';
+import suite776 from './examples/collection--2000.js';
+import suite777 from './examples/collection--2001.js';
+import suite778 from './examples/collection--2002.js';
+import suite779 from './examples/collection--2003.js';
+import suite780 from './examples/collection--2006.js';
+import suite781 from './examples/collection--2007.js';
+import suite782 from './examples/collection--2008.js';
+import suite783 from './examples/collection--2009.js';
+import suite784 from './examples/collection--2011.js';
+import suite785 from './examples/collection--2012.js';
+import suite786 from './examples/collection--2013.js';
+import suite787 from './examples/collection--2014.js';
+import suite788 from './examples/collection--2015.js';
+import suite789 from './examples/collection--2016.js';
+import suite790 from './examples/collection--2017.js';
+import suite791 from './examples/collection--2018.js';
+import suite792 from './examples/collection--2019.js';
+import suite793 from './examples/collection--2021.js';
+import suite794 from './examples/collection--2022.js';
+import suite795 from './examples/collection--2023.js';
+import suite796 from './examples/collection--2024.js';
+import suite797 from './examples/collection--2025.js';
+import suite798 from './examples/collection--2027.js';
+import suite799 from './examples/collection--2028.js';
+import suite800 from './examples/collection--2029.js';
+import suite801 from './examples/collection--2030.js';
+import suite802 from './examples/collection--2031.js';
+import suite803 from './examples/collection--2032.js';
+import suite804 from './examples/collection--2033.js';
+import suite805 from './examples/collection--2034.js';
+import suite806 from './examples/collection--2035.js';
+import suite807 from './examples/collection--2036.js';
+import suite808 from './examples/collection--2037.js';
+import suite809 from './examples/collection--2038.js';
+import suite810 from './examples/collection--2039.js';
+import suite811 from './examples/collection--2040.js';
+import suite812 from './examples/collection--2042.js';
+import suite813 from './examples/collection--2043.js';
+import suite814 from './examples/collection--2044.js';
+import suite815 from './examples/collection--2045.js';
+import suite816 from './examples/collection--2046.js';
+import suite817 from './examples/collection--2047.js';
+import suite818 from './examples/collection--2048.js';
+import suite819 from './examples/collection--2049.js';
+import suite820 from './examples/collection--2050.js';
+import suite821 from './examples/collection--2052.js';
+import suite822 from './examples/collection--2053.js';
+import suite823 from './examples/collection--2054.js';
+import suite824 from './examples/collection--2055.js';
+import suite825 from './examples/collection--2057.js';
+import suite826 from './examples/collection--2058.js';
+import suite827 from './examples/collection--2059.js';
+import suite828 from './examples/collection--2061.js';
+import suite829 from './examples/collection--2062.js';
+import suite830 from './examples/collection--2063.js';
+import suite831 from './examples/collection--2064.js';
+import suite832 from './examples/collection--2065.js';
+import suite833 from './examples/collection--2067.js';
+import suite834 from './examples/collection--2068.js';
+import suite835 from './examples/collection--2069.js';
+import suite836 from './examples/collection--2070.js';
+import suite837 from './examples/collection--2071.js';
+import suite838 from './examples/collection--2073.js';
+import suite839 from './examples/collection--2074.js';
+import suite840 from './examples/collection--2075.js';
+import suite841 from './examples/collection--2076.js';
+import suite842 from './examples/collection--2077.js';
+import suite843 from './examples/collection--2078.js';
+import suite844 from './examples/collection--2079.js';
+import suite845 from './examples/collection--2080.js';
+import suite846 from './examples/collection--2081.js';
+import suite847 from './examples/collection--2083.js';
+import suite848 from './examples/collection--2085.js';
+import suite849 from './examples/collection--2086.js';
+import suite850 from './examples/collection--2087.js';
+import suite851 from './examples/collection--2088.js';
+import suite852 from './examples/collection--2089.js';
+import suite853 from './examples/collection--2090.js';
+import suite854 from './examples/collection--2091.js';
+import suite855 from './examples/collection--2092.js';
+import suite856 from './examples/collection--2093.js';
+import suite857 from './examples/collection--2094.js';
+import suite858 from './examples/collection--2095.js';
+import suite859 from './examples/collection--2096.js';
+import suite860 from './examples/collection--2097.js';
+import suite861 from './examples/collection--2098.js';
+import suite862 from './examples/collection--2099.js';
+import suite863 from './examples/collection--2100.js';
+import suite864 from './examples/collection--2101.js';
+import suite865 from './examples/collection--2102.js';
+import suite866 from './examples/collection--2103.js';
+import suite867 from './examples/collection--2104.js';
+import suite868 from './examples/collection--2105.js';
+import suite869 from './examples/collection--2106.js';
+import suite870 from './examples/collection--2107.js';
+import suite871 from './examples/collection--2108.js';
+import suite872 from './examples/collection--2109.js';
+import suite873 from './examples/collection--2110.js';
+import suite874 from './examples/collection--2111.js';
+import suite875 from './examples/collection--2114.js';
+import suite876 from './examples/collection--2115.js';
+import suite877 from './examples/collection--2116.js';
+import suite878 from './examples/collection--2119.js';
+import suite879 from './examples/collection--2120.js';
+import suite880 from './examples/collection--2121.js';
+import suite881 from './examples/collection--2122.js';
+import suite882 from './examples/collection--2124.js';
+import suite883 from './examples/collection--2125.js';
+import suite884 from './examples/collection--2126.js';
+import suite885 from './examples/collection--2129.js';
+import suite886 from './examples/collection--2130.js';
+import suite887 from './examples/collection--2131.js';
+import suite888 from './examples/collection--2132.js';
+import suite889 from './examples/collection--2133.js';
+import suite890 from './examples/collection--2134.js';
+import suite891 from './examples/collection--2135.js';
+import suite892 from './examples/collection--2136.js';
+import suite893 from './examples/collection--2137.js';
+import suite894 from './examples/collection--2138.js';
+import suite895 from './examples/collection--2139.js';
+import suite896 from './examples/collection--2140.js';
+import suite897 from './examples/collection--2141.js';
+import suite898 from './examples/collection--2144.js';
+import suite899 from './examples/collection--2145.js';
+import suite900 from './examples/collection--2146.js';
+import suite901 from './examples/collection--2147.js';
+import suite902 from './examples/collection--2148.js';
+import suite903 from './examples/collection--2149.js';
+import suite904 from './examples/collection--2150.js';
+import suite905 from './examples/collection--2151.js';
+import suite906 from './examples/collection--2154.js';
+import suite907 from './examples/collection--2155.js';
+import suite908 from './examples/collection--2156.js';
+import suite909 from './examples/collection--2157.js';
+import suite910 from './examples/collection--2158.js';
+import suite911 from './examples/collection--2160.js';
+import suite912 from './examples/collection--2161.js';
+import suite913 from './examples/collection--2162.js';
+import suite914 from './examples/collection--2163.js';
+import suite915 from './examples/collection--2164.js';
+import suite916 from './examples/collection--2165.js';
+import suite917 from './examples/collection--2166.js';
+import suite918 from './examples/collection--2167.js';
+import suite919 from './examples/collection--2168.js';
+import suite920 from './examples/collection--2169.js';
+import suite921 from './examples/collection--2170.js';
+import suite922 from './examples/collection--2171.js';
+import suite923 from './examples/collection--2172.js';
+import suite924 from './examples/collection--2176.js';
+import suite925 from './examples/collection--2177.js';
+import suite926 from './examples/collection--2178.js';
+import suite927 from './examples/collection--2179.js';
+import suite928 from './examples/collection--2180.js';
+import suite929 from './examples/collection--2181.js';
+import suite930 from './examples/collection--2182.js';
+import suite931 from './examples/collection--2183.js';
+import suite932 from './examples/collection--2184.js';
+import suite933 from './examples/collection--2185.js';
+import suite934 from './examples/collection--2186.js';
+import suite935 from './examples/collection--2187.js';
+import suite936 from './examples/collection--2188.js';
+import suite937 from './examples/collection--2190.js';
+import suite938 from './examples/collection--2191.js';
+import suite939 from './examples/collection--2192.js';
+import suite940 from './examples/collection--2193.js';
+import suite941 from './examples/collection--2194.js';
+import suite942 from './examples/collection--2195.js';
+import suite943 from './examples/collection--2196.js';
+import suite944 from './examples/collection--2197.js';
+import suite945 from './examples/collection--2200.js';
+import suite946 from './examples/collection--2201.js';
+import suite947 from './examples/collection--2202.js';
+import suite948 from './examples/collection--2203.js';
+import suite949 from './examples/collection--2204.js';
+import suite950 from './examples/collection--2206.js';
+import suite951 from './examples/collection--2207.js';
+import suite952 from './examples/collection--2208.js';
+import suite953 from './examples/collection--2209.js';
+import suite954 from './examples/collection--2210.js';
+import suite955 from './examples/collection--2211.js';
+import suite956 from './examples/collection--2212.js';
+import suite957 from './examples/collection--2213.js';
+import suite958 from './examples/collection--2214.js';
+import suite959 from './examples/collection--2215.js';
+import suite960 from './examples/collection--2216.js';
+import suite961 from './examples/collection--2217.js';
+import suite962 from './examples/collection--2218.js';
+import suite963 from './examples/collection--2220.js';
+import suite964 from './examples/collection--2221.js';
+import suite965 from './examples/collection--2222.js';
+import suite966 from './examples/collection--2223.js';
+import suite967 from './examples/collection--2224.js';
+import suite968 from './examples/collection--2225.js';
+import suite969 from './examples/collection--2226.js';
+import suite970 from './examples/collection--2227.js';
+import suite971 from './examples/collection--2229.js';
+import suite972 from './examples/collection--2231.js';
+import suite973 from './examples/collection--2232.js';
+import suite974 from './examples/collection--2233.js';
+import suite975 from './examples/collection--2234.js';
+import suite976 from './examples/collection--2235.js';
+import suite977 from './examples/collection--2236.js';
+import suite978 from './examples/collection--2237.js';
+import suite979 from './examples/collection--2239.js';
+import suite980 from './examples/collection--2240.js';
+import suite981 from './examples/collection--2241.js';
+import suite982 from './examples/collection--2242.js';
+import suite983 from './examples/collection--2243.js';
+import suite984 from './examples/collection--2244.js';
+import suite985 from './examples/collection--2245.js';
+import suite986 from './examples/collection--2281.js';
+import suite987 from './examples/collection--2302.js';
+import suite988 from './examples/collection--2334.js';
+import suite989 from './examples/collection--2348.js';
+import suite990 from './examples/collection--2355.js';
+import suite991 from './examples/collection--2393.js';
+import suite992 from './examples/collection--2395.js';
+import suite993 from './examples/collection--2401.js';
+import suite994 from './examples/collection--2411.js';
+import suite995 from './examples/collection--2414.js';
+import suite996 from './examples/collection--2419.js';
+import suite997 from './examples/collection--2421.js';
+import suite998 from './examples/collection--2444.js';
+import suite999 from './examples/collection--2447.js';
+import suite1000 from './examples/collection--2454.js';
+import suite1001 from './examples/collection--2461.js';
+import suite1002 from './examples/collection--2470.js';
+import suite1003 from './examples/collection--2487.js';
+import suite1004 from './examples/collection--2492.js';
+import suite1005 from './examples/collection--2685.js';
+import suite1006 from './examples/collection--2709.js';
+import suite1007 from './examples/collection--2865.js';
+import suite1008 from './examples/collection--2866.js';
+import suite1009 from './examples/collection--2940.js';
+import suite1010 from './examples/collection--2948.js';
+import suite1011 from './examples/collection--3108.js';
+import suite1012 from './examples/collection--3113.js';
+import suite1013 from './examples/two-sum.js';
+import suite1014 from './examples/add-two-numbers.js';
+import suite1015 from './examples/add-two-numbers-ii.js';
+import suite1016 from './examples/add-binary.js';
+import suite1017 from './examples/longest-substring-without-repeating.js';
+import suite1018 from './examples/palindrome-partitioning.js';
+import suite1019 from './examples/palindrome-partitioning-ii.js';
+import suite1020 from './examples/palindromic-substrings.js';
+import suite1021 from './examples/longest-palindromic-subsequence.js';
+import suite1022 from './examples/palindrome-subsequence.js';
+import suite1023 from './examples/longest-palindrome.js';
+import suite1024 from './examples/valid-palindrome.js';
+import suite1025 from './examples/valid-parentheses.js';
+import suite1026 from './examples/generate-parentheses.js';
+import suite1027 from './examples/letter-combinations.js';
+import suite1028 from './examples/remove-duplicates.js';
+import suite1029 from './examples/remove-element.js';
+import suite1030 from './examples/next-permutation.js';
+import suite1031 from './examples/search-insert-position.js';
+import suite1032 from './examples/binary-search.js';
+import suite1033 from './examples/search-in-rotated-sorted-array.js';
+import suite1034 from './examples/search-in-rotated-sorted-array-ii.js';
+import suite1035 from './examples/find-first-last-position.js';
+import suite1036 from './examples/find-min-rotated-sorted-array.js';
+import suite1037 from './examples/find-minimum-in-rotated-sorted-array-ii.js';
+import suite1038 from './examples/three-sum.js';
+import suite1039 from './examples/three-sum-closest.js';
+import suite1040 from './examples/four-sum.js';
+import suite1041 from './examples/container-with-most-water.js';
+import suite1042 from './examples/trapping-rain-water.js';
+import suite1043 from './examples/largest-rectangle-in-histogram.js';
+import suite1044 from './examples/jump-game.js';
+import suite1045 from './examples/jump-game-ii.js';
+import suite1046 from './examples/permutations.js';
+import suite1047 from './examples/permutations-ii.js';
+import suite1048 from './examples/subsets.js';
+import suite1049 from './examples/combinations.js';
+import suite1050 from './examples/combination-sum.js';
+import suite1051 from './examples/combination-sum-ii.js';
+import suite1052 from './examples/coin-change.js';
+import suite1053 from './examples/coin-change-2.js';
+import suite1054 from './examples/house-robber.js';
+import suite1055 from './examples/house-robber-ii.js';
+import suite1056 from './examples/best-time-buy-sell-stock.js';
+import suite1057 from './examples/best-time-to-buy-and-sell-stock.js';
+import suite1058 from './examples/best-time-buy-sell-stock-iii.js';
+import suite1059 from './examples/best-time-to-buy-and-sell-stock-ii.js';
+import suite1060 from './examples/best-time-to-buy-and-sell-stock-iii.js';
+import suite1061 from './examples/best-time-buy-sell-stock-iv.js';
+import suite1062 from './examples/candy.js';
+import suite1063 from './examples/gas-station.js';
+import suite1064 from './examples/single-number.js';
+import suite1065 from './examples/single-number-ii.js';
+import suite1066 from './examples/longest-consecutive-sequence.js';
+import suite1067 from './examples/longest-increasing-subsequence.js';
+import suite1068 from './examples/contains-duplicate.js';
+import suite1069 from './examples/product-of-array-except-self.js';
+import suite1070 from './examples/move-zeroes.js';
+import suite1071 from './examples/sort-colors.js';
+import suite1072 from './examples/rotate-array.js';
+import suite1073 from './examples/sliding-window-maximum.js';
+import suite1074 from './examples/sliding-window-median.js';
+import suite1075 from './examples/subarray-sum-equals-k.js';
+import suite1076 from './examples/minimum-size-subarray-sum.js';
+import suite1077 from './examples/min-size-subarray-sum.js';
+import suite1078 from './examples/daily-temperatures.js';
+import suite1079 from './examples/132-pattern.js';
+import suite1080 from './examples/first-missing-positive.js';
+import suite1081 from './examples/missing-number.js';
+import suite1082 from './examples/find-duplicate.js';
+import suite1083 from './examples/find-all-duplicates-in-array.js';
+import suite1084 from './examples/find-all-numbers-disappeared-in-an-array.js';
+import suite1085 from './examples/find-all-numbers-disappeared-in-array.js';
+import suite1086 from './examples/find-disappeared-numbers.js';
+import suite1087 from './examples/single-element-in-sorted-array.js';
+import suite1088 from './examples/majority-element.js';
+import suite1089 from './examples/contiguous-array.js';
+import suite1090 from './examples/partition-equal-subset.js';
+import suite1091 from './examples/target-sum.js';
+import suite1092 from './examples/burst-balloons.js';
+import suite1093 from './examples/reverse-pairs.js';
+import suite1094 from './examples/count-of-smaller-after-self.js';
+import suite1095 from './examples/count-of-smaller-numbers-after-self.js';
+import suite1096 from './examples/count-of-range-sum.js';
+import suite1097 from './examples/k-diff-pairs-in-array.js';
+import suite1098 from './examples/arithmetic-slices-ii.js';
+import suite1099 from './examples/arithmetic-slices-ii-subsequence.js';
+import suite1100 from './examples/increasing-subsequences.js';
+import suite1101 from './examples/predict-the-winner.js';
+import suite1102 from './examples/minimum-moves-to-equal-array-elements.js';
+import suite1103 from './examples/minimum-moves-to-equal-array-elements-ii.js';
+import suite1104 from './examples/rotate-function.js';
+import suite1105 from './examples/find-peak-element.js';
+import suite1106 from './examples/kth-largest-element.js';
+import suite1107 from './examples/top-kfrequent.js';
+import suite1108 from './examples/wiggle-sort-ii.js';
+import suite1109 from './examples/continuous-subarray-sum.js';
+import suite1110 from './examples/patching-array.js';
+import suite1111 from './examples/teemo-attacking.js';
+import suite1112 from './examples/find-first-occurrence.js';
+import suite1113 from './examples/longest-common-prefix.js';
+import suite1114 from './examples/group-anagrams.js';
+import suite1115 from './examples/valid-anagram.js';
+import suite1116 from './examples/is-subsequence.js';
+import suite1117 from './examples/edit-distance.js';
+import suite1118 from './examples/lcs.js';
+import suite1119 from './examples/distinct-subsequences.js';
+import suite1120 from './examples/interleaving-string.js';
+import suite1121 from './examples/scramble-string.js';
+import suite1122 from './examples/minimum-window-substring.js';
+import suite1123 from './examples/find-all-anagrams.js';
+import suite1124 from './examples/find-all-anagrams-in-a-string.js';
+import suite1125 from './examples/find-all-anagrams-in-string.js';
+import suite1126 from './examples/permutation-in-string.js';
+import suite1127 from './examples/longest-repeating-char-replace.js';
+import suite1128 from './examples/longest-substring-k-repeating.js';
+import suite1129 from './examples/longest-substring-with-at-least-k-repeating-characters.js';
+import suite1130 from './examples/longest-substring-with-at-most-two-distinct-characters.js';
+import suite1131 from './examples/longest-substring-k-distinct.js';
+import suite1132 from './examples/word-break.js';
+import suite1133 from './examples/word-break-ii.js';
+import suite1134 from './examples/concatenated-words.js';
+import suite1135 from './examples/substring-concatenation.js';
+import suite1136 from './examples/decode-ways.js';
+import suite1137 from './examples/decode-string.js';
+import suite1138 from './examples/basic-calculator.js';
+import suite1139 from './examples/basic-calculator-ii.js';
+import suite1140 from './examples/eval-rpn.js';
+import suite1141 from './examples/expression-tree-from-tokens.js';
+import suite1142 from './examples/longest-valid-parentheses.js';
+import suite1143 from './examples/remove-invalid-parentheses.js';
+import suite1144 from './examples/remove-duplicate-letters.js';
+import suite1145 from './examples/remove-k-digits.js';
+import suite1146 from './examples/additive-number.js';
+import suite1147 from './examples/multiply-strings.js';
+import suite1148 from './examples/compare-version-numbers.js';
+import suite1149 from './examples/complex-number-multiplication.js';
+import suite1150 from './examples/fraction-to-recurring-decimal.js';
+import suite1151 from './examples/repeated-substring-pattern.js';
+import suite1152 from './examples/shortest-palindrome.js';
+import suite1153 from './examples/reverse-words-in-a-string.js';
+import suite1154 from './examples/length-of-last-word.js';
+import suite1155 from './examples/reverse-vowels.js';
+import suite1156 from './examples/reverse-string.js';
+import suite1157 from './examples/reverse-string-ii.js';
+import suite1158 from './examples/string-compression.js';
+import suite1159 from './examples/number-of-segments-in-a-string.js';
+import suite1160 from './examples/license-key-formatting.js';
+import suite1161 from './examples/detect-capital.js';
+import suite1162 from './examples/reconstruct-original-digits.js';
+import suite1163 from './examples/reconstruct-original-digits-from-english.js';
+import suite1164 from './examples/unique-substrings-in-wraparound-string.js';
+import suite1165 from './examples/word-abbreviation.js';
+import suite1166 from './examples/longest-word-dictionary.js';
+import suite1167 from './examples/text-justification.js';
+import suite1168 from './examples/simplify-path.js';
+import suite1169 from './examples/restore-ip-addresses.js';
+import suite1170 from './examples/validate-ip-address.js';
+import suite1171 from './examples/regular-expression-matching.js';
+import suite1172 from './examples/wildcard-matching.js';
+import suite1173 from './examples/ternary-expression-parser.js';
+import suite1174 from './examples/bulls-and-cows.js';
+import suite1175 from './examples/encode-decode-strings.js';
+import suite1176 from './examples/read-n-characters-given-read4.js';
+import suite1177 from './examples/read-n-characters-given-read4-ii.js';
+import suite1178 from './examples/integer-to-roman.js';
+import suite1179 from './examples/roman-to-integer.js';
+import suite1180 from './examples/palindrome-number.js';
+import suite1181 from './examples/reverse-integer.js';
+import suite1182 from './examples/string-to-integer-atoi.js';
+import suite1183 from './examples/sqrtx.js';
+import suite1184 from './examples/powx-n.js';
+import suite1185 from './examples/divide-two-integers.js';
+import suite1186 from './examples/plus-one.js';
+import suite1187 from './examples/plus-one-linked-list.js';
+import suite1188 from './examples/sum-of-two-integers.js';
+import suite1189 from './examples/hamming-distance.js';
+import suite1190 from './examples/total-hamming-distance.js';
+import suite1191 from './examples/number-complement.js';
+import suite1192 from './examples/reverse-bits.js';
+import suite1193 from './examples/number-of1-bits.js';
+import suite1194 from './examples/power-of-two.js';
+import suite1195 from './examples/power-of-three.js';
+import suite1196 from './examples/power-of-four.js';
+import suite1197 from './examples/climbing-stairs.js';
+import suite1198 from './examples/fibonacci-number.js';
+import suite1199 from './examples/counting-bits.js';
+import suite1200 from './examples/pascals-triangle.js';
+import suite1201 from './examples/perfect-squares.js';
+import suite1202 from './examples/ugly-number-ii.js';
+import suite1203 from './examples/super-ugly-number.js';
+import suite1204 from './examples/happy-number.js';
+import suite1205 from './examples/arranging-coins.js';
+import suite1206 from './examples/nth-digit.js';
+import suite1207 from './examples/beautiful-arrangement.js';
+import suite1208 from './examples/nqueens.js';
+import suite1209 from './examples/nqueensii.js';
+import suite1210 from './examples/gray-code.js';
+import suite1211 from './examples/permutation-sequence.js';
+import suite1212 from './examples/construct-the-rectangle.js';
+import suite1213 from './examples/poor-pigs.js';
+import suite1214 from './examples/can-i-win.js';
+import suite1215 from './examples/guess-number.js';
+import suite1216 from './examples/guess-number-higher-or-lower.js';
+import suite1217 from './examples/first-bad-version.js';
+import suite1218 from './examples/guess-number-higher-or-lower-ii.js';
+import suite1219 from './examples/smallest-good-base.js';
+import suite1220 from './examples/magical-string.js';
+import suite1221 from './examples/binary-watch.js';
+import suite1222 from './examples/output-contest-matches.js';
+import suite1223 from './examples/super-power.js';
+import suite1224 from './examples/integer-break.js';
+import suite1225 from './examples/bulb-switcher.js';
+import suite1226 from './examples/count-and-say.js';
+import suite1227 from './examples/excel-sheet-column-title.js';
+import suite1228 from './examples/factorial-trailing-zeroes.js';
+import suite1229 from './examples/number-of-digit-one.js';
+import suite1230 from './examples/bitwise-and-of-numbers-range.js';
+import suite1231 from './examples/binary-tree-level-order.js';
+import suite1232 from './examples/binary-tree-preorder-traversal.js';
+import suite1233 from './examples/binary-tree-postorder-traversal.js';
+import suite1234 from './examples/binary-tree-paths.js';
+import suite1235 from './examples/right-side-view.js';
+import suite1236 from './examples/invert-binary-tree.js';
+import suite1237 from './examples/flatten-binary-tree-to-linked-list.js';
+import suite1238 from './examples/max-depth-binary-tree.js';
+import suite1239 from './examples/diameter-binary-tree.js';
+import suite1240 from './examples/find-leaves-of-binary-tree.js';
+import suite1241 from './examples/binary-tree-tilt.js';
+import suite1242 from './examples/binary-tree-level-order-ii.js';
+import suite1243 from './examples/binary-tree-level-order-traversal-ii.js';
+import suite1244 from './examples/binary-tree-zigzag-level-order-traversal.js';
+import suite1245 from './examples/diameter-of-binary-tree.js';
+import suite1246 from './examples/binary-tree-vertical-order.js';
+import suite1247 from './examples/serialize-deserialize.js';
+import suite1248 from './examples/boundary-of-binary-tree.js';
+import suite1249 from './examples/balanced-binary-tree.js';
+import suite1250 from './examples/minimum-depth-of-binary-tree.js';
+import suite1251 from './examples/symmetric-tree.js';
+import suite1252 from './examples/same-tree.js';
+import suite1253 from './examples/validate-bst.js';
+import suite1254 from './examples/convert-sorted-array-to-binary-search-tree.js';
+import suite1255 from './examples/convert-sorted-list-to-binary-search-tree.js';
+import suite1256 from './examples/construct-binary-tree.js';
+import suite1257 from './examples/construct-binary-tree-from-inorder-and-postorder-traversal.js';
+import suite1258 from './examples/path-sum.js';
+import suite1259 from './examples/path-sum-ii.js';
+import suite1260 from './examples/path-sum-iii.js';
+import suite1261 from './examples/binary-tree-max-path.js';
+import suite1262 from './examples/binary-tree-maximum-path-sum.js';
+import suite1263 from './examples/sum-root-to-leaf-numbers.js';
+import suite1264 from './examples/kth-smallest.js';
+import suite1265 from './examples/lcabinary-tree.js';
+import suite1266 from './examples/lcabst.js';
+import suite1267 from './examples/inorder-successor-bst.js';
+import suite1268 from './examples/delete-node-in-a-bst.js';
+import suite1269 from './examples/bst-to-doubly-linked-list.js';
+import suite1270 from './examples/convert-bst-to-greater-tree.js';
+import suite1271 from './examples/minimum-absolute-difference-in-bst.js';
+import suite1272 from './examples/subtree-of-another-tree.js';
+import suite1273 from './examples/most-frequent-subtree-sum.js';
+import suite1274 from './examples/count-complete-tree-nodes.js';
+import suite1275 from './examples/construct-binary-tree-from-string.js';
+import suite1276 from './examples/binary-tree-longest-consecutive-sequence-ii.js';
+import suite1277 from './examples/binary-tree-upside-down.js';
+import suite1278 from './examples/reverse-linked-list.js';
+import suite1279 from './examples/swap-nodes-in-pairs.js';
+import suite1280 from './examples/odd-even-linked-list.js';
+import suite1281 from './examples/reorder-list.js';
+import suite1282 from './examples/sort-list.js';
+import suite1283 from './examples/insertion-sort-list.js';
+import suite1284 from './examples/palindrome-linked-list.js';
+import suite1285 from './examples/reverse-kgroup.js';
+import suite1286 from './examples/rotate-list.js';
+import suite1287 from './examples/merge-two-sorted-lists.js';
+import suite1288 from './examples/merge-ksorted-lists.js';
+import suite1289 from './examples/merge-sorted-array.js';
+import suite1290 from './examples/median-of-two-sorted-arrays.js';
+import suite1291 from './examples/intersection-of-two-arrays.js';
+import suite1292 from './examples/intersection-of-two-arrays-ii.js';
+import suite1293 from './examples/intersection-two-linked-lists.js';
+import suite1294 from './examples/linked-list-cycle.js';
+import suite1295 from './examples/linked-list-cycle-ii.js';
+import suite1296 from './examples/copy-list-random.js';
+import suite1297 from './examples/copy-list-with-random-pointer.js';
+import suite1298 from './examples/two-sum-ii.js';
+import suite1299 from './examples/spiral-matrix.js';
+import suite1300 from './examples/diagonal-traverse.js';
+import suite1301 from './examples/matrix-iteration-basics.js';
+import suite1302 from './examples/rotate-image.js';
+import suite1303 from './examples/spiral-matrix-ii.js';
+import suite1304 from './examples/set-matrix-zeroes.js';
+import suite1305 from './examples/01-matrix.js';
+import suite1306 from './examples/minimum-path-sum.js';
+import suite1307 from './examples/dungeon-game.js';
+import suite1308 from './examples/longest-increasing-path.js';
+import suite1309 from './examples/search-a-2d-matrix.js';
+import suite1310 from './examples/search2-dmatrix.js';
+import suite1311 from './examples/search-a-2d-matrix-ii.js';
+import suite1312 from './examples/reshape-matrix.js';
+import suite1313 from './examples/sparse-matrix-multiplication.js';
+import suite1314 from './examples/unique-paths.js';
+import suite1315 from './examples/triangle.js';
+import suite1316 from './examples/max-area-of-island.js';
+import suite1317 from './examples/number-of-islands.js';
+import suite1318 from './examples/island-perimeter.js';
+import suite1319 from './examples/rotting-oranges.js';
+import suite1320 from './examples/surrounded-regions.js';
+import suite1321 from './examples/longest-line.js';
+import suite1322 from './examples/lonely-pixel-i.js';
+import suite1323 from './examples/lonely-pixel-ii.js';
+import suite1324 from './examples/minesweeper.js';
+import suite1325 from './examples/trapping-rain-water-ii.js';
+import suite1326 from './examples/the-maze.js';
+import suite1327 from './examples/the-maze-iii.js';
+import suite1328 from './examples/shortest-distance-buildings.js';
+import suite1329 from './examples/shortest-distance-from-all-buildings.js';
+import suite1330 from './examples/robot-room-cleaner.js';
+import suite1331 from './examples/course-schedule.js';
+import suite1332 from './examples/course-schedule-ii.js';
+import suite1333 from './examples/connected-components-undirected.js';
+import suite1334 from './examples/clone-graph.js';
+import suite1335 from './examples/minimum-height-trees.js';
+import suite1336 from './examples/redundant-connection.js';
+import suite1337 from './examples/number-of-islands-ii.js';
+import suite1338 from './examples/evaluate-division.js';
+import suite1339 from './examples/word-ladder.js';
+import suite1340 from './examples/word-ladder-ii.js';
+import suite1341 from './examples/minimum-genetic-mutation.js';
+import suite1342 from './examples/kill-process.js';
+import suite1343 from './examples/sequence-reconstruction.js';
+import suite1344 from './examples/maximum-subarray.js';
+import suite1345 from './examples/max-product-subarray.js';
+import suite1346 from './examples/max-size-subarray-sum-k.js';
+import suite1347 from './examples/maximum-gap.js';
+import suite1348 from './examples/max-consecutive-ones.js';
+import suite1349 from './examples/max-consecutive-ones-iii.js';
+import suite1350 from './examples/next-greater-element-i.js';
+import suite1351 from './examples/next-greater-element-ii.js';
+import suite1352 from './examples/circular-array-loop.js';
+import suite1353 from './examples/assign-cookies.js';
+import suite1354 from './examples/ipo.js';
+import suite1355 from './examples/create-maximum-number.js';
+import suite1356 from './examples/find-k-pairs-with-smallest-sums.js';
+import suite1357 from './examples/4sum-ii.js';
+import suite1358 from './examples/merge-intervals.js';
+import suite1359 from './examples/insert-interval.js';
+import suite1360 from './examples/non-overlapping-intervals.js';
+import suite1361 from './examples/minimum-number-of-arrows-to-burst-balloons.js';
+import suite1362 from './examples/employee-free-time.js';
+import suite1363 from './examples/missing-ranges.js';
+import suite1364 from './examples/russian-doll-envelopes.js';
+import suite1365 from './examples/skyline-problem.js';
+import suite1366 from './examples/max-points-on-aline.js';
+import suite1367 from './examples/number-of-boomerangs.js';
+import suite1368 from './examples/convex-polygon.js';
+import suite1369 from './examples/perfect-rectangle.js';
+import suite1370 from './examples/perfect-rectangles.js';
+import suite1371 from './examples/rectangle-area.js';
+import suite1372 from './examples/sort-transformed-array.js';
+import suite1373 from './examples/minimum-time-difference.js';
+import suite1374 from './examples/one-edit-distance.js';
+import suite1375 from './examples/ones-and-zeroes.js';
+import suite1376 from './examples/task-scheduler.js';
+import suite1377 from './examples/rearrange-string-k-distance-apart.js';
+import suite1378 from './examples/super-washing-machines.js';
+import suite1379 from './examples/sort-characters-by-frequency.js';
+import suite1380 from './examples/max-product-word-lengths.js';
+import suite1381 from './examples/maximum-product-of-word-lengths.js';
+import suite1382 from './examples/min-cost-climbing-stairs.js';
+import suite1383 from './examples/student-attendance-record-ii.js';
+import suite1384 from './examples/split-array-with-equal-sum.js';
+import suite1385 from './examples/split-strings.js';
+import suite1386 from './examples/freedom-trail.js';
+import suite1387 from './examples/count-the-repetitions.js';
+import suite1388 from './examples/brace-expansion-ii.js';
+import suite1389 from './examples/utf-8-validation.js';
+import suite1390 from './examples/word-search.js';
+import suite1391 from './examples/word-search-ii.js';
+import suite1392 from './examples/word-squares.js';
+import suite1393 from './examples/zuma-game.js';
+import suite1394 from './examples/remove-boxes.js';
+import suite1395 from './examples/remove-nth-node.js';
+import suite1396 from './examples/find-median-data-stream.js';
+import suite1397 from './examples/moving-average-data-stream.js';
+import suite1398 from './examples/min-stack.js';
+import suite1399 from './examples/lrucache.js';
+import suite1400 from './examples/lfucache.js';
+import suite1401 from './examples/implement-trie.js';
+import suite1402 from './examples/all-o1-data-structure.js';
+import suite1403 from './examples/randomized-collection.js';
+import suite1404 from './examples/logger-rate-limiter.js';
+import suite1405 from './examples/problem359.js';
+import suite1406 from './examples/design-tic-tac-toe.js';
+import suite1407 from './examples/design-snake-game.js';
+import suite1408 from './examples/random-pick-index.js';
+import suite1409 from './examples/random-pick-with-weight.js';
+import suite1410 from './examples/random-flip-matrix.js';
+import suite1411 from './examples/generate-random-point-in-a-circle.js';
+import suite1412 from './examples/random-point-in-non-overlapping-rectangles.js';
+import suite1413 from './examples/range-sum-query-immutable.js';
+import suite1414 from './examples/range-sum-query-mutable.js';
+import suite1415 from './examples/range-sum-query-2d-immutable.js';
+import suite1416 from './examples/range-sum-query-2d-mutable.js';
+import suite1417 from './examples/n-ary-tree-level-order-traversal.js';
+import suite1418 from './examples/nary-tree-level-order.js';
+import suite1419 from './examples/serialize-deserialize-nary-tree.js';
+import suite1420 from './examples/serialize-and-deserialize-bst.js';
+import suite1421 from './examples/flatten-a-multilevel-doubly-linked-list.js';
+import suite1422 from './examples/flatten-multilevel-dll.js';
+import suite1423 from './examples/encode-nary-to-binary-tree.js';
+import suite1424 from './examples/game-on-growing-tree.js';
+import suite1425 from './examples/encode-and-decode-tinyurl.js';
+import suite1426 from './examples/smallest-rectangle-black-pixels.js';
+import suite1427 from './examples/optimal-account-balancing.js';
+import suite1428 from './examples/largest-palindrome-product.js';
+import suite1429 from './examples/verbal-arithmetic-puzzle.js';
+import suite1430 from './examples/reconstruct-itinerary.js';
+import suite1431 from './examples/largest-bst-subtree.js';
+import suite1432 from './examples/self-crossing.js';
+import suite1433 from './examples/house-robber-iii.js';
+import suite1434 from './examples/nested-list-weight-sum.js';
+import suite1435 from './examples/flatten-nested-list-iterator.js';
+import suite1436 from './examples/verify-preorder-serialization-tree.js';
+import suite1437 from './examples/increasing-triplet-subsequence.js';
+import suite1438 from './examples/palindrome-pairs.js';
+import suite1439 from './examples/generalized-abbreviation.js';
+import suite1440 from './examples/find-right-interval.js';
+import suite1441 from './examples/kth-smallest-lexicographical-order.js';
+import suite1442 from './examples/encode-string-with-shortest-length.js';
+import suite1443 from './examples/matchsticks-to-square.js';
+import suite1444 from './examples/heaters.js';
+import suite1445 from './examples/find-permutation.js';
+import suite1446 from './examples/two-sum-iii.js';
+import suite1447 from './examples/largest-number.js';
+import suite1448 from './examples/reverse-words-in-string-ii.js';
+import suite1449 from './examples/repeated-dna-sequences.js';
+import suite1450 from './examples/implement-stack-using-queues.js';
+import suite1451 from './examples/implement-queue-using-stacks.js';
+import suite1452 from './examples/summary-ranges.js';
+import suite1453 from './examples/majority-element-ii.js';
+import suite1454 from './examples/delete-node-in-a-linked-list.js';
+import suite1455 from './examples/different-ways-to-add-parentheses.js';
+import suite1456 from './examples/shortest-word-distance.js';
+import suite1457 from './examples/shortest-word-distance-ii.js';
+import suite1458 from './examples/shortest-word-distance-iii.js';
+import suite1459 from './examples/strobogrammatic-number.js';
+import suite1460 from './examples/strobogrammatic-number-ii.js';
+import suite1461 from './examples/strobogrammatic-number-iii.js';
+import suite1462 from './examples/group-shifted-strings.js';
+import suite1463 from './examples/count-univalue-subtrees.js';
+import suite1464 from './examples/zigzag-conversion.js';
+import suite1465 from './examples/implement-rand10.js';
+import suite1466 from './examples/keyboard-row.js';
+import suite1467 from './examples/find-mode-bst.js';
+import suite1468 from './examples/base-7.js';
+import suite1469 from './examples/distribute-candies-to-people.js';
+import suite1470 from './examples/find-bottom-left-tree-value.js';
+import suite1471 from './examples/find-largest-value-each-row.js';
+import suite1472 from './examples/longest-uncommon-subsequence-i.js';
+import suite1473 from './examples/longest-uncommon-subsequence-ii.js';
+import suite1474 from './examples/student-attendance.js';
+import suite1475 from './examples/optimal-division.js';
+import suite1476 from './examples/brick-wall.js';
+import suite1477 from './examples/next-greater-iii.js';
+import suite1478 from './examples/reverse-words-iii.js';
+import suite1479 from './examples/quad-tree.js';
+import suite1480 from './examples/max-depth-nary-tree.js';
+import suite1481 from './examples/array-partition.js';
+import suite1482 from './examples/find-the-celebrity-564.js';
+import suite1483 from './examples/array-nesting.js';
+import suite1484 from './examples/max-distance.js';
+import suite1485 from './examples/shortest-distance-ii.js';
+import suite1486 from './examples/distribute-candies.js';
+import suite1487 from './examples/out-of-boundary.js';
+import suite1488 from './examples/shortest-unsorted.js';
+import suite1489 from './examples/delete-operation.js';
+import suite1490 from './examples/erect-fence.js';
+import suite1491 from './examples/maximal-rectangle.js';
+import suite1492 from './examples/second-highest-salary.js';
+import suite1493 from './examples/nth-highest-salary.js';
+import suite1494 from './examples/employees-earning-more.js';
+import suite1495 from './examples/department-highest-salary.js';
+import suite1496 from './examples/department-top-three-salaries.js';
+import suite1497 from './examples/managers-with-at-least-5-direct-reports.js';
+import suite1498 from './examples/median-employee-salary.js';
+import suite1499 from './examples/rank-scores.js';
+import suite1500 from './examples/consecutive-numbers.js';
+import suite1501 from './examples/duplicate-emails.js';
+import suite1502 from './examples/delete-duplicate-emails.js';
+import suite1503 from './examples/combine-two-tables.js';
+import suite1504 from './examples/customers-never-order.js';
+import suite1505 from './examples/rising-temperature.js';
+import suite1506 from './examples/word-frequency.js';
+import suite1507 from './examples/valid-phone-numbers.js';
+import suite1508 from './examples/transpose-file.js';
+import suite1509 from './examples/tenth-line.js';
+import suite1510 from './examples/game-play-analysis-i.js';
+import suite1511 from './examples/game-play-analysis-ii.js';
+import suite1512 from './examples/game-play-analysis.js';
+import suite1513 from './examples/design-log-storage-system.js';
+import suite1514 from './examples/find-customer-referee.js';
+import suite1515 from './examples/investments-2016.js';
+import suite1516 from './examples/cumulative-salary.js';
+import suite1517 from './examples/count-students.js';
+import suite1518 from './examples/largest-orders.js';
+import suite1519 from './examples/highest-answer-rate.js';
+import suite1520 from './examples/sudoku-solver.js';
+import suite1521 from './examples/local--12.js';
+import suite1522 from './examples/local--24.js';
+import suite1523 from './examples/local--29.js';
+import suite1524 from './examples/local--43.js';
+import suite1525 from './examples/local--68.js';
+import suite1526 from './examples/local--111.js';
+import suite1527 from './examples/local--142.js';
+import suite1528 from './examples/local--202.js';
+import suite1529 from './examples/local--207.js';
+import suite1530 from './examples/local--212.js';
+import suite1531 from './examples/local--267.js';
+import suite1532 from './examples/local--320.js';
+import suite1533 from './examples/local--331.js';
+import suite1534 from './examples/local--332.js';
+import suite1535 from './examples/local--333.js';
+import suite1536 from './examples/local--335.js';
+import suite1537 from './examples/local--337.js';
+import suite1538 from './examples/local--339.js';
+import suite1539 from './examples/local--341.js';
+import suite1540 from './examples/local--342.js';
+import suite1541 from './examples/local--343.js';
+import suite1542 from './examples/local--409.js';
+import suite1543 from './examples/local--505.js';
+import suite1544 from './examples/local--121.js';
+import suite1545 from './examples/local--128.js';
+import suite1546 from './examples/local--135.js';
+import suite1547 from './examples/local--136.js';
+import suite1548 from './examples/local--131.js';
+import suite1549 from './examples/local--134.js';
+import suite1550 from './examples/local--138.js';
+import suite1551 from './examples/local--173.js';
+import suite1552 from './examples/local--218.js';
+import suite1553 from './examples/local--220.js';
+import suite1554 from './examples/local--345.js';
+import suite1555 from './examples/local--364.js';
+import suite1556 from './examples/local--374.js';
+import suite1557 from './examples/local--382.js';
+import suite1558 from './examples/local--384.js';
+import suite1559 from './examples/local--404.js';
+import suite1560 from './examples/local--414.js';
+import suite1561 from './examples/local--415.js';
+import suite1562 from './examples/local--421.js';
+import suite1563 from './examples/local--82.js';
+import suite1564 from './examples/local--83.js';
+import suite1565 from './examples/local--85.js';
+import suite1566 from './examples/local--94.js';
+import suite1567 from './examples/local--90.js';
+import suite1568 from './examples/local--5.js';
+import suite1569 from './examples/local--171.js';
+import suite1570 from './examples/local--203.js';
+import suite1571 from './examples/local--204.js';
+import suite1572 from './examples/local--205.js';
+import suite1573 from './examples/local--208.js';
+import suite1574 from './examples/local--211.js';
+import suite1575 from './examples/local--216.js';
+import suite1576 from './examples/local--217.js';
+import suite1577 from './examples/local--219.js';
+import suite1578 from './examples/local--221.js';
+import suite1579 from './examples/local--309.js';
+import suite1580 from './examples/local--351.js';
+import suite1581 from './examples/local--353.js';
+import suite1582 from './examples/local--355.js';
+import suite1583 from './examples/local--356.js';
+import suite1584 from './examples/local--357.js';
+import suite1585 from './examples/local--361.js';
+import suite1586 from './examples/local--362.js';
+import suite1587 from './examples/local--363.js';
+import suite1588 from './examples/local--365.js';
+import suite1589 from './examples/local--367.js';
+import suite1590 from './examples/local--368.js';
+import suite1591 from './examples/local--370.js';
+import suite1592 from './examples/local--376.js';
+import suite1593 from './examples/local--377.js';
+import suite1594 from './examples/local--378.js';
+import suite1595 from './examples/local--379.js';
+import suite1596 from './examples/local--380.js';
+import suite1597 from './examples/local--381.js';
+import suite1598 from './examples/local--383.js';
+import suite1599 from './examples/local--385.js';
+import suite1600 from './examples/local--386.js';
+import suite1601 from './examples/local--387.js';
+import suite1602 from './examples/local--388.js';
+import suite1603 from './examples/local--389.js';
+import suite1604 from './examples/local--390.js';
+import suite1605 from './examples/local--397.js';
+import suite1606 from './examples/local--403.js';
+import suite1607 from './examples/local--405.js';
+import suite1608 from './examples/local--406.js';
+import suite1609 from './examples/local--408.js';
+import suite1610 from './examples/local--410.js';
+import suite1611 from './examples/local--411.js';
+import suite1612 from './examples/local--412.js';
+import suite1613 from './examples/local--413.js';
+import suite1614 from './examples/local--417.js';
+import suite1615 from './examples/local--418.js';
+import suite1616 from './examples/local--419.js';
+import suite1617 from './examples/local--420.js';
+import suite1618 from './examples/local--422.js';
+import suite1619 from './examples/squirrel-distribution.js';
+import suite1620 from './examples/local--506.js';
+import suite1621 from './examples/local--507.js';
+import suite1622 from './examples/local--547.js';
+import suite1623 from './examples/local--63.js';
+import suite1624 from './examples/local--65.js';
+import suite1625 from './examples/local--695.js';
+import suite1626 from './examples/local--721.js';
+import suite1627 from './examples/local--743.js';
+import suite1628 from './examples/local--778.js';
+import suite1629 from './examples/local--80.js';
+import suite1630 from './examples/local--86.js';
+import suite1631 from './examples/local--875.js';
+import suite1632 from './examples/local--92.js';
+import suite1633 from './examples/local--95.js';
+import suite1634 from './examples/local--96.js';
+import suite1635 from './examples/local--99.js';
+import suite1636 from './examples/local--3894.js';
+import suite1637 from './examples/local--3895.js';
+import suite1638 from './examples/local--3896.js';
+import suite1639 from './examples/local--3899.js';
+import suite1640 from './examples/local--3905.js';
+import suite1641 from './examples/local--3908.js';
+import suite1642 from './examples/local--3909.js';
+import suite1643 from './examples/local--3910.js';
+import suite1644 from './examples/local--3912.js';
+import suite1645 from './examples/local--3913.js';
+import suite1646 from './examples/local--3914.js';
+import suite1647 from './examples/local--3915.js';
+import suite1648 from './examples/local--stableIndex.js';
+import suite1649 from './examples/next-pointers-perfect.js';
+import suite1650 from './examples/next-pointers-sparse.js';
+import suite1651 from './examples/pascal-triangle.js';
+import suite1652 from './examples/pascal-row.js';
+import suite1653 from './examples/valid-sudoku.js';
+export const AUTHORED_EXAMPLES = {
+  "251": suite0,
+  "252": suite1,
+  "253": suite2,
+  "254": suite3,
+  "255": suite4,
+  "256": suite5,
+  "258": suite6,
+  "259": suite7,
+  "260": suite8,
+  "261": suite9,
+  "262": suite10,
+  "263": suite11,
+  "264": suite12,
+  "265": suite13,
+  "266": suite14,
+  "267": suite15,
+  "269": suite16,
+  "270": suite17,
+  "272": suite18,
+  "273": suite19,
+  "274": suite20,
+  "275": suite21,
+  "276": suite22,
+  "277": suite23,
+  "280": suite24,
+  "281": suite25,
+  "282": suite26,
+  "284": suite27,
+  "285": suite28,
+  "286": suite29,
+  "288": suite30,
+  "289": suite31,
+  "290": suite32,
+  "291": suite33,
+  "292": suite34,
+  "293": suite35,
+  "294": suite36,
+  "296": suite37,
+  "298": suite38,
+  "300": suite39,
+  "sequence:605": suite40,
+  "sequence:611": suite41,
+  "sequence:628": suite42,
+  "sequence:633": suite43,
+  "sequence:643": suite44,
+  "sequence:645": suite45,
+  "sequence:674": suite46,
+  "sequence:697": suite47,
+  "sequence:724": suite48,
+  "sequence:747": suite49,
+  "sequence:766": suite50,
+  "sequence:832": suite51,
+  "sequence:867": suite52,
+  "sequence:896": suite53,
+  "sequence:905": suite54,
+  "sequence:922": suite55,
+  "sequence:977": suite56,
+  "sequence:1047": suite57,
+  "sequence:1207": suite58,
+  "sequence:1295": suite59,
+  "sequence:1431": suite60,
+  "sequence:1480": suite61,
+  "sequence:1512": suite62,
+  "sequence:1672": suite63,
+  "scan:594": suite64,
+  "scan:598": suite65,
+  "scan:599": suite66,
+  "scan:646": suite67,
+  "scan:657": suite68,
+  "scan:658": suite69,
+  "scan:661": suite70,
+  "scan:665": suite71,
+  "scan:670": suite72,
+  "scan:673": suite73,
+  "scan:678": suite74,
+  "scan:680": suite75,
+  "scan:682": suite76,
+  "scan:686": suite77,
+  "scan:692": suite78,
+  "scan:693": suite79,
+  "scan:696": suite80,
+  "scan:709": suite81,
+  "scan:713": suite82,
+  "scan:714": suite83,
+  "scan:717": suite84,
+  "scan:718": suite85,
+  "scan:728": suite86,
+  "scan:733": suite87,
+  "scan:735": suite88,
+  "scan:738": suite89,
+  "scan:740": suite90,
+  "scan:744": suite91,
+  "scan:771": suite92,
+  "scan:796": suite93,
+  "scan:804": suite94,
+  "scan:806": suite95,
+  "scan:821": suite96,
+  "scan:830": suite97,
+  "scan:836": suite98,
+  "scan:844": suite99,
+  "scan:849": suite100,
+  "scan:852": suite101,
+  "scan:856": suite102,
+  "scan:859": suite103,
+  "tree:606": suite104,
+  "tree:617": suite105,
+  "tree:623": suite106,
+  "tree:637": suite107,
+  "tree:653": suite108,
+  "tree:654": suite109,
+  "tree:669": suite110,
+  "tree:671": suite111,
+  "tree:687": suite112,
+  "tree:700": suite113,
+  "tree:701": suite114,
+  "tree:872": suite115,
+  "tree:897": suite116,
+  "tree:938": suite117,
+  "tree:965": suite118,
+  "collection:82": suite119,
+  "collection:127": suite120,
+  "collection:255": suite121,
+  "collection:351": suite122,
+  "collection:381": suite123,
+  "collection:426": suite124,
+  "collection:427": suite125,
+  "collection:432": suite126,
+  "collection:487": suite127,
+  "collection:491": suite128,
+  "collection:505": suite129,
+  "collection:510": suite130,
+  "collection:534": suite131,
+  "collection:550": suite132,
+  "collection:558": suite133,
+  "collection:564": suite134,
+  "collection:568": suite135,
+  "collection:571": suite136,
+  "collection:573": suite137,
+  "collection:574": suite138,
+  "collection:577": suite139,
+  "collection:586": suite140,
+  "collection:588": suite141,
+  "collection:589": suite142,
+  "collection:590": suite143,
+  "collection:591": suite144,
+  "collection:592": suite145,
+  "collection:593": suite146,
+  "collection:595": suite147,
+  "collection:596": suite148,
+  "collection:597": suite149,
+  "collection:600": suite150,
+  "collection:601": suite151,
+  "collection:602": suite152,
+  "collection:603": suite153,
+  "collection:604": suite154,
+  "collection:607": suite155,
+  "collection:608": suite156,
+  "collection:609": suite157,
+  "collection:610": suite158,
+  "collection:612": suite159,
+  "collection:613": suite160,
+  "collection:614": suite161,
+  "collection:615": suite162,
+  "collection:616": suite163,
+  "collection:618": suite164,
+  "collection:619": suite165,
+  "collection:620": suite166,
+  "collection:625": suite167,
+  "collection:626": suite168,
+  "collection:627": suite169,
+  "collection:629": suite170,
+  "collection:634": suite171,
+  "collection:638": suite172,
+  "collection:639": suite173,
+  "collection:648": suite174,
+  "collection:650": suite175,
+  "collection:651": suite176,
+  "collection:664": suite177,
+  "collection:677": suite178,
+  "collection:685": suite179,
+  "collection:688": suite180,
+  "collection:712": suite181,
+  "collection:720": suite182,
+  "collection:727": suite183,
+  "collection:737": suite184,
+  "collection:741": suite185,
+  "collection:750": suite186,
+  "collection:764": suite187,
+  "collection:765": suite188,
+  "collection:790": suite189,
+  "collection:795": suite190,
+  "collection:799": suite191,
+  "collection:801": suite192,
+  "collection:808": suite193,
+  "collection:813": suite194,
+  "collection:820": suite195,
+  "collection:823": suite196,
+  "collection:827": suite197,
+  "collection:837": suite198,
+  "collection:839": suite199,
+  "collection:860": suite200,
+  "collection:861": suite201,
+  "collection:862": suite202,
+  "collection:868": suite203,
+  "collection:869": suite204,
+  "collection:879": suite205,
+  "collection:881": suite206,
+  "collection:883": suite207,
+  "collection:884": suite208,
+  "collection:887": suite209,
+  "collection:888": suite210,
+  "collection:890": suite211,
+  "collection:892": suite212,
+  "collection:893": suite213,
+  "collection:898": suite214,
+  "collection:899": suite215,
+  "collection:901": suite216,
+  "collection:904": suite217,
+  "collection:907": suite218,
+  "collection:908": suite219,
+  "collection:914": suite220,
+  "collection:915": suite221,
+  "collection:917": suite222,
+  "collection:918": suite223,
+  "collection:920": suite224,
+  "collection:921": suite225,
+  "collection:924": suite226,
+  "collection:925": suite227,
+  "collection:926": suite228,
+  "collection:928": suite229,
+  "collection:929": suite230,
+  "collection:930": suite231,
+  "collection:931": suite232,
+  "collection:933": suite233,
+  "collection:935": suite234,
+  "collection:940": suite235,
+  "collection:941": suite236,
+  "collection:942": suite237,
+  "collection:944": suite238,
+  "collection:945": suite239,
+  "collection:946": suite240,
+  "collection:947": suite241,
+  "collection:948": suite242,
+  "collection:950": suite243,
+  "collection:952": suite244,
+  "collection:953": suite245,
+  "collection:956": suite246,
+  "collection:959": suite247,
+  "collection:961": suite248,
+  "collection:962": suite249,
+  "collection:970": suite250,
+  "collection:973": suite251,
+  "collection:974": suite252,
+  "collection:976": suite253,
+  "collection:978": suite254,
+  "collection:980": suite255,
+  "collection:983": suite256,
+  "collection:985": suite257,
+  "collection:989": suite258,
+  "collection:990": suite259,
+  "collection:991": suite260,
+  "collection:992": suite261,
+  "collection:997": suite262,
+  "collection:999": suite263,
+  "collection:1000": suite264,
+  "collection:1002": suite265,
+  "collection:1005": suite266,
+  "collection:1006": suite267,
+  "collection:1007": suite268,
+  "collection:1009": suite269,
+  "collection:1010": suite270,
+  "collection:1011": suite271,
+  "collection:1013": suite272,
+  "collection:1014": suite273,
+  "collection:1015": suite274,
+  "collection:1017": suite275,
+  "collection:1018": suite276,
+  "collection:1021": suite277,
+  "collection:1023": suite278,
+  "collection:1025": suite279,
+  "collection:1027": suite280,
+  "collection:1029": suite281,
+  "collection:1030": suite282,
+  "collection:1032": suite283,
+  "collection:1035": suite284,
+  "collection:1037": suite285,
+  "collection:1041": suite286,
+  "collection:1043": suite287,
+  "collection:1046": suite288,
+  "collection:1049": suite289,
+  "collection:1051": suite290,
+  "collection:1052": suite291,
+  "collection:1053": suite292,
+  "collection:1063": suite293,
+  "collection:1064": suite294,
+  "collection:1071": suite295,
+  "collection:1078": suite296,
+  "collection:1085": suite297,
+  "collection:1089": suite298,
+  "collection:1094": suite299,
+  "collection:1099": suite300,
+  "collection:1100": suite301,
+  "collection:1101": suite302,
+  "collection:1105": suite303,
+  "collection:1108": suite304,
+  "collection:1109": suite305,
+  "collection:1111": suite306,
+  "collection:1118": suite307,
+  "collection:1119": suite308,
+  "collection:1122": suite309,
+  "collection:1124": suite310,
+  "collection:1128": suite311,
+  "collection:1130": suite312,
+  "collection:1131": suite313,
+  "collection:1133": suite314,
+  "collection:1134": suite315,
+  "collection:1135": suite316,
+  "collection:1136": suite317,
+  "collection:1137": suite318,
+  "collection:1139": suite319,
+  "collection:1140": suite320,
+  "collection:1144": suite321,
+  "collection:1150": suite322,
+  "collection:1151": suite323,
+  "collection:1154": suite324,
+  "collection:1155": suite325,
+  "collection:1156": suite326,
+  "collection:1160": suite327,
+  "collection:1162": suite328,
+  "collection:1165": suite329,
+  "collection:1167": suite330,
+  "collection:1168": suite331,
+  "collection:1170": suite332,
+  "collection:1175": suite333,
+  "collection:1176": suite334,
+  "collection:1177": suite335,
+  "collection:1180": suite336,
+  "collection:1182": suite337,
+  "collection:1184": suite338,
+  "collection:1186": suite339,
+  "collection:1189": suite340,
+  "collection:1190": suite341,
+  "collection:1191": suite342,
+  "collection:1196": suite343,
+  "collection:1200": suite344,
+  "collection:1202": suite345,
+  "collection:1208": suite346,
+  "collection:1209": suite347,
+  "collection:1213": suite348,
+  "collection:1216": suite349,
+  "collection:1217": suite350,
+  "collection:1218": suite351,
+  "collection:1219": suite352,
+  "collection:1220": suite353,
+  "collection:1221": suite354,
+  "collection:1222": suite355,
+  "collection:1223": suite356,
+  "collection:1227": suite357,
+  "collection:1232": suite358,
+  "collection:1234": suite359,
+  "collection:1239": suite360,
+  "collection:1247": suite361,
+  "collection:1248": suite362,
+  "collection:1249": suite363,
+  "collection:1250": suite364,
+  "collection:1252": suite365,
+  "collection:1254": suite366,
+  "collection:1260": suite367,
+  "collection:1262": suite368,
+  "collection:1266": suite369,
+  "collection:1268": suite370,
+  "collection:1275": suite371,
+  "collection:1276": suite372,
+  "collection:1277": suite373,
+  "collection:1281": suite374,
+  "collection:1282": suite375,
+  "collection:1287": suite376,
+  "collection:1288": suite377,
+  "collection:1291": suite378,
+  "collection:1292": suite379,
+  "collection:1296": suite380,
+  "collection:1297": suite381,
+  "collection:1299": suite382,
+  "collection:1300": suite383,
+  "collection:1304": suite384,
+  "collection:1306": suite385,
+  "collection:1309": suite386,
+  "collection:1310": suite387,
+  "collection:1313": suite388,
+  "collection:1314": suite389,
+  "collection:1317": suite390,
+  "collection:1318": suite391,
+  "collection:1319": suite392,
+  "collection:1323": suite393,
+  "collection:1328": suite394,
+  "collection:1331": suite395,
+  "collection:1332": suite396,
+  "collection:1335": suite397,
+  "collection:1337": suite398,
+  "collection:1342": suite399,
+  "collection:1343": suite400,
+  "collection:1344": suite401,
+  "collection:1346": suite402,
+  "collection:1347": suite403,
+  "collection:1351": suite404,
+  "collection:1356": suite405,
+  "collection:1358": suite406,
+  "collection:1360": suite407,
+  "collection:1365": suite408,
+  "collection:1370": suite409,
+  "collection:1371": suite410,
+  "collection:1374": suite411,
+  "collection:1380": suite412,
+  "collection:1385": suite413,
+  "collection:1388": suite414,
+  "collection:1389": suite415,
+  "collection:1394": suite416,
+  "collection:1399": suite417,
+  "collection:1400": suite418,
+  "collection:1401": suite419,
+  "collection:1402": suite420,
+  "collection:1403": suite421,
+  "collection:1404": suite422,
+  "collection:1405": suite423,
+  "collection:1406": suite424,
+  "collection:1408": suite425,
+  "collection:1409": suite426,
+  "collection:1410": suite427,
+  "collection:1411": suite428,
+  "collection:1413": suite429,
+  "collection:1414": suite430,
+  "collection:1415": suite431,
+  "collection:1417": suite432,
+  "collection:1418": suite433,
+  "collection:1419": suite434,
+  "collection:1422": suite435,
+  "collection:1423": suite436,
+  "collection:1424": suite437,
+  "collection:1425": suite438,
+  "collection:1426": suite439,
+  "collection:1427": suite440,
+  "collection:1433": suite441,
+  "collection:1436": suite442,
+  "collection:1437": suite443,
+  "collection:1438": suite444,
+  "collection:1441": suite445,
+  "collection:1442": suite446,
+  "collection:1444": suite447,
+  "collection:1446": suite448,
+  "collection:1447": suite449,
+  "collection:1450": suite450,
+  "collection:1451": suite451,
+  "collection:1455": suite452,
+  "collection:1456": suite453,
+  "collection:1458": suite454,
+  "collection:1460": suite455,
+  "collection:1461": suite456,
+  "collection:1463": suite457,
+  "collection:1464": suite458,
+  "collection:1465": suite459,
+  "collection:1470": suite460,
+  "collection:1471": suite461,
+  "collection:1475": suite462,
+  "collection:1481": suite463,
+  "collection:1482": suite464,
+  "collection:1486": suite465,
+  "collection:1487": suite466,
+  "collection:1491": suite467,
+  "collection:1492": suite468,
+  "collection:1493": suite469,
+  "collection:1496": suite470,
+  "collection:1497": suite471,
+  "collection:1498": suite472,
+  "collection:1502": suite473,
+  "collection:1503": suite474,
+  "collection:1504": suite475,
+  "collection:1508": suite476,
+  "collection:1509": suite477,
+  "collection:1510": suite478,
+  "collection:1513": suite479,
+  "collection:1518": suite480,
+  "collection:1523": suite481,
+  "collection:1524": suite482,
+  "collection:1525": suite483,
+  "collection:1526": suite484,
+  "collection:1528": suite485,
+  "collection:1529": suite486,
+  "collection:1534": suite487,
+  "collection:1535": suite488,
+  "collection:1539": suite489,
+  "collection:1540": suite490,
+  "collection:1542": suite491,
+  "collection:1544": suite492,
+  "collection:1545": suite493,
+  "collection:1546": suite494,
+  "collection:1550": suite495,
+  "collection:1551": suite496,
+  "collection:1552": suite497,
+  "collection:1556": suite498,
+  "collection:1557": suite499,
+  "collection:1558": suite500,
+  "collection:1560": suite501,
+  "collection:1561": suite502,
+  "collection:1566": suite503,
+  "collection:1567": suite504,
+  "collection:1570": suite505,
+  "collection:1572": suite506,
+  "collection:1574": suite507,
+  "collection:1576": suite508,
+  "collection:1578": suite509,
+  "collection:1582": suite510,
+  "collection:1584": suite511,
+  "collection:1588": suite512,
+  "collection:1590": suite513,
+  "collection:1592": suite514,
+  "collection:1598": suite515,
+  "collection:1603": suite516,
+  "collection:1605": suite517,
+  "collection:1608": suite518,
+  "collection:1614": suite519,
+  "collection:1615": suite520,
+  "collection:1616": suite521,
+  "collection:1619": suite522,
+  "collection:1624": suite523,
+  "collection:1626": suite524,
+  "collection:1627": suite525,
+  "collection:1629": suite526,
+  "collection:1630": suite527,
+  "collection:1636": suite528,
+  "collection:1637": suite529,
+  "collection:1638": suite530,
+  "collection:1640": suite531,
+  "collection:1641": suite532,
+  "collection:1642": suite533,
+  "collection:1646": suite534,
+  "collection:1647": suite535,
+  "collection:1652": suite536,
+  "collection:1653": suite537,
+  "collection:1656": suite538,
+  "collection:1657": suite539,
+  "collection:1658": suite540,
+  "collection:1662": suite541,
+  "collection:1663": suite542,
+  "collection:1664": suite543,
+  "collection:1667": suite544,
+  "collection:1668": suite545,
+  "collection:1673": suite546,
+  "collection:1678": suite547,
+  "collection:1679": suite548,
+  "collection:1680": suite549,
+  "collection:1683": suite550,
+  "collection:1684": suite551,
+  "collection:1685": suite552,
+  "collection:1686": suite553,
+  "collection:1688": suite554,
+  "collection:1689": suite555,
+  "collection:1690": suite556,
+  "collection:1691": suite557,
+  "collection:1693": suite558,
+  "collection:1694": suite559,
+  "collection:1695": suite560,
+  "collection:1696": suite561,
+  "collection:1697": suite562,
+  "collection:1698": suite563,
+  "collection:1700": suite564,
+  "collection:1701": suite565,
+  "collection:1702": suite566,
+  "collection:1704": suite567,
+  "collection:1705": suite568,
+  "collection:1706": suite569,
+  "collection:1708": suite570,
+  "collection:1710": suite571,
+  "collection:1711": suite572,
+  "collection:1716": suite573,
+  "collection:1717": suite574,
+  "collection:1720": suite575,
+  "collection:1722": suite576,
+  "collection:1725": suite577,
+  "collection:1726": suite578,
+  "collection:1727": suite579,
+  "collection:1729": suite580,
+  "collection:1730": suite581,
+  "collection:1732": suite582,
+  "collection:1734": suite583,
+  "collection:1736": suite584,
+  "collection:1738": suite585,
+  "collection:1741": suite586,
+  "collection:1742": suite587,
+  "collection:1743": suite588,
+  "collection:1744": suite589,
+  "collection:1746": suite590,
+  "collection:1748": suite591,
+  "collection:1749": suite592,
+  "collection:1750": suite593,
+  "collection:1752": suite594,
+  "collection:1753": suite595,
+  "collection:1754": suite596,
+  "collection:1756": suite597,
+  "collection:1757": suite598,
+  "collection:1758": suite599,
+  "collection:1759": suite600,
+  "collection:1760": suite601,
+  "collection:1762": suite602,
+  "collection:1763": suite603,
+  "collection:1764": suite604,
+  "collection:1765": suite605,
+  "collection:1768": suite606,
+  "collection:1769": suite607,
+  "collection:1770": suite608,
+  "collection:1773": suite609,
+  "collection:1774": suite610,
+  "collection:1775": suite611,
+  "collection:1776": suite612,
+  "collection:1779": suite613,
+  "collection:1780": suite614,
+  "collection:1781": suite615,
+  "collection:1784": suite616,
+  "collection:1785": suite617,
+  "collection:1790": suite618,
+  "collection:1791": suite619,
+  "collection:1792": suite620,
+  "collection:1793": suite621,
+  "collection:1796": suite622,
+  "collection:1797": suite623,
+  "collection:1798": suite624,
+  "collection:1799": suite625,
+  "collection:1800": suite626,
+  "collection:1802": suite627,
+  "collection:1804": suite628,
+  "collection:1805": suite629,
+  "collection:1806": suite630,
+  "collection:1807": suite631,
+  "collection:1812": suite632,
+  "collection:1813": suite633,
+  "collection:1814": suite634,
+  "collection:1816": suite635,
+  "collection:1817": suite636,
+  "collection:1818": suite637,
+  "collection:1820": suite638,
+  "collection:1821": suite639,
+  "collection:1822": suite640,
+  "collection:1823": suite641,
+  "collection:1824": suite642,
+  "collection:1827": suite643,
+  "collection:1828": suite644,
+  "collection:1829": suite645,
+  "collection:1832": suite646,
+  "collection:1833": suite647,
+  "collection:1834": suite648,
+  "collection:1835": suite649,
+  "collection:1837": suite650,
+  "collection:1838": suite651,
+  "collection:1839": suite652,
+  "collection:1844": suite653,
+  "collection:1845": suite654,
+  "collection:1846": suite655,
+  "collection:1848": suite656,
+  "collection:1849": suite657,
+  "collection:1851": suite658,
+  "collection:1852": suite659,
+  "collection:1854": suite660,
+  "collection:1855": suite661,
+  "collection:1856": suite662,
+  "collection:1857": suite663,
+  "collection:1858": suite664,
+  "collection:1859": suite665,
+  "collection:1860": suite666,
+  "collection:1861": suite667,
+  "collection:1863": suite668,
+  "collection:1864": suite669,
+  "collection:1865": suite670,
+  "collection:1866": suite671,
+  "collection:1868": suite672,
+  "collection:1869": suite673,
+  "collection:1870": suite674,
+  "collection:1871": suite675,
+  "collection:1872": suite676,
+  "collection:1873": suite677,
+  "collection:1874": suite678,
+  "collection:1876": suite679,
+  "collection:1877": suite680,
+  "collection:1879": suite681,
+  "collection:1880": suite682,
+  "collection:1881": suite683,
+  "collection:1882": suite684,
+  "collection:1884": suite685,
+  "collection:1885": suite686,
+  "collection:1886": suite687,
+  "collection:1887": suite688,
+  "collection:1888": suite689,
+  "collection:1890": suite690,
+  "collection:1891": suite691,
+  "collection:1893": suite692,
+  "collection:1894": suite693,
+  "collection:1897": suite694,
+  "collection:1898": suite695,
+  "collection:1899": suite696,
+  "collection:1901": suite697,
+  "collection:1903": suite698,
+  "collection:1905": suite699,
+  "collection:1907": suite700,
+  "collection:1909": suite701,
+  "collection:1910": suite702,
+  "collection:1911": suite703,
+  "collection:1913": suite704,
+  "collection:1914": suite705,
+  "collection:1915": suite706,
+  "collection:1916": suite707,
+  "collection:1920": suite708,
+  "collection:1921": suite709,
+  "collection:1922": suite710,
+  "collection:1925": suite711,
+  "collection:1926": suite712,
+  "collection:1929": suite713,
+  "collection:1930": suite714,
+  "collection:1935": suite715,
+  "collection:1936": suite716,
+  "collection:1937": suite717,
+  "collection:1938": suite718,
+  "collection:1939": suite719,
+  "collection:1940": suite720,
+  "collection:1941": suite721,
+  "collection:1942": suite722,
+  "collection:1943": suite723,
+  "collection:1944": suite724,
+  "collection:1945": suite725,
+  "collection:1946": suite726,
+  "collection:1947": suite727,
+  "collection:1948": suite728,
+  "collection:1949": suite729,
+  "collection:1950": suite730,
+  "collection:1952": suite731,
+  "collection:1953": suite732,
+  "collection:1954": suite733,
+  "collection:1955": suite734,
+  "collection:1957": suite735,
+  "collection:1958": suite736,
+  "collection:1959": suite737,
+  "collection:1960": suite738,
+  "collection:1961": suite739,
+  "collection:1962": suite740,
+  "collection:1963": suite741,
+  "collection:1964": suite742,
+  "collection:1965": suite743,
+  "collection:1966": suite744,
+  "collection:1967": suite745,
+  "collection:1968": suite746,
+  "collection:1969": suite747,
+  "collection:1970": suite748,
+  "collection:1971": suite749,
+  "collection:1973": suite750,
+  "collection:1974": suite751,
+  "collection:1975": suite752,
+  "collection:1976": suite753,
+  "collection:1977": suite754,
+  "collection:1978": suite755,
+  "collection:1979": suite756,
+  "collection:1980": suite757,
+  "collection:1981": suite758,
+  "collection:1982": suite759,
+  "collection:1983": suite760,
+  "collection:1984": suite761,
+  "collection:1985": suite762,
+  "collection:1986": suite763,
+  "collection:1987": suite764,
+  "collection:1988": suite765,
+  "collection:1989": suite766,
+  "collection:1990": suite767,
+  "collection:1991": suite768,
+  "collection:1992": suite769,
+  "collection:1993": suite770,
+  "collection:1994": suite771,
+  "collection:1995": suite772,
+  "collection:1996": suite773,
+  "collection:1997": suite774,
+  "collection:1998": suite775,
+  "collection:2000": suite776,
+  "collection:2001": suite777,
+  "collection:2002": suite778,
+  "collection:2003": suite779,
+  "collection:2006": suite780,
+  "collection:2007": suite781,
+  "collection:2008": suite782,
+  "collection:2009": suite783,
+  "collection:2011": suite784,
+  "collection:2012": suite785,
+  "collection:2013": suite786,
+  "collection:2014": suite787,
+  "collection:2015": suite788,
+  "collection:2016": suite789,
+  "collection:2017": suite790,
+  "collection:2018": suite791,
+  "collection:2019": suite792,
+  "collection:2021": suite793,
+  "collection:2022": suite794,
+  "collection:2023": suite795,
+  "collection:2024": suite796,
+  "collection:2025": suite797,
+  "collection:2027": suite798,
+  "collection:2028": suite799,
+  "collection:2029": suite800,
+  "collection:2030": suite801,
+  "collection:2031": suite802,
+  "collection:2032": suite803,
+  "collection:2033": suite804,
+  "collection:2034": suite805,
+  "collection:2035": suite806,
+  "collection:2036": suite807,
+  "collection:2037": suite808,
+  "collection:2038": suite809,
+  "collection:2039": suite810,
+  "collection:2040": suite811,
+  "collection:2042": suite812,
+  "collection:2043": suite813,
+  "collection:2044": suite814,
+  "collection:2045": suite815,
+  "collection:2046": suite816,
+  "collection:2047": suite817,
+  "collection:2048": suite818,
+  "collection:2049": suite819,
+  "collection:2050": suite820,
+  "collection:2052": suite821,
+  "collection:2053": suite822,
+  "collection:2054": suite823,
+  "collection:2055": suite824,
+  "collection:2057": suite825,
+  "collection:2058": suite826,
+  "collection:2059": suite827,
+  "collection:2061": suite828,
+  "collection:2062": suite829,
+  "collection:2063": suite830,
+  "collection:2064": suite831,
+  "collection:2065": suite832,
+  "collection:2067": suite833,
+  "collection:2068": suite834,
+  "collection:2069": suite835,
+  "collection:2070": suite836,
+  "collection:2071": suite837,
+  "collection:2073": suite838,
+  "collection:2074": suite839,
+  "collection:2075": suite840,
+  "collection:2076": suite841,
+  "collection:2077": suite842,
+  "collection:2078": suite843,
+  "collection:2079": suite844,
+  "collection:2080": suite845,
+  "collection:2081": suite846,
+  "collection:2083": suite847,
+  "collection:2085": suite848,
+  "collection:2086": suite849,
+  "collection:2087": suite850,
+  "collection:2088": suite851,
+  "collection:2089": suite852,
+  "collection:2090": suite853,
+  "collection:2091": suite854,
+  "collection:2092": suite855,
+  "collection:2093": suite856,
+  "collection:2094": suite857,
+  "collection:2095": suite858,
+  "collection:2096": suite859,
+  "collection:2097": suite860,
+  "collection:2098": suite861,
+  "collection:2099": suite862,
+  "collection:2100": suite863,
+  "collection:2101": suite864,
+  "collection:2102": suite865,
+  "collection:2103": suite866,
+  "collection:2104": suite867,
+  "collection:2105": suite868,
+  "collection:2106": suite869,
+  "collection:2107": suite870,
+  "collection:2108": suite871,
+  "collection:2109": suite872,
+  "collection:2110": suite873,
+  "collection:2111": suite874,
+  "collection:2114": suite875,
+  "collection:2115": suite876,
+  "collection:2116": suite877,
+  "collection:2119": suite878,
+  "collection:2120": suite879,
+  "collection:2121": suite880,
+  "collection:2122": suite881,
+  "collection:2124": suite882,
+  "collection:2125": suite883,
+  "collection:2126": suite884,
+  "collection:2129": suite885,
+  "collection:2130": suite886,
+  "collection:2131": suite887,
+  "collection:2132": suite888,
+  "collection:2133": suite889,
+  "collection:2134": suite890,
+  "collection:2135": suite891,
+  "collection:2136": suite892,
+  "collection:2137": suite893,
+  "collection:2138": suite894,
+  "collection:2139": suite895,
+  "collection:2140": suite896,
+  "collection:2141": suite897,
+  "collection:2144": suite898,
+  "collection:2145": suite899,
+  "collection:2146": suite900,
+  "collection:2147": suite901,
+  "collection:2148": suite902,
+  "collection:2149": suite903,
+  "collection:2150": suite904,
+  "collection:2151": suite905,
+  "collection:2154": suite906,
+  "collection:2155": suite907,
+  "collection:2156": suite908,
+  "collection:2157": suite909,
+  "collection:2158": suite910,
+  "collection:2160": suite911,
+  "collection:2161": suite912,
+  "collection:2162": suite913,
+  "collection:2163": suite914,
+  "collection:2164": suite915,
+  "collection:2165": suite916,
+  "collection:2166": suite917,
+  "collection:2167": suite918,
+  "collection:2168": suite919,
+  "collection:2169": suite920,
+  "collection:2170": suite921,
+  "collection:2171": suite922,
+  "collection:2172": suite923,
+  "collection:2176": suite924,
+  "collection:2177": suite925,
+  "collection:2178": suite926,
+  "collection:2179": suite927,
+  "collection:2180": suite928,
+  "collection:2181": suite929,
+  "collection:2182": suite930,
+  "collection:2183": suite931,
+  "collection:2184": suite932,
+  "collection:2185": suite933,
+  "collection:2186": suite934,
+  "collection:2187": suite935,
+  "collection:2188": suite936,
+  "collection:2190": suite937,
+  "collection:2191": suite938,
+  "collection:2192": suite939,
+  "collection:2193": suite940,
+  "collection:2194": suite941,
+  "collection:2195": suite942,
+  "collection:2196": suite943,
+  "collection:2197": suite944,
+  "collection:2200": suite945,
+  "collection:2201": suite946,
+  "collection:2202": suite947,
+  "collection:2203": suite948,
+  "collection:2204": suite949,
+  "collection:2206": suite950,
+  "collection:2207": suite951,
+  "collection:2208": suite952,
+  "collection:2209": suite953,
+  "collection:2210": suite954,
+  "collection:2211": suite955,
+  "collection:2212": suite956,
+  "collection:2213": suite957,
+  "collection:2214": suite958,
+  "collection:2215": suite959,
+  "collection:2216": suite960,
+  "collection:2217": suite961,
+  "collection:2218": suite962,
+  "collection:2220": suite963,
+  "collection:2221": suite964,
+  "collection:2222": suite965,
+  "collection:2223": suite966,
+  "collection:2224": suite967,
+  "collection:2225": suite968,
+  "collection:2226": suite969,
+  "collection:2227": suite970,
+  "collection:2229": suite971,
+  "collection:2231": suite972,
+  "collection:2232": suite973,
+  "collection:2233": suite974,
+  "collection:2234": suite975,
+  "collection:2235": suite976,
+  "collection:2236": suite977,
+  "collection:2237": suite978,
+  "collection:2239": suite979,
+  "collection:2240": suite980,
+  "collection:2241": suite981,
+  "collection:2242": suite982,
+  "collection:2243": suite983,
+  "collection:2244": suite984,
+  "collection:2245": suite985,
+  "collection:2281": suite986,
+  "collection:2302": suite987,
+  "collection:2334": suite988,
+  "collection:2348": suite989,
+  "collection:2355": suite990,
+  "collection:2393": suite991,
+  "collection:2395": suite992,
+  "collection:2401": suite993,
+  "collection:2411": suite994,
+  "collection:2414": suite995,
+  "collection:2419": suite996,
+  "collection:2421": suite997,
+  "collection:2444": suite998,
+  "collection:2447": suite999,
+  "collection:2454": suite1000,
+  "collection:2461": suite1001,
+  "collection:2470": suite1002,
+  "collection:2487": suite1003,
+  "collection:2492": suite1004,
+  "collection:2685": suite1005,
+  "collection:2709": suite1006,
+  "collection:2865": suite1007,
+  "collection:2866": suite1008,
+  "collection:2940": suite1009,
+  "collection:2948": suite1010,
+  "collection:3108": suite1011,
+  "collection:3113": suite1012,
+  "two-sum": suite1013,
+  "add-two-numbers": suite1014,
+  "add-two-numbers-ii": suite1015,
+  "add-binary": suite1016,
+  "longest-substring-without-repeating": suite1017,
+  "palindrome-partitioning": suite1018,
+  "palindrome-partitioning-ii": suite1019,
+  "palindromic-substrings": suite1020,
+  "longest-palindromic-subsequence": suite1021,
+  "palindrome-subsequence": suite1022,
+  "longest-palindrome": suite1023,
+  "valid-palindrome": suite1024,
+  "valid-parentheses": suite1025,
+  "generate-parentheses": suite1026,
+  "letter-combinations": suite1027,
+  "remove-duplicates": suite1028,
+  "remove-element": suite1029,
+  "next-permutation": suite1030,
+  "search-insert-position": suite1031,
+  "binary-search": suite1032,
+  "search-in-rotated-sorted-array": suite1033,
+  "search-in-rotated-sorted-array-ii": suite1034,
+  "find-first-last-position": suite1035,
+  "find-min-rotated-sorted-array": suite1036,
+  "find-minimum-in-rotated-sorted-array-ii": suite1037,
+  "three-sum": suite1038,
+  "three-sum-closest": suite1039,
+  "four-sum": suite1040,
+  "container-with-most-water": suite1041,
+  "trapping-rain-water": suite1042,
+  "largest-rectangle-in-histogram": suite1043,
+  "jump-game": suite1044,
+  "jump-game-ii": suite1045,
+  "permutations": suite1046,
+  "permutations-ii": suite1047,
+  "subsets": suite1048,
+  "combinations": suite1049,
+  "combination-sum": suite1050,
+  "combination-sum-ii": suite1051,
+  "coin-change": suite1052,
+  "coin-change-2": suite1053,
+  "house-robber": suite1054,
+  "house-robber-ii": suite1055,
+  "best-time-buy-sell-stock": suite1056,
+  "best-time-to-buy-and-sell-stock": suite1057,
+  "best-time-buy-sell-stock-iii": suite1058,
+  "best-time-to-buy-and-sell-stock-ii": suite1059,
+  "best-time-to-buy-and-sell-stock-iii": suite1060,
+  "best-time-buy-sell-stock-iv": suite1061,
+  "candy": suite1062,
+  "gas-station": suite1063,
+  "single-number": suite1064,
+  "single-number-ii": suite1065,
+  "longest-consecutive-sequence": suite1066,
+  "longest-increasing-subsequence": suite1067,
+  "contains-duplicate": suite1068,
+  "product-of-array-except-self": suite1069,
+  "move-zeroes": suite1070,
+  "sort-colors": suite1071,
+  "rotate-array": suite1072,
+  "sliding-window-maximum": suite1073,
+  "sliding-window-median": suite1074,
+  "subarray-sum-equals-k": suite1075,
+  "minimum-size-subarray-sum": suite1076,
+  "min-size-subarray-sum": suite1077,
+  "daily-temperatures": suite1078,
+  "132-pattern": suite1079,
+  "first-missing-positive": suite1080,
+  "missing-number": suite1081,
+  "find-duplicate": suite1082,
+  "find-all-duplicates-in-array": suite1083,
+  "find-all-numbers-disappeared-in-an-array": suite1084,
+  "find-all-numbers-disappeared-in-array": suite1085,
+  "find-disappeared-numbers": suite1086,
+  "single-element-in-sorted-array": suite1087,
+  "majority-element": suite1088,
+  "contiguous-array": suite1089,
+  "partition-equal-subset": suite1090,
+  "target-sum": suite1091,
+  "burst-balloons": suite1092,
+  "reverse-pairs": suite1093,
+  "count-of-smaller-after-self": suite1094,
+  "count-of-smaller-numbers-after-self": suite1095,
+  "count-of-range-sum": suite1096,
+  "k-diff-pairs-in-array": suite1097,
+  "arithmetic-slices-ii": suite1098,
+  "arithmetic-slices-ii-subsequence": suite1099,
+  "increasing-subsequences": suite1100,
+  "predict-the-winner": suite1101,
+  "minimum-moves-to-equal-array-elements": suite1102,
+  "minimum-moves-to-equal-array-elements-ii": suite1103,
+  "rotate-function": suite1104,
+  "find-peak-element": suite1105,
+  "kth-largest-element": suite1106,
+  "top-kfrequent": suite1107,
+  "wiggle-sort-ii": suite1108,
+  "continuous-subarray-sum": suite1109,
+  "patching-array": suite1110,
+  "teemo-attacking": suite1111,
+  "find-first-occurrence": suite1112,
+  "longest-common-prefix": suite1113,
+  "group-anagrams": suite1114,
+  "valid-anagram": suite1115,
+  "is-subsequence": suite1116,
+  "edit-distance": suite1117,
+  "lcs": suite1118,
+  "distinct-subsequences": suite1119,
+  "interleaving-string": suite1120,
+  "scramble-string": suite1121,
+  "minimum-window-substring": suite1122,
+  "find-all-anagrams": suite1123,
+  "find-all-anagrams-in-a-string": suite1124,
+  "find-all-anagrams-in-string": suite1125,
+  "permutation-in-string": suite1126,
+  "longest-repeating-char-replace": suite1127,
+  "longest-substring-k-repeating": suite1128,
+  "longest-substring-with-at-least-k-repeating-characters": suite1129,
+  "longest-substring-with-at-most-two-distinct-characters": suite1130,
+  "longest-substring-k-distinct": suite1131,
+  "word-break": suite1132,
+  "word-break-ii": suite1133,
+  "concatenated-words": suite1134,
+  "substring-concatenation": suite1135,
+  "decode-ways": suite1136,
+  "decode-string": suite1137,
+  "basic-calculator": suite1138,
+  "basic-calculator-ii": suite1139,
+  "eval-rpn": suite1140,
+  "expression-tree-from-tokens": suite1141,
+  "longest-valid-parentheses": suite1142,
+  "remove-invalid-parentheses": suite1143,
+  "remove-duplicate-letters": suite1144,
+  "remove-k-digits": suite1145,
+  "additive-number": suite1146,
+  "multiply-strings": suite1147,
+  "compare-version-numbers": suite1148,
+  "complex-number-multiplication": suite1149,
+  "fraction-to-recurring-decimal": suite1150,
+  "repeated-substring-pattern": suite1151,
+  "shortest-palindrome": suite1152,
+  "reverse-words-in-a-string": suite1153,
+  "length-of-last-word": suite1154,
+  "reverse-vowels": suite1155,
+  "reverse-string": suite1156,
+  "reverse-string-ii": suite1157,
+  "string-compression": suite1158,
+  "number-of-segments-in-a-string": suite1159,
+  "license-key-formatting": suite1160,
+  "detect-capital": suite1161,
+  "reconstruct-original-digits": suite1162,
+  "reconstruct-original-digits-from-english": suite1163,
+  "unique-substrings-in-wraparound-string": suite1164,
+  "word-abbreviation": suite1165,
+  "longest-word-dictionary": suite1166,
+  "text-justification": suite1167,
+  "simplify-path": suite1168,
+  "restore-ip-addresses": suite1169,
+  "validate-ip-address": suite1170,
+  "regular-expression-matching": suite1171,
+  "wildcard-matching": suite1172,
+  "ternary-expression-parser": suite1173,
+  "bulls-and-cows": suite1174,
+  "encode-decode-strings": suite1175,
+  "read-n-characters-given-read4": suite1176,
+  "read-n-characters-given-read4-ii": suite1177,
+  "integer-to-roman": suite1178,
+  "roman-to-integer": suite1179,
+  "palindrome-number": suite1180,
+  "reverse-integer": suite1181,
+  "string-to-integer-atoi": suite1182,
+  "sqrtx": suite1183,
+  "powx-n": suite1184,
+  "divide-two-integers": suite1185,
+  "plus-one": suite1186,
+  "plus-one-linked-list": suite1187,
+  "sum-of-two-integers": suite1188,
+  "hamming-distance": suite1189,
+  "total-hamming-distance": suite1190,
+  "number-complement": suite1191,
+  "reverse-bits": suite1192,
+  "number-of1-bits": suite1193,
+  "power-of-two": suite1194,
+  "power-of-three": suite1195,
+  "power-of-four": suite1196,
+  "climbing-stairs": suite1197,
+  "fibonacci-number": suite1198,
+  "counting-bits": suite1199,
+  "pascals-triangle": suite1200,
+  "perfect-squares": suite1201,
+  "ugly-number-ii": suite1202,
+  "super-ugly-number": suite1203,
+  "happy-number": suite1204,
+  "arranging-coins": suite1205,
+  "nth-digit": suite1206,
+  "beautiful-arrangement": suite1207,
+  "nqueens": suite1208,
+  "nqueensii": suite1209,
+  "gray-code": suite1210,
+  "permutation-sequence": suite1211,
+  "construct-the-rectangle": suite1212,
+  "poor-pigs": suite1213,
+  "can-i-win": suite1214,
+  "guess-number": suite1215,
+  "guess-number-higher-or-lower": suite1216,
+  "first-bad-version": suite1217,
+  "guess-number-higher-or-lower-ii": suite1218,
+  "smallest-good-base": suite1219,
+  "magical-string": suite1220,
+  "binary-watch": suite1221,
+  "output-contest-matches": suite1222,
+  "super-power": suite1223,
+  "integer-break": suite1224,
+  "bulb-switcher": suite1225,
+  "count-and-say": suite1226,
+  "excel-sheet-column-title": suite1227,
+  "factorial-trailing-zeroes": suite1228,
+  "number-of-digit-one": suite1229,
+  "bitwise-and-of-numbers-range": suite1230,
+  "binary-tree-level-order": suite1231,
+  "binary-tree-preorder-traversal": suite1232,
+  "binary-tree-postorder-traversal": suite1233,
+  "binary-tree-paths": suite1234,
+  "right-side-view": suite1235,
+  "invert-binary-tree": suite1236,
+  "flatten-binary-tree-to-linked-list": suite1237,
+  "max-depth-binary-tree": suite1238,
+  "diameter-binary-tree": suite1239,
+  "find-leaves-of-binary-tree": suite1240,
+  "binary-tree-tilt": suite1241,
+  "binary-tree-level-order-ii": suite1242,
+  "binary-tree-level-order-traversal-ii": suite1243,
+  "binary-tree-zigzag-level-order-traversal": suite1244,
+  "diameter-of-binary-tree": suite1245,
+  "binary-tree-vertical-order": suite1246,
+  "serialize-deserialize": suite1247,
+  "boundary-of-binary-tree": suite1248,
+  "balanced-binary-tree": suite1249,
+  "minimum-depth-of-binary-tree": suite1250,
+  "symmetric-tree": suite1251,
+  "same-tree": suite1252,
+  "validate-bst": suite1253,
+  "convert-sorted-array-to-binary-search-tree": suite1254,
+  "convert-sorted-list-to-binary-search-tree": suite1255,
+  "construct-binary-tree": suite1256,
+  "construct-binary-tree-from-inorder-and-postorder-traversal": suite1257,
+  "path-sum": suite1258,
+  "path-sum-ii": suite1259,
+  "path-sum-iii": suite1260,
+  "binary-tree-max-path": suite1261,
+  "binary-tree-maximum-path-sum": suite1262,
+  "sum-root-to-leaf-numbers": suite1263,
+  "kth-smallest": suite1264,
+  "lcabinary-tree": suite1265,
+  "lcabst": suite1266,
+  "inorder-successor-bst": suite1267,
+  "delete-node-in-a-bst": suite1268,
+  "bst-to-doubly-linked-list": suite1269,
+  "convert-bst-to-greater-tree": suite1270,
+  "minimum-absolute-difference-in-bst": suite1271,
+  "subtree-of-another-tree": suite1272,
+  "most-frequent-subtree-sum": suite1273,
+  "count-complete-tree-nodes": suite1274,
+  "construct-binary-tree-from-string": suite1275,
+  "binary-tree-longest-consecutive-sequence-ii": suite1276,
+  "binary-tree-upside-down": suite1277,
+  "reverse-linked-list": suite1278,
+  "swap-nodes-in-pairs": suite1279,
+  "odd-even-linked-list": suite1280,
+  "reorder-list": suite1281,
+  "sort-list": suite1282,
+  "insertion-sort-list": suite1283,
+  "palindrome-linked-list": suite1284,
+  "reverse-kgroup": suite1285,
+  "rotate-list": suite1286,
+  "merge-two-sorted-lists": suite1287,
+  "merge-ksorted-lists": suite1288,
+  "merge-sorted-array": suite1289,
+  "median-of-two-sorted-arrays": suite1290,
+  "intersection-of-two-arrays": suite1291,
+  "intersection-of-two-arrays-ii": suite1292,
+  "intersection-two-linked-lists": suite1293,
+  "linked-list-cycle": suite1294,
+  "linked-list-cycle-ii": suite1295,
+  "copy-list-random": suite1296,
+  "copy-list-with-random-pointer": suite1297,
+  "two-sum-ii": suite1298,
+  "spiral-matrix": suite1299,
+  "diagonal-traverse": suite1300,
+  "matrix-iteration-basics": suite1301,
+  "rotate-image": suite1302,
+  "spiral-matrix-ii": suite1303,
+  "set-matrix-zeroes": suite1304,
+  "01-matrix": suite1305,
+  "minimum-path-sum": suite1306,
+  "dungeon-game": suite1307,
+  "longest-increasing-path": suite1308,
+  "search-a-2d-matrix": suite1309,
+  "search2-dmatrix": suite1310,
+  "search-a-2d-matrix-ii": suite1311,
+  "reshape-matrix": suite1312,
+  "sparse-matrix-multiplication": suite1313,
+  "unique-paths": suite1314,
+  "triangle": suite1315,
+  "max-area-of-island": suite1316,
+  "number-of-islands": suite1317,
+  "island-perimeter": suite1318,
+  "rotting-oranges": suite1319,
+  "surrounded-regions": suite1320,
+  "longest-line": suite1321,
+  "lonely-pixel-i": suite1322,
+  "lonely-pixel-ii": suite1323,
+  "minesweeper": suite1324,
+  "trapping-rain-water-ii": suite1325,
+  "the-maze": suite1326,
+  "the-maze-iii": suite1327,
+  "shortest-distance-buildings": suite1328,
+  "shortest-distance-from-all-buildings": suite1329,
+  "robot-room-cleaner": suite1330,
+  "course-schedule": suite1331,
+  "course-schedule-ii": suite1332,
+  "connected-components-undirected": suite1333,
+  "clone-graph": suite1334,
+  "minimum-height-trees": suite1335,
+  "redundant-connection": suite1336,
+  "number-of-islands-ii": suite1337,
+  "evaluate-division": suite1338,
+  "word-ladder": suite1339,
+  "word-ladder-ii": suite1340,
+  "minimum-genetic-mutation": suite1341,
+  "kill-process": suite1342,
+  "sequence-reconstruction": suite1343,
+  "maximum-subarray": suite1344,
+  "max-product-subarray": suite1345,
+  "max-size-subarray-sum-k": suite1346,
+  "maximum-gap": suite1347,
+  "max-consecutive-ones": suite1348,
+  "max-consecutive-ones-iii": suite1349,
+  "next-greater-element-i": suite1350,
+  "next-greater-element-ii": suite1351,
+  "circular-array-loop": suite1352,
+  "assign-cookies": suite1353,
+  "ipo": suite1354,
+  "create-maximum-number": suite1355,
+  "find-k-pairs-with-smallest-sums": suite1356,
+  "4sum-ii": suite1357,
+  "merge-intervals": suite1358,
+  "insert-interval": suite1359,
+  "non-overlapping-intervals": suite1360,
+  "minimum-number-of-arrows-to-burst-balloons": suite1361,
+  "employee-free-time": suite1362,
+  "missing-ranges": suite1363,
+  "russian-doll-envelopes": suite1364,
+  "skyline-problem": suite1365,
+  "max-points-on-aline": suite1366,
+  "number-of-boomerangs": suite1367,
+  "convex-polygon": suite1368,
+  "perfect-rectangle": suite1369,
+  "perfect-rectangles": suite1370,
+  "rectangle-area": suite1371,
+  "sort-transformed-array": suite1372,
+  "minimum-time-difference": suite1373,
+  "one-edit-distance": suite1374,
+  "ones-and-zeroes": suite1375,
+  "task-scheduler": suite1376,
+  "rearrange-string-k-distance-apart": suite1377,
+  "super-washing-machines": suite1378,
+  "sort-characters-by-frequency": suite1379,
+  "max-product-word-lengths": suite1380,
+  "maximum-product-of-word-lengths": suite1381,
+  "min-cost-climbing-stairs": suite1382,
+  "student-attendance-record-ii": suite1383,
+  "split-array-with-equal-sum": suite1384,
+  "split-strings": suite1385,
+  "freedom-trail": suite1386,
+  "count-the-repetitions": suite1387,
+  "brace-expansion-ii": suite1388,
+  "utf-8-validation": suite1389,
+  "word-search": suite1390,
+  "word-search-ii": suite1391,
+  "word-squares": suite1392,
+  "zuma-game": suite1393,
+  "remove-boxes": suite1394,
+  "remove-nth-node": suite1395,
+  "find-median-data-stream": suite1396,
+  "moving-average-data-stream": suite1397,
+  "min-stack": suite1398,
+  "lrucache": suite1399,
+  "lfucache": suite1400,
+  "implement-trie": suite1401,
+  "all-o1-data-structure": suite1402,
+  "randomized-collection": suite1403,
+  "logger-rate-limiter": suite1404,
+  "problem359": suite1405,
+  "design-tic-tac-toe": suite1406,
+  "design-snake-game": suite1407,
+  "random-pick-index": suite1408,
+  "random-pick-with-weight": suite1409,
+  "random-flip-matrix": suite1410,
+  "generate-random-point-in-a-circle": suite1411,
+  "random-point-in-non-overlapping-rectangles": suite1412,
+  "range-sum-query-immutable": suite1413,
+  "range-sum-query-mutable": suite1414,
+  "range-sum-query-2d-immutable": suite1415,
+  "range-sum-query-2d-mutable": suite1416,
+  "n-ary-tree-level-order-traversal": suite1417,
+  "nary-tree-level-order": suite1418,
+  "serialize-deserialize-nary-tree": suite1419,
+  "serialize-and-deserialize-bst": suite1420,
+  "flatten-a-multilevel-doubly-linked-list": suite1421,
+  "flatten-multilevel-dll": suite1422,
+  "encode-nary-to-binary-tree": suite1423,
+  "game-on-growing-tree": suite1424,
+  "encode-and-decode-tinyurl": suite1425,
+  "smallest-rectangle-black-pixels": suite1426,
+  "optimal-account-balancing": suite1427,
+  "largest-palindrome-product": suite1428,
+  "verbal-arithmetic-puzzle": suite1429,
+  "reconstruct-itinerary": suite1430,
+  "largest-bst-subtree": suite1431,
+  "self-crossing": suite1432,
+  "house-robber-iii": suite1433,
+  "nested-list-weight-sum": suite1434,
+  "flatten-nested-list-iterator": suite1435,
+  "verify-preorder-serialization-tree": suite1436,
+  "increasing-triplet-subsequence": suite1437,
+  "palindrome-pairs": suite1438,
+  "generalized-abbreviation": suite1439,
+  "find-right-interval": suite1440,
+  "kth-smallest-lexicographical-order": suite1441,
+  "encode-string-with-shortest-length": suite1442,
+  "matchsticks-to-square": suite1443,
+  "heaters": suite1444,
+  "find-permutation": suite1445,
+  "two-sum-iii": suite1446,
+  "largest-number": suite1447,
+  "reverse-words-in-string-ii": suite1448,
+  "repeated-dna-sequences": suite1449,
+  "implement-stack-using-queues": suite1450,
+  "implement-queue-using-stacks": suite1451,
+  "summary-ranges": suite1452,
+  "majority-element-ii": suite1453,
+  "delete-node-in-a-linked-list": suite1454,
+  "different-ways-to-add-parentheses": suite1455,
+  "shortest-word-distance": suite1456,
+  "shortest-word-distance-ii": suite1457,
+  "shortest-word-distance-iii": suite1458,
+  "strobogrammatic-number": suite1459,
+  "strobogrammatic-number-ii": suite1460,
+  "strobogrammatic-number-iii": suite1461,
+  "group-shifted-strings": suite1462,
+  "count-univalue-subtrees": suite1463,
+  "zigzag-conversion": suite1464,
+  "implement-rand10": suite1465,
+  "keyboard-row": suite1466,
+  "find-mode-bst": suite1467,
+  "base-7": suite1468,
+  "distribute-candies-to-people": suite1469,
+  "find-bottom-left-tree-value": suite1470,
+  "find-largest-value-each-row": suite1471,
+  "longest-uncommon-subsequence-i": suite1472,
+  "longest-uncommon-subsequence-ii": suite1473,
+  "student-attendance": suite1474,
+  "optimal-division": suite1475,
+  "brick-wall": suite1476,
+  "next-greater-iii": suite1477,
+  "reverse-words-iii": suite1478,
+  "quad-tree": suite1479,
+  "max-depth-nary-tree": suite1480,
+  "array-partition": suite1481,
+  "find-the-celebrity-564": suite1482,
+  "array-nesting": suite1483,
+  "max-distance": suite1484,
+  "shortest-distance-ii": suite1485,
+  "distribute-candies": suite1486,
+  "out-of-boundary": suite1487,
+  "shortest-unsorted": suite1488,
+  "delete-operation": suite1489,
+  "erect-fence": suite1490,
+  "maximal-rectangle": suite1491,
+  "second-highest-salary": suite1492,
+  "nth-highest-salary": suite1493,
+  "employees-earning-more": suite1494,
+  "department-highest-salary": suite1495,
+  "department-top-three-salaries": suite1496,
+  "managers-with-at-least-5-direct-reports": suite1497,
+  "median-employee-salary": suite1498,
+  "rank-scores": suite1499,
+  "consecutive-numbers": suite1500,
+  "duplicate-emails": suite1501,
+  "delete-duplicate-emails": suite1502,
+  "combine-two-tables": suite1503,
+  "customers-never-order": suite1504,
+  "rising-temperature": suite1505,
+  "word-frequency": suite1506,
+  "valid-phone-numbers": suite1507,
+  "transpose-file": suite1508,
+  "tenth-line": suite1509,
+  "game-play-analysis-i": suite1510,
+  "game-play-analysis-ii": suite1511,
+  "game-play-analysis": suite1512,
+  "design-log-storage-system": suite1513,
+  "find-customer-referee": suite1514,
+  "investments-2016": suite1515,
+  "cumulative-salary": suite1516,
+  "count-students": suite1517,
+  "largest-orders": suite1518,
+  "highest-answer-rate": suite1519,
+  "sudoku-solver": suite1520,
+  "local:12": suite1521,
+  "local:24": suite1522,
+  "local:29": suite1523,
+  "local:43": suite1524,
+  "local:68": suite1525,
+  "local:111": suite1526,
+  "local:142": suite1527,
+  "local:202": suite1528,
+  "local:207": suite1529,
+  "local:212": suite1530,
+  "local:267": suite1531,
+  "local:320": suite1532,
+  "local:331": suite1533,
+  "local:332": suite1534,
+  "local:333": suite1535,
+  "local:335": suite1536,
+  "local:337": suite1537,
+  "local:339": suite1538,
+  "local:341": suite1539,
+  "local:342": suite1540,
+  "local:343": suite1541,
+  "local:409": suite1542,
+  "local:505": suite1543,
+  "local:121": suite1544,
+  "local:128": suite1545,
+  "local:135": suite1546,
+  "local:136": suite1547,
+  "local:131": suite1548,
+  "local:134": suite1549,
+  "local:138": suite1550,
+  "local:173": suite1551,
+  "local:218": suite1552,
+  "local:220": suite1553,
+  "local:345": suite1554,
+  "local:364": suite1555,
+  "local:374": suite1556,
+  "local:382": suite1557,
+  "local:384": suite1558,
+  "local:404": suite1559,
+  "local:414": suite1560,
+  "local:415": suite1561,
+  "local:421": suite1562,
+  "local:82": suite1563,
+  "local:83": suite1564,
+  "local:85": suite1565,
+  "local:94": suite1566,
+  "local:90": suite1567,
+  "local:5": suite1568,
+  "local:171": suite1569,
+  "local:203": suite1570,
+  "local:204": suite1571,
+  "local:205": suite1572,
+  "local:208": suite1573,
+  "local:211": suite1574,
+  "local:216": suite1575,
+  "local:217": suite1576,
+  "local:219": suite1577,
+  "local:221": suite1578,
+  "local:309": suite1579,
+  "local:351": suite1580,
+  "local:353": suite1581,
+  "local:355": suite1582,
+  "local:356": suite1583,
+  "local:357": suite1584,
+  "local:361": suite1585,
+  "local:362": suite1586,
+  "local:363": suite1587,
+  "local:365": suite1588,
+  "local:367": suite1589,
+  "local:368": suite1590,
+  "local:370": suite1591,
+  "local:376": suite1592,
+  "local:377": suite1593,
+  "local:378": suite1594,
+  "local:379": suite1595,
+  "local:380": suite1596,
+  "local:381": suite1597,
+  "local:383": suite1598,
+  "local:385": suite1599,
+  "local:386": suite1600,
+  "local:387": suite1601,
+  "local:388": suite1602,
+  "local:389": suite1603,
+  "local:390": suite1604,
+  "local:397": suite1605,
+  "local:403": suite1606,
+  "local:405": suite1607,
+  "local:406": suite1608,
+  "local:408": suite1609,
+  "local:410": suite1610,
+  "local:411": suite1611,
+  "local:412": suite1612,
+  "local:413": suite1613,
+  "local:417": suite1614,
+  "local:418": suite1615,
+  "local:419": suite1616,
+  "local:420": suite1617,
+  "local:422": suite1618,
+  "squirrel-distribution": suite1619,
+  "local:506": suite1620,
+  "local:507": suite1621,
+  "local:547": suite1622,
+  "local:63": suite1623,
+  "local:65": suite1624,
+  "local:695": suite1625,
+  "local:721": suite1626,
+  "local:743": suite1627,
+  "local:778": suite1628,
+  "local:80": suite1629,
+  "local:86": suite1630,
+  "local:875": suite1631,
+  "local:92": suite1632,
+  "local:95": suite1633,
+  "local:96": suite1634,
+  "local:99": suite1635,
+  "local:3894": suite1636,
+  "local:3895": suite1637,
+  "local:3896": suite1638,
+  "local:3899": suite1639,
+  "local:3905": suite1640,
+  "local:3908": suite1641,
+  "local:3909": suite1642,
+  "local:3910": suite1643,
+  "local:3912": suite1644,
+  "local:3913": suite1645,
+  "local:3914": suite1646,
+  "local:3915": suite1647,
+  "local:stableIndex": suite1648,
+  "next-pointers-perfect": suite1649,
+  "next-pointers-sparse": suite1650,
+  "pascal-triangle": suite1651,
+  "pascal-row": suite1652,
+  "valid-sudoku": suite1653,
+};

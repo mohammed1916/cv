@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('guess-number-higher-or-lower-ii')[0];
+import authoredExamples0 from '../../config/examples/guess-number-higher-or-lower-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -159,7 +160,7 @@ function generateSteps(nText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('guess-number-higher-or-lower-ii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem375Visualizer() {
   const [nText, setNText] = useState(AUTHORED_INITIAL.n)

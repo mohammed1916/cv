@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('redundant-connection')[0];
+import authoredExamples0 from '../../config/examples/redundant-connection.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -11,7 +12,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./RedundantConnectionVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
@@ -119,7 +120,7 @@ function generateSteps(edges) {
   return steps;
 }
 
-const EXAMPLES = getExamples("redundant-connection");
+const EXAMPLES = authoredExamples0;
 
 export default function RedundantConnectionVisualizer() {
   const [edgesInput, setEdgesInput] = useState(JSON.stringify(AUTHORED_INITIAL.edges));

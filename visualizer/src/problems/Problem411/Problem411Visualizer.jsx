@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--411.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -20,7 +21,7 @@ const SOLUTION_CODE = getSolutionCode('minimum-unique-word-abbreviation')
 const LINE_PATTERN_MAP = {}
 const PATTERNS = ['check_abbr', 'done', 'found_unique', 'generate_len', 'init', 'match_check', 'not_unique']  // Auto-generated: maps line numbers to phase names
 
-const EXAMPLES = getAuthoredExamples('local:411')
+const EXAMPLES = authoredExamples0
 
 function abbreviationMatches(abbr, word) {
   let aIdx = 0, wIdx = 0

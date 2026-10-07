@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('minimum-size-subarray-sum')[0];
+import authoredExamples0 from '../../config/examples/minimum-size-subarray-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -127,7 +128,7 @@ function generateSteps(targetText, numsText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('minimum-size-subarray-sum', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem209Visualizer() {
   const [targetInput, setTargetInput] = useState(AUTHORED_INITIAL.target)

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/task-scheduler.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './TaskSchedulerVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -23,7 +24,7 @@ const SOLUTION_CODE = [
     { line: 8, text: '    return max(len(tasks), formula_result)' },
 ]
 
-const EXAMPLES = getExamplesOr('task-scheduler', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(tasks, n) {
     const steps = []

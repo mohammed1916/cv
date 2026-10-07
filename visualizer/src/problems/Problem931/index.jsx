@@ -1,9 +1,10 @@
-import { getExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/collection--931.js';
+
 import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitions';
+import { definitions } from '../families/collectionStories/definitionGroups/base.js';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 
-const definition = { ...definitions[931], examples: getExamples('collection:931') };
+const definition = { ...definitions[931], examples: authoredExamples0 };
 function Visualizer() { return <Story definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);

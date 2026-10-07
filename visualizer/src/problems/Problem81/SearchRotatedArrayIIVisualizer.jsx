@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('search-in-rotated-sorted-array-ii')[0];
+import authoredExamples0 from '../../config/examples/search-in-rotated-sorted-array-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SearchRotatedArrayIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -164,7 +165,7 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = getExamplesOr('search-in-rotated-sorted-array-ii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function SearchRotatedArrayIIVisualizer() {
     const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))

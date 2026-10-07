@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('interleaving-string')[0];
+import authoredExamples0 from '../../config/examples/interleaving-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
@@ -12,7 +13,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./InterleavingStringVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
@@ -49,7 +50,7 @@ const LINE_PATTERN_MAP = {
     "14": "check_loop",
 };
 
-const EXAMPLES = getExamples('interleaving-string');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(s1, s2, s3) {
     const m = s1.length, n = s2.length;

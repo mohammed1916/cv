@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/max-consecutive-ones.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -40,7 +41,7 @@ const SOLUTION_CODE = [
 
 // Registry entries carry `nums` arrays; normalise everything to the comma
 // string the input field edits so both shapes drive the same control.
-const EXAMPLES = getExamplesOr('max-consecutive-ones', []).map((ex) => ({
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.nums ?? ex.arr ?? []).join(','),
 }))

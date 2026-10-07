@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('nqueensii')[0];
+import authoredExamples0 from '../../config/examples/nqueensii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -12,12 +13,12 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./NQueensIIVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
 import { NQUEENSII_PATTERNS, LINE_PATTERN_MAP, SOLUTION_CODE, generateSteps } from './algorithm';
-const EXAMPLES = getExamples('nqueensii');
+const EXAMPLES = authoredExamples0;
 
 function getAttacked(board, n) {
   const attacked = Array.from({ length: n }, () => Array(n).fill(false));

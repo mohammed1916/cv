@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-bottom-left-tree-value')[0];
+import authoredExamples0 from '../../config/examples/find-bottom-left-tree-value.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FindBottomLeftTreeValueVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -56,7 +57,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('find-bottom-left-tree-value')
+const EXAMPLES = authoredExamples0
 
 function buildTree(arr) {
   if (!arr || arr.length === 0) return null

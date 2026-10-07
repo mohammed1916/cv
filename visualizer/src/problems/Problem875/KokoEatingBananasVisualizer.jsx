@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--875.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -98,7 +99,7 @@ function generateSteps(piles, h) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:875')
+const EXAMPLES = authoredExamples0
 
 export default function KokoEatingBananasVisualizer() {
   const [exIdx, setExIdx] = useState(0)

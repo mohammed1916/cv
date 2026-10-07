@@ -1,9 +1,10 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--547.js';
+
 import React, { useState, useCallback } from 'react';
 import './NumberOfProvinces.css';
 
 const NumberOfProvinces = () => {
-  const examples = getAuthoredExamples('local:547').map(example => example.isConnected);
+  const examples = authoredExamples0.map(example => example.isConnected);
 
   const [currentExample, setCurrentExample] = useState(0);
   const [isConnected, setIsConnected] = useState(examples[0]);

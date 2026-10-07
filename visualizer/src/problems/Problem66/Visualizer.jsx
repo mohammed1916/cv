@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/plus-one.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,12 +10,12 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('plus-one')
-const EXAMPLES = getExamples('plus-one');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(digIn) {
     const steps = [];

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('gray-code')[0];
+import authoredExamples0 from '../../config/examples/gray-code.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './GrayCodeVisualizer.css'
@@ -94,7 +95,7 @@ function generateSteps(n) {
     return steps
 }
 
-const EXAMPLES = getExamples('gray-code')
+const EXAMPLES = authoredExamples0
 
 export default function GrayCodeVisualizer() {
     const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))

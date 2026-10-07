@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('coin-change-2')[0];
+import authoredExamples0 from '../../config/examples/coin-change-2.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -11,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CoinChange2Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -28,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('coin-change-2')
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def change(amount, coins):' },

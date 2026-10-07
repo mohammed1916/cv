@@ -1,9 +1,10 @@
-import { getExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/collection--3108.js';
+
 import Story from '../families/sequenceStories/SequenceStory';
-import { definitions } from '../families/collectionStories/definitions';
+import { definitions } from '../families/collectionStories/definitionGroups/unionPathsBatch.js';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 
-const definition = { ...definitions[3108], examples: getExamples('collection:3108') };
+const definition = { ...definitions[3108], examples: authoredExamples0 };
 function Visualizer() { return <Story definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/k-diff-pairs-in-array.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './KDiffPairsInArrayVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -29,7 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('k-diff-pairs-in-array')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK_NUMS = [3, 1, 4, 1, 5]
 

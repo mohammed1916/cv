@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/longest-valid-parentheses.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,7 +9,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamplesOr } from "../../config/examplesRegistry"
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend";
 import "./LongestValidParenthesesVisualizer.css";
@@ -149,7 +150,7 @@ function generateSteps(s) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("longest-valid-parentheses", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 export default function LongestValidParenthesesVisualizer() {
   const [input, setInput] = useState('")()())"');

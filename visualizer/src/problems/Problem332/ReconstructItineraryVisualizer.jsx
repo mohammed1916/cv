@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--332.js';
+import authoredExamples1 from '../../config/examples/reconstruct-itinerary.js';
+
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +11,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ReconstructItineraryVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -30,9 +32,9 @@ const SOLUTION_CODE = [
 ]
 
 // Default + fallback examples (slug has no registry entry yet).
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:332')
+const DEFAULT_EXAMPLES = authoredExamples0
 
-const REGISTRY_EXAMPLES = getExamplesOr('reconstruct-itinerary', [])
+const REGISTRY_EXAMPLES = (authoredExamples1.length ? authoredExamples1 : [])
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 const cloneGraph = (g) => {

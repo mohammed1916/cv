@@ -1,14 +1,16 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--135.js';
+import authoredExamples1 from '../../config/examples/candy.js';
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CandyStory from "./CandyStory";
 import { CODE, buildCandyStory } from "./algorithm";
 import { candyNarrative } from "./candyNarrative";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./CandyVisualizer.css";
 
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:135');
+const DEFAULT_EXAMPLES = authoredExamples0;
 
-const registryExamples = getExamplesOr("candy", []);
+const registryExamples = (authoredExamples1.length ? authoredExamples1 : []);
 const EXAMPLES =
   registryExamples.length > 0
     ? registryExamples.map((ex) => ({

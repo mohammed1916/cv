@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/guess-number.js';
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../../components/CodeTracePanel";
@@ -5,7 +6,7 @@ import PlaybackControls from "../../../components/PlaybackControls";
 import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
-import { getExamples } from "../../../config/examplesRegistry";
+
 import "./GuessNumberVisualizer.css";
 import FloatingPanel from "../../../components/shared/FloatingPanel";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
@@ -25,7 +26,7 @@ const SOLUTION_CODE = [
   { line: 12, text: "                lo = mid + 1" },
 ];
 
-const EXAMPLES = getExamples("guess-number");
+const EXAMPLES = authoredExamples0;
 
 function guessResult(mid, pick) {
   if (mid === pick) return 0;

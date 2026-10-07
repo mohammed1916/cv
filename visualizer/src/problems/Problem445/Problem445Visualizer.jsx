@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/add-two-numbers-ii.js';
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
@@ -51,7 +52,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('add-two-numbers-ii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize Stacks', lines: [1, 2] },

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('lfucache')[0];
+import authoredExamples0 from '../../config/examples/lfucache.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -11,7 +12,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LFUCacheVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -47,7 +48,7 @@ const SOLUTION_CODE = [
     { line: 18, text: "            self.min_freq = 1" },
 ];
 
-const EXAMPLES = getExamples('lfucache');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(capacity, ops) {
     const steps = [];

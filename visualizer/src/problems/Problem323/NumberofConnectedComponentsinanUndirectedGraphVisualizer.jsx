@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/connected-components-undirected.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './NumberofConnectedComponentsinanUndirectedGraphVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { GraphFrontierLane } from '../../components/shared'
@@ -63,7 +64,7 @@ function generateSteps({ n, edges }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('connected-components-undirected', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

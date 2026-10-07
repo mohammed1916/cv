@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/reverse-string-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ReverseStringIIVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -211,7 +212,7 @@ function VisualizationPanel({ str, k, step, applyExample, examples }) {
 }
 
 export default function ReverseStringIIVisualizer() {
-  const examples = useMemo(() => getExamplesOr('reverse-string-ii', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [str, setStr] = useState('abcdefg')
   const [kValue, setKValue] = useState(2)
 

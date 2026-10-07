@@ -1,9 +1,10 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--695.js';
+
 import React, { useState, useCallback } from 'react';
 import './MaxAreaOfIsland.css';
 
 const MaxAreaOfIsland = () => {
-  const examples = getAuthoredExamples('local:695').map(example => example.grid);
+  const examples = authoredExamples0.map(example => example.grid);
 
   const [currentExample, setCurrentExample] = useState(0);
   const [grid, setGrid] = useState(examples[0]);

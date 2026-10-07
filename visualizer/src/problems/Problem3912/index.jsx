@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3912.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -16,7 +17,7 @@ const definition = {
     { id: 'select', label: 'Keep / reject', description: 'Keep values that beat at least one side.' },
     { id: 'done', label: 'Complete', description: 'Return values in original order.' },
   ],
-  examples: getAuthoredExamples('local:3912'),
+  examples: authoredExamples0,
 }
 
 function ValidElements() {

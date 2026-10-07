@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/maximal-rectangle.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +10,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './MaximalRectangleVisualizer.css'
 
@@ -157,7 +158,7 @@ function generateSteps(matrix) {
   return steps
 }
 
-const EXAMPLES = getExamples('maximal-rectangle')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ EXAMPLES, applyExample, selected, initial, step }) {
   const matrix = step?.matrix ?? initial

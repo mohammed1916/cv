@@ -12,7 +12,7 @@ import { useAutoScroll } from "./hooks/useAutoScroll";
 import { useVisualizationFeatures } from "./hooks/useVisualizationFeatures";
 import { useSolutionCode } from "./hooks/useSolutionCode";
 import { getVisualizationFeatures } from "./config/visualizationRegistry";
-import { getExamples } from "./config/examplesRegistry";
+
 
 /**
  * Generic Visualizer Component Template
@@ -418,7 +418,7 @@ export default function Visualizer({ problem }) {
 
   // Load solution code and examples from registries
   const SOLUTION_CODE = useSolutionCode(problemSlug);
-  const EXAMPLES = useMemo(() => getExamples(problemSlug), []);
+  const EXAMPLES = useMemo(() => [], []);
 
   // Generate execution steps from input
   const steps = useMemo(

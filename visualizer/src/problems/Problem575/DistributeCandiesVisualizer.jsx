@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('distribute-candies')[0];
+import authoredExamples0 from '../../config/examples/distribute-candies.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './DistributeCandiesVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -283,7 +284,7 @@ function VisualizationPanel({ step, applyExample, examples, candies }) {
 }
 
 export default function DistributeCandiesVisualizer() {
-  const examples = useMemo(() => getExamplesOr('distribute-candies', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [candiesInput, setCandiesInput] = useState(JSON.stringify(AUTHORED_INITIAL.candies || AUTHORED_INITIAL))
 
   const { candies, inputError } = useMemo(() => {

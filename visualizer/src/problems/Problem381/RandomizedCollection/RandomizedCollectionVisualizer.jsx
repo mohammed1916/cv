@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/randomized-collection.js';
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -8,7 +9,7 @@ import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { getExamples } from "../../../config/examplesRegistry";
+
 import ManualInputPanel from "../../../components/shared/ManualInputPanel";
 import "./RandomizedCollectionVisualizer.css";
 import { createPortal } from "react-dom";
@@ -40,7 +41,7 @@ const SOLUTION_CODE = [
   { line: 16, text: "        return random.choice(self.nums)" },
 ];
 
-const EXAMPLES = getExamples("randomized-collection");
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(ops) {
   const steps = [];

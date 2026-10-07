@@ -1,11 +1,12 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--29.js';
+
 import { divideNarrative } from './divideNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import { AccumulationLane } from "../../components/shared/LookupAccumulator";
 import { buildDivision, code, linePatterns } from "./algorithm";
 import "./DivideTwoIntegers.css";
 
-const examples = getAuthoredExamples('local:29');
+const examples = authoredExamples0;
 const definition = {
   narrative: divideNarrative,
   title: "Divide by doubling and subtracting",

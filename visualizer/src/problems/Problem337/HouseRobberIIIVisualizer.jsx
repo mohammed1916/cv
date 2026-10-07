@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/house-robber-iii.js';
+import authoredExamples1 from '../../config/examples/local--337.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +11,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import {
   buildTree,
   buildEdges,
@@ -159,8 +161,8 @@ function generateSteps(treeArray) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('house-robber-iii', [])
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:337')
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
+const DEFAULT_EXAMPLES = authoredExamples1
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 export default function HouseRobberIIIVisualizer() {

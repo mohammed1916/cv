@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('rotate-list')[0];
-import { getExamples } from "../../config/examplesRegistry";
+import authoredExamples0 from '../../config/examples/rotate-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -59,7 +60,7 @@ const LINE_PATTERN_MAP = {
   14: "done",
 };
 
-const EXAMPLES = getExamples("rotate-list");
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(list, k) {
   const steps = [];

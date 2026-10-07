@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--220.js';
+
 import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,7 +29,7 @@ const SOLUTION_CODE = [
   { line: 7, text: "    return False" },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:220')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums) {
   const steps = []

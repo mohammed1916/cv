@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/shortest-unsorted.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ShortestUnsortedVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -323,7 +324,7 @@ function VisualizationPanel({ step, applyExample, examples, nums }) {
 }
 
 export default function ShortestUnsortedVisualizer() {
-  const examples = useMemo(() => getExamplesOr('shortest-unsorted', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [arrayInput, setArrayInput] = useState('[1,2,4,5,3]')
 
   const { nums, inputError } = useMemo(() => {

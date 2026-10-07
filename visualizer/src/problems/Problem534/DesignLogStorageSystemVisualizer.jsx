@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/design-log-storage-system.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DesignLogStorageSystemVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -28,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('design-log-storage-system')
+const EXAMPLES = authoredExamples0
 
 const PRECISIONS = { Year: 4, Month: 7, Day: 10, Hour: 13, Minute: 16, Second: 19 }
 

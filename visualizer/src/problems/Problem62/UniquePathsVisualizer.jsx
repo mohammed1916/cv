@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('unique-paths')[0];
+import authoredExamples0 from '../../config/examples/unique-paths.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './UniquePathsVisualizer.css'
@@ -73,7 +74,7 @@ function generateSteps(m, n) {
     return steps
 }
 
-const EXAMPLES = getExamples('unique-paths')
+const EXAMPLES = authoredExamples0
 
 function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, setMInput, setNInput, handleReset }) {
     const dp = step?.dp ?? generateSteps(m, n)[0].dp

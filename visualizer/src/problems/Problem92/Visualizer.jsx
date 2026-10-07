@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:92')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--92.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -32,7 +33,7 @@ const LINE_PATTERN_MAP = {
   13: 'done',       // return dummy.next
 }
 
-const EXAMPLES = getAuthoredExamples('local:92')
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE = [
   { line: 1, text: 'class Solution:' },

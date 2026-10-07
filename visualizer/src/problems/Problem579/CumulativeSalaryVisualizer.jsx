@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/cumulative-salary.js';
 import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,14 +15,11 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 
-import {
-  getExamples as getInitialExamples,
-  getExamplesOr,
-} from "../../config/examplesRegistry";
+
 
 import "./CumulativeSalaryVisualizer.css";
 
-const AUTHORED_INITIAL = getInitialExamples("cumulative-salary")[0];
+const AUTHORED_INITIAL = authoredExamples0[0];
 
 const CUMULATIVE_PATTERNS = ["select", "filter", "window", "cumsum", "sort"];
 
@@ -55,7 +53,7 @@ const DEFAULT_EMPLOYEES = [
   { id: 2, month: 2, salary: 3500 },
 ];
 
-const EXAMPLES = getExamplesOr("cumulative-salary", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 function calculateCumulativeSalary(employees, current) {
   return employees

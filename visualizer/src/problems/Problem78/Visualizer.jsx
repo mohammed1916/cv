@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('subsets')[0];
+import authoredExamples0 from '../../config/examples/subsets.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +12,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./Visualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
@@ -100,7 +101,7 @@ function generateSteps(nums) {
   return steps;
 }
 
-const EXAMPLES = getExamples("subsets");
+const EXAMPLES = authoredExamples0;
 
 function VisualizationPanel({ nums, inputError, step }) {
   return (

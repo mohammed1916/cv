@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/max-product-word-lengths.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MaximumProductofWordLengthsVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { BitmaskLane } from '../../components/shared'
@@ -61,7 +62,7 @@ function generateSteps({ words }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('max-product-word-lengths', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function MaximumProductofWordLengthsVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

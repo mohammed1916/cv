@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/matchsticks-to-square.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem473Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +21,7 @@ const SOLUTION_CODE = getSolutionCode('matchsticks-to-square')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('matchsticks-to-square')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums) {
   const steps = []

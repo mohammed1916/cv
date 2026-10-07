@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/max-points-on-aline.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -8,7 +9,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MaxPointsOnALineVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -33,7 +34,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('max-points-on-aline');
+const EXAMPLES = authoredExamples0;
 
 function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
 

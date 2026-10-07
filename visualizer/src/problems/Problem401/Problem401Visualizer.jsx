@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('binary-watch')[0];
+import authoredExamples0 from '../../config/examples/binary-watch.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -126,7 +127,7 @@ function generateSteps(nStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('binary-watch', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem401Visualizer() {
   const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)

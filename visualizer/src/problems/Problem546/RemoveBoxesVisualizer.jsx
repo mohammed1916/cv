@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/remove-boxes.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -49,7 +50,7 @@ const SOLUTION_CODE = [
   { line: 21, text: '    return dp(0, len(boxes) - 1, 0)' },
 ]
 
-const EXAMPLES = getExamplesOr('remove-boxes', []).map((ex) => ({
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.boxes ?? []).join(','),
 }))

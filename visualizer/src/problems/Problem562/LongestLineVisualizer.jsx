@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-line')[0];
+import authoredExamples0 from '../../config/examples/longest-line.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -11,7 +12,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import "./LongestLineVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import { createPortal } from "react-dom";
@@ -657,7 +658,7 @@ function VisualizationPanel({
 }
 
 export default function LongestLineVisualizer() {
-  const examples = useMemo(() => getExamplesOr("longest-line", []), []);
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), []);
   const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix || AUTHORED_INITIAL));
 
   const { matrix, inputError } = useMemo(() => {

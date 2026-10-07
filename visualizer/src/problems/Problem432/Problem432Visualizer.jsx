@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('all-o1-data-structure')[0];
+import authoredExamples0 from '../../config/examples/all-o1-data-structure.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { generateSteps, CODE as SOLUTION_CODE_INLINE } from './algorithm';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -11,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem432Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -23,7 +24,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('all-o1-data-structure', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 
 

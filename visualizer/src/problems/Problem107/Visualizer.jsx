@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/binary-tree-level-order-traversal-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { TreeCanvas3D } from '../../components/viz3d'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -120,7 +121,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('binary-tree-level-order-traversal-ii')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({
     EXAMPLES,

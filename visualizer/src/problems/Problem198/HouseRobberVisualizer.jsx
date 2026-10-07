@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('house-robber')[0];
+import authoredExamples0 from '../../config/examples/house-robber.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import AnimatedIterationList from '../../components/shared/AnimatedIterationList'
@@ -11,7 +12,7 @@ import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './HouseRobberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -96,7 +97,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = getExamples('house-robber')
+const EXAMPLES = authoredExamples0
 
 export default function HouseRobberVisualizer({ problem }) {
   const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))

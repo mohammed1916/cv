@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/symmetric-tree.js';
 import { generateSteps } from "./algorithm";
 import MirrorTreeStory from "./MirrorTreeStory";
 import { useState, useMemo, useCallback } from "react";
@@ -9,7 +10,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./SymmetricTreeVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -40,7 +41,7 @@ const SOLUTION_CODE = [
 ];
 
 // ─── Preset examples ──────────────────────────────────────────────────────────
-const EXAMPLES = getExamples("symmetric-tree");
+const EXAMPLES = authoredExamples0;
 
 // ─── Tree utilities ───────────────────────────────────────────────────────────
 export default function SymmetricTreeVisualizer() {

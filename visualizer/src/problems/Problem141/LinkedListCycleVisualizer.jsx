@@ -1,11 +1,12 @@
+import authoredExamples0 from '../../config/examples/linked-list-cycle.js';
 import { hasCycleNarrative } from './hasCycleNarrative.js';
-import { getExamples } from "../../config/examplesRegistry";
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CycleStory from "./CycleStory";
 import { CODE, buildCycleStory } from "./algorithm";
 import "./LinkedListCycleVisualizer.css";
 
-const EXAMPLES = getExamples("linked-list-cycle");
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: hasCycleNarrative,

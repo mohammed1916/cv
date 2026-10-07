@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--382.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -125,7 +126,7 @@ function generateSteps(values) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:382')
+const EXAMPLES = authoredExamples0
 
 export default function Problem382Visualizer() {
   const [exIdx, setExIdx] = useState(0)

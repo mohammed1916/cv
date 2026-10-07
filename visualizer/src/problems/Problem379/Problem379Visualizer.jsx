@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--379.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem379.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -103,7 +104,7 @@ function generateSteps(maxNumbers, operations) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:379')
+const EXAMPLES = authoredExamples0
 
 export default function Problem379Visualizer() {
   const [exIdx, setExIdx] = useState(0)

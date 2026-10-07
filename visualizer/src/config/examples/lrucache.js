@@ -1,0 +1,121 @@
+// Independently authored walkthrough and boundary-case presets.
+export default [
+  {
+    "label": "Reads and updates change eviction order",
+    "commands": [
+      "LRUCache",
+      "put",
+      "put",
+      "put",
+      "get",
+      "put",
+      "get",
+      "put",
+      "get",
+      "get",
+      "get"
+    ],
+    "argsList": [
+      [
+        3
+      ],
+      [
+        11,
+        41
+      ],
+      [
+        22,
+        52
+      ],
+      [
+        33,
+        63
+      ],
+      [
+        11
+      ],
+      [
+        44,
+        74
+      ],
+      [
+        22
+      ],
+      [
+        33,
+        99
+      ],
+      [
+        44
+      ],
+      [
+        11
+      ],
+      [
+        33
+      ]
+    ]
+  },
+  {
+    "label": "Capacity one",
+    "commands": [
+      "LRUCache",
+      "put",
+      "get",
+      "put",
+      "get",
+      "get"
+    ],
+    "argsList": [
+      [
+        1
+      ],
+      [
+        7,
+        17
+      ],
+      [
+        7
+      ],
+      [
+        8,
+        18
+      ],
+      [
+        7
+      ],
+      [
+        8
+      ]
+    ]
+  },
+  {
+    "label": "Overwrite existing key",
+    "commands": [
+      "LRUCache",
+      "put",
+      "put",
+      "get",
+      "get"
+    ],
+    "argsList": [
+      [
+        2
+      ],
+      [
+        5,
+        15
+      ],
+      [
+        5,
+        35
+      ],
+      [
+        5
+      ],
+      [
+        9
+      ]
+    ]
+  }
+];

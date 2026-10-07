@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/odd-even-linked-list.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './OddEvenLinkedListVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import PointerRail from '../../components/shared/PointerRail'
@@ -45,7 +46,7 @@ function generateSteps({ values }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('odd-even-linked-list', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function OddEvenLinkedListVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

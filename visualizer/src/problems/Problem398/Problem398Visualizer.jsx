@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('random-pick-index')[0];
+import authoredExamples0 from '../../config/examples/random-pick-index.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -149,7 +150,7 @@ function generateSteps(numsStr, targetStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('random-pick-index', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem398Visualizer() {
   const [numsInput, setNumsInput] = useState(AUTHORED_INITIAL.nums)

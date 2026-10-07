@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:111')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--111.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { createPortal } from "react-dom";
 import { useState, useMemo, useCallback } from "react";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -41,7 +42,7 @@ const SOLUTION_CODE = [
     text: "    return 1 + min(minDepth(root.left), minDepth(root.right))",
   },
 ];
-const EXAMPLES = getAuthoredExamples('local:111');
+const EXAMPLES = authoredExamples0;
 
 export default function MinimumDepthOfBinaryTreeVisualizer() {
   const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr));

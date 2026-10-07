@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--351.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -150,7 +151,7 @@ function formatIntervals(intervals) {
   return '[' + intervals.map(([a, b]) => a === b ? a.toString() : `${a}->${b}`).join(', ') + ']'
 }
 
-const EXAMPLES = getAuthoredExamples('local:351')
+const EXAMPLES = authoredExamples0
 
 export default function Problem351Visualizer() {
   const [exIdx, setExIdx] = useState(0)

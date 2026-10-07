@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/permutations-ii.js';
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PermutationsIi.css'
 import { createPortal } from 'react-dom'
 
@@ -44,7 +45,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('permutations-ii', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function PermutationsIi() {
   const [input, setInput] = useState('[1, 2, 3]')

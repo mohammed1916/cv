@@ -1,3 +1,4 @@
+import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import WelcomeHero from "./components/marketing/WelcomeHero";
 import React, {
   useEffect,
@@ -40,29 +41,6 @@ const RuntimePlayground = React.lazy(
 
 // Metadata lives in a lightweight meta.js (eagerly bundled), while the heavy
 // visualizer is dynamically imported via index.jsx so each one code-splits.
-const metaModules = import.meta.glob("./problems/*/meta.js", { eager: true });
-const lazyModules = import.meta.glob("./problems/*/index.jsx");
-
-const ALL_PROBLEMS = Object.entries(metaModules)
-  .map(([path, mod]) => {
-    const meta = mod?.meta;
-    if (!meta?.number || !meta?.title) return null;
-    const loader = lazyModules[path.replace(/\/meta\.js$/, "/index.jsx")];
-    return {
-      id: `prob-${meta.slug || meta.number}`,
-      number: meta.number,
-      title: meta.title,
-      slug: meta.slug || meta.title.toLowerCase().replace(/\s+/g, "-"),
-      description: meta.description || "",
-      difficulty: meta.difficulty || "Medium",
-      tags: meta.tags || [],
-      accent: meta.accent || "#64748b",
-      component: loader ? React.lazy(() => loader()) : null,
-      implemented: !!loader,
-    };
-  })
-  .filter(Boolean);
-
 const IMPLEMENTED_BY_NUMBER = new Map(ALL_PROBLEMS.map((p) => [p.number, p]));
 
 const BASICS_PROBLEMS = ALL_PROBLEMS.filter((p) =>

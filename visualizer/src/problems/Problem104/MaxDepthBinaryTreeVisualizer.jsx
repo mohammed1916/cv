@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('max-depth-binary-tree')[0];
+import authoredExamples0 from '../../config/examples/max-depth-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { generateSteps } from './algorithm'
@@ -11,7 +12,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MaxDepthBinaryTreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -27,7 +28,7 @@ const SOLUTION_CODE = [
   { line: 6, text: '    return 1 + max(left, right)' },
 ]
 
-const EXAMPLES = getExamples('max-depth-binary-tree')
+const EXAMPLES = authoredExamples0
 
 const SNIPPETS = [
     { id: 'init', label: 'Init', lines: [3] },

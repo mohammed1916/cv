@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('sliding-window-maximum')[0];
+import authoredExamples0 from '../../config/examples/sliding-window-maximum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -7,7 +8,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SlidingWindowMaxVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -83,7 +84,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = getExamples('sliding-window-maximum');
+const EXAMPLES = authoredExamples0;
 
 function parseNums(str) {
     try { const p = JSON.parse(str); if (!Array.isArray(p)) throw new Error(); return { nums: p.map(Number), err: "" }; }

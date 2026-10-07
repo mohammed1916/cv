@@ -1,11 +1,12 @@
+import authoredExamples0 from '../../config/examples/binary-tree-maximum-path-sum.js';
 import { maxPathNarrative } from './maxPathNarrative.js';
-import { getExamples } from "../../config/examplesRegistry";
+
 import AlgorithmStoryWorkspace from '../../components/shared/AlgorithmStoryWorkspace';
 import MaxPathStory from './MaxPathStory';
 import { CODE, buildMaxPathStory } from './algorithm';
 import './BTMaxPathVisualizer.css';
 
-const EXAMPLES = getExamples("binary-tree-maximum-path-sum");
+const EXAMPLES = authoredExamples0;
 
 const LINE_PATTERN_MAP = {
   2: 'init',

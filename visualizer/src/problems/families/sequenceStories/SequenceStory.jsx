@@ -25,7 +25,7 @@ function Matrix({ values, label, cell, otherCell, rectangle }) {
 export default function SequenceStory({ definition }) {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ step }) => {
-      const sequence = typeof step.sequence === 'string' ? [...step.sequence] : step.sequence;
+      const sequence = typeof step.sequence === 'string' ? [...step.sequence] : (step.sequence ?? []);
       const matrix = step.matrix ?? (Array.isArray(sequence?.[0]) ? sequence : null);
       return <>
         {step.trieNodes && <TrieStateDiagram nodes={step.trieNodes} activeNode={step.activeNode} />}

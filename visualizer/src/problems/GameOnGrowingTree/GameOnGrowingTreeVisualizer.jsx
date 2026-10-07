@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('game-on-growing-tree')[0];
+import authoredExamples0 from '../../config/examples/game-on-growing-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,7 +30,7 @@ import BottomUpDetailsPanel from "./BottomUpDetailsPanel";
 import TraversalTrail, { TreeTraversalHighlight } from "./TraversalTrail";
 import ValueSourceTracking from "./ValueSourceTracking";
 import TreeDPConnector from "./TreeDPConnector";
-import { getExamples } from '../../config/examplesRegistry'
+
 import SituationOverlay from "./SituationOverlay";
 import { useSituationAnalysis } from "./useSituationAnalysis";
 import { usePruningAnalysis } from "./usePruningAnalysis";
@@ -37,7 +38,7 @@ import DualRepresentationView from "./DualRepresentationView";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const MAX_TREE_NODES_TO_RENDER = 120;
 
-const EXAMPLES = getExamples('game-on-growing-tree');
+const EXAMPLES = authoredExamples0;
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def scoreForPrefix(parent, size):' },

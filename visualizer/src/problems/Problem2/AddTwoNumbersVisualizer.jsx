@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('add-two-numbers')[0];
+import authoredExamples0 from '../../config/examples/add-two-numbers.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -12,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useProblemCode } from '../../hooks/useProblemCode'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './AddTwoNumbersVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -104,7 +105,7 @@ function generateSteps(list1, list2) {
   return steps
 }
 
-const EXAMPLES = getExamples('add-two-numbers')
+const EXAMPLES = authoredExamples0
 
 export default function AddTwoNumbersVisualizer({ problem }) {
   const [l1Input, setL1Input] = useState(JSON.stringify(AUTHORED_INITIAL.l1))

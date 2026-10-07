@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('convert-bst-to-greater-tree')[0];
+import authoredExamples0 from '../../config/examples/convert-bst-to-greater-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import{useState,useMemo,useCallback}from'react'
 import{motion}from'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -13,7 +14,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { createPortal } from 'react-dom'
 import{useCodeVisualConnectivity}from'../../hooks/useCodeVisualConnectivity'
 import{usePatternOverlay}from'../../hooks/usePatternOverlay'
-import{getExamples}from'../../config/examplesRegistry'
+
 import'./ConvertBSTToGreaterTreeVisualizer.css'
 const PATTERNS = ['done', 'init', 'visit']
 const LINE_PATTERN_MAP = {
@@ -23,7 +24,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES=getExamples('convert-bst-to-greater-tree')
+const EXAMPLES=authoredExamples0
 
 const DEFAULT_EX = EXAMPLES[0] || { label: 'Default', root: [5, 2, 13] }
 

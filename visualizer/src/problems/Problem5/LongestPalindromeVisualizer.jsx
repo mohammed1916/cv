@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-palindrome')[0];
+import authoredExamples0 from '../../config/examples/longest-palindrome.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestPalindromeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -190,7 +191,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamples('longest-palindrome')
+const EXAMPLES = authoredExamples0
 
 export default function LongestPalindromeVisualizer() {
   const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)

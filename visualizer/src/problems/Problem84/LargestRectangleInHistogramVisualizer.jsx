@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/largest-rectangle-in-histogram.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -5,7 +6,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LargestRectangleInHistogramVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -97,7 +98,7 @@ function generateSteps(heights) {
   return steps
 }
 
-const EXAMPLES = getExamples('largest-rectangle-in-histogram')
+const EXAMPLES = authoredExamples0
 
 export default function LargestRectangleInHistogramVisualizer() {
   const [input, setInput] = useState('[2,1,5,6,2,3]')

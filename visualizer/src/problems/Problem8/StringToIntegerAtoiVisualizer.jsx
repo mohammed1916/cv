@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/string-to-integer-atoi.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './StringToIntegerAtoiVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -184,7 +185,7 @@ function generateSteps(originalStr) {
   return steps
 }
 
-const EXAMPLES = getExamples('string-to-integer-atoi')
+const EXAMPLES = authoredExamples0
 
 export default function StringToIntegerAtoiVisualizer() {
   const [sInput, setSInput] = useState('   -42')

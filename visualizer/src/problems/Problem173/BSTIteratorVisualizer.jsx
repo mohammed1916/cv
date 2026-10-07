@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--173.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -34,7 +35,7 @@ const SOLUTION_CODE = [
   { line: 13, text: '        return node.val' },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:173')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(treeValues) {
   const steps = []

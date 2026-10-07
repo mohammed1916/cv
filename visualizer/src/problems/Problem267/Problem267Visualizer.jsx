@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--267.js';
+import authoredExamples1 from '../../config/examples/267.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem267Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -31,7 +33,7 @@ const SOLUTION_CODE = [
     { line: 12, text: '    backtrack("", half); return result' },
 ]
 
-const FALLBACK_EXAMPLES = getAuthoredExamples('local:267')
+const FALLBACK_EXAMPLES = authoredExamples0
 
 function generateSteps(input) {
     const text = String(Array.isArray(input) ? (input[0] ?? '') : input ?? '')
@@ -69,7 +71,7 @@ function generateSteps(input) {
 
 export default function Problem267Visualizer() {
     const examples = useMemo(() => {
-      const registered = getExamplesOr('267', [])
+      const registered = (authoredExamples1.length ? authoredExamples1 : [])
       return registered.length ? registered : FALLBACK_EXAMPLES
     }, [])
   const [inputInput, setInputInput] = useState(JSON.stringify(examples[0].input));

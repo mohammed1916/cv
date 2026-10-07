@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('decode-string')[0];
+import authoredExamples0 from '../../config/examples/decode-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./Problem394Visualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -69,7 +70,7 @@ function generateSteps(s) {
     return steps;
 }
 
-const EXAMPLES = getExamples('decode-string');
+const EXAMPLES = authoredExamples0;
 
 export default function Problem394Visualizer() {
     const [sInput, setSInput] = useState(AUTHORED_INITIAL.s);

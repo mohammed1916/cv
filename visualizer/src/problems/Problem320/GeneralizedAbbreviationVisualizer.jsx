@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--320.js';
+import authoredExamples1 from '../../config/examples/generalized-abbreviation.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './GeneralizedAbbreviationVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -135,9 +137,9 @@ function generateSteps(word) {
   return steps
 }
 
-const WORD_EXAMPLES = getAuthoredExamples('local:320')
+const WORD_EXAMPLES = authoredExamples0
 
-const REGISTRY_EXAMPLES = getExamples('generalized-abbreviation')
+const REGISTRY_EXAMPLES = authoredExamples1
 const EXAMPLES =
   Array.isArray(REGISTRY_EXAMPLES) && REGISTRY_EXAMPLES.length > 0
     ? REGISTRY_EXAMPLES

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-leaves-of-binary-tree')[0];
+import authoredExamples0 from '../../config/examples/find-leaves-of-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -11,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem366Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -237,7 +238,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamplesOr('find-leaves-of-binary-tree', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes, EXAMPLES, arrInput, setArrInput, applyExample, handleReset }) {
     return (

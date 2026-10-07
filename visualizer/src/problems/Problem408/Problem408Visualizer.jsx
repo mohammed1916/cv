@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--408.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -19,7 +20,7 @@ const SOLUTION_CODE = getSolutionCode('valid-word-abbreviation')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = getAuthoredExamples('local:408')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(word, abbr) {
   const steps = []

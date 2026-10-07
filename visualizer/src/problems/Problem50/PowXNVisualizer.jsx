@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('powx-n')[0];
+import authoredExamples0 from '../../config/examples/powx-n.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PowXNVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -32,7 +33,7 @@ const SOLUTION_CODE = [
   { line: 5, text: '    else: return half * half * x' },
 ]
 
-const EXAMPLES = getExamplesOr('powx-n', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(x, n) {
   const steps = []

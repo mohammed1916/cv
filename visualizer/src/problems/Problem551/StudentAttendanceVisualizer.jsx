@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/student-attendance.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './StudentAttendanceVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -217,7 +218,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function StudentAttendanceVisualizer() {
-  const examples = useMemo(() => getExamplesOr('student-attendance', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [record, setRecord] = useState('PPALLP')
 
   const steps = useMemo(() => generateSteps(record), [record])

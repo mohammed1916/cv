@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--208.js';
+
 import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
@@ -39,7 +40,7 @@ const SOLUTION_CODE = [
   { line: 18, text: "        return node.is_end" },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:208')
+const EXAMPLES = authoredExamples0
 
 function buildTrie(words) {
   const root = { children: {}, isEnd: false, val: "ROOT" }

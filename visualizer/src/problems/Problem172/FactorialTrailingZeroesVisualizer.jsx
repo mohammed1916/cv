@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/factorial-trailing-zeroes.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FactorialTrailingZeroesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -52,7 +53,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('factorial-trailing-zeroes')
+const EXAMPLES = authoredExamples0
 
 export default function FactorialTrailingZeroesVisualizer() {
   const [input, setInput] = useState('')

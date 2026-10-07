@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/russian-doll-envelopes.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,7 +10,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem354Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -202,7 +203,7 @@ function generateSteps(envelopes) {
   return steps
 }
 
-const EXAMPLES = getExamples('russian-doll-envelopes')
+const EXAMPLES = authoredExamples0
 const DEFAULT_ENVELOPES = EXAMPLES[0]?.envelopes ?? [
   [5, 4],
   [6, 4],

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/reverse-words-iii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ReverseWordsVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -292,7 +293,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function ReverseWordsVisualizer() {
-  const examples = useMemo(() => getExamplesOr('reverse-words-iii', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [inputString, setInputString] = useState("the sky is blue")
 
   const steps = useMemo(() => generateSteps(inputString), [inputString])

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/path-sum.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PathSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -19,7 +20,7 @@ import PathSumStory from './PathSumStory'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = { 1: 'init', 2: 'done', 3: 'visit', 4: 'check', 5: 'recurse', 6: 'recurse', 7: 'backtrack' }
 const PATTERNS = ['init', 'visit', 'descend', 'reject', 'found', 'backtrack', 'done']
-const EXAMPLES = getExamplesOr('path-sum', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def hasPathSum(root, targetSum):' },

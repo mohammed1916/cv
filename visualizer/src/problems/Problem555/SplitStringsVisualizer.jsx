@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('split-strings')[0];
+import authoredExamples0 from '../../config/examples/split-strings.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SplitStringsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -325,7 +326,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function SplitStringsVisualizer() {
-  const examples = useMemo(() => getExamplesOr('split-strings', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs || AUTHORED_INITIAL))
 
   const { strs, inputError } = useMemo(() => {

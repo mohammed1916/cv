@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/flatten-nested-list-iterator.js';
+import authoredExamples1 from '../../config/examples/local--341.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +11,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './FlattenNestedListIteratorVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -218,8 +220,8 @@ function renderNode(value, keyStr) {
   )
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('flatten-nested-list-iterator', [])
-const FALLBACK_EXAMPLES = getAuthoredExamples('local:341')
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
+const FALLBACK_EXAMPLES = authoredExamples1
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 export default function FlattenNestedListIteratorVisualizer() {

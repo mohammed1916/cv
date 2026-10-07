@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('binary-tree-longest-consecutive-sequence-ii')[0];
+import authoredExamples0 from '../../config/examples/binary-tree-longest-consecutive-sequence-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -8,7 +9,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import SvgViewport from "../../components/shared/SvgViewport";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -308,7 +309,7 @@ function generateSteps(input) {
   return steps;
 }
 
-const EXAMPLES = getExamplesOr("binary-tree-longest-consecutive-sequence-ii", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 export default function BTLongestConsecutiveIIVisualizer() {
   const [treeInput, setTreeInput] = useState(AUTHORED_INITIAL.tree);

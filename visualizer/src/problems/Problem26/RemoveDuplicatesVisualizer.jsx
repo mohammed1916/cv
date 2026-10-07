@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('remove-duplicates')[0];
+import authoredExamples0 from '../../config/examples/remove-duplicates.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -13,7 +14,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./RemoveDuplicatesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -29,7 +30,7 @@ const LINE_PATTERN_MAP = {
   7: 'done',
 }
 
-const EXAMPLES = getExamples('remove-duplicates');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(numsIn) {
   const steps = [];

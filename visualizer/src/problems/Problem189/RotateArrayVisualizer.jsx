@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('rotate-array')[0];
+import authoredExamples0 from '../../config/examples/rotate-array.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./RotateArrayVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -22,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('rotate-array')
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('rotate-array');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(inputNums, inputK) {
   const steps = [];

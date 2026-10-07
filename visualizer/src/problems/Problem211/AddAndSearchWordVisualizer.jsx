@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--211.js';
+
 import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
@@ -45,7 +46,7 @@ const SOLUTION_CODE = [
   { line: 24, text: "        return dfs(0, self.root)" },
 ]
 
-const EXAMPLES = getAuthoredExamples('local:211')
+const EXAMPLES = authoredExamples0
 
 function buildWordTrie(words) {
   const root = { children: {}, isWord: false, val: "ROOT" }

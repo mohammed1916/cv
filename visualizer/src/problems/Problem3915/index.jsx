@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3915.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -17,7 +18,7 @@ const definition = {
     { id: 'fall', label: 'Query larger ↓', description: 'Extend a rising state with a strictly larger endpoint.' },
     { id: 'done', label: 'Complete', description: 'Reconstruct an optimal alternating path.' },
   ],
-  examples: getAuthoredExamples('local:3915'),
+  examples: authoredExamples0,
 }
 
 function AlternatingSubsequence() {

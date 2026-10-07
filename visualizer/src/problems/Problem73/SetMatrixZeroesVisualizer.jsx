@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/set-matrix-zeroes.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
@@ -7,7 +8,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./SetMatrixZeroesVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -70,7 +71,7 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = getExamplesOr('set-matrix-zeroes', []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 export default function SetMatrixZeroesVisualizer() {
     const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0].matrix));

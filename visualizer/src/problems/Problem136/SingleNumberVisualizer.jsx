@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--136.js';
+
 import { singleNumberNarrative } from './singleNumberNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SingleNumberStory from "./SingleNumberStory";
@@ -6,7 +7,7 @@ import { CODE, buildSingleNumberStory } from "./algorithm";
 
 import "./SingleNumberVisualizer.css";
 
-const EXAMPLES = getAuthoredExamples('local:136');
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: singleNumberNarrative,

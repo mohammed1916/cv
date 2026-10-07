@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-median-data-stream')[0];
+import authoredExamples0 from '../../config/examples/find-median-data-stream.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +10,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import { buildTree, computeLayout, collectNodes, buildEdges, TreeSVG } from '../../components/treeUtils'
 import "./FindMedianVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -133,7 +134,7 @@ function generateSteps(nums) {
     return steps;
 }
 
-const EXAMPLES = getExamples('find-median-data-stream');
+const EXAMPLES = authoredExamples0;
 
 const HEAP_TREE_W = 240;
 const HEAP_TREE_H = 180;

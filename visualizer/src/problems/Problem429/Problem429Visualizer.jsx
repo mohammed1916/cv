@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('nary-tree-level-order')[0];
+import authoredExamples0 from '../../config/examples/nary-tree-level-order.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem429Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -24,7 +25,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('nary-tree-level-order', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 // Build an N-ary tree from LeetCode level-order-with-null-separators encoding.
 function buildTree(arr) {

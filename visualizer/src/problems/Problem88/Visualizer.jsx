@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/merge-sorted-array.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css";
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
@@ -63,7 +64,7 @@ function generateSteps(nums1Init, m, nums2, n) {
   return steps;
 }
 
-const EXAMPLES = getExamples('merge-sorted-array');
+const EXAMPLES = authoredExamples0;
 
 function VariablesPanel({ step, ex }) {
   return (

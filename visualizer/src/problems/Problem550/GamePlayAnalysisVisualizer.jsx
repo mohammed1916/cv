@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('game-play-analysis')[0];
+import authoredExamples0 from '../../config/examples/game-play-analysis.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './GamePlayAnalysisVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -196,7 +197,7 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function GamePlayAnalysisVisualizer() {
-  const examples = useMemo(() => getExamplesOr('game-play-analysis', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [activityInput, setActivityInput] = useState(JSON.stringify(AUTHORED_INITIAL.activity || AUTHORED_INITIAL))
 
   const { activity, inputError } = useMemo(() => {

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/max-area-of-island.js';
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +10,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MaxAreaOfIsland.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -190,7 +191,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('max-area-of-island', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const ISLAND_COLORS = [
   '#3b82f6',

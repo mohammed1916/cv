@@ -1,4 +1,6 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/guess-number-higher-or-lower.js';
+import authoredExamples1 from '../../config/examples/local--374.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem374Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -23,8 +25,8 @@ const SOLUTION_CODE = getSolutionCode('guess-number-higher-or-lower')
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = ['adjust_left', 'adjust_right', 'calc_guess', 'call_guess', 'check_condition', 'done', 'equal', 'higher', 'init', 'lower']
 
-const EXAMPLES = getExamples('guess-number-higher-or-lower')
-const FALLBACK_EXAMPLES = getAuthoredExamples('local:374')
+const EXAMPLES = authoredExamples0
+const FALLBACK_EXAMPLES = authoredExamples1
 
 function generateSteps(n, pick) {
   const steps = []

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/same-tree.js';
 import StoryPanel from "../../components/shared/StoryPanel";
 import { generateSteps } from "./algorithm";
 import { parseLevelOrderTree } from "../../components/shared/levelOrderTree";
@@ -10,7 +11,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./SameTreeVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -50,7 +51,7 @@ const LINE_PATTERN_MAP = {
 };
 
 // ─── Preset examples ──────────────────────────────────────────────────────────
-const EXAMPLES = getExamples("same-tree");
+const EXAMPLES = authoredExamples0;
 
 // ─── Tree utilities ───────────────────────────────────────────────────────────
 function TreeCanvas({

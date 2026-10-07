@@ -1,11 +1,12 @@
+import authoredExamples0 from '../../config/examples/valid-palindrome.js';
 import { palindromeNarrative } from './palindromeNarrative.js';
-import { getExamples } from "../../config/examplesRegistry";
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PalindromeStory from "./PalindromeStory";
 import { PALINDROME_CODE, buildPalindromeStory } from "./algorithm";
 import "./ValidPalindromeVisualizer.css";
 
-const EXAMPLES = getExamples("valid-palindrome");
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: palindromeNarrative,

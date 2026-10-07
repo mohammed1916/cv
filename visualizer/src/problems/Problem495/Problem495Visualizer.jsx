@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/teemo-attacking.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem495Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -39,7 +40,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('teemo-attacking', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(timeSeries, duration) {
   const steps = []

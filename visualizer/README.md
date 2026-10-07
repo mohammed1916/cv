@@ -2,6 +2,10 @@
 
 An interactive React visualizer for algorithms and data structures. The isolated **Visualizer Playground** accepts ordinary Python or `viz` JavaScript, runs it in a bounded worker, and turns runtime state into a navigable visual timeline.
 
+Development documentation lives in [docs](docs/README.md). Historical plans and
+completion reports are in [docs/archive](docs/archive/). Firebase Hosting publishes
+only `dist`; these documents are not hosted.
+
 ## WebMCP agent collaboration
 
 The Playground exposes six native [WebMCP](https://webmachinelearning.github.io/webmcp/) tools through `document.modelContext.registerTool(...)`. A browser agent can understand and operate the live application through structured actions instead of guessing at buttons or editor coordinates:

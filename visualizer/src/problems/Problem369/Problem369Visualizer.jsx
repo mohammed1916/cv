@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('plus-one-linked-list')[0];
+import authoredExamples0 from '../../config/examples/plus-one-linked-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem369Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -24,7 +25,7 @@ const SOLUTION_CODE = getSolutionCode('plus-one-linked-list')
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('plus-one-linked-list', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 // Build linked list from array of values
 function buildList(values) {

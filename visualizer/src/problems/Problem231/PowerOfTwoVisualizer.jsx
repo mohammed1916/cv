@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('power-of-two')[0];
+import authoredExamples0 from '../../config/examples/power-of-two.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -7,7 +8,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./PowerOfTwoVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -29,7 +30,7 @@ const SOLUTION_CODE = [
   { line: 6, text: "    return (n & (n - 1)) == 0" },
 ];
 
-const EXAMPLES = getExamples('power-of-two');
+const EXAMPLES = authoredExamples0;
 
 function toBin(n, bits = 8) {
   if (n < 0) return "N/A";

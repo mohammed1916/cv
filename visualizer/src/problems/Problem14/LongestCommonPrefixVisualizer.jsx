@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-common-prefix')[0];
+import authoredExamples0 from '../../config/examples/longest-common-prefix.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +14,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./LongestCommonPrefixVisualizer.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 
@@ -174,7 +175,7 @@ function generateSteps(strs) {
   return steps;
 }
 
-const EXAMPLES = getExamples("longest-common-prefix");
+const EXAMPLES = authoredExamples0;
 
 function InputPanel({
   strsInput,

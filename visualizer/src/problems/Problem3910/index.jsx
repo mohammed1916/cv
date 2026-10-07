@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3910.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -17,7 +18,7 @@ const definition = {
     { id: 'decide', label: 'Count / reject', description: 'Require even parity and connectivity.' },
     { id: 'done', label: 'Complete', description: 'Return the count over all non-empty subsets.' },
   ],
-  examples: getAuthoredExamples('local:3910'),
+  examples: authoredExamples0,
 }
 
 function EvenConnectedSubgraphs() {

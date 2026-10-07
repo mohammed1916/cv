@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/super-ugly-number.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SuperUglyNumberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { DPTable } from '../../components/shared'
@@ -54,7 +55,7 @@ function generateSteps({ n, primes }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('super-ugly-number', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function SuperUglyNumberVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

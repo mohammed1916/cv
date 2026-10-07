@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--403.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -19,7 +20,7 @@ const SOLUTION_CODE = getSolutionCode('frog-jump')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = getAuthoredExamples('local:403')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(stones) {
   const steps = []

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('minimum-window-substring')[0];
+import authoredExamples0 from '../../config/examples/minimum-window-substring.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MinimumWindowSubstringVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -75,7 +76,7 @@ function generateSteps(s, t) {
   return steps
 }
 
-const EXAMPLES = getExamples('minimum-window-substring')
+const EXAMPLES = authoredExamples0
 
 const SNIPPETS = [
   { id: 'init', label: 'Init', lines: [4, 5, 6, 7, 8, 9] },

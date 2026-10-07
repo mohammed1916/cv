@@ -1,5 +1,6 @@
+import authoredExamples0 from '../../../config/examples/local--stableIndex.js';
 import { buildTrace, parseInput, code } from './algorithm'
-import { getExamples } from '../../../config/examplesRegistry';
+
 
 const phases = [
   { id: 'start', label: 'Input', description: 'Initialize inclusive suffix minima.' },
@@ -14,6 +15,6 @@ export function createDefinition({ maxLength, slug }) {
     inputLabel: `nums and k (JSON object, up to ${maxLength} elements)`,
     url: `https://leetcode.com/problems/${slug}/`,
     complexity: 'O(n) time and O(n) space. The suffix table is built once, and the running prefix maximum avoids rescanning earlier elements.',
-    examples: getExamples('local:stableIndex'),
+    examples: authoredExamples0,
   }
 }

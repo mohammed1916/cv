@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('lcabinary-tree')[0];
+import authoredExamples0 from '../../config/examples/lcabinary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -11,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LCABinaryTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -113,7 +114,7 @@ function generateSteps(arr, pVal, qVal) {
     return steps
 }
 
-const EXAMPLES = getExamples('lcabinary-tree')
+const EXAMPLES = authoredExamples0
 
 export default function LCABinaryTreeVisualizer() {
     const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))

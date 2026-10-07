@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3896.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -15,7 +16,7 @@ const definition = {
     { id: 'apply', label: 'Pay increments', description: 'Apply the exact value difference to this position.' },
     { id: 'done', label: 'Return minimum', description: 'Sum the independent minimum costs.' },
   ],
-  examples: getAuthoredExamples('local:3896'),
+  examples: authoredExamples0,
 }
 function AlternatingPrime() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {

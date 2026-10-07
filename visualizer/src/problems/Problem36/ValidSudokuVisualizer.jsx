@@ -1,4 +1,5 @@
-import { getExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/valid-sudoku.js';
+
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,7 +30,7 @@ const SOLUTION_CODE = [
     { line: 13, text: "    return True" },
 ];
 
-const EXAMPLES = Object.fromEntries(getExamples('valid-sudoku').map((example,index)=>[index===0?'valid':`case${index}`,example]));
+const EXAMPLES = Object.fromEntries(authoredExamples0.map((example,index)=>[index===0?'valid':`case${index}`,example]));
 
 const EXAMPLE_LIST = Object.values(EXAMPLES);
 

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('is-subsequence')[0];
+import authoredExamples0 from '../../config/examples/is-subsequence.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -114,7 +115,7 @@ function generateSteps(s, t) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('is-subsequence', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem392Visualizer() {
   const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)

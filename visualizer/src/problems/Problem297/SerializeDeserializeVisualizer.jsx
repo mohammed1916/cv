@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('serialize-deserialize')[0];
+import authoredExamples0 from '../../config/examples/serialize-deserialize.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +10,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SerializeDeserializeVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -41,7 +42,7 @@ const SOLUTION_CODE = [
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
 
-const EXAMPLES = getExamples('serialize-deserialize');
+const EXAMPLES = authoredExamples0;
 
 // Build preorder (serialize) steps
 function serializeSteps(treeArr) {

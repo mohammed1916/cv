@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/longest-word-dictionary.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestWordDictionaryVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -28,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const REGISTRY_EXAMPLES = getExamples('longest-word-dictionary')
+const REGISTRY_EXAMPLES = authoredExamples0
 
 // The registry entry for this slug only carries a `words` list, which does not
 // match this visualizer's (s, dictionary) input. Fall back to correctly shaped

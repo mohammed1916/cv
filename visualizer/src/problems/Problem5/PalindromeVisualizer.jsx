@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--5.js';
+
 import { Fragment, useState, useCallback, useMemo, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -571,7 +572,7 @@ function StepDetail({ step, str }) {
    MAIN VISUALIZER
    ═══════════════════════════════════════════════════════════════ */
 const DEFAULT = 'racecar'
-const INPUT_PRESETS = getAuthoredExamples('local:5')
+const INPUT_PRESETS = authoredExamples0
 
 export default function PalindromeVisualizer() {
   const [inputStr, setInputStr]  = useState(DEFAULT)

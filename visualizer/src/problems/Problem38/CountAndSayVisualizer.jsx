@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/count-and-say.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './CountAndSay.css'
 
 const SOLUTION_CODE = [
@@ -250,7 +251,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
 }
 
 export default function CountAndSayVisualizer() {
-  const examples = useMemo(() => getExamplesOr('count-and-say', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [nValue, setNValue] = useState(1)
 
   const steps = useMemo(() => generateSteps(nValue), [nValue])

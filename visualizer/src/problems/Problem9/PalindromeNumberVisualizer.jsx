@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/palindrome-number.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -11,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './PalindromeNumberVisualizer.css'
 
 const PN_PATTERNS = ['init', 'negative', 'trailing_zero', 'state', 'check', 'extract', 'build', 'advance', 'compare']
@@ -399,7 +400,7 @@ function StateCard({ label, value, accent }) {
   )
 }
 
-const EXAMPLES = getExamples('palindrome-number')
+const EXAMPLES = authoredExamples0
 
 const EDGE_CASES = [
   { key: 'negative', label: 'Negative numbers', note: 'Immediately false, because the minus sign cannot mirror itself.' },

@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:506')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--506.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -91,7 +92,7 @@ function generateSteps(nums) {
 }
 
 function VisualizationPanel({ nums, step, applyEx }) {
-  const examples = getAuthoredExamples('local:506')
+  const examples = authoredExamples0
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--365.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -231,7 +232,7 @@ function generateSteps(a, b, z) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:365')
+const EXAMPLES = authoredExamples0
 
 export default function Problem365Visualizer() {
   const [exIdx, setExIdx] = useState(0)

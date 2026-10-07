@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/validate-ip-address.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem468Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +21,7 @@ const SOLUTION_CODE = getSolutionCode('validate-ip-address')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('validate-ip-address')
+const EXAMPLES = authoredExamples0
 
 function validateIP(ip) {
   const isIPv4 = ip.includes('.') && !ip.includes(':')

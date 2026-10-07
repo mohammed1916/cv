@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('construct-binary-tree')[0];
+import authoredExamples0 from '../../config/examples/construct-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { reconstructTreeStory } from "../../components/shared/reconstructTreeStory";
@@ -13,7 +14,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./ConstructBTVisualizer.css";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
@@ -35,7 +36,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "    return root" },
 ];
 
-const EXAMPLES = getExamples("construct-binary-tree");
+const EXAMPLES = authoredExamples0;
 
 export default function ConstructBTVisualizer() {
   const [preInput, setPreInput] = useState(JSON.stringify(AUTHORED_INITIAL.pre));

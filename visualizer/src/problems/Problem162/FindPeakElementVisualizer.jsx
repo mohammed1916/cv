@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-peak-element')[0];
+import authoredExamples0 from '../../config/examples/find-peak-element.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
@@ -8,7 +9,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./FindPeakElementVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -32,7 +33,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return lo" },
 ];
 
-const EXAMPLES = getExamples('find-peak-element');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
   const steps = [];

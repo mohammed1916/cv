@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('find-the-celebrity-564')[0];
+import authoredExamples0 from '../../config/examples/find-the-celebrity-564.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './FindCelebrityVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -361,7 +362,7 @@ function VisualizationPanel({ step, applyExample, examples, n, knowsMatrix }) {
 }
 
 export default function FindCelebrityVisualizer() {
-  const examples = useMemo(() => getExamplesOr('find-the-celebrity-564', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [n, setN] = useState(3)
   const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix || AUTHORED_INITIAL))
 

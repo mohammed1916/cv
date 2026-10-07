@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('kth-smallest')[0];
+import authoredExamples0 from '../../config/examples/kth-smallest.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './KthSmallestVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -108,7 +109,7 @@ function generateSteps(arr, k) {
     return steps
 }
 
-const EXAMPLES = getExamples('kth-smallest')
+const EXAMPLES = authoredExamples0
 
 export default function KthSmallestVisualizer() {
     const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/next-permutation.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,7 +15,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 
-import { getExamples } from "../../config/examplesRegistry";
+
 
 import "./NextPermutationVisualizer.css";
 
@@ -52,7 +53,7 @@ const LINE_PATTERN_MAP = {
   11: "done",
 };
 
-const EXAMPLES = getExamples("next-permutation");
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(input) {
   const nums = [...input];

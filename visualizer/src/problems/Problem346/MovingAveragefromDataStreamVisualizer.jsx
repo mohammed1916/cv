@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/moving-average-data-stream.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MovingAveragefromDataStreamVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import PointerRail from '../../components/shared/PointerRail'
@@ -43,7 +44,7 @@ function generateSteps({ size, stream }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('moving-average-data-stream', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function MovingAveragefromDataStreamVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))

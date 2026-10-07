@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('spiral-matrix')[0];
+import authoredExamples0 from '../../config/examples/spiral-matrix.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SpiralMatrixVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -186,7 +187,7 @@ function generateSteps(matrix) {
   return steps
 }
 
-const EXAMPLES = getExamples('spiral-matrix')
+const EXAMPLES = authoredExamples0
 
 export default function SpiralMatrixVisualizer() {
   const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix))

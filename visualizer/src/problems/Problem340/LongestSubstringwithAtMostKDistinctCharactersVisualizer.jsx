@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-substring-k-distinct')[0];
+import authoredExamples0 from '../../config/examples/longest-substring-k-distinct.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './LongestSubstringwithAtMostKDistinctCharactersVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -151,7 +152,7 @@ function generateSteps(s, k) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('longest-substring-k-distinct', [])
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 const EXAMPLES =
   REGISTRY_EXAMPLES.length > 0
     ? REGISTRY_EXAMPLES

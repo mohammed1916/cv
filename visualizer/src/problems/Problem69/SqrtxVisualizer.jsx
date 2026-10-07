@@ -1,4 +1,5 @@
-import { getExamples } from "../../config/examplesRegistry";
+import authoredExamples0 from '../../config/examples/sqrtx.js';
+
 ﻿import { useState, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -38,7 +39,7 @@ const SOLUTION_CODE = [
 
 
 
-const EXAMPLES = getExamples("sqrtx");
+const EXAMPLES = authoredExamples0;
 
 const SQRTX_PATTERNS = ['calc-mid', 'calc-square', 'check-greater', 'check-less', 'done', 'early-return', 'found', 'init', 'update-left', 'update-right', 'while-check']
 

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('balanced-binary-tree')[0];
+import authoredExamples0 from '../../config/examples/balanced-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "framer-motion";
@@ -10,7 +11,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { binaryTreeLayout } from "../../components/shared/binaryTreeLayout";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./BalancedBinaryTreeVisualizer.css";
 import { parseBalancedTree, traceBalance } from "./algorithm";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
@@ -43,7 +44,7 @@ function generateSteps(root) {
   return traceBalance(root).map(frame => ({ ...frame, positions, edges, allNodes }));
 }
 
-const EXAMPLES = getExamples("balanced-binary-tree");
+const EXAMPLES = authoredExamples0;
 
 // TreeVisualizationPanel: renders the tree canvas with states
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {

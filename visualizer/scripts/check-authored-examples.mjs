@@ -20,6 +20,7 @@ for(const folder of fs.readdirSync('src/problems')){
   const pathname=`${base}/${file}`, source=fs.readFileSync(pathname,'utf8');
   const ast=parse(source,{sourceType:'module',plugins:['jsx']});
   const keys=[];
+  for(const node of ast.program.body)if(node.type==='ImportDeclaration'&&node.source.value.includes('/config/examples/'))keys.push(node.source.value.split('/').at(-1).replace(/\.js$/,'').replace('--',':'));
   walk(ast,n=>{if(n.type==='CallExpression'&&/^(getExamples| getExamplesOr|getExamplesOr|getAuthoredExamples)$/.test(n.callee.name||'')&&n.arguments[0]?.type==='StringLiteral')keys.push(n.arguments[0].value);});
   for(const key of keys){
    if(!suites[key]?.length){failures.push(`${pathname}: missing ${key}`);continue;}

@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('ones-and-zeroes')[0];
+import authoredExamples0 from '../../config/examples/ones-and-zeroes.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem474Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +21,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('ones-and-zeroes', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMaxForm(strs, m, n):' },

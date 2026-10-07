@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('binary-tree-paths')[0];
+import authoredExamples0 from '../../config/examples/binary-tree-paths.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -11,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './BinaryTreePathsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -143,7 +144,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('binary-tree-paths')
+const EXAMPLES = authoredExamples0
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
     return (

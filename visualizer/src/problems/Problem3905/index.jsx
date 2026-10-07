@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3905.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -16,7 +17,7 @@ const definition = {
     { id: 'commit', label: 'Commit wave', description: 'Apply each winning color simultaneously.' },
     { id: 'done', label: 'Complete', description: 'Inspect the final grid.' },
   ],
-  examples: getAuthoredExamples('local:3905'),
+  examples: authoredExamples0,
 }
 
 function MultiSourceFloodFill() {

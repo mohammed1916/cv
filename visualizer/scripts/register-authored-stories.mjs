@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import { definitions as scans } from '../src/problems/families/scanStories/definitions.js';
 import { definitions as trees } from '../src/problems/families/treeStories/definitions.js';
 import { definitions as collections } from '../src/problems/families/collectionStories/definitions.js';
+const collectionGroups=JSON.parse(fs.readFileSync('src/problems/families/collectionStories/definitionGroupIndex.json','utf8'));
 const definitions={...scans,...trees,...collections};
 const collectionTags={
 ...authoredTags,
@@ -44,7 +45,7 @@ for(const [id,d] of Object.entries(definitions)) {
  const family=id in trees?'treeStories':id in collections?'collectionStories':'scanStories';
  if(fs.existsSync(folder)) {
   const index=fs.existsSync(`${folder}/index.jsx`)?fs.readFileSync(`${folder}/index.jsx`,'utf8'):'';
-  if(index.includes(`../families/${family}/definitions`))continue;
+  if(index.includes(`../families/${family}/definitions`) || index.includes(`../families/${family}/definitionGroups/`))continue;
   if(!authoredRouteReplacements.has(id))throw new Error(`Refusing to replace existing ${folder}`);
  }
  if(typeof d.python!=='string'||!d.python.trim()||!Array.isArray(d.code)||!d.code.length)throw new Error(`New route ${folder} requires complete Python and pseudocode before registration.`);
@@ -53,13 +54,13 @@ for(const [id,d] of Object.entries(definitions)) {
  const tags=collectionTags[id]??(id in trees?['Tree','Binary Tree']:[661,718,733].includes(+id)?['Array','Matrix']:[673,714,740].includes(+id)?['Dynamic Programming']:[682,735,844,856].includes(+id)?['Stack']:[594,599,692,771,804].includes(+id)?['Hash Table']:[658,744,852].includes(+id)?['Binary Search']:['Array','String']);
  fs.writeFileSync(`${folder}/meta.js`,`export const meta = ${JSON.stringify({number:id,title:d.title,slug:d.slug,difficulty:d.difficulty,tags,accent:'#0891b2',description:d.goal},null,2)};\n`);
  fs.writeFileSync(`${folder}/storyGuide.json`,JSON.stringify({number:id,title:d.title,goal:d.goal,strategy:d.strategy,phases:d.phases.map(p=>p.id),phasePurposes:Object.fromEntries(d.phases.map(p=>[p.id,p.description])),edgeCases:d.examples.slice(1).map(e=>e.label),checks:[],inputRules:['The input parser enforces the problem domain and explicit limits for an inspectable trace.']},null,2)+'\n');
- fs.writeFileSync(`${folder}/index.jsx`, `import { getExamples } from '../../config/examplesRegistry';
+ fs.writeFileSync(`${folder}/index.jsx`, `import examples from '../../config/examples/${id in trees?'tree':id in collections?'collection':'scan'}--${id}.js';
 import Story from '../families/${id in trees?'treeStories/TreeStory':'sequenceStories/SequenceStory'}';
-import { definitions } from '../families/${family}/definitions';
+import { definitions } from '../families/${family}/${id in collections?'definitionGroups/'+collectionGroups[id]+'.js':'definitions'}';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 
-const definition = { ...definitions[${id}], examples: getExamples('${id in trees?'tree':id in collections?'collection':'scan'}:${id}') };
+const definition = { ...definitions[${id}], examples };
 function Visualizer() { return <Story definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);
 `);

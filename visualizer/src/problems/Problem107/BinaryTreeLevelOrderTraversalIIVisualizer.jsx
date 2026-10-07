@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/binary-tree-level-order-ii.js';
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -10,7 +11,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { generateSteps } from "./algorithm";
 import StoryPanel from "../../components/shared/StoryPanel";
 import VisualizationPanel from "../../components/shared/TraversalTreePanel";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./BinaryTreeLevelOrderTraversalII.css";
 import ManualInputPanel from "../../components/shared/ManualInputPanel";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
@@ -36,7 +37,7 @@ const SOLUTION_CODE = [
   { line: 13, text: "        return res[::-1]  # Reverse!" },
 ];
 
-const EXAMPLES = getExamples("binary-tree-level-order-ii");
+const EXAMPLES = authoredExamples0;
 
 function ResultPanel({ step, inputError, LEVEL_COLORS }) {
   return (

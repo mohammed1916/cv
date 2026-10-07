@@ -1,11 +1,12 @@
+import authoredExamples0 from '../../config/examples/surrounded-regions.js';
 import { surroundedNarrative } from './surroundedNarrative.js';
-import { getExamples } from "../../config/examplesRegistry";
+
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SurroundedStory from "./SurroundedStory";
 import { CODE, buildSurroundedStory } from "./algorithm";
 import "./SurroundedRegionsVisualizer.css";
 
-const EXAMPLES = getExamples("surrounded-regions");
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: surroundedNarrative,

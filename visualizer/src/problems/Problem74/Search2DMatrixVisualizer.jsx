@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/search2-dmatrix.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 
 import { createPortal } from "react-dom";
@@ -23,7 +24,7 @@ import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 
-import { getExamples } from "../../config/examplesRegistry";
+
 
 import "./Search2DMatrixVisualizer.css";
 
@@ -534,7 +535,7 @@ function generateSteps(matrix, target) {
    EXAMPLES
    ========================================================= */
 
-const EXAMPLES = getExamples("search2-dmatrix");
+const EXAMPLES = authoredExamples0;
 
 /* =========================================================
    COMPONENT

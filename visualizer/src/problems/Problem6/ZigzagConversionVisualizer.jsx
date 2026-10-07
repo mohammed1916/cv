@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/zigzag-conversion.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ZigzagConversionVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -262,7 +263,7 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
 }
 
 export default function ZigzagConversionVisualizer() {
-  const examples = useMemo(() => getExamplesOr('zigzag-conversion', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [str, setStr] = useState('PAYPALISHIRING')
   const [numRows, setNumRows] = useState(3)
   const [panelDivs, setPanelDivs] = useState(null)

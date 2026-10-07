@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--138.js';
+
 import { copyRandomNarrative } from './copyRandomNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CopyRandomStory from "./CopyRandomStory";
@@ -11,7 +12,7 @@ import {
 
 import "./CopyListRandomVisualizer.css";
 
-const EXAMPLES = getAuthoredExamples('local:138');
+const EXAMPLES = authoredExamples0;
 
 const definition = {
   narrative: copyRandomNarrative,

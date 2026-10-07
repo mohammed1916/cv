@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/group-anagrams.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './GroupAnagramsVisualizer.css'
@@ -123,7 +124,7 @@ function generateSteps(strs) {
     return steps
 }
 
-const EXAMPLES = getExamples('group-anagrams')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap, keyToColor }) {
     return (

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/wildcard-matching.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -7,7 +8,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./WildcardMatchingVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -40,7 +41,7 @@ const SOLUTION_CODE = [
   { line: 13, text: "    return dp[m][n]" },
 ];
 
-const EXAMPLES = getExamples('wildcard-matching');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(s, p) {
   const m = s.length, n = p.length;

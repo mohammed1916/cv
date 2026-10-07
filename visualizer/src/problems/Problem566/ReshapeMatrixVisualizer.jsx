@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('reshape-matrix')[0];
+import authoredExamples0 from '../../config/examples/reshape-matrix.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -11,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ReshapeMatrixVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -447,7 +448,7 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReshapeMatrixVisualizer() {
-  const examples = useMemo(() => getExamplesOr('reshape-matrix', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.mat || AUTHORED_INITIAL.matrix || [[1, 2, 3, 4]]))
   const [r, setR] = useState(2)
   const [c, setC] = useState(2)

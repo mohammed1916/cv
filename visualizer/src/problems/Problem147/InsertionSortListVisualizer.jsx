@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('insertion-sort-list')[0];
+import authoredExamples0 from '../../config/examples/insertion-sort-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,7 +17,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 
-import { getExamplesOr } from "../../config/examplesRegistry";
+
 
 import "./InsertionSortListVisualizer.css";
 
@@ -25,7 +26,7 @@ import "./InsertionSortListVisualizer.css";
 const LINE_PATTERN_MAP = {};
 const PATTERNS = [];
 
-const EXAMPLES = getExamplesOr("insertion-sort-list", []);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 const SOLUTION_CODE = [
   { line: 1, text: "def insertionSortList(head):" },

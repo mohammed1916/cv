@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/set-matrix-zeroes.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './SetMatrixZeroesVisualizer.css'
 
@@ -115,7 +116,7 @@ function generateSteps(initial) {
     return steps
 }
 
-const EXAMPLES = getExamples('set-matrix-zeroes')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ EXAMPLES, applyExample, selected, initial, step }) {
     const matrix = step?.matrix ?? initial

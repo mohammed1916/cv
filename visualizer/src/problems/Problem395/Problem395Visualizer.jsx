@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('longest-substring-k-repeating')[0];
+import authoredExamples0 from '../../config/examples/longest-substring-k-repeating.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -138,7 +139,7 @@ function generateSteps(s, k) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('longest-substring-k-repeating', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem395Visualizer() {
   const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)

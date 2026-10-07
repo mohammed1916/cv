@@ -1,6 +1,7 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('local:63')[0];
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--63.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -171,7 +172,7 @@ function generateSteps(m, n, obstacleGrid) {
     return steps
 }
 
-const DEFAULT_EXAMPLES = getAuthoredExamples('local:63')
+const DEFAULT_EXAMPLES = authoredExamples0
 
 function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, mInput, nInput, setMInput, setNInput, obstacleGridInput, setObstacleGridInput, handleReset }) {
     const dp = step?.dp ?? []

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--368.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -161,7 +162,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = getAuthoredExamples('local:368')
+const EXAMPLES = authoredExamples0
 
 function DivisibilityArrows({ sorted, highlighted, currentIdx }) {
   const elementWidth = 60

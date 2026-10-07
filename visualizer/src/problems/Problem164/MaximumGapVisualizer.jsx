@@ -1,5 +1,6 @@
-import { getExamples as getInitialExamples } from '../../config/examplesRegistry';
-const AUTHORED_INITIAL = getInitialExamples('maximum-gap')[0];
+import authoredExamples0 from '../../config/examples/maximum-gap.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
@@ -10,7 +11,7 @@ import Selectable from "../../components/Selectable";
 import { useVisualizationContext } from "../../context/VisualizationContext";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MaximumGapVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -42,7 +43,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('maximum-gap');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
     const steps = [];

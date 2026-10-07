@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/find-all-anagrams.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../../config/examplesRegistry'
+
 import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./FindAllAnagramsVisualizer.css";
 import { createPortal } from 'react-dom'
@@ -28,7 +29,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('find-all-anagrams');
+const EXAMPLES = authoredExamples0;
 
 function countEq(a, b) {
     if (Object.keys(a).length !== Object.keys(b).length) return false;

@@ -1,4 +1,5 @@
-import { getExamples as getAuthoredExamples } from '../../config/examplesRegistry';
+import authoredExamples0 from '../../config/examples/local--3895.js';
+
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
@@ -15,7 +16,7 @@ const definition = {
     { id: 'finish', label: 'Number complete', description: 'The quotient is zero, so no digits remain.' },
     { id: 'done', label: 'Return total', description: 'Return all occurrences, not merely the number of matching elements.' },
   ],
-  examples: getAuthoredExamples('local:3895'),
+  examples: authoredExamples0,
 }
 function CountDigitAppearances() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
