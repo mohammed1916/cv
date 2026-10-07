@@ -1,28 +1,361 @@
-.local-dock-workspace { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; color: var(--text); background: var(--surface); }
-.local-dock-layout { flex: 1; min-height: 0; min-width: 0; display: flex; }
-.local-dock-split { display: flex; flex: 1; min-width: 0; min-height: 0; overflow: hidden; }
-.local-dock-split.vertical { flex-direction: column; }
-.local-dock-branch { display: flex; min-width: 0; min-height: 0; overflow: hidden; }
-.local-dock-divider { flex: 0 0 7px; background: var(--surface2); border: 2px solid var(--surface); cursor: col-resize; touch-action: none; }
-.vertical > .local-dock-divider { cursor: row-resize; }
-.local-dock-divider:hover, .local-dock-divider:focus-visible { background: var(--primary); outline: none; }
-.local-dock-group { display: flex; flex-direction: column; flex: 1; position: relative; min-width: 0; min-height: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
-.local-dock-header { display: flex; align-items: center; flex: 0 0 36px; min-width: 0; background: var(--surface2); border-bottom: 1px solid var(--border); gap: 3px; }
-.local-dock-tabs { display: flex; flex: 1; overflow-x: auto; min-width: 0; height: 36px; }
-.local-dock-header button, .local-dock-header select, .local-dock-restore button { color: var(--text); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 5px 8px; font-size: 12px; cursor: pointer; }
-.local-dock-header > button { margin-right: 5px; font-size: 18px; line-height: 16px; }
-.local-dock-header select { width: 58px; }
-.local-dock-tabs button { border: 0; border-radius: 0; border-bottom: 2px solid transparent; white-space: nowrap; cursor: grab; }
-.local-dock-tabs button[aria-selected=true] { border-bottom-color: var(--primary); background: var(--surface); }
-.local-dock-body, .local-dock-slot, .local-dock-content, .local-dock-code { flex: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
-.local-dock-slot[hidden] { display: none; }
-.local-dock-slot { position: relative; }
-.local-dock-content { overflow: auto; }
-.local-dock-code > * { flex: 1; min-height: 0; }
-.local-dock-status { flex: 0 0 auto; border-bottom: 1px solid var(--border); background: var(--surface2); }
-.local-dock-restore { flex: 0 0 auto; min-height: 28px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; padding: 4px 6px; border-top: 1px solid var(--border); }
-.local-dock-restore span { font-size: 11px; color: var(--text-muted); }
-.local-dock-empty { padding: 20px; }
+.local-dock-workspace {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--surface);
+  isolation: isolate;
+}
+
+.local-dock-layout {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.local-dock-split {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.local-dock-split.vertical {
+  flex-direction: column;
+}
+
+.local-dock-branch {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.local-dock-divider {
+  flex: 0 0 7px;
+  background: var(--surface2);
+  border: 2px solid var(--surface);
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.vertical > .local-dock-divider {
+  cursor: row-resize;
+}
+
+.local-dock-divider:hover,
+.local-dock-divider:focus-visible {
+  background: var(--primary);
+  outline: none;
+}
+
+/* -------------------------------------------------------
+   Dock group
+   ------------------------------------------------------- */
+
+.local-dock-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* -------------------------------------------------------
+   Header
+   ------------------------------------------------------- */
+
+.local-dock-header {
+  display: flex;
+  align-items: center;
+  flex: 0 0 36px;
+  min-width: 0;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  gap: 3px;
+}
+
+.local-dock-tabs {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 0;
+  height: 36px;
+}
+
+.local-dock-tabs::-webkit-scrollbar {
+  height: 3px;
+}
+
+.local-dock-header button,
+.local-dock-header select,
+.local-dock-restore button {
+  color: var(--text);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.local-dock-tabs button {
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  cursor: grab;
+}
+
+.local-dock-tabs button:active {
+  cursor: grabbing;
+}
+
+.local-dock-tabs button[aria-selected="true"] {
+  border-bottom-color: var(--primary);
+  background: var(--surface);
+}
+
+/* Keep Move / Maximize / Collapse together. */
+.local-dock-header-actions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 5px;
+}
+
+.local-dock-header-actions select {
+  width: 58px;
+  min-width: 58px;
+}
+
+.local-dock-header-actions select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* -------------------------------------------------------
+   Maximize / restore-size button
+   ------------------------------------------------------- */
+
+.local-dock-header-actions .local-dock-maximize-btn,
+.local-dock-header-actions .local-dock-collapse-btn {
+  width: 29px;
+  height: 27px;
+  min-width: 29px;
+  padding: 0;
+  margin: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 1;
+}
+
+.local-dock-maximize-btn svg {
+  display: block;
+  pointer-events: none;
+}
+
+.local-dock-maximize-btn:hover,
+.local-dock-maximize-btn:focus-visible,
+.local-dock-collapse-btn:hover,
+.local-dock-collapse-btn:focus-visible {
+  border-color: var(--primary);
+  background:
+    color-mix(
+      in srgb,
+      var(--surface2) 78%,
+      var(--primary)
+    );
+  outline: none;
+}
+
+.local-dock-maximize-btn[aria-pressed="true"] {
+  border-color: var(--primary);
+  color: var(--primary);
+  background:
+    color-mix(
+      in srgb,
+      var(--surface2) 86%,
+      var(--primary)
+    );
+}
+
+.local-dock-collapse-btn {
+  font-size: 18px !important;
+}
+
+/* -------------------------------------------------------
+   Maximized panel
+   -------------------------------------------------------
+
+   The layout tree itself is NOT changed.
+
+   The selected group simply becomes an absolute layer
+   covering .local-dock-layout. Therefore the original
+   split ratios and tab grouping remain untouched.
+   ------------------------------------------------------- */
+
+.local-dock-group.local-dock-group-maximized {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  flex: none;
+
+  z-index: 1500;
+
+  border-radius: 6px;
+  border-color:
+    color-mix(
+      in srgb,
+      var(--border) 65%,
+      var(--primary)
+    );
+
+  background: var(--surface);
+
+  box-shadow:
+    0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--primary) 18%,
+        transparent
+      ),
+    0 18px 50px rgb(0 0 0 / 22%);
+}
+
+/*
+ * Hide all normal branches/splits behind the maximized
+ * panel visually, while leaving them mounted.
+ *
+ * The maximized group itself has z-index 1500, so it
+ * remains visible.
+ */
+.local-dock-has-maximized
+  .local-dock-layout
+  > .local-dock-split {
+  position: relative;
+}
+
+/*
+ * Prevent dividers from appearing/capturing the mouse
+ * through the maximized layer.
+ */
+.local-dock-has-maximized
+  .local-dock-divider {
+  pointer-events: none;
+}
+
+/* Stronger visual distinction on maximized header. */
+.local-dock-group-maximized
+  > .local-dock-header {
+  background:
+    color-mix(
+      in srgb,
+      var(--surface2) 94%,
+      var(--primary)
+    );
+
+  border-bottom-color:
+    color-mix(
+      in srgb,
+      var(--border) 72%,
+      var(--primary)
+    );
+}
+
+/* -------------------------------------------------------
+   Panel content
+   ------------------------------------------------------- */
+
+.local-dock-body,
+.local-dock-slot,
+.local-dock-content,
+.local-dock-code {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.local-dock-slot[hidden] {
+  display: none;
+}
+
+.local-dock-slot {
+  position: relative;
+}
+
+.local-dock-content {
+  overflow: auto;
+}
+
+.local-dock-code > * {
+  flex: 1;
+  min-height: 0;
+}
+
+.local-dock-status {
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+/* -------------------------------------------------------
+   Restore strip
+   ------------------------------------------------------- */
+
+.local-dock-restore {
+  position: relative;
+  z-index: 1600;
+
+  flex: 0 0 auto;
+  min-height: 28px;
+
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 4px 6px;
+
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.local-dock-restore span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.local-dock-empty {
+  padding: 20px;
+}
+
+/* -------------------------------------------------------
+   Minimize animation
+   ------------------------------------------------------- */
+
 .local-dock-minimize-flight {
   position: absolute !important;
 
@@ -38,24 +371,17 @@
 
   overflow: hidden;
 
-  /*
-   * Keep the clone visually distinguishable from the real workspace,
-   * but don't give it a huge border that becomes ugly when scaled.
-   */
   outline: 1px solid var(--primary);
 
   box-shadow:
     0 14px 40px rgb(0 0 0 / 28%),
-    0 0 0 1px color-mix(
-      in srgb,
-      var(--primary) 35%,
-      transparent
-    );
+    0 0 0 1px
+      color-mix(
+        in srgb,
+        var(--primary) 35%,
+        transparent
+      );
 
-  /*
-   * Prevent the browser from trying to transition properties on
-   * descendants copied from the actual panel.
-   */
   transition: none !important;
 
   will-change:
@@ -65,10 +391,6 @@
   contain: paint;
 }
 
-/*
- * The restore target exists before the flying panel reaches it.
- * Keep it subdued until arrival.
- */
 .local-dock-restore button.is-arriving {
   border-color: var(--primary);
 
@@ -76,23 +398,243 @@
 
   box-shadow:
     0 0 0 2px
+      color-mix(
+        in srgb,
+        var(--primary) 30%,
+        transparent
+      );
+}
+
+/* -------------------------------------------------------
+   Dock zones
+   ------------------------------------------------------- */
+
+.local-dock-zones {
+  position: absolute;
+  inset: 36px 0 0;
+
+  display: grid;
+
+  grid-template-columns:
+    24% 1fr 24%;
+
+  grid-template-rows:
+    24% 1fr 24%;
+
+  z-index: 100;
+}
+
+.local-dock-zone {
+  display: grid;
+  place-items: center;
+
+  background:
     color-mix(
       in srgb,
-      var(--primary) 25%,
-      transparent
+      var(--surface) 85%,
+      var(--primary)
+    );
+
+  border: 1px dashed var(--primary);
+
+  color: var(--text);
+
+  font-size: 12px;
+}
+
+.local-dock-zone:hover {
+  background: var(--primary);
+  color:
+    var(
+      --text-on-primary,
+      white
     );
 }
-.local-dock-restore button.is-arriving { border-color: var(--primary); box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 30%, transparent); }
-.local-dock-zones { position: absolute; inset: 36px 0 0; display: grid; grid-template-columns: 24% 1fr 24%; grid-template-rows: 24% 1fr 24%; z-index: 100; }
-.local-dock-zone { display: grid; place-items: center; background: color-mix(in srgb, var(--surface) 85%, var(--primary)); border: 1px dashed var(--primary); color: var(--text); font-size: 12px; }
-.local-dock-zone:hover { background: var(--primary); color: var(--text-on-primary, white); }
-.local-dock-zone.left { grid-column: 1; grid-row: 1 / 4; }.local-dock-zone.right { grid-column: 3; grid-row: 1 / 4; }
-.local-dock-zone.top { grid-column: 2; grid-row: 1; }.local-dock-zone.bottom { grid-column: 2; grid-row: 3; }.local-dock-zone.tab { grid-column: 2; grid-row: 2; }
-.workspace-drop-targets { display: none; position: absolute; inset: 36px 8px 36px; z-index: 2001; pointer-events: none; }
-.dragging-floating-panel .workspace-drop-targets { display: block; }
-.workspace-drop-target { position: absolute; display: grid; place-items: center; border: 2px dashed var(--primary); border-radius: 10px; background: var(--surface2); color: var(--text); }
-.workspace-drop-target.left { left: 0; top: 0; bottom: 84px; width: 100px; }.workspace-drop-target.right { right: 0; top: 0; bottom: 84px; width: 100px; }.workspace-drop-target.bottom { left: 0; right: 0; bottom: 0; height: 76px; }
 
-.local-dock-minimize-guide { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2101; pointer-events: none; overflow: visible; }
-.local-dock-minimize-guide path { fill: none; stroke: var(--primary); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 2px var(--surface)); }
-.local-dock-minimize-notice { position: absolute; bottom: 48px; z-index: 2102; max-width: min(280px, calc(100% - 16px)); padding: 10px 14px; border: 2px solid var(--primary); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 14px; font-weight: 700; pointer-events: none; box-shadow: 0 4px 16px #0004; }
+.local-dock-zone.left {
+  grid-column: 1;
+  grid-row: 1 / 4;
+}
+
+.local-dock-zone.right {
+  grid-column: 3;
+  grid-row: 1 / 4;
+}
+
+.local-dock-zone.top {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.local-dock-zone.bottom {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.local-dock-zone.tab {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/* -------------------------------------------------------
+   Floating-panel dock targets
+   ------------------------------------------------------- */
+
+.workspace-drop-targets {
+  display: none;
+
+  position: absolute;
+
+  inset: 36px 8px 36px;
+
+  z-index: 2001;
+
+  pointer-events: none;
+}
+
+.dragging-floating-panel
+  .workspace-drop-targets {
+  display: block;
+}
+
+.workspace-drop-target {
+  position: absolute;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px dashed var(--primary);
+
+  border-radius: 10px;
+
+  background: var(--surface2);
+
+  color: var(--text);
+}
+
+.workspace-drop-target.left {
+  left: 0;
+  top: 0;
+  bottom: 84px;
+  width: 100px;
+}
+
+.workspace-drop-target.right {
+  right: 0;
+  top: 0;
+  bottom: 84px;
+  width: 100px;
+}
+
+.workspace-drop-target.bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 76px;
+}
+
+/* -------------------------------------------------------
+   Minimize guide
+   ------------------------------------------------------- */
+
+.local-dock-minimize-guide {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 2101;
+
+  pointer-events: none;
+
+  overflow: visible;
+}
+
+.local-dock-minimize-guide path {
+  fill: none;
+
+  stroke: var(--primary);
+
+  stroke-width: 4;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(
+      0 1px 2px var(--surface)
+    );
+}
+
+.local-dock-minimize-notice {
+  position: absolute;
+
+  bottom: 48px;
+
+  z-index: 2102;
+
+  max-width:
+    min(
+      280px,
+      calc(100% - 16px)
+    );
+
+  padding: 10px 14px;
+
+  border: 2px solid var(--primary);
+
+  border-radius: 8px;
+
+  background: var(--surface);
+
+  color: var(--text);
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  pointer-events: none;
+
+  box-shadow:
+    0 4px 16px #0004;
+}
+
+/* -------------------------------------------------------
+   Small workspace handling
+   ------------------------------------------------------- */
+
+@media (max-width: 700px) {
+  .local-dock-header-actions {
+    gap: 2px;
+    padding-right: 3px;
+  }
+
+  .local-dock-header-actions select {
+    width: 52px;
+    min-width: 52px;
+    font-size: 11px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .local-dock-header-actions
+    .local-dock-maximize-btn,
+  .local-dock-header-actions
+    .local-dock-collapse-btn {
+    width: 27px;
+    min-width: 27px;
+  }
+}
+
+/* -------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .local-dock-maximize-btn,
+  .local-dock-collapse-btn {
+    transition: none;
+  }
+}
