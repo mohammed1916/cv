@@ -1,15 +1,13 @@
-import authoredExamples0 from '../../config/examples/linked-list-cycle.js';
-import { hasCycleNarrative } from './hasCycleNarrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CycleStory from "./CycleStory";
 import { CODE, buildCycleStory } from "./algorithm";
+import { hasCycleNarrative } from "./hasCycleNarrative";
 import "./LinkedListCycleVisualizer.css";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("linked-list-cycle");
 
 const definition = {
-  narrative: hasCycleNarrative,
   title: "Linked List Cycle",
   inputLabel: "List values & cycle pos (e.g. [3,2,0,-4] | pos=1)",
   inputType: "string",
@@ -26,6 +24,7 @@ const definition = {
     8: "done",
   },
   patterns: ["init", "check", "move_slow", "move_fast", "compare", "done"],
+  narrative: hasCycleNarrative,
   build: (input) => buildCycleStory(input),
   renderStory: ({ story, step }) => <CycleStory story={story} step={step} />,
 };

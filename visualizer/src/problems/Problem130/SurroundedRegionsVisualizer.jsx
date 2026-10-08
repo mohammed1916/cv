@@ -1,12 +1,11 @@
-import authoredExamples0 from '../../config/examples/surrounded-regions.js';
-import { surroundedNarrative } from './surroundedNarrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import SurroundedStory from "./SurroundedStory";
 import { CODE, buildSurroundedStory } from "./algorithm";
+import { surroundedNarrative } from "./surroundedNarrative";
 import "./SurroundedRegionsVisualizer.css";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("surrounded-regions");
 
 const definition = {
   narrative: surroundedNarrative,
@@ -41,7 +40,9 @@ const definition = {
   },
   patterns: ["init", "border-scan", "sweep", "done"],
   build: (input) => buildSurroundedStory(input),
-  renderStory: ({ story, step }) => <SurroundedStory story={story} step={step} />,
+  renderStory: ({ story, step }) => (
+    <SurroundedStory story={story} step={step} />
+  ),
 };
 
 export default function SurroundedRegionsVisualizer() {

@@ -1,12 +1,11 @@
-import authoredExamples0 from '../../config/examples/best-time-to-buy-and-sell-stock-ii.js';
-import { stock2Narrative } from './stock2Narrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import StockStory2 from "./StockStory2";
 import { STOCK_CODE, buildStock2Story } from "./algorithm";
+import { stock2Narrative } from "./stock2Narrative";
 import "./BestTimeToBuyAndSellStockIIVisualizer.css";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("best-time-to-buy-and-sell-stock-ii");
 
 const definition = {
   narrative: stock2Narrative,

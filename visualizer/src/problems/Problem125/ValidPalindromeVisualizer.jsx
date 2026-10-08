@@ -1,12 +1,11 @@
-import authoredExamples0 from '../../config/examples/valid-palindrome.js';
-import { palindromeNarrative } from './palindromeNarrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import PalindromeStory from "./PalindromeStory";
 import { PALINDROME_CODE, buildPalindromeStory } from "./algorithm";
+import { palindromeNarrative } from "./palindromeNarrative";
 import "./ValidPalindromeVisualizer.css";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("valid-palindrome");
 
 const definition = {
   narrative: palindromeNarrative,
@@ -26,7 +25,9 @@ const definition = {
   },
   patterns: ["init", "loop", "compare", "update", "done"],
   build: (input) => buildPalindromeStory(input),
-  renderStory: ({ story, step }) => <PalindromeStory story={story} step={step} />,
+  renderStory: ({ story, step }) => (
+    <PalindromeStory story={story} step={step} />
+  ),
 };
 
 export default function ValidPalindromeVisualizer() {

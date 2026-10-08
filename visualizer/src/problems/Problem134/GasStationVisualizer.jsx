@@ -1,16 +1,49 @@
-import authoredExamples0 from '../../config/examples/local--134.js';
-import authoredExamples1 from '../../config/examples/gas-station.js';
-
-import { gasStationNarrative } from './gasStationNarrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import GasStationStory from "./GasStationStory";
 import { CODE, buildGasStationStory } from "./algorithm";
-
+import { gasStationNarrative } from "./gasStationNarrative";
+import { getExamplesOr } from "../../config/examplesRegistry";
 import "./GasStationVisualizer.css";
 
-const DEFAULT_EXAMPLES = authoredExamples0;
+const DEFAULT_EXAMPLES = [
+  {
+    label: "Example 1 (Start 3)",
+    values: {
+      gas: "[1, 2, 3, 4, 5]",
+      cost: "[3, 4, 5, 1, 2]",
+    },
+  },
+  {
+    label: "Example 2 (Impossible)",
+    values: {
+      gas: "[2, 3, 4]",
+      cost: "[3, 4, 3]",
+    },
+  },
+  {
+    label: "Example 3 (Ex 3)",
+    values: {
+      gas: "[5, 1, 2, 3, 4]",
+      cost: "[4, 4, 1, 5, 1]",
+    },
+  },
+  {
+    label: "Single Station",
+    values: {
+      gas: "[2]",
+      cost: "[2]",
+    },
+  },
+  {
+    label: "Exact Fuel (Start 0)",
+    values: {
+      gas: "[3, 1, 1]",
+      cost: "[1, 2, 2]",
+    },
+  },
+];
 
-const registryExamples = (authoredExamples1.length ? authoredExamples1 : []);
+const registryExamples = getExamplesOr("gas-station", []);
 const EXAMPLES =
   registryExamples.length > 0
     ? registryExamples.map((ex) => ({
@@ -69,12 +102,19 @@ const definition = {
   },
   patterns: ["init", "check", "travel", "deficit", "done"],
   build: (values) => {
-    if (values && typeof values === "object" && "gas" in values && "cost" in values) {
+    if (
+      values &&
+      typeof values === "object" &&
+      "gas" in values &&
+      "cost" in values
+    ) {
       return buildGasStationStory(values.gas, values.cost);
     }
     return buildGasStationStory(values);
   },
-  renderStory: ({ story, step }) => <GasStationStory story={story} step={step} />,
+  renderStory: ({ story, step }) => (
+    <GasStationStory story={story} step={step} />
+  ),
 };
 
 export default function GasStationVisualizer() {

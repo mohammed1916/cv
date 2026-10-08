@@ -1,11 +1,10 @@
-import authoredExamples0 from '../../config/examples/triangle.js';
-import { triangleNarrative } from './triangleNarrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import TriangleStory from "./TriangleStory";
 import { TRIANGLE_CODE, buildTriangleStory } from "./algorithm";
+import { triangleNarrative } from "./triangleNarrative";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("triangle");
 
 const definition = {
   narrative: triangleNarrative,

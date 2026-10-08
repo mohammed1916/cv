@@ -1,44 +1,72 @@
-import { createTraceNarrative } from '../../components/shared/createTraceNarrative.js';
-
-export const stock2Narrative = createTraceNarrative({
-  "goal": "Maximize profit with any number of non-overlapping buy/sell transactions.",
-  "strategy": "Collect each positive day-to-day rise; adjacent rises telescope into the same profit as holding through an increasing run.",
-  "chapters": [
-    "Start with no trades",
-    "Identify profitable rises",
-    "Accumulate gains"
+export const stock2Narrative = {
+  goal: "Find the maximum profit achievable from buying and selling stock as many times as desired by greedily capturing every positive daily price increase.",
+  chapters: [
+    "Compare adjacent days",
+    "Capture price rise",
+    "Total accumulated profit",
   ],
-  "blocks": [
-    {
-      "chapter": 0,
-      "lines": [
-        2
-      ],
-      "why": "Zero profit preserves the option of doing nothing.",
-      "next": "Inspect neighboring prices."
+  ready: {
+    why: "Because we can make unlimited transactions without cooldown or fee, any multi-day upward price run (prices[j] - prices[i]) equals the sum of its daily increases.",
+    achieved: "No trading days scanned yet.",
+    next: "Start with 0 total profit and compare day 1 with day 0.",
+  },
+  phases: {
+    init: {
+      chapter: 0,
+      why: "Initialize cumulative profit accumulator to 0 before scanning price pairs.",
+      achieved: "Total profit is initialized to 0.",
+      next: "Begin scanning price changes from day 1 onward.",
     },
-    {
-      "chapter": 1,
-      "lines": [
-        3,
-        4
-      ],
-      "why": "A falling or flat pair adds no profit; rising pairs can be included without holding multiple shares.",
-      "next": "Add a positive difference, otherwise continue."
+    compare: ({ step }) => ({
+      chapter: 0,
+      why: "Check whether stock price rose from yesterday (day i-1) to today (day i).",
+      achieved: `Day ${step.currentDay} price ($${step.currentPrice}) vs day ${step.prevDay} price ($${step.prevPrice}): difference is ${step.diff >= 0 ? `+$${step.diff}` : `-$${Math.abs(step.diff)}`}.`,
+      next: step.isUpward
+        ? `Price rose: buy at $${step.prevPrice} and sell at $${step.currentPrice} to capture +$${step.diff}.`
+        : "Price dropped or stayed equal: no profit opportunity on this day.",
+    }),
+    update: ({ step }) => ({
+      chapter: 1,
+      why: "Add the positive daily price difference to total profit.",
+      achieved: `Captured +$${step.diff} profit. Cumulative total profit is now $${step.profit}.`,
+      next: "Advance to the next day.",
+    }),
+    done: ({ step }) => ({
+      chapter: 2,
+      why: "All adjacent day transitions have been evaluated.",
+      achieved:
+        step.profit > 0
+          ? `Maximum total profit across all transactions is $${step.profit}.`
+          : "Stock price never increased; choosing no trades yields 0 profit.",
+      next: "Try another price series to explore different market movements.",
+    }),
+  },
+  lines: {
+    2: {
+      chapter: 0,
+      why: "Initialize total profit accumulator to 0.",
+      achieved: "profit = 0.",
+      next: "Iterate over days i from 1 to len(prices) - 1.",
     },
-    {
-      "chapter": 2,
-      "lines": [
-        5,
-        6
-      ],
-      "why": "Summing positive differences captures every upward run without paying for intervening drops.",
-      "next": "Continue until every adjacent pair has been considered."
-    }
-  ],
-  "edgeCases": [
-    "One price gives no opportunity to sell later.",
-    "Flat or decreasing prices yield zero.",
-    "Multiple rises separated by drops require separate trades, unlike the one-transaction problem."
-  ]
-});
+    4: ({ step }) => ({
+      chapter: 0,
+      why: "Test if today’s price is higher than yesterday’s price: prices[i] > prices[i-1].",
+      achieved: `Condition prices[${step.currentDay}] ($${step.currentPrice}) > prices[${step.prevDay}] ($${step.prevPrice}) is ${step.isUpward ? "True" : "False"}.`,
+      next: step.isUpward
+        ? "Add price difference to profit."
+        : "Move to next day.",
+    }),
+    5: ({ step }) => ({
+      chapter: 1,
+      why: "Accumulate the daily gain into total profit.",
+      achieved: `profit += ${step.currentPrice} - ${step.prevPrice} (${step.diff}) → total profit = $${step.profit}.`,
+      next: "Continue scanning price changes.",
+    }),
+    6: ({ step }) => ({
+      chapter: 2,
+      why: "Return the final accumulated profit.",
+      achieved: `Total maximum profit is $${step.profit}.`,
+      next: "Try another price array.",
+    }),
+  },
+};

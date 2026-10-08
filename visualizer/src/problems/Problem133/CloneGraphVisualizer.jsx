@@ -1,12 +1,11 @@
-import authoredExamples0 from '../../config/examples/clone-graph.js';
-import { cloneGraphNarrative } from './cloneGraphNarrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CloneGraphStory from "./CloneGraphStory";
 import { CODE, buildCloneGraphStory } from "./algorithm";
+import { cloneGraphNarrative } from "./cloneGraphNarrative";
 import "./CloneGraphVisualizer.css";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("clone-graph");
 
 const definition = {
   narrative: cloneGraphNarrative,

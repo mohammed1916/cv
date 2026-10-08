@@ -1,16 +1,44 @@
-import authoredExamples0 from '../../config/examples/local--142.js';
-import authoredExamples1 from '../../config/examples/linked-list-cycle-ii.js';
-
-import { detectCycle2Narrative } from './detectCycle2Narrative.js';
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import Cycle2Story from "./Cycle2Story";
 import { CODE, buildCycle2Story } from "./algorithm";
-
+import { detectCycle2Narrative } from "./detectCycle2Narrative";
+import { getExamplesOr } from "../../config/examplesRegistry";
 import "./LinkedListCycleIIVisualizer.css";
 
-const DEFAULT_EXAMPLES = authoredExamples0;
+const DEFAULT_EXAMPLES = [
+  {
+    label: "Example 1: [3,2,0,-4], pos=1",
+    values: { nodes: "[3, 2, 0, -4]", pos: 1 },
+    input: { nodes: "[3, 2, 0, -4]", pos: 1 },
+  },
+  {
+    label: "Example 2: [1,2], pos=0",
+    values: { nodes: "[1, 2]", pos: 0 },
+    input: { nodes: "[1, 2]", pos: 0 },
+  },
+  {
+    label: "Example 3: [1], pos=-1",
+    values: { nodes: "[1]", pos: -1 },
+    input: { nodes: "[1]", pos: -1 },
+  },
+  {
+    label: "Self Loop: [42], pos=0",
+    values: { nodes: "[42]", pos: 0 },
+    input: { nodes: "[42]", pos: 0 },
+  },
+  {
+    label: "Tail + Loop: [1..7], pos=3",
+    values: { nodes: "[1, 2, 3, 4, 5, 6, 7]", pos: 3 },
+    input: { nodes: "[1, 2, 3, 4, 5, 6, 7]", pos: 3 },
+  },
+  {
+    label: "Pure Cycle: [10,20,30], pos=0",
+    values: { nodes: "[10, 20, 30]", pos: 0 },
+    input: { nodes: "[10, 20, 30]", pos: 0 },
+  },
+];
 
-const registryExamples = (authoredExamples1.length ? authoredExamples1 : []);
+const registryExamples = getExamplesOr("linked-list-cycle-ii", []);
 const EXAMPLES =
   registryExamples.length > 0
     ? registryExamples.map((ex) => ({
@@ -27,7 +55,6 @@ const EXAMPLES =
     : DEFAULT_EXAMPLES;
 
 const definition = {
-  narrative: detectCycle2Narrative,
   title: "Linked List Cycle II",
   fields: [
     { key: "nodes", label: "nodes", type: "array" },
@@ -57,6 +84,7 @@ const definition = {
     15: "done",
   },
   patterns: ["init", "loop", "compare", "update", "done"],
+  narrative: detectCycle2Narrative,
   build: (input) => buildCycle2Story(input),
   renderStory: ({ story, step }) => <Cycle2Story story={story} step={step} />,
 };

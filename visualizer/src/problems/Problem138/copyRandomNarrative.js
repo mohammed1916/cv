@@ -1,61 +1,90 @@
-import { createTraceNarrative } from '../../components/shared/createTraceNarrative.js';
-
-export const copyRandomNarrative = createTraceNarrative({
-  "goal": "Deep-copy a linked list including next links and arbitrary random links, then restore the original list.",
-  "strategy": "Insert each clone beside its original, use that adjacency to resolve random targets, then separate the two lists.",
-  "chapters": [
-    "Interleave clones",
-    "Resolve random targets",
-    "Separate and restore"
+export const copyRandomNarrative = {
+  goal: "Create a deep copy of a linked list with random pointers in O(1) extra space by interleaving clone nodes directly with original nodes.",
+  chapters: [
+    "Interleave clone nodes (A → A')",
+    "Assign clone random pointers",
+    "Separate and restore original list",
+    "Return head of copied list",
   ],
-  "blocks": [
-    {
-      "chapter": 0,
-      "lines": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
-      ],
-      "why": "Placing a clone immediately after its original creates a direct original-to-clone lookup without a separate map.",
-      "next": "Once every clone exists, copy random pointers."
+  ready: {
+    why: "By inserting each clone node immediately after its original counterpart (A -> A' -> B -> B'), the clone of any node's random target is simply curr.random.next, eliminating the need for a hash map.",
+    achieved: "List copy has not started yet.",
+    next: "Start Phase 1: interleave each clone node after its original.",
+  },
+  phases: {
+    init: {
+      chapter: 0,
+      why: "Verify that head is non-null and initialize pointer curr = head.",
+      achieved: "List validated; pointer at head.",
+      next: "Begin Phase 1 (interleaving clones).",
     },
-    {
-      "chapter": 1,
-      "lines": [
-        9,
-        10,
-        11,
-        12,
-        13
-      ],
-      "why": "The clone of any random target is that target's next node, even if the target is earlier or points to itself.",
-      "next": "Walk originals by skipping their inserted clones."
+    interleave: ({ step }) => ({
+      chapter: 0,
+      why: "Create clone node with val = curr.val and insert it between curr and curr.next.",
+      achieved: `Phase 1: ${step.copy !== null ? `created clone ${step.copy}' (val: ${step.originalNodes?.[step.copy]?.val}) spliced after node ${step.copy}.` : "interleaving nodes."}`,
+      next: "Advance curr past the newly created clone node.",
+    }),
+    random: ({ step }) => ({
+      chapter: 1,
+      why: "Assign clone random pointers: curr.next.random = curr.random.next.",
+      achieved: `Phase 2: ${step.currRandom !== null ? `wired clone ${step.curr}'.random -> clone ${step.currRandom}'.` : `node ${step.curr} random is null.`}`,
+      next: "Advance curr two steps to the next original node.",
+    }),
+    decouple: ({ step }) => ({
+      chapter: 2,
+      why: "Separate the interleaved chain into two independent lists: restore original next pointers and wire clone next pointers.",
+      achieved: `Phase 3: separating original node ${step.curr} and clone ${step.copy}'.`,
+      next: "Advance to the next node pair.",
+    }),
+    done: ({ step }) => ({
+      chapter: 3,
+      why: "All 3 passes complete: deep copy is fully detached with preserved structure.",
+      achieved: `Deep copy complete! Returned copy_head (clone 0').`,
+      next: "Try another list with complex random cross-links or self-loops.",
+    }),
+  },
+  lines: {
+    2: {
+      chapter: 0,
+      why: "if not head: return None.",
+      achieved: "Checked empty list.",
+      next: "Start Phase 1.",
     },
-    {
-      "chapter": 2,
-      "lines": [
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22
-      ],
-      "why": "Restore original next links while connecting clones together; the returned list must share no nodes with the original.",
-      "next": "Return the saved clone head."
-    }
-  ],
-  "edgeCases": [
-    "An empty list returns null.",
-    "Null random links stay null.",
-    "Self-random links and backward random links must target clones, never originals."
-  ]
-});
+    5: ({ step }) => ({
+      chapter: 0,
+      why: "copy = Node(curr.val): allocate clone.",
+      achieved: `Allocated clone ${step.copy}'.`,
+      next: "Splicing into chain.",
+    }),
+    7: ({ step }) => ({
+      chapter: 0,
+      why: "curr.next = copy: interleave clone.",
+      achieved: `Spliced clone ${step.copy}' into list.`,
+      next: "Advance curr.",
+    }),
+    12: ({ step }) => ({
+      chapter: 1,
+      why: "curr.next.random = curr.random.next.",
+      achieved: `Set clone random pointer.`,
+      next: "Advance curr by 2 nodes.",
+    }),
+    18: ({ step }) => ({
+      chapter: 2,
+      why: "curr.next = copy.next (restore original link).",
+      achieved: `Restored original next link.`,
+      next: "Wire clone.next.",
+    }),
+    20: ({ step }) => ({
+      chapter: 2,
+      why: "copy.next = copy.next.next (wire clone list).",
+      achieved: `Wired clone next link.`,
+      next: "Advance curr.",
+    }),
+    23: {
+      chapter: 3,
+      why: "return copy_head.",
+      achieved: "Returned head of deep copied list.",
+      next: "Completed.",
+    },
+  },
+};

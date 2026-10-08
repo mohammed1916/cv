@@ -1,12 +1,11 @@
-import authoredExamples0 from '../../config/examples/word-break-ii.js';
-import { wordBreak2Narrative } from './wordBreak2Narrative.js';
-
+import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreak2Story from "./WordBreak2Story";
 import { CODE, buildWordBreak2Story } from "./algorithm";
+import { wordBreak2Narrative } from "./wordBreak2Narrative";
 import "./WordBreakIIVisualizer.css";
 
-const EXAMPLES = authoredExamples0;
+const EXAMPLES = getExamples("word-break-ii");
 
 const definition = {
   narrative: wordBreak2Narrative,
@@ -51,7 +50,9 @@ const definition = {
     "done",
   ],
   build: (inputs) => buildWordBreak2Story(inputs.s, inputs.wordDict),
-  renderStory: ({ story, step }) => <WordBreak2Story story={story} step={step} />,
+  renderStory: ({ story, step }) => (
+    <WordBreak2Story story={story} step={step} />
+  ),
 };
 
 export default function WordBreakIIVisualizer() {
