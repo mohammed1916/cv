@@ -60,21 +60,7 @@ export const IMPLEMENTED_BY_NUMBER = new Map(
   IMPLEMENTED_PROBLEMS.map((problem) => [problem.number, problem]),
 );
 
-export const BASICS_PROBLEMS = [
-  {
-    id: "bs-01",
-    number: "B1",
-    title: "Matrix Iteration Patterns",
-    slug: "matrix-iteration-patterns",
-    description:
-      "Explore upper/lower triangular, diagonal, anti-diagonal and full matrix traversals.",
-    difficulty: "Easy",
-    tags: ["Matrix", "Loops", "Basics"],
-    accent: "#0ea5e9",
-    folder: "MatrixIterationBasics",
-    implemented: true,
-  },
-];
+export { BASICS_PROBLEMS } from './basicsCatalog.js';
 
 export function buildCatalogProblems(catalogProblems) {
   return mergeCatalog(catalogProblems, IMPLEMENTED_PROBLEMS);

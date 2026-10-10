@@ -1,5 +1,7 @@
 # Development documentation
 
+- [Basics track](basics-track.md): free lessons, shared algorithms, and verification.
+
 - [Problem payloads and hosting](payload-boundaries.md): example files, generated
   definition groups, build checks, and what is deployed.
 - [Authored examples](authored-examples.md): example design and validation.

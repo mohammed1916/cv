@@ -45,7 +45,7 @@ const IMPLEMENTED_BY_NUMBER = new Map(ALL_PROBLEMS.map((p) => [p.number, p]));
 
 const BASICS_PROBLEMS = ALL_PROBLEMS.filter((p) =>
   (p.tags || []).includes("Basics"),
-);
+).sort((a, b) => a.number.localeCompare(b.number, undefined, { numeric: true }));
 
 const CODEFORCES_PROBLEMS = ALL_PROBLEMS.filter((p) =>
   (p.tags || []).includes("Codeforces"),

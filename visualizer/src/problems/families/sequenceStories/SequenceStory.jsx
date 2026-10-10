@@ -61,7 +61,7 @@ export default function SequenceStory({ definition }) {
         const sequence =
           typeof step.sequence === "string"
             ? [...step.sequence]
-            : step.sequence;
+            : (step.sequence ?? []);
         const matrix =
           step.matrix ?? (Array.isArray(sequence?.[0]) ? sequence : null);
         return (

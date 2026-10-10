@@ -46,7 +46,7 @@ export default function AlgorithmWorkspace({ definition, renderVisual, renderRea
       <p className="algorithm-workspace__event" role="status">{step.message}</p>
       {renderReasoning({ run, step })}
       <p>{definition.complexity}</p>
-      <a href={definition.url} target="_blank" rel="noreferrer">Official problem statement</a>
+      {definition.url && <a href={definition.url} target="_blank" rel="noreferrer">Official problem statement</a>}
     </>,
     code: <AlgorithmCodePanel key={definition.number} definition={definition} step={step} input={draft} />,
   } : {}
