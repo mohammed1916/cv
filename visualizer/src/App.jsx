@@ -25,7 +25,7 @@ import "./App.css";
 import { TRACKS } from "./data/implementedProblems";
 import { mergeCatalog } from './data/catalogCoverage';
 import { useAccess } from "./access/useAccess";
-import { isFreeProblem, accessLabel } from "./access/policy";
+import { isFreeProblem, accessLabel, PLANS } from "./access/policy";
 import {
   AccessDialog,
   Plans,
@@ -1123,8 +1123,8 @@ export default function App() {
         {access.debugPro
           ? "Pro · DEV"
           : access.pro
-            ? "Pro account"
-            : "Get Pro · ₹199"}
+            ? (access.account?.trialActive ? "Free trial · Pro" : "Pro account")
+            : `Get Pro · ${PLANS.monthly.display}/month`}
       </button>
       <button
         className="access-toolbar-btn"
@@ -1302,9 +1302,9 @@ export default function App() {
                         {access.debugPro
                           ? "Pro enabled locally for development"
                           : access.pro && access.account?.expiresAt
-                            ? `Pro active until ${new Date(
+                            ? `${access.account.trialActive ? 'Free trial' : 'Pro'} active until ${new Date(
                                 access.account.expiresAt,
-                              ).toLocaleDateString()}`
+                              ).toLocaleString()}`
                             : access.pro
                               ? "Pro account"
                               : "Free account"}

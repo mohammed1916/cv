@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
-import { PLANS } from './policy';
+import { PLANS, FREE_MEDIUM } from './policy';
 import './access.css';
 import TutorialDemo from './TutorialDemo';
 
@@ -66,14 +66,21 @@ export function Plans({ access, reason }) {
     <p>{reason || 'Learn the foundations free. Go further with Pro.'}</p>
     <div className="plan-grid">
       <section className="plan-card"><span className="access-eyebrow">FREE</span><h3>₹0</h3>
-        <ul><li>All Basics and Easy visualizers</li><li>15 selected Medium problems</li><li>Beginner tutorial</li><li>30 minutes of playground every day</li></ul>
+        <ul><li>All Basics and Easy visualizers</li><li>{FREE_MEDIUM.size} selected Medium problems, including Problem 2333</li><li>Beginner tutorial</li><li>30 minutes of playground every day</li></ul>
         <small>Sign in for playground access. Resets at midnight India time.</small>
       </section>
       <section className="plan-card plan-pro"><span className="access-eyebrow">TEEM TREAT PRO</span><h3>Every problem. More practice.</h3>
         <ul><li>All implemented problem visualizers unlocked</li><li>Unlimited code playground time</li><li>Future problem visualizers included during your plan</li></ul>
-        {Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || !checkoutEnabled || access.pro} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
-          {access.pro ? 'Pro active' : `${plan.display} / ${plan.label}`}{key === 'annual' && !access.pro ? ' · Save ₹889 vs 12 monthly purchases' : ''}
+        <p>Try Pro free for 3 days. No card required and no automatic charge.</p>
+        {access.account?.trialActive && access.pro && <p role="status">Free trial active until {new Date(access.account.trialEndsAt).toLocaleString()}.</p>}
+        {(!access.user || access.account?.trialAvailable) && <button className="access-primary" disabled={pending || access.busy || !backendEnabled} onClick={access.startTrial}>
+          {access.user ? 'Start 3-day free trial' : 'Sign in to start your free trial'}
+        </button>}
+        {access.account?.trialEndsAt && !access.pro ? <p>Your free trial has ended. Subscribe to continue with Pro, or keep using the free problems and daily playground allowance.</p> : null}
+        {Object.entries(PLANS).map(([key, plan]) => <button className="access-primary" key={key} disabled={pending || access.busy || !checkoutEnabled || (access.pro && access.account?.paid)} onClick={(event) => purchase(key, event.currentTarget.closest('dialog'))}>
+          {access.pro && access.account?.paid ? 'Paid Pro active' : `${plan.display} / ${plan.label}`}
         </button>)}
+        <small>Annual price: {PLANS.monthly.display} × 12 = {PLANS.annual.display}. If you buy during your trial, your paid time starts after the trial ends.</small>
         <small>One-time payment. No automatic renewal. Catalog-only entries are coming soon. AI provider limits remain separate.</small>
         {!checkoutEnabled && <p className="access-notice">Pro purchases are coming soon. Checkout is not open yet.</p>}
       </section>
@@ -138,7 +145,7 @@ export function PlaygroundGate({ access, onPlans, children }) {
   if (!access.user) return <div className="access-gate"><h2>Your daily coding practice</h2><p>Sign in with Google for 30 minutes of free playground use every day.</p><button className="access-primary" onClick={access.login} disabled={access.busy}>Continue with Google</button><p role="alert">{access.error}</p></div>;
   if (!backendEnabled) return <div className="access-gate"><h2>Playground account access is being set up</h2><p>Daily usage tracking is not available yet. Free problem visualizers and the tutorial are available now.</p></div>;
   return <div className="playground-access-wrap">
-    {allowed && <div className="playground-allowance" role="status">{lease.pro ? 'Pro · Unlimited playground' : `${Math.ceil((lease.remainingSeconds + Math.max(0, (lease.validUntil - now) / 1000)) / 60)} min left today · Resets midnight IST`}{!lease.pro && <button onClick={onPlans}>Get Pro</button>}</div>}
+    {allowed && <div className="playground-allowance" role="status">{lease.pro ? (lease.trialActive ? 'Free trial · Unlimited playground' : 'Pro · Unlimited playground') : `${Math.ceil((lease.remainingSeconds + Math.max(0, (lease.validUntil - now) / 1000)) / 60)} min left today · Resets midnight IST`}{!lease.pro && <button onClick={onPlans}>Get Pro</button>}</div>}
     {/* Keep the editor mounted after expiry so code can be recovered after renewal. */}
     {lease && <div className="playground-access-body" inert={!allowed ? true : undefined} style={!allowed ? { visibility: 'hidden' } : undefined}>{children}</div>}
     {!allowed && <div className="access-gate"><h2>{lease?.remainingSeconds === 0 ? 'You’ve used today’s 30 free minutes' : 'Checking playground access'}</h2>

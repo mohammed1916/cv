@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { onCall, onRequest, HttpsError } from 'firebase-functions/v2/https';
 import { defineSecret } from 'firebase-functions/params';
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { PLANS, reserve, status, entitlementEnd } from './policy.js';
+import { PLANS, reserve, status, entitlementEnd, trialStart } from './policy.js';
 initializeApp();
 const db = getFirestore();
 const keyId = defineSecret('RAZORPAY_KEY_ID');
@@ -17,6 +17,16 @@ function uid(request) {
   return request.auth.uid;
 }
 export const accountStatus = onCall(options, async (request) => status((await db.doc(`accounts/${uid(request)}`).get()).data()));
+export const startProTrial = onCall(options, async request => {
+  const ref = db.doc(`accounts/${uid(request)}`);
+  return db.runTransaction(async tx => {
+    const data = (await tx.get(ref)).data() || {};
+    const now = Date.now();
+    const trial = trialStart(data, now);
+    if (trial) tx.set(ref, trial, { merge: true });
+    return status({ ...data, ...trial }, now);
+  });
+});
 export const playgroundLease = onCall(options, async (request) => {
   const user = uid(request);
   const sessionId = request.data?.sessionId;
@@ -27,7 +37,7 @@ export const playgroundLease = onCall(options, async (request) => {
     const usage = await tx.get(ref);
     const now = Date.now();
     const pro = status(account.data(), now);
-    if (pro.pro) return { pro: true, validUntil: Math.min(now + 30000, pro.expiresAt), serverNow: now };
+    if (pro.pro) return { pro: true, trialActive: pro.trialActive, validUntil: Math.min(now + 30000, pro.expiresAt), serverNow: now };
     const result = reserve(usage.data(), sessionId, now);
     if (result.record) tx.set(ref, result.record);
     return { ...result.response, pro: false };
@@ -83,7 +93,7 @@ async function activate(payment, expectedUid) {
     if (order.status === 'paid') return { activated: true };
     const accountRef = db.doc(`accounts/${order.uid}`);
     const account = (await tx.get(accountRef)).data();
-    const expiresAt = entitlementEnd(account?.expiresAt, PLANS[order.plan].days, Date.now());
+    const expiresAt = entitlementEnd(status(account).expiresAt, PLANS[order.plan].days, Date.now());
     tx.set(accountRef, { expiresAt }, { merge: true });
     tx.update(orderRef, { status: 'paid', paymentId: payment.id, expiresAt, paidAt: Date.now() });
     return { activated: true };

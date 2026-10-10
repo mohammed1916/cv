@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
 import process from 'node:process';
 import { getFirestore } from 'firebase-admin/firestore';
-import { verifyProPayment, paymentWebhook } from './index.js';
+import { verifyProPayment, paymentWebhook, startProTrial, playgroundLease, createProOrder } from './index.js';
+import { PLANS, TRIAL_MS } from './policy.js';
 
 // Exercise real handlers with deterministic Firestore and Razorpay boundaries.
 // This validates business logic without secrets, network calls or real payments.
@@ -14,7 +15,7 @@ const db = getFirestore();
 let records = new Map();
 let payment;
 const snapshot = path => ({ data: () => records.get(path) });
-db.doc = path => ({ path });
+db.doc = path => ({ path, get: async () => snapshot(path), set: async data => { records.set(path, data); } });
 db.runTransaction = async fn => fn({
   get: async ref => snapshot(ref.path),
   set: (ref, data, options) => records.set(ref.path, options?.merge ? { ...records.get(ref.path), ...data } : data),
@@ -22,6 +23,7 @@ db.runTransaction = async fn => fn({
 });
 globalThis.fetch = async () => ({ ok: true, json: async () => payment });
 function reset() {
+  // Orders opened before the price change still verify against their stored amount.
   records = new Map([['orders/order_one', { uid: 'owner', plan: 'monthly', amount: 19900, status: 'created' }]]);
   payment = { id: 'pay_one', order_id: 'order_one', status: 'captured', amount: 19900, currency: 'INR', amount_refunded: 0 };
 }
@@ -50,6 +52,50 @@ test('captured payment grants once even with duplicate callback and webhook', as
   await verifyProPayment.run(request());
   await webhook('payment.captured', { payment: { entity: payment } });
   assert.equal(records.get('accounts/owner').expiresAt, first);
+});
+
+test('trial handler is authenticated, idempotent and grants unlimited playground until expiry', async t => {
+  reset();
+  const now = Date.now();
+  t.mock.method(Date, 'now', () => now);
+  await assert.rejects(startProTrial.run({ data: {} }), { code: 'unauthenticated' });
+  const first = await startProTrial.run(request());
+  assert.equal(first.trialEndsAt, now + TRIAL_MS);
+  assert.equal((await startProTrial.run(request())).trialEndsAt, first.trialEndsAt);
+  const leaseRequest = { ...request(), data: { sessionId: 'session-trial-test-123' } };
+  assert.equal((await playgroundLease.run(leaseRequest)).pro, true);
+  assert.equal(records.has('usage/owner'), false);
+  t.mock.method(Date, 'now', () => now + TRIAL_MS);
+  assert.equal((await startProTrial.run(request())).pro, false);
+  const expiredLease = await playgroundLease.run(leaseRequest);
+  assert.equal(expiredLease.pro, false);
+  assert.equal(expiredLease.remainingSeconds, 1770);
+});
+
+test('checkout sends the trusted new monthly and annual prices, ignoring client amounts', async t => {
+  t.mock.method(db, 'collection', () => ({ doc: () => ({ id: 'receipt_test' }) }));
+  t.mock.method(globalThis, 'fetch', async (_url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.currency, 'INR');
+    return { ok: true, json: async () => ({ id: 'order_new', amount: body.amount }) };
+  });
+  for (const [plan, expected] of [['monthly', 1900], ['annual', 22800]]) {
+    reset();
+    records.set('config/billing', { enabled: true });
+    const order = await createProOrder.run({ ...request(), data: { plan, amount: 1 } });
+    assert.equal(order.amount, expected);
+    assert.equal(records.get('orders/order_new').amount, expected);
+    assert.equal(expected, PLANS[plan].amount);
+  }
+});
+
+test('verified payment preserves unused trial time', async t => {
+  reset();
+  const now = Date.now();
+  t.mock.method(Date, 'now', () => now);
+  await startProTrial.run(request());
+  await verifyProPayment.run(request());
+  assert.equal(records.get('accounts/owner').expiresAt, now + TRIAL_MS + 30 * 86400000);
 });
 test('forged signatures, other accounts and wrong amount cannot grant access', async () => {
   reset();

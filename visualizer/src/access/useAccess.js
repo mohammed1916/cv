@@ -70,6 +70,19 @@ export function useAccess() {
       setError("Could not sign out. Please retry.");
     }
   };
+  const startTrial = async () => {
+    if (!user) { await login(); return; }
+    setBusy(true);
+    setError('');
+    try {
+      const next = await accessCall('startProTrial');
+      if (auth.currentUser?.uid === user.uid) setAccount(next);
+    } catch {
+      setError('Could not start your free trial. Please retry.');
+    } finally {
+      setBusy(false);
+    }
+  };
   const debugPro =
     import.meta.env.DEV && import.meta.env.VITE_DEBUG_PRO === "true";
 
@@ -90,5 +103,6 @@ export function useAccess() {
     login,
     logout,
     refresh,
+    startTrial,
   };
 }
