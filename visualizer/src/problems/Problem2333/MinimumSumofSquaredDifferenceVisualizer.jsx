@@ -220,6 +220,39 @@ function Formula({ step }) {
   if (step.ceiling != null) return <div className="mssd-formula"><span>Optimal maximum difference</span><strong>{number(step.ceiling)}</strong><small>Remaining unit operations: {number(step.remaining)}</small></div>;
   return <div className="mssd-formula"><span>Marginal improvement from reducing d by one</span><strong>d² − (d − 1)² = 2d − 1</strong><small>Larger differences provide greater savings.</small></div>;
 }
+function BinarySearchExplorer({ input, step }) {
+  const differences = input.nums1.map((v, i) => Math.abs(v - input.nums2[i]));
+  const max = Math.max(0, ...differences);
+  const low = step?.low;
+  const high = step?.high;
+  const mid = step?.mid;
+  const active = low != null && high != null;
+  const candidate = mid ?? step?.ceiling;
+  const needed = mid == null ? null : differences.reduce((sum, d) => sum + Math.max(0, d - mid), 0);
+  const feasible = needed == null ? null : needed <= input.k1 + input.k2;
+  const positions = max <= 24 ? Array.from({ length: max + 1 }, (_, i) => i) : [...new Set([0, low, mid, high, max].filter(v => v != null))].sort((a, b) => a - b);
+  return <div className="mssd-search-explorer">
+    <div className="mssd-search-heading"><strong>Binary search — find the smallest affordable ceiling</strong><span>{active ? `Iteration ${step.iteration || 0}` : 'Waiting for search'}</span></div>
+    <p>We want the smallest ceiling <code>mid</code> such that reducing every difference above it costs at most <code>k1 + k2</code> operations.</p>
+    <div className="mssd-search-values">
+      <div><span>low · minimum candidate</span><strong>{low ?? '—'}</strong></div>
+      <div className="candidate"><span>mid · test ceiling</span><strong>{candidate ?? '—'}</strong></div>
+      <div><span>high · maximum candidate</span><strong>{high ?? '—'}</strong></div>
+    </div>
+    {active && <div className="mssd-search-scale">
+      <div className="mssd-search-track"><div className="mssd-search-range" style={{left:`${100*low/Math.max(1,max)}%`,width:`${100*(high-low)/Math.max(1,max)}%`}} />{mid != null && <div className="mssd-search-mid" style={{left:`${100*mid/Math.max(1,max)}%`}} title={`mid = ${mid}`} />}</div>
+      <div className="mssd-search-ticks">{positions.map(n => <span key={n} className={`${n===mid?'is-mid':''} ${n===low?'is-low':''} ${n===high?'is-high':''}`} style={{left:`${100*n/Math.max(1,max)}%`}}>{n}</span>)}</div>
+    </div>}
+    {mid != null && <>
+      <div className="mssd-search-equation"><span>mid = floor((low + high) / 2)</span><strong>⌊({step.low} + {step.high}) / 2⌋ = {mid}</strong></div>
+      <div className="mssd-search-costs"><strong>Cost to cap each difference at {mid}</strong>{differences.map((d,i) => <div key={i} className={step.inspectedIndex===i?'is-active':''}><span>Index {i}: max(0, {d} − {mid})</span><b>{Math.max(0,d-mid)}</b></div>)}</div>
+      <div className={`mssd-search-verdict ${feasible?'feasible':'infeasible'}`}><strong>{needed} {feasible?'≤':'>'} {input.k1+input.k2} operations</strong><span>{feasible ? `Affordable: high becomes ${mid}. Search smaller ceilings.` : `Too expensive: low becomes ${mid+1}. Search larger ceilings.`}</span></div>
+    </>}
+    {step?.ceiling != null && <div className="mssd-search-verdict feasible"><strong>Optimal ceiling = {step.ceiling}</strong><span>The binary search has converged. Apply the cap, then spend any leftover operations.</span></div>}
+    {!active && <span className="mssd-search-placeholder">Step forward until the binary-search initialization to see low, mid and high.</span>}
+  </div>;
+}
+
 function DifferencePanel({ input, step, form, setForm, apply, exampleIndex, applyExample, error }) {
   const original = input.nums1.map((a, i) => Math.abs(a - input.nums2[i]));
   const current = step?.current ?? original;
@@ -228,6 +261,7 @@ function DifferencePanel({ input, step, form, setForm, apply, exampleIndex, appl
     <InputEditor form={form} setForm={setForm} apply={apply} exampleIndex={exampleIndex} applyExample={applyExample} error={error} />
     <AlgorithmNarrative definition={minimumSumSquaredDifferenceNarrative} step={step} input={input} />
     <Section title="Core intuition" meta="greedy optimization"><div className="mssd-concept"><strong>Reduce the largest difference first</strong><p>Reducing difference <code>d</code> to <code>d − 1</code> saves <code>2d − 1</code> squared-error units. A larger difference always yields a larger immediate saving. Binary search efficiently finds the level to which we can lower the largest differences.</p><div className="mssd-concept-flow"><span>Absolute differences</span><b>→</b><span>Optimal ceiling</span><b>→</b><span>Leftover reductions</span><b>→</b><span>Square + sum</span></div></div></Section>
+    <Section title="Binary search — low / mid / high" meta="live search"><BinarySearchExplorer input={input} step={step} /></Section>
     <Section title="Difference histogram" meta={`${current.length} indices`}><DifferenceChart input={input} step={step} /></Section>
     <div className="mssd-stat-grid"><Stat label="Original squared error" value={number(squaredSum(original))} /><Stat label="Current squared error" value={number(squaredSum(current))} tone="accent" /><Stat label="Operations spent" value={`${number(spent)} / ${number(input.k1 + input.k2)}`} /><Stat label="Operations left" value={number(step?.remaining ?? input.k1 + input.k2)} /></div>
     <Section title="Array comparison" meta="original values"><div className="mssd-array-grid"><div><strong>nums1</strong><PointerRail values={input.nums1} pointers={step?.inspectedIndex == null ? [] : [{ id: 'i', label: 'i', index: step.inspectedIndex, tone: 'primary' }]} /></div><div><strong>nums2</strong><PointerRail values={input.nums2} pointers={step?.inspectedIndex == null ? [] : [{ id: 'i', label: 'i', index: step.inspectedIndex, tone: 'primary' }]} /></div></div></Section>
@@ -241,6 +275,7 @@ function OptimizationPanel({ input, step }) {
   const biggest = Math.max(0, ...current);
   return <PanelBody>
     <Section title="Why the greedy choice works" meta="marginal savings"><div className="mssd-concept"><strong>One reduction at a time, conceptually</strong><p>For a positive difference <code>d</code>, reducing it by one changes its contribution from <code>d²</code> to <code>(d − 1)²</code>. The saved error is <code>2d − 1</code>. So the biggest difference is the most valuable one to reduce.</p><div className="mssd-savings"><Stat label="Largest current difference" value={number(biggest)} /><Stat label="Saving from one reduction" value={number(biggest > 0 ? 2 * biggest - 1 : 0)} tone="accent" /></div><p>The optimized implementation groups many such greedy reductions into a binary search rather than performing billions of individual operations.</p></div></Section>
+    <Section title="Search interval and midpoint" meta="visual bounds"><BinarySearchExplorer input={input} step={step} /></Section>
     <Section title="Binary search state" meta={step?.iteration ? `iteration ${step.iteration}` : 'not started'}><div className="mssd-stat-grid"><Stat label="Lower bound" value={step?.low ?? '—'} /><Stat label="Upper bound" value={step?.high ?? '—'} /><Stat label="Candidate ceiling" value={step?.mid ?? step?.ceiling ?? '—'} tone="accent" /><Stat label="Operations needed" value={step?.mid != null ? number(step.required) : '—'} /></div><Formula step={step} /></Section>
     <Section title="Original difference frequencies" meta="value × count"><BucketView values={original} highlight={step?.mid} /></Section>
     <Section title="Current difference frequencies" meta="after applied reductions"><BucketView values={current} highlight={step?.ceiling} /></Section>
