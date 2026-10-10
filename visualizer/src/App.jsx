@@ -825,12 +825,12 @@ function HomePage({
             >
               Basics Track
             </button>
-            <button
+            {/* <button
               className={`track-btn ${track === TRACKS.CODEFORCES ? "active" : ""}`}
               onClick={() => changeTrack(TRACKS.CODEFORCES)}
             >
               Codeforces Track
-            </button>
+            </button> */}
           </div>
 
           <button
