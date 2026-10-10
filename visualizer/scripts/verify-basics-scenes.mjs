@@ -19,5 +19,5 @@ try {
       }
     }
   }
-  console.log(`Rendered ${count} Basics frames across nine lessons. Server rendering only; browser interactions are separate.`);
+  console.log(`Rendered ${count} Basics frames across ${Object.keys(lessons).length} lessons. Server rendering only; browser interactions are separate.`);
 } finally { await server.close(); }

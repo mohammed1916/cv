@@ -1,14 +1,21 @@
 # Basics track
 
-The track has ten free lessons, ordered B1–B10: matrix iteration, linear search,
+The track has fifteen free lessons, ordered B1–B15: matrix iteration, linear search,
 binary search, lower bound, min-heap operations, segment trees, tries, histogram
-rectangles, prefix sums, and breadth-first search.
+rectangles, prefix sums, breadth-first search, two-pointer pair search, fixed-size
+sliding windows, insertion sort, next greater elements, and Euclidean GCD.
 
 Each lesson has a discoverable `meta.js` and lazy `index.jsx` under `src/problems`.
 `src/data/basicsCatalog.js` supplies the same metadata to the alternate HomePage.
 The `Basics` tag grants free access through the existing access policy.
 
 ## Shared implementation
+
+- `src/algorithms/shared/basicsExtended.js` reuses the shared snapshot tracer for
+  the five additional algorithms. `extendedDefinitions.js` owns their code,
+  validation, and edge-case presets; `ExtendedBasicsScene` composes existing
+  indexed arrays and state tables to show pointers, windows, held keys, stacks,
+  and remainder calculations.
 
 - `src/algorithms/shared/binarySearch.js` and `histogram.js` supply the traced
   algorithms and code listings to both the Basics lessons and Problems 704/84.

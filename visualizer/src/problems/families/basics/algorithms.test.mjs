@@ -9,6 +9,11 @@ import { isFreeProblem } from '../../../access/policy.js';
 import { BASICS_PROBLEMS } from '../../../data/basicsCatalog.js';
 
 const refs = {
+  pair: ({ nums, target }) => { for (let i = 0; i < nums.length; i++) for (let j = i + 1; j < nums.length; j++) if (nums[i] + nums[j] === target) return [i, j]; return null; },
+  window: ({ nums, k }) => Math.max(...nums.slice(k - 1).map((_, i) => nums.slice(i, i + k).reduce((a, b) => a + b, 0))),
+  insertion: ({ nums }) => [...nums].sort((a, b) => a - b),
+  greater: ({ nums }) => nums.map((value, i) => nums.slice(i + 1).find(n => n > value) ?? null),
+  gcd: ({ a, b }) => { for (let d = Math.max(a, b); d >= 1; d--) if (a % d === 0 && b % d === 0) return d; },
   linear: ({ nums, target }) => nums.indexOf(target),
   lower: ({ nums, target }) => { const i = nums.findIndex(n => n >= target); return i < 0 ? nums.length : i; },
   histogram: ({ heights }) => {
@@ -32,6 +37,11 @@ function check(kind, input) {
   if (kind === 'binary') {
     if (input.nums.includes(input.target)) assert.equal(input.nums[run.result], input.target);
     else assert.equal(run.result, -1);
+  } else if (kind === 'pair' && refs.pair(input) !== null) {
+    assert.ok(Array.isArray(run.result));
+    const [a, b] = run.result;
+    assert.ok(a >= 0 && a < b && b < input.nums.length);
+    assert.equal(input.nums[a] + input.nums[b], input.target);
   } else assert.deepEqual(run.result, refs[kind](input), `${kind}: ${JSON.stringify(input)}`);
   assert.equal(run.frames[0].phase, 'start');
   assert.equal(run.frames.at(-1).phase, 'done');
@@ -57,6 +67,11 @@ test('randomized searches, histogram, heap, range updates, trie and graph traces
   for (let i = 0; i < 100; i++) {
     const nums = Array.from({ length: rand(12) }, () => rand(19) - 9), target = rand(21) - 10;
     check('linear', { nums, target });
+    check('pair', { nums: [...nums].sort((a, b) => a - b), target });
+    check('insertion', { nums });
+    check('greater', { nums });
+    if (nums.length) check('window', { nums, k: rand(nums.length) + 1 });
+    check('gcd', { a: rand(200), b: rand(200) + 1 });
     check('binary', { nums: [...nums].sort((a, b) => a - b), target });
     check('lower', { nums: [...nums].sort((a, b) => a - b), target });
     check('histogram', { heights: nums.map(Math.abs) });
@@ -79,6 +94,10 @@ test('invalid inputs fail with a useful error instead of changing or sorting inp
     ['segment', { nums: [], operations: [] }], ['segment', { nums: [1], operations: [['sum', 0, 1]] }],
     ['prefix', { nums: [1], queries: [[1, 0]] }], ['trie', { words: ['CAT'], query: 'cat' }],
     ['bfs', { n: 2, start: 0, edges: [[0, 2]] }],
+    ['pair', { nums: [2, 1], target: 3 }], ['pair', { nums: [], target: null }],
+    ['window', { nums: [], k: 1 }], ['window', { nums: [2], k: 0 }], ['window', { nums: [2], k: 2 }],
+    ['insertion', { nums: [1.5] }], ['greater', { nums: '123' }],
+    ['gcd', { a: 0, b: 0 }], ['gcd', { a: -2, b: 4 }], ['gcd', { a: 2.5, b: 5 }],
   ]) assert.throws(() => parseBasics(kind, JSON.stringify(input)));
 });
 
@@ -115,7 +134,26 @@ test('all Basics entries are discoverable, unique and permanently free', async (
     assert.ok(!slugs.has(meta.slug)); assert.ok(!numbers.has(meta.number));
     slugs.add(meta.slug); numbers.add(meta.number);
   }
-  assert.equal(numbers.size, 10);
-  assert.deepEqual(BASICS_PROBLEMS.map(p => p.number), Array.from({ length: 10 }, (_, i) => `B${i + 1}`));
+  assert.equal(numbers.size, 15);
+  assert.deepEqual(BASICS_PROBLEMS.map(p => p.number), Array.from({ length: 15 }, (_, i) => `B${i + 1}`));
   assert.deepEqual(new Set(BASICS_PROBLEMS.map(p => p.slug)), slugs);
+});
+
+test('new lesson snapshots preserve their teaching invariants', () => {
+  for (const kind of ['pair', 'window', 'insertion', 'greater', 'gcd']) {
+    const definition = createBasicsDefinition(kind);
+    for (const example of definition.examples) {
+      const run = definition.build(definition.parse(example.input));
+      for (const frame of run.frames) {
+        if (kind === 'window') assert.equal(frame.sum, frame.nums.slice(frame.left, frame.right + 1).reduce((a, b) => a + b, 0));
+        if (kind === 'greater') for (let i = 1; i < frame.stack.length; i++) assert.ok(frame.nums[frame.stack[i - 1]] >= frame.nums[frame.stack[i]]);
+        if (kind === 'insertion') {
+          const values = frame.nums.filter((_, i) => i !== frame.hole);
+          if (frame.hole >= 0) values.push(frame.key);
+          assert.deepEqual(values.sort((a, b) => a - b), [...run.input.nums].sort((a, b) => a - b));
+        }
+        if (kind === 'gcd') assert.equal(refs.gcd(frame), run.result);
+      }
+    }
+  }
 });

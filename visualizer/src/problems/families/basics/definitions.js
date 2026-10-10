@@ -2,7 +2,10 @@ import { binarySearchSteps, BINARY_SEARCH_CODE } from '../../../algorithms/share
 import { histogramSteps, HISTOGRAM_CODE } from '../../../algorithms/shared/histogram.js';
 import { linearSearch, lowerBound, heapOperations, segmentTree, trieLookup, prefixSums, breadthFirstSearch } from '../../../algorithms/shared/basics.js';
 
+import { extendedBuilders, extendedCodes, extendedLessons, validateExtended } from './extendedDefinitions.js';
+
 const codes = {
+  ...extendedCodes,
   linear: `def linear_search(nums, target):
     for i, value in enumerate(nums):
         if value == target:
@@ -92,6 +95,7 @@ def breadth_first_search(n, edges, start):
 };
 
 export const lessons = {
+  ...extendedLessons,
   linear: { number: 'B2', title: 'Linear Search: Inspect Every Candidate', slug: 'basics-linear-search', tags: ['Search', 'Array'],
     goal: 'Find the first matching index in an unsorted array.', strategy: 'Every position before the current index has been checked and cannot be the answer. Linear search needs no sorting.', complexity: 'O(n) time; O(1) auxiliary algorithm state.',
     examples: [['Match late', { nums: [8, 3, 11, 2, 7], target: 7 }], ['First duplicate', { nums: [4, 2, 4], target: 4 }], ['Not present', { nums: [9, -2, 5], target: 0 }], ['Empty array', { nums: [], target: 3 }]] },
@@ -127,6 +131,7 @@ function vector(value, minLength = 0, maxLength = 24) { return Array.isArray(val
 export function parseBasics(key, text) {
   const input = JSON.parse(text);
   need(input && typeof input === 'object' && !Array.isArray(input), 'Use a JSON object.');
+  validateExtended(key, input);
   if (['linear', 'binary', 'lower', 'prefix', 'segment'].includes(key)) need(vector(input.nums, key === 'segment' ? 1 : 0, key === 'segment' ? 16 : 24), 'nums must contain 0–24 integers between -10000 and 10000 (segment tree: 1–16).');
   if (['linear', 'binary', 'lower'].includes(key)) need(integer(input.target), 'target must be an integer between -10000 and 10000.');
   if (['binary', 'lower'].includes(key)) need(input.nums.every((v, i, a) => i === 0 || a[i - 1] <= v), 'Binary search needs sorted input. Put nums in nondecreasing order.');
@@ -152,6 +157,7 @@ export function parseBasics(key, text) {
 }
 
 const builders = { linear: linearSearch, lower: lowerBound, heap: heapOperations, segment: segmentTree, trie: trieLookup, prefix: prefixSums, bfs: breadthFirstSearch,
+  ...extendedBuilders,
   binary: input => { const frames = binarySearchSteps(input.nums, input.target); return { input, frames, result: frames.at(-1).foundIndex }; },
   histogram: input => { const frames = histogramSteps(input.heights); return { input, frames, result: frames.at(-1).best }; },
 };

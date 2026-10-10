@@ -1,6 +1,6 @@
 import { AuthoredMinHeap } from '../../problems/families/collectionStories/authoredMinHeap.js';
 
-function trace(input) {
+export function trace(input) {
   const frames = [];
   const emit = (message, state = {}, activeLine = 1, phase = 'inspect') => frames.push(structuredClone({ phase, activeLine, message, ...state }));
   return { emit, finish: result => ({ input: structuredClone(input), frames, result }) };

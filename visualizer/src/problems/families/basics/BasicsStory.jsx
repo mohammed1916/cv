@@ -6,6 +6,7 @@ import StructureTree from '../../../components/shared/StructureTree';
 import TrieStateDiagram from '../../../components/shared/TrieStateDiagram';
 import SvgViewport from '../../../components/shared/SvgViewport';
 import styles from './BasicsStory.module.css';
+import ExtendedBasicsScene from './ExtendedBasicsScene';
 
 function Graph({ input, step }) {
   const point = i => ({ x: 200 + 140 * Math.cos(i * 2 * Math.PI / input.n - Math.PI / 2), y: 185 + 140 * Math.sin(i * 2 * Math.PI / input.n - Math.PI / 2) });
@@ -29,6 +30,7 @@ function Graph({ input, step }) {
 export function BasicsScene({ kind, run, step }) {
   const input = run.input;
   return <div className={styles.scene}>
+    <ExtendedBasicsScene kind={kind} step={step} input={input} />
     <p className={styles.event} role="status">{step.message}</p>
     {['binary', 'lower'].includes(kind) && <SearchWindow nums={input.nums} target={input.target} step={step} exclusive={kind === 'lower'} />}
     {kind === 'linear' && <>
