@@ -29,14 +29,16 @@ export default function ScrollHints({ host, active }) {
         for (const element of next) if (!observed.has(element)) { resize.observe(element); observed.add(element); }
       }
       const bounds = slot.getBoundingClientRect();
-      const nextHints = [];
+      const available = new Set();
       for (const element of candidates) {
         if (!element.clientWidth || !element.clientHeight) continue;
         const rect = element.getBoundingClientRect();
-        let left = Math.max(bounds.left, rect.left + element.clientLeft);
-        let top = Math.max(bounds.top, rect.top + element.clientTop);
-        let right = Math.min(bounds.right, rect.left + element.clientLeft + element.clientWidth);
-        let bottom = Math.min(bounds.bottom, rect.top + element.clientTop + element.clientHeight);
+        // Use viewport coordinates only for visibility. Never assign these
+        // scaled measurements to CSS offsets inside the panel.
+        let left = Math.max(bounds.left, rect.left);
+        let top = Math.max(bounds.top, rect.top);
+        let right = Math.min(bounds.right, rect.right);
+        let bottom = Math.min(bounds.bottom, rect.bottom);
         // Respect clipping by intermediate scroll areas and hidden wrappers.
         for (let parent = element.parentElement; parent && parent !== slot; parent = parent.parentElement) {
           const style = getComputedStyle(parent), clip = parent.getBoundingClientRect();
@@ -54,8 +56,10 @@ export default function ScrollHints({ host, active }) {
           x && offsetX > 2 && 'left',
           x && maxX - offsetX > 2 && 'right',
         ].filter(Boolean);
-        if (directions.length) nextHints.push({ left: left - bounds.left, top: top - bounds.top, width: right - left, height: bottom - top, directions });
+        directions.forEach(direction => available.add(direction));
       }
+      // One cue per panel edge, even when several nested areas can scroll.
+      const nextHints = ['up', 'down', 'left', 'right'].filter(direction => available.has(direction));
       setHints(previous => JSON.stringify(previous) === JSON.stringify(nextHints) ? previous : nextHints);
     }
     const mutation = new MutationObserver(() => schedule(true));
@@ -65,6 +69,8 @@ export default function ScrollHints({ host, active }) {
     slot.addEventListener('scroll', onScroll, true);
     host.addEventListener('load', onLoad, true);
     window.addEventListener('resize', onLoad);
+    window.visualViewport?.addEventListener('resize', onLoad);
+    window.visualViewport?.addEventListener('scroll', onScroll);
     schedule(true);
     return () => {
       stopped = true;
@@ -74,15 +80,17 @@ export default function ScrollHints({ host, active }) {
       slot.removeEventListener('scroll', onScroll, true);
       host.removeEventListener('load', onLoad, true);
       window.removeEventListener('resize', onLoad);
+      window.visualViewport?.removeEventListener('resize', onLoad);
+      window.visualViewport?.removeEventListener('scroll', onScroll);
     };
   }, [host, active]);
 
   if (!active) return null;
   return <div className="local-dock-scroll-hints" aria-hidden="true">
-    {hints.map(({ directions, ...style }, index) => <div className="local-dock-scroll-region" key={index} style={style}>
-      {directions.map(direction => <div key={direction} className={`local-dock-scroll-edge is-${direction}`}>
+    <div className="local-dock-scroll-region">
+      {hints.map(direction => <div key={direction} className={`local-dock-scroll-edge is-${direction}`}>
         <span>{({ up: '↑', down: '↓ Scroll', left: '‹', right: '›' })[direction]}</span>
       </div>)}
-    </div>)}
+    </div>
   </div>;
 }

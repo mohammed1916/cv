@@ -319,7 +319,7 @@
   overflow: hidden;
 }
 
-.local-dock-scroll-region { position: absolute; }
+.local-dock-scroll-region { position: absolute; inset: 0; }
 .local-dock-scroll-edge {
   position: absolute;
   display: flex;
