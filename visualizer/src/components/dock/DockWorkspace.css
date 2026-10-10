@@ -310,6 +310,56 @@
   overflow: auto;
 }
 
+/* Noninteractive edge fades leave wheel, touch, selection and controls usable. */
+.local-dock-scroll-hints {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.local-dock-scroll-region { position: absolute; }
+.local-dock-scroll-edge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1;
+}
+.local-dock-scroll-edge span {
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface2);
+  box-shadow: 0 1px 4px #0002;
+}
+.local-dock-scroll-edge.is-down {
+  inset: auto 0 0;
+  height: 28px;
+  align-items: flex-end;
+  padding-bottom: 2px;
+  background: linear-gradient(to bottom, transparent, var(--surface));
+}
+.local-dock-scroll-edge.is-up {
+  inset: 0 0 auto;
+  height: 20px;
+  align-items: flex-start;
+  background: linear-gradient(to top, transparent, var(--surface));
+}
+.local-dock-scroll-edge.is-left {
+  inset: 0 auto 0 0;
+  width: 20px;
+  background: linear-gradient(to left, transparent, var(--surface));
+}
+.local-dock-scroll-edge.is-right {
+  inset: 0 0 0 auto;
+  width: 20px;
+  background: linear-gradient(to right, transparent, var(--surface));
+}
+
 .local-dock-code > * {
   flex: 1;
   min-height: 0;

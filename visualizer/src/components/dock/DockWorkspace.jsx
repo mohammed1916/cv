@@ -19,6 +19,7 @@ import {
 
 import "./DockWorkspace.css";
 import { minimizeMotion } from "./minimizeMotion";
+import ScrollHints from "./ScrollHints";
 
 // Move stable DOM hosts, never React portal destinations.
 // Inputs, editors, playback state, scroll state, etc. survive
@@ -41,7 +42,9 @@ function HostSlot({ host, parking, active }) {
     };
   }, [host, parking]);
 
-  return <div ref={slot} className="local-dock-slot" hidden={!active} />;
+  return <div ref={slot} className="local-dock-slot" hidden={!active}>
+    <ScrollHints host={host} active={active} />
+  </div>;
 }
 
 function Split({ node, children, resize }) {
