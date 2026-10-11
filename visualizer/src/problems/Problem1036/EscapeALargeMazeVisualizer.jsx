@@ -8,6 +8,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import "./EscapeALargeMazeVisualizer.css";
+import VisualizerDockLayout, { VisualizerDockBody, VisualizerDockPanel, VisualizerDockPresets } from "../../components/shared/VisualizerDockLayout";
 
 const GRID = 1_000_000;
 const DIRECTIONS = [
@@ -331,13 +332,13 @@ export default function EscapeALargeMazeVisualizer() {
   }, [draft, load]);
   const focus = step.phase === "Target" ? "Target" : "Source";
   return (
-    <div className="problem-shell elm-problem-shell">
+    <VisualizerDockLayout>
       <LuminoDockPanel panels={panels} onPanelReady={onPanelReady} />
       {panelDivs && (
         <>
           {panelDivs.maze &&
             createPortal(
-              <div className="elm-shell elm-dock-body">
+              <VisualizerDockBody className="elm-shell">
                 <header className="elm-header">
                   <div>
                     <span className="elm-eyebrow">
@@ -356,7 +357,7 @@ export default function EscapeALargeMazeVisualizer() {
                   </span>
                 </header>
 
-                <section className="elm-panel elm-main">
+                <VisualizerDockPanel className="elm-panel elm-main">
                   <div className="elm-panel-heading">
                     <h3>Local grid exploration</h3>
                     <span>{step.phase} BFS</span>
@@ -388,7 +389,7 @@ export default function EscapeALargeMazeVisualizer() {
                     </strong>
                     <p>{step.message}</p>
                   </div>
-                </section>
+                </VisualizerDockPanel>
                 <div className="elm-stats">
                   <div>
                     <small>Blocked cells</small>
@@ -407,14 +408,14 @@ export default function EscapeALargeMazeVisualizer() {
                     <strong>{step.frontier.length.toLocaleString()}</strong>
                   </div>
                 </div>
-              </div>,
+              </VisualizerDockBody>,
               panelDivs.maze,
             )}
           {panelDivs.input &&
             createPortal(
-              <div className="elm-shell elm-dock-body">
-                <section className="elm-panel">
-                  <div className="elm-presets">
+              <VisualizerDockBody className="elm-shell">
+                <VisualizerDockPanel className="elm-panel">
+                  <VisualizerDockPresets className="elm-presets">
                     {EXAMPLES.map((ex, i) => (
                       <button
                         key={ex.name}
@@ -425,7 +426,7 @@ export default function EscapeALargeMazeVisualizer() {
                         {ex.name}
                       </button>
                     ))}
-                  </div>
+                  </VisualizerDockPresets>
                   <div className="elm-panel-heading">
                     <h3>Try your own input</h3>
                     <span>JSON</span>
@@ -445,8 +446,8 @@ export default function EscapeALargeMazeVisualizer() {
                   <button className="elm-primary elm-apply" onClick={apply}>
                     Apply input
                   </button>
-                </section>
-                <section className="elm-panel elm-explain">
+                </VisualizerDockPanel>
+                <VisualizerDockPanel className="elm-panel elm-explain">
                   <div className="elm-panel-heading">
                     <h3>Why two bounded searches?</h3>
                   </div>
@@ -487,20 +488,20 @@ export default function EscapeALargeMazeVisualizer() {
                     bounded searches. The 15×15 viewport follows the active BFS
                     cell; it does not represent the full grid.
                   </p>
-                </section>
-              </div>,
+                </VisualizerDockPanel>
+              </VisualizerDockBody>,
               panelDivs.input,
             )}
           {panelDivs.code &&
             createPortal(
-              <div className="elm-code-dock">
+              <VisualizerDockBody code>
                 <CodeTracePanel
                   step={codeStep}
                   codeLines={CODE}
                   onActiveLineDomChange={setActiveLineDom}
                   autoScroll={autoScrollCode}
                 />
-              </div>,
+              </VisualizerDockBody>,
               panelDivs.code,
             )}
         </>
@@ -531,6 +532,6 @@ export default function EscapeALargeMazeVisualizer() {
         </FloatingPanel>,
         document.body,
       )}
-    </div>
+    </VisualizerDockLayout>
   );
 }

@@ -1,0 +1,32 @@
+.shell {
+  position: relative;
+  height: 100%;
+  min-height: 100px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Explicit layout beats a visualizer's single-class decorative shell padding. */
+.body.body {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  padding: var(--visualizer-dock-padding, 12px);
+}
+
+.body.code {
+  padding: var(--visualizer-code-padding, 8px);
+}
+
+.panel {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+.presets {
+  margin-bottom: 12px;
+}
