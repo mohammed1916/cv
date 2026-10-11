@@ -573,7 +573,7 @@ function ChatAssistant() {
     const onSelect = (event) => {
       if (
         event.target.closest(
-          "[data-chat-ignore], button, input, textarea, select, a",
+          "[data-chat-ignore], [data-code-selection], button, input, textarea, select, a",
         )
       )
         return;

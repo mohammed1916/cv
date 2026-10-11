@@ -18,9 +18,9 @@ export default function Selectable({ label, data, children, className = "" }) {
 
   const handleClick = useCallback(
     (e) => {
-      e.stopPropagation();
       // Only attach on click when select mode is active, or when shift+click is used
       if (!selectMode && !e.shiftKey) return;
+      e.stopPropagation();
       attachContext(label, data);
       setSelected(true);
       // Deselect ring after 2s
@@ -32,9 +32,9 @@ export default function Selectable({ label, data, children, className = "" }) {
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
       // emulate click
       if (!selectMode) return;
+      e.preventDefault();
       attachContext(label, data);
       setSelected(true);
       setTimeout(() => setSelected(false), 2000);

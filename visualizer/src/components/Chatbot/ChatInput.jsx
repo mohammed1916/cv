@@ -240,6 +240,10 @@ export default function ChatInput({
             label={attachedContext.label}
             onRemove={onClearContext}
           />
+          {typeof attachedContext.data?.code === 'string' && <details className="chat-code-preview">
+            <summary>Review selected code · lines {attachedContext.data.lines}</summary>
+            <pre>{attachedContext.data.code}</pre>
+          </details>}
         </div>
       )}
 

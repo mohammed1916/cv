@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './CodePanel.css'
 import { useNarrativeTrace } from './NarrativeTraceContext'
+import { useCodeSelection } from './CodeSelection.jsx'
 
 /**
  * Shared code-panel component.
@@ -19,6 +20,7 @@ import { useNarrativeTrace } from './NarrativeTraceContext'
  */
 export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) {
   useNarrativeTrace(step, code)
+  const selection = useCodeSelection(code, title)
   const scrollRef = useRef(null)
   const [copied, setCopied] = useState(false)
 
@@ -26,7 +28,7 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
   // Only scroll when the active line is out of view, and use 'auto' (instant)
   // so no smooth-scroll animation is left in-flight when the user pauses.
   useEffect(() => {
-    if (!step?.activeLine || !scrollRef.current) return
+    if (selection.enabled || !step?.activeLine || !scrollRef.current) return
     const el = scrollRef.current.querySelector(`[data-line="${step.activeLine}"]`)
     if (!el) return
 
@@ -40,7 +42,7 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
     if (!isFullyVisible) {
       el.scrollIntoView({ block: 'nearest', behavior: 'auto' })
     }
-  }, [step])
+  }, [step, selection.enabled])
 
   useEffect(() => {
     if (!copied) return
@@ -86,7 +88,8 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
       </div>
 
       {/* ── Code lines ── */}
-      <div className="shared-code-scroll" ref={scrollRef}>
+      {selection.toolbar}
+      <div className="shared-code-scroll" ref={scrollRef} data-code-selection>
         {code.map(({ line, text }) => {
           const isActive  = step?.activeLine === line
           const isRelated = step?.relatedLines?.includes(line)
@@ -95,6 +98,7 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
             <motion.div
               key={line}
               data-line={line}
+              {...selection.rowProps(line)}
               className={[
                 'shared-code-row',
                 isActive  ? 'active'  : '',
@@ -103,7 +107,7 @@ export function CodePanel({ code, step, title = 'Solution Code', getRowExtra }) 
               ].filter(Boolean).join(' ')}
               animate={{
                 x: isActive ? 6 : 0,
-                opacity: isActive || isRelated || !step ? 1 : 0.52,
+                opacity: selection.selected.includes(line) || isActive || isRelated || !step ? 1 : 0.52,
               }}
               transition={{ type: 'spring', stiffness: 280, damping: 28 }}
             >

@@ -50,6 +50,16 @@ export function ChatProvider({ children }) {
   const [floatingMode, setFloatingMode] = useState(true);
 
   useEffect(() => {
+    document.body.classList.toggle('chat-select-mode', selectMode);
+    const onEscape = event => { if (event.key === 'Escape') setSelectMode(false); };
+    window.addEventListener('keydown', onEscape);
+    return () => {
+      document.body.classList.remove('chat-select-mode');
+      window.removeEventListener('keydown', onEscape);
+    };
+  }, [selectMode]);
+
+  useEffect(() => {
     try {
       window.localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(conversations));
     } catch (err) {
@@ -225,4 +235,8 @@ export function useChatContext() {
   const ctx = useContext(ChatContext);
   if (!ctx) throw new Error("useChatContext must be used inside ChatProvider");
   return ctx;
+}
+
+export function useOptionalChatContext() {
+  return useContext(ChatContext);
 }

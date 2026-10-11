@@ -12,6 +12,7 @@ import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ResizablePanel from "../ResizablePanel";
 import PanelScaleControl from "../shared/PanelScaleControl";
+import { SelectModeToggle } from '../shared/CodeSelection.jsx';
 import "./chatbot.css";
 
 const Icon = ({ name }) => {
@@ -88,6 +89,37 @@ function formatElementContext(label, data) {
   return lines.join("\n");
 }
 
+  const getClosestZone = (mouseX, mouseY) => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const previewWidth = 600;
+    const previewHeight = 400;
+    const startX = centerX - previewWidth / 2;
+    const startY = centerY - previewHeight / 2;
+
+    const cellWidth = previewWidth / 3;
+    const cellHeight = previewHeight / 2;
+
+    let closest = null;
+    let minDistance = Infinity;
+
+    Object.entries(LAYOUT_ZONES).forEach(([key, zone]) => {
+      const zoneX = startX + zone.col * cellWidth + cellWidth / 2;
+      const zoneY = startY + zone.row * cellHeight + cellHeight / 2;
+      const distance = Math.sqrt(
+        Math.pow(mouseX - zoneX, 2) + Math.pow(mouseY - zoneY, 2),
+      );
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closest = key;
+      }
+    });
+
+    return closest;
+  };
+
+
 export default function ChatDrawer() {
   const {
     messages,
@@ -109,7 +141,6 @@ export default function ChatDrawer() {
     floatingMode,
     toggleFloatingMode,
   } = useChatContext();
-  const [selectAnnouncement, setSelectAnnouncement] = useState("");
   const [historyOpen, setHistoryOpen] = useState(false);
   const [hoveredZone, setHoveredZone] = useState(null);
   const [providerConfig, setProviderConfig] = useState(getChatProvider);
@@ -140,21 +171,7 @@ export default function ChatDrawer() {
 
   useEffect(() => subscribeChatProvider(setProviderConfig), []);
 
-  const handleToggleSelectMode = useCallback(() => {
-    const newMode = !selectMode;
-    toggleSelectMode();
-    try {
-      if (newMode) document.body.classList.add("chat-select-mode");
-      else document.body.classList.remove("chat-select-mode");
-    } catch (err) {
-      void err;
-    }
-    setSelectAnnouncement(
-      newMode ? "Select mode enabled" : "Select mode disabled",
-    );
-    const t = setTimeout(() => setSelectAnnouncement(""), 1800);
-    return () => clearTimeout(t);
-  }, [selectMode, toggleSelectMode]);
+  const handleToggleSelectMode = toggleSelectMode;
 
   const viz = useVisualizationContext();
   const {
@@ -204,7 +221,7 @@ export default function ChatDrawer() {
       void err;
     }
     // default near bottom-right
-    return { x: window.innerWidth - 420, y: window.innerHeight - 520 };
+    return { x: Math.max(12, window.innerWidth - 440), y: Math.max(12, window.innerHeight - 620) };
   });
 
   // Chat size (persisted) — width and height for floating, width for docked
@@ -215,7 +232,7 @@ export default function ChatDrawer() {
     } catch (err) {
       void err;
     }
-    return { width: 380, height: 520 };
+    return { width: 420, height: 600 };
   });
   const [dockedSize, setDockedSize] = useState(() => {
     try {
@@ -593,60 +610,9 @@ When asked about code or data structures, be precise and educational.`,
   );
 
   if (!isOpen) return null;
-  const getClosestZone = (mouseX, mouseY) => {
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    const previewWidth = 600;
-    const previewHeight = 400;
-    const startX = centerX - previewWidth / 2;
-    const startY = centerY - previewHeight / 2;
-
-    const cellWidth = previewWidth / 3;
-    const cellHeight = previewHeight / 2;
-
-    let closest = null;
-    let minDistance = Infinity;
-
-    Object.entries(LAYOUT_ZONES).forEach(([key, zone]) => {
-      const zoneX = startX + zone.col * cellWidth + cellWidth / 2;
-      const zoneY = startY + zone.row * cellHeight + cellHeight / 2;
-      const distance = Math.sqrt(
-        Math.pow(mouseX - zoneX, 2) + Math.pow(mouseY - zoneY, 2),
-      );
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        closest = key;
-      }
-    });
-
-    return closest;
-  };
-
-  const snapToZone = (zoneKey) => {
-    const zone = LAYOUT_ZONES[zoneKey];
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    const previewWidth = 600;
-    const previewHeight = 400;
-    const startX = centerX - previewWidth / 2;
-    const startY = centerY - previewHeight / 2;
-
-    const cellWidth = previewWidth / 3;
-    const cellHeight = previewHeight / 2;
-
-    const newX = startX + zone.col * cellWidth + cellWidth / 2 - 100;
-    const newY = startY + zone.row * cellHeight + cellHeight / 2 - 80;
-
-    setPos({
-      x: Math.max(6, Math.min(window.innerWidth - 200, newX)),
-      y: Math.max(6, Math.min(window.innerHeight - 120, newY)),
-    });
-  };
-
   // Floating position (persisted)
   const startDrag = (e) => {
-    if (e.target.closest("button, select, input, textarea")) return;
+    if (e.target.closest("button, select, input, textarea, summary, [data-chat-ignore]")) return;
     e.preventDefault();
     draggingRef.current = true;
     const clientX = e.type.startsWith("touch")
@@ -769,6 +735,8 @@ When asked about code or data structures, be precise and educational.`,
                   Alt+C
                 </span>
               </div>
+              <details className="chat-provider-settings" data-chat-ignore>
+              <summary>AI connection · {selectedProviderLabel}</summary>
               <form
                 className="chat-model-controls"
                 data-chat-ignore
@@ -875,6 +843,7 @@ When asked about code or data structures, be precise and educational.`,
                   Google for your request, never saved by this app.
                 </p>
               )}
+              </details>
             </div>
           </div>
           <div className="chat-header-actions">
@@ -897,20 +866,8 @@ When asked about code or data structures, be precise and educational.`,
               <Icon name="plus" />
             </button>
 
-            <button
-              className={`chat-select-toggle ${selectMode ? "active" : ""}`}
-              onClick={handleToggleSelectMode}
-              aria-pressed={selectMode}
-              title="Toggle Select Mode (hover to highlight, click to attach)"
-            >
-              <Icon name="select" />
-              {selectMode && (
-                <span className="chat-select-hint">Select mode ON</span>
-              )}
-            </button>
-
             <div className="visually-hidden" aria-live="polite">
-              {selectAnnouncement}
+              {selectMode ? "Select mode enabled" : "Select mode disabled"}
             </div>
 
             <button
@@ -952,9 +909,13 @@ When asked about code or data structures, be precise and educational.`,
           </div>
         </div>
 
+        <div className="chat-context-tools" data-chat-ignore>
+          <SelectModeToggle enabled={selectMode} onChange={handleToggleSelectMode} />
+          <span>{selectMode ? 'Choose lines in a code panel, then Attach to chat. Esc exits.' : 'Select code or a visual element to give your question context.'}</span>
+        </div>
         {selectMode && (
           <div className="chat-selection-banner">
-            Selection mode: click any visual element to add it as context.
+            Code: click lines, Shift-click a range, then attach. Other visual elements attach with one click.
           </div>
         )}
 

@@ -7,6 +7,7 @@ import PointerStateBand from "./shared/PointerStateBand";
 import { useNarrativeTrace } from './shared/NarrativeTraceContext';
 
 import OpenProblemInPlayground from "../playground/OpenProblemInPlayground";
+import { useCodeSelection } from './shared/CodeSelection.jsx';
 
 export default function CodeTracePanel({
   step,
@@ -30,6 +31,7 @@ export default function CodeTracePanel({
   playgroundLaunch = null,
   playgroundInput,
   playgroundDisabled = false,
+  selectionPractice = false,
 }) {
   const resolvedCodeLines = Array.isArray(codeLines)
     ? codeLines
@@ -39,6 +41,7 @@ export default function CodeTracePanel({
         ? lines
         : [];
   const resolvedHighlightedLines = Array.isArray(highlightLines) ? highlightLines : highlightedLines;
+  const selection = useCodeSelection(resolvedCodeLines, title, selectionPractice);
   const resolvedStep = useMemo(() => step || (Number.isFinite(activeLine) ? { activeLine } : undefined), [step, activeLine]);
   useNarrativeTrace(resolvedStep, resolvedCodeLines);
   const codeRef = useRef(null);
@@ -75,7 +78,7 @@ export default function CodeTracePanel({
     }
 
     // Auto-scroll if enabled
-    if (!autoScroll || Date.now() - lastManualScrollTsRef.current < 600) return;
+    if (selection.enabled || !autoScroll || Date.now() - lastManualScrollTsRef.current < 600) return;
 
     const container = codeRef.current;
     const elTop = el.offsetTop;
@@ -85,7 +88,7 @@ export default function CodeTracePanel({
     if (elTop < ctTop || elBottom > ctBottom) {
       el.scrollIntoView({ block: "nearest", behavior: "auto" });
     }
-  }, [resolvedStep, autoScroll, onActiveLineDomChange]);
+  }, [resolvedStep, autoScroll, onActiveLineDomChange, selection.enabled]);
 
   useEffect(() => {
     if (!copied) return;
@@ -209,9 +212,11 @@ export default function CodeTracePanel({
       </div>
 
       <PointerStateBand step={resolvedStep} />
+      {selection.toolbar}
 
       <div
         className="ctp-scroll"
+        data-code-selection
         ref={codeRef}
         onWheel={markManualScroll}
         onTouchMove={markManualScroll}
@@ -229,18 +234,17 @@ export default function CodeTracePanel({
             <motion.div
               key={line}
               data-line={line}
+              {...selection.rowProps(line)}
               className={`ctp-row ${isActive ? "active" : ""} ${isRelated ? "related" : ""} ${isExternallyHighlighted ? "external-highlight" : ""} ${onLineSelect ? "clickable" : ""}`}
               animate={{
                 x: isActive ? 6 : 0,
                 opacity:
-                  isRelated || isActive || isExternallyHighlighted || !resolvedStep
+                  selection.selected.includes(line) || isRelated || isActive || isExternallyHighlighted || !resolvedStep
                     ? 1
                     : 0.56,
               }}
               transition={{ type: "spring", stiffness: 280, damping: 28 }}
-              onClick={
-                onLineSelect ? () => onLineSelect(line, { text }) : undefined
-              }
+              onClick={event => selection.enabled ? selection.rowProps(line).onClick(event) : onLineSelect?.(line, { text })}
             >
               <span className="ctp-no mono">{line}</span>
               <code className="ctp-text">{text || " "}</code>

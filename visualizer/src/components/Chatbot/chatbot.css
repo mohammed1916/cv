@@ -1848,3 +1848,27 @@ body.chat-select-mode .selectable.selected {
     font-size: 10px;
   }
 }
+/* Focused tutor layout: readable controls, quiet surfaces, explicit selection. */
+.chat-drawer .chat-header { align-items:flex-start; flex-wrap:wrap; padding:14px; background:var(--surface2); border-bottom:1px solid var(--border); gap:12px; max-height:40%; overflow:auto; }
+.chat-drawer .chat-header-left { align-items:flex-start; flex:1 1 230px; min-width:0; }
+.chat-drawer .chat-header-left > div { min-width:0; width:100%; }
+.chat-drawer .chat-header-title { font-size:16px; line-height:1.4; }
+.chat-drawer .chat-header-icon { border-radius:9px; width:34px; height:34px; flex-shrink:0; }
+.chat-drawer .chat-header-actions { gap:6px; }
+.chat-drawer .chat-header-actions button { width:34px; height:34px; padding:7px; border-radius:8px; color:var(--text); background:var(--surface); border:1px solid var(--border); }
+.chat-drawer .chat-provider-settings { margin-top:8px; font-size:12px; color:var(--text-muted); }
+.chat-drawer .chat-provider-settings summary { cursor:pointer; padding:5px 0; }
+.chat-drawer .chat-provider-settings[open] { padding-bottom:4px; }
+.chat-drawer .chat-model-controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.chat-drawer .chat-model-controls label { flex:1 1 120px; min-width:0; }
+.chat-drawer .chat-model-controls input, .chat-drawer .chat-model-controls select { min-height:34px; width:100%; box-sizing:border-box; }
+.chat-context-tools { padding:10px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:8px; flex:0 0 auto; border-bottom:1px solid var(--border); background:var(--surface); }
+.chat-context-tools > span { flex:1 1 180px; font-size:12px; line-height:1.5; color:var(--text-muted); }
+.chat-drawer .chat-selection-banner { padding:8px 14px; font-size:12px; line-height:1.5; background:color-mix(in srgb,var(--primary) 10%,var(--surface)); color:var(--text); }
+.chat-drawer .chat-messages { padding:16px; min-height:70px; }
+.chat-drawer .chat-empty { text-align:left; padding:18px 4px; line-height:1.65; }
+.chat-drawer .chat-empty-icon { border-radius:12px; }
+.chat-drawer button:focus-visible, .chat-drawer summary:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+.chat-code-preview { flex-basis:100%; min-width:0; margin:8px 0; color:var(--text); font-size:12px; }
+.chat-code-preview summary { cursor:pointer; }
+.chat-code-preview pre { max-height:150px; overflow:auto; padding:10px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; white-space:pre; }

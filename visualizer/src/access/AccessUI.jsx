@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
 import { PLANS, FREE_MEDIUM } from './policy';
 import './access.css';
 import TutorialDemo from './TutorialDemo';
+const TutorialSelectionPractice = lazy(() => import('./TutorialSelectionPractice'));
 
 export function AccessDialog({ title, onClose, children }) {
   const ref = useRef(null);
@@ -101,9 +102,11 @@ export function Tutorial({ onProblem, onPlayground, problems }) {
     ['Try your own code', 'Open Code Playground, choose Python or JavaScript, and start with its sample. Run it, inspect the trace, then change one line and compare. Your code is saved in this browser. Free accounts get 30 minutes each day; Pro has unlimited playground time.'],
   ];
   const twoSum = problems.find(p => String(p.number) === '1' && !p.tags.includes('Codeforces'));
+  lessons.push(['Select code and ask a focused question', 'Use the same selection controls as the shared code panels. Select individual lines or a range, then attach them to chat. Attaching does not send a message.']);
   return <div className="tutorial-content"><span className="access-eyebrow">QUICK START · {step + 1} / {lessons.length}</span>
     <progress value={step + 1} max={lessons.length} aria-label="Tutorial progress" />
-    <TutorialDemo key={step} lesson={step} />
+    <nav className="tutorial-lesson-nav" aria-label="Tutorial lessons">{lessons.map(([title], index) => <button type="button" key={title} aria-current={step === index ? 'step' : undefined} onClick={() => setStep(index)}>{index + 1}. {title}</button>)}</nav>
+    {step === 5 ? <Suspense fallback={<p role="status">Loading selection practice…</p>}><TutorialSelectionPractice /></Suspense> : <TutorialDemo key={step} lesson={step} />}
     <h3>{lessons[step][0]}</h3><p>{lessons[step][1]}</p>
     <div className="access-actions"><button disabled={step === 0} onClick={() => setStep(step - 1)}>Previous</button>
       {step < lessons.length - 1 ? <button className="access-primary" onClick={() => setStep(step + 1)}>Next</button> : <button className="access-primary" onClick={onPlayground}>Open playground</button>}
