@@ -74,6 +74,12 @@
 body.chat-select-mode * { cursor: crosshair !important; }
 body.chat-select-mode .chat-launcher,
 body.chat-select-mode .chat-launcher * { cursor: pointer !important; }
+body.chat-select-mode [data-chat-selectable]:hover,
+body.chat-select-mode .svg-viewport-svg g:hover,
+body.chat-select-mode .trie-state svg g:hover {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
 
 .settings-menu {
   position: relative;

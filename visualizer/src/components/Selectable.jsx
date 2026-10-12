@@ -13,7 +13,7 @@ import { useChatContext } from "../context/ChatContext";
  * - Shift+Click: attaches context AND opens the chat drawer
  */
 export default function Selectable({ label, data, children, className = "" }) {
-  const { attachContext, openChat, selectMode } = useChatContext();
+  const { attachContext, openChat, selectMode, disableSelectMode } = useChatContext();
   const [selected, setSelected] = useState(false);
 
   const handleClick = useCallback(
@@ -22,12 +22,14 @@ export default function Selectable({ label, data, children, className = "" }) {
       if (!selectMode && !e.shiftKey) return;
       e.stopPropagation();
       attachContext(label, data);
+      disableSelectMode();
+      openChat();
       setSelected(true);
       // Deselect ring after 2s
       setTimeout(() => setSelected(false), 2000);
       if (e.shiftKey) openChat();
     },
-    [label, data, attachContext, openChat, selectMode],
+    [label, data, attachContext, openChat, selectMode, disableSelectMode],
   );
 
   const handleKeyDown = useCallback((e) => {
@@ -36,10 +38,12 @@ export default function Selectable({ label, data, children, className = "" }) {
       if (!selectMode) return;
       e.preventDefault();
       attachContext(label, data);
+      disableSelectMode();
+      openChat();
       setSelected(true);
       setTimeout(() => setSelected(false), 2000);
     }
-  }, [selectMode, attachContext, label, data]);
+  }, [selectMode, attachContext, label, data, disableSelectMode, openChat]);
 
   return (
     <span

@@ -13,7 +13,7 @@ export default function IndexedSequence({ label, length, valueAt, active = -1, r
     <div className="algorithm-sequence__cells">{Array.from({ length: end - start }, (_, offset) => {
       const index = start + offset
       const role = roleAt(index)
-      return <div key={index} className={`algorithm-sequence__cell ${index === active ? 'is-active' : ''}`} data-role={role}>
+      return <div key={index} data-chat-selectable data-index={index + indexOffset} data-chat-label={`${label} [${index + indexOffset}]`} className={`algorithm-sequence__cell ${index === active ? 'is-active' : ''}`} data-role={role}>
         <small>[{index + indexOffset}]</small><strong>{valueAt(index)}</strong><span>{index === active ? 'current' : role || '\u00a0'}</span>
       </div>
     })}</div>

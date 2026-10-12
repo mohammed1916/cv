@@ -184,6 +184,10 @@ function MatrixRow({
           <motion.div
             key={key}
             className={classes}
+            data-chat-selectable
+            data-row={rowIndex}
+            data-column={colIndex}
+            data-chat-label={`Matrix cell [${rowIndex}, ${colIndex}]: ${value}`}
             style={{
               width: cellWidth,
               height: cellHeight,

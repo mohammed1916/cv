@@ -8,7 +8,7 @@ export default function SearchWindow({ nums, step, exclusive = false, target }) 
     <div className={styles.cells}>{nums.map((value, i) => {
       const outside = i < left || (exclusive ? i >= right : i > right);
       const roles = [i === left ? 'L' : '', i === step?.mid ? 'M' : '', i === right ? 'R' : ''].filter(Boolean);
-      return <div key={i} className={styles.cell} data-outside={outside} data-active={i === step?.mid} data-found={found === i}>
+      return <div key={i} data-chat-selectable data-index={i} data-chat-label={`Search array [${i}]: ${value}`} className={styles.cell} data-outside={outside} data-active={i === step?.mid} data-found={found === i}>
         <small>[{i}]</small><strong>{value}</strong><span>{roles.join(' · ') || (outside ? 'excluded' : 'candidate')}</span>
       </div>;
     })}{exclusive && <div className={styles.cell} data-found={found === nums.length}><small>[{nums.length}]</small><strong>∅</strong><span>{right === nums.length ? 'R · end' : 'end'}</span></div>}</div>

@@ -1,5 +1,6 @@
 import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import { createPortal } from 'react-dom';
+import { resolveVisualSelection } from './components/shared/visualSelection.js';
 import WelcomeHero from "./components/marketing/WelcomeHero";
 import React, {
   useEffect,
@@ -562,7 +563,6 @@ function ChatAssistant() {
     disableSelectMode,
     isOpen,
     selectMode,
-    toggleSelectMode,
     attachContext,
   } = useChatContext();
   const [chatLoaded, setChatLoaded] = useState(false);
@@ -572,39 +572,17 @@ function ChatAssistant() {
   useEffect(() => {
     if (!selectMode) return undefined;
     const onSelect = (event) => {
-      if (
-        event.target.closest(
-          "[data-chat-ignore], [data-code-selection], button, input, textarea, select, a",
-        )
-      )
-        return;
-      const element = event.target;
-      if (!element || element.closest(".chat-drawer, .chat-launcher")) return;
+      const selection = resolveVisualSelection(event.target);
+      if (!selection) return;
       event.preventDefault();
       event.stopPropagation();
-      const text = (element.innerText || element.textContent || "")
-        .trim()
-        .replace(/\s+/g, " ")
-        .slice(0, 1200);
-      const label =
-        element.getAttribute("aria-label") ||
-        element.dataset.chatLabel ||
-        element.className ||
-        element.tagName;
-      attachContext(`Selected: ${String(label).slice(0, 120)}`, {
-        tag: element.tagName.toLowerCase(),
-        text,
-        id: element.id || undefined,
-        classes:
-          typeof element.className === "string" ? element.className : undefined,
-      });
-      toggleSelectMode();
-      document.body.classList.remove("chat-select-mode");
+      attachContext(selection.label, selection.data);
+      disableSelectMode();
       openChat();
     };
     document.addEventListener("click", onSelect, true);
     return () => document.removeEventListener("click", onSelect, true);
-  }, [selectMode, attachContext, toggleSelectMode, openChat]);
+  }, [selectMode, attachContext, disableSelectMode, openChat]);
 
   return (
     <>
