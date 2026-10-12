@@ -1,4 +1,5 @@
 import { ALL_PROBLEMS } from './data/problemRoutes.js';
+import { createPortal } from 'react-dom';
 import WelcomeHero from "./components/marketing/WelcomeHero";
 import React, {
   useEffect,
@@ -558,7 +559,7 @@ function ProblemPage({
 function ChatAssistant() {
   const {
     openChat,
-    closeChat,
+    disableSelectMode,
     isOpen,
     selectMode,
     toggleSelectMode,
@@ -607,27 +608,23 @@ function ChatAssistant() {
 
   return (
     <>
-      {!isOpen && (
+      {(!isOpen || selectMode) && createPortal(
         <button
           type="button"
           className={`chat-launcher ${selectMode ? "selecting" : ""}`}
           onClick={
             selectMode
-              ? () => {
-                  toggleSelectMode();
-                  document.body.classList.remove("chat-select-mode");
-                  closeChat();
-                }
+              ? disableSelectMode
               : openChat
           }
           title={
             selectMode
-              ? "Exit selection and close chat"
+              ? "Exit select mode (Esc)"
               : "Open algorithm assistant"
           }
         >
-          {selectMode ? "Select element…" : "Ask AI"}
-        </button>
+          {selectMode ? "Exit select mode · Esc" : "Ask AI"}
+        </button>, document.body
       )}
       {chatLoaded && (
         <Suspense fallback={<div role="status">Loading assistant…</div>}>

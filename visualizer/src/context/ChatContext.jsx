@@ -47,6 +47,14 @@ export function ChatProvider({ children }) {
   const [attachedContext, setAttachedContext] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectMode, setSelectMode] = useState(false);
+  const [codeSelections, setCodeSelections] = useState({});
+  const reportCodeSelection = useCallback((id, selection) => {
+    setCodeSelections(previous => {
+      const next = { ...previous };
+      if (selection) next[id] = selection; else delete next[id];
+      return next;
+    });
+  }, []);
   const [floatingMode, setFloatingMode] = useState(true);
 
   useEffect(() => {
@@ -205,6 +213,8 @@ export function ChatProvider({ children }) {
         activeConversationId,
         attachedContext,
         selectMode,
+        codeSelections,
+        reportCodeSelection,
         floatingMode,
         isOpen,
         openChat,

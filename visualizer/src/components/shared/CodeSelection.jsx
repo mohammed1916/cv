@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useOptionalChatContext } from '../../context/ChatContext';
 import { codeSelectionPayload, selectCodeLines } from './codeSelection.js';
 import './CodeSelection.css';
@@ -13,12 +13,32 @@ export function SelectModeToggle({ enabled, onChange }) {
 // Shared by both code renderers; practice mode never attaches or sends a message.
 export function useCodeSelection(code, title, practice = false) {
   const chat = useOptionalChatContext();
+  const selectionId = useId();
+  const reportCodeSelection = practice ? null : chat?.reportCodeSelection;
   const source = JSON.stringify(code);
   const [localMode, setLocalMode] = useState(false);
   const [state, setState] = useState({ source, selected: [], anchor: null });
   const [notice, setNotice] = useState('');
   const selected = state.source === source ? state.selected : [];
   const enabled = practice || !chat ? localMode : chat.selectMode;
+  const selectionKey = JSON.stringify(selected);
+  useEffect(() => {
+    if (!reportCodeSelection) return;
+    const lines = JSON.parse(selectionKey);
+    reportCodeSelection(selectionId, lines.length ? codeSelectionPayload(JSON.parse(source), lines, title) : null);
+    return () => reportCodeSelection(selectionId, null);
+  }, [source, selectionKey, title, reportCodeSelection, selectionId]);
+  useEffect(() => {
+    if (!localMode) return;
+    const onEscape = event => {
+      if (event.key === 'Escape') { event.preventDefault(); setLocalMode(false); }
+    };
+    window.addEventListener('keydown', onEscape);
+    return () => window.removeEventListener('keydown', onEscape);
+  }, [localMode]);
+  const exit = () => {
+    if (practice || !chat) setLocalMode(false); else chat.disableSelectMode();
+  };
   const toggle = () => {
     if (practice || !chat) setLocalMode(value => !value); else chat.toggleSelectMode();
   };
@@ -47,6 +67,7 @@ export function useCodeSelection(code, title, practice = false) {
   });
   return { enabled, selected, rowProps, toolbar: <div className="code-selection-toolbar" data-chat-ignore>
     <SelectModeToggle enabled={enabled} onChange={toggle} />
+    {enabled && <button type="button" onClick={exit}>Exit select mode · Esc</button>}
     <span>{selected.length ? `${selected.length} lines selected` : 'Choose code to discuss'}</span>
     <button type="button" disabled={!selected.length || (!chat && !practice)} onClick={attach}>{practice ? 'Try attaching' : 'Attach to chat'}</button>
     <button type="button" disabled={!selected.length} onClick={() => { setState({ source, selected: [], anchor: null }); setNotice(''); }}>Clear</button>

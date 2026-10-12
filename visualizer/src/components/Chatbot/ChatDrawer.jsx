@@ -137,6 +137,8 @@ export default function ChatDrawer() {
     isOpen,
     closeChat,
     selectMode,
+    disableSelectMode,
+    codeSelections,
     toggleSelectMode,
     floatingMode,
     toggleFloatingMode,
@@ -911,7 +913,16 @@ When asked about code or data structures, be precise and educational.`,
 
         <div className="chat-context-tools" data-chat-ignore>
           <SelectModeToggle enabled={selectMode} onChange={handleToggleSelectMode} />
+          {selectMode && <button type="button" className="chat-exit-selection" onClick={disableSelectMode}>Exit select mode · Esc</button>}
           <span>{selectMode ? 'Choose lines in a code panel, then Attach to chat. Esc exits.' : 'Select code or a visual element to give your question context.'}</span>
+        </div>
+        <div className="chat-selection-status" role="status" aria-live="polite" data-chat-ignore>
+          {Object.values(codeSelections).length > 0 ? <>
+            <strong>Highlighted code{selectMode ? ' · selection in progress' : ' · selection kept'}</strong>
+            {Object.entries(codeSelections).map(([id, selection]) => <div key={id}>{selection.title} · lines {selection.lines}</div>)}
+            <small>Use Attach to chat in the code panel to include these lines in your next message.</small>
+          </> : selectMode ? <span>Select mode is on. No code lines selected yet.</span> : null}
+          {attachedContext && <div><strong>Attached to next message:</strong> {attachedContext.label}</div>}
         </div>
         {selectMode && (
           <div className="chat-selection-banner">
