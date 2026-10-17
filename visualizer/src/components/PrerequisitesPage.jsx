@@ -1,18 +1,44 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ALL_PROBLEMS } from '../data/problemRoutes';
-import { LEARNING_TOPICS, TOPIC_BY_ID, buildLearningIndex, prerequisitePath } from '../data/learningGraph';
+import { buildLearningIndex, prerequisitePath } from '../data/learningGraph';
+import { LEARNING_CONCEPTS, LEARNING_TOPICS, CONCEPT_BY_ID, LEARNING_SOURCES, conceptPath, searchLearningCatalog } from '../data/learningTaxonomy';
 import { isFreeProblem } from '../access/policy';
 import './PrerequisitesPage.css';
 
 const index = buildLearningIndex(ALL_PROBLEMS);
-const position = topic => ({ x: 28 + topic.column * 260, y: 64 + topic.row * 125 });
+const position = concept => ({ x: 28 + concept.column * 260, y: 64 + concept.row * 156 });
+const mapHeight = 64 + (Math.max(...LEARNING_TOPICS.map(item => item.row)) + 1) * 156;
+const rootId = id => conceptPath(id)[0];
+const label = id => CONCEPT_BY_ID[id].title;
 
-function TopicWindow({ topic, onClose, onTopic, onSelect, pro }) {
+function ConceptLinks({ ids, onSelect }) {
+  return <div className="learning-chips">{ids.map(id => <button key={id} onClick={() => onSelect(id)}>{label(id)} ↗</button>)}</div>;
+}
+
+function ConceptCard({ concept, style, overview, active, ancestor, onPreview, onGuide, onExpand, buttonRef }) {
+  const entry = index.byConcept[concept.id];
+  return <div style={style} className={`${overview ? 'learning-node' : 'learning-concept-card'} ${active ? 'is-current' : ''} ${ancestor ? 'is-ancestor' : ''}`} onMouseEnter={() => onPreview(concept.id)} onFocus={() => onPreview(concept.id)}>
+    <button className="learning-node-guide" onClick={() => onGuide(concept.id)} aria-label={`Open ${concept.title} guide`}>
+      <span>{entry.problems.length ? `${entry.problems.length} problem visualizers` : 'Concept only · no indexed visualizer'} <span aria-hidden="true">↗</span></span>
+      <strong>{concept.title}</strong>
+      {!overview && <span className="learning-card-summary">{concept.summary}</span>}
+      <small>{entry.capabilities.length ? `${entry.capabilities.length} indexed visual features` : 'Prerequisites & learning guide'}</small>
+    </button>
+    {entry.children.length > 0 && <button ref={buttonRef} className="learning-expand" onClick={() => onExpand(concept.id)} aria-label={`Expand ${concept.title}: ${entry.children.length} subtopics`}>+ {entry.children.length} subtopics <span aria-hidden="true">→</span></button>}
+  </div>;
+}
+
+function ConceptWindow({ id, onClose, onConcept, onBrowse, onSelect, pro }) {
   const dialog = useRef(null);
   const [query, setQuery] = useState('');
   const [limit, setLimit] = useState(12);
-  const entry = index.byTopic[topic.id];
-  const filtered = entry.problems.filter(problem => `${problem.number} ${problem.title} ${problem.difficulty}`.toLowerCase().includes(query.toLowerCase().trim()));
+  const [onlyDirect, setOnlyDirect] = useState(false);
+  const concept = CONCEPT_BY_ID[id];
+  const entry = index.byConcept[id];
+  const members = onlyDirect ? entry.ungrouped : entry.problems;
+  const filtered = members.filter(problem => `${problem.number} ${problem.title} ${problem.difficulty}`.toLowerCase().includes(query.toLowerCase().trim()));
+  const path = conceptPath(id);
+  const source = LEARNING_SOURCES[concept.source];
   useEffect(() => {
     const element = dialog.current;
     element.showModal();
@@ -20,21 +46,27 @@ function TopicWindow({ topic, onClose, onTopic, onSelect, pro }) {
   }, []);
   return <dialog ref={dialog} className="learning-dialog" aria-labelledby="learning-dialog-title" onCancel={onClose} onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <div className="learning-dialog-content">
-      <header><div><span className="learning-eyebrow">TOPIC GUIDE</span><h2 id="learning-dialog-title">{topic.title}</h2></div><button autoFocus onClick={onClose} aria-label="Close topic guide">✕</button></header>
-      <p>{topic.summary}</p>
-      <div className="learning-goal"><strong>What you’ll learn</strong><p>{topic.goal}</p></div>
-      <section><h3>Learn before this</h3>{topic.requires.length ? <div className="learning-chips">{topic.requires.map(id => <button key={id} onClick={() => onTopic(id)}>{TOPIC_BY_ID[id].title} ↗</button>)}</div> : <p>No prerequisites on this map. Start here.</p>}
-        {topic.note && <p className="learning-note">{topic.note}</p>}
-        {topic.related?.length > 0 && <div className="learning-chips"><span>Related:</span>{topic.related.map(id => <button key={id} onClick={() => onTopic(id)}>{TOPIC_BY_ID[id].title} ↗</button>)}</div>}
+      <header><div><span className="learning-eyebrow">CONCEPT GUIDE</span><h2 id="learning-dialog-title">{concept.title}</h2></div><button autoFocus onClick={onClose} aria-label="Close concept guide">✕</button></header>
+      {concept.parent && <nav className="learning-breadcrumb" aria-label="Concept home">{path.slice(0, -1).map(parent => <button key={parent} onClick={() => onConcept(parent)}>{label(parent)} /</button>)}</nav>}
+      <p>{concept.summary}</p>
+      {concept.note && <p className="learning-goal">{concept.note}</p>}
+      {entry.children.length > 0 && <section className="learning-guide-children"><h3>Break this down</h3><button onClick={() => onBrowse(id)}>Expand {entry.children.length} subtopics on the map →</button><details><summary>Choose a subtopic here</summary><ConceptLinks ids={entry.children.map(item => item.id)} onSelect={onConcept} /></details></section>}
+      <section><h3>Learn before this</h3>{concept.requires.length ? <ConceptLinks ids={concept.requires} onSelect={onConcept} /> : <p>No additional prerequisites on this learning path.</p>}
+        <p className="learning-note">Prerequisites are separate from the topic’s home. They describe a suggested learning path, not every possible implementation.</p>
       </section>
-      {entry.capabilities.length > 0 && <section><h3>See it in motion <small>{entry.capabilities.length} visual features</small></h3><div className="learning-features">{entry.capabilities.map(feature => <details key={feature.id}><summary>{feature.title}</summary><p>{feature.description}</p><div className="learning-chips">{feature.problems.map(number => index.byNumber.get(number)).filter(Boolean).map(problem => <button key={problem.number} onClick={() => onSelect(problem)}>#{problem.number} {problem.title}{!isFreeProblem(problem) && !pro ? ' · Pro' : ''} ↗</button>)}</div></details>)}</div></section>}
-      <section><h3>Practice this topic <small>{entry.problems.length} available</small></h3><label className="learning-search">Find a problem<input value={query} onChange={event => { setQuery(event.target.value); setLimit(12); }} placeholder="Title, number, or difficulty…" /></label>
-        <div className="learning-problems">{filtered.slice(0, limit).map(problem => <button key={problem.number} onClick={() => onSelect(problem)}><span><small>#{problem.number} · {problem.difficulty}{!isFreeProblem(problem) && !pro ? ' · Pro' : ''}</small><strong>{problem.title}</strong></span><span>{entry.recommended.includes(problem) ? 'Start here' : 'Explore'} ↗</span></button>)}</div>
-        {!filtered.length && <p>No matching problems. Try another title or number.</p>}
-        {filtered.length > limit && <button className="learning-more" onClick={() => setLimit(value => value + 12)}>Show more ({filtered.length - limit} remaining)</button>}
-        <p className="learning-note">“Start here” entries are curated. Other matches come from catalog topic tags and indexed visual features.</p>
+      {concept.related.length > 0 && <section><h3>Also used with</h3><ConceptLinks ids={concept.related} onSelect={onConcept} /><p className="learning-note">These links open the same concept, not a second copy.</p></section>}
+      {entry.capabilities.length > 0 && <section><h3>See it in motion</h3><div className="learning-features">{entry.capabilities.map(feature => <details key={feature.id}><summary>{feature.title}</summary><p>{feature.description}</p><div className="learning-chips">{feature.problems.map(number => index.byNumber.get(number)).map(problem => <button key={problem.number} onClick={() => onSelect(problem)}>#{problem.number} {problem.title}{!isFreeProblem(problem) && !pro ? ' · Pro' : ''} ↗</button>)}</div></details>)}</div></section>}
+      <section><h3>Practice & visualizers <small aria-live="polite">{filtered.length} matches</small></h3>
+        {!entry.problems.length ? <div className="learning-empty"><strong>Concept only for now</strong><p>No problem visualizer is indexed for this concept yet. Explore its prerequisites{source ? ' or the reference below' : ''}.</p></div> : <>
+          {entry.children.length > 0 && <label className="learning-checkbox"><input type="checkbox" checked={onlyDirect} onChange={event => { setOnlyDirect(event.target.checked); setLimit(12); }} />Only problems not yet grouped into subtopics ({entry.ungrouped.length})</label>}
+          <label className="learning-search">Find a problem<input value={query} onChange={event => { setQuery(event.target.value); setLimit(12); }} placeholder="Title, number, or difficulty…" /></label>
+          <div className="learning-problems">{filtered.slice(0, limit).map(problem => <button key={problem.number} onClick={() => onSelect(problem)}><span><small>#{problem.number} · {problem.difficulty}{!isFreeProblem(problem) && !pro ? ' · Pro' : ''}</small><strong>{problem.title}</strong></span><span>{entry.recommended.includes(problem) ? 'Suggested' : 'Catalog match'} ↗</span></button>)}</div>
+          {!filtered.length && <p role="status">No problems match this filter. <button onClick={() => { setQuery(''); setOnlyDirect(false); }}>Reset filters</button></p>}
+          {filtered.length > limit && <button className="learning-more" onClick={() => setLimit(value => value + 12)}>Show more ({filtered.length - limit} remaining)</button>}
+          <p className="learning-note">Includes subtopics. Suggested problems are curated; other matches use catalog tags. A problem may have multiple approaches. Only the visual features listed above are explicitly indexed.</p>
+        </>}
       </section>
-      <section><h3>Where to go next</h3><div className="learning-chips">{LEARNING_TOPICS.filter(item => item.requires.includes(topic.id)).map(item => <button key={item.id} onClick={() => onTopic(item.id)}>{item.title} ↗</button>)}</div>{!LEARNING_TOPICS.some(item => item.requires.includes(topic.id)) && <p>Apply this idea in the recommended problems above.</p>}</section>
+      {source && <p><a href={source.url} target="_blank" rel="noreferrer">Read: {source.title} ↗</a></p>}
     </div>
   </dialog>;
 }
@@ -42,39 +74,58 @@ function TopicWindow({ topic, onClose, onTopic, onSelect, pro }) {
 export default function PrerequisitesPage({ onBack, onSelect, pro }) {
   const [hovered, setHovered] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [expanded, setExpanded] = useState(null);
   const [query, setQuery] = useState('');
-  const [escapeHidden, setEscapeHidden] = useState(false);
-  const current = hovered && !escapeHidden ? TOPIC_BY_ID[hovered] : null;
-  const ancestors = useMemo(() => new Set(current ? prerequisitePath(current.id) : []), [current]);
-  const matches = LEARNING_TOPICS.filter(topic => `${topic.id} ${topic.title} ${topic.summary}`.toLowerCase().includes(query.toLowerCase().trim()));
-  const matchingIds = new Set(matches.map(topic => topic.id));
-  function preview(id) { setHovered(id); setEscapeHidden(false); }
-  return <main className="learning-page" onKeyDown={event => { if (event.key === 'Escape') { setHovered(null); setEscapeHidden(true); } }}>
-    <header className="learning-header"><button onClick={onBack}>← Problems</button><span className="learning-eyebrow">THE LEARNING MAP / 12 CONNECTED IDEAS</span></header>
-    <div className="learning-intro"><div><h1>Build the foundations.<br /><em>Then connect the dots.</em></h1><p>Find what to learn first, see how ideas connect, and choose a visualizer to make it click.</p></div><label className="learning-search">Find a concept<input type="search" placeholder="Try queue, recursion, or DP…" value={query} onChange={event => setQuery(event.target.value)} /></label></div>
-    <div className="learning-legend"><span><i /> Prerequisite → next concept</span><span>Hover or focus to preview · Click to explore</span><span>{matches.length} concepts shown</span></div>
-    <div className="learning-map-scroll" role="region" aria-label="Prerequisite graph, scroll horizontally on small screens" tabIndex={0}>
-      <div className="learning-map">
-        <div className="learning-columns">{['01 / Foundations', '02 / Build intuition', '03 / Solve & explore', '04 / Go deeper'].map(label => <span key={label}>{label}</span>)}</div>
-        <svg viewBox="0 0 1060 575" aria-hidden="true"><defs><marker id="learning-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" /></marker></defs>{LEARNING_TOPICS.flatMap(topic => topic.requires.map(id => {
-          const start = position(TOPIC_BY_ID[id]); const end = position(topic);
-          const active = current && (topic.id === current.id || ancestors.has(topic.id)) && ancestors.has(id);
-          const path = topic.column - TOPIC_BY_ID[id].column > 1
-            ? `M ${start.x + 218} ${start.y + 40} C ${start.x + 240} ${start.y + 40}, ${start.x + 230} ${start.y - 14}, ${start.x + 250} ${start.y - 14} L ${end.x - 30} ${start.y - 14} C ${end.x - 12} ${start.y - 14}, ${end.x - 24} ${end.y + 40}, ${end.x - 3} ${end.y + 40}`
-            : `M ${start.x + 218} ${start.y + 40} C ${start.x + 242} ${start.y + 40}, ${end.x - 24} ${end.y + 40}, ${end.x - 3} ${end.y + 40}`;
-          return <path key={`${id}-${topic.id}`} className={`${active ? 'is-active' : ''} ${!matchingIds.has(id) || !matchingIds.has(topic.id) ? 'is-dim' : ''}`} d={path} markerEnd="url(#learning-arrow)" />;
+  const [searchLimit, setSearchLimit] = useState(12);
+  const heading = useRef(null);
+  const searchInput = useRef(null);
+  const expandButtons = useRef(new Map());
+  const returnTo = useRef(null);
+  const current = CONCEPT_BY_ID[hovered];
+  const ancestorRoots = useMemo(() => new Set(current ? prerequisitePath(current.id).map(rootId) : []), [current]);
+  const results = searchLearningCatalog(query);
+  const searching = Boolean(query.trim());
+  const visibleRootIds = new Set(searching ? results.map(item => rootId(item.id)) : LEARNING_TOPICS.map(item => item.id));
+  const branch = expanded && CONCEPT_BY_ID[expanded];
+  const branchEntry = expanded && index.byConcept[expanded];
+  function browse(id) {
+    if (!index.byConcept[id].children.length) { setSelected(id); return; }
+    setSelected(null); setExpanded(id); setHovered(id);
+  }
+  function overview() { returnTo.current = expanded && rootId(expanded); setExpanded(null); setHovered(null); }
+  useEffect(() => {
+    if (expanded) heading.current?.focus();
+    else if (returnTo.current) {
+      (expandButtons.current.get(returnTo.current) || searchInput.current)?.focus();
+      returnTo.current = null;
+    }
+  }, [expanded]);
+  return <main className="learning-page" onKeyDown={event => { if (event.key === 'Escape' && !selected) { if (expanded) overview(); setHovered(null); } }}>
+    <header className="learning-header"><button onClick={onBack}>← Problems</button><span className="learning-eyebrow">LEARNING MAP / {LEARNING_TOPICS.length} AREAS / {LEARNING_CONCEPTS.length} CONCEPTS</span></header>
+    <div className="learning-intro"><div><h1>One concept. One home.<br /><em>Many ways to connect.</em></h1><p>Expand an area, follow its prerequisites, and find a small practice path. Cross-topic links take you to the same concept wherever you start.</p></div><label className="learning-search">Find any concept<input ref={searchInput} type="search" placeholder="Prefix sums, knapsack, alpha-beta…" value={query} onChange={event => { setQuery(event.target.value); setSearchLimit(12); }} /></label></div>
+    {searching && <section className="learning-search-results" aria-label="Concept search results"><span role="status">{results.length} concepts found</span><div className="learning-chips">{results.slice(0, searchLimit).map(item => <button key={item.id} onClick={() => browse(item.id)}><small>{conceptPath(item.id).slice(0, -1).map(label).join(' / ') || 'Topic'}</small><strong>{item.title}</strong></button>)}</div>{results.length > searchLimit && <button onClick={() => setSearchLimit(value => value + 12)}>Show more results</button>}<button onClick={() => setQuery('')}>Clear search</button></section>}
+    <div className="learning-legend"><span><i />{expanded ? 'Dotted branches = belongs under' : 'Hover or focus = prerequisite connections'}</span><span>Title → guide · + subtopics → expand</span><span>Concept-only entries remain visible</span></div>
+    <aside className="learning-preview" aria-live="polite"><span className="learning-preview-icon" aria-hidden="true">◎</span><div><strong>{current?.title || 'Start broad. Expand only what you need.'}</strong><p>{current?.summary || 'Prefix sums lives under Arrays; string and range-query techniques link to that same entry. Follow breadcrumbs to explore deeper without losing your place.'}</p>{current && <small>{index.byConcept[current.id].capabilities.slice(0, 2).map(feature => feature.title).join(' · ') || (index.byConcept[current.id].problems.length ? 'Open the guide for suggested problems' : 'Concept only · no indexed visualizer yet')}</small>}</div>{current && <button onClick={() => setSelected(current.id)}>Open guide ↗</button>}</aside>
+    {branch ? <section className="learning-cluster" aria-labelledby="learning-cluster-title">
+      <nav className="learning-breadcrumb" aria-label="Map location"><button onClick={overview}>← All areas</button>{conceptPath(expanded).map(id => <button key={id} aria-current={id === expanded ? 'location' : undefined} onClick={() => browse(id)}>{label(id)}</button>)}</nav>
+      <div className="learning-cluster-parent"><span className="learning-eyebrow">{conceptPath(expanded).length === 1 ? 'TOPIC' : 'SUBTOPIC'}</span><h2 id="learning-cluster-title" ref={heading} tabIndex={-1}>{branch.title}</h2><p>{branch.summary}</p><button onClick={() => setSelected(expanded)}>Open guide & practice ↗</button></div>
+      <div className="learning-pattern-grid" id="learning-expanded-patterns">{branchEntry.children.map(item => <ConceptCard key={item.id} concept={item} active={hovered === item.id} onPreview={setHovered} onGuide={setSelected} onExpand={browse} />)}</div>
+      {(branch.requires.length > 0 || branch.related.length > 0) && <div className="learning-cluster-links">{branch.requires.length > 0 && <section><h3>Learn before this</h3><ConceptLinks ids={branch.requires} onSelect={setSelected} /></section>}{branch.related.length > 0 && <section><h3>Also used with</h3><ConceptLinks ids={branch.related} onSelect={setSelected} /></section>}</div>}
+      <footer><p>Subtopic counts overlap. A canonical concept can apply to several data structures.</p><button onClick={() => branch.parent ? browse(branch.parent) : overview()}>← {branch.parent ? label(branch.parent) : 'All areas'}</button><button aria-expanded={true} aria-controls="learning-expanded-patterns" onClick={overview}>Collapse to overview</button></footer>
+    </section> : <div className="learning-map-scroll" role="region" aria-label="Topic graph; scroll horizontally on narrow screens" tabIndex={0}>
+      <div className="learning-map" style={{ height: mapHeight }}>
+        <div className="learning-columns">{['01 / Represent data', '02 / Explore & transform', '03 / Reuse & optimize', '04 / Specialize'].map(text => <span key={text}>{text}</span>)}</div>
+        <svg viewBox={`0 0 1060 ${mapHeight}`} style={{ height: mapHeight }} aria-hidden="true"><defs><marker id="learning-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" /></marker></defs>{current && LEARNING_TOPICS.flatMap(item => [...new Set(item.requires.map(rootId))].filter(id => id !== item.id && visibleRootIds.has(id) && visibleRootIds.has(item.id) && (item.id === rootId(current.id) || ancestorRoots.has(item.id))).map(id => {
+          const start = position(CONCEPT_BY_ID[id]); const end = position(item);
+          const direction = end.x >= start.x ? 1 : -1;
+          const from = start.x + (direction > 0 ? 218 : 0); const to = end.x + (direction > 0 ? -3 : 221);
+          const path = `M ${from} ${start.y + 40} C ${from + direction * 28} ${start.y + 40}, ${to - direction * 28} ${end.y + 40}, ${to} ${end.y + 40}`;
+          return <path key={`${id}-${item.id}`} className="is-active" d={path} markerEnd="url(#learning-arrow)" />;
         }))}</svg>
-        {LEARNING_TOPICS.map(topic => {
-          const pos = position(topic); const entry = index.byTopic[topic.id];
-          return <button key={topic.id} style={{ left: pos.x, top: pos.y }} className={`learning-node ${current?.id === topic.id ? 'is-current' : ''} ${ancestors.has(topic.id) ? 'is-ancestor' : ''} ${!matchingIds.has(topic.id) ? 'is-dim' : ''}`} hidden={!matchingIds.has(topic.id)} onMouseEnter={() => preview(topic.id)} onFocus={() => preview(topic.id)} onClick={() => setSelected(topic.id)} aria-label={`${topic.title}, ${entry.problems.length} problems. Open topic guide.`} aria-describedby={current?.id === topic.id ? 'learning-preview' : undefined}>
-            <span>{topic.requires.length ? `${topic.requires.length} prerequisites` : 'Start here'} <span aria-hidden="true">↗</span></span><strong>{topic.title}</strong><small>{entry.problems.length} problems{entry.capabilities.length ? ` · ${entry.capabilities.length} visual features` : ''}</small>
-          </button>;
-        })}
+        {LEARNING_TOPICS.filter(item => visibleRootIds.has(item.id)).map(item => { const pos = position(item); return <ConceptCard key={item.id} concept={item} style={{ left: pos.x, top: pos.y }} overview active={hovered === item.id} ancestor={ancestorRoots.has(item.id)} onPreview={setHovered} onGuide={setSelected} onExpand={browse} buttonRef={element => { if (element) expandButtons.current.set(item.id, element); else expandButtons.current.delete(item.id); }} />; })}
       </div>
-    </div>
-    {!matches.length && <p role="status">No concepts match “{query}”. <button onClick={() => setQuery('')}>Clear search</button></p>}
-    <aside className="learning-preview" id="learning-preview" aria-live="polite"><span className="learning-preview-icon" aria-hidden="true">◎</span><div><strong>{current ? current.title : 'Your next “aha” starts with one concept.'}</strong><p>{current ? current.summary : 'Follow the arrows from left to right. Select any concept for prerequisites, visual features, and practice problems.'}</p>{current && <small>{index.byTopic[current.id].capabilities.slice(0, 2).map(feature => feature.title).join(' · ') || 'Explore the recommended problem visualizers'}</small>}</div>{current && <button onClick={() => setSelected(current.id)}>Explore topic ↗</button>}</aside>
-    <p className="learning-footnote">A curated starting map, not a required syllabus. Prerequisites describe this learning path; related ideas appear inside each topic guide.</p>
-    {selected && <TopicWindow key={selected} topic={TOPIC_BY_ID[selected]} onClose={() => setSelected(null)} onTopic={setSelected} onSelect={problem => { setSelected(null); onSelect(problem); }} pro={pro} />}
+    </div>}
+    <p className="learning-footnote">This is a curated, expandable taxonomy, not a complete syllabus. The topic hierarchy, suggested prerequisites, and cross-topic links serve different purposes.</p>
+    {selected && <ConceptWindow key={selected} id={selected} onClose={() => setSelected(null)} onConcept={setSelected} onBrowse={browse} onSelect={problem => { setSelected(null); onSelect(problem); }} pro={pro} />}
   </main>;
 }

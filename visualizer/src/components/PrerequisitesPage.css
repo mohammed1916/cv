@@ -12,20 +12,23 @@
 .learning-legend { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
 .learning-legend i { display: inline-block; width: 22px; border-top: 2px solid var(--primary); vertical-align: middle; margin-right: 8px; }
 .learning-map-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
-.learning-map { position: relative; min-width: 1060px; height: 575px; background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 20px 20px; }
+.learning-map { position: relative; width: 1060px; margin: auto; height: 690px; background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 20px 20px; }
 .learning-columns { position: absolute; display: grid; grid-template-columns: repeat(4, 260px); padding: 22px 28px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-.learning-map svg { position: absolute; width: 1060px; height: 575px; pointer-events: none; color: var(--text-muted); }
+.learning-map svg { position: absolute; width: 1060px; height: 690px; pointer-events: none; color: var(--text-muted); }
 .learning-map svg > path { fill: none; stroke: var(--text-muted); stroke-width: 1.5; opacity: .32; }
 .learning-map svg > path.is-active { stroke: var(--primary); color: var(--primary); stroke-width: 3; opacity: 1; }
 .learning-map svg > path.is-dim { opacity: .06; }
-.learning-page .learning-node { position: absolute; width: 218px; min-height: 92px; display: flex; flex-direction: column; align-items: stretch; gap: 7px; text-align: left; padding: 12px 14px; box-shadow: 0 4px 12px #00000008; }
+.learning-page .learning-node { position: absolute; width: 218px; min-height: 92px; display: flex; flex-direction: column; align-items: stretch; text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 12px #00000008; }
 .learning-page .learning-node[hidden] { display: none; }
-.learning-node > span { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); display: flex; justify-content: space-between; }
+.learning-page .learning-node-guide { display: flex; flex-direction: column; gap: 7px; text-align: left; border: 0; background: transparent; padding: 12px 14px; }
+.learning-node-guide > span { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); display: flex; justify-content: space-between; width: 100%; }
+.learning-page .learning-expand { border: 0; border-top: 1px solid var(--border); border-radius: 0 0 10px 10px; padding: 8px 14px; display: flex; justify-content: space-between; color: var(--primary); background: var(--surface2); font-size: 12px; font-weight: 700; }
+.learning-page .learning-expand:hover { background: var(--surface3); }
 .learning-node strong { font-size: 15px; }
 .learning-node small { font-size: 11px; color: var(--text-muted); }
 .learning-page .learning-node:hover, .learning-page .learning-node.is-current { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary); }
 .learning-page .learning-node.is-ancestor { border-color: var(--primary); background: var(--surface2); }
-.learning-preview { display: flex; align-items: center; gap: 20px; margin-top: 16px; padding: 20px; min-height: 118px; box-sizing: border-box; border: 1px solid var(--border); border-radius: 16px; background: var(--surface2); }
+.learning-preview { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 20px; margin: 12px 0 16px; padding: 16px 20px; min-height: 110px; box-sizing: border-box; border: 1px solid var(--border); border-radius: 16px; background: var(--surface2); box-shadow: 0 8px 20px #0000000a; }
 .learning-preview > div { flex: 1; }
 .learning-preview-icon { color: var(--primary); font-size: 38px; }
 .learning-preview small { color: var(--primary); }
@@ -54,13 +57,52 @@
 .learning-problems strong { font-size: 14px; }
 .learning-problems button > span:last-child { font-size: 11px; white-space: nowrap; color: var(--primary); }
 .learning-dialog .learning-more { width: 100%; margin-top: 12px; }
+.learning-search-results { display: grid; gap: 12px; margin-bottom: 20px; font-size: 12px; }
+.learning-search-results .learning-chips { max-height: 160px; overflow: auto; padding: 5px; }
+.learning-cluster { border: 1px solid var(--border); border-radius: 18px; padding: 24px; background: var(--surface); animation: learning-reveal 180ms ease-out; }
+.learning-breadcrumb { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--text-muted); }
+.learning-cluster-parent { position: relative; max-width: 520px; margin: 24px auto 36px; padding: 24px; text-align: center; border: 1px solid var(--primary); background: var(--surface2); border-radius: 14px; }
+.learning-cluster-parent::after { content: ''; position: absolute; bottom: -37px; left: 50%; height: 36px; border-left: 2px dotted var(--primary); }
+.learning-cluster-parent h2 { font-size: clamp(24px, 3vw, 32px); margin: 8px 0; letter-spacing: -.03em; }
+.learning-cluster-parent h2, .learning-node, .learning-concept-card { scroll-margin-top: 160px; }
+.learning-cluster-parent p { color: var(--text-muted); line-height: 1.6; margin: 12px 0 20px; }
+.learning-pattern-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-top: 24px; border-top: 2px dotted var(--primary); }
+.learning-concept-card { position: relative; display: flex; flex-direction: column; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; }
+.learning-concept-card::before { content: ''; position: absolute; top: -26px; left: 50%; height: 24px; border-left: 2px dotted var(--primary); }
+.learning-concept-card:nth-child(n+4)::before { top: -22px; height: 20px; border-color: var(--border); }
+.learning-concept-card .learning-node-guide { flex: 1; padding: 18px; }
+.learning-concept-card strong { font-size: 17px; }
+.learning-concept-card small { font-size: 11px; color: var(--text-muted); }
+.learning-concept-card .learning-card-summary { text-transform: none; font-size: 13px; line-height: 1.6; letter-spacing: 0; }
+.learning-concept-card.is-current { border-color: var(--primary); }
+.learning-cluster-links { display: flex; flex-wrap: wrap; gap: 24px; padding-top: 24px; }
+.learning-cluster-links h3 { margin: 0 0 12px; font-size: 14px; }
+.learning-guide-children { border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.learning-guide-children details { margin-top: 14px; }
+.learning-guide-children summary { cursor: pointer; margin-bottom: 12px; }
+.learning-empty { border: 1px dashed var(--border); border-radius: 12px; padding: 16px; background: var(--surface2); }
+.learning-checkbox { display: flex; align-items: center; gap: 10px; line-height: 1.5; margin-bottom: 16px; font-size: 12px; }
+.learning-search-results .learning-chips button { display: grid; gap: 5px; text-align: left; }
+.learning-search-results .learning-chips small { color: var(--text-muted); font-size: 10px; }
+.learning-breadcrumb [aria-current="location"] { border-color: var(--primary); color: var(--primary); }
+.learning-dialog a { color: var(--primary); }
+.learning-cluster footer { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.learning-cluster footer p { flex: 1 1 240px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+@keyframes learning-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .learning-cluster { animation: none; } }
 @media (max-width: 680px) {
   .learning-header { align-items: start; gap: 12px; }
   .learning-header .learning-eyebrow { max-width: 180px; line-height: 1.6; }
   .learning-intro { flex-direction: column; align-items: stretch; }
   .learning-preview { flex-wrap: wrap; gap: 12px; }
+  .learning-preview { position: static; }
   .learning-preview-icon { display: none; }
   .learning-preview > div { flex-basis: 100%; }
   .learning-dialog-content { padding: 20px; }
   .learning-problems button > span:last-child { white-space: normal; }
+  .learning-cluster { padding: 16px; }
+  .learning-cluster-parent { padding: 18px; }
+  .learning-pattern-grid { grid-template-columns: 1fr; border-top: 0; padding: 0 0 0 16px; border-left: 2px dotted var(--primary); }
+  .learning-cluster-parent::after { left: 0; border-color: var(--primary); }
+  .learning-concept-card::before, .learning-concept-card:nth-child(n+4)::before { top: 50%; left: -18px; width: 16px; height: 0; border: 0; border-top: 2px dotted var(--primary); }
 }

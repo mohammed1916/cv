@@ -1,59 +1,58 @@
-// Learning catalog, version 1. Dependencies are pedagogical, not access gates.
-// Keep explicit visual capabilities separate from tag-based topic membership.
-export const LEARNING_TOPICS = [
-  { id: 'arrays', title: 'Arrays & iteration', column: 0, row: 0, tags: ['Array'], requires: [], summary: 'Read indexed values and follow a loop one step at a time.', goal: 'Trace an index, a value, and the state changed by each iteration.', picks: ['B2', '1'] },
-  { id: 'stack', title: 'Stack', column: 0, row: 1, tags: ['Stack'], requires: [], summary: 'The last item added is the first item removed.', goal: 'Predict push, pop, and the item on top.', picks: ['20', '155'] },
-  { id: 'queue', title: 'Queue', column: 0, row: 2, tags: ['Queue'], requires: [], summary: 'Process waiting items in first-in, first-out order.', goal: 'Distinguish the next item to process from newly enqueued items.', picks: ['232', 'B10'] },
-  { id: 'graphs', title: 'Graphs & neighbors', column: 0, row: 3, tags: ['Graph'], requires: [], summary: 'Represent connections with vertices and edges.', goal: 'List neighbors and explain why a visited set prevents repeated work.', picks: ['1971', '133'] },
-  { id: 'recursion', title: 'Recursion', column: 1, row: 1, tags: ['Recursion'], requires: ['stack'], summary: 'Pause a call, solve a smaller case, and return to the caller.', goal: 'Identify the base case and distinguish descending from returning.', picks: ['104', '301'], related: ['bfs'] },
-  { id: 'bfs', title: 'Breadth-first search', column: 1, row: 2, tags: ['Breadth-First Search'], requires: ['queue', 'graphs'], summary: 'Use a queue to explore a graph one layer at a time.', goal: 'Explain why BFS finds shortest paths in an unweighted graph.', picks: ['B10', '102', '1036'], related: ['recursion'], note: 'Recursion is helpful context for comparing traversals, but iterative BFS does not require it.' },
-  { id: 'prefix', title: 'Prefix sums', column: 1, row: 0, tags: ['Prefix Sum'], requires: ['arrays'], summary: 'Remember cumulative work to answer range questions.', goal: 'Recover a range sum by subtracting two prefix values.', picks: ['B9', '303'] },
-  { id: 'dfs', title: 'Depth-first search', column: 2, row: 2, tags: ['Depth-First Search'], requires: ['graphs', 'recursion'], summary: 'Explore one branch deeply before returning to another.', goal: 'Follow the recursive traversal and its visited state.', picks: ['104', '200'], note: 'This path teaches recursive DFS. Iterative DFS can use an explicit stack instead.' },
-  { id: 'backtracking', title: 'Backtracking', column: 2, row: 1, tags: ['Backtracking'], requires: ['recursion'], summary: 'Choose, explore, undo, and try the next possibility.', goal: 'Track a partial solution and restore it correctly after each branch.', picks: ['78', '22', '51'] },
-  { id: 'dp', title: 'Dynamic programming', column: 2, row: 0, tags: ['Dynamic Programming'], requires: ['arrays', 'recursion'], summary: 'Reuse answers to overlapping subproblems.', goal: 'Define a state, a recurrence, and an order for evaluating states.', picks: ['70', '198', '1143'], note: 'Recursion explains the recurrence; bottom-up DP can be implemented with loops.' },
-  { id: 'constraints', title: 'Constraint pruning', column: 3, row: 1, tags: [], requires: ['backtracking'], summary: 'Reject a choice as soon as a constraint makes it impossible.', goal: 'Explain which queen attacks a candidate square before placing it.', picks: ['51', '37'], note: 'N-Queens is a backtracking example, not a dynamic programming example.' },
-  { id: 'dp-table', title: '2D DP & transitions', column: 3, row: 0, tags: [], requires: ['dp'], summary: 'Read the earlier states that contribute to a table cell.', goal: 'Explain a cell using its dependencies, not just its final value.', picks: ['1143', '72'] },
-];
+import { LEARNING_CONCEPTS, CONCEPT_BY_ID } from './learningTaxonomy.js';
 
+// Capabilities are attached only to verified example routes, not inferred from tags.
 export const VISUALIZER_CAPABILITIES = [
-  { id: 'queue-layers', title: 'Queue & traversal layers', description: 'Watch the frontier and the level currently being processed.', topics: ['queue', 'bfs', 'graphs'], problems: ['B10', '102'], source: 'src/components/shared/TraversalTreePanel.jsx' },
-  { id: 'call-tree', title: 'Recursive call tree', description: 'Follow nested calls and the branches explored by recursive search.', topics: ['recursion', 'backtracking'], problems: ['301', '1096'], source: 'src/components/shared/RecursiveCallTree.jsx' },
-  { id: 'staircase', title: 'Staircase recurrence', description: 'Connect each stair to the earlier counts that reach it.', topics: ['dp', 'arrays'], problems: ['70'], source: 'src/components/shared/StaircaseScene.jsx' },
-  { id: 'dp-grid', title: 'DP table & active cell', description: 'Follow the LCS table as matching and skipping characters fill each cell.', topics: ['dp', 'dp-table'], problems: ['1143'], source: 'src/problems/Problem1143/LCSVisualizer.jsx' },
-  { id: 'queen-rays', title: 'Queen attack rays', description: 'See row, column, and diagonal conflicts for the next candidate position.', topics: ['backtracking', 'constraints'], problems: ['51'], source: 'src/components/shared/GridRayOverlay.jsx' },
+  { id: 'queue-layers', title: 'Queue & traversal layers', description: 'Watch the frontier and the level currently being processed.', problems: ['B10', '102'], source: 'src/components/shared/TraversalTreePanel.jsx' },
+  { id: 'call-tree', title: 'Recursive call tree', description: 'Follow nested calls and recursive search branches.', problems: ['301', '1096'], source: 'src/components/shared/RecursiveCallTree.jsx' },
+  { id: 'staircase', title: 'Staircase recurrence', description: 'Connect each stair to earlier counts that reach it.', problems: ['70'], source: 'src/components/shared/StaircaseScene.jsx' },
+  { id: 'dp-grid', title: 'DP table & active cell', description: 'Follow the LCS table as matching and skipping characters fill each cell.', problems: ['1143'], source: 'src/problems/Problem1143/LCSVisualizer.jsx' },
+  { id: 'queen-rays', title: 'Queen attack rays', description: 'See row, column, and diagonal conflicts for the next candidate.', problems: ['51'], source: 'src/components/shared/GridRayOverlay.jsx' },
 ];
 
-export const TOPIC_BY_ID = Object.fromEntries(LEARNING_TOPICS.map(topic => [topic.id, topic]));
+const TAG_ALIASES = { DP: 'Dynamic Programming', BFS: 'Breadth-First Search', DFS: 'Depth-First Search', 'Union-Find': 'Union Find', 'Heap (Priority Queue)': 'Heap', 'Priority Queue': 'Heap', 'Binary Indexed Tree': 'Fenwick Tree' };
+const normalizeTag = tag => TAG_ALIASES[tag] || tag;
+const unique = values => [...new Set(values)];
 
 export function prerequisitePath(id) {
   const result = new Set();
+  const visiting = new Set();
   function visit(key) {
-    for (const parent of TOPIC_BY_ID[key]?.requires || []) {
-      if (result.has(parent)) continue;
-      visit(parent);
-      result.add(parent);
+    if (visiting.has(key)) throw new Error(`Prerequisite cycle at ${key}`);
+    visiting.add(key);
+    for (const parent of CONCEPT_BY_ID[key]?.requires || []) {
+      if (!result.has(parent)) { visit(parent); result.add(parent); }
     }
+    visiting.delete(key);
   }
   visit(id);
   return [...result];
 }
 
-// Inverted indexes are built from lightweight route metadata, never visualizer imports.
 export function buildLearningIndex(problems) {
-  const available = problems.filter(problem => problem.implemented);
-  const byNumber = new Map(available.map(problem => [String(problem.number), problem]));
-  const byTopic = Object.fromEntries(LEARNING_TOPICS.map(topic => {
-    const recommended = topic.picks.map(number => byNumber.get(number)).filter(Boolean);
-    const recommendedNumbers = new Set(recommended.map(problem => String(problem.number)));
-    const capabilities = VISUALIZER_CAPABILITIES.filter(item => item.topics.includes(topic.id) && item.problems.some(number => byNumber.has(number)));
-    const featuredNumbers = new Set(capabilities.flatMap(item => item.problems));
-    const tagged = available.filter(problem => !recommendedNumbers.has(String(problem.number)) && (featuredNumbers.has(String(problem.number)) || problem.tags?.some(tag => topic.tags.includes(tag))))
-      .sort((a, b) => String(a.number).localeCompare(String(b.number), undefined, { numeric: true }));
-    return [topic.id, { recommended, problems: [...recommended, ...tagged], capabilities }];
-  }));
+  const byNumber = new Map(problems.filter(problem => problem.implemented).map(problem => [String(problem.number), problem]));
+  const available = [...byNumber.values()];
+  const byConcept = {};
+  function build(id) {
+    if (byConcept[id]) return byConcept[id];
+    const concept = CONCEPT_BY_ID[id];
+    const children = LEARNING_CONCEPTS.filter(item => item.parent === id);
+    const childEntries = children.map(item => build(item.id));
+    const curated = concept.picks.map(number => byNumber.get(number)).filter(Boolean);
+    const tags = new Set(concept.tags.map(normalizeTag));
+    const direct = unique([...curated, ...available.filter(problem => problem.tags?.some(tag => tags.has(normalizeTag(tag))))]);
+    const recommended = curated.length ? curated : unique(childEntries.flatMap(entry => entry.recommended)).slice(0, 6);
+    const members = unique([...recommended, ...direct, ...childEntries.flatMap(entry => entry.problems)]);
+    const memberNumbers = new Set(members.map(problem => String(problem.number)));
+    const childMembers = new Set(childEntries.flatMap(entry => entry.problems));
+    const capabilities = VISUALIZER_CAPABILITIES.map(feature => ({ ...feature, problems: feature.problems.filter(number => memberNumbers.has(number)) })).filter(feature => feature.problems.length);
+    return byConcept[id] = { children, recommended, direct, problems: members, capabilities, ungrouped: members.filter(problem => !childMembers.has(problem)) };
+  }
+  LEARNING_CONCEPTS.forEach(concept => build(concept.id));
+  const membership = new Map(LEARNING_CONCEPTS.map(concept => [concept.id, new Set(byConcept[concept.id].problems)]));
   const byProblem = Object.fromEntries(available.map(problem => [problem.number, {
-    topics: LEARNING_TOPICS.filter(topic => byTopic[topic.id].problems.includes(problem)).map(topic => topic.id),
-    capabilities: VISUALIZER_CAPABILITIES.filter(item => item.problems.includes(String(problem.number))).map(item => item.id),
+    concepts: LEARNING_CONCEPTS.filter(concept => membership.get(concept.id).has(problem)).map(concept => concept.id),
+    directConcepts: LEARNING_CONCEPTS.filter(concept => byConcept[concept.id].direct.includes(problem)).map(concept => concept.id),
+    capabilities: VISUALIZER_CAPABILITIES.filter(feature => feature.problems.includes(String(problem.number))).map(feature => feature.id),
   }]));
-  return { byTopic, byProblem, byNumber };
+  return { byConcept, byProblem, byNumber };
 }

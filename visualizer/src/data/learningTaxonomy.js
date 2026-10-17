@@ -1,0 +1,159 @@
+// One canonical record per concept. parent is navigation; requires is learning
+// order; related is a cross-reference and never creates a second concept.
+const c = (id, parent, title, summary, picks = [], tags = [], requires = [], related = [], extra = {}) =>
+  ({ id, parent, title, summary, picks, tags, requires, related, ...extra });
+
+export const LEARNING_SOURCES = {
+  knapsack: { title: 'CP-Algorithms: knapsack variants', url: 'https://cp-algorithms.com/dynamic_programming/knapsack.html' },
+  graphs: { title: 'CP-Algorithms: graph algorithms', url: 'https://cp-algorithms.com/' },
+  games: { title: 'Berkeley CS188: minimax and alpha-beta pruning', url: 'https://inst.eecs.berkeley.edu/~cs188/textbook/games/minimax.html' },
+  simulation: { title: 'LeetCode: Game of Life rules', url: 'https://leetcode.com/problems/game-of-life/' },
+};
+
+export const LEARNING_CONCEPTS = [
+  c('arrays', null, 'Arrays & sequence patterns', 'Read indexed data, then choose a pattern for scanning or aggregating it.', ['B2', '1'], ['Array'], [], [], { column: 0, row: 0 }),
+  c('strings', null, 'Strings & text', 'Work with characters, substrings, parsing, and shared prefixes.', ['242', '14'], ['String'], [], ['two-pointers', 'sliding-window'], { column: 0, row: 1 }),
+  c('hashing', null, 'Hash maps & sets', 'Remember seen values, frequencies, and keyed state for fast lookup.', ['1', '217'], ['Hash Table'], [], [], { column: 0, row: 2 }),
+  c('linked-list', null, 'Linked lists', 'Follow node references and reconnect links without losing the remaining list.', ['206', '21'], ['Linked List'], [], ['two-pointers'], { column: 0, row: 3 }),
+  c('stack-queue', null, 'Stacks, queues & deques', 'Choose which waiting item is processed next: last, first, or either end.', ['20', '232'], ['Stack', 'Queue'], [], [], { column: 0, row: 4 }),
+  c('bits', null, 'Bit manipulation', 'Represent and transform information one binary digit at a time.', ['191', '136'], ['Bit Manipulation'], [], [], { column: 0, row: 5 }),
+  c('math', null, 'Math & number theory', 'Use arithmetic structure, counting, and probability to avoid brute force.', ['B15', '204'], ['Math', 'Number Theory'], [], [], { column: 0, row: 6 }),
+  c('search-sort', null, 'Searching & sorting', 'Use ordering, partitions, and monotonic conditions to reduce work.', ['B3', 'B13'], ['Binary Search', 'Sorting'], ['arrays'], [], { column: 1, row: 0 }),
+  c('recursion', null, 'Recursion & divide-and-conquer', 'Solve a smaller input, then return and combine its answer with the caller.', ['104', '50'], ['Recursion', 'Divide and Conquer'], ['stack'], [], { column: 1, row: 1 }),
+  c('trees', null, 'Trees & tries', 'Exploit hierarchical structure, subtrees, and paths from a root.', ['104', 'B7'], ['Tree', 'Binary Tree', 'Trie'], ['recursion'], ['bfs', 'dfs'], { column: 1, row: 2 }),
+  c('graphs', null, 'Graph fundamentals', 'Model neighbors and reachability before choosing a traversal or connectivity tool.', ['B10', '133'], ['Graph'], [], [], { column: 1, row: 3 }),
+  c('intervals', null, 'Intervals & events', 'Reason about ranges, overlap, endpoint order, and active events.', ['56', '57'], ['Interval', 'Intervals'], ['sorting'], ['greedy', 'heaps'], { column: 1, row: 4 }),
+  c('simulation', null, 'Simulation & state machines', 'Apply the stated rules to update a process step by step: a board, robot, queue, or event timeline.', ['289', '54'], ['Simulation'], ['arrays'], [], { column: 1, row: 5, source: 'simulation' }),
+  c('geometry', null, 'Geometry', 'Use coordinates, orientation, distances, and boundaries to reason about shapes.', ['149', '223'], ['Geometry'], ['math'], [], { column: 1, row: 6 }),
+  c('heaps', null, 'Heaps & priority queues', 'Repeatedly retrieve the best-priority item while maintaining heap order.', ['B5', '215'], ['Heap', 'Priority Queue'], ['arrays'], ['dijkstra', 'event-simulation'], { column: 2, row: 0 }),
+  c('backtracking', null, 'Backtracking & pruning', 'Choose, explore, undo, and reject impossible partial solutions early.', ['78', '51'], ['Backtracking'], ['recursion'], [], { column: 2, row: 1 }),
+  c('dp', null, 'Dynamic programming', 'Define reusable states and transitions for overlapping subproblems.', ['70', '198'], ['Dynamic Programming'], ['arrays', 'recursion'], [], { column: 2, row: 2 }),
+  c('greedy', null, 'Greedy algorithms', 'Make a locally justified choice and prove it preserves an optimal solution.', ['55', '134'], ['Greedy'], [], ['intervals', 'heaps'], { column: 2, row: 3 }),
+  c('range-query', null, 'Range-query structures', 'Choose a data structure based on whether queries and updates are static or dynamic.', ['B6', '307'], ['Segment Tree', 'Binary Indexed Tree', 'Range Query'], ['arrays'], ['prefix-sums'], { column: 2, row: 4 }),
+  c('advanced-graphs', null, 'Advanced graphs', 'Extend traversal to weighted paths, structural decompositions, flows, and matching.', [], [], ['graphs'], [], { column: 3, row: 0, source: 'graphs' }),
+  c('games', null, 'Game theory & adversarial search', 'Reason about an opponent who chooses the best response, not a random next move.', ['486', '292'], ['Game Theory', 'Minimax'], ['recursion'], ['dp'], { column: 3, row: 1, source: 'games' }),
+
+  c('two-pointers', 'arrays', 'Two pointers', 'Coordinate two positions to avoid testing every candidate pair.', ['B11', '167', '11', '15'], ['Two Pointers'], ['arrays'], ['linked-list', 'strings']),
+  c('opposing-pointers', 'two-pointers', 'Opposing pointers', 'Move inward from both ends using an ordering or comparison invariant.', ['167', '11', '125'], [], ['two-pointers']),
+  c('fast-slow', 'two-pointers', 'Fast & slow pointers', 'Use different speeds to locate a midpoint or detect a cycle.', ['141', '142'], [], ['two-pointers'], ['linked-list']),
+  c('sliding-window', 'arrays', 'Sliding window', 'Maintain a contiguous range and reuse work when its boundaries change.', ['B12', '209', '3'], ['Sliding Window'], ['arrays'], ['strings', 'monotonic-deque']),
+  c('fixed-window', 'sliding-window', 'Fixed-size windows', 'Remove the outgoing value and add the incoming value without changing window length.', ['B12', '643', '438'], [], ['sliding-window']),
+  c('variable-window', 'sliding-window', 'Variable-size windows', 'Grow or shrink a window while preserving a problem-specific validity condition.', ['209', '3', '76'], [], ['sliding-window']),
+  c('prefix-sums', 'arrays', 'Prefix sums', 'Store cumulative totals so a range can be recovered from its boundaries.', ['B9', '303', '560'], ['Prefix Sum'], ['arrays'], ['range-query']),
+  c('prefix-2d', 'prefix-sums', '2D prefix sums', 'Combine four corner reads using inclusion-exclusion to recover a rectangle sum.', ['304'], [], ['prefix-sums']),
+  c('difference-array', 'arrays', 'Difference arrays', 'Mark range-update boundaries and reconstruct values with a prefix scan.', ['370', '1094'], [], ['prefix-sums']),
+  c('matrix-traversal', 'arrays', 'Matrix traversal', 'Keep row and column bounds explicit while traversing or transforming a grid.', ['B1', '54', '48'], ['Matrix'], ['arrays'], ['grid-simulation', 'bfs']),
+
+  c('string-matching', 'strings', 'String matching', 'Locate a pattern in text while avoiding redundant comparisons.', ['28', '459'], ['String Matching'], ['strings']),
+  c('kmp', 'string-matching', 'KMP & prefix function', 'Use the matched prefix to decide where comparison can resume after a mismatch.', [], ['KMP'], ['string-matching']),
+  c('rolling-hash', 'string-matching', 'Rolling hash', 'Update a substring fingerprint efficiently; account for possible collisions.', ['187'], ['Rolling Hash'], ['hashing', 'strings']),
+  c('palindromes', 'strings', 'Palindrome techniques', 'Compare mirrored positions or reuse information about smaller palindromes.', ['5', '647'], [], ['strings'], ['two-pointers', 'interval-dp']),
+  c('parsing', 'strings', 'Parsing & expression evaluation', 'Track tokens, precedence, and nested expression contexts.', ['150', '224', '394'], [], ['stack']),
+  c('frequency-map', 'hashing', 'Frequency counting', 'Count occurrences and compare frequency signatures instead of individual orders.', ['242', '49'], [], ['hashing']),
+  c('complement-lookup', 'hashing', 'Complement & seen-value lookup', 'Ask what earlier value completes the current candidate.', ['1', '219'], [], ['hashing'], ['prefix-sums']),
+  c('list-reversal', 'linked-list', 'Link reversal', 'Save the next node before reversing a link and advancing the traversal.', ['206', '92', '25'], [], ['linked-list']),
+  c('list-merge', 'linked-list', 'Merging & dummy nodes', 'Maintain a result tail and reconnect the next selected node safely.', ['21', '23'], [], ['linked-list'], ['heap-merge']),
+  c('list-design', 'linked-list', 'List-backed data structures', 'Combine node links with lookup tables to support efficient updates.', ['146', '460'], [], ['linked-list', 'hashing']),
+
+  c('stack', 'stack-queue', 'Stack / LIFO', 'Push and pop at one end so the most recent unfinished work resumes first.', ['20', '155'], ['Stack'], [], ['recursion', 'parsing']),
+  c('queue', 'stack-queue', 'Queue / FIFO', 'Process waiting items in the order they arrived.', ['232', 'B10'], ['Queue'], [], ['bfs']),
+  c('monotonic-stack', 'stack-queue', 'Monotonic stack', 'Discard dominated candidates while keeping unresolved values in order.', ['B14', '739', '84'], ['Monotonic Stack'], ['stack']),
+  c('monotonic-deque', 'stack-queue', 'Monotonic deque', 'Evict expired candidates at the front and dominated candidates at the back.', ['239', '862'], ['Monotonic Queue'], ['queue'], ['sliding-window']),
+  c('binary-search', 'search-sort', 'Binary search', 'Maintain a search invariant and discard a half that cannot contain the answer.', ['B3', '704', '33'], ['Binary Search'], ['arrays']),
+  c('binary-answer', 'binary-search', 'Binary search on the answer', 'Search a monotonic feasibility condition instead of an explicit sorted array.', ['410', '875'], [], ['binary-search']),
+  c('sorting', 'search-sort', 'Sorting algorithms', 'Build ordering through insertion, partitioning, or merging.', ['B13', '75', '148'], ['Sorting'], ['arrays']),
+  c('quickselect', 'search-sort', 'Quickselect & order statistics', 'Partition candidates and continue only in the side containing the desired rank.', [], ['Quickselect'], ['sorting']),
+  c('divide-conquer', 'recursion', 'Divide & combine', 'Solve independent smaller inputs and combine their returned results.', ['50', '241', '395'], ['Divide and Conquer'], ['recursion']),
+  c('tree-traversal', 'trees', 'Tree traversal orders', 'Choose when a node is processed relative to its children.', ['94', '144', '145'], [], ['trees'], ['dfs', 'bfs']),
+  c('bst', 'trees', 'Binary search trees', 'Use the ordering invariant to search, insert, or validate a tree.', ['98', '230', '700'], ['Binary Search Tree'], ['trees', 'binary-search']),
+  c('tree-paths', 'trees', 'Tree paths & ancestors', 'Relate nodes through root paths, lowest common ancestors, and subtree answers.', ['112', '236', '124'], [], ['trees']),
+  c('trie', 'trees', 'Trie / prefix tree', 'Share character prefixes while distinguishing a full word from a prefix.', ['B7', '208', '211'], ['Trie'], ['strings']),
+  c('heap-top-k', 'heaps', 'Top-k & bounded heaps', 'Keep only the candidates needed for a ranking or selection query.', ['215', '347'], [], ['heaps']),
+  c('heap-merge', 'heaps', 'K-way merging', 'Keep one frontier item per sorted source and repeatedly choose the smallest.', ['23', '373'], [], ['heaps'], ['list-merge']),
+  c('two-heaps', 'heaps', 'Two heaps & streaming median', 'Balance the lower and upper halves so their boundary reveals the median.', ['295', '480'], [], ['heaps']),
+
+  c('bfs', 'graphs', 'Breadth-first search', 'Explore one frontier layer at a time; unweighted distance grows by one per layer.', ['B10', '102', '1036'], ['Breadth-First Search'], ['queue', 'graphs'], ['recursion']),
+  c('multi-source-bfs', 'bfs', 'Multi-source BFS', 'Initialize every source at distance zero and expand one shared frontier.', ['994', '542'], [], ['bfs']),
+  c('dfs', 'graphs', 'Depth-first search', 'Finish one branch before returning; recursive and explicit-stack versions share this order.', ['104', '200'], ['Depth-First Search'], ['stack', 'graphs'], ['recursion']),
+  c('union-find', 'graphs', 'Union-find / disjoint sets', 'Track component representatives and merge sets without traversing all their members.', ['684', '547'], ['Union Find'], ['graphs']),
+  c('dsu-compression', 'union-find', 'Path compression & union by size', 'Flatten parent paths and attach smaller component trees to larger ones.', ['684'], [], ['union-find']),
+  c('dsu-rollback', 'union-find', 'Rollback DSU', 'Log union changes so earlier connectivity states can be restored.', [], [], ['union-find'], [], { source: 'graphs' }),
+  c('topological-sort', 'graphs', 'Topological sorting', 'Remove dependency-free nodes or use DFS finishing order in a directed acyclic graph.', ['207', '210'], ['Topological Sort'], ['graphs', 'queue']),
+  c('bipartite', 'graphs', 'Bipartite coloring', 'Assign two colors so adjacent vertices differ, detecting odd-cycle conflicts.', [], [], ['bfs']),
+  c('shortest-paths', 'advanced-graphs', 'Shortest-path algorithms', 'Choose the distance algorithm based on edge weights and query requirements.', [], ['Shortest Path'], ['graphs'], ['bfs']),
+  c('dijkstra', 'shortest-paths', 'Dijkstra', 'Finalize the smallest tentative distance when all edge weights are nonnegative.', ['743'], ['Dijkstra'], ['heaps', 'graphs']),
+  c('zero-one-bfs', 'shortest-paths', '0–1 BFS', 'Use a deque to prioritize zero-cost edges before unit-cost edges.', [], [], ['bfs', 'queue'], [], { source: 'graphs' }),
+  c('bellman-ford', 'shortest-paths', 'Bellman–Ford', 'Relax all edges repeatedly and detect reachable negative cycles.', [], ['Bellman-Ford'], ['graphs'], [], { source: 'graphs' }),
+  c('floyd-warshall', 'shortest-paths', 'Floyd–Warshall', 'Allow intermediate vertices one by one to compute all-pairs distances.', [], ['Floyd-Warshall'], ['graphs', 'dp'], [], { source: 'graphs' }),
+  c('mst', 'advanced-graphs', 'Minimum spanning trees', 'Connect every vertex with minimum total edge weight without forming a cycle.', ['1584'], ['Minimum Spanning Tree'], ['graphs']),
+  c('kruskal', 'mst', 'Kruskal', 'Process edges by weight and use DSU to reject edges inside one component.', [], [], ['union-find', 'sorting'], [], { source: 'graphs' }),
+  c('prim', 'mst', 'Prim', 'Grow one connected tree using the cheapest edge across its boundary.', [], [], ['heaps', 'graphs'], [], { source: 'graphs' }),
+  c('scc', 'advanced-graphs', 'Strongly connected components', 'Group directed vertices that can all reach each other, then form a condensation DAG.', [], ['Strongly Connected Component'], ['dfs'], [], { source: 'graphs' }),
+  c('bridges', 'advanced-graphs', 'Bridges & articulation points', 'Track DFS discovery and low-link values to find connectivity-critical edges or vertices.', [], [], ['dfs'], [], { source: 'graphs' }),
+  c('eulerian', 'advanced-graphs', 'Eulerian paths', 'Construct a walk that uses each edge exactly once.', ['332'], ['Eulerian Circuit'], ['graphs', 'stack']),
+  c('flow', 'advanced-graphs', 'Network flow & min-cut', 'Send flow through capacity-limited edges and reason about residual paths.', [], ['Maximum Flow'], ['bfs', 'dfs'], [], { source: 'graphs' }),
+  c('matching', 'advanced-graphs', 'Bipartite matching', 'Find nonconflicting pairs using augmenting paths.', [], [], ['bipartite'], ['flow'], { source: 'graphs' }),
+
+  c('subsets', 'backtracking', 'Subsets & combinations', 'Advance the starting choice to enumerate combinations without reordering duplicates.', ['78', '90', '39', '77'], [], ['backtracking']),
+  c('permutations', 'backtracking', 'Permutations', 'Track which input choices are already used in the current ordering.', ['46', '47'], [], ['backtracking']),
+  c('constraints', 'backtracking', 'Constraint pruning', 'Stop a branch immediately when its partial assignment violates a rule.', ['51', '37', '79'], [], ['backtracking'], ['alpha-beta']),
+  c('memoization', 'dp', 'Memoization / top-down DP', 'Cache an answer by state so repeated recursive subproblems do not run again.', ['139', '464'], ['Memoization'], ['recursion']),
+  c('linear-dp', 'dp', 'Linear & state-machine DP', 'Carry the best answer for each allowed state from one position to the next.', ['70', '198', '309'], [], ['dp']),
+  c('knapsack', 'dp', 'Knapsack family', 'Track a capacity or achievable total while choosing which items to take.', [], ['Knapsack'], ['dp'], [], { source: 'knapsack' }),
+  c('knapsack-01', 'knapsack', '0/1 knapsack', 'Use each item at most once; descending capacity updates prevent accidental reuse.', ['416', '494'], [], ['knapsack'], [], { source: 'knapsack' }),
+  c('knapsack-unbounded', 'knapsack', 'Unbounded / complete knapsack', 'Allow unlimited copies; ascending capacity updates can reuse the current item.', ['322', '518'], [], ['knapsack'], [], { source: 'knapsack' }),
+  c('knapsack-bounded', 'knapsack', 'Bounded / multiple knapsack', 'Limit the number of copies of each item; use grouped copies or an optimized transition.', [], [], ['knapsack-01'], [], { source: 'knapsack' }),
+  c('knapsack-mixed', 'knapsack', 'Mixed knapsack', 'Combine item types with single-use, limited-use, and unlimited-use rules.', [], [], ['knapsack-01', 'knapsack-unbounded', 'knapsack-bounded'], [], { source: 'knapsack' }),
+  c('knapsack-multidimensional', 'knapsack', 'Multidimensional knapsack', 'Track more than one resource limit in each DP state.', ['474'], [], ['knapsack-01']),
+  c('sequence-dp', 'dp', 'String & subsequence DP', 'Match, skip, or edit prefixes using answers for smaller positions.', ['1143', '72', '115', '300'], [], ['dp']),
+  c('grid-dp', 'dp', 'Grid DP', 'Combine the permitted predecessor cells while treating boundaries and obstacles explicitly.', ['62', '63', '64'], [], ['dp', 'matrix-traversal']),
+  c('interval-dp', 'dp', 'Interval DP', 'Solve shorter ranges before comparing splits or endpoint choices in a larger range.', ['312', '375', '516'], [], ['dp']),
+  c('tree-dp', 'dp', 'Tree DP', 'Combine child-state answers into a state for their parent.', ['337', '124'], [], ['dp', 'trees']),
+  c('bitmask-dp', 'dp', 'Bitmask / subset DP', 'Use a bitmask to encode the chosen set and transition by adding or removing elements.', ['464'], ['Bitmask'], ['dp', 'bitmasks']),
+  c('digit-dp', 'dp', 'Digit DP', 'Track position, bound tightness, and digit-related state while counting numbers.', ['233', '600'], [], ['dp']),
+  c('probability-dp', 'dp', 'Probability DP', 'Combine weighted outcomes, keeping probability and expected-value states distinct.', ['688', '837'], ['Probability and Statistics'], ['dp', 'probability']),
+
+  c('merge-intervals', 'intervals', 'Merge & intersect intervals', 'Sort endpoints and distinguish touching, overlapping, and disjoint ranges.', ['56', '57'], [], ['intervals']),
+  c('interval-scheduling', 'intervals', 'Interval scheduling', 'Choose compatible ranges with a justified ordering such as earliest finishing time.', ['435', '452'], [], ['intervals', 'greedy']),
+  c('sweep-line', 'intervals', 'Sweep line', 'Process ordered boundary events while maintaining the currently active set.', ['253', '218'], ['Line Sweep', 'Sweep Line'], ['intervals'], ['geometry', 'heaps']),
+  c('greedy-exchange', 'greedy', 'Exchange & ordering arguments', 'Show that replacing an optimal solution choice with the greedy choice does not worsen it.', ['455', '406'], [], ['greedy']),
+  c('greedy-reach', 'greedy', 'Reachability & running balance', 'Maintain the furthest reachable frontier or reset when a partial choice becomes impossible.', ['55', '45', '134'], [], ['greedy']),
+  c('fenwick', 'range-query', 'Fenwick / binary indexed tree', 'Use low-bit jumps to update and query cumulative ranges efficiently.', ['307', '315'], ['Binary Indexed Tree'], ['prefix-sums', 'bits']),
+  c('segment-tree', 'range-query', 'Segment tree', 'Store interval summaries and combine only the segments needed for a query.', ['B6', '307'], ['Segment Tree'], ['arrays', 'recursion']),
+  c('lazy-propagation', 'segment-tree', 'Lazy propagation', 'Defer whole-range updates while preserving correct node summaries.', [], [], ['segment-tree']),
+  c('sparse-table', 'range-query', 'Sparse table', 'Precompute power-of-two intervals for static queries such as range minimum.', [], [], ['arrays']),
+
+  c('bit-operations', 'bits', 'Masks, shifts & set bits', 'Test, set, clear, and count bits while respecting integer width.', ['191', '190', '338'], [], ['bits']),
+  c('xor', 'bits', 'XOR cancellation & parity', 'Use XOR identities to cancel paired values or compare binary differences.', ['136', '260', '389'], [], ['bits']),
+  c('bitmasks', 'bits', 'Bitmask sets & submask enumeration', 'Encode a small set as bits and enumerate its subsets or membership changes.', ['78', '401'], [], ['bits'], ['bitmask-dp']),
+  c('bitwise-trie', 'bits', 'Bitwise trie', 'Choose binary branches to optimize XOR against previously stored numbers.', ['421'], [], ['bits', 'trie']),
+  c('gcd', 'math', 'GCD & divisibility', 'Use remainders to reduce divisibility questions through the Euclidean algorithm.', ['B15', '365'], [], ['math']),
+  c('primes', 'math', 'Primes & sieve', 'Mark composite numbers or factor values to expose prime structure.', ['204', '650'], [], ['math']),
+  c('modular', 'math', 'Modular arithmetic & exponentiation', 'Keep residues bounded and use repeated squaring for large exponents.', ['50', '372'], [], ['math']),
+  c('combinatorics', 'math', 'Combinatorics', 'Count arrangements or choices through combinations, recurrences, and symmetry.', ['62', '96', '118'], ['Combinatorics'], ['math']),
+  c('probability', 'math', 'Probability & expectation', 'Distinguish outcome probability from the expected value of a random variable.', ['470'], ['Probability and Statistics'], ['math']),
+  c('geometry-orientation', 'geometry', 'Orientation, slopes & cross products', 'Use direction and signed area to compare points and detect collinearity.', ['149', '587'], [], ['geometry']),
+  c('geometry-rectangles', 'geometry', 'Rectangles, area & overlap', 'Combine coordinate bounds to detect intersections and account for shared area.', ['223', '391', '836'], [], ['geometry']),
+  c('convex-hull', 'geometry', 'Convex hull', 'Maintain the outer boundary by rejecting turns that bend into the interior.', ['587'], [], ['geometry-orientation', 'sorting']),
+  c('grid-simulation', 'simulation', 'Grid & cellular simulation', 'Read the old board consistently before committing simultaneous state changes.', ['289', '498'], [], ['simulation'], ['matrix-traversal']),
+  c('robot-simulation', 'simulation', 'Movement & direction state', 'Track position, heading, and obstacles as commands update a moving agent.', ['657'], [], ['simulation']),
+  c('event-simulation', 'simulation', 'Event-driven simulation', 'Jump to the next meaningful event rather than iterating through every time tick.', ['621', '1834'], [], ['simulation', 'heaps']),
+  c('minimax', 'games', 'Minimax', 'Alternate maximizing and minimizing choices assuming both players play optimally.', ['486', '464'], ['Minimax'], ['recursion'], [], { source: 'games' }),
+  c('alpha-beta', 'games', 'Alpha-beta pruning', 'Maintain lower and upper search bounds and skip branches that cannot affect the minimax decision.', [], [], ['minimax'], ['constraints'], { source: 'games', note: 'This is adversarial game-tree pruning. N-Queens constraint checks are not alpha-beta pruning.' }),
+  c('nim-grundy', 'games', 'Nim & Sprague–Grundy', 'Analyze impartial games through winning states and XOR combinations of game values.', ['292'], [], ['xor'], [], { source: 'graphs' }),
+];
+
+export const CONCEPT_BY_ID = Object.fromEntries(LEARNING_CONCEPTS.map(item => [item.id, item]));
+export const LEARNING_TOPICS = LEARNING_CONCEPTS.filter(item => !item.parent);
+export function conceptPath(id) {
+  const path = [];
+  const visited = new Set();
+  while (id && CONCEPT_BY_ID[id] && !visited.has(id)) {
+    visited.add(id); path.unshift(id); id = CONCEPT_BY_ID[id].parent;
+  }
+  return path;
+}
+export function searchLearningCatalog(query) {
+  const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+  return LEARNING_CONCEPTS.filter(item => words.every(word => `${item.id} ${item.title} ${item.summary} ${item.tags.join(' ')} ${conceptPath(item.id).map(id => CONCEPT_BY_ID[id].title).join(' ')}`.toLowerCase().includes(word)));
+}
