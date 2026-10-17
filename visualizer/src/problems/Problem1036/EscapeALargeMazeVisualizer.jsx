@@ -8,7 +8,11 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import "./EscapeALargeMazeVisualizer.css";
-import VisualizerDockLayout, { VisualizerDockBody, VisualizerDockPanel, VisualizerDockPresets } from "../../components/shared/VisualizerDockLayout";
+import VisualizerDockLayout, {
+  VisualizerDockBody,
+  VisualizerDockPanel,
+  VisualizerDockPresets,
+} from "../../components/shared/VisualizerDockLayout";
 
 const GRID = 1_000_000;
 const DIRECTIONS = [
@@ -58,25 +62,46 @@ const EXAMPLES = [
 ];
 
 const CODE_TEXT = [
-  "def isEscapePossible(blocked, source, target):",
-  "    walls = {tuple(cell) for cell in blocked}",
-  "    b = len(blocked)",
-  "    limit = b * (b - 1) // 2",
+  "from collections import deque",
   "",
-  "    def bfs(start, end):",
-  "        queue = deque([tuple(start)])",
-  "        seen = {tuple(start)}",
-  "        while queue and len(seen) <= limit:",
-  "            x, y = queue.popleft()",
-  "            if [x, y] == end: return True",
-  "            for dx, dy in directions:",
-  "                nx, ny = x + dx, y + dy",
-  "                if in_bounds and not_blocked and not_seen:",
-  "                    seen.add((nx, ny))",
-  "                    queue.append((nx, ny))",
-  "        return len(seen) > limit",
+  "class Solution:",
+  "    def isEscapePossible(self, blocked, source, target):",
+  "        walls = {tuple(cell) for cell in blocked}",
+  "        b = len(blocked)",
+  "        limit = b * (b - 1) // 2",
+  "        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]",
   "",
-  "    return bfs(source, target) and bfs(target, source)",
+  "        def bfs(start, end):",
+  "            start, end = tuple(start), tuple(end)",
+  "            queue = deque([start])",
+  "            seen = {start}",
+  "",
+  "            while queue:",
+  "                x, y = queue.popleft()",
+  "",
+  "                if (x, y) == end:",
+  "                    return True",
+  "",
+  "                for dx, dy in directions:",
+  "                    nx, ny = x + dx, y + dy",
+  "                    nxt = (nx, ny)",
+  "",
+  "                    if (",
+  "                        0 <= nx < 10**6",
+  "                        and 0 <= ny < 10**6",
+  "                        and nxt not in walls",
+  "                        and nxt not in seen",
+  "                    ):",
+  "                        seen.add(nxt)",
+  "",
+  "                        if len(seen) > limit:",
+  "                            return True",
+  "",
+  "                        queue.append(nxt)",
+  "",
+  "            return False",
+  "",
+  "        return bfs(source, target) and bfs(target, source)",
 ];
 
 const CODE = CODE_TEXT.map((text, index) => ({ line: index + 1, text }));
@@ -104,71 +129,95 @@ function validate(value) {
   return value;
 }
 
-// Captures the first few BFS operations for animation, but ALWAYS computes
-// the real verdict using the full enclosure bound (up to 19,900 cells).
-function traceBfs(start, end, walls, limit, label, maxFrames = 100) {
-  const queue = [start];
+// The BFS verdict matches Python exactly. Only recorded animation frames are capped.
+function traceBfs(start, end, walls, limit, label, maxFrames = 120) {
+  const queue = [[...start]];
   let head = 0;
   const seen = new Set([key(...start)]);
   const frames = [];
+  let omitted = 0;
   const record = (line, message, current = null, final = false) => {
     if (frames.length < maxFrames || final) {
       frames.push({
         phase: label,
         line,
+        activeLine: line,
         message,
         current,
         visited: Array.from(seen),
         frontier: queue.slice(head).map((p) => key(...p)),
         explored: seen.size,
         final,
+        omitted,
       });
+      omitted = 0;
+    } else {
+      omitted++;
     }
   };
-  record(8, `Start ${label.toLowerCase()} search at (${start.join(", ")}).`);
-  while (head < queue.length && seen.size <= limit) {
+
+  record(12, `Initialize ${label.toLowerCase()} BFS at (${start.join(", ")}).`);
+  record(13, `Visited set contains the starting cell.`);
+
+  while (head < queue.length) {
     const [x, y] = queue[head++];
+    record(16, `Dequeue (${x}, ${y}).`, [x, y]);
+
     if (x === end[0] && y === end[1]) {
-      record(10, `Reached the other endpoint at (${x}, ${y}).`, [x, y], true);
+      record(19, `Reached the opposite endpoint (${x}, ${y}).`, [x, y], true);
       return { escaped: true, reason: "reached", explored: seen.size, frames };
     }
+
     for (const [dx, dy] of DIRECTIONS) {
-      const nx = x + dx,
-        ny = y + dy,
-        k = key(nx, ny);
+      const nx = x + dx;
+      const ny = y + dy;
+      const nxt = key(nx, ny);
       if (
         nx >= 0 &&
-        ny >= 0 &&
         nx < GRID &&
+        ny >= 0 &&
         ny < GRID &&
-        !walls.has(k) &&
-        !seen.has(k)
+        !walls.has(nxt) &&
+        !seen.has(nxt)
       ) {
-        seen.add(k);
+        seen.add(nxt);
+        record(31, `Discover (${nx}, ${ny}); ${seen.size} visited cells.`, [
+          x,
+          y,
+        ]);
+
+        if (seen.size > limit) {
+          record(
+            34,
+            `Visited ${seen.size} cells, above the enclosure bound ${limit}.`,
+            [x, y],
+            true,
+          );
+          return {
+            escaped: true,
+            reason: "exceeded",
+            explored: seen.size,
+            frames,
+          };
+        }
+
         queue.push([nx, ny]);
+        record(
+          36,
+          `Enqueue (${nx}, ${ny}); ${queue.length - head} cells pending.`,
+          [x, y],
+        );
       }
     }
-    record(
-      14,
-      `Expand (${x}, ${y}); ${seen.size} cells discovered, ${queue.length - head} waiting.`,
-      [x, y],
-    );
   }
-  const escaped = seen.size > limit;
+
   record(
-    16,
-    escaped
-      ? `Explored ${seen.size} cells, exceeding the enclosure bound ${limit}. This endpoint cannot be trapped.`
-      : `Search stopped after ${seen.size} cells. The endpoint is enclosed.`,
+    38,
+    `Queue exhausted: ${label.toLowerCase()} is enclosed.`,
     null,
     true,
   );
-  return {
-    escaped,
-    reason: escaped ? "exceeded" : "enclosed",
-    explored: seen.size,
-    frames,
-  };
+  return { escaped: false, reason: "enclosed", explored: seen.size, frames };
 }
 
 function buildTrace(input) {
@@ -176,16 +225,19 @@ function buildTrace(input) {
   const b = input.blocked.length;
   const limit = (b * (b - 1)) / 2;
   const forward = traceBfs(input.source, input.target, walls, limit, "Source");
-  // Always show both searches so the reason for the two-way test is visible.
-  const backward = traceBfs(input.target, input.source, walls, limit, "Target");
-  const possible = forward.escaped && backward.escaped;
-  const frames = [...forward.frames, ...backward.frames];
+  // Python's `and` does not execute the second BFS if the first is false.
+  const backward = forward.escaped
+    ? traceBfs(input.target, input.source, walls, limit, "Target")
+    : null;
+  const possible = forward.escaped && Boolean(backward?.escaped);
+  const frames = [...forward.frames, ...(backward?.frames ?? [])];
   frames.push({
     phase: "Result",
-    line: 18,
+    line: 40,
+    activeLine: 40,
     message: possible
-      ? "Both searches escaped their potential enclosures. A path exists."
-      : `A search could not escape its enclosure. No path exists.`,
+      ? "Both BFS checks succeeded. A path exists."
+      : "At least one endpoint is enclosed. No path exists.",
     current: null,
     visited: [],
     frontier: [],
@@ -283,7 +335,7 @@ export default function EscapeALargeMazeVisualizer() {
   const rawStep = stepIndex >= 0 ? trace.frames[stepIndex] : null;
   const step = rawStep || {
     phase: "Source",
-    line: 1,
+    line: 4,
     message: "Press play or next to begin the bounded BFS.",
     explored: 0,
     frontier: [],
@@ -385,9 +437,16 @@ export default function EscapeALargeMazeVisualizer() {
                   </div>
                   <div className="elm-narrative" aria-live="polite">
                     <strong>
-                      Step {stepIndex + 1} / {trace.frames.length}
+                      Step {Math.max(0, stepIndex + 1)} / {trace.frames.length}{" "}
+                      · Python line {step.line}
                     </strong>
                     <p>{step.message}</p>
+                    {step.omitted > 0 && (
+                      <p>
+                        {step.omitted} intermediate operations were omitted from
+                        playback.
+                      </p>
+                    )}
                   </div>
                 </VisualizerDockPanel>
                 <div className="elm-stats">
@@ -477,8 +536,9 @@ export default function EscapeALargeMazeVisualizer() {
                     <div>
                       <strong>Target search</strong>
                       <span>
-                        {trace.backward.reason} ·{" "}
-                        {trace.backward.explored.toLocaleString()} cells
+                        {trace.backward
+                          ? `${trace.backward.reason} · ${trace.backward.explored.toLocaleString()} cells`
+                          : "Skipped (Python short-circuit)"}
                       </span>
                     </div>
                   </div>
