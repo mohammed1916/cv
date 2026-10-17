@@ -1,0 +1,58 @@
+.playground-launch-btn.prerequisite-launch-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+  background: linear-gradient(135deg, var(--surface2), color-mix(in srgb, var(--primary) 14%, var(--surface)));
+  box-shadow: inset 0 0 12px var(--primary-glow), 0 0 10px var(--primary-glow);
+}
+
+.playground-launch-btn.prerequisite-launch-btn > span { color: var(--primary); }
+
+.prerequisite-launch-btn .prerequisite-electric {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.prerequisite-electric-trail {
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-dasharray: 25 75;
+  filter: drop-shadow(0 0 2px var(--primary)) drop-shadow(0 0 5px var(--primary));
+  animation: prerequisite-electric-orbit 4.5s linear infinite;
+}
+
+.prerequisite-electric-spark {
+  stroke: color-mix(in srgb, var(--primary-l) 35%, white);
+  stroke-width: 1.15;
+  stroke-dasharray: 7 93;
+  filter: drop-shadow(0 0 2px var(--primary-l)) drop-shadow(0 0 4px var(--primary));
+  animation: prerequisite-electric-orbit 4.5s linear infinite;
+}
+
+.playground-launch-btn.prerequisite-launch-btn:hover {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 14px var(--primary-glow), 0 0 18px var(--primary-glow);
+}
+
+.playground-launch-btn.prerequisite-launch-btn:focus-visible { outline-color: var(--primary); outline-offset: 6px; }
+
+@keyframes prerequisite-electric-orbit { to { stroke-dashoffset: -100; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .playground-launch-btn.prerequisite-launch-btn { transition: none; }
+  .prerequisite-electric-trail { animation: none; stroke-dasharray: none; opacity: .7; }
+  .prerequisite-electric-spark { display: none; animation: none; }
+}
+
+@media (forced-colors: active) {
+  .prerequisite-launch-btn .prerequisite-electric { display: none; }
+  .playground-launch-btn.prerequisite-launch-btn { border-color: ButtonText; background: ButtonFace; box-shadow: none; }
+}

@@ -2,6 +2,7 @@ import { ALL_PROBLEMS } from './data/problemRoutes.js';
 import { createPortal } from 'react-dom';
 import { resolveVisualSelection } from './components/shared/visualSelection.js';
 import WelcomeHero from "./components/marketing/WelcomeHero";
+import PrerequisiteButton from './components/PrerequisiteButton';
 import React, {
   useEffect,
   useMemo,
@@ -819,9 +820,7 @@ function HomePage({
             Create Visualizer
           </button>
 
-          <button type="button" className="playground-launch-btn" onClick={onOpenPrerequisites}>
-            <span aria-hidden="true">◎</span> Prerequisite map
-          </button>
+          <PrerequisiteButton onClick={onOpenPrerequisites} />
           <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
         </div>
 
