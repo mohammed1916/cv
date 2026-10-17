@@ -25,16 +25,18 @@
   stroke: var(--primary);
   stroke-width: 2;
   stroke-dasharray: 25 75;
+  stroke-dashoffset: 0;
   filter: drop-shadow(0 0 2px var(--primary)) drop-shadow(0 0 5px var(--primary));
-  animation: prerequisite-electric-orbit 4.5s linear infinite;
+  animation: prerequisite-electric-orbit 3s linear infinite;
 }
 
 .prerequisite-electric-spark {
   stroke: color-mix(in srgb, var(--primary-l) 35%, white);
   stroke-width: 1.15;
   stroke-dasharray: 7 93;
+  stroke-dashoffset: 0;
   filter: drop-shadow(0 0 2px var(--primary-l)) drop-shadow(0 0 4px var(--primary));
-  animation: prerequisite-electric-orbit 4.5s linear infinite;
+  animation: prerequisite-electric-orbit 3s linear infinite;
 }
 
 .playground-launch-btn.prerequisite-launch-btn:hover {
@@ -44,12 +46,17 @@
 
 .playground-launch-btn.prerequisite-launch-btn:focus-visible { outline-color: var(--primary); outline-offset: 6px; }
 
-@keyframes prerequisite-electric-orbit { to { stroke-dashoffset: -100; } }
+@keyframes prerequisite-electric-orbit {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -100; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .playground-launch-btn.prerequisite-launch-btn { transition: none; }
-  .prerequisite-electric-trail { animation: none; stroke-dasharray: none; opacity: .7; }
-  .prerequisite-electric-spark { display: none; animation: none; }
+  /* Keep the requested effect visible without flickering or rapid movement. */
+  .prerequisite-electric-trail,
+  .prerequisite-electric-spark { animation-duration: 12s; }
+  .prerequisite-electric-trail { opacity: .7; }
 }
 
 @media (forced-colors: active) {

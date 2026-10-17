@@ -7,8 +7,8 @@ const outline = 'M24 4 L47 4 52 1 57 7 62 4 96 4 100 2 104 5 108 4 152 4 157 7 1
 export default function PrerequisiteButton({ onClick }) {
   return <button type="button" className="playground-launch-btn prerequisite-launch-btn" onClick={onClick}>
     <svg className="prerequisite-electric" viewBox="0 0 240 48" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path className="prerequisite-electric-trail" d={outline} pathLength="100" vectorEffect="non-scaling-stroke" />
-      <path className="prerequisite-electric-spark" d={outline} pathLength="100" vectorEffect="non-scaling-stroke" />
+      <path className="prerequisite-electric-trail" d={outline} pathLength="100" />
+      <path className="prerequisite-electric-spark" d={outline} pathLength="100" />
     </svg>
     <span aria-hidden="true">◎</span> Prerequisite map
   </button>;
