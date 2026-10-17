@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './TutorialDemo.css';
 import TwoSumPreviewCells from '../components/shared/TwoSumPreviewCells';
+import PlaybackControls from '../components/PlaybackControls';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const demos = [
@@ -11,26 +12,26 @@ const demos = [
     ['Indices 0 and 1 give 2 + 7 = 9.', 154, 148],
   ],
   [
-    ['Click Play to follow execution.', 113, 245],
-    ['The array and highlighted code advance together.', 113, 245],
-    ['Click Pause to inspect the current state.', 113, 245],
-    ['Click Next to advance one step.', 217, 245],
+    ['Click Play to follow execution.', 190, 245],
+    ['The array and highlighted code advance together.', 190, 245],
+    ['Click Pause to inspect the current state.', 190, 245],
+    ['Click Next to advance one step.', 255, 245],
   ],
   [
-    ['Grab the Code trace panel tab.', 459, 87],
+    ['Grab the Code panel tab.', 459, 87],
     ['Hold and drag the tab toward the left panel’s edge.', 325, 110],
     ['The highlighted edge previews the new panel position.', 74, 140],
-    ['Release to dock Code trace on the left.', 74, 140],
+    ['Release to dock Code on the left.', 74, 140],
   ],
   [
     ['At index 0, remember value 2 and its index.', 81, 149],
     ['Predict: what does 7 need to reach target 9?', 154, 149],
-    ['Click Next to check your prediction.', 217, 245],
+    ['Click Next to check your prediction.', 255, 245],
     ['9 − 7 = 2. The stored index gives answer [0, 1].', 154, 149],
   ],
   [
     ['Start with a Python sample in Code Playground.', 155, 110],
-    ['Click Run to create a trace.', 510, 87],
+    ['Click Run Python to create a trace.', 510, 87],
     ['Inspect the highlighted line and its output.', 425, 152],
     ['Change the input, then run again to compare.', 179, 152],
   ],
@@ -76,7 +77,7 @@ export default function TutorialDemo({ lesson, cinematic = false }) {
           <text x="42" y="151">target = 9</text><text x="42" y="182">print(nums[0] + nums[1])</text>
         </Box>
         <Box x={390} y={64} width={226} height={198}><text x="407" y="119">Trace / output</text><text x="407" y="158">{frame >= 2 ? '9' : 'Run to inspect →'}</text></Box>
-        <Box x={476} y={70} width={112} height={28} active={frame === 1}><text x="502" y="89">▶ Run</text></Box>
+        <Box x={476} y={70} width={112} height={28} active={frame === 1}><text x="487" y="89" fontSize="13">Run Python</text></Box>
       </> : <>
         <g transform={docked ? 'translate(248 0)' : undefined}>
           <Box x={24} y={64} width={344} height={146}><text x="40" y="88">Array &amp; Target · 9</text>
@@ -85,17 +86,21 @@ export default function TutorialDemo({ lesson, cinematic = false }) {
           </Box>
         </g>
         <g transform={docked ? 'translate(-368 0)' : undefined}>
-          <Box x={392} y={64} width={224} height={146}><text x="406" y="88">⠿ Code trace</text>
+          <Box x={392} y={64} width={224} height={146}><text x="406" y="88">Code</text>
             <rect x="400" y={found ? 174 : progressed ? 144 : 113} width="208" height="25" rx="4" fill="#312e81" />
             <text x="409" y="131" fontSize="12">need = target − value</text><text x="409" y="161" fontSize="12">if need in seen:</text><text x="421" y="190" fontSize="12">return [seen[need], i]</text>
           </Box>
         </g>
         {lesson === 2 && frame > 0 && frame < 3 && <>
           <rect x="27" y="101" width="60" height="103" rx="6" fill="#818cf855" stroke="#a5b4fc" strokeDasharray="5 4" />
-          <g transform={`translate(${x - 45} ${y - 18})`}><rect width="120" height="28" rx="6" fill="#4338ca" /><text x="8" y="19" fontSize="12">⠿ Code trace</text></g>
+          <g transform={`translate(${x - 45} ${y - 18})`}><rect width="120" height="28" rx="6" fill="#4338ca" /><text x="8" y="19" fontSize="12">Code</text></g>
         </>}
         <Box x={24} y={224} width={592} height={42}>
-          <text x="40" y="250" fontSize="13">↺</text><text x="81" y="250" fontSize="13">{lesson === 1 && frame === 1 ? 'Ⅱ Pause' : '▶ Play'}</text><text x="186" y="250" fontSize="13">Next →</text><text x="294" y="250" fontSize="13">Speed ━━━●━━</text><text x="513" y="250" fontSize="13">Float ↗</text>
+          <foreignObject x="24" y="224" width="592" height="42">
+            <div className="tutorial-demo-playback" inert aria-hidden="true">
+              <PlaybackControls isPlaying={lesson === 1 && (frame === 1 || frame === 2)} speed={740} onSpeedChange={() => {}} />
+            </div>
+          </foreignObject>
         </Box>
       </>}
       <g className="tutorial-demo-cursor" style={{ transform: `translate(${x}px, ${y}px)` }}>
