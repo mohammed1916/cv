@@ -1,0 +1,18 @@
+{
+  "voice": "en-US-AndrewMultilingualNeural",
+  "rate": "-3%",
+  "pitch": "-2Hz",
+  "segments": [
+    { "start": 0, "end": 4, "text": "What if code... finally made sense?" },
+    { "start": 4, "end": 12, "text": "Watch Two Sum connect the code, the data, and that moment the answer clicks." },
+    { "start": 12, "end": 15, "text": "Advanced graphs. Network Delay Time." },
+    { "start": 15, "end": 18, "text": "N Queens. Choose, check, backtrack." },
+    { "start": 18, "end": 20, "text": "See dynamic programming." },
+    { "start": 20, "end": 28, "text": "Find your learning path with prerequisites and concept guides. Then get hands on with the live tutorial." },
+    { "start": 28, "end": 40, "text": "Learn at your own pace. Pause and step through execution. Zoom in or out. Hide, restore, and resize panels. Dock or float your controls." },
+    { "start": 40, "end": 48, "text": "See recursion unfold in Brace Expansion Two. Follow nested choices, the active stack, and the results." },
+    { "start": 48, "end": 56, "text": "Try Python or JavaScript in Code Playground. Run it. Inspect the trace." },
+    { "start": 56, "end": 64, "text": "Questions about these lines? Select the code, attach it to chat, and keep your question in context." },
+    { "start": 64, "end": 72, "text": "Make algorithms click. Explore the beta at visualizer dot teem treat dot com." }
+  ]
+}

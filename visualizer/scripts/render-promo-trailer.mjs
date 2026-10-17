@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import { mkdir, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, access, copyFile } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
 import path from 'node:path';
@@ -11,6 +11,8 @@ const { chromium } = require('playwright');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'docs/promo/export');
 await mkdir(out, { recursive: true });
+const narrationPath = path.join(out, 'voiceover.wav');
+await access(narrationPath).catch(() => { throw new Error('Generate neural narration first: run scripts/build-promo-voiceover.py.'); });
 const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
 try {
   const app = await browser.newPage({ viewport: { width: 1600, height: 1000 }, deviceScaleFactor: 1 });
@@ -130,34 +132,11 @@ try {
   encoder.stdin.end();
   const [code] = await completed;
   if (code !== 0) throw new Error(`Video encoder exited with ${code}`);
-  // Original instrumental: minor arpeggio, warm pad, pulse, kick, and airy hats.
-  const rate = 44100, samples = rate * duration;
-  const wav = Buffer.alloc(44 + samples * 4);
-  wav.write('RIFF'); wav.writeUInt32LE(wav.length - 8, 4); wav.write('WAVEfmt ', 8);
-  wav.writeUInt32LE(16, 16); wav.writeUInt16LE(1, 20); wav.writeUInt16LE(2, 22);
-  wav.writeUInt32LE(rate, 24); wav.writeUInt32LE(rate * 4, 28); wav.writeUInt16LE(4, 32); wav.writeUInt16LE(16, 34);
-  wav.write('data', 36); wav.writeUInt32LE(samples * 4, 40);
-  const hz = midi => 440 * 2 ** ((midi - 69) / 12);
-  let seed = 47;
-  for (let i = 0; i < samples; i++) {
-    const t = i / rate, beat = t * 2, step = beat * 2, phase = step % 1;
-    const chord = [[45, 52, 57, 60], [41, 48, 53, 57], [48, 55, 60, 64], [43, 50, 55, 59]][Math.floor(t / 4) % 4];
-    const f = hz(chord[Math.floor(step) % 4] + 12);
-    const arp = (Math.sin(2 * Math.PI * f * t) + .22 * Math.sin(4 * Math.PI * f * t)) * Math.exp(-phase * 5) * .12;
-    const pad = chord.reduce((v, n) => v + Math.sin(2 * Math.PI * hz(n) * t), 0) * .027;
-    const kickAge = beat % 1 / 2;
-    const kick = Math.sin(2 * Math.PI * (48 * kickAge + 4 * (1 - Math.exp(-kickAge * 35)))) * Math.exp(-kickAge * 17) * .24;
-    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-    const hat = ((seed / 4294967296) * 2 - 1) * Math.exp(-phase * 35) * .032;
-    const fade = Math.min(t / 1.2, 1, (duration - t) / 2.3);
-    for (let channel = 0; channel < 2; channel++) {
-      const stereo = Math.sin(2 * Math.PI * f * (t + channel * .00014)) * Math.exp(-phase * 5) * .035;
-      wav.writeInt16LE(Math.round(Math.tanh((arp + pad + (t > 4 ? kick + hat : 0) + stereo) * fade) * 26000), 44 + i * 4 + channel * 2);
-    }
-  }
-  await writeFile(path.join(out, 'score.wav'), wav);
-  const mux = spawn('ffmpeg.exe', ['-hide_banner', '-loglevel', 'error', '-y', '-i', videoPath, '-i', path.join(out, 'score.wav'), '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-af', 'loudnorm=I=-16:TP=-1.5:LRA=9', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', path.join(out, 'teem-treat-promo.mp4')], { stdio: 'inherit' });
+  // Map only the new narrator track. No original music or effects enter the export.
+  const voicedFilm = path.join(out, 'teem-treat-promo-voiceover.mp4');
+  const mux = spawn('ffmpeg.exe', ['-hide_banner', '-loglevel', 'error', '-y', '-i', videoPath, '-i', narrationPath, '-map', '0:v', '-map', '1:a', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', '-shortest', voicedFilm], { stdio: 'inherit' });
   const [muxCode] = await once(mux, 'exit');
-  if (muxCode) throw new Error('Soundtrack mux failed');
-  console.log('Finished: docs/promo/export/teem-treat-promo.mp4');
+  if (muxCode) throw new Error('Narration mux failed');
+  await copyFile(voicedFilm, path.join(out, 'teem-treat-promo.mp4'));
+  console.log('Finished: docs/promo/export/teem-treat-promo-voiceover.mp4 (narration only)');
 } finally { await browser.close(); }

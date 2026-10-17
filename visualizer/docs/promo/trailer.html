@@ -14,6 +14,13 @@
 <section class="shot" data-start="48" data-end="56"><div class="copy" style="top:140px"><div class="eyebrow">07 / Turn understanding into experiments</div><h2>Write it.<br>Run it.<br><em>See it.</em></h2><p class="sub">Try your own ideas in Code Playground.<br>Python and JavaScript. One workspace.</p></div><div class="screen" style="width:800px;left:540px;top:140px;transform:rotate(2deg)"><div class="chrome"><i></i><i></i><i></i> CODE PLAYGROUND</div><img src="export/playground.png"></div><div class="label">EXPERIMENT. INSPECT. ITERATE.</div></section>
 <section class="shot" data-start="56" data-end="64"><div class="copy" style="top:150px"><div class="eyebrow">08 / Make the question specific</div><h2>These lines.<br><em>That question.</em></h2><p class="sub">Select code. Attach it to chat.<br>Keep the context with the question.</p><div class="steps"><span>Select</span><span>Attach</span><span>Ask</span></div></div><div class="screen" style="width:800px;left:540px;top:140px;transform:rotate(-2deg)"><div class="chrome"><i></i><i></i><i></i> CODE SELECTION / ACTUAL WORKSPACE</div><img src="export/selection.png"></div><div class="label">FOCUS ON THE CODE YOU WANT TO UNDERSTAND</div></section>
 <div class="number" id="count"></div><div class="line" id="progress"></div><div class="wipe" id="flash"></div></div>
+<style>
+.domain-callout{position:relative;display:inline-flex;flex-direction:column;gap:9px;width:690px;padding:18px 26px;background:linear-gradient(105deg,#c5b2ff,#a58af4);overflow:hidden;box-shadow:0 8px 65px #ad8fff30}
+.domain-callout .visit{font:10px monospace;letter-spacing:2.4px;color:#36205d}
+.domain-callout strong{display:block;font-size:35px;line-height:1.2;letter-spacing:-1px;color:#170d2b;white-space:nowrap}
+.domain-callout .arrow{position:absolute;right:24px;top:37px;font-size:29px;color:#2a1848}
+.beta-badge{display:inline-block;margin-left:14px;padding:4px 9px;border:1px solid #b99cff66;border-radius:5px;letter-spacing:2px;font:10px monospace;color:#cdbaff;vertical-align:middle}
+</style>
 <script>
 const stage=document.querySelector('#stage'), shots=[...document.querySelectorAll('.shot')];
 shots[4].dataset.end='40';shots[5].dataset.start='64';shots[5].dataset.end='72';
@@ -27,6 +34,10 @@ shots[8].querySelector('h2').style.fontSize='58px';
 shots[6].querySelector('.eyebrow').textContent='05 / Understand recursive choices';
 shots[7].querySelector('.eyebrow').textContent='06 / Turn understanding into experiments';
 shots[8].querySelector('.eyebrow').textContent='07 / Make the question specific';
+document.querySelector('.edition').textContent='VISUALIZER.TEEMTREAT.COM';
+shots[5].querySelector('.eyebrow').innerHTML='Teem Treat Visualizer <span class="beta-badge">BETA</span>';
+const domainCard=shots[5].querySelector('.cta');domainCard.classList.add('domain-callout');
+domainCard.innerHTML='<span class="visit">EXPLORE NOW</span><strong id="domain-name">visualizer.teemtreat.com</strong><span class="arrow">↗</span>';
 function smooth(x){x=Math.max(0,Math.min(1,x));return 1-Math.pow(1-x,3)}
 window.renderFrame=t=>{
 stage.style.transform=`scale(${innerWidth/1280})`;
@@ -49,5 +60,7 @@ document.querySelector('#learn-shot').src=t>=26&&t<28?'export/tutorial.png':t>=2
 document.querySelector('#selection-shot').src=t>=60&&t<64?'export/attached.png':'export/selection.png';
 document.querySelector('#progress').style.width=(t/72*100)+'%';
 document.querySelector('#flash').style.opacity=Math.max(0,...[4,12,20,28,40,48,56,64].map(c=>.12*(1-Math.abs(t-c)/.12)));
+const reveal=smooth((t-64.7)/1.6);document.querySelector('#domain-name').style.clipPath=`inset(0 ${(1-reveal)*100}% 0 0)`;
+domainCard.style.transform=`translateY(${(1-reveal)*14}px)`;domainCard.querySelector('.arrow').style.transform=`translate(${Math.sin(Math.max(0,t-66)*2)*3}px,${-Math.sin(Math.max(0,t-66)*2)*3}px)`;
 };window.renderFrame(0);
 </script></html>
