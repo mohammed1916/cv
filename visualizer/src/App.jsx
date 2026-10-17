@@ -38,6 +38,7 @@ import {
 const RuntimePlayground = React.lazy(
   () => import("./playground/RuntimePlayground"),
 );
+const PrerequisitesPage = React.lazy(() => import('./components/PrerequisitesPage'));
 
 /* ── Auto-discovery ──────────────────────────────────────────────────── */
 
@@ -620,6 +621,7 @@ function HomePage({
   onTrackChange,
   onSelect,
   onOpenPlayground,
+  onOpenPrerequisites,
   layoutWidth,
   onLayoutChange,
   enableTransitions,
@@ -817,6 +819,9 @@ function HomePage({
             Create Visualizer
           </button>
 
+          <button type="button" className="playground-launch-btn" onClick={onOpenPrerequisites}>
+            <span aria-hidden="true">◎</span> Prerequisite map
+          </button>
           <LayoutControls layoutWidth={layoutWidth} onChange={onLayoutChange} />
         </div>
 
@@ -1013,6 +1018,7 @@ export default function App() {
     }
   });
   const [track, setTrack] = useState(TRACKS.LEETCODE);
+  const [showPrerequisites, setShowPrerequisites] = useState(() => window.location.hash === '#prerequisites');
   const [layoutWidth, setLayoutWidth] = useState("full");
   const [navigationTransitionsEnabled, setNavigationTransitionsEnabled] =
     useState(() => {
@@ -1042,6 +1048,7 @@ export default function App() {
         ALL_PROBLEMS.find((p) => `#${p.slug}` === window.location.hash) || null,
       );
       setShowPlayground(window.location.hash === "#playground");
+      setShowPrerequisites(window.location.hash === '#prerequisites');
     };
     window.addEventListener("popstate", onPop);
     window.addEventListener("hashchange", onPop);
@@ -1055,9 +1062,18 @@ export default function App() {
     window.history.pushState({}, "", window.location.pathname);
     setActive(null);
     setShowPlayground(false);
+    setShowPrerequisites(false);
+  };
+
+  const openPrerequisites = () => {
+    window.history.pushState({ view: 'prerequisites' }, '', '#prerequisites');
+    setActive(null);
+    setShowPlayground(false);
+    setShowPrerequisites(true);
   };
 
   const openPlayground = () => {
+    setShowPrerequisites(false);
     window.history.pushState({ view: "playground" }, "", "#playground");
     setActive(null);
     setShowPlayground(true);
@@ -1070,11 +1086,13 @@ export default function App() {
       return;
     }
     window.history.pushState({ slug: problem.slug }, "", `#${problem.slug}`);
+    setShowPrerequisites(false);
     setShowPlayground(false);
     setActive(problem);
   };
 
   const handleTrackChange = (nextTrack) => {
+    setShowPrerequisites(false);
     setTrack(nextTrack);
     setActive(null);
     setShowPlayground(false);
@@ -1118,7 +1136,11 @@ export default function App() {
     </>
   );
 
-  const pageContent = showPlayground ? (
+  const pageContent = showPrerequisites ? (
+    <Suspense key="prerequisites-page" fallback={<div className="playground-loading">Loading learning map…</div>}>
+      <PrerequisitesPage onBack={goBack} onSelect={selectProblem} pro={access.pro} />
+    </Suspense>
+  ) : showPlayground ? (
     <div
       key="playground-page"
       style={{
@@ -1184,6 +1206,7 @@ export default function App() {
       onTrackChange={handleTrackChange}
       onSelect={selectProblem}
       onOpenPlayground={openPlayground}
+      onOpenPrerequisites={openPrerequisites}
       layoutWidth={layoutWidth}
       onLayoutChange={setLayoutWidth}
       enableTransitions={navigationTransitionsEnabled}
@@ -1198,7 +1221,7 @@ export default function App() {
           {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && (
             <Analytics />
           )}
-          {!active && !showPlayground && (
+          {!active && !showPlayground && !showPrerequisites && (
             <nav
               className="app-toolbar marketing-nav"
               aria-label="Main navigation"
