@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "framer-motion";
-import TutorialDemo from "../../access/TutorialDemo";
 import "./TwoSumTour.css";
 
 const preferenceKey = "visualizer.twoSum.showTutorialEveryTime";
@@ -55,11 +54,10 @@ export default function TwoSumTour({ panels, playbackRef }) {
   const [open, setOpen] = useState(everyTime);
   const [step, setStep] = useState(0);
   const [rect, setRect] = useState(null);
-  const [showDemo, setShowDemo] = useState(false);
   const launchRef = useRef(null);
   const closeRef = useRef(null);
   const reducedMotion = useReducedMotion();
-  const [panel, title, description, demo] = lessons[step];
+  const [panel, title, description] = lessons[step];
   useEffect(() => {
     if (!open || panel === "playback") return;
     const floating = playbackRef.current?.closest(".floating-panel");
@@ -154,7 +152,6 @@ export default function TwoSumTour({ panels, playbackRef }) {
   }
   function move(next) {
     setStep(next);
-    setShowDemo(false);
   }
   const cardOnLeft =
     rect && rect.left + rect.width / 2 > rect.viewportWidth / 2;
@@ -231,14 +228,7 @@ export default function TwoSumTour({ panels, playbackRef }) {
               </div>
               <h3 id="two-sum-tour-title">{title}</h3>
               <p>{description}</p>
-              <button
-                type="button"
-                aria-expanded={showDemo}
-                onClick={() => setShowDemo((value) => !value)}
-              >
-                {showDemo ? "Hide cursor demo" : "Watch cursor + zoom demo"}
-              </button>
-              {showDemo && <TutorialDemo key={step} lesson={demo} cinematic />}
+              <p>Try the highlighted controls directly in your workspace.</p>
               <label className="two-sum-tour-preference">
                 <input
                   type="checkbox"

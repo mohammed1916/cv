@@ -1,0 +1,9 @@
+export const TUTORIAL_STEPS = [
+  { page: 'home', target: '.cards-grid', title: 'Choose a real problem', text: 'These are the actual catalog cards. Search for Two Sum, inspect its tags, and open it. You can interact with the website throughout this guide.' },
+  { page: 'prerequisites', target: '.learning-search', title: 'Find your prerequisites', text: 'Try searching for BFS. Open its guide to see what to learn first and which problems demonstrate it. Expand Arrays into subtopics, hover for a quick preview, and open “See it in motion” for available visual features.' },
+  { page: 'two-sum', target: '.pc', title: 'Follow the execution', text: 'This is the real Two Sum workspace. Press Play, pause to inspect the hash map, then use Next or Prev. Adjust Speed to read the highlighted code at your own pace.' },
+  { page: 'two-sum', target: '.local-dock-workspace', title: 'Arrange your workspace', text: 'Drag the Code tab to an edge to split panels or to the center to group tabs. Resize using the dividers. Collapse with −, restore using the named button below, and try Dock / Float on Playback Controls.' },
+  { page: 'two-sum', target: '.zoom-controls-panel', title: 'Zoom and inspect', text: 'Use the actual zoom controls to zoom in, zoom out, or reset. With [2, 7, 11, 15] and target 9, predict the complement of 7, then step forward to check the answer.' },
+  { page: 'two-sum', target: '.ctp-panel', title: 'Ask about specific code', text: 'Use Select in the code panel, select the lines you want to discuss, and attach them to chat. Attaching a selection does not send a message.' },
+  { page: 'playground', target: '.runtime-playground', title: 'Experiment with your own code', text: 'Choose Python or JavaScript in the real Code Playground, run a sample, and inspect its trace. Sign-in and your normal playground allowance still apply. You can finish here and keep exploring.' },
+];

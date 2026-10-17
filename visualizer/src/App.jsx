@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { resolveVisualSelection } from './components/shared/visualSelection.js';
 import WelcomeHero from "./components/marketing/WelcomeHero";
 import PrerequisiteButton from './components/PrerequisiteButton';
+import LiveTutorial from './access/LiveTutorial';
+import { TUTORIAL_STEPS } from './access/tutorialSteps';
 import React, {
   useEffect,
   useMemo,
@@ -32,7 +34,6 @@ import { isFreeProblem, accessLabel, PLANS } from "./access/policy";
 import {
   AccessDialog,
   Plans,
-  Tutorial,
   PlaygroundGate,
 } from "./access/AccessUI";
 
@@ -40,6 +41,7 @@ const RuntimePlayground = React.lazy(
   () => import("./playground/RuntimePlayground"),
 );
 const PrerequisitesPage = React.lazy(() => import('./components/PrerequisitesPage'));
+const TrailerStudio = import.meta.env.DEV ? React.lazy(() => import('./promo/TrailerStudio')) : null;
 
 /* ── Auto-discovery ──────────────────────────────────────────────────── */
 
@@ -1004,6 +1006,7 @@ function HomePage({
 export default function App() {
   const access = useAccess();
   const [dialog, setDialog] = useState(null);
+  const [tourStep, setTourStep] = useState(null);
   const [lockedTitle, setLockedTitle] = useState("");
   const [active, setActive] = useState(
     () =>
@@ -1058,7 +1061,7 @@ export default function App() {
   }, []);
 
   const goBack = () => {
-    window.history.pushState({}, "", window.location.pathname);
+    window.history.pushState({}, "", window.location.pathname + window.location.search);
     setActive(null);
     setShowPlayground(false);
     setShowPrerequisites(false);
@@ -1097,11 +1100,24 @@ export default function App() {
     setShowPlayground(false);
   };
 
+  const navigateTour = (index) => {
+    setDialog(null);
+    setTourStep(index);
+    const page = TUTORIAL_STEPS[index].page;
+    if (page === 'home') { setTrack(TRACKS.LEETCODE); goBack(); }
+    else if (page === 'prerequisites') openPrerequisites();
+    else if (page === 'playground') openPlayground();
+    else if (String(active?.number) !== '1') {
+      const problem = ALL_PROBLEMS.find(p => String(p.number) === '1' && !p.tags?.includes('Codeforces'));
+      if (problem) selectProblem(problem);
+    }
+  };
+
   const utilityControls = (
     <>
       <button
         className="access-toolbar-btn"
-        onClick={() => setDialog("tutorial")}
+        onClick={() => navigateTour(0)}
       >
         Help & tutorial
       </button>
@@ -1199,7 +1215,7 @@ export default function App() {
   ) : (
     <HomePage
       key="home"
-      onTutorial={() => setDialog("tutorial")}
+      onTutorial={() => navigateTour(0)}
       pro={access.pro}
       track={track}
       onTrackChange={handleTrackChange}
@@ -1268,27 +1284,13 @@ export default function App() {
           {dialog && (
             <AccessDialog
               title={
-                dialog === "tutorial"
-                  ? "Learn with the visualizer"
-                  : dialog === "account"
+                dialog === "account"
                     ? "Your Teem Treat account"
                     : "Unlock Teem Treat Pro"
               }
               onClose={() => setDialog(null)}
             >
-              {dialog === "tutorial" ? (
-                <Tutorial
-                  problems={ALL_PROBLEMS}
-                  onProblem={(p) => {
-                    setDialog(null);
-                    selectProblem(p);
-                  }}
-                  onPlayground={() => {
-                    setDialog(null);
-                    openPlayground();
-                  }}
-                />
-              ) : dialog === "account" ? (
+              {dialog === "account" ? (
                 <>
                   {access.user ? (
                     <>
@@ -1338,6 +1340,21 @@ export default function App() {
               )}
             </AccessDialog>
           )}
+          {tourStep !== null && <LiveTutorial step={tourStep} onStep={navigateTour} onClose={() => setTourStep(null)} />}
+          {TrailerStudio && new URLSearchParams(window.location.search).has('trailer') && <Suspense fallback={null}>
+            <TrailerStudio canRecord={access.pro && Boolean(access.user)} onNavigate={page => {
+              setTourStep(null);
+              setDialog(null);
+              if (page === 'home') { setTrack(TRACKS.LEETCODE); goBack(); }
+              else if (page === 'prerequisites') openPrerequisites();
+              else if (page === 'playground') openPlayground();
+              else {
+                const problem = ALL_PROBLEMS.find(p => String(p.number) === page && !p.tags?.includes('Codeforces'));
+                if (!problem) throw new Error(`Problem ${page} is not available.`);
+                if (String(active?.number) !== page) selectProblem(problem);
+              }
+            }} />
+          </Suspense>}
           <ChatAssistant />
         </div>
       </ZoomProvider>

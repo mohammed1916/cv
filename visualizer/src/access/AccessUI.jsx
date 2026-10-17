@@ -1,10 +1,8 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { accessCall, backendEnabled, checkoutEnabled } from './firebase';
 import { PLANS, FREE_MEDIUM } from './policy';
 import './access.css';
-import TutorialDemo from './TutorialDemo';
-const TutorialSelectionPractice = lazy(() => import('./TutorialSelectionPractice'));
 
 export function AccessDialog({ title, onClose, children }) {
   const ref = useRef(null);
@@ -90,29 +88,6 @@ export function Plans({ access, reason }) {
     {access.user && <button onClick={access.refresh}>Refresh access</button>}
     <p role="status">{message || access.error}</p>
   </>;
-}
-
-export function Tutorial({ onProblem, onPlayground, problems }) {
-  const [step, setStep] = useState(0);
-  const lessons = [
-    ['Start with a small problem', 'Open Two Sum. For [2, 7, 11, 15] and target 9, the answer is indices [0, 1]: 2 + 7 = 9. Think about what you would need to remember while scanning the array.'],
-    ['Follow the execution', 'Use the visualizer’s Play/Pause and step controls. Pause after each step and connect the highlighted code with the changing variables. Adjust speed when you want more time to read.'],
-    ['Arrange your workspace', 'Drag a panel tab to another panel’s edge to split the workspace, or onto its center to group tabs. Playback can float freely: drag its title to a highlighted edge, or press Dock to mount it below the workspace. Press Float to detach it again. Drag dividers to resize. Use − to collapse a workspace panel, then its named button to restore it. The floating playback panel uses ▼ and ▲ to collapse and expand.'],
-    ['Predict, then check', 'Before the next step, predict which value changes. In Two Sum, after seeing 2, remember its index; when you see 7, look for the complement 9 − 7 = 2. Try another input using the controls available in the problem.'],
-    ['Try your own code', 'Open Code Playground, choose Python or JavaScript, and start with its sample. Run it, inspect the trace, then change one line and compare. Your code is saved in this browser. Free accounts get 30 minutes each day; Pro has unlimited playground time.'],
-  ];
-  const twoSum = problems.find(p => String(p.number) === '1' && !p.tags.includes('Codeforces'));
-  lessons.push(['Select code and ask a focused question', 'Use the same selection controls as the shared code panels. Select individual lines or a range, then attach them to chat. Attaching does not send a message.']);
-  return <div className="tutorial-content"><span className="access-eyebrow">QUICK START · {step + 1} / {lessons.length}</span>
-    <progress value={step + 1} max={lessons.length} aria-label="Tutorial progress" />
-    <nav className="tutorial-lesson-nav" aria-label="Tutorial lessons">{lessons.map(([title], index) => <button type="button" key={title} aria-current={step === index ? 'step' : undefined} onClick={() => setStep(index)}>{index + 1}. {title}</button>)}</nav>
-    {step === 5 ? <Suspense fallback={<p role="status">Loading selection practice…</p>}><TutorialSelectionPractice /></Suspense> : <TutorialDemo key={step} lesson={step} />}
-    <h3>{lessons[step][0]}</h3><p>{lessons[step][1]}</p>
-    <div className="access-actions"><button disabled={step === 0} onClick={() => setStep(step - 1)}>Previous</button>
-      {step < lessons.length - 1 ? <button className="access-primary" onClick={() => setStep(step + 1)}>Next</button> : <button className="access-primary" onClick={onPlayground}>Open playground</button>}
-      {twoSum && <button onClick={() => onProblem(twoSum)}>Try Two Sum · Free</button>}
-    </div>
-  </div>;
 }
 
 // The server reserves 30-second slices in a transaction. Reservations survive

@@ -1,0 +1,15 @@
+.live-tour { position: fixed; inset: 0; pointer-events: none; z-index: 2500; }
+.live-tour-highlight { position: fixed; box-sizing: border-box; border: 2px solid var(--primary, #818cf8); border-radius: 12px; box-shadow: 0 0 0 5px #818cf822; pointer-events: none; }
+.live-tour-card { position: absolute; right: 18px; bottom: 18px; width: min(390px, calc(100vw - 36px)); max-height: 70dvh; overflow: auto; box-sizing: border-box; pointer-events: auto; background: var(--surface, #101827); color: var(--text, #f1f5f9); border: 1px solid var(--primary, #818cf8); border-radius: 16px; padding: 16px; box-shadow: 0 16px 60px #0005; }
+.live-tour-card.is-left { left: 18px; right: auto; }
+.live-tour-card header, .live-tour-card footer { display: flex; align-items: center; gap: 8px; }
+.live-tour-card header span { flex: 1; font-size: 10px; letter-spacing: .06em; }
+.live-tour-card h2 { font-size: 20px; margin: 14px 0 8px; }
+.live-tour-card p { font-size: 14px; line-height: 1.65; }
+.live-tour-card label { display: grid; gap: 6px; font-size: 12px; }
+.live-tour-card select { width: 100%; padding: 8px; background: var(--surface2); color: inherit; border: 1px solid var(--border); border-radius: 8px; }
+.live-tour-card footer { justify-content: space-between; margin-top: 14px; }
+.live-tour-card button { font: inherit; font-size: 12px; padding: 6px 9px; cursor: pointer; }
+.live-tour-card .live-tour-next { background: var(--primary-d, #4f46e5); color: white; }
+body[data-guided-tour] .two-sum-tour-layer, body[data-guided-tour] .two-sum-tour-launch { display: none; }
+@media (max-width: 600px) { .live-tour-card { max-height: 45dvh; } }
