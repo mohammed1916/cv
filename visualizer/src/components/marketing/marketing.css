@@ -26,9 +26,25 @@
 .hero-node rect { fill: var(--surface2); stroke: var(--border); }
 .hero-node text { fill: var(--text); font: 27px monospace; }
 .hero-node .hero-index { fill: var(--text-muted); font-size: 11px; }
-.hero-match rect { stroke: var(--primary); animation: hero-glow 4s ease-in-out infinite; }
-.hero-flow { stroke: var(--primary); animation: hero-flow 3s linear infinite; }
-.hero-result { fill: var(--text); font: 19px monospace; }
+.hero-node .hero-tag { font: 10px monospace; fill: var(--text-muted); }
+.hero-idle text { fill: var(--text-muted); }
+.hero-target { fill: var(--text); font: 700 13px monospace; }
+.hero-cursor { fill: none; stroke: var(--primary); stroke-width: 2; stroke-dasharray: 5 4; animation: hero-cursor 8s linear infinite; }
+.hero-flow { fill: none; stroke: var(--primary); stroke-width: 2; opacity: 0; animation: hero-flow 3s linear infinite, hero-flow-show 8s linear infinite; }
+.hero-found { fill: color-mix(in srgb, var(--primary) 14%, var(--surface)); stroke: var(--primary); stroke-width: 2; opacity: 0; animation: hero-found-show 8s linear infinite, hero-pulse 4s ease-in-out infinite; }
+.hero-cap { font: 12px monospace; fill: var(--text); opacity: 0; }
+.hero-cap-a { animation: hero-cap-a 8s linear infinite; }
+.hero-cap-b { animation: hero-cap-b 8s linear infinite; }
+.hero-cap-c { animation: hero-cap-c 8s linear infinite; }
+.is-paused .hero-anim { animation-play-state: paused; }
+@keyframes hero-cursor { 0%, 29.9% { transform: translateX(0); } 30%, 100% { transform: translateX(112px); } }
+@keyframes hero-flow-show { 0%, 60% { opacity: 0; } 62%, 100% { opacity: 1; } }
+@keyframes hero-found-show { 0%, 60% { opacity: 0; } 62%, 100% { opacity: 1; } }
+@keyframes hero-pulse { 50% { stroke-width: 4; } }
+@keyframes hero-cap-a { 0%, 28% { opacity: 1; } 32%, 100% { opacity: 0; } }
+@keyframes hero-cap-b { 0%, 31% { opacity: 0; } 33%, 58% { opacity: 1; } 62%, 100% { opacity: 0; } }
+@keyframes hero-cap-c { 0%, 60% { opacity: 0; } 62%, 100% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero-anim, .welcome-visual { animation: none !important; } .hero-cap-c, .hero-flow, .hero-found { opacity: 1; } .hero-cursor { opacity: 0; } .welcome-hero button { transition: none; } }
 .welcome-code { padding: 18px; border-top: 1px solid var(--border); font: 11px/2 monospace; color: var(--text-muted); }
 .welcome-code span { color: var(--text-muted); margin-right: 14px; }
 .welcome-code strong { color: var(--primary); }
@@ -39,17 +55,14 @@
 .welcome-features { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font: 12px monospace; color: var(--text-muted); }
 .welcome-features strong { color: var(--text); font-weight: 500; }
 .welcome-features button { border: 0; background: none; padding: 0; font: inherit; }
-.is-paused .hero-flow, .is-paused .hero-match rect { animation-play-state: paused; }
 .webmcp-copy { display: flex; gap: 12px; flex-wrap: wrap; }
 .webmcp-copy input { flex: 1; min-width: 200px; padding: 12px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; font: 13px monospace; }
 .playground-dialog li { margin-block: 12px; }
 .playground-dialog a { color: var(--primary); }
 .playground-dialog select { padding: 10px; background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; }
 @keyframes hero-flow { to { stroke-dashoffset: -52; } }
-@keyframes hero-glow { 50% { fill: color-mix(in srgb, var(--primary) 22%, var(--surface2)); } }
 @keyframes hero-arrive { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @media(max-width: 850px) { .welcome-hero { grid-template-columns: 1fr; padding: 32px 8px; } .welcome-visual { max-width: 600px; width: 100%; } .welcome-start { flex-wrap: wrap; } .marketing-nav.app-toolbar { padding: 12px 16px; } .marketing-nav-actions { gap: 3px; } }
-@media(prefers-reduced-motion: reduce) { .welcome-visual, .hero-flow, .hero-match rect { animation: none; } .welcome-hero button { transition: none; } }
 
 .marketing-view { position: relative; font-size: 13px; color: var(--text-muted); }
 .marketing-view summary { cursor: pointer; padding: 10px; }

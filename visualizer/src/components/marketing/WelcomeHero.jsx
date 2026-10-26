@@ -17,12 +17,22 @@ export default function WelcomeHero({ onTutorial, onPlayground, onStart }) {
     </div>
     <div className={`welcome-visual ${paused ? 'is-paused' : ''}`}>
       <div className="welcome-demo-head"><span><i /> TWO SUM / EXECUTION PREVIEW</span><button onClick={() => setPaused(!paused)} aria-label={paused ? 'Play preview animation' : 'Pause preview animation'}>{paused ? 'Play' : 'Pause'}</button></div>
-      <svg viewBox="0 0 520 280" role="img" aria-label="Two Sum: two plus seven equals nine. Store two, then find its complement seven.">
+      <svg viewBox="0 0 520 280" role="img" aria-label="Two Sum with target 9. Store 2 and need 7. Then 7 arrives, needs 2, finds 2 already seen, and returns 2 + 7 = 9.">
         <defs><pattern id="hero-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" opacity=".08" /></pattern></defs>
         <rect width="520" height="280" fill="url(#hero-grid)" />
-        <path className="hero-flow" d="M92 149 V200 Q92 220 114 220 H182 Q204 220 204 200 V149" fill="none" stroke="#9e85ff" strokeWidth="2" strokeDasharray="6 7" />
-        {[2,7,11,15].map((n,i) => <g key={n} className={i < 2 ? 'hero-node hero-match' : 'hero-node'} style={{animationDelay:`${i * .4}s`}}><rect x={50+i*112} y="65" width="84" height="84" rx="14" /><text x={92+i*112} y="116" textAnchor="middle">{n}</text><text className="hero-index" x={92+i*112} y="47" textAnchor="middle">0{i}</text></g>)}
-        <text x="302" y="220" className="hero-result">2 + 7 = 9</text>
+        <text x="24" y="34" className="hero-target">target = 9</text>
+        <rect className="hero-cursor hero-anim" x="42" y="57" width="100" height="100" rx="18" />
+        <path className="hero-flow hero-anim" d="M92 149 V200 Q92 220 114 220 H182 Q204 220 204 200 V149" fill="none" strokeWidth="2" strokeDasharray="6 7" />
+        {[2, 7, 11, 15].map((n, i) => <g key={n} className={`hero-node ${i > 1 ? 'hero-idle' : ''}`}>
+          <rect x={50 + i * 112} y="65" width="84" height="84" rx="14" />
+          {i < 2 && <rect className="hero-found hero-anim" x={50 + i * 112} y="65" width="84" height="84" rx="14" />}
+          <text x={92 + i * 112} y="116" textAnchor="middle">{n}</text>
+          <text className="hero-index" x={92 + i * 112} y="47" textAnchor="middle">0{i}</text>
+          <text className="hero-tag" x={92 + i * 112} y="168" textAnchor="middle">{i === 0 ? 'stored' : i === 1 ? 'arrives' : 'not reached'}</text>
+        </g>)}
+        <text className="hero-cap hero-cap-a hero-anim" x="24" y="258">store 2 · need 9 − 2 = 7</text>
+        <text className="hero-cap hero-cap-b hero-anim" x="24" y="258">7 arrives · need 9 − 7 = 2 · 2 is stored ✓</text>
+        <text className="hero-cap hero-cap-c hero-anim" x="24" y="258">found: 2 + 7 = 9 → return</text>
       </svg>
       <div className="welcome-code"><span>01</span> complement = target − current<br /><span>02</span> <strong>if</strong> complement in seen: <strong>return</strong> answer</div>
     </div>

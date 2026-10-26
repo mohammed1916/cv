@@ -955,11 +955,11 @@ export default function App() {
   return (
     <ThemeProvider>
       <ZoomProvider>
-      {(active || showPlayground) && <ZoomControls />}
+      <ZoomControls />
       <div className={`app layout-${layoutWidth}`}>
         {import.meta.env.VITE_ENABLE_VERCEL_ANALYTICS !== "false" && <Analytics />}
         {!active && !showPlayground && (
-          <nav className="app-toolbar marketing-nav" aria-label="Main navigation"><a className="marketing-brand" href="#" aria-label="Teem Treat home"><span>⌘</span> TEEM TREAT <small>VISUALIZER</small></a><div className="marketing-nav-actions"><details className="marketing-view"><summary>View</summary><ZoomControls /></details><button className="access-toolbar-btn" onClick={openPlayground}>Playground ↗</button>{utilityControls}</div></nav>
+          <nav className="app-toolbar marketing-nav" aria-label="Main navigation"><a className="marketing-brand" href="#" aria-label="Teem Treat home"><span>⌘</span> TEEM TREAT <small>VISUALIZER</small></a><div className="marketing-nav-actions"><button className="access-toolbar-btn" onClick={openPlayground}>Playground ↗</button>{utilityControls}</div></nav>
         )}
         {/* A flex column (not overflow:auto) so children get a definite height to
             resolve `height: 100%` against — an auto-overflow box lets children
