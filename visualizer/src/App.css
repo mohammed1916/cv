@@ -365,9 +365,20 @@ body.chat-select-mode * { cursor: crosshair !important; }
 }
 
 .track-btn.active {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.24), rgba(99, 102, 241, 0.22));
+  background: linear-gradient(110deg, var(--primary-glow) 0%, var(--surface3) 45%, var(--primary-glow) 55%, var(--primary-glow) 100%);
+  background-size: 250% 100%;
   color: var(--text);
-  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.26) inset;
+  box-shadow: 0 0 0 1px var(--primary) inset, 0 0 14px var(--primary-glow);
+  animation: track-sheen 3.2s linear infinite;
+}
+
+@keyframes track-sheen {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track-btn.active { animation: none; }
 }
 
 .playground-launch-btn {
