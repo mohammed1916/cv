@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/median-employee-salary.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -214,11 +215,7 @@ const DEFAULT_TABLE = [
   '12,B,234',
 ].join('\n')
 
-const EXAMPLES = getExamplesOr('median-employee-salary', [
-  { label: 'LeetCode sample', table: DEFAULT_TABLE },
-  { label: 'Odd counts', table: '1,A,100\n2,A,200\n3,A,300\n4,B,50\n5,B,60\n6,B,70' },
-  { label: 'Single row', table: '1,A,999' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function MedianEmployeeSalaryVisualizer() {
   const [tableInput, setTableInput] = useState(DEFAULT_TABLE);
@@ -447,9 +444,6 @@ export default function MedianEmployeeSalaryVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -467,6 +461,9 @@ export default function MedianEmployeeSalaryVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -474,7 +471,7 @@ export default function MedianEmployeeSalaryVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state',   title: 'State',         dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',          dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',          dockMode: 'split-right' },
       { id: 'status',  title: 'Status',        dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

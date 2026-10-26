@@ -1,0 +1,31 @@
+{
+  "number": "2062",
+  "title": "Count Vowel Substrings of a String",
+  "goal": "Count substrings made only of vowels and containing all five vowel types.",
+  "strategy": "Track the last occurrence of each vowel and the most recent consonant. At each endpoint, valid starts lie after that consonant and no later than the earliest of the five last occurrences.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings made only of vowels and containing all five vowel types.",
+    "inspect": "Track the last occurrence of each vowel and the most recent consonant. At each endpoint, valid starts lie after that consonant and no later than the earliest of the five last occurrences.",
+    "update": "Track the last occurrence of each vowel and the most recent consonant. At each endpoint, valid starts lie after that consonant and no later than the earliest of the five last occurrences.",
+    "done": "Count substrings made only of vowels and containing all five vowel types."
+  },
+  "edgeCases": [
+    "A missing vowel prevents every match",
+    "Exactly one complete vowel window",
+    "Repeated vowels create many start choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

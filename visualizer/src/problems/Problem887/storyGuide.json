@@ -1,0 +1,31 @@
+{
+  "number": "887",
+  "title": "Super Egg Drop",
+  "goal": "Find the fewest worst-case egg drops needed to identify the critical floor.",
+  "strategy": "Invert the usual question: with a fixed number of moves and eggs, count how many floors can be resolved. One drop covers lower floors when the egg breaks, upper floors when it survives, and the tested floor itself.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest worst-case egg drops needed to identify the critical floor.",
+    "inspect": "Invert the usual question: with a fixed number of moves and eggs, count how many floors can be resolved. One drop covers lower floors when the egg breaks, upper floors when it survives, and the tested floor itself.",
+    "update": "Invert the usual question: with a fixed number of moves and eggs, count how many floors can be resolved. One drop covers lower floors when the egg breaks, upper floors when it survives, and the tested floor itself.",
+    "done": "Find the fewest worst-case egg drops needed to identify the critical floor."
+  },
+  "edgeCases": [
+    "One egg requires checking floors sequentially",
+    "Two eggs cover floors through triangular growth",
+    "One floor needs only one drop"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

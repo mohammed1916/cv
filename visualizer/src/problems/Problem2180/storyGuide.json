@@ -1,0 +1,31 @@
+{
+  "number": "2180",
+  "title": "Count Integers With Even Digit Sum",
+  "goal": "Count positive integers up to num with an even digit sum.",
+  "strategy": "Every complete ten-number block has five even digit sums. In the final partial block, the prefix digit-sum parity determines which last digits qualify; exclude zero from the count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count positive integers up to num with an even digit sum.",
+    "inspect": "Every complete ten-number block has five even digit sums. In the final partial block, the prefix digit-sum parity determines which last digits qualify; exclude zero from the count.",
+    "update": "Every complete ten-number block has five even digit sums. In the final partial block, the prefix digit-sum parity determines which last digits qualify; exclude zero from the count.",
+    "done": "Count positive integers up to num with an even digit sum."
+  },
+  "edgeCases": [
+    "No positive even digit sum appears before two",
+    "A full final block contributes its five matches",
+    "Crossing a power of ten changes the prefix digit sum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1691",
+  "title": "Maximum Height by Stacking Cuboids ",
+  "goal": "Stack rotatable cuboids for maximum total height while respecting all three dimension limits.",
+  "strategy": "Sort each cuboid dimensions so its largest dimension becomes height, then order cuboids. Dynamic programming tries every compatible smaller stack above each candidate base.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Stack rotatable cuboids for maximum total height while respecting all three dimension limits.",
+    "inspect": "Sort each cuboid dimensions so its largest dimension becomes height, then order cuboids. Dynamic programming tries every compatible smaller stack above each candidate base.",
+    "update": "Sort each cuboid dimensions so its largest dimension becomes height, then order cuboids. Dynamic programming tries every compatible smaller stack above each candidate base.",
+    "done": "Stack rotatable cuboids for maximum total height while respecting all three dimension limits."
+  },
+  "edgeCases": [
+    "Single cuboid chooses tallest dimension",
+    "Equal cuboids can stack",
+    "Incomparable normalized dimensions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

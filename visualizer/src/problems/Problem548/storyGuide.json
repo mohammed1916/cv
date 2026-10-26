@@ -1,0 +1,40 @@
+{
+  "number": "548",
+  "title": "Split Array with Equal Sum",
+  "goal": "Solve Split Array with Equal Sum: Given an integer array nums, determine whether there exist indices i < j < k that split the array into four non-empty parts (excluding nums[i], nums[j], nums[k]) with equal sums.",
+  "strategy": "Given an integer array nums, determine whether there exist indices i < j < k that split the array into four non-empty parts (excluding nums[i], nums[j], nums[k]) with equal sums.",
+  "phases": [
+    "init",
+    "prefix",
+    "pick_j",
+    "reset_set",
+    "pick_i",
+    "left_match",
+    "record",
+    "pick_k",
+    "right_match",
+    "found",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n < 7",
+      "outcome": "return False"
+    },
+    {
+      "condition": "pre[k] - pre[j + 1] in seen",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "Enter a comma-separated list of integers",
+    "Keep the array to 24 numbers or fewer"
+  ],
+  "source": [
+    "src/problems/Problem548/index.jsx",
+    "src/problems/Problem548/SplitArrayEqualSumVisualizer.jsx"
+  ]
+}

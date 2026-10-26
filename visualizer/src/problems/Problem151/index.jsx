@@ -1,1 +1,5 @@
-export { default } from './ReverseWordsInAStringVisualizer';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ReverseWordsInAStringVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

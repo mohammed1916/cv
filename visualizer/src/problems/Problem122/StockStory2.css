@@ -1,0 +1,394 @@
+.stock2-story {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.stock2-explanation {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted, #94a3b8);
+  margin: 0;
+}
+
+/* ─── Metric & Status Cards ─── */
+.stock2-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.stock2-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 16px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stock2-card.highlight {
+  border-color: var(--success, #10b981);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.stock2-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.stock2-card-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stock2-profit-number {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+  font-family: var(--font-mono, monospace);
+  line-height: 1;
+}
+
+.stock2-profit-number.profit-positive {
+  color: var(--success, #10b981);
+}
+
+.stock2-profit-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success, #10b981);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.stock2-profit-meter-track {
+  width: 100%;
+  height: 6px;
+  background: var(--surface3, #334155);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.stock2-profit-meter-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.stock2-card-desc {
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Comparison status */
+.stock2-compare-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stock2-action-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stock2-action-badge.buy-sell {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--success, #10b981);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.stock2-action-badge.skip {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger, #ef4444);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.stock2-action-badge.flat {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-muted, #94a3b8);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.stock2-action-badge.idle {
+  background: var(--surface3, #334155);
+  color: var(--text-muted, #94a3b8);
+}
+
+/* ─── Chart SVG Container ─── */
+.stock2-chart-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.stock2-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stock2-chart-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.stock2-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.stock2-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stock2-legend-swatch {
+  width: 12px;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.stock2-legend-swatch.swatch-profit {
+  background: #10b981;
+}
+
+.stock2-legend-swatch.swatch-skip {
+  background: #ef4444;
+}
+
+.stock2-legend-swatch.swatch-neutral {
+  background: #64748b;
+}
+
+.stock2-svg {
+  display: block;
+  width: 100%;
+  min-width: 480px;
+  height: auto;
+  overflow: visible;
+}
+
+/* SVG Chart details */
+.stock2-grid-line {
+  stroke: var(--border, #334155);
+  stroke-dasharray: 4, 4;
+  stroke-width: 1;
+}
+
+.stock2-axis-label {
+  font-size: 10px;
+  fill: var(--text-muted, #94a3b8);
+  font-family: var(--font-mono, monospace);
+  dominant-baseline: middle;
+}
+
+.stock2-day-label {
+  font-size: 10px;
+  fill: var(--text-muted, #94a3b8);
+  font-family: var(--font-mono, monospace);
+  text-anchor: middle;
+}
+
+.stock2-price-label {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text, #f8fafc);
+  font-family: var(--font-mono, monospace);
+  text-anchor: middle;
+}
+
+.stock2-base-path {
+  fill: none;
+  stroke: var(--border, #475569);
+  stroke-width: 2;
+  opacity: 0.6;
+}
+
+.stock2-step-triangle {
+  transition: all 0.2s ease;
+}
+
+.stock2-step-triangle.profitable {
+  fill: rgba(16, 185, 129, 0.2);
+  stroke: rgba(16, 185, 129, 0.6);
+  stroke-dasharray: 3, 3;
+  stroke-width: 1.5;
+}
+
+.stock2-step-triangle.unprofitable {
+  fill: rgba(239, 68, 68, 0.12);
+  stroke: rgba(239, 68, 68, 0.4);
+  stroke-dasharray: 3, 3;
+  stroke-width: 1.5;
+}
+
+.stock2-slope-line {
+  transition: stroke-width 0.2s ease;
+}
+
+.stock2-slope-line.active-profit {
+  stroke: #10b981;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.5));
+}
+
+.stock2-slope-line.active-drop {
+  stroke: #ef4444;
+  stroke-width: 3.5;
+  stroke-dasharray: 6, 4;
+}
+
+.stock2-slope-line.active-flat {
+  stroke: #94a3b8;
+  stroke-width: 3;
+  stroke-dasharray: 4, 3;
+}
+
+.stock2-slope-line.harvested {
+  stroke: #10b981;
+  stroke-width: 3;
+  opacity: 0.85;
+}
+
+.stock2-node-circle {
+  transition: all 0.2s ease;
+}
+
+.stock2-node-circle.active-day {
+  fill: #3b82f6;
+  stroke: #60a5fa;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
+}
+
+.stock2-node-circle.buy-day {
+  fill: #f59e0b;
+  stroke: #fbbf24;
+  stroke-width: 2;
+}
+
+.stock2-node-circle.harvested-day {
+  fill: #10b981;
+  stroke: #34d399;
+  stroke-width: 2;
+}
+
+.stock2-node-circle.normal-day {
+  fill: var(--surface1, #0f172a);
+  stroke: var(--border, #64748b);
+  stroke-width: 1.5;
+}
+
+.stock2-floating-badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+/* ─── Ledger Table ─── */
+.stock2-ledger-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+}
+
+.stock2-ledger-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock2-ledger-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.stock2-ledger-empty {
+  font-size: 12px;
+  color: var(--text-muted, #94a3b8);
+  font-style: italic;
+  padding: 8px 0;
+}
+
+.stock2-ledger-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stock2-ledger-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--surface1, #0f172a);
+  border: 1px solid var(--border, #334155);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono, monospace);
+  transition: all 0.2s ease;
+}
+
+.stock2-ledger-item.just-added {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+.stock2-ledger-trade-num {
+  font-size: 10px;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+}
+
+.stock2-ledger-days {
+  color: var(--text, #f8fafc);
+}
+
+.stock2-ledger-gain {
+  font-weight: 700;
+  color: var(--success, #10b981);
+}

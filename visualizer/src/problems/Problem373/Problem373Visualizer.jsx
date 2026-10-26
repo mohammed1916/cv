@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/find-k-pairs-with-smallest-sums.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -156,16 +159,12 @@ function generateSteps(t1, t2, kText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('find-k-pairs-with-smallest-sums', [
-  { label: 'Example 1', nums1: '1,7,11', nums2: '2,4,6', k: '3' },
-  { label: 'Example 2', nums1: '1,1,2', nums2: '1,2,3', k: '2' },
-  { label: 'Example 3', nums1: '1,2', nums2: '3', k: '3' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem373Visualizer() {
   const [t1, setT1] = useState('1,7,11')
   const [t2, setT2] = useState('2,4,6')
-  const [kText, setKText] = useState('3')
+  const [kText, setKText] = useState(AUTHORED_INITIAL.k)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const inputError = useMemo(() => {
@@ -389,9 +388,6 @@ export default function Problem373Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -409,6 +405,9 @@ export default function Problem373Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -416,7 +415,7 @@ export default function Problem373Visualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

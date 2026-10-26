@@ -1,0 +1,31 @@
+{
+  "number": "2167",
+  "title": "Minimum Time to Remove All Cars Containing Illegal Goods",
+  "goal": "Remove every illegal car with minimum cost using end removals or individual removals.",
+  "strategy": "For each prefix, choose between paying two for a newly encountered illegal car and removing the entire prefix from the left. Combine that best prefix cost with removing the untouched suffix from the right.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove every illegal car with minimum cost using end removals or individual removals.",
+    "inspect": "For each prefix, choose between paying two for a newly encountered illegal car and removing the entire prefix from the left. Combine that best prefix cost with removing the untouched suffix from the right.",
+    "update": "For each prefix, choose between paying two for a newly encountered illegal car and removing the entire prefix from the left. Combine that best prefix cost with removing the untouched suffix from the right.",
+    "done": "Remove every illegal car with minimum cost using end removals or individual removals."
+  },
+  "edgeCases": [
+    "An all-legal train needs no removal",
+    "An all-illegal train can be removed from an end",
+    "One isolated interior illegal car favors its individual removal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

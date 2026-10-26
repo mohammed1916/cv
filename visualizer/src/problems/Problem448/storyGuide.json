@@ -1,0 +1,23 @@
+{
+  "number": "448",
+  "title": "Find All Numbers Disappeared in Array",
+  "goal": "Solve Find All Numbers Disappeared in Array: Mark the index corresponding to every seen value, then report the indices whose markers remain untouched.",
+  "strategy": "Mark the index corresponding to every seen value, then report the indices whose markers remain untouched.",
+  "phases": [
+    "checking",
+    "done",
+    "found_missing",
+    "initialized",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Duplicates may revisit a marker; the constrained value range is required for index-based marking."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem448/index.jsx",
+    "src/problems/Problem448/Problem448Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "number": "361",
+  "title": "Bomb Enemy",
+  "goal": "Solve Bomb Enemy: Count enemies along wall-bounded row and column segments, then combine those counts at each empty bomb location.",
+  "strategy": "Count enemies along wall-bounded row and column segments, then combine those counts at each empty bomb location.",
+  "phases": [
+    "init",
+    "precompute-left",
+    "precompute-right",
+    "precompute-up",
+    "precompute-down",
+    "calculate-cell",
+    "final"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Walls block the blast; an enemy cell is not a valid bomb placement."
+  ],
+  "checks": [
+    {
+      "condition": "not grid",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "grid must be an array"
+  ],
+  "source": [
+    "src/problems/Problem361/index.jsx",
+    "src/problems/Problem361/Problem361Visualizer.jsx"
+  ]
+}

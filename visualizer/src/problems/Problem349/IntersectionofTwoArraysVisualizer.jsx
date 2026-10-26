@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/intersection-of-two-arrays.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './IntersectionofTwoArraysVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import PointerRail from '../../components/shared/PointerRail'
@@ -39,7 +40,7 @@ function generateSteps({ nums1, nums2 }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('intersection-of-two-arrays', [{ label: 'Classic', nums1: [1, 2, 2, 1], nums2: [2, 2] }, { label: 'Two matches', nums1: [4, 9, 5], nums2: [9, 4, 9, 8, 4] }])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function IntersectionofTwoArraysVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -201,9 +202,6 @@ export default function IntersectionofTwoArraysVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -221,6 +219,9 @@ export default function IntersectionofTwoArraysVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

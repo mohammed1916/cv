@@ -1,0 +1,21 @@
+{
+  "number": "186",
+  "title": "Reverse Words in a String II",
+  "goal": "Solve Reverse Words in a String II: Reverse individual words in-place: 'the sky is blue' -> 'blue is sky the'.",
+  "strategy": "Reverse individual words in-place: 'the sky is blue' -> 'blue is sky the'.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reverse the whole character sequence and then each word without changing spaces into word characters."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem186/index.jsx",
+    "src/problems/Problem186/ReverseWordsInAStringIiVisualizer.jsx"
+  ]
+}

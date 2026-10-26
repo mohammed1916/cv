@@ -1,0 +1,31 @@
+{
+  "number": "2157",
+  "title": "Groups of Strings",
+  "goal": "Group letter sets connected by adding deleting or replacing one letter.",
+  "strategy": "Union identical masks first. A deleted-letter mask connects words differing by an insertion or deletion; two words sharing the same deleted-letter signature differ by a replacement.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Group letter sets connected by adding deleting or replacing one letter.",
+    "inspect": "Union identical masks first. A deleted-letter mask connects words differing by an insertion or deletion; two words sharing the same deleted-letter signature differ by a replacement.",
+    "update": "Union identical masks first. A deleted-letter mask connects words differing by an insertion or deletion; two words sharing the same deleted-letter signature differ by a replacement.",
+    "done": "Group letter sets connected by adding deleting or replacing one letter."
+  },
+  "edgeCases": [
+    "Singleton letters connect through replacement",
+    "Widely different letter sets remain separate",
+    "Anagrams are duplicate letter-set members"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

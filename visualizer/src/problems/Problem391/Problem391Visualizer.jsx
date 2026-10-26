@@ -1,5 +1,8 @@
+import authoredExamples0 from '../../config/examples/perfect-rectangles.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -147,14 +150,10 @@ function generateSteps(rectangles) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('perfect-rectangles', [
-  { label: 'Example 1', rectangles: [[1,1,3,3],[2,0,3,1]] },
-  { label: 'Example 2', rectangles: [[1,1,2,3],[1,3,2,4],[3,1,4,2],[3,2,4,4]] },
-  { label: 'Example 3', rectangles: [[1,1,3,3],[2,0,3,2]] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem391Visualizer() {
-  const [rectanglesInput, setRectanglesInput] = useState('[[1,1,3,3],[2,0,3,1]]')
+  const [rectanglesInput, setRectanglesInput] = useState(JSON.stringify(AUTHORED_INITIAL.rectangles))
 
   const { rectangles, inputError } = useMemo(() => {
     try {
@@ -331,9 +330,6 @@ export default function Problem391Visualizer() {
         {panelDivs.code && createPortal(codePanel, panelDivs.code)}
       </>}
         <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -351,6 +347,9 @@ export default function Problem391Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </>
   )

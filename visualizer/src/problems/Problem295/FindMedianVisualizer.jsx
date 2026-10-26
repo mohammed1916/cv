@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/find-median-data-stream.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -7,7 +10,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import { buildTree, computeLayout, collectNodes, buildEdges, TreeSVG } from '../../components/treeUtils'
 import "./FindMedianVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -131,7 +134,7 @@ function generateSteps(nums) {
     return steps;
 }
 
-const EXAMPLES = getExamples('find-median-data-stream');
+const EXAMPLES = authoredExamples0;
 
 const HEAP_TREE_W = 240;
 const HEAP_TREE_H = 180;
@@ -220,16 +223,6 @@ function VisualizationPanel({ step, heapView, setHeapView, EXAMPLES, applyExampl
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
             <div className="fm-controls-row">
-                <div className="fm-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="fm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <input className="fm-input" value={numsInput}
-                        onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    {inputErr && <span className="fm-error">{inputErr}</span>}
-                </div>
                 <div className="fm-view-toggle">
                     <button
                         className={`fm-view-btn ${heapView === "tree" ? "active" : ""}`}
@@ -292,7 +285,7 @@ function VisualizationPanel({ step, heapView, setHeapView, EXAMPLES, applyExampl
 }
 
 export default function FindMedianVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,2,3]");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
     const [heapView, setHeapView] = useState("tree"); // "tree" | "list"
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 

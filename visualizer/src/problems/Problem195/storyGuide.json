@@ -1,0 +1,21 @@
+{
+  "number": "195",
+  "title": "Tenth Line",
+  "goal": "Solve Tenth Line: Shell script to output exactly line 10 of a file.",
+  "strategy": "Shell script to output exactly line 10 of a file.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A file with fewer than ten lines has no tenth line; line numbering is one-based."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem195/index.jsx",
+    "src/problems/Problem195/TenthLineVisualizer.jsx"
+  ]
+}

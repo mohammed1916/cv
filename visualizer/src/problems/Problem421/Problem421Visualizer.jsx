@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--421.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -26,11 +28,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  { label: 'Small', nums: [3, 10, 5, 25, 2, 8], expected: 28 },
-  { label: 'Medium', nums: [8, 10, 2], expected: 10 },
-  { label: 'Large', nums: [14, 70, 53, 83, 49, 91, 36, 80, 92, 51, 66, 70], expected: 127 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums) {
   const steps = []
@@ -116,7 +114,7 @@ function MaxXORVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Maximum XOR of Two Numbers</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Maximum XOR of Two Numbers</div>
 
       {/* Input array */}
       <div>
@@ -227,7 +225,7 @@ function MaxXORVisualization({ nums, step }) {
                     fontSize: 11,
                   }}
                 >
-                  <div style={{ fontWeight: 600, color: 'var(--surface2)' }}>
+                  <div style={{ fontWeight: 600, color: (isMax ? 'var(--text-on-light)' : 'var(--text)') }}>
                     {pair.a} ^ {pair.b}
                   </div>
                   <div style={{ fontSize: 10, color: isMax ? '#0284c7' : 'var(--text-muted)', fontWeight: 700, marginTop: 4 }}>
@@ -307,7 +305,7 @@ export default function Problem421Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

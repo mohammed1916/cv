@@ -1,0 +1,27 @@
+{
+  "title": "Transpose Matrix",
+  "goal": "Exchange matrix rows and columns while preserving every cell value.",
+  "strategy": "Move each source cell (r,c) to destination (c,r). A rectangular matrix changes shape as well as orientation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Move each source cell (r,c) to destination (c,r). A rectangular matrix changes shape as well as orientation.",
+    "update": "Source row and column indices have exchanged roles.",
+    "done": "Source row and column indices have exchanged roles."
+  },
+  "edgeCases": [
+    "Single row becomes column",
+    "Single column becomes row",
+    "Single cell"
+  ],
+  "number": "867",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

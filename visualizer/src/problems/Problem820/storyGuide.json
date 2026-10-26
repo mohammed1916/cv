@@ -1,0 +1,31 @@
+{
+  "number": "820",
+  "title": "Short Encoding of Words",
+  "goal": "Find the shortest suffix-based reference encoding length, including separators.",
+  "strategy": "Reverse words so common suffixes share prefix paths. Only leaves require separate encoded words; internal terminal words already appear as suffixes of longer words.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest suffix-based reference encoding length, including separators.",
+    "inspect": "Reverse words so common suffixes share prefix paths. Only leaves require separate encoded words; internal terminal words already appear as suffixes of longer words.",
+    "update": "Reverse words so common suffixes share prefix paths. Only leaves require separate encoded words; internal terminal words already appear as suffixes of longer words.",
+    "done": "Find the shortest suffix-based reference encoding length, including separators."
+  },
+  "edgeCases": [
+    "Duplicate words add no length",
+    "All words suffixes of one longest word",
+    "No suffix sharing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/arranging-coins.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem441Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -26,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('arranging-coins')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(n) {
   const steps = []
@@ -102,7 +105,7 @@ function StaircaseVisualization({ stairs, n, used }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Staircase</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Staircase</div>
       <div style={{
         padding: 16,
         backgroundColor: 'var(--surface2)',
@@ -172,7 +175,7 @@ function CoinsVisualization({ n, used, remaining, stairs }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Coins</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Coins</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -214,7 +217,7 @@ function CoinsVisualization({ n, used, remaining, stairs }) {
 function StatsVisualization({ stairs, used, remaining, n }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -263,7 +266,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -309,7 +312,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem441Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(5);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

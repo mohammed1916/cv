@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--378.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem378.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -102,23 +104,7 @@ function generateSteps(matrix, k) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    matrix: [[1, 2], [1, 3]],
-    k: 1,
-  },
-  {
-    label: 'Example 2',
-    matrix: [[1, 2], [1, 4]],
-    k: 3,
-  },
-  {
-    label: 'Example 3',
-    matrix: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-    k: 4,
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem378Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -311,9 +297,6 @@ export default function Problem378Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -331,6 +314,9 @@ export default function Problem378Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

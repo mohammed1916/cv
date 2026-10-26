@@ -1,0 +1,31 @@
+{
+  "number": "1844",
+  "title": "Replace All Digits with Characters",
+  "goal": "Replace each digit with the preceding letter shifted forward by its value.",
+  "strategy": "Even positions hold original letters and odd positions hold offsets. Each replacement depends only on the immediately preceding letter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace each digit with the preceding letter shifted forward by its value.",
+    "inspect": "Even positions hold original letters and odd positions hold offsets. Each replacement depends only on the immediately preceding letter.",
+    "update": "Even positions hold original letters and odd positions hold offsets. Each replacement depends only on the immediately preceding letter.",
+    "done": "Replace each digit with the preceding letter shifted forward by its value."
+  },
+  "edgeCases": [
+    "Zero shifts repeat letters",
+    "Single unchanged letter",
+    "Final letter has no following digit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

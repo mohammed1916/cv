@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/merge-intervals.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MergeIntervalsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -135,10 +138,10 @@ function generateSteps(originalIntervals) {
   return steps
 }
 
-const EXAMPLES = getExamples('merge-intervals')
+const EXAMPLES = authoredExamples0
 
 export default function MergeIntervalsVisualizer() {
-  const [intervalsInput, setIntervalsInput] = useState('[[1,3],[2,6],[8,10],[15,18]]')
+  const [intervalsInput, setIntervalsInput] = useState(JSON.stringify(AUTHORED_INITIAL.intervals))
 
   const { originalIntervals, inputError } = useMemo(() => {
     try {
@@ -200,25 +203,6 @@ export default function MergeIntervalsVisualizer() {
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="mi-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="mi-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <input
-          value={intervalsInput}
-          onChange={(e) => { setIntervalsInput(e.target.value);
-handleReset() }}
-          placeholder="[[1,3],[2,6],[8,10],[15,18]]"
-          className="mi-input"
-        />
 
         <div className="mi-canvas">
           <div className="mi-axis">
@@ -321,9 +305,6 @@ handleReset() }}
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -341,6 +322,9 @@ handleReset() }}
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEINTERVALS_PATTERNS} />
+      )}
     </>
   )
 
@@ -349,7 +333,7 @@ handleReset() }}
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Input Intervals', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

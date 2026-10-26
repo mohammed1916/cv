@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/daily-temperatures.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DailyTemperaturesVisualizer.css'
 
 const SOLUTION_CODE_INLINE = [
@@ -60,7 +61,7 @@ function generateSteps(temps) {
   return steps
 }
 
-const EXAMPLES = getExamples('daily-temperatures')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ step, temps, inputError, applyExample }) {
   return (
@@ -160,7 +161,7 @@ export default function DailyTemperaturesVisualizer() {
     () => [
       { id: 'input', title: 'Input & Visualization' },
       { id: 'stack', title: 'Stack State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ],
     []
   )

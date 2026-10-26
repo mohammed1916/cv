@@ -1,1 +1,5 @@
-export { default } from "./LongestUncommonSubsequenceIIVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./LongestUncommonSubsequenceIIVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

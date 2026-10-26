@@ -1,0 +1,27 @@
+{
+  "number": "901",
+  "title": "Online Stock Span",
+  "goal": "Report the consecutive no-higher price span for every quote.",
+  "strategy": "A decreasing stack stores compressed blocks. Popping a block absorbs its entire span, including equal prices.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Report the consecutive no-higher price span for every quote.",
+    "inspect": "A decreasing stack stores compressed blocks. Popping a block absorbs its entire span, including equal prices.",
+    "update": "A decreasing stack stores compressed blocks. Popping a block absorbs its entire span, including equal prices.",
+    "done": "Report the consecutive no-higher price span for every quote."
+  },
+  "edgeCases": [
+    "Strictly decreasing prices",
+    "Equal prices all join",
+    "Single quote"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

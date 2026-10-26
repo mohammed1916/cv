@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/insert-interval.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +11,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./InsertIntervalVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -77,7 +78,7 @@ function generateSteps(intervals, newInterval) {
     return steps;
 }
 
-const EXAMPLES = getExamples('insert-interval');
+const EXAMPLES = authoredExamples0;
 
 const BAR_SCALE = 14; // px per unit
 
@@ -236,9 +237,6 @@ export default function InsertIntervalVisualizer() {
 
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={INSERTINTERVAL_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying} isDone={isDone} speed={speed}
           onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -250,6 +248,9 @@ export default function InsertIntervalVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={INSERTINTERVAL_PATTERNS} />
+        )}
       </>
     );
 
@@ -258,7 +259,7 @@ export default function InsertIntervalVisualizer() {
     const panelConfigs = useMemo(
       () => [
         { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-        { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
         { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
       ],
       []

@@ -1,0 +1,31 @@
+{
+  "number": "1300",
+  "title": "Sum of Mutated Array Closest to Target",
+  "goal": "Choose an integer cap making the capped sum closest to the target, preferring the smaller cap on ties.",
+  "strategy": "Capped sums are monotone. Find the first cap whose sum reaches the target, then compare it with its predecessor to handle undershoot and overshoot.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose an integer cap making the capped sum closest to the target, preferring the smaller cap on ties.",
+    "inspect": "Capped sums are monotone. Find the first cap whose sum reaches the target, then compare it with its predecessor to handle undershoot and overshoot.",
+    "update": "Capped sums are monotone. Find the first cap whose sum reaches the target, then compare it with its predecessor to handle undershoot and overshoot.",
+    "done": "Choose an integer cap making the capped sum closest to the target, preferring the smaller cap on ties."
+  },
+  "edgeCases": [
+    "Exact sum needs no reduction",
+    "Tie prefers smaller cap",
+    "Zero target chooses zero cap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

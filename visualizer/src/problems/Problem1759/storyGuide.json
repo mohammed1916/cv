@@ -1,0 +1,31 @@
+{
+  "number": "1759",
+  "title": "Count Number of Homogenous Substrings",
+  "goal": "Count nonempty substrings made entirely of one repeated character.",
+  "strategy": "A same-character suffix of length r contributes r substrings ending at this position. Reset the length when the character changes and accumulate modulo the required prime.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nonempty substrings made entirely of one repeated character.",
+    "inspect": "A same-character suffix of length r contributes r substrings ending at this position. Reset the length when the character changes and accumulate modulo the required prime.",
+    "update": "A same-character suffix of length r contributes r substrings ending at this position. Reset the length when the character changes and accumulate modulo the required prime.",
+    "done": "Count nonempty substrings made entirely of one repeated character."
+  },
+  "edgeCases": [
+    "All characters distinct",
+    "One uninterrupted run",
+    "Single character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

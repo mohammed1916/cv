@@ -1,0 +1,26 @@
+{
+  "number": "341",
+  "title": "Flatten Nested List Iterator",
+  "goal": "Solve Flatten Nested List Iterator: Design iterator for flattened nested list.",
+  "strategy": "Design iterator for flattened nested list.",
+  "phases": [
+    "init",
+    "loop",
+    "expand",
+    "done",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "top.isInteger()",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem341/index.jsx",
+    "src/problems/Problem341/FlattenNestedListIteratorVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1694",
+  "title": "Reformat Phone Number",
+  "goal": "Remove separators and regroup phone digits into blocks of two or three.",
+  "strategy": "Take three digits while more than four remain. Finish four as two pairs, preventing a final singleton block.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove separators and regroup phone digits into blocks of two or three.",
+    "inspect": "Take three digits while more than four remain. Finish four as two pairs, preventing a final singleton block.",
+    "update": "Take three digits while more than four remain. Finish four as two pairs, preventing a final singleton block.",
+    "done": "Remove separators and regroup phone digits into blocks of two or three."
+  },
+  "edgeCases": [
+    "Four digits split into pairs",
+    "Two digits stay together",
+    "Six digits form two triples"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

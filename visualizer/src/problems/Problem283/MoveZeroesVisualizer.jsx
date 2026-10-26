@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/move-zeroes.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -11,7 +14,7 @@ import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MoveZeroesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -21,7 +24,7 @@ import { createPortal } from 'react-dom'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('move-zeroes');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(numsIn) {
     const steps = [];
@@ -43,7 +46,7 @@ function generateSteps(numsIn) {
 
 export default function MoveZeroesVisualizer({ problem }) {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[0,1,0,3,12]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -80,7 +83,7 @@ export default function MoveZeroesVisualizer({ problem }) {
     const panelConfigs = useMemo(() => [
       { id: 'input', title: "Input Examples" },
       { id: 'viz', title: "Array Visualization", dockMode: 'split-right' },
-      { id: 'code', title: "Code Trace", dockMode: 'split-bottom' },
+      { id: 'code', title: "Code Trace", dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       input: (<div className="mz-panel-body">

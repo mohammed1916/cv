@@ -1,0 +1,20 @@
+{
+  "number": "721",
+  "title": "Accounts Merge",
+  "goal": "Solve Accounts Merge: Merge accounts with same emails using Union-Find.",
+  "strategy": "Merge accounts with same emails using Union-Find.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Shared email identity connects accounts transitively; equal names alone do not prove the same account owner."
+  ],
+  "checks": [],
+  "inputRules": [
+    "accounts must be a non-empty array",
+    "each account must be [\"Name\", \"email1\", ...] with at least one email"
+  ],
+  "source": [
+    "src/problems/Problem721/index.jsx",
+    "src/problems/Problem721/AccountsMergeVisualizer.jsx"
+  ]
+}

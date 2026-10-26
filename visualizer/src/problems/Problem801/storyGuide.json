@@ -1,0 +1,31 @@
+{
+  "number": "801",
+  "title": "Minimum Swaps To Make Sequences Increasing",
+  "goal": "Use the fewest same-index swaps so both sequences become strictly increasing.",
+  "strategy": "Keep two costs for each index: leave this pair in place or swap it. Straight comparisons preserve the previous swap status; cross comparisons allow changing that status.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Use the fewest same-index swaps so both sequences become strictly increasing.",
+    "inspect": "Keep two costs for each index: leave this pair in place or swap it. Straight comparisons preserve the previous swap status; cross comparisons allow changing that status.",
+    "update": "Keep two costs for each index: leave this pair in place or swap it. Straight comparisons preserve the previous swap status; cross comparisons allow changing that status.",
+    "done": "Use the fewest same-index swaps so both sequences become strictly increasing."
+  },
+  "edgeCases": [
+    "Already increasing sequences need no swaps",
+    "A final swap repairs both strict inequalities",
+    "Single-element sequences are already increasing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

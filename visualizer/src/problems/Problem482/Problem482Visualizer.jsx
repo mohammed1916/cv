@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/license-key-formatting.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem482Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -55,10 +58,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('license-key-formatting', [
-  { label: 'Example 1', s: '5F3Z-2e-9-w', k: 4 },
-  { label: 'Example 2', s: '2-4A0r-4k', k: 4 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(s, k) {
   const steps = []
@@ -118,7 +118,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -163,7 +163,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
 
       {step?.cleaned && step.cleaned.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>After Cleaning</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>After Cleaning</div>
           <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
             {step.cleaned.map((ch, i) => (
               <motion.div
@@ -192,7 +192,7 @@ function VisualizationPanel({ s, k, step, applyEx }) {
 
       {step?.groups && step.groups.length > 0 && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Groups Formed</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Groups Formed</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {step.groups.map((grp, i) => (
               <motion.div
@@ -244,8 +244,8 @@ const SOLUTION_CODE_INLINE = [
 
 export default function Problem482Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("5F3Z-2e-9-w");
-  const [kInput, setKInput] = useState(4);
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { s, k, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;
@@ -308,7 +308,6 @@ export default function Problem482Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -326,6 +325,7 @@ export default function Problem482Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

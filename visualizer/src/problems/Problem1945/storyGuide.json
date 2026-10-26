@@ -1,0 +1,31 @@
+{
+  "number": "1945",
+  "title": "Sum of Digits of String After Convert",
+  "goal": "Convert letters to alphabet positions and apply k digit-sum transformations.",
+  "strategy": "Concatenate alphabet positions into a digit string. Repeatedly sum its digits, preserving multi-digit positions such as 26 before the first transformation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert letters to alphabet positions and apply k digit-sum transformations.",
+    "inspect": "Concatenate alphabet positions into a digit string. Repeatedly sum its digits, preserving multi-digit positions such as 26 before the first transformation.",
+    "update": "Concatenate alphabet positions into a digit string. Repeatedly sum its digits, preserving multi-digit positions such as 26 before the first transformation.",
+    "done": "Convert letters to alphabet positions and apply k digit-sum transformations."
+  },
+  "edgeCases": [
+    "Only one transformation is requested",
+    "Repeated letters with two-digit positions",
+    "A one-digit fixed point"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

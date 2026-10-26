@@ -1,0 +1,21 @@
+{
+  "number": "246",
+  "title": "Strobogrammatic Number",
+  "goal": "Solve Strobogrammatic Number: Check if number is strobogrammatic (looks the same upside down).",
+  "strategy": "Check if number is strobogrammatic (looks the same upside down).",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only digits with valid rotated partners qualify; a middle digit must rotate to itself."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem246/index.jsx",
+    "src/problems/Problem246/StrobogrammaticNumber.jsx"
+  ]
+}

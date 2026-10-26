@@ -1,0 +1,31 @@
+{
+  "number": "1442",
+  "title": "Count Triplets That Can Form Two Arrays of Equal XOR",
+  "goal": "Count triples splitting a contiguous interval into two equal-XOR parts.",
+  "strategy": "The two parts have equal XOR exactly when the entire interval XOR is zero. An interval from left through right then offers right-left internal split positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count triples splitting a contiguous interval into two equal-XOR parts.",
+    "inspect": "The two parts have equal XOR exactly when the entire interval XOR is zero. An interval from left through right then offers right-left internal split positions.",
+    "update": "The two parts have equal XOR exactly when the entire interval XOR is zero. An interval from left through right then offers right-left internal split positions.",
+    "done": "Count triples splitting a contiguous interval into two equal-XOR parts."
+  },
+  "edgeCases": [
+    "All zeros multiply possible split positions",
+    "One element has no internal split",
+    "Repeated equal values cancel in pairs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

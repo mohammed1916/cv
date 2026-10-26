@@ -1,0 +1,33 @@
+{
+  "number": "529",
+  "title": "Minesweeper",
+  "goal": "Solve Minesweeper: Implement minesweeper board reveal using BFS to count adjacent mines.",
+  "strategy": "Implement minesweeper board reveal using BFS to count adjacent mines.",
+  "phases": [
+    "add_to_queue",
+    "blank_cell",
+    "count_mines",
+    "done",
+    "init",
+    "mine_hit",
+    "number_cell",
+    "process_cell",
+    "start_bfs"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Clicking a mine ends differently from revealing an empty region; numbered cells stop recursive expansion."
+  ],
+  "checks": [],
+  "inputRules": [
+    "board must be a non-empty 2D array",
+    "board rows must be non-empty arrays",
+    "board rows must be equal-length arrays of strings",
+    "click must be [row, col]",
+    "click is out of board bounds"
+  ],
+  "source": [
+    "src/problems/Problem529/index.jsx",
+    "src/problems/Problem529/MinesweeperVisualizer.jsx"
+  ]
+}

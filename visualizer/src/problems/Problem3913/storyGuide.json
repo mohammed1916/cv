@@ -1,0 +1,31 @@
+{
+  "number": "3913",
+  "title": "Sort Vowels by Frequency",
+  "goal": "Solve Sort Vowels by Frequency: Count vowels, rank them by frequency and first occurrence, then fill only the original vowel slots.",
+  "strategy": "Count vowels, rank them by frequency and first occurrence, then fill only the original vowel slots.",
+  "phases": [
+    "start",
+    "count",
+    "rank",
+    "write",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Initialize vowel counts and fixed consonant slots.",
+    "count": "Scan each character and count vowels.",
+    "rank": "Sort groups by frequency, then first occurrence.",
+    "write": "Write ranked vowels into the original vowel slots.",
+    "done": "Return the rearranged string."
+  },
+  "edgeCases": [
+    "Frequency ties follow first occurrence rather than alphabetic order; consonants remain fixed."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON string of 1–100,000 lowercase letters."
+  ],
+  "source": [
+    "src/problems/Problem3913/index.jsx",
+    "src/problems/Problem3913/algorithm.js"
+  ]
+}

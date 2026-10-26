@@ -1,0 +1,27 @@
+{
+  "number": "946",
+  "title": "Validate Stack Sequences",
+  "goal": "Check whether the requested pop sequence is achievable.",
+  "strategy": "Whenever the desired pop is on top, popping immediately is safe. Items below it cannot be accessed sooner.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether the requested pop sequence is achievable.",
+    "inspect": "Whenever the desired pop is on top, popping immediately is safe. Items below it cannot be accessed sooner.",
+    "update": "Whenever the desired pop is on top, popping immediately is safe. Items below it cannot be accessed sooner.",
+    "done": "Check whether the requested pop sequence is achievable."
+  },
+  "edgeCases": [
+    "Impossible middle pop",
+    "Immediate pops",
+    "One element"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

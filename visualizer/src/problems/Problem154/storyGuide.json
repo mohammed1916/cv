@@ -1,0 +1,19 @@
+{
+  "number": "154",
+  "title": "Find Minimum in Rotated Sorted Array II",
+  "goal": "Solve Find Minimum in Rotated Sorted Array II: Find the minimum element in a rotated sorted array with duplicates.",
+  "strategy": "Find the minimum element in a rotated sorted array with duplicates.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal boundary values can hide the pivot, requiring one-at-a-time shrinking instead of a guaranteed halving step."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem154/index.jsx",
+    "src/problems/Problem154/FindMinimumInRotatedSortedArrayIIVisualizer.jsx"
+  ]
+}

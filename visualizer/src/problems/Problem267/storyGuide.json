@@ -1,0 +1,29 @@
+{
+  "number": "267",
+  "title": "Palindrome Permutation II",
+  "goal": "Solve Palindrome Permutation II: Generate all palindrome permutations.",
+  "strategy": "Generate all palindrome permutations.",
+  "phases": [
+    "init",
+    "check",
+    "done",
+    "prepare",
+    "found",
+    "choose"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(odds) > 1",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem267/index.jsx",
+    "src/problems/Problem267/Problem267Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1905",
+  "title": "Count Sub Islands",
+  "goal": "Count grid-two islands entirely contained inside grid-one land.",
+  "strategy": "Traverse each grid-two component completely. Every cell must be land in grid one; continue traversal even after failure so the same island is never counted again.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count grid-two islands entirely contained inside grid-one land.",
+    "inspect": "Traverse each grid-two component completely. Every cell must be land in grid one; continue traversal even after failure so the same island is never counted again.",
+    "update": "Traverse each grid-two component completely. Every cell must be land in grid one; continue traversal even after failure so the same island is never counted again.",
+    "done": "Count grid-two islands entirely contained inside grid-one land."
+  },
+  "edgeCases": [
+    "No land in the second grid",
+    "Every second island is covered",
+    "One uncovered cell invalidates the whole component"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

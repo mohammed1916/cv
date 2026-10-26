@@ -1,0 +1,31 @@
+{
+  "number": "1763",
+  "title": "Longest Nice Substring",
+  "goal": "Find the earliest longest substring containing both cases of every letter it uses.",
+  "strategy": "Expand each start while tracking present characters. A candidate is nice only if every present letter has its lowercase and uppercase counterpart; replace the best only on strict length improvement.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the earliest longest substring containing both cases of every letter it uses.",
+    "inspect": "Expand each start while tracking present characters. A candidate is nice only if every present letter has its lowercase and uppercase counterpart; replace the best only on strict length improvement.",
+    "update": "Expand each start while tracking present characters. A candidate is nice only if every present letter has its lowercase and uppercase counterpart; replace the best only on strict length improvement.",
+    "done": "Find the earliest longest substring containing both cases of every letter it uses."
+  },
+  "edgeCases": [
+    "No uppercase counterparts",
+    "Entire substring is nice",
+    "Equal best lengths retain earlier start"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

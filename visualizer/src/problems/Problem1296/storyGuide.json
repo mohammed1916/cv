@@ -1,0 +1,31 @@
+{
+  "number": "1296",
+  "title": "Divide Array in Sets of K Consecutive Numbers",
+  "goal": "Decide whether all values partition into groups of k consecutive numbers.",
+  "strategy": "The smallest remaining value must start every group containing its remaining copies. Consume the same multiplicity from the next k-1 values or reject.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether all values partition into groups of k consecutive numbers.",
+    "inspect": "The smallest remaining value must start every group containing its remaining copies. Consume the same multiplicity from the next k-1 values or reject.",
+    "update": "The smallest remaining value must start every group containing its remaining copies. Consume the same multiplicity from the next k-1 values or reject.",
+    "done": "Decide whether all values partition into groups of k consecutive numbers."
+  },
+  "edgeCases": [
+    "Length cannot split evenly",
+    "A missing internal value breaks a group",
+    "Singleton groups always fit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

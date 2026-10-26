@@ -1,9 +1,12 @@
 export const meta = {
-  number: 558,
-  title: 'Quad Tree Construction',
-  slug: 'quad-tree',
-  difficulty: 'Medium',
-  tags: ['Tree', 'Recursion', 'Divide and Conquer'],
-  description: 'Construct a quad tree from an N x N matrix by recursively subdividing regions where all values are the same into leaf nodes.',
-  accent: '#f59e0b',
-}
+  "number": "558",
+  "title": "Logical OR of Two Binary Grids Represented as Quad-Trees",
+  "slug": "logical-or-of-two-binary-grids-represented-as-quad-trees",
+  "difficulty": "Medium",
+  "tags": [
+    "Tree",
+    "Divide and Conquer"
+  ],
+  "accent": "#0891b2",
+  "description": "Compute logical OR of two compressed binary images and compress the result."
+};

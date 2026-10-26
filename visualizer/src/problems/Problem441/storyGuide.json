@@ -1,0 +1,29 @@
+{
+  "number": "441",
+  "title": "Arranging Coins",
+  "goal": "Solve Arranging Coins: Find the largest complete staircase whose triangular coin total does not exceed the available coins.",
+  "strategy": "Find the largest complete staircase whose triangular coin total does not exceed the available coins.",
+  "phases": [
+    "add_stair",
+    "complete",
+    "init",
+    "use_coins"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Leftover coins in an incomplete next row do not increase the answer."
+  ],
+  "checks": [
+    {
+      "condition": "coins==n",
+      "outcome": "return mid"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem441/index.jsx",
+    "src/problems/Problem441/Problem441Visualizer.jsx"
+  ]
+}

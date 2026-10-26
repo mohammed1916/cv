@@ -1,0 +1,31 @@
+{
+  "number": "823",
+  "title": "Binary Trees With Factors",
+  "goal": "Count ordered binary trees where every internal value equals the product of its children.",
+  "strategy": "Process distinct values in increasing order. A value is always a one-node tree; each ordered factor pair drawn from earlier values contributes the product of its two subtree counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count ordered binary trees where every internal value equals the product of its children.",
+    "inspect": "Process distinct values in increasing order. A value is always a one-node tree; each ordered factor pair drawn from earlier values contributes the product of its two subtree counts.",
+    "update": "Process distinct values in increasing order. A value is always a one-node tree; each ordered factor pair drawn from earlier values contributes the product of its two subtree counts.",
+    "done": "Count ordered binary trees where every internal value equals the product of its children."
+  },
+  "edgeCases": [
+    "Prime values only produce leaf trees",
+    "Repeated powers permit nested factor trees",
+    "A singleton value is one leaf tree"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

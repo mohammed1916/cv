@@ -1,0 +1,27 @@
+{
+  "number": "587",
+  "title": "Erect the Fence",
+  "goal": "Solve Erect the Fence: Find the convex hull of points using Graham scan algorithm",
+  "strategy": "Find the convex hull of points using Graham scan algorithm",
+  "phases": [
+    "find_start",
+    "sort_angle",
+    "build_hull",
+    "remove_concave",
+    "add_point",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(points) <= 2",
+      "outcome": "return points"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem587/index.jsx",
+    "src/problems/Problem587/ErectFenceVisualizer.jsx"
+  ]
+}

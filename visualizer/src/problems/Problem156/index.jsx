@@ -1,1 +1,5 @@
-export { default } from "./BinaryTreeUpsideDownVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./BinaryTreeUpsideDownVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

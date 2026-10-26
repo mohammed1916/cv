@@ -1,0 +1,31 @@
+{
+  "number": "990",
+  "title": "Satisfiability of Equality Equations",
+  "goal": "Determine whether all equalities and inequalities between variables can hold at once.",
+  "strategy": "First union every equality so transitive equality is complete. Then reject any inequality whose two variables have the same representative; all other components can receive different values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether all equalities and inequalities between variables can hold at once.",
+    "inspect": "First union every equality so transitive equality is complete. Then reject any inequality whose two variables have the same representative; all other components can receive different values.",
+    "update": "First union every equality so transitive equality is complete. Then reject any inequality whose two variables have the same representative; all other components can receive different values.",
+    "done": "Determine whether all equalities and inequalities between variables can hold at once."
+  },
+  "edgeCases": [
+    "Different equality components can satisfy inequalities",
+    "A variable cannot differ from itself",
+    "Repeated and reflexive equalities are harmless"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

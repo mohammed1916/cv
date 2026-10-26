@@ -1,0 +1,28 @@
+{
+  "number": "57",
+  "title": "Insert Interval",
+  "goal": "Solve Insert Interval: Keep intervals before the insertion, merge all overlaps with the new interval, then append the untouched suffix.",
+  "strategy": "Keep intervals before the insertion, merge all overlaps with the new interval, then append the untouched suffix.",
+  "phases": [
+    "after",
+    "before",
+    "check",
+    "done",
+    "done_early",
+    "init",
+    "merge"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The new interval may cover none or all of the existing intervals; output must remain sorted and disjoint."
+  ],
+  "checks": [],
+  "inputRules": [
+    "intervals must be an array",
+    "newInterval must be an array"
+  ],
+  "source": [
+    "src/problems/Problem57/index.jsx",
+    "src/problems/Problem57/InsertIntervalVisualizer.jsx"
+  ]
+}

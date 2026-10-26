@@ -1,0 +1,31 @@
+{
+  "number": "2204",
+  "title": "Distance to a Cycle in Undirected Graph",
+  "goal": "Find each vertex distance to the unique cycle of a connected undirected graph.",
+  "strategy": "Repeatedly peel degree-one leaves; only cycle vertices survive. Seed a multi-source BFS with those vertices to measure the shortest distance outward into attached trees.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find each vertex distance to the unique cycle of a connected undirected graph.",
+    "inspect": "Repeatedly peel degree-one leaves; only cycle vertices survive. Seed a multi-source BFS with those vertices to measure the shortest distance outward into attached trees.",
+    "update": "Repeatedly peel degree-one leaves; only cycle vertices survive. Seed a multi-source BFS with those vertices to measure the shortest distance outward into attached trees.",
+    "done": "Find each vertex distance to the unique cycle of a connected undirected graph."
+  },
+  "edgeCases": [
+    "Every vertex already lies on the cycle",
+    "A triangle has one long attached branch",
+    "Several leaves can peel simultaneously"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

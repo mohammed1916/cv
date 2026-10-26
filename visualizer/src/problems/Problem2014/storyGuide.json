@@ -1,0 +1,31 @@
+{
+  "number": "2014",
+  "title": "Longest Subsequence Repeated k Times",
+  "goal": "Find the longest subsequence whose k repetitions occur in s, breaking ties lexicographically.",
+  "strategy": "Only letters appearing at least k times can participate. Breadth-first search extends valid repeated prefixes; a failed prefix cannot lead to a valid extension.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest subsequence whose k repetitions occur in s, breaking ties lexicographically.",
+    "inspect": "Only letters appearing at least k times can participate. Breadth-first search extends valid repeated prefixes; a failed prefix cannot lead to a valid extension.",
+    "update": "Only letters appearing at least k times can participate. Breadth-first search extends valid repeated prefixes; a failed prefix cannot lead to a valid extension.",
+    "done": "Find the longest subsequence whose k repetitions occur in s, breaking ties lexicographically."
+  },
+  "edgeCases": [
+    "No letter appears often enough",
+    "Tied one-letter answers choose the largest letter",
+    "Repeated equal characters form a longer answer"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

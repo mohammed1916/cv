@@ -1,0 +1,31 @@
+{
+  "number": "2114",
+  "title": "Maximum Number of Words Found in Sentences",
+  "goal": "Find the largest word count among the supplied sentences.",
+  "strategy": "With one space between nonempty words, the number of words is one plus the number of spaces. Compare each sentence count against the best so far.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest word count among the supplied sentences.",
+    "inspect": "With one space between nonempty words, the number of words is one plus the number of spaces. Compare each sentence count against the best so far.",
+    "update": "With one space between nonempty words, the number of words is one plus the number of spaces. Compare each sentence count against the best so far.",
+    "done": "Find the largest word count among the supplied sentences."
+  },
+  "edgeCases": [
+    "One word is still one complete sentence",
+    "Equal word counts share the maximum",
+    "A later sentence establishes the maximum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

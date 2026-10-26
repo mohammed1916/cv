@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/largest-orders.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +10,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LargestOrdersVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -406,7 +407,7 @@ function DetailsPanel({ step }) {
   )
 }
 
-const EXAMPLES = getExamples('largest-orders')
+const EXAMPLES = authoredExamples0
 
 export default function LargestOrdersVisualizer() {
   const [input, setInput] = useState('')

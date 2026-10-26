@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--63.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -168,32 +172,7 @@ function generateSteps(m, n, obstacleGrid) {
     return steps
 }
 
-const DEFAULT_EXAMPLES = [
-    {
-        label: '3×3 (clear)',
-        m: 3,
-        n: 3,
-        obstacleGrid: [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
-    },
-    {
-        label: '3×3 (1 obstacle)',
-        m: 3,
-        n: 3,
-        obstacleGrid: [[0, 0, 0], [0, 1, 0], [0, 0, 0]],
-    },
-    {
-        label: '2×2 (corner)',
-        m: 2,
-        n: 2,
-        obstacleGrid: [[0, 1], [0, 0]],
-    },
-    {
-        label: '4×4 (varied)',
-        m: 4,
-        n: 4,
-        obstacleGrid: [[0, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 0, 0]],
-    },
-]
+const DEFAULT_EXAMPLES = authoredExamples0
 
 function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, mInput, nInput, setMInput, setNInput, obstacleGridInput, setObstacleGridInput, handleReset }) {
     const dp = step?.dp ?? []
@@ -216,20 +195,7 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
                             <button key={ex.label} className="upii-chip" onClick={() => onApplyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="upii-inputs">
-                        <label className="upii-input-label">
-                            m (rows):
-                            <input className="upii-input-num" type="number" min={1} max={6} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value));
-
- handleReset() }} />
-                        </label>
-                        <label className="upii-input-label">
-                            n (cols):
-                            <input className="upii-input-num" type="number" min={1} max={6} value={nInput}
-                                onChange={(e) => { setNInput(Number(e.target.value)); handleReset() }} />
-                        </label>
-                    </div>
+                    
                 </div>
 
                 {/* Input Grid - for editing obstacles */}
@@ -340,13 +306,9 @@ function UniquePathsIIVisualization({ m, n, obstacleGrid, step, onApplyExample, 
 }
 
 export default function UniquePathsIIVisualizer() {
-    const [mInput, setMInput] = useState(3)
-    const [nInput, setNInput] = useState(3)
-    const [obstacleGridInput, setObstacleGridInput] = useState([
-        [0, 0, 0],
-        [0, 1, 0],
-        [0, 0, 0],
-    ])
+    const [mInput, setMInput] = useState(AUTHORED_INITIAL.m)
+    const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
+    const [obstacleGridInput, setObstacleGridInput] = useState(AUTHORED_INITIAL.obstacleGrid)
 
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -435,9 +397,6 @@ export default function UniquePathsIIVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -450,6 +409,9 @@ export default function UniquePathsIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHSII_PATTERNS} />
+            )}
         </>
     )
 
@@ -458,7 +420,7 @@ export default function UniquePathsIIVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Unique Paths II', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/word-search.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './WordSearchVisualizer.css'
@@ -207,7 +210,7 @@ function generateSteps(board, word) {
   return steps
 }
 
-const EXAMPLES = getExamples('word-search')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, step, board, word, boardInput, setBoardInput, wordInput, setWordInput, inputError }) {
   return (
@@ -229,24 +232,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
               </button>
             ))}
           </div>
-          <div className="ws-inputs">
-            <input
-              className="ws-input"
-              value={boardInput}
-              onChange={(e) => {
-                setBoardInput(e.target.value)
-                handleReset()
-              }}
-            />
-            <input
-              className="ws-input small"
-              value={wordInput}
-              onChange={(e) => {
-                setWordInput(e.target.value.toUpperCase())
-                handleReset()
-              }}
-            />
-          </div>
+          
           <div
             className="ws-grid"
             style={{ gridTemplateColumns: `repeat(${(step?.board || board)[0].length}, minmax(0, 1fr))` }}
@@ -313,8 +299,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
 }
 
 export default function WordSearchVisualizer() {
-  const [boardInput, setBoardInput] = useState('[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]')
-  const [wordInput, setWordInput] = useState('ABCCED')
+  const [boardInput, setBoardInput] = useState(JSON.stringify(AUTHORED_INITIAL.board))
+  const [wordInput, setWordInput] = useState(AUTHORED_INITIAL.word)
   const [selected, setSelected] = useState(0)
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -417,9 +403,6 @@ export default function WordSearchVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -440,6 +423,9 @@ export default function WordSearchVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
+          )}
         </FloatingPanel>,
         document.body
       )}

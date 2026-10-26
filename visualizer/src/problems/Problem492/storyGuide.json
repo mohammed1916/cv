@@ -1,0 +1,22 @@
+{
+  "number": "492",
+  "title": "Construct the Rectangle",
+  "goal": "Solve Construct the Rectangle: Find width and height that form a rectangle with given area, minimizing perimeter.",
+  "strategy": "Find width and height that form a rectangle with given area, minimizing perimeter.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "area%w==0",
+      "outcome": "return [area//w,w]"
+    }
+  ],
+  "inputRules": [
+    "area must be a number"
+  ],
+  "source": [
+    "src/problems/Problem492/index.jsx",
+    "src/problems/Problem492/Problem492Visualizer.jsx"
+  ]
+}

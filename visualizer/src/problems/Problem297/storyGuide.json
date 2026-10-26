@@ -1,0 +1,24 @@
+{
+  "number": "297",
+  "title": "Serialize and Deserialize Binary Tree",
+  "goal": "Solve Serialize and Deserialize Binary Tree: Pre-order DFS serialization with null markers; reconstruct by consuming tokens in the same order.",
+  "strategy": "Pre-order DFS serialization with null markers; reconstruct by consuming tokens in the same order.",
+  "phases": [
+    "serialize",
+    "serialize-done",
+    "deserialize",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Null markers preserve missing-child positions; equal node values do not uniquely describe tree structure."
+  ],
+  "checks": [],
+  "inputRules": [
+    "tree must be an array"
+  ],
+  "source": [
+    "src/problems/Problem297/index.jsx",
+    "src/problems/Problem297/SerializeDeserializeVisualizer.jsx"
+  ]
+}

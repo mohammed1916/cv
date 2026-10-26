@@ -1,0 +1,31 @@
+{
+  "number": "1946",
+  "title": "Largest Number After Mutating Substring",
+  "goal": "Maximize a number by mutating at most one contiguous substring.",
+  "strategy": "Start at the first strict improvement. Continue across improvements and equal mappings; stop permanently at the first decrease after mutation starts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize a number by mutating at most one contiguous substring.",
+    "inspect": "Start at the first strict improvement. Continue across improvements and equal mappings; stop permanently at the first decrease after mutation starts.",
+    "update": "Start at the first strict improvement. Continue across improvements and equal mappings; stop permanently at the first decrease after mutation starts.",
+    "done": "Maximize a number by mutating at most one contiguous substring."
+  },
+  "edgeCases": [
+    "No digit can improve",
+    "Stop before a decrease and ignore later improvements",
+    "Mutation begins with a zero digit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

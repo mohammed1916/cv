@@ -1,0 +1,31 @@
+{
+  "number": "2447",
+  "title": "Number of Subarrays With GCD Equal to K",
+  "goal": "Count subarrays whose greatest common divisor is exactly k.",
+  "strategy": "Extend each start while updating its rolling GCD. GCD can only lose factors; if the current GCD is not divisible by k, no further extension can recover the target.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose greatest common divisor is exactly k.",
+    "inspect": "Extend each start while updating its rolling GCD. GCD can only lose factors; if the current GCD is not divisible by k, no further extension can recover the target.",
+    "update": "Extend each start while updating its rolling GCD. GCD can only lose factors; if the current GCD is not divisible by k, no further extension can recover the target.",
+    "done": "Count subarrays whose greatest common divisor is exactly k."
+  },
+  "edgeCases": [
+    "Every target value supports many matching windows",
+    "Values lacking the target factor stop immediately",
+    "Coprime neighbors can create gcd one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1984",
+  "title": "Minimum Difference Between Highest and Lowest of K Scores",
+  "goal": "Choose k scores with the smallest difference between highest and lowest.",
+  "strategy": "In sorted order an optimal selection can be a consecutive block. Compare the endpoints of every length-k window.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose k scores with the smallest difference between highest and lowest.",
+    "inspect": "In sorted order an optimal selection can be a consecutive block. Compare the endpoints of every length-k window.",
+    "update": "In sorted order an optimal selection can be a consecutive block. Compare the endpoints of every length-k window.",
+    "done": "Choose k scores with the smallest difference between highest and lowest."
+  },
+  "edgeCases": [
+    "One selected score has zero spread",
+    "All scores must be chosen",
+    "Repeated scores offer a zero-spread group"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

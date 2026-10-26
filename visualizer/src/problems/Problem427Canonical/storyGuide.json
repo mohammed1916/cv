@@ -1,0 +1,31 @@
+{
+  "number": "427",
+  "title": "Construct Quad Tree",
+  "goal": "Represent a binary square grid as a quad tree that compresses uniform regions.",
+  "strategy": "A prefix sum detects whether a region is all zero or all one. Uniform regions become leaves; mixed regions split into top-left top-right bottom-left and bottom-right quadrants.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Represent a binary square grid as a quad tree that compresses uniform regions.",
+    "inspect": "A prefix sum detects whether a region is all zero or all one. Uniform regions become leaves; mixed regions split into top-left top-right bottom-left and bottom-right quadrants.",
+    "update": "A prefix sum detects whether a region is all zero or all one. Uniform regions become leaves; mixed regions split into top-left top-right bottom-left and bottom-right quadrants.",
+    "done": "Represent a binary square grid as a quad tree that compresses uniform regions."
+  },
+  "edgeCases": [
+    "A uniform square compresses to one leaf",
+    "A checkerboard reaches one-cell leaves",
+    "One cell is already a leaf"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2078",
+  "title": "Two Furthest Houses With Different Colors",
+  "goal": "Find the greatest distance between two houses with different colors.",
+  "strategy": "An optimal differing pair can use the first or last house. Compare every house against both endpoints and retain the farthest eligible distance.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest distance between two houses with different colors.",
+    "inspect": "An optimal differing pair can use the first or last house. Compare every house against both endpoints and retain the farthest eligible distance.",
+    "update": "An optimal differing pair can use the first or last house. Compare every house against both endpoints and retain the farthest eligible distance.",
+    "done": "Find the greatest distance between two houses with different colors."
+  },
+  "edgeCases": [
+    "Different endpoint colors give the full span",
+    "Only one interior house differs",
+    "Two different houses form the smallest input"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

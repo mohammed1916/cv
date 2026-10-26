@@ -1,0 +1,38 @@
+{
+  "number": "417",
+  "title": "Pacific Atlantic Water Flow",
+  "goal": "Solve Pacific Atlantic Water Flow: Multi-source BFS from both borders; cells reachable from both are result.",
+  "strategy": "Multi-source BFS from both borders; cells reachable from both are result.",
+  "phases": [
+    "atlantic_dfs",
+    "atlantic_start",
+    "done",
+    "init",
+    "pacific_dfs",
+    "pacific_start",
+    "result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not heights",
+      "outcome": "return []"
+    },
+    {
+      "condition": "(r,c) in visited or r<0 or r>=m or c<0 or c>=n",
+      "outcome": "return"
+    },
+    {
+      "condition": "heights[r][c] < prev_h",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "Enter a non-empty rectangular JSON matrix of numbers."
+  ],
+  "source": [
+    "src/problems/Problem417/index.jsx",
+    "src/problems/Problem417/Problem417Visualizer.jsx"
+  ]
+}

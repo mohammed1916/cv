@@ -1,0 +1,31 @@
+{
+  "number": "1717",
+  "title": "Maximum Score From Removing Substrings",
+  "goal": "Maximize score from deleting ab and ba substrings worth different amounts.",
+  "strategy": "Remove the more valuable orientation first using a stack, then process the leftover string for the other orientation. Other characters divide independent regions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize score from deleting ab and ba substrings worth different amounts.",
+    "inspect": "Remove the more valuable orientation first using a stack, then process the leftover string for the other orientation. Other characters divide independent regions.",
+    "update": "Remove the more valuable orientation first using a stack, then process the leftover string for the other orientation. Other characters divide independent regions.",
+    "done": "Maximize score from deleting ab and ba substrings worth different amounts."
+  },
+  "edgeCases": [
+    "Equal pair scores",
+    "No removable pairs",
+    "One high-scoring removal exposes another"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

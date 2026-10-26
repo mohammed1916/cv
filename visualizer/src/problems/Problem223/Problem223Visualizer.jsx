@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/rectangle-area.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -124,11 +125,7 @@ function generateSteps(vals) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('rectangle-area', [
-  { label: 'Example 1', vals: { ax1: '-3', ay1: '0', ax2: '3', ay2: '4', bx1: '0', by1: '-1', bx2: '9', by2: '2' } },
-  { label: 'Example 2', vals: { ax1: '-2', ay1: '-2', ax2: '2', ay2: '2', bx1: '-2', by1: '-2', bx2: '2', by2: '2' } },
-  { label: 'Disjoint', vals: { ax1: '0', ay1: '0', ax2: '2', ay2: '2', bx1: '4', by1: '4', bx2: '6', by2: '6' } },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const DEFAULT_VALS = { ax1: '-3', ay1: '0', ax2: '3', ay2: '4', bx1: '0', by1: '-1', bx2: '9', by2: '2' }
 
@@ -364,9 +361,6 @@ export default function Problem223Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -384,6 +378,9 @@ export default function Problem223Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -391,7 +388,7 @@ export default function Problem223Visualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     [],

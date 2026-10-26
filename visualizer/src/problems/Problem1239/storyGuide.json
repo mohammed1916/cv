@@ -1,0 +1,31 @@
+{
+  "number": "1239",
+  "title": "Maximum Length of a Concatenated String with Unique Characters",
+  "goal": "Find the longest concatenation of a subsequence whose characters are all distinct.",
+  "strategy": "At every word choose skip or take. Taking is legal only if the word is internally unique and disjoint from all chosen letters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest concatenation of a subsequence whose characters are all distinct.",
+    "inspect": "At every word choose skip or take. Taking is legal only if the word is internally unique and disjoint from all chosen letters.",
+    "update": "At every word choose skip or take. Taking is legal only if the word is internally unique and disjoint from all chosen letters.",
+    "done": "Find the longest concatenation of a subsequence whose characters are all distinct."
+  },
+  "edgeCases": [
+    "Internal duplicate invalidates one word",
+    "All words are mutually disjoint",
+    "Every choice shares one character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

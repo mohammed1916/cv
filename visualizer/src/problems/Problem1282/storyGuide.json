@@ -1,0 +1,31 @@
+{
+  "number": "1282",
+  "title": "Group the People Given the Group Size They Belong To",
+  "goal": "Partition people so each group has its members requested size.",
+  "strategy": "Maintain a waiting bucket per requested size. Once a bucket fills exactly, emit it and start a fresh bucket for later people of that size.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Partition people so each group has its members requested size.",
+    "inspect": "Maintain a waiting bucket per requested size. Once a bucket fills exactly, emit it and start a fresh bucket for later people of that size.",
+    "update": "Maintain a waiting bucket per requested size. Once a bucket fills exactly, emit it and start a fresh bucket for later people of that size.",
+    "done": "Partition people so each group has its members requested size."
+  },
+  "edgeCases": [
+    "Everyone forms a singleton",
+    "One group contains everybody",
+    "Several equal-sized groups"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

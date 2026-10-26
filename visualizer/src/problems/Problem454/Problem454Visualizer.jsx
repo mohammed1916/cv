@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/4sum-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -44,11 +45,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('4sum-ii', [
-  { label: 'Example 1', nums1: [1, 2], nums2: [-2, -1], nums3: [-1, 2], nums4: [0, 2], expected: 2 },
-  { label: 'Example 2', nums1: [0], nums2: [0], nums3: [0], nums4: [0], expected: 1 },
-  { label: 'Example 3', nums1: [1, 0], nums2: [1, 0], nums3: [-1, 0], nums4: [0, 1], expected: 5 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },
@@ -230,7 +227,7 @@ function SumMapDisplay({ sumMap }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Pair Sum Map ({entries.length} entries)
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 200, overflowY: 'auto' }}>
@@ -267,7 +264,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -352,7 +349,7 @@ function VisualizationPanel({ step, nums1, nums2, nums3, nums4, EXAMPLES, handle
         <SumMapDisplay sumMap={step?.sumMap || {}} />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+          <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
             Count of Quadruples
           </header>
           <div style={{

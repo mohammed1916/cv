@@ -1,0 +1,27 @@
+{
+  "number": "693",
+  "title": "Binary Number with Alternating Bits",
+  "goal": "Decide whether adjacent bits in the binary representation always differ.",
+  "strategy": "Compare consecutive bits without adding leading zeros. One repeated neighboring bit disproves alternation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether adjacent bits in the binary representation always differ.",
+    "inspect": "Compare consecutive bits without adding leading zeros. One repeated neighboring bit disproves alternation.",
+    "update": "Compare consecutive bits without adding leading zeros. One repeated neighboring bit disproves alternation.",
+    "done": "Decide whether adjacent bits in the binary representation always differ."
+  },
+  "edgeCases": [
+    "Repeated middle bits",
+    "One bit",
+    "Repeated low bits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/serialize-and-deserialize-bst.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -59,11 +60,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('serialize-and-deserialize-bst', [
-  { label: 'Example 1', tree: [2, 1, 3], expected: '2,1,3,#,#,#,#' },
-  { label: 'Example 2', tree: [1, 0, 50, null, null, 25, 75], expected: '1,0,50,#,#,25,75' },
-  { label: 'Example 3', tree: [5, 3, 7], expected: '5,3,7,#,#,#,#' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'serialize', label: 'Serialize (DFS)', lines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
@@ -212,7 +209,7 @@ function SerializedView({ serialized }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Serialized String
       </header>
       <div style={{
@@ -263,7 +260,7 @@ function SerializedView({ serialized }) {
 function TreeStructure({ treeValues }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Tree Values (level-order)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -299,64 +296,8 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
-        </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => handleExampleClick(ex)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid var(--border)',
-                backgroundColor: 'var(--surface2)',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Tree (comma-separated, null for missing nodes)
-        </label>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <input
-            value={treeInput}
-            onChange={(e) => { setTreeInput(e.target.value); handleReset() }}
-            placeholder="e.g., 2,1,3"
-            style={{
-              flex: 1,
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-          <button
-            onClick={handleReset}
-            style={{
-              padding: '8px 10px',
-              backgroundColor: 'var(--primary-glow)',
-              color: 'var(--text)',
-              border: '1px solid var(--primary)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            Reset
-          </button>
         </div>
       </div>
 

@@ -1,0 +1,31 @@
+{
+  "number": "2000",
+  "title": "Reverse Prefix of Word",
+  "goal": "Reverse the prefix ending at the first occurrence of ch.",
+  "strategy": "Only the earliest occurrence defines the reversal boundary. Swap symmetric positions within that prefix; leave later characters in place.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reverse the prefix ending at the first occurrence of ch.",
+    "inspect": "Only the earliest occurrence defines the reversal boundary. Swap symmetric positions within that prefix; leave later characters in place.",
+    "update": "Only the earliest occurrence defines the reversal boundary. Swap symmetric positions within that prefix; leave later characters in place.",
+    "done": "Reverse the prefix ending at the first occurrence of ch."
+  },
+  "edgeCases": [
+    "Boundary already at the first character",
+    "The requested character is absent",
+    "Boundary at the last character reverses the entire word"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

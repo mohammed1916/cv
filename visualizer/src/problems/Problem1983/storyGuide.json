@@ -1,0 +1,31 @@
+{
+  "number": "1983",
+  "title": "Widest Pair of Indices With Equal Range Sum",
+  "goal": "Find the widest interval whose sums match in two binary arrays.",
+  "strategy": "Equal range sums mean equal prefix-sum differences at the two boundaries. Record the earliest index for each difference to maximize the later matching interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the widest interval whose sums match in two binary arrays.",
+    "inspect": "Equal range sums mean equal prefix-sum differences at the two boundaries. Record the earliest index for each difference to maximize the later matching interval.",
+    "update": "Equal range sums mean equal prefix-sum differences at the two boundaries. Record the earliest index for each difference to maximize the later matching interval.",
+    "done": "Find the widest interval whose sums match in two binary arrays."
+  },
+  "edgeCases": [
+    "The full arrays have equal sums",
+    "No nonempty interval can match",
+    "One equal position"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

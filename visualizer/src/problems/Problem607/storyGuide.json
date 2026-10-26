@@ -1,0 +1,31 @@
+{
+  "number": "607",
+  "title": "Sales Person",
+  "goal": "Find salespeople who have never handled an order for company RED.",
+  "strategy": "Collect IDs of companies named RED, then collect salespeople attached to those orders. Preserve every salesperson outside that exclusion set, including people with no orders at all.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find salespeople who have never handled an order for company RED.",
+    "inspect": "Collect IDs of companies named RED, then collect salespeople attached to those orders. Preserve every salesperson outside that exclusion set, including people with no orders at all.",
+    "update": "Collect IDs of companies named RED, then collect salespeople attached to those orders. Preserve every salesperson outside that exclusion set, including people with no orders at all.",
+    "done": "Find salespeople who have never handled an order for company RED."
+  },
+  "edgeCases": [
+    "Without a RED company every salesperson qualifies",
+    "Zero orders still preserves the full roster",
+    "Everyone can be excluded"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

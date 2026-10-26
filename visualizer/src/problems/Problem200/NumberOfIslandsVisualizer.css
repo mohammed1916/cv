@@ -59,7 +59,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px;
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   font-size: 13px;
   resize: none;
@@ -117,7 +117,7 @@
 
 .noi-cell.land.visited {
   /* color overridden inline dynamically by island map */
-  color: var(--surface);
+  color: var(--text-on-light);
 }
 
 .noi-cell-indicator {

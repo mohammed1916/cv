@@ -1,0 +1,31 @@
+{
+  "number": "2156",
+  "title": "Find Substring With Given Hash Value",
+  "goal": "Find the earliest length-k substring with the requested polynomial hash.",
+  "strategy": "The first character has exponent zero, so slide from right to left. Multiply the previous hash by power, add the new first letter, and remove the outgoing letter contribution at exponent k.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the earliest length-k substring with the requested polynomial hash.",
+    "inspect": "The first character has exponent zero, so slide from right to left. Multiply the previous hash by power, add the new first letter, and remove the outgoing letter contribution at exponent k.",
+    "update": "The first character has exponent zero, so slide from right to left. Multiply the previous hash by power, add the new first letter, and remove the outgoing letter contribution at exponent k.",
+    "done": "Find the earliest length-k substring with the requested polynomial hash."
+  },
+  "edgeCases": [
+    "A modulus of one makes every full window match",
+    "The entire string is the only full window",
+    "A matching internal window follows two nonmatching windows"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

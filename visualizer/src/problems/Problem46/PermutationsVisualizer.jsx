@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/permutations.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './PermutationsVisualizer.css'
@@ -96,7 +99,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('permutations')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, nums, inputError, handleReset, step }) {
     return (
@@ -108,14 +111,6 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
                         {inputError && <span className="perm-error">{inputError}</span>}
                     </header>
                     <div className="perm-body">
-                        <div className="perm-examples">
-                            {EXAMPLES.map((ex) => (
-                                <button key={ex.label} className="perm-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                            ))}
-                        </div>
-                        <input className="perm-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }} />
 
                         <div className="perm-section-label">Current path</div>
                         <div className="perm-path-row">
@@ -167,7 +162,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, numsInput, setNumsInput, n
 }
 
 export default function PermutationsVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,2,3]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
 
     const { nums, inputError } = useMemo(() => {
         try {
@@ -243,9 +238,6 @@ export default function PermutationsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -266,6 +258,9 @@ export default function PermutationsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PERMUTATIONS_PATTERNS} />
+            )}
         </>
     )
 
@@ -273,7 +268,7 @@ export default function PermutationsVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

@@ -1,0 +1,31 @@
+{
+  "number": "1582",
+  "title": "Special Positions in a Binary Matrix",
+  "goal": "Count one-valued cells that are the only one in both their row and column.",
+  "strategy": "Row and column sums summarize uniqueness. A one qualifies precisely when both associated sums are one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count one-valued cells that are the only one in both their row and column.",
+    "inspect": "Row and column sums summarize uniqueness. A one qualifies precisely when both associated sums are one.",
+    "update": "Row and column sums summarize uniqueness. A one qualifies precisely when both associated sums are one.",
+    "done": "Count one-valued cells that are the only one in both their row and column."
+  },
+  "edgeCases": [
+    "Every diagonal entry special",
+    "All zero cells",
+    "Single one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

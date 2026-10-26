@@ -1,0 +1,27 @@
+{
+  "number": "942",
+  "title": "DI String Match",
+  "goal": "Construct a permutation matching every increase/decrease instruction.",
+  "strategy": "The smallest unused value guarantees an increase; the largest guarantees a decrease regardless of the next choice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct a permutation matching every increase/decrease instruction.",
+    "inspect": "The smallest unused value guarantees an increase; the largest guarantees a decrease regardless of the next choice.",
+    "update": "The smallest unused value guarantees an increase; the largest guarantees a decrease regardless of the next choice.",
+    "done": "Construct a permutation matching every increase/decrease instruction."
+  },
+  "edgeCases": [
+    "Only increases",
+    "Only decreases",
+    "One relation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

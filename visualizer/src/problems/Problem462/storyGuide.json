@@ -1,0 +1,25 @@
+{
+  "number": "462",
+  "title": "Minimum Moves to Equal Array Elements II",
+  "goal": "Solve Minimum Moves to Equal Array Elements II: Move values toward a median, where the total absolute distance is minimized.",
+  "strategy": "Move values toward a median, where the total absolute distance is minimized.",
+  "phases": [
+    "add_move",
+    "calculating",
+    "done",
+    "init_moves",
+    "median_found",
+    "sorted",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "For even length, any point between the two middle values has the same minimum total distance."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem462/index.jsx",
+    "src/problems/Problem462/Problem462Visualizer.jsx"
+  ]
+}

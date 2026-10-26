@@ -1,0 +1,31 @@
+{
+  "number": "2070",
+  "title": "Most Beautiful Item for Each Query",
+  "goal": "For each price budget return the greatest beauty of an affordable item.",
+  "strategy": "Sort items and indexed queries by price. A forward sweep adds each newly affordable item once and retains the largest beauty, then places answers back in original query order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For each price budget return the greatest beauty of an affordable item.",
+    "inspect": "Sort items and indexed queries by price. A forward sweep adds each newly affordable item once and retains the largest beauty, then places answers back in original query order.",
+    "update": "Sort items and indexed queries by price. A forward sweep adds each newly affordable item once and retains the largest beauty, then places answers back in original query order.",
+    "done": "For each price budget return the greatest beauty of an affordable item."
+  },
+  "edgeCases": [
+    "Equal-price items compete by beauty",
+    "Higher prices need not offer higher beauty",
+    "One item and repeated budgets"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

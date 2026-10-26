@@ -1,0 +1,31 @@
+{
+  "number": "2076",
+  "title": "Process Restricted Friend Requests",
+  "goal": "Accept friendship requests only when no restricted pair becomes connected.",
+  "strategy": "Before joining two components, check whether any restricted pair has endpoints in those two components. Failed requests leave the disjoint sets unchanged; requests inside one component are already safe.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Accept friendship requests only when no restricted pair becomes connected.",
+    "inspect": "Before joining two components, check whether any restricted pair has endpoints in those two components. Failed requests leave the disjoint sets unchanged; requests inside one component are already safe.",
+    "update": "Before joining two components, check whether any restricted pair has endpoints in those two components. Failed requests leave the disjoint sets unchanged; requests inside one component are already safe.",
+    "done": "Accept friendship requests only when no restricted pair becomes connected."
+  },
+  "edgeCases": [
+    "A direct restricted pair is rejected",
+    "Repeated friendships inside one component are accepted",
+    "A rejected request must not partially merge components"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

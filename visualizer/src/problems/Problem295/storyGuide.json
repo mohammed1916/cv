@@ -1,0 +1,29 @@
+{
+  "number": "295",
+  "title": "Find Median from Data Stream",
+  "goal": "Solve Find Median from Data Stream: Maintain a max-heap for the lower half and a min-heap for the upper half, balancing sizes after each insert.",
+  "strategy": "Maintain a max-heap for the lower half and a min-heap for the upper half, balancing sizes after each insert.",
+  "phases": [
+    "init",
+    "push_small",
+    "balance_order",
+    "balance_size_sl",
+    "balance_size_ls",
+    "median"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(small) == len(large)",
+      "outcome": "return (-small[0] + large[0]) / 2"
+    }
+  ],
+  "inputRules": [
+    "Must be array"
+  ],
+  "source": [
+    "src/problems/Problem295/index.jsx",
+    "src/problems/Problem295/FindMedianVisualizer.jsx"
+  ]
+}

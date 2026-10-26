@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/find-all-anagrams-in-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem438Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,9 +23,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('find-all-anagrams-in-string', [
-  { label: 'Example 1', s: 'cbaebabacd', p: 'abc' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findAnagrams(s,p):' },
@@ -90,7 +91,7 @@ function generateSteps(s, p) {
 function StringVisualization({ s, windowStart, windowEnd }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>String with Window</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>String with Window</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -144,7 +145,7 @@ function StringVisualization({ s, windowStart, windowEnd }) {
 function PatternVisualization({ p }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Pattern to Find</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Pattern to Find</div>
       <div style={{
         padding: 12,
         backgroundColor: '#f3e8ff',
@@ -181,7 +182,7 @@ function PatternVisualization({ p }) {
 function ResultsVisualization({ s, result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Anagram Start Indices</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Anagram Start Indices</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -229,7 +230,7 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -268,8 +269,8 @@ function VisualizationPanel({ step, applyEx, s, p, windowStart, windowEnd, resul
 
 export default function Problem438Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("cbaebabacd");
-  const [pInput, setPInput] = useState("abc");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+  const [pInput, setPInput] = useState(String(AUTHORED_INITIAL.p));
   const { s, p, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;

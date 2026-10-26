@@ -1,0 +1,31 @@
+{
+  "number": "1885",
+  "title": "Count Pairs in Two Arrays",
+  "goal": "Count index pairs whose first-array sum exceeds their second-array sum.",
+  "strategy": "Subtract aligned arrays to convert the condition into a positive pair sum. Sort differences and count whole ranges of successful partners with two pointers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count index pairs whose first-array sum exceeds their second-array sum.",
+    "inspect": "Subtract aligned arrays to convert the condition into a positive pair sum. Sort differences and count whole ranges of successful partners with two pointers.",
+    "update": "Subtract aligned arrays to convert the condition into a positive pair sum. Sort differences and count whole ranges of successful partners with two pointers.",
+    "done": "Count index pairs whose first-array sum exceeds their second-array sum."
+  },
+  "edgeCases": [
+    "Equal sums do not satisfy strict inequality",
+    "Every pair succeeds",
+    "No pair succeeds"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

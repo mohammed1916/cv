@@ -1,0 +1,304 @@
+/* MaxPathStory.css - Visual story styles for Problem 124 */
+
+.mps-story-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mps-empty-notice {
+  color: var(--text-muted, #94a3b8);
+  font-style: italic;
+  padding: 16px 0;
+}
+
+/* ── Metrics Grid ── */
+.mps-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.mps-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+}
+
+.mps-metric-max {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.mps-metric-turnaround {
+  background: rgba(168, 85, 247, 0.08);
+  border-color: rgba(168, 85, 247, 0.35);
+}
+
+.mps-metric-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted, #94a3b8);
+  font-weight: 600;
+}
+
+.mps-metric-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #10b981;
+  font-family: monospace;
+}
+
+.mps-metric-formula {
+  font-size: 13px;
+  font-family: monospace;
+  color: var(--text, #f1f5f9);
+}
+
+.mps-metric-formula strong {
+  color: #a855f7;
+}
+
+/* ── Phase Tags ── */
+.mps-phase-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.mps-phase-init {
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--text-muted, #94a3b8);
+}
+
+.mps-phase-recurse {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.mps-phase-compute {
+  background: rgba(168, 85, 247, 0.2);
+  color: #a855f7;
+}
+
+.mps-phase-update {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.mps-phase-return {
+  background: rgba(236, 72, 153, 0.2);
+  color: #ec4899;
+}
+
+.mps-phase-done {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+/* ── SVG Canvas ── */
+.mps-canvas-wrapper {
+  background: var(--surface1, #0f172a);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 280px;
+}
+
+/* ── Tree Edges ── */
+.mps-edge {
+  stroke: var(--border, #475569);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.mps-edge-turnaround {
+  stroke: #a855f7;
+  stroke-width: 3.5px;
+}
+
+.mps-edge-best {
+  stroke: #10b981;
+  stroke-width: 3px;
+  stroke-dasharray: 4 2;
+}
+
+.mps-edge-winner {
+  stroke: #10b981;
+  stroke-width: 4.5px;
+}
+
+/* ── Tree Nodes ── */
+.mps-node {
+  cursor: default;
+  transition: transform 0.2s ease;
+}
+
+.mps-node-circle {
+  fill: var(--surface2, #1e293b);
+  stroke: var(--border, #64748b);
+  stroke-width: 2px;
+  transition: all 0.2s ease;
+}
+
+.mps-node-val {
+  fill: var(--text, #f8fafc);
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.mps-node-id {
+  fill: var(--text-muted, #94a3b8);
+  font-size: 10px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* Node States */
+.mps-node-active .mps-node-circle {
+  stroke: #f59e0b;
+  stroke-width: 3.5px;
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.4));
+}
+
+.mps-node-turnaround .mps-node-circle {
+  stroke: #a855f7;
+  stroke-width: 3px;
+  fill: rgba(168, 85, 247, 0.15);
+}
+
+.mps-node-apex .mps-node-circle {
+  stroke: #c084fc;
+  stroke-width: 4px;
+  fill: rgba(192, 132, 252, 0.25);
+  filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.6));
+}
+
+.mps-node-best .mps-node-circle {
+  stroke: #34d399;
+  stroke-width: 3px;
+}
+
+.mps-node-winner .mps-node-circle {
+  stroke: #10b981;
+  stroke-width: 4px;
+  fill: rgba(16, 185, 129, 0.25);
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+}
+
+.mps-node-winner .mps-node-val {
+  fill: #6ee7b7;
+  font-weight: 800;
+}
+
+/* Gain Pill */
+.mps-gain-pill {
+  fill: rgba(16, 185, 129, 0.15);
+  stroke: #10b981;
+  stroke-width: 1px;
+}
+
+.mps-gain-pill.is-clipped {
+  fill: rgba(148, 163, 184, 0.15);
+  stroke: var(--text-muted, #94a3b8);
+}
+
+.mps-gain-text {
+  fill: #34d399;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.mps-gain-pill.is-clipped + .mps-gain-text {
+  fill: var(--text-muted, #94a3b8);
+}
+
+/* ── Footer Info & Legend ── */
+.mps-footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mps-winner-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10b981;
+  font-size: 13px;
+}
+
+.mps-trophy {
+  font-size: 16px;
+  color: #f59e0b;
+}
+
+.mps-turnaround-info {
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  font-size: 12px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.mps-turnaround-info strong {
+  color: #a855f7;
+}
+
+.mps-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted, #94a3b8);
+}
+
+.mps-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mps-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mps-dot-active {
+  background: #f59e0b;
+}
+
+.mps-dot-turnaround {
+  background: #a855f7;
+}
+
+.mps-dot-winner {
+  background: #10b981;
+}
+
+.mps-dot-gain {
+  background: #34d399;
+  border-radius: 2px;
+  width: 12px;
+  height: 8px;
+}

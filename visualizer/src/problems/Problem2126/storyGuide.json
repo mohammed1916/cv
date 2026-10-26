@@ -1,0 +1,31 @@
+{
+  "number": "2126",
+  "title": "Destroying Asteroids",
+  "goal": "Determine whether an asteroid can absorb every incoming asteroid.",
+  "strategy": "Absorbing a smaller asteroid only increases mass, so process the smallest remaining one first. If even that one is too heavy, no other remaining choice can help.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether an asteroid can absorb every incoming asteroid.",
+    "inspect": "Absorbing a smaller asteroid only increases mass, so process the smallest remaining one first. If even that one is too heavy, no other remaining choice can help.",
+    "update": "Absorbing a smaller asteroid only increases mass, so process the smallest remaining one first. If even that one is too heavy, no other remaining choice can help.",
+    "done": "Determine whether an asteroid can absorb every incoming asteroid."
+  },
+  "edgeCases": [
+    "Even the smallest arrival is too heavy",
+    "Equal mass can be absorbed",
+    "A later gap remains too large after small absorptions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

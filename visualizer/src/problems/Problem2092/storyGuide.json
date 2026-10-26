@@ -1,0 +1,31 @@
+{
+  "number": "2092",
+  "title": "Find All People With Secret",
+  "goal": "Find everyone who learns a secret through time-ordered meetings.",
+  "strategy": "At each timestamp, form the meeting graph and spread from every attendee who already knows the secret. Finish the entire same-time connected propagation before advancing time.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find everyone who learns a secret through time-ordered meetings.",
+    "inspect": "At each timestamp, form the meeting graph and spread from every attendee who already knows the secret. Finish the entire same-time connected propagation before advancing time.",
+    "update": "At each timestamp, form the meeting graph and spread from every attendee who already knows the secret. Finish the entire same-time connected propagation before advancing time.",
+    "done": "Find everyone who learns a secret through time-ordered meetings."
+  },
+  "edgeCases": [
+    "Earlier uninformed meetings do not reconnect retroactively",
+    "Separate same-time components propagate independently",
+    "A meeting directly with zero shares the secret"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

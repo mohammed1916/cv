@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/perfect-squares.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './PerfectSquares.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -100,10 +103,10 @@ function generateSteps(n) {
     return steps
 }
 
-const EXAMPLES = getExamples('perfect-squares')
+const EXAMPLES = authoredExamples0
 
 export default function PerfectSquaresVisualizer() {
-    const [nInput, setNInput] = useState('7')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
 
     const { n, inputError } = useMemo(() => {
         try {
@@ -143,7 +146,7 @@ export default function PerfectSquaresVisualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'input', title: 'Input & Examples' },
       { id: 'state', title: 'Current State', dockMode: 'split-right' },
-      { id: 'code', title: 'Solution Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Solution Trace', dockMode: 'split-right' },
       { id: 'visualization', title: 'DP Array Visualization', dockMode: 'split-bottom' },
     ], [])
     const panelContents = useMemo(() => ({
@@ -155,15 +158,7 @@ export default function PerfectSquaresVisualizer() {
                             </button>
                         ))}
                     </div>
-                    <div className="ps-inputs">
-                        <label className="ps-input-label">n</label>
-                        <input
-                            className="ps-input"
-                            value={nInput}
-                            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-                            placeholder="7"
-                        />
-                    </div>
+                    
                     {inputError && <div className="ps-error-box">{inputError}</div>}
                 </div>),
       state: (<div className="ps-panel-body">

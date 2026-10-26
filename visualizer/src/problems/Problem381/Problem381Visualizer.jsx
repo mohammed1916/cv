@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--381.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -184,23 +186,7 @@ function generateSteps(n, blacklist) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple',
-    n: 7,
-    blacklist: [2],
-  },
-  {
-    label: 'Multiple Blacklist',
-    n: 10,
-    blacklist: [1, 3, 5, 7],
-  },
-  {
-    label: 'Upper Range',
-    n: 10,
-    blacklist: [8, 9],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem381Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -415,9 +401,6 @@ export default function Problem381Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -435,6 +418,9 @@ export default function Problem381Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

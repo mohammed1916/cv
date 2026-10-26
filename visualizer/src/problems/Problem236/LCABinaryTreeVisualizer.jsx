@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/lcabinary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LCABinaryTreeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -111,12 +114,12 @@ function generateSteps(arr, pVal, qVal) {
     return steps
 }
 
-const EXAMPLES = getExamples('lcabinary-tree')
+const EXAMPLES = authoredExamples0
 
 export default function LCABinaryTreeVisualizer() {
-    const [arrInput, setArrInput] = useState('[3,5,1,6,2,0,8,null,null,7,4]')
-    const [pInput, setPInput] = useState('5')
-    const [qInput, setQInput] = useState('1')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
+    const [pInput, setPInput] = useState(String(AUTHORED_INITIAL.p))
+    const [qInput, setQInput] = useState(String(AUTHORED_INITIAL.q))
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
@@ -157,11 +160,7 @@ export default function LCABinaryTreeVisualizer() {
                             <button key={ex.label} className="lcabt-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="lcabt-inputs">
-                        <label>Tree <input className="lcabt-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} /></label>
-                        <label>p <input className="lcabt-input narrow" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
-                        <label>q <input className="lcabt-input narrow" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
-                    </div>
+                    
                     <div className="lcabt-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                         <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                             {edges.map(({ fromId, toId }) => {

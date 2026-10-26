@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/add-two-numbers.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useProblemCode } from '../../hooks/useProblemCode'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './AddTwoNumbersVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -102,11 +105,11 @@ function generateSteps(list1, list2) {
   return steps
 }
 
-const EXAMPLES = getExamples('add-two-numbers')
+const EXAMPLES = authoredExamples0
 
 export default function AddTwoNumbersVisualizer({ problem }) {
-  const [l1Input, setL1Input] = useState('[2, 4, 3]')
-  const [l2Input, setL2Input] = useState('[5, 6, 4]')
+  const [l1Input, setL1Input] = useState(JSON.stringify(AUTHORED_INITIAL.l1))
+  const [l2Input, setL2Input] = useState(JSON.stringify(AUTHORED_INITIAL.l2))
   const codeLines = useProblemCode(problem, 'add-two-numbers')
 
   const { list1, list2, inputError } = useMemo(() => {
@@ -164,7 +167,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
       />
 
     <div className="atn-panel">
-      <div className="atn-panel-head">
+      <div className="vis-panel-head atn-panel-head">
         Linked Lists
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
@@ -181,24 +184,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>l1=</span>
-          <input
-            value={l1Input}
-            onChange={(e) => { setL1Input(e.target.value); handleReset() }}
-            placeholder="[2, 4, 3]"
-            className="atn-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>l2=</span>
-          <input
-            value={l2Input}
-            onChange={(e) => { setL2Input(e.target.value); handleReset() }}
-            placeholder="[5, 6, 4]"
-            className="atn-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-        </div>
+        
 
         <div className="atn-lists-container">
           {/* L1 */}
@@ -274,7 +260,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
 
   const statePanel = (
     <div className="atn-panel">
-      <div className="atn-panel-head">State Variables</div>
+      <div className="vis-panel-head atn-panel-head">State Variables</div>
       <div className="atn-panel-body" style={{ gap: 16 }}>
 
         <div className="atn-var-card carry">
@@ -337,9 +323,6 @@ export default function AddTwoNumbersVisualizer({ problem }) {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -357,6 +340,9 @@ export default function AddTwoNumbersVisualizer({ problem }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={ATN_PATTERNS} />
+      )}
     </>
   )
 
@@ -365,7 +351,7 @@ export default function AddTwoNumbersVisualizer({ problem }) {
     () => [
       { id: 'primary', title: 'Linked Lists', dockMode: 'split-right' },
       { id: 'state',   title: 'State Variables', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

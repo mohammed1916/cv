@@ -1,1 +1,5 @@
-export { default } from './WordSearchIIVisualizer';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./WordSearchIIVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

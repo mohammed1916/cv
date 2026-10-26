@@ -1,0 +1,26 @@
+{
+  "number": "92",
+  "title": "Reverse Linked List II",
+  "goal": "Solve Reverse Linked List II: Reverse Linked List II visualization",
+  "strategy": "Reverse Linked List II visualization",
+  "phases": [
+    "init",
+    "locate_prev",
+    "reverse",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reversing from position one changes the head; preserve links on both sides of the requested inclusive segment."
+  ],
+  "checks": [],
+  "inputRules": [
+    "list must be an array",
+    "left must be a number",
+    "right must be a number"
+  ],
+  "source": [
+    "src/problems/Problem92/index.jsx",
+    "src/problems/Problem92/Visualizer.jsx"
+  ]
+}

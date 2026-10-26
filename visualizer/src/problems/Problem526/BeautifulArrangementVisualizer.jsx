@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/beautiful-arrangement.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './BeautifulArrangementVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -28,7 +31,7 @@ const LINE_PATTERN_MAP = {
   9: 'process'
 }
 
-const EXAMPLES = getExamples('beautiful-arrangement')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(n) {
   const steps = []
@@ -165,7 +168,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -188,7 +191,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Current Arrangement */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Current Arrangement (Position {step?.pos || 0}/{n})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -234,7 +237,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 
       {/* Available Numbers */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Available Numbers</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Available Numbers</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {Array.from({ length: n }, (_, i) => i + 1).map(num => {
             const isAvailable = step && (step.available & (1 << num)) > 0
@@ -253,7 +256,7 @@ function VisualizationPanel({ n, step, applyEx }) {
                   textAlign: 'center',
                   backgroundColor: isCandidate ? '#fecaca' : isAvailable ? 'var(--surface2)' : 'var(--surface)',
                   borderColor: isCandidate ? '#f87171' : isAvailable ? 'var(--border)' : 'var(--text)',
-                  color: isCandidate ? '#7f1d1d' : isAvailable ? 'var(--surface2)' : 'var(--text-muted)',
+                  color: isCandidate ? '#7f1d1d' : isAvailable ? 'var(--text)' : 'var(--text-muted)',
                   opacity: isAvailable ? 1 : 0.5
                 }}
                 animate={{ scale: isCandidate ? 1.2 : 1 }}
@@ -321,7 +324,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 export default function BeautifulArrangementVisualizer() {
   const DEFAULT_N = EXAMPLES[0]?.n ?? 2
 
-  const [nInput, setNInput] = useState(String(DEFAULT_N))
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { n, inputError } = useMemo(() => {
@@ -465,9 +468,6 @@ export default function BeautifulArrangementVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -485,6 +485,9 @@ export default function BeautifulArrangementVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const API_URL = 'https://leetcode.com/api/problems/algorithms/'
+const API_URL = 'https://leetcode.com/api/problems/all/'
 
 const TAG_RULES = [
   { tag: 'Dynamic Programming', patterns: [/dynamic-programming|dp|palindrome|subsequence|knapsack|partition|edit-distance|coin-change|longest/i] },

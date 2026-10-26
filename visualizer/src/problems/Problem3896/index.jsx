@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3896.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -12,14 +16,9 @@ const definition = {
     { id: 'apply', label: 'Pay increments', description: 'Apply the exact value difference to this position.' },
     { id: 'done', label: 'Return minimum', description: 'Sum the independent minimum costs.' },
   ],
-  examples: [
-    { label: 'Two consecutive primes', input: '[1,2,3,4]' },
-    { label: 'Already alternating', input: '[5,6,7,8]' },
-    { label: 'One increment', input: '[4,4]' },
-    { label: 'Prime gap', input: '[90,97]' },
-  ],
+  examples: authoredExamples0,
 }
-export default function AlternatingPrime() {
+function AlternatingPrime() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const committed = i => step.phase === 'done' || i < step.index || i === step.index && step.phase === 'apply'
     return <>
@@ -40,3 +39,5 @@ export default function AlternatingPrime() {
     {['choose', 'apply'].includes(step.phase) && <p>Current target: {step.target}. The candidate row shows every intervening value; the operation batch represents exactly {step.cost} unit increments.</p>}
   </>} />
 }
+
+export default withProblemStory(AlternatingPrime, storyGuide);

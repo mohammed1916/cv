@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/plus-one-linked-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem369Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -22,10 +25,7 @@ const SOLUTION_CODE = getSolutionCode('plus-one-linked-list')
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('plus-one-linked-list', [
-  { label: 'Example 1: 999→1000', values: [9, 9, 9] },
-  { label: 'Example 2: 123→124', values: [1, 2, 3] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 // Build linked list from array of values
 function buildList(values) {
@@ -172,7 +172,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem369Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [valuesInput, setValuesInput] = useState("[9,9,9]");
+  const [valuesInput, setValuesInput] = useState(JSON.stringify(AUTHORED_INITIAL.values));
   const { values, inputError } = useMemo(() => {
     try {
       const parsedValues = JSON.parse(valuesInput); if (!Array.isArray(parsedValues)) throw new Error('values must be an array');

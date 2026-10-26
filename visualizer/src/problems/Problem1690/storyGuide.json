@@ -1,0 +1,31 @@
+{
+  "number": "1690",
+  "title": "Stone Game VII",
+  "goal": "Find the optimal score difference in a game where removing an endpoint scores the remaining interval sum.",
+  "strategy": "For each interval, compare the score earned now minus the opponent best difference on the smaller interval. Prefix sums provide both remaining sums quickly.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the optimal score difference in a game where removing an endpoint scores the remaining interval sum.",
+    "inspect": "For each interval, compare the score earned now minus the opponent best difference on the smaller interval. Prefix sums provide both remaining sums quickly.",
+    "update": "For each interval, compare the score earned now minus the opponent best difference on the smaller interval. Prefix sums provide both remaining sums quickly.",
+    "done": "Find the optimal score difference in a game where removing an endpoint scores the remaining interval sum."
+  },
+  "edgeCases": [
+    "Two stones choose the greater remaining value",
+    "Equal stones",
+    "Large values at both ends"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

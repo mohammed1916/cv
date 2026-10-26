@@ -1,0 +1,26 @@
+{
+  "number": "509",
+  "title": "Fibonacci Number",
+  "goal": "Solve Fibonacci Number: Compute the n-th Fibonacci number using dynamic programming.",
+  "strategy": "Compute the n-th Fibonacci number using dynamic programming.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 0",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "n == 1",
+      "outcome": "return 1"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem509/index.jsx",
+    "src/problems/Problem509/FibonacciNumberVisualizer.jsx"
+  ]
+}

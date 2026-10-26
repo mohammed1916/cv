@@ -1,0 +1,19 @@
+{
+  "number": "497",
+  "title": "Random Point in Rectangles",
+  "goal": "Solve Random Point in Rectangles: Generate random point in non-overlapping rectangles.",
+  "strategy": "Generate random point in non-overlapping rectangles.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Choose rectangles in proportion to their number of integer points, including their boundary coordinates."
+  ],
+  "checks": [],
+  "inputRules": [
+    "rects must be an array"
+  ],
+  "source": [
+    "src/problems/Problem497/index.jsx",
+    "src/problems/Problem497/Problem497Visualizer.jsx"
+  ]
+}

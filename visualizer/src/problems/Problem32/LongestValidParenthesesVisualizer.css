@@ -8,12 +8,12 @@
   min-height: 480px;
   gap: 0;
   overflow: hidden;
-  background-color: #fafafa;
+  background-color: var(--bg);
 }
 
 .lvp-hero {
   padding: 24px 32px;
-  background-color: white;
+  background-color: var(--surface);
   border-bottom: 1px solid var(--text);
 }
 
@@ -34,7 +34,7 @@
   margin-bottom: 12px;
   font-size: 28px;
   font-weight: 700;
-  color: var(--surface2);
+  color: var(--text);
 }
 
 .lvp-hero-copy p {
@@ -45,7 +45,7 @@
 
 .lvp-panel {
   padding: 16px;
-  background-color: white;
+  background-color: var(--surface);
 }
 
 .lvp-panel-body {
@@ -63,7 +63,7 @@
 .lvp-label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--surface2);
+  color: var(--text);
 }
 
 .lvp-input {
@@ -73,7 +73,7 @@
   font-size: 13px;
   font-family: monospace;
   background-color: white;
-  color: var(--surface2);
+  color: var(--text-on-light);
 }
 
 .lvp-input:focus {
@@ -93,7 +93,7 @@
   border: 1px solid var(--border);
   border-radius: 4px;
   background-color: var(--surface2);
-  color: var(--surface2);
+  color: var(--text);
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -102,6 +102,7 @@
 .lvp-example-btn:hover {
   background-color: var(--text);
   border-color: var(--text-muted);
+  color: var(--text-inverse);
 }
 
 .lvp-example-btn.active {
@@ -130,7 +131,7 @@
   font-size: 14px;
   font-weight: bold;
   border-radius: 4px;
-  color: var(--surface2);
+  color: var(--text-on-light);
 }
 
 .lvp-char.open {
@@ -164,7 +165,7 @@
   border-radius: 4px;
   font-size: 13px;
   font-weight: bold;
-  color: var(--surface2);
+  color: var(--text-on-light);
 }
 
 .lvp-stack-item.base {

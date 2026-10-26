@@ -1,0 +1,31 @@
+{
+  "number": "1100",
+  "title": "Find K-Length Substrings With No Repeated Characters",
+  "goal": "Count length-k substrings without repeated characters.",
+  "strategy": "Keep counts for exactly the active window. A complete window contains only distinct characters when its map has k keys.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count length-k substrings without repeated characters.",
+    "inspect": "Keep counts for exactly the active window. A complete window contains only distinct characters when its map has k keys.",
+    "update": "Keep counts for exactly the active window. A complete window contains only distinct characters when its map has k keys.",
+    "done": "Count length-k substrings without repeated characters."
+  },
+  "edgeCases": [
+    "Width exceeds the whole string",
+    "Every character is the same",
+    "Single-character windows always qualify"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

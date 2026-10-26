@@ -1,0 +1,31 @@
+{
+  "number": "1756",
+  "title": "Design Most Recently Used Queue",
+  "goal": "Process queue fetches that move the requested current-position item to the back.",
+  "strategy": "Positions are one-based and change after each fetch. Remove the indexed value, append it, and record which value was fetched.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Process queue fetches that move the requested current-position item to the back.",
+    "inspect": "Positions are one-based and change after each fetch. Remove the indexed value, append it, and record which value was fetched.",
+    "update": "Positions are one-based and change after each fetch. Remove the indexed value, append it, and record which value was fetched.",
+    "done": "Process queue fetches that move the requested current-position item to the back."
+  },
+  "edgeCases": [
+    "Fetching last leaves order unchanged",
+    "Always fetch first",
+    "Single item queue"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1992",
+  "title": "Find All Groups of Farmland",
+  "goal": "Find the corners of each rectangular farmland group.",
+  "strategy": "An unvisited farmland cell encountered row by row is the upper-left corner of its rectangle. Extend down and right to its boundary, then mark the whole rectangle visited.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the corners of each rectangular farmland group.",
+    "inspect": "An unvisited farmland cell encountered row by row is the upper-left corner of its rectangle. Extend down and right to its boundary, then mark the whole rectangle visited.",
+    "update": "An unvisited farmland cell encountered row by row is the upper-left corner of its rectangle. Extend down and right to its boundary, then mark the whole rectangle visited.",
+    "done": "Find the corners of each rectangular farmland group."
+  },
+  "edgeCases": [
+    "An all-zero field has no groups",
+    "The entire field is one rectangle",
+    "Single cells can touch diagonally"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

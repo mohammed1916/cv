@@ -1,0 +1,31 @@
+{
+  "number": "600",
+  "title": "Non-negative Integers without Consecutive Ones",
+  "goal": "Count nonnegative integers at most n whose binary digits never contain adjacent ones.",
+  "strategy": "Precompute counts of valid suffixes by length. Scan the upper bound from its highest bit: whenever it has a one, replacing that bit with zero admits every valid suffix. Two consecutive ones end the remaining equal-prefix branch.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nonnegative integers at most n whose binary digits never contain adjacent ones.",
+    "inspect": "Precompute counts of valid suffixes by length. Scan the upper bound from its highest bit: whenever it has a one, replacing that bit with zero admits every valid suffix. Two consecutive ones end the remaining equal-prefix branch.",
+    "update": "Precompute counts of valid suffixes by length. Scan the upper bound from its highest bit: whenever it has a one, replacing that bit with zero admits every valid suffix. Two consecutive ones end the remaining equal-prefix branch.",
+    "done": "Count nonnegative integers at most n whose binary digits never contain adjacent ones."
+  },
+  "edgeCases": [
+    "Consecutive leading ones end the equal-prefix scan early",
+    "The smallest positive bound includes zero and one",
+    "An alternating bound is itself valid and must be included"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1769",
+  "title": "Minimum Number of Operations to Move All Balls to Each Box",
+  "goal": "Compute moves needed to gather all balls into each box independently.",
+  "strategy": "A left-to-right scan accumulates movement cost from balls on the left; a mirrored scan adds costs from the right. Each step increases cost by the number of balls passed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute moves needed to gather all balls into each box independently.",
+    "inspect": "A left-to-right scan accumulates movement cost from balls on the left; a mirrored scan adds costs from the right. Each step increases cost by the number of balls passed.",
+    "update": "A left-to-right scan accumulates movement cost from balls on the left; a mirrored scan adds costs from the right. Each step increases cost by the number of balls passed.",
+    "done": "Compute moves needed to gather all balls into each box independently."
+  },
+  "edgeCases": [
+    "No balls",
+    "A ball in every box",
+    "Single occupied box"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "number": "1307",
+  "title": "Verbal Arithmetic Puzzle",
+  "goal": "Solve Verbal Arithmetic Puzzle: Assign distinct digits to letters while satisfying column sums and carrying into the next column.",
+  "strategy": "Assign distinct digits to letters while satisfying column sums and carrying into the next column.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Leading letters of multi-character words cannot be zero; a digit cannot belong to two different letters."
+  ],
+  "checks": [
+    {
+      "condition": "idx == len(letters)",
+      "outcome": "return is_valid(mapping, addends, result)"
+    },
+    {
+      "condition": "digit in used",
+      "outcome": "continue"
+    },
+    {
+      "condition": "backtrack(idx + 1)",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem1307/index.jsx",
+    "src/problems/Problem1307/Problem1307Visualizer.jsx"
+  ]
+}

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/find-all-anagrams.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../../config/examplesRegistry'
+
 import ManualInputPanel from '../../../components/shared/ManualInputPanel'
 import "./FindAllAnagramsVisualizer.css";
 import { createPortal } from 'react-dom'
@@ -28,7 +29,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('find-all-anagrams');
+const EXAMPLES = authoredExamples0;
 
 function countEq(a, b) {
     if (Object.keys(a).length !== Object.keys(b).length) return false;
@@ -107,7 +108,7 @@ export default function FindAllAnagramsVisualizer() {
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: ex.label === e.label ? '#dbeafe' : 'var(--surface2)' }}>{e.label}</button>)}
                 </div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--surface2)' }}>s = "{ex.s}" | p = "{ex.p}"</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text)' }}>s = "{ex.s}" | p = "{ex.p}"</div>
                 <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                     {ex.s.split("").map((ch, i) => {
                         const inWin = step && i >= step.winStart && i <= step.winEnd;
@@ -117,7 +118,7 @@ export default function FindAllAnagramsVisualizer() {
                             <motion.div key={i} animate={{ scale: inWin ? 1.12 : 1 }} style={{
                                 width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 backgroundColor: isResult ? '#dcfce7' : inWin ? (isMatch ? '#86efac' : '#fbbf24') : '#f3f4f6',
-                                border: inWin ? '2px solid #0ea5e9' : '1px solid var(--border)', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                                border: inWin ? '2px solid #0ea5e9' : '1px solid var(--border)', borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
                             }}>
                                 {ch}
                             </motion.div>

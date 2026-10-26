@@ -1,0 +1,31 @@
+{
+  "number": "1890",
+  "title": "The Latest Login in 2020",
+  "goal": "Find each user latest login within calendar year 2020.",
+  "strategy": "Filter timestamps to 2020 before computing each group maximum. Users with no qualifying login produce no row.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find each user latest login within calendar year 2020.",
+    "inspect": "Filter timestamps to 2020 before computing each group maximum. Users with no qualifying login produce no row.",
+    "update": "Filter timestamps to 2020 before computing each group maximum. Users with no qualifying login produce no row.",
+    "done": "Find each user latest login within calendar year 2020."
+  },
+  "edgeCases": [
+    "Start inclusive and following year exclusive",
+    "No login in target year",
+    "Empty Logins table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

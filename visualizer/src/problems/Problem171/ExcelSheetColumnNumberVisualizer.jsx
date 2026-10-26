@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--171.js';
+
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -17,10 +19,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = [
-  { label: 'Example 1', s: 'A' },
-  { label: 'Example 2', s: 'AB' },
-]
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def titleToNumber(s):' },
@@ -141,9 +140,6 @@ export default function ExcelSheetColumnNumberVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.activeLine} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -161,6 +157,9 @@ export default function ExcelSheetColumnNumberVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.activeLine} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -169,7 +168,7 @@ export default function ExcelSheetColumnNumberVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '🔢 Excel Column', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

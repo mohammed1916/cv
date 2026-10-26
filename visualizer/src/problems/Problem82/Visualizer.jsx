@@ -1,4 +1,8 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/local--82.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -14,13 +18,7 @@ import PatternLegend from "../../components/PatternLegend"
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./Visualizer.css"
 
-const EXAMPLES = [
-  { label: 'Mixed duplicates', input: [1, 2, 3, 3, 4, 4, 5] },
-  { label: 'Leading run', input: [1, 1, 1, 2, 3] },
-  { label: 'Trailing run', input: [1, 2, 2, 2] },
-  { label: 'No duplicates', input: [1, 2, 3] },
-  { label: 'Empty list', input: [] },
-]
+const EXAMPLES = authoredExamples0
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
   { line: 2, text: "    def deleteDuplicates(self, head: ListNode) -> ListNode:" },
@@ -400,7 +398,7 @@ function RemoveDuplicatesFromListState({ step }) {
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function RemoveDuplicatesFromListVisualizer() {
-  const [inputStr, setInputStr] = useState("[1,2,3,3,4,4,5]")
+  const [inputStr, setInputStr] = useState(JSON.stringify(AUTHORED_INITIAL.input))
 
   const { list, inputError } = useMemo(() => {
     try {
@@ -467,9 +465,6 @@ export default function RemoveDuplicatesFromListVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -490,6 +485,9 @@ export default function RemoveDuplicatesFromListVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={_PATTERNS} />
+      )}
     </>
   )
 
@@ -500,7 +498,7 @@ export default function RemoveDuplicatesFromListVisualizer() {
       { id: 'input', title: 'Input' },
       { id: "primary", title: "Visualization", dockMode: "split-bottom" },
       { id: "code", title: "Code", dockMode: "split-right" },
-      { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
+      { id: "status", title: "Status", dockMode: "split-right", ratio: 0.08 },
     ],
     []
   )

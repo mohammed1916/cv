@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--364.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -165,23 +167,7 @@ function generateSteps(nestedList) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Simple Nesting',
-    list: [[1, 1], 2, [1, 1]],
-    description: 'Mixed integers and single nesting',
-  },
-  {
-    label: 'Example 2: Deep Nesting',
-    list: [1, [4, [6]]],
-    description: 'Progressive depth increase',
-  },
-  {
-    label: 'Example 3: Complex',
-    list: [[1], [[2]], [[[3]]], [[[[4]]]]],
-    description: 'Increasing nesting depths',
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem364Visualizer() {
   const [exIdx, setExIdx] = useState(0)

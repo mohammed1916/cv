@@ -1,0 +1,31 @@
+{
+  "number": "1318",
+  "title": "Minimum Flips to Make a OR b Equal to c",
+  "goal": "Count the fewest input bit flips needed to make a OR b equal c.",
+  "strategy": "Bits are independent. A target zero requires clearing both input ones, while a target one requires a single flip only if both inputs are zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count the fewest input bit flips needed to make a OR b equal c.",
+    "inspect": "Bits are independent. A target zero requires clearing both input ones, while a target one requires a single flip only if both inputs are zero.",
+    "update": "Bits are independent. A target zero requires clearing both input ones, while a target one requires a single flip only if both inputs are zero.",
+    "done": "Count the fewest input bit flips needed to make a OR b equal c."
+  },
+  "edgeCases": [
+    "Already equal OR result",
+    "Target zero clears both sources",
+    "Both sources zero need target bits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

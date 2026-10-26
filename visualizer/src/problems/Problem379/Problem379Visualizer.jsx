@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--379.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem379.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -102,42 +104,7 @@ function generateSteps(maxNumbers, operations) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    maxNumbers: 5,
-    operations: [
-      { type: 'get' },
-      { type: 'get' },
-      { type: 'check', number: 0 },
-      { type: 'get' },
-      { type: 'release', number: 2 },
-      { type: 'check', number: 2 },
-    ],
-  },
-  {
-    label: 'Example 2',
-    maxNumbers: 3,
-    operations: [
-      { type: 'get' },
-      { type: 'get' },
-      { type: 'get' },
-      { type: 'release', number: 0 },
-      { type: 'get' },
-      { type: 'check', number: 1 },
-    ],
-  },
-  {
-    label: 'Example 3',
-    maxNumbers: 4,
-    operations: [
-      { type: 'get' },
-      { type: 'release', number: 0 },
-      { type: 'get' },
-      { type: 'check', number: 0 },
-    ],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem379Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -339,9 +306,6 @@ export default function Problem379Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -359,6 +323,9 @@ export default function Problem379Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

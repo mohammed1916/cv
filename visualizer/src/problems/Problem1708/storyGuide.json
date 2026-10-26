@@ -1,0 +1,31 @@
+{
+  "number": "1708",
+  "title": "Largest Subarray Length K",
+  "goal": "Choose the lexicographically largest contiguous subarray of length k.",
+  "strategy": "Since all values are distinct, competing starts differ at their first value. The largest first value among legal starting positions determines the answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose the lexicographically largest contiguous subarray of length k.",
+    "inspect": "Since all values are distinct, competing starts differ at their first value. The largest first value among legal starting positions determines the answer.",
+    "update": "Since all values are distinct, competing starts differ at their first value. The largest first value among legal starting positions determines the answer.",
+    "done": "Choose the lexicographically largest contiguous subarray of length k."
+  },
+  "edgeCases": [
+    "Entire array is the only candidate",
+    "Length one selects maximum",
+    "First legal start wins"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

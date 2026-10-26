@@ -1,0 +1,31 @@
+{
+  "number": "1865",
+  "title": "Finding Pairs With a Certain Sum",
+  "goal": "Update second-array values and count cross-array index pairs summing to a query total.",
+  "strategy": "Maintain second-array frequencies through updates. Each count query adds the complement frequency for every first-array position, preserving multiplicity.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Update second-array values and count cross-array index pairs summing to a query total.",
+    "inspect": "Maintain second-array frequencies through updates. Each count query adds the complement frequency for every first-array position, preserving multiplicity.",
+    "update": "Maintain second-array frequencies through updates. Each count query adds the complement frequency for every first-array position, preserving multiplicity.",
+    "done": "Update second-array values and count cross-array index pairs summing to a query total."
+  },
+  "edgeCases": [
+    "Repeated values multiply pair counts",
+    "No complementary pair",
+    "One index changes repeatedly"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

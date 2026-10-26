@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--368.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -160,20 +162,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Powers of 2',
-    input: [1, 2, 4, 8],
-  },
-  {
-    label: 'Example 2: Mixed divisors',
-    input: [1, 2, 3, 4, 6],
-  },
-  {
-    label: 'Example 3: Simple case',
-    input: [1, 2],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 function DivisibilityArrows({ sorted, highlighted, currentIdx }) {
   const elementWidth = 60
@@ -401,7 +390,7 @@ export default function Problem368Visualizer() {
             <>
               {/* Status message */}
               <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--surface2)' }}>{step.message}</div>
+                <div style={{ fontWeight: 600, marginBottom: 6, color: 'var(--text)' }}>{step.message}</div>
               </div>
 
               {/* Array and DP state */}
@@ -420,7 +409,7 @@ export default function Problem368Visualizer() {
                           borderRadius: 4,
                           border: isCurrent || isHighlighted ? '2px solid #0ea5e9' : '1px solid var(--border)',
                           backgroundColor: isCurrent ? '#fef08a' : isHighlighted ? '#0ea5e9' : 'var(--surface2)',
-                          color: isHighlighted ? '#fff' : 'var(--surface2)',
+                          color: isHighlighted ? '#fff' : (isCurrent ? 'var(--text-on-light)' : 'var(--text)'),
                           fontSize: 11,
                           fontWeight: 600,
                           textAlign: 'center',

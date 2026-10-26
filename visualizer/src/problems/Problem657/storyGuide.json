@@ -1,0 +1,27 @@
+{
+  "number": "657",
+  "title": "Robot Return to Origin",
+  "goal": "Decide whether the robot returns to its starting position.",
+  "strategy": "Track horizontal and vertical displacement separately. Returning requires both totals to become zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether the robot returns to its starting position.",
+    "inspect": "Track horizontal and vertical displacement separately. Returning requires both totals to become zero.",
+    "update": "Track horizontal and vertical displacement separately. Returning requires both totals to become zero.",
+    "done": "Decide whether the robot returns to its starting position."
+  },
+  "edgeCases": [
+    "One unmatched axis",
+    "Repeated closed loops",
+    "One move"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

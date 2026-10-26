@@ -1,0 +1,31 @@
+{
+  "number": "1518",
+  "title": "Water Bottles",
+  "goal": "Count bottles drinkable using repeated exchanges of empty bottles.",
+  "strategy": "After each exchange, newly consumed bottles become empty again. Preserve the unexchanged remainder and continue while enough empty bottles remain.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count bottles drinkable using repeated exchanges of empty bottles.",
+    "inspect": "After each exchange, newly consumed bottles become empty again. Preserve the unexchanged remainder and continue while enough empty bottles remain.",
+    "update": "After each exchange, newly consumed bottles become empty again. Preserve the unexchanged remainder and continue while enough empty bottles remain.",
+    "done": "Count bottles drinkable using repeated exchanges of empty bottles."
+  },
+  "edgeCases": [
+    "No exchange possible",
+    "Exact first exchange",
+    "Smallest exchange rate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

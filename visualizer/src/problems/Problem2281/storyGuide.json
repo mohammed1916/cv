@@ -1,0 +1,31 @@
+{
+  "number": "2281",
+  "title": "Sum of Total Strength of Wizards",
+  "goal": "Sum minimum strength times total strength over every contiguous group modulo 1000000007.",
+  "strategy": "A monotonic stack assigns every subarray to one minimum occurrence. Prefix sums of prefix sums aggregate the total strengths of all ranges owned by that occurrence without enumerating those ranges.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum minimum strength times total strength over every contiguous group modulo 1000000007.",
+    "inspect": "A monotonic stack assigns every subarray to one minimum occurrence. Prefix sums of prefix sums aggregate the total strengths of all ranges owned by that occurrence without enumerating those ranges.",
+    "update": "A monotonic stack assigns every subarray to one minimum occurrence. Prefix sums of prefix sums aggregate the total strengths of all ranges owned by that occurrence without enumerating those ranges.",
+    "done": "Sum minimum strength times total strength over every contiguous group modulo 1000000007."
+  },
+  "edgeCases": [
+    "Repeated equal minima need a consistent ownership rule",
+    "One strength contributes its own square",
+    "Large strengths require exact modular arithmetic"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

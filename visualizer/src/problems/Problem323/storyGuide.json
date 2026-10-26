@@ -1,0 +1,27 @@
+{
+  "number": "323",
+  "title": "Number of Connected Components in an Undirected Graph",
+  "goal": "Solve Number of Connected Components in an Undirected Graph: Count connected components using union-find.",
+  "strategy": "Count connected components using union-find.",
+  "phases": [
+    "init",
+    "component",
+    "traverse",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "start in visited",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Use { \"n\": 5, \"edges\": [[0, 1], [1, 2]] } with 0 ≤ node < n and n ≤ 12."
+  ],
+  "source": [
+    "src/problems/Problem323/index.jsx",
+    "src/problems/Problem323/NumberofConnectedComponentsinanUndirectedGraphVisualizer.jsx"
+  ]
+}

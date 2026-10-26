@@ -1,0 +1,32 @@
+{
+  "number": "200",
+  "title": "Number of Islands",
+  "goal": "Solve Number of Islands: BFS flood-fill on a 2-D grid — each unvisited land cell seeds a new island count.",
+  "strategy": "BFS flood-fill on a 2-D grid — each unvisited land cell seeds a new island count.",
+  "phases": [
+    "done",
+    "init",
+    "scan",
+    "found_new",
+    "bfs_init",
+    "bfs_pop",
+    "bfs_check_neighbor",
+    "bfs_add_neighbor",
+    "inc_islands"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not grid",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Grid must be a 2D array of strings"
+  ],
+  "source": [
+    "src/problems/Problem200/index.jsx",
+    "src/problems/Problem200/NumberOfIslandsVisualizer.jsx"
+  ]
+}

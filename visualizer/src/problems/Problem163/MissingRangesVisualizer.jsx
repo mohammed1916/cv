@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/missing-ranges.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MissingRangesVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -19,10 +20,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('missing-ranges', [
-  { label: 'Example 1', nums: [0, 1, 3, 50, 75], lower: 0, upper: 99 },
-  { label: 'Example 2', nums: [], lower: 1, upper: 1 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMissingRanges(nums, lower, upper):' },
@@ -254,7 +252,7 @@ function NumberLine({ nums, lower, upper, currentIdx, gap, finalGap }) {
                   : 'none',
               fontSize: 11,
               fontWeight: 600,
-              color: 'var(--code-bg)',
+              color: (isGap || isFinalGap ? 'var(--text-on-light)' : (isNum ? 'var(--text-on-light)' : (isInRange ? 'var(--text-inverse)' : 'var(--text-on-light)'))),
               fontFamily: 'monospace',
             }}
             animate={{ scale: isGap || isFinalGap ? 1.1 : 1 }}
@@ -415,7 +413,6 @@ export default function MissingRangesVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -433,6 +430,7 @@ export default function MissingRangesVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 
@@ -441,7 +439,7 @@ export default function MissingRangesVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '🔍 Missing Ranges', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

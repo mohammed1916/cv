@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/find-peak-element.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -6,7 +9,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./FindPeakElementVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -30,7 +33,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return lo" },
 ];
 
-const EXAMPLES = getExamples('find-peak-element');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
   const steps = [];
@@ -57,7 +60,7 @@ const BAR_MAX_H = 120;
 
 export default function FindPeakElementVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,2,3,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -160,7 +163,6 @@ export default function FindPeakElementVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -171,6 +173,7 @@ export default function FindPeakElementVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 
@@ -180,7 +183,7 @@ export default function FindPeakElementVisualizer() {
     () => [
       { id: 'primary', title: 'Array (bars)', dockMode: 'split-right' },
       { id: 'state',   title: 'Variables', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

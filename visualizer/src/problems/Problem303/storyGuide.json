@@ -1,0 +1,24 @@
+{
+  "number": "303",
+  "title": "Range Sum Query - Immutable",
+  "goal": "Solve Range Sum Query - Immutable: Calculate sum of elements in range using prefix sums.",
+  "strategy": "Calculate sum of elements in range using prefix sums.",
+  "phases": [
+    "init",
+    "build",
+    "query",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An inclusive query uses prefix[right+1] minus prefix[left]; a query beginning at zero still needs the empty prefix."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"nums\": [-2,0,3], \"left\": 0, \"right\": 2 }."
+  ],
+  "source": [
+    "src/problems/Problem303/index.jsx",
+    "src/problems/Problem303/RangeSumQuery-ImmutableVisualizer.jsx"
+  ]
+}

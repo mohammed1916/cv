@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/restore-ip-addresses.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './RestoreIPAddressesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -280,12 +281,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('restore-ip-addresses', [
-  { label: '101023', s: '101023' },
-  { label: '0000', s: '0000' },
-  { label: '1111', s: '1111' },
-  { label: '25525511135', s: '25525511135' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function RestoreIPAddressesVisualizer() {
   const [input, setInput] = useState('25525511135')
@@ -476,9 +472,6 @@ export default function RestoreIPAddressesVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -496,6 +489,9 @@ export default function RestoreIPAddressesVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={RESTOREIPADDRESSES_PATTERNS} />
+      )}
     </>
   )
 
@@ -505,7 +501,7 @@ export default function RestoreIPAddressesVisualizer() {
     () => [
       { id: 'primary', title: 'Input', dockMode: 'split-right' },
       { id: 'state', title: 'Results', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

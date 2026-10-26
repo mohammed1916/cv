@@ -1,0 +1,28 @@
+{
+  "number": "380",
+  "title": "Insert Delete GetRandom O(1)",
+  "goal": "Solve Insert Delete GetRandom O(1): Combine an array with a value-to-index map; remove by swapping with the last element so random indexing stays uniform.",
+  "strategy": "Combine an array with a value-to-index map; remove by swapping with the last element so random indexing stays uniform.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Inserting a duplicate or removing a missing value reports failure without changing the set."
+  ],
+  "checks": [
+    {
+      "condition": "val in self.map",
+      "outcome": "return False"
+    },
+    {
+      "condition": "val not in self.map",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "operations must be an array"
+  ],
+  "source": [
+    "src/problems/Problem380/index.jsx",
+    "src/problems/Problem380/Problem380Visualizer.jsx"
+  ]
+}

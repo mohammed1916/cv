@@ -1,0 +1,31 @@
+{
+  "number": "426",
+  "title": "Convert Binary Search Tree to Sorted Doubly Linked List",
+  "goal": "Convert a binary search tree into a sorted circular doubly linked list using the original nodes.",
+  "strategy": "Inorder traversal gives sorted node order. Reuse each node by linking its left pointer to its predecessor and right pointer to its successor, then close the first and last links into a circle.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert a binary search tree into a sorted circular doubly linked list using the original nodes.",
+    "inspect": "Inorder traversal gives sorted node order. Reuse each node by linking its left pointer to its predecessor and right pointer to its successor, then close the first and last links into a circle.",
+    "update": "Inorder traversal gives sorted node order. Reuse each node by linking its left pointer to its predecessor and right pointer to its successor, then close the first and last links into a circle.",
+    "done": "Convert a binary search tree into a sorted circular doubly linked list using the original nodes."
+  },
+  "edgeCases": [
+    "One original node links to itself in both directions",
+    "A skewed tree still produces sorted circular order",
+    "An empty tree produces an empty list"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

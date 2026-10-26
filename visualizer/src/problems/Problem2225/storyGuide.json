@@ -1,0 +1,31 @@
+{
+  "number": "2225",
+  "title": "Find Players With Zero or One Losses",
+  "goal": "Find players with no losses and players with exactly one loss.",
+  "strategy": "Every winner must be recorded even before losing, while each match increments only the loser count. Classify the final counts and sort the two output groups.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find players with no losses and players with exactly one loss.",
+    "inspect": "Every winner must be recorded even before losing, while each match increments only the loser count. Classify the final counts and sort the two output groups.",
+    "update": "Every winner must be recorded even before losing, while each match increments only the loser count. Classify the final counts and sort the two output groups.",
+    "done": "Find players with no losses and players with exactly one loss."
+  },
+  "edgeCases": [
+    "One match separates an undefeated winner and one-loss player",
+    "A cycle leaves every player with one loss",
+    "A frequently losing player belongs to neither output group"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

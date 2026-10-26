@@ -1,0 +1,31 @@
+{
+  "number": "1464",
+  "title": "Maximum Product of Two Elements in an Array",
+  "goal": "Maximize the product of two distinct-position values after subtracting one from each.",
+  "strategy": "All values are positive, so the two largest values maximize both nonnegative factors. Track two positions even when the values are equal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the product of two distinct-position values after subtracting one from each.",
+    "inspect": "All values are positive, so the two largest values maximize both nonnegative factors. Track two positions even when the values are equal.",
+    "update": "All values are positive, so the two largest values maximize both nonnegative factors. Track two positions even when the values are equal.",
+    "done": "Maximize the product of two distinct-position values after subtracting one from each."
+  },
+  "edgeCases": [
+    "Equal maxima can use distinct positions",
+    "Two smallest allowed values",
+    "Exactly two input positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

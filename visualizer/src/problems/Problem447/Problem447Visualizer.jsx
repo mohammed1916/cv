@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/number-of-boomerangs.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -44,11 +45,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('number-of-boomerangs', [
-  { label: 'Example 1', points: [[0, 0], [1, 0], [2, 0]], expected: 2 },
-  { label: 'Example 2', points: [[1, 1], [2, 2], [3, 3]], expected: 2 },
-  { label: 'Example 3', points: [[0, 0], [1, 1], [1, 1]], expected: 2 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },
@@ -168,7 +165,7 @@ function snippetIdForPhase(phase) {
 function PointsVisualizer({ points, centerIdx, otherIdx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Points (2D Plot)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -207,7 +204,7 @@ function DistanceMap({ distMap }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Distance Map (center iteration)
       </header>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -245,64 +242,8 @@ function VisualizationPanel({ step, points, EXAMPLES, handleExampleClick, points
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
-        </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => handleExampleClick(ex)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid var(--border)',
-                backgroundColor: 'var(--surface2)',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Points (format: [x,y] separated by spaces, e.g., [0,0] [1,0] [2,0])
-        </label>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <input
-            value={pointsInput}
-            onChange={(e) => { setPointsInput(e.target.value); handleReset() }}
-            placeholder="[0,0] [1,0] [2,0]"
-            style={{
-              flex: 1,
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-          <button
-            onClick={handleReset}
-            style={{
-              padding: '8px 10px',
-              backgroundColor: 'var(--primary-glow)',
-              color: 'var(--text)',
-              border: '1px solid var(--primary)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            Reset
-          </button>
         </div>
       </div>
 

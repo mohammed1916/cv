@@ -1,5 +1,8 @@
+import authoredExamples0 from '../../config/examples/longest-substring-k-repeating.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -136,15 +139,11 @@ function generateSteps(s, k) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('longest-substring-k-repeating', [
-  { label: 'Example 1', s: 'aaab', k: 3 },
-  { label: 'Example 2', s: 'ababbc', k: 2 },
-  { label: 'Example 3', s: 'aaabccccaabbaac', k: 3 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem395Visualizer() {
-  const [sInput, setSInput] = useState('aaab')
-  const [kInput, setKInput] = useState('3')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
 
   const { s, k, inputError } = useMemo(() => {
     try {
@@ -306,9 +305,6 @@ export default function Problem395Visualizer() {
         {panelDivs.code && createPortal(codePanel, panelDivs.code)}
       </>}
         <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -326,6 +322,9 @@ export default function Problem395Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </>
   )

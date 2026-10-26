@@ -1,0 +1,33 @@
+{
+  "number": "553",
+  "title": "Optimal Division",
+  "goal": "Solve Optimal Division: Given an array of positive integers, find the largest result by inserting division operators between array elements. The key insight is that to maximize division, use the pattern: num[0] / (num[1] / num[2] / ... / num[n-1]).",
+  "strategy": "Given an array of positive integers, find the largest result by inserting division operators between array elements. The key insight is that to maximize division, use the pattern: num[0] / (num[1] / num[2] / ... / num[n-1]).",
+  "phases": [
+    "setup",
+    "basecase_one",
+    "basecase_two",
+    "optimal",
+    "compute",
+    "return"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 1",
+      "outcome": "return str(nums[0])"
+    },
+    {
+      "condition": "n == 2",
+      "outcome": "return f\"{nums[0]}/{nums[1]}\""
+    }
+  ],
+  "inputRules": [
+    "must be an array"
+  ],
+  "source": [
+    "src/problems/Problem553/index.jsx",
+    "src/problems/Problem553/OptimalDivisionVisualizer.jsx"
+  ]
+}

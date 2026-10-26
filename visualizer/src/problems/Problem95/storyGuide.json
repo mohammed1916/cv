@@ -1,0 +1,28 @@
+{
+  "number": "95",
+  "title": "Unique Binary Search Trees II",
+  "goal": "Solve Unique Binary Search Trees II: Unique Binary Search Trees II visualization",
+  "strategy": "Unique Binary Search Trees II visualization",
+  "phases": [
+    "base",
+    "choose_root",
+    "build_subtrees",
+    "combine",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "start > end",
+      "outcome": "return [None]"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem95/index.jsx",
+    "src/problems/Problem95/Visualizer.jsx"
+  ]
+}

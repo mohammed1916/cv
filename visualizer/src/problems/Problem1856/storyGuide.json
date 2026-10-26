@@ -1,0 +1,31 @@
+{
+  "number": "1856",
+  "title": "Maximum Subarray Min-Product",
+  "goal": "Maximize subarray sum times its minimum, reducing only the final maximum modulo the required prime.",
+  "strategy": "A monotonic stack finds each minimum candidate widest eligible interval. Positive values make the widest interval best for that fixed minimum, and prefix sums supply its total.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize subarray sum times its minimum, reducing only the final maximum modulo the required prime.",
+    "inspect": "A monotonic stack finds each minimum candidate widest eligible interval. Positive values make the widest interval best for that fixed minimum, and prefix sums supply its total.",
+    "update": "A monotonic stack finds each minimum candidate widest eligible interval. Positive values make the widest interval best for that fixed minimum, and prefix sums supply its total.",
+    "done": "Maximize subarray sum times its minimum, reducing only the final maximum modulo the required prime."
+  },
+  "edgeCases": [
+    "All equal values use full array",
+    "Single value is squared",
+    "Increasing values flush at the sentinel"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

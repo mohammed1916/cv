@@ -1,0 +1,27 @@
+{
+  "number": "978",
+  "title": "Longest Turbulent Subarray",
+  "goal": "Find the longest interval of alternating strict comparisons.",
+  "strategy": "Opposite nonzero comparison signs extend a run. Equality resets to one; a repeated direction restarts at two.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest interval of alternating strict comparisons.",
+    "inspect": "Opposite nonzero comparison signs extend a run. Equality resets to one; a repeated direction restarts at two.",
+    "update": "Opposite nonzero comparison signs extend a run. Equality resets to one; a repeated direction restarts at two.",
+    "done": "Find the longest interval of alternating strict comparisons."
+  },
+  "edgeCases": [
+    "All equal",
+    "Strictly increasing",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

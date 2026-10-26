@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/valid-parentheses.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ValidParenthesesVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 
@@ -80,7 +81,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamples('valid-parentheses')
+const EXAMPLES = authoredExamples0
 
 export default function ValidParenthesesVisualizer() {
   const [input, setInput] = useState('()[]{}')
@@ -141,10 +142,10 @@ export default function ValidParenthesesVisualizer() {
 
   const playbackPanel = (
     <>
+      <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       {showPatternOverlay && (
         <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDPARENTHESES_PATTERNS} />
       )}
-      <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(e) => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Pattern" showPatternOverlayToggle />
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </>
   )
@@ -155,7 +156,7 @@ export default function ValidParenthesesVisualizer() {
     () => [
       { id: 'primary', title: 'Bracket Dance', dockMode: 'split-right' },
       { id: 'state', title: 'Stack', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

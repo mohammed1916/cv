@@ -1,0 +1,31 @@
+{
+  "number": "1857",
+  "title": "Largest Color Value in a Directed Graph",
+  "goal": "Find the greatest count of one color on a directed path, or -1 if a cycle exists.",
+  "strategy": "Topological traversal ensures all incoming path counts are available. Propagate one best count per color to successors; vertices left unprocessed reveal a cycle.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest count of one color on a directed path, or -1 if a cycle exists.",
+    "inspect": "Topological traversal ensures all incoming path counts are available. Propagate one best count per color to successors; vertices left unprocessed reveal a cycle.",
+    "update": "Topological traversal ensures all incoming path counts are available. Propagate one best count per color to successors; vertices left unprocessed reveal a cycle.",
+    "done": "Find the greatest count of one color on a directed path, or -1 if a cycle exists."
+  },
+  "edgeCases": [
+    "Self-loop is a cycle",
+    "Disconnected DAG components",
+    "A cycle hidden beside an acyclic component"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2208",
+  "title": "Minimum Operations to Halve Array Sum",
+  "goal": "Halve the total array sum using the fewest individual halving operations.",
+  "strategy": "Halving the current largest value gives the largest immediate reduction. Keep a max-heap, repeatedly halve its maximum, and stop when accumulated reduction reaches half the original sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Halve the total array sum using the fewest individual halving operations.",
+    "inspect": "Halving the current largest value gives the largest immediate reduction. Keep a max-heap, repeatedly halve its maximum, and stop when accumulated reduction reaches half the original sum.",
+    "update": "Halving the current largest value gives the largest immediate reduction. Keep a max-heap, repeatedly halve its maximum, and stop when accumulated reduction reaches half the original sum.",
+    "done": "Halve the total array sum using the fewest individual halving operations."
+  },
+  "edgeCases": [
+    "One value needs exactly one halving",
+    "Equal values share the reduction work",
+    "One dominant value is not always enough for a single operation"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

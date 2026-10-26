@@ -1,0 +1,27 @@
+{
+  "number": "371",
+  "title": "Sum of Two Integers",
+  "goal": "Solve Sum of Two Integers: Separate addition into XOR sum bits and shifted carry bits, repeating until no carry remains.",
+  "strategy": "Separate addition into XOR sum bits and shifted carry bits, repeating until no carry remains.",
+  "phases": [
+    "and-operation",
+    "binary-representation",
+    "complete",
+    "shift-carry",
+    "update-variables",
+    "xor-operation"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Negative inputs require the intended fixed-width signed representation; carry handling cannot use unbounded sign extension."
+  ],
+  "checks": [],
+  "inputRules": [
+    "a must be a number",
+    "b must be a number"
+  ],
+  "source": [
+    "src/problems/Problem371/index.jsx",
+    "src/problems/Problem371/Problem371Visualizer.jsx"
+  ]
+}

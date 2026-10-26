@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--413.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,11 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  { label: 'Small', nums: [1, 2, 3], expected: 1 },
-  { label: 'Medium', nums: [1, 2, 3, 4], expected: 3 },
-  { label: 'Large', nums: [1, 2, 3, 4, 5, 6], expected: 9 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums) {
   const steps = []
@@ -142,7 +140,7 @@ function ArithmeticSlicesVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Arithmetic Slices Counting</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Arithmetic Slices Counting</div>
 
       {/* Input array */}
       <div>
@@ -192,7 +190,7 @@ function ArithmeticSlicesVisualization({ nums, step }) {
                 border: `2px solid ${step?.currentI === idx ? '#f59e0b' : 'var(--border)'}`,
                 fontSize: 13,
                 fontWeight: 700,
-                color: 'var(--surface2)',
+                color: (step?.currentI === idx ? 'var(--text-on-light)' : 'var(--text)'),
               }}>
                 {dp[idx]}
               </div>
@@ -293,7 +291,7 @@ export default function Problem413Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

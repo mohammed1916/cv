@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/local--208.js';
+
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -38,12 +40,7 @@ const SOLUTION_CODE = [
   { line: 18, text: "        return node.is_end" },
 ]
 
-const EXAMPLES = [
-  { label: 'Insert new word', word: 'apt', operation: 'insert' },
-  { label: 'Find full word', word: 'apple', operation: 'search' },
-  { label: 'Prefix only', word: 'ap', operation: 'search' },
-  { label: 'Missing word', word: 'banana', operation: 'search' },
-]
+const EXAMPLES = authoredExamples0
 
 function buildTrie(words) {
   const root = { children: {}, isEnd: false, val: "ROOT" }

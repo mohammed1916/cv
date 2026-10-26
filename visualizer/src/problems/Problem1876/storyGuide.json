@@ -1,0 +1,31 @@
+{
+  "number": "1876",
+  "title": "Substrings of Size Three with Distinct Characters",
+  "goal": "Count length-three substrings with three distinct characters.",
+  "strategy": "Slide a three-character window; the window qualifies precisely when its character set has size three.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count length-three substrings with three distinct characters.",
+    "inspect": "Slide a three-character window; the window qualifies precisely when its character set has size three.",
+    "update": "Slide a three-character window; the window qualifies precisely when its character set has size three.",
+    "done": "Count length-three substrings with three distinct characters."
+  },
+  "edgeCases": [
+    "Fewer than three characters",
+    "Every window repeats a character",
+    "Exactly one good window"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

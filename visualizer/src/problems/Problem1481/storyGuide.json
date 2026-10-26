@@ -1,0 +1,31 @@
+{
+  "number": "1481",
+  "title": "Least Number of Unique Integers after K Removals",
+  "goal": "Minimize the number of distinct integers after exactly k removals.",
+  "strategy": "A distinct value disappears only when its whole frequency bucket is removed. Spend deletions on the smallest buckets first; leftover partial deletions cannot remove another value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the number of distinct integers after exactly k removals.",
+    "inspect": "A distinct value disappears only when its whole frequency bucket is removed. Spend deletions on the smallest buckets first; leftover partial deletions cannot remove another value.",
+    "update": "A distinct value disappears only when its whole frequency bucket is removed. Spend deletions on the smallest buckets first; leftover partial deletions cannot remove another value.",
+    "done": "Minimize the number of distinct integers after exactly k removals."
+  },
+  "edgeCases": [
+    "Keep every value",
+    "Remove everything",
+    "Partial group remains"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

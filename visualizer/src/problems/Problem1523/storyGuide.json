@@ -1,0 +1,31 @@
+{
+  "number": "1523",
+  "title": "Count Odd Numbers in an Interval Range",
+  "goal": "Count odd integers in an inclusive interval.",
+  "strategy": "Count odds through high and subtract odds strictly before low. This handles odd and even endpoints without enumerating the interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count odd integers in an inclusive interval.",
+    "inspect": "Count odds through high and subtract odds strictly before low. This handles odd and even endpoints without enumerating the interval.",
+    "update": "Count odds through high and subtract odds strictly before low. This handles odd and even endpoints without enumerating the interval.",
+    "done": "Count odd integers in an inclusive interval."
+  },
+  "edgeCases": [
+    "Single odd value",
+    "Single even value",
+    "Interval includes zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

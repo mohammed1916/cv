@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/local--207.js';
+
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -36,12 +38,7 @@ const SOLUTION_CODE = [
   { line: 16, text: "    return True" },
 ]
 
-const EXAMPLES = [
-  { label: 'Simple chain', numCourses: 4, prerequisites: [[1,0],[2,1],[3,2]] },
-  { label: 'Two-course cycle', numCourses: 2, prerequisites: [[1,0],[0,1]] },
-  { label: 'Independent courses', numCourses: 3, prerequisites: [] },
-  { label: 'Self-cycle', numCourses: 1, prerequisites: [[0,0]] },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(numCourses, prerequisites) {
   const steps = []

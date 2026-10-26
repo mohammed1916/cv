@@ -1,0 +1,31 @@
+{
+  "number": "1266",
+  "title": "Minimum Time Visiting All Points",
+  "goal": "Visit points in order using the least number of unit horizontal, vertical, or diagonal moves.",
+  "strategy": "Use diagonal motion while both coordinates differ, then finish along the remaining axis. Each segment needs the larger absolute coordinate difference.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Visit points in order using the least number of unit horizontal, vertical, or diagonal moves.",
+    "inspect": "Use diagonal motion while both coordinates differ, then finish along the remaining axis. Each segment needs the larger absolute coordinate difference.",
+    "update": "Use diagonal motion while both coordinates differ, then finish along the remaining axis. Each segment needs the larger absolute coordinate difference.",
+    "done": "Visit points in order using the least number of unit horizontal, vertical, or diagonal moves."
+  },
+  "edgeCases": [
+    "One point needs no travel",
+    "Repeated consecutive point",
+    "Horizontal and vertical segments"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "number": "3904",
+  "title": "Smallest Stable Index II",
+  "goal": "Solve Smallest Stable Index II: Use linear-time suffix and prefix extrema to test stability across up to 100,000 elements.",
+  "strategy": "Use linear-time suffix and prefix extrema to test stability across up to 100,000 elements.",
+  "phases": [
+    "start",
+    "suffix",
+    "check",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Initialize inclusive suffix minima.",
+    "suffix": "Build minima from right to left.",
+    "check": "Update the prefix maximum and compare the instability score with k.",
+    "done": "Return the first passing index, or −1 when all fail."
+  },
+  "edgeCases": [
+    "The threshold comparison is inclusive. If every index fails, return -1; the large-input version must not rescan every prefix and suffix."
+  ],
+  "checks": [
+    {
+      "condition": "maximum - suffix[i] <= k",
+      "outcome": "return i"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem3904/index.jsx",
+    "src/problems/families/stableIndex/StableIndexWorkspace.jsx",
+    "src/problems/families/stableIndex/algorithm.js",
+    "src/problems/families/stableIndex/definition.js"
+  ]
+}

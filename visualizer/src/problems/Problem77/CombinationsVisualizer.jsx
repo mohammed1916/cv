@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/combinations.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './CombinationsVisualizer.css'
@@ -95,7 +98,7 @@ function generateSteps(n, k) {
     return steps
 }
 
-const EXAMPLES = getExamples('combinations')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput, setKInput, n, k, inputError, handleReset, step }) {
     return (
@@ -113,34 +116,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
                             ))}
                         </div>
 
-                        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-                            <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>n</label>
-                                <input
-                                    className="comb-input"
-                                    value={nInput}
-                                    onChange={(e) => { setNInput(e.target.value);
-
- handleReset() }}
-                                    placeholder="4"
-                                    type="number"
-                                    min="1"
-                                    max="20"
-                                />
-                            </div>
-                            <div style={{ flex: 1 }}>
-                                <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>k</label>
-                                <input
-                                    className="comb-input"
-                                    value={kInput}
-                                    onChange={(e) => { setKInput(e.target.value); handleReset() }}
-                                    placeholder="2"
-                                    type="number"
-                                    min="1"
-                                    max="20"
-                                />
-                            </div>
-                        </div>
+                        
 
                         <div className="comb-section-label">Available numbers</div>
                         <div className="comb-nums-row">
@@ -192,8 +168,8 @@ function VisualizationPanel({ EXAMPLES, applyExample, nInput, setNInput, kInput,
 }
 
 export default function CombinationsVisualizer() {
-    const [nInput, setNInput] = useState('4')
-    const [kInput, setKInput] = useState('2')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
 
     const { n, k, inputError } = useMemo(() => {
         try {
@@ -256,9 +232,6 @@ export default function CombinationsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -272,6 +245,9 @@ export default function CombinationsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONS_PATTERNS} />
+            )}
         </>
     )
 
@@ -280,7 +256,7 @@ export default function CombinationsVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

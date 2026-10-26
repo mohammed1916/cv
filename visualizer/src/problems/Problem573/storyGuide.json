@@ -1,0 +1,31 @@
+{
+  "number": "573",
+  "title": "Squirrel Simulation",
+  "goal": "Minimize the squirrel travel needed to carry every nut individually to the tree.",
+  "strategy": "Imagine every nut trip starting and ending at the tree. Only the first trip differs: it starts at the squirrel instead. Choose the nut with the greatest saved distance, even if every saving is negative.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the squirrel travel needed to carry every nut individually to the tree.",
+    "inspect": "Imagine every nut trip starting and ending at the tree. Only the first trip differs: it starts at the squirrel instead. Choose the nut with the greatest saved distance, even if every saving is negative.",
+    "update": "Imagine every nut trip starting and ending at the tree. Only the first trip differs: it starts at the squirrel instead. Choose the nut with the greatest saved distance, even if every saving is negative.",
+    "done": "Minimize the squirrel travel needed to carry every nut individually to the tree."
+  },
+  "edgeCases": [
+    "Every first choice costs more than starting from the tree",
+    "One nut still includes its final trip to the tree",
+    "Equal savings permit either optimal first nut"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

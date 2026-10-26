@@ -1,0 +1,31 @@
+{
+  "number": "2130",
+  "title": "Maximum Twin Sum of a Linked List",
+  "goal": "Find the largest sum of nodes equally far from opposite ends of an even list.",
+  "strategy": "Locate the second half with fast and slow pointers, reverse that half, then walk both halves together. Each paired walk step visits one twin pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest sum of nodes equally far from opposite ends of an even list.",
+    "inspect": "Locate the second half with fast and slow pointers, reverse that half, then walk both halves together. Each paired walk step visits one twin pair.",
+    "update": "Locate the second half with fast and slow pointers, reverse that half, then walk both halves together. Each paired walk step visits one twin pair.",
+    "done": "Find the largest sum of nodes equally far from opposite ends of an even list."
+  },
+  "edgeCases": [
+    "Two nodes form the only twin pair",
+    "Repeated values retain separate twin identities",
+    "The outermost pair wins"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

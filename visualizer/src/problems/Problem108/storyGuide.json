@@ -1,0 +1,29 @@
+{
+  "number": "108",
+  "title": "Convert Sorted Array to Binary Search Tree",
+  "goal": "Solve Convert Sorted Array to Binary Search Tree: Convert a sorted array into a height-balanced binary search tree.",
+  "strategy": "Convert a sorted array into a height-balanced binary search tree.",
+  "phases": [
+    "compare",
+    "update",
+    "visit",
+    "return",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "left >= right",
+      "outcome": "return None"
+    }
+  ],
+  "inputRules": [
+    "Use strictly increasing array values."
+  ],
+  "source": [
+    "src/problems/Problem108/index.jsx",
+    "src/problems/Problem108/ConvertSortedArrayToBinarySearchTreeVisualizer.jsx",
+    "src/problems/Problem108/algorithm.js"
+  ]
+}

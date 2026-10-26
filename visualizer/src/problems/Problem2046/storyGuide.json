@@ -1,0 +1,31 @@
+{
+  "number": "2046",
+  "title": "Sort Linked List Already Sorted Using Absolute Values",
+  "goal": "Sort a linked list whose absolute values are already nondecreasing.",
+  "strategy": "Nonnegative nodes are already ordered. Each later negative value belongs before all earlier values, so detach it and prepend it to the head while retaining stable node identities.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sort a linked list whose absolute values are already nondecreasing.",
+    "inspect": "Nonnegative nodes are already ordered. Each later negative value belongs before all earlier values, so detach it and prepend it to the head while retaining stable node identities.",
+    "update": "Nonnegative nodes are already ordered. Each later negative value belongs before all earlier values, so detach it and prepend it to the head while retaining stable node identities.",
+    "done": "Sort a linked list whose absolute values are already nondecreasing."
+  },
+  "edgeCases": [
+    "An all-negative absolute-sorted list reverses",
+    "A nonnegative list is already sorted",
+    "One node needs no rewiring"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

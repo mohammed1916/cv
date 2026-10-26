@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from "react";
+import authoredExamples0 from '../../config/examples/merge-two-sorted-lists.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -7,7 +10,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MergeTwoSortedListsVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -214,11 +217,11 @@ function generateSteps(arr1, arr2) {
   return steps;
 }
 
-const EXAMPLES = getExamples('merge-two-sorted-lists');
+const EXAMPLES = authoredExamples0;
 
 export default function MergeTwoSortedListsVisualizer() {
-  const [l1Input, setL1Input] = useState("[1, 2, 4]");
-  const [l2Input, setL2Input] = useState("[1, 3, 4]");
+  const [l1Input, setL1Input] = useState(JSON.stringify(AUTHORED_INITIAL.list1));
+  const [l2Input, setL2Input] = useState(JSON.stringify(AUTHORED_INITIAL.list2));
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   const { list1, list2, inputError } = useMemo(() => {
@@ -305,63 +308,7 @@ export default function MergeTwoSortedListsVisualizer() {
           ))}
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            marginBottom: 24,
-            alignItems: "center",
-          }}
-        >
-          <span
-            style={{
-              color: "#e90d33",
-              fontSize: 13,
-              fontFamily: "monospace",
-              fontWeight: "bold",
-            }}
-          >
-            list1=
-          </span>
-          <input
-            value={l1Input}
-            onChange={(e) => {
-              setL1Input(e.target.value);
-              handleReset();
-            }}
-            placeholder="[1, 2, 4]"
-            className="mtsl-input"
-            style={{
-              flex: 1,
-              margin: 0,
-              borderColor: "rgba(244, 63, 94, 0.3)",
-            }}
-          />
-          <span
-            style={{
-              color: "#0b7db0",
-              fontSize: 13,
-              fontFamily: "monospace",
-              fontWeight: "bold",
-            }}
-          >
-            list2=
-          </span>
-          <input
-            value={l2Input}
-            onChange={(e) => {
-              setL2Input(e.target.value);
-              handleReset();
-            }}
-            placeholder="[1, 3, 4]"
-            className="mtsl-input"
-            style={{
-              flex: 1,
-              margin: 0,
-              borderColor: "rgba(14, 165, 233, 0.3)",
-            }}
-          />
-        </div>
+        
 
         <div className="mtsl-lists-container">
           {/* List 1 */}
@@ -559,9 +506,6 @@ export default function MergeTwoSortedListsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGETWOSORTEDLISTS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -579,6 +523,9 @@ export default function MergeTwoSortedListsVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGETWOSORTEDLISTS_PATTERNS} />
+      )}
     </>
   );
 
@@ -586,7 +533,7 @@ export default function MergeTwoSortedListsVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Linked Lists', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

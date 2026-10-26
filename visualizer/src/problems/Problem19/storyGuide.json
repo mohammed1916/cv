@@ -1,0 +1,31 @@
+{
+  "number": "19",
+  "title": "Remove Nth Node From End of List",
+  "goal": "Solve Remove Nth Node From End of List: Separate two list pointers by the requested gap, then advance together to locate the predecessor of the node counted from the end.",
+  "strategy": "Separate two list pointers by the requested gap, then advance together to locate the predecessor of the node counted from the end.",
+  "phases": [
+    "init",
+    "pointers_init",
+    "fast_advance",
+    "fast_step",
+    "gap_ready",
+    "both_advance",
+    "found_target",
+    "removing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Removing the head needs a dummy predecessor; the requested position must be within the list."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Format: [array]; n",
+    "Array required",
+    "n <= length"
+  ],
+  "source": [
+    "src/problems/Problem19/index.jsx",
+    "src/problems/Problem19/RemoveNthNodeVisualizer.jsx"
+  ]
+}

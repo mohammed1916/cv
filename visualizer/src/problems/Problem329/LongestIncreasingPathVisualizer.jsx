@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/longest-increasing-path.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -9,7 +12,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LongestIncreasingPathVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +33,7 @@ const SOLUTION_CODE = [
     { line: 11, text: "    return max(dfs(r,c) for r,c in all_cells)" },
 ];
 
-const EXAMPLES = getExamples('longest-increasing-path');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(matrix) {
     const steps = [];
@@ -193,7 +196,7 @@ function VisualizationPanel({ EXAMPLES, ex, matrix, dpGrid, activeCell, neighbor
 
 export default function LongestIncreasingPathVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [matrixInput, setMatrixInput] = useState("[[9,9,4],[6,6,8],[2,1,1]]");
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix));
   const { matrix, inputError } = useMemo(() => {
     try {
       const parsedMatrix = JSON.parse(matrixInput); if (!Array.isArray(parsedMatrix)) throw new Error('matrix must be an array');

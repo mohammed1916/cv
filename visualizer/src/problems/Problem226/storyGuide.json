@@ -1,0 +1,21 @@
+{
+  "number": "226",
+  "title": "Invert Binary Tree",
+  "goal": "Solve Invert Binary Tree: Recursively swap left and right children of every node to mirror the tree.",
+  "strategy": "Recursively swap left and right children of every node to mirror the tree.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A null subtree remains null. A leaf stays a leaf while its parent’s left/right relationship may change."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem226/index.jsx",
+    "src/problems/Problem226/InvertBinaryTree.jsx"
+  ]
+}

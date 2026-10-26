@@ -1,0 +1,31 @@
+{
+  "number": "2197",
+  "title": "Replace Non-Coprime Numbers in Array",
+  "goal": "Repeatedly merge adjacent non-coprime values into their least common multiple.",
+  "strategy": "A stack stores a settled prefix. Each incoming value may merge with the top; the new LCM can expose another non-coprime neighbor, so keep merging backward until the boundary is coprime.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Repeatedly merge adjacent non-coprime values into their least common multiple.",
+    "inspect": "A stack stores a settled prefix. Each incoming value may merge with the top; the new LCM can expose another non-coprime neighbor, so keep merging backward until the boundary is coprime.",
+    "update": "A stack stores a settled prefix. Each incoming value may merge with the top; the new LCM can expose another non-coprime neighbor, so keep merging backward until the boundary is coprime.",
+    "done": "Repeatedly merge adjacent non-coprime values into their least common multiple."
+  },
+  "edgeCases": [
+    "Pairwise coprime neighbors remain unchanged",
+    "Ones never merge with any neighbor",
+    "Repeated values collapse to the same least common multiple"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

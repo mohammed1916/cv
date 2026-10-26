@@ -1,0 +1,31 @@
+{
+  "number": "2200",
+  "title": "Find All K-Distant Indices in an Array",
+  "goal": "Return every index within distance k of some key occurrence.",
+  "strategy": "Each key occurrence covers an index interval. Since key positions arrive in order, append only the portion of each interval beyond the last covered index to avoid duplicates.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return every index within distance k of some key occurrence.",
+    "inspect": "Each key occurrence covers an index interval. Since key positions arrive in order, append only the portion of each interval beyond the last covered index to avoid duplicates.",
+    "update": "Each key occurrence covers an index interval. Since key positions arrive in order, append only the portion of each interval beyond the last covered index to avoid duplicates.",
+    "done": "Return every index within distance k of some key occurrence."
+  },
+  "edgeCases": [
+    "Radius zero returns exactly key positions",
+    "A large radius covers the entire array",
+    "No key occurrence covers any index"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

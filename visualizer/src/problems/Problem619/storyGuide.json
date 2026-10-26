@@ -1,0 +1,31 @@
+{
+  "number": "619",
+  "title": "Biggest Single Number",
+  "goal": "Return the largest number that appears exactly once, or null when none exists.",
+  "strategy": "Count complete value groups before selecting a maximum. A large duplicated value is ineligible, and an empty set of singletons must still produce one null result row.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the largest number that appears exactly once, or null when none exists.",
+    "inspect": "Count complete value groups before selecting a maximum. A large duplicated value is ineligible, and an empty set of singletons must still produce one null result row.",
+    "update": "Count complete value groups before selecting a maximum. A large duplicated value is ineligible, and an empty set of singletons must still produce one null result row.",
+    "done": "Return the largest number that appears exactly once, or null when none exists."
+  },
+  "edgeCases": [
+    "Every value repeated returns one null row",
+    "Negative singletons still have a numeric maximum",
+    "An empty table still returns null"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

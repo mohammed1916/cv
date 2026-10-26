@@ -1,0 +1,27 @@
+{
+  "number": "60",
+  "title": "Permutation Sequence",
+  "goal": "Solve Permutation Sequence: Use factorial-sized blocks to choose each next digit by rank, then continue with the rank inside the selected block.",
+  "strategy": "Use factorial-sized blocks to choose each next digit by rank, then continue with the rank inside the selected block.",
+  "phases": [
+    "adjust-k",
+    "calc-index",
+    "done",
+    "init-factorial",
+    "init-nums",
+    "init-result",
+    "remove-num",
+    "select-num",
+    "update-k"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The external rank is one-based; converting it consistently prevents errors at block boundaries."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem60/index.jsx",
+    "src/problems/Problem60/PermutationSequenceVisualizer.jsx"
+  ]
+}

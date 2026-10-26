@@ -1,0 +1,31 @@
+{
+  "number": "980",
+  "title": "Unique Paths III",
+  "goal": "Count paths from the start to the end that visit every non-obstacle cell exactly once.",
+  "strategy": "Backtracking marks one visited cell at a time. The end accepts a path only when it is the final unvisited cell; undo each choice so alternate paths can reuse the cell in a different search branch.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count paths from the start to the end that visit every non-obstacle cell exactly once.",
+    "inspect": "Backtracking marks one visited cell at a time. The end accepts a path only when it is the final unvisited cell; undo each choice so alternate paths can reuse the cell in a different search branch.",
+    "update": "Backtracking marks one visited cell at a time. The end accepts a path only when it is the final unvisited cell; undo each choice so alternate paths can reuse the cell in a different search branch.",
+    "done": "Count paths from the start to the end that visit every non-obstacle cell exactly once."
+  },
+  "edgeCases": [
+    "An unobstructed corridor has one covering path",
+    "Reaching the end early leaves an unvisited branch",
+    "An obstacle can disconnect the required cells"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

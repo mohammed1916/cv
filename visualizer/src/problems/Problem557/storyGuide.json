@@ -1,0 +1,24 @@
+{
+  "number": "557",
+  "title": "Reverse Words in String III",
+  "goal": "Solve Reverse Words in String III: Reverse each word in a string while keeping the word order the same.",
+  "strategy": "Reverse each word in a string while keeping the word order the same.",
+  "phases": [
+    "split",
+    "iterate",
+    "reverse",
+    "append",
+    "join",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reverse characters inside each word while preserving word order and separators."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem557/index.jsx",
+    "src/problems/Problem557/ReverseWordsVisualizer.jsx"
+  ]
+}

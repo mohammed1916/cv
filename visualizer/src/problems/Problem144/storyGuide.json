@@ -1,0 +1,20 @@
+{
+  "number": "144",
+  "title": "Binary Tree Preorder Traversal",
+  "goal": "Solve Binary Tree Preorder Traversal: Traverse a tree in preorder (root, left, right) using iteration.",
+  "strategy": "Traverse a tree in preorder (root, left, right) using iteration.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem144/index.jsx",
+    "src/problems/Problem144/BinaryTreePreorderTraversalVisualizer.jsx"
+  ]
+}

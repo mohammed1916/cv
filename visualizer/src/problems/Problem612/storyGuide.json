@@ -1,0 +1,31 @@
+{
+  "number": "612",
+  "title": "Shortest Distance in a Plane",
+  "goal": "Find the shortest Euclidean distance between distinct planar points, rounded to two decimals.",
+  "strategy": "Compare each unordered pair once using squared distance. Keep the smallest squared value, then take one square root and round only the final result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest Euclidean distance between distinct planar points, rounded to two decimals.",
+    "inspect": "Compare each unordered pair once using squared distance. Keep the smallest squared value, then take one square root and round only the final result.",
+    "update": "Compare each unordered pair once using squared distance. Keep the smallest squared value, then take one square root and round only the final result.",
+    "done": "Find the shortest Euclidean distance between distinct planar points, rounded to two decimals."
+  },
+  "edgeCases": [
+    "A vertical pair uses only its y gap",
+    "An irrational distance is rounded only at the end",
+    "Several equal shortest distances are harmless"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

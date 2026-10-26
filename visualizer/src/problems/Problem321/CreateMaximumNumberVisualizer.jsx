@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/create-maximum-number.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './CreateMaximumNumberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { StackLane } from '../../components/shared'
@@ -86,11 +87,7 @@ function generateSteps({ nums1, nums2, k }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('create-maximum-number', [
-  { label: 'Classic', nums1: [3, 4, 6, 5], nums2: [9, 1, 2, 5, 8, 3], k: 5 },
-  { label: 'All digits', nums1: [6, 7], nums2: [6, 0, 4], k: 5 },
-  { label: 'Tie break', nums1: [3, 9], nums2: [8, 9], k: 3 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function CreateMaximumNumberVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -159,7 +156,7 @@ export default function CreateMaximumNumberVisualizer() {
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'viz', title: '📚 Greedy stacks', dockMode: 'split-right' },
   ], [])
   const panelContents = {
@@ -188,9 +185,6 @@ export default function CreateMaximumNumberVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -208,6 +202,9 @@ export default function CreateMaximumNumberVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

@@ -1,0 +1,31 @@
+{
+  "number": "1978",
+  "title": "Employees Whose Manager Left the Company",
+  "goal": "Find low-paid employees whose manager record has left the company.",
+  "strategy": "Use the current employee-ID set to check manager existence. Qualify only salaries strictly below 30000 and non-null manager IDs that are absent from that set.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find low-paid employees whose manager record has left the company.",
+    "inspect": "Use the current employee-ID set to check manager existence. Qualify only salaries strictly below 30000 and non-null manager IDs that are absent from that set.",
+    "update": "Use the current employee-ID set to check manager existence. Qualify only salaries strictly below 30000 and non-null manager IDs that are absent from that set.",
+    "done": "Find low-paid employees whose manager record has left the company."
+  },
+  "edgeCases": [
+    "Exactly the salary threshold is excluded",
+    "A null manager is not a departed manager",
+    "No employees means no result"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

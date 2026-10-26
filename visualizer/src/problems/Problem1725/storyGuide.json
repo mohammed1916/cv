@@ -1,0 +1,31 @@
+{
+  "number": "1725",
+  "title": "Number Of Rectangles That Can Form The Largest Square",
+  "goal": "Count rectangles capable of producing the greatest possible square.",
+  "strategy": "The smaller side of a rectangle limits its square. Track the greatest such limit and reset or increment the number attaining it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count rectangles capable of producing the greatest possible square.",
+    "inspect": "The smaller side of a rectangle limits its square. Track the greatest such limit and reset or increment the number attaining it.",
+    "update": "The smaller side of a rectangle limits its square. Track the greatest such limit and reset or increment the number attaining it.",
+    "done": "Count rectangles capable of producing the greatest possible square."
+  },
+  "edgeCases": [
+    "One rectangle",
+    "All rectangles tie",
+    "A late larger square resets the count"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

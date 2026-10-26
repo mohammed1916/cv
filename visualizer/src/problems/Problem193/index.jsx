@@ -1,1 +1,5 @@
-export { default } from "./ValidPhoneNumbersVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ValidPhoneNumbersVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

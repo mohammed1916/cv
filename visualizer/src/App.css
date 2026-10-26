@@ -60,9 +60,26 @@
   box-shadow: 0 8px 24px var(--primary-glow);
 }
 
-.chat-launcher.selecting { background: var(--warning); color: var(--code-bg); }
+.chat-launcher.selecting {
+  background: var(--warning);
+  color: var(--text-inverse);
+  /* Body portal: independent of the scaled app and chat stacking contexts. */
+  z-index: 11000;
+  left: max(12px, env(safe-area-inset-left));
+  right: auto;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  max-width: calc(100vw - 24px);
+}
 
 body.chat-select-mode * { cursor: crosshair !important; }
+body.chat-select-mode .chat-launcher,
+body.chat-select-mode .chat-launcher * { cursor: pointer !important; }
+body.chat-select-mode [data-chat-selectable]:hover,
+body.chat-select-mode .svg-viewport-svg g:hover,
+body.chat-select-mode .trie-state svg g:hover {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
 
 .settings-menu {
   position: relative;

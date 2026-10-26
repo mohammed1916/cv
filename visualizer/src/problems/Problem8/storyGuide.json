@@ -1,0 +1,35 @@
+{
+  "number": "8",
+  "title": "String to Integer (atoi)",
+  "goal": "Solve String to Integer (atoi): Follow the parser through whitespace, sign, digits, stop conditions, and 32-bit clamping.",
+  "strategy": "Follow the parser through whitespace, sign, digits, stop conditions, and 32-bit clamping.",
+  "phases": [
+    "whitespace",
+    "sign",
+    "digit",
+    "stop",
+    "clamp_min",
+    "clamp_max",
+    "final",
+    "clamp-min",
+    "clamp-max"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "result < -2**31",
+      "outcome": "return -2**31"
+    },
+    {
+      "condition": "result > 2**31 - 1",
+      "outcome": "return 2**31 - 1"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem8/index.jsx",
+    "src/problems/Problem8/AtoiVisualizer.jsx",
+    "src/problems/Problem8/algorithm.js"
+  ]
+}

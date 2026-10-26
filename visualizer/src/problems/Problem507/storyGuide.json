@@ -1,0 +1,19 @@
+{
+  "number": "507",
+  "title": "Perfect Number",
+  "goal": "Solve Perfect Number: Check if a number is perfect (sum of proper divisors equals the number).",
+  "strategy": "Check if a number is perfect (sum of proper divisors equals the number).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "One is not perfect; paired divisors must not count a square root twice or include the number itself."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem507/index.jsx",
+    "src/problems/Problem507/PerfectNumberVisualizer.jsx"
+  ]
+}

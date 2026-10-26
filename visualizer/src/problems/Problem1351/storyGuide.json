@@ -1,0 +1,31 @@
+{
+  "number": "1351",
+  "title": "Count Negative Numbers in a Sorted Matrix",
+  "goal": "Count negative cells in a row- and column-nonincreasing matrix.",
+  "strategy": "From the bottom-left corner, a negative value certifies its entire rightward row suffix. A nonnegative value certifies the whole upward column prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count negative cells in a row- and column-nonincreasing matrix.",
+    "inspect": "From the bottom-left corner, a negative value certifies its entire rightward row suffix. A nonnegative value certifies the whole upward column prefix.",
+    "update": "From the bottom-left corner, a negative value certifies its entire rightward row suffix. A nonnegative value certifies the whole upward column prefix.",
+    "done": "Count negative cells in a row- and column-nonincreasing matrix."
+  },
+  "edgeCases": [
+    "All nonnegative",
+    "All negative",
+    "Single descending row"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

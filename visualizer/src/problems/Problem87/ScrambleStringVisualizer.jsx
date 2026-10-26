@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/scramble-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,13 +13,13 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ScrambleStringVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('scramble-string')
 
-const EXAMPLES = getExamples('scramble-string')
+const EXAMPLES = authoredExamples0
 
 const SCRAMBLESTRING_PATTERNS = ['check', 'memo', 'base', 'char_check', 'recurse', 'not_found']
 
@@ -323,7 +326,7 @@ function StringVisualization({ s1, s2, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Input strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* String s1 */}
           <div>
@@ -387,7 +390,7 @@ function StringVisualization({ s1, s2, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Current Check</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Current Check</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>s1</div>
@@ -417,7 +420,7 @@ function StringVisualization({ s1, s2, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Split Attempt</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-on-light)', marginBottom: 8 }}>Split Attempt</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
             <div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>No Swap</div>
@@ -475,7 +478,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -522,8 +525,8 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 
 export default function ScrambleStringVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [s1Input, setS1Input] = useState("great");
-  const [s2Input, setS2Input] = useState("rgeat");
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1));
+  const [s2Input, setS2Input] = useState(String(AUTHORED_INITIAL.s2));
   const { s1, s2, inputError } = useMemo(() => {
     try {
       const parsedS1 = s1Input;
@@ -610,9 +613,6 @@ export default function ScrambleStringVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -630,6 +630,9 @@ export default function ScrambleStringVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SCRAMBLESTRING_PATTERNS} />
+      )}
     </>
   )
 
@@ -638,7 +641,7 @@ export default function ScrambleStringVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'String Scramble', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

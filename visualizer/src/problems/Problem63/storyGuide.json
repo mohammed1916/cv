@@ -1,0 +1,29 @@
+{
+  "number": "63",
+  "title": "Unique Paths II",
+  "goal": "Solve Unique Paths II: Propagate right/down path counts through open cells while forcing blocked cells to contribute zero.",
+  "strategy": "Propagate right/down path counts through open cells while forcing blocked cells to contribute zero.",
+  "phases": [
+    "blocked",
+    "done",
+    "fill",
+    "fill_first_col",
+    "fill_first_row",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A blocked start or destination gives zero paths; a barrier can disconnect the destination entirely."
+  ],
+  "checks": [
+    {
+      "condition": "obstacleGrid[0][0] == 1 or obstacleGrid[m-1][n-1] == 1",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem63/index.jsx",
+    "src/problems/Problem63/UniquePathsIIVisualizer.jsx"
+  ]
+}

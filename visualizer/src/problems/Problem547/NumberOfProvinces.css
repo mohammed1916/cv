@@ -21,7 +21,7 @@
 .nop-difficulty {
   display: inline-block;
   background: #8b5cf6;
-  color: var(--code-bg);
+  color: var(--text-on-light);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: 600;
@@ -61,7 +61,7 @@
 
 .nop-button-primary {
   background: #8b5cf6;
-  color: var(--code-bg);
+  color: var(--text-on-light);
 }
 
 .nop-button-primary:hover:not(:disabled) {
@@ -108,7 +108,7 @@
 .nop-example-btn.nop-active {
   border-color: #8b5cf6;
   background: #8b5cf6;
-  color: var(--code-bg);
+  color: var(--text-on-light);
 }
 
 .nop-content {
@@ -168,7 +168,7 @@
 
 .nop-matrix-cell.nop-highlight {
   background: #f38ba8;
-  color: var(--code-bg);
+  color: var(--text-on-light);
   box-shadow: inset 0 0 8px rgba(243, 139, 168, 0.5);
 }
 

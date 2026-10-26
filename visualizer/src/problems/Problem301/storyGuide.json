@@ -1,0 +1,26 @@
+{
+  "number": "301",
+  "title": "Remove Invalid Parentheses",
+  "goal": "Solve Remove Invalid Parentheses: Remove minimum number of invalid parentheses to make string valid.",
+  "strategy": "Remove minimum number of invalid parentheses to make string valid.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "answers",
+      "outcome": "return answers"
+    }
+  ],
+  "inputRules": [
+    "Use { \"s\": \"expression\" }."
+  ],
+  "source": [
+    "src/problems/Problem301/index.jsx",
+    "src/problems/Problem301/RemoveInvalidParenthesesVisualizer.jsx"
+  ]
+}

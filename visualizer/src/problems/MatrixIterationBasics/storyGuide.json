@@ -1,0 +1,17 @@
+{
+  "number": "B1",
+  "title": "Matrix Iteration Patterns",
+  "goal": "Solve Matrix Iteration Patterns: Explore upper/lower triangular, diagonal, anti-diagonal and full matrix traversals.",
+  "strategy": "Explore upper/lower triangular, diagonal, anti-diagonal and full matrix traversals.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A one-row or one-column matrix collapses several traversal directions; do not visit a cell twice when boundaries meet."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/MatrixIterationBasics/index.jsx",
+    "src/problems/MatrixIterationBasics/MatrixIterationBasicsVisualizer.jsx"
+  ]
+}

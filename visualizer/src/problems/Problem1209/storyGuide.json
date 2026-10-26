@@ -1,0 +1,31 @@
+{
+  "number": "1209",
+  "title": "Remove All Adjacent Duplicates in String II",
+  "goal": "Repeatedly remove adjacent groups of k equal characters.",
+  "strategy": "A stack stores surviving character runs. Removing a full group exposes its predecessor, allowing later characters to continue that earlier run.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Repeatedly remove adjacent groups of k equal characters.",
+    "inspect": "A stack stores surviving character runs. Removing a full group exposes its predecessor, allowing later characters to continue that earlier run.",
+    "update": "A stack stores surviving character runs. Removing a full group exposes its predecessor, allowing later characters to continue that earlier run.",
+    "done": "Repeatedly remove adjacent groups of k equal characters."
+  },
+  "edgeCases": [
+    "Complete removal",
+    "No run reaches threshold",
+    "Cascade across removed middle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1560",
+  "title": "Most Visited Sector in  a Circular Track",
+  "goal": "Find the most visited sectors during clockwise rounds on a circular track.",
+  "strategy": "Count the initial sector once. Each later segment counts only newly entered sectors, so shared round endpoints are not duplicated.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the most visited sectors during clockwise rounds on a circular track.",
+    "inspect": "Count the initial sector once. Each later segment counts only newly entered sectors, so shared round endpoints are not duplicated.",
+    "update": "Count the initial sector once. Each later segment counts only newly entered sectors, so shared round endpoints are not duplicated.",
+    "done": "Find the most visited sectors during clockwise rounds on a circular track."
+  },
+  "edgeCases": [
+    "Short nonwrapping segment",
+    "One full circuit ties every sector",
+    "Starting sector visited again"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

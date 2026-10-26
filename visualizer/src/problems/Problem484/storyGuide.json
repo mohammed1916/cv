@@ -1,0 +1,17 @@
+{
+  "number": "484",
+  "title": "Find Permutation",
+  "goal": "Solve Find Permutation: Construct a permutation from a string of D (decrease) and I (increase) characters.",
+  "strategy": "Construct a permutation from a string of D (decrease) and I (increase) characters.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each decreasing run needs reversal as a group; reversing isolated comparisons can break neighboring constraints."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem484/index.jsx",
+    "src/problems/Problem484/Problem484Visualizer.jsx"
+  ]
+}

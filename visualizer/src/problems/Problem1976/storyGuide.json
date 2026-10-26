@@ -1,0 +1,31 @@
+{
+  "number": "1976",
+  "title": "Number of Ways to Arrive at Destination",
+  "goal": "Count shortest routes from vertex zero to vertex n-1.",
+  "strategy": "Dijkstra tracks both shortest distance and number of ways. Better distances replace counts; equal distances add counts. Strictly positive weights keep settled predecessor counts final.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count shortest routes from vertex zero to vertex n-1.",
+    "inspect": "Dijkstra tracks both shortest distance and number of ways. Better distances replace counts; equal distances add counts. Strictly positive weights keep settled predecessor counts final.",
+    "update": "Dijkstra tracks both shortest distance and number of ways. Better distances replace counts; equal distances add counts. Strictly positive weights keep settled predecessor counts final.",
+    "done": "Count shortest routes from vertex zero to vertex n-1."
+  },
+  "edgeCases": [
+    "Unique direct shortest route",
+    "A direct road ties two indirect routes",
+    "Start is already destination"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

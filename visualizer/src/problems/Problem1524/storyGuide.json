@@ -1,0 +1,31 @@
+{
+  "number": "1524",
+  "title": "Number of Sub-arrays With Odd Sum",
+  "goal": "Count subarrays with odd sum modulo one billion and seven.",
+  "strategy": "A subarray sum is odd when its two prefix parities differ. Count earlier opposite-parity prefixes before recording the new prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays with odd sum modulo one billion and seven.",
+    "inspect": "A subarray sum is odd when its two prefix parities differ. Count earlier opposite-parity prefixes before recording the new prefix.",
+    "update": "A subarray sum is odd when its two prefix parities differ. Count earlier opposite-parity prefixes before recording the new prefix.",
+    "done": "Count subarrays with odd sum modulo one billion and seven."
+  },
+  "edgeCases": [
+    "Only even sums",
+    "Every entry odd",
+    "Single zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

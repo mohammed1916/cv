@@ -1,0 +1,31 @@
+{
+  "number": "3108",
+  "title": "Minimum Cost Walk in Weighted Graph",
+  "goal": "Answer minimum bitwise-AND walk costs between queried vertices.",
+  "strategy": "Repeated-edge walks can detour through every edge in a connected component. AND never increases when another weight is included, so the minimum cost is the AND of all component edge weights; disconnected endpoints return minus one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer minimum bitwise-AND walk costs between queried vertices.",
+    "inspect": "Repeated-edge walks can detour through every edge in a connected component. AND never increases when another weight is included, so the minimum cost is the AND of all component edge weights; disconnected endpoints return minus one.",
+    "update": "Repeated-edge walks can detour through every edge in a connected component. AND never increases when another weight is included, so the minimum cost is the AND of all component edge weights; disconnected endpoints return minus one.",
+    "done": "Answer minimum bitwise-AND walk costs between queried vertices."
+  },
+  "edgeCases": [
+    "A zero-weight edge reduces every same-component query to zero",
+    "Parallel edges both contribute to the component AND",
+    "Without edges every distinct-endpoint query is unreachable"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

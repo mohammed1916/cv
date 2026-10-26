@@ -1,0 +1,32 @@
+{
+  "number": "7",
+  "title": "Reverse Integer",
+  "goal": "Solve Reverse Integer: Pop and push digits while carefully avoiding 32-bit integer overflows.",
+  "strategy": "Pop and push digits while carefully avoiding 32-bit integer overflows.",
+  "phases": [
+    "init",
+    "loop",
+    "pop",
+    "check_max",
+    "check_min",
+    "push",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "res > MAX // 10 or (res == MAX // 10 and digit > 7)",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "res < int(MIN / 10) or (res == int(MIN / 10) and digit < -8)",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem7/index.jsx",
+    "src/problems/Problem7/ReverseIntegerVisualizer.jsx"
+  ]
+}

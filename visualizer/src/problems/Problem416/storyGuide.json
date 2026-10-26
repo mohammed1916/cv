@@ -1,0 +1,26 @@
+{
+  "number": "416",
+  "title": "Partition Equal Subset Sum",
+  "goal": "Solve Partition Equal Subset Sum: 0/1 knapsack DP targeting sum/2: dp[j] |= dp[j - num].",
+  "strategy": "0/1 knapsack DP targeting sum/2: dp[j] |= dp[j - num].",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "total % 2 != 0",
+      "outcome": "return False"
+    },
+    {
+      "condition": "target in dp",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem416/index.jsx",
+    "src/problems/Problem416/PartitionEqualSubsetVisualizer.jsx"
+  ]
+}

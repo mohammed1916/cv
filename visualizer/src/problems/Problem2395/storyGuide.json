@@ -1,0 +1,31 @@
+{
+  "number": "2395",
+  "title": "Find Subarrays With Equal Sum",
+  "goal": "Determine whether two different length-two subarrays have the same sum.",
+  "strategy": "Each adjacent pair contributes one sum keyed by its ending position. A previously seen sum proves a different pair exists, even when the pairs overlap.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether two different length-two subarrays have the same sum.",
+    "inspect": "Each adjacent pair contributes one sum keyed by its ending position. A previously seen sum proves a different pair exists, even when the pairs overlap.",
+    "update": "Each adjacent pair contributes one sum keyed by its ending position. A previously seen sum proves a different pair exists, even when the pairs overlap.",
+    "done": "Determine whether two different length-two subarrays have the same sum."
+  },
+  "edgeCases": [
+    "Overlapping pairs are still different subarrays",
+    "Distinct adjacent sums return false",
+    "A two-element array has only one pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

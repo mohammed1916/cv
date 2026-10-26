@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/power-of-three.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PowerofThreeVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { createPortal } from 'react-dom'
@@ -37,7 +38,7 @@ function generateSteps({ n }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('power-of-three', [{ label: '27 = 3³', n: 27 }, { label: '45 is not', n: 45 }, { label: '1 = 3⁰', n: 1 }])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function PowerofThreeVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -170,9 +171,6 @@ export default function PowerofThreeVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -190,6 +188,9 @@ export default function PowerofThreeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

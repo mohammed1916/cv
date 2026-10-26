@@ -1,0 +1,31 @@
+{
+  "number": "1502",
+  "title": "Can Make Arithmetic Progression From Sequence",
+  "goal": "Decide whether rearranging values can form an arithmetic progression.",
+  "strategy": "Sorting fixes the only possible order up to reversal. Every neighboring difference must equal the first one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether rearranging values can form an arithmetic progression.",
+    "inspect": "Sorting fixes the only possible order up to reversal. Every neighboring difference must equal the first one.",
+    "update": "Sorting fixes the only possible order up to reversal. Every neighboring difference must equal the first one.",
+    "done": "Decide whether rearranging values can form an arithmetic progression."
+  },
+  "edgeCases": [
+    "Repeated constant progression",
+    "One inconsistent gap",
+    "Two values always work"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

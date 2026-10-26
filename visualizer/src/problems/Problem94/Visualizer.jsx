@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--94.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -40,11 +44,7 @@ const SOLUTION_CODE = [
   { line: 9, text: '    return result' },
 ]
 
-const EXAMPLES = [
-  { label: 'Example 1', tree: [1, null, 2, 3] },
-  { label: 'Example 2', tree: [4, 2, 6, 1, 3, 5, 7] },
-  { label: 'Left chain', tree: [3, 2, null, 1] },
-]
+const EXAMPLES = authoredExamples0
 
 // ─── Canvas / layout constants ───────────────────────────────────────────────
 const CANVAS_W = 520
@@ -269,7 +269,7 @@ function VisualizationPanel({ step }) {
               x={p.x} y={p.y + 5}
               textAnchor="middle"
               fontSize={14} fontWeight={700}
-              fill={p.id === currentId || visitedIds.has(p.id) ? 'var(--code-bg)' : 'var(--text)'}
+              fill={p.id === currentId || visitedIds.has(p.id) || stackIds.has(p.id) ? 'var(--text-on-light)' : 'var(--text)'}
             >
               {p.val}
             </text>
@@ -336,7 +336,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem94Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [treeInput, setTreeInput] = useState("[1,null,2,3]");
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree));
   const { tree, inputError } = useMemo(() => {
     try {
       const parsedTree = JSON.parse(treeInput); if (!Array.isArray(parsedTree)) throw new Error('tree must be an array');
@@ -404,9 +404,6 @@ export default function Problem94Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -424,6 +421,9 @@ export default function Problem94Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -432,7 +432,7 @@ export default function Problem94Visualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
-      { id: 'viz', title: '🌳 Inorder Traversal', dockMode: 'split-bottom' },
+      { id: 'viz', title: '🌳 Inorder Traversal', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []
@@ -450,7 +450,7 @@ export default function Problem94Visualizer() {
               padding: '6px 12px', borderRadius: 6, cursor: 'pointer',
               border: e.label === ex.label ? '2px solid #059669' : '1px solid var(--border)',
               background: e.label === ex.label ? '#d1fae5' : 'var(--surface)',
-              color: 'var(--code-bg)', fontSize: 12, fontWeight: 600,
+              color: (e.label === ex.label ? 'var(--text-on-light)' : 'var(--text)'), fontSize: 12, fontWeight: 600,
             }}
           >
             {e.label} [{e.tree.map((v) => (v == null ? 'null' : v)).join(',')}]

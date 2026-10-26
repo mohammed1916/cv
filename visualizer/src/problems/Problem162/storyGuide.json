@@ -1,0 +1,19 @@
+{
+  "number": "162",
+  "title": "Find Peak Element",
+  "goal": "Solve Find Peak Element: Binary search toward the higher neighbor to guarantee landing on a peak.",
+  "strategy": "Binary search toward the higher neighbor to guarantee landing on a peak.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An endpoint may be a peak under the virtual negative-infinity boundary convention; the peak need not be the global maximum."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem162/index.jsx",
+    "src/problems/Problem162/FindPeakElementVisualizer.jsx"
+  ]
+}

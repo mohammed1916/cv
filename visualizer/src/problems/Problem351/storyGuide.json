@@ -1,0 +1,19 @@
+{
+  "number": "351",
+  "title": "Data Stream as Disjoint Intervals",
+  "goal": "Solve Data Stream as Disjoint Intervals: Insert each arriving value into ordered disjoint intervals, merging neighboring intervals when the new value joins them.",
+  "strategy": "Insert each arriving value into ordered disjoint intervals, merging neighboring intervals when the new value joins them.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An already-covered value changes nothing; a value can bridge two intervals at once."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem351/index.jsx",
+    "src/problems/Problem351/Problem351Visualizer.jsx"
+  ]
+}

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/path-sum-iii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem437Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -26,7 +27,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('path-sum-iii')
+const EXAMPLES = authoredExamples0
 
 function buildTree(arr) {
   if (!arr || arr.length === 0) return null
@@ -204,7 +205,7 @@ function TreeVisualization({ tree, currentNode }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Tree Structure</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Tree Structure</div>
       <svg
         style={{
           width: '100%',
@@ -224,7 +225,7 @@ function TreeVisualization({ tree, currentNode }) {
 function PathsVisualization({ paths, count, target }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Found Paths (Sum = {target})</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Found Paths (Sum = {target})</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -277,7 +278,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

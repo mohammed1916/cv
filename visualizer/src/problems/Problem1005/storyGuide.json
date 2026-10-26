@@ -1,0 +1,27 @@
+{
+  "number": "1005",
+  "title": "Maximize Sum Of Array After K Negations",
+  "goal": "Maximize the sum after exactly k sign flips.",
+  "strategy": "Flip negative values with greatest magnitude first. Remaining operations cancel in pairs; one leftover should affect the smallest magnitude.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the sum after exactly k sign flips.",
+    "inspect": "Flip negative values with greatest magnitude first. Remaining operations cancel in pairs; one leftover should affect the smallest magnitude.",
+    "update": "Flip negative values with greatest magnitude first. Remaining operations cancel in pairs; one leftover should affect the smallest magnitude.",
+    "done": "Maximize the sum after exactly k sign flips."
+  },
+  "edgeCases": [
+    "Odd leftover flips smallest magnitude",
+    "Even operations cancel",
+    "More negatives than available flips"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

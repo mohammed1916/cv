@@ -1,0 +1,31 @@
+{
+  "number": "1866",
+  "title": "Number of Ways to Rearrange Sticks With K Sticks Visible",
+  "goal": "Count stick permutations with exactly k visible sticks from the left.",
+  "strategy": "Insert the shortest stick into an order of the others. At the front it adds one visible stick; each other insertion position leaves visibility unchanged.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count stick permutations with exactly k visible sticks from the left.",
+    "inspect": "Insert the shortest stick into an order of the others. At the front it adds one visible stick; each other insertion position leaves visibility unchanged.",
+    "update": "Insert the shortest stick into an order of the others. At the front it adds one visible stick; each other insertion position leaves visibility unchanged.",
+    "done": "Count stick permutations with exactly k visible sticks from the left."
+  },
+  "edgeCases": [
+    "Every stick visible forces increasing order",
+    "Only one visible stick",
+    "One stick"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

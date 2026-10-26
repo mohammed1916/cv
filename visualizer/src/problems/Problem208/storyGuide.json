@@ -1,0 +1,23 @@
+{
+  "number": "208",
+  "title": "Implement Trie",
+  "goal": "Solve Implement Trie: Implement a Trie (prefix tree) with insert, search, and startsWith.",
+  "strategy": "Implement a Trie (prefix tree) with insert, search, and startsWith.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "char not in node.children",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "Enter one lowercase alphabetic word.",
+    "Operation must be insert or search."
+  ],
+  "source": [
+    "src/problems/Problem208/index.jsx",
+    "src/problems/Problem208/ImplementTrieVisualizer.jsx"
+  ]
+}

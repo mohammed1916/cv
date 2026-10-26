@@ -1,0 +1,12 @@
+.search, .histogram { margin: 0; color: var(--text); min-width: 0; }
+.search figcaption, .histogram figcaption { font-weight: 700; margin-bottom: 12px; }
+.cells { display: flex; gap: 8px; overflow-x: auto; padding: 8px 2px; }
+.cell { display: grid; align-content: center; gap: 5px; min-width: 72px; padding: 9px; text-align: center; border: 2px solid var(--border); border-radius: 9px; background: var(--surface2); }
+.cell strong { font-size: 1.15rem; }
+.cell small, .cell span { font-size: .72rem; }
+.cell[data-outside="true"] { opacity: .55; border-style: dashed; }
+.cell[data-active="true"], .cell[data-found="true"] { border-color: var(--primary); box-shadow: inset 0 -3px var(--primary); opacity: 1; }
+.bar { fill: var(--surface2); stroke: var(--text-muted); }
+g[data-active="true"] .bar { fill: var(--primary); }
+.text { fill: var(--text); font-size: 12px; }
+.rectangle { fill: color-mix(in srgb, var(--primary) 18%, transparent); stroke: var(--primary); stroke-width: 3; stroke-dasharray: 5 3; }

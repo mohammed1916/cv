@@ -1,0 +1,31 @@
+{
+  "number": "2184",
+  "title": "Number of Ways to Build Sturdy Brick Wall",
+  "goal": "Count brick walls with no aligned internal seams in adjacent rows.",
+  "strategy": "Generate every row tiling as a mask of internal seams. Two row patterns are compatible when their seam masks do not overlap; DP stacks compatible rows modulo one billion plus seven.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count brick walls with no aligned internal seams in adjacent rows.",
+    "inspect": "Generate every row tiling as a mask of internal seams. Two row patterns are compatible when their seam masks do not overlap; DP stacks compatible rows modulo one billion plus seven.",
+    "update": "Generate every row tiling as a mask of internal seams. Two row patterns are compatible when their seam masks do not overlap; DP stacks compatible rows modulo one billion plus seven.",
+    "done": "Count brick walls with no aligned internal seams in adjacent rows."
+  },
+  "edgeCases": [
+    "A full-width brick has no internal seam",
+    "A single row has no adjacent-row restriction",
+    "No brick combination reaches the exact width"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

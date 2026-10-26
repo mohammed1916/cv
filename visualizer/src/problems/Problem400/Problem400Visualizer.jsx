@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/nth-digit.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -193,14 +196,10 @@ function generateSteps(nStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('nth-digit', [
-  { label: 'Example 1', n: '3' },
-  { label: 'Example 2', n: '10' },
-  { label: 'Example 3', n: '15' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem400Visualizer() {
-  const [nInput, setNInput] = useState('3')
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
   const [panelDivs, setPanelDivs] = useState(null)
 
   // Validates the input for the inline hint; generateSteps re-parses nInput
@@ -261,20 +260,7 @@ export default function Problem400Visualizer() {
     <div className="p400-panel-primary">
       <div className="p400-card">
         <div className="p400-section-label">Input</div>
-        <div className="p400-input-row">
-          <div className="p400-field">
-            <label className="p400-input-label" htmlFor="p400-n">Position (n)</label>
-            <input
-              id="p400-n"
-              className={`p400-input mono ${inputError ? 'has-error' : ''}`}
-              value={nInput}
-              onChange={(e) => { setNInput(e.target.value); handleReset() }}
-              placeholder="3"
-              type="number"
-              min="1"
-            />
-          </div>
-        </div>
+        
         <p className={`p400-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Digits are concatenated as 1,2,…,9,10,11,… — find the nth one.'}
         </p>
@@ -402,9 +388,6 @@ export default function Problem400Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -422,6 +405,9 @@ export default function Problem400Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -429,7 +415,7 @@ export default function Problem400Visualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state',   title: 'State',         dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',          dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',          dockMode: 'split-right' },
       { id: 'status',  title: 'Status',        dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

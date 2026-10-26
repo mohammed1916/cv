@@ -1,0 +1,31 @@
+{
+  "number": "2091",
+  "title": "Removing Minimum and Maximum From Array",
+  "goal": "Remove both the minimum and maximum using the fewest deletions from array ends.",
+  "strategy": "Only three plans matter: remove through the farther extreme from the left, from the right, or remove one extreme from each end. Compare their exact counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove both the minimum and maximum using the fewest deletions from array ends.",
+    "inspect": "Only three plans matter: remove through the farther extreme from the left, from the right, or remove one extreme from each end. Compare their exact counts.",
+    "update": "Only three plans matter: remove through the farther extreme from the left, from the right, or remove one extreme from each end. Compare their exact counts.",
+    "done": "Remove both the minimum and maximum using the fewest deletions from array ends."
+  },
+  "edgeCases": [
+    "Extremes already occupy opposite ends",
+    "Adjacent interior extremes favor deleting one prefix or suffix",
+    "One value is both minimum and maximum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

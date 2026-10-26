@@ -1,5 +1,12 @@
 export const meta = {
-  number: '709', title: 'To Lower Case', slug: 'to-lower-case', difficulty: 'Easy',
-  tags: ['String'], accent: '#15803d',
-  description: 'Shift each uppercase ASCII letter by the fixed offset 32 and leave every other character alone.',
-}
+  "number": "709",
+  "title": "To Lower Case",
+  "slug": "to-lower-case",
+  "difficulty": "Easy",
+  "tags": [
+    "Array",
+    "String"
+  ],
+  "accent": "#0891b2",
+  "description": "Convert uppercase English letters to lowercase while preserving all other characters."
+};

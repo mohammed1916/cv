@@ -1,0 +1,31 @@
+{
+  "number": "2073",
+  "title": "Time Needed to Buy Tickets",
+  "goal": "Count seconds until person k finishes buying tickets one at a time.",
+  "strategy": "Before and including k, a person can participate in the final target round; after k, they can participate in only one fewer round. Sum each person capped contribution.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count seconds until person k finishes buying tickets one at a time.",
+    "inspect": "Before and including k, a person can participate in the final target round; after k, they can participate in only one fewer round. Sum each person capped contribution.",
+    "update": "Before and including k, a person can participate in the final target round; after k, they can participate in only one fewer round. Sum each person capped contribution.",
+    "done": "Count seconds until person k finishes buying tickets one at a time."
+  },
+  "edgeCases": [
+    "The target needs only its first ticket",
+    "Target at the very front",
+    "Target at the very back"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "number": "503",
+  "title": "Next Greater Element II",
+  "goal": "Solve Next Greater Element II: Given a circular integer array nums, return the next greater number for every element. The next greater number of x is the first greater number to its traversing order next, searching circularly; if it does not exist, return -1.",
+  "strategy": "Given a circular integer array nums, return the next greater number for every element. The next greater number of x is the first greater number to its traversing order next, searching circularly; if it does not exist, return -1.",
+  "phases": [
+    "init",
+    "visit",
+    "pop",
+    "push",
+    "skip",
+    "wrap",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A circular second pass may resolve pending indices but must not append duplicate answer positions."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter numbers, e.g. 1,2,1",
+    "All entries must be numbers",
+    "Keep the array to 16 elements or fewer"
+  ],
+  "source": [
+    "src/problems/Problem503/index.jsx",
+    "src/problems/Problem503/NextGreaterElementIIVisualizer.jsx"
+  ]
+}

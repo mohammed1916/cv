@@ -1,0 +1,31 @@
+{
+  "number": "2461",
+  "title": "Maximum Sum of Distinct Subarrays With Length K",
+  "goal": "Find the maximum sum of a length-k subarray with all distinct values.",
+  "strategy": "Maintain the fixed window sum and a frequency map. Once the window reaches length k, it is eligible exactly when the map also contains k distinct keys.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the maximum sum of a length-k subarray with all distinct values.",
+    "inspect": "Maintain the fixed window sum and a frequency map. Once the window reaches length k, it is eligible exactly when the map also contains k distinct keys.",
+    "update": "Maintain the fixed window sum and a frequency map. Once the window reaches length k, it is eligible exactly when the map also contains k distinct keys.",
+    "done": "Find the maximum sum of a length-k subarray with all distinct values."
+  },
+  "edgeCases": [
+    "No full window has distinct values",
+    "Length one chooses the largest value",
+    "The whole distinct array is the only full window"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

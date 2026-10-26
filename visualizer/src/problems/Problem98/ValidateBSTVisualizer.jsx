@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/validate-bst.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -6,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ValidateBSTVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -128,10 +131,10 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('validate-bst')
+const EXAMPLES = authoredExamples0
 
 export default function ValidateBSTVisualizer() {
-    const [arrInput, setArrInput] = useState('[5,3,7,1,4,6,8]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { arr, inputError } = useMemo(() => {
@@ -174,12 +177,6 @@ export default function ValidateBSTVisualizer() {
                 {inputError && <span className="vbst-error">{inputError}</span>}
             </header>
             <div className="vbst-body">
-                <div className="vbst-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="vbst-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <input className="vbst-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
                 <div className="vbst-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                     <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                         {edges.map(({ fromId, toId }) => {
@@ -271,9 +268,6 @@ export default function ValidateBSTVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDATEBST_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -284,6 +278,9 @@ export default function ValidateBSTVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={VALIDATEBST_PATTERNS} />
+            )}
         </>
     )
 
@@ -292,7 +289,7 @@ export default function ValidateBSTVisualizer() {
         () => [
             { id: 'primary', title: 'DFS with (lo, hi) bounds', dockMode: 'split-right' },
             { id: 'state', title: 'Bounds', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

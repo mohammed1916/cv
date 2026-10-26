@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/zuma-game.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem488Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -39,11 +42,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('zuma-game', [
-  { label: 'Example 1', board: 'WWWWW', hand: 'W' },
-  { label: 'Example 2', board: 'WRRBBW', hand: 'RB' },
-  { label: 'Example 3', board: 'WBWBW', hand: 'WB' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(board, hand) {
   const steps = []
@@ -119,7 +118,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Game Board (Circular)</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Game Board (Circular)</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', padding: 12, backgroundColor: '#f5f5f5', borderRadius: 6 }}>
           {board.split('').map((color, idx) => (
             <motion.div
@@ -145,7 +144,7 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Hand</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Hand</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {hand.split('').map((color, idx) => (
             <motion.div
@@ -218,8 +217,8 @@ function VisualizationPanel({ board, hand, step, applyEx }) {
 
 export default function Problem488Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [boardInput, setBoardInput] = useState("WWWWW");
-  const [handInput, setHandInput] = useState("WWWWW");
+  const [boardInput, setBoardInput] = useState(String(AUTHORED_INITIAL.board));
+  const [handInput, setHandInput] = useState(String(AUTHORED_INITIAL.hand));
   const { board, hand, inputError } = useMemo(() => {
     try {
       const parsedBoard = boardInput;
@@ -298,7 +297,6 @@ export default function Problem488Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -316,6 +314,7 @@ export default function Problem488Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

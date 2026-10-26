@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--386.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -142,20 +144,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'n=13',
-    n: 13,
-  },
-  {
-    label: 'n=100',
-    n: 100,
-  },
-  {
-    label: 'n=2',
-    n: 2,
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem386Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -387,9 +376,6 @@ export default function Problem386Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -407,6 +393,9 @@ export default function Problem386Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

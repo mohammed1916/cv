@@ -1,0 +1,31 @@
+{
+  "number": "1128",
+  "title": "Number of Equivalent Domino Pairs",
+  "goal": "Count pairs of dominoes equivalent under rotation.",
+  "strategy": "Normalize the smaller endpoint first. A new domino pairs with every earlier occurrence of its normalized key.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs of dominoes equivalent under rotation.",
+    "inspect": "Normalize the smaller endpoint first. A new domino pairs with every earlier occurrence of its normalized key.",
+    "update": "Normalize the smaller endpoint first. A new domino pairs with every earlier occurrence of its normalized key.",
+    "done": "Count pairs of dominoes equivalent under rotation."
+  },
+  "edgeCases": [
+    "Identical endpoints",
+    "No equivalent pairs",
+    "Single domino"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

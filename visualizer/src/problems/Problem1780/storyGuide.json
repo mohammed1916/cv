@@ -1,0 +1,31 @@
+{
+  "number": "1780",
+  "title": "Check if Number is a Sum of Powers of Three",
+  "goal": "Decide whether n is a sum of distinct powers of three.",
+  "strategy": "The ternary expansion gives the coefficient of every power. Coefficients zero and one are allowed; a digit two would require using that power twice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether n is a sum of distinct powers of three.",
+    "inspect": "The ternary expansion gives the coefficient of every power. Coefficients zero and one are allowed; a digit two would require using that power twice.",
+    "update": "The ternary expansion gives the coefficient of every power. Coefficients zero and one are allowed; a digit two would require using that power twice.",
+    "done": "Decide whether n is a sum of distinct powers of three."
+  },
+  "edgeCases": [
+    "A ternary digit two rejects the sum",
+    "A single large power",
+    "Smallest positive value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

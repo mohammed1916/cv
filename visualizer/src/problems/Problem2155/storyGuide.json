@@ -1,0 +1,31 @@
+{
+  "number": "2155",
+  "title": "All Divisions With the Highest Score of a Binary Array",
+  "goal": "Find every split maximizing zeros on the left plus ones on the right.",
+  "strategy": "Initially all ones belong to the right. Moving one element across the split adds a point for zero or removes a point for one, so every split can be scored incrementally.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find every split maximizing zeros on the left plus ones on the right.",
+    "inspect": "Initially all ones belong to the right. Moving one element across the split adds a point for zero or removes a point for one, so every split can be scored incrementally.",
+    "update": "Initially all ones belong to the right. Moving one element across the split adds a point for zero or removes a point for one, so every split can be scored incrementally.",
+    "done": "Find every split maximizing zeros on the left plus ones on the right."
+  },
+  "edgeCases": [
+    "All zeros favor the empty right side",
+    "All ones favor the empty left side",
+    "One zero has a single best endpoint"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

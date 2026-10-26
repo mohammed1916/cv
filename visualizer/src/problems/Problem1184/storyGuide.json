@@ -1,0 +1,31 @@
+{
+  "number": "1184",
+  "title": "Distance Between Bus Stops",
+  "goal": "Find the shorter route between two stops on a circular bus line.",
+  "strategy": "The two routes partition all edges. Sum the interval between the ordered stop indices and compare it with total minus that interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shorter route between two stops on a circular bus line.",
+    "inspect": "The two routes partition all edges. Sum the interval between the ordered stop indices and compare it with total minus that interval.",
+    "update": "The two routes partition all edges. Sum the interval between the ordered stop indices and compare it with total minus that interval.",
+    "done": "Find the shorter route between two stops on a circular bus line."
+  },
+  "edgeCases": [
+    "Same stop needs no travel",
+    "Equal routes",
+    "Zero-weight edges"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

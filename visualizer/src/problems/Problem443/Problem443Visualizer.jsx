@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/string-compression.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem443Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -28,7 +31,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('string-compression')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(chars) {
   const steps = []
@@ -139,7 +142,7 @@ function generateSteps(chars) {
 function OriginalStringVisualization({ chars, readIdx, current }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Original String</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Original String</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -196,7 +199,7 @@ function OriginalStringVisualization({ chars, readIdx, current }) {
 function CompressedStringVisualization({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Compressed Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Compressed Result</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -243,7 +246,7 @@ function StatsVisualization({ chars, result, write }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -292,7 +295,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -334,7 +337,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem443Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [charsInput, setCharsInput] = useState("[\"a\",\"a\",\"b\",\"b\",\"c\",\"c\",\"c\"]");
+  const [charsInput, setCharsInput] = useState(JSON.stringify(AUTHORED_INITIAL.chars));
   const { chars, inputError } = useMemo(() => {
     try {
       const parsedChars = JSON.parse(charsInput); if (!Array.isArray(parsedChars)) throw new Error('chars must be an array');

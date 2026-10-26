@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/median-of-two-sorted-arrays.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -7,7 +10,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MedianOfTwoSortedArraysVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -49,7 +52,7 @@ const SOLUTION_CODE = [
   { line: 10, text: "        while low <= high:" },
   { line: 11, text: "            cut1 = (low + high) // 2" },
   { line: 12, text: "            cut2 = left - cut1" },
-  { line: 13, text: "" },
+  { line: 13, text: "            left1 = nums1[cut1-1] if cut1 else float('-inf'); right1 = nums1[cut1] if cut1 < m else float('inf'); left2 = nums2[cut2-1] if cut2 else float('-inf'); right2 = nums2[cut2] if cut2 < n else float('inf')" },
   { line: 14, text: "            if left1 <= right2 and left2 <= right1:" },
   { line: 15, text: "                if (m + n) % 2 == 0:" },
   {
@@ -63,7 +66,7 @@ const SOLUTION_CODE = [
   { line: 21, text: "                low = cut1 + 1" },
 ];
 
-const EXAMPLES = getExamples('median-of-two-sorted-arrays');
+const EXAMPLES = authoredExamples0;
 
 function parseArrayInput(text) {
   const parsed = JSON.parse(text);
@@ -590,8 +593,8 @@ function PartitionPointerRail({ step, searchValues, otherValues, searchName, oth
 }
 
 export default function MedianOfTwoSortedArraysVisualizer() {
-  const [nums1Input, setNums1Input] = useState("[1, 3]");
-  const [nums2Input, setNums2Input] = useState("[2]");
+  const [nums1Input, setNums1Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums1));
+  const [nums2Input, setNums2Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums2));
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
   const prepared = useMemo(() => {
@@ -731,33 +734,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
             ))}
           </div>
 
-          <div className="median-input-grid">
-            <div className="median-input-group">
-              <span className="median-input-prefix">nums1 =</span>
-              <input
-                className="median-input"
-                value={nums1Input}
-                onChange={(event) => {
-                  setNums1Input(event.target.value);
-                  handleReset();
-                }}
-                placeholder="[1, 3]"
-              />
-            </div>
-
-            <div className="median-input-group">
-              <span className="median-input-prefix">nums2 =</span>
-              <input
-                className="median-input"
-                value={nums2Input}
-                onChange={(event) => {
-                  setNums2Input(event.target.value);
-                  handleReset();
-                }}
-                placeholder="[2]"
-              />
-            </div>
-          </div>
+          
 
           <div className="median-note-box">
             <div className="median-note-title">How the search is set up</div>
@@ -965,7 +942,7 @@ export default function MedianOfTwoSortedArraysVisualizer() {
         {step?.message || "Press Play or Step to begin."}
       </div>
       <div className="median-code-panel-body" style={{ position: 'relative', height: '100%' }}>
-        <CodeTracePanel
+        <CodeTracePanel playgroundInput={{ nums1: prepared.nums1, nums2: prepared.nums2 }} playgroundDisabled={Boolean(prepared.inputError)}
           step={step}
           codeLines={SOLUTION_CODE}
           onActiveLineDomChange={setActiveLineDom}
@@ -986,9 +963,6 @@ export default function MedianOfTwoSortedArraysVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -1006,6 +980,9 @@ export default function MedianOfTwoSortedArraysVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MEDIAN_PATTERNS} />
+      )}
     </>
   );
 

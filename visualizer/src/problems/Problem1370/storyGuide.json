@@ -1,0 +1,31 @@
+{
+  "number": "1370",
+  "title": "Increasing Decreasing String",
+  "goal": "Reorder a string by alternating increasing and decreasing available-letter sweeps.",
+  "strategy": "Each sweep takes at most one of each remaining character. Counts preserve duplicates for later sweeps until all characters are used.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reorder a string by alternating increasing and decreasing available-letter sweeps.",
+    "inspect": "Each sweep takes at most one of each remaining character. Counts preserve duplicates for later sweeps until all characters are used.",
+    "update": "Each sweep takes at most one of each remaining character. Counts preserve duplicates for later sweeps until all characters are used.",
+    "done": "Reorder a string by alternating increasing and decreasing available-letter sweeps."
+  },
+  "edgeCases": [
+    "Only one letter",
+    "Every letter distinct",
+    "Balanced two-letter frequencies"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

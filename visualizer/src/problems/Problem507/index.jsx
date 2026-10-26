@@ -1,1 +1,5 @@
-export { default } from "./PerfectNumberVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./PerfectNumberVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

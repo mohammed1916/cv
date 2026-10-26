@@ -1,0 +1,21 @@
+{
+  "number": "237",
+  "title": "Delete Node in a Linked List",
+  "goal": "Solve Delete Node in a Linked List: Delete a node in linked list given only the node itself (no head reference).",
+  "strategy": "Delete a node in linked list given only the node itself (no head reference).",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The supplied node must not be the tail: copy its successor value and unlink that successor to simulate deleting it."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem237/index.jsx",
+    "src/problems/Problem237/DeleteNodeInALinkedList.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1629",
+  "title": "Slowest Key",
+  "goal": "Find the key with the longest individual press, resolving ties toward the greatest character.",
+  "strategy": "Each duration is the difference between consecutive release times, with the first press starting at zero. Compare individual presses, not accumulated time per key.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the key with the longest individual press, resolving ties toward the greatest character.",
+    "inspect": "Each duration is the difference between consecutive release times, with the first press starting at zero. Compare individual presses, not accumulated time per key.",
+    "update": "Each duration is the difference between consecutive release times, with the first press starting at zero. Compare individual presses, not accumulated time per key.",
+    "done": "Find the key with the longest individual press, resolving ties toward the greatest character."
+  },
+  "edgeCases": [
+    "Lexicographically larger key wins a tie",
+    "First press is longest",
+    "Single key"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

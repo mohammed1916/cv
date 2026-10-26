@@ -1,0 +1,31 @@
+{
+  "number": "1791",
+  "title": "Find Center of Star Graph",
+  "goal": "Find the center of a valid undirected star graph.",
+  "strategy": "Every edge contains the center. Two different star edges share exactly that endpoint, so the first two determine the answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the center of a valid undirected star graph.",
+    "inspect": "Every edge contains the center. Two different star edges share exactly that endpoint, so the first two determine the answer.",
+    "update": "Every edge contains the center. Two different star edges share exactly that endpoint, so the first two determine the answer.",
+    "done": "Find the center of a valid undirected star graph."
+  },
+  "edgeCases": [
+    "Smallest star",
+    "Largest label is center",
+    "Center is one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

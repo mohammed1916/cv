@@ -1,0 +1,31 @@
+{
+  "number": "1930",
+  "title": "Unique Length-3 Palindromic Subsequences",
+  "goal": "Count distinct palindromic subsequences of length three.",
+  "strategy": "For each possible outer letter, its first and last occurrence enclose every possible middle letter. Each distinct middle letter gives one unique palindrome.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct palindromic subsequences of length three.",
+    "inspect": "For each possible outer letter, its first and last occurrence enclose every possible middle letter. Each distinct middle letter gives one unique palindrome.",
+    "update": "For each possible outer letter, its first and last occurrence enclose every possible middle letter. Each distinct middle letter gives one unique palindrome.",
+    "done": "Count distinct palindromic subsequences of length three."
+  },
+  "edgeCases": [
+    "Many index triples spell one palindrome",
+    "No outer letter repeats",
+    "Exactly three positions form a palindrome"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

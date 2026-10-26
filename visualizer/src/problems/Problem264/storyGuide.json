@@ -1,0 +1,23 @@
+{
+  "number": "264",
+  "title": "Ugly Number II",
+  "goal": "Find nth ugly number.",
+  "strategy": "Generate ugly numbers from the next multiples of two, three and five, advancing every pointer whose product equals the chosen minimum.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The sequence starts at one; equal candidate products must advance together to avoid duplicates."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem264/index.jsx",
+    "src/problems/Problem264/Problem264Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "544",
+  "title": "Output Contest Matches",
+  "goal": "Solve Output Contest Matches: Output the contest matches in elimination tournament bracket format.",
+  "strategy": "Output the contest matches in elimination tournament bracket format.",
+  "phases": [
+    "init",
+    "round",
+    "match",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The bracket construction assumes a power-of-two team count; pair opposite ends of each round until one bracket remains."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem544/index.jsx",
+    "src/problems/Problem544/OutputContestMatchesVisualizer.jsx"
+  ]
+}

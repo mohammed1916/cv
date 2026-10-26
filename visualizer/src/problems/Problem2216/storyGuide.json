@@ -1,0 +1,31 @@
+{
+  "number": "2216",
+  "title": "Minimum Deletions to Make Array Beautiful",
+  "goal": "Delete the fewest values so the retained array has even length and unequal values in each adjacent pair.",
+  "strategy": "Keep a first value for a pair, then discard equal candidates until a different second value arrives. Completed pairs never constrain the next pair; discard an unfinished last value if necessary.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Delete the fewest values so the retained array has even length and unequal values in each adjacent pair.",
+    "inspect": "Keep a first value for a pair, then discard equal candidates until a different second value arrives. Completed pairs never constrain the next pair; discard an unfinished last value if necessary.",
+    "update": "Keep a first value for a pair, then discard equal candidates until a different second value arrives. Completed pairs never constrain the next pair; discard an unfinished last value if necessary.",
+    "done": "Delete the fewest values so the retained array has even length and unequal values in each adjacent pair."
+  },
+  "edgeCases": [
+    "An already beautiful even array needs no deletion",
+    "All equal values eventually leave no complete pair",
+    "One trailing unmatched value must be removed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--361.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -207,34 +209,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple Grid',
-    grid: [
-      ['0', 'E', '0'],
-      ['E', '0', 'W'],
-      ['0', 'E', '0'],
-    ],
-  },
-  {
-    label: 'Complex with Walls',
-    grid: [
-      ['0', 'E', '0', 'E'],
-      ['W', '0', 'W', '0'],
-      ['0', 'E', '0', 'W'],
-      ['E', '0', 'E', '0'],
-    ],
-  },
-  {
-    label: 'Optimal Placement',
-    grid: [
-      ['E', '0', 'W', 'E'],
-      ['0', 'E', '0', '0'],
-      ['W', '0', 'W', 'E'],
-      ['E', 'E', 'E', '0'],
-    ],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 const CELL_SIZE = 50
 const PADDING = 20

@@ -1,0 +1,31 @@
+{
+  "number": "2207",
+  "title": "Maximize Number of Subsequences in a String",
+  "goal": "Insert one character to maximize occurrences of a two-character subsequence.",
+  "strategy": "Count existing pattern subsequences in one pass. Inserting the first pattern character at the front adds every second-character occurrence; inserting the second at the end adds every first-character occurrence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Insert one character to maximize occurrences of a two-character subsequence.",
+    "inspect": "Count existing pattern subsequences in one pass. Inserting the first pattern character at the front adds every second-character occurrence; inserting the second at the end adds every first-character occurrence.",
+    "update": "Count existing pattern subsequences in one pass. Inserting the first pattern character at the front adds every second-character occurrence; inserting the second at the end adds every first-character occurrence.",
+    "done": "Insert one character to maximize occurrences of a two-character subsequence."
+  },
+  "edgeCases": [
+    "Equal pattern letters require distinct source positions",
+    "No pattern characters means one insertion still cannot form a pair",
+    "Only first-pattern letters favor insertion at the end"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/local--335.js';
+import authoredExamples1 from '../../config/examples/self-crossing.js';
+
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +11,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SelfCrossingVisualizer.css'
 
 // LeetCode 335. Self Crossing — classic O(n) three-case comparison.
@@ -262,14 +265,7 @@ function generateSteps(x) {
   return steps
 }
 
-const DEFAULT_EXAMPLES = [
-  { label: 'Crosses [2,1,1,2] (Case 1)', distances: [2, 1, 1, 2] },
-  { label: 'No cross [1,2,3,4]', distances: [1, 2, 3, 4] },
-  { label: 'Closed square [1,1,1,1]', distances: [1, 1, 1, 1] },
-  { label: 'Touches [1,1,2,1,1] (Case 2)', distances: [1, 1, 2, 1, 1] },
-  { label: 'Crosses [1,1,2,2,1,1] (Case 3)', distances: [1, 1, 2, 2, 1, 1] },
-  { label: 'Growing spiral [1,2,3,4,5,6]', distances: [1, 2, 3, 4, 5, 6] },
-]
+const DEFAULT_EXAMPLES = authoredExamples0
 
 function exampleToArray(ex) {
   if (Array.isArray(ex)) return ex
@@ -280,7 +276,7 @@ function exampleToArray(ex) {
   return []
 }
 
-const REGISTERED = getExamplesOr('self-crossing', [])
+const REGISTERED = (authoredExamples1.length ? authoredExamples1 : [])
 const EXAMPLES = REGISTERED.length > 0 ? REGISTERED : DEFAULT_EXAMPLES
 
 const W = 420

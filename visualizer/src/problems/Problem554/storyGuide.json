@@ -1,0 +1,27 @@
+{
+  "number": "554",
+  "title": "Brick Wall",
+  "goal": "Solve Brick Wall: You have a brick wall with rows of varying brick widths. Find the vertical line that crosses through the least number of bricks.",
+  "strategy": "You have a brick wall with rows of varying brick widths. Find the vertical line that crosses through the least number of bricks.",
+  "phases": [
+    "iterate",
+    "edge_count",
+    "find_max",
+    "result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not edge_count",
+      "outcome": "return len(wall)"
+    }
+  ],
+  "inputRules": [
+    "Input must be array of arrays"
+  ],
+  "source": [
+    "src/problems/Problem554/index.jsx",
+    "src/problems/Problem554/BrickWallVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2133",
+  "title": "Check if Every Row and Column Contains All Numbers",
+  "goal": "Check that every row and every column contains every value from one through n.",
+  "strategy": "The input values are restricted to one through n. Therefore a row or column of length n has the required values exactly when its set has size n.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check that every row and every column contains every value from one through n.",
+    "inspect": "The input values are restricted to one through n. Therefore a row or column of length n has the required values exactly when its set has size n.",
+    "update": "The input values are restricted to one through n. Therefore a row or column of length n has the required values exactly when its set has size n.",
+    "done": "Check that every row and every column contains every value from one through n."
+  },
+  "edgeCases": [
+    "Rows may be valid while columns repeat values",
+    "A duplicated row value violates the condition",
+    "A one-cell square has the full required set"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/longest-substring-k-distinct.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './LongestSubstringwithAtMostKDistinctCharactersVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -149,7 +152,7 @@ function generateSteps(s, k) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('longest-substring-k-distinct', [])
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 const EXAMPLES =
   REGISTRY_EXAMPLES.length > 0
     ? REGISTRY_EXAMPLES
@@ -172,14 +175,14 @@ function VisualizationPanel({ step, s, k, inputError, handleReset }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%', overflow: 'auto' }}>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 160 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minWidth: 160 }}>
           <span style={{ fontSize: 12, color: COL.muted }}>String s</span>
-          <input readOnly value={s} className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36 }} />
-        </label>
-        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 90 }}>
+          <div className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36, display: 'flex', alignItems: 'center' }}>{s}</div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 90 }}>
           <span style={{ fontSize: 12, color: COL.muted }}>k</span>
-          <input readOnly value={k} className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36 }} />
-        </label>
+          <div className="longest-substringwith-at-most-k-distinct-characters-textarea" style={{ flex: 'none', minHeight: 0, height: 36, display: 'flex', alignItems: 'center' }}>{k}</div>
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
@@ -244,8 +247,8 @@ function VisualizationPanel({ step, s, k, inputError, handleReset }) {
 }
 
 export default function LongestSubstringwithAtMostKDistinctCharactersVisualizer() {
-  const [sInput, setSInput] = useState('eceba')
-  const [kInput, setKInput] = useState('2')
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s ?? ''))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k ?? 0))
 
   const inputError = useMemo(() => {
     const trimmed = kInput.trim()

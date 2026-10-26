@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/output-contest-matches.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './OutputContestMatchesVisualizer.css'
 import { createPortal } from 'react-dom'
 
@@ -211,7 +212,7 @@ function VisualizationPanel({ n, step, applyExample, examples }) {
 }
 
 export default function OutputContestMatchesVisualizer() {
-  const examples = useMemo(() => getExamplesOr('output-contest-matches', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [nValue, setNValue] = useState(2)
 
   const steps = useMemo(() => generateSteps(nValue), [nValue])
@@ -305,7 +306,6 @@ export default function OutputContestMatchesVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -323,6 +323,7 @@ export default function OutputContestMatchesVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

@@ -1,0 +1,31 @@
+{
+  "number": "1710",
+  "title": "Maximum Units on a Truck",
+  "goal": "Load a limited number of boxes to maximize total units.",
+  "strategy": "Every box costs one truck slot, so units per box alone determine priority. Take the highest-unit types first until capacity is exhausted.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Load a limited number of boxes to maximize total units.",
+    "inspect": "Every box costs one truck slot, so units per box alone determine priority. Take the highest-unit types first until capacity is exhausted.",
+    "update": "Every box costs one truck slot, so units per box alone determine priority. Take the highest-unit types first until capacity is exhausted.",
+    "done": "Load a limited number of boxes to maximize total units."
+  },
+  "edgeCases": [
+    "Enough room for everything",
+    "One truck slot",
+    "Equal units make order irrelevant"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

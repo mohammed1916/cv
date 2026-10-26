@@ -1,0 +1,31 @@
+{
+  "number": "2181",
+  "title": "Merge Nodes in Between Zeros",
+  "goal": "Merge each run between zero delimiters into one sum node.",
+  "strategy": "Walk the actual list while accumulating positive values. An ending zero commits the run sum to a new output node and resets the accumulator for the next run.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Merge each run between zero delimiters into one sum node.",
+    "inspect": "Walk the actual list while accumulating positive values. An ending zero commits the run sum to a new output node and resets the accumulator for the next run.",
+    "update": "Walk the actual list while accumulating positive values. An ending zero commits the run sum to a new output node and resets the accumulator for the next run.",
+    "done": "Merge each run between zero delimiters into one sum node."
+  },
+  "edgeCases": [
+    "One positive value between delimiters remains its own sum",
+    "Single-node runs produce the same sequence of values",
+    "A long run becomes one output node"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

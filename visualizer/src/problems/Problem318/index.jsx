@@ -1,1 +1,5 @@
-export { default } from "./MaximumProductofWordLengthsVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MaximumProductofWordLengthsVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

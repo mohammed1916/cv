@@ -1,0 +1,31 @@
+{
+  "number": "2007",
+  "title": "Find Original Array From Doubled Array",
+  "goal": "Recover an array whose values and doubles form the supplied multiset.",
+  "strategy": "For nonnegative values, process the smallest remaining value first. It must pair with its double; decrement the original occurrence before checking the partner so zero correctly consumes two copies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Recover an array whose values and doubles form the supplied multiset.",
+    "inspect": "For nonnegative values, process the smallest remaining value first. It must pair with its double; decrement the original occurrence before checking the partner so zero correctly consumes two copies.",
+    "update": "For nonnegative values, process the smallest remaining value first. It must pair with its double; decrement the original occurrence before checking the partner so zero correctly consumes two copies.",
+    "done": "Recover an array whose values and doubles form the supplied multiset."
+  },
+  "edgeCases": [
+    "Zero must consume two separate occurrences",
+    "A missing double invalidates the whole candidate",
+    "Odd length cannot be a doubled array"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

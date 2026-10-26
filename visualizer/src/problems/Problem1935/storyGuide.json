@@ -1,0 +1,31 @@
+{
+  "number": "1935",
+  "title": "Maximum Number of Words You Can Type",
+  "goal": "Count words that can be typed without a broken key.",
+  "strategy": "A word is usable only if every letter avoids the broken-key set. Repeated letters and repeated words each obey the same membership rule.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count words that can be typed without a broken key.",
+    "inspect": "A word is usable only if every letter avoids the broken-key set. Repeated letters and repeated words each obey the same membership rule.",
+    "update": "A word is usable only if every letter avoids the broken-key set. Repeated letters and repeated words each obey the same membership rule.",
+    "done": "Count words that can be typed without a broken key."
+  },
+  "edgeCases": [
+    "No keys are broken",
+    "Every word needs the same broken key",
+    "Repeated words count separately"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

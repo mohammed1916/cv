@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--80.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -25,10 +29,7 @@ const LINE_PATTERN_MAP = {
   7: 'done',
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', nums: [1, 1, 1, 2, 2, 3] },
-  { label: 'Example 2', nums: [0, 0, 1, 1, 1, 1, 2, 3, 3] },
-]
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE = [
   { line: 1, text: 'write = 0' },
@@ -233,7 +234,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem80Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,1,1,2,2,3]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -322,9 +323,6 @@ export default function Problem80Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -342,6 +340,9 @@ export default function Problem80Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -350,7 +351,7 @@ export default function Problem80Visualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '🔢 Remove Duplicates II', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

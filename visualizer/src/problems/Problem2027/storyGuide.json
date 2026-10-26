@@ -1,0 +1,31 @@
+{
+  "number": "2027",
+  "title": "Minimum Moves to Convert String",
+  "goal": "Convert every X to O using the fewest length-three changes.",
+  "strategy": "At the leftmost remaining X, one operation must cover it. Cover it and as much of the remaining suffix as possible, then skip the positions this operation settles.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert every X to O using the fewest length-three changes.",
+    "inspect": "At the leftmost remaining X, one operation must cover it. Cover it and as much of the remaining suffix as possible, then skip the positions this operation settles.",
+    "update": "At the leftmost remaining X, one operation must cover it. Cover it and as much of the remaining suffix as possible, then skip the positions this operation settles.",
+    "done": "Convert every X to O using the fewest length-three changes."
+  },
+  "edgeCases": [
+    "Already converted text needs no moves",
+    "A final X uses a full segment shifted left",
+    "The smallest all-X string"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

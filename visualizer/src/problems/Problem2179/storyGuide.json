@@ -1,0 +1,31 @@
+{
+  "number": "2179",
+  "title": "Count Good Triplets in an Array",
+  "goal": "Count value triples occurring in the same relative order in both permutations.",
+  "strategy": "Map the first permutation into positions in the second. For each middle element, a Fenwick tree counts earlier smaller positions; the unused larger positions count valid right endpoints.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count value triples occurring in the same relative order in both permutations.",
+    "inspect": "Map the first permutation into positions in the second. For each middle element, a Fenwick tree counts earlier smaller positions; the unused larger positions count valid right endpoints.",
+    "update": "Map the first permutation into positions in the second. For each middle element, a Fenwick tree counts earlier smaller positions; the unused larger positions count valid right endpoints.",
+    "done": "Count value triples occurring in the same relative order in both permutations."
+  },
+  "edgeCases": [
+    "Identical order makes every triple good",
+    "Opposite orders have no common increasing triple",
+    "Only one possible triple must be checked"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

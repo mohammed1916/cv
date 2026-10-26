@@ -1,0 +1,31 @@
+{
+  "number": "1827",
+  "title": "Minimum Operations to Make the Array Increasing",
+  "goal": "Make the array strictly increasing with the fewest single-value increments.",
+  "strategy": "At each position keep the original value if already large enough; otherwise raise it to exactly previous repaired value plus one. Extra increments never help later positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Make the array strictly increasing with the fewest single-value increments.",
+    "inspect": "At each position keep the original value if already large enough; otherwise raise it to exactly previous repaired value plus one. Extra increments never help later positions.",
+    "update": "At each position keep the original value if already large enough; otherwise raise it to exactly previous repaired value plus one. Extra increments never help later positions.",
+    "done": "Make the array strictly increasing with the fewest single-value increments."
+  },
+  "edgeCases": [
+    "Already strictly increasing",
+    "All equal values",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

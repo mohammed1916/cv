@@ -1,5 +1,12 @@
 export const meta = {
-  number: '701', title: 'Insert into a Binary Search Tree', slug: 'insert-into-a-binary-search-tree', difficulty: 'Medium',
-  tags: ['Tree', 'Binary Search Tree', 'Binary Tree'], accent: '#0f766e',
-  description: 'Walk down by comparison to the empty slot where the value belongs, and attach a new leaf there.',
-}
+  "number": "701",
+  "title": "Insert into a Binary Search Tree",
+  "slug": "insert-into-a-binary-search-tree",
+  "difficulty": "Medium",
+  "tags": [
+    "Tree",
+    "Binary Tree"
+  ],
+  "accent": "#0891b2",
+  "description": "Insert a new value as a leaf while preserving strict BST order."
+};

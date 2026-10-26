@@ -1,0 +1,31 @@
+{
+  "number": "491",
+  "title": "Non-decreasing Subsequences",
+  "goal": "List all distinct nondecreasing subsequences of length at least two.",
+  "strategy": "Backtracking preserves source order and permits equal values. A fresh used-value set at each recursion depth prevents duplicate choices at that depth without blocking equal values later in a subsequence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List all distinct nondecreasing subsequences of length at least two.",
+    "inspect": "Backtracking preserves source order and permits equal values. A fresh used-value set at each recursion depth prevents duplicate choices at that depth without blocking equal values later in a subsequence.",
+    "update": "Backtracking preserves source order and permits equal values. A fresh used-value set at each recursion depth prevents duplicate choices at that depth without blocking equal values later in a subsequence.",
+    "done": "List all distinct nondecreasing subsequences of length at least two."
+  },
+  "edgeCases": [
+    "Equal values may extend a nondecreasing subsequence",
+    "Strictly decreasing values have no length-two result",
+    "A singleton cannot produce a qualifying subsequence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

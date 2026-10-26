@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/max-area-of-island.js';
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +10,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MaxAreaOfIsland.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -190,20 +191,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('max-area-of-island', [
-  {
-    label: 'Basic',
-    gridStr: '[[1,1,0,0,0],[1,1,0,0,0],[0,0,1,0,0],[0,0,0,1,1]]',
-  },
-  {
-    label: 'Dense',
-    gridStr: '[[1,1,1],[0,1,0],[1,1,1]]',
-  },
-  {
-    label: 'Sparse',
-    gridStr: '[[0,0,0],[0,1,0],[0,0,0]]',
-  },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const ISLAND_COLORS = [
   '#3b82f6',
@@ -266,27 +254,6 @@ export default function MaxAreaOfIslandVisualizer() {
                 applyExample={applyExample}
                 inputError={inputError}
               />
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {EXAMPLES.map((ex) => (
-                <button
-                  key={ex.label}
-                  onClick={() => applyExample(ex)}
-                  className="maoi-example-btn"
-                >
-                  {ex.label}
-                </button>
-              ))}
-            </div>
-
-            {inputError && <div style={{ color: '#ea0c0c', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
-
-            <textarea
-              className="maoi-input-textarea"
-              value={gridInput}
-              onChange={(e) => { setGridInput(e.target.value); handleReset() }}
-              rows={5}
-              spellCheck={false}
-            />
 
             <div className="maoi-grid-container">
               <div
@@ -411,7 +378,7 @@ export default function MaxAreaOfIslandVisualizer() {
     () => [
       { id: 'grid', title: 'Grid View & Input' },
       { id: 'state', title: 'State & Info', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ],
     []
   )

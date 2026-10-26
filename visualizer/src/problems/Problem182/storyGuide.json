@@ -1,0 +1,21 @@
+{
+  "number": "182",
+  "title": "Duplicate Emails",
+  "goal": "Solve Duplicate Emails: SQL query to find duplicate emails using GROUP BY and HAVING.",
+  "strategy": "SQL query to find duplicate emails using GROUP BY and HAVING.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Return each duplicated email once, even if it occurs more than twice."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem182/index.jsx",
+    "src/problems/Problem182/DuplicateEmailsVisualizer.jsx"
+  ]
+}

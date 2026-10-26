@@ -1,0 +1,35 @@
+{
+  "number": "408",
+  "title": "Valid Word Abbreviation",
+  "goal": "Solve Valid Word Abbreviation: Check if an abbreviation is valid for a word (e.g., 'internationalization' matches 'i18n').",
+  "strategy": "Check if an abbreviation is valid for a word (e.g., 'internationalization' matches 'i18n').",
+  "phases": [
+    "done",
+    "init",
+    "check_char",
+    "parse_number",
+    "invalid_skip",
+    "after_skip",
+    "char_mismatch",
+    "char_match"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "abbr[j]=='0'",
+      "outcome": "return False"
+    },
+    {
+      "condition": "word[i]!=abbr[j]",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "abbr must be an array"
+  ],
+  "source": [
+    "src/problems/Problem408/index.jsx",
+    "src/problems/Problem408/Problem408Visualizer.jsx"
+  ]
+}

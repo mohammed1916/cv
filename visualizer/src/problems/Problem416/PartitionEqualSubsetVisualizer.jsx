@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/partition-equal-subset.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -9,7 +12,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./PartitionEqualSubsetVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -28,7 +31,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return target in dp" },
 ];
 
-const EXAMPLES = getExamples('partition-equal-subset');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
   const steps = [];
@@ -66,7 +69,7 @@ function generateSteps(nums) {
 
 export default function PartitionEqualSubsetVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,5,11,5]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -180,7 +183,7 @@ export default function PartitionEqualSubsetVisualizer() {
     () => [
       { id: "input", title: "Input" },
       { id: "viz", title: "Visualization", dockMode: "split-right" },
-      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+      { id: "code", title: "Code Trace", dockMode: "split-right" },
     ],
     []
   );

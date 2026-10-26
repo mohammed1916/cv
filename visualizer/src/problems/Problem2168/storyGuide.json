@@ -1,0 +1,31 @@
+{
+  "number": "2168",
+  "title": "Unique Substrings With Equal Digit Frequency",
+  "goal": "Count distinct substrings whose present digits all occur equally often.",
+  "strategy": "Extend each start position while updating ten digit counts. A substring qualifies when all nonzero counts agree; a set deduplicates equal text appearing at different positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct substrings whose present digits all occur equally often.",
+    "inspect": "Extend each start position while updating ten digit counts. A substring qualifies when all nonzero counts agree; a set deduplicates equal text appearing at different positions.",
+    "update": "Extend each start position while updating ten digit counts. A substring qualifies when all nonzero counts agree; a set deduplicates equal text appearing at different positions.",
+    "done": "Count distinct substrings whose present digits all occur equally often."
+  },
+  "edgeCases": [
+    "One repeated digit makes every length valid but duplicate occurrences collapse",
+    "All distinct digits give equal frequency one in every substring",
+    "A single zero is a valid distinct substring"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

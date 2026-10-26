@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/minimum-absolute-difference-in-bst.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './MinimumAbsoluteDifferenceInBSTVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -27,7 +28,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('minimum-absolute-difference-in-bst')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK_ROOT = [4, 2, 6, 1, 3]
 
@@ -143,7 +144,7 @@ function VisualizationPanel({ step }) {
 
       {/* Inorder Sequence */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Inorder Sequence</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Inorder Sequence</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {step?.inorderSequence?.map((val, idx) => {
             const isLast = idx === step.inorderSequence.length - 1
@@ -340,9 +341,6 @@ export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -360,6 +358,9 @@ export default function MinimumAbsoluteDifferenceInBSTVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

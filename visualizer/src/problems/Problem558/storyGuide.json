@@ -1,0 +1,31 @@
+{
+  "number": "558",
+  "title": "Logical OR of Two Binary Grids Represented as Quad-Trees",
+  "goal": "Compute logical OR of two compressed binary images and compress the result.",
+  "strategy": "A true leaf makes its entire region true, while a false leaf contributes nothing and can reuse the other subtree. Only two mixed regions require four recursive comparisons. Equal result leaves collapse back into one leaf.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute logical OR of two compressed binary images and compress the result.",
+    "inspect": "A true leaf makes its entire region true, while a false leaf contributes nothing and can reuse the other subtree. Only two mixed regions require four recursive comparisons. Equal result leaves collapse back into one leaf.",
+    "update": "A true leaf makes its entire region true, while a false leaf contributes nothing and can reuse the other subtree. Only two mixed regions require four recursive comparisons. Equal result leaves collapse back into one leaf.",
+    "done": "Compute logical OR of two compressed binary images and compress the result."
+  },
+  "edgeCases": [
+    "Complementary quadrants collapse into one true leaf",
+    "An all-zero image reuses the other compressed image",
+    "Two false single-cell leaves stay false"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

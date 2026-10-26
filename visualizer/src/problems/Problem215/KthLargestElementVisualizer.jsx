@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/kth-largest-element.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './KthLargestElementVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -56,11 +59,11 @@ function generateSteps(nums, k) {
   return steps
 }
 
-const EXAMPLES = getExamples('kth-largest-element')
+const EXAMPLES = authoredExamples0
 
 export default function KthLargestElementVisualizer() {
-  const [numsInput, setNumsInput] = useState('[3,2,1,5,6,4]')
-  const [kInput, setKInput] = useState('2')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
   const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -97,10 +100,7 @@ export default function KthLargestElementVisualizer() {
           inputError={inputError}
         />
       <div className="kl-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="kl-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
-      <div className="kl-inputs">
-        <input className="kl-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset() }} placeholder="e.g., [3,2,1,5,6,4]" />
-        <input className="kl-input small" value={kInput} onChange={(e) => { setKInput(e.target.value); handleReset() }} placeholder="k" />
-      </div>
+      
       {inputError && <div className="kl-error">{inputError}</div>}
       <div className="kl-stream">
         {nums.map((v, i) => <motion.div key={`${v}-${i}`} className={`kl-num ${step?.i === i ? 'active' : ''}`} animate={step?.i === i ? { y: -5 } : { y: 0 }}>{v}</motion.div>)}
@@ -131,7 +131,7 @@ export default function KthLargestElementVisualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input & Heap Evolution' },
     { id: 'heap', title: 'Min-Heap State', dockMode: 'split-right' },
-    { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
   ], [])
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

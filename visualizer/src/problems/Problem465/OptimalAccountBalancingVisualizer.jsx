@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/optimal-account-balancing.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -50,11 +51,7 @@ const SOLUTION_CODE = [
   { line: 21, text: '    return dfs(0)' },
 ]
 
-const EXAMPLES = getExamplesOr('optimal-account-balancing', [
-  { label: 'Example 1', text: '[[0,1,10],[2,0,5]]' },
-  { label: 'Example 2', text: '[[0,1,10],[1,0,1],[1,2,5],[2,0,5]]' },
-  { label: 'Three-way', text: '[[0,1,4],[1,2,4],[2,0,4]]' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function parseTransactions(text) {
   const nums = text.match(/-?\d+/g)
@@ -498,9 +495,6 @@ export default function OptimalAccountBalancingVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -518,6 +512,9 @@ export default function OptimalAccountBalancingVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -525,7 +522,7 @@ export default function OptimalAccountBalancingVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     [],

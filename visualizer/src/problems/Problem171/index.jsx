@@ -1,1 +1,5 @@
-export { default } from './ExcelSheetColumnNumberVisualizer';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ExcelSheetColumnNumberVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

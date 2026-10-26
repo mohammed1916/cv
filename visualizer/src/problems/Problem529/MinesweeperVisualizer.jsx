@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/minesweeper.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './MinesweeperVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +31,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('minesweeper')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK_BOARD = [['E', 'E', 'E', 'E', 'E'], ['E', 'E', 'M', 'E', 'E'], ['E', 'E', 'E', 'E', 'E'], ['E', 'E', 'E', 'E', 'E']]
 const FALLBACK_CLICK = [0, 0]
@@ -197,7 +198,7 @@ function VisualizationPanel({ step }) {
 
       {/* Board */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Board State</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Board State</div>
         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${step?.board[0]?.length || 5}, 1fr)`, gap: 4 }}>
           {step?.board?.map((row, r) =>
             row.map((cell, c) => {
@@ -379,9 +380,6 @@ export default function MinesweeperVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -399,6 +397,9 @@ export default function MinesweeperVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

@@ -1,0 +1,31 @@
+{
+  "number": "2040",
+  "title": "Kth Smallest Product of Two Sorted Arrays",
+  "goal": "Find the kth smallest pair product from two sorted signed arrays.",
+  "strategy": "Binary search the answer value. For each first-array value, binary-search how many second-array products are at most the threshold; negative multipliers reverse the monotone direction.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the kth smallest pair product from two sorted signed arrays.",
+    "inspect": "Binary search the answer value. For each first-array value, binary-search how many second-array products are at most the threshold; negative multipliers reverse the monotone direction.",
+    "update": "Binary search the answer value. For each first-array value, binary-search how many second-array products are at most the threshold; negative multipliers reverse the monotone direction.",
+    "done": "Find the kth smallest pair product from two sorted signed arrays."
+  },
+  "edgeCases": [
+    "All products are negative with reversed per-row order",
+    "Duplicate products occupy distinct pair ranks",
+    "A single product fixes the answer without a search"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

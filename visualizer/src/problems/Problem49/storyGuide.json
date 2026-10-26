@@ -1,0 +1,28 @@
+{
+  "number": "49",
+  "title": "Group Anagrams",
+  "goal": "Solve Group Anagrams: Map each string to a canonical character-multiplicity signature and collect strings with identical signatures.",
+  "strategy": "Map each string to a canonical character-multiplicity signature and collect strings with identical signatures.",
+  "phases": [
+    "append",
+    "done",
+    "existing",
+    "init",
+    "new_group",
+    "pick",
+    "sort"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated letters matter; empty strings share the empty signature."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be a JSON array of strings",
+    "Max 12 words for clarity"
+  ],
+  "source": [
+    "src/problems/Problem49/index.jsx",
+    "src/problems/Problem49/GroupAnagramsVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "510",
+  "title": "Inorder Successor in BST II",
+  "goal": "Find the inorder successor of a BST node using its child and parent links.",
+  "strategy": "If a right subtree exists, its leftmost node is next. Otherwise climb past ancestors reached from their right child; the first ancestor reached from its left child is the next larger node.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the inorder successor of a BST node using its child and parent links.",
+    "inspect": "If a right subtree exists, its leftmost node is next. Otherwise climb past ancestors reached from their right child; the first ancestor reached from its left child is the next larger node.",
+    "update": "If a right subtree exists, its leftmost node is next. Otherwise climb past ancestors reached from their right child; the first ancestor reached from its left child is the next larger node.",
+    "done": "Find the inorder successor of a BST node using its child and parent links."
+  },
+  "edgeCases": [
+    "Climb past several right-child ancestors",
+    "The maximum node has no successor",
+    "A single-node tree also has no successor"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,413 @@
+.flat-index-bounds {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 12px 12px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 9px;
+
+  background:
+    var(--surface3);
+}
+
+.flat-index-bounds__head {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 8px;
+}
+
+.flat-index-bounds__title {
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  color:
+    var(--text-muted);
+}
+
+.flat-index-bounds__range {
+  padding: 2px 6px;
+
+  border:
+    1px solid
+    rgba(56, 189, 248, 0.22);
+
+  border-radius: 4px;
+
+  background:
+    rgba(56, 189, 248, 0.06);
+
+  font-family: monospace;
+  font-size: 9px;
+
+  color:
+    #38bdf8;
+}
+
+
+/* =========================================================
+   STAGE
+   ========================================================= */
+
+.flat-index-bounds__stage {
+  position: relative;
+
+  padding-top: 27px;
+  padding-bottom: 25px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+
+/* =========================================================
+   ENGINEERING BRACKET
+   ========================================================= */
+
+.flat-index-bounds__bracket {
+  position: absolute;
+
+  top: 8px;
+
+  height: 14px;
+
+  box-sizing: border-box;
+
+  border-top:
+    2px solid
+    #38bdf8;
+
+  border-left:
+    2px solid
+    #38bdf8;
+
+  border-right:
+    2px solid
+    #38bdf8;
+
+  border-radius:
+    4px 4px 0 0;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.flat-index-bounds__bracket::before,
+.flat-index-bounds__bracket::after {
+  content: '';
+
+  position: absolute;
+
+  bottom: -3px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    #38bdf8;
+}
+
+.flat-index-bounds__bracket::before {
+  left: -3px;
+}
+
+.flat-index-bounds__bracket::after {
+  right: -3px;
+}
+
+.flat-index-bounds__bracket-label {
+  position: absolute;
+
+  top: -15px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  padding: 0 4px;
+
+  background:
+    var(--surface3);
+
+  font-family: monospace;
+  font-size: 8px;
+  font-weight: 800;
+
+  color:
+    #38bdf8;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TRACK
+   ========================================================= */
+
+.flat-index-bounds__track {
+  display: flex;
+
+  width: 100%;
+  min-width: max-content;
+}
+
+.flat-index-bounds__slot {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 1 0 46px;
+
+  min-width: 46px;
+  height: 42px;
+
+  box-sizing: border-box;
+
+  border-top:
+    1px solid
+    var(--border);
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+  border-right:
+    1px solid
+    var(--border);
+
+  background:
+    var(--surface2);
+
+  transition:
+    opacity 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.flat-index-bounds__slot:first-child {
+  border-left:
+    1px solid
+    var(--border);
+
+  border-radius:
+    6px 0 0 6px;
+}
+
+.flat-index-bounds__slot:last-child {
+  border-radius:
+    0 6px 6px 0;
+}
+
+.flat-index-bounds__slot.is-in-range {
+  background:
+    rgba(56, 189, 248, 0.055);
+
+  border-color:
+    rgba(56, 189, 248, 0.28);
+}
+
+.flat-index-bounds__slot.is-out {
+  opacity: 0.23;
+}
+
+.flat-index-bounds__slot.is-eliminated {
+  opacity: 0.12;
+
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 5px,
+      rgba(
+        148,
+        163,
+        184,
+        0.08
+      ) 5px,
+      rgba(
+        148,
+        163,
+        184,
+        0.08
+      ) 7px
+    );
+}
+
+
+/* =========================================================
+   VALUES
+   ========================================================= */
+
+.flat-index-bounds__value {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 800;
+
+  color:
+    var(--text);
+}
+
+.flat-index-bounds__index {
+  margin-top: 2px;
+
+  font-family: monospace;
+  font-size: 8px;
+
+  color:
+    var(--text-dim);
+}
+
+
+/* =========================================================
+   SPECIAL POSITIONS
+   ========================================================= */
+
+.flat-index-bounds__slot.is-lo {
+  border-color:
+    #06b6d4;
+
+  box-shadow:
+    inset 3px 0 0
+    rgba(6, 182, 212, 0.35);
+}
+
+.flat-index-bounds__slot.is-hi {
+  border-color:
+    #c084fc;
+
+  box-shadow:
+    inset -3px 0 0
+    rgba(192, 132, 252, 0.35);
+}
+
+.flat-index-bounds__slot.is-mid {
+  z-index: 3;
+
+  border-color:
+    #f59e0b;
+
+  background:
+    rgba(245, 158, 11, 0.13);
+
+  box-shadow:
+    0 0 0 2px
+      rgba(245, 158, 11, 0.07),
+    0 5px 12px
+      rgba(245, 158, 11, 0.09);
+}
+
+.flat-index-bounds__slot.is-mid
+.flat-index-bounds__value {
+  color:
+    #f59e0b;
+}
+
+
+/* =========================================================
+   POINTERS
+   ========================================================= */
+
+.flat-index-bounds__pointers {
+  position: absolute;
+
+  top: calc(100% + 4px);
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 2px;
+}
+
+.flat-index-bounds__pointer {
+  padding: 1px 4px;
+
+  border-radius: 3px;
+
+  font-family: monospace;
+  font-size: 8px;
+  font-weight: 900;
+
+  white-space: nowrap;
+}
+
+.flat-index-bounds__pointer.is-lo {
+  background:
+    rgba(6, 182, 212, 0.12);
+
+  color:
+    #06b6d4;
+}
+
+.flat-index-bounds__pointer.is-mid {
+  background:
+    rgba(245, 158, 11, 0.12);
+
+  color:
+    #f59e0b;
+}
+
+.flat-index-bounds__pointer.is-hi {
+  background:
+    rgba(192, 132, 252, 0.12);
+
+  color:
+    #c084fc;
+}
+
+
+/* =========================================================
+   MID GUIDE
+   ========================================================= */
+
+.flat-index-bounds__mid-line {
+  position: absolute;
+
+  top: 21px;
+
+  width: 1px;
+  height: 7px;
+
+  transform:
+    translateX(-50%);
+
+  border-left:
+    1px dashed
+    rgba(245, 158, 11, 0.7);
+
+  pointer-events: none;
+}
+
+.flat-index-bounds__mid-line span {
+  position: absolute;
+
+  bottom: -2px;
+  left: -3px;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background:
+    #f59e0b;
+}

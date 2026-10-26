@@ -1,0 +1,31 @@
+{
+  "number": "1936",
+  "title": "Add Minimum Number of Rungs",
+  "goal": "Bridge every ladder gap using the fewest added rungs.",
+  "strategy": "A gap of g needs floor((g-1)/dist) intermediate rungs. Subtracting one avoids adding a rung when the upper endpoint is already reachable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Bridge every ladder gap using the fewest added rungs.",
+    "inspect": "A gap of g needs floor((g-1)/dist) intermediate rungs. Subtracting one avoids adding a rung when the upper endpoint is already reachable.",
+    "update": "A gap of g needs floor((g-1)/dist) intermediate rungs. Subtracting one avoids adding a rung when the upper endpoint is already reachable.",
+    "done": "Bridge every ladder gap using the fewest added rungs."
+  },
+  "edgeCases": [
+    "Exact multiples need no endpoint duplicates",
+    "First rung is far above ground",
+    "Every integer height is required"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

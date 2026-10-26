@@ -4,13 +4,20 @@ Access UI and payment backend implemented locally on September 10, 2026. Google 
 
 ## Product decision
 
-- Free: all Basics and Easy visualizers; Medium problems 2, 3, 11, 15, 33, 49, 53, 56, 62, 78, 98, 102, 198, 200, 238; tutorial; 30 minutes of playground per day after Google sign-in.
-- Pro: every implemented visualizer and unlimited playground time. ₹199 for 30 days or ₹1,499 for 365 days. One-time purchases, no automatic renewal. AI provider quotas and charges remain separate.
+- Free: all Basics and Easy visualizers; Medium problems 2, 3, 11, 15, 33, 49, 53, 56, 62, 78, 98, 102, 198, 200, 238, 2333; tutorial; 30 minutes of playground per day after Google sign-in.
+- Pro: every implemented visualizer and unlimited playground time. ₹19 for 30 days or ₹228 for 365 days (₹19 × 12). One-time purchases, no automatic renewal. AI provider quotas and charges remain separate.
+- Free trial: eligible Google accounts can choose Start 3-day free trial for exactly 72 hours of Pro access, without a payment method or automatic charge. `startProTrial` transactionally records server-owned `trialStartedAt` and `trialEndsAt`; repeated calls cannot extend it, and accounts with prior paid access are ineligible. Expiry restores the usual free tier. Purchasing during a trial appends the paid period after the remaining trial time.
 - Catalog-only entries stay marked Coming soon; Pro does not make missing implementations available.
 - Daily allowance resets at midnight Asia/Kolkata. Server reserves 30-second intervals while the playground tab is visible; closing a session may consume the remainder of its reserved interval. Only one free session can hold a reservation at once. Reservations survive refresh and device changes; Pro allows concurrent sessions.
 - Expiring access hides and disables the playground but keeps the editor mounted. Source is also saved by the existing playground browser storage. Re-authentication or navigation can remount it.
 
 ## Current setup status
+
+October 10 local update: Problem 2333 is free; pricing is ₹19/₹228; the optional
+72-hour trial is implemented. All 16 access/payment tests, focused ESLint, and
+the production build pass. Real payments and browser interactions were not run.
+Deploy the updated Functions (including `startProTrial`) before publishing the
+matching Hosting build. These October changes have not been deployed by this task.
 
 The existing Teem Treat Google flow is in `../../teemavenue_web/src/app/account/page.tsx` (relative to the visualizer checkout). The visualizer uses its own Firebase project, not the sweets site's accounts, secrets, or paid status.
 
@@ -36,7 +43,7 @@ Razorpay dashboard was visibly logged in to the Visualizer by Teem Treat account
    ```sh
    firebase deploy --only firestore:rules,functions --project teemtreat-visualizer
    ```
-   Browser database reads and writes are denied. Callable functions require a Firebase Google-authenticated user. Pro status is determined by server-owned `accounts/{uid}.expiresAt`, not user-writable claims or local storage.
+   Browser database reads and writes are denied. Callable functions require a Firebase Google-authenticated user. Pro status is determined by server-owned `accounts/{uid}.expiresAt` or an active `trialEndsAt`, not user-writable claims or local storage.
 5. Set `VITE_ACCESS_BACKEND_ENABLED=true` in the deployment environment, rebuild, and test Google sign-in plus the daily quota against the backend. Keep checkout disabled for this first step.
 6. Use the visualizer's separate Razorpay merchant account. Use Test Mode first. Enable automatic capture. Set the webhook to the deployed `paymentWebhook` URL and subscribe to `payment.captured` and `refund.processed`. Checkout return and webhook both verify captured payment amount/currency and stored order ownership before a transactional, idempotent grant. Signed refund events revoke that order's period; partial refunds also revoke the whole period. Document that policy before selling.
 7. Test success, failure, abandoned checkout, webhook before/after checkout callback, duplicate events, out-of-order refund/capture, concurrent calls, account switching, expired Pro, and free quota across browsers and midnight. No real payments have been executed. Policy tests do not replace these integration checks.

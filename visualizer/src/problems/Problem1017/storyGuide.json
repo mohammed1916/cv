@@ -1,0 +1,27 @@
+{
+  "number": "1017",
+  "title": "Convert to Base -2",
+  "goal": "Represent a nonnegative integer using base negative two.",
+  "strategy": "Choose a remainder of zero or one, subtract it, then divide by negative two. The quotient may change sign, but output digits stay valid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Represent a nonnegative integer using base negative two.",
+    "inspect": "Choose a remainder of zero or one, subtract it, then divide by negative two. The quotient may change sign, but output digits stay valid.",
+    "update": "Choose a remainder of zero or one, subtract it, then divide by negative two. The quotient may change sign, but output digits stay valid.",
+    "done": "Represent a nonnegative integer using base negative two."
+  },
+  "edgeCases": [
+    "Zero needs one digit",
+    "Single positive unit",
+    "An even value requires a negative intermediate quotient"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

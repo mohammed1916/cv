@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/minimum-moves-to-equal-array-elements.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -37,11 +38,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('minimum-moves-to-equal-array-elements', [
-  { label: 'Example 1', nums: [1, 0, 0, 8, 6], expected: 14 },
-  { label: 'Example 2', nums: [1, 2, 3], expected: 3 },
-  { label: 'Example 3', nums: [5, 5, 5], expected: 0 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Find Minimum', lines: [1, 2, 3, 4, 5] },
@@ -147,7 +144,7 @@ function snippetIdForPhase(phase) {
 function ArrayDisplay({ nums, minVal, currentIdx, currentNum, diff }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Array Elements
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -200,7 +197,7 @@ function ArrayDisplay({ nums, minVal, currentIdx, currentNum, diff }) {
 function MoveCounter({ moves, minVal }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Total Moves
       </header>
       <div style={{
@@ -236,64 +233,8 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
-        </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => handleExampleClick(ex)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid var(--border)',
-                backgroundColor: 'var(--surface2)',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Array (comma-separated)
-        </label>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <input
-            value={numsInput}
-            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-            placeholder="e.g., 1,0,0,8,6"
-            style={{
-              flex: 1,
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-          <button
-            onClick={handleReset}
-            style={{
-              padding: '8px 10px',
-              backgroundColor: 'var(--primary-glow)',
-              color: 'var(--text)',
-              border: '1px solid var(--primary)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            Reset
-          </button>
         </div>
       </div>
 

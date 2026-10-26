@@ -1,1 +1,5 @@
-export { default } from './ScrambleStringVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ScrambleStringVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

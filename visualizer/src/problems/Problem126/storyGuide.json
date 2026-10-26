@@ -1,0 +1,19 @@
+{
+  "number": "126",
+  "title": "Word Ladder II",
+  "goal": "Solve Word Ladder II: Find all shortest transformation sequences from beginWord to endWord in a word list.",
+  "strategy": "Find all shortest transformation sequences from beginWord to endWord in a word list.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Keep all predecessors at the shortest distance; stopping at the first discovered path would lose other shortest ladders."
+  ],
+  "checks": [],
+  "inputRules": [
+    "wordList must be an array"
+  ],
+  "source": [
+    "src/problems/Problem126/index.jsx",
+    "src/problems/Problem126/WordLadderIIVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2079",
+  "title": "Watering Plants",
+  "goal": "Count walking steps needed to water plants in order from the river.",
+  "strategy": "Walk one step to each next plant. If the remaining water is insufficient before plant i, returning to the river and back adds 2*i steps before the normal forward step.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count walking steps needed to water plants in order from the river.",
+    "inspect": "Walk one step to each next plant. If the remaining water is insufficient before plant i, returning to the river and back adds 2*i steps before the normal forward step.",
+    "update": "Walk one step to each next plant. If the remaining water is insufficient before plant i, returning to the river and back adds 2*i steps before the normal forward step.",
+    "done": "Count walking steps needed to water plants in order from the river."
+  },
+  "edgeCases": [
+    "Exact remaining water does not require a refill",
+    "Every plant requires a full can",
+    "One plant is one step away"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

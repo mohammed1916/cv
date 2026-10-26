@@ -1,0 +1,31 @@
+{
+  "number": "1874",
+  "title": "Minimize Product Sum of Two Arrays",
+  "goal": "Minimize the product sum by rearranging array pairings.",
+  "strategy": "Pair one array in increasing order with the other in decreasing order. This avoids multiplying large values together when a smaller partner is available.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the product sum by rearranging array pairings.",
+    "inspect": "Pair one array in increasing order with the other in decreasing order. This avoids multiplying large values together when a smaller partner is available.",
+    "update": "Pair one array in increasing order with the other in decreasing order. This avoids multiplying large values together when a smaller partner is available.",
+    "done": "Minimize the product sum by rearranging array pairings."
+  },
+  "edgeCases": [
+    "Repeated values make pairings equivalent",
+    "One pair",
+    "Opposite orders already minimize"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

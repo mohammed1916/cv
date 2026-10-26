@@ -1,0 +1,31 @@
+{
+  "number": "1444",
+  "title": "Number of Ways of Cutting a Pizza",
+  "goal": "Count ordered ways to cut a pizza into k pieces so every piece contains an apple.",
+  "strategy": "Suffix apple counts test whether the top or left piece being handed away contains an apple. DP counts ways to continue cutting the remaining lower-right rectangle into the remaining pieces.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count ordered ways to cut a pizza into k pieces so every piece contains an apple.",
+    "inspect": "Suffix apple counts test whether the top or left piece being handed away contains an apple. DP counts ways to continue cutting the remaining lower-right rectangle into the remaining pieces.",
+    "update": "Suffix apple counts test whether the top or left piece being handed away contains an apple. DP counts ways to continue cutting the remaining lower-right rectangle into the remaining pieces.",
+    "done": "Count ordered ways to cut a pizza into k pieces so every piece contains an apple."
+  },
+  "edgeCases": [
+    "One piece requires at least one apple",
+    "Too few apples makes the requested pieces impossible",
+    "A single row permits only vertical cuts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

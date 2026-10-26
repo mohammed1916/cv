@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--414.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -27,11 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  { label: 'Small', nums: [3, 2, 1], expected: 1 },
-  { label: 'Medium', nums: [1, 2, -2147483648], expected: -2147483648 },
-  { label: 'Large', nums: [2, 1, 0, -1], expected: -1 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums) {
   const steps = []
@@ -144,7 +142,7 @@ function ThirdMaxVisualization({ nums, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Third Maximum Number</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Third Maximum Number</div>
 
       {/* Input array */}
       <div>
@@ -312,7 +310,7 @@ export default function Problem414Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

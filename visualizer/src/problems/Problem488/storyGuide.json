@@ -1,0 +1,24 @@
+{
+  "number": "488",
+  "title": "Zuma Game",
+  "goal": "Solve Zuma Game: Shoot balls to remove consecutive same-colored balls from a circular board.",
+  "strategy": "Shoot balls to remove consecutive same-colored balls from a circular board.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not h",
+      "outcome": "return 0 if not b else -1"
+    },
+    {
+      "condition": "(b,h) in memo",
+      "outcome": "return memo[(b,h)]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem488/index.jsx",
+    "src/problems/Problem488/Problem488Visualizer.jsx"
+  ]
+}

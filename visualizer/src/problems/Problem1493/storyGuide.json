@@ -1,0 +1,31 @@
+{
+  "number": "1493",
+  "title": "Longest Subarray of 1's After Deleting One Element",
+  "goal": "Find the longest all-one subarray after deleting exactly one element.",
+  "strategy": "Maintain an interval with at most one zero. Its length minus one is achievable after the mandatory deletion, even when all current entries are one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest all-one subarray after deleting exactly one element.",
+    "inspect": "Maintain an interval with at most one zero. Its length minus one is achievable after the mandatory deletion, even when all current entries are one.",
+    "update": "Maintain an interval with at most one zero. Its length minus one is achievable after the mandatory deletion, even when all current entries are one.",
+    "done": "Find the longest all-one subarray after deleting exactly one element."
+  },
+  "edgeCases": [
+    "All ones still lose one",
+    "All zeros",
+    "Single one must be deleted"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

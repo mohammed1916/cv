@@ -1,0 +1,28 @@
+{
+  "number": "75",
+  "title": "Sort Colors",
+  "goal": "Solve Sort Colors: Partition the array into completed low values, an unchecked middle and completed high values, shrinking the unchecked region.",
+  "strategy": "Partition the array into completed low values, an unchecked middle and completed high values, shrinking the unchecked region.",
+  "phases": [
+    "init",
+    "check",
+    "place_lo",
+    "skip",
+    "place_hi",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "After swapping a high value from the right, the incoming value still needs inspection."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON array containing only 0, 1, and 2.",
+    "Array must contain at least one value.",
+    "Use at most 24 elements for visualization clarity."
+  ],
+  "source": [
+    "src/problems/Problem75/index.jsx",
+    "src/problems/Problem75/SortColorsVisualizer.jsx"
+  ]
+}

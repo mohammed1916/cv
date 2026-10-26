@@ -1,0 +1,26 @@
+{
+  "number": "230",
+  "title": "Kth Smallest Element in a BST",
+  "goal": "Solve Kth Smallest Element in a BST: In-order traversal of BST yields sorted order; stop at the k-th visited node.",
+  "strategy": "In-order traversal of BST yields sorted order; stop at the k-th visited node.",
+  "phases": [
+    "go-left",
+    "visit",
+    "found",
+    "go-right",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node or result",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem230/index.jsx",
+    "src/problems/Problem230/KthSmallestVisualizer.jsx"
+  ]
+}

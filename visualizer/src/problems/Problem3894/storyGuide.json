@@ -1,0 +1,44 @@
+{
+  "number": "3894",
+  "title": "Traffic Signal Color",
+  "goal": "Solve Traffic Signal Color: Evaluate exact timer boundaries and illuminate the matching traffic signal, or return Invalid.",
+  "strategy": "Evaluate exact timer boundaries and illuminate the matching traffic signal, or return Invalid.",
+  "phases": [
+    "start",
+    "green",
+    "orange",
+    "red",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Read the timer without changing it.",
+    "green": "Only timer 0 is Green.",
+    "orange": "Only timer 30 is Orange.",
+    "red": "Red excludes 30 and includes 90.",
+    "done": "Return the matched color or Invalid."
+  },
+  "edgeCases": [
+    "Timer zero is Green, 30 is Orange, and values strictly above 30 through 90 are Red; other accepted timers return Invalid."
+  ],
+  "checks": [
+    {
+      "condition": "timer == 0",
+      "outcome": "return \"Green\""
+    },
+    {
+      "condition": "timer == 30",
+      "outcome": "return \"Orange\""
+    },
+    {
+      "condition": "30 < timer <= 90",
+      "outcome": "return \"Red\""
+    }
+  ],
+  "inputRules": [
+    "Enter an integer timer from 0 to 1000."
+  ],
+  "source": [
+    "src/problems/Problem3894/index.jsx",
+    "src/problems/Problem3894/algorithm.js"
+  ]
+}

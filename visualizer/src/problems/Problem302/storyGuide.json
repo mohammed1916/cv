@@ -1,0 +1,23 @@
+{
+  "number": "302",
+  "title": "Smallest Rectangle Enclosing Black Pixels",
+  "goal": "Solve Smallest Rectangle Enclosing Black Pixels: Find smallest rectangle enclosing all black pixels in binary matrix.",
+  "strategy": "Find smallest rectangle enclosing all black pixels in binary matrix.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The supplied black-pixel seed must belong to the component; extreme occupied rows and columns define the enclosing area."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use binary image rows and coordinates x, y of a black pixel."
+  ],
+  "source": [
+    "src/problems/Problem302/index.jsx",
+    "src/problems/Problem302/SmallestRectangleEnclosingBlackPixelsVisualizer.jsx"
+  ]
+}

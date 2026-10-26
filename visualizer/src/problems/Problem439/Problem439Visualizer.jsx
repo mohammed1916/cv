@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/ternary-expression-parser.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem439Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +33,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('ternary-expression-parser')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(expression) {
   const steps = []
@@ -159,7 +162,7 @@ function generateSteps(expression) {
 function ExpressionVisualization({ expression, pos }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Expression</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Expression</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -167,7 +170,7 @@ function ExpressionVisualization({ expression, pos }) {
         border: '2px solid var(--border)',
         minHeight: 80,
       }}>
-        <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontFamily: 'monospace', fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>
           {expression}
         </div>
         <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
@@ -205,7 +208,7 @@ function ExpressionVisualization({ expression, pos }) {
 function StackVisualization({ stack }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Processing Stack</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Processing Stack</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -248,7 +251,7 @@ function StackVisualization({ stack }) {
 function ResultVisualization({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Result</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -273,7 +276,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -312,7 +315,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem439Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [expressionInput, setExpressionInput] = useState("T?2:3");
+  const [expressionInput, setExpressionInput] = useState(String(AUTHORED_INITIAL.expression));
   const { expression, inputError } = useMemo(() => {
     try {
       const parsedExpression = expressionInput;

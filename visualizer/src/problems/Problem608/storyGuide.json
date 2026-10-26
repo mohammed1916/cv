@@ -1,0 +1,31 @@
+{
+  "number": "608",
+  "title": "Tree Node",
+  "goal": "Classify each tree record as Root Inner or Leaf.",
+  "strategy": "A null parent identifies the root before any other rule. Nonroot nodes appearing as another record parent are inner nodes; the remaining nodes are leaves.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Classify each tree record as Root Inner or Leaf.",
+    "inspect": "A null parent identifies the root before any other rule. Nonroot nodes appearing as another record parent are inner nodes; the remaining nodes are leaves.",
+    "update": "A null parent identifies the root before any other rule. Nonroot nodes appearing as another record parent are inner nodes; the remaining nodes are leaves.",
+    "done": "Classify each tree record as Root Inner or Leaf."
+  },
+  "edgeCases": [
+    "A singleton is Root even though it has no children",
+    "A long chain has one root one leaf and inner links",
+    "Input row order does not determine the root"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

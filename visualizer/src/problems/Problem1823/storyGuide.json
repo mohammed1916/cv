@@ -1,0 +1,31 @@
+{
+  "number": "1823",
+  "title": "Find the Winner of the Circular Game",
+  "goal": "Find the final player after repeatedly eliminating every kth player in a circle.",
+  "strategy": "Track the current position in the surviving list. Count the starting player as one, remove the kth, and continue at the same list index after removal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the final player after repeatedly eliminating every kth player in a circle.",
+    "inspect": "Track the current position in the surviving list. Count the starting player as one, remove the kth, and continue at the same list index after removal.",
+    "update": "Track the current position in the surviving list. Count the starting player as one, remove the kth, and continue at the same list index after removal.",
+    "done": "Find the final player after repeatedly eliminating every kth player in a circle."
+  },
+  "edgeCases": [
+    "Only one player",
+    "Remove each current player",
+    "Count larger than player count"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

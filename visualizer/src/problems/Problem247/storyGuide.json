@@ -1,0 +1,21 @@
+{
+  "number": "247",
+  "title": "Strobogrammatic Number II",
+  "goal": "Solve Strobogrammatic Number II: Generate all n-digit strobogrammatic numbers recursively.",
+  "strategy": "Generate all n-digit strobogrammatic numbers recursively.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Multi-digit results cannot start with zero; an odd-length center must be one of the self-rotating digits."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem247/index.jsx",
+    "src/problems/Problem247/StrobogrammaticNumberIi.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "520",
+  "title": "Detect Capital",
+  "goal": "Solve Detect Capital: Check if a word uses capital letters correctly.",
+  "strategy": "Check if a word uses capital letters correctly.",
+  "phases": [
+    "init",
+    "loop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "word.isupper()",
+      "outcome": "return True"
+    },
+    {
+      "condition": "word.islower()",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem520/index.jsx",
+    "src/problems/Problem520/DetectCapitalVisualizer.jsx"
+  ]
+}

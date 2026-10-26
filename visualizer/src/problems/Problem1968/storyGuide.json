@@ -1,0 +1,31 @@
+{
+  "number": "1968",
+  "title": "Array With Elements Not Equal to Average of Neighbors",
+  "goal": "Rearrange distinct values so no interior value equals the average of its neighbors.",
+  "strategy": "Place the smaller half at even positions and the larger half at odd positions. Every interior position becomes a strict local minimum or maximum, ruling out equality with the neighbor average.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rearrange distinct values so no interior value equals the average of its neighbors.",
+    "inspect": "Place the smaller half at even positions and the larger half at odd positions. Every interior position becomes a strict local minimum or maximum, ruling out equality with the neighbor average.",
+    "update": "Place the smaller half at even positions and the larger half at odd positions. Every interior position becomes a strict local minimum or maximum, ruling out equality with the neighbor average.",
+    "done": "Rearrange distinct values so no interior value equals the average of its neighbors."
+  },
+  "edgeCases": [
+    "Three values require a strict middle extreme",
+    "The smallest valid input has one interior position",
+    "A longer already sorted input"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

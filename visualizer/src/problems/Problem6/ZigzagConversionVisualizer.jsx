@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/zigzag-conversion.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ZigzagConversionVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -262,7 +263,7 @@ function VisualizationPanel({ str, numRows, step, applyExample, examples }) {
 }
 
 export default function ZigzagConversionVisualizer() {
-  const examples = useMemo(() => getExamplesOr('zigzag-conversion', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [str, setStr] = useState('PAYPALISHIRING')
   const [numRows, setNumRows] = useState(3)
   const [panelDivs, setPanelDivs] = useState(null)
@@ -380,7 +381,7 @@ export default function ZigzagConversionVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'main', title: 'Visualizer', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []
@@ -402,7 +403,6 @@ export default function ZigzagConversionVisualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -420,6 +420,7 @@ export default function ZigzagConversionVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         </FloatingPanel>,
         document.body
       )}

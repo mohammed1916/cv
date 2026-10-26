@@ -1,0 +1,31 @@
+{
+  "number": "2039",
+  "title": "The Time When the Network Becomes Idle",
+  "goal": "Find the first second when no network messages remain in transit.",
+  "strategy": "BFS gives shortest round-trip latency to the master. A server resends at patience intervals strictly before its first reply; the last resend plus its round trip determines its final arriving reply.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the first second when no network messages remain in transit.",
+    "inspect": "BFS gives shortest round-trip latency to the master. A server resends at patience intervals strictly before its first reply; the last resend plus its round trip determines its final arriving reply.",
+    "update": "BFS gives shortest round-trip latency to the master. A server resends at patience intervals strictly before its first reply; the last resend plus its round trip determines its final arriving reply.",
+    "done": "Find the first second when no network messages remain in transit."
+  },
+  "edgeCases": [
+    "Reply exactly at a resend boundary prevents that send",
+    "Large patience values require no resends",
+    "One nearby impatient server"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

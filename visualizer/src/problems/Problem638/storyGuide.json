@@ -1,0 +1,31 @@
+{
+  "number": "638",
+  "title": "Shopping Offers",
+  "goal": "Buy exactly the needed quantities at minimum cost using unit prices and reusable bundle offers.",
+  "strategy": "Memoize each remaining-needs vector. Buying everything individually gives a valid baseline; apply a fitting useful bundle and recursively price the reduced vector, never buying extra items.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Buy exactly the needed quantities at minimum cost using unit prices and reusable bundle offers.",
+    "inspect": "Memoize each remaining-needs vector. Buying everything individually gives a valid baseline; apply a fitting useful bundle and recursively price the reduced vector, never buying extra items.",
+    "update": "Memoize each remaining-needs vector. Buying everything individually gives a valid baseline; apply a fitting useful bundle and recursively price the reduced vector, never buying extra items.",
+    "done": "Buy exactly the needed quantities at minimum cost using unit prices and reusable bundle offers."
+  },
+  "edgeCases": [
+    "An oversized discount cannot buy unwanted extras",
+    "No required items costs zero",
+    "Offers more expensive than unit purchases are irrelevant"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

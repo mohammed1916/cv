@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/plus-one.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -10,12 +13,12 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./PlusOneVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('plus-one')
-const EXAMPLES = getExamples('plus-one');
+const EXAMPLES = authoredExamples0;
 
 const PLUSONE_PATTERNS = ['init', 'loop', 'carry', 'append']
 
@@ -158,7 +161,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -186,7 +189,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function PlusOneVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [digitsInput, setDigitsInput] = useState("[1,2,3]");
+  const [digitsInput, setDigitsInput] = useState(JSON.stringify(AUTHORED_INITIAL.digits));
   const [descInput, setDescInput] = useState("123");
   const { digits, desc, inputError } = useMemo(() => {
     try {
@@ -256,9 +259,6 @@ export default function PlusOneVisualizer() {
     )
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -276,6 +276,9 @@ export default function PlusOneVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PLUSONE_PATTERNS} />
+        )}
       </>
     )
 
@@ -284,7 +287,7 @@ export default function PlusOneVisualizer() {
       () => [
         { id: 'code', title: 'Code', dockMode: 'split-right' },
         { id: 'viz', title: '🧮 Domino Chain', dockMode: 'split-right' },
-        { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+        { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
       ],
       []
     )

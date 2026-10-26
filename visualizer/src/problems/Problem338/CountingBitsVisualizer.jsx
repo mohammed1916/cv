@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/counting-bits.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CountingBitsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -55,10 +58,10 @@ function generateSteps(n) {
     return steps
 }
 
-const EXAMPLES = getExamples('counting-bits')
+const EXAMPLES = authoredExamples0
 
 export default function CountingBitsVisualizer() {
-    const [nInput, setNInput] = useState('5')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {
@@ -98,10 +101,10 @@ export default function CountingBitsVisualizer() {
                 {EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                     {ex.label}
                 </button>)}
-                <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="20" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid var(--border)' }} /></label>
+                
             </div>
             {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>DP Array</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>DP Array</div>
             <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', flex: 1, overflow: 'auto' }}>
                 {(step?.dp ?? []).map((val, i) => {
                     const isActive = step?.i === i

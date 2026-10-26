@@ -1,0 +1,31 @@
+{
+  "number": "2002",
+  "title": "Maximum Product of the Length of Two Palindromic Subsequences",
+  "goal": "Maximize the product of lengths of two disjoint palindromic subsequences.",
+  "strategy": "Enumerate palindromic index masks. Subset DP stores the best palindrome available inside any mask, so each palindrome can pair with the best one entirely inside its complement.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the product of lengths of two disjoint palindromic subsequences.",
+    "inspect": "Enumerate palindromic index masks. Subset DP stores the best palindrome available inside any mask, so each palindrome can pair with the best one entirely inside its complement.",
+    "update": "Enumerate palindromic index masks. Subset DP stores the best palindrome available inside any mask, so each palindrome can pair with the best one entirely inside its complement.",
+    "done": "Maximize the product of lengths of two disjoint palindromic subsequences."
+  },
+  "edgeCases": [
+    "Equal characters can be split into two long subsequences",
+    "Distinct letters restrict both lengths to one",
+    "Two positions form the smallest valid pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,1 +1,5 @@
-export{default}from"./ComplexNumberMultiplicationVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ComplexNumberMultiplicationVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

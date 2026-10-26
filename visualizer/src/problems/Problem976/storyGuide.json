@@ -1,0 +1,27 @@
+{
+  "number": "976",
+  "title": "Largest Perimeter Triangle",
+  "goal": "Find the greatest perimeter of a nondegenerate triangle.",
+  "strategy": "For each largest candidate side, use the next two largest. If even those fail, no smaller pair can rescue that side.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest perimeter of a nondegenerate triangle.",
+    "inspect": "For each largest candidate side, use the next two largest. If even those fail, no smaller pair can rescue that side.",
+    "update": "For each largest candidate side, use the next two largest. If even those fail, no smaller pair can rescue that side.",
+    "done": "Find the greatest perimeter of a nondegenerate triangle."
+  },
+  "edgeCases": [
+    "Degenerate equality is rejected",
+    "All sides equal",
+    "Small valid triangle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

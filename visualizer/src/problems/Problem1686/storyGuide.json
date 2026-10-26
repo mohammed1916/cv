@@ -1,0 +1,31 @@
+{
+  "number": "1686",
+  "title": "Stone Game VI",
+  "goal": "Determine the winner when two players optimally take stones with different personal values.",
+  "strategy": "Choosing a stone gains your value and denies the opponent theirs. Order stones by the sum of both values, then alternate choices and compare each player actual total.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine the winner when two players optimally take stones with different personal values.",
+    "inspect": "Choosing a stone gains your value and denies the opponent theirs. Order stones by the sum of both values, then alternate choices and compare each player actual total.",
+    "update": "Choosing a stone gains your value and denies the opponent theirs. Order stones by the sum of both values, then alternate choices and compare each player actual total.",
+    "done": "Determine the winner when two players optimally take stones with different personal values."
+  },
+  "edgeCases": [
+    "One stone belongs to Alice",
+    "Identical valuations can tie",
+    "Bob wins despite moving second"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

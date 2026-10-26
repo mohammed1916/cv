@@ -1,0 +1,31 @@
+{
+  "number": "2241",
+  "title": "Design an ATM Machine",
+  "goal": "Simulate ATM deposits and largest-denomination-first withdrawals without partial failed transactions.",
+  "strategy": "Attempt a withdrawal using a temporary note selection from 500 down to 20. Commit inventory changes only when the whole amount is formed; the mandated greedy rule can fail even if a different combination exists.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Simulate ATM deposits and largest-denomination-first withdrawals without partial failed transactions.",
+    "inspect": "Attempt a withdrawal using a temporary note selection from 500 down to 20. Commit inventory changes only when the whole amount is formed; the mandated greedy rule can fail even if a different combination exists.",
+    "update": "Attempt a withdrawal using a temporary note selection from 500 down to 20. Commit inventory changes only when the whole amount is formed; the mandated greedy rule can fail even if a different combination exists.",
+    "done": "Simulate ATM deposits and largest-denomination-first withdrawals without partial failed transactions."
+  },
+  "edgeCases": [
+    "Greedy preference may reject a non-greedy possible amount",
+    "An empty ATM cannot fulfill a withdrawal",
+    "A failed attempt must preserve notes for a later request"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1626",
+  "title": "Best Team With No Conflicts",
+  "goal": "Build a maximum-score team with no younger player outscoring an older teammate.",
+  "strategy": "Sort by increasing age, breaking ties by increasing score. A maximum-weight nondecreasing score subsequence then includes only compatible players while allowing all same-age players.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build a maximum-score team with no younger player outscoring an older teammate.",
+    "inspect": "Sort by increasing age, breaking ties by increasing score. A maximum-weight nondecreasing score subsequence then includes only compatible players while allowing all same-age players.",
+    "update": "Sort by increasing age, breaking ties by increasing score. A maximum-weight nondecreasing score subsequence then includes only compatible players while allowing all same-age players.",
+    "done": "Build a maximum-score team with no younger player outscoring an older teammate."
+  },
+  "edgeCases": [
+    "All players have the same age",
+    "Scores decrease as age increases",
+    "Single player"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

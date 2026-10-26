@@ -1,0 +1,31 @@
+{
+  "number": "2217",
+  "title": "Find Palindrome With Fixed Length",
+  "goal": "Find the requested one-based palindromes of a fixed decimal length.",
+  "strategy": "A palindrome is uniquely determined by its first half including the middle digit. Add query minus one to the smallest legal half, check its digit width, then mirror it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the requested one-based palindromes of a fixed decimal length.",
+    "inspect": "A palindrome is uniquely determined by its first half including the middle digit. Add query minus one to the smallest legal half, check its digit width, then mirror it.",
+    "update": "A palindrome is uniquely determined by its first half including the middle digit. Add query minus one to the smallest legal half, check its digit width, then mirror it.",
+    "done": "Find the requested one-based palindromes of a fixed decimal length."
+  },
+  "edgeCases": [
+    "Even-length palindromes mirror the entire half",
+    "One-digit palindromes exclude zero",
+    "Long fixed-length palindromes remain exact integers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

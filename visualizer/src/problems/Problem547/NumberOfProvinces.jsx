@@ -1,12 +1,10 @@
+import authoredExamples0 from '../../config/examples/local--547.js';
+
 import React, { useState, useCallback } from 'react';
 import './NumberOfProvinces.css';
 
 const NumberOfProvinces = () => {
-  const examples = [
-    [[1, 1, 0], [1, 1, 0], [0, 0, 1]],
-    [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
-    [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
-  ];
+  const examples = authoredExamples0.map(example => example.isConnected);
 
   const [currentExample, setCurrentExample] = useState(0);
   const [isConnected, setIsConnected] = useState(examples[0]);
@@ -186,7 +184,7 @@ const NumberOfProvinces = () => {
                     className="nop-uf-value"
                     style={{
                       backgroundColor: highlightedCells.includes(i) ? '#f38ba8' : getNodeColor(i),
-                      color: 'var(--code-bg)',
+                      color: 'var(--text-on-light)',
                     }}
                   >
                     {i}: {p}
@@ -255,7 +253,7 @@ const NumberOfProvinces = () => {
                     y={y}
                     textAnchor="middle"
                     dy="0.3em"
-                    fill="var(--code-bg)"
+                    fill="var(--text-on-light)"
                     fontWeight="bold"
                   >
                     {i}

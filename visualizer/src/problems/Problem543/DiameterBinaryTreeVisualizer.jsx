@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/diameter-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DiameterBinaryTreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -174,10 +177,10 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('diameter-binary-tree')
+const EXAMPLES = authoredExamples0
 
 export default function DiameterBinaryTreeVisualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3,4,5]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { arr, inputError } = useMemo(() => {
@@ -225,9 +228,6 @@ export default function DiameterBinaryTreeVisualizer() {
                 {panelDivs.code && createPortal(codePanel, panelDivs.code)}
             </>}
             <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                )}
                 <PlaybackControls
                     isPlaying={isPlaying} isDone={isDone} speed={speed}
                     onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -238,6 +238,9 @@ export default function DiameterBinaryTreeVisualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
+                {showPatternOverlay && (
+                    <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                )}
             </FloatingPanel>
 
         </div>

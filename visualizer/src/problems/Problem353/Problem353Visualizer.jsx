@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--353.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem353.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -142,41 +144,7 @@ function generateSteps(events) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Simple Route',
-    events: [
-      { type: 'checkIn', id: 1, stationName: 'A', t: 0 },
-      { type: 'checkOut', id: 1, stationName: 'B', t: 5 },
-      { type: 'checkIn', id: 2, stationName: 'A', t: 1 },
-      { type: 'checkOut', id: 2, stationName: 'B', t: 9 },
-    ],
-  },
-  {
-    label: 'Example 2: Multiple Routes',
-    events: [
-      { type: 'checkIn', id: 1, stationName: 'A', t: 0 },
-      { type: 'checkOut', id: 1, stationName: 'B', t: 5 },
-      { type: 'checkIn', id: 2, stationName: 'B', t: 10 },
-      { type: 'checkOut', id: 2, stationName: 'C', t: 20 },
-      { type: 'checkIn', id: 3, stationName: 'A', t: 15 },
-      { type: 'checkOut', id: 3, stationName: 'B', t: 30 },
-    ],
-  },
-  {
-    label: 'Example 3: Complex Network',
-    events: [
-      { type: 'checkIn', id: 1, stationName: 'A', t: 0 },
-      { type: 'checkOut', id: 1, stationName: 'B', t: 6 },
-      { type: 'checkIn', id: 2, stationName: 'B', t: 5 },
-      { type: 'checkOut', id: 2, stationName: 'C', t: 15 },
-      { type: 'checkIn', id: 3, stationName: 'A', t: 10 },
-      { type: 'checkOut', id: 3, stationName: 'C', t: 18 },
-      { type: 'checkIn', id: 1, stationName: 'C', t: 20 },
-      { type: 'checkOut', id: 1, stationName: 'A', t: 28 },
-    ],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem353Visualizer() {
   const [exIdx, setExIdx] = useState(0)

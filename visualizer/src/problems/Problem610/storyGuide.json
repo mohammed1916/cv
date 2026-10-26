@@ -1,0 +1,31 @@
+{
+  "number": "610",
+  "title": "Triangle Judgement",
+  "goal": "Classify whether each triple of segment lengths can form a nondegenerate triangle.",
+  "strategy": "All three pair sums must be strictly greater than the opposite side. Equality produces a flat segment, so it must fail rather than count as a triangle.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Classify whether each triple of segment lengths can form a nondegenerate triangle.",
+    "inspect": "All three pair sums must be strictly greater than the opposite side. Equality produces a flat segment, so it must fail rather than count as a triangle.",
+    "update": "All three pair sums must be strictly greater than the opposite side. Equality produces a flat segment, so it must fail rather than count as a triangle.",
+    "done": "Classify whether each triple of segment lengths can form a nondegenerate triangle."
+  },
+  "edgeCases": [
+    "Equality is not a triangle",
+    "Permuting sides preserves the classification",
+    "An empty table has no classifications"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

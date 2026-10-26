@@ -1,0 +1,31 @@
+{
+  "number": "2348",
+  "title": "Number of Zero-Filled Subarrays",
+  "goal": "Count all contiguous subarrays made entirely of zeros.",
+  "strategy": "A zero run of current length k contributes k new zero-only subarrays ending here. A nonzero value resets the run, separating independent contributions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count all contiguous subarrays made entirely of zeros.",
+    "inspect": "A zero run of current length k contributes k new zero-only subarrays ending here. A nonzero value resets the run, separating independent contributions.",
+    "update": "A zero run of current length k contributes k new zero-only subarrays ending here. A nonzero value resets the run, separating independent contributions.",
+    "done": "Count all contiguous subarrays made entirely of zeros."
+  },
+  "edgeCases": [
+    "An all-zero array follows the triangular count",
+    "Without zeros the answer is zero",
+    "One zero contributes one subarray"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

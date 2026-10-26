@@ -1,0 +1,31 @@
+{
+  "number": "808",
+  "title": "Soup Servings",
+  "goal": "Compute the chance soup A empties first plus half the chance both soups empty together.",
+  "strategy": "Scale volumes to 25 mL units. Each state averages the four equally likely serving outcomes; A-empty states score one, B-empty states zero, and simultaneous-empty states one half.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the chance soup A empties first plus half the chance both soups empty together.",
+    "inspect": "Scale volumes to 25 mL units. Each state averages the four equally likely serving outcomes; A-empty states score one, B-empty states zero, and simultaneous-empty states one half.",
+    "update": "Scale volumes to 25 mL units. Each state averages the four equally likely serving outcomes; A-empty states score one, B-empty states zero, and simultaneous-empty states one half.",
+    "done": "Compute the chance soup A empties first plus half the chance both soups empty together."
+  },
+  "edgeCases": [
+    "Both soups initially empty contribute half credit",
+    "A nonmultiple of twenty-five uses the next unit boundary",
+    "A larger bounded volume exposes the full probability table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

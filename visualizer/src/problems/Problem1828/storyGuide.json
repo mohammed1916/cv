@@ -1,0 +1,31 @@
+{
+  "number": "1828",
+  "title": "Queries on Number of Points Inside a Circle",
+  "goal": "Count points inside or on each query circle.",
+  "strategy": "For each point compare squared coordinate distance with squared radius. Independent queries count boundary points and repeated point positions as given.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count points inside or on each query circle.",
+    "inspect": "For each point compare squared coordinate distance with squared radius. Independent queries count boundary points and repeated point positions as given.",
+    "update": "For each point compare squared coordinate distance with squared radius. Independent queries count boundary points and repeated point positions as given.",
+    "done": "Count points inside or on each query circle."
+  },
+  "edgeCases": [
+    "Boundary points count",
+    "No point inside",
+    "Repeated positions count separately"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

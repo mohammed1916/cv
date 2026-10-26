@@ -1,1 +1,5 @@
-export { default } from './MaximalSquareVisualizer';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MaximalSquareVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

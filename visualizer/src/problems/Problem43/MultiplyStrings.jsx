@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/multiply-strings.js';
+
 import { useState, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -147,12 +149,7 @@ function generateSteps(num1, num2) {
   return steps;
 }
 
-const EXAMPLES = [
-  { label: "2 × 3", num1: "2", num2: "3" },
-  { label: "123 × 456", num1: "123", num2: "456" },
-  { label: "9 × 9", num1: "9", num2: "9" },
-  { label: "0 × 5", num1: "0", num2: "5" },
-];
+const EXAMPLES = authoredExamples0;
 
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState("123");
@@ -177,7 +174,7 @@ export default function MultiplyStringsVisualizer() {
     [num1, num2]
   );
 
-  const { currentStep, isPlaying, setCurrentStep, setIsPlaying } =
+  const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, setIsPlaying, togglePlay, handleReset, speed, setSpeed, isDone } =
     usePlaybackState(steps);
 
   const currentStepData = steps[currentStep] || {};
@@ -207,24 +204,8 @@ export default function MultiplyStringsVisualizer() {
           <div className="ms-panel">
             <div className="ms-panel-head">Input</div>
             <div className="ms-panel-body">
-              <div className="ms-field">
-                <span>num1 (multiplicand)</span>
-                <input
-                  className="ms-input"
-                  value={num1Input}
-                  onChange={(e) => setNum1Input(e.target.value)}
-                  placeholder="e.g., 123"
-                />
-              </div>
-              <div className="ms-field">
-                <span>num2 (multiplier)</span>
-                <input
-                  className="ms-input"
-                  value={num2Input}
-                  onChange={(e) => setNum2Input(e.target.value)}
-                  placeholder="e.g., 456"
-                />
-              </div>
+              
+              
               {inputError && <div className="ms-error">{inputError}</div>}
               <div className="ms-examples">
                 {EXAMPLES.map((ex) => (
@@ -348,12 +329,15 @@ export default function MultiplyStringsVisualizer() {
       </div>
 
       <PlaybackControls
-        currentStep={currentStep}
+        activeStep={currentStep}
         totalSteps={steps.length}
         isPlaying={isPlaying}
         onStepChange={setCurrentStep}
-        onPlayPause={setIsPlaying}
-        speed={1}
+        onPlayToggle={togglePlay}
+        onReset={handleReset}
+        isDone={isDone}
+        speed={speed}
+        onSpeedChange={(event) => setSpeed(Number(event.target.value))}
         showPatternOverlay={showPatternOverlay}
         onShowPatternOverlayChange={setShowPatternOverlay}
         patternOverlayLabel="Show pattern overlay"

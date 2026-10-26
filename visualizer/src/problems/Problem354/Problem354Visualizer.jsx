@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/russian-doll-envelopes.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,7 +10,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem354Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -59,7 +60,7 @@ function generateSteps(envelopes) {
 
   // Step 1: Sort envelopes
   let sorted = [...envelopes]
-    .map((e, idx) => ({ ...e, origIdx: idx }))
+    .map((e, idx) => Object.assign([...e], { origIdx: idx }))
     .sort((a, b) => a[0] - b[0] || b[1] - a[1])
 
   steps.push({
@@ -202,7 +203,7 @@ function generateSteps(envelopes) {
   return steps
 }
 
-const EXAMPLES = getExamples('russian-doll-envelopes')
+const EXAMPLES = authoredExamples0
 const DEFAULT_ENVELOPES = EXAMPLES[0]?.envelopes ?? [
   [5, 4],
   [6, 4],
@@ -302,7 +303,7 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                           rx="4"
                           filter="url(#shadow)"
                           animate={{
-                            opacity: idx === step?.currentIdx ? 0.9 : 0.6,
+                            opacity: 0.9,
                           }}
                           transition={{ duration: 0.2 }}
                         />
@@ -312,7 +313,9 @@ function VisualizationPanel({ EXAMPLES, applyExample, selected, handleReset, ste
                           textAnchor="middle"
                           dominantBaseline="middle"
                           className="rde-envelope-label"
-                          fill="var(--code-bg)"
+                          fill={step?.phase === 'sort_start' || step?.phase === 'sort_done' || idx === step?.currentIdx || step?.nestingChain?.includes(idx)
+                            ? 'var(--text-on-light)'
+                            : 'var(--text-on-dark)'}
                           fontWeight="bold"
                           fontSize="12"
                         >

@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/spiral-matrix-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SpiralMatrixIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -210,15 +213,10 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('spiral-matrix-ii', [
-  { label: 'n=1', n: 1 },
-  { label: 'n=2', n: 2 },
-  { label: 'n=3', n: 3 },
-  { label: 'n=4', n: 4 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function SpiralMatrixIIVisualizer() {
-  const [nInput, setNInput] = useState('3')
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -279,20 +277,7 @@ export default function SpiralMatrixIIVisualizer() {
           ))}
         </div>
 
-        <div style={{ marginBottom: 12 }}>
-          <label style={{ fontSize: 13, color: '#627794', display: 'block', marginBottom: 6 }}>
-            n (matrix size):
-          </label>
-          <input
-            value={nInput}
-            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-            placeholder="3"
-            className="smi-input"
-            type="number"
-            min="1"
-            max="20"
-          />
-        </div>
+        
 
         <div className="smi-matrix-container">
           <div
@@ -390,9 +375,6 @@ export default function SpiralMatrixIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIXII_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -410,6 +392,9 @@ export default function SpiralMatrixIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIXII_PATTERNS} />
+      )}
     </>
   )
 
@@ -418,7 +403,7 @@ export default function SpiralMatrixIIVisualizer() {
     () => [
       { id: 'primary', title: 'Matrix Generation', dockMode: 'split-right' },
       { id: 'state',   title: 'Variables', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

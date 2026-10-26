@@ -1,0 +1,27 @@
+{
+  "number": "744",
+  "title": "Find Smallest Letter Greater Than Target",
+  "goal": "Find the smallest letter strictly greater than target, wrapping around if needed.",
+  "strategy": "Binary-search the first strictly greater position. If it lies beyond the array, return the first letter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest letter strictly greater than target, wrapping around if needed.",
+    "inspect": "Binary-search the first strictly greater position. If it lies beyond the array, return the first letter.",
+    "update": "Binary-search the first strictly greater position. If it lies beyond the array, return the first letter.",
+    "done": "Find the smallest letter strictly greater than target, wrapping around if needed."
+  },
+  "edgeCases": [
+    "Wrap beyond maximum",
+    "Strictly greater excludes equals",
+    "Before the first letter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

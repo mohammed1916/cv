@@ -1,0 +1,25 @@
+{
+  "number": "500",
+  "title": "Keyboard Row",
+  "goal": "Solve Keyboard Row: Find words typed by one hand only on a QWERTY keyboard",
+  "strategy": "Find words typed by one hand only on a QWERTY keyboard",
+  "phases": [
+    "init",
+    "check_word",
+    "check_row",
+    "found",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Case does not change keyboard-row membership; every character of the word must belong to one row."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem500/index.jsx",
+    "src/problems/Problem500/KeyboardRowVisualizer.jsx"
+  ]
+}

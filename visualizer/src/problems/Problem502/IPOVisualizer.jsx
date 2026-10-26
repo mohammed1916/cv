@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/ipo.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -7,7 +10,7 @@ import PatternLegend from "../../components/PatternLegend";
 import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./IPOVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -57,7 +60,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('ipo');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(k, initW, profits, capital) {
     const steps = [];
@@ -93,10 +96,10 @@ function generateSteps(k, initW, profits, capital) {
 
 export default function IPOVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [kInput, setKInput] = useState(1);
-  const [wInput, setWInput] = useState(0);
-  const [profitsInput, setProfitsInput] = useState("[1,2,3]");
-  const [capitalInput, setCapitalInput] = useState("[0,1,1]");
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
+  const [wInput, setWInput] = useState(String(AUTHORED_INITIAL.w));
+  const [profitsInput, setProfitsInput] = useState(JSON.stringify(AUTHORED_INITIAL.profits));
+  const [capitalInput, setCapitalInput] = useState(JSON.stringify(AUTHORED_INITIAL.capital));
   const { k, w: inputW, profits, capital, inputError } = useMemo(() => {
     try {
       const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
@@ -199,7 +202,6 @@ export default function IPOVisualizer() {
             {panelDivs.code && createPortal(codePanel, panelDivs.code)}
           </>}
             <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -210,6 +212,7 @@ export default function IPOVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
       {showPatternOverlay && (<CodePatternAnnotations linePatterns={LINE_PATTERN_MAP} currentPhase={step?.phase} activeLineDom={activeLineDom} activeLine={step?.activeLine} />)}

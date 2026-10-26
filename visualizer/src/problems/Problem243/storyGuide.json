@@ -1,0 +1,21 @@
+{
+  "number": "243",
+  "title": "Shortest Word Distance",
+  "goal": "Solve Shortest Word Distance: Find minimum distance between two words in an array.",
+  "strategy": "Find minimum distance between two words in an array.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The closest occurrences can appear in either word order; compare positions rather than the order of query arguments."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem243/index.jsx",
+    "src/problems/Problem243/ShortestWordDistance.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1768",
+  "title": "Merge Strings Alternately",
+  "goal": "Merge two strings by alternating their characters, starting with the first string.",
+  "strategy": "Advance a common character index through both words. Append from each when that index exists, naturally preserving any longer suffix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Merge two strings by alternating their characters, starting with the first string.",
+    "inspect": "Advance a common character index through both words. Append from each when that index exists, naturally preserving any longer suffix.",
+    "update": "Advance a common character index through both words. Append from each when that index exists, naturally preserving any longer suffix.",
+    "done": "Merge two strings by alternating their characters, starting with the first string."
+  },
+  "edgeCases": [
+    "First word is shorter",
+    "Second word is shorter",
+    "Equal short lengths"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

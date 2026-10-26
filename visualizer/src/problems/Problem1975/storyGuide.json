@@ -1,0 +1,31 @@
+{
+  "number": "1975",
+  "title": "Maximum Matrix Sum",
+  "goal": "Maximize the matrix sum using adjacent pair sign flips.",
+  "strategy": "Pair flips preserve the parity of the number of negatives. Make all magnitudes positive when parity is even; otherwise leave the smallest magnitude negative, unless a zero absorbs the sign.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the matrix sum using adjacent pair sign flips.",
+    "inspect": "Pair flips preserve the parity of the number of negatives. Make all magnitudes positive when parity is even; otherwise leave the smallest magnitude negative, unless a zero absorbs the sign.",
+    "update": "Pair flips preserve the parity of the number of negatives. Make all magnitudes positive when parity is even; otherwise leave the smallest magnitude negative, unless a zero absorbs the sign.",
+    "done": "Maximize the matrix sum using adjacent pair sign flips."
+  },
+  "edgeCases": [
+    "Zero absorbs an otherwise odd negative sign",
+    "Even negative parity permits all positive magnitudes",
+    "All values are already nonnegative"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

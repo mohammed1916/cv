@@ -1,0 +1,21 @@
+{
+  "number": "478",
+  "title": "Generate Random Point in a Circle",
+  "goal": "Solve Generate Random Point in a Circle: Generate uniformly random points inside a circle.",
+  "strategy": "Generate uniformly random points inside a circle.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Uniform radius does not give uniform area; the radial sampling distribution must account for larger outer rings."
+  ],
+  "checks": [],
+  "inputRules": [
+    "radius must be a number",
+    "x_center must be a number",
+    "y_center must be a number"
+  ],
+  "source": [
+    "src/problems/Problem478/index.jsx",
+    "src/problems/Problem478/Problem478Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "577",
+  "title": "Employee Free Time",
+  "goal": "Solve Employee Free Time: Find the free time slots among employee schedules",
+  "strategy": "Find the free time slots among employee schedules",
+  "phases": [
+    "flatten",
+    "sort",
+    "merge",
+    "overlap_check",
+    "merge_update",
+    "find_gaps",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only gaps between merged busy intervals are finite common free time; overlapping schedules must be merged first."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Invalid format"
+  ],
+  "source": [
+    "src/problems/Problem577/index.jsx",
+    "src/problems/Problem577/EmployeeFreeTimeVisualizer.jsx"
+  ]
+}

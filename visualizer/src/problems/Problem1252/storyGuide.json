@@ -1,0 +1,31 @@
+{
+  "number": "1252",
+  "title": "Cells with Odd Values in a Matrix",
+  "goal": "Count odd cells after repeatedly incrementing selected rows and columns.",
+  "strategy": "Only increment parity matters. A cell is odd exactly when its row and column parities differ; a doubly incremented intersection stays even.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count odd cells after repeatedly incrementing selected rows and columns.",
+    "inspect": "Only increment parity matters. A cell is odd exactly when its row and column parities differ; a doubly incremented intersection stays even.",
+    "update": "Only increment parity matters. A cell is odd exactly when its row and column parities differ; a doubly incremented intersection stays even.",
+    "done": "Count odd cells after repeatedly incrementing selected rows and columns."
+  },
+  "edgeCases": [
+    "Same operation twice restores parity",
+    "Single cell is incremented twice",
+    "One row and several columns"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

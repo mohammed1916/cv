@@ -1,0 +1,31 @@
+{
+  "number": "1667",
+  "title": "Fix Names in a Table",
+  "goal": "Normalize names to first-letter uppercase and remaining-letter lowercase, ordered by user ID.",
+  "strategy": "Transform the name field while retaining each row identity. Ordering is a separate final operation on user_id.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Normalize names to first-letter uppercase and remaining-letter lowercase, ordered by user ID.",
+    "inspect": "Transform the name field while retaining each row identity. Ordering is a separate final operation on user_id.",
+    "update": "Transform the name field while retaining each row identity. Ordering is a separate final operation on user_id.",
+    "done": "Normalize names to first-letter uppercase and remaining-letter lowercase, ordered by user ID."
+  },
+  "edgeCases": [
+    "One-letter names",
+    "Already normalized names",
+    "Empty Users table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

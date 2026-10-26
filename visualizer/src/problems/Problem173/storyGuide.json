@@ -1,0 +1,19 @@
+{
+  "number": "173",
+  "title": "Binary Search Tree Iterator",
+  "goal": "Solve Binary Search Tree Iterator: Implement BST iterator using in-order traversal with stack.",
+  "strategy": "Implement BST iterator using in-order traversal with stack.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An iterator must keep enough pending ancestors to resume inorder traversal without returning a node twice."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON level-order array."
+  ],
+  "source": [
+    "src/problems/Problem173/index.jsx",
+    "src/problems/Problem173/BSTIteratorVisualizer.jsx"
+  ]
+}

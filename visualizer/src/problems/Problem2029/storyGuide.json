@@ -1,0 +1,31 @@
+{
+  "number": "2029",
+  "title": "Stone Game IX",
+  "goal": "Determine whether Alice wins the modulo-three stone-removal game.",
+  "strategy": "Only residue counts matter. An even number of residue-zero stones leaves a win exactly when both other residues exist; an odd count requires their counts to differ by more than two.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether Alice wins the modulo-three stone-removal game.",
+    "inspect": "Only residue counts matter. An even number of residue-zero stones leaves a win exactly when both other residues exist; an odd count requires their counts to differ by more than two.",
+    "update": "Only residue counts matter. An even number of residue-zero stones leaves a win exactly when both other residues exist; an odd count requires their counts to differ by more than two.",
+    "done": "Determine whether Alice wins the modulo-three stone-removal game."
+  },
+  "edgeCases": [
+    "Even zero count but one nonzero group is missing",
+    "Odd zero count needs a strict imbalance above two",
+    "An imbalance of exactly two is insufficient in the odd case"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

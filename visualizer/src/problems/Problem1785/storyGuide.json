@@ -1,0 +1,31 @@
+{
+  "number": "1785",
+  "title": "Minimum Elements to Add to Form a Given Sum",
+  "goal": "Find the fewest bounded-magnitude values to append so the sum equals goal.",
+  "strategy": "Compute the signed sum gap. Each appended value closes at most limit of its magnitude, and a smaller final remainder is permitted.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest bounded-magnitude values to append so the sum equals goal.",
+    "inspect": "Compute the signed sum gap. Each appended value closes at most limit of its magnitude, and a smaller final remainder is permitted.",
+    "update": "Compute the signed sum gap. Each appended value closes at most limit of its magnitude, and a smaller final remainder is permitted.",
+    "done": "Find the fewest bounded-magnitude values to append so the sum equals goal."
+  },
+  "edgeCases": [
+    "Existing sum already matches",
+    "Gap is an exact multiple",
+    "Final addition uses only a remainder"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

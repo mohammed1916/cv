@@ -1,0 +1,27 @@
+{
+  "number": "859",
+  "title": "Buddy Strings",
+  "goal": "Decide whether swapping exactly two positions in s can produce goal.",
+  "strategy": "Two differing positions must cross-match. Identical strings require a repeated character so a swap can leave the visible text unchanged.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether swapping exactly two positions in s can produce goal.",
+    "inspect": "Two differing positions must cross-match. Identical strings require a repeated character so a swap can leave the visible text unchanged.",
+    "update": "Two differing positions must cross-match. Identical strings require a repeated character so a swap can leave the visible text unchanged.",
+    "done": "Decide whether swapping exactly two positions in s can produce goal."
+  },
+  "edgeCases": [
+    "Identical with duplicate letters",
+    "Identical without duplicates",
+    "Two positions exchange"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

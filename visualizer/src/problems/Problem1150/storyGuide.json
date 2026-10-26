@@ -1,0 +1,31 @@
+{
+  "number": "1150",
+  "title": "Check If a Number Is Majority Element in a Sorted Array",
+  "goal": "Decide whether a target occupies more than half of a sorted array.",
+  "strategy": "Lower and upper insertion boundaries isolate all occurrences. Equality is insufficient for a majority: twice the count must exceed the length.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether a target occupies more than half of a sorted array.",
+    "inspect": "Lower and upper insertion boundaries isolate all occurrences. Equality is insufficient for a majority: twice the count must exceed the length.",
+    "update": "Lower and upper insertion boundaries isolate all occurrences. Equality is insufficient for a majority: twice the count must exceed the length.",
+    "done": "Decide whether a target occupies more than half of a sorted array."
+  },
+  "edgeCases": [
+    "Exactly half is not a majority",
+    "Target absent",
+    "Single matching value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

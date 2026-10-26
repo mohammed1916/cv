@@ -1,0 +1,21 @@
+{
+  "number": "62",
+  "title": "Unique Paths",
+  "goal": "Solve Unique Paths: Count routes to each grid cell by adding the routes from the cell above and the cell to its left.",
+  "strategy": "Count routes to each grid cell by adding the routes from the cell above and the cell to its left.",
+  "phases": [
+    "done",
+    "fill",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A single row or column has only one route; movement is limited to right and down."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem62/index.jsx",
+    "src/problems/Problem62/UniquePathsVisualizer.jsx"
+  ]
+}

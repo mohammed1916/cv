@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/burst-balloons.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -10,7 +13,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./BurstBalloonsVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -38,7 +41,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('burst-balloons');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(numsOrig) {
     const nums = [1, ...numsOrig, 1];
@@ -72,7 +75,7 @@ function generateSteps(numsOrig) {
 
 export default function BurstBalloonsVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[3,1,5,8]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums: inputNums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -90,7 +93,7 @@ export default function BurstBalloonsVisualizer() {
     const connectivity = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex });
     const [panelDivs, setPanelDivs] = useState(null);
 
-    const nums = [1, ...nums, 1];
+    const nums = [1, ...inputNums, 1];
     const n = nums.length;
     const dp = step?.dp ?? Array.from({ length: n }, () => Array(n).fill(0));
     const activeL = step?.left ?? -1;
@@ -137,21 +140,21 @@ export default function BurstBalloonsVisualizer() {
                         ))}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 4 }}>Padded array</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginTop: 4 }}>Padded array</div>
                     <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'center' }}>
                         {nums.map((v, i) => (
                             <motion.div key={i} animate={{ scale: i === activeK ? 1.3 : 1 }} style={{
                                 width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 backgroundColor: i === 0 || i === n - 1 ? '#e5e7eb' : i === activeK ? '#fbbf24' : '#f3f4f6',
                                 border: i === activeK ? '2px solid #f59e0b' : '1px solid var(--border)',
-                                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
                             }}>
                                 {v}
                             </motion.div>
                         ))}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 8 }}>DP table</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginTop: 8 }}>DP table</div>
                     <div style={{ overflowX: 'auto', flex: 1 }}>
                         <table style={{ borderCollapse: 'collapse', fontSize: 11, marginBottom: 8 }}>
                             <thead>
@@ -174,7 +177,7 @@ export default function BurstBalloonsVisualizer() {
                                                         padding: '6px 8px', border: '1px solid var(--text)',
                                                         backgroundColor: isActive ? '#dbeafe' : isK ? '#fef3c7' : v > 0 ? '#f0fdf4' : 'white',
                                                         fontWeight: isActive ? 'bold' : 'normal',
-                                                        color: isActive ? '#1e40af' : 'var(--surface2)',
+                                                        color: isActive ? '#1e40af' : 'var(--text-on-light)',
                                                         minWidth: 32, textAlign: 'center'
                                                     }}>
                                                     {v || '·'}
@@ -190,11 +193,11 @@ export default function BurstBalloonsVisualizer() {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
                         <div>
                             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Window</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>[{activeL},{activeR}]</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>[{activeL},{activeR}]</div>
                         </div>
                         <div>
                             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Pivot k</div>
-                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{activeK >= 0 ? activeK : '—'}</div>
+                            <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{activeK >= 0 ? activeK : '—'}</div>
                         </div>
                         <div>
                             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Coins</div>
@@ -228,9 +231,6 @@ export default function BurstBalloonsVisualizer() {
             )}
             {createPortal(
                 <FloatingPanel title="Playback Controls">
-                    {showPatternOverlay && (
-                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                    )}
                     <PlaybackControls
                         isPlaying={isPlaying}
                         isDone={isDone}
@@ -248,6 +248,9 @@ export default function BurstBalloonsVisualizer() {
                         patternOverlayLabel="Show pattern overlay"
                         showPatternOverlayToggle
                     />
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
                 </FloatingPanel>,
                 document.body
             )}

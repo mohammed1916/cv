@@ -1,0 +1,31 @@
+{
+  "number": "255",
+  "title": "Verify Preorder Sequence in Binary Search Tree",
+  "goal": "Verify that a sequence can be the preorder traversal of a binary search tree with distinct values.",
+  "strategy": "A monotonic stack tracks unfinished ancestors. Popping smaller ancestors means entering their right subtrees, which establishes a lower bound that all later values must respect.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Verify that a sequence can be the preorder traversal of a binary search tree with distinct values.",
+    "inspect": "A monotonic stack tracks unfinished ancestors. Popping smaller ancestors means entering their right subtrees, which establishes a lower bound that all later values must respect.",
+    "update": "A monotonic stack tracks unfinished ancestors. Popping smaller ancestors means entering their right subtrees, which establishes a lower bound that all later values must respect.",
+    "done": "Verify that a sequence can be the preorder traversal of a binary search tree with distinct values."
+  },
+  "edgeCases": [
+    "A late value crosses an established lower bound",
+    "Ascending preorder describes a right-only chain",
+    "Descending preorder describes a left-only chain"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

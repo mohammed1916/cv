@@ -1,0 +1,22 @@
+{
+  "number": "329",
+  "title": "Longest Increasing Path in a Matrix",
+  "goal": "Solve Longest Increasing Path in a Matrix: DFS with memoization from each cell, exploring only strictly increasing neighbors.",
+  "strategy": "DFS with memoization from each cell, exploring only strictly increasing neighbors.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "(r, c) in memo",
+      "outcome": "return memo[(r, c)]"
+    }
+  ],
+  "inputRules": [
+    "matrix must be an array"
+  ],
+  "source": [
+    "src/problems/Problem329/index.jsx",
+    "src/problems/Problem329/LongestIncreasingPathVisualizer.jsx"
+  ]
+}

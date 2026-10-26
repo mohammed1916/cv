@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/reverse-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -11,7 +14,7 @@ const SOLUTION_CODE = getSolutionCode('reverse-string')
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./ReverseStringVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -19,7 +22,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
 const PATTERNS = []
 
-const EXAMPLES = getExamples('reverse-string');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(sIn) {
     const steps = [];
@@ -91,7 +94,7 @@ function RopeFlipVisualization({ arr, step, ex }) {
 
       {/* Current state */}
       <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, border: '2px solid #0ea5e9' }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Reversed String</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Reversed String</div>
         <div style={{ fontSize: 24, fontFamily: 'monospace', fontWeight: 'bold', color: '#0b7db0', letterSpacing: 4 }}>
           {arr.join("")}
         </div>
@@ -122,7 +125,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -150,7 +153,7 @@ function VisualizationPanel({ arr, step, ex, applyEx }) {
 
 export default function ReverseStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("[\"h\",\"e\",\"l\",\"l\",\"o\"]");
+  const [sInput, setSInput] = useState(JSON.stringify(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = JSON.parse(sInput); if (!Array.isArray(parsedS)) throw new Error('s must be an array');

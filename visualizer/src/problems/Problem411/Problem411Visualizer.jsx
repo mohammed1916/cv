@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--411.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -19,11 +21,7 @@ const SOLUTION_CODE = getSolutionCode('minimum-unique-word-abbreviation')
 const LINE_PATTERN_MAP = {}
 const PATTERNS = ['check_abbr', 'done', 'found_unique', 'generate_len', 'init', 'match_check', 'not_unique']  // Auto-generated: maps line numbers to phase names
 
-const EXAMPLES = [
-  { label: 'Ex1', word: 'apple', dictionary: ['banana'], expected: 'a3e' },
-  { label: 'Ex2', word: 'banana', dictionary: ['band', 'can', 'fan'], expected: 'ba2' },
-  { label: 'Simple', word: 'dog', dictionary: ['cat'], expected: 'd1g' },
-]
+const EXAMPLES = authoredExamples0
 
 function abbreviationMatches(abbr, word) {
   let aIdx = 0, wIdx = 0
@@ -182,7 +180,7 @@ function generateSteps(word, dictionary) {
 function AbbreviationExplorer({ word, dictionary, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Abbreviation Search</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Abbreviation Search</div>
 
       {/* Word display */}
       <div>
@@ -374,7 +372,7 @@ export default function Problem411Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

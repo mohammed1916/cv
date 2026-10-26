@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/lcabst.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LCABSTVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -105,7 +108,7 @@ function parseInputs(arrInput, pInput, qInput) {
     return { arr, p, q }
 }
 
-const EXAMPLES = getExamples('lcabst')
+const EXAMPLES = authoredExamples0
 
 function TreeVisualizationPanel({
     positions,
@@ -192,9 +195,9 @@ function TreeVisualizationPanel({
 }
 
 export default function LCABSTVisualizer() {
-    const [arrInput, setArrInput] = useState('[6,2,8,0,4,7,9,null,null,3,5]')
-    const [pInput, setPInput] = useState('2')
-    const [qInput, setQInput] = useState('8')
+    const [arrInput, setArrInput] = useState(AUTHORED_INITIAL.arrInput)
+    const [pInput, setPInput] = useState(String(AUTHORED_INITIAL.p))
+    const [qInput, setQInput] = useState(String(AUTHORED_INITIAL.q))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -229,13 +232,7 @@ export default function LCABSTVisualizer() {
                     <button key={ex.label} className="lca-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                 ))}
             </div>
-            <div className="lca-inputs">
-                <input className="lca-input wide" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} placeholder="tree array" />
-                <div className="lca-pq">
-                    <label>p=<input className="lca-input small" value={pInput} onChange={(e) => { setPInput(e.target.value); handleReset() }} /></label>
-                    <label>q=<input className="lca-input small" value={qInput} onChange={(e) => { setQInput(e.target.value); handleReset() }} /></label>
-                </div>
-            </div>
+            
             {inputError && <span className="lca-error">{inputError}</span>}
         </div>
     )
@@ -280,7 +277,7 @@ export default function LCABSTVisualizer() {
     const panelConfigs = useMemo(() => [
         { id: 'input', title: 'Input Setup' },
         { id: 'viz', title: 'Tree Visualization', dockMode: 'split-right' },
-        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

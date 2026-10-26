@@ -1,0 +1,31 @@
+{
+  "number": "1881",
+  "title": "Maximum Value after Insertion",
+  "goal": "Insert digit x into a signed decimal string to maximize its numeric value.",
+  "strategy": "For positive numbers insert before the first smaller digit. For negative numbers reduce magnitude by inserting before the first larger digit; otherwise append.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Insert digit x into a signed decimal string to maximize its numeric value.",
+    "inspect": "For positive numbers insert before the first smaller digit. For negative numbers reduce magnitude by inserting before the first larger digit; otherwise append.",
+    "update": "For positive numbers insert before the first smaller digit. For negative numbers reduce magnitude by inserting before the first larger digit; otherwise append.",
+    "done": "Insert digit x into a signed decimal string to maximize its numeric value."
+  },
+  "edgeCases": [
+    "Negative number prefers a smaller early digit",
+    "Append when no earlier position improves",
+    "Equal digits defer the insertion"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

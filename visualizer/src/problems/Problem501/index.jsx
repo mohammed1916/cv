@@ -1,1 +1,4 @@
-export { default } from "./FindModeInBSTVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./FindModeInBSTVisualizer";
+export default withProblemStory(CatalogVisualizer, storyGuide);

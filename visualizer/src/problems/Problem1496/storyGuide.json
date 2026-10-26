@@ -1,0 +1,31 @@
+{
+  "number": "1496",
+  "title": "Path Crossing",
+  "goal": "Decide whether a grid walk revisits a previously occupied point.",
+  "strategy": "Remember coordinates, starting with the origin. Crossing happens on the first repeated coordinate after any unit move.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether a grid walk revisits a previously occupied point.",
+    "inspect": "Remember coordinates, starting with the origin. Crossing happens on the first repeated coordinate after any unit move.",
+    "update": "Remember coordinates, starting with the origin. Crossing happens on the first repeated coordinate after any unit move.",
+    "done": "Decide whether a grid walk revisits a previously occupied point."
+  },
+  "edgeCases": [
+    "Always moving away",
+    "Return to origin",
+    "Single move"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

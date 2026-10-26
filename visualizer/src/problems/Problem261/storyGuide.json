@@ -1,0 +1,30 @@
+{
+  "number": "261",
+  "title": "Graph Valid Tree",
+  "goal": "Solve Graph Valid Tree: Determine if edges form a tree.",
+  "strategy": "Determine if edges form a tree.",
+  "phases": [
+    "init",
+    "done",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(edges) != n - 1",
+      "outcome": "return False"
+    },
+    {
+      "condition": "find(left) == find(right)",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem261/index.jsx",
+    "src/problems/Problem261/Problem261Visualizer.jsx"
+  ]
+}

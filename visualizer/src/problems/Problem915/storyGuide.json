@@ -1,0 +1,27 @@
+{
+  "number": "915",
+  "title": "Partition Array into Disjoint Intervals",
+  "goal": "Find the shortest nonempty left partition no greater than every right value.",
+  "strategy": "A value below the committed left maximum forces the boundary forward. Include every intervening value in the new left maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest nonempty left partition no greater than every right value.",
+    "inspect": "A value below the committed left maximum forces the boundary forward. Include every intervening value in the new left maximum.",
+    "update": "A value below the committed left maximum forces the boundary forward. Include every intervening value in the new left maximum.",
+    "done": "Find the shortest nonempty left partition no greater than every right value."
+  },
+  "edgeCases": [
+    "Shortest prefix is one element",
+    "Equal values permit earliest cut",
+    "Smallest valid split"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

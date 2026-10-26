@@ -1,0 +1,28 @@
+{
+  "number": "412",
+  "title": "Fizz Buzz",
+  "goal": "Solve Fizz Buzz: Generate FizzBuzz sequence: print 'Fizz' for multiples of 3, 'Buzz' for 5, 'FizzBuzz' for 15, else the number.",
+  "strategy": "Generate FizzBuzz sequence: print 'Fizz' for multiples of 3, 'Buzz' for 5, 'FizzBuzz' for 15, else the number.",
+  "phases": [
+    "buzz",
+    "check_div",
+    "check_i",
+    "done",
+    "fizz",
+    "fizzbuzz",
+    "init",
+    "number"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A number divisible by both three and five uses the combined label rather than either single label."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem412/index.jsx",
+    "src/problems/Problem412/Problem412Visualizer.jsx"
+  ]
+}

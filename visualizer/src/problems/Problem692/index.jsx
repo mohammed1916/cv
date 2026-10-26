@@ -1,28 +1,10 @@
-import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import authoredExamples0 from '../../config/examples/scan--692.js';
 
-const definition = {
-  phases: [
-    { id: 'count', label: 'Count', description: 'Tally every word.' },
-    { id: 'rank', label: 'Rank', description: 'Keep the highest-ranked words, most frequent first.' },
-    { id: 'done', label: 'Complete', description: 'Return the top k.' },
-  ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Words and k (JSON object)',
-  url: 'https://leetcode.com/problems/top-k-frequent-words/',
-  complexity: 'O(n log n) time for the sort; a heap of size k gives O(n log k).',
-  examples: [
-    { label: 'Ties alphabetical', input: '{"words":["i","love","leetcode","i","love","coding"],"k":2}' },
-    { label: 'Four words', input: '{"words":["the","day","is","sunny","the","the","the","sunny","is","is"],"k":4}' },
-  ],
-}
+import SequenceStory from '../families/sequenceStories/SequenceStory';
+import { definitions } from '../families/scanStories/definitions';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 
-export default function TopKWords() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <StackLane title="Ranked so far" items={step.ranked} note={step.phase === 'done' ? 'final' : 'building'} />
-    <output aria-label="Top words">{step.phase === 'done' ? `Top: ${step.result.join(', ')}` : 'Counting…'}</output>
-  </>} renderReasoning={({ step }) => <>
-    <p>{step.message}</p>
-    <p><strong>Tie break:</strong> equal counts are ordered alphabetically, so the output is deterministic.</p>
-  </>} />
-}
+const definition = { ...definitions[692], examples: authoredExamples0 };
+function Visualizer() { return <SequenceStory definition={definition} />; }
+export default withProblemStory(Visualizer, storyGuide);

@@ -1,1 +1,5 @@
-export { default } from "./Problem417Visualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./Problem417Visualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

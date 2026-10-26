@@ -1,0 +1,31 @@
+{
+  "number": "2191",
+  "title": "Sort the Jumbled Numbers",
+  "goal": "Sort numbers by their digit-mapped values while preserving ties in original order.",
+  "strategy": "Map every decimal digit, including the single digit of zero. Leading mapped zeros do not contribute numeric weight; decorate each value with its mapped number and original index before sorting.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sort numbers by their digit-mapped values while preserving ties in original order.",
+    "inspect": "Map every decimal digit, including the single digit of zero. Leading mapped zeros do not contribute numeric weight; decorate each value with its mapped number and original index before sorting.",
+    "update": "Map every decimal digit, including the single digit of zero. Leading mapped zeros do not contribute numeric weight; decorate each value with its mapped number and original index before sorting.",
+    "done": "Sort numbers by their digit-mapped values while preserving ties in original order."
+  },
+  "edgeCases": [
+    "Identity mapping is ordinary stable numeric sorting",
+    "Zero is mapped as one digit rather than an empty representation",
+    "Equal original values remain repeated occurrences"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

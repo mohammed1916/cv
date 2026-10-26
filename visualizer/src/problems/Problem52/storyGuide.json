@@ -1,0 +1,33 @@
+{
+  "number": "52",
+  "title": "N-Queens II",
+  "goal": "Solve N-Queens II: Explore nonattacking queen placements row by row, counting completed boards rather than storing each board.",
+  "strategy": "Explore nonattacking queen placements row by row, counting completed boards rather than storing each board.",
+  "phases": [
+    "check",
+    "done",
+    "init",
+    "place",
+    "remove",
+    "skip",
+    "solution"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only a placement covering every row counts; a dead-end row contributes zero."
+  ],
+  "checks": [
+    {
+      "condition": "col in cols or (row-col) in diag1 or (row+col) in diag2",
+      "outcome": "continue  # under attack"
+    }
+  ],
+  "inputRules": [
+    "Use an integer n from 1 to 9."
+  ],
+  "source": [
+    "src/problems/Problem52/index.jsx",
+    "src/problems/Problem52/NQueensIIVisualizer.jsx",
+    "src/problems/Problem52/algorithm.js"
+  ]
+}

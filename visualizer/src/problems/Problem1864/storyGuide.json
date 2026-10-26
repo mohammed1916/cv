@@ -1,0 +1,31 @@
+{
+  "number": "1864",
+  "title": "Minimum Number of Swaps to Make the Binary String Alternating",
+  "goal": "Find the fewest arbitrary-position swaps making a binary string alternate.",
+  "strategy": "Alternation requires zero and one counts differing by at most one. For each count-compatible target, a swap repairs two mismatched positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest arbitrary-position swaps making a binary string alternate.",
+    "inspect": "Alternation requires zero and one counts differing by at most one. For each count-compatible target, a swap repairs two mismatched positions.",
+    "update": "Alternation requires zero and one counts differing by at most one. For each count-compatible target, a swap repairs two mismatched positions.",
+    "done": "Find the fewest arbitrary-position swaps making a binary string alternate."
+  },
+  "edgeCases": [
+    "Count imbalance makes alternation impossible",
+    "Already alternating",
+    "Odd length fixes the starting bit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1292",
+  "title": "Maximum Side Length of a Square with Sum Less than or Equal to Threshold",
+  "goal": "Find the largest square whose sum is at most the threshold.",
+  "strategy": "A two-dimensional prefix table answers square sums with four accesses. Nonnegative entries make larger squares at one corner no cheaper than smaller ones.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest square whose sum is at most the threshold.",
+    "inspect": "A two-dimensional prefix table answers square sums with four accesses. Nonnegative entries make larger squares at one corner no cheaper than smaller ones.",
+    "update": "A two-dimensional prefix table answers square sums with four accesses. Nonnegative entries make larger squares at one corner no cheaper than smaller ones.",
+    "done": "Find the largest square whose sum is at most the threshold."
+  },
+  "edgeCases": [
+    "Zero cells permit the whole square",
+    "No single cell fits",
+    "Rectangular dimensions limit square size"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1898",
+  "title": "Maximum Number of Removable Characters",
+  "goal": "Remove the longest prefix of the removal list while keeping p as a subsequence of s.",
+  "strategy": "Store each position removal order. For a proposed count, skip removed positions and greedily match p; feasibility is monotone under additional removals.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the longest prefix of the removal list while keeping p as a subsequence of s.",
+    "inspect": "Store each position removal order. For a proposed count, skip removed positions and greedily match p; feasibility is monotone under additional removals.",
+    "update": "Store each position removal order. For a proposed count, skip removed positions and greedily match p; feasibility is monotone under additional removals.",
+    "done": "Remove the longest prefix of the removal list while keeping p as a subsequence of s."
+  },
+  "edgeCases": [
+    "First removal immediately breaks the subsequence",
+    "All requested removals are harmless",
+    "Empty removal list"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

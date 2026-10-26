@@ -1,0 +1,23 @@
+{
+  "number": "288",
+  "title": "Unique Word Abbreviation",
+  "goal": "Solve Unique Word Abbreviation: Design data structure for unique abbreviations.",
+  "strategy": "Design data structure for unique abbreviations.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A dictionary containing the same word repeatedly does not create an abbreviation conflict with itself."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem288/index.jsx",
+    "src/problems/Problem288/Problem288Visualizer.jsx"
+  ]
+}

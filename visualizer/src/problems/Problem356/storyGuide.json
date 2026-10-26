@@ -1,0 +1,28 @@
+{
+  "number": "356",
+  "title": "Line Reflection",
+  "goal": "Solve Line Reflection: Use the extreme x coordinates to propose a vertical reflection axis and check that every point has its reflected partner.",
+  "strategy": "Use the extreme x coordinates to propose a vertical reflection axis and check that every point has its reflected partner.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Points on the axis reflect to themselves; negative coordinates and repeated points must not shift the axis."
+  ],
+  "checks": [
+    {
+      "condition": "not points",
+      "outcome": "return True"
+    },
+    {
+      "condition": "(reflected_x, y) not in point_set",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "points must be an array"
+  ],
+  "source": [
+    "src/problems/Problem356/index.jsx",
+    "src/problems/Problem356/Problem356Visualizer.jsx"
+  ]
+}

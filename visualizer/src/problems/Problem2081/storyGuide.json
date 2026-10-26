@@ -1,0 +1,31 @@
+{
+  "number": "2081",
+  "title": "Sum of k-Mirror Numbers",
+  "goal": "Sum the first n positive numbers palindromic in decimal and base k.",
+  "strategy": "Generate decimal palindromes directly by mirroring their first half, in increasing numeric order. Convert each to base k and keep only representations that are also palindromes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the first n positive numbers palindromic in decimal and base k.",
+    "inspect": "Generate decimal palindromes directly by mirroring their first half, in increasing numeric order. Convert each to base k and keep only representations that are also palindromes.",
+    "update": "Generate decimal palindromes directly by mirroring their first half, in increasing numeric order. Convert each to base k and keep only representations that are also palindromes.",
+    "done": "Sum the first n positive numbers palindromic in decimal and base k."
+  },
+  "edgeCases": [
+    "Only the first qualifying value is requested",
+    "Binary symmetry filters decimal palindromes",
+    "A larger base has several single-digit matches"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

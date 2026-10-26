@@ -1,0 +1,27 @@
+{
+  "number": "904",
+  "title": "Fruit Into Baskets",
+  "goal": "Find the longest contiguous harvest using at most two fruit types.",
+  "strategy": "After adding a third type, discard leftmost fruit until one type disappears completely.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest contiguous harvest using at most two fruit types.",
+    "inspect": "After adding a third type, discard leftmost fruit until one type disappears completely.",
+    "update": "After adding a third type, discard leftmost fruit until one type disappears completely.",
+    "done": "Find the longest contiguous harvest using at most two fruit types."
+  },
+  "edgeCases": [
+    "One type only",
+    "Every fruit type differs",
+    "Exactly two types"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

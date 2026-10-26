@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/binary-tree-paths.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './BinaryTreePathsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -141,7 +144,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('binary-tree-paths')
+const EXAMPLES = authoredExamples0
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
     return (
@@ -224,24 +227,13 @@ function StatePanel({ step, allNodes }) {
 function InputPanel({ arrInput, setArrInput, applyExample, inputError }) {
     return (
         <div className="btp-input-panel">
-            <div className="btp-examples">
-                {EXAMPLES.map((ex) => (
-                    <button key={ex.label} className="btp-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                ))}
-            </div>
-            <input
-                className="btp-input"
-                value={arrInput}
-                onChange={(e) => setArrInput(e.target.value)}
-                placeholder="[1,2,3]"
-            />
             {inputError && <span className="btp-error">{inputError}</span>}
         </div>
     )
 }
 
 export default function BinaryTreePathsVisualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
 
     const { arr, inputError } = useMemo(() => {
         try {
@@ -270,7 +262,7 @@ export default function BinaryTreePathsVisualizer() {
       { id: 'input', title: 'Input' },
       { id: 'tree', title: 'Tree Visualization', dockMode: 'split-bottom' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       input: (<InputPanel arrInput={arrInput} setArrInput={setArrInput} applyExample={applyExample} inputError={inputError} />),

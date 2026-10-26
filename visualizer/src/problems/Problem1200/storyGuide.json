@@ -1,0 +1,31 @@
+{
+  "number": "1200",
+  "title": "Minimum Absolute Difference",
+  "goal": "Return every pair of distinct values attaining the minimum absolute difference.",
+  "strategy": "A minimum-gap pair must be adjacent in sorted order. A smaller gap replaces winners; an equal gap appends another pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return every pair of distinct values attaining the minimum absolute difference.",
+    "inspect": "A minimum-gap pair must be adjacent in sorted order. A smaller gap replaces winners; an equal gap appends another pair.",
+    "update": "A minimum-gap pair must be adjacent in sorted order. A smaller gap replaces winners; an equal gap appends another pair.",
+    "done": "Return every pair of distinct values attaining the minimum absolute difference."
+  },
+  "edgeCases": [
+    "One pair",
+    "All neighboring gaps tie",
+    "Unique smallest gap crosses zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

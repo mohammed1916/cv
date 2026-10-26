@@ -1,0 +1,31 @@
+{
+  "number": "1374",
+  "title": "Generate a String With Characters That Have Odd Counts",
+  "goal": "Construct a length-n string where every occurring character has odd frequency.",
+  "strategy": "For odd n, one character suffices. For even n, use n-1 copies of one character and one copy of a different character.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct a length-n string where every occurring character has odd frequency.",
+    "inspect": "For odd n, one character suffices. For even n, use n-1 copies of one character and one copy of a different character.",
+    "update": "For odd n, one character suffices. For even n, use n-1 copies of one character and one copy of a different character.",
+    "done": "Construct a length-n string where every occurring character has odd frequency."
+  },
+  "edgeCases": [
+    "Odd length needs one character kind",
+    "Single character",
+    "Two different one-count characters"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

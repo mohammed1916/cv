@@ -1,0 +1,26 @@
+{
+  "number": "262",
+  "title": "Trips and Users",
+  "goal": "Solve Trips and Users: Find SQL join of trips and users.",
+  "strategy": "Find SQL join of trips and users.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "trip.client_id in banned or trip.driver_id in banned",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem262/index.jsx",
+    "src/problems/Problem262/Problem262Visualizer.jsx"
+  ]
+}

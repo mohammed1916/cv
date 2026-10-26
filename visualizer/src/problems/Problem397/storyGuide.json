@@ -1,0 +1,24 @@
+{
+  "number": "397",
+  "title": "Integer Replacement",
+  "goal": "Solve Integer Replacement: Find minimum steps to reach 1 from n using division by 2 (if even) or add/subtract 1 (if odd).",
+  "strategy": "Find minimum steps to reach 1 from n using division by 2 (if even) or add/subtract 1 (if odd).",
+  "phases": [
+    "apply",
+    "check",
+    "complete",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Even values halve directly; odd values choose between neighboring evens, with small cases needing careful termination."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem397/index.jsx",
+    "src/problems/Problem397/Problem397Visualizer.jsx"
+  ]
+}

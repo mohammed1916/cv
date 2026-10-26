@@ -1,0 +1,31 @@
+{
+  "number": "1837",
+  "title": "Sum of Digits in Base K",
+  "goal": "Sum the digits of n in base k without converting to decimal text.",
+  "strategy": "Repeated remainder extracts the least significant base-k digit. Integer division removes that digit so the remaining positions can be processed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the digits of n in base k without converting to decimal text.",
+    "inspect": "Repeated remainder extracts the least significant base-k digit. Integer division removes that digit so the remaining positions can be processed.",
+    "update": "Repeated remainder extracts the least significant base-k digit. Integer division removes that digit so the remaining positions can be processed.",
+    "done": "Sum the digits of n in base k without converting to decimal text."
+  },
+  "edgeCases": [
+    "A base power has one nonzero digit",
+    "Small number below base",
+    "Binary digit sum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

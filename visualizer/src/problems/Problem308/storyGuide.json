@@ -1,0 +1,23 @@
+{
+  "number": "308",
+  "title": "Range Sum Query 2D - Mutable",
+  "goal": "Solve Range Sum Query 2D - Mutable: 2D mutable range sum queries with updates.",
+  "strategy": "2D mutable range sum queries with updates.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A cell update affects multiple two-dimensional index blocks; query rectangles require inclusion-exclusion."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use a rectangular numeric matrix and operations."
+  ],
+  "source": [
+    "src/problems/Problem308/index.jsx",
+    "src/problems/Problem308/RangeSumQuery2D-MutableVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "number": "493",
+  "title": "Reverse Pairs",
+  "goal": "Solve Reverse Pairs: Count pairs where i < j and nums[i] > 2*nums[j] using merge sort.",
+  "strategy": "Count pairs where i < j and nums[i] > 2*nums[j] using merge sort.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(arr)<=1",
+      "outcome": "return arr"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem493/index.jsx",
+    "src/problems/Problem493/Problem493Visualizer.jsx"
+  ]
+}

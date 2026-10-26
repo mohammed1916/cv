@@ -1,0 +1,31 @@
+{
+  "number": "2099",
+  "title": "Find Subsequence of Length K With the Largest Sum",
+  "goal": "Keep a length-k subsequence with maximum sum while preserving original order.",
+  "strategy": "Choose the indices of the k largest values, breaking ties consistently by earlier index. Sorting those chosen indices restores the required subsequence order without changing the sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Keep a length-k subsequence with maximum sum while preserving original order.",
+    "inspect": "Choose the indices of the k largest values, breaking ties consistently by earlier index. Sorting those chosen indices restores the required subsequence order without changing the sum.",
+    "update": "Choose the indices of the k largest values, breaking ties consistently by earlier index. Sorting those chosen indices restores the required subsequence order without changing the sum.",
+    "done": "Keep a length-k subsequence with maximum sum while preserving original order."
+  },
+  "edgeCases": [
+    "Equal values break ties by earlier source position",
+    "Negative values still require exactly k selections",
+    "Choosing the full length preserves every element"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

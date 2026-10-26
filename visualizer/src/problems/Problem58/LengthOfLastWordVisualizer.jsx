@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/length-of-last-word.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -10,7 +13,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LengthOfLastWordVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
@@ -38,7 +41,7 @@ const LINE_PATTERN_MAP = {
   9: 'done',
 };
 
-const EXAMPLES = getExamples('length-of-last-word');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(sIn) {
   const steps = [];
@@ -68,7 +71,7 @@ function generateSteps(sIn) {
 
 export default function LengthOfLastWordVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("Hello World");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;
@@ -140,7 +143,7 @@ export default function LengthOfLastWordVisualizer() {
         ))}
       </div>
 
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Characters</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Characters</div>
       <div style={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         {chars.map((ch, idx) => {
           const isActive = idx === i;
@@ -152,7 +155,7 @@ export default function LengthOfLastWordVisualizer() {
                 width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                 backgroundColor: isDoneHighlight ? '#dcfce7' : isActive ? '#fbbf24' : '#f3f4f6',
                 border: isActive ? '2px solid #f59e0b' : isDoneHighlight ? '2px solid #86efac' : '1px solid var(--border)',
-                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
               }}>
                 {isSpace ? '·' : ch}
               </motion.div>
@@ -165,7 +168,7 @@ export default function LengthOfLastWordVisualizer() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
         <div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>i</div>
-          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{i < 0 ? '-1' : i}</div>
+          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{i < 0 ? '-1' : i}</div>
         </div>
         <div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>length</div>
@@ -175,7 +178,7 @@ export default function LengthOfLastWordVisualizer() {
         </div>
         <div>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>phase</div>
-          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{phase}</div>
+          <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{phase}</div>
         </div>
       </div>
 
@@ -192,9 +195,6 @@ export default function LengthOfLastWordVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -212,6 +212,9 @@ export default function LengthOfLastWordVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LENGTHOFLASTWORD_PATTERNS} />
+      )}
     </>
   );
 
@@ -220,7 +223,7 @@ export default function LengthOfLastWordVisualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'primary', title: '📝 Last Word', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   );

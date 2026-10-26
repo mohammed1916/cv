@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/jump-game-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -10,7 +13,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./JumpGameIIVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -39,7 +42,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('jump-game-ii');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
   const steps = [];
@@ -123,7 +126,7 @@ function StatsDisplay({ step }) {
 
 export default function JumpGameIIVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[2,3,1,1,4]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -206,9 +209,6 @@ export default function JumpGameIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -230,6 +230,9 @@ export default function JumpGameIIVisualizer() {
         autoScrollLabel="Auto-scroll code"
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAMEII_PATTERNS} />
+      )}
     </>
   );
 
@@ -238,7 +241,7 @@ export default function JumpGameIIVisualizer() {
     () => [
       { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
       { id: 'viz', title: 'Array Visualization', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

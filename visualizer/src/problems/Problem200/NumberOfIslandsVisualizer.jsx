@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/number-of-islands.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './NumberOfIslandsVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -153,7 +156,7 @@ function generateSteps(grid) {
   return steps
 }
 
-const EXAMPLES = getExamples('number-of-islands')
+const EXAMPLES = authoredExamples0
 
 const ISLAND_COLORS = [
   '#3b82f6', // blue
@@ -167,7 +170,7 @@ const ISLAND_COLORS = [
 ]
 
 export default function NumberOfIslandsVisualizer() {
-  const [gridInput, setGridInput] = useState(EXAMPLES[1].gridStr)
+  const [gridInput, setGridInput] = useState(AUTHORED_INITIAL.gridStr)
 
   const { grid, inputError } = useMemo(() => {
     try {
@@ -222,14 +225,6 @@ export default function NumberOfIslandsVisualizer() {
           </div>
 
           {inputError && <div style={{ color: '#ea0c0c', marginBottom: 12, fontSize: 13 }}>{inputError}</div>}
-
-          <textarea
-            className="noi-input-textarea"
-            value={gridInput}
-            onChange={(e) => { setGridInput(e.target.value); handleReset() }}
-            rows={5}
-            spellCheck={false}
-          />
 
           <div className="noi-grid-container">
             <div
@@ -355,7 +350,7 @@ export default function NumberOfIslandsVisualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'grid', title: 'Grid View & Input' },
     { id: 'state', title: 'State & Queue', dockMode: 'split-right' },
-    { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
   ], [])
 
   const [panelDivs, setPanelDivs] = useState(null)

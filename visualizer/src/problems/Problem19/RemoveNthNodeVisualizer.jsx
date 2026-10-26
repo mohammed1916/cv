@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/remove-nth-node.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -11,7 +14,7 @@ import PatternLegend from "../../components/PatternLegend"
 import { usePlaybackState } from "../../hooks/usePlaybackState"
 import { usePatternOverlay } from "../../hooks/usePatternOverlay"
 import { useAutoScroll } from "../../hooks/useAutoScroll"
-import { getExamples } from "../../config/examplesRegistry"
+
 import "./RemoveNthNodeVisualizer.css"
 const SOLUTION_CODE = [
   { line: 1, text: "class Solution:" },
@@ -212,7 +215,7 @@ function generateSteps(list, n) {
   return steps
 }
 
-const EXAMPLES = getExamples("remove-nth-node")
+const EXAMPLES = authoredExamples0
 
 function RemoveNthNodeViz({
   step,
@@ -381,7 +384,7 @@ function RemoveNthNodeState({ step }) {
 }
 
 export default function RemoveNthNodeVisualizer() {
-  const [inputStr, setInputStr] = useState("[1,2,3,4,5]; 2")
+  const [inputStr, setInputStr] = useState(AUTHORED_INITIAL.input)
 
   const { list, n, inputError } = useMemo(() => {
     try {
@@ -458,9 +461,6 @@ export default function RemoveNthNodeVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVENTHNODE_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -481,6 +481,9 @@ export default function RemoveNthNodeVisualizer() {
         patternOverlayLabel="Pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVENTHNODE_PATTERNS} />
+      )}
     </>
   )
 
@@ -490,7 +493,7 @@ export default function RemoveNthNodeVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

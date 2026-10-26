@@ -1,0 +1,31 @@
+{
+  "number": "1535",
+  "title": "Find the Winner of an Array Game",
+  "goal": "Find the first front-of-array champion to win k consecutive comparisons.",
+  "strategy": "Only the current champion and its win streak matter. After one scan the greatest value is champion forever, even when k exceeds the array length.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the first front-of-array champion to win k consecutive comparisons.",
+    "inspect": "Only the current champion and its win streak matter. After one scan the greatest value is champion forever, even when k exceeds the array length.",
+    "update": "Only the current champion and its win streak matter. After one scan the greatest value is champion forever, even when k exceeds the array length.",
+    "done": "Find the first front-of-array champion to win k consecutive comparisons."
+  },
+  "edgeCases": [
+    "First comparison decides",
+    "Large streak ends with global maximum",
+    "Initial maximum stays champion"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

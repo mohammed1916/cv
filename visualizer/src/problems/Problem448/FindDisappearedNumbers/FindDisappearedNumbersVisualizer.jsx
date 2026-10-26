@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/find-disappeared-numbers.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../../components/CodeTracePanel'
@@ -5,7 +6,7 @@ import PlaybackControls from '../../../components/PlaybackControls'
 import PatternOverlay from '../../../components/PatternOverlay'
 import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
-import { getExamples } from '../../../config/examplesRegistry'
+
 import './FindDisappearedNumbersVisualizer.css'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../../components/shared/ManualInputPanel'
@@ -24,7 +25,7 @@ const SOLUTION_CODE = [
     { line: 9, text: '    return result' },
 ]
 
-const EXAMPLES = getExamples('find-disappeared-numbers')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(input) {
     const steps = []
@@ -248,7 +249,7 @@ export default function FindDisappearedNumbersVisualizer() {
     </div>
     const codePanel = <>
       <div className="fdn-panel"><div className="fdn-head">Status</div><div className="fdn-status">{step.message}</div></div>
-      <CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
+      <CodeTracePanel step={step} code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} />
     </>
     return (
         <>

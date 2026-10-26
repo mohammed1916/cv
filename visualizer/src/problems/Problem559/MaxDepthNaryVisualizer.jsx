@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/max-depth-nary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MaxDepthNaryVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -263,30 +266,6 @@ function generateSteps(arr) {
 function VisualizationPanel({ step, applyExample, examples }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {step?.currentValue !== undefined && (
         <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid #22c55e' }}>
@@ -442,7 +421,7 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
         return (
           <g key={`node-${node.id}`}>
             <circle cx={pos.x} cy={pos.y} r="20" fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
-            <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="var(--surface)">
+            <text x={pos.x} y={pos.y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill={isActive || isProcessing || returnDepth !== undefined ? 'var(--text-on-light)' : 'var(--text)'}>
               {node.val}
             </text>
             {returnDepth !== undefined && (
@@ -458,8 +437,8 @@ function TreeVisualization({ root, nodeMap, step, canvasWidth = 400, canvasHeigh
 }
 
 export default function MaxDepthNaryVisualizer() {
-  const examples = useMemo(() => getExamplesOr('max-depth-nary-tree', []), [])
-  const [treeInput, setTreeInput] = useState('[1,[3,5,6],[2,4]]')
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
+  const [treeInput, setTreeInput] = useState(JSON.stringify(AUTHORED_INITIAL.tree || AUTHORED_INITIAL))
 
   const { tree, nodeMap, inputError } = useMemo(() => {
     try {
@@ -472,7 +451,8 @@ export default function MaxDepthNaryVisualizer() {
     }
   }, [treeInput])
 
-  const { steps } = useMemo(() => generateSteps(tree ? treeInput : []), [treeInput, tree])
+  const trace = useMemo(() => generateSteps(tree ? JSON.parse(treeInput) : []), [treeInput, tree])
+  const steps = Array.isArray(trace) ? trace : trace.steps
 
   const {
     stepIndex,
@@ -521,40 +501,7 @@ export default function MaxDepthNaryVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Tree Structure (Nested Array)</div>
-              <textarea
-                value={treeInput}
-                onChange={(e) => {
-                  setTreeInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 60,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-              />
-              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-            </div>
-
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8, overflow: 'auto' }}>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4' }}>Tree Visualization</div>
-              <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <TreeVisualization root={tree} nodeMap={nodeMap} step={step} canvasWidth={360} canvasHeight={280} />
-              </div>
-            </div>
-
-            <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
-          </div>),
+    viz: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} />),
   }), [step, connectivity, setActiveLineDom, treeInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom, tree, nodeMap])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
@@ -580,7 +527,6 @@ export default function MaxDepthNaryVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -598,6 +544,7 @@ export default function MaxDepthNaryVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

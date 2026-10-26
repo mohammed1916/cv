@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/sort-transformed-array.js';
+
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -16,32 +18,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
 const PATTERNS = ['done', 'init', 'merge', 'transform']
 
-const EXAMPLES = [
-  {
-    label: "U-shaped (a=1, b=-4, c=3)",
-    nums: [-4, -2, 2, 4],
-    a: 1,
-    b: -4,
-    c: 3,
-    description: "Positive parabola: largest values at edges"
-  },
-  {
-    label: "Inverted (a=-1, b=4, c=-3)",
-    nums: [-4, -2, 2, 4],
-    a: -1,
-    b: 4,
-    c: -3,
-    description: "Negative parabola: largest values in middle"
-  },
-  {
-    label: "Linear (a=0, b=2, c=0)",
-    nums: [-2, -1, 0, 1, 2],
-    a: 0,
-    b: 2,
-    c: 0,
-    description: "Linear transformation: monotonic"
-  }
-];
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums, a, b, c) {
   const steps = [];
@@ -345,7 +322,7 @@ function VisualizationPanel({ step, ex, setEx, applyExample }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map((e, i) => (
             <button
@@ -464,7 +441,7 @@ export default function Problem360Visualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
     { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
-    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     code: (<CodeTracePanel

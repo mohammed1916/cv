@@ -1,0 +1,27 @@
+{
+  "number": "1053",
+  "title": "Previous Permutation With One Swap",
+  "goal": "Find the greatest lexicographically smaller arrangement using at most one swap.",
+  "strategy": "Change the rightmost possible position. Choose the largest smaller suffix value, using its leftmost duplicate so the remaining suffix stays maximal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest lexicographically smaller arrangement using at most one swap.",
+    "inspect": "Change the rightmost possible position. Choose the largest smaller suffix value, using its leftmost duplicate so the remaining suffix stays maximal.",
+    "update": "Change the rightmost possible position. Choose the largest smaller suffix value, using its leftmost duplicate so the remaining suffix stays maximal.",
+    "done": "Find the greatest lexicographically smaller arrangement using at most one swap."
+  },
+  "edgeCases": [
+    "Leftmost duplicate replacement maximizes the suffix",
+    "Already the smallest arrangement",
+    "Single value cannot be swapped"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

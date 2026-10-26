@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/sum-of-two-integers.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem371Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -29,7 +32,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('sum-of-two-integers')
+const EXAMPLES = authoredExamples0
 
 function getSignBit(n) {
   return (n >>> 31) & 1
@@ -194,7 +197,7 @@ function generateSteps(a, b) {
 function BinaryRepresentation({ label, number, binary, highlight = false }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         {label}
       </div>
       <div style={{
@@ -204,7 +207,7 @@ function BinaryRepresentation({ label, number, binary, highlight = false }) {
         border: `2px solid ${highlight ? '#0284c7' : 'var(--border)'}`,
         fontFamily: 'monospace',
         fontSize: 12,
-        color: 'var(--surface2)'
+        color: (highlight ? 'var(--text-on-light)' : 'var(--text)')
       }}>
         {number}
       </div>
@@ -262,7 +265,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -460,8 +463,8 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 
 export default function Problem371Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [aInput, setAInput] = useState(1);
-  const [bInput, setBInput] = useState(1);
+  const [aInput, setAInput] = useState(String(AUTHORED_INITIAL.a));
+  const [bInput, setBInput] = useState(String(AUTHORED_INITIAL.b));
   const { a, b, inputError } = useMemo(() => {
     try {
       const parsedA = Number(aInput); if (isNaN(parsedA)) throw new Error('a must be a number');

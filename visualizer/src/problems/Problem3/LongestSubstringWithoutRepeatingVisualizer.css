@@ -64,8 +64,8 @@
 }
 
 .lswrc-example-btn:hover {
-  background: var(--border);
-  color: var(--surface);
+  background: var(--surface3);
+  color: var(--text);
 }
 
 .lswrc-input {
@@ -73,7 +73,7 @@
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   font-size: 14px;
   margin-bottom: 24px;
@@ -128,16 +128,16 @@
 }
 
 .lswrc-char-box.in-window {
-  background: rgba(139, 92, 246, 0.15);
-  border-color: #8b5cf6;
-  color: #c4b5fd;
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface));
+  border-color: var(--primary);
+  color: var(--primary);
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
 }
 
 .lswrc-char-box.collision {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: #ef4444;
-  color: #fca5a5;
+  background: color-mix(in srgb, var(--error) 8%, var(--surface));
+  border-color: var(--error);
+  color: var(--error);
   box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
 }
 
@@ -164,15 +164,15 @@
   font-family: monospace;
   padding: 2px 6px;
   border-radius: 4px;
-  color: #757575;
+  color: var(--text);
 }
 
-.left-pointer {
-  background: #3b82f6;
+.lswrc-pointer.left-pointer {
+  background: color-mix(in srgb, var(--info) 12%, var(--surface));
 }
 
-.right-pointer {
-  background: #f59e0b;
+.lswrc-pointer.right-pointer {
+  background: color-mix(in srgb, var(--warning) 12%, var(--surface));
   position: absolute;
   top: -72px; /* Move above the box */
 }
@@ -180,24 +180,24 @@
 .lswrc-window-indicator {
     margin-top: 24px;
     padding: 12px;
-    background: rgba(139, 92, 246, 0.1);
+    background: color-mix(in srgb, var(--primary) 8%, var(--surface));
     border: 1px solid rgba(139, 92, 246, 0.3);
     border-radius: 8px;
     text-align: center;
     font-size: 14px;
-    color: #c4b5fd;
+    color: var(--text);
     font-family: monospace;
 }
 
 .lswrc-window-indicator .highlight-text {
     font-weight: bold;
-    color: #7559fb;
+    color: var(--primary);
     font-size: 16px;
 }
 
 .lswrc-window-indicator .window-str {
     margin-left: 8px;
-    color: #7e56f8;
+    color: var(--primary);
 }
 
 /* Map table */
@@ -212,22 +212,22 @@
 .lswrc-map-table th {
   padding: 8px;
   border-bottom: 1px solid var(--border);
-  color: #627794;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
 .lswrc-map-table td {
   padding: 8px;
-  color: #4879a9;
+  color: var(--text);
   border-bottom: 1px solid var(--surface2);
 }
 
 .lswrc-map-row.highlight {
-  background: rgba(139, 92, 246, 0.2);
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface));
 }
 
 .lswrc-map-row.highlight td {
-  color: #7957fa;
+  color: var(--primary);
 }
 
 .lswrc-vars {
@@ -248,11 +248,11 @@
 }
 
 .lswrc-var-name {
-  color: #627794;
+  color: var(--text-muted);
 }
 
 .lswrc-var-val {
-  color: #4879a9;
+  color: var(--text);
   font-weight: 500;
 }
 
@@ -270,13 +270,13 @@
 }
 
 .lswrc-status.found {
-  border-left-color: #8b5cf6;
-  background: rgba(139, 92, 246, 0.1);
+  border-left-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface));
 }
 
 .lswrc-status.collision {
-  border-left-color: #ef4444;
-  background: rgba(239, 68, 68, 0.1);
+  border-left-color: var(--error);
+  background: color-mix(in srgb, var(--error) 8%, var(--surface));
 }
 
 .lswrc-dock {

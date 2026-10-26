@@ -1,0 +1,27 @@
+{
+  "number": "709",
+  "title": "To Lower Case",
+  "goal": "Convert uppercase English letters to lowercase while preserving all other characters.",
+  "strategy": "Only ASCII codes A through Z shift by 32. Lowercase letters, punctuation, spaces, and digits keep their original values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Convert uppercase English letters to lowercase while preserving all other characters.",
+    "inspect": "Only ASCII codes A through Z shift by 32. Lowercase letters, punctuation, spaces, and digits keep their original values.",
+    "update": "Only ASCII codes A through Z shift by 32. Lowercase letters, punctuation, spaces, and digits keep their original values.",
+    "done": "Convert uppercase English letters to lowercase while preserving all other characters."
+  },
+  "edgeCases": [
+    "Already lowercase",
+    "No letters",
+    "Alphabet endpoints"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

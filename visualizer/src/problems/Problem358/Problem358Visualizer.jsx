@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/rearrange-string-k-distance-apart.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import './Problem358.css'
@@ -50,11 +53,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('rearrange-string-k-distance-apart', [
-  { label: 'Example 1', s: 'ABABAB', k: 2 },
-  { label: 'Example 2', s: 'AAABBBCCD', k: 2 },
-  { label: 'Example 3', s: 'A', k: 0 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [3, 4, 5, 6, 7, 8, 9, 10] },
@@ -285,7 +284,7 @@ function FrequencyHistogram({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Character Frequency
       </header>
 
@@ -300,7 +299,7 @@ function FrequencyHistogram({ step }) {
               transition={{ duration: 0.2 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                <span style={{ fontWeight: 600, color: 'var(--surface2)' }}>{ch}</span>
+                <span style={{ fontWeight: 600, color: 'var(--text)' }}>{ch}</span>
                 <span style={{ color: 'var(--text-muted)' }}>{freq}</span>
               </div>
               <motion.div
@@ -345,7 +344,7 @@ function QueueAndCooldown({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Queue & Cooldown
       </header>
 
@@ -421,7 +420,7 @@ function ResultBuilder({ step, k }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Result: {result.length} chars
       </header>
 
@@ -452,7 +451,7 @@ function ResultBuilder({ step, k }) {
                   borderRadius: 6,
                   fontSize: 13,
                   fontWeight: 700,
-                  color: 'var(--surface2)',
+                  color: 'var(--text-on-light)',
                   position: 'relative',
                 }}
               >
@@ -488,7 +487,7 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -514,46 +513,10 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            String (s)
-          </label>
-          <input
-            value={sInput}
-            onChange={(e) => { setSInput(e.target.value); handleReset() }}
-            placeholder="e.g., ABABAB"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-          <div>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-              Distance (k)
-            </label>
-            <input
-              type="number"
-              value={kInput}
-              onChange={(e) => { setKInput(Math.max(0, parseInt(e.target.value) || 0)); handleReset() }}
-              min="0"
-              style={{
-                width: '100%',
-                padding: '8px 10px',
-                border: '1px solid var(--border)',
-                borderRadius: 4,
-                fontSize: 12,
-                boxSizing: 'border-box',
-              }}
-            />
-          </div>
+          
           <div style={{ display: 'flex', alignItems: 'flex-end' }}>
             <button
               onClick={handleReset}
@@ -588,8 +551,8 @@ function VisualizationPanel({ step, s, k, EXAMPLES, handleExampleClick, sInput, 
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem358Visualizer() {
-  const [sInput, setSInput] = useState('ABABAB')
-  const [kInput, setKInput] = useState(2)
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [kInput, setKInput] = useState(AUTHORED_INITIAL.k)
 
   const { s, k } = useMemo(() => ({
     s: sInput ?? '',

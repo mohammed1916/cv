@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/concatenated-words.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem472Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('concatenated-words')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('concatenated-words')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(words) {
   const steps = []
@@ -85,7 +88,7 @@ function VisualizationPanel({ words, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -107,7 +110,7 @@ function VisualizationPanel({ words, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Words List
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -185,7 +188,7 @@ function VisualizationPanel({ words, step, applyEx }) {
 
 export default function Problem472Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [wordsInput, setWordsInput] = useState("[\"cat\",\"cats\",\"catsdogcats\",\"dog\",\"catscat\",\"ratcatdogcat\"]");
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words));
   const { words, inputError } = useMemo(() => {
     try {
       const parsedWords = JSON.parse(wordsInput); if (!Array.isArray(parsedWords)) throw new Error('words must be an array');

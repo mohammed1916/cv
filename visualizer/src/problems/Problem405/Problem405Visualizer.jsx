@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--405.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +20,7 @@ const SOLUTION_CODE = getSolutionCode('convert-number-to-hex')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', num: 26, expected: '1a' },
-  { label: 'Ex2', num: -1, expected: 'ffffffff' },
-  { label: 'Zero', num: 0, expected: '0' },
-]
+const EXAMPLES = authoredExamples0
 
 const HEX_CHARS = '0123456789abcdef'
 
@@ -132,7 +130,7 @@ function HexConversionVisualization({ num, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Number: {num}</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Number: {num}</div>
 
       {/* Binary representation */}
       <div>
@@ -213,7 +211,7 @@ function HexConversionVisualization({ num, step }) {
               }}
             >
               <div style={{ color: 'var(--text-muted)', fontSize: 9 }}>{i}</div>
-              <div style={{ fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--surface2)' }}>{HEX_CHARS[i]}</div>
+              <div style={{ fontFamily: 'monospace', fontWeight: 'bold', color: (step?.digit === HEX_CHARS[i] ? 'var(--text-on-light)' : 'var(--text)') }}>{HEX_CHARS[i]}</div>
             </div>
           ))}
         </div>
@@ -221,7 +219,7 @@ function HexConversionVisualization({ num, step }) {
 
       {/* Result */}
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Hexadecimal Result</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Hexadecimal Result</div>
         <div style={{
           padding: 16,
           backgroundColor: '#dbeafe',
@@ -305,7 +303,7 @@ export default function Problem405Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -355,9 +353,6 @@ export default function Problem405Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -375,6 +370,9 @@ export default function Problem405Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

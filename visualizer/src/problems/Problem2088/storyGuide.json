@@ -1,0 +1,31 @@
+{
+  "number": "2088",
+  "title": "Count Fertile Pyramids in a Land",
+  "goal": "Count upright and inverted fertile pyramids of height at least two.",
+  "strategy": "Directional DP stores the largest fertile pyramid height at each apex. The minimum supported height of the three cells in the next row determines how far the apex can extend; height h contributes h-1 pyramids.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count upright and inverted fertile pyramids of height at least two.",
+    "inspect": "Directional DP stores the largest fertile pyramid height at each apex. The minimum supported height of the three cells in the next row determines how far the apex can extend; height h contributes h-1 pyramids.",
+    "update": "Directional DP stores the largest fertile pyramid height at each apex. The minimum supported height of the three cells in the next row determines how far the apex can extend; height h contributes h-1 pyramids.",
+    "done": "Count upright and inverted fertile pyramids of height at least two."
+  },
+  "edgeCases": [
+    "A fully fertile rectangle supports both orientations",
+    "A single row has no height-two pyramid",
+    "No fertile cell means no pyramid"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

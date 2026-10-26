@@ -1,0 +1,31 @@
+{
+  "number": "1779",
+  "title": "Find Nearest Point That Has the Same X or Y Coordinate",
+  "goal": "Find the nearest point sharing x or y with the reference point, breaking ties by input index.",
+  "strategy": "Filter for a shared coordinate, then minimize Manhattan distance. Keep the earlier candidate on equal distance.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the nearest point sharing x or y with the reference point, breaking ties by input index.",
+    "inspect": "Filter for a shared coordinate, then minimize Manhattan distance. Keep the earlier candidate on equal distance.",
+    "update": "Filter for a shared coordinate, then minimize Manhattan distance. Keep the earlier candidate on equal distance.",
+    "done": "Find the nearest point sharing x or y with the reference point, breaking ties by input index."
+  },
+  "edgeCases": [
+    "No shared coordinate",
+    "Equal distances retain earlier index",
+    "Reference point itself"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

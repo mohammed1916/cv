@@ -1,0 +1,31 @@
+{
+  "number": "727",
+  "title": "Minimum Window Subsequence",
+  "goal": "Find the shortest substring of s1 containing s2 as a subsequence, preferring the leftmost tie.",
+  "strategy": "Track the latest possible start for each matched prefix of s2 while scanning s1. Update target positions backward so one source character is not reused twice; each completed target supplies a candidate window.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest substring of s1 containing s2 as a subsequence, preferring the leftmost tie.",
+    "inspect": "Track the latest possible start for each matched prefix of s2 while scanning s1. Update target positions backward so one source character is not reused twice; each completed target supplies a candidate window.",
+    "update": "Track the latest possible start for each matched prefix of s2 while scanning s1. Update target positions backward so one source character is not reused twice; each completed target supplies a candidate window.",
+    "done": "Find the shortest substring of s1 containing s2 as a subsequence, preferring the leftmost tie."
+  },
+  "edgeCases": [
+    "Target order matters even when every letter exists",
+    "Repeated target letters need different source positions",
+    "Equal shortest windows retain the leftmost one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

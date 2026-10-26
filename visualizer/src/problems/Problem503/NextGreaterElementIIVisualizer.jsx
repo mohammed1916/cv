@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/next-greater-element-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -43,11 +44,7 @@ const SOLUTION_CODE = [
   { line: 14, text: '    return result' },
 ]
 
-const EXAMPLES = getExamplesOr('next-greater-element-ii', [
-  { label: 'Example 1', text: '1,2,1' },
-  { label: 'Example 2', text: '1,2,3,4,3' },
-  { label: 'Decreasing', text: '5,4,3,2,1' },
-]).map((ex) => ({
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []).map((ex) => ({
   label: ex.label,
   text: ex.text ?? (ex.nums ?? []).join(','),
 }))
@@ -367,9 +364,6 @@ export default function NextGreaterElementIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -387,6 +381,9 @@ export default function NextGreaterElementIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -394,7 +391,7 @@ export default function NextGreaterElementIIVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     [],

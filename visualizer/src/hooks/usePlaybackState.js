@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { useNarrativePlayback } from '../components/shared/NarrativeTraceContext'
 
 /**
  * Custom hook for managing playback state across visualizers.
@@ -33,6 +34,7 @@ export function usePlaybackState(stepsLength, initialSpeed = 500, legacySetCurre
   }, [isLegacyExternalIndex, legacySetCurrentStep])
 
   const isDone = stepIndex >= resolvedStepsLength - 1
+  useNarrativePlayback(stepIndex, resolvedStepsLength)
   const currentStep = stepIndex >= 0 ? stepIndex : null
   const canNext = stepIndex < resolvedStepsLength - 1
   const canPrev = stepIndex > 0

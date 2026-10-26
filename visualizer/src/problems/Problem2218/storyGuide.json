@@ -1,0 +1,31 @@
+{
+  "number": "2218",
+  "title": "Maximum Value of K Coins From Piles",
+  "goal": "Take exactly k coins from pile tops with the greatest total value.",
+  "strategy": "Each pile offers only its prefix sums, since deeper coins require taking those above. DP combines one prefix choice per pile while marking impossible exact coin counts as unreachable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Take exactly k coins from pile tops with the greatest total value.",
+    "inspect": "Each pile offers only its prefix sums, since deeper coins require taking those above. DP combines one prefix choice per pile while marking impossible exact coin counts as unreachable.",
+    "update": "Each pile offers only its prefix sums, since deeper coins require taking those above. DP combines one prefix choice per pile while marking impossible exact coin counts as unreachable.",
+    "done": "Take exactly k coins from pile tops with the greatest total value."
+  },
+  "edgeCases": [
+    "One pile requires taking its exact top prefix",
+    "Taking every coin removes all choice",
+    "A high buried coin is inaccessible with a one-coin budget"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

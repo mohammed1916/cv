@@ -1,0 +1,31 @@
+{
+  "number": "1998",
+  "title": "GCD Sort of an Array",
+  "goal": "Decide whether swaps between values sharing a factor greater than one can sort the array.",
+  "strategy": "Connect positions through their prime factors. Values can move within each connected component; compare the component values with the values required at those positions in global sorted order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether swaps between values sharing a factor greater than one can sort the array.",
+    "inspect": "Connect positions through their prime factors. Values can move within each connected component; compare the component values with the values required at those positions in global sorted order.",
+    "update": "Connect positions through their prime factors. Values can move within each connected component; compare the component values with the values required at those positions in global sorted order.",
+    "done": "Decide whether swaps between values sharing a factor greater than one can sort the array."
+  },
+  "edgeCases": [
+    "Isolated primes cannot swap to their target positions",
+    "Already sorted disconnected values need no swaps",
+    "Duplicates remain valid multiset members"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

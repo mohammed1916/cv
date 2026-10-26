@@ -1,0 +1,21 @@
+{
+  "number": "185",
+  "title": "Department Top Three Salaries",
+  "goal": "Solve Department Top Three Salaries: SQL query to find top 3 salaries per department.",
+  "strategy": "SQL query to find top 3 salaries per department.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The top three are distinct salary levels within each department; ties can make the result contain more than three employees."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem185/index.jsx",
+    "src/problems/Problem185/DepartmentTopThreeSalariesVisualizer.jsx"
+  ]
+}

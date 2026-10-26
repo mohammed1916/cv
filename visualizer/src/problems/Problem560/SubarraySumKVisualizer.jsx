@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/subarray-sum-equals-k.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -8,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SubarraySumKVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -63,7 +66,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = getExamples('subarray-sum-equals-k');
+const EXAMPLES = authoredExamples0;
 
 function VizPanel({ nums, step, k }) {
     return (
@@ -118,8 +121,8 @@ function parseNums(str) {
 }
 
 export default function SubarraySumKVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,1,1]");
-    const [kInput, setKInput] = useState("2");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
 
     const { nums, err } = useMemo(() => parseNums(numsInput), [numsInput]);
     const k = useMemo(() => parseInt(kInput, 10) || 0, [kInput]);
@@ -158,17 +161,6 @@ export default function SubarraySumKVisualizer() {
       />
 
             <div className="ssk-controls-row">
-                <div className="ssk-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="ssk-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <input className="ssk-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value); handleReset(); }} />
-                    <label className="ssk-k-label">k=<input className="ssk-k-input" type="number" value={kInput}
-                        onChange={(e) => { setKInput(e.target.value); handleReset(); }} /></label>
-                    {err && <span className="ssk-error">{err}</span>}
-                </div>
             </div>
 
             <>

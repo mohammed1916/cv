@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/robot-room-cleaner.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem489Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -45,10 +48,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('robot-room-cleaner', [
-  { label: 'Example 1', room: [[1, 1, 1], [1, 1, 1], [1, 1, 1]] },
-  { label: 'Example 2', room: [[1, 0, 1], [1, 1, 1], [1, 0, 1]] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(room) {
   const steps = []
@@ -141,7 +141,7 @@ function VisualizationPanel({ room, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Room Layout</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Room Layout</div>
         <div style={{
           display: 'inline-grid',
           gridTemplateColumns: `repeat(${room[0].length}, 1fr)`,
@@ -232,7 +232,7 @@ function VisualizationPanel({ room, step, applyEx }) {
 
 export default function Problem489Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [roomInput, setRoomInput] = useState("[[1,1,1,0],[1,0,1,0],[1,1,1,1]]");
+  const [roomInput, setRoomInput] = useState(JSON.stringify(AUTHORED_INITIAL.room));
   const { room, inputError } = useMemo(() => {
     try {
       const parsedRoom = JSON.parse(roomInput); if (!Array.isArray(parsedRoom)) throw new Error('room must be an array');
@@ -309,7 +309,6 @@ export default function Problem489Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -327,6 +326,7 @@ export default function Problem489Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

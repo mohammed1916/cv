@@ -1,0 +1,31 @@
+{
+  "number": "1513",
+  "title": "Number of Substrings With Only 1s",
+  "goal": "Count substrings consisting only of ones modulo one billion and seven.",
+  "strategy": "Each ending position contributes the current consecutive-one run length. Zeros reset that length and prevent substrings crossing them.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings consisting only of ones modulo one billion and seven.",
+    "inspect": "Each ending position contributes the current consecutive-one run length. Zeros reset that length and prevent substrings crossing them.",
+    "update": "Each ending position contributes the current consecutive-one run length. Zeros reset that length and prevent substrings crossing them.",
+    "done": "Count substrings consisting only of ones modulo one billion and seven."
+  },
+  "edgeCases": [
+    "No one bits",
+    "One uninterrupted run",
+    "Single one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

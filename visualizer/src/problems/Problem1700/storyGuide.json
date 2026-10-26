@@ -1,0 +1,31 @@
+{
+  "number": "1700",
+  "title": "Number of Students Unable to Eat Lunch",
+  "goal": "Count students left waiting when the top sandwich can no longer be served.",
+  "strategy": "Queue rotation changes order but not preferences. A top sandwich can be served exactly when some remaining student wants that type.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count students left waiting when the top sandwich can no longer be served.",
+    "inspect": "Queue rotation changes order but not preferences. A top sandwich can be served exactly when some remaining student wants that type.",
+    "update": "Queue rotation changes order but not preferences. A top sandwich can be served exactly when some remaining student wants that type.",
+    "done": "Count students left waiting when the top sandwich can no longer be served."
+  },
+  "edgeCases": [
+    "Every student can eat",
+    "Top sandwich blocks everyone",
+    "One matching student"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

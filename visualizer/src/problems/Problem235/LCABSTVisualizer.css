@@ -166,19 +166,19 @@
 
 .p-tag {
     background: #89b4fa;
-    color: var(--code-bg);
+    color: var(--text-on-light);
     left: 0;
 }
 
 .q-tag {
     background: #f38ba8;
-    color: var(--code-bg);
+    color: var(--text-on-light);
     right: 0;
 }
 
 .lca-tag-badge {
     background: #cba6f7;
-    color: var(--code-bg);
+    color: var(--text-on-light);
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;

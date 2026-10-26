@@ -1,0 +1,25 @@
+{
+  "number": "409",
+  "title": "Longest Palindrome",
+  "goal": "Solve Longest Palindrome: Calculate the length of the longest palindrome constructible from lowercase and uppercase letters.",
+  "strategy": "Calculate the length of the longest palindrome constructible from lowercase and uppercase letters.",
+  "phases": [
+    "done",
+    "init",
+    "count",
+    "freq_complete",
+    "process_char",
+    "calculate",
+    "add_odd"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Use all available pairs and at most one odd leftover as a center; several odd counts cannot all become centers."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem409/index.jsx",
+    "src/problems/Problem409/Problem409Visualizer.jsx"
+  ]
+}

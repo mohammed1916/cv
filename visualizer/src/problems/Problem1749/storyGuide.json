@@ -1,0 +1,31 @@
+{
+  "number": "1749",
+  "title": "Maximum Absolute Sum of Any Subarray",
+  "goal": "Find the greatest absolute sum of any subarray, allowing the empty subarray.",
+  "strategy": "Any subarray sum is a difference of two prefix sums. The largest absolute difference is the maximum prefix minus the minimum prefix, including the initial zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest absolute sum of any subarray, allowing the empty subarray.",
+    "inspect": "Any subarray sum is a difference of two prefix sums. The largest absolute difference is the maximum prefix minus the minimum prefix, including the initial zero.",
+    "update": "Any subarray sum is a difference of two prefix sums. The largest absolute difference is the maximum prefix minus the minimum prefix, including the initial zero.",
+    "done": "Find the greatest absolute sum of any subarray, allowing the empty subarray."
+  },
+  "edgeCases": [
+    "All negative values",
+    "All positive values",
+    "Zero allows empty or nonempty optimum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

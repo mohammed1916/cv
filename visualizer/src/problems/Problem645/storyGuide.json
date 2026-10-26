@@ -1,0 +1,27 @@
+{
+  "title": "Set Mismatch",
+  "goal": "Identify the duplicated and missing values in the expected set 1 through n.",
+  "strategy": "Count visits to each expected slot from 1 through n. A twice-visited slot and an unvisited slot identify the error.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Count visits to each expected slot from 1 through n. A twice-visited slot and an unvisited slot identify the error.",
+    "update": "The duplicate uses a slot twice; the missing number never occupies its slot.",
+    "done": "The duplicate uses a slot twice; the missing number never occupies its slot."
+  },
+  "edgeCases": [
+    "Missing first",
+    "Missing last",
+    "Smallest mismatch"
+  ],
+  "number": "645",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

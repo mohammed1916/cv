@@ -1,0 +1,27 @@
+{
+  "number": "965",
+  "title": "Univalued Binary Tree",
+  "goal": "Decide whether every node has the same value as the root.",
+  "strategy": "One mismatch is sufficient to disprove the property. Otherwise every reachable node must be visited before returning true.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether every node has the same value as the root.",
+    "inspect": "One mismatch is sufficient to disprove the property. Otherwise every reachable node must be visited before returning true.",
+    "update": "One mismatch is sufficient to disprove the property. Otherwise every reachable node must be visited before returning true.",
+    "done": "Decide whether every node has the same value as the root."
+  },
+  "edgeCases": [
+    "All nodes agree",
+    "Root differs from child",
+    "One node"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

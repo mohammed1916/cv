@@ -1,0 +1,31 @@
+{
+  "number": "1877",
+  "title": "Minimize Maximum Pair Sum in Array",
+  "goal": "Pair all entries to minimize the greatest pair sum.",
+  "strategy": "Sorted extremes should pair together. Assigning the largest value its smallest possible partner prevents an unnecessarily large worst pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Pair all entries to minimize the greatest pair sum.",
+    "inspect": "Sorted extremes should pair together. Assigning the largest value its smallest possible partner prevents an unnecessarily large worst pair.",
+    "update": "Sorted extremes should pair together. Assigning the largest value its smallest possible partner prevents an unnecessarily large worst pair.",
+    "done": "Pair all entries to minimize the greatest pair sum."
+  },
+  "edgeCases": [
+    "One pair only",
+    "All values equal",
+    "Repeated extremes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

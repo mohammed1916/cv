@@ -1,0 +1,31 @@
+{
+  "number": "2171",
+  "title": "Removing Minimum Number of Magic Beans",
+  "goal": "Remove the fewest beans so every nonempty bag has the same count.",
+  "strategy": "For a chosen positive target, bags smaller than it must be emptied and larger bags reduced. Sort counts; choosing the target at index i keeps target times the number of bags from i onward.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the fewest beans so every nonempty bag has the same count.",
+    "inspect": "For a chosen positive target, bags smaller than it must be emptied and larger bags reduced. Sort counts; choosing the target at index i keeps target times the number of bags from i onward.",
+    "update": "For a chosen positive target, bags smaller than it must be emptied and larger bags reduced. Sort counts; choosing the target at index i keeps target times the number of bags from i onward.",
+    "done": "Remove the fewest beans so every nonempty bag has the same count."
+  },
+  "edgeCases": [
+    "Equal bag sizes already satisfy the condition",
+    "One bag needs no removal",
+    "One huge bag can make emptying all small bags optimal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

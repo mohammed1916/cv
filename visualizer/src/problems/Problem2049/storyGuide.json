@@ -1,0 +1,31 @@
+{
+  "number": "2049",
+  "title": "Count Nodes With the Highest Score",
+  "goal": "Count nodes whose removal yields the highest product of remaining component sizes.",
+  "strategy": "Subtree sizes determine every component after removing a node: each child subtree and the remaining parent-side nodes. Multiply only nonempty components using exact integers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nodes whose removal yields the highest product of remaining component sizes.",
+    "inspect": "Subtree sizes determine every component after removing a node: each child subtree and the remaining parent-side nodes. Multiply only nonempty components using exact integers.",
+    "update": "Subtree sizes determine every component after removing a node: each child subtree and the remaining parent-side nodes. Multiply only nonempty components using exact integers.",
+    "done": "Count nodes whose removal yields the highest product of remaining component sizes."
+  },
+  "edgeCases": [
+    "A chain emphasizes balanced middle cuts",
+    "Symmetric branches create tied highest scores",
+    "One root leaves no nonempty components"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

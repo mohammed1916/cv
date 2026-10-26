@@ -1,0 +1,19 @@
+{
+  "number": "427",
+  "title": "Build an Expression Tree from Tokens",
+  "goal": "Solve Build an Expression Tree from Tokens: Combine operands and operators into an expression tree while respecting precedence and parentheses.",
+  "strategy": "Combine operands and operators into an expression tree while respecting precedence and parentheses.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Parentheses override normal precedence; operators must receive operands in their original left-to-right order."
+  ],
+  "checks": [],
+  "inputRules": [
+    "tokens must be an array"
+  ],
+  "source": [
+    "src/problems/Problem427/index.jsx",
+    "src/problems/Problem427/Problem427Visualizer.jsx"
+  ]
+}

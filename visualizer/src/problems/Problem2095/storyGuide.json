@@ -1,0 +1,31 @@
+{
+  "number": "2095",
+  "title": "Delete the Middle Node of a Linked List",
+  "goal": "Remove the middle node, choosing index floor(length/2).",
+  "strategy": "A fast pointer travels twice as quickly as a slow pointer. When fast reaches the end, slow identifies the middle; its predecessor reconnects around that node.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the middle node, choosing index floor(length/2).",
+    "inspect": "A fast pointer travels twice as quickly as a slow pointer. When fast reaches the end, slow identifies the middle; its predecessor reconnects around that node.",
+    "update": "A fast pointer travels twice as quickly as a slow pointer. When fast reaches the end, slow identifies the middle; its predecessor reconnects around that node.",
+    "done": "Remove the middle node, choosing index floor(length/2)."
+  },
+  "edgeCases": [
+    "An even list removes the later middle",
+    "A singleton becomes empty",
+    "Repeated values still have distinct node identities"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

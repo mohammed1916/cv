@@ -1,0 +1,95 @@
+// Independently authored walkthrough and boundary-case presets.
+export default [
+  {
+    "label": "Counts cross and keys disappear",
+    "operations": [
+      [
+        "inc",
+        "oak"
+      ],
+      [
+        "inc",
+        "pine"
+      ],
+      [
+        "inc",
+        "oak"
+      ],
+      [
+        "inc",
+        "birch"
+      ],
+      [
+        "inc",
+        "pine"
+      ],
+      [
+        "inc",
+        "pine"
+      ],
+      [
+        "getMaxKey"
+      ],
+      [
+        "dec",
+        "oak"
+      ],
+      [
+        "getMinKey"
+      ],
+      [
+        "dec",
+        "oak"
+      ],
+      [
+        "getMinKey"
+      ],
+      [
+        "getMaxKey"
+      ]
+    ]
+  },
+  {
+    "label": "Drain one key",
+    "operations": [
+      [
+        "inc",
+        "moss"
+      ],
+      [
+        "dec",
+        "moss"
+      ],
+      [
+        "getMaxKey"
+      ],
+      [
+        "getMinKey"
+      ]
+    ]
+  },
+  {
+    "label": "Repeated count changes",
+    "operations": [
+      [
+        "inc",
+        "river"
+      ],
+      [
+        "inc",
+        "river"
+      ],
+      [
+        "inc",
+        "river"
+      ],
+      [
+        "dec",
+        "river"
+      ],
+      [
+        "getMaxKey"
+      ]
+    ]
+  }
+];

@@ -1,0 +1,31 @@
+{
+  "number": "593",
+  "title": "Valid Square",
+  "goal": "Determine whether four unordered points are the vertices of a nondegenerate square.",
+  "strategy": "A square has four equal positive squared side lengths and two equal squared diagonals, each twice the side value. All six pair distances avoid guessing vertex order and avoid floating-point roots.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether four unordered points are the vertices of a nondegenerate square.",
+    "inspect": "A square has four equal positive squared side lengths and two equal squared diagonals, each twice the side value. All six pair distances avoid guessing vertex order and avoid floating-point roots.",
+    "update": "A square has four equal positive squared side lengths and two equal squared diagonals, each twice the side value. All six pair distances avoid guessing vertex order and avoid floating-point roots.",
+    "done": "Determine whether four unordered points are the vertices of a nondegenerate square."
+  },
+  "edgeCases": [
+    "A rectangle has equal diagonals but unequal sides",
+    "Repeated vertices cannot make a square",
+    "Four collinear points fail the distance pattern"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

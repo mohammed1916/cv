@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/patching-array.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PatchingArrayVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import PointerRail from '../../components/shared/PointerRail'
@@ -42,7 +43,7 @@ function generateSteps({ nums, n }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('patching-array', [{ label: '[1,3], n=6', nums: [1, 3], n: 6 }, { label: '[1,5,10], n=20', nums: [1, 5, 10], n: 20 }])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function PatchingArrayVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -175,9 +176,6 @@ export default function PatchingArrayVisualizer() {
       </div>
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -195,6 +193,9 @@ export default function PatchingArrayVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

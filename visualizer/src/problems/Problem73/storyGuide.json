@@ -1,0 +1,27 @@
+{
+  "number": "73",
+  "title": "Set Matrix Zeroes",
+  "goal": "Solve Set Matrix Zeroes: Remember which rows and columns originally contain zeros before clearing their cells.",
+  "strategy": "Remember which rows and columns originally contain zeros before clearing their cells.",
+  "phases": [
+    "done",
+    "fill",
+    "mark",
+    "scan",
+    "zero"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "New zeros must not trigger additional clearing; first-row and first-column markers need their own original-state handling."
+  ],
+  "checks": [],
+  "inputRules": [
+    "matrix must be a non-empty 2D array",
+    "every row must be a non-empty array of the same length",
+    "matrix entries must be numbers"
+  ],
+  "source": [
+    "src/problems/Problem73/index.jsx",
+    "src/problems/Problem73/SetMatrixZeroesVisualizer.jsx"
+  ]
+}

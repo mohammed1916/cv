@@ -1,0 +1,27 @@
+{
+  "number": "504",
+  "title": "Base 7",
+  "goal": "Solve Base 7: Given an integer num, return a string of its base 7 representation.",
+  "strategy": "Given an integer num, return a string of its base 7 representation.",
+  "phases": [
+    "init",
+    "check_zero",
+    "convert",
+    "append_digit",
+    "negate",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num == 0",
+      "outcome": "return \"0\""
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem504/index.jsx",
+    "src/problems/Problem504/Base7Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "961",
+  "title": "N-Repeated Element in Size 2N Array",
+  "goal": "Find the value repeated in exactly half the array.",
+  "strategy": "Under the stated frequency promise, only one value repeats at all. Its second occurrence identifies the answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the value repeated in exactly half the array.",
+    "inspect": "Under the stated frequency promise, only one value repeats at all. Its second occurrence identifies the answer.",
+    "update": "Under the stated frequency promise, only one value repeats at all. Its second occurrence identifies the answer.",
+    "done": "Find the value repeated in exactly half the array."
+  },
+  "edgeCases": [
+    "Smallest promised size",
+    "Repeated block at end",
+    "Repeated zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

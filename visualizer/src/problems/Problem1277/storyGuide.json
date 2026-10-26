@@ -1,0 +1,31 @@
+{
+  "number": "1277",
+  "title": "Count Square Submatrices with All Ones",
+  "goal": "Count every square submatrix containing only ones.",
+  "strategy": "At a one cell, the smallest neighboring square limit determines how far a new square can extend. Its maximal side also counts all square sizes ending there.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count every square submatrix containing only ones.",
+    "inspect": "At a one cell, the smallest neighboring square limit determines how far a new square can extend. Its maximal side also counts all square sizes ending there.",
+    "update": "At a one cell, the smallest neighboring square limit determines how far a new square can extend. Its maximal side also counts all square sizes ending there.",
+    "done": "Count every square submatrix containing only ones."
+  },
+  "edgeCases": [
+    "Only zero cells",
+    "Every square of a solid grid counts",
+    "Single row has only unit squares"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/base-7.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Base7Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -238,8 +241,8 @@ function VisualizationPanel({ step, applyExample, examples }) {
 }
 
 export default function Base7Visualizer() {
-  const examples = useMemo(() => getExamplesOr('base-7', []), [])
-  const [numInput, setNumInput] = useState('100')
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
+  const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.num || AUTHORED_INITIAL.input || 100))
 
   const steps = useMemo(() => generateSteps(numInput), [numInput])
 
@@ -262,7 +265,7 @@ export default function Base7Visualizer() {
 
   const applyExample = useCallback(
     (ex) => {
-      setNumInput(String(ex.num || ex.input || 100))
+      setNumInput(String(ex.num ?? ex.input ?? 100))
       handleReset()
     },
     [handleReset]
@@ -291,27 +294,7 @@ export default function Base7Visualizer() {
             )}
           </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Number</div>
-              <input
-                type="number"
-                value={numInput}
-                onChange={(e) => {
-                  setNumInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                }}
-              />
-            </div>
+            
             <VisualizationPanel step={step} applyExample={applyExample} examples={examples} />
           </div>),
   }), [step, connectivity, setActiveLineDom, numInput, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])
@@ -338,7 +321,6 @@ export default function Base7Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -356,6 +338,7 @@ export default function Base7Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

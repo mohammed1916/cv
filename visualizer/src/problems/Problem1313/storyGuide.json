@@ -1,0 +1,31 @@
+{
+  "number": "1313",
+  "title": "Decompress Run-Length Encoded List",
+  "goal": "Expand a flat list of frequency-value pairs.",
+  "strategy": "Every even-position entry is a count and its following entry is the repeated value. Preserve pair order and append exactly the requested multiplicity.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Expand a flat list of frequency-value pairs.",
+    "inspect": "Every even-position entry is a count and its following entry is the repeated value. Preserve pair order and append exactly the requested multiplicity.",
+    "update": "Every even-position entry is a count and its following entry is the repeated value. Preserve pair order and append exactly the requested multiplicity.",
+    "done": "Expand a flat list of frequency-value pairs."
+  },
+  "edgeCases": [
+    "One long run",
+    "Unit-length runs",
+    "Adjacent equal-value runs remain separate input pairs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

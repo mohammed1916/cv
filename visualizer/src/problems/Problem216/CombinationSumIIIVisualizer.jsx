@@ -1,4 +1,8 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/local--216.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -33,12 +37,7 @@ const SOLUTION_CODE = [
   { line: 13, text: "    return result" },
 ]
 
-const EXAMPLES = [
-  { label: 'Two numbers → 9', k: 2, n: 9 },
-  { label: 'Three numbers → 7', k: 3, n: 7 },
-  { label: 'No solution', k: 4, n: 1 },
-  { label: 'All nine numbers', k: 9, n: 45 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(k, n) {
   const steps = []
@@ -247,8 +246,8 @@ function VisualizationPanel({ step }) {
 }
 
 export default function CombinationSumIIIVisualizer() {
-  const [kInput, setKInput] = useState(EXAMPLES[1].k);
-  const [nInput, setNInput] = useState(EXAMPLES[1].n);
+  const [kInput, setKInput] = useState(AUTHORED_INITIAL.k);
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
   const { k, n, inputError } = useMemo(() => {
     try {
       const parsedK = Number(kInput); if (!Number.isInteger(parsedK) || parsedK < 1 || parsedK > 9) throw new Error('k must be an integer from 1 through 9');

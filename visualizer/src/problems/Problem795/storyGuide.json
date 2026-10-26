@@ -1,0 +1,31 @@
+{
+  "number": "795",
+  "title": "Number of Subarrays with Bounded Maximum",
+  "goal": "Count contiguous subarrays whose maximum lies within the inclusive bounds.",
+  "strategy": "For each ending index, remember the latest value above the upper bound and the latest value inside the allowed range. Valid starts lie after the bad value and no later than the in-range value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count contiguous subarrays whose maximum lies within the inclusive bounds.",
+    "inspect": "For each ending index, remember the latest value above the upper bound and the latest value inside the allowed range. Valid starts lie after the bad value and no later than the in-range value.",
+    "update": "For each ending index, remember the latest value above the upper bound and the latest value inside the allowed range. Valid starts lie after the bad value and no later than the in-range value.",
+    "done": "Count contiguous subarrays whose maximum lies within the inclusive bounds."
+  },
+  "edgeCases": [
+    "Values below the lower bound never qualify alone",
+    "A single allowed value extends across small neighbors",
+    "Every value above the upper bound yields zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

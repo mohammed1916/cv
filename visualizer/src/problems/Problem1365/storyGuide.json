@@ -1,0 +1,31 @@
+{
+  "number": "1365",
+  "title": "How Many Numbers Are Smaller Than the Current Number",
+  "goal": "For each entry, count strictly smaller values at other positions.",
+  "strategy": "Its first index in a sorted copy equals the number of smaller entries. Repeated values all share the same first index.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For each entry, count strictly smaller values at other positions.",
+    "inspect": "Its first index in a sorted copy equals the number of smaller entries. Repeated values all share the same first index.",
+    "update": "Its first index in a sorted copy equals the number of smaller entries. Repeated values all share the same first index.",
+    "done": "For each entry, count strictly smaller values at other positions."
+  },
+  "edgeCases": [
+    "All equal entries have zero smaller values",
+    "Strictly increasing values",
+    "Single value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

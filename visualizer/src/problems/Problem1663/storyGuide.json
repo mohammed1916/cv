@@ -1,0 +1,31 @@
+{
+  "number": "1663",
+  "title": "Smallest String With A Given Numeric Value",
+  "goal": "Construct the lexicographically smallest length-n lowercase string whose character values sum to k.",
+  "strategy": "Start every position at a, the minimum. Spend remaining value at the rightmost positions first so earlier characters stay as small as possible.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct the lexicographically smallest length-n lowercase string whose character values sum to k.",
+    "inspect": "Start every position at a, the minimum. Spend remaining value at the rightmost positions first so earlier characters stay as small as possible.",
+    "update": "Start every position at a, the minimum. Spend remaining value at the rightmost positions first so earlier characters stay as small as possible.",
+    "done": "Construct the lexicographically smallest length-n lowercase string whose character values sum to k."
+  },
+  "edgeCases": [
+    "Minimum possible value",
+    "Maximum possible value",
+    "Single character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

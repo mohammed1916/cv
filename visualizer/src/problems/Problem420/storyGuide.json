@@ -1,0 +1,27 @@
+{
+  "number": "420",
+  "title": "Strong Password Checker",
+  "goal": "Solve Strong Password Checker: Minimum edits to make strong password (lower, upper, digit, len>=6).",
+  "strategy": "Minimum edits to make strong password (lower, upper, digit, len>=6).",
+  "phases": [
+    "check_char",
+    "check_length",
+    "check_length_long",
+    "count_missing",
+    "done",
+    "init",
+    "scan"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Length, character-class and repeated-run constraints interact; one edit may satisfy more than one requirement."
+  ],
+  "checks": [],
+  "inputRules": [
+    "password must be an array"
+  ],
+  "source": [
+    "src/problems/Problem420/index.jsx",
+    "src/problems/Problem420/Problem420Visualizer.jsx"
+  ]
+}

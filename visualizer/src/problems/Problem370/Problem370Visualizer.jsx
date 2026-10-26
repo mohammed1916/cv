@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--370.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -166,30 +168,7 @@ function generateSteps(length, updates) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple Range',
-    length: 5,
-    updates: [[1, 3, 2]],
-  },
-  {
-    label: 'Multiple Ranges',
-    length: 5,
-    updates: [
-      [1, 3, 2],
-      [2, 4, 3],
-    ],
-  },
-  {
-    label: 'Overlapping Ranges',
-    length: 5,
-    updates: [
-      [1, 3, 2],
-      [0, 2, 1],
-      [2, 4, 3],
-    ],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem370Visualizer() {
   const [exIdx, setExIdx] = useState(0)

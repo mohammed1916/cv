@@ -1,0 +1,21 @@
+{
+  "number": "183",
+  "title": "Customers Who Never Order",
+  "goal": "Solve Customers Who Never Order: SQL query to find customers with no orders using LEFT JOIN.",
+  "strategy": "SQL query to find customers with no orders using LEFT JOIN.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A customer with zero matching orders is retained; multiple orders still exclude that customer only once."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem183/index.jsx",
+    "src/problems/Problem183/CustomersWhoNeverOrderVisualizer.jsx"
+  ]
+}

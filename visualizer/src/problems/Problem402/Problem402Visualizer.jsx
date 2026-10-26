@@ -1,5 +1,8 @@
+import authoredExamples0 from '../../config/examples/remove-k-digits.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -210,15 +213,11 @@ function generateSteps(numStr, kStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('remove-k-digits', [
-  { label: 'Example 1', num: '1432219', k: '3' },
-  { label: 'Example 2', num: '10200', k: '1' },
-  { label: 'Example 3', num: '112', k: '1' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem402Visualizer() {
-  const [numInput, setNumInput] = useState('1432219')
-  const [kInput, setKInput] = useState('3')
+  const [numInput, setNumInput] = useState(AUTHORED_INITIAL.num)
+  const [kInput, setKInput] = useState(AUTHORED_INITIAL.k)
 
   const { num, k, inputError } = useMemo(() => {
     try {
@@ -315,7 +314,7 @@ export default function Problem402Visualizer() {
                     animate={{ scale: 1 }}
                     style={{
                       width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: '#06b6d4', color: 'var(--surface2)', borderRadius: '6px',
+                      backgroundColor: '#06b6d4', color: 'var(--text-on-light)', borderRadius: '6px',
                       fontSize: '13px', fontWeight: 'bold'
                     }}
                   >
@@ -398,9 +397,6 @@ export default function Problem402Visualizer() {
         {panelDivs.code && createPortal(codePanel, panelDivs.code)}
       </>}
         <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -418,6 +414,9 @@ export default function Problem402Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </>
   )

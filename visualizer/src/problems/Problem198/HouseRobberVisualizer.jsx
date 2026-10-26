@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/house-robber.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
 import AnimatedIterationList from '../../components/shared/AnimatedIterationList'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import { useParsedInput } from '../../hooks/useParsedInput'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './HouseRobberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -94,10 +97,10 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = getExamples('house-robber')
+const EXAMPLES = authoredExamples0
 
 export default function HouseRobberVisualizer({ problem }) {
-  const [numsInput, setNumsInput] = useState('[2,7,9,3,1]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
   const codeLines = useProblemCode(problem, 'house-robber')
 
   const { value: nums, error: inputError } = useParsedInput(
@@ -148,10 +151,6 @@ export default function HouseRobberVisualizer({ problem }) {
             {inputError && <span className="hr-error">{inputError}</span>}
           </header>
           <div className="hr-body">
-            <div className="hr-examples">
-              {EXAMPLES.map((ex) => <button key={ex.label} className="hr-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
-            </div>
-            <input className="hr-input" value={numsInput} onChange={handleNumsInputChange} />
             <AnimatedIterationList
               items={nums}
               styleName="dp-house"

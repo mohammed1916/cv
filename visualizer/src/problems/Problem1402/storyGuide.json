@@ -1,0 +1,31 @@
+{
+  "number": "1402",
+  "title": "Reducing Dishes",
+  "goal": "Maximize the sum of cooking completion time times satisfaction.",
+  "strategy": "Process candidate dishes from greatest satisfaction downward. Prepending one dish increases every selected completion time, giving a net gain equal to the new selected sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the sum of cooking completion time times satisfaction.",
+    "inspect": "Process candidate dishes from greatest satisfaction downward. Prepending one dish increases every selected completion time, giving a net gain equal to the new selected sum.",
+    "update": "Process candidate dishes from greatest satisfaction downward. Prepending one dish increases every selected completion time, giving a net gain equal to the new selected sum.",
+    "done": "Maximize the sum of cooking completion time times satisfaction."
+  },
+  "edgeCases": [
+    "All negative dishes should be skipped",
+    "All positive dishes can be included",
+    "A zero-satisfaction dish can improve later timing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

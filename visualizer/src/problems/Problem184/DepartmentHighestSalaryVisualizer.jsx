@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/department-highest-salary.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DepartmentHighestSalaryVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -58,7 +59,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('department-highest-salary')
+const EXAMPLES = authoredExamples0
 
 export default function DepartmentHighestSalaryVisualizer() {
   const [input, setInput] = useState('')

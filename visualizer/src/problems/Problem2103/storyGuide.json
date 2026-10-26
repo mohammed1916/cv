@@ -1,0 +1,31 @@
+{
+  "number": "2103",
+  "title": "Rings and Rods",
+  "goal": "Count rods carrying at least one ring of every color.",
+  "strategy": "Each rod needs only three presence bits. Repeated rings of an already present color leave the mask unchanged; mask seven means all three colors are present.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count rods carrying at least one ring of every color.",
+    "inspect": "Each rod needs only three presence bits. Repeated rings of an already present color leave the mask unchanged; mask seven means all three colors are present.",
+    "update": "Each rod needs only three presence bits. Repeated rings of an already present color leave the mask unchanged; mask seven means all three colors are present.",
+    "done": "Count rods carrying at least one ring of every color."
+  },
+  "edgeCases": [
+    "Repeating one color never completes a rod",
+    "All three colors reach different rods",
+    "One rod gets all colors in a different order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "number": "3903",
+  "title": "Smallest Stable Index I",
+  "goal": "Solve Smallest Stable Index I: Track inclusive suffix minima and prefix maxima to find the first index within the instability threshold.",
+  "strategy": "Track inclusive suffix minima and prefix maxima to find the first index within the instability threshold.",
+  "phases": [
+    "start",
+    "suffix",
+    "check",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Initialize inclusive suffix minima.",
+    "suffix": "Build minima from right to left.",
+    "check": "Update the prefix maximum and compare the instability score with k.",
+    "done": "Return the first passing index, or −1 when all fail."
+  },
+  "edgeCases": [
+    "Prefix maxima and suffix minima include the candidate index. A singleton has instability zero; return the first passing index, not the best-scoring index."
+  ],
+  "checks": [
+    {
+      "condition": "maximum - suffix[i] <= k",
+      "outcome": "return i"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem3903/index.jsx",
+    "src/problems/families/stableIndex/StableIndexWorkspace.jsx",
+    "src/problems/families/stableIndex/algorithm.js",
+    "src/problems/families/stableIndex/definition.js"
+  ]
+}

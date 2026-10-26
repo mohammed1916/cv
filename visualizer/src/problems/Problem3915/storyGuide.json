@@ -1,0 +1,31 @@
+{
+  "number": "3915",
+  "title": "Maximum Sum of Alternating Subsequence With Distance at Least K",
+  "goal": "Solve Maximum Sum of Alternating Subsequence With Distance at Least K: Activate distant predecessors, query opposite-direction DP states, and reconstruct an optimal zigzag subsequence.",
+  "strategy": "Activate distant predecessors, query opposite-direction DP states, and reconstruct an optimal zigzag subsequence.",
+  "phases": [
+    "start",
+    "activate",
+    "rise",
+    "fall",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Initialize rising and falling DP states.",
+    "activate": "Insert index i − k into the eligible predecessor trees.",
+    "rise": "Extend a falling state with a strictly smaller endpoint.",
+    "fall": "Extend a rising state with a strictly larger endpoint.",
+    "done": "Reconstruct an optimal alternating path."
+  },
+  "edgeCases": [
+    "Equal values cannot extend a strict rise or fall; predecessors must also be at least k indices away."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter {\"nums\":[...],\"k\":1}: 1–100,000 values in 1–100,000, and 1 ≤ k ≤ nums.length."
+  ],
+  "source": [
+    "src/problems/Problem3915/index.jsx",
+    "src/problems/Problem3915/algorithm.js"
+  ]
+}

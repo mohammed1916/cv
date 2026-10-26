@@ -1,0 +1,29 @@
+{
+  "number": "41",
+  "title": "First Missing Positive",
+  "goal": "Solve First Missing Positive: Index-as-hash: swap each number to its correct index position, then scan for the first mismatch.",
+  "strategy": "Index-as-hash: swap each number to its correct index position, then scan for the first mismatch.",
+  "phases": [
+    "found",
+    "init",
+    "place",
+    "scan",
+    "swap",
+    "swapped"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "nums[i] != i + 1",
+      "outcome": "return i + 1"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem41/index.jsx",
+    "src/problems/Problem41/FirstMissingPositiveVisualizer.jsx"
+  ]
+}

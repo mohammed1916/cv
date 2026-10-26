@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3915.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import SubsequencePath from '../../components/shared/SubsequencePath'
@@ -14,15 +18,10 @@ const definition = {
     { id: 'fall', label: 'Query larger ↓', description: 'Extend a rising state with a strictly larger endpoint.' },
     { id: 'done', label: 'Complete', description: 'Reconstruct an optimal alternating path.' },
   ],
-  examples: [
-    { label: 'Distance two', input: '{"nums":[5,4,2],"k":2}' },
-    { label: 'Alternating path', input: '{"nums":[3,5,4,2,4],"k":1}' },
-    { label: 'Equal values', input: '{"nums":[5,5,5,5],"k":1}' },
-    { label: 'Singleton', input: '{"nums":[5],"k":1}' },
-  ],
+  examples: authoredExamples0,
 }
 
-export default function AlternatingSubsequence() {
+function AlternatingSubsequence() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const known = (index, direction) => step.phase === 'done' || index < step.index || index === step.index && (step.phase === 'fall' || direction === 'up' && step.phase === 'rise')
     return <>
@@ -47,3 +46,5 @@ export default function AlternatingSubsequence() {
     <p>Fenwick trees summarize the best endpoint over value ranges. Reversing value coordinates turns a greater-than query into another prefix query. Each endpoint is inserted only when it becomes far enough away.</p>
   </>} />
 }
+
+export default withProblemStory(AlternatingSubsequence, storyGuide);

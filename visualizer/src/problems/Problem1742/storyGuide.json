@@ -1,0 +1,31 @@
+{
+  "number": "1742",
+  "title": "Maximum Number of Balls in a Box",
+  "goal": "Find the greatest number of numbered balls assigned to one digit-sum box.",
+  "strategy": "Each ball number maps to the sum of its decimal digits. Count those destinations and track the greatest occupancy.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest number of numbered balls assigned to one digit-sum box.",
+    "inspect": "Each ball number maps to the sum of its decimal digits. Count those destinations and track the greatest occupancy.",
+    "update": "Each ball number maps to the sum of its decimal digits. Count those destinations and track the greatest occupancy.",
+    "done": "Find the greatest number of numbered balls assigned to one digit-sum box."
+  },
+  "edgeCases": [
+    "One ball",
+    "Single-digit balls use separate boxes",
+    "Cross a hundred boundary"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

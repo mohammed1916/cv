@@ -1,0 +1,31 @@
+{
+  "number": "2017",
+  "title": "Grid Game",
+  "goal": "Minimize the points the second robot can collect after the first robot moves.",
+  "strategy": "The first robot changes rows at one column. It leaves only the top suffix and bottom prefix as useful regions, and the second robot chooses the larger one. Minimize that maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the points the second robot can collect after the first robot moves.",
+    "inspect": "The first robot changes rows at one column. It leaves only the top suffix and bottom prefix as useful regions, and the second robot chooses the larger one. Minimize that maximum.",
+    "update": "The first robot changes rows at one column. It leaves only the top suffix and bottom prefix as useful regions, and the second robot chooses the larger one. Minimize that maximum.",
+    "done": "Minimize the points the second robot can collect after the first robot moves."
+  },
+  "edgeCases": [
+    "One column leaves no unvisited points",
+    "Large top suffix favors a later turn",
+    "Equal rows create symmetric choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

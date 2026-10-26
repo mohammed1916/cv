@@ -1,0 +1,31 @@
+{
+  "number": "1939",
+  "title": "Users That Actively Request Confirmation Messages",
+  "goal": "Find users with two confirmation requests no more than twenty-four hours apart.",
+  "strategy": "Sort requests within each user and compare adjacent timestamps. Any close pair implies a close adjacent pair; confirmation outcome does not affect the time-window condition.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find users with two confirmation requests no more than twenty-four hours apart.",
+    "inspect": "Sort requests within each user and compare adjacent timestamps. Any close pair implies a close adjacent pair; confirmation outcome does not affect the time-window condition.",
+    "update": "Sort requests within each user and compare adjacent timestamps. Any close pair implies a close adjacent pair; confirmation outcome does not affect the time-window condition.",
+    "done": "Find users with two confirmation requests no more than twenty-four hours apart."
+  },
+  "edgeCases": [
+    "Exactly one day qualifies regardless of action",
+    "One second beyond a day does not qualify",
+    "Registered users with no confirmation requests"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

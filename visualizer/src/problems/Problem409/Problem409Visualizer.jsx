@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--409.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +20,7 @@ const SOLUTION_CODE = getSolutionCode('longest-palindrome')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', s: 'abccccdd', expected: 7 },
-  { label: 'Ex2', s: 'Aa', expected: 1 },
-  { label: 'Ex3', s: 'a', expected: 1 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(s) {
   const steps = []
@@ -152,7 +150,7 @@ function PalindromeVisualization({ s, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Palindrome Construction</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Palindrome Construction</div>
 
       {/* Input string */}
       <div>
@@ -203,7 +201,7 @@ function PalindromeVisualization({ s, step }) {
                 }}
                 animate={{ scale: isCurrent ? 1.05 : 1 }}
               >
-                <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--surface2)' }}>
+                <div style={{ fontSize: 14, fontFamily: 'monospace', fontWeight: 'bold', color: (isCurrent ? 'var(--text-on-light)' : 'var(--text)') }}>
                   {char}
                 </div>
                 <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
@@ -339,7 +337,7 @@ export default function Problem409Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -389,9 +387,6 @@ export default function Problem409Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -409,6 +404,9 @@ export default function Problem409Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

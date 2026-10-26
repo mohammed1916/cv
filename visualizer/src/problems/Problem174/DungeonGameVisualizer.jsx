@@ -1,4 +1,7 @@
-﻿import { createPortal } from 'react-dom';
+import authoredExamples0 from '../../config/examples/dungeon-game.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { createPortal } from 'react-dom';
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -8,7 +11,7 @@ import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./DungeonGameVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +33,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('dungeon-game');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(dungeon) {
     const R = dungeon.length, C = dungeon[0].length;
@@ -147,7 +150,7 @@ function VizPanel({ EXAMPLES, ex, dungeon, R, C, CELL_W, CELL_H, dp, activeR, ac
 
 export default function DungeonGameVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [dungeonInput, setDungeonInput] = useState("[[-2,-3,3],[-5,-10,1],[10,30,-5]]");
+  const [dungeonInput, setDungeonInput] = useState(JSON.stringify(AUTHORED_INITIAL.dungeon));
   const { dungeon, inputError } = useMemo(() => {
     try {
       const parsedDungeon = JSON.parse(dungeonInput); if (!Array.isArray(parsedDungeon)) throw new Error('dungeon must be an array');
@@ -206,7 +209,6 @@ export default function DungeonGameVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -217,6 +219,7 @@ export default function DungeonGameVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
         </>
     );
 
@@ -225,7 +228,7 @@ export default function DungeonGameVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

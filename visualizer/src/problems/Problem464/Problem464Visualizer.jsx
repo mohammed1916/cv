@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/can-i-win.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -49,11 +52,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('can-i-win', [
-  { label: 'Example 1', maxChoosable: 10, desiredTotal: 40, expected: true },
-  { label: 'Example 2', maxChoosable: 10, desiredTotal: 1, expected: true },
-  { label: 'Example 3', maxChoosable: 4, desiredTotal: 6, expected: true },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'check', label: 'Check Cases', lines: [2, 3, 4] },
@@ -312,7 +311,7 @@ function VisualizationPanel({ step, maxChoosable, desiredTotal, EXAMPLES, handle
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -336,47 +335,7 @@ function VisualizationPanel({ step, maxChoosable, desiredTotal, EXAMPLES, handle
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            Max Choosable Integer
-          </label>
-          <input
-            value={maxChoosableInput}
-            onChange={(e) => { setMaxChoosableInput(e.target.value); handleReset() }}
-            placeholder="e.g., 10"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            Desired Total
-          </label>
-          <input
-            value={desiredTotalInput}
-            onChange={(e) => { setDesiredTotalInput(e.target.value); handleReset() }}
-            placeholder="e.g., 40"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-      </div>
+      
 
       <button
         onClick={handleReset}
@@ -412,7 +371,7 @@ const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem464Visualizer() {
   const [maxChoosableInput, setMaxChoosableInput] = useState('10')
-  const [desiredTotalInput, setDesiredTotalInput] = useState('40')
+  const [desiredTotalInput, setDesiredTotalInput] = useState(String(AUTHORED_INITIAL.desiredTotal))
 
   const { maxChoosable, desiredTotal } = useMemo(() => {
     const m = parseInt(maxChoosableInput.trim())

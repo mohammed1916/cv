@@ -1,0 +1,24 @@
+{
+  "number": "66",
+  "title": "Plus One",
+  "goal": "Solve Plus One: Increment from the final decimal digit, carrying through trailing nines until a digit absorbs the carry.",
+  "strategy": "Increment from the final decimal digit, carrying through trailing nines until a digit absorbs the carry.",
+  "phases": [
+    "init",
+    "loop",
+    "carry",
+    "append"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All nines require a new leading one; other leading digits remain unchanged."
+  ],
+  "checks": [],
+  "inputRules": [
+    "digits must be an array"
+  ],
+  "source": [
+    "src/problems/Problem66/index.jsx",
+    "src/problems/Problem66/PlusOneVisualizer.jsx"
+  ]
+}

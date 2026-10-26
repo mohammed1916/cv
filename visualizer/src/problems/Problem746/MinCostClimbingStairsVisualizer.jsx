@@ -1,11 +1,14 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/min-cost-climbing-stairs.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MinCostClimbingStairsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -21,7 +24,7 @@ const SOLUTION_CODE = [
     { line: 6, text: '    return min(dp[n-1], dp[n])' },
 ]
 
-const EXAMPLES = getExamples('min-cost-climbing-stairs')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(cost) {
       const steps = []
@@ -109,7 +112,7 @@ function generateSteps(cost) {
 }
 
 export default function MinCostClimbingStairsVisualizer() {
-  const [costInput, setCostInput] = useState('[10,15,20]');
+  const [costInput, setCostInput] = useState(JSON.stringify(AUTHORED_INITIAL.input));
   const { cost, inputError } = useMemo(() => {
     try {
       const parsedCost = JSON.parse(costInput);
@@ -120,7 +123,7 @@ export default function MinCostClimbingStairsVisualizer() {
       return { cost: [10, 15, 20], inputError: e.message };
     }
   }, [costInput]);    const steps = useMemo(() => generateSteps(cost), [cost])
-    const { currentStep, isPlaying, setCurrentStep, setIsPlaying } = usePlaybackState(steps.length)
+    const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, togglePlay, handleReset, speed, setSpeed, isDone } = usePlaybackState(steps.length)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const handleExample = useCallback((ex) => {
@@ -128,9 +131,7 @@ export default function MinCostClimbingStairsVisualizer() {
         setCurrentStep(0)
     }, [setCurrentStep])
 
-    if (steps.length === 0) return null
-
-    const step = steps[currentStep]
+    const step = steps[currentStep ?? 0] || steps[0]
 
     const panelConfigs = useMemo(() => [
       { id: 'input', title: 'Input', dockMode: 'split-top' },
@@ -206,7 +207,7 @@ export default function MinCostClimbingStairsVisualizer() {
             </div>
 
     </div>
-    const codePanel = <><div className="mcs-panel"><div className="mcs-head">Status</div><div className="mcs-status">{step.message}</div></div><CodeTracePanel code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} /></>
+    const codePanel = <><div className="mcs-panel"><div className="mcs-head">Status</div><div className="mcs-status">{step.message}</div></div><CodeTracePanel step={step} code={SOLUTION_CODE} activeLine={step.activeLine} onActiveLineDomChange={setActiveLineDom} /></>
     return (
         <>
           <LuminoDockPanel panels={panelConfigs} onPanelReady={setPanelDivs} />
@@ -218,11 +219,15 @@ export default function MinCostClimbingStairsVisualizer() {
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
-                currentStep={currentStep}
+                activeStep={currentStep}
                 totalSteps={steps.length}
                 onStepChange={setCurrentStep}
                 isPlaying={isPlaying}
-                onPlayingChange={setIsPlaying}
+                onPlayToggle={togglePlay}
+                onReset={handleReset}
+                isDone={isDone}
+                speed={speed}
+                onSpeedChange={(event) => setSpeed(Number(event.target.value))}
                 showPatternOverlay={showPatternOverlay}
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"

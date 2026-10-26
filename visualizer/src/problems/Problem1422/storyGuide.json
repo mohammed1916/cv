@@ -1,0 +1,31 @@
+{
+  "number": "1422",
+  "title": "Maximum Score After Splitting a String",
+  "goal": "Split a binary string into nonempty parts to maximize left zeros plus right ones.",
+  "strategy": "Move the split one character at a time. Left zeros grow as right ones shrink, and the final character must remain in the right part.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split a binary string into nonempty parts to maximize left zeros plus right ones.",
+    "inspect": "Move the split one character at a time. Left zeros grow as right ones shrink, and the final character must remain in the right part.",
+    "update": "Move the split one character at a time. Left zeros grow as right ones shrink, and the final character must remain in the right part.",
+    "done": "Split a binary string into nonempty parts to maximize left zeros plus right ones."
+  },
+  "edgeCases": [
+    "Every bit is zero",
+    "Every bit is one",
+    "Smallest valid split"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Longest Continuous Increasing Subsequence",
+  "goal": "Find the length of the longest contiguous strictly increasing run.",
+  "strategy": "A contiguous increasing run ends at the first equality or drop. Remember both the current run and the greatest completed length.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "A contiguous increasing run ends at the first equality or drop. Remember both the current run and the greatest completed length.",
+    "update": "Only adjacent strict increases extend a run.",
+    "done": "Only adjacent strict increases extend a run."
+  },
+  "edgeCases": [
+    "All equal",
+    "Strict descent",
+    "One value"
+  ],
+  "number": "674",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

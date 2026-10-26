@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/design-snake-game.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem352Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -342,11 +343,7 @@ function DirectionArrow({ direction }) {
   )
 }
 
-const EXAMPLES = getExamplesOr('design-snake-game', [
-  { label: 'Straight Move', value: 'RRRRU', moves: ['R', 'R', 'R', 'R', 'U'] },
-  { label: 'Food Eating', value: 'RRUULL', moves: ['R', 'R', 'U', 'U', 'L', 'L'] },
-  { label: 'Self-Collision', value: 'RRRUUULL', moves: ['R', 'R', 'R', 'U', 'U', 'U', 'L', 'L'] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function DesignSnakeGameVisualizer() {
   const [movementsInput, setMovementsInput] = useState('RRDDR')
@@ -422,19 +419,7 @@ export default function DesignSnakeGameVisualizer() {
             </button>
           ))}
         </div>
-        <div className="dsg-input-row">
-          <span className="dsg-input-prefix">moves =</span>
-          <input
-            className="dsg-input"
-            value={movementsInput}
-            onChange={(e) => {
-              setMovementsInput(e.target.value)
-              handleReset()
-            }}
-            placeholder="RRDDR"
-            maxLength={50}
-          />
-        </div>
+        
         {inputError && <span className="dsg-error-pill">{inputError}</span>}
         <div className="dsg-note-box">
           <div className="dsg-note-title">How it works</div>

@@ -1,5 +1,8 @@
+import authoredExamples0 from '../../config/examples/binary-watch.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
-﻿import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -8,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { createPortal } from 'react-dom'
@@ -124,14 +127,10 @@ function generateSteps(nStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('binary-watch', [
-  { label: 'Example 1: n=1', n: '1' },
-  { label: 'Example 2: n=0', n: '0' },
-  { label: 'Example 3: n=3', n: '3' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem401Visualizer() {
-  const [nInput, setNInput] = useState('1')
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
 
   const { n, inputError } = useMemo(() => {
     try {
@@ -308,9 +307,6 @@ export default function Problem401Visualizer() {
         {panelDivs.code && createPortal(codePanel, panelDivs.code)}
       </>}
         <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -328,6 +324,9 @@ export default function Problem401Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </>
   )

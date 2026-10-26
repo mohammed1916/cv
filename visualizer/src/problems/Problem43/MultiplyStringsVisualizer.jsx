@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--43.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -139,12 +141,7 @@ function generateSteps(num1, num2) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: '2 × 3', num1: '2', num2: '3' },
-  { label: '123 × 456', num1: '123', num2: '456' },
-  { label: '9 × 9', num1: '9', num2: '9' },
-  { label: '0 × 5', num1: '0', num2: '5' },
-]
+const EXAMPLES = authoredExamples0
 
 export default function MultiplyStringsVisualizer() {
   const [num1Input, setNum1Input] = useState('123')
@@ -370,9 +367,6 @@ export default function MultiplyStringsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -390,6 +384,9 @@ export default function MultiplyStringsVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.state?.phase} usedPatterns={MULTIPLYSTRINGS_PATTERNS} />
+      )}
     </>
   )
 
@@ -399,7 +396,7 @@ export default function MultiplyStringsVisualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🔢 Multiplication Grid', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/merge-ksorted-lists.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +11,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MergeKSortedListsVisualizer.css'
 
 const SOLUTION_CODE_INLINE = [
@@ -95,7 +96,7 @@ function generateSteps(lists) {
   return steps
 }
 
-const EXAMPLES = getExamples('merge-ksorted-lists')
+const EXAMPLES = authoredExamples0
 
 // Visualization component for the k lists and heap state
 function HeapVisualizationPanel({ step, lists, inputError, input, onInputChange, onApplyExample }) {
@@ -200,9 +201,6 @@ export default function MergeKSortedListsVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -225,6 +223,9 @@ export default function MergeKSortedListsVisualizer() {
         autoScrollLabel="Auto-scroll code"
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MERGEKSORTEDLISTS_PATTERNS} />
+      )}
     </>
   )
 
@@ -233,7 +234,7 @@ export default function MergeKSortedListsVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Heap Visualization', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

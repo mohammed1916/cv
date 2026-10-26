@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/four-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +11,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FourSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -170,11 +173,11 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = getExamples('four-sum')
+const EXAMPLES = authoredExamples0
 
 export default function FourSumVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1000000000,1000000000,1000000000,1000000000]')
-    const [targetInput, setTargetInput] = useState('-294967296')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+    const [targetInput, setTargetInput] = useState(JSON.stringify(AUTHORED_INITIAL.target))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, target, inputError } = useMemo(() => {
@@ -233,20 +236,7 @@ export default function FourSumVisualizer() {
                         </button>
                     ))}
                 </div>
-                <div className="fs4-input-row">
-                    <input
-                        className="fs4-input"
-                        value={numsInput}
-                        onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                        placeholder="[1,0,-1,0,-2,2]"
-                    />
-                    <input
-                        className="fs4-input target"
-                        value={targetInput}
-                        onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                        placeholder="0"
-                    />
-                </div>
+                
 
                 <div className="fs4-array">
                     {sorted.map((val, idx) => {
@@ -341,9 +331,6 @@ export default function FourSumVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -361,6 +348,9 @@ export default function FourSumVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={FOURSUM_PATTERNS} />
+            )}
             {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
         </>
     )
@@ -371,7 +361,7 @@ export default function FourSumVisualizer() {
         () => [
             { id: 'primary', title: 'Sorted Array · Two Pointers', dockMode: 'split-right' },
             { id: 'state', title: 'Quadruplets Found', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

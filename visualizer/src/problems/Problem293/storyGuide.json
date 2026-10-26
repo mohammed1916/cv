@@ -1,0 +1,23 @@
+{
+  "number": "293",
+  "title": "Flip Game",
+  "goal": "Solve Flip Game: Find all possible states after one flip.",
+  "strategy": "Find all possible states after one flip.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only adjacent plus signs can flip; each distinct starting pair describes a separate next state."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem293/index.jsx",
+    "src/problems/Problem293/Problem293Visualizer.jsx"
+  ]
+}

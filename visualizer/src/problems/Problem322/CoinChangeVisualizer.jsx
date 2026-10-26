@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/coin-change.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CoinChangeVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -112,11 +115,11 @@ function generateSteps(coins, amount) {
     return steps
 }
 
-const EXAMPLES = getExamples('coin-change')
+const EXAMPLES = authoredExamples0
 
 export default function CoinChangeVisualizer() {
-    const [coinsInput, setCoinsInput] = useState('[1,5,6,9]')
-    const [amountInput, setAmountInput] = useState('11')
+    const [coinsInput, setCoinsInput] = useState(JSON.stringify(AUTHORED_INITIAL.coins))
+    const [amountInput, setAmountInput] = useState(String(AUTHORED_INITIAL.amount))
 
     const { coins, amount, inputError } = useMemo(() => {
         try {
@@ -173,22 +176,7 @@ export default function CoinChangeVisualizer() {
                     </button>
                 ))}
             </div>
-            <div className="cc-inputs">
-                <label className="cc-input-label">coins</label>
-                <input
-                    className="cc-input"
-                    value={coinsInput}
-                    onChange={(e) => { setCoinsInput(e.target.value); handleReset() }}
-                    placeholder="[1,5,6,9]"
-                />
-                <label className="cc-input-label">amount</label>
-                <input
-                    className="cc-input small"
-                    value={amountInput}
-                    onChange={(e) => { setAmountInput(e.target.value); handleReset() }}
-                    placeholder="11"
-                />
-            </div>
+            
             {inputError && <div className="cc-error-box">{inputError}</div>}
         </div>
     )
@@ -308,7 +296,7 @@ export default function CoinChangeVisualizer() {
     const panelConfigs = useMemo(() => [
         { id: 'visualization', title: 'DP Array Visualization' },
         { id: 'code', title: 'Solution Trace', dockMode: 'split-right' },
-        { id: 'input', title: 'Input Playground', dockMode: 'split-bottom' },
+        { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
         { id: 'state', title: 'Current State', dockMode: 'split-right' },
     ], [])
 

@@ -1,0 +1,31 @@
+{
+  "number": "1109",
+  "title": "Corporate Flight Bookings",
+  "goal": "Compute the reserved seats on every flight.",
+  "strategy": "A booking changes occupancy at two boundaries. Prefix accumulation restores the complete range contribution without updating every flight individually.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the reserved seats on every flight.",
+    "inspect": "A booking changes occupancy at two boundaries. Prefix accumulation restores the complete range contribution without updating every flight individually.",
+    "update": "A booking changes occupancy at two boundaries. Prefix accumulation restores the complete range contribution without updating every flight individually.",
+    "done": "Compute the reserved seats on every flight."
+  },
+  "edgeCases": [
+    "One booking covers all flights",
+    "Single-flight booking",
+    "Repeated intervals accumulate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

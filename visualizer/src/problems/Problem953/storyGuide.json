@@ -1,0 +1,27 @@
+{
+  "number": "953",
+  "title": "Verifying an Alien Dictionary",
+  "goal": "Check dictionary order in a supplied alphabet.",
+  "strategy": "Only the first differing character decides a pair. If there is none, a longer word cannot precede its own prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check dictionary order in a supplied alphabet.",
+    "inspect": "Only the first differing character decides a pair. If there is none, a longer word cannot precede its own prefix.",
+    "update": "Only the first differing character decides a pair. If there is none, a longer word cannot precede its own prefix.",
+    "done": "Check dictionary order in a supplied alphabet."
+  },
+  "edgeCases": [
+    "Longer shared prefix is invalid first",
+    "Shorter shared prefix comes first",
+    "Identical neighboring words"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

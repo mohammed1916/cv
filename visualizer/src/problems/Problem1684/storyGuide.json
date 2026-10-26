@@ -1,0 +1,31 @@
+{
+  "number": "1684",
+  "title": "Count the Number of Consistent Strings",
+  "goal": "Count words that use only allowed characters.",
+  "strategy": "A set gives membership checks for each letter. Repeated letters are fine; even one outside the set invalidates the whole word.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count words that use only allowed characters.",
+    "inspect": "A set gives membership checks for each letter. Repeated letters are fine; even one outside the set invalidates the whole word.",
+    "update": "A set gives membership checks for each letter. Repeated letters are fine; even one outside the set invalidates the whole word.",
+    "done": "Count words that use only allowed characters."
+  },
+  "edgeCases": [
+    "One allowed letter",
+    "All words violate the set",
+    "Every word qualifies"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

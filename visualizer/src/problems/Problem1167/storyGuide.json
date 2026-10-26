@@ -1,0 +1,31 @@
+{
+  "number": "1167",
+  "title": "Minimum Cost to Connect Sticks",
+  "goal": "Minimize the total cost of joining all sticks into one.",
+  "strategy": "Short lengths should participate in more joins. Repeatedly joining the two smallest delays expensive large lengths.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the total cost of joining all sticks into one.",
+    "inspect": "Short lengths should participate in more joins. Repeatedly joining the two smallest delays expensive large lengths.",
+    "update": "Short lengths should participate in more joins. Repeatedly joining the two smallest delays expensive large lengths.",
+    "done": "Minimize the total cost of joining all sticks into one."
+  },
+  "edgeCases": [
+    "One stick needs no join",
+    "Equal lengths still incur repeated costs",
+    "Two sticks join once"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

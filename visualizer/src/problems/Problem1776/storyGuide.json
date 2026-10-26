@@ -1,0 +1,31 @@
+{
+  "number": "1776",
+  "title": "Car Fleet II",
+  "goal": "Find when each moving car first collides with the fleet ahead of it.",
+  "strategy": "Scan cars from right to left. A candidate ahead is useful only if this car can catch it before that candidate joins another fleet; otherwise discard it and inspect the next fleet representative.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find when each moving car first collides with the fleet ahead of it.",
+    "inspect": "Scan cars from right to left. A candidate ahead is useful only if this car can catch it before that candidate joins another fleet; otherwise discard it and inspect the next fleet representative.",
+    "update": "Scan cars from right to left. A candidate ahead is useful only if this car can catch it before that candidate joins another fleet; otherwise discard it and inspect the next fleet representative.",
+    "done": "Find when each moving car first collides with the fleet ahead of it."
+  },
+  "edgeCases": [
+    "Increasing speeds never collide",
+    "Equal speeds preserve all separations",
+    "Two cars can meet at a fractional time"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

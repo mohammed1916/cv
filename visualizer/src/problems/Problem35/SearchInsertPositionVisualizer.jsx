@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/search-insert-position.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -6,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SearchInsertPositionVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -125,11 +128,11 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = getExamples('search-insert-position')
+const EXAMPLES = authoredExamples0
 
 export default function SearchInsertPositionVisualizer() {
-  const [numsInput, setNumsInput] = useState('[1, 3, 5, 6]')
-  const [targetInput, setTargetInput] = useState('5')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { nums, target, inputError } = useMemo(() => {
     try {
@@ -208,23 +211,7 @@ export default function SearchInsertPositionVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <input
-            value={numsInput}
-            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-            placeholder="[1, 3, 5, 6]"
-            className="sip-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-          <input
-            value={targetInput}
-            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-            placeholder="5"
-            className="sip-input"
-            style={{ width: '60px', margin: 0, textAlign: 'center' }}
-          />
-        </div>
+        
 
         <div className="sip-pointers-legend">
           <div className="sip-legend-item left"><div className="sip-legend-swatch" /> Left</div>
@@ -323,9 +310,6 @@ export default function SearchInsertPositionVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINSERTPOSITION_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -343,6 +327,9 @@ export default function SearchInsertPositionVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHINSERTPOSITION_PATTERNS} />
+      )}
     </>
   )
 
@@ -350,7 +337,7 @@ export default function SearchInsertPositionVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Array State & Search Space', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

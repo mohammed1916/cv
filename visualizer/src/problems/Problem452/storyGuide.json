@@ -1,0 +1,30 @@
+{
+  "number": "452",
+  "title": "Minimum Number of Arrows to Burst Balloons",
+  "goal": "Solve Minimum Number of Arrows to Burst Balloons: Choose arrow positions at interval ends and reuse each arrow for every balloon interval containing that position.",
+  "strategy": "Choose arrow positions at interval ends and reuse each arrow for every balloon interval containing that position.",
+  "phases": [
+    "checking",
+    "done",
+    "initialized",
+    "new_arrow",
+    "overlap",
+    "sorted",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Touching closed endpoints share one arrow; disjoint intervals require separate arrows."
+  ],
+  "checks": [
+    {
+      "condition": "not points",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem452/index.jsx",
+    "src/problems/Problem452/Problem452Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1797",
+  "title": "Design Authentication Manager",
+  "goal": "Simulate token generation, renewal, and counting with exact expiration times.",
+  "strategy": "Before each operation discard tokens whose expiry is at or before the current time. Renew only tokens still alive and return counts for count operations.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Simulate token generation, renewal, and counting with exact expiration times.",
+    "inspect": "Before each operation discard tokens whose expiry is at or before the current time. Renew only tokens still alive and return counts for count operations.",
+    "update": "Before each operation discard tokens whose expiry is at or before the current time. Renew only tokens still alive and return counts for count operations.",
+    "done": "Simulate token generation, renewal, and counting with exact expiration times."
+  },
+  "edgeCases": [
+    "Renew exactly at expiry fails",
+    "Renewing missing token changes nothing",
+    "Successful renewal extends lifetime"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

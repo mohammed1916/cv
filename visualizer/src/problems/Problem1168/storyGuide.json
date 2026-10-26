@@ -1,0 +1,31 @@
+{
+  "number": "1168",
+  "title": "Optimize Water Distribution in a Village",
+  "goal": "Supply every house with water at minimum total well and pipe cost.",
+  "strategy": "A virtual water source turns each possible well into a source-to-house edge. A minimum spanning tree over wells and pipes chooses the cheapest connected supply system.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Supply every house with water at minimum total well and pipe cost.",
+    "inspect": "A virtual water source turns each possible well into a source-to-house edge. A minimum spanning tree over wells and pipes chooses the cheapest connected supply system.",
+    "update": "A virtual water source turns each possible well into a source-to-house edge. A minimum spanning tree over wells and pipes chooses the cheapest connected supply system.",
+    "done": "Supply every house with water at minimum total well and pipe cost."
+  },
+  "edgeCases": [
+    "Without pipes every house needs its own well",
+    "Expensive pipes lose to individual wells",
+    "A zero-cost well and pipes can supply everything for free"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

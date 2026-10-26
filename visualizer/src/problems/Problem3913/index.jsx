@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3913.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -13,9 +17,9 @@ const definition = {
   parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/sort-vowels-by-frequency/',
   complexity: 'O(n) time and O(n) space. Only five vowel kinds need ranking. Every execution step is retained; long sequences are paged.',
-  examples: [{ label: 'leetcode', input: '"leetcode"' }, { label: 'Many vowels', input: '"aeiaaioooa"' }, { label: 'First-occurrence tie', input: '"uoaei"' }, { label: 'No vowels', input: '"rhythm"' }],
+  examples: authoredExamples0,
 }
-export default function SortVowelsByFrequency() {
+function SortVowelsByFrequency() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Original characters" length={run.input.length} active={step.index} valueAt={i => run.input[i]} roleAt={i => run.ordinal[i] >= 0 ? 'vowel' : 'fixed'} />
     <IndexedSequence label="Vowel placement" length={run.input.length} active={step.index}
@@ -29,3 +33,5 @@ export default function SortVowelsByFrequency() {
     <p>Only vowel positions can change. Equal-frequency groups keep their first-occurrence order.</p>
   </>} />
 }
+
+export default withProblemStory(SortVowelsByFrequency, storyGuide);

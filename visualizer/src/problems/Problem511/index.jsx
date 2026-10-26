@@ -1,1 +1,5 @@
-export { default } from "./GamePlayAnalysisIVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./GamePlayAnalysisIVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

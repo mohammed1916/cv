@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--403.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +20,7 @@ const SOLUTION_CODE = getSolutionCode('frog-jump')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', stones: [0, 1, 3, 5, 6, 8, 12, 17], expected: true },
-  { label: 'Ex2', stones: [0, 1, 2, 3, 4, 8, 9, 11], expected: false },
-  { label: 'Simple', stones: [0, 1, 2], expected: true },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(stones) {
   const steps = []
@@ -160,7 +158,7 @@ function StoneVisualization({ stones, step, selectedStones }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Stone Layout</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Stone Layout</div>
 
       <div style={{ position: 'relative', height: 60, backgroundColor: 'var(--surface2)', borderRadius: 8, overflow: 'hidden', border: '2px solid var(--border)' }}>
         <div style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'flex-end' }}>
@@ -308,7 +306,7 @@ export default function Problem403Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -358,9 +356,6 @@ export default function Problem403Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -378,6 +373,9 @@ export default function Problem403Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

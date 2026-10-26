@@ -1,0 +1,31 @@
+{
+  "number": "1937",
+  "title": "Maximum Number of Points with Cost",
+  "goal": "Choose one cell per row while paying for horizontal movement between rows.",
+  "strategy": "Two directional sweeps summarize the best previous score minus distance. Their maximum gives the best arrival score for each column before collecting its points.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose one cell per row while paying for horizontal movement between rows.",
+    "inspect": "Two directional sweeps summarize the best previous score minus distance. Their maximum gives the best arrival score for each column before collecting its points.",
+    "update": "Two directional sweeps summarize the best previous score minus distance. Their maximum gives the best arrival score for each column before collecting its points.",
+    "done": "Choose one cell per row while paying for horizontal movement between rows."
+  },
+  "edgeCases": [
+    "One row needs no movement",
+    "One column forces all choices",
+    "Tied zero rewards"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

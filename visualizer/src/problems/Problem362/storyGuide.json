@@ -1,0 +1,23 @@
+{
+  "number": "362",
+  "title": "Design Hit Counter",
+  "goal": "Solve Design Hit Counter: Design a hit counter that tracks HTTP requests and returns count in last N seconds.",
+  "strategy": "Design a hit counter that tracks HTTP requests and returns count in last N seconds.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Hits exactly at the expiry boundary no longer belong to the rolling window; multiple hits can share a timestamp."
+  ],
+  "checks": [],
+  "inputRules": [
+    "hits must be an array of timestamps",
+    "every hit timestamp must be a non-negative number",
+    "hit timestamps must be in non-decreasing order",
+    "timestamp must be a non-negative number",
+    "window must be a positive number"
+  ],
+  "source": [
+    "src/problems/Problem362/index.jsx",
+    "src/problems/Problem362/Problem362Visualizer.jsx"
+  ]
+}

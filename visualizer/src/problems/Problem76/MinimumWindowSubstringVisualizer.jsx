@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/minimum-window-substring.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import VisualizerPlaybackSection from '../../components/VisualizerPlaybackSection'
@@ -7,7 +10,7 @@ import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MinimumWindowSubstringVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -73,7 +76,7 @@ function generateSteps(s, t) {
   return steps
 }
 
-const EXAMPLES = getExamples('minimum-window-substring')
+const EXAMPLES = authoredExamples0
 
 const SNIPPETS = [
   { id: 'init', label: 'Init', lines: [4, 5, 6, 7, 8, 9] },
@@ -93,8 +96,8 @@ function snippetIdForPhase(phase) {
 export default function MinimumWindowSubstringVisualizer() {
   // Load solution code from registry
 
-  const [sInput, setSInput] = useState('ADOBECODEBANC')
-  const [tInput, setTInput] = useState('ABC')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [tInput, setTInput] = useState(AUTHORED_INITIAL.t)
   const s = sInput ?? ''
   const t = tInput ?? ''
 
@@ -153,10 +156,7 @@ export default function MinimumWindowSubstringVisualizer() {
         <div className="mws-examples">
           {EXAMPLES.map((ex) => <button key={ex.label} className="mws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
         </div>
-        <div className="mws-inputs">
-          <input className="mws-input" value={sInput} onChange={handleSInputChange} placeholder="s" />
-          <input className="mws-input small" value={tInput} onChange={handleTInputChange} placeholder="t" />
-        </div>
+        
         <div className="mws-string">
           {s.split('').map((ch, i) => {
             const inWindow = i >= (step?.left ?? 0) && i <= (step?.right ?? -1)
@@ -284,7 +284,7 @@ export default function MinimumWindowSubstringVisualizer() {
     () => [
       { id: 'primary', title: 'Sliding Window', dockMode: 'split-right' },
       { id: 'state', title: 'Frequency State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

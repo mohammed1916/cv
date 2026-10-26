@@ -41,7 +41,7 @@ export default function VisualizerStatusDashboard() {
                 fontSize: 12,
               }}
             >
-              <div style={{ fontWeight: 700, color: 'var(--surface2)', marginBottom: 4 }}>
+              <div style={{ fontWeight: 700, color: 'var(--text-on-light)', marginBottom: 4 }}>
                 #{problem.number} {problem.title}
               </div>
               <div style={{ color: 'var(--text-muted)', marginBottom: 8, fontSize: 11 }}>

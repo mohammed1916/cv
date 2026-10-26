@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/top-kfrequent.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./TopKFrequentVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -90,7 +93,7 @@ function generateSteps(nums, k) {
     return steps;
 }
 
-const EXAMPLES = getExamples('top-kfrequent');
+const EXAMPLES = authoredExamples0;
 
 function parseNums(str) {
     try {
@@ -105,8 +108,8 @@ function parseNums(str) {
 }
 
 export default function TopKFrequentVisualizer() {
-    const [numsInput, setNumsInput] = useState("[1,1,1,2,2,3]");
-    const [kInput, setKInput] = useState("2");
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { nums, err: numsError } = useMemo(() => parseNums(numsInput), [numsInput]);
@@ -253,9 +256,6 @@ export default function TopKFrequentVisualizer() {
             )}
             {createPortal(
                 <FloatingPanel title="Playback Controls">
-                    {showPatternOverlay && (
-                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                    )}
                     <PlaybackControls
                         isPlaying={isPlaying} isDone={isDone} speed={speed}
                         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -266,6 +266,9 @@ export default function TopKFrequentVisualizer() {
                         patternOverlayLabel="Show pattern overlay"
                         showPatternOverlayToggle
                     />
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
                 </FloatingPanel>,
                 document.body,
             )}

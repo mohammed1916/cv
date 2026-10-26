@@ -1,0 +1,27 @@
+{
+  "number": "881",
+  "title": "Boats to Save People",
+  "goal": "Rescue everyone with the fewest two-person boats.",
+  "strategy": "The heaviest passenger must depart. If the lightest cannot accompany them, no one else can.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rescue everyone with the fewest two-person boats.",
+    "inspect": "The heaviest passenger must depart. If the lightest cannot accompany them, no one else can.",
+    "update": "The heaviest passenger must depart. If the lightest cannot accompany them, no one else can.",
+    "done": "Rescue everyone with the fewest two-person boats."
+  },
+  "edgeCases": [
+    "Every person rides alone",
+    "Exact weight pairs",
+    "Single passenger"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2419",
+  "title": "Longest Subarray With Maximum Bitwise AND",
+  "goal": "Find the longest subarray attaining the maximum possible bitwise AND.",
+  "strategy": "A singleton maximum value attains the global maximum AND. No smaller value can belong to a subarray with that AND, so the answer is the longest consecutive run of the array maximum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest subarray attaining the maximum possible bitwise AND.",
+    "inspect": "A singleton maximum value attains the global maximum AND. No smaller value can belong to a subarray with that AND, so the answer is the longest consecutive run of the array maximum.",
+    "update": "A singleton maximum value attains the global maximum AND. No smaller value can belong to a subarray with that AND, so the answer is the longest consecutive run of the array maximum.",
+    "done": "Find the longest subarray attaining the maximum possible bitwise AND."
+  },
+  "edgeCases": [
+    "Every equal value belongs to the maximum run",
+    "A unique maximum has answer one",
+    "A maximum run at the end must be retained"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

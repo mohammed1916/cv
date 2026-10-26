@@ -1,0 +1,31 @@
+{
+  "number": "562",
+  "title": "Longest Line of Consecutive One in Matrix",
+  "goal": "Solve Longest Line of Consecutive One in Matrix: Find the longest line of consecutive ones in a binary matrix (horizontal, vertical, or diagonal).",
+  "strategy": "Find the longest line of consecutive ones in a binary matrix (horizontal, vertical, or diagonal).",
+  "phases": [
+    "initialize",
+    "scanning",
+    "horizontal",
+    "vertical",
+    "diagonal",
+    "update_max",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not mat",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Input must be array",
+    "Input must be 2D array"
+  ],
+  "source": [
+    "src/problems/Problem562/index.jsx",
+    "src/problems/Problem562/LongestLineVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1697",
+  "title": "Checking Existence of Edge Length Limited Paths",
+  "goal": "Answer whether each pair of vertices is connected using only edges shorter than its limit.",
+  "strategy": "Sort edges and queries by weight threshold. As limits rise, union newly eligible edges; component membership gives each answer, stored in its original query order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer whether each pair of vertices is connected using only edges shorter than its limit.",
+    "inspect": "Sort edges and queries by weight threshold. As limits rise, union newly eligible edges; component membership gives each answer, stored in its original query order.",
+    "update": "Sort edges and queries by weight threshold. As limits rise, union newly eligible edges; component membership gives each answer, stored in its original query order.",
+    "done": "Answer whether each pair of vertices is connected using only edges shorter than its limit."
+  },
+  "edgeCases": [
+    "Equal edge weight is excluded",
+    "Disconnected components",
+    "No edges"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

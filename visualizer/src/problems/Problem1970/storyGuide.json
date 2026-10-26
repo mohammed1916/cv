@@ -1,0 +1,31 @@
+{
+  "number": "1970",
+  "title": "Last Day Where You Can Still Cross",
+  "goal": "Find the last day a land path connects the top row to the bottom row.",
+  "strategy": "Reverse the flooding process. Reopen cells and union adjacent land components with virtual top and bottom nodes; the first reverse connection identifies the latest feasible day.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the last day a land path connects the top row to the bottom row.",
+    "inspect": "Reverse the flooding process. Reopen cells and union adjacent land components with virtual top and bottom nodes; the first reverse connection identifies the latest feasible day.",
+    "update": "Reverse the flooding process. Reopen cells and union adjacent land components with virtual top and bottom nodes; the first reverse connection identifies the latest feasible day.",
+    "done": "Find the last day a land path connects the top row to the bottom row."
+  },
+  "edgeCases": [
+    "An entire top row floods first",
+    "A single column stays open late",
+    "Smallest two-by-two board"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

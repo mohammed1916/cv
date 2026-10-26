@@ -1,0 +1,31 @@
+{
+  "number": "1035",
+  "title": "Uncrossed Lines",
+  "goal": "Draw the largest number of equal-value connections without crossings.",
+  "strategy": "Noncrossing connections preserve order in both arrays, so they form a common subsequence. Prefix DP either connects matching final values or skips one side to preserve the best earlier alignment.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Draw the largest number of equal-value connections without crossings.",
+    "inspect": "Noncrossing connections preserve order in both arrays, so they form a common subsequence. Prefix DP either connects matching final values or skips one side to preserve the best earlier alignment.",
+    "update": "Noncrossing connections preserve order in both arrays, so they form a common subsequence. Prefix DP either connects matching final values or skips one side to preserve the best earlier alignment.",
+    "done": "Draw the largest number of equal-value connections without crossings."
+  },
+  "edgeCases": [
+    "Disjoint values permit no lines",
+    "Equal repeats connect only as many positions as both arrays contain",
+    "Identical arrays connect every position"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

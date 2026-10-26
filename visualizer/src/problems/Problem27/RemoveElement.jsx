@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/remove-element.js';
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './RemoveElement.css'
 import { createPortal } from 'react-dom'
 
@@ -44,7 +45,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('remove-element', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function RemoveElement() {
   const [input, setInput] = useState('[1, 2, 3]')
@@ -91,7 +92,7 @@ export default function RemoveElement() {
   ], [])
   const panelContents = {
     left: (<div className="remove-element-panel">
-            <div className="remove-element-panel-head">
+            <div className="vis-panel-head remove-element-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
@@ -137,7 +138,7 @@ export default function RemoveElement() {
             </div>
           </div>),
     right: (<div className="remove-element-panel">
-            <div className="remove-element-panel-head">Details</div>
+            <div className="vis-panel-head remove-element-panel-head">Details</div>
             <div className="remove-element-panel-body">
               <div className="remove-element-info">
                 <h3>Problem 27</h3>

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/nested-list-weight-sum.js';
+import authoredExamples1 from '../../config/examples/local--339.js';
+
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -5,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './NestedListWeightSumVisualizer.css'
 
 const P = 'nested-list-weight-sum'
@@ -187,12 +190,8 @@ function renderNode(node, step) {
   )
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('nested-list-weight-sum', [])
-const FALLBACK_EXAMPLES = [
-  { label: '[[1,1],2,[1,1]]  → 10', inputs: [[1, 1], 2, [1, 1]] },
-  { label: '[1,[4,[6]]]  → 27', inputs: [1, [4, [6]]] },
-  { label: '[[[3]],2,1]  → 12', inputs: [[[3]], 2, 1] },
-]
+const REGISTRY_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
+const FALLBACK_EXAMPLES = authoredExamples1
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 function isNestedNumberList(value) {

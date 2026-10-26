@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/teemo-attacking.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem495Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -39,10 +40,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('teemo-attacking', [
-  { label: 'Example 1', timeSeries: [1,4], duration: 2 },
-  { label: 'Example 2', timeSeries: [1,2], duration: 2 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(timeSeries, duration) {
   const steps = []
@@ -64,7 +62,7 @@ function VisualizationPanel({ timeSeries, duration, step }) {
       <div style={{ padding: 12, backgroundColor: '#ccfbf1', borderRadius: 6, borderLeft: '4px solid #14b8a6' }}>
         <div style={{ fontSize: 12, color: '#134e4a', fontStyle: 'italic' }}>Teemo deals 1 damage per second for {duration}s after attack, then cooldown starts.</div>
       </div>
-      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Attack Times: [{timeSeries.join(', ')}]</div></div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Attack Times: [{timeSeries.join(', ')}]</div></div>
       <motion.div style={{ padding: 16, backgroundColor: '#ccfbf1', borderRadius: 6, border: '2px solid #14b8a6', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#134e4a' }}>Total Damage</div>
         <div style={{ fontSize: 32, fontWeight: 'bold', color: '#0e8477' }}>{step?.totalDamage ?? 0}</div>
@@ -122,8 +120,8 @@ export default function Problem495Visualizer() {
           </>
         )}
       </><FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>{showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}</div>)
 }
 

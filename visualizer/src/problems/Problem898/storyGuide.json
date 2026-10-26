@@ -1,0 +1,27 @@
+{
+  "number": "898",
+  "title": "Bitwise ORs of Subarrays",
+  "goal": "Count distinct bitwise OR values of contiguous subarrays.",
+  "strategy": "Every subarray ending here is the singleton or an earlier ending extended by this value. Equal OR states can merge.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct bitwise OR values of contiguous subarrays.",
+    "inspect": "Every subarray ending here is the singleton or an earlier ending extended by this value. Equal OR states can merge.",
+    "update": "Every subarray ending here is the singleton or an earlier ending extended by this value. Equal OR states can merge.",
+    "done": "Count distinct bitwise OR values of contiguous subarrays."
+  },
+  "edgeCases": [
+    "Only zeros",
+    "Equal values",
+    "Disjoint bit powers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

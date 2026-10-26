@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/trapping-rain-water.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './TrappingRainWaterVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -132,10 +135,10 @@ function generateSteps(height) {
   return steps
 }
 
-const EXAMPLES = getExamples('trapping-rain-water')
+const EXAMPLES = authoredExamples0
 
 export default function TrappingRainWaterVisualizer() {
-  const [heightInput, setHeightInput] = useState('[0,1,0,2,1,0,1,3,2,1,2,1]')
+  const [heightInput, setHeightInput] = useState(JSON.stringify(AUTHORED_INITIAL.height))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -183,26 +186,6 @@ export default function TrappingRainWaterVisualizer() {
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="tw-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="tw-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <input
-          value={heightInput}
-          onChange={(e) => { setHeightInput(e.target.value);
-
- handleReset() }}
-          placeholder="[0,1,0,2,1,0,1,3,2,1,2,1]"
-          className="tw-input"
-        />
 
         <div className="tw-chart-container">
           {height.map((h, i) => {
@@ -313,9 +296,6 @@ export default function TrappingRainWaterVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -333,6 +313,9 @@ export default function TrappingRainWaterVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={TRAPPINGRAINWATER_PATTERNS} />
+      )}
     </>
   )
 
@@ -341,7 +324,7 @@ export default function TrappingRainWaterVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Elevation Map', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'state', title: 'Variables', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],

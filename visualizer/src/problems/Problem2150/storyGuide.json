@@ -1,0 +1,31 @@
+{
+  "number": "2150",
+  "title": "Find All Lonely Numbers in the Array",
+  "goal": "Find values appearing once with neither neighboring integer present.",
+  "strategy": "A frequency map separates uniqueness from adjacency. A value is lonely only when its count is one and both value-minus-one and value-plus-one are absent.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find values appearing once with neither neighboring integer present.",
+    "inspect": "A frequency map separates uniqueness from adjacency. A value is lonely only when its count is one and both value-minus-one and value-plus-one are absent.",
+    "update": "A frequency map separates uniqueness from adjacency. A value is lonely only when its count is one and both value-minus-one and value-plus-one are absent.",
+    "done": "Find values appearing once with neither neighboring integer present."
+  },
+  "edgeCases": [
+    "Every unique value is adjacent to another",
+    "Widely separated singleton values are all lonely",
+    "One isolated occurrence is lonely"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

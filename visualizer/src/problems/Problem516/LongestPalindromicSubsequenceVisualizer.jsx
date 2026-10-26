@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/longest-palindromic-subsequence.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './LongestPalindromicSubsequenceVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +31,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('longest-palindromic-subsequence')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(s) {
   const steps = []
@@ -148,7 +149,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
 
       {/* String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>String: {s}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>String: {s}</div>
         <div style={{ display: 'flex', gap: 4 }}>
           {s.split('').map((char, idx) => {
             const isInRange = step && idx >= step.i && idx <= step.j
@@ -176,7 +177,7 @@ function VisualizationPanel({ s, step, inputPanel }) {
 
       {/* DP Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Table</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>DP Table</div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', fontSize: 11, minWidth: 300 }}>
             <tbody>
@@ -335,9 +336,6 @@ export default function LongestPalindromicSubsequenceVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -355,6 +353,9 @@ export default function LongestPalindromicSubsequenceVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/verbal-arithmetic-puzzle.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem1307Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,9 +23,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('verbal-arithmetic-puzzle', [
-  { label: 'Example 1', equation: 'SEND+MORE=MONEY' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def isValidWordSquare(equation):' },
@@ -180,7 +181,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem1307Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [equationInput, setEquationInput] = useState("SEND+MORE=MONEY");
+  const [equationInput, setEquationInput] = useState(String(AUTHORED_INITIAL.equation));
   const { equation, inputError } = useMemo(() => {
     try {
       const parsedEquation = equationInput;

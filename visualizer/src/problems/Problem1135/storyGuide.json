@@ -1,0 +1,31 @@
+{
+  "number": "1135",
+  "title": "Connecting Cities With Minimum Cost",
+  "goal": "Connect every city with minimum total road cost, or report impossibility.",
+  "strategy": "Kruskal chooses the cheapest edge that joins different components. Cycle edges add cost without improving connectivity.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Connect every city with minimum total road cost, or report impossibility.",
+    "inspect": "Kruskal chooses the cheapest edge that joins different components. Cycle edges add cost without improving connectivity.",
+    "update": "Kruskal chooses the cheapest edge that joins different components. Cycle edges add cost without improving connectivity.",
+    "done": "Connect every city with minimum total road cost, or report impossibility."
+  },
+  "edgeCases": [
+    "Disconnected city groups",
+    "Two cities and one edge",
+    "Equal-cost alternative trees"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

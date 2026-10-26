@@ -1,0 +1,29 @@
+{
+  "number": "3914",
+  "title": "Minimum Operations to Make Array Non Decreasing",
+  "goal": "Solve Minimum Operations to Make Array Non Decreasing: Pay for each adjacent drop and construct an optimal sequence of suffix increments.",
+  "strategy": "Pay for each adjacent drop and construct an optimal sequence of suffix increments.",
+  "phases": [
+    "start",
+    "compare",
+    "apply",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Initialize total cost.",
+    "compare": "Measure the positive drop at the current boundary.",
+    "apply": "Pay for the suffix increment, or skip a zero drop.",
+    "done": "Return the minimum total cost."
+  },
+  "edgeCases": [
+    "Only positive adjacent drops add cost; each paid increment applies to a suffix, and already non-decreasing input costs zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON array of 1–100,000 integers, each between 1 and 1,000,000,000."
+  ],
+  "source": [
+    "src/problems/Problem3914/index.jsx",
+    "src/problems/Problem3914/algorithm.js"
+  ]
+}

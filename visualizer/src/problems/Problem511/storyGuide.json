@@ -1,0 +1,19 @@
+{
+  "number": "511",
+  "title": "Game Play Analysis I",
+  "goal": "Solve Game Play Analysis I: Find the first login date for each player using window functions.",
+  "strategy": "Find the first login date for each player using window functions.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Choose the earliest event date independently for each player, regardless of device or number of later sessions."
+  ],
+  "checks": [],
+  "inputRules": [
+    "activity must be an array of rows"
+  ],
+  "source": [
+    "src/problems/Problem511/index.jsx",
+    "src/problems/Problem511/GamePlayAnalysisIVisualizer.jsx"
+  ]
+}

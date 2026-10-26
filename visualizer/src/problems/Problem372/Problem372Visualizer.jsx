@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/super-power.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './Problem372Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -22,7 +25,7 @@ const SOLUTION_CODE = getSolutionCode('super-power')
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []
 
-const EXAMPLES = getExamples('super-power')
+const EXAMPLES = authoredExamples0
 const DEFAULT_EX = EXAMPLES[0] || { label: '2^3', base: 2, exponents: [3] }
 
 function generateSteps(base, exponents) {
@@ -169,7 +172,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Exponent digits breakdown */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Exponent Digits</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Exponent Digits</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
           {expDigits.map((digit, idx) => {
             const isCurrent = idx === step?.currentIdx && step && !step.done
@@ -212,7 +215,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Base Power Calculation</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Base Power Calculation</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>Base</div>
@@ -277,7 +280,7 @@ function SuperPowerVisualization({ base, exponents, step }) {
 
       {/* Final result */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Result</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Result</div>
         <motion.div
           style={{
             padding: 16,
@@ -331,8 +334,8 @@ function VisualizationPanel({ base, exponents, step, inputPanel }) {
 
 export default function Problem372Visualizer() {
   const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label ?? '')
-  const [baseInput, setBaseInput] = useState(String(DEFAULT_EX.base))
-  const [exponentsInput, setExponentsInput] = useState(JSON.stringify(DEFAULT_EX.exponents))
+  const [baseInput, setBaseInput] = useState(String(AUTHORED_INITIAL.base))
+  const [exponentsInput, setExponentsInput] = useState(JSON.stringify(AUTHORED_INITIAL.exponents))
 
   const { base, exponents, inputError } = useMemo(() => {
     try {

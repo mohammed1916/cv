@@ -201,7 +201,7 @@ function KthSmallestMatrixVisualizer() {
         return generateSteps(matrix, k)
     }, [matrix, k, error])
 
-    const { currentStep, isPlaying, setIsPlaying, setCurrentStep } =
+    const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, togglePlay, handleReset, speed, setSpeed, isDone } =
         usePlaybackState(steps.length)
     const { lineConnections } = useCodeVisualConnectivity(
         currentStep < steps.length ? steps[currentStep]?.activeLine : -1
@@ -286,7 +286,7 @@ function KthSmallestMatrixVisualizer() {
                                         dy="0.3em"
                                         fontSize="14"
                                         fontWeight="700"
-                                        fill={isCountedCell || isResult ? 'var(--code-bg)' : 'var(--code-text)'}
+                                        fill={isCountedCell || isResult || isHighlighted ? 'var(--text-on-light)' : 'var(--code-text)'}
                                     >
                                         {val}
                                     </text>
@@ -390,18 +390,20 @@ function KthSmallestMatrixVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
+            <CodeTracePanel step={currentStepData} code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
-                currentStep={currentStep}
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            isDone={isDone}
+                activeStep={currentStep}
                 totalSteps={steps.length}
                 isPlaying={isPlaying}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onStepForward={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-                onStepBackward={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-                onReset={() => setCurrentStep(0)}
+                onPlayToggle={togglePlay}
+                onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
+                onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
+                onReset={handleReset}
                 showPatternOverlay={showPatternOverlay}
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"

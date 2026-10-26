@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/delete-operation.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './DeleteOperationVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -212,30 +215,6 @@ function DPTableDisplay({ dpTable, s1, s2, currentI, currentJ }) {
 function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* String comparison */}
       {s1 && s2 && (
@@ -322,9 +301,9 @@ function VisualizationPanel({ step, s1, s2, applyExample, examples, inputError }
 }
 
 export default function DeleteOperationVisualizer() {
-  const examples = useMemo(() => getExamplesOr('delete-operation', []), [])
-  const [s1Input, setS1Input] = useState('"sea"')
-  const [s2Input, setS2Input] = useState('"eat"')
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
+  const [s1Input, setS1Input] = useState(`"${AUTHORED_INITIAL.s1 || AUTHORED_INITIAL[0]}"`)
+  const [s2Input, setS2Input] = useState(`"${AUTHORED_INITIAL.s2 || AUTHORED_INITIAL[1]}"`)
 
   const { s1, s2, inputError } = useMemo(() => {
     try {
@@ -393,65 +372,14 @@ export default function DeleteOperationVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>String 1</div>
-              <textarea
-                value={s1Input}
-                onChange={(e) => {
-                  setS1Input(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 50,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-                placeholder='"sea"'
-              />
-            </div>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>String 2</div>
-              <textarea
-                value={s2Input}
-                onChange={(e) => {
-                  setS2Input(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 50,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-                placeholder='"eat"'
-              />
-            </div>
-            {inputError && (
-              <div style={{ color: '#ea0c0c', fontSize: 11 }}>{inputError}</div>
-            )}
-            <VisualizationPanel
+    viz: (<VisualizationPanel
               step={step}
               s1={s1}
               s2={s2}
               applyExample={applyExample}
               examples={examples}
               inputError={inputError}
-            />
-          </div>),
+            />),
   }), [step, connectivity, setActiveLineDom, s1Input, s2Input, s1, s2, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
@@ -477,7 +405,6 @@ export default function DeleteOperationVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -495,6 +422,7 @@ export default function DeleteOperationVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

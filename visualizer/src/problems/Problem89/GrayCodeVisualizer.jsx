@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/gray-code.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './GrayCodeVisualizer.css'
@@ -92,10 +95,10 @@ function generateSteps(n) {
     return steps
 }
 
-const EXAMPLES = getExamples('gray-code')
+const EXAMPLES = authoredExamples0
 
 export default function GrayCodeVisualizer() {
-    const [nInput, setNInput] = useState('3')
+    const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { n, inputError } = useMemo(() => {
@@ -131,7 +134,7 @@ export default function GrayCodeVisualizer() {
                 {EXAMPLES && EXAMPLES.length > 0 && EXAMPLES.map(ex => <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
                     {ex.label}
                 </button>)}
-                <label style={{ marginLeft: 'auto', display: 'flex', gap: 6, alignItems: 'center', fontSize: 12 }}>n = <input type="number" min="0" max="8" value={nInput} onChange={e => { setNInput(e.target.value); handleReset() }} style={{ width: 50, padding: '4px 8px', borderRadius: 4, border: '1px solid var(--border)' }} /></label>
+                
             </div>
             {inputError && <div style={{ color: '#991b1b', fontSize: 11 }}>{inputError}</div>}
 
@@ -164,7 +167,7 @@ export default function GrayCodeVisualizer() {
                 </div>
             )}
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Result Sequence</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Result Sequence</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', flex: 1, overflow: 'auto', alignItems: 'flex-start' }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.result ?? []).map((val, idx) => {
@@ -223,17 +226,17 @@ export default function GrayCodeVisualizer() {
     )
 
     const statusPanel = (
-        <div className="gc-status" style={{ padding: 8, fontSize: 12, color: 'var(--surface2)', backgroundColor: 'var(--surface)', borderTop: '1px solid var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <div className="gc-status" style={{ padding: 8, fontSize: 12, color: 'var(--text)', backgroundColor: 'var(--surface)', borderTop: '1px solid var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {step?.message || 'Ready'}
         </div>
     )
 
     const playbackPanel = (
       <>
+            <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
             {showPatternOverlay && (
                 <PatternLegend currentPhase={step?.phase} usedPatterns={GRAYCODE_PATTERNS} />
             )}
-            <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
         </>
     )
 
@@ -241,7 +244,7 @@ export default function GrayCodeVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Gray Code', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

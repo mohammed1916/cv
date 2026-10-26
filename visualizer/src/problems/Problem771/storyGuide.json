@@ -1,0 +1,27 @@
+{
+  "number": "771",
+  "title": "Jewels and Stones",
+  "goal": "Count stones whose case-sensitive type occurs in the jewel set.",
+  "strategy": "Build a membership set once and test every stone independently. Repeated stones each contribute, while letter case remains significant.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count stones whose case-sensitive type occurs in the jewel set.",
+    "inspect": "Build a membership set once and test every stone independently. Repeated stones each contribute, while letter case remains significant.",
+    "update": "Build a membership set once and test every stone independently. Repeated stones each contribute, while letter case remains significant.",
+    "done": "Count stones whose case-sensitive type occurs in the jewel set."
+  },
+  "edgeCases": [
+    "No jewel matches",
+    "Every stone matches",
+    "One jewel and stone"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

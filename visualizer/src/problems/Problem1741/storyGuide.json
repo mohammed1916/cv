@@ -1,0 +1,31 @@
+{
+  "number": "1741",
+  "title": "Find Total Time Spent by Each Employee",
+  "goal": "Sum employee visit durations separately for each day.",
+  "strategy": "Each interval contributes out_time minus in_time. Grouping by both employee and day prevents unrelated visits from merging.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum employee visit durations separately for each day.",
+    "inspect": "Each interval contributes out_time minus in_time. Grouping by both employee and day prevents unrelated visits from merging.",
+    "update": "Each interval contributes out_time minus in_time. Grouping by both employee and day prevents unrelated visits from merging.",
+    "done": "Sum employee visit durations separately for each day."
+  },
+  "edgeCases": [
+    "Adjacent visits share a boundary without overlap",
+    "One-minute visit",
+    "No visit records"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

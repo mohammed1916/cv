@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--410.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,10 +20,7 @@ const SOLUTION_CODE = getSolutionCode('split-array-largest-sum')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', nums: [1,2,3,4,5], m: 2, expected: 9 },
-  { label: 'Ex2', nums: [1,4,4], m: 3, expected: 4 },
-]
+const EXAMPLES = authoredExamples0
 
 function canSplit(nums, m, maxSum) {
   let count = 1
@@ -176,7 +175,7 @@ function SplitArrayVisualization({ nums, m, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Binary Search for Min Max Sum</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Binary Search for Min Max Sum</div>
 
       {/* Array visualization */}
       <div>
@@ -196,7 +195,7 @@ function SplitArrayVisualization({ nums, m, step }) {
                 paddingBottom: 4,
                 fontSize: 11,
                 fontWeight: 'bold',
-                color: 'var(--surface)',
+                color: 'var(--text-on-light)',
               }}
             >
               {num}
@@ -399,7 +398,7 @@ export default function Problem410Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -449,9 +448,6 @@ export default function Problem410Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -469,6 +465,9 @@ export default function Problem410Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

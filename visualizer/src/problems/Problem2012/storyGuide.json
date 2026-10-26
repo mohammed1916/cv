@@ -1,0 +1,31 @@
+{
+  "number": "2012",
+  "title": "Sum of Beauty in the Array",
+  "goal": "Sum each interior element beauty based on global or local ordering.",
+  "strategy": "Prefix maxima and suffix minima decide whether every left value is smaller and every right value larger. If that stronger condition fails, check only the two immediate neighbors for one point.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum each interior element beauty based on global or local ordering.",
+    "inspect": "Prefix maxima and suffix minima decide whether every left value is smaller and every right value larger. If that stronger condition fails, check only the two immediate neighbors for one point.",
+    "update": "Prefix maxima and suffix minima decide whether every left value is smaller and every right value larger. If that stronger condition fails, check only the two immediate neighbors for one point.",
+    "done": "Sum each interior element beauty based on global or local ordering."
+  },
+  "edgeCases": [
+    "Every interior value earns two",
+    "Equal neighbors prevent strict beauty",
+    "Only one interior position exists"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

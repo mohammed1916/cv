@@ -1,0 +1,31 @@
+{
+  "number": "2077",
+  "title": "Paths in Maze That Lead to Same Room",
+  "goal": "Count three-room cycles in an undirected maze.",
+  "strategy": "Orient each candidate triple by increasing room number. For every edge a<b, find common neighbors c>b, so each triangle is counted once rather than once per starting room or direction.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count three-room cycles in an undirected maze.",
+    "inspect": "Orient each candidate triple by increasing room number. For every edge a<b, find common neighbors c>b, so each triangle is counted once rather than once per starting room or direction.",
+    "update": "Orient each candidate triple by increasing room number. For every edge a<b, find common neighbors c>b, so each triangle is counted once rather than once per starting room or direction.",
+    "done": "Count three-room cycles in an undirected maze."
+  },
+  "edgeCases": [
+    "A four-room cycle is not a three-room cycle",
+    "A complete four-room graph has overlapping triples",
+    "Disconnected edges form no cycle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

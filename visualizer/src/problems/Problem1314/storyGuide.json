@@ -1,0 +1,31 @@
+{
+  "number": "1314",
+  "title": "Matrix Block Sum",
+  "goal": "Compute the sum of each cell neighborhood within row and column distance k.",
+  "strategy": "Clip neighborhood boundaries to the matrix, then apply four-corner inclusion-exclusion to a prefix table. Keep input and output separate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the sum of each cell neighborhood within row and column distance k.",
+    "inspect": "Clip neighborhood boundaries to the matrix, then apply four-corner inclusion-exclusion to a prefix table. Keep input and output separate.",
+    "update": "Clip neighborhood boundaries to the matrix, then apply four-corner inclusion-exclusion to a prefix table. Keep input and output separate.",
+    "done": "Compute the sum of each cell neighborhood within row and column distance k."
+  },
+  "edgeCases": [
+    "Zero radius copies each cell",
+    "Radius larger than matrix includes everything",
+    "Single cell"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

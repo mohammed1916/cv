@@ -1,0 +1,31 @@
+{
+  "number": "1433",
+  "title": "Check If a String Can Break Another String",
+  "goal": "Decide whether a permutation of one string can dominate the other character by character.",
+  "strategy": "Sorted alignment is sufficient to determine dominance. All comparisons must consistently favor one side, though equality is allowed.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether a permutation of one string can dominate the other character by character.",
+    "inspect": "Sorted alignment is sufficient to determine dominance. All comparisons must consistently favor one side, though equality is allowed.",
+    "update": "Sorted alignment is sufficient to determine dominance. All comparisons must consistently favor one side, though equality is allowed.",
+    "done": "Decide whether a permutation of one string can dominate the other character by character."
+  },
+  "edgeCases": [
+    "Crossing comparisons prevent either direction",
+    "Identical multisets break each other",
+    "One-character comparison"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

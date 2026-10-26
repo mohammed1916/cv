@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--95.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -45,12 +49,7 @@ const SOLUTION_CODE = [
 ]
 
 // n is capped at 4 for rendering sanity (n=4 already yields 14 trees).
-const EXAMPLES = [
-  { label: 'n = 3', n: 3 },
-  { label: 'n = 2', n: 2 },
-  { label: 'n = 1', n: 1 },
-  { label: 'n = 4', n: 4 },
-]
+const EXAMPLES = authoredExamples0
 
 // ─── Pure BST generation (real algorithm) ───────────────────────────────────
 function generate(start, end) {
@@ -291,7 +290,7 @@ function TreeCell({ tree, index, highlight }) {
                 dominantBaseline="central"
                 fontSize={12}
                 fontWeight={700}
-                fill="var(--surface)"
+                fill="var(--text-on-light)"
               >
                 {nd.val}
               </text>
@@ -404,7 +403,7 @@ function VisualizationPanel({ step }) {
 // ─── Default export ───────────────────────────────────────────────────────────
 export default function Problem95Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(3);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
@@ -487,9 +486,6 @@ export default function Problem95Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -507,6 +503,9 @@ export default function Problem95Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -515,7 +514,7 @@ export default function Problem95Visualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🌲 Unique BSTs II', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

@@ -1,0 +1,23 @@
+{
+  "number": "305",
+  "title": "Number of Islands II",
+  "goal": "Solve Number of Islands II: Track island count as cells are added dynamically.",
+  "strategy": "Track island count as cells are added dynamically.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Adding land twice at the same position does not create a new island; neighboring cells may already belong to one component."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use m, n, and in-bounds [row, col] positions."
+  ],
+  "source": [
+    "src/problems/Problem305/index.jsx",
+    "src/problems/Problem305/NumberofIslandsIIVisualizer.jsx"
+  ]
+}

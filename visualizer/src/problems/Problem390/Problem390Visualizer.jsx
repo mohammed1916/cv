@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--390.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -134,20 +136,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'n=8',
-    n: 8,
-  },
-  {
-    label: 'n=10',
-    n: 10,
-  },
-  {
-    label: 'n=5',
-    n: 5,
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem390Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -389,9 +378,6 @@ export default function Problem390Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -409,6 +395,9 @@ export default function Problem390Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

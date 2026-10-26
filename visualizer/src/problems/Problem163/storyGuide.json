@@ -1,0 +1,28 @@
+{
+  "number": "163",
+  "title": "Missing Ranges",
+  "goal": "Solve Missing Ranges: Find missing ranges in a list of numbers within a given range.",
+  "strategy": "Find missing ranges in a list of numbers within a given range.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num < lower",
+      "outcome": "continue"
+    },
+    {
+      "condition": "num > upper",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "lower must be a number",
+    "upper must be a number"
+  ],
+  "source": [
+    "src/problems/Problem163/index.jsx",
+    "src/problems/Problem163/MissingRangesVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1957",
+  "title": "Delete Characters to Make Fancy String",
+  "goal": "Delete the fewest characters so no three adjacent characters are equal.",
+  "strategy": "Only the last two kept characters matter. Discard the next character exactly when keeping it would complete a forbidden triple.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Delete the fewest characters so no three adjacent characters are equal.",
+    "inspect": "Only the last two kept characters matter. Discard the next character exactly when keeping it would complete a forbidden triple.",
+    "update": "Only the last two kept characters matter. Discard the next character exactly when keeping it would complete a forbidden triple.",
+    "done": "Delete the fewest characters so no three adjacent characters are equal."
+  },
+  "edgeCases": [
+    "Already valid paired runs",
+    "One long repeated run",
+    "One character needs no deletion"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

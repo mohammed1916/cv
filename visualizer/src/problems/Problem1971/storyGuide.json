@@ -1,0 +1,31 @@
+{
+  "number": "1971",
+  "title": "Find if Path Exists in Graph",
+  "goal": "Determine whether an undirected path connects source and destination.",
+  "strategy": "Traverse reachable vertices and mark them when queued. Repeated edges of a cycle cannot cause repeated exploration, and a vertex reaches itself without traversing an edge.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether an undirected path connects source and destination.",
+    "inspect": "Traverse reachable vertices and mark them when queued. Repeated edges of a cycle cannot cause repeated exploration, and a vertex reaches itself without traversing an edge.",
+    "update": "Traverse reachable vertices and mark them when queued. Repeated edges of a cycle cannot cause repeated exploration, and a vertex reaches itself without traversing an edge.",
+    "done": "Determine whether an undirected path connects source and destination."
+  },
+  "edgeCases": [
+    "Disconnected components",
+    "A vertex reaches itself without edges",
+    "Distinct isolated vertices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

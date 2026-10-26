@@ -1,0 +1,31 @@
+{
+  "number": "2487",
+  "title": "Remove Nodes From Linked List",
+  "goal": "Remove every linked-list node that has a strictly larger value somewhere to its right.",
+  "strategy": "Keep surviving nodes in nonincreasing order on a stack. A new larger node invalidates smaller tail candidates; reconnect the last surviving predecessor directly to the new node using original node identities.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove every linked-list node that has a strictly larger value somewhere to its right.",
+    "inspect": "Keep surviving nodes in nonincreasing order on a stack. A new larger node invalidates smaller tail candidates; reconnect the last surviving predecessor directly to the new node using original node identities.",
+    "update": "Keep surviving nodes in nonincreasing order on a stack. A new larger node invalidates smaller tail candidates; reconnect the last surviving predecessor directly to the new node using original node identities.",
+    "done": "Remove every linked-list node that has a strictly larger value somewhere to its right."
+  },
+  "edgeCases": [
+    "Equal values remain because removal needs a strictly larger value",
+    "A descending list keeps every original node",
+    "An increasing list retains only the last node"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

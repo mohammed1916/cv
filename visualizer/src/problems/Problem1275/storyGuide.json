@@ -1,0 +1,31 @@
+{
+  "number": "1275",
+  "title": "Find Winner on a Tic Tac Toe Game",
+  "goal": "Determine the result of an alternating tic-tac-toe move sequence.",
+  "strategy": "Only lines passing through the newest mark can become newly complete. Return the first winning player, otherwise distinguish a full board from an unfinished game.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine the result of an alternating tic-tac-toe move sequence.",
+    "inspect": "Only lines passing through the newest mark can become newly complete. Return the first winning player, otherwise distinguish a full board from an unfinished game.",
+    "update": "Only lines passing through the newest mark can become newly complete. Return the first winning player, otherwise distinguish a full board from an unfinished game.",
+    "done": "Determine the result of an alternating tic-tac-toe move sequence."
+  },
+  "edgeCases": [
+    "B completes a diagonal",
+    "Game still pending",
+    "A full board with no winner"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

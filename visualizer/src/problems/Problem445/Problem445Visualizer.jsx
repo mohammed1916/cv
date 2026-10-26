@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/add-two-numbers-ii.js';
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { createPortal } from 'react-dom'
@@ -51,11 +52,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('add-two-numbers-ii', [
-  { label: 'Example 1', list1: [7, 2, 4, 3], list2: [5, 6, 4], expected: [7, 8, 0, 7] },
-  { label: 'Example 2', list1: [2, 4, 3], list2: [5, 6, 4], expected: [7, 0, 8] },
-  { label: 'Example 3', list1: [9, 9, 9], list2: [9, 9, 9, 9], expected: [1, 0, 0, 0, 9] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize Stacks', lines: [1, 2] },
@@ -213,7 +210,7 @@ function snippetIdForPhase(phase) {
 function StackView({ stack, label, style = {} }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, ...style }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         {label}
       </header>
       <div style={{ display: 'flex', flexDirection: 'column-reverse', gap: 6, minHeight: 80, justifyContent: 'flex-end' }}>
@@ -250,7 +247,7 @@ function StackView({ stack, label, style = {} }) {
 function ResultList({ result }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Result: [{result.length} digits]
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 60, alignContent: 'flex-start' }}>
@@ -288,7 +285,7 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -313,45 +310,9 @@ function VisualizationPanel({ step, list1, list2, EXAMPLES, handleExampleClick, 
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            List 1 (comma-separated)
-          </label>
-          <input
-            value={list1Input}
-            onChange={(e) => { setList1Input(e.target.value); handleReset() }}
-            placeholder="e.g., 7,2,4,3"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            List 2 (comma-separated)
-          </label>
-          <input
-            value={list2Input}
-            onChange={(e) => { setList2Input(e.target.value); handleReset() }}
-            placeholder="e.g., 5,6,4"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
         <button
           onClick={handleReset}

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/288.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem288Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -37,7 +38,7 @@ function generateSteps(input) {
 }
 
 export default function Problem288Visualizer() {
-    const examples = useMemo(() => getExamplesOr('288', []), [])
+    const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
     const [currentExample, setCurrentExample] = useState(0)
   const [inputInput, setInputInput] = useState(JSON.stringify(examples[0]?.input ?? []));
   const { input, inputError } = useMemo(() => {
@@ -55,7 +56,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
       const steps = useMemo(() => generateSteps(input), [input])
     const step = steps[currentStep] || steps[0]
 
-    const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
+    const { isPlaying, canNext, canPrev, speed, setSpeed, togglePlay, handleReset, isDone } = usePlaybackState(steps, currentStep, setCurrentStep)
     const { pattern, togglePattern } = usePatternOverlay(false)
 
     const panelConfigs = useMemo(() => [
@@ -87,7 +88,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
                     </div>
                 </div>
 </>),
-      bottom: (<CodeTracePanel
+      bottom: (<CodeTracePanel step={step}
                     code={SOLUTION_CODE}
                     activeLine={step.activeLine}
                     onTogglePattern={togglePattern}
@@ -105,7 +106,10 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
               {panelDivs.bottom && createPortal(panelContents.bottom, panelDivs.bottom)}
             </>
           )}
-          {createPortal(<FloatingPanel title="Playback Controls"><PlaybackControls onReset={() => setCurrentStep(0)} onNext={() => setCurrentStep((current) => Math.min(steps.length - 1, current + 1))} onPrev={() => setCurrentStep((current) => Math.max(0, current - 1))} onPlayToggle={() => setIsPlaying(!isPlaying)} isPlaying={isPlaying} canNext={canNext} canPrev={canPrev} /></FloatingPanel>, document.body)}
+          {createPortal(<FloatingPanel title="Playback Controls"><PlaybackControls
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            isDone={isDone} onReset={handleReset} onNext={() => setCurrentStep((current) => Math.min(steps.length - 1, current + 1))} onPrev={() => setCurrentStep((current) => Math.max(0, current - 1))} onPlayToggle={togglePlay} isPlaying={isPlaying} canNext={canNext} canPrev={canPrev} /></FloatingPanel>, document.body)}
         </>
     )
 }

@@ -1,0 +1,34 @@
+{
+  "number": "367",
+  "title": "Valid Perfect Square",
+  "goal": "Solve Valid Perfect Square: Determine if a number is a perfect square without using built-in functions.",
+  "strategy": "Determine if a number is a perfect square without using built-in functions.",
+  "phases": [
+    "compute-mid",
+    "compute-square",
+    "done",
+    "edge-case",
+    "found",
+    "init",
+    "search-left",
+    "search-right",
+    "setup"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num == 1",
+      "outcome": "return True"
+    },
+    {
+      "condition": "square == num",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem367/index.jsx",
+    "src/problems/Problem367/Problem367Visualizer.jsx"
+  ]
+}

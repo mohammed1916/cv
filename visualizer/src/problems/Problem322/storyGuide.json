@@ -1,0 +1,28 @@
+{
+  "number": "322",
+  "title": "Coin Change",
+  "goal": "Solve Coin Change: Bottom-up DP where dp[i] = min coins to make amount i.",
+  "strategy": "Bottom-up DP where dp[i] = min coins to make amount i.",
+  "phases": [
+    "check_coin",
+    "done",
+    "init",
+    "outer",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An unreachable amount needs a failure sentinel rather than zero coins; coins may be reused."
+  ],
+  "checks": [],
+  "inputRules": [
+    "coins must be array of numbers",
+    "amount must be a non-negative integer",
+    "Max amount 50 for clarity",
+    "Max 8 coin types"
+  ],
+  "source": [
+    "src/problems/Problem322/index.jsx",
+    "src/problems/Problem322/CoinChangeVisualizer.jsx"
+  ]
+}

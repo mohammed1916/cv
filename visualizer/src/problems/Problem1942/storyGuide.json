@@ -1,0 +1,31 @@
+{
+  "number": "1942",
+  "title": "The Number of the Smallest Unoccupied Chair",
+  "goal": "Find the smallest available chair assigned to the target arrival.",
+  "strategy": "Process arrivals in time order. Release every chair whose owner leaves at or before the arrival, then choose the smallest free chair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest available chair assigned to the target arrival.",
+    "inspect": "Process arrivals in time order. Release every chair whose owner leaves at or before the arrival, then choose the smallest free chair.",
+    "update": "Process arrivals in time order. Release every chair whose owner leaves at or before the arrival, then choose the smallest free chair.",
+    "done": "Find the smallest available chair assigned to the target arrival."
+  },
+  "edgeCases": [
+    "Departure equals another arrival",
+    "Target is the first arrival despite its index",
+    "All earlier friends still occupy chairs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

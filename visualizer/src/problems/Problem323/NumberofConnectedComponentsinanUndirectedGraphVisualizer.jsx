@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/connected-components-undirected.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './NumberofConnectedComponentsinanUndirectedGraphVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { GraphFrontierLane } from '../../components/shared'
@@ -63,11 +64,7 @@ function generateSteps({ n, edges }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('connected-components-undirected', [
-  { label: 'Two components', n: 5, edges: [[0, 1], [1, 2], [3, 4]] },
-  { label: 'One component', n: 5, edges: [[0, 1], [1, 2], [2, 3], [3, 4]] },
-  { label: 'Isolated nodes', n: 4, edges: [[0, 1]] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -112,7 +109,7 @@ export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'graph', title: '🕸️ DFS graph', dockMode: 'split-right' },
     { id: 'frontier', title: 'DFS frontier', dockMode: 'split-bottom' },
   ], [])
@@ -140,9 +137,6 @@ export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -160,6 +154,9 @@ export default function NumberofConnectedComponentsinanUndirectedGraphVisualizer
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

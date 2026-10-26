@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/trapping-rain-water-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,14 +12,12 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem407Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
 
-const EXAMPLES = getExamplesOr('trapping-rain-water-ii', [
-  { label: 'Example', heightMap: [[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const PATTERNS = []
 
@@ -148,7 +149,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem407Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [heightMapInput, setHeightMapInput] = useState("[[1,4,3,1,3,2],[3,2,1,3,2,4],[2,3,3,2,3,1]]");
+  const [heightMapInput, setHeightMapInput] = useState(JSON.stringify(AUTHORED_INITIAL.heightMap));
   const { heightMap, inputError } = useMemo(() => {
     try {
       const parsedHeightMap = JSON.parse(heightMapInput); if (!Array.isArray(parsedHeightMap)) throw new Error('heightMap must be an array');
@@ -220,9 +221,6 @@ export default function Problem407Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -240,6 +238,9 @@ export default function Problem407Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

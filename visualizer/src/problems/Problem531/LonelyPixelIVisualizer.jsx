@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/lonely-pixel-i.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './LonelyPixelIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -29,7 +30,7 @@ const LINE_PATTERN_MAP = {
   16: 'done'
 }
 
-const EXAMPLES = getExamples('lonely-pixel-i')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK_PICTURE = [['W', 'W', 'B'], ['W', 'B', 'W'], ['B', 'W', 'W']]
 
@@ -160,7 +161,7 @@ function VisualizationPanel({ step }) {
 
       {/* Grid */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Picture</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Picture</div>
         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${step?.picture[0]?.length || 3}, 1fr)`, gap: 4 }}>
           {step?.picture?.map((row, r) =>
             row.map((cell, c) => {
@@ -196,7 +197,7 @@ function VisualizationPanel({ step }) {
       {/* Row and Column Counts */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>Row Counts</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>Row Counts</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {step?.rowCount?.map((count, idx) => (
               <div
@@ -217,7 +218,7 @@ function VisualizationPanel({ step }) {
           </div>
         </div>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 6 }}>Col Counts</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>Col Counts</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {step?.colCount?.map((count, idx) => (
               <div
@@ -405,9 +406,6 @@ export default function LonelyPixelIVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -425,6 +423,9 @@ export default function LonelyPixelIVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

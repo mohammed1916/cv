@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/heaters.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem475Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('heaters')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('heaters')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(houses, heaters) {
   const steps = []
@@ -88,7 +91,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -110,7 +113,7 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number Line</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Number Line</div>
         <svg width="100%" height="80" style={{ border: '1px solid var(--border)', borderRadius: 4 }}>
           <line x1="20" y1="40" x2="380" y2="40" stroke="var(--border)" strokeWidth="2" />
           {Math.min(...[...houses, ...heaters]) >= 0 && Math.max(...[...houses, ...heaters]) <= 50 && (
@@ -192,8 +195,8 @@ function VisualizationPanel({ houses, heaters, step, applyEx }) {
 
 export default function Problem475Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [housesInput, setHousesInput] = useState("[1,2,3]");
-  const [heatersInput, setHeatersInput] = useState("[2]");
+  const [housesInput, setHousesInput] = useState(JSON.stringify(AUTHORED_INITIAL.houses));
+  const [heatersInput, setHeatersInput] = useState(JSON.stringify(AUTHORED_INITIAL.heaters));
   const { houses, heaters, inputError } = useMemo(() => {
     try {
       const parsedHouses = JSON.parse(housesInput); if (!Array.isArray(parsedHouses)) throw new Error('houses must be an array');

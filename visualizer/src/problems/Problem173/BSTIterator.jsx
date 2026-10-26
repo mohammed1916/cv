@@ -207,18 +207,6 @@ const BSTIterator = () => {
       </div>
 
       <div className="bsti-controls">
-        <div className="bsti-control-group">
-          <label>BST Values (level-order, null for missing):</label>
-          <input
-            type="text"
-            value={customInput}
-            onChange={(e) => setCustomInput(e.target.value)}
-            placeholder="e.g., 7,3,15,null,null,9,20"
-          />
-          <button onClick={handleCustomSubmit} className="bsti-btn bsti-btn-primary">
-            Set Tree
-          </button>
-        </div>
 
         <div className="bsti-control-group">
           <button onClick={handleLoadExample} className="bsti-btn bsti-btn-secondary">

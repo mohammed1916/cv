@@ -1,0 +1,31 @@
+{
+  "number": "1306",
+  "title": "Jump Game III",
+  "goal": "Decide whether exact left or right jumps can reach a zero-valued index.",
+  "strategy": "Treat indices as graph vertices with at most two outgoing edges. A visited set prevents cycles while breadth-first traversal explores every reachable candidate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether exact left or right jumps can reach a zero-valued index.",
+    "inspect": "Treat indices as graph vertices with at most two outgoing edges. A visited set prevents cycles while breadth-first traversal explores every reachable candidate.",
+    "update": "Treat indices as graph vertices with at most two outgoing edges. A visited set prevents cycles while breadth-first traversal explores every reachable candidate.",
+    "done": "Decide whether exact left or right jumps can reach a zero-valued index."
+  },
+  "edgeCases": [
+    "Already at zero",
+    "Cycle has no reachable zero",
+    "Both jumps immediately leave the array"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

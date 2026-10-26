@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--65.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -223,12 +227,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Valid decimal', s: '3.14' },
-  { label: 'Sci notation', s: '2e10' },
-  { label: 'Invalid', s: '1a' },
-  { label: 'Sign+dot', s: '+.8' },
-]
+const EXAMPLES = authoredExamples0
 
 function FlagBadge({ label, value }) {
   return (
@@ -379,7 +378,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem65Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("3.14");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;
@@ -478,9 +477,6 @@ export default function Problem65Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -498,6 +494,9 @@ export default function Problem65Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -505,7 +504,7 @@ export default function Problem65Visualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Examples', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🔢 Valid Number', dockMode: 'split-bottom' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],

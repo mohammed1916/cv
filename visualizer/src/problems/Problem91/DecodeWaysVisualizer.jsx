@@ -1,11 +1,14 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/decode-ways.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DecodeWaysVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -120,10 +123,10 @@ function generateSteps(s) {
     return steps
 }
 
-const EXAMPLES = getExamples('decode-ways')
+const EXAMPLES = authoredExamples0
 
 export default function DecodeWaysVisualizer() {
-    const [sInput, setSInput] = useState('226')
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
     const { s, inputError } = useMemo(() => {
         const v = sInput.trim()
@@ -168,22 +171,6 @@ export default function DecodeWaysVisualizer() {
             <header className="dw-head"><span>Decode Ways · 1D DP</span></header>
             <div className="dw-body">
                 <div className="dw-top-row">
-                    <div className="dw-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="dw-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                        ))}
-                    </div>
-                    <div className="dw-input-group">
-                        {inputError && <span className="dw-error">{inputError}</span>}
-                        <input
-                            className="dw-input"
-                            value={sInput}
-                            onChange={(e) => { setSInput(e.target.value);
-
- handleReset() }}
-                            placeholder="226"
-                        />
-                    </div>
                 </div>
 
                 {/* String display */}
@@ -288,9 +275,6 @@ export default function DecodeWaysVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={DECODEWAYS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -302,6 +286,9 @@ export default function DecodeWaysVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={DECODEWAYS_PATTERNS} />
+            )}
         </>
     )
 
@@ -310,7 +297,7 @@ export default function DecodeWaysVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Decode Ways · 1D DP', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

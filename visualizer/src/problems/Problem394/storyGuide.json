@@ -1,0 +1,17 @@
+{
+  "number": "394",
+  "title": "Decode String",
+  "goal": "Solve Decode String: Decode a string encoded with nested brackets. Example: 2[abc]3[cd] -> abcabccdcdcd",
+  "strategy": "Decode a string encoded with nested brackets. Example: 2[abc]3[cd] -> abcabccdcdcd",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Nested repeats need separate count and prefix state; multi-digit counts are not individual repeat operations."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem394/index.jsx",
+    "src/problems/Problem394/Problem394Visualizer.jsx"
+  ]
+}

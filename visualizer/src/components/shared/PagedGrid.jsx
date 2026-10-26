@@ -27,7 +27,7 @@ export default function PagedGrid({ rows, columns, cellAt, label = 'Grid' }) {
       <div className="algorithm-grid__cells" style={{ gridTemplateColumns: `repeat(${colEnd - colStart}, minmax(76px, 1fr))` }}>
         {Array.from({ length: rowEnd - rowStart }, (_, r) => Array.from({ length: colEnd - colStart }, (_, c) => {
           const row = rowStart + r, column = colStart + c, cell = cellAt(row, column)
-          return <button key={`${row},${column}`} data-row={row} data-column={column} data-role={cell.role}
+          return <button key={`${row},${column}`} data-chat-selectable data-row={row} data-column={column} data-role={cell.role}
             aria-label={`Cell ${row}, ${column}: ${cell.value}; ${cell.label}`} aria-pressed={selection?.[0] === row && selection?.[1] === column}
             onClick={() => setSelected([row, column])} style={{ borderTopColor: cell.color || 'var(--border)' }}>
             <small>[{row}, {column}]</small><strong>{cell.value}</strong><span>{cell.label}</span>

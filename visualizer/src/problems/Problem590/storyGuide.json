@@ -1,0 +1,31 @@
+{
+  "number": "590",
+  "title": "N-ary Tree Postorder Traversal",
+  "goal": "Visit every child subtree before its parent in left-to-right order.",
+  "strategy": "A stack entry records whether its children have already been scheduled. First defer the parent beneath its reversed children; when the deferred parent returns to the top, all child subtrees are complete.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Visit every child subtree before its parent in left-to-right order.",
+    "inspect": "A stack entry records whether its children have already been scheduled. First defer the parent beneath its reversed children; when the deferred parent returns to the top, all child subtrees are complete.",
+    "update": "A stack entry records whether its children have already been scheduled. First defer the parent beneath its reversed children; when the deferred parent returns to the top, all child subtrees are complete.",
+    "done": "Visit every child subtree before its parent in left-to-right order."
+  },
+  "edgeCases": [
+    "An empty tree has no traversal values",
+    "Repeated values retain distinct node identities",
+    "A single long child chain exposes reversed traversal order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

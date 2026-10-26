@@ -1,0 +1,31 @@
+{
+  "number": "1688",
+  "title": "Count of Matches in Tournament",
+  "goal": "Count the matches needed to reduce a tournament to one winner.",
+  "strategy": "Each round pairs as many teams as possible; an odd leftover advances without playing. Track eliminated teams through successive rounds.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count the matches needed to reduce a tournament to one winner.",
+    "inspect": "Each round pairs as many teams as possible; an odd leftover advances without playing. Track eliminated teams through successive rounds.",
+    "update": "Each round pairs as many teams as possible; an odd leftover advances without playing. Track eliminated teams through successive rounds.",
+    "done": "Count the matches needed to reduce a tournament to one winner."
+  },
+  "edgeCases": [
+    "Already one winner",
+    "Two teams need one match",
+    "Power of two avoids byes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

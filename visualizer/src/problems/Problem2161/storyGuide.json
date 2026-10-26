@@ -1,0 +1,31 @@
+{
+  "number": "2161",
+  "title": "Partition Array According to Given Pivot",
+  "goal": "Partition values around a pivot while preserving order within each group.",
+  "strategy": "Append each value to the less equal or greater group as encountered. Concatenating these groups gives the required order while keeping each group stable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Partition values around a pivot while preserving order within each group.",
+    "inspect": "Append each value to the less equal or greater group as encountered. Concatenating these groups gives the required order while keeping each group stable.",
+    "update": "Append each value to the less equal or greater group as encountered. Concatenating these groups gives the required order while keeping each group stable.",
+    "done": "Partition values around a pivot while preserving order within each group."
+  },
+  "edgeCases": [
+    "All values equal the pivot",
+    "The pivot is absent but still separates two groups",
+    "Signed values retain stable order within their groups"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

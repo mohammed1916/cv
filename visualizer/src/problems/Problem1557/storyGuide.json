@@ -1,0 +1,31 @@
+{
+  "number": "1557",
+  "title": "Minimum Number of Vertices to Reach All Nodes",
+  "goal": "Find the smallest starting-vertex set reaching every vertex of a directed acyclic graph.",
+  "strategy": "A zero-indegree vertex cannot be reached from any other start and is mandatory. In a DAG, every other vertex descends from at least one such source.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest starting-vertex set reaching every vertex of a directed acyclic graph.",
+    "inspect": "A zero-indegree vertex cannot be reached from any other start and is mandatory. In a DAG, every other vertex descends from at least one such source.",
+    "update": "A zero-indegree vertex cannot be reached from any other start and is mandatory. In a DAG, every other vertex descends from at least one such source.",
+    "done": "Find the smallest starting-vertex set reaching every vertex of a directed acyclic graph."
+  },
+  "edgeCases": [
+    "All vertices isolated",
+    "One chain source",
+    "Single vertex"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

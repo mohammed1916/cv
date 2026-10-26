@@ -1,0 +1,25 @@
+{
+  "number": "370",
+  "title": "Range Addition",
+  "goal": "Solve Range Addition: Apply multiple range addition operations efficiently using difference array technique.",
+  "strategy": "Apply multiple range addition operations efficiently using difference array technique.",
+  "phases": [
+    "complete",
+    "init",
+    "prefix_sum",
+    "processing"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The end marker lies just after the inclusive update interval; omit it when that position is beyond the array."
+  ],
+  "checks": [],
+  "inputRules": [
+    "length must be an array",
+    "updates must be an array"
+  ],
+  "source": [
+    "src/problems/Problem370/index.jsx",
+    "src/problems/Problem370/Problem370Visualizer.jsx"
+  ]
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/unique-paths.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './UniquePathsVisualizer.css'
@@ -71,7 +74,7 @@ function generateSteps(m, n) {
     return steps
 }
 
-const EXAMPLES = getExamples('unique-paths')
+const EXAMPLES = authoredExamples0
 
 function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, setMInput, setNInput, handleReset }) {
     const dp = step?.dp ?? generateSteps(m, n)[0].dp
@@ -88,20 +91,7 @@ function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, 
                             <button key={ex.label} className="up-chip" onClick={() => onApplyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="up-inputs">
-                        <label className="up-input-label">
-                            m (rows):
-                            <input className="up-input-num" type="number" min={1} max={7} value={mInput}
-                                onChange={(e) => { setMInput(Number(e.target.value));
-
- handleReset() }} />
-                        </label>
-                        <label className="up-input-label">
-                            n (cols):
-                            <input className="up-input-num" type="number" min={1} max={8} value={nInput}
-                                onChange={(e) => { setNInput(Number(e.target.value)); handleReset() }} />
-                        </label>
-                    </div>
+                    
                 </div>
 
                 {/* Grid */}
@@ -176,8 +166,8 @@ function UniquePathsVisualization({ m, n, step, onApplyExample, mInput, nInput, 
 }
 
 export default function UniquePathsVisualizer() {
-    const [mInput, setMInput] = useState(3)
-    const [nInput, setNInput] = useState(7)
+    const [mInput, setMInput] = useState(AUTHORED_INITIAL.m)
+    const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
 
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -243,9 +233,6 @@ export default function UniquePathsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -258,6 +245,9 @@ export default function UniquePathsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={UNIQUEPATHS_PATTERNS} />
+            )}
         </>
     )
 
@@ -265,7 +255,7 @@ export default function UniquePathsVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Unique Paths · 2D DP', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

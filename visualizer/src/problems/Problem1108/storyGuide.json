@@ -1,0 +1,31 @@
+{
+  "number": "1108",
+  "title": "Defanging an IP Address",
+  "goal": "Display an IPv4 address with bracketed dots.",
+  "strategy": "Replace only separators and preserve every digit in order. Output positions expand when a dot becomes three characters.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Display an IPv4 address with bracketed dots.",
+    "inspect": "Replace only separators and preserve every digit in order. Output positions expand when a dot becomes three characters.",
+    "update": "Replace only separators and preserve every digit in order. Output positions expand when a dot becomes three characters.",
+    "done": "Display an IPv4 address with bracketed dots."
+  },
+  "edgeCases": [
+    "All zero octets",
+    "Maximum octets",
+    "Short octets"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

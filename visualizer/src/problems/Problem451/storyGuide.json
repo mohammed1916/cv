@@ -1,0 +1,24 @@
+{
+  "number": "451",
+  "title": "Sort Characters By Frequency",
+  "goal": "Solve Sort Characters By Frequency: Count each character and emit groups in descending frequency order.",
+  "strategy": "Count each character and emit groups in descending frequency order.",
+  "phases": [
+    "building",
+    "counted",
+    "counting",
+    "done",
+    "sorted",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal-frequency characters may have multiple valid relative orders; all occurrences must be retained."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem451/index.jsx",
+    "src/problems/Problem451/Problem451Visualizer.jsx"
+  ]
+}

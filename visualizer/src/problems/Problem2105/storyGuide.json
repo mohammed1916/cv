@@ -1,0 +1,31 @@
+{
+  "number": "2105",
+  "title": "Watering Plants II",
+  "goal": "Water plants from both ends with the fewest required refills.",
+  "strategy": "Each gardener waters the next plant from their own side, refilling only when necessary. If one middle plant remains, the gardener with more water handles it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Water plants from both ends with the fewest required refills.",
+    "inspect": "Each gardener waters the next plant from their own side, refilling only when necessary. If one middle plant remains, the gardener with more water handles it.",
+    "update": "Each gardener waters the next plant from their own side, refilling only when necessary. If one middle plant remains, the gardener with more water handles it.",
+    "done": "Water plants from both ends with the fewest required refills."
+  },
+  "edgeCases": [
+    "One middle plant uses the fuller initial can",
+    "Every plant exactly empties a can",
+    "An odd middle needs a final refill"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

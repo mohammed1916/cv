@@ -62,7 +62,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   padding: 8px 10px;
   width: 100%;
@@ -91,7 +91,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30,41,59,.75);
-  color: var(--surface);
+  color: var(--text-on-dark);
   font-family: monospace;
   display: grid;
   place-items: center;
@@ -125,7 +125,7 @@
   place-items: center;
   border: 1px solid var(--border);
   background: rgba(30,41,59,.8);
-  color: var(--surface);
+  color: var(--text-on-dark);
   font-family: monospace;
   font-size: 13px;
 }

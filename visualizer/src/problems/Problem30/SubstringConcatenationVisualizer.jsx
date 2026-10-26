@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/substring-concatenation.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -8,7 +11,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./SubstringConcatenationVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -44,7 +47,7 @@ const SOLUTION_CODE = [
     { line: 14, text: "    return result" },
 ];
 
-const EXAMPLES = getExamples('substring-concatenation');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(s, words) {
     const wlen = words[0].length;
@@ -182,8 +185,8 @@ function VisualizationPanel({ wlen, window, wordStart, wordEnd, seen, result, ph
 
 export default function SubstringConcatenationVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-    const [sInput, setSInput] = useState("barfoothefoobarman");
-    const [wordsInput, setWordsInput] = useState("[\"foo\",\"bar\"]");
+    const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
+    const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words));
     const { s, words, inputError } = useMemo(() => {
         try {
             const parsedS = sInput;
@@ -245,9 +248,6 @@ export default function SubstringConcatenationVisualizer() {
             )}
             {createPortal(
                 <FloatingPanel title="Playback Controls">
-                    {showPatternOverlay && (
-                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-                    )}
                     <PlaybackControls
                         isPlaying={isPlaying} isDone={isDone} speed={speed}
                         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -258,6 +258,9 @@ export default function SubstringConcatenationVisualizer() {
                         patternOverlayLabel="Show pattern overlay"
                         showPatternOverlayToggle
                     />
+                    {showPatternOverlay && (
+                        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+                    )}
                 </FloatingPanel>,
                 document.body
             )}

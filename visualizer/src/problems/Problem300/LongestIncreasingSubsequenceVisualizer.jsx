@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/longest-increasing-subsequence.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestIncreasingSubsequenceVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -89,10 +92,10 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('longest-increasing-subsequence')
+const EXAMPLES = authoredExamples0
 
 export default function LongestIncreasingSubsequenceVisualizer() {
-    const [numsInput, setNumsInput] = useState('[10,9,2,5,3,7,101,18]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -130,19 +133,6 @@ export default function LongestIncreasingSubsequenceVisualizer() {
     const VisualizationContent = () => (
         <div className="lis-body">
             <div className="lis-top-row">
-                <div className="lis-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="lis-chip" onClick={() => applyExample(ex)}>
-                            {ex.label}
-                        </button>
-                    ))}
-                </div>
-                <input
-                    className="lis-input"
-                    value={numsInput}
-                    onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                    placeholder="[10,9,2,5,3,7,101,18]"
-                />
             </div>
 
             {/* Array + dp rows */}

@@ -1,0 +1,31 @@
+{
+  "number": "2054",
+  "title": "Two Best Non-Overlapping Events",
+  "goal": "Maximize the total value of at most two nonoverlapping events.",
+  "strategy": "Sort by start time and prepare suffix maximum values. For each first event, binary-search the first start strictly after its inclusive end, then combine with the best eligible suffix event.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the total value of at most two nonoverlapping events.",
+    "inspect": "Sort by start time and prepare suffix maximum values. For each first event, binary-search the first start strictly after its inclusive end, then combine with the best eligible suffix event.",
+    "update": "Sort by start time and prepare suffix maximum values. For each first event, binary-search the first start strictly after its inclusive end, then combine with the best eligible suffix event.",
+    "done": "Maximize the total value of at most two nonoverlapping events."
+  },
+  "edgeCases": [
+    "Touching inclusive endpoints still overlap",
+    "The best answer may use only one event",
+    "One event is allowed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

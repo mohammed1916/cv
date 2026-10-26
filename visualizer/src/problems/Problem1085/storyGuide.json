@@ -1,0 +1,27 @@
+{
+  "number": "1085",
+  "title": "Sum of Digits in the Minimum Number",
+  "goal": "Return one when the digit sum of the smallest number is even, otherwise zero.",
+  "strategy": "Find the minimum before examining digits; summing digits of every array value answers a different question.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return one when the digit sum of the smallest number is even, otherwise zero.",
+    "inspect": "Find the minimum before examining digits; summing digits of every array value answers a different question.",
+    "update": "Find the minimum before examining digits; summing digits of every array value answers a different question.",
+    "done": "Return one when the digit sum of the smallest number is even, otherwise zero."
+  },
+  "edgeCases": [
+    "Even digit sum",
+    "Odd digit sum",
+    "One number"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

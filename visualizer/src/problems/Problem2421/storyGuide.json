@@ -1,0 +1,31 @@
+{
+  "number": "2421",
+  "title": "Number of Good Paths",
+  "goal": "Count tree paths with equal endpoint values and no larger value between them.",
+  "strategy": "Activate connectivity in increasing value order. After processing one value, nodes of that value sharing a component can be paired; a group of k contributes k singleton paths and k choose two endpoint pairs.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count tree paths with equal endpoint values and no larger value between them.",
+    "inspect": "Activate connectivity in increasing value order. After processing one value, nodes of that value sharing a component can be paired; a group of k contributes k singleton paths and k choose two endpoint pairs.",
+    "update": "Activate connectivity in increasing value order. After processing one value, nodes of that value sharing a component can be paired; a group of k contributes k singleton paths and k choose two endpoint pairs.",
+    "done": "Count tree paths with equal endpoint values and no larger value between them."
+  },
+  "edgeCases": [
+    "All equal values make every endpoint pair good",
+    "Distinct values leave only singleton good paths",
+    "One node contributes one path"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

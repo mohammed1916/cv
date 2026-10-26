@@ -1,0 +1,31 @@
+{
+  "number": "992",
+  "title": "Subarrays with K Different Integers",
+  "goal": "Count subarrays containing exactly k distinct values.",
+  "strategy": "Count windows with at most k distinct values, then subtract windows with at most k-1. Each at-most pass shrinks a frequency window only when its distinct count exceeds the limit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays containing exactly k distinct values.",
+    "inspect": "Count windows with at most k distinct values, then subtract windows with at most k-1. Each at-most pass shrinks a frequency window only when its distinct count exceeds the limit.",
+    "update": "Count windows with at most k distinct values, then subtract windows with at most k-1. Each at-most pass shrinks a frequency window only when its distinct count exceeds the limit.",
+    "done": "Count subarrays containing exactly k distinct values."
+  },
+  "edgeCases": [
+    "Exactly one distinct value counts repeated-value runs",
+    "Too many requested distinct values gives zero",
+    "A singleton can satisfy k one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

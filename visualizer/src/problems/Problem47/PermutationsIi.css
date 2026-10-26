@@ -54,7 +54,7 @@
 
 .permutations-ii-example-btn:hover {
   background: var(--border);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .permutations-ii-input {
@@ -62,7 +62,7 @@
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   font-size: 14px;
 }

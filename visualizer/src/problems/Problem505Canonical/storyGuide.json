@@ -1,0 +1,31 @@
+{
+  "number": "505",
+  "title": "The Maze II",
+  "goal": "Find the shortest rolling distance that stops exactly at the destination.",
+  "strategy": "The ball cannot brake in a corridor. Each wall-to-wall roll is one weighted edge; Dijkstra settles stopping positions in increasing total distance. Passing over the target does not finish the journey.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest rolling distance that stops exactly at the destination.",
+    "inspect": "The ball cannot brake in a corridor. Each wall-to-wall roll is one weighted edge; Dijkstra settles stopping positions in increasing total distance. Passing over the target does not finish the journey.",
+    "update": "The ball cannot brake in a corridor. Each wall-to-wall roll is one weighted edge; Dijkstra settles stopping positions in increasing total distance. Passing over the target does not finish the journey.",
+    "done": "Find the shortest rolling distance that stops exactly at the destination."
+  },
+  "edgeCases": [
+    "The ball passes the target but cannot stop there",
+    "Separated chambers have no route",
+    "A single corridor counts every traversed cell"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

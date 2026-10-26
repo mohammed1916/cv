@@ -1,0 +1,22 @@
+{
+  "number": "498",
+  "title": "Diagonal Traverse",
+  "goal": "Solve Diagonal Traverse: Traverse matrix diagonally returning 1D array.",
+  "strategy": "Traverse matrix diagonally returning 1D array.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not matrix",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [
+    "mat must be an array"
+  ],
+  "source": [
+    "src/problems/Problem498/index.jsx",
+    "src/problems/Problem498/Problem498Visualizer.jsx"
+  ]
+}

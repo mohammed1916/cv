@@ -1,0 +1,17 @@
+{
+  "number": "505",
+  "title": "Distribute Candies to People",
+  "goal": "Solve Distribute Candies to People: Distribute candies in increasing amounts to people in a circular manner.",
+  "strategy": "Distribute candies in increasing amounts to people in a circular manner.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The final recipient may receive fewer candies than the next scheduled gift; the recipient index wraps after the last person."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem505/index.jsx",
+    "src/problems/Problem505/DistributeCandiesPeopleVisualizer.jsx"
+  ]
+}

@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/number-of1-bits.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
@@ -9,7 +12,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./NumberOf1BitsVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -27,7 +30,7 @@ const SOLUTION_CODE = [
   { line: 6, text: "    return count" },
 ];
 
-const EXAMPLES = getExamples('number-of1-bits');
+const EXAMPLES = authoredExamples0;
 
 function toBin32(n) {
   return (n >>> 0).toString(2).padStart(32, "0");
@@ -52,7 +55,7 @@ function generateSteps(nIn) {
 
 export default function NumberOf1BitsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(11);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const [descInput, setDescInput] = useState("11 (0b1011)");
   const { n, desc, inputError } = useMemo(() => {
     try {
@@ -99,7 +102,7 @@ export default function NumberOf1BitsVisualizer() {
       />
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map(e => (
                 <button

@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--367.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -204,13 +208,7 @@ function generateSteps(num) {
     return steps
 }
 
-const EXAMPLES = [
-    { label: 'Perfect Square (16)', value: 16 },
-    { label: 'Not Square (17)', value: 17 },
-    { label: 'Edge Case (1)', value: 1 },
-    { label: 'Large Perfect (10000)', value: 10000 },
-    { label: 'Not Perfect (99)', value: 99 },
-]
+const EXAMPLES = authoredExamples0
 
 function SearchVisualizationPanel({ step, numInput, setNumInput, applyExample, handleReset }) {
     const numVal = Math.max(1, Math.floor(Number(numInput) || 1))
@@ -232,21 +230,7 @@ function SearchVisualizationPanel({ step, numInput, setNumInput, applyExample, h
                 ))}
             </div>
 
-            <div className="p367-input-row">
-                <label>Find perfect square:</label>
-                <input
-                    className="p367-input"
-                    type="number"
-                    value={numInput}
-                    onChange={(e) => {
-                        setNumInput(e.target.value)
-                        handleReset()
-                    }}
-                    placeholder="Enter number (1-10000)"
-                    min="1"
-                    max="10000"
-                />
-            </div>
+            
 
             {/* Number Line Visualization */}
             <div className="p367-canvas">
@@ -486,7 +470,7 @@ function ResultPanel({ step }) {
 }
 
 export default function Problem367Visualizer() {
-    const [numInput, setNumInput] = useState('16')
+    const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.value))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -498,7 +482,7 @@ export default function Problem367Visualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'viz', title: 'Search Visualization' },
       { id: 'result', title: 'Result Panel', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       viz: (<SearchVisualizationPanel

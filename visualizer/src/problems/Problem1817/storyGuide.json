@@ -1,0 +1,31 @@
+{
+  "number": "1817",
+  "title": "Finding the Users Active Minutes",
+  "goal": "Count users by their number of distinct active minutes.",
+  "strategy": "Build a set of minutes per user so repeated logs in one minute do not inflate activity. Then count users in the matching minute-count bucket.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count users by their number of distinct active minutes.",
+    "inspect": "Build a set of minutes per user so repeated logs in one minute do not inflate activity. Then count users in the matching minute-count bucket.",
+    "update": "Build a set of minutes per user so repeated logs in one minute do not inflate activity. Then count users in the matching minute-count bucket.",
+    "done": "Count users by their number of distinct active minutes."
+  },
+  "edgeCases": [
+    "One user repeats one minute",
+    "Every user active once",
+    "One user fills the last bucket"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

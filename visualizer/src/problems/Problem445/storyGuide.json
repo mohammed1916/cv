@@ -1,0 +1,25 @@
+{
+  "number": "445",
+  "title": "Add Two Numbers II",
+  "goal": "Solve Add Two Numbers II: Read forward-order digit lists into stacks, add from the least significant ends, and prepend result digits.",
+  "strategy": "Read forward-order digit lists into stacks, add from the least significant ends, and prepend result digits.",
+  "phases": [
+    "digit_created",
+    "done",
+    "popped1",
+    "popped2",
+    "processing",
+    "stacks_loaded",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Unequal lengths and a final carry must both be handled without reversing digit significance."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem445/index.jsx",
+    "src/problems/Problem445/Problem445Visualizer.jsx"
+  ]
+}

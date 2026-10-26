@@ -1,11 +1,14 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/encode-decode-strings.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./EncodeDecodeVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -109,10 +112,10 @@ function generateSteps(strs) {
     return steps;
 }
 
-const EXAMPLES = getExamples('encode-decode-strings');
+const EXAMPLES = authoredExamples0;
 
 export default function EncodeDecodeVisualizer() {
-    const [strsInput, setStrsInput] = useState('["lint","code","love","you"]');
+    const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs));
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const { strs, inputErr } = useMemo(() => {

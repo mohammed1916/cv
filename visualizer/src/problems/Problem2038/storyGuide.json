@@ -1,0 +1,31 @@
+{
+  "number": "2038",
+  "title": "Remove Colored Pieces if Both Neighbors are the Same Color",
+  "goal": "Determine whether Alice wins when only removable same-color interior pieces may be deleted.",
+  "strategy": "A run of length L supplies max(0,L-2) legal removals to its owner. Removing interior pieces never removes the run endpoints, so the players move budgets are independent.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether Alice wins when only removable same-color interior pieces may be deleted.",
+    "inspect": "A run of length L supplies max(0,L-2) legal removals to its owner. Removing interior pieces never removes the run endpoints, so the players move budgets are independent.",
+    "update": "A run of length L supplies max(0,L-2) legal removals to its owner. Removing interior pieces never removes the run endpoints, so the players move budgets are independent.",
+    "done": "Determine whether Alice wins when only removable same-color interior pieces may be deleted."
+  },
+  "edgeCases": [
+    "Equal move counts make Alice run out first",
+    "Alternation offers no legal removal",
+    "One piece has no neighbors"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

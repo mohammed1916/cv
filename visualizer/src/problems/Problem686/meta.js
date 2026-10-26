@@ -1,5 +1,12 @@
 export const meta = {
-  number: '686', title: 'Repeated String Match', slug: 'repeated-string-match', difficulty: 'Medium',
-  tags: ['String', 'String Matching'], accent: '#0f766e',
-  description: 'Repeat a until b could fit, then one more copy catches a match that wraps around the seam.',
-}
+  "number": "686",
+  "title": "Repeated String Match",
+  "slug": "repeated-string-match",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "String"
+  ],
+  "accent": "#0891b2",
+  "description": "Find the fewest repeats of a that contain b as a contiguous substring."
+};

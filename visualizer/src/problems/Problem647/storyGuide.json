@@ -1,0 +1,24 @@
+{
+  "number": "647",
+  "title": "Palindromic Substrings",
+  "goal": "Solve Palindromic Substrings: Expand from each center (odd/even) and count all palindromes; O(n²) time.",
+  "strategy": "Expand from each center (odd/even) and count all palindromes; O(n²) time.",
+  "phases": [
+    "init",
+    "center-odd",
+    "expand-odd",
+    "center-even",
+    "expand-even",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Count occurrences, not distinct text values; every character is a palindrome, and even palindromes need between-character centers."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem647/index.jsx",
+    "src/problems/Problem647/PalindromicSubstringsVisualizer.jsx"
+  ]
+}

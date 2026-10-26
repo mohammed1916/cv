@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/delete-node-in-a-bst.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -50,11 +53,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('delete-node-in-a-bst', [
-  { label: 'Example 1', tree: [5, 3, 6, 2, 4, null, 7], key: 3, expected: [5, 4, 6, 2, null, null, 7] },
-  { label: 'Example 2', tree: [5, 3, 6], key: 0, expected: [5, 3, 6] },
-  { label: 'Example 3', tree: [5], key: 5, expected: [] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'base', label: 'Base Cases', lines: [2] },
@@ -200,7 +199,7 @@ function snippetIdForPhase(phase) {
 function TreeDisplay({ treeValues, currentVal, key }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Tree Structure ({treeValues.filter(v => v !== null && v !== undefined).length} nodes)
       </header>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 80, alignContent: 'flex-start' }}>
@@ -240,7 +239,7 @@ function TreeDisplay({ treeValues, currentVal, key }) {
 function SearchStatus({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
         Search Status
       </header>
       <div style={{
@@ -274,7 +273,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -298,47 +297,7 @@ function VisualizationPanel({ step, treeValues, EXAMPLES, handleExampleClick, tr
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            Tree (comma-separated)
-          </label>
-          <input
-            value={treeInput}
-            onChange={(e) => { setTreeInput(e.target.value); handleReset() }}
-            placeholder="e.g., 5,3,6,2,4,null,7"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            Key to Delete
-          </label>
-          <input
-            value={keyInput}
-            onChange={(e) => { setKeyInput(e.target.value); handleReset() }}
-            placeholder="e.g., 3"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
-      </div>
+      
 
       <button
         onClick={handleReset}
@@ -381,7 +340,7 @@ const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem450Visualizer() {
   const [treeInput, setTreeInput] = useState('5,3,6,2,4,null,7')
-  const [keyInput, setKeyInput] = useState('3')
+  const [keyInput, setKeyInput] = useState(String(AUTHORED_INITIAL.key))
 
   const { treeValues, key } = useMemo(() => {
     const parseTree = (str) => {

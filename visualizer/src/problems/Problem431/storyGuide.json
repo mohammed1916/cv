@@ -1,0 +1,22 @@
+{
+  "number": "431",
+  "title": "Encode N-ary Tree to Binary Tree",
+  "goal": "Solve Encode N-ary Tree to Binary Tree: Represent the first N-ary child as a binary left child and later siblings through binary right links.",
+  "strategy": "Represent the first N-ary child as a binary left child and later siblings through binary right links.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Right links encode siblings rather than ordinary right subtrees; child order must survive decoding."
+  ],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return None"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem431/index.jsx",
+    "src/problems/Problem431/Problem431Visualizer.jsx"
+  ]
+}

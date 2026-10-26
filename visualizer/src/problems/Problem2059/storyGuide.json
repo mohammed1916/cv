@@ -1,0 +1,31 @@
+{
+  "number": "2059",
+  "title": "Minimum Operations to Convert Number",
+  "goal": "Reach goal using additions, subtractions, and XOR with the fewest operations.",
+  "strategy": "BFS explores reachable values between zero and one thousand. A generated goal counts immediately even outside that interval, but an out-of-range value cannot become an intermediate state.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach goal using additions, subtractions, and XOR with the fewest operations.",
+    "inspect": "BFS explores reachable values between zero and one thousand. A generated goal counts immediately even outside that interval, but an out-of-range value cannot become an intermediate state.",
+    "update": "BFS explores reachable values between zero and one thousand. A generated goal counts immediately even outside that interval, but an out-of-range value cannot become an intermediate state.",
+    "done": "Reach goal using additions, subtractions, and XOR with the fewest operations."
+  },
+  "edgeCases": [
+    "An out-of-range final goal may be reached directly",
+    "Even operations cannot reach an odd goal from an even start",
+    "The start already equals the goal"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

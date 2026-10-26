@@ -14,7 +14,7 @@
 .ws-examples { display: flex; gap: 6px; flex-wrap: wrap; }
 .ws-chip { border: 1px solid var(--border); border-radius: 999px; background: rgba(30,41,59,.8); color: var(--border); padding: 4px 10px; cursor: pointer; }
 .ws-inputs { display: flex; gap: 8px; }
-.ws-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--surface); font-family: monospace; padding: 8px 10px; width: 100%; }
+.ws-input { border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); color: var(--text); font-family: monospace; padding: 8px 10px; width: 100%; }
 .ws-input.small { max-width: 130px; }
 .ws-grid { display: grid; gap: 6px; }
 .ws-cell { border: 1px solid var(--border); border-radius: 8px; min-height: 50px; position: relative; display: grid; place-items: center; background: rgba(30,41,59,.75); }

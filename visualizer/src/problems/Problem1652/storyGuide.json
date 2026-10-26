@@ -1,0 +1,31 @@
+{
+  "number": "1652",
+  "title": "Defuse the Bomb",
+  "goal": "Replace each circular-array value with the sum of its requested neighboring values.",
+  "strategy": "Read only from the unchanged input. Positive k sums next entries, negative k previous entries, and zero gives zero at every position.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace each circular-array value with the sum of its requested neighboring values.",
+    "inspect": "Read only from the unchanged input. Positive k sums next entries, negative k previous entries, and zero gives zero at every position.",
+    "update": "Read only from the unchanged input. Positive k sums next entries, negative k previous entries, and zero gives zero at every position.",
+    "done": "Replace each circular-array value with the sum of its requested neighboring values."
+  },
+  "edgeCases": [
+    "Backward neighbors wrap around the beginning",
+    "Zero asks for no neighbors",
+    "Every other position contributes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

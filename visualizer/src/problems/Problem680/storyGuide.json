@@ -1,0 +1,27 @@
+{
+  "number": "680",
+  "title": "Valid Palindrome II",
+  "goal": "Decide whether deleting at most one character can produce a palindrome.",
+  "strategy": "Matching endpoints can stay. At the first mismatch, only deleting the left or right endpoint can repair that pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether deleting at most one character can produce a palindrome.",
+    "inspect": "Matching endpoints can stay. At the first mismatch, only deleting the left or right endpoint can repair that pair.",
+    "update": "Matching endpoints can stay. At the first mismatch, only deleting the left or right endpoint can repair that pair.",
+    "done": "Decide whether deleting at most one character can produce a palindrome."
+  },
+  "edgeCases": [
+    "Already symmetric",
+    "Remove an endpoint",
+    "Two deletions would be needed"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "number": "27",
+  "title": "Remove Element",
+  "goal": "Solve Remove Element: Remove all instances of a target value in-place.",
+  "strategy": "Remove all instances of a target value in-place.",
+  "phases": [
+    "init",
+    "check",
+    "keep",
+    "place",
+    "increment",
+    "skip",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only the returned prefix length is meaningful after compaction; overwritten or leftover values beyond that prefix are not part of the result."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem27/index.jsx",
+    "src/problems/Problem27/RemoveElementVisualizer.jsx"
+  ]
+}

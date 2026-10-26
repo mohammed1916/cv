@@ -1,0 +1,31 @@
+{
+  "number": "1487",
+  "title": "Making File Names Unique",
+  "goal": "Assign distinct names using the smallest available numeric suffix when needed.",
+  "strategy": "Track all assigned names and the next suffix to try for each base. Existing names containing parentheses can occupy candidates too, so check full-name availability.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign distinct names using the smallest available numeric suffix when needed.",
+    "inspect": "Track all assigned names and the next suffix to try for each base. Existing names containing parentheses can occupy candidates too, so check full-name availability.",
+    "update": "Track all assigned names and the next suffix to try for each base. Existing names containing parentheses can occupy candidates too, so check full-name availability.",
+    "done": "Assign distinct names using the smallest available numeric suffix when needed."
+  },
+  "edgeCases": [
+    "All distinct",
+    "Repeated suffixed base",
+    "One name"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

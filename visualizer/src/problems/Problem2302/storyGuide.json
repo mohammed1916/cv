@@ -1,0 +1,31 @@
+{
+  "number": "2302",
+  "title": "Count Subarrays With Score Less Than K",
+  "goal": "Count subarrays whose sum multiplied by length is strictly below k.",
+  "strategy": "All values are positive, so extending a window cannot reduce its score. Shrink from the left until the score is below k; every suffix of that valid window also qualifies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose sum multiplied by length is strictly below k.",
+    "inspect": "All values are positive, so extending a window cannot reduce its score. Shrink from the left until the score is below k; every suffix of that valid window also qualifies.",
+    "update": "All values are positive, so extending a window cannot reduce its score. Shrink from the left until the score is below k; every suffix of that valid window also qualifies.",
+    "done": "Count subarrays whose sum multiplied by length is strictly below k."
+  },
+  "edgeCases": [
+    "Equality with the threshold is excluded",
+    "A low threshold can reject every singleton",
+    "A large threshold admits every subarray"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

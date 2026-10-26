@@ -1,0 +1,31 @@
+{
+  "number": "2090",
+  "title": "K Radius Subarray Averages",
+  "goal": "Compute integer averages for all complete radius-k neighborhoods.",
+  "strategy": "Maintain a window of 2*k+1 values. Only full windows have a center with enough neighbors on both sides; leave other answers at -1.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute integer averages for all complete radius-k neighborhoods.",
+    "inspect": "Maintain a window of 2*k+1 values. Only full windows have a center with enough neighbors on both sides; leave other answers at -1.",
+    "update": "Maintain a window of 2*k+1 values. Only full windows have a center with enough neighbors on both sides; leave other answers at -1.",
+    "done": "Compute integer averages for all complete radius-k neighborhoods."
+  },
+  "edgeCases": [
+    "Radius zero preserves each value",
+    "The required window is wider than the input",
+    "Integer division drops the fractional part"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

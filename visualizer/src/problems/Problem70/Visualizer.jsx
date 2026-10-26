@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/climbing-stairs.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -13,7 +16,7 @@ import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useVisualizationFeatures } from '../../hooks/useVisualizationFeatures'
 import { getVisualizationFeatures } from '../../config/visualizationRegistry'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Visualizer.css'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -72,7 +75,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamples('climbing-stairs')
+const EXAMPLES = authoredExamples0
 
 function VariablesPanel({ step }) {
   return (
@@ -155,19 +158,7 @@ function VisualizationPanel({
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>n =</span>
-          <input
-            type="number"
-            value={nInput}
-            onChange={(e) => { setNInput(e.target.value); handleReset() }}
-            placeholder="5"
-            className="cs-dp-input"
-            style={{ width: '80px', margin: 0, textAlign: 'center' }}
-            min="1"
-            max="45"
-          />
-        </div>
+        
 
         <div className="cs-dp-visual-area">
           <div className="cs-dp-stairs-container">
@@ -257,7 +248,7 @@ function VisualizationPanel({
 const LINE_PATTERN_MAP = {}
 
 export default function ClimbingStairsVisualizer() {
-  const [nInput, setNInput] = useState('5')
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n))
 
   // Load solution code from registry
 
@@ -370,7 +361,7 @@ export default function ClimbingStairsVisualizer() {
   const panelConfigs = useMemo(() => [
     { id: 'code', title: 'Code' },
     { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
-    { id: 'vars', title: 'Variables', dockMode: 'split-bottom' },
+    { id: 'vars', title: 'Variables', dockMode: 'split-right' },
   ], [])
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

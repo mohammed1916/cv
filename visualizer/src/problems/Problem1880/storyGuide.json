@@ -1,0 +1,31 @@
+{
+  "number": "1880",
+  "title": "Check if Word Equals Summation of Two Words",
+  "goal": "Compare numeric word values after mapping letters a through j to digits.",
+  "strategy": "Treat each word as decimal digits, including leading zero letters. Accumulate values and compare the first two summed with the third.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compare numeric word values after mapping letters a through j to digits.",
+    "inspect": "Treat each word as decimal digits, including leading zero letters. Accumulate values and compare the first two summed with the third.",
+    "update": "Treat each word as decimal digits, including leading zero letters. Accumulate values and compare the first two summed with the third.",
+    "done": "Compare numeric word values after mapping letters a through j to digits."
+  },
+  "edgeCases": [
+    "Zero plus zero",
+    "Sum does not match",
+    "Addition carries into another digit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

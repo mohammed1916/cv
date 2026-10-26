@@ -1,0 +1,31 @@
+{
+  "number": "2047",
+  "title": "Number of Valid Words in a Sentence",
+  "goal": "Count sentence tokens satisfying the valid-word rules.",
+  "strategy": "A token may contain lowercase letters, one interior hyphen between letters, and at most one trailing punctuation mark. Digits, misplaced punctuation, and malformed hyphens invalidate it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count sentence tokens satisfying the valid-word rules.",
+    "inspect": "A token may contain lowercase letters, one interior hyphen between letters, and at most one trailing punctuation mark. Digits, misplaced punctuation, and malformed hyphens invalidate it.",
+    "update": "A token may contain lowercase letters, one interior hyphen between letters, and at most one trailing punctuation mark. Digits, misplaced punctuation, and malformed hyphens invalidate it.",
+    "done": "Count sentence tokens satisfying the valid-word rules."
+  },
+  "edgeCases": [
+    "Punctuation-only tokens are allowed",
+    "A hyphen must have letters on both sides",
+    "Extra spaces do not create tokens"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

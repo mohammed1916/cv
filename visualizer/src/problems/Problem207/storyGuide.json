@@ -1,0 +1,35 @@
+{
+  "number": "207",
+  "title": "Course Schedule",
+  "goal": "Solve Course Schedule: Detect cycle in a directed graph (course prerequisites).",
+  "strategy": "Detect cycle in a directed graph (course prerequisites).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "visited[node] == 2",
+      "outcome": "return True"
+    },
+    {
+      "condition": "visited[node] == 1",
+      "outcome": "return False"
+    },
+    {
+      "condition": "not dfs(neighbor)",
+      "outcome": "return False"
+    },
+    {
+      "condition": "not dfs(course)",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "numCourses must be a positive integer",
+    "Use prerequisite pairs [course, prerequisite] within the course range."
+  ],
+  "source": [
+    "src/problems/Problem207/index.jsx",
+    "src/problems/Problem207/CourseScheduleVisualizer.jsx"
+  ]
+}

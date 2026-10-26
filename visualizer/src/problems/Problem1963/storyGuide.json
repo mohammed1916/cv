@@ -1,0 +1,31 @@
+{
+  "number": "1963",
+  "title": "Minimum Number of Swaps to Make the String Balanced",
+  "goal": "Minimize arbitrary swaps needed to balance equal numbers of opening and closing brackets.",
+  "strategy": "Greedily match each closing bracket with a preceding unmatched opening. The unmatched pattern consists of closings followed by openings; each swap repairs two such mismatches.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize arbitrary swaps needed to balance equal numbers of opening and closing brackets.",
+    "inspect": "Greedily match each closing bracket with a preceding unmatched opening. The unmatched pattern consists of closings followed by openings; each swap repairs two such mismatches.",
+    "update": "Greedily match each closing bracket with a preceding unmatched opening. The unmatched pattern consists of closings followed by openings; each swap repairs two such mismatches.",
+    "done": "Minimize arbitrary swaps needed to balance equal numbers of opening and closing brackets."
+  },
+  "edgeCases": [
+    "Already balanced nested groups",
+    "All closing brackets precede all openings",
+    "One reversed pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

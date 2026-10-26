@@ -1,0 +1,35 @@
+{
+  "number": "374",
+  "title": "Guess Number Higher or Lower",
+  "goal": "Solve Guess Number Higher or Lower: Use each comparison response to discard the half of the search interval that cannot contain the hidden number.",
+  "strategy": "Use each comparison response to discard the half of the search interval that cannot contain the hidden number.",
+  "phases": [
+    "adjust_left",
+    "adjust_right",
+    "calc_guess",
+    "call_guess",
+    "check_condition",
+    "done",
+    "equal",
+    "higher",
+    "init",
+    "lower"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A match stops the search; boundary updates must retain the only remaining candidate."
+  ],
+  "checks": [
+    {
+      "condition": "res == 0",
+      "outcome": "return mid"
+    }
+  ],
+  "inputRules": [
+    "Use {\"n\": positive integer, \"pick\": integer from 1 to n}."
+  ],
+  "source": [
+    "src/problems/Problem374/index.jsx",
+    "src/problems/Problem374/Problem374Visualizer.jsx"
+  ]
+}

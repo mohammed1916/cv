@@ -1,0 +1,26 @@
+{
+  "number": "326",
+  "title": "Power of Three",
+  "goal": "Solve Power of Three: Check if number is power of three.",
+  "strategy": "Check if number is power of three.",
+  "phases": [
+    "init",
+    "divide",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n <= 0",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "Use { \"n\": 27 }."
+  ],
+  "source": [
+    "src/problems/Problem326/index.jsx",
+    "src/problems/Problem326/PowerofThreeVisualizer.jsx"
+  ]
+}

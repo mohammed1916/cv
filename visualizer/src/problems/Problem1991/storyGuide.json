@@ -1,0 +1,31 @@
+{
+  "number": "1991",
+  "title": "Find the Middle Index in Array",
+  "goal": "Find the leftmost index with equal sums strictly to its left and right.",
+  "strategy": "Maintain the running left sum and derive the right sum from the total after excluding the current value. Return the first equality.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the leftmost index with equal sums strictly to its left and right.",
+    "inspect": "Maintain the running left sum and derive the right sum from the total after excluding the current value. Return the first equality.",
+    "update": "Maintain the running left sum and derive the right sum from the total after excluding the current value. Return the first equality.",
+    "done": "Find the leftmost index with equal sums strictly to its left and right."
+  },
+  "edgeCases": [
+    "Multiple balanced positions choose the first",
+    "No position balances",
+    "A singleton has two empty sides"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

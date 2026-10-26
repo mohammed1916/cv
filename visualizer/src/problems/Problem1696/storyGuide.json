@@ -1,0 +1,31 @@
+{
+  "number": "1696",
+  "title": "Jump Game VI",
+  "goal": "Maximize score while jumping forward at most k positions and ending at the last index.",
+  "strategy": "Dynamic programming needs the greatest score among the last k reachable positions. A decreasing candidate deque discards expired positions and weaker candidates.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize score while jumping forward at most k positions and ending at the last index.",
+    "inspect": "Dynamic programming needs the greatest score among the last k reachable positions. A decreasing candidate deque discards expired positions and weaker candidates.",
+    "update": "Dynamic programming needs the greatest score among the last k reachable positions. A decreasing candidate deque discards expired positions and weaker candidates.",
+    "done": "Maximize score while jumping forward at most k positions and ending at the last index."
+  },
+  "edgeCases": [
+    "Every position is mandatory",
+    "Jump across negative middle values",
+    "Single starting position"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

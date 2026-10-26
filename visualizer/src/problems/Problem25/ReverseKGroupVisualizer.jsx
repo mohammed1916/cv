@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/reverse-kgroup.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -7,7 +10,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import "./ReverseKGroupVisualizer.css";
@@ -47,7 +50,7 @@ const SOLUTION_CODE = [
     { line: 17, text: "    return dummy.next" },
 ];
 
-const EXAMPLES = getExamples('reverse-kgroup');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(listIn, k) {
     const steps = [];
@@ -137,8 +140,8 @@ function generateSteps(listIn, k) {
 
 export default function ReverseKGroupVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [listInput, setListInput] = useState("[1,2,3,4,5]");
-  const [kInput, setKInput] = useState(2);
+  const [listInput, setListInput] = useState(JSON.stringify(AUTHORED_INITIAL.list));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { list, k, inputError } = useMemo(() => {
     try {
       const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');
@@ -265,9 +268,6 @@ export default function ReverseKGroupVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -285,6 +285,9 @@ export default function ReverseKGroupVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={REVERSEKGROUP_PATTERNS} />
+            )}
         </>
     )
 
@@ -292,7 +295,7 @@ export default function ReverseKGroupVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Array Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

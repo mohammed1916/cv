@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--408.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +20,7 @@ const SOLUTION_CODE = getSolutionCode('valid-word-abbreviation')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Valid', word: 'internationalization', abbr: 'i18n', expected: true },
-  { label: 'Invalid', word: 'apple', abbr: 'apl', expected: false },
-  { label: 'Simple', word: 'abc', abbr: 'a1c', expected: true },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(word, abbr) {
   const steps = []
@@ -203,7 +201,7 @@ function generateSteps(word, abbr) {
 function AbbreviationVisualization({ word, abbr, step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Matching Process</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Matching Process</div>
 
       {/* Word alignment */}
       <div>
@@ -388,7 +386,7 @@ export default function Problem408Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -438,9 +436,6 @@ export default function Problem408Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -458,6 +453,9 @@ export default function Problem408Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

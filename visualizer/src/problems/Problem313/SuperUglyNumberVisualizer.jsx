@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/super-ugly-number.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SuperUglyNumberVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { DPTable } from '../../components/shared'
@@ -54,11 +55,7 @@ function generateSteps({ n, primes }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('super-ugly-number', [
-  { label: '12th with 2, 7, 13, 19', n: 12, primes: [2, 7, 13, 19] },
-  { label: '12th with 2, 3, 5', n: 12, primes: [2, 3, 5] },
-  { label: 'First number', n: 1, primes: [2, 3, 5] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function SuperUglyNumberVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -96,7 +93,7 @@ export default function SuperUglyNumberVisualizer() {
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'sequence', title: '📈 DP sequence', dockMode: 'split-right' },
     { id: 'candidates', title: 'Prime pointers', dockMode: 'split-bottom' },
   ], [])
@@ -137,9 +134,6 @@ export default function SuperUglyNumberVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -157,6 +151,9 @@ export default function SuperUglyNumberVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

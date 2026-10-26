@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--382.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -77,7 +79,7 @@ function generateSteps(values) {
       values,
       currentIdx: idx,
       count: idx + 1,
-      result,
+      result: steps[steps.length - 1].result,
       message: `Visit node ${idx}: count = ${idx + 1}`,
     })
 
@@ -124,20 +126,7 @@ function generateSteps(values) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple List',
-    values: [1, 2, 3],
-  },
-  {
-    label: 'Longer List',
-    values: [1, 2, 3, 4, 5],
-  },
-  {
-    label: 'Single Node',
-    values: [7],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem382Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -346,9 +335,6 @@ export default function Problem382Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -366,6 +352,9 @@ export default function Problem382Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

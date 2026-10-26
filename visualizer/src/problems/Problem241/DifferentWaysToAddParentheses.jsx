@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/different-ways-to-add-parentheses.js';
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './DifferentWaysToAddParentheses.css'
 import { createPortal } from 'react-dom'
 
@@ -44,7 +45,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('different-ways-to-add-parentheses', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function DifferentWaysToAddParentheses() {
   const [input, setInput] = useState('[1, 2, 3]')

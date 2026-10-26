@@ -1,0 +1,31 @@
+{
+  "number": "2233",
+  "title": "Maximum Product After K Increments",
+  "goal": "Maximize the product after exactly k increments of individual values.",
+  "strategy": "For two values a no larger than b, incrementing a produces at least as large a product as incrementing b. Repeatedly increment the current minimum with a heap, then multiply modulo one billion plus seven.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the product after exactly k increments of individual values.",
+    "inspect": "For two values a no larger than b, incrementing a produces at least as large a product as incrementing b. Repeatedly increment the current minimum with a heap, then multiply modulo one billion plus seven.",
+    "update": "For two values a no larger than b, incrementing a produces at least as large a product as incrementing b. Repeatedly increment the current minimum with a heap, then multiply modulo one billion plus seven.",
+    "done": "Maximize the product after exactly k increments of individual values."
+  },
+  "edgeCases": [
+    "Zero factors must receive increments before a positive product is possible",
+    "No increment returns the original product modulo the modulus",
+    "A singleton receives every increment"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

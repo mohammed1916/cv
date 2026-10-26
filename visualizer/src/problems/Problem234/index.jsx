@@ -1,1 +1,5 @@
-export { default } from "./PalindromeLinkedListVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./PalindromeLinkedListVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

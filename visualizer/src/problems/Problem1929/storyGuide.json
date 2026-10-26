@@ -1,0 +1,31 @@
+{
+  "number": "1929",
+  "title": "Concatenation of Array",
+  "goal": "Build two consecutive copies of an array.",
+  "strategy": "Each source position fills one position in the first half and the matching position in the second half. No source values are overwritten.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Build two consecutive copies of an array.",
+    "inspect": "Each source position fills one position in the first half and the matching position in the second half. No source values are overwritten.",
+    "update": "Each source position fills one position in the first half and the matching position in the second half. No source values are overwritten.",
+    "done": "Build two consecutive copies of an array."
+  },
+  "edgeCases": [
+    "Repeated values retain all positions",
+    "One value becomes two entries",
+    "Equal values still double the length"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

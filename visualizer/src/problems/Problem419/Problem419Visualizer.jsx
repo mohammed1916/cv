@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--419.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -27,23 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  {
-    label: 'Small',
-    board: [['X', 'X', '.', 'X'], ['.', '.', '.', '.'], ['.', '.', '.', '.']],
-    expected: 2
-  },
-  {
-    label: 'Medium',
-    board: [['X', 'X', '.', 'X'], ['X', '.', '.', '.'], ['.', '.', '.', '.']],
-    expected: 2
-  },
-  {
-    label: 'Large',
-    board: [['X', '.', '.', 'X'], ['.', '.', '.', '.'], ['.', '.', '.', 'X']],
-    expected: 3
-  },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(board) {
   const steps = []
@@ -156,7 +142,7 @@ function BattleshipsVisualization({ board, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Battleships Counter</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Battleships Counter</div>
 
       {/* Board visualization */}
       <div>
@@ -331,7 +317,7 @@ export default function Problem419Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

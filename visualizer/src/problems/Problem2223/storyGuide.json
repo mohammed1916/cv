@@ -1,0 +1,31 @@
+{
+  "number": "2223",
+  "title": "Sum of Scores of Built Strings",
+  "goal": "Sum the common-prefix scores of every suffix of the string.",
+  "strategy": "The Z value at each position is that suffix common-prefix length with the whole string. Reuse a previously matched interval before extending comparisons, avoiding repeated scans of known matches.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum the common-prefix scores of every suffix of the string.",
+    "inspect": "The Z value at each position is that suffix common-prefix length with the whole string. Reuse a previously matched interval before extending comparisons, avoiding repeated scans of known matches.",
+    "update": "The Z value at each position is that suffix common-prefix length with the whole string. Reuse a previously matched interval before extending comparisons, avoiding repeated scans of known matches.",
+    "done": "Sum the common-prefix scores of every suffix of the string."
+  },
+  "edgeCases": [
+    "Every suffix of a repeated letter matches the prefix",
+    "Distinct letters leave only the whole-string score",
+    "A singleton scores one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

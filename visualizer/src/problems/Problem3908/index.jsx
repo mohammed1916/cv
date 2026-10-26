@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3908.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -11,14 +15,9 @@ const definition = {
     { id: 'leading', label: 'Check first digit', description: 'The leading digit must differ from x.' },
     { id: 'done', label: 'AND / return', description: 'Both conditions must pass.' },
   ],
-  examples: [
-    { label: 'Valid zero inside', input: '{"n":101,"x":0}' },
-    { label: 'Leading match', input: '{"n":232,"x":2}' },
-    { label: 'Target absent', input: '{"n":5,"x":1}' },
-    { label: 'Number zero', input: '{"n":0,"x":0}' },
-  ],
+  examples: authoredExamples0,
 }
-export default function ValidDigitNumber() {
+function ValidDigitNumber() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <p>Target digit: {run.target}. Index 0 is the leading digit.</p>
     <IndexedSequence label="Decimal digits" length={run.input.length} active={step.index} valueAt={i => run.input[i]}
@@ -33,3 +32,5 @@ export default function ValidDigitNumber() {
     <p>For n = 0 and x = 0, the target is present but it is also the leading digit, so the answer is false.</p>
   </>} />
 }
+
+export default withProblemStory(ValidDigitNumber, storyGuide);

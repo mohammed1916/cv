@@ -1,0 +1,23 @@
+{
+  "number": "339",
+  "title": "Nested List Weight Sum",
+  "goal": "Solve Nested List Weight Sum: Calculate weighted sum of nested list.",
+  "strategy": "Calculate weighted sum of nested list.",
+  "phases": [
+    "init",
+    "visit",
+    "update",
+    "recurse",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only integers contribute to the total; entering a nested list increases the depth weight of its contained integers."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem339/index.jsx",
+    "src/problems/Problem339/NestedListWeightSumVisualizer.jsx"
+  ]
+}

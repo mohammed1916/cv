@@ -1,0 +1,25 @@
+{
+  "number": "421",
+  "title": "Maximum XOR of Two Numbers in Array",
+  "goal": "Solve Maximum XOR of Two Numbers in Array: Find maximum XOR value of two numbers in array.",
+  "strategy": "Find maximum XOR value of two numbers in array.",
+  "phases": [
+    "check_pair",
+    "done",
+    "init",
+    "new_max",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Prefer an opposite bit at each high-to-low trie level; the first differing high bit dominates later choices."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem421/index.jsx",
+    "src/problems/Problem421/Problem421Visualizer.jsx"
+  ]
+}

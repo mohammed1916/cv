@@ -1,0 +1,31 @@
+{
+  "number": "2003",
+  "title": "Smallest Missing Genetic Value in Each Subtree",
+  "goal": "Find the smallest missing positive genetic value in every subtree.",
+  "strategy": "Subtrees that do not contain value one have answer one. Starting at the node carrying one, walk toward the root and add newly encountered descendants to a shared seen-value set.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest missing positive genetic value in every subtree.",
+    "inspect": "Subtrees that do not contain value one have answer one. Starting at the node carrying one, walk toward the root and add newly encountered descendants to a shared seen-value set.",
+    "update": "Subtrees that do not contain value one have answer one. Starting at the node carrying one, walk toward the root and add newly encountered descendants to a shared seen-value set.",
+    "done": "Find the smallest missing positive genetic value in every subtree."
+  },
+  "edgeCases": [
+    "No node carries genetic value one",
+    "The root carries one so only the root can differ",
+    "A single node carries one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

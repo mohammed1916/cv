@@ -1,0 +1,27 @@
+{
+  "number": "701",
+  "title": "Insert into a Binary Search Tree",
+  "goal": "Insert a new value as a leaf while preserving strict BST order.",
+  "strategy": "Follow the same comparisons as search. The first missing child on that path is the unique insertion position for this leaf strategy.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Insert a new value as a leaf while preserving strict BST order.",
+    "inspect": "Follow the same comparisons as search. The first missing child on that path is the unique insertion position for this leaf strategy.",
+    "update": "Follow the same comparisons as search. The first missing child on that path is the unique insertion position for this leaf strategy.",
+    "done": "Insert a new value as a leaf while preserving strict BST order."
+  },
+  "edgeCases": [
+    "Empty tree",
+    "New minimum",
+    "New maximum"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

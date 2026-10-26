@@ -1,1 +1,5 @@
-export { default } from "./CountingBitsVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./CountingBitsVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

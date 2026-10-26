@@ -1,0 +1,27 @@
+{
+  "number": "206",
+  "title": "Reverse Linked List",
+  "goal": "Solve Reverse Linked List: Iterative three-pointer reverse: prev, curr, next in a single pass.",
+  "strategy": "Iterative three-pointer reverse: prev, curr, next in a single pass.",
+  "phases": [
+    "done",
+    "init",
+    "save_nxt",
+    "reverse_arrow",
+    "move_prev",
+    "move_curr"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Save the next node before reversing a link; null and one-node lists need no multi-node rewiring."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be an array",
+    "Max 8 nodes for clarity"
+  ],
+  "source": [
+    "src/problems/Problem206/index.jsx",
+    "src/problems/Problem206/ReverseLinkedListVisualizer.jsx"
+  ]
+}

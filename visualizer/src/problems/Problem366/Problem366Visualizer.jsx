@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/find-leaves-of-binary-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem366Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -235,35 +238,11 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamplesOr('find-leaves-of-binary-tree', [
-    { label: 'Simple', arr: [1, 2, 3] },
-    { label: 'Unbalanced', arr: [1, 2, null, 3, null, 4] },
-    { label: 'Single Node', arr: [1] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function TreeVisualizationPanel({ step, positions, edges, allNodes, EXAMPLES, arrInput, setArrInput, applyExample, handleReset }) {
     return (
         <div className="p366-viz-panel">
-            <div className="p366-examples">
-                {EXAMPLES.map((ex) => (
-                    <button
-                        key={ex.label}
-                        className="p366-chip"
-                        onClick={() => applyExample(ex)}
-                    >
-                        {ex.label}
-                    </button>
-                ))}
-            </div>
-            <input
-                className="p366-input"
-                value={arrInput}
-                onChange={(e) => {
-                    setArrInput(e.target.value)
-                    handleReset()
-                }}
-                placeholder="Enter tree array..."
-            />
             <div className="p366-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                 <svg style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }} width={CANVAS_W} height={CANVAS_H}>
                     {edges.map(({ fromId, toId }) => {
@@ -361,7 +340,7 @@ function ResultPanel({ step, inputError, collectedLeaves }) {
 }
 
 export default function Problem366Visualizer() {
-    const [arrInput, setArrInput] = useState('[1,2,3,4,5]')
+    const [arrInput, setArrInput] = useState(JSON.stringify(AUTHORED_INITIAL.arr))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -389,7 +368,7 @@ export default function Problem366Visualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'viz', title: 'Tree Visualization' },
       { id: 'result', title: 'Leaf Collection', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       viz: (<TreeVisualizationPanel

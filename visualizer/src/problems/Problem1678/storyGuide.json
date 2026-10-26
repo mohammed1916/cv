@@ -1,0 +1,31 @@
+{
+  "number": "1678",
+  "title": "Goal Parser Interpretation",
+  "goal": "Interpret the command tokens G, (), and (al).",
+  "strategy": "Consume one complete token at a time and append its defined expansion. Token lengths determine where the next reading position begins.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Interpret the command tokens G, (), and (al).",
+    "inspect": "Consume one complete token at a time and append its defined expansion. Token lengths determine where the next reading position begins.",
+    "update": "Consume one complete token at a time and append its defined expansion. Token lengths determine where the next reading position begins.",
+    "done": "Interpret the command tokens G, (), and (al)."
+  },
+  "edgeCases": [
+    "Only G tokens",
+    "Only empty-pair tokens",
+    "Single al token"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

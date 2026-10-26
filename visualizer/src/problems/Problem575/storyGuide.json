@@ -1,0 +1,26 @@
+{
+  "number": "575",
+  "title": "Distribute Candies",
+  "goal": "Solve Distribute Candies: Alice gets the first half of candies. Maximize the number of unique candy types she receives.",
+  "strategy": "Alice gets the first half of candies. Maximize the number of unique candy types she receives.",
+  "phases": [
+    "setup",
+    "iteration",
+    "track_unique",
+    "calculate",
+    "result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The number of distinct types received cannot exceed either the available types or half the total candy count."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array",
+    "Values must be positive integers"
+  ],
+  "source": [
+    "src/problems/Problem575/index.jsx",
+    "src/problems/Problem575/DistributeCandiesVisualizer.jsx"
+  ]
+}

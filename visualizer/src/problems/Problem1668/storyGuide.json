@@ -1,0 +1,31 @@
+{
+  "number": "1668",
+  "title": "Maximum Repeating Substring",
+  "goal": "Find the largest consecutive repetition count of word present inside sequence.",
+  "strategy": "Build candidates word, word+word, and so on. Once a repeated candidate is absent, no longer repetition can appear because it contains the absent candidate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest consecutive repetition count of word present inside sequence.",
+    "inspect": "Build candidates word, word+word, and so on. Once a repeated candidate is absent, no longer repetition can appear because it contains the absent candidate.",
+    "update": "Build candidates word, word+word, and so on. Once a repeated candidate is absent, no longer repetition can appear because it contains the absent candidate.",
+    "done": "Find the largest consecutive repetition count of word present inside sequence."
+  },
+  "edgeCases": [
+    "Word absent",
+    "Repeated word overlaps itself",
+    "Word longer than sequence"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

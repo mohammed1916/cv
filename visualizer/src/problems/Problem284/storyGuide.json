@@ -1,0 +1,23 @@
+{
+  "number": "284",
+  "title": "Peeking Iterator",
+  "goal": "Solve Peeking Iterator: Implement iterator with peek capability.",
+  "strategy": "Implement iterator with peek capability.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Peeking twice must return the same value; only next consumes the cached element."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem284/index.jsx",
+    "src/problems/Problem284/Problem284Visualizer.jsx"
+  ]
+}

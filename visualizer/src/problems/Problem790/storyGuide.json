@@ -1,0 +1,31 @@
+{
+  "number": "790",
+  "title": "Domino and Tromino Tiling",
+  "goal": "Count tilings of a two-by-n board using dominoes and trominoes.",
+  "strategy": "Full and partial frontier states collapse to a recurrence: full(n)=2*full(n-1)+full(n-3). The additional term accounts for the paired staggered frontier patterns introduced by trominoes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count tilings of a two-by-n board using dominoes and trominoes.",
+    "inspect": "Full and partial frontier states collapse to a recurrence: full(n)=2*full(n-1)+full(n-3). The additional term accounts for the paired staggered frontier patterns introduced by trominoes.",
+    "update": "Full and partial frontier states collapse to a recurrence: full(n)=2*full(n-1)+full(n-3). The additional term accounts for the paired staggered frontier patterns introduced by trominoes.",
+    "done": "Count tilings of a two-by-n board using dominoes and trominoes."
+  },
+  "edgeCases": [
+    "One column admits one vertical domino",
+    "Two columns admit the two domino orientations",
+    "A larger board requires modular reduction"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

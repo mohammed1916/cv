@@ -1,0 +1,31 @@
+{
+  "number": "1105",
+  "title": "Filling Bookcase Shelves",
+  "goal": "Arrange ordered books on shelves to minimize total height.",
+  "strategy": "Try every fitting final shelf for each prefix. Its cost is the maximum height in that shelf plus the optimal cost of the earlier prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Arrange ordered books on shelves to minimize total height.",
+    "inspect": "Try every fitting final shelf for each prefix. Its cost is the maximum height in that shelf plus the optimal cost of the earlier prefix.",
+    "update": "Try every fitting final shelf for each prefix. Its cost is the maximum height in that shelf plus the optimal cost of the earlier prefix.",
+    "done": "Arrange ordered books on shelves to minimize total height."
+  },
+  "edgeCases": [
+    "Every book needs its own shelf",
+    "All fit one shelf",
+    "One book"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

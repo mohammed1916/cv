@@ -1,0 +1,29 @@
+{
+  "number": "68",
+  "title": "Text Justification",
+  "goal": "Solve Text Justification: Text Justification visualization",
+  "strategy": "Text Justification visualization",
+  "phases": [
+    "init",
+    "pack_word",
+    "close_line",
+    "justify",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "last or len(cur) == 1",
+      "outcome": "return \" \".join(cur).ljust(maxWidth)"
+    }
+  ],
+  "inputRules": [
+    "words must be an array",
+    "maxWidth must be a number"
+  ],
+  "source": [
+    "src/problems/Problem68/index.jsx",
+    "src/problems/Problem68/Visualizer.jsx"
+  ]
+}

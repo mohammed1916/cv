@@ -1,0 +1,14 @@
+[
+  { "page": "home", "title": "Make algorithms click.", "text": "What if you could see your code think? Meet Teem Treat Visualizer. Find a problem, open its workspace, and follow every step.", "action": "catalog" },
+  { "page": "prerequisites", "title": "Know what to learn next.", "text": "Start with prerequisites. Explore topics, expand their subtopics, and discover the concepts you need before taking the next step.", "action": "expand" },
+  { "page": "prerequisites", "title": "From concepts to practice.", "text": "Open a concept guide. Find prerequisites, recommended problems, and the visual features that bring each idea to life.", "action": "guide" },
+  { "page": "1", "title": "Follow the data. Follow the code.", "text": "Watch Two Sum connect an array and a hash map. Pause, step forward, and follow the highlighted code at your own pace.", "action": "play" },
+  { "page": "743", "title": "Advanced graphs, made visible.", "text": "Explore Network Delay Time. Follow the priority queue and watch shortest paths take shape across a weighted network.", "action": "play" },
+  { "page": "1096", "title": "See recursion unfold.", "text": "Dive into Brace Expansion Two. Follow recursive calls, inspect the active stack, and see how nested choices combine into results.", "action": "play" },
+  { "page": "51", "title": "Choose. Check. Backtrack.", "text": "Try N Queens. Watch candidate positions and conflict checks, then follow the search as it places a queen or backtracks.", "action": "play" },
+  { "page": "62", "title": "Build answers from smaller states.", "text": "Explore dynamic programming. Watch each state build on earlier results, with the code and visualization moving together.", "action": "play" },
+  { "page": "1", "title": "Focus on what matters.", "text": "Zoom in for detail. Zoom out for context. Hide a panel, restore it, or maximize it to give an important step more space.", "action": "workspace" },
+  { "page": "1", "title": "A workspace that moves with you.", "text": "Dock or float your playback controls. Rearrange panels and resize the workspace to suit the way you learn.", "action": "dock" },
+  { "page": "playground", "title": "Make it your experiment.", "text": "Open Code Playground. Run a Python or JavaScript sample, inspect its trace, then change your code and compare the results.", "action": "playground" },
+  { "page": "1", "title": "Build understanding, one step at a time.", "text": "Select the lines you want to discuss and attach them to chat. From your first array to your next challenging graph, explore Teem Treat Visualizer.", "action": "selection" }
+]

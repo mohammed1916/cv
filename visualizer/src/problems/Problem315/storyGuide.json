@@ -1,0 +1,23 @@
+{
+  "number": "315",
+  "title": "Count of Smaller Numbers After Self",
+  "goal": "Solve Count of Smaller Numbers After Self: Count smaller elements to the right efficiently.",
+  "strategy": "Count smaller elements to the right efficiently.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal values are not smaller; only elements strictly to the right contribute to each count."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"nums\": [numbers] }."
+  ],
+  "source": [
+    "src/problems/Problem315/index.jsx",
+    "src/problems/Problem315/CountofSmallerNumbersAfterSelfVisualizer.jsx"
+  ]
+}

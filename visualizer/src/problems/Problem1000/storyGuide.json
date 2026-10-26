@@ -1,0 +1,31 @@
+{
+  "number": "1000",
+  "title": "Minimum Cost to Merge Stones",
+  "goal": "Merge adjacent groups of exactly k piles at minimum total cost until one pile remains.",
+  "strategy": "Every merge removes k-1 piles, which determines feasibility. Interval DP merges subranges to their smallest achievable pile count; add the interval sum only when its length can collapse to one pile.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Merge adjacent groups of exactly k piles at minimum total cost until one pile remains.",
+    "inspect": "Every merge removes k-1 piles, which determines feasibility. Interval DP merges subranges to their smallest achievable pile count; add the interval sum only when its length can collapse to one pile.",
+    "update": "Every merge removes k-1 piles, which determines feasibility. Interval DP merges subranges to their smallest achievable pile count; add the interval sum only when its length can collapse to one pile.",
+    "done": "Merge adjacent groups of exactly k piles at minimum total cost until one pile remains."
+  },
+  "edgeCases": [
+    "Pile count can make k-way completion impossible",
+    "One existing pile needs no merge cost",
+    "Binary merges compare many parenthesizations"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

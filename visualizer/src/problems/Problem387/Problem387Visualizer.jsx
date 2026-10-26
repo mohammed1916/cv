@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--387.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -138,20 +140,7 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'With Unique',
-    s: 'leetcode',
-  },
-  {
-    label: 'All Repeat',
-    s: 'aabb',
-  },
-  {
-    label: 'Single Unique',
-    s: 'abacabad',
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem387Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -413,9 +402,6 @@ export default function Problem387Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -433,6 +419,9 @@ export default function Problem387Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

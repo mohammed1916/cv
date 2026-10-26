@@ -1,0 +1,31 @@
+{
+  "number": "2016",
+  "title": "Maximum Difference Between Increasing Elements",
+  "goal": "Find the largest positive difference with the smaller value at an earlier index.",
+  "strategy": "Retain the smallest value seen before the current position. A current value larger than that minimum is a valid endpoint; equal values do not form a positive difference.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest positive difference with the smaller value at an earlier index.",
+    "inspect": "Retain the smallest value seen before the current position. A current value larger than that minimum is a valid endpoint; equal values do not form a positive difference.",
+    "update": "Retain the smallest value seen before the current position. A current value larger than that minimum is a valid endpoint; equal values do not form a positive difference.",
+    "done": "Find the largest positive difference with the smaller value at an earlier index."
+  },
+  "edgeCases": [
+    "Strict decrease has no valid pair",
+    "Equal values are not a strict increase",
+    "Two entries form the only candidate"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

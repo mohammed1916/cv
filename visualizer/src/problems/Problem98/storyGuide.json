@@ -1,0 +1,30 @@
+{
+  "number": "98",
+  "title": "Validate Binary Search Tree",
+  "goal": "Solve Validate Binary Search Tree: DFS with min/max bounds; each node must be strictly between its inherited bounds.",
+  "strategy": "DFS with min/max bounds; each node must be strictly between its inherited bounds.",
+  "phases": [
+    "check",
+    "done",
+    "invalid",
+    "recurse-left",
+    "recurse-right"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return True"
+    },
+    {
+      "condition": "node.val <= lo or node.val >= hi",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem98/index.jsx",
+    "src/problems/Problem98/ValidateBSTVisualizer.jsx"
+  ]
+}

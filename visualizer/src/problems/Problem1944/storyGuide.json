@@ -1,0 +1,31 @@
+{
+  "number": "1944",
+  "title": "Number of Visible People in a Queue",
+  "goal": "Count people visible to the right of every person.",
+  "strategy": "Scan right to left with a decreasing-height stack. Every shorter popped person is visible, and the first remaining taller person is visible but blocks all people beyond it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count people visible to the right of every person.",
+    "inspect": "Scan right to left with a decreasing-height stack. Every shorter popped person is visible, and the first remaining taller person is visible but blocks all people beyond it.",
+    "update": "Scan right to left with a decreasing-height stack. Every shorter popped person is visible, and the first remaining taller person is visible but blocks all people beyond it.",
+    "done": "Count people visible to the right of every person."
+  },
+  "edgeCases": [
+    "Strictly increasing queue",
+    "Strictly decreasing queue",
+    "No person to the right"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

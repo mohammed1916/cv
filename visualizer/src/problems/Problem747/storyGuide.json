@@ -1,0 +1,27 @@
+{
+  "title": "Largest Number At Least Twice of Others",
+  "goal": "Find the index of a maximum that is at least twice every other number, or return -1.",
+  "strategy": "The second largest is the strongest competitor. Retain its value and the original index of the largest.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "The second largest is the strongest competitor. Retain its value and the original index of the largest.",
+    "update": "It is enough to compare the largest value with twice the second largest.",
+    "done": "It is enough to compare the largest value with twice the second largest."
+  },
+  "edgeCases": [
+    "Exactly twice",
+    "Unique largest but not dominant",
+    "Zeros beside maximum"
+  ],
+  "number": "747",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback, useEffect } from "react";
+import authoredExamples0 from '../../config/examples/maximum-gap.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -8,7 +11,7 @@ import Selectable from "../../components/Selectable";
 import { useVisualizationContext } from "../../context/VisualizationContext";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MaximumGapVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -40,7 +43,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('maximum-gap');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(nums) {
     const steps = [];
@@ -78,7 +81,7 @@ function generateSteps(nums) {
 
 export default function MaximumGapVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[3,6,9,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -274,7 +277,7 @@ export default function MaximumGapVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
-            { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code',    title: 'Code', dockMode: 'split-right' },
             { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

@@ -1,0 +1,31 @@
+{
+  "number": "1111",
+  "title": "Maximum Nesting Depth of Two Valid Parentheses Strings",
+  "goal": "Split a balanced parentheses sequence into two groups with minimum maximum nesting depth.",
+  "strategy": "Assign paired brackets using depth parity. Alternating nesting layers balances depth between the groups while keeping each group balanced.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split a balanced parentheses sequence into two groups with minimum maximum nesting depth.",
+    "inspect": "Assign paired brackets using depth parity. Alternating nesting layers balances depth between the groups while keeping each group balanced.",
+    "update": "Assign paired brackets using depth parity. Alternating nesting layers balances depth between the groups while keeping each group balanced.",
+    "done": "Split a balanced parentheses sequence into two groups with minimum maximum nesting depth."
+  },
+  "edgeCases": [
+    "Only shallow pairs",
+    "One deep primitive",
+    "Single pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

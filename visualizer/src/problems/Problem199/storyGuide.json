@@ -1,0 +1,28 @@
+{
+  "number": "199",
+  "title": "Binary Tree Right Side View",
+  "goal": "Solve Binary Tree Right Side View: BFS level-order; record the last node of each level as the right-side view.",
+  "strategy": "BFS level-order; record the last node of each level as the right-side view.",
+  "phases": [
+    "done",
+    "init",
+    "level-start",
+    "dequeue",
+    "enqueue-left",
+    "enqueue-right",
+    "rightmost"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem199/index.jsx",
+    "src/problems/Problem199/RightSideViewVisualizer.jsx"
+  ]
+}

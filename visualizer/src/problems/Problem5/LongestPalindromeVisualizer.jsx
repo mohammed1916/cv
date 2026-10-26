@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/longest-palindrome.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -6,7 +9,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestPalindromeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -188,10 +191,10 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamples('longest-palindrome')
+const EXAMPLES = authoredExamples0
 
 export default function LongestPalindromeVisualizer() {
-  const [sInput, setSInput] = useState('babad')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
   const { s, inputError } = useMemo(() => {
     return { s: sInput, inputError: '' }
@@ -327,9 +330,6 @@ export default function LongestPalindromeVisualizer() {
       </>}
 
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={LPAL_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -347,6 +347,9 @@ export default function LongestPalindromeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={LPAL_PATTERNS} />
+        )}
       </FloatingPanel>
     </>
   )

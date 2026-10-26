@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/house-robber-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './HouseRobberIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -104,10 +107,10 @@ function generateSteps(nums) {
     return allSteps
 }
 
-const EXAMPLES = getExamples('house-robber-ii')
+const EXAMPLES = authoredExamples0
 
 export default function HouseRobberIIVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,3,2]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -161,17 +164,7 @@ export default function HouseRobberIIVisualizer() {
                     <button key={ex.label} className="hr2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                 ))}
             </div>
-            <label className="hr2-field">
-                <span>nums array</span>
-                <input
-                    className="hr2-input"
-                    value={numsInput}
-                    onChange={(e) => {
-                        setNumsInput(e.target.value)
-                        handleReset()
-                    }}
-                />
-            </label>
+            
             {inputError && <div className="hr2-error">{inputError}</div>}
             <div className="hr2-output-wrap">
                 <div className="hr2-output-label">Input parsed</div>
@@ -249,7 +242,7 @@ export default function HouseRobberIIVisualizer() {
         { id: 'input', title: 'Input Playground' },
         { id: 'state', title: 'DP State Monitor', dockMode: 'split-right' },
         { id: 'viz', title: 'DP Array Visualization', dockMode: 'split-bottom' },
-        { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
 

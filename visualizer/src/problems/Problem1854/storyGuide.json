@@ -1,0 +1,31 @@
+{
+  "number": "1854",
+  "title": "Maximum Population Year",
+  "goal": "Return the earliest year with maximum living population.",
+  "strategy": "Treat life intervals as birth-inclusive and death-exclusive. Apply combined yearly deltas in increasing year order; update the best year only for a strictly larger population.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the earliest year with maximum living population.",
+    "inspect": "Treat life intervals as birth-inclusive and death-exclusive. Apply combined yearly deltas in increasing year order; update the best year only for a strictly larger population.",
+    "update": "Treat life intervals as birth-inclusive and death-exclusive. Apply combined yearly deltas in increasing year order; update the best year only for a strictly larger population.",
+    "done": "Return the earliest year with maximum living population."
+  },
+  "edgeCases": [
+    "Tied populations preserve earliest year",
+    "Death year is excluded",
+    "One lifespan"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

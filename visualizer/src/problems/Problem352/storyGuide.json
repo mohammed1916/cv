@@ -1,0 +1,26 @@
+{
+  "number": "352",
+  "title": "Design Snake Game",
+  "goal": "Solve Design Snake Game: Move the snake head, check bounds and occupied cells, and update its body while growing only when food is reached.",
+  "strategy": "Move the snake head, check bounds and occupied cells, and update its body while growing only when food is reached.",
+  "phases": [
+    "collision-self",
+    "collision-wall",
+    "direction",
+    "eat-food",
+    "idle",
+    "init",
+    "move-forward",
+    "state-update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Moving into the departing tail cell is safe when the snake is not growing; eating keeps the tail in place."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem352/index.jsx",
+    "src/problems/Problem352/Problem352Visualizer.jsx"
+  ]
+}

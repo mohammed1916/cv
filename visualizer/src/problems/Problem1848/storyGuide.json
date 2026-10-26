@@ -1,0 +1,31 @@
+{
+  "number": "1848",
+  "title": "Minimum Distance to the Target Element",
+  "goal": "Find the shortest index distance from start to an occurrence of target.",
+  "strategy": "Inspect target occurrences and compare absolute index differences. Values that differ from target cannot contribute.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest index distance from start to an occurrence of target.",
+    "inspect": "Inspect target occurrences and compare absolute index differences. Values that differ from target cannot contribute.",
+    "update": "Inspect target occurrences and compare absolute index differences. Values that differ from target cannot contribute.",
+    "done": "Find the shortest index distance from start to an occurrence of target."
+  },
+  "edgeCases": [
+    "Start already equals target",
+    "Only target is at the far end",
+    "Equidistant targets"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

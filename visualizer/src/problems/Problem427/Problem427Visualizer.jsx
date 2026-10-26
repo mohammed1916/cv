@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/expression-tree-from-tokens.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem427Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -22,9 +25,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('expression-tree-from-tokens', [
-  { label: 'Example 1', tokens: ['2', '1', '+', '3', '*'] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const isOp = (t) => t === '+' || t === '-' || t === '*' || t === '/'
 
@@ -157,7 +158,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem427Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [tokensInput, setTokensInput] = useState("[\"2\",\"1\",\"+\",\"3\",\"*\"]");
+  const [tokensInput, setTokensInput] = useState(JSON.stringify(AUTHORED_INITIAL.tokens));
   const { tokens, inputError } = useMemo(() => {
     try {
       const parsedTokens = JSON.parse(tokensInput); if (!Array.isArray(parsedTokens)) throw new Error('tokens must be an array');

@@ -1,0 +1,27 @@
+{
+  "title": "Sort Array By Parity",
+  "goal": "Reorder the array so all even numbers appear before all odd numbers.",
+  "strategy": "Partition into even and odd groups, preserving every occurrence. The groups can then be concatenated.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Partition into even and odd groups, preserving every occurrence. The groups can then be concatenated.",
+    "update": "The output contains all the same values with evens before odds.",
+    "done": "The output contains all the same values with evens before odds."
+  },
+  "edgeCases": [
+    "All odd",
+    "All even",
+    "Singleton"
+  ],
+  "number": "905",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

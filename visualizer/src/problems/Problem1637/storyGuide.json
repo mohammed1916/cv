@@ -1,0 +1,31 @@
+{
+  "number": "1637",
+  "title": "Widest Vertical Area Between Two Points Containing No Points",
+  "goal": "Find the widest empty vertical strip between points.",
+  "strategy": "Only horizontal coordinates affect vertical-strip width. Sort those coordinates; any empty strip is bounded by neighboring distinct coordinates in this order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the widest empty vertical strip between points.",
+    "inspect": "Only horizontal coordinates affect vertical-strip width. Sort those coordinates; any empty strip is bounded by neighboring distinct coordinates in this order.",
+    "update": "Only horizontal coordinates affect vertical-strip width. Sort those coordinates; any empty strip is bounded by neighboring distinct coordinates in this order.",
+    "done": "Find the widest empty vertical strip between points."
+  },
+  "edgeCases": [
+    "All x coordinates coincide",
+    "Two points",
+    "Repeated coordinates do not create width"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

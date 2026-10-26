@@ -1,1 +1,5 @@
-export { default } from "./MovingAveragefromDataStreamVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MovingAveragefromDataStreamVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

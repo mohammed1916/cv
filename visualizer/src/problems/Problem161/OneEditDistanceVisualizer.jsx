@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/one-edit-distance.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './OneEditDistanceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -18,10 +19,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('one-edit-distance', [
-  { label: 'Example 1', s1: 'ab', s2: 'acb' },
-  { label: 'Example 2', s1: 'cab', s2: 'ab' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def isOneEditDistance(s1, s2):' },
@@ -203,7 +201,7 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'var(--code-bg)',
+                  color: (isMismatch ? 'var(--text-on-light)' : (isHighlight ? 'var(--text-on-light)' : 'var(--text-inverse)')),
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}
@@ -238,7 +236,7 @@ function StringComparison({ s1, s2, highlightIdx, mismatchPos }) {
                   border: isMismatch ? '2px solid #ef4444' : isHighlight ? '2px solid #f59e0b' : '1px solid var(--border)',
                   fontSize: 12,
                   fontWeight: 600,
-                  color: 'var(--code-bg)',
+                  color: (isMismatch ? 'var(--text-on-light)' : (isHighlight ? 'var(--text-on-light)' : 'var(--text-inverse)')),
                   fontFamily: 'monospace',
                 }}
                 animate={{ scale: isHighlight ? 1.15 : 1 }}
@@ -407,9 +405,6 @@ export default function OneEditDistanceVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -427,6 +422,9 @@ export default function OneEditDistanceVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -435,7 +433,7 @@ export default function OneEditDistanceVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '✏️ One Edit Distance', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

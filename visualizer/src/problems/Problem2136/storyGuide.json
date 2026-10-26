@@ -1,0 +1,31 @@
+{
+  "number": "2136",
+  "title": "Earliest Possible Day of Full Bloom",
+  "goal": "Finish planting and growing all flowers as early as possible.",
+  "strategy": "Plant longer-growing flowers first so their growth overlaps later planting. Track elapsed planting time and the latest completion day; growth does not consume the planting resource.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Finish planting and growing all flowers as early as possible.",
+    "inspect": "Plant longer-growing flowers first so their growth overlaps later planting. Track elapsed planting time and the latest completion day; growth does not consume the planting resource.",
+    "update": "Plant longer-growing flowers first so their growth overlaps later planting. Track elapsed planting time and the latest completion day; growth does not consume the planting resource.",
+    "done": "Finish planting and growing all flowers as early as possible."
+  },
+  "edgeCases": [
+    "One seed finishes after planting plus growth",
+    "Equal growth durations permit any planting order",
+    "A short planting task can have the longest growth"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

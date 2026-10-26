@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/k-diff-pairs-in-array.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './KDiffPairsInArrayVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -29,7 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('k-diff-pairs-in-array')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK_NUMS = [3, 1, 4, 1, 5]
 
@@ -173,7 +174,7 @@ function VisualizationPanel({ nums, k, step }) {
 
       {/* Frequency Map */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number Frequencies</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Number Frequencies</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {step?.count && Array.from(step.count.entries()).map(([num, freq]) => {
             const isCurrent = step?.num === num
@@ -377,9 +378,6 @@ export default function KDiffPairsInArrayVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -397,6 +395,9 @@ export default function KDiffPairsInArrayVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

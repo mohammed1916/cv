@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/range-sum-query-immutable.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './RangeSumQuery-ImmutableVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import PointerRail from '../../components/shared/PointerRail'
@@ -39,7 +40,7 @@ function generateSteps({ nums, left, right }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('range-sum-query-immutable', [{ label: 'Classic query', nums: [-2, 0, 3, -5, 2, -1], left: 0, right: 2 }, { label: 'Middle range', nums: [-2, 0, 3, -5, 2, -1], left: 2, right: 5 }])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function RangeSumQueryImmutableVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -181,9 +182,6 @@ export default function RangeSumQueryImmutableVisualizer() {
 
       <div className="range-sum-query--immutable-bottom">
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -201,6 +199,9 @@ export default function RangeSumQueryImmutableVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+          )}
         </FloatingPanel>
       </div>
     </div>

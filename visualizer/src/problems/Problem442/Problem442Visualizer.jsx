@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/find-all-duplicates-in-array.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem442Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -27,7 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('find-all-duplicates-in-array')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums) {
   const steps = []
@@ -115,7 +118,7 @@ function generateSteps(nums) {
 function ArrayVisualization({ nums, current, seen, duplicates }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Array</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Array</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -173,7 +176,7 @@ function ArrayVisualization({ nums, current, seen, duplicates }) {
 function SeenMapVisualization({ seen }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Seen Map</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Seen Map</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -213,7 +216,7 @@ function SeenMapVisualization({ seen }) {
 function DuplicatesVisualization({ duplicates }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Duplicates Found</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Duplicates Found</div>
       <div style={{
         padding: 12,
         backgroundColor: '#fee2e2',
@@ -255,7 +258,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -296,7 +299,7 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem442Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[4,3,2,7,8,2,3,1]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

@@ -1,0 +1,31 @@
+{
+  "number": "1032",
+  "title": "Stream of Characters",
+  "goal": "After each streamed character, determine whether any dictionary word is a current suffix.",
+  "strategy": "A reversed-word trie lets each query walk backward from the newest character. Stop at the first terminal or missing edge, retaining only the longest useful suffix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "After each streamed character, determine whether any dictionary word is a current suffix.",
+    "inspect": "A reversed-word trie lets each query walk backward from the newest character. Stop at the first terminal or missing edge, retaining only the longest useful suffix.",
+    "update": "A reversed-word trie lets each query walk backward from the newest character. Stop at the first terminal or missing edge, retaining only the longest useful suffix.",
+    "done": "After each streamed character, determine whether any dictionary word is a current suffix."
+  },
+  "edgeCases": [
+    "One-letter matches are immediate",
+    "No stream suffix matches",
+    "Repeated suffix matches overlap"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

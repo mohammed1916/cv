@@ -1,0 +1,44 @@
+{
+  "number": "79",
+  "title": "Word Search",
+  "goal": "Solve Word Search: Follow orthogonally adjacent cells matching successive word characters, marking the current path and restoring it on return.",
+  "strategy": "Follow orthogonally adjacent cells matching successive word characters, marking the current path and restoring it on return.",
+  "phases": [
+    "init",
+    "match",
+    "success",
+    "backtrack",
+    "not_found",
+    "check",
+    "choose",
+    "start_cell",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A cell cannot be reused within one word path; a failed branch must release its cells for other paths."
+  ],
+  "checks": [
+    {
+      "condition": "i == len(word)",
+      "outcome": "return True"
+    },
+    {
+      "condition": "out of bounds / mismatch / visited",
+      "outcome": "return False"
+    },
+    {
+      "condition": "dfs(r, c, 0)",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "Board must be 2D array of letters",
+    "All rows must have same width",
+    "Word must be non-empty"
+  ],
+  "source": [
+    "src/problems/Problem79/index.jsx",
+    "src/problems/Problem79/WordSearchVisualizer.jsx"
+  ]
+}

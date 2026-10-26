@@ -1,0 +1,21 @@
+{
+  "number": "474",
+  "title": "Ones and Zeroes",
+  "goal": "Solve Ones and Zeroes: Find maximum number of strings formable using at most m zeros and n ones.",
+  "strategy": "Find maximum number of strings formable using at most m zeros and n ones.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Update capacities backward so one string cannot be selected multiple times during its own iteration."
+  ],
+  "checks": [],
+  "inputRules": [
+    "strs must be an array",
+    "m must be a number",
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem474/index.jsx",
+    "src/problems/Problem474/Problem474Visualizer.jsx"
+  ]
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/coin-change-2.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CoinChange2Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -26,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('coin-change-2')
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def change(amount, coins):' },
@@ -125,7 +128,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -148,7 +151,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* Coins */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Coins: {coins.join(', ')}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Coins: {coins.join(', ')}</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {coins.map((coin, idx) => {
             const isActive = step && idx === step.coinIdx
@@ -177,7 +180,7 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
       {/* DP Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>DP Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
           {step?.dp?.map((val, idx) => {
             const isActive = step && idx === step.amountIdx && step.amountIdx !== -1
@@ -233,8 +236,8 @@ function VisualizationPanel({ amount, coins, step, applyEx }) {
 
 export default function CoinChange2Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [amountInput, setAmountInput] = useState(5);
-  const [coinsInput, setCoinsInput] = useState("[1,2,5]");
+  const [amountInput, setAmountInput] = useState(String(AUTHORED_INITIAL.amount));
+  const [coinsInput, setCoinsInput] = useState(JSON.stringify(AUTHORED_INITIAL.coins));
   const { amount, coins, inputError } = useMemo(() => {
     try {
       const parsedAmount = Number(amountInput); if (isNaN(parsedAmount)) throw new Error('amount must be a number');
@@ -341,9 +344,6 @@ export default function CoinChange2Visualizer() {
       )}
       {createPortal(
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -361,6 +361,9 @@ export default function CoinChange2Visualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+          )}
         </FloatingPanel>,
         document.body
       )}

@@ -1,11 +1,14 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/search-in-rotated-sorted-array-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './SearchRotatedArrayIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -162,15 +165,11 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = getExamplesOr('search-in-rotated-sorted-array-ii', [
-    { label: 'Find True', nums: [1, 0, 1, 1, 1], target: 0 },
-    { label: 'Find False', nums: [1, 3], target: 3 },
-    { label: 'With Duplicates', nums: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1], target: 2 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function SearchRotatedArrayIIVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,0,1,1,1]')
-    const [targetInput, setTargetInput] = useState('0')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+    const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -238,25 +237,7 @@ export default function SearchRotatedArrayIIVisualizer() {
                             </button>
                         ))}
                     </div>
-                    <div className="sra2-inputs">
-                        <div className="sra2-input-group">
-                            <label className="sra2-label">nums</label>
-                            <input
-                                className="sra2-input"
-                                value={numsInput}
-                                onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-                            />
-                        </div>
-                        <div className="sra2-input-group">
-                            <label className="sra2-label">target</label>
-                            <input
-                                className="sra2-input narrow"
-                                value={targetInput}
-                                onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-                                type="number"
-                            />
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {/* Array */}
@@ -359,9 +340,6 @@ export default function SearchRotatedArrayIIVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -373,6 +351,9 @@ export default function SearchRotatedArrayIIVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SEARCHROTATEDARRAYII_PATTERNS} />
+            )}
         </>
     )
 
@@ -381,7 +362,7 @@ export default function SearchRotatedArrayIIVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Search Rotated Array II · Binary Search', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

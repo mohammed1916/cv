@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/letter-combinations.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +12,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LetterCombinationsVisualizer.css";
 
 const LC_PATTERNS = ['init', 'choose', 'record', 'unchoose', 'done']
@@ -95,7 +96,7 @@ function generateSteps(digits) {
     return steps;
 }
 
-const EXAMPLES = getExamples('letter-combinations');
+const EXAMPLES = authoredExamples0;
 
 export default function LetterCombinationsVisualizer() {
     const [digits, setDigits] = useState("23");
@@ -148,20 +149,20 @@ export default function LetterCombinationsVisualizer() {
                 <input style={{ padding: '6px 10px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12 }} value={digits} onChange={e => { setDigits(e.target.value); handleReset(); }} placeholder="digits (e.g. 23)" maxLength={4} />
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Phone keypad</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Phone keypad</div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6 }}>
                 {Object.entries(PHONE_MAP).map(([d, letters]) => (
                     <div key={d} style={{
                         padding: 8, borderRadius: 6, border: validDigits.includes(d) ? '2px solid #0ea5e9' : '1px solid var(--border)',
                         backgroundColor: step?.activeDigit === d ? '#dbeafe' : 'var(--surface)', textAlign: 'center'
                     }}>
-                        <div style={{ fontSize: 14, fontWeight: 'bold', color: 'var(--surface2)', marginBottom: 4 }}>{d}</div>
+                        <div style={{ fontSize: 14, fontWeight: 'bold', color: (step?.activeDigit === d ? 'var(--text-on-light)' : 'var(--text)'), marginBottom: 4 }}>{d}</div>
                         <div style={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
                             {letters.split("").map(l => (
                                 <span key={l} style={{
                                     fontSize: 12, fontWeight: 'bold', padding: '2px 4px',
                                     backgroundColor: step?.activeChar === l && step?.activeDigit === d ? '#fbbf24' : '#f3f4f6',
-                                    borderRadius: 3, color: 'var(--surface2)'
+                                    borderRadius: 3, color: 'var(--text-on-light)'
                                 }}>
                                     {l}
                                 </span>
@@ -171,7 +172,7 @@ export default function LetterCombinationsVisualizer() {
                 ))}
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Current path</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Current path</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.path ?? []).map((c, i) => (
@@ -186,7 +187,7 @@ export default function LetterCombinationsVisualizer() {
                 {(step?.path?.length ?? 0) === 0 && <span style={{ color: 'var(--text-muted)', fontSize: 12 }}>empty</span>}
             </div>
 
-            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Results ({step?.res?.length ?? 0})</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Results ({step?.res?.length ?? 0})</div>
             <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', flex: 1, overflow: 'auto', paddingBottom: 8 }}>
                 <AnimatePresence mode="popLayout">
                     {(step?.res ?? []).map((s, i) => (
@@ -211,9 +212,6 @@ export default function LetterCombinationsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={LC_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -231,6 +229,9 @@ export default function LetterCombinationsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={LC_PATTERNS} />
+            )}
         </>
     );
 
@@ -240,7 +241,7 @@ export default function LetterCombinationsVisualizer() {
         () => [
             { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'primary', title: '☎️ Backtracking Paths', dockMode: 'split-right' },
-            { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+            { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
         ],
         []
     );

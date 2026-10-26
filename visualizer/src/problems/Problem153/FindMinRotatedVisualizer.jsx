@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/find-min-rotated-sorted-array.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -6,7 +7,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FindMinRotatedVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -87,7 +88,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('find-min-rotated-sorted-array')
+const EXAMPLES = authoredExamples0
 
 export default function FindMinRotatedVisualizer() {
     const [input, setInput] = useState('[3,4,5,1,2]')
@@ -229,7 +230,6 @@ export default function FindMinRotatedVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward}
@@ -241,6 +241,7 @@ export default function FindMinRotatedVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
         </>
     )
 
@@ -248,7 +249,7 @@ export default function FindMinRotatedVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Find Min in Rotated Sorted Array', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

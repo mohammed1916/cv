@@ -1,0 +1,20 @@
+{
+  "number": "340",
+  "title": "Longest Substring with At Most K Distinct Characters",
+  "goal": "Solve Longest Substring with At Most K Distinct Characters: Find longest substring with at most k distinct characters.",
+  "strategy": "Find longest substring with at most k distinct characters.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "k == 0",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem340/index.jsx",
+    "src/problems/Problem340/LongestSubstringwithAtMostKDistinctCharactersVisualizer.jsx"
+  ]
+}

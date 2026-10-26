@@ -1,0 +1,31 @@
+{
+  "number": "2001",
+  "title": "Number of Pairs of Interchangeable Rectangles",
+  "goal": "Count pairs of rectangles with the same width-to-height ratio.",
+  "strategy": "Reduce each width and height by their greatest common divisor. Every earlier rectangle with the same reduced pair forms one new interchangeable pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs of rectangles with the same width-to-height ratio.",
+    "inspect": "Reduce each width and height by their greatest common divisor. Every earlier rectangle with the same reduced pair forms one new interchangeable pair.",
+    "update": "Reduce each width and height by their greatest common divisor. Every earlier rectangle with the same reduced pair forms one new interchangeable pair.",
+    "done": "Count pairs of rectangles with the same width-to-height ratio."
+  },
+  "edgeCases": [
+    "All equal rectangles still occupy distinct positions",
+    "Reciprocal ratios are different",
+    "One rectangle has no partner"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

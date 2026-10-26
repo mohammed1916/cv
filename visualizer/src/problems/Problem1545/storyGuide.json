@@ -1,0 +1,31 @@
+{
+  "number": "1545",
+  "title": "Find Kth Bit in Nth Binary String",
+  "goal": "Find the kth bit in the recursively mirrored and inverted binary sequence.",
+  "strategy": "The center is one. Left-half positions descend unchanged; right-half positions mirror into the previous level and toggle inversion.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the kth bit in the recursively mirrored and inverted binary sequence.",
+    "inspect": "The center is one. Left-half positions descend unchanged; right-half positions mirror into the previous level and toggle inversion.",
+    "update": "The center is one. Left-half positions descend unchanged; right-half positions mirror into the previous level and toggle inversion.",
+    "done": "Find the kth bit in the recursively mirrored and inverted binary sequence."
+  },
+  "edgeCases": [
+    "Base sequence",
+    "Middle bit",
+    "Final bit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

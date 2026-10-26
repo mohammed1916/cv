@@ -1,0 +1,25 @@
+{
+  "number": "350",
+  "title": "Intersection of Two Arrays II",
+  "goal": "Solve Intersection of Two Arrays II: Consume matching value counts so each value appears in the intersection only as many times as both arrays supply it.",
+  "strategy": "Consume matching value counts so each value appears in the intersection only as many times as both arrays supply it.",
+  "phases": [
+    "checking",
+    "counting",
+    "done",
+    "match_found",
+    "no_match",
+    "ready_to_match",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Duplicates are retained up to the smaller multiplicity; membership alone would lose this information."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem350/index.jsx",
+    "src/problems/Problem350/Problem350Visualizer.jsx"
+  ]
+}

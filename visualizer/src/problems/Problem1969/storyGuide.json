@@ -1,0 +1,31 @@
+{
+  "number": "1969",
+  "title": "Minimum Non-Zero Product of the Array Elements",
+  "goal": "Minimize the nonzero product of values from one through 2^p-1 after allowed bit swaps.",
+  "strategy": "The minimum has one maximum value, many ones, and pairs contributing maximum minus one. Evaluate maximum times (maximum minus one) to the power 2^(p-1)-1 modulo 1000000007.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the nonzero product of values from one through 2^p-1 after allowed bit swaps.",
+    "inspect": "The minimum has one maximum value, many ones, and pairs contributing maximum minus one. Evaluate maximum times (maximum minus one) to the power 2^(p-1)-1 modulo 1000000007.",
+    "update": "The minimum has one maximum value, many ones, and pairs contributing maximum minus one. Evaluate maximum times (maximum minus one) to the power 2^(p-1)-1 modulo 1000000007.",
+    "done": "Minimize the nonzero product of values from one through 2^p-1 after allowed bit swaps."
+  },
+  "edgeCases": [
+    "One-bit range contains only one",
+    "Two-bit range provides the first pair",
+    "Largest allowed bit width"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

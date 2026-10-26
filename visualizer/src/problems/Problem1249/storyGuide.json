@@ -1,0 +1,31 @@
+{
+  "number": "1249",
+  "title": "Minimum Remove to Make Valid Parentheses",
+  "goal": "Remove the fewest parentheses needed to make the string valid.",
+  "strategy": "Match closers to available openers. Unmatched closers and leftover openers are exactly the brackets that cannot participate in any valid pairing.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the fewest parentheses needed to make the string valid.",
+    "inspect": "Match closers to available openers. Unmatched closers and leftover openers are exactly the brackets that cannot participate in any valid pairing.",
+    "update": "Match closers to available openers. Unmatched closers and leftover openers are exactly the brackets that cannot participate in any valid pairing.",
+    "done": "Remove the fewest parentheses needed to make the string valid."
+  },
+  "edgeCases": [
+    "No parentheses to remove",
+    "Only unmatched parentheses",
+    "Already balanced nested text"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

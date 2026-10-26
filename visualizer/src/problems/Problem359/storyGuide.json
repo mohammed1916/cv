@@ -1,0 +1,31 @@
+{
+  "number": "359",
+  "title": "Logger Rate Limiter",
+  "goal": "Track the last accepted timestamp per message so each independent message can be printed again only after the time window expires.",
+  "strategy": "Remember the last accepted timestamp for each message and allow it again only after its suppression interval has elapsed.",
+  "phases": [
+    "check_exists",
+    "cooldown_active",
+    "cooldown_expired",
+    "done",
+    "init",
+    "new_message",
+    "request_arrives"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Different messages have independent timers; the exact interval boundary is accepted."
+  ],
+  "checks": [],
+  "inputRules": [
+    "requests must be an array",
+    "each request must be an object { \"timestamp\": number, \"message\": string }",
+    "each request needs a numeric \"timestamp\"",
+    "each request needs a string \"message\"",
+    "threshold must be a non-negative number"
+  ],
+  "source": [
+    "src/problems/Problem359/index.jsx",
+    "src/problems/Problem359/Problem359Visualizer.jsx"
+  ]
+}

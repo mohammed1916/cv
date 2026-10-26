@@ -1,0 +1,31 @@
+{
+  "number": "2685",
+  "title": "Count the Number of Complete Components",
+  "goal": "Count connected components in which every pair of different vertices has an edge.",
+  "strategy": "Union graph endpoints, then count vertices and edges in each completed component. A simple component of size k is complete exactly when it has k times k minus one divided by two edges; an isolated vertex qualifies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count connected components in which every pair of different vertices has an edge.",
+    "inspect": "Union graph endpoints, then count vertices and edges in each completed component. A simple component of size k is complete exactly when it has k times k minus one divided by two edges; an isolated vertex qualifies.",
+    "update": "Union graph endpoints, then count vertices and edges in each completed component. A simple component of size k is complete exactly when it has k times k minus one divided by two edges; an isolated vertex qualifies.",
+    "done": "Count connected components in which every pair of different vertices has an edge."
+  },
+  "edgeCases": [
+    "All isolated vertices are complete components",
+    "A four-node clique is one complete component",
+    "One missing clique edge prevents completeness"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "number": "70",
+  "title": "Climbing Stairs",
+  "goal": "Solve Climbing Stairs: Count ways to reach each step by combining routes whose final move climbs one step or two steps.",
+  "strategy": "Count ways to reach each step by combining routes whose final move climbs one step or two steps.",
+  "phases": [
+    "add",
+    "done",
+    "init",
+    "loop",
+    "shift",
+    "temp"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The starting base cases determine the recurrence; one and two steps have different counts."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be between 1 and 45"
+  ],
+  "source": [
+    "src/problems/Problem70/index.jsx",
+    "src/problems/Problem70/ClimbingStairsVisualizer.jsx"
+  ]
+}

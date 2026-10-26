@@ -1,9 +1,12 @@
 export const meta = {
-  number: 573,
-  title: 'Squirrel Distribution',
-  slug: 'squirrel-distribution',
-  difficulty: 'Medium',
-  tags: ['Array', 'Greedy', 'Simulation'],
-  description: 'Find minimum distance for squirrel to visit all chairs by jumping between positions.',
-  accent: '#f87171',
-}
+  "number": "573",
+  "title": "Squirrel Simulation",
+  "slug": "squirrel-simulation",
+  "difficulty": "Medium",
+  "tags": [
+    "Math",
+    "Greedy"
+  ],
+  "accent": "#0891b2",
+  "description": "Minimize the squirrel travel needed to carry every nut individually to the tree."
+};

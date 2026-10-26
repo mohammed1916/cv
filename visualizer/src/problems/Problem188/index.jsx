@@ -1,1 +1,5 @@
-export { default } from "./BestTimeBuySellStockIVVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./BestTimeBuySellStockIVVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

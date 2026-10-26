@@ -1,0 +1,32 @@
+{
+  "number": "299",
+  "title": "Bulls and Cows",
+  "goal": "Solve Bulls and Cows: Count bulls (exact digit+position matches) and cows (digit matches out of place); return \"xAyB\".",
+  "strategy": "Count bulls (exact digit+position matches) and cows (digit matches out of place); return \"xAyB\".",
+  "phases": [
+    "init",
+    "bull_scan",
+    "bull_found",
+    "count_secret",
+    "cow_scan",
+    "cow_found",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "secret[i] == guess[i]",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "secret and guess must contain digits only",
+    "secret and guess must be the same length"
+  ],
+  "source": [
+    "src/problems/Problem299/index.jsx",
+    "src/problems/Problem299/Problem299Visualizer.jsx"
+  ]
+}

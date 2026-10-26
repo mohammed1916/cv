@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/subsets.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,7 +13,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SubsetsVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -93,10 +96,10 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('subsets')
+const EXAMPLES = authoredExamples0
 
 export default function SubsetsVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,2,3]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
 
     const { nums, inputError } = useMemo(() => {
         try {
@@ -127,14 +130,6 @@ export default function SubsetsVisualizer() {
                 {inputError && <span className="sub-error">{inputError}</span>}
             </header>
             <div className="sub-body">
-                <div className="sub-examples">
-                    {EXAMPLES.map((ex) => (
-                        <button key={ex.label} className="sub-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                    ))}
-                </div>
-                <input className="sub-input" value={numsInput} onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }} />
 
                 {/* Current path */}
                 <div className="sub-section-label">Current path</div>
@@ -227,9 +222,6 @@ export default function SubsetsVisualizer() {
     )
     const playbackPanel = (
         <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -243,6 +235,9 @@ export default function SubsetsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={SUBSETS_PATTERNS} />
+            )}
         </>
     )
 
@@ -252,7 +247,7 @@ export default function SubsetsVisualizer() {
         () => [
             { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
             { id: 'results', title: 'Results', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

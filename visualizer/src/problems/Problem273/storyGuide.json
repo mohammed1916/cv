@@ -1,0 +1,26 @@
+{
+  "number": "273",
+  "title": "Integer to English Words",
+  "goal": "Solve Integer to English Words: Convert integer to English words.",
+  "strategy": "Convert integer to English words.",
+  "phases": [
+    "done",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num == 0",
+      "outcome": "return \"Zero\""
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem273/index.jsx",
+    "src/problems/Problem273/Problem273Visualizer.jsx"
+  ]
+}

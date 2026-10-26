@@ -1,0 +1,31 @@
+{
+  "number": "2141",
+  "title": "Maximum Running Time of N Computers",
+  "goal": "Run n computers simultaneously for as long as possible by swapping batteries.",
+  "strategy": "For a target runtime, each battery contributes at most that runtime because it cannot power two computers at once. Feasibility is total capped energy at least n times the target.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Run n computers simultaneously for as long as possible by swapping batteries.",
+    "inspect": "For a target runtime, each battery contributes at most that runtime because it cannot power two computers at once. Feasibility is total capped energy at least n times the target.",
+    "update": "For a target runtime, each battery contributes at most that runtime because it cannot power two computers at once. Feasibility is total capped energy at least n times the target.",
+    "done": "Run n computers simultaneously for as long as possible by swapping batteries."
+  },
+  "edgeCases": [
+    "One computer can consume every battery in sequence",
+    "Exactly one battery per computer is limited by the smallest",
+    "A huge battery cannot power two computers simultaneously"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

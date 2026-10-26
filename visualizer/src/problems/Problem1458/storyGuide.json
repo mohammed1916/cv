@@ -1,0 +1,31 @@
+{
+  "number": "1458",
+  "title": "Max Dot Product of Two Subsequences",
+  "goal": "Maximize the dot product of two equally long nonempty subsequences.",
+  "strategy": "Prefix DP may skip an element on either side or pair the current elements. Start a new nonempty product at that pair when the earlier diagonal is negative; negative-infinity borders forbid an empty answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the dot product of two equally long nonempty subsequences.",
+    "inspect": "Prefix DP may skip an element on either side or pair the current elements. Start a new nonempty product at that pair when the earlier diagonal is negative; negative-infinity borders forbid an empty answer.",
+    "update": "Prefix DP may skip an element on either side or pair the current elements. Start a new nonempty product at that pair when the earlier diagonal is negative; negative-infinity borders forbid an empty answer.",
+    "done": "Maximize the dot product of two equally long nonempty subsequences."
+  },
+  "edgeCases": [
+    "Every possible product is negative but an empty result is forbidden",
+    "Negative pairs can make a positive optimum",
+    "A zero product can beat every negative pairing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

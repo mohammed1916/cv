@@ -1,0 +1,29 @@
+{
+  "number": "210",
+  "title": "Course Schedule II",
+  "goal": "Solve Course Schedule II: Run Kahn's topological sort to build a valid course ordering, or return [] when a cycle blocks completion.",
+  "strategy": "Run Kahn's topological sort to build a valid course ordering, or return [] when a cycle blocks completion.",
+  "phases": [
+    "done",
+    "init",
+    "build",
+    "queue_init",
+    "pop",
+    "append",
+    "relax",
+    "enqueue"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A cycle prevents a complete topological ordering; independent zero-indegree courses can have several valid orders."
+  ],
+  "checks": [],
+  "inputRules": [
+    "numCourses must be 1-14",
+    "prerequisites must be a 2D array"
+  ],
+  "source": [
+    "src/problems/Problem210/index.jsx",
+    "src/problems/Problem210/CourseScheduleIIVisualizer.jsx"
+  ]
+}

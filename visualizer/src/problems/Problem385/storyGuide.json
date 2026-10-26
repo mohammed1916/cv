@@ -1,0 +1,24 @@
+{
+  "number": "385",
+  "title": "Mini Parser",
+  "goal": "Solve Mini Parser: Parse nested integer notation using recursion and stack.",
+  "strategy": "Parse nested integer notation using recursion and stack.",
+  "phases": [
+    "complete",
+    "init",
+    "list_complete",
+    "list_start",
+    "parse",
+    "parse_number"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A scalar integer and a nested list are distinct parse cases; signs and empty lists must preserve their meaning."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem385/index.jsx",
+    "src/problems/Problem385/Problem385Visualizer.jsx"
+  ]
+}

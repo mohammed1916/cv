@@ -1,0 +1,31 @@
+{
+  "number": "1720",
+  "title": "Decode XORed Array",
+  "goal": "Recover an array from its first value and XORs of adjacent pairs.",
+  "strategy": "XORing the previous original value with the encoded pair cancels the previous value, leaving the next original value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Recover an array from its first value and XORs of adjacent pairs.",
+    "inspect": "XORing the previous original value with the encoded pair cancels the previous value, leaving the next original value.",
+    "update": "XORing the previous original value with the encoded pair cancels the previous value, leaving the next original value.",
+    "done": "Recover an array from its first value and XORs of adjacent pairs."
+  },
+  "edgeCases": [
+    "One encoded pair",
+    "Zero encodings repeat the preceding value",
+    "First value is zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "number": "61",
+  "title": "Rotate List",
+  "goal": "Rotate List visualization",
+  "strategy": "Measure list length, reduce rotation modulo that length, and reconnect the list at the resulting split.",
+  "phases": [
+    "init",
+    "measure",
+    "form_ring",
+    "locate",
+    "break_ring",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A multiple of the length leaves the list unchanged; empty and one-node lists need no rewiring."
+  ],
+  "checks": [
+    {
+      "condition": "not head or not head.next",
+      "outcome": "return head"
+    }
+  ],
+  "inputRules": [
+    "list must be an array",
+    "Max 8 nodes for clarity",
+    "k must be a non-negative number"
+  ],
+  "source": [
+    "src/problems/Problem61/index.jsx",
+    "src/problems/Problem61/Visualizer.jsx"
+  ]
+}

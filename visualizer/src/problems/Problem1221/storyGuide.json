@@ -1,0 +1,31 @@
+{
+  "number": "1221",
+  "title": "Split a String in Balanced Strings",
+  "goal": "Split a balanced L/R string into as many balanced pieces as possible.",
+  "strategy": "Every return of prefix balance to zero is a safe cut. Taking it immediately cannot reduce the choices for the untouched suffix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split a balanced L/R string into as many balanced pieces as possible.",
+    "inspect": "Every return of prefix balance to zero is a safe cut. Taking it immediately cannot reduce the choices for the untouched suffix.",
+    "update": "Every return of prefix balance to zero is a safe cut. Taking it immediately cannot reduce the choices for the untouched suffix.",
+    "done": "Split a balanced L/R string into as many balanced pieces as possible."
+  },
+  "edgeCases": [
+    "One indivisible balanced section",
+    "Every pair can close immediately",
+    "Reverse starting direction"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

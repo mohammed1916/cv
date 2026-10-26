@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--420.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,11 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  { label: 'Short', password: 'a', expected: 5 },
-  { label: 'NoUpper', password: 'aabbcc', expected: 1 },
-  { label: 'NoDigit', password: 'ABbBb', expected: 1 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(password) {
   const steps = []
@@ -174,7 +172,7 @@ function PasswordCheckerVisualization({ password, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Strong Password Checker</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Strong Password Checker</div>
 
       {/* Password display */}
       <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '2px solid var(--border)' }}>
@@ -182,7 +180,7 @@ function PasswordCheckerVisualization({ password, step }) {
         <div style={{
           fontSize: 14,
           fontFamily: 'monospace',
-          color: 'var(--surface2)',
+          color: 'var(--text)',
           wordBreak: 'break-all',
           letterSpacing: '2px',
         }}>
@@ -353,7 +351,7 @@ export default function Problem420Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

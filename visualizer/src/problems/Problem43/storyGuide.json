@@ -1,0 +1,32 @@
+{
+  "number": "43",
+  "title": "Multiply Strings",
+  "goal": "Solve Multiply Strings: Grade-school multiplication: for each digit pair, multiply and add to result[i+j] and result[i+j+1]; handle carries; trim leading zeros.",
+  "strategy": "Grade-school multiplication: for each digit pair, multiply and add to result[i+j] and result[i+j+1]; handle carries; trim leading zeros.",
+  "phases": [
+    "add_to_result",
+    "create_result_array",
+    "done",
+    "init",
+    "multiply",
+    "trim_zeros",
+    "update_cells",
+    "zero-check"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num1 == \"0\" or num2 == \"0\"",
+      "outcome": "return \"0\""
+    }
+  ],
+  "inputRules": [
+    "Both inputs required",
+    "Must be non-negative integers"
+  ],
+  "source": [
+    "src/problems/Problem43/index.jsx",
+    "src/problems/Problem43/MultiplyStringsVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2083",
+  "title": "Substrings That Begin and End With the Same Letter",
+  "goal": "Count substrings whose first and last characters match.",
+  "strategy": "When a new character becomes the endpoint, every earlier equal character can be its start, and the one-character substring is one more choice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings whose first and last characters match.",
+    "inspect": "When a new character becomes the endpoint, every earlier equal character can be its start, and the one-character substring is one more choice.",
+    "update": "When a new character becomes the endpoint, every earlier equal character can be its start, and the one-character substring is one more choice.",
+    "done": "Count substrings whose first and last characters match."
+  },
+  "edgeCases": [
+    "Every character matches all earlier positions",
+    "Distinct letters permit only singleton substrings",
+    "One character is one substring"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

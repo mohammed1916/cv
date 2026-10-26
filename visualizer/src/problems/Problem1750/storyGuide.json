@@ -1,0 +1,31 @@
+{
+  "number": "1750",
+  "title": "Minimum Length of String After Deleting Similar Ends",
+  "goal": "Minimize remaining string length by repeatedly deleting matching-character prefix and suffix runs.",
+  "strategy": "When the end characters match, remove their complete runs from both ends. Stop when the ends disagree or fewer than two characters remain.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize remaining string length by repeatedly deleting matching-character prefix and suffix runs.",
+    "inspect": "When the end characters match, remove their complete runs from both ends. Stop when the ends disagree or fewer than two characters remain.",
+    "update": "When the end characters match, remove their complete runs from both ends. Stop when the ends disagree or fewer than two characters remain.",
+    "done": "Minimize remaining string length by repeatedly deleting matching-character prefix and suffix runs."
+  },
+  "edgeCases": [
+    "Different ends cannot be removed",
+    "One character must remain",
+    "One repeated run disappears completely"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

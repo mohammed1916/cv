@@ -1,0 +1,24 @@
+{
+  "number": "161",
+  "title": "One Edit Distance",
+  "goal": "Solve One Edit Distance: Check if two strings are one edit distance apart (insert, delete, replace).",
+  "strategy": "Check if two strings are one edit distance apart (insert, delete, replace).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "abs(len(s1) - len(s2)) > 1",
+      "outcome": "return False"
+    },
+    {
+      "condition": "s1[i] != s2[i]",
+      "outcome": "return s1[i+1:] == s2[i+1:]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem161/index.jsx",
+    "src/problems/Problem161/OneEditDistanceVisualizer.jsx"
+  ]
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/find-minimum-in-rotated-sorted-array-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './FindMinimumInRotatedSortedArrayIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -19,10 +22,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('find-minimum-in-rotated-sorted-array-ii', [
-  { label: 'Example 1', nums: [1, 3, 5] },
-  { label: 'Example 2', nums: [2, 2, 2, 0, 1] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMin(nums):' },
@@ -194,7 +194,7 @@ function ArrayVisualization({ nums, left, right, mid }) {
               border: isLeft || isRight ? '3px solid #ef4444' : isMid ? '2px solid #f59e0b' : '1px solid var(--border)',
               fontSize: 12,
               fontWeight: 600,
-              color: 'var(--code-bg)',
+              color: (isMid ? 'var(--text-on-light)' : (isInRange ? 'var(--text-on-light)' : 'var(--text-inverse)')),
             }}
             animate={{ scale: isMid ? 1.15 : 1 }}
           >
@@ -266,7 +266,7 @@ function VisualizationPanel({ step }) {
 
 export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","nums":[1,3,5]});
-  const [numsInput, setNumsInput] = useState("[1,3,5]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -328,7 +328,6 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -346,6 +345,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 
@@ -354,7 +354,7 @@ export default function FindMinimumInRotatedSortedArrayIIVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '🔍 Min Rotated II', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

@@ -1,4 +1,8 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/local--507.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -38,12 +42,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = [
-  { label: '6 · smallest perfect', n: 6 },
-  { label: '28 · perfect', n: 28 },
-  { label: '1 · edge case', n: 1 },
-  { label: '12 · not perfect', n: 12 },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(n) {
   const steps = []
@@ -101,7 +100,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -136,7 +135,7 @@ function VisualizationPanel({ n, step, applyEx }) {
       </motion.div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Proper Divisors Found
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -210,7 +209,7 @@ function VisualizationPanel({ n, step, applyEx }) {
 }
 
 export default function PerfectNumberVisualizer() {
-  const [nInput, setNInput] = useState(6);
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
@@ -285,7 +284,6 @@ export default function PerfectNumberVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -303,6 +301,7 @@ export default function PerfectNumberVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

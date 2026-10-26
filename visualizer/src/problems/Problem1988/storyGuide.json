@@ -1,0 +1,31 @@
+{
+  "number": "1988",
+  "title": "Find Cutoff Score for Each School",
+  "goal": "Choose each school minimum feasible score threshold.",
+  "strategy": "Among exam thresholds admitting no more students than capacity, choose the smallest score. Monotone cumulative counts make this maximize eligible students and break equal-count ties toward the smaller score.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose each school minimum feasible score threshold.",
+    "inspect": "Among exam thresholds admitting no more students than capacity, choose the smallest score. Monotone cumulative counts make this maximize eligible students and break equal-count ties toward the smaller score.",
+    "update": "Among exam thresholds admitting no more students than capacity, choose the smallest score. Monotone cumulative counts make this maximize eligible students and break equal-count ties toward the smaller score.",
+    "done": "Choose each school minimum feasible score threshold."
+  },
+  "edgeCases": [
+    "Equal student counts choose the smaller score",
+    "No threshold fits a small school",
+    "An empty exam table cannot determine a cutoff"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,6 @@
+.list-tree-story__list { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0; }
+.list-tree-story__cell { display: grid; gap: 4px; text-align: center; flex: 0 0 64px; border: 1px solid var(--border); border-radius: 8px; padding: 8px; }
+.list-tree-story__cell.in-range { background: var(--surface2); }
+.list-tree-story__cell.selected { outline: 2px solid var(--primary); outline-offset: -2px; }
+.list-tree-story__cell small { color: var(--text-muted); font-size: 10px; }
+.list-tree-story g.selected circle { stroke: var(--primary); stroke-width: 4; }

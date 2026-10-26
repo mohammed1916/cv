@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--357.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -138,23 +140,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'n = 0',
-    n: 0,
-    description: 'Only 0',
-  },
-  {
-    label: 'n = 1',
-    n: 1,
-    description: '0-9 (10 numbers)',
-  },
-  {
-    label: 'n = 2',
-    n: 2,
-    description: '0-99: 1-digit (10) + 2-digit (81) = 91',
-  },
-]
+const EXAMPLES = authoredExamples0
 
 function DigitChoiceTree({ length, choicesPerPosition }) {
   if (!choicesPerPosition) return null
@@ -411,7 +397,7 @@ export default function Problem357Visualizer() {
           {step && (
             <>
               <div style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, borderLeft: '4px solid #0ea5e9' }}>
-                <div style={{ fontWeight: 600, fontSize: 12, color: 'var(--surface2)' }}>
+                <div style={{ fontWeight: 600, fontSize: 12, color: 'var(--text)' }}>
                   {step.message}
                 </div>
                 {step.calculation && (

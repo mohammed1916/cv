@@ -1,0 +1,31 @@
+{
+  "number": "2203",
+  "title": "Minimum Weighted Subgraph With the Required Paths",
+  "goal": "Find the minimum-weight directed subgraph letting both sources reach the destination.",
+  "strategy": "The two routes may share a suffix after a meeting vertex. Compute shortest distances from both sources and to the destination, then minimize their sum at every possible meeting vertex.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the minimum-weight directed subgraph letting both sources reach the destination.",
+    "inspect": "The two routes may share a suffix after a meeting vertex. Compute shortest distances from both sources and to the destination, then minimize their sum at every possible meeting vertex.",
+    "update": "The two routes may share a suffix after a meeting vertex. Compute shortest distances from both sources and to the destination, then minimize their sum at every possible meeting vertex.",
+    "done": "Find the minimum-weight directed subgraph letting both sources reach the destination."
+  },
+  "edgeCases": [
+    "One source can join the other source before traveling onward",
+    "A source with no route makes the joint subgraph impossible",
+    "Independent routes may meet only at the destination"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

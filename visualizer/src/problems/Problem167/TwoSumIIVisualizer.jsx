@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/two-sum-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -6,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './TwoSumIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -94,11 +97,11 @@ function generateSteps(numbers, target) {
     return steps
 }
 
-const EXAMPLES = getExamples('two-sum-ii')
+const EXAMPLES = authoredExamples0
 
 export default function TwoSumIIVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,7,11,15]')
-    const [targetInput, setTargetInput] = useState('9')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.numbers))
+    const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -155,18 +158,7 @@ export default function TwoSumIIVisualizer() {
                             <button key={ex.label} className="ts2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                         ))}
                     </div>
-                    <div className="ts2-inputs">
-                        <div className="ts2-input-group">
-                            <label className="ts2-label">numbers (sorted)</label>
-                            <input className="ts2-input" value={numsInput}
-                                onChange={e => { setNumsInput(e.target.value); handleReset() }} />
-                        </div>
-                        <div className="ts2-input-group">
-                            <label className="ts2-label">target</label>
-                            <input className="ts2-input narrow" type="number" value={targetInput}
-                                onChange={e => { setTargetInput(e.target.value); handleReset() }} />
-                        </div>
-                    </div>
+                    
                 </div>
 
                 {/* Array */}
@@ -269,7 +261,7 @@ export default function TwoSumIIVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Two Sum II · Two Pointers', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

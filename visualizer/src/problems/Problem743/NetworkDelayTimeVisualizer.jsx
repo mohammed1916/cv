@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--743.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -123,26 +125,7 @@ function generateSteps(n, k, times) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    n: 4,
-    k: 2,
-    times: [[2, 1, 1], [2, 3, 1], [3, 4, 1]],
-  },
-  {
-    label: 'Example 2',
-    n: 2,
-    k: 1,
-    times: [[1, 2, 1]],
-  },
-  {
-    label: 'Example 3',
-    n: 4,
-    k: 1,
-    times: [[1, 2, 1], [1, 4, 4], [2, 3, 2], [3, 4, 1]],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function NetworkDelayTimeVisualizer() {
   const [timesInput, setTimesInput] = useState(JSON.stringify(EXAMPLES[0].times))
@@ -302,7 +285,7 @@ export default function NetworkDelayTimeVisualizer() {
                 textAnchor="middle"
                 fontSize="14"
                 fontWeight="700"
-                fill={isCurrent || isVisited ? '#fff' : 'var(--surface2)'}
+                fill={isCurrent || isVisited ? 'var(--text-on-light)' : 'var(--text)'}
               >
                 {node}
               </text>
@@ -360,7 +343,7 @@ export default function NetworkDelayTimeVisualizer() {
               </div>
 
               <div style={{ padding: 8, backgroundColor: 'var(--surface2)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--code-bg)' }}>Distances:</div>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--text)' }}>Distances:</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {Array.from({ length: n }, (_, i) => i + 1).map((node) => {
                     const dist = step.dist[node]
@@ -376,7 +359,7 @@ export default function NetworkDelayTimeVisualizer() {
                           backgroundColor: isVisited ? '#d1fae5' : 'var(--text)',
                           fontSize: 11,
                           fontWeight: 600,
-                          color: 'var(--code-bg)',
+                          color: (isVisited ? 'var(--text-on-light)' : 'var(--text-inverse)'),
                         }}
                       >
                         {node}: {dist === Infinity ? '∞' : dist}
@@ -387,7 +370,7 @@ export default function NetworkDelayTimeVisualizer() {
               </div>
 
               <div style={{ padding: 8, backgroundColor: 'var(--surface2)', borderRadius: 6, fontSize: 11 }}>
-                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--code-bg)' }}>Heap:</div>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--text)' }}>Heap:</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                   {step.heap.length === 0 ? (
                     <span style={{ color: 'var(--text-muted)', fontSize: 10 }}>Empty</span>

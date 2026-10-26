@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--355.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -210,36 +212,7 @@ function generateSteps(scenario) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Simple Timeline',
-    operations: ['postTweet', 'follow', 'postTweet', 'getNewsFeed'],
-    params: {
-      postTweet: [[1, 1], [2, 2]],
-      follow: [[1, 2]],
-      getNewsFeed: [1],
-    },
-  },
-  {
-    label: 'Example 2: Following Chain',
-    operations: ['postTweet', 'postTweet', 'follow', 'follow', 'getNewsFeed'],
-    params: {
-      postTweet: [[1, 10], [2, 20]],
-      follow: [[1, 2], [1, 3]],
-      getNewsFeed: [1],
-    },
-  },
-  {
-    label: 'Example 3: Complex Network',
-    operations: ['postTweet', 'postTweet', 'postTweet', 'follow', 'follow', 'unfollow', 'postTweet', 'getNewsFeed'],
-    params: {
-      postTweet: [[1, 100], [2, 200], [3, 300]],
-      follow: [[1, 2], [1, 3]],
-      unfollow: [[1, 3]],
-      getNewsFeed: [1],
-    },
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem355Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -308,7 +281,7 @@ export default function Problem355Visualizer() {
                   cursor: 'pointer',
                   fontSize: 12,
                   backgroundColor: exIdx === i ? '#1da1f2' : 'var(--surface2)',
-                  color: exIdx === i ? '#fff' : 'var(--surface2)',
+                  color: exIdx === i ? '#fff' : 'var(--text)',
                   fontWeight: exIdx === i ? 600 : 400,
                 }}
               >

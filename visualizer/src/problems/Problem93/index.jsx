@@ -1,1 +1,5 @@
-export { default } from "./RestoreIPAddressesVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./RestoreIPAddressesVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

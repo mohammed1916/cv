@@ -1,0 +1,31 @@
+{
+  "number": "1941",
+  "title": "Check if All Characters Have Equal Number of Occurrences",
+  "goal": "Check whether every distinct character occurs equally often.",
+  "strategy": "Build a frequency table, then compare every count with the first character count. Characters absent from the input do not participate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether every distinct character occurs equally often.",
+    "inspect": "Build a frequency table, then compare every count with the first character count. Characters absent from the input do not participate.",
+    "update": "Build a frequency table, then compare every count with the first character count. Characters absent from the input do not participate.",
+    "done": "Check whether every distinct character occurs equally often."
+  },
+  "edgeCases": [
+    "One extra occurrence breaks equality",
+    "Only one distinct character",
+    "Every character appears once"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

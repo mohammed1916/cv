@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/max-product-word-lengths.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MaximumProductofWordLengthsVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { BitmaskLane } from '../../components/shared'
@@ -61,11 +62,7 @@ function generateSteps({ words }) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('max-product-word-lengths', [
-  { label: 'Classic', words: ['abcw', 'baz', 'foo', 'bar', 'xtfn', 'abcdef'] },
-  { label: 'No disjoint pair', words: ['a', 'aa', 'aaa', 'aaaa'] },
-  { label: 'Two words', words: ['abc', 'def'] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function MaximumProductofWordLengthsVisualizer() {
   const [inputValue, setInputValue] = useState(JSON.stringify(EXAMPLES[0]))
@@ -125,7 +122,7 @@ export default function MaximumProductofWordLengthsVisualizer() {
 
   const panelConfigs = useMemo(() => [
     { id: 'input', title: 'Input' },
-    { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+    { id: 'code', title: 'Code', dockMode: 'split-right' },
     { id: 'viz', title: '🔤 Bitmask comparison', dockMode: 'split-right' },
   ], [])
   const panelContents = {
@@ -154,9 +151,6 @@ export default function MaximumProductofWordLengthsVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -174,6 +168,9 @@ export default function MaximumProductofWordLengthsVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

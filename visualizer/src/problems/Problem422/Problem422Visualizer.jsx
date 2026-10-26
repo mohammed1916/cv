@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--422.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,23 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = [
-  {
-    label: 'Valid',
-    words: ['abcd', 'bnrt', 'crmy', 'dtye'],
-    expected: true
-  },
-  {
-    label: 'Invalid',
-    words: ['abcd', 'bnrt', 'crm', 'dt'],
-    expected: false
-  },
-  {
-    label: 'Single',
-    words: ['a'],
-    expected: true
-  },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(words) {
   const steps = []
@@ -155,7 +141,7 @@ function WordSquareVisualization({ words, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Valid Word Square</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Valid Word Square</div>
 
       {/* Grid display */}
       <div>
@@ -248,7 +234,7 @@ function WordSquareVisualization({ words, step }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
             <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>words[{step?.checkI}][{step?.checkJ}]</div>
-              <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)', marginTop: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text)', marginTop: 4 }}>
                 '{step?.char1}'
               </div>
             </div>
@@ -259,7 +245,7 @@ function WordSquareVisualization({ words, step }) {
             </div>
             <div style={{ padding: 8, backgroundColor: 'var(--surface)', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>words[{step?.checkJ}][{step?.checkI}]</div>
-              <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--surface2)', marginTop: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 'bold', color: 'var(--text)', marginTop: 4 }}>
                 '{step?.char2}'
               </div>
             </div>
@@ -281,7 +267,7 @@ function WordSquareVisualization({ words, step }) {
                 border: `2px solid ${step?.checkI === idx ? '#6366f1' : 'var(--border)'}`,
                 fontSize: 12,
                 fontFamily: 'monospace',
-                color: 'var(--surface2)',
+                color: (step?.checkI === idx ? 'var(--text-on-light)' : 'var(--text)'),
               }}
             >
               words[{idx}] = "{word}"
@@ -370,7 +356,7 @@ export default function Problem422Visualizer() {
         />),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button

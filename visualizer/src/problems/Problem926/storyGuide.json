@@ -1,0 +1,27 @@
+{
+  "number": "926",
+  "title": "Flip String to Monotone Increasing",
+  "goal": "Minimize flips needed for zeros followed by ones.",
+  "strategy": "For each zero, choose between flipping that zero or flipping all earlier ones. Retain the cheaper valid prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize flips needed for zeros followed by ones.",
+    "inspect": "For each zero, choose between flipping that zero or flipping all earlier ones. Retain the cheaper valid prefix.",
+    "update": "For each zero, choose between flipping that zero or flipping all earlier ones. Retain the cheaper valid prefix.",
+    "done": "Minimize flips needed for zeros followed by ones."
+  },
+  "edgeCases": [
+    "Already monotone",
+    "All zeros",
+    "One descent"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

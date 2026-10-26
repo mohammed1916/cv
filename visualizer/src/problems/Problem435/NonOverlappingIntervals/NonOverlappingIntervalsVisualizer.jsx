@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/non-overlapping-intervals.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../../components/CodeTracePanel'
@@ -5,7 +6,7 @@ import PlaybackControls from '../../../components/PlaybackControls'
 import PatternOverlay from '../../../components/PatternOverlay'
 import { usePlaybackState } from '../../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../../hooks/usePatternOverlay'
-import { getExamples } from '../../../config/examplesRegistry'
+
 import './NonOverlappingIntervalsVisualizer.css'
 import FloatingPanel from '../../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../../components/shared/ManualInputPanel'
@@ -101,7 +102,7 @@ function toX(val, min, max) {
     return TIMELINE_PAD + ((val - min) / (max - min)) * (TIMELINE_W - 2 * TIMELINE_PAD)
 }
 
-const EXAMPLES = getExamples('non-overlapping-intervals')
+const EXAMPLES = authoredExamples0
 
 export default function NonOverlappingIntervalsVisualizer() {
     const [input, setInput] = useState('[[1,2],[2,3],[3,4],[1,3]]')

@@ -1,0 +1,31 @@
+{
+  "number": "1657",
+  "title": "Determine if Two Strings Are Close",
+  "goal": "Decide whether position swaps and existing-character identity swaps can transform one word into the other.",
+  "strategy": "Allowed operations preserve the set of characters and the multiset of their counts. Both conditions, together with equal length, characterize transformability.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether position swaps and existing-character identity swaps can transform one word into the other.",
+    "inspect": "Allowed operations preserve the set of characters and the multiset of their counts. Both conditions, together with equal length, characterize transformability.",
+    "update": "Allowed operations preserve the set of characters and the multiset of their counts. Both conditions, together with equal length, characterize transformability.",
+    "done": "Decide whether position swaps and existing-character identity swaps can transform one word into the other."
+  },
+  "edgeCases": [
+    "Same frequencies but different letters",
+    "Same letters but incompatible frequencies",
+    "Identical words"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "number": "852",
+  "title": "Peak Index in a Mountain Array",
+  "goal": "Find the peak index of a strictly increasing then strictly decreasing mountain.",
+  "strategy": "At the midpoint, an ascending edge puts the peak to the right. A descending edge keeps the midpoint as a possible peak.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the peak index of a strictly increasing then strictly decreasing mountain.",
+    "inspect": "At the midpoint, an ascending edge puts the peak to the right. A descending edge keeps the midpoint as a possible peak.",
+    "update": "At the midpoint, an ascending edge puts the peak to the right. A descending edge keeps the midpoint as a possible peak.",
+    "done": "Find the peak index of a strictly increasing then strictly decreasing mountain."
+  },
+  "edgeCases": [
+    "Peak near left boundary",
+    "Peak near right boundary",
+    "Smallest mountain"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

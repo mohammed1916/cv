@@ -1,0 +1,24 @@
+{
+  "number": "743",
+  "title": "Network Delay Time",
+  "goal": "Solve Network Delay Time: Find minimum time to reach all nodes using Dijkstra.",
+  "strategy": "Find minimum time to reach all nodes using Dijkstra.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "d > dist[u]",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "n must be an integer >= 1",
+    "times must be an array of [u, v, w]",
+    "each edge must be [u, v, w] numbers"
+  ],
+  "source": [
+    "src/problems/Problem743/index.jsx",
+    "src/problems/Problem743/NetworkDelayTimeVisualizer.jsx"
+  ]
+}

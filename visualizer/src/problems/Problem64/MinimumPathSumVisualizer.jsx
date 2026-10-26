@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/minimum-path-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './MinimumPathSumVisualizer.css'
@@ -17,7 +20,7 @@ import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('minimum-path-sum')
 
-const EXAMPLES = getExamples('minimum-path-sum')
+const EXAMPLES = authoredExamples0
 
 const MINIMUMPATHSUM_PATTERNS = ['done', 'fill', 'fill-col', 'fill-row', 'init']
 
@@ -230,7 +233,7 @@ function MinimumPathSumVisualization({
 }
 
 export default function MinimumPathSumVisualizer() {
-  const [gridInput, setGridInput] = useState('[[1,3,1],[1,5,1],[4,2,1]]')
+  const [gridInput, setGridInput] = useState(JSON.stringify(AUTHORED_INITIAL.grid))
 
 
   const { grid, m, n, inputError } = useMemo(() => {
@@ -340,9 +343,6 @@ export default function MinimumPathSumVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -363,6 +363,9 @@ export default function MinimumPathSumVisualizer() {
         onAutoScrollChange={setAutoScrollCode}
         showAutoScroll
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MINIMUMPATHSUM_PATTERNS} />
+      )}
     </>
   )
 
@@ -371,7 +374,7 @@ export default function MinimumPathSumVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Minimum Path Sum · 2D DP', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

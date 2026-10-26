@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/reconstruct-original-digits.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem423Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -21,9 +22,7 @@ const PATTERNS = []
 
 
 
-const EXAMPLES = getExamplesOr('reconstruct-original-digits', [
-  { label: 'Example 1', s: 'owoztneoer' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def originalDigits(s):' },
@@ -88,7 +87,7 @@ function generateSteps(s) {
   const dependentDigits = [
     { digit: 3, unique: [8] },
     { digit: 5, unique: [4] },
-    { digit: 7, unique: [6, 2] },
+    { digit: 7, unique: [6] },
     { digit: 9, unique: [5, 6, 8] },
     { digit: 1, unique: [0, 2, 4] },
   ]
@@ -96,7 +95,8 @@ function generateSteps(s) {
   for (const { digit, unique } of dependentDigits) {
     let subtracted = 0
     for (const u of unique) subtracted += count[u]
-    const finalCount = (charCount['ohfsi'[digit - 1]] ?? 0) - subtracted
+    const marker = { 3: 'h', 5: 'f', 7: 's', 9: 'i', 1: 'o' }[digit]
+    const finalCount = (charCount[marker] ?? 0) - subtracted
     count[digit] = finalCount
     const line = digit === 3 ? 16 : digit === 5 ? 17 : digit === 7 ? 18 : digit === 9 ? 19 : 20
     steps.push({ activeLine: line, message: `count[${digit}] -= dependent digits: ${finalCount}` })

@@ -1,1 +1,5 @@
-export { default } from "./DepartmentHighestSalaryVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./DepartmentHighestSalaryVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

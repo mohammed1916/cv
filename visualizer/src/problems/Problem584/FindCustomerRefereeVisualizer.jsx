@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/find-customer-referee.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './FindCustomerRefereeVisualizer.css'
 
@@ -131,35 +132,7 @@ function generateSteps(customers, targetRefereeId = 2) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('find-customer-referee', [
-  {
-    label: 'Standard',
-    customers: [
-      { id: 1, name: 'Will', referee_id: null },
-      { id: 2, name: 'Jane', referee_id: null },
-      { id: 3, name: 'Alex', referee_id: 2 },
-      { id: 4, name: 'Bill', referee_id: null },
-      { id: 5, name: 'Zack', referee_id: 1 },
-    ],
-    refereeId: 2,
-  },
-  {
-    label: 'Minimal',
-    customers: [
-      { id: 1, name: 'Alice', referee_id: null },
-      { id: 2, name: 'Bob', referee_id: 1 },
-    ],
-    refereeId: 1,
-  },
-  {
-    label: 'All referred',
-    customers: [
-      { id: 1, name: 'Ann', referee_id: 2 },
-      { id: 2, name: 'Ben', referee_id: 2 },
-    ],
-    refereeId: 2,
-  },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function VisualizationPanel({ step, allCustomers, targetRefereeId, inputPanel }) {
   const customers = step?.result || []
@@ -450,9 +423,6 @@ export default function FindCustomerRefereeVisualizer() {
         </>
       )}
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -470,6 +440,9 @@ export default function FindCustomerRefereeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

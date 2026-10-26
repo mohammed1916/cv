@@ -1,0 +1,31 @@
+{
+  "number": "1331",
+  "title": "Rank Transform of an Array",
+  "goal": "Replace values with one-based ranks among distinct sorted values.",
+  "strategy": "Equal values share one rank. Rank increments only when the sorted distinct value changes, so there are no skipped ranks.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace values with one-based ranks among distinct sorted values.",
+    "inspect": "Equal values share one rank. Rank increments only when the sorted distinct value changes, so there are no skipped ranks.",
+    "update": "Equal values share one rank. Rank increments only when the sorted distinct value changes, so there are no skipped ranks.",
+    "done": "Replace values with one-based ranks among distinct sorted values."
+  },
+  "edgeCases": [
+    "Every entry has equal rank",
+    "Already ascending distinct values",
+    "Empty input produces empty ranks"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "number": "682",
+  "title": "Baseball Game",
+  "goal": "Compute the total of valid baseball rounds after cancel, double, and sum operations.",
+  "strategy": "A stack stores only valid rounds. Derived scores use the current stack, so canceled rounds immediately disappear from future calculations.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the total of valid baseball rounds after cancel, double, and sum operations.",
+    "inspect": "A stack stores only valid rounds. Derived scores use the current stack, so canceled rounds immediately disappear from future calculations.",
+    "update": "A stack stores only valid rounds. Derived scores use the current stack, so canceled rounds immediately disappear from future calculations.",
+    "done": "Compute the total of valid baseball rounds after cancel, double, and sum operations."
+  },
+  "edgeCases": [
+    "Cancel the only round",
+    "Negative doubled score",
+    "Several sums"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

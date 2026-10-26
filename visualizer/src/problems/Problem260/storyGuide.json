@@ -1,0 +1,23 @@
+{
+  "number": "260",
+  "title": "Single Number III",
+  "goal": "Solve Single Number III: Find two elements appearing once in array.",
+  "strategy": "Find two elements appearing once in array.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The XOR of the two singles has a set bit because they differ; use that bit to separate them before canceling pairs."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem260/index.jsx",
+    "src/problems/Problem260/Problem260Visualizer.jsx"
+  ]
+}

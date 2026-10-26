@@ -1,0 +1,31 @@
+{
+  "number": "28",
+  "title": "Find First Occurrence",
+  "goal": "Solve Find First Occurrence: Compare candidate starting positions against the pattern until the first complete match is found.",
+  "strategy": "Compare candidate starting positions against the pattern until the first complete match is found.",
+  "phases": [
+    "compare",
+    "done",
+    "empty_needle",
+    "init",
+    "loop_check",
+    "match_found",
+    "mismatch",
+    "return_zero"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A partial prefix match is not a complete occurrence; a match cannot extend past the text end."
+  ],
+  "checks": [
+    {
+      "condition": "not needle",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem28/index.jsx",
+    "src/problems/Problem28/FindFirstOccurrenceVisualizer.jsx"
+  ]
+}

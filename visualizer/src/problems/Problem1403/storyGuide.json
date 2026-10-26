@@ -1,0 +1,31 @@
+{
+  "number": "1403",
+  "title": "Minimum Subsequence in Non-Increasing Order",
+  "goal": "Choose the shortest subsequence whose sum exceeds the remaining values, preferring the greatest sum.",
+  "strategy": "Taking largest values first maximizes the sum at each chosen length. The first prefix exceeding half the total has minimal length and maximal sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose the shortest subsequence whose sum exceeds the remaining values, preferring the greatest sum.",
+    "inspect": "Taking largest values first maximizes the sum at each chosen length. The first prefix exceeding half the total has minimal length and maximal sum.",
+    "update": "Taking largest values first maximizes the sum at each chosen length. The first prefix exceeding half the total has minimal length and maximal sum.",
+    "done": "Choose the shortest subsequence whose sum exceeds the remaining values, preferring the greatest sum."
+  },
+  "edgeCases": [
+    "Equal halves require one more selected value",
+    "One dominant value suffices",
+    "Single positive value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

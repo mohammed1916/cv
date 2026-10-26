@@ -1,0 +1,23 @@
+{
+  "number": "174",
+  "title": "Dungeon Game",
+  "goal": "Solve Dungeon Game: Reverse DP from bottom-right: compute minimum health needed at each cell to survive to the exit.",
+  "strategy": "Reverse DP from bottom-right: compute minimum health needed at each cell to survive to the exit.",
+  "phases": [
+    "init",
+    "fill",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Health must remain at least one at every cell; the cheapest total sum alone does not determine the needed starting health."
+  ],
+  "checks": [],
+  "inputRules": [
+    "dungeon must be an array"
+  ],
+  "source": [
+    "src/problems/Problem174/index.jsx",
+    "src/problems/Problem174/DungeonGameVisualizer.jsx"
+  ]
+}

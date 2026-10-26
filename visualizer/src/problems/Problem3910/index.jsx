@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3910.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import InducedGraph from '../../components/shared/InducedGraph'
@@ -14,15 +18,10 @@ const definition = {
     { id: 'decide', label: 'Count / reject', description: 'Require even parity and connectivity.' },
     { id: 'done', label: 'Complete', description: 'Return the count over all non-empty subsets.' },
   ],
-  examples: [
-    { label: 'Three-node path', input: '{"nums":[1,0,1],"edges":[[0,1],[1,2]]}' },
-    { label: 'Odd singleton', input: '{"nums":[1],"edges":[]}' },
-    { label: 'Disconnected zeros', input: '{"nums":[0,0,0],"edges":[]}' },
-    { label: 'Even triangle', input: '{"nums":[0,0,0],"edges":[[0,1],[0,2],[1,2]]}' },
-  ],
+  examples: authoredExamples0,
 }
 
-export default function EvenConnectedSubgraphs() {
+function EvenConnectedSubgraphs() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <p>Subset mask: {step.mask.toString(2).padStart(run.input.length, '0')} (rightmost bit = node 0). {step.phase === 'done' ? 'All subsets processed.' : `Sum: ${step.sum}.`}</p>
     <InducedGraph values={run.input} edges={run.edges} mask={step.mask} reached={step.reached} active={step.node} />
@@ -43,3 +42,5 @@ export default function EvenConnectedSubgraphs() {
     </tbody></table>}
   </>} />
 }
+
+export default withProblemStory(EvenConnectedSubgraphs, storyGuide);

@@ -1,0 +1,31 @@
+{
+  "number": "1182",
+  "title": "Shortest Distance to Target Color",
+  "goal": "Find the nearest occurrence of the requested color for every index query.",
+  "strategy": "Store sorted occurrence positions by color. At the query insertion point, only the immediate neighbors can minimize distance.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the nearest occurrence of the requested color for every index query.",
+    "inspect": "Store sorted occurrence positions by color. At the query insertion point, only the immediate neighbors can minimize distance.",
+    "update": "Store sorted occurrence positions by color. At the query insertion point, only the immediate neighbors can minimize distance.",
+    "done": "Find the nearest occurrence of the requested color for every index query."
+  },
+  "edgeCases": [
+    "Requested color absent",
+    "Query already matches",
+    "Nearest occurrences tie"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

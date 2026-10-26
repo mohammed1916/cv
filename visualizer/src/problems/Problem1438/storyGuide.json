@@ -1,0 +1,31 @@
+{
+  "number": "1438",
+  "title": "Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit",
+  "goal": "Find the longest contiguous interval whose greatest and least values differ by at most limit.",
+  "strategy": "Monotonic queues retain maximum and minimum candidates. Shrink the left boundary only while their difference violates the limit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest contiguous interval whose greatest and least values differ by at most limit.",
+    "inspect": "Monotonic queues retain maximum and minimum candidates. Shrink the left boundary only while their difference violates the limit.",
+    "update": "Monotonic queues retain maximum and minimum candidates. Shrink the left boundary only while their difference violates the limit.",
+    "done": "Find the longest contiguous interval whose greatest and least values differ by at most limit."
+  },
+  "edgeCases": [
+    "Equal values fit a zero limit",
+    "Limit covers every value difference",
+    "Single value always fits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

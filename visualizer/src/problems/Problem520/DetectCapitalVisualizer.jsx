@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/detect-capital.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DetectCapitalVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -26,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('detect-capital')
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def detectCapitalUse(word):' },
@@ -120,7 +123,7 @@ function VisualizationPanel({ word, step }) {
 
       {/* Word Display */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Word: {word}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Word: {word}</div>
         <div style={{ display: 'flex', gap: 8 }}>
           {word.split('').map((char, idx) => {
             const isUpper = char === char.toUpperCase()
@@ -225,7 +228,7 @@ function VisualizationPanel({ word, step }) {
 }
 
 export default function DetectCapitalVisualizer() {
-  const [wordInput, setWordInput] = useState(EXAMPLES?.[0]?.word ?? 'FiCc')
+  const [wordInput, setWordInput] = useState(AUTHORED_INITIAL.word ?? '')
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 
   const { word, inputError } = useMemo(() => {
@@ -335,9 +338,6 @@ export default function DetectCapitalVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -355,6 +355,9 @@ export default function DetectCapitalVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

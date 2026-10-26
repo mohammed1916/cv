@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/two-sum-iii.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './TwoSumIii-DataStructureDesignVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -60,7 +61,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('two-sum-iii')
+const EXAMPLES = authoredExamples0
 
 export default function TwoSumIiiDataStructureDesignVisualizer() {
   const [input, setInput] = useState('')
@@ -159,7 +160,6 @@ export default function TwoSumIiiDataStructureDesignVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -177,6 +177,7 @@ export default function TwoSumIiiDataStructureDesignVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 
@@ -186,7 +187,7 @@ export default function TwoSumIiiDataStructureDesignVisualizer() {
     () => [
       { id: 'primary', title: 'Input & State', dockMode: 'split-right' },
       { id: 'state', title: 'Step Details', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/set-matrix-zeroes.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom'
 import { motion } from "framer-motion";
@@ -7,7 +8,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import "./SetMatrixZeroesVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -70,9 +71,7 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = getExamplesOr('set-matrix-zeroes', [
-    { label: 'Ex1', matrix: [[1, 1, 1], [1, 0, 1], [1, 1, 1]] },
-]);
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : []);
 
 export default function SetMatrixZeroesVisualizer() {
     const [matrixInput, setMatrixInput] = useState(JSON.stringify(EXAMPLES[0].matrix));
@@ -199,9 +198,6 @@ export default function SetMatrixZeroesVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -212,6 +208,9 @@ export default function SetMatrixZeroesVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+            )}
         </>
     );
 
@@ -220,7 +219,7 @@ export default function SetMatrixZeroesVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Matrix Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

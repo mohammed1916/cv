@@ -1,0 +1,23 @@
+{
+  "number": "325",
+  "title": "Maximum Size Subarray Sum Equals k",
+  "goal": "Solve Maximum Size Subarray Sum Equals k: Find maximum length subarray with sum equal to k.",
+  "strategy": "Find maximum length subarray with sum equal to k.",
+  "phases": [
+    "done",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Keep the earliest index of each prefix sum to maximize subarray length; negative values are allowed."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"nums\": [numbers], \"k\": number }."
+  ],
+  "source": [
+    "src/problems/Problem325/index.jsx",
+    "src/problems/Problem325/MaximumSizeSubarraySumEqualskVisualizer.jsx"
+  ]
+}

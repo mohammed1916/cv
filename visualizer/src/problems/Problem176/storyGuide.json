@@ -1,0 +1,21 @@
+{
+  "number": "176",
+  "title": "Second Highest Salary",
+  "goal": "Solve Second Highest Salary: SQL query to find second highest salary using subquery.",
+  "strategy": "SQL query to find second highest salary using subquery.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The second salary is the second distinct salary; if it does not exist, return null."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem176/index.jsx",
+    "src/problems/Problem176/SecondHighestSalaryVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1807",
+  "title": "Evaluate the Bracket Pairs of a String",
+  "goal": "Replace bracketed keys by known values and unknown keys by question marks.",
+  "strategy": "Build a lookup map and scan complete bracket pairs. Preserve ordinary text, replacing each entire pair once without rescanning the inserted value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace bracketed keys by known values and unknown keys by question marks.",
+    "inspect": "Build a lookup map and scan complete bracket pairs. Preserve ordinary text, replacing each entire pair once without rescanning the inserted value.",
+    "update": "Build a lookup map and scan complete bracket pairs. Preserve ordinary text, replacing each entire pair once without rescanning the inserted value.",
+    "done": "Replace bracketed keys by known values and unknown keys by question marks."
+  },
+  "edgeCases": [
+    "All keys unknown",
+    "Plain text has no substitutions",
+    "Adjacent known keys"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

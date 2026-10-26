@@ -1,0 +1,31 @@
+{
+  "number": "1260",
+  "title": "Shift 2D Grid",
+  "goal": "Shift a grid forward by k flattened positions with wraparound.",
+  "strategy": "Flatten each coordinate, add k modulo the cell count, and unflatten its destination. Read only the original grid while constructing the shifted result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Shift a grid forward by k flattened positions with wraparound.",
+    "inspect": "Flatten each coordinate, add k modulo the cell count, and unflatten its destination. Read only the original grid while constructing the shifted result.",
+    "update": "Flatten each coordinate, add k modulo the cell count, and unflatten its destination. Read only the original grid while constructing the shifted result.",
+    "done": "Shift a grid forward by k flattened positions with wraparound."
+  },
+  "edgeCases": [
+    "Zero shift preserves positions",
+    "Full rotations return the original grid",
+    "Single-column wraparound"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

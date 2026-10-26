@@ -1,15 +1,5 @@
 /* CSS for PathSumIIVisualizer.jsx */
 
-.psi-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-}
-
 /* Panel styles */
 .psi-panel {
   display: flex;
@@ -20,10 +10,10 @@
 
 .psi-panel-head {
   padding: 12px 16px;
-  border-bottom: 1px solid var(--border-color, var(--text));
+  border-bottom: 1px solid var(--border);
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text);
   flex-shrink: 0;
 }
 
@@ -36,57 +26,13 @@
 /* Status panel */
 .psi-status {
   padding: 12px 16px;
-  border-top: 1px solid var(--border-color, var(--text));
+  border-top: 1px solid var(--border);
   font-size: 13px;
   color: var(--text-secondary, var(--text-muted));
   background-color: var(--bg-secondary, var(--surface));
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-/* Visualization and state panel styles */
-.psi-viz-panel {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 12px;
-}
-
-.psi-canvas {
-  position: relative;
-  border: 1px solid var(--border-color, var(--text));
-  border-radius: 6px;
-  background-color: var(--bg-secondary, var(--surface));
-  flex-shrink: 0;
-}
-
-.psi-node {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
-  background-color: #dbeafe;
-  border: 2px solid #3b82f6;
-  color: #1e40af;
-  transition: all 150ms ease;
-}
-
-.psi-node.active {
-  background-color: #fbbf24;
-  border-color: #f59e0b;
-  color: #8a3c0d;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
-}
-
-.psi-node.on-path {
-  background-color: #f38ba8;
-  border-color: #ec4899;
-  color: #3e3e3e;
 }
 
 .psi-state-panel {
@@ -112,18 +58,18 @@
 .psi-value {
   font-size: 16px;
   font-weight: 700;
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text);
   font-family: 'Monaco', 'Menlo', monospace;
 }
 
 .psi-path-display {
   font-size: 14px;
   font-family: 'Monaco', 'Menlo', monospace;
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text);
   padding: 8px 12px;
   background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 4px;
-  border: 1px solid var(--border-color, var(--text));
+  border: 1px solid var(--border);
   word-break: break-all;
 }
 
@@ -136,13 +82,13 @@
   padding: 8px;
   background-color: var(--bg-tertiary, var(--surface2));
   border-radius: 4px;
-  border: 1px solid var(--border-color, var(--text));
+  border: 1px solid var(--border);
 }
 
 .psi-path-item {
   font-size: 12px;
   font-family: 'Monaco', 'Menlo', monospace;
-  color: var(--text-primary, var(--code-bg));
+  color: var(--text);
   padding: 4px 6px;
   background-color: var(--bg-secondary, var(--surface));
   border-radius: 2px;
@@ -154,188 +100,3 @@
   font-style: italic;
 }
 
-.psi-legend {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-color, var(--text));
-}
-
-.psi-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--text-secondary, var(--text-muted));
-}
-
-.psi-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #dbeafe;
-  border: 1.5px solid #3b82f6;
-}
-
-.psi-dot.active {
-  background-color: #fbbf24;
-  border-color: #f59e0b;
-}
-
-.psi-dot.on-path {
-  background-color: #f38ba8;
-  border-color: #ec4899;
-}
-
-/* Input panel styles */
-.psi-input-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.psi-examples {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.psi-chip {
-  padding: 6px 12px;
-  border: 1px solid var(--border-color, var(--text));
-  border-radius: 4px;
-  background-color: var(--bg-secondary, var(--surface));
-  color: var(--text-primary, var(--code-bg));
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.psi-chip:hover {
-  background-color: var(--text);
-  border-color: var(--border);
-}
-
-.psi-input-row {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.psi-input-row label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-secondary, var(--text-muted));
-  min-width: 60px;
-}
-
-.psi-input {
-  flex: 1;
-  min-width: 200px;
-  padding: 8px 12px;
-  border: 1px solid var(--border-color, var(--text));
-  border-radius: 4px;
-  background-color: var(--bg-secondary, var(--surface));
-  color: var(--text-primary, var(--code-bg));
-  font-size: 13px;
-  font-family: 'Monaco', 'Menlo', monospace;
-  transition: all 150ms ease;
-}
-
-.psi-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.psi-error {
-  font-size: 12px;
-  color: #dc2626;
-  font-weight: 500;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="dark"] .psi-panel-head,
-  :root[data-theme="dark"] .psi-status {
-    border-bottom-color: var(--border);
-    border-top-color: var(--border);
-    color: #5577a4;
-  }
-
-  :root[data-theme="dark"] .psi-panel-body {
-    background-color: var(--surface2);
-  }
-
-  :root[data-theme="dark"] .psi-canvas {
-    background-color: var(--surface2);
-    border-color: var(--border);
-  }
-
-  :root[data-theme="dark"] .psi-node {
-    background-color: #0c4a6e;
-    border-color: #0ea5e9;
-    color: #bfdbfe;
-  }
-
-  :root[data-theme="dark"] .psi-node.active {
-    background-color: #713f12;
-    border-color: #d97706;
-    color: #fef3c7;
-  }
-
-  :root[data-theme="dark"] .psi-node.on-path {
-    background-color: #831843;
-    border-color: #ec4899;
-    color: #fbcfe8;
-  }
-
-  :root[data-theme="dark"] .psi-path-display,
-  :root[data-theme="dark"] .psi-paths-list {
-    background-color: var(--code-bg);
-    border-color: var(--border);
-    color: var(--text);
-  }
-
-  :root[data-theme="dark"] .psi-path-item {
-    background-color: var(--surface2);
-    color: var(--text);
-  }
-
-  :root[data-theme="dark"] .psi-empty {
-    color: #627794;
-  }
-
-  :root[data-theme="dark"] .psi-legend {
-    border-top-color: var(--border);
-  }
-
-  :root[data-theme="dark"] .psi-legend-item {
-    color: #5a779b;
-  }
-
-  :root[data-theme="dark"] .psi-input {
-    background-color: var(--surface2);
-    color: var(--text);
-    border-color: var(--border);
-  }
-
-  :root[data-theme="dark"] .psi-input:focus {
-    border-color: #0ea5e9;
-    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-  }
-
-  :root[data-theme="dark"] .psi-chip {
-    background-color: var(--surface2);
-    color: var(--text);
-    border-color: var(--border);
-  }
-
-  :root[data-theme="dark"] .psi-chip:hover {
-    background-color: var(--border);
-    border-color: var(--text-muted);
-  }
-}

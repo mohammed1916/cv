@@ -1,6 +1,6 @@
+import authoredExamples0 from '../../config/examples/max-points-on-aline.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
-import { motion } from "framer-motion";
 import LuminoDockPanel from "../../components/LuminoDockPanel";
 import FloatingPanel from "../../components/shared/FloatingPanel";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -9,7 +9,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./MaxPointsOnALineVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -34,7 +34,7 @@ const SOLUTION_CODE_INLINE = [
 ];
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('max-points-on-aline');
+const EXAMPLES = authoredExamples0;
 
 function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
 
@@ -51,9 +51,9 @@ function normalizeSlope(dx, dy) {
 
 function generateSteps(points) {
     const steps = [];
-    let res = 1;
+    let res = Math.min(1, points.length);
 
-    steps.push({ activeLine: 2, i: -1, j: -1, slopes: {}, res, bestLine: null, message: "Initialize result = 1" });
+    steps.push({ activeLine: 2, i: -1, j: -1, slopes: {}, res, bestLine: null, message: `Initialize result = ${res}` });
 
     for (let i = 0; i < points.length; i++) {
         const [x1, y1] = points[i];
@@ -94,8 +94,6 @@ function toSvg(points, W, H, PAD) {
 }
 
 function VizPanel({
-    EXAMPLES,
-    ex,
     points,
     svgPts,
     W,
@@ -106,17 +104,9 @@ function VizPanel({
     step,
     slopes,
     res,
-    applyEx,
 }) {
     return (
         <div className="mpl-viz-container">
-            <div className="mpl-examples">
-                {EXAMPLES.map(e => (
-                    <button key={e.label} className={`mpl-chip ${ex.label === e.label ? "active" : ""}`} onClick={() => applyEx(e)}>
-                        {e.label}
-                    </button>
-                ))}
-            </div>
 
             <div className="mpl-row">
                 <div className="mpl-panel mpl-chart-wrap">
@@ -136,11 +126,9 @@ function VizPanel({
                             const isPartner = idx === partner;
                             const onLine = slopePts.includes(idx);
                             return (
-                                <motion.circle key={idx} cx={cx} cy={cy}
+                                <circle key={idx} cx={cx} cy={cy}
                                     r={isOrigin ? 9 : (isPartner || onLine) ? 7 : 5}
                                     className={`mpl-dot ${isOrigin ? "origin" : isPartner ? "partner" : onLine ? "on-line" : ""}`}
-                                    animate={{ r: isOrigin ? 9 : (isPartner || onLine) ? 7 : 5 }}
-                                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                 />
                             );
                         })}
@@ -187,16 +175,22 @@ function VizPanel({
 
 export default function MaxPointsOnALineVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [pointsInput, setPointsInput] = useState("[[1,1],[1,1],[2,2],[2,2]]");
+  const [pointsInput, setPointsInput] = useState(() => JSON.stringify(EXAMPLES[0]?.points ?? []));
   const { points, inputError } = useMemo(() => {
     try {
       const parsedPoints = JSON.parse(pointsInput); if (!Array.isArray(parsedPoints)) throw new Error('points must be an array');
+      if (!parsedPoints.every(point => Array.isArray(point) && point.length === 2 && point.every(Number.isSafeInteger))) {
+        throw new Error('Each point must contain two safe integers: [x, y].');
+      }
+      if (new Set(parsedPoints.map(point => JSON.stringify(point))).size !== parsedPoints.length) {
+        throw new Error('Points must be distinct, as required by this problem.');
+      }
       return { points: parsedPoints, inputError: '' };
     } catch (e) {
-      return { points: "[[1,1],[1,1],[2,2],[2,2]]", inputError: e.message };
+      return { points: [], inputError: e.message };
     }
   }, [pointsInput]);
-    const steps = useMemo(() => generateSteps(points), [points]);
+    const steps = useMemo(() => inputError ? [] : generateSteps(points), [points, inputError]);
     const { stepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } =
         usePlaybackState(steps.length);
     const step = stepIndex >= 0 ? steps[stepIndex] : null;
@@ -207,7 +201,7 @@ export default function MaxPointsOnALineVisualizer() {
     const svgPts = useMemo(() => toSvg(points, W, H, PAD), [points]);
     const origin = step?.origin ?? -1;
     const partner = step?.partner ?? -1;
-    const res = step?.res ?? 1;
+    const res = step?.res ?? Math.min(1, points.length);
     const slopes = step?.slopes ?? {};
 
     // Find all points on same slope line from origin
@@ -240,7 +234,7 @@ export default function MaxPointsOnALineVisualizer() {
           <ManualInputPanel
             fields={[{"key":"points","label":"points","type":"array"}]}
             values={{ points: pointsInput }}
-            onChange={(k, v) => { if (k === 'points') setPointsInput(v); handleReset() }}
+            onChange={(k, v) => { if (k === 'points') setPointsInput(v); setEx(null); handleReset() }}
             examples={EXAMPLES}
             activeLabel={ex?.label}
             applyExample={applyEx}
@@ -248,8 +242,6 @@ export default function MaxPointsOnALineVisualizer() {
           />
         <div className="mpl-panel">
             <VizPanel
-                EXAMPLES={EXAMPLES}
-                ex={ex}
                 points={points}
                 svgPts={svgPts}
                 W={W}
@@ -260,7 +252,6 @@ export default function MaxPointsOnALineVisualizer() {
                 step={step}
                 slopes={slopes}
                 res={res}
-                applyEx={applyEx}
             />
         </div>
     
@@ -273,7 +264,6 @@ export default function MaxPointsOnALineVisualizer() {
     )
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -286,6 +276,7 @@ export default function MaxPointsOnALineVisualizer() {
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
         </>
     )
 
@@ -294,7 +285,7 @@ export default function MaxPointsOnALineVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'viz', title: 'Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

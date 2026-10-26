@@ -53,5 +53,5 @@
 
 .vis-example-btn:hover {
   background: var(--border);
-  color: var(--surface);
+  color: var(--text);
 }

@@ -1,0 +1,27 @@
+{
+  "number": "1099",
+  "title": "Two Sum Less Than K",
+  "goal": "Find the greatest sum of two different positions strictly below k.",
+  "strategy": "In sorted order, an oversized sum needs a smaller right endpoint. A valid sum permits a larger left endpoint while retaining the best answer so far.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest sum of two different positions strictly below k.",
+    "inspect": "In sorted order, an oversized sum needs a smaller right endpoint. A valid sum permits a larger left endpoint while retaining the best answer so far.",
+    "update": "In sorted order, an oversized sum needs a smaller right endpoint. A valid sum permits a larger left endpoint while retaining the best answer so far.",
+    "done": "Find the greatest sum of two different positions strictly below k."
+  },
+  "edgeCases": [
+    "An exact threshold is not allowed",
+    "Repeated values may use different positions",
+    "One value supplies no pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

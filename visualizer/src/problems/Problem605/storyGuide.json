@@ -1,0 +1,28 @@
+{
+  "title": "Can Place Flowers",
+  "goal": "Decide whether n new flowers fit without adjacent occupied slots.",
+  "strategy": "Greedily occupy the earliest safe empty slot; this leaves at least as much room for later flowers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Greedily occupy the earliest safe empty slot; this leaves at least as much room for later flowers.",
+    "update": "Every planted flower preserves an empty neighbor on both sides.",
+    "done": "Every planted flower preserves an empty neighbor on both sides."
+  },
+  "edgeCases": [
+    "Both boundaries available",
+    "No flowers requested",
+    "Only one slot",
+    "Not enough space"
+  ],
+  "number": "605",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

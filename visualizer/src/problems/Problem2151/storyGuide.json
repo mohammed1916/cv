@@ -1,0 +1,31 @@
+{
+  "number": "2151",
+  "title": "Maximum Good People Based on Statements",
+  "goal": "Find the largest group that can consistently be considered good.",
+  "strategy": "Enumerate who is good. Only statements made by assumed-good people constrain the assignment; each known statement must agree with the target person status.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest group that can consistently be considered good.",
+    "inspect": "Enumerate who is good. Only statements made by assumed-good people constrain the assignment; each known statement must agree with the target person status.",
+    "update": "Enumerate who is good. Only statements made by assumed-good people constrain the assignment; each known statement must agree with the target person status.",
+    "done": "Find the largest group that can consistently be considered good."
+  },
+  "edgeCases": [
+    "Unknown statements allow everyone to be good",
+    "Two people accusing each other allow at most one good person",
+    "One person with no statement can be good"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

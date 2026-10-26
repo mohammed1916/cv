@@ -1,0 +1,30 @@
+{
+  "number": "71",
+  "title": "Simplify Path",
+  "goal": "Simplify Path visualization",
+  "strategy": "Process path segments with a stack, ignoring current-directory markers and removing one segment for each parent-directory marker.",
+  "phases": [
+    "init",
+    "split",
+    "skip",
+    "pop",
+    "push",
+    "join",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Parent traversal cannot go above root; repeated separators do not create directories."
+  ],
+  "checks": [
+    {
+      "condition": "part == \"\" or part == \".\"",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem71/index.jsx",
+    "src/problems/Problem71/Visualizer.jsx"
+  ]
+}

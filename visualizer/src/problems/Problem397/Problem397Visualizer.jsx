@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--397.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -161,11 +163,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Example 1: n=8 (Power of 2)', n: 8 },
-  { label: 'Example 2: n=7 (Tricky odd)', n: 7 },
-  { label: 'Example 3: n=3 (Edge case)', n: 3 },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem397Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -244,7 +242,7 @@ export default function Problem397Visualizer() {
           {step && (
             <>
               {/* Message */}
-              <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500, color: 'var(--surface2)' }}>
+              <div style={{ padding: 10, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12, fontWeight: 500, color: 'var(--text)' }}>
                 {step.message}
               </div>
 
@@ -454,9 +452,6 @@ export default function Problem397Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -474,6 +469,9 @@ export default function Problem397Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

@@ -1,0 +1,37 @@
+{
+  "number": "695",
+  "title": "Max Area of Island",
+  "goal": "Solve Max Area of Island: Find max area of island using BFS/DFS on 2D grid.",
+  "strategy": "Find max area of island using BFS/DFS on 2D grid.",
+  "phases": [
+    "done",
+    "init",
+    "scan",
+    "found_new",
+    "dfs_explore",
+    "dfs_complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not grid",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "r < 0 or r >= rows or c < 0 or c >= cols",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "(r, c) in visited or grid[r][c] == 0",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Grid must be a 2D array"
+  ],
+  "source": [
+    "src/problems/Problem695/index.jsx",
+    "src/problems/Problem695/MaxAreaOfIslandVisualizer.jsx"
+  ]
+}

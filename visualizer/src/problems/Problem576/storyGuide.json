@@ -1,0 +1,36 @@
+{
+  "number": "576",
+  "title": "Out of Boundary Paths",
+  "goal": "Solve Out of Boundary Paths: Find the number of paths to move out of an m x n grid with exactly k moves.",
+  "strategy": "Find the number of paths to move out of an m x n grid with exactly k moves.",
+  "phases": [
+    "init",
+    "bounds_check",
+    "move_check",
+    "memoization",
+    "explore",
+    "backtrack",
+    "result"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "r < 0 or r >= m or c < 0 or c >= n",
+      "outcome": "return 1  # Out of bounds"
+    },
+    {
+      "condition": "moves == 0",
+      "outcome": "return 0  # No moves left"
+    },
+    {
+      "condition": "(r, c, moves) in memo",
+      "outcome": "return memo[(r, c, moves)]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem576/index.jsx",
+    "src/problems/Problem576/OutOfBoundaryVisualizer.jsx"
+  ]
+}

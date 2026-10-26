@@ -1,0 +1,35 @@
+{
+  "number": "3905",
+  "title": "Multi Source Flood Fill",
+  "goal": "Solve Multi Source Flood Fill: Spread simultaneous BFS waves, resolve competing colors by maximum, and inspect arrival times in the grid.",
+  "strategy": "Spread simultaneous BFS waves, resolve competing colors by maximum, and inspect arrival times in the grid.",
+  "phases": [
+    "start",
+    "propose",
+    "commit",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Place all initial sources simultaneously.",
+    "propose": "Gather proposals without allowing pending cells to spread.",
+    "commit": "Apply each winning color simultaneously.",
+    "done": "Inspect the final grid."
+  },
+  "edgeCases": [
+    "All starting sources enter the flood together; same-layer competing arrivals must be resolved before advancing to the next layer."
+  ],
+  "checks": [
+    {
+      "condition": "not (0 <= nr < n and 0 <= nc < m)",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Enter {\"n\":3,\"m\":3,\"sources\":[[0,0,1]]}, with positive dimensions, at most 100,000 cells, and at least one source.",
+    "Each source must have a unique in-bounds [row,column], and an integer color from 1 to 1,000,000."
+  ],
+  "source": [
+    "src/problems/Problem3905/index.jsx",
+    "src/problems/Problem3905/algorithm.js"
+  ]
+}

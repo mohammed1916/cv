@@ -1,0 +1,25 @@
+{
+  "number": "442",
+  "title": "Find All Duplicates in Array",
+  "goal": "Solve Find All Duplicates in Array: Use the constrained value-to-index correspondence to detect a value whose marker has already been visited.",
+  "strategy": "Use the constrained value-to-index correspondence to detect a value whose marker has already been visited.",
+  "phases": [
+    "check",
+    "complete",
+    "found_duplicate",
+    "init",
+    "mark_seen"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Values must satisfy the index-mapping range; duplicates are values, not the indices used as markers."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem442/index.jsx",
+    "src/problems/Problem442/Problem442Visualizer.jsx"
+  ]
+}

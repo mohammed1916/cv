@@ -1,0 +1,27 @@
+{
+  "number": "1041",
+  "title": "Robot Bounded In Circle",
+  "goal": "Decide whether indefinitely repeating the robot program stays bounded.",
+  "strategy": "After one cycle, return to the origin or face a different direction to remain bounded. A changed heading makes displacement cancel over later cycles.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether indefinitely repeating the robot program stays bounded.",
+    "inspect": "After one cycle, return to the origin or face a different direction to remain bounded. A changed heading makes displacement cancel over later cycles.",
+    "update": "After one cycle, return to the origin or face a different direction to remain bounded. A changed heading makes displacement cancel over later cycles.",
+    "done": "Decide whether indefinitely repeating the robot program stays bounded."
+  },
+  "edgeCases": [
+    "Returns to origin facing the original direction",
+    "Northward displacement repeats forever",
+    "Turns without moving stay at the origin"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

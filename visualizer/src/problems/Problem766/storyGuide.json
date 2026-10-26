@@ -1,0 +1,27 @@
+{
+  "title": "Toeplitz Matrix",
+  "goal": "Decide whether every northwest-to-southeast diagonal is constant.",
+  "strategy": "A cell belongs to the same diagonal as its northwest neighbor. Local equality therefore proves whole-diagonal equality.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "A cell belongs to the same diagonal as its northwest neighbor. Local equality therefore proves whole-diagonal equality.",
+    "update": "Each cell agrees with its northwest neighbor, so every diagonal is constant.",
+    "done": "Each cell agrees with its northwest neighbor, so every diagonal is constant."
+  },
+  "edgeCases": [
+    "Late mismatch",
+    "Single row",
+    "Single column"
+  ],
+  "number": "766",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

@@ -1,9 +1,11 @@
 export const meta = {
-  number: 550,
-  title: 'Game Play Analysis I',
-  slug: 'game-play-analysis',
-  difficulty: 'Easy',
-  tags: ['Database', 'SQL', 'Group By'],
-  description: 'Find the first login date for each player.',
-  accent: '#f59e0b',
-}
+  "number": "550",
+  "title": "Game Play Analysis IV",
+  "slug": "game-play-analysis-iv",
+  "difficulty": "Medium",
+  "tags": [
+    "Database"
+  ],
+  "accent": "#0891b2",
+  "description": "Measure the fraction of players who return exactly one day after their first login."
+};

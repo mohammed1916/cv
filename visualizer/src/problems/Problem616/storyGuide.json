@@ -1,0 +1,31 @@
+{
+  "number": "616",
+  "title": "Add Bold Tag in String",
+  "goal": "Wrap matching substrings in the fewest bold-tag ranges, merging overlaps and adjacency.",
+  "strategy": "At each character, extend the farthest match end from dictionary words beginning there. A coverage mask marks the union of matches; open and close tags only when that mask changes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Wrap matching substrings in the fewest bold-tag ranges, merging overlaps and adjacency.",
+    "inspect": "At each character, extend the farthest match end from dictionary words beginning there. A coverage mask marks the union of matches; open and close tags only when that mask changes.",
+    "update": "At each character, extend the farthest match end from dictionary words beginning there. A coverage mask marks the union of matches; open and close tags only when that mask changes.",
+    "done": "Wrap matching substrings in the fewest bold-tag ranges, merging overlaps and adjacency."
+  },
+  "edgeCases": [
+    "Adjacent matches share one pair of tags",
+    "No matching word leaves the text unchanged",
+    "Repeated overlapping matches cover the entire text"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

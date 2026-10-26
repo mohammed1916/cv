@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/longest-repeating-char-replace.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -9,7 +12,7 @@ import LuminoDockPanel from "../../components/LuminoDockPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./LongestRepeatingVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
@@ -65,11 +68,11 @@ function generateSteps(s, k) {
     return steps;
 }
 
-const EXAMPLES = getExamples('longest-repeating-char-replace');
+const EXAMPLES = authoredExamples0;
 
 export default function LongestRepeatingVisualizer() {
-    const [sInput, setSInput] = useState("AABABBA");
-    const [kInput, setKInput] = useState("1");
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s);
+    const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
 
     const k = useMemo(() => Math.max(0, parseInt(kInput, 10) || 0), [kInput]);
     const steps = useMemo(() => generateSteps(sInput.toUpperCase(), k), [sInput, k]);
@@ -144,24 +147,7 @@ export default function LongestRepeatingVisualizer() {
                 ))}
             </div>
 
-            <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 12 }}>
-                <input
-                    className="lr-input"
-                    value={sInput}
-                    onChange={(e) => { setSInput(e.target.value); handleReset(); }}
-                    placeholder="String"
-                />
-                <label className="lr-k-label">
-                    k=
-                    <input
-                        className="lr-k-input"
-                        type="number"
-                        min={0}
-                        value={kInput}
-                        onChange={(e) => { setKInput(e.target.value); handleReset(); }}
-                    />
-                </label>
-            </div>
+            
         </div>
     );
 
@@ -198,7 +184,7 @@ export default function LongestRepeatingVisualizer() {
         () => [
             { id: "input", title: "Input Playground" },
             { id: "viz", title: "Visualization", dockMode: "split-right" },
-            { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+            { id: "code", title: "Code Trace", dockMode: "split-right" },
         ],
         []
     );

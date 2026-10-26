@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--345.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -28,11 +32,7 @@ const LINE_PATTERN_MAP = {
   12: 'done',
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', s: 'leetcode' },
-  { label: 'Example 2', s: 'IceCreAm' },
-  { label: 'hello', s: 'hello' },
-]
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def reverseVowels(s: str) -> str:' },
@@ -278,7 +278,7 @@ function VisualizationPanel({ step }) {
 
 export default function ReverseVowelsVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [sInput, setSInput] = useState("leetcode");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;
@@ -353,7 +353,7 @@ export default function ReverseVowelsVisualizer() {
               fontSize: 12,
               fontWeight: 600,
               backgroundColor: ex.label === e.label ? '#eff6ff' : 'var(--surface2)',
-              color: 'var(--surface2)',
+              color: (ex.label === e.label ? 'var(--text-on-light)' : 'var(--text)'),
             }}
           >
             {e.label}: "{e.s}"
@@ -370,9 +370,6 @@ export default function ReverseVowelsVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -390,6 +387,9 @@ export default function ReverseVowelsVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

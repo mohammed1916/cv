@@ -1,0 +1,31 @@
+{
+  "number": "1144",
+  "title": "Decrease Elements To Make Array Zigzag",
+  "goal": "Minimize decrements needed to make values alternate between peaks and valleys.",
+  "strategy": "Only two valley parity patterns exist. Lower each chosen valley just below its smaller neighbor; valleys do not constrain each other.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize decrements needed to make values alternate between peaks and valleys.",
+    "inspect": "Only two valley parity patterns exist. Lower each chosen valley just below its smaller neighbor; valleys do not constrain each other.",
+    "update": "Only two valley parity patterns exist. Lower each chosen valley just below its smaller neighbor; valleys do not constrain each other.",
+    "done": "Minimize decrements needed to make values alternate between peaks and valleys."
+  },
+  "edgeCases": [
+    "Equal neighbors require strict decrements",
+    "Already zigzag",
+    "One value requires no work"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

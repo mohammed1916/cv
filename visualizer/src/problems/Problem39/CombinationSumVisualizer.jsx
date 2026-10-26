@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/combination-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './CombinationSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -186,7 +189,7 @@ function generateSteps(candidates, target) {
   return steps
 }
 
-const EXAMPLES = getExamples('combination-sum')
+const EXAMPLES = authoredExamples0
 
 function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, linePrefix = "", childBasePrefix = "" }) {
   const node = treeNodes.get(nodeKey)
@@ -221,8 +224,8 @@ function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, li
 }
 
 export default function CombinationSumVisualizer() {
-  const [candidatesInput, setCandidatesInput] = useState('[2, 3, 6, 7]')
-  const [targetInput, setTargetInput] = useState('7')
+  const [candidatesInput, setCandidatesInput] = useState(JSON.stringify(AUTHORED_INITIAL.candidates))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -285,25 +288,7 @@ export default function CombinationSumVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-          <input
-            value={candidatesInput}
-            onChange={(e) => { setCandidatesInput(e.target.value);
-
- handleReset() }}
-            placeholder="[2, 3, 6, 7]"
-            className="cs-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-          <input
-            value={targetInput}
-            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-            placeholder="7"
-            className="cs-input"
-            style={{ width: '60px', margin: 0, textAlign: 'center' }}
-          />
-        </div>
+        
 
         <div className="cs-candidates-row">
           <span className="cs-label">Candidates (Sorted):</span>
@@ -401,9 +386,6 @@ export default function CombinationSumVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -421,6 +403,9 @@ export default function CombinationSumVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUM_PATTERNS} />
+      )}
     </>
   )
 
@@ -429,7 +414,7 @@ export default function CombinationSumVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'State & Recursion Tree', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

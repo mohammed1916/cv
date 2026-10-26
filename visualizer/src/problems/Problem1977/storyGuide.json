@@ -1,0 +1,31 @@
+{
+  "number": "1977",
+  "title": "Number of Ways to Separate Numbers",
+  "goal": "Count partitions into positive nondecreasing decimal integers without leading zeroes.",
+  "strategy": "DP records a prefix and its final number length. All shorter previous lengths are automatically smaller; an equal-length predecessor needs a lexicographic comparison. Prefix sums combine shorter lengths efficiently.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count partitions into positive nondecreasing decimal integers without leading zeroes.",
+    "inspect": "DP records a prefix and its final number length. All shorter previous lengths are automatically smaller; an equal-length predecessor needs a lexicographic comparison. Prefix sums combine shorter lengths efficiently.",
+    "update": "DP records a prefix and its final number length. All shorter previous lengths are automatically smaller; an equal-length predecessor needs a lexicographic comparison. Prefix sums combine shorter lengths efficiently.",
+    "done": "Count partitions into positive nondecreasing decimal integers without leading zeroes."
+  },
+  "edgeCases": [
+    "A leading zero prevents every valid partition",
+    "Zeroes may occur inside a positive number",
+    "Repeated digits allow equal consecutive numbers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

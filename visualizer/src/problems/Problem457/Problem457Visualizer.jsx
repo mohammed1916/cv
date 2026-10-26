@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/circular-array-loop.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -49,11 +50,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('circular-array-loop', [
-  { label: 'Example 1', nums: [2, -1, 1, 2, 2], expected: true },
-  { label: 'Example 2', nums: [-2, 1, -1, -2, -2], expected: false },
-  { label: 'Example 3', nums: [1, 1, 1, 1, 1], expected: true },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3] },
@@ -225,7 +222,7 @@ function CircularArrayVisualization({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
           Array Visualization
         </header>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', minHeight: 60, alignContent: 'flex-start' }}>
@@ -251,7 +248,7 @@ function CircularArrayVisualization({ step }) {
                   borderRadius: 6,
                   fontSize: 12,
                   fontWeight: 600,
-                  color: isSlow && isFast ? 'var(--surface)' : isSlow ? '#1e40af' : isFast ? '#5b21b6' : isStart ? '#713f12' : '#1f2937',
+                  color: isSlow && isFast ? 'var(--text-on-light)' : isSlow ? '#1e40af' : isFast ? '#5b21b6' : isStart ? '#713f12' : '#1f2937',
                 }}
               >
                 {val}
@@ -290,7 +287,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -314,25 +311,7 @@ function VisualizationPanel({ step, nums, EXAMPLES, handleExampleClick, numsInpu
         </div>
       </div>
 
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Array (comma-separated)
-        </label>
-        <input
-          value={numsInput}
-          onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-          placeholder="e.g., 2,-1,1,2,2"
-          style={{
-            width: '100%',
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            boxSizing: 'border-box',
-          }}
-        />
-      </div>
+      
 
       <button
         onClick={handleReset}

@@ -1,0 +1,27 @@
+{
+  "number": "1078",
+  "title": "Occurrences After Bigram",
+  "goal": "Collect each word immediately following the requested two-word phrase.",
+  "strategy": "Check every consecutive triple, including overlapping matches. Preserve order and repeated following words.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Collect each word immediately following the requested two-word phrase.",
+    "inspect": "Check every consecutive triple, including overlapping matches. Preserve order and repeated following words.",
+    "update": "Check every consecutive triple, including overlapping matches. Preserve order and repeated following words.",
+    "done": "Collect each word immediately following the requested two-word phrase."
+  },
+  "edgeCases": [
+    "Overlapping equal-word phrase",
+    "Phrase at the end has no following word",
+    "No matching phrase"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1638",
+  "title": "Count Substrings That Differ by One Character",
+  "goal": "Count pairs of equal-length substrings that differ at exactly one character.",
+  "strategy": "Choose both starting positions and extend them together. After the first mismatch every extension counts until the second mismatch makes all longer extensions invalid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count pairs of equal-length substrings that differ at exactly one character.",
+    "inspect": "Choose both starting positions and extend them together. After the first mismatch every extension counts until the second mismatch makes all longer extensions invalid.",
+    "update": "Choose both starting positions and extend them together. After the first mismatch every extension counts until the second mismatch makes all longer extensions invalid.",
+    "done": "Count pairs of equal-length substrings that differ at exactly one character."
+  },
+  "edgeCases": [
+    "Identical repeated strings have no one-mismatch pair",
+    "One unequal character pair",
+    "Length-one matches mixed with mismatches"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

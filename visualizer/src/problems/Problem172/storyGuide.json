@@ -1,0 +1,21 @@
+{
+  "number": "172",
+  "title": "Factorial Trailing Zeroes",
+  "goal": "Solve Factorial Trailing Zeroes: Count trailing zeros in n! by counting factors of 5.",
+  "strategy": "Count trailing zeros in n! by counting factors of 5.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Multiples of 25 contribute two factors of five, multiples of 125 contribute three; counting only multiples of five misses trailing zeros."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem172/index.jsx",
+    "src/problems/Problem172/FactorialTrailingZeroesVisualizer.jsx"
+  ]
+}

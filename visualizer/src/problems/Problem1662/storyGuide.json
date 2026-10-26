@@ -1,0 +1,31 @@
+{
+  "number": "1662",
+  "title": "Check If Two String Arrays are Equivalent",
+  "goal": "Decide whether two arrays of string chunks represent the same complete string.",
+  "strategy": "Chunk boundaries disappear when the strings are concatenated. Compare the resulting character sequences, including any length difference.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether two arrays of string chunks represent the same complete string.",
+    "inspect": "Chunk boundaries disappear when the strings are concatenated. Compare the resulting character sequences, including any length difference.",
+    "update": "Chunk boundaries disappear when the strings are concatenated. Compare the resulting character sequences, including any length difference.",
+    "done": "Decide whether two arrays of string chunks represent the same complete string."
+  },
+  "edgeCases": [
+    "Same prefix but different length",
+    "Different middle character",
+    "Single identical chunks"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "number": "422",
+  "title": "Valid Word Square",
+  "goal": "Solve Valid Word Square: Check if word square is valid (word[i][j]==word[j][i]).",
+  "strategy": "Check if word square is valid (word[i][j]==word[j][i]).",
+  "phases": [
+    "check_pos",
+    "compare",
+    "done",
+    "init",
+    "invalid",
+    "match",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(words[i])>n",
+      "outcome": "return False"
+    },
+    {
+      "condition": "j>=n or i>=len(words[j]) or words[i][j]!=words[j][i]",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "words must be an array"
+  ],
+  "source": [
+    "src/problems/Problem422/index.jsx",
+    "src/problems/Problem422/Problem422Visualizer.jsx"
+  ]
+}

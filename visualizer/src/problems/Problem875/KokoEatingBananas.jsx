@@ -125,52 +125,14 @@ const KokoEatingBananas = () => {
   return (
     <div className="keb-container">
         <ManualInputPanel
-          fields={[{"key":"custom","label":"custom","type":"string"}]}
-          values={{ custom: customInput }}
-          onChange={(k, v) => { if (k === 'custom') setCustomInput(v) }}
+          fields={[{"key":"custom","label":"Piles","type":"string"},{"key":"h","label":"Hours (h)","type":"number"}]}
+          values={{ custom: customInput, h }}
+          onChange={(k, v) => { if (k === 'custom') setCustomInput(v); if (k === 'h') setH(Math.max(1, parseInt(v) || 1)) }}
           showExamples={false}
         />
       <div className="keb-header">
         <h1>Koko Eating Bananas (LC 875)</h1>
         <p className="keb-subtitle">Find minimum eating speed to finish all piles in time</p>
-      </div>
-
-      <div className="keb-controls">
-        <div className="keb-control-group">
-          <label>Pile Heights (comma-separated):</label>
-          <input
-            type="text"
-            value={customInput}
-            onChange={(e) => setCustomInput(e.target.value)}
-            placeholder="e.g., 3,6,7,11"
-          />
-          <button onClick={handleCustomSubmit} className="keb-btn keb-btn-primary">
-            Set Piles
-          </button>
-        </div>
-
-        <div className="keb-control-group">
-          <label>Hours Available (h):</label>
-          <input
-            type="number"
-            value={h}
-            onChange={(e) => setH(Math.max(1, parseInt(e.target.value) || 1))}
-            min="1"
-          />
-        </div>
-
-        <div className="keb-control-group">
-          <button onClick={handleLoadExample} className="keb-btn keb-btn-secondary">
-            Load Example
-          </button>
-          <button
-            onClick={startAnimation}
-            disabled={animationState === 'running' || piles.length === 0}
-            className="keb-btn keb-btn-accent"
-          >
-            {animationState === 'running' ? 'Searching...' : 'Search'}
-          </button>
-        </div>
       </div>
 
       <div className="keb-content">

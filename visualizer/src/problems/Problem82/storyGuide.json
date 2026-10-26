@@ -1,0 +1,31 @@
+{
+  "number": "82",
+  "title": "Remove Duplicates from Sorted List II",
+  "goal": "Remove every value that occurs more than once in a sorted linked list.",
+  "strategy": "Sorted duplicates form complete adjacent runs. Keep a run only when it contains one node; otherwise reconnect the last retained node directly to the following run.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove every value that occurs more than once in a sorted linked list.",
+    "inspect": "Sorted duplicates form complete adjacent runs. Keep a run only when it contains one node; otherwise reconnect the last retained node directly to the following run.",
+    "update": "Sorted duplicates form complete adjacent runs. Keep a run only when it contains one node; otherwise reconnect the last retained node directly to the following run.",
+    "done": "Remove every value that occurs more than once in a sorted linked list."
+  },
+  "edgeCases": [
+    "Every node belongs to one repeated run",
+    "All distinct nodes retain their original links",
+    "An empty list remains empty"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

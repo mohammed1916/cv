@@ -1,0 +1,31 @@
+{
+  "number": "2050",
+  "title": "Parallel Courses III",
+  "goal": "Finish all courses as early as possible with unlimited parallel enrollment after prerequisites.",
+  "strategy": "Topological processing propagates the latest prerequisite finish time. Each course finish is its own duration plus the maximum finish among prerequisites, and the last finish determines completion.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Finish all courses as early as possible with unlimited parallel enrollment after prerequisites.",
+    "inspect": "Topological processing propagates the latest prerequisite finish time. Each course finish is its own duration plus the maximum finish among prerequisites, and the last finish determines completion.",
+    "update": "Topological processing propagates the latest prerequisite finish time. Each course finish is its own duration plus the maximum finish among prerequisites, and the last finish determines completion.",
+    "done": "Finish all courses as early as possible with unlimited parallel enrollment after prerequisites."
+  },
+  "edgeCases": [
+    "Independent courses run together",
+    "A chain forces durations to add",
+    "One course needs its own duration"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "2074",
+  "title": "Reverse Nodes in Even Length Groups",
+  "goal": "Reverse each linked-list group whose actual length is even.",
+  "strategy": "Groups request lengths one, two, three, and so on, but the last group may be shorter. Count its actual nodes before deciding whether to reverse its pointers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reverse each linked-list group whose actual length is even.",
+    "inspect": "Groups request lengths one, two, three, and so on, but the last group may be shorter. Count its actual nodes before deciding whether to reverse its pointers.",
+    "update": "Groups request lengths one, two, three, and so on, but the last group may be shorter. Count its actual nodes before deciding whether to reverse its pointers.",
+    "done": "Reverse each linked-list group whose actual length is even."
+  },
+  "edgeCases": [
+    "The final actual length is two rather than requested three",
+    "A final singleton remains unchanged",
+    "One node forms only the first group"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

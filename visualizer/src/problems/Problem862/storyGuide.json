@@ -1,0 +1,31 @@
+{
+  "number": "862",
+  "title": "Shortest Subarray with Sum at Least K",
+  "goal": "Find the shortest nonempty subarray with sum at least k even when values are negative.",
+  "strategy": "Prefix sums turn a range sum into a difference. A deque retains candidate starts with increasing prefix sums; discard satisfied starts after recording their lengths and discard dominated larger prefixes from the back.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest nonempty subarray with sum at least k even when values are negative.",
+    "inspect": "Prefix sums turn a range sum into a difference. A deque retains candidate starts with increasing prefix sums; discard satisfied starts after recording their lengths and discard dominated larger prefixes from the back.",
+    "update": "Prefix sums turn a range sum into a difference. A deque retains candidate starts with increasing prefix sums; discard satisfied starts after recording their lengths and discard dominated larger prefixes from the back.",
+    "done": "Find the shortest nonempty subarray with sum at least k even when values are negative."
+  },
+  "edgeCases": [
+    "A later singleton can beat every earlier multi-value answer",
+    "No qualifying subarray returns minus one",
+    "An exact threshold sum qualifies"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

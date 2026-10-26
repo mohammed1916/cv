@@ -1,0 +1,21 @@
+{
+  "number": "72",
+  "title": "Edit Distance",
+  "goal": "Solve Edit Distance: Compare string prefixes and choose the cheapest insert, delete or replace transition, reusing a matching final character for free.",
+  "strategy": "Compare string prefixes and choose the cheapest insert, delete or replace transition, reusing a matching final character for free.",
+  "phases": [
+    "init",
+    "match",
+    "mismatch"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Converting an empty prefix requires only insertions or deletions; equal characters do not require replacement."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem72/index.jsx",
+    "src/problems/Problem72/EditDistanceVisualizer.jsx"
+  ]
+}

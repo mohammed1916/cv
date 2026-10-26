@@ -1,0 +1,45 @@
+{
+  "number": "34",
+  "title": "Find First and Last Position",
+  "goal": "Solve Find First and Last Position: Use separate binary-search boundaries to find the first and last positions of the target.",
+  "strategy": "Use separate binary-search boundaries to find the first and last positions of the target.",
+  "phases": [
+    "calc_mid_first",
+    "calc_mid_last",
+    "check_greater_first",
+    "check_greater_last",
+    "check_less_first",
+    "check_less_last",
+    "check_target_first",
+    "check_target_last",
+    "done",
+    "done_first",
+    "done_last",
+    "found_target_first",
+    "found_target_last",
+    "init_first",
+    "init_last",
+    "search_left_first",
+    "search_right_last",
+    "update_left_first",
+    "update_left_last",
+    "update_right_first",
+    "update_right_last",
+    "while_check_first",
+    "while_check_last"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An absent target returns no range; repeated targets may occupy the entire array."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "nums must contain only numbers",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem34/index.jsx",
+    "src/problems/Problem34/FindFirstLastPositionVisualizer.jsx"
+  ]
+}

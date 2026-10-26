@@ -1,0 +1,30 @@
+{
+  "number": "567",
+  "title": "Permutation in String",
+  "goal": "Solve Permutation in String: Fixed-size sliding window comparing character frequency maps of s1 and the window in s2.",
+  "strategy": "Fixed-size sliding window comparing character frequency maps of s1 and the window in s2.",
+  "phases": [
+    "done",
+    "match",
+    "initialize",
+    "expand",
+    "shrink"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(s1) > len(s2)",
+      "outcome": "return False"
+    },
+    {
+      "condition": "have == need",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem567/index.jsx",
+    "src/problems/Problem567/PermutationInStringVisualizer.jsx"
+  ]
+}

@@ -1,11 +1,14 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/first-bad-version.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
 import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./FirstBadVersionVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -30,7 +33,7 @@ const SOLUTION_CODE = [
   { line: 9, text: "    return lo" },
 ];
 
-const EXAMPLES = getExamples('first-bad-version');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(n, bad) {
   const steps = [];
@@ -112,8 +115,8 @@ function generateSteps(n, bad) {
 
 export default function FirstBadVersionVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(5);
-  const [badInput, setBadInput] = useState(4);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
+  const [badInput, setBadInput] = useState(String(AUTHORED_INITIAL.bad));
   const { n, bad, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');

@@ -1,0 +1,31 @@
+{
+  "number": "1792",
+  "title": "Maximum Average Pass Ratio",
+  "goal": "Assign guaranteed-passing students to maximize the average class pass ratio.",
+  "strategy": "The marginal gain from one extra passing student shrinks after assignment. Repeatedly choose the class with the greatest current gain.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign guaranteed-passing students to maximize the average class pass ratio.",
+    "inspect": "The marginal gain from one extra passing student shrinks after assignment. Repeatedly choose the class with the greatest current gain.",
+    "update": "The marginal gain from one extra passing student shrinks after assignment. Repeatedly choose the class with the greatest current gain.",
+    "done": "Assign guaranteed-passing students to maximize the average class pass ratio."
+  },
+  "edgeCases": [
+    "All classes already perfect",
+    "Single class receives every extra student",
+    "Equal starting ratios have different gains"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/min-stack.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +12,7 @@ import { useAutoScroll } from "../../hooks/useAutoScroll";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import "./MinStackVisualizer.css";
 import { Stack3D } from "../../components/viz3d";
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 
@@ -159,7 +160,7 @@ function generateSteps(operations) {
   return steps;
 }
 
-const EXAMPLES = getExamples('min-stack');
+const EXAMPLES = authoredExamples0;
 
 export default function MinStackVisualizer() {
   const [selectedExample, setSelectedExample] = useState(0);
@@ -347,9 +348,6 @@ export default function MinStackVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend patterns={PATTERNS} />
-      )}
       <PlaybackControls
         onReset={handleReset}
         onPrev={stepBack}
@@ -372,6 +370,9 @@ export default function MinStackVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend patterns={PATTERNS} />
+      )}
     </>
   );
 
@@ -381,7 +382,7 @@ export default function MinStackVisualizer() {
     () => [
       { id: "primary", title: "Operation Builder", dockMode: "split-right" },
       { id: "viz", title: "Stack Visualization", dockMode: "split-right" },
-      { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+      { id: "code", title: "Code Trace", dockMode: "split-right" },
       { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
     ],
     []

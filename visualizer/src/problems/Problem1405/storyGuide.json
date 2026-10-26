@@ -1,0 +1,31 @@
+{
+  "number": "1405",
+  "title": "Longest Happy String",
+  "goal": "Construct a longest a/b/c string without three identical adjacent characters.",
+  "strategy": "Use the most abundant available letter unless it would create a forbidden triple. Then choose the next most abundant letter to break the run.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct a longest a/b/c string without three identical adjacent characters.",
+    "inspect": "Use the most abundant available letter unless it would create a forbidden triple. Then choose the next most abundant letter to break the run.",
+    "update": "Use the most abundant available letter unless it would create a forbidden triple. Then choose the next most abundant letter to break the run.",
+    "done": "Construct a longest a/b/c string without three identical adjacent characters."
+  },
+  "edgeCases": [
+    "Only one character type is available",
+    "Equal counts allow a long balanced choice sequence",
+    "A highly dominant letter cannot all be used"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

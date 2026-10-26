@@ -1,0 +1,31 @@
+{
+  "number": "2940",
+  "title": "Find Building Where Alice and Bob Can Meet",
+  "goal": "Find the leftmost building where each pair can meet by moving right to strictly taller buildings.",
+  "strategy": "Resolve pairs that can meet at their right endpoint immediately. For the rest, process right boundaries from right to left; a monotonic skyline retains undominated buildings, and binary search finds the nearest one taller than both starts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the leftmost building where each pair can meet by moving right to strictly taller buildings.",
+    "inspect": "Resolve pairs that can meet at their right endpoint immediately. For the rest, process right boundaries from right to left; a monotonic skyline retains undominated buildings, and binary search finds the nearest one taller than both starts.",
+    "update": "Resolve pairs that can meet at their right endpoint immediately. For the rest, process right boundaries from right to left; a monotonic skyline retains undominated buildings, and binary search finds the nearest one taller than both starts.",
+    "done": "Find the leftmost building where each pair can meet by moving right to strictly taller buildings."
+  },
+  "edgeCases": [
+    "Equal heights do not permit a strict upward move",
+    "An increasing skyline resolves pairs at their right start",
+    "A descending skyline has no later taller meeting"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

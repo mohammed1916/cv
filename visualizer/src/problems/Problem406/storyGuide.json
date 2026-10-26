@@ -1,0 +1,25 @@
+{
+  "number": "406",
+  "title": "Queue Reconstruction by Height",
+  "goal": "Solve Queue Reconstruction by Height: Reconstruct queue from (height, k) pairs where k is the count of people taller or equal height before this person.",
+  "strategy": "Reconstruct queue from (height, k) pairs where k is the count of people taller or equal height before this person.",
+  "phases": [
+    "done",
+    "init",
+    "sort",
+    "process",
+    "inserted"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Process taller people before shorter ones so insertion at index k counts only people at least as tall."
+  ],
+  "checks": [],
+  "inputRules": [
+    "people must be an array"
+  ],
+  "source": [
+    "src/problems/Problem406/index.jsx",
+    "src/problems/Problem406/Problem406Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1319",
+  "title": "Number of Operations to Make Network Connected",
+  "goal": "Find the fewest cable relocations needed to connect every computer, or report impossibility.",
+  "strategy": "At least n-1 cables are necessary. If enough exist, union the current connections and count components; each relocation joins two components, so exactly components minus one moves suffice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest cable relocations needed to connect every computer, or report impossibility.",
+    "inspect": "At least n-1 cables are necessary. If enough exist, union the current connections and count components; each relocation joins two components, so exactly components minus one moves suffice.",
+    "update": "At least n-1 cables are necessary. If enough exist, union the current connections and count components; each relocation joins two components, so exactly components minus one moves suffice.",
+    "done": "Find the fewest cable relocations needed to connect every computer, or report impossibility."
+  },
+  "edgeCases": [
+    "Too few cables makes reconnection impossible",
+    "An already connected network needs no relocation",
+    "One computer is already connected"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

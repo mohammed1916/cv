@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/non-overlapping-intervals.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem435Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -27,7 +28,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('non-overlapping-intervals')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(intervals) {
   const steps = []
@@ -115,7 +116,7 @@ function generateSteps(intervals) {
 function IntervalVisualization({ intervals, removed, current, title }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>{title}</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>{title}</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -146,7 +147,7 @@ function IntervalVisualization({ intervals, removed, current, title }) {
                     opacity: isRemoved ? 0.6 : 1,
                   }}
                 >
-                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', minWidth: 50 }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: (isRemoved ? 'var(--text-on-light)' : (isCurrent ? 'var(--text-on-light)' : 'var(--text)')), minWidth: 50 }}>
                     [{start}, {end}]
                   </div>
                   <div style={{
@@ -189,7 +190,7 @@ function IntervalVisualization({ intervals, removed, current, title }) {
 function StatsVisualization({ intervals, removed }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Statistics</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Statistics</div>
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
@@ -238,7 +239,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

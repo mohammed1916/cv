@@ -1,0 +1,27 @@
+{
+  "number": "892",
+  "title": "Surface Area of 3D Shapes",
+  "goal": "Count exposed faces of the stacked cubes.",
+  "strategy": "Each shared boundary hides two faces. Count it once using only north and west neighbors.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count exposed faces of the stacked cubes.",
+    "inspect": "Each shared boundary hides two faces. Count it once using only north and west neighbors.",
+    "update": "Each shared boundary hides two faces. Count it once using only north and west neighbors.",
+    "done": "Count exposed faces of the stacked cubes."
+  },
+  "edgeCases": [
+    "One cube",
+    "Two equal adjacent towers",
+    "Empty surface"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

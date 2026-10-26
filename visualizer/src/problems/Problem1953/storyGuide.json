@@ -1,0 +1,31 @@
+{
+  "number": "1953",
+  "title": "Maximum Number of Weeks for Which You Can Work",
+  "goal": "Work as many weeks as possible without repeating a project in consecutive weeks.",
+  "strategy": "All projects other than the largest provide separators. The dominant project can occupy at most one more week than all other projects combined.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Work as many weeks as possible without repeating a project in consecutive weeks.",
+    "inspect": "All projects other than the largest provide separators. The dominant project can occupy at most one more week than all other projects combined.",
+    "update": "All projects other than the largest provide separators. The dominant project can occupy at most one more week than all other projects combined.",
+    "done": "Work as many weeks as possible without repeating a project in consecutive weeks."
+  },
+  "edgeCases": [
+    "One project dominates all available separators",
+    "A single project allows one week",
+    "The largest exactly fits between all other weeks"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

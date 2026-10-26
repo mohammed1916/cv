@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/target-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -10,7 +13,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem494Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -39,10 +42,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('target-sum', [
-  { label: 'Example 1', nums: [1,1,1,1,1], target: 3 },
-  { label: 'Example 2', nums: [1,0], target: 1 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(nums, target) {
   const steps = []
@@ -70,7 +70,7 @@ function VisualizationPanel({ nums, target, step, applyEx }) {
       <div style={{ padding: 12, backgroundColor: '#fce7f3', borderRadius: 6, borderLeft: '4px solid #ec4899' }}>
         <div style={{ fontSize: 12, color: '#831843', fontStyle: 'italic' }}>Find count of ways to assign +/- operators to nums to reach target.</div>
       </div>
-      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Array: [{nums.join(', ')}], Target: {target}</div></div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Array: [{nums.join(', ')}], Target: {target}</div></div>
       <motion.div style={{ padding: 16, backgroundColor: '#fce7f3', borderRadius: 6, border: '2px solid #ec4899', textAlign: 'center' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={{ fontSize: 13, fontWeight: 600, color: '#831843' }}>Ways to Reach Target</div>
         <div style={{ fontSize: 32, fontWeight: 'bold', color: '#e0177a' }}>{step?.count ?? 0}</div>
@@ -82,8 +82,8 @@ function VisualizationPanel({ nums, target, step, applyEx }) {
 
 export default function Problem494Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,1,1,1,1]");
-  const [targetInput, setTargetInput] = useState(3);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target));
   const { nums, target, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -128,8 +128,8 @@ export default function Problem494Visualizer() {
         </>
       )}
       {createPortal(<FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>, document.body)}
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>)

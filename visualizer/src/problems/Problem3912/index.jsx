@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3912.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -13,10 +17,10 @@ const definition = {
     { id: 'select', label: 'Keep / reject', description: 'Keep values that beat at least one side.' },
     { id: 'done', label: 'Complete', description: 'Return values in original order.' },
   ],
-  examples: [{ label: 'Mixed records', input: '[1,2,4,2,3,2]' }, { label: 'All equal', input: '[5,5,5,5]' }, { label: 'Singleton', input: '[1]' }],
+  examples: authoredExamples0,
 }
 
-export default function ValidElements() {
+function ValidElements() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const leftKnown = i => ['right', 'select', 'done'].includes(step.phase) || step.phase === 'left' && i <= step.index
     const rightKnown = i => ['select', 'done'].includes(step.phase) || step.phase === 'right' && i >= step.index
@@ -40,3 +44,5 @@ export default function ValidElements() {
     <p>The current element is excluded from both maxima. Zero represents an empty side because every allowed input value is positive.</p>
   </>} />
 }
+
+export default withProblemStory(ValidElements, storyGuide);

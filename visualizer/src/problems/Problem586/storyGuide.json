@@ -1,0 +1,31 @@
+{
+  "number": "586",
+  "title": "Customer Placing the Largest Number of Orders",
+  "goal": "Find the customer who placed the most orders.",
+  "strategy": "Group order records by customer, count every order once, then select the largest count. The input contract guarantees a unique winning customer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the customer who placed the most orders.",
+    "inspect": "Group order records by customer, count every order once, then select the largest count. The input contract guarantees a unique winning customer.",
+    "update": "Group order records by customer, count every order once, then select the largest count. The input contract guarantees a unique winning customer.",
+    "done": "Find the customer who placed the most orders."
+  },
+  "edgeCases": [
+    "One order has one winning customer",
+    "Every order can belong to the same customer",
+    "Large order IDs do not outweigh a larger group"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

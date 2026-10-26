@@ -1,0 +1,31 @@
+{
+  "number": "639",
+  "title": "Decode Ways II",
+  "goal": "Count letter decodings when an asterisk can represent any digit from one to nine.",
+  "strategy": "At each position, combine valid one-character decodings with valid two-character decodings. Wildcard pair multiplicities depend on both symbols, and zero is valid only in a suitable pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count letter decodings when an asterisk can represent any digit from one to nine.",
+    "inspect": "At each position, combine valid one-character decodings with valid two-character decodings. Wildcard pair multiplicities depend on both symbols, and zero is valid only in a suitable pair.",
+    "update": "At each position, combine valid one-character decodings with valid two-character decodings. Wildcard pair multiplicities depend on both symbols, and zero is valid only in a suitable pair.",
+    "done": "Count letter decodings when an asterisk can represent any digit from one to nine."
+  },
+  "edgeCases": [
+    "A leading zero prevents every decoding",
+    "Two wildcard pairs around zero change pair availability",
+    "A wildcard after three cannot join it into a letter"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

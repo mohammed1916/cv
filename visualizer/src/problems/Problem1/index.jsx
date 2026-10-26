@@ -1,1 +1,5 @@
-export { default } from "./TwoSumVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./TwoSumVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

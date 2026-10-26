@@ -1,0 +1,31 @@
+{
+  "number": "1832",
+  "title": "Check if the Sentence Is Pangram",
+  "goal": "Check whether a lowercase sentence contains every English alphabet letter.",
+  "strategy": "Track distinct letters; repeated occurrences do not increase coverage. Exactly twenty-six distinct lowercase letters is sufficient.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether a lowercase sentence contains every English alphabet letter.",
+    "inspect": "Track distinct letters; repeated occurrences do not increase coverage. Exactly twenty-six distinct lowercase letters is sufficient.",
+    "update": "Track distinct letters; repeated occurrences do not increase coverage. Exactly twenty-six distinct lowercase letters is sufficient.",
+    "done": "Check whether a lowercase sentence contains every English alphabet letter."
+  },
+  "edgeCases": [
+    "Only one missing letter",
+    "Many repetitions do not add coverage",
+    "Alphabet exactly once"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

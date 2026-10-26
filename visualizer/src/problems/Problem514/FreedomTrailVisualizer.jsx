@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/freedom-trail.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FreedomTrailVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -48,7 +51,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('freedom-trail')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(ring, key) {
   const steps = []
@@ -175,7 +178,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -198,7 +201,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Ring Visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Ring: {ring}</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Ring: {ring}</div>
         <svg width="100%" height="250" viewBox="0 0 250 250" style={{ border: '1px solid #e5e7eb', borderRadius: 6 }}>
           <circle cx="125" cy="125" r="80" fill="none" stroke="var(--border)" strokeWidth="2" />
           {ring.split('').map((char, idx) => {
@@ -242,7 +245,7 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
       {/* Key Progress */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Spelling Progress
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
@@ -297,8 +300,8 @@ function VisualizationPanel({ ring, key, step, applyEx }) {
 
 export default function FreedomTrailVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [ringInput, setRingInput] = useState("godding");
-  const [keyInput, setKeyInput] = useState("gd");
+  const [ringInput, setRingInput] = useState(String(AUTHORED_INITIAL.ring));
+  const [keyInput, setKeyInput] = useState(String(AUTHORED_INITIAL.key));
   const { ring, key, inputError } = useMemo(() => {
     try {
       const parsedRing = ringInput;
@@ -376,7 +379,6 @@ export default function FreedomTrailVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -396,6 +398,7 @@ export default function FreedomTrailVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

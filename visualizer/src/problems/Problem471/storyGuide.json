@@ -1,0 +1,20 @@
+{
+  "number": "471",
+  "title": "Encode String with Shortest Length",
+  "goal": "Solve Encode String with Shortest Length: Encode a string with shortest possible length considering repetitions and subproblems.",
+  "strategy": "Encode a string with shortest possible length considering repetitions and subproblems.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "s in memo",
+      "outcome": "return memo[s]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem471/index.jsx",
+    "src/problems/Problem471/Problem471Visualizer.jsx"
+  ]
+}

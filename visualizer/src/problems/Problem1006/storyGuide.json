@@ -1,0 +1,27 @@
+{
+  "number": "1006",
+  "title": "Clumsy Factorial",
+  "goal": "Evaluate descending factorial terms with cycling multiply, divide, add, and subtract operations.",
+  "strategy": "Preserve multiplication and division precedence inside signed terms. Sum terms only after those operations have been resolved.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Evaluate descending factorial terms with cycling multiply, divide, add, and subtract operations.",
+    "inspect": "Preserve multiplication and division precedence inside signed terms. Sum terms only after those operations have been resolved.",
+    "update": "Preserve multiplication and division precedence inside signed terms. Sum terms only after those operations have been resolved.",
+    "done": "Evaluate descending factorial terms with cycling multiply, divide, add, and subtract operations."
+  },
+  "edgeCases": [
+    "Single term needs no operation",
+    "Multiplication and division precede addition",
+    "Subtraction followed by a product"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

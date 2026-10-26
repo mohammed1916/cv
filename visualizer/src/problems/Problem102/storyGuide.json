@@ -1,0 +1,27 @@
+{
+  "number": "102",
+  "title": "Binary Tree Level Order Traversal",
+  "goal": "Solve Binary Tree Level Order Traversal: BFS with a queue; drain each level completely before enqueuing the next layer.",
+  "strategy": "BFS with a queue; drain each level completely before enqueuing the next layer.",
+  "phases": [
+    "init",
+    "loop",
+    "visit",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem102/index.jsx",
+    "src/problems/Problem102/BinaryTreeLevelOrderVisualizer.jsx",
+    "src/problems/Problem102/algorithm.js"
+  ]
+}

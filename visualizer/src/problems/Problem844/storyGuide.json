@@ -1,0 +1,27 @@
+{
+  "number": "844",
+  "title": "Backspace String Compare",
+  "goal": "Compare the final texts after treating # as backspace.",
+  "strategy": "Reduce each text with a character stack. Backspacing an empty stack has no effect, and only surviving characters participate in the final comparison.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compare the final texts after treating # as backspace.",
+    "inspect": "Reduce each text with a character stack. Backspacing an empty stack has no effect, and only surviving characters participate in the final comparison.",
+    "update": "Reduce each text with a character stack. Backspacing an empty stack has no effect, and only surviving characters participate in the final comparison.",
+    "done": "Compare the final texts after treating # as backspace."
+  },
+  "edgeCases": [
+    "Everything erased",
+    "Backspace on empty buffer",
+    "Same length different survivors"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--173.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -33,11 +35,7 @@ const SOLUTION_CODE = [
   { line: 13, text: '        return node.val' },
 ]
 
-const EXAMPLES = [
-  { label: 'Balanced BST', input: [3, 1, 6, null, 2, 4, 7] },
-  { label: 'Single node', input: [1] },
-  { label: 'Right chain', input: [1, null, 2, null, null, null, 3] },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(treeValues) {
   const steps = []
@@ -109,7 +107,7 @@ export default function BSTIteratorVisualizer() {
                       borderRadius: 3,
                       fontSize: 11,
                       fontWeight: 'bold',
-                      color: i === step.stack.length - 1 ? '#fff' : 'var(--surface2)',
+                      color: i === step.stack.length - 1 ? '#fff' : 'var(--text-on-light)',
                     }}
                   >
                     {val}
@@ -153,7 +151,6 @@ export default function BSTIteratorVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -171,6 +168,7 @@ export default function BSTIteratorVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 

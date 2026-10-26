@@ -1,0 +1,26 @@
+{
+  "number": "321",
+  "title": "Create Maximum Number",
+  "goal": "Solve Create Maximum Number: Create maximum number from two arrays with fixed length.",
+  "strategy": "Create maximum number from two arrays with fixed length.",
+  "phases": [
+    "init",
+    "choose",
+    "compare",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal leading merge digits require comparing remaining suffixes, not choosing arbitrarily by the current digit."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"nums1\": [digits], \"nums2\": [digits], \"k\": number }.",
+    "nums1 and nums2 must contain digits from 0 through 9.",
+    "k must be between 0 and nums1.length + nums2.length."
+  ],
+  "source": [
+    "src/problems/Problem321/index.jsx",
+    "src/problems/Problem321/CreateMaximumNumberVisualizer.jsx"
+  ]
+}

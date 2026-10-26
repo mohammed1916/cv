@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/bulb-switcher.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './BulbSwitcherVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -110,7 +111,7 @@ function generateSteps(n) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('bulb-switcher', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 const DEFAULT_N = 10
 const INPUT_EXAMPLES = EXAMPLES.length > 0 ? EXAMPLES : [
   { label: 'No bulbs', n: 0 },

@@ -1,0 +1,19 @@
+{
+  "number": "83",
+  "title": "Remove Duplicates from Sorted List",
+  "goal": "Solve Remove Duplicates from Sorted List: Remove Duplicates from Sorted List visualization",
+  "strategy": "Remove Duplicates from Sorted List visualization",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Keep one representative of each sorted equal-value run; unlike the remove-all-duplicates variant, a repeated value still remains once."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a JSON array of numbers, for example [1,1,2]."
+  ],
+  "source": [
+    "src/problems/Problem83/index.jsx",
+    "src/problems/Problem83/Visualizer.jsx"
+  ]
+}

@@ -1,1 +1,5 @@
-export { default } from "./ImplementStackUsingQueues";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ImplementStackUsingQueues";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

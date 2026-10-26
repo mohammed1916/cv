@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/powx-n.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './PowXNVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -30,11 +33,7 @@ const SOLUTION_CODE = [
   { line: 5, text: '    else: return half * half * x' },
 ]
 
-const EXAMPLES = getExamplesOr('powx-n', [
-  { label: '2^10', x: 2, n: 10 },
-  { label: '2.1^3', x: 2.1, n: 3 },
-  { label: '2^-2', x: 2, n: -2 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(x, n) {
   const steps = []
@@ -44,8 +43,8 @@ function generateSteps(x, n) {
 
 export default function PowXNVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [xInput, setXInput] = useState(2);
-  const [nInput, setNInput] = useState(10);
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x));
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { x, n, inputError } = useMemo(() => {
     try {
       const parsedX = Number(xInput); if (isNaN(parsedX)) throw new Error('x must be a number');
@@ -100,7 +99,7 @@ export default function PowXNVisualizer() {
     <div className="powxn-panel">
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {EXAMPLES.map(e => (
               <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
@@ -109,7 +108,7 @@ export default function PowXNVisualizer() {
             ))}
           </div>
         </div>
-        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>
           {x}^{n} = {Math.pow(x, n).toFixed(6)}
         </div>
       </div>
@@ -127,9 +126,6 @@ export default function PowXNVisualizer() {
   // Panel 4: Playback controls (floating)
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={POW_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -147,6 +143,9 @@ export default function PowXNVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={POW_PATTERNS} />
+      )}
     </>
   )
 
@@ -155,7 +154,7 @@ export default function PowXNVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: '🔢 Power Calculation', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

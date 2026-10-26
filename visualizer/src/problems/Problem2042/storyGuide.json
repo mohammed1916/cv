@@ -1,0 +1,31 @@
+{
+  "number": "2042",
+  "title": "Check if Numbers Are Ascending in a Sentence",
+  "goal": "Check whether numbers appear in strictly increasing order within a sentence.",
+  "strategy": "Ignore word tokens and compare each numeric token with the previous number. Equality is a failure because the required ordering is strict.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Check whether numbers appear in strictly increasing order within a sentence.",
+    "inspect": "Ignore word tokens and compare each numeric token with the previous number. Equality is a failure because the required ordering is strict.",
+    "update": "Ignore word tokens and compare each numeric token with the previous number. Equality is a failure because the required ordering is strict.",
+    "done": "Check whether numbers appear in strictly increasing order within a sentence."
+  },
+  "edgeCases": [
+    "An equal number breaks strict ordering",
+    "A later smaller number is invalid",
+    "Only one number needs no comparison"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

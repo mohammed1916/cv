@@ -1,0 +1,31 @@
+{
+  "number": "1170",
+  "title": "Compare Strings by Frequency of the Smallest Character",
+  "goal": "For each query, count words with a greater frequency of their smallest character.",
+  "strategy": "Find the smallest letter before counting its occurrences. Comparisons are strict and concern frequency, not lexicographic order of entire strings.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For each query, count words with a greater frequency of their smallest character.",
+    "inspect": "Find the smallest letter before counting its occurrences. Comparisons are strict and concern frequency, not lexicographic order of entire strings.",
+    "update": "Find the smallest letter before counting its occurrences. Comparisons are strict and concern frequency, not lexicographic order of entire strings.",
+    "done": "For each query, count words with a greater frequency of their smallest character."
+  },
+  "edgeCases": [
+    "Equal frequencies do not count",
+    "One query has the largest frequency",
+    "Every word exceeds the query"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

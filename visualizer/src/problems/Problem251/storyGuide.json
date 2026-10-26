@@ -1,0 +1,23 @@
+{
+  "number": "251",
+  "title": "Flatten 2D Vector",
+  "goal": "Solve Flatten 2D Vector: Design an iterator to flatten a 2D vector on the fly.",
+  "strategy": "Design an iterator to flatten a 2D vector on the fly.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Skip empty inner vectors before reading; repeated hasNext calls must not consume an element."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem251/index.jsx",
+    "src/problems/Problem251/Problem251Visualizer.jsx"
+  ]
+}

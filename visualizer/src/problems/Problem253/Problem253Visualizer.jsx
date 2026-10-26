@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/253.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +10,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem253Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -38,7 +39,7 @@ function generateSteps(input) {
 }
 
 export default function Problem253Visualizer() {
-    const examples = useMemo(() => getExamplesOr('253', []), [])
+    const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
     const [currentExample, setCurrentExample] = useState(0)
   const [inputInput, setInputInput] = useState(JSON.stringify(examples[0]?.input ?? []));
   const { input, inputError } = useMemo(() => {
@@ -56,7 +57,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
       const steps = useMemo(() => generateSteps(input), [input])
     const step = steps[currentStep] || steps[0]
 
-    const { isPlaying, setIsPlaying, canNext, canPrev } = usePlaybackState(steps, currentStep, setCurrentStep)
+    const { isPlaying, canNext, canPrev, speed, setSpeed, togglePlay, handleReset, isDone } = usePlaybackState(steps, currentStep, setCurrentStep)
     const { pattern, togglePattern } = usePatternOverlay(false)
 
     const vizPanel = (
@@ -88,7 +89,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
     </>)
 
     const codePanel = (
-        <CodeTracePanel
+        <CodeTracePanel step={step}
             code={SOLUTION_CODE}
             activeLine={step.activeLine}
             onTogglePattern={togglePattern}
@@ -98,11 +99,15 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
 
     const playbackPanel = (
         <PlaybackControls
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            isDone={isDone}
+            onReset={handleReset}
             currentStep={currentStep}
             totalSteps={steps.length}
             onNext={() => setCurrentStep(c => c + 1)}
             onPrev={() => setCurrentStep(c => c - 1)}
-            onPlayToggle={() => setIsPlaying(!isPlaying)}
+            onPlayToggle={togglePlay}
             isPlaying={isPlaying}
             canNext={canNext}
             canPrev={canPrev}
@@ -113,7 +118,7 @@ const applyEx = useCallback((i) => { setCurrentExample(i); setInputInput(JSON.st
     const panelConfigs = useMemo(
         () => [
             { id: 'viz', title: 'Visualization' },
-            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
         ],
         []
     )

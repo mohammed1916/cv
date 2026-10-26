@@ -1,0 +1,21 @@
+{
+  "number": "233",
+  "title": "Number of Digit One",
+  "goal": "Solve Number of Digit One: Count total occurrences of digit 1 in all numbers from 1 to n using math.",
+  "strategy": "Count total occurrences of digit 1 in all numbers from 1 to n using math.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "At each digit position, the contribution differs depending on whether the current digit is zero, one or greater than one."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem233/index.jsx",
+    "src/problems/Problem233/NumberOfDigitOne.jsx"
+  ]
+}

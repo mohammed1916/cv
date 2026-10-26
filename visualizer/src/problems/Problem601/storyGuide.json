@@ -1,0 +1,31 @@
+{
+  "number": "601",
+  "title": "Human Traffic of Stadium",
+  "goal": "Return visits belonging to a run of at least three consecutive IDs with attendance of at least 100.",
+  "strategy": "First remove low-attendance visits, then split the remaining sorted IDs wherever a gap appears. Calendar-day gaps do not matter: only consecutive visit IDs form a qualifying run.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return visits belonging to a run of at least three consecutive IDs with attendance of at least 100.",
+    "inspect": "First remove low-attendance visits, then split the remaining sorted IDs wherever a gap appears. Calendar-day gaps do not matter: only consecutive visit IDs form a qualifying run.",
+    "update": "First remove low-attendance visits, then split the remaining sorted IDs wherever a gap appears. Calendar-day gaps do not matter: only consecutive visit IDs form a qualifying run.",
+    "done": "Return visits belonging to a run of at least three consecutive IDs with attendance of at least 100."
+  },
+  "edgeCases": [
+    "Two busy records are not a qualifying run",
+    "Calendar gaps do not break consecutive visit IDs",
+    "An empty stadium has no qualifying visits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

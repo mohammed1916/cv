@@ -1,0 +1,27 @@
+{
+  "number": "1025",
+  "title": "Divisor Game",
+  "goal": "Decide whether the first player can force a win in the divisor subtraction game.",
+  "strategy": "A state is winning when one legal divisor leads to a losing opponent state. Build smaller answers before using them to explain each choice.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether the first player can force a win in the divisor subtraction game.",
+    "inspect": "A state is winning when one legal divisor leads to a losing opponent state. Build smaller answers before using them to explain each choice.",
+    "update": "A state is winning when one legal divisor leads to a losing opponent state. Build smaller answers before using them to explain each choice.",
+    "done": "Decide whether the first player can force a win in the divisor subtraction game."
+  },
+  "edgeCases": [
+    "No proper positive divisor is available",
+    "Smallest winning state",
+    "An odd state leaves winning responses"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

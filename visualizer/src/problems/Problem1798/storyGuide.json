@@ -1,0 +1,31 @@
+{
+  "number": "1798",
+  "title": "Maximum Number of Consecutive Values You Can Make",
+  "goal": "Count consecutive constructible sums beginning at zero when each coin can be used once.",
+  "strategy": "If all sums through reach are available, a coin at most reach+1 extends coverage through reach+coin. A larger coin leaves the first gap permanently uncovered.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count consecutive constructible sums beginning at zero when each coin can be used once.",
+    "inspect": "If all sums through reach are available, a coin at most reach+1 extends coverage through reach+coin. A larger coin leaves the first gap permanently uncovered.",
+    "update": "If all sums through reach are available, a coin at most reach+1 extends coverage through reach+coin. A larger coin leaves the first gap permanently uncovered.",
+    "done": "Count consecutive constructible sums beginning at zero when each coin can be used once."
+  },
+  "edgeCases": [
+    "No one-valued coin",
+    "Repeated ones extend one at a time",
+    "Exact next missing value extends coverage"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

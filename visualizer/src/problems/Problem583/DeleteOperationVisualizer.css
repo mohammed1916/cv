@@ -38,14 +38,14 @@
 
 .do-dp-cell.current {
   background-color: #f59e0b;
-  color: var(--surface2);
+  color: var(--text-on-light);
   box-shadow: 0 0 0 2px #f59e0b;
   animation: pulse 0.5s ease-in-out;
 }
 
 .do-dp-cell.lcs {
   background-color: #22c55e;
-  color: var(--surface2);
+  color: var(--text-on-light);
   font-weight: 700;
 }
 
@@ -107,13 +107,13 @@
 
 .do-char.highlight {
   background-color: #f59e0b;
-  color: var(--surface2);
+  color: var(--text-on-light);
   border-color: #f59e0b;
 }
 
 .do-char.match {
   background-color: #22c55e;
-  color: var(--surface2);
+  color: var(--text-on-light);
   border-color: #22c55e;
 }
 

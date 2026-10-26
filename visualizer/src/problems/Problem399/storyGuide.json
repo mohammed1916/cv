@@ -1,0 +1,35 @@
+{
+  "number": "399",
+  "title": "Evaluate Division",
+  "goal": "Solve Evaluate Division: Evaluate equations with division operations using graph traversal.",
+  "strategy": "Evaluate equations with division operations using graph traversal.",
+  "phases": [
+    "build_edge",
+    "dfs_end",
+    "dfs_start",
+    "done",
+    "error",
+    "init",
+    "query_invalid",
+    "query_start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "start == end",
+      "outcome": "return 1.0"
+    },
+    {
+      "condition": "result > 0",
+      "outcome": "return result * weight"
+    }
+  ],
+  "inputRules": [
+    "All inputs must be arrays"
+  ],
+  "source": [
+    "src/problems/Problem399/index.jsx",
+    "src/problems/Problem399/Problem399Visualizer.jsx"
+  ]
+}

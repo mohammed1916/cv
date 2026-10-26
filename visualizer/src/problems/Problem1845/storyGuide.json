@@ -1,0 +1,31 @@
+{
+  "number": "1845",
+  "title": "Seat Reservation Manager",
+  "goal": "Always reserve the smallest available seat and support returning seats.",
+  "strategy": "Keep the set of currently free seat numbers. A reservation removes its minimum; an unreserve adds that exact held seat back.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Always reserve the smallest available seat and support returning seats.",
+    "inspect": "Keep the set of currently free seat numbers. A reservation removes its minimum; an unreserve adds that exact held seat back.",
+    "update": "Keep the set of currently free seat numbers. A reservation removes its minimum; an unreserve adds that exact held seat back.",
+    "done": "Always reserve the smallest available seat and support returning seats."
+  },
+  "edgeCases": [
+    "Fill every seat",
+    "Single seat can be reused",
+    "Returning a larger seat does not skip smaller free seats"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

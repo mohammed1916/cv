@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/count-complete-tree-nodes.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -180,14 +183,10 @@ function spine(id, n, dir) {
   return out
 }
 
-const EXAMPLES = getExamplesOr('count-complete-tree-nodes', [
-  { label: 'Example 1', n: '6' },
-  { label: 'Example 2', n: '1' },
-  { label: 'Example 3', n: '13' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem222Visualizer() {
-  const [nInput, setNInput] = useState('6')
+  const [nInput, setNInput] = useState(AUTHORED_INITIAL.n)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(
@@ -247,21 +246,7 @@ export default function Problem222Visualizer() {
     <div className="p222-panel-primary">
       <div className="p222-card">
         <div className="p222-section-label">Input</div>
-        <div className="p222-input-row">
-          <div className="p222-field">
-            <label className="p222-input-label" htmlFor="p222-n">Node count</label>
-            <input
-              id="p222-n"
-              className={`p222-input mono ${inputError ? 'has-error' : ''}`}
-              value={nInput}
-              onChange={(e) => { setNInput(e.target.value); handleReset() }}
-              placeholder="6"
-              type="number"
-              min="0"
-              max="31"
-            />
-          </div>
-        </div>
+        
         <p className={`p222-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'A complete tree of this many nodes is built; the algorithm counts them in O(log²n).'}
         </p>
@@ -396,9 +381,6 @@ export default function Problem222Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -416,6 +398,9 @@ export default function Problem222Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -423,7 +408,7 @@ export default function Problem222Visualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     [],

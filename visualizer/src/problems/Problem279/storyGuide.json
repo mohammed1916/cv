@@ -1,0 +1,26 @@
+{
+  "number": "279",
+  "title": "Perfect Squares",
+  "goal": "Solve Perfect Squares: Min number of perfect squares summing to n using DP.",
+  "strategy": "Min number of perfect squares summing to n using DP.",
+  "phases": [
+    "done",
+    "init",
+    "outer",
+    "sq_calc",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A perfect square needs one term; repeated use of the same square is allowed."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a non-negative integer",
+    "Max n=100 for clarity"
+  ],
+  "source": [
+    "src/problems/Problem279/index.jsx",
+    "src/problems/Problem279/PerfectSquaresVisualizer.jsx"
+  ]
+}

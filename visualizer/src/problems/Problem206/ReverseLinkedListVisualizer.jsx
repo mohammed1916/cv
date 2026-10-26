@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/reverse-linked-list.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +12,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ReverseLinkedListVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -60,7 +63,7 @@ function generateSteps(values) {
     const arrows = forwardArrows.map(a => ({ ...a, reversed: false, active: false }))
     let curr = 0
 
-    while (curr < n) {
+    while (curr >= 0 && curr < n) {
         const nxt = curr + 1 < n ? curr + 1 : -1
 
         steps.push({
@@ -116,7 +119,7 @@ function generateSteps(values) {
     return steps
 }
 
-const EXAMPLES = getExamples('reverse-linked-list')
+const EXAMPLES = authoredExamples0
 
 function ReverseLinkedListViz({ step, values, nodes, arrows, EXAMPLES, valInput, setValInput, handleReset, inputError }) {
     const handleExampleClick = useCallback((ex) => {
@@ -138,14 +141,7 @@ function ReverseLinkedListViz({ step, values, nodes, arrows, EXAMPLES, valInput,
                         </button>
                     ))}
                 </div>
-                <div className="rll-input-row">
-                    <input
-                        className="rll-input"
-                        value={valInput}
-                        onChange={(e) => { setValInput(e.target.value); handleReset() }}
-                        placeholder="[1,2,3,4,5]"
-                    />
-                </div>
+                
 
                 {/* Node row */}
                 <div className="rll-canvas">
@@ -242,7 +238,7 @@ function ReverseLinkedListPointerState({ step, nodes }) {
 }
 
 export default function ReverseLinkedListVisualizer() {
-    const [valInput, setValInput] = useState('[1,2,3,4,5]')
+    const [valInput, setValInput] = useState(JSON.stringify(AUTHORED_INITIAL.values))
 
     const { values, inputError } = useMemo(() => {
         try {

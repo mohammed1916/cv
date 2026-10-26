@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/find-first-occurrence.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -6,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FindFirstOccurrenceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -120,11 +123,11 @@ function generateSteps(haystack, needle) {
   return steps
 }
 
-const EXAMPLES = getExamples('find-first-occurrence')
+const EXAMPLES = authoredExamples0
 
 export default function FindFirstOccurrenceVisualizer({ problem }) {
-  const [haystackInput, setHaystackInput] = useState('"sadbutsad"')
-  const [needleInput, setNeedleInput] = useState('"sad"')
+  const [haystackInput, setHaystackInput] = useState(`"${AUTHORED_INITIAL.haystack}"`)
+  const [needleInput, setNeedleInput] = useState(`"${AUTHORED_INITIAL.needle}"`)
 
   const { haystack, needle, inputError } = useMemo(() => {
     try {
@@ -201,28 +204,7 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center', flexDirection: 'column', alignItems: 'flex-start' }}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>haystack:</span>
-            <input
-              value={haystackInput}
-              onChange={(e) => { setHaystackInput(e.target.value); handleReset() }}
-              placeholder='"sadbutsad"'
-              className="ffo-input"
-              style={{ flex: 1, margin: 0 }}
-            />
-          </div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', width: '100%' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace', minWidth: 70 }}>needle:</span>
-            <input
-              value={needleInput}
-              onChange={(e) => { setNeedleInput(e.target.value); handleReset() }}
-              placeholder='"sad"'
-              className="ffo-input"
-              style={{ flex: 1, margin: 0 }}
-            />
-          </div>
-        </div>
+        
 
         <div className="ffo-haystack-container">
           <div className="ffo-label">Haystack:</div>
@@ -330,9 +312,6 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -350,6 +329,9 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={FINDFIRSTOCCURRENCE_PATTERNS} />
+      )}
     </>
   )
 
@@ -358,7 +340,7 @@ export default function FindFirstOccurrenceVisualizer({ problem }) {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'String Matching', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

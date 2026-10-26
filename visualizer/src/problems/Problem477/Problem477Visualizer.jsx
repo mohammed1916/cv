@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/total-hamming-distance.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem477Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -18,10 +21,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('total-hamming-distance', [
-  { label: 'Example 1', nums: [4, 14, 2] },
-  { label: 'Example 2', nums: [1, 3, 5] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def totalHammingDistance(nums):' },
@@ -97,7 +97,7 @@ function BinaryVisualization({ nums, binaries, bitPos }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {binaries.map((bin, i) => (
           <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 10 }}>
-            <div style={{ fontWeight: 600, color: 'var(--surface2)', minWidth: 40 }}>{nums[i]}</div>
+            <div style={{ fontWeight: 600, color: 'var(--text-on-light)', minWidth: 40 }}>{nums[i]}</div>
             <div style={{ fontFamily: 'monospace', display: 'flex', gap: 1 }}>
               {bin.split('').map((bit, j) => (
                 <div
@@ -136,7 +136,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -165,7 +165,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Numbers</div>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Numbers</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
           {nums.map((num, i) => (
             <motion.div
@@ -270,7 +270,7 @@ function VisualizationPanel({ nums, step, applyEx }) {
 
 export default function Problem477Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[4,14,2]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

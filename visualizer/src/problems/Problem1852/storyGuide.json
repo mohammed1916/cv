@@ -1,0 +1,31 @@
+{
+  "number": "1852",
+  "title": "Distinct Numbers in Each Subarray",
+  "goal": "Count distinct values in each fixed-length subarray.",
+  "strategy": "Maintain occurrence counts for the sliding window. Delete a key when its last copy leaves so the map size equals the number of distinct values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct values in each fixed-length subarray.",
+    "inspect": "Maintain occurrence counts for the sliding window. Delete a key when its last copy leaves so the map size equals the number of distinct values.",
+    "update": "Maintain occurrence counts for the sliding window. Delete a key when its last copy leaves so the map size equals the number of distinct values.",
+    "done": "Count distinct values in each fixed-length subarray."
+  },
+  "edgeCases": [
+    "Window length one",
+    "Whole-array window",
+    "Uniform repeated values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

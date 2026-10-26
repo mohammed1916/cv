@@ -1,0 +1,31 @@
+{
+  "number": "2210",
+  "title": "Count Hills and Valleys in an Array",
+  "goal": "Count hills and valleys while treating adjacent equal values as one plateau.",
+  "strategy": "Compress each equal run to one height. Only interior compressed values can have both neighbors, and strict comparisons identify hill and valley plateaus once each.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count hills and valleys while treating adjacent equal values as one plateau.",
+    "inspect": "Compress each equal run to one height. Only interior compressed values can have both neighbors, and strict comparisons identify hill and valley plateaus once each.",
+    "update": "Compress each equal run to one height. Only interior compressed values can have both neighbors, and strict comparisons identify hill and valley plateaus once each.",
+    "done": "Count hills and valleys while treating adjacent equal values as one plateau."
+  },
+  "edgeCases": [
+    "A constant plateau has no two distinct neighboring heights",
+    "Monotone heights have no hill or valley",
+    "One interior plateau is one hill"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

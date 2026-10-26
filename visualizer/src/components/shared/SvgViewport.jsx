@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import './SvgViewport.css'
+import { useOptionalChatContext } from '../../context/ChatContext'
 
 /**
  * Pan/zoom wrapper for an inline SVG diagram inside a Lumino dock panel.
@@ -29,6 +30,7 @@ export default function SvgViewport({
   children,
 }) {
   const [scale, setScale] = useState(1)
+  const selecting = useOptionalChatContext()?.selectMode ?? false
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   // Mirrored in state purely so the grabbing cursor re-renders; the ref holds
   // the live pointer position without causing a render per pointermove.
@@ -79,7 +81,7 @@ export default function SvgViewport({
   const onPointerDown = (e) => {
     // Left button only; keeps right-click/context menu and Lumino's own
     // middle-click behaviour untouched.
-    if (e.button !== 0) return
+    if (selecting || e.button !== 0) return
     e.stopPropagation()
     dragRef.current = { x: e.clientX, y: e.clientY }
     setIsDragging(true)

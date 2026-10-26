@@ -1,0 +1,22 @@
+{
+  "number": "158",
+  "title": "Read N Characters Given Read4 II - Call multiple times",
+  "goal": "Solve Read N Characters Given Read4 II - Call multiple times: Read N characters with multiple calls to read() with caching.",
+  "strategy": "Read N characters with multiple calls to read() with caching.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not chunk",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "calls must be an array"
+  ],
+  "source": [
+    "src/problems/Problem158/index.jsx",
+    "src/problems/Problem158/ReadNCharactersGivenRead4IIVisualizer.jsx"
+  ]
+}

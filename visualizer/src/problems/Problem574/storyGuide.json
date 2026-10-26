@@ -1,0 +1,31 @@
+{
+  "number": "574",
+  "title": "Winning Candidate",
+  "goal": "Return the name of the candidate receiving the most votes.",
+  "strategy": "Count vote records by candidate ID, select the unique largest group, and join that ID to its candidate name. Names are labels and need not be unique.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the name of the candidate receiving the most votes.",
+    "inspect": "Count vote records by candidate ID, select the unique largest group, and join that ID to its candidate name. Names are labels and need not be unique.",
+    "update": "Count vote records by candidate ID, select the unique largest group, and join that ID to its candidate name. Names are labels and need not be unique.",
+    "done": "Return the name of the candidate receiving the most votes."
+  },
+  "edgeCases": [
+    "A single ballot is enough to select a winner",
+    "Duplicate names still use separate candidate IDs",
+    "Candidates without votes do not create winning groups"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

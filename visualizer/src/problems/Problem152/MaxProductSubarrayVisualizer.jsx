@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/max-product-subarray.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MaxProductSubarrayVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -74,10 +77,10 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('max-product-subarray')
+const EXAMPLES = authoredExamples0
 
 export default function MaxProductSubarrayVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,3,-2,4]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, inputError } = useMemo(() => {
@@ -127,20 +130,9 @@ export default function MaxProductSubarrayVisualizer() {
 
         <div className="mps-panel">
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16, overflow: 'auto' }}>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                    {EXAMPLES.map(ex => (
-                        <button key={ex.label} onClick={() => applyExample(ex)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
-                            {ex.label}
-                        </button>
-                    ))}
-                </div>
 
-                <div>
-                    <input style={{ width: '100%', padding: '8px', borderRadius: 4, border: inputError ? '2px solid #ef4444' : '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={numsInput} onChange={e => { setNumsInput(e.target.value); handleReset() }} />
-                    {inputError && <div style={{ color: '#991b1b', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-                </div>
 
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Array</div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Array</div>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                     {nums.map((val, i) => {
                         const isActive = step?.i === i
@@ -151,7 +143,7 @@ export default function MaxProductSubarrayVisualizer() {
                                 border: isActive ? '2px solid #f59e0b' : '1px solid var(--border)', borderRadius: 4
                             }}>
                                 <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{i}</span>
-                                <span style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{val}</span>
+                                <span style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text-on-light)' }}>{val}</span>
                             </motion.div>
                         )
                     })}
@@ -213,7 +205,6 @@ export default function MaxProductSubarrayVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -231,6 +222,7 @@ export default function MaxProductSubarrayVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
         </>
     )
 
@@ -239,7 +231,7 @@ export default function MaxProductSubarrayVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: '📊 Max Product', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

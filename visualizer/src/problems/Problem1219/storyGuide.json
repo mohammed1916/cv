@@ -1,0 +1,31 @@
+{
+  "number": "1219",
+  "title": "Path with Maximum Gold",
+  "goal": "Collect the maximum gold along a path that never revisits a cell.",
+  "strategy": "Try each positive cell as a start. Branch to unvisited orthogonal gold neighbors and unmark on return so independent paths can reuse cells.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Collect the maximum gold along a path that never revisits a cell.",
+    "inspect": "Try each positive cell as a start. Branch to unvisited orthogonal gold neighbors and unmark on return so independent paths can reuse cells.",
+    "update": "Try each positive cell as a start. Branch to unvisited orthogonal gold neighbors and unmark on return so independent paths can reuse cells.",
+    "done": "Collect the maximum gold along a path that never revisits a cell."
+  },
+  "edgeCases": [
+    "No gold",
+    "One isolated gold cell",
+    "A straight corridor can collect everything"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

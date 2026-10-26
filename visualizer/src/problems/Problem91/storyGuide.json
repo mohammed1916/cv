@@ -1,0 +1,30 @@
+{
+  "number": "91",
+  "title": "Decode Ways",
+  "goal": "Solve Decode Ways: Count decoding prefixes using a valid final single digit and, when allowed, a valid final two-digit code.",
+  "strategy": "Count decoding prefixes using a valid final single digit and, when allowed, a valid final two-digit code.",
+  "phases": [
+    "add_one",
+    "add_two",
+    "check",
+    "done",
+    "init",
+    "read",
+    "zero"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Zero is not a standalone letter; only 10 and 20 can absorb it as the second digit of a pair."
+  ],
+  "checks": [
+    {
+      "condition": "not s or s[0] == \"0\"",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem91/index.jsx",
+    "src/problems/Problem91/DecodeWaysVisualizer.jsx"
+  ]
+}

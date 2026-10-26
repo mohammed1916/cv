@@ -1,0 +1,31 @@
+{
+  "number": "1642",
+  "title": "Furthest Building You Can Reach",
+  "goal": "Reach the farthest building using limited bricks and ladders.",
+  "strategy": "Among positive climbs seen so far, ladders should cover the largest. Keep candidate ladder climbs sorted and pay bricks for the smallest whenever their count exceeds the ladder supply.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach the farthest building using limited bricks and ladders.",
+    "inspect": "Among positive climbs seen so far, ladders should cover the largest. Keep candidate ladder climbs sorted and pay bricks for the smallest whenever their count exceeds the ladder supply.",
+    "update": "Among positive climbs seen so far, ladders should cover the largest. Keep candidate ladder climbs sorted and pay bricks for the smallest whenever their count exceeds the ladder supply.",
+    "done": "Reach the farthest building using limited bricks and ladders."
+  },
+  "edgeCases": [
+    "Only descending heights",
+    "No resource for first climb",
+    "A ladder for every climb"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

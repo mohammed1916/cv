@@ -1,0 +1,23 @@
+{
+  "number": "349",
+  "title": "Intersection of Two Arrays",
+  "goal": "Solve Intersection of Two Arrays: Find intersection of two arrays.",
+  "strategy": "Find intersection of two arrays.",
+  "phases": [
+    "init",
+    "scan",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "This intersection returns each common value once, regardless of duplicate occurrences."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"nums1\": [1,2], \"nums2\": [2,3] }."
+  ],
+  "source": [
+    "src/problems/Problem349/index.jsx",
+    "src/problems/Problem349/IntersectionofTwoArraysVisualizer.jsx"
+  ]
+}

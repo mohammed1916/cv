@@ -1,0 +1,29 @@
+{
+  "number": "16",
+  "title": "3Sum Closest",
+  "goal": "Solve 3Sum Closest: Sort the array and scan two-pointer pairs for each fixed first value, retaining the sum with smallest distance to the target.",
+  "strategy": "Sort the array and scan two-pointer pairs for each fixed first value, retaining the sum with smallest distance to the target.",
+  "phases": [
+    "init",
+    "fix_i",
+    "calc",
+    "update",
+    "move_l",
+    "move_r",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An exact target sum has distance zero; otherwise the answer may lie above or below the target."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number",
+    "Max 12 elements for clarity"
+  ],
+  "source": [
+    "src/problems/Problem16/index.jsx",
+    "src/problems/Problem16/ThreeSumClosestVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "number": "181",
+  "title": "Employees Earning More Than Their Managers",
+  "goal": "Solve Employees Earning More Than Their Managers: SQL query to find employees earning more than managers.",
+  "strategy": "SQL query to find employees earning more than managers.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Employees without a matching manager cannot satisfy a manager-salary comparison; equal salaries do not count as earning more."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem181/index.jsx",
+    "src/problems/Problem181/EmployeesEarningMoreThanTheirManagersVisualizer.jsx"
+  ]
+}

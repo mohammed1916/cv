@@ -1,0 +1,31 @@
+{
+  "number": "2163",
+  "title": "Minimum Difference in Sums After Removal of Elements",
+  "goal": "Remove one third of the values to minimize the first retained half sum minus the second.",
+  "strategy": "At each split, keep the n smallest values available on the left and the n largest on the right. A max-heap maintains left minima and a min-heap maintains right maxima; compare every valid split.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove one third of the values to minimize the first retained half sum minus the second.",
+    "inspect": "At each split, keep the n smallest values available on the left and the n largest on the right. A max-heap maintains left minima and a min-heap maintains right maxima; compare every valid split.",
+    "update": "At each split, keep the n smallest values available on the left and the n largest on the right. A max-heap maintains left minima and a min-heap maintains right maxima; compare every valid split.",
+    "done": "Remove one third of the values to minimize the first retained half sum minus the second."
+  },
+  "edgeCases": [
+    "The smallest input keeps one value on each side",
+    "Equal values give zero difference at every split",
+    "Ascending values favor small left and large right values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

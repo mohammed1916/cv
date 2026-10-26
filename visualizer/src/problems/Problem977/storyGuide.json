@@ -1,0 +1,27 @@
+{
+  "title": "Squares of a Sorted Array",
+  "goal": "Return the squares of a sorted array in nondecreasing order.",
+  "strategy": "A sorted signed array can have its greatest magnitude at either end. Fill the squared output from right to left.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "A sorted signed array can have its greatest magnitude at either end. Fill the squared output from right to left.",
+    "update": "The greatest remaining magnitude was placed at the last remaining output position.",
+    "done": "The greatest remaining magnitude was placed at the last remaining output position."
+  },
+  "edgeCases": [
+    "All negative",
+    "Equal magnitudes",
+    "Single zero"
+  ],
+  "number": "977",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/game-play-analysis-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './GamePlayAnalysisIIVisualizer.css'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -40,7 +43,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('game-play-analysis-ii')
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def gamePlayAnalysisII(events):' },
@@ -141,7 +144,7 @@ function VisualizationPanel({ events, step, inputPanel }) {
 
       {/* Events Table */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Events</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Events</div>
         <div style={{ overflowX: 'auto', maxHeight: 200, overflowY: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', fontSize: 12 }}>
             <thead>
@@ -231,8 +234,8 @@ function VisualizationPanel({ events, step, inputPanel }) {
 }
 
 export default function GamePlayAnalysisIIVisualizer() {
-  const DEFAULT_ACTIVITY = EXAMPLES[0]?.activity ?? [{ player_id: 1, device_id: 2, event_date: '2016-03-01' }]
-  const [activityInput, setActivityInput] = useState(JSON.stringify(DEFAULT_ACTIVITY))
+
+  const [activityInput, setActivityInput] = useState(JSON.stringify(AUTHORED_INITIAL.activity))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
   const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
@@ -323,7 +326,6 @@ export default function GamePlayAnalysisIIVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -341,6 +343,7 @@ export default function GamePlayAnalysisIIVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

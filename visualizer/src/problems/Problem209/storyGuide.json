@@ -1,0 +1,28 @@
+{
+  "number": "209",
+  "title": "Minimum Size Subarray Sum",
+  "goal": "Solve Minimum Size Subarray Sum: Find the minimal length of a contiguous subarray whose sum is at least target.",
+  "strategy": "Find the minimal length of a contiguous subarray whose sum is at least target.",
+  "phases": [
+    "init",
+    "expand",
+    "shrink",
+    "record",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The shrinking-window proof assumes positive values; if no window reaches the target, the minimum length is zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Provide at least one number",
+    "target must be a positive number",
+    "Use at most 40 numbers"
+  ],
+  "source": [
+    "src/problems/Problem209/index.jsx",
+    "src/problems/Problem209/Problem209Visualizer.jsx"
+  ]
+}

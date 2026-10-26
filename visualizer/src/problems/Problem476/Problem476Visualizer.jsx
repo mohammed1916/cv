@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/number-complement.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem476Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('number-complement')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('number-complement')
+const EXAMPLES = authoredExamples0
 
 function findComplement(num) {
   let highestBit = 1
@@ -96,7 +99,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -118,7 +121,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Number</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Number</div>
         <div style={{
           padding: 12,
           backgroundColor: 'var(--surface2)',
@@ -132,7 +135,7 @@ function VisualizationPanel({ num, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Bits</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Bits</div>
         <div style={{ display: 'flex', gap: 4, justifyContent: 'center' }}>
           {binary.split('').map((bit, idx) => (
             <motion.div
@@ -206,7 +209,7 @@ function VisualizationPanel({ num, step, applyEx }) {
 
 export default function Problem476Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numInput, setNumInput] = useState(5);
+  const [numInput, setNumInput] = useState(String(AUTHORED_INITIAL.num));
   const { num, inputError } = useMemo(() => {
     try {
       const parsedNum = Number(numInput); if (isNaN(parsedNum)) throw new Error('num must be a number');

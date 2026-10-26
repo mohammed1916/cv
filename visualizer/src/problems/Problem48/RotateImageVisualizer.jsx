@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/rotate-image.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
@@ -7,7 +8,7 @@ import CodePatternAnnotations from "../../components/CodePatternAnnotations";
 import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./RotateImageVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
@@ -68,7 +69,7 @@ function generateSteps(initial) {
     return steps;
 }
 
-const EXAMPLES = getExamples('rotate-image');
+const EXAMPLES = authoredExamples0;
 
 const ACCENT = "#f9e2af";
 
@@ -153,9 +154,6 @@ export default function RotateImageVisualizer() {
     );
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -166,6 +164,9 @@ export default function RotateImageVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={ROTATE_PATTERNS} />
+            )}
         </>
     );
 
@@ -175,7 +176,7 @@ export default function RotateImageVisualizer() {
         () => [
             { id: 'primary', title: 'Original', dockMode: 'split-right' },
             { id: 'state', title: 'Working matrix', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

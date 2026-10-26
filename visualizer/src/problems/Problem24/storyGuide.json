@@ -1,0 +1,29 @@
+{
+  "number": "24",
+  "title": "Swap Nodes in Pairs",
+  "goal": "Solve Swap Nodes in Pairs: Rewire each adjacent pair through its predecessor, then advance to the next unswapped pair.",
+  "strategy": "Rewire each adjacent pair through its predecessor, then advance to the next unswapped pair.",
+  "phases": [
+    "advance",
+    "check_end",
+    "check_pair",
+    "done",
+    "identify",
+    "init",
+    "swap_done",
+    "swap_start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An unpaired final node stays in place; swapping the first pair changes the list head."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be an array",
+    "Max 8 nodes for clarity"
+  ],
+  "source": [
+    "src/problems/Problem24/index.jsx",
+    "src/problems/Problem24/SwapNodesInPairsVisualizer.jsx"
+  ]
+}

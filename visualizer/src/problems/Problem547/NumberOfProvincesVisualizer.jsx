@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--547.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -119,42 +121,7 @@ function generateSteps(isConnected) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Two Provinces',
-    isConnected: [
-      [1, 1, 0],
-      [1, 1, 0],
-      [0, 0, 1],
-    ],
-  },
-  {
-    label: 'Example 2: Three Provinces',
-    isConnected: [
-      [1, 0, 0],
-      [0, 1, 0],
-      [0, 0, 1],
-    ],
-  },
-  {
-    label: 'Example 3: One Province',
-    isConnected: [
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-    ],
-  },
-  {
-    label: 'Example 4: Complex',
-    isConnected: [
-      [1, 0, 0, 1],
-      [0, 1, 1, 0],
-      [0, 1, 1, 1],
-      [1, 0, 1, 1],
-    ],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function NumberOfProvincesVisualizer() {
   const [isConnectedInput, setIsConnectedInput] = useState(JSON.stringify(EXAMPLES[0].isConnected))
@@ -265,7 +232,7 @@ export default function NumberOfProvincesVisualizer() {
                           borderRadius: 4,
                           border: isHighlighted ? '2px solid #0ea5e9' : '1px solid var(--border)',
                           backgroundColor: isHighlighted ? '#0ea5e9' : isRoot ? '#dcfce7' : 'var(--surface2)',
-                          color: isHighlighted ? '#fff' : 'var(--surface2)',
+                          color: isHighlighted ? '#fff' : (isRoot ? 'var(--text-on-light)' : 'var(--text)'),
                           fontSize: 11,
                           fontWeight: 600,
                         }}
@@ -298,7 +265,7 @@ export default function NumberOfProvincesVisualizer() {
                               borderRadius: 4,
                               border: isHighlighted ? '2px solid #ef4444' : '1px solid var(--border)',
                               backgroundColor: isHighlighted ? '#ef4444' : isCellConnected ? '#dcfce7' : '#f5f5f5',
-                              color: isHighlighted ? '#fff' : 'var(--surface2)',
+                              color: isHighlighted ? '#fff' : 'var(--text-on-light)',
                               fontSize: 12,
                               fontWeight: 600,
                             }}
@@ -336,9 +303,6 @@ export default function NumberOfProvincesVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -356,6 +320,9 @@ export default function NumberOfProvincesVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

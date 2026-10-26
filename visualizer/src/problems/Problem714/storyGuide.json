@@ -1,0 +1,27 @@
+{
+  "number": "714",
+  "title": "Best Time to Buy and Sell Stock with Transaction Fee",
+  "goal": "Maximize profit with any number of nonoverlapping stock trades and a fee per sale.",
+  "strategy": "Keep best cash and best held-stock profit. Read the previous day states for both transitions so one update cannot contaminate the other.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize profit with any number of nonoverlapping stock trades and a fee per sale.",
+    "inspect": "Keep best cash and best held-stock profit. Read the previous day states for both transitions so one update cannot contaminate the other.",
+    "update": "Keep best cash and best held-stock profit. Read the previous day states for both transitions so one update cannot contaminate the other.",
+    "done": "Maximize profit with any number of nonoverlapping stock trades and a fee per sale."
+  },
+  "edgeCases": [
+    "Fee erases every gain",
+    "Descending prices",
+    "No selling day"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

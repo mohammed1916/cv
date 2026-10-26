@@ -1,0 +1,31 @@
+{
+  "number": "2008",
+  "title": "Maximum Earnings From Taxi",
+  "goal": "Maximize taxi earnings from nonoverlapping rides along increasing positions.",
+  "strategy": "DP at a position stores the best earnings available by that point. Either carry the previous value forward or finish a ride using the best earnings already available at its start.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize taxi earnings from nonoverlapping rides along increasing positions.",
+    "inspect": "DP at a position stores the best earnings available by that point. Either carry the previous value forward or finish a ride using the best earnings already available at its start.",
+    "update": "DP at a position stores the best earnings available by that point. Either carry the previous value forward or finish a ride using the best earnings already available at its start.",
+    "done": "Maximize taxi earnings from nonoverlapping rides along increasing positions."
+  },
+  "edgeCases": [
+    "Two rides can meet at one position",
+    "A profitable long ride beats short alternatives",
+    "A ride need not start at position one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "number": "1143",
+  "title": "Longest Common Subsequence",
+  "goal": "Solve Longest Common Subsequence: 2D DP: dp[i][j] = dp[i-1][j-1]+1 on match, else max of dp[i-1][j] and dp[i][j-1].",
+  "strategy": "2D DP: dp[i][j] = dp[i-1][j-1]+1 on match, else max of dp[i-1][j] and dp[i][j-1].",
+  "phases": [
+    "init",
+    "compare",
+    "match",
+    "no-match",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Empty prefixes have common-subsequence length zero. Equal characters extend the diagonal; unequal characters require choosing between dropping either suffix character."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem1143/index.jsx",
+    "src/problems/Problem1143/LCSVisualizer.jsx"
+  ]
+}

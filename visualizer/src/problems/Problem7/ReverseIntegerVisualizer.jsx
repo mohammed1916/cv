@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/reverse-integer.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,7 +13,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ReverseIntegerVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -127,10 +130,10 @@ function generateSteps(initialX) {
   return steps
 }
 
-const EXAMPLES = getExamples('reverse-integer')
+const EXAMPLES = authoredExamples0
 
 export default function ReverseIntegerVisualizer() {
-  const [xInput, setXInput] = useState('123')
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x))
   const [panelDivs, setPanelDivs] = useState(null)
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
@@ -198,16 +201,7 @@ export default function ReverseIntegerVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>x=</span>
-          <input
-            value={xInput}
-            onChange={(e) => { setXInput(e.target.value); handleReset() }}
-            placeholder="123"
-            className="revin-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-        </div>
+        
 
         <div className="revin-math-container">
             <div className="revin-math-box x-box">
@@ -327,9 +321,6 @@ export default function ReverseIntegerVisualizer() {
 
   const playbackPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REVIN_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -347,6 +338,9 @@ export default function ReverseIntegerVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REVIN_PATTERNS} />
+      )}
     </div>
   )
 
@@ -354,7 +348,7 @@ export default function ReverseIntegerVisualizer() {
     () => [
       { id: 'input', title: 'Pop & Push Digits', dockMode: 'split-right' },
       { id: 'bounds', title: '32-Bit Bounds', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

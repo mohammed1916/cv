@@ -1,275 +1,654 @@
 .sirsa-shell {
     position: relative;
+
     display: flex;
     flex-direction: column;
+
     height: 100%;
     min-height: 480px;
+
     gap: 0;
+
     overflow: hidden;
+}
+
+
+/* =========================================================
+   PRIMARY PANEL
+   ========================================================= */
+
+.sirsa-primary {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    height: 100%;
+    min-height: 0;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
 }
 
 .sirsa-panel {
-    background: var(--surface2);
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    min-height: 0;
+
     border: 1px solid var(--border);
     border-radius: 12px;
-    display: flex;
-    flex-direction: column;
+
+    background: var(--surface2);
+
     overflow: hidden;
-    flex: 1;
-    min-height: 0;
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .sirsa-head {
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    background: var(--surface3);
-    flex-shrink: 0;
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    padding: 10px 14px;
+
+    flex-shrink: 0;
+
+    border-bottom: 1px solid var(--border);
+
+    background: var(--surface3);
 }
 
-.sirsa-error {
-    color: #ea0c0c;
-    font-size: 12px;
-    font-weight: 400;
+.sirsa-head-title {
+    font-size: 13px;
+    font-weight: 800;
+
+    color: var(--text);
 }
+
+.sirsa-head-subtitle {
+    margin-top: 2px;
+
+    font-size: 10px;
+
+    color: var(--text-muted);
+}
+
+.sirsa-target-badge {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 5px 9px;
+
+    border: 1px solid rgba(251, 113, 133, 0.28);
+    border-radius: 7px;
+
+    background: rgba(251, 113, 133, 0.08);
+
+    font-family: monospace;
+    font-size: 10px;
+
+    color: var(--text-muted);
+}
+
+.sirsa-target-badge strong {
+    font-size: 14px;
+
+    color: #fb7185;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
 
 .sirsa-body {
-    padding: 14px;
-    flex: 1;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
+
     gap: 16px;
+
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 14px;
+
+    overflow-y: auto;
 }
 
-.sirsa-top-row {
+
+/* =========================================================
+   ARRAY SECTION
+   ========================================================= */
+
+.sirsa-array-section {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+
+    gap: 8px;
 }
 
-.sirsa-examples {
+.sirsa-section-heading {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-}
 
-.sirsa-chip {
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    background: rgba(30, 41, 59, 0.8);
-    border-radius: 999px;
-    padding: 4px 12px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.18s ease;
-}
+    align-items: center;
+    justify-content: space-between;
 
-.sirsa-chip:hover {
-    background: var(--border);
-    color: var(--text);
-}
+    gap: 12px;
 
-.sirsa-inputs {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: flex-end;
-}
-
-.sirsa-input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.sirsa-label {
     font-size: 11px;
-    font-weight: 700;
-    font-family: monospace;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
     color: var(--text-muted);
 }
 
-.sirsa-input {
-    padding: 7px 11px;
-    border-radius: 7px;
-    border: 1px solid var(--border);
-    background: var(--code-bg);
-    color: var(--text);
+.sirsa-window-readout {
+    padding: 2px 7px;
+
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 5px;
+
+    background: rgba(56, 189, 248, 0.07);
+
     font-family: monospace;
-    font-size: 13px;
-    min-width: 200px;
+    font-size: 10px;
+
+    color: #38bdf8;
 }
 
-.sirsa-input.narrow {
-    min-width: 80px;
+
+/* =========================================================
+   ENGINEERING ARRAY STAGE
+   ========================================================= */
+
+.sirsa-array-stage {
+    position: relative;
+
+    width: max-content;
+    min-width: 100%;
+
+    box-sizing: border-box;
+
+    padding-top: 42px;
+
+    overflow: visible;
 }
 
-.sirsa-input:focus {
-    outline: none;
-    border-color: var(--primary);
+
+/* Current search window upper bracket */
+
+.sirsa-window-rail {
+    position: absolute;
+
+    top: 14px;
+
+    height: 18px;
+
+    box-sizing: border-box;
+
+    border-top: 2px solid #38bdf8;
+    border-left: 2px solid #38bdf8;
+    border-right: 2px solid #38bdf8;
+
+    border-radius: 5px 5px 0 0;
+
+    pointer-events: none;
+
+    z-index: 3;
 }
 
-/* ── Array ── */
+.sirsa-window-rail::before,
+.sirsa-window-rail::after {
+    content: '';
+
+    position: absolute;
+
+    bottom: -4px;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #38bdf8;
+}
+
+.sirsa-window-rail::before {
+    left: -4px;
+}
+
+.sirsa-window-rail::after {
+    right: -4px;
+}
+
+.sirsa-window-rail-label {
+    position: absolute;
+
+    left: 50%;
+    top: -18px;
+
+    transform: translateX(-50%);
+
+    padding: 1px 6px;
+
+    border-radius: 4px;
+
+    background: var(--surface2);
+
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 800;
+
+    color: #38bdf8;
+
+    white-space: nowrap;
+}
+
+
+/* Sorted-half lower engineering rail */
+
+.sirsa-sorted-rail {
+    position: absolute;
+
+    top: 108px;
+
+    height: 18px;
+
+    box-sizing: border-box;
+
+    border-left: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+
+    border-radius: 0 0 5px 5px;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.sirsa-sorted-rail.left {
+    color: #38bdf8;
+}
+
+.sirsa-sorted-rail.right {
+    color: #c084fc;
+}
+
+.sirsa-sorted-rail span {
+    position: absolute;
+
+    left: 50%;
+    bottom: -20px;
+
+    transform: translateX(-50%);
+
+    padding: 1px 6px;
+
+    border-radius: 4px;
+
+    background: var(--surface2);
+
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 800;
+
+    color: currentColor;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ARRAY
+   ========================================================= */
+
 .sirsa-array-wrap {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px 0;
+    flex-wrap: nowrap;
+
+    gap: 16px;
+
+    padding: 8px 0 30px;
 }
 
 .sirsa-col {
+    position: relative;
+
     display: flex;
     flex-direction: column;
+
     align-items: center;
+
     gap: 4px;
+
+    width: 52px;
+    min-width: 52px;
 }
 
 .sirsa-cell {
-    width: 52px;
-    height: 52px;
+    position: relative;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: monospace;
-    background: var(--surface2);
+
+    width: 52px;
+    height: 52px;
+
+    box-sizing: border-box;
+
     border: 2px solid var(--border);
+    border-radius: 8px;
+
+    background: var(--surface2);
+
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 800;
+
     color: var(--text);
-    transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        opacity 0.2s,
+        box-shadow 0.2s;
 }
+
+
+/* =========================================================
+   ARRAY CELL STATES
+   ========================================================= */
 
 .sirsa-cell.mid {
     border-color: var(--warning);
+
     background: rgba(251, 191, 36, 0.12);
+
     color: var(--warning);
+
+    box-shadow:
+        0 0 0 2px rgba(251, 191, 36, 0.08),
+        0 5px 14px rgba(251, 191, 36, 0.1);
 }
 
 .sirsa-cell.found {
     border-color: var(--success);
+
     background: rgba(34, 197, 94, 0.15);
+
     color: var(--success);
-    box-shadow: 0 0 12px var(--success-glow);
+
+    box-shadow:
+        0 0 0 2px rgba(34, 197, 94, 0.08),
+        0 0 14px var(--success-glow);
 }
 
-.sirsa-cell.sorted-left {
-    border-color: rgba(56, 189, 248, 0.5);
+.sirsa-cell.sorted-left:not(.mid) {
+    border-color: rgba(56, 189, 248, 0.55);
+
     background: rgba(56, 189, 248, 0.08);
 }
 
-.sirsa-cell.sorted-right {
-    border-color: rgba(168, 85, 247, 0.5);
+.sirsa-cell.sorted-right:not(.mid) {
+    border-color: rgba(168, 85, 247, 0.55);
+
     background: rgba(168, 85, 247, 0.08);
 }
 
 .sirsa-cell.dim {
-    opacity: 0.3;
+    opacity: 0.25;
 }
 
 .sirsa-cell.eliminated {
-    opacity: 0.25;
+    opacity: 0.18;
+
     border-style: dashed;
+
+    filter: grayscale(0.6);
 }
 
+
+/* =========================================================
+   ARRAY INDEX
+   ========================================================= */
+
 .sirsa-idx {
-    font-size: 10px;
-    color: var(--text-dim);
     font-family: monospace;
+    font-size: 9px;
+
+    color: var(--text-dim);
 }
+
+
+/* =========================================================
+   POINTERS
+   ========================================================= */
 
 .sirsa-ptrs {
     display: flex;
+
+    justify-content: center;
+
     gap: 2px;
+
     min-height: 18px;
 }
 
 .sirsa-ptr {
-    font-size: 10px;
-    font-weight: 700;
     padding: 1px 5px;
+
     border-radius: 4px;
+
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 800;
 }
 
 .lo-ptr {
-    background: rgba(56, 189, 248, 0.2);
-    color: var(--info);
+    background: rgba(56, 189, 248, 0.15);
+
+    color: #38bdf8;
 }
 
 .mid-ptr {
-    background: rgba(251, 191, 36, 0.2);
+    background: rgba(251, 191, 36, 0.15);
+
     color: var(--warning);
 }
 
 .hi-ptr {
-    background: rgba(168, 85, 247, 0.2);
+    background: rgba(192, 132, 252, 0.15);
+
     color: #c084fc;
 }
 
-/* ── Half badge ── */
+
+/* =========================================================
+   WEIGHTED COMPARISON
+   ========================================================= */
+
+.sirsa-comparison-wrap {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   SORTED HALF BADGE
+   ========================================================= */
+
 .sirsa-half-badge {
-    padding: 6px 14px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 600;
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
 }
 
 .sirsa-half-badge.left {
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--info);
     border: 1px solid rgba(56, 189, 248, 0.25);
+
+    background: rgba(56, 189, 248, 0.07);
+
+    color: #38bdf8;
 }
 
 .sirsa-half-badge.right {
-    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(192, 132, 252, 0.25);
+
+    background: rgba(192, 132, 252, 0.07);
+
     color: #c084fc;
-    border: 1px solid rgba(168, 85, 247, 0.25);
 }
 
-/* ── Result ── */
+.sirsa-half-badge-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: 900;
+
+    flex-shrink: 0;
+}
+
+.sirsa-half-badge div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.sirsa-half-badge strong {
+    font-size: 11px;
+}
+
+.sirsa-half-badge div span {
+    font-family: monospace;
+    font-size: 9px;
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
 .sirsa-result {
     padding: 10px 14px;
+
     border-radius: 8px;
+
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
+
     text-align: center;
 }
 
 .sirsa-result.found {
-    background: rgba(34, 197, 94, 0.12);
     border: 1px solid rgba(34, 197, 94, 0.3);
+
+    background: rgba(34, 197, 94, 0.1);
+
     color: var(--success);
 }
 
 .sirsa-result.not-found {
-    background: rgba(248, 113, 113, 0.1);
     border: 1px solid rgba(248, 113, 113, 0.3);
+
+    background: rgba(248, 113, 113, 0.08);
+
     color: var(--error);
 }
 
-/* ── Status ── */
+
+/* =========================================================
+   STATUS PANEL
+   ========================================================= */
+
 .sirsa-status {
     padding: 8px 14px;
-    background: var(--surface3);
+
     border: 1px solid var(--border);
     border-radius: 8px;
+
+    background: var(--surface3);
+
     font-size: 13px;
+
     color: var(--text-muted);
+
     flex-shrink: 0;
 }
 
 .sirsa-status.ok {
-    color: var(--success);
     border-color: rgba(34, 197, 94, 0.3);
+
+    color: var(--success);
 }
 
 .sirsa-status.fail {
-    color: var(--error);
     border-color: rgba(248, 113, 113, 0.3);
+
+    color: var(--error);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+    .sirsa-primary {
+        padding: 8px;
+    }
+
+    .sirsa-body {
+        padding: 10px;
+    }
+
+    .sirsa-head {
+        align-items: flex-start;
+    }
+
+    .sirsa-array-section {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
 }

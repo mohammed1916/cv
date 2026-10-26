@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--875.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -97,11 +99,7 @@ function generateSteps(piles, h) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: 'Ex1', piles: [1, 1, 1, 1], h: 4 },
-  { label: 'Ex2', piles: [312884132], h: 968709470 },
-  { label: 'Ex3', piles: [1, 10, 1, 1], h: 3 },
-]
+const EXAMPLES = authoredExamples0
 
 export default function KokoEatingBananasVisualizer() {
   const [exIdx, setExIdx] = useState(0)

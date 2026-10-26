@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--384.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -122,20 +124,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Small Array',
-    nums: [1, 2, 3],
-  },
-  {
-    label: 'Larger Array',
-    nums: [1, 2, 3, 4, 5],
-  },
-  {
-    label: 'Single Element',
-    nums: [42],
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem384Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -389,9 +378,6 @@ export default function Problem384Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -409,6 +395,9 @@ export default function Problem384Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

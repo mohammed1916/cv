@@ -1,0 +1,31 @@
+{
+  "number": "627",
+  "title": "Swap Sex of Employees",
+  "goal": "Swap the stored m and f category values for every employee in one update.",
+  "strategy": "Each output value depends on the row original category. A single CASE update chooses the opposite value without a second update accidentally changing already-updated rows again.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Swap the stored m and f category values for every employee in one update.",
+    "inspect": "Each output value depends on the row original category. A single CASE update chooses the opposite value without a second update accidentally changing already-updated rows again.",
+    "update": "Each output value depends on the row original category. A single CASE update chooses the opposite value without a second update accidentally changing already-updated rows again.",
+    "done": "Swap the stored m and f category values for every employee in one update."
+  },
+  "edgeCases": [
+    "All m entries become f",
+    "All f entries become m",
+    "An empty salary table needs no changes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

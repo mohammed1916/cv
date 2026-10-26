@@ -1,0 +1,24 @@
+{
+  "number": "580",
+  "title": "Count Student Number in Departments",
+  "goal": "Solve Count Student Number in Departments: SQL query to count the number of students in each department",
+  "strategy": "SQL query to count the number of students in each department",
+  "phases": [
+    "init",
+    "grouping",
+    "counting",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Departments with no students must remain in the result with count zero; counting joined rows incorrectly can produce one."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem580/index.jsx",
+    "src/problems/Problem580/CountStudentsVisualizer.jsx"
+  ]
+}

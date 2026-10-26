@@ -1,0 +1,31 @@
+{
+  "number": "2025",
+  "title": "Maximum Number of Ways to Partition an Array",
+  "goal": "Maximize equal-sum split points after changing at most one value to k.",
+  "strategy": "Store each split imbalance as twice its prefix sum minus the total. A replacement shifts splits before the changed position one way and splits after it the opposite way, so two frequency maps count all repaired splits.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize equal-sum split points after changing at most one value to k.",
+    "inspect": "Store each split imbalance as twice its prefix sum minus the total. A replacement shifts splits before the changed position one way and splits after it the opposite way, so two frequency maps count all repaired splits.",
+    "update": "Store each split imbalance as twice its prefix sum minus the total. A replacement shifts splits before the changed position one way and splits after it the opposite way, so two frequency maps count all repaired splits.",
+    "done": "Maximize equal-sum split points after changing at most one value to k."
+  },
+  "edgeCases": [
+    "Keeping the original already maximizes balanced splits",
+    "Two values have only one possible split",
+    "Replacement equal to an existing value changes nothing there"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

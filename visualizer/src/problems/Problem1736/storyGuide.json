@@ -1,0 +1,31 @@
+{
+  "number": "1736",
+  "title": "Latest Time by Replacing Hidden Digits",
+  "goal": "Replace unknown digits to form the latest valid 24-hour time.",
+  "strategy": "Choose hour tens with the fixed hour units in mind. Once that limit is respected, each remaining unknown can take its greatest independently valid digit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace unknown digits to form the latest valid 24-hour time.",
+    "inspect": "Choose hour tens with the fixed hour units in mind. Once that limit is respected, each remaining unknown can take its greatest independently valid digit.",
+    "update": "Choose hour tens with the fixed hour units in mind. Once that limit is respected, each remaining unknown can take its greatest independently valid digit.",
+    "done": "Replace unknown digits to form the latest valid 24-hour time."
+  },
+  "edgeCases": [
+    "Every digit hidden",
+    "Fixed twenty-hour prefix",
+    "Already complete time"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

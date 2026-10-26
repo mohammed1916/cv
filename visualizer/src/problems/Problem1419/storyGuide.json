@@ -1,0 +1,31 @@
+{
+  "number": "1419",
+  "title": "Minimum Number of Frogs Croaking",
+  "goal": "Find the minimum simultaneous frogs explaining the sound sequence.",
+  "strategy": "Each sound must advance a frog waiting at the previous croak stage. A completed frog becomes reusable; the peak active count is the required workforce.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the minimum simultaneous frogs explaining the sound sequence.",
+    "inspect": "Each sound must advance a frog waiting at the previous croak stage. A completed frog becomes reusable; the peak active count is the required workforce.",
+    "update": "Each sound must advance a frog waiting at the previous croak stage. A completed frog becomes reusable; the peak active count is the required workforce.",
+    "done": "Find the minimum simultaneous frogs explaining the sound sequence."
+  },
+  "edgeCases": [
+    "One frog can repeat sequentially",
+    "A sound arrives before its predecessor",
+    "An unfinished frog remains"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

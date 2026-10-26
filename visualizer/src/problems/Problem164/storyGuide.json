@@ -1,0 +1,31 @@
+{
+  "number": "164",
+  "title": "Maximum Gap",
+  "goal": "Solve Maximum Gap: Bucket sort by range/n buckets; the maximum gap must span at least two buckets.",
+  "strategy": "Bucket sort by range/n buckets; the maximum gap must span at least two buckets.",
+  "phases": [
+    "done",
+    "init",
+    "fill",
+    "scan"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(nums) < 2",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "bmin == inf",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem164/index.jsx",
+    "src/problems/Problem164/MaximumGapVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "604",
+  "title": "Design Compressed String Iterator",
+  "goal": "Read a run-length encoded string one character at a time without expanding it.",
+  "strategy": "Keep a cursor into the encoded text and a remaining count for the current character. Load a new run only after the previous count reaches zero. Exhausted next calls return one space; hasNext never consumes a character.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Read a run-length encoded string one character at a time without expanding it.",
+    "inspect": "Keep a cursor into the encoded text and a remaining count for the current character. Load a new run only after the previous count reaches zero. Exhausted next calls return one space; hasNext never consumes a character.",
+    "update": "Keep a cursor into the encoded text and a remaining count for the current character. Load a new run only after the previous count reaches zero. Exhausted next calls return one space; hasNext never consumes a character.",
+    "done": "Read a run-length encoded string one character at a time without expanding it."
+  },
+  "edgeCases": [
+    "A multi-digit count is loaded as one number",
+    "Repeated reads after exhaustion return one space each",
+    "Repeated availability queries leave the first character untouched"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

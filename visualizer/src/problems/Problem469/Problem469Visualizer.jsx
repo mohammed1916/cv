@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/convex-polygon.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem469Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('convex-polygon')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('convex-polygon')
+const EXAMPLES = authoredExamples0
 
 function isConvex(points) {
   if (points.length < 3) return false
@@ -104,7 +107,7 @@ function VisualizationPanel({ points, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -126,7 +129,7 @@ function VisualizationPanel({ points, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Points: {JSON.stringify(points)}
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -222,7 +225,7 @@ function VisualizationPanel({ points, step, applyEx }) {
 
 export default function Problem469Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [pointsInput, setPointsInput] = useState("[[0,0],[0,1],[1,1],[1,0]]");
+  const [pointsInput, setPointsInput] = useState(JSON.stringify(AUTHORED_INITIAL.points));
   const { points, inputError } = useMemo(() => {
     try {
       const parsedPoints = JSON.parse(pointsInput); if (!Array.isArray(parsedPoints)) throw new Error('points must be an array');

@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/maximum-subarray.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MaximumSubarrayVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -113,10 +116,10 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = getExamples('maximum-subarray')
+const EXAMPLES = authoredExamples0
 
 export default function MaximumSubarrayVisualizer() {
-  const [numsInput, setNumsInput] = useState('[-2, 1, -3, 4, -1, 2, 1, -5, 4]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -175,16 +178,7 @@ export default function MaximumSubarrayVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>nums=</span>
-          <input
-            value={numsInput}
-            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-            placeholder="[-2, 1, -3, 4, -1, 2, 1, -5, 4]"
-            className="maxsub-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-        </div>
+        
 
         <div className="maxsub-array-container">
           {nums.map((num, idx) => {
@@ -303,9 +297,6 @@ export default function MaximumSubarrayVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMUMSUBARRAY_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -323,6 +314,9 @@ export default function MaximumSubarrayVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMUMSUBARRAY_PATTERNS} />
+      )}
     </>
   )
 
@@ -332,7 +326,7 @@ export default function MaximumSubarrayVisualizer() {
     () => [
       { id: 'primary', title: 'Array & Current Subarray', dockMode: 'split-right' },
       { id: 'state', title: 'State Variables', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

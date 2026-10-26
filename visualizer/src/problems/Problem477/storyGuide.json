@@ -1,0 +1,22 @@
+{
+  "number": "477",
+  "title": "Total Hamming Distance",
+  "goal": "Solve Total Hamming Distance: Calculate total Hamming distance between all pairs of numbers.",
+  "strategy": "Calculate total Hamming distance between all pairs of numbers.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "ones==0",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem477/index.jsx",
+    "src/problems/Problem477/Problem477Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "number": "294",
+  "title": "Flip Game II",
+  "goal": "Solve Flip Game II: Determine if first player can win.",
+  "strategy": "Determine if first player can win.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A move is winning only if it leaves the opponent no winning reply; having any legal move does not alone prove a win."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem294/index.jsx",
+    "src/problems/Problem294/Problem294Visualizer.jsx"
+  ]
+}

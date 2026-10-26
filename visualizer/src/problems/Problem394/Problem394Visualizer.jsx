@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/decode-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -9,7 +12,7 @@ import PatternLegend from "../../components/PatternLegend";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./Problem394Visualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -67,10 +70,10 @@ function generateSteps(s) {
     return steps;
 }
 
-const EXAMPLES = getExamples('decode-string');
+const EXAMPLES = authoredExamples0;
 
 export default function Problem394Visualizer() {
-    const [sInput, setSInput] = useState("3[a]2[bc]");
+    const [sInput, setSInput] = useState(AUTHORED_INITIAL.s);
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay();
 
     const steps = useMemo(() => { try { return generateSteps(sInput).map((current) => ({
@@ -109,7 +112,7 @@ export default function Problem394Visualizer() {
       </div>),
       viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
                     <div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+                        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
                         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                             {EXAMPLES.map(e => (
                                 <button key={e.label} onClick={() => applyExample(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>
@@ -119,10 +122,7 @@ export default function Problem394Visualizer() {
                         </div>
                     </div>
 
-                    <input style={{ padding: '8px', borderRadius: 4, border: '1px solid var(--border)', fontSize: 12, fontFamily: 'monospace' }} value={sInput}
-                        onChange={(e) => { setSInput(e.target.value); handleReset(); }} placeholder="encoded string" />
-
-                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Input</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Input</div>
                     <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', minHeight: 40 }}>
                         {sInput.split("").map((ch, i) => {
                             const isCur = step?.ci === i;
@@ -132,13 +132,13 @@ export default function Problem394Visualizer() {
                                 <motion.div key={i} animate={{ scale: isCur ? 1.3 : 1 }} style={{
                                     width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center',
                                     backgroundColor: colors[type], border: isCur ? '3px solid #0ea5e9' : '1px solid var(--border)',
-                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--surface2)'
+                                    borderRadius: 4, fontSize: 12, fontWeight: 'bold', color: 'var(--text-on-light)'
                                 }}>{ch}</motion.div>
                             );
                         })}
                     </div>
 
-                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>Stack</div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>Stack</div>
                     <div style={{ display: 'flex', gap: 6, alignItems: 'flex-start', minHeight: 50, paddingBottom: 8, borderBottom: '1px solid var(--text)' }}>
                         <AnimatePresence mode="popLayout">
                             {(step?.stack ?? []).map((item, i) => (
@@ -188,10 +188,7 @@ export default function Problem394Visualizer() {
               )}
             </>
             <FloatingPanel title="Playback Controls">
-                {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
-        <PlaybackControls
+                <PlaybackControls
                     isPlaying={isPlaying}
                     isDone={isDone}
                     speed={speed}
@@ -208,6 +205,9 @@ export default function Problem394Visualizer() {
                     patternOverlayLabel="Show pattern overlay"
                     showPatternOverlayToggle
                 />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
             </FloatingPanel>
         </div>
     );

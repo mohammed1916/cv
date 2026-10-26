@@ -1,0 +1,31 @@
+{
+  "number": "1730",
+  "title": "Shortest Path to Get Food",
+  "goal": "Find the fewest grid steps from the starting cell to any food.",
+  "strategy": "Breadth-first search expands reachable cells in distance order while avoiding obstacles. The first food removed from the queue is therefore nearest.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest grid steps from the starting cell to any food.",
+    "inspect": "Breadth-first search expands reachable cells in distance order while avoiding obstacles. The first food removed from the queue is therefore nearest.",
+    "update": "Breadth-first search expands reachable cells in distance order while avoiding obstacles. The first food removed from the queue is therefore nearest.",
+    "done": "Find the fewest grid steps from the starting cell to any food."
+  },
+  "edgeCases": [
+    "Adjacent food",
+    "Food is enclosed",
+    "Only one open corridor"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

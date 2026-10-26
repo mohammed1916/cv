@@ -1,0 +1,31 @@
+{
+  "number": "1738",
+  "title": "Find Kth Largest XOR Coordinate Value",
+  "goal": "Find the kth largest XOR of an origin-anchored matrix rectangle.",
+  "strategy": "Two-dimensional prefix XOR combines top and left rectangles and corrects their overlap. Collect each coordinate value, retaining duplicates when ranking.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the kth largest XOR of an origin-anchored matrix rectangle.",
+    "inspect": "Two-dimensional prefix XOR combines top and left rectangles and corrects their overlap. Collect each coordinate value, retaining duplicates when ranking.",
+    "update": "Two-dimensional prefix XOR combines top and left rectangles and corrects their overlap. Collect each coordinate value, retaining duplicates when ranking.",
+    "done": "Find the kth largest XOR of an origin-anchored matrix rectangle."
+  },
+  "edgeCases": [
+    "Single coordinate",
+    "Repeated zero results keep ranks",
+    "Choose smallest coordinate XOR"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/three-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +13,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ThreeSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -214,10 +217,10 @@ function generateSteps(nums) {
   return steps
 }
 
-const EXAMPLES = getExamples('three-sum')
+const EXAMPLES = authoredExamples0
 
 export default function ThreeSumVisualizer() {
-  const [numsInput, setNumsInput] = useState('[-1,0,1,2,-1,-4]')
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
   const { nums, inputError } = useMemo(() => {
@@ -311,6 +314,7 @@ export default function ThreeSumVisualizer() {
               cursor: 'pointer',
               fontSize: 12,
               backgroundColor: 'var(--surface2)',
+              color: 'var(--text)',
               fontWeight: 500,
             }}
           >
@@ -320,26 +324,7 @@ export default function ThreeSumVisualizer() {
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Input Array</div>
-          <input
-            style={{
-              width: '100%',
-              padding: '8px 12px',
-              borderRadius: 4,
-              border: '1px solid var(--border)',
-              fontFamily: 'monospace',
-              fontSize: 12,
-            }}
-            value={numsInput}
-            onChange={(e) => {
-              setNumsInput(e.target.value)
-              handleReset()
-            }}
-            placeholder="[-1,0,1,2,-1,-4]"
-          />
-          {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-        </div>
+        
 
         <div>
           <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 6 }}>Sorted Array · Pointers</div>
@@ -353,6 +338,7 @@ export default function ThreeSumVisualizer() {
               return (
                 <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
                         <motion.div
+                          className={`ts3-cell${isFound ? ' found' : isI ? ' fix' : isL ? ' left' : isR ? ' right' : ''}`}
                           style={{
                             width: 48,
                             height: 48,
@@ -363,38 +349,26 @@ export default function ThreeSumVisualizer() {
                             fontWeight: 600,
                             fontSize: 14,
                             fontFamily: 'monospace',
-                            border: '2px solid',
-                            backgroundColor: isFound
-                              ? '#dcfce7'
-                              : isI
-                                ? '#fef3c7'
-                                : isL
-                                  ? '#dbeafe'
-                                  : isR
-                                    ? '#fed7aa'
-                                    : 'var(--surface2)',
-                            borderColor: isFound ? '#22c55e' : isI ? '#f59e0b' : isL ? '#0ea5e9' : isR ? '#f97316' : 'var(--border)',
-                            color: isFound ? '#22c55e' : isI ? '#d97706' : isL ? '#0284c7' : isR ? '#ea580c' : 'var(--surface2)',
                           }}
                           animate={{ y: lifted ? -12 : 0, scale: lifted ? 1.15 : 1 }}
                           transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                         >
                           {val}
                         </motion.div>
-                        <div style={{ fontSize: 10, color: '#627794' }}>{idx}</div>
+                        <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>{idx}</div>
                         <div style={{ display: 'flex', gap: 2, minHeight: 18 }}>
                           {isI && (
-                            <span style={{ fontSize: 9, fontWeight: 700, backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#d97706', padding: '1px 5px', borderRadius: 4 }}>
+                            <span className="ts3-ptr-i" style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4 }}>
                               i
                             </span>
                           )}
                           {isL && (
-                            <span style={{ fontSize: 9, fontWeight: 700, backgroundColor: 'rgba(14, 165, 233, 0.2)', color: '#0284c7', padding: '1px 5px', borderRadius: 4 }}>
+                            <span className="ts3-ptr-l" style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4 }}>
                               l
                             </span>
                           )}
                           {isR && (
-                            <span style={{ fontSize: 9, fontWeight: 700, backgroundColor: 'rgba(249, 115, 22, 0.2)', color: '#ea580c', padding: '1px 5px', borderRadius: 4 }}>
+                            <span className="ts3-ptr-r" style={{ fontSize: 9, fontWeight: 700, padding: '1px 5px', borderRadius: 4 }}>
                               r
                             </span>
                           )}
@@ -410,16 +384,14 @@ export default function ThreeSumVisualizer() {
                   <div style={{ fontWeight: 600, marginBottom: 6 }}>Sum Calculation</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                     <span style={{ fontFamily: 'monospace', fontSize: 13 }}>nums[i] + nums[l] + nums[r] =</span>
-                    <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 700, color: 'var(--surface2)' }}>{step.sum}</span>
+                    <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{step.sum}</span>
                     <span
+                      className={`ts3-sum-verdict ${step.sum === 0 ? 'zero' : step.sum < 0 ? 'neg' : 'pos'}`}
                       style={{
                         fontSize: 11,
                         fontWeight: 600,
                         padding: '3px 8px',
                         borderRadius: 4,
-                        backgroundColor:
-                          step.sum === 0 ? 'rgba(34, 197, 94, 0.18)' : step.sum < 0 ? 'rgba(14, 165, 233, 0.15)' : 'rgba(249, 115, 22, 0.15)',
-                        color: step.sum === 0 ? '#22c55e' : step.sum < 0 ? '#0284c7' : '#ea580c',
                       }}
                     >
                       {step.sum === 0 ? '= 0 ✓' : step.sum < 0 ? '< 0 → l →' : '> 0 → ← r'}
@@ -435,16 +407,14 @@ export default function ThreeSumVisualizer() {
                     {(step?.result ?? []).length > 0 ? (
                       (step?.result ?? []).map((triplet) => (
                         <motion.div
+                          className="ts3-triplet"
                           key={triplet.join(',')}
                           initial={{ opacity: 0, x: 24 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0 }}
                           style={{
                             padding: '8px 12px',
-                            backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                            border: '1px solid rgba(34, 197, 94, 0.3)',
                             borderRadius: 6,
-                            color: '#22c55e',
                             fontSize: 12,
                             fontFamily: 'monospace',
                           }}
@@ -453,7 +423,7 @@ export default function ThreeSumVisualizer() {
                         </motion.div>
                       ))
                     ) : (
-                      <div style={{ color: '#627794', fontSize: 12, textAlign: 'center', padding: '16px 0' }}>
+                      <div style={{ color: 'var(--text-muted)', fontSize: 12, textAlign: 'center', padding: '16px 0' }}>
                         No triplets yet
                       </div>
                     )}
@@ -462,7 +432,7 @@ export default function ThreeSumVisualizer() {
               </div>
 
               {step?.message && (
-                <div style={{ padding: 10, backgroundColor: '#dbeafe', borderRadius: 6, fontSize: 11, color: '#0c4a6e', border: '1px solid #0ea5e9' }}>
+                <div style={{ padding: 10, backgroundColor: 'color-mix(in srgb, var(--info) 8%, var(--surface))', borderRadius: 6, fontSize: 11, color: 'var(--text)', border: '1px solid var(--info)' }}>
                   {step.message}
                 </div>
               )}
@@ -481,9 +451,6 @@ export default function ThreeSumVisualizer() {
 
   const playbackPanel = (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -501,6 +468,9 @@ export default function ThreeSumVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUM_PATTERNS} />
+      )}
     </div>
   )
 
@@ -510,7 +480,7 @@ export default function ThreeSumVisualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🔍 Array & Triplets', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

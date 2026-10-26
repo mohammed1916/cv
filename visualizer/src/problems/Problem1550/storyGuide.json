@@ -1,0 +1,31 @@
+{
+  "number": "1550",
+  "title": "Three Consecutive Odds",
+  "goal": "Decide whether three consecutive values are all odd.",
+  "strategy": "A single run counter captures the only needed history. Odd values extend it and even values reset it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether three consecutive values are all odd.",
+    "inspect": "A single run counter captures the only needed history. Odd values extend it and even values reset it.",
+    "update": "A single run counter captures the only needed history. Odd values extend it and even values reset it.",
+    "done": "Decide whether three consecutive values are all odd."
+  },
+  "edgeCases": [
+    "Only two odd values",
+    "No odd entries",
+    "Negative odd streak"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

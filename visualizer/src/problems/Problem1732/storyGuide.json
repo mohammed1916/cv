@@ -1,0 +1,31 @@
+{
+  "number": "1732",
+  "title": "Find the Highest Altitude",
+  "goal": "Find the highest altitude along a route starting at altitude zero.",
+  "strategy": "Running sums recover the altitude after each segment. Include the initial zero because every later point could be lower.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the highest altitude along a route starting at altitude zero.",
+    "inspect": "Running sums recover the altitude after each segment. Include the initial zero because every later point could be lower.",
+    "update": "Running sums recover the altitude after each segment. Include the initial zero because every later point could be lower.",
+    "done": "Find the highest altitude along a route starting at altitude zero."
+  },
+  "edgeCases": [
+    "Starting point remains highest",
+    "Always climbing",
+    "No elevation change"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

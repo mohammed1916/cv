@@ -1,0 +1,31 @@
+{
+  "number": "1879",
+  "title": "Minimum XOR Sum of Two Arrays",
+  "goal": "Minimize XOR sum by assigning second-array positions to first-array positions.",
+  "strategy": "A bitmask records used second-array positions. Its population count identifies the next first-array entry, making all assignment histories with the same mask share one best cost.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize XOR sum by assigning second-array positions to first-array positions.",
+    "inspect": "A bitmask records used second-array positions. Its population count identifies the next first-array entry, making all assignment histories with the same mask share one best cost.",
+    "update": "A bitmask records used second-array positions. Its population count identifies the next first-array entry, making all assignment histories with the same mask share one best cost.",
+    "done": "Minimize XOR sum by assigning second-array positions to first-array positions."
+  },
+  "edgeCases": [
+    "One XOR pair",
+    "A permutation can produce zero",
+    "Duplicate positions remain separate choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

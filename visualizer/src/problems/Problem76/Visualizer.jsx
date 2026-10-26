@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/minimum-window-substring.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,7 +13,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './MinimumWindowSubstring.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -41,11 +44,7 @@ const SOLUTION_CODE = [
   { line: 24, text: '    return s[best[0]:best[1]+1] if best else ""' },
 ]
 
-const EXAMPLES = getExamplesOr('minimum-window-substring', [
-  { label: 'Example 1', s: 'ADOBECODEBANC', t: 'ABC' },
-  { label: 'Example 2', s: 'a', t: 'a' },
-  { label: 'Example 3', s: 'a', t: 'aa' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [4, 5, 6, 7, 8, 9, 10] },
@@ -144,7 +143,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Sliding Window
       </header>
 
@@ -168,32 +167,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
         ))}
       </div>
 
-      <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <input
-          value={sInput}
-          onChange={(e) => { setSInput(e.target.value); handleReset() }}
-          placeholder="Enter string s"
-          style={{
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-          }}
-        />
-        <input
-          value={tInput}
-          onChange={(e) => { setTInput(e.target.value); handleReset() }}
-          placeholder="Enter string t"
-          style={{
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-          }}
-        />
-      </div>
+      
 
       <div style={{ flex: 1, overflow: 'auto', minHeight: 200 }}>
         <div style={{ display: 'flex', gap: 4, padding: 8, flexWrap: 'wrap', alignContent: 'flex-start' }}>
@@ -262,7 +236,7 @@ function SlidingWindowViz({ step, s, EXAMPLES, sInput, setSInput, tInput, setTIn
 function FrequencyState({ step }) {
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Frequency State
       </header>
 
@@ -270,17 +244,17 @@ function FrequencyState({ step }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 8 }}>
           <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>formed</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>{step?.formed ?? 0}</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{step?.formed ?? 0}</div>
           </div>
           <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
             <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>required</div>
-            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--surface2)' }}>{step?.required ?? 0}</div>
+            <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text)' }}>{step?.required ?? 0}</div>
           </div>
         </div>
 
         <div style={{ padding: 10, backgroundColor: 'var(--surface2)', borderRadius: 4 }}>
           <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>best window</div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', fontFamily: 'monospace' }}>
             {step?.best?.value ?? 'None'}
           </div>
         </div>
@@ -311,7 +285,7 @@ function FrequencyState({ step }) {
                 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--surface2)' }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-on-light)' }}>
                   {ch}
                 </div>
                 <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>
@@ -330,8 +304,8 @@ const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 const LINE_PATTERN_MAP = {}
 
 export default function MinimumWindowSubstringVisualizer() {
-  const [sInput, setSInput] = useState('ADOBECODEBANC')
-  const [tInput, setTInput] = useState('ABC')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
+  const [tInput, setTInput] = useState(AUTHORED_INITIAL.t)
 
   const { s, t } = useMemo(() => ({
     s: sInput ?? '',

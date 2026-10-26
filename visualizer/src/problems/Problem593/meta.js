@@ -1,5 +1,12 @@
 export const meta = {
-  number: '593', title: 'Valid Square', slug: 'valid-square', difficulty: 'Medium',
-  tags: ['Math', 'Geometry'], accent: '#0284c7',
-  description: 'Sort the six squared distances: a square has four equal sides and two equal diagonals.',
-}
+  "number": "593",
+  "title": "Valid Square",
+  "slug": "valid-square",
+  "difficulty": "Medium",
+  "tags": [
+    "Math",
+    "Geometry"
+  ],
+  "accent": "#0891b2",
+  "description": "Determine whether four unordered points are the vertices of a nondegenerate square."
+};

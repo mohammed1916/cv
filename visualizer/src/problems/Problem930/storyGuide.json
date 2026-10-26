@@ -1,0 +1,27 @@
+{
+  "number": "930",
+  "title": "Binary Subarrays With Sum",
+  "goal": "Count nonempty binary subarrays with the requested sum.",
+  "strategy": "A current prefix forms an answer with every earlier prefix smaller by goal. Repeated zero prefixes create multiple answers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nonempty binary subarrays with the requested sum.",
+    "inspect": "A current prefix forms an answer with every earlier prefix smaller by goal. Repeated zero prefixes create multiple answers.",
+    "update": "A current prefix forms an answer with every earlier prefix smaller by goal. Repeated zero prefixes create multiple answers.",
+    "done": "Count nonempty binary subarrays with the requested sum."
+  },
+  "edgeCases": [
+    "All zeros and zero target",
+    "Target is unreachable",
+    "One matching bit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

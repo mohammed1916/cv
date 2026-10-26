@@ -1,0 +1,33 @@
+{
+  "number": "552",
+  "title": "Student Attendance Record II",
+  "goal": "Solve Student Attendance Record II: Count the number of length-n attendance records over {P, A, L} that are rewardable — containing fewer than 2 absences and never 3 or more consecutive late days — modulo 10^9 + 7.",
+  "strategy": "Count the number of length-n attendance records over {P, A, L} that are rewardable — containing fewer than 2 absences and never 3 or more consecutive late days — modulo 10^9 + 7.",
+  "phases": [
+    "init",
+    "day",
+    "present",
+    "absent",
+    "late",
+    "commit",
+    "sum",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not ways",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "n must be a positive integer",
+    "Keep n at 40 or below so the walkthrough stays readable"
+  ],
+  "source": [
+    "src/problems/Problem552/index.jsx",
+    "src/problems/Problem552/StudentAttendanceRecordIIVisualizer.jsx"
+  ]
+}

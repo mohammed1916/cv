@@ -1,0 +1,22 @@
+{
+  "number": "217",
+  "title": "Contains Duplicate",
+  "goal": "Solve Contains Duplicate: Check if array contains any duplicate element.",
+  "strategy": "Check if array contains any duplicate element.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num in seen",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "Enter a JSON array of numbers."
+  ],
+  "source": [
+    "src/problems/Problem220/index.jsx",
+    "src/problems/Problem220/ContainsDuplicateVisualizer.jsx"
+  ]
+}

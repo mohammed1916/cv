@@ -1,0 +1,31 @@
+{
+  "number": "1343",
+  "title": "Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold",
+  "goal": "Count length-k subarrays whose average is at least the threshold.",
+  "strategy": "Maintain one rolling sum. Comparing it to k times the threshold avoids division and preserves the inclusive comparison.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count length-k subarrays whose average is at least the threshold.",
+    "inspect": "Maintain one rolling sum. Comparing it to k times the threshold avoids division and preserves the inclusive comparison.",
+    "update": "Maintain one rolling sum. Comparing it to k times the threshold avoids division and preserves the inclusive comparison.",
+    "done": "Count length-k subarrays whose average is at least the threshold."
+  },
+  "edgeCases": [
+    "Every average equals the threshold",
+    "One window covers the whole array",
+    "Width one uses individual values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

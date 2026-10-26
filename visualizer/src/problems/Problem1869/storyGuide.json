@@ -1,0 +1,31 @@
+{
+  "number": "1869",
+  "title": "Longer Contiguous Segments of Ones than Zeros",
+  "goal": "Decide whether the longest one run is strictly longer than the longest zero run.",
+  "strategy": "Track the active run length and separate maximums for each bit. Equality is a negative answer because the comparison is strict.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether the longest one run is strictly longer than the longest zero run.",
+    "inspect": "Track the active run length and separate maximums for each bit. Equality is a negative answer because the comparison is strict.",
+    "update": "Track the active run length and separate maximums for each bit. Equality is a negative answer because the comparison is strict.",
+    "done": "Decide whether the longest one run is strictly longer than the longest zero run."
+  },
+  "edgeCases": [
+    "Equal longest lengths return false",
+    "Only ones",
+    "Only zeros"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

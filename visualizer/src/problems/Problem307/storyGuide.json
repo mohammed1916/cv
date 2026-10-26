@@ -1,0 +1,21 @@
+{
+  "number": "307",
+  "title": "Range Sum Query - Mutable",
+  "goal": "Solve Range Sum Query - Mutable: Update elements and query sums efficiently using segment tree.",
+  "strategy": "Update elements and query sums efficiently using segment tree.",
+  "phases": [
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An update replaces a value, so propagate its difference rather than adding the replacement value itself."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use nums and operations."
+  ],
+  "source": [
+    "src/problems/Problem307/index.jsx",
+    "src/problems/Problem307/RangeSumQuery-MutableVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1888",
+  "title": "Minimum Number of Flips to Make the Binary String Alternating",
+  "goal": "Minimize bit flips to make some cyclic rotation alternate.",
+  "strategy": "Every length-n window of the doubled string represents a rotation. Maintain mismatch count against an alternating target; the complement target has n minus that count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize bit flips to make some cyclic rotation alternate.",
+    "inspect": "Every length-n window of the doubled string represents a rotation. Maintain mismatch count against an alternating target; the complement target has n minus that count.",
+    "update": "Every length-n window of the doubled string represents a rotation. Maintain mismatch count against an alternating target; the complement target has n minus that count.",
+    "done": "Minimize bit flips to make some cyclic rotation alternate."
+  },
+  "edgeCases": [
+    "Already alternating",
+    "Uniform string needs balanced flips",
+    "Single bit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

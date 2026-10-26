@@ -1,0 +1,28 @@
+{
+  "number": "444",
+  "title": "Sequence Reconstruction",
+  "goal": "Solve Sequence Reconstruction: Build precedence constraints and require exactly one available next node at every topological-sort step.",
+  "strategy": "Build precedence constraints and require exactly one available next node at every topological-sort step.",
+  "phases": [
+    "add_relation",
+    "check_sequence",
+    "check_unique",
+    "complete",
+    "init",
+    "invalid_subseq",
+    "not_unique"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Multiple available nodes make reconstruction ambiguous; missing nodes or a cycle also prevent a unique reconstruction."
+  ],
+  "checks": [],
+  "inputRules": [
+    "org must be an array",
+    "seqs must be an array"
+  ],
+  "source": [
+    "src/problems/Problem444/index.jsx",
+    "src/problems/Problem444/Problem444Visualizer.jsx"
+  ]
+}

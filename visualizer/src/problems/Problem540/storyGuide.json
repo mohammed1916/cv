@@ -1,0 +1,26 @@
+{
+  "number": "540",
+  "title": "Single Element in Sorted Array",
+  "goal": "Solve Single Element in Sorted Array: Find the single element in sorted array where others appear twice.",
+  "strategy": "Find the single element in sorted array where others appear twice.",
+  "phases": [
+    "init",
+    "search",
+    "adjust",
+    "go_right",
+    "go_left",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Pair alignment changes after the singleton; ensure comparisons use the correct even-aligned pair boundary."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem540/index.jsx",
+    "src/problems/Problem540/SingleElementInSortedArrayVisualizer.jsx"
+  ]
+}

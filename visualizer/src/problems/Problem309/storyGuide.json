@@ -1,0 +1,26 @@
+{
+  "number": "309",
+  "title": "Best Time to Buy and Sell Stock with Cooldown",
+  "goal": "Solve Best Time to Buy and Sell Stock with Cooldown: Maximize profit with transaction cooldown using DP.",
+  "strategy": "Maximize profit with transaction cooldown using DP.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n <= 1",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Enter a JSON array of non-negative prices."
+  ],
+  "source": [
+    "src/problems/Problem309/index.jsx",
+    "src/problems/Problem309/BestTimeBuySellStockCooldownVisualizer.jsx"
+  ]
+}

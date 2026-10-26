@@ -1,0 +1,19 @@
+{
+  "number": "268",
+  "title": "Missing Number",
+  "goal": "Solve Missing Number: XOR all indices and values; paired values cancel, leaving the missing number.",
+  "strategy": "XOR all indices and values; paired values cancel, leaving the missing number.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The missing value may be zero or n; the comparison range includes both endpoints."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem268/index.jsx",
+    "src/problems/Problem268/MissingNumberVisualizer.jsx"
+  ]
+}

@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/next-greater-element-i.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem496Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -61,10 +64,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('next-greater-element-i', [
-  { label: 'Example 1', nums1: [4, 1, 2], nums2: [1, 3, 4, 2] },
-  { label: 'Example 2', nums1: [2, 4], nums2: [1, 2, 3, 4] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(nums1, nums2) {
   const steps = []
@@ -127,7 +127,7 @@ function VisualizationPanel({ nums1, nums2, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -157,7 +157,7 @@ function VisualizationPanel({ nums1, nums2, step, applyEx }) {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>nums1 (Query)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>nums1 (Query)</div>
           <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
             {nums1.map((num, i) => (
               <motion.div
@@ -183,7 +183,7 @@ function VisualizationPanel({ nums1, nums2, step, applyEx }) {
         </div>
 
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>nums2 (Reference)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>nums2 (Reference)</div>
           <div style={{ display: 'flex', gap: 3, flexWrap: 'wrap', padding: 10, backgroundColor: '#f9fafb', borderRadius: 6, border: '1px solid var(--border)' }}>
             {nums2.map((num, i) => (
               <motion.div
@@ -289,8 +289,8 @@ const SOLUTION_CODE_INLINE = [
 
 export default function Problem496Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nums1Input, setNums1Input] = useState("[4,1,2]");
-  const [nums2Input, setNums2Input] = useState("[1,3,4,2]");
+  const [nums1Input, setNums1Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums1));
+  const [nums2Input, setNums2Input] = useState(JSON.stringify(AUTHORED_INITIAL.nums2));
   const { nums1, nums2, inputError } = useMemo(() => {
     try {
       const parsedNums1 = JSON.parse(nums1Input); if (!Array.isArray(parsedNums1)) throw new Error('nums1 must be an array');
@@ -353,7 +353,6 @@ export default function Problem496Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -371,6 +370,7 @@ export default function Problem496Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

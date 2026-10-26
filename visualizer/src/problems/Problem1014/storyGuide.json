@@ -1,0 +1,27 @@
+{
+  "number": "1014",
+  "title": "Best Sightseeing Pair",
+  "goal": "Maximize the values of two sightseeing spots minus their distance.",
+  "strategy": "Separate the score into values[i]+i and values[j]-j. Keep the best strictly earlier left contribution and evaluate before inserting the right endpoint.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the values of two sightseeing spots minus their distance.",
+    "inspect": "Separate the score into values[i]+i and values[j]-j. Keep the best strictly earlier left contribution and evaluate before inserting the right endpoint.",
+    "update": "Separate the score into values[i]+i and values[j]-j. Keep the best strictly earlier left contribution and evaluate before inserting the right endpoint.",
+    "done": "Maximize the values of two sightseeing spots minus their distance."
+  },
+  "edgeCases": [
+    "Two spots are the only possible pair",
+    "Equal values favor adjacent spots",
+    "A large early value remains useful"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

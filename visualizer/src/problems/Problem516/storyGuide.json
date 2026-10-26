@@ -1,0 +1,21 @@
+{
+  "number": "516",
+  "title": "Longest Palindromic Subsequence",
+  "goal": "Solve Longest Palindromic Subsequence: Find the longest palindromic subsequence in a string using dynamic programming.",
+  "strategy": "Find the longest palindromic subsequence in a string using dynamic programming.",
+  "phases": [
+    "init",
+    "loop",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Subsequences may skip characters. A single character has length one, and mismatching ends require choosing which end to exclude."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem516/index.jsx",
+    "src/problems/Problem516/LongestPalindromicSubsequenceVisualizer.jsx"
+  ]
+}

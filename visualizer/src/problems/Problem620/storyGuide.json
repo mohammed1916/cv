@@ -1,0 +1,31 @@
+{
+  "number": "620",
+  "title": "Not Boring Movies",
+  "goal": "Select non-boring movies with odd IDs and rank them by descending rating.",
+  "strategy": "The parity and description predicates must both hold. Filter first, then sort the surviving complete movie records by rating; a high rating cannot rescue a rejected row.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Select non-boring movies with odd IDs and rank them by descending rating.",
+    "inspect": "The parity and description predicates must both hold. Filter first, then sort the surviving complete movie records by rating; a high rating cannot rescue a rejected row.",
+    "update": "The parity and description predicates must both hold. Filter first, then sort the surviving complete movie records by rating; a high rating cannot rescue a rejected row.",
+    "done": "Select non-boring movies with odd IDs and rank them by descending rating."
+  },
+  "edgeCases": [
+    "A high rating cannot rescue an even ID",
+    "Every odd boring movie is excluded",
+    "No movies yields no output"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

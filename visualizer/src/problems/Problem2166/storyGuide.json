@@ -1,0 +1,31 @@
+{
+  "number": "2166",
+  "title": "Design Bitset",
+  "goal": "Maintain a bitset supporting individual changes whole-set flips and queries.",
+  "strategy": "Store bits relative to a global flip flag. Logical value is stored bit XOR flip; a cached one-count makes all one and count queries constant time without materializing a flip.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain a bitset supporting individual changes whole-set flips and queries.",
+    "inspect": "Store bits relative to a global flip flag. Logical value is stored bit XOR flip; a cached one-count makes all one and count queries constant time without materializing a flip.",
+    "update": "Store bits relative to a global flip flag. Logical value is stored bit XOR flip; a cached one-count makes all one and count queries constant time without materializing a flip.",
+    "done": "Maintain a bitset supporting individual changes whole-set flips and queries."
+  },
+  "edgeCases": [
+    "A single bit exercises all and one at both states",
+    "Two flips restore the initial bit pattern",
+    "Repeated unfix on an empty bitset keeps the count zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

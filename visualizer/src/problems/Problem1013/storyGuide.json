@@ -1,0 +1,27 @@
+{
+  "number": "1013",
+  "title": "Partition Array Into Three Parts With Equal Sum",
+  "goal": "Decide whether two cuts create three nonempty parts with equal sums.",
+  "strategy": "The total fixes each target sum. Close two matching prefixes as early as possible and leave a nonempty suffix; its sum must then be the same target.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether two cuts create three nonempty parts with equal sums.",
+    "inspect": "The total fixes each target sum. Close two matching prefixes as early as possible and leave a nonempty suffix; its sum must then be the same target.",
+    "update": "The total fixes each target sum. Close two matching prefixes as early as possible and leave a nonempty suffix; its sum must then be the same target.",
+    "done": "Decide whether two cuts create three nonempty parts with equal sums."
+  },
+  "edgeCases": [
+    "Zero total still requires three nonempty parts",
+    "Total is not divisible by three",
+    "Divisible total but no valid pair of cuts"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

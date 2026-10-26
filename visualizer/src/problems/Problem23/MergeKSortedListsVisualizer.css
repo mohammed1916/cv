@@ -40,7 +40,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--code-bg);
-  color: var(--surface);
+  color: var(--text);
   font-family: monospace;
   padding: 8px 10px;
 }
@@ -75,7 +75,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(30, 41, 59, 0.75);
-  color: var(--surface);
+  color: var(--text-on-dark);
   font-family: monospace;
   display: grid;
   place-items: center;
@@ -104,7 +104,7 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   background: rgba(30, 41, 59, 0.75);
-  color: var(--surface);
+  color: var(--text-on-dark);
   font-family: monospace;
   padding: 4px 6px;
 }

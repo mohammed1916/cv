@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/minimum-genetic-mutation.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem433Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,9 +21,7 @@ const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 
 
 
-const EXAMPLES = getExamplesOr('minimum-genetic-mutation', [
-  { label: 'Example 1', start: 'AACCCCCC', end: 'AACCCCTA', bank: ['AACCCCTA'] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def minMutation(start, end, bank):' },
@@ -129,7 +128,7 @@ function GeneSequenceVisualization({ gene, highlight }) {
             justifyContent: 'center',
             fontSize: 12,
             fontWeight: 600,
-            color: highlight && highlight === idx ? '#0c4a6e' : bases.includes(base) ? 'var(--surface2)' : 'var(--text-muted)',
+            color: highlight && highlight === idx ? '#0c4a6e' : bases.includes(base) ? 'var(--text-on-light)' : 'var(--text-muted)',
           }}
           animate={{
             scale: highlight && highlight === idx ? 1.15 : 1,
@@ -152,7 +151,7 @@ function VisualizationPanel({ step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

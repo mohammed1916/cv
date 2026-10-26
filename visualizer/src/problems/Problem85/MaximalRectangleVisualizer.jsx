@@ -1,4 +1,6 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/local--85.js';
+
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -28,12 +30,7 @@ const SOLUTION_CODE = [
   { line: 15, text: '            max_area = max(max_area, largestRectangleArea(heights))' },
 ]
 
-const EXAMPLES = [
-  { label: 'Mixed rectangle', input: [['1', '0', '1'], ['1', '0', '1'], ['1', '1', '1']] },
-  { label: 'All zeroes', input: [['0', '0'], ['0', '0']] },
-  { label: 'All ones', input: [['1', '1', '1'], ['1', '1', '1']] },
-  { label: 'Single cell', input: [['1']] },
-]
+const EXAMPLES = authoredExamples0
 
 const MAXIMALRECTANGLE_PATTERNS = ['area_calc', 'area_final', 'done', 'height_update', 'init', 'row_end', 'row_start']
 
@@ -388,9 +385,6 @@ function MaximalRectangleVisualizer() {
 
       <div className="mr-bottom">
         <FloatingPanel title="Playback Controls">
-          {showPatternOverlay && (
-            <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
-          )}
           <PlaybackControls
             isPlaying={isPlaying}
             isDone={isDone}
@@ -408,6 +402,9 @@ function MaximalRectangleVisualizer() {
             patternOverlayLabel="Show pattern overlay"
             showPatternOverlayToggle
           />
+          {showPatternOverlay && (
+            <PatternLegend currentPhase={step?.phase} usedPatterns={MAXIMALRECTANGLE_PATTERNS} />
+          )}
         </FloatingPanel>
       </div>
     </div>

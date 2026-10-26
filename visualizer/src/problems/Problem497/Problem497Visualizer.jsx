@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/random-point-in-non-overlapping-rectangles.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem497Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -48,9 +51,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('random-point-in-non-overlapping-rectangles', [
-  { label: 'Example', rects: [[-2, -2, -1, -1], [1, 0, 3, 0]] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 // Deterministic PRNG so the traced samples are stable across re-renders.
 function mulberry32(seed) {
@@ -234,7 +235,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem497Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [rectsInput, setRectsInput] = useState("[[1,1,5,5],[6,2,10,4]]");
+  const [rectsInput, setRectsInput] = useState(JSON.stringify(AUTHORED_INITIAL.rects));
   const { rects, inputError } = useMemo(() => {
     try {
       const parsedRects = JSON.parse(rectsInput); if (!Array.isArray(parsedRects)) throw new Error('rects must be an array');
@@ -294,7 +295,6 @@ export default function Problem497Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -312,6 +312,7 @@ export default function Problem497Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

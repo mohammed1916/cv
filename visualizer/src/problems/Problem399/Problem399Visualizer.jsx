@@ -1,4 +1,7 @@
-﻿import { Fragment, useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/evaluate-division.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { Fragment, useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import SvgViewport from '../../components/shared/SvgViewport'
@@ -198,14 +201,11 @@ function generateSteps(equationsStr, valuesStr, queryStr) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('evaluate-division', [
-  { label: 'Example 1', equations: '[["a","b"],["b","c"]]', values: '[2.0,3.0]', query: '[["a","c"],["b","a"],["a","e"]]' },
-  { label: 'Example 2', equations: '[["a","b"],["b","c"],["bc","cd"]]', values: '[1.5,2.5,5.0]', query: '[["a","c"],["c","b"],["bc","cd"],["cd","bc"]]' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem399Visualizer() {
-  const [equationsInput, setEquationsInput] = useState('[["a","b"],["b","c"]]')
-  const [valuesInput, setValuesInput] = useState('[2.0,3.0]')
+  const [equationsInput, setEquationsInput] = useState(AUTHORED_INITIAL.equations)
+  const [valuesInput, setValuesInput] = useState(AUTHORED_INITIAL.values)
   const [queryInput, setQueryInput] = useState('[["a","c"],["b","a"],["a","e"]]')
   const [panelDivs, setPanelDivs] = useState(null)
 
@@ -396,35 +396,7 @@ export default function Problem399Visualizer() {
 
       <div className="p399-card">
         <div className="p399-section-label">Input</div>
-        <div className="p399-field-grid">
-          <div className="p399-field">
-            <label className="p399-input-label" htmlFor="p399-eq">equations</label>
-            <input
-              id="p399-eq"
-              className={`p399-input ${inputError ? 'has-error' : ''}`}
-              value={equationsInput}
-              onChange={(e) => { setEquationsInput(e.target.value); handleReset() }}
-            />
-          </div>
-          <div className="p399-field">
-            <label className="p399-input-label" htmlFor="p399-vals">values</label>
-            <input
-              id="p399-vals"
-              className={`p399-input ${inputError ? 'has-error' : ''}`}
-              value={valuesInput}
-              onChange={(e) => { setValuesInput(e.target.value); handleReset() }}
-            />
-          </div>
-          <div className="p399-field">
-            <label className="p399-input-label" htmlFor="p399-q">queries</label>
-            <input
-              id="p399-q"
-              className={`p399-input ${inputError ? 'has-error' : ''}`}
-              value={queryInput}
-              onChange={(e) => { setQueryInput(e.target.value); handleReset() }}
-            />
-          </div>
-        </div>
+        
         <p className={`p399-hint ${inputError ? 'error' : ''}`} style={{ marginTop: '0.6rem' }}>
           {inputError || 'Each equation a/b = value becomes edges a→b (value) and b→a (1/value).'}
         </p>
@@ -544,9 +516,6 @@ export default function Problem399Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -564,6 +533,9 @@ export default function Problem399Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -571,7 +543,7 @@ export default function Problem399Visualizer() {
     () => [
       { id: 'primary', title: 'Graph',  dockMode: 'split-right' },
       { id: 'state',   title: 'State',  dockMode: 'split-right' },
-      { id: 'code',    title: 'Code',   dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code',   dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

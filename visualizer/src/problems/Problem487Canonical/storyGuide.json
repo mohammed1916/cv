@@ -1,0 +1,31 @@
+{
+  "number": "487",
+  "title": "Max Consecutive Ones II",
+  "goal": "Find the longest run of ones obtainable by flipping at most one zero.",
+  "strategy": "Maintain a window containing at most one zero. Adding a second zero forces the left boundary past the older zero; the widest valid window is the answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest run of ones obtainable by flipping at most one zero.",
+    "inspect": "Maintain a window containing at most one zero. Adding a second zero forces the left boundary past the older zero; the widest valid window is the answer.",
+    "update": "Maintain a window containing at most one zero. Adding a second zero forces the left boundary past the older zero; the widest valid window is the answer.",
+    "done": "Find the longest run of ones obtainable by flipping at most one zero."
+  },
+  "edgeCases": [
+    "All ones need no flip",
+    "All zeros can contribute only one flipped position",
+    "A zero between two runs joins them with one flip"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

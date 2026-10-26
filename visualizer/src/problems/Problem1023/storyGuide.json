@@ -1,0 +1,27 @@
+{
+  "number": "1023",
+  "title": "Camelcase Matching",
+  "goal": "Decide which queries can be formed by inserting lowercase letters into a pattern.",
+  "strategy": "Consume pattern characters in order. Unmatched lowercase letters may be inserted, but any unmatched uppercase letter invalidates the query.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide which queries can be formed by inserting lowercase letters into a pattern.",
+    "inspect": "Consume pattern characters in order. Unmatched lowercase letters may be inserted, but any unmatched uppercase letter invalidates the query.",
+    "update": "Consume pattern characters in order. Unmatched lowercase letters may be inserted, but any unmatched uppercase letter invalidates the query.",
+    "done": "Decide which queries can be formed by inserting lowercase letters into a pattern."
+  },
+  "edgeCases": [
+    "Lowercase pattern characters must also be consumed",
+    "Extra lowercase letters are allowed",
+    "An unmatched capital cannot be inserted"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

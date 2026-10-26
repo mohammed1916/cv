@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/sequence-reconstruction.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem444Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -29,7 +32,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('sequence-reconstruction')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(org, seqs) {
   const steps = []
@@ -200,7 +203,7 @@ function reconstructSequence(relationships) {
 function SequencesVisualization({ seqs, currentSeq }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Input Sequences</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Input Sequences</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -258,7 +261,7 @@ function SequencesVisualization({ seqs, currentSeq }) {
 function OrgSequenceVisualization({ org }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Original Sequence</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Original Sequence</div>
       <div style={{
         padding: 12,
         backgroundColor: '#ecfdf5',
@@ -294,7 +297,7 @@ function OrgSequenceVisualization({ org }) {
 function RelationshipsVisualization({ relationships, currentRel }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Extracted Relations</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Extracted Relations</div>
       <div style={{
         padding: 12,
         backgroundColor: 'var(--surface2)',
@@ -338,7 +341,7 @@ function RelationshipsVisualization({ relationships, currentRel }) {
 function ResultVisualization({ valid }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Result</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Result</div>
       <div style={{
         padding: 12,
         backgroundColor: valid ? '#ecfdf5' : '#fee2e2',
@@ -362,7 +365,7 @@ function VisualizationPanel({ step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16, overflow: 'auto' }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -406,8 +409,8 @@ function VisualizationPanel({ step, applyEx }) {
 
 export default function Problem444Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [orgInput, setOrgInput] = useState("[1,2,3]");
-  const [seqsInput, setSeqsInput] = useState("[[1,2],[1,3],[2,3]]");
+  const [orgInput, setOrgInput] = useState(JSON.stringify(AUTHORED_INITIAL.org));
+  const [seqsInput, setSeqsInput] = useState(JSON.stringify(AUTHORED_INITIAL.seqs));
   const { org, seqs, inputError } = useMemo(() => {
     try {
       const parsedOrg = JSON.parse(orgInput); if (!Array.isArray(parsedOrg)) throw new Error('org must be an array');

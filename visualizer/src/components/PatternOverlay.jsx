@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import { useLayoutEffect, useMemo, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useAlgorithmState } from '../hooks/useAlgorithmState';
 import { resolvePattern } from './patternCatalog';
 import './PatternOverlay.css';
@@ -113,19 +114,44 @@ export default function PatternOverlay({ step, activeLineDom }) {
     return resolvePattern(step.phase);
   }, [step, algorithmState]);
 
-  if (!patternInfo || !activeLineDom) {
+  const overlayRef = useRef(null);
+  const panel = activeLineDom?.closest('.ctp-panel, .shared-code-panel');
+  useLayoutEffect(() => {
+    const overlay = overlayRef.current;
+    if (!panel || !overlay || !activeLineDom) return;
+    const position = () => {
+      const bounds = panel.getBoundingClientRect();
+      const line = activeLineDom.getBoundingClientRect();
+      const scale = bounds.height / panel.offsetHeight || 1;
+      const scroll = activeLineDom.closest('.ctp-scroll, .shared-code-scroll');
+      const viewport = scroll?.getBoundingClientRect() || bounds;
+      const minTop = Math.max(8, (viewport.top - bounds.top) / scale);
+      const maxTop = Math.max(minTop, Math.min(panel.clientHeight, (viewport.bottom - bounds.top) / scale) - overlay.offsetHeight - 8);
+      overlay.style.top = `${Math.max(minTop, Math.min(maxTop, (line.top - bounds.top) / scale))}px`;
+      overlay.style.visibility = panel.clientHeight && line.bottom > viewport.top && line.top < viewport.bottom ? 'visible' : 'hidden';
+    };
+    position();
+    const observer = new ResizeObserver(position);
+    observer.observe(panel);
+    observer.observe(overlay);
+    panel.addEventListener('scroll', position, true);
+    window.addEventListener('resize', position);
+    return () => {
+      observer.disconnect();
+      panel.removeEventListener('scroll', position, true);
+      window.removeEventListener('resize', position);
+    };
+  }, [panel, activeLineDom, patternInfo]);
+
+  if (!patternInfo || !activeLineDom || !panel) {
     return null;
   }
 
-  // Get position of the active line element
-  const lineRect = activeLineDom.getBoundingClientRect();
-
-  return (
+  return createPortal(
     <div
+      ref={overlayRef}
       className="pattern-overlay"
       style={{
-        top: `${lineRect.top + window.scrollY}px`,
-        left: `${lineRect.right + 12}px`,
         '--pattern-color': patternInfo.color,
       }}
     >
@@ -133,6 +159,7 @@ export default function PatternOverlay({ step, activeLineDom }) {
         <span className="pattern-icon">{patternInfo.icon}</span>
         <span className="pattern-label">{patternInfo.label}</span>
       </div>
-    </div>
+    </div>,
+    panel,
   );
 }

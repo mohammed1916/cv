@@ -1,0 +1,31 @@
+{
+  "number": "1415",
+  "title": "The k-th Lexicographical String of All Happy Strings of Length n",
+  "goal": "Return the kth lexicographic length-n string over a,b,c with no equal neighbors.",
+  "strategy": "Depth-first generation tries letters in sorted order and skips the previous letter. Complete leaves therefore arrive in lexicographic order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the kth lexicographic length-n string over a,b,c with no equal neighbors.",
+    "inspect": "Depth-first generation tries letters in sorted order and skips the previous letter. Complete leaves therefore arrive in lexicographic order.",
+    "update": "Depth-first generation tries letters in sorted order and skips the previous letter. Complete leaves therefore arrive in lexicographic order.",
+    "done": "Return the kth lexicographic length-n string over a,b,c with no equal neighbors."
+  },
+  "edgeCases": [
+    "Rank exceeds all available strings",
+    "First string in order",
+    "One-character choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/intersection-of-two-arrays-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem350.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -43,11 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('intersection-of-two-arrays-ii', [
-  { label: 'Example 1: Overlap', nums1: [1, 2, 2, 1], nums2: [2, 2] },
-  { label: 'Example 2: No overlap', nums1: [4, 9, 5], nums2: [9, 4, 9, 8, 4] },
-  { label: 'Example 3: Duplicates', nums1: [1, 2, 2, 1, 2, 2], nums2: [2] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [1, 2] },
@@ -209,7 +206,7 @@ function FrequencyMap({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Frequency Map (from nums1)
       </header>
 
@@ -228,7 +225,7 @@ function FrequencyMap({ step }) {
               transition={{ duration: 0.2 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12 }}>
-                <span style={{ fontWeight: 600, color: 'var(--surface2)', fontFamily: 'monospace' }}>
+                <span style={{ fontWeight: 600, color: 'var(--text)', fontFamily: 'monospace' }}>
                   {key}
                 </span>
                 <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
@@ -276,7 +273,7 @@ function InputArrays({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Input Arrays
       </header>
 
@@ -363,7 +360,7 @@ function ResultBuilder({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Result: [{result.length} element{result.length !== 1 ? 's' : ''}]
       </header>
 
@@ -422,7 +419,7 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -448,45 +445,9 @@ function VisualizationPanel({ step, nums1, nums2, EXAMPLES, handleExampleClick, 
       </div>
 
       <div style={{ display: 'flex', gap: 8, flexDirection: 'column' }}>
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            nums1 (comma-separated)
-          </label>
-          <input
-            value={nums1Input}
-            onChange={(e) => { setNums1Input(e.target.value); handleReset() }}
-            placeholder="e.g., 1,2,2,1"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
-        <div>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-            nums2 (comma-separated)
-          </label>
-          <input
-            value={nums2Input}
-            onChange={(e) => { setNums2Input(e.target.value); handleReset() }}
-            placeholder="e.g., 2,2"
-            style={{
-              width: '100%',
-              padding: '8px 10px',
-              border: '1px solid var(--border)',
-              borderRadius: 4,
-              fontSize: 12,
-              fontFamily: 'monospace',
-              boxSizing: 'border-box',
-            }}
-          />
-        </div>
+        
 
         <button
           onClick={handleReset}

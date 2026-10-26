@@ -1,0 +1,31 @@
+{
+  "number": "685",
+  "title": "Redundant Connection II",
+  "goal": "Remove the latest eligible directed edge so the remaining graph becomes a rooted tree.",
+  "strategy": "An extra edge creates a cycle, a node with two parents, or both. Skip the later parent edge temporarily; a remaining cycle requires removing the earlier parent edge, otherwise the skipped edge is the answer.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the latest eligible directed edge so the remaining graph becomes a rooted tree.",
+    "inspect": "An extra edge creates a cycle, a node with two parents, or both. Skip the later parent edge temporarily; a remaining cycle requires removing the earlier parent edge, otherwise the skipped edge is the answer.",
+    "update": "An extra edge creates a cycle, a node with two parents, or both. Skip the later parent edge temporarily; a remaining cycle requires removing the earlier parent edge, otherwise the skipped edge is the answer.",
+    "done": "Remove the latest eligible directed edge so the remaining graph becomes a rooted tree."
+  },
+  "edgeCases": [
+    "A pure directed cycle requires its latest cycle edge",
+    "A two-parent conflict and cycle require the earlier parent edge",
+    "The later conflicting parent edge can itself close the cycle"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

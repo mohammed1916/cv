@@ -1,0 +1,31 @@
+{
+  "number": "1503",
+  "title": "Last Moment Before All Ants Fall Out of a Plank",
+  "goal": "Find when the final ant falls off the plank.",
+  "strategy": "Equal-speed collisions exchange identities without changing the set of trajectories. Treat ants as passing through and take the longest direct exit time.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find when the final ant falls off the plank.",
+    "inspect": "Equal-speed collisions exchange identities without changing the set of trajectories. Treat ants as passing through and take the longest direct exit time.",
+    "update": "Equal-speed collisions exchange identities without changing the set of trajectories. Treat ants as passing through and take the longest direct exit time.",
+    "done": "Find when the final ant falls off the plank."
+  },
+  "edgeCases": [
+    "Only left-moving ants",
+    "Only right-moving ants",
+    "Ants already exit at endpoints"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

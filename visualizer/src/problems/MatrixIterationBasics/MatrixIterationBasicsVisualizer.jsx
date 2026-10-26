@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/matrix-iteration-basics.js';
+import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { useCallback, useMemo, useState } from 'react'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -7,9 +9,8 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './MatrixIterationBasicsVisualizer.css'
-import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
 
 const MODE_META = {
@@ -50,7 +51,7 @@ const MODE_META = {
   },
 }
 
-const EXAMPLES = getExamples('matrix-iteration-basics')
+const EXAMPLES = authoredExamples0
 
 function makeCodeLines(mode) {
   return [
@@ -222,7 +223,7 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
     { id: 'controls', title: 'Pattern Controls' },
     { id: 'matrix', title: 'Matrix View', dockMode: 'split-bottom' },
     { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
-    { id: 'legend', title: 'Legend', dockMode: 'split-bottom' },
+    { id: 'legend', title: 'Legend', dockMode: 'split-right' },
   ], [])
   const panelContents = useMemo(() => ({
     controls: (<div className="mib-panel-body">
@@ -275,23 +276,6 @@ export default function MatrixIterationBasicsVisualizer({ problem }) {
                 <input style={{ width: 68 }} value={constVal} onChange={(e) => setConstVal(Number(e.target.value))} />
               </div>
             )}
-          </div>
-
-          <div className="mib-size-row">
-            <span>n =</span>
-            <input
-              value={sizeInput}
-              onChange={(event) => {
-                setSizeInput(event.target.value)
-                handleReset()
-              }}
-              className="mib-size-input"
-            />
-            {EXAMPLES.map((n) => (
-              <button key={n} className="mib-size-preset" onClick={() => applySize(n)}>
-                {n}x{n}
-              </button>
-            ))}
           </div>
 
           {error && <p className="mib-error">{error}</p>}

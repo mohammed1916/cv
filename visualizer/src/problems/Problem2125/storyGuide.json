@@ -1,0 +1,31 @@
+{
+  "number": "2125",
+  "title": "Number of Laser Beams in a Bank",
+  "goal": "Count beams between consecutive nonempty device rows.",
+  "strategy": "Empty rows do not block beams. Every device in one nonempty row connects to every device in the next nonempty row, contributing the product of their counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count beams between consecutive nonempty device rows.",
+    "inspect": "Empty rows do not block beams. Every device in one nonempty row connects to every device in the next nonempty row, contributing the product of their counts.",
+    "update": "Empty rows do not block beams. Every device in one nonempty row connects to every device in the next nonempty row, contributing the product of their counts.",
+    "done": "Count beams between consecutive nonempty device rows."
+  },
+  "edgeCases": [
+    "A single nonempty row cannot form a beam",
+    "No devices produce no beams",
+    "One-column devices connect across empty rows"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

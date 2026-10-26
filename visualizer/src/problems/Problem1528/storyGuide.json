@@ -1,0 +1,31 @@
+{
+  "number": "1528",
+  "title": "Shuffle String",
+  "goal": "Reorder characters into their specified destination indices.",
+  "strategy": "Indices describe final destinations, not insertion positions. Write every original character once into a separate output array.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reorder characters into their specified destination indices.",
+    "inspect": "Indices describe final destinations, not insertion positions. Write every original character once into a separate output array.",
+    "update": "Indices describe final destinations, not insertion positions. Write every original character once into a separate output array.",
+    "done": "Reorder characters into their specified destination indices."
+  },
+  "edgeCases": [
+    "Identity order",
+    "Reverse placement",
+    "Single character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

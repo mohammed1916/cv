@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--5.js';
+
 import { Fragment, useState, useCallback, useMemo, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -570,44 +572,7 @@ function StepDetail({ step, str }) {
    MAIN VISUALIZER
    ═══════════════════════════════════════════════════════════════ */
 const DEFAULT = 'racecar'
-const INPUT_PRESETS = [
-  {
-    label: 'Classic',
-    value: 'racecar',
-    tone: 'featured',
-    note: 'Whole string is already a palindrome.',
-  },
-  {
-    label: 'Overlapping',
-    value: 'rarerer',
-    tone: 'featured',
-    note: 'Good for showing competing centers and nested palindromes.',
-  },
-  {
-    label: 'LeetCode',
-    value: 'banana',
-    tone: 'featured',
-    note: 'Finds a longer palindrome inside the middle.',
-  },
-  {
-    label: 'Even length',
-    value: 'cbbd',
-    tone: 'edge',
-    note: 'Tests even-length palindromes.',
-  },
-  {
-    label: 'Single char',
-    value: 'a',
-    tone: 'edge',
-    note: 'Smallest non-empty valid case.',
-  },
-  {
-    label: 'No long match',
-    value: 'abcd',
-    tone: 'edge',
-    note: 'Best answer stays length 1.',
-  },
-]
+const INPUT_PRESETS = authoredExamples0
 
 export default function PalindromeVisualizer() {
   const [inputStr, setInputStr]  = useState(DEFAULT)
@@ -833,7 +798,7 @@ export default function PalindromeVisualizer() {
 
   const codePanel = (
     <div style={{ position: 'relative', height: '100%' }}>
-      <CodeTracePanel
+      <CodeTracePanel playgroundInput={{ s: str }} playgroundDisabled={false}
         step={currentStep}
         codeLines={SOLUTION_CODE}
         activeLabelPrefix="Currently executing line"
@@ -908,7 +873,7 @@ export default function PalindromeVisualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state',   title: 'Variables', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

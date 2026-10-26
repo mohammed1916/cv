@@ -1,0 +1,24 @@
+{
+  "number": "336",
+  "title": "Palindrome Pairs",
+  "goal": "Solve Palindrome Pairs: Find all pairs of words that form palindromes.",
+  "strategy": "Find all pairs of words that form palindromes.",
+  "phases": [
+    "init",
+    "word",
+    "split",
+    "check-prefix",
+    "check-suffix",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The two word indices must differ; an empty word can pair with a palindrome, and both concatenation orders may matter."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem336/index.jsx",
+    "src/problems/Problem336/PalindromePairsVisualizer.jsx"
+  ]
+}

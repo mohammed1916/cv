@@ -1,0 +1,31 @@
+{
+  "number": "1400",
+  "title": "Construct K Palindrome Strings",
+  "goal": "Decide whether all characters can form exactly k nonempty palindromes.",
+  "strategy": "Each odd-frequency character requires a separate center. Between that minimum and the character count, pairs can be split to create additional nonempty palindromes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether all characters can form exactly k nonempty palindromes.",
+    "inspect": "Each odd-frequency character requires a separate center. Between that minimum and the character count, pairs can be split to create additional nonempty palindromes.",
+    "update": "Each odd-frequency character requires a separate center. Between that minimum and the character count, pairs can be split to create additional nonempty palindromes.",
+    "done": "Decide whether all characters can form exactly k nonempty palindromes."
+  },
+  "edgeCases": [
+    "Too few centers for distinct letters",
+    "More strings than characters is impossible",
+    "Every character can stand alone"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

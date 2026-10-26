@@ -1,0 +1,29 @@
+{
+  "number": "400",
+  "title": "Nth Digit",
+  "goal": "Solve Nth Digit: Find the nth digit in the sequence 123456789101112131415...",
+  "strategy": "Find the nth digit in the sequence 123456789101112131415...",
+  "phases": [
+    "calculate",
+    "check_range",
+    "done",
+    "error",
+    "extract_digit",
+    "find_number",
+    "init",
+    "init_vars",
+    "range_update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Ranks cross digit-length blocks such as 9 to 10; convert the remaining rank consistently when locating the digit inside a number."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a positive integer"
+  ],
+  "source": [
+    "src/problems/Problem400/index.jsx",
+    "src/problems/Problem400/Problem400Visualizer.jsx"
+  ]
+}

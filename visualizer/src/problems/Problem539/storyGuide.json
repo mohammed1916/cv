@@ -1,0 +1,26 @@
+{
+  "number": "539",
+  "title": "Minimum Time Difference",
+  "goal": "Solve Minimum Time Difference: Find minimum time difference between any two times in 24-hour circular format.",
+  "strategy": "Find minimum time difference between any two times in 24-hour circular format.",
+  "phases": [
+    "init",
+    "convert",
+    "sort",
+    "compare",
+    "wrap",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The closest pair may cross midnight; identical times produce a zero difference."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array"
+  ],
+  "source": [
+    "src/problems/Problem539/index.jsx",
+    "src/problems/Problem539/MinimumTimeDifferenceVisualizer.jsx"
+  ]
+}

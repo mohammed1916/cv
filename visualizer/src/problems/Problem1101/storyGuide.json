@@ -1,0 +1,31 @@
+{
+  "number": "1101",
+  "title": "The Earliest Moment When Everyone Become Friends",
+  "goal": "Find the earliest timestamp when every person belongs to one friendship network.",
+  "strategy": "Process friendships by time and merge their connected components. The first moment only one component remains is the earliest universal connection.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the earliest timestamp when every person belongs to one friendship network.",
+    "inspect": "Process friendships by time and merge their connected components. The first moment only one component remains is the earliest universal connection.",
+    "update": "Process friendships by time and merge their connected components. The first moment only one component remains is the earliest universal connection.",
+    "done": "Find the earliest timestamp when every person belongs to one friendship network."
+  },
+  "edgeCases": [
+    "Two people connect immediately",
+    "One isolated person prevents completion",
+    "Redundant friendships do not reduce components"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

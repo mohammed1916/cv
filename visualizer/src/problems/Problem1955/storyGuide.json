@@ -1,0 +1,31 @@
+{
+  "number": "1955",
+  "title": "Count Number of Special Subsequences",
+  "goal": "Count subsequences consisting of nonempty runs of zeroes, ones, then twos.",
+  "strategy": "Three counters represent subsequences ending in each phase. A matching digit can extend or duplicate an existing phase, or start it from the previous phase.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subsequences consisting of nonempty runs of zeroes, ones, then twos.",
+    "inspect": "Three counters represent subsequences ending in each phase. A matching digit can extend or duplicate an existing phase, or start it from the previous phase.",
+    "update": "Three counters represent subsequences ending in each phase. A matching digit can extend or duplicate an existing phase, or start it from the previous phase.",
+    "done": "Count subsequences consisting of nonempty runs of zeroes, ones, then twos."
+  },
+  "edgeCases": [
+    "Missing middle phase",
+    "Reverse order prevents a complete subsequence",
+    "Long runs multiply independent choices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

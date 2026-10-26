@@ -1,0 +1,24 @@
+{
+  "number": "304",
+  "title": "Range Sum Query 2D - Immutable",
+  "goal": "Solve Range Sum Query 2D - Immutable: 2D prefix sum queries for rectangular regions.",
+  "strategy": "2D prefix sum queries for rectangular regions.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Two-dimensional range sums subtract both outside strips and add their overlap back once."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use a rectangular numeric matrix plus row1, col1, row2, col2.",
+    "Query bounds are outside the matrix."
+  ],
+  "source": [
+    "src/problems/Problem304/index.jsx",
+    "src/problems/Problem304/RangeSumQuery2D-ImmutableVisualizer.jsx"
+  ]
+}

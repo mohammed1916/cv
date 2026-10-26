@@ -1,0 +1,31 @@
+{
+  "number": "626",
+  "title": "Exchange Seats",
+  "goal": "Exchange every neighboring pair of student seats while leaving an unpaired last seat unchanged.",
+  "strategy": "Seat IDs form a continuous sequence from one. Each odd seat takes the following student, each even seat takes the preceding student, and an odd final seat has no partner.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Exchange every neighboring pair of student seats while leaving an unpaired last seat unchanged.",
+    "inspect": "Seat IDs form a continuous sequence from one. Each odd seat takes the following student, each even seat takes the preceding student, and an odd final seat has no partner.",
+    "update": "Seat IDs form a continuous sequence from one. Each odd seat takes the following student, each even seat takes the preceding student, and an odd final seat has no partner.",
+    "done": "Exchange every neighboring pair of student seats while leaving an unpaired last seat unchanged."
+  },
+  "edgeCases": [
+    "One student keeps the only seat",
+    "An even roster swaps every seat",
+    "An empty roster stays empty"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

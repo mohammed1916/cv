@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/random-pick-with-weight.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +9,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './RandomPickWithWeightVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -27,7 +28,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('random-pick-with-weight')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(w) {
   const steps = []
@@ -154,7 +155,7 @@ function VisualizationPanel({ w, step }) {
 
       {/* Weights */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Weights</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Weights</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {w.map((weight, idx) => {
             const isProcessing = step?.idx === idx
@@ -186,7 +187,7 @@ function VisualizationPanel({ w, step }) {
 
       {/* Prefix Sum Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Prefix Sum Array</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Prefix Sum Array</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', overflowX: 'auto', paddingBottom: 8 }}>
           {step?.prefix?.map((val, idx) => {
             const isCurrent = step?.idx === idx
@@ -382,9 +383,6 @@ export default function RandomPickWithWeightVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -402,6 +400,9 @@ export default function RandomPickWithWeightVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

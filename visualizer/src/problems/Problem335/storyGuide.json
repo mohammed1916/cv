@@ -1,0 +1,26 @@
+{
+  "number": "335",
+  "title": "Self Crossing",
+  "goal": "Solve Self Crossing: Check if line segments form a self-crossing line.",
+  "strategy": "Check if line segments form a self-crossing line.",
+  "phases": [
+    "init",
+    "move",
+    "check",
+    "crossing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "x[i] >= x[i-2] and x[i-1] <= x[i-3]",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem335/index.jsx",
+    "src/problems/Problem335/SelfCrossingVisualizer.jsx"
+  ]
+}

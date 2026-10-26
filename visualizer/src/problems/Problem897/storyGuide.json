@@ -1,0 +1,27 @@
+{
+  "number": "897",
+  "title": "Increasing Order Search Tree",
+  "goal": "Rearrange a BST into increasing order with no left children.",
+  "strategy": "Inorder traversal gives sorted node order. Relink those nodes in that order, clearing every left pointer and ending the right chain with null.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rearrange a BST into increasing order with no left children.",
+    "inspect": "Inorder traversal gives sorted node order. Relink those nodes in that order, clearing every left pointer and ending the right chain with null.",
+    "update": "Inorder traversal gives sorted node order. Relink those nodes in that order, clearing every left pointer and ending the right chain with null.",
+    "done": "Rearrange a BST into increasing order with no left children."
+  },
+  "edgeCases": [
+    "Already a right chain",
+    "Left chain",
+    "Single node"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

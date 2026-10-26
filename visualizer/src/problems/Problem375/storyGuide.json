@@ -1,0 +1,28 @@
+{
+  "number": "375",
+  "title": "Guess Number Higher or Lower II",
+  "goal": "Solve Guess Number Higher or Lower II: For each interval, choose a guess minimizing its price plus the more expensive of the two remaining subintervals.",
+  "strategy": "For each interval, choose a guess minimizing its price plus the more expensive of the two remaining subintervals.",
+  "phases": [
+    "init",
+    "new_interval",
+    "try_pivot",
+    "better",
+    "commit",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A one-number interval costs zero; minimizing average cost would not satisfy the worst-case guarantee."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a positive integer",
+    "keep n at 9 or below so the DP table stays readable"
+  ],
+  "source": [
+    "src/problems/Problem375/index.jsx",
+    "src/problems/Problem375/Problem375Visualizer.jsx"
+  ]
+}

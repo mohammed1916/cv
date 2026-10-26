@@ -1,0 +1,25 @@
+{
+  "number": "382",
+  "title": "Linked List Random Node",
+  "goal": "Solve Linked List Random Node: Select a random node from a linked list using reservoir sampling.",
+  "strategy": "Select a random node from a linked list using reservoir sampling.",
+  "phases": [
+    "check",
+    "complete",
+    "init",
+    "traverse",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reservoir sampling replaces the current choice with probability 1/i at the ith node, keeping all seen nodes equally likely."
+  ],
+  "checks": [],
+  "inputRules": [
+    "values must be an array"
+  ],
+  "source": [
+    "src/problems/Problem382/index.jsx",
+    "src/problems/Problem382/Problem382Visualizer.jsx"
+  ]
+}

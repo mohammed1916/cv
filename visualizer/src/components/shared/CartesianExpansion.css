@@ -1,0 +1,389 @@
+.cartesian-expansion {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cartesian-expansion-summary {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 8px;
+}
+
+.cartesian-expansion-side {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  padding: 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface2);
+}
+
+.cartesian-expansion-side-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.cartesian-expansion-side-heading strong {
+  color: var(--text);
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.cartesian-expansion-side-heading > span {
+  min-width: 18px;
+
+  padding: 1px 5px;
+
+  border-radius: 999px;
+
+  background: var(--surface);
+  color: var(--muted);
+
+  font-size: 9px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.cartesian-expansion-side p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.cartesian-expansion-times {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+
+  color: var(--primary);
+}
+
+.cartesian-expansion-times strong {
+  font-size: 19px;
+}
+
+.cartesian-expansion-times span {
+  color: var(--muted);
+
+  font-size: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cartesian-expansion-token-set {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.cartesian-expansion-token {
+  max-width: 100%;
+
+  padding: 3px 6px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  border: 1px solid var(--border);
+  border-radius: 5px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.cartesian-expansion-empty-set {
+  color: var(--muted);
+
+  font-size: 10px;
+  font-style: italic;
+}
+
+.cartesian-expansion-explanation {
+  padding: 7px 9px;
+
+  border-left: 3px solid var(--primary);
+
+  background: color-mix(in srgb, var(--primary) 6%, var(--surface));
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.cartesian-expansion-explanation strong {
+  color: var(--text);
+}
+
+.cartesian-expansion-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cartesian-expansion-group {
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 8px;
+
+  padding: 8px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface2);
+}
+
+.cartesian-expansion-prefix {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+
+  padding-right: 8px;
+
+  border-right: 1px solid var(--border);
+}
+
+.cartesian-expansion-prefix span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: var(--muted);
+
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cartesian-expansion-prefix strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: var(--primary);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 13px;
+}
+
+.cartesian-expansion-combinations {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.cartesian-expansion-combination {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px 6px;
+
+  border: 1px solid var(--border);
+  border-radius: 5px;
+
+  background: var(--surface);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.cartesian-expansion-source {
+  color: var(--text);
+}
+
+.cartesian-expansion-action {
+  color: var(--muted);
+
+  font-family: inherit;
+  font-size: 8px;
+}
+
+.cartesian-expansion-arrow {
+  color: var(--muted);
+}
+
+.cartesian-expansion-combined {
+  color: #16a34a;
+}
+
+.cartesian-expansion-result {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding: 9px;
+
+  border: 1px solid
+    color-mix(in srgb, #22c55e 55%, var(--border));
+  border-radius: 7px;
+
+  background: color-mix(in srgb, #22c55e 6%, var(--surface));
+}
+
+.cartesian-expansion-result-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cartesian-expansion-result-heading > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cartesian-expansion-result-heading strong {
+  color: var(--text);
+
+  font-size: 10px;
+}
+
+.cartesian-expansion-result-heading div > span {
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.cartesian-expansion-result-count {
+  flex: 0 0 auto;
+
+  min-width: 20px;
+
+  padding: 2px 6px;
+
+  border-radius: 999px;
+
+  background: #22c55e;
+  color: white;
+
+  font-size: 9px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.cartesian-expansion-empty {
+  display: grid;
+  place-items: center;
+
+  min-height: 78px;
+  padding: 12px;
+
+  border: 1px dashed var(--border);
+  border-radius: 7px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+@container (max-width: 500px) {
+  .cartesian-expansion-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .cartesian-expansion-times {
+    flex-direction: row;
+  }
+
+  .cartesian-expansion-group {
+    grid-template-columns: 1fr;
+  }
+
+  .cartesian-expansion-prefix {
+    padding-right: 0;
+    padding-bottom: 6px;
+
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 650px) {
+  .cartesian-expansion-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .cartesian-expansion-times {
+    flex-direction: row;
+  }
+
+  .cartesian-expansion-group {
+    grid-template-columns: 1fr;
+  }
+
+  .cartesian-expansion-prefix {
+    padding-right: 0;
+    padding-bottom: 6px;
+
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+}

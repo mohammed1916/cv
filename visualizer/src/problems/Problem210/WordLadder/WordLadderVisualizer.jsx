@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../../config/examples/word-ladder.js';
 ﻿import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../../components/CodeTracePanel";
@@ -5,7 +6,7 @@ import PlaybackControls from "../../../components/PlaybackControls";
 import PatternOverlay from "../../../components/PatternOverlay";
 import { usePlaybackState } from "../../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./WordLadderVisualizer.css";
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../../components/shared/ManualInputPanel'
@@ -28,7 +29,7 @@ const SOLUTION_CODE = [
   { line: 15, text: "    return 0" },
 ];
 
-const EXAMPLES = getExamples('word-ladder');
+const EXAMPLES = authoredExamples0;
 
 function oneAway(a, b) {
   let diff = 0;

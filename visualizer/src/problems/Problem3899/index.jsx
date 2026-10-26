@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3899.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code, trianglePoints } from './algorithm'
@@ -11,13 +15,7 @@ const definition = {
     { id: 'angle', label: 'Law of cosines', description: 'Compute each opposite angle in degrees.' },
     { id: 'done', label: 'Return sorted', description: 'Return sorted angles, or an empty array for invalid geometry.' },
   ],
-  examples: [
-    { label: 'Right triangle', input: '[3,4,5]' },
-    { label: 'Degenerate', input: '[2,4,2]' },
-    { label: 'Equilateral', input: '[5,5,5]' },
-    { label: 'Obtuse', input: '[2,3,4]' },
-    { label: 'Cannot close', input: '[1,2,10]' },
-  ],
+  examples: authoredExamples0,
 }
 
 function TriangleDiagram({ sides, active }) {
@@ -34,7 +32,7 @@ function TriangleDiagram({ sides, active }) {
   </div>
 }
 
-export default function TriangleAngles() {
+function TriangleAngles() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Sorted sides a, b, c" length={3} active={step.index} valueAt={i => run.sides[i]} roleAt={i => `opposite ${'ABC'[i]}`} />
     {step.phase !== 'start' && (run.valid ? <TriangleDiagram sides={run.sides} active={step.index} /> : <p role="status">No positive-area triangle: {run.sides[0]} + {run.sides[1]} ≤ {run.sides[2]}.</p>)}
@@ -49,3 +47,5 @@ export default function TriangleAngles() {
     {step.phase === 'done' && run.valid && <p>Angle sum check: {run.result.reduce((a, b) => a + b, 0).toFixed(8)}°.</p>}
   </>} />
 }
+
+export default withProblemStory(TriangleAngles, storyGuide);

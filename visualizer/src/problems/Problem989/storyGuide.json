@@ -1,0 +1,27 @@
+{
+  "number": "989",
+  "title": "Add to Array-Form of Integer",
+  "goal": "Add an integer to a number stored as decimal digits.",
+  "strategy": "Process right to left without converting the whole number. Carry may continue after the source digits are exhausted.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Add an integer to a number stored as decimal digits.",
+    "inspect": "Process right to left without converting the whole number. Carry may continue after the source digits are exhausted.",
+    "update": "Process right to left without converting the whole number. Carry may continue after the source digits are exhausted.",
+    "done": "Add an integer to a number stored as decimal digits."
+  },
+  "edgeCases": [
+    "New leading digit",
+    "Zero plus zero",
+    "Addend longer than array"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

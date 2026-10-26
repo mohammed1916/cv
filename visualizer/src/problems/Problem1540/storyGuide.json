@@ -1,0 +1,31 @@
+{
+  "number": "1540",
+  "title": "Can Convert String in K Moves",
+  "goal": "Decide whether at most k uniquely numbered shift moves can transform s into t.",
+  "strategy": "Equal required shifts compete for the same move residue modulo twenty-six. Schedule successive occurrences at shift, shift+26, shift+52, and check the budget.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether at most k uniquely numbered shift moves can transform s into t.",
+    "inspect": "Equal required shifts compete for the same move residue modulo twenty-six. Schedule successive occurrences at shift, shift+26, shift+52, and check the budget.",
+    "update": "Equal required shifts compete for the same move residue modulo twenty-six. Schedule successive occurrences at shift, shift+26, shift+52, and check the budget.",
+    "done": "Decide whether at most k uniquely numbered shift moves can transform s into t."
+  },
+  "edgeCases": [
+    "Repeated shift misses its deadline",
+    "Equal strings need no moves",
+    "Different lengths cannot convert"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

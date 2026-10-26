@@ -1,0 +1,31 @@
+{
+  "number": "42",
+  "title": "Trapping Rain Water",
+  "goal": "Solve Trapping Rain Water: Determine the lower enclosing wall for each region and accumulate water only above bars below that boundary.",
+  "strategy": "Determine the lower enclosing wall for each region and accumulate water only above bars below that boundary.",
+  "phases": [
+    "add_water",
+    "check",
+    "done",
+    "init",
+    "max_left",
+    "max_right",
+    "move_left",
+    "move_right"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "An open end cannot trap water; tall interior bars contribute no negative water."
+  ],
+  "checks": [
+    {
+      "condition": "not height",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem42/index.jsx",
+    "src/problems/Problem42/TrappingRainWaterVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Remove All Adjacent Duplicates In String",
+  "goal": "Repeatedly remove adjacent equal character pairs until none remain.",
+  "strategy": "The stack is the reduced prefix. A matching incoming character removes its top; otherwise it extends the reduced prefix.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "The stack is the reduced prefix. A matching incoming character removes its top; otherwise it extends the reduced prefix.",
+    "update": "The stack contains no adjacent equal pair; removing one pair may expose another.",
+    "done": "The stack contains no adjacent equal pair; removing one pair may expose another."
+  },
+  "edgeCases": [
+    "Whole string disappears",
+    "No adjacent duplicates",
+    "Odd run leaves one"
+  ],
+  "number": "1047",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

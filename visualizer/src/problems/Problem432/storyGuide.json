@@ -1,0 +1,31 @@
+{
+  "number": "432",
+  "title": "All O(1) Data Structure",
+  "goal": "Maintain string counts with constant-time updates and minimum/maximum-key queries.",
+  "strategy": "Link nonempty count buckets in increasing order and map each key to its bucket. An increment or decrement moves a key only to a neighboring count bucket; the two list ends expose the extremes.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain string counts with constant-time updates and minimum/maximum-key queries.",
+    "inspect": "Link nonempty count buckets in increasing order and map each key to its bucket. An increment or decrement moves a key only to a neighboring count bucket; the two list ends expose the extremes.",
+    "update": "Link nonempty count buckets in increasing order and map each key to its bucket. An increment or decrement moves a key only to a neighboring count bucket; the two list ends expose the extremes.",
+    "done": "Maintain string counts with constant-time updates and minimum/maximum-key queries."
+  },
+  "edgeCases": [
+    "Empty extreme queries return empty strings",
+    "Several keys can share one count bucket",
+    "Decrementing can recreate a missing intermediate bucket"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "number": "454",
+  "title": "4Sum II",
+  "goal": "Solve 4Sum II: Count pair sums from two arrays and match each sum from the other two against its negation.",
+  "strategy": "Count pair sums from two arrays and match each sum from the other two against its negation.",
+  "phases": [
+    "building_map",
+    "checking",
+    "done",
+    "found",
+    "map_complete",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated values contribute multiple index combinations, so pair-sum frequencies must be retained."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem454/index.jsx",
+    "src/problems/Problem454/Problem454Visualizer.jsx"
+  ]
+}

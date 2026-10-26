@@ -1,0 +1,30 @@
+{
+  "number": "396",
+  "title": "Rotate Function",
+  "goal": "Solve Rotate Function: Calculate the sum of all F(k) where F(k) is the sum of i*nums[(i+k) % len] for all i.",
+  "strategy": "Calculate the sum of all F(k) where F(k) is the sum of i*nums[(i+k) % len] for all i.",
+  "phases": [
+    "done",
+    "init",
+    "sum",
+    "initial_f",
+    "rotate_announce",
+    "update_f",
+    "new_max",
+    "compare",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each rotation moves one endpoint across the weighted sum; reuse the total sum rather than recomputing every coefficient."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Invalid number",
+    "Invalid number in array"
+  ],
+  "source": [
+    "src/problems/Problem396/index.jsx",
+    "src/problems/Problem396/Problem396Visualizer.jsx"
+  ]
+}

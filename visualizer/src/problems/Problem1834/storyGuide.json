@@ -1,0 +1,31 @@
+{
+  "number": "1834",
+  "title": "Single-Threaded CPU",
+  "goal": "Return the order in which a single-threaded CPU processes arriving tasks.",
+  "strategy": "Maintain ready tasks separately from future arrivals. Select shortest duration then smallest original index; when none are ready, jump time to the next arrival.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return the order in which a single-threaded CPU processes arriving tasks.",
+    "inspect": "Maintain ready tasks separately from future arrivals. Select shortest duration then smallest original index; when none are ready, jump time to the next arrival.",
+    "update": "Maintain ready tasks separately from future arrivals. Select shortest duration then smallest original index; when none are ready, jump time to the next arrival.",
+    "done": "Return the order in which a single-threaded CPU processes arriving tasks."
+  },
+  "edgeCases": [
+    "Equal durations use original index",
+    "Long idle gaps jump to next arrival",
+    "A running task is not preempted"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

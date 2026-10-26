@@ -45,7 +45,7 @@
 .pc-btn-play {
   background: var(--primary);
   border-color: var(--primary);
-  color: var(--primary-contrast);
+  color: var(--text-inverse);
 }
 
 .pc-btn-play:hover:not(:disabled) {

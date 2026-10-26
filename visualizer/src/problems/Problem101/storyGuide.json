@@ -1,0 +1,35 @@
+{
+  "number": "101",
+  "title": "Symmetric Tree",
+  "goal": "Solve Symmetric Tree: Check if a tree is a mirror image of itself using recursive pair comparison.",
+  "strategy": "Check if a tree is a mirror image of itself using recursive pair comparison.",
+  "phases": [
+    "check",
+    "compare",
+    "visit",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not left and not right",
+      "outcome": "return True"
+    },
+    {
+      "condition": "not left or not right",
+      "outcome": "return False"
+    },
+    {
+      "condition": "left.val != right.val",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem101/index.jsx",
+    "src/problems/Problem101/SymmetricTreeVisualizer.jsx",
+    "src/problems/Problem101/algorithm.js",
+    "src/problems/Problem101/MirrorTreeStory.jsx"
+  ]
+}

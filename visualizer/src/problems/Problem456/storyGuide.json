@@ -1,0 +1,33 @@
+{
+  "number": "456",
+  "title": "132 Pattern",
+  "goal": "Solve 132 Pattern: Search for an increasing-then-decreasing triple with strict inequalities, retaining a feasible middle value while scanning candidates.",
+  "strategy": "Search for an increasing-then-decreasing triple with strict inequalities, retaining a feasible middle value while scanning candidates.",
+  "phases": [
+    "init",
+    "scan",
+    "found",
+    "pop",
+    "push",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal values cannot satisfy the strict 1 < 3 < 2 ordering; the indices must also occur in order."
+  ],
+  "checks": [
+    {
+      "condition": "num < third",
+      "outcome": "return True     # num is the \"1\""
+    }
+  ],
+  "inputRules": [
+    "enter at least one number",
+    "keep the array to 20 elements or fewer"
+  ],
+  "source": [
+    "src/problems/Problem456/index.jsx",
+    "src/problems/Problem456/Problem456Visualizer.jsx"
+  ]
+}

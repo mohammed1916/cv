@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/generate-parentheses.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -10,7 +13,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./GenerateParenthesesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE_INLINE = [
@@ -80,12 +83,12 @@ function generateSteps(n) {
     return steps;
 }
 
-const EXAMPLES = getExamples('generate-parentheses');
+const EXAMPLES = authoredExamples0;
 
 
 
 export default function GenerateParenthesesVisualizer() {
-    const [nInput, setNInput] = useState(3);
+    const [nInput, setNInput] = useState(AUTHORED_INITIAL.n);
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
@@ -201,9 +204,6 @@ export default function GenerateParenthesesVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying} isDone={isDone} speed={speed}
                 onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -218,6 +218,9 @@ export default function GenerateParenthesesVisualizer() {
                 autoScrollLabel="Auto-scroll code"
                 showAutoScroll
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={GENERATEPARENTHESES_PATTERNS} />
+            )}
         </>
     );
 
@@ -227,7 +230,7 @@ export default function GenerateParenthesesVisualizer() {
         () => [
             { id: "primary", title: "Input Controls", dockMode: "split-right" },
             { id: "viz", title: "Backtracking Visualization", dockMode: "split-right" },
-            { id: "code", title: "Code Trace", dockMode: "split-bottom" },
+            { id: "code", title: "Code Trace", dockMode: "split-right" },
             { id: "status", title: "Status", dockMode: "split-bottom", ratio: 0.08 },
         ],
         []

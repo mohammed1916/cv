@@ -1,0 +1,31 @@
+{
+  "number": "127",
+  "title": "Word Ladder",
+  "goal": "Find the shortest one-letter-at-a-time transformation through allowed words.",
+  "strategy": "Wildcard buckets connect words differing in one position. BFS explores transformations by distance, and consuming each bucket once avoids repeatedly scanning the same neighbor group.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the shortest one-letter-at-a-time transformation through allowed words.",
+    "inspect": "Wildcard buckets connect words differing in one position. BFS explores transformations by distance, and consuming each bucket once avoids repeatedly scanning the same neighbor group.",
+    "update": "Wildcard buckets connect words differing in one position. BFS explores transformations by distance, and consuming each bucket once avoids repeatedly scanning the same neighbor group.",
+    "done": "Find the shortest one-letter-at-a-time transformation through allowed words."
+  },
+  "edgeCases": [
+    "The destination is absent from the allowed dictionary",
+    "The destination exists but belongs to a disconnected group",
+    "A direct neighbor needs the two endpoint words"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

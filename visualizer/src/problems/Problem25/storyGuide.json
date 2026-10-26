@@ -1,0 +1,32 @@
+{
+  "number": "25",
+  "title": "Reverse Nodes in k-Group",
+  "goal": "Solve Reverse Nodes in k-Group: Iteratively check k nodes ahead; if available, reverse that group and recurse on the remainder.",
+  "strategy": "Iteratively check k nodes ahead; if available, reverse that group and recurse on the remainder.",
+  "phases": [
+    "advance",
+    "done",
+    "find",
+    "found",
+    "init",
+    "reverse",
+    "reversed",
+    "short"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not kth",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "list must be an array",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem25/index.jsx",
+    "src/problems/Problem25/ReverseKGroupVisualizer.jsx"
+  ]
+}

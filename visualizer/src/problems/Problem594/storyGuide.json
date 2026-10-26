@@ -1,0 +1,27 @@
+{
+  "number": "594",
+  "title": "Longest Harmonious Subsequence",
+  "goal": "Find the longest subsequence whose maximum and minimum differ by exactly one.",
+  "strategy": "Count each value, then combine only neighboring value buckets. Equal values alone cannot satisfy an exact difference of one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest subsequence whose maximum and minimum differ by exactly one.",
+    "inspect": "Count each value, then combine only neighboring value buckets. Equal values alone cannot satisfy an exact difference of one.",
+    "update": "Count each value, then combine only neighboring value buckets. Equal values alone cannot satisfy an exact difference of one.",
+    "done": "Find the longest subsequence whose maximum and minimum differ by exactly one."
+  },
+  "edgeCases": [
+    "Only one distinct value",
+    "Gaps exceed one",
+    "Negative adjacent values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

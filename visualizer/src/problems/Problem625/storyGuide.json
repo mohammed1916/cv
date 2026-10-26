@@ -1,0 +1,31 @@
+{
+  "number": "625",
+  "title": "Minimum Factorization",
+  "goal": "Find the smallest positive 32-bit integer whose decimal digits multiply to num.",
+  "strategy": "Factor the target using digits nine down to two, which minimizes the number of digits. Reverse the collected digits into increasing order to minimize the integer. A leftover factor or overflow makes the answer impossible.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the smallest positive 32-bit integer whose decimal digits multiply to num.",
+    "inspect": "Factor the target using digits nine down to two, which minimizes the number of digits. Reverse the collected digits into increasing order to minimize the integer. A leftover factor or overflow makes the answer impossible.",
+    "update": "Factor the target using digits nine down to two, which minimizes the number of digits. Reverse the collected digits into increasing order to minimize the integer. A leftover factor or overflow makes the answer impossible.",
+    "done": "Find the smallest positive 32-bit integer whose decimal digits multiply to num."
+  },
+  "edgeCases": [
+    "A remaining large prime makes factorization impossible",
+    "The multiplicative identity is already one digit",
+    "Valid factors can still exceed the result integer limit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

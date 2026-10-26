@@ -1,0 +1,31 @@
+{
+  "number": "1394",
+  "title": "Find Lucky Integer in an Array",
+  "goal": "Find the largest integer equal to its own occurrence count.",
+  "strategy": "Build complete frequencies before comparing values with counts. Return the largest equality, or minus one if no value qualifies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest integer equal to its own occurrence count.",
+    "inspect": "Build complete frequencies before comparing values with counts. Return the largest equality, or minus one if no value qualifies.",
+    "update": "Build complete frequencies before comparing values with counts. Return the largest equality, or minus one if no value qualifies.",
+    "done": "Find the largest integer equal to its own occurrence count."
+  },
+  "edgeCases": [
+    "One is lucky when alone",
+    "No frequency matches its value",
+    "Larger value occurs too often"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

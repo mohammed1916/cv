@@ -1,0 +1,36 @@
+import {databaseSchemas} from './databaseAlgorithms.js';
+export const databaseSpecs={
+1667:['rows','Normalize names to first-letter uppercase and remaining-letter lowercase, ordered by user ID.','Transform the name field while retaining each row identity. Ordering is a separate final operation on user_id.','read Users rows|for each user|uppercase first letter and lowercase the remainder|append transformed row and sort by user_id|return normalized users','Python reference: O(characters+n log n) time; O(n) output space.'],
+1683:['rows','Return IDs of tweets longer than fifteen characters.','Length greater than fifteen is the filtering boundary. Project only the tweet ID for rows that fail the length limit.','read Tweets rows|for each tweet|count characters in content|retain tweet_id only when length > 15|return invalid tweet IDs','Python reference: O(total characters) time; O(n) result space.'],
+1693:['rows','Count distinct leads and partners for each date and make.','The grouping key contains two columns. Lead and partner uniqueness are independent, so maintain two sets per group.','read DailySales rows|locate the group for date_id and make_name|insert lead_id and partner_id into separate sets|show each group with both set sizes|return grouped distinct counts','Python reference: O(n+g log g) expected time; O(n) sets and output.'],
+1729:['rows','Count followers of each user and order the results by user ID.','Each input relationship contributes once to its followed user. Group user_id values and count their distinct primary-key rows.','read unique Followers relationships|for each relationship|locate its followed user group|increment followers_count and order groups by user_id|return follower counts','Python reference: O(n+g log g) expected time; O(g) groups.'],
+1741:['rows','Sum employee visit durations separately for each day.','Each interval contributes out_time minus in_time. Grouping by both employee and day prevents unrelated visits from merging.','read Employees visit intervals|for each visit|compute out_time-in_time|add duration to the event_day and emp_id group|return day, employee, and total time','Python reference: O(n+g log g) expected time; O(g) grouped state.'],
+1757:['rows','Select product IDs that are both low-fat and recyclable.','Use a conjunction of the two Y flags. Projection removes the flag columns from selected result rows.','read Products rows|for each product|check low_fats is Y and recyclable is Y|append product_id only if both checks pass|return selected products','Python reference: O(n) time; O(n) result space.'],
+1821:['rows','Select customers with positive revenue in 2021.','Year filtering and strictly positive revenue must both hold. The input customer/year key identifies one revenue record.','read Customers yearly records|for each record|require year 2021 and revenue > 0|append the qualifying customer_id|return selected customers','Python reference: O(n) time; O(n) result space.'],
+1873:['rows','Compute full-salary bonuses for odd employee IDs whose names do not start with M.','This is a conditional projection, not a row filter. Every employee appears; nonqualifying employees receive zero.','read Employees rows|for each employee|check odd ID and name not starting with uppercase M|append full salary or zero, then sort by ID|return employee bonuses','Python reference: O(n log n) time; O(n) output space.'],
+1890:['rows','Find each user latest login within calendar year 2020.','Filter timestamps to 2020 before computing each group maximum. Users with no qualifying login produce no row.','read Logins rows|for each login|require timestamp >= start of 2020 and < start of 2021|retain greatest qualifying timestamp per user|return latest qualifying logins','Python reference: O(n+g log g) expected time; O(g) groups.'],
+1907:['rows','Count accounts in all three income categories, including empty categories.','Precreate the categories. Low is below 20000, average includes 20000 through 50000, and high is above 50000.','initialize all category counts to zero|for each account|select low, inclusive-average, or high interval|increment that category and retain zero-count groups|return all three category rows','Python reference: O(n) time; O(1) category state.'],
+};
+export function validateDatabase(id,input){
+ const check=(ok,message)=>{if(!ok)throw new Error(message);};
+ const integer=(v,min=0,max=10000000)=>Number.isSafeInteger(v)&&v>=min&&v<=max;
+ const date=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value+'T00:00:00Z'))&&new Date(value+'T00:00:00Z').toISOString().slice(0,10)===value;
+ check(Array.isArray(input.rows)&&input.rows.length<=40,'Use rows as an array of at most forty records; empty tables are supported.');
+ for(const row of input.rows){
+  check(row&&typeof row==='object'&&!Array.isArray(row)&&databaseSchemas[id].columns.every(c=>Object.hasOwn(row,c)),'Each row must contain every column shown in the example table.');
+  for(const key of ['user_id','tweet_id','lead_id','partner_id','follower_id','emp_id','product_id','customer_id','employee_id','account_id'])if(key in row)check(integer(row[key]),`${key} must be a nonnegative integer.`);
+  if('name'in row)check(typeof row.name==='string'&&/^[A-Za-z]{1,30}$/.test(row.name),'Names must contain 1-30 ASCII letters.');
+  if(id===1683)check(typeof row.content==='string'&&row.content.length<=160&&/^[\x20-\x7e]*$/.test(row.content),'Use up to 160 printable ASCII characters per tweet.');
+  if(id===1693)check(date(row.date_id)&&typeof row.make_name==='string'&&/^[a-z]{1,20}$/.test(row.make_name),'Use real ISO dates and lowercase make names.');
+  if(id===1741)check(date(row.event_day)&&integer(row.in_time,0,1440)&&integer(row.out_time,row.in_time+1,1440),'Use a real ISO day and 0 <= in_time < out_time <= 1440.');
+  if(id===1757)check(['Y','N'].includes(row.low_fats)&&['Y','N'].includes(row.recyclable),'Use Y or N for both product flags.');
+  if(id===1821)check(integer(row.year,1900,2100)&&integer(row.revenue,-10000000),'Use a year from 1900-2100 and bounded integer revenue.');
+  if(id===1873)check(integer(row.salary),'Use nonnegative integer salaries.');
+  if(id===1890){const stamp=row.time_stamp;check(typeof stamp==='string'&&/^\d{4}-\d{2}-\d{2} [0-2]\d:[0-5]\d:[0-5]\d$/.test(stamp)&&date(stamp.slice(0,10))&&Number(stamp.slice(11,13))<24,'Use a real YYYY-MM-DD HH:MM:SS timestamp.');}
+  if(id===1907)check(integer(row.income),'Use nonnegative integer incomes.');
+ }
+ const keys={1667:['user_id'],1683:['tweet_id'],1729:['user_id','follower_id'],1741:['emp_id','event_day','in_time'],1757:['product_id'],1821:['customer_id','year'],1873:['employee_id'],1890:['user_id','time_stamp'],1907:['account_id']}[id];
+ if(keys)check(new Set(input.rows.map(row=>JSON.stringify(keys.map(k=>row[k])))).size===input.rows.length,'Primary-key combinations must be unique.');
+ if(id===1741){const groups=new Map();for(const row of input.rows){const key=JSON.stringify([row.emp_id,row.event_day]);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(row);}for(const rows of groups.values()){rows.sort((a,b)=>a.in_time-b.in_time);check(rows.every((row,i)=>!i||row.in_time>=rows[i-1].out_time),'Visits for one employee on one day cannot overlap.');}}
+ return input;
+}

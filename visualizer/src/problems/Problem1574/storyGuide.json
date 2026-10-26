@@ -1,0 +1,31 @@
+{
+  "number": "1574",
+  "title": "Shortest Subarray to be Removed to Make Array Sorted",
+  "goal": "Remove the shortest contiguous segment so the remaining array is nondecreasing.",
+  "strategy": "Keep a sorted prefix and sorted suffix. Their boundary values must fit together; use two pointers to find the smallest gap between compatible prefix and suffix endpoints.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Remove the shortest contiguous segment so the remaining array is nondecreasing.",
+    "inspect": "Keep a sorted prefix and sorted suffix. Their boundary values must fit together; use two pointers to find the smallest gap between compatible prefix and suffix endpoints.",
+    "update": "Keep a sorted prefix and sorted suffix. Their boundary values must fit together; use two pointers to find the smallest gap between compatible prefix and suffix endpoints.",
+    "done": "Remove the shortest contiguous segment so the remaining array is nondecreasing."
+  },
+  "edgeCases": [
+    "Already sorted values require no removal",
+    "A descending array keeps just one element",
+    "Equal boundary values allow a valid merge"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

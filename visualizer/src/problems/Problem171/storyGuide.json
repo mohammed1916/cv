@@ -1,0 +1,17 @@
+{
+  "number": "171",
+  "title": "Excel Sheet Column Number",
+  "goal": "Solve Excel Sheet Column Number: Convert Excel column letter to column number (A=1, Z=26, AA=27).",
+  "strategy": "Convert Excel column letter to column number (A=1, Z=26, AA=27).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A means one rather than zero; each additional letter shifts the preceding total by a factor of 26."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem171/index.jsx",
+    "src/problems/Problem171/ExcelSheetColumnNumberVisualizer.jsx"
+  ]
+}

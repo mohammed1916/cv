@@ -1,1 +1,5 @@
-export { default } from "./DungeonGameVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./DungeonGameVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

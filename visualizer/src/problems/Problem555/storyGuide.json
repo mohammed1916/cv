@@ -1,0 +1,27 @@
+{
+  "number": "555",
+  "title": "Split Concatenated Strings",
+  "goal": "Solve Split Concatenated Strings: Given a concatenated string with embedded numbers indicating split points, extract all words and find the lexicographically largest rotation of any word.",
+  "strategy": "Given a concatenated string with embedded numbers indicating split points, extract all words and find the lexicographically largest rotation of any word.",
+  "phases": [
+    "parse",
+    "split",
+    "rotate",
+    "compare",
+    "track_max",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The cut can lie inside a string; choosing an orientation independently for every untouched string differs from choosing the cut string’s orientation."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Input must be array",
+    "All items must be strings"
+  ],
+  "source": [
+    "src/problems/Problem555/index.jsx",
+    "src/problems/Problem555/SplitStringsVisualizer.jsx"
+  ]
+}

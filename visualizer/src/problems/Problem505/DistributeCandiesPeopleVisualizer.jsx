@@ -1,4 +1,9 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/local--505.js';
+import authoredExamples1 from '../../config/examples/distribute-candies-to-people.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +14,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './DistributeCandiesPeopleVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -40,7 +45,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamples('distribute-candies-to-people')
+const EXAMPLES = authoredExamples1
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def distributeCandies(n, k):' },
@@ -117,11 +122,7 @@ function generateSteps(n, k) {
 }
 
 function VisualizationPanel({ n, k, step, applyEx }) {
-  const EXAMPLES_LIST = [
-    { label: 'n=10, k=3', n: 10, k: 3 },
-    { label: 'n=100, k=2', n: 100, k: 2 },
-    { label: 'n=7, k=4', n: 7, k: 4 },
-  ]
+  const EXAMPLES_LIST = authoredExamples0
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
@@ -134,7 +135,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES_LIST.map(e => (
             <button
@@ -157,7 +158,7 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
       {/* People Distribution */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           People Candies Distribution (Total: {n} candies)
         </div>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -224,8 +225,8 @@ function VisualizationPanel({ n, k, step, applyEx }) {
 
 export default function DistributeCandiesPeopleVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","candies":7,"num_people":4});
-  const [nInput, setNInput] = useState("");
-  const [kInput, setKInput] = useState("");
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { n, k, inputError } = useMemo(() => {
     try {
       const parsedN = nInput;
@@ -303,7 +304,6 @@ export default function DistributeCandiesPeopleVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -321,6 +321,7 @@ export default function DistributeCandiesPeopleVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

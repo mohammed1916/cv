@@ -1,0 +1,31 @@
+{
+  "number": "1915",
+  "title": "Number of Wonderful Substrings",
+  "goal": "Count substrings with at most one character occurring an odd number of times.",
+  "strategy": "Prefix parity masks differ by the substring parity. Equal masks give all-even counts; a one-bit difference gives exactly one odd-count letter.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count substrings with at most one character occurring an odd number of times.",
+    "inspect": "Prefix parity masks differ by the substring parity. Equal masks give all-even counts; a one-bit difference gives exactly one odd-count letter.",
+    "update": "Prefix parity masks differ by the substring parity. Equal masks give all-even counts; a one-bit difference gives exactly one odd-count letter.",
+    "done": "Count substrings with at most one character occurring an odd number of times."
+  },
+  "edgeCases": [
+    "One repeated letter makes every substring wonderful",
+    "All distinct letters allow only singleton matches",
+    "Single character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/quad-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './QuadTreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -289,7 +292,7 @@ function GridVisualization({ grid, currentRegion, highlightRegions = [] }) {
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: cellSize > 30 ? 12 : 10,
-              color: val === 1 ? 'var(--surface2)' : 'var(--surface2)',
+              color: val === 1 ? 'var(--text)' : 'var(--text)',
               fontWeight: 'bold',
             }}
           >
@@ -368,30 +371,6 @@ function TreeVisualization({ tree, depth = 0 }) {
 function VisualizationPanel({ step, applyExample, examples, gridSize }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {step?.grid && (
         <div>
@@ -448,9 +427,9 @@ function VisualizationPanel({ step, applyExample, examples, gridSize }) {
 }
 
 export default function QuadTreeVisualizer() {
-  const examples = useMemo(() => getExamplesOr('quad-tree', []), [])
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
   const [gridSize, setGridSize] = useState(4)
-  const [gridInput, setGridInput] = useState('[[1,1,0,0],[1,1,0,0],[1,1,1,1],[1,1,1,1]]')
+  const [gridInput, setGridInput] = useState(JSON.stringify(AUTHORED_INITIAL.grid || AUTHORED_INITIAL))
 
   const { grid, inputError } = useMemo(() => {
     try {
@@ -515,61 +494,7 @@ export default function QuadTreeVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Grid Size</div>
-                <input
-                  type="number"
-                  value={gridSize}
-                  onChange={(e) => {
-                    const size = Number(e.target.value)
-                    if (size > 0) {
-                      setGridSize(size)
-                      setGridInput(JSON.stringify(generateRandomGrid(size)))
-                      handleReset()
-                    }
-                  }}
-                  min={1}
-                  max={8}
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--surface2)',
-                    color: 'var(--text)',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-            </div>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Grid (JSON)</div>
-              <textarea
-                value={gridInput}
-                onChange={(e) => {
-                  setGridInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 80,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-              />
-              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-            </div>
-            <VisualizationPanel step={step} applyExample={applyExample} examples={examples} gridSize={gridSize} />
-          </div>),
+    viz: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} gridSize={gridSize} />),
   }), [step, connectivity, setActiveLineDom, gridSize, gridInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
@@ -595,7 +520,6 @@ export default function QuadTreeVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -613,6 +537,7 @@ export default function QuadTreeVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

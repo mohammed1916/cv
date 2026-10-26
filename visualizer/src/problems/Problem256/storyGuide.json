@@ -1,0 +1,23 @@
+{
+  "number": "256",
+  "title": "Paint House",
+  "goal": "Solve Paint House: Minimize cost to paint n houses with 3 colors.",
+  "strategy": "Minimize cost to paint n houses with 3 colors.",
+  "phases": [
+    "done",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Neighboring houses cannot choose the same color; each current color compares only the other preceding colors."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem256/index.jsx",
+    "src/problems/Problem256/Problem256Visualizer.jsx"
+  ]
+}

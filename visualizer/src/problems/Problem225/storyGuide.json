@@ -1,0 +1,21 @@
+{
+  "number": "225",
+  "title": "Implement Stack using Queues",
+  "goal": "Solve Implement Stack using Queues: Implement LIFO stack behavior using two FIFO queues through clever re-queuing.",
+  "strategy": "Implement LIFO stack behavior using two FIFO queues through clever re-queuing.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "LIFO behavior must survive interleaved pushes and pops even though each underlying queue removes from its front."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem225/index.jsx",
+    "src/problems/Problem225/ImplementStackUsingQueues.jsx"
+  ]
+}

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/implement-rand10.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem470Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('implement-rand10')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('implement-rand10')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(calls) {
   const steps = []
@@ -111,7 +114,7 @@ function VisualizationPanel({ calls, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -133,7 +136,7 @@ function VisualizationPanel({ calls, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Calls to Generate: {calls}
         </div>
       </div>
@@ -189,7 +192,7 @@ function VisualizationPanel({ calls, step, applyEx }) {
 
 export default function Problem470Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [callsInput, setCallsInput] = useState(5);
+  const [callsInput, setCallsInput] = useState(String(AUTHORED_INITIAL.calls));
   const { calls, inputError } = useMemo(() => {
     try {
       const parsedCalls = Number(callsInput); if (isNaN(parsedCalls)) throw new Error('calls must be a number');

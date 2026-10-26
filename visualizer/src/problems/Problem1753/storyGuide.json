@@ -1,0 +1,31 @@
+{
+  "number": "1753",
+  "title": "Maximum Score From Removing Stones",
+  "goal": "Maximize moves that remove one stone from each of two different piles.",
+  "strategy": "Every move consumes two stones, but a dominant pile also needs partners from the other piles. The smaller of these two bounds is achievable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize moves that remove one stone from each of two different piles.",
+    "inspect": "Every move consumes two stones, but a dominant pile also needs partners from the other piles. The smaller of these two bounds is achievable.",
+    "update": "Every move consumes two stones, but a dominant pile also needs partners from the other piles. The smaller of these two bounds is achievable.",
+    "done": "Maximize moves that remove one stone from each of two different piles."
+  },
+  "edgeCases": [
+    "Dominant pile runs out of partners",
+    "Equal piles",
+    "Odd total leaves a stone"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

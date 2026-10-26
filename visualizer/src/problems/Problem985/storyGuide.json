@@ -1,0 +1,27 @@
+{
+  "number": "985",
+  "title": "Sum of Even Numbers After Queries",
+  "goal": "Report the sum of even values after every point update.",
+  "strategy": "Only the changed cell can alter the even sum. Remove its old contribution and add its new contribution when applicable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Report the sum of even values after every point update.",
+    "inspect": "Only the changed cell can alter the even sum. Remove its old contribution and add its new contribution when applicable.",
+    "update": "Only the changed cell can alter the even sum. Remove its old contribution and add its new contribution when applicable.",
+    "done": "Report the sum of even values after every point update."
+  },
+  "edgeCases": [
+    "Even stays even",
+    "Odd stays odd",
+    "Cross zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

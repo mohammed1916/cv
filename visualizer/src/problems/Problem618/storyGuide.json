@@ -1,0 +1,31 @@
+{
+  "number": "618",
+  "title": "Students Report By Geography",
+  "goal": "Pivot alphabetically ordered student names into America Asia and Europe columns.",
+  "strategy": "Sort names independently inside each continent, then align their first names on row one, second names on row two, and so on. A missing name at a rank becomes null rather than shifting another column.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Pivot alphabetically ordered student names into America Asia and Europe columns.",
+    "inspect": "Sort names independently inside each continent, then align their first names on row one, second names on row two, and so on. A missing name at a rank becomes null rather than shifting another column.",
+    "update": "Sort names independently inside each continent, then align their first names on row one, second names on row two, and so on. A missing name at a rank becomes null rather than shifting another column.",
+    "done": "Pivot alphabetically ordered student names into America Asia and Europe columns."
+  },
+  "edgeCases": [
+    "Only the America column is populated",
+    "Equal list sizes need no padding",
+    "No students produce no report rows"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

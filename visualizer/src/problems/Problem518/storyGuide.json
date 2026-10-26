@@ -1,0 +1,23 @@
+{
+  "number": "518",
+  "title": "Coin Change 2",
+  "goal": "Solve Coin Change 2: Find the number of combinations that make up a given amount using given coin denominations.",
+  "strategy": "Find the number of combinations that make up a given amount using given coin denominations.",
+  "phases": [
+    "init",
+    "loop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Count combinations rather than permutations by fixing coin order; amount zero has one empty combination."
+  ],
+  "checks": [],
+  "inputRules": [
+    "amount must be a number",
+    "coins must be an array"
+  ],
+  "source": [
+    "src/problems/Problem518/index.jsx",
+    "src/problems/Problem518/CoinChange2Visualizer.jsx"
+  ]
+}

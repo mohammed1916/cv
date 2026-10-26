@@ -1,0 +1,26 @@
+{
+  "number": "414",
+  "title": "Third Maximum Number",
+  "goal": "Solve Third Maximum Number: Find third largest distinct number (or max if fewer than 3).",
+  "strategy": "Find third largest distinct number (or max if fewer than 3).",
+  "phases": [
+    "done",
+    "init",
+    "process",
+    "update_first",
+    "update_second",
+    "update_third"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The rank concerns distinct values; if fewer than three distinct values exist, return the maximum."
+  ],
+  "checks": [],
+  "inputRules": [
+    "nums must be an array"
+  ],
+  "source": [
+    "src/problems/Problem414/index.jsx",
+    "src/problems/Problem414/Problem414Visualizer.jsx"
+  ]
+}

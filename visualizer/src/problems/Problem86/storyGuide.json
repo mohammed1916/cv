@@ -1,0 +1,27 @@
+{
+  "number": "86",
+  "title": "Partition List",
+  "goal": "Partition List visualization",
+  "strategy": "Build stable chains for values below the pivot and values at least the pivot, then join them.",
+  "phases": [
+    "init",
+    "scan",
+    "append_less",
+    "append_ge",
+    "join",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Original relative order within each side must remain; terminate the second chain to avoid retaining old links."
+  ],
+  "checks": [],
+  "inputRules": [
+    "list must be an array",
+    "x must be a number"
+  ],
+  "source": [
+    "src/problems/Problem86/index.jsx",
+    "src/problems/Problem86/Visualizer.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "390",
+  "title": "Elimination Game",
+  "goal": "Solve Elimination Game: Find last remaining number after alternating elimination rounds.",
+  "strategy": "Find last remaining number after alternating elimination rounds.",
+  "phases": [
+    "complete",
+    "eliminate",
+    "init",
+    "round_complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "n == 1",
+      "outcome": "return 1  # Position of last element"
+    }
+  ],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem390/index.jsx",
+    "src/problems/Problem390/Problem390Visualizer.jsx"
+  ]
+}

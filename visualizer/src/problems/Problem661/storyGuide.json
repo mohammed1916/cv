@@ -1,0 +1,27 @@
+{
+  "number": "661",
+  "title": "Image Smoother",
+  "goal": "Replace each pixel with the floored average of its valid surrounding 3×3 neighborhood.",
+  "strategy": "At boundaries use only neighbors that exist. Read the original matrix throughout so updated averages never contaminate later cells.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Replace each pixel with the floored average of its valid surrounding 3×3 neighborhood.",
+    "inspect": "At boundaries use only neighbors that exist. Read the original matrix throughout so updated averages never contaminate later cells.",
+    "update": "At boundaries use only neighbors that exist. Read the original matrix throughout so updated averages never contaminate later cells.",
+    "done": "Replace each pixel with the floored average of its valid surrounding 3×3 neighborhood."
+  },
+  "edgeCases": [
+    "One row",
+    "Single pixel",
+    "Uniform image"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

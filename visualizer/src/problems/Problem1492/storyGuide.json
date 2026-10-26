@@ -1,0 +1,31 @@
+{
+  "number": "1492",
+  "title": "The kth Factor of n",
+  "goal": "Find the kth positive factor of n in ascending order.",
+  "strategy": "Scanning candidate divisors increasingly gives factor rank directly. Count only exact divisors and return minus one when there are fewer than k.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the kth positive factor of n in ascending order.",
+    "inspect": "Scanning candidate divisors increasingly gives factor rank directly. Count only exact divisors and return minus one when there are fewer than k.",
+    "update": "Scanning candidate divisors increasingly gives factor rank directly. Count only exact divisors and return minus one when there are fewer than k.",
+    "done": "Find the kth positive factor of n in ascending order."
+  },
+  "edgeCases": [
+    "Prime has no third factor",
+    "First factor",
+    "Unit has one factor"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

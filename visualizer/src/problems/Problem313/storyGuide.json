@@ -1,0 +1,24 @@
+{
+  "number": "313",
+  "title": "Super Ugly Number",
+  "goal": "Solve Super Ugly Number: Find n-th number whose prime factors are in given array.",
+  "strategy": "Find n-th number whose prime factors are in given array.",
+  "phases": [
+    "init",
+    "candidate",
+    "advance",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Several prime factors may produce the same next number; advance every matching candidate to avoid duplicate sequence entries."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use { \"n\": 12, \"primes\": [2, 7, 13, 19] }; n must be 1–24 and primes must be integers greater than 1."
+  ],
+  "source": [
+    "src/problems/Problem313/index.jsx",
+    "src/problems/Problem313/SuperUglyNumberVisualizer.jsx"
+  ]
+}

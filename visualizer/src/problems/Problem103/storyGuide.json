@@ -1,0 +1,30 @@
+{
+  "number": "103",
+  "title": "Binary Tree Zigzag Level Order Traversal",
+  "goal": "Solve Binary Tree Zigzag Level Order Traversal: Return the zigzag level order traversal of a binary tree: left-to-right, right-to-left alternating for each level.",
+  "strategy": "Return the zigzag level order traversal of a binary tree: left-to-right, right-to-left alternating for each level.",
+  "phases": [
+    "init",
+    "loop",
+    "visit",
+    "reverse",
+    "update",
+    "done",
+    "direction"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem103/index.jsx",
+    "src/problems/Problem103/BinaryTreeZigzagLevelOrderTraversalVisualizer.jsx",
+    "src/problems/Problem103/algorithm.js",
+    "src/problems/Problem103/ZigzagStory.jsx"
+  ]
+}

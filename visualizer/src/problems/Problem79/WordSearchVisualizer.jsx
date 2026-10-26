@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/word-search.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +10,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './WordSearchVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -203,11 +206,11 @@ function generateSteps(board, word) {
   return steps
 }
 
-const EXAMPLES = getExamples('word-search')
+const EXAMPLES = authoredExamples0
 
 export default function WordSearchVisualizer() {
-  const [boardInput, setBoardInput] = useState('[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]')
-  const [wordInput, setWordInput] = useState('ABCCED')
+  const [boardInput, setBoardInput] = useState(JSON.stringify(AUTHORED_INITIAL.board))
+  const [wordInput, setWordInput] = useState(AUTHORED_INITIAL.word)
 
   const { board, word, inputError } = useMemo(() => {
     try {
@@ -249,10 +252,7 @@ export default function WordSearchVisualizer() {
         <div className="ws-examples">
           {EXAMPLES.map((ex) => <button key={ex.label} className="ws-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}
         </div>
-        <div className="ws-inputs">
-          <input className="ws-input" value={boardInput} onChange={(e) => { setBoardInput(e.target.value); handleReset() }} />
-          <input className="ws-input small" value={wordInput} onChange={(e) => { setWordInput(e.target.value.toUpperCase()); handleReset() }} />
-        </div>
+        
         <div className="ws-grid" style={{ gridTemplateColumns: `repeat(${(step?.board || board)[0].length}, minmax(0, 1fr))` }}>
           {(step?.board || board).flatMap((row, r) => row.map((cell, c) => {
             const current = step?.current?.[0] === r && step?.current?.[1] === c
@@ -309,9 +309,6 @@ export default function WordSearchVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={WORDSEARCH_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -329,6 +326,9 @@ export default function WordSearchVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={WORDSEARCH_PATTERNS} />
+      )}
     </>
   )
 
@@ -337,7 +337,7 @@ export default function WordSearchVisualizer() {
     () => [
       { id: 'primary', title: 'DFS Backtracking Grid', dockMode: 'split-right' },
       { id: 'state', title: 'Search State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

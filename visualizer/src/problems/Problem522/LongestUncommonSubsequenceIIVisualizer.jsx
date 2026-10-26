@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/longest-uncommon-subsequence-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestUncommonSubsequenceIIVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -29,7 +32,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('longest-uncommon-subsequence-ii')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(strs) {
   const steps = []
@@ -137,7 +140,7 @@ function VisualizationPanel({ step }) {
 
       {/* Strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Strings</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {step?.strs?.map((str, idx) => {
             const isActive = step && idx === step.currentIdx && !step.done
@@ -224,7 +227,7 @@ function VisualizationPanel({ step }) {
 
 export default function LongestUncommonSubsequenceIIVisualizer() {
   const [strsInput, setStrsInput] = useState(
-    JSON.stringify(EXAMPLES?.[0]?.nums ?? EXAMPLES?.[0]?.strs ?? ['abcdefg', 'abc', 'abcd'])
+    JSON.stringify(AUTHORED_INITIAL.nums ?? AUTHORED_INITIAL.strs ?? [])
   )
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 
@@ -340,9 +343,6 @@ export default function LongestUncommonSubsequenceIIVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -360,6 +360,9 @@ export default function LongestUncommonSubsequenceIIVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--363.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -186,34 +188,7 @@ function generateSteps(matrix, K) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple 2×2',
-    matrix: [
-      [1, 0],
-      [0, -2],
-    ],
-    K: 0,
-  },
-  {
-    label: 'Constraint Binding',
-    matrix: [
-      [5, -4, -3],
-      [4, -3, 4],
-      [-3, 3, -4],
-    ],
-    K: 3,
-  },
-  {
-    label: 'Optimization',
-    matrix: [
-      [2, 1, -1],
-      [-1, -1, 2],
-      [1, 0, -1],
-    ],
-    K: 2,
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem363Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -285,12 +260,12 @@ export default function Problem363Visualizer() {
                   {e.label}
                 </button>
               ))}
-              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>K = {K}</span>
+              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>K = {K}</span>
             </div>
 
             {/* Matrix Display */}
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Matrix</div>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Matrix</div>
               <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, minmax(60px, 1fr))`, gap: 4 }}>
                 {matrix.map((row, i) =>
                   row.map((val, j) => {
@@ -320,7 +295,7 @@ export default function Problem363Visualizer() {
                           borderRadius: 4,
                           fontSize: 13,
                           fontWeight: 700,
-                          color: 'var(--surface2)',
+                          color: (isCurrentCol ? 'var(--text-on-light)' : (isInRange ? 'var(--text-on-light)' : 'var(--text)')),
                         }}
                       >
       

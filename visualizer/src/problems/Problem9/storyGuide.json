@@ -1,0 +1,35 @@
+{
+  "number": "9",
+  "title": "Palindrome Number",
+  "goal": "Solve Palindrome Number: Compare decimal digits from opposite ends, or reverse the necessary digits, to decide whether the number is symmetric.",
+  "strategy": "Compare decimal digits from opposite ends, or reverse the necessary digits, to decide whether the number is symmetric.",
+  "phases": [
+    "init",
+    "negative",
+    "trailing_zero",
+    "state",
+    "check",
+    "extract",
+    "build",
+    "advance",
+    "compare",
+    "invalid",
+    "done",
+    "trailing-zero"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Negative numbers are not palindromes; a nonzero number ending in zero cannot have a matching leading zero."
+  ],
+  "checks": [
+    {
+      "condition": "x < 0 or (x % 10 == 0 and x != 0)",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem9/index.jsx",
+    "src/problems/Problem9/PalindromeNumberVisualizer.jsx"
+  ]
+}

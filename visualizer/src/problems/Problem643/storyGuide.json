@@ -1,0 +1,27 @@
+{
+  "title": "Maximum Average Subarray I",
+  "goal": "Find the greatest average of any contiguous subarray of length k.",
+  "strategy": "Keep exactly k neighboring values. Subtract the outgoing value as each incoming value arrives.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Keep exactly k neighboring values. Subtract the outgoing value as each incoming value arrives.",
+    "update": "Every window has exactly k entries, so comparing sums also compares averages.",
+    "done": "Every window has exactly k entries, so comparing sums also compares averages."
+  },
+  "edgeCases": [
+    "All negative",
+    "Window is entire input",
+    "Single-value windows"
+  ],
+  "number": "643",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

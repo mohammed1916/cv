@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--362.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -108,29 +110,7 @@ function generateSteps(hits, queryTime, windowSize) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Simple Sequence',
-    desc: 'Basic hit tracking',
-    hits: [1, 100, 150],
-    timestamp: 150,
-    windowSize: 300,
-  },
-  {
-    label: 'Example 2: Window Expiration',
-    desc: 'Removing stale hits',
-    hits: [1, 100, 150, 300, 400, 500],
-    timestamp: 500,
-    windowSize: 300,
-  },
-  {
-    label: 'Example 3: Rate Limiting',
-    desc: 'Monitoring request volume',
-    hits: [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
-    timestamp: 500,
-    windowSize: 300,
-  },
-]
+const EXAMPLES = authoredExamples0
 
 
 export default function Problem362Visualizer() {

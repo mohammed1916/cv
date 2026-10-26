@@ -1,0 +1,31 @@
+{
+  "number": "837",
+  "title": "New 21 Game",
+  "goal": "Find the probability a random drawing game stops with score at most n.",
+  "strategy": "Scores below k continue drawing uniformly from one through maxPts. A sliding sum of active predecessor probabilities supplies each next score; terminal scores accumulate the answer but never generate more draws.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the probability a random drawing game stops with score at most n.",
+    "inspect": "Scores below k continue drawing uniformly from one through maxPts. A sliding sum of active predecessor probabilities supplies each next score; terminal scores accumulate the answer but never generate more draws.",
+    "update": "Scores below k continue drawing uniformly from one through maxPts. A sliding sum of active predecessor probabilities supplies each next score; terminal scores accumulate the answer but never generate more draws.",
+    "done": "Find the probability a random drawing game stops with score at most n."
+  },
+  "edgeCases": [
+    "Zero stopping threshold ends the game immediately",
+    "A bound above every stopping score makes success certain",
+    "Draws of one stop at a deterministic score"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

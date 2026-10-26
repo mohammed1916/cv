@@ -1,0 +1,31 @@
+{
+  "number": "1250",
+  "title": "Check If It Is a Good Array",
+  "goal": "Decide whether an integer linear combination of the array can equal one.",
+  "strategy": "The gcd generates all possible integer linear combinations. It equals one exactly when the requested combination exists.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether an integer linear combination of the array can equal one.",
+    "inspect": "The gcd generates all possible integer linear combinations. It equals one exactly when the requested combination exists.",
+    "update": "The gcd generates all possible integer linear combinations. It equals one exactly when the requested combination exists.",
+    "done": "Decide whether an integer linear combination of the array can equal one."
+  },
+  "edgeCases": [
+    "All values share a factor",
+    "A literal one makes the answer immediate",
+    "One value greater than one"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

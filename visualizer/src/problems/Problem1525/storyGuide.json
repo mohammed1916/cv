@@ -1,0 +1,31 @@
+{
+  "number": "1525",
+  "title": "Number of Good Ways to Split a String",
+  "goal": "Count splits whose nonempty halves contain the same number of distinct letters.",
+  "strategy": "Transfer characters from a complete right multiset into the left multiset. Remove right keys at zero frequency before comparing distinct counts.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count splits whose nonempty halves contain the same number of distinct letters.",
+    "inspect": "Transfer characters from a complete right multiset into the left multiset. Remove right keys at zero frequency before comparing distinct counts.",
+    "update": "Transfer characters from a complete right multiset into the left multiset. Remove right keys at zero frequency before comparing distinct counts.",
+    "done": "Count splits whose nonempty halves contain the same number of distinct letters."
+  },
+  "edgeCases": [
+    "Repeated letter makes every split valid",
+    "No available split",
+    "All distinct characters"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

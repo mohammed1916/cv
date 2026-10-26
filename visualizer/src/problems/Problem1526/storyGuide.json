@@ -1,0 +1,31 @@
+{
+  "number": "1526",
+  "title": "Minimum Number of Increments on Subarrays to Form a Target Array",
+  "goal": "Count minimum interval increments needed to form the target from zeros.",
+  "strategy": "Existing increment layers can continue across level or falling heights. Each rise requires new layers beginning at that index.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count minimum interval increments needed to form the target from zeros.",
+    "inspect": "Existing increment layers can continue across level or falling heights. Each rise requires new layers beginning at that index.",
+    "update": "Existing increment layers can continue across level or falling heights. Each rise requires new layers beginning at that index.",
+    "done": "Count minimum interval increments needed to form the target from zeros."
+  },
+  "edgeCases": [
+    "Already zero",
+    "Flat plateau",
+    "Strict descent"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

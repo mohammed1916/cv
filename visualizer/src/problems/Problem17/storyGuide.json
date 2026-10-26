@@ -1,0 +1,26 @@
+{
+  "number": "17",
+  "title": "Letter Combinations of a Phone Number",
+  "goal": "Solve Letter Combinations of a Phone Number: DFS over phone digit map, appending one letter per digit level until the combination is complete.",
+  "strategy": "DFS over phone digit map, appending one letter per digit level until the combination is complete.",
+  "phases": [
+    "init",
+    "choose",
+    "record",
+    "unchoose",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not digits",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem17/index.jsx",
+    "src/problems/Problem17/LetterCombinationsVisualizer.jsx"
+  ]
+}

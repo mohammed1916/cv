@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3894.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -12,13 +16,9 @@ const definition = {
     { id: 'red', label: '(30, 90]?', description: 'Red excludes 30 and includes 90.' },
     { id: 'done', label: 'Return', description: 'Return the matched color or Invalid.' },
   ],
-  examples: [
-    { label: 'Red: 60', input: '60' }, { label: 'Invalid: 5', input: '5' },
-    { label: 'Green: 0', input: '0' }, { label: 'Orange: 30', input: '30' },
-    { label: 'Red boundary: 90', input: '90' }, { label: 'Beyond red: 91', input: '91' },
-  ],
+  examples: authoredExamples0,
 }
-export default function TrafficSignal() {
+function TrafficSignal() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Timer (unchanged during evaluation)" length={1} valueAt={() => run.input} />
     <svg width={220} height={260} role="img" aria-label={`Traffic signal: ${step.result || 'not decided'}`}>
@@ -38,3 +38,5 @@ export default function TrafficSignal() {
     <p>The signal names and ON labels convey the result without depending on color perception.</p>
   </>} />
 }
+
+export default withProblemStory(TrafficSignal, storyGuide);

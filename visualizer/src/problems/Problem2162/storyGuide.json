@@ -1,0 +1,31 @@
+{
+  "number": "2162",
+  "title": "Minimum Cost to Set Cooking Time",
+  "goal": "Enter a microwave time with minimum finger movement and button cost.",
+  "strategy": "The display accepts up to two minute digits and two second digits, including seconds above 59. Enumerate all minute/second representations of the duration, remove leading zeros, and price each button sequence.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Enter a microwave time with minimum finger movement and button cost.",
+    "inspect": "The display accepts up to two minute digits and two second digits, including seconds above 59. Enumerate all minute/second representations of the duration, remove leading zeros, and price each button sequence.",
+    "update": "The display accepts up to two minute digits and two second digits, including seconds above 59. Enumerate all minute/second representations of the duration, remove leading zeros, and price each button sequence.",
+    "done": "Enter a microwave time with minimum finger movement and button cost."
+  },
+  "edgeCases": [
+    "A seconds-only display avoids leading zero presses",
+    "Repeated digits can avoid several finger movements",
+    "Maximum supported display uses both 99 fields"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

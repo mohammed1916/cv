@@ -1,0 +1,24 @@
+{
+  "number": "165",
+  "title": "Compare Version Numbers",
+  "goal": "Solve Compare Version Numbers: Compare two version numbers and return which is larger.",
+  "strategy": "Compare two version numbers and return which is larger.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "p1 < p2",
+      "outcome": "return -1"
+    },
+    {
+      "condition": "p1 > p2",
+      "outcome": "return 1"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem165/index.jsx",
+    "src/problems/Problem165/CompareVersionNumbersVisualizer.jsx"
+  ]
+}

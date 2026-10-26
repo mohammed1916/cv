@@ -1,0 +1,31 @@
+{
+  "number": "2045",
+  "title": "Second Minimum Time to Reach Destination",
+  "goal": "Find the second distinct travel time from vertex one to vertex n.",
+  "strategy": "Uniform edge times and synchronized signals make arrival time depend only on hop count. BFS retains two distinct smallest hop counts per vertex, then simulates red-light waits for the second destination count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the second distinct travel time from vertex one to vertex n.",
+    "inspect": "Uniform edge times and synchronized signals make arrival time depend only on hop count. BFS retains two distinct smallest hop counts per vertex, then simulates red-light waits for the second destination count.",
+    "update": "Uniform edge times and synchronized signals make arrival time depend only on hop count. BFS retains two distinct smallest hop counts per vertex, then simulates red-light waits for the second destination count.",
+    "done": "Find the second distinct travel time from vertex one to vertex n."
+  },
+  "edgeCases": [
+    "One edge requires a backtrack for the second arrival",
+    "Equal-length paths do not count as distinct arrival times",
+    "Arriving on a red boundary forces a wait before continuing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

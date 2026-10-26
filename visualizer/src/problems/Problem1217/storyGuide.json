@@ -1,0 +1,31 @@
+{
+  "number": "1217",
+  "title": "Minimum Cost to Move Chips to The Same Position",
+  "goal": "Move all chips to one position at minimum cost.",
+  "strategy": "Free moves by two connect all positions of one parity. Choose the larger parity group as the destination and pay only for the smaller group.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Move all chips to one position at minimum cost.",
+    "inspect": "Free moves by two connect all positions of one parity. Choose the larger parity group as the destination and pay only for the smaller group.",
+    "update": "Free moves by two connect all positions of one parity. Choose the larger parity group as the destination and pay only for the smaller group.",
+    "done": "Move all chips to one position at minimum cost."
+  },
+  "edgeCases": [
+    "All positions have one parity",
+    "Equal parity group sizes",
+    "Repeated chip positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

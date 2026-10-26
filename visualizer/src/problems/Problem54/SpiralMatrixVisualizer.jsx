@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/spiral-matrix.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SpiralMatrixVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
@@ -184,10 +187,10 @@ function generateSteps(matrix) {
   return steps
 }
 
-const EXAMPLES = getExamples('spiral-matrix')
+const EXAMPLES = authoredExamples0
 
 export default function SpiralMatrixVisualizer() {
-  const [matrixInput, setMatrixInput] = useState('[[1,2,3],[4,5,6],[7,8,9]]')
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.matrix))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -239,25 +242,6 @@ export default function SpiralMatrixVisualizer() {
         {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
       </div>
       <div className="sm-panel-body">
-        <div style={{ display: 'flex', gap: 6, marginBottom: 12, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => applyExample(ex)}
-              className="sm-example-btn"
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-
-        <input
-          value={matrixInput}
-          onChange={(e) => { setMatrixInput(e.target.value);
- handleReset() }}
-          placeholder="[[1,2,3],[4,5,6],[7,8,9]]"
-          className="sm-input"
-        />
 
         <div className="sm-matrix-container">
             <div
@@ -369,9 +353,6 @@ export default function SpiralMatrixVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIX_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -389,6 +370,9 @@ export default function SpiralMatrixVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SPIRALMATRIX_PATTERNS} />
+      )}
     </>
   )
 
@@ -398,7 +382,7 @@ export default function SpiralMatrixVisualizer() {
     () => [
       { id: 'primary', title: 'Matrix View', dockMode: 'split-right' },
       { id: 'state', title: 'Variables', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

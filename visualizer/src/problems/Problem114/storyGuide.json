@@ -1,0 +1,27 @@
+{
+  "number": "114",
+  "title": "Flatten Binary Tree to Linked List",
+  "goal": "Solve Flatten Binary Tree to Linked List: Morris-style: at each node, find the rightmost node of the left subtree and attach the right subtree there.",
+  "strategy": "Morris-style: at each node, find the rightmost node of the left subtree and attach the right subtree there.",
+  "phases": [
+    "init",
+    "check",
+    "visit",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Save the original right subtree before rewiring left links; the final chain must preserve preorder and clear every left pointer."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use at most 200 nodes for this pointer trace."
+  ],
+  "source": [
+    "src/problems/Problem114/index.jsx",
+    "src/problems/Problem114/FlattenBinaryTreeVisualizer.jsx",
+    "src/problems/Problem114/algorithm.js",
+    "src/problems/Problem114/FlattenStory.jsx"
+  ]
+}

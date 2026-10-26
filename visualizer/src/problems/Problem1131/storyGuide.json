@@ -1,0 +1,31 @@
+{
+  "number": "1131",
+  "title": "Maximum of Absolute Value Expression",
+  "goal": "Maximize the sum of two absolute value differences and index distance.",
+  "strategy": "Expand the two value absolute differences through four sign choices. For each choice, the largest minus smallest transformed value captures its maximum separation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the sum of two absolute value differences and index distance.",
+    "inspect": "Expand the two value absolute differences through four sign choices. For each choice, the largest minus smallest transformed value captures its maximum separation.",
+    "update": "Expand the two value absolute differences through four sign choices. For each choice, the largest minus smallest transformed value captures its maximum separation.",
+    "done": "Maximize the sum of two absolute value differences and index distance."
+  },
+  "edgeCases": [
+    "Only index distance remains",
+    "Two aligned entries",
+    "Both arrays decrease"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

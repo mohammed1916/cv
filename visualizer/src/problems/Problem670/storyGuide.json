@@ -1,0 +1,27 @@
+{
+  "number": "670",
+  "title": "Maximum Swap",
+  "goal": "Maximize a number using at most one swap of two digits.",
+  "strategy": "Improve the earliest digit possible. Swap with the rightmost occurrence of the greatest larger digit to keep the remaining suffix maximal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize a number using at most one swap of two digits.",
+    "inspect": "Improve the earliest digit possible. Swap with the rightmost occurrence of the greatest larger digit to keep the remaining suffix maximal.",
+    "update": "Improve the earliest digit possible. Swap with the rightmost occurrence of the greatest larger digit to keep the remaining suffix maximal.",
+    "done": "Maximize a number using at most one swap of two digits."
+  },
+  "edgeCases": [
+    "Nonincreasing digits",
+    "Zero input",
+    "Repeated best suffix digit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

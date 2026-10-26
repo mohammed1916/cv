@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/remove-duplicates.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import CodeTracePanel from "../../components/CodeTracePanel";
 import PlaybackControls from "../../components/PlaybackControls";
@@ -11,7 +14,7 @@ import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
 import { useProblemCode } from "../../hooks/useProblemCode";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./RemoveDuplicatesVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -27,7 +30,7 @@ const LINE_PATTERN_MAP = {
   7: 'done',
 }
 
-const EXAMPLES = getExamples('remove-duplicates');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(numsIn) {
   const steps = [];
@@ -51,7 +54,7 @@ function generateSteps(numsIn) {
 
 export default function RemoveDuplicatesVisualizer({ problem }) {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,1,2]");
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
   const { nums, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');
@@ -160,9 +163,6 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVDUPLICATES_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying} isDone={isDone} speed={speed}
         onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset}
@@ -173,6 +173,9 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={REMOVDUPLICATES_PATTERNS} />
+      )}
     </>
   );
 
@@ -181,7 +184,7 @@ export default function RemoveDuplicatesVisualizer({ problem }) {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Array (in-place)', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

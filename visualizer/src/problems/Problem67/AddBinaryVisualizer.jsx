@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/add-binary.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -10,13 +13,13 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './AddBinaryVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { getSolutionCode } from '../../config/solutionCodeRegistry'
 const SOLUTION_CODE = getSolutionCode('add-binary')
 
-const EXAMPLES = getExamples('add-binary')
+const EXAMPLES = authoredExamples0
 
 const ADDBINARY_PATTERNS = ['init', 'check_loop', 'get_vals', 'sum', 'append', 'advance']
 
@@ -175,7 +178,7 @@ function BinaryVisualization({ a, b, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Input strings */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Strings</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Strings</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {/* String a */}
           <div>
@@ -251,7 +254,7 @@ function BinaryVisualization({ a, b, step }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Current Bit Addition</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Current Bit Addition</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: 8, marginBottom: 8 }}>
             <div style={{ textAlign: 'center', padding: 8, backgroundColor: '#dbeafe', borderRadius: 4 }}>
               <div style={{ fontSize: 10, color: '#1e40af' }}>a[i]</div>
@@ -280,7 +283,7 @@ function BinaryVisualization({ a, b, step }) {
 
       {/* Result */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Result</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Result</div>
         <div style={{
           padding: 16,
           backgroundColor: '#ecfdf5',
@@ -316,7 +319,7 @@ function VisualizationPanel({ a, b, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -344,8 +347,8 @@ function VisualizationPanel({ a, b, step, applyEx }) {
 
 export default function AddBinaryVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [aInput, setAInput] = useState("11");
-  const [bInput, setBInput] = useState("1");
+  const [aInput, setAInput] = useState(String(AUTHORED_INITIAL.a));
+  const [bInput, setBInput] = useState(String(AUTHORED_INITIAL.b));
   const { a, b, inputError } = useMemo(() => {
     try {
       const parsedA = aInput;
@@ -432,9 +435,6 @@ export default function AddBinaryVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={ADDBINARY_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -452,6 +452,9 @@ export default function AddBinaryVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={ADDBINARY_PATTERNS} />
+      )}
     </>
   )
 
@@ -461,7 +464,7 @@ export default function AddBinaryVisualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '🔢 Binary Addition', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

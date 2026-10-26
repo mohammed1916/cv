@@ -1,0 +1,31 @@
+{
+  "number": "1165",
+  "title": "Single-Row Keyboard",
+  "goal": "Compute finger travel on a single-row keyboard starting at position zero.",
+  "strategy": "Map each character to its position. The movement cost is the absolute distance from the previously typed key.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute finger travel on a single-row keyboard starting at position zero.",
+    "inspect": "Map each character to its position. The movement cost is the absolute distance from the previously typed key.",
+    "update": "Map each character to its position. The movement cost is the absolute distance from the previously typed key.",
+    "done": "Compute finger travel on a single-row keyboard starting at position zero."
+  },
+  "edgeCases": [
+    "Repeated presses have zero movement",
+    "Jump between keyboard ends",
+    "Start at the first supplied key"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

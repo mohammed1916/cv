@@ -1,0 +1,27 @@
+{
+  "number": "1002",
+  "title": "Find Common Characters",
+  "goal": "Return characters shared by every word, retaining multiplicity.",
+  "strategy": "For each character, the smallest frequency among all words is exactly the number of copies that can be shared.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return characters shared by every word, retaining multiplicity.",
+    "inspect": "For each character, the smallest frequency among all words is exactly the number of copies that can be shared.",
+    "update": "For each character, the smallest frequency among all words is exactly the number of copies that can be shared.",
+    "done": "Return characters shared by every word, retaining multiplicity."
+  },
+  "edgeCases": [
+    "No common letter",
+    "Repeated common characters",
+    "One word preserves every character"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

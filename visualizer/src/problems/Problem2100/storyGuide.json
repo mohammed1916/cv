@@ -1,0 +1,31 @@
+{
+  "number": "2100",
+  "title": "Find Good Days to Rob the Bank",
+  "goal": "Find days surrounded by enough nonincreasing and nondecreasing security counts.",
+  "strategy": "Count consecutive nonincreasing steps ending at each day and consecutive nondecreasing steps starting there. A day qualifies only if both run lengths meet time.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find days surrounded by enough nonincreasing and nondecreasing security counts.",
+    "inspect": "Count consecutive nonincreasing steps ending at each day and consecutive nondecreasing steps starting there. A day qualifies only if both run lengths meet time.",
+    "update": "Count consecutive nonincreasing steps ending at each day and consecutive nondecreasing steps starting there. A day qualifies only if both run lengths meet time.",
+    "done": "Find days surrounded by enough nonincreasing and nondecreasing security counts."
+  },
+  "edgeCases": [
+    "Zero neighboring days accepts every position",
+    "A requirement wider than the array accepts nothing",
+    "Equal counts extend both monotone runs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

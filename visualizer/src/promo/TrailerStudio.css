@@ -1,0 +1,9 @@
+.trailer-studio { position: fixed; right: 20px; bottom: 20px; z-index: 4000; width: min(410px, calc(100vw - 40px)); padding: 20px; box-sizing: border-box; border: 1px solid #818cf8; border-radius: 16px; background: #101827; color: #f8fafc; box-shadow: 0 20px 80px #0008; }
+.trailer-studio p { font-size: 13px; line-height: 1.6; }
+.trailer-studio a { display: block; margin-top: 12px; color: #a5b4fc; }
+.trailer-studio.is-recording { width: auto; padding: 4px; opacity: 0; }
+.trailer-studio.is-recording:hover, .trailer-studio.is-recording:focus-within { opacity: 1; }
+.trailer-caption { position: fixed; z-index: 3000; bottom: 24px; left: 24px; padding: 16px 24px; border-left: 4px solid #818cf8; border-radius: 0 12px 12px 0; background: #0b1220eb; color: white; pointer-events: none; box-shadow: 0 8px 30px #0004; }
+.trailer-caption span { display: block; color: #a5b4fc; font-size: 10px; letter-spacing: .16em; margin-bottom: 6px; }
+.trailer-caption strong { font-size: clamp(18px, 2.2vw, 32px); }
+body[data-trailer-recording] .two-sum-tour-launch, body[data-trailer-recording] .two-sum-tour-layer { display: none; }

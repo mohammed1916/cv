@@ -1,0 +1,23 @@
+{
+  "number": "458",
+  "title": "Poor Pigs",
+  "goal": "Solve Poor Pigs: Use each pig’s possible death round or survival as an information state, increasing pigs until their combined states distinguish all buckets.",
+  "strategy": "Use each pig’s possible death round or survival as an information state, increasing pigs until their combined states distinguish all buckets.",
+  "phases": [
+    "checking",
+    "done",
+    "init_pigs",
+    "start",
+    "states_calculated"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "With no completed testing round, multiple buckets cannot be distinguished; one bucket needs no pig."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem458/index.jsx",
+    "src/problems/Problem458/Problem458Visualizer.jsx"
+  ]
+}

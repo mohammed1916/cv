@@ -1,0 +1,31 @@
+{
+  "number": "1154",
+  "title": "Day of the Year",
+  "goal": "Find the one-based day number within the given year.",
+  "strategy": "Add complete preceding months to the current day. February must use the same year-specific leap rule as the date itself.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the one-based day number within the given year.",
+    "inspect": "Add complete preceding months to the current day. February must use the same year-specific leap rule as the date itself.",
+    "update": "Add complete preceding months to the current day. February must use the same year-specific leap rule as the date itself.",
+    "done": "Find the one-based day number within the given year."
+  },
+  "edgeCases": [
+    "First day of year",
+    "Leap day",
+    "Century without a leap day"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

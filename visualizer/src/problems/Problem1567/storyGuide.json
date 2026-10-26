@@ -1,0 +1,31 @@
+{
+  "number": "1567",
+  "title": "Maximum Length of Subarray With Positive Product",
+  "goal": "Find the longest subarray with strictly positive product.",
+  "strategy": "Track longest positive-product and negative-product suffix lengths. A negative value swaps their roles, a positive preserves signs, and zero resets both.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest subarray with strictly positive product.",
+    "inspect": "Track longest positive-product and negative-product suffix lengths. A negative value swaps their roles, a positive preserves signs, and zero resets both.",
+    "update": "Track longest positive-product and negative-product suffix lengths. A negative value swaps their roles, a positive preserves signs, and zero resets both.",
+    "done": "Find the longest subarray with strictly positive product."
+  },
+  "edgeCases": [
+    "Single negative",
+    "All zeros",
+    "Even count of negative values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "number": "100",
+  "title": "Same Tree",
+  "goal": "Solve Same Tree: Recursively check if two trees are identical: same value at each node and same structure.",
+  "strategy": "Recursively check if two trees are identical: same value at each node and same structure.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not p and not q",
+      "outcome": "return True"
+    },
+    {
+      "condition": "not p or not q",
+      "outcome": "return False"
+    },
+    {
+      "condition": "p.val != q.val",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem100/index.jsx",
+    "src/problems/Problem100/SameTreeVisualizer.jsx",
+    "src/problems/Problem100/algorithm.js"
+  ]
+}

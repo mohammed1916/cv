@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/reshape-matrix.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ReshapeMatrixVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -283,7 +286,7 @@ function MatrixGrid({ matrix, title, highlight = null, extractHighlight = null }
                   fontWeight: 600,
                   fontFamily: 'monospace',
                   backgroundColor: isHighlighted ? '#38bdf8' : isExtracted ? '#fbbf24' : 'var(--surface2)',
-                  color: isHighlighted ? 'var(--code-bg)' : isExtracted ? 'var(--code-bg)' : 'var(--text)',
+                  color: isHighlighted ? 'var(--text-on-light)' : isExtracted ? 'var(--text-on-light)' : 'var(--text)',
                   border: isHighlighted || isExtracted ? '2px solid #38bdf8' : '1px solid var(--text-muted)',
                 }}
                 animate={{
@@ -336,7 +339,7 @@ function FlattenedArray({ flat, highlightIndex = null }) {
                 fontWeight: 600,
                 fontFamily: 'monospace',
                 backgroundColor: isHighlighted ? '#38bdf8' : 'var(--surface2)',
-                color: isHighlighted ? 'var(--code-bg)' : 'var(--text)',
+                color: isHighlighted ? 'var(--text-on-light)' : 'var(--text)',
                 border: isHighlighted ? '2px solid #38bdf8' : '1px solid var(--text-muted)',
               }}
               animate={{
@@ -445,8 +448,8 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ReshapeMatrixVisualizer() {
-  const examples = useMemo(() => getExamplesOr('reshape-matrix', []), [])
-  const [matrixInput, setMatrixInput] = useState('[[1,2,3,4]]')
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
+  const [matrixInput, setMatrixInput] = useState(JSON.stringify(AUTHORED_INITIAL.mat || AUTHORED_INITIAL.matrix || [[1, 2, 3, 4]]))
   const [r, setR] = useState(2)
   const [c, setC] = useState(2)
 
@@ -501,102 +504,7 @@ export default function ReshapeMatrixVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Matrix (JSON)</div>
-                <textarea
-                  value={matrixInput}
-                  onChange={(e) => {
-                    setMatrixInput(e.target.value)
-                    handleReset()
-                  }}
-                  style={{
-                    width: '100%',
-                    height: 60,
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--surface2)',
-                    color: 'var(--text)',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                    resize: 'vertical',
-                  }}
-                />
-              </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Rows (r)</div>
-                <input
-                  type="number"
-                  value={r}
-                  onChange={(e) => {
-                    setR(Number(e.target.value))
-                    handleReset()
-                  }}
-                  min={1}
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--surface2)',
-                    color: 'var(--text)',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                    marginBottom: 8,
-                  }}
-                />
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Cols (c)</div>
-                <input
-                  type="number"
-                  value={c}
-                  onChange={(e) => {
-                    setC(Number(e.target.value))
-                    handleReset()
-                  }}
-                  min={1}
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--surface2)',
-                    color: 'var(--text)',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                {examples?.length > 0 && (
-                  <div>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                      {examples.map((ex, i) => (
-                        <button
-                          key={i}
-                          onClick={() => applyExample(ex)}
-                          style={{
-                            padding: '6px 12px',
-                            borderRadius: 4,
-                            border: '1px solid var(--text-muted)',
-                            cursor: 'pointer',
-                            fontSize: 11,
-                            backgroundColor: 'var(--surface2)',
-                            color: 'var(--text)',
-                          }}
-                        >
-                          {ex.label || `Example ${i + 1}`}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            <VisualizationPanel step={step} />
-          </div>),
+    viz: (<VisualizationPanel step={step} />),
   }), [step, connectivity, setActiveLineDom, matrixInput, r, c, examples, applyExample, handleReset, showPatternOverlay, activeLineDom])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
@@ -621,7 +529,6 @@ export default function ReshapeMatrixVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -639,6 +546,7 @@ export default function ReshapeMatrixVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

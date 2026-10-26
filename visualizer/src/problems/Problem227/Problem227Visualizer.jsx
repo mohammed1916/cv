@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/basic-calculator-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -160,14 +163,10 @@ function generateSteps(exprRaw) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('basic-calculator-ii', [
-  { label: 'Example 1', expr: '3+2*2' },
-  { label: 'Example 2', expr: ' 3/2 ' },
-  { label: 'Example 3', expr: ' 3+5 / 2 ' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem227Visualizer() {
-  const [exprInput, setExprInput] = useState('3+2*2')
+  const [exprInput, setExprInput] = useState(AUTHORED_INITIAL.expr)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(
@@ -214,18 +213,7 @@ export default function Problem227Visualizer() {
     <div className="p227-panel-primary">
       <div className="p227-card">
         <div className="p227-section-label">Input</div>
-        <div className="p227-input-row">
-          <div className="p227-field grow">
-            <label className="p227-input-label" htmlFor="p227-expr">Expression</label>
-            <input
-              id="p227-expr"
-              className={`p227-input mono ${inputError ? 'has-error' : ''}`}
-              value={exprInput}
-              onChange={(e) => { setExprInput(e.target.value); handleReset() }}
-              placeholder="3+2*2"
-            />
-          </div>
-        </div>
+        
         <p className={`p227-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Evaluate with normal precedence (× and ÷ before + and −), no parentheses. Division truncates toward zero.'}
         </p>
@@ -345,9 +333,6 @@ export default function Problem227Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -365,6 +350,9 @@ export default function Problem227Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -372,7 +360,7 @@ export default function Problem227Visualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     [],

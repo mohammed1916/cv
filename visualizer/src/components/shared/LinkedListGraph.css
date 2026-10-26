@@ -1,0 +1,14 @@
+.linked-list-graph { max-width: 100%; overflow: auto; color: var(--text); --list-accent: var(--primary, #6366f1); }
+.linked-list-graph svg { display: block; }
+.linked-list-graph--left { --list-accent: #3b82f6; }
+.linked-list-graph--right { --list-accent: #a855f7; }
+.linked-list-graph--merged { --list-accent: #22c55e; }
+.linked-list-graph__edge { fill: none; stroke: var(--text-muted); stroke-width: 2; }
+.linked-list-graph__node rect { fill: var(--surface2); stroke: var(--list-accent); stroke-width: 2; }
+.linked-list-graph__node.is-highlighted rect { stroke-width: 4; }
+.linked-list-graph__node path { stroke: var(--border); }
+.linked-list-graph text { fill: var(--text); font: 600 14px ui-monospace, monospace; }
+.linked-list-graph .linked-list-graph__id { fill: var(--text-muted); font-size: 10px; }
+.linked-list-graph .linked-list-graph__pointer { font-size: 11px; }
+.linked-list-graph__null-pointers { padding: 6px 12px; font-size: 12px; }
+.linked-list-graph:focus-visible { outline: 2px solid var(--list-accent); outline-offset: -2px; }

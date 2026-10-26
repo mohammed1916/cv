@@ -1,4 +1,7 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/two-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,9 +13,11 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './TwoSumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
+import { useRef } from 'react'
+import TwoSumTour from './TwoSumTour'
 
 const TWOSUM_PATTERNS = ['init', 'loop', 'calc_diff', 'check_map', 'found', 'add_map']
 
@@ -100,11 +105,12 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = getExamples('two-sum')
+const EXAMPLES = authoredExamples0
 
 export default function TwoSumVisualizer() {
-  const [numsInput, setNumsInput] = useState('[2, 7, 11, 15]')
-  const [targetInput, setTargetInput] = useState('9')
+  const tourPlaybackRef = useRef(null)
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { nums, target, inputError } = useMemo(() => {
     try {
@@ -174,23 +180,7 @@ export default function TwoSumVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-          <input
-            value={numsInput}
-            onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-            placeholder="[2, 7, 11, 15]"
-            className="twosum-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-          <input
-            value={targetInput}
-            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-            placeholder="9"
-            className="twosum-input"
-            style={{ width: '60px', margin: 0, textAlign: 'center' }}
-          />
-        </div>
+        
 
         <div className="twosum-array-container">
           {nums.map((num, idx) => {
@@ -308,10 +298,7 @@ export default function TwoSumVisualizer() {
   )
 
   const playbackPanel = (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
-      )}
+    <div ref={tourPlaybackRef} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -329,6 +316,9 @@ export default function TwoSumVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={TWOSUM_PATTERNS} />
+      )}
     </div>
   )
 
@@ -338,7 +328,7 @@ export default function TwoSumVisualizer() {
     () => [
       { id: 'array', title: 'Array & Target', dockMode: 'split-right' },
       { id: 'hashmap', title: 'Hash Map', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []
@@ -350,7 +340,10 @@ export default function TwoSumVisualizer() {
 
   return (
     <div className="vis-shell twosum-shell">
-      <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      <TwoSumTour panels={panelDivs} playbackRef={tourPlaybackRef} />
+      <div className="two-sum-tour-workspace">
+        <LuminoDockPanel panels={panelConfigs} onPanelReady={handlePanelReady} />
+      </div>
       {panelDivs && (
         <>
           {panelDivs.array && createPortal(arrayPanel, panelDivs.array)}

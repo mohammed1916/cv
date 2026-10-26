@@ -1,0 +1,27 @@
+{
+  "number": "446",
+  "title": "Arithmetic Slices II",
+  "goal": "Solve Arithmetic Slices II: For each endpoint and difference, count earlier arithmetic subsequences that can be extended, while storing pairs as future seeds.",
+  "strategy": "For each endpoint and difference, count earlier arithmetic subsequences that can be extended, while storing pairs as future seeds.",
+  "phases": [
+    "arithmetic",
+    "checking",
+    "done",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Length-two pairs seed later subsequences but are not themselves counted as arithmetic subsequences of length at least three."
+  ],
+  "checks": [
+    {
+      "condition": "len(nums) < 3",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem446/index.jsx",
+    "src/problems/Problem446/Problem446Visualizer.jsx"
+  ]
+}

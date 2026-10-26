@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/construct-the-rectangle.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem492Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -39,11 +42,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('construct-the-rectangle', [
-  { label: 'Example 1', area: 8 },
-  { label: 'Example 2', area: 37 },
-  { label: 'Example 3', area: 122122 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(area) {
   const steps = []
@@ -71,7 +70,7 @@ function VisualizationPanel({ area, step, applyEx }) {
           Find rectangle dimensions with given area, maximizing the length to width ratio (length &gt;= width).
         </div>
       </div>
-      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Given Area: {area}</div></div>
+      <div><div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Given Area: {area}</div></div>
       {step && step.width > 0 && (
         <motion.div style={{ padding: 16, backgroundColor: '#cffafe', borderRadius: 6, border: '2px solid #06b6d4' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div style={{ fontSize: 13, fontWeight: 600, color: '#164e63', marginBottom: 12 }}>Result Rectangle</div>
@@ -102,7 +101,7 @@ function VisualizationPanel({ area, step, applyEx }) {
 
 export default function Problem492Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [areaInput, setAreaInput] = useState(8);
+  const [areaInput, setAreaInput] = useState(String(AUTHORED_INITIAL.area));
   const { area, inputError } = useMemo(() => {
     try {
       const parsedArea = Number(areaInput); if (isNaN(parsedArea)) throw new Error('area must be a number');
@@ -146,8 +145,8 @@ export default function Problem492Visualizer() {
           </>
         )}
       </><FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={e => setSpeed(Number(e.target.value))} showPatternOverlay={showPatternOverlay} onShowPatternOverlayChange={setShowPatternOverlay} patternOverlayLabel="Show pattern overlay" showPatternOverlayToggle />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>{showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}</div>)
 }
 

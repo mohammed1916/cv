@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--377.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +11,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem377.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -89,23 +91,7 @@ function generateSteps(nums, target) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1',
-    nums: [1, 2, 3],
-    target: 4,
-  },
-  {
-    label: 'Example 2',
-    nums: [1, 3, 4],
-    target: 5,
-  },
-  {
-    label: 'Example 3',
-    nums: [1, 2],
-    target: 3,
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem377Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -231,7 +217,7 @@ export default function Problem377Visualizer() {
                           sum === step.currentIdx ? '#fff' :
                           sum === 0 ? '#065f46' :
                           step.highlighted?.includes(sum) ? '#1e40af' :
-                          'var(--surface2)',
+                          'var(--text)',
                         fontSize: 11,
                         fontWeight: 600,
                         textAlign: 'center',
@@ -279,9 +265,6 @@ export default function Problem377Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -299,6 +282,9 @@ export default function Problem377Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

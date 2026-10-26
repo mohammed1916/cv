@@ -1,0 +1,31 @@
+{
+  "number": "928",
+  "title": "Minimize Malware Spread II",
+  "goal": "Choose one infected node to remove with all its edges to minimize the final malware spread.",
+  "strategy": "Union only initially clean nodes. A clean component is saved by removing an infected source only when that source is its sole infected neighbor. Sum those uniquely exposed component sizes per candidate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose one infected node to remove with all its edges to minimize the final malware spread.",
+    "inspect": "Union only initially clean nodes. A clean component is saved by removing an infected source only when that source is its sole infected neighbor. Sum those uniquely exposed component sizes per candidate.",
+    "update": "Union only initially clean nodes. A clean component is saved by removing an infected source only when that source is its sole infected neighbor. Sum those uniquely exposed component sizes per candidate.",
+    "done": "Choose one infected node to remove with all its edges to minimize the final malware spread."
+  },
+  "edgeCases": [
+    "Removing a connector saves clean nodes beyond that infected vertex",
+    "Shared clean exposure yields no saved component and a tie",
+    "An isolated infected node can be removed with no clean nodes saved"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

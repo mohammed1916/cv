@@ -1,0 +1,22 @@
+{
+  "number": "389",
+  "title": "Find the Difference",
+  "goal": "Solve Find the Difference: Find added character using XOR bit manipulation technique.",
+  "strategy": "Find added character using XOR bit manipulation technique.",
+  "phases": [
+    "complete",
+    "init",
+    "xor_s",
+    "xor_t"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Repeated characters are allowed; the extra character is identified by multiplicity, not ordinary set difference."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem389/index.jsx",
+    "src/problems/Problem389/Problem389Visualizer.jsx"
+  ]
+}

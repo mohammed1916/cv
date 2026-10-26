@@ -1,0 +1,27 @@
+{
+  "title": "Valid Triangle Number",
+  "goal": "Count index triples whose lengths form a nondegenerate triangle.",
+  "strategy": "Sort side lengths. For a fixed largest side, one successful pair proves a whole interval of starts is valid.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Sort side lengths. For a fixed largest side, one successful pair proves a whole interval of starts is valid.",
+    "update": "Every counted triple has a smallest pair whose sum exceeds its largest side.",
+    "done": "Every counted triple has a smallest pair whose sum exceeds its largest side."
+  },
+  "edgeCases": [
+    "Zeros cannot be sides",
+    "Equality is not a triangle",
+    "Fewer than three sides"
+  ],
+  "number": "611",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

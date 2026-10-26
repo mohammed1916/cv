@@ -1,0 +1,24 @@
+{
+  "number": "146",
+  "title": "LRU Cache",
+  "goal": "Solve LRU Cache: Track O(1) get/put with a hash map and doubly linked list while MRU/LRU order updates live.",
+  "strategy": "Track O(1) get/put with a hash map and doubly linked list while MRU/LRU order updates live.",
+  "phases": [
+    "done",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reading a cached key refreshes recency; updating an existing key must not consume an additional capacity slot."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Commands and arguments must both be arrays.",
+    "Commands and arguments must be arrays of equal length.",
+    "At least one command is required."
+  ],
+  "source": [
+    "src/problems/Problem146/index.jsx",
+    "src/problems/Problem146/LRUCacheVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "number": "202",
+  "title": "Happy Number",
+  "goal": "Solve Happy Number: Determine if a number is happy (sum of squares of digits eventually reaches 1).",
+  "strategy": "Determine if a number is happy (sum of squares of digits eventually reaches 1).",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "One ends the process successfully; revisiting a non-one value proves the digit-square process is cycling."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem202/index.jsx",
+    "src/problems/Problem202/HappyNumberVisualizer.jsx"
+  ]
+}

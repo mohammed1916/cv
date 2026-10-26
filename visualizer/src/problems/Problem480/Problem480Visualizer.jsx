@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/sliding-window-median.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem480Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -18,9 +21,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('sliding-window-median', [
-  { label: 'Example 1', nums: [1, 3, -1, -3, 5, 3, 6, 7], k: 3 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def medianSlidingWindow(nums, k):' },
@@ -95,14 +96,14 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => <button key={e.label} onClick={() => applyEx(e)} style={{ padding: '6px 12px', borderRadius: 4, border: '1px solid var(--border)', cursor: 'pointer', fontSize: 12, backgroundColor: 'var(--surface2)' }}>{e.label}</button>)}
         </div>
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Array (k={k})</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Array (k={k})</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6 }}>
           {nums.map((num, idx) => {
             const inWindow = step && idx >= (step.windowStart || 0) && idx < (step.windowEnd || 0)
@@ -132,7 +133,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
       {step?.window && step.window.length > 0 && (
         <div>
-          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
             Current Window {step.sorted ? '(sorted)' : ''}
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -179,8 +180,8 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
 export default function Problem480Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,3,-1,-3,5,3,6,7]");
-  const [kInput, setKInput] = useState(3);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { nums, k, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

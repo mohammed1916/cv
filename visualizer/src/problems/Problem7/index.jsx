@@ -1,1 +1,5 @@
-export { default } from "./ReverseIntegerVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./ReverseIntegerVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

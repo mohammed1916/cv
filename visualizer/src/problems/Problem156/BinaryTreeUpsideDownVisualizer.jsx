@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/binary-tree-upside-down.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './BinaryTreeUpsideDownVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -56,7 +57,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamples('binary-tree-upside-down')
+const EXAMPLES = authoredExamples0
 
 export default function BinaryTreeUpsideDownVisualizer() {
   const [input, setInput] = useState('')
@@ -155,7 +156,6 @@ export default function BinaryTreeUpsideDownVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -173,6 +173,7 @@ export default function BinaryTreeUpsideDownVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 
@@ -182,7 +183,7 @@ export default function BinaryTreeUpsideDownVisualizer() {
     () => [
       { id: 'primary', title: 'Input & State', dockMode: 'split-right' },
       { id: 'state',   title: 'Step Details', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

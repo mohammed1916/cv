@@ -1,0 +1,31 @@
+{
+  "number": "2139",
+  "title": "Minimum Moves to Reach Target Score",
+  "goal": "Reach the target from one with the fewest increments and limited doublings.",
+  "strategy": "Work backward: an even target can be halved when a doubling remains, while an odd target must first lose one. When doublings run out, all remaining backward moves are decrements.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reach the target from one with the fewest increments and limited doublings.",
+    "inspect": "Work backward: an even target can be halved when a doubling remains, while an odd target must first lose one. When doublings run out, all remaining backward moves are decrements.",
+    "update": "Work backward: an even target can be halved when a doubling remains, while an odd target must first lose one. When doublings run out, all remaining backward moves are decrements.",
+    "done": "Reach the target from one with the fewest increments and limited doublings."
+  },
+  "edgeCases": [
+    "No doubling permits only increments from one",
+    "The starting value needs no moves",
+    "A power of two uses repeated halving"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

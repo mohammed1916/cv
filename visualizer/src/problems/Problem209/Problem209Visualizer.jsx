@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/minimum-size-subarray-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -7,7 +10,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -125,15 +128,11 @@ function generateSteps(targetText, numsText) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('minimum-size-subarray-sum', [
-  { label: 'Example 1', target: '7', nums: '2,3,1,2,4,3' },
-  { label: 'Example 2', target: '4', nums: '1,4,4' },
-  { label: 'Example 3', target: '11', nums: '1,1,1,1,1,1,1,1' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function Problem209Visualizer() {
-  const [targetInput, setTargetInput] = useState('7')
-  const [numsInput, setNumsInput] = useState('2,3,1,2,4,3')
+  const [targetInput, setTargetInput] = useState(AUTHORED_INITIAL.target)
+  const [numsInput, setNumsInput] = useState(AUTHORED_INITIAL.nums)
   const [panelDivs, setPanelDivs] = useState(null)
 
   const steps = useMemo(
@@ -181,28 +180,7 @@ export default function Problem209Visualizer() {
     <div className="p209-panel-primary">
       <div className="p209-card">
         <div className="p209-section-label">Input</div>
-        <div className="p209-input-row">
-          <div className="p209-field">
-            <label className="p209-input-label" htmlFor="p209-target">Target</label>
-            <input
-              id="p209-target"
-              className={`p209-input mono short ${inputError ? 'has-error' : ''}`}
-              value={targetInput}
-              onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-              placeholder="7"
-            />
-          </div>
-          <div className="p209-field grow">
-            <label className="p209-input-label" htmlFor="p209-nums">Numbers</label>
-            <input
-              id="p209-nums"
-              className={`p209-input mono ${inputError ? 'has-error' : ''}`}
-              value={numsInput}
-              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              placeholder="2,3,1,2,4,3"
-            />
-          </div>
-        </div>
+        
         <p className={`p209-hint ${inputError ? 'error' : ''}`}>
           {inputError || 'Find the shortest contiguous subarray whose sum is at least target.'}
         </p>
@@ -344,9 +322,6 @@ export default function Problem209Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -364,6 +339,9 @@ export default function Problem209Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -371,7 +349,7 @@ export default function Problem209Visualizer() {
     () => [
       { id: 'primary', title: 'Visualization', dockMode: 'split-right' },
       { id: 'state', title: 'State', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     [],

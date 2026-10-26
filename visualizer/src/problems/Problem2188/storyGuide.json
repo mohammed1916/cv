@@ -1,0 +1,31 @@
+{
+  "number": "2188",
+  "title": "Minimum Time to Finish the Race",
+  "goal": "Finish all race laps in minimum time while choosing when to change tires.",
+  "strategy": "Precompute the cheapest uninterrupted run of each useful length. Stop extending a tire once its next lap is slower than changing to the fastest fresh tire, then partition the race with DP.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Finish all race laps in minimum time while choosing when to change tires.",
+    "inspect": "Precompute the cheapest uninterrupted run of each useful length. Stop extending a tire once its next lap is slower than changing to the fastest fresh tire, then partition the race with DP.",
+    "update": "Precompute the cheapest uninterrupted run of each useful length. Stop extending a tire once its next lap is slower than changing to the fastest fresh tire, then partition the race with DP.",
+    "done": "Finish all race laps in minimum time while choosing when to change tires."
+  },
+  "edgeCases": [
+    "One lap needs no tire-change fee",
+    "Cheap changes favor frequent fresh tires",
+    "An expensive change makes longer runs worthwhile"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

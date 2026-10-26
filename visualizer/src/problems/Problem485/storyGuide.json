@@ -1,0 +1,28 @@
+{
+  "number": "485",
+  "title": "Max Consecutive Ones",
+  "goal": "Solve Max Consecutive Ones: Given a binary array nums, return the maximum number of consecutive 1's in the array.",
+  "strategy": "Given a binary array nums, return the maximum number of consecutive 1's in the array.",
+  "phases": [
+    "init",
+    "scan",
+    "extend",
+    "reset",
+    "new_max",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A zero ends the current run; the maximum may occur before the final array position."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter a binary array, e.g. 1,1,0,1,1,1",
+    "Keep the array to 40 elements or fewer"
+  ],
+  "source": [
+    "src/problems/Problem485/index.jsx",
+    "src/problems/Problem485/MaxConsecutiveOnesVisualizer.jsx"
+  ]
+}

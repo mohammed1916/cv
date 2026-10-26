@@ -1,0 +1,21 @@
+{
+  "number": "244",
+  "title": "Shortest Word Distance II",
+  "goal": "Solve Shortest Word Distance II: Design a class that can find shortest distance between two words efficiently.",
+  "strategy": "Design a class that can find shortest distance between two words efficiently.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each query compares sorted occurrence lists without rebuilding the entire index; repeated occurrences can change the minimum distance."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem244/index.jsx",
+    "src/problems/Problem244/ShortestWordDistanceIi.jsx"
+  ]
+}

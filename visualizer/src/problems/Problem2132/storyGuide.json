@@ -1,0 +1,31 @@
+{
+  "number": "2132",
+  "title": "Stamping the Grid",
+  "goal": "Cover every empty grid cell with legal overlapping stamps.",
+  "strategy": "A prefix sum identifies all obstacle-free stamp rectangles. Add all legal placements to a difference grid; since overlap is allowed, coverage by any legal placement is sufficient for each empty cell.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Cover every empty grid cell with legal overlapping stamps.",
+    "inspect": "A prefix sum identifies all obstacle-free stamp rectangles. Add all legal placements to a difference grid; since overlap is allowed, coverage by any legal placement is sufficient for each empty cell.",
+    "update": "A prefix sum identifies all obstacle-free stamp rectangles. Add all legal placements to a difference grid; since overlap is allowed, coverage by any legal placement is sufficient for each empty cell.",
+    "done": "Cover every empty grid cell with legal overlapping stamps."
+  },
+  "edgeCases": [
+    "An isolated empty cell cannot fit the requested stamp",
+    "All obstacles need no covering even with an oversized stamp",
+    "A unit stamp covers every empty cell independently"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "number": "1401",
+  "title": "Circle and Rectangle Overlapping",
+  "goal": "Decide whether a circle and axis-aligned rectangle overlap or touch.",
+  "strategy": "The closest rectangle point is obtained by clamping each center coordinate to its interval. Squared-distance comparison avoids square roots and includes tangency.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether a circle and axis-aligned rectangle overlap or touch.",
+    "inspect": "The closest rectangle point is obtained by clamping each center coordinate to its interval. Squared-distance comparison avoids square roots and includes tangency.",
+    "update": "The closest rectangle point is obtained by clamping each center coordinate to its interval. Squared-distance comparison avoids square roots and includes tangency.",
+    "done": "Decide whether a circle and axis-aligned rectangle overlap or touch."
+  },
+  "edgeCases": [
+    "Center lies inside rectangle",
+    "Exact edge tangency",
+    "Separated shapes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

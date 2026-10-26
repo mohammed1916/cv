@@ -1,0 +1,31 @@
+{
+  "number": "1360",
+  "title": "Number of Days Between Two Dates",
+  "goal": "Count calendar days between two dates regardless of their order.",
+  "strategy": "Use midnight in UTC for both dates. Daylight-saving transitions then cannot distort the number of complete calendar days.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count calendar days between two dates regardless of their order.",
+    "inspect": "Use midnight in UTC for both dates. Daylight-saving transitions then cannot distort the number of complete calendar days.",
+    "update": "Use midnight in UTC for both dates. Daylight-saving transitions then cannot distort the number of complete calendar days.",
+    "done": "Count calendar days between two dates regardless of their order."
+  },
+  "edgeCases": [
+    "Identical dates",
+    "Reverse date order",
+    "Non-leap century boundary"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

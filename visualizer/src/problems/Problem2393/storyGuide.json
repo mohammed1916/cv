@@ -1,0 +1,31 @@
+{
+  "number": "2393",
+  "title": "Count Strictly Increasing Subarrays",
+  "goal": "Count strictly increasing contiguous subarrays including single elements.",
+  "strategy": "Track the increasing run ending at each index. Extend it only for a strict rise; equal or smaller values start a new length-one run. Every suffix of the current run is an increasing subarray.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count strictly increasing contiguous subarrays including single elements.",
+    "inspect": "Track the increasing run ending at each index. Extend it only for a strict rise; equal or smaller values start a new length-one run. Every suffix of the current run is an increasing subarray.",
+    "update": "Track the increasing run ending at each index. Extend it only for a strict rise; equal or smaller values start a new length-one run. Every suffix of the current run is an increasing subarray.",
+    "done": "Count strictly increasing contiguous subarrays including single elements."
+  },
+  "edgeCases": [
+    "A fully increasing array contributes all subarrays",
+    "Equal values allow only singletons",
+    "A descending array also allows only singletons"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

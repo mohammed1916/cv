@@ -1,0 +1,26 @@
+{
+  "number": "78",
+  "title": "Subsets",
+  "goal": "Solve Subsets: Explore including or excluding each element, recording each distinct subset of the input.",
+  "strategy": "Explore including or excluding each element, recording each distinct subset of the input.",
+  "phases": [
+    "choose",
+    "done",
+    "init",
+    "record",
+    "recurse",
+    "unchoose"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The empty subset is a valid result; the full input is also a subset."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Must be array"
+  ],
+  "source": [
+    "src/problems/Problem78/index.jsx",
+    "src/problems/Problem78/SubsetsVisualizer.jsx"
+  ]
+}

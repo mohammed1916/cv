@@ -1,4 +1,8 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/local--217.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
+import { useState, useMemo, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 import LuminoDockPanel from "../../components/LuminoDockPanel"
@@ -130,12 +134,7 @@ function generateSteps(nums, k) {
   return steps
 }
 
-const EXAMPLES = [
-  { label: "Duplicate found", nums: [1, 2, 3, 1], k: 3 },
-  { label: "No duplicate", nums: [1, 2, 3, 1, 2, 3], k: 2 },
-  { label: "Adjacent duplicate", nums: [99, 99, 2, 4, 5, 3, 9], k: 3 },
-  { label: "Duplicate too far apart", nums: [1, 0, 1, 1], k: 1 },
-]
+const EXAMPLES = authoredExamples0
 
 function ArrayDisplay({ nums, windowStart, windowEnd, highlighted }) {
   return (
@@ -274,8 +273,8 @@ function VisualizationPanel({ step }) {
 }
 
 export default function ContainsDuplicateIIVisualizer() {
-  const [numsInput, setNumsInput] = useState("[99,99,2,4,5,3,9]")
-  const [kInput, setKInput] = useState("3")
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
 
   const { nums, k, inputError } = useMemo(() => {
     try {
@@ -330,7 +329,7 @@ export default function ContainsDuplicateIIVisualizer() {
               onClick={() => applyExample(ex)}
               style={{
                 padding: "6px 12px", borderRadius: 6, border: "1px solid var(--border)",
-                background: "var(--surface2)", color: "var(--surface2)", fontSize: 12, cursor: "pointer",
+                background: "var(--surface2)", color: "var(--text)", fontSize: 12, cursor: "pointer",
               }}
             >
               {ex.label}
@@ -338,22 +337,8 @@ export default function ContainsDuplicateIIVisualizer() {
           ))}
         </div>
         <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "var(--text-muted)" }}>
-            nums:
-            <input
-              value={numsInput}
-              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              style={{ minWidth: 220, padding: "6px 10px", borderRadius: 6, border: "1px solid var(--border)", fontFamily: "monospace", fontSize: 12 }}
-            />
-          </label>
-          <label style={{ display: "flex", gap: 6, alignItems: "center", fontSize: 12, color: "var(--text-muted)" }}>
-            k:
-            <input
-              value={kInput}
-              onChange={(e) => { setKInput(e.target.value); handleReset() }}
-              style={{ width: 60, padding: "6px 10px", borderRadius: 6, border: "1px solid var(--border)", fontFamily: "monospace", fontSize: 12 }}
-            />
-          </label>
+          
+          
           {inputError && <span style={{ color: "#e91414", fontSize: 12 }}>{inputError}</span>}
         </div>
       </div>

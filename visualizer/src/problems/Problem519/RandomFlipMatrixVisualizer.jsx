@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/random-flip-matrix.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './RandomFlipMatrixVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -27,7 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('random-flip-matrix')
+const EXAMPLES = authoredExamples0
 
 const FALLBACK = { m: 3, n: 2, flips: [[0, 0]] }
 
@@ -105,7 +108,7 @@ function VisualizationPanel({ m, n, flips, step }) {
 
       {/* Matrix */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Matrix ({m}x{n})
         </div>
         <div style={{
@@ -207,8 +210,8 @@ function VisualizationPanel({ m, n, flips, step }) {
 }
 
 export default function RandomFlipMatrixVisualizer() {
-  const [mInput, setMInput] = useState(String(EXAMPLES?.[0]?.m ?? FALLBACK.m))
-  const [nInput, setNInput] = useState(String(EXAMPLES?.[0]?.n ?? FALLBACK.n))
+  const [mInput, setMInput] = useState(String(AUTHORED_INITIAL.m ?? FALLBACK.m))
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n ?? FALLBACK.n))
   const [flipsInput, setFlipsInput] = useState(
     JSON.stringify(EXAMPLES?.[0]?.flips ?? FALLBACK.flips)
   )
@@ -347,9 +350,6 @@ export default function RandomFlipMatrixVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -367,6 +367,9 @@ export default function RandomFlipMatrixVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

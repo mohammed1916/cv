@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/generate-random-point-in-a-circle.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem478Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -18,10 +21,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('generate-random-point-in-a-circle', [
-  { label: 'Example 1', radius: 1 },
-  { label: 'Example 2', radius: 2.5 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def __init__(self, radius, x_center, y_center):' },
   { line: 2, text: '    self.radius = radius' },
@@ -135,7 +135,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -224,7 +224,7 @@ function VisualizationPanel({ radius, step, applyEx }) {
 
 export default function Problem478Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [radiusInput, setRadiusInput] = useState(1);
+  const [radiusInput, setRadiusInput] = useState(String(AUTHORED_INITIAL.radius));
   const [x_centerInput, setX_centerInput] = useState(0);
   const [y_centerInput, setY_centerInput] = useState(0);
   const { radius, x_center, y_center, inputError } = useMemo(() => {

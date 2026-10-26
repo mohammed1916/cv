@@ -1,0 +1,26 @@
+{
+  "number": "519",
+  "title": "Random Flip Matrix",
+  "goal": "Solve Random Flip Matrix: Design a structure to flip random cells in a matrix and reset.",
+  "strategy": "Design a structure to flip random cells in a matrix and reset.",
+  "phases": [
+    "init",
+    "loop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Sampling must exclude previously flipped cells until reset; reset restores the full available population."
+  ],
+  "checks": [],
+  "inputRules": [
+    "m must be an integer >= 1",
+    "n must be an integer >= 1",
+    "m * n must be <= 400 for display",
+    "flips must be an array of [row, col] pairs",
+    "each flip must be a [row, col] pair of integers"
+  ],
+  "source": [
+    "src/problems/Problem519/index.jsx",
+    "src/problems/Problem519/RandomFlipMatrixVisualizer.jsx"
+  ]
+}

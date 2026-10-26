@@ -1,0 +1,31 @@
+{
+  "number": "1423",
+  "title": "Maximum Points You Can Obtain from Cards",
+  "goal": "Maximize points by taking exactly k cards from the two ends.",
+  "strategy": "The unselected cards always form one contiguous middle interval. Its length is n-k, so minimizing that interval sum maximizes the chosen sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize points by taking exactly k cards from the two ends.",
+    "inspect": "The unselected cards always form one contiguous middle interval. Its length is n-k, so minimizing that interval sum maximizes the chosen sum.",
+    "update": "The unselected cards always form one contiguous middle interval. Its length is n-k, so minimizing that interval sum maximizes the chosen sum.",
+    "done": "Maximize points by taking exactly k cards from the two ends."
+  },
+  "edgeCases": [
+    "Take all cards",
+    "Take one strongest endpoint",
+    "Equal card values make all choices tie"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

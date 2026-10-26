@@ -167,7 +167,7 @@ function renderTrieNode(node, x, y, isRoot = false) {
                 dy="0.3em"
                 fontSize="11"
                 fontWeight="600"
-                fill="var(--code-bg)"
+                fill="var(--text-on-light)"
             >
                 {isRoot ? '∅' : ''}
             </text>
@@ -235,7 +235,7 @@ function AddSearchWordsVisualizer() {
         return []
     }, [trie, searchWord, mode])
 
-    const { currentStep, isPlaying, setIsPlaying, setCurrentStep } =
+    const { stepIndex: currentStep, isPlaying, setStepIndex: setCurrentStep, togglePlay, handleReset, speed, setSpeed, isDone } =
         usePlaybackState(steps.length)
     const { lineConnections } = useCodeVisualConnectivity(
         currentStep < steps.length ? steps[currentStep]?.activeLine : -1
@@ -376,18 +376,20 @@ function AddSearchWordsVisualizer() {
                 </div>
             </div>
 
-            <CodeTracePanel code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
+            <CodeTracePanel step={currentStepData} code={SOLUTION_CODE} lineConnections={lineConnections} onActiveLineDomChange={setActiveLineDom} />
 
             <FloatingPanel title="Playback Controls">
         <PlaybackControls
-                currentStep={currentStep}
+            speed={speed}
+            onSpeedChange={(event) => setSpeed(Number(event.target.value))}
+            isDone={isDone}
+                activeStep={currentStep}
                 totalSteps={steps.length}
                 isPlaying={isPlaying}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onStepForward={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
-                onStepBackward={() => setCurrentStep(Math.max(currentStep - 1, 0))}
-                onReset={() => setCurrentStep(0)}
+                onPlayToggle={togglePlay}
+                onNext={() => setCurrentStep(Math.min(currentStep + 1, steps.length - 1))}
+                onPrev={() => setCurrentStep(Math.max(currentStep - 1, 0))}
+                onReset={handleReset}
                 showPatternOverlay={showPatternOverlay}
                 onShowPatternOverlayChange={setShowPatternOverlay}
                 patternOverlayLabel="Show pattern overlay"

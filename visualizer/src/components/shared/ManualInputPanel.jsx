@@ -55,7 +55,7 @@ export default function ManualInputPanel({
             <input
               className="mip-input"
               type="text"
-              value={values[f.key] ?? ''}
+              value={Array.isArray(values[f.key]) ? JSON.stringify(values[f.key]) : values[f.key] ?? ''}
               onChange={(e) => onChange(f.key, e.target.value)}
               placeholder={f.placeholder || ''}
               spellCheck={false}

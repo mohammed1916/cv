@@ -1,0 +1,28 @@
+{
+  "number": "528",
+  "title": "Random Pick With Weight",
+  "goal": "Solve Random Pick With Weight: Implement weighted random index selection using prefix sum and binary search.",
+  "strategy": "Implement weighted random index selection using prefix sum and binary search.",
+  "phases": [
+    "binary_search",
+    "compute_prefix",
+    "done",
+    "done_init",
+    "init",
+    "pick_result",
+    "pick_start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Sampling probability is proportional to weight, not index frequency; prefix-sum boundary handling must give each weight exactly its interval size."
+  ],
+  "checks": [],
+  "inputRules": [
+    "w must be a non-empty array",
+    "w must contain positive numbers"
+  ],
+  "source": [
+    "src/problems/Problem528/index.jsx",
+    "src/problems/Problem528/RandomPickWithWeightVisualizer.jsx"
+  ]
+}

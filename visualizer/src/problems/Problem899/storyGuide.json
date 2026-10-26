@@ -1,0 +1,27 @@
+{
+  "number": "899",
+  "title": "Orderly Queue",
+  "goal": "Find the least string reachable by allowed front-to-back moves.",
+  "strategy": "One choice allows rotations only. Two or more choices permit exchanges that can reach the sorted arrangement.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the least string reachable by allowed front-to-back moves.",
+    "inspect": "One choice allows rotations only. Two or more choices permit exchanges that can reach the sorted arrangement.",
+    "update": "One choice allows rotations only. Two or more choices permit exchanges that can reach the sorted arrangement.",
+    "done": "Find the least string reachable by allowed front-to-back moves."
+  },
+  "edgeCases": [
+    "Two choices permit full sorting",
+    "All letters equal",
+    "A rotation already begins smallest"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

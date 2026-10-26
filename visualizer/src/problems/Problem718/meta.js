@@ -1,5 +1,12 @@
 export const meta = {
-  number: '718', title: 'Maximum Length of Repeated Subarray', slug: 'maximum-length-of-repeated-subarray', difficulty: 'Medium',
-  tags: ['Array', 'Binary Search', 'Dynamic Programming', 'Sliding Window', 'Hash Function', 'Rolling Hash'], accent: '#be185d',
-  description: 'Extend a common run diagonally in a table: equal values grow the run, mismatches reset it.',
-}
+  "number": "718",
+  "title": "Maximum Length of Repeated Subarray",
+  "slug": "maximum-length-of-repeated-subarray",
+  "difficulty": "Medium",
+  "tags": [
+    "Array",
+    "Matrix"
+  ],
+  "accent": "#0891b2",
+  "description": "Find the length of the longest contiguous block shared by both arrays."
+};

@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/longest-substring-with-at-most-two-distinct-characters.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './LongestSubstringWithAtMostTwoDistinctCharactersVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -19,10 +22,7 @@ import PatternLegend from '../../components/PatternLegend'
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamplesOr('longest-substring-with-at-most-two-distinct-characters', [
-  { label: 'Example 1', s: 'eceba' },
-  { label: 'Example 2', s: 'ccaabbb' },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def lengthOfLongestSubstring(s):' },
@@ -216,7 +216,7 @@ function StringVisualization({ s, left, right }) {
               border: idx === left || idx === right ? '3px solid #4f46e5' : '1px solid var(--border)',
               fontSize: 13,
               fontWeight: 600,
-              color: 'var(--code-bg)',
+              color: (inWindow ? 'var(--text-on-light)' : 'var(--text-inverse)'),
               fontFamily: 'monospace',
             }}
             animate={{ scale: inWindow ? 1.1 : 1 }}
@@ -299,7 +299,7 @@ function VisualizationPanel({ step }) {
 
 export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualizer() {
   const [input, setInput] = useState({"label":"Example 1","s":"eceba"});
-  const [sInput, setSInput] = useState("eceba");
+  const [sInput, setSInput] = useState(String(AUTHORED_INITIAL.s));
   const { s, inputError } = useMemo(() => {
     try {
       const parsedS = sInput;
@@ -363,7 +363,6 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -381,6 +380,7 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && <PatternLegend patterns={PATTERNS} />}
     </>
   )
 
@@ -390,7 +390,7 @@ export default function LongestSubstringWithAtMostTwoDistinctCharactersVisualize
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: 'Longest Substring 2 Chars', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

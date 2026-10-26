@@ -1,1 +1,5 @@
-export { default } from "./KillProcessVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./KillProcessVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

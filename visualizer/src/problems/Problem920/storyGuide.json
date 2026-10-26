@@ -1,0 +1,31 @@
+{
+  "number": "920",
+  "title": "Number of Music Playlists",
+  "goal": "Count playlists of length goal using every song while requiring k other songs before a repeat.",
+  "strategy": "DP tracks playlist length and how many distinct songs have appeared. Add an unused song in n-used+1 ways, or replay one of used-k eligible songs; the final state must use all n songs.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count playlists of length goal using every song while requiring k other songs before a repeat.",
+    "inspect": "DP tracks playlist length and how many distinct songs have appeared. Add an unused song in n-used+1 ways, or replay one of used-k eligible songs; the final state must use all n songs.",
+    "update": "DP tracks playlist length and how many distinct songs have appeared. Add an unused song in n-used+1 ways, or replay one of used-k eligible songs; the final state must use all n songs.",
+    "done": "Count playlists of length goal using every song while requiring k other songs before a repeat."
+  },
+  "edgeCases": [
+    "A playlist of n positions uses each song once",
+    "One song can repeat when the gap is zero",
+    "A gap of n minus one forces cyclic reuse after the first order"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

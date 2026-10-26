@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/300.js';
 ﻿import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -8,7 +9,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem300Visualizer.css'
 
 
@@ -31,7 +32,7 @@ function generateSteps(input) {
 }
 
 export default function Problem300Visualizer() {
-    const examples = useMemo(() => getExamplesOr('300', []), [])
+    const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
     const [inputInput, setInputInput] = useState(JSON.stringify(examples[0]?.input ?? []))
     const { input, inputError } = useMemo(() => {
         try {

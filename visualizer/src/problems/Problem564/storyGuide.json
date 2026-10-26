@@ -1,0 +1,31 @@
+{
+  "number": "564",
+  "title": "Find the Closest Palindrome",
+  "goal": "Find the nearest different decimal palindrome, choosing the smaller number on a tie.",
+  "strategy": "Only mirrors of the current leading half and its immediate neighbors can be closest within this digit length. The all-nines and one-zero-one boundaries cover changes in digit count. Compare candidates with exact integers.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the nearest different decimal palindrome, choosing the smaller number on a tie.",
+    "inspect": "Only mirrors of the current leading half and its immediate neighbors can be closest within this digit length. The all-nines and one-zero-one boundaries cover changes in digit count. Compare candidates with exact integers.",
+    "update": "Only mirrors of the current leading half and its immediate neighbors can be closest within this digit length. The all-nines and one-zero-one boundaries cover changes in digit count. Compare candidates with exact integers.",
+    "done": "Find the nearest different decimal palindrome, choosing the smaller number on a tie."
+  },
+  "edgeCases": [
+    "A power of ten ties with the shorter all-nines boundary",
+    "An existing palindrome must choose a different value",
+    "The smallest positive input can choose zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

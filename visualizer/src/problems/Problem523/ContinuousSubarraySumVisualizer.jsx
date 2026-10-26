@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/continuous-subarray-sum.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ContinuousSubarraySumVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +33,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('continuous-subarray-sum')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(nums, k) {
   const steps = []
@@ -147,7 +150,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -170,7 +173,7 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 
       {/* Array */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Array (k={k})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -301,11 +304,11 @@ function VisualizationPanel({ nums, k, step, applyEx }) {
 }
 
 export default function ContinuousSubarraySumVisualizer() {
-  const DEFAULT_NUMS = EXAMPLES[0]?.nums ?? [23, 2, 4, 6, 7]
-  const DEFAULT_K = EXAMPLES[0]?.k ?? 6
 
-  const [numsInput, setNumsInput] = useState(JSON.stringify(DEFAULT_NUMS))
-  const [kInput, setKInput] = useState(String(DEFAULT_K))
+
+
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { nums, k, inputError } = useMemo(() => {
@@ -427,9 +430,6 @@ export default function ContinuousSubarraySumVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -447,8 +447,11 @@ export default function ContinuousSubarraySumVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
-      
+
     </div>
   )
 }

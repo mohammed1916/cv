@@ -1,0 +1,25 @@
+{
+  "number": "320",
+  "title": "Generalized Abbreviation",
+  "goal": "Solve Generalized Abbreviation: Generate all valid generalized abbreviations of a word.",
+  "strategy": "Generate all valid generalized abbreviations of a word.",
+  "phases": [
+    "enter",
+    "record-result",
+    "choose-abbreviate",
+    "abbr",
+    "choose-keep",
+    "keep",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Adjacent abbreviated characters combine into one count; pending counts must be flushed before a literal character or the end."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem320/index.jsx",
+    "src/problems/Problem320/GeneralizedAbbreviationVisualizer.jsx"
+  ]
+}

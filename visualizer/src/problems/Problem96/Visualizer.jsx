@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--96.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -26,11 +30,7 @@ const LINE_PATTERN_MAP = {
   8: 'done',
 }
 
-const EXAMPLES = [
-  { label: 'n = 3', n: 3 },
-  { label: 'n = 4', n: 4 },
-  { label: 'n = 5', n: 5 },
-]
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def numTrees(n):' },
@@ -246,7 +246,7 @@ function VisualizationPanel({ step }) {
 
 export default function Problem96Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [nInput, setNInput] = useState(3);
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { n, inputError } = useMemo(() => {
     try {
       const parsedN = Number(nInput); if (isNaN(parsedN)) throw new Error('n must be a number');
@@ -335,9 +335,6 @@ export default function Problem96Visualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -355,6 +352,9 @@ export default function Problem96Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -363,7 +363,7 @@ export default function Problem96Visualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'primary', title: '📊 Unique BSTs', dockMode: 'split-right' },
-      { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Status', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

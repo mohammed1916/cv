@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/string-to-integer-atoi.js';
 ﻿import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './StringToIntegerAtoiVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -184,7 +185,7 @@ function generateSteps(originalStr) {
   return steps
 }
 
-const EXAMPLES = getExamples('string-to-integer-atoi')
+const EXAMPLES = authoredExamples0
 
 export default function StringToIntegerAtoiVisualizer() {
   const [sInput, setSInput] = useState('   -42')
@@ -240,16 +241,7 @@ export default function StringToIntegerAtoiVisualizer() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', gap: 12, marginBottom: 24, alignItems: 'center' }}>
-              <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>s=</span>
-              <input
-                value={sInput}
-                onChange={(e) => { setSInput(e.target.value); handleReset() }}
-                placeholder="   -42"
-                className="atoi-input"
-                style={{ flex: 1, margin: 0, fontFamily: 'monospace' }}
-              />
-            </div>
+            
 
             {step?.phase === 'init' && (
               <div className="atoi-lstrip-alert">
@@ -392,7 +384,7 @@ export default function StringToIntegerAtoiVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'main', title: 'Visualizer', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

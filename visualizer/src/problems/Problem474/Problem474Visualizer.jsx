@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/ones-and-zeroes.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem474Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -18,9 +21,7 @@ import { createPortal } from 'react-dom'
 
 const PATTERNS = []
 
-const EXAMPLES = getExamplesOr('ones-and-zeroes', [
-  { label: 'Example 1', strs: ['10', '0001', '111001', '1', '0'], m: 5, n: 3 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SOLUTION_CODE_INLINE = [
   { line: 1, text: 'def findMaxForm(strs, m, n):' },
@@ -100,7 +101,7 @@ function DPTableView({ dp, m, n, updateRow, updateCol }) {
                       textAlign: 'center',
                       fontWeight: 600,
                       backgroundColor: isUpdated ? '#fef08a' : i === 0 || j === 0 ? '#e0f2fe' : 'var(--surface)',
-                      color: isUpdated ? '#92400e' : 'var(--surface2)',
+                      color: isUpdated ? '#92400e' : (i === 0 || j === 0 ? 'var(--text-on-light)' : 'var(--text)'),
                       minWidth: 35,
                     }}
                   >
@@ -127,7 +128,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
       )}
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -184,7 +185,7 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
 
       {step?.dp && (
         <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>DP Table (2D)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>DP Table (2D)</div>
           <DPTableView dp={step.dp} m={m} n={n} updateRow={step.updateRow} updateCol={step.updateCol} />
         </div>
       )}
@@ -207,9 +208,9 @@ function VisualizationPanel({ strs, m, n, step, applyEx }) {
 
 export default function Problem474Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [strsInput, setStrsInput] = useState("[\"10\",\"0001\",\"111001\",\"1\",\"0\"]");
-  const [mInput, setMInput] = useState(5);
-  const [nInput, setNInput] = useState(3);
+  const [strsInput, setStrsInput] = useState(JSON.stringify(AUTHORED_INITIAL.strs));
+  const [mInput, setMInput] = useState(String(AUTHORED_INITIAL.m));
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n));
   const { strs, m, n, inputError } = useMemo(() => {
     try {
       const parsedStrs = JSON.parse(strsInput); if (!Array.isArray(parsedStrs)) throw new Error('strs must be an array');

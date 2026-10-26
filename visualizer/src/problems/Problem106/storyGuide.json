@@ -1,0 +1,25 @@
+{
+  "number": "106",
+  "title": "Construct Binary Tree from Inorder and Postorder Traversal",
+  "goal": "Solve Construct Binary Tree from Inorder and Postorder Traversal: Construct a binary tree from its inorder and postorder traversal arrays.",
+  "strategy": "Construct a binary tree from its inorder and postorder traversal arrays.",
+  "phases": [
+    "visit",
+    "compare",
+    "update",
+    "return"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not inorder",
+      "outcome": "return None"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem106/index.jsx",
+    "src/problems/Problem106/ConstructBinaryTreeFromInorderAndPostorderTraversalVisualizer.jsx"
+  ]
+}

@@ -1,14 +1,5 @@
 /* Binary Tree Zigzag Level Order Traversal Visualizer */
-.bzlt-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-  background: var(--code-bg);
-}
+
 
 .bzlt-panel {
   display: flex;

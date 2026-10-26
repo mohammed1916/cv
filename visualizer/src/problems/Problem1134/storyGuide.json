@@ -1,0 +1,31 @@
+{
+  "number": "1134",
+  "title": "Armstrong Number",
+  "goal": "Decide whether a number equals the sum of its digits raised to its digit count.",
+  "strategy": "The exponent is fixed by the original number length. Accumulate each powered digit before comparing with the unchanged original.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether a number equals the sum of its digits raised to its digit count.",
+    "inspect": "The exponent is fixed by the original number length. Accumulate each powered digit before comparing with the unchanged original.",
+    "update": "The exponent is fixed by the original number length. Accumulate each powered digit before comparing with the unchanged original.",
+    "done": "Decide whether a number equals the sum of its digits raised to its digit count."
+  },
+  "edgeCases": [
+    "Four-digit near miss",
+    "Single digit",
+    "Longer Armstrong number"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "number": "617",
+  "title": "Merge Two Binary Trees",
+  "goal": "Merge trees by adding corresponding values and retaining unmatched branches.",
+  "strategy": "Recursion aligns positions rather than values. Each output node sums the two nodes at that position; an absent node contributes zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Merge trees by adding corresponding values and retaining unmatched branches.",
+    "inspect": "Recursion aligns positions rather than values. Each output node sums the two nodes at that position; an absent node contributes zero.",
+    "update": "Recursion aligns positions rather than values. Each output node sums the two nodes at that position; an absent node contributes zero.",
+    "done": "Merge trees by adding corresponding values and retaining unmatched branches."
+  },
+  "edgeCases": [
+    "One input is empty",
+    "Overlapping single nodes",
+    "Unmatched opposite branches"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

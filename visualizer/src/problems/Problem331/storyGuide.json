@@ -1,0 +1,27 @@
+{
+  "number": "331",
+  "title": "Verify Preorder Serialization of a Binary Tree",
+  "goal": "Solve Verify Preorder Serialization of a Binary Tree: Verify if string is valid preorder serialization of BST.",
+  "strategy": "Verify if string is valid preorder serialization of BST.",
+  "phases": [
+    "init",
+    "consume",
+    "invalid",
+    "null",
+    "node",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "slots < 0",
+      "outcome": "return False  # no slot available -> invalid"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem331/index.jsx",
+    "src/problems/Problem331/VerifyPreorderSerializationofaBinaryTreeVisualizer.jsx"
+  ]
+}

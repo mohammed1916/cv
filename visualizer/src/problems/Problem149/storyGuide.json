@@ -1,0 +1,21 @@
+{
+  "number": "149",
+  "title": "Max Points on a Line",
+  "goal": "Solve Max Points on a Line: For each anchor point, hash the reduced slope to every other point and find the largest bucket.",
+  "strategy": "For each anchor point, hash the reduced slope to every other point and find the largest bucket.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Vertical lines need a separate slope representation, and repeated coordinates must count without dividing by zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "points must be an array",
+    "Each point must contain two safe integers: [x, y].",
+    "Points must be distinct, as required by this problem."
+  ],
+  "source": [
+    "src/problems/Problem149/index.jsx",
+    "src/problems/Problem149/MaxPointsOnALineVisualizer.jsx"
+  ]
+}

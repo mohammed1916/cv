@@ -1,0 +1,20 @@
+{
+  "number": "378",
+  "title": "Kth Smallest Element in a Sorted Matrix",
+  "goal": "Solve Kth Smallest Element in a Sorted Matrix: Exploit sorted matrix rows and columns to locate the kth value without treating repeated values as one item.",
+  "strategy": "Exploit sorted matrix rows and columns to locate the kth value without treating repeated values as one item.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Duplicate entries count separately toward k; k is a rank among cells, not distinct values."
+  ],
+  "checks": [],
+  "inputRules": [
+    "matrix must be an array",
+    "k must be a number"
+  ],
+  "source": [
+    "src/problems/Problem378/index.jsx",
+    "src/problems/Problem378/Problem378Visualizer.jsx"
+  ]
+}

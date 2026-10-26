@@ -1,0 +1,31 @@
+{
+  "number": "1846",
+  "title": "Maximum Element After Decreasing and Rearranging",
+  "goal": "Maximize the final value after decreases and rearrangement under adjacent-gap constraints.",
+  "strategy": "Sort and greedily make each position as large as permitted: no greater than its original value or the preceding repaired value plus one. The first position becomes one.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the final value after decreases and rearrangement under adjacent-gap constraints.",
+    "inspect": "Sort and greedily make each position as large as permitted: no greater than its original value or the preceding repaired value plus one. The first position becomes one.",
+    "update": "Sort and greedily make each position as large as permitted: no greater than its original value or the preceding repaired value plus one. The first position becomes one.",
+    "done": "Maximize the final value after decreases and rearrangement under adjacent-gap constraints."
+  },
+  "edgeCases": [
+    "All large values form a full ladder",
+    "Already optimal",
+    "Repeated ones cannot increase"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

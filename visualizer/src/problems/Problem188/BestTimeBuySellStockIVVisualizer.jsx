@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/best-time-buy-sell-stock-iv.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -8,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from "../../config/examplesRegistry";
+
 import "./BestTimeBuySellStockIVVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -36,7 +39,7 @@ const SOLUTION_CODE_INLINE = [
 
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamples('best-time-buy-sell-stock-iv');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(k, prices) {
   const n = prices.length;
@@ -66,8 +69,8 @@ function generateSteps(k, prices) {
 
 export default function BestTimeBuySellStockIVVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [kInput, setKInput] = useState(2);
-  const [pricesInput, setPricesInput] = useState("[3,2,6,5,0,3]");
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
+  const [pricesInput, setPricesInput] = useState(JSON.stringify(AUTHORED_INITIAL.prices));
   const { k, prices, inputError } = useMemo(() => {
     try {
       const parsedK = Number(kInput); if (isNaN(parsedK)) throw new Error('k must be a number');
@@ -119,7 +122,7 @@ export default function BestTimeBuySellStockIVVisualizer() {
             ))}
           </div>
 
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>Price chart</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>Price chart</div>
           <svg width={SVG_W} height={SVG_H + 4} style={{ border: '1px solid var(--text)', borderRadius: 4, backgroundColor: 'var(--surface)' }}>
             <polyline points={polyline} fill="none" stroke="#0ea5e9" strokeWidth="2" />
             {prices.map((p, i) => (
@@ -132,14 +135,14 @@ export default function BestTimeBuySellStockIVVisualizer() {
               <span key={i} style={{
                 padding: '4px 6px', borderRadius: 3,
                 backgroundColor: i === activeI ? '#fbbf24' : '#f3f4f6',
-                color: 'var(--surface2)'
+                color: 'var(--text-on-light)'
               }}>
                 {p}
               </span>
             ))}
           </div>
 
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginTop: 4 }}>DP table (partial)</div>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)', marginTop: 4 }}>DP table (partial)</div>
           <div style={{ overflowX: 'auto', flex: 1 }}>
             <table style={{ borderCollapse: 'collapse', fontSize: 10 }}>
               <thead>
@@ -159,7 +162,7 @@ export default function BestTimeBuySellStockIVVisualizer() {
                         <motion.td key={i} animate={{ scale: isActive ? 1.2 : 1 }} style={{
                           padding: '4px 6px', border: '1px solid var(--text)',
                           backgroundColor: isActive ? '#dbeafe' : val > 0 ? '#f0fdf4' : 'white',
-                          color: isActive ? '#1e40af' : 'var(--surface2)', fontWeight: isActive ? 'bold' : 'normal',
+                          color: isActive ? '#1e40af' : 'var(--text-on-light)', fontWeight: isActive ? 'bold' : 'normal',
                           minWidth: 32, textAlign: 'center'
                         }}>
       
@@ -177,11 +180,11 @@ export default function BestTimeBuySellStockIVVisualizer() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, padding: 8, backgroundColor: 'var(--surface)', borderRadius: 6 }}>
             <div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Transactions</div>
-              <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{activeT >= 0 ? activeT : '—'}</div>
+              <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{activeT >= 0 ? activeT : '—'}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>Day</div>
-              <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--surface2)' }}>{activeI >= 0 ? activeI : '—'}</div>
+              <div style={{ fontSize: 13, fontWeight: 'bold', color: 'var(--text)' }}>{activeI >= 0 ? activeI : '—'}</div>
             </div>
             <div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 4 }}>max_so_far</div>

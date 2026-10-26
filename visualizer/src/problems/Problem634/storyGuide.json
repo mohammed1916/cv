@@ -1,0 +1,31 @@
+{
+  "number": "634",
+  "title": "Find the Derangement of An Array",
+  "goal": "Count permutations in which no position keeps its original item.",
+  "strategy": "Focus on the item paired with the first position. Either those two items swap as a pair or the displaced item participates in a larger cycle, giving D(n)=(n-1)*(D(n-1)+D(n-2)).",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count permutations in which no position keeps its original item.",
+    "inspect": "Focus on the item paired with the first position. Either those two items swap as a pair or the displaced item participates in a larger cycle, giving D(n)=(n-1)*(D(n-1)+D(n-2)).",
+    "update": "Focus on the item paired with the first position. Either those two items swap as a pair or the displaced item participates in a larger cycle, giving D(n)=(n-1)*(D(n-1)+D(n-2)).",
+    "done": "Count permutations in which no position keeps its original item."
+  },
+  "edgeCases": [
+    "One item cannot leave its own position",
+    "Two items have only their swap",
+    "A larger count wraps modulo the required modulus"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

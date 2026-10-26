@@ -198,7 +198,7 @@ export default function SumOfTwoIntegersVisualizer() {
                 animate={{ opacity: 1, y: 0 }}
                 style={{ padding: 12, backgroundColor: 'var(--surface)', borderRadius: 6, fontSize: 12 }}
               >
-                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--surface2)' }}>{step.message}</div>
+                <div style={{ fontWeight: 600, marginBottom: 8, color: 'var(--text)' }}>{step.message}</div>
               </motion.div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>

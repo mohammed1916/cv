@@ -1,5 +1,12 @@
 export const meta = {
-  number: '591', title: 'Tag Validator', slug: 'tag-validator', difficulty: 'Hard',
-  tags: ['String', 'Stack'], accent: '#be123c',
-  description: 'Validate nested tags with a stack, treating CDATA sections as literal text.',
-}
+  "number": "591",
+  "title": "Tag Validator",
+  "slug": "tag-validator",
+  "difficulty": "Hard",
+  "tags": [
+    "String",
+    "Stack"
+  ],
+  "accent": "#0891b2",
+  "description": "Decide whether markup is exactly one valid root tag containing properly nested content."
+};

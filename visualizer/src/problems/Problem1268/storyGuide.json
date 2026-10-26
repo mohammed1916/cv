@@ -1,0 +1,31 @@
+{
+  "number": "1268",
+  "title": "Search Suggestions System",
+  "goal": "Show at most three lexicographically smallest products for every typed prefix.",
+  "strategy": "Insert products in sorted order and cache the first three at each prefix node. Queries follow one edge per typed character and read the cached list.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Show at most three lexicographically smallest products for every typed prefix.",
+    "inspect": "Insert products in sorted order and cache the first three at each prefix node. Queries follow one edge per typed character and read the cached list.",
+    "update": "Insert products in sorted order and cache the first three at each prefix node. Queries follow one edge per typed character and read the cached list.",
+    "done": "Show at most three lexicographically smallest products for every typed prefix."
+  },
+  "edgeCases": [
+    "Absent prefix stays absent",
+    "Fewer than three products",
+    "Exact product also prefixes longer products"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

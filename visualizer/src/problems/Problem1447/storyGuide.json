@@ -1,0 +1,31 @@
+{
+  "number": "1447",
+  "title": "Simplified Fractions",
+  "goal": "List all reduced positive proper fractions with denominator at most n.",
+  "strategy": "Numerator smaller than denominator makes a proper fraction. Coprime numerator and denominator ensure it is already reduced and not a duplicate.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List all reduced positive proper fractions with denominator at most n.",
+    "inspect": "Numerator smaller than denominator makes a proper fraction. Coprime numerator and denominator ensure it is already reduced and not a duplicate.",
+    "update": "Numerator smaller than denominator makes a proper fraction. Coprime numerator and denominator ensure it is already reduced and not a duplicate.",
+    "done": "List all reduced positive proper fractions with denominator at most n."
+  },
+  "edgeCases": [
+    "No positive proper fraction with denominator one",
+    "One reduced half",
+    "Prime and composite denominators mix"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

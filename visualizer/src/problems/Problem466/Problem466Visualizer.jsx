@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/count-the-repetitions.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem466Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('count-the-repetitions')
 
 const PATTERNS = []
 
-const EXAMPLES = getExamples('count-the-repetitions')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(s1, s2) {
   const steps = []
@@ -115,7 +118,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -137,7 +140,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           s1: "{s1}"
         </div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -168,7 +171,7 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           s2: "{s2}" (Match target)
         </div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
@@ -247,8 +250,8 @@ function VisualizationPanel({ s1, s2, step, applyEx }) {
 
 export default function Problem466Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [s1Input, setS1Input] = useState("acb");
-  const [s2Input, setS2Input] = useState("ab");
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1));
+  const [s2Input, setS2Input] = useState(String(AUTHORED_INITIAL.s2));
   const { s1, s2, inputError } = useMemo(() => {
     try {
       const parsedS1 = s1Input;

@@ -1,0 +1,252 @@
+.stock-story-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stock-story__explanation {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted, #94a3b8);
+  margin: 0;
+}
+
+/* ─── Metric Cards ────────────────────────────────────────────────────────── */
+.stock-story__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.stock-story__metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px;
+  background: var(--surface2, #1e293b);
+  border: 1px solid var(--border, #334155);
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.stock-story__metric-card--wide {
+  grid-column: span 1;
+}
+
+@media (min-width: 640px) {
+  .stock-story__metric-card--wide {
+    grid-column: span 2;
+  }
+}
+
+.stock-story__metric-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-muted, #94a3b8);
+  font-weight: 600;
+}
+
+.stock-story__metric-val {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+  color: var(--text, #f8fafc);
+}
+
+.stock-story__metric-val--min {
+  color: #38bdf8;
+}
+
+.stock-story__metric-val--profit {
+  color: #22c55e;
+}
+
+.stock-story__metric-val--trade {
+  color: #38bdf8;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stock-story__metric-sub {
+  font-size: 11px;
+  color: var(--text-dim, #64748b);
+}
+
+/* ─── SVG Viewport & Chart ────────────────────────────────────────────────── */
+.stock-story__viewport {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border, #334155);
+  background: var(--surface2, #0f172a);
+}
+
+.stock-story__grid-line {
+  stroke: var(--border, #334155);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+.stock-story__grid-label {
+  fill: var(--text-dim, #64748b);
+  font-size: 10px;
+  font-family: var(--font-mono, monospace);
+}
+
+.stock-story__axis-line {
+  stroke: var(--border, #475569);
+  stroke-width: 1.5;
+}
+
+/* minPrice Reference Line */
+.stock-story__min-line {
+  stroke: #38bdf8;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  opacity: 0.85;
+}
+
+.stock-story__min-line-label {
+  fill: #38bdf8;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+}
+
+/* Best Trade Connection Arc */
+.stock-story__arc-path {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  transition: all 0.25s ease;
+}
+
+.stock-story__arc-badge {
+  fill: rgba(34, 197, 94, 0.25);
+  stroke: #22c55e;
+  stroke-width: 1;
+}
+
+.stock-story__arc-text {
+  fill: #22c55e;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono, monospace);
+}
+
+/* Price Bars */
+.stock-story__bar-group {
+  cursor: pointer;
+  outline: none;
+}
+
+.stock-story__bar {
+  fill: var(--surface3, #1e293b);
+  stroke: var(--border, #475569);
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.stock-story__bar-group[data-state='min-price'] .stock-story__bar {
+  fill: rgba(56, 189, 248, 0.25);
+  stroke: #38bdf8;
+  stroke-width: 2;
+}
+
+.stock-story__bar-group[data-state='current'] .stock-story__bar {
+  fill: rgba(245, 158, 11, 0.35);
+  stroke: #f59e0b;
+  stroke-width: 2.5;
+}
+
+.stock-story__bar-group[data-state='best-buy'] .stock-story__bar {
+  fill: rgba(56, 189, 248, 0.4);
+  stroke: #0ea5e9;
+  stroke-width: 2.5;
+}
+
+.stock-story__bar-group[data-state='best-sell'] .stock-story__bar {
+  fill: rgba(34, 197, 94, 0.4);
+  stroke: #22c55e;
+  stroke-width: 2.5;
+}
+
+/* Profit Overlay */
+.stock-story__profit-overlay {
+  fill: rgba(34, 197, 94, 0.45);
+  stroke: #22c55e;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 2;
+  animation: stock-pulse 1.6s infinite ease-in-out;
+}
+
+@keyframes stock-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Text Labels */
+.stock-story__price-text {
+  fill: var(--text, #f8fafc);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+}
+
+.stock-story__day-text {
+  fill: var(--text-muted, #94a3b8);
+  font-size: 11px;
+  font-family: var(--font-mono, monospace);
+}
+
+/* Badges */
+.stock-story__badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-family: var(--font-mono, monospace);
+}
+
+.stock-story__badge--min {
+  fill: #38bdf8;
+}
+
+.stock-story__badge--buy {
+  fill: #0ea5e9;
+}
+
+.stock-story__badge--sell {
+  fill: #22c55e;
+}
+
+.stock-story__badge--success {
+  fill: #22c55e;
+}
+
+.stock-story__badge--eval {
+  fill: #f97316;
+}
+
+/* Current Pointer */
+.stock-story__pointer-arrow {
+  fill: #f59e0b;
+}
+
+.stock-story__pointer-pill {
+  fill: #f59e0b;
+}
+
+.stock-story__pointer-text {
+  fill: #0f172a;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: var(--font-mono, monospace);
+}

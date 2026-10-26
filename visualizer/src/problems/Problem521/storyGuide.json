@@ -1,0 +1,20 @@
+{
+  "number": "521",
+  "title": "Longest Uncommon Subsequence I",
+  "goal": "Solve Longest Uncommon Subsequence I: Find the longest uncommon subsequence between two strings.",
+  "strategy": "Find the longest uncommon subsequence between two strings.",
+  "phases": [
+    "init",
+    "loop"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "If the strings differ, the longer whole string is an uncommon subsequence; identical strings have no uncommon subsequence."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem521/index.jsx",
+    "src/problems/Problem521/LongestUncommonSubsequenceIVisualizer.jsx"
+  ]
+}

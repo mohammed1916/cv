@@ -1,0 +1,31 @@
+{
+  "number": "1139",
+  "title": "Largest 1-Bordered Square",
+  "goal": "Find the largest square whose entire border consists of ones.",
+  "strategy": "Precompute rightward and downward one-runs. Four run lengths verify a candidate border without inspecting its interior.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the largest square whose entire border consists of ones.",
+    "inspect": "Precompute rightward and downward one-runs. Four run lengths verify a candidate border without inspecting its interior.",
+    "update": "Precompute rightward and downward one-runs. Four run lengths verify a candidate border without inspecting its interior.",
+    "done": "Find the largest square whose entire border consists of ones."
+  },
+  "edgeCases": [
+    "No ones",
+    "Only singleton squares",
+    "Entire grid border qualifies"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

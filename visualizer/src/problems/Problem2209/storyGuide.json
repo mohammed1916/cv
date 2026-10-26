@@ -1,0 +1,31 @@
+{
+  "number": "2209",
+  "title": "Minimum White Tiles After Covering With Carpets",
+  "goal": "Cover the most white tiles using a limited number of fixed-length carpets.",
+  "strategy": "Prefix DP compares leaving the last tile uncovered with ending a carpet there. Overlap is allowed, so a carpet transition can jump to the prefix before its length without tracking previous carpet positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Cover the most white tiles using a limited number of fixed-length carpets.",
+    "inspect": "Prefix DP compares leaving the last tile uncovered with ending a carpet there. Overlap is allowed, so a carpet transition can jump to the prefix before its length without tracking previous carpet positions.",
+    "update": "Prefix DP compares leaving the last tile uncovered with ending a carpet there. Overlap is allowed, so a carpet transition can jump to the prefix before its length without tracking previous carpet positions.",
+    "done": "Cover the most white tiles using a limited number of fixed-length carpets."
+  },
+  "edgeCases": [
+    "An all-black floor has no uncovered white cost",
+    "A long carpet can cover the entire floor",
+    "No carpet leaves every white tile visible"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

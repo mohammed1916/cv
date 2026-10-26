@@ -209,7 +209,7 @@
 .chat-history-delete:hover {
   border-color: var(--border);
   background: var(--surface2);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .chat-attach-step-btn {
@@ -253,7 +253,7 @@
 .chat-clear-btn:hover,
 .chat-close-btn:hover {
   background: var(--surface2);
-  color: var(--surface2);
+  color: var(--text);
   border-color: var(--border);
 }
 
@@ -1633,3 +1633,246 @@ body.chat-select-mode .selectable.selected {
 .chat-drawer--floating .chat-header {
   padding-top: 44px !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Chat Generation / Stop Control
+───────────────────────────────────────────────────────────── */
+
+.chat-generating-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  min-width: 0;
+
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+
+  user-select: none;
+}
+
+.chat-generating-label::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  animation: chat-generating-pulse 1.15s ease-in-out infinite;
+}
+
+@keyframes chat-generating-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* Composer stays usable while the model generates. */
+
+.chat-composer-row {
+  align-items: flex-end;
+}
+
+.chat-composer-row .chat-textarea {
+  min-width: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Stop Generation Button
+
+   Uses the same footprint as Send so switching Send -> Stop
+   does not move the textarea.
+───────────────────────────────────────────────────────────── */
+
+.chat-stop-btn {
+  position: relative;
+
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid color-mix(
+    in srgb,
+    var(--danger, #ef4444) 65%,
+    var(--border)
+  );
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--danger, #ef4444) 92%,
+        white
+      ),
+      var(--danger, #dc2626)
+    );
+
+  color: #fff;
+
+  cursor: pointer;
+
+  opacity: 1;
+
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    box-shadow 120ms ease,
+    border-color 120ms ease;
+}
+
+.chat-stop-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  filter: brightness(1.06);
+
+  border-color: var(--danger, #ef4444);
+
+  box-shadow:
+    0 10px 24px
+    color-mix(
+      in srgb,
+      var(--danger, #ef4444) 30%,
+      transparent
+    );
+}
+
+.chat-stop-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+
+/* Actual stop glyph. */
+
+.chat-stop-square {
+  display: block;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 2px;
+
+  background: currentColor;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+
+/* Don't make the composer look disabled while generating.
+   User may prepare their next question while waiting. */
+
+.chat-textarea.chat-textarea--streaming {
+  opacity: 1;
+}
+
+
+/* The streaming assistant bubble gets a subtle active indicator. */
+
+.chat-msg-text.streaming {
+  border-right:
+    2px solid var(--primary);
+
+  box-shadow:
+    inset -1px 0 0
+    color-mix(
+      in srgb,
+      var(--primary) 18%,
+      transparent
+    );
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Floating Chat
+───────────────────────────────────────────────────────────── */
+
+.chat-drawer--floating .chat-stop-btn {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Docked Chat
+───────────────────────────────────────────────────────────── */
+
+.chat-drawer--docked .chat-generating-label {
+  font-size: 10px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile
+───────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .chat-stop-btn {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+
+    border-radius: 12px;
+  }
+
+  .chat-stop-square {
+    width: 11px;
+    height: 11px;
+  }
+
+  .chat-generating-label {
+    font-size: 10px;
+  }
+}
+/* Focused tutor layout: readable controls, quiet surfaces, explicit selection. */
+.chat-drawer .chat-header { align-items:flex-start; flex-wrap:wrap; padding:14px; background:var(--surface2); border-bottom:1px solid var(--border); gap:12px; max-height:40%; overflow:auto; }
+.chat-drawer .chat-header-left { align-items:flex-start; flex:1 1 230px; min-width:0; }
+.chat-drawer .chat-header-left > div { min-width:0; width:100%; }
+.chat-drawer .chat-header-title { font-size:16px; line-height:1.4; }
+.chat-drawer .chat-header-icon { border-radius:9px; width:34px; height:34px; flex-shrink:0; }
+.chat-drawer .chat-header-actions { gap:6px; }
+.chat-drawer .chat-header-actions button { width:34px; height:34px; padding:7px; border-radius:8px; color:var(--text); background:var(--surface); border:1px solid var(--border); }
+.chat-drawer .chat-provider-settings { margin-top:8px; font-size:12px; color:var(--text-muted); }
+.chat-drawer .chat-provider-settings summary { cursor:pointer; padding:5px 0; }
+.chat-drawer .chat-provider-settings[open] { padding-bottom:4px; }
+.chat-drawer .chat-model-controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.chat-drawer .chat-model-controls label { flex:1 1 120px; min-width:0; }
+.chat-drawer .chat-model-controls input, .chat-drawer .chat-model-controls select { min-height:34px; width:100%; box-sizing:border-box; }
+.chat-context-tools { padding:10px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:8px; flex:0 0 auto; border-bottom:1px solid var(--border); background:var(--surface); }
+.chat-context-tools > span { flex:1 1 180px; font-size:12px; line-height:1.5; color:var(--text-muted); }
+.chat-drawer .chat-selection-banner { padding:8px 14px; font-size:12px; line-height:1.5; background:color-mix(in srgb,var(--primary) 10%,var(--surface)); color:var(--text); }
+.chat-drawer .chat-messages { padding:16px; min-height:70px; }
+.chat-drawer .chat-empty { text-align:left; padding:18px 4px; line-height:1.65; }
+.chat-drawer .chat-empty-icon { border-radius:12px; }
+.chat-drawer button:focus-visible, .chat-drawer summary:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+.chat-code-preview { flex-basis:100%; min-width:0; margin:8px 0; color:var(--text); font-size:12px; }
+.chat-code-preview summary { cursor:pointer; }
+.chat-code-preview pre { max-height:150px; overflow:auto; padding:10px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; white-space:pre; }
+.chat-exit-selection { min-height:34px; padding:6px 10px; border:1px solid var(--border); border-radius:8px; background:var(--surface2); color:var(--text); font:inherit; font-size:12px; cursor:pointer; }
+.chat-selection-status:empty { display:none; }
+.chat-selection-status { flex:0 0 auto; max-height:130px; overflow:auto; padding:10px 14px; border-bottom:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:12px; line-height:1.5; overflow-wrap:anywhere; }
+.chat-selection-status small { display:block; color:var(--text-muted); margin-top:4px; }

@@ -1,0 +1,31 @@
+{
+  "number": "2215",
+  "title": "Find the Difference of Two Arrays",
+  "goal": "Return distinct values present only in each of two arrays.",
+  "strategy": "Membership sets remove duplicate occurrences. Check each distinct value against the opposite set; values shared by both appear in neither difference.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return distinct values present only in each of two arrays.",
+    "inspect": "Membership sets remove duplicate occurrences. Check each distinct value against the opposite set; values shared by both appear in neither difference.",
+    "update": "Membership sets remove duplicate occurrences. Check each distinct value against the opposite set; values shared by both appear in neither difference.",
+    "done": "Return distinct values present only in each of two arrays."
+  },
+  "edgeCases": [
+    "Identical sets yield two empty differences",
+    "Disjoint sets keep all distinct values",
+    "Signed values follow ordinary set membership"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

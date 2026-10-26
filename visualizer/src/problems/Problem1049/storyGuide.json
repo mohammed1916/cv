@@ -1,0 +1,31 @@
+{
+  "number": "1049",
+  "title": "Last Stone Weight II",
+  "goal": "Minimize the final stone weight after repeatedly smashing pairs.",
+  "strategy": "Every outcome corresponds to splitting weights into two signed groups. Find the largest achievable subset sum at most half the total; the remaining imbalance is total minus twice that sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the final stone weight after repeatedly smashing pairs.",
+    "inspect": "Every outcome corresponds to splitting weights into two signed groups. Find the largest achievable subset sum at most half the total; the remaining imbalance is total minus twice that sum.",
+    "update": "Every outcome corresponds to splitting weights into two signed groups. Find the largest achievable subset sum at most half the total; the remaining imbalance is total minus twice that sum.",
+    "done": "Minimize the final stone weight after repeatedly smashing pairs."
+  },
+  "edgeCases": [
+    "An exact equal partition can leave zero",
+    "A single stone remains unchanged",
+    "One dominant stone exceeds all other weights combined"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

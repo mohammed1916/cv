@@ -1,0 +1,31 @@
+{
+  "number": "1916",
+  "title": "Count Ways to Build Rooms in an Ant Colony",
+  "goal": "Count room-building orders that place every parent before its children.",
+  "strategy": "Compute subtree sizes and order counts bottom-up. Child orders interleave according to a multinomial coefficient while preserving their internal parent constraints.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count room-building orders that place every parent before its children.",
+    "inspect": "Compute subtree sizes and order counts bottom-up. Child orders interleave according to a multinomial coefficient while preserving their internal parent constraints.",
+    "update": "Compute subtree sizes and order counts bottom-up. Child orders interleave according to a multinomial coefficient while preserving their internal parent constraints.",
+    "done": "Count room-building orders that place every parent before its children."
+  },
+  "edgeCases": [
+    "One chain forces a single order",
+    "Every nonroot room is independent after root",
+    "Parent indices need not precede child indices"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

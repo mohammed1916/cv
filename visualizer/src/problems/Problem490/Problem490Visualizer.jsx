@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/the-maze.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './Problem490Visualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -45,10 +48,7 @@ const LINE_PATTERN_MAP = {
 
 }
 
-const EXAMPLES = getExamplesOr('the-maze', [
-  { label: 'Example 1', maze: [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start: [0,4], destination: [4,4] },
-  { label: 'Example 2', maze: [[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]], start: [0,4], destination: [3,2] },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function generateSteps(maze, start, destination) {
   const steps = []
@@ -159,7 +159,7 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
       </div>
 
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Maze</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Maze</div>
         <div style={{
           display: 'inline-grid',
           gridTemplateColumns: `repeat(${maze[0].length}, 1fr)`,
@@ -248,9 +248,9 @@ function VisualizationPanel({ maze, start, destination, step, applyEx }) {
 
 export default function Problem490Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [mazeInput, setMazeInput] = useState("[[0,0,1,0,0],[0,0,0,0,0],[0,0,0,1,0],[1,1,0,1,1],[0,0,0,0,0]]");
-  const [startInput, setStartInput] = useState("[0,0]");
-  const [destinationInput, setDestinationInput] = useState("[4,4]");
+  const [mazeInput, setMazeInput] = useState(JSON.stringify(AUTHORED_INITIAL.maze));
+  const [startInput, setStartInput] = useState(JSON.stringify(AUTHORED_INITIAL.start));
+  const [destinationInput, setDestinationInput] = useState(JSON.stringify(AUTHORED_INITIAL.destination));
   const { maze, start, destination, inputError } = useMemo(() => {
     try {
       const parsedMaze = JSON.parse(mazeInput); if (!Array.isArray(parsedMaze)) throw new Error('maze must be an array');
@@ -331,7 +331,6 @@ export default function Problem490Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -349,6 +348,7 @@ export default function Problem490Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={Object.keys(PATTERNS)} />}
       </FloatingPanel>
       {showPatternOverlay && step && <PatternOverlay step={step} activeLineDom={activeLineDom} />}
     </div>

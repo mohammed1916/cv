@@ -1,0 +1,31 @@
+{
+  "number": "1155",
+  "title": "Number of Dice Rolls With Target Sum",
+  "goal": "Count dice outcomes reaching the target sum modulo one billion and seven.",
+  "strategy": "For each die count, the final face partitions possibilities into disjoint previous-sum groups. Read a separate previous row so one die cannot be reused.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count dice outcomes reaching the target sum modulo one billion and seven.",
+    "inspect": "For each die count, the final face partitions possibilities into disjoint previous-sum groups. Read a separate previous row so one die cannot be reused.",
+    "update": "For each die count, the final face partitions possibilities into disjoint previous-sum groups. Read a separate previous row so one die cannot be reused.",
+    "done": "Count dice outcomes reaching the target sum modulo one billion and seven."
+  },
+  "edgeCases": [
+    "Target below minimum achievable sum",
+    "Only one face on each die",
+    "One die with unreachable target"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

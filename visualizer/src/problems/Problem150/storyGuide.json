@@ -1,0 +1,17 @@
+{
+  "number": "150",
+  "title": "Evaluate Reverse Polish Notation",
+  "goal": "Solve Evaluate Reverse Polish Notation: Use a stack: push numbers, pop two operands on each operator, push the result.",
+  "strategy": "Use a stack: push numbers, pop two operands on each operator, push the result.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Pop the right operand before the left operand for subtraction and division. Division truncates toward zero."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem150/index.jsx",
+    "src/problems/Problem150/EvalRPNVisualizer.jsx"
+  ]
+}

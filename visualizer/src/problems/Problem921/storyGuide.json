@@ -1,0 +1,27 @@
+{
+  "number": "921",
+  "title": "Minimum Add to Make Parentheses Valid",
+  "goal": "Count the fewest parentheses to insert for balance.",
+  "strategy": "An unmatched closer needs an opener immediately. Unmatched openers need closers at the end.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count the fewest parentheses to insert for balance.",
+    "inspect": "An unmatched closer needs an opener immediately. Unmatched openers need closers at the end.",
+    "update": "An unmatched closer needs an opener immediately. Unmatched openers need closers at the end.",
+    "done": "Count the fewest parentheses to insert for balance."
+  },
+  "edgeCases": [
+    "Already balanced",
+    "Only openers",
+    "Only closers"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

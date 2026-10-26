@@ -1,0 +1,27 @@
+{
+  "number": "713",
+  "title": "Subarray Product Less Than K",
+  "goal": "Count contiguous subarrays whose product is strictly smaller than k.",
+  "strategy": "Positive numbers permit a sliding window: remove left values until the product is small enough, then count every suffix ending at the right edge.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count contiguous subarrays whose product is strictly smaller than k.",
+    "inspect": "Positive numbers permit a sliding window: remove left values until the product is small enough, then count every suffix ending at the right edge.",
+    "update": "Positive numbers permit a sliding window: remove left values until the product is small enough, then count every suffix ending at the right edge.",
+    "done": "Count contiguous subarrays whose product is strictly smaller than k."
+  },
+  "edgeCases": [
+    "Threshold one",
+    "Many products stay one",
+    "Single excessive value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

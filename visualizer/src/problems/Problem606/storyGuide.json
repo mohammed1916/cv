@@ -1,0 +1,27 @@
+{
+  "number": "606",
+  "title": "Construct String from Binary Tree",
+  "goal": "Serialize the tree into preorder text while preserving its exact structure.",
+  "strategy": "Omit unnecessary empty child groups, but retain an empty left group whenever a right child exists. Otherwise left-only and right-only shapes become indistinguishable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Serialize the tree into preorder text while preserving its exact structure.",
+    "inspect": "Omit unnecessary empty child groups, but retain an empty left group whenever a right child exists. Otherwise left-only and right-only shapes become indistinguishable.",
+    "update": "Omit unnecessary empty child groups, but retain an empty left group whenever a right child exists. Otherwise left-only and right-only shapes become indistinguishable.",
+    "done": "Serialize the tree into preorder text while preserving its exact structure."
+  },
+  "edgeCases": [
+    "Only a right child",
+    "Only a left child",
+    "Single node"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

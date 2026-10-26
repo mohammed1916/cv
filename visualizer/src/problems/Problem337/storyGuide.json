@@ -1,0 +1,26 @@
+{
+  "number": "337",
+  "title": "House Robber III",
+  "goal": "Solve House Robber III: Rob houses in tree structure with constraint.",
+  "strategy": "Rob houses in tree structure with constraint.",
+  "phases": [
+    "done",
+    "init",
+    "base",
+    "enter",
+    "compute"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return (0, 0)"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem337/index.jsx",
+    "src/problems/Problem337/HouseRobberIIIVisualizer.jsx"
+  ]
+}

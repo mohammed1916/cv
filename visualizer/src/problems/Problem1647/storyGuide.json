@@ -1,0 +1,31 @@
+{
+  "number": "1647",
+  "title": "Minimum Deletions to Make Character Frequencies Unique",
+  "goal": "Delete the fewest characters so all remaining positive character frequencies differ.",
+  "strategy": "Process frequencies from largest to smallest. Keep each as high as possible below the previous kept frequency; zero means a character disappears and can repeat freely.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Delete the fewest characters so all remaining positive character frequencies differ.",
+    "inspect": "Process frequencies from largest to smallest. Keep each as high as possible below the previous kept frequency; zero means a character disappears and can repeat freely.",
+    "update": "Process frequencies from largest to smallest. Keep each as high as possible below the previous kept frequency; zero means a character disappears and can repeat freely.",
+    "done": "Delete the fewest characters so all remaining positive character frequencies differ."
+  },
+  "edgeCases": [
+    "Every frequency already differs",
+    "All singleton letters compete",
+    "One letter type"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

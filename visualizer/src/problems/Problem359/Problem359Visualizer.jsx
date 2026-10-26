@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/logger-rate-limiter.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import './Problem359.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -43,41 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('logger-rate-limiter', [
-  {
-    label: 'Example 1',
-    requests: [
-      { timestamp: 1, message: 'foo' },
-      { timestamp: 1, message: 'bar' },
-      { timestamp: 3, message: 'foo' },
-      { timestamp: 8, message: 'bar' },
-      { timestamp: 10, message: 'foo' },
-      { timestamp: 11, message: 'foo' },
-    ],
-    threshold: 5,
-  },
-  {
-    label: 'Example 2',
-    requests: [
-      { timestamp: 0, message: 'a' },
-      { timestamp: 0, message: 'b' },
-      { timestamp: 0, message: 'c' },
-      { timestamp: 2, message: 'a' },
-      { timestamp: 5, message: 'a' },
-    ],
-    threshold: 2,
-  },
-  {
-    label: 'Example 3',
-    requests: [
-      { timestamp: 0, message: 'msg' },
-      { timestamp: 5, message: 'msg' },
-      { timestamp: 10, message: 'msg' },
-      { timestamp: 15, message: 'msg' },
-    ],
-    threshold: 10,
-  },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3, 4] },
@@ -252,7 +219,7 @@ function RequestTimeline({ step, requests }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Request Timeline
       </header>
 
@@ -306,7 +273,7 @@ function RequestTimeline({ step, requests }) {
                       fontFamily: 'monospace',
                       fontWeight: 600,
                       fontSize: 13,
-                      color: 'var(--surface2)',
+                      color: 'var(--text)',
                     }}
                     animate={{ scale: isActive ? 1.1 : 1 }}
                   >
@@ -342,7 +309,7 @@ function LogMapState({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Message Map (message → last_print_time)
       </header>
 
@@ -376,7 +343,7 @@ function LogMapState({ step }) {
                     fontSize: 12,
                   }}
                 >
-                  <span style={{ fontWeight: 600, color: 'var(--surface2)' }}>"{msg}"</span>
+                  <span style={{ fontWeight: 600, color: (isExpired && step.timestamp !== null ? 'var(--text-on-light)' : 'var(--text)') }}>"{msg}"</span>
 
                   <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                     <span style={{ color: 'var(--text-muted)' }}>last: {lastTime}</span>
@@ -423,7 +390,7 @@ function DecisionFlow({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Decision Flow
       </header>
 
@@ -512,7 +479,7 @@ function OutputLog({ step }) {
 
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderLeft: '1px solid var(--text)' }}>
-      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>
+      <header style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>
         Printed Output ({(step.printedMessages || []).length})
       </header>
 

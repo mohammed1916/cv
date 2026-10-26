@@ -1,0 +1,31 @@
+{
+  "number": "1551",
+  "title": "Minimum Operations to Make Array Equal",
+  "goal": "Equalize the first n odd numbers with minimum paired increment/decrement operations.",
+  "strategy": "The target value is their mean n. Symmetric low and high values exchange units, so sum only the deficits of the lower half.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Equalize the first n odd numbers with minimum paired increment/decrement operations.",
+    "inspect": "The target value is their mean n. Symmetric low and high values exchange units, so sum only the deficits of the lower half.",
+    "update": "The target value is their mean n. Symmetric low and high values exchange units, so sum only the deficits of the lower half.",
+    "done": "Equalize the first n odd numbers with minimum paired increment/decrement operations."
+  },
+  "edgeCases": [
+    "Single element needs nothing",
+    "Even number of entries",
+    "Two entries"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

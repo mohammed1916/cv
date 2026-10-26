@@ -1,0 +1,37 @@
+{
+  "number": "39",
+  "title": "Combination Sum",
+  "goal": "Solve Combination Sum: Use a backtracking depth-first search (DFS) algorithm to find all unique combinations of candidates that sum to the target.",
+  "strategy": "Use a backtracking depth-first search (DFS) algorithm to find all unique combinations of candidates that sum to the target.",
+  "phases": [
+    "call_dfs",
+    "call_include",
+    "call_skip",
+    "check_bound",
+    "check_target",
+    "done",
+    "enter_dfs",
+    "found",
+    "include",
+    "init",
+    "pop",
+    "return_bound",
+    "return_target"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "i >= len(candidates) or total > target",
+      "outcome": "return"
+    }
+  ],
+  "inputRules": [
+    "Candidates must be positive integers.",
+    "Target must be a positive integer."
+  ],
+  "source": [
+    "src/problems/Problem39/index.jsx",
+    "src/problems/Problem39/CombinationSumVisualizer.jsx"
+  ]
+}

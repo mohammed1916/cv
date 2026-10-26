@@ -1,0 +1,19 @@
+{
+  "number": "515",
+  "title": "Find Largest Value in Each Tree Row",
+  "goal": "Solve Find Largest Value in Each Tree Row: Find the largest value in each row of a binary tree.",
+  "strategy": "Find the largest value in each row of a binary tree.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Initialize each level maximum from an actual value or negative infinity so all-negative levels are handled."
+  ],
+  "checks": [],
+  "inputRules": [
+    "arr must be an array"
+  ],
+  "source": [
+    "src/problems/Problem515/index.jsx",
+    "src/problems/Problem515/FindLargestValueEachRowVisualizer.jsx"
+  ]
+}

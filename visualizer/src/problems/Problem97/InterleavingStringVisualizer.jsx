@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/interleaving-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { createPortal } from 'react-dom';
 import { motion } from "framer-motion";
 import CodeTracePanel from "../../components/CodeTracePanel";
@@ -10,7 +13,7 @@ import FloatingPanel from "../../components/shared/FloatingPanel";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useAutoScroll } from "../../hooks/useAutoScroll";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./InterleavingStringVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 const SOLUTION_CODE = [
@@ -47,7 +50,7 @@ const LINE_PATTERN_MAP = {
     "14": "check_loop",
 };
 
-const EXAMPLES = getExamples('interleaving-string');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(s1, s2, s3) {
     const m = s1.length, n = s2.length;
@@ -89,9 +92,9 @@ function generateSteps(s1, s2, s3) {
 
 export default function InterleavingStringVisualizer() {
     const [ex, setEx] = useState(EXAMPLES[0]);
-  const [s1Input, setS1Input] = useState("aabcc");
-  const [s2Input, setS2Input] = useState("dbbca");
-  const [s3Input, setS3Input] = useState("aadbbcbcac");
+  const [s1Input, setS1Input] = useState(String(AUTHORED_INITIAL.s1));
+  const [s2Input, setS2Input] = useState(String(AUTHORED_INITIAL.s2));
+  const [s3Input, setS3Input] = useState(String(AUTHORED_INITIAL.s3));
   const { s1, s2, s3, inputError } = useMemo(() => {
     try {
       const parsedS1 = s1Input;
@@ -234,7 +237,6 @@ export default function InterleavingStringVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && <PatternLegend />}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -257,6 +259,7 @@ export default function InterleavingStringVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && <PatternLegend />}
         </>
     );
 
@@ -266,7 +269,7 @@ export default function InterleavingStringVisualizer() {
         () => [
             { id: 'input', title: 'Input Examples', dockMode: 'split-right' },
             { id: 'dp', title: 'DP Table Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
             { id: 'status', title: 'Result', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

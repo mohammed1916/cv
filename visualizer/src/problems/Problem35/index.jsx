@@ -1,1 +1,5 @@
-export { default } from './SearchInsertPositionVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./SearchInsertPositionVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

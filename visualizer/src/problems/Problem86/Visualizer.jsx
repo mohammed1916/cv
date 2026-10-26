@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--86.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -29,10 +33,7 @@ const LINE_PATTERN_MAP = {
   12: 'done',       // return lessDummy.next
 }
 
-const EXAMPLES = [
-  { label: 'Example 1', list: [1, 4, 3, 2, 5, 2], x: 3 },
-  { label: 'Example 2', list: [2, 1], x: 2 },
-]
+const EXAMPLES = authoredExamples0
 
 const SOLUTION_CODE = [
   { line: 1, text: 'def partition(head, x):' },
@@ -173,7 +174,7 @@ function NodeRow({ nodes, currentId, accent, emptyLabel }) {
                 borderRadius: 8,
                 fontSize: 15,
                 fontWeight: 700,
-                color: isCurrent ? 'var(--code-bg)' : 'var(--text)',
+                color: isCurrent ? 'var(--text-on-light)' : 'var(--text)',
                 background: isCurrent ? '#fde047' : accent,
                 border: isCurrent ? '3px solid #f59e0b' : `2px solid ${accent}`,
                 boxShadow: isCurrent ? '0 0 12px rgba(253,224,71,0.6)' : 'none',
@@ -257,8 +258,8 @@ function VisualizationPanel({ step }) {
 
 export default function Problem86Visualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [listInput, setListInput] = useState("[1,4,3,2,5,2]");
-  const [xInput, setXInput] = useState(3);
+  const [listInput, setListInput] = useState(JSON.stringify(AUTHORED_INITIAL.list));
+  const [xInput, setXInput] = useState(String(AUTHORED_INITIAL.x));
   const { list, x, inputError } = useMemo(() => {
     try {
       const parsedList = JSON.parse(listInput); if (!Array.isArray(parsedList)) throw new Error('list must be an array');
@@ -357,9 +358,6 @@ export default function Problem86Visualizer() {
   // Playback panel with controls
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -377,6 +375,9 @@ export default function Problem86Visualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+      )}
     </>
   )
 
@@ -385,7 +386,7 @@ export default function Problem86Visualizer() {
     () => [
       { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'viz', title: '✂️ Partition List', dockMode: 'split-right' },
-      { id: 'status', title: 'Examples', dockMode: 'split-bottom', ratio: 0.08 },
+      { id: 'status', title: 'Examples', dockMode: 'split-right', ratio: 0.08 },
     ],
     []
   )

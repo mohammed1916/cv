@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/shortest-distance-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './ShortestWordDistanceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -224,30 +227,6 @@ function generateSteps(words, word1, word2) {
 function VisualizationPanel({ step, words, word1, word2, applyExample, examples }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {step?.words && (
         <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, border: '1px solid var(--text-muted)' }}>
@@ -382,8 +361,8 @@ function VisualizationPanel({ step, words, word1, word2, applyExample, examples 
 }
 
 export default function ShortestWordDistanceVisualizer() {
-  const examples = useMemo(() => getExamplesOr('shortest-distance-ii', []), [])
-  const [wordsInput, setWordsInput] = useState('["practice","can","do","coding","now"]')
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
+  const [wordsInput, setWordsInput] = useState(JSON.stringify(AUTHORED_INITIAL.words || AUTHORED_INITIAL))
   const [word1, setWord1] = useState('practice')
   const [word2, setWord2] = useState('now')
 
@@ -449,83 +428,14 @@ export default function ShortestWordDistanceVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Word List (JSON)</div>
-              <textarea
-                value={wordsInput}
-                onChange={(e) => {
-                  setWordsInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 60,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-              />
-              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Word 1</div>
-                <input
-                  type="text"
-                  value={word1}
-                  onChange={(e) => {
-                    setWord1(e.target.value)
-                    handleReset()
-                  }}
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--surface2)',
-                    color: 'var(--text)',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Word 2</div>
-                <input
-                  type="text"
-                  value={word2}
-                  onChange={(e) => {
-                    setWord2(e.target.value)
-                    handleReset()
-                  }}
-                  style={{
-                    width: '100%',
-                    padding: '8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--text-muted)',
-                    backgroundColor: 'var(--surface2)',
-                    color: 'var(--text)',
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-            </div>
-            <VisualizationPanel
+    viz: (<VisualizationPanel
               step={step}
               words={words}
               word1={word1}
               word2={word2}
               applyExample={applyExample}
               examples={examples}
-            />
-          </div>),
+            />),
   }), [
       step,
       connectivity,
@@ -565,7 +475,6 @@ export default function ShortestWordDistanceVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -583,6 +492,7 @@ export default function ShortestWordDistanceVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

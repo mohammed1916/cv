@@ -1,0 +1,27 @@
+{
+  "number": "733",
+  "title": "Flood Fill",
+  "goal": "Recolor the starting pixel’s orthogonally connected component of equal-colored pixels.",
+  "strategy": "Use a queue and mark pixels when enqueuing. Only pixels of the original color join the component; diagonal contact does not connect regions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Recolor the starting pixel’s orthogonally connected component of equal-colored pixels.",
+    "inspect": "Use a queue and mark pixels when enqueuing. Only pixels of the original color join the component; diagonal contact does not connect regions.",
+    "update": "Use a queue and mark pixels when enqueuing. Only pixels of the original color join the component; diagonal contact does not connect regions.",
+    "done": "Recolor the starting pixel’s orthogonally connected component of equal-colored pixels."
+  },
+  "edgeCases": [
+    "Replacement equals original",
+    "Diagonals are not connected",
+    "Single pixel"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "number": "704",
+  "title": "Binary Search",
+  "goal": "Solve Binary Search: Classic binary search: halve the search window each iteration until target is found or window collapses.",
+  "strategy": "Classic binary search: halve the search window each iteration until target is found or window collapses.",
+  "phases": [
+    "done",
+    "init",
+    "while_check",
+    "calc_mid",
+    "check_target",
+    "found",
+    "check_less",
+    "update_left",
+    "check_greater",
+    "update_right"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "nums[mid] == target",
+      "outcome": "return mid"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem704/index.jsx",
+    "src/problems/Problem704/BinarySearchVisualizer.jsx"
+  ]
+}

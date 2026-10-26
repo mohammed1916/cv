@@ -1,0 +1,21 @@
+{
+  "number": "169",
+  "title": "Majority Element",
+  "goal": "Solve Majority Element: Find element appearing more than n/2 times using Boyer-Moore voting.",
+  "strategy": "Find element appearing more than n/2 times using Boyer-Moore voting.",
+  "phases": [
+    "init",
+    "processing",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Boyer–Moore finds a candidate under the guarantee that a majority exists; without that guarantee a separate frequency check is required."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem169/index.jsx",
+    "src/problems/Problem169/MajorityElementVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "883",
+  "title": "Projection Area of 3D Shapes",
+  "goal": "Measure the total area of three projections.",
+  "strategy": "The top counts occupied cells; each side sees only the tallest stack along its sightline.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Measure the total area of three projections.",
+    "inspect": "The top counts occupied cells; each side sees only the tallest stack along its sightline.",
+    "update": "The top counts occupied cells; each side sees only the tallest stack along its sightline.",
+    "done": "Measure the total area of three projections."
+  },
+  "edgeCases": [
+    "All empty",
+    "Single tower",
+    "Equal heights"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

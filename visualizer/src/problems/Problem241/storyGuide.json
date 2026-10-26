@@ -1,0 +1,21 @@
+{
+  "number": "241",
+  "title": "Different Ways to Add Parentheses",
+  "goal": "Solve Different Ways to Add Parentheses: Generate all possible results by placing parentheses at different positions.",
+  "strategy": "Generate all possible results by placing parentheses at different positions.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Different parenthesizations can yield the same number; retain multiplicity when each expression grouping counts as a result."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem241/index.jsx",
+    "src/problems/Problem241/DifferentWaysToAddParentheses.jsx"
+  ]
+}

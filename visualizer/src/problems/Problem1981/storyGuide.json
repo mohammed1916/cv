@@ -1,0 +1,31 @@
+{
+  "number": "1981",
+  "title": "Minimize the Difference Between Target and Chosen Elements",
+  "goal": "Choose one value from each row with total closest to target.",
+  "strategy": "Keep the set of all reachable sums after each row. Combining each existing sum with each value in the next row covers every legal selection while merging duplicate totals.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Choose one value from each row with total closest to target.",
+    "inspect": "Keep the set of all reachable sums after each row. Combining each existing sum with each value in the next row covers every legal selection while merging duplicate totals.",
+    "update": "Keep the set of all reachable sums after each row. Combining each existing sum with each value in the next row covers every legal selection while merging duplicate totals.",
+    "done": "Choose one value from each row with total closest to target."
+  },
+  "edgeCases": [
+    "Every possible total exceeds the target",
+    "Every possible total is below the target",
+    "Duplicate row values produce one state"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

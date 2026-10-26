@@ -1,0 +1,31 @@
+{
+  "number": "1959",
+  "title": "Minimum Total Space Wasted With K Resizing Operations",
+  "goal": "Minimize wasted capacity with at most k resizing operations.",
+  "strategy": "Partition demand into at most k+1 contiguous segments. Each segment needs its maximum demand as capacity, giving waste maximum times length minus segment sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize wasted capacity with at most k resizing operations.",
+    "inspect": "Partition demand into at most k+1 contiguous segments. Each segment needs its maximum demand as capacity, giving waste maximum times length minus segment sum.",
+    "update": "Partition demand into at most k+1 contiguous segments. Each segment needs its maximum demand as capacity, giving waste maximum times length minus segment sum.",
+    "done": "Minimize wasted capacity with at most k resizing operations."
+  },
+  "edgeCases": [
+    "No resize means one maximum capacity",
+    "A resize between every pair eliminates waste",
+    "Constant demand needs no resizing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

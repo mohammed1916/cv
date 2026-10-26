@@ -1,0 +1,31 @@
+{
+  "number": "2492",
+  "title": "Minimum Score of a Path Between Two Cities",
+  "goal": "Minimize the smallest road weight encountered on a walk from city one to city n.",
+  "strategy": "Walks may repeat roads and vertices, so any edge in city one connected component can be visited as a detour before reaching city n. The smallest weight anywhere in that component is attainable.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Minimize the smallest road weight encountered on a walk from city one to city n.",
+    "inspect": "Walks may repeat roads and vertices, so any edge in city one connected component can be visited as a detour before reaching city n. The smallest weight anywhere in that component is attainable.",
+    "update": "Walks may repeat roads and vertices, so any edge in city one connected component can be visited as a detour before reaching city n. The smallest weight anywhere in that component is attainable.",
+    "done": "Minimize the smallest road weight encountered on a walk from city one to city n."
+  },
+  "edgeCases": [
+    "A smaller edge in another component is irrelevant",
+    "One road is the complete path",
+    "Cycles allow repeated visits without changing the minimum rule"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

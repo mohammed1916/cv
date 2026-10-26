@@ -1,0 +1,31 @@
+{
+  "number": "592",
+  "title": "Fraction Addition and Subtraction",
+  "goal": "Add and subtract fractions and return one reduced fraction with a positive denominator.",
+  "strategy": "Fold each signed fraction into an accumulator using cross multiplication, then divide numerator and denominator by their greatest common divisor. Exact integer arithmetic handles cancellation without rounding.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Add and subtract fractions and return one reduced fraction with a positive denominator.",
+    "inspect": "Fold each signed fraction into an accumulator using cross multiplication, then divide numerator and denominator by their greatest common divisor. Exact integer arithmetic handles cancellation without rounding.",
+    "update": "Fold each signed fraction into an accumulator using cross multiplication, then divide numerator and denominator by their greatest common divisor. Exact integer arithmetic handles cancellation without rounding.",
+    "done": "Add and subtract fractions and return one reduced fraction with a positive denominator."
+  },
+  "edgeCases": [
+    "Complete cancellation normalizes the denominator to one",
+    "A negative result keeps the sign in the numerator",
+    "An improper fraction can reduce to an integer"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

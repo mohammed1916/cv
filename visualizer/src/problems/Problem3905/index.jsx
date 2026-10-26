@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3905.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import IndexedSequence from '../../components/shared/IndexedSequence'
@@ -13,15 +17,10 @@ const definition = {
     { id: 'commit', label: 'Commit wave', description: 'Apply each winning color simultaneously.' },
     { id: 'done', label: 'Complete', description: 'Inspect the final grid.' },
   ],
-  examples: [
-    { label: 'Competing corners', input: '{"n":3,"m":3,"sources":[[0,0,1],[2,2,2]]}' },
-    { label: 'Adjacent sources', input: '{"n":3,"m":3,"sources":[[0,1,3],[1,1,5]]}' },
-    { label: 'Single source', input: '{"n":2,"m":2,"sources":[[1,1,5]]}' },
-    { label: 'Already filled', input: '{"n":1,"m":2,"sources":[[0,0,1],[0,1,9]]}' },
-  ],
+  examples: authoredExamples0,
 }
 
-export default function MultiSourceFloodFill() {
+function MultiSourceFloodFill() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <p>Time {step.time} · {step.colored} / {run.n * run.m} committed cells. “?” marks a proposal, not a committed color.</p>
     <PagedGrid rows={run.n} columns={run.m} cellAt={(r, c) => cellAtStep(run, step, r, c)} label="Flood fill grid" />
@@ -35,3 +34,5 @@ export default function MultiSourceFloodFill() {
     <p>Select any grid cell to inspect its incoming colors and arrival time. Row and column pages retain the grid geometry; every coordinate is accessible.</p>
   </>} />
 }
+
+export default withProblemStory(MultiSourceFloodFill, storyGuide);

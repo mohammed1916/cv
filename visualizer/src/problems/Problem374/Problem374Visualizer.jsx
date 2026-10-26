@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/guess-number-higher-or-lower.js';
+import authoredExamples1 from '../../config/examples/local--374.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Problem374Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -22,13 +25,8 @@ const SOLUTION_CODE = getSolutionCode('guess-number-higher-or-lower')
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = ['adjust_left', 'adjust_right', 'calc_guess', 'call_guess', 'check_condition', 'done', 'equal', 'higher', 'init', 'lower']
 
-const EXAMPLES = getExamples('guess-number-higher-or-lower')
-const FALLBACK_EXAMPLES = [
-  { label: 'Middle target', input: { n: 10, pick: 6 } },
-  { label: 'Lower boundary', input: { n: 10, pick: 1 } },
-  { label: 'Upper boundary', input: { n: 10, pick: 10 } },
-  { label: 'Single number', input: { n: 1, pick: 1 } },
-]
+const EXAMPLES = authoredExamples0
+const FALLBACK_EXAMPLES = authoredExamples1
 
 function generateSteps(n, pick) {
   const steps = []
@@ -162,7 +160,7 @@ function GuessVisualization({ n, pick, step }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 16 }}>
       {/* Range display */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>
           Search Space
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
@@ -227,7 +225,7 @@ function GuessVisualization({ n, pick, step }) {
 
       {/* Number range visualization */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 12 }}>
           Number Range [1, {n}]
         </div>
         <div style={{
@@ -314,7 +312,7 @@ function GuessVisualization({ n, pick, step }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)', marginBottom: 4 }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-on-light)', marginBottom: 4 }}>
             Oracle Response
           </div>
           <div style={{
@@ -368,7 +366,7 @@ function VisualizationPanel({ n, pick, step, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button

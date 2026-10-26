@@ -1,0 +1,31 @@
+{
+  "number": "1884",
+  "title": "Egg Drop With 2 Eggs and N Floors",
+  "goal": "Find the minimum worst-case moves to determine the critical floor using two eggs.",
+  "strategy": "With m moves, decreasing drop gaps can cover m+(m-1)+...+1 floors. Increase the move count until this triangular coverage reaches n.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the minimum worst-case moves to determine the critical floor using two eggs.",
+    "inspect": "With m moves, decreasing drop gaps can cover m+(m-1)+...+1 floors. Increase the move count until this triangular coverage reaches n.",
+    "update": "With m moves, decreasing drop gaps can cover m+(m-1)+...+1 floors. Increase the move count until this triangular coverage reaches n.",
+    "done": "Find the minimum worst-case moves to determine the critical floor using two eggs."
+  },
+  "edgeCases": [
+    "One floor",
+    "Exact triangular coverage",
+    "One beyond a triangular boundary"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

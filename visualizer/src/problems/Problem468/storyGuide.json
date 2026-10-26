@@ -1,0 +1,24 @@
+{
+  "number": "468",
+  "title": "Validate IP Address",
+  "goal": "Solve Validate IP Address: Validate whether a string is a valid IPv4 or IPv6 address.",
+  "strategy": "Validate whether a string is a valid IPv4 or IPv6 address.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "len(parts)!=4",
+      "outcome": "return 'Neither'"
+    },
+    {
+      "condition": "int(p)>255 or (p[0]=='0' and len(p)>1)",
+      "outcome": "return 'Neither'"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem468/index.jsx",
+    "src/problems/Problem468/Problem468Visualizer.jsx"
+  ]
+}

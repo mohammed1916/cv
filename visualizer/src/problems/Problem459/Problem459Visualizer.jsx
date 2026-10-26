@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/repeated-substring-pattern.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -41,11 +44,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('repeated-substring-pattern', [
-  { label: 'Example 1', s: 'abab', expected: true },
-  { label: 'Example 2', s: 'aba', expected: false },
-  { label: 'Example 3', s: 'abcabcabcabc', expected: true },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2] },
@@ -207,7 +206,7 @@ function StringVisualization({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
           Original String
         </header>
         <div style={{
@@ -229,7 +228,7 @@ function StringVisualization({ step }) {
       {pattern && (
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+            <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
               Pattern Found
             </header>
             <div style={{
@@ -248,7 +247,7 @@ function StringVisualization({ step }) {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+            <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
               Reconstructed ({repetitions}x)
             </header>
             <div style={{
@@ -312,7 +311,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
@@ -336,25 +335,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
         </div>
       </div>
 
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          String Input
-        </label>
-        <input
-          value={sInput}
-          onChange={(e) => { setSInput(e.target.value); handleReset() }}
-          placeholder="e.g., abab"
-          style={{
-            width: '100%',
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            boxSizing: 'border-box',
-          }}
-        />
-      </div>
+      
 
       <button
         onClick={handleReset}
@@ -389,7 +370,7 @@ function VisualizationPanel({ step, s, EXAMPLES, handleExampleClick, sInput, set
 const SOLUTION_CODE_WITH_CONNECTIVITY = SOLUTION_CODE
 
 export default function Problem459Visualizer() {
-  const [sInput, setSInput] = useState('abab')
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
 
   const s = useMemo(() => {
     return sInput ? String(sInput) : ''

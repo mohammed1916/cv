@@ -1,0 +1,31 @@
+{
+  "number": "1356",
+  "title": "Sort Integers by The Number of 1 Bits",
+  "goal": "Sort values by their number of one bits, then numerically.",
+  "strategy": "Compute binary population counts as the primary key. Numeric tie-breaking makes values with equal bit counts appear in ascending order.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sort values by their number of one bits, then numerically.",
+    "inspect": "Compute binary population counts as the primary key. Numeric tie-breaking makes values with equal bit counts appear in ascending order.",
+    "update": "Compute binary population counts as the primary key. Numeric tie-breaking makes values with equal bit counts appear in ascending order.",
+    "done": "Sort values by their number of one bits, then numerically."
+  },
+  "edgeCases": [
+    "Powers of two tie by one bit",
+    "Repeated values are retained",
+    "Only zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

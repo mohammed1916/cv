@@ -1,0 +1,23 @@
+{
+  "number": "258",
+  "title": "Add Digits",
+  "goal": "Solve Add Digits: Keep summing digits until single digit.",
+  "strategy": "Keep summing digits until single digit.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Zero stays zero; positive multiples of nine map to nine rather than zero."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem258/index.jsx",
+    "src/problems/Problem258/Problem258Visualizer.jsx"
+  ]
+}

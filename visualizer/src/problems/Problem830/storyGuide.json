@@ -1,0 +1,27 @@
+{
+  "number": "830",
+  "title": "Positions of Large Groups",
+  "goal": "Return inclusive start and end indices of character runs at least three long.",
+  "strategy": "A run ends when the next character changes or the string ends. Evaluate its full length before starting the next group.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Return inclusive start and end indices of character runs at least three long.",
+    "inspect": "A run ends when the next character changes or the string ends. Evaluate its full length before starting the next group.",
+    "update": "A run ends when the next character changes or the string ends. Evaluate its full length before starting the next group.",
+    "done": "Return inclusive start and end indices of character runs at least three long."
+  },
+  "edgeCases": [
+    "Final group qualifies",
+    "Every group too short",
+    "Whole string is one group"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

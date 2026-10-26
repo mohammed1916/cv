@@ -1,0 +1,31 @@
+{
+  "number": "1641",
+  "title": "Count Sorted Vowel Strings",
+  "goal": "Count nondecreasing strings of length n made from the five vowels.",
+  "strategy": "For each ending vowel, sum shorter strings ending in any vowel no greater than it. Updating left to right computes these prefix sums in place.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count nondecreasing strings of length n made from the five vowels.",
+    "inspect": "For each ending vowel, sum shorter strings ending in any vowel no greater than it. Updating left to right computes these prefix sums in place.",
+    "update": "For each ending vowel, sum shorter strings ending in any vowel no greater than it. Updating left to right computes these prefix sums in place.",
+    "done": "Count nondecreasing strings of length n made from the five vowels."
+  },
+  "edgeCases": [
+    "One-character strings",
+    "Two-character strings allow repeats",
+    "Longer combinatorial count"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

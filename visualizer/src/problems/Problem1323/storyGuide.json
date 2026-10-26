@@ -1,0 +1,31 @@
+{
+  "number": "1323",
+  "title": "Maximum 69 Number",
+  "goal": "Maximize a number by changing at most one six to nine or nine to six.",
+  "strategy": "Changing the earliest six yields the largest place-value gain. If there is no six, leaving the number unchanged is optimal.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize a number by changing at most one six to nine or nine to six.",
+    "inspect": "Changing the earliest six yields the largest place-value gain. If there is no six, leaving the number unchanged is optimal.",
+    "update": "Changing the earliest six yields the largest place-value gain. If there is no six, leaving the number unchanged is optimal.",
+    "done": "Maximize a number by changing at most one six to nine or nine to six."
+  },
+  "edgeCases": [
+    "Already all nines",
+    "Every digit is six",
+    "Single six"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

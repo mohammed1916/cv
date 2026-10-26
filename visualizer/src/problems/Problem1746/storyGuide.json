@@ -1,0 +1,31 @@
+{
+  "number": "1746",
+  "title": "Maximum Subarray Sum After One Operation",
+  "goal": "Maximize a nonempty subarray sum after squaring exactly one element.",
+  "strategy": "Keep best suffix sums before and after using the operation. At the current value either square now or extend a suffix that already contains the squared value.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize a nonempty subarray sum after squaring exactly one element.",
+    "inspect": "Keep best suffix sums before and after using the operation. At the current value either square now or extend a suffix that already contains the squared value.",
+    "update": "Keep best suffix sums before and after using the operation. At the current value either square now or extend a suffix that already contains the squared value.",
+    "done": "Maximize a nonempty subarray sum after squaring exactly one element."
+  },
+  "edgeCases": [
+    "One negative element",
+    "Only zero values",
+    "All positive values"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

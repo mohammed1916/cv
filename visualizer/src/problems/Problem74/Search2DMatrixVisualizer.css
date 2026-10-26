@@ -1,166 +1,611 @@
+/* =========================================================
+   SHELL
+   ========================================================= */
+
 .s2m-shell {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 480px;
-    gap: 0;
-    overflow: hidden;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  min-height: 480px;
+
+  gap: 0;
+
+  overflow: hidden;
 }
 
-.s2m-controls-row {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+
+/* =========================================================
+   PRIMARY
+   ========================================================= */
+
+.s2m-primary {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  min-height: 0;
+
+  gap: 12px;
+
+  box-sizing: border-box;
+
+  padding: 12px;
+
+  overflow-y: auto;
 }
 
-.s2m-examples {
-    display: flex;
-    gap: 8px;
-}
 
-.s2m-chip {
-    background: var(--code-line);
-    color: var(--code-text);
-    border: 2px solid var(--code-line);
-    border-radius: 6px;
-    padding: 4px 12px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.s2m-chip.active,
-.s2m-chip:hover {
-    border-color: #cba6f7;
-    color: #964cef;
-}
-
-.s2m-target-tag {
-    font-size: 14px;
-    font-weight: 700;
-    color: #964cef;
-    font-family: monospace;
-}
+/* =========================================================
+   PANEL
+   ========================================================= */
 
 .s2m-panel {
-    background: var(--code-bg);
-    border: 1px solid var(--code-line);
-    border-radius: 10px;
-    padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  min-height: 0;
+
+  padding: 0;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 12px;
+
+  background:
+    var(--surface2);
+
+  overflow: hidden;
 }
 
-.s2m-panel-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--code-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
+.s2m-head {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding:
+    10px 14px;
+
+  flex-shrink: 0;
+
+  border-bottom:
+    1px solid
+    var(--border);
+
+  background:
+    var(--surface3);
 }
 
-.s2m-grid {
-    display: grid;
-    gap: 5px;
+.s2m-title {
+  font-size: 13px;
+  font-weight: 800;
+
+  color:
+    var(--text);
 }
 
-.s2m-cell {
-    width: 60px;
-    height: 56px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    border-radius: 8px;
-    background: var(--code-line);
-    border: 2px solid var(--code-line);
+.s2m-subtitle {
+  margin-top: 2px;
+
+  font-size: 10px;
+
+  color:
+    var(--text-muted);
 }
 
-.s2m-val {
-    font-size: 17px;
-    font-weight: 700;
-    color: #4f6ed8;
+
+/* =========================================================
+   TARGET
+   ========================================================= */
+
+.s2m-target {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    5px 9px;
+
+  border:
+    1px solid
+    rgba(168, 85, 247, 0.3);
+
+  border-radius: 7px;
+
+  background:
+    rgba(168, 85, 247, 0.07);
+
+  font-family:
+    monospace;
 }
 
-.s2m-flat {
-    font-size: 10px;
-    color: var(--code-dim);
+.s2m-target span {
+  font-size: 9px;
+
+  color:
+    var(--text-muted);
 }
 
-.s2m-cell.in-range {
-    background: #1a1030;
-    border-color: #cba6f7;
+.s2m-target strong {
+  font-size: 14px;
+
+  color:
+    #a855f7;
 }
 
-.s2m-cell.in-range .s2m-val {
-    color: #964cef;
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.s2m-body {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  min-height: 0;
+
+  gap: 16px;
+
+  padding: 14px;
+
+  overflow-y: auto;
 }
 
-.s2m-cell.mid {
-    background: #1e0a30;
-    border-color: #f9e2af;
-    box-shadow: 0 0 12px #f9e2af44;
+
+/* =========================================================
+   DIMENSIONS
+   ========================================================= */
+
+.s2m-dimensions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  width: fit-content;
+
+  padding:
+    7px 10px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 7px;
+
+  background:
+    var(--surface3);
 }
 
-.s2m-cell.mid .s2m-val {
-    color: #996d0c;
-    font-size: 20px;
+.s2m-dimension {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 5px;
 }
 
-.s2m-cell.found {
-    background: #002010;
-    border-color: #a6e3a1;
-    box-shadow: 0 0 14px #a6e3a166;
+.s2m-dimension span {
+  font-size: 9px;
+
+  color:
+    var(--text-muted);
 }
 
-.s2m-cell.found .s2m-val {
-    color: #2f8628;
-    font-size: 20px;
+.s2m-dimension strong {
+  font-family:
+    monospace;
+
+  font-size: 13px;
+
+  color:
+    var(--text);
 }
 
-.s2m-cell.out {
-    opacity: 0.35;
+.s2m-dimension.total strong {
+  color:
+    #38bdf8;
 }
 
-.s2m-ptrs {
-    display: flex;
-    gap: 16px;
-    padding: 4px 0;
+.s2m-dimension-times,
+.s2m-dimension-equals {
+  font-family:
+    monospace;
+
+  font-size: 11px;
+
+  color:
+    var(--text-dim);
 }
 
-.s2m-ptr {
-    font-size: 13px;
-    font-weight: 700;
-    font-family: monospace;
-    padding: 4px 10px;
-    border-radius: 6px;
+
+/* =========================================================
+   FLAT -> MATRIX MAPPING
+   ========================================================= */
+
+.s2m-mapping {
+  display: flex;
+  min-height: fit-content;
+  align-items: stretch;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding:
+    8px;
+
+  border:
+    1px solid
+    rgba(245, 158, 11, 0.2);
+
+  border-radius: 8px;
+
+  background:
+    rgba(245, 158, 11, 0.035);
+
+  overflow-x: auto;
 }
 
-.s2m-ptr.lo {
-    background: #0d1424;
-    color: #89b4fa;
-    border: 1px solid #89b4fa55;
+.s2m-mapping-node {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 65px;
+
+  padding:
+    5px 8px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 6px;
+
+  background:
+    var(--surface2);
 }
 
-.s2m-ptr.mid {
-    background: #1e0a30;
-    color: #f9e2af;
-    border: 1px solid #f9e2af55;
+.s2m-mapping-node span {
+  font-size: 8px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  color:
+    var(--text-muted);
 }
 
-.s2m-ptr.hi {
-    background: #1a0030;
-    color: #cba6f7;
-    border: 1px solid #cba6f755;
+.s2m-mapping-node strong {
+  margin-top: 2px;
+
+  font-family:
+    monospace;
+
+  font-size: 14px;
 }
+
+.s2m-mapping-node.mid {
+  border-color:
+    rgba(245, 158, 11, 0.35);
+}
+
+.s2m-mapping-node.mid strong {
+  color:
+    #f59e0b;
+}
+
+.s2m-mapping-node.coordinate {
+  border-color:
+    rgba(56, 189, 248, 0.35);
+}
+
+.s2m-mapping-node.coordinate strong {
+  color:
+    #38bdf8;
+}
+
+.s2m-mapping-node.value {
+  border-color:
+    rgba(168, 85, 247, 0.35);
+}
+
+.s2m-mapping-node.value strong {
+  color:
+    #a855f7;
+}
+
+.s2m-mapping-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  color:
+    var(--text-dim);
+}
+
+.s2m-mapping-formula {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  padding:
+    5px 8px;
+
+  border:
+    1px dashed
+    var(--border);
+
+  border-radius: 6px;
+}
+
+.s2m-mapping-formula > div {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.s2m-mapping-formula span {
+  font-size: 8px;
+
+  color:
+    var(--text-muted);
+}
+
+.s2m-mapping-formula code {
+  font-size: 10px;
+
+  color:
+    var(--text);
+}
+
+
+/* =========================================================
+   MATRIX SECTION
+   ========================================================= */
+
+.s2m-matrix-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding:
+    10px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 9px;
+
+  background:
+    var(--surface3);
+}
+
+.s2m-section-head {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding:
+    0 4px;
+}
+
+.s2m-section-head > span:first-child {
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  color:
+    var(--text-muted);
+}
+
+.s2m-section-head > span:last-child {
+  font-family:
+    monospace;
+
+  font-size: 9px;
+
+  color:
+    var(--text-dim);
+}
+
+
+/* =========================================================
+   COMPARISON
+   ========================================================= */
+
+.s2m-comparison {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.s2m-result {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    9px 12px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 8px;
+}
+
+.s2m-result.found {
+  border-color:
+    rgba(34, 197, 94, 0.3);
+
+  background:
+    rgba(34, 197, 94, 0.07);
+
+  color:
+    var(--success);
+}
+
+.s2m-result.not-found {
+  border-color:
+    rgba(248, 113, 113, 0.3);
+
+  background:
+    rgba(248, 113, 113, 0.07);
+
+  color:
+    var(--error);
+}
+
+.s2m-result-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid
+    currentColor;
+
+  border-radius: 50%;
+
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.s2m-result > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.s2m-result strong {
+  font-size: 11px;
+}
+
+.s2m-result > div > span {
+  font-size: 10px;
+
+  color:
+    var(--text-muted);
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
 
 .s2m-status {
-    padding: 8px 12px;
-    background: var(--code-bg);
-    border: 1px solid var(--code-line);
-    border-radius: 8px;
-    font-size: 13px;
-    color: var(--code-dim);
-    min-height: 36px;
+  display: flex;
+
+  align-items: center;
+
+  min-height: 36px;
+
+  box-sizing: border-box;
+
+  padding:
+    8px 12px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 8px;
+
+  background:
+    var(--surface3);
+
+  font-size: 13px;
+
+  color:
+    var(--text-muted);
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (
+  max-width: 800px
+) {
+  .s2m-primary {
+    padding: 8px;
+  }
+
+  .s2m-body {
+    padding: 10px;
+  }
+
+  .s2m-head {
+    align-items:
+      flex-start;
+  }
+
+  .s2m-section-head {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap: 3px;
+  }
+
+  .s2m-mapping {
+    justify-content:
+      flex-start;
+  }
 }

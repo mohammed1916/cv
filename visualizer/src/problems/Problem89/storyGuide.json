@@ -1,0 +1,22 @@
+{
+  "number": "89",
+  "title": "Gray Code",
+  "goal": "Solve Gray Code: Construct an ordering where successive binary codes differ by one bit, using reflection or the equivalent binary-to-Gray relation.",
+  "strategy": "Construct an ordering where successive binary codes differ by one bit, using reflection or the equivalent binary-to-Gray relation.",
+  "phases": [
+    "add",
+    "compute",
+    "done",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The sequence includes zero; changing more than one bit between neighbors violates the Gray property."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem89/index.jsx",
+    "src/problems/Problem89/GrayCodeVisualizer.jsx"
+  ]
+}

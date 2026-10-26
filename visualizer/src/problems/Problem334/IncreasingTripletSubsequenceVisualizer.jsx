@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/increasing-triplet-subsequence.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +8,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './IncreasingTripletSubsequenceVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 
@@ -150,7 +151,7 @@ function generateSteps(nums) {
   return steps
 }
 
-const REGISTERED_EXAMPLES = getExamplesOr('increasing-triplet-subsequence', [])
+const REGISTERED_EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 const EXAMPLES =
   REGISTERED_EXAMPLES.length > 0
     ? REGISTERED_EXAMPLES

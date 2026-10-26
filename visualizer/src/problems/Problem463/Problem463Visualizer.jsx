@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/island-perimeter.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +10,7 @@ import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import PatternOverlay from "../../components/PatternOverlay";
@@ -44,11 +45,7 @@ const SOLUTION_CODE_INLINE = [
 ]
 const SOLUTION_CODE = SOLUTION_CODE_INLINE
 
-const EXAMPLES = getExamplesOr('island-perimeter', [
-  { label: 'Example 1', grid: [[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 1], [1, 1, 0, 0]], expected: 16 },
-  { label: 'Example 2', grid: [[1]], expected: 4 },
-  { label: 'Example 3', grid: [[1, 1], [1, 1]], expected: 8 },
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 const SNIPPETS = [
   { id: 'init', label: 'Initialize', lines: [2, 3] },
@@ -200,7 +197,7 @@ function GridVisualization({ step }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--surface2)' }}>
+        <header style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
           Grid Visualization
         </header>
         <div style={{
@@ -229,7 +226,7 @@ function GridVisualization({ step }) {
                     borderRadius: 4,
                     fontSize: 12,
                     fontWeight: 600,
-                    color: isCurrent && isLand ? '#713f12' : isLand ? 'var(--surface)' : '#1e40af',
+                    color: isCurrent && isLand ? '#713f12' : isLand ? 'var(--text-on-light)' : '#1e40af',
                   }}
                 >
                   {isLand ? '█' : '▪'}
@@ -267,49 +264,9 @@ function VisualizationPanel({ step, EXAMPLES, handleExampleClick, gridInput, set
   return (
     <section style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Examples
         </div>
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-          {EXAMPLES.map((ex) => (
-            <button
-              key={ex.label}
-              onClick={() => handleExampleClick(ex)}
-              style={{
-                padding: '6px 12px',
-                borderRadius: 4,
-                border: '1px solid var(--border)',
-                backgroundColor: 'var(--surface2)',
-                cursor: 'pointer',
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              {ex.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontSize: 12, fontWeight: 600, color: 'var(--text-muted)', marginBottom: 4 }}>
-          Grid (rows separated by semicolon)
-        </label>
-        <textarea
-          value={gridInput}
-          onChange={(e) => { setGridInput(e.target.value); handleReset() }}
-          placeholder="e.g., 0,1,0,0;1,1,1,0;0,1,0,1;1,1,0,0"
-          style={{
-            width: '100%',
-            minHeight: 80,
-            padding: '8px 10px',
-            border: '1px solid var(--border)',
-            borderRadius: 4,
-            fontSize: 12,
-            fontFamily: 'monospace',
-            boxSizing: 'border-box',
-          }}
-        />
       </div>
 
       <button

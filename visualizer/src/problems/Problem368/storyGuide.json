@@ -1,0 +1,20 @@
+{
+  "number": "368",
+  "title": "Largest Divisible Subset",
+  "goal": "Solve Largest Divisible Subset: Find largest subset where every element divides the next.",
+  "strategy": "Find largest subset where every element divides the next.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not nums",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem368/index.jsx",
+    "src/problems/Problem368/Problem368Visualizer.jsx"
+  ]
+}

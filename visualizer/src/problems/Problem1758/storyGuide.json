@@ -1,0 +1,31 @@
+{
+  "number": "1758",
+  "title": "Minimum Changes To Make Alternating Binary String",
+  "goal": "Flip the fewest bits to make a binary string alternate.",
+  "strategy": "Only two alternating targets exist, starting with zero or one. Count mismatches to each target in one scan.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Flip the fewest bits to make a binary string alternate.",
+    "inspect": "Only two alternating targets exist, starting with zero or one. Count mismatches to each target in one scan.",
+    "update": "Only two alternating targets exist, starting with zero or one. Count mismatches to each target in one scan.",
+    "done": "Flip the fewest bits to make a binary string alternate."
+  },
+  "edgeCases": [
+    "Already alternating",
+    "Uniform even length ties both choices",
+    "Single bit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

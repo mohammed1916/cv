@@ -1,0 +1,31 @@
+{
+  "number": "1491",
+  "title": "Average Salary Excluding the Minimum and Maximum Salary",
+  "goal": "Compute the average after excluding the minimum and maximum salary entries.",
+  "strategy": "Track both extremes and the total in one scan. Subtract the extremes and divide by the number of remaining employees.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute the average after excluding the minimum and maximum salary entries.",
+    "inspect": "Track both extremes and the total in one scan. Subtract the extremes and divide by the number of remaining employees.",
+    "update": "Track both extremes and the total in one scan. Subtract the extremes and divide by the number of remaining employees.",
+    "done": "Compute the average after excluding the minimum and maximum salary entries."
+  },
+  "edgeCases": [
+    "Three employees leave one salary",
+    "Consecutive salaries",
+    "Unsorted extremes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

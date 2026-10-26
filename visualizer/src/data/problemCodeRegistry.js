@@ -1,4 +1,8 @@
+import { code as permutationsIICode } from "../problems/Problem47/algorithm.js";
+import { SOLUTION_CODE as nQueensIICode } from "../problems/Problem52/algorithm.js";
 export const PROBLEM_CODE_REGISTRY = {
+  "permutations-ii": permutationsIICode,
+  "n-queens-ii": nQueensIICode,
   'add-two-numbers': [
     { line: 1, text: 'class Solution:' },
     { line: 2, text: '    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:' },

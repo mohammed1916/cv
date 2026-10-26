@@ -20,22 +20,6 @@
     flex-wrap: wrap;
 }
 
-.rl-chip {
-    background: var(--code-line);
-    color: var(--code-text);
-    border: 2px solid var(--code-line);
-    border-radius: 6px;
-    padding: 4px 12px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.rl-chip.active,
-.rl-chip:hover {
-    border-color: #89dceb;
-    color: #198093;
-}
-
 .rl-panel {
     background: var(--code-bg);
     border: 1px solid var(--code-line);

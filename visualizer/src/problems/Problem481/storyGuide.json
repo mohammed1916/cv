@@ -1,0 +1,19 @@
+{
+  "number": "481",
+  "title": "Magical String",
+  "goal": "Solve Magical String: Build a magical string where s[i] indicates how many times to repeat the next character.",
+  "strategy": "Build a magical string where s[i] indicates how many times to repeat the next character.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Generated digits also determine later run lengths; count only the requested prefix when a final run extends past it."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem481/index.jsx",
+    "src/problems/Problem481/Problem481Visualizer.jsx"
+  ]
+}

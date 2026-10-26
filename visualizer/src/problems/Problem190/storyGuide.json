@@ -1,0 +1,19 @@
+{
+  "number": "190",
+  "title": "Reverse Bits",
+  "goal": "Solve Reverse Bits: Shift result left and OR in bits from n one at a time over 32 iterations.",
+  "strategy": "Shift result left and OR in bits from n one at a time over 32 iterations.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Reverse exactly the specified bit width, including leading zeros; signed display must not change the bit pattern."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem190/index.jsx",
+    "src/problems/Problem190/ReverseBitsVisualizer.jsx"
+  ]
+}

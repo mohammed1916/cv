@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/construct-binary-tree-from-string.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ConstructBinaryTreeFromStringVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -26,7 +29,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('construct-binary-tree-from-string')
+const EXAMPLES = authoredExamples0
 
 const DEFAULT_EX = EXAMPLES[0] || { label: 'Default', s: '4(2(3)(1))(6(5))' }
 
@@ -121,7 +124,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -144,7 +147,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Input String */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input String</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input String</div>
         <div style={{ padding: 12, backgroundColor: 'var(--surface2)', borderRadius: 6, fontFamily: 'monospace', fontSize: 12, wordBreak: 'break-all' }}>
           {s}
         </div>
@@ -152,7 +155,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 
       {/* Parse Progress */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Parse Position</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Parse Position</div>
         <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
           {s.split('').map((char, idx) => (
             <div
@@ -197,7 +200,7 @@ function VisualizationPanel({ s, step, applyEx }) {
 }
 
 export default function ConstructBinaryTreeFromStringVisualizer() {
-  const [sInput, setSInput] = useState(DEFAULT_EX.s)
+  const [sInput, setSInput] = useState(AUTHORED_INITIAL.s)
   const [activeLabel, setActiveLabel] = useState(DEFAULT_EX.label)
 
   // Plain string input - no JSON parsing, just validation.
@@ -308,9 +311,6 @@ export default function ConstructBinaryTreeFromStringVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -328,6 +328,9 @@ export default function ConstructBinaryTreeFromStringVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

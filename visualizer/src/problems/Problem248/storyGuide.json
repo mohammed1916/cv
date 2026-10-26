@@ -1,0 +1,21 @@
+{
+  "number": "248",
+  "title": "Strobogrammatic Number III",
+  "goal": "Solve Strobogrammatic Number III: Count strobogrammatic numbers within a range efficiently.",
+  "strategy": "Count strobogrammatic numbers within a range efficiently.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Bounds are inclusive; leading-zero strings are not separate numbers inside the range."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem248/index.jsx",
+    "src/problems/Problem248/StrobogrammaticNumberIii.jsx"
+  ]
+}

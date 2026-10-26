@@ -1,0 +1,31 @@
+{
+  "number": "1993",
+  "title": "Operations on Tree",
+  "goal": "Apply lock, unlock, and upgrade operations on a rooted tree.",
+  "strategy": "Locks store their owner. Upgrade requires an unlocked node, no locked ancestor, and at least one locked descendant; only after all checks pass does it clear descendant locks and lock the node.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Apply lock, unlock, and upgrade operations on a rooted tree.",
+    "inspect": "Locks store their owner. Upgrade requires an unlocked node, no locked ancestor, and at least one locked descendant; only after all checks pass does it clear descendant locks and lock the node.",
+    "update": "Locks store their owner. Upgrade requires an unlocked node, no locked ancestor, and at least one locked descendant; only after all checks pass does it clear descendant locks and lock the node.",
+    "done": "Apply lock, unlock, and upgrade operations on a rooted tree."
+  },
+  "edgeCases": [
+    "Upgrade fails when no descendant is locked",
+    "A locked ancestor blocks upgrade but not ordinary lock",
+    "Only the owner may unlock an already locked node"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

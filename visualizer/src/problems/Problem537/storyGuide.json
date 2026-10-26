@@ -1,0 +1,23 @@
+{
+  "number": "537",
+  "title": "Complex Number Multiplication",
+  "goal": "Solve Complex Number Multiplication: Multiply two complex numbers given as strings.",
+  "strategy": "Multiply two complex numbers given as strings.",
+  "phases": [
+    "init",
+    "parse",
+    "calc_real",
+    "calc_imag",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The imaginary-unit product contributes a negative real term; signed components must be parsed independently of the separator."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem537/index.jsx",
+    "src/problems/Problem537/ComplexNumberMultiplicationVisualizer.jsx"
+  ]
+}

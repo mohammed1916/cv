@@ -50,7 +50,7 @@
 .matrix-cell.neutral {
   background-color: var(--surface2);
   border: 1px solid var(--border);
-  color: var(--surface2);
+  color: var(--text);
 }
 
 /* Info Panel */
@@ -111,7 +111,7 @@
 
 .sum-badge.active {
   background: #0ea5e9;
-  color: var(--surface);
+  color: var(--text-on-light);
   transform: scale(1.15);
 }
 
@@ -123,7 +123,7 @@
   cursor: pointer;
   font-size: 12px;
   background-color: var(--surface2);
-  color: var(--surface2);
+  color: var(--text);
   font-weight: 400;
   transition: all 0.2s ease;
 }
@@ -137,6 +137,7 @@
 
 .example-button:hover {
   background-color: var(--text);
+  color: var(--text-inverse);
 }
 
 /* Result Box */

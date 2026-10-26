@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--356.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -192,23 +194,7 @@ function generateSteps(points) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Example 1: Valid',
-    points: [[1, 1], [1, -1], [-1, -1], [-1, 1]],
-    description: 'Square reflected across y-axis',
-  },
-  {
-    label: 'Example 2: Valid',
-    points: [[0, 0], [1, 1], [1, -1], [2, 0], [2, 2]],
-    description: 'Points symmetric across vertical line',
-  },
-  {
-    label: 'Example 3: Invalid',
-    points: [[0, 0], [1, 1], [1, -1], [2, 0]],
-    description: 'Missing reflected pair',
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem356Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -427,7 +413,7 @@ export default function Problem356Visualizer() {
                           y={sy - 12}
                           textAnchor="middle"
                           fontSize="10"
-                          fill={isInvalid ? '#ef4444' : 'var(--surface2)'}
+                          fill={isInvalid ? 'var(--error)' : 'var(--text)'}
                           fontWeight="600"
                         >
                           ({x}, {y})

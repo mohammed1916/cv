@@ -1,0 +1,31 @@
+{
+  "number": "2109",
+  "title": "Adding Spaces to a String",
+  "goal": "Insert spaces before the requested original character indices.",
+  "strategy": "The supplied positions refer to the original string. A separate pointer into those positions avoids shifting later indices as output grows.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Insert spaces before the requested original character indices.",
+    "inspect": "The supplied positions refer to the original string. A separate pointer into those positions avoids shifting later indices as output grows.",
+    "update": "The supplied positions refer to the original string. A separate pointer into those positions avoids shifting later indices as output grows.",
+    "done": "Insert spaces before the requested original character indices."
+  },
+  "edgeCases": [
+    "An insertion at zero produces a leading space",
+    "Adjacent insertion indices each precede one character",
+    "An empty insertion list leaves the text unchanged"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

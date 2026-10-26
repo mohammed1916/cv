@@ -1,0 +1,28 @@
+{
+  "number": "223",
+  "title": "Rectangle Area",
+  "goal": "Solve Rectangle Area: Compute the total area covered by two axis-aligned rectangles.",
+  "strategy": "Compute the total area covered by two axis-aligned rectangles.",
+  "phases": [
+    "init",
+    "area_a",
+    "area_b",
+    "overlap",
+    "combine",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Touching rectangles have zero overlap area; clamp negative overlap widths or heights to zero before multiplying."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Rectangle A needs ax2 >= ax1 and ay2 >= ay1",
+    "Rectangle B needs bx2 >= bx1 and by2 >= by1"
+  ],
+  "source": [
+    "src/problems/Problem223/index.jsx",
+    "src/problems/Problem223/Problem223Visualizer.jsx"
+  ]
+}

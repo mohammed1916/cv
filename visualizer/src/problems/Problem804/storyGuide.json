@@ -1,0 +1,27 @@
+{
+  "number": "804",
+  "title": "Unique Morse Code Words",
+  "goal": "Count distinct Morse encodings of the supplied lowercase words.",
+  "strategy": "Encode characters with the standard Morse alphabet and concatenate without separators. Different words may map to the same combined code.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct Morse encodings of the supplied lowercase words.",
+    "inspect": "Encode characters with the standard Morse alphabet and concatenate without separators. Different words may map to the same combined code.",
+    "update": "Encode characters with the standard Morse alphabet and concatenate without separators. Different words may map to the same combined code.",
+    "done": "Count distinct Morse encodings of the supplied lowercase words."
+  },
+  "edgeCases": [
+    "One word",
+    "Repeated words",
+    "Short distinct transformations"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

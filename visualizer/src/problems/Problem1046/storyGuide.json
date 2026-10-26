@@ -1,0 +1,27 @@
+{
+  "number": "1046",
+  "title": "Last Stone Weight",
+  "goal": "Find the remaining weight after repeatedly smashing the two heaviest stones.",
+  "strategy": "Equal weights cancel. Unequal weights leave their difference, which must compete with all remaining stones at the next step.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the remaining weight after repeatedly smashing the two heaviest stones.",
+    "inspect": "Equal weights cancel. Unequal weights leave their difference, which must compete with all remaining stones at the next step.",
+    "update": "Equal weights cancel. Unequal weights leave their difference, which must compete with all remaining stones at the next step.",
+    "done": "Find the remaining weight after repeatedly smashing the two heaviest stones."
+  },
+  "edgeCases": [
+    "Equal final stones both vanish",
+    "Only one stone remains untouched",
+    "Repeated weights cancel in pairs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

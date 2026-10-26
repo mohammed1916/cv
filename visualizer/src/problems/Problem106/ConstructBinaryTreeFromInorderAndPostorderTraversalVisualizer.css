@@ -1,14 +1,5 @@
 /* Construct Binary Tree from Inorder and Postorder Traversal */
-.cbtipt-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-  background: var(--code-bg);
-}
+.cbtipt-shell { background: var(--code-bg); }
 
 .cbtipt-panel {
   display: flex;
@@ -24,7 +15,7 @@
   align-items: center;
   padding: 8px 16px;
   font-size: 12px;
-  color: var(--border);
+  color: var(--text-muted);
   background: var(--surface2);
   border-top: 1px solid var(--border);
   overflow: hidden;

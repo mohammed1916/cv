@@ -1,0 +1,21 @@
+{
+  "number": "228",
+  "title": "Summary Ranges",
+  "goal": "Solve Summary Ranges: Group consecutive numbers into ranges and format them as string summaries.",
+  "strategy": "Group consecutive numbers into ranges and format them as string summaries.",
+  "phases": [
+    "init",
+    "processing",
+    "complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A one-value run is written as that value; a gap closes the preceding run even at the end of the array."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem228/index.jsx",
+    "src/problems/Problem228/SummaryRanges.jsx"
+  ]
+}

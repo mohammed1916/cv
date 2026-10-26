@@ -1,0 +1,26 @@
+{
+  "number": "99",
+  "title": "Recover Binary Search Tree",
+  "goal": "Solve Recover Binary Search Tree: Recover Binary Search Tree visualization",
+  "strategy": "Recover Binary Search Tree visualization",
+  "phases": [
+    "init",
+    "inorder",
+    "compare",
+    "violation",
+    "swap",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Swapped values can create one inversion or two separated inversions in inorder traversal; the tree structure itself stays unchanged."
+  ],
+  "checks": [],
+  "inputRules": [
+    "tree must be an array"
+  ],
+  "source": [
+    "src/problems/Problem99/index.jsx",
+    "src/problems/Problem99/Visualizer.jsx"
+  ]
+}

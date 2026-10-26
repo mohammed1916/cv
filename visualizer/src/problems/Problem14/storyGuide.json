@@ -1,0 +1,35 @@
+{
+  "number": "14",
+  "title": "Longest Common Prefix",
+  "goal": "Solve Longest Common Prefix: Narrow a candidate prefix until every string agrees on each retained position.",
+  "strategy": "Narrow a candidate prefix until every string agrees on each retained position.",
+  "phases": [
+    "done",
+    "init",
+    "check_col",
+    "check_row",
+    "out_of_bounds",
+    "compare_char",
+    "mismatch",
+    "col_complete"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "The prefix can become empty; no comparison may read past the shortest string."
+  ],
+  "checks": [
+    {
+      "condition": "not strs",
+      "outcome": "return \"\""
+    },
+    {
+      "condition": "col > = len(strs[row]) or strs[row][col] ! = strs[0][col]",
+      "outcome": "return strs[0][:col]"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem14/index.jsx",
+    "src/problems/Problem14/LongestCommonPrefixVisualizer.jsx"
+  ]
+}

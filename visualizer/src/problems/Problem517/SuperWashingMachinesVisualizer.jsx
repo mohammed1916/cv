@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/super-washing-machines.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SuperWashingMachinesVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -27,7 +30,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('super-washing-machines')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(machines) {
   const steps = []
@@ -113,7 +116,7 @@ function VisualizationPanel({ machines, step }) {
 
       {/* Machines */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>
           Washing Machines (Target: {step?.target ?? Math.floor((step?.total || 0) / machines.length)})
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -205,7 +208,7 @@ function VisualizationPanel({ machines, step }) {
 
 export default function SuperWashingMachinesVisualizer() {
   const [machinesInput, setMachinesInput] = useState(
-    JSON.stringify(EXAMPLES?.[0]?.machines ?? [1, 0, 5])
+    JSON.stringify(AUTHORED_INITIAL.machines ?? [])
   )
   const [activeLabel, setActiveLabel] = useState(EXAMPLES?.[0]?.label ?? '')
 
@@ -322,9 +325,6 @@ export default function SuperWashingMachinesVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -342,6 +342,9 @@ export default function SuperWashingMachinesVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
       
     </div>

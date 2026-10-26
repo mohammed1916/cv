@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/group-anagrams.js';
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +9,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import './GroupAnagramsVisualizer.css'
@@ -123,7 +124,7 @@ function generateSteps(strs) {
     return steps
 }
 
-const EXAMPLES = getExamples('group-anagrams')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({ strs, step, currentWordIdx, currentKey, anagramMap, keyToColor }) {
     return (
@@ -291,9 +292,6 @@ export default function GroupAnagramsVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
-            )}
             <PlaybackControls
                 onReset={handleReset}
                 onPrev={stepBack}
@@ -316,6 +314,9 @@ export default function GroupAnagramsVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={GROUPANAGRAMS_PATTERNS} />
+            )}
         </>
     )
 
@@ -323,7 +324,7 @@ export default function GroupAnagramsVisualizer() {
         () => [
             { id: 'input', title: 'Input Playground', dockMode: 'split-right' },
             { id: 'viz', title: 'Hash Map Visualization', dockMode: 'split-right' },
-            { id: 'code', title: 'Solution Code Trace', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Solution Code Trace', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

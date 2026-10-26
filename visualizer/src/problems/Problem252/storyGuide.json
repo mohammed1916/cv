@@ -1,0 +1,25 @@
+{
+  "number": "252",
+  "title": "Meeting Rooms",
+  "goal": "Solve Meeting Rooms: Determine if a person can attend all meetings.",
+  "strategy": "Determine if a person can attend all meetings.",
+  "phases": [
+    "init",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "current[0] < previous[1]",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem252/index.jsx",
+    "src/problems/Problem252/Problem252Visualizer.jsx"
+  ]
+}

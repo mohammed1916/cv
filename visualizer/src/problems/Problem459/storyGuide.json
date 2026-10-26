@@ -1,0 +1,31 @@
+{
+  "number": "459",
+  "title": "Repeated Substring Pattern",
+  "goal": "Solve Repeated Substring Pattern: Look for a shorter repeating period whose copies exactly cover the string.",
+  "strategy": "Look for a shorter repeating period whose copies exactly cover the string.",
+  "phases": [
+    "checking_length",
+    "comparing",
+    "divisible",
+    "done",
+    "extracted_pattern",
+    "found",
+    "not_divisible",
+    "start"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A single copy of the whole string does not qualify; the candidate period must divide the total length."
+  ],
+  "checks": [
+    {
+      "condition": "pattern * (n // i) == s",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem459/index.jsx",
+    "src/problems/Problem459/Problem459Visualizer.jsx"
+  ]
+}

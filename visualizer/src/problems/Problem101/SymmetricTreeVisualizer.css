@@ -1,15 +1,4 @@
 /* ── Shell ──────────────────────────────────────────────────────────────────── */
-.sym-shell {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 480px;
-    gap: 0;
-    overflow: hidden;
-}
-
-/* ── Panels ─────────────────────────────────────────────────────────────────── */
 .sym-panel {
     background: var(--code-bg);
     border: none;
@@ -46,63 +35,6 @@
 }
 
 /* ── Example chips ──────────────────────────────────────────────────────────── */
-.sym-examples {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.sym-chip {
-    background: var(--code-line);
-    color: var(--code-text);
-    border: 1px solid transparent;
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
-}
-
-.sym-chip:hover {
-    background: var(--code-line);
-}
-
-.sym-chip.selected {
-    border-color: #8b5cf6;
-    color: #8553f6;
-}
-
-/* ── Input ──────────────────────────────────────────────────────────────────── */
-.sym-input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.sym-input-label {
-    font-size: 11px;
-    color: var(--code-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.sym-input {
-    background: var(--code-surface);
-    color: var(--code-text);
-    border: 1px solid var(--code-line);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 13px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.sym-input:focus {
-    outline: none;
-    border-color: #8b5cf6;
-}
-
-/* ── Canvas wrapper ─────────────────────────────────────────────────────────── */
 .sym-canvas-wrap {
     display: flex;
     flex-direction: column;
@@ -119,27 +51,6 @@
     letter-spacing: 0.1em;
 }
 
-.sym-canvas {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--code-line);
-    border-radius: 8px;
-    background: var(--code-surface);
-    flex-shrink: 0;
-}
-
-.sym-empty {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--code-dim);
-    font-size: 14px;
-    font-style: italic;
-}
-
-/* ── Result badge ───────────────────────────────────────────────────────────── */
 .sym-result-badge {
     display: inline-block;
     padding: 8px 16px;
@@ -163,55 +74,6 @@
 }
 
 /* ── Nodes ──────────────────────────────────────────────────────────────────── */
-.sym-node {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--code-line);
-    border: 2px solid var(--code-line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--code-text);
-    user-select: none;
-}
-
-.sym-node.active {
-    border-color: #8b5cf6;
-    background: #3d2c5a;
-    box-shadow: 0 0 14px #8b5cf655;
-    color: #c8b6ff;
-    z-index: 2;
-}
-
-.sym-node.mirror-ok {
-    border-color: #a6e3a1;
-    background: #1a2e1e;
-    color: #a6e3a1;
-}
-
-.sym-node.active.mirror-ok {
-    border-color: #a6e3a1;
-    background: #1a2e1e;
-    box-shadow: 0 0 14px #a6e3a155;
-}
-
-.sym-node.mirror-fail {
-    border-color: #f38ba8;
-    background: #2e1a1e;
-    color: #f38ba8;
-}
-
-.sym-node.active.mirror-fail {
-    border-color: #f38ba8;
-    background: #2e1a1e;
-    box-shadow: 0 0 14px #f38ba855;
-}
-
-/* ── Side-panel state ───────────────────────────────────────────────────────── */
 .sym-legend {
     display: flex;
     flex-direction: column;
@@ -307,3 +169,5 @@
     color: #e51851;
     border-color: #f38ba8;
 }
+
+.mirror-story { width: 100%; }

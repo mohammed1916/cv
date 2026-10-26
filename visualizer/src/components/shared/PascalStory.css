@@ -1,0 +1,8 @@
+.pascal-story__rows { display: grid; gap: 10px; overflow: auto; max-height: 300px; padding: 4px; }
+.pascal-story__row { display: flex; align-items: center; justify-content: center; gap: 6px; width: max-content; min-width: 100%; }
+.pascal-story__row>span { font-size: 12px; width: 54px; flex-shrink: 0; }
+.pascal-story__row>div { padding: 8px; min-width: 56px; text-align: center; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); }
+.pascal-story__row small { display: block; color: var(--text-muted); font-size: 10px; margin-top: 4px; }
+.pascal-story__row [data-role="parent"], .pascal-story__row [data-role="old input"] { border-style: dashed; border-color: var(--primary); }
+.pascal-story__row [data-role="sum"], .pascal-story__row [data-role="written now"] { outline: 2px solid var(--primary); }
+.pascal-story__row [data-role="pending"] strong { opacity: .45; }

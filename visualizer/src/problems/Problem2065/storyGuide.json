@@ -1,0 +1,31 @@
+{
+  "number": "2065",
+  "title": "Maximum Path Quality of a Graph",
+  "goal": "Maximize unique node value along a walk that starts and ends at node zero within the time budget.",
+  "strategy": "Backtrack feasible walks while counting each node value only on its first visit in the current walk. Shortest return distances prune moves that cannot get back to zero in time.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize unique node value along a walk that starts and ends at node zero within the time budget.",
+    "inspect": "Backtrack feasible walks while counting each node value only on its first visit in the current walk. Shortest return distances prune moves that cannot get back to zero in time.",
+    "update": "Backtrack feasible walks while counting each node value only on its first visit in the current walk. Shortest return distances prune moves that cannot get back to zero in time.",
+    "done": "Maximize unique node value along a walk that starts and ends at node zero within the time budget."
+  },
+  "edgeCases": [
+    "Repeated visits cannot collect the same value twice",
+    "A distant high value cannot return before the deadline",
+    "No edge can be traversed and returned in time"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

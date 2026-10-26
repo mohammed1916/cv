@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/brick-wall.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -9,7 +12,7 @@ import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './BrickWallVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { createPortal } from 'react-dom'
@@ -190,30 +193,6 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16, height: '100%', overflow: 'auto' }}>
-      {examples?.length > 0 && (
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 8 }}>Examples</div>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {examples.map((ex, i) => (
-              <button
-                key={i}
-                onClick={() => applyExample(ex)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 4,
-                  border: '1px solid var(--text-muted)',
-                  cursor: 'pointer',
-                  fontSize: 11,
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                }}
-              >
-                {ex.label || `Example ${i + 1}`}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Brick Wall Visualization */}
       {wall && wall.length > 0 && (
@@ -405,8 +384,8 @@ function VisualizationPanel({ step, applyExample, examples, wall }) {
 }
 
 export default function BrickWallVisualizer() {
-  const examples = useMemo(() => getExamplesOr('brick-wall', []), [])
-  const [wallInput, setWallInput] = useState('[[1,1],[2],[1,1]]');
+  const examples = useMemo(() => (authoredExamples0.length ? authoredExamples0 : []), [])
+  const [wallInput, setWallInput] = useState(JSON.stringify(AUTHORED_INITIAL.wall || AUTHORED_INITIAL));
   const { wall, inputError } = useMemo(() => {
     try {
       const parsed = JSON.parse(wallInput)
@@ -466,32 +445,7 @@ export default function BrickWallVisualizer() {
               />
             )}
           </div>),
-    viz: (<div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#5577a4', marginBottom: 6 }}>Wall (JSON)</div>
-              <textarea
-                value={wallInput}
-                onChange={(e) => {
-                  setWallInput(e.target.value)
-                  handleReset()
-                }}
-                style={{
-                  width: '100%',
-                  height: 100,
-                  padding: '8px',
-                  borderRadius: 4,
-                  border: inputError ? '2px solid #f87171' : '1px solid var(--text-muted)',
-                  backgroundColor: 'var(--surface2)',
-                  color: 'var(--text)',
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  resize: 'vertical',
-                }}
-              />
-              {inputError && <div style={{ color: '#ea0c0c', fontSize: 11, marginTop: 4 }}>{inputError}</div>}
-            </div>
-            <VisualizationPanel step={step} applyExample={applyExample} examples={examples} wall={wall} />
-          </div>),
+    viz: (<VisualizationPanel step={step} applyExample={applyExample} examples={examples} wall={wall} />),
   }), [step, connectivity, setActiveLineDom, wallInput, inputError, examples, applyExample, handleReset, showPatternOverlay, activeLineDom, wall])
   const [panelDivs, setPanelDivs] = useState(null)
   const handlePanelReady = useCallback((divs) => setPanelDivs(divs), [])
@@ -517,7 +471,6 @@ export default function BrickWallVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -535,6 +488,7 @@ export default function BrickWallVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />}
       </FloatingPanel>
     </div>
   )

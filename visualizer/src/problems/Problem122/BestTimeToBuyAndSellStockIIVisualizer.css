@@ -1,10 +1,1 @@
-.btbass2-shell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 480px;
-  gap: 0;
-  overflow: hidden;
-  background: var(--code-bg);
-}
+/* BestTimeToBuyAndSellStockIIVisualizer shell styles are handled by AlgorithmStoryWorkspace and StockStory2.css */

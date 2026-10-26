@@ -1,0 +1,23 @@
+{
+  "number": "259",
+  "title": "3Sum Smaller",
+  "goal": "Solve 3Sum Smaller: Count triplets with sum smaller than target.",
+  "strategy": "Count triplets with sum smaller than target.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "After sorting, a pair sum below target can certify several smaller-right-end choices at once; the inequality is strict."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem259/index.jsx",
+    "src/problems/Problem259/Problem259Visualizer.jsx"
+  ]
+}

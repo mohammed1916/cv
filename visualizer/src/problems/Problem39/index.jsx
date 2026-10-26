@@ -1,1 +1,5 @@
-export { default } from "./CombinationSumVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./CombinationSumVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

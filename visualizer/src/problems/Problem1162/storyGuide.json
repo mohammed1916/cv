@@ -1,0 +1,31 @@
+{
+  "number": "1162",
+  "title": "As Far from Land as Possible",
+  "goal": "Find the water cell farthest from its nearest land cell.",
+  "strategy": "Start BFS from all land cells at once. The first wave to reach a water cell supplies its shortest land distance; retain the greatest such distance.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the water cell farthest from its nearest land cell.",
+    "inspect": "Start BFS from all land cells at once. The first wave to reach a water cell supplies its shortest land distance; retain the greatest such distance.",
+    "update": "Start BFS from all land cells at once. The first wave to reach a water cell supplies its shortest land distance; retain the greatest such distance.",
+    "done": "Find the water cell farthest from its nearest land cell."
+  },
+  "edgeCases": [
+    "All land",
+    "All water",
+    "One corner source"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

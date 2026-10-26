@@ -1,0 +1,34 @@
+{
+  "number": "1",
+  "title": "Two Sum",
+  "goal": "Find two indices that add to the target using a single-pass hash map to achieve O(n) time.",
+  "strategy": "Find a prior complement before storing the current value, so two distinct indices sum to the target.",
+  "phases": [
+    "init",
+    "loop",
+    "calc_diff",
+    "check_map",
+    "found",
+    "add_map",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Equal values can form a pair, but the same index cannot be used twice."
+  ],
+  "checks": [
+    {
+      "condition": "diff in prevMap",
+      "outcome": "return [prevMap[diff], i]"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "target must be a number"
+  ],
+  "source": [
+    "src/problems/Problem1/index.jsx",
+    "src/problems/Problem1/TwoSumVisualizer.jsx",
+    "src/problems/Problem1/TwoSumTour.jsx"
+  ]
+}

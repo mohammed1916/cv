@@ -1,0 +1,31 @@
+{
+  "number": "1262",
+  "title": "Greatest Sum Divisible by Three",
+  "goal": "Find the greatest subset sum divisible by three.",
+  "strategy": "Keep the best achievable sum for each remainder. Every value reads an unchanged previous row, preventing it from being selected more than once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest subset sum divisible by three.",
+    "inspect": "Keep the best achievable sum for each remainder. Every value reads an unchanged previous row, preventing it from being selected more than once.",
+    "update": "Keep the best achievable sum for each remainder. Every value reads an unchanged previous row, preventing it from being selected more than once.",
+    "done": "Find the greatest subset sum divisible by three."
+  },
+  "edgeCases": [
+    "No positive divisible subset",
+    "All values already divisible",
+    "One valid value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

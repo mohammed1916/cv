@@ -1,33 +1,20 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import HistogramBars from '../../components/shared/HistogramBars';
+import { HISTOGRAM_CODE as SOLUTION_CODE, histogramSteps as generateSteps } from '../../algorithms/shared/histogram.js';
+import authoredExamples0 from '../../config/examples/largest-rectangle-in-histogram.js';
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LargestRectangleInHistogramVisualizer.css'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import CodePatternAnnotations from "../../components/CodePatternAnnotations"
 import PatternLegend from "../../components/PatternLegend"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 
-const SOLUTION_CODE = [
-  { line: 1, text: 'class Solution:' },
-  { line: 2, text: '    def largestRectangleArea(self, heights):' },
-  { line: 3, text: '        stack = []  # (start, height)' },
-  { line: 4, text: '        best = 0' },
-  { line: 5, text: '        for i, h in enumerate(heights):' },
-  { line: 6, text: '            start = i' },
-  { line: 7, text: '            while stack and stack[-1][1] > h:' },
-  { line: 8, text: '                idx, ht = stack.pop()' },
-  { line: 9, text: '                best = max(best, ht * (i - idx))' },
-  { line: 10, text: '                start = idx' },
-  { line: 11, text: '            stack.append((start, h))' },
-  { line: 12, text: '        for i, h in stack:' },
-  { line: 13, text: '            best = max(best, h * (len(heights) - i))' },
-  { line: 14, text: '        return best' },
-]
+
 
 const LARGESTRECTANGLEINHISTOGRAM_PATTERNS = ['done', 'finalize', 'init', 'iterate', 'pop', 'push']
 
@@ -47,57 +34,9 @@ function parseHeights(input) {
   return parsed.map((n) => Math.max(0, Number(n)))
 }
 
-function generateSteps(heights) {
-  const steps = []
-  const stack = []
-  let best = 0
-  steps.push({ phase: 'init', activeLine: 4, heights, i: -1, stack: [...stack], best, area: 0, rect: null, message: 'Initialize stack and best area.' })
-  for (let i = 0; i < heights.length; i++) {
-    const h = heights[i]
-    let start = i
-    steps.push({ phase: 'iterate', activeLine: 6, heights, i, h, stack: [...stack], best, area: 0, rect: null, message: `Index ${i}, height ${h}.` })
-    while (stack.length && stack[stack.length - 1].h > h) {
-      const top = stack.pop()
-      const area = top.h * (i - top.start)
-      best = Math.max(best, area)
-      start = top.start
-      steps.push({
-        phase: 'pop',
-        activeLine: 9,
-        heights,
-        i,
-        h,
-        stack: [...stack],
-        best,
-        area,
-        rect: { start: top.start, end: i - 1, height: top.h },
-        message: `Pop height ${top.h}, width ${i - top.start}, area ${area}.`,
-      })
-    }
-    stack.push({ start, h })
-    steps.push({ phase: 'push', activeLine: 11, heights, i, h, stack: [...stack], best, area: 0, rect: null, message: `Push bar (${start}, ${h}).` })
-  }
-  for (const item of stack) {
-    const area = item.h * (heights.length - item.start)
-    best = Math.max(best, area)
-    steps.push({
-      phase: 'finalize',
-      activeLine: 13,
-      heights,
-      i: heights.length - 1,
-      h: item.h,
-      stack: [...stack],
-      best,
-      area,
-      rect: { start: item.start, end: heights.length - 1, height: item.h },
-      message: `Finalize bar ${item.h}: area=${area}.`,
-    })
-  }
-  steps.push({ phase: 'done', activeLine: 14, heights, i: heights.length - 1, stack: [...stack], best, area: 0, rect: null, message: `Largest rectangle area = ${best}.` })
-  return steps
-}
 
-const EXAMPLES = getExamples('largest-rectangle-in-histogram')
+
+const EXAMPLES = authoredExamples0
 
 export default function LargestRectangleInHistogramVisualizer() {
   const [input, setInput] = useState('[2,1,5,6,2,3]')
@@ -122,20 +61,7 @@ export default function LargestRectangleInHistogramVisualizer() {
       <div className="lr-body">
         <div className="lr-examples">{EXAMPLES.map((ex) => <button key={ex.label} className="lr-chip" onClick={() => applyExample(ex)}>{ex.label}</button>)}</div>
         <input className="lr-input" value={input} onChange={(e) => { setInput(e.target.value); handleReset() }} />
-        <div className="lr-bars">
-          {heights.map((v, i) => {
-            const active = step?.i === i
-            const inRect = step?.rect && i >= step.rect.start && i <= step.rect.end && v >= step.rect.height
-            return (
-              <div key={`${v}-${i}`} className="lr-col">
-                <motion.div className={`lr-bar ${active ? 'active' : ''} ${inRect ? 'rect' : ''}`} style={{ height: `${Math.max(20, v * 18)}px` }} animate={active ? { y: -4 } : { y: 0 }}>
-                  <span>{v}</span>
-                </motion.div>
-                <small>{i}</small>
-              </div>
-            )
-          })}
-        </div>
+        <HistogramBars heights={heights} step={step} />
       </div>
     </div>
   )
@@ -170,9 +96,6 @@ export default function LargestRectangleInHistogramVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LARGESTRECTANGLEINHISTOGRAM_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -190,6 +113,9 @@ export default function LargestRectangleInHistogramVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LARGESTRECTANGLEINHISTOGRAM_PATTERNS} />
+      )}
     </>
   )
 
@@ -198,7 +124,7 @@ export default function LargestRectangleInHistogramVisualizer() {
     () => [
       { id: 'primary', title: 'Histogram Stack Sweep', dockMode: 'split-right' },
       { id: 'state', title: 'Stack / Best', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

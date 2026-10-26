@@ -1,0 +1,31 @@
+{
+  "number": "1304",
+  "title": "Find N Unique Integers Sum up to Zero",
+  "goal": "Construct n distinct integers summing to zero.",
+  "strategy": "Opposite nonzero pairs cancel independently. If an odd count is needed, include a single zero without duplicating any existing number.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Construct n distinct integers summing to zero.",
+    "inspect": "Opposite nonzero pairs cancel independently. If an odd count is needed, include a single zero without duplicating any existing number.",
+    "update": "Opposite nonzero pairs cancel independently. If an odd count is needed, include a single zero without duplicating any existing number.",
+    "done": "Construct n distinct integers summing to zero."
+  },
+  "edgeCases": [
+    "One required number",
+    "Even output contains no zero",
+    "Smallest canceling pair"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

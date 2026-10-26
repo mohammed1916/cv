@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/longest-substring-without-repeating.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -9,7 +12,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useApplyExample } from '../../hooks/useApplyExample'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './LongestSubstringWithoutRepeatingVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -116,10 +119,10 @@ function generateSteps(s) {
   return steps
 }
 
-const EXAMPLES = getExamples('longest-substring-without-repeating')
+const EXAMPLES = authoredExamples0
 
 export default function LongestSubstringWithoutRepeatingVisualizer() {
-  const [strInput, setStrInput] = useState('abcabcbb')
+  const [strInput, setStrInput] = useState(AUTHORED_INITIAL.s)
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -178,14 +181,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
             </button>
           ))}
         </div>
-
-        <input
-          value={strInput}
-          onChange={handleStrInputChange}
-          placeholder="abcabcbb"
-          className="lswrc-input"
-          maxLength={24}
-        />
 
         <div className="lswrc-string-container">
           {s.split('').map((char, i) => {
@@ -314,7 +309,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
           </div>
           <div className="lswrc-var-row" style={{ borderColor: '#8b5cf6' }}>
             <span className="lswrc-var-name">max_len</span>
-            <span className="lswrc-var-val highlight" style={{ color: '#7e56f8' }}>{step?.maxLen ?? '–'}</span>
+            <span className="lswrc-var-val highlight" style={{ color: 'var(--primary)' }}>{step?.maxLen ?? '–'}</span>
           </div>
         </div>
       </div>
@@ -329,9 +324,6 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -349,6 +341,9 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={LSWRC_PATTERNS} />
+      )}
     </>
   )
 
@@ -357,7 +352,7 @@ export default function LongestSubstringWithoutRepeatingVisualizer() {
     () => [
       { id: 'primary', title: 'String View', dockMode: 'split-right' },
       { id: 'state',   title: 'Hash Map', dockMode: 'split-right' },
-      { id: 'code',    title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code',    title: 'Code', dockMode: 'split-right' },
       { id: 'variables', title: 'Variables', dockMode: 'tab-after' },
       { id: 'status',  title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],

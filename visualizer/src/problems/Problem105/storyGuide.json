@@ -1,0 +1,25 @@
+{
+  "number": "105",
+  "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+  "goal": "Solve Construct Binary Tree from Preorder and Inorder Traversal: Recursively split preorder/inorder arrays: preorder[0] is the root, inorder split defines left and right subtrees.",
+  "strategy": "Recursively split preorder/inorder arrays: preorder[0] is the root, inorder split defines left and right subtrees.",
+  "phases": [
+    "visit",
+    "compare",
+    "update",
+    "return"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not preorder",
+      "outcome": "return None"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem105/index.jsx",
+    "src/problems/Problem105/ConstructBTVisualizer.jsx"
+  ]
+}

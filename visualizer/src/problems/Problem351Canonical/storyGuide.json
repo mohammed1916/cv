@@ -1,0 +1,31 @@
+{
+  "number": "351",
+  "title": "Android Unlock Patterns",
+  "goal": "Count valid Android unlock patterns with lengths between m and n.",
+  "strategy": "A move across a grid key is allowed only when that intermediate key has already been visited. Subset DP tracks the visited mask and final key, preserving all legal ordering counts without enumerating every full path.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count valid Android unlock patterns with lengths between m and n.",
+    "inspect": "A move across a grid key is allowed only when that intermediate key has already been visited. Subset DP tracks the visited mask and final key, preserving all legal ordering counts without enumerating every full path.",
+    "update": "A move across a grid key is allowed only when that intermediate key has already been visited. Subset DP tracks the visited mask and final key, preserving all legal ordering counts without enumerating every full path.",
+    "done": "Count valid Android unlock patterns with lengths between m and n."
+  },
+  "edgeCases": [
+    "Every one-key pattern is valid",
+    "Only patterns visiting every key are counted",
+    "A narrow longer-length range excludes shorter prefixes"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

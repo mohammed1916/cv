@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/sqrtx.js';
+
 ﻿import { useState, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -37,14 +39,7 @@ const SOLUTION_CODE = [
 
 
 
-const EXAMPLES = [
-  { label: 'x = 4', x: 4, desc: 'answer = 2' },
-  { label: 'x = 8', x: 8, desc: 'answer = 2' },
-  { label: 'x = 1', x: 1, desc: 'answer = 1' },
-  { label: 'x = 16', x: 16, desc: 'answer = 4' },
-  { label: 'x = 100', x: 100, desc: 'answer = 10' },
-  { label: 'x = 2', x: 2, desc: 'answer = 1' },
-];
+const EXAMPLES = authoredExamples0;
 
 const SQRTX_PATTERNS = ['calc-mid', 'calc-square', 'check-greater', 'check-less', 'done', 'early-return', 'found', 'init', 'update-left', 'update-right', 'while-check']
 
@@ -528,9 +523,6 @@ export default function SqrtxVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -548,6 +540,9 @@ export default function SqrtxVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={SQRTX_PATTERNS} />
+      )}
     </>
   );
 
@@ -556,7 +551,7 @@ export default function SqrtxVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'Binary Search Visualizer', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

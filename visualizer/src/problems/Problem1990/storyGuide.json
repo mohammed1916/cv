@@ -1,0 +1,31 @@
+{
+  "number": "1990",
+  "title": "Count the Number of Experiments",
+  "goal": "Count experiments for every platform and experiment-name combination.",
+  "strategy": "Initialize the full three-by-three category grid with zeros, then increment the observed category pair for each record. Empty categories remain visible in the output.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count experiments for every platform and experiment-name combination.",
+    "inspect": "Initialize the full three-by-three category grid with zeros, then increment the observed category pair for each record. Empty categories remain visible in the output.",
+    "update": "Initialize the full three-by-three category grid with zeros, then increment the observed category pair for each record. Empty categories remain visible in the output.",
+    "done": "Count experiments for every platform and experiment-name combination."
+  },
+  "edgeCases": [
+    "Empty input still returns nine zero counts",
+    "All experiments belong to one category",
+    "Every category occurs exactly once"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

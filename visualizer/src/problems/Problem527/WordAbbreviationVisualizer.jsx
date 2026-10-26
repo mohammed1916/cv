@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/word-abbreviation.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './WordAbbreviationVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -30,7 +33,7 @@ const LINE_PATTERN_MAP = {
 }
 
 
-const EXAMPLES = getExamples('word-abbreviation')
+const EXAMPLES = authoredExamples0
 
 function generateSteps(dict) {
   const steps = []
@@ -180,7 +183,7 @@ function VisualizationPanel({ dict, step, applyEx }) {
 
       {/* Examples */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -203,7 +206,7 @@ function VisualizationPanel({ dict, step, applyEx }) {
 
       {/* Input Words */}
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Input Words</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Input Words</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {dict.map((word, idx) => {
             const isProcessing = step?.idx === idx
@@ -219,7 +222,7 @@ function VisualizationPanel({ dict, step, applyEx }) {
                   fontWeight: 600,
                   backgroundColor: isProcessing ? '#fecaca' : 'var(--surface2)',
                   borderColor: isProcessing ? '#f87171' : 'var(--border)',
-                  color: isProcessing ? '#7f1d1d' : 'var(--surface2)'
+                  color: isProcessing ? '#7f1d1d' : 'var(--text)'
                 }}
                 animate={{ scale: isProcessing ? 1.1 : 1 }}
               >
@@ -285,9 +288,9 @@ function VisualizationPanel({ dict, step, applyEx }) {
 }
 
 export default function WordAbbreviationVisualizer() {
-  const DEFAULT_DICT = EXAMPLES[0]?.dict ?? ['like', 'god', 'internal']
 
-  const [dictInput, setDictInput] = useState(JSON.stringify(DEFAULT_DICT))
+
+  const [dictInput, setDictInput] = useState(JSON.stringify(AUTHORED_INITIAL.dict))
   const [activeLabel, setActiveLabel] = useState(EXAMPLES[0]?.label ?? '')
 
   const { dict, inputError } = useMemo(() => {
@@ -399,9 +402,6 @@ export default function WordAbbreviationVisualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -419,8 +419,11 @@ export default function WordAbbreviationVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
-      
+
     </div>
   )
 }

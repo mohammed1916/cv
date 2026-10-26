@@ -1,0 +1,27 @@
+{
+  "title": "Find Numbers with Even Number of Digits",
+  "goal": "Count positive integers with an even number of decimal digits.",
+  "strategy": "Count decimal digits rather than testing the parity of the number itself.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "Count decimal digits rather than testing the parity of the number itself.",
+    "update": "Only numbers whose decimal digit count is even contribute to the count.",
+    "done": "Only numbers whose decimal digit count is even contribute to the count."
+  },
+  "edgeCases": [
+    "Powers of ten",
+    "No even digit lengths",
+    "Two digits only"
+  ],
+  "number": "1295",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

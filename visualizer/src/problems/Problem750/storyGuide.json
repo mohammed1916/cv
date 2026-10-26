@@ -1,0 +1,31 @@
+{
+  "number": "750",
+  "title": "Number Of Corner Rectangles",
+  "goal": "Count axis-aligned rectangles whose four corners are ones.",
+  "strategy": "Every rectangle is determined by two rows sharing two one-columns. While processing a row, each pair of one-columns forms one rectangle with every earlier row containing that same pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count axis-aligned rectangles whose four corners are ones.",
+    "inspect": "Every rectangle is determined by two rows sharing two one-columns. While processing a row, each pair of one-columns forms one rectangle with every earlier row containing that same pair.",
+    "update": "Every rectangle is determined by two rows sharing two one-columns. While processing a row, each pair of one-columns forms one rectangle with every earlier row containing that same pair.",
+    "done": "Count axis-aligned rectangles whose four corners are ones."
+  },
+  "edgeCases": [
+    "A single row cannot make a rectangle",
+    "A full three-by-four grid combines all row and column pairs",
+    "One one per row yields no corner pairs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

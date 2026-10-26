@@ -1,1 +1,5 @@
-export { default } from './FindFirstOccurrenceVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./FindFirstOccurrenceVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

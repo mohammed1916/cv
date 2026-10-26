@@ -108,7 +108,7 @@
     background: rgba(2, 6, 23, 0.55);
     border: 1px solid #243244;
     border-radius: 12px;
-    color: var(--surface);
+    color: var(--text-on-dark);
     padding: 10px 12px;
     font-size: 15px;
     outline: none;
@@ -344,7 +344,7 @@
     border-radius: 12px;
     background: rgba(15, 23, 42, 0.95);
     border: 1px solid var(--border);
-    color: var(--surface);
+    color: var(--text-on-dark);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-weight: 800;

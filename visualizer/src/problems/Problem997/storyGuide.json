@@ -1,0 +1,27 @@
+{
+  "number": "997",
+  "title": "Find the Town Judge",
+  "goal": "Identify a person trusted by everyone else who trusts nobody.",
+  "strategy": "Both conditions matter: incoming popularity alone cannot establish the judge if that person also trusts someone.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Identify a person trusted by everyone else who trusts nobody.",
+    "inspect": "Both conditions matter: incoming popularity alone cannot establish the judge if that person also trusts someone.",
+    "update": "Both conditions matter: incoming popularity alone cannot establish the judge if that person also trusts someone.",
+    "done": "Identify a person trusted by everyone else who trusts nobody."
+  },
+  "edgeCases": [
+    "Candidate trusts someone else",
+    "Single person needs no trust",
+    "Nobody has enough incoming trust"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

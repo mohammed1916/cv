@@ -1,0 +1,31 @@
+{
+  "number": "2144",
+  "title": "Minimum Cost of Buying Candies With Discount",
+  "goal": "Buy every candy at minimum cost when each paid pair can cover one no-more-expensive free candy.",
+  "strategy": "Sort prices descending and process triples. Pay for the two most expensive remaining candies and make the third free, which uses each discount on the most valuable eligible candy.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Buy every candy at minimum cost when each paid pair can cover one no-more-expensive free candy.",
+    "inspect": "Sort prices descending and process triples. Pay for the two most expensive remaining candies and make the third free, which uses each discount on the most valuable eligible candy.",
+    "update": "Sort prices descending and process triples. Pay for the two most expensive remaining candies and make the third free, which uses each discount on the most valuable eligible candy.",
+    "done": "Buy every candy at minimum cost when each paid pair can cover one no-more-expensive free candy."
+  },
+  "edgeCases": [
+    "One candy cannot earn a free item",
+    "Two candies are both paid",
+    "Equal costs still allow every third candy free"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

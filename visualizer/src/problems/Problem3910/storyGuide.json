@@ -1,0 +1,37 @@
+{
+  "number": "3910",
+  "title": "Count Connected Subgraphs with Even Node Sum",
+  "goal": "Solve Count Connected Subgraphs with Even Node Sum: Enumerate induced node subsets, reject odd sums, and traverse retained edges to prove connectivity.",
+  "strategy": "Enumerate induced node subsets, reject odd sums, and traverse retained edges to prove connectivity.",
+  "phases": [
+    "start",
+    "select",
+    "visit",
+    "decide",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Prepare adjacency lists.",
+    "select": "Keep the subset and its induced edges.",
+    "visit": "Visit reachable selected nodes only.",
+    "decide": "Require even parity and connectivity.",
+    "done": "Return the count over all non-empty subsets."
+  },
+  "edgeCases": [
+    "Only nonempty connected selected subgraphs with even node-value sum count; an even sum alone is insufficient."
+  ],
+  "checks": [
+    {
+      "condition": "sum(nums[i] for i in selected) % 2",
+      "outcome": "continue"
+    }
+  ],
+  "inputRules": [
+    "Enter {\"nums\":[0,1],\"edges\":[[0,1]]}: 1–13 binary node values and distinct undirected edges.",
+    "Each edge must be a unique [u,v] with 0 ≤ u < v < nums.length."
+  ],
+  "source": [
+    "src/problems/Problem3910/index.jsx",
+    "src/problems/Problem3910/algorithm.js"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "number": "665",
+  "title": "Non-decreasing Array",
+  "goal": "Decide whether at most one changed value can make the array nondecreasing.",
+  "strategy": "At a drop, lower the previous value when the earlier boundary permits it; otherwise raise the current value. A second drop exhausts the budget.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether at most one changed value can make the array nondecreasing.",
+    "inspect": "At a drop, lower the previous value when the earlier boundary permits it; otherwise raise the current value. A second drop exhausts the budget.",
+    "update": "At a drop, lower the previous value when the earlier boundary permits it; otherwise raise the current value. A second drop exhausts the budget.",
+    "done": "Decide whether at most one changed value can make the array nondecreasing."
+  },
+  "edgeCases": [
+    "Must raise the current value",
+    "Two repairs required",
+    "Already nondecreasing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

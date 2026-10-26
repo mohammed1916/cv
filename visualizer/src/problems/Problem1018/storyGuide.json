@@ -1,0 +1,27 @@
+{
+  "number": "1018",
+  "title": "Binary Prefix Divisible By 5",
+  "goal": "Report which binary prefixes are divisible by five.",
+  "strategy": "The full prefix may exceed integer precision. Its remainder alone is sufficient because appending a bit doubles the value and adds that bit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Report which binary prefixes are divisible by five.",
+    "inspect": "The full prefix may exceed integer precision. Its remainder alone is sufficient because appending a bit doubles the value and adds that bit.",
+    "update": "The full prefix may exceed integer precision. Its remainder alone is sufficient because appending a bit doubles the value and adds that bit.",
+    "done": "Report which binary prefixes are divisible by five."
+  },
+  "edgeCases": [
+    "Leading zero prefixes are divisible",
+    "Repeated ones cycle through remainders",
+    "One zero bit"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

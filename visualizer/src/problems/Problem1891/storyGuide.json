@@ -1,0 +1,31 @@
+{
+  "number": "1891",
+  "title": "Cutting Ribbons",
+  "goal": "Cut at least k equal-length ribbon pieces while maximizing their integer length.",
+  "strategy": "At a candidate length, each ribbon supplies its floor-divided piece count. Feasibility decreases with larger cuts, allowing binary search with zero as the impossible result.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Cut at least k equal-length ribbon pieces while maximizing their integer length.",
+    "inspect": "At a candidate length, each ribbon supplies its floor-divided piece count. Feasibility decreases with larger cuts, allowing binary search with zero as the impossible result.",
+    "update": "At a candidate length, each ribbon supplies its floor-divided piece count. Feasibility decreases with larger cuts, allowing binary search with zero as the impossible result.",
+    "done": "Cut at least k equal-length ribbon pieces while maximizing their integer length."
+  },
+  "edgeCases": [
+    "Cannot supply even unit pieces",
+    "One piece selects the longest ribbon",
+    "Exact divisions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

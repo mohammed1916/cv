@@ -1,0 +1,31 @@
+{
+  "number": "1615",
+  "title": "Maximal Network Rank",
+  "goal": "Find the greatest number of distinct roads incident to a pair of cities.",
+  "strategy": "City degrees include every attached road. A direct road between the chosen cities appears in both degrees, so subtract it once.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the greatest number of distinct roads incident to a pair of cities.",
+    "inspect": "City degrees include every attached road. A direct road between the chosen cities appears in both degrees, so subtract it once.",
+    "update": "City degrees include every attached road. A direct road between the chosen cities appears in both degrees, so subtract it once.",
+    "done": "Find the greatest number of distinct roads incident to a pair of cities."
+  },
+  "edgeCases": [
+    "No roads",
+    "One road counted once",
+    "Disjoint hubs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

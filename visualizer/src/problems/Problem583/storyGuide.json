@@ -1,0 +1,24 @@
+{
+  "number": "583",
+  "title": "Delete Operation for Two Strings",
+  "goal": "Solve Delete Operation for Two Strings: Find minimum number of deletions to make two strings equal",
+  "strategy": "Find minimum number of deletions to make two strings equal",
+  "phases": [
+    "init",
+    "check_char",
+    "char_match",
+    "char_nomatch",
+    "compute_lcs",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only deletions are allowed. Characters retained in a common subsequence need not be deleted from either string."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem583/index.jsx",
+    "src/problems/Problem583/DeleteOperationVisualizer.jsx"
+  ]
+}

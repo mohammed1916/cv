@@ -1,0 +1,23 @@
+{
+  "number": "166",
+  "title": "Fraction to Recurring Decimal",
+  "goal": "Solve Fraction to Recurring Decimal: Convert a fraction to a decimal string with recurring digits.",
+  "strategy": "Convert a fraction to a decimal string with recurring digits.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "num % denom == 0",
+      "outcome": "return result"
+    }
+  ],
+  "inputRules": [
+    "numerator must be a number",
+    "denominator must be a number"
+  ],
+  "source": [
+    "src/problems/Problem166/index.jsx",
+    "src/problems/Problem166/FractionToRecurringDecimalVisualizer.jsx"
+  ]
+}

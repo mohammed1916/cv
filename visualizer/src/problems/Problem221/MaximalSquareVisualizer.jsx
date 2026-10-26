@@ -1,4 +1,6 @@
-﻿import { useState, useMemo, useCallback } from "react"
+import authoredExamples0 from '../../config/examples/local--221.js';
+
+import { useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel"
@@ -34,12 +36,7 @@ const SOLUTION_CODE = [
   { line: 14, text: "    return max_side * max_side" },
 ]
 
-const EXAMPLES = [
-  { label: 'Classic', input: [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]] },
-  { label: 'All zeroes', input: [["0","0"],["0","0"]] },
-  { label: 'All ones', input: [["1","1","1"],["1","1","1"]] },
-  { label: 'Single cell', input: [["1"]] },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(matrix) {
   const steps = []

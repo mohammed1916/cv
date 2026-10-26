@@ -1,11 +1,14 @@
-﻿import { useState, useCallback, useMemo } from 'react'
+import authoredExamples0 from '../../config/examples/combination-sum-ii.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useCallback, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './CombinationSumIIVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -199,28 +202,7 @@ function generateSteps(candidates, target) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('combination-sum-ii', [
-  {
-    label: 'Classic',
-    candidates: [10, 1, 2, 7, 6, 1, 5],
-    target: 8
-  },
-  {
-    label: 'Duplicates',
-    candidates: [2, 5, 2, 1, 2],
-    target: 5
-  },
-  {
-    label: 'No Answer',
-    candidates: [1],
-    target: 2
-  },
-  {
-    label: 'Multiple dups',
-    candidates: [1, 1, 2, 5, 6, 7, 10],
-    target: 8
-  }
-])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, linePrefix = "", childBasePrefix = "" }) {
   const node = treeNodes.get(nodeKey)
@@ -255,8 +237,8 @@ function RecursionTreeNode({ nodeKey, treeNodes, activeKey, currentStepIndex, li
 }
 
 export default function CombinationSumIIVisualizer() {
-  const [candidatesInput, setCandidatesInput] = useState('[10, 1, 2, 7, 6, 1, 5]')
-  const [targetInput, setTargetInput] = useState('8')
+  const [candidatesInput, setCandidatesInput] = useState(JSON.stringify(AUTHORED_INITIAL.candidates))
+  const [targetInput, setTargetInput] = useState(String(AUTHORED_INITIAL.target))
 
   const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -319,23 +301,7 @@ export default function CombinationSumIIVisualizer() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-          <input
-            value={candidatesInput}
-            onChange={(e) => { setCandidatesInput(e.target.value); handleReset() }}
-            placeholder="[10, 1, 2, 7, 6, 1, 5]"
-            className="csii-input"
-            style={{ flex: 1, margin: 0 }}
-          />
-          <span style={{ color: 'var(--text-muted)', fontSize: 13, fontFamily: 'monospace' }}>target=</span>
-          <input
-            value={targetInput}
-            onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-            placeholder="8"
-            className="csii-input"
-            style={{ width: '60px', margin: 0, textAlign: 'center' }}
-          />
-        </div>
+        
 
         <div className="csii-candidates-row">
           <span className="csii-label">Candidates (Sorted):</span>
@@ -433,9 +399,6 @@ export default function CombinationSumIIVisualizer() {
 
   const playbackPanel = (
     <>
-      {showPatternOverlay && (
-        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUMII_PATTERNS} />
-      )}
       <PlaybackControls
         isPlaying={isPlaying}
         isDone={isDone}
@@ -453,6 +416,9 @@ export default function CombinationSumIIVisualizer() {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
+      {showPatternOverlay && (
+        <PatternLegend currentPhase={step?.phase} usedPatterns={COMBINATIONSUMII_PATTERNS} />
+      )}
     </>
   )
 
@@ -461,7 +427,7 @@ export default function CombinationSumIIVisualizer() {
   const panelConfigs = useMemo(
     () => [
       { id: 'primary', title: 'State & Recursion Tree', dockMode: 'split-right' },
-      { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code', dockMode: 'split-right' },
       { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
     ],
     []

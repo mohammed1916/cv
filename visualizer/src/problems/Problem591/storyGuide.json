@@ -1,0 +1,31 @@
+{
+  "number": "591",
+  "title": "Tag Validator",
+  "goal": "Decide whether markup is exactly one valid root tag containing properly nested content.",
+  "strategy": "A stack tracks open tag names. Ordinary text and CDATA are allowed only inside the root. Closing tags must match the stack top, and once the root closes no additional content may follow.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether markup is exactly one valid root tag containing properly nested content.",
+    "inspect": "A stack tracks open tag names. Ordinary text and CDATA are allowed only inside the root. Closing tags must match the stack top, and once the root closes no additional content may follow.",
+    "update": "A stack tracks open tag names. Ordinary text and CDATA are allowed only inside the root. Closing tags must match the stack top, and once the root closes no additional content may follow.",
+    "done": "Decide whether markup is exactly one valid root tag containing properly nested content."
+  },
+  "edgeCases": [
+    "A closing tag cannot skip the most recent opening tag",
+    "A second complete root is still invalid",
+    "An unterminated CDATA section never becomes ordinary text"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

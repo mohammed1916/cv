@@ -1,0 +1,31 @@
+{
+  "number": "2234",
+  "title": "Maximum Total Beauty of the Gardens",
+  "goal": "Distribute extra flowers to maximize full-garden rewards plus the minimum incomplete-garden reward.",
+  "strategy": "For each possible number of incomplete gardens, complete the largest existing gardens first. Spend the remaining budget raising the minimum among the incomplete prefix, capped below target so its partial reward still applies.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Distribute extra flowers to maximize full-garden rewards plus the minimum incomplete-garden reward.",
+    "inspect": "For each possible number of incomplete gardens, complete the largest existing gardens first. Spend the remaining budget raising the minimum among the incomplete prefix, capped below target so its partial reward still applies.",
+    "update": "For each possible number of incomplete gardens, complete the largest existing gardens first. Spend the remaining budget raising the minimum among the incomplete prefix, capped below target so its partial reward still applies.",
+    "done": "Distribute extra flowers to maximize full-garden rewards plus the minimum incomplete-garden reward."
+  },
+  "edgeCases": [
+    "All gardens already full have no partial component",
+    "A strong partial reward can favor leaving one garden incomplete",
+    "No new flowers preserves the existing full and minimum rewards"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

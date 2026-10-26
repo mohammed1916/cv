@@ -1,0 +1,31 @@
+{
+  "number": "1693",
+  "title": "Daily Leads and Partners",
+  "goal": "Count distinct leads and partners for each date and make.",
+  "strategy": "The grouping key contains two columns. Lead and partner uniqueness are independent, so maintain two sets per group.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count distinct leads and partners for each date and make.",
+    "inspect": "The grouping key contains two columns. Lead and partner uniqueness are independent, so maintain two sets per group.",
+    "update": "The grouping key contains two columns. Lead and partner uniqueness are independent, so maintain two sets per group.",
+    "done": "Count distinct leads and partners for each date and make."
+  },
+  "edgeCases": [
+    "Duplicate rows do not inflate distinct counts",
+    "One partner with several leads",
+    "Empty sales table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

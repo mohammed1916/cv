@@ -1,0 +1,27 @@
+{
+  "title": "Number of Good Pairs",
+  "goal": "Count index pairs i < j with equal array values.",
+  "strategy": "When a value arrives, pair it with every earlier equal occurrence. Counting before incrementing prevents pairing an index with itself.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Establish the initial state.",
+    "inspect": "When a value arrives, pair it with every earlier equal occurrence. Counting before incrementing prevents pairing an index with itself.",
+    "update": "Each new occurrence pairs with all earlier equal values exactly once.",
+    "done": "Each new occurrence pairs with all earlier equal values exactly once."
+  },
+  "edgeCases": [
+    "All equal",
+    "All distinct",
+    "One value"
+  ],
+  "number": "1512",
+  "checks": [],
+  "inputRules": [
+    "Inputs are validated against this algorithm’s domain and the documented visualization size limits."
+  ]
+}

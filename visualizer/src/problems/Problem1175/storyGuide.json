@@ -1,0 +1,31 @@
+{
+  "number": "1175",
+  "title": "Prime Arrangements",
+  "goal": "Count permutations where prime values occupy prime-numbered positions.",
+  "strategy": "Prime and nonprime values permute independently inside equally sized position groups. Multiply the two factorials modulo one billion and seven.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count permutations where prime values occupy prime-numbered positions.",
+    "inspect": "Prime and nonprime values permute independently inside equally sized position groups. Multiply the two factorials modulo one billion and seven.",
+    "update": "Prime and nonprime values permute independently inside equally sized position groups. Multiply the two factorials modulo one billion and seven.",
+    "done": "Count permutations where prime values occupy prime-numbered positions."
+  },
+  "edgeCases": [
+    "No prime values",
+    "One prime and one nonprime",
+    "A prime upper endpoint"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

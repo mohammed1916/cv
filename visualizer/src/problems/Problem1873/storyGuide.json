@@ -1,0 +1,31 @@
+{
+  "number": "1873",
+  "title": "Calculate Special Bonus",
+  "goal": "Compute full-salary bonuses for odd employee IDs whose names do not start with M.",
+  "strategy": "This is a conditional projection, not a row filter. Every employee appears; nonqualifying employees receive zero.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Compute full-salary bonuses for odd employee IDs whose names do not start with M.",
+    "inspect": "This is a conditional projection, not a row filter. Every employee appears; nonqualifying employees receive zero.",
+    "update": "This is a conditional projection, not a row filter. Every employee appears; nonqualifying employees receive zero.",
+    "done": "Compute full-salary bonuses for odd employee IDs whose names do not start with M."
+  },
+  "edgeCases": [
+    "Name comparison targets uppercase M",
+    "Qualified zero salary still returns zero",
+    "Empty employee table"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

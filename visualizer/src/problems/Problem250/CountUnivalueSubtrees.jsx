@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/count-univalue-subtrees.js';
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -7,7 +8,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './CountUnivalueSubtrees.css'
 import { createPortal } from 'react-dom'
 
@@ -44,7 +45,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = getExamplesOr('count-univalue-subtrees', [])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 
 export default function CountUnivalueSubtrees() {
   const [input, setInput] = useState('[1, 2, 3]')
@@ -91,7 +92,7 @@ export default function CountUnivalueSubtrees() {
   ], [])
   const panelContents = {
     left: (<div className="count-univalue-subtrees-panel">
-            <div className="count-univalue-subtrees-panel-head">
+            <div className="vis-panel-head count-univalue-subtrees-panel-head">
               Input
               {inputError && <span style={{ color: '#ea0c0c', marginLeft: 8 }}>{inputError}</span>}
             </div>
@@ -137,7 +138,7 @@ export default function CountUnivalueSubtrees() {
             </div>
           </div>),
     right: (<div className="count-univalue-subtrees-panel">
-            <div className="count-univalue-subtrees-panel-head">Details</div>
+            <div className="vis-panel-head count-univalue-subtrees-panel-head">Details</div>
             <div className="count-univalue-subtrees-panel-body">
               <div className="count-univalue-subtrees-info">
                 <h3>Problem 250</h3>

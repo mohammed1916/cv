@@ -1,0 +1,19 @@
+{
+  "number": "353",
+  "title": "Design Underground System",
+  "goal": "Solve Design Underground System: Track average travel times between station pairs in an underground system.",
+  "strategy": "Track average travel times between station pairs in an underground system.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Each checkout pairs with that passenger’s active check-in; averages are maintained separately for ordered station pairs."
+  ],
+  "checks": [],
+  "inputRules": [
+    "events must be an array"
+  ],
+  "source": [
+    "src/problems/Problem353/index.jsx",
+    "src/problems/Problem353/Problem353Visualizer.jsx"
+  ]
+}

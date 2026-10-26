@@ -1,0 +1,31 @@
+{
+  "number": "1820",
+  "title": "Maximum Number of Accepted Invitations",
+  "goal": "Maximize accepted invitations with no participant assigned more than once.",
+  "strategy": "Use augmenting paths in a bipartite graph. When a desired partner is occupied, recursively reassign their current owner; a successful chain adds one new matched pair.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize accepted invitations with no participant assigned more than once.",
+    "inspect": "Use augmenting paths in a bipartite graph. When a desired partner is occupied, recursively reassign their current owner; a successful chain adds one new matched pair.",
+    "update": "Use augmenting paths in a bipartite graph. When a desired partner is occupied, recursively reassign their current owner; a successful chain adds one new matched pair.",
+    "done": "Maximize accepted invitations with no participant assigned more than once."
+  },
+  "edgeCases": [
+    "No acceptable partners",
+    "Several invitations compete for one partner",
+    "Every pair acceptable"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/subtree-of-another-tree.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -8,7 +11,7 @@ import PatternOverlay from '../../components/PatternOverlay'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges } from '../../components/treeUtils'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './SubtreeVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -76,7 +79,7 @@ function generateSteps(rootArr, subArr) {
     return steps
 }
 
-const EXAMPLES = getExamples('subtree-of-another-tree')
+const EXAMPLES = authoredExamples0
 
 function parseArr(str) {
     try {
@@ -149,8 +152,8 @@ function VisualizationPanel({ root, sub, step, matchId, rootError, subError, app
 }
 
 export default function SubtreeVisualizer() {
-    const [rootInput, setRootInput] = useState('[3,4,5,1,2]')
-    const [subInput, setSubInput] = useState('[4,1,2]')
+    const [rootInput, setRootInput] = useState(JSON.stringify(AUTHORED_INITIAL.root))
+    const [subInput, setSubInput] = useState(JSON.stringify(AUTHORED_INITIAL.sub))
 
     const { arr: rootArr, err: rootErr } = useMemo(() => parseArr(rootInput), [rootInput])
     const { arr: subArr, err: subErr } = useMemo(() => parseArr(subInput), [subInput])

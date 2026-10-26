@@ -1,0 +1,23 @@
+{
+  "number": "289",
+  "title": "Game of Life",
+  "goal": "Solve Game of Life: Simulate game of life cellular automaton.",
+  "strategy": "Simulate game of life cellular automaton.",
+  "phases": [
+    "init",
+    "evaluate",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "All updates use the original generation; an in-place encoding must retain old state until every neighbor count is read."
+  ],
+  "checks": [],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem289/index.jsx",
+    "src/problems/Problem289/Problem289Visualizer.jsx"
+  ]
+}

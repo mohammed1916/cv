@@ -1,0 +1,31 @@
+{
+  "number": "596",
+  "title": "Classes With at Least 5 Students",
+  "goal": "Find classes with at least five enrolled students.",
+  "strategy": "Each input row is one unique student-class enrollment. Count rows within each class, then apply the threshold to the completed groups rather than individual enrollment rows.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find classes with at least five enrolled students.",
+    "inspect": "Each input row is one unique student-class enrollment. Count rows within each class, then apply the threshold to the completed groups rather than individual enrollment rows.",
+    "update": "Each input row is one unique student-class enrollment. Count rows within each class, then apply the threshold to the completed groups rather than individual enrollment rows.",
+    "done": "Find classes with at least five enrolled students."
+  },
+  "edgeCases": [
+    "Exactly five distinct students qualify",
+    "The same students can populate different class groups",
+    "No enrollment means no qualifying class"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

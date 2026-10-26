@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/remove-duplicate-letters.js';
 import { useState, useMemo, useCallback } from 'react'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
@@ -6,7 +7,7 @@ import { StackLane } from '../../components/shared'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import { createPortal } from 'react-dom'
 import './RemoveDuplicateLettersVisualizer.css'
 
@@ -18,12 +19,12 @@ function makeSteps({ s }) {
     stack.push(char); used.add(char); steps.push({ activeLine: 8, phase: 'process', message: `Push ${char}; it is the best available next letter.`, stack: [...stack], used: [...used], index, last }) }
   steps.push({ activeLine: 9, phase: 'done', message: `Result: ${stack.join('')}.`, stack: [...stack], used: [...used], index: null, last }); return steps
 }
-const EXAMPLES = getExamplesOr('remove-duplicate-letters', [{ label: 'bcabc', s: 'bcabc' }, { label: 'cbacdcbc', s: 'cbacdcbc' }])
+const EXAMPLES = (authoredExamples0.length ? authoredExamples0 : [])
 function parse(raw) { try { const data = JSON.parse(raw); if (typeof data.s !== 'string' || !/^[a-z]+$/.test(data.s)) throw new Error('Use { "s": "lowercase letters" }.'); return { input: data, inputError: '' } } catch (error) { return { input: null, inputError: error.message } } }
 export default function RemoveDuplicateLettersVisualizer() {
   const [raw, setRaw] = useState(JSON.stringify(EXAMPLES[0])); const { input, inputError } = useMemo(() => parse(raw), [raw]); const steps = useMemo(() => input ? makeSteps(input).map((step) => ({ ...step, relatedLines: [step.activeLine] })) : [], [input])
   const { stepIndex, setStepIndex, stepForward, stepBack, togglePlay, handleReset, isPlaying, speed, setSpeed, isDone } = usePlaybackState(steps.length); const step = stepIndex >= 0 ? steps[stepIndex] : null; const links = useCodeVisualConnectivity({ steps, stepIndex, onStepJump: setStepIndex }); const apply = useCallback((example) => { setRaw(JSON.stringify(example)); handleReset() }, [handleReset]); const [divs, setDivs] = useState(null)
-  const panels = useMemo(() => [{ id: 'input', title: 'Input' }, { id: 'code', title: 'Python code', dockMode: 'split-bottom' }, { id: 'viz', title: 'Monotonic stack', dockMode: 'split-right' }, { id: 'state', title: 'Letter positions', dockMode: 'split-bottom' }], [])
+  const panels = useMemo(() => [{ id: 'input', title: 'Input' }, { id: 'code', title: 'Python code', dockMode: 'split-right' }, { id: 'viz', title: 'Monotonic stack', dockMode: 'split-right' }, { id: 'state', title: 'Letter positions', dockMode: 'split-bottom' }], [])
   const contents = { input: <div className="remove-duplicate-letters-panel"><div className="remove-duplicate-letters-panel-body"><textarea className="remove-duplicate-letters-textarea" value={raw} onChange={(event) => setRaw(event.target.value)} /></div></div>, code: <CodeTracePanel step={step} codeLines={CODE} highlightedLines={links.highlightedLines} onLineSelect={links.handleLineSelect} />, viz: !input ? <div className="remove-duplicate-letters-error">{inputError}</div> : <div className="remove-duplicate-letters-panel"><div className="remove-duplicate-letters-panel-body"><div className="remove-duplicate-letters-step-info"><h3>{step?.message || 'Press play to start.'}</h3></div><div className="remove-duplicate-letters-letters">{[...input.s].map((char, index) => <b className={index === step?.index ? 'active' : ''} key={`${char}-${index}`}>{char}</b>)}</div><StackLane title="Lexicographic stack" items={step?.stack || []} dropped={step?.dropped || []} note={`used: {${(step?.used || []).join(', ')}}`} /></div></div>, state: <div className="remove-duplicate-letters-panel"><div className="remove-duplicate-letters-panel-body"><div className="remove-duplicate-letters-last-map">{Object.entries(step?.last || {}).map(([char, index]) => <span key={char}>{char} → {index}</span>)}</div>{EXAMPLES.map((example, index) => <button className="remove-duplicate-letters-example-btn" key={index} onClick={() => apply(example)}>{example.label || example.s}</button>)}</div></div> }
   return <div className="remove-duplicate-letters-shell"><LuminoDockPanel panels={panels} onPanelReady={setDivs} />{divs && Object.entries(contents).map(([id, content]) => divs[id] && createPortal(content, divs[id]))}<FloatingPanel title="Playback Controls"><PlaybackControls isPlaying={isPlaying} isDone={isDone} speed={speed} onPlayToggle={togglePlay} onPrev={stepBack} onNext={stepForward} onReset={handleReset} prevDisabled={stepIndex < 0} nextDisabled={isDone} resetDisabled={stepIndex < 0} onSpeedChange={(event) => setSpeed(Number(event.target.value))} /></FloatingPanel></div>
 }

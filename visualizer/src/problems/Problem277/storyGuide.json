@@ -1,0 +1,26 @@
+{
+  "number": "277",
+  "title": "Find the Celebrity",
+  "goal": "Solve Find the Celebrity: Find celebrity everyone knows.",
+  "strategy": "Find celebrity everyone knows.",
+  "phases": [
+    "init",
+    "process",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "person != candidate and (knows(candidate, person) or not knows(person, candidate))",
+      "outcome": "return -1"
+    }
+  ],
+  "inputRules": [
+    "input must be an array"
+  ],
+  "source": [
+    "src/problems/Problem277/index.jsx",
+    "src/problems/Problem277/Problem277Visualizer.jsx"
+  ]
+}

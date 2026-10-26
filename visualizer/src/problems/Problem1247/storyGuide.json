@@ -1,0 +1,31 @@
+{
+  "number": "1247",
+  "title": "Minimum Swaps to Make Strings Equal",
+  "goal": "Find the fewest cross-string swaps needed to make two x/y strings equal.",
+  "strategy": "Same-direction mismatches pair in one swap. Two leftover opposite directions require two swaps; an odd total number of mismatches is impossible.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the fewest cross-string swaps needed to make two x/y strings equal.",
+    "inspect": "Same-direction mismatches pair in one swap. Two leftover opposite directions require two swaps; an odd total number of mismatches is impossible.",
+    "update": "Same-direction mismatches pair in one swap. Two leftover opposite directions require two swaps; an odd total number of mismatches is impossible.",
+    "done": "Find the fewest cross-string swaps needed to make two x/y strings equal."
+  },
+  "edgeCases": [
+    "Already equal",
+    "One unmatched mismatch is impossible",
+    "Opposite leftover directions need two swaps"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

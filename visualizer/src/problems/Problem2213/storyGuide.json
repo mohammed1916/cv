@@ -1,0 +1,31 @@
+{
+  "number": "2213",
+  "title": "Longest Substring of One Repeating Character",
+  "goal": "After each character replacement, report the longest run of one repeated character.",
+  "strategy": "Each segment-tree node stores its boundary characters, equal-character prefix and suffix lengths, and best internal run. A replacement changes one leaf and only the ancestors that contain it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "After each character replacement, report the longest run of one repeated character.",
+    "inspect": "Each segment-tree node stores its boundary characters, equal-character prefix and suffix lengths, and best internal run. A replacement changes one leaf and only the ancestors that contain it.",
+    "update": "Each segment-tree node stores its boundary characters, equal-character prefix and suffix lengths, and best internal run. A replacement changes one leaf and only the ancestors that contain it.",
+    "done": "After each character replacement, report the longest run of one repeated character."
+  },
+  "edgeCases": [
+    "Updating a character to itself preserves the result",
+    "A one-character segment tree always reports one",
+    "Replacing a separator joins two equal runs"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

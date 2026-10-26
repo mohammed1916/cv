@@ -1,0 +1,7 @@
+.recurrence-grid { max-width: 100%; max-height: 260px; overflow: auto; }
+.recurrence-grid table { border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.recurrence-grid caption { text-align: left; padding-block: 8px; line-height: 1.5; }
+.recurrence-grid th, .recurrence-grid td { border: 1px solid var(--border); padding: 8px; min-width: 64px; text-align: center; color: var(--text); background: var(--surface); }
+.recurrence-grid td small { display: block; font-size: 10px; margin-top: 4px; color: var(--text-muted); }
+.recurrence-grid td[data-role="current"] { outline: 3px solid var(--primary); outline-offset: -3px; }
+.recurrence-grid td[data-role="skip"], .recurrence-grid td[data-role="use"] { background: var(--surface2); border-bottom: 3px solid var(--primary); }

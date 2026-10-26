@@ -1,0 +1,22 @@
+{
+  "number": "430",
+  "title": "Flatten a Multilevel Doubly Linked List",
+  "goal": "Solve Flatten a Multilevel Doubly Linked List: Splice a child list immediately after its parent while preserving the deferred next chain and all backward links.",
+  "strategy": "Splice a child list immediately after its parent while preserving the deferred next chain and all backward links.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A child chain may itself have children; the old next chain must resume after the entire child subtree."
+  ],
+  "checks": [
+    {
+      "condition": "not head",
+      "outcome": "return head"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem430/index.jsx",
+    "src/problems/Problem430/Problem430Visualizer.jsx"
+  ]
+}

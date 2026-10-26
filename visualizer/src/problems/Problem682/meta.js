@@ -1,5 +1,11 @@
 export const meta = {
-  number: '682', title: 'Baseball Game', slug: 'baseball-game', difficulty: 'Easy',
-  tags: ['Array', 'Stack', 'Simulation'], accent: '#15803d',
-  description: 'Keep a stack of scores; each operation adds, doubles, or cancels the most recent entries.',
-}
+  "number": "682",
+  "title": "Baseball Game",
+  "slug": "baseball-game",
+  "difficulty": "Easy",
+  "tags": [
+    "Stack"
+  ],
+  "accent": "#0891b2",
+  "description": "Compute the total of valid baseball rounds after cancel, double, and sum operations."
+};

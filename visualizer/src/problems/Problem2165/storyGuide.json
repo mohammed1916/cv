@@ -1,0 +1,31 @@
+{
+  "number": "2165",
+  "title": "Smallest Value of the Rearranged Number",
+  "goal": "Rearrange the digits into the smallest number with the original sign and no leading zero.",
+  "strategy": "For a positive number, use ascending digits but move the smallest nonzero digit to the front. For a negative number, the smallest signed value has the largest magnitude, so use descending digits.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Rearrange the digits into the smallest number with the original sign and no leading zero.",
+    "inspect": "For a positive number, use ascending digits but move the smallest nonzero digit to the front. For a negative number, the smallest signed value has the largest magnitude, so use descending digits.",
+    "update": "For a positive number, use ascending digits but move the smallest nonzero digit to the front. For a negative number, the smallest signed value has the largest magnitude, so use descending digits.",
+    "done": "Rearrange the digits into the smallest number with the original sign and no leading zero."
+  },
+  "edgeCases": [
+    "Negative values reverse the magnitude objective",
+    "Zero has no nonzero leading digit to select",
+    "Repeated digits keep their multiplicities"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

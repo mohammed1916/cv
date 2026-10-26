@@ -1,0 +1,27 @@
+{
+  "number": "584",
+  "title": "Find Customer Referee",
+  "goal": "Solve Find Customer Referee: Find customers who were NOT referred by a specific customer",
+  "strategy": "Find customers who were NOT referred by a specific customer",
+  "phases": [
+    "init",
+    "check_referee",
+    "check_value",
+    "include",
+    "exclude",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A null referee still qualifies when excluding one referee ID; ordinary inequality alone may discard nulls in SQL."
+  ],
+  "checks": [],
+  "inputRules": [
+    "refereeId must be a number",
+    "customers must be an array"
+  ],
+  "source": [
+    "src/problems/Problem584/index.jsx",
+    "src/problems/Problem584/FindCustomerRefereeVisualizer.jsx"
+  ]
+}

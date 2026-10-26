@@ -1,0 +1,27 @@
+{
+  "number": "893",
+  "title": "Groups of Special-Equivalent Strings",
+  "goal": "Count groups reachable by swapping equal-parity positions.",
+  "strategy": "Swaps cannot move a character between parity classes. Sorted even and odd multisets are a complete group signature.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count groups reachable by swapping equal-parity positions.",
+    "inspect": "Swaps cannot move a character between parity classes. Sorted even and odd multisets are a complete group signature.",
+    "update": "Swaps cannot move a character between parity classes. Sorted even and odd multisets are a complete group signature.",
+    "done": "Count groups reachable by swapping equal-parity positions."
+  },
+  "edgeCases": [
+    "One-letter groups",
+    "Repeated identical words",
+    "Same multiset different parity"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

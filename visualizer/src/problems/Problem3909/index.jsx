@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3909.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -14,14 +18,10 @@ const definition = {
     { id: 'right', label: 'Sum descending', description: 'Include the peak through the last index.' },
     { id: 'done', label: 'Compare', description: 'Return 0, 1, or −1 according to the larger sum.' },
   ],
-  examples: [
-    { label: 'Descending wins', input: '[1,3,2,1]' },
-    { label: 'Ascending wins', input: '[2,4,5,2]' },
-    { label: 'Equal sums', input: '[1,2,4,3]' },
-  ],
+  examples: authoredExamples0,
 }
 
-export default function CompareBitonicSums() {
+function CompareBitonicSums() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Bitonic input and shared peak" length={run.input.length} active={step.index} valueAt={i => run.input[i]}
       roleAt={i => step.peak === null ? 'unclassified' : i === step.peak ? 'both parts' : i < step.peak ? 'ascending' : 'descending'} />
@@ -43,3 +43,5 @@ export default function CompareBitonicSums() {
     <p>The shared peak could be subtracted from both sides without changing the comparison. Here it remains in both totals to match the problem's definition.</p>
   </>} />
 }
+
+export default withProblemStory(CompareBitonicSums, storyGuide);

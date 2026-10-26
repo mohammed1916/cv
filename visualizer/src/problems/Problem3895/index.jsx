@@ -1,3 +1,7 @@
+import authoredExamples0 from '../../config/examples/local--3895.js';
+
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
@@ -12,14 +16,9 @@ const definition = {
     { id: 'finish', label: 'Number complete', description: 'The quotient is zero, so no digits remain.' },
     { id: 'done', label: 'Return total', description: 'Return all occurrences, not merely the number of matching elements.' },
   ],
-  examples: [
-    { label: 'Repeated twos', input: '{"nums":[12,54,32,22],"digit":2}' },
-    { label: 'Absent digit', input: '{"nums":[1,34,7],"digit":9}' },
-    { label: 'Trailing zeros', input: '{"nums":[1000000,10,101],"digit":0}' },
-    { label: 'All digits match', input: '{"nums":[777777,7],"digit":7}' },
-  ],
+  examples: authoredExamples0,
 }
-export default function CountDigitAppearances() {
+function CountDigitAppearances() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const digits = step.index < 0 ? '' : String(run.input[step.index])
     const active = step.phase === 'extract' ? digits.length - 1 - step.position : -1
@@ -41,3 +40,5 @@ export default function CountDigitAppearances() {
     <p>A zero remainder counts when the target is zero. A zero quotient ends the loop; it is not an additional leading zero. Input numbers are positive under this problem's constraints.</p>
   </>} />
 }
+
+export default withProblemStory(CountDigitAppearances, storyGuide);

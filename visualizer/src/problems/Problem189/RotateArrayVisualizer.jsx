@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from "react";
+import authoredExamples0 from '../../config/examples/rotate-array.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LuminoDockPanel from '../../components/LuminoDockPanel'
 import FloatingPanel from "../../components/shared/FloatingPanel";
@@ -8,7 +11,7 @@ import PatternOverlay from "../../components/PatternOverlay";
 import { usePlaybackState } from "../../hooks/usePlaybackState";
 import { usePatternOverlay } from "../../hooks/usePatternOverlay";
 import { useCodeVisualConnectivity } from "../../hooks/useCodeVisualConnectivity";
-import { getExamples } from '../../config/examplesRegistry'
+
 import "./RotateArrayVisualizer.css";
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -20,7 +23,7 @@ const SOLUTION_CODE = getSolutionCode('rotate-array')
 // ─── Pattern annotations ───────────────────────────────────────────────────
 const LINE_PATTERN_MAP = {}  // Auto-generated: maps line numbers to phase names
 const PATTERNS = []  // Auto-generated: list of phase names used in this visualizer
-const EXAMPLES = getExamples('rotate-array');
+const EXAMPLES = authoredExamples0;
 
 function generateSteps(inputNums, inputK) {
   const steps = [];
@@ -121,7 +124,7 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16, padding: 16 }}>
       <div>
-        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {EXAMPLES.map(e => (
             <button
@@ -144,7 +147,7 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
 
       <CarouselVisualization nums={nums} step={step} n={n} k={k} />
 
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Array State</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Array State</div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {nums.map((val, idx) => (
           <div
@@ -172,8 +175,8 @@ function VisualizationPanel({ nums, step, n, k, applyEx }) {
 
 export default function RotateArrayVisualizer() {
   const [ex, setEx] = useState(EXAMPLES[0]);
-  const [numsInput, setNumsInput] = useState("[1,2,3,4,5,6,7]");
-  const [kInput, setKInput] = useState(3);
+  const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums));
+  const [kInput, setKInput] = useState(String(AUTHORED_INITIAL.k));
   const { nums: inputNums, k, inputError } = useMemo(() => {
     try {
       const parsedNums = JSON.parse(numsInput); if (!Array.isArray(parsedNums)) throw new Error('nums must be an array');

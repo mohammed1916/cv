@@ -1,147 +1,804 @@
 .remove-invalid-parentheses-shell {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+
+  width: 100%;
   height: 100%;
-  gap: 16px;
-  overflow: hidden;
-}
-
-.remove-invalid-parentheses-top {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-  gap: 16px;
-}
-
-.remove-invalid-parentheses-middle {
-  display: flex;
-  height: 240px;
-  gap: 16px;
-  flex-shrink: 0;
-}
-
-.remove-invalid-parentheses-bottom {
-  height: 80px;
-  flex-shrink: 0;
-}
-
-.remove-invalid-parentheses-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
   min-width: 0;
+  min-height: 480px;
+
   overflow: hidden;
-  flex: 1;
 }
 
-.remove-invalid-parentheses-panel-head {
-  padding: 12px 16px;
-  background: var(--surface-3);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-main);
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
+
+/* =========================================================
+   Generic dock body
+   ========================================================= */
 
 .remove-invalid-parentheses-panel-body {
-  padding: 16px;
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+  box-sizing: border-box;
 
-.remove-invalid-parentheses-textarea {
-  font-family: monospace;
-  font-size: 12px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface-1);
-  color: var(--text-main);
-  resize: none;
-  flex: 1;
-}
-
-.remove-invalid-parentheses-viz {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   width: 100%;
-}
-.remove-invalid-level { display:flex; flex-wrap:wrap; gap:8px; }.remove-invalid-level span { padding:8px 10px; border:1px solid var(--border); background:var(--surface-1); border-radius:7px; overflow-wrap:anywhere; }
+  height: 100%;
+  min-width: 0;
 
-.remove-invalid-parentheses-step-info {
-  padding: 16px;
-  background: linear-gradient(135deg, #f43f5e20, #f43f5e10);
-  border-left: 4px solid #f43f5e;
-  border-radius: 8px;
-  color: var(--text-main);
-}
+  overflow: auto;
 
-.remove-invalid-parentheses-step-info h3 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  padding: 14px;
+
+  container-type: inline-size;
 }
 
-.remove-invalid-parentheses-example-btn {
-  padding: 8px 12px;
+.remove-invalid-parentheses-code {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   Input
+   ========================================================= */
+
+.remove-invalid-parentheses-input-card {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 11px;
+
   border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface-1);
-  color: var(--text-main);
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
+  border-radius: 8px;
 
-.remove-invalid-parentheses-example-btn:hover {
-  background: #f43f5e20;
-  border-color: #f43f5e;
-  color: #f43f5e;
-}
-
-.remove-invalid-parentheses-example-btn.active {
-  background: var(--error-glow);
-  border-color: var(--error);
-  color: var(--text);
+  background: var(--surface2);
 }
 
 .remove-invalid-parentheses-examples {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.remove-invalid-parentheses-example-btn {
+  appearance: none;
+
+  padding: 5px 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    border-color 120ms ease,
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.remove-invalid-parentheses-example-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.remove-invalid-parentheses-field {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.remove-invalid-parentheses-field > span {
+  color: var(--muted);
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.remove-invalid-parentheses-textarea {
+  box-sizing: border-box;
+
+  width: 100%;
+  min-height: 68px;
+
+  padding: 8px 10px;
+
+  resize: vertical;
+
+  outline: none;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.remove-invalid-parentheses-textarea:focus {
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 2px
+    color-mix(
+      in srgb,
+      var(--primary) 15%,
+      transparent
+    );
+}
+
+.remove-invalid-parentheses-error {
+  padding: 8px 9px;
+
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+
+  background:
+    color-mix(
+      in srgb,
+      #ef4444 8%,
+      var(--surface)
+    );
+
+  color: #ef4444;
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   Sections
+   ========================================================= */
+
+.remove-invalid-parentheses-section {
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.remove-invalid-parentheses-error {
-  padding: 16px;
-  background: #ef444420;
-  border: 1px solid #ef4444;
-  border-radius: 8px;
-  color: #ef4444;
+.remove-invalid-parentheses-section-head {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.remove-invalid-parentheses-section-head strong {
+  color: var(--text);
+
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.remove-invalid-parentheses-section-head > span {
+  flex: 0 0 auto;
+
+  color: var(--muted);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   Status / current decision
+   ========================================================= */
+
+.remove-invalid-parentheses-status {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  padding: 9px 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface2);
+  color: var(--text);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.remove-invalid-parentheses-decision {
+  flex: 0 0 auto;
+
+  padding: 2px 6px;
+
+  border-radius: 4px;
+
+  background: var(--surface);
+  color: var(--muted);
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.remove-invalid-parentheses-decision.keep {
+  background:
+    color-mix(
+      in srgb,
+      #22c55e 12%,
+      var(--surface)
+    );
+
+  color: #168044;
+}
+
+.remove-invalid-parentheses-decision.discard {
+  background:
+    color-mix(
+      in srgb,
+      #f59e0b 14%,
+      var(--surface)
+    );
+
+  color: #a36907;
+}
+
+.remove-invalid-parentheses-decision.pruned {
+  background:
+    color-mix(
+      in srgb,
+      #ef4444 12%,
+      var(--surface)
+    );
+
+  color: #d12d2d;
+}
+
+.remove-invalid-parentheses-decision.backtrack {
+  background:
+    color-mix(
+      in srgb,
+      #8b5cf6 12%,
+      var(--surface)
+    );
+
+  color: #7c3aed;
+}
+
+
+/* =========================================================
+   Removal budget
+   ========================================================= */
+
+.remove-invalid-parentheses-stats {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+.remove-invalid-parentheses-stat {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  padding: 8px 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface2);
+}
+
+.remove-invalid-parentheses-stat span {
+  min-width: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.remove-invalid-parentheses-stat strong {
+  flex: 0 0 auto;
+
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
   font-size: 12px;
-  font-family: monospace;
 }
 
-.remove-invalid-parentheses-panel-input {
-  flex: 0.35;
+.remove-invalid-parentheses-stat.left {
+  border-left: 3px solid #3b82f6;
 }
 
-.remove-invalid-parentheses-panel-viz {
-  flex: 0.65;
+.remove-invalid-parentheses-stat.right {
+  border-left: 3px solid #f59e0b;
 }
 
-@media (max-width: 1024px) {
-  .remove-invalid-parentheses-middle {
-    height: 200px;
+
+/* =========================================================
+   Partial expression / balance
+   ========================================================= */
+
+.remove-invalid-parentheses-expression {
+  min-height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8px 10px;
+
+  overflow-wrap: anywhere;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--code-line);
+  color: var(--code-text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.remove-invalid-parentheses-expression > span {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.remove-invalid-parentheses-balance {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 6px;
+}
+
+.remove-invalid-parentheses-balance > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 7px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface2);
+}
+
+.remove-invalid-parentheses-balance span {
+  color: var(--muted);
+
+  font-size: 8px;
+  line-height: 1.3;
+}
+
+.remove-invalid-parentheses-balance strong {
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   Decision tree explanation
+   ========================================================= */
+
+.remove-invalid-parentheses-tree-help {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding: 9px 10px;
+
+  border-left: 3px solid var(--primary);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 5%,
+      var(--surface)
+    );
+}
+
+.remove-invalid-parentheses-tree-help strong {
+  color: var(--text);
+
+  font-size: 11px;
+}
+
+.remove-invalid-parentheses-tree-help span {
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.remove-invalid-parentheses-tree-help b {
+  color: var(--text);
+}
+
+
+/* =========================================================
+   Call stack
+   ========================================================= */
+
+.remove-invalid-parentheses-stack-help {
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.remove-invalid-parentheses-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.remove-invalid-parentheses-frame {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding: 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 7px;
+
+  background: var(--surface2);
+}
+
+.remove-invalid-parentheses-frame.active {
+  border-color: var(--primary);
+
+  box-shadow:
+    inset 3px 0 0 var(--primary);
+}
+
+.remove-invalid-parentheses-frame-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.remove-invalid-parentheses-frame-head strong {
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 10px;
+}
+
+.remove-invalid-parentheses-frame-head span {
+  padding: 2px 5px;
+
+  border-radius: 4px;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--primary) 12%,
+      transparent
+    );
+
+  color: var(--primary);
+
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.remove-invalid-parentheses-frame-expression {
+  overflow-wrap: anywhere;
+
+  color: var(--muted);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+.remove-invalid-parentheses-frame-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 5px;
+}
+
+.remove-invalid-parentheses-frame-grid > span {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+
+  padding: 5px 6px;
+
+  border-radius: 5px;
+
+  background: var(--surface);
+
+  color: var(--muted);
+
+  font-size: 8px;
+}
+
+.remove-invalid-parentheses-frame-grid strong {
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   Results
+   ========================================================= */
+
+.remove-invalid-parentheses-result-summary {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.remove-invalid-parentheses-result-summary > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  padding: 9px;
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  background: var(--surface2);
+}
+
+.remove-invalid-parentheses-result-summary span {
+  color: var(--muted);
+
+  font-size: 9px;
+}
+
+.remove-invalid-parentheses-result-summary strong {
+  color: var(--text);
+
+  font-size: 16px;
+}
+
+.remove-invalid-parentheses-result-help {
+  padding: 8px 9px;
+
+  border-left: 3px solid #22c55e;
+
+  background:
+    color-mix(
+      in srgb,
+      #22c55e 5%,
+      var(--surface)
+    );
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.remove-invalid-parentheses-results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.remove-invalid-parentheses-answer {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 9px;
+
+  border:
+    1px solid
+    color-mix(
+      in srgb,
+      #22c55e 35%,
+      var(--border)
+    );
+
+  border-radius: 6px;
+
+  background:
+    color-mix(
+      in srgb,
+      #22c55e 5%,
+      var(--surface)
+    );
+}
+
+.remove-invalid-parentheses-answer > span {
+  flex: 0 0 auto;
+
+  color: #168044;
+
+  font-weight: 800;
+}
+
+.remove-invalid-parentheses-answer code {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+
+  color: var(--text);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   Empty
+   ========================================================= */
+
+.remove-invalid-parentheses-empty {
+  display: grid;
+  place-items: center;
+
+  min-height: 72px;
+
+  padding: 12px;
+
+  border: 1px dashed var(--border);
+  border-radius: 7px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+
+/* =========================================================
+   Narrow Lumino panels
+   ========================================================= */
+
+@container (max-width: 520px) {
+  .remove-invalid-parentheses-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .remove-invalid-parentheses-balance {
+    grid-template-columns: 1fr;
+  }
+
+  .remove-invalid-parentheses-result-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   Page fallback
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .remove-invalid-parentheses-panel-body {
+    padding: 10px;
+    gap: 11px;
+  }
+
+  .remove-invalid-parentheses-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .remove-invalid-parentheses-balance {
+    grid-template-columns: 1fr;
+  }
+
+  .remove-invalid-parentheses-result-summary {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,31 @@
+{
+  "number": "1765",
+  "title": "Map of Highest Peak",
+  "goal": "Assign maximum possible terrain heights with water at zero and neighboring differences at most one.",
+  "strategy": "Every water cell constrains nearby heights. Multi-source breadth-first search computes distance to the nearest water, which is the greatest feasible height at each location.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Assign maximum possible terrain heights with water at zero and neighboring differences at most one.",
+    "inspect": "Every water cell constrains nearby heights. Multi-source breadth-first search computes distance to the nearest water, which is the greatest feasible height at each location.",
+    "update": "Every water cell constrains nearby heights. Multi-source breadth-first search computes distance to the nearest water, which is the greatest feasible height at each location.",
+    "done": "Assign maximum possible terrain heights with water at zero and neighboring differences at most one."
+  },
+  "edgeCases": [
+    "Every cell is water",
+    "One water source in a long row",
+    "Single water cell"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

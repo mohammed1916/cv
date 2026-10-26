@@ -1,0 +1,31 @@
+{
+  "number": "2111",
+  "title": "Minimum Operations to Make the Array K-Increasing",
+  "goal": "Change as few values as possible so every k-spaced subsequence is nondecreasing.",
+  "strategy": "Indices with the same remainder modulo k are independent. Keep a longest nondecreasing subsequence in each chain, found with upper-bound tails, and change the other positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Change as few values as possible so every k-spaced subsequence is nondecreasing.",
+    "inspect": "Indices with the same remainder modulo k are independent. Keep a longest nondecreasing subsequence in each chain, found with upper-bound tails, and change the other positions.",
+    "update": "Indices with the same remainder modulo k are independent. Keep a longest nondecreasing subsequence in each chain, found with upper-bound tails, and change the other positions.",
+    "done": "Change as few values as possible so every k-spaced subsequence is nondecreasing."
+  },
+  "edgeCases": [
+    "Equal values extend a nondecreasing chain",
+    "One position per chain needs no replacement",
+    "A descending single chain keeps one value"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,1 +1,5 @@
-export { default } from "./PalindromicSubstringsVisualizer";
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./PalindromicSubstringsVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

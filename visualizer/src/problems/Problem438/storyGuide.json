@@ -1,0 +1,22 @@
+{
+  "number": "438",
+  "title": "Find All Anagrams in String",
+  "goal": "Solve Find All Anagrams in String: Maintain character counts in a fixed-length sliding window and identify windows with the same multiplicities as the pattern.",
+  "strategy": "Maintain character counts in a fixed-length sliding window and identify windows with the same multiplicities as the pattern.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Overlapping matches are valid; equal sets of characters with different counts are not anagrams."
+  ],
+  "checks": [
+    {
+      "condition": "not s or not p or len(p)>len(s)",
+      "outcome": "return []"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem438/index.jsx",
+    "src/problems/Problem438/Problem438Visualizer.jsx"
+  ]
+}

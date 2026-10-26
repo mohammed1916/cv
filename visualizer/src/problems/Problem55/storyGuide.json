@@ -1,0 +1,31 @@
+{
+  "number": "55",
+  "title": "Jump Game",
+  "goal": "Solve Jump Game: Maintain the farthest reachable index and extend it only from positions that are already reachable.",
+  "strategy": "Maintain the farthest reachable index and extend it only from positions that are already reachable.",
+  "phases": [
+    "check",
+    "done",
+    "init",
+    "stuck",
+    "update"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Encountering an index beyond the current reach proves failure; a zero jump is harmless if an earlier jump can cross it."
+  ],
+  "checks": [
+    {
+      "condition": "i > maxReach",
+      "outcome": "return False  # stuck"
+    }
+  ],
+  "inputRules": [
+    "nums must be an array",
+    "Max 14 elements for clarity"
+  ],
+  "source": [
+    "src/problems/Problem55/index.jsx",
+    "src/problems/Problem55/JumpGameVisualizer.jsx"
+  ]
+}

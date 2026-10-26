@@ -1,0 +1,28 @@
+{
+  "number": "76",
+  "title": "Minimum Window Substring",
+  "goal": "Solve Minimum Window Substring: Expand a window until it covers required character multiplicities, then shrink it while coverage remains valid.",
+  "strategy": "Expand a window until it covers required character multiplicities, then shrink it while coverage remains valid.",
+  "phases": [
+    "best",
+    "done",
+    "expand",
+    "init",
+    "shrink"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Extra copies can be discarded, but dropping the last required copy invalidates coverage; absence returns no window."
+  ],
+  "checks": [
+    {
+      "condition": "not t or not s",
+      "outcome": "return \"\""
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem76/index.jsx",
+    "src/problems/Problem76/MinimumWindowSubstringVisualizer.jsx"
+  ]
+}

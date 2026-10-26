@@ -1,0 +1,27 @@
+{
+  "number": "974",
+  "title": "Subarray Sums Divisible by K",
+  "goal": "Count subarrays whose sum is divisible by k.",
+  "strategy": "Two prefix sums give a divisible difference exactly when their normalized remainders agree, including negative sums.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Count subarrays whose sum is divisible by k.",
+    "inspect": "Two prefix sums give a divisible difference exactly when their normalized remainders agree, including negative sums.",
+    "update": "Two prefix sums give a divisible difference exactly when their normalized remainders agree, including negative sums.",
+    "done": "Count subarrays whose sum is divisible by k."
+  },
+  "edgeCases": [
+    "Every zero contributes",
+    "Divisor one",
+    "No divisible subarray"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ]
+}

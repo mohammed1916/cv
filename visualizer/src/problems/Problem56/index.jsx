@@ -1,1 +1,5 @@
-export { default } from './MergeIntervalsVisualizer'
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./MergeIntervalsVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

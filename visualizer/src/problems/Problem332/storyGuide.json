@@ -1,0 +1,25 @@
+{
+  "number": "332",
+  "title": "Reconstruct Itinerary",
+  "goal": "Solve Reconstruct Itinerary: Find Eulerian path through airport tickets.",
+  "strategy": "Find Eulerian path through airport tickets.",
+  "phases": [
+    "sort",
+    "build",
+    "init",
+    "peek",
+    "advance",
+    "backtrack",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Every ticket must be used once, including duplicate tickets. A locally smallest edge can be appended to the final itinerary only after its remaining trail is resolved."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem332/index.jsx",
+    "src/problems/Problem332/ReconstructItineraryVisualizer.jsx"
+  ]
+}

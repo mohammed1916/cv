@@ -1,3 +1,8 @@
+import authoredExamples0 from '../../config/examples/local--343.js';
+import authoredExamples1 from '../../config/examples/integer-break.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -7,7 +12,7 @@ import PlaybackControls from '../../components/PlaybackControls'
 import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamplesOr } from '../../config/examplesRegistry'
+
 import './IntegerBreakVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
@@ -116,15 +121,8 @@ function generateSteps(n) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamplesOr('integer-break', [])
-const DEFAULT_EXAMPLES = [
-  { label: 'n = 2', n: 2 },
-  { label: 'n = 4', n: 4 },
-  { label: 'n = 7', n: 7 },
-  { label: 'n = 10', n: 10 },
-  { label: 'n = 15', n: 15 },
-  { label: 'n = 20', n: 20 },
-]
+const REGISTRY_EXAMPLES = (authoredExamples1.length ? authoredExamples1 : [])
+const DEFAULT_EXAMPLES = authoredExamples0
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : DEFAULT_EXAMPLES
 
 const COLORS = {
@@ -186,7 +184,7 @@ function cellStyle(idx, value, step) {
 }
 
 export default function IntegerBreakVisualizer() {
-  const [nInput, setNInput] = useState('10')
+  const [nInput, setNInput] = useState(String(AUTHORED_INITIAL.n ?? 10))
 
   const { n, inputError } = useMemo(() => {
     const raw = nInput.trim()

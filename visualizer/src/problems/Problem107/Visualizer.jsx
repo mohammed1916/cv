@@ -1,3 +1,4 @@
+import authoredExamples0 from '../../config/examples/binary-tree-level-order-traversal-ii.js';
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -10,7 +11,7 @@ import { useAutoScroll } from '../../hooks/useAutoScroll'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { buildTree, computeLayout, collectNodes, buildEdges, parseTreeInput } from '../../components/treeUtils'
 import { TreeCanvas3D } from '../../components/viz3d'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './Visualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -120,7 +121,7 @@ function generateSteps(arr) {
     return steps
 }
 
-const EXAMPLES = getExamples('binary-tree-level-order-traversal-ii')
+const EXAMPLES = authoredExamples0
 
 function VisualizationPanel({
     EXAMPLES,
@@ -138,12 +139,7 @@ function VisualizationPanel({
 }) {
     return (
         <div className="btlo2-viz-panel">
-            <div className="btlo2-examples">
-                {EXAMPLES.map((ex) => (
-                    <button key={ex.label} className="btlo2-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
-                ))}
-            </div>
-            <input className="btlo2-input" value={arrInput} onChange={(e) => { setArrInput(e.target.value); handleReset() }} />
+
             <div className="btlo2-canvas" style={{ width: CANVAS_W, height: CANVAS_H }}>
                 <TreeCanvas3D
                     positions={positions}
@@ -234,7 +230,7 @@ export default function BinaryTreeLevelOrderTraversalIIVisualizer() {
     const panelConfigs = useMemo(() => [
       { id: 'viz', title: 'Tree Visualization' },
       { id: 'result', title: 'Level Results', dockMode: 'split-right' },
-      { id: 'code', title: 'Code Trace', dockMode: 'split-bottom' },
+      { id: 'code', title: 'Code Trace', dockMode: 'split-right' },
     ], [])
     const panelContents = useMemo(() => ({
       viz: (<VisualizationPanel

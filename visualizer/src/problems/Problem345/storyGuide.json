@@ -1,0 +1,25 @@
+{
+  "number": "345",
+  "title": "Reverse Vowels of a String",
+  "goal": "Solve Reverse Vowels of a String: Two pointers from both ends: advance each pointer until it lands on a vowel, then swap.",
+  "strategy": "Two pointers from both ends: advance each pointer until it lands on a vowel, then swap.",
+  "phases": [
+    "init",
+    "move_left",
+    "move_right",
+    "found",
+    "swap",
+    "advance",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Only vowels exchange positions; consonants remain at their original indices, and letter case remains part of each character."
+  ],
+  "checks": [],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem345/index.jsx",
+    "src/problems/Problem345/ReverseVowelsVisualizer.jsx"
+  ]
+}

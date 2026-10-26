@@ -1,0 +1,31 @@
+{
+  "number": "1689",
+  "title": "Partitioning Into Minimum Number Of Deci-Binary Numbers",
+  "goal": "Find the minimum number of decimal numbers with only zero and one digits that sum to n.",
+  "strategy": "Each addend can contribute at most one at any decimal position. The maximum digit supplies a lower bound and that many nested digit layers attain it.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the minimum number of decimal numbers with only zero and one digits that sum to n.",
+    "inspect": "Each addend can contribute at most one at any decimal position. The maximum digit supplies a lower bound and that many nested digit layers attain it.",
+    "update": "Each addend can contribute at most one at any decimal position. The maximum digit supplies a lower bound and that many nested digit layers attain it.",
+    "done": "Find the minimum number of decimal numbers with only zero and one digits that sum to n."
+  },
+  "edgeCases": [
+    "Only ones and zeros",
+    "Single high digit",
+    "Nine appears late"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

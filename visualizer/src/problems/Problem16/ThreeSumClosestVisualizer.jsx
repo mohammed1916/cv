@@ -1,4 +1,7 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/three-sum-closest.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -8,7 +11,7 @@ import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './ThreeSumClosestVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -128,11 +131,11 @@ function generateSteps(nums, target) {
     return steps
 }
 
-const EXAMPLES = getExamples('three-sum-closest')
+const EXAMPLES = authoredExamples0
 
 export default function ThreeSumClosestVisualizer() {
-    const [numsInput, setNumsInput] = useState('[-1,2,1,-4]')
-    const [targetInput, setTargetInput] = useState('1')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
+    const [targetInput, setTargetInput] = useState(JSON.stringify(AUTHORED_INITIAL.target))
     const [panelDivs, setPanelDivs] = useState(null)
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
@@ -192,20 +195,7 @@ export default function ThreeSumClosestVisualizer() {
               </button>
             ))}
           </div>
-          <div className="tsc3-input-row">
-            <input
-              className="tsc3-input"
-              value={numsInput}
-              onChange={(e) => { setNumsInput(e.target.value); handleReset() }}
-              placeholder="[-1,2,1,-4]"
-            />
-            <input
-              className="tsc3-input target"
-              value={targetInput}
-              onChange={(e) => { setTargetInput(e.target.value); handleReset() }}
-              placeholder="1"
-            />
-          </div>
+          
 
           <div className="tsc3-array">
             {sorted.map((val, idx) => {
@@ -323,9 +313,6 @@ export default function ThreeSumClosestVisualizer() {
 
     const playbackPanel = (
       <>
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -343,6 +330,9 @@ export default function ThreeSumClosestVisualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={THREESUMCLOSEST_PATTERNS} />
+        )}
       </>
     )
 
@@ -351,7 +341,7 @@ export default function ThreeSumClosestVisualizer() {
       () => [
         { id: 'primary', title: 'Sorted Array · Two Pointers', dockMode: 'split-right' },
         { id: 'state', title: 'Tracking Closest', dockMode: 'split-right' },
-        { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+        { id: 'code', title: 'Code', dockMode: 'split-right' },
         { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
       ],
       []

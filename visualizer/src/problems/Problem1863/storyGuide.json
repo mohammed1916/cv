@@ -1,0 +1,31 @@
+{
+  "number": "1863",
+  "title": "Sum of All Subset XOR Totals",
+  "goal": "Sum XOR totals over every subset, including the empty subset.",
+  "strategy": "Each bit present in any input value appears in exactly half of all subset XORs. OR identifies contributing bits; multiply that value by half the subset count.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Sum XOR totals over every subset, including the empty subset.",
+    "inspect": "Each bit present in any input value appears in exactly half of all subset XORs. OR identifies contributing bits; multiply that value by half the subset count.",
+    "update": "Each bit present in any input value appears in exactly half of all subset XORs. OR identifies contributing bits; multiply that value by half the subset count.",
+    "done": "Sum XOR totals over every subset, including the empty subset."
+  },
+  "edgeCases": [
+    "Only zero bits",
+    "One value",
+    "Repeated values still represent separate positions"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

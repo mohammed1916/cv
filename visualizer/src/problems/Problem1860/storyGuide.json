@@ -1,0 +1,31 @@
+{
+  "number": "1860",
+  "title": "Incremental Memory Leak",
+  "goal": "Simulate increasing memory requests until neither bank can satisfy the next request.",
+  "strategy": "At second t allocate t units from the bank with more free memory, breaking ties toward bank one. Report the first failing second and both remaining capacities.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Simulate increasing memory requests until neither bank can satisfy the next request.",
+    "inspect": "At second t allocate t units from the bank with more free memory, breaking ties toward bank one. Report the first failing second and both remaining capacities.",
+    "update": "At second t allocate t units from the bank with more free memory, breaking ties toward bank one. Report the first failing second and both remaining capacities.",
+    "done": "Simulate increasing memory requests until neither bank can satisfy the next request."
+  },
+  "edgeCases": [
+    "No first allocation is possible",
+    "Equal banks favor the first",
+    "Only one bank has space"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

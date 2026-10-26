@@ -1,0 +1,641 @@
+.weighted-comparison {
+  --wc-lo: #38bdf8;
+  --wc-mid: #fbbf24;
+  --wc-hi: #c084fc;
+  --wc-target: #fb7185;
+  --wc-default: #94a3b8;
+
+  --wc-success: #22c55e;
+  --wc-error: #ef4444;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  padding: 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  background: var(--surface2);
+  color: var(--text);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.weighted-comparison__header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.weighted-comparison__title {
+  font-size: 12px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  color: var(--text);
+}
+
+.weighted-comparison__subtitle {
+  font-size: 11px;
+  line-height: 1.4;
+
+  color: var(--text-muted);
+}
+
+
+/* =========================================================
+   MACHINE
+   ========================================================= */
+
+.weighted-comparison__machine {
+  position: relative;
+
+  display: flex;
+
+  min-height: 220px;
+
+  padding: 14px 8px 0 40px;
+
+  box-sizing: border-box;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 24%,
+      rgba(148, 163, 184, 0.06) 24%,
+      rgba(148, 163, 184, 0.06) 24.5%,
+      transparent 24.5%,
+      transparent 49%,
+      rgba(148, 163, 184, 0.06) 49%,
+      rgba(148, 163, 184, 0.06) 49.5%,
+      transparent 49.5%,
+      transparent 74%,
+      rgba(148, 163, 184, 0.06) 74%,
+      rgba(148, 163, 184, 0.06) 74.5%,
+      transparent 74.5%
+    ),
+    var(--code-bg);
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   SCALE
+   ========================================================= */
+
+.weighted-comparison__scale {
+  position: absolute;
+
+  left: 8px;
+  top: 18px;
+  bottom: 56px;
+
+  width: 28px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: space-between;
+
+  pointer-events: none;
+}
+
+.weighted-comparison__scale-line {
+  position: absolute;
+
+  left: 50%;
+  top: 18px;
+  bottom: 18px;
+
+  width: 1px;
+
+  transform: translateX(-50%);
+
+  background: var(--border);
+}
+
+.weighted-comparison__scale-high,
+.weighted-comparison__scale-low {
+  position: relative;
+  z-index: 1;
+
+  padding: 2px;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 0.06em;
+
+  color: var(--text-dim);
+
+  background: var(--code-bg);
+}
+
+.weighted-comparison__scale-high {
+  margin-top: -2px;
+}
+
+.weighted-comparison__scale-low {
+  margin-bottom: -2px;
+}
+
+
+/* =========================================================
+   PISTONS CONTAINER
+   ========================================================= */
+
+.weighted-comparison__pistons {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-around;
+
+  gap: 24px;
+
+  width: 100%;
+  min-width: max-content;
+
+  padding: 0 16px;
+}
+
+
+/* =========================================================
+   INDIVIDUAL PISTON
+   ========================================================= */
+
+.weighted-comparison__piston-column {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 100px;
+  min-width: 80px;
+}
+
+.weighted-comparison__piston-track {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: center;
+
+  width: 64px;
+  height: 142px;
+}
+
+.weighted-comparison__piston-track::before {
+  content: '';
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 0;
+
+  width: 10px;
+  height: 100%;
+
+  transform: translateX(-50%);
+
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 8px,
+      rgba(148, 163, 184, 0.08) 8px,
+      rgba(148, 163, 184, 0.08) 9px
+    );
+}
+
+.weighted-comparison__piston {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 48px;
+
+  color: var(--wc-default);
+
+  z-index: 2;
+}
+
+.weighted-comparison__rod {
+  width: 6px;
+  flex: 1;
+
+  min-height: 8px;
+
+  border-left: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.08),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   WEIGHT / PISTON HEAD
+   ========================================================= */
+
+.weighted-comparison__weight {
+  position: relative;
+
+  z-index: 3;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  min-height: 34px;
+
+  box-sizing: border-box;
+
+  padding: 5px 7px;
+
+  border: 2px solid currentColor;
+  border-radius: 6px;
+
+  background: var(--surface2);
+
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.weighted-comparison__weight::after {
+  content: '';
+
+  position: absolute;
+
+  left: 8px;
+  right: 8px;
+  bottom: -5px;
+
+  height: 4px;
+
+  border-left: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+
+  opacity: 0.55;
+}
+
+.weighted-comparison__weight-value {
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 900;
+
+  color: currentColor;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   PISTON BASE
+   ========================================================= */
+
+.weighted-comparison__base {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  width: 64px;
+  height: 12px;
+
+  border-top: 2px solid currentColor;
+
+  color: var(--border);
+}
+
+.weighted-comparison__base-cap {
+  width: 38px;
+  height: 6px;
+
+  border-left: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+
+  border-radius: 0 0 4px 4px;
+}
+
+
+/* =========================================================
+   LABELS UNDER PISTONS
+   ========================================================= */
+
+.weighted-comparison__operand-label {
+  margin-top: 6px;
+
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 800;
+
+  color: var(--text);
+
+  text-align: center;
+  white-space: nowrap;
+}
+
+.weighted-comparison__operand-sublabel {
+  margin-top: 2px;
+
+  font-size: 9px;
+
+  color: var(--text-dim);
+
+  text-align: center;
+  white-space: nowrap;
+}
+
+.weighted-comparison__operand-value {
+  margin-top: 3px;
+
+  padding: 2px 7px;
+
+  border: 1px solid currentColor;
+  border-radius: 999px;
+
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 800;
+
+  color: var(--wc-default);
+}
+
+
+/* =========================================================
+   TONES
+   ========================================================= */
+
+.weighted-comparison__piston--lo {
+  color: var(--wc-lo);
+}
+
+.weighted-comparison__piston--mid {
+  color: var(--wc-mid);
+}
+
+.weighted-comparison__piston--hi {
+  color: var(--wc-hi);
+}
+
+.weighted-comparison__piston--target {
+  color: var(--wc-target);
+}
+
+.weighted-comparison__piston--default {
+  color: var(--wc-default);
+}
+
+.weighted-comparison__piston--success {
+  color: var(--wc-success);
+}
+
+.weighted-comparison__piston--danger {
+  color: var(--wc-error);
+}
+
+.weighted-comparison__piston.is-active
+.weighted-comparison__weight {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.04),
+    0 0 16px currentColor;
+}
+
+
+/* =========================================================
+   EXPRESSION
+   ========================================================= */
+
+.weighted-comparison__expression {
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  overflow-x: auto;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--code-bg);
+}
+
+.weighted-comparison__expression-group {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+}
+
+.weighted-comparison__expression-operand {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  min-width: 54px;
+}
+
+.weighted-comparison__expression-value {
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 900;
+
+  color: var(--text);
+}
+
+.weighted-comparison__expression-label {
+  margin-top: 2px;
+
+  font-family: monospace;
+  font-size: 9px;
+
+  color: var(--text-dim);
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   OPERATORS
+   ========================================================= */
+
+.weighted-comparison__operator-block {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  min-width: 28px;
+}
+
+.weighted-comparison__operator {
+  font-family: monospace;
+  font-size: 20px;
+  font-weight: 900;
+
+  line-height: 22px;
+
+  color: var(--text-muted);
+}
+
+.weighted-comparison__pair-result {
+  margin-top: 3px;
+
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.weighted-comparison__pair-result.is-true {
+  color: var(--wc-success);
+}
+
+.weighted-comparison__pair-result.is-false {
+  color: var(--wc-error);
+}
+
+
+/* =========================================================
+   OVERALL RESULT
+   ========================================================= */
+
+.weighted-comparison__overall {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 8px 12px;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+}
+
+.weighted-comparison__overall.is-true {
+  color: var(--wc-success);
+
+  background:
+    rgba(34, 197, 94, 0.09);
+
+  border:
+    1px solid rgba(34, 197, 94, 0.28);
+}
+
+.weighted-comparison__overall.is-false {
+  color: var(--wc-error);
+
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  border:
+    1px solid rgba(239, 68, 68, 0.26);
+}
+
+.weighted-comparison__overall-icon {
+  font-size: 15px;
+}
+
+.weighted-comparison__overall-text {
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.weighted-comparison--empty {
+  min-height: 100px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.weighted-comparison__empty {
+  font-size: 12px;
+
+  color: var(--text-muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .weighted-comparison {
+    padding: 10px;
+  }
+
+  .weighted-comparison__machine {
+    padding-left: 30px;
+  }
+
+  .weighted-comparison__pistons {
+    gap: 12px;
+
+    justify-content: flex-start;
+  }
+
+  .weighted-comparison__piston-column {
+    width: 82px;
+    min-width: 82px;
+  }
+
+  .weighted-comparison__expression {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "number": "344",
+  "title": "Reverse String",
+  "goal": "Solve Reverse String: Swap characters from both ends with two pointers until they cross.",
+  "strategy": "Swap characters from both ends with two pointers until they cross.",
+  "phases": [],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Swap symmetric positions only until pointers meet or cross; the middle character of odd-length input stays put."
+  ],
+  "checks": [],
+  "inputRules": [
+    "s must be an array"
+  ],
+  "source": [
+    "src/problems/Problem344/index.jsx",
+    "src/problems/Problem344/ReverseStringVisualizer.jsx"
+  ]
+}

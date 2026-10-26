@@ -1,0 +1,31 @@
+{
+  "number": "1833",
+  "title": "Maximum Ice Cream Bars",
+  "goal": "Buy the greatest number of ice cream bars within the coin budget.",
+  "strategy": "Every purchase increases the answer equally, so choose cheaper bars before expensive ones. Stop at the first unaffordable sorted cost.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Buy the greatest number of ice cream bars within the coin budget.",
+    "inspect": "Every purchase increases the answer equally, so choose cheaper bars before expensive ones. Stop at the first unaffordable sorted cost.",
+    "update": "Every purchase increases the answer equally, so choose cheaper bars before expensive ones. Stop at the first unaffordable sorted cost.",
+    "done": "Buy the greatest number of ice cream bars within the coin budget."
+  },
+  "edgeCases": [
+    "Budget below every cost",
+    "Enough coins for all bars",
+    "Zero coins"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

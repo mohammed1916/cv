@@ -1,0 +1,31 @@
+{
+  "number": "2244",
+  "title": "Minimum Rounds to Complete All Tasks",
+  "goal": "Finish tasks in the fewest rounds of two or three equal-difficulty tasks.",
+  "strategy": "Each difficulty is independent. A single occurrence is impossible; every count at least two is representable by twos and threes, with minimum rounds equal to the count divided by three rounded up.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Finish tasks in the fewest rounds of two or three equal-difficulty tasks.",
+    "inspect": "Each difficulty is independent. A single occurrence is impossible; every count at least two is representable by twos and threes, with minimum rounds equal to the count divided by three rounded up.",
+    "update": "Each difficulty is independent. A single occurrence is impossible; every count at least two is representable by twos and threes, with minimum rounds equal to the count divided by three rounded up.",
+    "done": "Finish tasks in the fewest rounds of two or three equal-difficulty tasks."
+  },
+  "edgeCases": [
+    "A singleton difficulty makes all work impossible",
+    "Four equal tasks require two pairs",
+    "Six equal tasks use two triples"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

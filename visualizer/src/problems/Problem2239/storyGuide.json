@@ -1,0 +1,31 @@
+{
+  "number": "2239",
+  "title": "Find Closest Number to Zero",
+  "goal": "Find the value closest to zero, preferring the positive value on equal distance.",
+  "strategy": "Compare absolute distance first. When distances tie, the numerically larger value is the positive one and wins the specified tie-break.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the value closest to zero, preferring the positive value on equal distance.",
+    "inspect": "Compare absolute distance first. When distances tie, the numerically larger value is the positive one and wins the specified tie-break.",
+    "update": "Compare absolute distance first. When distances tie, the numerically larger value is the positive one and wins the specified tie-break.",
+    "done": "Find the value closest to zero, preferring the positive value on equal distance."
+  },
+  "edgeCases": [
+    "Zero wins over every nonzero candidate",
+    "Only negative values favor the least negative magnitude",
+    "A positive value wins an equal-distance tie"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

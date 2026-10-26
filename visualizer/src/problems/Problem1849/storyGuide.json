@@ -1,0 +1,31 @@
+{
+  "number": "1849",
+  "title": "Splitting a String Into Descending Consecutive Values",
+  "goal": "Split a digit string into at least two descending consecutive numeric values.",
+  "strategy": "Choose a first chunk and recursively try following chunks equal to previous minus one. Leading zeros are allowed; arbitrary-precision integers preserve long chunk values.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Split a digit string into at least two descending consecutive numeric values.",
+    "inspect": "Choose a first chunk and recursively try following chunks equal to previous minus one. Leading zeros are allowed; arbitrary-precision integers preserve long chunk values.",
+    "update": "Choose a first chunk and recursively try following chunks equal to previous minus one. Leading zeros are allowed; arbitrary-precision integers preserve long chunk values.",
+    "done": "Split a digit string into at least two descending consecutive numeric values."
+  },
+  "edgeCases": [
+    "Single digit cannot form two parts",
+    "Zeros cannot descend below zero",
+    "Two numeric chunks finish at zero"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

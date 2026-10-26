@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--406.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -18,11 +20,7 @@ const SOLUTION_CODE = getSolutionCode('queue-reconstruction-by-height')
 const PATTERNS = []
 const LINE_PATTERN_MAP = {}
 
-const EXAMPLES = [
-  { label: 'Ex1', people: [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]], expected: [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]] },
-  { label: 'Ex2', people: [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]], expected: [[4,0],[5,0],[2,2],[3,2],[1,4],[6,0]] },
-  { label: 'Simple', people: [[1,0]], expected: [[1,0]] },
-]
+const EXAMPLES = authoredExamples0
 
 function generateSteps(people) {
   const steps = []
@@ -112,7 +110,7 @@ function QueueVisualization({ people, step }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 16 }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)' }}>Queue State</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)' }}>Queue State</div>
 
       {/* Current queue */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -145,7 +143,7 @@ function QueueVisualization({ people, step }) {
                     borderRadius: 4,
                     fontWeight: 600,
                     fontSize: 13,
-                    color: 'var(--surface2)',
+                    color: 'var(--text)',
                     border: '1px solid var(--border)',
                     minWidth: 50,
                     textAlign: 'center',
@@ -158,7 +156,7 @@ function QueueVisualization({ people, step }) {
                     borderRadius: 4,
                     fontWeight: 600,
                     fontSize: 13,
-                    color: 'var(--surface2)',
+                    color: 'var(--text)',
                     border: '1px solid var(--border)',
                     minWidth: 50,
                     textAlign: 'center',
@@ -285,7 +283,7 @@ export default function Problem406Visualizer() {
       </div>),
     viz: (<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, height: '100%' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--surface2)', marginBottom: 8 }}>Examples</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', marginBottom: 8 }}>Examples</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {EXAMPLES.map((e, idx) => (
                 <button
@@ -335,9 +333,6 @@ export default function Problem406Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -355,6 +350,9 @@ export default function Problem406Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

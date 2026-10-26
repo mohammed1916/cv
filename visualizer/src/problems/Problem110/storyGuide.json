@@ -1,0 +1,43 @@
+{
+  "number": "110",
+  "title": "Balanced Binary Tree",
+  "goal": "Solve Balanced Binary Tree: Check height balance by recursively computing subtree heights and returning -1 on imbalance.",
+  "strategy": "Check height balance by recursively computing subtree heights and returning -1 on imbalance.",
+  "phases": [
+    "visit",
+    "compare",
+    "return",
+    "done",
+    "recurse-left",
+    "recurse-right",
+    "propagate",
+    "unbalanced",
+    "balanced"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not node",
+      "outcome": "return 0"
+    },
+    {
+      "condition": "lh == -1",
+      "outcome": "return -1"
+    },
+    {
+      "condition": "rh == -1",
+      "outcome": "return -1"
+    },
+    {
+      "condition": "abs(lh - rh) > 1",
+      "outcome": "return -1"
+    }
+  ],
+  "inputRules": [],
+  "source": [
+    "src/problems/Problem110/index.jsx",
+    "src/problems/Problem110/BalancedBinaryTreeVisualizer.jsx",
+    "src/problems/Problem110/algorithm.js"
+  ]
+}

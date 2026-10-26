@@ -1,0 +1,28 @@
+{
+  "number": "383",
+  "title": "Ransom Note",
+  "goal": "Solve Ransom Note: Check if ransom note can be constructed from magazine using character frequency counting.",
+  "strategy": "Check if ransom note can be constructed from magazine using character frequency counting.",
+  "phases": [
+    "build_freq",
+    "check",
+    "complete",
+    "init"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "char not in freq or freq[char] == 0",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "ransomNote must be an array",
+    "magazine must be an array"
+  ],
+  "source": [
+    "src/problems/Problem383/index.jsx",
+    "src/problems/Problem383/Problem383Visualizer.jsx"
+  ]
+}

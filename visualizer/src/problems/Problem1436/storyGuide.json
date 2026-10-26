@@ -1,0 +1,31 @@
+{
+  "number": "1436",
+  "title": "Destination City",
+  "goal": "Find the terminal city of a directed itinerary.",
+  "strategy": "The destination city appears as an arrival but never a departure. A set of departure names makes that distinction explicit.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the terminal city of a directed itinerary.",
+    "inspect": "The destination city appears as an arrival but never a departure. A set of departure names makes that distinction explicit.",
+    "update": "The destination city appears as an arrival but never a departure. A set of departure names makes that distinction explicit.",
+    "done": "Find the terminal city of a directed itinerary."
+  },
+  "edgeCases": [
+    "One direct route",
+    "Endpoint appears early in the input list",
+    "Longer chain with shuffled entries"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

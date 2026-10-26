@@ -1,0 +1,31 @@
+{
+  "number": "2192",
+  "title": "All Ancestors of a Node in a Directed Acyclic Graph",
+  "goal": "List every ancestor of each vertex in a directed acyclic graph.",
+  "strategy": "Process vertices in topological order. Before a vertex leaves the queue, all its ancestors are complete; propagate that set plus the vertex itself along each outgoing edge.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "List every ancestor of each vertex in a directed acyclic graph.",
+    "inspect": "Process vertices in topological order. Before a vertex leaves the queue, all its ancestors are complete; propagate that set plus the vertex itself along each outgoing edge.",
+    "update": "Process vertices in topological order. Before a vertex leaves the queue, all its ancestors are complete; propagate that set plus the vertex itself along each outgoing edge.",
+    "done": "List every ancestor of each vertex in a directed acyclic graph."
+  },
+  "edgeCases": [
+    "An edgeless graph has no ancestors",
+    "A chain accumulates every earlier vertex",
+    "A diamond reaches the same ancestor along two paths only once"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

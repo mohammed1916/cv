@@ -1,0 +1,31 @@
+{
+  "number": "2022",
+  "title": "Convert 1D Array Into 2D Array",
+  "goal": "Reshape a flat array into m rows and n columns without reordering.",
+  "strategy": "The reshape is possible only when the element count equals m*n. Position i maps to row floor(i/n) and column i mod n.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Reshape a flat array into m rows and n columns without reordering.",
+    "inspect": "The reshape is possible only when the element count equals m*n. Position i maps to row floor(i/n) and column i mod n.",
+    "update": "The reshape is possible only when the element count equals m*n. Position i maps to row floor(i/n) and column i mod n.",
+    "done": "Reshape a flat array into m rows and n columns without reordering."
+  },
+  "edgeCases": [
+    "The element count does not fit",
+    "A single row keeps the flat order",
+    "A single column places one value per row"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

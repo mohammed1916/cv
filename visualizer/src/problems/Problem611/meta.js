@@ -1,5 +1,11 @@
 export const meta = {
-  number: '611', title: 'Valid Triangle Number', slug: 'valid-triangle-number', difficulty: 'Medium',
-  tags: ['Array', 'Two Pointers', 'Greedy', 'Sorting'], accent: '#0369a1',
-  description: 'Sort the sides, fix the longest one, and count pairs with two pointers.',
-}
+  "number": "611",
+  "title": "Valid Triangle Number",
+  "slug": "valid-triangle-number",
+  "difficulty": "Medium",
+  "tags": [
+    "Array"
+  ],
+  "accent": "#0d9488",
+  "description": "Sort side lengths. For a fixed largest side, one successful pair proves a whole interval of starts is valid."
+};

@@ -1,0 +1,31 @@
+{
+  "number": "1770",
+  "title": "Maximum Score from Performing Multiplication Operations",
+  "goal": "Maximize score by repeatedly multiplying and removing either array endpoint.",
+  "strategy": "The operation index and number of left selections determine both remaining endpoints. Fill future scores backward so each left/right choice can reuse its optimal continuation.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize score by repeatedly multiplying and removing either array endpoint.",
+    "inspect": "The operation index and number of left selections determine both remaining endpoints. Fill future scores backward so each left/right choice can reuse its optimal continuation.",
+    "update": "The operation index and number of left selections determine both remaining endpoints. Fill future scores backward so each left/right choice can reuse its optimal continuation.",
+    "done": "Maximize score by repeatedly multiplying and removing either array endpoint."
+  },
+  "edgeCases": [
+    "One endpoint decision",
+    "Use every value",
+    "Zero multipliers score nothing"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "number": "314",
+  "title": "Binary Tree Vertical Order Traversal",
+  "goal": "Solve Binary Tree Vertical Order Traversal: Traverse tree vertically with column indexing.",
+  "strategy": "Traverse tree vertically with column indexing.",
+  "phases": [
+    "done",
+    "init",
+    "process"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Nodes sharing a column preserve the required top-to-bottom and traversal tie order; column position alone does not determine output order."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Use level-order input: { \"tree\": [3,9,20,null,null,15,7] }."
+  ],
+  "source": [
+    "src/problems/Problem314/index.jsx",
+    "src/problems/Problem314/BinaryTreeVerticalOrderTraversalVisualizer.jsx"
+  ]
+}

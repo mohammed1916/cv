@@ -1,0 +1,42 @@
+{
+  "number": "572",
+  "title": "Subtree of Another Tree",
+  "goal": "Solve Subtree of Another Tree: DFS: at each node check if the subtree matches subRoot using an isSameTree helper.",
+  "strategy": "DFS: at each node check if the subtree matches subRoot using an isSameTree helper.",
+  "phases": [
+    "check",
+    "init",
+    "done"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "not root",
+      "outcome": "return not subRoot"
+    },
+    {
+      "condition": "isSameTree(root, subRoot)",
+      "outcome": "return True"
+    },
+    {
+      "condition": "not p and not q",
+      "outcome": "return True"
+    },
+    {
+      "condition": "not p or not q",
+      "outcome": "return False"
+    },
+    {
+      "condition": "p.val != q.val",
+      "outcome": "return False"
+    }
+  ],
+  "inputRules": [
+    "Must be array"
+  ],
+  "source": [
+    "src/problems/Problem572/index.jsx",
+    "src/problems/Problem572/SubtreeVisualizer.jsx"
+  ]
+}

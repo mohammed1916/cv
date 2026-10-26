@@ -1,0 +1,31 @@
+{
+  "number": "2120",
+  "title": "Execution of All Suffix Instructions Staying in a Grid",
+  "goal": "For every instruction suffix, count moves before leaving the grid.",
+  "strategy": "Restart at the original position for each suffix. Simulate the next requested move before accepting it, and stop immediately when that move crosses a boundary.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "For every instruction suffix, count moves before leaving the grid.",
+    "inspect": "Restart at the original position for each suffix. Simulate the next requested move before accepting it, and stop immediately when that move crosses a boundary.",
+    "update": "Restart at the original position for each suffix. Simulate the next requested move before accepting it, and stop immediately when that move crosses a boundary.",
+    "done": "For every instruction suffix, count moves before leaving the grid."
+  },
+  "edgeCases": [
+    "A one-cell grid rejects every first move",
+    "Instructions immediately point outside the top boundary",
+    "A short loop stays inside until its later boundary move"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

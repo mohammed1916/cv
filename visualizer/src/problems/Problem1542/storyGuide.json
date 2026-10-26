@@ -1,0 +1,31 @@
+{
+  "number": "1542",
+  "title": "Find Longest Awesome Substring",
+  "goal": "Find the longest digit substring that can be rearranged into a palindrome.",
+  "strategy": "A palindrome permutation has at most one odd count. Two prefix masks therefore may be identical or differ in one digit bit; compare each current mask against the earliest occurrence of those eleven possibilities.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the longest digit substring that can be rearranged into a palindrome.",
+    "inspect": "A palindrome permutation has at most one odd count. Two prefix masks therefore may be identical or differ in one digit bit; compare each current mask against the earliest occurrence of those eleven possibilities.",
+    "update": "A palindrome permutation has at most one odd count. Two prefix masks therefore may be identical or differ in one digit bit; compare each current mask against the earliest occurrence of those eleven possibilities.",
+    "done": "Find the longest digit substring that can be rearranged into a palindrome."
+  },
+  "edgeCases": [
+    "Distinct digits allow only one-character palindromes",
+    "The full string can be rearranged with one odd-count digit",
+    "One digit always qualifies"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

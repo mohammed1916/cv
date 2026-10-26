@@ -1,5 +1,12 @@
 export const meta = {
-  number: '728', title: 'Self Dividing Numbers', slug: 'self-dividing-numbers', difficulty: 'Easy',
-  tags: ['Math'], accent: '#0369a1',
-  description: 'A number qualifies when no digit is zero and every digit divides it.',
-}
+  "number": "728",
+  "title": "Self Dividing Numbers",
+  "slug": "self-dividing-numbers",
+  "difficulty": "Easy",
+  "tags": [
+    "Array",
+    "String"
+  ],
+  "accent": "#0891b2",
+  "description": "List numbers in the inclusive interval divisible by every one of their own digits."
+};

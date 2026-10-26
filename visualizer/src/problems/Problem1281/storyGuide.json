@@ -1,0 +1,31 @@
+{
+  "number": "1281",
+  "title": "Subtract the Product and Sum of Digits of an Integer",
+  "goal": "Subtract the sum of decimal digits from their product.",
+  "strategy": "Maintain independent product and sum accumulators. A zero digit collapses the product but leaves the other digits relevant to the sum.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Subtract the sum of decimal digits from their product.",
+    "inspect": "Maintain independent product and sum accumulators. A zero digit collapses the product but leaves the other digits relevant to the sum.",
+    "update": "Maintain independent product and sum accumulators. A zero digit collapses the product but leaves the other digits relevant to the sum.",
+    "done": "Subtract the sum of decimal digits from their product."
+  },
+  "edgeCases": [
+    "A zero collapses the product",
+    "Single digit cancels itself",
+    "Repeated digits"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

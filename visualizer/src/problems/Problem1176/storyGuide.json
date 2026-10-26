@@ -1,0 +1,31 @@
+{
+  "number": "1176",
+  "title": "Diet Plan Performance",
+  "goal": "Score every consecutive k-day calorie interval against two thresholds.",
+  "strategy": "Update one rolling sum. Totals below lower lose a point, above upper gain one, and totals on either boundary change nothing.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Score every consecutive k-day calorie interval against two thresholds.",
+    "inspect": "Update one rolling sum. Totals below lower lose a point, above upper gain one, and totals on either boundary change nothing.",
+    "update": "Update one rolling sum. Totals below lower lose a point, above upper gain one, and totals on either boundary change nothing.",
+    "done": "Score every consecutive k-day calorie interval against two thresholds."
+  },
+  "edgeCases": [
+    "Exact lower and upper totals are neutral",
+    "Window spans all days",
+    "Single-day scoring"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

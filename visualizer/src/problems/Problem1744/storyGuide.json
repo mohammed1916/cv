@@ -1,0 +1,31 @@
+{
+  "number": "1744",
+  "title": "Can You Eat Your Favorite Candy on Your Favorite Day?",
+  "goal": "Determine whether a favorite candy type can be eaten on a chosen day under daily limits.",
+  "strategy": "Prefix sums locate each type in the required eating order. By day d inclusive, total consumption ranges from d+1 to (d+1)*cap; test overlap with the favorite type positions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether a favorite candy type can be eaten on a chosen day under daily limits.",
+    "inspect": "Prefix sums locate each type in the required eating order. By day d inclusive, total consumption ranges from d+1 to (d+1)*cap; test overlap with the favorite type positions.",
+    "update": "Prefix sums locate each type in the required eating order. By day d inclusive, total consumption ranges from d+1 to (d+1)*cap; test overlap with the favorite type positions.",
+    "done": "Determine whether a favorite candy type can be eaten on a chosen day under daily limits."
+  },
+  "edgeCases": [
+    "First candy on day zero",
+    "Daily cap one fixes exact progress",
+    "Only one candy type"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

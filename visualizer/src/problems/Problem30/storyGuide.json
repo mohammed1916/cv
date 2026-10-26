@@ -1,0 +1,32 @@
+{
+  "number": "30",
+  "title": "Substring with Concatenation of All Words",
+  "goal": "Solve Substring with Concatenation of All Words: Fixed-size window of total word length; check each position's word frequency map against the target.",
+  "strategy": "Fixed-size window of total word length; check each position's word frequency map against the target.",
+  "phases": [
+    "done",
+    "found",
+    "init",
+    "overflow",
+    "window"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "word not in freq",
+      "outcome": "break"
+    },
+    {
+      "condition": "seen[word] > freq[word]",
+      "outcome": "break"
+    }
+  ],
+  "inputRules": [
+    "words must be an array"
+  ],
+  "source": [
+    "src/problems/Problem30/index.jsx",
+    "src/problems/Problem30/SubstringConcatenationVisualizer.jsx"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "number": "569",
+  "title": "Median Employee Salary",
+  "goal": "Solve Median Employee Salary: Write a SQL query to find the median salary of each company, returning the id, company and salary of the median row(s) per company.",
+  "strategy": "Write a SQL query to find the median salary of each company, returning the id, company and salary of the median row(s) per company.",
+  "phases": [
+    "init",
+    "partition",
+    "rank",
+    "bounds",
+    "test_row",
+    "keep",
+    "drop",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "Even-sized employee groups have two middle positions, and ties need stable ordering under the query’s ranking convention."
+  ],
+  "checks": [],
+  "inputRules": [
+    "Enter at least one row: id,company,salary",
+    "Keep the table to 30 rows or fewer"
+  ],
+  "source": [
+    "src/problems/Problem569/index.jsx",
+    "src/problems/Problem569/MedianEmployeeSalaryVisualizer.jsx"
+  ]
+}

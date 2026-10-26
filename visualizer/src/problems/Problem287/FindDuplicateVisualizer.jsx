@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/find-duplicate.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
@@ -9,7 +12,7 @@ import FloatingPanel from '../../components/shared/FloatingPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
 import { useAutoScroll } from '../../hooks/useAutoScroll'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './FindDuplicateVisualizer.css'
 import CodePatternAnnotations from '../../components/CodePatternAnnotations'
 import PatternLegend from '../../components/PatternLegend'
@@ -96,7 +99,7 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('find-duplicate')
+const EXAMPLES = authoredExamples0
 
 // Visualization component for array and pointers
 function ArrayVisualizationPanel({ nums, step }) {
@@ -160,7 +163,7 @@ function MetricsPanel({ step }) {
 }
 
 export default function FindDuplicateVisualizer() {
-    const [numsInput, setNumsInput] = useState('[1,3,4,2,2]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
     const [autoScrollCode, setAutoScrollCode] = useAutoScroll()
 
@@ -191,17 +194,7 @@ export default function FindDuplicateVisualizer() {
                     <button key={ex.label} className="fd-chip" onClick={() => applyExample(ex)}>{ex.label}</button>
                 ))}
             </div>
-            <label className="fd-input-field">
-                <span>Array input (JSON format)</span>
-                <input
-                    className="fd-input"
-                    value={numsInput}
-                    onChange={(e) => {
-                        setNumsInput(e.target.value)
-                        handleReset()
-                    }}
-                />
-            </label>
+            
             {inputError && <div className="fd-error-box">{inputError}</div>}
         </div>
     )

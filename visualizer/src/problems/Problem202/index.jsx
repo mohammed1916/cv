@@ -1,1 +1,5 @@
-export { default } from './HappyNumberVisualizer';
+import withProblemStory from '../../components/shared/withProblemStory';
+import storyGuide from './storyGuide.json';
+import CatalogVisualizer from "./HappyNumberVisualizer";
+
+export default withProblemStory(CatalogVisualizer, storyGuide);

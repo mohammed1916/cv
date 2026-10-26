@@ -1,0 +1,31 @@
+{
+  "number": "1616",
+  "title": "Split Two Strings to Make Palindrome",
+  "goal": "Decide whether a prefix from one string and a suffix from the other can form a palindrome.",
+  "strategy": "Match outer characters across the two strings until they disagree. At that point the untouched center must be a palindrome entirely within either original string. Try both prefix directions.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Decide whether a prefix from one string and a suffix from the other can form a palindrome.",
+    "inspect": "Match outer characters across the two strings until they disagree. At that point the untouched center must be a palindrome entirely within either original string. Try both prefix directions.",
+    "update": "Match outer characters across the two strings until they disagree. At that point the untouched center must be a palindrome entirely within either original string. Try both prefix directions.",
+    "done": "Decide whether a prefix from one string and a suffix from the other can form a palindrome."
+  },
+  "edgeCases": [
+    "Single characters always qualify",
+    "No matching outer endpoints",
+    "A whole original string is palindromic"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

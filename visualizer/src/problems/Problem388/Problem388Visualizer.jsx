@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--388.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -165,20 +167,7 @@ function generateSteps(input) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Simple Dir',
-    input: 'dir\n\tfile.txt',
-  },
-  {
-    label: 'Nested',
-    input: 'dir1\n\tfile1.txt\ndir2\n\tdir3\n\t\tfile2.txt',
-  },
-  {
-    label: 'Complex',
-    input: 'a\n\tb.txt\n\tc.txt\nd\n\te.txt',
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem388Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -416,9 +405,6 @@ export default function Problem388Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -436,6 +422,9 @@ export default function Problem388Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

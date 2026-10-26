@@ -1,0 +1,25 @@
+{
+  "number": "22",
+  "title": "Generate Parentheses",
+  "goal": "Solve Generate Parentheses: Backtrack with open/close counters, appending '( when opens remain and ') when closes > opens.",
+  "strategy": "Backtrack with open/close counters, appending '( when opens remain and ') when closes > opens.",
+  "phases": [
+    "add_close",
+    "add_open",
+    "done",
+    "init",
+    "record"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [
+    "A prefix cannot contain more closing than opening parentheses; completion requires exactly n of each."
+  ],
+  "checks": [],
+  "inputRules": [
+    "n must be a number"
+  ],
+  "source": [
+    "src/problems/Problem22/index.jsx",
+    "src/problems/Problem22/GenerateParenthesesVisualizer.jsx"
+  ]
+}

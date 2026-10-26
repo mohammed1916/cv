@@ -1,0 +1,37 @@
+{
+  "number": "465",
+  "title": "Optimal Account Balancing",
+  "goal": "Solve Optimal Account Balancing: Given a list of transactions between people, compute the net balance of each person and find the minimum number of transfers required to settle all debts.",
+  "strategy": "Given a list of transactions between people, compute the net balance of each person and find the minimum number of transfers required to settle all debts.",
+  "phases": [
+    "init",
+    "net_balance",
+    "filter",
+    "dfs_enter",
+    "settle",
+    "backtrack",
+    "base_case",
+    "best",
+    "done",
+    "error"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "i == len(debts)",
+      "outcome": "return 0"
+    }
+  ],
+  "inputRules": [
+    "Enter triples like [[0,1,10],[2,0,5]]",
+    "Each transaction needs 3 numbers: from, to, amount",
+    "A person cannot pay themselves",
+    "Amounts must be positive",
+    "Keep it to 8 transactions or fewer"
+  ],
+  "source": [
+    "src/problems/Problem465/index.jsx",
+    "src/problems/Problem465/OptimalAccountBalancingVisualizer.jsx"
+  ]
+}

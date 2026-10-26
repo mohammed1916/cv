@@ -1,0 +1,31 @@
+{
+  "number": "588",
+  "title": "Design In-Memory File System",
+  "goal": "Maintain directories and file contents while answering sorted listings and reads.",
+  "strategy": "A directory trie resolves each path component. Directory creation fills missing ancestors; appends modify one file; listing a directory sorts its immediate names, while listing a file returns only its own name.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maintain directories and file contents while answering sorted listings and reads.",
+    "inspect": "A directory trie resolves each path component. Directory creation fills missing ancestors; appends modify one file; listing a directory sorts its immediate names, while listing a file returns only its own name.",
+    "update": "A directory trie resolves each path component. Directory creation fills missing ancestors; appends modify one file; listing a directory sorts its immediate names, while listing a file returns only its own name.",
+    "done": "Maintain directories and file contents while answering sorted listings and reads."
+  },
+  "edgeCases": [
+    "An empty root can be listed repeatedly",
+    "Repeated mkdir preserves files and append preserves earlier content",
+    "Listing sorts immediate names without descending into folders"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

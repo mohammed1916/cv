@@ -1,11 +1,14 @@
-﻿import { useState, useMemo, useCallback } from 'react'
+import authoredExamples0 from '../../config/examples/jump-game.js';
+
+const AUTHORED_INITIAL = authoredExamples0[0];
+import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
 import PlaybackControls from '../../components/PlaybackControls'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { usePatternOverlay } from '../../hooks/usePatternOverlay'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './JumpGameVisualizer.css'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import FloatingPanel from '../../components/shared/FloatingPanel'
@@ -93,10 +96,10 @@ function generateSteps(nums) {
     return steps
 }
 
-const EXAMPLES = getExamples('jump-game')
+const EXAMPLES = authoredExamples0
 
 export default function JumpGameVisualizer() {
-    const [numsInput, setNumsInput] = useState('[2,3,1,1,4]')
+    const [numsInput, setNumsInput] = useState(JSON.stringify(AUTHORED_INITIAL.nums))
     const { showPatternOverlay, setShowPatternOverlay, activeLineDom, setActiveLineDom } = usePatternOverlay()
 
     const { nums, inputError } = useMemo(() => {
@@ -148,21 +151,6 @@ export default function JumpGameVisualizer() {
             </header>
             <div className="jg-body">
                 <div className="jg-top-row">
-                    <div className="jg-examples">
-                        {EXAMPLES.map((ex) => (
-                            <button key={ex.label} className="jg-chip" onClick={() => applyExample(ex)}>
-                                {ex.label}
-                            </button>
-                        ))}
-                    </div>
-                    <input
-                        className="jg-input"
-                        value={numsInput}
-                        onChange={(e) => { setNumsInput(e.target.value);
-
- handleReset() }}
-                        placeholder="[2,3,1,1,4]"
-                    />
                 </div>
 
                 {/* maxReach indicator */}
@@ -240,9 +228,6 @@ export default function JumpGameVisualizer() {
 
     const playbackPanel = (
       <>
-            {showPatternOverlay && (
-                <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAME_PATTERNS} />
-            )}
             <PlaybackControls
                 isPlaying={isPlaying}
                 isDone={isDone}
@@ -260,6 +245,9 @@ export default function JumpGameVisualizer() {
                 patternOverlayLabel="Show pattern overlay"
                 showPatternOverlayToggle
             />
+            {showPatternOverlay && (
+                <PatternLegend currentPhase={step?.phase} usedPatterns={JUMPGAME_PATTERNS} />
+            )}
         </>
     )
 
@@ -268,7 +256,7 @@ export default function JumpGameVisualizer() {
     const panelConfigs = useMemo(
         () => [
             { id: 'primary', title: 'Jump Game · Greedy Reach Tracking', dockMode: 'split-right' },
-            { id: 'code', title: 'Code', dockMode: 'split-bottom' },
+            { id: 'code', title: 'Code', dockMode: 'split-right' },
             { id: 'status', title: 'Status', dockMode: 'split-bottom', ratio: 0.08 },
         ],
         []

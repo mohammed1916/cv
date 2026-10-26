@@ -1,0 +1,31 @@
+{
+  "number": "2080",
+  "title": "Range Frequency Queries",
+  "goal": "Answer how often a value appears within each inclusive array range.",
+  "strategy": "Store sorted occurrence indices for every value. Two binary searches isolate the occurrence positions between left and right; their index difference is the frequency.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer how often a value appears within each inclusive array range.",
+    "inspect": "Store sorted occurrence indices for every value. Two binary searches isolate the occurrence positions between left and right; their index difference is the frequency.",
+    "update": "Store sorted occurrence indices for every value. Two binary searches isolate the occurrence positions between left and right; their index difference is the frequency.",
+    "done": "Answer how often a value appears within each inclusive array range."
+  },
+  "edgeCases": [
+    "An absent value has an empty position list",
+    "Equal inclusive endpoints inspect one position",
+    "All values equal create a dense occurrence list"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

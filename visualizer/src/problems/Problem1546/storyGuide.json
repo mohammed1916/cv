@@ -1,0 +1,31 @@
+{
+  "number": "1546",
+  "title": "Maximum Number of Non-Overlapping Subarrays With Sum Equals Target",
+  "goal": "Maximize the number of disjoint subarrays summing to target.",
+  "strategy": "Finish the earliest available valid interval. Reset prefix state afterward so later matches cannot overlap the chosen interval.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Maximize the number of disjoint subarrays summing to target.",
+    "inspect": "Finish the earliest available valid interval. Reset prefix state afterward so later matches cannot overlap the chosen interval.",
+    "update": "Finish the earliest available valid interval. Reset prefix state afterward so later matches cannot overlap the chosen interval.",
+    "done": "Maximize the number of disjoint subarrays summing to target."
+  },
+  "edgeCases": [
+    "Zero values give separate intervals",
+    "No target interval",
+    "Whole array is one match"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

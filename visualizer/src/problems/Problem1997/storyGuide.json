@@ -1,0 +1,31 @@
+{
+  "number": "1997",
+  "title": "First Day Where You Have Been in All the Rooms",
+  "goal": "Find the first day every room has been visited.",
+  "strategy": "The first arrival at a new room is on an odd visit, forcing a return to its prescribed earlier room. Replaying the known segment and then moving forward gives a recurrence for first-visit days.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Find the first day every room has been visited.",
+    "inspect": "The first arrival at a new room is on an odd visit, forcing a return to its prescribed earlier room. Replaying the known segment and then moving forward gives a recurrence for first-visit days.",
+    "update": "The first arrival at a new room is on an odd visit, forcing a return to its prescribed earlier room. Replaying the known segment and then moving forward gives a recurrence for first-visit days.",
+    "done": "Find the first day every room has been visited."
+  },
+  "edgeCases": [
+    "Every odd visit returns to the same room",
+    "Every return goes back to room zero",
+    "Only two rooms"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

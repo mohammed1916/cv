@@ -1,3 +1,5 @@
+import authoredExamples0 from '../../config/examples/local--383.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import LuminoDockPanel from '../../components/LuminoDockPanel'
@@ -170,23 +172,7 @@ function generateSteps(ransomNote, magazine) {
   return steps
 }
 
-const EXAMPLES = [
-  {
-    label: 'Possible',
-    ransomNote: 'a',
-    magazine: 'b',
-  },
-  {
-    label: 'Possible 2',
-    ransomNote: 'aa',
-    magazine: 'aab',
-  },
-  {
-    label: 'Impossible',
-    ransomNote: 'aa',
-    magazine: 'aab',
-  },
-]
+const EXAMPLES = authoredExamples0
 
 export default function Problem383Visualizer() {
   const [exIdx, setExIdx] = useState(0)
@@ -467,9 +453,6 @@ export default function Problem383Visualizer() {
         )}
       </>
       <FloatingPanel title="Playback Controls">
-        {showPatternOverlay && (
-          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
-        )}
         <PlaybackControls
           isPlaying={isPlaying}
           isDone={isDone}
@@ -487,6 +470,9 @@ export default function Problem383Visualizer() {
           patternOverlayLabel="Show pattern overlay"
           showPatternOverlayToggle
         />
+        {showPatternOverlay && (
+          <PatternLegend currentPhase={step?.phase} usedPatterns={PATTERNS} />
+        )}
       </FloatingPanel>
     </div>
   )

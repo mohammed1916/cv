@@ -1,0 +1,31 @@
+{
+  "number": "1952",
+  "title": "Three Divisors",
+  "goal": "Determine whether n has exactly three positive divisors.",
+  "strategy": "Exactly three divisors occur only for the square of a prime: one, the prime, and its square. Verify the square, then check primality of its root.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Determine whether n has exactly three positive divisors.",
+    "inspect": "Exactly three divisors occur only for the square of a prime: one, the prime, and its square. Verify the square, then check primality of its root.",
+    "update": "Exactly three divisors occur only for the square of a prime: one, the prime, and its square. Verify the square, then check primality of its root.",
+    "done": "Determine whether n has exactly three positive divisors."
+  },
+  "edgeCases": [
+    "A composite square has extra divisors",
+    "A nonsquare near a prime square",
+    "One is not a prime square"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

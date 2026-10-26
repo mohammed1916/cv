@@ -1,0 +1,31 @@
+{
+  "number": "2102",
+  "title": "Sequentially Ordinal Rank Tracker",
+  "goal": "Answer successive rank queries while new locations join the ranking.",
+  "strategy": "Maintain locations ordered by descending score and ascending name. The first get asks for rank one, the second for rank two, and later additions may shift previously returned locations.",
+  "phases": [
+    "start",
+    "inspect",
+    "update",
+    "done"
+  ],
+  "phasePurposes": {
+    "start": "Answer successive rank queries while new locations join the ranking.",
+    "inspect": "Maintain locations ordered by descending score and ascending name. The first get asks for rank one, the second for rank two, and later additions may shift previously returned locations.",
+    "update": "Maintain locations ordered by descending score and ascending name. The first get asks for rank one, the second for rank two, and later additions may shift previously returned locations.",
+    "done": "Answer successive rank queries while new locations join the ranking."
+  },
+  "edgeCases": [
+    "Equal scores are ordered alphabetically",
+    "A previously returned name can appear at a later rank",
+    "One added location supports one query"
+  ],
+  "checks": [],
+  "inputRules": [
+    "The input parser enforces the problem domain and explicit limits for an inspectable trace."
+  ],
+  "verification": {
+    "status": "not-run",
+    "reason": "User requested implementation without tests or builds."
+  }
+}

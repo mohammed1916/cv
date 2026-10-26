@@ -1,0 +1,37 @@
+{
+  "number": "74",
+  "title": "Search a 2D Matrix",
+  "goal": "Solve Search a 2D Matrix: Treat the matrix as a flattened sorted array and binary search by mapping mid to (row, col).",
+  "strategy": "Treat the matrix as a flattened sorted array and binary search by mapping mid to (row, col).",
+  "phases": [
+    "init",
+    "calc",
+    "found",
+    "lo",
+    "hi",
+    "not_found",
+    "compare",
+    "compare_lo",
+    "compare_hi"
+  ],
+  "phasePurposes": {},
+  "edgeCases": [],
+  "checks": [
+    {
+      "condition": "val == target",
+      "outcome": "return True"
+    }
+  ],
+  "inputRules": [
+    "matrix must be a non-empty 2D array",
+    "matrix must contain non-empty rows",
+    "all matrix rows must have equal length",
+    "matrix must contain only numbers",
+    "target must be a number",
+    "matrix must be globally sorted in ascending order"
+  ],
+  "source": [
+    "src/problems/Problem74/index.jsx",
+    "src/problems/Problem74/Search2DMatrixVisualizer.jsx"
+  ]
+}

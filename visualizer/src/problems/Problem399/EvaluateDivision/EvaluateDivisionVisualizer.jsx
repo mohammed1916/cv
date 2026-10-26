@@ -323,7 +323,7 @@ export default function EvaluateDivisionVisualizer() {
                         textAnchor="middle"
                         fontSize="14"
                         fontWeight="700"
-                        fill="var(--surface2)"
+                        fill={isInPath || isVisited ? 'var(--text-on-light)' : 'var(--text)'}
                       >
                         {node}
                       </text>

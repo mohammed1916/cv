@@ -1,3 +1,6 @@
+import authoredExamples0 from '../../config/examples/power-of-four.js';
+import authoredExamples1 from '../../config/examples/local--342.js';
+
 import { useState, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,7 +11,7 @@ import LuminoDockPanel from '../../components/LuminoDockPanel'
 import ManualInputPanel from '../../components/shared/ManualInputPanel'
 import { usePlaybackState } from '../../hooks/usePlaybackState'
 import { useCodeVisualConnectivity } from '../../hooks/useCodeVisualConnectivity'
-import { getExamples } from '../../config/examplesRegistry'
+
 import './PowerofFourVisualizer.css'
 
 const SOLUTION_CODE = [
@@ -180,15 +183,8 @@ function generateSteps(n) {
   return steps
 }
 
-const REGISTRY_EXAMPLES = getExamples('power-of-four')
-const FALLBACK_EXAMPLES = [
-  { label: 'n = 16', n: 16, desc: '4² = 16 → true' },
-  { label: 'n = 1', n: 1, desc: '4⁰ = 1 → true' },
-  { label: 'n = 64', n: 64, desc: '4³ = 64 → true' },
-  { label: 'n = 8', n: 8, desc: '2³, odd bit → false' },
-  { label: 'n = 5', n: 5, desc: 'not power of 2 → false' },
-  { label: 'n = 0', n: 0, desc: 'n ≤ 0 → false' },
-]
+const REGISTRY_EXAMPLES = authoredExamples0
+const FALLBACK_EXAMPLES = authoredExamples1
 const EXAMPLES = REGISTRY_EXAMPLES.length > 0 ? REGISTRY_EXAMPLES : FALLBACK_EXAMPLES
 
 function parseN(raw) {
@@ -413,7 +409,7 @@ export default function PowerofFourVisualizer() {
                           fontWeight: 800,
                           fontSize: 16,
                           textAlign: 'center',
-                          color: 'var(--code-bg)',
+                          color: 'var(--text-on-light)',
                           background: result ? COLORS.pass : COLORS.fail,
                         }}
                       >
