@@ -4110,67 +4110,6 @@
     ]
   },
   {
-    "id": "lc-697",
-    "number": "697",
-    "title": "Degree of an Array",
-    "slug": "degree-of-an-array",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-698",
-    "number": "698",
-    "title": "Partition to K Equal Sum Subsets",
-    "slug": "partition-to-k-equal-sum-subsets",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Array",
-      "Backtracking"
-    ]
-  },
-  {
-    "id": "lc-699",
-    "number": "699",
-    "title": "Falling Squares",
-    "slug": "falling-squares",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-700",
-    "number": "700",
-    "title": "Search in a Binary Search Tree",
-    "slug": "search-in-a-binary-search-tree",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Binary Search"
-    ]
-  },
-  {
-    "id": "lc-701",
-    "number": "701",
-    "title": "Insert into a Binary Search Tree",
-    "slug": "insert-into-a-binary-search-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Binary Search"
-    ]
-  },
-  {
     "id": "lc-702",
     "number": "702",
     "title": "Search in a Sorted Array of Unknown Size",
@@ -4181,18 +4120,6 @@
       "Array",
       "Binary Search",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-703",
-    "number": "703",
-    "title": "Kth Largest Element in a Stream",
-    "slug": "kth-largest-element-in-a-stream",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Design",
-      "Heap"
     ]
   },
   {
@@ -4207,40 +4134,6 @@
     ]
   },
   {
-    "id": "lc-705",
-    "number": "705",
-    "title": "Design HashSet",
-    "slug": "design-hashset",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Design"
-    ]
-  },
-  {
-    "id": "lc-706",
-    "number": "706",
-    "title": "Design HashMap",
-    "slug": "design-hashmap",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Design"
-    ]
-  },
-  {
-    "id": "lc-707",
-    "number": "707",
-    "title": "Design Linked List",
-    "slug": "design-linked-list",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Design",
-      "Linked List"
-    ]
-  },
-  {
     "id": "lc-708",
     "number": "708",
     "title": "Insert into a Sorted Circular Linked List",
@@ -4251,17 +4144,6 @@
       "Linked List",
       "Binary Search",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-709",
-    "number": "709",
-    "title": "To Lower Case",
-    "slug": "to-lower-case",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {

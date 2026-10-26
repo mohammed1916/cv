@@ -295,5 +295,15 @@
   "stickers-to-spell-word",
   "top-k-frequent-words",
   "binary-number-with-alternating-bits",
-  "count-binary-substrings"
+  "count-binary-substrings",
+  "degree-of-an-array",
+  "partition-to-k-equal-sum-subsets",
+  "falling-squares",
+  "search-in-a-binary-search-tree",
+  "insert-into-a-binary-search-tree",
+  "kth-largest-element-in-a-stream",
+  "design-hashset",
+  "design-hashmap",
+  "design-linked-list",
+  "to-lower-case"
 ]
