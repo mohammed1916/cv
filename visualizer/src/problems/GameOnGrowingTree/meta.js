@@ -4,6 +4,6 @@ export const meta = {
   slug: "game-on-growing-tree",
   difficulty: "Hard",
   tags: ["Tree", "Game Theory", "DP", "Codeforces"],
-  description: "After each insertion in a growing tree, compute Alice's optimal final score against Bob using a compressed DP strategy.",
+  description: "Watch the growing-tree game one query at a time: each vertex keeps its three longest branches, pruning the rest, and the score follows.",
   accent: "#f97316",
 }

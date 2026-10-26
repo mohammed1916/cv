@@ -699,7 +699,7 @@ function HomePage({
           ) : (
             <div className="track-note">
               {isCodeforcesTrack
-                ? "Codeforces track focuses on advanced contest strategies and data structures."
+                ? "Codeforces track: Game on Growing Tree is live as a step-by-step story. More Codeforces problems are coming soon."
                 : isBlind75Track
                   ? "Blind 75 is fully implemented in this app."
                   : "Basics track includes foundational loop visualizations."}

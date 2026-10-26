@@ -1,0 +1,25 @@
+.gt-scene { display: grid; grid-template-columns: minmax(0, 3fr) minmax(200px, 2fr); gap: 14px; align-items: start; }
+.gt-scene__side { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.gt-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0 0; font-size: .75rem; color: var(--text-muted); }
+.gt-key { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--border); margin-left: 6px; }
+.gt-key.is-new { background: var(--success, #16a34a); border-color: var(--success, #16a34a); }
+.gt-key.is-focus { border-color: var(--primary); }
+.gt-key.is-target { border-color: var(--warning, #d97706); }
+.gt-key.is-best { background: var(--primary); border-color: var(--primary); }
+.gt-slots { padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); }
+.gt-slots h4, .gt-answers h4 { margin: 0 0 8px; font-size: .9rem; }
+.gt-slots__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.gt-slot { display: grid; justify-items: center; gap: 2px; padding: 8px 4px; border: 1px dashed var(--border); border-radius: 8px; transition: background .4s, border-color .4s; }
+.gt-slot strong { font-size: 1.15rem; }
+.gt-slot small { color: var(--text-muted); font-size: .7rem; }
+.gt-slot.is-kept { border: 2px solid var(--success, #16a34a); background: color-mix(in srgb, var(--success, #16a34a) 15%, transparent); }
+.gt-chip { margin-top: 10px; padding: 6px 10px; border-radius: 999px; font-size: .85rem; font-weight: 600; display: inline-block; animation: gt-pop .45s ease-out; }
+.gt-chip.is-kept { background: var(--success, #16a34a); color: #fff; }
+.gt-chip.is-pruned { background: transparent; color: var(--error, #dc2626); border: 1px solid var(--error, #dc2626); text-decoration: line-through; animation: gt-fade .6s ease-out; }
+.gt-score { margin: 0; font-size: .9rem; }
+.gt-answers__list { display: flex; flex-wrap: wrap; gap: 6px; }
+.gt-answer { padding: 3px 8px; border: 1px solid var(--border); border-radius: 6px; font-size: .85rem; }
+.gt-muted { color: var(--text-muted); margin: 0; font-size: .85rem; }
+@keyframes gt-pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes gt-fade { from { opacity: 1; } to { opacity: .45; } }
+@media (max-width: 760px) { .gt-scene { grid-template-columns: minmax(0, 1fr); } }

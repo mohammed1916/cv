@@ -1,0 +1,10 @@
+.rooted-tree { min-width: 0; }
+.rooted-tree__edge { stroke: var(--border); stroke-width: 2; }
+.rooted-tree__node circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; transition: fill .3s, stroke .3s; }
+.rooted-tree__node text { fill: var(--text); font-size: 12px; font-weight: 700; }
+.rooted-tree__node.is-new circle { fill: var(--success, #16a34a); stroke: var(--success, #16a34a); }
+.rooted-tree__node.is-new text { fill: #fff; }
+.rooted-tree__node.is-focus circle { stroke: var(--primary); stroke-width: 3; }
+.rooted-tree__node.is-target circle { stroke: var(--warning, #d97706); stroke-width: 3; }
+.rooted-tree__node.is-best circle { fill: var(--primary); stroke: var(--primary); }
+.rooted-tree__node.is-best text { fill: #fff; }

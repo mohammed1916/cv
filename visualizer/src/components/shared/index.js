@@ -23,3 +23,7 @@ export { treeFromLevelOrder, treeFromNary, levelOrderFromTree, layoutTree } from
 export { default as TreeOutline } from './TreeOutline'
 // Operation log for design-style problems driven by a list of method calls.
 export { default as OperationLog } from './OperationLog'
+// Story workspace (code + one scene + narration + play/rewind) and rooted trees of any branching factor.
+export { default as StoryWorkspace } from './StoryWorkspace'
+export { default as RootedTreeDiagram } from './RootedTreeDiagram'
+export { layoutRootedTree } from './treeLayout'

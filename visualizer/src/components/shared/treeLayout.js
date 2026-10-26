@@ -85,3 +85,26 @@ export function levelOrderFromTree(root) {
   while (out.length && out[out.length - 1] === null) out.pop()
   return out
 }
+
+/**
+ * Lays out a rooted tree of any branching factor. Leaves take consecutive columns; each parent sits
+ * over the middle of its children. Input nodes are { id, children: [] }.
+ */
+export function layoutRootedTree(root) {
+  const positions = new Map()
+  const edges = []
+  let column = 0
+  let deepest = 0
+  function place(node, depth) {
+    deepest = Math.max(deepest, depth)
+    const kids = node.children ?? []
+    if (kids.length === 0) {
+      positions.set(node.id, { x: column++, depth })
+      return
+    }
+    const xs = kids.map(child => { place(child, depth + 1); edges.push([node.id, child.id]); return positions.get(child.id).x })
+    positions.set(node.id, { x: (Math.min(...xs) + Math.max(...xs)) / 2, depth })
+  }
+  place(root, 0)
+  return { positions, edges, columns: Math.max(1, column), rows: deepest + 1 }
+}
