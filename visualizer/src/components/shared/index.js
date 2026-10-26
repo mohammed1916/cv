@@ -21,3 +21,5 @@ export { default as LinkedListLane } from './LinkedListLane'
 export { default as BinaryTreeLane } from './BinaryTreeLane'
 export { treeFromLevelOrder, treeFromNary, levelOrderFromTree, layoutTree } from './treeLayout'
 export { default as TreeOutline } from './TreeOutline'
+// Operation log for design-style problems driven by a list of method calls.
+export { default as OperationLog } from './OperationLog'

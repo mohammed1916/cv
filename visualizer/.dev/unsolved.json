@@ -4086,98 +4086,6 @@
     ]
   },
   {
-    "id": "lc-673",
-    "number": "673",
-    "title": "Number of Longest Increasing Subsequence",
-    "slug": "number-of-longest-increasing-subsequence",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Math"
-    ]
-  },
-  {
-    "id": "lc-674",
-    "number": "674",
-    "title": "Longest Continuous Increasing Subsequence",
-    "slug": "longest-continuous-increasing-subsequence",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming"
-    ]
-  },
-  {
-    "id": "lc-675",
-    "number": "675",
-    "title": "Cut Off Trees for Golf Event",
-    "slug": "cut-off-trees-for-golf-event",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-676",
-    "number": "676",
-    "title": "Implement Magic Dictionary",
-    "slug": "implement-magic-dictionary",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-677",
-    "number": "677",
-    "title": "Map Sum Pairs",
-    "slug": "map-sum-pairs",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-678",
-    "number": "678",
-    "title": "Valid Parenthesis String",
-    "slug": "valid-parenthesis-string",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String"
-    ]
-  },
-  {
-    "id": "lc-679",
-    "number": "679",
-    "title": "24 Game",
-    "slug": "24-game",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-680",
-    "number": "680",
-    "title": "Valid Palindrome II",
-    "slug": "valid-palindrome-ii",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "String"
-    ]
-  },
-  {
     "id": "lc-681",
     "number": "681",
     "title": "Next Closest Time",
@@ -4189,34 +4097,12 @@
     ]
   },
   {
-    "id": "lc-682",
-    "number": "682",
-    "title": "Baseball Game",
-    "slug": "baseball-game",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-683",
     "number": "683",
     "title": "K Empty Slots",
     "slug": "k-empty-slots",
     "difficulty": "Hard",
     "paidOnly": true,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-685",
-    "number": "685",
-    "title": "Redundant Connection II",
-    "slug": "redundant-connection-ii",
-    "difficulty": "Hard",
-    "paidOnly": false,
     "tags": [
       "General"
     ]

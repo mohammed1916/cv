@@ -1,0 +1,7 @@
+.operation-log { margin-bottom: 16px; }
+.operation-log header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.operation-log header span { font-size: .75rem; color: var(--text-muted); }
+.operation-log table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.operation-log th, .operation-log td { padding: 4px 6px; border: 1px solid var(--border); text-align: left; }
+.operation-log tr.is-current td { background: var(--surface2); font-weight: 700; }
+.operation-log code { font-size: .8rem; }

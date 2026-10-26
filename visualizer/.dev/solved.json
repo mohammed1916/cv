@@ -275,5 +275,15 @@
   "trim-a-binary-search-tree",
   "maximum-swap",
   "second-minimum-node-in-a-binary-tree",
-  "bulb-switcher-ii"
+  "bulb-switcher-ii",
+  "number-of-longest-increasing-subsequence",
+  "longest-continuous-increasing-subsequence",
+  "cut-off-trees-for-golf-event",
+  "implement-magic-dictionary",
+  "map-sum-pairs",
+  "valid-parenthesis-string",
+  "24-game",
+  "valid-palindrome-ii",
+  "baseball-game",
+  "redundant-connection-ii"
 ]
