@@ -26,11 +26,11 @@
 .hero-node rect { fill: var(--surface2); stroke: var(--border); }
 .hero-node text { fill: var(--text); font: 27px monospace; }
 .hero-node .hero-index { fill: var(--text-muted); font-size: 11px; }
-.hero-match rect { stroke: #9e85ff; animation: hero-glow 4s ease-in-out infinite; }
-.hero-flow { animation: hero-flow 3s linear infinite; }
+.hero-match rect { stroke: var(--primary); animation: hero-glow 4s ease-in-out infinite; }
+.hero-flow { stroke: var(--primary); animation: hero-flow 3s linear infinite; }
 .hero-result { fill: var(--text); font: 19px monospace; }
 .welcome-code { padding: 18px; border-top: 1px solid var(--border); font: 11px/2 monospace; color: var(--text-muted); }
-.welcome-code span { color: var(--text-muted); margin-right: 14px; opacity: .6; }
+.welcome-code span { color: var(--text-muted); margin-right: 14px; }
 .welcome-code strong { color: var(--primary); }
 .welcome-start { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; padding: 20px 24px; border: 1px solid color-mix(in srgb, var(--primary) 45%, var(--border)); background: color-mix(in srgb, var(--primary) 7%, var(--surface)); border-radius: 12px; }
 .welcome-start > div { flex: 1; }

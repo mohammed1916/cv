@@ -20,7 +20,7 @@ export default function WelcomeHero({ onTutorial, onPlayground, onStart }) {
       <svg viewBox="0 0 520 280" role="img" aria-label="Two Sum: two plus seven equals nine. Store two, then find its complement seven.">
         <defs><pattern id="hero-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="currentColor" opacity=".08" /></pattern></defs>
         <rect width="520" height="280" fill="url(#hero-grid)" />
-        <path className="hero-flow" d="M85 130 V200 Q85 220 110 220 H235 Q260 220 260 195 V130" fill="none" stroke="#9e85ff" strokeWidth="2" strokeDasharray="6 7" />
+        <path className="hero-flow" d="M92 149 V200 Q92 220 114 220 H182 Q204 220 204 200 V149" fill="none" stroke="#9e85ff" strokeWidth="2" strokeDasharray="6 7" />
         {[2,7,11,15].map((n,i) => <g key={n} className={i < 2 ? 'hero-node hero-match' : 'hero-node'} style={{animationDelay:`${i * .4}s`}}><rect x={50+i*112} y="65" width="84" height="84" rx="14" /><text x={92+i*112} y="116" textAnchor="middle">{n}</text><text className="hero-index" x={92+i*112} y="47" textAnchor="middle">0{i}</text></g>)}
         <text x="302" y="220" className="hero-result">2 + 7 = 9</text>
       </svg>
