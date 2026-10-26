@@ -80,21 +80,18 @@
   --code-surface: #e6e9ef;
   --code-line:    #dce0e8;
   --code-text:    #4c4f69;
-  --code-dim:     #6a6d82;
+  --code-dim:     #6c6f85;
   --code-keyword: #8839ef;
-  --code-string:  #327c21;
-  --code-number:  #be4601;
-  --code-func:    #1761f5;
-  --code-comment: #6a6d81;
+  --code-string:  #40a02b;
+  --code-number:  #fe640b;
+  --code-func:    #1e66f5;
+  --code-comment: #7c7f93;
 
   /* Neutral wash layers. Panels used rgba(255,255,255,0.06) for these, which
      is invisible on a light ground. */
   --overlay-weak:   rgba(15, 23, 42, 0.05);
   --overlay-medium: rgba(15, 23, 42, 0.09);
   --overlay-strong: rgba(15, 23, 42, 0.14);
-  --primary-contrast: #ffffff;
-  --surface-2: var(--surface2);
-  --text-main: var(--text);
 
   --radius-sm: 6px;
   --radius:    10px;
@@ -158,9 +155,6 @@
   --overlay-weak:   rgba(255, 255, 255, 0.06);
   --overlay-medium: rgba(255, 255, 255, 0.10);
   --overlay-strong: rgba(255, 255, 255, 0.16);
-  --primary-contrast: #0f0f24;
-  --surface-2: var(--surface2);
-  --text-main: var(--text);
 }
 
 html {
