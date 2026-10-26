@@ -1,0 +1,11 @@
+.binary-tree-lane { margin-bottom: 16px; }
+.binary-tree-lane header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.binary-tree-lane header span { font-size: .75rem; color: var(--text-muted); }
+.binary-tree-lane__edge { stroke: var(--border); stroke-width: 2; }
+.binary-tree-lane__node circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; }
+.binary-tree-lane__node text { fill: var(--text); font-size: 12px; font-weight: 600; }
+.binary-tree-lane__node text.binary-tree-lane__tag { font-size: 10px; font-weight: 500; fill: var(--text-muted); }
+.binary-tree-lane__node.is-active circle { stroke: var(--primary); stroke-width: 3; }
+.binary-tree-lane__node.is-visited circle { fill: var(--surface); stroke: var(--primary); }
+.binary-tree-lane__node.is-match circle { stroke: var(--success); stroke-width: 3; }
+.binary-tree-lane__node.is-pruned circle { opacity: .35; stroke-dasharray: 4 3; }

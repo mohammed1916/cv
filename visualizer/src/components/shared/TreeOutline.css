@@ -1,0 +1,11 @@
+.tree-outline { margin-bottom: 16px; }
+.tree-outline header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.tree-outline header span { font-size: .75rem; color: var(--text-muted); }
+.tree-outline__list { list-style: none; margin: 0; padding-left: 18px; border-left: 1px dashed var(--border); }
+.tree-outline > .tree-outline__list { padding-left: 0; border-left: none; }
+.tree-outline__node { display: inline-flex; align-items: baseline; gap: 6px; margin: 3px 0; padding: 2px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); }
+.tree-outline__node small { font-size: .65rem; color: var(--text-muted); }
+.tree-outline__node.is-active { outline: 2px solid var(--primary); outline-offset: 1px; }
+.tree-outline__node.is-visited { border-color: var(--primary); }
+.tree-outline__node.is-match { border-color: var(--success); }
+.tree-outline__node.is-pruned { opacity: .4; border-style: dashed; }

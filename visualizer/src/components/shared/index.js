@@ -16,3 +16,8 @@ export { ProgressBand }    from './ProgressBand'
 // Pan/zoom shell for SVG diagrams (graphs, trees) inside dock panels.
 export { default as SvgViewport } from './SvgViewport'
 export { StackLane, BitmaskLane, DPTable, GraphFrontierLane } from './AlgorithmStatePrimitives'
+// Linked list and binary tree lanes for pointer and structure problems.
+export { default as LinkedListLane } from './LinkedListLane'
+export { default as BinaryTreeLane } from './BinaryTreeLane'
+export { treeFromLevelOrder, treeFromNary, levelOrderFromTree, layoutTree } from './treeLayout'
+export { default as TreeOutline } from './TreeOutline'

@@ -1,0 +1,16 @@
+.linked-list-lane { margin-bottom: 16px; }
+.linked-list-lane header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.linked-list-lane header span { font-size: .75rem; color: var(--text-muted); }
+.linked-list-lane__track { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px; }
+.linked-list-lane__item { display: flex; align-items: flex-end; gap: 6px; }
+.linked-list-lane__tags { display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 22px; }
+.linked-list-lane__tags b { font-size: .65rem; padding: 1px 5px; border-radius: 4px; background: var(--primary); color: #fff; }
+.linked-list-lane__tags b[data-tone="warn"] { background: var(--warning, #b45309); }
+.linked-list-lane__node { min-width: 52px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface2); display: grid; justify-items: center; gap: 2px; }
+.linked-list-lane__node small { font-size: .65rem; color: var(--text-muted); }
+.linked-list-lane__node.is-visited { border-color: var(--primary); }
+.linked-list-lane__node.is-active { outline: 2px solid var(--primary); outline-offset: 1px; }
+.linked-list-lane__node.is-match { border-color: var(--success); background: var(--surface); }
+.linked-list-lane__node.is-removed { opacity: .45; border-style: dashed; }
+.linked-list-lane__arrow { color: var(--text-muted); padding-bottom: 8px; }
+.linked-list-lane__cycle, .linked-list-lane__end { font-size: .75rem; color: var(--text-muted); padding-bottom: 8px; }
