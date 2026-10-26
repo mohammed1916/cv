@@ -265,5 +265,15 @@
   "maximum-binary-tree",
   "print-binary-tree",
   "robot-return-to-origin",
-  "find-k-closest-elements"
+  "find-k-closest-elements",
+  "split-array-into-consecutive-subsequences",
+  "image-smoother",
+  "maximum-width-of-binary-tree",
+  "strange-printer",
+  "non-decreasing-array",
+  "kth-smallest-number-in-multiplication-table",
+  "trim-a-binary-search-tree",
+  "maximum-swap",
+  "second-minimum-node-in-a-binary-tree",
+  "bulb-switcher-ii"
 ]

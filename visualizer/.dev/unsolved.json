@@ -4039,18 +4039,6 @@
     ]
   },
   {
-    "id": "lc-659",
-    "number": "659",
-    "title": "Split Array into Consecutive Subsequences",
-    "slug": "split-array-into-consecutive-subsequences",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Array"
-    ]
-  },
-  {
     "id": "lc-660",
     "number": "660",
     "title": "Remove 9",
@@ -4059,30 +4047,6 @@
     "paidOnly": true,
     "tags": [
       "General"
-    ]
-  },
-  {
-    "id": "lc-661",
-    "number": "661",
-    "title": "Image Smoother",
-    "slug": "image-smoother",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-662",
-    "number": "662",
-    "title": "Maximum Width of Binary Tree",
-    "slug": "maximum-width-of-binary-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Greedy"
     ]
   },
   {
@@ -4096,28 +4060,6 @@
       "Dynamic Programming",
       "Graph",
       "Tree"
-    ]
-  },
-  {
-    "id": "lc-664",
-    "number": "664",
-    "title": "Strange Printer",
-    "slug": "strange-printer",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-665",
-    "number": "665",
-    "title": "Non-decreasing Array",
-    "slug": "non-decreasing-array",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
     ]
   },
   {
@@ -4137,66 +4079,6 @@
     "number": "667",
     "title": "Beautiful Arrangement II",
     "slug": "beautiful-arrangement-ii",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-668",
-    "number": "668",
-    "title": "Kth Smallest Number in Multiplication Table",
-    "slug": "kth-smallest-number-in-multiplication-table",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Math",
-      "Heap"
-    ]
-  },
-  {
-    "id": "lc-669",
-    "number": "669",
-    "title": "Trim a Binary Search Tree",
-    "slug": "trim-a-binary-search-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Binary Search"
-    ]
-  },
-  {
-    "id": "lc-670",
-    "number": "670",
-    "title": "Maximum Swap",
-    "slug": "maximum-swap",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-671",
-    "number": "671",
-    "title": "Second Minimum Node In a Binary Tree",
-    "slug": "second-minimum-node-in-a-binary-tree",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-672",
-    "number": "672",
-    "title": "Bulb Switcher II",
-    "slug": "bulb-switcher-ii",
     "difficulty": "Medium",
     "paidOnly": false,
     "tags": [
