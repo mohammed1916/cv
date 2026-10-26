@@ -4207,17 +4207,6 @@
     ]
   },
   {
-    "id": "lc-736",
-    "number": "736",
-    "title": "Parse Lisp Expression",
-    "slug": "parse-lisp-expression",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-737",
     "number": "737",
     "title": "Sentence Similarity II",
@@ -4296,19 +4285,6 @@
     ]
   },
   {
-    "id": "lc-745",
-    "number": "745",
-    "title": "Prefix and Suffix Search",
-    "slug": "prefix-and-suffix-search",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Binary Search",
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-746",
     "number": "746",
     "title": "Min Cost Climbing Stairs",
@@ -4328,29 +4304,6 @@
     "paidOnly": false,
     "tags": [
       "Math"
-    ]
-  },
-  {
-    "id": "lc-748",
-    "number": "748",
-    "title": "Shortest Completing Word",
-    "slug": "shortest-completing-word",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-749",
-    "number": "749",
-    "title": "Contain Virus",
-    "slug": "contain-virus",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {
@@ -4377,67 +4330,12 @@
     ]
   },
   {
-    "id": "lc-752",
-    "number": "752",
-    "title": "Open the Lock",
-    "slug": "open-the-lock",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-753",
-    "number": "753",
-    "title": "Cracking the Safe",
-    "slug": "cracking-the-safe",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-754",
-    "number": "754",
-    "title": "Reach a Number",
-    "slug": "reach-a-number",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Math"
-    ]
-  },
-  {
     "id": "lc-755",
     "number": "755",
     "title": "Pour Water",
     "slug": "pour-water",
     "difficulty": "Medium",
     "paidOnly": true,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-756",
-    "number": "756",
-    "title": "Pyramid Transition Matrix",
-    "slug": "pyramid-transition-matrix",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-757",
-    "number": "757",
-    "title": "Set Intersection Size At Least Two",
-    "slug": "set-intersection-size-at-least-two",
-    "difficulty": "Hard",
-    "paidOnly": false,
     "tags": [
       "General"
     ]
@@ -4477,40 +4375,6 @@
     ]
   },
   {
-    "id": "lc-761",
-    "number": "761",
-    "title": "Special Binary String",
-    "slug": "special-binary-string",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "String"
-    ]
-  },
-  {
-    "id": "lc-762",
-    "number": "762",
-    "title": "Prime Number of Set Bits in Binary Representation",
-    "slug": "prime-number-of-set-bits-in-binary-representation",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Math",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-763",
-    "number": "763",
-    "title": "Partition Labels",
-    "slug": "partition-labels",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming"
-    ]
-  },
-  {
     "id": "lc-764",
     "number": "764",
     "title": "Largest Plus Sign",
@@ -4544,55 +4408,6 @@
     ]
   },
   {
-    "id": "lc-767",
-    "number": "767",
-    "title": "Reorganize String",
-    "slug": "reorganize-string",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-768",
-    "number": "768",
-    "title": "Max Chunks To Make Sorted II",
-    "slug": "max-chunks-to-make-sorted-ii",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Greedy",
-      "Binary Search",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-769",
-    "number": "769",
-    "title": "Max Chunks To Make Sorted",
-    "slug": "max-chunks-to-make-sorted",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Greedy",
-      "Binary Search",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-770",
-    "number": "770",
-    "title": "Basic Calculator IV",
-    "slug": "basic-calculator-iv",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-771",
     "number": "771",
     "title": "Jewels and Stones",
@@ -4615,17 +4430,6 @@
     ]
   },
   {
-    "id": "lc-773",
-    "number": "773",
-    "title": "Sliding Puzzle",
-    "slug": "sliding-puzzle",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-774",
     "number": "774",
     "title": "Minimize Max Distance to Gas Station",
@@ -4634,17 +4438,6 @@
     "paidOnly": true,
     "tags": [
       "Greedy"
-    ]
-  },
-  {
-    "id": "lc-775",
-    "number": "775",
-    "title": "Global and Local Inversions",
-    "slug": "global-and-local-inversions",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
     ]
   },
   {
@@ -4659,144 +4452,11 @@
     ]
   },
   {
-    "id": "lc-777",
-    "number": "777",
-    "title": "Swap Adjacent in LR String",
-    "slug": "swap-adjacent-in-lr-string",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String"
-    ]
-  },
-  {
     "id": "lc-778",
     "number": "778",
     "title": "Swim in Rising Water",
     "slug": "swim-in-rising-water",
     "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-779",
-    "number": "779",
-    "title": "K-th Symbol in Grammar",
-    "slug": "k-th-symbol-in-grammar",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-780",
-    "number": "780",
-    "title": "Reaching Points",
-    "slug": "reaching-points",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-781",
-    "number": "781",
-    "title": "Rabbits in Forest",
-    "slug": "rabbits-in-forest",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-782",
-    "number": "782",
-    "title": "Transform to Chessboard",
-    "slug": "transform-to-chessboard",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-783",
-    "number": "783",
-    "title": "Minimum Distance Between BST Nodes",
-    "slug": "minimum-distance-between-bst-nodes",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Tree",
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-784",
-    "number": "784",
-    "title": "Letter Case Permutation",
-    "slug": "letter-case-permutation",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Backtracking"
-    ]
-  },
-  {
-    "id": "lc-785",
-    "number": "785",
-    "title": "Is Graph Bipartite?",
-    "slug": "is-graph-bipartite",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph"
-    ]
-  },
-  {
-    "id": "lc-786",
-    "number": "786",
-    "title": "K-th Smallest Prime Fraction",
-    "slug": "k-th-smallest-prime-fraction",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Math"
-    ]
-  },
-  {
-    "id": "lc-787",
-    "number": "787",
-    "title": "Cheapest Flights Within K Stops",
-    "slug": "cheapest-flights-within-k-stops",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Heap"
-    ]
-  },
-  {
-    "id": "lc-788",
-    "number": "788",
-    "title": "Rotated Digits",
-    "slug": "rotated-digits",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-789",
-    "number": "789",
-    "title": "Escape The Ghosts",
-    "slug": "escape-the-ghosts",
-    "difficulty": "Medium",
     "paidOnly": false,
     "tags": [
       "General"
@@ -4812,52 +4472,6 @@
     "tags": [
       "Greedy",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-791",
-    "number": "791",
-    "title": "Custom Sort String",
-    "slug": "custom-sort-string",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-792",
-    "number": "792",
-    "title": "Number of Matching Subsequences",
-    "slug": "number-of-matching-subsequences",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Math"
-    ]
-  },
-  {
-    "id": "lc-793",
-    "number": "793",
-    "title": "Preimage Size of Factorial Zeroes Function",
-    "slug": "preimage-size-of-factorial-zeroes-function",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-794",
-    "number": "794",
-    "title": "Valid Tic-Tac-Toe State",
-    "slug": "valid-tic-tac-toe-state",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {
@@ -4883,28 +4497,6 @@
     "tags": [
       "String",
       "Array"
-    ]
-  },
-  {
-    "id": "lc-797",
-    "number": "797",
-    "title": "All Paths From Source to Target",
-    "slug": "all-paths-from-source-to-target",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph"
-    ]
-  },
-  {
-    "id": "lc-798",
-    "number": "798",
-    "title": "Smallest Rotation with Highest Score",
-    "slug": "smallest-rotation-with-highest-score",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
     ]
   },
   {
@@ -4941,28 +4533,6 @@
     ]
   },
   {
-    "id": "lc-802",
-    "number": "802",
-    "title": "Find Eventual Safe States",
-    "slug": "find-eventual-safe-states",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-803",
-    "number": "803",
-    "title": "Bricks Falling When Hit",
-    "slug": "bricks-falling-when-hit",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-804",
     "number": "804",
     "title": "Unique Morse Code Words",
@@ -4972,17 +4542,6 @@
     "tags": [
       "String",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-805",
-    "number": "805",
-    "title": "Split Array With Same Average",
-    "slug": "split-array-with-same-average",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Array"
     ]
   },
   {
@@ -4998,67 +4557,11 @@
     ]
   },
   {
-    "id": "lc-807",
-    "number": "807",
-    "title": "Max Increase to Keep City Skyline",
-    "slug": "max-increase-to-keep-city-skyline",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Greedy"
-    ]
-  },
-  {
     "id": "lc-808",
     "number": "808",
     "title": "Soup Servings",
     "slug": "soup-servings",
     "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-809",
-    "number": "809",
-    "title": "Expressive Words",
-    "slug": "expressive-words",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-810",
-    "number": "810",
-    "title": "Chalkboard XOR Game",
-    "slug": "chalkboard-xor-game",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-811",
-    "number": "811",
-    "title": "Subdomain Visit Count",
-    "slug": "subdomain-visit-count",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-812",
-    "number": "812",
-    "title": "Largest Triangle Area",
-    "slug": "largest-triangle-area",
-    "difficulty": "Easy",
     "paidOnly": false,
     "tags": [
       "General"
@@ -5073,74 +4576,6 @@
     "paidOnly": false,
     "tags": [
       "Array"
-    ]
-  },
-  {
-    "id": "lc-814",
-    "number": "814",
-    "title": "Binary Tree Pruning",
-    "slug": "binary-tree-pruning",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
-    "id": "lc-815",
-    "number": "815",
-    "title": "Bus Routes",
-    "slug": "bus-routes",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-816",
-    "number": "816",
-    "title": "Ambiguous Coordinates",
-    "slug": "ambiguous-coordinates",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-817",
-    "number": "817",
-    "title": "Linked List Components",
-    "slug": "linked-list-components",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Linked List"
-    ]
-  },
-  {
-    "id": "lc-818",
-    "number": "818",
-    "title": "Race Car",
-    "slug": "race-car",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-819",
-    "number": "819",
-    "title": "Most Common Word",
-    "slug": "most-common-word",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
     ]
   },
   {
@@ -5167,17 +4602,6 @@
     ]
   },
   {
-    "id": "lc-822",
-    "number": "822",
-    "title": "Card Flipping Game",
-    "slug": "card-flipping-game",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-823",
     "number": "823",
     "title": "Binary Trees With Factors",
@@ -5187,40 +4611,6 @@
     "tags": [
       "Graph",
       "Tree",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-824",
-    "number": "824",
-    "title": "Goat Latin",
-    "slug": "goat-latin",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-825",
-    "number": "825",
-    "title": "Friends Of Appropriate Ages",
-    "slug": "friends-of-appropriate-ages",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-826",
-    "number": "826",
-    "title": "Most Profit Assigning Work",
-    "slug": "most-profit-assigning-work",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Greedy",
       "Bit Manipulation"
     ]
   },
@@ -5237,30 +4627,6 @@
     ]
   },
   {
-    "id": "lc-828",
-    "number": "828",
-    "title": "Count Unique Characters of All Substrings of a Given String",
-    "slug": "count-unique-characters-of-all-substrings-of-a-given-string",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Tree",
-      "String"
-    ]
-  },
-  {
-    "id": "lc-829",
-    "number": "829",
-    "title": "Consecutive Numbers Sum",
-    "slug": "consecutive-numbers-sum",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Math"
-    ]
-  },
-  {
     "id": "lc-830",
     "number": "830",
     "title": "Positions of Large Groups",
@@ -5272,58 +4638,11 @@
     ]
   },
   {
-    "id": "lc-831",
-    "number": "831",
-    "title": "Masking Personal Information",
-    "slug": "masking-personal-information",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-832",
     "number": "832",
     "title": "Flipping an Image",
     "slug": "flipping-an-image",
     "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-833",
-    "number": "833",
-    "title": "Find And Replace in String",
-    "slug": "find-and-replace-in-string",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-834",
-    "number": "834",
-    "title": "Sum of Distances in Tree",
-    "slug": "sum-of-distances-in-tree",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-835",
-    "number": "835",
-    "title": "Image Overlap",
-    "slug": "image-overlap",
-    "difficulty": "Medium",
     "paidOnly": false,
     "tags": [
       "General"
@@ -5352,17 +4671,6 @@
     ]
   },
   {
-    "id": "lc-838",
-    "number": "838",
-    "title": "Push Dominoes",
-    "slug": "push-dominoes",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Greedy"
-    ]
-  },
-  {
     "id": "lc-839",
     "number": "839",
     "title": "Similar String Groups",
@@ -5371,51 +4679,6 @@
     "paidOnly": false,
     "tags": [
       "String"
-    ]
-  },
-  {
-    "id": "lc-840",
-    "number": "840",
-    "title": "Magic Squares In Grid",
-    "slug": "magic-squares-in-grid",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-841",
-    "number": "841",
-    "title": "Keys and Rooms",
-    "slug": "keys-and-rooms",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-842",
-    "number": "842",
-    "title": "Split Array into Fibonacci Sequence",
-    "slug": "split-array-into-fibonacci-sequence",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-843",
-    "number": "843",
-    "title": "Guess the Word",
-    "slug": "guess-the-word",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
     ]
   },
   {
@@ -5430,52 +4693,6 @@
     ]
   },
   {
-    "id": "lc-845",
-    "number": "845",
-    "title": "Longest Mountain in Array",
-    "slug": "longest-mountain-in-array",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-846",
-    "number": "846",
-    "title": "Hand of Straights",
-    "slug": "hand-of-straights",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-847",
-    "number": "847",
-    "title": "Shortest Path Visiting All Nodes",
-    "slug": "shortest-path-visiting-all-nodes",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-848",
-    "number": "848",
-    "title": "Shifting Letters",
-    "slug": "shifting-letters",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-849",
     "number": "849",
     "title": "Maximize Distance to Closest Person",
@@ -5484,28 +4701,6 @@
     "paidOnly": false,
     "tags": [
       "Greedy"
-    ]
-  },
-  {
-    "id": "lc-850",
-    "number": "850",
-    "title": "Rectangle Area II",
-    "slug": "rectangle-area-ii",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-851",
-    "number": "851",
-    "title": "Loud and Rich",
-    "slug": "loud-and-rich",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
     ]
   },
   {
@@ -5520,66 +4715,10 @@
     ]
   },
   {
-    "id": "lc-853",
-    "number": "853",
-    "title": "Car Fleet",
-    "slug": "car-fleet",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-854",
-    "number": "854",
-    "title": "K-Similar Strings",
-    "slug": "k-similar-strings",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "String"
-    ]
-  },
-  {
-    "id": "lc-855",
-    "number": "855",
-    "title": "Exam Room",
-    "slug": "exam-room",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-856",
     "number": "856",
     "title": "Score of Parentheses",
     "slug": "score-of-parentheses",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-857",
-    "number": "857",
-    "title": "Minimum Cost to Hire K Workers",
-    "slug": "minimum-cost-to-hire-k-workers",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Greedy",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-858",
-    "number": "858",
-    "title": "Mirror Reflection",
-    "slug": "mirror-reflection",
     "difficulty": "Medium",
     "paidOnly": false,
     "tags": [
@@ -5633,55 +4772,6 @@
     ]
   },
   {
-    "id": "lc-863",
-    "number": "863",
-    "title": "All Nodes Distance K in Binary Tree",
-    "slug": "all-nodes-distance-k-in-binary-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
-    "id": "lc-864",
-    "number": "864",
-    "title": "Shortest Path to Get All Keys",
-    "slug": "shortest-path-to-get-all-keys",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-865",
-    "number": "865",
-    "title": "Smallest Subtree with all the Deepest Nodes",
-    "slug": "smallest-subtree-with-all-the-deepest-nodes",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
-    "id": "lc-866",
-    "number": "866",
-    "title": "Prime Palindrome",
-    "slug": "prime-palindrome",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "String",
-      "Math"
-    ]
-  },
-  {
     "id": "lc-867",
     "number": "867",
     "title": "Transpose Matrix",
@@ -5716,29 +4806,6 @@
     ]
   },
   {
-    "id": "lc-870",
-    "number": "870",
-    "title": "Advantage Shuffle",
-    "slug": "advantage-shuffle",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-871",
-    "number": "871",
-    "title": "Minimum Number of Refueling Stops",
-    "slug": "minimum-number-of-refueling-stops",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Greedy",
-      "Math"
-    ]
-  },
-  {
     "id": "lc-872",
     "number": "872",
     "title": "Leaf-Similar Trees",
@@ -5748,61 +4815,6 @@
     "tags": [
       "Graph",
       "Tree"
-    ]
-  },
-  {
-    "id": "lc-873",
-    "number": "873",
-    "title": "Length of Longest Fibonacci Subsequence",
-    "slug": "length-of-longest-fibonacci-subsequence",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming"
-    ]
-  },
-  {
-    "id": "lc-874",
-    "number": "874",
-    "title": "Walking Robot Simulation",
-    "slug": "walking-robot-simulation",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-876",
-    "number": "876",
-    "title": "Middle of the Linked List",
-    "slug": "middle-of-the-linked-list",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Linked List"
-    ]
-  },
-  {
-    "id": "lc-877",
-    "number": "877",
-    "title": "Stone Game",
-    "slug": "stone-game",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-878",
-    "number": "878",
-    "title": "Nth Magical Number",
-    "slug": "nth-magical-number",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Math"
     ]
   },
   {
@@ -5817,17 +4829,6 @@
     ]
   },
   {
-    "id": "lc-880",
-    "number": "880",
-    "title": "Decoded String at Index",
-    "slug": "decoded-string-at-index",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String"
-    ]
-  },
-  {
     "id": "lc-881",
     "number": "881",
     "title": "Boats to Save People",
@@ -5836,17 +4837,6 @@
     "paidOnly": false,
     "tags": [
       "General"
-    ]
-  },
-  {
-    "id": "lc-882",
-    "number": "882",
-    "title": "Reachable Nodes In Subdivided Graph",
-    "slug": "reachable-nodes-in-subdivided-graph",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Graph"
     ]
   },
   {
@@ -5873,28 +4863,6 @@
     ]
   },
   {
-    "id": "lc-885",
-    "number": "885",
-    "title": "Spiral Matrix III",
-    "slug": "spiral-matrix-iii",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-886",
-    "number": "886",
-    "title": "Possible Bipartition",
-    "slug": "possible-bipartition",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming"
-    ]
-  },
-  {
     "id": "lc-887",
     "number": "887",
     "title": "Super Egg Drop",
@@ -5917,19 +4885,6 @@
     ]
   },
   {
-    "id": "lc-889",
-    "number": "889",
-    "title": "Construct Binary Tree from Preorder and Postorder Traversal",
-    "slug": "construct-binary-tree-from-preorder-and-postorder-traversal",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-890",
     "number": "890",
     "title": "Find and Replace Pattern",
@@ -5939,18 +4894,6 @@
     "tags": [
       "String",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-891",
-    "number": "891",
-    "title": "Sum of Subsequence Widths",
-    "slug": "sum-of-subsequence-widths",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Array"
     ]
   },
   {
@@ -5973,30 +4916,6 @@
     "paidOnly": false,
     "tags": [
       "String"
-    ]
-  },
-  {
-    "id": "lc-894",
-    "number": "894",
-    "title": "All Possible Full Binary Trees",
-    "slug": "all-possible-full-binary-trees",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
-    "id": "lc-895",
-    "number": "895",
-    "title": "Maximum Frequency Stack",
-    "slug": "maximum-frequency-stack",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Design",
-      "Greedy"
     ]
   },
   {
@@ -6050,18 +4969,6 @@
     ]
   },
   {
-    "id": "lc-900",
-    "number": "900",
-    "title": "RLE Iterator",
-    "slug": "rle-iterator",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Design",
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-901",
     "number": "901",
     "title": "Online Stock Span",
@@ -6070,29 +4977,6 @@
     "paidOnly": false,
     "tags": [
       "General"
-    ]
-  },
-  {
-    "id": "lc-902",
-    "number": "902",
-    "title": "Numbers At Most N Given Digit Set",
-    "slug": "numbers-at-most-n-given-digit-set",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Math"
-    ]
-  },
-  {
-    "id": "lc-903",
-    "number": "903",
-    "title": "Valid Permutations for DI Sequence",
-    "slug": "valid-permutations-for-di-sequence",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Backtracking",
-      "Bit Manipulation"
     ]
   },
   {
@@ -6119,18 +5003,6 @@
     ]
   },
   {
-    "id": "lc-906",
-    "number": "906",
-    "title": "Super Palindromes",
-    "slug": "super-palindromes",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "String"
-    ]
-  },
-  {
     "id": "lc-907",
     "number": "907",
     "title": "Sum of Subarray Minimums",
@@ -6151,62 +5023,6 @@
     "paidOnly": false,
     "tags": [
       "General"
-    ]
-  },
-  {
-    "id": "lc-909",
-    "number": "909",
-    "title": "Snakes and Ladders",
-    "slug": "snakes-and-ladders",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-910",
-    "number": "910",
-    "title": "Smallest Range II",
-    "slug": "smallest-range-ii",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-911",
-    "number": "911",
-    "title": "Online Election",
-    "slug": "online-election",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-912",
-    "number": "912",
-    "title": "Sort an Array",
-    "slug": "sort-an-array",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-913",
-    "number": "913",
-    "title": "Cat and Mouse",
-    "slug": "cat-and-mouse",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
     ]
   },
   {
@@ -6233,19 +5049,6 @@
     ]
   },
   {
-    "id": "lc-916",
-    "number": "916",
-    "title": "Word Subsets",
-    "slug": "word-subsets",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Backtracking",
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-917",
     "number": "917",
     "title": "Reverse Only Letters",
@@ -6266,18 +5069,6 @@
     "tags": [
       "Array",
       "Greedy"
-    ]
-  },
-  {
-    "id": "lc-919",
-    "number": "919",
-    "title": "Complete Binary Tree Inserter",
-    "slug": "complete-binary-tree-inserter",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
     ]
   },
   {
@@ -6315,17 +5106,6 @@
     ]
   },
   {
-    "id": "lc-923",
-    "number": "923",
-    "title": "3Sum With Multiplicity",
-    "slug": "3sum-with-multiplicity",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
     "id": "lc-924",
     "number": "924",
     "title": "Minimize Malware Spread",
@@ -6356,17 +5136,6 @@
     "paidOnly": false,
     "tags": [
       "String"
-    ]
-  },
-  {
-    "id": "lc-927",
-    "number": "927",
-    "title": "Three Equal Parts",
-    "slug": "three-equal-parts",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {
@@ -6416,17 +5185,6 @@
     ]
   },
   {
-    "id": "lc-932",
-    "number": "932",
-    "title": "Beautiful Array",
-    "slug": "beautiful-array",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
     "id": "lc-933",
     "number": "933",
     "title": "Number of Recent Calls",
@@ -6435,17 +5193,6 @@
     "paidOnly": false,
     "tags": [
       "Math"
-    ]
-  },
-  {
-    "id": "lc-934",
-    "number": "934",
-    "title": "Shortest Bridge",
-    "slug": "shortest-bridge",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
     ]
   },
   {
@@ -6460,28 +5207,6 @@
     ]
   },
   {
-    "id": "lc-936",
-    "number": "936",
-    "title": "Stamping The Sequence",
-    "slug": "stamping-the-sequence",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-937",
-    "number": "937",
-    "title": "Reorder Data in Log Files",
-    "slug": "reorder-data-in-log-files",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-938",
     "number": "938",
     "title": "Range Sum of BST",
@@ -6491,17 +5216,6 @@
     "tags": [
       "Tree",
       "Array"
-    ]
-  },
-  {
-    "id": "lc-939",
-    "number": "939",
-    "title": "Minimum Area Rectangle",
-    "slug": "minimum-area-rectangle",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Greedy"
     ]
   },
   {
@@ -6535,18 +5249,6 @@
     "paidOnly": false,
     "tags": [
       "String"
-    ]
-  },
-  {
-    "id": "lc-943",
-    "number": "943",
-    "title": "Find the Shortest Superstring",
-    "slug": "find-the-shortest-superstring",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
     ]
   },
   {
@@ -6607,17 +5309,6 @@
     ]
   },
   {
-    "id": "lc-949",
-    "number": "949",
-    "title": "Largest Time for Given Digits",
-    "slug": "largest-time-for-given-digits",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-950",
     "number": "950",
     "title": "Reveal Cards In Increasing Order",
@@ -6626,18 +5317,6 @@
     "paidOnly": false,
     "tags": [
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-951",
-    "number": "951",
-    "title": "Flip Equivalent Binary Trees",
-    "slug": "flip-equivalent-binary-trees",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
     ]
   },
   {
@@ -6663,29 +5342,6 @@
     ]
   },
   {
-    "id": "lc-954",
-    "number": "954",
-    "title": "Array of Doubled Pairs",
-    "slug": "array-of-doubled-pairs",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-955",
-    "number": "955",
-    "title": "Delete Columns to Make Sorted II",
-    "slug": "delete-columns-to-make-sorted-ii",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Binary Search",
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-956",
     "number": "956",
     "title": "Tallest Billboard",
@@ -6694,29 +5350,6 @@
     "paidOnly": false,
     "tags": [
       "General"
-    ]
-  },
-  {
-    "id": "lc-957",
-    "number": "957",
-    "title": "Prison Cells After N Days",
-    "slug": "prison-cells-after-n-days",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-958",
-    "number": "958",
-    "title": "Check Completeness of a Binary Tree",
-    "slug": "check-completeness-of-a-binary-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
     ]
   },
   {
