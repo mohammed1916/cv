@@ -3958,29 +3958,6 @@
     ]
   },
   {
-    "id": "lc-632",
-    "number": "632",
-    "title": "Smallest Range Covering Elements from K Lists",
-    "slug": "smallest-range-covering-elements-from-k-lists",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-633",
-    "number": "633",
-    "title": "Sum of Square Numbers",
-    "slug": "sum-of-square-numbers",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Math"
-    ]
-  },
-  {
     "id": "lc-634",
     "number": "634",
     "title": "Find the Derangement of An Array",
@@ -4004,73 +3981,6 @@
     ]
   },
   {
-    "id": "lc-636",
-    "number": "636",
-    "title": "Exclusive Time of Functions",
-    "slug": "exclusive-time-of-functions",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-637",
-    "number": "637",
-    "title": "Average of Levels in Binary Tree",
-    "slug": "average-of-levels-in-binary-tree",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
-    "id": "lc-638",
-    "number": "638",
-    "title": "Shopping Offers",
-    "slug": "shopping-offers",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-639",
-    "number": "639",
-    "title": "Decode Ways II",
-    "slug": "decode-ways-ii",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-640",
-    "number": "640",
-    "title": "Solve the Equation",
-    "slug": "solve-the-equation",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-641",
-    "number": "641",
-    "title": "Design Circular Deque",
-    "slug": "design-circular-deque",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Design"
-    ]
-  },
-  {
     "id": "lc-642",
     "number": "642",
     "title": "Design Search Autocomplete System",
@@ -4083,18 +3993,6 @@
     ]
   },
   {
-    "id": "lc-643",
-    "number": "643",
-    "title": "Maximum Average Subarray I",
-    "slug": "maximum-average-subarray-i",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Greedy"
-    ]
-  },
-  {
     "id": "lc-644",
     "number": "644",
     "title": "Maximum Average Subarray II",
@@ -4103,28 +4001,6 @@
     "paidOnly": true,
     "tags": [
       "Array",
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-645",
-    "number": "645",
-    "title": "Set Mismatch",
-    "slug": "set-mismatch",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-646",
-    "number": "646",
-    "title": "Maximum Length of Pair Chain",
-    "slug": "maximum-length-of-pair-chain",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
       "Greedy"
     ]
   },
@@ -4141,40 +4017,6 @@
     ]
   },
   {
-    "id": "lc-648",
-    "number": "648",
-    "title": "Replace Words",
-    "slug": "replace-words",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-649",
-    "number": "649",
-    "title": "Dota2 Senate",
-    "slug": "dota2-senate",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-650",
-    "number": "650",
-    "title": "2 Keys Keyboard",
-    "slug": "2-keys-keyboard",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-651",
     "number": "651",
     "title": "4 Keys Keyboard",
@@ -4186,56 +4028,6 @@
     ]
   },
   {
-    "id": "lc-652",
-    "number": "652",
-    "title": "Find Duplicate Subtrees",
-    "slug": "find-duplicate-subtrees",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
-    "id": "lc-653",
-    "number": "653",
-    "title": "Two Sum IV - Input is a BST",
-    "slug": "two-sum-iv-input-is-a-bst",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Tree",
-      "Array",
-      "Two Pointers"
-    ]
-  },
-  {
-    "id": "lc-654",
-    "number": "654",
-    "title": "Maximum Binary Tree",
-    "slug": "maximum-binary-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree",
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-655",
-    "number": "655",
-    "title": "Print Binary Tree",
-    "slug": "print-binary-tree",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Graph",
-      "Tree"
-    ]
-  },
-  {
     "id": "lc-656",
     "number": "656",
     "title": "Coin Path",
@@ -4244,28 +4036,6 @@
     "paidOnly": true,
     "tags": [
       "Graph"
-    ]
-  },
-  {
-    "id": "lc-657",
-    "number": "657",
-    "title": "Robot Return to Origin",
-    "slug": "robot-return-to-origin",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-658",
-    "number": "658",
-    "title": "Find K Closest Elements",
-    "slug": "find-k-closest-elements",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {

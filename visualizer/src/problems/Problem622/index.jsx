@@ -24,7 +24,7 @@ export default function CircularQueue() {
     <IndexedSequence label={`Ring of ${step.k} slots (head at ${step.head})`} length={step.k} active={step.size ? step.head : -1}
       valueAt={i => (step.slots[i] === null ? '·' : step.slots[i])}
       roleAt={i => (i === step.head && step.size ? 'front' : step.size && i === (step.head + step.size - 1) % step.k ? 'rear' : '')} />
-    <output aria-label="Last return value">{step.op >= 0 ? `${step.name}${step.name === 'enQueue' ? `(${step.value})` : '()'} returned ${String(step.returned)}` : 'Ready'} · size {step.size}</output>
+    <output aria-label="Last return value">{step.phase === 'done' ? 'All operations complete' : step.op >= 0 ? `${step.name}${step.name === 'enQueue' ? `(${step.value})` : '()'} returned ${String(step.returned)}` : 'Ready'} · size {step.size}</output>
     <p>Results so far: [{run.result.slice(0, Math.max(0, step.op + 1)).map(v => (v === null ? 'null' : String(v))).join(', ')}]</p>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
