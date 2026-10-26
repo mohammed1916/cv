@@ -285,3 +285,9 @@
 .workspace-drop-target.right { right: 0; top: 0; bottom: 84px; width: 100px; }
 .workspace-drop-target.bottom { left: 0; right: 0; bottom: 0; height: 76px; }
 .lumino-floating-host { min-width: 240px; min-height: 160px; overflow: hidden; }
+
+.workspace-dock-hint { min-height: 34px; display: flex; align-items: center; gap: 12px; padding: 4px 8px; pointer-events: auto; }
+.workspace-dock-hint > span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.workspace-layout-options { display: flex; flex-shrink: 0; gap: 4px; }
+.workspace-layout-options button { padding: 4px 8px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; }
+.workspace-layout-options button[aria-pressed="true"] { background: var(--primary); color: var(--primary-contrast); border-color: var(--primary); }

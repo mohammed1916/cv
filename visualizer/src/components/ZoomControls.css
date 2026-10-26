@@ -93,3 +93,8 @@
   min-width: 38px;
   text-align: center;
 }
+
+.zoom-controls-inner { border-color: var(--primary); border-top-width: 3px; box-shadow: 0 4px 16px #0002, 0 0 0 3px var(--primary-glow); }
+.zoom-value { color: var(--primary); font-weight: 800; }
+
+.zoom-controls-label { color: var(--primary); font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }

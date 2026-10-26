@@ -7,46 +7,37 @@
   padding: 0;
 }
 
-/* Light is the default theme. Dark is kept below under
-   :root[data-theme="dark"] and is reachable from the theme toggle.
-
-   The accent tokens are used overwhelmingly as TEXT colours — `--success`
-   appears as `color:` 112 times out of 114 uses — so each one is the vivid
-   700-weight of its hue rather than the bright 400/500 that reads well only
-   on a dark ground. Every foreground/surface pair here clears WCAG AA; run
-   `node scripts/check-theme-contrast.mjs` to re-verify after any edit.
-
-   Surfaces are tinted rather than neutral grey (a cool indigo cast) so the
-   chrome stays colourful without tinting the text. */
+/* Slate & Tide: neutral surfaces, teal controls, and semantic state colors.
+   Foregrounds are paired independently for light and dark themes. */
 :root {
-  --bg:          #eaeefb;
+  --bg:          #f4f6f8;
   --surface:     #ffffff;
-  --surface2:    #f5f7ff;
-  --surface3:    #e6ebfb;
+  --surface2:    #f1f4f7;
+  --surface3:    #e5ebf1;
   --border:      rgba(15, 23, 42, 0.16);
 
-  --primary:      #6d28d9;
-  --primary-l:    #7c3aed;
-  --primary-d:    #5b21b6;
-  --primary-glow: rgba(109, 40, 217, 0.28);
+  --primary:      #005e68;
+  --primary-l:    #006976;
+  --primary-d:    #004d56;
+  --primary-glow: rgba(0, 94, 104, 0.16);
 
-  --success:      #047857;
+  --success:      #16613e;
   --success-d:    #065f46;
   --success-glow: rgba(4, 120, 87, 0.26);
 
-  --error:        #be123c;
+  --error:        #a52b3b;
   --error-d:      #9f1239;
   --error-glow:   rgba(190, 18, 60, 0.24);
 
-  --warning:      #9a3412;
+  --warning:      #804a0b;
   --warning-d:    #7c2d12;
   --warning-glow: rgba(154, 52, 18, 0.28);
 
-  --info:         #0369a1;
+  --info:         #175f9c;
 
-  --text:         #0b1020;
-  --text-muted:   #45526b;
-  --text-dim:     #5c6b85;
+  --text:         #172b3a;
+  --text-muted:   #40556a;
+  --text-dim:     #4b6173;
 
   /* Semantic component roles.  These preserve a consistent accessible base
      for reusable controls while problem visualizers remain free to define
@@ -62,20 +53,17 @@
   --accent:       var(--primary);
   --text-secondary: var(--text-muted);
 
-  /* Code surface — Catppuccin Latte. The visualizers already use Catppuccin
-     Mocha (#1e1e2e, #cdd6f4, #a6e3a1 …), so Latte is its official light twin
-     and keeps the syntax hues recognisable across both themes instead of
-     inventing a second scheme. Every colour here clears AA on --code-bg. */
-  --code-bg:      #eff1f5;
-  --code-surface: #e6e9ef;
-  --code-line:    #dce0e8;
-  --code-text:    #4c4f69;
-  --code-dim:     #6c6f85;
-  --code-keyword: #8839ef;
-  --code-string:  #40a02b;
-  --code-number:  #fe640b;
-  --code-func:    #1e66f5;
-  --code-comment: #7c7f93;
+  /* Syntax colors paired with the light code surface. */
+  --code-bg:      #f1f4f7;
+  --code-surface: #e5ebf1;
+  --code-line:    #d8e5eb;
+  --code-text:    #172b3a;
+  --code-dim:     #40556a;
+  --code-keyword: #68439a;
+  --code-string:  #16613e;
+  --code-number:  #87420d;
+  --code-func:    #175f9c;
+  --code-comment: #4b6173;
 
   /* Neutral wash layers. Panels used rgba(255,255,255,0.06) for these, which
      is invisible on a light ground. */
@@ -87,39 +75,41 @@
   --radius:    10px;
   --radius-lg: 16px;
   --radius-xl: 22px;
+  --primary-contrast: #ffffff;
+  --surface-2: var(--surface2);
+  --text-main: var(--text);
 }
 
-/* The original dark palette, unchanged apart from lifting --text-dim to meet
-   AA against the dark surfaces (it was #475569, ~2.6:1, effectively invisible). */
+/* Dark companion palette. */
 :root[data-theme="dark"] {
-  --bg:          #07071a;
-  --surface:     #0f0f24;
-  --surface2:    #17172e;
-  --surface3:    #21213a;
+  --bg:          #10171f;
+  --surface:     #17212c;
+  --surface2:    #1d2b38;
+  --surface3:    #263646;
   --border:      rgba(255, 255, 255, 0.09);
 
-  --primary:      #a78bfa;
-  --primary-l:    #c4b5fd;
-  --primary-d:    #8b5cf6;
-  --primary-glow: rgba(139, 92, 246, 0.38);
+  --primary:      #62d4d0;
+  --primary-l:    #91e5e1;
+  --primary-d:    #37b9b5;
+  --primary-glow: rgba(98, 212, 208, 0.16);
 
-  --success:      #4ade80;
+  --success:      #8bd6ac;
   --success-d:    #22c55e;
   --success-glow: rgba(34, 197, 94, 0.35);
 
-  --error:        #fca5a5;
+  --error:        #ffacb5;
   --error-d:      #f87171;
   --error-glow:   rgba(248, 113, 113, 0.3);
 
-  --warning:      #fbbf24;
+  --warning:      #f0c780;
   --warning-d:    #d97706;
   --warning-glow: rgba(251, 191, 36, 0.45);
 
-  --info:         #7dd3fc;
+  --info:         #9ccaff;
 
-  --text:         #f1f5f9;
-  --text-muted:   #a9b6ca;
-  --text-dim:     #8b9ab2;
+  --text:         #edf3f8;
+  --text-muted:   #bbcad7;
+  --text-dim:     #acc0d0;
   --ui-card-bg:         var(--surface2);
   --ui-card-raised-bg:  var(--surface3);
   --ui-card-border:     var(--border);
@@ -130,21 +120,24 @@
   --accent:       var(--primary);
   --text-secondary: var(--text-muted);
 
-  /* Catppuccin Mocha — the palette the visualizers were already written in. */
-  --code-bg:      #1e1e2e;
-  --code-surface: #181825;
-  --code-line:    #313244;
-  --code-text:    #cdd6f4;
-  --code-dim:     #a6adc8;
-  --code-keyword: #cba6f7;
-  --code-string:  #a6e3a1;
-  --code-number:  #fab387;
-  --code-func:    #89b4fa;
-  --code-comment: #9399b2;
+  /* Syntax colors paired with the dark code surface. */
+  --code-bg:      #17212c;
+  --code-surface: #1d2b38;
+  --code-line:    #263e4b;
+  --code-text:    #edf3f8;
+  --code-dim:     #bbcad7;
+  --code-keyword: #cbb5ef;
+  --code-string:  #8bd6ac;
+  --code-number:  #f0c780;
+  --code-func:    #9ccaff;
+  --code-comment: #acc0d0;
 
   --overlay-weak:   rgba(255, 255, 255, 0.06);
   --overlay-medium: rgba(255, 255, 255, 0.10);
   --overlay-strong: rgba(255, 255, 255, 0.16);
+  --primary-contrast: #102329;
+  --surface-2: var(--surface2);
+  --text-main: var(--text);
 }
 
 html {

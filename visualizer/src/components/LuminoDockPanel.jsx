@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BoxPanel, DockPanel, Widget } from '@lumino/widgets'
 import { MessageLoop } from '@lumino/messaging'
 import './LuminoDockPanel.css'
+import { createFocusedLayout } from './workspaceLayout'
 
 // Fraction of a split area a collapsed panel is allowed to keep. Small enough
 // that only its ~36px tab strip shows; siblings take the rest.
@@ -9,6 +10,8 @@ const COLLAPSED_FRACTION = 0.0001
 
 export default function LuminoDockPanel({ panels, onPanelReady }) {
   const containerRef = useRef(null)
+  const layoutActionRef = useRef(null)
+  const [layoutMode, setLayoutMode] = useState('focus')
   const onPanelReadyRef = useRef(onPanelReady)
   const dockRef = useRef(null)
   const boxRef = useRef(null)
@@ -167,6 +170,23 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       })
     }
     container.addEventListener('cpviz-dock-panel', mountFloating)
+    const expandedLayout = dock.saveLayout()
+    const focusedLayout = createFocusedLayout(Object.values(widgetRefsRef.current))
+    const arrange = (mode) => {
+      // Keep React portal hosts and current algorithm state intact.
+      Object.values(widgetRefsRef.current).forEach((widget) => {
+        if (widget._collapsed) {
+          widget.node.querySelector('.lumino-panel-minbtn')?.click()
+        }
+      })
+      const layout = mode === 'focus' && focusedLayout ? focusedLayout : expandedLayout
+      dock.restoreLayout(layout)
+      floatingWidgets.forEach(widget => dock.addWidget(widget, { mode: 'split-bottom' }))
+      dock.update()
+    }
+    layoutActionRef.current = arrange
+    if (focusedLayout) arrange('focus')
+
 
     // Use BoxPanel to manage dock sizing
     const box = new BoxPanel({ direction: 'top-to-bottom', spacing: 0 })
@@ -184,7 +204,7 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
       // positions its widgets in layout pixels, so feeding it scaled values
       // would shrink or overflow the dock at any zoom level other than 100%.
       const w = Math.max(0, container.clientWidth)
-      const h = Math.max(0, container.clientHeight - 22)
+      const h = Math.max(0, container.clientHeight - 34)
       if (w === 0 || h === 0) return
       box.node.style.position = 'absolute'
       box.node.style.top = '0'
@@ -311,7 +331,12 @@ export default function LuminoDockPanel({ panels, onPanelReady }) {
   }, [panels.length])
 
   return <div ref={containerRef} className="lumino-dock-container">
-    <div className="workspace-dock-hint">Drag tabs to split or group panels · Drag playback to a highlighted edge to dock</div>
+    <div className="workspace-dock-hint">
+      {panels.some(panel => panel.id === 'code' || panel.id === 'editor') && <div className="workspace-layout-options" aria-label="Workspace layout">
+        {['focus', 'all'].map(mode => <button key={mode} type="button" aria-pressed={layoutMode === mode} onClick={() => { layoutActionRef.current?.(mode); setLayoutMode(mode); }}>{mode === 'focus' ? 'Focus view' : 'All panels'}</button>)}
+      </div>}
+      <span>Switch tabs for more views · Drag a tab to split or group · Dock playback at an edge</span>
+    </div>
     <div className="workspace-drop-targets" aria-hidden="true">
       {['left', 'right', 'bottom'].map(side => <div key={side} data-dock-side={side} className={`workspace-drop-target ${side}`}>Dock {side}</div>)}
     </div>

@@ -8,8 +8,8 @@ export default function PatternLegend({ currentPhase, usedPatterns }) {
     : ['init', 'loop', 'check', 'update', 'done']
 
   return (
-    <div className="pattern-legend">
-      <div className="pattern-legend-title">Pattern Guide</div>
+    <details className="pattern-legend">
+      <summary className="pattern-legend-title">Pattern guide · {resolvePattern(currentPhase || "init").label}</summary>
       <div className="pattern-legend-grid">
         {patternsToShow.map((phaseKey) => {
           const pattern = resolvePattern(phaseKey)
@@ -30,6 +30,6 @@ export default function PatternLegend({ currentPhase, usedPatterns }) {
           )
         })}
       </div>
-    </div>
+    </details>
   )
 }

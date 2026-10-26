@@ -107,8 +107,27 @@ declare const viz: VizApi;
 `;
 
 function getEditorTheme() {
-  if (typeof document === "undefined") return "vs-dark";
-  return document.documentElement.dataset.theme === "dark" ? "vs-dark" : "vs";
+  if (typeof document === "undefined") return "cpviz-dark";
+  return document.documentElement.dataset.theme === "dark" ? "cpviz-dark" : "cpviz-light";
+}
+
+function installEditorTheme(monaco) {
+  const styles = getComputedStyle(document.documentElement);
+  const color = name => styles.getPropertyValue(`--${name}`).trim();
+  const name = getEditorTheme();
+  monaco.editor.defineTheme(name, {
+    base: name === 'cpviz-dark' ? 'vs-dark' : 'vs', inherit: true,
+    rules: [
+      ['', 'code-text'], ['comment', 'code-comment'], ['keyword', 'code-keyword'],
+      ['string', 'code-string'], ['number', 'code-number'], ['type', 'code-func'],
+    ].map(([token, role]) => ({ token, foreground: color(role).replace('#', '') })),
+    colors: {
+      'editor.background': color('code-bg'), 'editor.foreground': color('code-text'),
+      'editorLineNumber.foreground': color('code-dim'), 'editorLineNumber.activeForeground': color('primary'),
+      'editorCursor.foreground': color('primary'), 'editor.selectionBackground': color('code-line'),
+      'editor.lineHighlightBackground': color('code-surface'), 'editorGutter.background': color('code-bg'),
+    },
+  });
 }
 
 export default function RuntimeCodeEditor({
@@ -221,7 +240,10 @@ export default function RuntimeCodeEditor({
   useEffect(() => {
     if (typeof MutationObserver === "undefined") return undefined;
 
-    const observer = new MutationObserver(() => setTheme(getEditorTheme()));
+    const observer = new MutationObserver(() => {
+      if (monacoRef.current) installEditorTheme(monacoRef.current);
+      setTheme(getEditorTheme());
+    });
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["data-theme"],
@@ -249,6 +271,7 @@ export default function RuntimeCodeEditor({
             ? "visualizer-python-trace.py"
             : "visualizer-playground.js"
         }
+        beforeMount={installEditorTheme}
         theme={theme}
         value={value}
         onChange={(nextValue) => {

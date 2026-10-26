@@ -47,6 +47,7 @@ export default function ZoomControls() {
     >
       <div className="zoom-controls-handle" onPointerDown={startDrag} title="Drag to move zoom controls" aria-label="Drag to move zoom controls">⠿</div>
       <div className="zoom-controls-inner">
+        <span className="zoom-controls-label">Zoom</span>
         <button
           type="button"
           className="zoom-btn zoom-btn-out"

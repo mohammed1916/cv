@@ -660,10 +660,8 @@ export default function CodeTracePanel({
               className={`ctp-row ${isActive ? "active" : ""} ${isRelated ? "related" : ""} ${isExternallyHighlighted ? "external-highlight" : ""} ${onLineSelect ? "clickable" : ""}`}
               animate={{
                 x: isActive ? 6 : 0,
-                opacity:
-                  isRelated || isActive || isExternallyHighlighted || !resolvedStep
-                    ? 1
-                    : 0.56,
+                // Keep inactive code readable; background and rail mark execution.
+                opacity: 1,
               }}
               transition={{ type: "spring", stiffness: 280, damping: 28 }}
               onClick={

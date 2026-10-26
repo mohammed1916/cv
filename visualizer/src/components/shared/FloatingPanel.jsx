@@ -13,8 +13,8 @@ export default function FloatingPanel({
   title = "Panel",
   children,
   defaultPosition = null,
-  defaultSize = { width: 560, height: 260 },
-  storageKey = "floating-playback-size",
+  defaultSize = { width: 460, height: 180 },
+  storageKey = "floating-playback-size.v2",
 }) {
   const panelRef = useRef(null);
   const [host] = useState(() => document.createElement('div'));
@@ -58,7 +58,8 @@ export default function FloatingPanel({
         stored?.width >= 220 &&
         stored?.height >= 92
       ) {
-        return stored;
+        // Migrate the previous oversized default; preserve custom dimensions.
+        return stored.width === 560 && stored.height === 260 ? defaultSize : stored;
       }
     } catch {
       // Ignore invalid persisted values.
@@ -356,6 +357,7 @@ export default function FloatingPanel({
         </span>
 
         {canDock && <button type="button" className="floating-panel-pin" onClick={() => docked ? floatPanel() : dockPanel()} title={docked ? 'Float panel over workspace' : 'Dock panel below workspace'}>{docked ? 'Float' : 'Dock'}</button>}
+        {!docked && <button type="button" className="floating-panel-pin" title="Reset to compact size" aria-label="Reset playback to compact size" onClick={() => { setSize(defaultSize); setControlScale(100); }}>↺</button>}
         <button
           type="button"
           className="floating-panel-pin"

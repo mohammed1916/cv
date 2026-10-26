@@ -76,6 +76,16 @@ for (const fg of FOREGROUNDS) {
   console.log(row)
 }
 
+// Code tokens and filled controls need their own foreground/background pairs.
+for (const [fg, bg] of [
+  ['primary-contrast', 'primary'],
+  ...['code-text', 'code-dim', 'code-keyword', 'code-string', 'code-number', 'code-func', 'code-comment'].map(fg => [fg, 'code-bg']),
+]) {
+  const r = ratio(hex(tokens[fg]), hex(tokens[bg]));
+  if (r < 4.5) failures++;
+  console.log(`${fg} on ${bg}: ${r.toFixed(2)}${r < 4.5 ? ' !' : ''}`);
+}
+
 console.log('\n! = below 4.5:1 (WCAG AA body text)')
 console.log(failures === 0 ? 'PASS — every token pair meets AA' : `FAIL — ${failures} pair(s) below AA`)
 process.exit(failures === 0 ? 0 : 1)

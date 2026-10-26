@@ -271,3 +271,13 @@ body.resizing-playback * {
 .floating-panel.collapsed { min-height: 0; }
 .floating-panel { max-width: calc(100vw - 16px); color: var(--text); }
 @media (prefers-reduced-motion: reduce) { .floating-panel { animation: none; } }
+
+/* Playback is a steady visual anchor, without a large glow. */
+.floating-panel { border: 1px solid var(--primary); box-shadow: 0 8px 28px #0003, 0 0 0 3px var(--primary-glow); }
+.floating-panel-handle { border-top: 3px solid var(--primary); background: var(--surface); }
+.floating-panel-title { color: var(--primary); }
+.floating-panel .pc { padding: 4px 0; gap: 8px; }
+.floating-panel .pattern-legend { padding: 4px 8px; }
+.floating-panel .pattern-legend-title { cursor: pointer; margin: 0; }
+
+.floating-panel-body > div > .pattern-legend { order: 2; }
