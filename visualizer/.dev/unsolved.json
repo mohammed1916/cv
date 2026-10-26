@@ -4075,17 +4075,6 @@
     ]
   },
   {
-    "id": "lc-667",
-    "number": "667",
-    "title": "Beautiful Arrangement II",
-    "slug": "beautiful-arrangement-ii",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-681",
     "number": "681",
     "title": "Next Closest Time",
@@ -4108,100 +4097,6 @@
     ]
   },
   {
-    "id": "lc-686",
-    "number": "686",
-    "title": "Repeated String Match",
-    "slug": "repeated-string-match",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String"
-    ]
-  },
-  {
-    "id": "lc-687",
-    "number": "687",
-    "title": "Longest Univalue Path",
-    "slug": "longest-univalue-path",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "Graph"
-    ]
-  },
-  {
-    "id": "lc-688",
-    "number": "688",
-    "title": "Knight Probability in Chessboard",
-    "slug": "knight-probability-in-chessboard",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-689",
-    "number": "689",
-    "title": "Maximum Sum of 3 Non-Overlapping Subarrays",
-    "slug": "maximum-sum-of-3-non-overlapping-subarrays",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-690",
-    "number": "690",
-    "title": "Employee Importance",
-    "slug": "employee-importance",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-691",
-    "number": "691",
-    "title": "Stickers to Spell Word",
-    "slug": "stickers-to-spell-word",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-692",
-    "number": "692",
-    "title": "Top K Frequent Words",
-    "slug": "top-k-frequent-words",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Heap",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-693",
-    "number": "693",
-    "title": "Binary Number with Alternating Bits",
-    "slug": "binary-number-with-alternating-bits",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Math",
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-694",
     "number": "694",
     "title": "Number of Distinct Islands",
@@ -4212,18 +4107,6 @@
       "Graph",
       "Math",
       "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-696",
-    "number": "696",
-    "title": "Count Binary Substrings",
-    "slug": "count-binary-substrings",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Tree",
-      "String"
     ]
   },
   {

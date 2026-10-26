@@ -285,5 +285,15 @@
   "24-game",
   "valid-palindrome-ii",
   "baseball-game",
-  "redundant-connection-ii"
+  "redundant-connection-ii",
+  "repeated-string-match",
+  "longest-univalue-path",
+  "knight-probability-in-chessboard",
+  "maximum-sum-of-3-non-overlapping-subarrays",
+  "employee-importance",
+  "beautiful-arrangement-ii",
+  "stickers-to-spell-word",
+  "top-k-frequent-words",
+  "binary-number-with-alternating-bits",
+  "count-binary-substrings"
 ]
