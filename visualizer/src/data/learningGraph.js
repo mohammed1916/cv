@@ -6,6 +6,7 @@ export const VISUALIZER_CAPABILITIES = [
   { id: 'call-tree', title: 'Recursive call tree', description: 'Follow nested calls and recursive search branches.', problems: ['301', '1096'], source: 'src/components/shared/RecursiveCallTree.jsx' },
   { id: 'staircase', title: 'Staircase recurrence', description: 'Connect each stair to earlier counts that reach it.', problems: ['70'], source: 'src/components/shared/StaircaseScene.jsx' },
   { id: 'dp-grid', title: 'DP table & active cell', description: 'Follow the LCS table as matching and skipping characters fill each cell.', problems: ['1143'], source: 'src/problems/Problem1143/LCSVisualizer.jsx' },
+  { id: 'union-find', title: 'Union-find forest & operations', description: 'Watch each find walk its parent chain, path compression re-point nodes, and each union attach the smaller tree under the larger.', problems: ['737', '765', '839', '947', '952', '990', '1319', '1627', '685', '924', '928', '1168', '827', '959', '2421', '2492', '2685', '2709', '2948', '3108'], source: 'src/components/shared/DisjointSetView.jsx' },
   { id: 'queen-rays', title: 'Queen attack rays', description: 'See row, column, and diagonal conflicts for the next candidate.', problems: ['51'], source: 'src/components/shared/GridRayOverlay.jsx' },
 ];
 

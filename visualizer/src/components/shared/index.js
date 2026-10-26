@@ -27,3 +27,6 @@ export { default as OperationLog } from './OperationLog'
 export { default as StoryWorkspace } from './StoryWorkspace'
 export { default as RootedTreeDiagram } from './RootedTreeDiagram'
 export { layoutRootedTree } from './treeLayout'
+// Union-find (disjoint set) state: parent array, forest of sets, and each find/union operation.
+export { default as DisjointSetView } from './DisjointSetView'
+export { describeDisjointSetOps, disjointSetForest } from './disjointSetModel.js'

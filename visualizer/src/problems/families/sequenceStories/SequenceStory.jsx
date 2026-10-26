@@ -2,6 +2,7 @@ import AlgorithmWorkspace from "../../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../../components/shared/IndexedSequence";
 import TrieStateDiagram from "../../../components/shared/TrieStateDiagram";
 import RecordStateTable from "../../../components/shared/RecordStateTable";
+import DisjointSetView from "../../../components/shared/DisjointSetView";
 import styles from "./SequenceStory.module.css";
 
 const display = (value) =>
@@ -114,6 +115,7 @@ export default function SequenceStory({ definition }) {
                 valueAt={(i) => display(step.output[i])}
               />
             )}
+            {step.dsu && <DisjointSetView {...step.dsu} />}
             {step.table && (
               <table>
                 <caption>
