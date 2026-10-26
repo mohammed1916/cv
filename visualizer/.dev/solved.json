@@ -305,5 +305,15 @@
   "design-hashset",
   "design-hashmap",
   "design-linked-list",
-  "to-lower-case"
+  "to-lower-case",
+  "random-pick-with-blacklist",
+  "minimum-ascii-delete-sum-for-two-strings",
+  "subarray-product-less-than-k",
+  "best-time-to-buy-and-sell-stock-with-transaction-fee",
+  "range-module",
+  "1-bit-and-2-bit-characters",
+  "maximum-length-of-repeated-subarray",
+  "find-k-th-smallest-pair-distance",
+  "longest-word-in-dictionary",
+  "remove-comments"
 ]

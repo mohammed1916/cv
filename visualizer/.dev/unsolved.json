@@ -4147,17 +4147,6 @@
     ]
   },
   {
-    "id": "lc-710",
-    "number": "710",
-    "title": "Random Pick with Blacklist",
-    "slug": "random-pick-with-blacklist",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
     "id": "lc-711",
     "number": "711",
     "title": "Number of Distinct Islands II",
@@ -4171,53 +4160,6 @@
     ]
   },
   {
-    "id": "lc-712",
-    "number": "712",
-    "title": "Minimum ASCII Delete Sum for Two Strings",
-    "slug": "minimum-ascii-delete-sum-for-two-strings",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "String",
-      "Array",
-      "Greedy",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-713",
-    "number": "713",
-    "title": "Subarray Product Less Than K",
-    "slug": "subarray-product-less-than-k",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array"
-    ]
-  },
-  {
-    "id": "lc-714",
-    "number": "714",
-    "title": "Best Time to Buy and Sell Stock with Transaction Fee",
-    "slug": "best-time-to-buy-and-sell-stock-with-transaction-fee",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-715",
-    "number": "715",
-    "title": "Range Module",
-    "slug": "range-module",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
     "id": "lc-716",
     "number": "716",
     "title": "Max Stack",
@@ -4227,64 +4169,6 @@
     "tags": [
       "Design",
       "Greedy"
-    ]
-  },
-  {
-    "id": "lc-717",
-    "number": "717",
-    "title": "1-bit and 2-bit Characters",
-    "slug": "1-bit-and-2-bit-characters",
-    "difficulty": "Easy",
-    "paidOnly": false,
-    "tags": [
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-718",
-    "number": "718",
-    "title": "Maximum Length of Repeated Subarray",
-    "slug": "maximum-length-of-repeated-subarray",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Array",
-      "Greedy"
-    ]
-  },
-  {
-    "id": "lc-719",
-    "number": "719",
-    "title": "Find K-th Smallest Pair Distance",
-    "slug": "find-k-th-smallest-pair-distance",
-    "difficulty": "Hard",
-    "paidOnly": false,
-    "tags": [
-      "General"
-    ]
-  },
-  {
-    "id": "lc-720",
-    "number": "720",
-    "title": "Longest Word in Dictionary",
-    "slug": "longest-word-in-dictionary",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "Dynamic Programming",
-      "String",
-      "Bit Manipulation"
-    ]
-  },
-  {
-    "id": "lc-722",
-    "number": "722",
-    "title": "Remove Comments",
-    "slug": "remove-comments",
-    "difficulty": "Medium",
-    "paidOnly": false,
-    "tags": [
-      "General"
     ]
   },
   {
