@@ -315,5 +315,15 @@
   "maximum-length-of-repeated-subarray",
   "find-k-th-smallest-pair-distance",
   "longest-word-in-dictionary",
-  "remove-comments"
+  "remove-comments",
+  "find-pivot-index",
+  "split-linked-list-in-parts",
+  "number-of-atoms",
+  "self-dividing-numbers",
+  "my-calendar-i",
+  "count-different-palindromic-subsequences",
+  "my-calendar-ii",
+  "my-calendar-iii",
+  "flood-fill",
+  "asteroid-collision"
 ]
