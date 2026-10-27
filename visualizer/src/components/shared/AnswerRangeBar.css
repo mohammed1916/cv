@@ -1,0 +1,5 @@
+.answer-range-bar__track { position: relative; height: 14px; border-radius: 7px; background: rgba(127, 127, 127, 0.2); margin: 10px 0; }
+.answer-range-bar__range { position: absolute; top: 0; bottom: 0; border-radius: 7px; background: #3b82f6; opacity: 0.55; }
+.answer-range-bar__probe { position: absolute; top: -4px; bottom: -4px; width: 3px; margin-left: -1px; background: #1d4ed8; }
+.answer-range-bar__probe.is-ok { background: #047857; }
+.answer-range-bar__probe.is-no { background: #b91c1c; }
