@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'divide', label: 'Divide', description: 'Shift to the next base-9 place.' },
     { id: 'done', label: 'Complete', description: 'Read the digits back as a base-10 number.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'n (JSON number)',
   url: 'https://leetcode.com/problems/remove-9/',
   complexity: 'O(log n) time and space. The visualization accepts n up to 1,000,000.',

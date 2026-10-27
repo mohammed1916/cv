@@ -1,13 +1,13 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'visit', label: 'Sum subtrees', description: 'Each node gets the sum of its own subtree, children first.' },
     { id: 'done', label: 'Decide', description: 'Look for a non-root subtree that sums to half the total.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Tree (JSON level order)',
   url: 'https://leetcode.com/problems/equal-tree-partition/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 30 nodes.',

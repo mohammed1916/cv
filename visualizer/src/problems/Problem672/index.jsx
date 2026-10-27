@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -7,7 +7,7 @@ const definition = {
     { id: 'press', label: 'Press buttons', description: 'Apply each of the four buttons to every state.' },
     { id: 'done', label: 'Complete', description: 'Count the distinct states.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Bulbs and presses (JSON object with n and presses)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bulbs and presses (JSON object with n and presses)',
   url: 'https://leetcode.com/problems/bulb-switcher-ii/',
   complexity: 'O(presses · 4 · 2ⁿ) for this visualization; the official problem has a closed form that depends only on min(n, 3) and min(presses, 3).',
   examples: [

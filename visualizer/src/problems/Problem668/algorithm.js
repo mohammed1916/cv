@@ -9,25 +9,38 @@ export function parseInput(text) {
 // Binary search on the answer: count how many products are ≤ mid, row by row, and narrow toward k.
 export function buildTrace({ m, n, k }) {
   let lo = 1, hi = m * n
-  const frames = [{ phase: 'start', lo, hi, mid: null, count: null, activeLine: 2, message: `Search the value v in [1, ${m * n}] for which at least ${k} products are ≤ v.` }]
+  const frames = [{ phase: 'start', lo, hi, mid: null, count: null, activeLine: L('set lo to 1'), message: `Search the value v in [1, ${m * n}] for which at least ${k} products are ≤ v.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     let count = 0
     for (let i = 1; i <= m; i++) count += Math.min(n, Math.floor(mid / i))
     const enough = count >= k
-    frames.push({ phase: 'count', lo, hi, mid, count, enough, activeLine: 6, message: `mid ${mid}: ${count} products ≤ ${mid}; ${enough ? 'at least k, so answer ≤ mid' : 'fewer than k, so answer > mid'}.` })
+    frames.push({ phase: 'count', lo, hi, mid, count, enough, activeLine: L('if count is at least k'), message: `mid ${mid}: ${count} products ≤ ${mid}; ${enough ? 'at least k, so answer ≤ mid' : 'fewer than k, so answer > mid'}.` })
     if (enough) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', lo, hi, mid: null, count: null, result: lo, activeLine: 8, message: `The ${k}-th smallest product is ${lo}.` })
+  frames.push({ phase: 'done', lo, hi, mid: null, count: null, result: lo, activeLine: L('return lo'), message: `The ${k}-th smallest product is ${lo}.` })
   return { input: { m, n, k }, result: lo, frames }
 }
 
-export const code = `def findKthNumber(m, n, k):
+export const code = `function findKthNumber(m, n, k):
+  set lo to 1 and hi to m times n
+  while lo is less than hi:
+    set mid to the midpoint of lo and hi, rounded down
+    set count to the sum over rows i = 1 to m of min(n, mid divided by i, rounded down)
+    if count is at least k, set hi to mid
+    otherwise set lo to mid + 1
+  return lo`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def find_kth_number(m, n, k):
     lo, hi = 1, m * n
     while lo < hi:
         mid = (lo + hi) // 2
         count = sum(min(n, mid // i) for i in range(1, m + 1))
-        if count >= k: hi = mid
-        else: lo = mid + 1
-    return lo`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        if count >= k:
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
+`

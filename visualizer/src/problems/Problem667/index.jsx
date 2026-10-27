@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'tail', label: 'Consecutive tail', description: 'Finish in order; differences of 1 are already counted.' },
     { id: 'done', label: 'Complete', description: 'Return the permutation.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Parameters (JSON object with n and k)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Parameters (JSON object with n and k)',
   url: 'https://leetcode.com/problems/beautiful-arrangement-ii/',
   complexity: 'O(n) time and O(n) space for the output.',
   examples: [

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'walk', label: 'Walk forward', description: 'From index 1, take the earliest index that keeps the optimal cost.' },
     { id: 'done', label: 'Complete', description: 'Report the path, or no path.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Coins and maximum jump (JSON)',
   url: 'https://leetcode.com/problems/coin-path/',
   complexity: 'O(n * maxJump) time and O(n) space. The visualization caps input at 30 coins.',

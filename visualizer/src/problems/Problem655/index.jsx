@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'place', label: 'Place node', description: 'Put each node in the middle of its column range.' },
     { id: 'done', label: 'Complete', description: 'Return the grid.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Tree (LeetCode level-order JSON array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/print-binary-tree/',
   complexity: 'O(n + rows × cols) time, where cols = 2^(height+1) − 1 grows exponentially in height; the 64-item limit keeps the grid small.',
   examples: [

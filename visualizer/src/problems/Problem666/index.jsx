@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'leaf', label: 'Leaf', description: 'A leaf adds its complete path number to the total.' },
     { id: 'done', label: 'Complete', description: 'Report the total of all root-to-leaf paths.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Three-digit codes (JSON array of strings)',
   url: 'https://leetcode.com/problems/path-sum-iv/',
   complexity: 'O(n) time and O(depth) stack space. The visualization caps input at 15 nodes.',

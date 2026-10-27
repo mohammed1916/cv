@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'reject', label: 'Reject', description: 'The value fits no run.' },
     { id: 'done', label: 'Complete', description: 'Report whether every value was placed.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Sorted array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sorted array nums (JSON)',
   url: 'https://leetcode.com/problems/split-array-into-consecutive-subsequences/',
   complexity: 'O(n) expected time with hash maps for counts and run tails.',
   examples: [

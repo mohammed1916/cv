@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'level', label: 'Measure level', description: 'Width is last position minus first position, plus one.' },
     { id: 'done', label: 'Complete', description: 'Return the widest level.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Tree (LeetCode level-order JSON array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/maximum-width-of-binary-tree/',
   complexity: 'O(n) time and O(w) extra space for the current level. Positions can reach 2^depth, so the solver uses arbitrary-precision or offset arithmetic in languages with fixed-width integers.',
   examples: [

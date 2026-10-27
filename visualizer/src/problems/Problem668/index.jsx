@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -7,7 +7,7 @@ const definition = {
     { id: 'count', label: 'Count ≤ mid', description: 'Count products no larger than the midpoint.' },
     { id: 'done', label: 'Complete', description: 'The search has converged.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Table (JSON object with m, n and k)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Table (JSON object with m, n and k)',
   url: 'https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/',
   complexity: 'O(m · log(m·n)) time and O(1) extra space.',
   examples: [

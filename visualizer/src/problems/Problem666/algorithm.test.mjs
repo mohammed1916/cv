@@ -13,6 +13,11 @@ test('666 single root', () => {
   assert.equal(solve(['117']), 7)
 })
 
+// Hand-checked: 6→5→1→8 gives 6518 and 6→5→4 gives 654. A missing left child must not hide the right subtree.
+test('666 gap at a level keeps the deeper right subtree', () => {
+  assert.equal(solve(['116', '225', '331', '344', '468']), 7172)
+})
+
 test('666 rejects a missing parent', () => {
   assert.throws(() => parseInput('["113","317"]'))
 })
