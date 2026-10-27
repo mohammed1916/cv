@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'wrap', label: 'Wrap', description: 'After the even slots run out, restart at index 1.' },
     { id: 'done', label: 'Complete', description: 'Return the rearranged string or empty string.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON, 1-500 lowercase letters)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON, 1-500 lowercase letters)',
   url: 'https://leetcode.com/problems/reorganize-string/',
   complexity: 'O(n + k log k) time for k distinct letters and O(n) space.',
   examples: [

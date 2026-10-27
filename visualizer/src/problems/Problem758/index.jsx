@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'match', label: 'Occurrence', description: 'Bold the letters of this occurrence of a word.' },
     { id: 'done', label: 'Wrap runs', description: 'Adjacent bold letters share one tag pair.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Words and string (JSON)',
   url: 'https://leetcode.com/problems/bold-words-in-string/',
   complexity: 'O(words * n * length) time with direct comparison. The visualization caps input at 10 words and 50 letters.',

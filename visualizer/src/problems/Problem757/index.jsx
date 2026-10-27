@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IntervalView from '../../components/shared/IntervalView'
 import { intervalView } from '../../components/shared/intervalModel.js'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'skip', label: 'Skip', description: 'Both chosen points are inside already.' },
     { id: 'done', label: 'Complete', description: 'Return the number of chosen points.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Intervals (JSON)',
   url: 'https://leetcode.com/problems/set-intersection-size-at-least-two/',
   complexity: 'O(n log n) time for sorting plus one pass; capped at 40 intervals.',

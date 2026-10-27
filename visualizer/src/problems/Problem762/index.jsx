@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'test', label: 'Test prime', description: 'Check whether the bit count is prime and count the number.' },
     { id: 'done', label: 'Complete', description: 'Return the total.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: '[left, right] (JSON)',
   url: 'https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/',
   complexity: 'O(right - left) numbers, each with a popcount; the visualization caps the range width at 200.',

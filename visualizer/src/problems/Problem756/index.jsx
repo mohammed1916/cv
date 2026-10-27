@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -14,7 +14,7 @@ const definition = {
     { id: 'top', label: 'Top reached', description: 'A one-block row completes the pyramid.' },
     { id: 'done', label: 'Complete', description: 'Return whether the pyramid can be built.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Bottom row and allowed triples (JSON)',
   url: 'https://leetcode.com/problems/pyramid-transition-matrix/',
   complexity: 'Exponential in the worst case, reduced by memoising failed rows. The visualization caps the bottom row at 6 letters and 40 triples.',

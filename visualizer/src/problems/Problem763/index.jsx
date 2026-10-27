@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'cut', label: 'Cut part', description: 'When the index meets the reach, close the part.' },
     { id: 'done', label: 'Complete', description: 'Return the part sizes.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/partition-labels/',
   complexity: 'O(n) time, O(26) extra space; the visualization caps the string at 200 characters.',

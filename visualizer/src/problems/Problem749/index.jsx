@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'spread', label: 'Spread', description: 'All other regions infect their threatened cells.' },
     { id: 'done', label: 'Complete', description: 'Return the total number of walls.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Grid isInfected (JSON)',
   url: 'https://leetcode.com/problems/contain-virus/',
   complexity: 'O((mn)^2) worst case: each day scans the whole grid and there are at most mn days. Capped at 20 x 20.',

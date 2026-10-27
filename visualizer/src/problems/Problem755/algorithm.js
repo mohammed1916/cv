@@ -23,17 +23,30 @@ export function landing(heights, k) {
 
 export function buildTrace(spec) {
   const heights = [...spec.heights]
-  const frames = [{ phase: 'start', activeLine: L('heights = list'), heights: [...heights], index: null, side: null, drop: 0, message: `Drop ${spec.volume} unit(s) of water at index ${spec.k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('heights = a copy'), heights: [...heights], index: null, side: null, drop: 0, message: `Drop ${spec.volume} unit(s) of water at index ${spec.k}.` }]
   for (let drop = 1; drop <= spec.volume; drop++) {
     const { index, side } = landing(heights, spec.k)
     heights[index] += 1
-    frames.push({ phase: 'drop', activeLine: L('heights[index] += 1'), heights: [...heights], index, side, drop, message: `Unit ${drop} settles at index ${index} (${side}).` })
+    frames.push({ phase: 'drop', activeLine: L('add one unit of water'), heights: [...heights], index, side, drop, message: `Unit ${drop} settles at index ${index} (${side}).` })
   }
   frames.push({ phase: 'done', activeLine: L('return heights'), heights: [...heights], index: null, side: null, drop: spec.volume, message: 'All water has settled.' })
   return { input: spec, result: heights, frames }
 }
 
-export const code = `def pourWater(heights, volume, k):
+export const code = `function pourWater(heights, volume, k):
+  heights = a copy of the heights
+  repeat volume times:
+    index = k
+    look left from k-1 down to 0 while the ground does not rise:
+      if heights[i] is lower than heights[index] then index = i
+    if index is still k then:
+      look right from k+1 while the ground does not rise:
+        if heights[i] is lower than heights[index] then index = i
+    add one unit of water at index
+  return heights`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def pour_water(heights, volume, k):
     heights = list(heights)
     for _ in range(volume):
         index = k
@@ -49,5 +62,4 @@ export const code = `def pourWater(heights, volume, k):
                 if heights[i] < heights[index]:
                     index = i
         heights[index] += 1
-    return heights`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return heights`

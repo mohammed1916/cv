@@ -1,13 +1,22 @@
-export const code = `def countPrimeSetBits(left, right):
+export const code = `function countPrimeSetBits(left, right):
+  primes = {2, 3, 5, 7, 11, 13, 17, 19}
+  count = 0
+  for each x from left to right:
+    bits = number of 1 bits in the binary form of x
+    if bits is in primes then
+      count = count + 1
+  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19]
+
+export const python = `def count_prime_set_bits(left, right):
     primes = {2, 3, 5, 7, 11, 13, 17, 19}
     count = 0
     for x in range(left, right + 1):
         bits = bin(x).count('1')
         if bits in primes:
             count += 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19]
+    return count`
 
 export function parseInput(text) {
   const v = JSON.parse(text)
@@ -30,7 +39,7 @@ export function buildTrace({ left, right }) {
     frames.push({ phase: 'count', activeLine: L('bits ='), count, index, bits, isPrime: null, binary: x.toString(2), message: `${x} is ${x.toString(2)} in binary, which has ${bits} set bit${bits === 1 ? '' : 's'}.` })
     const isPrime = PRIMES.includes(bits)
     if (isPrime) count++
-    frames.push({ phase: 'test', activeLine: isPrime ? L('count += 1') : L('if bits'), count, index, bits, isPrime, binary: x.toString(2),
+    frames.push({ phase: 'test', activeLine: isPrime ? L('count = count + 1') : L('if bits'), count, index, bits, isPrime, binary: x.toString(2),
       message: isPrime ? `${bits} is prime, so ${x} counts. Total: ${count}.` : `${bits} is not prime (1 and 0 are not prime), so ${x} is skipped.` })
   }
   frames.push({ phase: 'done', activeLine: L('return count'), count, index: numbers.length - 1, bits: null, isPrime: null, message: `${count} number${count === 1 ? '' : 's'} in [${left}, ${right}] have a prime number of set bits.` })

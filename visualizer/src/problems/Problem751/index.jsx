@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'block', label: 'Largest block', description: 'Take the biggest aligned block that still fits.' },
     { id: 'done', label: 'Covered', description: 'All addresses are covered by the blocks.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'ip and n (JSON)',
   url: 'https://leetcode.com/problems/ip-to-cidr/',
   complexity: 'O(log n) blocks of work each. The visualization accepts up to 1000 addresses.',

@@ -1,4 +1,16 @@
-export const code = `def partitionLabels(s):
+export const code = `function partitionLabels(s):
+  last = map from each letter to its last index in s
+  sizes = empty list
+  start = 0, end = 0
+  for each index i and letter c in s:
+    end = the larger of end and last[c]
+    if i equals end then
+      append end - start + 1 to sizes
+      start = i + 1
+  return sizes`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def partition_labels(s):
     last = {c: i for i, c in enumerate(s)}
     sizes = []
     start = end = 0
@@ -7,8 +19,7 @@ export const code = `def partitionLabels(s):
         if i == end:
             sizes.append(end - start + 1)
             start = i + 1
-    return sizes`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return sizes`
 
 export function parseInput(text) {
   const s = JSON.parse(text)
@@ -26,11 +37,11 @@ export function buildTrace(s) {
   for (let i = 0; i < s.length; i++) {
     const prev = end
     end = Math.max(end, last[s[i]])
-    frames.push({ phase: 'extend', activeLine: L('end = max'), i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
+    frames.push({ phase: 'extend', activeLine: L('end = the larger'), i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
       message: end > prev ? `'${s[i]}' last appears at ${last[s[i]]}, so the current part must reach at least index ${end}.` : `'${s[i]}' last appears at ${last[s[i]]}, within the current reach ${end}; no change.` })
     if (i === end) {
       sizes.push(end - start + 1); cuts.push(i)
-      frames.push({ phase: 'cut', activeLine: L('sizes.append'), i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
+      frames.push({ phase: 'cut', activeLine: L('append end - start'), i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
         message: `Index ${i} equals the reach, so every letter in [${start}..${end}] ends here. Cut a part of size ${end - start + 1}.` })
       start = i + 1
     }

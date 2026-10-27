@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, TARGET } from './algorithm'
+import { buildTrace, parseInput, code, python, TARGET } from './algorithm'
 
 const rowOf = (state, r) => [...state.slice(r * 3, r * 3 + 3)]
 const definition = {
@@ -10,7 +10,7 @@ const definition = {
     { id: 'solved', label: 'Solved', description: 'The target board was dequeued.' },
     { id: 'done', label: 'Complete', description: 'Return the move count, or -1 if the queue empties.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Board 2x3 (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Board 2x3 (JSON)',
   url: 'https://leetcode.com/problems/sliding-puzzle/',
   complexity: 'At most 6! = 720 states with up to 3 neighbours each: O(6! * 6) time, O(6!) space.',
   examples: [

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'combine', label: 'Combine', description: 'Add, subtract, or multiply two polynomials.' },
     { id: 'done', label: 'Complete', description: 'Sort terms by degree then lexicographic order and format them.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {expression, evalvars, evalints} (JSON, expression up to 80 chars)',
   url: 'https://leetcode.com/problems/basic-calculator-iv/',
   complexity: 'Polynomial multiplication dominates: roughly O(t1 * t2) per product for polynomials with t1 and t2 terms.',

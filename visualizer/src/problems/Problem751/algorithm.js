@@ -14,7 +14,7 @@ export function parseInput(text) {
 export function buildTrace(spec) {
   let start = toInt(spec.ip), remaining = spec.n
   const blocks = []
-  const frames = [{ phase: 'start', activeLine: L('start = sum'), start: toIp(start), remaining, blocks: [], message: `Cover ${remaining} addresses from ${spec.ip} with the fewest aligned blocks.` }]
+  const frames = [{ phase: 'start', activeLine: L('start = first'), start: toIp(start), remaining, blocks: [], message: `Cover ${remaining} addresses from ${spec.ip} with the fewest aligned blocks.` }]
   while (remaining > 0) {
     // The largest block that starts here, is aligned to its own size, and fits in the remaining addresses.
     let size = 1
@@ -23,7 +23,7 @@ export function buildTrace(spec) {
     blocks.push(`${toIp(start)}/${prefix}`)
     start += size
     remaining -= size
-    frames.push({ phase: 'block', activeLine: L('size *= 2'), start: toIp(start), remaining, blocks: [...blocks], message: `${blocks.at(-1)} covers ${size} address(es) and is aligned.` })
+    frames.push({ phase: 'block', activeLine: L('append the CIDR block'), start: toIp(start), remaining, blocks: [...blocks], message: `${blocks.at(-1)} covers ${size} address(es) and is aligned.` })
   }
   frames.push({ phase: 'done', activeLine: L('return result'), start: null, remaining: 0, blocks: [...blocks], message: `${blocks.length} block(s) cover the range.` })
   return { input: spec, result: blocks, frames }
@@ -31,7 +31,20 @@ export function buildTrace(spec) {
 
 export { toInt, toIp }
 
-export const code = `def ipToCIDR(ip, n):
+export const code = `function ipToCIDR(ip, n):
+  start = first address of ip, as a 32-bit number
+  result = empty list
+  while addresses are left to cover (n > 0):
+    size = 1
+    while doubling size keeps it aligned to start and it fits in n:
+      double size
+    append the CIDR block that starts at start and has size addresses
+    start = start + size
+    n = n - size
+  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def ip_to_cidr(ip, n):
     start = sum(int(part) << (8 * (3 - i)) for i, part in enumerate(ip.split('.')))
     result = []
     while n > 0:
@@ -41,5 +54,4 @@ export const code = `def ipToCIDR(ip, n):
         result.append(f'{start >> 24}.{(start >> 16) & 255}.{(start >> 8) & 255}.{start & 255}/{32 - size.bit_length() + 1}')
         start += size
         n -= size
-    return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return result`

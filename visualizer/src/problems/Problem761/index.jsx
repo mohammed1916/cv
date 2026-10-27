@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -14,7 +14,7 @@ const definition = {
     { id: 'return', label: 'Return', description: 'Join the pieces and return to the caller.' },
     { id: 'done', label: 'Complete', description: 'Final largest string.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Special binary string (JSON)',
   url: 'https://leetcode.com/problems/special-binary-string/',
   complexity: 'O(n^2) worst case time from nested recursion and sorting; the visualization caps n at 60.',

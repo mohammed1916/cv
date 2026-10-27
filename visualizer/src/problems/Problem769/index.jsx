@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'cut', label: 'Cut', description: 'Maximum equals index: close a chunk.' },
     { id: 'done', label: 'Complete', description: 'Return the number of chunks.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Permutation arr of 0..n-1 (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Permutation arr of 0..n-1 (JSON)',
   url: 'https://leetcode.com/problems/max-chunks-to-make-sorted/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [

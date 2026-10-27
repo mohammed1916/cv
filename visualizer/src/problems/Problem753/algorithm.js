@@ -1,16 +1,29 @@
-export const code = `def crackSafe(n, k):
+export const code = `function crackSafe(n, k):
+  seen = empty set of used passwords
+  ans = empty list
+  define dfs(prefix):
+    for each digit x from 0 to k-1:
+      nei = prefix followed by x
+      if nei is not seen then
+        mark nei as seen
+        dfs(nei without its first character)
+        append x to ans
+  dfs(n-1 zeros)
+  return ans joined, followed by n-1 zeros`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def crack_safe(n, k):
     seen = set()
     ans = []
-    def dfs(node):
+    def dfs(prefix):
         for x in range(k):
-            nei = node + str(x)
+            nei = prefix + str(x)
             if nei not in seen:
                 seen.add(nei)
                 dfs(nei[1:])
                 ans.append(str(x))
     dfs("0" * (n - 1))
-    return "".join(ans) + "0" * (n - 1)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return "".join(ans) + "0" * (n - 1)`
 
 export function parseInput(text) {
   const v = JSON.parse(text)
@@ -30,17 +43,17 @@ export function buildTrace({ n, k }) {
       const nei = node + x
       if (!seen.has(nei)) {
         seen.add(nei)
-        frames.push({ phase: 'visit', activeLine: L('seen.add'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Password "${nei}" is unused: mark it and follow it to node "${nei.slice(1) || '(empty)'}".` })
+        frames.push({ phase: 'visit', activeLine: L('mark nei as seen'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Password "${nei}" is unused: mark it and follow it to node "${nei.slice(1) || '(empty)'}".` })
         dfs(nei.slice(1), depth + 1)
         out.push(String(x))
-        frames.push({ phase: 'emit', activeLine: L('ans.append'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Backtracking from "${nei}": append digit ${x} (the answer is built in reverse post-order, which keeps the walk a valid cycle).` })
+        frames.push({ phase: 'emit', activeLine: L('append x to ans'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Backtracking from "${nei}": append digit ${x} (the answer is built in reverse post-order, which keeps the walk a valid cycle).` })
       } else if (x === k - 1) {
-        frames.push({ phase: 'skip', activeLine: L('if nei not in seen'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Node "${node || '(empty)'}": all its outgoing passwords are used.` })
+        frames.push({ phase: 'skip', activeLine: L('if nei is not seen'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Node "${node || '(empty)'}": all its outgoing passwords are used.` })
       }
     }
   }
   dfs('0'.repeat(n - 1), 0)
   const result = out.join('') + '0'.repeat(n - 1)
-  frames.push({ phase: 'done', activeLine: L('return "".join'), node: '', edge: null, seen: seen.size, total, ans: result, depth: 0, message: `Answer "${result}" has length ${result.length} = k^n + n - 1, the minimum possible.` })
+  frames.push({ phase: 'done', activeLine: L('return ans joined'), node: '', edge: null, seen: seen.size, total, ans: result, depth: 0, message: `Answer "${result}" has length ${result.length} = k^n + n - 1, the minimum possible.` })
   return { input: { n, k }, result, frames }
 }

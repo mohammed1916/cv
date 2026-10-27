@@ -1,4 +1,24 @@
-export const code = `def pyramidTransition(bottom, allowed):
+export const code = `function pyramidTransition(bottom, allowed):
+  options = map from each base pair to the top letters allowed above it
+  failed = empty set of rows that cannot be completed
+  define build(row):
+    if row has one block then return true
+    if row is in failed then return false
+    define place(i, cur):
+      if i reached the last pair then return build(cur)
+      for each top letter c allowed above pair row[i..i+1]:
+        if place(i + 1, cur + c) then return true
+      return false
+    if place(0, empty) then return true
+    add row to failed
+    return false
+  return build(bottom)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const MAX_FRAMES = 30000
+
+export const python = `from collections import defaultdict
+
+def pyramid_transition(bottom, allowed):
     options = defaultdict(list)
     for a, b, c in allowed:
         options[a + b].append(c)
@@ -19,9 +39,7 @@ export const code = `def pyramidTransition(bottom, allowed):
             return True
         failed.add(row)
         return False
-    return build(bottom)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
-const MAX_FRAMES = 30000
+    return build(bottom)`
 
 export function parseInput(text) {
   const v = JSON.parse(text)
@@ -46,13 +64,13 @@ export function buildTrace({ bottom, allowed }) {
   function build(row) {
     rows.push(row)
     try {
-      if (row.length === 1) { push({ phase: 'top', activeLine: L('return True'), cur: '', i: -1, message: `Row "${row}" has one block: the pyramid is complete.` }); return true }
-      if (failed.has(row)) { push({ phase: 'memo', activeLine: L('if row in failed'), cur: '', i: -1, message: `Row "${row}" already failed earlier; skip repeating that search.` }); return false }
-      push({ phase: 'row', activeLine: L('def build'), cur: '', i: -1, message: `Build a row above "${row}": each adjacent pair needs an allowed top block.` })
+      if (row.length === 1) { push({ phase: 'top', activeLine: L('has one block'), cur: '', i: -1, message: `Row "${row}" has one block: the pyramid is complete.` }); return true }
+      if (failed.has(row)) { push({ phase: 'memo', activeLine: L('row is in failed'), cur: '', i: -1, message: `Row "${row}" already failed earlier; skip repeating that search.` }); return false }
+      push({ phase: 'row', activeLine: L('define build'), cur: '', i: -1, message: `Build a row above "${row}": each adjacent pair needs an allowed top block.` })
       const place = (i, cur) => {
         if (i === row.length - 1) return build(cur)
         const opts = options[row.slice(i, i + 2)] || []
-        if (!opts.length) push({ phase: 'dead', activeLine: L('for c in options'), cur, i, message: `No allowed block above "${row.slice(i, i + 2)}": this partial row is a dead end.` })
+        if (!opts.length) push({ phase: 'dead', activeLine: L('for each top letter c'), cur, i, message: `No allowed block above "${row.slice(i, i + 2)}": this partial row is a dead end.` })
         for (const c of opts) {
           push({ phase: 'place', activeLine: L('place(i + 1'), cur: cur + c, i, message: `Above "${row.slice(i, i + 2)}" choose ${c}; partial row "${cur + c}".` })
           if (place(i + 1, cur + c)) return true
@@ -61,7 +79,7 @@ export function buildTrace({ bottom, allowed }) {
       }
       if (place(0, '')) return true
       failed.add(row)
-      push({ phase: 'fail', activeLine: L('failed.add'), cur: '', i: -1, message: `Every choice for the row above "${row}" failed: remember it as failed.` })
+      push({ phase: 'fail', activeLine: L('add row to failed'), cur: '', i: -1, message: `Every choice for the row above "${row}" failed: remember it as failed.` })
       return false
     } finally { rows.pop() }
   }

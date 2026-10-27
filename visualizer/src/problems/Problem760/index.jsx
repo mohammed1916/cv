@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'map', label: 'Map a value', description: 'Take the next unused position of this value.' },
     { id: 'done', label: 'Complete', description: 'Report the mapping.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'nums1 and nums2 (JSON)',
   url: 'https://leetcode.com/problems/find-anagram-mappings/',
   complexity: 'O(n) time and space with a hash map. The visualization caps input at 20 values.',

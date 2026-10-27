@@ -19,7 +19,7 @@ const needed = (gaps, distance) => gaps.reduce((total, gap) => total + Math.ceil
 export function buildTrace(spec) {
   const gaps = gapsOf(spec.stations)
   let lo = 0, hi = Math.max(...gaps)
-  const frames = [{ phase: 'start', activeLine: L('lo, hi = 0'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between 0 and the largest gap, ${hi}.` }]
+  const frames = [{ phase: 'start', activeLine: L('lo = 0, hi'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between 0 and the largest gap, ${hi}.` }]
   for (let iteration = 1; iteration <= ITERATIONS; iteration++) {
     const mid = (lo + hi) / 2
     const count = needed(gaps, mid)
@@ -36,7 +36,20 @@ export function buildTrace(spec) {
   return { input: spec, gaps, result: hi, frames }
 }
 
-export const code = `def minmaxGasDist(stations, k):
+export const code = `function minmaxGasDist(stations, k):
+  gaps = distance between each pair of neighbouring stations
+  lo = 0, hi = largest gap
+  repeat 50 times:
+    mid = (lo + hi) / 2
+    needed = sum over gaps of (ceil(gap / mid) - 1)
+    if needed is at most k then hi = mid
+    otherwise lo = mid
+  return hi`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `import math
+
+def minmax_gas_dist(stations, k):
     gaps = [b - a for a, b in zip(stations, stations[1:])]
     lo, hi = 0, max(gaps)
     for _ in range(50):
@@ -46,5 +59,4 @@ export const code = `def minmaxGasDist(stations, k):
             hi = mid
         else:
             lo = mid
-    return hi`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return hi`

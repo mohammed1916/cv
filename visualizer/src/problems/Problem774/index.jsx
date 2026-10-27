@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'check', label: 'Test a limit', description: 'Count the stations needed if no gap may exceed the limit.' },
     { id: 'done', label: 'Converged', description: 'The smallest feasible limit is found.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Station positions and k (JSON)',
   url: 'https://leetcode.com/problems/minimize-max-distance-to-gas-station/',
   complexity: 'O(n log(range / precision)) time. The visualization caps input at 20 stations and runs a fixed 50 iterations.',

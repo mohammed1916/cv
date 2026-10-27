@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'emit', label: 'Emit digit', description: 'After returning from an edge, append its digit to the answer.' },
     { id: 'done', label: 'Complete', description: 'Append the starting prefix and return.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'n and k (JSON)',
   url: 'https://leetcode.com/problems/cracking-the-safe/',
   complexity: 'O(k^n) edges visited, each with O(n) string work. The visualization caps k^n at 500.',

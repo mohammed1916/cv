@@ -1,4 +1,22 @@
-export const code = `def openLock(deadends, target):
+export const code = `function openLock(deadends, target):
+  dead = set of deadends
+  if "0000" is dead then return -1
+  queue = new queue holding ("0000", 0)
+  seen = {"0000"}
+  while the queue is not empty:
+    take the oldest (node, steps) from the front of queue
+    if node equals target then return steps
+    for each of the 4 wheels and each direction (+1, -1):
+      nxt = node with that wheel turned one step
+      if nxt is not seen and not dead:
+        mark nxt as seen
+        append (nxt, steps + 1) to the back of queue
+  return -1 because the queue ran out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+def open_lock(deadends, target):
     dead = set(deadends)
     if "0000" in dead:
         return -1
@@ -14,8 +32,7 @@ export const code = `def openLock(deadends, target):
                 if nxt not in seen and nxt not in dead:
                     seen.add(nxt)
                     queue.append((nxt, steps + 1))
-    return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return -1`
 
 export function parseInput(text) {
   const v = JSON.parse(text)
@@ -30,7 +47,7 @@ export function buildTrace({ deadends, target }) {
   const dead = new Set(deadends)
   const frames = [{ phase: 'start', activeLine: L('dead ='), node: '0000', steps: 0, queueSize: 0, seen: 0, fresh: [], blocked: [], path: [], message: `Each state is a 4-digit string; one move turns one wheel up or down (wrapping 9<->0). ${dead.size} dead end${dead.size === 1 ? '' : 's'} are forbidden.` }]
   if (dead.has('0000')) {
-    frames.push({ phase: 'done', activeLine: L('return -1'), node: '0000', steps: -1, queueSize: 0, seen: 0, fresh: [], blocked: [], path: [], message: 'The start state 0000 is a dead end: the lock is stuck immediately, answer -1.' })
+    frames.push({ phase: 'done', activeLine: L('"0000" is dead'), node: '0000', steps: -1, queueSize: 0, seen: 0, fresh: [], blocked: [], path: [], message: 'The start state 0000 is a dead end: the lock is stuck immediately, answer -1.' })
     return { input: { deadends, target }, result: -1, frames }
   }
   const parent = new Map([['0000', null]])
@@ -40,7 +57,7 @@ export function buildTrace({ deadends, target }) {
   while (head < queue.length) {
     const node = queue[head++]
     const steps = dist.get(node)
-    frames.push({ phase: 'pop', activeLine: L('popleft'), node, steps, queueSize: queue.length - head, seen: parent.size, fresh: [], blocked: [], path: [], message: `Dequeue ${node} (${steps} move${steps === 1 ? '' : 's'}). BFS pops states in order of distance, so the first time the target is popped is the shortest.` })
+    frames.push({ phase: 'pop', activeLine: L('take the oldest'), node, steps, queueSize: queue.length - head, seen: parent.size, fresh: [], blocked: [], path: [], message: `Dequeue ${node} (${steps} move${steps === 1 ? '' : 's'}). BFS pops states in order of distance, so the first time the target is popped is the shortest.` })
     if (node === target) {
       frames.push({ phase: 'done', activeLine: L('return steps'), node, steps, queueSize: queue.length - head, seen: parent.size, fresh: [], blocked: [], path: pathTo(node), message: `Reached ${target} after ${steps} moves.` })
       return { input: { deadends, target }, result: steps, frames }
@@ -51,8 +68,8 @@ export function buildTrace({ deadends, target }) {
       if (dead.has(nxt)) blocked.push(nxt)
       else if (!parent.has(nxt)) { parent.set(nxt, node); dist.set(nxt, steps + 1); queue.push(nxt); fresh.push(nxt) }
     }
-    frames.push({ phase: 'expand', activeLine: L('seen.add'), node, steps, queueSize: queue.length - head, seen: parent.size, fresh, blocked, path: [], message: `Eight neighbours of ${node}: ${fresh.length} new (queued), ${blocked.length} dead end${blocked.length === 1 ? '' : 's'} (skipped), the rest already seen.` })
+    frames.push({ phase: 'expand', activeLine: L('mark nxt as seen'), node, steps, queueSize: queue.length - head, seen: parent.size, fresh, blocked, path: [], message: `Eight neighbours of ${node}: ${fresh.length} new (queued), ${blocked.length} dead end${blocked.length === 1 ? '' : 's'} (skipped), the rest already seen.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), node: '', steps: -1, queueSize: 0, seen: parent.size, fresh: [], blocked: [], path: [], message: `The queue is empty after reaching ${parent.size} states: the target is walled off by dead ends. Answer -1.` })
+  frames.push({ phase: 'done', activeLine: L('ran out'), node: '', steps: -1, queueSize: 0, seen: parent.size, fresh: [], blocked: [], path: [], message: `The queue is empty after reaching ${parent.size} states: the target is walled off by dead ends. Answer -1.` })
   return { input: { deadends, target }, result: -1, frames }
 }

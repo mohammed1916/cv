@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'drop', label: 'Drop a unit', description: 'Water flows to the lowest reachable spot, left first.' },
     { id: 'done', label: 'Settled', description: 'All water has settled.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'heights, volume and k (JSON)',
   url: 'https://leetcode.com/problems/pour-water/',
   complexity: 'O(volume * n) time with this scan. The visualization caps input at 30 heights and 50 units.',

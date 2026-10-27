@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'step', label: 'Take step', description: 'Add the next step size to the sum.' },
     { id: 'done', label: 'Complete', description: 'Return the minimum number of moves.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Target (JSON integer)',
   url: 'https://leetcode.com/problems/reach-a-number/',
   complexity: 'O(sqrt(|target|)) steps; the visualization caps |target| at 20,000.',

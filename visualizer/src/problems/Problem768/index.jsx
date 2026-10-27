@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'merge', label: 'Merge chunks', description: 'A smaller value forces earlier chunks to merge.' },
     { id: 'done', label: 'Complete', description: 'The stack size is the chunk count.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array arr (JSON, 1-200 integers)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array arr (JSON, 1-200 integers)',
   url: 'https://leetcode.com/problems/max-chunks-to-make-sorted-ii/',
   complexity: 'O(n) time and O(n) space with the monotonic stack.',
   examples: [

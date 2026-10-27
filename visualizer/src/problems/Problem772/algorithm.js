@@ -11,16 +11,16 @@ const tokenize = expr => expr.match(/\d+|[-+*/()]/g) ?? []
 export function buildTrace(expr) {
   const tokens = tokenize(expr)
   let pos = 0
-  const frames = [{ phase: 'start', activeLine: L('tokens = re.findall'), a: null, op: null, b: null, value: null, message: 'Read the expression left to right. * and / are applied before + and -.' }]
+  const frames = [{ phase: 'start', activeLine: L('tokens = numbers'), a: null, op: null, b: null, value: null, message: 'Read the expression left to right. * and / are applied before + and -.' }]
   const apply = (a, op, b) => {
     let value, activeLine
-    if (op === '+') { value = a + b; activeLine = L('value = value + right') }
-    else if (op === '-') { value = a - b; activeLine = L('value = value - right') }
-    else if (op === '*') { value = a * b; activeLine = L('value = value * right') }
+    if (op === '+') { value = a + b; activeLine = L('if op is + then') }
+    else if (op === '-') { value = a - b; activeLine = L('otherwise value = value minus') }
+    else if (op === '*') { value = a * b; activeLine = L('if op is * then') }
     else {
       if (b === 0) throw new Error('Division by zero.')
       value = Math.trunc(a / b)
-      activeLine = L('value = int(value / right)')
+      activeLine = L('otherwise value = value divided')
     }
     frames.push({ phase: 'apply', activeLine, a, op, b, value, message: `${a} ${op} ${b} = ${value}.` })
     return value
@@ -55,11 +55,40 @@ export function buildTrace(expr) {
   }
   const result = expression()
   if (pos !== tokens.length) throw new Error('Unexpected token.')
-  frames.push({ phase: 'done', activeLine: L('return value'), a: null, op: null, b: null, value: result, message: `The expression evaluates to ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return expression()'), a: null, op: null, b: null, value: result, message: `The expression evaluates to ${result}.` })
   return { input: expr, result, frames }
 }
 
-export const code = `def calculate(s):
+export const code = `function calculate(s):
+  tokens = numbers and operators found in s, in order
+  pos = 0
+  define expression():
+    value = term()
+    while the next token is + or -:
+      op = that token; move past it
+      right = term()
+      if op is + then value = value plus right
+      otherwise value = value minus right
+    return value
+  define term():
+    value = factor()
+    while the next token is * or /:
+      op = that token; move past it
+      right = factor()
+      if op is * then value = value times right
+      otherwise value = value divided by right, truncated toward zero
+    return value
+  define factor():
+    if the next token is "(" then
+      move past it, value = expression(), then move past ")"
+      return value
+    move past the number, return it as an integer
+  return expression()`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `import re
+
+def calculate(s):
     tokens = re.findall(r'\\d+|[-+*/()]', s)
     pos = 0
     def expression():
@@ -95,5 +124,4 @@ export const code = `def calculate(s):
             return value
         pos += 1
         return int(tokens[pos - 1])
-    return expression()`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return expression()`
