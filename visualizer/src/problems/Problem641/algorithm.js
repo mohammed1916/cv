@@ -16,7 +16,7 @@ export function buildTrace({ k, ops }) {
   const slots = Array(k).fill(null)
   let head = 0, size = 0
   const results = []
-  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, activeLine: 2, message: `Create a ring of ${k} slots.` }]
+  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, activeLine: L('slots = k empty'), message: `Create a ring of ${k} slots.` }]
   ops.forEach(([name, value], op) => {
     let returned
     let phase = 'query'
@@ -41,21 +41,91 @@ export function buildTrace({ k, ops }) {
     else if (name === 'isEmpty') returned = size === 0
     else returned = size === k
     results.push(returned === undefined ? null : returned)
-    frames.push({ phase, op, name, value, slots: [...slots], head, size, k, returned, activeLine: phase === 'write' ? 5 : phase === 'read' ? 9 : 12,
+    frames.push({ phase, op, name, value, slots: [...slots], head, size, k, returned, activeLine: ACTIVE[name],
       message: `${name}${name.startsWith('insert') ? `(${value})` : '()'} → ${String(returned)}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, activeLine: 14, message: `${ops.length} operations complete.` })
+  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, activeLine: L('return results'), message: `${ops.length} operations complete.` })
   return { input: { k, ops }, result: results, frames }
 }
 
-export const code = `class MyCircularDeque:
-    def insertFront(self, value):
-        if self.size == self.k: return False
-        self.head = (self.head - 1) % self.k
-        self.slots[self.head] = value
-        self.size += 1
-        return True
-    def deleteLast(self):
-        if self.size == 0: return False
-        self.size -= 1
-        return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `slots = k empty slots, head = 0, size = 0
+results = empty list
+for each operation (name, value) in ops:
+  if name is insertFront:
+    if size equals k: result = false
+    else: move head back one (wrap around), write value there, size += 1, result = true
+  else if name is insertLast:
+    if size equals k: result = false
+    else: write value after the last element, size += 1, result = true
+  else if name is deleteFront:
+    if size is 0: result = false
+    else: clear slot at head, move head forward one (wrap around), size -= 1, result = true
+  else if name is deleteLast:
+    if size is 0: result = false
+    else: clear the last element's slot, size -= 1, result = true
+  else if name is getFront:
+    result = front value, or -1 if empty
+  else if name is getRear:
+    result = rear value, or -1 if empty
+  else if name is isEmpty:
+    result = size is 0
+  else:
+    result = size equals k
+  append result to results
+return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const ACTIVE = {
+  insertFront: L('move head back one'), insertLast: L('write value after the last element'),
+  deleteFront: L('clear slot at head'), deleteLast: L("clear the last element's slot"),
+  getFront: L('result = front value'), getRear: L('result = rear value'),
+  isEmpty: L('result = size is 0'), isFull: L('result = size equals k'),
+}
+
+export const python = `def design_circular_deque(k, ops):
+    slots = [None] * k
+    head = 0
+    size = 0
+    results = []
+    for entry in ops:
+        name = entry[0]
+        value = entry[1] if len(entry) > 1 else None
+        if name == 'insertFront':
+            if size == k:
+                result = False
+            else:
+                head = (head - 1) % k
+                slots[head] = value
+                size += 1
+                result = True
+        elif name == 'insertLast':
+            if size == k:
+                result = False
+            else:
+                slots[(head + size) % k] = value
+                size += 1
+                result = True
+        elif name == 'deleteFront':
+            if size == 0:
+                result = False
+            else:
+                slots[head] = None
+                head = (head + 1) % k
+                size -= 1
+                result = True
+        elif name == 'deleteLast':
+            if size == 0:
+                result = False
+            else:
+                slots[(head + size - 1) % k] = None
+                size -= 1
+                result = True
+        elif name == 'getFront':
+            result = slots[head] if size else -1
+        elif name == 'getRear':
+            result = slots[(head + size - 1) % k] if size else -1
+        elif name == 'isEmpty':
+            result = size == 0
+        else:
+            result = size == k
+        results.append(result)
+    return results`

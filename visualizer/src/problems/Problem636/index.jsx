@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'end', label: 'Return', description: 'Pop the function and add its time.' },
     { id: 'done', label: 'Complete', description: 'Return the exclusive times.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Program (JSON object with n and logs)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Program (JSON object with n and logs)',
   url: 'https://leetcode.com/problems/exclusive-time-of-functions/',
   complexity: 'O(logs + n) time and O(logs) stack space.',
   examples: [

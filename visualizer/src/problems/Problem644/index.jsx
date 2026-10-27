@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'check', label: 'Test a guess', description: 'Ask whether a subarray of length at least k reaches the guessed average.' },
     { id: 'done', label: 'Complete', description: 'Report the highest feasible average.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Numbers and minimum length (JSON)',
   url: 'https://leetcode.com/problems/maximum-average-subarray-ii/',
   complexity: 'O(n log(range / precision)) time with prefix sums. The visualization caps input at 30 values and runs a fixed 40 iterations.',

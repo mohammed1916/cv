@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -7,7 +7,7 @@ const definition = {
     { id: 'move', label: 'Move terms', description: 'Collect x on the left and constants on the right.' },
     { id: 'done', label: 'Complete', description: 'Solve, or detect no or infinite solutions.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Equation (JSON string)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Equation (JSON string)',
   url: 'https://leetcode.com/problems/solve-the-equation/',
   complexity: 'O(n) time and O(1) extra space for the equation length n.',
   examples: [

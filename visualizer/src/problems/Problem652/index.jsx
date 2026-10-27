@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'duplicate', label: 'Repeat found', description: 'This serialization appeared before.' },
     { id: 'done', label: 'Complete', description: 'Return one root per repeated subtree.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Tree (LeetCode level-order JSON array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree (LeetCode level-order JSON array)',
   url: 'https://leetcode.com/problems/find-duplicate-subtrees/',
   complexity: 'O(n²) time in the worst case with string serialization, and O(n²) space for the serialized keys.',
   examples: [

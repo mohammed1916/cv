@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'ban', label: 'Ban opponent', description: 'The front senator bans the next opponent and rejoins later.' },
     { id: 'done', label: 'Complete', description: 'The party with senators left wins.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Senate (JSON string of R and D)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Senate (JSON string of R and D)',
   url: 'https://leetcode.com/problems/dota2-senate/',
   complexity: 'O(n) time with two queues; each senator is dequeued and requeued at most a constant number of times per round.',
   examples: [

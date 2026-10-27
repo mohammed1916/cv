@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'get', label: 'Read cell', description: 'Evaluate the cell by following its formula links.' },
     { id: 'done', label: 'Complete', description: 'Report every result in operation order.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Sheet and operations (JSON)',
   url: 'https://leetcode.com/problems/design-excel-sum-formula/',
   complexity: 'Reading a cell costs time proportional to the cells its formula expands to. The visualization caps the sheet at 10 rows and 10 columns and 30 operations.',

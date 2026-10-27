@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'save', label: 'Save with #', description: 'The typed sentence gains one count and the prefix resets.' },
     { id: 'done', label: 'Complete', description: 'Report the suggestions after each character.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Sentences, hotness and typed text (JSON)',
   url: 'https://leetcode.com/problems/design-search-autocomplete-system/',
   complexity: 'Each character scans the stored sentences. The visualization caps input at 10 sentences and 40 characters.',

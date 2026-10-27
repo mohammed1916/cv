@@ -24,7 +24,7 @@ function feasible(nums, k, average) {
 export function buildTrace(spec) {
   const { nums, k } = spec
   let lo = Math.min(...nums), hi = Math.max(...nums)
-  const frames = [{ phase: 'start', activeLine: L('lo, hi = min'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between the smallest value ${lo} and the largest ${hi}. Binary search on the average.` }]
+  const frames = [{ phase: 'start', activeLine: L('lo = smallest value'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between the smallest value ${lo} and the largest ${hi}. Binary search on the average.` }]
   for (let iteration = 1; iteration <= ITERATIONS; iteration++) {
     const mid = (lo + hi) / 2
     const ok = feasible(nums, k, mid)
@@ -40,24 +40,40 @@ export function buildTrace(spec) {
   return { input: spec, nums, result: lo, frames }
 }
 
-export const code = `def feasible(nums, k, average):
-    prefix = [0]
-    for v in nums:
-        prefix.append(prefix[-1] + v - average)
-    lowest = float('inf')
-    for j in range(k, len(prefix)):
-        lowest = min(lowest, prefix[j - k])
-        if prefix[j] - lowest >= 0:
-            return True
-    return False
+export const code = `lo = smallest value, hi = largest value
+repeat 40 times:
+  mid = (lo + hi) / 2
+  if feasible(mid) is true: lo = mid
+  else: hi = mid
+return lo
 
-def findMaxAverage(nums, k):
+feasible(average):
+  prefix = [0]
+  for each value v in nums: append the last prefix sum + v - average
+  lowest = infinity
+  for j from k to the end of prefix:
+    lowest = smaller of lowest and prefix[j - k]
+    if prefix[j] - lowest is at least 0: return true
+  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def find_max_average(nums, k):
+    def feasible(average):
+        prefix = [0]
+        for v in nums:
+            prefix.append(prefix[-1] + v - average)
+        lowest = float('inf')
+        for j in range(k, len(prefix)):
+            lowest = min(lowest, prefix[j - k])
+            if prefix[j] - lowest >= 0:
+                return True
+        return False
+
     lo, hi = min(nums), max(nums)
     for _ in range(40):
         mid = (lo + hi) / 2
-        if feasible(nums, k, mid):
+        if feasible(mid):
             lo = mid
         else:
             hi = mid
-    return lo`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return lo`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1

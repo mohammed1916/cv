@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'advance', label: 'Advance smallest', description: 'Only moving the smallest value can narrow the range.' },
     { id: 'done', label: 'Complete', description: 'Return the smallest range found.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Sorted lists (JSON array of arrays)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sorted lists (JSON array of arrays)',
   url: 'https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/',
   complexity: 'O(N·k) for this visualization, which scans k pointers per step; a min-heap gives O(N log k) for N total elements across k lists.',
   examples: [
