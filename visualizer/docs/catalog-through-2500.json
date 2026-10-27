@@ -2,8 +2,8 @@
   "scope": "Every catalog problem numbered 1 through 2500",
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 2500,
-  "routePresent": 1745,
-  "missing": 755,
+  "routePresent": 1757,
+  "missing": 743,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "bands": [
     {
@@ -24,12 +24,12 @@
     {
       "from": 751,
       "through": 1000,
-      "missing": 10
+      "missing": 1
     },
     {
       "from": 1001,
       "through": 1250,
-      "missing": 143
+      "missing": 140
     },
     {
       "from": 1251,
@@ -6933,8 +6933,8 @@
       "number": "982",
       "title": "Triples with Bitwise AND Equal To Zero",
       "slug": "triples-with-bitwise-and-equal-to-zero",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem982"
     },
     {
       "number": "983",
@@ -6947,8 +6947,8 @@
       "number": "984",
       "title": "String Without AAA or BBB",
       "slug": "string-without-aaa-or-bbb",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem984"
     },
     {
       "number": "985",
@@ -6961,22 +6961,22 @@
       "number": "986",
       "title": "Interval List Intersections",
       "slug": "interval-list-intersections",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem986"
     },
     {
       "number": "987",
       "title": "Vertical Order Traversal of a Binary Tree",
       "slug": "vertical-order-traversal-of-a-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem987"
     },
     {
       "number": "988",
       "title": "Smallest String Starting From Leaf",
       "slug": "smallest-string-starting-from-leaf",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem988"
     },
     {
       "number": "989",
@@ -7010,8 +7010,8 @@
       "number": "993",
       "title": "Cousins in Binary Tree",
       "slug": "cousins-in-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem993"
     },
     {
       "number": "994",
@@ -7024,15 +7024,15 @@
       "number": "995",
       "title": "Minimum Number of K Consecutive Bit Flips",
       "slug": "minimum-number-of-k-consecutive-bit-flips",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem995"
     },
     {
       "number": "996",
       "title": "Number of Squareful Arrays",
       "slug": "number-of-squareful-arrays",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem996"
     },
     {
       "number": "997",
@@ -7045,8 +7045,8 @@
       "number": "998",
       "title": "Maximum Binary Tree II",
       "slug": "maximum-binary-tree-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem998"
     },
     {
       "number": "999",
@@ -7066,8 +7066,8 @@
       "number": "1001",
       "title": "Grid Illumination",
       "slug": "grid-illumination",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1001"
     },
     {
       "number": "1002",
@@ -7080,8 +7080,8 @@
       "number": "1003",
       "title": "Check If Word Is Valid After Substitutions",
       "slug": "check-if-word-is-valid-after-substitutions",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1003"
     },
     {
       "number": "1004",
@@ -7116,8 +7116,8 @@
       "number": "1008",
       "title": "Construct Binary Search Tree from Preorder Traversal",
       "slug": "construct-binary-search-tree-from-preorder-traversal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem1008"
     },
     {
       "number": "1009",
