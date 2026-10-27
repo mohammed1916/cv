@@ -1,9 +1,9 @@
 {
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 4073,
-  "routes": 1762,
-  "matchedCatalogRoutes": 1743,
-  "remaining": 2330,
+  "routes": 1774,
+  "matchedCatalogRoutes": 1755,
+  "remaining": 2318,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "unmatchedRoutes": [
     {
@@ -5080,8 +5080,8 @@
       "number": "711",
       "title": "Number of Distinct Islands II",
       "slug": "number-of-distinct-islands-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem711"
     },
     {
       "number": "712",
@@ -5115,8 +5115,8 @@
       "number": "716",
       "title": "Max Stack",
       "slug": "max-stack",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem716"
     },
     {
       "number": "717",
@@ -5164,8 +5164,8 @@
       "number": "723",
       "title": "Candy Crush",
       "slug": "candy-crush",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem723"
     },
     {
       "number": "724",
@@ -5241,8 +5241,8 @@
       "number": "734",
       "title": "Sentence Similarity",
       "slug": "sentence-similarity",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem734"
     },
     {
       "number": "735",
@@ -5297,8 +5297,8 @@
       "number": "742",
       "title": "Closest Leaf in a Binary Tree",
       "slug": "closest-leaf-in-a-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem742"
     },
     {
       "number": "743",
@@ -5360,8 +5360,8 @@
       "number": "751",
       "title": "IP to CIDR",
       "slug": "ip-to-cidr",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem751"
     },
     {
       "number": "752",
@@ -5388,8 +5388,8 @@
       "number": "755",
       "title": "Pour Water",
       "slug": "pour-water",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem755"
     },
     {
       "number": "756",
@@ -5409,8 +5409,8 @@
       "number": "758",
       "title": "Bold Words in String",
       "slug": "bold-words-in-string",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem758"
     },
     {
       "number": "759",
@@ -5424,8 +5424,8 @@
       "number": "760",
       "title": "Find Anagram Mappings",
       "slug": "find-anagram-mappings",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem760"
     },
     {
       "number": "761",
@@ -5508,8 +5508,8 @@
       "number": "772",
       "title": "Basic Calculator III",
       "slug": "basic-calculator-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem772"
     },
     {
       "number": "773",
@@ -5522,8 +5522,8 @@
       "number": "774",
       "title": "Minimize Max Distance to Gas Station",
       "slug": "minimize-max-distance-to-gas-station",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem774"
     },
     {
       "number": "775",
@@ -5536,8 +5536,8 @@
       "number": "776",
       "title": "Split BST",
       "slug": "split-bst",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem776"
     },
     {
       "number": "777",
