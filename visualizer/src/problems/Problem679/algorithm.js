@@ -8,7 +8,7 @@ const EPS = 1e-6
 
 // Repeatedly combine any two numbers with +, −, ×, ÷ (both orders for − and ÷); succeed at one value of 24.
 export function buildTrace(cards) {
-  const frames = [{ phase: 'start', values: cards.map(String), attempt: null, found: null, activeLine: 2, message: `Combine the four cards ${cards.join(', ')} into 24.` }]
+  const frames = [{ phase: 'start', values: cards.map(String), attempt: null, found: null, activeLine: L('start with the four cards'), message: `Combine the four cards ${cards.join(', ')} into 24.` }]
   let answer = null
   let attempts = 0
   function solve(items) {
@@ -32,22 +32,43 @@ export function buildTrace(cards) {
         if (answer) return
         attempts++
         const next = [...rest, { expr, value }]
-        frames.push({ phase: 'try', values: next.map(x => x.expr), attempt: expr, found: null, activeLine: 6, message: `Try ${expr} = ${Number(value.toFixed(4))}.` })
+        frames.push({ phase: 'try', values: next.map(x => x.expr), attempt: expr, found: null, activeLine: L('put the result back'), message: `Try ${expr} = ${Number(value.toFixed(4))}.` })
         solve(next)
       }
     }
   }
   solve(cards.map(v => ({ expr: String(v), value: v })))
-  frames.push({ phase: 'done', values: [], attempt: null, found: answer, attempts, result: answer !== null, activeLine: 9, message: answer ? `Found: ${answer} = 24.` : 'No combination reaches 24.' })
+  frames.push({ phase: 'done', values: [], attempt: null, found: answer, attempts, result: answer !== null, activeLine: answer ? L('if that reaches 24') : L('return false'), message: answer ? `Found: ${answer} = 24.` : 'No combination reaches 24.' })
   return { input: cards, result: answer !== null, expression: answer, frames }
 }
 
-export const code = `def judgePoint24(cards):
+export const code = `start with the four cards as the list of numbers
+if one number is left, return whether it equals 24
+for each pair of numbers in the list
+  remove the pair from the list
+  for each result of combining the pair with +, −, ×, ÷ (both orders for − and ÷)
+    put the result back into the list and try to reach 24 from it
+    if that reaches 24, return true
+return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def judge_point_24(cards):
     def solve(nums):
-        if len(nums) == 1: return abs(nums[0] - 24) < 1e-6
-        for i, j in pairs(nums):
-            rest = others(nums, i, j)
-            for v in combine(nums[i], nums[j]):
-                if solve(rest + [v]): return True
+        if len(nums) == 1:
+            return abs(nums[0] - 24) < 1e-6
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                a, b = nums[i], nums[j]
+                rest = [nums[k] for k in range(len(nums)) if k != i and k != j]
+                options = [a + b, a - b, b - a, a * b]
+                if abs(b) > 1e-6:
+                    options.append(a / b)
+                if abs(a) > 1e-6:
+                    options.append(b / a)
+                for value in options:
+                    if solve(rest + [value]):
+                        return True
         return False
-    return solve([float(c) for c in cards])`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return solve([float(card) for card in cards])
+`

@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace({ words, queries }) {
   const dictionary = [...words]
   const ops = []
-  const frames = [{ phase: 'start', query: null, ops: [], activeLine: 2, message: `Dictionary: ${dictionary.join(', ')}.` }]
+  const frames = [{ phase: 'start', query: null, ops: [], activeLine: L('store the dictionary words'), message: `Dictionary: ${dictionary.join(', ')}.` }]
   for (const query of queries) {
     let matched = false, witness = null
     for (const w of dictionary) {
@@ -21,18 +21,33 @@ export function buildTrace({ words, queries }) {
       if (diff === 1) { matched = true; witness = w; break }
     }
     ops.push({ name: 'search', args: [query], returned: matched })
-    frames.push({ phase: 'search', query, witness, matched, ops: ops.map(o => ({ ...o })), activeLine: 6, message: matched ? `${query} matches ${witness} with one change.` : `${query} has no dictionary word one change away.` })
+    frames.push({ phase: 'search', query, witness, matched, ops: ops.map(o => ({ ...o })), activeLine: L('record whether the query matched'), message: matched ? `${query} matches ${witness} with one change.` : `${query} has no dictionary word one change away.` })
   }
-  frames.push({ phase: 'done', query: null, ops: ops.map(o => ({ ...o })), result: ops.map(o => o.returned), activeLine: 9, message: 'All queries answered.' })
+  frames.push({ phase: 'done', query: null, ops: ops.map(o => ({ ...o })), result: ops.map(o => o.returned), activeLine: L('return the recorded results'), message: 'All queries answered.' })
   return { input: { words, queries }, result: ops.map(o => o.returned), ops, frames }
 }
 
-export const code = `class MagicDictionary:
-    def buildDict(self, dictionary):
-        self.words = set(dictionary)
-    def search(self, searchWord):
-        for i in range(len(searchWord)):
-            for c in 'abcdefghijklmnopqrstuvwxyz':
-                if c != searchWord[i] and searchWord[:i] + c + searchWord[i+1:] in self.words:
-                    return True
-        return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `store the dictionary words
+for each query word, in order
+  for each dictionary word of the same length
+    count the letters that differ from the query
+    if exactly one letter differs, the query matches that word
+  record whether the query matched
+return the recorded results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def magic_dictionary(words, queries):
+    results = []
+    for query in queries:
+        matched = False
+        for word in words:
+            if len(word) != len(query):
+                continue
+            diff = sum(1 for a, b in zip(word, query) if a != b)
+            if diff == 1:
+                matched = True
+                break
+        results.append(matched)
+    return results
+`

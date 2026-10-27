@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'apply', label: 'Apply sticker', description: 'Remove as many needed letters as the sticker provides.' },
     { id: 'done', label: 'Complete', description: 'Report the fewest stickers, or −1.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Stickers and target (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Stickers and target (JSON object)',
   url: 'https://leetcode.com/problems/stickers-to-spell-word/',
   complexity: 'O(S · ∏(cᵢ + 1)) time for S stickers and letter counts cᵢ of the target, since each state is a vector of remaining counts.',
   examples: [

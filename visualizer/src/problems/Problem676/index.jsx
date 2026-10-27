@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'search', label: 'Search query', description: 'Find a word that differs in exactly one letter.' },
     { id: 'done', label: 'Complete', description: 'All queries answered.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Dictionary and queries (JSON object with words and queries)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Dictionary and queries (JSON object with words and queries)',
   url: 'https://leetcode.com/problems/implement-magic-dictionary/',
   complexity: 'O(D · L) per query for D words of length L in this visualization; a trie or set of wildcard keys gives O(L · 26) per query.',
   examples: [

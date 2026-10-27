@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'middle', label: 'Middle window', description: 'Combine the best left window, this middle window, and the best right window.' },
     { id: 'done', label: 'Complete', description: 'Return the lexicographically smallest best triple of starts.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Input (JSON object with nums and k)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Input (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/',
   complexity: 'O(n) time after prefix sums, and O(n) space for the side tables.',
   examples: [

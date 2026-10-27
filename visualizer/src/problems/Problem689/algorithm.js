@@ -24,24 +24,59 @@ export function buildTrace({ nums, k }) {
     if (cur >= best) { best = cur; idx = i }
     right[i] = idx
   }
-  const frames = [{ phase: 'start', j: null, starts: null, total: null, activeLine: 2, message: `Precompute the best window to the left and right of each position (windows of length ${k}).` }]
+  const frames = [{ phase: 'start', j: null, starts: null, total: null, activeLine: L('precompute left'), message: `Precompute the best window to the left and right of each position (windows of length ${k}).` }]
   let bestTotal = -1, bestStarts = null
   for (let j = k; j <= n - 2 * k; j++) {
     const a = left[j - 1], c = right[j + k]
     const total = at(a) + at(j) + at(c)
     if (total > bestTotal) { bestTotal = total; bestStarts = [a, j, c] }
-    frames.push({ phase: 'middle', j, starts: [a, j, c], total, best: bestStarts, activeLine: 7, message: `Middle window at ${j}: sums ${at(a)} + ${at(j)} + ${at(c)} = ${total}.` })
+    frames.push({ phase: 'middle', j, starts: [a, j, c], total, best: bestStarts, activeLine: L('if best is nothing'), message: `Middle window at ${j}: sums ${at(a)} + ${at(j)} + ${at(c)} = ${total}.` })
   }
-  frames.push({ phase: 'done', j: null, starts: bestStarts, total: bestTotal, result: bestStarts, activeLine: 10, message: `Best starts: [${bestStarts.join(', ')}] with total ${bestTotal}.` })
+  frames.push({ phase: 'done', j: null, starts: bestStarts, total: bestTotal, result: bestStarts, activeLine: L('return the kept starts'), message: `Best starts: [${bestStarts.join(', ')}] with total ${bestTotal}.` })
   return { input: { nums, k }, result: bestStarts, frames }
 }
 
-export const code = `def maxSumOfThreeSubarrays(nums, k):
-    # left[i] / right[i]: start of the best length-k window in nums[:i+1] / nums[i:]
-    ...
+export const code = `build prefix sums so any window sum takes constant time
+precompute left, where left[i] is the best window start at or before i
+precompute right, where right[i] is the best window start at or after i
+best = nothing
+for each middle start j from k to n - 2k
+  a = left[j - 1], c = right[j + k]
+  total = the sum of the windows at a, j and c
+  if best is nothing or total is larger than best, keep a, j, c as the best
+return the kept starts`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def max_sum_of_three_subarrays(nums, k):
+    n = len(nums)
+    prefix = [0]
+    for x in nums:
+        prefix.append(prefix[-1] + x)
+
+    def window(s):
+        return prefix[s + k] - prefix[s]
+
+    left = [0] * n
+    best_start = 0
+    for i in range(k - 1, n):
+        start = i - k + 1
+        if window(start) > window(best_start):
+            best_start = start
+        left[i] = best_start
+
+    right = [0] * n
+    best_start = n - k
+    for i in range(n - k, -1, -1):
+        if window(i) >= window(best_start):
+            best_start = i
+        right[i] = best_start
+
     best = None
     for j in range(k, n - 2 * k + 1):
         a, c = left[j - 1], right[j + k]
-        total = S(a) + S(j) + S(c)
-        if best is None or total > best[0]: best = (total, [a, j, c])
-    return best[1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        total = window(a) + window(j) + window(c)
+        if best is None or total > best[0]:
+            best = (total, [a, j, c])
+    return best[1]
+`

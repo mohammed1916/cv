@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'try', label: 'Try a combination', description: 'Combine two numbers and recurse on the rest.' },
     { id: 'done', label: 'Complete', description: 'Report the expression or failure.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Four cards (JSON array of integers 1–9)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Four cards (JSON array of integers 1–9)',
   url: 'https://leetcode.com/problems/24-game/',
   complexity: 'Constant for four cards: at most 6 pairs × 6 operations at each of 3 levels, about 4 000 combinations.',
   examples: [

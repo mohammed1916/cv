@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import TreeOutline from '../../components/shared/TreeOutline'
 import TreeWalkView from '../../components/shared/TreeWalkView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'visit', label: 'Add importance', description: 'Add this employee and push the reports.' },
     { id: 'done', label: 'Complete', description: 'Return the total.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Employees and id (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Employees and id (JSON object)',
   url: 'https://leetcode.com/problems/employee-importance/',
   complexity: 'O(n) time and O(n) space for the employee map and the stack.',
   examples: [

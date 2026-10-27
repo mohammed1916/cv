@@ -9,7 +9,7 @@ const minutesOf = time => Number(time.slice(0, 2)) * 60 + Number(time.slice(3))
 export function buildTrace(time) {
   const digits = [...new Set(time.replace(':', ''))].sort()
   const start = minutesOf(time)
-  const frames = [{ phase: 'start', activeLine: L('allowed = set'), candidate: null, gap: null, best: null, digits, message: `The clock may only use the digits ${digits.join(', ')}. Try every arrangement of them.` }]
+  const frames = [{ phase: 'start', activeLine: L('collect the distinct digits'), candidate: null, gap: null, best: null, digits, message: `The clock may only use the digits ${digits.join(', ')}. Try every arrangement of them.` }]
   let best = time, bestGap = 1440
   for (const a of digits) for (const b of digits) for (const c of digits) for (const d of digits) {
     const candidate = `${a}${b}:${c}${d}`
@@ -18,23 +18,38 @@ export function buildTrace(time) {
     const gap = (minutesOf(candidate) - start + 1440) % 1440 || 1440
     const improved = gap < bestGap
     if (improved) { best = candidate; bestGap = gap }
-    frames.push({ phase: 'candidate', activeLine: L('gap = '), candidate, gap, best, digits, improved, message: improved ? `${candidate} is ${gap} minutes ahead and the closest so far.` : `${candidate} is ${gap} minutes ahead, not closer than ${best}.` })
+    frames.push({ phase: 'candidate', activeLine: L('if gap < bestGap'), candidate, gap, best, digits, improved, message: improved ? `${candidate} is ${gap} minutes ahead and the closest so far.` : `${candidate} is ${gap} minutes ahead, not closer than ${best}.` })
   }
   frames.push({ phase: 'done', activeLine: L('return best'), candidate: best, gap: bestGap, best, digits, improved: false, message: `The closest valid arrangement is ${best}.` })
   return { input: time, result: best, frames }
 }
 
-export const code = `def nextClosestTime(time):
-    allowed = set(time) - {':'}
-    start = int(time[:2]) * 60 + int(time[3:])
-    best, bestGap = time, 1440
-    for a, b, c, d in product(sorted(allowed), repeat=4):
-        h, m = a + b, c + d
-        if int(h) > 23 or int(m) > 59:
-            continue
-        cand = int(h) * 60 + int(m)
-        gap = (cand - start) % 1440 or 1440
-        if gap < bestGap:
-            best, bestGap = f'{h}:{m}', gap
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `collect the distinct digits of the time into allowed
+start = the current time in minutes
+best = the current time, bestGap = 1440
+for each arrangement of four digits taken from allowed
+  read the first two digits as hours and the last two as minutes
+  if hours > 23 or minutes > 59, skip this arrangement
+  gap = minutes from start to this time, wrapping past midnight (the same time counts as 1440)
+  if gap < bestGap, best = this time and bestGap = gap
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from itertools import product
+
+
+def next_closest_time(time):
+    allowed = sorted(set(time) - {':'})
+    start = int(time[:2]) * 60 + int(time[3:])
+    best, best_gap = time, 1440
+    for a, b, c, d in product(allowed, repeat=4):
+        hours, minutes = a + b, c + d
+        if int(hours) > 23 or int(minutes) > 59:
+            continue
+        cand = int(hours) * 60 + int(minutes)
+        gap = (cand - start) % 1440 or 1440
+        if gap < best_gap:
+            best, best_gap = f'{hours}:{minutes}', gap
+    return best
+`

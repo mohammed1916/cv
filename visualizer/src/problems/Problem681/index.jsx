@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'candidate', label: 'Try a time', description: 'Build a valid arrangement and measure the wait until it.' },
     { id: 'done', label: 'Complete', description: 'Report the arrangement with the shortest wait.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Time (JSON string, HH:MM)',
   url: 'https://leetcode.com/problems/next-closest-time/',
   complexity: 'O(1) time: at most 4 to the power 4 arrangements of four digits.',

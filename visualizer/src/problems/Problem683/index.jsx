@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'match', label: 'Pattern found', description: 'Two lit bulbs have exactly k dark bulbs between them.' },
     { id: 'done', label: 'Never', description: 'Every day was checked without a match.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'bulbs (JSON, day i lights position bulbs[i]) and k',
   url: 'https://leetcode.com/problems/k-empty-slots/',
   complexity: 'O(n * k) time with this scan, or O(n log n) with an ordered set. The visualization caps input at 30 bulbs.',

@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'blocked', label: 'Blocked', description: 'No route reaches the next tree.' },
     { id: 'done', label: 'Complete', description: 'Every tree has been cut.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Forest grid (JSON array of rows)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Forest grid (JSON array of rows)',
   url: 'https://leetcode.com/problems/cut-off-trees-for-golf-event/',
   complexity: 'O(T · (m·n)) time for T trees on an m×n grid, since each leg is a BFS. The order is fixed by sorting heights.',
   examples: [

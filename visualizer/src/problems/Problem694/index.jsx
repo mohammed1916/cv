@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'repeat', label: 'Repeat shape', description: 'This walk matches an island already counted.' },
     { id: 'done', label: 'Complete', description: 'Count the distinct walks.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Grid (JSON array of 0/1 strings)',
   url: 'https://leetcode.com/problems/number-of-distinct-islands/',
   complexity: 'O(rows * columns) time and space. The visualization caps the grid at 10 by 10.',
