@@ -4,7 +4,7 @@ export function describeDisjointSetOps(ops = [], label = String) {
     if (op.type === 'find') {
       const path = op.chain.map(label).join(' → ')
       const compressed = op.repointed.length
-        ? ` Path compression re-points ${op.repointed.map(label).join(', ')} straight to ${label(op.root)}.`
+        ? ` Path halving re-points ${op.repointed.map(r => `${label(r.node)} from ${label(r.from)} to ${label(r.to)}`).join(', ')}.`
         : ''
       return `find(${label(op.node)}): follow ${path}; the root is ${label(op.root)}.${compressed}`
     }

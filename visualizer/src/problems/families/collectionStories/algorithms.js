@@ -1,3 +1,4 @@
+import {StackqLog,stackqView} from '../../../components/shared/stackqModel.js';
 import { authoredSolvers } from './authoredBatches.js';
 import { nextSequenceSolvers } from './nextSequenceBatch.js';
 import { graphGridSolvers } from './graphGridAlgorithms.js';
@@ -86,7 +87,7 @@ export const solvers = {
     let best=s;for(let i=0;i<s.length;i++){const rotated=s.slice(i)+s.slice(0,i);if(rotated<best)best=rotated;emit(`k=1 permits only rotations. Compare rotation ${i} with the best so far.`,{sequence:rotated,metrics:{rotation:i,best}},'update');}return best;
   },
   901({prices},emit) {
-    const stack=[],output=[];prices.forEach((price,i)=>{let span=1;while(stack.length&&stack.at(-1)[0]<=price)span+=stack.pop()[1];stack.push([price,span]);output.push(span);emit(`Price ${price} absorbs blocks with prices no greater than itself; each stored block carries its full span.`,{index:i,output,table:stack,tableHeaders:['Price','Absorbed span']},'update');});return output;
+    const log=new StackqLog(),stack=log.lane('price blocks','stack',([price,span])=>`${price} ×${span}`),output=[];prices.forEach((price,i)=>{let span=1;while(stack.length&&stack.peek()[0]<=price){const block=stack.pop(`${price} is at least ${stack.peek()[0]}, so that block joins today's span.`);span+=block[1];}stack.push([price,span],`${price} is stored with its full span ${span}.`);output.push(span);emit(`Price ${price} absorbs blocks with prices no greater than itself; each stored block carries its full span.`,{index:i,output,table:stack.items,tableHeaders:['Price','Absorbed span'],...stackqView(log)},'update');});return output;
   },
   904({fruits},emit) {
     const counts=new Map();let left=0,best=0;fruits.forEach((v,right)=>{counts.set(v,(counts.get(v)||0)+1);while(counts.size>2){const out=fruits[left++],n=counts.get(out)-1;if(n)counts.set(out,n);else counts.delete(out);}best=Math.max(best,right-left+1);emit(`The window now contains ${counts.size} fruit types. Shrink only when a third type appears.`,{sequence:fruits,index:right,window:[left,right],table:[...counts],metrics:{best}},'update');});return best;
@@ -140,7 +141,7 @@ export const solvers = {
     const a=[...nums].sort((x,y)=>x-y);let moves=0;for(let i=1;i<a.length;i++){const old=a[i];a[i]=Math.max(a[i],a[i-1]+1);moves+=a[i]-old;emit(`At ${i}, raise ${old} only as far as ${a[i]}, the smallest value above its predecessor.`,{sequence:a,index:i,metrics:{added:a[i]-old,moves}},'update');}return moves;
   },
   946({pushed,popped},emit) {
-    const stack=[];let j=0;pushed.forEach((v,i)=>{stack.push(v);emit(`Push ${v} so it becomes available as the next stack top.`,{sequence:pushed,index:i,output:stack,metrics:{nextPop:popped[j]??'none'}},'update');while(stack.length&&stack.at(-1)===popped[j]){stack.pop();j++;emit('The stack top matches the next requested pop; remove it now.',{sequence:pushed,index:i,output:stack,metrics:{consumedPops:j,nextPop:popped[j]??'none'}},'update');}});return j===popped.length;
+    const log=new StackqLog(),stack=log.lane('stack','stack');let j=0;pushed.forEach((v,i)=>{stack.push(v,`${v} is pushed so it becomes the stack top.`);emit(`Push ${v} so it becomes available as the next stack top.`,{sequence:pushed,index:i,output:stack.items,metrics:{nextPop:popped[j]??'none'},...stackqView(log)},'update');while(stack.length&&stack.peek()===popped[j]){stack.pop(`the top ${stack.peek()} matches the next requested pop.`);j++;emit('The stack top matches the next requested pop; remove it now.',{sequence:pushed,index:i,output:stack.items,metrics:{consumedPops:j,nextPop:popped[j]??'none'},...stackqView(log)},'update');}});return j===popped.length;
   },
   948({tokens,power},emit) {
     const a=[...tokens].sort((x,y)=>x-y);let left=0,right=a.length-1,score=0,best=0;while(left<=right){if(power>=a[left]){power-=a[left++];score++;best=Math.max(best,score);}else if(score>0&&left<right){power+=a[right--];score--;}else break;emit('Buy score with the cheapest token when possible; otherwise sell the largest remaining token only when another purchase may follow.',{sequence:a,window:[left,right],metrics:{power,score,best}},'update');}return best;

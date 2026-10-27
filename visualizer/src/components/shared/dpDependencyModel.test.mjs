@@ -69,3 +69,18 @@ test('window follows the target in large tables and hides huge 1-D tables', () =
   assert.equal(dpWindow({ shape: 'bitmask', values: Array(1024).fill(0), target: 5, sources: [] }).hidden, true)
   assert.equal(dpWindow({ shape: 'bitmask', values: Array(32).fill(0), target: 5, sources: [] }).hidden, false)
 })
+
+test('window always contains the target when sources are far away (1-D)', () => {
+  const values = Array.from({ length: 25 }, (_, i) => i)
+  const spec = { shape: 'linear', values, target: [0, 24], sources: [{ cell: [0, 0] }, { cell: [0, 23] }] }
+  const w = dpWindow(spec)
+  assert.ok(w.columnStart <= 24 && 24 < w.columnEnd)
+  assert.ok(w.columnStart <= 23 && 23 < w.columnEnd)
+})
+
+test('window always contains the target for distant interval-DP sources', () => {
+  const values = Array.from({ length: 30 }, () => Array(30).fill(0))
+  const spec = { shape: 'grid', values, target: [0, 29], sources: [{ cell: [0, 0] }, { cell: [29, 29] }] }
+  const w = dpWindow(spec)
+  assert.ok(w.rowStart <= 0 && 0 < w.rowEnd && w.columnStart <= 29 && 29 < w.columnEnd)
+})

@@ -12,7 +12,7 @@ test('find records the walked chain and what path compression re-pointed', () =>
   assert.deepEqual(op.chain, [4, 3, 2, 1, 0])
   assert.equal(op.root, 0)
   assert.ok(op.repointed.length > 0)
-  assert.ok(op.repointed.every(node => dsu.parent[node] !== [0, 0, 1, 2, 3][node]))
+  assert.ok(op.repointed.every(r => dsu.parent[r.node] === r.to && r.to !== r.from))
 })
 
 test('union logs both finds then the merge decision, smaller tree under larger', () => {
@@ -70,12 +70,12 @@ test('every set appears as exactly one tree and every element once', () => {
 
 test('descriptions name the chain, the compression and the merge decision', () => {
   const lines = describeDisjointSetOps([
-    { type: 'find', node: 4, chain: [4, 3, 0], root: 0, repointed: [4] },
+    { type: 'find', node: 4, chain: [4, 3, 0], root: 0, repointed: [{ node: 4, from: 3, to: 0 }] },
     { type: 'union', a: 1, b: 2, rootA: 0, rootB: 2, merged: true, winner: 0, loser: 2, winnerSize: 3, loserSize: 1 },
     { type: 'union', a: 1, b: 3, rootA: 0, rootB: 0, merged: false },
   ], i => `n${i}`)
   assert.match(lines[0], /n4 → n3 → n0/)
-  assert.match(lines[0], /Path compression re-points n4/)
+  assert.match(lines[0], /Path halving re-points n4 from n3 to n0/)
   assert.match(lines[1], /smaller tree \(root n2, size 1\).*under root n0 \(size 3\).*size 4/)
   assert.match(lines[2], /nothing changes/)
 })
@@ -84,4 +84,18 @@ test('equal-sized trees are described as a tie, not as smaller and larger', () =
   const [line] = describeDisjointSetOps([{ type: 'union', a: 0, b: 1, rootA: 0, rootB: 1, merged: true, winner: 0, loser: 1, winnerSize: 1, loserSize: 1 }], i => `n${i}`)
   assert.match(line, /Both trees have size 1, so root n1 hangs under root n0, giving size 2/)
   assert.doesNotMatch(line, /smaller tree/)
+})
+
+test('narration reports the real before/after parents under path halving', async () => {
+  const { AuthoredUnionFind } = await import('../../problems/families/collectionStories/authoredUnionFind.js')
+  const dsu = new AuthoredUnionFind(8)
+  for (const [a, b] of [[0, 1], [2, 3], [4, 5], [6, 7], [0, 2], [4, 6], [0, 4]]) dsu.union(a, b)
+  dsu.takeOps()
+  dsu.find(7)
+  const [op] = dsu.takeOps()
+  assert.deepEqual(op.chain, [7, 6, 4, 0])
+  assert.equal(dsu.parent[7], 4)
+  const text = describeDisjointSetOps([op])[0]
+  assert.match(text, /7 from 6 to 4/)
+  assert.doesNotMatch(text, /straight to/)
 })

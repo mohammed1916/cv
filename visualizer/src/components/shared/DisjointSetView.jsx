@@ -15,7 +15,7 @@ export default function DisjointSetView({ parent, size, labels, ops = [] }) {
   for (const op of ops) {
     if (op.type === 'find') {
       op.chain.forEach(i => { touched[idOf(i)] = 'focus' })
-      op.repointed.forEach(i => { touched[idOf(i)] = 'target' })
+      op.repointed.forEach(r => { touched[idOf(r.node)] = 'target' })
       touched[idOf(op.root)] = 'best'
     } else if (op.merged) {
       touched[idOf(op.winner)] = 'best'

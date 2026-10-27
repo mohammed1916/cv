@@ -10,7 +10,7 @@ export class AuthoredUnionFind {
   for(let r=x;this.parent[r]!==r;){r=this.parent[r];chain.push(r);}
   while(this.parent[x]!==x){this.parent[x]=this.parent[this.parent[x]];x=this.parent[x];}
   const root=chain[chain.length-1];
-  const repointed=chain.filter(node=>this.parent[node]!==before[node]);
+  const repointed=chain.filter(node=>this.parent[node]!==before[node]).map(node=>({node,from:before[node],to:this.parent[node]}));
   this.ops.push({type:'find',node:start,chain,root,repointed});
   return x;
  }

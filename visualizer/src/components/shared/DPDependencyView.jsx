@@ -11,6 +11,7 @@ export default function DPDependencyView({ title = 'DP transition', labels = {},
   const roles = dpCellRoles(spec)
   const win = dpWindow(spec)
   const lines = describeDpTransition(spec)
+  const hiddenSources = n.sources.filter(({ cell: [r, c] }) => r < win.rowStart || r >= win.rowEnd || c < win.columnStart || c >= win.columnEnd)
   const rows = []
   for (let r = win.rowStart; r < win.rowEnd; r++) rows.push(r)
   const columns = []
@@ -26,6 +27,9 @@ export default function DPDependencyView({ title = 'DP transition', labels = {},
         <span aria-hidden="true"> ➜ </span><code>{dpCellName(n.shape, n.target)}</code>
       </li>)}
     </ul>}
+    {!win.hidden && hiddenSources.length > 0 && <p className="dp-deps__legend" role="note">
+      Outside this window: {hiddenSources.map(s => dpCellName(n.shape, s.cell)).join(', ')}
+    </p>}
     {!win.hidden && <div className="dp-deps__scroll"><table className="dp-deps__table">
       <caption>{n.oneD ? 'Table' : 'Rows'}{win.rowEnd - win.rowStart < n.values.length || win.columnEnd - win.columnStart < (n.values[0]?.length ?? 0) ? ' (window around the active cell)' : ''}</caption>
       <thead><tr>{!n.oneD && <th scope="col" />}{columns.map(c => <th scope="col" key={c}>{columnLabel(c)}</th>)}</tr></thead>

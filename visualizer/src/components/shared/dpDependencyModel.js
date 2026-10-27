@@ -76,10 +76,15 @@ export function dpWindow(spec) {
   const rows = values.length, columns = values[0]?.length ?? 0
   if (oneD && columns > MAX_LINEAR_CELLS) return { hidden: true, rowStart: 0, rowEnd: 0, columnStart: 0, columnEnd: 0 }
   const cells = [target, ...sources.map(s => s.cell)].filter(([r, c]) => r < rows && c < columns)
+  if (!cells.length) return { hidden: false, rowStart: 0, rowEnd: Math.min(rows, MAX_ROWS), columnStart: 0, columnEnd: Math.min(columns, MAX_COLUMNS) }
   const span = (index, size, limit) => {
     if (size <= limit) return [0, size]
     const lo = Math.min(...cells.map(c => c[index])), hi = Math.max(...cells.map(c => c[index]))
-    const start = Math.max(0, Math.min(lo - 1, size - limit, hi + 2 - limit))
+    const target = cells[0][index]
+    // Prefer showing every source; when they are too far apart, always keep the target and the nearest sources.
+    const start = hi - lo + 3 <= limit
+      ? Math.max(0, Math.min(lo - 1, size - limit, hi + 2 - limit))
+      : Math.max(0, Math.min(target - 1, size - limit, target + 2 - limit))
     return [start, Math.min(size, start + limit)]
   }
   const [rowStart, rowEnd] = span(0, rows, MAX_ROWS), [columnStart, columnEnd] = span(1, columns, MAX_COLUMNS)
