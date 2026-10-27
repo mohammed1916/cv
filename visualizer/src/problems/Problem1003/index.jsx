@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'pop', label: 'Remove abc', description: 'The top three letters form abc, so remove them.' },
     { id: 'done', label: 'Complete', description: 'The word is valid only if the stack is empty.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Word (JSON object with s)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Word (JSON object with s)',
   url: 'https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/',
   complexity: 'O(n) time and O(n) space. The visualization caps input at 20 letters.',
   examples: [

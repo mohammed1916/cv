@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'leaf', label: 'Leaf', description: 'Read the path from the leaf up and compare.' },
     { id: 'done', label: 'Complete', description: 'Report the smallest string.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Tree of letter values 0-25 (JSON level order)',
   url: 'https://leetcode.com/problems/smallest-string-starting-from-leaf/',
   complexity: 'O(n * h) time for string building. The visualization caps input at 15 nodes.',

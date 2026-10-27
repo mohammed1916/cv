@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'skip', label: 'Empty subtree', description: 'The next value does not fit these bounds, so this subtree is empty.' },
     { id: 'done', label: 'Complete', description: 'Serialize the tree in level order.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Preorder traversal (JSON object with preorder)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Preorder traversal (JSON object with preorder)',
   url: 'https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/',
   complexity: 'O(n) time and O(h) recursion space. The visualization caps input at 12 values.',
   examples: [

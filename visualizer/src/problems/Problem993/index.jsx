@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'found', label: 'Record', description: 'Store the depth and parent of a target value.' },
     { id: 'done', label: 'Decide', description: 'Compare depths and parents once both values are recorded.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Tree (JSON level order) with x and y: {"arr": [...], "x": n, "y": n}',
   url: 'https://leetcode.com/problems/cousins-in-binary-tree/',
   complexity: 'O(n) time and O(n) space for the walk. The visualization caps input at 15 nodes.',

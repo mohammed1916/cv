@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'complete', label: 'Count', description: 'A full arrangement is squareful; add one to the count.' },
     { id: 'done', label: 'Return', description: 'Report the number of distinct squareful arrangements.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Integers from 0 to 20 (JSON): {"nums": [...]}',
   url: 'https://leetcode.com/problems/number-of-squareful-arrays/',
   complexity: 'Worst case O(n!) time for backtracking over at most 8 values; duplicate skipping prunes equal values.',

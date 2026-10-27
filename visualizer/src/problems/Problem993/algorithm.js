@@ -31,7 +31,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { arr, x, y } = input
   const root = treeFromLevelOrder(arr)
-  const frames = [{ phase: 'start', activeLine: L('queue = deque'), node: null, depths: {}, found: new Map(), result: null, message: `Search for ${x} and ${y} with a breadth-first walk. Each node records its depth and parent.` }]
+  const frames = [{ phase: 'start', activeLine: L('set queue to hold'), node: null, depths: {}, found: new Map(), result: null, message: `Search for ${x} and ${y} with a breadth-first walk. Each node records its depth and parent.` }]
   const queue = [{ node: root, parent: null, depth: 0 }]
   const seen = new Map()
   const depths = {}
@@ -39,10 +39,10 @@ export function buildTrace(input) {
   for (let head = 0; head < queue.length && result === null; head++) {
     const { node, parent, depth } = queue[head]
     depths[node.id] = depth
-    frames.push({ phase: 'visit', activeLine: L('node, parent, depth = queue.popleft()'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Dequeue ${node.value} at depth ${depth}${parent === null ? ' (the root has no parent)' : `, child of ${parent}`}.` })
+    frames.push({ phase: 'visit', activeLine: L('take the front entry'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Dequeue ${node.value} at depth ${depth}${parent === null ? ' (the root has no parent)' : `, child of ${parent}`}.` })
     if (node.value === x || node.value === y) {
       seen.set(node.value, { depth, parent, id: node.id })
-      frames.push({ phase: 'found', activeLine: L('seen[node.val] = (depth, parent)'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Record ${node.value}: depth ${depth}, parent ${parent ?? 'none'}.` })
+      frames.push({ phase: 'found', activeLine: L('record the depth and parent of node'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Record ${node.value}: depth ${depth}, parent ${parent ?? 'none'}.` })
     }
     if (seen.has(x) && seen.has(y)) {
       const a = seen.get(x), b = seen.get(y)
@@ -50,7 +50,7 @@ export function buildTrace(input) {
       const why = result
         ? `${x} and ${y} are cousins: both at depth ${a.depth} with different parents.`
         : a.depth !== b.depth ? `${x} and ${y} are not cousins: depths ${a.depth} and ${b.depth} differ.` : `${x} and ${y} are not cousins: they share parent ${a.parent}.`
-      frames.push({ phase: 'done', activeLine: L('return dx == dy and px != py'), node: null, depths: { ...depths }, found: new Map(seen), result, message: why })
+      frames.push({ phase: 'done', activeLine: L('return true when'), node: null, depths: { ...depths }, found: new Map(seen), result, message: why })
       break
     }
     if (node.left) queue.push({ node: node.left, parent: node.value, depth: depth + 1 })
@@ -58,14 +58,55 @@ export function buildTrace(input) {
   }
   if (result === null) {
     result = false
-    frames.push({ phase: 'done', activeLine: L('return False'), node: null, depths: { ...depths }, found: new Map(seen), result, message: 'The walk finished without finding both values.' })
+    frames.push({ phase: 'done', activeLine: L('return false'), node: null, depths: { ...depths }, found: new Map(seen), result, message: 'The walk finished without finding both values.' })
   }
   return { input, root, result, frames }
 }
 
-export const code = `from collections import deque
+export const code = `cousins in a binary tree (root, x, y):
+  set queue to hold (root, no parent, depth 0)
+  set seen to an empty record
+  while the queue is not empty:
+    take the front entry as node, parent, depth
+    if node holds x or y then
+      record the depth and parent of node under its value in seen
+    if both x and y are recorded in seen then
+      read the depth and parent of x and of y
+      return true when the depths are equal and the parents differ
+    if node has a left child then
+      add (left child, node's value, depth + 1) to the back of the queue
+    if node has a right child then
+      add (right child, node's value, depth + 1) to the back of the queue
+  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-def isCousins(root, x, y):
+export const python = `from collections import deque
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def build(arr):
+    if not arr or arr[0] is None:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    cursor = 1
+    for node in queue:
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.left = TreeNode(arr[cursor])
+            queue.append(node.left)
+        cursor += 1
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.right = TreeNode(arr[cursor])
+            queue.append(node.right)
+        cursor += 1
+    return root
+
+def is_cousins(arr, x, y):
+    root = build(arr)
     queue = deque([(root, None, 0)])
     seen = {}
     while queue:
@@ -80,5 +121,5 @@ def isCousins(root, x, y):
             queue.append((node.left, node.val, depth + 1))
         if node.right:
             queue.append((node.right, node.val, depth + 1))
-    return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return False
+`

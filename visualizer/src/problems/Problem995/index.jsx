@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'impossible', label: 'Impossible', description: 'The window would run past the end of the array.' },
     { id: 'done', label: 'Return', description: 'Every bit is 1; return the number of flips.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Binary array and k (JSON): {"nums": [...], "k": n}',
   url: 'https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/',
   complexity: 'O(n * k) time for the visualized window recomputation; the greedy itself is O(n) time and O(n) space. The visualization caps input at 12 bits.',

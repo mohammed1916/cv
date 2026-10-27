@@ -25,15 +25,15 @@ export function buildTrace(input) {
   const flipped = Array(n).fill(0)
   let active = 0
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('flipped = [0] * n'), i: -1, flipped: [...flipped], bits: [...nums], active, count, result: null, message: `Scan left to right. A window of ${k} starting at i flips bits i to i+${k - 1}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set flipped to'), i: -1, flipped: [...flipped], bits: [...nums], active, count, result: null, message: `Scan left to right. A window of ${k} starting at i flips bits i to i+${k - 1}.` }]
   let result = null
   for (let i = 0; i < n; i++) {
     if (i >= k) {
       active ^= flipped[i - k]
-      frames.push({ phase: 'expire', activeLine: L('active ^= flipped[i - k]'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i}: the window that started at ${i - k} no longer covers it, so the flip parity is ${active}.` })
+      frames.push({ phase: 'expire', activeLine: L('remove flipped at i - k'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i}: the window that started at ${i - k} no longer covers it, so the flip parity is ${active}.` })
     }
     if (nums[i] !== active) {
-      frames.push({ phase: 'scan', activeLine: L('if nums[i] == active'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} reads ${nums[i]} with flip parity ${active}, which is already 1. No flip here.` })
+      frames.push({ phase: 'scan', activeLine: L('if nums at i equals active'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} reads ${nums[i]} with flip parity ${active}, which is already 1. No flip here.` })
       continue
     }
     if (i + k > n) {
@@ -44,7 +44,7 @@ export function buildTrace(input) {
     flipped[i] = 1
     active ^= 1
     count++
-    frames.push({ phase: 'flip', activeLine: L('active ^= 1'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} is 0 with no pending flip. Flip the window starting at ${i}; ${count} flip${count === 1 ? '' : 's'} so far.` })
+    frames.push({ phase: 'flip', activeLine: L('toggle active'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} is 0 with no pending flip. Flip the window starting at ${i}; ${count} flip${count === 1 ? '' : 's'} so far.` })
   }
   if (result === null) {
     result = count
@@ -53,7 +53,22 @@ export function buildTrace(input) {
   return { input, result, frames }
 }
 
-export const code = `def minKBitFlips(nums, k):
+export const code = `minimum k-bit flips (nums, k):
+  set n to the length of nums
+  set flipped to n zeros, meaning no window starts at any index yet
+  set active to 0, the parity of flips covering the current index
+  set count to 0
+  for each index i from 0 to n - 1:
+    if i is at least k then
+      remove flipped at i - k from active, since that window stops covering i
+    if nums at i equals active then
+      if i + k is greater than n then
+        return -1
+      set flipped at i to 1, toggle active, and add 1 to count
+  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def min_k_bit_flips(nums, k):
     n = len(nums)
     flipped = [0] * n
     active = 0
@@ -67,5 +82,5 @@ export const code = `def minKBitFlips(nums, k):
             flipped[i] = 1
             active ^= 1
             count += 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return count
+`

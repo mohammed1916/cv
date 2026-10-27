@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'relink', label: 'Relink', description: 'The right child returned by the recursion is attached.' },
     { id: 'done', label: 'Complete', description: 'Serialize the new maximum tree.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with arr (maximum tree, level order) and val (JSON)',
   url: 'https://leetcode.com/problems/maximum-binary-tree-ii/',
   complexity: 'O(h) time, where h is the height of the tree. Only the right spine is walked. The visualization caps the tree at 12 entries.',
@@ -25,10 +25,10 @@ const definition = {
 export default function MaximumBinaryTreeII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const roles = {}
-    if (step.node !== null) roles[step.node] = 'active'
+    if (step.node !== null) roles[step.node] = step.node === step.newId ? 'match' : 'active'
+    const tags = step.node === step.newId ? { [step.newId]: 'new' } : {}
     return <>
-      <BinaryTreeLane title="Maximum tree of arr" root={run.root} roles={roles} />
-      {step.phase === 'done' && <BinaryTreeLane title="Maximum tree of arr + val" root={run.resultRoot} />}
+      <BinaryTreeLane title={step.phase === 'done' ? 'Maximum tree of arr + val' : 'Tree being built'} root={step.tree} roles={roles} tags={tags} />
       <output aria-label="Insertion">{`Inserting ${run.input.val} after ${run.input.arr.length} tree entries`}</output>
     </>
   }} renderReasoning={({ step }) => <>

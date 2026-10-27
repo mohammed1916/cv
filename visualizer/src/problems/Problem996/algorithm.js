@@ -15,28 +15,28 @@ export function buildTrace(input) {
   const used = Array(n).fill(false)
   const sequence = []
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('nums.sort()'), index: null, sequence: [], used: [...used], count, result: null, message: `Sort the values to ${sorted.join(', ')}. Equal values are interchangeable, so each repeated value is tried once per position.` }]
+  const frames = [{ phase: 'start', activeLine: L('sort nums'), index: null, sequence: [], used: [...used], count, result: null, message: `Sort the values to ${sorted.join(', ')}. Equal values are interchangeable, so each repeated value is tried once per position.` }]
   const snapshot = (phase, activeLine, index, message, result = null) => frames.push({ phase, activeLine: L(activeLine), index, sequence: [...sequence], used: [...used], count, result, message })
   const backtrack = () => {
     if (sequence.length === n) {
       count++
-      snapshot('complete', 'count += 1', null, `A full arrangement [${sequence.join(', ')}] is squareful. Total so far: ${count}.`)
+      snapshot('complete', 'add 1 to count', null, `A full arrangement [${sequence.join(', ')}] is squareful. Total so far: ${count}.`)
       return
     }
     for (let i = 0; i < n; i++) {
       if (used[i]) continue
       if (i > 0 && sorted[i] === sorted[i - 1] && !used[i - 1]) {
-        snapshot('duplicate', 'if i > 0 and nums[i] == nums[i - 1]', i, `Value ${sorted[i]} at index ${i} repeats an unused value just before it, so this arrangement was already tried.`)
+        snapshot('duplicate', 'if i > 0 and nums[i] equals nums[i - 1]', i, `Value ${sorted[i]} at index ${i} repeats an unused value just before it, so this arrangement was already tried.`)
         continue
       }
       const prev = sequence.at(-1)
       if (prev !== undefined && !isSquare(prev + sorted[i])) {
-        snapshot('reject', 'if seq and not is_square', i, `${prev} + ${sorted[i]} = ${prev + sorted[i]} is not a perfect square. Skip ${sorted[i]} here.`)
+        snapshot('reject', 'is not a perfect square', i, `${prev} + ${sorted[i]} = ${prev + sorted[i]} is not a perfect square. Skip ${sorted[i]} here.`)
         continue
       }
       used[i] = true
       sequence.push(sorted[i])
-      snapshot('place', 'used[i] = True', i, prev === undefined ? `Start the arrangement with ${sorted[i]}.` : `${prev} + ${sorted[i]} = ${prev + sorted[i]} is a perfect square. Place ${sorted[i]}.`)
+      snapshot('place', 'mark index i as used', i, prev === undefined ? `Start the arrangement with ${sorted[i]}.` : `${prev} + ${sorted[i]} = ${prev + sorted[i]} is a perfect square. Place ${sorted[i]}.`)
       backtrack()
       sequence.pop()
       used[i] = false
@@ -47,13 +47,34 @@ export function buildTrace(input) {
   return { input, result: count, frames }
 }
 
-export const code = `from math import isqrt
+export const code = `squareful arrangements (nums):
+  sort nums so equal values sit together
+  set n to the number of values
+  mark every index as unused
+  set count to 0
+  build(an empty arrangement)
+  return count
+
+build(arrangement):
+  if the arrangement holds all n values then
+    add 1 to count
+    stop this branch
+  for each index i from 0 to n - 1:
+    if index i is used then skip it
+    if i > 0 and nums[i] equals nums[i - 1] and nums[i - 1] is unused then skip it
+    if the arrangement is not empty and its last value plus nums[i] is not a perfect square then skip it
+    mark index i as used and append nums[i] to the arrangement
+    build(arrangement)
+    remove the last value from the arrangement and mark index i unused`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from math import isqrt
 
 def is_square(n):
     return isqrt(n) ** 2 == n
 
-def numSquarefulPerms(nums):
-    nums.sort()
+def num_squareful_perms(nums):
+    nums = sorted(nums)
     n = len(nums)
     used = [False] * n
     seq = []
@@ -76,5 +97,5 @@ def numSquarefulPerms(nums):
             seq.pop()
             used[i] = False
     backtrack()
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return count
+`

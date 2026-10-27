@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'off', label: 'Turn off', description: 'Switch off lamps in the 3x3 block around the query.' },
     { id: 'done', label: 'Complete', description: 'Return the recorded answers.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object with n, lamps and queries (JSON)',
   url: 'https://leetcode.com/problems/grid-illumination/',
   complexity: 'O(L + Q) expected time with hash maps, where L is the number of lamps and Q the queries. Each lamp goes off at most once. The visualization caps n at 8.',
