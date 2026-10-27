@@ -23,12 +23,31 @@ export function buildTrace(s) {
   return { input: s, result, frames }
 }
 
-export const code = `def checkValidString(s):
-    lo = hi = 0
+export const code = `set low and high to 0
+for each character c in s
+  if c is an opening bracket then add 1 to low and to high
+  otherwise if c is a closing bracket then subtract 1 from low and from high
+  otherwise c is a star: subtract 1 from low and add 1 to high
+  if high is negative then return false
+  set low to the larger of low and 0
+return true only if low is 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 reports a rejection, line 4 the clamped interval after each character, line 5 the return.
+export const LINE_MAP = { 1: 1, 3: 6, 4: 7, 5: 8 }
+
+export const python = `def check_valid_string(s):
+    low = high = 0
     for c in s:
-        if c == '(': lo, hi = lo + 1, hi + 1
-        elif c == ')': lo, hi = lo - 1, hi - 1
-        else: lo, hi = lo - 1, hi + 1
-        if hi < 0: return False
-        lo = max(lo, 0)
-    return lo == 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        if c == '(':
+            low += 1
+            high += 1
+        elif c == ')':
+            low -= 1
+            high -= 1
+        else:
+            low -= 1
+            high += 1
+        if high < 0:
+            return False
+        low = max(low, 0)
+    return low == 0`

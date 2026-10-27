@@ -19,6 +19,18 @@ export function buildTrace(n) {
   return { input: n, result: ok, bits, frames }
 }
 
-export const code = `def hasAlternatingBits(n):
-    x = n ^ (n >> 1)
-    return x & (x + 1) == 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `write n in binary as the list of its bits
+for each adjacent pair of bits
+  compare the two bits
+  if they are equal then return false
+return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 compares each adjacent pair of bits; line 1 and line 5 match the setup and return.
+export const LINE_MAP = { 1: 1, 3: 3, 5: 5 }
+
+export const python = `def has_alternating_bits(n):
+    bits = bin(n)[2:]
+    for i in range(len(bits) - 1):
+        if bits[i] == bits[i + 1]:
+            return False
+    return True`

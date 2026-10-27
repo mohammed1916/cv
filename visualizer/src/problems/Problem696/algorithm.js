@@ -24,6 +24,24 @@ export function buildTrace(s) {
   return { input: s, result, runs, frames }
 }
 
-export const code = `def countBinarySubstrings(s):
-    runs = [len(list(g)) for _, g in groupby(s)]
-    return sum(min(a, b) for a, b in zip(runs, runs[1:]))`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set the run lengths list to empty and the current run length to 1
+for each character after the first
+  if it equals the previous character, extend the current run
+  otherwise record the finished run length and start a new run at 1
+record the last run length
+return the sum over adjacent pairs of the smaller of the two run lengths`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 rolls the runs forward (line 4 here); line 5 returns the total (line 6 here).
+export const LINE_MAP = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 6 }
+
+export const python = `def count_binary_substrings(s):
+    runs = []
+    current = 1
+    for i in range(1, len(s)):
+        if s[i] == s[i - 1]:
+            current += 1
+        else:
+            runs.append(current)
+            current = 1
+    runs.append(current)
+    return sum(min(a, b) for a, b in zip(runs, runs[1:]))`

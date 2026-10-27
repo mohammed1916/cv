@@ -21,8 +21,19 @@ export function buildTrace({ prices, fee }) {
   return { input: { prices, fee }, result, frames }
 }
 
-export const code = `def maxProfit(prices, fee):
-    cash, hold = 0, -prices[0]
-    for p in prices[1:]:
-        cash, hold = max(cash, hold + p - fee), max(hold, cash - p)
-    return cash`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set cash to 0 and hold to the negative of the first price
+for each later price
+  compute the new cash as the larger of cash and hold plus price minus fee (sell today)
+  compute the new hold as the larger of hold and the previous cash minus price (buy today)
+  replace cash and hold with the new values
+return cash`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 compares keeping cash with selling and keeping stock with buying; line 5 is the return.
+export const LINE_MAP = { 1: 1, 4: 5, 5: 6 }
+
+export const python = `def max_profit(prices, fee):
+    cash = 0
+    hold = -prices[0]
+    for price in prices[1:]:
+        cash, hold = max(cash, hold + price - fee), max(hold, cash - price)
+    return cash`

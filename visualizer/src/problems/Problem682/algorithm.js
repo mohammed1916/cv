@@ -23,11 +23,27 @@ export function buildTrace(ops) {
   return { input: ops, result, frames }
 }
 
-export const code = `def calPoints(operations):
-    stack = []
+export const code = `create an empty stack of valid round scores
+for each operation in order
+  if the operation is a number then push it
+  otherwise if it is C then remove the last score, if D push twice the last score, if + push the sum of the last two scores
+return the sum of the scores left on the stack`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 applies any operation to the stack: a number pushes (line 3), a C, D or + edits the stack (line 4).
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return /^Apply [-+]?\d+ /.test(frame.message) ? 3 : 4
+  return ({ 1: 1, 5: 5 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def cal_points(operations):
+    scores = []
     for op in operations:
-        if op == '+': stack.append(stack[-1] + stack[-2])
-        elif op == 'D': stack.append(stack[-1] * 2)
-        elif op == 'C': stack.pop()
-        else: stack.append(int(op))
-    return sum(stack)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        if op == 'C':
+            scores.pop()
+        elif op == 'D':
+            scores.append(2 * scores[-1])
+        elif op == '+':
+            scores.append(scores[-1] + scores[-2])
+        else:
+            scores.append(int(op))
+    return sum(scores)`

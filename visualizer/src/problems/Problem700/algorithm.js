@@ -31,7 +31,64 @@ export function buildTrace({ root, val }) {
   return { input: { root, val }, root: treeFromLevelOrder(root), result, frames }
 }
 
-export const code = `def searchBST(root, val):
-    while root and root.val != val:
-        root = root.left if val < root.val else root.right
-    return root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set current to the root
+while current exists
+  compare the target with the current value
+  if they are equal, return the whole subtree at current; otherwise move to the left child for a smaller target or the right child for a larger one
+return an empty subtree`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 either returns the matching subtree or reports a missing child; line 5 returns the result.
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return /missing child/.test(frame.message) ? 5 : 4
+  if (frame.activeLine === 5) return /^Return \[\]/.test(frame.message) ? 5 : 4
+  return ({ 1: 1, 3: 3 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def search_bst(root, val):
+    values, lefts, rights = [], [], []
+
+    def make(value):
+        values.append(value)
+        lefts.append(None)
+        rights.append(None)
+        return len(values) - 1
+
+    if not root or root[0] is None:
+        return []
+    start = make(root[0])
+    queue = [start]
+    head = 0
+    i = 1
+    while head < len(queue) and i < len(root):
+        current = queue[head]
+        head += 1
+        if root[i] is not None:
+            lefts[current] = make(root[i])
+            queue.append(lefts[current])
+        i += 1
+        if i < len(root) and root[i] is not None:
+            rights[current] = make(root[i])
+            queue.append(rights[current])
+        i += 1
+
+    current = start
+    while current is not None and values[current] != val:
+        current = lefts[current] if val < values[current] else rights[current]
+    if current is None:
+        return []
+
+    result = [values[current]]
+    queue = [current]
+    head = 0
+    while head < len(queue):
+        node = queue[head]
+        head += 1
+        for child in (lefts[node], rights[node]):
+            if child is None:
+                result.append(None)
+            else:
+                result.append(values[child])
+                queue.append(child)
+    while result and result[-1] is None:
+        result.pop()
+    return result`

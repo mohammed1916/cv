@@ -23,13 +23,27 @@ export function buildTrace({ nums, k }) {
   return { input: { nums, k }, result: count, frames }
 }
 
-export const code = `def numSubarrayProductLessThanK(nums, k):
-    if k <= 1: return 0
-    l, product, count = 0, 1, 0
-    for r, x in enumerate(nums):
-        product *= x
+export const code = `if k is at most 1, return 0
+set left to 0, product to 1, and count to 0
+for each index right with value v in nums
+  multiply product by v
+  while product is at least k, divide product by nums[left] and increase left
+  add right minus left plus 1 to count
+return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 handles the k at most 1 threshold (line 1 here); line 1 sets up the window (line 2 here).
+export const LINE_MAP = { 1: 2, 3: 1, 4: 6, 5: 7 }
+
+export const python = `def num_subarray_product_less_than_k(nums, k):
+    if k <= 1:
+        return 0
+    left = 0
+    product = 1
+    count = 0
+    for right, value in enumerate(nums):
+        product *= value
         while product >= k:
-            product //= nums[l]
-            l += 1
-        count += r - l + 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+            product //= nums[left]
+            left += 1
+        count += right - left + 1
+    return count`

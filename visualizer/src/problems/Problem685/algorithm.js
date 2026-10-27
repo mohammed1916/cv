@@ -40,19 +40,47 @@ export function buildTrace(edges) {
   return { input: edges, result, removed, frames }
 }
 
-export const code = `def findRedundantDirectedConnection(edges):
-    parent = [None] * (len(edges) + 1)
-    first = second = None
-    for i, (u, v) in enumerate(edges):
-        if parent[v] is not None:
-            first, second = parent[v], i
-        else: parent[v] = i
-    dsu = list(range(len(edges) + 1))
-    cycle = None
-    for i, (u, v) in enumerate(edges):
-        if i == second: continue
-        if find(dsu, u) == find(dsu, v): cycle = i; break
-        dsu[find(dsu, u)] = find(dsu, v)
-    if second is None: return edges[cycle]
-    if cycle is None: return edges[second]
-    return edges[first]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `give every node no parent and clear the conflict pair
+for each edge (u, v) in input order
+  if v already has a parent then record the earlier parent edge and this later edge as the conflict
+  otherwise set the parent of v to u
+set up union-find with every node in its own set
+for each edge (u, v) in input order, skipping the later conflicting edge
+  if u and v are already in the same set then return the earlier parent edge when there is a conflict, otherwise (u, v)
+  otherwise join the sets of u and v
+return the later conflicting edge`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 ends either the parent-conflict pass (no cycle: remove the later edge) or the cycle pass.
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return frame.message.startsWith('Skipping') ? 9 : 7
+  return ({ 1: 1, 3: 3, 5: 9 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_redundant_directed_connection(edges):
+    n = len(edges)
+    parent = [0] * (n + 1)
+    earlier = later = None
+    later_index = -1
+    for index, (u, v) in enumerate(edges):
+        if parent[v] != 0:
+            earlier = [parent[v], v]
+            later = [u, v]
+            later_index = index
+        else:
+            parent[v] = u
+    root = list(range(n + 1))
+
+    def find(x):
+        while root[x] != x:
+            root[x] = root[root[x]]
+            x = root[x]
+        return x
+
+    for index, (u, v) in enumerate(edges):
+        if index == later_index:
+            continue
+        ru, rv = find(u), find(v)
+        if ru == rv:
+            return earlier if earlier is not None else [u, v]
+        root[rv] = ru
+    return later`

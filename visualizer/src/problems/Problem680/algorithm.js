@@ -25,14 +25,28 @@ export function buildTrace(s) {
   return { input: s, result: true, frames }
 }
 
-export const code = `def validPalindrome(s):
-    def pal(l, r):
-        while l < r:
-            if s[l] != s[r]: return False
-            l, r = l + 1, r - 1
+export const code = `set left to the first index and right to the last index
+while left is less than right and the characters at left and right are equal
+  move left one step inward and right one step inward
+if left is at least right then return true
+return whether deleting the left character or the right character leaves a palindrome`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 is the endpoint comparison, line 5 is the return.
+export const LINE_MAP = { 1: 1, 3: 2, 5: 5 }
+
+export const python = `def valid_palindrome(s):
+    def is_palindrome(i, j):
+        while i < j:
+            if s[i] != s[j]:
+                return False
+            i += 1
+            j -= 1
         return True
-    l, r = 0, len(s) - 1
-    while l < r:
-        if s[l] != s[r]: return pal(l + 1, r) or pal(l, r - 1)
-        l, r = l + 1, r - 1
-    return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+    left, right = 0, len(s) - 1
+    while left < right and s[left] == s[right]:
+        left += 1
+        right -= 1
+    if left >= right:
+        return True
+    return is_palindrome(left + 1, right) or is_palindrome(left, right - 1)`

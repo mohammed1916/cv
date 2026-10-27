@@ -28,15 +28,61 @@ export function buildTrace(values) {
   return { input: values, root, result: best, frames }
 }
 
-export const code = `def longestUnivaluePath(root):
+export const code = `set best to 0
+define arm(node) as the longest equal-value path going down from node, counted in edges
+  if node is empty, return 0; otherwise get the arm of each child first
+  left is one more than the left child's arm when the left child has the same value as node, otherwise 0
+  right is one more than the right child's arm when the right child has the same value as node, otherwise 0
+  set best to the larger of best and left plus right
+  return the larger of left and right
+call arm on the root
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 gathers the child arms, line 4 joins them and updates the best path, line 5 returns.
+export const LINE_MAP = { 1: 1, 3: 3, 4: 6, 5: 9 }
+
+export const python = `def longest_univalue_path(root):
+    if not root or root[0] is None:
+        return 0
+    values, lefts, rights = [], [], []
+
+    def make(value):
+        values.append(value)
+        lefts.append(None)
+        rights.append(None)
+        return len(values) - 1
+
+    start = make(root[0])
+    queue = [start]
+    head = 0
+    i = 1
+    while head < len(queue) and i < len(root):
+        current = queue[head]
+        head += 1
+        if root[i] is not None:
+            lefts[current] = make(root[i])
+            queue.append(lefts[current])
+        i += 1
+        if i < len(root) and root[i] is not None:
+            rights[current] = make(root[i])
+            queue.append(rights[current])
+        i += 1
+
     best = 0
+
     def arm(node):
         nonlocal best
-        if not node: return 0
-        left, right = arm(node.left), arm(node.right)
-        l = left + 1 if node.left and node.left.val == node.val else 0
-        r = right + 1 if node.right and node.right.val == node.val else 0
-        best = max(best, l + r)
-        return max(l, r)
-    arm(root)
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        left_len = right_len = 0
+        if lefts[node] is not None:
+            child = arm(lefts[node])
+            if values[lefts[node]] == values[node]:
+                left_len = child + 1
+        if rights[node] is not None:
+            child = arm(rights[node])
+            if values[rights[node]] == values[node]:
+                right_len = child + 1
+        best = max(best, left_len + right_len)
+        return max(left_len, right_len)
+
+    arm(start)
+    return best`

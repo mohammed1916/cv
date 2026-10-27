@@ -30,15 +30,27 @@ export function buildTrace({ n, k, row, column }) {
   return { input: { n, k, row, column }, result, frames }
 }
 
-export const code = `def knightProbability(n, k, row, col):
-    dp = [[0.0] * n for _ in range(n)]
-    dp[row][col] = 1.0
+export const code = `place probability one on the starting square
+repeat k times
+  create an empty board of zero probabilities for the next move
+  send one eighth of each square's probability along every knight move that stays on the board
+  replace the board with the new probabilities, without renormalizing
+return the total probability still on the board`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 1 is the start, line 4 the transfer of one eighth along each move, line 5 the return.
+export const LINE_MAP = { 1: 1, 4: 4, 5: 6 }
+
+export const python = `def knight_probability(n, k, row, column):
+    moves = [(1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1), (-1, 2)]
+    board = [[0.0] * n for _ in range(n)]
+    board[row][column] = 1.0
     for _ in range(k):
-        nxt = [[0.0] * n for _ in range(n)]
+        following = [[0.0] * n for _ in range(n)]
         for r in range(n):
             for c in range(n):
-                for dr, dc in MOVES:
-                    if 0 <= r + dr < n and 0 <= c + dc < n:
-                        nxt[r + dr][c + dc] += dp[r][c] / 8
-        dp = nxt
-    return sum(map(sum, dp))`.split('\n').map((text, index) => ({ line: index + 1, text }))
+                for dr, dc in moves:
+                    nr, nc = r + dr, c + dc
+                    if 0 <= nr < n and 0 <= nc < n:
+                        following[nr][nc] += board[r][c] / 8
+        board = following
+    return sum(sum(line) for line in board)`

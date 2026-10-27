@@ -24,8 +24,20 @@ export function buildTrace(bits) {
   return { input: bits, result, frames }
 }
 
-export const code = `def isOneBitCharacter(bits):
-    i = 0
-    while i < len(bits) - 1:
-        i += 2 if bits[i] == 1 else 1
-    return i == len(bits) - 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set index to 0
+while index is before the final bit
+  read the bit at index; if it is 1, it starts a two-bit character
+  if the bit is 1 advance index by 2, otherwise (a one-bit character) advance index by 1
+return true if index equals the final index, otherwise false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 reads the leading bit and line 4 advances by one or two; line 5 returns the comparison.
+export const LINE_MAP = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 }
+
+export const python = `def is_one_bit_character(bits):
+    index = 0
+    while index < len(bits) - 1:
+        if bits[index] == 1:
+            index += 2
+        else:
+            index += 1
+    return index == len(bits) - 1`

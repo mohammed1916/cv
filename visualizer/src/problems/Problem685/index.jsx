@@ -4,7 +4,18 @@ import Story from '../families/sequenceStories/SequenceStory';
 import { definitions } from '../families/collectionStories/definitionGroups/unionRegionsBatch.js';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
+import { code, python, familyLine } from './algorithm';
 
-const definition = { ...definitions[685], examples: authoredExamples0 };
+const base = definitions[685];
+const definition = {
+  ...base,
+  examples: authoredExamples0,
+  code,
+  python,
+  build: raw => {
+    const trace = base.build(raw);
+    return { ...trace, frames: trace.frames.map(frame => ({ ...frame, activeLine: familyLine(frame) })) };
+  },
+};
 function Visualizer() { return <Story definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);

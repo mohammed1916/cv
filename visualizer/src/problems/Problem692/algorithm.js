@@ -20,6 +20,21 @@ export function buildTrace({ words, k }) {
   return { input: { words, k }, result, frames }
 }
 
-export const code = `def topKFrequent(words, k):
-    count = Counter(words)
-    return sorted(count, key=lambda w: (-count[w], w))[:k]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `count how many times each word appears
+rank all distinct words
+  order by higher count first, then by word alphabetically
+  take the first k ranked words
+return the selected words`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 both counts words (the 'Count' frames) and takes the first k ranked words.
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return /^Count /.test(frame.message) ? 1 : 4
+  return ({ 1: 1, 3: 3, 5: 5 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def top_k_frequent(words, k):
+    counts = {}
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+    ranked = sorted(counts, key=lambda word: (-counts[word], word))
+    return ranked[:k]`

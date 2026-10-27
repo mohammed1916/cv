@@ -19,9 +19,24 @@ export function buildTrace(s) {
   return { input: s, result, frames }
 }
 
-export const code = `def toLowerCase(s):
-    out = []
+export const code = `create an empty output list
+for each character c in s
+  if the ASCII code of c is between 65 and 90, append the character with its code increased by 32
+  otherwise append c unchanged
+return the output joined into one string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 both shifts uppercase letters and keeps other characters, so it maps to line 3 or 4 by message.
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return /shift by 32/.test(frame.message) ? 3 : 4
+  return ({ 1: 1, 2: 2, 3: 3, 5: 5 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def to_lower_case(s):
+    output = []
     for ch in s:
-        if 'A' <= ch <= 'Z': out.append(chr(ord(ch) + 32))
-        else: out.append(ch)
-    return ''.join(out)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        code = ord(ch)
+        if 65 <= code <= 90:
+            output.append(chr(code + 32))
+        else:
+            output.append(ch)
+    return ''.join(output)`

@@ -25,10 +25,24 @@ export function buildTrace(nums) {
   return { input: nums, result: best, frames }
 }
 
-export const code = `def findShortestSubArray(nums):
-    first, last, count = {}, {}, Counter(nums)
-    for i, v in enumerate(nums):
-        first.setdefault(v, i)
-        last[v] = i
+export const code = `set the count, first-index, and last-index maps to empty; set degree and shortest to 0
+for each index i with value v in nums
+  record the first index of v if new, set its last index to i, and increase its count
+  if the count of v is above degree, set degree to it and shortest to the span of v
+  otherwise if the count of v equals degree, set shortest to the smaller of shortest and the span of v
+return shortest`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family lines 1-5 are setup, the loop header, the per-value update, the span comparison and the return.
+export const LINE_MAP = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 6 }
+
+export const python = `def find_shortest_subarray(nums):
+    first = {}
+    last = {}
+    count = {}
+    for i, value in enumerate(nums):
+        if value not in first:
+            first[value] = i
+        last[value] = i
+        count[value] = count.get(value, 0) + 1
     degree = max(count.values())
-    return min(last[v] - first[v] + 1 for v in count if count[v] == degree)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return min(last[v] - first[v] + 1 for v in count if count[v] == degree)`

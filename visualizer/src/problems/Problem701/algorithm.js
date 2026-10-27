@@ -34,16 +34,75 @@ export function buildTrace({ root, val }) {
   return { input: { root, val }, root: top, result, frames }
 }
 
-export const code = `def insertIntoBST(root, val):
-    if not root: return TreeNode(val)
-    node = root
+export const code = `create a new leaf node holding the value
+if the tree is empty, return the new leaf as the tree
+set current to the root
+while true
+  if the value is less than current's value, go left; otherwise go right
+  if that child is missing, attach the new leaf there and stop; otherwise set current to that child
+return the root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 chooses a side at each visited node (line 5 here); line 4 attaches or starts the tree; line 5 returns.
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return /first node/.test(frame.message) ? 2 : 6
+  if (frame.activeLine === 5) return 7
+  return ({ 1: 1, 3: 5 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def insert_into_bst(root, val):
+    values, lefts, rights = [], [], []
+
+    def make(value):
+        values.append(value)
+        lefts.append(None)
+        rights.append(None)
+        return len(values) - 1
+
+    if not root or root[0] is None:
+        return [val]
+    start = make(root[0])
+    queue = [start]
+    head = 0
+    i = 1
+    while head < len(queue) and i < len(root):
+        current = queue[head]
+        head += 1
+        if root[i] is not None:
+            lefts[current] = make(root[i])
+            queue.append(lefts[current])
+        i += 1
+        if i < len(root) and root[i] is not None:
+            rights[current] = make(root[i])
+            queue.append(rights[current])
+        i += 1
+
+    leaf = make(val)
+    current = start
     while True:
-        if val < node.val:
-            if not node.left:
-                node.left = TreeNode(val); break
-            node = node.left
+        if val < values[current]:
+            if lefts[current] is None:
+                lefts[current] = leaf
+                break
+            current = lefts[current]
         else:
-            if not node.right:
-                node.right = TreeNode(val); break
-            node = node.right
-    return root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+            if rights[current] is None:
+                rights[current] = leaf
+                break
+            current = rights[current]
+
+    result = []
+    queue = [start]
+    head = 0
+    while head < len(queue):
+        node = queue[head]
+        head += 1
+        for child in (lefts[node], rights[node]):
+            if child is None:
+                result.append(None)
+            else:
+                result.append(values[child])
+                queue.append(child)
+    result.insert(0, values[start])
+    while result and result[-1] is None:
+        result.pop()
+    return result`

@@ -32,10 +32,22 @@ export function buildTrace(ops) {
   return { input: ops, result: out.filter(o => o.name === 'sum').map(o => o.returned), ops: out, frames }
 }
 
-export const code = `class MapSum:
-    def __init__(self):
-        self.map = {}
-    def insert(self, key, val):
-        self.map[key] = val
-    def sum(self, prefix):
-        return sum(v for k, v in self.map.items() if k.startswith(prefix))`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `create an empty map of key values and an empty list of answers
+for each operation in order
+  if it is an insert, store its value under its key, replacing any old value
+  if it is a sum query, add the values of all stored keys that start with the prefix and record that total
+return the recorded totals`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 3 follows a sum query's prefix (line 4 here); family line 4 stores insert deltas (line 3 here).
+export const LINE_MAP = { 1: 1, 3: 4, 4: 3, 5: 5 }
+
+export const python = `def map_sum_pairs(operations):
+    values = {}
+    answers = []
+    for op in operations:
+        if op[0] == 'insert':
+            values[op[1]] = op[2]
+        else:
+            prefix = op[1]
+            answers.append(sum(v for key, v in values.items() if key.startswith(prefix)))
+    return answers`

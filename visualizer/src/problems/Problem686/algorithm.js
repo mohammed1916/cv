@@ -28,8 +28,23 @@ export function buildTrace({ a, b }) {
   return { input: { a, b }, result, frames }
 }
 
-export const code = `def repeatedStringMatch(a, b):
-    times = -(-len(b) // len(a))
-    for k in (times, times + 1):
-        if b in a * k: return k
-    return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set text to empty and limit to the length of b divided by the length of a, rounded up, plus 1
+for repeats from 1 to limit
+  append a to text
+  if b appears inside text then return repeats
+return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Family line 4 is the membership check (failure messages) or the successful return.
+export function familyLine(frame) {
+  if (frame.activeLine === 4) return /does not appear/.test(frame.message) ? 3 : 4
+  return ({ 1: 1, 5: 5 })[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def repeated_string_match(a, b):
+    text = ''
+    limit = -(-len(b) // len(a)) + 1
+    for repeats in range(1, limit + 1):
+        text += a
+        if b in text:
+            return repeats
+    return -1`
