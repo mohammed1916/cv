@@ -1,5 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import WeightedGraphView from '../../components/shared/WeightedGraphView'
+import { wgraphState } from '../../components/shared/wgraphModel.js'
+import HeapView from '../../components/shared/HeapView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -22,8 +25,13 @@ const definition = {
 }
 export default function CheapestFlights() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <WeightedGraphView {...wgraphState({
+      labels: Array.from({ length: run.input.n }, (_, i) => String(i)), edges: run.input.flights, directed: true, title: 'Flight graph (weights are prices; distance = cheapest price found so far, ignoring the stop limit)',
+      dist: step.best, active: step.cur && step.phase !== 'push' ? step.cur[2] : -1, ops: step.ops,
+      edgeStates: step.flight ? { [run.input.flights.findIndex(f => f[0] === step.flight[0] && f[1] === step.flight[1])]: 'active' } : {},
+    }).wgraph} />
     <IndexedSequence label="Flights (from-to: price)" length={Math.max(run.input.flights.length, 1)} valueAt={i => run.input.flights[i] ? `${run.input.flights[i][0]}-${run.input.flights[i][1]}: ${run.input.flights[i][2]}` : '-'} />
-    <IndexedSequence label="Priority queue (cheapest first)" length={Math.max(step.heap.length, 1)} valueAt={i => step.heap[i] ?? ' '} />
+    {step.heapState && <HeapView {...step.heapState} />}
     <IndexedSequence label="Fewest flights at expansion, per city" length={run.input.n} active={step.cur ? step.cur[2] : -1} valueAt={i => step.seen[i]} roleAt={i => i === run.input.src ? 'src' : i === run.input.dst ? 'dst' : ''} />
     {step.more > 0 && <p>... and {step.more} more queued state(s).</p>}
     <output aria-label="Answer">{step.phase === 'done' ? `Cheapest price: ${run.result}` : 'Searching...'}</output>

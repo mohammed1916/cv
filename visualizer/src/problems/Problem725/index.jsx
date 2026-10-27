@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import ListPointerView from '../../components/shared/ListPointerView'
 import LinkedListLane from '../../components/shared/LinkedListLane'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -19,6 +20,7 @@ const definition = {
 
 export default function SplitLinkedList() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    {step.view && <ListPointerView {...step.view} />}
     {step.parts.length === 0 ? <p>Sizing parts…</p> : step.parts.map((part, p) => <LinkedListLane key={p} title={`Part ${p}`} nodes={part.map((value, id) => ({ id: `${p}-${id}`, value }))}
       note={`${part.length} node${part.length === 1 ? '' : 's'}`} />)}
     {step.phase === 'done' && <output aria-label="Parts">{step.sizes.join(', ')}</output>}

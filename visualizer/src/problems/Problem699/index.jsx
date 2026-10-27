@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import SegtreeView from '../../components/shared/SegtreeView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -21,7 +22,8 @@ const definition = {
 export default function FallingSquares() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="Tallest stack after each drop" length={run.input.length} active={step.index} valueAt={i => step.heights[i] ?? '…'} />
-    <output aria-label="Current drop">{step.span ? `Square ${step.index} spans [${step.span[0]}, ${step.span[1]}] · lands at ${step.landed} · top ${step.top}` : 'Ready'}</output>
+    <output aria-label="Current drop">{step.span ? `Square ${step.index} spans [${step.span[0]}, ${step.span[1]}] · lands at ${step.landed}${step.top == null ? '' : ` · top ${step.top}`}` : 'Ready'}</output>
+    {step.seg && <SegtreeView {...step.seg} />}
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>
     <p><strong>Span surface:</strong> the square rests on the highest point of any column it covers, so its bottom is the maximum height in that span.</p>

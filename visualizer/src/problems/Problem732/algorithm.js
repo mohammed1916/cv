@@ -1,3 +1,5 @@
+import { SegTree } from '../../components/shared/segtreeModel.js'
+
 export function parseInput(text) {
   const ops = JSON.parse(text)
   if (!Array.isArray(ops) || ops.length < 1 || ops.length > 400) throw new Error('Enter 1–400 bookings as [start, end) pairs.')
@@ -11,7 +13,11 @@ export function parseInput(text) {
 export function buildTrace(ops) {
   const delta = new Map()
   const results = []
-  const frames = [{ phase: 'start', delta: [], best: 0, op: null, activeLine: 2, message: 'Empty calendar: maximum overlap 0.' }]
+  // The same bookings on a lazy max/add segment tree over the compressed time points (leaf k = [t_k, t_k+1)).
+  const xs = [...new Set(ops.flat())].sort((a, b) => a - b)
+  const seg = new SegTree(Math.max(1, xs.length - 1), 'max-add')
+  const segView = () => ({ seg: { ...seg.snapshot(), coords: xs, title: 'Segment tree of overlap counts (max, lazy add)' } })
+  const frames = [{ phase: 'start', delta: [], best: 0, op: null, activeLine: 2, ...segView(), message: 'Empty calendar: maximum overlap 0.' }]
   ops.forEach(([s, e], i) => {
     delta.set(s, (delta.get(s) ?? 0) + 1)
     delta.set(e, (delta.get(e) ?? 0) - 1)
@@ -19,9 +25,10 @@ export function buildTrace(ops) {
     let running = 0, best = 0
     for (const p of points) { running += delta.get(p); best = Math.max(best, running) }
     results.push(best)
-    frames.push({ phase: 'add', op: i, attempt: [s, e], delta: points.map(p => [p, delta.get(p)]), best, result: results.slice(), activeLine: 6, message: `[${s}, ${e}) added: the maximum overlap is now ${best}.` })
+    seg.update(xs.indexOf(s), xs.indexOf(e) - 1, 1)
+    frames.push({ phase: 'add', op: i, attempt: [s, e], delta: points.map(p => [p, delta.get(p)]), best, result: results.slice(), activeLine: 6, ...segView(), message: `[${s}, ${e}) added: the maximum overlap is now ${best}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, delta: [...delta.keys()].sort((a, b) => a - b).map(p => [p, delta.get(p)]), best: results.at(-1), result: results, activeLine: 9, message: `Maximum overlaps: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', op: ops.length - 1, delta: [...delta.keys()].sort((a, b) => a - b).map(p => [p, delta.get(p)]), best: results.at(-1), result: results, activeLine: 9, ...segView(), message: `Maximum overlaps: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 

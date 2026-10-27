@@ -1,34 +1,51 @@
+import { trieNodeRoles } from '../../../components/shared/trieModel.js';
+
 function makeTrie(mode = 'words') {
   const nodes = [{ id: 0, parent: null, char: '', prefix: '', children: new Map(), terminal: 0, pass: 0, total: 0 }];
+  let ops = [];
   const child = (id, char, create = false) => {
     let next = nodes[id].children.get(char);
+    const base = { char, parentPrefix: nodes[id].prefix, prefix: nodes[id].prefix + char };
     if (next === undefined && create) {
       next = nodes.length;
       nodes[id].children.set(char, next);
       nodes.push({ id: next, parent: id, char, prefix: nodes[id].prefix + char, children: new Map(), terminal: 0, pass: 0, total: 0 });
-    }
+      ops.push({ ...base, kind: 'create', node: next });
+    } else if (next === undefined) ops.push({ ...base, kind: 'miss', node: id });
+    else ops.push({ ...base, kind: 'reuse', node: next });
     return next;
   };
-  const snapshot = () => nodes.map(({ children, pass, total, ...node }) => ({ ...node,
+  const markEnd = (id, text) => ops.push({ kind: 'end', prefix: nodes[id].prefix, text });
+  // Ops since the last report, with node roles for the diagram; reading them starts a new batch.
+  const take = () => { const taken = ops; ops = []; return taken; };
+  const snapshot = (roles = {}) => nodes.map(({ children, pass, total, ...node }) => ({ ...node,
     ...(mode === 'counts' ? { pass } : {}), ...(mode === 'sums' ? { total } : {}),
+    ...(roles[node.id] ? { role: roles[node.id] } : {}),
   }));
-  return { nodes, child, snapshot };
+  return { nodes, child, markEnd, take, snapshot };
 }
 
 function reporter(trie, emit) {
-  return (message, activeNode, codeStage, state = {}) => emit(message, {
-    trieNodes: trie.snapshot(), activeNode, codeStage, ...state,
-  }, ['insert', 'store', 'erase', 'accumulate', 'accept'].includes(codeStage) ? 'update' : 'inspect');
+  return (message, activeNode, codeStage, state = {}) => {
+    const ops = trie.take();
+    const word = Array.isArray(state.sequence) ? state.sequence.join('') : state.sequence;
+    emit(message, { trieNodes: trie.snapshot(trieNodeRoles(ops)), activeNode, codeStage, trie: { word, ops }, ...state },
+      ['insert', 'store', 'erase', 'accumulate', 'accept'].includes(codeStage) ? 'update' : 'inspect');
+  };
 }
 
 function insertWord(trie, word, report) {
   let node = 0;
   for (const char of word) {
+    const before = trie.nodes.length;
     node = trie.child(node, char, true);
-    report(`Follow or create '${char}'. Shared prefixes reuse the same nodes instead of storing another separate path.`, node, 'insert', { sequence: word });
+    report(trie.nodes.length > before
+      ? `Create a new node for '${char}': no earlier word shared this prefix.`
+      : `Reuse the existing node for '${char}': this prefix is shared with an earlier word.`, node, 'insert', { sequence: word });
   }
   trie.nodes[node].terminal++;
-  report(`Mark '${word}' as a complete stored word. A prefix node alone is not a complete-word match.`, node, 'store', { sequence: word });
+  trie.markEnd(node, `'${word}' ends at the node for '${trie.nodes[node].prefix}'; a prefix node alone is not a stored word`);
+  report(`Mark '${word}' as a complete stored word (end-of-word mark). A prefix node alone is not a complete-word match.`, node, 'store', { sequence: word });
 }
 
 export const trieSolvers = {
@@ -64,6 +81,8 @@ export const trieSolvers = {
           report('Store only the value difference along this prefix path. Overwriting a key must replace its old contribution rather than add it twice.', node, 'accumulate', { sequence: key, metrics: { key, value, delta }, output });
         }
         trie.nodes[node].terminal = 1;
+        trie.markEnd(node, `key '${key}' now holds ${value} at '${trie.nodes[node].prefix}'`);
+        report(`Key '${key}' is stored with value ${value}; every node on its path now includes the change of ${delta}.`, node, 'accumulate', { sequence: key, metrics: { key, value, delta }, output });
       } else {
         for (const char of key) {
           const next = trie.child(node, char);
@@ -161,6 +180,7 @@ export const trieSolvers = {
           report('Update the number of stored word occurrences passing through this node. Erasing one occurrence preserves counts for duplicates and longer words.', node, action === 'insert' ? 'insert' : 'erase', { sequence: word, output, metrics: { action, delta } });
         }
         trie.nodes[node].terminal += delta;
+        trie.markEnd(node, `the exact-word count at '${trie.nodes[node].prefix}' is now ${trie.nodes[node].terminal}`);
         report('Update the exact-word count only at the final node. Prefix counts and exact counts answer different questions.', node, 'store', { sequence: word, output, metrics: { action, exactCount: trie.nodes[node].terminal } });
       } else {
         for (const char of word) {

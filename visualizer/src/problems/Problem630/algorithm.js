@@ -1,3 +1,4 @@
+import { TracedHeap, heapView } from '../../components/shared/heapModel.js'
 export function parseInput(text) {
   const courses = JSON.parse(text)
   if (!Array.isArray(courses) || courses.length < 1 || courses.length > 200) throw new Error('Enter a JSON array of 1–200 [duration, lastDay] pairs.')
@@ -11,21 +12,25 @@ export function buildTrace(courses) {
   const sorted = courses.map(([duration, last], index) => ({ duration, last, index })).sort((a, b) => a.last - b.last || a.index - b.index)
   let time = 0
   const taken = []
-  const frames = [{ phase: 'start', time, taken: [], course: null, activeLine: 2, message: 'Process courses in order of their last day.' }]
+  const heap = new TracedHeap((a, b) => b - a, { order: 'max' })
+  const hv = () => heapView(heap, { title: 'Max-heap of taken durations (root = longest, the one to drop)' }).heap
+  const frames = [{ phase: 'start', time, taken: [], course: null, heapState: hv(), activeLine: 2, message: 'Process courses in order of their last day.' }]
   for (const course of sorted) {
     time += course.duration
     taken.push(course)
-    frames.push({ phase: 'take', time, taken: taken.map(c => c.duration), course, activeLine: 5, message: `Take [${course.duration}, ${course.last}]; finish time ${time}.` })
+    heap.push(course.duration)
+    frames.push({ phase: 'take', time, taken: taken.map(c => c.duration), course, heapState: hv(), activeLine: 5, message: `Take [${course.duration}, ${course.last}]; finish time ${time}.` })
     if (time > course.last) {
       let longest = 0
       for (let i = 1; i < taken.length; i++) if (taken[i].duration > taken[longest].duration) longest = i
       const dropped = taken.splice(longest, 1)[0]
+      heap.pop()
       time -= dropped.duration
-      frames.push({ phase: 'drop', time, taken: taken.map(c => c.duration), course: dropped, activeLine: 8, message: `Past its deadline. Drop the longest course taken so far, duration ${dropped.duration}; time ${time}.` })
+      frames.push({ phase: 'drop', time, taken: taken.map(c => c.duration), course: dropped, heapState: hv(), activeLine: 8, message: `Past its deadline. Drop the longest course taken so far, duration ${dropped.duration}; time ${time}.` })
     }
   }
   const result = taken.length
-  frames.push({ phase: 'done', time, taken: taken.map(c => c.duration), course: null, result, activeLine: 10, message: `Maximum courses: ${result}.` })
+  frames.push({ phase: 'done', time, taken: taken.map(c => c.duration), course: null, result, heapState: hv(), activeLine: 10, message: `Maximum courses: ${result}.` })
   return { input: courses, result, frames }
 }
 

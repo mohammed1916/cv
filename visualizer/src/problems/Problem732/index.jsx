@@ -1,4 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
+import SegtreeView from '../../components/shared/SegtreeView'
 import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -16,8 +19,20 @@ const definition = {
   ],
 }
 
+function IntervalViewFor({ run, step }) {
+  const shown = run.input.slice(0, step.op === null || step.op === undefined ? 0 : step.op + 1)
+  const events = step.delta.map(([pos, delta]) => ({ pos, delta, label: delta > 0 ? 'bookings start' : 'bookings end' }))
+  const { interval } = intervalView({
+    title: 'Bookings and the sweep over their boundary markers', intervals: shown.map(([start, end], i) => ({ start, end, role: i === shown.length - 1 ? 'current' : 'kept' })),
+    events, eventIndex: events.length - 1, note: step.message,
+  })
+  return interval ? <IntervalView {...interval} /> : null
+}
+
 export default function MyCalendarIII() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IntervalViewFor run={run} step={step} />
+    {step.seg && <SegtreeView {...step.seg} />}
     <table aria-label="Markers">
       <thead><tr><th>Point</th><th>Change</th></tr></thead>
       <tbody>{step.delta.length === 0 ? <tr><td colSpan={2}>none</td></tr> : step.delta.map(([p, d]) => <tr key={p}><td>{p}</td><td>{d > 0 ? `+${d}` : d}</td></tr>)}</tbody>

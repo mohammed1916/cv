@@ -1,3 +1,4 @@
+import { TracedHeap, heapView } from '../../components/shared/heapModel.js'
 export function parseInput(text) {
   const v = JSON.parse(text)
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new Error('Enter {"target": n, "startFuel": n, "stations": [[position, fuel], ...]}.')
@@ -17,17 +18,17 @@ export function parseInput(text) {
 
 export function buildTrace({ target, startFuel, stations }) {
   const points = [...stations, [target, 0]]
-  const heap = []
+  const heap = new TracedHeap((x, y) => y - x, { order: 'max' })
   let fuel = startFuel, stops = 0, prev = 0
   const frames = []
-  const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, heap: heap.slice(), fuel, stops, prev, ...extra })
+  const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, heap: [...heap.data], heapState: heapView(heap, { title: "Max-heap of passed stations' fuel (root = largest)" }).heap, fuel, stops, prev, ...extra })
   f('start', 3, `Start with ${startFuel} fuel at position 0. Stations are only "used" later, when we actually run dry.`)
   for (let i = 0; i < points.length; i++) {
     const [pos, gas] = points[i]
     fuel -= pos - prev
     f('drive', 5, `Drive from ${prev} to ${pos} (${pos - prev} units): fuel is now ${fuel}${fuel < 0 ? ', which is negative, so we must have refuelled earlier' : ''}.`, { index: i })
-    while (heap.length && fuel < 0) {
-      const g = heap.shift()
+    while (heap.size && fuel < 0) {
+      const g = heap.pop()
       fuel += g; stops++
       f('refuel', 7, `Retroactively refuel at the best passed station (${g} fuel). Stops: ${stops}, fuel: ${fuel}.`, { index: i })
     }
@@ -36,7 +37,7 @@ export function buildTrace({ target, startFuel, stations }) {
       return { input: { target, startFuel, stations }, points, result: -1, frames }
     }
     if (i < stations.length) {
-      heap.push(gas); heap.sort((x, y) => y - x)
+      heap.push(gas)
       f('push', 11, `Reached station at ${pos}: remember its ${gas} fuel in the max-heap without stopping yet.`, { index: i })
     }
     prev = pos

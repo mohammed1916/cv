@@ -4,6 +4,7 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import FenwickView from '../../components/shared/FenwickView'
 import SubsequencePath from '../../components/shared/SubsequencePath'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -25,6 +26,7 @@ function AlternatingSubsequence() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
     const known = (index, direction) => step.phase === 'done' || index < step.index || index === step.index && (step.phase === 'fall' || direction === 'up' && step.phase === 'rise')
     return <>
+      {(step.trees ?? []).map(tree => <FenwickView key={tree.title} {...tree} />)}
       <IndexedSequence label="Distance eligibility and predecessor" length={run.input.length} active={step.index} valueAt={i => run.input[i]}
         roleAt={i => step.phase === 'done' ? 'complete' : i === step.candidate ? 'predecessor' : i <= step.eligible ? 'eligible' : i < step.index ? 'too close' : 'unprocessed'} />
       <IndexedSequence label="UP: best sum ending with a rise" length={run.input.length} active={step.phase === 'rise' ? step.index : -1}

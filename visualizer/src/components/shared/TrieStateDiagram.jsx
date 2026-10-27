@@ -27,9 +27,10 @@ export default function TrieStateDiagram({ nodes, activeNode }) {
         {nodes.map(node => {
           const { x, y } = positions.get(node.id)
           const details = [node.terminal ? `end ${node.terminal}` : '', node.pass !== undefined ? `pass ${node.pass}` : '', node.total !== undefined ? `sum ${node.total}` : ''].filter(Boolean).join(' · ')
-          return <g key={node.id} transform={`translate(${x},${y})`} data-active={node.id === activeNode}>
+          return <g key={node.id} transform={`translate(${x},${y})`} data-active={node.id === activeNode} data-role={node.role} data-end={node.terminal ? 'true' : undefined}>
             <title>{`${node.prefix || 'root'}${details ? `: ${details}` : ''}`}</title>
             <rect x={-49} y={-23} width={98} height={46} rx={8} />
+            {node.terminal ? <rect className="trie-state__end" x={-44} y={-18} width={88} height={36} rx={5} /> : null}
             <text textAnchor="middle" y={4}>{node.parent === null ? 'root' : node.char}</text>
             <text className="trie-state__details" textAnchor="middle" y={39}>{details}</text>
           </g>

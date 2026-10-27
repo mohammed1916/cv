@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
+import HeapView from '../../components/shared/HeapView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -22,7 +23,7 @@ const definition = {
 export default function KthSmallestPrimeFraction() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
     <IndexedSequence label="arr" length={run.input.arr.length} valueAt={i => run.input.arr[i]} roleAt={i => step.current ? (i === step.current[0] ? 'numerator' : i === step.current[1] ? 'denominator' : '') : ''} />
-    <IndexedSequence label="Min-heap (array order)" length={Math.max(step.heap.length, 1)} valueAt={i => step.heap[i] ?? ' '} active={step.heap.length ? 0 : -1} />
+    {step.heapState && <HeapView {...step.heapState} />}
     <IndexedSequence label="Popped in order" length={Math.max(step.popped.length, 1)} valueAt={i => step.popped[i] ?? ' '} indexOffset={1} />
     <output aria-label="Answer">{step.phase === 'done' ? `Answer: [${run.result.join(', ')}]` : `Pops so far: ${step.round} of ${run.input.k - 1}`}</output>
   </>} renderReasoning={({ step }) => <>

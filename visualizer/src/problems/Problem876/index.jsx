@@ -1,4 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import ListPointerView from '../../components/shared/ListPointerView'
 import LinkedListLane from '../../components/shared/LinkedListLane'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -29,6 +30,7 @@ export default function MiddleOfTheLinkedList() {
       const roles = { [step.slow]: 'active' }
       return <>
         <LinkedListLane title="Linked list" nodes={nodes} pointers={pointers} roles={roles} note={step.fast >= nodes.length ? 'fast = null' : undefined} />
+        {step.view && <ListPointerView {...step.view} />}
         <output aria-label="Pointer positions">slow at index {step.slow}; fast at {step.fast < nodes.length ? `index ${step.fast}` : 'null'}</output>
         {step.phase === 'done' && <output aria-label="Returned list">Returned list: [{run.result.join(', ')}]</output>}
       </>

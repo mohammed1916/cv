@@ -1,0 +1,29 @@
+.interval-view { margin-bottom: 16px; }
+.interval-view h3 { margin: 0 0 8px; font-size: .95rem; }
+.interval-view__note { margin: 0 0 8px; font-size: .85rem; line-height: 1.45; }
+.interval-view__tracks { display: grid; gap: 6px; padding: 6px 6px 0; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.interval-view__group { display: block; font-size: .72rem; color: var(--text-muted); margin-bottom: 2px; }
+.interval-view__lanes { position: relative; }
+.interval-view__gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--border); opacity: .5; }
+.interval-view__marker { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--warning, #d97706); z-index: 2; }
+.interval-view__bar { position: absolute; height: 22px; border-radius: 6px; border: 2px solid var(--border); background: var(--surface-2, var(--surface)); overflow: hidden; box-sizing: border-box; display: flex; align-items: center; min-width: 6px; }
+.interval-view__bar b { font-size: .68rem; font-weight: 600; padding: 0 4px; white-space: nowrap; }
+.interval-view__axis { position: relative; height: 22px; border-top: 1px solid var(--border); font-size: .68rem; color: var(--text-muted); }
+.interval-view__axis span { position: absolute; transform: translateX(-50%); top: 3px; }
+.interval-view__axis .interval-view__marker-label { top: 3px; color: var(--warning, #d97706); font-weight: 700; background: var(--surface); z-index: 2; }
+.interval-view__bar.is-current { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 22%, transparent); }
+.interval-view__bar.is-merged, .interval-view__bar.is-kept { border-color: var(--success, #16a34a); background: color-mix(in srgb, var(--success, #16a34a) 22%, transparent); }
+.interval-view__bar.is-rejected { border-color: var(--danger, #dc2626); background: color-mix(in srgb, var(--danger, #dc2626) 16%, transparent); text-decoration: line-through; }
+.interval-view__bar.is-active { border-color: var(--warning, #d97706); background: color-mix(in srgb, var(--warning, #d97706) 22%, transparent); }
+.interval-view__bar.is-done { opacity: .55; }
+.interval-view__events { margin-top: 10px; border-collapse: collapse; font-size: .8rem; }
+.interval-view__events th, .interval-view__events td { padding: 3px 10px; border-bottom: 1px solid var(--border); text-align: left; }
+.interval-view__events .is-current { background: color-mix(in srgb, var(--primary) 18%, transparent); font-weight: 700; }
+.interval-view__events .is-pending { color: var(--text-muted); }
+.interval-view__events .is-peak td:last-child { color: var(--danger, #dc2626); font-weight: 700; }
+.interval-view__legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: var(--text-muted); }
+.interval-view__legend span::before { content: ''; display: inline-block; width: 12px; height: 8px; border-radius: 3px; margin-right: 5px; border: 2px solid var(--border); vertical-align: -1px; }
+.interval-view__legend .is-current::before { border-color: var(--primary); }
+.interval-view__legend .is-merged::before, .interval-view__legend .is-kept::before { border-color: var(--success, #16a34a); }
+.interval-view__legend .is-rejected::before { border-color: var(--danger, #dc2626); }
+.interval-view__legend .is-active::before { border-color: var(--warning, #d97706); }

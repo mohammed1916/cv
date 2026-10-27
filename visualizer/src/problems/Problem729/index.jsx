@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
 import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -18,8 +20,17 @@ const definition = {
   ],
 }
 
+function IntervalViewFor({ step }) {
+  const rejected = step.phase === 'reject'
+  const booked = step.booked.map(([start, end], i) => ({ start, end, group: 'Calendar', role: !rejected && step.phase === 'accept' && i === step.booked.length - 1 ? 'current' : step.clash && step.clash[0] === start && step.clash[1] === end ? 'active' : 'kept' }))
+  const attempt = rejected ? [{ start: step.attempt[0], end: step.attempt[1], group: 'New booking', role: 'rejected', label: 'overlaps, refused' }] : []
+  const { interval } = intervalView({ title: 'Bookings on a time line (half-open: touching ends are allowed)', intervals: [...booked, ...attempt], note: step.message })
+  return interval ? <IntervalView {...interval} /> : null
+}
+
 export default function MyCalendarI() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <IntervalViewFor step={step} />
     <table aria-label="Booked intervals">
       <thead><tr><th>Booked</th></tr></thead>
       <tbody>{step.booked.length === 0 ? <tr><td>none</td></tr> : step.booked.map(([a, b]) => <tr key={`${a}-${b}`}><td>[{a}, {b})</td></tr>)}</tbody>

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import HeapView from '../../components/shared/HeapView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -29,7 +29,8 @@ export default function MinimumCostToHireKWorkers() {
       valueAt={i => (run.sorted[i].w / run.sorted[i].q).toFixed(2)}
       roleAt={i => i <= step.index ? (i === step.bestIdx ? 'written' : 'shifted') : ''} />
     <IndexedSequence label="Qualities (sorted order)" length={run.sorted.length} active={step.index} valueAt={i => run.sorted[i].q} />
-    <StackLane title="Max-heap of qualities (largest first)" items={step.heap ?? []} note={`sum = ${step.sumQ ?? 0}`} />
+    {step.heapState && <HeapView {...step.heapState} />}
+    <output aria-label="Quality sum">Quality sum of the group = {step.sumQ ?? 0}</output>
     <output aria-label="Best cost">Best cost so far: {step.best === null || step.best === undefined ? 'none' : step.best.toFixed(5)}</output>
   </>} renderReasoning={({ step }) => <>
     <p>Quality sum of the group: {step.sumQ ?? 0}. {step.cost !== null && step.cost !== undefined && <>Group cost: {step.cost.toFixed(5)}.</>}</p>

@@ -1,5 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import TreeOutline from '../../components/shared/TreeOutline'
+import TreeWalkView from '../../components/shared/TreeWalkView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -33,6 +34,7 @@ export default function EmployeeImportance() {
     if (step.current !== null && step.current !== undefined) roles[step.current] = 'active'
     return <>
       <TreeOutline title="Reporting tree (id:importance)" root={toTree(run.input.employees, run.input.id)} roles={roles} />
+      {step.treeWalk && <TreeWalkView {...step.treeWalk} />}
       <output aria-label="Total importance">Total so far: {step.total} · visited {step.visited.join(', ') || '—'}</output>
     </>
   }} renderReasoning={({ step }) => <>

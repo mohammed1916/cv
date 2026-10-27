@@ -1,3 +1,4 @@
+import { TracedHeap, heapView } from '../../components/shared/heapModel.js'
 export function parseInput(text) {
   const v = JSON.parse(text)
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new Error('Enter {"quality": [...], "wage": [...], "k": number}.')
@@ -12,20 +13,20 @@ export function parseInput(text) {
 export function buildTrace({ quality, wage, k }) {
   const workers = quality.map((q, i) => ({ id: i, q, w: wage[i] }))
   workers.sort((a, b) => a.w * b.q - b.w * a.q)
-  const heap = []
+  const heap = new TracedHeap((a, b) => b - a, { order: 'max' })
   let sumQ = 0, best = Infinity, bestIdx = -1
   const frames = []
-  const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, heap: heap.slice(), sumQ, best: Number.isFinite(best) ? best : null, bestIdx, cost: null, ...extra })
+  const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, heap: [...heap.data], heapState: heapView(heap, { title: 'Max-heap of qualities in the group (root = largest)' }).heap, sumQ, best: Number.isFinite(best) ? best : null, bestIdx, cost: null, ...extra })
   f('start', 2, 'Sort workers by wage / quality. When worker i has the highest ratio in the group, everyone is paid at that ratio.')
   f('sort', 2, `Sorted order (worker id: quality, wage): ${workers.map(x => `${x.id}: ${x.q},${x.w}`).join(' | ')}`)
   workers.forEach((x, i) => {
-    heap.push(x.q); heap.sort((a, b) => b - a); sumQ += x.q
+    heap.push(x.q); sumQ += x.q
     f('add', 5, `Worker ${x.id} (quality ${x.q}, ratio ${(x.w / x.q).toFixed(3)}) joins; it is the highest ratio so far. Quality sum ${sumQ}.`, { index: i })
-    if (heap.length > k) {
-      const removed = heap.shift(); sumQ -= removed
+    if (heap.size > k) {
+      const removed = heap.pop(); sumQ -= removed
       f('evict', 6, `More than ${k} workers: drop the largest quality ${removed}, which is the most expensive to pay at this ratio. Quality sum ${sumQ}.`, { index: i })
     }
-    if (heap.length === k) {
+    if (heap.size === k) {
       const cost = sumQ * x.w / x.q
       const improved = cost < best
       if (improved) { best = cost; bestIdx = i }

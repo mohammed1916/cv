@@ -1,3 +1,5 @@
+import { SegTree } from '../../components/shared/segtreeModel.js'
+
 export function parseInput(text) {
   const ops = JSON.parse(text)
   if (!Array.isArray(ops) || ops.length < 1 || ops.length > 500) throw new Error('Enter 1–500 operations: ["addRange", l, r], ["queryRange", l, r] or ["removeRange", l, r].')
@@ -11,7 +13,11 @@ export function parseInput(text) {
 export function buildTrace(ops) {
   let intervals = []
   const log = []
-  const frames = [{ phase: 'start', intervals: [], op: null, activeLine: 2, message: 'No tracked ranges yet.' }]
+  // The same operations on a lazy cover/uncover segment tree over the compressed endpoints (value = covered leaves).
+  const xs = [...new Set(ops.flatMap(([, l, r]) => [l, r]))].sort((a, b) => a - b)
+  const seg = new SegTree(Math.max(1, xs.length - 1), 'cover-assign')
+  const segView = () => ({ seg: { ...seg.snapshot(), coords: xs, title: 'Segment tree of covered pieces (lazy cover / clear)' } })
+  const frames = [{ phase: 'start', intervals: [], ...segView(), op: null, activeLine: 2, message: 'No tracked ranges yet.' }]
   ops.forEach(([name, l, r], i) => {
     let returned = null
     if (name === 'addRange') {
@@ -35,11 +41,16 @@ export function buildTrace(ops) {
     } else {
       returned = intervals.some(([a, b]) => a <= l && r <= b)
     }
+    const from = xs.indexOf(l), to = xs.indexOf(r) - 1
+    let segReturned = null
+    if (name === 'queryRange') segReturned = seg.query(from, to) === to - from + 1
+    else seg.update(from, to, name === 'addRange' ? 1 : 0)
+    if (segReturned !== null && segReturned !== returned) throw new Error('segment tree disagrees with interval list')
     log.push({ name, args: [l, r], returned })
-    frames.push({ phase: name, op: i, intervals: intervals.map(x => [...x]), log: log.map(x => ({ ...x })), returned, activeLine: name === 'addRange' ? 5 : name === 'removeRange' ? 8 : 11,
+    frames.push({ phase: name, op: i, intervals: intervals.map(x => [...x]), log: log.map(x => ({ ...x })), returned, ...segView(), activeLine: name === 'addRange' ? 5 : name === 'removeRange' ? 8 : 11,
       message: `${name}[${l}, ${r})${returned === null ? '' : ` → ${returned}`}: ${intervals.length} interval${intervals.length === 1 ? '' : 's'} tracked.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, intervals: intervals.map(x => [...x]), log, activeLine: 13, message: 'All operations complete.' })
+  frames.push({ phase: 'done', op: ops.length - 1, intervals: intervals.map(x => [...x]), log, ...segView(), activeLine: 13, message: 'All operations complete.' })
   return { input: ops, result: log.filter(x => x.name === 'queryRange').map(x => x.returned), log, frames }
 }
 

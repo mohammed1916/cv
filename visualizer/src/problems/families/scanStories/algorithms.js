@@ -1,3 +1,4 @@
+import {StackqLog,stackqView} from '../../../components/shared/stackqModel.js';
 // Explicit algorithms; emit records the state actually reached by each decision.
 export const solvers = {
   594({nums}, emit) {
@@ -59,8 +60,9 @@ export const solvers = {
     let left=0,right=s.length-1;while(left<right){emit(`Compare '${s[left]}' and '${s[right]}'. A mismatch permits deleting only one endpoint.`,{marks:{[left]:'left',[right]:'right'}});if(s[left]!==s[right])return palindrome(left+1,right)||palindrome(left,right-1);left++;right--;}return true;
   },
   682({operations},emit) {
-    const stack=[];
-    operations.forEach((op,i)=>{if(op==='C')stack.pop();else if(op==='D')stack.push(2*stack.at(-1));else if(op==='+')stack.push(stack.at(-1)+stack.at(-2));else stack.push(Number(op));emit(`Apply ${op} to the record of valid rounds; canceled rounds no longer contribute.`,{index:i,output:stack,metrics:{total:stack.reduce((a,b)=>a+b,0)}},'update');});return stack.reduce((a,b)=>a+b,0);
+    const log=new StackqLog(),stack=log.lane('valid rounds','stack'),total=()=>stack.items.reduce((a,b)=>a+b,0);
+    operations.forEach((op,i)=>{if(op==='C')stack.pop('C cancels the previous valid round.');else if(op==='D'){stack.keep('D doubles this top round.');stack.push(2*stack.peek(),'D adds a round worth double the previous one.');}else if(op==='+'){const a=stack.items.at(-1),b=stack.items.at(-2);stack.keep(`+ adds the previous two rounds ${b} and ${a}.`);stack.push(a+b,`+ adds a round worth ${b} + ${a}.`);}else stack.push(Number(op),`${op} is a plain score for a new round.`);
+    emit(`Apply ${op} to the record of valid rounds; canceled rounds no longer contribute.`,{index:i,output:stack.items,metrics:{total:total()},...stackqView(log)},'update');});return total();
   },
   686({a,b},emit) {
     let text='',repeats=0;const limit=Math.ceil(b.length/a.length)+1;
@@ -101,10 +103,16 @@ export const solvers = {
   733({image,sr,sc,color},emit) {
     const output=image.map(row=>[...row]),old=image[sr][sc];if(old===color){emit('The starting pixel already has the new color; return unchanged.',{matrix:output,cell:[sr,sc]});return output;}
     const queue=[[sr,sc]];output[sr][sc]=color;
-    for(let head=0;head<queue.length;head++){const [r,c]=queue[head];for(const [dr,dc]of[[1,0],[-1,0],[0,1],[0,-1]]){const nr=r+dr,nc=c+dc;if(output[nr]?.[nc]===old){output[nr][nc]=color;queue.push([nr,nc]);}}emit(`Visit (${r},${c}); recolor matching orthogonal neighbors when enqueuing so each pixel enters once.`,{matrix:output,cell:[r,c],output:queue.slice(head+1).map(p=>`(${p})`),metrics:{originalColor:old,newColor:color,visited:head+1}},'update');}return output;
+    for(let head=0;head<queue.length;head++){const [r,c]=queue[head],before=queue.slice(head);for(const [dr,dc]of[[1,0],[-1,0],[0,1],[0,-1]]){const nr=r+dr,nc=c+dc;if(output[nr]?.[nc]===old){output[nr][nc]=color;queue.push([nr,nc]);}}emit(`Visit (${r},${c}); recolor matching orthogonal neighbors when enqueuing so each pixel enters once.`,{matrix:output,cell:[r,c],output:queue.slice(head+1).map(p=>`(${p})`),graph:{title:'Flood fill: BFS over equal-coloured pixels',grid:{rows:output.length,cols:output[0].length,cells:output.map(x=>[...x])},current:[r,c],frontier:queue.slice(head+1),prevFrontier:before,visited:queue.slice(),done:queue.slice(0,head),notes:[`Pixel (${r},${c}) is processed; its four orthogonal neighbours are checked for the original colour ${old}.`]},metrics:{originalColor:old,newColor:color,visited:head+1}},'update');}return output;
   },
   735({asteroids},emit) {
-    const stack=[];asteroids.forEach((v,i)=>{let alive=true;while(alive&&v<0&&stack.at(-1)>0){const top=stack.at(-1);if(top<-v)stack.pop();else{if(top===-v)stack.pop();alive=false;}emit(`Incoming ${v} meets right-moving ${top}; the smaller magnitude disappears, equal magnitudes both disappear.`,{index:i,output:stack,metrics:{incoming:v,alive}},'update');}if(alive)stack.push(v);emit('The stack holds survivors; only a positive top and negative incoming asteroid can collide.',{index:i,output:stack},'update');});return stack;
+    const log=new StackqLog(),stack=log.lane('surviving asteroids','stack');
+    asteroids.forEach((v,i)=>{let alive=true;while(alive&&v<0&&stack.peek()>0){const top=stack.peek();
+      if(top<-v)stack.pop(`${top} is smaller than ${-v}, so the right-moving ${top} is destroyed and ${v} keeps going.`);
+      else{if(top===-v)stack.pop(`${top} and ${v} have equal size, so both are destroyed.`);else stack.keep(`${top} is larger than ${-v}, so the incoming ${v} is destroyed.`);alive=false;}
+      emit(`Incoming ${v} meets right-moving ${top}; the smaller magnitude disappears, equal magnitudes both disappear.`,{index:i,output:stack.items,metrics:{incoming:v,alive},...stackqView(log)},'update');}
+    if(alive)stack.push(v,v>0?'it moves right, so it cannot hit anything already on the stack.':'nothing right-moving is on top, so it survives.');
+    emit('The stack holds survivors; only a positive top and negative incoming asteroid can collide.',{index:i,output:stack.items,...stackqView(log)},'update');});return stack.items;
   },
   738({n},emit) {
     const digits=[...String(n)].map(Number);let mark=digits.length;
@@ -146,7 +154,7 @@ export const solvers = {
     emit('Intersect the horizontal and vertical ranges. Both intersection lengths must be strictly positive; touching an edge has zero area.',{sequence:[`A: ${rec1}`,`B: ${rec2}`],metrics:{intersectionWidth:width,intersectionHeight:height}},'update');return width>0&&height>0;
   },
   844({s,t},emit) {
-    const reduce=text=>{const stack=[];[...text].forEach((c,i)=>{if(c==='#')stack.pop();else stack.push(c);emit(`Process '${c}' in '${text}': ${c==='#'?'remove the last surviving character if any':'append the character'}.`,{sequence:text,index:i,output:stack},'update');});return stack.join('');};const a=reduce(s),b=reduce(t);emit('Compare the two fully edited strings.',{metrics:{first:a,second:b}});return a===b;
+    const reduce=(text,name)=>{const log=new StackqLog(),stack=log.lane(`typed text ${name}`,'stack');[...text].forEach((c,i)=>{if(c==='#'){if(stack.length)stack.pop('# is a backspace: it erases the last surviving character.');else stack.note('# is a backspace but nothing is typed yet, so nothing is erased.');}else stack.push(c,`${c} is typed, so it goes on top.`);emit(`Process '${c}' in '${text}': ${c==='#'?'remove the last surviving character if any':'append the character'}.`,{sequence:text,index:i,output:stack.items,...stackqView(log)},'update');});return stack.items.join('');};const a=reduce(s,'s'),b=reduce(t,'t');emit('Compare the two fully edited strings.',{metrics:{first:a,second:b}});return a===b;
   },
   849({seats},emit) {
     let last=-1,best=0;seats.forEach((v,i)=>{if(v){const distance=last<0?i:Math.floor((i-last)/2);best=Math.max(best,distance);emit(last<0?'Leading empty seats are bounded on only one side.':'Inside a gap, the best seat is halfway between occupied endpoints.',{sequence:seats,index:i,metrics:{previousOccupied:last,currentOccupied:i,gapBest:distance,best}},'update');last=i;}});return Math.max(best,seats.length-1-last);

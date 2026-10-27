@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -24,6 +26,11 @@ const definition = {
 
 export default function SetIntersectionSizeTwo() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    {(() => {
+      const { interval } = intervalView({ title: 'Intervals sorted by right end, with the points chosen so far', closed: true, note: step.message, marker: step.index >= 0 ? run.sorted[step.index][1] : null, markerLabel: 'current end',
+        intervals: [...run.sorted.map(([start, end], i) => ({ start, end, group: 'Sorted intervals', role: i === step.index ? (step.phase === 'skip' ? 'kept' : 'current') : i < step.index ? 'done' : 'pending' })), ...step.chosen.map(p => ({ start: p, end: p, label: String(p), group: 'Chosen points', role: 'merged' }))] })
+      return interval ? <IntervalView {...interval} /> : null
+    })()}
     <IndexedSequence label="Intervals sorted by end" length={run.sorted.length} active={step.index} valueAt={i => `[${run.sorted[i][0]}, ${run.sorted[i][1]}]`} roleAt={i => i < step.index ? 'done' : ''} />
     <IndexedSequence label="Chosen points" length={step.chosen.length} valueAt={i => step.chosen[i]} active={step.chosen.length - 1} />
     <output aria-label="Last two points">Last two points: {step.a === null || step.a < 0 ? 'none' : step.a}, {step.b === null || step.b < 0 ? 'none' : step.b}</output>

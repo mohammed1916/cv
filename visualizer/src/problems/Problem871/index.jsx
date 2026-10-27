@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import HeapView from '../../components/shared/HeapView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -29,7 +29,7 @@ export default function MinRefuelStops() {
     return <>
       <IndexedSequence label="Positions along the road (last = target)" length={pts.length} active={step.index} valueAt={i => pts[i][0]} roleAt={i => i === pts.length - 1 ? 'right' : i < step.index ? 'written' : ''} />
       <IndexedSequence label="Fuel offered at each position" length={pts.length} active={step.index} valueAt={i => pts[i][1]} />
-      <StackLane title="Max-heap of passed stations' fuel (largest first)" items={step.heap ?? []} />
+      {step.heapState && <HeapView {...step.heapState} />}
       <output aria-label="Fuel and stops">Fuel in tank: {step.fuel}; stops used: {step.stops}</output>
       {step.phase === 'done' && <output aria-label="Answer">Answer: {run.result}</output>}
     </>

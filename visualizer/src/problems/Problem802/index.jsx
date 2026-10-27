@@ -1,6 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
+import { edgesFromAdjacency, degreeTags } from '../../components/shared/graphTraversalModel'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -23,12 +25,20 @@ const definition = {
   ],
 }
 export default function EventualSafeStates() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const prev = run.frames[run.frames.indexOf(step) - 1], p = step.parent
+    return <>
+    <GraphTraversalView title="Graph with unresolved out-degree (Kahn on reversed edges)" n={run.input.length} directed edges={edgesFromAdjacency(run.input, true)}
+      current={p >= 0 ? p : step.current >= 0 ? step.current : null} neighbour={p >= 0 ? step.current : null}
+      visited={step.safe.map((s, i) => (s ? i : -1)).filter(i => i >= 0)} done={step.safe.map((s, i) => (s ? i : -1)).filter(i => i >= 0)}
+      frontier={step.queue} prevFrontier={prev ? prev.queue : []} tags={degreeTags(step.outdeg, 'out')}
+      notes={p >= 0 ? [`Edge ${p} -> ${step.current} points at a safe node, so node ${p} now waits on ${step.outdeg[p]} unresolved out-edge(s).`] : []}
+      legend={{ current: 'node whose out-degree drops (or node just popped)', neighbour: 'safe node it points to', done: 'safe' }} />
     <IndexedSequence label="Out-edges per node (graph[i])" length={run.input.length} active={step.current} valueAt={i => `[${run.input[i].join(',')}]`} roleAt={i => step.safe[i] ? 'safe' : i === step.parent ? 'parent' : ''} />
     <IndexedSequence label="Unresolved out-degree" length={run.input.length} active={step.parent} valueAt={i => step.outdeg[i]} roleAt={i => step.safe[i] ? 'safe' : ''} />
     <StackLane title="Queue (front first)" items={step.queue} />
     <output aria-label="Safe nodes">Safe so far: [{step.safe.map((s, i) => s ? i : -1).filter(i => i >= 0).join(', ')}]</output>
-  </>} renderReasoning={({ run, step }) => <>
+  </>}} renderReasoning={({ run, step }) => <>
     <p>{step.message}</p>
     <p><strong>Why reversal works:</strong> a node on a cycle can never reach out-degree 0, because the cycle members keep waiting on each other. Everything that can reach a cycle is stuck too.</p>
     {step.phase === 'done' && <p>Result: [{run.result.join(', ')}] out of {run.input.length} nodes.</p>}

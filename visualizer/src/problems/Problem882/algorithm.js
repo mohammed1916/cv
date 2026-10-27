@@ -1,3 +1,4 @@
+import { TracedHeap, heapView } from '../../components/shared/heapModel.js'
 export function parseInput(text) {
   const obj = JSON.parse(text)
   if (!obj || typeof obj !== 'object' || !Array.isArray(obj.edges) || !Number.isInteger(obj.maxMoves) || !Number.isInteger(obj.n)) {
@@ -25,29 +26,30 @@ export function buildTrace({ edges, maxMoves, n }) {
   const dist = Array(n).fill(null)
   dist[0] = 0
   const used = new Map()
-  let heap = [[0, 0]]
+  const heap = new TracedHeap((x, y) => x[0] - y[0] || x[1] - y[1], { format: ([d, u]) => `${u}:${d}` })
+  heap.push([0, 0])
   const settled = []
   let ans = 0
-  const base = () => ({ dist: [...dist], settled: [...settled], heap: heap.map(h => [...h]), ans })
+  const base = () => ({ dist: [...dist], settled: [...settled], heap: heap.data.map(h => [...h]), heapState: heapView(heap, { title: 'Priority queue (root = fewest moves; entries are node:moves)' }).heap, ans })
   const frames = [{ phase: 'start', ...base(), node: 0, edge: null, activeLine: 9, message: `Start Dijkstra at node 0 with distance 0. Moving along an edge with cnt new nodes costs cnt + 1 moves; budget maxMoves = ${maxMoves}.` }]
-  while (heap.length) {
-    heap.sort((x, y) => x[0] - y[0] || x[1] - y[1])
-    const [d, u] = heap.shift()
+  while (heap.size) {
+    const [d, u] = heap.pop()
     if (d > dist[u]) {
-      frames.push({ phase: 'pop', ...base(), node: u, edge: null, activeLine: 13, message: `Pop stale entry (${d}, node ${u}); a shorter path (${dist[u]}) is already known, so skip.` })
+      frames.push({ phase: 'pop', ...base(), ops: [{ type: 'stale', node: u, dist: d, best: dist[u] }], node: u, edge: null, activeLine: 13, message: `Pop stale entry (${d}, node ${u}); a shorter path (${dist[u]}) is already known, so skip.` })
       continue
     }
     ans += 1
     settled.push(u)
-    frames.push({ phase: 'pop', ...base(), node: u, edge: null, activeLine: 15, message: `Settle node ${u} at distance ${d} (≤ ${maxMoves}? ${d <= maxMoves ? 'yes' : 'no'}). It counts as one reachable original node.` })
+    frames.push({ phase: 'pop', ...base(), ops: [{ type: 'pop', node: u, dist: d }], node: u, edge: null, activeLine: 15, message: `Settle node ${u} at distance ${d} (≤ ${maxMoves}? ${d <= maxMoves ? 'yes' : 'no'}). It counts as one reachable original node.` })
     for (const [v, cnt] of graph[u]) {
       const reach = Math.min(cnt, Math.max(0, maxMoves - d))
       used.set(`${u},${v}`, reach)
       const d2 = d + cnt + 1
       const better = d2 < (dist[v] === null ? maxMoves + 1 : dist[v])
+      const old = dist[v] === null ? Infinity : dist[v]
       if (better) { heap.push([d2, v]); dist[v] = d2 }
       frames.push({
-        phase: 'relax', ...base(), node: u, edge: [u, v], activeLine: better ? 21 : 20,
+        phase: 'relax', ...base(), ops: [!better && old === Infinity ? { text: `Edge ${u}-${v}: ${d} + ${cnt + 1} = ${d2} exceeds the budget of ${maxMoves} moves, so ${v} is not reachable this way and dist[${v}] stays ∞.` } : { type: 'relax', u, v, w: cnt + 1, base: d, candidate: d2, old, result: better ? 'improved' : 'kept' }], node: u, edge: [u, v], activeLine: better ? 21 : 20,
         message: `Edge ${u}-${v} (cnt ${cnt}): from ${u} we can walk ${reach} of its subdivision nodes (min(cnt, maxMoves - ${d})). ` +
           (better ? `Reaching ${v} costs ${d2} ≤ ${maxMoves}, so dist[${v}] = ${d2} and it is queued.` : `Reaching ${v} would cost ${d2}, not an improvement within budget.`),
       })

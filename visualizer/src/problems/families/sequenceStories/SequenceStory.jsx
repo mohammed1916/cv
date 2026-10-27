@@ -1,8 +1,19 @@
 import AlgorithmWorkspace from "../../../components/shared/AlgorithmWorkspace";
 import IndexedSequence from "../../../components/shared/IndexedSequence";
 import TrieStateDiagram from "../../../components/shared/TrieStateDiagram";
+import TrieView from "../../../components/shared/TrieView";
 import RecordStateTable from "../../../components/shared/RecordStateTable";
 import DisjointSetView from "../../../components/shared/DisjointSetView";
+import DPDependencyView from "../../../components/shared/DPDependencyView";
+import ListPointerView from "../../../components/shared/ListPointerView";
+import WeightedGraphView from "../../../components/shared/WeightedGraphView";
+import FenwickView from "../../../components/shared/FenwickView";
+import IntervalView from "../../../components/shared/IntervalView";
+import HeapView from "../../../components/shared/HeapView";
+import StackqView from "../../../components/shared/StackqView";
+import HashMapView from "../../../components/shared/HashMapView";
+import SegtreeView from "../../../components/shared/SegtreeView";
+import GraphTraversalView from "../../../components/shared/GraphTraversalView";
 import styles from "./SequenceStory.module.css";
 
 const display = (value) =>
@@ -116,6 +127,17 @@ export default function SequenceStory({ definition }) {
               />
             )}
             {step.dsu && <DisjointSetView {...step.dsu} />}
+            {step.fenwick && <FenwickView {...step.fenwick} />}
+            {step.interval && <IntervalView {...step.interval} />}
+            {step.wgraph && <WeightedGraphView {...step.wgraph} />}
+            {step.heap && <HeapView {...step.heap} />}
+            {step.linkedList && <ListPointerView {...step.linkedList} />}
+            {step.trie && <TrieView {...step.trie} />}
+            {step.dpDeps && <DPDependencyView {...step.dpDeps} />}
+            {step.stackq && <StackqView {...step.stackq} />}
+            {step.hash && <HashMapView {...step.hash} />}
+            {step.segtree && <SegtreeView {...step.segtree} />}
+            {step.graph && <GraphTraversalView {...step.graph} />}
             {step.table && (
               <table>
                 <caption>

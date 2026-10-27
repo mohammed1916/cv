@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
+import TreeWalkView from '../../components/shared/TreeWalkView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -26,7 +26,7 @@ export default function MinimumDistanceBST() {
     if (step.current !== null) roles[step.current] = 'active'
     return <>
       <BinaryTreeLane title="Binary search tree" root={run.root} roles={roles} />
-      <IndexedSequence label="Values in in-order sequence so far" length={Math.max(step.order.length, 1)} active={step.order.length - 1} valueAt={i => (step.order.length ? step.order[i] : '-')} />
+      {step.treeWalk && <TreeWalkView {...step.treeWalk} />}
       <output aria-label="Tracking state">prev: {step.prev === null ? 'none' : step.prev} | best: {step.best === null ? 'none' : step.best}</output>
     </>
   }} renderReasoning={({ step }) => <>

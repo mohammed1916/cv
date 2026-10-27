@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../../components/shared/AlgorithmWorkspace';
 import TreeDiagram from '../../../components/shared/TreeDiagram';
 import IndexedSequence from '../../../components/shared/IndexedSequence';
+import TreeWalkView from '../../../components/shared/TreeWalkView';
 import {binaryTreeLayout} from '../../../components/shared/binaryTreeLayout';
 import styles from './TreeStory.module.css';
 
@@ -11,7 +12,8 @@ export default function TreeStory({definition}) {
    <h3>{label}</h3><TreeDiagram {...binaryTreeLayout(root)} activeIds={new Set(step.active)}
     labelForNode={node=>step.nodeLabels?.[node.id]!==undefined?`return ${step.nodeLabels[node.id]}`:step.active.includes(node.id)?'Current':''}/>
   </section>)}</div>
-  {step.output&&<IndexedSequence label="Recorded values / traversal frontier" length={step.output.length} active={step.output.length-1} valueAt={i=>display(step.output[i])}/>}
+  {step.treeWalk&&<TreeWalkView {...step.treeWalk}/>}
+  {step.output&&!step.treeWalk&&<IndexedSequence label="Recorded values / traversal frontier" length={step.output.length} active={step.output.length-1} valueAt={i=>display(step.output[i])}/>}
   {Object.keys(step.metrics).length>0&&<table><caption>Current decision state</caption><tbody>{Object.entries(step.metrics).map(([key,value])=><tr key={key}><th>{key}</th><td>{display(value)}</td></tr>)}</tbody></table>}
   {step.phase==='done'&&<output aria-label="Algorithm result">Result: {display(step.result)}</output>}
  </>} renderReasoning={()=><>

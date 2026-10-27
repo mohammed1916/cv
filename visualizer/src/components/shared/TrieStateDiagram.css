@@ -8,3 +8,7 @@
 .trie-state text { fill: var(--text); font-size: 15px; }
 .trie-state .trie-state__details { font-size: 10px; }
 .trie-state [data-active="true"] rect { stroke: var(--primary); stroke-width: 4; }
+.trie-state .trie-state__end { fill: none; stroke: var(--text-muted); stroke-width: 1.5; }
+.trie-state [data-role="created"] rect:first-of-type { stroke: var(--success, #16a34a); stroke-width: 4; fill: color-mix(in srgb, var(--success, #16a34a) 14%, var(--surface2)); }
+.trie-state [data-role="reused"] rect:first-of-type { stroke: var(--primary); stroke-width: 3; }
+.trie-state [data-active="true"] rect:first-of-type { stroke: var(--primary); stroke-width: 4; }

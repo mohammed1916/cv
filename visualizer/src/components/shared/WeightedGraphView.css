@@ -1,0 +1,36 @@
+.wgraph-view { margin-bottom: 16px; }
+.wgraph-view h3 { margin: 0 0 8px; font-size: .95rem; }
+.wgraph-view__ops { margin: 0 0 12px; padding-left: 20px; display: grid; gap: 4px; font-size: .85rem; line-height: 1.45; }
+.wgraph-view__body { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.wgraph-view__graph { flex: 1 1 300px; max-width: 420px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+.wgraph-view__graph svg { display: block; width: 100%; height: auto; }
+.wgraph-view__side { flex: 1 1 220px; min-width: 0; display: grid; gap: 10px; }
+.wgraph-view__edge { stroke: var(--text-muted); stroke-width: 1.6; fill: none; opacity: .55; }
+.wgraph-view__edge.is-active { stroke: var(--primary); stroke-width: 3; opacity: 1; }
+.wgraph-view__edge.is-chosen { stroke: var(--success, #16a34a); stroke-width: 3.4; opacity: 1; }
+.wgraph-view__edge.is-rejected { stroke: var(--danger, #dc2626); stroke-dasharray: 5 4; opacity: .8; }
+.wgraph-view__edge.is-tight { stroke: var(--warning, #d97706); stroke-width: 2.6; opacity: 1; }
+.wgraph-view__weight { font-size: 11px; fill: var(--text); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; text-anchor: middle; }
+.wgraph-view__arrow { fill: var(--text-muted); }
+.wgraph-view__node circle { fill: var(--surface); stroke: var(--border); stroke-width: 2; }
+.wgraph-view__node text { font-size: 12px; fill: var(--text); text-anchor: middle; }
+.wgraph-view__node .wgraph-view__dist { font-size: 10px; fill: var(--text-muted); }
+.wgraph-view__node.is-final circle { stroke: var(--success, #16a34a); }
+.wgraph-view__node.is-active circle { fill: var(--primary); stroke: var(--primary); }
+.wgraph-view__node.is-active text { fill: #fff; }
+.wgraph-view__table { border-collapse: collapse; font-size: .8rem; width: 100%; }
+.wgraph-view__table caption { text-align: left; font-weight: 600; padding-bottom: 4px; }
+.wgraph-view__table th, .wgraph-view__table td { border: 1px solid var(--border); padding: 3px 8px; text-align: left; }
+.wgraph-view__table tr.is-active { background: color-mix(in srgb, var(--primary) 14%, transparent); }
+.wgraph-view__table td.is-changed { font-weight: 700; color: var(--success, #16a34a); }
+.wgraph-view__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: .8rem; }
+.wgraph-view__chips li { border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; background: var(--surface); }
+.wgraph-view__chips li:first-child { border-color: var(--primary); }
+.wgraph-view__label { margin: 0 0 4px; font-size: .8rem; font-weight: 600; }
+.wgraph-view__empty { color: var(--text-muted); font-size: .8rem; margin: 0; }
+.wgraph-view__legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: var(--text-muted); }
+.wgraph-view__legend span::before { content: ''; display: inline-block; width: 16px; height: 0; border-top: 3px solid var(--text-muted); margin-right: 5px; vertical-align: 3px; }
+.wgraph-view__legend .is-chosen::before { border-color: var(--success, #16a34a); }
+.wgraph-view__legend .is-rejected::before { border-top-style: dashed; border-color: var(--danger, #dc2626); }
+.wgraph-view__legend .is-active::before { border-color: var(--primary); }
+.wgraph-view__legend .is-tight::before { border-color: var(--warning, #d97706); }

@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { GraphFrontierLane } from '../../components/shared/AlgorithmStatePrimitives'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
+import { colourName } from '../../components/shared/graphTraversalModel'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -27,11 +28,14 @@ export default function PossibleBipartition() {
   return <AlgorithmWorkspace definition={definition}
     renderVisual={({ run, step }) => {
       const { n, dislikes } = run.input
-      const nodes = Array.from({ length: n }, (_, i) => String(i + 1))
-      const colored = step.colors.map((c, i) => (c ? String(i + 1) : null)).filter(Boolean)
       return <>
-        <GraphFrontierLane title="Dislike graph (coloured = assigned)" nodes={nodes} edges={dislikes.map(([a, b]) => [String(a), String(b)])}
-          activeNode={step.node === null ? undefined : String(step.node)} visited={colored} embedded />
+        <GraphTraversalView title="Dislike graph with group colours" n={n} labelOf={i => i + 1} edges={dislikes.map(([a, b]) => [a - 1, b - 1])}
+          current={step.node === null ? null : step.node - 1} neighbour={step.other === null ? null : step.other - 1}
+          visited={step.colors.map((c, i) => (c ? i : -1)).filter(i => i >= 0)} frontier={step.queue.map(x => x - 1)}
+          prevFrontier={(run.frames[run.frames.indexOf(step) - 1]?.queue ?? []).map(x => x - 1)}
+          tags={Object.fromEntries(step.colors.map((c, i) => [i, `group ${c === 0 ? '?' : colourName(c === 1 ? 0 : 1)}`]))}
+          groups={Object.fromEntries(step.colors.map((c, i) => [i, c === 0 ? '' : c === 1 ? 0 : 1]))}
+          notes={step.node !== null && step.other !== null ? [`Examining dislike ${step.node}-${step.other}.`] : []} />
         <IndexedSequence label="Group of each person (0 = none, ±1 = the two groups)" length={n} indexOffset={1} valueAt={i => step.colors[i]}
           active={step.node === null ? -1 : step.node - 1} roleAt={i => (step.other === i + 1 ? 'neighbour' : '')} />
         <output aria-label="Queue">BFS queue: {step.queue.length ? step.queue.join(', ') : 'empty'}</output>

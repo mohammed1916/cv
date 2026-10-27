@@ -1,3 +1,4 @@
+import {intervalView} from '../../../components/shared/intervalModel.js';
 export const nextSolvers = {
   1053({arr},emit) {
     const a=[...arr];let left=a.length-2;while(left>=0&&a[left]<=a[left+1])left--;
@@ -28,7 +29,7 @@ export const nextSolvers = {
   },
   1094({trips,capacity},emit) {
     const changes=new Map();for(const[count,start,end]of trips){changes.set(start,(changes.get(start)||0)+count);changes.set(end,(changes.get(end)||0)-count);}let passengers=0;
-    for(const[location,change]of [...changes].sort((a,b)=>a[0]-b[0])){passengers+=change;emit(`At location ${location}, net passenger change is ${change}. Drop-offs and pickups share this boundary, so seats freed here can be reused immediately.`,{sequence:trips.map(t=>`[${t}]`),metrics:{location,change,passengers,capacity}},'update');if(passengers>capacity)return false;}return true;
+    const sweep=[...changes].sort((a,b)=>a[0]-b[0]);for(const[location,change]of sweep){passengers+=change;emit(`At location ${location}, net passenger change is ${change}. Drop-offs and pickups share this boundary, so seats freed here can be reused immediately.`,{sequence:trips.map(t=>`[${t}]`),...intervalView({title:`Trips on the road (capacity ${capacity}); passengers on board now: ${passengers}`,intervals:trips.map(([count,start,end])=>({start,end,label:`${count} riders`,role:end<=location?'done':start<=location?(passengers>capacity?'rejected':'active'):'pending'})),marker:location,markerLabel:`at ${location}`,events:sweep.map(([pos,delta])=>({pos,delta,label:'net pickups minus drop-offs'})),eventIndex:sweep.findIndex(([pos])=>pos===location),note:passengers>capacity?`${passengers} passengers exceed capacity ${capacity}, so the answer is false.`:`${passengers} of ${capacity} seats are in use.`}),metrics:{location,change,passengers,capacity}},'update');if(passengers>capacity)return false;}return true;
   },
   1099({nums,k},emit) {
     const a=[...nums].sort((x,y)=>x-y);let left=0,right=a.length-1,best=-1;

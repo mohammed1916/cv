@@ -1,6 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -24,12 +25,19 @@ const definition = {
 }
 
 export default function LoudAndRich() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => {
+    const prev = run.frames[run.frames.indexOf(step) - 1]
+    const resolved = step.ans.map((a, i) => (a === -1 ? -1 : i)).filter(i => i >= 0)
+    return <>
+    <GraphTraversalView title="Richer-than graph (arrow points from richer to poorer)" n={run.input.quiet.length} directed edges={run.input.richer}
+      current={step.x} neighbour={step.cand !== null && step.cand !== step.x ? step.cand : null} visited={resolved} done={resolved} frontier={step.path} prevFrontier={prev ? prev.path : []}
+      frontierKind="stack" frontierTitle="dfs call stack (top is last)" tags={Object.fromEntries(step.ans.map((a, i) => [i, `quiet ${run.input.quiet[i]}, ans ${a === -1 ? '?' : a}`]))}
+      legend={{ current: 'person being resolved', neighbour: 'candidate answer', frontier: 'in a dfs call', done: 'answer known' }} />
     <IndexedSequence label="quiet (index = person)" length={run.input.quiet.length} active={step.x ?? -1} valueAt={i => run.input.quiet[i]} roleAt={i => i === step.cand ? 'left' : ''} />
     <IndexedSequence label="ans so far (? = unknown)" length={run.input.quiet.length} active={step.x ?? -1} valueAt={i => (step.ans[i] === -1 ? '?' : step.ans[i])} />
     <StackLane title="dfs call stack" items={step.path.map(p => `dfs(${p})`)} note={step.cand == null ? '' : `candidate ${step.cand}`} />
     <output aria-label="Richer pairs">richer: {run.input.richer.map(([a, b]) => `${a} > ${b}`).join(', ') || 'none'}</output>
-  </>} renderReasoning={() => <>
+  </>}} renderReasoning={() => <>
     <p>Everyone richer than a richer person is also richer than you, so the answer for x is the quietest among x and the answers of its direct richer neighbours. Memoization makes each person resolved once.</p>
     <p>Quietness values are distinct, so comparisons never tie.</p>
   </>} />

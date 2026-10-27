@@ -1,11 +1,12 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import LinkedListLane from '../../components/shared/LinkedListLane'
+import ListPointerView from '../../components/shared/ListPointerView'
 import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'start', label: 'Empty list', description: 'No nodes yet.' },
+    { id: 'walk', label: 'Walk prev', description: 'Advance prev from the dummy node to the position before the target.' },
     { id: 'splice', label: 'Splice', description: 'Insert or delete at the target position.' },
     { id: 'get', label: 'get', description: 'Walk to the index and read its value.' },
     { id: 'done', label: 'Complete', description: 'All operations complete.' },
@@ -20,7 +21,7 @@ const definition = {
 
 export default function LinkedListDesign() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <LinkedListLane title="List" nodes={step.list.map((value, id) => ({ id, value }))} />
+    <ListPointerView {...step.view} />
     <OperationLog title="Operations" ops={step.log ?? []} current={step.op ?? -1} />
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

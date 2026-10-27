@@ -1,4 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
+import SegtreeView from '../../components/shared/SegtreeView'
 import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -18,8 +21,21 @@ const definition = {
   ],
 }
 
+function IntervalViewFor({ run, step }) {
+  const op = step.op === null || step.op === undefined ? null : run.input[step.op]
+  const role = !op ? null : op[0] === 'addRange' ? 'current' : op[0] === 'removeRange' ? 'rejected' : step.returned ? 'merged' : 'rejected'
+  const intervals = [
+    ...step.intervals.map(([start, end]) => ({ start, end, group: 'Tracked ranges', role: 'kept' })),
+    ...(op ? [{ start: op[1], end: op[2], group: `Operation: ${op[0]}`, role, label: op[0] === 'queryRange' ? (step.returned ? 'fully covered' : 'not fully covered') : undefined }] : []),
+  ]
+  const { interval } = intervalView({ title: 'Tracked ranges after each operation (half-open)', intervals, note: step.message })
+  return interval ? <IntervalView {...interval} /> : null
+}
+
 export default function RangeModule() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IntervalViewFor run={run} step={step} />
+    {step.seg && <SegtreeView {...step.seg} />}
     <table aria-label="Tracked intervals">
       <thead><tr><th>Interval</th></tr></thead>
       <tbody>{step.intervals.length === 0 ? <tr><td>none</td></tr> : step.intervals.map(([a, b]) => <tr key={`${a}-${b}`}><td>[{a}, {b})</td></tr>)}</tbody>

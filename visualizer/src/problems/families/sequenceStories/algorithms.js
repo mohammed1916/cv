@@ -1,3 +1,4 @@
+import {StackqLog,stackqView} from '../../../components/shared/stackqModel.js';
 // Each solver owns its decisions. Only immutable trace capture is shared.
 export function traceAlgorithm(id, input) {
   const frames = [];
@@ -207,13 +208,14 @@ const solvers = {
     return output;
   },
   1047({ s }, emit) {
-    const stack = [];
+    const log = new StackqLog(), stack = log.lane('kept letters', 'stack');
     [...s].forEach((letter, i) => {
-      const remove = stack.at(-1) === letter;
-      if (remove) stack.pop(); else stack.push(letter);
-      emit(remove ? `Remove ${letter}${letter}; the new stack top may match a later character.` : `Push ${letter}; it does not match the stack top.`, { index: i, output: stack, metrics: { action: remove ? 'pop pair' : 'push', size: stack.length } }, 'update');
+      const remove = stack.peek() === letter;
+      if (remove) stack.pop(`${letter} matches the top letter, so the adjacent pair ${letter}${letter} is removed.`);
+      else { if (stack.length) stack.keep(`the top ${stack.peek()} differs from ${letter}, so it stays.`); stack.push(letter, `${letter} does not match the top, so it is kept for now.`); }
+      emit(remove ? `Remove ${letter}${letter}; the new stack top may match a later character.` : `Push ${letter}; it does not match the stack top.`, { index: i, output: stack.items, metrics: { action: remove ? 'pop pair' : 'push', size: stack.length }, ...stackqView(log) }, 'update');
     });
-    return stack.join('');
+    return stack.items.join('');
   },
   1207({ nums }, emit) {
     const counts = new Map();

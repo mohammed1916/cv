@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
+import HeapView from '../../components/shared/HeapView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -21,8 +21,8 @@ const definition = {
 
 export default function CourseScheduleIII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
-    <StackLane title="Courses taken (durations)" items={step.taken.map(String)} dropped={step.phase === 'drop' && step.course ? [String(step.course.duration)] : []}
-      note={`finish time ${step.time}`} />
+    {step.heapState && <HeapView {...step.heapState} />}
+    <p>Finish time {step.time}</p>
     <output aria-label="Courses kept">Courses kept: {step.taken.length}{step.result !== undefined ? ` · final ${step.result}` : ''}</output>
   </>} renderReasoning={({ step }) => <>
     <p>{step.message}</p>

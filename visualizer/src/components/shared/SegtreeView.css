@@ -1,0 +1,27 @@
+.segtree-view { margin-bottom: 16px; }
+.segtree-view h3 { margin: 0 0 8px; font-size: .95rem; }
+.segtree-view__ops { margin: 0 0 12px; padding-left: 20px; display: grid; gap: 4px; font-size: .85rem; line-height: 1.45; }
+.segtree-view__note { margin: 0 0 8px; font-size: .8rem; color: var(--text-muted); }
+.segtree-view__scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 6px; }
+.segtree-view__scroll svg { display: block; margin: 0 auto; max-width: none; }
+.segtree-view__edge { stroke: var(--border); stroke-width: 1.5; }
+.segtree-view__node rect { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+.segtree-view__node text { fill: var(--text); }
+.segtree-view__value { font-size: 13px; font-weight: 700; }
+.segtree-view__range { font-size: 9.5px; opacity: .7; }
+.segtree-view__node.is-outside { opacity: .45; }
+.segtree-view__node.is-partial rect { stroke: var(--primary); stroke-width: 2.5; }
+.segtree-view__node.is-covered rect { fill: var(--primary); stroke: var(--primary); }
+.segtree-view__node.is-covered text { fill: #fff; }
+.segtree-view__node.is-pushed rect { stroke: var(--warning, #d97706); stroke-width: 3; stroke-dasharray: 4 2; }
+.segtree-view__node.is-pulled rect { stroke: var(--success, #16a34a); stroke-width: 2.5; }
+.segtree-view__tag rect { fill: var(--warning, #d97706); }
+.segtree-view__tag text { fill: #fff !important; font-size: 10px; font-weight: 700; }
+.segtree-view__legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: var(--text-muted); }
+.segtree-view__legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; border: 2px solid var(--border); vertical-align: -1px; }
+.segtree-view__legend .is-partial::before { border-color: var(--primary); }
+.segtree-view__legend .is-covered::before { background: var(--primary); border-color: var(--primary); }
+.segtree-view__legend .is-outside::before { opacity: .45; }
+.segtree-view__legend .is-pushed::before { border-color: var(--warning, #d97706); border-style: dashed; }
+.segtree-view__legend .is-pulled::before { border-color: var(--success, #16a34a); }
+.segtree-view__legend .is-tag::before { background: var(--warning, #d97706); border-color: var(--warning, #d97706); border-radius: 6px; }

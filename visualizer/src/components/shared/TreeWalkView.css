@@ -1,0 +1,10 @@
+.tree-walk { margin-bottom: 16px; display: grid; gap: 10px; }
+.tree-walk__decision { margin: 0; padding: 8px 10px; border-left: 3px solid var(--primary); background: var(--surface); border-radius: 6px; font-size: .88rem; line-height: 1.45; }
+.tree-walk__pending h3 { margin: 0 0 4px; font-size: .9rem; }
+.tree-walk__summary { margin: 0 0 6px; font-size: .8rem; color: var(--text-muted); overflow-wrap: anywhere; }
+.tree-walk__rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-width: 340px; }
+.tree-walk__rows li { display: flex; align-items: baseline; gap: 8px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: .85rem; }
+.tree-walk__rows li span { color: var(--text-muted); font-size: .75rem; }
+.tree-walk__rows li em { margin-left: auto; font-style: normal; font-size: .7rem; color: var(--primary); }
+.tree-walk__rows li.is-top { border-color: var(--primary); }
+.tree-walk__rows li.tree-walk__more { border-style: dashed; color: var(--text-muted); justify-content: center; }

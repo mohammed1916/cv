@@ -24,9 +24,11 @@ export function buildTrace(values) {
   const visited = []
   const order = []
   const frames = [{ phase: 'start', activeLine: 12, current: null, prev: null, best: null, visited: [], order: [], message: 'In a BST the in-order traversal yields values in increasing order, so the closest pair must be consecutive in that order. Track only the previous value.' }]
-  const snap = (phase, activeLine, current, message) => frames.push({ phase, activeLine, current: current ? current.id : null, prev, best: best === Infinity ? null : best, visited: [...visited], order: [...order], message })
+  const stack = []
+  const snap = (phase, activeLine, current, message, decision) => frames.push({ phase, activeLine, current: current ? current.id : null, prev, best: best === Infinity ? null : best, visited: [...visited], order: [...order], message, treeWalk: { kind: 'recursion', stack: stack.map(v => ({ label: `inorder(${v})` })), order: [...order], orderLabel: 'In-order values so far (sorted)', decision: decision ?? message } })
   function inorder(node) {
     if (!node) return
+    stack.push(node.value)
     snap('descend', 7, node, `Visit node ${node.value}: first finish its left subtree${node.left ? ` (root ${node.left.value})` : ' (empty)'}.`)
     inorder(node.left)
     visited.push(node.id)
@@ -39,6 +41,7 @@ export function buildTrace(values) {
     } else snap('visit', 10, node, `In-order visit ${node.value}: the smallest value, nothing to compare with yet.`)
     prev = node.value
     inorder(node.right)
+    stack.pop()
   }
   inorder(root)
   frames.push({ phase: 'done', activeLine: 13, current: null, prev, best, visited: [...visited], order: [...order], message: `Minimum difference between any two nodes: ${best}.` })

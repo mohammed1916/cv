@@ -1,4 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IntervalView from '../../components/shared/IntervalView'
+import { intervalView } from '../../components/shared/intervalModel.js'
 import OperationLog from '../../components/shared/OperationLog'
 import { buildTrace, parseInput, code } from './algorithm'
 
@@ -17,8 +19,20 @@ const definition = {
   ],
 }
 
+function IntervalViewFor({ step }) {
+  const rejected = step.phase === 'reject'
+  const intervals = [
+    ...step.booked.map(([start, end]) => ({ start, end, group: 'Booked', role: 'kept' })),
+    ...step.doubled.map(([start, end]) => ({ start, end, group: 'Double-booked (a third booking here is refused)', role: 'active' })),
+    ...(step.attempt ? [{ start: step.attempt[0], end: step.attempt[1], group: 'New booking', role: rejected ? 'rejected' : 'current', label: rejected ? 'would be a triple booking' : undefined }] : []),
+  ]
+  const { interval } = intervalView({ title: 'Single and double bookings on a time line', intervals, note: step.message })
+  return interval ? <IntervalView {...interval} /> : null
+}
+
 export default function MyCalendarII() {
   return <AlgorithmWorkspace definition={definition} renderVisual={({ step }) => <>
+    <IntervalViewFor step={step} />
     <table aria-label="Bookings and double bookings">
       <thead><tr><th>Booked</th><th>Double-booked</th></tr></thead>
       <tbody>{Array.from({ length: Math.max(step.booked.length, step.doubled.length, 1) }, (_, i) => <tr key={i}>

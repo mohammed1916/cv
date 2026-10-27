@@ -1,0 +1,20 @@
+.heap-view { margin-bottom: 16px; }
+.heap-view h3 { margin: 0 0 8px; font-size: .95rem; }
+.heap-view__ops { margin: 0 0 12px; padding-left: 20px; display: grid; gap: 4px; font-size: .85rem; line-height: 1.45; }
+.heap-view__more { list-style: none; margin-left: -20px; color: var(--text-muted); font-size: .75rem; }
+.heap-view__tree { border: 1px solid var(--border); border-radius: 10px; padding: 6px; background: var(--surface); margin-bottom: 10px; min-width: 0; }
+.heap-view__empty { color: var(--text-muted); font-size: .85rem; margin: 0 0 8px; }
+.heap-view__edge { stroke: var(--border); stroke-width: 2; }
+.heap-view__node circle { fill: var(--surface2); stroke: var(--border); stroke-width: 2; transition: fill .3s, stroke .3s; }
+.heap-view__node text { fill: var(--text); font-size: 11px; font-weight: 700; }
+.heap-view__node.is-root circle { stroke: var(--primary); }
+.heap-view__node.is-path circle { stroke: var(--warning, #d97706); stroke-width: 3; }
+.heap-view__node.is-new circle { fill: var(--success, #16a34a); stroke: var(--success, #16a34a); }
+.heap-view__node.is-moved circle { fill: var(--primary); stroke: var(--primary); }
+.heap-view__node.is-new text, .heap-view__node.is-moved text { fill: #fff; }
+.heap-view__legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 0; font-size: .72rem; color: var(--text-muted); }
+.heap-view__legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; border: 2px solid var(--border); vertical-align: -1px; }
+.heap-view__legend .is-root::before { border-color: var(--primary); }
+.heap-view__legend .is-path::before { border-color: var(--warning, #d97706); }
+.heap-view__legend .is-new::before { background: var(--success, #16a34a); border-color: var(--success, #16a34a); }
+.heap-view__legend .is-moved::before { background: var(--primary); border-color: var(--primary); }

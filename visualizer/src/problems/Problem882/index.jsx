@@ -1,6 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { GraphFrontierLane } from '../../components/shared/AlgorithmStatePrimitives'
+import WeightedGraphView from '../../components/shared/WeightedGraphView'
+import { wgraphState } from '../../components/shared/wgraphModel.js'
+import HeapView from '../../components/shared/HeapView'
 import { buildTrace, parseInput, code } from './algorithm'
 
 const definition = {
@@ -28,11 +30,17 @@ export default function ReachableNodesInSubdividedGraph() {
       const { n, edges } = run.input
       const nodes = Array.from({ length: n }, (_, i) => String(i))
       return <>
-        <GraphFrontierLane title="Original graph" nodes={nodes} edges={edges.map(([u, v]) => [String(u), String(v)])}
-          activeNode={step.node === null ? undefined : String(step.node)} visited={step.settled.map(String)} embedded />
+        {n <= 14 && <WeightedGraphView {...wgraphState({
+          labels: nodes, edges: edges.map(([u, v, c]) => [u, v, c + 1]), title: 'Original graph (edge weight = new nodes + 1 = moves to cross)',
+          dist: step.dist.map(x => (x === null ? Infinity : x)), settled: nodes.map((_, i) => step.settled.includes(i)), active: step.node ?? -1,
+          pq: [...step.heap].sort((x, y) => x[0] - y[0] || x[1] - y[1]).map(([d, u]) => `${d} @${u}`), pqLabel: 'Heap (moves @ node, smallest first)',
+          edgeStates: step.edge ? { [edges.findIndex(([a, b]) => (a === step.edge[0] && b === step.edge[1]) || (a === step.edge[1] && b === step.edge[0]))]: 'active' } : {},
+          ops: step.ops ?? [],
+        }).wgraph} />}
         <IndexedSequence label="dist from node 0 (blank = not reached within budget)" length={n} valueAt={i => (step.dist[i] === null ? '–' : step.dist[i])} active={step.node ?? -1}
           roleAt={i => (step.settled.includes(i) ? 'settled' : '')} />
-        <output aria-label="Heap">Heap: {step.heap.length ? step.heap.map(([d, u]) => `(${d}, ${u})`).join(' ') : 'empty'} | reachable so far: {step.ans}</output>
+        {step.heapState && <HeapView {...step.heapState} />}
+        <output aria-label="Reachable">Reachable so far: {step.ans}</output>
         {step.edge && <output aria-label="Current edge">Current edge: {step.edge[0]}-{step.edge[1]}</output>}
       </>
     }}
