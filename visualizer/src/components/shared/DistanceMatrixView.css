@@ -1,0 +1,4 @@
+.distance-matrix-view { margin-bottom: 16px; }
+.distance-matrix-view__queue { margin-top: 10px; font-size: .85rem; }
+.distance-matrix-view__queue h4 { margin: 0 0 4px; font-size: .9rem; }
+.distance-matrix-view__queue ol { margin: 0; padding-left: 22px; display: grid; gap: 2px; line-height: 1.4; }
