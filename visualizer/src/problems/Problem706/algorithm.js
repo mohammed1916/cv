@@ -11,11 +11,22 @@ export function parseInput(text) {
   return ops
 }
 
+export const code = `hashMapOperations(ops):
+  buckets = ten empty lists of [key, value] pairs
+  results = empty list
+  for each operation in ops
+    bucket = buckets[key mod 10]
+    if operation is put, update the pair for key in bucket, or append [key, value] if absent
+    if operation is remove, delete the pair for key from bucket
+    if operation is get, append the value for key in bucket, or -1 if absent, to results
+  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
 // Chained hashing with (key, value) pairs; get returns −1 when the key is missing.
 export function buildTrace(ops) {
   const buckets = Array.from({ length: BUCKETS }, () => [])
   const log = []
-  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: 2, message: `${BUCKETS} buckets of (key, value) pairs.` }]
+  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: L('buckets = ten empty lists'), message: `${BUCKETS} buckets of (key, value) pairs.` }]
   ops.forEach(([name, key, value], i) => {
     const bucket = key % BUCKETS
     const list = buckets[bucket]
@@ -25,25 +36,34 @@ export function buildTrace(ops) {
     else if (name === 'remove') { if (at >= 0) list.splice(at, 1) }
     else returned = at >= 0 ? list[at][1] : -1
     log.push({ name, args: name === 'put' ? [key, value] : [key], returned })
-    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), log: log.map(x => ({ ...x })), activeLine: name === 'put' ? 5 : name === 'remove' ? 8 : 10,
+    const line = name === 'put' ? L('update the pair for key in bucket') : name === 'remove' ? L('delete the pair for key from bucket') : L('append the value for key in bucket')
+    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), log: log.map(x => ({ ...x })), activeLine: line,
       message: `${name}(${key}${name === 'put' ? `, ${value}` : ''}) in bucket ${bucket}${returned === null ? '' : ` → ${returned}`}.` })
   })
-  frames.push({ phase: 'done', buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), op: ops.length - 1, log, activeLine: 12, message: 'All operations complete.' })
+  frames.push({ phase: 'done', buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), op: ops.length - 1, log, activeLine: L('return results'), message: 'All operations complete.' })
   return { input: ops, result: log.filter(x => x.name === 'get').map(x => x.returned), log, frames }
 }
 
-export const code = `class MyHashMap:
-    def __init__(self):
-        self.buckets = [[] for _ in range(10)]
-    def put(self, key, value):
-        b = self.buckets[key % 10]
-        for pair in b:
-            if pair[0] == key: pair[1] = value; return
-        b.append([key, value])
-    def get(self, key):
-        for k, v in self.buckets[key % 10]:
-            if k == key: return v
-        return -1
-    def remove(self, key):
-        b = self.buckets[key % 10]
-        b[:] = [p for p in b if p[0] != key]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def hash_map_operations(ops):
+    buckets = [[] for _ in range(10)]
+    results = []
+    for op in ops:
+        name, key = op[0], op[1]
+        bucket = buckets[key % 10]
+        if name == 'put':
+            value = op[2]
+            for pair in bucket:
+                if pair[0] == key:
+                    pair[1] = value
+                    break
+            else:
+                bucket.append([key, value])
+        elif name == 'remove':
+            bucket[:] = [pair for pair in bucket if pair[0] != key]
+        else:
+            found = -1
+            for pair in bucket:
+                if pair[0] == key:
+                    found = pair[1]
+            results.append(found)
+    return results`

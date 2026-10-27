@@ -34,7 +34,7 @@ export function buildTrace(rows) {
   const land = (r, c) => r >= 0 && c >= 0 && r < height && c < width && grid[r][c] === 1
   const seen = Array.from({ length: height }, () => Array(width).fill(false))
   const shapes = new Set()
-  const frames = [{ phase: 'start', activeLine: L('shapes = set()'), cell: null, island: [], shapes: 0, message: 'Scan the grid. Each unseen land cell starts an island.' }]
+  const frames = [{ phase: 'start', activeLine: L('shapes = empty set'), cell: null, island: [], shapes: 0, message: 'Scan the grid. Each unseen land cell starts an island.' }]
   for (let r = 0; r < height; r++) {
     for (let c = 0; c < width; c++) {
       if (!land(r, c) || seen[r][c]) continue
@@ -42,7 +42,7 @@ export function buildTrace(rows) {
       const explore = (y, x) => {
         seen[y][x] = true
         island.push([y, x])
-        frames.push({ phase: 'explore', activeLine: L('island.append'), cell: [y, x], island: [...island], shapes: shapes.size, message: `Collect (${y + 1}, ${x + 1}) into this island.` })
+        frames.push({ phase: 'explore', activeLine: L('append (r, c) to island'), cell: [y, x], island: [...island], shapes: shapes.size, message: `Collect (${y + 1}, ${x + 1}) into this island.` })
         for (const [dy, dx] of MOVES) {
           if (land(y + dy, x + dx) && !seen[y + dy][x + dx]) explore(y + dy, x + dx)
         }
@@ -54,25 +54,63 @@ export function buildTrace(rows) {
       frames.push({ phase: isNew ? 'new' : 'repeat', activeLine: L('shapes.add('), cell: [r, c], island: [...island], shapes: shapes.size, message: isNew ? 'A shape not seen before, once every rotation and reflection of it is considered.' : 'Same shape as an earlier island once rotations and reflections are allowed.' })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return len(shapes)'), cell: null, island: [], shapes: shapes.size, message: `${shapes.size} distinct shape(s) up to rotation and reflection.` })
+  frames.push({ phase: 'done', activeLine: L('return the number of shapes'), cell: null, island: [], shapes: shapes.size, message: `${shapes.size} distinct shape(s) up to rotation and reflection.` })
   return { input: rows, grid, result: shapes.size, frames }
 }
 
-export const code = `def numDistinctIslands2(grid):
+export const code = `numDistinctIslands2(grid):
+  seen = empty set
+  shapes = empty set
+  for each cell (r, c) in grid
+    if the cell is land and not in seen
+      island = empty list
+      explore(r, c) to collect its connected land into island
+      shapes.add(canonical key of island)
+  return the number of shapes
+explore(r, c):
+  mark (r, c) as seen
+  append (r, c) to island
+  for each of the four neighbors (nr, nc) of (r, c)
+    if (nr, nc) is land and not seen, explore(nr, nc)
+canonical key of island:
+  for each of the 8 rotations and reflections of island
+    shift the cells so the smallest row and column are 0
+    sort the cells and join them into one string
+  return the smallest string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def number_of_distinct_islands2(grid):
+    height, width = len(grid), len(grid[0])
     seen = set()
     shapes = set()
+    symmetries = [
+        lambda r, c: (r, c), lambda r, c: (r, -c), lambda r, c: (-r, c), lambda r, c: (-r, -c),
+        lambda r, c: (c, r), lambda r, c: (c, -r), lambda r, c: (-c, r), lambda r, c: (-c, -r),
+    ]
+
+    def canonical(cells):
+        best = None
+        for sym in symmetries:
+            moved = [sym(r, c) for r, c in cells]
+            min_r = min(r for r, _ in moved)
+            min_c = min(c for _, c in moved)
+            key = ';'.join(sorted(f'{r - min_r},{c - min_c}' for r, c in moved))
+            if best is None or key < best:
+                best = key
+        return best
+
     def explore(r, c, island):
         seen.add((r, c))
         island.append((r, c))
         for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
             nr, nc = r + dr, c + dc
-            if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]) and grid[nr][nc] == 1 and (nr, nc) not in seen:
+            if 0 <= nr < height and 0 <= nc < width and grid[nr][nc] == '1' and (nr, nc) not in seen:
                 explore(nr, nc, island)
-    for r in range(len(grid)):
-        for c in range(len(grid[0])):
-            if grid[r][c] == 1 and (r, c) not in seen:
+
+    for r in range(height):
+        for c in range(width):
+            if grid[r][c] == '1' and (r, c) not in seen:
                 island = []
                 explore(r, c, island)
                 shapes.add(canonical(island))
-    return len(shapes)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return len(shapes)`

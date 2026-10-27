@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'popMax', label: 'Pop max', description: 'Remove the largest value, the most recent if tied.' },
     { id: 'done', label: 'Complete', description: 'All operations are done.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/max-stack/',
   complexity: 'O(n) per popMax with a plain array, which the visualization uses. The visualization caps input at 30 operations.',

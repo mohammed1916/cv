@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'add', label: 'Add value', description: 'Keep the value only if it beats the smallest kept value.' },
     { id: 'done', label: 'Complete', description: 'Return every answer.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Stream (JSON object with k, nums and adds)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Stream (JSON object with k, nums and adds)',
   url: 'https://leetcode.com/problems/kth-largest-element-in-a-stream/',
   complexity: 'O(k) per add with this sorted list. A min-heap of size k gives O(log k) per add.',
   examples: [

@@ -13,6 +13,25 @@ export function parseInput(text) {
   return ops
 }
 
+export const code = `MyLinkedList():
+  dummy = sentinel node whose next is null
+  size = 0
+runOperation(name, index, value):
+  index is 0 for addAtHead, size for addAtTail, or the given index
+  if name is get or deleteAtIndex, require 0 <= index < size
+  otherwise require 0 <= index <= size
+  if the index is invalid, change nothing and return -1 for get
+  prev = dummy
+  walk prev forward index times
+  if name is get, cur = prev.next and return cur.value
+  if name is deleteAtIndex, doomed = prev.next
+    then prev.next = doomed.next and size -= 1
+  otherwise, new = node with value
+    new.next = prev.next
+    prev.next = new and size += 1
+  return the list`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
 // Singly linked list with a sentinel head. Every operation walks `prev` from the dummy node, then rewrites next pointers.
 export function buildTrace(ops) {
   const table = { dummy: { val: 'dummy', next: null } }
@@ -25,7 +44,7 @@ export function buildTrace(ops) {
     phase, op, returned, activeLine, message, list: values(), size, log: log.map(x => ({ ...x })),
     view: tracker.snapshot(table, 'dummy', [{ label: 'dummy', nodeId: 'dummy' }, ...pointers], hot, { title: 'Nodes and next pointers', doubly: false }),
   })
-  push('start', null, null, 3, 'An empty list: only the dummy sentinel exists, and dummy.next is null.')
+  push('start', null, null, L('dummy = sentinel node'), 'An empty list: only the dummy sentinel exists, and dummy.next is null.')
   ops.forEach((op, i) => {
     const [name, a, b] = op
     const call = `${name}(${[a, b].filter(x => x !== undefined).join(', ')})`
@@ -37,62 +56,93 @@ export function buildTrace(ops) {
     log.push(entry)
     if (!valid) {
       if (name === 'get') entry.returned = returned
-      push(name === 'get' ? 'get' : 'splice', i, entry.returned, name === 'get' ? 17 : name === 'deleteAtIndex' ? 12 : 6, `${call}: index ${index} is outside the list (length ${size}), so nothing changes${name === 'get' ? ' and -1 is returned' : ''}.`, [{ label: 'prev', nodeId: 'dummy' }])
+      push(name === 'get' ? 'get' : 'splice', i, entry.returned, L('if the index is invalid'), `${call}: index ${index} is outside the list (length ${size}), so nothing changes${name === 'get' ? ' and -1 is returned' : ''}.`, [{ label: 'prev', nodeId: 'dummy' }])
       return
     }
     // Walk prev to the node just before the target position (for get, cur lands on the target).
     let prev = 'dummy'
-    push('walk', i, null, name === 'get' ? 18 : name === 'deleteAtIndex' ? 13 : 7, `${call}: prev starts at dummy; it must advance ${index} time${index === 1 ? '' : 's'} to stand just before position ${index}.`, [{ label: 'prev', nodeId: prev }])
+    push('walk', i, null, L('prev = dummy'), `${call}: prev starts at dummy; it must advance ${index} time${index === 1 ? '' : 's'} to stand just before position ${index}.`, [{ label: 'prev', nodeId: prev }])
     for (let hop = 0; hop < index; hop++) {
       prev = table[prev].next
-      push('walk', i, null, name === 'get' ? 19 : name === 'deleteAtIndex' ? 14 : 8, `prev = prev.next moves to node ${prev} (value ${table[prev].val}), hop ${hop + 1} of ${index}.`, [{ label: 'prev', nodeId: prev }])
+      push('walk', i, null, L('walk prev forward index times'), `prev = prev.next moves to node ${prev} (value ${table[prev].val}), hop ${hop + 1} of ${index}.`, [{ label: 'prev', nodeId: prev }])
     }
     if (name === 'get') {
       const cur = table[prev].next
       entry.returned = table[cur].val
-      push('get', i, entry.returned, 20, `${call}: cur = prev.next is node ${cur}; return its value ${entry.returned}.`, [{ label: 'prev', nodeId: prev }, { label: 'cur', nodeId: cur }], [cur])
+      push('get', i, entry.returned, L('return cur.value'), `${call}: cur = prev.next is node ${cur}; return its value ${entry.returned}.`, [{ label: 'prev', nodeId: prev }, { label: 'cur', nodeId: cur }], [cur])
     } else if (name === 'deleteAtIndex') {
       const doomed = table[prev].next
-      push('splice', i, null, 15, `${call}: doomed = prev.next is node ${doomed} (value ${table[doomed].val}).`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [doomed])
+      push('splice', i, null, L('doomed = prev.next'), `${call}: doomed = prev.next is node ${doomed} (value ${table[doomed].val}).`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [doomed])
       table[prev].next = table[doomed].next
       size -= 1
-      push('splice', i, null, 15, `prev.next = doomed.next: node ${prev === 'dummy' ? 'dummy' : prev} now skips node ${doomed}, which is detached from the list.`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [prev])
+      push('splice', i, null, L('then prev.next = doomed.next'), `prev.next = doomed.next: node ${prev === 'dummy' ? 'dummy' : prev} now skips node ${doomed}, which is detached from the list.`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [prev])
     } else {
       const value = name === 'addAtIndex' ? b : a
       const fresh = nextId++
       table[fresh] = { val: value, next: null }
-      push('splice', i, null, 9, `${call}: create node ${fresh} (value ${value}); it is not linked yet, so it appears detached with next = null.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
+      push('splice', i, null, L('otherwise, new = node with value'), `${call}: create node ${fresh} (value ${value}); it is not linked yet, so it appears detached with next = null.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
       table[fresh].next = table[prev].next
-      push('splice', i, null, 9, `new.next = prev.next: the new node points at what prev used to point at (${table[fresh].next === null ? 'null' : `node ${table[fresh].next}`}).`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
+      push('splice', i, null, L('new.next = prev.next'), `new.next = prev.next: the new node points at what prev used to point at (${table[fresh].next === null ? 'null' : `node ${table[fresh].next}`}).`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
       table[prev].next = fresh
       size += 1
-      push('splice', i, null, 10, `prev.next = new: node ${prev} now points at node ${fresh}, completing the splice. Length is ${size}.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
+      push('splice', i, null, L('prev.next = new and size += 1'), `prev.next = new: node ${prev} now points at node ${fresh}, completing the splice. Length is ${size}.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
     }
   })
-  push('done', ops.length - 1, null, 20, `Final list: [${values().join(', ')}].`)
+  push('done', ops.length - 1, null, L('return the list'), `Final list: [${values().join(', ')}].`)
   const final = frames.at(-1)
   final.log = log
   return { input: ops, result: log.filter(x => x.name === 'get').map(x => x.returned), log, frames }
 }
 
-export const code = `class MyLinkedList:
+export const python = `class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class MyLinkedList:
     def __init__(self):
-        self.head = Node(0)  # sentinel
+        self.dummy = ListNode(0)
         self.size = 0
-    def addAtIndex(self, index, val):
-        if index > self.size: return
-        prev = self.head
-        for _ in range(index): prev = prev.next
-        prev.next = Node(val, prev.next)
+
+    def get(self, index):
+        if index < 0 or index >= self.size:
+            return -1
+        cur = self.dummy.next
+        for _ in range(index):
+            cur = cur.next
+        return cur.val
+
+    def add_at_index(self, index, val):
+        if index < 0 or index > self.size:
+            return
+        prev = self.dummy
+        for _ in range(index):
+            prev = prev.next
+        prev.next = ListNode(val, prev.next)
         self.size += 1
-    def deleteAtIndex(self, index):
-        if index >= self.size: return
-        prev = self.head
-        for _ in range(index): prev = prev.next
+
+    def delete_at_index(self, index):
+        if index < 0 or index >= self.size:
+            return
+        prev = self.dummy
+        for _ in range(index):
+            prev = prev.next
         prev.next = prev.next.next
         self.size -= 1
-    def get(self, index):
-        if index >= self.size: return -1
-        cur = self.head.next
-        for _ in range(index): cur = cur.next
-        return cur.val`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+def linked_list_operations(ops):
+    lst = MyLinkedList()
+    results = []
+    for op in ops:
+        name = op[0]
+        if name == 'get':
+            results.append(lst.get(op[1]))
+        elif name == 'addAtHead':
+            lst.add_at_index(0, op[1])
+        elif name == 'addAtTail':
+            lst.add_at_index(lst.size, op[1])
+        elif name == 'addAtIndex':
+            lst.add_at_index(op[1], op[2])
+        else:
+            lst.delete_at_index(op[1])
+    return results`

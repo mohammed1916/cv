@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import SegtreeView from '../../components/shared/SegtreeView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,12 +9,12 @@ const definition = {
     { id: 'drop', label: 'Drop square', description: 'Land on the tallest surface under the span.' },
     { id: 'done', label: 'Complete', description: 'Return the tallest stack after each drop.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Squares (JSON array of [left, side])',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Squares (JSON array of [left, side])',
   url: 'https://leetcode.com/problems/falling-squares/',
   complexity: 'O(n · w) time for this direct version over coordinate width w; a segment tree with lazy assignment gives O(n log w).',
   examples: [
     { label: 'Stacking', input: '[[1,2],[2,3],[6,1]]' },
-    { label: 'Overlap', input: '[[100,100],[200,100]]' },
+    { label: 'Overlap', input: '[[50,50],[80,50]]' },
     { label: 'Nested', input: '[[1,2],[1,3]]' },
   ],
 }

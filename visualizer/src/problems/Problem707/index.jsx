@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ListPointerView from '../../components/shared/ListPointerView'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'get', label: 'get', description: 'Walk to the index and read its value.' },
     { id: 'done', label: 'Complete', description: 'All operations complete.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Operations (JSON array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/design-linked-list/',
   complexity: 'O(index) per operation, which is O(n) in the worst case, and O(1) extra space.',
   examples: [

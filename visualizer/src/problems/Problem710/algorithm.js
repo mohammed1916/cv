@@ -19,22 +19,42 @@ export function buildTrace({ n, blacklist, draws }) {
   for (let v = m; v < n; v++) if (!black.has(v)) tail.push(v)
   let t = 0
   for (const b of blacklist) if (b < m) mapping.set(b, tail[t++])
-  const frames = [{ phase: 'start', draw: null, pick: null, mapping: [...mapping.entries()], activeLine: 2, message: `Map ${blacklist.length} blacklisted value(s) below ${m} to whitelisted values in [${m}, ${n}).` }]
+  const frames = [{ phase: 'start', draw: null, pick: null, mapping: [...mapping.entries()], activeLine: L('m = n minus'), message: `Map ${blacklist.length} blacklisted value(s) below ${m} to whitelisted values in [${m}, ${n}).` }]
   const results = []
   draws.forEach((r, i) => {
     const pick = mapping.has(r) ? mapping.get(r) : r
     results.push(pick)
-    frames.push({ phase: 'draw', index: i, draw: r, pick, mapping: [...mapping.entries()], result: results.slice(), activeLine: mapping.has(r) ? 6 : 5, message: mapping.has(r) ? `Draw ${r} is blacklisted; use ${pick}.` : `Draw ${r} is allowed.` })
+    frames.push({ phase: 'draw', index: i, draw: r, pick, mapping: [...mapping.entries()], result: results.slice(), activeLine: mapping.has(r) ? L('if r is a key in mapping') : L('otherwise, pick = r'), message: mapping.has(r) ? `Draw ${r} is blacklisted; use ${pick}.` : `Draw ${r} is allowed.` })
   })
-  frames.push({ phase: 'done', draw: null, pick: null, mapping: [...mapping.entries()], result: results, activeLine: 8, message: `Picks: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', draw: null, pick: null, mapping: [...mapping.entries()], result: results, activeLine: L('return results'), message: `Picks: [${results.join(', ')}].` })
   return { input: { n, blacklist, draws }, result: results, mapping, frames }
 }
 
-export const code = `class Solution:
-    def __init__(self, n, blacklist):
-        self.m = n - len(blacklist)
-        black = set(blacklist)
-        tail = iter(v for v in range(self.m, n) if v not in black)
-        self.map = {b: next(tail) for b in blacklist if b < self.m}
-    def pick(self, r):
-        return self.map.get(r, r)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `pickWithBlacklist(n, blacklist, draws):
+  m = n minus the count of blacklist
+  black = set of blacklist values
+  tail = the values from m to n - 1 that are not in black, in order
+  mapping = empty map
+  for each b in blacklist below m, map b to the next value taken from tail
+  results = empty list
+  for each draw r
+    if r is a key in mapping, pick = mapping[r]
+    otherwise, pick = r
+    append pick to results
+  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def random_pick_with_blacklist(n, blacklist, draws):
+    m = n - len(blacklist)
+    black = set(blacklist)
+    tail = [v for v in range(m, n) if v not in black]
+    mapping = {}
+    t = 0
+    for b in blacklist:
+        if b < m:
+            mapping[b] = tail[t]
+            t += 1
+    results = []
+    for r in draws:
+        results.append(mapping[r] if r in mapping else r)
+    return results`

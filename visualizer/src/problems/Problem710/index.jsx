@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'draw', label: 'Draw', description: 'Each draw is either allowed or redirected through the table.' },
     { id: 'done', label: 'Complete', description: 'All picks are allowed values.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Setup and draws (JSON object with n, blacklist and draws)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Setup and draws (JSON object with n, blacklist and draws)',
   url: 'https://leetcode.com/problems/random-pick-with-blacklist/',
   complexity: 'O(b) setup for b blacklisted values and O(1) per pick. The draws are supplied in the input so the run is reproducible.',
   examples: [

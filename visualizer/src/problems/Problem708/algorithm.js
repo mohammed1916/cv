@@ -15,7 +15,7 @@ export function buildTrace(spec) {
   const n = values.length
   const frames = []
   if (n === 0) {
-    frames.push({ phase: 'done', activeLine: L('return head'), prev: null, cur: null, nodes: [], result: [insert], message: 'The list is empty: the new node points to itself.' })
+    frames.push({ phase: 'done', activeLine: L('if head is empty'), prev: null, cur: null, nodes: [], result: [insert], message: 'The list is empty: the new node points to itself.' })
     return { input: spec, result: [insert], frames, head: null }
   }
   const nodes = values.map((value, id) => ({ id, value, next: null }))
@@ -40,24 +40,49 @@ export function buildTrace(spec) {
   const at = pivot ?? head
   at.next = { id: n, value: insert, next: at.next }
   const result = order(n + 1).map(item => item.value)
-  frames.push({ phase: 'insert', activeLine: L('prev.next = Node'), prev: at.id, cur: at.next.id, nodes: order(n + 1), result: null, fits: true, message: `Insert ${insert} after ${at.value}. The head stays where it was.` })
+  frames.push({ phase: 'insert', activeLine: L('link a new node holding insert'), prev: at.id, cur: at.next.id, nodes: order(n + 1), result: null, fits: true, message: `Insert ${insert} after ${at.value}. The head stays where it was.` })
   frames.push({ phase: 'done', activeLine: L('return head'), prev: null, cur: null, nodes: order(n + 1), result, message: `Read the cycle from the head: ${result.join(', ')}.` })
   return { input: spec, result, frames, head: head.id }
 }
 
-export const code = `def insert(head, insertVal):
-    if head is None:
-        node = Node(insertVal)
+export const code = `insertIntoCircularList(head, insert):
+  if head is empty, make a new node for insert that points to itself, and return it
+  prev = head
+  repeat
+    cur = prev.next
+    if insert fits between prev and cur in sorted order, or across the wrap, stop
+    prev = cur
+    if prev is head, stop
+  link a new node holding insert after prev, so its next is prev's old next
+  return head`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class Node:
+    def __init__(self, val, next=None):
+        self.val = val
+        self.next = next
+
+def insert_into_circular_list(values, insert):
+    if not values:
+        node = Node(insert)
         node.next = node
-        return node
+        return [insert]
+    nodes = [Node(v) for v in values]
+    for i, node in enumerate(nodes):
+        node.next = nodes[(i + 1) % len(nodes)]
+    head = nodes[0]
     prev = head
     while True:
         cur = prev.next
-        if prev.val <= insertVal <= cur.val or (prev.val > cur.val and (insertVal >= prev.val or insertVal <= cur.val)):
+        if prev.val <= insert <= cur.val or (prev.val > cur.val and (insert >= prev.val or insert <= cur.val)):
             break
         prev = cur
         if prev is head:
             break
-    prev.next = Node(insertVal, prev.next)
-    return head`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    prev.next = Node(insert, prev.next)
+    result = []
+    node = head
+    for _ in range(len(values) + 1):
+        result.append(node.val)
+        node = node.next
+    return result`

@@ -3,7 +3,7 @@ import IntervalView from '../../components/shared/IntervalView'
 import { intervalView } from '../../components/shared/intervalModel.js'
 import SegtreeView from '../../components/shared/SegtreeView'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'queryRange', label: 'queryRange', description: 'A query holds only if one interval covers it.' },
     { id: 'done', label: 'Complete', description: 'All operations complete.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Operations (JSON array of [name, left, right))',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array of [name, left, right))',
   url: 'https://leetcode.com/problems/range-module/',
   complexity: 'O(n) per operation for this list version; a balanced ordered set gives O(log n) plus interval work.',
   examples: [

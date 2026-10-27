@@ -17,55 +17,71 @@ export function parseInput(text) {
   return ops
 }
 
+export const code = `maxStackOperations(ops):
+  stack = empty list, bottom to top
+  results = empty list
+  for each operation in ops
+    if operation is push(value), append value to stack
+    if operation is pop, remove and return the top value
+    if operation is top, return the top value without removing it
+    if operation is peekMax, return the largest value in the stack
+    if operation is popMax, find the largest value, take its most recent position, and remove it
+    append the returned value to results, or null for push
+  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
 export function buildTrace(ops) {
   const stack = []
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('self.stack = []'), stack: [], index: null, result: null, message: 'An empty stack. popMax removes the largest value, and the most recent one if values tie.' }]
+  const frames = [{ phase: 'start', activeLine: L('stack = empty list'), stack: [], index: null, result: null, message: 'An empty stack. popMax removes the largest value, and the most recent one if values tie.' }]
   for (const [kind, value] of ops) {
     let out = null, index = null, activeLine, message
     if (kind === 'push') {
       stack.push(value)
-      activeLine = L('self.stack.append')
+      activeLine = L('append value to stack')
       message = `Push ${value}.`
     } else if (kind === 'pop') {
       out = stack.pop()
-      activeLine = L('return self.stack.pop()')
+      activeLine = L('remove and return the top value')
       message = `Pop ${out}.`
     } else if (kind === 'top') {
       out = stack.at(-1)
-      activeLine = L('return self.stack[-1]')
+      activeLine = L('return the top value without removing it')
       message = `The top is ${out}.`
     } else if (kind === 'peekMax') {
       out = Math.max(...stack)
-      activeLine = L('return max(self.stack)')
+      activeLine = L('return the largest value in the stack')
       message = `The largest value is ${out}.`
     } else {
       const best = Math.max(...stack)
       index = stack.lastIndexOf(best)
       out = stack.splice(index, 1)[0]
-      activeLine = L('return self.stack.pop(index)')
+      activeLine = L('take its most recent position')
       message = `Remove ${out}: the largest value, and the most recent one if values tie.`
     }
     result.push(out)
     frames.push({ phase: kind, activeLine, stack: [...stack], index, result: out, message })
   }
-  frames.push({ phase: 'done', activeLine: L('return self.stack.pop(index)'), stack: [...stack], index: null, result: null, message: `${result.length} operation(s) complete.` })
+  frames.push({ phase: 'done', activeLine: L('return results'), stack: [...stack], index: null, result: null, message: `${result.length} operation(s) complete.` })
   return { input: ops, result, frames }
 }
 
-export const code = `class MaxStack:
-    def __init__(self):
-        self.stack = []
-    def push(self, x):
-        self.stack.append(x)
-    def pop(self):
-        return self.stack.pop()
-    def top(self):
-        return self.stack[-1]
-    def peekMax(self):
-        return max(self.stack)
-    def popMax(self):
-        best = max(self.stack)
-        index = len(self.stack) - 1 - self.stack[::-1].index(best)
-        return self.stack.pop(index)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const python = `def max_stack_operations(ops):
+    stack = []
+    result = []
+    for op in ops:
+        kind = op[0]
+        if kind == 'push':
+            stack.append(op[1])
+            result.append(None)
+        elif kind == 'pop':
+            result.append(stack.pop())
+        elif kind == 'top':
+            result.append(stack[-1])
+        elif kind == 'peekMax':
+            result.append(max(stack))
+        else:
+            best = max(stack)
+            index = len(stack) - 1 - stack[::-1].index(best)
+            result.append(stack.pop(index))
+    return result`

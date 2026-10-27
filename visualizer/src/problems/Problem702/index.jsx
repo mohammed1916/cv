@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'search', label: 'Binary search', description: 'Halve the range that the probes bound.' },
     { id: 'done', label: 'Complete', description: 'Report the index, or -1.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Sorted array and target (JSON)',
   url: 'https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/',
   complexity: 'O(log n) reads. The visualization caps the array at 30 values.',

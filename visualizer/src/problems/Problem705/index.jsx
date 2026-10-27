@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import OperationLog from '../../components/shared/OperationLog'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'contains', label: 'contains', description: 'Search one bucket.' },
     { id: 'done', label: 'Complete', description: 'All operations complete.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Operations (JSON array of [name, key])',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Operations (JSON array of [name, key])',
   url: 'https://leetcode.com/problems/design-hashset/',
   complexity: 'O(1) expected per operation with a good hash and a bounded bucket chain.',
   examples: [

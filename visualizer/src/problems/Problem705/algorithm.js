@@ -9,11 +9,22 @@ export function parseInput(text) {
   return ops
 }
 
+export const code = `hashSetOperations(ops):
+  buckets = ten empty lists, indexed 0 through 9
+  results = empty list
+  for each [name, key] in ops
+    bucket = buckets[key mod 10]
+    if name is add, append key to bucket unless it is already there
+    if name is remove, delete key from bucket if it is there
+    if name is contains, append whether key is in bucket to results
+  return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
 // Chained hashing: key % 10 chooses a bucket; each bucket is a list of distinct keys.
 export function buildTrace(ops) {
   const buckets = Array.from({ length: BUCKETS }, () => [])
   const log = []
-  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: 2, message: `${BUCKETS} buckets; the bucket index is key mod ${BUCKETS}.` }]
+  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: L('buckets = ten empty lists'), message: `${BUCKETS} buckets; the bucket index is key mod ${BUCKETS}.` }]
   ops.forEach(([name, key], i) => {
     const bucket = key % BUCKETS
     const list = buckets[bucket]
@@ -22,21 +33,25 @@ export function buildTrace(ops) {
     else if (name === 'remove') { const at = list.indexOf(key); if (at >= 0) list.splice(at, 1) }
     else returned = list.includes(key)
     log.push({ name, args: [key], returned })
-    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => [...b]), log: log.map(x => ({ ...x })), activeLine: name === 'add' ? 5 : name === 'remove' ? 7 : 9,
+    const line = name === 'add' ? L('append key to bucket unless it is already there') : name === 'remove' ? L('delete key from bucket if it is there') : L('append whether key is in bucket to results')
+    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => [...b]), log: log.map(x => ({ ...x })), activeLine: line,
       message: `${name}(${key}) → bucket ${bucket}${returned === null ? '' : `, returns ${returned}`}.` })
   })
-  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), log, activeLine: 11, message: 'All operations complete.' })
+  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), log, activeLine: L('return results'), message: 'All operations complete.' })
   return { input: ops, result: log.filter(x => x.name === 'contains').map(x => x.returned), log, frames }
 }
 
-export const code = `class MyHashSet:
-    def __init__(self):
-        self.buckets = [[] for _ in range(10)]
-    def add(self, key):
-        b = self.buckets[key % 10]
-        if key not in b: b.append(key)
-    def remove(self, key):
-        b = self.buckets[key % 10]
-        if key in b: b.remove(key)
-    def contains(self, key):
-        return key in self.buckets[key % 10]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def hash_set_operations(ops):
+    buckets = [[] for _ in range(10)]
+    results = []
+    for name, key in ops:
+        bucket = buckets[key % 10]
+        if name == 'add':
+            if key not in bucket:
+                bucket.append(key)
+        elif name == 'remove':
+            if key in bucket:
+                bucket.remove(key)
+        else:
+            results.append(key in bucket)
+    return results`

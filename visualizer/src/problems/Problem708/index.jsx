@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import LinkedListLane from '../../components/shared/LinkedListLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'insert', label: 'Insert', description: 'Link the new node after the pivot.' },
     { id: 'done', label: 'Complete', description: 'Read the cycle from the head.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Sorted circular list values (from the head) and insert (JSON)',
   url: 'https://leetcode.com/problems/insert-into-a-sorted-circular-linked-list/',
   complexity: 'O(n) time and O(1) extra space. The visualization caps the list at 15 values.',

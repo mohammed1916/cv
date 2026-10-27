@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'undo', label: 'Backtrack', description: 'The branch failed; remove the number and try another bucket.' },
     { id: 'done', label: 'Complete', description: 'Report whether the split exists.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Input (JSON object with nums and k)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Input (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/partition-to-k-equal-sum-subsets/',
   complexity: 'Exponential in the worst case; sorting descending and skipping equal empty buckets prune most branches.',
   examples: [
