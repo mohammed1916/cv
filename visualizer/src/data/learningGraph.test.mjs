@@ -78,7 +78,8 @@ test('algorithm variants stay separate and unsupported techniques do not borrow 
   assert.ok(index.byConcept['knapsack-01'].problems.some(problem => problem.number === '416'));
   assert.ok(!index.byConcept['knapsack-01'].problems.some(problem => problem.number === '322'));
   assert.ok(index.byConcept['knapsack-unbounded'].problems.some(problem => problem.number === '322'));
-  for (const id of ['alpha-beta', 'knapsack-bounded', 'knapsack-mixed', 'dsu-rollback']) {
+  assert.ok(index.byConcept['knapsack-bounded'].problems.some(problem => problem.number === '2585'));
+  for (const id of ['alpha-beta', 'knapsack-mixed', 'dsu-rollback']) {
     assert.equal(index.byConcept[id].problems.length, 0);
     assert.equal(index.byConcept[id].capabilities.length, 0);
   }
