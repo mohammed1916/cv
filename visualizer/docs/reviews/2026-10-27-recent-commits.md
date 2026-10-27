@@ -4,7 +4,7 @@ Review baseline: `31acf774170e409104e7603e218d1f6d70343a6d`. This is a spot-chec
 
 ## 1. P2 — DP window can exclude the cell being computed
 
-Status: open. Introduced in `31acf7741`.
+Status: resolved in `40ce9ad51`. The window now always includes the target, and sources outside it are listed under the table. Re-verified on 2026-10-27: `node --test src/components/shared/*Model.test.mjs` passes 81/81 with the regression tests.
 
 Location: `src/components/shared/dpDependencyModel.js:81–83`.
 
@@ -16,7 +16,7 @@ Fix criteria: always include the target in the visible row/column bounds. Includ
 
 ## 2. P2 — Union-find narration falsely claims full compression
 
-Status: open. Introduced in `ec6474289`.
+Status: resolved in `40ce9ad51`. The narration reports the real before/after parents under path halving ("re-points 7 from 6 to 4"), with a depth-three regression test. Re-verified on 2026-10-27: `node --test src/components/shared/*Model.test.mjs` passes 81/81 with the regression tests.
 
 Locations: `src/components/shared/disjointSetModel.js:6–7` and `src/problems/families/collectionStories/authoredUnionFind.js:8–14`.
 
@@ -28,7 +28,7 @@ Fix criteria: record and describe actual before/after parents for halving, or de
 
 ## 3. P2 — Stack integration test fails: 901 and 946 emit no stack view
 
-Status: open. The integration expectation was added in `31acf7741`; these base solvers were not migrated.
+Status: resolved in `40ce9ad51`. Problems 901 and 946 emit the stackq view; `baseAlgorithms.js` was regenerated. Re-verified on 2026-10-27: `node --test src/components/shared/*Model.test.mjs` passes 81/81 with the regression tests.
 
 Locations: `src/components/shared/stackqModel.test.mjs:50–58`; `src/problems/families/collectionStories/algorithms.js:88–89,142–143`.
 
