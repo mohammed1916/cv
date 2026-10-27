@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'improve', label: 'New best', description: 'This triple beats the best so far.' },
     { id: 'done', label: 'Complete', description: 'Return the largest area.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array points (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array points (JSON)',
   url: 'https://leetcode.com/problems/largest-triangle-area/',
   complexity: 'O(n^3) time and O(1) extra space; fine for n up to 50.',
   examples: [

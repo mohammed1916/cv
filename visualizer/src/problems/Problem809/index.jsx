@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, runsOf, code } from './algorithm'
+import { buildTrace, parseInput, runsOf, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'reject', label: 'Not stretchy', description: 'A mismatch rules the word out.' },
     { id: 'done', label: 'Complete', description: 'Return the stretchy count.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {s, words} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {s, words} (JSON)',
   url: 'https://leetcode.com/problems/expressive-words/',
   complexity: 'O(total length of s and all words) time and space for the encodings.',
   examples: [

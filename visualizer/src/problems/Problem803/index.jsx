@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'merge', label: 'Merge and count', description: 'Compare ceiling-component size before and after.' },
     { id: 'done', label: 'Complete', description: 'Return the fallen counts.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {grid, hits} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {grid, hits} (JSON)',
   url: 'https://leetcode.com/problems/bricks-falling-when-hit/',
   complexity: 'O(R*C + H) union-find operations, near-linear with path compression and union by size.',
   examples: [

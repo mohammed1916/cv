@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'pay', label: 'Assign worker', description: 'The worker earns the best profit among reachable jobs.' },
     { id: 'done', label: 'Complete', description: 'Return the summed profit.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object with difficulty, profit, worker (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with difficulty, profit, worker (JSON)',
   url: 'https://leetcode.com/problems/most-profit-assigning-work/',
   complexity: 'O(n log n + m log m) time for sorting; the two-pointer sweep is O(n + m).',
   examples: [

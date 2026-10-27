@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'backoff', label: 'Back off early', description: 'Reverse before the target, retreat j steps, reverse again.' },
     { id: 'done', label: 'Complete', description: 'Return dp[target].' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Target (JSON integer)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Target (JSON integer)',
   url: 'https://leetcode.com/problems/race-car/',
   complexity: 'O(target log target) time, O(target) space. Each target tries O(log target) turn-around points.',
   examples: [{ label: 'Target 3', input: '3' }, { label: 'Target 6', input: '6' }, { label: 'Target 100', input: '100' }],

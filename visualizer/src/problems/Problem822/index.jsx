@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'candidate', label: 'Scan faces', description: 'Take the smallest face that is not bad.' },
     { id: 'done', label: 'Complete', description: 'Return the smallest good number, or 0.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object with fronts and backs (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with fronts and backs (JSON)',
   url: 'https://leetcode.com/problems/card-flipping-game/',
   complexity: 'O(n) time and O(n) space for the bad set.',
   examples: [

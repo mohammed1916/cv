@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'add', label: 'Add contribution', description: 'Multiply the start choices by the end choices.' },
     { id: 'done', label: 'Complete', description: 'Return the accumulated total.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'String of uppercase letters (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String of uppercase letters (JSON)',
   url: 'https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/',
   complexity: 'O(n) time with precomputed neighbours (the shown code uses rfind/find, O(n * 26) in practice); O(1) extra space.',
   examples: [{ label: 'ABC', input: '"ABC"' }, { label: 'ABA', input: '"ABA"' }, { label: 'LEETCODE', input: '"LEETCODE"' }],

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'decide', label: 'Parity rule', description: 'XOR zero or an even count wins.' },
     { id: 'done', label: 'Complete', description: 'Return the winner.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/chalkboard-xor-game/',
   complexity: 'O(n) time, O(1) extra space; the game tree is never searched.',
   examples: [

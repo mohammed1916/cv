@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'cell', label: 'Raise building', description: 'Raise to min(row max, column max).' },
     { id: 'done', label: 'Complete', description: 'Return the total height added.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Square grid (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Square grid (JSON)',
   url: 'https://leetcode.com/problems/max-increase-to-keep-city-skyline/',
   complexity: 'O(n^2) time, O(n) extra space.',
   examples: [

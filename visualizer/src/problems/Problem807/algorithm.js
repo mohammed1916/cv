@@ -10,9 +10,9 @@ export function buildTrace(grid) {
   const colMax = grid[0].map((_, c) => Math.max(...grid.map(r => r[c])))
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, rowMax: null, colMax: null, cell: null, total: 0, raised: grid.map(r => r.map(() => null)), ...extra })
-  push('start', 1, 'The skyline seen from each side is the row / column maximum. A building can grow until it would change one of them.')
-  push('rows', 2, `Row maxima (skyline from east/west): [${rowMax.join(', ')}].`, { rowMax })
-  push('cols', 3, `Column maxima (skyline from north/south): [${colMax.join(', ')}].`, { rowMax, colMax })
+  push('start', L('read the grid'), 'The skyline seen from each side is the row / column maximum. A building can grow until it would change one of them.')
+  push('rows', L('set rowMax'), `Row maxima (skyline from east/west): [${rowMax.join(', ')}].`, { rowMax })
+  push('cols', L('set colMax'), `Column maxima (skyline from north/south): [${colMax.join(', ')}].`, { rowMax, colMax })
   let total = 0
   const raised = grid.map(r => r.map(() => null))
   for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
@@ -20,16 +20,28 @@ export function buildTrace(grid) {
     const gain = cap - grid[r][c]
     total += gain
     raised[r][c] = cap
-    frames.push({ phase: 'cell', activeLine: 7, rowMax, colMax, cell: [r, c], total, raised: raised.map(x => [...x]), message: `Cell (${r}, ${c}) = ${grid[r][c]}: cap = min(row ${rowMax[r]}, col ${colMax[c]}) = ${cap}, so add ${gain}. Total ${total}.` })
+    frames.push({ phase: 'cell', activeLine: L('set cap'), rowMax, colMax, cell: [r, c], total, raised: raised.map(x => [...x]), message: `Cell (${r}, ${c}) = ${grid[r][c]}: cap = min(row ${rowMax[r]}, col ${colMax[c]}) = ${cap}, so add ${gain}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: 8, rowMax, colMax, cell: null, total, raised, message: `Maximum total increase: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), rowMax, colMax, cell: null, total, raised, message: `Maximum total increase: ${total}.` })
   return { input: grid, result: total, frames }
 }
-export const code = `def maxIncreaseKeepingSkyline(grid):
-    rowMax = [max(row) for row in grid]
-    colMax = [max(col) for col in zip(*grid)]
+export const code = `read the grid and let n be its number of rows
+set rowMax[r] to the largest height in row r, for each row r
+set colMax[c] to the largest height in column c, for each column c
+set total to 0
+for each row r from 0 to n - 1
+  for each column c from 0 to n - 1
+    set cap to min(rowMax[r], colMax[c])
+    add cap - grid[r][c] to total
+return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def max_increase_keeping_skyline(grid):
+    row_max = [max(row) for row in grid]
+    col_max = [max(col) for col in zip(*grid)]
     total = 0
     for r in range(len(grid)):
         for c in range(len(grid[0])):
-            total += min(rowMax[r], colMax[c]) - grid[r][c]
-    return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+            total += min(row_max[r], col_max[c]) - grid[r][c]
+    return total
+`

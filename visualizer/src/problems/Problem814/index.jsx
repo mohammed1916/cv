@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'decide', label: 'Keep or drop', description: 'Report whether this subtree contains a 1.' },
     { id: 'done', label: 'Complete', description: 'Return the pruned tree.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Level-order tree (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Level-order tree (JSON)',
   url: 'https://leetcode.com/problems/binary-tree-pruning/',
   complexity: 'O(n) time and O(h) recursion space.',
   examples: [

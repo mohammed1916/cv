@@ -31,25 +31,25 @@ export function buildTrace({ grid, hits }) {
     phase, activeLine, message, g: g.map(r => [...r]), res: [...res], cell: null, hitIndex: -1,
     attached: g.map((row, r) => row.map((v, c) => v === 1 && find(r * C + c) === find(top))), ...extra,
   })
-  push('start', 1, 'Falling bricks are hard to undo, so work backwards: remove every hit brick first, then add them back in reverse order.')
+  push('start', L('let R and C'), 'Falling bricks are hard to undo, so work backwards: remove every hit brick first, then add them back in reverse order.')
   for (const [r, c] of hits) g[r][c] -= 1
-  push('remove', 5, 'Subtract 1 from each hit cell. A hit on a real brick becomes 0; a hit on an empty cell becomes -1 so it is not restored later.')
+  push('remove', L('subtract 1'), 'Subtract 1 from each hit cell. A hit on a real brick becomes 0; a hit on an empty cell becomes -1 so it is not restored later.')
   for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) {
     if (g[r][c] !== 1) continue
     if (r === 0) union(r * C + c, top)
     if (r > 0 && g[r - 1][c] === 1) union(r * C + c, (r - 1) * C + c)
     if (c > 0 && g[r][c - 1] === 1) union(r * C + c, r * C + c - 1)
   }
-  push('build', 20, `Union all remaining bricks. Bricks sharing the ceiling node's set (green) are stable: ${size[find(top)] - 1} of them.`)
+  push('build', L('for each cell (r, c)'), `Union all remaining bricks. Bricks sharing the ceiling node's set (green) are stable: ${size[find(top)] - 1} of them.`)
   for (let i = hits.length - 1; i >= 0; i--) {
     const [r, c] = hits[i]
     g[r][c] += 1
     if (g[r][c] !== 1) {
-      push('skip', 30, `Hit ${i} at (${r}, ${c}) was an empty cell, so nothing fell: res[${i}] = 0.`, { cell: [r, c], hitIndex: i })
+      push('skip', L('set res[i] to 0'), `Hit ${i} at (${r}, ${c}) was an empty cell, so nothing fell: res[${i}] = 0.`, { cell: [r, c], hitIndex: i })
       continue
     }
     const before = size[find(top)]
-    push('restore', 31, `Undo hit ${i}: put the brick back at (${r}, ${c}). Stable bricks before: ${before - 1}.`, { cell: [r, c], hitIndex: i })
+    push('restore', L('add 1 to g'), `Undo hit ${i}: put the brick back at (${r}, ${c}). Stable bricks before: ${before - 1}.`, { cell: [r, c], hitIndex: i })
     if (r === 0) union(r * C + c, top)
     for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
       const nr = r + dr, nc = c + dc
@@ -57,12 +57,30 @@ export function buildTrace({ grid, hits }) {
     }
     const after = size[find(top)]
     res[i] = Math.max(0, after - before - 1)
-    push('merge', 38, `Merge with neighbours: stable bricks now ${after - 1}. The brick itself does not count as fallen, so res[${i}] = max(0, ${after} - ${before} - 1) = ${res[i]}.`, { cell: [r, c], hitIndex: i })
+    push('merge', L('set res[i] to max'), `Merge with neighbours: stable bricks now ${after - 1}. The brick itself does not count as fallen, so res[${i}] = max(0, ${after} - ${before} - 1) = ${res[i]}.`, { cell: [r, c], hitIndex: i })
   }
-  push('done', 39, `Bricks dropped per hit: [${res.join(', ')}].`)
+  push('done', L('return res'), `Bricks dropped per hit: [${res.join(', ')}].`)
   return { input: { grid, hits }, result: res, frames }
 }
-export const code = `def hitBricks(grid, hits):
+export const code = `let R and C be the number of rows and columns, and top be the ceiling node R * C
+copy grid into g, then subtract 1 from g at each hit cell
+set up union-find over the cells and the ceiling node top
+for each cell (r, c) with g[r][c] equal to 1
+  if r is 0, union the cell with top
+  if the cell above is 1, union the cell with it
+  if the cell to the left is 1, union the cell with it
+set res to a list of zeros, one per hit
+for hit i from the last hit back to the first
+  add 1 to g at the cell of hit i
+  if g at that cell is not 1, set res[i] to 0 and move to the previous hit
+  remember the size of the ceiling component as before
+  if the cell is in row 0, union the cell with top
+  union the cell with each neighbour that is 1
+  set res[i] to max(0, the new ceiling size - before - 1)
+return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def hit_bricks(grid, hits):
     R, C = len(grid), len(grid[0])
     g = [row[:] for row in grid]
     for r, c in hits:
@@ -78,26 +96,33 @@ export const code = `def hitBricks(grid, hits):
     def union(a, b):
         x, y = find(a), find(b)
         if x != y:
-            if size[x] < size[y]: x, y = y, x
+            if size[x] < size[y]:
+                x, y = y, x
             parent[y] = x
             size[x] += size[y]
     for r in range(R):
         for c in range(C):
             if g[r][c] == 1:
-                if r == 0: union(c, top)
-                if r > 0 and g[r-1][c] == 1: union(r*C+c, (r-1)*C+c)
-                if c > 0 and g[r][c-1] == 1: union(r*C+c, r*C+c-1)
+                if r == 0:
+                    union(c, top)
+                if r > 0 and g[r - 1][c] == 1:
+                    union(r * C + c, (r - 1) * C + c)
+                if c > 0 and g[r][c - 1] == 1:
+                    union(r * C + c, r * C + c - 1)
     res = [0] * len(hits)
     for i in range(len(hits) - 1, -1, -1):
         r, c = hits[i]
         g[r][c] += 1
-        if g[r][c] != 1: continue
+        if g[r][c] != 1:
+            continue
         before = size[find(top)]
-        if r == 0: union(c, top)
-        for dr, dc in ((1,0),(-1,0),(0,1),(0,-1)):
+        if r == 0:
+            union(r * C + c, top)
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             nr, nc = r + dr, c + dc
             if 0 <= nr < R and 0 <= nc < C and g[nr][nc] == 1:
-                union(r*C+c, nr*C+nc)
+                union(r * C + c, nr * C + nc)
         after = size[find(top)]
         res[i] = max(0, after - before - 1)
-    return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return res
+`

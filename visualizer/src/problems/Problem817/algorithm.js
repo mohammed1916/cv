@@ -14,31 +14,50 @@ export function buildTrace({ head, nums }) {
   let count = 0, inRun = false
   const marks = head.map(() => '')
   const push = (phase, activeLine, message, index = -1) => frames.push({ phase, activeLine, message, index, count, inRun, marks: [...marks] })
-  push('start', 2, `Put nums in a set. A component is a maximal run of consecutive list nodes whose values are all in {${nums.join(', ')}}.`)
+  push('start', L('set S to'), `Put nums in a set. A component is a maximal run of consecutive list nodes whose values are all in {${nums.join(', ')}}.`)
   head.forEach((v, i) => {
     if (S.has(v)) {
       if (!inRun) {
         count += 1; inRun = true
         marks[i] = 'start'
-        push('open', 9, `Node ${v} is in nums and the previous node was not: a new component begins. Count = ${count}.`, i)
+        push('open', L('add 1 to count'), `Node ${v} is in nums and the previous node was not: a new component begins. Count = ${count}.`, i)
       } else {
         marks[i] = 'inside'
-        push('extend', 7, `Node ${v} is in nums and continues the current component. Count stays ${count}.`, i)
+        push('extend', L('extends the current'), `Node ${v} is in nums and continues the current component. Count stays ${count}.`, i)
       }
     } else {
       inRun = false
       marks[i] = 'gap'
-      push('close', 12, `Node ${v} is not in nums, so any component ends here.`, i)
+      push('close', L('if cur.val is not in S'), `Node ${v} is not in nums, so any component ends here.`, i)
     }
   })
-  push('done', 14, `${count} component${count === 1 ? '' : 's'}.`)
+  push('done', L('return count'), `${count} component${count === 1 ? '' : 's'}.`)
   return { input: { head, nums }, result: count, frames }
 }
-export const code = `def numComponents(head, nums):
+export const code = `set S to the set of values in nums
+set count to 0, and set inRun to false
+set cur to the head node
+while cur is not empty
+  if cur.val is not in S, set inRun to false
+  otherwise if inRun is false, add 1 to count and set inRun to true
+  otherwise the node extends the current component, so inRun stays true
+  set cur to cur.next
+return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def num_components(head, nums):
+    first = None
+    for v in reversed(head):
+        first = ListNode(v, first)
     S = set(nums)
     count = 0
     in_run = False
-    cur = head
+    cur = first
     while cur:
         if cur.val in S:
             if not in_run:
@@ -47,4 +66,5 @@ export const code = `def numComponents(head, nums):
         else:
             in_run = False
         cur = cur.next
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return count
+`

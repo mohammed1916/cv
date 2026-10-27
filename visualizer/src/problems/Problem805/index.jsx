@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'check', label: 'Check target', description: 'Is total*k/n reachable with exactly k items?' },
     { id: 'done', label: 'Complete', description: 'Return the boolean.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/split-array-with-same-average/',
   complexity: 'Roughly O(n * n/2 * S) set work where S is the number of distinct sums; the early divisibility filter prunes most sizes.',
   examples: [

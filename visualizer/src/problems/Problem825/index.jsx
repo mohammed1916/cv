@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'age', label: 'Sender age', description: 'Add requests from every person of this age to all valid receivers.' },
     { id: 'done', label: 'Complete', description: 'Return the total number of requests.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Ages array (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Ages array (JSON)',
   url: 'https://leetcode.com/problems/friends-of-appropriate-ages/',
   complexity: 'O(n + A^2) time with A = 120 possible ages; O(A) space. A prefix sum would make it O(n + A).',
   examples: [{ label: 'Two people', input: '[16,16]' }, { label: 'Three people', input: '[16,17,18]' }, { label: 'Mixed', input: '[20,30,100,110,120]' }],

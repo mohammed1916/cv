@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -14,7 +14,7 @@ const definition = {
     { id: 'found', label: 'Reached target', description: 'The boarded bus serves the target.' },
     { id: 'done', label: 'Complete', description: 'Return the minimum bus count or -1.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {routes, source, target} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {routes, source, target} (JSON)',
   url: 'https://leetcode.com/problems/bus-routes/',
   complexity: 'O(total stops across routes) time and space; each bus is boarded once and each stop enqueued once.',
   examples: [

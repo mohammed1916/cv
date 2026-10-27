@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'channel', label: 'Snap a channel', description: 'Pick the nearest multiple of 17 for this channel.' },
     { id: 'done', label: 'Complete', description: 'Combine the three shorthand digits.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Color (JSON string "#rrggbb")',
   url: 'https://leetcode.com/problems/similar-rgb-color/',
   complexity: 'O(1) time: each channel has only 16 candidates.',

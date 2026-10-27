@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'combine', label: 'Combine', description: 'Pair every left option with every right option.' },
     { id: 'done', label: 'Complete', description: 'Return all coordinates.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/ambiguous-coordinates/',
   complexity: 'O(n^3) for the splits, decimal positions and string building; the output itself is the dominant cost.',
   examples: [

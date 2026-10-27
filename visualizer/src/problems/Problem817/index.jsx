@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import LinkedListLane from '../../components/shared/LinkedListLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'close', label: 'Close', description: 'A non-set node ends the run.' },
     { id: 'done', label: 'Complete', description: 'Return the component count.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {head, nums} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {head, nums} (JSON)',
   url: 'https://leetcode.com/problems/linked-list-components/',
   complexity: 'O(n + m) time and O(m) space for the set.',
   examples: [

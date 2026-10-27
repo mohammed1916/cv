@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'credit', label: 'Credit suffix', description: 'Add the count to one dot-suffix.' },
     { id: 'done', label: 'Complete', description: 'Emit "count domain" strings.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array cpdomains (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array cpdomains (JSON)',
   url: 'https://leetcode.com/problems/subdomain-visit-count/',
   complexity: 'O(total characters) time with a hash map of at most (entries * labels) keys.',
   examples: [

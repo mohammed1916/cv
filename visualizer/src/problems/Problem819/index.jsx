@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'count', label: 'Count word', description: 'Increment the word frequency.' },
     { id: 'done', label: 'Complete', description: 'Return the word with the highest count.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object with paragraph and banned (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with paragraph and banned (JSON)',
   url: 'https://leetcode.com/problems/most-common-word/',
   complexity: 'O(n + b) time for n characters and b banned words; O(n) space for the counts.',
   examples: [

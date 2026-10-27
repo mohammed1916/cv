@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'append', label: 'Append', description: 'Add "ma" and one "a" per word position.' },
     { id: 'done', label: 'Complete', description: 'Join the transformed words.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Sentence (JSON string)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Sentence (JSON string)',
   url: 'https://leetcode.com/problems/goat-latin/',
   complexity: 'O(n^2) time and space in the worst case, because the i-th word receives i trailing a letters.',
   examples: [

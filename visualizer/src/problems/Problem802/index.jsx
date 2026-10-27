@@ -3,7 +3,7 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { edgesFromAdjacency, degreeTags } from '../../components/shared/graphTraversalModel'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -15,7 +15,7 @@ const definition = {
     { id: 'enqueue', label: 'Enqueue', description: 'A parent with out-degree 0 becomes safe next.' },
     { id: 'done', label: 'Complete', description: 'Return the sorted safe nodes.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Adjacency list graph (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Adjacency list graph (JSON)',
   url: 'https://leetcode.com/problems/find-eventual-safe-states/',
   complexity: 'O(V + E) time and space with the reversed-graph topological peel.',
   examples: [

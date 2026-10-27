@@ -13,25 +13,37 @@ export function buildTrace({ paragraph, banned }) {
   const counts = new Map()
   let bestWord = null
   const snap = () => [...counts.entries()]
-  const frames = [{ phase: 'start', index: -1, counts: [], bestWord: null, activeLine: 3, message: `Lowercase the paragraph and split it into ${words.length} letter-only words. ${banned.length} word(s) are banned.` }]
+  const frames = [{ phase: 'start', index: -1, counts: [], bestWord: null, activeLine: L('set ban to'), message: `Lowercase the paragraph and split it into ${words.length} letter-only words. ${banned.length} word(s) are banned.` }]
   words.forEach((word, index) => {
     if (ban.has(word)) {
-      frames.push({ phase: 'skip', index, word, counts: snap(), bestWord, activeLine: 7, message: `"${word}" is banned, so it is skipped.` })
+      frames.push({ phase: 'skip', index, word, counts: snap(), bestWord, activeLine: L('if word is in ban'), message: `"${word}" is banned, so it is skipped.` })
       return
     }
     counts.set(word, (counts.get(word) || 0) + 1)
-    if (bestWord === null || counts.get(word) > counts.get(bestWord)) bestWord = word
-    frames.push({ phase: 'count', index, word, counts: snap(), bestWord, activeLine: 8, message: `Count "${word}": now ${counts.get(word)}. Most common so far: "${bestWord}" (${counts.get(bestWord)}).` })
+    // Leader = the earliest-inserted word with the largest count, so ties match the final max(count) answer.
+    bestWord = [...counts.keys()].reduce((best, w) => (best === null || counts.get(w) > counts.get(best) ? w : best), null)
+    frames.push({ phase: 'count', index, word, counts: snap(), bestWord, activeLine: L('set best to the earliest'), message: `Count "${word}": now ${counts.get(word)}. Most common so far: "${bestWord}" (${counts.get(bestWord)}).` })
   })
-  frames.push({ phase: 'done', index: words.length - 1, counts: snap(), bestWord, activeLine: 9, message: `The most common non-banned word is "${bestWord}" with ${counts.get(bestWord)} occurrence(s).` })
+  frames.push({ phase: 'done', index: words.length - 1, counts: snap(), bestWord, activeLine: L('return best'), message: `The most common non-banned word is "${bestWord}" with ${counts.get(bestWord)} occurrence(s).` })
   return { input: { paragraph, banned }, words, result: bestWord, frames }
 }
-export const code = `import re
-def mostCommonWord(paragraph, banned):
+export const code = `set ban to the set of banned words
+set count to an empty map from word to frequency
+for each word in the lowercased runs of letters in paragraph
+  if word is in ban, skip it
+  add 1 to count[word]
+  set best to the earliest-inserted word with the largest count
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `import re
+
+def most_common_word(paragraph, banned):
     ban = set(banned)
     count = {}
     for word in re.findall(r'[a-z]+', paragraph.lower()):
         if word in ban:
             continue
         count[word] = count.get(word, 0) + 1
-    return max(count, key=count.get)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return max(count, key=count.get)
+`
