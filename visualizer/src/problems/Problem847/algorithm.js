@@ -20,37 +20,54 @@ export function buildTrace(graph) {
   let head = 0
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, mask: 0, node: -1, dist: 0, queueLen: queue.length - head, queueHead: queue.slice(head, head + 6).map(([m, v, d]) => `${bits(m, n)}@${v}:${d}`), seenCount: seen.size, ...extra })
-  push('start', 5, `Every node is a possible start: seed the queue with the ${n} states (mask with only that node, node, distance 0). A state is (set of nodes visited, node we stand on).`)
+  push('start', 3, `Every node is a possible start: seed the queue with the ${n} states (mask with only that node, node, distance 0). A state is (set of nodes visited, node we stand on).`)
   while (head < queue.length) {
     const [mask, node, dist] = queue[head++]
     if (mask === full) {
-      push('found', 8, `State mask ${bits(mask, n)} has every node visited after ${dist} edge${dist === 1 ? '' : 's'}. BFS reaches states in order of distance, so ${dist} is the minimum.`, { mask, node, dist })
-      push('done', 8, `Shortest path length: ${dist}.`, { mask, node, dist })
+      push('found', 7, `State mask ${bits(mask, n)} has every node visited after ${dist} edge${dist === 1 ? '' : 's'}. BFS reaches states in order of distance, so ${dist} is the minimum.`, { mask, node, dist })
+      push('done', 7, `Shortest path length: ${dist}.`, { mask, node, dist })
       return { input: graph.map(r => [...r]), result: dist, frames }
     }
-    push('pop', 7, `Pop state (mask ${bits(mask, n)}, node ${node}) at distance ${dist}; ${n - bits(mask, n).replace(/0/g, '').length} node(s) still unvisited.`, { mask, node, dist })
+    push('pop', 6, `Pop state (mask ${bits(mask, n)}, node ${node}) at distance ${dist}; ${n - bits(mask, n).replace(/0/g, '').length} node(s) still unvisited.`, { mask, node, dist })
     for (const nxt of graph[node]) {
       const nm = mask | (1 << nxt)
       if (!seen.has(nm * 8 + nxt)) {
         seen.add(nm * 8 + nxt); queue.push([nm, nxt, dist + 1])
-        push('push', 13, `Move to ${nxt}: new state (mask ${bits(nm, n)}, node ${nxt}) at distance ${dist + 1}; enqueue it.`, { mask: nm, node: nxt, dist: dist + 1, from: node })
-      } else push('skip', 11, `Move to ${nxt} gives state (mask ${bits(nm, n)}, node ${nxt}) which was already seen at an equal or shorter distance: skip.`, { mask, node, dist, from: node })
+        push('push', 11, `Move to ${nxt}: new state (mask ${bits(nm, n)}, node ${nxt}) at distance ${dist + 1}; enqueue it.`, { mask: nm, node: nxt, dist: dist + 1, from: node })
+      } else push('skip', 12, `Move to ${nxt} gives state (mask ${bits(nm, n)}, node ${nxt}) which was already seen at an equal or shorter distance: skip.`, { mask, node, dist, from: node })
     }
   }
-  push('done', 14, 'Queue exhausted (only possible for an empty graph): return 0.')
+  push('done', 13, 'Queue exhausted (only possible for an empty graph): return 0.')
   return { input: graph.map(r => [...r]), result: 0, frames }
 }
-export const code = `def shortestPathLength(graph):
+export const code = `function shortestPathLength(graph)
+  set n to the number of nodes and full to the bit mask with all n bits set
+  create a queue holding the state (only node i visited, node i, distance 0) for every i
+  mark those starting states as seen
+  while the queue is not empty
+    pop the front state (mask, node, dist)
+    if mask equals full then return dist
+    for each neighbour nxt of node
+      set nm to mask with the bit for nxt added
+      if state (nm, nxt) is not seen then
+        mark it seen and push (nm, nxt, dist + 1)
+      otherwise skip this neighbour
+  return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `from collections import deque
+
+def shortest_path_length(graph):
     n = len(graph)
     full = (1 << n) - 1
     queue = deque((1 << i, i, 0) for i in range(n))
     seen = {(1 << i, i) for i in range(n)}
     while queue:
         mask, node, dist = queue.popleft()
-        if mask == full: return dist
+        if mask == full:
+            return dist
         for nxt in graph[node]:
             nm = mask | (1 << nxt)
             if (nm, nxt) not in seen:
                 seen.add((nm, nxt))
                 queue.append((nm, nxt, dist + 1))
-    return 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return 0
+`

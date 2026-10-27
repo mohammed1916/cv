@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'left', label: 'Leftward sweep', description: 'Scan right to left and subtract the leftward force.' },
     { id: 'done', label: 'Complete', description: 'The sign of each net force gives the final direction.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Dominoes string (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Dominoes string (JSON)',
   url: 'https://leetcode.com/problems/push-dominoes/',
   complexity: 'O(n) time and O(n) space: two linear sweeps and one pass to build the answer.',
   examples: [

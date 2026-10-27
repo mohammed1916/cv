@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'merge', label: 'Merge', description: 'The car catches a fleet ahead and joins it.' },
     { id: 'done', label: 'Complete', description: 'Return the fleet count.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {target, position, speed} (JSON)',
   url: 'https://leetcode.com/problems/car-fleet/',
   complexity: 'O(n log n) time for sorting, O(n) space. The visualization caps n at 30.',

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'fail', label: 'Missing card', description: 'A required card is short: the hand cannot be split.' },
     { id: 'done', label: 'Complete', description: 'Report whether the hand can be rearranged.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Hand and group size (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Hand and group size (JSON)',
   url: 'https://leetcode.com/problems/hand-of-straights/',
   complexity: 'O(n log n + n) time for sorting the distinct cards then at most n * groupSize card removals bounded by the hand; O(n) space for the counts.',
   examples: [

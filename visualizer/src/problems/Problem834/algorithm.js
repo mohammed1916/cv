@@ -18,31 +18,44 @@ export function buildTrace({ n, edges }) {
   const build = (u, p) => ({ id: u, children: g[u].filter(v => v !== p).map(v => build(v, u)) })
   const root = build(0, -1)
   const snap = (extra) => ({ count: [...count], res: [...res], ...extra })
-  const frames = [snap({ phase: 'start', u: 0, v: -1, stage: 'up', activeLine: 6, message: 'Root the tree at 0. count[u] is the subtree size; res[u] will first be the sum of distances to nodes inside u\'s subtree.' })]
+  const frames = [snap({ phase: 'start', u: 0, v: -1, stage: 'up', activeLine: 3, message: 'Root the tree at 0. count[u] is the subtree size; res[u] will first be the sum of distances to nodes inside u\'s subtree.' })]
   const post = (u, p) => {
     for (const v of g[u]) {
       if (v === p) continue
       post(v, u)
       count[u] += count[v]
       res[u] += res[v] + count[v]
-      frames.push(snap({ phase: 'up', u, v, stage: 'up', activeLine: 13, message: `Merge child ${v} into ${u}: its ${count[v]} node(s) are each one edge farther, so res[${u}] += res[${v}] + count[${v}]. Now count[${u}] = ${count[u]}, res[${u}] = ${res[u]}.` }))
+      frames.push(snap({ phase: 'up', u, v, stage: 'up', activeLine: 8, message: `Merge child ${v} into ${u}: its ${count[v]} node(s) are each one edge farther, so res[${u}] += res[${v}] + count[${v}]. Now count[${u}] = ${count[u]}, res[${u}] = ${res[u]}.` }))
     }
   }
   post(0, -1)
-  frames.push(snap({ phase: 'root', u: 0, v: -1, stage: 'down', activeLine: 20, message: `The root sees every node inside its subtree, so res[0] = ${res[0]} is already final.` }))
+  frames.push(snap({ phase: 'root', u: 0, v: -1, stage: 'down', activeLine: 9, message: `The root sees every node inside its subtree, so res[0] = ${res[0]} is already final.` }))
   const pre = (u, p) => {
     for (const v of g[u]) {
       if (v === p) continue
       res[v] = res[u] - count[v] + n - count[v]
-      frames.push(snap({ phase: 'down', u, v, stage: 'down', activeLine: 17, message: `Move the root from ${u} to ${v}: the ${count[v]} node(s) under ${v} get 1 closer, the other ${n - count[v]} get 1 farther. res[${v}] = res[${u}] - ${count[v]} + ${n - count[v]} = ${res[v]}.` }))
+      frames.push(snap({ phase: 'down', u, v, stage: 'down', activeLine: 11, message: `Move the root from ${u} to ${v}: the ${count[v]} node(s) under ${v} get 1 closer, the other ${n - count[v]} get 1 farther. res[${v}] = res[${u}] - ${count[v]} + ${n - count[v]} = ${res[v]}.` }))
       pre(v, u)
     }
   }
   pre(0, -1)
-  frames.push(snap({ phase: 'done', u: -1, v: -1, stage: 'down', activeLine: 21, message: `Answer: [${res.join(', ')}].` }))
+  frames.push(snap({ phase: 'done', u: -1, v: -1, stage: 'down', activeLine: 13, message: `Answer: [${res.join(', ')}].` }))
   return { input: { n, edges }, root, result: [...res], frames }
 }
-export const code = `def sumOfDistancesInTree(n, edges):
+export const code = `function sumOfDistancesInTree(n, edges)
+  build an adjacency list g from edges
+  root the tree at node 0; set count[u] = 1 and res[u] = 0 for every node u
+  gather upward: call post(0, none)
+    for each neighbor v of u other than u's parent
+      call post(v, u) first
+      add count[v] to count[u]
+      add res[v] + count[v] to res[u]
+  re-root downward: call pre(0, none)
+    for each neighbor v of u other than u's parent
+      set res[v] = res[u] - count[v] + (n - count[v])
+      call pre(v, u) and continue downward
+  return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def sum_of_distances_in_tree(n, edges):
     g = [[] for _ in range(n)]
     for a, b in edges:
         g[a].append(b)
@@ -62,4 +75,5 @@ export const code = `def sumOfDistancesInTree(n, edges):
                 pre(v, u)
     post(0, -1)
     pre(0, -1)
-    return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return res
+`

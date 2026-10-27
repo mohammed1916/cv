@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'hit', label: 'Valid run', description: 'n minus the triangular offset divides evenly by k.' },
     { id: 'done', label: 'Complete', description: 'Return the number of valid run lengths.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'n (JSON integer)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/consecutive-numbers-sum/',
   complexity: 'O(sqrt(n)) time since k(k+1)/2 <= n; O(1) extra space (this view stores the valid runs).',
   examples: [{ label: 'n = 5', input: '5' }, { label: 'n = 9', input: '9' }, { label: 'n = 15', input: '15' }],

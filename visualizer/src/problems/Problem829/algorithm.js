@@ -15,17 +15,28 @@ export function buildTrace(n) {
       hits.push({ k, a })
       frames.push({ phase: 'hit', k, rest, start: a, count, activeLine: 6, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} divides by ${k}, so start a = ${a}: ${a}..${a + k - 1}. Count ${count}.` })
     } else {
-      frames.push({ phase: 'miss', k, rest, count, activeLine: 5, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} is not divisible by ${k}; no run of this length.` })
+      frames.push({ phase: 'miss', k, rest, count, activeLine: 8, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} is not divisible by ${k}; no run of this length.` })
     }
   }
-  frames.push({ phase: 'done', k: hits.length ? hits[hits.length - 1].k : 0, count, activeLine: 8, message: `${n} can be written as a sum of consecutive positive integers in ${count} way(s).` })
+  frames.push({ phase: 'done', k: hits.length ? hits[hits.length - 1].k : 0, count, activeLine: 9, message: `${n} can be written as a sum of consecutive positive integers in ${count} way(s).` })
   return { input: n, hits, result: count, frames }
 }
-export const code = `def consecutiveNumbersSum(n):
+export const code = `function countConsecutiveRuns(n)
+  set count to 0
+  for each length k = 1, 2, ... while k(k+1)/2 is at most n
+    set rest to n minus k(k-1)/2
+    if rest divides evenly by k then
+      increment count and record the run starting at rest / k
+    otherwise
+      skip this length k
+  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def consecutive_numbers_sum(n):
     count = 0
     k = 1
     while k * (k + 1) // 2 <= n:
-        if (n - k * (k - 1) // 2) % k == 0:
+        rest = n - k * (k - 1) // 2
+        if rest % k == 0:
             count += 1
         k += 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return count
+`

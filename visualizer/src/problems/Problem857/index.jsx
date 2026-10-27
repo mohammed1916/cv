@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import HeapView from '../../components/shared/HeapView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'cost', label: 'Price group', description: 'Cost of the group at the current ratio.' },
     { id: 'done', label: 'Complete', description: 'Report the minimum cost.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {quality, wage, k} (JSON, up to 30 workers)',
   url: 'https://leetcode.com/problems/minimum-cost-to-hire-k-workers/',
   complexity: 'O(n log n) for the sort plus O(n log k) heap work.',

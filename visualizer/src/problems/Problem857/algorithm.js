@@ -24,28 +24,43 @@ export function buildTrace({ quality, wage, k }) {
     f('add', 5, `Worker ${x.id} (quality ${x.q}, ratio ${(x.w / x.q).toFixed(3)}) joins; it is the highest ratio so far. Quality sum ${sumQ}.`, { index: i })
     if (heap.size > k) {
       const removed = heap.pop(); sumQ -= removed
-      f('evict', 6, `More than ${k} workers: drop the largest quality ${removed}, which is the most expensive to pay at this ratio. Quality sum ${sumQ}.`, { index: i })
+      f('evict', 7,`More than ${k} workers: drop the largest quality ${removed}, which is the most expensive to pay at this ratio. Quality sum ${sumQ}.`, { index: i })
     }
     if (heap.size === k) {
       const cost = sumQ * x.w / x.q
       const improved = cost < best
       if (improved) { best = cost; bestIdx = i }
-      f('cost', 7, `Group of ${k}: cost = ${sumQ} * ${x.w}/${x.q} = ${cost.toFixed(5)}. ${improved ? 'New best.' : 'Not better than the best so far.'}`, { index: i, cost })
+      f('cost', 9,`Group of ${k}: cost = ${sumQ} * ${x.w}/${x.q} = ${cost.toFixed(5)}. ${improved ? 'New best.' : 'Not better than the best so far.'}`, { index: i, cost })
     }
   })
-  f('done', 8, `Minimum cost to hire ${k} workers: ${best.toFixed(5)}.`, { index: workers.length - 1 })
+  f('done', 10,`Minimum cost to hire ${k} workers: ${best.toFixed(5)}.`, { index: workers.length - 1 })
   return { input: { quality, wage, k }, sorted: workers, result: best, frames }
 }
 
-export const code = `def mincostToHireWorkers(quality, wage, k):
-    workers = sorted(zip(quality, wage), key=lambda x: x[1] / x[0])
+export const code = `function mincostToHireWorkers(quality, wage, k)
+  pair each worker's quality with its wage, then sort the workers by wage / quality ascending
+  create an empty max-heap of qualities, set sumQ to 0 and best to infinity
+  for each worker (q, w) in sorted order
+    push q onto the heap and add q to sumQ
+    if the heap holds more than k workers then
+      remove the largest quality from the heap and subtract it from sumQ
+    if the heap holds exactly k workers then
+      set best to the smaller of best and sumQ * w / q
+  return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `from fractions import Fraction
+import heapq
+
+def mincost_to_hire_workers(quality, wage, k):
+    workers = sorted(zip(quality, wage), key=lambda x: Fraction(x[1], x[0]))
     heap = []
     sum_q = 0
     best = float('inf')
     for q, w in workers:
-        heappush(heap, -q); sum_q += q
+        heapq.heappush(heap, -q)
+        sum_q += q
         if len(heap) > k:
-            sum_q += heappop(heap)
+            sum_q += heapq.heappop(heap)
         if len(heap) == k:
             best = min(best, sum_q * w / q)
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return best
+`

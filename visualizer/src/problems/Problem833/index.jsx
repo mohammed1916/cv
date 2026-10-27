@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'replace', label: 'Replace', description: 'The source matches, so swap in the target.' },
     { id: 'done', label: 'Complete', description: 'Return the edited string.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object with s, indices, sources, targets (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with s, indices, sources, targets (JSON)',
   url: 'https://leetcode.com/problems/find-and-replace-in-string/',
   complexity: 'O(k log k + k * L) time for k operations and string length L; O(L) space.',
   examples: [

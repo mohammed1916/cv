@@ -13,24 +13,35 @@ export function buildTrace(rooms) {
   const push = (phase, activeLine, message, extra) => frames.push({ phase, activeLine, message, visited: [...visited], stack: [], current: -1, ...extra })
   const stack = [0]
   visited[0] = true
-  push('start', 5, 'Room 0 is always unlocked. Mark it visited and put it on the stack of rooms to explore.', { stack: [...stack] })
+  push('start', 4, 'Room 0 is always unlocked. Mark it visited and put it on the stack of rooms to explore.', { stack: [...stack] })
   while (stack.length) {
     const room = stack.pop()
-    push('visit', 7, `Pop room ${room} and walk in. It holds keys [${rooms[room].join(', ')}].`, { stack: [...stack], current: room })
+    push('visit', 6, `Pop room ${room} and walk in. It holds keys [${rooms[room].join(', ')}].`, { stack: [...stack], current: room })
     for (const key of rooms[room]) {
       if (!visited[key]) {
         visited[key] = true; stack.push(key)
-        push('key', 11, `Key ${key} opens room ${key}, which was still locked: mark it visited and push it.`, { stack: [...stack], current: room, key })
+        push('key', 9, `Key ${key} opens room ${key}, which was still locked: mark it visited and push it.`, { stack: [...stack], current: room, key })
       } else {
-        push('skip', 9, `Key ${key} opens room ${key}, which is already visited: ignore it.`, { stack: [...stack], current: room, key })
+        push('skip', 10, `Key ${key} opens room ${key}, which is already visited: ignore it.`, { stack: [...stack], current: room, key })
       }
     }
   }
   const ok = visited.every(Boolean)
-  push('done', 12, ok ? `All ${n} rooms are visited: return True.` : `Rooms ${visited.map((v, i) => (v ? -1 : i)).filter(i => i >= 0).join(', ')} stay locked: return False.`, {})
+  push('done', 11, ok ? `All ${n} rooms are visited: return True.` : `Rooms ${visited.map((v, i) => (v ? -1 : i)).filter(i => i >= 0).join(', ')} stay locked: return False.`, {})
   return { input: rooms.map(r => [...r]), result: ok, frames }
 }
-export const code = `def canVisitAllRooms(rooms):
+export const code = `function canVisitAllRooms(rooms)
+  set n to the number of rooms
+  mark every room as not visited
+  mark room 0 as visited and put it on the stack
+  while the stack is not empty
+    pop a room from the stack
+    for each key in that room's key list
+      if the room this key opens is not visited then
+        mark that room as visited and push it onto the stack
+      otherwise ignore the key
+  return true if every room is visited, otherwise false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def can_visit_all_rooms(rooms):
     n = len(rooms)
     visited = [False] * n
     visited[0] = True
@@ -41,4 +52,5 @@ export const code = `def canVisitAllRooms(rooms):
             if not visited[key]:
                 visited[key] = True
                 stack.append(key)
-    return all(visited)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return all(visited)
+`

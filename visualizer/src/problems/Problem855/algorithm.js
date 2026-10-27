@@ -38,12 +38,12 @@ export function buildTrace({ n, ops }) {
   const students = []
   const returned = []
   const base = (extra) => ({ students: students.slice(), opIndex: -1, returned: returned.slice(), cand: null, best: null, bestSeat: null, ...extra })
-  frames.push(base({ phase: 'start', activeLine: 4, message: `Empty room with ${n} seats (0..${n - 1}). Keep the occupied seats in a sorted list.` }))
+  frames.push(base({ phase: 'start', activeLine: 2, message: `Empty room with ${n} seats (0..${n - 1}). Keep the occupied seats in a sorted list.` }))
   ops.forEach((op, k) => {
     if (op[0] === 'leave') {
       students.splice(students.indexOf(op[1]), 1)
       returned.push(null)
-      frames.push(base({ phase: 'leave', activeLine: 19, opIndex: k, message: `Student leaves seat ${op[1]}; remove it from the sorted list. Gaps on both sides merge.` }))
+      frames.push(base({ phase: 'leave', activeLine: 5, opIndex: k, message: `Student leaves seat ${op[1]}; remove it from the sorted list. Gaps on both sides merge.` }))
       return
     }
     if (!students.length) {
@@ -64,31 +64,52 @@ export function buildTrace({ n, ops }) {
     const ed = n - 1 - last
     const better = ed > best
     if (better) { best = ed; seat = n - 1 }
-    frames.push(base({ phase: 'candidate', activeLine: 15, opIndex: k, best, bestSeat: seat, cand: { seat: n - 1, dist: ed },
+    frames.push(base({ phase: 'candidate', activeLine: 14, opIndex: k, best, bestSeat: seat, cand: { seat: n - 1, dist: ed },
       message: `Last seat ${n - 1} is ${ed} from the final student. ${better ? 'Strictly better, so take it.' : 'Not strictly better.'}` }))
     students.push(seat); students.sort((x, y) => x - y); returned.push(seat)
-    frames.push(base({ phase: 'seat', activeLine: 17, opIndex: k, best, bestSeat: seat, cand: { seat, dist: best }, message: `Seat the student at ${seat} (distance ${best} to the nearest neighbour) and insert it in sorted order.` }))
+    frames.push(base({ phase: 'seat', activeLine: 15, opIndex: k, best, bestSeat: seat, cand: { seat, dist: best }, message: `Seat the student at ${seat} (distance ${best} to the nearest neighbour) and insert it in sorted order.` }))
   })
-  frames.push(base({ phase: 'done', activeLine: 17, opIndex: ops.length - 1, message: `All operations done. Returned values: ${JSON.stringify(returned)}.` }))
+  frames.push(base({ phase: 'done', activeLine: 16, opIndex: ops.length - 1, message: `All operations done. Returned values: ${JSON.stringify(returned)}.` }))
   return { input: { n, ops }, result: returned, frames }
 }
 
-export const code = `class ExamRoom:
-    def __init__(self, n):
-        self.n = n
-        self.students = []
-    def seat(self):
-        if not self.students:
+export const code = `function examRoom(n, ops)
+  set students to an empty sorted list and out to an empty list
+  for each operation op in ops, in order
+    if op is "leave p" then
+      remove seat p from students, append null to out, and go to the next operation
+    otherwise, if students is empty then
+      choose seat 0 for the new student
+    otherwise
+      set best to the distance from seat 0 to the first student, and seat to 0
+      for each adjacent pair of students a and b, left to right
+        let d be (b - a) // 2, the distance from the middle of the gap
+        if d is not greater than best then keep the current seat
+        otherwise set best to d and seat to a + d
+      if seat n - 1 is farther than best from the last student then set seat to n - 1
+    for a seat operation, insert seat into students in sorted order and append seat to out
+  return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `import bisect
+
+def exam_room(n, ops):
+    students = []
+    out = []
+    for op in ops:
+        if op[0] == 'leave':
+            students.remove(op[1])
+            out.append(None)
+            continue
+        if not students:
             seat = 0
         else:
-            best, seat = self.students[0], 0
-            for a, b in zip(self.students, self.students[1:]):
+            best, seat = students[0], 0
+            for a, b in zip(students, students[1:]):
                 d = (b - a) // 2
                 if d > best:
                     best, seat = d, a + d
-            if self.n - 1 - self.students[-1] > best:
-                seat = self.n - 1
-        bisect.insort(self.students, seat)
-        return seat
-    def leave(self, p):
-        self.students.remove(p)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+            if n - 1 - students[-1] > best:
+                seat = n - 1
+        bisect.insort(students, seat)
+        out.append(seat)
+    return out
+`

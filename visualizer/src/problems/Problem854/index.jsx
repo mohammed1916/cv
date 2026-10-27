@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'skip', label: 'Skip seen', description: 'The swapped string was already reached.' },
     { id: 'done', label: 'Complete', description: 'Report the swap count.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Strings [s1, s2] (JSON, length up to 8, letters a-f)',
   url: 'https://leetcode.com/problems/k-similar-strings/',
   complexity: 'Worst case explores O(n!) strings, but fixing the first mismatch each time prunes branching to at most n per string. Capped at length 8 here.',

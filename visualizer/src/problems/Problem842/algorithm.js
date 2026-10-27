@@ -36,10 +36,30 @@ export function buildTrace(num) {
   }
   const found = backtrack(0)
   const result = found ? [...res] : []
-  push('done', 21, found ? `Sequence found: [${result.join(', ')}].` : 'Every split was pruned or failed: return [].')
+  push('done', 20, found ? `Sequence found: [${result.join(', ')}].` : 'Every split was pruned or failed: return [].')
   return { input: num, result, frames }
 }
-export const code = `def splitIntoFibonacci(num):
+export const code = `function splitIntoFibonacci(num)
+  set limit to 2^31 - 1 and res to an empty list
+  call backtrack(0)
+  function backtrack(i)
+    if i equals the length of num then
+      return true only if res has at least 3 numbers
+    set cur to 0
+    for each end position j from i up to the last digit
+      if j > i and num[i] is '0' then stop extending (leading zero)
+      set cur to cur * 10 + num[j]
+      if cur > limit then stop extending (overflow)
+      if res has 2 or more numbers then
+        set s to the sum of the last two numbers in res
+        if cur < s then continue with a longer segment
+        if cur > s then stop extending (too large)
+      append cur to res
+      if backtrack(j + 1) returns true then return true
+      remove the last number from res
+    return false
+  return res, or an empty list if no split was found`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def split_into_fibonacci(num):
     limit = 2 ** 31 - 1
     res = []
     def backtrack(i):
@@ -47,16 +67,22 @@ export const code = `def splitIntoFibonacci(num):
             return len(res) >= 3
         cur = 0
         for j in range(i, len(num)):
-            if j > i and num[i] == '0': break
+            if j > i and num[i] == '0':
+                break
             cur = cur * 10 + int(num[j])
-            if cur > limit: break
+            if cur > limit:
+                break
             if len(res) >= 2:
                 s = res[-1] + res[-2]
-                if cur < s: continue
-                if cur > s: break
+                if cur < s:
+                    continue
+                if cur > s:
+                    break
             res.append(cur)
-            if backtrack(j + 1): return True
+            if backtrack(j + 1):
+                return True
             res.pop()
         return False
     backtrack(0)
-    return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return res
+`

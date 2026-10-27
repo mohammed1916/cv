@@ -16,23 +16,32 @@ export function parseInput(text) {
 export function buildTrace({ s, indices, sources, targets }) {
   const ops = indices.map((index, id) => ({ id, index, source: sources[id], target: targets[id] })).sort((a, b) => b.index - a.index)
   let cur = s
-  const frames = [{ phase: 'start', cur, op: -1, activeLine: 2, message: `Process ${ops.length} operation(s) from the largest index down; edits to the right never shift positions on the left.` }]
+  const frames = [{ phase: 'start', cur, op: -1, activeLine: 3, message: `Process ${ops.length} operation(s) from the largest index down; edits to the right never shift positions on the left.` }]
   ops.forEach(op => {
     const match = cur.startsWith(op.source, op.index)
     if (match) {
       const before = cur
       cur = cur.slice(0, op.index) + op.target + cur.slice(op.index + op.source.length)
-      frames.push({ phase: 'replace', cur, before, op, match, activeLine: 5, message: `At index ${op.index} the text really is "${op.source}": replace it with "${op.target}" giving "${cur}".` })
+      frames.push({ phase: 'replace', cur, before, op, match, activeLine: 6, message: `At index ${op.index} the text really is "${op.source}": replace it with "${op.target}" giving "${cur}".` })
     } else {
-      frames.push({ phase: 'skip', cur, before: cur, op, match, activeLine: 4, message: `At index ${op.index} the text is "${cur.substr(op.index, op.source.length)}", not "${op.source}": skip this operation.` })
+      frames.push({ phase: 'skip', cur, before: cur, op, match, activeLine: 7, message: `At index ${op.index} the text is "${cur.substr(op.index, op.source.length)}", not "${op.source}": skip this operation.` })
     }
   })
-  frames.push({ phase: 'done', cur, op: -1, activeLine: 6, message: `Final string: "${cur}".` })
+  frames.push({ phase: 'done', cur, op: -1, activeLine: 8, message: `Final string: "${cur}".` })
   return { input: { s, indices, sources, targets }, ops, result: cur, frames }
 }
-export const code = `def findReplaceString(s, indices, sources, targets):
+export const code = `function findReplaceString(s, indices, sources, targets)
+  pair each index with its source and target
+  sort the operations by index, largest index first
+  for each operation (index i, source, target)
+    if s has source starting at position i then
+      replace that piece of s with target
+    otherwise leave s unchanged
+  return s`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def find_replace_string(s, indices, sources, targets):
     ops = sorted(zip(indices, sources, targets), reverse=True)
     for i, src, tgt in ops:
         if s.startswith(src, i):
             s = s[:i] + tgt + s[i + len(src):]
-    return s`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return s
+`

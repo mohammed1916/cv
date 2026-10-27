@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, matchCount } from './algorithm'
+import { buildTrace, parseInput, code, python, matchCount } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'ask', label: 'Ask master', description: 'Receive the match count and filter the candidates.' },
     { id: 'done', label: 'Complete', description: 'Report whether the secret was found in time.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Words, secret and guess budget (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Words, secret and guess budget (JSON)',
   url: 'https://leetcode.com/problems/guess-the-word/',
   complexity: 'Each round costs O(W^2 * L) to score all candidates and the candidate list shrinks every round. Reduced version: the hidden master is simulated by supplying the secret in the input.',
   examples: [

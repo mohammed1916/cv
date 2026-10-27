@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'skip', label: 'Known room', description: 'A key opens a room already visited.' },
     { id: 'done', label: 'Complete', description: 'Check that every room is visited.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Rooms (JSON array of key lists)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Rooms (JSON array of key lists)',
   url: 'https://leetcode.com/problems/keys-and-rooms/',
   complexity: 'O(n + total keys) time and O(n) space: each room is pushed once and each key examined once.',
   examples: [

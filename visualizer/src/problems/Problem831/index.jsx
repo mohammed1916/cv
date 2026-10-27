@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'country', label: 'Country code', description: 'Extra leading digits become a starred prefix.' },
     { id: 'done', label: 'Complete', description: 'Return the masked string.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Email or phone (JSON string)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Email or phone (JSON string)',
   url: 'https://leetcode.com/problems/masking-personal-information/',
   complexity: 'O(n) time and space for a string of n characters.',
   examples: [

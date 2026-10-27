@@ -3,7 +3,7 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { edgesFromAdjacency } from '../../components/shared/graphTraversalModel'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -14,7 +14,7 @@ const definition = {
     { id: 'found', label: 'All visited', description: 'A popped state has the full mask.' },
     { id: 'done', label: 'Complete', description: 'Return the first (shortest) distance with the full mask.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Graph adjacency list (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Graph adjacency list (JSON)',
   url: 'https://leetcode.com/problems/shortest-path-visiting-all-nodes/',
   complexity: 'O(2^n * n * deg) time and O(2^n * n) space. Visualization cap: 7 nodes.',
   examples: [

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'cover', label: 'Merge y-intervals', description: 'Union the y-intervals and add covered height times width.' },
     { id: 'done', label: 'Complete', description: 'Return the total area modulo 1,000,000,007.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Rectangles [x1,y1,x2,y2] (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Rectangles [x1,y1,x2,y2] (JSON)',
   url: 'https://leetcode.com/problems/rectangle-area-ii/',
   complexity: 'O(n^2 log n) time (n slabs, each sorting up to n intervals) and O(n) space. Exact BigInt arithmetic avoids overflow before the final modulo.',
   examples: [

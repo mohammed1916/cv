@@ -23,10 +23,18 @@ export function buildTrace({ s, shifts }) {
   frames.push({ phase: 'done', activeLine: 7, index: -1, total, res: [...res], message: `Result: "${out}".` })
   return { input: { s, shifts }, result: out, frames }
 }
-export const code = `def shiftingLetters(s, shifts):
+export const code = `function shiftingLetters(s, shifts)
+  set res to a list holding the letters of s
+  set total to 0
+  for i from n - 1 down to 0, scanning right to left
+    set total to (total + shifts[i]) mod 26
+    set res[i] to the letter s[i] moved forward by total, wrapping mod 26
+  return res joined into a string`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def shifting_letters(s, shifts):
     res = list(s)
     total = 0
     for i in range(len(s) - 1, -1, -1):
         total = (total + shifts[i]) % 26
         res[i] = chr((ord(s[i]) - 97 + total) % 26 + 97)
-    return ''.join(res)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return ''.join(res)
+`

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'pop', label: 'Backtrack', description: 'Undo the last segment and try a longer one.' },
     { id: 'done', label: 'Complete', description: 'Return the sequence, or an empty list.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Digit string (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Digit string (JSON)',
   url: 'https://leetcode.com/problems/split-array-into-fibonacci-sequence/',
   complexity: 'Only the first two numbers branch (at most 10 digits each); the rest are forced by the sum, so about O(n^2 * n) time. The recursion stack is O(n).',
   examples: [

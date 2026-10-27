@@ -1,13 +1,27 @@
-export const code = `def carFleet(target, position, speed):
+export const code = `function carFleet(target, position, speed)
+  pair each car's position with its speed
+  sort the cars by position, from closest to the target to farthest
+  set fleets to 0 and slowest to 0
+  for each car (p, s) in that order
+    set t to (target - p) / s, the exact time this car needs alone
+    if t is greater than slowest then
+      add one to fleets, because this car leads a new fleet
+      set slowest to t
+    otherwise the car catches the fleet ahead and joins it
+  return fleets`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `from fractions import Fraction
+
+def car_fleet(target, position, speed):
     cars = sorted(zip(position, speed), reverse=True)
     fleets = 0
     slowest = 0
     for p, s in cars:
-        t = (target - p) / s
+        t = Fraction(target - p, s)
         if t > slowest:
             fleets += 1
             slowest = t
-    return fleets`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return fleets
+`
 
 const L = (s) => code.findIndex((c) => c.text.includes(s)) + 1
 
@@ -33,16 +47,16 @@ export function buildTrace({ target, position, speed }) {
   const fmt = (r) => (r ? Number((r.num / r.den).toFixed(4)) : 0)
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, fleets, slowest: fmt(slowest), leaders: leaders.slice(), ...extra })
   const leaders = []
-  push('start', L('cars = sorted'), `Sort cars by position from the closest to the target down to the farthest: [${cars.map((c) => `(${c.p},${c.s})`).join(', ')}].`)
+  push('start', L('sort the cars'),`Sort cars by position from the closest to the target down to the farthest: [${cars.map((c) => `(${c.p},${c.s})`).join(', ')}].`)
   cars.forEach((c, k) => {
     const t = { num: target - c.p, den: c.s }
-    push('time', L('t = '), `Car at ${c.p} with speed ${c.s} needs (${target} - ${c.p}) / ${c.s} = ${fmt(t)} hours to reach the target alone.`, { index: k, time: fmt(t) })
+    push('time', L('set t to'),`Car at ${c.p} with speed ${c.s} needs (${target} - ${c.p}) / ${c.s} = ${fmt(t)} hours to reach the target alone.`, { index: k, time: fmt(t) })
     const later = !slowest || t.num * slowest.den > slowest.num * t.den
     if (later) {
       fleets++; slowest = t; leaders.push(k)
-      push('new', L('fleets += 1'), `${fmt(t)} is greater than the slowest fleet ahead, so this car can never catch it: it leads a new fleet. Fleets = ${fleets}.`, { index: k, time: fmt(t) })
+      push('new', L('add one to fleets'),`${fmt(t)} is greater than the slowest fleet ahead, so this car can never catch it: it leads a new fleet. Fleets = ${fleets}.`, { index: k, time: fmt(t) })
     } else {
-      push('merge', L('if t > slowest'), `${fmt(t)} is not greater than ${fmt(slowest)}: it catches the fleet ahead before the target and must slow down to join it.`, { index: k, time: fmt(t) })
+      push('merge', L('otherwise the car'),`${fmt(t)} is not greater than ${fmt(slowest)}: it catches the fleet ahead before the target and must slow down to join it.`, { index: k, time: fmt(t) })
     }
   })
   push('done', L('return fleets'), `Done: ${fleets} fleet${fleets === 1 ? '' : 's'} arrive at the target.`)

@@ -14,14 +14,14 @@ export function buildTrace(grid) {
     const cells = []
     for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) cells.push(grid[r + i][c + j])
     const snap = (phase, line, message, ok) => frames.push({ phase, activeLine: line, r, c, count, found: [...found], ok, cells, message })
-    snap('window', 5, `Examine the window with top-left (${r}, ${c}).`)
+    snap('window', 4, `Examine the window with top-left (${r}, ${c}).`)
     if (grid[r + 1][c + 1] !== 5) {
-      snap('reject', 6, `Centre is ${grid[r + 1][c + 1]}, not 5. In any 1-9 magic square the centre must be 5 (it lies on 4 lines summing to 15), so reject.`, false)
+      snap('reject', 5, `Centre is ${grid[r + 1][c + 1]}, not 5. In any 1-9 magic square the centre must be 5 (it lies on 4 lines summing to 15), so reject.`, false)
       continue
     }
     const sorted = [...cells].sort((a, b) => a - b)
     if (sorted.some((v, i) => v !== i + 1)) {
-      snap('reject', 8, `Cells sorted are [${sorted.join(', ')}], not exactly 1..9, so reject.`, false)
+      snap('reject', 7, `Cells sorted are [${sorted.join(', ')}], not exactly 1..9, so reject.`, false)
       continue
     }
     const rows = [0, 1, 2].map(i => cells[i * 3] + cells[i * 3 + 1] + cells[i * 3 + 2])
@@ -30,25 +30,38 @@ export function buildTrace(grid) {
     const sums = [...rows, ...cols, ...diags]
     if (sums.every(x => x === 15)) {
       count++; found.push([r, c])
-      snap('accept', 13, `Rows ${rows}, columns ${cols}, diagonals ${diags}: all equal 15. Magic square number ${count}.`, true)
+      snap('accept', 9, `Rows ${rows}, columns ${cols}, diagonals ${diags}: all equal 15. Magic square number ${count}.`, true)
     } else {
-      snap('reject', 12, `Sums rows ${rows}, columns ${cols}, diagonals ${diags} are not all 15, so reject.`, false)
+      snap('reject', 9, `Sums rows ${rows}, columns ${cols}, diagonals ${diags} are not all 15, so reject.`, false)
     }
   }
-  frames.push({ phase: 'done', activeLine: 14, r: -1, c: -1, count, found: [...found], message: `Found ${count} magic square${count === 1 ? '' : 's'}.` })
+  frames.push({ phase: 'done', activeLine: 10, r: -1, c: -1, count, found: [...found], message: `Found ${count} magic square${count === 1 ? '' : 's'}.` })
   return { input: grid.map(r => [...r]), result: count, frames }
 }
-export const code = `def numMagicSquaresInside(grid):
+export const code = `function numMagicSquaresInside(grid)
+  set R to the number of rows and C to the number of columns
+  set count to 0
+  for each top-left corner (r, c) where a 3x3 window fits
+    if the centre grid[r+1][c+1] is not 5 then skip this window
+    collect the 9 cells of the window and sort them
+    if the sorted cells are not exactly 1 through 9 then skip this window
+    compute the three row sums, three column sums and two diagonal sums
+    if all eight sums equal 15 then increment count
+  return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def num_magic_squares_inside(grid):
     R, C = len(grid), len(grid[0])
     count = 0
     for r in range(R - 2):
         for c in range(C - 2):
-            if grid[r+1][c+1] != 5: continue
-            cells = [grid[r+i][c+j] for i in range(3) for j in range(3)]
-            if sorted(cells) != list(range(1, 10)): continue
-            rows = [sum(cells[i*3:i*3+3]) for i in range(3)]
+            if grid[r + 1][c + 1] != 5:
+                continue
+            cells = [grid[r + i][c + j] for i in range(3) for j in range(3)]
+            if sorted(cells) != list(range(1, 10)):
+                continue
+            rows = [sum(cells[i * 3:i * 3 + 3]) for i in range(3)]
             cols = [sum(cells[j::3]) for j in range(3)]
-            diags = [cells[0]+cells[4]+cells[8], cells[2]+cells[4]+cells[6]]
+            diags = [cells[0] + cells[4] + cells[8], cells[2] + cells[4] + cells[6]]
             if all(s == 15 for s in rows + cols + diags):
                 count += 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return count
+`

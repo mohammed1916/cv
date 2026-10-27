@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'vote', label: 'Vote for shift', description: 'Each pair of 1s votes for the translation that aligns them.' },
     { id: 'done', label: 'Complete', description: 'Return the highest vote count.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object with matrices A and B (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with matrices A and B (JSON)',
   url: 'https://leetcode.com/problems/image-overlap/',
   complexity: 'O(a * b) time for a ones in A and b ones in B (at most n^4); O(n^2) space for the vote table.',
   examples: [

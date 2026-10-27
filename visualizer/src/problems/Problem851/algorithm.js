@@ -1,4 +1,19 @@
-export const code = `def loudAndRich(richer, quiet):
+export const code = `function loudAndRich(richer, quiet)
+  let n be the number of people
+  build g, where g[b] lists everyone directly richer than b
+  set ans[x] to -1 (unknown) for every person x
+  define dfs(x)
+    if ans[x] is already known, then reuse it and stop
+    set ans[x] to x
+    for each directly richer neighbour y in g[x]
+      let c be dfs(y)
+      if quiet[c] is less than quiet[ans[x]] then
+        set ans[x] to c
+    return ans[x]
+  for i from 0 to n - 1
+    call dfs(i)
+  return the array ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def loud_and_rich(richer, quiet):
     n = len(quiet)
     g = [[] for _ in range(n)]
     for a, b in richer:
@@ -15,7 +30,8 @@ export const code = `def loudAndRich(richer, quiet):
         return ans[x]
     for i in range(n):
         dfs(i)
-    return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return ans
+`
 
 const L = (s) => code.findIndex((c) => c.text.includes(s)) + 1
 
@@ -50,24 +66,24 @@ export function buildTrace({ richer, quiet }) {
   const path = []
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, ans: [...ans], path: [...path], x: null, cand: null, ...extra })
-  push('start', L('n = len'), `Build g so g[b] lists everyone directly richer than b. ans is -1 (unknown) for all ${n} people.`)
+  push('start', L('build g'),`Build g so g[b] lists everyone directly richer than b. ans is -1 (unknown) for all ${n} people.`)
   const dfs = (x) => {
     path.push(x)
-    push('visit', L('def dfs'), `dfs(${x}): ask for the quietest person at least as rich as ${x}.`, { x })
+    push('visit', L('define dfs'),`dfs(${x}): ask for the quietest person at least as rich as ${x}.`, { x })
     if (ans[x] !== -1) {
       push('memo', L('if ans[x]'), `ans[${x}] is already ${ans[x]}, so reuse it without searching again.`, { x, cand: ans[x] })
       path.pop()
       return ans[x]
     }
     ans[x] = x
-    push('visit', L('ans[x] = x'), `Person ${x} is at least as rich as themselves, so start with candidate ${x} (quiet ${quiet[x]}).`, { x, cand: x })
+    push('visit', L('set ans[x] to x'),`Person ${x} is at least as rich as themselves, so start with candidate ${x} (quiet ${quiet[x]}).`, { x, cand: x })
     for (const y of g[x]) {
       const c = dfs(y)
       const better = quiet[c] < quiet[ans[x]]
       push('compare', L('if quiet'), `Richer person ${y} offers ${c} (quiet ${quiet[c]}) versus current ${ans[x]} (quiet ${quiet[ans[x]]}): ${better ? 'quieter, so replace' : 'not quieter, keep'}.`, { x, cand: c })
       if (better) {
         ans[x] = c
-        push('update', L('ans[x] = c'), `ans[${x}] becomes ${c}. Everyone richer than ${y} is also richer than ${x}, so the answer is inherited.`, { x, cand: c })
+        push('update', L('set ans[x] to c'),`ans[${x}] becomes ${c}. Everyone richer than ${y} is also richer than ${x}, so the answer is inherited.`, { x, cand: c })
       }
     }
     push('visit', L('return ans[x]'), `All richer neighbours of ${x} are checked; ans[${x}] = ${ans[x]}.`, { x, cand: ans[x] })
@@ -75,9 +91,9 @@ export function buildTrace({ richer, quiet }) {
     return ans[x]
   }
   for (let i = 0; i < n; i++) {
-    push('visit', L('for i in range(n)'), `Outer loop: make sure person ${i} is resolved.`, { x: i })
+    push('visit', L('for i from 0'),`Outer loop: make sure person ${i} is resolved.`, { x: i })
     dfs(i)
   }
-  push('done', L('return ans'), `Done: answer = [${ans.join(', ')}].`)
+  push('done', L('return the array ans'),`Done: answer = [${ans.join(', ')}].`)
   return { input: { richer, quiet }, result: [...ans], frames }
 }

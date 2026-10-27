@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'peak', label: 'Peak', description: 'Join climb and descent into a mountain length.' },
     { id: 'done', label: 'Complete', description: 'Return the longest mountain length.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array arr (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array arr (JSON)',
   url: 'https://leetcode.com/problems/longest-mountain-in-array/',
   complexity: 'O(n) time and O(n) space for the two run-length arrays (an O(1) two-pointer version also exists).',
   examples: [

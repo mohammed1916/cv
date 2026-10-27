@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'leave', label: 'Leave', description: 'Remove a student, merging gaps.' },
     { id: 'done', label: 'Complete', description: 'All operations finished.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {n, ops} (JSON, n up to 40, up to 40 ops)',
   url: 'https://leetcode.com/problems/exam-room/',
   complexity: 'seat is O(k) over k seated students, leave is O(k); the visualization is capped at 40 seats.',

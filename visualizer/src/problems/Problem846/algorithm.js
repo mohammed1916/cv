@@ -22,7 +22,7 @@ export function buildTrace({ hand, groupSize }) {
   for (const card of keys) {
     const c = count.get(card)
     if (c === 0) { push('skip', 6, `Card ${card} has no copies left (they were used by earlier groups): move on.`, { card }); continue }
-    push('run', 6, `The smallest remaining card is ${card} with ${c} cop${c === 1 ? 'y' : 'ies'}. Each must start a straight ${card}..${card + groupSize - 1}, so build ${c} such group${c === 1 ? '' : 's'} at once.`, { card, run: c })
+    push('run', 7, `The smallest remaining card is ${card} with ${c} cop${c === 1 ? 'y' : 'ies'}. Each must start a straight ${card}..${card + groupSize - 1}, so build ${c} such group${c === 1 ? '' : 's'} at once.`, { card, run: c })
     for (let k = card; k < card + groupSize; k++) {
       const have = count.get(k) || 0
       if (have < c) {
@@ -37,13 +37,28 @@ export function buildTrace({ hand, groupSize }) {
   push('done', 10, 'Every card was consumed by complete straights: return True.')
   return { input: { hand, groupSize }, keys, result: true, frames }
 }
-export const code = `def isNStraightHand(hand, groupSize):
-    if len(hand) % groupSize: return False
+export const code = `function isNStraightHand(hand, groupSize)
+  if the length of hand is not divisible by groupSize then return false
+  count how many copies of each card there are
+  for each distinct card in increasing order
+    set c to the copies of card still remaining
+    if c > 0 then
+      for k from card to card + groupSize - 1
+        if count[k] < c then return false
+        subtract c from count[k]
+  return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `from collections import Counter
+
+def is_n_straight_hand(hand, groupSize):
+    if len(hand) % groupSize:
+        return False
     count = Counter(hand)
     for card in sorted(count):
         c = count[card]
         if c > 0:
             for k in range(card, card + groupSize):
-                if count[k] < c: return False
+                if count[k] < c:
+                    return False
                 count[k] -= c
-    return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return True
+`

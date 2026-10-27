@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import RootedTreeDiagram from '../../components/shared/RootedTreeDiagram'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'down', label: 'Re-root downward', description: 'Derive a child answer from its parent answer.' },
     { id: 'done', label: 'Complete', description: 'Return all answers.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object with n and edges (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object with n and edges (JSON)',
   url: 'https://leetcode.com/problems/sum-of-distances-in-tree/',
   complexity: 'O(n) time and space: two DFS passes over the n - 1 edges.',
   examples: [

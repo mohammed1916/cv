@@ -13,7 +13,7 @@ export function buildTrace(rects) {
   for (let i = 0; i + 1 < xs.length; i++) {
     const x1 = xs[i], x2 = xs[i + 1]
     const intervals = rects.filter(([a, , b]) => a <= x1 && x2 <= b).map(([, y1, , y2]) => [y1, y2]).sort((p, q) => p[0] - q[0] || p[1] - q[1])
-    frames.push({ phase: 'slab', activeLine: 6, slab: i, xs, intervals, merged: [], covered: 0, total: String(total), message: `Slab x in [${x1}, ${x2}] (width ${x2 - x1}): ${intervals.length} rectangle${intervals.length === 1 ? '' : 's'} span it, with y-intervals ${intervals.length ? intervals.map(([a, b]) => `[${a},${b}]`).join(' ') : 'none'}.` })
+    frames.push({ phase: 'slab', activeLine: 5, slab: i, xs, intervals, merged: [], covered: 0, total: String(total), message: `Slab x in [${x1}, ${x2}] (width ${x2 - x1}): ${intervals.length} rectangle${intervals.length === 1 ? '' : 's'} span it, with y-intervals ${intervals.length ? intervals.map(([a, b]) => `[${a},${b}]`).join(' ') : 'none'}.` })
     let covered = 0, top = 0
     const merged = []
     for (const [a, b] of intervals) {
@@ -21,13 +21,25 @@ export function buildTrace(rects) {
       if (b > lo) { covered += b - lo; top = b; if (merged.length && merged[merged.length - 1][1] === lo) merged[merged.length - 1][1] = b; else merged.push([lo, b]) }
     }
     total += BigInt(covered) * BigInt(x2 - x1)
-    frames.push({ phase: 'cover', activeLine: 13, slab: i, xs, intervals, merged: merged.map(m => [...m]), covered, total: String(total), message: `Sorted by y and clipped against the highest y already counted, the union covers ${covered} of the y-axis. Slab area = ${covered} x ${x2 - x1}; running total ${total}.` })
+    frames.push({ phase: 'cover', activeLine: 11, slab: i, xs, intervals, merged: merged.map(m => [...m]), covered, total: String(total), message: `Sorted by y and clipped against the highest y already counted, the union covers ${covered} of the y-axis. Slab area = ${covered} x ${x2 - x1}; running total ${total}.` })
   }
   const result = Number(total % MOD)
-  frames.push({ phase: 'done', activeLine: 14, slab: -1, xs, intervals: [], merged: [], covered: 0, total: String(total), message: `Total union area ${total}; modulo 1,000,000,007 gives ${result}.` })
+  frames.push({ phase: 'done', activeLine: 12, slab: -1, xs, intervals: [], merged: [], covered: 0, total: String(total), message: `Total union area ${total}; modulo 1,000,000,007 gives ${result}.` })
   return { input: rects.map(r => [...r]), result, xs, frames }
 }
-export const code = `def rectangleArea(rectangles):
+export const code = `function rectangleArea(rectangles)
+  collect the distinct x edges of all rectangles and sort them
+  set total to 0
+  for each slab between consecutive edges x1 and x2
+    collect the y-intervals of the rectangles that span the whole slab
+    sort those intervals by their lower y
+    set covered to 0 and top to 0
+    for each interval (y1, y2) in order
+      raise y1 to top if top is higher
+      if y2 is above y1 then add y2 - y1 to covered and set top to y2
+    add covered * (x2 - x1) to total
+  return total mod 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def rectangle_area(rectangles):
     xs = sorted({x for x1, y1, x2, y2 in rectangles for x in (x1, x2)})
     total = 0
     for i in range(len(xs) - 1):
@@ -40,4 +52,5 @@ export const code = `def rectangleArea(rectangles):
                 covered += y2 - y1
                 top = y2
         total += covered * (x2 - x1)
-    return total % (10**9 + 7)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return total % (10**9 + 7)
+`

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'accept', label: 'Accept', description: 'All digits and all eight line sums check out.' },
     { id: 'done', label: 'Complete', description: 'Return the count of magic squares.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Grid (JSON 2-D array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON 2-D array)',
   url: 'https://leetcode.com/problems/magic-squares-in-grid/',
   complexity: 'O(R*C) time (each window costs a constant 9 cells) and O(1) extra space.',
   examples: [

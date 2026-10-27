@@ -17,9 +17,9 @@ export function buildTrace(s) {
     frames.push({ phase: 'mask', activeLine: 5, partial: result, message: `Keep the first and last letter of "${name}" around five stars and keep the domain: "${result}".` })
   } else {
     const digits = [...s].filter(c => c >= '0' && c <= '9')
-    frames.push({ phase: 'phone', activeLine: 6, partial: digits.join(''), message: `Phone: drop separators and keep the ${digits.length} digits.` })
+    frames.push({ phase: 'phone', activeLine: 7, partial: digits.join(''), message: `Phone: drop separators and keep the ${digits.length} digits.` })
     const local = '***-***-' + digits.slice(-4).join('')
-    frames.push({ phase: 'mask', activeLine: 7, partial: local, message: `The last four digits stay visible; the rest of the local number becomes "${local}".` })
+    frames.push({ phase: 'mask', activeLine: 8, partial: local, message: `The last four digits stay visible; the rest of the local number becomes "${local}".` })
     result = digits.length === 10 ? local : '+' + '*'.repeat(digits.length - 10) + '-' + local
     frames.push({ phase: 'country', activeLine: digits.length === 10 ? 9 : 10, partial: result,
       message: digits.length === 10 ? 'Exactly 10 digits means no country code: use the local mask.' : `${digits.length - 10} extra leading digit(s) form the country code: prefix "+${'*'.repeat(digits.length - 10)}-".` })
@@ -27,13 +27,24 @@ export function buildTrace(s) {
   frames.push({ phase: 'done', activeLine: result.startsWith('+') || result.includes('@') ? (result.includes('@') ? 5 : 10) : 9, partial: result, message: `Masked result: ${result}` })
   return { input: s, result, frames }
 }
-export const code = `def maskPII(s):
+export const code = `function maskPII(s)
+  if s contains an "@" sign then
+    lowercase every letter of s
+    split s into name and domain at the "@"
+    return first letter of name, "*****", last letter of name, "@", domain
+  otherwise treat s as a phone number
+    keep only the digits of s
+    set local to "***-***-" followed by the last four digits
+    if there are exactly 10 digits then return local
+    return "+", one star per digit beyond 10, "-", local`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def mask_pii(s):
     if '@' in s:
         s = s.lower()
         name, domain = s.split('@')
         return name[0] + '*****' + name[-1] + '@' + domain
-    digits = [c for c in s if c.isdigit()]
+    digits = [c for c in s if '0' <= c <= '9']
     local = '***-***-' + ''.join(digits[-4:])
     if len(digits) == 10:
         return local
-    return '+' + '*' * (len(digits) - 10) + '-' + local`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return '+' + '*' * (len(digits) - 10) + '-' + local
+`

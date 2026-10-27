@@ -13,7 +13,7 @@ export function buildTrace({ A, B }) {
   const votes = new Map()
   const pairs = []
   let best = 0, bestKey = null
-  const frames = [{ phase: 'start', pair: -1, best: 0, bestKey: null, activeLine: 5, message: `A has ${onesA.length} one(s), B has ${onesB.length}. Sliding A by (dr, dc) overlaps a pair of 1s exactly when their offset equals that shift.` }]
+  const frames = [{ phase: 'start', pair: -1, best: 0, bestKey: null, activeLine: 4, message: `A has ${onesA.length} one(s), B has ${onesB.length}. Sliding A by (dr, dc) overlaps a pair of 1s exactly when their offset equals that shift.` }]
   for (const [ai, aj] of onesA) for (const [bi, bj] of onesB) {
     const key = `${bi - ai},${bj - aj}`
     const c = (votes.get(key) || 0) + 1
@@ -26,7 +26,17 @@ export function buildTrace({ A, B }) {
   frames.push({ phase: 'done', pair: pairs.length - 1, best, bestKey, activeLine: 10, message: best ? `Largest overlap is ${best}, achieved by shifting A by (${bestKey}).` : 'No pair of 1s exists, so the overlap is 0.' })
   return { input: { A, B }, pairs, result: best, frames }
 }
-export const code = `def largestOverlap(A, B):
+export const code = `function largestOverlap(A, B)
+  set n to the side length of A
+  collect ones_a, the cells (i, j) where A holds a 1
+  collect ones_b, the cells (i, j) where B holds a 1
+  create an empty vote table with one counter per shift
+  for each cell (ai, aj) in ones_a
+    for each cell (bi, bj) in ones_b
+      set shift to (bi - ai, bj - aj)
+      add one vote to the counter for shift
+  return the largest vote count, or 0 if there are no votes`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def largest_overlap(A, B):
     n = len(A)
     ones_a = [(i, j) for i in range(n) for j in range(n) if A[i][j]]
     ones_b = [(i, j) for i in range(n) for j in range(n) if B[i][j]]
@@ -35,4 +45,5 @@ export const code = `def largestOverlap(A, B):
         for bi, bj in ones_b:
             d = (bi - ai, bj - aj)
             vote[d] = vote.get(d, 0) + 1
-    return max(vote.values(), default=0)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return max(vote.values(), default=0)
+`

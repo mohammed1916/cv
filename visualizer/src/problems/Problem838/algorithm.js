@@ -6,7 +6,7 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const n = s.length
   const force = new Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: 2, index: -1, f: 0, force: [...force], message: `Each domino gets a signed force: positive means falling right, negative means falling left. Strength n = ${n} at an initial push, decaying by 1 per cell.` }]
+  const frames = [{ phase: 'start', activeLine: 3, index: -1, f: 0, force: [...force], message: `Each domino gets a signed force: positive means falling right, negative means falling left. Strength n = ${n} at an initial push, decaying by 1 per cell.` }]
   let f = 0
   for (let i = 0; i < n; i++) {
     let why
@@ -29,19 +29,42 @@ export function buildTrace(s) {
   frames.push({ phase: 'done', activeLine: 16, index: -1, f: 0, force: [...force], message: `Positive force falls R, negative falls L, zero stays upright (balanced or never touched): "${out}".` })
   return { input: s, result: out, frames }
 }
-export const code = `def pushDominoes(dominoes):
+export const code = `function pushDominoes(dominoes)
+  set n to the number of dominoes
+  create force[i] = 0 for every domino i
+  set f to 0
+  for i from 0 up to n - 1, scanning left to right
+    if dominoes[i] is R then set f to n
+    else if dominoes[i] is L then set f to 0
+    otherwise set f to max(f - 1, 0)
+    add f to force[i]
+  set f to 0
+  for i from n - 1 down to 0, scanning right to left
+    if dominoes[i] is L then set f to n
+    else if dominoes[i] is R then set f to 0
+    otherwise set f to max(f - 1, 0)
+    subtract f from force[i]
+  return "R" where force > 0, "L" where force < 0, "." elsewhere`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def push_dominoes(dominoes):
     n = len(dominoes)
     force = [0] * n
     f = 0
     for i in range(n):
-        if dominoes[i] == 'R': f = n
-        elif dominoes[i] == 'L': f = 0
-        else: f = max(f - 1, 0)
+        if dominoes[i] == 'R':
+            f = n
+        elif dominoes[i] == 'L':
+            f = 0
+        else:
+            f = max(f - 1, 0)
         force[i] += f
     f = 0
     for i in range(n - 1, -1, -1):
-        if dominoes[i] == 'L': f = n
-        elif dominoes[i] == 'R': f = 0
-        else: f = max(f - 1, 0)
+        if dominoes[i] == 'L':
+            f = n
+        elif dominoes[i] == 'R':
+            f = 0
+        else:
+            f = max(f - 1, 0)
         force[i] -= f
-    return ''.join('R' if x > 0 else 'L' if x < 0 else '.' for x in force)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return ''.join('R' if x > 0 else 'L' if x < 0 else '.' for x in force)
+`

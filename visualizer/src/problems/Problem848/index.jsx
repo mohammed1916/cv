@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'shift', label: 'Rotate letter', description: 'Rotate the letter by the running total.' },
     { id: 'done', label: 'Complete', description: 'Join the shifted letters.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'String and shifts (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String and shifts (JSON)',
   url: 'https://leetcode.com/problems/shifting-letters/',
   complexity: 'O(n) time and O(n) space, instead of the O(n^2) cost of applying every shift to its prefix.',
   examples: [

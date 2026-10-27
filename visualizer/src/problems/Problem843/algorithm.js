@@ -24,7 +24,7 @@ export function buildTrace({ words, secret, allowed }) {
   let cand = [...words]
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, cand: [...cand], guesses: extra.guesses ?? 0, guess: null, ...extra })
-  push('start', 5, `${words.length} candidate words; the hidden secret is one of them. We may ask the master at most ${allowed} times.`)
+  push('start', 2, `${words.length} candidate words; the hidden secret is one of them. We may ask the master at most ${allowed} times.`)
   let guesses = 0, solved = false
   while (cand.length && guesses < allowed) {
     let guess = cand[0], best = Infinity, worst = []
@@ -34,26 +34,48 @@ export function buildTrace({ words, secret, allowed }) {
     const m = matchCount(guess, secret)
     if (m === guess.length) {
       solved = true
-      push('ask', 11, `Master says ${m} of ${guess.length} letters match: "${guess}" is the secret. Solved in ${guesses} guess${guesses === 1 ? '' : 'es'}.`, { guesses, guess, m })
+      push('ask', 10, `Master says ${m} of ${guess.length} letters match: "${guess}" is the secret. Solved in ${guesses} guess${guesses === 1 ? '' : 'es'}.`, { guesses, guess, m })
       break
     }
     const before = cand.length
     cand = cand.filter(w => matchCount(w, guess) === m)
-    push('ask', 12, `Master says ${m} of ${guess.length} match. Keep only words with exactly ${m} matches against "${guess}": ${before} candidates become ${cand.length}.`, { guesses, guess, m, removed: before - cand.length, kept: [...cand] })
+    push('ask', 11, `Master says ${m} of ${guess.length} match. Keep only words with exactly ${m} matches against "${guess}": ${before} candidates become ${cand.length}.`, { guesses, guess, m, removed: before - cand.length, kept: [...cand] })
   }
-  push('done', 13, solved ? `Secret "${secret}" found with ${guesses} of ${allowed} allowed guesses.` : `Out of guesses or candidates after ${guesses} guesses: the secret was not identified.`, { guesses })
+  push('done', 12, solved ? `Secret "${secret}" found with ${guesses} of ${allowed} allowed guesses.` : `Out of guesses or candidates after ${guesses} guesses: the secret was not identified.`, { guesses })
   return { input: { words, secret, allowed }, result: solved, frames }
 }
-export const code = `def findSecretWord(words, secret, allowed):
+export const code = `function findSecretWord(words, secret, allowedGuesses)
+  set cand to a copy of words and guesses to 0
+  while cand is not empty and guesses < allowedGuesses
+    for each candidate w in cand
+      count, for every x in cand, how many share each match score with w
+      note the largest bucket for w
+    choose the guess with the smallest largest bucket (first one on ties)
+    add one to guesses
+    ask the master for the match count m between guess and secret
+    if m equals the length of guess then return true
+    keep only the candidates w in cand whose match count with guess is m
+  return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def find_secret_word(words, secret, allowedGuesses=10):
     def match(a, b):
         return sum(x == y for x, y in zip(a, b))
-    cand = words[:]
+    cand = list(words)
     guesses = 0
-    while cand and guesses < allowed:
-        guess = min(cand, key=lambda w: max(Counter(match(w, x) for x in cand).values()))
+    while cand and guesses < allowedGuesses:
+        best_guess, best_worst = None, None
+        for w in cand:
+            counts = {}
+            for x in cand:
+                m = match(w, x)
+                counts[m] = counts.get(m, 0) + 1
+            worst = max(counts.values())
+            if best_worst is None or worst < best_worst:
+                best_guess, best_worst = w, worst
+        guess = best_guess
         guesses += 1
-        m = match(guess, secret)  # the master.guess(guess) call
+        m = match(guess, secret)
         if m == len(guess):
             return True
         cand = [w for w in cand if match(w, guess) == m]
-    return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return False
+`

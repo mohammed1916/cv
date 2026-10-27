@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'update', label: 'Update', description: 'Adopt a quieter candidate.' },
     { id: 'done', label: 'Complete', description: 'Return the answer array.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {richer, quiet} (JSON)',
   url: 'https://leetcode.com/problems/loud-and-rich/',
   complexity: 'O(n + r) time and O(n + r) space with memoization. The visualization caps n at 20 and r at 40.',
