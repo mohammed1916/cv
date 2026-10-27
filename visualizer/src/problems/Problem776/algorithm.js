@@ -25,13 +25,13 @@ export function parseInput(text) {
 
 export function buildTrace(spec) {
   const roles = {}
-  const frames = [{ phase: 'start', activeLine: L('if not root'), node: null, roles: {}, message: `Split the tree at ${spec.target}: values at most ${spec.target} go left, larger values go right.` }]
+  const frames = [{ phase: 'start', activeLine: L('To split the tree at target'), node: null, roles: {}, message: `Split the tree at ${spec.target}: values at most ${spec.target} go left, larger values go right.` }]
   // Splits a subtree; returns the roots of the two resulting trees. Pointers are rewired in place.
   const split = node => {
     if (!node) return [null, null]
     const small = node.value <= spec.target
     roles[node.id] = small ? 'small' : 'large'
-    frames.push({ phase: 'visit', activeLine: L(small ? 'if root.val <= target' : 'left, right = splitBST(root.left'), node: node.id, roles: { ...roles }, message: `${node.value} is ${small ? 'at most' : 'greater than'} ${spec.target}, so it stays in the ${small ? 'left' : 'right'} tree.` })
+    frames.push({ phase: 'visit', activeLine: L(small ? 'if root.value is at most target' : '(left, right) = split root.left'), node: node.id, roles: { ...roles }, message: `${node.value} is ${small ? 'at most' : 'greater than'} ${spec.target}, so it stays in the ${small ? 'left' : 'right'} tree.` })
     if (small) {
       const [smallPart, largePart] = split(node.right)
       node.right = smallPart
@@ -43,18 +43,62 @@ export function buildTrace(spec) {
   }
   const [smallRoot, largeRoot] = split(treeFromLevelOrder(spec.arr))
   const result = [inorder(smallRoot), inorder(largeRoot)]
-  frames.push({ phase: 'done', activeLine: L('return root, right'), node: null, roles: { ...roles }, message: `Left tree: [${result[0].join(', ')}]. Right tree: [${result[1].join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('To split the tree at target'), node: null, roles: { ...roles }, message: `Left tree: [${result[0].join(', ')}]. Right tree: [${result[1].join(', ')}].` })
   return { input: spec, root: treeFromLevelOrder(spec.arr), result, frames }
 }
 
-export const code = `def splitBST(root, target):
-    if not root:
-        return None, None
-    if root.val <= target:
-        left, right = splitBST(root.right, target)
-        root.right = left
-        return root, right
-    left, right = splitBST(root.left, target)
-    root.left = right
-    return left, root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `To split the tree at target, call split(root)
+  if root is empty then
+    return (empty, empty)
+  if root.value is at most target then
+    (left, right) = split root.right
+    set root.right to left
+    return (root, right)
+  (left, right) = split root.left
+  set root.left to right
+  return (left, root)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def build(arr):
+    if not arr or arr[0] is None:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    cursor = 1
+    for node in queue:
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.left = TreeNode(arr[cursor])
+            queue.append(node.left)
+        cursor += 1
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.right = TreeNode(arr[cursor])
+            queue.append(node.right)
+        cursor += 1
+    return root
+
+def inorder(node, out):
+    if node:
+        inorder(node.left, out)
+        out.append(node.val)
+        inorder(node.right, out)
+    return out
+
+def split_bst(arr, target):
+    def split(root):
+        if root is None:
+            return None, None
+        if root.val <= target:
+            left, right = split(root.right)
+            root.right = left
+            return root, right
+        left, right = split(root.left)
+        root.left = right
+        return left, root
+    small, large = split(build(arr))
+    return [inorder(small, []), inorder(large, [])]
+`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1

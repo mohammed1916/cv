@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'resolve', label: 'Resolve', description: 'Copy the parent for odd positions, flip it for even positions.' },
     { id: 'done', label: 'Complete', description: 'Return the symbol.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {n, k} (JSON, n up to 30)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {n, k} (JSON, n up to 30)',
   url: 'https://leetcode.com/problems/k-th-symbol-in-grammar/',
   complexity: 'O(n) time and O(n) recursion depth.',
   examples: [

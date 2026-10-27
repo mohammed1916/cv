@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'emit', label: 'Emit', description: 'A full-length prefix is recorded as a result.' },
     { id: 'done', label: 'Complete', description: 'All permutations are collected.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/letter-case-permutation/',
   complexity: 'O(2^L * n) time for L letters and length n; O(n) recursion depth plus output.',
   examples: [

@@ -23,13 +23,13 @@ export function buildTrace(values) {
   let best = Infinity
   const visited = []
   const order = []
-  const frames = [{ phase: 'start', activeLine: 12, current: null, prev: null, best: null, visited: [], order: [], message: 'In a BST the in-order traversal yields values in increasing order, so the closest pair must be consecutive in that order. Track only the previous value.' }]
+  const frames = [{ phase: 'start', activeLine: 1, current: null, prev: null, best: null, visited: [], order: [], message: 'In a BST the in-order traversal yields values in increasing order, so the closest pair must be consecutive in that order. Track only the previous value.' }]
   const stack = []
   const snap = (phase, activeLine, current, message, decision) => frames.push({ phase, activeLine, current: current ? current.id : null, prev, best: best === Infinity ? null : best, visited: [...visited], order: [...order], message, treeWalk: { kind: 'recursion', stack: stack.map(v => ({ label: `inorder(${v})` })), order: [...order], orderLabel: 'In-order values so far (sorted)', decision: decision ?? message } })
   function inorder(node) {
     if (!node) return
     stack.push(node.value)
-    snap('descend', 7, node, `Visit node ${node.value}: first finish its left subtree${node.left ? ` (root ${node.left.value})` : ' (empty)'}.`)
+    snap('descend', 4, node, `Visit node ${node.value}: first finish its left subtree${node.left ? ` (root ${node.left.value})` : ' (empty)'}.`)
     inorder(node.left)
     visited.push(node.id)
     order.push(node.value)
@@ -37,18 +37,52 @@ export function buildTrace(values) {
       const diff = node.value - prev
       const improved = diff < best
       best = Math.min(best, diff)
-      snap('visit', 9, node, `In-order visit ${node.value}: difference from previous ${prev} is ${diff}${improved ? ', a new minimum' : `, not below ${best}`}. Best so far: ${best}.`)
-    } else snap('visit', 10, node, `In-order visit ${node.value}: the smallest value, nothing to compare with yet.`)
+      snap('visit', 6, node, `In-order visit ${node.value}: difference from previous ${prev} is ${diff}${improved ? ', a new minimum' : `, not below ${best}`}. Best so far: ${best}.`)
+    } else snap('visit', 7, node, `In-order visit ${node.value}: the smallest value, nothing to compare with yet.`)
     prev = node.value
     inorder(node.right)
     stack.pop()
   }
   inorder(root)
-  frames.push({ phase: 'done', activeLine: 13, current: null, prev, best, visited: [...visited], order: [...order], message: `Minimum difference between any two nodes: ${best}.` })
+  frames.push({ phase: 'done', activeLine: 10, current: null, prev, best, visited: [...visited], order: [...order], message: `Minimum difference between any two nodes: ${best}.` })
   return { input: [...values], root, result: best, frames }
 }
-export const code = `def minDiffInBST(root):
-    prev, best = None, inf
+export const code = `set prev to none and best to infinity
+define inorder(node)
+  if node is empty then return
+  inorder(node.left)
+  if prev is not none then
+    set best to min(best, node.value - prev)
+  set prev to node.value
+  inorder(node.right)
+call inorder(root)
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def build(arr):
+    if not arr or arr[0] is None:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    cursor = 1
+    for node in queue:
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.left = TreeNode(arr[cursor])
+            queue.append(node.left)
+        cursor += 1
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.right = TreeNode(arr[cursor])
+            queue.append(node.right)
+        cursor += 1
+    return root
+
+def min_diff_in_bst(values):
+    root = build(values)
+    prev, best = None, float('inf')
     def inorder(node):
         nonlocal prev, best
         if not node:
@@ -59,4 +93,5 @@ export const code = `def minDiffInBST(root):
         prev = node.val
         inorder(node.right)
     inorder(root)
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return best
+`

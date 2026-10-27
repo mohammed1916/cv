@@ -20,8 +20,14 @@ export function buildTrace(nums) {
   frames.push({ phase: 'done', activeLine: 5, index: nums.length - 1, dev: 0, offenders: [], message: 'Every value is within one slot of its home, so all inversions are local: True.' })
   return { input: [...nums], result: true, frames }
 }
-export const code = `def isIdealPermutation(nums):
+export const code = `for each index i from 0 to n - 1
+  set dev to the absolute difference of nums[i] and i
+  if dev is greater than 1 then
+    return False
+return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def is_ideal_permutation(nums):
     for i, x in enumerate(nums):
         if abs(x - i) > 1:
             return False
-    return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return True
+`

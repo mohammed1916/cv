@@ -25,13 +25,21 @@ export function buildTrace({ n, k }) {
     frames.push({ phase: 'resolve', activeLine: odd ? 6 : 7, depth: d, values: [...values], message: `Position ${chain[d].pos} in row ${chain[d].row} is ${odd ? 'odd (first child): it copies' : 'even (second child): it flips'} its parent ${parent}, giving ${values[d]}.` })
   }
   const result = values[0]
-  frames.push({ phase: 'done', activeLine: 7, depth: 0, values: [...values], message: `The ${k}-th symbol in row ${n} is ${result}.` })
+  frames.push({ phase: 'done', activeLine: chain.length === 1 ? 3 : chain[0].pos % 2 === 1 ? 6 : 7, depth: 0, values: [...values], message: `The ${k}-th symbol in row ${n} is ${result}.` })
   return { input: { n, k }, chain, result, frames }
 }
-export const code = `def kthGrammar(n, k):
+export const code = `to find the k-th symbol in row n
+  if n equals 1 then
+    return 0
+  set parent to the symbol at position (k + 1) / 2 (integer division) in row n - 1
+  if k is odd then
+    return parent
+  return 1 - parent`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def kth_grammar(n, k):
     if n == 1:
         return 0
-    parent = kthGrammar(n - 1, (k + 1) // 2)
+    parent = kth_grammar(n - 1, (k + 1) // 2)
     if k % 2 == 1:
         return parent
-    return 1 - parent`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return 1 - parent
+`

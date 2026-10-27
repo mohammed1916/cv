@@ -27,7 +27,20 @@ export function buildTrace({ sx, sy, tx: tx0, ty: ty0 }) {
   frames.push({ phase: 'done', activeLine: line, tx, ty, message: `Answer: ${result}.` })
   return { input: { sx, sy, tx: tx0, ty: ty0 }, result, frames }
 }
-export const code = `def reachingPoints(sx, sy, tx, ty):
+export const code = `start with (tx, ty) equal to the target (tx0, ty0)
+while tx > sx and ty > sy and tx is not ty
+  if tx > ty then
+    set tx to tx mod ty
+  else
+    set ty to ty mod tx
+if (tx, ty) equals (sx, sy) then
+  return True
+if tx equals sx then
+  return ty > sy and (ty - sy) is divisible by tx
+if ty equals sy then
+  return tx > sx and (tx - sx) is divisible by ty
+return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def reaching_points(sx, sy, tx, ty):
     while tx > sx and ty > sy and tx != ty:
         if tx > ty:
             tx %= ty
@@ -39,4 +52,5 @@ export const code = `def reachingPoints(sx, sy, tx, ty):
         return ty > sy and (ty - sy) % tx == 0
     if ty == sy:
         return tx > sx and (tx - sx) % ty == 0
-    return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return False
+`

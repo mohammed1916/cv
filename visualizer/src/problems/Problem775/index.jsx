@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'violation', label: 'Violation', description: 'A value is two or more slots from home.' },
     { id: 'done', label: 'Complete', description: 'Report whether global equals local inversions.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Permutation nums of 0..n-1 (JSON, up to 300)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Permutation nums of 0..n-1 (JSON, up to 300)',
   url: 'https://leetcode.com/problems/global-and-local-inversions/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [

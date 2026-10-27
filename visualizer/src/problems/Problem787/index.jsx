@@ -3,7 +3,7 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import WeightedGraphView from '../../components/shared/WeightedGraphView'
 import { wgraphState } from '../../components/shared/wgraphModel.js'
 import HeapView from '../../components/shared/HeapView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -14,7 +14,7 @@ const definition = {
     { id: 'found', label: 'Destination', description: 'The first popped destination is the cheapest valid one.' },
     { id: 'done', label: 'Complete', description: 'Return the price or -1.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Flights problem (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Flights problem (JSON)',
   url: 'https://leetcode.com/problems/cheapest-flights-within-k-stops/',
   complexity: 'O(E k log(E k)) time worst case; visualization limited to 10 cities and 30 flights.',
   examples: [

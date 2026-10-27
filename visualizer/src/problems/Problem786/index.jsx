@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import HeapView from '../../components/shared/HeapView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'skip', label: 'Column done', description: 'No larger numerator is left for that denominator.' },
     { id: 'done', label: 'Complete', description: 'Heap top is the k-th smallest.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'arr and k (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'arr and k (JSON)',
   url: 'https://leetcode.com/problems/k-th-smallest-prime-fraction/',
   complexity: 'O((n + k) log n) time, O(n) space. Visualization limited to 12 values.',
   examples: [

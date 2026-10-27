@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'complete', label: 'Word matched', description: 'A word consumed all its letters.' },
     { id: 'done', label: 'Complete', description: 'Return the number of matched words.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 's and words (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 's and words (JSON)',
   url: 'https://leetcode.com/problems/number-of-matching-subsequences/',
   complexity: 'O(|s| + total word length) time; every word letter is processed at most once.',
   examples: [

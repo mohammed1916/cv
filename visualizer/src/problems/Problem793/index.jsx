@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'raise', label: 'Move lo', description: 'Too few zeros: search higher.' },
     { id: 'done', label: 'Complete', description: 'Check whether the first candidate hits k exactly.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Integer k (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Integer k (JSON)',
   url: 'https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/',
   complexity: 'O(log^2 k) time: about log k binary search steps, each counting zeros in O(log x).',
   examples: [

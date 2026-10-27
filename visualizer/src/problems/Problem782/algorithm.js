@@ -14,7 +14,7 @@ export function buildTrace(board) {
   const cols = Array.from({ length: n }, (_, j) => board.reduce((m, r, i) => m | (r[j] << i), 0))
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, axis: '', index: -1, kinds: [], ...extra })
-  push('start', 4, `Swapping rows never changes which two row patterns exist, and likewise for columns. So treat each row as an ${n}-bit mask (and each column), then solve rows and columns separately.`, { rows: rows.map(m => bits(m, n)), cols: cols.map(m => bits(m, n)) })
+  push('start', 2, `Swapping rows never changes which two row patterns exist, and likewise for columns. So treat each row as an ${n}-bit mask (and each column), then solve rows and columns separately.`, { rows: rows.map(m => bits(m, n)), cols: cols.map(m => bits(m, n)) })
 
   function solve(axis, masks) {
     const first = masks[0]
@@ -26,23 +26,23 @@ export function buildTrace(board) {
       else if (m === other) kinds.push('B')
       else {
         kinds.push('X')
-        push('classify', 11, `${axis} ${i} is ${bits(m, n)}: it is neither ${bits(first, n)} nor its complement ${bits(other, n)}. Impossible.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
+        push('classify', 6, `${axis} ${i} is ${bits(m, n)}: it is neither ${bits(first, n)} nor its complement ${bits(other, n)}. Impossible.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
         return -1
       }
-      push('classify', 10, `${axis} ${i} = ${bits(m, n)} is ${kinds[i] === 'A' ? 'the same as' : 'the complement of'} ${axis} 0.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
+      push('classify', 5, `${axis} ${i} = ${bits(m, n)} is ${kinds[i] === 'A' ? 'the same as' : 'the complement of'} ${axis} 0.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
     }
     const ones = popcount(first)
     if (Math.abs(ones - (n - ones)) > 1) {
-      push('balance', 14, `${axis} 0 has ${ones} ones and ${n - ones} zeros: in a chessboard they differ by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
+      push('balance', 8, `${axis} 0 has ${ones} ones and ${n - ones} zeros: in a chessboard they differ by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
       return -1
     }
     const lead = kinds.map(k => (k === 'A' ? 1 : 0))
     const cnt = lead.reduce((a, b) => a + b, 0)
     if (Math.abs(cnt - (n - cnt)) > 1) {
-      push('balance', 18, `Only ${cnt} of ${n} ${axis}s equal ${axis} 0 (the rest are complements): the two kinds must differ in count by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
+      push('balance', 11, `Only ${cnt} of ${n} ${axis}s equal ${axis} 0 (the rest are complements): the two kinds must differ in count by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
       return -1
     }
-    push('balance', 18, `${axis} 0 is balanced (${ones} ones) and the two kinds appear ${cnt} and ${n - cnt} times: a chessboard layout is possible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
+    push('balance', 11, `${axis} 0 is balanced (${ones} ones) and the two kinds appear ${cnt} and ${n - cnt} times: a chessboard layout is possible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
     let best = -1
     const notes = []
     for (const s of [0, 1]) {
@@ -52,17 +52,37 @@ export function buildTrace(board) {
       notes.push(`pattern ${target.join('')} needs ${d} swap${d === 1 ? '' : 's'}`)
       if (best === -1 || d < best) best = d
     }
-    push('moves', 25, `Kinds in order: ${lead.join('')}. Target alternations: ${notes.join('; ')}. Each swap fixes two misplaced ${axis}s, so ${axis} swaps = ${best}.`, { axis, kinds, masks: masks.map(x => bits(x, n)), moves: best })
+    push('moves', 18, `Kinds in order: ${lead.join('')}. Target alternations: ${notes.join('; ')}. Each swap fixes two misplaced ${axis}s, so ${axis} swaps = ${best}.`, { axis, kinds, masks: masks.map(x => bits(x, n)), moves: best })
     return best
   }
   const r = solve('row', rows)
   let c = -1
   if (r >= 0) c = solve('column', cols)
   const result = r < 0 || c < 0 ? -1 : r + c
-  push('done', 31, result < 0 ? 'A chessboard cannot be formed: return -1.' : `Row swaps ${r} + column swaps ${c} = ${result}.`, { moves: result })
+  push('done', 20, result < 0 ? 'A chessboard cannot be formed: return -1.' : `Row swaps ${r} + column swaps ${c} = ${result}.`, { moves: result })
   return { input: board, result, frames }
 }
-export const code = `def movesToChessboard(board):
+export const code = `let n be the board size, and full the bitmask with n ones
+encode each row as a bitmask rows, and each column as a bitmask cols
+define solve(masks)
+  set first to masks[0] and other to full XOR first
+  for each mask m in masks
+    if m is neither first nor other then return -1
+  set ones to the number of ones in first
+  if |ones - (n - ones)| is greater than 1 then return -1
+  set lead[i] to 1 if masks[i] equals first, else 0
+  set cnt to the sum of lead
+  if |cnt - (n - cnt)| is greater than 1 then return -1
+  set best to -1
+  for s in 0 and 1
+    set target[i] to 1 if i mod 2 equals s, else 0
+    if the sum of target is not cnt then skip s
+    set d to the number of positions where lead differs from target, divided by 2
+    if best is -1 or d is less than best then set best to d
+  return best
+set r to solve(rows) and c to solve(cols)
+return -1 if r < 0 or c < 0, else r + c`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const python = `def moves_to_chessboard(board):
     n = len(board)
     full = (1 << n) - 1
     rows = [sum(board[i][j] << j for j in range(n)) for i in range(n)]
@@ -92,4 +112,5 @@ export const code = `def movesToChessboard(board):
         return best
 
     r, c = solve(rows), solve(cols)
-    return -1 if r < 0 or c < 0 else r + c`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return -1 if r < 0 or c < 0 else r + c
+`

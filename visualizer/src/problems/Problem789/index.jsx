@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'caught', label: 'Ghost intercepts', description: 'This ghost can arrive no later than you.' },
     { id: 'done', label: 'Complete', description: 'Return whether escape is possible.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'ghosts and target (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'ghosts and target (JSON)',
   url: 'https://leetcode.com/problems/escape-the-ghosts/',
   complexity: 'O(g) time, O(1) extra space. Visualization limited to 20 ghosts and |coordinate| <= 20.',
   examples: [

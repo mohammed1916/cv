@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'best', label: 'New best', description: 'A strictly higher score for this k.' },
     { id: 'done', label: 'Complete', description: 'Return the smallest best k.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/smallest-rotation-with-highest-score/',
   complexity: 'O(n) time, O(n) space. Visualization limited to 30 elements.',
   examples: [

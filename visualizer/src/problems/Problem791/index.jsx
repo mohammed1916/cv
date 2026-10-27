@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'rest', label: 'Append rest', description: 'Characters outside the order go at the end.' },
     { id: 'done', label: 'Complete', description: 'Return the joined result.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'order and s (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'order and s (JSON)',
   url: 'https://leetcode.com/problems/custom-sort-string/',
   complexity: 'O(|order| + |s|) time, O(26) space for the counts.',
   examples: [

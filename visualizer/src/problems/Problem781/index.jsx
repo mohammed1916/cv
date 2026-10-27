@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'group', label: 'Form groups', description: 'Round each tally up to whole colour groups.' },
     { id: 'done', label: 'Complete', description: 'Return the minimum total.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array answers (JSON, up to 200)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array answers (JSON, up to 200)',
   url: 'https://leetcode.com/problems/rabbits-in-forest/',
   complexity: 'O(n) time and O(k) space for k distinct answers.',
   examples: [

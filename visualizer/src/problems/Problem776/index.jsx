@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'visit', label: 'Visit node', description: 'Decide which side of the split this node belongs to.' },
     { id: 'done', label: 'Split', description: 'Both trees are assembled.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'BST (JSON level order) and target',
   url: 'https://leetcode.com/problems/split-bst/',
   complexity: 'O(h) time for height h, since each step descends one level. The visualization caps input at 30 nodes.',

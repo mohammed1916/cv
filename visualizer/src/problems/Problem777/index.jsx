@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'match', label: 'Match', description: 'The letters can be paired; advance both pointers.' },
     { id: 'done', label: 'Complete', description: 'Report whether start can become end.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {start, end} (JSON, up to 60 characters each)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {start, end} (JSON, up to 60 characters each)',
   url: 'https://leetcode.com/problems/swap-adjacent-in-lr-string/',
   complexity: 'O(n) time and O(1) extra space.',
   examples: [

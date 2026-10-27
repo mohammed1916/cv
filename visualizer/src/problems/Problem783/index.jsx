@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
 import TreeWalkView from '../../components/shared/TreeWalkView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'visit', label: 'In-order visit', description: 'Compare the node with the previously visited value.' },
     { id: 'done', label: 'Complete', description: 'Return the smallest gap.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Level-order tree (JSON, null for gaps, up to 63 slots)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Level-order tree (JSON, null for gaps, up to 63 slots)',
   url: 'https://leetcode.com/problems/minimum-distance-between-bst-nodes/',
   complexity: 'O(n) time and O(h) recursion space for a tree of height h.',
   examples: [

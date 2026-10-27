@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'invalid', label: 'Rule broken', description: 'The state cannot arise in a real game.' },
     { id: 'done', label: 'Complete', description: 'Return the verdict.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Board (JSON array of 3 strings)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Board (JSON array of 3 strings)',
   url: 'https://leetcode.com/problems/valid-tic-tac-toe-state/',
   complexity: 'O(1): the board has 9 cells and 8 lines.',
   examples: [

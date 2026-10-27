@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { edgesFromAdjacency } from '../../components/shared/graphTraversalModel'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'pop', label: 'Backtrack', description: 'Remove the last node and try the next edge.' },
     { id: 'done', label: 'Complete', description: 'All paths found.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'DAG adjacency list (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'DAG adjacency list (JSON)',
   url: 'https://leetcode.com/problems/all-paths-from-source-to-target/',
   complexity: 'O(2^n * n) worst case for n nodes (output-bound). Visualization limited to 10 nodes.',
   examples: [

@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { edgesFromAdjacency, colourTags } from '../../components/shared/graphTraversalModel'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'conflict', label: 'Conflict', description: 'Both endpoints share a colour: odd cycle.' },
     { id: 'done', label: 'Complete', description: 'Return the verdict.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Adjacency list graph (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Adjacency list graph (JSON)',
   url: 'https://leetcode.com/problems/is-graph-bipartite/',
   complexity: 'O(V + E) time, O(V) space. Visualization limited to 20 nodes.',
   examples: [

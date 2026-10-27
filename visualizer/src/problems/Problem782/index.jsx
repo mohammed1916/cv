@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'moves', label: 'Count swaps', description: 'Compare to the alternating target and count swaps.' },
     { id: 'done', label: 'Complete', description: 'Add row and column swaps, or return -1.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Grid board (JSON, n x n, n up to 20)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid board (JSON, n x n, n up to 20)',
   url: 'https://leetcode.com/problems/transform-to-chessboard/',
   complexity: 'O(n^2) time to build masks and O(n) extra space.',
   examples: [

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'finish', label: 'Final check', description: 'Compare the shrunken pair with the start.' },
     { id: 'done', label: 'Complete', description: 'Report reachability.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {sx, sy, tx, ty} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {sx, sy, tx, ty} (JSON)',
   url: 'https://leetcode.com/problems/reaching-points/',
   complexity: 'O(log(max(tx, ty))) time like Euclid\'s algorithm, O(1) space.',
   examples: [

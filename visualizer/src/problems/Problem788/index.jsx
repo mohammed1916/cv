@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'good', label: 'Good', description: 'Valid and different after rotation.' },
     { id: 'done', label: 'Complete', description: 'Return the count of good numbers.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Integer n (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Integer n (JSON)',
   url: 'https://leetcode.com/problems/rotated-digits/',
   complexity: 'O(n log n) time, O(n) for the visualization status array.',
   examples: [
