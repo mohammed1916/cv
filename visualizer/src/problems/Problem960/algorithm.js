@@ -13,7 +13,7 @@ export function buildTrace(strs) {
   // dp[j]: the most columns that can be kept with column j as the last one kept.
   const dp = Array(cols).fill(1)
   const from = Array(cols).fill(-1)
-  const frames = [{ phase: 'start', activeLine: L('dp = [1]'), column: null, dp: [...dp], from: null, message: 'Each column alone is a valid choice. Look for longer chains of columns that stay sorted in every row.' }]
+  const frames = [{ phase: 'start', activeLine: L('for each column j, set dp'), column: null, dp: [...dp], from: null, message: 'Each column alone is a valid choice. Look for longer chains of columns that stay sorted in every row.' }]
   for (let j = 0; j < cols; j++) {
     for (let i = 0; i < j; i++) {
       if (strs.every(row => row[i] <= row[j]) && dp[i] + 1 > dp[j]) {
@@ -21,21 +21,30 @@ export function buildTrace(strs) {
         from[j] = i
       }
     }
-    frames.push({ phase: 'fill', activeLine: L('dp[j] = dp[i] + 1'), column: j, dp: [...dp], from: from[j], message: from[j] === -1 ? `Column ${j} starts a new chain of length 1.` : `Column ${j} extends the chain ending at column ${from[j]} to length ${dp[j]}.` })
+    frames.push({ phase: 'fill', activeLine: L('set dp[j] to dp[i] plus 1'), column: j, dp: [...dp], from: from[j], message: from[j] === -1 ? `Column ${j} starts a new chain of length 1.` : `Column ${j} extends the chain ending at column ${from[j]} to length ${dp[j]}.` })
   }
   let best = 0
   for (let j = 1; j < cols; j++) if (dp[j] > dp[best]) best = j
   const result = cols - dp[best]
-  frames.push({ phase: 'done', activeLine: L('return len'), column: best, dp: [...dp], from: null, message: `Keep ${dp[best]} columns and delete ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return cols minus'), column: best, dp: [...dp], from: null, message: `Keep ${dp[best]} columns and delete ${result}.` })
   return { input: strs, cols, result, frames }
 }
 
-export const code = `def minDeletionSize(strs):
+export const code = `minDeletionSize(strs) returns the fewest columns to delete
+  set cols to the number of columns
+  for each column j, set dp[j] to 1 (a chain of just column j)
+  for each column j from left to right
+    for each column i before j
+      if every row has row[i] at most row[j], and dp[i] plus 1 is more than dp[j], then
+        set dp[j] to dp[i] plus 1
+  return cols minus the largest value in dp`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def min_deletion_size(strs):
     cols = len(strs[0])
     dp = [1] * cols
     for j in range(cols):
         for i in range(j):
             if all(row[i] <= row[j] for row in strs):
                 dp[j] = max(dp[j], dp[i] + 1)
-    return cols - max(dp)`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return cols - max(dp)`

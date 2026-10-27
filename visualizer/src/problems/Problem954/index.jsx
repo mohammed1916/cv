@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'fail', label: 'Fail', description: 'Not enough doubles available.' },
     { id: 'done', label: 'Complete', description: 'Return whether all values were paired.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Array arr (JSON, even length)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array arr (JSON, even length)',
   url: 'https://leetcode.com/problems/array-of-doubled-pairs/',
   complexity: 'O(n log n) time, O(n) space. The visualization caps input at 30 values.',
   examples: [

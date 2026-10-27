@@ -8,14 +8,14 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   // Count every ordered pair (i, j) by the value of nums[i] & nums[j].
   const pairs = new Map()
-  const frames = [{ phase: 'start', activeLine: L('pairs = Counter'), pairs: [], value: null, total: 0, message: 'Count the AND of every ordered pair first. A triple is zero when a pair’s AND has no bit in common with the third value.' }]
+  const frames = [{ phase: 'start', activeLine: L('set pairs to an empty count'), pairs: [], value: null, total: 0, message: 'Count the AND of every ordered pair first. A triple is zero when a pair’s AND has no bit in common with the third value.' }]
   for (const a of nums) {
     for (const b of nums) {
       const value = a & b
       pairs.set(value, (pairs.get(value) ?? 0) + 1)
     }
   }
-  frames.push({ phase: 'pairs', activeLine: L('pairs[a & b]'), pairs: [...pairs].map(([v, c]) => [v, c]), value: null, total: 0, message: `${pairs.size} distinct pair AND value(s) found.` })
+  frames.push({ phase: 'pairs', activeLine: L('add 1 to pairs[a & b]'), pairs: [...pairs].map(([v, c]) => [v, c]), value: null, total: 0, message: `${pairs.size} distinct pair AND value(s) found.` })
   let total = 0
   for (const c of nums) {
     let added = 0
@@ -23,13 +23,27 @@ export function buildTrace(nums) {
       if ((value & c) === 0) added += count
     }
     total += added
-    frames.push({ phase: 'match', activeLine: L('if p & c == 0'), pairs: [...pairs].map(([v, n]) => [v, n]), value: c, total, message: `The third value ${c} matches ${added} ordered pair(s) with AND zero; running total ${total}.` })
+    frames.push({ phase: 'match', activeLine: L('if p & c is 0'), pairs: [...pairs].map(([v, n]) => [v, n]), value: c, total, message: `The third value ${c} matches ${added} ordered pair(s) with AND zero; running total ${total}.` })
   }
   frames.push({ phase: 'done', activeLine: L('return total'), pairs: [], value: null, total, message: `${total} triple(s) have AND equal to 0.` })
   return { input: nums, result: total, frames }
 }
 
-export const code = `def countTriplets(nums):
+export const code = `countTriplets(nums) returns how many ordered triples have AND equal to 0
+  set pairs to an empty count table
+  for each a in nums
+    for each b in nums
+      add 1 to pairs[a & b]
+  set total to 0
+  for each c in nums
+    for each value p with count in pairs
+      if p & c is 0, then add count to total
+  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import Counter
+
+def count_triplets(nums):
     pairs = Counter()
     for a in nums:
         for b in nums:
@@ -37,7 +51,6 @@ export const code = `def countTriplets(nums):
     total = 0
     for c in nums:
         for p, count in pairs.items():
-            if p & c == 0:
+            if (p & c) == 0:
                 total += count
-    return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return total`

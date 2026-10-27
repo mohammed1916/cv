@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'return', label: 'Return', description: 'A subtree pair gets its final verdict.' },
     { id: 'done', label: 'Complete', description: 'Overall answer.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {root1, root2} (JSON level-order)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {root1, root2} (JSON level-order)',
   url: 'https://leetcode.com/problems/flip-equivalent-binary-trees/',
   complexity: 'O(min(n1, n2)) for unique values; the visualization caps each tree at 30 nodes.',
   examples: [

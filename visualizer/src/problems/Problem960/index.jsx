@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'fill', label: 'Extend chains', description: 'Attach this column to an earlier one when every row stays sorted.' },
     { id: 'done', label: 'Best chain', description: 'The longest chain gives the columns to keep.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Strings (JSON array)',
   url: 'https://leetcode.com/problems/delete-columns-to-make-sorted-iii/',
   complexity: 'O(rows * columns^2) time. The visualization caps the grid at 6 rows and 10 columns.',

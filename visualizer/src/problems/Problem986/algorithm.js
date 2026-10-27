@@ -16,15 +16,15 @@ export function parseInput(text) {
 export function buildTrace(spec) {
   const { a, b } = spec
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('i = j = 0'), i: 0, j: 0, pair: null, result: [], message: 'Walk both lists together. Two intervals overlap when the larger start is at most the smaller end.' }]
+  const frames = [{ phase: 'start', activeLine: L('set i and j to 0'), i: 0, j: 0, pair: null, result: [], message: 'Walk both lists together. Two intervals overlap when the larger start is at most the smaller end.' }]
   let i = 0, j = 0
   while (i < a.length && j < b.length) {
     const lo = Math.max(a[i][0], b[j][0]), hi = Math.min(a[i][1], b[j][1])
     if (lo <= hi) {
       result.push([lo, hi])
-      frames.push({ phase: 'overlap', activeLine: L('result.append'), i, j, pair: [lo, hi], result: result.map(r => [...r]), message: `[${a[i]}] and [${b[j]}] overlap at [${lo}, ${hi}].` })
+      frames.push({ phase: 'overlap', activeLine: L('append [lo, hi]'), i, j, pair: [lo, hi], result: result.map(r => [...r]), message: `[${a[i]}] and [${b[j]}] overlap at [${lo}, ${hi}].` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('i += 1'), i, j, pair: null, result: result.map(r => [...r]), message: `[${a[i]}] and [${b[j]}] do not overlap.` })
+      frames.push({ phase: 'skip', activeLine: L('if lo is at most hi'), i, j, pair: null, result: result.map(r => [...r]), message: `[${a[i]}] and [${b[j]}] do not overlap.` })
     }
     // Advance the interval that ends first; it cannot overlap anything later in the other list.
     if (a[i][1] < b[j][1]) i++
@@ -34,17 +34,26 @@ export function buildTrace(spec) {
   return { input: spec, result, frames }
 }
 
-export const code = `def intervalIntersection(firstList, secondList):
+export const code = `intervalIntersection(firstList, secondList) returns the overlaps of two sorted, disjoint lists
+  set i and j to 0, and set result to an empty list
+  while i is in firstList and j is in secondList
+    set lo to the larger start, and hi to the smaller end
+    if lo is at most hi, then append [lo, hi] to result
+    if firstList[i] ends before secondList[j] ends, then add 1 to i
+    otherwise add 1 to j
+  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def interval_intersection(a, b):
     i = j = 0
     result = []
-    while i < len(firstList) and j < len(secondList):
-        lo = max(firstList[i][0], secondList[j][0])
-        hi = min(firstList[i][1], secondList[j][1])
+    while i < len(a) and j < len(b):
+        lo = max(a[i][0], b[j][0])
+        hi = min(a[i][1], b[j][1])
         if lo <= hi:
             result.append([lo, hi])
-        if firstList[i][1] < secondList[j][1]:
+        if a[i][1] < b[j][1]:
             i += 1
         else:
             j += 1
-    return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return result`

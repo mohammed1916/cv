@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'answer', label: 'Answer', description: 'Return that value, or the empty string.' },
     { id: 'done', label: 'Complete', description: 'All operations are processed.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Operations (JSON array)',
   url: 'https://leetcode.com/problems/time-based-key-value-store/',
   complexity: 'O(1) per set and O(log n) per get. The visualization caps input at 30 operations.',

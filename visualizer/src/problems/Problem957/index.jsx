@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'cycle', label: 'Cycle found', description: 'A seen state repeats; shrink the remaining days modulo the cycle.' },
     { id: 'done', label: 'Complete', description: 'Return the final state.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {cells, n} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {cells, n} (JSON)',
   url: 'https://leetcode.com/problems/prison-cells-after-n-days/',
   complexity: 'O(min(n, 2^6)) simulated days, since states repeat within at most 64 steps.',
   examples: [

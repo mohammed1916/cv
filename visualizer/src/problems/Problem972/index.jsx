@@ -1,12 +1,12 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'convert', label: 'To fraction', description: 'Turn a repeating decimal into numerator over denominator.' },
     { id: 'compare', label: 'Compare', description: 'Two fractions are equal when their cross products match.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Two numbers (JSON strings)',
   url: 'https://leetcode.com/problems/equal-rational-numbers/',
   complexity: 'O(1) big-integer arithmetic on the digit lengths.',

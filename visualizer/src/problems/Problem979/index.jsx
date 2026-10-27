@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'visit', label: 'Surplus', description: 'Coins that must cross each edge above this node.' },
     { id: 'done', label: 'Complete', description: 'Report the total moves.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Coins per node (JSON level order)',
   url: 'https://leetcode.com/problems/distribute-coins-in-binary-tree/',
   complexity: 'O(n) time and O(h) stack space. The visualization caps input at 15 nodes.',

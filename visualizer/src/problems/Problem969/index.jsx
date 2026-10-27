@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'flip', label: 'Reverse prefix', description: 'Reverse the first k values.' },
     { id: 'done', label: 'Sorted', description: 'Every value is in place.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Permutation (JSON array)',
   url: 'https://leetcode.com/problems/pancake-sorting/',
   complexity: 'O(n^2) time to find and flip. At most 2n flips are used. The visualization caps input at 12 values.',

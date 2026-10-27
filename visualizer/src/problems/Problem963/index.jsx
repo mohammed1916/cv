@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'rectangle', label: 'Right angle', description: 'Two perpendicular arms whose fourth corner is a point.' },
     { id: 'done', label: 'Smallest', description: 'Report the smallest rectangle found.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Points (JSON array of [x, y])',
   url: 'https://leetcode.com/problems/minimum-area-rectangle-ii/',
   complexity: 'O(n^3) time with a set lookup. The visualization caps input at 12 points.',

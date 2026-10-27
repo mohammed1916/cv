@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'match', label: 'Match a value', description: 'Count the pairs that share no bit with this value.' },
     { id: 'done', label: 'Complete', description: 'Report the total.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Numbers (JSON array)',
   url: 'https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/',
   complexity: 'O(n^2 + n * distinct pair values) time. The visualization caps input at 12 numbers.',

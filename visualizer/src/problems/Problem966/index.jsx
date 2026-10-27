@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'query', label: 'Check a query', description: 'Try the three rules in order; the first match is the answer.' },
     { id: 'done', label: 'Complete', description: 'Report the corrected words.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'wordlist and queries (JSON)',
   url: 'https://leetcode.com/problems/vowel-spellchecker/',
   complexity: 'O(total length) time with hash lookups. The visualization caps input at 10 words and 10 queries.',

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'stuck', label: 'Stuck', description: 'No allowed letter remains.' },
     { id: 'done', label: 'Complete', description: 'Every letter is used.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'a, b and c (JSON)',
   url: 'https://leetcode.com/problems/longest-happy-string/',
   complexity: 'O(a + b + c) steps with a constant number of letters to compare. The visualization caps each count at 100.',

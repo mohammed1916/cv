@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'complete', label: 'Full number', description: 'A number with n digits is valid.' },
     { id: 'done', label: 'Complete', description: 'Every valid number has been found.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'n and k (JSON)',
   url: 'https://leetcode.com/problems/numbers-with-same-consecutive-differences/',
   complexity: 'Proportional to the number of answers times n. The visualization caps n at 5.',

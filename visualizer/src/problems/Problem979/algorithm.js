@@ -12,14 +12,14 @@ export function parseInput(text) {
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
   let moves = 0
-  const frames = [{ phase: 'start', activeLine: L('moves = 0'), node: null, excess: null, moves: 0, message: 'Each node should end with exactly one coin. Work up from the leaves and track the surplus below each node.' }]
+  const frames = [{ phase: 'start', activeLine: L('set moves to 0'), node: null, excess: null, moves: 0, message: 'Each node should end with exactly one coin. Work up from the leaves and track the surplus below each node.' }]
   // Returns the surplus of coins in the subtree (coins minus nodes); each edge carries the absolute surplus of its child.
   const visit = node => {
     if (!node) return 0
     const left = visit(node.left), right = visit(node.right)
     moves += Math.abs(left) + Math.abs(right)
     const excess = node.value + left + right - 1
-    frames.push({ phase: 'visit', activeLine: L('moves +='), node: node.id, excess, moves, message: `${node.value} coin(s) at ${node.value}, children carry ${left} and ${right}: ${excess >= 0 ? `${excess} extra coin(s) move up` : `${-excess} coin(s) must come up`}.` })
+    frames.push({ phase: 'visit', activeLine: L('add |left| plus |right| to moves'), node: node.id, excess, moves, message: `${node.value} coin(s) at ${node.value}, children carry ${left} and ${right}: ${excess >= 0 ? `${excess} extra coin(s) move up` : `${-excess} coin(s) must come up`}.` })
     return excess
   }
   visit(root)
@@ -27,7 +27,42 @@ export function buildTrace(arr) {
   return { input: arr, root: treeFromLevelOrder(arr), result: moves, frames }
 }
 
-export const code = `def distributeCoins(root):
+export const code = `distributeCoins(root) returns the fewest moves so that every node holds one coin
+  set moves to 0
+  dfs(node) returns the surplus of coins in its subtree (coins minus nodes)
+    if node is empty, then return 0
+    set left and right to dfs(left child) and dfs(right child)
+    add |left| plus |right| to moves
+    return node.coins plus left plus right minus 1
+  dfs(root)
+  return moves`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def build(arr):
+    if not arr or arr[0] is None:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    cursor = 1
+    for node in queue:
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.left = TreeNode(arr[cursor])
+            queue.append(node.left)
+        cursor += 1
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.right = TreeNode(arr[cursor])
+            queue.append(node.right)
+        cursor += 1
+    return root
+
+def distribute_coins(arr):
+    root = build(arr)
     moves = 0
     def dfs(node):
         nonlocal moves
@@ -37,5 +72,4 @@ export const code = `def distributeCoins(root):
         moves += abs(left) + abs(right)
         return node.val + left + right - 1
     dfs(root)
-    return moves`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return moves`

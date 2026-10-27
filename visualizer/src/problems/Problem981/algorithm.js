@@ -22,14 +22,14 @@ export function parseInput(text) {
 export function buildTrace(ops) {
   const store = new Map()
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('self.store = {}'), key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: 'Each key keeps its (timestamp, value) pairs in increasing timestamp order.' }]
+  const frames = [{ phase: 'start', activeLine: L('start with an empty store'), key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: 'Each key keeps its (timestamp, value) pairs in increasing timestamp order.' }]
   for (const op of ops) {
     if (op[0] === 'set') {
       const [, key, value, ts] = op
       if (!store.has(key)) store.set(key, [])
       store.get(key).push([ts, value])
       result.push(null)
-      frames.push({ phase: 'set', activeLine: L('self.store[key].append'), key, entries: store.get(key).map(e => [...e]), low: null, high: null, mid: null, found: null, result: null, message: `Store ${value} for ${key} at time ${ts}.` })
+      frames.push({ phase: 'set', activeLine: L('append (time, value) to store'), key, entries: store.get(key).map(e => [...e]), low: null, high: null, mid: null, found: null, result: null, message: `Store ${value} for ${key} at time ${ts}.` })
       continue
     }
     const [, key, ts] = op
@@ -37,11 +37,11 @@ export function buildTrace(ops) {
     let low = 0, high = entries.length - 1
     let answer = ''
     let found = -1
-    frames.push({ phase: 'search', activeLine: L('lo, hi = 0'), key, entries: entries.map(e => [...e]), low, high, mid: null, found: null, result: null, message: `Find the latest ${key} entry at or before time ${ts}.` })
+    frames.push({ phase: 'search', activeLine: L('set lo to 0'), key, entries: entries.map(e => [...e]), low, high, mid: null, found: null, result: null, message: `Find the latest ${key} entry at or before time ${ts}.` })
     while (low <= high) {
       const mid = Math.floor((low + high) / 2)
       const [when, value] = entries[mid]
-      frames.push({ phase: 'search', activeLine: L('mid = (lo + hi)'), key, entries: entries.map(e => [...e]), low, high, mid, found: null, result: null, message: `Check time ${when}: ${when <= ts ? 'not after the query, so the answer is here or later' : 'after the query, so look earlier'}.` })
+      frames.push({ phase: 'search', activeLine: L('set mid to the middle'), key, entries: entries.map(e => [...e]), low, high, mid, found: null, result: null, message: `Check time ${when}: ${when <= ts ? 'not after the query, so the answer is here or later' : 'after the query, so look earlier'}.` })
       if (when <= ts) {
         answer = value
         found = mid
@@ -51,13 +51,27 @@ export function buildTrace(ops) {
       }
     }
     result.push(answer)
-    frames.push({ phase: 'answer', activeLine: L('return ans'), key, entries: entries.map(e => [...e]), low, high, mid: null, found, result: answer, message: answer === '' ? `No ${key} entry at or before ${ts}: answer "".` : `The latest value at or before ${ts} is ${answer}.` })
+    frames.push({ phase: 'answer', activeLine: L('append ans, or null'), key, entries: entries.map(e => [...e]), low, high, mid: null, found, result: answer, message: answer === '' ? `No ${key} entry at or before ${ts}: answer "".` : `The latest value at or before ${ts} is ${answer}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: `${ops.length} operation(s) processed.` })
+  frames.push({ phase: 'done', activeLine: L('return the answers'), key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: `${ops.length} operation(s) processed.` })
   return { input: ops, result, frames }
 }
 
-export const code = `class TimeMap:
+export const code = `processOps(ops) runs each operation in order and returns the answers
+  start with an empty store, which maps each key to a list of (time, value) pairs
+  for each operation in ops
+    if it is set(key, value, time), then append (time, value) to store[key]
+    otherwise it is get(key, time): set entries to store[key], or an empty list
+      set lo to 0 and hi to the last index of entries, and set ans to ""
+      while lo is at most hi
+        set mid to the middle index between lo and hi
+        if entries[mid] has a time at most time, then set ans to its value and lo to mid plus 1
+        otherwise set hi to mid minus 1
+      append ans, or null for a set, to the answers
+  return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class TimeMap:
     def __init__(self):
         self.store = {}
     def set(self, key, value, timestamp):
@@ -73,5 +87,15 @@ export const code = `class TimeMap:
                 lo = mid + 1
             else:
                 hi = mid - 1
-        return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+        return ans
+
+def time_based_key_value_store(ops):
+    tm = TimeMap()
+    answers = []
+    for op in ops:
+        if op[0] == 'set':
+            tm.set(op[1], op[2], op[3])
+            answers.append(None)
+        else:
+            answers.append(tm.get(op[1], op[2]))
+    return answers`

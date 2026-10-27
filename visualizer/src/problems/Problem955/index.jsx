@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'keep', label: 'Keep column', description: 'Keep the column and settle pairs it strictly orders.' },
     { id: 'done', label: 'Complete', description: 'Return the number of deleted columns.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'strs (JSON array of equal-length strings)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'strs (JSON array of equal-length strings)',
   url: 'https://leetcode.com/problems/delete-columns-to-make-sorted-ii/',
   complexity: 'O(n * m) time, O(n) space. The visualization caps input at 10 strings of length 12.',
   examples: [

@@ -9,25 +9,36 @@ export function parseInput(text) {
 export function buildTrace(arr) {
   const a = [...arr]
   const flips = []
-  const frames = [{ phase: 'start', activeLine: L('for size in range'), array: [...a], flip: null, message: 'Place the largest unsorted value at the end using at most two prefix reversals.' }]
-  const flip = k => {
+  const frames = [{ phase: 'start', activeLine: L('set a to a copy'), array: [...a], flip: null, message: 'Place the largest unsorted value at the end using at most two prefix reversals.' }]
+  const flip = (k, line) => {
     for (let i = 0, j = k - 1; i < j; i++, j--) [a[i], a[j]] = [a[j], a[i]]
     flips.push(k)
-    frames.push({ phase: 'flip', activeLine: L('reverse(a, 0, k)'), array: [...a], flip: k, message: `Reverse the first ${k} value(s).` })
+    frames.push({ phase: 'flip', activeLine: line, array: [...a], flip: k, message: `Reverse the first ${k} value(s).` })
   }
   for (let size = a.length; size > 1; size--) {
     // The values above `size` are already in place, so the largest remaining value is `size`.
     const at = a.indexOf(size)
-    frames.push({ phase: 'find', activeLine: L('index = a.index'), array: [...a], flip: null, message: `${size} is the largest unsorted value and sits at position ${at + 1}.` })
+    frames.push({ phase: 'find', activeLine: L('set index to the position'), array: [...a], flip: null, message: `${size} is the largest unsorted value and sits at position ${at + 1}.` })
     if (at === size - 1) continue
-    if (at !== 0) flip(at + 1)
-    flip(size)
+    if (at !== 0) flip(at + 1, L('if index is not 0'))
+    flip(size, L('reverse(size)'))
   }
   frames.push({ phase: 'done', activeLine: L('return flips'), array: [...a], flip: null, message: `Sorted with ${flips.length} flip(s).` })
   return { input: arr, result: flips, sorted: a, frames }
 }
 
-export const code = `def pancakeSort(arr):
+export const code = `pancakeSort(arr) returns the list of prefix reversals that sorts arr
+  set a to a copy of arr, and set flips to an empty list
+  define reverse(k): reverse the first k values of a, and record k in flips
+  for each size from n down to 2
+    set index to the position of size in a
+    if index is size minus 1, then skip this size
+    if index is not 0, then reverse(index plus 1)
+    reverse(size)
+  return flips`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def pancake_sort(arr):
     a = list(arr)
     flips = []
     def reverse(k):
@@ -40,5 +51,4 @@ export const code = `def pancakeSort(arr):
         if index:
             reverse(index + 1)
         reverse(size)
-    return flips`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+    return flips`

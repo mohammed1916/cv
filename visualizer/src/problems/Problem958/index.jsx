@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'fail', label: 'Gap', description: 'A real node follows a null.' },
     { id: 'done', label: 'Complete', description: 'Report completeness.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Tree root (JSON level-order)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Tree root (JSON level-order)',
   url: 'https://leetcode.com/problems/check-completeness-of-a-binary-tree/',
   complexity: 'O(n) time and space. The visualization caps input at 30 nodes.',
   examples: [

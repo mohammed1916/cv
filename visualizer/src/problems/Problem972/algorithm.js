@@ -30,26 +30,35 @@ export function buildTrace(spec) {
   const frames = []
   const fs = [spec.s, spec.t].map(s => {
     const f = toFraction(s)
-    frames.push({ phase: 'convert', activeLine: L('return whole'), text: s, num: f.num.toString(), den: f.den.toString(), equal: null, message: `${s} = ${f.num} / ${f.den}.` })
+    frames.push({ phase: 'convert', activeLine: L('return the fraction'), text: s, num: f.num.toString(), den: f.den.toString(), equal: null, message: `${s} = ${f.num} / ${f.den}.` })
     return f
   })
   const equal = fs[0].num * fs[1].den === fs[1].num * fs[0].den
-  frames.push({ phase: 'compare', activeLine: L('return a.num'), text: null, num: null, den: null, equal, message: `Cross-multiply: ${fs[0].num} × ${fs[1].den} ${equal ? '=' : '≠'} ${fs[1].num} × ${fs[0].den}.` })
+  frames.push({ phase: 'compare', activeLine: L('return whether a.num'), text: null, num: null, den: null, equal, message: `Cross-multiply: ${fs[0].num} × ${fs[1].den} ${equal ? '=' : '≠'} ${fs[1].num} × ${fs[0].den}.` })
   return { input: spec, result: equal, frames }
 }
 
-export const code = `from fractions import Fraction
+export const code = `isRationalEqual(s, t) returns whether s and t are the same rational number
+  set a to toFraction(s), and set b to toFraction(t)
+  return whether a.num times b.den equals b.num times a.den
+toFraction(s) turns a decimal into a fraction with a numerator and denominator
+  split s into the whole part, the non-repeating digits N, and the repeating digits R
+  if R is empty, then set num to whole times 10^len(N) plus N, and den to 10^len(N)
+  otherwise, set num to whole times den plus (N and R as one number) minus N, and den to 10^len(N) times (10^len(R) minus 1)
+  return the fraction num over den`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
-def toFraction(s):
+export const python = `from fractions import Fraction
+
+def to_fraction(s):
     whole, _, rest = s.partition('.')
-    nonRepeat, _, repeat = rest.partition('(')
+    non_repeat, _, repeat = rest.partition('(')
     repeat = repeat.rstrip(')')
     if not repeat:
-        return Fraction(int(whole) * 10 ** len(nonRepeat) + int(nonRepeat or 0), 10 ** len(nonRepeat))
-    return Fraction(int(whole + nonRepeat + repeat) - int(whole + nonRepeat), 10 ** len(nonRepeat) * (10 ** len(repeat) - 1)) + int(whole)
+        return Fraction(int(whole) * 10 ** len(non_repeat) + int(non_repeat or 0), 10 ** len(non_repeat))
+    return Fraction(int(whole + non_repeat + repeat) - int(whole + non_repeat), 10 ** len(non_repeat) * (10 ** len(repeat) - 1)) + int(whole)
 
-def isRationalEqual(s, t):
-    a = toFraction(s)
-    b = toFraction(t)
-    return a.num * b.den == b.num * a.den`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+def is_rational_equal(s, t):
+    a = to_fraction(s)
+    b = to_fraction(t)
+    return a.numerator * b.denominator == b.numerator * a.denominator`

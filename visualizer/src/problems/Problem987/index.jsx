@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'visit', label: 'Place a node', description: 'Each child is one column left or right and one row lower.' },
     { id: 'done', label: 'Columns', description: 'Sort each column by row, then value.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Tree (JSON level order)',
   url: 'https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/',
   complexity: 'O(n log n) time for the sort. The visualization caps input at 15 nodes.',

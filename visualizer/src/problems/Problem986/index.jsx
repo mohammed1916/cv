@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'skip', label: 'No overlap', description: 'Advance the interval that ends first.' },
     { id: 'done', label: 'Complete', description: 'Report every overlap.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Two interval lists a and b (JSON)',
   url: 'https://leetcode.com/problems/interval-list-intersections/',
   complexity: 'O(m + n) time for lists of m and n intervals. The visualization caps each list at 12 intervals.',
