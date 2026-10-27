@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const DIR_NAMES = ['east', 'south', 'west', 'north']
 
@@ -12,7 +12,7 @@ const definition = {
     { id: 'turn', label: 'Turn / widen', description: 'Turn clockwise; widen the legs every two turns.' },
     { id: 'done', label: 'Complete', description: 'Every cell has been visited.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Input [rows, cols, rStart, cStart] (JSON)',
   url: 'https://leetcode.com/problems/spiral-matrix-iii/',
   complexity: 'O(max(rows, cols)^2) time: the spiral may wander outside the grid but visits each of rows*cols cells once.',

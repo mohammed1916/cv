@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import HeapView from '../../components/shared/HeapView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'push', label: 'Remember station', description: 'Add its fuel to the max-heap.' },
     { id: 'done', label: 'Complete', description: 'Stops needed, or -1.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {target, startFuel, stations} (JSON, up to 25 stations)',
   url: 'https://leetcode.com/problems/minimum-number-of-refueling-stops/',
   complexity: 'O(n log n) with a max-heap of passed stations.',

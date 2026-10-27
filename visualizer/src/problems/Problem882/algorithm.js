@@ -31,16 +31,16 @@ export function buildTrace({ edges, maxMoves, n }) {
   const settled = []
   let ans = 0
   const base = () => ({ dist: [...dist], settled: [...settled], heap: heap.data.map(h => [...h]), heapState: heapView(heap, { title: 'Priority queue (root = fewest moves; entries are node:moves)' }).heap, ans })
-  const frames = [{ phase: 'start', ...base(), node: 0, edge: null, activeLine: 9, message: `Start Dijkstra at node 0 with distance 0. Moving along an edge with cnt new nodes costs cnt + 1 moves; budget maxMoves = ${maxMoves}.` }]
+  const frames = [{ phase: 'start', ...base(), node: 0, edge: null, activeLine: L('build the graph'), message: `Start Dijkstra at node 0 with distance 0. Moving along an edge with cnt new nodes costs cnt + 1 moves; budget maxMoves = ${maxMoves}.` }]
   while (heap.size) {
     const [d, u] = heap.pop()
     if (d > dist[u]) {
-      frames.push({ phase: 'pop', ...base(), ops: [{ type: 'stale', node: u, dist: d, best: dist[u] }], node: u, edge: null, activeLine: 13, message: `Pop stale entry (${d}, node ${u}); a shorter path (${dist[u]}) is already known, so skip.` })
+      frames.push({ phase: 'pop', ...base(), ops: [{ type: 'stale', node: u, dist: d, best: dist[u] }], node: u, edge: null, activeLine: L('is more than dist[u]'), message: `Pop stale entry (${d}, node ${u}); a shorter path (${dist[u]}) is already known, so skip.` })
       continue
     }
     ans += 1
     settled.push(u)
-    frames.push({ phase: 'pop', ...base(), ops: [{ type: 'pop', node: u, dist: d }], node: u, edge: null, activeLine: 15, message: `Settle node ${u} at distance ${d} (≤ ${maxMoves}? ${d <= maxMoves ? 'yes' : 'no'}). It counts as one reachable original node.` })
+    frames.push({ phase: 'pop', ...base(), ops: [{ type: 'pop', node: u, dist: d }], node: u, edge: null, activeLine: L('count u as reachable'), message: `Settle node ${u} at distance ${d} (≤ ${maxMoves}? ${d <= maxMoves ? 'yes' : 'no'}). It counts as one reachable original node.` })
     for (const [v, cnt] of graph[u]) {
       const reach = Math.min(cnt, Math.max(0, maxMoves - d))
       used.set(`${u},${v}`, reach)
@@ -49,7 +49,7 @@ export function buildTrace({ edges, maxMoves, n }) {
       const old = dist[v] === null ? Infinity : dist[v]
       if (better) { heap.push([d2, v]); dist[v] = d2 }
       frames.push({
-        phase: 'relax', ...base(), ops: [!better && old === Infinity ? { text: `Edge ${u}-${v}: ${d} + ${cnt + 1} = ${d2} exceeds the budget of ${maxMoves} moves, so ${v} is not reachable this way and dist[${v}] stays ∞.` } : { type: 'relax', u, v, w: cnt + 1, base: d, candidate: d2, old, result: better ? 'improved' : 'kept' }], node: u, edge: [u, v], activeLine: better ? 21 : 20,
+        phase: 'relax', ...base(), ops: [!better && old === Infinity ? { text: `Edge ${u}-${v}: ${d} + ${cnt + 1} = ${d2} exceeds the budget of ${maxMoves} moves, so ${v} is not reachable this way and dist[${v}] stays ∞.` } : { type: 'relax', u, v, w: cnt + 1, base: d, candidate: d2, old, result: better ? 'improved' : 'kept' }], node: u, edge: [u, v], activeLine: better ? L('set dist[v] = d2') : L('otherwise, keep dist[v]'),
         message: `Edge ${u}-${v} (cnt ${cnt}): from ${u} we can walk ${reach} of its subdivision nodes (min(cnt, maxMoves - ${d})). ` +
           (better ? `Reaching ${v} costs ${d2} ≤ ${maxMoves}, so dist[${v}] = ${d2} and it is queued.` : `Reaching ${v} would cost ${d2}, not an improvement within budget.`),
       })
@@ -61,16 +61,37 @@ export function buildTrace({ edges, maxMoves, n }) {
     const add = Math.min(cnt, fromU + fromV)
     ans += add
     frames.push({
-      phase: 'count', ...base(), node: null, edge: [u, v], activeLine: 24,
+      phase: 'count', ...base(), node: null, edge: [u, v], activeLine: L('add min(cnt'),
       message: `Edge ${u}-${v}: ${fromU} nodes reachable from ${u} plus ${fromV} from ${v}, capped at cnt ${cnt}: +${add}.`,
     })
   }
-  frames.push({ phase: 'done', ...base(), node: null, edge: null, activeLine: 25, message: `Total reachable nodes: ${ans}.` })
+  frames.push({ phase: 'done', ...base(), node: null, edge: null, activeLine: L('return ans'), message: `Total reachable nodes: ${ans}.` })
   return { input: { edges, maxMoves, n }, result: ans, frames }
 }
 
-export const code = `import heapq
-def reachableNodes(edges, maxMoves, n):
+export const code = `build the graph: each edge (u, v, cnt) links u and v both ways
+let dist[0] = 0, and every other dist be unknown
+put (0, 0) into the heap, as (moves, node)
+let ans = 0
+while the heap is not empty, do
+  take the entry (d, u) with the fewest moves from the heap
+  if d is more than dist[u], this entry is stale: skip it
+  otherwise, count u as reachable: ans = ans + 1
+  for each edge (v, cnt) out of u, do
+    let reach be min(cnt, maxMoves - d), the subdivision nodes walkable from u
+    let d2 be d + cnt + 1
+    if d2 is less than dist[v] (or maxMoves + 1 if unknown), set dist[v] = d2 and push (d2, v)
+    otherwise, keep dist[v]
+for each original edge (u, v, cnt), do
+  add min(cnt, used from u + used from v) to ans
+return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `import heapq
+
+
+def reachable_nodes(edges, maxMoves, n):
     graph = [[] for _ in range(n)]
     for u, v, cnt in edges:
         graph[u].append((v, cnt))
@@ -93,4 +114,5 @@ def reachableNodes(edges, maxMoves, n):
                 dist[v] = d2
     for u, v, cnt in edges:
         ans += min(cnt, used.get((u, v), 0) + used.get((v, u), 0))
-    return ans`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return ans
+`

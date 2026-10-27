@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'level', label: 'Level done', description: 'One more unit of distance covered.' },
     { id: 'done', label: 'Complete', description: 'Nodes at distance k.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {tree, target, k} (JSON, level-order tree with null, up to 30 nodes)',
   url: 'https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/',
   complexity: 'O(n) time and space: one DFS for parents and one BFS over at most n nodes.',

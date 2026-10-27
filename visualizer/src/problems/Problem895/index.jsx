@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import OperationLog from '../../components/shared/OperationLog'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'shrink', label: 'Update', description: 'Lower the frequency and maybe maxfreq.' },
     { id: 'done', label: 'Complete', description: 'All operations processed.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Operations (LeetCode JSON: names, args)',
   url: 'https://leetcode.com/problems/maximum-frequency-stack/',
   complexity: 'O(1) per push and pop; O(n) space for the level stacks.',

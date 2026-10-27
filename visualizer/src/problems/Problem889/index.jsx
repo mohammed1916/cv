@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, partialTree, code } from './algorithm'
+import { buildTrace, parseInput, partialTree, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'split', label: 'Split subtrees', description: 'Use the left root position in postorder to size the left subtree.' },
     { id: 'done', label: 'Complete', description: 'Return the constructed tree.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Input {preorder, postorder} (JSON, n ≤ 30)',
   url: 'https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/',
   complexity: 'O(n) time and space with a postorder index map (a node with one child is attached as the left child, so any valid tree is accepted).',

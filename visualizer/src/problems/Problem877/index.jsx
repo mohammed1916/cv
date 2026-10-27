@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'fill', label: 'Fill interval', description: 'Take the better of left or right pile minus the opponent best lead.' },
     { id: 'done', label: 'Complete', description: 'Alex wins when the full-row lead is positive.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Piles (JSON, even length ≤ 20, odd total)',
   url: 'https://leetcode.com/problems/stone-game/',
   complexity: 'O(n^2) time and space for interval DP. (Alex in fact always wins, but the DP proves it.)',

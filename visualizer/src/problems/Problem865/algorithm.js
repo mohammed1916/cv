@@ -24,10 +24,10 @@ export function buildTrace(tree) {
   const heights = {}
   const done = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, current: null, candidate: null, heights: { ...heights }, done: done.slice(), subtree: [], ...extra })
-  f('start', 2, 'Each call returns (depth of its subtree, lowest node containing all of that subtree\'s deepest nodes).')
+  f('start', L('walk(node) returns'), 'Each call returns (depth of its subtree, lowest node containing all of that subtree\'s deepest nodes).')
   const dfs = node => {
     if (!node) return [0, null]
-    f('enter', 5, `Enter ${node.value}; solve the left child first, then the right.`, { current: node.id })
+    f('enter', L('walk the left child'), `Enter ${node.value}; solve the left child first, then the right.`, { current: node.id })
     const [dl, l] = dfs(node.left)
     const [dr, r] = dfs(node.right)
     let out
@@ -37,24 +37,67 @@ export function buildTrace(tree) {
     else { out = [dl + 1, node]; msg = `Both sides have depth ${dl}${dl ? '' : ' (leaf)'}: deepest nodes are on both sides (or this is a leaf), so ${node.value} itself is the lowest common ancestor.` }
     heights[node.id] = `h${out[0]}`
     done.push(node.id)
-    f('combine', dl > dr ? 8 : dr > dl ? 10 : 11, `Node ${node.value}: ${msg} Return depth ${out[0]}.`, { current: node.id, candidate: out[1].id })
+    const line = dl > dr ? L('if left depth is greater') : dr > dl ? L('if right depth is greater') : L('return (left depth + 1, node)')
+    f('combine', line, `Node ${node.value}: ${msg} Return depth ${out[0]}.`, { current: node.id, candidate: out[1].id })
     return out
   }
   const [, ans] = dfs(root)
   const sub = nodesOf(ans).map(n => n.id)
-  f('done', 12, `The smallest subtree containing every deepest node is rooted at ${ans.value}.`, { candidate: ans.id, subtree: sub })
+  f('done', L('return the answer node'), `The smallest subtree containing every deepest node is rooted at ${ans.value}.`, { candidate: ans.id, subtree: sub })
   return { input: tree, root, result: ans.value, resultSubtree: levelOrderFromTree(ans), frames }
 }
 
-export const code = `def subtreeWithAllDeepest(root):
-    def dfs(node):
-        if not node:
+export const code = `walk(node) returns (depth, answer node) for the subtree at node
+  if node is empty, return (0, none)
+  walk the left child, getting (left depth, left answer)
+  walk the right child, getting (right depth, right answer)
+  if left depth is greater than right depth, return (left depth + 1, left answer)
+  if right depth is greater than left depth, return (right depth + 1, right answer)
+  return (left depth + 1, node)
+return the answer node of walk(root)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def build_tree(values):
+    if not values or values[0] is None:
+        return None
+    root = TreeNode(values[0])
+    queue = deque([root])
+    i = 1
+    while queue and i < len(values):
+        current = queue.popleft()
+        if i < len(values) and values[i] is not None:
+            current.left = TreeNode(values[i])
+            queue.append(current.left)
+        i += 1
+        if i < len(values) and values[i] is not None:
+            current.right = TreeNode(values[i])
+            queue.append(current.right)
+        i += 1
+    return root
+
+
+def subtree_with_all_deepest(tree):
+    def dfs(current):
+        if current is None:
             return 0, None
-        dl, l = dfs(node.left)
-        dr, r = dfs(node.right)
+        dl, left = dfs(current.left)
+        dr, right = dfs(current.right)
         if dl > dr:
-            return dl + 1, l
+            return dl + 1, left
         if dr > dl:
-            return dr + 1, r
-        return dl + 1, node
-    return dfs(root)[1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+            return dr + 1, right
+        return dl + 1, current
+
+    return dfs(build_tree(tree))[1].val
+`

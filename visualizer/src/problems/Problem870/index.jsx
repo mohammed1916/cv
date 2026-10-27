@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'sacrifice', label: 'Sacrifice', description: 'Waste the card on the strongest opponent.' },
     { id: 'done', label: 'Complete', description: 'Permutation built.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {nums1, nums2} (JSON, up to 30 elements)',
   url: 'https://leetcode.com/problems/advantage-shuffle/',
   complexity: 'O(n log n) for the sorts, O(n) for the single sweep.',

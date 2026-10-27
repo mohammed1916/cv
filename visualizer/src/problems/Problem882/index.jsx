@@ -3,7 +3,7 @@ import IndexedSequence from '../../components/shared/IndexedSequence'
 import WeightedGraphView from '../../components/shared/WeightedGraphView'
 import { wgraphState } from '../../components/shared/wgraphModel.js'
 import HeapView from '../../components/shared/HeapView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'count', label: 'Count edge', description: 'Add subdivision nodes reachable from either end.' },
     { id: 'done', label: 'Complete', description: 'Return the total reachable count.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Input {edges, maxMoves, n} (JSON)',
   url: 'https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/',
   complexity: 'O((V + E) log V) time with a heap; subdivision nodes are never materialised.',

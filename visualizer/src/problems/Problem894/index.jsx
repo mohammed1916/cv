@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, toNode, code } from './algorithm'
+import { buildTrace, parseInput, toNode, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'store', label: 'Memoise', description: 'Store all trees of this size.' },
     { id: 'done', label: 'Complete', description: 'Return every full binary tree with n nodes.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'n (JSON integer, 1–11)',
   url: 'https://leetcode.com/problems/all-possible-full-binary-trees/',
   complexity: 'Output-sensitive: O(2^(n/2)/sqrt(n)) trees (Catalan numbers); memoisation shares subtrees between results.',

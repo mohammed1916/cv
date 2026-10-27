@@ -9,37 +9,51 @@ export function parseInput(text) {
 export function buildTrace({ p, q }) {
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, a: null, b: null, g: null, m: null, n: null, ...extra })
-  f('start', 2, `Room side p = ${p}, laser hits the east wall at height q = ${q}. Unfold the room: the ray becomes a straight line that climbs q per room width.`)
+  f('start', L('let a = p'), `Room side p = ${p}, laser hits the east wall at height q = ${q}. Unfold the room: the ray becomes a straight line that climbs q per room width.`)
   let a = p, b = q
   while (b) {
-    f('gcd', 4, `gcd step: (${a}, ${b}) -> (${b}, ${a % b}).`, { a, b })
+    f('gcd', L('set a and b'), `gcd step: (${a}, ${b}) -> (${b}, ${a % b}).`, { a, b })
     ;[a, b] = [b, a % b]
   }
   const g = a
   const m = p / g, n = q / g
-  f('reduce', 5, `gcd = ${g}. The ray first hits a corner after m = p/g = ${m} room widths, by which time it has climbed n = q/g = ${n} room heights (m*q = n*p).`, { g, m, n })
+  f('reduce', L('let m = p divided by g'), `gcd = ${g}. The ray first hits a corner after m = p/g = ${m} room widths, by which time it has climbed n = q/g = ${n} room heights (m*q = n*p).`, { g, m, n })
   let result
   if (n % 2 === 0) {
     result = 0
-    f('parity', 7, `n = ${n} is even: an even number of heights means the corner is on the bottom edge, which is receptor 0.`, { g, m, n })
+    f('parity', L('if n is even'), `n = ${n} is even: an even number of heights means the corner is on the bottom edge, which is receptor 0.`, { g, m, n })
   } else if (m % 2 === 1) {
     result = 1
-    f('parity', 9, `n = ${n} is odd (top edge) and m = ${m} is odd (east wall): receptor 1.`, { g, m, n })
+    f('parity', L('if m is odd'), `n = ${n} is odd (top edge) and m = ${m} is odd (east wall): receptor 1.`, { g, m, n })
   } else {
     result = 2
-    f('parity', 10, `n = ${n} is odd (top edge) and m = ${m} is even (west wall): receptor 2.`, { g, m, n })
+    f('parity', L('if m is odd'), `n = ${n} is odd (top edge) and m = ${m} is even (west wall): receptor 2.`, { g, m, n })
   }
-  f('done', 10, `The ray meets receptor ${result} first.`, { g, m, n })
+  const doneLine = result === 0 ? L('if n is even') : result === 1 ? L('return receptor 1') : L('return receptor 2')
+  f('done', doneLine, `The ray meets receptor ${result} first.`, { g, m, n })
   return { input: { p, q }, result, frames }
 }
 
-export const code = `def mirrorReflection(p, q):
+export const code = `let a = p and b = q
+while b is not 0 do
+  set a and b to b and (a mod b)
+let g be a, the greatest common divisor of p and q
+let m = p divided by g and n = q divided by g
+if n is even, the ray lands on the bottom edge: return receptor 0
+if m is odd, the ray lands on the east wall: return receptor 1
+return receptor 2`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def mirror_reflection(p, q):
     a, b = p, q
     while b:
         a, b = b, a % b
-    m, n = p // a, q // a
+    g = a
+    m, n = p // g, q // g
     if n % 2 == 0:
         return 0
     if m % 2 == 1:
         return 1
-    return 2`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return 2
+`

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'blocked', label: 'Blocked', description: 'An obstacle stops the current command.' },
     { id: 'done', label: 'Complete', description: 'Return the maximum squared distance.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {commands, obstacles} (JSON)',
   url: 'https://leetcode.com/problems/walking-robot-simulation/',
   complexity: 'O(total steps + obstacles) time, O(obstacles) space. The visualization caps commands at 30 with moves of 1 to 9.',

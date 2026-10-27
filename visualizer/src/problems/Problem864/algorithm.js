@@ -33,7 +33,7 @@ export function buildTrace(grid) {
   let queue = [[sr, sc, 0]]
   const seen = new Set([`${sr},${sc},0`])
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, r: sr, c: sc, mask: 0, steps: 0, popped: -1, queueSize: queue.length, seenSize: seen.size, ...extra })
-  f('start', 5, `Start at (${sr}, ${sc}) holding no keys. A state is (row, column, keys held); ${k} keys means full mask ${full.toString(2).padStart(k, '0')}.`)
+  f('start', L('find the start cell'), `Start at (${sr}, ${sc}) holding no keys. A state is (row, column, keys held); ${k} keys means full mask ${full.toString(2).padStart(k, '0')}.`)
   let steps = 0
   const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
   while (queue.length) {
@@ -44,10 +44,10 @@ export function buildTrace(grid) {
       pops.push([r, c])
       const rest = level.length - t - 1 + queue.length
       if (mask === full) {
-        f('done', 12, `State (${r}, ${c}) holds every key after ${steps} moves: that is the shortest path.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest })
+        f('done', L('if the keys held are full'), `State (${r}, ${c}) holds every key after ${steps} moves: that is the shortest path.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest })
         return { input: grid, pops, result: steps, frames }
       }
-      f('pop', 10, `Pop (${r}, ${c}) with keys ${mask.toString(2).padStart(k, '0')} at distance ${steps}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest })
+      f('pop', L('take the next state'), `Pop (${r}, ${c}) with keys ${mask.toString(2).padStart(k, '0')} at distance ${steps}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest })
       for (const [dr, dc] of dirs) {
         const nr = r + dr, nc = c + dc
         if (nr < 0 || nc < 0 || nr >= m || nc >= n || grid[nr][nc] === '#') continue
@@ -55,24 +55,54 @@ export function buildTrace(grid) {
         let nmask = mask
         if (ch >= 'a' && ch <= 'f') nmask |= 1 << (ch.charCodeAt(0) - 97)
         if (ch >= 'A' && ch <= 'F' && !((mask >> (ch.charCodeAt(0) - 65)) & 1)) {
-          f('blocked', 24, `Lock ${ch} at (${nr}, ${nc}) needs key ${ch.toLowerCase()}, which we do not hold. Skip.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest, tr: nr, tc: nc })
+          f('blocked', L('a lock whose key is not held'), `Lock ${ch} at (${nr}, ${nc}) needs key ${ch.toLowerCase()}, which we do not hold. Skip.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest, tr: nr, tc: nc })
           continue
         }
         const key = `${nr},${nc},${nmask}`
         if (seen.has(key)) continue
         seen.add(key); queue.push([nr, nc, nmask])
-        f('push', 27, `Move to (${nr}, ${nc})${nmask !== mask ? ` and pick up key ${ch}` : ''}: new state with keys ${nmask.toString(2).padStart(k, '0')}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest + 1, tr: nr, tc: nc, nmask })
+        f('push', L('is not seen, mark it seen'), `Move to (${nr}, ${nc})${nmask !== mask ? ` and pick up key ${ch}` : ''}: new state with keys ${nmask.toString(2).padStart(k, '0')}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest + 1, tr: nr, tc: nc, nmask })
       }
     }
     steps++
   }
-  f('done', 29, 'No reachable state holds all keys, so the answer is -1.', { popped: pops.length - 1 })
+  f('done', L('return -1'), 'No reachable state holds all keys, so the answer is -1.', { popped: pops.length - 1 })
   return { input: grid, pops, result: -1, frames }
 }
 
-export const code = `def shortestPathAllKeys(grid):
+export const code = `find the start cell @ and count the keys
+let full be the mask with one bit per key
+queue holds the start state (row, column, no keys), marked seen
+let steps be 0
+while the queue is not empty do
+  for each state currently in the queue do
+    take the next state (row, column, keys) out of the queue
+    if the keys held are full then return steps
+    for each direction (down, up, right, left) do
+      let (nr, nc) be the neighbour cell in that direction
+      if it is outside the grid or a wall, skip it
+      let new keys be the keys held, plus the key on that cell if any
+      if the cell is a lock whose key is not held, skip it
+      if (nr, nc, new keys) is not seen, mark it seen and add it to the queue
+  increase steps by 1
+return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+
+def shortest_path_all_keys(grid):
     m, n = len(grid), len(grid[0])
-    sr, sc = find('@')
+    sr, sc = 0, 0
+    count_keys = 0
+    for r in range(m):
+        for c in range(n):
+            ch = grid[r][c]
+            if ch == '@':
+                sr, sc = r, c
+            elif ch.islower():
+                count_keys += 1
     full = (1 << count_keys) - 1
     queue = deque([(sr, sc, 0)])
     seen = {(sr, sc, 0)}
@@ -82,7 +112,7 @@ export const code = `def shortestPathAllKeys(grid):
             r, c, mask = queue.popleft()
             if mask == full:
                 return steps
-            for dr, dc in ((1,0), (-1,0), (0,1), (0,-1)):
+            for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
                 nr, nc = r + dr, c + dc
                 if not (0 <= nr < m and 0 <= nc < n):
                     continue
@@ -98,4 +128,5 @@ export const code = `def shortestPathAllKeys(grid):
                     seen.add((nr, nc, nmask))
                     queue.append((nr, nc, nmask))
         steps += 1
-    return -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return -1
+`

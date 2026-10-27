@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import { BitmaskLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'push', label: 'Enqueue state', description: 'A new (cell, keys) state is reached.' },
     { id: 'done', label: 'Complete', description: 'All keys collected, or unreachable.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Grid rows (JSON array of strings, up to 8 x 8)',
   url: 'https://leetcode.com/problems/shortest-path-to-get-all-keys/',
   complexity: 'O(m * n * 2^k) states, each with 4 moves; k up to 6 keys.',

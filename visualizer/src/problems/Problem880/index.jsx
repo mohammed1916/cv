@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'unwind', label: 'Unwind', description: 'Walk backwards, reducing k modulo size.' },
     { id: 'done', label: 'Complete', description: 'Return the k-th decoded character.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Input ["encoded", k] (JSON)',
   url: 'https://leetcode.com/problems/decoded-string-at-index/',
   complexity: 'O(|s|) time and O(1) space; the decoded string, possibly astronomically long, is never built.',

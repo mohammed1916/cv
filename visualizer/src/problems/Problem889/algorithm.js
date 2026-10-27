@@ -44,16 +44,16 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ preorder, postorder }) {
-  const frames = [{ phase: 'start', count: 0, active: null, preLo: null, preHi: null, postLo: null, activeLine: 2, message: 'Preorder visits root, left, right; postorder visits left, right, root. The first preorder value is the root, and the next one is the root of the left subtree.' }]
+  const frames = [{ phase: 'start', count: 0, active: null, preLo: null, preHi: null, postLo: null, activeLine: L('map each postorder value'), message: 'Preorder visits root, left, right; postorder visits left, right, root. The first preorder value is the root, and the next one is the root of the left subtree.' }]
   const { root } = build(preorder, postorder, (kind, info) => {
     if (kind === 'root') {
-      frames.push({ phase: 'root', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, activeLine: 6, message: `build(pre ${info.preLo}..${info.preHi}, post from ${info.postLo}): create node ${info.root.value} from preorder[${info.preLo}].` })
+      frames.push({ phase: 'root', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, activeLine: L('create a node from preorder'), message: `build(pre ${info.preLo}..${info.preHi}, post from ${info.postLo}): create node ${info.root.value} from preorder[${info.preLo}].` })
     } else {
-      frames.push({ phase: 'split', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, activeLine: 10, message: `Left subtree root is preorder[${info.preLo + 1}] = ${info.leftRoot}. In postorder it sits at index ${info.postLo + info.leftSize - 1}, so the left subtree has ${info.leftSize} node(s); the rest are the right subtree.` })
+      frames.push({ phase: 'split', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, activeLine: L('let left_size be'), message: `Left subtree root is preorder[${info.preLo + 1}] = ${info.leftRoot}. In postorder it sits at index ${info.postLo + info.leftSize - 1}, so the left subtree has ${info.leftSize} node(s); the rest are the right subtree.` })
     }
   })
   const result = levelOrderFromTree(root)
-  frames.push({ phase: 'done', count: preorder.length, active: root.value, preLo: null, preHi: null, postLo: null, activeLine: 14, message: `Tree built. Level-order serialization: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', count: preorder.length, active: root.value, preLo: null, preHi: null, postLo: null, activeLine: L('return build(0'), message: `Tree built. Level-order serialization: [${result.join(', ')}].` })
   return { input: { preorder, postorder }, result, tree: root, frames }
 }
 
@@ -64,8 +64,33 @@ export function partialTree(run, count) {
   return copy(run.tree)
 }
 
-export const code = `def constructFromPrePost(preorder, postorder):
+export const code = `let post_index map each postorder value to its position
+define build(pre_lo, pre_hi, post_lo), which builds the subtree for a range
+  if pre_lo is greater than pre_hi, return empty
+  create a node from preorder[pre_lo] as the root
+  if pre_lo equals pre_hi, return the root, a leaf
+  let left_root be preorder[pre_lo + 1]
+  let left_size be the position of left_root in postorder, minus post_lo, plus 1
+  attach build(pre_lo + 1, pre_lo + left_size, post_lo) as the left child
+  attach build(pre_lo + left_size + 1, pre_hi, post_lo + left_size) as the right child
+  return the root
+return build(0, n - 1, 0), the root of the whole tree`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def construct_from_pre_post(preorder, postorder):
     post_index = {v: i for i, v in enumerate(postorder)}
+
     def build(pre_lo, pre_hi, post_lo):
         if pre_lo > pre_hi:
             return None
@@ -77,4 +102,19 @@ export const code = `def constructFromPrePost(preorder, postorder):
         root.left = build(pre_lo + 1, pre_lo + left_size, post_lo)
         root.right = build(pre_lo + left_size + 1, pre_hi, post_lo + left_size)
         return root
-    return build(0, len(preorder) - 1, 0)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+    root = build(0, len(preorder) - 1, 0)
+    out = []
+    queue = deque([root])
+    while queue:
+        node = queue.popleft()
+        if node is None:
+            out.append(None)
+        else:
+            out.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+    while out and out[-1] is None:
+        out.pop()
+    return out
+`

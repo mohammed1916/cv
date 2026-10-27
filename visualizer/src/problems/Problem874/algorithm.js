@@ -1,4 +1,18 @@
-export const code = `def robotSim(commands, obstacles):
+export const code = `put all obstacles into a set for fast lookup
+start at x = 0, y = 0, facing north (d = 0), with best = 0
+for each command c in commands, do
+  if c is -2, turn left: d becomes d - 1, taken mod 4
+  else if c is -1, turn right: d becomes d + 1, taken mod 4
+  else repeat c times, one unit at a time
+    let (nx, ny) be the next cell one unit ahead in direction d
+    if (nx, ny) is an obstacle, stop repeating for this command
+    move to (nx, ny), and set best to the larger of best and x*x + y*y
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = (s) => code.findIndex((c) => c.text.includes(s)) + 1
+const DIRS = ['north', 'east', 'south', 'west']
+
+export const python = `def robot_sim(commands, obstacles):
     obs = {tuple(o) for o in obstacles}
     dx, dy = [0, 1, 0, -1], [1, 0, -1, 0]
     x = y = d = 0
@@ -15,10 +29,8 @@ export const code = `def robotSim(commands, obstacles):
                     break
                 x, y = nx, ny
                 best = max(best, x * x + y * y)
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const L = (s) => code.findIndex((c) => c.text.includes(s)) + 1
-const DIRS = ['north', 'east', 'south', 'west']
+    return best
+`
 
 export function parseInput(text) {
   let v
@@ -39,27 +51,27 @@ export function buildTrace({ commands, obstacles }) {
   const trail = [[0, 0]]
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, x, y, d, best, cmd: -1, trail: trail.map((p) => [...p]), blocked: null, ...extra })
-  push('start', L('x = y = d'), 'Robot starts at (0, 0) facing north. Obstacles go into a set for O(1) lookup.')
+  push('start', L('put all obstacles'), 'Robot starts at (0, 0) facing north. Obstacles go into a set for O(1) lookup.')
   commands.forEach((c, ci) => {
     if (c === -2) {
       d = (d + 3) % 4
-      push('turn', L('d = (d - 1)'), `Command ${c}: turn left 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci })
+      push('turn', L('turn left'), `Command ${c}: turn left 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci })
     } else if (c === -1) {
       d = (d + 1) % 4
-      push('turn', L('d = (d + 1)'), `Command ${c}: turn right 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci })
+      push('turn', L('turn right'), `Command ${c}: turn right 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci })
     } else {
-      push('move', L('for _ in range'), `Command ${c}: try to walk ${c} unit${c > 1 ? 's' : ''} ${DIRS[d]}, one unit at a time.`, { cmd: ci })
+      push('move', L('repeat c times'), `Command ${c}: try to walk ${c} unit${c > 1 ? 's' : ''} ${DIRS[d]}, one unit at a time.`, { cmd: ci })
       for (let s = 0; s < c; s++) {
         const nx = x + dx[d]; const ny = y + dy[d]
         if (obs.has(`${nx},${ny}`)) {
-          push('blocked', L('break'), `(${nx}, ${ny}) is an obstacle, so the robot stays at (${x}, ${y}) and abandons the rest of this command.`, { cmd: ci, blocked: [nx, ny] })
+          push('blocked', L('is an obstacle, stop'), `(${nx}, ${ny}) is an obstacle, so the robot stays at (${x}, ${y}) and abandons the rest of this command.`, { cmd: ci, blocked: [nx, ny] })
           break
         }
         x = nx; y = ny; trail.push([x, y])
         const dist = x * x + y * y
         const improved = dist > best
         best = Math.max(best, dist)
-        push('move', L('best = max'), `Step to (${x}, ${y}): squared distance ${dist}${improved ? ' is a new maximum' : ` does not beat ${best}`}.`, { cmd: ci })
+        push('move', L('move to (nx, ny)'), `Step to (${x}, ${y}): squared distance ${dist}${improved ? ' is a new maximum' : ` does not beat ${best}`}.`, { cmd: ci })
       }
     }
   })

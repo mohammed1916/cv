@@ -1,4 +1,19 @@
-export const code = `def lenLongestFibSubseq(arr):
+export const code = `map each value in arr to its index
+let n be the length of arr
+let dp[j][k] be 2 for every pair j < k
+let best be 0
+for each k from 0 to n - 1, do
+  for each j from 0 to k - 1, do
+    let need be arr[k] - arr[j]
+    let i be the index of need in the map, or -1 if need is absent
+    if i is at least 0 and less than j, then
+      set dp[j][k] to dp[i][j] + 1, and set best to the larger of best and dp[j][k]
+    otherwise, leave dp[j][k] at 2
+return best, which is 0 when no chain of length 3 exists`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = (s) => code.findIndex((c) => c.text.includes(s)) + 1
+
+export const python = `def len_longest_fib_subseq(arr):
     idx = {v: i for i, v in enumerate(arr)}
     n = len(arr)
     dp = [[2] * n for _ in range(n)]
@@ -9,9 +24,8 @@ export const code = `def lenLongestFibSubseq(arr):
             if 0 <= i < j:
                 dp[j][k] = dp[i][j] + 1
                 best = max(best, dp[j][k])
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
-
-const L = (s) => code.findIndex((c) => c.text.includes(s)) + 1
+    return best
+`
 
 export function parseInput(text) {
   let a
@@ -29,20 +43,20 @@ export function buildTrace(arr) {
   let best = 0
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, dp: dp.map((r) => [...r]), best, j: -1, k: -1, i: -1, ...extra })
-  push('start', L('idx = '), 'Every pair is a Fibonacci-like sequence of length 2, so dp starts at 2. dp[j][k] is the longest chain ending with arr[j], arr[k].')
+  push('start', L('map each value in arr'), 'Every pair is a Fibonacci-like sequence of length 2, so dp starts at 2. dp[j][k] is the longest chain ending with arr[j], arr[k].')
   for (let k = 0; k < n; k++) {
     for (let j = 0; j < k; j++) {
       const need = arr[k] - arr[j]
       const i = idx.has(need) ? idx.get(need) : -1
-      push('lookup', L('i = idx.get'), `Chain ends (${arr[j]}, ${arr[k]}): the previous element must be ${arr[k]} - ${arr[j]} = ${need}${i >= 0 ? ` (found at index ${i})` : ' (not in arr)'}.`, { j, k, i })
+      push('lookup', L('the index of need'), `Chain ends (${arr[j]}, ${arr[k]}): the previous element must be ${arr[k]} - ${arr[j]} = ${need}${i >= 0 ? ` (found at index ${i})` : ' (not in arr)'}.`, { j, k, i })
       if (i >= 0 && i < j) {
         dp[j][k] = dp[i][j] + 1
         best = Math.max(best, dp[j][k])
-        push('extend', L('dp[j][k] ='), `${need} sits at index ${i} before ${j}, so extend the chain ending (${arr[i]}, ${arr[j]}): dp[${j}][${k}] = ${dp[j][k]}. best = ${best}.`, { j, k, i })
+        push('extend', L('set dp[j][k]'), `${need} sits at index ${i} before ${j}, so extend the chain ending (${arr[i]}, ${arr[j]}): dp[${j}][${k}] = ${dp[j][k]}. best = ${best}.`, { j, k, i })
       } else if (i >= 0) {
-        push('skip', L('if 0 <= i'), `Index ${i} is not before j=${j}, so ${need} cannot precede ${arr[j]} in an increasing chain; the pair stays at 2.`, { j, k, i })
+        push('skip', L('is at least 0'), `Index ${i} is not before j=${j}, so ${need} cannot precede ${arr[j]} in an increasing chain; the pair stays at 2.`, { j, k, i })
       } else {
-        push('skip', L('if 0 <= i'), `No valid predecessor, so the pair stays at length 2.`, { j, k, i })
+        push('skip', L('is at least 0'), `No valid predecessor, so the pair stays at length 2.`, { j, k, i })
       }
     }
   }

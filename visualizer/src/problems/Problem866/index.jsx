@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'test', label: 'Primality test', description: 'Trial division up to the square root.' },
     { id: 'done', label: 'Complete', description: 'The first prime palindrome at least n.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Integer n (JSON, 1 to 100,000,000)',
   url: 'https://leetcode.com/problems/prime-palindrome/',
   complexity: 'About 10^4 odd-length palindromes to scan, each tested in O(sqrt p) time.',

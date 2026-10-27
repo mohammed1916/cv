@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'term', label: 'Add contribution', description: 'Element i adds nums[i] * (2^i - 2^(n-1-i)).' },
     { id: 'done', label: 'Complete', description: 'Return the total width sum.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'nums (JSON array, up to 200 values)',
   url: 'https://leetcode.com/problems/sum-of-subsequence-widths/',
   complexity: 'O(n log n) time for sorting plus O(n) for the sum; O(n) space for powers of two.',

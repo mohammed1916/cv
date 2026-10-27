@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'combine', label: 'Combine', description: 'Compare child depths and pick the candidate.' },
     { id: 'done', label: 'Complete', description: 'The answer subtree.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Level-order tree (JSON, null for missing, up to 30 nodes)',
   url: 'https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/',
   complexity: 'O(n) time, O(h) recursion space; every node is processed once.',

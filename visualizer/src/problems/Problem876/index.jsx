@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ListPointerView from '../../components/shared/ListPointerView'
 import LinkedListLane from '../../components/shared/LinkedListLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'advance', label: 'Advance', description: 'Move slow by one node and fast by two.' },
     { id: 'done', label: 'Complete', description: 'Return the slow pointer.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Node values head (JSON array)',
   url: 'https://leetcode.com/problems/middle-of-the-linked-list/',
   complexity: 'O(n) time and O(1) extra space: fast reaches the end after about n/2 loop iterations.',

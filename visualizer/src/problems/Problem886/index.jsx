@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { colourName } from '../../components/shared/graphTraversalModel'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'conflict', label: 'Conflict', description: 'Two people who dislike each other share a group.' },
     { id: 'done', label: 'Complete', description: 'Return whether a valid split exists.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Input {n, dislikes} (JSON, n ≤ 20)',
   url: 'https://leetcode.com/problems/possible-bipartition/',
   complexity: 'O(n + m) time and space for BFS colouring.',

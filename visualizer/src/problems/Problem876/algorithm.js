@@ -15,28 +15,51 @@ export function buildTrace(values) {
   const view = (slow, fast) => tracker.snapshot(table, 0, [{ label: 'slow', nodeId: slow }, { label: 'fast', nodeId: fast < n ? fast : null }], [slow], { title: 'Pointers (slow = slow.next, fast = fast.next.next)' })
   let slow = 0
   let fast = 0
-  const frames = [{ phase: 'start', slow, fast, view: view(slow, fast), activeLine: 2, message: 'Both pointers start at the head. fast will move twice as quickly as slow.' }]
+  const frames = [{ phase: 'start', slow, fast, view: view(slow, fast), activeLine: L('set slow and fast'), message: 'Both pointers start at the head. fast will move twice as quickly as slow.' }]
   while (fast < n && fast + 1 < n) {
-    frames.push({ phase: 'check', slow, fast, view: view(slow, fast), activeLine: 3, message: `fast is at node ${fast} and fast.next exists, so the pointers can advance.` })
+    frames.push({ phase: 'check', slow, fast, view: view(slow, fast), activeLine: L('while fast is not empty'), message: `fast is at node ${fast} and fast.next exists, so the pointers can advance.` })
     slow += 1
     fast += 2
     frames.push({
-      phase: 'advance', slow, fast, view: view(slow, fast), activeLine: 5,
+      phase: 'advance', slow, fast, view: view(slow, fast), activeLine: L('move slow forward one node'),
       message: `slow moves to node ${slow}; fast jumps two nodes to ${fast < n ? `node ${fast}` : 'null'}. slow has travelled half as far as fast.`,
     })
   }
   frames.push({
-    phase: 'check', slow, fast, view: view(slow, fast), activeLine: 3,
+    phase: 'check', slow, fast, view: view(slow, fast), activeLine: L('while fast is not empty'),
     message: fast >= n ? 'fast is null, so the list had even length and slow is the second middle node.' : `fast is on the last node (fast.next is null), so slow is the exact middle.`,
   })
   const result = values.slice(slow)
-  frames.push({ phase: 'done', slow, fast, view: view(slow, fast), activeLine: 6, message: `Return the node at index ${slow}; the returned list is [${result.join(', ')}].` })
+  frames.push({ phase: 'done', slow, fast, view: view(slow, fast), activeLine: L('return slow'), message: `Return the node at index ${slow}; the returned list is [${result.join(', ')}].` })
   return { input: [...values], result, frames }
 }
 
-export const code = `def middleNode(head):
-    slow = fast = head
+export const code = `set slow and fast to the head
+while fast is not empty and fast.next is not empty, do
+  move slow forward one node
+  move fast forward two nodes
+end while
+return slow, which is the middle node (the second middle node for an even length)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def middle_of_list(head):
+    first = None
+    for v in reversed(head):
+        first = ListNode(v, first)
+    slow = fast = first
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
-    return slow`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    out = []
+    while slow:
+        out.append(slow.val)
+        slow = slow.next
+    return out
+`

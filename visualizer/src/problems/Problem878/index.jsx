@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'shrink', label: 'Shrink', description: 'Keep the half that still contains the n-th number.' },
     { id: 'done', label: 'Complete', description: 'lo equals hi is the answer (mod 1e9+7).' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Input [n, a, b] (JSON)',
   url: 'https://leetcode.com/problems/nth-magical-number/',
   complexity: 'O(log(n * min(a, b))) time and O(1) space.',

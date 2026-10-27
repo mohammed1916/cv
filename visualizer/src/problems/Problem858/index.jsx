@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'parity', label: 'Parity', description: 'Parities of m and n pick the receptor.' },
     { id: 'done', label: 'Complete', description: 'Report the receptor.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Array [p, q] (JSON, 1 <= q <= p <= 1000)',
   url: 'https://leetcode.com/problems/mirror-reflection/',
   complexity: 'O(log p) for the gcd, O(1) for the parity test.',

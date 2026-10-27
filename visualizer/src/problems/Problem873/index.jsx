@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'skip', label: 'Skip', description: 'No usable predecessor for this pair.' },
     { id: 'done', label: 'Complete', description: 'Return the best length, or 0.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Array arr (JSON, strictly increasing)',
   url: 'https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/',
   complexity: 'O(n^2) time and space. The visualization caps n at 16.',

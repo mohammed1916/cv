@@ -20,39 +20,57 @@ export function buildTrace({ n, dislikes }) {
   for (const [a, b] of dislikes) { graph[a].push(b); graph[b].push(a) }
   const color = Array(n + 1).fill(0)
   const snap = () => color.slice(1)
-  const frames = [{ phase: 'start', colors: snap(), node: null, other: null, queue: [], activeLine: 6, message: 'Everyone starts uncoloured (0). Colours +1 and -1 are the two groups.' }]
+  const frames = [{ phase: 'start', colors: snap(), node: null, other: null, queue: [], activeLine: L('let color of every person'), message: 'Everyone starts uncoloured (0). Colours +1 and -1 are the two groups.' }]
   let result = true
   outer:
   for (let start = 1; start <= n; start++) {
     if (color[start]) continue
     color[start] = 1
     const queue = [start]
-    frames.push({ phase: 'seed', colors: snap(), node: start, other: null, queue: [...queue], activeLine: 10, message: `Person ${start} is uncoloured: put them in group +1 and start a BFS for their connected component.` })
+    frames.push({ phase: 'seed', colors: snap(), node: start, other: null, queue: [...queue], activeLine: L('color start as group 1'), message: `Person ${start} is uncoloured: put them in group +1 and start a BFS for their connected component.` })
     let head = 0
     while (head < queue.length) {
       const u = queue[head++]
-      frames.push({ phase: 'visit', colors: snap(), node: u, other: null, queue: queue.slice(head), activeLine: 13, message: `Dequeue person ${u} (group ${color[u]}). Check everyone they dislike.` })
+      frames.push({ phase: 'visit', colors: snap(), node: u, other: null, queue: queue.slice(head), activeLine: L('take the front person'), message: `Dequeue person ${u} (group ${color[u]}). Check everyone they dislike.` })
       for (const v of graph[u]) {
         if (color[v] === color[u]) {
           result = false
-          frames.push({ phase: 'conflict', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: 16, message: `Person ${u} dislikes ${v} but both are in group ${color[u]}: an odd cycle exists, so no valid split. Return False.` })
+          frames.push({ phase: 'conflict', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: L('if v has the same group'), message: `Person ${u} dislikes ${v} but both are in group ${color[u]}: an odd cycle exists, so no valid split. Return False.` })
           break outer
         }
         if (color[v] === 0) {
           color[v] = -color[u]
           queue.push(v)
-          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: 18, message: `${v} is uncoloured: dislike across an edge means opposite groups, so ${v} gets ${color[v]} and joins the queue.` })
+          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: L('if v is uncoloured'), message: `${v} is uncoloured: dislike across an edge means opposite groups, so ${v} gets ${color[v]} and joins the queue.` })
         } else {
-          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: 15, message: `${v} is already in group ${color[v]}, opposite to ${u}: consistent.` })
+          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: L('otherwise, v is already'), message: `${v} is already in group ${color[v]}, opposite to ${u}: consistent.` })
         }
       }
     }
   }
-  frames.push({ phase: 'done', colors: snap(), node: null, other: null, queue: [], activeLine: result ? 20 : 16, message: result ? 'Every component was two-coloured: return True.' : 'Conflict found: return False.' })
+  frames.push({ phase: 'done', colors: snap(), node: null, other: null, queue: [], activeLine: result ? L('return True') : L('if v has the same group'), message: result ? 'Every component was two-coloured: return True.' : 'Conflict found: return False.' })
   return { input: { n, dislikes }, result, frames }
 }
 
-export const code = `def possibleBipartition(n, dislikes):
+export const code = `build the dislike graph, with an edge in both directions for each dislike
+let color of every person be 0 (uncoloured)
+for each person start from 1 to n, do
+  if start is already coloured, skip it
+  color start as group 1, and make a queue holding only start
+  while the queue is not empty, do
+    take the front person u out of the queue
+    for each person v that u dislikes, do
+      if v has the same group as u, return False
+      if v is uncoloured, give v the opposite group and add v to the queue
+      otherwise, v is already in the opposite group: consistent
+return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+
+def possible_bipartition(n, dislikes):
     graph = [[] for _ in range(n + 1)]
     for a, b in dislikes:
         graph[a].append(b)
@@ -71,4 +89,5 @@ export const code = `def possibleBipartition(n, dislikes):
                 if color[v] == 0:
                     color[v] = -color[u]
                     queue.append(v)
-    return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return True
+`

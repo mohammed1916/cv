@@ -31,12 +31,12 @@ export function buildTrace({ tree, target, k }) {
   const frames = []
   const parentDone = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, current: null, parentDone: parentDone.slice(), seen: [], queue: [], dists: {}, dist: 0, ...extra })
-  f('start', 2, `Tree nodes only point downward, so first record every node's parent. Then distance-k nodes are k BFS steps from ${target}.`)
+  f('start', L('let parent be an empty map'), `Tree nodes only point downward, so first record every node's parent. Then distance-k nodes are k BFS steps from ${target}.`)
   const dfs = (node, par) => {
     if (!node) return
     parent.set(node, par)
     parentDone.push(node.id)
-    f('parent', 5, `Visit ${node.value}: its parent is ${par ? par.value : 'none (root)'}.`, { current: node.id })
+    f('parent', L('set parent of the node'), `Visit ${node.value}: its parent is ${par ? par.value : 'none (root)'}.`, { current: node.id })
     dfs(node.left, node)
     dfs(node.right, node)
   }
@@ -46,7 +46,7 @@ export function buildTrace({ tree, target, k }) {
   const dists = { [targetNode.id]: 0 }
   let dist = 0
   const snap = (phase, line, message, extra = {}) => f(phase, line, message, { seen: [...seen].map(n => n.id), queue: queue.map(n => n.id), dists: { ...dists }, dist, ...extra })
-  snap('seed', 9, `Start BFS at target ${target} with distance 0.`)
+  snap('seed', L('let queue hold only the target'), `Start BFS at target ${target} with distance 0.`)
   while (queue.length && dist < k) {
     const level = queue.length
     const next = []
@@ -59,34 +59,84 @@ export function buildTrace({ tree, target, k }) {
         if (nb && !seen.has(nb)) { seen.add(nb); next.push(nb); dists[nb.id] = dist + 1; added.push(nb.value) }
       }
       queue = [...before.slice(t + 1), ...next]
-      snap('expand', 16, `Expand ${node.value}: ${added.length ? `new neighbours ${added.join(', ')} at distance ${dist + 1}` : 'no unseen neighbours'} (children and parent).`, { current: node.id })
+      snap('expand', L('if the neighbour exists'), `Expand ${node.value}: ${added.length ? `new neighbours ${added.join(', ')} at distance ${dist + 1}` : 'no unseen neighbours'} (children and parent).`, { current: node.id })
     }
     queue = next
     dist++
-    snap('level', 17, `Level complete: ${queue.length} node(s) are exactly ${dist} away from ${target}.`)
+    snap('level', L('increase distance by 1'), `Level complete: ${queue.length} node(s) are exactly ${dist} away from ${target}.`)
   }
   const result = queue.map(n => n.value)
-  snap('done', 18, `Distance ${k} from ${target}: [${result.join(', ')}].`)
+  snap('done', L('return the values left'), `Distance ${k} from ${target}: [${result.join(', ')}].`)
   return { input: { tree, target, k }, root, result, frames }
 }
 
-export const code = `def distanceK(root, target, k):
+export const code = `let parent be an empty map
+depth-first walk from the root, visiting each node
+  set parent of the node to the node that led here (none for the root)
+  walk into the left child, then into the right child
+let queue hold only the target, and mark the target as seen
+let distance be 0
+while the queue is not empty and distance is less than k do
+  for each node currently in the queue do
+    take the next node out of the queue
+    for each neighbour in (left child, right child, parent)
+      if the neighbour exists and is not seen, mark it seen and add it to the queue
+  increase distance by 1
+return the values left in the queue`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def build_tree(values):
+    if not values or values[0] is None:
+        return None
+    root = TreeNode(values[0])
+    queue = deque([root])
+    i = 1
+    while queue and i < len(values):
+        current = queue.popleft()
+        if i < len(values) and values[i] is not None:
+            current.left = TreeNode(values[i])
+            queue.append(current.left)
+        i += 1
+        if i < len(values) and values[i] is not None:
+            current.right = TreeNode(values[i])
+            queue.append(current.right)
+        i += 1
+    return root
+
+
+def distance_k(tree, target, k):
+    root = build_tree(tree)
     parent = {}
-    def dfs(node, par):
-        if node:
-            parent[node] = par
-            dfs(node.left, node)
-            dfs(node.right, node)
+
+    def dfs(current, par):
+        if current is not None:
+            parent[current] = par
+            dfs(current.left, current)
+            dfs(current.right, current)
+
     dfs(root, None)
-    queue = deque([target])
-    seen = {target}
+    start = next(n for n in parent if n.val == target)
+    queue = deque([start])
+    seen = {start}
     dist = 0
     while queue and dist < k:
         for _ in range(len(queue)):
-            node = queue.popleft()
-            for nb in (node.left, node.right, parent[node]):
-                if nb and nb not in seen:
+            current = queue.popleft()
+            for nb in (current.left, current.right, parent[current]):
+                if nb is not None and nb not in seen:
                     seen.add(nb)
                     queue.append(nb)
         dist += 1
-    return [n.val for n in queue]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return [n.val for n in queue]
+`

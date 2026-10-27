@@ -16,28 +16,42 @@ export function buildTrace({ nums1, nums2 }) {
   let lo = 0, hi = n - 1
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, i: -1, lo, hi, res: res.slice(), target: null, ...extra })
-  f('start', 2, 'Sort nums1 ascending. Also sort nums2\'s indices by value so we know the weakest and strongest opponents.')
-  f('sort', 3, `Opponent order (indices of nums2, ascending): [${order.join(', ')}] = values [${order.map(i => nums2[i]).join(', ')}].`)
+  f('start', L('sort nums1 in ascending'), 'Sort nums1 ascending. Also sort nums2\'s indices by value so we know the weakest and strongest opponents.')
+  f('sort', L('sort the indices of nums2'), `Opponent order (indices of nums2, ascending): [${order.join(', ')}] = values [${order.map(i => nums2[i]).join(', ')}].`)
   a.forEach((x, i) => {
     const weakest = nums2[order[lo]]
     const win = x > weakest
-    f('compare', 7, `Card ${x} vs weakest remaining opponent ${weakest} (nums2[${order[lo]}]).`, { i, target: order[lo] })
+    f('compare', L('let weakest be'), `Card ${x} vs weakest remaining opponent ${weakest} (nums2[${order[lo]}]).`, { i, target: order[lo] })
     if (win) {
       res[order[lo]] = x; lo++
-      f('win', 8, `${x} beats ${weakest}: assign it to position ${order[lo - 1]} and advance to the next weakest.`, { i, target: order[lo - 1] })
+      f('win', L('assign x to position order[lo]'), `${x} beats ${weakest}: assign it to position ${order[lo - 1]} and advance to the next weakest.`, { i, target: order[lo - 1] })
     } else {
       const t = order[hi], v = nums2[t]
       res[t] = x; hi--
-      f('sacrifice', 11, `${x} cannot beat even the weakest (${weakest}), so it is useless; waste it on the strongest remaining opponent ${v} at position ${t}.`, { i, target: t })
+      f('sacrifice', L('assign x to position order[hi]'), `${x} cannot beat even the weakest (${weakest}), so it is useless; waste it on the strongest remaining opponent ${v} at position ${t}.`, { i, target: t })
     }
   })
-  f('done', 13, `Result: [${res.join(', ')}].`)
+  f('done', L('return res'), `Result: [${res.join(', ')}].`)
   return { input: { nums1, nums2 }, sorted: a, order, result: res, frames }
 }
 
-export const code = `def advantageCount(nums1, nums2):
+export const code = `sort nums1 in ascending order, giving a
+sort the indices of nums2 by value, smallest first, giving order
+let res be a list with one empty slot per position of nums2
+let lo = 0 and hi = the last index
+for each card x in a, from smallest to largest, do
+  let weakest be the value of nums2 at order[lo]
+  if x is greater than weakest, then
+    assign x to position order[lo] in res, and increase lo by 1
+  otherwise
+    assign x to position order[hi] in res, and decrease hi by 1
+return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def advantage_count(nums1, nums2):
     a = sorted(nums1)
-    order = sorted(range(len(nums2)), key=lambda i: nums2[i])
+    order = sorted(range(len(nums2)), key=lambda i: (nums2[i], i))
     res = [0] * len(nums1)
     lo, hi = 0, len(nums1) - 1
     for x in a:
@@ -47,4 +61,5 @@ export const code = `def advantageCount(nums1, nums2):
         else:
             res[order[hi]] = x
             hi -= 1
-    return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return res
+`
