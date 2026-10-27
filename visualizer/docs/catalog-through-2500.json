@@ -2,8 +2,8 @@
   "scope": "Every catalog problem numbered 1 through 2500",
   "catalogDate": "2026-10-05T09:48:48.663Z",
   "catalogProblems": 2500,
-  "routePresent": 1733,
-  "missing": 767,
+  "routePresent": 1745,
+  "missing": 755,
   "note": "Route presence is not certification of algorithm or browser correctness. Nonmatching legacy routes are not counted as implemented catalog entries.",
   "bands": [
     {
@@ -24,7 +24,7 @@
     {
       "from": 751,
       "through": 1000,
-      "missing": 22
+      "missing": 10
     },
     {
       "from": 1001,
@@ -5659,8 +5659,8 @@
       "number": "800",
       "title": "Similar RGB Color",
       "slug": "similar-rgb-color",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem800"
     },
     {
       "number": "801",
@@ -6779,8 +6779,8 @@
       "number": "960",
       "title": "Delete Columns to Make Sorted III",
       "slug": "delete-columns-to-make-sorted-iii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem960"
     },
     {
       "number": "961",
@@ -6800,8 +6800,8 @@
       "number": "963",
       "title": "Minimum Area Rectangle II",
       "slug": "minimum-area-rectangle-ii",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem963"
     },
     {
       "number": "964",
@@ -6821,29 +6821,29 @@
       "number": "966",
       "title": "Vowel Spellchecker",
       "slug": "vowel-spellchecker",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem966"
     },
     {
       "number": "967",
       "title": "Numbers With Same Consecutive Differences",
       "slug": "numbers-with-same-consecutive-differences",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem967"
     },
     {
       "number": "968",
       "title": "Binary Tree Cameras",
       "slug": "binary-tree-cameras",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem968"
     },
     {
       "number": "969",
       "title": "Pancake Sorting",
       "slug": "pancake-sorting",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem969"
     },
     {
       "number": "970",
@@ -6856,15 +6856,15 @@
       "number": "971",
       "title": "Flip Binary Tree To Match Preorder Traversal",
       "slug": "flip-binary-tree-to-match-preorder-traversal",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem971"
     },
     {
       "number": "972",
       "title": "Equal Rational Numbers",
       "slug": "equal-rational-numbers",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem972"
     },
     {
       "number": "973",
@@ -6884,8 +6884,8 @@
       "number": "975",
       "title": "Odd Even Jump",
       "slug": "odd-even-jump",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem975"
     },
     {
       "number": "976",
@@ -6912,8 +6912,8 @@
       "number": "979",
       "title": "Distribute Coins in Binary Tree",
       "slug": "distribute-coins-in-binary-tree",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem979"
     },
     {
       "number": "980",
@@ -6926,8 +6926,8 @@
       "number": "981",
       "title": "Time Based Key-Value Store",
       "slug": "time-based-key-value-store",
-      "status": "unimplemented",
-      "folder": null
+      "status": "route-present",
+      "folder": "Problem981"
     },
     {
       "number": "982",
