@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'expand', label: 'Roll dice', description: 'Try rolls 1 to 6, following snakes and ladders.' },
     { id: 'done', label: 'Complete', description: 'Read the distance of the last square.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Board (JSON 2D array)',
   url: 'https://leetcode.com/problems/snakes-and-ladders/',
   complexity: 'O(n^2) time and space: each square is enqueued once and tries 6 rolls. Boards are capped at 20 x 20.',

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'full', label: 'n itself', description: 'Every digit matched, so n is counted.' },
     { id: 'done', label: 'Complete', description: 'Return the count.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {digits, n} (JSON)',
   url: 'https://leetcode.com/problems/numbers-at-most-n-given-digit-set/',
   complexity: 'O(k * d) time for k digits in n and d set digits, O(k) space.',

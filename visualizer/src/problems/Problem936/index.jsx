@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'erase', label: 'Un-stamp', description: 'Replace a matched window with wildcards and record its index.' },
     { id: 'done', label: 'Complete', description: 'Reverse the recorded indices, or report impossible.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Object {stamp, target} (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Object {stamp, target} (JSON)',
   url: 'https://leetcode.com/problems/stamping-the-sequence/',
   complexity: 'O(n * (n - m + 1) * m) worst case time. The visualization caps the target at 30 characters.',
   examples: [

@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'reject', label: 'Not universal', description: 'The word of words1 is short of some letter.' },
     { id: 'done', label: 'Complete', description: 'Return the universal words.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {words1, words2} (JSON)',
   url: 'https://leetcode.com/problems/word-subsets/',
   complexity: 'O(total letters in words1 and words2) with a 26-letter count table. Inputs are capped at 30 words of 10 letters.',

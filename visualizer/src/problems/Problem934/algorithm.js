@@ -33,13 +33,13 @@ export function buildTrace(input) {
   const rows = input.length, cols = input[0].length
   const grid = input.map(r => [...r])
   const snap = () => grid.map(r => [...r])
-  const frames = [{ phase: 'start', activeLine: 2, grid: snap(), flips: 0, cell: null, message: 'Two islands exist. Mark the first one, then grow it outward one ring of water at a time.' }]
+  const frames = [{ phase: 'start', activeLine: L('Scan the grid for the first land cell'), grid: snap(), flips: 0, cell: null, message: 'Two islands exist. Mark the first one, then grow it outward one ring of water at a time.' }]
   const frontier = []
   const dfs = (r, c) => {
     if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] !== 1) return
     grid[r][c] = 2
     frontier.push([r, c])
-    frames.push({ phase: 'flood', activeLine: 7, grid: snap(), flips: 0, cell: [r, c], message: `DFS marks (${r}, ${c}) as part of the first island and adds it to the BFS frontier.` })
+    frames.push({ phase: 'flood', activeLine: L('mark (r, c) as part of the first island'), grid: snap(), flips: 0, cell: [r, c], message: `DFS marks (${r}, ${c}) as part of the first island and adds it to the BFS frontier.` })
     for (const [dr, dc] of DIRS) dfs(r + dr, c + dc)
   }
   let start = null
@@ -56,34 +56,49 @@ export function buildTrace(input) {
         if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue
         if (grid[nr][nc] === 1) {
           result = flips
-          frames.push({ phase: 'found', activeLine: 21, grid: snap(), flips, cell: [nr, nc], message: `(${nr}, ${nc}) belongs to the second island and touches the frontier at layer ${flips}: ${flips} water cells must be flipped.` })
+          frames.push({ phase: 'found', activeLine: L('if (nr, nc) is land of the second island'), grid: snap(), flips, cell: [nr, nc], message: `(${nr}, ${nc}) belongs to the second island and touches the frontier at layer ${flips}: ${flips} water cells must be flipped.` })
           break outer
         }
         if (grid[nr][nc] === 0) {
           grid[nr][nc] = -(flips + 1)
           nxt.push([nr, nc])
-          frames.push({ phase: 'expand', activeLine: 24, grid: snap(), flips, cell: [nr, nc], message: `Water (${nr}, ${nc}) is adjacent to the island: it would be flipped as bridge cell number ${flips + 1}.` })
+          frames.push({ phase: 'expand', activeLine: L('if (nr, nc) is unvisited water'), grid: snap(), flips, cell: [nr, nc], message: `Water (${nr}, ${nc}) is adjacent to the island: it would be flipped as bridge cell number ${flips + 1}.` })
         }
       }
     }
     current = nxt
     flips++
   }
-  frames.push({ phase: 'done', activeLine: 21, grid: snap(), flips: result, cell: null, message: `Shortest bridge needs ${result} flipped cell(s). BFS layers give the minimum because every layer extends all frontier cells simultaneously.` })
+  frames.push({ phase: 'done', activeLine: L('return flips'), grid: snap(), flips: result, cell: null, message: `Shortest bridge needs ${result} flipped cell(s). BFS layers give the minimum because every layer extends all frontier cells simultaneously.` })
   return { input: input.map(r => [...r]), result, frames }
 }
 
-export const code = `def shortestBridge(grid):
-    n = len(grid)
+export const code = `Scan the grid for the first land cell, and flood-fill its island with DFS
+DFS(r, c): if (r, c) is outside the grid or not unvisited land, return
+  mark (r, c) as part of the first island and add it to the frontier
+  call DFS on each of the 4 neighbours of (r, c)
+Set flips to 0; the frontier now holds the cells of the first island
+while the frontier is not empty
+  let nxt be an empty list
+  for each cell (r, c) in the frontier and each of its 4 neighbours (nr, nc)
+    if (nr, nc) is outside the grid, skip it
+    if (nr, nc) is land of the second island, return flips
+    if (nr, nc) is unvisited water, mark it visited and add it to nxt
+  set frontier to nxt and add one to flips`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def shortest_bridge(grid):
+    rows, cols = len(grid), len(grid[0])
+    grid = [list(row) for row in grid]
+    frontier = []
     def dfs(r, c):
-        if not (0 <= r < n and 0 <= c < n) or grid[r][c] != 1:
+        if not (0 <= r < rows and 0 <= c < cols) or grid[r][c] != 1:
             return
         grid[r][c] = 2
         frontier.append((r, c))
         for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             dfs(r + dr, c + dc)
-    frontier = []
-    start = next((r, c) for r in range(n) for c in range(n) if grid[r][c])
+    start = next((r, c) for r in range(rows) for c in range(cols) if grid[r][c] == 1)
     dfs(*start)
     flips = 0
     while frontier:
@@ -91,11 +106,11 @@ export const code = `def shortestBridge(grid):
         for r, c in frontier:
             for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
                 nr, nc = r + dr, c + dc
-                if 0 <= nr < n and 0 <= nc < n:
+                if 0 <= nr < rows and 0 <= nc < cols:
                     if grid[nr][nc] == 1:
                         return flips
                     if grid[nr][nc] == 0:
                         grid[nr][nc] = 2
                         nxt.append((nr, nc))
         frontier = nxt
-        flips += 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        flips += 1`

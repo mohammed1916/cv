@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'check', label: 'Check overlap', description: 'Make sure the three windows do not overlap.' },
     { id: 'done', label: 'Complete', description: 'Return the cut indices.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Array arr of 0/1 (JSON)',
   url: 'https://leetcode.com/problems/three-equal-parts/',
   complexity: 'O(n) time and O(n) space for the index list. arr is capped at 100 values here.',

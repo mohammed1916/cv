@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'sort', label: 'Sort letters', description: 'Order letter-logs by content then identifier.' },
     { id: 'done', label: 'Complete', description: 'Concatenate letter-logs and digit-logs.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Logs (JSON array of strings)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Logs (JSON array of strings)',
   url: 'https://leetcode.com/problems/reorder-data-in-log-files/',
   complexity: 'O(n log n * m) time for n logs of length m. The visualization caps input at 30 logs.',
   examples: [

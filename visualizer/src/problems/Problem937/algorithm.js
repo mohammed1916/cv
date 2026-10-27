@@ -18,27 +18,38 @@ const cmp = (a, b) => (a < b ? -1 : a > b ? 1 : 0)
 export function buildTrace(logs) {
   const kinds = logs.map(() => '')
   const letters = [], digits = []
-  const frames = [{ phase: 'start', activeLine: 2, kinds: [...kinds], order: [...logs], message: 'Letter logs get sorted by content then identifier; digit logs keep their original relative order at the end.' }]
+  const frames = [{ phase: 'start', activeLine: L('Create empty lists letters and digits'), kinds: [...kinds], order: [...logs], message: 'Letter logs get sorted by content then identifier; digit logs keep their original relative order at the end.' }]
   logs.forEach((log, i) => {
     const sp = log.indexOf(' ')
     const ident = log.slice(0, sp), rest = log.slice(sp + 1)
     if (/[0-9]/.test(rest[0])) {
       digits.push(log); kinds[i] = 'digit'
-      frames.push({ phase: 'classify', activeLine: 6, index: i, kinds: [...kinds], order: [...logs], message: `"${log}" starts with a digit after the identifier: digit-log, appended in encounter order.` })
+      frames.push({ phase: 'classify', activeLine: L('append log to digits'), index: i, kinds: [...kinds], order: [...logs], message: `"${log}" starts with a digit after the identifier: digit-log, appended in encounter order.` })
     } else {
       letters.push([rest, ident, log]); kinds[i] = 'letter'
-      frames.push({ phase: 'classify', activeLine: 8, index: i, kinds: [...kinds], order: [...logs], message: `"${log}" is a letter-log: store the key (content "${rest}", identifier "${ident}").` })
+      frames.push({ phase: 'classify', activeLine: L('append (rest, ident, log) to letters'), index: i, kinds: [...kinds], order: [...logs], message: `"${log}" is a letter-log: store the key (content "${rest}", identifier "${ident}").` })
     }
   })
   letters.sort((a, b) => cmp(a[0], b[0]) || cmp(a[1], b[1]))
   const sortedLetters = letters.map(l => l[2])
-  frames.push({ phase: 'sort', activeLine: 9, kinds: sortedLetters.map(() => 'letter').concat(digits.map(() => 'digit')), order: [...sortedLetters, ...digits], message: `Sort letter-logs by (content, identifier): ${sortedLetters.length} letter-log(s) now ordered.` })
+  frames.push({ phase: 'sort', activeLine: L('sort letters by content'), kinds: sortedLetters.map(() => 'letter').concat(digits.map(() => 'digit')), order: [...sortedLetters, ...digits], message: `Sort letter-logs by (content, identifier): ${sortedLetters.length} letter-log(s) now ordered.` })
   const result = [...sortedLetters, ...digits]
-  frames.push({ phase: 'done', activeLine: 10, kinds: result.map((_, i) => (i < sortedLetters.length ? 'letter' : 'digit')), order: result, message: 'Append the digit logs after the sorted letter logs.' })
+  frames.push({ phase: 'done', activeLine: L('return the logs of letters'), kinds: result.map((_, i) => (i < sortedLetters.length ? 'letter' : 'digit')), order: result, message: 'Append the digit logs after the sorted letter logs.' })
   return { input: [...logs], result, frames }
 }
 
-export const code = `def reorderLogFiles(logs):
+export const code = `Create empty lists letters and digits
+for each log in logs
+  split log into ident (before the first space) and rest (after it)
+  if the first character of rest is a digit
+    append log to digits
+  else
+    append (rest, ident, log) to letters
+sort letters by content (rest), then by identifier
+return the logs of letters in order, followed by digits`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def reorder_log_files(logs):
     letters, digits = [], []
     for log in logs:
         ident, rest = log.split(' ', 1)
@@ -47,4 +58,4 @@ export const code = `def reorderLogFiles(logs):
         else:
             letters.append((rest, ident, log))
     letters.sort()
-    return [l[2] for l in letters] + digits`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return [l[2] for l in letters] + digits`

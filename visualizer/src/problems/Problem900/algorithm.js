@@ -24,12 +24,12 @@ export function buildTrace({ encoding, ops }) {
   let i = 0
   const log = []
   const results = []
-  const frames = [{ phase: 'start', enc: [...enc], i, n: null, current: -1, log: [], activeLine: 3, message: 'Store the encoding and a pointer i at the first run (count at even index, value at odd index).' }]
+  const frames = [{ phase: 'start', enc: [...enc], i, n: null, current: -1, log: [], activeLine: L('Store the encoding'), message: 'Store the encoding and a pointer i at the first run (count at even index, value at odd index).' }]
   ops.forEach((n0, k) => {
     let n = n0
-    frames.push({ phase: 'next', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: 6, message: `next(${n0}): we must skip ${n0} element(s) and report the last one skipped.` })
+    frames.push({ phase: 'next', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: L('To next(n)'), message: `next(${n0}): we must skip ${n0} element(s) and report the last one skipped.` })
     while (i < enc.length && enc[i] < n) {
-      frames.push({ phase: 'skip', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: 7, message: `Run at ${i} has ${enc[i]} copies of ${enc[i + 1]}, and ${enc[i]} < ${n}, so the whole run is consumed and the target is further on (n becomes ${n - enc[i]}).` })
+      frames.push({ phase: 'skip', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: L('subtract that run'), message: `Run at ${i} has ${enc[i]} copies of ${enc[i + 1]}, and ${enc[i]} < ${n}, so the whole run is consumed and the target is further on (n becomes ${n - enc[i]}).` })
       n -= enc[i]
       i += 2
     }
@@ -38,22 +38,32 @@ export function buildTrace({ encoding, ops }) {
       returned = -1
       results.push(-1)
       log.push({ name: 'next', args: [n0], returned })
-      frames.push({ phase: 'exhaust', enc: [...enc], i, n, current: k, log: [...log], activeLine: 10, message: `Every run is used up before ${n0} elements were skipped: return -1.` })
+      frames.push({ phase: 'exhaust', enc: [...enc], i, n, current: k, log: [...log], activeLine: L('return -1'), message: `Every run is used up before ${n0} elements were skipped: return -1.` })
     } else {
       enc[i] -= n
       returned = enc[i + 1]
       results.push(returned)
       log.push({ name: 'next', args: [n0], returned })
-      frames.push({ phase: 'take', enc: [...enc], i, n, current: k, log: [...log], activeLine: 12, message: `The run at ${i} has at least the remaining ${n}: remove ${n} copies (count becomes ${enc[i]}) and return its value ${returned}.` })
+      frames.push({ phase: 'take', enc: [...enc], i, n, current: k, log: [...log], activeLine: L('remove n copies'), message: `The run at ${i} has at least the remaining ${n}: remove ${n} copies (count becomes ${enc[i]}) and return its value ${returned}.` })
     }
   })
-  frames.push({ phase: 'done', enc: [...enc], i, n: null, current: ops.length - 1, log: [...log], activeLine: 13, message: `Results: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', enc: [...enc], i, n: null, current: ops.length - 1, log: [...log], activeLine: L('return the value of the run'), message: `Results: [${results.join(', ')}].` })
   return { input: { encoding, ops }, result: results, frames }
 }
 
-export const code = `class RLEIterator:
+export const code = `Store the encoding as (count, value) pairs and set pointer i to the first pair
+To next(n), skip n elements and report the element reached
+  while pointer i is inside the encoding and the run at i has fewer than n copies
+    subtract that run's count from n and move pointer i forward by one pair
+  if pointer i is past the end of the encoding
+    return -1
+  remove n copies from the run at i
+  return the value of the run at i`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class RLEIterator:
     def __init__(self, encoding):
-        self.enc = encoding
+        self.enc = list(encoding)
         self.i = 0
 
     def next(self, n):
@@ -63,4 +73,11 @@ export const code = `class RLEIterator:
         if self.i >= len(self.enc):
             return -1
         self.enc[self.i] -= n
-        return self.enc[self.i + 1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        return self.enc[self.i + 1]
+
+def rle_iterator(names, args):
+    it = RLEIterator(args[0][0])
+    results = []
+    for arg in args[1:]:
+        results.append(it.next(arg[0]))
+    return results`

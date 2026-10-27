@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import SvgViewport from '../../components/shared/SvgViewport'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'found', label: 'Rectangle', description: 'Record a rectangle and update the minimum area.' },
     { id: 'done', label: 'Complete', description: 'Return the minimum area or 0.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Points (JSON [[x,y],...])',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Points (JSON [[x,y],...])',
   url: 'https://leetcode.com/problems/minimum-area-rectangle/',
   complexity: 'O(n^2) time and O(n) space. The visualization caps input at 30 points.',
   examples: [

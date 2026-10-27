@@ -24,10 +24,10 @@ export function buildTrace(board) {
   const queue = [1]
   let head = 0
   const snap = () => ({ dist: dist.slice(1), queue: queue.slice(head) })
-  const frames = [{ phase: 'start', activeLine: 11, cur: 1, discovered: [], ...snap(), message: `Flatten the ${n}x${n} board into squares 1..${total} (rows alternate direction). Square 1 is at distance 0; BFS explores one dice roll per level.` }]
+  const frames = [{ phase: 'start', activeLine: L('Set dist[1] to 0'), cur: 1, discovered: [], ...snap(), message: `Flatten the ${n}x${n} board into squares 1..${total} (rows alternate direction). Square 1 is at distance 0; BFS explores one dice roll per level.` }]
   while (head < queue.length) {
     const cur = queue[head++]
-    frames.push({ phase: 'pop', activeLine: 13, cur, discovered: [], ...snap(), message: `Take square ${cur} (distance ${dist[cur]}) from the queue.` })
+    frames.push({ phase: 'pop', activeLine: L('take the front square'), cur, discovered: [], ...snap(), message: `Take square ${cur} (distance ${dist[cur]}) from the queue.` })
     const discovered = []
     const notes = []
     for (let nxt = cur + 1; nxt <= Math.min(cur + 6, total); nxt++) {
@@ -40,13 +40,26 @@ export function buildTrace(board) {
         notes.push(`roll to ${nxt}${jump} reaches new square ${dest}`)
       } else notes.push(`roll to ${nxt}${jump} lands on ${dest}, already seen`)
     }
-    frames.push({ phase: 'expand', activeLine: 18, cur, discovered, ...snap(), message: `From ${cur}: ${notes.join('; ')}.` })
+    frames.push({ phase: 'expand', activeLine: L('if dist[dest] is -1'), cur, discovered, ...snap(), message: `From ${cur}: ${notes.join('; ')}.` })
   }
   const result = dist[total]
-  frames.push({ phase: 'done', activeLine: 19, cur: total, discovered: [], ...snap(), message: result === -1 ? 'The last square was never reached: return -1.' : `Square ${total} is reached in ${result} moves.` })
+  frames.push({ phase: 'done', activeLine: L('return dist[n*n]'), cur: total, discovered: [], ...snap(), message: result === -1 ? 'The last square was never reached: return -1.' : `Square ${total} is reached in ${result} moves.` })
   return { input: board, cells, result, frames }
 }
-export const code = `def snakesAndLadders(board):
+export const code = `Flatten the board into squares 1 to n*n, where rows alternate direction and square 1 is the bottom-left cell
+Set dist[1] to 0, every other distance to -1, and put square 1 in a queue
+while the queue is not empty
+  take the front square cur from the queue
+  for each roll nxt from cur + 1 to min(cur + 6, n*n)
+    let dest be cells[nxt] if it holds a ladder or snake, otherwise nxt
+    if dist[dest] is -1
+      set dist[dest] to dist[cur] + 1 and add dest to the back of the queue
+return dist[n*n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `from collections import deque
+
+def snakes_and_ladders(board):
     n = len(board)
     cells = [0] * (n * n + 1)
     label = 1
@@ -65,4 +78,4 @@ export const code = `def snakesAndLadders(board):
             if dist[dest] == -1:
                 dist[dest] = dist[cur] + 1
                 queue.append(dest)
-    return dist[n * n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return dist[n * n]`

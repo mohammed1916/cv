@@ -7,8 +7,8 @@ export function parseInput(text) {
   return { left: v.left, right: v.right }
 }
 export function buildTrace({ left, right }) {
-  const L = Number(left), R = Number(right)
-  const frames = [{ phase: 'start', activeLine: 2, count: 0, candidates: [], message: `Count x in [${L}, ${R}] with x and sqrt(x) both palindromes. Every palindromic root is built from a half, so only those roots are tried.` }]
+  const lo = Number(left), hi = Number(right)
+  const frames = [{ phase: 'start', activeLine: L('Let L and R'), count: 0, candidates: [], message: `Count x in [${lo}, ${hi}] with x and sqrt(x) both palindromes. Every palindromic root is built from a half, so only those roots are tried.` }]
   const candidates = []
   let count = 0
   for (let half = 1; half < 1000; half++) {
@@ -16,19 +16,29 @@ export function buildTrace({ left, right }) {
     const roots = [Number(s + [...s].reverse().join('')), Number(s + [...s].reverse().slice(1).join(''))]
     for (const root of roots) {
       const sq = root * root
-      if (sq > R) continue
-      if (sq < L) { continue }
+      if (sq > hi) continue
+      if (sq < lo) { continue }
       const ok = isPal(sq)
       if (ok) count++
       candidates.push({ root, sq, ok })
-      frames.push({ phase: ok ? 'accept' : 'reject', activeLine: ok ? 11 : 10, count, candidates: candidates.map(c => ({ ...c })).slice(-60), index: candidates.length - 1, half,
+      frames.push({ phase: ok ? 'accept' : 'reject', activeLine: ok ? L('increase count by 1') : L('if L <= sq <= R'), count, candidates: candidates.map(c => ({ ...c })).slice(-60), index: candidates.length - 1, half,
         message: ok ? `Root ${root} (from half ${half}): ${root}^2 = ${sq} is a palindrome, so it counts. Total ${count}.` : `Root ${root} (from half ${half}): ${root}^2 = ${sq} is not a palindrome.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: 12, count, candidates: candidates.slice(-60).map(c => ({ ...c })), index: -1, message: `${count} super-palindromes in [${L}, ${R}].` })
+  frames.push({ phase: 'done', activeLine: L('return count'), count, candidates: candidates.slice(-60).map(c => ({ ...c })), index: -1, message: `${count} super-palindromes in [${lo}, ${hi}].` })
   return { input: { left, right }, result: count, frames }
 }
-export const code = `def superpalindromesInRange(left, right):
+export const code = `Let L and R be the bounds as integers, and set count to 0
+for each half from 1 to 999
+  let s be the digits of half
+  for each root in [s followed by its reverse, s followed by its reverse with its first digit dropped]
+    let sq be root squared
+    if L <= sq <= R and sq is a palindrome
+      increase count by 1
+return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def superpalindromes_in_range(left, right):
     L, R = int(left), int(right)
     def is_pal(x):
         s = str(x)
@@ -37,7 +47,6 @@ export const code = `def superpalindromesInRange(left, right):
     for half in range(1, 1000):
         s = str(half)
         for root in (int(s + s[::-1]), int(s + s[-2::-1])):
-            if L <= root * root <= R:
-                if is_pal(root * root):
-                    count += 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+            if L <= root * root <= R and is_pal(root * root):
+                count += 1
+    return count`

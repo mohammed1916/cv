@@ -24,7 +24,7 @@ export function buildTrace(graph) {
     color[t][c][c] = 2; queue.push([c, c, t, 2])
   }
   const snap = () => ({ mouseTurn: color[1].map(r => r.map(v => SYMBOL[v])), catTurn: color[2].map(r => r.map(v => SYMBOL[v])), queueLength: queue.length })
-  const frames = [{ phase: 'start', activeLine: at('queue = deque()'), ...snap(), colored: [], message: 'Seed the known outcomes: mouse in the hole (0) is a mouse win, and cat on the mouse is a cat win, for either player to move.' }]
+  const frames = [{ phase: 'start', activeLine: at('Let n be the number'), ...snap(), colored: [], message: 'Seed the known outcomes: mouse in the hole (0) is a mouse win, and cat on the mouse is a cat win, for either player to move.' }]
   let head = 0
   while (head < queue.length) {
     const [m, c, t, res] = queue[head++]
@@ -43,21 +43,36 @@ export function buildTrace(graph) {
         } else notes.push(`(mouse ${pm}, cat ${pc}, ${pt === 1 ? 'mouse' : 'cat'} to move) loses one escape move (${degree[pt][pm][pc]} left)`)
       }
     }
-    frames.push({ phase: 'propagate', activeLine: at('for pm, pc, pt in parents'), ...snap(), turn: t, cell: [m, c], colored,
+    frames.push({ phase: 'propagate', activeLine: at('for each parent state'), ...snap(), turn: t, cell: [m, c], colored,
       message: `Pop state (mouse ${m}, cat ${c}, ${t === 1 ? 'mouse' : 'cat'} to move) = ${res === 1 ? 'mouse win' : 'cat win'}. ${notes.length ? notes.join('; ') + '.' : 'No predecessor changes.'}` })
   }
   const result = color[1][1][2]
-  frames.push({ phase: 'done', activeLine: at('return color.get'), ...snap(), turn: 1, cell: [1, 2], colored: [], message: result === 0 ? 'The start state (mouse 1, cat 2) never got a forced result: draw.' : `The start state is a forced ${result === 1 ? 'mouse' : 'cat'} win.` })
+  frames.push({ phase: 'done', activeLine: at('return the color of'), ...snap(), turn: 1, cell: [1, 2], colored: [], message: result === 0 ? 'The start state (mouse 1, cat 2) never got a forced result: draw.' : `The start state is a forced ${result === 1 ? 'mouse' : 'cat'} win.` })
   return { input: graph, result, frames }
 }
-export const code = `def catMouseGame(graph):
+export const code = `Let n be the number of nodes; color and degree start empty, and the cat may never enter hole 0
+for each mouse node m and each cat node c from 1 to n - 1
+  set degree of (m, c, mouse to move) to the number of mouse moves from m
+  set degree of (m, c, cat to move) to the number of cat moves from c that avoid hole 0
+Seed the queue with known results for both turns: mouse in hole 0 is a mouse win (1), cat on the mouse is a cat win (2)
+while the queue is not empty
+  pop state (m, c, t) with result res
+  for each parent state (pm, pc, pt) of (m, c, t)
+    if (pm, pc, pt) is already colored, skip it
+    if pt equals res, the player to move can take this winning move: color it res and queue it
+    otherwise decrement degree of (pm, pc, pt), and if it reaches 0 color it res and queue it
+return the color of (mouse 1, cat 2, mouse to move), where 0 means a draw`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `from collections import deque
+
+def cat_mouse_game(graph):
     n = len(graph)
     color = {}
     degree = {}
     for m in range(n):
         for c in range(1, n):
             degree[m, c, 1] = len(graph[m])
-            degree[m, c, 2] = len(graph[c]) - (0 in graph[c])
+            degree[m, c, 2] = len([x for x in graph[c] if x != 0])
     def parents(m, c, t):
         if t == 2:
             return [(pm, c, 1) for pm in graph[m]]
@@ -82,4 +97,4 @@ export const code = `def catMouseGame(graph):
                 if degree[pm, pc, pt] == 0:
                     color[pm, pc, pt] = res
                     queue.append((pm, pc, pt, res))
-    return color.get((1, 2, 1), 0)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return color.get((1, 2, 1), 0)`

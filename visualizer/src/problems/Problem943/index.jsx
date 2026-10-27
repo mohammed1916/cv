@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'build', label: 'Build string', description: 'Append each word minus its overlap.' },
     { id: 'done', label: 'Complete', description: 'Return the superstring.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Words (JSON array)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Words (JSON array)',
   url: 'https://leetcode.com/problems/find-the-shortest-superstring/',
   complexity: 'O(2^n * n^2) time, O(2^n * n) space. The visualization caps words at 8.',
   examples: [

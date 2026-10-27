@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'filter', label: 'Filter', description: 'Discard values larger than n.' },
     { id: 'done', label: 'Complete', description: 'Return the beautiful array.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'n (JSON integer)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'n (JSON integer)',
   url: 'https://leetcode.com/problems/beautiful-array/',
   complexity: 'O(n) time and space (the array doubles each round). The visualization caps n at 200.',
   examples: [{ label: 'Example 1', input: '4' }, { label: 'Example 2', input: '5' }, { label: 'n = 11', input: '11' }],

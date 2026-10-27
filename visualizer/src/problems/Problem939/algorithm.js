@@ -14,7 +14,7 @@ export function parseInput(text) {
 export function buildTrace(points) {
   const seen = new Set(points.map(p => p.join(',')))
   let best = Infinity, bestRect = null
-  const frames = [{ phase: 'start', activeLine: 2, i: -1, j: -1, best: null, bestRect, message: 'Put every point in a hash set so any corner can be checked in O(1).' }]
+  const frames = [{ phase: 'start', activeLine: L('Put every point in a hash set'), i: -1, j: -1, best: null, bestRect, message: 'Put every point in a hash set so any corner can be checked in O(1).' }]
   for (let i = 0; i < points.length; i++) {
     const [x1, y1] = points[i]
     for (let j = 0; j < i; j++) {
@@ -24,19 +24,28 @@ export function buildTrace(points) {
       if (diagonal && has1 && has2) {
         const area = Math.abs(x1 - x2) * Math.abs(y1 - y2)
         if (area < best) { best = area; bestRect = [x1, y1, x2, y2] }
-        frames.push({ phase: 'found', activeLine: 9, i, j, best, bestRect, area, message: `(${x1},${y1}) and (${x2},${y2}) are diagonal corners and both (${x1},${y2}), (${x2},${y1}) exist: area ${area}. Best is ${best}.` })
+        frames.push({ phase: 'found', activeLine: L('set best to the smaller of'), i, j, best, bestRect, area, message: `(${x1},${y1}) and (${x2},${y2}) are diagonal corners and both (${x1},${y2}), (${x2},${y1}) exist: area ${area}. Best is ${best}.` })
       } else {
-        frames.push({ phase: 'check', activeLine: 8, i, j, best: best === Infinity ? null : best, bestRect,
+        frames.push({ phase: 'check', activeLine: L('if x1 is not x2'), i, j, best: best === Infinity ? null : best, bestRect,
           message: !diagonal ? `(${x1},${y1}) and (${x2},${y2}) share an x or y: they cannot be opposite corners.` : `Missing corner ${!has1 ? `(${x1},${y2})` : `(${x2},${y1})`}: no rectangle with these diagonal corners.` })
       }
     }
   }
   const result = best === Infinity ? 0 : best
-  frames.push({ phase: 'done', activeLine: 10, i: -1, j: -1, best: result, bestRect, message: result ? `Minimum rectangle area is ${result}.` : 'No axis-parallel rectangle exists: return 0.' })
+  frames.push({ phase: 'done', activeLine: L('return 0 if best'), i: -1, j: -1, best: result, bestRect, message: result ? `Minimum rectangle area is ${result}.` : 'No axis-parallel rectangle exists: return 0.' })
   return { input: points.map(p => [...p]), result, frames }
 }
 
-export const code = `def minAreaRect(points):
+export const code = `Put every point in a hash set seen, so any corner can be checked in O(1)
+set best to infinity
+for each point i = (x1, y1)
+  for each earlier point j = (x2, y2)
+    if x1 is not x2 and y1 is not y2 and (x1, y2) and (x2, y1) are both in seen
+      set best to the smaller of best and abs(x1 - x2) * abs(y1 - y2)
+return 0 if best is still infinity, otherwise best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def min_area_rect(points):
     seen = set(map(tuple, points))
     best = float('inf')
     for i in range(len(points)):
@@ -45,4 +54,4 @@ export const code = `def minAreaRect(points):
             x2, y2 = points[j]
             if x1 != x2 and y1 != y2 and (x1, y2) in seen and (x2, y1) in seen:
                 best = min(best, abs(x1 - x2) * abs(y1 - y2))
-    return 0 if best == float('inf') else best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return 0 if best == float('inf') else best`

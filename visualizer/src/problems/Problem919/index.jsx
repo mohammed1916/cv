@@ -3,7 +3,7 @@ import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
 import OperationLog from '../../components/shared/OperationLog'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { treeFromLevelOrder } from '../../components/shared/treeLayout.js'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'root', label: 'get_root', description: 'Return the root.' },
     { id: 'done', label: 'Complete', description: 'All operations finished.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {tree, ops} (JSON)',
   url: 'https://leetcode.com/problems/complete-binary-tree-inserter/',
   complexity: 'O(n) constructor, O(1) per insert and get_root. The tree is a level-order list without nulls; at most 63 nodes in total.',

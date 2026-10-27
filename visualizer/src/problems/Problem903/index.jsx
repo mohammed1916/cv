@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'decrease', label: 'D step', description: 'New rank j sums old ranks from j upward.' },
     { id: 'done', label: 'Complete', description: 'Sum the final row.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'DI string s (JSON)',
   url: 'https://leetcode.com/problems/valid-permutations-for-di-sequence/',
   complexity: 'O(n^2) time and O(n) space (the visualization keeps each row; s is capped at 100 characters).',

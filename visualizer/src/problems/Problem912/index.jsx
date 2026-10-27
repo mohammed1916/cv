@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'place', label: 'Merge write', description: 'Write the next smallest element into the range.' },
     { id: 'done', label: 'Complete', description: 'The array is sorted.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/sort-an-array/',
   complexity: 'O(n log n) time, O(n) extra space, stable. The visualization caps the array at 64 values.',

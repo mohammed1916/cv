@@ -12,7 +12,7 @@ export function buildTrace({ stamp, target }) {
   const t = [...target]
   const res = []
   let stars = 0
-  const frames = [{ phase: 'start', activeLine: 4, t: t.join(''), window: null, stars, res: [], message: `Think in reverse: the last stamp fully shows its letters, so find a window equal to "${stamp}" and replace it with wildcards '?'.` }]
+  const frames = [{ phase: 'start', activeLine: L('Let m and n be the lengths'), t: t.join(''), window: null, stars, res: [], message: `Think in reverse: the last stamp fully shows its letters, so find a window equal to "${stamp}" and replace it with wildcards '?'.` }]
   let changed = true
   let pass = 0
   while (changed && stars < n) {
@@ -26,20 +26,33 @@ export function buildTrace({ stamp, target }) {
         for (let j = 0; j < m; j++) if (t[i + j] !== '?') { t[i + j] = '?'; stars++ }
         res.push(i)
         changed = true
-        frames.push({ phase: 'erase', activeLine: 18, t: t.join(''), window: i, stars, res: [...res], pass, message: `Window at ${i} matches the stamp (wildcards match anything) and still has real letters: stamp it last, turning them into '?'. Wildcards so far: ${stars}.` })
+        frames.push({ phase: 'erase', activeLine: L('set each non-'), t: t.join(''), window: i, stars, res: [...res], pass, message: `Window at ${i} matches the stamp (wildcards match anything) and still has real letters: stamp it last, turning them into '?'. Wildcards so far: ${stars}.` })
       } else {
-        frames.push({ phase: 'check', activeLine: 11, t: t.join(''), window: i, stars, res: [...res], pass,
+        frames.push({ phase: 'check', activeLine: L('let k be the count of leading'), t: t.join(''), window: i, stars, res: [...res], pass,
           message: k === m ? `Window at ${i} is already all wildcards: nothing to undo.` : `Window at ${i} fails at offset ${k}: '${t[i + k]}' vs '${stamp[k]}'.` })
       }
     }
   }
   const ok = stars === n
   const result = ok ? [...res].reverse() : []
-  frames.push({ phase: 'done', activeLine: 20, t: t.join(''), window: null, stars, res: result, pass, message: ok ? `All ${n} positions are wildcards. Reversing the removal order gives the stamping order: [${result.join(', ')}].` : 'No more windows can be removed but letters remain: impossible, return [].' })
+  frames.push({ phase: 'done', activeLine: L('if stars equals n'), t: t.join(''), window: null, stars, res: result, pass, message: ok ? `All ${n} positions are wildcards. Reversing the removal order gives the stamping order: [${result.join(', ')}].` : 'No more windows can be removed but letters remain: impossible, return [].' })
   return { input: { stamp, target }, result, frames }
 }
 
-export const code = `def movesToStamp(stamp, target):
+export const code = `Let m and n be the lengths of stamp and target, t be the target as a list, res be empty, and stars be 0
+Let changed be true
+while changed is true and stars is less than n
+  set changed to false
+  for each window start i from 0 to n - m
+    let k be the count of leading positions where t[i + k] is '?' or equals stamp[k]
+    if k equals m and the window still has a letter (not all '?')
+      set each non-'?' letter in the window to '?' and add the count to stars
+      append i to res
+      set changed to true
+if stars equals n, return res reversed, otherwise return []`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def moves_to_stamp(stamp, target):
     m, n = len(stamp), len(target)
     t = list(target)
     res = []
@@ -58,4 +71,4 @@ export const code = `def movesToStamp(stamp, target):
                         stars += 1
                 res.append(i)
                 changed = True
-    return res[::-1] if stars == n else []`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return res[::-1] if stars == n else []`

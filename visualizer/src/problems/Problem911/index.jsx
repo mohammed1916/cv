@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'query', label: 'Query', description: 'Binary search the last vote time at or before t.' },
     { id: 'done', label: 'Complete', description: 'All queries answered.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {persons, times, queries} (JSON)',
   url: 'https://leetcode.com/problems/online-election/',
   complexity: 'O(n) construction and O(log n) per query. Inputs are capped at 60 votes and 40 queries.',

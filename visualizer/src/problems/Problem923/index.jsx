@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'pairs', label: 'Equal block', description: 'Sum matches with j and k on equal values: count pairs in the block.' },
     { id: 'done', label: 'Complete', description: 'Return the count modulo 10^9 + 7.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {arr, target} (JSON)',
   url: 'https://leetcode.com/problems/3sum-with-multiplicity/',
   complexity: 'O(n^2) time after sorting, O(1) extra space. arr is capped at 40 values here.',

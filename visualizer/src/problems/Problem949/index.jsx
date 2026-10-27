@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'better', label: 'New best', description: 'A valid time later than every earlier one.' },
     { id: 'done', label: 'Complete', description: 'Return the best time or an empty string.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Digits (JSON array of 4)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Digits (JSON array of 4)',
   url: 'https://leetcode.com/problems/largest-time-for-given-digits/',
   complexity: 'O(4!) = O(1) time and space.',
   examples: [

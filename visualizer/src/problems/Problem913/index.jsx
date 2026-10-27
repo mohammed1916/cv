@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'propagate', label: 'Propagate', description: 'Pop a decided state and update its predecessors.' },
     { id: 'done', label: 'Complete', description: 'Read the result of the starting state.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Graph adjacency list (JSON)',
   url: 'https://leetcode.com/problems/cat-and-mouse/',
   complexity: 'O(n^3) time and O(n^2) space for n nodes (states times moves). Graphs are capped at 16 nodes.',

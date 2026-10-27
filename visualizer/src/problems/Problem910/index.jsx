@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'improve', label: 'New best', description: 'This split beats the best range so far.' },
     { id: 'done', label: 'Complete', description: 'Return the smallest range.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Object {nums, k} (JSON)',
   url: 'https://leetcode.com/problems/smallest-range-ii/',
   complexity: 'O(n log n) time for the sort, then O(n) for the splits. nums is capped at 100 values.',

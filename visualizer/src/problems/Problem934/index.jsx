@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
 import GraphTraversalView from '../../components/shared/GraphTraversalView'
 import { cellName } from '../../components/shared/graphTraversalModel'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'found', label: 'Touch', description: 'The frontier reaches the second island.' },
     { id: 'done', label: 'Complete', description: 'Return the number of flips.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Grid (JSON 0/1 matrix)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid (JSON 0/1 matrix)',
   url: 'https://leetcode.com/problems/shortest-bridge/',
   complexity: 'O(n^2) time and space. The visualization caps the grid at 12x12.',
   examples: [

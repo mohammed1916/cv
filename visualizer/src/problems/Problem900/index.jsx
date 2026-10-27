@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -12,7 +12,7 @@ const definition = {
     { id: 'exhaust', label: 'Exhausted', description: 'No runs left: return -1.' },
     { id: 'done', label: 'Complete', description: 'All calls processed.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Operations (LeetCode JSON: names, args)',
   url: 'https://leetcode.com/problems/rle-iterator/',
   complexity: 'Amortised O(1) per call: the pointer only moves forward over each run once. O(len(encoding)) space.',
