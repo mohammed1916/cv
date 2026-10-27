@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'update', label: 'Update range', description: 'Widen the tracked extremes.' },
     { id: 'done', label: 'Complete', description: 'Return the best distance.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Arrays (JSON array of arrays)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Arrays (JSON array of arrays)',
   url: 'https://leetcode.com/problems/maximum-distance-in-arrays/',
   complexity: 'O(total length) time and O(1) extra space: only the running minimum and maximum are kept.',
   examples: [

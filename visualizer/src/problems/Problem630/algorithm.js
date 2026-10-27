@@ -14,31 +14,43 @@ export function buildTrace(courses) {
   const taken = []
   const heap = new TracedHeap((a, b) => b - a, { order: 'max' })
   const hv = () => heapView(heap, { title: 'Max-heap of taken durations (root = longest, the one to drop)' }).heap
-  const frames = [{ phase: 'start', time, taken: [], course: null, heapState: hv(), activeLine: 2, message: 'Process courses in order of their last day.' }]
+  const frames = [{ phase: 'start', time, taken: [], course: null, heapState: hv(), activeLine: L('sort the courses'), message: 'Process courses in order of their last day.' }]
   for (const course of sorted) {
     time += course.duration
     taken.push(course)
     heap.push(course.duration)
-    frames.push({ phase: 'take', time, taken: taken.map(c => c.duration), course, heapState: hv(), activeLine: 5, message: `Take [${course.duration}, ${course.last}]; finish time ${time}.` })
+    frames.push({ phase: 'take', time, taken: taken.map(c => c.duration), course, heapState: hv(), activeLine: L('add duration to time'), message: `Take [${course.duration}, ${course.last}]; finish time ${time}.` })
     if (time > course.last) {
       let longest = 0
       for (let i = 1; i < taken.length; i++) if (taken[i].duration > taken[longest].duration) longest = i
       const dropped = taken.splice(longest, 1)[0]
       heap.pop()
       time -= dropped.duration
-      frames.push({ phase: 'drop', time, taken: taken.map(c => c.duration), course: dropped, heapState: hv(), activeLine: 8, message: `Past its deadline. Drop the longest course taken so far, duration ${dropped.duration}; time ${time}.` })
+      frames.push({ phase: 'drop', time, taken: taken.map(c => c.duration), course: dropped, heapState: hv(), activeLine: L('pop the longest'), message: `Past its deadline. Drop the longest course taken so far, duration ${dropped.duration}; time ${time}.` })
     }
   }
   const result = taken.length
-  frames.push({ phase: 'done', time, taken: taken.map(c => c.duration), course: null, result, heapState: hv(), activeLine: 10, message: `Maximum courses: ${result}.` })
+  frames.push({ phase: 'done', time, taken: taken.map(c => c.duration), course: null, result, heapState: hv(), activeLine: L('return the number'), message: `Maximum courses: ${result}.` })
   return { input: courses, result, frames }
 }
 
-export const code = `def scheduleCourse(courses):
-    time, heap = 0, []
+export const code = `sort the courses by last day, earliest first
+set time to 0 and keep a max-heap of the durations taken
+for each course with a duration and a last day:
+  add duration to time and push duration onto the heap
+  if time is greater than last day:
+    pop the longest duration from the heap and subtract it from time
+return the number of durations left in the heap`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `import heapq
+
+def schedule_course(courses):
+    time = 0
+    heap = []
     for duration, last in sorted(courses, key=lambda c: c[1]):
         time += duration
         heapq.heappush(heap, -duration)
         if time > last:
             time += heapq.heappop(heap)
-    return len(heap)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return len(heap)`

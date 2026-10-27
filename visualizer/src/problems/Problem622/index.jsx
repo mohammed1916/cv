@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'query', label: 'Query', description: 'Read front, rear, or the empty/full state.' },
     { id: 'done', label: 'Complete', description: 'All operations have run.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Queue and operations (JSON object with k and ops)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Queue and operations (JSON object with k and ops)',
   url: 'https://leetcode.com/problems/design-circular-queue/',
   complexity: 'O(1) time per operation and O(k) space for the fixed ring.',
   examples: [

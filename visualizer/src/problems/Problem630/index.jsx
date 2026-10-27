@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import HeapView from '../../components/shared/HeapView'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'drop', label: 'Drop longest', description: 'Remove the longest taken course to meet the deadline.' },
     { id: 'done', label: 'Complete', description: 'Report the number of courses kept.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Courses (JSON array of [duration, lastDay])',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Courses (JSON array of [duration, lastDay])',
   url: 'https://leetcode.com/problems/course-schedule-iii/',
   complexity: 'O(n log n) time with a heap (the visualization scans for the maximum, so it is O(n²) for display). O(n) space.',
   examples: [
