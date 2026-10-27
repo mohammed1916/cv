@@ -2,7 +2,7 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IntervalView from '../../components/shared/IntervalView'
 import { intervalView } from '../../components/shared/intervalModel.js'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'reject', label: 'Reject', description: 'It would create a triple booking.' },
     { id: 'done', label: 'Complete', description: 'All bookings processed.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Bookings (JSON array of [start, end))',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bookings (JSON array of [start, end))',
   url: 'https://leetcode.com/problems/my-calendar-ii/',
   complexity: 'O(n) per booking for this list version; ordered maps give O(log n) plus overlap work.',
   examples: [

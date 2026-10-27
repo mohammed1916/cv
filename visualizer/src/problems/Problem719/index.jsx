@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -7,7 +7,7 @@ const definition = {
     { id: 'count', label: 'Count pairs', description: 'Count pairs within the midpoint distance.' },
     { id: 'done', label: 'Complete', description: 'The search has converged.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Input (JSON object with nums and k)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Input (JSON object with nums and k)',
   url: 'https://leetcode.com/problems/find-k-th-smallest-pair-distance/',
   complexity: 'O(n log n + n · log W) time, where W is the value range, and O(1) extra space after sorting.',
   examples: [

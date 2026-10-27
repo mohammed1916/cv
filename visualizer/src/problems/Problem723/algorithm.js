@@ -42,32 +42,45 @@ function gravity(board) {
 
 export function buildTrace(start) {
   let board = copy(start)
-  const frames = [{ phase: 'start', activeLine: L('crushed = set()'), board: copy(board), crushed: [], round: 0, message: 'Look for three or more equal candies in a row or column.' }]
+  const frames = [{ phase: 'start', activeLine: L('set crushed to an empty set'), board: copy(board), crushed: [], round: 0, message: 'Look for three or more equal candies in a row or column.' }]
   let round = 0
   for (;;) {
     const crushed = crushable(board)
     if (crushed.length === 0) break
     round++
-    frames.push({ phase: 'mark', activeLine: L('crushed |='), board: copy(board), crushed, round, message: `Round ${round}: ${crushed.length} candies are part of a run of three and are crushed.` })
+    frames.push({ phase: 'mark', activeLine: L('add those three cells to crushed'), board: copy(board), crushed, round, message: `Round ${round}: ${crushed.length} candies are part of a run of three and are crushed.` })
     for (const [r, c] of crushed) board[r][c] = 0
-    frames.push({ phase: 'clear', activeLine: L('for r, c in crushed'), board: copy(board), crushed: [], round, message: 'Crushed cells become empty.' })
+    frames.push({ phase: 'clear', activeLine: L('set each cell in crushed to empty'), board: copy(board), crushed: [], round, message: 'Crushed cells become empty.' })
     board = gravity(board)
-    frames.push({ phase: 'drop', activeLine: L('column = [board'), board: copy(board), crushed: [], round, message: 'Candies above fall into the empty cells below them.' })
+    frames.push({ phase: 'drop', activeLine: L('stack the non-empty candies'), board: copy(board), crushed: [], round, message: 'Candies above fall into the empty cells below them.' })
   }
-  frames.push({ phase: 'done', activeLine: L('return board'), board: copy(board), crushed: [], round, message: `Stable after ${round} round(s).` })
+  frames.push({ phase: 'done', activeLine: L('return the board'), board: copy(board), crushed: [], round, message: `Stable after ${round} round(s).` })
   return { input: start, result: board, frames }
 }
 
-export const code = `def candyCrush(board):
+export const code = `set rows and cols to the board height and width
+repeat forever
+  set crushed to an empty set
+  for each cell (r, c) on the board
+    if a non-empty cell matches the next two cells to its right, add those three cells to crushed
+    if a non-empty cell matches the next two cells below it, add those three cells to crushed
+  if crushed is empty then stop repeating
+  set each cell in crushed to empty
+  for each column c
+    stack the non-empty candies of column c at the bottom, keeping their order
+return the board`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def candy_crush(board):
+    board = [row[:] for row in board]
     rows, cols = len(board), len(board[0])
     while True:
         crushed = set()
         for r in range(rows):
             for c in range(cols):
                 v = board[r][c]
-                if v and c + 2 < cols and board[r][c + 1] == v == board[r][c + 2]:
+                if v and c + 2 < cols and board[r][c + 1] == v and board[r][c + 2] == v:
                     crushed |= {(r, c), (r, c + 1), (r, c + 2)}
-                if v and r + 2 < rows and board[r + 1][c] == v == board[r + 2][c]:
+                if v and r + 2 < rows and board[r + 1][c] == v and board[r + 2][c] == v:
                     crushed |= {(r, c), (r + 1, c), (r + 2, c)}
         if not crushed:
             return board
@@ -78,5 +91,5 @@ export const code = `def candyCrush(board):
             for r in range(rows):
                 board[r][c] = 0
             for i, v in enumerate(column):
-                board[rows - len(column) + i][c] = v`.split('\n').map((text, index) => ({ line: index + 1, text }))
+                board[rows - len(column) + i][c] = v`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1

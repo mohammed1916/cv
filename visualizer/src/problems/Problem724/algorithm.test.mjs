@@ -23,5 +23,7 @@ test('724 random arrays match the first index with equal side sums', () => {
 })
 
 test('724 rejects non-integers', () => {
-  assert.throws(() => parseInput('[1.5]'))
+  assert.throws(() => parseInput('{"nums":[1.5]}'))
+  assert.throws(() => parseInput('[1, 2]'))
+  assert.deepEqual(parseInput('{"nums":[1, 2]}'), [1, 2])
 })

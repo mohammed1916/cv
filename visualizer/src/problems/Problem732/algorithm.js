@@ -17,7 +17,7 @@ export function buildTrace(ops) {
   const xs = [...new Set(ops.flat())].sort((a, b) => a - b)
   const seg = new SegTree(Math.max(1, xs.length - 1), 'max-add')
   const segView = () => ({ seg: { ...seg.snapshot(), coords: xs, title: 'Segment tree of overlap counts (max, lazy add)' } })
-  const frames = [{ phase: 'start', delta: [], best: 0, op: null, activeLine: 2, ...segView(), message: 'Empty calendar: maximum overlap 0.' }]
+  const frames = [{ phase: 'start', delta: [], best: 0, op: null, activeLine: 1, ...segView(), message: 'Empty calendar: maximum overlap 0.' }]
   ops.forEach(([s, e], i) => {
     delta.set(s, (delta.get(s) ?? 0) + 1)
     delta.set(e, (delta.get(e) ?? 0) - 1)
@@ -26,20 +26,28 @@ export function buildTrace(ops) {
     for (const p of points) { running += delta.get(p); best = Math.max(best, running) }
     results.push(best)
     seg.update(xs.indexOf(s), xs.indexOf(e) - 1, 1)
-    frames.push({ phase: 'add', op: i, attempt: [s, e], delta: points.map(p => [p, delta.get(p)]), best, result: results.slice(), activeLine: 6, ...segView(), message: `[${s}, ${e}) added: the maximum overlap is now ${best}.` })
+    frames.push({ phase: 'add', op: i, attempt: [s, e], delta: points.map(p => [p, delta.get(p)]), best, result: results.slice(), activeLine: 5, ...segView(), message: `[${s}, ${e}) added: the maximum overlap is now ${best}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, delta: [...delta.keys()].sort((a, b) => a - b).map(p => [p, delta.get(p)]), best: results.at(-1), result: results, activeLine: 9, ...segView(), message: `Maximum overlaps: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', op: ops.length - 1, delta: [...delta.keys()].sort((a, b) => a - b).map(p => [p, delta.get(p)]), best: results.at(-1), result: results, activeLine: 7, ...segView(), message: `Maximum overlaps: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 
-export const code = `class MyCalendarThree:
-    def __init__(self):
-        self.delta = defaultdict(int)
-    def book(self, start, end):
-        self.delta[start] += 1
-        self.delta[end] -= 1
+export const code = `set delta to an empty map of point changes, and results to an empty list
+for each booking [s, e] in order
+  add +1 to delta at s
+  subtract 1 from delta at e
+  sweep the points in sorted order, tracking the running total and its largest value best
+  append best to results
+return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def my_calendar_three(bookings):
+    delta, results = {}, []
+    for s, e in bookings:
+        delta[s] = delta.get(s, 0) + 1
+        delta[e] = delta.get(e, 0) - 1
         best = running = 0
-        for p in sorted(self.delta):
-            running += self.delta[p]
+        for p in sorted(delta):
+            running += delta[p]
             best = max(best, running)
-        return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        results.append(best)
+    return results`

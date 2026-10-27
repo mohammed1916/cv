@@ -17,14 +17,29 @@ export function buildTrace({ nums1, nums2 }) {
       dp[i][j] = dp[i - 1][j - 1] + 1
       if (dp[i][j] > best) { best = dp[i][j]; bestEnd = [i, j] }
     }
-    frames.push({ phase: nums1[i - 1] === nums2[j - 1] ? 'match' : 'mismatch', row: i, column: j, table: dp.map(r => [...r]), best, activeLine: nums1[i - 1] === nums2[j - 1] ? 6 : 8,
+    frames.push({ phase: nums1[i - 1] === nums2[j - 1] ? 'match' : 'mismatch', row: i, column: j, table: dp.map(r => [...r]), best, activeLine: nums1[i - 1] === nums2[j - 1] ? 7 : 9,
       message: nums1[i - 1] === nums2[j - 1] ? `${nums1[i - 1]} = ${nums2[j - 1]}: extend the run to ${dp[i][j]}.` : `${nums1[i - 1]} ≠ ${nums2[j - 1]}: the run resets to 0.` })
   }
   frames.push({ phase: 'done', row: bestEnd[0], column: bestEnd[1], table: dp.map(r => [...r]), best, result: best, activeLine: 10, message: `Longest common subarray: ${best}.` })
   return { input: { nums1, nums2 }, result: best, frames }
 }
 
-export const code = `def findLength(nums1, nums2):
+export const code = `create table dp with one extra row and column, all zeros
+set best to 0
+for each i from 1 to the length of nums1
+  for each j from 1 to the length of nums2
+    compare nums1[i - 1] with nums2[j - 1]
+    if they are equal then
+      set dp[i][j] to dp[i - 1][j - 1] plus 1
+      set best to the larger of best and dp[i][j]
+    otherwise leave dp[i][j] at zero
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The scan-family visualizer reports its own step numbers (1 setup, 3 compare, 4 update, 5 return).
+// This maps them onto the pseudocode lines above.
+export const LINE_MAP = { 1: 2, 3: 5, 4: 7, 5: 10 }
+
+export const python = `def find_length(nums1, nums2):
     dp = [[0] * (len(nums2) + 1) for _ in range(len(nums1) + 1)]
     best = 0
     for i in range(1, len(nums1) + 1):
@@ -32,4 +47,4 @@ export const code = `def findLength(nums1, nums2):
             if nums1[i - 1] == nums2[j - 1]:
                 dp[i][j] = dp[i - 1][j - 1] + 1
                 best = max(best, dp[i][j])
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return best`

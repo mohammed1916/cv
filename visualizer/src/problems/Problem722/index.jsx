@@ -1,5 +1,5 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'drop', label: 'Drop line', description: 'The line is empty once comments are removed.' },
     { id: 'done', label: 'Complete', description: 'Return the remaining lines.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Source lines (JSON array of strings)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Source lines (JSON array of strings)',
   url: 'https://leetcode.com/problems/remove-comments/',
   complexity: 'O(total characters) time and O(total characters) space for the output.',
   examples: [

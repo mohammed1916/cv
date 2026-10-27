@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'best', label: 'Update best', description: 'Keep the shortest completing word, first on ties.' },
     { id: 'done', label: 'Complete', description: 'Return the shortest completing word.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Plate and words (JSON)',
   url: 'https://leetcode.com/problems/shortest-completing-word/',
   complexity: 'O(total letters of words) time with a 26-letter counter; the trace shows one frame set per word (capped at 40 words).',

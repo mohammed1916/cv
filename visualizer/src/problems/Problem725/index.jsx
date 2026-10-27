@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import ListPointerView from '../../components/shared/ListPointerView'
 import LinkedListLane from '../../components/shared/LinkedListLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'cut', label: 'Cut part', description: 'Take the next run of nodes as one part.' },
     { id: 'done', label: 'Complete', description: 'Return all parts, empty ones included.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'List and k (JSON object with values and k)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'List and k (JSON object with values and k)',
   url: 'https://leetcode.com/problems/split-linked-list-in-parts/',
   complexity: 'O(n + k) time and O(k) space for the part heads.',
   examples: [

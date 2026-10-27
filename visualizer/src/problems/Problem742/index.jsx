@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import BinaryTreeLane from '../../components/shared/BinaryTreeLane'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'expand', label: 'Expand', description: 'Queue the children and the parent of each non-leaf node.' },
     { id: 'found', label: 'Leaf', description: 'The first leaf dequeued is the closest.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Tree (JSON level order) and k',
   url: 'https://leetcode.com/problems/closest-leaf-in-a-binary-tree/',
   complexity: 'O(n) time and space. The visualization caps input at 30 nodes.',

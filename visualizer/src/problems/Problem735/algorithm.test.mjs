@@ -34,5 +34,7 @@ test('735 random asteroids match repeated adjacent-pair elimination', () => {
 })
 
 test('735 rejects zero', () => {
-  assert.throws(() => parseInput('[0]'))
+  assert.throws(() => parseInput('{"asteroids":[0]}'))
+  assert.throws(() => parseInput('[5]'))
+  assert.deepEqual(parseInput('{"asteroids":[5, -3]}'), [5, -3])
 })

@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -13,7 +13,7 @@ const definition = {
     { id: 'combine', label: 'Combine', description: 'Finish an add, mult or let and return its value.' },
     { id: 'done', label: 'Complete', description: 'Return the overall value.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Expression (JSON string)',
   url: 'https://leetcode.com/problems/parse-lisp-expression/',
   complexity: 'O(n * d) time for n tokens and scope depth d. The visualization caps the expression at 300 characters.',

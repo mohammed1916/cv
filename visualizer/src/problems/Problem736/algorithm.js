@@ -1,4 +1,21 @@
-export const code = `def evaluate(expression):
+export const code = `set tokens to the expression with parentheses padded by spaces, then split on spaces
+set pos to 0, and scopes to one empty scope
+define value() to read the token at pos
+  if the token is not "(", advance pos
+    if the token is a name, return the lookup of the name, searching scopes from innermost outward
+    otherwise return the integer literal
+  otherwise advance past "(" and read the operator op
+    if op is let, push a new scope, then loop:
+      while the next item is "(" or the item after it is ")"
+        result = value() for the final expression, then stop
+      otherwise name = tokens[pos], and advance pos
+        then scopes[-1][name] = value(), binding it in the innermost scope
+      pop the scope, so its variables vanish, and return the let result
+    otherwise, for add or mult, a = value() then b = value()
+      return a + b for add, or a * b for mult
+return value()`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def evaluate(expression):
     tokens = expression.replace('(', ' ( ').replace(')', ' ) ').split()
     pos = 0
     scopes = [{}]
@@ -36,7 +53,7 @@ export const code = `def evaluate(expression):
         pos += 1
         return result
 
-    return value()`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return value()`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function tokenize(expression) {
@@ -79,12 +96,12 @@ function buildFrames(tokens, record) {
       if (/^[a-z]/.test(tok)) {
         if (tok === 'let' || tok === 'add' || tok === 'mult') bail(`"${tok}" is a keyword, not a variable.`)
         const { value: v, level } = lookup(tok)
-        push('lookup', L('return lookup'), `Variable ${tok}: search scopes from innermost outward; found ${tok} = ${v} in scope ${level}.`, { depth, value: v, token: pos - 1 })
+        push('lookup', L('return the lookup of the name'), `Variable ${tok}: search scopes from innermost outward; found ${tok} = ${v} in scope ${level}.`, { depth, value: v, token: pos - 1 })
         return v
       }
       if (!/^-?[0-9]+$/.test(tok)) bail(`Invalid token "${tok}".`)
       const v = parseInt(tok, 10)
-      push('literal', L('return int(tok)'), `Integer literal ${v}.`, { depth, value: v, token: pos - 1 })
+      push('literal', L('return the integer literal'), `Integer literal ${v}.`, { depth, value: v, token: pos - 1 })
       return v
     }
     pos++
@@ -92,7 +109,7 @@ function buildFrames(tokens, record) {
     pos++
     if (op === 'let') {
       scopes.push({})
-      push('enter', L("if op == 'let'"), 'Enter a let: push a fresh scope. Variables bound here shadow outer ones until the let ends.', { depth, token: pos - 1 })
+      push('enter', L('if op is let'), 'Enter a let: push a fresh scope. Variables bound here shadow outer ones until the let ends.', { depth, token: pos - 1 })
       let result
       for (;;) {
         if (at(pos) === '(' || at(pos + 1) === ')') {
@@ -110,7 +127,7 @@ function buildFrames(tokens, record) {
       }
       scopes.pop()
       pos++
-      push('combine', L('scopes.pop()'), `Close the let: pop its scope (its variables vanish). The let evaluates to ${result}.`, { depth, value: result, token: pos - 1 })
+      push('combine', L('pop the scope'), `Close the let: pop its scope (its variables vanish). The let evaluates to ${result}.`, { depth, value: result, token: pos - 1 })
       return result
     }
     if (op !== 'add' && op !== 'mult') bail(`Unknown operator "${op}".`)
@@ -119,10 +136,10 @@ function buildFrames(tokens, record) {
     const b = value(depth + 1)
     const result = op === 'add' ? a + b : a * b
     pos++
-    push('combine', L("result = a + b"), `${op}(${a}, ${b}) = ${result}.`, { depth, value: result, token: pos - 1 })
+    push('combine', L('return a + b for add'), `${op}(${a}, ${b}) = ${result}.`, { depth, value: result, token: pos - 1 })
     return result
   }
-  push('start', L('tokens ='), `Tokenise by padding parentheses with spaces: ${tokens.length} tokens. A stack of scopes starts with one empty scope.`, { token: -1 })
+  push('start', L('set tokens to'), `Tokenise by padding parentheses with spaces: ${tokens.length} tokens. A stack of scopes starts with one empty scope.`, { token: -1 })
   const result = value(0)
   if (pos !== tokens.length) bail('Unexpected tokens after the expression.')
   if (!Number.isSafeInteger(result)) bail('Result is too large.')

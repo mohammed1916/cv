@@ -25,5 +25,7 @@ test('720 random dictionaries match a direct prefix check', () => {
 })
 
 test('720 rejects uppercase words', () => {
-  assert.throws(() => parseInput('["Ab"]'))
+  assert.throws(() => parseInput('{"words":["Ab"]}'))
+  assert.throws(() => parseInput('["ab"]'))
+  assert.deepEqual(parseInput('{"words":["ab"]}'), ['ab'])
 })

@@ -14,27 +14,34 @@ export function buildTrace(spec) {
   const { s1, s2, pairs } = spec
   // Similarity is symmetric but not transitive: store each pair in both orders and nothing more.
   const similar = new Set(pairs.flatMap(([a, b]) => [`${a} ${b}`, `${b} ${a}`]))
-  const frames = [{ phase: 'start', activeLine: L('similar = {'), index: null, a: null, b: null, ok: null, message: 'Compare the sentences word by word. Equal words match; other words need a listed pair.' }]
+  const frames = [{ phase: 'start', activeLine: L('set similar to every listed pair'), index: null, a: null, b: null, ok: null, message: 'Compare the sentences word by word. Equal words match; other words need a listed pair.' }]
   if (s1.length !== s2.length) {
-    frames.push({ phase: 'fail', activeLine: L('return False'), index: null, a: null, b: null, ok: false, message: 'The sentences have different lengths, so they cannot be similar.' })
+    frames.push({ phase: 'fail', activeLine: L('lengths differ'), index: null, a: null, b: null, ok: false, message: 'The sentences have different lengths, so they cannot be similar.' })
     return { input: spec, s1, s2, result: false, frames }
   }
   for (let i = 0; i < s1.length; i++) {
     const a = s1[i], b = s2[i]
     const ok = a === b || similar.has(`${a} ${b}`)
-    frames.push({ phase: ok ? 'match' : 'fail', activeLine: L(ok ? 'if a != b' : 'return False'), index: i, a, b, ok, message: ok ? `${a} and ${b} are ${a === b ? 'equal' : 'a listed similar pair'}.` : `${a} and ${b} are neither equal nor a listed pair.` })
+    frames.push({ phase: ok ? 'match' : 'fail', activeLine: L(ok ? 'if a and b are equal' : 'otherwise return false'), index: i, a, b, ok, message: ok ? `${a} and ${b} are ${a === b ? 'equal' : 'a listed similar pair'}.` : `${a} and ${b} are neither equal nor a listed pair.` })
     if (!ok) return { input: spec, s1, s2, result: false, frames }
   }
-  frames.push({ phase: 'done', activeLine: L('return True'), index: null, a: null, b: null, ok: true, message: 'Every position matches, so the sentences are similar.' })
+  frames.push({ phase: 'done', activeLine: L('return true'), index: null, a: null, b: null, ok: true, message: 'Every position matches, so the sentences are similar.' })
   return { input: spec, s1, s2, result: true, frames }
 }
 
-export const code = `def areSentencesSimilar(sentence1, sentence2, similarPairs):
-    if len(sentence1) != len(sentence2):
+export const code = `set similar to every listed pair, in both orders
+if the lengths differ, return false
+for each position i, let a be s1[i] and b be s2[i]
+  if a and b are equal, or (a, b) is in similar, keep going
+  otherwise return false, because a and b are neither equal nor a listed pair
+return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def are_sentences_similar(s1, s2, pairs):
+    if len(s1) != len(s2):
         return False
-    similar = {(a, b) for a, b in similarPairs} | {(b, a) for a, b in similarPairs}
-    for a, b in zip(sentence1, sentence2):
+    similar = {(a, b) for a, b in pairs} | {(b, a) for a, b in pairs}
+    for a, b in zip(s1, s2):
         if a != b and (a, b) not in similar:
             return False
-    return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return True`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1

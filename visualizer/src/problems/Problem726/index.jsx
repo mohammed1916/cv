@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { StackLane } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'close', label: 'Close group', description: 'Multiply the group and add it to its parent.' },
     { id: 'done', label: 'Complete', description: 'Print atoms in sorted order.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Formula (JSON string)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Formula (JSON string)',
   url: 'https://leetcode.com/problems/number-of-atoms/',
   complexity: 'O(n log n) time with n characters: each atom is counted once, and the final sort is over distinct atoms.',
   examples: [

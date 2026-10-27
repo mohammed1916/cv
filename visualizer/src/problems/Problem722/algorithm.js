@@ -39,13 +39,43 @@ export function buildTrace(source) {
   return { input: source, result: out, frames }
 }
 
-export const code = `def removeComments(source):
+export const code = `set out to an empty list, block to closed, and cur to empty text
+for each line in source
+  set i to 0
+  while i is less than the length of line
+    if block is open, look for */; when found, close the block and skip two characters, otherwise skip one character
+    otherwise if the text at i is /* then open the block and skip two characters
+    otherwise if the text at i is // then stop reading this line
+    otherwise append the character at i to cur and move i forward by one
+  if block is still open then go on to the next line, keeping cur
+  if cur is not empty then append cur to out
+  otherwise drop this line because it is empty after removing comments
+  set cur to empty text
+return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def remove_comments(source):
     out, block = [], False
     cur = ''
     for line in source:
         i = 0
         while i < len(line):
-            ...  # '*/' ends a block, '/*' starts one, '//' ends the line
-        if not block and cur: out.append(cur)
+            if block:
+                if line.startswith('*/', i):
+                    block = False
+                    i += 2
+                else:
+                    i += 1
+            elif line.startswith('/*', i):
+                block = True
+                i += 2
+            elif line.startswith('//', i):
+                break
+            else:
+                cur += line[i]
+                i += 1
+        if block:
+            continue
+        if cur:
+            out.append(cur)
         cur = ''
-    return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return out`

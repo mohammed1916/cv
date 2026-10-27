@@ -12,12 +12,12 @@ export function buildTrace(ops) {
   const booked = []
   const doubled = []
   const results = []
-  const frames = [{ phase: 'start', booked: [], doubled: [], op: null, activeLine: 2, message: 'No bookings; no double bookings.' }]
+  const frames = [{ phase: 'start', booked: [], doubled: [], op: null, activeLine: 1, message: 'No bookings; no double bookings.' }]
   ops.forEach(([s, e], i) => {
     const clash = doubled.find(([ds, de]) => s < de && ds < e) ?? null
     if (clash) {
       results.push(false)
-      frames.push({ phase: 'reject', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 6, message: `[${s}, ${e}) would make a triple booking inside [${clash[0]}, ${clash[1]}).` })
+      frames.push({ phase: 'reject', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 4, message: `[${s}, ${e}) would make a triple booking inside [${clash[0]}, ${clash[1]}).` })
       return
     }
     for (const [bs, be] of booked) {
@@ -26,20 +26,30 @@ export function buildTrace(ops) {
     }
     booked.push([s, e])
     results.push(true)
-    frames.push({ phase: 'accept', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 8, message: `[${s}, ${e}) accepted; ${doubled.length} double-booked span${doubled.length === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'accept', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 6, message: `[${s}, ${e}) accepted; ${doubled.length} double-booked span${doubled.length === 1 ? '' : 's'}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), result: results, activeLine: 11, message: `Results: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', op: ops.length - 1, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), result: results, activeLine: 7, message: `Results: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 
-export const code = `class MyCalendarTwo:
-    def __init__(self):
-        self.books, self.overlaps = [], []
-    def book(self, start, end):
-        for s, e in self.overlaps:
-            if start < e and s < end: return False
-        for s, e in self.books:
-            if start < e and s < end:
-                self.overlaps.append((max(s, start), min(e, end)))
-        self.books.append((start, end))
-        return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set booked, doubled, and results to empty lists
+for each booking [s, e] in order
+  look for a doubled span [ds, de] where s is less than de and ds is less than e
+  if one overlaps, append false to results and refuse the booking
+  otherwise, for each earlier booking [bs, be] that overlaps [s, e], add the overlap to doubled
+  add [s, e] to booked and append true to results
+return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def my_calendar_two(bookings):
+    booked, doubled, results = [], [], []
+    for s, e in bookings:
+        if any(s < de and ds < e for ds, de in doubled):
+            results.append(False)
+            continue
+        for bs, be in booked:
+            lo, hi = max(s, bs), min(e, be)
+            if lo < hi:
+                doubled.append((lo, hi))
+        booked.append((s, e))
+        results.append(True)
+    return results`

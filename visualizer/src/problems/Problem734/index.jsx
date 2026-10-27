@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'fail', label: 'Mismatch', description: 'A position has neither equal words nor a listed pair.' },
     { id: 'done', label: 'Similar', description: 'Every position matched.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Sentences and similar pairs (JSON)',
   url: 'https://leetcode.com/problems/sentence-similarity/',
   complexity: 'O(n + p) time for n words and p pairs. The visualization caps input at 20 words and 20 pairs.',

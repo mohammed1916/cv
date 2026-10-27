@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'query', label: 'Query f', description: 'Look up suffix#prefix in the table.' },
     { id: 'done', label: 'Complete', description: 'All queries answered.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Words and queries (JSON)',
   url: 'https://leetcode.com/problems/prefix-and-suffix-search/',
   complexity: 'Constructor O(sum of len^3) time and O(sum of len^2) keys; each query O(len). Capped at 12 words of 7 letters and 20 queries.',

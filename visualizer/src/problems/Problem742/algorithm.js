@@ -42,11 +42,11 @@ export function buildTrace(spec) {
   const neighbours = node => [node.left, node.right, parent.get(node.id)].filter(Boolean)
   const queue = [start]
   const seen = new Set([start.id])
-  const frames = [{ phase: 'start', activeLine: L('queue = deque([target])'), node: start.id, queue: [start.value], visited: [start.id], message: `Start at ${spec.k} and search outward. Parent links count as edges.` }]
+  const frames = [{ phase: 'start', activeLine: L('set queue to the target'), node: start.id, queue: [start.value], visited: [start.id], message: `Start at ${spec.k} and search outward. Parent links count as edges.` }]
   while (queue.length) {
     const node = queue.shift()
     if (!node.left && !node.right) {
-      frames.push({ phase: 'found', activeLine: L('return node.val'), node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is a leaf at the smallest distance from ${spec.k}.` })
+      frames.push({ phase: 'found', activeLine: L('return its value'), node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is a leaf at the smallest distance from ${spec.k}.` })
       return { input: spec, root: treeFromLevelOrder(spec.arr), result: node.value, frames }
     }
     for (const next of neighbours(node)) {
@@ -54,12 +54,46 @@ export function buildTrace(spec) {
       seen.add(next.id)
       queue.push(next)
     }
-    frames.push({ phase: 'expand', activeLine: L('for nxt in'), node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is not a leaf: queue its unseen neighbours.` })
+    frames.push({ phase: 'expand', activeLine: L('for each neighbour nxt'), node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is not a leaf: queue its unseen neighbours.` })
   }
   throw new Error('A tree always has a leaf.')
 }
 
-export const code = `def findClosestLeaf(root, k):
+export const code = `build a parent link for every node, and find the target node whose value is k
+set queue to the target, and seen to the target
+while queue is not empty
+  remove the first node from queue
+  if the node has no left and no right child, return its value
+  for each neighbour nxt of the left child, the right child, and the parent
+    if nxt is not seen, mark it seen and add it to queue`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `from collections import deque
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def build_tree(arr):
+    if not arr or arr[0] is None:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    cursor = 1
+    for node in queue:
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.left = TreeNode(arr[cursor])
+            queue.append(node.left)
+        cursor += 1
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.right = TreeNode(arr[cursor])
+            queue.append(node.right)
+        cursor += 1
+    return root
+
+def find_closest_leaf(arr, k):
+    root = build_tree(arr)
     parent = {}
     target = None
     stack = [root]
@@ -80,5 +114,6 @@ export const code = `def findClosestLeaf(root, k):
         for nxt in (node.left, node.right, parent.get(node)):
             if nxt and nxt not in seen:
                 seen.add(nxt)
-                queue.append(nxt)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+                queue.append(nxt)
+    return None`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1

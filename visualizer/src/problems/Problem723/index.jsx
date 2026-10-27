@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -10,7 +10,7 @@ const definition = {
     { id: 'drop', label: 'Gravity', description: 'Candies fall into the empty cells below them.' },
     { id: 'done', label: 'Stable', description: 'No run of three remains.' },
   ],
-  parse: parseInput, build: buildTrace, code,
+  parse: parseInput, build: buildTrace, code, python,
   inputLabel: 'Board (JSON array of arrays, 0 = empty)',
   url: 'https://leetcode.com/problems/candy-crush/',
   complexity: 'Each round scans the board; the number of rounds is bounded by the board size. The visualization caps the board at 8 by 8.',

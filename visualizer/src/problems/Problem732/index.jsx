@@ -3,7 +3,7 @@ import IntervalView from '../../components/shared/IntervalView'
 import { intervalView } from '../../components/shared/intervalModel.js'
 import SegtreeView from '../../components/shared/SegtreeView'
 import OperationLog from '../../components/shared/OperationLog'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -11,7 +11,7 @@ const definition = {
     { id: 'add', label: 'Add booking', description: 'Update the start and end markers, then sweep for the peak.' },
     { id: 'done', label: 'Complete', description: 'All bookings processed.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Bookings (JSON array of [start, end))',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bookings (JSON array of [start, end))',
   url: 'https://leetcode.com/problems/my-calendar-iii/',
   complexity: 'O(n log n) per booking for this sweep; a lazy segment tree gives O(log n) per booking.',
   examples: [

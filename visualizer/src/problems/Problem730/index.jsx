@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import { DPTable } from '../../components/shared/AlgorithmStatePrimitives'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
@@ -9,7 +9,7 @@ const definition = {
     { id: 'match', label: 'Matching ends', description: 'Count palindromes with and without the outer letters.' },
     { id: 'done', label: 'Complete', description: 'Return the count for the whole string.' },
   ],
-  parse: parseInput, build: buildTrace, code, inputLabel: 'String s (JSON string, up to 12 letters)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON string, up to 12 letters)',
   url: 'https://leetcode.com/problems/count-different-palindromic-subsequences/',
   complexity: 'O(n²) states with O(1) work each in this version. The visualization is limited to n ≤ 12 because it stores the whole table.',
   examples: [

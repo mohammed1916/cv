@@ -22,23 +22,38 @@ export function buildTrace({ nums, k }) {
   while (lo < hi) {
     const mid = (lo + hi) >> 1
     const count = countUpTo(mid)
-    frames.push({ phase: 'count', lo, hi, mid, count, activeLine: 7, message: `mid ${mid}: ${count} pair${count === 1 ? '' : 's'} within distance ${mid}; ${count >= k ? 'enough, search lower' : 'too few, search higher'}.` })
+    frames.push({ phase: 'count', lo, hi, mid, count, activeLine: 9, message: `mid ${mid}: ${count} pair${count === 1 ? '' : 's'} within distance ${mid}; ${count >= k ? 'enough, search lower' : 'too few, search higher'}.` })
     if (count >= k) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', lo, hi, mid: null, count: null, result: lo, activeLine: 9, message: `The ${k}th smallest distance is ${lo}.` })
+  frames.push({ phase: 'done', lo, hi, mid: null, count: null, result: lo, activeLine: 11, message: `The ${k}th smallest distance is ${lo}.` })
   return { input: { nums, k }, result: lo, frames }
 }
 
-export const code = `def smallestDistancePair(nums, k):
+export const code = `sort nums into the list a
+set lo to 0 and hi to the largest value minus the smallest value
+while lo is less than hi
+  set mid to the midpoint of lo and hi
+  set count and left to 0
+  for each right index from the first value to the last
+    move left forward while a[right] minus a[left] is greater than mid
+    add right minus left to count
+  if count is at least k then set hi to mid
+  otherwise set lo to mid plus 1
+return lo`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+export const python = `def smallest_distance_pair(nums, k):
     a = sorted(nums)
     lo, hi = 0, a[-1] - a[0]
     while lo < hi:
         mid = (lo + hi) // 2
         count, left = 0, 0
         for right in range(len(a)):
-            while a[right] - a[left] > mid: left += 1
+            while a[right] - a[left] > mid:
+                left += 1
             count += right - left
-        if count >= k: hi = mid
-        else: lo = mid + 1
-    return lo`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        if count >= k:
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo`
