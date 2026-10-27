@@ -24,10 +24,28 @@ export function buildTrace({ arr, k, x }) {
   return { input: { arr, k, x }, result, frames }
 }
 
-export const code = `def findClosestElements(arr, k, x):
-    lo, hi = 0, len(arr) - k
-    while lo < hi:
-        mid = (lo + hi) // 2
-        if x - arr[mid] > arr[mid + k] - x: lo = mid + 1
-        else: hi = mid
-    return arr[lo:lo + k]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set left to 0 and right to the last index
+while right - left + 1 is greater than k:
+  compare the distance of arr[left] from x with that of arr[right]
+  if the left value is farther, move left up by one
+  otherwise move right down by one, so ties discard the larger value
+return arr[left] through arr[right]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Scan trace: activeLine 1 (setup), 3 (compare per discard), 4 (update, final window), 5 (return).
+// The compare frame names the discarded side, so the discard branch selects line 4 or 5.
+export const LINE_MAP = { 1: 1, 4: 6, 5: 6 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'inspect' && frame.activeLine === 3) return /Discard left\./.test(frame.message) ? 4 : 5
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_closest_elements(arr, k, x):
+    left = 0
+    right = len(arr) - 1
+    while right - left + 1 > k:
+        if abs(arr[left] - x) > abs(arr[right] - x):
+            left += 1
+        else:
+            right -= 1
+    return arr[left:right + 1]`

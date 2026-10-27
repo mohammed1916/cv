@@ -28,13 +28,25 @@ export function buildTrace(num) {
   return { input: num, result, frames }
 }
 
-export const code = `def maximumSwap(num):
+export const code = `record the last position of each digit in num
+for each digit position i from left to right:
+  look for a greater digit to the right, trying 9 downward
+  if one exists, swap position i with its rightmost occurrence, then stop
+return the resulting number`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Scan trace: activeLine 1 (setup), 3 (no greater digit at this position), 4 (swap), 5 (return).
+export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 5 }
+
+export const familyLine = frame => LINE_MAP[frame.activeLine] ?? frame.activeLine
+
+export const python = `def maximum_swap(num):
     digits = list(str(num))
-    last = {d: i for i, d in enumerate(digits)}
-    for i, d in enumerate(digits):
-        for bigger in range(9, int(d), -1):
-            if str(bigger) in last and last[str(bigger)] > i:
-                j = last[str(bigger)]
+    last = {digit: index for index, digit in enumerate(digits)}
+    for i, current in enumerate(digits):
+        for d in range(9, int(current), -1):
+            digit = str(d)
+            if digit in last and last[digit] > i:
+                j = last[digit]
                 digits[i], digits[j] = digits[j], digits[i]
                 return int(''.join(digits))
-    return num`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return num`

@@ -26,12 +26,44 @@ export function buildTrace(nums) {
   return { input: nums, root, result: serial, frames }
 }
 
-export const code = `def constructMaximumBinaryTree(nums):
-    def build(lo, hi):
-        if lo > hi: return None
-        best = max(range(lo, hi + 1), key=lambda i: nums[i])
-        node = TreeNode(nums[best])
-        node.left = build(lo, best - 1)
-        node.right = build(best + 1, hi)
-        return node
-    return build(0, len(nums) - 1)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set stack to an empty list of roots
+for each value in nums from left to right:
+  pop each smaller root from the stack; the last popped root becomes the new node's left child
+  if the stack is not empty, make the new node the right child of the stack top
+  push the new node onto the stack
+return the root at the bottom of the stack`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Tree trace: activeLine 1 (setup), 4 (update once per value), 5 (return).
+export const LINE_MAP = { 1: 1, 4: 5, 5: 6 }
+
+export const familyLine = frame => LINE_MAP[frame.activeLine] ?? frame.activeLine
+
+export const python = `def construct_maximum_binary_tree(nums):
+    def serialize(top):
+        if top is None:
+            return []
+        queue = [top]
+        values = []
+        position = 0
+        while position < len(queue):
+            node = queue[position]
+            position += 1
+            if node is None:
+                values.append(None)
+            else:
+                values.append(node["val"])
+                queue.append(node["left"])
+                queue.append(node["right"])
+        while values and values[-1] is None:
+            values.pop()
+        return values
+
+    stack = []
+    for value in nums:
+        node = {"val": value, "left": None, "right": None}
+        while stack and stack[-1]["val"] < value:
+            node["left"] = stack.pop()
+        if stack:
+            stack[-1]["right"] = node
+        stack.append(node)
+    return serialize(stack[0])`

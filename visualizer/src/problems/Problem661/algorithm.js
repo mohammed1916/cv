@@ -23,12 +23,31 @@ export function buildTrace(img) {
   return { input: img, result: out, frames }
 }
 
-export const code = `def imageSmoother(img):
-    m, n = len(img), len(img[0])
-    out = [[0] * n for _ in range(m)]
-    for r in range(m):
-        for c in range(n):
-            cells = [img[i][j] for i in range(max(0, r-1), min(m, r+2))
-                               for j in range(max(0, c-1), min(n, c+2))]
-            out[r][c] = sum(cells) // len(cells)
-    return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `create an output grid with the same shape as img
+for each cell (r, c):
+  add the values of existing cells in its 3 by 3 block, counting itself, and count them
+  set output[r][c] to floor(sum / count)
+return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Scan trace: activeLine 1 (setup), 4 (update per cell), 5 (return).
+export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 5 }
+
+export const familyLine = frame => LINE_MAP[frame.activeLine] ?? frame.activeLine
+
+export const python = `def image_smoother(img):
+    rows = len(img)
+    cols = len(img[0])
+    output = [[0] * cols for _ in range(rows)]
+    for r in range(rows):
+        for c in range(cols):
+            total = 0
+            count = 0
+            for dr in (-1, 0, 1):
+                for dc in (-1, 0, 1):
+                    rr = r + dr
+                    cc = c + dc
+                    if 0 <= rr < rows and 0 <= cc < cols:
+                        total += img[rr][cc]
+                        count += 1
+            output[r][c] = total // count
+    return output`

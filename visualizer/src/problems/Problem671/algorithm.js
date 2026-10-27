@@ -28,12 +28,52 @@ export function buildTrace(values) {
   return { input: values, root, result, frames }
 }
 
-export const code = `def findSecondMinimumValue(root):
-    first, second = root.val, inf
-    stack = [root]
+export const code = `set minimum to the root value, second to infinity, and stack to [root]
+while the stack is not empty:
+  pop a node
+  if its value is greater than minimum, keep the smaller of second and its value, and do not explore below
+  otherwise push its children onto the stack
+return second, or -1 if no larger value was found`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Tree trace: activeLine 1 (setup), 4 (update per popped node), 5 (return).
+// Update frames name a candidate (line 4) or a node equal to the minimum that is explored (line 5).
+export const LINE_MAP = { 1: 1, 5: 6 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'update') return /candidate/.test(frame.message) ? 4 : 5
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_second_minimum_value(root):
+    def build_tree(values):
+        if not values or values[0] is None:
+            return None
+        top = {"val": values[0], "left": None, "right": None}
+        queue = [top]
+        index = 1
+        position = 0
+        while position < len(queue):
+            node = queue[position]
+            position += 1
+            for side in ("left", "right"):
+                if index < len(values) and values[index] is not None:
+                    child = {"val": values[index], "left": None, "right": None}
+                    node[side] = child
+                    queue.append(child)
+                index += 1
+        return top
+
+    tree = build_tree(root)
+    minimum = tree["val"]
+    second = float("inf")
+    stack = [tree]
     while stack:
         node = stack.pop()
-        if first < node.val < second: second = node.val
-        if node.left: stack.append(node.left)
-        if node.right: stack.append(node.right)
-    return second if second < inf else -1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        if node["val"] > minimum:
+            second = min(second, node["val"])
+        else:
+            if node["left"] is not None:
+                stack.append(node["left"])
+            if node["right"] is not None:
+                stack.append(node["right"])
+    return -1 if second == float("inf") else second`

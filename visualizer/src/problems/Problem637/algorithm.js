@@ -32,11 +32,40 @@ export function buildTrace(values) {
   return { input: values, root, result: averages, frames }
 }
 
-export const code = `def averageOfLevels(root):
-    out, level = [], [root]
-    while level:
-        total = 0
-        for node in level: total += node.val
-        out.append(total / len(level))
-        level = [c for n in level for c in (n.left, n.right) if c]
-    return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set frontier to the root and output to an empty list
+while frontier is not empty:
+  sum the values on this level and count its nodes
+  append their average to output
+  replace frontier with all children of the frontier nodes
+return output`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Tree trace: activeLine 1 (setup), 4 (update once per level), 5 (return).
+export const LINE_MAP = { 1: 1, 4: 4, 5: 6 }
+
+export const familyLine = frame => LINE_MAP[frame.activeLine] ?? frame.activeLine
+
+export const python = `def average_of_levels(root):
+    def build_tree(values):
+        if not values or values[0] is None:
+            return None
+        top = {"val": values[0], "left": None, "right": None}
+        queue = [top]
+        index = 1
+        position = 0
+        while position < len(queue):
+            node = queue[position]
+            position += 1
+            for side in ("left", "right"):
+                if index < len(values) and values[index] is not None:
+                    child = {"val": values[index], "left": None, "right": None}
+                    node[side] = child
+                    queue.append(child)
+                index += 1
+        return top
+
+    frontier = [build_tree(root)]
+    output = []
+    while frontier:
+        output.append(sum(node["val"] for node in frontier) / len(frontier))
+        frontier = [child for node in frontier for child in (node["left"], node["right"]) if child is not None]
+    return output`

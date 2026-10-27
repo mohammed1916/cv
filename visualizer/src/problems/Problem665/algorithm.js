@@ -25,12 +25,34 @@ export function buildTrace(nums) {
   return { input: nums, result, frames }
 }
 
-export const code = `def checkPossibility(nums):
-    changes = 0
-    for i in range(1, len(nums)):
-        if nums[i - 1] > nums[i]:
-            changes += 1
-            if changes > 1: return False
-            if i < 2 or nums[i - 2] <= nums[i]: nums[i - 1] = nums[i]
-            else: nums[i] = nums[i - 1]
-    return True`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `copy nums into a working array; set edits to 0
+for each index i from 1 to the last index:
+  if working[i] is less than working[i - 1], count one edit
+  if edits is more than 1, return false
+  if i < 2 or working[i] >= working[i - 2], lower working[i - 1] to working[i]
+  otherwise raise working[i] to working[i - 1]
+return true`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Scan trace: activeLine 1 (setup), 4 (update per index, line 3 check), inspect (second descent rejects, line 4), done (line 7 or 4).
+// The rejection frame is the only inspect frame; the done frame is line 4 for false and 7 for true.
+export const LINE_MAP = { 1: 1, 4: 3 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'done') return frame.result === false ? 4 : 7
+  if (frame.phase === 'inspect') return 4
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def check_possibility(nums):
+    working = list(nums)
+    edits = 0
+    for i in range(1, len(working)):
+        if working[i] < working[i - 1]:
+            edits += 1
+            if edits > 1:
+                return False
+            if i < 2 or working[i] >= working[i - 2]:
+                working[i - 1] = working[i]
+            else:
+                working[i] = working[i - 1]
+    return True`

@@ -20,6 +20,28 @@ export function buildTrace(points) {
   return { input: points, result, frames }
 }
 
-export const code = `def validSquare(p1, p2, p3, p4):
-    d = sorted(dist(a, b) for a, b in combinations(points, 2))
-    return d[0] > 0 and d[0] == d[1] == d[2] == d[3] and d[4] == d[5] == 2 * d[0]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `calculate the six squared distances between the four points
+sort the six distances from smallest to largest
+let the side be the smallest distance
+require the four smallest distances to equal the side, and the side to be positive
+require the two largest distances to be equal and twice the side
+return whether all square conditions hold`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The family visualizer reports code stages rather than line numbers. This maps each frame onto the lines above.
+export function familyLine(frame) {
+  if (frame.phase === 'start') return 1
+  if (frame.phase === 'done') return 6
+  return frame.codeStage === 'classify' ? 4 : 1
+}
+
+export const python = `def valid_square(points):
+    distances = []
+    for first in range(4):
+        for second in range(first + 1, 4):
+            dx = points[first][0] - points[second][0]
+            dy = points[first][1] - points[second][1]
+            distances.append(dx * dx + dy * dy)
+    distances.sort()
+    side = distances[0]
+    return (side > 0 and all(d == side for d in distances[:4])
+            and distances[4] == distances[5] == 2 * side)`

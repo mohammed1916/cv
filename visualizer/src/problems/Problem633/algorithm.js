@@ -19,10 +19,34 @@ export function buildTrace(c) {
   return { input: c, result, frames }
 }
 
-export const code = `def judgeSquareSum(c):
-    a = 0
-    while a * a <= c:
-        b = isqrt(c - a * a)
-        if b * b == c - a * a: return True
-        a += 1
-    return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set left to 0 and right to the integer square root of c
+while left is at most right
+  compute sum as left squared plus right squared
+  if sum equals c, return true
+  if sum is less than c, increase left by one
+  otherwise decrease right by one
+return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The sequence-family trace reports activeLine 1 (setup), 3 (compare), 5 (return).
+export const LINE_MAP = { 1: 1, 3: 3, 5: 7 }
+
+// A true result returns from inside the loop, so the final frame highlights line 4.
+export function familyLine(frame) {
+  if (frame.phase === 'done' && frame.result === true) return 4
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `from math import isqrt
+
+def judge_square_sum(c):
+    left = 0
+    right = isqrt(c)
+    while left <= right:
+        total = left * left + right * right
+        if total == c:
+            return True
+        if total < c:
+            left += 1
+        else:
+            right -= 1
+    return False`

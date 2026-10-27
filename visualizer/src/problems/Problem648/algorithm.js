@@ -29,13 +29,31 @@ export function buildTrace({ dictionary, sentence }) {
   return { input: { dictionary, sentence }, result, frames }
 }
 
-export const code = `def replaceWords(dictionary, sentence):
+export const code = `build a trie from the dictionary and mark the end of each root
+for each word in the sentence, split on single spaces:
+  start at the trie root with replacement equal to the word
+  for each character, follow its child edge, stopping if the edge is missing
+  if the node marks the end of a root, set replacement to the prefix read so far and stop
+  append replacement to the output
+return the output words joined with single spaces`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Collection trace stages from the trie walk: insert and store are line 1, lookup and missing are line 4,
+// accept is line 5, append is line 6, and return is line 7.
+const STAGE_LINE = { insert: 1, store: 1, lookup: 4, missing: 4, accept: 5, append: 6, return: 7 }
+export const LINE_MAP = { 1: 1, 3: 4, 4: 6, 5: 7 }
+
+export function familyLine(frame) {
+  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def replace_words(dictionary, sentence):
     roots = set(dictionary)
-    out = []
-    for word in sentence.split():
-        for i in range(1, len(word) + 1):
-            if word[:i] in roots:
-                word = word[:i]
+    output = []
+    for word in sentence.split(' '):
+        replacement = word
+        for i in range(len(word)):
+            if word[:i + 1] in roots:
+                replacement = word[:i + 1]
                 break
-        out.append(word)
-    return ' '.join(out)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        output.append(replacement)
+    return ' '.join(output)`

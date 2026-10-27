@@ -21,9 +21,27 @@ export function buildTrace(pairs) {
   return { input: pairs, result: count, frames }
 }
 
-export const code = `def findLongestChain(pairs):
-    end, count = float('-inf'), 0
-    for left, right in sorted(pairs, key=lambda p: p[1]):
-        if left > end:
-            end, count = right, count + 1
-    return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `sort pairs by their second value; set end to negative infinity and count to 0
+for each pair [start, finish] in that order:
+  if start is strictly greater than end:
+    count the pair and set end to finish
+  otherwise skip the pair because it touches or overlaps
+return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Sequence trace: activeLine 1 (setup), 4 (update per pair), 5 (return).
+// Each update frame records a take or a skip; the take line is 4 and the skip line is 5.
+export const LINE_MAP = { 1: 1, 5: 6 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'update') return frame.message.startsWith('Take') ? 4 : 5
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_longest_chain(pairs):
+    end = float('-inf')
+    count = 0
+    for start, finish in sorted(pairs, key=lambda pair: pair[1]):
+        if start > end:
+            count += 1
+            end = finish
+    return count`

@@ -25,10 +25,23 @@ export function buildTrace(nums) {
   return { input: nums, result: best, frames }
 }
 
-export const code = `def findLHS(nums):
-    count = Counter(nums)
+export const code = `count how many times each value appears
+start the best length at zero
+for each value in the counts
+  look up how many times the next larger value appears
+  if that count is positive, consider the two counts together
+  keep the larger of the best length and that combined count
+return the best length`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The scan-family visualizer reports its own step numbers (1 setup, 3 compare, 4 count, 5 return).
+export const LINE_MAP = { 1: 1, 3: 4, 4: 1, 5: 7 }
+
+export const python = `def find_lhs(nums):
+    counts = {}
+    for value in nums:
+        counts[value] = counts.get(value, 0) + 1
     best = 0
-    for x in count:
-        if x + 1 in count:
-            best = max(best, count[x] + count[x + 1])
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    for value, count in counts.items():
+        if counts.get(value + 1, 0):
+            best = max(best, count + counts[value + 1])
+    return best`

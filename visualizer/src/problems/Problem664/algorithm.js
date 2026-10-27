@@ -28,13 +28,32 @@ export function buildTrace(s) {
   return { input: s, result: best[0][n - 1], table: best, frames }
 }
 
-export const code = `def strangePrinter(s):
+export const code = `set dp[i][i] to 1 for every position i
+for start i from the last index down to 0
+  for end j from i + 1 to the last index
+    set dp[i][j] to 1 + dp[i + 1][j], printing s[i] alone
+    for each k from i + 1 through j where s[k] equals s[i]
+      candidate is dp[i + 1][k - 1] (zero if that interval is empty) plus dp[k][j]
+      set dp[i][j] to the smaller of dp[i][j] and candidate
+return dp[0][last index]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Collection trace: codeStage 'interval' is the per-interval update (line 7); 'return' is line 8.
+const STAGE_LINE = { interval: 7, return: 8 }
+export const LINE_MAP = { 1: 1, 4: 7, 5: 8 }
+
+export function familyLine(frame) {
+  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def strange_printer(s):
     n = len(s)
     dp = [[0] * n for _ in range(n)]
     for i in range(n - 1, -1, -1):
         dp[i][i] = 1
         for j in range(i + 1, n):
-            dp[i][j] = 1 + dp[i + 1][j] if s[i] != s[i + 1] else dp[i + 1][j]
+            dp[i][j] = 1 + dp[i + 1][j]
             for k in range(i + 1, j + 1):
-                if s[k] == s[i]: dp[i][j] = min(dp[i][j], dp[i + 1][k - 1] + dp[k][j] if k > i + 1 else dp[k][j])
-    return dp[0][n - 1]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+                if s[k] == s[i]:
+                    inner = dp[i + 1][k - 1] if k - 1 >= i + 1 else 0
+                    dp[i][j] = min(dp[i][j], inner + dp[k][j])
+    return dp[0][n - 1]`

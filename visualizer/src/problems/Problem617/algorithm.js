@@ -35,10 +35,57 @@ export function buildTrace({ a, b }) {
   return { input: { a, b }, root, result: serial, frames }
 }
 
-export const code = `def mergeTrees(t1, t2):
-    if not t1: return t2
-    if not t2: return t1
-    node = TreeNode(t1.val + t2.val)
-    node.left = mergeTrees(t1.left, t2.left)
-    node.right = mergeTrees(t1.right, t2.right)
-    return node`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `align the two roots at the top
+define merge for two positions: if both positions are empty, return empty
+otherwise sum the two values, treating a missing node as zero
+merge the left children and merge the right children at the same positions
+return a new node holding the sum and the merged children
+return the level-order serialization of the merged tree`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The tree-family visualizer reports its own step numbers (1 setup, 3 sum, 4 combine, 5 return).
+export const LINE_MAP = { 1: 1, 3: 3, 4: 5, 5: 6 }
+
+export const python = `def merge_trees(root1, root2):
+    def build(values):
+        if not values or values[0] is None:
+            return None
+        top = {'val': values[0], 'left': None, 'right': None}
+        queue, i = [top], 1
+        while queue and i < len(values):
+            current = queue.pop(0)
+            if values[i] is not None:
+                current['left'] = {'val': values[i], 'left': None, 'right': None}
+                queue.append(current['left'])
+            i += 1
+            if i < len(values) and values[i] is not None:
+                current['right'] = {'val': values[i], 'left': None, 'right': None}
+                queue.append(current['right'])
+            i += 1
+        return top
+
+    def merge(a, b):
+        if a is None and b is None:
+            return None
+        total = (a['val'] if a is not None else 0) + (b['val'] if b is not None else 0)
+        left = merge(a['left'] if a is not None else None, b['left'] if b is not None else None)
+        right = merge(a['right'] if a is not None else None, b['right'] if b is not None else None)
+        return {'val': total, 'left': left, 'right': right}
+
+    def serialize(tree):
+        if tree is None:
+            return []
+        queue, values, i = [tree], [], 0
+        while i < len(queue):
+            current = queue[i]
+            i += 1
+            if current is None:
+                values.append(None)
+            else:
+                values.append(current['val'])
+                queue.append(current['left'])
+                queue.append(current['right'])
+        while values and values[-1] is None:
+            values.pop()
+        return values
+
+    return serialize(merge(build(root1), build(root2)))`

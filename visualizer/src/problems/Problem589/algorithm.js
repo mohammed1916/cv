@@ -26,9 +26,22 @@ export function buildTrace(items) {
   return { input: items, root, result: order, frames }
 }
 
-export const code = `def preorder(root):
-    if not root: return []
-    out = [root.val]
-    for child in root.children:
-        out.extend(preorder(child))
-    return out`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `put the root on a stack when it exists
+start the output as an empty list
+while the stack is not empty
+  pop the next node from the stack
+  append its value to the output
+  push its children onto the stack from right to left
+return the output`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The family visualizer reports its own step numbers (1 setup, 3 visit, 5 return).
+export const LINE_MAP = { 1: 1, 3: 5, 5: 7 }
+
+export const python = `def preorder(root):
+    stack = [root] if root is not None else []
+    output = []
+    while stack:
+        current = stack.pop()
+        output.append(current['val'])
+        stack.extend(reversed(current.get('children', [])))
+    return output`

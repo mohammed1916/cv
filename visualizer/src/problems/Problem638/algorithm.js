@@ -37,15 +37,36 @@ export function buildTrace({ price, special, needs }) {
   return { input: { price, special, needs }, result, frames }
 }
 
-export const code = `def shoppingOffers(price, special, needs):
+export const code = `memoize each result by the remaining-needs vector
+keep only useful bundles: at least one item, and cheaper than buying those items one by one
+price all remaining units individually as the baseline
+for each useful bundle that fits without overbuying:
+  combine its cost with the optimal cost of the reduced needs
+keep the minimum as this state's answer and store it in the memo
+return the minimum cost for the original needs`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Collection trace: codeStage 'needs' is the per-state update (line 6); 'return' is line 7.
+const STAGE_LINE = { needs: 6, return: 7 }
+export const LINE_MAP = { 1: 1, 4: 6, 5: 7 }
+
+export function familyLine(frame) {
+  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def shopping_offers(price, special, needs):
+    useful = [offer for offer in special
+              if any(offer[:-1]) and offer[-1] < sum(q * p for q, p in zip(offer[:-1], price))]
     memo = {}
-    def dfs(needs):
-        key = tuple(needs)
-        if key in memo: return memo[key]
-        best = sum(q * p for q, p in zip(needs, price))
-        for offer in special:
-            if all(c <= q for c, q in zip(offer, needs)):
-                best = min(best, offer[-1] + dfs([q - c for q, c in zip(needs, offer)]))
-        memo[key] = best
+
+    def solve(remaining):
+        if remaining in memo:
+            return memo[remaining]
+        best = sum(q * p for q, p in zip(remaining, price))
+        for offer in useful:
+            if all(q >= offer[i] for i, q in enumerate(remaining)):
+                reduced = tuple(q - offer[i] for i, q in enumerate(remaining))
+                best = min(best, offer[-1] + solve(reduced))
+        memo[remaining] = best
         return best
-    return dfs(needs)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+    return solve(tuple(needs))`

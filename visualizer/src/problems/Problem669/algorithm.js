@@ -36,10 +36,69 @@ export function buildTrace({ root, low, high }) {
   return { input: { root, low, high }, root: trimmed, result, frames, prunedIds: new Set(pruned) }
 }
 
-export const code = `def trimBST(root, low, high):
-    if not root: return None
-    if root.val < low: return trimBST(root.right, low, high)
-    if root.val > high: return trimBST(root.left, low, high)
-    root.left = trimBST(root.left, low, high)
-    root.right = trimBST(root.right, low, high)
-    return root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `define trim(node): if node is empty, return empty
+if node value is less than low, return trim(right child)
+if node value is greater than high, return trim(left child)
+otherwise trim both children, attach them to node, and return node
+return trim(root)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Tree trace: activeLine 1 (setup), 3 (inspect), 4 (update, final tree), 5 (return).
+// Inspect frames name the verdict: too small (line 2), too large (line 3), in range (line 4).
+export const LINE_MAP = { 1: 1, 4: 5, 5: 5 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'inspect') return /too small/.test(frame.message) ? 2 : /too large/.test(frame.message) ? 3 : 4
+  if (frame.phase === 'done') return 5
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def trim_bst(root, low, high):
+    def build_tree(values):
+        if not values or values[0] is None:
+            return None
+        top = {"val": values[0], "left": None, "right": None}
+        queue = [top]
+        index = 1
+        position = 0
+        while position < len(queue):
+            node = queue[position]
+            position += 1
+            for side in ("left", "right"):
+                if index < len(values) and values[index] is not None:
+                    child = {"val": values[index], "left": None, "right": None}
+                    node[side] = child
+                    queue.append(child)
+                index += 1
+        return top
+
+    def serialize(top):
+        if top is None:
+            return []
+        queue = [top]
+        values = []
+        position = 0
+        while position < len(queue):
+            node = queue[position]
+            position += 1
+            if node is None:
+                values.append(None)
+            else:
+                values.append(node["val"])
+                queue.append(node["left"])
+                queue.append(node["right"])
+        while values and values[-1] is None:
+            values.pop()
+        return values
+
+    def trim(node):
+        if node is None:
+            return None
+        if node["val"] < low:
+            return trim(node["right"])
+        if node["val"] > high:
+            return trim(node["left"])
+        node["left"] = trim(node["left"])
+        node["right"] = trim(node["right"])
+        return node
+
+    return serialize(trim(build_tree(root)))`

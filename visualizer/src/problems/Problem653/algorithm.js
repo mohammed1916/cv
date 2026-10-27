@@ -36,13 +36,50 @@ export function buildTrace({ root, k }) {
   return { input: { root, k }, root: tree, result, frames }
 }
 
-export const code = `def findTarget(root, k):
-    seen, stack, node = set(), [], root
-    while node or stack:
-        while node:
-            stack.append(node); node = node.left
+export const code = `set seen to an empty set and stack to [root]
+while the stack is not empty:
+  pop a node and compute need = k - its value
+  if need is already in seen, return true
+  add the node value to seen and push its children
+return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Tree trace: activeLine 1 (setup), 3 (inspect per popped node), 4 (true), 5 (update), done (6 when false).
+export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 6 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'done') return frame.result === true ? 4 : 6
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_target(root, k):
+    def build_tree(values):
+        if not values or values[0] is None:
+            return None
+        top = {"val": values[0], "left": None, "right": None}
+        queue = [top]
+        index = 1
+        position = 0
+        while position < len(queue):
+            node = queue[position]
+            position += 1
+            for side in ("left", "right"):
+                if index < len(values) and values[index] is not None:
+                    child = {"val": values[index], "left": None, "right": None}
+                    node[side] = child
+                    queue.append(child)
+                index += 1
+        return top
+
+    seen = set()
+    stack = [build_tree(root)]
+    while stack:
         node = stack.pop()
-        if k - node.val in seen: return True
-        seen.add(node.val)
-        node = node.right
-    return False`.split('\n').map((text, index) => ({ line: index + 1, text }))
+        need = k - node["val"]
+        if need in seen:
+            return True
+        seen.add(node["val"])
+        if node["right"] is not None:
+            stack.append(node["right"])
+        if node["left"] is not None:
+            stack.append(node["left"])
+    return False`

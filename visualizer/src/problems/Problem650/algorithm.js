@@ -24,11 +24,30 @@ export function buildTrace(n) {
   return { input: n, result: n === 1 ? 0 : result, frames }
 }
 
-export const code = `def minSteps(n):
-    steps, p = 0, 2
-    while n > 1:
-        while n % p == 0:
-            steps += p
-            n //= p
-        p += 1
-    return steps`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set remaining to n and operations to 0
+for each candidate factor from 2 while factor times factor is at most remaining:
+  while remaining is divisible by factor:
+    divide remaining by factor and add factor to operations
+if remaining is greater than 1, add remaining to operations as its final prime factor
+return operations`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Collection trace: codeStage 'factor' is line 4, 'prime' is line 5, and 'return' is line 6.
+const STAGE_LINE = { factor: 4, prime: 5, return: 6 }
+export const LINE_MAP = { 1: 1, 3: 4, 4: 5, 5: 6 }
+
+export function familyLine(frame) {
+  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def min_steps(n):
+    remaining = n
+    operations = 0
+    factor = 2
+    while factor * factor <= remaining:
+        while remaining % factor == 0:
+            remaining //= factor
+            operations += factor
+        factor += 1
+    if remaining > 1:
+        operations += remaining
+    return operations`

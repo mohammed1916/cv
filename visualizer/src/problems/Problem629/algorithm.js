@@ -31,10 +31,33 @@ export function buildTrace({ n, k }) {
   return { input: { n, k }, result, table: dp, frames }
 }
 
-export const code = `def kInversePairs(n, k):
+export const code = `if k is more than n times (n minus one) divided by two, return zero
+start with one empty permutation, so the row holds one at zero inversions and zero elsewhere
+for each size from one to n
+  build a new row using a sliding window sum over the previous row
+  add the entering count to the window for each inversion count from zero to k
+  subtract the count that falls outside the insertion range
+  store the window sum as the new row entry
+return the entry for k inversions, modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The family visualizer reports code stages rather than line numbers. This maps each frame onto the lines above.
+export function familyLine(frame) {
+  if (frame.phase === 'start') return 1
+  if (frame.phase === 'done') return frame.codeStage === 'impossible' ? 1 : 8
+  return 4
+}
+
+export const python = `def k_inverse_pairs(n, k):
+    if k > n * (n - 1) // 2:
+        return 0
+    modulus = 1000000007
     dp = [1] + [0] * k
-    for i in range(1, n + 1):
-        prefix = [0]
-        for x in dp: prefix.append((prefix[-1] + x) % MOD)
-        dp = [(prefix[j + 1] - prefix[max(0, j - i + 1)]) % MOD for j in range(k + 1)]
-    return dp[k]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    for size in range(1, n + 1):
+        following, window = [0] * (k + 1), 0
+        for inversions in range(k + 1):
+            window = (window + dp[inversions]) % modulus
+            if inversions >= size:
+                window = (window - dp[inversions - size] + modulus) % modulus
+            following[inversions] = window
+        dp = following
+    return dp[k]`

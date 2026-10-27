@@ -35,11 +35,34 @@ export function buildTrace(n) {
   return { input: n, result: count, bits, frames }
 }
 
-export const code = `def findIntegers(n):
+export const code = `write n in binary and build the counts of valid suffixes for each length
+start the answer at zero and the previous bit at zero
+for each bit of n from the most significant bit
+  if the bit is one
+    add the count of valid suffixes for the remaining positions
+    if the previous bit was also one, return the answer
+  remember this bit as the previous bit
+return the answer plus one, which counts n itself`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The family visualizer reports code stages rather than line numbers. This maps each frame onto the lines above.
+export function familyLine(frame) {
+  if (frame.phase === 'start') return 1
+  if (frame.phase === 'done') return frame.codeStage === 'stop' ? 6 : 8
+  return { branch: 5, stop: 6 }[frame.codeStage] ?? 5
+}
+
+export const python = `def find_integers(n):
     bits = bin(n)[2:]
-    fib = [1, 2]
-    for k in range(2, len(bits) + 1): fib.append(fib[-1] + fib[-2])
-    count, prev_one = 0, False
-    for i, b in enumerate(bits):
-        ...
-    return count + 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    counts = [1, 2]
+    for i in range(2, len(bits) + 1):
+        counts.append(counts[-1] + counts[-2])
+    answer, previous = 0, 0
+    for index, ch in enumerate(bits):
+        bit = int(ch)
+        remaining = len(bits) - index - 1
+        if bit:
+            answer += counts[remaining]
+            if previous:
+                return answer
+        previous = bit
+    return answer + 1`

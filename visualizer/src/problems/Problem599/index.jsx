@@ -4,7 +4,19 @@ import SequenceStory from '../families/sequenceStories/SequenceStory';
 import { definitions } from '../families/scanStories/definitions';
 import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
+import { code, python, LINE_MAP } from './algorithm';
 
-const definition = { ...definitions[599], examples: authoredExamples0 };
+const base = definitions[599];
+const definition = {
+  ...base,
+  examples: authoredExamples0,
+  code,
+  python,
+  pythonStages: undefined,
+  build: raw => {
+    const trace = base.build(raw);
+    return { ...trace, frames: trace.frames.map(frame => ({ ...frame, activeLine: LINE_MAP[frame.activeLine] ?? frame.activeLine })) };
+  },
+};
 function Visualizer() { return <SequenceStory definition={definition} />; }
 export default withProblemStory(Visualizer, storyGuide);

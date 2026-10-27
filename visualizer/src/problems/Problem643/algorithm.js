@@ -22,10 +22,29 @@ export function buildTrace({ nums, k }) {
   return { input: { nums, k }, result, frames }
 }
 
-export const code = `def findMaxAverage(nums, k):
-    total = sum(nums[:k])
-    best = total
-    for i in range(k, len(nums)):
-        total += nums[i] - nums[i - k]
-        best = max(best, total)
-    return best / k`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set window sum to 0 and best to negative infinity
+for each index i and value in nums
+  add value to the window sum
+  if i is at least k, subtract nums[i - k] from the window sum
+  if i is at least k - 1, keep the larger of best and the window sum
+return best divided by k`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The sequence-family trace reports activeLine 1 (setup), 4 (update per index), 5 (return).
+// Before the first full window, the update frame describes the partial window (line 3).
+export const LINE_MAP = { 1: 1, 4: 5, 5: 6 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'update' && frame.metrics?.best === 'no full window') return 3
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_max_average(nums, k):
+    window_sum = 0
+    best = float('-inf')
+    for i, value in enumerate(nums):
+        window_sum += value
+        if i >= k:
+            window_sum -= nums[i - k]
+        if i >= k - 1:
+            best = max(best, window_sum)
+    return best / k`

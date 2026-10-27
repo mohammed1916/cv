@@ -25,9 +25,28 @@ export function buildTrace(nums) {
   return { input: nums, result, frames }
 }
 
-export const code = `def findErrorNums(nums):
-    counts = [0] * (len(nums) + 1)
-    for v in nums: counts[v] += 1
-    dup = next(v for v in range(1, len(nums) + 1) if counts[v] == 2)
-    missing = next(v for v in range(1, len(nums) + 1) if counts[v] == 0)
-    return [dup, missing]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `count[1..n] = 0; duplicate = none
+for each value in nums:
+  increase count[value] by one
+  if count[value] has just become 2, record value as duplicate
+find the slot in 1..n whose count is still zero
+return [duplicate, missing slot]`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The sequence-family trace uses activeLine 1 (setup), 4 (per-value update), 3 (missing slot search), 5 (return).
+export const LINE_MAP = { 1: 1, 3: 5, 5: 6 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'update') return frame.message.endsWith('appeared 2 time(s).') ? 4 : 3
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_error_nums(nums):
+    n = len(nums)
+    count = [0] * (n + 1)
+    duplicate = None
+    for value in nums:
+        count[value] += 1
+        if count[value] == 2:
+            duplicate = value
+    missing = next(slot for slot in range(1, n + 1) if count[slot] == 0)
+    return [duplicate, missing]`

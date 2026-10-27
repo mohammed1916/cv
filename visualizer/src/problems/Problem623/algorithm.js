@@ -36,12 +36,59 @@ export function buildTrace({ root, v, d }) {
   return { input: { root, v, d }, root: top, result, frames }
 }
 
-export const code = `def addOneRow(root, v, d):
-    if d == 1: return TreeNode(v, root, None)
-    level = [root]
-    for _ in range(d - 2):
-        level = [c for n in level for c in (n.left, n.right) if c]
-    for node in level:
-        node.left = TreeNode(v, node.left, None)
-        node.right = TreeNode(v, None, node.right)
-    return root`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `if the depth is one, make a new root whose left child is the old tree
+otherwise start the frontier at the root
+advance the frontier down until it holds the nodes just above the insertion depth
+under each frontier node, insert a new value node on the left that keeps the old left subtree
+and a new value node on the right that keeps the old right subtree
+return the tree serialized in level order`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The tree-family visualizer reports its own step numbers (1 setup, 3 advance, 4 insert, 5 return).
+export const LINE_MAP = { 1: 1, 3: 3, 4: 4, 5: 6 }
+
+export const python = `def add_one_row(root, val, depth):
+    def build(values):
+        if not values or values[0] is None:
+            return None
+        top = {'val': values[0], 'left': None, 'right': None}
+        queue, i = [top], 1
+        while queue and i < len(values):
+            current = queue.pop(0)
+            if values[i] is not None:
+                current['left'] = {'val': values[i], 'left': None, 'right': None}
+                queue.append(current['left'])
+            i += 1
+            if i < len(values) and values[i] is not None:
+                current['right'] = {'val': values[i], 'left': None, 'right': None}
+                queue.append(current['right'])
+            i += 1
+        return top
+
+    def serialize(tree):
+        if tree is None:
+            return []
+        queue, values, i = [tree], [], 0
+        while i < len(queue):
+            current = queue[i]
+            i += 1
+            if current is None:
+                values.append(None)
+            else:
+                values.append(current['val'])
+                queue.append(current['left'])
+                queue.append(current['right'])
+        while values and values[-1] is None:
+            values.pop()
+        return values
+
+    tree = build(root)
+    if depth == 1:
+        tree = {'val': val, 'left': tree, 'right': None}
+    else:
+        row = [tree]
+        for _ in range(depth - 2):
+            row = [child for current in row for child in (current['left'], current['right']) if child is not None]
+        for current in row:
+            current['left'] = {'val': val, 'left': current['left'], 'right': None}
+            current['right'] = {'val': val, 'left': None, 'right': current['right']}
+    return serialize(tree)`

@@ -12,6 +12,7 @@ const definition = {
   examples: authoredExamples0,
   code,
   python,
+  pythonStages: undefined,
   build: raw => {
     const trace = base.build(raw);
     return { ...trace, frames: trace.frames.map(frame => ({ ...frame, activeLine: LINE_MAP[frame.activeLine] ?? frame.activeLine })) };

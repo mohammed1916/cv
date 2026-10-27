@@ -30,10 +30,41 @@ export function buildTrace(s) {
   return { input: s, result, ways, frames }
 }
 
-export const code = `def numDecodings(s):
-    MOD = 10**9 + 7
-    prev2, prev1 = 1, ways_one(s[0])
-    for i in range(1, len(s)):
-        cur = prev1 * ways_one(s[i]) + prev2 * ways_two(s[i-1], s[i])
-        prev2, prev1 = prev1, cur % MOD
-    return prev1`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set before to 0 and previous to 1, the ways for the empty prefix
+for each index i in s:
+  count single-symbol readings of s[i]: nine for an asterisk, zero for a zero, otherwise one
+  count two-symbol readings of s[i - 1] and s[i] when i is greater than 0
+  set current to (single readings times previous plus pair readings times before) modulo 1000000007
+  shift: before becomes previous, and previous becomes current
+return previous`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Collection trace: codeStage 'decode' is the per-index update (line 5); 'return' is line 7.
+const STAGE_LINE = { decode: 5, return: 7 }
+export const LINE_MAP = { 1: 1, 4: 5, 5: 7 }
+
+export function familyLine(frame) {
+  return STAGE_LINE[frame.codeStage] ?? LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def num_decodings(s):
+    def single(c):
+        if c == '*':
+            return 9
+        return 0 if c == '0' else 1
+
+    def pair(a, b):
+        if a == '*' and b == '*':
+            return 15
+        if a == '*':
+            return 2 if int(b) <= 6 else 1
+        if b == '*':
+            return 9 if a == '1' else 6 if a == '2' else 0
+        return 1 if 10 <= int(a + b) <= 26 else 0
+
+    modulus = 1000000007
+    before, previous = 0, 1
+    for i, character in enumerate(s):
+        two = pair(s[i - 1], character) if i > 0 else 0
+        current = (single(character) * previous + two * before) % modulus
+        before, previous = previous, current
+    return previous`

@@ -17,11 +17,31 @@ export function buildTrace(moves) {
   return { input: moves, result, frames }
 }
 
-export const code = `def judgeCircle(moves):
-    x = y = 0
-    for m in moves:
-        if m == 'U': y += 1
-        elif m == 'D': y -= 1
-        elif m == 'L': x -= 1
-        else: x += 1
-    return x == 0 and y == 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = `set horizontal total x and vertical total y to 0
+for each move in moves:
+  if the move is U or D, change y by one step
+  if the move is L or R, change x by one step
+return x equals 0 and y equals 0`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// Scan trace: activeLine 1 (setup), 4 (update per move), 5 (return).
+// Vertical moves are line 3 and horizontal moves are line 4.
+export const LINE_MAP = { 1: 1, 4: 4, 5: 5 }
+
+export function familyLine(frame) {
+  if (frame.phase === 'update') return /^Move [UD] /.test(frame.message) ? 3 : 4
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def judge_circle(moves):
+    x = 0
+    y = 0
+    for move in moves:
+        if move == 'U':
+            y += 1
+        elif move == 'D':
+            y -= 1
+        elif move == 'L':
+            x -= 1
+        elif move == 'R':
+            x += 1
+    return x == 0 and y == 0`

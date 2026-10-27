@@ -18,9 +18,27 @@ export function buildTrace(nums) {
   return { input: nums, result: best, frames }
 }
 
-export const code = `def findLengthOfLCIS(nums):
-    best = run = 1
-    for i in range(1, len(nums)):
-        run = run + 1 if nums[i] > nums[i - 1] else 1
+export const code = `set run to 0 and best to 0
+for each index i and value in nums
+  compare value with the immediately previous value
+  if i > 0 and value is strictly greater, extend run by one; otherwise restart run at one
+  set best to the larger of best and run
+return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+
+// The sequence-family trace reports activeLine 1 (setup), 4 (per-index update), 5 (return).
+export const LINE_MAP = { 1: 1, 4: 4, 5: 6 }
+
+export function familyLine(frame) {
+  return LINE_MAP[frame.activeLine] ?? frame.activeLine
+}
+
+export const python = `def find_length_of_lcis(nums):
+    run = 0
+    best = 0
+    for i, value in enumerate(nums):
+        if i > 0 and value > nums[i - 1]:
+            run += 1
+        else:
+            run = 1
         best = max(best, run)
-    return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return best`
