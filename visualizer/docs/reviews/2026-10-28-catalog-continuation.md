@@ -37,6 +37,19 @@ Continues `docs/CLAUDE-CATALOG-HANDOFF.md`. Records what this session actually v
 - The literal template migration for 139–142 touches the shared story workspace that the other story definitions depend on. It needs a regression pass for those definitions before it is safe.
 - The handoff's full scope (Phases A–E, about 1,451 legacy conversions and 1,189 missing entries, each with browser acceptance) is far larger than one session. Phase A is not closed.
 
+## Checkpoint commit
+
+- `ee30a50`: the Codex repair batch, Problem 140's 20-character cap, the Problem 139 move to `AlgorithmWorkspace` (its `index.jsx` now uses the existing `WordBreakStory` scene), the requirement notes, and the handoff pointers.
+- Verified before commit: 130 of 130 partial-batch tests pass; `npm run build` succeeds.
+- **Not verified:** browser acceptance for Problem 139's new wrapper. The earlier smoke checks ran on the old story shell, so they don't cover it.
+- Statuses: all 17 partial entries remain `partial`.
+
+## Still open after this checkpoint
+
+- 140, 141, 142: not yet on `AlgorithmWorkspace`. Each needs its own parse/build adapter. 141 and 142 also need their linked-list input contracts handled.
+- Browser acceptance for 139 and the rest of the 17, plus the 38 earlier repairs and 2919.
+- Phases B–E as laid out in the handoff.
+
 ## Next concrete steps
 
 1. Migrate 139–142 to the literal `AlgorithmWorkspace` pattern, keeping their authored scenes; re-run the 130-test command and the build.
