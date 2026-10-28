@@ -3,8 +3,8 @@
  "catalogProblems": 4073,
  "summary": {
   "legacy-unconverted": 1451,
-  "partial": 55,
-  "verified": 1377,
+  "verified": 1415,
+  "partial": 17,
   "missing": 1189,
   "implemented-unverified": 1
  },
@@ -114,11 +114,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem8",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
-   "testStatus": "no-test",
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -156,11 +156,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem11",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -170,11 +170,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem12",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
-   "testStatus": "no-test",
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -184,11 +184,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem13",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
-   "testStatus": "no-test",
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -408,11 +408,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem29",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
-   "testStatus": "fail",
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -660,11 +660,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem47",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
-   "testStatus": "no-test",
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -730,11 +730,11 @@
    "difficulty": "Hard",
    "paidOnly": false,
    "folder": "Problem52",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
-   "testStatus": "no-test",
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1402,11 +1402,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem100",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1416,11 +1416,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem101",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1430,11 +1430,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem102",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1444,11 +1444,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem103",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1458,11 +1458,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem104",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1500,11 +1500,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem107",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1514,11 +1514,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem108",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1528,11 +1528,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem109",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1542,11 +1542,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem110",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1556,11 +1556,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem111",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1570,11 +1570,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem112",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1584,11 +1584,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem113",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1598,11 +1598,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem114",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1612,11 +1612,11 @@
    "difficulty": "Hard",
    "paidOnly": false,
    "folder": "Problem115",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1682,11 +1682,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem120",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1696,11 +1696,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem121",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1710,11 +1710,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem122",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1724,11 +1724,11 @@
    "difficulty": "Hard",
    "paidOnly": false,
    "folder": "Problem123",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1738,11 +1738,11 @@
    "difficulty": "Hard",
    "paidOnly": false,
    "folder": "Problem124",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1752,11 +1752,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem125",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1794,11 +1794,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem128",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1808,11 +1808,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem129",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1822,11 +1822,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem130",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1836,11 +1836,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem131",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1850,11 +1850,11 @@
    "difficulty": "Hard",
    "paidOnly": false,
    "folder": "Problem132",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1864,11 +1864,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem133",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1878,11 +1878,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem134",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1892,11 +1892,11 @@
    "difficulty": "Hard",
    "paidOnly": false,
    "folder": "Problem135",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1906,11 +1906,11 @@
    "difficulty": "Easy",
    "paidOnly": false,
    "folder": "Problem136",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1920,11 +1920,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem137",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
@@ -1934,11 +1934,11 @@
    "difficulty": "Medium",
    "paidOnly": false,
    "folder": "Problem138",
-   "route": "partial",
+   "route": "implemented",
    "committed": true,
    "testStatus": "pass",
    "requirementsCached": false,
-   "status": "partial",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
