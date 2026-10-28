@@ -2,9 +2,9 @@
  "generatedBy": "manual reconciliation, see commit message",
  "catalogProblems": 4073,
  "summary": {
-  "missing": 2651,
+  "missing": 2640,
   "partial": 55,
-  "verified": 1366,
+  "verified": 1377,
   "implemented-unverified": 1
  },
  "entries": [
@@ -22465,12 +22465,12 @@
    "slug": "cat-and-mouse-ii",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem1728",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": true,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "1729",
@@ -32995,12 +32995,12 @@
    "slug": "difference-between-maximum-and-minimum-price-sum",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem2538",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": true,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "2539",
@@ -37961,12 +37961,12 @@
    "slug": "maximum-points-after-collecting-coins-from-all-nodes",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem2920",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": true,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "2921",
@@ -44786,12 +44786,12 @@
    "slug": "maximum-difference-between-even-and-odd-frequency-ii",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3445",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3446",
@@ -45098,12 +45098,12 @@
    "slug": "find-minimum-cost-to-remove-array-elements",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3469",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3470",
@@ -45527,12 +45527,12 @@
    "slug": "minimum-cost-to-reach-every-position",
    "difficulty": "Easy",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3502",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3503",
@@ -45540,12 +45540,12 @@
    "slug": "longest-palindrome-after-substring-concatenation-i",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3503",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3504",
@@ -45618,12 +45618,12 @@
    "slug": "maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3509",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3510",
@@ -45722,12 +45722,12 @@
    "slug": "smallest-palindromic-rearrangement-i",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3517",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3518",
@@ -45735,12 +45735,12 @@
    "slug": "smallest-palindromic-rearrangement-ii",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3518",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3519",
@@ -45748,12 +45748,12 @@
    "slug": "count-numbers-with-non-decreasing-digits",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3519",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3520",
