@@ -2,7 +2,7 @@ import { useState } from "react";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import {
   buildPermutations,
-  code,
+  legacyCode as code,
   linePatterns,
   TRACE_LIMIT,
 } from "./algorithm";
