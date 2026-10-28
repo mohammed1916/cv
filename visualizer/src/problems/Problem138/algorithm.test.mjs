@@ -263,3 +263,40 @@ test("frames are immutable across steps", () => {
   const fLast = frames[frames.length - 1];
   assert.equal(fLast.originalNodes[0].val, 10);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  const five = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+  assert.deepEqual(buildTrace(parseInput(JSON.stringify({ pairs: five }))).result, five)
+  assert.deepEqual(buildTrace(parseInput('{"pairs":[[1,1],[2,1]]}')).result, [[1,1],[2,1]])
+  assert.deepEqual(buildTrace(parseInput('{"pairs":[[3,null],[3,0],[3,null]]}')).result, [[3,null],[3,0],[3,null]])
+  assert.deepEqual(buildTrace(parseInput('{"pairs":[]}')).result, [])
+})
+
+test('validation rejects malformed lists with clear errors', () => {
+  assert.throws(() => parseInput('[[1,null]]'), /"pairs" array/)
+  assert.throws(() => parseInput('{"pairs":[[1]]}'), /\[val, random_index\]/)
+  assert.throws(() => parseInput('{"pairs":[[1,1]]}'), /valid 0-based node index/)
+  assert.throws(() => parseInput('{"pairs":[[500,null]]}'), /from -100 to 100/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"pairs":[[7,null],[13,0]]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def copy_random_list\(pairs\):/)
+})
+
+test('seeded random lists copy every value and random target position', () => {
+  let seed = 138
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  for (let t = 0; t < 150; t++) {
+    const n = rnd(9)
+    const pairs = Array.from({ length: n }, () => [rnd(201) - 100, null])
+    for (const p of pairs) p[1] = n === 0 || rnd(3) === 0 ? null : rnd(n)
+    const out = buildTrace(parseInput(JSON.stringify({ pairs }))).result
+    // Oracle: the copy must keep each value and point each random at the same position in the list.
+    assert.deepEqual(out, pairs, JSON.stringify(pairs))
+  }
+})

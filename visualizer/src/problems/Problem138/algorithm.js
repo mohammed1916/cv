@@ -868,3 +868,82 @@ export function buildCopyRandomListStory(input) {
 
   return { original, frames };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_NODES = 20
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"pairs": [[7,null],[13,0]]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.pairs)) throw new Error('Input must be an object with a "pairs" array.')
+  const pairs = data.pairs
+  if (pairs.length > MAX_NODES) throw new Error(`Use at most ${MAX_NODES} nodes for this trace.`)
+  pairs.forEach(p => {
+    if (!Array.isArray(p) || p.length !== 2) throw new Error('Each node must be [val, random_index].')
+    if (!Number.isInteger(p[0]) || p[0] < -100 || p[0] > 100) throw new Error('Values must be integers from -100 to 100.')
+    if (p[1] !== null && (!Number.isInteger(p[1]) || p[1] < 0 || p[1] >= pairs.length)) throw new Error('random_index must be null or a valid 0-based node index.')
+  })
+  return { pairs }
+}
+
+export function buildTrace(input) {
+  const pairs = input.pairs
+  const originals = pairs.map(([val]) => ({ val, next: null, random: null }))
+  pairs.forEach(([, r], i) => {
+    if (i + 1 < originals.length) originals[i].next = originals[i + 1]
+    originals[i].random = r === null ? null : originals[r]
+  })
+  const map = new Map()
+  const frames = []
+  for (const node of originals) {
+    map.set(node, { val: node.val, next: null, random: null })
+    frames.push({ activeLine: L('create a copy with the same value'), phase: 'copy', index: originals.indexOf(node), message: `Copy node ${node.val} and record it in the map.` })
+  }
+  for (const node of originals) {
+    const copy = map.get(node)
+    copy.next = node.next === null ? null : map.get(node.next)
+    copy.random = node.random === null ? null : map.get(node.random)
+    frames.push({ activeLine: L('copy.random = map'), phase: 'link', index: originals.indexOf(node), message: `Point the copy of ${node.val} at its next and random copies.` })
+  }
+  const head = originals.length ? map.get(originals[0]) : null
+  const result = []
+  const order = []
+  for (let c = head; c !== null; c = c.next) order.push(c)
+  for (const c of order) result.push([c.val, c.random === null ? null : order.indexOf(c.random)])
+  frames.push({ activeLine: L('return the copy of head'), phase: 'done', index: null, message: `The copy has ${result.length} nodes, none shared with the original.` })
+  return { input, result, frames }
+}
+
+export const code = [
+  { line: 1, text: 'deep copy of a list whose nodes have next and random pointers' },
+  { line: 2, text: 'if head is empty, return empty' },
+  { line: 3, text: 'map = empty map from original node to its copy' },
+  { line: 4, text: 'first pass: for each original node, create a copy with the same value' },
+  { line: 5, text: 'record the copy in map' },
+  { line: 6, text: 'second pass: for each original node' },
+  { line: 7, text: 'copy.next = map of original.next, or null' },
+  { line: 8, text: 'copy.random = map of original.random, or null' },
+  { line: 9, text: 'return the copy of head' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def copy_random_list(pairs):
+    originals = [{"val": v, "next": None, "random": None} for v, _ in pairs]
+    for i, (_, r) in enumerate(pairs):
+        if i + 1 < len(originals):
+            originals[i]["next"] = originals[i + 1]
+        originals[i]["random"] = None if r is None else originals[r]
+    copies = {}
+    for node in originals:
+        copies[id(node)] = {"val": node["val"], "next": None, "random": None}
+    for node in originals:
+        copy = copies[id(node)]
+        copy["next"] = None if node["next"] is None else copies[id(node["next"])]
+        copy["random"] = None if node["random"] is None else copies[id(node["random"])]
+    order = []
+    cur = copies[id(originals[0])] if originals else None
+    while cur is not None:
+        order.append(cur)
+        cur = cur["next"]
+    position = {id(c): i for i, c in enumerate(order)}
+    return [[c["val"], None if c["random"] is None else position[id(c["random"])]] for c in order]
+`

@@ -469,3 +469,80 @@ export function buildCloneGraphStory(input) {
 
   return { originalGraph, clonedGraph, frames };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_GRAPH_NODES = 20
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"adj_list": [[2,4],[1,3],[2,4],[1,3]]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.adj_list)) throw new Error('Input must be an object with an "adj_list" array.')
+  const adj = data.adj_list, n = adj.length
+  if (n > MAX_GRAPH_NODES) throw new Error(`Use at most ${MAX_GRAPH_NODES} nodes for this trace.`)
+  adj.forEach((nbrs, i) => {
+    if (!Array.isArray(nbrs)) throw new Error('Each adjacency entry must be an array.')
+    const seen = new Set()
+    for (const w of nbrs) {
+      if (!Number.isInteger(w) || w < 1 || w > n) throw new Error(`Neighbour values must be integers from 1 to ${n}.`)
+      if (w === i + 1) throw new Error('Self-loops are not allowed.')
+      if (seen.has(w)) throw new Error('Repeated edges are not allowed.')
+      seen.add(w)
+      if (!adj[w - 1].includes(i + 1)) throw new Error('Adjacency must be symmetric for an undirected graph.')
+    }
+  })
+  if (n > 0) {
+    const reached = new Set([1]), stack = [1]
+    while (stack.length) for (const w of adj[stack.pop() - 1]) if (!reached.has(w)) { reached.add(w); stack.push(w) }
+    if (reached.size !== n) throw new Error('The graph must be connected.')
+  }
+  return { adj_list: adj }
+}
+
+export function buildTrace(input) {
+  const adj = input.adj_list
+  const copies = new Map()
+  const frames = []
+  const clone = v => {
+    if (copies.has(v)) return copies.get(v)
+    const copy = { val: v, neighbors: [] }
+    copies.set(v, copy)
+    frames.push({ activeLine: L('create a copy of node'), phase: 'copy', node: v, copies: copies.size, message: `Create the copy for node ${v} and record it in the map.` })
+    for (const w of adj[v - 1]) {
+      copy.neighbors.push(clone(w))
+      frames.push({ activeLine: L('add the copy of each neighbour'), phase: 'link', node: v, copies: copies.size, message: `Link copy ${v} to copy ${w}.` })
+    }
+    return copy
+  }
+  if (adj.length > 0) clone(1)
+  const result = adj.map((_, i) => (copies.has(i + 1) ? copies.get(i + 1).neighbors.map(c => c.val) : []))
+  frames.push({ activeLine: L('return the copy of the starting node'), phase: 'done', node: null, copies: copies.size, message: `Cloned ${copies.size} nodes with their edges.` })
+  return { input, result, frames }
+}
+
+export const code = [
+  { line: 1, text: 'clone a connected undirected graph' },
+  { line: 2, text: 'copies = empty map from original node to its copy' },
+  { line: 3, text: 'clone(node): if node is in copies, return its copy' },
+  { line: 4, text: 'create a copy of node with the same value' },
+  { line: 5, text: 'record the copy in copies' },
+  { line: 6, text: 'for each neighbour, add the copy of each neighbour to the copy' },
+  { line: 7, text: 'return the copy of the starting node' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def clone_graph(adj_list):
+    if len(adj_list) == 0:
+        return []
+    copies = {}
+
+    def clone(v):
+        if v in copies:
+            return copies[v]
+        copy = {"val": v, "neighbors": []}
+        copies[v] = copy
+        for w in adj_list[v - 1]:
+            copy["neighbors"].append(clone(w))
+        return copy
+
+    clone(1)
+    return [[nb["val"] for nb in copies[v]["neighbors"]] for v in range(1, len(adj_list) + 1)]
+`

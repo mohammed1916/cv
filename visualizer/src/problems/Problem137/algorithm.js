@@ -367,3 +367,59 @@ export function buildSingleNumber2Story(input) {
     frames,
   };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_VALUES = 40
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"nums": [2,2,3,2]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.nums)) throw new Error('Input must be an object with a "nums" array.')
+  const nums = data.nums
+  if (nums.length < 1 || nums.length > MAX_VALUES) throw new Error(`Use between 1 and ${MAX_VALUES} values for this trace.`)
+  if (nums.length % 3 !== 1) throw new Error('Every value appears three times except one, so the length must be 1 more than a multiple of 3.')
+  for (const v of nums) if (!Number.isInteger(v) || Math.abs(v) > 30000) throw new Error('Values must be integers from -30000 to 30000.')
+  const counts = new Map()
+  for (const v of nums) counts.set(v, (counts.get(v) || 0) + 1)
+  const all = [...counts.values()]
+  if (all.filter(c => c === 1).length !== 1 || all.some(c => c !== 1 && c !== 3)) throw new Error('Exactly one value must appear once and every other value must appear three times.')
+  return { nums }
+}
+
+export function buildTrace(input) {
+  const nums = input.nums
+  let result = 0
+  const frames = [{ activeLine: L('result = 0'), phase: 'init', bit: null, ones: null, result, message: 'Count the set bits in each position; a count that is not a multiple of 3 belongs to the single value.' }]
+  for (let bit = 0; bit < 32; bit++) {
+    let ones = 0
+    for (const v of nums) ones += (v >> bit) & 1
+    if (ones % 3 !== 0) result |= (1 << bit)
+    frames.push({ activeLine: L('if the count is not a multiple of 3'), phase: 'bit', bit, ones, result: result | 0, message: `Bit ${bit}: ${ones} numbers have it set, ${ones % 3 ? 'so' : 'and'} ${ones % 3 ? 'the single value has it' : 'it is absent from the single value'}.` })
+  }
+  result = result | 0
+  frames.push({ activeLine: L('return result'), phase: 'done', bit: null, ones: null, result, message: `The value that appears once is ${result}.` })
+  return { input, result, frames }
+}
+
+export const code = [
+  { line: 1, text: 'find the value that appears once when all others appear three times' },
+  { line: 2, text: 'result = 0' },
+  { line: 3, text: 'for each bit position from 0 to 31' },
+  { line: 4, text: 'count how many numbers have this bit set' },
+  { line: 5, text: 'if the count is not a multiple of 3, set this bit in result' },
+  { line: 6, text: 'if bit 31 of result is set, subtract 2 to the 32 to make it negative' },
+  { line: 7, text: 'return result' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def single_number(nums):
+    result = 0
+    for bit in range(32):
+        ones = 0
+        for num in nums:
+            ones += (num >> bit) & 1
+        if ones % 3 != 0:
+            result |= 1 << bit
+    if result >= 1 << 31:
+        result -= 1 << 32
+    return result
+`

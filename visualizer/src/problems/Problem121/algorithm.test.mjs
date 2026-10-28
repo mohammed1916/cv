@@ -204,3 +204,38 @@ test("trace snapshots are immutable and frozen across execution steps", () => {
     frame0.minPrice = 123;
   }, TypeError);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"prices":[7,1,5,3,6,4]}')).result, 5)
+  assert.equal(buildTrace(parseInput('{"prices":[7,6,4,3,1]}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"prices":[4]}')).result, 0)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1,2]'), /object with a "prices" array/)
+  assert.throws(() => parseInput('{"prices":[]}'), /between 1 and 60/)
+  assert.throws(() => parseInput('{"prices":[-1]}'), /integers from 0 to 10000/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"prices":[7,1,5,3,6,4]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def max_profit\(prices\):/)
+})
+
+test('seeded random price lists match a brute-force pair oracle', () => {
+  let seed = 121
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const brute = p => {
+    let best = 0
+    for (let i = 0; i < p.length; i++) for (let j = i + 1; j < p.length; j++) best = Math.max(best, p[j] - p[i])
+    return best
+  }
+  for (let t = 0; t < 150; t++) {
+    const prices = Array.from({ length: 1 + rnd(15) }, () => rnd(101))
+    assert.equal(buildTrace(parseInput(JSON.stringify({ prices }))).result, brute(prices), JSON.stringify(prices))
+  }
+})

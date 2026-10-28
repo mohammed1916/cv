@@ -137,3 +137,45 @@ test("frames maintain immutable history snapshots and valid phase transitions", 
   doneFrame.history.push({ day: 99, price: 999 });
   assert.equal(story.frames[0].history.length, originalInitHistoryLength);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"prices":[3,3,5,0,0,3,1,4]}')).result, 6)
+  assert.equal(buildTrace(parseInput('{"prices":[1,2,3,4,5]}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"prices":[7,6,4,3,1]}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"prices":[1]}')).result, 0)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1,2]'), /object with a "prices" array/)
+  assert.throws(() => parseInput('{"prices":[]}'), /between 1 and 60/)
+  assert.throws(() => parseInput('{"prices":[-2]}'), /integers from 0 to 10000/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"prices":[3,3,5,0,0,3,1,4]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def max_profit\(prices\):/)
+})
+
+test('seeded random lists match a brute-force oracle over all transaction pairs', () => {
+  let seed = 123
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const brute = p => {
+    const n = p.length
+    const trades = []
+    for (let b = 0; b < n; b++) for (let s = b + 1; s < n; s++) trades.push([b, s, p[s] - p[b]])
+    let best = 0
+    for (const [, s1, g1] of trades) {
+      best = Math.max(best, g1)
+      for (const [b2, s2, g2] of trades) if (b2 >= s1) best = Math.max(best, g1 + g2)
+    }
+    return best
+  }
+  for (let t = 0; t < 150; t++) {
+    const prices = Array.from({ length: 1 + rnd(12) }, () => rnd(31))
+    assert.equal(buildTrace(parseInput(JSON.stringify({ prices }))).result, brute(prices), JSON.stringify(prices))
+  }
+})

@@ -195,3 +195,48 @@ test("trace frames are strictly immutable and have valid activeLine, phase, and 
     assert.equal(frames[6].clones[1]?.neighbors.includes(9999), false);
   }
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.deepEqual(buildTrace(parseInput('{"adj_list":[[2,4],[1,3],[2,4],[1,3]]}')).result, [[2,4],[1,3],[2,4],[1,3]])
+  assert.deepEqual(buildTrace(parseInput('{"adj_list":[[]]}')).result, [[]])
+  assert.deepEqual(buildTrace(parseInput('{"adj_list":[]}')).result, [])
+  assert.deepEqual(buildTrace(parseInput('{"adj_list":[[2],[1]]}')).result, [[2],[1]])
+})
+
+test('validation rejects malformed graphs with clear errors', () => {
+  assert.throws(() => parseInput('[[2],[1]]'), /"adj_list" array/)
+  assert.throws(() => parseInput('{"adj_list":[[1],[]]}'), /Self-loops/)
+  assert.throws(() => parseInput('{"adj_list":[[2,2],[1]]}'), /Repeated edges/)
+  assert.throws(() => parseInput('{"adj_list":[[2],[]]}'), /symmetric/)
+  assert.throws(() => parseInput('{"adj_list":[[],[]]}'), /connected/)
+  assert.throws(() => parseInput('{"adj_list":[[4],[],[1]]}'), /from 1 to 3/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"adj_list":[[2,4],[1,3],[2,4],[1,3]]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def clone_graph\(adj_list\):/)
+})
+
+test('seeded random connected graphs match their generating edge sets', () => {
+  let seed = 133
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  for (let t = 0; t < 120; t++) {
+    const n = 1 + rnd(8)
+    const edges = new Set()
+    for (let v = 2; v <= n; v++) edges.add(`${rnd(v - 1) + 1}-${v}`)
+    for (let extra = rnd(4); extra > 0; extra--) {
+      const a = 1 + rnd(n), b = 1 + rnd(n)
+      if (a !== b) edges.add(a < b ? `${a}-${b}` : `${b}-${a}`)
+    }
+    const expected = Array.from({ length: n }, () => [])
+    for (const e of edges) { const [a, b] = e.split('-').map(Number); expected[a - 1].push(b); expected[b - 1].push(a) }
+    const adj = expected.map(list => list.sort(() => (rnd(2) ? 1 : -1)))
+    const got = buildTrace(parseInput(JSON.stringify({ adj_list: adj }))).result
+    const norm = list => list.map(x => [...x].sort((p, q) => p - q))
+    assert.deepEqual(norm(got), norm(expected), JSON.stringify(adj))
+  }
+})

@@ -355,3 +355,58 @@ export function buildStock3Story(input) {
     frames,
   };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_PRICES = 60
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"prices": [3,3,5,0,0,3,1,4]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.prices)) throw new Error('Input must be an object with a "prices" array.')
+  if (data.prices.length < 1 || data.prices.length > MAX_PRICES) throw new Error(`Use between 1 and ${MAX_PRICES} prices for this trace.`)
+  for (const p of data.prices) if (!Number.isInteger(p) || p < 0 || p > 10000) throw new Error('Prices must be integers from 0 to 10000.')
+  return { prices: data.prices }
+}
+
+export function buildTrace(input) {
+  const prices = input.prices
+  let buy1 = -Infinity, sell1 = 0, buy2 = -Infinity, sell2 = 0
+  const frames = [{ activeLine: L('negative infinity'), phase: 'init', day: -1, state: { buy1, sell1, buy2, sell2 }, message: 'Four running states: first buy, first sell, second buy, second sell.' }]
+  prices.forEach((price, day) => {
+    buy1 = Math.max(buy1, -price)
+    frames.push({ activeLine: L('buy1 = max(buy1, -price)'), phase: 'buy', day, state: { buy1, sell1, buy2, sell2 }, message: `Day ${day} at ${price}: best cash after the first buy is ${buy1}.` })
+    sell1 = Math.max(sell1, buy1 + price)
+    frames.push({ activeLine: L('sell1 = max(sell1, buy1 + price)'), phase: 'sell', day, state: { buy1, sell1, buy2, sell2 }, message: `Best profit after one completed trade is ${sell1}.` })
+    buy2 = Math.max(buy2, sell1 - price)
+    sell2 = Math.max(sell2, buy2 + price)
+    frames.push({ activeLine: L('sell2 = max(sell2, buy2 + price)'), phase: 'second', day, state: { buy1, sell1, buy2, sell2 }, message: `Best profit after up to two trades is ${sell2}.` })
+  })
+  const result = sell2
+  frames.push({ activeLine: L('return sell2'), phase: 'done', day: prices.length - 1, state: { buy1, sell1, buy2, sell2 }, message: `Maximum profit with at most two transactions is ${result}.` })
+  return { input, result, frames }
+}
+
+export const code = [
+  { line: 1, text: 'maximum profit with at most two transactions' },
+  { line: 2, text: 'buy1 = negative infinity, sell1 = 0' },
+  { line: 3, text: 'buy2 = negative infinity, sell2 = 0' },
+  { line: 4, text: 'for each price in order' },
+  { line: 5, text: 'buy1 = max(buy1, -price)' },
+  { line: 6, text: 'sell1 = max(sell1, buy1 + price)' },
+  { line: 7, text: 'buy2 = max(buy2, sell1 - price)' },
+  { line: 8, text: 'sell2 = max(sell2, buy2 + price)' },
+  { line: 9, text: 'return sell2' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def max_profit(prices):
+    buy1 = float("-inf")
+    sell1 = 0
+    buy2 = float("-inf")
+    sell2 = 0
+    for price in prices:
+        buy1 = max(buy1, -price)
+        sell1 = max(sell1, buy1 + price)
+        buy2 = max(buy2, sell1 - price)
+        sell2 = max(sell2, buy2 + price)
+    return sell2
+`

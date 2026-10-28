@@ -214,3 +214,42 @@ test("trace frames are strictly immutable and valid", () => {
   const frameB = story.frames[story.frames.length - 1];
   assert.notEqual(frameA.bestSequence, frameB.bestSequence);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"nums":[100,4,200,1,3,2]}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"nums":[0,3,7,2,5,8,4,6,0,1]}')).result, 9)
+  assert.equal(buildTrace(parseInput('{"nums":[]}')).result, 0)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1,2]'), /object with a "nums" array/)
+  assert.throws(() => parseInput('{"nums":[1.5]}'), /integers between/)
+  assert.throws(() => parseInput('{"nums":[' + Array(41).fill(1).join(',') + ']}'), /at most 40/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"nums":[100,4,200,1,3,2]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def longest_consecutive\(nums\):/)
+})
+
+test('seeded random arrays match a sort-and-scan oracle', () => {
+  let seed = 128
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const oracle = nums => {
+    const sorted = [...new Set(nums)].sort((a, b) => a - b)
+    let best = 0, run = 0
+    sorted.forEach((v, i) => {
+      run = i > 0 && v === sorted[i - 1] + 1 ? run + 1 : 1
+      best = Math.max(best, run)
+    })
+    return best
+  }
+  for (let t = 0; t < 200; t++) {
+    const nums = Array.from({ length: rnd(25) }, () => rnd(31) - 10)
+    assert.equal(buildTrace(parseInput(JSON.stringify({ nums }))).result, oracle(nums), JSON.stringify(nums))
+  }
+})

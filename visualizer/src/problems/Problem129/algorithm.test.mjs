@@ -179,3 +179,59 @@ describe('Problem 129: Sum Root to Leaf Numbers', () => {
     });
   });
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+it('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"root":[1,2,3]}')).result, 25)
+  assert.equal(buildTrace(parseInput('{"root":[4,9,0,5,1]}')).result, 1026)
+  assert.equal(buildTrace(parseInput('{"root":[0]}')).result, 0)
+})
+
+it('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1]'), /object with a "root" array/)
+  assert.throws(() => parseInput('{"root":[null,1]}'), /root slot cannot be null/)
+  assert.throws(() => parseInput('{"root":[10]}'), /digits 0 to 9/)
+  assert.throws(() => parseInput('{"root":' + JSON.stringify(Array(16).fill(1)) + '}'), /at most|between 1 and 15/)
+})
+
+it('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"root":[4,9,0,5,1]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def sum_root_to_leaf\(root\):/)
+})
+
+it('seeded random trees match a path-enumeration oracle', () => {
+  let seed = 129
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const oracle = root => {
+    // Independent oracle: nested objects built from a recursive split of the slot list, then explicit path strings.
+    const build = (index) => {
+      if (index >= root.length || root[index] === null) return null
+      return { digit: root[index], kids: [] }
+    }
+    const nodes = root.map((_, i) => build(i))
+    const queue = [nodes[0]]; let slot = 1
+    for (let i = 0; i < queue.length; i++) {
+      for (let k = 0; k < 2; k++) {
+        const idx = slot++
+        if (idx < nodes.length && nodes[idx]) { queue[i].kids.push(nodes[idx]); queue.push(nodes[idx]) }
+      }
+    }
+    let total = 0
+    const paths = (node, digits) => {
+      const d = digits + String(node.digit)
+      if (node.kids.length === 0) total += Number(d)
+      for (const kid of node.kids) paths(kid, d)
+    }
+    paths(nodes[0], '')
+    return total
+  }
+  for (let t = 0; t < 200; t++) {
+    const len = 1 + rnd(12)
+    const root = Array.from({ length: len }, (_, i) => (i > 0 && rnd(3) === 0 ? null : rnd(10)))
+    root[0] = root[0] === null ? 5 : root[0]
+    assert.equal(buildTrace(parseInput(JSON.stringify({ root }))).result, oracle(root), JSON.stringify(root))
+  }
+})

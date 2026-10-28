@@ -168,3 +168,46 @@ test("frames are immutable and correctly snapshot backtracking state evolution",
   assert.deepEqual(f0.partitions, []);
   assert.deepEqual(f1.path, []);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  const sorted = p => [...p].map(x => [...x]).sort((a, b) => JSON.stringify(a) < JSON.stringify(b) ? -1 : 1)
+  assert.deepEqual(sorted(buildTrace(parseInput('{"s":"aab"}')).result), sorted([["a","a","b"],["aa","b"]]))
+  assert.deepEqual(buildTrace(parseInput('{"s":"a"}')).result, [["a"]])
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('"aab"'), /string field "s"/)
+  assert.throws(() => parseInput('{"s":""}'), /between 1 and 16/)
+  assert.throws(() => parseInput('{"s":"aB"}'), /lowercase English letters/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"s":"aab"}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def palindrome_partition\(s\):/)
+})
+
+test('seeded random strings match a cut-subset enumeration oracle', () => {
+  let seed = 131
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const oracle = s => {
+    const out = []
+    const gaps = s.length - 1
+    for (let mask = 0; mask < 1 << gaps; mask++) {
+      const parts = []
+      let from = 0
+      for (let g = 0; g < gaps; g++) if (mask & (1 << g)) { parts.push(s.slice(from, g + 1)); from = g + 1 }
+      parts.push(s.slice(from))
+      if (parts.every(p => p === [...p].reverse().join(''))) out.push(parts)
+    }
+    return out
+  }
+  const canon = p => p.map(x => x.join(',')).sort()
+  for (let t = 0; t < 120; t++) {
+    const s = Array.from({ length: 1 + rnd(9) }, () => 'ab'[rnd(2)]).join('')
+    assert.deepEqual(canon(buildTrace(parseInput(JSON.stringify({ s }))).result), canon(oracle(s)), s)
+  }
+})

@@ -263,3 +263,51 @@ test("trace frames are immutable and correctly snapshot board state", () => {
     assert.ok(frame.stats);
   }
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  const board = [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
+  assert.deepEqual(buildTrace(parseInput(JSON.stringify({ board }))).result, [["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]])
+  assert.deepEqual(buildTrace(parseInput('{"board":[["X"]]}')).result, [["X"]])
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[["X"]]'), /object with a "board" array/)
+  assert.throws(() => parseInput('{"board":[["X","O"],["X"]]}'), /same number of cells/)
+  assert.throws(() => parseInput('{"board":[["X","Y"]]}'), /"X" or "O"/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"board":[["X","O"],["X","X"]]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def solve\(board\):/)
+})
+
+test('seeded random boards match a per-cell reachability oracle', () => {
+  let seed = 130
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  // Oracle: an O stays only if some path of O cells from it reaches the border (checked cell by cell, no flood from the border).
+  const oracle = board => {
+    const rows = board.length, cols = board[0].length
+    const reachesBorder = (sr, sc) => {
+      const seen = new Set([`${sr},${sc}`]), q = [[sr, sc]]
+      while (q.length) {
+        const [r, c] = q.shift()
+        if (r === 0 || c === 0 || r === rows - 1 || c === cols - 1) return true
+        for (const [nr, nc] of [[r + 1, c], [r - 1, c], [r, c + 1], [r, c - 1]]) {
+          const key = `${nr},${nc}`
+          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && board[nr][nc] === 'O' && !seen.has(key)) { seen.add(key); q.push([nr, nc]) }
+        }
+      }
+      return false
+    }
+    return board.map((row, r) => row.map((cell, c) => (cell === 'O' && !reachesBorder(r, c) ? 'X' : cell)))
+  }
+  for (let t = 0; t < 150; t++) {
+    const rows = 1 + rnd(6), cols = 1 + rnd(6)
+    const board = Array.from({ length: rows }, () => Array.from({ length: cols }, () => (rnd(2) ? 'X' : 'O')))
+    assert.deepEqual(buildTrace(parseInput(JSON.stringify({ board }))).result, oracle(board), JSON.stringify(board))
+  }
+})

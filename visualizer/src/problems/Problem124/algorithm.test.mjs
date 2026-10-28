@@ -172,3 +172,60 @@ describe('Problem 124: Binary Tree Maximum Path Sum', () => {
     });
   });
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+it('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"root":[1,2,3]}')).result, 6)
+  assert.equal(buildTrace(parseInput('{"root":[-10,9,20,null,null,15,7]}')).result, 42)
+  assert.equal(buildTrace(parseInput('{"root":[-3]}')).result, -3)
+})
+
+it('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1]'), /object with a "root" array/)
+  assert.throws(() => parseInput('{"root":[]}'), /between 1 and 60/)
+  assert.throws(() => parseInput('{"root":[null,1]}'), /root slot cannot be null/)
+  assert.throws(() => parseInput('{"root":[1001]}'), /integers from -1000 to 1000/)
+})
+
+it('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"root":[1,2,3]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def max_path_sum\(root\):/)
+})
+
+it('seeded random trees match a brute-force oracle over all node pairs', () => {
+  let seed = 124
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const brute = root => {
+    // Independent oracle: object nodes built from a queue, parent pointers, every node pair.
+    const slots = root.map(v => (v === null ? null : { v, parent: null, kids: [] }))
+    const queue = [slots[0]]; let slot = 1
+    for (let i = 0; i < queue.length; i++) {
+      for (let k = 0; k < 2; k++) {
+        const idx = slot++
+        if (idx < slots.length && slots[idx]) { slots[idx].parent = queue[i]; queue[i].kids.push(slots[idx]); queue.push(slots[idx]) }
+      }
+    }
+    const nodes = queue // only nodes reachable from the root; trailing unattached slots are ignored
+    const ancestors = x => { const out = []; for (let y = x; y; y = y.parent) out.push(y); return out }
+    let best = -Infinity
+    for (const a of nodes) for (const b of nodes) {
+      const up = ancestors(a), other = new Set(ancestors(b))
+      const lca = up.find(x => other.has(x))
+      const path = new Set()
+      for (let x = a; x !== lca; x = x.parent) path.add(x)
+      for (let x = b; x !== lca; x = x.parent) path.add(x)
+      path.add(lca)
+      best = Math.max(best, [...path].reduce((sum, x) => sum + x.v, 0))
+    }
+    return best
+  }
+  for (let t = 0; t < 150; t++) {
+    const len = 1 + rnd(15)
+    const root = Array.from({ length: len }, (_, i) => (i > 0 && rnd(3) === 0 ? null : rnd(201) - 100))
+    root[0] = root[0] === null ? 0 : root[0]
+    assert.equal(buildTrace(parseInput(JSON.stringify({ root }))).result, brute(root), JSON.stringify(root))
+  }
+})

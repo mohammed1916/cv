@@ -201,3 +201,46 @@ test("buildSingleNumber2Story frames are immutable snapshots", () => {
   f0.processedIndices.push(999);
   assert.ok(!f1.processedIndices.includes(999));
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"nums":[2,2,3,2]}')).result, 3)
+  assert.equal(buildTrace(parseInput('{"nums":[0,1,0,1,0,1,99]}')).result, 99)
+  assert.equal(buildTrace(parseInput('{"nums":[-2,-2,-2,7]}')).result, 7)
+})
+
+test('validation rejects inputs that break the statement guarantee', () => {
+  assert.throws(() => parseInput('[1]'), /"nums" array/)
+  assert.throws(() => parseInput('{"nums":[1,1]}'), /1 more than a multiple of 3/)
+  assert.throws(() => parseInput('{"nums":[1,2,3,4]}'), /appear once and every other value must appear three times/)
+  assert.throws(() => parseInput('{"nums":[1,1,2,2]}'), /appear once and every other value must appear three times/)
+  assert.throws(() => parseInput('{"nums":[1.5]}'), /integers from -30000/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"nums":[2,2,3,2]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def single_number\(nums\):/)
+})
+
+test('seeded random triple-plus-single arrays match a count-map oracle', () => {
+  let seed = 137
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const oracle = nums => {
+    const counts = new Map()
+    for (const v of nums) counts.set(v, (counts.get(v) || 0) + 1)
+    return [...counts].find(([, c]) => c === 1)[0]
+  }
+  for (let t = 0; t < 200; t++) {
+    const groups = 1 + rnd(9)
+    const pool = Array.from({ length: 41 }, (_, i) => i - 20)
+    for (let i = pool.length - 1; i > 0; i--) { const j = rnd(i + 1); [pool[i], pool[j]] = [pool[j], pool[i]] }
+    const values = pool.slice(0, groups + 1)
+    const nums = [values[0]]
+    for (const v of values.slice(1)) nums.push(v, v, v)
+    for (let i = nums.length - 1; i > 0; i--) { const j = rnd(i + 1); [nums[i], nums[j]] = [nums[j], nums[i]] }
+    assert.equal(buildTrace(parseInput(JSON.stringify({ nums }))).result, oracle(nums), JSON.stringify(nums))
+  }
+})

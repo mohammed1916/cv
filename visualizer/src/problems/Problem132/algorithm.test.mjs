@@ -161,3 +161,46 @@ test("trace frames are immutable and have required metadata", () => {
     assert.ok(Array.isArray(frame.relatedLines));
   }
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"s":"aab"}')).result, 1)
+  assert.equal(buildTrace(parseInput('{"s":"a"}')).result, 0)
+  assert.equal(buildTrace(parseInput('{"s":"ab"}')).result, 1)
+  assert.equal(buildTrace(parseInput('{"s":"abcde"}')).result, 4)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('"aab"'), /string field "s"/)
+  assert.throws(() => parseInput('{"s":""}'), /between 1 and 40/)
+  assert.throws(() => parseInput('{"s":"A"}'), /lowercase English letters/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"s":"aab"}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def min_cut\(s\):/)
+})
+
+test('seeded random strings match a brute-force cut-subset oracle', () => {
+  let seed = 132
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const oracle = s => {
+    let best = Infinity
+    const gaps = s.length - 1
+    for (let mask = 0; mask < 1 << gaps; mask++) {
+      const parts = []
+      let from = 0, cuts = 0
+      for (let g = 0; g < gaps; g++) if (mask & (1 << g)) { parts.push(s.slice(from, g + 1)); from = g + 1; cuts++ }
+      parts.push(s.slice(from))
+      if (parts.every(p => p === [...p].reverse().join(''))) best = Math.min(best, cuts)
+    }
+    return best
+  }
+  for (let t = 0; t < 150; t++) {
+    const s = Array.from({ length: 1 + rnd(11) }, () => 'ab'[rnd(2)]).join('')
+    assert.equal(buildTrace(parseInput(JSON.stringify({ s }))).result, oracle(s), s)
+  }
+})

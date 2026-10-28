@@ -321,3 +321,55 @@ export function buildCandyStory(input) {
     frames,
   };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_CHILDREN = 40
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"ratings": [1,0,2]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.ratings)) throw new Error('Input must be an object with a "ratings" array.')
+  if (data.ratings.length < 1 || data.ratings.length > MAX_CHILDREN) throw new Error(`Use between 1 and ${MAX_CHILDREN} children for this trace.`)
+  for (const v of data.ratings) if (!Number.isInteger(v) || v < 0 || v > 1000) throw new Error('Ratings must be integers from 0 to 1000.')
+  return { ratings: data.ratings }
+}
+
+export function buildTrace(input) {
+  const r = input.ratings
+  const n = r.length
+  const candies = Array(n).fill(1)
+  const frames = [{ activeLine: L('candies = all ones'), phase: 'init', i: 0, candies: [...candies], message: 'Everyone starts with one candy.' }]
+  for (let i = 1; i < n; i++) {
+    if (r[i] > r[i - 1]) candies[i] = candies[i - 1] + 1
+    frames.push({ activeLine: L('left-to-right'), phase: 'left', i, candies: [...candies], message: `Left pass at ${i}: rating ${r[i]} vs ${r[i - 1]} gives ${candies[i]} candies.` })
+  }
+  for (let i = n - 2; i >= 0; i--) {
+    if (r[i] > r[i + 1]) candies[i] = Math.max(candies[i], candies[i + 1] + 1)
+    frames.push({ activeLine: L('right-to-left'), phase: 'right', i, candies: [...candies], message: `Right pass at ${i}: keep at least the right neighbour's count plus one when needed.` })
+  }
+  const result = candies.reduce((a, b) => a + b, 0)
+  frames.push({ activeLine: L('return the sum'), phase: 'done', i: null, candies: [...candies], message: `Minimum total is ${result} candies.` })
+  return { input, result, frames }
+}
+
+export const code = [
+  { line: 1, text: 'minimum candies so higher-rated neighbours get more' },
+  { line: 2, text: 'candies = all ones' },
+  { line: 3, text: 'left-to-right pass over the children' },
+  { line: 4, text: 'if rating i is above rating i - 1, candies i = candies i - 1 plus 1' },
+  { line: 5, text: 'right-to-left pass over the children' },
+  { line: 6, text: 'if rating i is above rating i + 1, candies i = max of its count and candies i + 1 plus 1' },
+  { line: 7, text: 'return the sum of candies' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def candy(ratings):
+    n = len(ratings)
+    candies = [1] * n
+    for i in range(1, n):
+        if ratings[i] > ratings[i - 1]:
+            candies[i] = candies[i - 1] + 1
+    for i in range(n - 2, -1, -1):
+        if ratings[i] > ratings[i + 1]:
+            candies[i] = max(candies[i], candies[i + 1] + 1)
+    return sum(candies)
+`

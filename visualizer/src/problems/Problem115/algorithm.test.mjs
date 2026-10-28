@@ -15,3 +15,45 @@ test('earlier cells do not reveal future writes; skip and use have separate fram
   assert.equal(buildSubsequenceStory('a'.repeat(64),'a'.repeat(32)).frames.at(-1).value,'1832624140942590534');
   assert.throws(()=>buildSubsequenceStory('a'.repeat(65),''));
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples and boundary presets', () => {
+  assert.equal(buildTrace(parseInput('{"s":"rabbbit","t":"rabbit"}')).result, 3)
+  assert.equal(buildTrace(parseInput('{"s":"babgbag","t":"bag"}')).result, 5)
+  assert.equal(buildTrace(parseInput('{"s":"mmmmmm","t":"mmm"}')).result, 20)
+  assert.equal(buildTrace(parseInput('{"s":"","t":""}')).result, 1)
+  assert.equal(buildTrace(parseInput('{"s":"","t":"a"}')).result, 0)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('["a","b"]'), /string fields "s" and "t"/)
+  assert.throws(() => parseInput('{"s":"a1","t":"a"}'), /English letters only/)
+  assert.throws(() => parseInput('{"s":"' + 'a'.repeat(31) + '","t":""}'), /at most 30/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"s":"rabbbit","t":"rabbit"}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def distinct_subsequences\(s, t\):/)
+})
+
+test('seeded random strings match a brute-force oracle over all index subsets', () => {
+  let seed = 115
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const brute = (s, t) => {
+    let count = 0
+    for (let mask = 0; mask < 1 << s.length; mask++) {
+      let picked = ''
+      for (let k = 0; k < s.length; k++) if (mask & (1 << k)) picked += s[k]
+      if (picked === t) count++
+    }
+    return count
+  }
+  const word = len => Array.from({ length: len }, () => 'abc'[rnd(3)]).join('')
+  for (let k = 0; k < 150; k++) {
+    const s = word(rnd(13)), t = word(rnd(7))
+    assert.equal(buildTrace(parseInput(JSON.stringify({ s, t }))).result, brute(s, t), `${s} / ${t}`)
+  }
+})

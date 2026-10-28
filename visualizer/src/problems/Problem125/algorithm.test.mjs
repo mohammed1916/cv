@@ -183,3 +183,38 @@ test("frames are immutable and correctly snapshot pointer evolution", () => {
   assert.deepEqual(f0.matchedIndices, []);
   assert.deepEqual(f1.matchedIndices, []);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"s":"A man, a plan, a canal: Panama"}')).result, true)
+  assert.equal(buildTrace(parseInput('{"s":"race a car"}')).result, false)
+  assert.equal(buildTrace(parseInput('{"s":" "}')).result, true)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('"abc"'), /string field "s"/)
+  assert.throws(() => parseInput('{"s":""}'), /between 1 and 60/)
+  assert.throws(() => parseInput('{"s":"é"}'), /printable ASCII/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"s":"race a car"}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def is_palindrome\(s\):/)
+})
+
+test('seeded random phrases match a filter-then-reverse oracle', () => {
+  let seed = 125
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const alphabet = 'aAbB1 ,.:!'
+  const oracle = s => {
+    const clean = s.replace(/[^a-z0-9]/gi, '').toLowerCase()
+    return clean === clean.split('').reverse().join('')
+  }
+  for (let t = 0; t < 200; t++) {
+    const s = Array.from({ length: 1 + rnd(14) }, () => alphabet[rnd(alphabet.length)]).join('')
+    assert.equal(buildTrace(parseInput(JSON.stringify({ s }))).result, oracle(s), JSON.stringify(s))
+  }
+})

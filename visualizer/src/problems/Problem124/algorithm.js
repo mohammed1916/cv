@@ -355,3 +355,95 @@ export function buildMaxPathStory(input) {
     height: layout.height,
   };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_SLOTS = 60
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"root": [1,2,3]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.root)) throw new Error('Input must be an object with a "root" array.')
+  const root = data.root
+  if (root.length < 1 || root.length > MAX_SLOTS) throw new Error(`Use between 1 and ${MAX_SLOTS} slots for this trace.`)
+  if (root[0] === null) throw new Error('The root slot cannot be null; a path needs at least one node.')
+  for (const v of root) if (v !== null && (!Number.isInteger(v) || v < -1000 || v > 1000)) throw new Error('Values must be integers from -1000 to 1000 or null.')
+  return { root }
+}
+
+function slotLinks(root) {
+  const n = root.length, left = Array(n).fill(null), right = Array(n).fill(null)
+  const queue = [0]; let next = 1
+  for (let head = 0; head < queue.length; head++) {
+    const i = queue[head]
+    for (const side of ['left', 'right']) {
+      const slot = next++
+      if (slot < n && root[slot] !== null) { (side === 'left' ? left : right)[i] = slot; queue.push(slot) }
+    }
+  }
+  return { left, right }
+}
+
+export function buildTrace(input) {
+  const root = input.root
+  const { left, right } = slotLinks(root)
+  const frames = []
+  let best = -Infinity
+  const gain = id => {
+    if (id === null) return 0
+    frames.push({ activeLine: L('if node is empty'), phase: 'visit', node: id, value: root[id], best, message: `Visit ${root[id]}; first ask its children for their best downward gain.` })
+    const leftGain = Math.max(0, gain(left[id]))
+    const rightGain = Math.max(0, gain(right[id]))
+    const through = root[id] + leftGain + rightGain
+    best = Math.max(best, through)
+    frames.push({ activeLine: L('best = max(best'), phase: 'combine', node: id, value: through, best, message: `A path through ${root[id]} sums to ${through}; best so far is ${best}.` })
+    return root[id] + Math.max(leftGain, rightGain)
+  }
+  gain(0)
+  frames.push({ activeLine: L('return best'), phase: 'done', node: 0, value: best, best, message: `Maximum path sum is ${best}.` })
+  return { input, result: best, frames }
+}
+
+export const code = [
+  { line: 1, text: 'maximum path sum over all paths in the tree' },
+  { line: 2, text: 'best = negative infinity' },
+  { line: 3, text: 'gain(node) returns the best downward sum from node' },
+  { line: 4, text: 'if node is empty return 0' },
+  { line: 5, text: 'left = max(0, gain(node.left))' },
+  { line: 6, text: 'right = max(0, gain(node.right))' },
+  { line: 7, text: 'best = max(best, node.val + left + right)' },
+  { line: 8, text: 'return node.val + max(left, right)' },
+  { line: 9, text: 'call gain(root) then return best' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def max_path_sum(root):
+    n = len(root)
+    left = [None] * n
+    right = [None] * n
+    queue = [0]
+    nxt = 1
+    head = 0
+    while head < len(queue):
+        i = queue[head]
+        head += 1
+        for side in ("left", "right"):
+            slot = nxt
+            nxt += 1
+            if slot < n and root[slot] is not None:
+                if side == "left":
+                    left[i] = slot
+                else:
+                    right[i] = slot
+                queue.append(slot)
+    best = [float("-inf")]
+
+    def gain(node):
+        if node is None:
+            return 0
+        left_gain = max(0, gain(left[node]))
+        right_gain = max(0, gain(right[node]))
+        best[0] = max(best[0], root[node] + left_gain + right_gain)
+        return root[node] + max(left_gain, right_gain)
+
+    gain(0)
+    return best[0]
+`

@@ -165,3 +165,50 @@ test("Trace frames maintain immutable state snapshots", () => {
   const fLastStates = story.frames[story.frames.length - 1].stationStates;
   assert.notEqual(f0States, fLastStates, "stationStates must be freshly snapshot per frame");
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"gas":[1,2,3,4,5],"cost":[3,4,5,1,2]}')).result, 3)
+  assert.equal(buildTrace(parseInput('{"gas":[2,3,4],"cost":[3,4,3]}')).result, -1)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1]'), /"gas" and "cost" arrays/)
+  assert.throws(() => parseInput('{"gas":[1,2],"cost":[1]}'), /same length/)
+  assert.throws(() => parseInput('{"gas":[-1],"cost":[1]}'), /from 0 to 10000/)
+  assert.throws(() => parseInput('{"gas":[],"cost":[]}'), /between 1 and 40/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"gas":[1,2,3,4,5],"cost":[3,4,5,1,2]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def can_complete_circuit\(gas, cost\):/)
+})
+
+test('seeded random stations match a try-every-start simulation oracle', () => {
+  let seed = 134
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const simulate = (gas, cost) => {
+    const n = gas.length
+    for (let s = 0; s < n; s++) {
+      let tank = 0, ok = true
+      for (let k = 0; k < n; k++) {
+        const i = (s + k) % n
+        tank += gas[i] - cost[i]
+        if (tank < 0) { ok = false; break }
+      }
+      if (ok) return s
+    }
+    return -1
+  }
+  for (let t = 0; t < 200; t++) {
+    const n = 1 + rnd(8)
+    const gas = Array.from({ length: n }, () => rnd(6))
+    const cost = Array.from({ length: n }, () => rnd(6))
+    const got = buildTrace(parseInput(JSON.stringify({ gas, cost }))).result
+    // The greedy may return any valid unique start; the oracle's first valid start must match because the answer is unique when it exists.
+    assert.equal(got, simulate(gas, cost), JSON.stringify({ gas, cost }))
+  }
+})

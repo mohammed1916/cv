@@ -180,3 +180,42 @@ test("frames maintain immutability and do not leak future transaction mutations"
   assert.equal(lastFrame.transactions.length, 2);
   assert.equal(lastFrame.profit, 10);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"prices":[7,1,5,3,6,4]}')).result, 7)
+  assert.equal(buildTrace(parseInput('{"prices":[1,2,3,4,5]}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"prices":[7,6,4,3,1]}')).result, 0)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1,2]'), /object with a "prices" array/)
+  assert.throws(() => parseInput('{"prices":[]}'), /between 1 and 60/)
+  assert.throws(() => parseInput('{"prices":[1.5]}'), /integers from 0 to 10000/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"prices":[7,1,5,3,6,4]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def max_profit\(prices\):/)
+})
+
+test('seeded random price lists match a two-state cash/holding DP oracle', () => {
+  let seed = 122
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const stateDp = p => {
+    let cash = 0, hold = -Infinity
+    for (const price of p) {
+      const nextCash = Math.max(cash, hold + price)
+      hold = Math.max(hold, cash - price)
+      cash = nextCash
+    }
+    return cash
+  }
+  for (let t = 0; t < 150; t++) {
+    const prices = Array.from({ length: 1 + rnd(20) }, () => rnd(101))
+    assert.equal(buildTrace(parseInput(JSON.stringify({ prices }))).result, stateDp(prices), JSON.stringify(prices))
+  }
+})

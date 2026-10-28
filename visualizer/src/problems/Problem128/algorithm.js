@@ -318,3 +318,62 @@ export function buildConsecutiveStory(input) {
     frames,
   };
 }
+
+// ─── Statement contract: parseInput / buildTrace / code / python ───
+const MAX_VALUES = 40
+export function parseInput(text) {
+  let data
+  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"nums": [100,4,200,1,3,2]}.') }
+  if (!data || typeof data !== 'object' || !Array.isArray(data.nums)) throw new Error('Input must be an object with a "nums" array.')
+  if (data.nums.length > MAX_VALUES) throw new Error(`Use at most ${MAX_VALUES} values for this trace.`)
+  for (const v of data.nums) if (!Number.isInteger(v) || Math.abs(v) > 1e9) throw new Error('Values must be integers between -1000000000 and 1000000000.')
+  return { nums: data.nums }
+}
+
+export function buildTrace(input) {
+  const nums = input.nums
+  const seen = new Set(nums)
+  let best = 0
+  const frames = [{ activeLine: L('seen = set of all numbers'), phase: 'init', start: null, length: 0, best, message: `Store the ${seen.size} distinct values for constant-time lookups.` }]
+  for (const num of seen) {
+    if (seen.has(num - 1)) {
+      frames.push({ activeLine: L('if number minus 1 is not in seen'), phase: 'skip', start: num, length: 0, best, message: `${num} has ${num - 1} before it, so it is not a run start.` })
+      continue
+    }
+    let length = 1
+    frames.push({ activeLine: L('length = 1'), phase: 'start', start: num, length, best, message: `${num} starts a run because ${num - 1} is absent.` })
+    while (seen.has(num + length)) {
+      length++
+      frames.push({ activeLine: L('while number plus length is in seen'), phase: 'extend', start: num, length, best, message: `${num + length - 1} is present; the run from ${num} now has length ${length}.` })
+    }
+    best = Math.max(best, length)
+    frames.push({ activeLine: L('best = max(best, length)'), phase: 'record', start: num, length, best, message: `The run from ${num} has length ${length}; best is ${best}.` })
+  }
+  frames.push({ activeLine: L('return best'), phase: 'done', start: null, length: 0, best, message: `Longest consecutive sequence has length ${best}.` })
+  return { input, result: best, frames }
+}
+
+export const code = [
+  { line: 1, text: 'length of the longest run of consecutive integers' },
+  { line: 2, text: 'seen = set of all numbers' },
+  { line: 3, text: 'best = 0' },
+  { line: 4, text: 'for each number in seen' },
+  { line: 5, text: 'if number minus 1 is not in seen, it starts a run' },
+  { line: 6, text: 'length = 1' },
+  { line: 7, text: 'while number plus length is in seen, increase length' },
+  { line: 8, text: 'best = max(best, length)' },
+  { line: 9, text: 'return best' },
+]
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def longest_consecutive(nums):
+    seen = set(nums)
+    best = 0
+    for num in seen:
+        if num - 1 not in seen:
+            length = 1
+            while num + length in seen:
+                length += 1
+            best = max(best, length)
+    return best
+`

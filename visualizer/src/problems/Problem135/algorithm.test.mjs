@@ -227,3 +227,48 @@ test("trace frames are immutable and frozen across execution steps", () => {
     frame0.candies[0] = 999;
   }, TypeError);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"ratings":[1,0,2]}')).result, 5)
+  assert.equal(buildTrace(parseInput('{"ratings":[1,2,2]}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"ratings":[4,3,5]}')).result, 5)
+  assert.equal(buildTrace(parseInput('{"ratings":[2,3,3]}')).result, 4)
+})
+
+test('validation rejects malformed input with clear errors', () => {
+  assert.throws(() => parseInput('[1]'), /"ratings" array/)
+  assert.throws(() => parseInput('{"ratings":[]}'), /between 1 and 40/)
+  assert.throws(() => parseInput('{"ratings":[-1]}'), /from 0 to 1000/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"ratings":[1,0,2]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def candy\(ratings\):/)
+})
+
+test('seeded random ratings match a relax-until-stable oracle', () => {
+  let seed = 135
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const relax = ratings => {
+    // Independent oracle: raise any violating child until no constraint is broken (least fixed point).
+    const c = ratings.map(() => 1)
+    let changed = true
+    while (changed) {
+      changed = false
+      for (let i = 0; i < ratings.length; i++) {
+        for (const j of [i - 1, i + 1]) {
+          if (j >= 0 && j < ratings.length && ratings[i] > ratings[j] && c[i] <= c[j]) { c[i] = c[j] + 1; changed = true }
+        }
+      }
+    }
+    return c.reduce((a, b) => a + b, 0)
+  }
+  for (let t = 0; t < 200; t++) {
+    const ratings = Array.from({ length: 1 + rnd(12) }, () => rnd(6))
+    assert.equal(buildTrace(parseInput(JSON.stringify({ ratings }))).result, relax(ratings), JSON.stringify(ratings))
+  }
+})

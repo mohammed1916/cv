@@ -211,3 +211,49 @@ test("Story frames are immutable across playback steps", () => {
   assert.equal(frame2Cancelled.length, 2);
   assert.notEqual(frame0Cancelled, frame2Cancelled);
 });
+
+// ─── Statement contract tests (parseInput / buildTrace / python) ───
+import { parseInput, buildTrace, code, python } from './algorithm.js'
+
+test('statement examples', () => {
+  assert.equal(buildTrace(parseInput('{"nums":[2,2,1]}')).result, 1)
+  assert.equal(buildTrace(parseInput('{"nums":[4,1,2,1,2]}')).result, 4)
+  assert.equal(buildTrace(parseInput('{"nums":[1]}')).result, 1)
+})
+
+test('validation rejects inputs that break the statement guarantee', () => {
+  assert.throws(() => parseInput('[1]'), /"nums" array/)
+  assert.throws(() => parseInput('{"nums":[1,1]}'), /must be odd/)
+  assert.throws(() => parseInput('{"nums":[1,2,3]}'), /appear once and every other value must appear twice/)
+  assert.throws(() => parseInput('{"nums":[1,1,1]}'), /appear once and every other value must appear twice/)
+  assert.throws(() => parseInput('{"nums":[1.5]}'), /integers from -30000/)
+})
+
+test('every frame points at a pseudocode line and the python export is present', () => {
+  const trace = buildTrace(parseInput('{"nums":[4,1,2,1,2]}'))
+  for (const f of trace.frames) assert.ok(Number.isInteger(f.activeLine) && f.activeLine >= 1 && f.activeLine <= code.length)
+  assert.match(python, /def single_number\(nums\):/)
+})
+
+test('seeded random pair-plus-single arrays match a count-map oracle', () => {
+  let seed = 136
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const oracle = nums => {
+    const counts = new Map()
+    for (const v of nums) counts.set(v, (counts.get(v) || 0) + 1)
+    return [...counts].find(([, c]) => c === 1)[0]
+  }
+  for (let t = 0; t < 200; t++) {
+    const pairs = 1 + rnd(10)
+    const pool = Array.from({ length: 41 }, (_, i) => i - 20)
+    for (let i = pool.length - 1; i > 0; i--) { const j = rnd(i + 1); [pool[i], pool[j]] = [pool[j], pool[i]] }
+    const values = pool.slice(0, pairs + 1)
+    const single = values[0]
+    const nums = [single]
+    for (const v of values.slice(1)) nums.push(v, v)
+    // Ensure the chosen singleton is distinct from every paired value.
+    if (nums.filter(x => x === single).length !== 1) continue
+    for (let i = nums.length - 1; i > 0; i--) { const j = rnd(i + 1); [nums[i], nums[j]] = [nums[j], nums[i]] }
+    assert.equal(buildTrace(parseInput(JSON.stringify({ nums }))).result, oracle(nums), JSON.stringify(nums))
+  }
+})
