@@ -57,3 +57,21 @@ Continues `docs/CLAUDE-CATALOG-HANDOFF.md`. Records what this session actually v
 3. Review the 17 pseudocode mappings for branches absent from default examples.
 4. Run browser acceptance on the 17, recording each scenario actually exercised.
 5. Only then consider promoting any of the 17 to `verified` in `docs/catalog-manifest.json`.
+
+## Phase A close-out attempt (commit 2511a21)
+
+Done:
+- 139, 140, 141, 142: `index.jsx` now uses the literal `AlgorithmWorkspace` pattern, reusing the authored story scenes (`WordBreakStory`, `WordBreak2Story`, `CycleStory`, `Cycle2Story`). The old `*Visualizer.jsx` story-shell files remain on disk and are no longer imported.
+- `parseInput` in 140–142 accepts the UI text format, JSON objects, and the registry example shapes. All 20 registry examples for these four problems parse and trace.
+- 140: string length capped at 20 (official maximum).
+- Tests: 130/130 for the partial command; 139–142 algorithm tests pass; `npm run build` succeeds.
+
+Limitations, stated plainly:
+- **Browser acceptance was not run for 139–142 or any of the 17 partial entries.** No browser-automation tool is available in this session. Google Chrome is installed, but nothing drives it. Earlier smoke results predate these wrapper changes and do not cover them.
+- Visualization caps are below official limits: 141 at 500 nodes and 142 at 40 nodes against the official 10,000; 139 at 50 characters and dictionary entries. Each caps is stated in that problem's complexity text.
+- 141 and 142 return a result value that is not yet displayed in the workspace output panel; only the per-frame message and explanation are shown.
+- Problems 140–142's Python playground handoff is not verified against the new input adapters.
+
+Statuses: all 17 partial entries remain `partial` in `docs/catalog-manifest.json`. None are promoted to verified.
+
+Next step: run interactive browser acceptance for 139–142 and the rest of the 17 once a browser-automation tool is available.
