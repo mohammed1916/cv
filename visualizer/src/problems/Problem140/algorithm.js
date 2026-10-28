@@ -443,5 +443,14 @@ export const CODE = [
   "    RETURN sentences"
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
-export const parseInput = (input) => parseWordBreak2Input(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
-export const buildTrace = (input) => buildWordBreak2Story(input);
+// Accepts "leetcode | leet, code", a JSON object {"s":...,"wordDict":[...]}, or a registry values object.
+export const parseInput = (input) => {
+  if (typeof input === "string") {
+    const text = input.trim();
+    if (text.startsWith("{")) return parseWordBreak2Input(JSON.parse(text));
+    const [s, words = ""] = text.split("|");
+    return parseWordBreak2Input(s.trim(), words.split(",").map((w) => w.trim()).filter(Boolean));
+  }
+  return parseWordBreak2Input(input);
+};
+export const buildTrace = (input) => buildWordBreak2Story(input.s, input.wordDict);

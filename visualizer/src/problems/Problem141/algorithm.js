@@ -482,5 +482,18 @@ export const CODE = [
   "    RETURN false"
 ];
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
-export const parseInput = (input) => parseLinkedListCycleInput(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
-export const buildTrace = (input) => buildCycleStory(input);
+// Accepts "[3, 2, 0, -4] | pos = 1", a JSON object with values or nodes and pos, or a registry object.
+export const parseInput = (input) => {
+  if (typeof input === "string") {
+    const text = input.trim();
+    if (text.startsWith("{")) {
+      const data = JSON.parse(text);
+      return parseLinkedListCycleInput(data.values ?? data.nodes, data.pos);
+    }
+    const match = text.match(/^(.*?)\s*\|\s*pos\s*=\s*(-?\d+)\s*$/);
+    if (!match) throw new Error('Enter "[3, 2, 0, -4] | pos = 1": a JSON array of values and pos (-1 for no cycle).');
+    return parseLinkedListCycleInput(JSON.parse(match[1]), Number(match[2]));
+  }
+  return parseLinkedListCycleInput(input.values ?? input.nodes, input.pos);
+};
+export const buildTrace = (input) => buildCycleStory(input.values, input.pos);
