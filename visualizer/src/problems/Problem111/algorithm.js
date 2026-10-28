@@ -1,3 +1,4 @@
+import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 export function parseMinimumDepth(text) {
   const values = JSON.parse(text);
   if (!Array.isArray(values) || values.some(value => value !== null && !Number.isSafeInteger(value))) {
@@ -83,3 +84,77 @@ export function routeTo(nodes, leaf) {
   for (let id = leaf; id !== null && id !== undefined; id = nodes[id].parent) route.push(nodes[id]);
   return route.reverse();
 }
+
+// ---- Minimum Depth of Binary Tree (statement-sourced; see scratch statements/111.md) ----
+export function parseInput(text) {
+  const arr = JSON.parse(text)
+  if (!Array.isArray(arr) || arr.length > 15) throw new Error('Use a level-order array of at most 15 entries.')
+  if (arr.length && arr[0] === null) throw new Error('A level-order array must start with a value or be empty.')
+  if (arr.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 1000))) throw new Error('Values are integers from -1000 to 1000, or null.')
+  return arr
+}
+
+export function buildTrace(arr) {
+  const root = buildTreeFromLevels(arr)
+  const frames = [{ phase: 'start', activeLine: L('if node is empty then return 0'), node: root ? root.id : null, depth: 0, message: 'Find the nearest leaf. A missing child is not a leaf.' }]
+  const depthOf = node => {
+    if (!node) return 0
+    if (!node.left && !node.right) {
+      frames.push({ phase: 'leaf', activeLine: L('if this node is a leaf then return 1'), node: node.id, depth: 1, message: `${node.value} is a leaf, so its depth is 1 from here.` })
+      return 1
+    }
+    if (!node.left || !node.right) {
+      const only = depthOf(node.left || node.right)
+      frames.push({ phase: 'one-child', activeLine: L('only one child exists'), node: node.id, depth: only + 1, message: `${node.value} has one child, so it must follow that branch.` })
+      return only + 1
+    }
+    const best = Math.min(depthOf(node.left), depthOf(node.right))
+    frames.push({ phase: 'both', activeLine: L('return 1 plus the smaller'), node: node.id, depth: best + 1, message: `${node.value} has two children. Its shallower side gives depth ${best + 1}.` })
+    return best + 1
+  }
+  const result = depthOf(root)
+  frames.push({ phase: 'done', activeLine: L('return'), node: null, depth: result, message: `Minimum depth is ${result}.` })
+  return { input: arr, result, frames }
+}
+
+export const code = `minimum depth (node):
+  if node is empty then return 0
+  if this node is a leaf then return 1
+  if only one child exists then return 1 plus the depth of that child
+  return 1 plus the smaller depth of the left and right children`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def build(arr):
+    if not arr or arr[0] is None:
+        return None
+    root = TreeNode(arr[0])
+    queue = [root]
+    cursor = 1
+    for node in queue:
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.left = TreeNode(arr[cursor])
+            queue.append(node.left)
+        cursor += 1
+        if cursor < len(arr) and arr[cursor] is not None:
+            node.right = TreeNode(arr[cursor])
+            queue.append(node.right)
+        cursor += 1
+    return root
+
+def min_depth(root):
+    def depth(node):
+        if node is None:
+            return 0
+        if node.left is None and node.right is None:
+            return 1
+        if node.left is None or node.right is None:
+            return 1 + depth(node.left or node.right)
+        return 1 + min(depth(node.left), depth(node.right))
+    return depth(build(root))
+`

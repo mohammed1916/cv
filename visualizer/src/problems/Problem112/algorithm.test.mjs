@@ -33,3 +33,68 @@ test('matches independent exhaustive root-to-leaf oracle on small trees', () => 
     for (let target = -4; target <= 4; target++) assert.equal(buildPathSum(values, target).result, sums.includes(target));
   }
 });
+
+import { buildTrace, parseInput, python } from './algorithm.js'
+import { treeFromLevelOrder } from '../../components/shared/treeLayout.js'
+import { spawnSync } from 'node:child_process'
+
+const solve = (root, target_sum) => buildTrace(parseInput(JSON.stringify({ root, target_sum }))).result
+
+test('112 official examples', () => {
+  assert.equal(solve([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1], 22), true)
+  assert.equal(solve([1, 2, 3], 5), false)
+  assert.equal(solve([], 0), false)
+})
+
+test('112 a single node matches only its own value', () => {
+  assert.equal(solve([1], 1), true)
+  assert.equal(solve([1], 0), false)
+})
+
+test('112 rejects a missing field and out-of-range values', () => {
+  assert.throws(() => parseInput('{"root":[1]}'))
+  assert.throws(() => parseInput('{"root":[1],"target_sum":5000}'))
+  assert.throws(() => parseInput('[1,2]'))
+})
+
+// Independent oracle: list every root-to-leaf sum with an explicit stack, then test membership.
+function leafSums(root) {
+  const sums = []
+  const stack = root ? [[root, 0]] : []
+  while (stack.length) {
+    const [node, above] = stack.pop()
+    const here = above + node.value
+    if (!node.left && !node.right) sums.push(here)
+    if (node.left) stack.push([node.left, here])
+    if (node.right) stack.push([node.right, here])
+  }
+  return sums
+}
+
+test('112 seeded random trees match a leaf-sum oracle', () => {
+  let seed = 112
+  // Use the high bits: the low bits of this generator repeat in short cycles.
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  for (let t = 0; t < 300; t++) {
+    const arr = rnd(8) === 0 ? [] : [rnd(5) - 2]
+    const size = rnd(14)
+    for (let i = 1; i < size && arr.length; i++) arr.push(rnd(3) === 0 ? null : rnd(5) - 2)
+    const target = rnd(9) - 4
+    const expected = leafSums(treeFromLevelOrder(arr)).includes(target)
+    assert.equal(solve(arr, target), expected, JSON.stringify({ arr, target }))
+  }
+})
+
+test('112 displayed Python returns the same answers', () => {
+  const cases = [
+    { root: [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1], target_sum: 22 },
+    { root: [1, 2, 3], target_sum: 5 },
+    { root: [], target_sum: 0 },
+    { root: [1, 2], target_sum: 3 },
+  ]
+  const result = spawnSync(process.env.PYTHON || 'python', ['-c', 'import json,sys\np=json.load(sys.stdin)\nexec(p["source"])\nprint(json.dumps([has_path_sum(c["root"], c["target_sum"]) for c in p["cases"]]))'], {
+    input: JSON.stringify({ source: python, cases }), encoding: 'utf8',
+  })
+  assert.equal(result.status, 0, result.stderr || result.error?.message)
+  assert.deepEqual(JSON.parse(result.stdout), cases.map(c => solve(c.root, c.target_sum)))
+})

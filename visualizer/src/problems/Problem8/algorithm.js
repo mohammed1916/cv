@@ -207,3 +207,80 @@ export function generateAtoiSteps(input) {
   return steps
 }
 
+
+// ---- String to Integer (atoi) (statement-sourced; see scratch statements/8.md) ----
+export function parseInput(text) {
+  const s = JSON.parse(text)
+  if (typeof s !== 'string' || s.length > 200) throw new Error('Use a string of at most 200 characters.')
+  if (!/^[A-Za-z0-9 .+-]*$/.test(s)) throw new Error('Use only letters, digits, spaces, dots, plus and minus signs.')
+  return s
+}
+
+export function buildTrace(s) {
+  const n = s.length
+  let i = 0
+  const frames = []
+  while (i < n && s[i] === ' ') i++
+  frames.push({ phase: 'whitespace', activeLine: L('skip spaces at position i'), index: i, value: 0, message: `Skip leading spaces. The next character is at index ${i}.` })
+  let sign = 1
+  if (i < n && (s[i] === '+' || s[i] === '-')) {
+    sign = s[i] === '-' ? -1 : 1
+    i++
+    frames.push({ phase: 'sign', activeLine: L('set sign from that character and move past it'), index: i, value: 0, message: `Read sign ${sign === 1 ? '+' : '-'}.` })
+  } else {
+    frames.push({ phase: 'sign', activeLine: L('if the next character is plus or minus then'), index: i, value: 0, message: 'No sign character, so the number is positive.' })
+  }
+  let result = 0
+  while (i < n && s[i] >= '0' && s[i] <= '9') {
+    result = result * 10 + Number(s[i])
+    i++
+    frames.push({ phase: 'digit', activeLine: L('result becomes result times 10 plus that digit'), index: i, value: result, message: `Read digit ${s[i - 1]}. Digits so far: ${result}.` })
+  }
+  frames.push({ phase: 'stop', activeLine: L('apply the sign'), index: i, value: result, message: 'Stop at the first non-digit, or at the end of the text.' })
+  let value = sign * result + 0 // + 0 turns -0 into 0
+  if (value < -(2 ** 31)) {
+    value = -(2 ** 31)
+    frames.push({ phase: 'clamp', activeLine: L('clamp result to the 32-bit signed range'), index: i, value, message: 'Below the 32-bit minimum, so return -2147483648.' })
+  } else if (value > 2 ** 31 - 1) {
+    value = 2 ** 31 - 1
+    frames.push({ phase: 'clamp', activeLine: L('clamp result to the 32-bit signed range'), index: i, value, message: 'Above the 32-bit maximum, so return 2147483647.' })
+  }
+  frames.push({ phase: 'done', activeLine: L('return result'), index: i, value, message: `Result: ${value}.` })
+  return { input: s, result: value, frames }
+}
+
+export const code = `string to integer (s):
+  set index i to 0
+  skip spaces at position i
+  set sign to positive
+  if the next character is plus or minus then
+    set sign from that character and move past it
+  set result to 0
+  while the character at i is a digit:
+    result becomes result times 10 plus that digit
+    move i forward
+  apply the sign to result
+  clamp result to the 32-bit signed range
+  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def my_atoi(s):
+    i = 0
+    n = len(s)
+    while i < n and s[i] == " ":
+        i += 1
+    sign = 1
+    if i < n and s[i] in "+-":
+        sign = -1 if s[i] == "-" else 1
+        i += 1
+    result = 0
+    while i < n and "0" <= s[i] <= "9":
+        result = result * 10 + int(s[i])
+        i += 1
+    result *= sign
+    if result < -2**31:
+        return -2**31
+    if result > 2**31 - 1:
+        return 2**31 - 1
+    return result
+`

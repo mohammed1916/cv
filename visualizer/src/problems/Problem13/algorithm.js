@@ -168,3 +168,57 @@ export function generateSteps(s) {
 
 
 
+
+// ---- Roman to Integer (statement-sourced; see scratch statements/13.md) ----
+const ROMAN_VALUES = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
+const CANONICAL = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
+
+export function parseInput(text) {
+  const s = JSON.parse(text)
+  if (typeof s !== 'string' || s.length < 1 || s.length > 15) throw new Error('Use a Roman numeral string of 1 to 15 characters.')
+  if (!CANONICAL.test(s) || s === '') throw new Error('Use a valid Roman numeral from 1 to 3999 (letters I V X L C D M).')
+  return s
+}
+
+export function buildTrace(s) {
+  let total = 0
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, total: 0, message: `Read ${s} from left to right.` }]
+  for (let i = 0; i < s.length; i++) {
+    const value = ROMAN_VALUES[s[i]]
+    const next = i + 1 < s.length ? ROMAN_VALUES[s[i + 1]] : 0
+    if (value < next) {
+      total -= value
+      frames.push({ phase: 'subtract', activeLine: L('if value is less than next then'), index: i, total, message: `${s[i]} (${value}) is before a larger symbol, so subtract it. Total ${total}.` })
+    } else {
+      total += value
+      frames.push({ phase: 'add', activeLine: L('add value to total'), index: i, total, message: `Add ${s[i]} (${value}). Total ${total}.` })
+    }
+  }
+  frames.push({ phase: 'done', activeLine: L('return total'), index: s.length, total, message: `The value of ${s} is ${total}.` })
+  return { input: s, result: total, frames }
+}
+
+export const code = `roman to integer (s):
+  set total to 0
+  for each position i from left to right:
+    value is the value of the symbol at i
+    next is the value of the symbol at i + 1, or 0 at the end
+    if value is less than next then
+      subtract value from total
+    otherwise
+      add value to total
+  return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def roman_to_int(s):
+    values = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+    for i, ch in enumerate(s):
+        value = values[ch]
+        nxt = values[s[i + 1]] if i + 1 < len(s) else 0
+        if value < nxt:
+            total -= value
+        else:
+            total += value
+    return total
+`

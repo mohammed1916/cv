@@ -98,3 +98,79 @@ export function generateSteps(n) {
   return steps;
 }
 
+
+// ---- N-Queens II (statement-sourced; see scratch statements/52.md) ----
+export function parseInput(text) {
+  const n = JSON.parse(text)
+  if (!Number.isInteger(n) || n < 1 || n > 6) throw new Error('Use an integer board size from 1 to 6 (the visualization caps the size).')
+  return n
+}
+
+export function buildTrace(n) {
+  const cols = []
+  let count = 0
+  const frames = [{ phase: 'start', activeLine: L('set count to 0'), row: 0, col: null, count: 0, message: `Place ${n} queens, one per row, on a ${n} by ${n} board.` }]
+  const safe = (row, col) => cols.every((c, r) => c !== col && Math.abs(c - col) !== row - r)
+  const place = row => {
+    if (row === n) {
+      count++
+      frames.push({ phase: 'solution', activeLine: L('if row equals n then add 1 to count and stop'), row, col: null, count, message: `All ${n} rows have a queen. Solution ${count}.` })
+      return
+    }
+    for (let col = 0; col < n; col++) {
+      if (!safe(row, col)) {
+        frames.push({ phase: 'conflict', activeLine: L('if the square at row and col is safe then'), row, col, count, message: `Column ${col} in row ${row} is attacked by an earlier queen.` })
+        continue
+      }
+      cols[row] = col
+      frames.push({ phase: 'place', activeLine: L('put a queen there'), row, col, count, message: `Place a queen at row ${row}, column ${col}.` })
+      place(row + 1)
+      cols.length = row
+    }
+  }
+  place(0)
+  frames.push({ phase: 'done', activeLine: L('return count'), row: n, col: null, count, message: `${count} distinct solutions.` })
+  return { input: n, result: count, frames }
+}
+
+export const code = `count n-queens solutions (n):
+  set count to 0
+  call place with row 0
+  return count
+
+place(row):
+  if row equals n then add 1 to count and stop
+  for each column col from 0 to n - 1:
+    if the square at row and col is safe then
+      put a queen there
+      call place with row + 1
+      take the queen back
+
+square is safe:
+  no earlier queen shares the column or a diagonal`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def total_n_queens(n):
+    cols = []
+    count = 0
+
+    def safe(row, col):
+        for r, c in enumerate(cols):
+            if c == col or abs(c - col) == row - r:
+                return False
+        return True
+
+    def place(row):
+        nonlocal count
+        if row == n:
+            count += 1
+            return
+        for col in range(n):
+            if safe(row, col):
+                cols.append(col)
+                place(row + 1)
+                cols.pop()
+
+    place(0)
+    return count
+`

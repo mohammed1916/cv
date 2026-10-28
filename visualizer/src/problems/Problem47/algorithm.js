@@ -1,4 +1,4 @@
-export const code = [
+export const legacyCode = [
   'def permuteUnique(nums):',
   '    nums = sorted(nums)',
   '    result, path = [], []',
@@ -55,3 +55,83 @@ export function buildPermutations(values) {
   push(18, -1, `Return all ${results.length} unique permutations.`);
   return { input: { nums: input }, nums, results, frames, eventCount, truncated: eventCount > TRACE_LIMIT + 1 };
 }
+
+// ---- Permutations II (statement-sourced; see scratch statements/47.md) ----
+export function parseInput(text) {
+  const nums = JSON.parse(text)
+  if (!Array.isArray(nums) || nums.length < 1 || nums.length > 6) throw new Error('Use an array of 1 to 6 integers (the visualization caps the size).')
+  if (nums.some(v => !Number.isInteger(v) || v < -10 || v > 10)) throw new Error('Values are integers from -10 to 10.')
+  return nums
+}
+
+export function buildTrace(nums) {
+  const sorted = [...nums].sort((a, b) => a - b)
+  const used = sorted.map(() => false)
+  const path = []
+  const result = []
+  const frames = [{ phase: 'start', activeLine: L('sort nums'), path: [], total: 0, message: `Sort the values to ${sorted.join(', ')} so equal values sit together.` }]
+  const backtrack = () => {
+    if (path.length === sorted.length) {
+      result.push([...path])
+      frames.push({ phase: 'record', activeLine: L('record a copy'), path: [...path], total: result.length, message: `Record [${path.join(', ')}].` })
+      return
+    }
+    for (let i = 0; i < sorted.length; i++) {
+      if (used[i]) continue
+      if (i > 0 && sorted[i] === sorted[i - 1] && !used[i - 1]) {
+        frames.push({ phase: 'skip', activeLine: L('if nums[i] equals nums[i - 1] and nums[i - 1] is not used then skip it'), path: [...path], total: result.length, message: `Skip ${sorted[i]} at index ${i}: an equal value is still unused, so this branch repeats an earlier one.` })
+        continue
+      }
+      used[i] = true
+      path.push(sorted[i])
+      frames.push({ phase: 'choose', activeLine: L('mark index i as used and add nums[i] to the path'), path: [...path], total: result.length, message: `Place ${sorted[i]}. Path [${path.join(', ')}].` })
+      backtrack()
+      path.pop()
+      used[i] = false
+    }
+  }
+  backtrack()
+  frames.push({ phase: 'done', activeLine: L('return the list of recorded permutations'), path: [], total: result.length, message: `${result.length} unique permutations.` })
+  return { input: nums, result, frames }
+}
+
+export const code = `permute unique (nums):
+  sort nums so equal values are next to each other
+  set used flags to all false
+  call backtrack with an empty path
+  return the list of recorded permutations
+
+backtrack():
+  if the path has every value then record a copy of it
+  for each index i in nums:
+    if index i is already used then continue
+    if nums[i] equals nums[i - 1] and nums[i - 1] is not used then skip it
+    mark index i as used and add nums[i] to the path
+    call backtrack
+    remove the last value from the path and unmark index i`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def permute_unique(nums):
+    nums = sorted(nums)
+    used = [False] * len(nums)
+    path = []
+    result = []
+
+    def backtrack():
+        if len(path) == len(nums):
+            result.append(list(path))
+            return
+        for i in range(len(nums)):
+            if used[i]:
+                continue
+            if i > 0 and nums[i] == nums[i - 1] and not used[i - 1]:
+                continue
+            used[i] = True
+            path.append(nums[i])
+            backtrack()
+            path.pop()
+            used[i] = False
+
+    backtrack()
+    return result
+`

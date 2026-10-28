@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { buildDivision, code } from './algorithm.js';
+import { buildDivision, legacyCode, python } from './algorithm.js';
+import { buildTrace, parseInput } from './algorithm.js';
 
 test('division trace agrees with truncation and preserves every committed chunk', () => {
   const cases = [[10, 3], [43, 5], [7, -3], [-7, 3], [-7, -3], [0, 1], [2, 5], [-2147483648, -1], [-2147483648, 1], [2147483647, 1], [-2147483648, -2147483648], [2147483647, -2147483648]];
@@ -21,7 +22,7 @@ test('division trace agrees with truncation and preserves every committed chunk'
 test('displayed Python solution handles signed boundaries and doubling', () => {
   const cases = [[10,3], [43,5], [7,-3], [-2147483648,1], [-2147483648,-1], [0,3]];
   const result = spawnSync(process.env.PYTHON || 'python', ['-c', 'import json,sys\np=json.load(sys.stdin)\nexec(p["source"])\nprint(json.dumps([divide(*args) for args in p["cases"]]))'], {
-    input: JSON.stringify({ source: code.map(line => line.text).join('\n'), cases }), encoding: 'utf8',
+    input: JSON.stringify({ source: python, cases }), encoding: 'utf8',
   });
   assert.equal(result.status, 0, result.stderr || result.error?.message);
   assert.deepEqual(JSON.parse(result.stdout), cases.map(([dividend, divisor]) => buildDivision({ dividend, divisor }).frames.at(-1).result));
@@ -30,3 +31,28 @@ test('displayed Python solution handles signed boundaries and doubling', () => {
 test('rejects invalid integers and division by zero', () => {
   for (const values of [{ dividend: 1, divisor: 0 }, { dividend: '', divisor: 1 }, { dividend: 2147483648, divisor: 1 }, { dividend: '3.5', divisor: 2 }]) assert.throws(() => buildDivision(values));
 });
+
+test('29 official examples', () => {
+  assert.equal(buildTrace(parseInput('{"dividend":10,"divisor":3}')).result, 3)
+  assert.equal(buildTrace(parseInput('{"dividend":7,"divisor":-3}')).result, -2)
+  assert.equal(buildTrace(parseInput('{"dividend":-2147483648,"divisor":-1}')).result, 2147483647)
+})
+
+test('29 rejects a zero divisor and non-object input', () => {
+  assert.throws(() => parseInput('{"dividend":1,"divisor":0}'))
+  assert.throws(() => parseInput('[1,2]'))
+})
+
+test('29 seeded random pairs match truncated division with clamping', () => {
+  let seed = 29
+  // Use the high bits: the low bits of this generator repeat in short cycles.
+  const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed >> 16) % n }
+  const big = () => rnd(2) ? rnd(4000) - 2000 : (rnd(2 ** 15) * 65536 + rnd(65536)) - 2 ** 31
+  for (let t = 0; t < 300; t++) {
+    const dividend = Math.max(-2147483648, Math.min(2147483647, big()))
+    let divisor = Math.max(-2147483648, Math.min(2147483647, big()))
+    if (divisor === 0) divisor = 1
+    const expected = Math.min(2147483647, Math.trunc(dividend / divisor)) + 0
+    assert.equal(buildTrace(parseInput(JSON.stringify({ dividend, divisor }))).result, expected, `${dividend}/${divisor}`)
+  }
+})

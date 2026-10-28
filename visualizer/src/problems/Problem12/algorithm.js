@@ -70,3 +70,47 @@ export function generateSteps(num) {
   return steps;
 }
 
+
+// ---- Integer to Roman (statement-sourced; see scratch statements/12.md) ----
+export function parseInput(text) {
+  const n = JSON.parse(text)
+  if (!Number.isInteger(n) || n < 1 || n > 3999) throw new Error('Use an integer from 1 to 3999.')
+  return n
+}
+
+const ROMAN_PAIRS = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]
+
+export function buildTrace(num) {
+  let rest = num
+  let out = ''
+  const frames = [{ phase: 'start', activeLine: L('set result to an empty string'), remaining: rest, result: '', message: `Convert ${num} by taking the largest symbol value that still fits.` }]
+  for (const [value, symbol] of ROMAN_PAIRS) {
+    while (rest >= value) {
+      rest -= value
+      out += symbol
+      frames.push({ phase: 'take', activeLine: L('while num is at least value:'), remaining: rest, result: out, message: `Take ${symbol} (${value}). ${rest} remains.` })
+    }
+  }
+  frames.push({ phase: 'done', activeLine: L('return result'), remaining: 0, result: out, message: `Roman numeral: ${out}.` })
+  return { input: num, result: out, frames }
+}
+
+export const code = `integer to roman numeral (num):
+  set result to an empty string
+  for each (value, symbol) pair from largest to smallest:
+    while num is at least value:
+      append symbol to result
+      subtract value from num
+  return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def int_to_roman(num):
+    pairs = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'), (90, 'XC'),
+             (50, 'L'), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'), (1, 'I')]
+    result = ''
+    for value, symbol in pairs:
+        while num >= value:
+            result += symbol
+            num -= value
+    return result
+`

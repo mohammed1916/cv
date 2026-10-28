@@ -1,4 +1,4 @@
-export const code = [
+export const legacyCode = [
   'def divide(dividend: int, divisor: int) -> int:',
   '    if dividend == -2147483648 and divisor == -1:',
   '        return 2147483647',
@@ -64,3 +64,63 @@ export function buildDivision(values) {
   push(14, `Return ${result}. Leftover magnitude ${remaining} is smaller than ${base}; truncate toward zero.`);
   return { input, total, base, frames };
 }
+
+// ---- Divide Two Integers (statement-sourced; see scratch statements/29.md) ----
+const INT_MAX = 2147483647
+const INT_MIN = -2147483648
+
+export function parseInput(text) {
+  const obj = JSON.parse(text)
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) throw new Error('Use an object with dividend and divisor.')
+  const { dividend, divisor } = obj
+  if (!Number.isInteger(dividend) || dividend < INT_MIN || dividend > INT_MAX) throw new Error('Dividend must be a 32-bit signed integer.')
+  if (!Number.isInteger(divisor) || divisor < INT_MIN || divisor > INT_MAX) throw new Error('Divisor must be a 32-bit signed integer.')
+  if (divisor === 0) throw new Error('Divisor must not be zero.')
+  return { dividend, divisor }
+}
+
+export function buildTrace({ dividend, divisor }) {
+  const negative = (dividend < 0) !== (divisor < 0)
+  let a = Math.abs(dividend)
+  const b = Math.abs(divisor)
+  let quotient = 0
+  const frames = [{ phase: 'init', activeLine: L('set a to |dividend| and b to |divisor|'), a, b, quotient, message: `Work with |${dividend}| and |${divisor}|, then fix the sign at the end.` }]
+  while (a >= b) {
+    let shift = 0
+    while (a >= b * 2 ** (shift + 1)) shift++
+    a -= b * 2 ** shift
+    quotient += 2 ** shift
+    frames.push({ phase: 'build', activeLine: L('find the largest doubling of b that still fits in a'), a, b, quotient, message: `Subtract ${b} doubled ${shift} time(s). Remainder ${a}, quotient ${quotient}.` })
+  }
+  const signed = negative ? -quotient : quotient
+  const result = Math.min(INT_MAX, signed)
+  frames.push({ phase: 'done', activeLine: L('return'), a, b, quotient: result, message: result === INT_MAX && signed > INT_MAX ? 'The quotient overflows, so return 2147483647.' : `Quotient ${result}.` })
+  return { input: { dividend, divisor }, result: result + 0, frames }
+}
+
+export const code = `divide (dividend, divisor) without multiplication or division:
+  if the result would overflow then return the upper bound
+  set the sign to negative when exactly one input is negative
+  set a to |dividend| and b to |divisor|
+  set quotient to 0
+  while a is at least b:
+    find the largest doubling of b that still fits in a
+    subtract that doubling from a and add its multiple to quotient
+  apply the sign and clamp to the 32-bit range
+  return quotient`.split('\n').map((text, index) => ({ line: index + 1, text }))
+const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+export const python = `def divide(dividend, divisor):
+    if dividend == -2147483648 and divisor == -1:
+        return 2147483647
+    negative = (dividend < 0) != (divisor < 0)
+    a, b = abs(dividend), abs(divisor)
+    quotient = 0
+    while a >= b:
+        shift = 0
+        while a >= (b << (shift + 1)):
+            shift += 1
+        a -= b << shift
+        quotient += 1 << shift
+    return -quotient if negative else quotient
+`
