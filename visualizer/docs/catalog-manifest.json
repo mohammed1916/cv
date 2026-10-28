@@ -1,5 +1,5 @@
 {
- "generatedBy": "manual reconciliation, see commit message",
+ "generatedBy": "manual reconciliation; 2026-10-28 repair evidence in docs/reviews/2026-10-28-catalog-repairs.md",
  "catalogProblems": 4073,
  "summary": {
   "legacy-unconverted": 1451,
@@ -1950,9 +1950,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/139.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "forward-back-smoke",
+    "template": "AlgorithmStoryWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "140",
@@ -1964,9 +1972,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/140.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "forward-back-smoke",
+    "template": "AlgorithmStoryWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "141",
@@ -1978,9 +1994,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/141.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "forward-back-smoke",
+    "template": "AlgorithmStoryWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "142",
@@ -1992,9 +2016,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/142.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "forward-back-smoke",
+    "template": "AlgorithmStoryWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "143",
@@ -6051,10 +6083,18 @@
    "folder": "Problem432",
    "route": "partial",
    "committed": true,
-   "testStatus": "no-test",
-   "requirementsCached": false,
+   "testStatus": "pass",
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/432.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "433",
@@ -19750,7 +19790,7 @@
   },
   {
    "number": "1411",
-   "title": "Number of Ways to Paint N \u00d7 3 Grid",
+   "title": "Number of Ways to Paint N × 3 Grid",
    "slug": "number-of-ways-to-paint-n-3-grid",
    "difficulty": "Hard",
    "paidOnly": false,
@@ -37292,7 +37332,7 @@
   },
   {
    "number": "2664",
-   "title": "The Knight\u2019s Tour",
+   "title": "The Knight’s Tour",
    "slug": "the-knights-tour",
    "difficulty": "Medium",
    "paidOnly": true,
@@ -38692,7 +38732,7 @@
   },
   {
    "number": "2764",
-   "title": "Is Array a Preorder of Some \u200cBinary Tree",
+   "title": "Is Array a Preorder of Some ‌Binary Tree",
    "slug": "is-array-a-preorder-of-some-binary-tree",
    "difficulty": "Medium",
    "paidOnly": true,
@@ -50004,7 +50044,7 @@
   },
   {
    "number": "3572",
-   "title": "Maximize Y\u2011Sum by Picking a Triplet of Distinct X\u2011Values",
+   "title": "Maximize Y‑Sum by Picking a Triplet of Distinct X‑Values",
    "slug": "maximize-ysum-by-picking-a-triplet-of-distinct-xvalues",
    "difficulty": "Medium",
    "paidOnly": false,
@@ -54520,9 +54560,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3894.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3895",
@@ -54534,9 +54582,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3895.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3896",
@@ -54548,9 +54604,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3896.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3897",
@@ -54590,9 +54654,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3899.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3900",
@@ -54674,9 +54746,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3905.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3906",
@@ -54716,9 +54796,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3908.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3909",
@@ -54730,9 +54818,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3909.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3910",
@@ -54744,9 +54840,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3910.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3911",
@@ -54771,10 +54875,18 @@
    "folder": "Problem3912",
    "route": "partial",
    "committed": true,
-   "testStatus": "no-test",
-   "requirementsCached": false,
+   "testStatus": "pass",
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3912.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3913",
@@ -54785,10 +54897,18 @@
    "folder": "Problem3913",
    "route": "partial",
    "committed": true,
-   "testStatus": "no-test",
-   "requirementsCached": false,
+   "testStatus": "pass",
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3913.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3914",
@@ -54799,10 +54919,18 @@
    "folder": "Problem3914",
    "route": "partial",
    "committed": true,
-   "testStatus": "no-test",
-   "requirementsCached": false,
+   "testStatus": "pass",
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3914.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3915",
@@ -54814,9 +54942,17 @@
    "route": "partial",
    "committed": true,
    "testStatus": "pass",
-   "requirementsCached": false,
+   "requirementsCached": true,
    "status": "partial",
-   "folderKind": "four-file"
+   "folderKind": "four-file",
+   "requirementsFile": "docs/requirements/3915.json",
+   "repairEvidence": {
+    "date": "2026-10-28",
+    "languages": "python-executed-and-pseudocode-line-ranges-checked",
+    "browser": "terminal-frame-and-back-smoke",
+    "template": "AlgorithmWorkspace",
+    "committed": false
+   }
   },
   {
    "number": "3916",

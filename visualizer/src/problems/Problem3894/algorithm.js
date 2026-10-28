@@ -16,11 +16,21 @@ export function buildTrace(timer) {
   frames.push({ phase: 'done', checked: frames.at(-1).checked, result, activeLine: result === 'Invalid' ? 8 : 3 + 2 * names.indexOf(result), message: `Return "${result}".${result === 'Invalid' ? ' The input is within bounds, but no signal condition matched.' : ''}` })
   return { input: timer, checks, result, frames }
 }
-export const code = `def signalColor(timer):
+export const python = `def signalColor(timer):
     if timer == 0:
         return "Green"
     if timer == 30:
         return "Orange"
     if 30 < timer <= 90:
         return "Red"
-    return "Invalid"`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return "Invalid"`
+export const code = [
+  "FUNCTION signalColor(timer)",
+  "    IF timer = 0",
+  "        RETURN Green",
+  "    IF timer = 30",
+  "        RETURN Orange",
+  "    IF 30 < timer ≤ 90",
+  "        RETURN Red",
+  "    RETURN Invalid"
+].map((text, index) => ({ line: index + 1, text }))

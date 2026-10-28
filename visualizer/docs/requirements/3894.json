@@ -1,0 +1,10 @@
+{
+  "number": 3894,
+  "title": "Traffic Signal Color",
+  "source": "https://leetcode.com/problems/traffic-signal-color/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Return Green at zero, Orange at 30, Red for 30 < timer ≤ 90, otherwise Invalid.",
+  "officialConstraints": "Integer timer 0–1000.",
+  "visualizationNotes": "None."
+}

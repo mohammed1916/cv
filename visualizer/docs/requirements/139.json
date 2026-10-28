@@ -1,0 +1,10 @@
+{
+  "number": 139,
+  "title": "Word Break",
+  "source": "https://leetcode.com/problems/word-break/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Segment a lowercase string into reusable dictionary words; return whether a segmentation exists.",
+  "officialConstraints": "s length 1–300; 1–1000 unique words of length 1–20.",
+  "visualizationNotes": "Existing visual caps s and dictionary size at 50; allows uppercase normalization and duplicate words."
+}

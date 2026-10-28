@@ -33,7 +33,7 @@ export function buildTrace(nums) {
   return { input: [...nums], left, right, selected, result, frames }
 }
 
-export const code = `def validElements(nums):
+export const python = `def validElements(nums):
     left, right = [0] * len(nums), [0] * len(nums)
     maximum = 0
     for i, value in enumerate(nums):
@@ -44,4 +44,16 @@ export const code = `def validElements(nums):
         right[i] = maximum
         maximum = max(maximum, nums[i])
     return [v for i, v in enumerate(nums) if v > left[i] or v > right[i]]`
-  .split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "FUNCTION validElements(nums)",
+  "    left, right ← zero arrays of length(nums)",
+  "    maximum ← 0",
+  "    FOR EACH index i AND value IN nums",
+  "        left[i] ← maximum",
+  "        maximum ← max(maximum, value)",
+  "    maximum ← 0",
+  "    FOR i FROM length(nums) − 1 DOWN TO 0",
+  "        right[i] ← maximum",
+  "        maximum ← max(maximum, nums[i])",
+  "    RETURN values exceeding left[i] OR right[i], in input order"
+].map((text, index) => ({ line: index + 1, text }))

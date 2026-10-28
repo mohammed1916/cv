@@ -30,7 +30,7 @@ export function buildTrace(s) {
   frames.push({ phase: 'done', index: -1, placed: positions.length, counts, activeLine: 11, message: 'All vowel slots are filled in ranked order.' })
   return { input: s, result: result.join(''), positions, ordinal, counts, first, order, frames }
 }
-export const code = `def sortVowels(s):
+export const python = `def sortVowels(s):
     counts, first = {}, {}
     for i, ch in enumerate(s):
         if ch in "aeiou":
@@ -40,4 +40,17 @@ export const code = `def sortVowels(s):
     vowels = iter("".join(ch * counts[ch] for ch in order))
     result = [ch for ch in s]
     result = [next(vowels) if ch in counts else ch for ch in result]
-    return "".join(result)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return "".join(result)`
+export const code = [
+  "FUNCTION sortVowels(s)",
+  "    counts, first ← empty maps",
+  "    FOR EACH index i AND character ch IN s",
+  "        IF ch is a vowel",
+  "            IF ch is new THEN first[ch] ← i",
+  "            counts[ch] ← previous count + 1",
+  "    order ← vowels sorted by decreasing count, then increasing first position",
+  "    vowels ← each vowel in order repeated by its count",
+  "    result ← characters of s",
+  "    REPLACE vowel slots of result with successive characters of vowels",
+  "    RETURN result joined into a string"
+].map((text, index) => ({ line: index + 1, text }))

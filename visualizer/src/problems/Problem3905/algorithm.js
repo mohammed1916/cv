@@ -72,7 +72,7 @@ export function cellAtStep(run, step, row, column) {
   }
 }
 
-export const code = `def floodFill(n, m, sources):
+export const python = `def floodFill(n, m, sources):
     grid = [[0] * m for _ in range(n)]
     frontier = []
     for r, c, color in sources:
@@ -90,4 +90,25 @@ export const code = `def floodFill(n, m, sources):
         for (r, c), color in pending.items():
             grid[r][c] = color
         frontier = list(pending)
-    return grid`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return grid`
+export const code = [
+  "FUNCTION floodFill(n, m, sources)",
+  "    grid ← n by m array of zeros",
+  "    frontier ← empty list",
+  "    FOR EACH row r, column c, color IN sources",
+  "        grid[r][c] ← color",
+  "        APPEND (r, c) TO frontier",
+  "    WHILE frontier is not empty",
+  "        pending ← empty map",
+  "        FOR EACH (r, c) IN frontier",
+  "            FOR EACH orthogonal direction (dr, dc)",
+  "                nr ← r + dr; nc ← c + dc",
+  "                IF (nr, nc) is outside the grid",
+  "                    CONTINUE",
+  "                IF grid[nr][nc] = 0",
+  "                    pending[nr, nc] ← maximum proposed neighbor color",
+  "        FOR EACH (r, c), color IN pending",
+  "            grid[r][c] ← color",
+  "        frontier ← cells in pending",
+  "    RETURN grid"
+].map((text, index) => ({ line: index + 1, text }))

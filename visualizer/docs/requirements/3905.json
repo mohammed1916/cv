@@ -1,0 +1,10 @@
+{
+  "number": 3905,
+  "title": "Multi Source Flood Fill",
+  "source": "https://leetcode.com/problems/multi-source-flood-fill/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Spread source colors simultaneously to uncolored orthogonal neighbors; largest color wins simultaneous arrival. Return the final grid.",
+  "officialConstraints": "Positive dimensions with at most 100000 cells; distinct source coordinates; colors 1–1000000.",
+  "visualizationNotes": "Large traces are not fully browser stress-tested."
+}

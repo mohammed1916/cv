@@ -24,11 +24,21 @@ export function buildTrace({ nums, digit }) {
   frames.push({ phase: 'done', index: -1, total, local: 0, activeLine: 8, message: `Return ${total} digit occurrences across all ${nums.length} numbers.` })
   return { input: [...nums], digit, counts, result: total, frames }
 }
-export const code = `def countDigitAppearances(nums, digit):
+export const python = `def countDigitAppearances(nums, digit):
     total = 0
     for value in nums:
         remaining = value
         while remaining > 0:
             total += (remaining % 10 == digit)
             remaining //= 10
-    return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return total`
+export const code = [
+  "FUNCTION countDigitAppearances(nums, digit)",
+  "    total ← 0",
+  "    FOR EACH value IN nums",
+  "        remaining ← value",
+  "        WHILE remaining > 0",
+  "            IF remaining MOD 10 = digit THEN increment total",
+  "            remaining ← floor(remaining / 10)",
+  "    RETURN total"
+].map((text, index) => ({ line: index + 1, text }))

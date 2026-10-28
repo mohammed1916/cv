@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  CODE,
+  python,
   parseLinkedListCycleInput,
   buildCycleStory,
 } from "./algorithm.js";
+
+const CODE = python.split("\n");
 
 test("CODE matches Floyd's Tortoise and Hare implementation", () => {
   assert.equal(CODE.length, 8);

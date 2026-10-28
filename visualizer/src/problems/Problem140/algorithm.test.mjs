@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { CODE, parseWordBreak2Input, buildWordBreak2Story } from "./algorithm.js";
+import { python, parseWordBreak2Input, buildWordBreak2Story } from "./algorithm.js";
+
+const CODE = python.split("\n");
 
 test("CODE contains the exact 16-line Python solution", () => {
   assert.equal(CODE.length, 16);
@@ -55,10 +57,10 @@ test("parseWordBreak2Input validates inputs and parses diverse formats", () => {
 
 test("parseWordBreak2Input throws on invalid inputs", () => {
   // Empty s
-  assert.throws(() => parseWordBreak2Input("", ["cat"]), /between 1 and 25/);
+  assert.throws(() => parseWordBreak2Input("", ["cat"]), /between 1 and 20/);
 
-  // s too long (>25)
-  assert.throws(() => parseWordBreak2Input("a".repeat(26), ["cat"]), /between 1 and 25/);
+  // s too long (>20)
+  assert.throws(() => parseWordBreak2Input("a".repeat(21), ["cat"]), /between 1 and 20/);
 
   // Non-letter characters in s
   assert.throws(() => parseWordBreak2Input("cat123", ["cat"]), /lowercase English letters/);

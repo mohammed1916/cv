@@ -1,0 +1,10 @@
+{
+  "number": 140,
+  "title": "Word Break II",
+  "source": "https://leetcode.com/problems/word-break-ii/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Return every dictionary-word segmentation as a sentence; words can be reused and output order is unrestricted.",
+  "officialConstraints": "s length 1–20; 1–1000 unique lowercase words of length 1–10; answer size at most 100000.",
+  "visualizationNotes": "Existing parser accepts strings through length 25, beyond the official domain; exponential frame growth still needs bounding."
+}

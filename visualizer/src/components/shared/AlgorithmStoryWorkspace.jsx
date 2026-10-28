@@ -27,6 +27,11 @@ export default function AlgorithmStoryWorkspace({ definition }) {
     patterns: PATTERNS,
     examples: EXAMPLES,
   } = definition;
+  const [codeLanguage, setCodeLanguage] = useState('python');
+  const showPython = Boolean(definition.python) && codeLanguage === 'python';
+  const displayedCode = showPython
+    ? definition.python.split('\n').map((text, index) => ({ line: index + 1, text }))
+    : SOLUTION_CODE;
   const isMultiField = Boolean(
     definition.fields && definition.fields.length > 0,
   );
@@ -132,17 +137,22 @@ export default function AlgorithmStoryWorkspace({ definition }) {
 
   const codePanel = (
     <div style={{ position: "relative", height: "100%" }}>
+      {definition.python && <div role="group" aria-label="Code language">
+        <button type="button" aria-pressed={showPython} onClick={() => setCodeLanguage('python')}>Python</button>
+        <button type="button" aria-pressed={!showPython} onClick={() => setCodeLanguage('pseudocode')}>Pseudocode</button>
+      </div>}
       <CodeTracePanel
+        title={definition.python ? (showPython ? 'Python solution' : 'Pseudocode') : undefined}
         playgroundInput={story?.input}
-        playgroundDisabled={Boolean(inputError)}
-        step={step}
-        codeLines={SOLUTION_CODE}
-        highlightedLines={connectivity.highlightedLines}
-        onLineSelect={connectivity.handleLineSelect}
-        onActiveLineDomChange={setActiveLineDom}
+        playgroundDisabled={Boolean(inputError) || (Boolean(definition.python) && (!showPython || story?.input === undefined))}
+        step={showPython ? undefined : step}
+        codeLines={displayedCode}
+        highlightedLines={showPython ? [] : connectivity.highlightedLines}
+        onLineSelect={showPython ? undefined : connectivity.handleLineSelect}
+        onActiveLineDomChange={showPython ? undefined : setActiveLineDom}
         disableResizer
       />
-      {showPatternOverlay && (
+      {showPatternOverlay && !showPython && (
         <CodePatternAnnotations
           linePatterns={LINE_PATTERN_MAP}
           currentPhase={step?.phase}
@@ -176,7 +186,7 @@ export default function AlgorithmStoryWorkspace({ definition }) {
         patternOverlayLabel="Show pattern overlay"
         showPatternOverlayToggle
       />
-      {showPatternOverlay && (
+      {showPatternOverlay && !showPython && (
         <PatternLegend usedPatterns={PATTERNS} currentPhase={step?.phase} />
       )}
     </>

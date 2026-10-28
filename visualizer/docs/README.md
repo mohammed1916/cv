@@ -1,5 +1,7 @@
 # Development documentation
 
+- [Current Claude catalog handoff](CLAUDE-CATALOG-HANDOFF.md): start here for the 4,073-problem completion task.
+
 - [Basics track](basics-track.md): free lessons, shared algorithms, and verification.
 
 - [Problem payloads and hosting](payload-boundaries.md): example files, generated

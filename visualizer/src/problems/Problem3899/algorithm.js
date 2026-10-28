@@ -24,7 +24,7 @@ export function buildTrace(input) {
     message: result.length ? 'Return the three angles in non-decreasing order, retaining full numerical precision.' : 'Return []: equality gives zero area, and a larger longest side cannot close the triangle.' })
   return { input: [...input], sides, valid: a + b > c, result, frames }
 }
-export const code = `import math
+export const python = `import math
 def triangleAngles(sides):
     a, b, c = sorted(sides)
     if a + b <= c:
@@ -34,7 +34,20 @@ def triangleAngles(sides):
         cosine = (u*u + v*v - opposite*opposite) / (2*u*v)
         cosine = max(-1.0, min(1.0, cosine))
         angles.append(math.degrees(math.acos(cosine)))
-    return sorted(angles)`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return sorted(angles)`
+export const code = [
+  "USE inverse cosine and radians-to-degrees conversion",
+  "FUNCTION triangleAngles(sides)",
+  "    a, b, c ← sorted side lengths",
+  "    IF a + b ≤ c",
+  "        RETURN empty list",
+  "    angles ← empty list",
+  "    FOR EACH opposite side AND the other two sides u, v",
+  "        cosine ← (u² + v² − opposite²) / (2 × u × v)",
+  "        cosine ← clamp(cosine, −1, 1)",
+  "        APPEND degrees(arccos(cosine)) TO angles",
+  "    RETURN sorted angles"
+].map((text, index) => ({ line: index + 1, text }))
 
 export function trianglePoints(sides) {
   const [a, b, c] = sides

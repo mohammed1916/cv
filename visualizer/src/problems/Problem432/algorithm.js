@@ -40,19 +40,99 @@ export function generateSteps(operations) {
   return steps;
 }
 
-export const CODE = [
- 'class AllOne:  # linked count buckets + key-to-bucket map',
- '    def inc(self, key):',
- '        old = self.location.get(key, self.head)',
- '        move_key(key, old, bucket_after(old, old.count + 1))',
- '        remove_if_empty(old)',
- '    def dec(self, key):',
- '        old = self.location[key]',
- '        move_or_delete(key, old, old.count - 1)',
- '        remove_if_empty(old)',
- '    def getMinKey(self):',
- '        return any_key(self.head.next)  # empty sentinel -> ""',
- '    def getMaxKey(self):',
- '        return any_key(self.tail.prev)  # empty sentinel -> ""',
- '    # Neighbor buckets and extreme queries take O(1).',
-].map((text,index)=>({line:index+1,text}));
+export function parseInput(input) {
+  const operations = typeof input === 'string' ? JSON.parse(input) : input
+  if (!Array.isArray(operations) || operations.length > 200) throw new Error('Use at most 200 operations for visualization.')
+  const counts = new Map()
+  for (const operation of operations) {
+    if (!Array.isArray(operation)) throw new Error('Each operation must be an array.')
+    const [type, key] = operation
+    if (type === 'inc' || type === 'dec') {
+      if (operation.length !== 2 || typeof key !== 'string' || !/^[a-z]{1,10}$/.test(key)) throw new Error('Use a lowercase key of 1–10 letters.')
+      const old = counts.get(key) || 0
+      if (type === 'dec' && !old) throw new Error('Cannot decrement an absent key.')
+      counts.set(key, old + (type === 'inc' ? 1 : -1))
+    } else if (!['getMinKey', 'getMaxKey'].includes(type) || operation.length !== 1) throw new Error('Unknown operation or extra arguments.')
+  }
+  return operations
+}
+export function buildTrace(input) {
+  const operations = parseInput(input)
+  const frames = generateSteps(operations).map((frame, i, all) => ({ ...frame, phase: i === 0 ? 'start' : i === all.length - 1 ? 'done' : 'operation' }))
+  return { input: operations, frames, result: frames.filter(f => Object.hasOwn(f, 'result')).map(f => f.result) }
+}
+export const code = [
+  'INITIALIZE linked count buckets and a key-to-bucket map',
+  'ON inc(key)',
+  '    FIND or create the next count bucket',
+  '    MOVE key there; remove its old bucket if empty',
+  'ON dec(key)',
+  '    FIND the current bucket',
+  '    MOVE key to the preceding count, or delete a zero-count key',
+  '    REMOVE its old bucket if empty',
+  'ON getMinKey()',
+  '    READ the first count bucket',
+  '    RETURN any key in it, or an empty string',
+  'ON getMaxKey()',
+  '    RETURN any key in the last count bucket, or an empty string',
+  'FINISH the operation sequence',
+].map((text, index) => ({ line: index + 1, text }))
+
+export const python = `class Bucket:
+    def __init__(self, count):
+        self.count = count
+        self.keys = set()
+        self.prev = self.next = None
+
+class AllOne:
+    def __init__(self):
+        self.head, self.tail = Bucket(0), Bucket(float('inf'))
+        self.head.next, self.tail.prev = self.tail, self.head
+        self.location = {}
+
+    def _insert(self, previous, count):
+        bucket = Bucket(count)
+        bucket.prev, bucket.next = previous, previous.next
+        previous.next.prev = bucket
+        previous.next = bucket
+        return bucket
+
+    def _remove_empty(self, bucket):
+        if not bucket.keys:
+            bucket.prev.next = bucket.next
+            bucket.next.prev = bucket.prev
+
+    def inc(self, key):
+        old = self.location.get(key, self.head)
+        count = old.count + 1
+        target = old.next
+        if target.count != count:
+            target = self._insert(old, count)
+        target.keys.add(key)
+        self.location[key] = target
+        if old is not self.head:
+            old.keys.remove(key)
+            self._remove_empty(old)
+
+    def dec(self, key):
+        old = self.location[key]
+        count = old.count - 1
+        if count:
+            target = old.prev
+            if target.count != count:
+                target = self._insert(old.prev, count)
+            target.keys.add(key)
+            self.location[key] = target
+        else:
+            del self.location[key]
+        old.keys.remove(key)
+        self._remove_empty(old)
+
+    def getMinKey(self):
+        return next(iter(self.head.next.keys), '')
+
+    def getMaxKey(self):
+        return next(iter(self.tail.prev.keys), '')`
+
+// Compatibility for the retained legacy visual module.
+export const CODE = code;

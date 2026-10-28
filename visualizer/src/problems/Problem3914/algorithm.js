@@ -22,9 +22,17 @@ export function valueAtStep(run, step, index) {
   const processed = step.phase === 'compare' ? step.index - 1 : step.index
   return run.input[index] + run.offsets[Math.min(index, processed)]
 }
-export const code = `def minOperations(nums):
+export const python = `def minOperations(nums):
     cost = 0
     for i in range(1, len(nums)):
         drop = max(0, nums[i - 1] - nums[i])
         cost += drop
-    return cost`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return cost`
+export const code = [
+  "FUNCTION minOperations(nums)",
+  "    cost ← 0",
+  "    FOR i FROM 1 THROUGH length(nums) − 1",
+  "        drop ← max(0, nums[i − 1] − nums[i])",
+  "        cost ← cost + drop",
+  "    RETURN cost"
+].map((text, index) => ({ line: index + 1, text }))

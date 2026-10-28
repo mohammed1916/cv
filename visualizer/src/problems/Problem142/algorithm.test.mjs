@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  CODE,
+  python,
   parseCycle2Input,
   buildCycle2Story,
 } from "./algorithm.js";
+
+const CODE = python.split("\n");
 
 test("CODE matches the canonical Python detectCycle reference implementation", () => {
   assert.ok(Array.isArray(CODE));

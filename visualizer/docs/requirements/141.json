@@ -1,0 +1,10 @@
+{
+  "number": 141,
+  "title": "Linked List Cycle",
+  "source": "https://leetcode.com/problems/linked-list-cycle/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Determine whether repeated next-pointer traversal revisits a node. pos describes fixture wiring, not a solver argument.",
+  "officialConstraints": "0–10000 nodes; values −100000 through 100000; pos is −1 or a valid index.",
+  "visualizationNotes": "Existing visual caps lists at 500 nodes."
+}

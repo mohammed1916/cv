@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  CODE,
+  python,
   parseWordBreakInput,
   buildWordBreakStory,
 } from "./algorithm.js";
+
+const CODE = python.split("\n");
 
 test("CODE exports expected python code lines", () => {
   assert.ok(Array.isArray(CODE));

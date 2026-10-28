@@ -1,4 +1,4 @@
-export const CODE = [
+const PYTHON_LINES = [
   "def wordBreak(s, wordDict):",
   "    words = set(wordDict)",
   "    memo = {}",
@@ -35,8 +35,8 @@ export function parseWordBreak2Input(sInput, dictInput) {
   }
 
   const s = rawS.trim();
-  if (s.length < 1 || s.length > 25) {
-    throw new Error("Input string s length must be between 1 and 25 characters");
+  if (s.length < 1 || s.length > 20) {
+    throw new Error("Input string s length must be between 1 and 20 characters");
   }
 
   if (!/^[a-z]+$/.test(s)) {
@@ -422,3 +422,26 @@ export function buildWordBreak2Story(sInput, dictInput) {
     frames,
   };
 }
+
+export const python = PYTHON_LINES.join("\n");
+export const CODE = [
+  "FUNCTION wordBreak(s, wordDict)",
+  "    words ← set of wordDict",
+  "    memo ← empty map",
+  "    FUNCTION dfs(start)",
+  "        IF memo contains start THEN RETURN memo[start]",
+  "        IF start = length(s) THEN RETURN one empty path",
+  "        res ← empty list",
+  "        FOR end FROM start + 1 THROUGH length(s)",
+  "            word ← substring(s, start, end)",
+  "            IF word belongs to words",
+  "                FOR EACH rest IN dfs(end)",
+  "                    APPEND word followed by rest TO res",
+  "        memo[start] ← res",
+  "        RETURN res",
+  "    sentences ← join each path in dfs(0) with spaces",
+  "    RETURN sentences"
+];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+export const parseInput = (input) => parseWordBreak2Input(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
+export const buildTrace = (input) => buildWordBreak2Story(input);

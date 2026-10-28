@@ -89,7 +89,7 @@ export function buildTrace({ nums, k }) {
   return { input: [...nums], k, up, down, prevUp, prevDown, result, path, frames }
 }
 
-export const code = `def maxAlternatingSum(nums, k):
+export const python = `def maxAlternatingSum(nums, k):
     U = max(nums)
     lower, higher = [0] * (U + 1), [0] * (U + 1)
     def update(tree, p, value):
@@ -115,4 +115,33 @@ export const code = `def maxAlternatingSum(nums, k):
         up[i] = value + query(lower, value - 1)
         down[i] = value + query(higher, U - value)
         answer = max(answer, up[i], down[i])
-    return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return answer`
+export const code = [
+  "FUNCTION maxAlternatingSum(nums, k)",
+  "    U ← maximum(nums)",
+  "    lower, higher ← zero arrays of length U + 1",
+  "    FUNCTION update(tree, p, value)",
+  "        WHILE p ≤ U",
+  "            tree[p] ← max(tree[p], value)",
+  "            p ← p + lowest set bit of p",
+  "    FUNCTION query(tree, p)",
+  "        best ← 0",
+  "        WHILE p > 0",
+  "            best ← max(best, tree[p])",
+  "            p ← p − lowest set bit of p",
+  "        RETURN best",
+  "    up, down ← zero arrays of length(nums)",
+  "    answer ← 0",
+  "    FOR EACH index i AND value IN nums",
+  "        // Admit only endpoints at least k positions earlier",
+  "        j ← i − k",
+  "        IF j ≥ 0",
+  "            update(lower, nums[j], down[j])",
+  "            // Reverse coordinates for greater-value queries",
+  "            update(higher, U − nums[j] + 1, up[j])",
+  "        // Both queries exclude equal values",
+  "        up[i] ← value + query(lower, value − 1)",
+  "        down[i] ← value + query(higher, U − value)",
+  "        answer ← max(answer, up[i], down[i])",
+  "    RETURN answer"
+].map((text, index) => ({ line: index + 1, text }))

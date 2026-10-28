@@ -1,7 +1,7 @@
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreak2Story from "./WordBreak2Story";
-import { CODE, buildWordBreak2Story } from "./algorithm";
+import { CODE, python, buildWordBreak2Story } from "./algorithm";
 import { wordBreak2Narrative } from "./wordBreak2Narrative";
 import "./WordBreakIIVisualizer.css";
 
@@ -19,6 +19,7 @@ const definition = {
     wordDict: '["cat", "cats", "and", "sand", "dog"]',
   },
   examples: EXAMPLES,
+  python,
   code: CODE.map((text, i) => ({ line: i + 1, text })),
   linePatterns: {
     1: "init",

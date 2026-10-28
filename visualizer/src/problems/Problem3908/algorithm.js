@@ -16,10 +16,19 @@ export function buildTrace({ n, x }) {
   frames.push({ phase: 'done', index: -1, found, leading, activeLine: 7, message: `Contains target (${found}) AND starts with a different digit (${leading}) = ${result}.` })
   return { input, target, result, frames }
 }
-export const code = `def validNumber(n, x):
+export const python = `def validNumber(n, x):
     digits, target = str(n), str(x)
     found = False
     for digit in digits:
         found = found or digit == target
     different_first = digits[0] != target
-    return found and different_first`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return found and different_first`
+export const code = [
+  "FUNCTION validNumber(n, x)",
+  "    digits, target ← decimal representations of n and x",
+  "    found ← false",
+  "    FOR EACH digit IN digits",
+  "        found ← found OR digit = target",
+  "    different_first ← first digit differs from target",
+  "    RETURN found AND different_first"
+].map((text, index) => ({ line: index + 1, text }))

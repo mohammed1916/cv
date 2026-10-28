@@ -34,7 +34,7 @@ export function buildTrace(nums) {
   return { input: [...nums], peak, left, right, result, frames }
 }
 
-export const code = `def compareSums(nums):
+export const python = `def compareSums(nums):
     peak = 0
     while peak + 1 < len(nums) and nums[peak] < nums[peak + 1]:
         peak += 1
@@ -44,4 +44,15 @@ export const code = `def compareSums(nums):
     for i in range(peak, len(nums)):
         descending += nums[i]
     return -1 if ascending == descending else (0 if ascending > descending else 1)`
-  .split('\n').map((text, index) => ({ line: index + 1, text }))
+export const code = [
+  "FUNCTION compareSums(nums)",
+  "    peak ← 0",
+  "    WHILE peak + 1 < length(nums) AND nums[peak] < nums[peak + 1]",
+  "        peak ← peak + 1",
+  "    ascending ← 0; descending ← 0",
+  "    FOR i FROM 0 THROUGH peak",
+  "        ascending ← ascending + nums[i]",
+  "    FOR i FROM peak THROUGH length(nums) − 1",
+  "        descending ← descending + nums[i]",
+  "    RETURN −1 if equal, 0 if ascending is larger, otherwise 1"
+].map((text, index) => ({ line: index + 1, text }))

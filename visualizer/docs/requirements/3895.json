@@ -1,0 +1,10 @@
+{
+  "number": 3895,
+  "title": "Count Digit Appearances",
+  "source": "https://leetcode.com/problems/count-digit-appearances/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Count all decimal occurrences of the requested digit across the array.",
+  "officialConstraints": "1–1000 positive numbers up to 1000000; digit 0–9.",
+  "visualizationNotes": "None."
+}

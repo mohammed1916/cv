@@ -1,0 +1,10 @@
+{
+  "number": 142,
+  "title": "Linked List Cycle II",
+  "source": "https://leetcode.com/problems/linked-list-cycle-ii/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Return the cycle entrance node, or null for an acyclic list, without changing links. pos describes fixture wiring.",
+  "officialConstraints": "0–10000 nodes; values −100000 through 100000; pos is −1 or a valid index.",
+  "visualizationNotes": "Existing parser limits and full-domain browser performance still need review."
+}

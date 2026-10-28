@@ -4,9 +4,9 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 const definition = {
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Timer in seconds (JSON integer)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Timer in seconds (JSON integer)',
   url: 'https://leetcode.com/problems/traffic-signal-color/',
   complexity: 'O(1) time and space: at most three condition checks.',
   phases: [

@@ -1,0 +1,10 @@
+{
+  "number": 3899,
+  "title": "Angles of a Triangle",
+  "source": "https://leetcode.com/problems/angles-of-a-triangle/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Return sorted internal angles in degrees for a positive-area triangle; return an empty array when no triangle exists.",
+  "officialConstraints": "Three integer sides in 1–1000; numerical tolerance 0.00001.",
+  "visualizationNotes": "None."
+}

@@ -1,0 +1,10 @@
+{
+  "number": 3910,
+  "title": "Count Connected Subgraphs with Even Node Sum",
+  "source": "https://leetcode.com/problems/count-connected-subgraphs-with-even-node-sum/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Count nonempty node subsets whose induced graph is connected and whose node-value sum is even.",
+  "officialConstraints": "1–13 binary-valued nodes; distinct edges with 0 ≤ u < v < n.",
+  "visualizationNotes": "None."
+}

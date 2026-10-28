@@ -46,7 +46,7 @@ export function buildTrace({ nums, edges }) {
   return { input: [...nums], edges: edges.map(edge => [...edge]), result: total, decisions, frames }
 }
 
-export const code = `def countSubgraphs(nums, edges):
+export const python = `def countSubgraphs(nums, edges):
     adj = [[] for _ in nums]
     for u, v in edges:
         adj[u].append(v)
@@ -65,4 +65,26 @@ export const code = `def countSubgraphs(nums, edges):
                     queue.append(other)
         if seen == selected:
             answer += 1
-    return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return answer`
+export const code = [
+  "FUNCTION countSubgraphs(nums, edges)",
+  "    adj ← one empty neighbor list per node",
+  "    FOR EACH edge (u, v)",
+  "        APPEND v TO adj[u]",
+  "        APPEND u TO adj[v]",
+  "    answer ← 0",
+  "    FOR EACH nonempty node mask",
+  "        selected ← nodes whose bits are set in mask",
+  "        IF sum of selected node values is odd",
+  "            CONTINUE",
+  "        seed ← smallest selected node",
+  "        seen ← set containing seed; queue ← list containing seed",
+  "        FOR EACH node IN queue, including newly appended nodes",
+  "            FOR EACH other IN adj[node]",
+  "                IF other is selected and not seen",
+  "                    ADD other TO seen",
+  "                    APPEND other TO queue",
+  "        IF seen = selected",
+  "            answer ← answer + 1",
+  "    RETURN answer"
+].map((text, index) => ({ line: index + 1, text }))

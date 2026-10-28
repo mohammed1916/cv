@@ -1,7 +1,7 @@
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import CycleStory from "./CycleStory";
-import { CODE, buildCycleStory } from "./algorithm";
+import { CODE, python, buildCycleStory } from "./algorithm";
 import { hasCycleNarrative } from "./hasCycleNarrative";
 import "./LinkedListCycleVisualizer.css";
 
@@ -13,6 +13,7 @@ const definition = {
   inputType: "string",
   initialInput: "[3, 2, 0, -4] | pos = 1",
   examples: EXAMPLES,
+  python,
   code: CODE.map((text, i) => ({ line: i + 1, text })),
   linePatterns: {
     2: "init",

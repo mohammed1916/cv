@@ -1,7 +1,7 @@
 import { getExamples } from "../../config/examplesRegistry";
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import WordBreakStory from "./WordBreakStory";
-import { CODE, buildWordBreakStory } from "./algorithm";
+import { CODE, python, buildWordBreakStory } from "./algorithm";
 import { wordBreakNarrative } from "./wordBreakNarrative";
 import "./WordBreakVisualizer.css";
 
@@ -29,6 +29,7 @@ const definition = {
   inputType: "string",
   initialInput: "leetcode | leet, code",
   examples: EXAMPLES,
+  python,
   code: CODE.map((text, i) => ({ line: i + 1, text })),
   linePatterns: LINE_PATTERN_MAP,
   patterns: PATTERNS,

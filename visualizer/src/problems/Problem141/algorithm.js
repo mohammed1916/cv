@@ -1,4 +1,4 @@
-export const CODE = [
+const PYTHON_LINES = [
   "def hasCycle(head):",
   "    slow = fast = head",
   "    while fast and fast.next:",
@@ -469,3 +469,18 @@ export function buildCycleStory(values, pos) {
     frames,
   };
 }
+
+export const python = PYTHON_LINES.join("\n");
+export const CODE = [
+  "FUNCTION hasCycle(head)",
+  "    slow ← head; fast ← head",
+  "    WHILE fast and its next node exist",
+  "        slow ← next node after slow",
+  "        fast ← node two links after fast",
+  "        IF slow and fast are the same node",
+  "            RETURN true",
+  "    RETURN false"
+];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+export const parseInput = (input) => parseLinkedListCycleInput(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
+export const buildTrace = (input) => buildCycleStory(input);

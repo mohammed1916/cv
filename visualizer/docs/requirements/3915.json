@@ -1,0 +1,10 @@
+{
+  "number": 3915,
+  "title": "Maximum Sum of Alternating Subsequence With Distance at Least K",
+  "source": "https://leetcode.com/problems/maximum-sum-of-alternating-subsequence-with-distance-at-least-k/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Maximize selected-value sum with adjacent chosen indices at least k apart and strict alternating comparisons. Singletons qualify.",
+  "officialConstraints": "1–100000 entries in 1–100000; k from 1 through n.",
+  "visualizationNotes": "Fenwick visualization only draws up to 48 value coordinates; larger solver traces remain available."
+}

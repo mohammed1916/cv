@@ -1,0 +1,10 @@
+{
+  "number": 3909,
+  "title": "Compare Sums of Bitonic Parts",
+  "source": "https://leetcode.com/problems/compare-sums-of-bitonic-parts/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Compare sums on both sides of a bitonic peak, including the peak in both. Return 0 for ascending, 1 for descending, −1 for a tie.",
+  "officialConstraints": "3–100000 entries in 1–1000000000; bitonic input.",
+  "visualizationNotes": "Large traces are not fully browser stress-tested."
+}

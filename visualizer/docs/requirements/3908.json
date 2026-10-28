@@ -1,0 +1,10 @@
+{
+  "number": 3908,
+  "title": "Valid Digit Number",
+  "source": "https://leetcode.com/problems/valid-digit-number/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Accept a number if its decimal form contains the requested digit but does not begin with it.",
+  "officialConstraints": "n 0–100000; digit 0–9.",
+  "visualizationNotes": "None."
+}

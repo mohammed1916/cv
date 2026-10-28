@@ -1,4 +1,4 @@
-export const CODE = [
+const PYTHON_LINES = [
   "def detectCycle(head):",
   "    slow = fast = head",
   "    while fast and fast.next:",
@@ -689,3 +689,25 @@ export function buildCycle2Story(values, pos) {
     frames: Object.freeze(frames),
   };
 }
+
+export const python = PYTHON_LINES.join("\n");
+export const CODE = [
+  "FUNCTION detectCycle(head)",
+  "    slow ← head; fast ← head",
+  "    WHILE fast and its next node exist",
+  "        slow ← next node after slow",
+  "        fast ← node two links after fast",
+  "        IF slow and fast are the same node",
+  "            BREAK",
+  "    IF the loop ended without a meeting",
+  "        RETURN null",
+  "    ptr1 ← head",
+  "    ptr2 ← slow",
+  "    WHILE ptr1 and ptr2 are different nodes",
+  "        ptr1 ← next node after ptr1",
+  "        ptr2 ← next node after ptr2",
+  "    RETURN ptr1"
+];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+export const parseInput = (input) => parseCycle2Input(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
+export const buildTrace = (input) => buildCycle2Story(input);

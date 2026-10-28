@@ -33,7 +33,7 @@ export function buildTrace(nums) {
   frames.push({ phase: 'done', index: -1, total, activeLine: 19, message: `Return ${total}. Each position uses its independently cheapest allowed value.` })
   return { input: [...nums], prime, targets, costs, result: total, frames }
 }
-export const code = `def minOperations(nums):
+export const python = `def minOperations(nums):
     limit = 2 * max(2, max(nums))
     prime = [True] * (limit + 1)
     prime[0] = prime[1] = False
@@ -51,4 +51,25 @@ export const code = `def minOperations(nums):
     for i, value in enumerate(nums):
         target = next_prime[value] if i % 2 == 0 else next_non[value]
         cost += target - value
-    return cost`.split('\n').map((text, index) => ({ line: index + 1, text }))
+    return cost`
+export const code = [
+  "FUNCTION minOperations(nums)",
+  "    limit ← twice the larger of 2 and maximum(nums)",
+  "    prime ← true at indices 0 through limit",
+  "    prime[0] ← false; prime[1] ← false",
+  "    FOR p FROM 2 THROUGH floor(sqrt(limit))",
+  "        IF prime[p]",
+  "            FOR multiple FROM p × p THROUGH limit BY p",
+  "                prime[multiple] ← false",
+  "    next_prime, next_non ← arrays filled with −1",
+  "    p ← −1; q ← −1",
+  "    FOR v FROM limit DOWN TO 1",
+  "        IF prime[v] THEN p ← v",
+  "        OTHERWISE q ← v",
+  "        next_prime[v] ← p; next_non[v] ← q",
+  "    cost ← 0",
+  "    FOR EACH index i AND value IN nums",
+  "        target ← next_prime[value] at even i, otherwise next_non[value]",
+  "        cost ← cost + target − value",
+  "    RETURN cost"
+].map((text, index) => ({ line: index + 1, text }))

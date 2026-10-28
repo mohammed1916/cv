@@ -4,9 +4,9 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 const definition = {
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Number n and digit x (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Number n and digit x (JSON object)',
   url: 'https://leetcode.com/problems/valid-digit-number/',
   complexity: 'O(d) time and space for d decimal digits. The official input has at most six digits.',
   phases: [

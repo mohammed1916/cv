@@ -1,6 +1,6 @@
 import AlgorithmStoryWorkspace from "../../components/shared/AlgorithmStoryWorkspace";
 import Cycle2Story from "./Cycle2Story";
-import { CODE, buildCycle2Story } from "./algorithm";
+import { CODE, python, buildCycle2Story } from "./algorithm";
 import { detectCycle2Narrative } from "./detectCycle2Narrative";
 import { getExamplesOr } from "../../config/examplesRegistry";
 import "./LinkedListCycleIIVisualizer.css";
@@ -65,6 +65,7 @@ const definition = {
     pos: 1,
   },
   examples: EXAMPLES,
+  python,
   code: CODE.map((text, i) => ({ line: i + 1, text })),
   linePatterns: {
     1: "init",

@@ -1,4 +1,4 @@
-export const CODE = [
+const PYTHON_LINES = [
   "def wordBreak(s, wordDict):",
   "    words = set(wordDict)",
   "    dp = [False] * (len(s) + 1)",
@@ -405,3 +405,20 @@ export function buildWordBreakStory(sInput, dictInput) {
     frames,
   };
 }
+
+export const python = PYTHON_LINES.join("\n");
+export const CODE = [
+  "FUNCTION wordBreak(s, wordDict)",
+  "    words ← set of wordDict",
+  "    dp ← false for every prefix length",
+  "    dp[0] ← true",
+  "    FOR i FROM 1 THROUGH length(s)",
+  "        FOR j FROM 0 THROUGH i − 1",
+  "            IF dp[j] AND substring(s, j, i) belongs to words",
+  "                dp[i] ← true",
+  "                BREAK",
+  "    RETURN dp[length(s)]"
+];
+export const code = CODE.map((text, index) => ({ line: index + 1, text }));
+export const parseInput = (input) => parseWordBreakInput(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
+export const buildTrace = (input) => buildWordBreakStory(input);

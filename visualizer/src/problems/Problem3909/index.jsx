@@ -4,10 +4,10 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code } from './algorithm'
+import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, inputLabel: 'Bitonic array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Bitonic array nums (JSON)',
   url: 'https://leetcode.com/problems/compare-sums-of-bitonic-parts/',
   complexity: 'O(n) time and O(1) solver extra space. The visualization retains O(n) compact events, without copying the array at each addition.',
   phases: [

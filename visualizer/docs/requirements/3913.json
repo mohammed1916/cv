@@ -1,0 +1,10 @@
+{
+  "number": 3913,
+  "title": "Sort Vowels by Frequency",
+  "source": "https://leetcode.com/problems/sort-vowels-by-frequency/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Keep consonant positions fixed; refill vowel slots by descending vowel frequency, resolving ties by earliest original occurrence.",
+  "officialConstraints": "1–100000 lowercase English letters.",
+  "visualizationNotes": "Large traces are not fully browser stress-tested."
+}

@@ -1,0 +1,10 @@
+{
+  "number": 432,
+  "title": "All O`one Data Structure",
+  "source": "https://leetcode.com/problems/all-oone-data-structure/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Maintain string counts with inc/dec and return any minimum/maximum key; empty queries return an empty string. Every operation requires average constant time.",
+  "officialConstraints": "Keys use 1–10 lowercase letters; decrement targets exist; at most 50000 operations.",
+  "visualizationNotes": "Playback accepts at most 200 operations. Snapshot creation is linear in current key count, separate from data-structure operation cost."
+}

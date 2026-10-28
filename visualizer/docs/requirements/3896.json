@@ -1,0 +1,10 @@
+{
+  "number": 3896,
+  "title": "Minimum Operations to Transform Array into Alternating Prime",
+  "source": "https://leetcode.com/problems/minimum-operations-to-transform-array-into-alternating-prime/",
+  "checkedOn": "2026-10-28",
+  "sourceKind": "official-page-via-web-tool",
+  "summary": "Increment individual elements until even indices are prime and odd indices non-prime; minimize total increments.",
+  "officialConstraints": "1–100000 entries, each 1–100000.",
+  "visualizationNotes": "Large traces are not fully browser stress-tested."
+}
