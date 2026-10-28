@@ -2,9 +2,9 @@
  "generatedBy": "manual reconciliation, see commit message",
  "catalogProblems": 4073,
  "summary": {
-  "missing": 2668,
+  "missing": 2651,
   "partial": 55,
-  "verified": 1349,
+  "verified": 1366,
   "implemented-unverified": 1
  },
  "entries": [
@@ -45800,12 +45800,12 @@
    "slug": "make-array-non-decreasing",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3523",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3524",
@@ -45891,12 +45891,12 @@
    "slug": "maximum-profit-from-valid-topological-order-in-dag",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3530",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3531",
@@ -48205,12 +48205,12 @@
    "slug": "longest-fibonacci-subarray",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3708",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": true,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3709",
@@ -48257,12 +48257,12 @@
    "slug": "sum-of-elements-with-frequency-divisible-by-k",
    "difficulty": "Easy",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3712",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": true,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3713",
@@ -48361,12 +48361,12 @@
    "slug": "lexicographically-smallest-permutation-greater-than-target",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3720",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": true,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3721",
@@ -48426,12 +48426,12 @@
    "slug": "count-ways-to-choose-coprime-integers-from-rows",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3725",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3726",
@@ -48452,12 +48452,12 @@
    "slug": "maximum-alternating-sum-of-squares",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3727",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3728",
@@ -48465,12 +48465,12 @@
    "slug": "stable-subarrays-with-equal-boundary-and-interior-sum",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3728",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3729",
@@ -48478,12 +48478,12 @@
    "slug": "count-distinct-subarrays-divisible-by-k-in-sorted-array",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3729",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3730",
@@ -48543,12 +48543,12 @@
    "slug": "lexicographically-smallest-palindromic-permutation-greater-than-target",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3734",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3735",
@@ -48647,12 +48647,12 @@
    "slug": "maximum-path-score-in-a-grid",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3742",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3743",
@@ -48660,12 +48660,12 @@
    "slug": "maximize-cyclic-partition-score",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3743",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3744",
@@ -48712,12 +48712,12 @@
    "slug": "count-distinct-integers-after-removing-zeros",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3747",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3748",
@@ -48764,12 +48764,12 @@
    "slug": "total-waviness-of-numbers-in-range-i",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3751",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3752",
@@ -48790,12 +48790,12 @@
    "slug": "total-waviness-of-numbers-in-range-ii",
    "difficulty": "Hard",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3753",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3754",
@@ -48816,12 +48816,12 @@
    "slug": "find-maximum-balanced-xor-subarray-length",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3755",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3756",
@@ -48894,12 +48894,12 @@
    "slug": "minimum-absolute-distance-between-mirror-pairs",
    "difficulty": "Medium",
    "paidOnly": false,
-   "folder": null,
-   "route": "missing",
-   "committed": false,
-   "testStatus": "n/a",
+   "folder": "Problem3761",
+   "route": "implemented",
+   "committed": true,
+   "testStatus": "pass",
    "requirementsCached": false,
-   "status": "missing"
+   "status": "verified"
   },
   {
    "number": "3762",
