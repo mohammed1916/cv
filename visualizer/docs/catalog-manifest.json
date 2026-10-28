@@ -3,10 +3,9 @@
  "catalogProblems": 4073,
  "summary": {
   "legacy-unconverted": 1451,
-  "verified": 1415,
+  "verified": 1416,
   "partial": 17,
-  "missing": 1189,
-  "implemented-unverified": 1
+  "missing": 1189
  },
  "entries": [
   {
@@ -40869,10 +40868,10 @@
    "paidOnly": false,
    "folder": "Problem2919",
    "route": "implemented",
-   "committed": false,
+   "committed": true,
    "testStatus": "pass",
    "requirementsCached": true,
-   "status": "implemented-unverified",
+   "status": "verified",
    "folderKind": "four-file"
   },
   {
