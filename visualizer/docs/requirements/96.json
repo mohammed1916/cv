@@ -1,0 +1,13 @@
+{
+  "number": 96,
+  "title": "Unique Binary Search Trees",
+  "slug": "unique-binary-search-trees",
+  "source": "https://leetcode.com/problems/unique-binary-search-trees/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "official-page-blocked",
+  "accessAttempt": "WebFetch returned HTTP 403 Forbidden for the official page.",
+  "summary": null,
+  "officialConstraints": "unverified: official page not retrievable in this session",
+  "visualizationNotes": "not recorded; requires official constraints before caps are set",
+  "requirementsVerified": false
+}
