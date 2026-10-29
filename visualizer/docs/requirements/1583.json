@@ -1,0 +1,17 @@
+{
+  "number": 1583,
+  "title": "Count Unhappy Friends",
+  "slug": "count-unhappy-friends",
+  "source": "https://leetcode.com/problems/count-unhappy-friends/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "official-page-blocked; statement and examples from WebSearch result summaries citing leetcode.com/problems/count-unhappy-friends, leetcode.doocs.org/en/lc/1583/, walkccc.me/LeetCode/problems/1583/",
+  "summary": "n friends (n even) each rank the other n-1 friends; friends are split into n/2 pairs. Friend x is unhappy if x prefers some u over partner y, and u prefers x over u's partner v. Return the number of unhappy friends.",
+  "officialConstraints": "2 <= n <= 500; n is even; each preference list has length n-1, has unique entries, and never contains the friend's own index; each person is in exactly one pair.",
+  "examples": [
+    { "input": { "n": 4, "preferences": [[1,2,3],[3,2,0],[3,1,0],[1,2,0]], "pairs": [[0,1],[2,3]] }, "output": 2 },
+    { "input": { "n": 2, "preferences": [[1],[0]], "pairs": [[1,0]] }, "output": 0 },
+    { "input": { "n": 4, "preferences": [[1,3,2],[2,3,0],[1,3,0],[0,2,1]], "pairs": [[1,3],[0,2]] }, "output": 4 }
+  ],
+  "visualizationNotes": "Visualization caps n at 40 (IndexedSequence over friends). Full LeetCode range is up to 500.",
+  "requirementsVerified": true
+}

@@ -1,0 +1,17 @@
+{
+  "number": 1617,
+  "title": "Count Subtrees With Max Distance Between Cities",
+  "slug": "count-subtrees-with-max-distance-between-cities",
+  "source": "https://leetcode.com/problems/count-subtrees-with-max-distance-between-cities/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "official-page-blocked; statement and examples from WebSearch result summaries citing leetcode.com/problems/count-subtrees-with-max-distance-between-cities and related mirrors",
+  "summary": "n cities are connected by n-1 bidirectional edges forming a tree. For each d from 1 to n-1, count subsets of cities that are connected (within the subset) whose largest pairwise distance (in edges) is exactly d. Return the counts as an array.",
+  "officialConstraints": "2 <= n <= 15; edges has length n-1; 1 <= u, v <= n; u != v; the edges form a tree.",
+  "examples": [
+    { "input": { "n": 4, "edges": [[1,2],[2,3],[2,4]] }, "output": [3,4,0] },
+    { "input": { "n": 2, "edges": [[1,2]] }, "output": [1] },
+    { "input": { "n": 3, "edges": [[1,2],[2,3]] }, "output": [2,1] }
+  ],
+  "visualizationNotes": "Visualization caps n at 10 because subset enumeration is 2^n; the full LeetCode limit is 15.",
+  "requirementsVerified": true
+}

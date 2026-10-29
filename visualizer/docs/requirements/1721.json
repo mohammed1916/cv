@@ -1,0 +1,18 @@
+{
+  "number": 1721,
+  "title": "Swapping Nodes in a Linked List",
+  "slug": "swapping-nodes-in-a-linked-list",
+  "source": "https://leetcode.com/problems/swapping-nodes-in-a-linked-list/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "official-page-blocked; statement and examples from WebSearch result summaries citing leetcode.doocs.org/en/lc/1721/ and mirrors",
+  "summary": "Given the head of a linked list and k (1-based), swap the values of the k-th node from the start and the k-th node from the end. Return the head.",
+  "officialConstraints": "The list has n nodes; 1 <= k <= n <= 10^5; 0 <= Node.val <= 100.",
+  "examples": [
+    { "input": { "head": [1,2,3,4,5], "k": 2 }, "output": [1,4,3,2,5] },
+    { "input": { "head": [7,9,6,6,7,8,3,0,9,5], "k": 5 }, "output": [7,9,6,6,8,7,3,0,9,5] },
+    { "input": { "head": [1], "k": 1 }, "output": [1] },
+    { "input": { "head": [1,2], "k": 1 }, "output": [2,1] }
+  ],
+  "visualizationNotes": "Visualization caps the list at 30 nodes (LeetCode allows 10^5).",
+  "requirementsVerified": true
+}
