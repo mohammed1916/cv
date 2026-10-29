@@ -1,0 +1,36 @@
+{
+  "number": "1363",
+  "title": "Largest Multiple of Three",
+  "difficulty": "Hard",
+  "sources": [
+    "https://leetcode.com/problems/largest-multiple-of-three",
+    "https://leetcode.doocs.org/en/lc/1363/"
+  ],
+  "statement": "Given digits, return the largest multiple of three formed by concatenating some of them (as a string); return \"\" if none, and \"0\" if the only result is zeros.",
+  "constraints": [
+    "1 <= digits.length <= 10^4",
+    "0 <= digits[i] <= 9"
+  ],
+  "examples": [
+    {
+      "input": "[8,1,9]",
+      "output": "981"
+    },
+    {
+      "input": "[8,6,7,1,0]",
+      "output": "8760"
+    },
+    {
+      "input": "[1]",
+      "output": ""
+    },
+    {
+      "input": "[0,0,0,0,0,0]",
+      "output": "0"
+    }
+  ],
+  "visualizationCap": "digits capped at 50",
+  "requirementsVerified": true,
+  "notes": "Outputs match the Python solution; the all-zeros example comes from a Chinese LeetCode mirror.",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}

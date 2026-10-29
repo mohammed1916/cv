@@ -1,0 +1,32 @@
+{
+  "number": "1391",
+  "title": "Check if There is a Valid Path in a Grid",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid",
+    "https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/description/"
+  ],
+  "statement": "Grid of street types 1..6 starting at top-left; return true if a path to bottom-right exists following street connections.",
+  "constraints": [
+    "1 <= m, n <= 300",
+    "1 <= grid[i][j] <= 6"
+  ],
+  "examples": [
+    {
+      "input": "[[2,4,3],[6,5,2]]",
+      "output": true
+    },
+    {
+      "input": "[[1,2,1],[1,2,1]]",
+      "output": false
+    },
+    {
+      "input": "[[1,1,2]]",
+      "output": false
+    }
+  ],
+  "visualizationCap": "each side capped at 12 for the grid view",
+  "requirementsVerified": true,
+  "notes": "Street shapes are the standard LeetCode definitions (1 LR, 2 UD, 3 LD, 4 RD, 5 LU, 6 RU).",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}

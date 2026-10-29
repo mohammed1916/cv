@@ -1,0 +1,33 @@
+{
+  "number": "1361",
+  "title": "Validate Binary Tree Nodes",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.com/problems/validate-binary-tree-nodes",
+    "https://leetcode.doocs.org/en/lc/1361/"
+  ],
+  "statement": "n nodes 0..n-1 with leftChild/rightChild (-1 for none); return true only if they form exactly one valid binary tree.",
+  "constraints": [
+    "1 <= n <= 10^4",
+    "leftChild and rightChild have length n",
+    "-1 <= entries <= n-1"
+  ],
+  "examples": [
+    {
+      "input": "n=4, leftChild=[1,-1,3,-1], rightChild=[2,-1,-1,-1]",
+      "output": true
+    },
+    {
+      "input": "n=4, leftChild=[1,-1,3,-1], rightChild=[2,3,-1,-1]",
+      "output": false
+    },
+    {
+      "input": "n=2, leftChild=[1,0], rightChild=[-1,-1]",
+      "output": false
+    }
+  ],
+  "visualizationCap": "n capped at 50 nodes",
+  "requirementsVerified": true,
+  "notes": "",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}

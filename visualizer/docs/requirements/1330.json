@@ -1,0 +1,29 @@
+{
+  "number": "1330",
+  "title": "Reverse Subarray To Maximize Array Value",
+  "difficulty": "Hard",
+  "sources": [
+    "https://leetcode.com/problems/reverse-subarray-to-maximize-array-value",
+    "https://walkccc.me/LeetCode/problems/1330/"
+  ],
+  "statement": "Reverse exactly one subarray (or none) to maximize the sum of |nums[i] - nums[i+1]|; return the maximum final value.",
+  "constraints": [
+    "2 <= nums.length <= 3 * 10^4",
+    "-10^5 <= nums[i] <= 10^5",
+    "The answer fits in a 32-bit integer"
+  ],
+  "examples": [
+    {
+      "input": "[2,3,1,5,4]",
+      "output": 10
+    },
+    {
+      "input": "[2,4,9,24,2,1,10]",
+      "output": 68
+    }
+  ],
+  "visualizationCap": "nums capped at 50 values for the visualization; the solution is O(n)",
+  "requirementsVerified": true,
+  "notes": "Brute-force checked against all subarray reversals on 3000 random arrays (length 2-7).",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}
