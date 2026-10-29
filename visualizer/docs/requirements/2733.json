@@ -1,0 +1,30 @@
+{
+  "number": 2733,
+  "title": "Neither Minimum nor Maximum",
+  "source": "https://leetcode.com/problems/neither-minimum-nor-maximum/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/neither-minimum-nor-maximum/description/",
+    "https://leetcode.doocs.org/en/lc/2733/",
+    "https://walkccc.me/LeetCode/problems/2733/"
+  ],
+  "summary": "Given an array of distinct positive integers nums, return any element that is neither the minimum nor the maximum of nums, or -1 if no such element exists.",
+  "officialConstraints": "1 <= nums.length <= 100; 1 <= nums[i] <= 100; nums values are distinct.",
+  "examples": [
+    {
+      "input": "nums = [3,2,1,4]",
+      "output": "2 or 3 (any valid element)"
+    },
+    {
+      "input": "nums = [1,2]",
+      "output": "-1"
+    },
+    {
+      "input": "nums = [2,1,3]",
+      "output": "2"
+    }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Input is capped at 100 values as in the official constraints. Output 3 for [3,2,1,4] is one of the two accepted answers, chosen as the first valid element."
+}

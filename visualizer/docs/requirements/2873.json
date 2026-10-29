@@ -1,0 +1,28 @@
+{
+  "number": 2873,
+  "title": "Maximum Value of an Ordered Triplet I",
+  "slug": "maximum-value-of-an-ordered-triplet-i",
+  "source": "https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-i/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-partial (WebSearch only; official page not retrievable)",
+  "sourceUrls": [
+    "https://walkccc.me/LeetCode/problems/2873/",
+    "https://dev.to/mdarifulhaque/2873-maximum-value-of-an-ordered-triplet-i-3m9i"
+  ],
+  "summary": "Return the maximum value of (nums[i] - nums[j]) * nums[k] over i < j < k, or 0 if every such value is negative.",
+  "officialConstraints": "unverified: no retrieved source stated the length or value bounds",
+  "examples": [
+    {
+      "input": "[12,6,1,2,7]",
+      "output": 77,
+      "source": "search snippet"
+    },
+    {
+      "input": "[1,10,3,4,19]",
+      "output": 133,
+      "source": "search snippet"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Array capped at 30 elements and values at 1,000,000 by the visualization, not by a verified constraint."
+}

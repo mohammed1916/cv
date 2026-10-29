@@ -1,0 +1,16 @@
+{
+  "number": 2396,
+  "title": "Strictly Palindromic Number",
+  "source": "https://leetcode.com/problems/strictly-palindromic-number/description/",
+  "otherSources": [
+    "https://walkccc.me/LeetCode/problems/2396/"
+  ],
+  "summary": "Return whether n is palindromic in every base from 2 to n-2.",
+  "officialConstraints": "4 <= n <= 10^5 (snippet).",
+  "examples": [],
+  "visualizationNotes": "SKIPPED: the answer is always false; no meaningful state to visualize and no sourced example input.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
+  "skipped": true
+}

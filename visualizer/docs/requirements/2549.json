@@ -1,0 +1,13 @@
+{
+  "number": "2549",
+  "title": "Count Distinct Numbers on Board",
+  "slug": "count-distinct-numbers-on-board",
+  "source": "https://leetcode.com/problems/count-distinct-numbers-on-board/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only",
+  "summary": null,
+  "officialConstraints": "partial or missing",
+  "visualizationNotes": "not recorded; problem skipped",
+  "requirementsVerified": false,
+  "skipReason": "No concrete example or constraints were found in any source; only explanatory write-ups. Skipped: no example can be sourced."
+}

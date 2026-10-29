@@ -1,0 +1,17 @@
+{
+  "number": 2060,
+  "title": "Check if an Original String Exists Given Two Encoded Strings",
+  "source": "https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/check-if-an-original-string-exists-given-two-encoded-strings/",
+    "https://leetcode.doocs.org/en/lc/2060/",
+    "https://www.algo.monster/liteproblems/2060"
+  ],
+  "summary": "Decide whether some lowercase original string encodes to both s1 and s2 (digits are wildcard counts). Snippets quote s1=\"internationalization\", s2=\"i18n\" -> true and s1=\"l123e\", s2=\"44\" -> true; full constraints (e.g. length 1..40) not retrieved.",
+  "officialConstraints": null,
+  "examples": [],
+  "requirementsVerified": false,
+  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained."
+}

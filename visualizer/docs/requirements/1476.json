@@ -1,0 +1,20 @@
+{
+  "number": "1476",
+  "title": "Subrectangle Queries",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/1476/",
+    "https://walkccc.me/LeetCode/problems/1476/"
+  ],
+  "statement": "SubrectangleQueries(rows x cols matrix) with updateSubrectangle(row1,col1,row2,col2,newValue) and getValue(row,col).",
+  "constraints": [
+    "at most 500 calls in total (paraphrased by fetch tool)",
+    "rows and cols up to 100",
+    "values 1..10^9"
+  ],
+  "examples": [],
+  "visualizationCap": "not set",
+  "requirementsVerified": false,
+  "notes": "SKIPPED: fetch tool reported the page has two examples but returned neither their inputs nor outputs; the official page is 403 to WebFetch. No example invented.",
+  "urls_checked_with": "WebSearch + WebFetch (doocs, walkccc)"
+}

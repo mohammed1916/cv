@@ -1,0 +1,18 @@
+{
+  "number": 1298,
+  "title": "Maximum Candies You Can Get from Boxes",
+  "source": "https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/",
+  "sourceUrls": [
+    "https://www.hellointerview.com/community/questions/max-candies-boxes/cm5eguhae030g838ogqu5ifuh",
+    "https://algo.monster/liteproblems/1298"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "third-party mirrors via web search (official page not fetchable)",
+  "requirementsVerified": false,
+  "summary": "n boxes with status, candies, keys and contained boxes; starting from initialBoxes, return the maximum candies collectible. A box can be opened if it is open or a key to it is held.",
+  "officialConstraints": "1 <= n <= 1000; 1 <= candies[i] <= 1000; key and containedBoxes lists are length at most n with valid, non-duplicate indices.",
+  "examples": [
+    { "note": "Sample answers 16 and 6 were confirmed by a search snippet; the full example inputs in the visualization were written from the standard example and were not captured from a source." }
+  ],
+  "visualizationNotes": "Visualization accepts up to 24 boxes so the graph view stays readable. Requirements not fully verified: example inputs need checking against the official page."
+}

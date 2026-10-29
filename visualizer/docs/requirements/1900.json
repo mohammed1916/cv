@@ -1,0 +1,17 @@
+{
+  "number": 1900,
+  "title": "The Earliest and Latest Rounds Where Players Compete",
+  "source": "https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/",
+    "https://leetcode.doocs.org/en/lc/1900-1999/",
+    "https://www.hellointerview.com/community/questions/earliest-latest-rounds/cm5eguhaf03h6838o0vl819jr"
+  ],
+  "summary": "Tournament of n players with pairing first-vs-last per round; return earliest and latest round where firstPlayer and secondPlayer meet. Only example n=11, first=2, second=4 -> [3,4] retrieved.",
+  "officialConstraints": null,
+  "examples": [],
+  "requirementsVerified": false,
+  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained."
+}

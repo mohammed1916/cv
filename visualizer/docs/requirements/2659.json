@@ -1,0 +1,14 @@
+{
+  "number": 2659,
+  "title": "Make Array Empty",
+  "slug": "make-array-empty",
+  "source": "https://leetcode.com/problems/make-array-empty/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-summary-only",
+  "accessAttempt": "WebSearch returned only third-party summaries; no official statement or examples retrieved. WebFetch on the official page returns 403.",
+  "summary": "Repeatedly either remove the first element if it is the current minimum, or move it to the end. Return the total number of operations to empty the distinct integer array.",
+  "officialConstraints": "unverified: official constraints not retrieved",
+  "examples": [],
+  "visualizationNotes": "not recorded; constraints and examples required before caps are set",
+  "requirementsVerified": false
+}

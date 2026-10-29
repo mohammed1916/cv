@@ -1,0 +1,23 @@
+{
+  "number": 2644,
+  "title": "Find the Maximum Divisibility Score",
+  "source": "https://leetcode.com/problems/find-the-maximum-divisibility-score/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-and-doocs-mirror (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/2644",
+    "https://walkccc.me/LeetCode/problems/2644/"
+  ],
+  "summary": "Given integer arrays nums and divisors, the divisibility score of a divisor is how many elements of nums it divides evenly. Return the divisor with the maximum score; ties go to the smallest divisor.",
+  "officialConstraints": [
+    "1 <= nums.length, divisors.length <= 1000",
+    "1 <= nums[i], divisors[i] <= 10^9 (the source page shows the exponent as 109; interpreted as 10^9)"
+  ],
+  "examples": [
+    { "input": "nums = [2,9,15,50], divisors = [5,3,7,2]", "output": "2" },
+    { "input": "nums = [4,7,9,3,9], divisors = [5,2,3]", "output": "3" },
+    { "input": "nums = [20,14,21,10], divisors = [10,16,20]", "output": "10" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Example 1 divisors are written as [5,3,7,2) on the source page; the bracket is a typo, and the source's own scores (5->2, 3->2, 7->0, 2->2) confirm [5,3,7,2]. Visualization uses the full official limits; one divisor is scored per step."
+}

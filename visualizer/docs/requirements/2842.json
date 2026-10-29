@@ -1,0 +1,25 @@
+{
+  "number": 2842,
+  "title": "Count K-Subsequences of a String With Maximum Beauty",
+  "slug": "count-k-subsequences-of-a-string-with-maximum-beauty",
+  "source": "https://leetcode.com/problems/count-k-subsequences-of-a-string-with-maximum-beauty/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "incomplete",
+  "sources": [
+    "https://www.hellointerview.com/community/questions/count-k-subsequences/cm5eguhai047c838oo10kgckz"
+  ],
+  "summary": "Summary only: choose k-length subsequences of distinct characters maximising total frequency; count them modulo 1e9+7.",
+  "officialConstraints": "not obtained",
+  "examples": [
+    {
+      "input": {
+        "s": "bcca",
+        "k": 2
+      },
+      "output": 4
+    }
+  ],
+  "visualizationNotes": "not recorded; full constraints not obtained",
+  "requirementsVerified": false,
+  "note": "Skipped: full constraints and remaining examples could not be obtained from a source (only one example from a search snippet)."
+}

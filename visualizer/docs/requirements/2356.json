@@ -1,0 +1,14 @@
+{
+  "number": 2356,
+  "title": "Number of Unique Subjects Taught by Each Teacher",
+  "source": "",
+  "otherSources": [],
+  "summary": "SQL database problem.",
+  "officialConstraints": "",
+  "examples": [],
+  "visualizationNotes": "SKIPPED: database/SQL problem.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
+  "skipped": true
+}

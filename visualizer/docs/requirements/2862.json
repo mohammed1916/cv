@@ -1,0 +1,28 @@
+{
+  "number": 2862,
+  "title": "Maximum Element-Sum of a Complete Subset of Indices",
+  "slug": "maximum-element-sum-of-a-complete-subset-of-indices",
+  "source": "https://leetcode.com/problems/maximum-element-sum-of-a-complete-subset-of-indices/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-partial (WebSearch only; official page not retrievable)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/2862/",
+    "https://github.com/lzl124631x/LeetCode/blob/master/leetcode/2862"
+  ],
+  "summary": "Given a 1-indexed array, choose indices whose pairwise products are perfect squares and return the maximum sum of their values.",
+  "officialConstraints": "1 <= n == nums.length <= 10^4 and 1 <= nums[i] <= 10^9 (from search snippet)",
+  "examples": [
+    {
+      "input": "[8,7,3,5,7,2,4,9]",
+      "output": 16,
+      "source": "search snippet (indices 2 and 8)"
+    },
+    {
+      "input": "[8,10,3,8,1,13,7,9,4] vs [5,10,3,10,1,13,7,9,4]",
+      "output": "20 vs 19",
+      "source": "CONFLICT between two sources; not recorded as an example"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization caps the array at 30 elements (official n up to 10^4). The second example is unresolved and excluded."
+}

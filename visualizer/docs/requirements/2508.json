@@ -1,0 +1,16 @@
+{
+  "number": 2508,
+  "title": "Add Edges to Make Degrees of All Nodes Even",
+  "slug": "add-edges-to-make-degrees-of-all-nodes-even",
+  "source": "https://leetcode.com/problems/add-edges-to-make-degrees-of-all-nodes-even/",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2508/"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets",
+  "summary": "Decide whether at most two new edges can make all node degrees even.",
+  "officialConstraints": "3 <= n <= 10^5; 2 <= edges.length <= 10^5; no self-loops or repeated edges (per doocs mirror only)",
+  "examples": [],
+  "visualizationNotes": "Graph input; not built. Official page not retrieved and approach not verified against an editorial.",
+  "requirementsVerified": false
+}

@@ -1,0 +1,16 @@
+{
+  "number": 2424,
+  "title": "Longest Uploaded Prefix",
+  "source": "https://leetcode.com/problems/longest-uploaded-prefix/description/",
+  "otherSources": [
+    "https://walkccc.me/LeetCode/problems/2424/"
+  ],
+  "summary": "Design class: upload(video) and longest() reporting the longest uploaded prefix 1..k.",
+  "officialConstraints": "Up to 2*10^5 calls combined (snippet).",
+  "examples": [],
+  "visualizationNotes": "SKIPPED: design (stream of method calls) without a sourced example input/output format.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
+  "skipped": true
+}

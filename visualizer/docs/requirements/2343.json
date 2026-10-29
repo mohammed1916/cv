@@ -1,0 +1,16 @@
+{
+  "number": 2343,
+  "title": "Query Kth Smallest Trimmed Number",
+  "source": "https://leetcode.com/problems/query-kth-smallest-trimmed-number/description/",
+  "otherSources": [
+    "https://walkccc.me/LeetCode/problems/2343/"
+  ],
+  "summary": "For each query [k, trim], trim each digit string to its rightmost trim digits and return the index of the k-th smallest (ties by lower index).",
+  "officialConstraints": "1 <= nums.length <= 100, 1 <= nums[i].length <= 100, equal lengths, digits only (snippet).",
+  "examples": [],
+  "visualizationNotes": "SKIPPED: no example input/output obtained from a source.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
+  "skipped": true
+}

@@ -1,0 +1,25 @@
+{
+  "number": "2567",
+  "title": "Minimum Score by Changing Two Elements",
+  "slug": "minimum-score-by-changing-two-elements",
+  "source": "https://leetcode.com/problems/minimum-score-by-changing-two-elements/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only; official page not retrieved (403 to WebFetch)",
+  "searchSources": [
+    "https://leetcode.com/problems/minimum-score-by-changing-two-elements/description/",
+    "https://walkccc.me/LeetCode/problems/2567/",
+    "https://leetcode.doocs.org/en/lc/2567/"
+  ],
+  "summary": "Change at most two elements; minimize low score plus high score. Solved by sorting and taking the best of three candidate ranges.",
+  "officialConstraints": "unverified: constraints not retrieved from a source",
+  "examples": [
+    {
+      "input": "nums = [1,4,7,8,5]",
+      "output": "3",
+      "source": "search snippet citing expected output for example 1"
+    }
+  ],
+  "visualizationNotes": "Visualization caps nums at 40 values; the candidate formula requires at least three values.",
+  "requirementsVerified": false,
+  "notes": "Only one example; constraints missing. Snippet's 'candidate two' arithmetic was miscalculated, so the formula was checked against brute force instead."
+}

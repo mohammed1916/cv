@@ -1,0 +1,17 @@
+{
+  "number": 1912,
+  "title": "Design Movie Rental System",
+  "source": "https://leetcode.com/problems/design-movie-rental-system/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/design-movie-rental-system/",
+    "https://leetcode.doocs.org/en/lc/1912/",
+    "https://www.algo.monster/liteproblems/1912"
+  ],
+  "summary": "Design class with search (cheapest 5 unrented shops), rent, drop, and report (cheapest 5 rented). Constraints partly retrieved (1<=n<=3*10^5, 1<=entries.length<=1e5); no official example set retrieved. Operation-based input is not a single-function problem.",
+  "officialConstraints": null,
+  "examples": [],
+  "requirementsVerified": false,
+  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained."
+}

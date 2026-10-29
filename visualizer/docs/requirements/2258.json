@@ -1,0 +1,14 @@
+{
+  "number": 2258,
+  "title": "Escape the Spreading Fire",
+  "source": "https://leetcode.com/problems/escape-the-spreading-fire/description/",
+  "otherSources": [],
+  "summary": "Grid with grass, fire and walls; fire spreads after each move. Return max waiting time at start, -1 if impossible, or 10^9.",
+  "officialConstraints": "Not fetched.",
+  "examples": [],
+  "visualizationNotes": "SKIPPED: example inputs not obtained from a source (only outputs 3, -1, 1000000000 were seen).",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
+  "skipped": true
+}

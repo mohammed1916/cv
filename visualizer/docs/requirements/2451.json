@@ -1,0 +1,22 @@
+{
+  "number": 2451,
+  "title": "Odd String Difference",
+  "source": "https://leetcode.com/problems/odd-string-difference/description/",
+  "otherSources": [
+    "https://leetcode.doocs.org/en/lc/2451/",
+    "https://walkccc.me/LeetCode/problems/2451/"
+  ],
+  "summary": "Each word's difference array is the adjacent letter differences; return the one word whose difference array is unique.",
+  "officialConstraints": "3 <= words.length <= 100, 2 <= n <= 20, lowercase letters (from search summary).",
+  "examples": [
+    {
+      "input": "{\"words\":[\"adc\",\"wzy\",\"abc\"]}",
+      "output": "abc",
+      "source": "search summary of official examples (not read from the page)"
+    }
+  ],
+  "visualizationNotes": "Visualization caps words at 50 and length at 20.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)"
+}

@@ -1,0 +1,15 @@
+{
+  "number": 2500,
+  "title": "Delete Greatest Value in Each Row",
+  "source": "https://leetcode.com/problems/delete-greatest-value-in-each-row/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://walkccc.me/LeetCode/problems/2500/",
+    "https://leetcode.doocs.org/en/lc/2500/"
+  ],
+  "summary": "Repeatedly remove the greatest value from each row and add the largest removed value to a running total, until the matrix is empty. Return the total.",
+  "officialConstraints": "Not confirmed from the official page.",
+  "visualizationNotes": "Visualization caps the grid at 10 by 10 with values up to 100. Example [[1,2,4],[3,3,1]] -> 8 comes from a search summary; not confirmed on the official page.",
+  "requirementsVerified": false
+}

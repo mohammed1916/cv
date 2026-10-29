@@ -1,0 +1,17 @@
+{
+  "number": 1733,
+  "title": "Minimum Number of People to Teach",
+  "source": "https://leetcode.com/problems/minimum-number-of-people-to-teach/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/minimum-number-of-people-to-teach/",
+    "https://www.educative.io/interview-prep/coding/minimum-number-of-people-to-teach",
+    "https://github.com/JunTech/leetcode/commit/085570c820e311d0b39cb617b855bc3fc01bb80c"
+  ],
+  "summary": "Choose one language to teach to users so every friendship pair shares a language; minimize users taught. Snippets confirm the problem but give only partial examples (n=2 -> 1; n=3 -> 2 without full input) and no full constraint list from an official source.",
+  "officialConstraints": null,
+  "examples": [],
+  "requirementsVerified": false,
+  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained."
+}

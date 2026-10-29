@@ -1,0 +1,15 @@
+{
+  "number": 2490,
+  "title": "Circular Sentence",
+  "source": "https://leetcode.com/problems/circular-sentence/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://walkccc.me/LeetCode/problems/2490/",
+    "https://leetcode.com/problems/circular-sentence"
+  ],
+  "summary": "A sentence is circular when the last character of each word equals the first character of the next word, and the last word's last character equals the first word's first character. Matching is case-sensitive.",
+  "officialConstraints": "Not confirmed from the official page.",
+  "visualizationNotes": "Visualization caps the sentence at 20 words. Examples 'leetcode exercises sound delightful' (true) and 'Leetcode is cool' (false) come from search summaries; not confirmed on the official page.",
+  "requirementsVerified": false
+}

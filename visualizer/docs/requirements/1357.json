@@ -1,0 +1,28 @@
+{
+  "number": "1357",
+  "title": "Apply Discount Every n Orders",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.com/problems/apply-discount-every-n-orders/",
+    "https://leetcode.doocs.org/en/lc/1357/"
+  ],
+  "statement": "Cashier class: every nth customer gets discount% off the subtotal; getBill(product, amount) returns the bill; answers within 1e-5 accepted.",
+  "constraints": [
+    "1 <= n <= 10^4",
+    "0 <= discount <= 100",
+    "1 <= products.length <= 200, unique product ids 1..200",
+    "1 <= prices[i] <= 1000",
+    "getBill: 1 <= product.length <= products.length, unique ids present in products, 1 <= amount[j] <= 1000",
+    "At most 1000 getBill calls"
+  ],
+  "examples": [
+    {
+      "input": "n=3, discount=50 (official example: 3rd bill 1600 becomes 800, 6th bill 14700 becomes 7350)",
+      "output": "official full input not captured"
+    }
+  ],
+  "visualizationCap": "orders capped at 50 calls; the solution is O(P) setup and O(|product|) per call",
+  "requirementsVerified": false,
+  "notes": "Constraints came from a search summary of the official page. The full official example input was not captured; the visualization examples are custom and verified only against the Python solution.",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}

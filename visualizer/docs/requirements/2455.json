@@ -1,0 +1,15 @@
+{
+  "number": 2455,
+  "title": "Average Value of Even Numbers That Are Divisible by Three",
+  "source": "https://leetcode.com/problems/average-value-of-even-numbers-that-are-divisible-by-three/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://walkccc.me/LeetCode/problems/2455/",
+    "https://leetcode.doocs.org/en/lc/2455/"
+  ],
+  "summary": "Return the floor of the average of the positive integers in nums that are divisible by 6 (even and divisible by 3), or 0 if none exist.",
+  "officialConstraints": "Secondary summaries: length up to 1000, values from 1 to 1000 (not confirmed on the official page).",
+  "visualizationNotes": "Visualization caps nums at 50 values from 1 to 1000. Both examples come from search summaries citing leetcode.com and walkccc.me; not confirmed on the official page.",
+  "requirementsVerified": false
+}

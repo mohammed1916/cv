@@ -1,0 +1,21 @@
+{
+  "number": 2778,
+  "title": "Sum of Squares of Special Elements",
+  "source": "https://leetcode.com/problems/sum-of-squares-of-special-elements/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://walkccc.me/LeetCode/problems/2778/",
+    "https://algo.monster/liteproblems/2778"
+  ],
+  "summary": "nums is 1-indexed. An element at index i is special if i divides n, the length of nums. Return the sum of squares of the special elements.",
+  "officialConstraints": "NOT OBTAINED (only the statement summary was seen; length and value bounds were not captured from a source).",
+  "examples": [
+    {
+      "input": "nums = [2,7,1,19,18,3]",
+      "output": "63"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Only one example and no official constraints were obtained, so requirementsVerified is false. Visualization caps length at 30 and values at 1000."
+}

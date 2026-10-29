@@ -1,0 +1,31 @@
+{
+  "number": 2844,
+  "title": "Minimum Operations to Make a Special Number",
+  "slug": "minimum-operations-to-make-a-special-number",
+  "source": "https://leetcode.com/problems/minimum-operations-to-make-a-special-number/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "incomplete",
+  "sources": [
+    "https://walkccc.me/LeetCode/problems/2844/",
+    "https://algo.monster/liteproblems/2844"
+  ],
+  "summary": "Summary only: delete digits from num to leave a number divisible by 25; return minimum deletions.",
+  "officialConstraints": "not obtained",
+  "examples": [
+    {
+      "input": {
+        "num": "2245047"
+      },
+      "output": 2
+    },
+    {
+      "input": {
+        "num": "10"
+      },
+      "output": 1
+    }
+  ],
+  "visualizationNotes": "not recorded; full constraints and examples not obtained",
+  "requirementsVerified": false,
+  "note": "Skipped: the mirror pages gave no examples or constraints; the example values come from a search snippet only."
+}

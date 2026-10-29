@@ -1,0 +1,28 @@
+{
+  "number": 2850,
+  "title": "Minimum Moves to Spread Stones Over Grid",
+  "slug": "minimum-moves-to-spread-stones-over-grid",
+  "source": "https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-partial (WebSearch only; official page not retrievable)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/",
+    "https://leetcode.doocs.org/en/lc/2850/"
+  ],
+  "summary": "A 3x3 grid holds nine stones; a stone can move to an edge-adjacent cell. Return the fewest moves so every cell has exactly one stone.",
+  "officialConstraints": "unverified: grid is 3x3 with nine stones per the snippet; no explicit constraint list retrieved",
+  "examples": [
+    {
+      "input": "[[1,1,0],[1,1,1],[1,2,1]]",
+      "output": 3,
+      "source": "search snippet citing leetcode.com"
+    },
+    {
+      "input": "[[1,3,0],[1,0,0],[1,0,3]]",
+      "output": 4,
+      "source": "search snippet citing leetcode.com"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Grid fixed at 3x3 with nine stones (the full statement's rule). Backtracking matches surplus stones to empty cells, pruned by best cost."
+}

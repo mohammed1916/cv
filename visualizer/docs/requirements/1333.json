@@ -1,0 +1,44 @@
+{
+  "number": "1333",
+  "title": "Filter Restaurants by Vegan-Friendly, Price and Distance",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.com/problems/filter-restaurants-by-vegan-friendly-price-and-distance/",
+    "https://leetcode.doocs.org/en/lc/1333/"
+  ],
+  "statement": "Keep restaurants that pass the vegan filter (when veganFriendly=1), price <= maxPrice and distance <= maxDistance; return ids sorted by rating then id, both descending.",
+  "constraints": [
+    "Full numeric constraints were not captured from a source (search snippets gave only an outline); the implementation does not rely on them beyond integer and 0/1 checks."
+  ],
+  "examples": [
+    {
+      "input": "restaurants=[[1,4,1,40,10],[2,8,0,50,5],[3,8,1,30,4],[4,10,0,10,3],[5,1,1,15,1]], veganFriendly=1, maxPrice=50, maxDistance=10",
+      "output": [
+        3,
+        1,
+        5
+      ]
+    },
+    {
+      "input": "same, veganFriendly=0, maxPrice=50, maxDistance=10",
+      "output": [
+        4,
+        3,
+        2,
+        1,
+        5
+      ]
+    },
+    {
+      "input": "same, veganFriendly=0, maxPrice=30, maxDistance=3",
+      "output": [
+        4,
+        5
+      ]
+    }
+  ],
+  "visualizationCap": "restaurants capped at 50 rows",
+  "requirementsVerified": false,
+  "notes": "Examples came from a search summary; the numeric constraints were not captured from the statement, so verification is incomplete.",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}

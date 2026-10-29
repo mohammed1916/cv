@@ -1,0 +1,30 @@
+{
+  "number": "2562",
+  "title": "Find the Array Concatenation Value",
+  "slug": "find-the-array-concatenation-value",
+  "source": "https://leetcode.com/problems/find-the-array-concatenation-value/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only; official page not retrieved (403 to WebFetch)",
+  "searchSources": [
+    "https://leetcode.com/problems/find-the-array-concatenation-value/",
+    "https://walkccc.me/LeetCode/problems/2562",
+    "https://leetcode.doocs.org/en/lc/2562/"
+  ],
+  "summary": "Repeatedly concatenate the first and last values as strings, add each to a total, remove both; add a lone middle value.",
+  "officialConstraints": "Snippet shows 1 <= nums.length <= 1000 and 1 <= nums[i] <= 104 (superscript lost in extraction; 10^4 is not confirmed).",
+  "examples": [
+    {
+      "input": "nums = [7,52,2,4]",
+      "output": "596",
+      "source": "search snippet quoting the LeetCode statement"
+    },
+    {
+      "input": "nums = [5,14,13,8,12]",
+      "output": "673",
+      "source": "search snippet quoting the LeetCode statement"
+    }
+  ],
+  "visualizationNotes": "Visualization caps nums at 40 values and each value at 10000.",
+  "requirementsVerified": false,
+  "notes": "Upper bound on nums[i] is ambiguous in the extracted text, so requirementsVerified is false."
+}

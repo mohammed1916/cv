@@ -1,0 +1,26 @@
+{
+  "number": 2798,
+  "title": "Number of Employees Who Met the Target",
+  "source": "https://leetcode.com/problems/number-of-employees-who-met-the-target/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/number-of-employees-who-met-the-target/description/",
+    "https://leetcode.doocs.org/en/lc/2798/",
+    "https://walkccc.me/LeetCode/problems/2798"
+  ],
+  "summary": "Return the number of employees who worked at least target hours. hours[i] is the hours worked by employee i.",
+  "officialConstraints": "1 <= n == hours.length <= 50; hours values up to 10^5. The bounds for target were NOT captured from a source.",
+  "examples": [
+    {
+      "input": "hours = [0,1,2,3,4], target = 2",
+      "output": "3"
+    },
+    {
+      "input": "hours = [5,1,4,2,2], target = 6",
+      "output": "0"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "The target bound was not captured from a source, so requirementsVerified is false. Visualization uses the official 50-employee cap and a 0 to 100000 range for values and target."
+}

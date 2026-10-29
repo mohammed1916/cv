@@ -1,0 +1,21 @@
+{
+  "number": 2448,
+  "title": "Minimum Cost to Make Array Equal",
+  "source": "https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/",
+  "otherSources": [
+    "https://dmitriisamoilenko.substack.com/p/21062023-2448-minimum-cost-to-make"
+  ],
+  "summary": "Changing nums[i] by 1 costs cost[i]; return the minimum total cost to make all elements equal.",
+  "officialConstraints": "Not confirmed: bounds not in fetched snippets.",
+  "examples": [
+    {
+      "input": "{\"nums\":[1,3,5,2],\"cost\":[2,3,1,14]}",
+      "output": 8,
+      "source": "search summary of LeetCode examples (not read from the page)"
+    }
+  ],
+  "visualizationNotes": "Visualization caps n at 50. The algorithm tries each value of nums as the target, which is valid because the total cost is piecewise linear and convex in the target.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)"
+}

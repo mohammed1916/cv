@@ -1,0 +1,16 @@
+{
+  "number": 2321,
+  "title": "Maximum Score Of Spliced Array",
+  "source": "https://leetcode.doocs.org/en/lc/2321/",
+  "otherSources": [
+    "https://walkccc.me/LeetCode/problems/2321/"
+  ],
+  "summary": "Swap one contiguous subarray between two equal-length arrays; maximize the larger of the two sums.",
+  "officialConstraints": "Up to 10^5 elements (snippet).",
+  "examples": [],
+  "visualizationNotes": "SKIPPED: no example input/output obtained from a source.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)",
+  "skipped": true
+}

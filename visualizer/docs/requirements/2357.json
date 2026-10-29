@@ -1,0 +1,22 @@
+{
+  "number": 2357,
+  "title": "Make Array Zero by Subtracting Equal Amounts",
+  "source": "https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/",
+  "otherSources": [
+    "https://walkccc.me/LeetCode/problems/2357/",
+    "https://algo.monster/liteproblems/2357"
+  ],
+  "summary": "Each operation picks positive x no larger than the smallest nonzero element and subtracts it from all positive elements; return the minimum number of operations.",
+  "officialConstraints": "Not confirmed: search snippets did not state bounds.",
+  "examples": [
+    {
+      "input": "{\"nums\":[1,5,0,3,5]}",
+      "output": 3,
+      "source": "search summary of LeetCode examples (not read from the page)"
+    }
+  ],
+  "visualizationNotes": "Visualization caps n at 50. Answer equals the number of distinct nonzero values.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)"
+}

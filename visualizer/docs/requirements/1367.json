@@ -1,0 +1,33 @@
+{
+  "number": "1367",
+  "title": "Linked List in Binary Tree",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.com/problems/linked-list-in-binary-tree/",
+    "https://leetcode.doocs.org/en/lc/1367/"
+  ],
+  "statement": "Return true if the linked list values appear as a downward path starting at some node of the binary tree.",
+  "constraints": [
+    "Tree has 1 to 2500 nodes",
+    "List has 1 to 100 nodes",
+    "Node values are 1 to 100"
+  ],
+  "examples": [
+    {
+      "input": "head=[4,2,8] on the sample tree",
+      "output": true
+    },
+    {
+      "input": "head=[1,4,2,6] on the sample tree",
+      "output": true
+    },
+    {
+      "input": "head=[1,4,2,6,8] on the sample tree",
+      "output": false
+    }
+  ],
+  "visualizationCap": "tree capped at 50 nodes, head at 20 values",
+  "requirementsVerified": false,
+  "notes": "Example outputs come from a mirror, but the sample tree was not captured; the tree used in the visualization is a reconstruction from the level-order serialization and may not match the official sample.",
+  "urls_checked_with": "WebSearch (official page returned 403 to WebFetch)"
+}

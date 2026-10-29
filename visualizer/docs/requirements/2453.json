@@ -1,0 +1,15 @@
+{
+  "number": 2453,
+  "title": "Destroy Sequential Targets",
+  "source": "https://leetcode.com/problems/destroy-sequential-targets/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://www.jointaro.com/interviews/intuit/destroy-sequential-targets",
+    "https://huggingface.co/datasets/NyanDoggo/leetcode/viewer/default/train?p=17"
+  ],
+  "summary": "Given nums and space, a seed target destroys every target differing from it by a multiple of space. Return the smallest seed that destroys the most targets.",
+  "officialConstraints": "Not confirmed from the official page.",
+  "visualizationNotes": "Visualization caps nums at 50 values from 1 to 1000 and space from 1 to 1000. The example comes from a search summary (nums [3,7,8,1,1,5], space 2, answer 1); not confirmed on the official page.",
+  "requirementsVerified": false
+}

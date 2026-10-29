@@ -1,0 +1,16 @@
+{
+  "number": 1206,
+  "title": "Design Skiplist",
+  "source": "https://leetcode.com/problems/design-skiplist/",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/1206/",
+    "https://walkccc.me/LeetCode/problems/1206/"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "third-party mirrors via web search (official page not fetchable)",
+  "requirementsVerified": false,
+  "summary": "Design a skiplist with search(target), add(num) and erase(num) (erase returns false when absent) that runs in O(log n) time without built-in sorted containers.",
+  "officialConstraints": "0 <= num, target <= 2 * 10^4; at most 5 * 10^4 calls to search, add and erase.",
+  "examples": [],
+  "visualizationNotes": "Constraints came from a search snippet, not the official page. The example call sequence was written for this visualization and is not an official example. Duplicate handling is not confirmed by the official text: the mirror says removing any one copy is fine. The visualization accepts up to 40 calls and uses a deterministic level rule so the Python solution is reproducible."
+}

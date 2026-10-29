@@ -1,0 +1,33 @@
+{
+  "number": 2855,
+  "title": "Minimum Right Shifts to Sort the Array",
+  "slug": "minimum-right-shifts-to-sort-the-array",
+  "source": "https://leetcode.com/problems/minimum-right-shifts-to-sort-the-array/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-partial (WebSearch only; official page not retrievable)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/minimum-right-shifts-to-sort-the-array/description/",
+    "https://walkccc.me/LeetCode/problems/2855/"
+  ],
+  "summary": "Given an array of distinct positive integers, return the minimum number of right shifts that sort it, or -1 if impossible.",
+  "officialConstraints": "1 <= nums.length <= 100 and 1 <= nums[i] <= 100 (from aggregator snippet; not confirmed on the official page); values distinct",
+  "examples": [
+    {
+      "input": "[3,4,5,1,2]",
+      "output": 2,
+      "source": "search snippet"
+    },
+    {
+      "input": "[1,3,5]",
+      "output": 0,
+      "source": "search snippet"
+    },
+    {
+      "input": "[2,1,4]",
+      "output": -1,
+      "source": "search snippet (its explanation text says 2 shifts, a source typo; output -1 kept as stated and matches the rotation check)"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Array capped at 100 elements. Example 3 explanation in the snippet is inconsistent with its output; not corrected silently."
+}

@@ -1,0 +1,25 @@
+{
+  "number": 2788,
+  "title": "Split Strings by Separator",
+  "source": "https://leetcode.com/problems/split-strings-by-separator/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/2788/",
+    "https://leetcode.com/problems/split-strings-by-separator/description/"
+  ],
+  "summary": "Given an array of strings words and a character separator, split each string by separator, and return the non-empty pieces in order.",
+  "officialConstraints": "NOT OBTAINED (word count, word length and separator constraints were not captured from a source).",
+  "examples": [
+    {
+      "input": "words = [\"one.two.three\",\"four.five\",\"six\"], separator = \".\"",
+      "output": "[\"one\",\"two\",\"three\",\"four\",\"five\",\"six\"]"
+    },
+    {
+      "input": "words = [\"|||\"], separator = \"|\"",
+      "output": "[]"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Examples came from the doocs mirror, but constraints were not captured, so requirementsVerified is false. Visualization caps input at 20 words of up to 30 characters."
+}

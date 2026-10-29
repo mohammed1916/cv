@@ -1,0 +1,15 @@
+{
+  "number": 2469,
+  "title": "Convert the Temperature",
+  "source": "https://leetcode.com/problems/convert-the-temperature/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2469/",
+    "https://walkccc.me/LeetCode/problems/2469"
+  ],
+  "summary": "Given celsius, return [kelvin, fahrenheit] where kelvin = celsius + 273.15 and fahrenheit = celsius * 1.80 + 32.00. Answers within 1e-5 are accepted.",
+  "officialConstraints": "Secondary summaries: celsius from 0 to 1000 with two decimals (not confirmed on the official page).",
+  "visualizationNotes": "Visualization accepts celsius 0 to 1000 with at most two decimals. Examples 36.50 -> [309.65, 97.70] and 122.11 -> [395.26, 251.798] come from a search summary; not confirmed on the official page.",
+  "requirementsVerified": false
+}

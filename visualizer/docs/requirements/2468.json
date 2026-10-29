@@ -1,0 +1,15 @@
+{
+  "number": 2468,
+  "title": "Split Message Based on Limit",
+  "source": "https://leetcode.com/problems/split-message-based-on-limit/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2468/",
+    "https://www.hellointerview.com/community/questions/split-message-limit/cm5eguhah03wy838osyyab4zu"
+  ],
+  "summary": "Split message into parts, each ending with an <a/b> suffix, each exactly limit characters except possibly the last. Use as few parts as possible; return an empty array if impossible.",
+  "officialConstraints": "Secondary summaries: message and limit up to 10^4; message is lowercase letters and spaces (not confirmed on the official page).",
+  "visualizationNotes": "Visualization caps message at 50 characters and limit at 50. Example 'short message' with limit 15 -> ['short mess<1/2>','age<2/2>'] comes from a search summary; not confirmed on the official page.",
+  "requirementsVerified": false
+}

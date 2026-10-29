@@ -1,0 +1,15 @@
+{
+  "number": 2460,
+  "title": "Apply Operations to an Array",
+  "source": "https://leetcode.com/problems/apply-operations-to-an-array/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2460/",
+    "https://www.educative.io/interview-prep/coding/apply-operations-to-an-array"
+  ],
+  "summary": "For i from 0 to n-2, if nums[i] equals nums[i+1], double nums[i] and set nums[i+1] to 0 (operations applied in order). Then move all zeros to the end keeping non-zero order.",
+  "officialConstraints": "Secondary summaries: 2 <= n <= 2000, values 0 to 1000 (not confirmed on the official page).",
+  "visualizationNotes": "Visualization caps n at 50 values from 0 to 1000. Example [1,2,2,1,1,0] -> [1,4,2,0,0,0] comes from leetcode.doocs.org; not confirmed on the official page.",
+  "requirementsVerified": false
+}

@@ -1,0 +1,37 @@
+{
+  "number": "1472",
+  "title": "Design Browser History",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/1472/",
+    "https://leetcode.com/problems/design-browser-history/ (official, WebSearch snippet only; WebFetch 403)"
+  ],
+  "statement": "Single-tab browser with homepage. visit(url) clears forward history; back(steps) and forward(steps) move at most steps and return the current URL.",
+  "constraints": [
+    "1 <= homepage.length <= 20",
+    "1 <= url.length <= 20",
+    "1 <= steps <= 100",
+    "at most 5000 calls to visit/back/forward"
+  ],
+  "examples": [
+    {
+      "input": "homepage=leetcode.com; visit(google.com), visit(facebook.com), visit(youtube.com), back(1), back(1), forward(1), visit(linkedin.com), forward(2), back(2), back(7)",
+      "output": [
+        null,
+        null,
+        null,
+        "facebook.com",
+        "google.com",
+        "facebook.com",
+        null,
+        "linkedin.com",
+        "google.com",
+        "leetcode.com"
+      ]
+    }
+  ],
+  "visualizationCap": "at most 50 calls shown",
+  "requirementsVerified": true,
+  "notes": "Only one example was retrieved from the source; no other example was invented. Output list uses null for visit calls.",
+  "urls_checked_with": "WebSearch + WebFetch (doocs)"
+}

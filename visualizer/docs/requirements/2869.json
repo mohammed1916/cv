@@ -1,0 +1,33 @@
+{
+  "number": 2869,
+  "title": "Minimum Operations to Collect Elements",
+  "slug": "minimum-operations-to-collect-elements",
+  "source": "https://leetcode.com/problems/minimum-operations-to-collect-elements/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-partial (WebSearch only; official page not retrievable)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/2869/",
+    "https://algo.monster/liteproblems/2869"
+  ],
+  "summary": "Each operation removes the last element of nums. Return the minimum operations needed to collect every value 1 to k.",
+  "officialConstraints": "length of nums up to 50 (from snippet); value range and k bounds not retrieved; input guarantees 1..k can be collected",
+  "examples": [
+    {
+      "input": "nums=[3,1,5,4,2], k=2",
+      "output": 4,
+      "source": "search snippet"
+    },
+    {
+      "input": "nums=[3,1,5,4,2], k=5",
+      "output": 5,
+      "source": "search snippet"
+    },
+    {
+      "input": "nums=[3,2,5,3,1], k=3",
+      "output": 4,
+      "source": "search snippet"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Array capped at 50 elements. Visualization assumes values 1..50 (not confirmed by source)."
+}

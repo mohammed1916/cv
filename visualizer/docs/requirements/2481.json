@@ -1,0 +1,14 @@
+{
+  "number": 2481,
+  "title": "Minimum Cuts to Divide a Circle",
+  "source": "https://leetcode.com/problems/minimum-cuts-to-divide-a-circle/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://www.hellointerview.com/community/questions/minimum-cuts-circle/cm5eguhah03xb838owop9lm7i"
+  ],
+  "summary": "Given n (1 <= n <= 100), return the minimum number of straight cuts that divide a circle into n equal slices.",
+  "officialConstraints": "Constraint 1 <= n <= 100 from search summaries (not confirmed on the official page).",
+  "visualizationNotes": "Visualization accepts n from 1 to 100. Examples n=4 -> 2 and n=3 -> 3 come from a search summary; not confirmed on the official page.",
+  "requirementsVerified": false
+}

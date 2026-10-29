@@ -1,0 +1,17 @@
+{
+  "number": 2678,
+  "title": "Number of Senior Citizens",
+  "slug": "number-of-senior-citizens",
+  "source": "https://leetcode.com/problems/number-of-senior-citizens/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-citing-leetcode.com",
+  "accessAttempt": "Official page not fetched (WebFetch returns 403). WebSearch snippets cite leetcode.com and walkccc/doocs write-ups.",
+  "summary": "Each details[i] is a 15-character passenger string: 10 phone digits, a gender letter, two age digits, then the seat. Count passengers whose age is greater than 60.",
+  "officialConstraints": "Partial: detail string length 15 with the layout above. Array length bound and full character set not obtained, so unverified.",
+  "examples": [
+    { "input": "[\"7868190130M7522\",\"5303914400F9211\",\"9273338290F4010\"]", "output": 2, "source": "WebSearch snippet citing leetcode.com/problems/number-of-senior-citizens" },
+    { "input": "[\"1313579440F2036\",\"2921522980M5644\"]", "output": 0, "source": "WebSearch snippet citing leetcode.com/problems/number-of-senior-citizens" }
+  ],
+  "visualizationNotes": "Visualization caps details at 50 items. This cap is our own and is not an official constraint.",
+  "requirementsVerified": false
+}

@@ -1,0 +1,16 @@
+{
+  "number": 2526,
+  "title": "Find Consecutive Integers from a Data Stream",
+  "slug": "find-consecutive-integers-from-a-data-stream",
+  "source": "https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2526/"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets",
+  "summary": "DataStream(value, k) with consec(num): true if the last k integers all equal value.",
+  "officialConstraints": "Constraints not retrieved from an official or mirror statement.",
+  "examples": [],
+  "visualizationNotes": "Design class; example text in the retrieved snippet was internally inconsistent.",
+  "requirementsVerified": false
+}

@@ -1,0 +1,25 @@
+{
+  "number": "2566",
+  "title": "Maximum Difference by Remapping a Digit",
+  "slug": "maximum-difference-by-remapping-a-digit",
+  "source": "https://leetcode.com/problems/maximum-difference-by-remapping-a-digit/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only; official page not retrieved (403 to WebFetch)",
+  "searchSources": [
+    "https://leetcode.com/problems/maximum-difference-by-remapping-a-digit",
+    "https://walkccc.me/LeetCode/problems/2566",
+    "https://leetcode.doocs.org/en/lc/2566/"
+  ],
+  "summary": "Remap one digit 0-9 to another (possibly itself); return max minus min of the resulting numbers. Leading zeros allowed.",
+  "officialConstraints": "unverified: constraints not retrieved from a source",
+  "examples": [
+    {
+      "input": "num = 11891",
+      "output": "99009",
+      "source": "search snippet quoting the LeetCode statement"
+    }
+  ],
+  "visualizationNotes": "Visualization caps num at 8 digits.",
+  "requirementsVerified": false,
+  "notes": "Only one example; constraints missing."
+}

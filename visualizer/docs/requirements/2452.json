@@ -1,0 +1,15 @@
+{
+  "number": 2452,
+  "title": "Words Within Two Edits of Dictionary",
+  "source": "https://leetcode.com/problems/words-within-two-edits-of-dictionary/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only (official page returns 403 to WebFetch; statement taken from search-result summaries of secondary sites)",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2452/",
+    "https://www.hellointerview.com/community/questions/words-2-edits-dictionary/cm5eguhah03wi838onnh4c129"
+  ],
+  "summary": "Given queries and dictionary string arrays of equal-length lowercase words, return the queries (in original order) that match some dictionary word after at most two letter changes.",
+  "officialConstraints": "Secondary sources describe at most 100 words of length up to 100 (not confirmed on the official page).",
+  "visualizationNotes": "Visualization caps each list at 50 words of up to 20 letters. Example 1 comes from a search summary citing leetcode.doocs.org; not confirmed on the official page.",
+  "requirementsVerified": false
+}

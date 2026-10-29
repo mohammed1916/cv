@@ -1,0 +1,16 @@
+{
+  "number": 2532,
+  "title": "Time to Cross a Bridge",
+  "slug": "time-to-cross-a-bridge",
+  "source": "https://leetcode.com/problems/time-to-cross-a-bridge/",
+  "sources": [
+    "https://leetcode.doocs.org/lc/2532/"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets",
+  "summary": "Workers and boxes crossing a bridge with four timed steps; return elapsed time for the last box.",
+  "officialConstraints": "Constraints not fully retrieved (k bounds unconfirmed).",
+  "examples": [],
+  "visualizationNotes": "Event simulation; retrieved example walkthrough disagreed with the stated output.",
+  "requirementsVerified": false
+}

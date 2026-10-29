@@ -1,0 +1,16 @@
+{
+  "number": 2731,
+  "title": "Movement of Robots",
+  "slug": "movement-of-robots",
+  "source": "https://leetcode.com/problems/movement-of-robots/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-partial (official page returned 403 to WebFetch; one result labels the problem Medium #2787)",
+  "sourceUrls": [
+    "https://portrait.gitee.com/peaklee1134/leetcode/blob/main/solution/2700-2799/2731.Movement%20of%20Robots/README_EN.md"
+  ],
+  "summary": "Robots on a number line at positions nums move left for 'L' or right for 'R' for d seconds; return the sum of pairwise distances modulo 1e9+7.",
+  "officialConstraints": "unverified: constraints not returned by any retrieved source",
+  "examples": [],
+  "requirementsVerified": false,
+  "visualizationNotes": "not recorded; constraints and examples must come from the official statement before caps are set"
+}

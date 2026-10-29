@@ -1,0 +1,13 @@
+{
+  "number": "2600",
+  "title": "K Items With the Maximum Sum",
+  "slug": "k-items-with-the-maximum-sum",
+  "source": "https://leetcode.com/problems/k-items-with-the-maximum-sum/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only",
+  "summary": null,
+  "officialConstraints": "partial or missing",
+  "visualizationNotes": "not recorded; problem skipped",
+  "requirementsVerified": false,
+  "skipReason": "No concrete input/output example found in any source (only constraints); skipped because examples cannot be sourced."
+}

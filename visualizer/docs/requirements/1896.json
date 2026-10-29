@@ -1,0 +1,17 @@
+{
+  "number": 1896,
+  "title": "Minimum Cost to Change the Final Value of Expression",
+  "source": "https://leetcode.com/problems/minimum-cost-to-change-the-final-value-of-expression/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets (official page returns 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/minimum-cost-to-change-the-final-value-of-expression/",
+    "https://leetcode.com/problems/minimum-cost-to-change-the-final-value-of-expression/description/",
+    "https://algo.monster/liteproblems/1896"
+  ],
+  "summary": "Given a valid boolean expression of 1, 0, &, |, parentheses, return the minimum number of operations to make it evaluate to the opposite value. Snippets quote three examples (1&(0|1)->1, (0&0)&(0&0&0)->3, (0|(1|0&1))->1) and mention length up to 1e5, but the full constraint list was not retrieved.",
+  "officialConstraints": null,
+  "examples": [],
+  "requirementsVerified": false,
+  "visualizationNotes": "Not built: full statement, constraints and examples were not verifiably obtained."
+}

@@ -1,0 +1,22 @@
+{
+  "number": 2365,
+  "title": "Task Scheduler II",
+  "source": "https://www.jointaro.com/interviews/questions/task-scheduler-ii/?company=nvidia",
+  "otherSources": [
+    "https://www.hellointerview.com/community/questions/task-scheduler-ii/cm5eguhah03u3838oigq9ioml",
+    "https://walkccc.me/LeetCode/problems/2365/"
+  ],
+  "summary": "Tasks are processed in order, one per day, or a break is taken; a same-type task must wait at least space days after its last run. Return the fewest total days.",
+  "officialConstraints": "Not confirmed: bounds not in fetched snippets.",
+  "examples": [
+    {
+      "input": "{\"tasks\":[1,2,1,2,3,1],\"space\":3}",
+      "output": 9,
+      "source": "Jointaro problem page example (snippet)"
+    }
+  ],
+  "visualizationNotes": "Visualization caps n at 50 and space at 20.",
+  "checkedOn": "2026-10-29",
+  "requirementsVerified": false,
+  "sourceKind": "search-snippets-only (official leetcode.com page returns 403 to WebFetch)"
+}
