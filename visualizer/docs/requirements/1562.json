@@ -1,0 +1,30 @@
+{
+  "number": "1562",
+  "title": "Find Latest Group of Size M",
+  "difficulty": "Medium",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/1562/",
+    "https://leetcode.com/problems/find-latest-group-of-size-m/ (official, WebSearch snippet only; WebFetch 403)"
+  ],
+  "statement": "arr is a permutation of 1..n; step i sets bit arr[i] to 1 in an n-zero string. Return the latest step where a run of ones of length exactly m exists, or -1.",
+  "constraints": [
+    "n == arr.length",
+    "1 <= m <= n <= 10^5",
+    "1 <= arr[i] <= n",
+    "all arr[i] distinct"
+  ],
+  "examples": [
+    {
+      "input": "arr=[3,5,1,2,4], m=1",
+      "output": 4
+    },
+    {
+      "input": "arr=[3,1,5,4,2], m=2",
+      "output": -1
+    }
+  ],
+  "visualizationCap": "n capped at 50 bits",
+  "requirementsVerified": true,
+  "notes": "",
+  "urls_checked_with": "WebSearch + WebFetch (doocs)"
+}

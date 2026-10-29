@@ -1,0 +1,34 @@
+{
+  "number": "1507",
+  "title": "Reformat Date",
+  "difficulty": "Easy",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/1507/",
+    "https://leetcode.com/problems/reformat-date/description/ (official, WebSearch snippet only; WebFetch 403)"
+  ],
+  "statement": "Convert a date like '20th Oct 2052' into YYYY-MM-DD. Input is a valid date.",
+  "constraints": [
+    "day is an ordinal 1st to 31st",
+    "month is a three-letter abbreviation Jan through Dec",
+    "year between 1900 and 2100",
+    "input is a valid date"
+  ],
+  "examples": [
+    {
+      "input": "20th Oct 2052",
+      "output": "2052-10-20"
+    },
+    {
+      "input": "6th Jun 1933",
+      "output": "1933-06-06"
+    },
+    {
+      "input": "26th May 1960",
+      "output": "1960-05-26"
+    }
+  ],
+  "visualizationCap": "not needed (input length fixed)",
+  "requirementsVerified": true,
+  "notes": "",
+  "urls_checked_with": "WebSearch + WebFetch (doocs)"
+}
