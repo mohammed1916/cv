@@ -1,0 +1,48 @@
+{
+  "number": 2836,
+  "title": "Maximize Value of Function in a Ball Passing Game",
+  "slug": "maximize-value-of-function-in-a-ball-passing-game",
+  "source": "https://leetcode.com/problems/maximize-value-of-function-in-a-ball-passing-game/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2836/",
+    "https://www.jointaro.com/interviews/questions/maximize-value-of-function-in-a-ball-passing-game/",
+    "https://leetcode.cn/problems/maximize-value-of-function-in-a-ball-passing-game"
+  ],
+  "summary": "Players 0..n-1 with receiver array; from start x, ball passes k times along receiver; f(x) is sum of all touched player indices including repeats and start. Return max f(x).",
+  "officialConstraints": [
+    "1 <= n = receiver.length <= 10^5",
+    "0 <= receiver[i] <= n - 1",
+    "1 <= k <= 10^10"
+  ],
+  "examples": [
+    {
+      "input": {
+        "receiver": [
+          2,
+          0,
+          1
+        ],
+        "k": 4
+      },
+      "output": 6
+    },
+    {
+      "input": {
+        "receiver": [
+          1,
+          1,
+          1,
+          2,
+          3
+        ],
+        "k": 3
+      },
+      "output": 10
+    }
+  ],
+  "visualizationNotes": "Visualization cap: n <= 24 (GraphTraversalView node limit); k is simulated with binary lifting in the trace.",
+  "requirementsVerified": true,
+  "note": "Official page returned 403; statement from doocs and jointaro mirrors (paraphrased). Label for the ID #3032 on one index is a mismatch and was ignored."
+}

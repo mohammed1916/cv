@@ -1,0 +1,48 @@
+{
+  "number": 2818,
+  "title": "Apply Operations to Maximize Score",
+  "slug": "apply-operations-to-maximize-score",
+  "source": "https://leetcode.com/problems/apply-operations-to-maximize-score/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2818/"
+  ],
+  "summary": "Start with score 1; at most k operations, each picks an unused subarray and multiplies score by the element with the largest prime score (distinct prime factor count), ties to smaller index. Return max score mod 1e9+7.",
+  "officialConstraints": [
+    "1 <= n = nums.length <= 10^5",
+    "1 <= nums[i] <= 10^5",
+    "1 <= k <= min(n(n+1)/2, 10^9)"
+  ],
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          8,
+          3,
+          9,
+          3,
+          8
+        ],
+        "k": 2
+      },
+      "output": 81
+    },
+    {
+      "input": {
+        "nums": [
+          19,
+          12,
+          14,
+          6,
+          10,
+          18
+        ],
+        "k": 3
+      },
+      "output": 4788
+    }
+  ],
+  "visualizationNotes": "Visualization cap: n <= 50 and nums[i] <= 100000.",
+  "requirementsVerified": true
+}

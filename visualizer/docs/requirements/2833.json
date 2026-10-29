@@ -1,0 +1,38 @@
+{
+  "number": 2833,
+  "title": "Furthest Point From Origin",
+  "slug": "furthest-point-from-origin",
+  "source": "https://leetcode.com/problems/furthest-point-from-origin/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2833/"
+  ],
+  "summary": "moves string of 'L', 'R', '_'; '_' may be either direction. Return the maximum distance from origin reachable after all moves.",
+  "officialConstraints": [
+    "1 <= moves.length = n <= 50",
+    "moves consists only of 'L', 'R', '_'"
+  ],
+  "examples": [
+    {
+      "input": {
+        "moves": "L_RL__R"
+      },
+      "output": 3
+    },
+    {
+      "input": {
+        "moves": "_R__LL_"
+      },
+      "output": 5
+    },
+    {
+      "input": {
+        "moves": "_______"
+      },
+      "output": 7
+    }
+  ],
+  "visualizationNotes": "Visualization cap: moves length <= 50 (official maximum).",
+  "requirementsVerified": true
+}

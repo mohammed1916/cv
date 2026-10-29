@@ -1,0 +1,54 @@
+{
+  "number": 2808,
+  "title": "Minimum Seconds to Equalize a Circular Array",
+  "slug": "minimum-seconds-to-equalize-a-circular-array",
+  "source": "https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2808/"
+  ],
+  "summary": "Circular array; each second every index takes its own value or one of its two neighbours' values, simultaneously. Return the minimum seconds to make all values equal.",
+  "officialConstraints": [
+    "1 <= n = nums.length <= 10^5",
+    "1 <= nums[i] <= 10^9"
+  ],
+  "examples": [
+    {
+      "input": {
+        "nums": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "output": 1
+    },
+    {
+      "input": {
+        "nums": [
+          2,
+          1,
+          3,
+          3,
+          2
+        ]
+      },
+      "output": 2
+    },
+    {
+      "input": {
+        "nums": [
+          5,
+          5,
+          5,
+          5
+        ]
+      },
+      "output": 0
+    }
+  ],
+  "visualizationNotes": "Visualization cap: n <= 50.",
+  "requirementsVerified": true
+}

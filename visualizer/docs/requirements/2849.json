@@ -1,0 +1,40 @@
+{
+  "number": 2849,
+  "title": "Determine if a Cell Is Reachable at a Given Time",
+  "slug": "determine-if-a-cell-is-reachable-at-a-given-time",
+  "source": "https://leetcode.com/problems/determine-if-a-cell-is-reachable-at-a-given-time/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2849/"
+  ],
+  "summary": "Start at (sx, sy); each second move to one of 8 neighbouring cells (must move). Return true if (fx, fy) can be reached at exactly time t.",
+  "officialConstraints": [
+    "1 <= sx, sy, fx, fy <= 10^9",
+    "0 <= t <= 10^9"
+  ],
+  "examples": [
+    {
+      "input": {
+        "sx": 2,
+        "sy": 4,
+        "fx": 7,
+        "fy": 7,
+        "t": 6
+      },
+      "output": true
+    },
+    {
+      "input": {
+        "sx": 3,
+        "sy": 1,
+        "fx": 7,
+        "fy": 3,
+        "t": 3
+      },
+      "output": false
+    }
+  ],
+  "visualizationNotes": "Visualization cap: coordinates and t are numeric; the trace shows the Chebyshev distance check.",
+  "requirementsVerified": true
+}

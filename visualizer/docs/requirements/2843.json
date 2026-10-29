@@ -1,0 +1,34 @@
+{
+  "number": 2843,
+  "title": "Count Symmetric Integers",
+  "slug": "count-symmetric-integers",
+  "source": "https://leetcode.com/problems/count-symmetric-integers/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2843/",
+    "https://walkccc.me/LeetCode/problems/2843/"
+  ],
+  "summary": "Count integers in [low, high] with an even number of digits whose first half digit sum equals second half digit sum.",
+  "officialConstraints": [
+    "1 <= low <= high <= 10^4"
+  ],
+  "examples": [
+    {
+      "input": {
+        "low": 1,
+        "high": 100
+      },
+      "output": 9
+    },
+    {
+      "input": {
+        "low": 1200,
+        "high": 1230
+      },
+      "output": 4
+    }
+  ],
+  "visualizationNotes": "Visualization cap: high - low + 1 <= 120 numbers traced (official maximum range is 1 <= low <= high <= 10^4).",
+  "requirementsVerified": true
+}

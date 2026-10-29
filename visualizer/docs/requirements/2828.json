@@ -1,0 +1,58 @@
+{
+  "number": 2828,
+  "title": "Check if a String Is an Acronym of Words",
+  "slug": "check-if-a-string-is-an-acronym-of-words",
+  "source": "https://leetcode.com/problems/check-if-a-string-is-an-acronym-of-words/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2828/",
+    "https://www.jointaro.com/interviews/questions/check-if-a-string-is-an-acronym-of-words/"
+  ],
+  "summary": "Return true if s equals the first letters of words concatenated in order.",
+  "officialConstraints": [
+    "1 <= words.length <= 100",
+    "1 <= words[i].length <= 10",
+    "1 <= s.length <= 100",
+    "words[i] and s contain only lowercase English letters"
+  ],
+  "examples": [
+    {
+      "input": {
+        "words": [
+          "alice",
+          "bob",
+          "charlie"
+        ],
+        "s": "abc"
+      },
+      "output": true
+    },
+    {
+      "input": {
+        "words": [
+          "an",
+          "apple"
+        ],
+        "s": "a"
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "words": [
+          "never",
+          "gonna",
+          "give",
+          "up",
+          "on",
+          "you"
+        ],
+        "s": "ngguoy"
+      },
+      "output": true
+    }
+  ],
+  "visualizationNotes": "Visualization cap: words.length <= 100 (no extra cap needed).",
+  "requirementsVerified": true
+}
