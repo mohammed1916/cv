@@ -1,0 +1,20 @@
+{
+  "number": 1233,
+  "title": "Remove Sub-Folders from the Filesystem",
+  "source": "https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/1233/",
+    "https://neetcode.io/solutions/remove-sub-folders-from-the-filesystem",
+    "https://github.com/grandyang/leetcode/issues/1233"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "third-party mirrors via web search (official page not fetchable)",
+  "requirementsVerified": true,
+  "summary": "Given folder paths, return the list with every sub-folder removed, in any order. A sub-folder begins with its parent path followed by '/'.",
+  "officialConstraints": "1 to 40,000 entries; each path 2 to 100 characters; lowercase letters and '/' only, starting with '/'; folder names unique.",
+  "examples": [
+    { "input": ["/a", "/a/b", "/c/d", "/c/d/e", "/c/f"], "output": ["/a", "/c/d", "/c/f"] },
+    { "input": ["/a/b/c", "/a/b/ca", "/a/b/d"], "output": ["/a/b/c", "/a/b/ca", "/a/b/d"] }
+  ],
+  "visualizationNotes": "Visualization accepts up to 64 paths. Output is returned in sorted order."
+}

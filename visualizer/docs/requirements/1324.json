@@ -1,0 +1,20 @@
+{
+  "number": 1324,
+  "title": "Print Words Vertically",
+  "source": "https://leetcode.com/problems/print-words-vertically/",
+  "sourceUrls": [
+    "https://walkccc.me/LeetCode/problems/1324/",
+    "https://www.educative.io/courses/grokking-coding-interview/print-words-vertically",
+    "https://blog.51cto.com/u_9453611/5568582"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "third-party mirrors via web search (official page not fetchable)",
+  "requirementsVerified": true,
+  "summary": "Return the words of s read vertically: row k holds the k-th character of each word in order, padded with spaces, with trailing spaces removed.",
+  "officialConstraints": "1 <= s.length <= 200; uppercase English letters with words separated by a single space.",
+  "examples": [
+    { "input": "HOW ARE YOU", "output": ["HAY", "ORO", "WEU"] },
+    { "input": "TO BE OR NOT TO BE", "output": ["TBONTB", "OEROOE", "   T"] }
+  ],
+  "visualizationNotes": "Mirrors disagree on whether spaces appear in s; the visualization accepts uppercase words with single spaces, which matches the single-space separator rule. Leading padding is kept; trailing spaces are removed."
+}
