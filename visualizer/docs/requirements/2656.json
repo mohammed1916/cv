@@ -1,0 +1,17 @@
+{
+  "number": 2656,
+  "title": "Maximum Sum With Exactly K Elements",
+  "slug": "maximum-sum-with-exactly-k-elements",
+  "source": "https://leetcode.com/problems/maximum-sum-with-exactly-k-elements/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-citing-leetcode.com",
+  "accessAttempt": "WebFetch on the official page returns 403; constraints and examples taken from WebSearch result text citing the LeetCode problem page.",
+  "summary": "Given nums and k, perform exactly k operations; each picks an element m, adds m to the score, and replaces it with m + 1. Return the maximum score.",
+  "officialConstraints": "1 <= nums.length <= 100; 1 <= nums[i] <= 100; 1 <= k <= 100",
+  "examples": [
+    { "input": { "nums": [1, 2, 3, 4, 5], "k": 3 }, "output": 18 },
+    { "input": { "nums": [5, 5, 5], "k": 2 }, "output": 11 }
+  ],
+  "visualizationNotes": "Constraints are already within the visualization cap (100 elements, k <= 100).",
+  "requirementsVerified": true
+}

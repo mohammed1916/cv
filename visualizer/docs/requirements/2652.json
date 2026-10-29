@@ -1,0 +1,18 @@
+{
+  "number": 2652,
+  "title": "Sum Multiples",
+  "slug": "sum-multiples",
+  "source": "https://leetcode.com/problems/sum-multiples/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-citing-leetcode.com",
+  "accessAttempt": "WebFetch on the official page returns 403; constraints and examples taken from WebSearch result text citing leetcode.com (walkccc.me and leetcode.doocs.org mirrors consulted).",
+  "summary": "Given a positive integer n, return the sum of all integers in [1, n] that are divisible by 3, 5, or 7.",
+  "officialConstraints": "1 <= n <= 1000",
+  "examples": [
+    { "input": { "n": 7 }, "output": 21 },
+    { "input": { "n": 10 }, "output": 40 },
+    { "input": { "n": 9 }, "output": 30 }
+  ],
+  "visualizationNotes": "Visualization cap: n <= 1000 (the official bound).",
+  "requirementsVerified": true
+}

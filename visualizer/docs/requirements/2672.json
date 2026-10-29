@@ -1,0 +1,17 @@
+{
+  "number": 2672,
+  "title": "Number of Adjacent Elements With the Same Color",
+  "slug": "number-of-adjacent-elements-with-the-same-color",
+  "source": "https://leetcode.com/problems/number-of-adjacent-elements-with-the-same-color/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-citing-leetcode.com",
+  "accessAttempt": "WebFetch on the official page returns 403; constraints and examples taken from WebSearch result text citing leetcode.com.",
+  "summary": "An array of n uncolored (0) positions receives colorings from queries [index, color]. After each query, return the number of adjacent pairs with the same nonzero color.",
+  "officialConstraints": "1 <= n <= 10^5; 1 <= queries.length <= 10^5; queries[i].length == 2; 0 <= index_i <= n - 1; 1 <= color_i <= 10^5",
+  "examples": [
+    { "input": { "n": 4, "queries": [[0, 2], [1, 2], [3, 1], [1, 1], [2, 1]] }, "output": [0, 1, 1, 0, 2] },
+    { "input": { "n": 1, "queries": [[0, 100000]] }, "output": [0] }
+  ],
+  "visualizationNotes": "Visualization cap: n <= 50 and queries.length <= 50; colors remain up to 10^5.",
+  "requirementsVerified": true
+}
