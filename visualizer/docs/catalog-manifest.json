@@ -1960,7 +1960,8 @@
     "browser": "forward-back-smoke",
     "template": "AlgorithmStoryWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "140",
@@ -1982,7 +1983,8 @@
     "browser": "forward-back-smoke",
     "template": "AlgorithmStoryWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "141",
@@ -2004,7 +2006,8 @@
     "browser": "forward-back-smoke",
     "template": "AlgorithmStoryWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "142",
@@ -2026,7 +2029,8 @@
     "browser": "forward-back-smoke",
     "template": "AlgorithmStoryWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "143",
@@ -6094,7 +6098,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "433",
@@ -19790,7 +19795,7 @@
   },
   {
    "number": "1411",
-   "title": "Number of Ways to Paint N × 3 Grid",
+   "title": "Number of Ways to Paint N \u00d7 3 Grid",
    "slug": "number-of-ways-to-paint-n-3-grid",
    "difficulty": "Hard",
    "paidOnly": false,
@@ -37332,7 +37337,7 @@
   },
   {
    "number": "2664",
-   "title": "The Knight’s Tour",
+   "title": "The Knight\u2019s Tour",
    "slug": "the-knights-tour",
    "difficulty": "Medium",
    "paidOnly": true,
@@ -38732,7 +38737,7 @@
   },
   {
    "number": "2764",
-   "title": "Is Array a Preorder of Some ‌Binary Tree",
+   "title": "Is Array a Preorder of Some \u200cBinary Tree",
    "slug": "is-array-a-preorder-of-some-binary-tree",
    "difficulty": "Medium",
    "paidOnly": true,
@@ -50044,7 +50049,7 @@
   },
   {
    "number": "3572",
-   "title": "Maximize Y‑Sum by Picking a Triplet of Distinct X‑Values",
+   "title": "Maximize Y\u2011Sum by Picking a Triplet of Distinct X\u2011Values",
    "slug": "maximize-ysum-by-picking-a-triplet-of-distinct-xvalues",
    "difficulty": "Medium",
    "paidOnly": false,
@@ -54570,7 +54575,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3895",
@@ -54592,7 +54598,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3896",
@@ -54614,7 +54621,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3897",
@@ -54664,7 +54672,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3900",
@@ -54756,7 +54765,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3906",
@@ -54806,7 +54816,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3909",
@@ -54828,7 +54839,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3910",
@@ -54850,7 +54862,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3911",
@@ -54886,7 +54899,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3913",
@@ -54908,7 +54922,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3914",
@@ -54930,7 +54945,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3915",
@@ -54952,7 +54968,8 @@
     "browser": "terminal-frame-and-back-smoke",
     "template": "AlgorithmWorkspace",
     "committed": false
-   }
+   },
+   "browserSmoke": "2026-10-29 smoke (scripts/browser-smoke/accept.mjs): step/seek/reset, examples load, Python and pseudocode switch; not exhaustive"
   },
   {
    "number": "3916",
