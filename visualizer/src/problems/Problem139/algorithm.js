@@ -422,3 +422,6 @@ export const CODE = [
 export const code = CODE.map((text, index) => ({ line: index + 1, text }));
 export const parseInput = (input) => parseWordBreakInput(typeof input === "string" && input.trim().startsWith("{") ? JSON.parse(input) : input);
 export const buildTrace = (input) => buildWordBreakStory(input);
+
+// Pseudocode line -> Python line, used for Python playback highlighting.
+export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10 };

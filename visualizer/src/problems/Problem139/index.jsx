@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import { getExamples } from "../../config/examplesRegistry";
 import WordBreakStory from "./WordBreakStory";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import { code, python, pythonLineMap, parseInput, buildTrace } from "./algorithm";
 import "./WordBreakVisualizer.css";
 
 const definition = {
@@ -16,6 +16,7 @@ const definition = {
   build: buildTrace,
   code,
   python,
+  pythonLineMap,
   inputLabel: 'String s | wordDict (e.g. "leetcode | leet, code")',
   url: "https://leetcode.com/problems/word-break/",
   complexity: "O(n * m) time and O(n) space for string length n and dictionary size m. The visualization caps string and dictionary size at 50.",
