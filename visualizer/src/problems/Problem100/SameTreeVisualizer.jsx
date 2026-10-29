@@ -54,7 +54,7 @@ const LINE_PATTERN_MAP = {
 const EXAMPLES = authoredExamples0;
 
 // ─── Tree utilities ───────────────────────────────────────────────────────────
-function TreeCanvas({
+export function TreeCanvas({
   positions,
   edges,
   nodes,
@@ -126,6 +126,27 @@ function TreeCanvas({
           );
         })}
         {nodes.length === 0 && <div className="st-empty-tree">null</div>}
+      </div>
+    </div>
+  );
+}
+
+// Scene for the workspace: the two trees side by side with the comparison verdict.
+export function SameTreeScene({ step }) {
+  return (
+    <div className="st-panel main">
+      <div className="st-body">
+        <div className="st-trees">
+          <TreeCanvas positions={step.pPositions} edges={step.pEdges} nodes={step.pNodes}
+            activePId={step.activePId} activeQId={step.activeQId} nodeStates={step.nodeStates} label="p" prefix="p" />
+          <div className="st-vs">
+            {step.finalResult != null
+              ? <span className={`st-vs-badge ${step.finalResult ? "true" : "false"}`}>{step.finalResult ? "true" : "false"}</span>
+              : <span className="st-vs-label">vs</span>}
+          </div>
+          <TreeCanvas positions={step.qPositions} edges={step.qEdges} nodes={step.qNodes}
+            activePId={step.activePId} activeQId={step.activeQId} nodeStates={step.nodeStates} label="q" prefix="q" />
+        </div>
       </div>
     </div>
   );

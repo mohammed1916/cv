@@ -101,36 +101,31 @@ export function generateSteps(n) {
 
 // ---- N-Queens II (statement-sourced; see scratch statements/52.md) ----
 export function parseInput(text) {
-  const n = JSON.parse(text)
+  let n = text
+  if (n && typeof n === 'object' && !Array.isArray(n)) n = n.n ?? n.value
+  if (typeof n === 'string') {
+    const digits = n.trim().replace(/^"(.*)"$/, '$1').trim()
+    if (!/^\d+$/.test(digits)) throw new Error('Use an integer board size from 1 to 6 (the visualization caps the size).')
+    n = Number(digits)
+  }
   if (!Number.isInteger(n) || n < 1 || n > 6) throw new Error('Use an integer board size from 1 to 6 (the visualization caps the size).')
   return n
 }
 
-export function buildTrace(n) {
-  const cols = []
-  let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), row: 0, col: null, count: 0, message: `Place ${n} queens, one per row, on a ${n} by ${n} board.` }]
-  const safe = (row, col) => cols.every((c, r) => c !== col && Math.abs(c - col) !== row - r)
-  const place = row => {
-    if (row === n) {
-      count++
-      frames.push({ phase: 'solution', activeLine: L('if row equals n then add 1 to count and stop'), row, col: null, count, message: `All ${n} rows have a queen. Solution ${count}.` })
-      return
-    }
-    for (let col = 0; col < n; col++) {
-      if (!safe(row, col)) {
-        frames.push({ phase: 'conflict', activeLine: L('if the square at row and col is safe then'), row, col, count, message: `Column ${col} in row ${row} is attacked by an earlier queen.` })
-        continue
-      }
-      cols[row] = col
-      frames.push({ phase: 'place', activeLine: L('put a queen there'), row, col, count, message: `Place a queen at row ${row}, column ${col}.` })
-      place(row + 1)
-      cols.length = row
-    }
-  }
-  place(0)
-  frames.push({ phase: 'done', activeLine: L('return count'), row: n, col: null, count, message: `${count} distinct solutions.` })
-  return { input: n, result: count, frames }
+// generateSteps owns the board snapshots and counts. Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 3: 2, 7: 7, 9: 9, 10: 9, 11: 10, 13: 12, 15: 4 }
+
+export function buildTrace(input) {
+  const n = parseInput(input)
+  const steps = generateSteps(n)
+  const frames = steps.map(frame => ({
+    ...frame,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    message: frame.message,
+    explanation: frame.message,
+  }))
+  return { input: n, result: frames.at(-1).solutions, truncated: steps.truncated, frames }
 }
 
 export const code = `count n-queens solutions (n):
@@ -148,7 +143,6 @@ place(row):
 
 square is safe:
   no earlier queen shares the column or a diagonal`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def total_n_queens(n):
     cols = []
@@ -174,3 +168,19 @@ export const python = `def total_n_queens(n):
     place(0)
     return count
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 3,
+  3: 22,
+  4: 23,
+  6: 11,
+  7: 13,
+  8: 16,
+  9: 17,
+  10: 18,
+  11: 19,
+  12: 20,
+  14: 5,
+  15: 7,
+}

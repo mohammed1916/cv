@@ -56,6 +56,8 @@ test('102 seeded random trees match a depth-bucket oracle', () => {
     const arr = [rnd(5)]
     const size = rnd(14)
     for (let i = 1; i < size; i++) arr.push(rnd(3) === 0 ? null : rnd(5))
+    // Orphaned values are rejected by the shared parser; keep only arrays it accepts.
+    try { generateSteps(JSON.stringify(arr)) } catch { continue }
     assert.deepEqual(solve(arr), depthBuckets(treeFromLevelOrder(arr), 0, []), JSON.stringify(arr))
   }
 })

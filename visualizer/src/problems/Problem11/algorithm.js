@@ -102,7 +102,10 @@ export function generateSteps(height) {
 
 // ---- Container With Most Water (statement-sourced; see scratch statements/11.md) ----
 export function parseInput(text) {
-  const h = JSON.parse(text)
+  let h = text
+  if (typeof text === 'string') {
+    try { h = JSON.parse(text) } catch { throw new Error('Input must be a JSON array of heights, for example [1,8,6,2,5].') }
+  } else if (h && typeof h === 'object' && !Array.isArray(h) && 'height' in h) h = h.height
   if (!Array.isArray(h) || h.length < 2 || h.length > 50) throw new Error('Use an array of 2 to 50 heights.')
   if (h.some(v => !Number.isInteger(v) || v < 0 || v > 10000)) throw new Error('Heights are integers from 0 to 10000.')
   return h
@@ -157,3 +160,15 @@ export const python = `def max_area(height):
             right -= 1
     return best
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 2,
+  3: 4,
+  4: 5,
+  5: 6,
+  6: 7,
+  7: 8,
+  8: 11,
+  9: 12,
+}

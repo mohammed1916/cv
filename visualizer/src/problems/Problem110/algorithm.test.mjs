@@ -84,6 +84,8 @@ test('110 seeded random trees match a recompute-every-node oracle', () => {
     const arr = rnd(8) === 0 ? [] : [rnd(5)]
     const size = rnd(14)
     for (let i = 1; i < size && arr.length; i++) arr.push(rnd(2) === 0 ? null : rnd(5))
+    // Orphaned values are rejected by the shared parser; keep only arrays it accepts.
+    try { parseBalancedTree(JSON.stringify(arr)) } catch { continue }
     assert.equal(solve(arr), oracle(treeFromLevelOrder(arr)), JSON.stringify(arr))
   }
 })

@@ -1,6 +1,7 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 import { parseLevelOrderTree } from "../../components/shared/levelOrderTree.js";
 import { binaryTreeLayout } from "../../components/shared/binaryTreeLayout.js";
+const VALUE_LIMIT = 10000
+
 export function generateSteps(pArr, qArr) {
   const pRoot = parseLevelOrderTree(JSON.stringify(pArr), "p");
   const qRoot = parseLevelOrderTree(JSON.stringify(qArr), "q");
@@ -119,10 +120,12 @@ export function generateSteps(pArr, qArr) {
 }
 
 // ---- Same Tree (statement-sourced; see scratch statements/100.md) ----
-const VALUE_LIMIT = 10000
 
 export function parseInput(text) {
-  const obj = JSON.parse(text)
+  let obj = text
+  if (typeof obj === 'string') {
+    try { obj = JSON.parse(obj) } catch { throw new Error('Use a JSON object with level-order arrays p and q.') }
+  }
   if (!obj || typeof obj !== 'object' || !Array.isArray(obj.p) || !Array.isArray(obj.q)) throw new Error('Use an object with level-order arrays p and q.')
   for (const arr of [obj.p, obj.q]) {
     if (arr.length > 15) throw new Error('Each tree may have at most 15 entries in this visualization.')
@@ -132,29 +135,20 @@ export function parseInput(text) {
   return { p: obj.p, q: obj.q }
 }
 
-export function buildTrace({ p, q }) {
-  const a0 = buildTreeFromLevels(p)
-  const b0 = buildTreeFromLevels(q)
-  const frames = [{ phase: 'start', activeLine: L('if both p and q are empty then return true'), node: null, message: 'Compare the two trees from the roots down.' }]
-  const walk = (a, b) => {
-    if (!a && !b) {
-      frames.push({ phase: 'both-empty', activeLine: L('return true'), node: null, message: 'Both positions are empty, so they match.' })
-      return true
-    }
-    if (!a || !b) {
-      frames.push({ phase: 'mismatch', activeLine: L('return false'), node: null, message: 'One tree has a node here and the other does not.' })
-      return false
-    }
-    if (a.value !== b.value) {
-      frames.push({ phase: 'mismatch', activeLine: L('if the values of p and q differ then return false'), node: a.id, message: `Values ${a.value} and ${b.value} differ.` })
-      return false
-    }
-    frames.push({ phase: 'match', activeLine: L('check the left children'), node: a.id, message: `Values ${a.value} match. Check the left pair, then the right pair.` })
-    return walk(a.left, b.left) && walk(a.right, b.right)
-  }
-  const result = walk(a0, b0)
-  frames.push({ phase: 'done', activeLine: L('return'), node: null, message: result ? 'Every position matches.' : 'The trees differ.' })
-  return { input: { p, q }, result, frames }
+// generateSteps owns the tree snapshots and comparisons. Each frame gets a phase and the pseudocode line it performs.
+const PHASE_FOR_LEGACY = { 2: 'start', 3: 'check', 4: 'both-empty', 5: 'one-empty', 6: 'mismatch', 7: 'match', 8: 'mismatch', 9: 'left', 10: 'right', 11: 'return' }
+const PSEUDO_LINE_FOR_LEGACY = { 2: 2, 3: 2, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4, 9: 5, 10: 6, 11: 7 }
+
+export function buildTrace(input) {
+  const { p, q } = parseInput(input)
+  const legacy = generateSteps(p, q)
+  const frames = legacy.map((frame, index) => ({
+    ...frame,
+    phase: index === legacy.length - 1 ? 'done' : PHASE_FOR_LEGACY[frame.activeLine],
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: { p, q }, result: legacy.at(-1).finalResult, frames }
 }
 
 export const code = `same tree (p, q):
@@ -164,7 +158,6 @@ export const code = `same tree (p, q):
   check the left children of p and q
   check the right children of p and q
   return true only when both checks are true`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -198,3 +191,13 @@ def is_same_tree(p, q):
         return a.val == b.val and same(a.left, b.left) and same(a.right, b.right)
     return same(build(p), build(q))
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 26,
+  3: 28,
+  4: 30,
+  5: 30,
+  6: 30,
+  7: 30,
+}

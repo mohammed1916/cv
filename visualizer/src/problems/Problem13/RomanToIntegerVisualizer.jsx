@@ -14,44 +14,13 @@ import {
   generateSteps,
 } from "./algorithm";
 
-const definition = {
-  narrative: romanToIntNarrative,
-  title: "Roman to Integer",
-  code: SOLUTION_CODE,
-  linePatterns: LINE_PATTERN_MAP,
-  patterns: R2I_PATTERNS,
-  fields: [{ key: "s", label: "Roman numeral", type: "string" }],
-  initialValues: { s: "MCMXCIV" },
-  initialLabel: "Complex",
-  examples: authoredExamples0.map((example) => ({
-    ...example,
-    values: { s: example.s },
-  })),
-  build(values) {
-    const s = values.s.toUpperCase();
-    if (
-      !s ||
-      !/^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/.test(s)
-    )
-      throw new Error("Enter a valid Roman numeral from I to MMMCMXCIX.");
-    return { input: { s }, frames: generateSteps(s) };
-  },
-  renderStory({ story, step, stepIndex }) {
-    const terms = story.frames
-      .slice(0, Math.max(0, stepIndex) + 1)
-      .filter(
-        (frame) => frame.operation === "add" || frame.operation === "subtract",
-      )
-      .map((frame) => ({
-        label: `${frame.currChar} [${frame.index}]`,
-        value: frame.operation === "subtract" ? -frame.currVal : frame.currVal,
-      }));
-    return (
+export function RomanToIntegerScene({ s, step }) {
+  return (
       <div className="lookup-flow">
         <section className="lookup-story">
           <h3>Read s[i], then compare with s[i + 1]</h3>
           <div className="lookup-map">
-            {[...story.input.s].map((char, index) => (
+            {[...s].map((char, index) => (
               <div
                 key={index}
                 className={`lookup-cell ${index === step.index ? "is-current" : ""} ${index === step.index + 1 && step.index >= 0 ? "is-next" : ""}`}
@@ -69,7 +38,7 @@ const definition = {
             value,
           }))}
           activeKey={step.currChar}
-          nextKey={step.currChar ? story.input.s[step.index + 1] : null}
+          nextKey={step.currChar ? s[step.index + 1] : null}
         />
         {step.currChar && (
           <section className="lookup-story">
@@ -95,12 +64,38 @@ const definition = {
         )}
         <AccumulationLane
           title="Signed contributions, in scan order"
-          terms={terms}
+          terms={step.terms}
           result={step.res}
         />
         <p>{step.message}</p>
       </div>
-    );
+  );
+}
+
+const definition = {
+  narrative: romanToIntNarrative,
+  title: "Roman to Integer",
+  code: SOLUTION_CODE,
+  linePatterns: LINE_PATTERN_MAP,
+  patterns: R2I_PATTERNS,
+  fields: [{ key: "s", label: "Roman numeral", type: "string" }],
+  initialValues: { s: "MCMXCIV" },
+  initialLabel: "Complex",
+  examples: authoredExamples0.map((example) => ({
+    ...example,
+    values: { s: example.s },
+  })),
+  build(values) {
+    const s = values.s.toUpperCase();
+    if (
+      !s ||
+      !/^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/.test(s)
+    )
+      throw new Error("Enter a valid Roman numeral from I to MMMCMXCIX.");
+    return { input: { s }, frames: generateSteps(s) };
+  },
+  renderStory({ story, step }) {
+    return <RomanToIntegerScene s={story.input.s} step={step} />;
   },
 };
 

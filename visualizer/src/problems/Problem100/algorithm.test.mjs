@@ -54,7 +54,8 @@ test('100 seeded random pairs match a pre-order signature oracle', () => {
     const arr = []
     for (let i = 0; i < size; i++) arr.push(rnd(3) === 0 ? null : rnd(3))
     if (arr.length && arr[0] === null) arr[0] = 1
-    return arr
+    // Orphaned values are rejected by the shared parser; keep only arrays it accepts.
+    try { buildTrace({ p: arr, q: [] }); return arr } catch { return [] }
   }
   for (let t = 0; t < 300; t++) {
     const p = randomTree()

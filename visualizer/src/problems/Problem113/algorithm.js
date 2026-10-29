@@ -1,4 +1,3 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 import { parseLevelOrderTree } from '../../components/shared/levelOrderTree.js';
 import { binaryTreeLayout } from '../../components/shared/binaryTreeLayout.js';
 export function generateSteps(text, targetSum) {
@@ -128,7 +127,10 @@ export function generateSteps(text, targetSum) {
 
 // ---- Path Sum II (statement-sourced; see scratch statements/113.md) ----
 export function parseInput(text) {
-  const obj = JSON.parse(text)
+  let obj = text
+  if (typeof obj === 'string') {
+    try { obj = JSON.parse(obj) } catch { throw new Error('Use a JSON object with a level-order array root and an integer target_sum.') }
+  }
   if (!obj || typeof obj !== 'object' || Array.isArray(obj) || !Array.isArray(obj.root) || !Number.isInteger(obj.target_sum)) throw new Error('Use an object with a level-order array root and an integer target_sum.')
   const { root, target_sum: targetSum } = obj
   if (root.length > 15) throw new Error('The tree may have at most 15 entries in this visualization.')
@@ -138,32 +140,20 @@ export function parseInput(text) {
   return { root, target_sum: targetSum }
 }
 
-export function buildTrace({ root: arr, target_sum: target }) {
-  const root = buildTreeFromLevels(arr)
-  const result = []
-  const path = []
-  const frames = [{ phase: 'start', activeLine: L('if node is empty then return'), node: root ? root.id : null, path: [], message: `Collect every root-to-leaf path whose values sum to ${target}.` }]
-  const walk = (node, remaining) => {
-    if (!node) return
-    path.push(node.value)
-    const left = remaining - node.value
-    if (!node.left && !node.right) {
-      if (left === 0) {
-        result.push([...path])
-        frames.push({ phase: 'match', activeLine: L('record a copy of the path'), node: node.id, path: [...path], message: `Leaf ${node.value} completes [${path.join(', ')}], which sums to ${target}.` })
-      } else {
-        frames.push({ phase: 'leaf', activeLine: L('if node is a leaf then'), node: node.id, path: [...path], message: `Leaf ${node.value} gives [${path.join(', ')}], which misses ${target}.` })
-      }
-    } else {
-      frames.push({ phase: 'visit', activeLine: L('walk the left child'), node: node.id, path: [...path], message: `Extend the path with ${node.value} and walk both children.` })
-      walk(node.left, left)
-      walk(node.right, left)
-    }
-    path.pop()
-  }
-  walk(root, target)
-  frames.push({ phase: 'done', activeLine: L('return result'), node: null, path: [], message: `${result.length} path(s) match.` })
-  return { input: { root: arr, target_sum: target }, result, frames }
+// generateSteps owns the route frames, the working path and the saved matches. Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 2: 2, 4: 7, 5: 8, 6: 10, 7: 11, 8: 11, 9: 13, 10: 13, 11: 14, 12: 15, 13: 4 }
+
+export function buildTrace(input) {
+  const { root, target_sum: target } = parseInput(input)
+  const legacy = generateSteps(JSON.stringify(root), target)
+  const frames = legacy.map((frame, index) => ({
+    ...frame,
+    index,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: { root, target_sum: target }, result: legacy.at(-1).completedPaths, frames }
 }
 
 export const code = `path sum (root, target_sum):
@@ -181,7 +171,6 @@ walk(node, remaining):
     walk the left child with left
     walk the right child with left
   remove the last value from the path`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -224,3 +213,20 @@ def path_sum(root, target_sum):
     walk(build(root), target_sum)
     return result
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 25,
+  3: 39,
+  4: 40,
+  6: 27,
+  7: 28,
+  8: 30,
+  9: 31,
+  10: 32,
+  11: 33,
+  12: 35,
+  13: 36,
+  14: 37,
+  15: 38,
+}

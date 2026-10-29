@@ -39,7 +39,7 @@ const SOLUTION_CODE = [
 
 const EXAMPLES = authoredExamples0;
 
-function ResultPanel({ step, inputError, LEVEL_COLORS }) {
+export function ResultPanel({ step, inputError, LEVEL_COLORS }) {
   return (
     <div className="btloti-result-panel"><StoryPanel title="Collect top-down. Return bottom-up." description={step?.message ?? "Build levels with a FIFO queue, then reverse the level list."}><p>Within each row, left-to-right node order stays unchanged.</p></StoryPanel>
       <div className="btloti-queue-label">
@@ -94,6 +94,17 @@ function ResultPanel({ step, inputError, LEVEL_COLORS }) {
       </div>
       {inputError && <div className="btloti-error-box">{inputError}</div>}
     </div>
+  );
+}
+
+// Scene for the workspace: the traversal tree beside the queue and the top-down levels.
+const SCENE_LEVEL_COLORS = ["#89b4fa", "#a6e3a1", "#f9e2af", "#cba6f7", "#f38ba8", "#89dceb"];
+export function LevelOrderIIScene({ step }) {
+  return (
+    <>
+      <VisualizationPanel positions={step.positions} edges={step.edges} allNodes={step.allNodes} step={step} />
+      <ResultPanel step={step} inputError="" LEVEL_COLORS={SCENE_LEVEL_COLORS} />
+    </>
   );
 }
 

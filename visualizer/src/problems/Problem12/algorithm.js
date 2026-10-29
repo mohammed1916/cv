@@ -73,26 +73,35 @@ export function generateSteps(num) {
 
 // ---- Integer to Roman (statement-sourced; see scratch statements/12.md) ----
 export function parseInput(text) {
-  const n = JSON.parse(text)
+  let n = text
+  if (n && typeof n === 'object' && !Array.isArray(n)) n = n.num ?? n.value
+  if (typeof n === 'string') {
+    const digits = n.trim().replace(/^"(.*)"$/, '$1').trim()
+    if (!/^\d+$/.test(digits)) throw new Error('Enter a whole number from 1 to 3999.')
+    n = Number(digits)
+  }
   if (!Number.isInteger(n) || n < 1 || n > 3999) throw new Error('Use an integer from 1 to 3999.')
   return n
 }
 
-const ROMAN_PAIRS = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]
-
+// generateSteps owns the loop state (remaining value, pair index, terms). Each frame gains a phase and a pseudocode line.
 export function buildTrace(num) {
-  let rest = num
-  let out = ''
-  const frames = [{ phase: 'start', activeLine: L('set result to an empty string'), remaining: rest, result: '', message: `Convert ${num} by taking the largest symbol value that still fits.` }]
-  for (const [value, symbol] of ROMAN_PAIRS) {
-    while (rest >= value) {
-      rest -= value
-      out += symbol
-      frames.push({ phase: 'take', activeLine: L('while num is at least value:'), remaining: rest, result: out, message: `Take ${symbol} (${value}). ${rest} remains.` })
-    }
+  const lineFor = {
+    4: L('set result to an empty string'),
+    5: L('for each (value, symbol) pair'),
+    6: L('while num is at least value'),
+    7: L('append symbol to result'),
+    8: L('subtract value from num'),
+    9: L('return result'),
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), remaining: 0, result: out, message: `Roman numeral: ${out}.` })
-  return { input: num, result: out, frames }
+  const phaseFor = { 4: 'init', 5: 'select', 6: 'test', 7: 'append', 8: 'subtract', 9: 'done' }
+  const frames = generateSteps(num).map(step => ({
+    ...step,
+    phase: phaseFor[step.activeLine],
+    activeLine: lineFor[step.activeLine],
+    explanation: step.message,
+  }))
+  return { input: num, result: frames[frames.length - 1].result, frames }
 }
 
 export const code = `integer to roman numeral (num):
@@ -114,3 +123,13 @@ export const python = `def int_to_roman(num):
             num -= value
     return result
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 4,
+  3: 5,
+  4: 6,
+  5: 7,
+  6: 8,
+  7: 9,
+}

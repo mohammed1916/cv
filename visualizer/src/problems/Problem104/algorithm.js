@@ -1,4 +1,3 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 import { parseLevelOrderTree } from '../../components/shared/levelOrderTree.js';
 import { binaryTreeLayout } from '../../components/shared/binaryTreeLayout.js';
 
@@ -22,41 +21,43 @@ export function generateSteps(text) {
 
 // ---- Maximum Depth of Binary Tree (statement-sourced; see scratch statements/104.md) ----
 export function parseInput(text) {
-  const arr = JSON.parse(text)
+  let arr = text
+  if (typeof arr === 'string') {
+    try { arr = JSON.parse(arr) } catch { throw new Error('Use a JSON level-order array, such as [3,9,20,null,null,15,7].') }
+  }
+  if (arr && typeof arr === 'object' && !Array.isArray(arr) && 'root' in arr) arr = arr.root
   if (!Array.isArray(arr) || arr.length > 15) throw new Error('Use a level-order array of at most 15 entries.')
   if (arr.length && arr[0] === null) throw new Error('A level-order array must start with a value or be empty.')
   if (arr.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 100))) throw new Error('Values are integers from -100 to 100, or null.')
   return arr
 }
 
-export function buildTrace(arr) {
-  const root = buildTreeFromLevels(arr)
-  let best = 0
-  const frames = [{ phase: 'start', activeLine: L('if the root is empty'), node: root ? root.id : null, depth: 0, best: 0, message: 'Walk the tree and track the deepest node seen.' }]
-  const visit = (node, depth) => {
-    if (!node) return
-    best = Math.max(best, depth)
-    frames.push({ phase: 'visit', activeLine: L('set best to the larger of best and level'), node: node.id, depth, best, message: `Node ${node.value} is at depth ${depth}. Deepest so far: ${best}.` })
-    visit(node.left, depth + 1)
-    visit(node.right, depth + 1)
-  }
-  visit(root, 1)
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, depth: best, best, message: `Maximum depth is ${best}.` })
-  return { input: arr, result: best, frames }
+// generateSteps owns the post-order walk: each frame carries the tree layout, the call stack and returned depths.
+// Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 3: 2, 4: 3, 5: 4, 6: 5 }
+const PHASE_FOR_LEGACY = { 3: 'done', 4: 'left', 5: 'right', 6: 'return' }
+
+export function buildTrace(input) {
+  const arr = parseInput(input)
+  const story = generateSteps(JSON.stringify(arr))
+  const frames = story.steps.map(frame => ({
+    ...frame,
+    legacyLine: frame.activeLine,
+    phase: PHASE_FOR_LEGACY[frame.activeLine],
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+    positions: story.positions,
+    edges: story.edges,
+    nodes: story.nodes,
+  }))
+  return { input: arr, result: story.steps.at(-1).total, frames }
 }
 
-export const code = `maximum depth (root):
-  if the root is empty then return 0
-  set best to 0
-  call visit on the root at level 1
-  return best
-
-visit(node, level):
-  if node is empty then stop
-  set best to the larger of best and level
-  visit the left child at level + 1
-  visit the right child at level + 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = `maximum depth (node):
+  if node is empty then return 0
+  depth of the left subtree is maximum depth (node.left)
+  depth of the right subtree is maximum depth (node.right)
+  return 1 plus the larger of the two depths`.split('\n').map((text, index) => ({ line: index + 1, text }))
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -82,14 +83,19 @@ def build(arr):
     return root
 
 def max_depth(root):
-    best = 0
-    def visit(node, level):
-        nonlocal best
+    def depth(node):
         if node is None:
-            return
-        best = max(best, level)
-        visit(node.left, level + 1)
-        visit(node.right, level + 1)
-    visit(build(root), 1)
-    return best
+            return 0
+        left = depth(node.left)
+        right = depth(node.right)
+        return 1 + max(left, right)
+    return depth(build(root))
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 26,
+  3: 28,
+  4: 29,
+  5: 30,
+}

@@ -47,7 +47,7 @@ function generateSteps(root) {
 const EXAMPLES = authoredExamples0;
 
 // TreeVisualizationPanel: renders the tree canvas with states
-function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
+export function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
   const reduceMotion = useReducedMotion();
   const canvasWidth = Math.max(320, ...[...positions.values()].map(p => p.x + 48));
   const canvasHeight = Math.max(320, ...[...positions.values()].map(p => p.y + 55));
@@ -119,7 +119,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
 }
 
 // StatePanel: shows active node and final result
-function StatePanel({ step, allNodes }) {
+export function StatePanel({ step, allNodes }) {
   return (
     <div className="bbt-state-panel">
       <h3>Height balance checkpoint</h3>

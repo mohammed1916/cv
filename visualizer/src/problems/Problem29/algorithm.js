@@ -70,32 +70,32 @@ const INT_MAX = 2147483647
 const INT_MIN = -2147483648
 
 export function parseInput(text) {
-  const obj = JSON.parse(text)
+  let obj = text
+  if (typeof obj === 'string') {
+    try { obj = JSON.parse(obj) } catch { throw new Error('Use a JSON object such as {"dividend":10,"divisor":3}.') }
+  }
+  if (obj && typeof obj === 'object' && !Array.isArray(obj) && obj.values) obj = obj.values
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) throw new Error('Use an object with dividend and divisor.')
-  const { dividend, divisor } = obj
+  const dividend = typeof obj.dividend === 'string' ? Number(obj.dividend.trim()) : obj.dividend
+  const divisor = typeof obj.divisor === 'string' ? Number(obj.divisor.trim()) : obj.divisor
   if (!Number.isInteger(dividend) || dividend < INT_MIN || dividend > INT_MAX) throw new Error('Dividend must be a 32-bit signed integer.')
   if (!Number.isInteger(divisor) || divisor < INT_MIN || divisor > INT_MAX) throw new Error('Divisor must be a 32-bit signed integer.')
   if (divisor === 0) throw new Error('Divisor must not be zero.')
   return { dividend, divisor }
 }
 
-export function buildTrace({ dividend, divisor }) {
-  const negative = (dividend < 0) !== (divisor < 0)
-  let a = Math.abs(dividend)
-  const b = Math.abs(divisor)
-  let quotient = 0
-  const frames = [{ phase: 'init', activeLine: L('set a to |dividend| and b to |divisor|'), a, b, quotient, message: `Work with |${dividend}| and |${divisor}|, then fix the sign at the end.` }]
-  while (a >= b) {
-    let shift = 0
-    while (a >= b * 2 ** (shift + 1)) shift++
-    a -= b * 2 ** shift
-    quotient += 2 ** shift
-    frames.push({ phase: 'build', activeLine: L('find the largest doubling of b that still fits in a'), a, b, quotient, message: `Subtract ${b} doubled ${shift} time(s). Remainder ${a}, quotient ${quotient}.` })
-  }
-  const signed = negative ? -quotient : quotient
-  const result = Math.min(INT_MAX, signed)
-  frames.push({ phase: 'done', activeLine: L('return'), a, b, quotient: result, message: result === INT_MAX && signed > INT_MAX ? 'The quotient overflows, so return 2147483647.' : `Quotient ${result}.` })
-  return { input: { dividend, divisor }, result: result + 0, frames }
+// buildDivision owns the story frames (chunks, counts, legacy line numbers). Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 2: 2, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 8: 7, 9: 7, 10: 7, 11: 7, 12: 8, 13: 8, 14: 10 }
+
+export function buildTrace(input) {
+  const story = buildDivision(parseInput(input))
+  const frames = story.frames.map(frame => ({
+    ...frame,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: story.input, total: story.total, base: story.base, result: frames.at(-1).result, frames }
 }
 
 export const code = `divide (dividend, divisor) without multiplication or division:
@@ -108,7 +108,6 @@ export const code = `divide (dividend, divisor) without multiplication or divisi
     subtract that doubling from a and add its multiple to quotient
   apply the sign and clamp to the 32-bit range
   return quotient`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def divide(dividend, divisor):
     if dividend == -2147483648 and divisor == -1:
@@ -124,3 +123,16 @@ export const python = `def divide(dividend, divisor):
         quotient += 1 << shift
     return -quotient if negative else quotient
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 2,
+  3: 4,
+  4: 5,
+  5: 6,
+  6: 7,
+  7: 9,
+  8: 11,
+  9: 13,
+  10: 13,
+}

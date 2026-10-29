@@ -1,4 +1,3 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 export function parsePathSum(rootText, targetText) {
   const values = JSON.parse(rootText);
   if (!Array.isArray(values) || values.some(value => value !== null && !Number.isSafeInteger(value))) {
@@ -85,7 +84,10 @@ export function getRoute(nodes, nodeId) {
 
 // ---- Path Sum (statement-sourced; see scratch statements/112.md) ----
 export function parseInput(text) {
-  const obj = JSON.parse(text)
+  let obj = text
+  if (typeof obj === 'string') {
+    try { obj = JSON.parse(obj) } catch { throw new Error('Use a JSON object with a level-order array root and an integer target_sum.') }
+  }
   if (!obj || typeof obj !== 'object' || Array.isArray(obj) || !Array.isArray(obj.root) || !Number.isInteger(obj.target_sum)) throw new Error('Use an object with a level-order array root and an integer target_sum.')
   const { root, target_sum: targetSum } = obj
   if (root.length > 15) throw new Error('The tree may have at most 15 entries in this visualization.')
@@ -95,23 +97,20 @@ export function parseInput(text) {
   return { root, target_sum: targetSum }
 }
 
-export function buildTrace({ root: arr, target_sum: target }) {
-  const root = buildTreeFromLevels(arr)
-  const frames = [{ phase: 'start', activeLine: L('if node is empty then return false'), node: root ? root.id : null, remaining: target, message: `Walk root-to-leaf paths, subtracting each value from ${target}.` }]
-  const walk = (node, remaining) => {
-    if (!node) return false
-    const left = remaining - node.value
-    if (!node.left && !node.right) {
-      const hit = left === 0
-      frames.push({ phase: 'leaf', activeLine: L('return whether left is zero'), node: node.id, remaining: left, message: `Leaf ${node.value} leaves ${left}. ${hit ? 'That is a match.' : 'Not a match.'}` })
-      return hit
-    }
-    frames.push({ phase: 'visit', activeLine: L('return walk on the left child'), node: node.id, remaining: left, message: `${node.value} leaves ${left}. Try the children.` })
-    return walk(node.left, left) || walk(node.right, left)
-  }
-  const result = walk(root, target)
-  frames.push({ phase: 'done', activeLine: L('return'), node: null, remaining: null, message: result ? 'A root-to-leaf path reaches the target.' : 'No root-to-leaf path reaches the target.' })
-  return { input: { root: arr, target_sum: target }, result, frames }
+// buildPathSum owns the route frames and the running sums. Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 1: 1, 3: 7, 4: 8, 5: 9, 7: 9 }
+
+export function buildTrace(input) {
+  const { root, target_sum: target } = parseInput(input)
+  const run = buildPathSum(root, target)
+  const frames = run.frames.map((frame, index) => ({
+    ...frame,
+    index,
+    legacyLine: frame.activeLine,
+    activeLine: frame.phase === 'done' ? (run.nodes.length ? 3 : 2) : PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { ...run, input: { root, target_sum: target }, result: run.result, frames }
 }
 
 export const code = `has path sum (root, target_sum):
@@ -123,7 +122,6 @@ walk(node, remaining):
   set left to remaining minus the node value
   if node is a leaf then return whether left is zero
   return walk on the left child with left, or walk on the right child with left`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -158,3 +156,15 @@ def has_path_sum(root, target_sum):
         return walk(node.left, left) or walk(node.right, left)
     return walk(build(root), target_sum)
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  1: 24,
+  2: 26,
+  3: 32,
+  5: 25,
+  6: 26,
+  7: 28,
+  8: 29,
+  9: 31,
+}

@@ -41,7 +41,7 @@ const SOLUTION_CODE = [
 
 const EXAMPLES = authoredExamples0;
 
-function ResultPanel({ step, inputError, LEVEL_COLORS }) {
+export function ResultPanel({ step, inputError, LEVEL_COLORS }) {
   return (
     <div className="btlo-result-panel">
       <StoryPanel title="Queue: front to back" description="Finish the frozen current-level count before processing the next level.">
@@ -70,6 +70,17 @@ function ResultPanel({ step, inputError, LEVEL_COLORS }) {
       </div>
       {inputError && <div className="btlo-error-box">{inputError}</div>}
     </div>
+  );
+}
+
+// Scene for the workspace: the traversal tree beside the queue and grouped levels.
+const SCENE_LEVEL_COLORS = ["#89b4fa", "#a6e3a1", "#f9e2af", "#cba6f7", "#f38ba8", "#89dceb"];
+export function LevelOrderScene({ step }) {
+  return (
+    <>
+      <VisualizationPanel positions={step.positions} edges={step.edges} allNodes={step.allNodes} step={step} />
+      <ResultPanel step={step} inputError="" LEVEL_COLORS={SCENE_LEVEL_COLORS} />
+    </>
   );
 }
 

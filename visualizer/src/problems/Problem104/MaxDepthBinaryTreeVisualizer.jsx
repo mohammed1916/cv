@@ -44,6 +44,29 @@ function snippetIdForPhase(phase) {
     return 'init'
 }
 
+// Scene for the workspace: the tree with returned depths, the call stack, and the route to the deepest leaf.
+export function MaxDepthScene({ step }) {
+  return (
+    <div className="mdbt-panel main">
+      <div className="mdbt-body">
+        <StoryPanel title="Carry the deepest route upward" description={step.message}>
+          <TreeDiagram positions={step.positions} edges={step.edges} nodes={step.nodes}
+            activeIds={new Set(step.path ?? (step.activeId >= 0 ? [step.activeId] : []))}
+            labelForNode={node => step.returnValues?.has(node.id) ? `depth ${step.returnValues.get(node.id)}` : 'not returned'} />
+          {step.left != null && step.right != null && <p>Left depth {step.left}; right depth {step.right}. Add one for the current node.</p>}
+          {step.phase === 'done' && <p>Highlighted route contains {step.total} nodes. Equal-depth ties choose the left route.</p>}
+        </StoryPanel>
+        <div className="mdbt-stack" aria-label="Call stack">
+          {step.callStack.map((val, i) => (
+            <div key={i} className={`mdbt-frame ${i === step.callStack.length - 1 ? 'top' : ''}`}>maxDepth({val})</div>
+          ))}
+          {step.callStack.length === 0 && <div className="mdbt-empty">—</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function MaxDepthBinaryTreeVisualizer() {
     // Load solution code from registry
 

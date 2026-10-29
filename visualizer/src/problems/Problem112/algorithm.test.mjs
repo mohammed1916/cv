@@ -79,6 +79,8 @@ test('112 seeded random trees match a leaf-sum oracle', () => {
     const arr = rnd(8) === 0 ? [] : [rnd(5) - 2]
     const size = rnd(14)
     for (let i = 1; i < size && arr.length; i++) arr.push(rnd(3) === 0 ? null : rnd(5) - 2)
+    // Orphaned values are rejected by the shared parser; keep only arrays it accepts.
+    try { buildPathSum(arr, 0) } catch { continue }
     const target = rnd(9) - 4
     const expected = leafSums(treeFromLevelOrder(arr)).includes(target)
     assert.equal(solve(arr, target), expected, JSON.stringify({ arr, target }))

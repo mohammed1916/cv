@@ -58,41 +58,28 @@ export function buildPermutations(values) {
 
 // ---- Permutations II (statement-sourced; see scratch statements/47.md) ----
 export function parseInput(text) {
-  const nums = JSON.parse(text)
+  let nums = text
+  if (typeof nums === 'string') {
+    try { nums = JSON.parse(nums) } catch { throw new Error('Use a JSON array of integers, such as [1,1,2].') }
+  }
+  if (nums && typeof nums === 'object' && !Array.isArray(nums) && 'nums' in nums) nums = nums.nums
   if (!Array.isArray(nums) || nums.length < 1 || nums.length > 6) throw new Error('Use an array of 1 to 6 integers (the visualization caps the size).')
   if (nums.some(v => !Number.isInteger(v) || v < -10 || v > 10)) throw new Error('Values are integers from -10 to 10.')
   return nums
 }
 
-export function buildTrace(nums) {
-  const sorted = [...nums].sort((a, b) => a - b)
-  const used = sorted.map(() => false)
-  const path = []
-  const result = []
-  const frames = [{ phase: 'start', activeLine: L('sort nums'), path: [], total: 0, message: `Sort the values to ${sorted.join(', ')} so equal values sit together.` }]
-  const backtrack = () => {
-    if (path.length === sorted.length) {
-      result.push([...path])
-      frames.push({ phase: 'record', activeLine: L('record a copy'), path: [...path], total: result.length, message: `Record [${path.join(', ')}].` })
-      return
-    }
-    for (let i = 0; i < sorted.length; i++) {
-      if (used[i]) continue
-      if (i > 0 && sorted[i] === sorted[i - 1] && !used[i - 1]) {
-        frames.push({ phase: 'skip', activeLine: L('if nums[i] equals nums[i - 1] and nums[i - 1] is not used then skip it'), path: [...path], total: result.length, message: `Skip ${sorted[i]} at index ${i}: an equal value is still unused, so this branch repeats an earlier one.` })
-        continue
-      }
-      used[i] = true
-      path.push(sorted[i])
-      frames.push({ phase: 'choose', activeLine: L('mark index i as used and add nums[i] to the path'), path: [...path], total: result.length, message: `Place ${sorted[i]}. Path [${path.join(', ')}].` })
-      backtrack()
-      path.pop()
-      used[i] = false
-    }
-  }
-  backtrack()
-  frames.push({ phase: 'done', activeLine: L('return the list of recorded permutations'), path: [], total: result.length, message: `${result.length} unique permutations.` })
-  return { input: nums, result, frames }
+// buildPermutations owns the story frames (event limit, copies, path). Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 2: 2, 7: 8, 11: 10, 13: 11, 14: 12, 16: 14, 18: 5 }
+
+export function buildTrace(input) {
+  const story = buildPermutations({ nums: JSON.stringify(parseInput(input)) })
+  const frames = story.frames.map(frame => ({
+    ...frame,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: story.input.nums, nums: story.nums, results: story.results, truncated: story.truncated, result: story.results, frames }
 }
 
 export const code = `permute unique (nums):
@@ -109,7 +96,6 @@ backtrack():
     mark index i as used and add nums[i] to the path
     call backtrack
     remove the last value from the path and unmark index i`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `def permute_unique(nums):
     nums = sorted(nums)
@@ -135,3 +121,19 @@ export const python = `def permute_unique(nums):
     backtrack()
     return result
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 2,
+  3: 3,
+  4: 22,
+  5: 23,
+  7: 7,
+  8: 8,
+  9: 11,
+  10: 12,
+  11: 14,
+  12: 16,
+  13: 18,
+  14: 19,
+}

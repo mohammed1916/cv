@@ -43,7 +43,7 @@ const SOLUTION_CODE = [
 // Examples registry will be loaded by the visualizer if needed
 // getExamples('path-sum-ii') can be called within a component for example buttons
 
-function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
+export function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
     return <StoryPanel title="Collect every matching leaf route" description={step?.message ?? 'Grow a path, test the leaf, save a copy when it matches, then backtrack.'}>
         <p>Path total: {step?.currentSum ?? 0}. A matching total at an internal node is not a complete route.</p>
         <TreeDiagram positions={positions} edges={edges} nodes={allNodes} activeIds={step?.onPathNode ?? new Set()} labelForNode={n=>n.id===step?.activeId?'Current':step?.onPathNode?.has(n.id)?'On route':!n.left&&!n.right?'Leaf':''}/>
@@ -51,7 +51,7 @@ function TreeVisualizationPanel({ step, positions, edges, allNodes }) {
     </StoryPanel>;
 }
 
-function StatePanel({ step }) {
+export function StatePanel({ step }) {
     return (
         <div className="psi-state-panel">
             <div className="psi-metric">

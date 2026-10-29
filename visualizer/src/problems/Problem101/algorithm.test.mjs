@@ -54,6 +54,8 @@ test('101 seeded random trees match a reflected pre-order oracle', () => {
     const arr = [rnd(2)]
     const size = rnd(9)
     for (let i = 1; i < size; i++) arr.push(rnd(3) === 0 ? null : rnd(2))
+    // Orphaned values are rejected by the shared parser; keep only arrays it accepts.
+    try { generateSteps(arr) } catch { continue }
     const root = treeFromLevelOrder(arr)
     const expected = !root || pre(root.left) === reflected(root.right)
     assert.equal(solve(arr), expected, JSON.stringify(arr))

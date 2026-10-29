@@ -13,6 +13,56 @@ import {
   generateSteps,
 } from "./algorithm";
 
+export function IntegerToRomanScene({ num, step }) {
+    const appended = step.terms.reduce((sum, term) => sum + term.value, 0);
+    return (
+      <div className="lookup-flow">
+        <section className="lookup-story">
+          <h3>
+            {num} → {step.result || "empty output"}
+          </h3>
+          <p>
+            Remaining: <strong>{step.remainingNum}</strong> · Loop index:{" "}
+            <strong>{step.currentIdx < 0 ? "—" : step.currentIdx}</strong>
+          </p>
+          <progress
+            aria-label="Value subtracted from input"
+            max={num}
+            value={num - step.remainingNum}
+          />
+        </section>
+        <LookupMap
+          title="Ordered values → symbols"
+          entries={VALUE_SYMBOL_PAIRS.map(({ value, symbol }) => ({
+            key: value,
+            value: symbol,
+          }))}
+          activeKey={step.currentVal}
+        />
+        {step.currentVal != null && (
+          <section className="lookup-story">
+            <h3>
+              while: {step.remainingNum} ≥ {step.currentVal}?
+            </h3>
+            <p>
+              {step.phase === "append"
+                ? `Appended ${step.currentSymbol}; next subtract ${step.currentVal} from the remaining number.`
+                : step.remainingNum >= step.currentVal
+                  ? `Use ${step.currentSymbol}; the inner loop stays at index ${step.currentIdx}.`
+                  : "False: the for loop advances to the next pair."}
+            </p>
+          </section>
+        )}
+        <AccumulationLane
+          title="Output tokens and their values"
+          terms={step.terms}
+          result={appended}
+        />
+        <p>{step.message}</p>
+      </div>
+    );
+}
+
 const definition = {
   narrative: romanNarrative,
   title: "Integer to Roman",
@@ -38,53 +88,7 @@ const definition = {
     return { input: { num }, frames: generateSteps(num) };
   },
   renderStory({ story, step }) {
-    const appended = step.terms.reduce((sum, term) => sum + term.value, 0);
-    return (
-      <div className="lookup-flow">
-        <section className="lookup-story">
-          <h3>
-            {story.input.num} → {step.result || "empty output"}
-          </h3>
-          <p>
-            Remaining: <strong>{step.remainingNum}</strong> · Loop index:{" "}
-            <strong>{step.currentIdx < 0 ? "—" : step.currentIdx}</strong>
-          </p>
-          <progress
-            aria-label="Value subtracted from input"
-            max={story.input.num}
-            value={story.input.num - step.remainingNum}
-          />
-        </section>
-        <LookupMap
-          title="Ordered values → symbols"
-          entries={VALUE_SYMBOL_PAIRS.map(({ value, symbol }) => ({
-            key: value,
-            value: symbol,
-          }))}
-          activeKey={step.currentVal}
-        />
-        {step.currentVal != null && (
-          <section className="lookup-story">
-            <h3>
-              while: {step.remainingNum} ≥ {step.currentVal}?
-            </h3>
-            <p>
-              {step.activeLine === 7
-                ? `Appended ${step.currentSymbol}; next subtract ${step.currentVal} from the remaining number.`
-                : step.remainingNum >= step.currentVal
-                  ? `Use ${step.currentSymbol}; the inner loop stays at index ${step.currentIdx}.`
-                  : "False: the for loop advances to the next pair."}
-            </p>
-          </section>
-        )}
-        <AccumulationLane
-          title="Output tokens and their values"
-          terms={step.terms}
-          result={appended}
-        />
-        <p>{step.message}</p>
-      </div>
-    );
+    return <IntegerToRomanScene num={story.input.num} step={step} />;
   },
 };
 

@@ -1,4 +1,3 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 export function parseMinimumDepth(text) {
   const values = JSON.parse(text);
   if (!Array.isArray(values) || values.some(value => value !== null && !Number.isSafeInteger(value))) {
@@ -87,34 +86,31 @@ export function routeTo(nodes, leaf) {
 
 // ---- Minimum Depth of Binary Tree (statement-sourced; see scratch statements/111.md) ----
 export function parseInput(text) {
-  const arr = JSON.parse(text)
+  let arr = text
+  if (typeof arr === 'string') {
+    try { arr = JSON.parse(arr) } catch { throw new Error('Use a JSON level-order array, such as [3,9,20,null,null,15,7].') }
+  }
+  if (arr && typeof arr === 'object' && !Array.isArray(arr) && 'arr' in arr) arr = arr.arr
   if (!Array.isArray(arr) || arr.length > 15) throw new Error('Use a level-order array of at most 15 entries.')
   if (arr.length && arr[0] === null) throw new Error('A level-order array must start with a value or be empty.')
   if (arr.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 1000))) throw new Error('Values are integers from -1000 to 1000, or null.')
   return arr
 }
 
-export function buildTrace(arr) {
-  const root = buildTreeFromLevels(arr)
-  const frames = [{ phase: 'start', activeLine: L('if node is empty then return 0'), node: root ? root.id : null, depth: 0, message: 'Find the nearest leaf. A missing child is not a leaf.' }]
-  const depthOf = node => {
-    if (!node) return 0
-    if (!node.left && !node.right) {
-      frames.push({ phase: 'leaf', activeLine: L('if this node is a leaf then return 1'), node: node.id, depth: 1, message: `${node.value} is a leaf, so its depth is 1 from here.` })
-      return 1
-    }
-    if (!node.left || !node.right) {
-      const only = depthOf(node.left || node.right)
-      frames.push({ phase: 'one-child', activeLine: L('only one child exists'), node: node.id, depth: only + 1, message: `${node.value} has one child, so it must follow that branch.` })
-      return only + 1
-    }
-    const best = Math.min(depthOf(node.left), depthOf(node.right))
-    frames.push({ phase: 'both', activeLine: L('return 1 plus the smaller'), node: node.id, depth: best + 1, message: `${node.value} has two children. Its shallower side gives depth ${best + 1}.` })
-    return best + 1
-  }
-  const result = depthOf(root)
-  frames.push({ phase: 'done', activeLine: L('return'), node: null, depth: result, message: `Minimum depth is ${result}.` })
-  return { input: arr, result, frames }
+// buildMinimumDepth owns the DFS frames and the depth bookkeeping. Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 1: 1, 4: 2, 6: 2, 7: 3, 9: 4, 10: 4, 11: 4, 12: 4, 14: 5 }
+
+export function buildTrace(input) {
+  const arr = parseInput(input)
+  const run = buildMinimumDepth(arr)
+  const frames = run.frames.map((frame, index) => ({
+    ...frame,
+    index,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { ...run, input: arr, result: run.result, frames }
 }
 
 export const code = `minimum depth (node):
@@ -122,7 +118,6 @@ export const code = `minimum depth (node):
   if this node is a leaf then return 1
   if only one child exists then return 1 plus the depth of that child
   return 1 plus the smaller depth of the left and right children`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -158,3 +153,12 @@ def min_depth(root):
         return 1 + min(depth(node.left), depth(node.right))
     return depth(build(root))
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  1: 24,
+  2: 26,
+  3: 28,
+  4: 30,
+  5: 32,
+}

@@ -1,4 +1,3 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 import { traceLevelOrder } from '../../components/shared/traceLevelOrder.js';
 
 // The queue always traverses left to right; only the completed output row reverses.
@@ -22,36 +21,30 @@ export function generateSteps(text) {
 
 // ---- Binary Tree Zigzag Level Order Traversal (statement-sourced; see scratch statements/103.md) ----
 export function parseInput(text) {
-  const arr = JSON.parse(text)
+  let arr = text
+  if (typeof arr === 'string') {
+    try { arr = JSON.parse(arr) } catch { throw new Error('Use a JSON level-order array, such as [3,9,20,null,null,15,7].') }
+  }
+  if (arr && typeof arr === 'object' && !Array.isArray(arr) && 'root' in arr) arr = arr.root
   if (!Array.isArray(arr) || arr.length > 15) throw new Error('Use a level-order array of at most 15 entries.')
   if (arr.length && arr[0] === null) throw new Error('A level-order array must start with a value or be empty.')
   if (arr.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 100))) throw new Error('Values are integers from -100 to 100, or null.')
   return arr
 }
 
-export function buildTrace(arr) {
-  const root = buildTreeFromLevels(arr)
-  const levels = []
-  const frames = [{ phase: 'start', activeLine: L('set queue to [root]'), node: root ? root.id : null, levels: [], message: 'Start a queue with the root.' }]
-  let queue = root ? [root] : []
-  while (queue.length) {
-    const width = queue.length
-    const row = []
-    const next = []
-    for (let i = 0; i < width; i++) {
-      const node = queue[i]
-      row.push(node.value)
-      if (node.left) next.push(node.left)
-      if (node.right) next.push(node.right)
-      frames.push({ phase: 'visit', activeLine: L('take every node that is in the queue now'), node: node.id, levels: levels.map(l => [...l]), message: `Visit ${node.value} and queue its children.` })
-    }
-    const reversed = levels.length % 2 === 1
-    levels.push(reversed ? [...row].reverse() : row)
-    frames.push({ phase: 'level', activeLine: L('append row to result'), node: null, levels: levels.map(l => [...l]), message: reversed ? `Level ${levels.length} runs right to left: [${levels.at(-1).join(', ')}].` : `Level ${levels.length} runs left to right: [${row.join(', ')}].` })
-    queue = next
-  }
-  frames.push({ phase: 'done', activeLine: L('return result'), node: null, levels: levels.map(l => [...l]), message: `${levels.length} levels from top to bottom.` })
-  return { input: arr, result: levels, frames }
+// generateSteps owns the queue snapshots and zigzag rows. Each frame is mapped to the pseudocode line in `code`.
+const PSEUDO_LINE_FOR_LEGACY = { 2: 3, 4: 4, 7: 6, 10: 7, 11: 8, 12: 9, 13: 9, 14: 10, 15: 11, 16: 10, 17: 12 }
+
+export function buildTrace(input) {
+  const arr = parseInput(input)
+  const legacy = generateSteps(JSON.stringify(arr))
+  const frames = legacy.map(frame => ({
+    ...frame,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: arr, result: legacy.at(-1).result, frames }
 }
 
 export const code = `level order (root):
@@ -66,7 +59,6 @@ export const code = `level order (root):
     if the level number is odd then reverse row
     append row to result
   return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -109,3 +101,18 @@ def zigzag_level_order(root):
         queue = next_queue
     return result
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 25,
+  3: 26,
+  4: 26,
+  5: 27,
+  6: 28,
+  7: 30,
+  8: 31,
+  9: 32,
+  10: 36,
+  11: 38,
+  12: 40,
+}

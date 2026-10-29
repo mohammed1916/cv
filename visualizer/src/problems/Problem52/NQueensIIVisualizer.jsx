@@ -41,7 +41,7 @@ function getAttacked(board, n) {
 }
 
 // Board visualization panel component
-function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx }) {
+export function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attacked, step, applyEx }) {
   return (
     <div className="nqii-panel-content">
       <div className="nqii-examples">
@@ -103,6 +103,13 @@ function BoardPanel({ EXAMPLES, ex, n, board, activeRow, activeCol, phase, attac
       <div className="nqii-status">{step?.message ?? "Press Play to begin."}</div>
     </div>
   );
+}
+
+// Scene for the workspace: derives the attacked squares from the current board snapshot.
+export function NQueensScene({ n, step }) {
+  const attacked = useMemo(() => getAttacked(step.boardRef, n), [step.boardRef, n]);
+  return <BoardPanel EXAMPLES={[]} ex={{}} n={n} board={step.boardRef} activeRow={step.row} activeCol={step.col}
+    phase={step.phase} attacked={attacked} step={step} applyEx={() => {}} />;
 }
 
 export default function NQueensIIVisualizer() {

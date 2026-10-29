@@ -7,20 +7,7 @@ import { buildDivision, legacyCode as code, linePatterns } from "./algorithm";
 import "./DivideTwoIntegers.css";
 
 const examples = authoredExamples0;
-const definition = {
-  narrative: divideNarrative,
-  title: "Divide by doubling and subtracting",
-  code,
-  linePatterns,
-  patterns: ["init", "check", "build", "subtract", "add", "done"],
-  fields: [
-    { key: "dividend", label: "Dividend", type: "string" },
-    { key: "divisor", label: "Divisor (nonzero)", type: "string" },
-  ],
-  initialValues: examples[0].values,
-  examples,
-  build: buildDivision,
-  renderStory({ story, step }) {
+export function DivideScene({ story, step }) {
     const bits = step.quotient.toString(2).padStart(32, "0");
     return (
       <div className="division-story">
@@ -96,7 +83,7 @@ const definition = {
               />
             </div>
             <p>
-              {[8, 9, 10, 11].includes(step.activeLine)
+              {[8, 9, 10, 11].includes(step.legacyLine)
                 ? `${step.chunk + step.chunk} <= ${step.remaining}: ${step.chunk + step.chunk <= step.remaining ? "double again" : "stop doubling and subtract this chunk"}`
                 : "Chunk committed; continue with the remaining magnitude."}
             </p>
@@ -116,7 +103,7 @@ const definition = {
         <AccumulationLane
           title="Counts added to the quotient"
           terms={step.taken
-            .slice(0, step.activeLine === 12 ? -1 : undefined)
+            .slice(0, step.legacyLine === 12 ? -1 : undefined)
             .map((item) => ({
               label: `chunk ${item.chunk}`,
               value: item.count,
@@ -125,6 +112,23 @@ const definition = {
         />
       </div>
     );
+}
+
+const definition = {
+  narrative: divideNarrative,
+  title: "Divide by doubling and subtracting",
+  code,
+  linePatterns,
+  patterns: ["init", "check", "build", "subtract", "add", "done"],
+  fields: [
+    { key: "dividend", label: "Dividend", type: "string" },
+    { key: "divisor", label: "Divisor (nonzero)", type: "string" },
+  ],
+  initialValues: examples[0].values,
+  examples,
+  build: buildDivision,
+  renderStory({ story, step }) {
+    return <DivideScene story={story} step={step} />;
   },
 };
 

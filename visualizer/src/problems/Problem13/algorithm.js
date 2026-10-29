@@ -170,32 +170,38 @@ export function generateSteps(s) {
 
 
 // ---- Roman to Integer (statement-sourced; see scratch statements/13.md) ----
-const ROMAN_VALUES = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
 const CANONICAL = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/
 
 export function parseInput(text) {
-  const s = JSON.parse(text)
-  if (typeof s !== 'string' || s.length < 1 || s.length > 15) throw new Error('Use a Roman numeral string of 1 to 15 characters.')
-  if (!CANONICAL.test(s) || s === '') throw new Error('Use a valid Roman numeral from 1 to 3999 (letters I V X L C D M).')
+  let s = text
+  if (s && typeof s === 'object' && !Array.isArray(s)) s = s.s ?? s.value
+  if (typeof s !== 'string') throw new Error('Enter a Roman numeral string, for example MCMXCIV.')
+  s = s.trim().replace(/^"(.*)"$/, '$1').toUpperCase()
+  if (s.length < 1 || s.length > 15) throw new Error('Use a Roman numeral string of 1 to 15 characters.')
+  if (!CANONICAL.test(s)) throw new Error('Use a valid Roman numeral from 1 to 3999 (letters I V X L C D M).')
   return s
 }
 
+// generateSteps owns the scan (value, next value, operation). Each frame gets a phase, a pseudocode line and the signed terms so far.
 export function buildTrace(s) {
-  let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, total: 0, message: `Read ${s} from left to right.` }]
-  for (let i = 0; i < s.length; i++) {
-    const value = ROMAN_VALUES[s[i]]
-    const next = i + 1 < s.length ? ROMAN_VALUES[s[i + 1]] : 0
-    if (value < next) {
-      total -= value
-      frames.push({ phase: 'subtract', activeLine: L('if value is less than next then'), index: i, total, message: `${s[i]} (${value}) is before a larger symbol, so subtract it. Total ${total}.` })
-    } else {
-      total += value
-      frames.push({ phase: 'add', activeLine: L('add value to total'), index: i, total, message: `Add ${s[i]} (${value}). Total ${total}.` })
-    }
+  const lineFor = {
+    6: L('set total to 0'),
+    8: L('value is the value of the symbol at i'),
+    9: L('next is the value of the symbol at i + 1'),
+    10: L('if value is less than next then'),
+    11: L('subtract value from total'),
+    13: L('add value to total'),
+    14: L('return total'),
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: s.length, total, message: `The value of ${s} is ${total}.` })
-  return { input: s, result: total, frames }
+  const phaseFor = { 6: 'init', 8: 'value', 9: 'next', 10: 'check', 11: 'subtract', 13: 'add', 14: 'done' }
+  const terms = []
+  const frames = generateSteps(s).map(step => {
+    if (step.operation === 'add' || step.operation === 'subtract') {
+      terms.push({ label: `${step.currChar} [${step.index}]`, value: step.operation === 'subtract' ? -step.currVal : step.currVal })
+    }
+    return { ...step, phase: phaseFor[step.activeLine], activeLine: lineFor[step.activeLine], explanation: step.message, terms: [...terms] }
+  })
+  return { input: s, result: frames[frames.length - 1].res, frames }
 }
 
 export const code = `roman to integer (s):
@@ -222,3 +228,16 @@ export const python = `def roman_to_int(s):
             total += value
     return total
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 3,
+  3: 4,
+  4: 5,
+  5: 6,
+  6: 7,
+  7: 8,
+  8: 9,
+  9: 10,
+  10: 11,
+}

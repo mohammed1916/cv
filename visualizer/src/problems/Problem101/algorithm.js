@@ -1,4 +1,3 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
 import { parseLevelOrderTree } from "../../components/shared/levelOrderTree.js";
 import { binaryTreeLayout } from "../../components/shared/binaryTreeLayout.js";
 export function generateSteps(treeArr) {
@@ -125,35 +124,32 @@ export function generateSteps(treeArr) {
 
 // ---- Symmetric Tree (statement-sourced; see scratch statements/101.md) ----
 export function parseInput(text) {
-  const arr = JSON.parse(text)
+  let arr = text
+  if (typeof arr === 'string') {
+    try { arr = JSON.parse(arr) } catch { throw new Error('Use a JSON level-order array, such as [1,2,2,3,4,4,3].') }
+  }
+  if (arr && typeof arr === 'object' && !Array.isArray(arr) && 'tree' in arr) arr = arr.tree
   if (!Array.isArray(arr) || arr.length < 1 || arr.length > 15) throw new Error('Use a level-order array of 1 to 15 entries.')
   if (arr[0] === null) throw new Error('The root must have a value.')
   if (arr.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 100))) throw new Error('Values are integers from -100 to 100, or null.')
   return arr
 }
 
-export function buildTrace(arr) {
-  const root = buildTreeFromLevels(arr)
-  const frames = [{ phase: 'start', activeLine: L('if the root is empty'), node: root ? root.id : null, message: 'The tree is symmetric when its left side mirrors its right side.' }]
-  const mirror = (a, b) => {
-    if (!a && !b) {
-      frames.push({ phase: 'both-empty', activeLine: L('return true'), node: null, message: 'Both positions are empty, so they mirror each other.' })
-      return true
-    }
-    if (!a || !b) {
-      frames.push({ phase: 'mismatch', activeLine: L('return false'), node: null, message: 'Only one side has a node here, so the pair is not mirrored.' })
-      return false
-    }
-    if (a.value !== b.value) {
-      frames.push({ phase: 'mismatch', activeLine: L('if the values of a and b differ then return false'), node: a.id, message: `Values ${a.value} and ${b.value} differ.` })
-      return false
-    }
-    frames.push({ phase: 'pair', activeLine: L('check that a.left mirrors b.right'), node: a.id, message: `Values ${a.value} match. Compare left-outer with right-outer, then left-inner with right-inner.` })
-    return mirror(a.left, b.right) && mirror(a.right, b.left)
-  }
-  const result = root ? mirror(root.left, root.right) : true
-  frames.push({ phase: 'done', activeLine: L('return'), node: null, message: result ? 'The tree is symmetric.' : 'The tree is not symmetric.' })
-  return { input: arr, result, frames }
+// generateSteps owns the snapshots and mirror comparisons. Each frame gets a phase and the pseudocode line it performs.
+const PSEUDO_LINE_FOR_LEGACY = { 4: 5, 12: 2, 5: 6, 6: 7, 7: 7, 8: 8, 9: 8, 10: 9, 11: 10 }
+const PHASE_FOR_LEGACY = { 4: 'pair', 12: 'start', 5: 'both-empty', 6: 'check', 7: 'mismatch', 8: 'compare', 9: 'mismatch', 10: 'pair', 11: 'pair' }
+
+export function buildTrace(input) {
+  const arr = parseInput(input)
+  const legacy = generateSteps(arr)
+  const frames = legacy.map((frame, index) => ({
+    ...frame,
+    legacyLine: frame.activeLine,
+    phase: index === legacy.length - 1 ? 'done' : PHASE_FOR_LEGACY[frame.activeLine],
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: arr, result: legacy.at(-1).finalResult, frames }
 }
 
 export const code = `symmetric tree (root):
@@ -167,7 +163,6 @@ mirror(a, b):
   check that a.left mirrors b.right
   check that a.right mirrors b.left
   return true only when both checks are true`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -202,3 +197,16 @@ def is_symmetric(root):
     tree = build(root)
     return True if tree is None else mirror(tree.left, tree.right)
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 32,
+  3: 32,
+  5: 25,
+  6: 26,
+  7: 28,
+  8: 30,
+  9: 30,
+  10: 30,
+  11: 30,
+}

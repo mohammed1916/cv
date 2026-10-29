@@ -1,5 +1,5 @@
 import authoredExamples0 from '../../config/examples/string-to-integer-atoi.js';
-﻿import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
 import CodeTracePanel from '../../components/CodeTracePanel'
@@ -17,7 +17,7 @@ import { INT_MIN, INT_MAX, ATOI_PATTERNS, LINE_PATTERN_MAP, SOLUTION_CODE, gener
 const EXAMPLES = authoredExamples0
 const DEFAULT_INPUT = '   -042'
 
-function Scanner({ input, step }) {
+export function Scanner({ input, step }) {
   return (
     <div className="atoi-scanner">
       {input.length === 0 ? (

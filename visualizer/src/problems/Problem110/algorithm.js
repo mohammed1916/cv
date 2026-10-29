@@ -1,5 +1,6 @@
-import { treeFromLevelOrder as buildTreeFromLevels } from '../../components/shared/treeLayout.js'
-export { parseLevelOrderTree as parseBalancedTree } from "../../components/shared/levelOrderTree.js";
+import { binaryTreeLayout } from '../../components/shared/binaryTreeLayout.js'
+import { parseLevelOrderTree as parseBalancedTree } from "../../components/shared/levelOrderTree.js";
+export { parseBalancedTree };
 
 export function traceBalance(root) {
   const frames = [], heights = new Map(), unbalancedIds = new Set();
@@ -55,33 +56,36 @@ export function traceBalance(root) {
 
 // ---- Balanced Binary Tree (statement-sourced; see scratch statements/110.md) ----
 export function parseInput(text) {
-  const arr = JSON.parse(text)
+  let arr = text
+  if (typeof arr === 'string') {
+    try { arr = JSON.parse(arr) } catch { throw new Error('Use a JSON level-order array, such as [3,9,20,null,null,15,7].') }
+  }
+  if (arr && typeof arr === 'object' && !Array.isArray(arr) && 'arr' in arr) arr = arr.arr
   if (!Array.isArray(arr) || arr.length > 15) throw new Error('Use a level-order array of at most 15 entries.')
   if (arr.length && arr[0] === null) throw new Error('A level-order array must start with a value or be empty.')
   if (arr.some(v => v !== null && (!Number.isInteger(v) || Math.abs(v) > 100))) throw new Error('Values are integers from -100 to 100, or null.')
   return arr
 }
 
-export function buildTrace(arr) {
-  const root = buildTreeFromLevels(arr)
-  const frames = [{ phase: 'start', activeLine: L('if node is empty then return 0'), node: root ? root.id : null, height: null, message: 'Measure each subtree height from the bottom up. Any imbalance is reported as -1.' }]
-  const height = node => {
-    if (!node) return 0
-    const left = height(node.left)
-    if (left === -1) return -1
-    const right = height(node.right)
-    if (right === -1) return -1
-    if (Math.abs(left - right) > 1) {
-      frames.push({ phase: 'unbalanced', activeLine: L('return -1'), node: node.id, height: -1, message: `At ${node.value}, the subtree heights ${left} and ${right} differ by more than 1.` })
-      return -1
-    }
-    const h = Math.max(left, right) + 1
-    frames.push({ phase: 'height', activeLine: L('return 1 plus the larger'), node: node.id, height: h, message: `At ${node.value}, heights ${left} and ${right} differ by at most 1. Height ${h}.` })
-    return h
-  }
-  const result = height(root) !== -1
-  frames.push({ phase: 'done', activeLine: L('return'), node: null, height: null, message: result ? 'Every node is balanced.' : 'Some node is unbalanced.' })
-  return { input: arr, result, frames }
+// traceBalance owns the bottom-up walk; each frame gets the tree layout and the pseudocode line it performs.
+const PSEUDO_LINE_FOR_LEGACY = { 4: 6, 6: 8, 5: 7, 7: 9, 8: 10, 9: 11, 10: 2 }
+
+export function buildTrace(input) {
+  const arr = parseInput(input)
+  const root = parseBalancedTree(JSON.stringify(arr))
+  const { positions, edges, nodes: allNodes } = binaryTreeLayout(root)
+  const legacy = traceBalance(root)
+  const frames = legacy.map((frame, index) => ({
+    ...frame,
+    index,
+    positions,
+    edges,
+    allNodes,
+    legacyLine: frame.activeLine,
+    activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
+    explanation: frame.message,
+  }))
+  return { input: arr, result: legacy.at(-1).result, frames }
 }
 
 export const code = `is balanced (root):
@@ -95,7 +99,6 @@ height(node):
   if right is -1 then return -1
   if the difference between left and right is more than 1 then return -1
   return 1 plus the larger of left and right`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -135,3 +138,16 @@ def is_balanced(root):
         return 1 + max(left, right)
     return height(build(root)) != -1
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 37,
+  4: 25,
+  5: 26,
+  6: 28,
+  7: 29,
+  8: 31,
+  9: 32,
+  10: 34,
+  11: 36,
+}

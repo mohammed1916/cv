@@ -48,20 +48,7 @@ function Results({ results, count }) {
   );
 }
 
-const definition = {
-  narrative: permuteUniqueNarrative,
-  title: "Permutations II: unique backtracking",
-  code,
-  linePatterns,
-  patterns: ["init", "skip", "add", "remove", "result", "done"],
-  fields: [{ key: "nums", label: "Numbers", type: "string" }],
-  initialValues: { nums: "[1,1,2]" },
-  examples: ["[1,1,2]", "[1,2,3]", "[2,2,2]", "[-1,-1,2,2]"].map((nums) => ({
-    label: nums,
-    values: { nums },
-  })),
-  build: buildPermutations,
-  renderStory({ story, step }) {
+export function PermutationScene({ story, step }) {
     return (
       <div className="permutation-story">
         {story.truncated && (
@@ -77,7 +64,7 @@ const definition = {
             {story.nums.map((value, index) => (
               <div
                 key={index}
-                className={`permutation-cell ${step.path.includes(index) ? "used" : ""} ${step.candidate === index ? "candidate" : ""} ${step.activeLine === 13 && index === step.candidate - 1 ? "duplicate-source" : ""}`}
+                className={`permutation-cell ${step.path.includes(index) ? "used" : ""} ${step.candidate === index ? "candidate" : ""} ${step.legacyLine === 13 && index === step.candidate - 1 ? "duplicate-source" : ""}`}
               >
                 <small>index {index}</small>
                 <strong>{value}</strong>
@@ -120,6 +107,23 @@ const definition = {
         />
       </div>
     );
+}
+
+const definition = {
+  narrative: permuteUniqueNarrative,
+  title: "Permutations II: unique backtracking",
+  code,
+  linePatterns,
+  patterns: ["init", "skip", "add", "remove", "result", "done"],
+  fields: [{ key: "nums", label: "Numbers", type: "string" }],
+  initialValues: { nums: "[1,1,2]" },
+  examples: ["[1,1,2]", "[1,2,3]", "[2,2,2]", "[-1,-1,2,2]"].map((nums) => ({
+    label: nums,
+    values: { nums },
+  })),
+  build: buildPermutations,
+  renderStory({ story, step }) {
+    return <PermutationScene story={story} step={step} />;
   },
 };
 
