@@ -1,0 +1,20 @@
+{
+  "number": 1117,
+  "title": "Building H2O",
+  "source": "https://leetcode.com/problems/building-h2o/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/building-h2o/description/",
+    "https://leetcode.doocs.org/en/lc/1117/",
+    "https://walkccc.me/LeetCode/problems/1117/"
+  ],
+  "summary": "Hydrogen and oxygen threads call hydrogen() and oxygen(). Release them so every molecule is formed by exactly one oxygen and two hydrogen threads, with each group of three releasing before the next group begins.",
+  "officialConstraints": "3 * n == water.length, 1 <= n <= 20, water[i] is 'H' or 'O', exactly 2n 'H' and n 'O'.",
+  "examples": [
+    { "input": "water = \"HOH\"", "output": "HHO (or OHH; any valid group order)" },
+    { "input": "water = \"OOHHHH\"", "output": "HHOHHO (among several valid orders)" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization accepts water of length 3n up to 60 (n up to 20) with only H and O letters, exactly 2n H and n O. The released order is one deterministic valid order."
+}

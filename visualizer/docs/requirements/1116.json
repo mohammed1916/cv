@@ -1,0 +1,20 @@
+{
+  "number": 1116,
+  "title": "Print Zero Even Odd",
+  "source": "https://leetcode.com/problems/print-zero-even-odd/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/print-zero-even-odd/description/",
+    "https://leetcode.doocs.org/en/lc/1116/",
+    "https://algomaster.io/practice/concurrency/print-zero-even-odd"
+  ],
+  "summary": "Three threads share one ZeroEvenOdd(n): zero() prints 0s, even() prints even numbers, odd() prints odd numbers. The combined output must be 010203... with length 2n.",
+  "officialConstraints": "1 <= n <= 1000.",
+  "examples": [
+    { "input": "n = 2", "output": "0102" },
+    { "input": "n = 5", "output": "0102030405" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization accepts n from 1 to 1000 and produces 2n printed tokens."
+}

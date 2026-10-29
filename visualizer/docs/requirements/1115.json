@@ -1,0 +1,19 @@
+{
+  "number": 1115,
+  "title": "Print FooBar Alternately",
+  "source": "https://leetcode.com/problems/print-foobar-alternately/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/print-foobar-alternately/description/",
+    "https://leetcode.doocs.org/en/lc/1115/",
+    "https://algomaster.io/practice/concurrency/print-foobar-alternately"
+  ],
+  "summary": "Thread A calls foo() and thread B calls bar(). Make them print foobar alternately n times, with foo first.",
+  "officialConstraints": "1 <= n <= 1000.",
+  "examples": [
+    { "input": "n = 1", "output": "foobar" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization accepts n from 1 to 1000 and produces 2n printed tokens."
+}

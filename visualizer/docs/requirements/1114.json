@@ -1,0 +1,20 @@
+{
+  "number": 1114,
+  "title": "Print in Order",
+  "source": "https://leetcode.com/problems/print-in-order/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/print-in-order/description/",
+    "https://leetcode.doocs.org/en/lc/1114/",
+    "https://algomaster.io/practice/concurrency/print-in-order"
+  ],
+  "summary": "Three threads call first(), second() and third() on one Foo instance. Make second() run after first() and third() run after second(), so the output is firstsecondthird regardless of scheduling.",
+  "officialConstraints": "nums is a permutation of [1, 2, 3].",
+  "examples": [
+    { "input": "nums = [1,2,3]", "output": "firstsecondthird" },
+    { "input": "nums = [1,3,2]", "output": "firstsecondthird" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization replays a deterministic arrival order for the given nums permutation; input is exactly 3 values."
+}
