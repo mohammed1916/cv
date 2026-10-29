@@ -1,0 +1,17 @@
+{
+  "number": 2710,
+  "title": "Remove Trailing Zeros From a String",
+  "slug": "remove-trailing-zeros-from-a-string",
+  "source": "https://leetcode.com/problems/remove-trailing-zeros-from-a-string/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-citing-leetcode.com",
+  "accessAttempt": "Official page not fetched (WebFetch returns 403). WebSearch snippets cite leetcode.com, doocs and talentd.",
+  "summary": "Given a positive integer as a string, return it with trailing zeros removed, as a string.",
+  "officialConstraints": "Length between 1 and 1000, digits only, no leading zeros.",
+  "examples": [
+    { "input": "\"51230100\"", "output": "\"512301\"", "source": "WebSearch snippet citing leetcode.com/problems/remove-trailing-zeros-from-a-string" },
+    { "input": "\"123\"", "output": "\"123\"", "source": "WebSearch snippet citing leetcode.com/problems/remove-trailing-zeros-from-a-string" }
+  ],
+  "visualizationNotes": "Uses the official 1000-character limit directly. No extra cap is applied.",
+  "requirementsVerified": true
+}
