@@ -57,3 +57,11 @@ export const code = [
   "        maximum ← max(maximum, nums[i])",
   "    RETURN values exceeding left[i] OR right[i], in input order"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  5: 5,
+  9: 9,
+  11: 11,
+};

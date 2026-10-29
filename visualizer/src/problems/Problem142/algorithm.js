@@ -724,3 +724,22 @@ export const parseInput = (input) => {
   return parseCycle2Input(input.values ?? input.nodes, input.pos);
 };
 export const buildTrace = (input) => buildCycle2Story(input.values, input.pos);
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12,
+  13: 13,
+  14: 14,
+  15: 15,
+};

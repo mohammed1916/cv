@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import { getExamplesOr } from "../../config/examplesRegistry";
 import WordBreak2Story from "./WordBreak2Story";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import { code, python, parseInput, buildTrace, pythonLineMap } from "./algorithm";
 import "./WordBreakIIVisualizer.css";
 
 const definition = {
@@ -19,6 +19,7 @@ const definition = {
   build: buildTrace,
   code,
   python,
+  pythonLineMap,
   inputLabel: 'String s | wordDict (e.g. "catsanddog | cat, cats, and, sand, dog")',
   url: "https://leetcode.com/problems/word-break-ii/",
   complexity: "Exponential in the worst case for the number of sentences; the memo shares suffix results. The visualization caps string length at 20, matching the official maximum.",

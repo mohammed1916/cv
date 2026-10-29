@@ -4,9 +4,9 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Numbers and target digit (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Numbers and target digit (JSON object)',
   url: 'https://leetcode.com/problems/count-digit-appearances/',
   complexity: 'O(D) time for D total decimal digits, O(1) solver extra space. The visualization retains O(D) compact events and O(n) per-number counts.',
   phases: [

@@ -497,3 +497,14 @@ export const parseInput = (input) => {
   return parseLinkedListCycleInput(input.values ?? input.nodes, input.pos);
 };
 export const buildTrace = (input) => buildCycleStory(input.values, input.pos);
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+};

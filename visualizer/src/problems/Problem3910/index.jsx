@@ -5,10 +5,10 @@ import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import InducedGraph from '../../components/shared/InducedGraph'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Node values and edges (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Node values and edges (JSON object)',
   url: 'https://leetcode.com/problems/count-connected-subgraphs-with-even-node-sum/',
   complexity: 'O(2ⁿ × (n + edges)) time. The solver uses O(n + edges) working space; the visualization retains O(n × 2ⁿ) compact traversal frames. The official limit is 13 nodes.',
   phases: [

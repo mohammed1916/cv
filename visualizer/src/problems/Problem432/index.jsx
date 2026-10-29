@@ -1,8 +1,8 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import examples from '../../config/examples/all-o1-data-structure'
-import { parseInput, buildTrace, code, python } from './algorithm'
+import { parseInput, buildTrace, code, python, pythonLineMap } from './algorithm'
 const definition = {
-  parse: parseInput, build: buildTrace, code, python,
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap,
   inputLabel: 'Operations as JSON arrays (up to 200 for visualization)',
   url: 'https://leetcode.com/problems/all-oone-data-structure/',
   complexity: 'Average O(1) per data-structure operation; rendering each snapshot costs O(number of keys).',

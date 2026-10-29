@@ -136,3 +136,13 @@ class AllOne:
 
 // Compatibility for the retained legacy visual module.
 export const CODE = code;
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  1: 9,
+  4: 31,
+  8: 49,
+  11: 52,
+  13: 55,
+  14: 55,
+};

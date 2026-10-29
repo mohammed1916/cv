@@ -4,10 +4,10 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/valid-elements-in-an-array/',
   complexity: 'O(n) time and O(n) space. Two exclusive maxima scans avoid repeatedly searching each side.',
   phases: [

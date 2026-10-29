@@ -454,3 +454,20 @@ export const parseInput = (input) => {
   return parseWordBreak2Input(input);
 };
 export const buildTrace = (input) => buildWordBreak2Story(input.s, input.wordDict);
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  3: 3,
+  5: 5,
+  6: 6,
+  7: 7,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12,
+  13: 13,
+  14: 14,
+  15: 15,
+  16: 16,
+};

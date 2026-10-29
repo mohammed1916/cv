@@ -4,7 +4,7 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
   phases: [
@@ -14,7 +14,7 @@ const definition = {
     { id: 'write', label: 'Place', description: 'Write ranked vowels into the original vowel slots.' },
     { id: 'done', label: 'Complete', description: 'Return the rearranged string.' },
   ],
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'String s (JSON)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'String s (JSON)',
   url: 'https://leetcode.com/problems/sort-vowels-by-frequency/',
   complexity: 'O(n) time and O(n) space. Only five vowel kinds need ranking. Every execution step is retained; long sequences are paged.',
   examples: authoredExamples0,

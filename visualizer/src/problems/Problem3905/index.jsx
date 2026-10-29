@@ -5,10 +5,10 @@ import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import PagedGrid from '../../components/shared/PagedGrid'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, cellAtStep, python } from './algorithm'
+import { buildTrace, parseInput, code, cellAtStep, python, pythonLineMap } from './algorithm'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Grid dimensions and sources (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Grid dimensions and sources (JSON object)',
   url: 'https://leetcode.com/problems/multi-source-flood-fill/',
   complexity: 'O(n × m) time and space. Each cell joins one frontier; at most four neighbors propose a color. Arrival times reconstruct every frame without copying the whole grid per step.',
   phases: [

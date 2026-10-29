@@ -34,3 +34,15 @@ export const code = [
   "        RETURN Red",
   "    RETURN Invalid"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+};

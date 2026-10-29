@@ -112,3 +112,11 @@ export const code = [
   "        frontier ← cells in pending",
   "    RETURN grid"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  15: 15,
+  17: 17,
+  19: 19,
+};

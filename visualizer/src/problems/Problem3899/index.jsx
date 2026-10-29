@@ -4,9 +4,9 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, trianglePoints, python } from './algorithm'
+import { buildTrace, parseInput, code, trianglePoints, python, pythonLineMap } from './algorithm'
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Three side lengths (JSON array)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Three side lengths (JSON array)',
   url: 'https://leetcode.com/problems/angles-of-a-triangle/',
   complexity: 'O(1) time and space: exactly three sides. Displayed decimals are formatted; returned angles retain full precision.',
   phases: [

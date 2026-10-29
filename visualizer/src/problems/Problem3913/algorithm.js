@@ -54,3 +54,13 @@ export const code = [
   "    REPLACE vowel slots of result with successive characters of vowels",
   "    RETURN result joined into a string"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  4: 4,
+  6: 6,
+  7: 7,
+  10: 10,
+  11: 11,
+};

@@ -4,9 +4,9 @@ import withProblemStory from '../../components/shared/withProblemStory';
 import storyGuide from './storyGuide.json';
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'Array nums (JSON)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'Array nums (JSON)',
   url: 'https://leetcode.com/problems/minimum-operations-to-transform-array-into-alternating-prime/',
   complexity: 'O(U log log U + n) time and O(U + n) visualization space, U = 2 × max(2, max(nums)). The sieve and reverse lookup scan are preprocessing; playback focuses on per-position decisions.',
   phases: [

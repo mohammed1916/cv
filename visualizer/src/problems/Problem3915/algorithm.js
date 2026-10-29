@@ -145,3 +145,13 @@ export const code = [
   "        answer ← max(answer, up[i], down[i])",
   "    RETURN answer"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  14: 14,
+  19: 19,
+  22: 22,
+  24: 24,
+  25: 25,
+  27: 27,
+};

@@ -6,10 +6,10 @@ import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
 import FenwickView from '../../components/shared/FenwickView'
 import SubsequencePath from '../../components/shared/SubsequencePath'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
-  parse: parseInput, build: buildTrace, code, python, inputLabel: 'nums and k (JSON object)',
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap, inputLabel: 'nums and k (JSON object)',
   url: 'https://leetcode.com/problems/maximum-sum-of-alternating-subsequence-with-distance-at-least-k/',
   complexity: 'O(n log U + U) time and O(n + U) space, U = max(nums). Two Fenwick prefix-maximum trees enforce strict value comparisons; delayed insertion enforces distance. Trace storage is O(n).',
   phases: [

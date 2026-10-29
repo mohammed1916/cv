@@ -32,3 +32,11 @@ export const code = [
   "    different_first ← first digit differs from target",
   "    RETURN found AND different_first"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  5: 5,
+  6: 6,
+  7: 7,
+};

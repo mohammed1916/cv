@@ -1,7 +1,7 @@
 import AlgorithmWorkspace from "../../components/shared/AlgorithmWorkspace";
 import { getExamplesOr } from "../../config/examplesRegistry";
 import Cycle2Story from "./Cycle2Story";
-import { code, python, parseInput, buildTrace } from "./algorithm";
+import { code, python, parseInput, buildTrace, pythonLineMap } from "./algorithm";
 import "./LinkedListCycleIIVisualizer.css";
 
 const definition = {
@@ -15,6 +15,7 @@ const definition = {
   build: buildTrace,
   code,
   python,
+  pythonLineMap,
   inputLabel: 'Values | pos (e.g. "[3, 2, 0, -4] | pos = 1")',
   url: "https://leetcode.com/problems/linked-list-cycle-ii/",
   complexity: "O(n) time and O(1) extra space for n nodes. The visualization caps the list at 40 nodes; the official limit is 10,000.",

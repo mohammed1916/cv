@@ -73,3 +73,12 @@ export const code = [
   "        cost ← cost + target − value",
   "    RETURN cost"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  16: 16,
+  17: 17,
+  18: 18,
+  19: 19,
+};

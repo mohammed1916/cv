@@ -56,3 +56,13 @@ export const code = [
   "        descending ← descending + nums[i]",
   "    RETURN −1 if equal, 0 if ascending is larger, otherwise 1"
 ].map((text, index) => ({ line: index + 1, text }))
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  2: 2,
+  3: 3,
+  5: 5,
+  7: 7,
+  9: 9,
+  10: 10,
+};

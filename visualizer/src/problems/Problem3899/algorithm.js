@@ -55,3 +55,12 @@ export function trianglePoints(sides) {
   const y = Math.sqrt(Math.max(0, b * b - x * x))
   return [[0, 0], [c, 0], [x, y]]
 }
+
+// Maps each pseudocode activeLine used by the frames to its Python line.
+export const pythonLineMap = {
+  3: 3,
+  4: 4,
+  5: 5,
+  10: 10,
+  11: 11,
+};
