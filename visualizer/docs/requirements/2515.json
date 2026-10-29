@@ -1,0 +1,56 @@
+{
+  "number": 2515,
+  "title": "Shortest Distance to Target String in a Circular Array",
+  "slug": "shortest-distance-to-target-string-in-a-circular-array",
+  "source": "https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/",
+  "sources": [
+    "https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/",
+    "https://leetcode.doocs.org/en/lc/2515"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets",
+  "summary": "Circular array of words; return the fewest left/right steps from startIndex to a word equal to target, or -1.",
+  "officialConstraints": "1 <= words.length <= 100; 1 <= words[i].length <= 100; 0 <= startIndex < words.length",
+  "examples": [
+    {
+      "input": {
+        "words": [
+          "hello",
+          "i",
+          "am",
+          "leetcode",
+          "hello"
+        ],
+        "target": "hello",
+        "startIndex": 1
+      },
+      "output": 1
+    },
+    {
+      "input": {
+        "words": [
+          "a",
+          "b",
+          "leetcode"
+        ],
+        "target": "leetcode",
+        "startIndex": 0
+      },
+      "output": 1
+    },
+    {
+      "input": {
+        "words": [
+          "i",
+          "eat",
+          "leetcode"
+        ],
+        "target": "ate",
+        "startIndex": 0
+      },
+      "output": -1
+    }
+  ],
+  "visualizationNotes": "Words array up to 100 entries; cap 100.",
+  "requirementsVerified": true
+}

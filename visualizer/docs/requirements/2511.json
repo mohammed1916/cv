@@ -1,0 +1,26 @@
+{
+  "number": 2511,
+  "title": "Maximum Enemy Forts That Can Be Captured",
+  "slug": "maximum-enemy-forts-that-can-be-captured",
+  "source": "https://leetcode.com/problems/maximum-enemy-forts-that-can-be-captured/",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2511/",
+    "https://leetcode.com/problems/maximum-enemy-forts-that-can-be-captured/description/"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets",
+  "summary": "Array of -1 (empty), 0 (enemy fort), 1 (your fort). Move from a 1 to a -1 over zeros only; return the max zeros captured, or 0.",
+  "officialConstraints": "1 <= forts.length <= 1000; forts[i] in {-1, 0, 1}",
+  "examples": [
+    {
+      "input": "[1,0,0,-1,0,0,0,0,1]",
+      "output": 4
+    },
+    {
+      "input": "[0,0,1,-1]",
+      "output": 0
+    }
+  ],
+  "visualizationNotes": "Array of up to 1000 positions shown with IndexedSequence; cap 1000.",
+  "requirementsVerified": true
+}

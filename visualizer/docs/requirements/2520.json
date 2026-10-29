@@ -1,0 +1,30 @@
+{
+  "number": 2520,
+  "title": "Count the Digits That Divide a Number",
+  "slug": "count-the-digits-that-divide-a-number",
+  "source": "https://leetcode.com/problems/count-the-digits-that-divide-a-number/",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/2520/",
+    "https://leetcode.com/problems/count-the-digits-that-divide-a-number/description/"
+  ],
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets",
+  "summary": "Count digits of num that divide num exactly.",
+  "officialConstraints": "1 <= num <= 10^9; num contains no digit 0",
+  "examples": [
+    {
+      "input": 7,
+      "output": 1
+    },
+    {
+      "input": 121,
+      "output": 2
+    },
+    {
+      "input": 1248,
+      "output": 4
+    }
+  ],
+  "visualizationNotes": "Single number; digit list up to 10 entries.",
+  "requirementsVerified": true
+}
