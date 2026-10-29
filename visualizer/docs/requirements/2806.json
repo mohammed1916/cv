@@ -1,0 +1,30 @@
+{
+  "number": 2806,
+  "title": "Account Balance After Rounded Purchase",
+  "source": "https://leetcode.com/problems/account-balance-after-rounded-purchase/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/account-balance-after-rounded-purchase/description/",
+    "https://leetcode.doocs.org/en/lc/2806/",
+    "https://walkccc.me/LeetCode/problems/2806/"
+  ],
+  "summary": "Your balance starts at 100 dollars. The purchase amount is rounded to the nearest multiple of 10, with ties going up. Return the remaining balance.",
+  "officialConstraints": "0 <= purchaseAmount <= 100.",
+  "examples": [
+    {
+      "input": "purchaseAmount = 9",
+      "output": "90"
+    },
+    {
+      "input": "purchaseAmount = 15",
+      "output": "80"
+    },
+    {
+      "input": "purchaseAmount = 10",
+      "output": "90"
+    }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "The integer input is validated against the official 0 to 100 range."
+}

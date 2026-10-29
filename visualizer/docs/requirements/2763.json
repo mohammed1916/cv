@@ -1,0 +1,26 @@
+{
+  "number": 2763,
+  "title": "Sum of Imbalance Numbers of All Subarrays",
+  "source": "https://leetcode.com/problems/sum-of-imbalance-numbers-of-all-subarrays/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-from-leetcode-and-mirrors (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/sum-of-imbalance-numbers-of-all-subarrays/description/",
+    "https://leetcode.doocs.org/en/lc/2763/",
+    "https://www.hellointerview.com/community/questions/sum-imbalance-subarrays/cm5eguhai0455838op9k52gg5"
+  ],
+  "summary": "The imbalance number of an array is the number of indices i in the sorted array where 0 <= i < n - 1 and sorted[i+1] - sorted[i] > 1. Return the sum of imbalance numbers over all subarrays of nums.",
+  "officialConstraints": "1 <= nums.length <= 1000; 1 <= nums[i] <= nums.length.",
+  "examples": [
+    {
+      "input": "nums = [2,3,1,4]",
+      "output": "3"
+    },
+    {
+      "input": "nums = [1,3,3,3,5]",
+      "output": "8"
+    }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Input is capped at 20 values for the visualization; the official limit is 1000. Values are constrained to 1..length as officially stated."
+}
