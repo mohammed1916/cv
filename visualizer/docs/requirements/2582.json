@@ -1,0 +1,30 @@
+{
+  "number": "2582",
+  "title": "Pass the Pillow",
+  "slug": "pass-the-pillow",
+  "source": "https://leetcode.com/problems/pass-the-pillow/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-snippets-only; official page not retrieved (403 to WebFetch)",
+  "searchSources": [
+    "https://leetcode.com/problems/pass-the-pillow",
+    "https://walkccc.me/LeetCode/problems/2582",
+    "https://dev.to/mdarifulhaque/2582-pass-the-pillow-4gf8"
+  ],
+  "summary": "A pillow starts with person 1 and reverses at each end of a line of n people; return the holder after time seconds.",
+  "officialConstraints": "2 <= n <= 1000, 1 <= time <= 1000",
+  "examples": [
+    {
+      "input": "n = 4, time = 5",
+      "output": "2",
+      "source": "search snippet citing the official page"
+    },
+    {
+      "input": "n = 8, time = 9",
+      "output": "6",
+      "source": "Hashnode solution write-up quoting the example"
+    }
+  ],
+  "visualizationNotes": "Visualization uses the full allowed range (n and time up to 1000).",
+  "requirementsVerified": true,
+  "notes": "Constraints and both examples come from search snippets that cite the official problem."
+}
