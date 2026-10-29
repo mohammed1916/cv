@@ -1,0 +1,10 @@
+{
+  "number": 31,
+  "title": "Next Permutation",
+  "source": "https://leetcode.com/problems/next-permutation/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "official-url-search-snippet (direct fetch returned HTTP 403)",
+  "summary": "Rearrange nums in place into the next lexicographically greater permutation; if none exists, rearrange into the lowest (ascending) permutation.",
+  "officialConstraints": "1 <= nums.length <= 100; 0 <= nums[i] <= 100 (from search snippet of official page; not independently verified).",
+  "visualizationNotes": "Visualization accepts the official bounds (JSON array, 1 to 100 integers, 0 to 100). The solver does not cap further. Playback produces one snapshot per pointer or swap step."
+}
