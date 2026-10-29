@@ -289,42 +289,28 @@ export function buildStock1Story(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
 const MAX_PRICES = 60
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Accepts {"prices": [...]} JSON (the registry values shape) and returns validated prices.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"prices": [7,1,5,3,6,4]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.prices)) throw new Error('Input must be an object with a "prices" array.')
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"prices": [7,1,5,3,6,4]}.') }
+  }
+  if (!data || typeof data !== "object" || !Array.isArray(data.prices)) throw new Error('Input must be an object with a "prices" array.')
   if (data.prices.length < 1 || data.prices.length > MAX_PRICES) throw new Error(`Use between 1 and ${MAX_PRICES} prices for this trace.`)
-  for (const p of data.prices) if (!Number.isInteger(p) || p < 0 || p > 10000) throw new Error('Prices must be integers from 0 to 10000.')
+  for (const p of data.prices) if (!Number.isInteger(p) || p < 0 || p > 10000) throw new Error("Prices must be integers from 0 to 10000.")
   return { prices: data.prices }
 }
 
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
 export function buildTrace(input) {
-  const prices = input.prices
-  let lowest = prices[0], best = 0
-  const frames = [{ activeLine: L('lowest = first price'), phase: 'init', day: 0, lowest, best, message: `Track the lowest buy price so far: day 0 at ${lowest}.` }]
-  for (let day = 1; day < prices.length; day++) {
-    const price = prices[day]
-    best = Math.max(best, price - lowest)
-    frames.push({ activeLine: L('best = max(best, price - lowest)'), phase: 'sell', day, lowest, best, message: `Selling at ${price} on day ${day} after buying at ${lowest} gives best profit ${best}.` })
-    lowest = Math.min(lowest, price)
-    frames.push({ activeLine: L('lowest = min(lowest, price)'), phase: 'buy', day, lowest, best, message: `Day ${day} at ${price}: the lowest buy price is now ${lowest}.` })
-  }
-  frames.push({ activeLine: L('return best'), phase: 'done', day: prices.length - 1, lowest, best, message: `Maximum profit from one transaction is ${best}.` })
-  return { input, result: best, frames }
+  const story = buildStock1Story(JSON.stringify(input.prices))
+  return { ...story, input, result: story.maxProfit, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'maximum profit from one buy and one later sell' },
-  { line: 2, text: 'lowest = first price' },
-  { line: 3, text: 'best = 0' },
-  { line: 4, text: 'for each price after the first' },
-  { line: 5, text: 'best = max(best, price - lowest)' },
-  { line: 6, text: 'lowest = min(lowest, price)' },
-  { line: 7, text: 'return best' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = STOCK_CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_profit(prices):
     lowest = prices[0]
@@ -334,3 +320,6 @@ export const python = `def max_profit(prices):
         lowest = min(lowest, price)
     return best
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 2: 2, 3: 3, 4: 4, 5: 6, 6: 6, 7: 5, 8: 5, 9: 7 }

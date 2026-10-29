@@ -100,7 +100,7 @@ test('statement examples', () => {
 })
 
 test('validation rejects malformed input with clear errors', () => {
-  assert.throws(() => parseInput('[[1]]'), /object with a "triangle" array/)
+  assert.deepEqual(parseInput('[[1]]'), { triangle: [[1]] })
   assert.throws(() => parseInput('{"triangle":[[1],[2]]}'), /Row 1 must have exactly 2 entries/)
   assert.throws(() => parseInput('{"triangle":[[1.5]]}'), /integers between/)
   assert.throws(() => parseInput('{"triangle":[]}'), /between 1 and 30 rows/)

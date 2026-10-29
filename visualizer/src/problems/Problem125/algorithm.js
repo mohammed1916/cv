@@ -268,57 +268,33 @@ export function buildPalindromeStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
-const MAX_CHARS = 60
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Accepts {"s": "..."} JSON or raw text; the cleaning and matching happen in the scene's builder.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"s": "race a car"}.') }
-  if (!data || typeof data !== 'object' || typeof data.s !== 'string') throw new Error('Input must be an object with a string field "s".')
-  if (data.s.length < 1 || data.s.length > MAX_CHARS) throw new Error(`Use between 1 and ${MAX_CHARS} characters for this trace.`)
-  if (!/^[\x20-\x7e]*$/.test(data.s)) throw new Error('Use printable ASCII characters only.')
-  return { s: data.s }
-}
-
-const isAlnum = c => /[a-z0-9]/i.test(c)
-
-export function buildTrace(input) {
-  const s = input.s
-  let left = 0, right = s.length - 1
-  const frames = []
-  let result = true
-  frames.push({ activeLine: L('left = 0'), phase: 'init', left, right, result: null, message: 'Place one pointer at each end of the phrase.' })
-  while (left < right) {
-    if (!isAlnum(s[left])) {
-      frames.push({ activeLine: L('if s[left] is not alphanumeric'), phase: 'skip', left, right, result: null, message: `Skip "${s[left]}" on the left.` })
-      left++
-    } else if (!isAlnum(s[right])) {
-      frames.push({ activeLine: L('if s[right] is not alphanumeric'), phase: 'skip', left, right, result: null, message: `Skip "${s[right]}" on the right.` })
-      right--
-    } else if (s[left].toLowerCase() !== s[right].toLowerCase()) {
-      frames.push({ activeLine: L('return false'), phase: 'mismatch', left, right, result: false, message: `"${s[left]}" and "${s[right]}" differ, so the phrase is not a palindrome.` })
-      result = false
-      break
-    } else {
-      frames.push({ activeLine: L('move both pointers inward'), phase: 'match', left, right, result: null, message: `"${s[left]}" matches "${s[right]}"; move both inward.` })
-      left++
-      right--
-    }
+  let s
+  if (typeof text !== "string") throw new Error('Input must be an object with a string field "s".')
+  const trimmed = text.trim()
+  if (trimmed.startsWith("{") || trimmed.startsWith('"')) {
+    let data
+    try { data = JSON.parse(trimmed) } catch { throw new Error('Input must be JSON, e.g. {"s": "A man, a plan, a canal: Panama"}.') }
+    if (!data || typeof data !== "object" || typeof data.s !== "string") throw new Error('Input must be an object with a string field "s".')
+    s = data.s
+  } else {
+    s = text
   }
-  if (result) frames.push({ activeLine: L('return true'), phase: 'done', left, right, result: true, message: 'Every compared pair matched, so the phrase is a palindrome.' })
-  return { input, result, frames }
+  if (s.length < 1 || s.length > 60) throw new Error("Use between 1 and 60 characters for this trace.")
+  if (!/^[\x20-\x7e]*$/.test(s)) throw new Error("Use printable ASCII characters only.")
+  return { s }
 }
 
-export const code = [
-  { line: 1, text: 'is the phrase a palindrome ignoring case and non-alphanumeric characters' },
-  { line: 2, text: 'left = 0, right = last index' },
-  { line: 3, text: 'while left is less than right' },
-  { line: 4, text: 'if s[left] is not alphanumeric, move left right' },
-  { line: 5, text: 'if s[right] is not alphanumeric, move right left' },
-  { line: 6, text: 'if lowercase s[left] differs from lowercase s[right], return false' },
-  { line: 7, text: 'move both pointers inward' },
-  { line: 8, text: 'return true' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
+export function buildTrace(input) {
+  const story = buildPalindromeStory(input.s)
+  return { ...story, input, result: story.isValid, frames: withMessages(story.frames) }
+}
+
+export const code = PALINDROME_CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def is_palindrome(s):
     left = 0
@@ -335,3 +311,6 @@ export const python = `def is_palindrome(s):
             right -= 1
     return True
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 2: 5, 3: 2, 5: 9, 6: 12, 7: 14 }

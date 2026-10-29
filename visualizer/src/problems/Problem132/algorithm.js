@@ -408,57 +408,32 @@ export function buildMinCutStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
 const MAX_LEN = 40
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Accepts {"s": "..."} JSON or raw lowercase text.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"s": "aab"}.') }
-  if (!data || typeof data !== 'object' || typeof data.s !== 'string') throw new Error('Input must be an object with a string field "s".')
-  if (data.s.length < 1 || data.s.length > MAX_LEN) throw new Error(`Use between 1 and ${MAX_LEN} characters for this trace.`)
-  if (!/^[a-z]+$/.test(data.s)) throw new Error('Use lowercase English letters only.')
-  return { s: data.s }
+  if (typeof text !== "string") throw new Error('Input must be an object with a string field "s".')
+  const trimmed = text.trim()
+  let s = trimmed
+  if (trimmed.startsWith("{") || trimmed.startsWith('"')) {
+    let data
+    try { data = JSON.parse(trimmed) } catch { throw new Error('Input must be JSON, e.g. {"s": "aab"}.') }
+    if (!data || typeof data !== "object" || typeof data.s !== "string") throw new Error('Input must be an object with a string field "s".')
+    s = data.s
+  }
+  if (s.length < 1 || s.length > MAX_LEN) throw new Error(`Use between 1 and ${MAX_LEN} characters for this trace.`)
+  if (!/^[a-z]+$/.test(s)) throw new Error("Use lowercase English letters only.")
+  return { s }
 }
 
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
 export function buildTrace(input) {
-  const s = input.s, n = s.length
-  const isPal = Array.from({ length: n }, () => Array(n).fill(false))
-  const frames = []
-  for (let i = n - 1; i >= 0; i--) {
-    for (let j = i; j < n; j++) {
-      isPal[i][j] = s[i] === s[j] && (j - i < 2 || isPal[i + 1][j - 1])
-    }
-    frames.push({ activeLine: L('for j from i to the end'), phase: 'palindromes', i, j: null, cuts: null, message: `Palindrome table filled for substrings starting at ${i}.` })
-  }
-  const cuts = Array(n).fill(0)
-  for (let i = 0; i < n; i++) {
-    if (isPal[0][i]) {
-      cuts[i] = 0
-      frames.push({ activeLine: L('if is_pal[0][i]'), phase: 'whole', i, j: null, cuts: cuts[i], message: `s[0..${i}] is a palindrome: 0 cuts.` })
-    } else {
-      let best = Infinity, bestJ = -1
-      for (let j = 1; j <= i; j++) if (isPal[j][i] && cuts[j - 1] + 1 < best) { best = cuts[j - 1] + 1; bestJ = j }
-      cuts[i] = best
-      frames.push({ activeLine: L('cuts[i] = 1 + minimum'), phase: 'split', i, j: bestJ, cuts: cuts[i], message: `Best last piece for prefix ${i} starts at ${bestJ}: ${cuts[i]} cuts.` })
-    }
-  }
-  const result = cuts[n - 1]
-  frames.push({ activeLine: L('return cuts[n - 1]'), phase: 'done', i: n - 1, j: null, cuts: result, message: `Minimum cuts for the whole string is ${result}.` })
-  return { input, result, frames }
+  const story = buildMinCutStory(input.s)
+  return { ...story, input, result: story.minCuts, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'minimum cuts so every piece is a palindrome' },
-  { line: 2, text: 'is_pal[i][j] is true when s[i..j] is a palindrome' },
-  { line: 3, text: 'for i from the end down to the start' },
-  { line: 4, text: 'for j from i to the end' },
-  { line: 5, text: 'is_pal[i][j] = s[i] equals s[j] and (short or is_pal[i+1][j-1])' },
-  { line: 6, text: 'cuts[i] = minimum cuts for s[0..i]' },
-  { line: 7, text: 'for each end index i from 0 to n-1' },
-  { line: 8, text: 'if is_pal[0][i] then cuts[i] = 0' },
-  { line: 9, text: 'else cuts[i] = 1 + minimum of cuts[j-1] where is_pal[j][i]' },
-  { line: 10, text: 'return cuts[n - 1]' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def min_cut(s):
     n = len(s)
@@ -474,3 +449,6 @@ export const python = `def min_cut(s):
             cuts[i] = min(cuts[j - 1] + 1 for j in range(1, i + 1) if is_pal[j][i])
     return cuts[n - 1]
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 3: 7, 4: 4, 6: 6, 7: 6, 8: 12, 9: 6, 11: 6, 12: 6, 13: 12, 14: 6, 15: 13 }

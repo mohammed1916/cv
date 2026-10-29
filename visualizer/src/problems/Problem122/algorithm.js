@@ -220,40 +220,28 @@ export function buildStock2Story(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
 const MAX_PRICES = 60
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Accepts {"prices": [...]} JSON (the registry values shape) and returns validated prices.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"prices": [7,1,5,3,6,4]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.prices)) throw new Error('Input must be an object with a "prices" array.')
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"prices": [7,1,5,3,6,4]}.') }
+  }
+  if (!data || typeof data !== "object" || !Array.isArray(data.prices)) throw new Error('Input must be an object with a "prices" array.')
   if (data.prices.length < 1 || data.prices.length > MAX_PRICES) throw new Error(`Use between 1 and ${MAX_PRICES} prices for this trace.`)
-  for (const p of data.prices) if (!Number.isInteger(p) || p < 0 || p > 10000) throw new Error('Prices must be integers from 0 to 10000.')
+  for (const p of data.prices) if (!Number.isInteger(p) || p < 0 || p > 10000) throw new Error("Prices must be integers from 0 to 10000.")
   return { prices: data.prices }
 }
 
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
 export function buildTrace(input) {
-  const prices = input.prices
-  let total = 0
-  const frames = [{ activeLine: L('total = 0'), phase: 'init', day: 0, total, message: 'No profit yet. Every upward move between neighbouring days can be captured.' }]
-  for (let day = 1; day < prices.length; day++) {
-    const rise = prices[day] - prices[day - 1]
-    frames.push({ activeLine: L('if price today is above'), phase: 'check', day, total, message: `Day ${day}: ${prices[day - 1]} to ${prices[day]} is a change of ${rise}.` })
-    if (rise > 0) total += rise
-    frames.push({ activeLine: rise > 0 ? L('total = total +') : L('total = total +'), phase: rise > 0 ? 'gain' : 'skip', day, total, message: rise > 0 ? `Capture the rise of ${rise}; total is now ${total}.` : 'No rise, so no trade is made on this step.' })
-  }
-  frames.push({ activeLine: L('return total'), phase: 'done', day: prices.length - 1, total, message: `Maximum profit with unlimited transactions is ${total}.` })
-  return { input, result: total, frames }
+  const story = buildStock2Story(JSON.stringify(input.prices))
+  return { ...story, input, result: story.totalProfit, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'maximum profit with unlimited transactions' },
-  { line: 2, text: 'total = 0' },
-  { line: 3, text: 'for each day from the second onward' },
-  { line: 4, text: 'if price today is above price yesterday' },
-  { line: 5, text: 'total = total + (today minus yesterday)' },
-  { line: 6, text: 'return total' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = STOCK_CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def max_profit(prices):
     total = 0
@@ -262,3 +250,6 @@ export const python = `def max_profit(prices):
             total = total + (prices[i] - prices[i - 1])
     return total
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 2: 2, 3: 3, 4: 4, 5: 5, 6: 6 }

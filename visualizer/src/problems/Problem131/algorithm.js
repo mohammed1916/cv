@@ -292,60 +292,32 @@ export function buildPartitionStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
 const MAX_LEN = 16
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Accepts {"s": "..."} JSON or raw lowercase text.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"s": "aab"}.') }
-  if (!data || typeof data !== 'object' || typeof data.s !== 'string') throw new Error('Input must be an object with a string field "s".')
-  if (data.s.length < 1 || data.s.length > MAX_LEN) throw new Error(`Use between 1 and ${MAX_LEN} characters for this trace.`)
-  if (!/^[a-z]+$/.test(data.s)) throw new Error('Use lowercase English letters only.')
-  return { s: data.s }
-}
-
-export function buildTrace(input) {
-  const s = input.s
-  const result = [], path = []
-  const frames = []
-  const isPal = t => t === [...t].reverse().join('')
-  const backtrack = start => {
-    if (start === s.length) {
-      result.push([...path])
-      frames.push({ activeLine: L('add a copy of path'), phase: 'record', start, path: [...path], result: result.length, message: `Whole string used: record partition ${path.join(' | ')}.` })
-      return
-    }
-    for (let end = start + 1; end <= s.length; end++) {
-      const piece = s.slice(start, end)
-      frames.push({ activeLine: L('piece = s[start:end]'), phase: 'try', start, path: [...path], piece, result: result.length, message: `Try piece "${piece}" starting at ${start}.` })
-      if (isPal(piece)) {
-        path.push(piece)
-        frames.push({ activeLine: L('push piece onto path'), phase: 'push', start, path: [...path], piece, result: result.length, message: `"${piece}" is a palindrome: keep it and continue from ${end}.` })
-        backtrack(end)
-        path.pop()
-        frames.push({ activeLine: L('pop piece from path'), phase: 'pop', start, path: [...path], piece, result: result.length, message: `Undo "${piece}" and try the next piece.` })
-      }
-    }
+  if (typeof text !== "string") throw new Error('Input must be an object with a string field "s".')
+  const trimmed = text.trim()
+  let s = trimmed
+  if (trimmed.startsWith("{") || trimmed.startsWith('"')) {
+    let data
+    try { data = JSON.parse(trimmed) } catch { throw new Error('Input must be JSON, e.g. {"s": "aab"}.') }
+    if (!data || typeof data !== "object" || typeof data.s !== "string") throw new Error('Input must be an object with a string field "s".')
+    s = data.s
   }
-  backtrack(0)
-  frames.push({ activeLine: L('return result'), phase: 'done', start: s.length, path: [], piece: null, result: result.length, message: `${result.length} palindrome partitions found.` })
-  return { input, result, frames }
+  if (s.length < 1 || s.length > MAX_LEN) throw new Error(`Use between 1 and ${MAX_LEN} characters for this trace.`)
+  if (!/^[a-z]+$/.test(s)) throw new Error("Use lowercase English letters only.")
+  return { s }
 }
 
-export const code = [
-  { line: 1, text: 'all ways to split s into palindromic pieces' },
-  { line: 2, text: 'result is empty and path is empty' },
-  { line: 3, text: 'backtrack(start) explores partitions from start' },
-  { line: 4, text: 'if start is at the end, add a copy of path to result' },
-  { line: 5, text: 'for each end from start plus 1 to the length' },
-  { line: 6, text: 'piece = s[start:end]' },
-  { line: 7, text: 'if piece is a palindrome' },
-  { line: 8, text: 'push piece onto path' },
-  { line: 9, text: 'backtrack(end)' },
-  { line: 10, text: 'pop piece from path' },
-  { line: 11, text: 'call backtrack(0)' },
-  { line: 12, text: 'return result' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
+export function buildTrace(input) {
+  const story = buildPartitionStory(input.s)
+  return { ...story, input, result: story.partitions, frames: withMessages(story.frames) }
+}
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def palindrome_partition(s):
     result = []
@@ -365,3 +337,6 @@ export const python = `def palindrome_partition(s):
     backtrack(0)
     return result
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 2: 2, 4: 6, 5: 7, 6: 8, 8: 10, 9: 11, 10: 13, 11: 16, 12: 17 }

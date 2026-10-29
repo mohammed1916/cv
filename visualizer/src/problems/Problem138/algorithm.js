@@ -869,62 +869,36 @@ export function buildCopyRandomListStory(input) {
   return { original, frames };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
-const MAX_NODES = 20
+const MAX_NODES = 30
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Pairs of [val, random_index]; random_index is null or a 0-based node index, e.g. {"pairs": [[7,null],[13,0]]}.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"pairs": [[7,null],[13,0]]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.pairs)) throw new Error('Input must be an object with a "pairs" array.')
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"pairs": [[7,null],[13,0]]}.') }
+  }
+  if (!data || typeof data !== "object" || !Array.isArray(data.pairs)) throw new Error('Input must be an object with a "pairs" array.')
   const pairs = data.pairs
   if (pairs.length > MAX_NODES) throw new Error(`Use at most ${MAX_NODES} nodes for this trace.`)
-  pairs.forEach(p => {
-    if (!Array.isArray(p) || p.length !== 2) throw new Error('Each node must be [val, random_index].')
-    if (!Number.isInteger(p[0]) || p[0] < -100 || p[0] > 100) throw new Error('Values must be integers from -100 to 100.')
-    if (p[1] !== null && (!Number.isInteger(p[1]) || p[1] < 0 || p[1] >= pairs.length)) throw new Error('random_index must be null or a valid 0-based node index.')
-  })
+  for (const pair of pairs) {
+    if (!Array.isArray(pair) || pair.length !== 2) throw new Error("Each node must be [val, random_index].")
+    const [val, random] = pair
+    if (!Number.isInteger(val) || val < -100 || val > 100) throw new Error("Node values must be integers from -100 to 100.")
+    if (random !== null && (!Number.isInteger(random) || random < 0 || random >= pairs.length)) throw new Error("random_index must be null or a valid 0-based node index.")
+  }
   return { pairs }
 }
 
+// The scene's story builder runs unchanged; the result is the copied list as [val, random_index] pairs.
 export function buildTrace(input) {
-  const pairs = input.pairs
-  const originals = pairs.map(([val]) => ({ val, next: null, random: null }))
-  pairs.forEach(([, r], i) => {
-    if (i + 1 < originals.length) originals[i].next = originals[i + 1]
-    originals[i].random = r === null ? null : originals[r]
-  })
-  const map = new Map()
-  const frames = []
-  for (const node of originals) {
-    map.set(node, { val: node.val, next: null, random: null })
-    frames.push({ activeLine: L('create a copy with the same value'), phase: 'copy', index: originals.indexOf(node), message: `Copy node ${node.val} and record it in the map.` })
-  }
-  for (const node of originals) {
-    const copy = map.get(node)
-    copy.next = node.next === null ? null : map.get(node.next)
-    copy.random = node.random === null ? null : map.get(node.random)
-    frames.push({ activeLine: L('copy.random = map'), phase: 'link', index: originals.indexOf(node), message: `Point the copy of ${node.val} at its next and random copies.` })
-  }
-  const head = originals.length ? map.get(originals[0]) : null
-  const result = []
-  const order = []
-  for (let c = head; c !== null; c = c.next) order.push(c)
-  for (const c of order) result.push([c.val, c.random === null ? null : order.indexOf(c.random)])
-  frames.push({ activeLine: L('return the copy of head'), phase: 'done', index: null, message: `The copy has ${result.length} nodes, none shared with the original.` })
-  return { input, result, frames }
+  const story = buildCopyRandomListStory(JSON.stringify(input.pairs))
+  const last = story.frames[story.frames.length - 1]
+  const result = last.clonedNodes.map(node => [node.val, node.random ?? null])
+  return { ...story, input, result, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'deep copy of a list whose nodes have next and random pointers' },
-  { line: 2, text: 'if head is empty, return empty' },
-  { line: 3, text: 'map = empty map from original node to its copy' },
-  { line: 4, text: 'first pass: for each original node, create a copy with the same value' },
-  { line: 5, text: 'record the copy in map' },
-  { line: 6, text: 'second pass: for each original node' },
-  { line: 7, text: 'copy.next = map of original.next, or null' },
-  { line: 8, text: 'copy.random = map of original.random, or null' },
-  { line: 9, text: 'return the copy of head' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def copy_random_list(pairs):
     originals = [{"val": v, "next": None, "random": None} for v, _ in pairs]
@@ -947,3 +921,6 @@ export const python = `def copy_random_list(pairs):
     position = {id(c): i for i, c in enumerate(order)}
     return [[c["val"], None if c["random"] is None else position[id(c["random"])]] for c in order]
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 1: 1, 2: 2, 3: 2, 4: 7, 5: 9, 6: 9, 7: 9, 8: 9, 9: 10, 10: 10, 11: 11, 12: 13, 13: 13, 14: 14, 15: 15, 16: 16, 17: 17, 18: 18, 19: 18, 20: 18, 21: 18, 22: 20 }

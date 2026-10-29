@@ -183,6 +183,23 @@ describe('Problem 129: Sum Root to Leaf Numbers', () => {
 // ─── Statement contract tests (parseInput / buildTrace / python) ───
 import { parseInput, buildTrace, code, python } from './algorithm.js'
 
+
+// Level-order slots that cannot be reached from the root are ignored by the oracle, so the
+// generated array is normalised the same way before it is parsed (the parser rejects orphans).
+function normalizeTree(values) {
+  const out = [...values]
+  const attached = new Set([0])
+  const queue = [0]
+  let cursor = 1
+  for (let qi = 0; qi < queue.length; qi++) {
+    for (let side = 0; side < 2; side++) {
+      const idx = cursor++
+      if (idx < out.length && out[idx] !== null) { attached.add(idx); queue.push(idx) }
+    }
+  }
+  return out.map((value, i) => (attached.has(i) || value === null ? value : null))
+}
+
 it('statement examples', () => {
   assert.equal(buildTrace(parseInput('{"root":[1,2,3]}')).result, 25)
   assert.equal(buildTrace(parseInput('{"root":[4,9,0,5,1]}')).result, 1026)
@@ -232,6 +249,7 @@ it('seeded random trees match a path-enumeration oracle', () => {
     const len = 1 + rnd(12)
     const root = Array.from({ length: len }, (_, i) => (i > 0 && rnd(3) === 0 ? null : rnd(10)))
     root[0] = root[0] === null ? 5 : root[0]
-    assert.equal(buildTrace(parseInput(JSON.stringify({ root }))).result, oracle(root), JSON.stringify(root))
+    const tree = normalizeTree(root)
+    assert.equal(buildTrace(parseInput(JSON.stringify({ root: tree }))).result, oracle(tree), JSON.stringify(tree))
   }
 })

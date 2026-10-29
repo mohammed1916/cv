@@ -217,47 +217,31 @@ export function buildTriangleStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
 const MAX_ROWS = 30
+
+// Accepts a bare triangle array (registry shape), {"triangle": [...]} JSON, or the same as parsed values.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"triangle": [[2],[3,4],[6,5,7],[4,1,8,3]]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.triangle)) throw new Error('Input must be an object with a "triangle" array.')
-  const rows = data.triangle
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON: a triangle like [[2],[3,4],[6,5,7]] or {"triangle": [[2],[3,4],[6,5,7]]}.') }
+  }
+  const rows = Array.isArray(data) ? data : data && typeof data === "object" ? data.triangle : undefined
+  if (!Array.isArray(rows)) throw new Error('Input must be a triangle array or an object with a "triangle" array.')
   if (rows.length < 1 || rows.length > MAX_ROWS) throw new Error(`Use between 1 and ${MAX_ROWS} rows for this trace.`)
   rows.forEach((row, r) => {
     if (!Array.isArray(row) || row.length !== r + 1) throw new Error(`Row ${r} must have exactly ${r + 1} entries.`)
-    for (const v of row) if (!Number.isInteger(v) || Math.abs(v) > 10000) throw new Error('Values must be integers between -10000 and 10000.')
+    for (const v of row) if (!Number.isInteger(v) || Math.abs(v) > 10000) throw new Error("Values must be integers between -10000 and 10000.")
   })
   return { triangle: rows }
 }
 
+// Frames come from the scene's story builder, so every field the scene reads is present.
 export function buildTrace(input) {
-  const tri = input.triangle
-  const last = tri.length - 1
-  const best = [...tri[last]]
-  const frames = [{ activeLine: L('best = copy of the last row'), phase: 'init', row: last, col: null, value: null, message: 'Start with the bottom row: each entry is the best sum from there down.' }]
-  for (let r = last - 1; r >= 0; r--) {
-    frames.push({ activeLine: L('for each index k'), phase: 'row', row: r, col: null, value: null, message: `Fold row ${r} into the best sums below it.` })
-    for (let k = 0; k <= r; k++) {
-      best[k] = tri[r][k] + Math.min(best[k], best[k + 1])
-      frames.push({ activeLine: L('best[k] = row[k]'), phase: 'cell', row: r, col: k, value: best[k], message: `Cell (${r},${k}) = ${tri[r][k]} + min of the two children = ${best[k]}.` })
-    }
-  }
-  const result = best[0]
-  frames.push({ activeLine: L('return best[0]'), phase: 'done', row: 0, col: 0, value: result, message: `Minimum top-to-bottom path sum is ${result}.` })
-  return { input, result, frames, best }
+  const story = buildTriangleStory(input.triangle)
+  return { ...story, input, result: story.minTotal }
 }
 
-export const code = [
-  { line: 1, text: 'minimum path sum from top to bottom' },
-  { line: 2, text: 'best = copy of the last row' },
-  { line: 3, text: 'for each row from the second-last up to the top' },
-  { line: 4, text: 'for each index k in the row' },
-  { line: 5, text: 'best[k] = row[k] plus min of best[k] and best[k + 1]' },
-  { line: 6, text: 'return best[0]' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = TRIANGLE_CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def minimum_total(triangle):
     best = list(triangle[-1])
@@ -266,3 +250,6 @@ export const python = `def minimum_total(triangle):
             best[k] = triangle[r][k] + min(best[k], best[k + 1])
     return best[0]
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 2: 2, 3: 2, 5: 4, 6: 5, 7: 6 }

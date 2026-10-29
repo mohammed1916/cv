@@ -398,43 +398,34 @@ export function buildSingleNumberStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
-const MAX_VALUES = 41
+const MAX_VALUES = 3001
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Accepts {"nums": [...]} JSON (the registry values shape).
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"nums": [2,2,1]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.nums)) throw new Error('Input must be an object with a "nums" array.')
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"nums": [4,1,2,1,2]}.') }
+  }
+  if (!data || typeof data !== "object" || !Array.isArray(data.nums)) throw new Error('Input must be an object with a "nums" array.')
   const nums = data.nums
   if (nums.length < 1 || nums.length > MAX_VALUES) throw new Error(`Use between 1 and ${MAX_VALUES} values for this trace.`)
-  if (nums.length % 2 === 0) throw new Error('Every value appears twice except one, so the length must be odd.')
-  for (const v of nums) if (!Number.isInteger(v) || Math.abs(v) > 30000) throw new Error('Values must be integers from -30000 to 30000.')
+  if (nums.length % 2 === 0) throw new Error("The array length must be odd so one value can stand alone.")
+  for (const v of nums) if (!Number.isInteger(v) || v < -30000 || v > 30000) throw new Error("Values must be integers from -30000 to 30000.")
   const counts = new Map()
-  for (const v of nums) counts.set(v, (counts.get(v) || 0) + 1)
+  for (const v of nums) counts.set(v, (counts.get(v) ?? 0) + 1)
   const singles = [...counts.values()].filter(c => c === 1).length
-  if (singles !== 1 || [...counts.values()].some(c => c !== 1 && c !== 2)) throw new Error('Exactly one value must appear once and every other value must appear twice.')
+  if (singles !== 1 || [...counts.values()].some(c => c !== 1 && c !== 2)) throw new Error("Exactly one value must appear once and every other value must appear twice.")
   return { nums }
 }
 
+// The scene's story builder runs unchanged; the result is the value that appears once.
 export function buildTrace(input) {
-  const nums = input.nums
-  let result = 0
-  const frames = [{ activeLine: L('result = 0'), phase: 'init', index: null, value: null, result, message: 'Start with 0. XOR cancels any value that appears twice.' }]
-  nums.forEach((v, i) => {
-    result ^= v
-    frames.push({ activeLine: L('result = result XOR number'), phase: 'xor', index: i, value: v, result, message: `XOR ${v} into the running value: now ${result}.` })
-  })
-  frames.push({ activeLine: L('return result'), phase: 'done', index: null, value: null, result, message: `The value that appears once is ${result}.` })
-  return { input, result, frames }
+  const story = buildSingleNumberStory(JSON.stringify(input.nums))
+  return { ...story, input, result: story.singleVal, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'find the value that appears once when all others appear twice' },
-  { line: 2, text: 'result = 0' },
-  { line: 3, text: 'for each number in nums' },
-  { line: 4, text: 'result = result XOR number' },
-  { line: 5, text: 'return result' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def single_number(nums):
     result = 0
@@ -442,3 +433,6 @@ export const python = `def single_number(nums):
         result ^= num
     return result
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 2: 2, 3: 3, 4: 4, 5: 5 }

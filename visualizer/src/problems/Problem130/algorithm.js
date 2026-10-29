@@ -363,69 +363,33 @@ export function buildSurroundedStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
-const MAX_SIDE = 6
+const MAX_SIDE = 20
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Board rows of "X" and "O" cells, e.g. {"board": [["X","X"],["X","O"]]}.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"board": [["X","O"],["X","X"]]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.board)) throw new Error('Input must be an object with a "board" array of rows.')
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"board": [["X","O"],["X","X"]]}.') }
+  }
+  if (!data || typeof data !== "object" || !Array.isArray(data.board)) throw new Error('Input must be an object with a "board" array.')
   const board = data.board
   if (board.length < 1 || board.length > MAX_SIDE) throw new Error(`Use between 1 and ${MAX_SIDE} rows for this trace.`)
-  const cols = Array.isArray(board[0]) ? board[0].length : 0
-  if (cols < 1 || cols > MAX_SIDE) throw new Error(`Use between 1 and ${MAX_SIDE} columns for this trace.`)
-  board.forEach(row => {
-    if (!Array.isArray(row) || row.length !== cols) throw new Error('Every row must have the same number of cells.')
-    for (const c of row) if (c !== 'X' && c !== 'O') throw new Error('Cells must be "X" or "O".')
-  })
+  if (!Array.isArray(board[0]) || board[0].length < 1 || board[0].length > MAX_SIDE) throw new Error(`Use between 1 and ${MAX_SIDE} columns for this trace.`)
+  for (const row of board) {
+    if (!Array.isArray(row) || row.length !== board[0].length) throw new Error("Every row must have the same number of cells.")
+    for (const cell of row) if (cell !== "X" && cell !== "O") throw new Error('Cells must be "X" or "O".')
+  }
   return { board }
 }
 
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
 export function buildTrace(input) {
-  const src = input.board
-  const rows = src.length, cols = src[0].length
-  const board = src.map(r => [...r])
-  const safe = Array.from({ length: rows }, () => Array(cols).fill(false))
-  const frames = []
-  const stack = []
-  const mark = (r, c) => { safe[r][c] = true; stack.push([r, c]) }
-  frames.push({ activeLine: L('mark every O on the border'), phase: 'border', row: null, col: null, board: board.map(r => [...r]), message: 'Start from the border: an O on the edge can never be surrounded.' })
-  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-    const onEdge = r === 0 || c === 0 || r === rows - 1 || c === cols - 1
-    if (onEdge && board[r][c] === 'O' && !safe[r][c]) {
-      mark(r, c)
-      frames.push({ activeLine: L('mark every O on the border'), phase: 'border', row: r, col: c, board: board.map(x => [...x]), message: `Border O at (${r},${c}) is safe.` })
-    }
-  }
-  while (stack.length) {
-    const [r, c] = stack.pop()
-    for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-      const nr = r + dr, nc = c + dc
-      if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && board[nr][nc] === 'O' && !safe[nr][nc]) {
-        mark(nr, nc)
-        frames.push({ activeLine: L('flood safe'), phase: 'flood', row: nr, col: nc, board: board.map(x => [...x]), message: `(${nr},${nc}) connects to a safe O, so it is safe too.` })
-      }
-    }
-  }
-  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-    if (board[r][c] === 'O' && !safe[r][c]) {
-      board[r][c] = 'X'
-      frames.push({ activeLine: L('change it to X'), phase: 'flip', row: r, col: c, board: board.map(x => [...x]), message: `(${r},${c}) is enclosed, so it flips to X.` })
-    }
-  }
-  frames.push({ activeLine: L('return board'), phase: 'done', row: null, col: null, board: board.map(x => [...x]), message: 'Every O not connected to the border is now X.' })
-  return { input, result: board, frames }
+  const story = buildSurroundedStory(JSON.stringify(input.board))
+  return { ...story, input, result: story.finalBoard, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'flip every O region not connected to the border' },
-  { line: 2, text: 'mark every O on the border as safe' },
-  { line: 3, text: 'while there are safe cells to expand' },
-  { line: 4, text: 'flood safe to O neighbours' },
-  { line: 5, text: 'for each cell in the board' },
-  { line: 6, text: 'if the cell is O and not safe, change it to X' },
-  { line: 7, text: 'return board' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def solve(board):
     rows = len(board)
@@ -451,3 +415,6 @@ export const python = `def solve(board):
                 board[r][c] = "X"
     return board
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 1: 1, 3: 2, 7: 10, 8: 14, 9: 9, 10: 10, 11: 9, 12: 10, 13: 19, 15: 21, 16: 21 }

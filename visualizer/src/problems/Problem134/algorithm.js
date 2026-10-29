@@ -448,50 +448,29 @@ export function buildGasStationStory(gasInput, costInput, options = {}) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
-const MAX_STATIONS = 40
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Two equal-length arrays: {"gas": [...], "cost": [...]}.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"gas": [1,2,3,4,5], "cost": [3,4,5,1,2]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.gas) || !Array.isArray(data.cost)) throw new Error('Input must be an object with "gas" and "cost" arrays.')
-  if (data.gas.length < 1 || data.gas.length > MAX_STATIONS) throw new Error(`Use between 1 and ${MAX_STATIONS} stations for this trace.`)
-  if (data.gas.length !== data.cost.length) throw new Error('"gas" and "cost" must have the same length.')
-  for (const v of [...data.gas, ...data.cost]) if (!Number.isInteger(v) || v < 0 || v > 10000) throw new Error('Gas and cost values must be integers from 0 to 10000.')
-  return { gas: data.gas, cost: data.cost }
-}
-
-export function buildTrace(input) {
-  const { gas, cost } = input
-  const n = gas.length
-  let total = 0, tank = 0, start = 0
-  const frames = [{ activeLine: L('total = 0, tank = 0'), phase: 'init', station: null, start, tank, total, message: 'Start with an empty tank and assume station 0 is the start.' }]
-  for (let i = 0; i < n; i++) {
-    const gain = gas[i] - cost[i]
-    total += gain
-    tank += gain
-    frames.push({ activeLine: L('tank = tank + gain'), phase: 'drive', station: i, start, tank, total, message: `Station ${i}: gain ${gas[i]} - ${cost[i]} = ${gain}; tank is ${tank}.` })
-    if (tank < 0) {
-      start = i + 1
-      tank = 0
-      frames.push({ activeLine: L('start = i + 1'), phase: 'restart', station: i, start, tank, total, message: `The tank went negative, so the start moves to station ${start}.` })
-    }
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"gas": [1,2,3,4,5], "cost": [3,4,5,1,2]}.') }
   }
-  const result = total >= 0 ? start : -1
-  frames.push({ activeLine: L('return start if total'), phase: 'done', station: null, start, tank, total, message: result === -1 ? `Total gain is ${total}, so no start works.` : `Start at station ${result}.` })
-  return { input, result, frames }
+  if (!data || typeof data !== "object" || !Array.isArray(data.gas) || !Array.isArray(data.cost)) throw new Error('Input must be an object with "gas" and "cost" arrays.')
+  const { gas, cost } = data
+  if (gas.length < 1 || gas.length > 40) throw new Error("Use between 1 and 40 stations for this trace.")
+  if (gas.length !== cost.length) throw new Error("gas and cost must have the same length.")
+  for (const v of [...gas, ...cost]) if (!Number.isInteger(v) || v < 0 || v > 10000) throw new Error("Values must be integers from 0 to 10000.")
+  return { gas, cost }
 }
 
-export const code = [
-  { line: 1, text: 'index of a station that completes the circuit, or -1' },
-  { line: 2, text: 'total = 0, tank = 0, start = 0' },
-  { line: 3, text: 'for each station i from 0 to n - 1' },
-  { line: 4, text: 'gain = gas[i] - cost[i]' },
-  { line: 5, text: 'total = total + gain' },
-  { line: 6, text: 'tank = tank + gain' },
-  { line: 7, text: 'if tank is negative, start = i + 1 and reset tank to 0' },
-  { line: 8, text: 'return start if total is not negative, else -1' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+// The scene's story builder runs unchanged; the result is the starting station or -1.
+export function buildTrace(input) {
+  const story = buildGasStationStory(input.gas, input.cost)
+  return { ...story, input, result: story.canComplete ? story.startStation : -1, frames: withMessages(story.frames) }
+}
+
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def can_complete_circuit(gas, cost):
     total = 0
@@ -506,3 +485,6 @@ export const python = `def can_complete_circuit(gas, cost):
             tank = 0
     return start if total >= 0 else -1
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 1: 1, 2: 12, 3: 2, 4: 5, 5: 7, 6: 8, 7: 9, 8: 10, 9: 11, 10: 12 }

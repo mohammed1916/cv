@@ -176,6 +176,23 @@ describe('Problem 124: Binary Tree Maximum Path Sum', () => {
 // ─── Statement contract tests (parseInput / buildTrace / python) ───
 import { parseInput, buildTrace, code, python } from './algorithm.js'
 
+
+// Level-order slots that cannot be reached from the root are ignored by the oracle, so the
+// generated array is normalised the same way before it is parsed (the parser rejects orphans).
+function normalizeTree(values) {
+  const out = [...values]
+  const attached = new Set([0])
+  const queue = [0]
+  let cursor = 1
+  for (let qi = 0; qi < queue.length; qi++) {
+    for (let side = 0; side < 2; side++) {
+      const idx = cursor++
+      if (idx < out.length && out[idx] !== null) { attached.add(idx); queue.push(idx) }
+    }
+  }
+  return out.map((value, i) => (attached.has(i) || value === null ? value : null))
+}
+
 it('statement examples', () => {
   assert.equal(buildTrace(parseInput('{"root":[1,2,3]}')).result, 6)
   assert.equal(buildTrace(parseInput('{"root":[-10,9,20,null,null,15,7]}')).result, 42)
@@ -226,6 +243,7 @@ it('seeded random trees match a brute-force oracle over all node pairs', () => {
     const len = 1 + rnd(15)
     const root = Array.from({ length: len }, (_, i) => (i > 0 && rnd(3) === 0 ? null : rnd(201) - 100))
     root[0] = root[0] === null ? 0 : root[0]
-    assert.equal(buildTrace(parseInput(JSON.stringify({ root }))).result, brute(root), JSON.stringify(root))
+    const tree = normalizeTree(root)
+    assert.equal(buildTrace(parseInput(JSON.stringify({ root: tree }))).result, brute(tree), JSON.stringify(tree))
   }
 })

@@ -377,64 +377,32 @@ export function buildSumNumbersStory(input) {
   };
 }
 
-// ─── Statement contract: parseInput / buildTrace / code / python ───
-const MAX_SLOTS = 15
+const MAX_NODES = 15
+const withMessages = frames => frames.map(frame => ({ ...frame, message: frame.message ?? frame.explanation ?? "" }))
+
+// Level-order array of digits with null for missing children, e.g. {"root": [4,9,0,5,1]}.
 export function parseInput(text) {
-  let data
-  try { data = JSON.parse(text) } catch { throw new Error('Input must be JSON, e.g. {"root": [1,2,3]}.') }
-  if (!data || typeof data !== 'object' || !Array.isArray(data.root)) throw new Error('Input must be an object with a "root" array.')
+  let data = text
+  if (typeof text === "string") {
+    try { data = JSON.parse(text.trim()) } catch { throw new Error('Input must be JSON, e.g. {"root": [4,9,0,5,1]}.') }
+  }
+  if (!data || typeof data !== "object" || !Array.isArray(data.root)) throw new Error('Input must be an object with a "root" array.')
   const root = data.root
-  if (root.length < 1 || root.length > MAX_SLOTS) throw new Error(`Use between 1 and ${MAX_SLOTS} slots for this trace.`)
-  if (root[0] === null) throw new Error('The root slot cannot be null; a tree needs at least one node.')
-  for (const v of root) if (v !== null && (!Number.isInteger(v) || v < 0 || v > 9)) throw new Error('Values must be digits 0 to 9 or null.')
+  if (root.length < 1 || root.length > MAX_NODES) throw new Error(`Use between 1 and ${MAX_NODES} root slots for this trace.`)
+  if (root[0] === null) throw new Error("root slot cannot be null: the tree needs a root digit.")
+  for (const value of root) {
+    if (value !== null && (!Number.isInteger(value) || value < 0 || value > 9)) throw new Error("Node values must be digits 0 to 9.")
+  }
   return { root }
 }
 
-function slotLinksDigits(root) {
-  const n = root.length, left = Array(n).fill(null), right = Array(n).fill(null)
-  const queue = [0]; let next = 1
-  for (let head = 0; head < queue.length; head++) {
-    const i = queue[head]
-    for (const side of ['left', 'right']) {
-      const slot = next++
-      if (slot < n && root[slot] !== null) { (side === 'left' ? left : right)[i] = slot; queue.push(slot) }
-    }
-  }
-  return { left, right }
-}
-
+// The scene's story builder runs unchanged; its frames carry phase, activeLine and message.
 export function buildTrace(input) {
-  const root = input.root
-  const { left, right } = slotLinksDigits(root)
-  const frames = []
-  let total = 0
-  const visit = (id, prefix) => {
-    if (id === null) return
-    const number = prefix * 10 + root[id]
-    frames.push({ activeLine: L('number = prefix * 10'), phase: 'extend', node: id, prefix, number, total, message: `Extend the path to ${number} at digit ${root[id]}.` })
-    if (left[id] === null && right[id] === null) {
-      total += number
-      frames.push({ activeLine: L('if node has no children'), phase: 'leaf', node: id, prefix, number, total, message: `Leaf reached: add ${number}; total is ${total}.` })
-    }
-    visit(left[id], number)
-    visit(right[id], number)
-  }
-  visit(0, 0)
-  frames.push({ activeLine: L('return total'), phase: 'done', node: null, prefix: 0, number: null, total, message: `Sum of all root-to-leaf numbers is ${total}.` })
-  return { input, result: total, frames }
+  const story = buildSumNumbersStory(JSON.stringify(input.root))
+  return { ...story, input, result: story.totalSum, frames: withMessages(story.frames) }
 }
 
-export const code = [
-  { line: 1, text: 'sum of all root-to-leaf numbers' },
-  { line: 2, text: 'total = 0' },
-  { line: 3, text: 'visit(node, prefix) adds the numbers below node' },
-  { line: 4, text: 'if node is empty return' },
-  { line: 5, text: 'number = prefix * 10 + node digit' },
-  { line: 6, text: 'if node has no children add number to total' },
-  { line: 7, text: 'visit(left child, number) and visit(right child, number)' },
-  { line: 8, text: 'return total' },
-]
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+export const code = CODE.map((text, index) => ({ line: index + 1, text }))
 
 export const python = `def sum_root_to_leaf(root):
     n = len(root)
@@ -471,3 +439,6 @@ export const python = `def sum_root_to_leaf(root):
     visit(0, 0)
     return total[0]
 `
+
+// Python playback: pseudocode activeLine -> Python line doing the same step.
+export const pythonLineMap = { 3: 25, 4: 27, 6: 29, 7: 30, 8: 33 }
