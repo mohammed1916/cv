@@ -1,0 +1,16 @@
+{
+  "number": 3287,
+  "title": "Find the Maximum Sequence Value of Array",
+  "slug": "find-the-maximum-sequence-value-of-array",
+  "sources": [
+    "https://www.jointaro.com/interviews/questions/find-the-maximum-sequence-value-of-array/",
+    "https://www.jointaro.com/interviews/google/find-the-maximum-sequence-value-of-array"
+  ],
+  "sourceKind": "third-party mirrors (official LeetCode page not fetched)",
+  "checkedOn": "2026-10-29",
+  "summary": "For a subsequence of size 2k, its value is OR(first k elements) XOR OR(last k elements). Return the maximum value over subsequences of size 2k.",
+  "officialConstraints": "2 <= nums.length <= 400 and 1 <= nums[i] < 27 (from mirror summary). Visualization cap: n up to 20, values 1..26.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "The example nums=[4,2,5,6,7], k=2 -> 2 is from the mirror; one mirror page misstated the arithmetic, and (4 OR 5) XOR (6 OR 7) = 5 XOR 7 = 2 confirms it. The second check case [2,6,7], k=1 -> 5 is a derived check (not a statement example).",
+  "requirementsVerified": true
+}

@@ -1,0 +1,16 @@
+{
+  "number": 2606,
+  "title": "Find the Substring With Maximum Cost",
+  "slug": "find-the-substring-with-maximum-cost",
+  "sources": [
+    "https://leetcode.com/problems/find-the-substring-with-maximum-cost/",
+    "https://leetcode.doocs.org/en/lc/2606/"
+  ],
+  "sourceKind": "search-result summaries of the official page and a mirror",
+  "checkedOn": "2026-10-29",
+  "summary": "Each letter has a cost: the value from chars/vals if listed, otherwise its alphabet position (a=1 ... z=26). Return the maximum total cost of a substring, where the empty substring costs 0.",
+  "officialConstraints": "s length up to 1e5 lowercase letters; chars has up to 26 distinct lowercase letters; vals in -1000..1000 (from search summary of leetcode.com). Visualization cap: s up to 50.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "Both examples and their outputs were reported by the doocs mirror.",
+  "requirementsVerified": true
+}

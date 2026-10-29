@@ -1,0 +1,17 @@
+{
+  "number": 2963,
+  "title": "Count the Number of Good Partitions",
+  "slug": "count-the-number-of-good-partitions",
+  "sources": [
+    "https://leetcode.com/problems/count-the-number-of-good-partitions/",
+    "https://www.jointaro.com/interviews/google/count-the-number-of-good-partitions",
+    "https://leetcode.doocs.org/en/lc/2900-2999/"
+  ],
+  "sourceKind": "search-result summaries (official page not fetched)",
+  "checkedOn": "2026-10-29",
+  "summary": "Count partitions of an array of positive integers into contiguous subarrays so that no value appears in more than one subarray, modulo 1e9+7.",
+  "officialConstraints": "Not retrieved from a source. Visualization cap: 1 to 50 elements, positive integers.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "Examples [1,2,3,4] -> 8, [1,1,1,1] -> 1 and [1,2,1,3] -> 2 come from search summaries. Constraints were not retrieved.",
+  "requirementsVerified": false
+}

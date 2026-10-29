@@ -1,0 +1,17 @@
+{
+  "number": 2745,
+  "title": "Construct the Longest New String",
+  "slug": "construct-the-longest-new-string",
+  "sources": [
+    "https://www.hellointerview.com/community/questions/construct-longest-string/cm5eguhai044n838oo61165ow",
+    "https://www.talentd.in/fleetcode/problems?page=55&video=1",
+    "https://www.jointaro.com/interviews/questions/construct-the-longest-new-string/"
+  ],
+  "sourceKind": "third-party mirrors (official LeetCode page not fetched)",
+  "checkedOn": "2026-10-29",
+  "summary": "Given x AA strings, y BB strings and z AB strings, pick any of them in any order to build the longest string that does not contain AAA or BBB.",
+  "officialConstraints": "1 <= x, y, z <= 50 (from mirror summaries).",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "Both examples (x=2,y=5,z=1 -> 12; x=3,y=2,z=2 -> 14) come from mirror summaries. The DP was checked against brute force on small inputs.",
+  "requirementsVerified": true
+}

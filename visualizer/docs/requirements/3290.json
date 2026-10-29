@@ -1,0 +1,16 @@
+{
+  "number": 3290,
+  "title": "Maximum Multiplication Score",
+  "slug": "maximum-multiplication-score",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/3290/",
+    "https://algo.monster/liteproblems/3290"
+  ],
+  "sourceKind": "mirror pages (doocs mirror shows statement examples; official page not found)",
+  "checkedOn": "2026-10-29",
+  "summary": "Given a of length 4 and b, choose i0 < i1 < i2 < i3 in b to maximize a[0]*b[i0] + a[1]*b[i1] + a[2]*b[i2] + a[3]*b[i3].",
+  "officialConstraints": "Not retrieved from a source. Visualization cap: b has 4 to 20 values, all values from -100 to 100.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "Examples (26 and -1) come from the doocs mirror. Constraints were not retrieved.",
+  "requirementsVerified": false
+}

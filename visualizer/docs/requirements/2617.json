@@ -1,0 +1,16 @@
+{
+  "number": 2617,
+  "title": "Minimum Number of Visited Cells in a Grid",
+  "slug": "minimum-number-of-visited-cells-in-a-grid",
+  "sources": [
+    "https://leetcode.com/problems/minimum-number-of-visited-cells-in-a-grid/description/",
+    "https://leetcode.doocs.org/en/lc/2617/"
+  ],
+  "sourceKind": "search-result summaries (official page not fetched)",
+  "checkedOn": "2026-10-29",
+  "summary": "Starting at the top-left cell, a jump from (i, j) can go right to (i, k) for j < k <= j + grid[i][j], or down to (k, j) for i < k <= i + grid[i][j]. Return the fewest cells visited to reach the bottom-right cell, or -1.",
+  "officialConstraints": "Up to 10^5 cells in total; bottom-right cell is 0 (from search summary). Visualization cap: 8 rows and 8 columns, values 0..99.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "Sources report the three expected outputs 4, 3 and -1. The grid inputs used here were not retrieved from a source; they were checked by brute force and match those outputs.",
+  "requirementsVerified": false
+}

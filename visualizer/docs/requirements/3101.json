@@ -1,0 +1,17 @@
+{
+  "number": 3101,
+  "title": "Count Alternating Subarrays",
+  "slug": "count-alternating-subarrays",
+  "sources": [
+    "https://leetcode.com/problems/count-alternating-subarrays/",
+    "https://leetcode.doocs.org/en/lc/3101/",
+    "https://walkccc.me/LeetCode/problems/3101/"
+  ],
+  "sourceKind": "search-result summaries (official page not fetched)",
+  "checkedOn": "2026-10-29",
+  "summary": "Count subarrays of a binary array in which adjacent elements always differ.",
+  "officialConstraints": "Not retrieved from a source. Visualization cap: 1 to 50 elements, values 0 or 1.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "Examples [0,1,1,1] -> 5 and [1,0,1,0] -> 10 come from search summaries. Constraints were not retrieved.",
+  "requirementsVerified": false
+}

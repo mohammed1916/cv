@@ -1,0 +1,16 @@
+{
+  "number": 2552,
+  "title": "Count Increasing Quadruplets",
+  "slug": "count-increasing-quadruplets",
+  "sources": [
+    "https://leetcode.com/problems/count-increasing-quadruplets/",
+    "https://walkccc.me/LeetCode/problems/2552/"
+  ],
+  "sourceKind": "search-result summaries (official page not fetched)",
+  "checkedOn": "2026-10-29",
+  "summary": "Given a permutation nums of length n, count index quadruplets i < j < k < l with nums[i] < nums[k] < nums[j] < nums[l].",
+  "officialConstraints": "Permutation of 1..n; length up to 4000 (from search summary). Visualization cap: 4 to 12 elements.",
+  "visualizationNotes": "Visualization caps are listed in constraints; the DP table is shown in an 8 by 8 window that follows playback.",
+  "examplesNotes": "No example inputs or outputs were retrieved from a source. Example outputs were checked by brute force, not from the statement.",
+  "requirementsVerified": false
+}
