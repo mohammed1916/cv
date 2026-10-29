@@ -7,8 +7,8 @@ export default function AlgorithmCodePanel({ definition, step, input }) {
   const hasPython = typeof definition.python === 'string' && definition.python.trim().length > 0
   const hasSql = typeof definition.sql === 'string' && definition.sql.trim().length > 0
   const language = preferredLanguage === 'sql' && hasSql ? 'sql' : preferredLanguage === 'python' && hasPython ? 'python' : 'pseudocode'
-  // Python highlights come from pythonLineMap (pseudocode activeLine -> Python line), falling back to pythonStages (codeStage -> Python line).
-  const pythonLine = definition.pythonLineMap?.[step?.activeLine] ?? definition.pythonStages?.[step?.codeStage]
+  // Python highlights: the frame's own pythonLine (the Python line it executes) first, then pythonLineMap (pseudocode activeLine -> Python line), then pythonStages.
+  const pythonLine = step?.pythonLine ?? definition.pythonLineMap?.[step?.activeLine] ?? definition.pythonStages?.[step?.codeStage]
   const codeLines = language !== 'pseudocode'
     ? definition[language].trim().split('\n').map((text, index) => ({ line: index + 1, text }))
     : definition.code
