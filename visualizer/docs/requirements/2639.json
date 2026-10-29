@@ -1,0 +1,24 @@
+{
+  "number": 2639,
+  "title": "Find the Width of Columns of a Grid",
+  "source": "https://leetcode.com/problems/find-the-width-of-columns-of-a-grid/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-and-doocs-mirror (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/find-the-width-of-columns-of-a-grid/description/",
+    "https://leetcode.doocs.org/en/lc/2639/"
+  ],
+  "summary": "Given a 0-indexed m x n integer matrix grid, return an array ans of size n where ans[i] is the width of column i. A column's width is the maximum length of its integers; a negative integer's length includes its minus sign.",
+  "officialConstraints": [
+    "m == grid.length",
+    "n == grid[i].length",
+    "1 <= m, n <= 100",
+    "-10^9 <= grid[r][c] <= 10^9 (the source page shows the exponent as 109; the search summary confirms -10^9 to 10^9)"
+  ],
+  "examples": [
+    { "input": "grid = [[1],[22],[333]]", "output": "[3]" },
+    { "input": "grid = [[-15,1,3],[15,7,12],[5,6,-2]]", "output": "[3,1,2]" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization uses the full official limits (m, n up to 100); the trace has about 2 frames per cell."
+}

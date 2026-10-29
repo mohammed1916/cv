@@ -1,0 +1,22 @@
+{
+  "number": 2717,
+  "title": "Semi-Ordered Permutation",
+  "slug": "semi-ordered-permutation",
+  "source": "https://leetcode.com/problems/semi-ordered-permutation/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-citing-leetcode.com (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/semi-ordered-permutation/description/",
+    "https://leetcode.doocs.org/en/lc/2717/",
+    "https://walkccc.me/LeetCode/problems/2717/"
+  ],
+  "summary": "Given a permutation nums of length n, return the minimum number of adjacent swaps needed so that the first element is 1 and the last element is n.",
+  "officialConstraints": "2 <= nums.length == n <= 50; 1 <= nums[i] <= 50; nums is a permutation.",
+  "examples": [
+    { "input": "nums = [2,1,4,3]", "output": "2" },
+    { "input": "nums = [2,4,1,3]", "output": "3" },
+    { "input": "nums = [1,3,4,2,5]", "output": "0" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Input is a permutation of 1..n with n between 2 and 50; the view shows the array and the indices of 1 and n."
+}

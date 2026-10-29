@@ -1,0 +1,21 @@
+{
+  "number": 2729,
+  "title": "Check if The Number is Fascinating",
+  "slug": "check-if-the-number-is-fascinating",
+  "source": "https://leetcode.com/problems/check-if-the-number-is-fascinating/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-citing-leetcode.com (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/check-if-the-number-is-fascinating/description/",
+    "https://leetcode.doocs.org/en/lc/2729/",
+    "https://walkccc.me/LeetCode/problems/2729/"
+  ],
+  "summary": "Given n, concatenate n, 2 * n and 3 * n. Return true if the result contains each digit 1 through 9 exactly once and no zeros, otherwise false.",
+  "officialConstraints": "100 <= n <= 999.",
+  "examples": [
+    { "input": "n = 192", "output": "true" },
+    { "input": "n = 100", "output": "false" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Input is one integer n in 100..999; the joined string has at most 11 characters and is shown with its sorted digits."
+}

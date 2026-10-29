@@ -1,0 +1,25 @@
+{
+  "number": 2643,
+  "title": "Row With Maximum Ones",
+  "source": "https://leetcode.com/problems/row-with-maximum-ones/",
+  "checkedOn": "2026-10-29",
+  "sourceKind": "search-results-and-doocs-mirror (official page returned 403 to WebFetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/row-with-maximum-ones/description/",
+    "https://leetcode.doocs.org/en/lc/2643/"
+  ],
+  "summary": "Given an m x n binary matrix mat, return the 0-indexed row number with the most ones and the count of ones in that row, as [rowIndex, onesCount]. If rows tie, return the smallest row index.",
+  "officialConstraints": [
+    "m == mat.length",
+    "n == mat[i].length",
+    "1 <= m, n <= 100",
+    "mat[i][j] is either 0 or 1."
+  ],
+  "examples": [
+    { "input": "mat = [[0,1],[1,0]]", "output": "[0,1]" },
+    { "input": "mat = [[0,0,0],[0,1,1]]", "output": "[1,2]" },
+    { "input": "mat = [[0,0],[1,1],[0,0]]", "output": "[1,2]" }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization uses the full official limits (m, n up to 100); one row is counted per step."
+}
