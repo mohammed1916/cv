@@ -55,3 +55,15 @@ export const python = `def min_increments(nums, k):
         dp[i] = cost + best
     return min(dp[n - 3:])
 `
+
+// Maps each pseudocode activeLine to the Python line that performs the same action.
+export const pythonLineMap = {
+  2: 3,
+  3: 7,
+  4: 8,
+  5: 9,
+  6: 10,
+  7: 11,
+  8: 12,
+  9: 13,
+}

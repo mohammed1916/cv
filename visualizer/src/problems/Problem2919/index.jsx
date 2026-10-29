@@ -1,6 +1,6 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
 import IndexedSequence from '../../components/shared/IndexedSequence'
-import { buildTrace, parseInput, code, python } from './algorithm'
+import { buildTrace, parseInput, code, python, pythonLineMap } from './algorithm'
 
 const definition = {
   phases: [
@@ -8,7 +8,7 @@ const definition = {
     { id: 'cover', label: 'Cover index', description: 'Compute the cheapest way to cover windows ending here.' },
     { id: 'done', label: 'Complete', description: 'Report the minimum over the last three positions.' },
   ],
-  parse: parseInput, build: buildTrace, code, python,
+  parse: parseInput, build: buildTrace, code, python, pythonLineMap,
   inputLabel: 'JSON object with nums (1 to 20 values from 0 to 20) and k (1 to 20)',
   url: 'https://leetcode.doocs.org/en/lc/2919/',
   complexity: 'O(n) time and O(n) space for the DP table.',
