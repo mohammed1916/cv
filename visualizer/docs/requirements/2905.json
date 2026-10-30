@@ -1,0 +1,20 @@
+{
+  "number": 2905,
+  "title": "Find Indices With Index and Value Difference II",
+  "source": "https://leetcode.com/problems/find-indices-with-index-and-value-difference-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets (official page not fetchable; snippets cite leetcode.com and mirrors)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/find-indices-with-index-and-value-difference-ii/",
+    "https://leetcode.doocs.org/en/lc/2905"
+  ],
+  "summary": "Find i, j with |i - j| >= indexDifference and |nums[i] - nums[j]| >= valueDifference, returning [-1, -1] if none exists. i and j may be equal and any valid pair is accepted.",
+  "officialConstraints": "1 <= n <= 10^5; 0 <= nums[i] <= 10^9; 0 <= indexDifference <= 10^5; 0 <= valueDifference <= 10^9 (as reported by search snippets; not confirmed on the official page). The visualization caps nums at 100 values and values at 1000.",
+  "examples": [
+    { "input": "nums = [5,1,4,1], indexDifference = 2, valueDifference = 4", "output": "[0,3]" },
+    { "input": "nums = [2,1], indexDifference = 0, valueDifference = 0", "output": "[0,0] (other valid answers accepted)" },
+    { "input": "nums = [1,2,3], indexDifference = 2, valueDifference = 4", "output": "[-1,-1]" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Linear scan tracking the min and max index at least indexDifference behind j. Examples come from search snippets, not a fetched statement, so they are not marked as verified."
+}

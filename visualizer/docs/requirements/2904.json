@@ -1,0 +1,20 @@
+{
+  "number": 2904,
+  "title": "Shortest and Lexicographically Smallest Beautiful String",
+  "source": "https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets (official page not fetchable; mirrors leetcode.doocs.org and walkccc.me)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/2904/",
+    "https://walkccc.me/LeetCode/problems/2904/"
+  ],
+  "summary": "Given a binary string s and a positive integer k, a substring is beautiful if it contains exactly k ones. Return the shortest beautiful substring, lexicographically smallest among ties, or an empty string if none exists.",
+  "officialConstraints": "1 <= s.length <= 100 and k >= 1 (length bound reported by a mirror; k range and character set not confirmed on the official page).",
+  "examples": [
+    { "input": "s = \"100011001\", k = 3", "output": "\"11001\"" },
+    { "input": "s = \"1011\", k = 2", "output": "\"11\"" },
+    { "input": "s = \"000\", k = 1", "output": "\"\"" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Sliding window over the string; the visual caps s at 100 characters and k at 100. The k bound is an assumption and the examples are from mirror snippets, so requirements are not marked verified."
+}

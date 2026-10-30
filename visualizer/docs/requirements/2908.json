@@ -1,0 +1,21 @@
+{
+  "number": 2908,
+  "title": "Minimum Sum of Mountain Triplets I",
+  "source": "https://leetcode.com/problems/minimum-sum-of-mountain-triplets-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets (official page not fetchable; snippets cite leetcode.com and mirrors)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/minimum-sum-of-mountain-triplets-i/description/",
+    "https://leetcode.doocs.org/en/lc/2908/",
+    "https://walkccc.me/LeetCode/problems/2908/"
+  ],
+  "summary": "A mountain triplet is indices i < j < k with nums[i] < nums[j] and nums[k] < nums[j]. Return the minimum nums[i] + nums[j] + nums[k], or -1 if none exists.",
+  "officialConstraints": "3 <= n <= 50; 1 <= nums[i] <= 50 (as reported by search snippets; not confirmed on the official page).",
+  "examples": [
+    { "input": "nums = [8,6,1,5,3]", "output": "9" },
+    { "input": "nums = [5,4,8,7,10,2]", "output": "13" },
+    { "input": "nums = [6,5,4,3,4,5]", "output": "-1" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Per-peak scan for cheapest smaller partners on each side. Examples come from search snippets, not a fetched statement, so they are not marked as verified."
+}
