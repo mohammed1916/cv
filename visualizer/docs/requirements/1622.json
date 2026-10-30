@@ -1,0 +1,12 @@
+{
+  "number": 1622,
+  "title": "Fancy Sequence",
+  "source": "https://leetcode.com/problems/fancy-sequence/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-summary",
+  "summary": "Design a Fancy class for an append-only sequence supporting append(val), addAll(inc), multAll(m) and getIndex(idx), where getIndex returns the value at a 0-based index modulo 1e9+7, or -1 when the index is out of range.",
+  "officialConstraints": "Values, increments and multipliers are 1 to 100; indices up to 1e5; at most 1e5 calls in total (as reported by the web search summary of the LeetCode statement and an algo.monster mirror).",
+  "officialExamples": [],
+  "visualizationNotes": "The statement's full example input and output sequence were not retrievable through search, so no official example is recorded. The visualization ships one illustrative input labelled as not from the statement. The visualization caps the operation list at 40 calls. Operations are given as a JSON ops list, not as class method calls.",
+  "requirementsVerified": false
+}
