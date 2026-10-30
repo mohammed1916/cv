@@ -1,0 +1,28 @@
+{
+  "number": 3340,
+  "title": "Check Balanced String",
+  "slug": "check-balanced-string",
+  "source": "https://leetcode.com/problems/check-balanced-string/",
+  "sources": [
+    "https://www.educative.io/interview-prep/coding/check-balanced-string",
+    "https://walkccc.me/LeetCode/problems/3340/"
+  ],
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "summary": "A digit string is balanced when the sum of digits at even indices equals the sum of digits at odd indices.",
+  "officialConstraints": "Length 2 to 100, digits only (per Educative listing).",
+  "visualizationNotes": "Visualization accepts lengths 2 to 100. Examples are illustrative.",
+  "examples": [
+    {
+      "label": "Illustrative: balanced",
+      "input": "{\"num\": \"1221\"}",
+      "provenance": "illustrative (not from the statement)"
+    },
+    {
+      "label": "Illustrative: unbalanced",
+      "input": "{\"num\": \"1234\"}",
+      "provenance": "illustrative (not from the statement)"
+    }
+  ],
+  "requirementsVerified": false
+}

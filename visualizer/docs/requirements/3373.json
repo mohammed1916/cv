@@ -1,0 +1,23 @@
+{
+  "number": 3373,
+  "title": "Maximize the Number of Target Nodes After Connecting Trees II",
+  "slug": "maximize-the-number-of-target-nodes-after-connecting-trees-ii",
+  "source": "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-ii/",
+  "sources": [
+    "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-ii/description",
+    "https://leetcode.doocs.org/en/lc/3373/"
+  ],
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "summary": "For each node of tree 1, connect it to one node of tree 2 and count nodes at even distance from it (both trees).",
+  "officialConstraints": "Constraints not obtained from a source in this session.",
+  "visualizationNotes": "Visualization accepts at most 40 nodes per tree. Examples are illustrative.",
+  "examples": [
+    {
+      "label": "Illustrative: two small trees",
+      "input": "{\"edges1\": [[0,1],[0,2],[2,3]], \"edges2\": [[0,1],[0,2]]}",
+      "provenance": "illustrative (not from the statement)"
+    }
+  ],
+  "requirementsVerified": false
+}

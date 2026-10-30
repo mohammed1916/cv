@@ -1,0 +1,35 @@
+{
+  "number": 3372,
+  "title": "Maximize the Number of Target Nodes After Connecting Trees I",
+  "slug": "maximize-the-number-of-target-nodes-after-connecting-trees-i",
+  "source": "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i/",
+  "sources": [
+    "https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i/description/",
+    "https://leetcode.doocs.org/en/lc/3372/"
+  ],
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "summary": "For each node of tree 1, count nodes within k edges (both trees) after one temporary edge joins tree 1 to tree 2; a node counts itself.",
+  "officialConstraints": "n, m up to 1000 (doocs write-up). k bounds not obtained from a source.",
+  "visualizationNotes": "Visualization accepts at most 40 nodes per tree.",
+  "examples": [
+    {
+      "label": "Sourced example (k = 1)",
+      "input": "{\"edges1\": [[0,1],[0,2],[0,3],[0,4]], \"edges2\": [[0,1],[1,2],[2,3]], \"k\": 1}",
+      "expectedOutput": [
+        6,
+        3,
+        3,
+        3,
+        3
+      ],
+      "provenance": "search snippet quoting the leetcode.com example"
+    },
+    {
+      "label": "Illustrative: k = 0",
+      "input": "{\"edges1\": [[0,1],[1,2]], \"edges2\": [[0,1]], \"k\": 0}",
+      "provenance": "illustrative (not from the statement)"
+    }
+  ],
+  "requirementsVerified": false
+}

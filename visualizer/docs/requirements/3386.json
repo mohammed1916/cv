@@ -1,0 +1,31 @@
+{
+  "number": 3386,
+  "title": "Button with Longest Push Time",
+  "slug": "button-with-longest-push-time",
+  "source": "https://leetcode.com/problems/button-with-longest-push-time/",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/3386/",
+    "https://www.educative.io/interview-prep/coding/button-with-longest-push-time",
+    "https://algo.monster/liteproblems/3386"
+  ],
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "summary": "Events are [index, time] sorted by time. The first push lasts its press time; each later push lasts the gap to the previous press. Return the index with the longest push, ties to the smaller index.",
+  "officialConstraints": "Up to 1000 events; indices and times up to 1e5 (Educative listing).",
+  "visualizationNotes": "Visualization accepts at most 40 events.",
+  "examples": [
+    {
+      "label": "Sourced example 1",
+      "input": "{\"events\": [[1,2],[2,5],[3,9],[1,15]]}",
+      "expectedOutput": 1,
+      "provenance": "leetcode.doocs.org mirror"
+    },
+    {
+      "label": "Sourced example 2",
+      "input": "{\"events\": [[10,5],[1,7]]}",
+      "expectedOutput": 10,
+      "provenance": "leetcode.doocs.org mirror"
+    }
+  ],
+  "requirementsVerified": true
+}

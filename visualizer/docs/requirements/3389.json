@@ -1,0 +1,36 @@
+{
+  "number": 3389,
+  "title": "Minimum Operations to Make Character Frequencies Equal",
+  "slug": "minimum-operations-to-make-character-frequencies-equal",
+  "source": "https://leetcode.com/problems/minimum-operations-to-make-character-frequencies-equal/",
+  "sources": [
+    "https://leetcode.doocs.org/en/lc/3389/",
+    "https://www.hellointerview.com/community/questions/character-frequencies-equal/cm5eguhaj04mj838ojbby41x0"
+  ],
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "summary": "Make every present letter occur equally often using deletions, insertions, and changing a letter to the next letter (no wrap from z to a).",
+  "officialConstraints": "Length 3 to 2*10^4, lowercase letters only (doocs mirror).",
+  "visualizationNotes": "Visualization accepts words of length 1 to 24.",
+  "examples": [
+    {
+      "label": "acab",
+      "input": "{\"word\": \"acab\"}",
+      "expectedOutput": 1,
+      "provenance": "leetcode.doocs.org mirror"
+    },
+    {
+      "label": "wddw",
+      "input": "{\"word\": \"wddw\"}",
+      "expectedOutput": 0,
+      "provenance": "leetcode.doocs.org mirror"
+    },
+    {
+      "label": "aaabc",
+      "input": "{\"word\": \"aaabc\"}",
+      "expectedOutput": 2,
+      "provenance": "leetcode.doocs.org mirror"
+    }
+  ],
+  "requirementsVerified": true
+}
