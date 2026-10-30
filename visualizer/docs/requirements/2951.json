@@ -1,0 +1,15 @@
+{
+  "number": 2951,
+  "title": "Find the Peaks",
+  "source": "https://leetcode.com/problems/find-the-peaks/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search-snippets (official URL and mirror write-ups; statement body not fetched)",
+  "summary": "Given a 0-indexed array mountain, return the indices of all peaks, meaning elements strictly greater than their neighbours. The first and last elements are not peaks. Indices may be returned in any order.",
+  "officialConstraints": "Not captured by the search. Constraints in code (length 3 to 50, values 1 to 100) are visualization caps only.",
+  "examples": [
+    { "input": "mountain = [1,4,3,8,5]", "output": "[1,3]", "source": "Ruby solution test cited in a GitHub search result (not the statement)", "label": "community test, not the official statement" },
+    { "input": "mountain = [2,1,2,1,2]", "output": "[]", "label": "illustrative (not from the statement)" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Constraints in code are visualization caps. The official length and value bounds were not captured, so requirements are not verified."
+}

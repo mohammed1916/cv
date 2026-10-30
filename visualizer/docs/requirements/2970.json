@@ -1,0 +1,15 @@
+{
+  "number": 2970,
+  "title": "Count the Number of Incremovable Subarrays I",
+  "source": "https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-i/description/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search-snippets (official URL and doocs.org / walkccc.me write-ups; statement body not fetched)",
+  "summary": "Count the non-empty subarrays whose removal leaves nums strictly increasing.",
+  "officialConstraints": "Not captured by the search. The snippet says the input is a 0-indexed array of positive integers. Length and value bounds were not captured.",
+  "examples": [
+    { "input": "nums = [8,7,6,6]", "output": "3", "source": "search snippet citing the official rules" },
+    { "input": "nums = [6,5,7,8]", "output": "7", "source": "doocs.org write-up (leetcode.doocs.org mirror)" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization caps n at 50 and values at 1000 (not from the source). Python was checked against brute force before publishing the trace. The snippets disagree on whether an empty subarray counts, so the official empty-subarray rule is unconfirmed."
+}

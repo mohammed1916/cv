@@ -1,0 +1,15 @@
+{
+  "number": 2947,
+  "title": "Count Beautiful Substrings I",
+  "source": "https://leetcode.com/problems/count-beautiful-substrings-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search-snippets (official URL in results; statement body not fetched)",
+  "summary": "A substring is beautiful if its number of vowels equals its number of consonants and the product of those counts is divisible by k. Return the number of non-empty beautiful substrings of s.",
+  "officialConstraints": "1 <= s.length <= 1000 (from the leetcode.com snippet). The bound on k was not captured by the search, so constraints are incomplete.",
+  "examples": [
+    { "input": "s = \"abba\", k = 1", "output": "3", "source": "search snippet citing the official page" },
+    { "input": "s = \"bcdf\", k = 1", "output": "0", "source": "search snippet citing the official page" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization caps s at 50 lowercase letters and k at 1000. The k bound used in code (1 to 1000) is not confirmed by a source. The shared IndexedSequence view shows the window."
+}

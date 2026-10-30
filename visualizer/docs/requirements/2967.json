@@ -1,0 +1,15 @@
+{
+  "number": 2967,
+  "title": "Minimum Cost to Make Array Equalindromic",
+  "source": "https://leetcode.com/problems/minimum-cost-to-make-array-equalindromic/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search-snippets (official URL and mirror write-ups; statement body not fetched)",
+  "summary": "Make every element of nums equal to one palindromic number below 10^9 with minimum total cost, where changing nums[i] to x costs |nums[i] - x|.",
+  "officialConstraints": "Not captured by the search. The bound (palindromes below 10^9) is from the snippet. Array length and value bounds were not captured.",
+  "examples": [
+    { "input": "nums = [1,2,3,4,5]", "output": "6", "source": "search snippet citing the official page" },
+    { "input": "nums = [10,12,13,14,15]", "output": "11", "label": "illustrative (not from the statement)" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization caps n at 50 and values at 1000. The median-neighbour palindrome method is the one described in write-ups. Python solution matches the JSON key nums."
+}

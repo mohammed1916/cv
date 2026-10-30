@@ -1,0 +1,15 @@
+{
+  "number": 2965,
+  "title": "Find Missing and Repeated Values",
+  "source": "https://leetcode.com/problems/find-missing-and-repeated-values/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search-snippets (leetcode.doocs.org, walkccc.me and NeetCode write-ups; statement body not fetched)",
+  "summary": "Given an n x n grid whose values are 1 to n squared, where one value appears twice and one value is missing, return [repeated, missing].",
+  "officialConstraints": "Not captured as explicit bounds by the search. The grid shape and value set (1 to n squared, one repeat, one missing) are described by the write-ups.",
+  "examples": [
+    { "input": "grid = [[1,3],[2,2]]", "output": "[2,4]", "label": "illustrative (not from the statement)" },
+    { "input": "grid = [[9,1,7],[8,9,2],[3,4,6]]", "output": "[9,5]", "label": "illustrative (not from the statement)" }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization caps n at 9. The count-table approach is the one described in the write-ups, and the Python function returns [repeated, missing]."
+}
