@@ -1,0 +1,13 @@
+{
+  "number": 3017,
+  "title": "Count the Number of Houses at a Certain Distance II",
+  "source": "https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries only; official page not fetched",
+  "sourceUrls": [],
+  "summary": null,
+  "officialConstraints": "unverified: constraints not retrieved",
+  "examples": [],
+  "visualizationNotes": "not built: Skipped: the constraints were not retrieved, and sources disagree on the problem number (3017, 3310, 3271). Algorithm requires n up to 10^5 and was not built.",
+  "requirementsVerified": false
+}

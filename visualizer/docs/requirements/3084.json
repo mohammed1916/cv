@@ -1,0 +1,16 @@
+{
+  "number": 3084,
+  "title": "Count Substrings Starting and Ending with Given Character",
+  "slug": "count-substrings-starting-and-ending-with-given-character",
+  "source": "https://leetcode.com/problems/count-substrings-starting-and-ending-with-given-character/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Count substrings whose first and last character equal c.",
+  "officialConstraints": "Partial: length bounds not retrieved in snippet.",
+  "visualizationNotes": "see src/problems/Problem3084/meta.js",
+  "requirementsVerified": false,
+  "poolStatus": "built"
+}

@@ -1,0 +1,16 @@
+{
+  "number": 3065,
+  "title": "Minimum Operations to Exceed Threshold Value I",
+  "slug": "minimum-operations-to-exceed-threshold-value-i",
+  "source": "https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Repeatedly remove the smallest element; count values below k.",
+  "officialConstraints": "Partial: snippet says at least one index has value >= k; full constraints not retrieved.",
+  "visualizationNotes": "see src/problems/Problem3065/meta.js",
+  "requirementsVerified": false,
+  "poolStatus": "built"
+}

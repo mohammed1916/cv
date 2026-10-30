@@ -1,0 +1,30 @@
+{
+  "number": 3206,
+  "title": "Alternating Groups I",
+  "slug": "alternating-groups-i",
+  "source": "https://leetcode.com/problems/alternating-groups-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://huggingface.co/datasets/FPEvalRepoPublic/LeetCodeMetaData/blob/main/alternating-groups-i.json",
+    "https://leetcode.doocs.org/lc/3206"
+  ],
+  "summary": "Circular array of 0/1 tile colors; count windows of 3 consecutive tiles whose middle tile differs from both neighbours.",
+  "officialConstraints": "3 <= colors.length <= 100; each value is 0 or 1 (LeetCode metadata copy)",
+  "examples": [
+    {
+      "label": "Example 1",
+      "input": "{\"colors\":[1,1,1]}",
+      "expected": 0,
+      "provenance": "LeetCode metadata copy"
+    },
+    {
+      "label": "Example 2",
+      "input": "{\"colors\":[0,1,0,0,1]}",
+      "expected": 3,
+      "provenance": "LeetCode metadata copy"
+    }
+  ],
+  "visualizationNotes": "circular window scan; cap 100 tiles",
+  "requirementsVerified": true
+}

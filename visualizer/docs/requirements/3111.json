@@ -1,0 +1,16 @@
+{
+  "number": 3111,
+  "title": "Minimum Rectangles to Cover Points",
+  "slug": "minimum-rectangles-to-cover-points",
+  "source": "https://leetcode.com/problems/minimum-rectangles-to-cover-points/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Cover 2D points with rectangles of width at most w.",
+  "officialConstraints": "Not obtained: constraints missing.",
+  "visualizationNotes": "not built",
+  "requirementsVerified": false,
+  "poolStatus": "skipped"
+}

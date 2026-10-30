@@ -1,0 +1,16 @@
+{
+  "number": 3044,
+  "title": "Most Frequent Prime",
+  "slug": "most-frequent-prime",
+  "source": "https://leetcode.com/problems/most-frequent-prime/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Matrix walk in 8 directions, counting prime values above 10.",
+  "officialConstraints": "Partial: snippet cut off the tie-break rule.",
+  "visualizationNotes": "not built",
+  "requirementsVerified": false,
+  "poolStatus": "skipped"
+}

@@ -1,0 +1,24 @@
+{
+  "number": 3127,
+  "title": "Make a Square with the Same Color",
+  "slug": "make-a-square-with-the-same-color",
+  "source": "https://leetcode.com/problems/make-a-square-with-the-same-color/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/3127/",
+    "https://walkccc.me/LeetCode/problems/3127/"
+  ],
+  "summary": "3x3 grid of 'B'/'W'; return true if changing at most one cell creates a 2x2 square of one color.",
+  "officialConstraints": "unverified: grid fixed at 3x3 per source summary; official page not retrieved",
+  "examples": [
+    {
+      "label": "illustrative (not from the statement)",
+      "input": "{\"grid\":[[\"B\",\"W\",\"B\"],[\"B\",\"W\",\"W\"],[\"B\",\"W\",\"B\"]]}",
+      "expected": true,
+      "provenance": "grid and answer cited in a walkccc summary snippet, not checked against the statement"
+    }
+  ],
+  "visualizationNotes": "2x2 windows over a 3x3 grid; cap 9 cells",
+  "requirementsVerified": false
+}

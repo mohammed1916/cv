@@ -1,0 +1,16 @@
+{
+  "number": 3106,
+  "title": "Lexicographically Smallest String After Operations With Constraint",
+  "slug": "lexicographically-smallest-string-after-operations-with-constraint",
+  "source": "https://leetcode.com/problems/lexicographically-smallest-string-after-operations-with-constraint/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Greedy lexicographic minimisation with a cyclic alphabet distance budget k.",
+  "officialConstraints": "Partial: distance semantics not fully stated in snippets.",
+  "visualizationNotes": "not built",
+  "requirementsVerified": false,
+  "poolStatus": "skipped"
+}

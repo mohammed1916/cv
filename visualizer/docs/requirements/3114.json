@@ -1,0 +1,16 @@
+{
+  "number": 3114,
+  "title": "Latest Time You Can Obtain After Replacing Characters",
+  "slug": "latest-time-you-can-obtain-after-replacing-characters",
+  "source": "https://leetcode.com/problems/latest-time-you-can-obtain-after-replacing-characters/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Fill '?' in an HH:MM 12-hour time to get the latest valid time.",
+  "officialConstraints": "Partial: format and guarantee from snippet; full constraints not retrieved.",
+  "visualizationNotes": "see src/problems/Problem3114/meta.js",
+  "requirementsVerified": false,
+  "poolStatus": "built"
+}

@@ -1,0 +1,19 @@
+{
+  "number": 3225,
+  "title": "Maximum Score From Grid Operations",
+  "slug": "maximum-score-from-grid-operations",
+  "source": "https://leetcode.com/problems/maximum-score-from-grid-operations/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/3225",
+    "https://walkccc.me/LeetCode/problems/3225/"
+  ],
+  "summary": "n x n grid; operations blacken a column prefix; score white cells adjacent to black cells; maximize total.",
+  "officialConstraints": "1 <= n <= 100 per search summary; value bounds not retrieved",
+  "examples": [],
+  "visualizationNotes": "not built: hard DP over columns; examples not retrieved",
+  "requirementsVerified": false,
+  "skipped": true,
+  "skipReason": "Hard DP problem; statement examples were not retrieved from a source, so it was not built."
+}

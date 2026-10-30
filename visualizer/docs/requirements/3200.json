@@ -1,0 +1,18 @@
+{
+  "number": 3200,
+  "title": "Maximum Height of a Triangle",
+  "slug": "maximum-height-of-a-triangle",
+  "source": "https://leetcode.com/problems/maximum-height-of-a-triangle/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://www.educative.io/interview-prep/coding/maximum-height-of-a-triangle"
+  ],
+  "summary": "Given red and blue ball counts, rows alternate colors; return maximum triangle height.",
+  "officialConstraints": "1 <= red, blue <= 100 per Educative; not confirmed on LeetCode",
+  "examples": [],
+  "visualizationNotes": "not built: no statement examples retrieved",
+  "requirementsVerified": false,
+  "skipped": true,
+  "skipReason": "Statement examples were not retrieved from a source; constraints came only from a third-party course page."
+}

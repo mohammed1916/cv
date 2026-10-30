@@ -1,0 +1,16 @@
+{
+  "number": 3086,
+  "title": "Minimum Moves to Pick K Ones",
+  "slug": "minimum-moves-to-pick-k-ones",
+  "source": "https://leetcode.com/problems/minimum-moves-to-pick-k-ones/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Hard: pick k ones on a binary array with limited flips and adjacent swaps.",
+  "officialConstraints": "Partial: setup only, no full constraints.",
+  "visualizationNotes": "not built",
+  "requirementsVerified": false,
+  "poolStatus": "skipped"
+}

@@ -1,0 +1,18 @@
+{
+  "number": 3168,
+  "title": "Minimum Number of Chairs in a Waiting Room",
+  "slug": "minimum-number-of-chairs-in-a-waiting-room",
+  "source": "https://leetcode.com/problems/minimum-number-of-chairs-in-a-waiting-room/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://www.hellointerview.com/community/questions/minimum-chairs-waiting-room/cm5eguhaj04ge838olnlpj607"
+  ],
+  "summary": "Events describe people entering and leaving; answer is the peak occupancy.",
+  "officialConstraints": "unverified: input alphabet and length not confirmed from the statement",
+  "examples": [],
+  "visualizationNotes": "not built: event alphabet not confirmed",
+  "requirementsVerified": false,
+  "skipped": true,
+  "skipReason": "The input alphabet (event characters) could not be confirmed from a source statement."
+}

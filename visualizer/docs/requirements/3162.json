@@ -1,0 +1,24 @@
+{
+  "number": 3162,
+  "title": "Find the Number of Good Pairs I",
+  "slug": "find-the-number-of-good-pairs-i",
+  "source": "https://leetcode.com/problems/find-the-number-of-good-pairs-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/lc/3162/",
+    "https://algo.monster/liteproblems/3162"
+  ],
+  "summary": "Given nums1, nums2 and integer k, count pairs (i, j) where nums1[i] is divisible by nums2[j] * k.",
+  "officialConstraints": "unverified: constraints not retrieved from the statement",
+  "examples": [
+    {
+      "label": "illustrative (not from the statement)",
+      "input": "{\"nums1\":[1,3,4],\"nums2\":[1,3,4],\"k\":1}",
+      "expected": null,
+      "provenance": "illustrative (not from the statement)"
+    }
+  ],
+  "visualizationNotes": "pair scan over nums1 and nums2; cap 20 elements each",
+  "requirementsVerified": false
+}

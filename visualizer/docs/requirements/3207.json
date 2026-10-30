@@ -1,0 +1,26 @@
+{
+  "number": 3207,
+  "title": "Maximum Points After Enemy Battles",
+  "slug": "maximum-points-after-enemy-battles",
+  "source": "https://leetcode.com/problems/maximum-points-after-enemy-battles/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/3207/",
+    "https://www.educative.io/courses/grokking-coding-interview/maximum-points-after-enemy-battles"
+  ],
+  "summary": "Enemy energies and current energy; gain a point by defeating the weakest unmarked enemy, and gain energy by absorbing the strongest.",
+  "officialConstraints": "unverified: constraints not retrieved",
+  "examples": [
+    {
+      "label": "Example 1",
+      "input": "{\"enemyEnergies\":[3,2,2],\"currentEnergy\":2}",
+      "expected": 3,
+      "provenance": "cited in search summary"
+    }
+  ],
+  "visualizationNotes": "not built: constraints not retrieved",
+  "requirementsVerified": false,
+  "skipped": true,
+  "skipReason": "Constraints were not retrieved from a source, so the problem was not built."
+}

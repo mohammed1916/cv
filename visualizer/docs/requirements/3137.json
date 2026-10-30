@@ -1,0 +1,25 @@
+{
+  "number": 3137,
+  "title": "Minimum Number of Operations to Make Word K-Periodic",
+  "slug": "minimum-number-of-operations-to-make-word-k-periodic",
+  "source": "https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/3137/",
+    "https://walkccc.me/LeetCode/problems/3137/",
+    "https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/"
+  ],
+  "summary": "Make word k-periodic (a repeated block of length k) by replacing substrings of length k; answer = number of blocks minus the most frequent block count.",
+  "officialConstraints": "unverified: constraints not retrieved from the statement",
+  "examples": [
+    {
+      "label": "Example 1",
+      "input": "{\"word\":\"leetcodeleet\",\"k\":4}",
+      "expected": 1,
+      "provenance": "cited in search summary of the problem statement (not fetched from the official page)"
+    }
+  ],
+  "visualizationNotes": "blocks of length k; cap 16 characters",
+  "requirementsVerified": false
+}

@@ -1,0 +1,25 @@
+{
+  "number": 3146,
+  "title": "Permutation Difference between Two Strings",
+  "slug": "permutation-difference-between-two-strings",
+  "source": "https://leetcode.com/problems/permutation-difference-between-two-strings/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries (WebSearch); official page not fetched (403)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/3146/",
+    "https://walkccc.me/LeetCode/problems/3146/",
+    "https://medium.com/@ben.dlmp_80333/leetcode-3146-permutation-difference-between-two-strings-7ce93d00ea48"
+  ],
+  "summary": "Each character appears at most once in s and t is a permutation of s; return the sum over characters of |index in s - index in t|.",
+  "officialConstraints": "unverified: constraints summarized from doocs (each character at most once); length bound not retrieved",
+  "examples": [
+    {
+      "label": "Example 1",
+      "input": "{\"s\":\"abc\",\"t\":\"bac\"}",
+      "expected": 2,
+      "provenance": "cited in Ben Pereira Medium write-up (not fetched from the official page)"
+    }
+  ],
+  "visualizationNotes": "index table over t; cap 26 characters",
+  "requirementsVerified": false
+}

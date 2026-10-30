@@ -1,0 +1,16 @@
+{
+  "number": 3071,
+  "title": "Minimum Operations to Write the Letter Y on a Grid",
+  "slug": "minimum-operations-to-write-the-letter-y-on-a-grid",
+  "source": "https://leetcode.com/problems/minimum-operations-to-write-the-letter-y-on-a-grid/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Grid of 0/1/2 values; change cells to write a Y shape at minimum cost.",
+  "officialConstraints": "Partial: Y geometry and constraints not fully retrieved.",
+  "visualizationNotes": "not built",
+  "requirementsVerified": false,
+  "poolStatus": "skipped"
+}

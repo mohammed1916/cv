@@ -1,0 +1,16 @@
+{
+  "number": 3079,
+  "title": "Find the Sum of Encrypted Integers",
+  "slug": "find-the-sum-of-encrypted-integers",
+  "source": "https://leetcode.com/problems/find-the-sum-of-encrypted-integers/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Replace each digit with the largest digit of the number and sum the results.",
+  "officialConstraints": "Partial: snippet gives 1 <= nums.length <= 50 and values <= 1000.",
+  "visualizationNotes": "see src/problems/Problem3079/meta.js",
+  "requirementsVerified": false,
+  "poolStatus": "built"
+}

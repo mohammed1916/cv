@@ -1,0 +1,16 @@
+{
+  "number": 3049,
+  "title": "Earliest Second to Mark Indices II",
+  "slug": "earliest-second-to-mark-indices-ii",
+  "source": "https://leetcode.com/problems/earliest-second-to-mark-indices-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "web-search-snippets",
+  "sources": [
+    "WebSearch results for title + LeetCode (leetcode.doocs.org, walkccc.me, algo.monster, hellointerview, leetcode.com listings)"
+  ],
+  "summary": "Hard binary-search/greedy problem; only title, tags and a generic approach were found.",
+  "officialConstraints": "Not obtained.",
+  "visualizationNotes": "not built",
+  "requirementsVerified": false,
+  "poolStatus": "skipped"
+}
