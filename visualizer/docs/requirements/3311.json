@@ -1,0 +1,24 @@
+{
+  "number": 3311,
+  "title": "Construct 2D Grid Matching Graph Layout",
+  "slug": "construct-2d-grid-matching-graph-layout",
+  "source": "https://leetcode.com/problems/construct-2d-grid-matching-graph-layout/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "unavailable",
+  "sources": [
+    "https://leetcode.com/problems/construct-2d-grid-matching-graph-layout/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3311/"
+  ],
+  "accessAttempt": "Constraints from the mirror; examples are diagram-only and the grid reconstruction is not implemented.",
+  "summary": "Given an undirected graph, build a 2D grid placing each node once so adjacency matches the edges.",
+  "officialConstraints": [
+    "2 <= n <= 5 * 10^4",
+    "1 <= edges.length <= 10^5",
+    "0 <= ui < vi < n",
+    "edges are distinct",
+    "input is guaranteed to form a valid 2D grid"
+  ],
+  "examples": [],
+  "visualizationNotes": "Not built in this pass: the reconstruction algorithm was not implemented; example outputs on the mirror are shown only as diagrams.",
+  "requirementsVerified": false
+}

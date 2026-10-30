@@ -1,0 +1,14 @@
+{
+  "number": 3387,
+  "title": "Maximize Amount After Two Days of Conversions",
+  "slug": "maximize-amount-after-two-days-of-conversions",
+  "source": "https://leetcode.com/problems/maximize-amount-after-two-days-of-conversions/",
+  "sources": [
+    "https://walkccc.me/LeetCode/problems/3387/",
+    "https://algo.monster/liteproblems/3387"
+  ],
+  "checkedOn": "2026-10-30",
+  "status": "skipped",
+  "reason": "Statement not obtained: sources describe the setup only, with no constraints or examples.",
+  "requirementsVerified": false
+}

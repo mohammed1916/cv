@@ -1,0 +1,13 @@
+{
+  "number": 3374,
+  "title": "First Letter Capitalization II",
+  "slug": "first-letter-capitalization-ii",
+  "source": "https://leetcode.com/problems/first-letter-capitalization-ii/",
+  "sources": [
+    "https://github.com/LeetCode-in-Java/LeetCode-in-Java.github.io/commit/37ef1ea33eddf0ace8829b6f542786b41e24518d"
+  ],
+  "checkedOn": "2026-10-30",
+  "status": "skipped",
+  "reason": "Database (SQL) problem; excluded by the pool rules.",
+  "requirementsVerified": false
+}

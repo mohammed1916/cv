@@ -1,0 +1,14 @@
+{
+  "number": 3357,
+  "title": "Minimize the Maximum Adjacent Element Difference",
+  "slug": "minimize-the-maximum-adjacent-element-difference",
+  "source": "https://leetcode.com/problems/minimize-the-maximum-adjacent-element-difference/",
+  "sources": [
+    "https://leetcode.com/problems/minimize-the-maximum-adjacent-element-difference/",
+    "https://github.com/doocs/leetcode/pull/3803"
+  ],
+  "checkedOn": "2026-10-30",
+  "status": "skipped",
+  "reason": "Statement partly obtained (official snippet: fill -1 gaps with one pair (x, y) to minimise the largest adjacent difference; example [1,2,-1,10,8] -> 4). Constraints (n up to 1e5, values up to 1e9) come only from a secondary listing, and the feasibility check was not verifiable from sources.",
+  "requirementsVerified": false
+}

@@ -1,0 +1,14 @@
+{
+  "number": 3361,
+  "title": "Shift Distance Between Two Strings",
+  "slug": "shift-distance-between-two-strings",
+  "source": "https://leetcode.com/problems/shift-distance-between-two-strings/",
+  "sources": [
+    "https://huggingface.co/datasets/TheRealSamuel/LeetCodeProblem/raw/main/shift_distance_between_two_strings/meta.json",
+    "https://github.com/doocs/leetcode/pull/3808.patch"
+  ],
+  "checkedOn": "2026-10-30",
+  "status": "skipped",
+  "reason": "Statement not obtained: sources give only a dataset mirror with examples whose nextCost and previousCost arrays are absent.",
+  "requirementsVerified": false
+}

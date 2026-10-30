@@ -1,0 +1,21 @@
+{
+  "number": 3286,
+  "title": "Find a Safe Walk Through a Grid",
+  "slug": "find-a-safe-walk-through-a-grid",
+  "source": "https://leetcode.com/problems/find-a-safe-walk-through-a-grid/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "unavailable",
+  "sources": [
+    "https://leetcode.com/problems/find-a-safe-walk-through-a-grid/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3286/"
+  ],
+  "accessAttempt": "Mirror gave constraints but only vague, grid-less example descriptions; statement not verified.",
+  "summary": "Grid walk with health; unsafe cells cost one health; determine whether the walk can finish with at least 1 health.",
+  "officialConstraints": [
+    "grid dimensions 1 to 50 per side with at least two cells",
+    "1 <= health <= m + n"
+  ],
+  "examples": [],
+  "visualizationNotes": "Not built: concrete example grids were not obtainable from a source, so no example set can be attributed.",
+  "requirementsVerified": false
+}
