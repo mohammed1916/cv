@@ -1,0 +1,31 @@
+{
+  "number": 3429,
+  "title": "Paint House IV",
+  "slug": "paint-house-iv",
+  "source": "https://leetcode.doocs.org/en/lc/3429/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-restatement (leetcode.doocs.org); official page not fetched",
+  "accessAttempt": "Official leetcode.com page not fetched in this run (WebSearch returned leetcode.com links only as search results). Statement taken from the leetcode.doocs.org mirror restatement.",
+  "summary": "n (even) houses in a row, cost[i][j] for color j+1; adjacent houses differ and mirror houses (i, n-1-i) differ; return minimum total cost.",
+  "officialConstraints": [
+    "2 <= n <= 10^5",
+    "n is even",
+    "cost.length == n",
+    "cost[i].length == 3",
+    "0 <= cost[i][j] <= 10^5"
+  ],
+  "examples": [
+    {
+      "input": "n=4, cost=[[3,5,7],[6,2,9],[4,8,1],[7,3,5]]",
+      "output": "9",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "n=6, cost=[[2,4,6],[5,3,8],[7,1,9],[4,6,2],[3,5,7],[8,2,4]]",
+      "output": "18",
+      "label": "from mirror statement"
+    }
+  ],
+  "visualizationNotes": "Caps n at 12 and cost entries at 20 for the visualization.",
+  "requirementsVerified": true
+}

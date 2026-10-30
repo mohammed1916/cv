@@ -1,0 +1,35 @@
+{
+  "number": 3447,
+  "title": "Assign Elements to Groups with Constraints",
+  "slug": "assign-elements-to-groups-with-constraints",
+  "source": "https://leetcode.doocs.org/en/lc/3447/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-restatement (leetcode.doocs.org); official page not fetched",
+  "accessAttempt": "Official leetcode.com page not fetched in this run (WebSearch returned leetcode.com links only as search results). Statement taken from the leetcode.doocs.org mirror restatement.",
+  "summary": "Assign to each group the smallest index of an element that divides the group size, or -1 if none; elements may be reused.",
+  "officialConstraints": [
+    "1 <= groups.length <= 10^5",
+    "1 <= elements.length <= 10^5",
+    "1 <= groups[i] <= 10^5",
+    "1 <= elements[i] <= 10^5"
+  ],
+  "examples": [
+    {
+      "input": "groups=[8,4,3,2,4], elements=[4,2]",
+      "output": "[0,0,-1,1,0]",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "groups=[2,3,5,7], elements=[5,3,3]",
+      "output": "[-1,1,0,-1]",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "groups=[10,21,30,41], elements=[2,1]",
+      "output": "[0,1,0,1]",
+      "label": "from mirror statement"
+    }
+  ],
+  "visualizationNotes": "Caps lists at 8 values and values at 50 for the visualization.",
+  "requirementsVerified": true
+}

@@ -1,0 +1,33 @@
+{
+  "number": 3448,
+  "title": "Count Substrings Divisible By Last Digit",
+  "slug": "count-substrings-divisible-by-last-digit",
+  "source": "https://leetcode.doocs.org/en/lc/3448/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-restatement (leetcode.doocs.org); official page not fetched",
+  "accessAttempt": "Official leetcode.com page not fetched in this run (WebSearch returned leetcode.com links only as search results). Statement taken from the leetcode.doocs.org mirror restatement.",
+  "summary": "Count substrings of a digit string that are divisible by their last digit, where the last digit must be non-zero; leading zeros allowed.",
+  "officialConstraints": [
+    "1 <= s.length <= 10^5",
+    "s consists only of digits"
+  ],
+  "examples": [
+    {
+      "input": "s=\"12936\"",
+      "output": "11",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "s=\"5701283\"",
+      "output": "18",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "s=\"1010101010\"",
+      "output": "25",
+      "label": "from mirror statement"
+    }
+  ],
+  "visualizationNotes": "Caps s at 20 digits for the visualization.",
+  "requirementsVerified": true
+}

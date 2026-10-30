@@ -1,0 +1,29 @@
+{
+  "number": 3426,
+  "title": "Manhattan Distances of All Arrangements of Pieces",
+  "slug": "manhattan-distances-of-all-arrangements-of-pieces",
+  "source": "https://leetcode.doocs.org/en/lc/3426/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-restatement (leetcode.doocs.org); official page not fetched",
+  "accessAttempt": "Official leetcode.com page not fetched in this run (WebSearch returned leetcode.com links only as search results). Statement taken from the leetcode.doocs.org mirror restatement.",
+  "summary": "Given m, n, k: sum over all placements of k identical pieces on an m x n grid (at most one per cell) of the sum of pairwise Manhattan distances, modulo 1e9+7.",
+  "officialConstraints": [
+    "1 <= m, n <= 10^5",
+    "2 <= m * n <= 10^5",
+    "2 <= k <= m * n"
+  ],
+  "examples": [
+    {
+      "input": "m=2, n=2, k=2",
+      "output": "8",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "m=1, n=4, k=3",
+      "output": "20",
+      "label": "from mirror statement"
+    }
+  ],
+  "visualizationNotes": "Caps m * n at 36 cells for the visualization.",
+  "requirementsVerified": true
+}

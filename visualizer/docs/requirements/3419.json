@@ -1,0 +1,43 @@
+{
+  "number": 3419,
+  "title": "Minimize the Maximum Edge Weight of Graph",
+  "slug": "minimize-the-maximum-edge-weight-of-graph",
+  "source": "https://leetcode.doocs.org/en/lc/3419/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-restatement (leetcode.doocs.org); official page not fetched",
+  "accessAttempt": "Official leetcode.com page not fetched in this run (WebSearch returned leetcode.com links only as search results). Statement taken from the leetcode.doocs.org mirror restatement.",
+  "summary": "Directed weighted graph with n nodes and threshold; remove edges so node 0 is reachable from every node, each node has at most threshold outgoing edges, minimize the maximum remaining edge weight, or -1.",
+  "officialConstraints": [
+    "2 <= n <= 10^5",
+    "1 <= threshold <= n - 1",
+    "1 <= edges.length <= min(10^5, n(n-1)/2)",
+    "edges[i].length = 3",
+    "0 <= Ai, Bi < n",
+    "Ai != Bi",
+    "1 <= Wi <= 10^6"
+  ],
+  "examples": [
+    {
+      "input": "n=5, edges=[[1,0,1],[2,0,2],[3,0,1],[4,3,1],[2,1,1]], threshold=2",
+      "output": "1",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "n=5, edges=[[0,1,1],[0,2,2],[0,3,1],[0,4,1],[1,2,1],[1,4,1]], threshold=1",
+      "output": "-1",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "n=5, edges=[[1,2,1],[1,3,3],[1,4,5],[2,3,2],[3,4,2],[4,0,1]], threshold=1",
+      "output": "2",
+      "label": "from mirror statement"
+    },
+    {
+      "input": "n=5, edges=[[1,2,1],[1,3,3],[1,4,5],[2,3,2],[4,0,1]], threshold=1",
+      "output": "-1",
+      "label": "from mirror statement"
+    }
+  ],
+  "visualizationNotes": "Caps n at 8 and weights at 20 for the visualization; the full constraints are above.",
+  "requirementsVerified": true
+}
