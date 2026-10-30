@@ -1,0 +1,12 @@
+{
+  "number": 3267,
+  "title": "Count Almost Equal Pairs II",
+  "source": "https://leetcode.com/problems/count-almost-equal-pairs-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Count index pairs i < j where the two numbers become equal after at most two digit swaps in one of them, with leading zeros allowed.",
+  "officialConstraints": "Not obtained in full (only the summary and a worked example were reached).",
+  "examples": "[1023, 2310, 2130, 213] -> 4 (search summary, pair (1023, 2310) needs two swaps). The three-value example is illustrative (not from the statement).",
+  "visualizationNotes": "Playback accepts 12 numbers up to 999999. Two-round swap reach per number; checked by an independent recursive search.",
+  "requirementsVerified": false
+}

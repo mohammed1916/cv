@@ -1,0 +1,12 @@
+{
+  "number": 3272,
+  "title": "Find the Count of Good Integers",
+  "source": "https://www.jointaro.com/interviews/questions/find-the-count-of-good-integers/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary-web-search",
+  "summary": "Count n-digit integers that can be rearranged, without a leading zero, into a palindrome divisible by k. Secondary source; the official LeetCode page was not reached.",
+  "officialConstraints": "Not obtained.",
+  "examples": "n = 3, k = 5 -> 27 and n = 1, k = 4 -> 2 (Jointaro listing, not official).",
+  "visualizationNotes": "Playback accepts n up to 6 and k up to 9. Enumerates palindromes and counts arrangements per digit multiset; checked by permutation brute force for n up to 4.",
+  "requirementsVerified": false
+}

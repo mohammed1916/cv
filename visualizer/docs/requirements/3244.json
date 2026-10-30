@@ -1,0 +1,12 @@
+{
+  "number": 3244,
+  "title": "Shortest Distance After Road Addition Queries II",
+  "source": "https://leetcode.com/problems/shortest-distance-after-road-addition-queries-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Start with roads i to i+1 for 0 <= i < n-1. After each query adds a road u to v, return the shortest distance from city 0 to city n-1.",
+  "officialConstraints": "3 <= n <= 10^5 and 1 <= queries.length <= 10^5 (search summary). Query ordering u < v not confirmed.",
+  "examples": "n = 4, queries [[0,3],[0,2]] -> [1,1] (search summary). Only this example is recorded.",
+  "visualizationNotes": "Playback accepts n up to 12 and 12 queries. The Python reference recomputes distances from v onward per query: correct, but O(n * q), not the optimized official-limit solution.",
+  "requirementsVerified": false
+}

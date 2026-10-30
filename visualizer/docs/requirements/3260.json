@@ -1,0 +1,12 @@
+{
+  "number": 3260,
+  "title": "Find the Largest Palindrome Divisible by K",
+  "source": "https://leetcode.com/problems/find-the-largest-palindrome-divisible-by-k/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Return the largest n-digit palindrome with no leading zero that is divisible by k, as a string. Return an empty string if none exists.",
+  "officialConstraints": "1 <= n <= 10^5 and 1 <= k <= 9 (search summary citing leetcode.com).",
+  "examples": "n = 3, k = 5 -> \"595\"; n = 5, k = 6 -> \"89898\" (search summary citing leetcode.com).",
+  "visualizationNotes": "Playback accepts n up to 40. Greedy outside-in digit choice with suffix reach sets; checked by brute force for n up to 12.",
+  "requirementsVerified": true
+}

@@ -1,0 +1,12 @@
+{
+  "number": 3249,
+  "title": "Count the Number of Good Nodes",
+  "source": "https://leetcode.com/problems/count-the-number-of-good-nodes/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Tree rooted at node 0. A node is good when all of its child subtrees have the same size. Count good nodes.",
+  "officialConstraints": "Not obtained in full.",
+  "examples": "Search summary reported outputs 7, 6, 12 for unnamed inputs; no statement inputs were obtained. Examples in the app are illustrative (not from the statement).",
+  "visualizationNotes": "Playback accepts at most 12 nodes. A leaf counts as good because it has no child sizes that differ.",
+  "requirementsVerified": false
+}

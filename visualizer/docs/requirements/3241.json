@@ -1,0 +1,12 @@
+{
+  "number": 3241,
+  "title": "Time Taken to Mark All Nodes",
+  "source": "https://leetcode.com/problems/time-taken-to-mark-all-nodes/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "For each start node of an undirected tree, find the time until all nodes are marked. An odd-numbered node is marked one unit after a neighbour marked at x-1; an even-numbered node is marked when a neighbour was marked at x-2.",
+  "officialConstraints": "Up to n = 10^5 nodes (search summary). Lower bound and tree guarantees not confirmed.",
+  "examples": "[[0,1],[0,2]] -> [2,4,3]; [[0,1]] -> [1,2]; [[2,4],[0,1],[2,3],[0,2]] -> [4,6,3,5,5] reported from the official statement by a search summary; not fetched directly.",
+  "visualizationNotes": "Playback accepts at most 12 nodes. Solution uses two tree passes (down and up) and is checked against a per-start search.",
+  "requirementsVerified": false
+}

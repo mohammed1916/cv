@@ -1,0 +1,12 @@
+{
+  "number": 3234,
+  "title": "Count the Number of Substrings With Dominant Ones",
+  "source": "https://leetcode.com/problems/count-the-number-of-substrings-with-dominant-ones",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Count substrings of a binary string where the number of ones is at least the square of the number of zeros.",
+  "officialConstraints": "1 <= s.length <= 4 * 10^4; s consists only of '0' and '1' (search summary citing leetcode.com).",
+  "examples": "Only '101101' -> 16 was reported, by a search summary of the official-style page; mirror sites disagree on '00011'. Not verified.",
+  "visualizationNotes": "Playback accepts strings up to 60 characters. Official limit 4 * 10^4 is not drawn.",
+  "requirementsVerified": false
+}

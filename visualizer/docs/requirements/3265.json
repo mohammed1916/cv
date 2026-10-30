@@ -1,0 +1,12 @@
+{
+  "number": 3265,
+  "title": "Count Almost Equal Pairs I",
+  "source": "https://leetcode.com/problems/count-almost-equal-pairs-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Count index pairs i < j where the two numbers become equal after at most one swap of two digits in one of them. Leading zeros are allowed after a swap.",
+  "officialConstraints": "2 <= nums.length <= 100 and 1 <= nums[i] <= 10^6 (search summary citing leetcode.com).",
+  "examples": "nums = [123, 231] -> 0 (search summary citing leetcode.com). The leading-zero example [100, 1] is illustrative (not from the statement).",
+  "visualizationNotes": "Playback accepts 12 numbers up to 999999. Each number's one-swap reach is built and checked against earlier numbers.",
+  "requirementsVerified": false
+}

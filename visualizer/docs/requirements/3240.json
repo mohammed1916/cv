@@ -1,0 +1,12 @@
+{
+  "number": 3240,
+  "title": "Minimum Number of Flips to Make Binary Grid Palindromic II",
+  "source": "https://leetcode.com/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "official-page-via-web-search",
+  "summary": "Return the minimum number of cells to flip so every row and column is a palindrome and the total number of ones is divisible by 4.",
+  "officialConstraints": "Not obtained (grid dimension limits not in the sources reached).",
+  "examples": "No example from the statement was obtained. Grid examples are illustrative (not from the statement).",
+  "visualizationNotes": "Playback accepts grids up to 6 by 6. Solution uses 4-cell mirror orbits and a 4-state remainder table; checked by brute force on small grids.",
+  "requirementsVerified": false
+}
