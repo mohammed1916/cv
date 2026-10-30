@@ -1,0 +1,18 @@
+{
+  "number": 3041,
+  "title": "Maximize Consecutive Elements in an Array After Modification",
+  "slug": "maximize-consecutive-elements-in-an-array-after-modification",
+  "source": "https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/description/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary-mirror-paraphrase",
+  "accessAttempt": "Official leetcode.com page not fetchable (HTTP 403). Statement obtained from leetcode.doocs.org/en/lc/3041/ via WebFetch, which paraphrased it (not verbatim).",
+  "summary": "Given a 0-indexed array of positive integers, each element may be increased by at most 1. Return the maximum number of elements that can be selected so that their sorted values form a run of consecutive integers.",
+  "officialConstraints": ["1 <= nums.length <= 10^5", "1 <= nums[i] <= 10^6"],
+  "examples": [
+    {"label": "Example 1", "input": {"nums": [2,1,5,1,1]}, "output": 3, "source": "doocs mirror paraphrase"},
+    {"label": "Example 2", "input": {"nums": [1,4,7,10]}, "output": 1, "source": "doocs mirror paraphrase"}
+  ],
+  "visualizationCap": "nums.length capped at 30 and values at 60 for the visualization; the solution itself handles the stated limits.",
+  "requirementsVerified": false,
+  "verificationNote": "Constraints and examples came from a paraphrasing mirror, not the official statement. Not verified against the official page."
+}
