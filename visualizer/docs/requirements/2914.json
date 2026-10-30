@@ -1,0 +1,17 @@
+{
+  "number": 2914,
+  "title": "Minimum Number of Changes to Make Binary String Beautiful",
+  "source": "https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary mirror (leetcode.doocs.org/en/lc/2914); official page not retrievable",
+  "sourcesUsed": ["https://leetcode.doocs.org/en/lc/2914/", "https://walkccc.me/LeetCode/problems/2914/"],
+  "summary": "A binary string is beautiful if it splits into even-length substrings that are all 1s or all 0s; return the fewest changes needed.",
+  "officialConstraints": "2 <= s.length <= 10^5; s.length is even; s[i] is '0' or '1' (exponent read from the mirror).",
+  "examples": [
+    { "input": "s = \"1001\"", "output": "2", "origin": "leetcode.doocs.org/en/lc/2914" },
+    { "input": "s = \"10\"", "output": "1", "origin": "leetcode.doocs.org/en/lc/2914" },
+    { "input": "s = \"0000\"", "output": "0", "origin": "leetcode.doocs.org/en/lc/2914" }
+  ],
+  "visualizationNotes": "Visualization caps s at 50 characters. Difficulty Medium is from a search snippet.",
+  "requirementsVerified": true
+}

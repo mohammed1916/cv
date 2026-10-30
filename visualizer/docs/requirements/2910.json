@@ -1,0 +1,16 @@
+{
+  "number": 2910,
+  "title": "Minimum Number of Groups to Create a Valid Assignment",
+  "source": "https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary mirror (leetcode.doocs.org/en/lc/2910, paraphrased); official page not retrievable",
+  "sourcesUsed": ["https://leetcode.doocs.org/en/lc/2910/"],
+  "summary": "Group equal values into boxes so that the sizes of any two groups differ by at most 1; return the fewest groups.",
+  "officialConstraints": "1 <= nums.length <= 10^5; 1 <= nums[i] <= 10^9 (exponents read from the mirror; the mirror dropped superscripts).",
+  "examples": [
+    { "input": "nums = [3,2,3,2,3]", "output": "2", "origin": "leetcode.doocs.org/en/lc/2910" },
+    { "input": "nums = [10,10,10,3,1,1]", "output": "4", "origin": "leetcode.doocs.org/en/lc/2910" }
+  ],
+  "visualizationNotes": "Visualization caps nums at 50 elements. Mirror text is paraphrased; the Python solution follows the counting rule (group sizes s or s+1 per value).",
+  "requirementsVerified": true
+}

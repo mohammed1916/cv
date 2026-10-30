@@ -1,0 +1,17 @@
+{
+  "number": 2911,
+  "title": "Minimum Changes to Make K Semi-palindromes",
+  "source": "https://leetcode.com/problems/minimum-changes-to-make-k-semi-palindromes/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary mirror (leetcode.doocs.org/en/lc/2911, paraphrased); official page not retrievable",
+  "sourcesUsed": ["https://leetcode.doocs.org/en/lc/2911/", "https://walkccc.me/LeetCode/problems/2911"],
+  "summary": "Split s into k substrings and minimise the letter changes needed so every substring is a semi-palindrome.",
+  "officialConstraints": "Mirror paraphrase only: 2 <= s.length <= 200; 1 <= k <= s.length / 2; lowercase letters. Exact official wording not verified.",
+  "examples": [
+    { "input": "s = \"abcac\", k = 2", "output": "1", "origin": "leetcode.doocs.org/en/lc/2911 (paraphrased)" },
+    { "input": "s = \"abcdef\", k = 2", "output": "2", "origin": "leetcode.doocs.org/en/lc/2911 (paraphrased)" },
+    { "input": "s = \"aabbaa\", k = 3", "output": "0", "origin": "leetcode.doocs.org/en/lc/2911 (paraphrased)" }
+  ],
+  "visualizationNotes": "Visualization caps s at 12 characters. Constraints are paraphrased, so requirementsVerified is false.",
+  "requirementsVerified": false
+}

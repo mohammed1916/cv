@@ -1,0 +1,16 @@
+{
+  "number": 2913,
+  "title": "Subarrays Distinct Element Sum of Squares I",
+  "source": "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary mirror (leetcode.doocs.org/en/lc/2913); official page not retrievable",
+  "sourcesUsed": ["https://leetcode.doocs.org/en/lc/2913/", "https://leetcode.com/problems/subarrays-distinct-element-sum-of-squares-i/description/"],
+  "summary": "For every subarray, square its number of distinct values and sum the results.",
+  "officialConstraints": "1 <= nums.length <= 100; 1 <= nums[i] <= 100.",
+  "examples": [
+    { "input": "nums = [1,2,1]", "output": "15", "origin": "leetcode.doocs.org/en/lc/2913" },
+    { "input": "nums = [1,1]", "output": "3", "origin": "leetcode.doocs.org/en/lc/2913" }
+  ],
+  "visualizationNotes": "Visualization caps nums at 50 elements. Difficulty tag not taken from a source.",
+  "requirementsVerified": true
+}

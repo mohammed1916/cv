@@ -1,0 +1,16 @@
+{
+  "number": 2923,
+  "title": "Find Champion I",
+  "source": "https://leetcode.com/problems/find-champion-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary mirror (leetcode.doocs.org/en/lc/2923); official page not retrievable",
+  "sourcesUsed": ["https://leetcode.doocs.org/en/lc/2923/"],
+  "summary": "In an n x n strength grid (grid[i][j] = 1 means team i beats team j), return the team that beats every other team.",
+  "officialConstraints": "n == grid.length == grid[i].length; 2 <= n <= 100; entries 0 or 1; diagonal 0; exactly one of grid[i][j], grid[j][i] is 1 for i != j; transitive.",
+  "examples": [
+    { "input": "grid = [[0,1],[0,0]]", "output": "0", "origin": "leetcode.doocs.org/en/lc/2923" },
+    { "input": "grid = [[0,0,1],[1,0,1],[0,0,0]]", "output": "1", "origin": "leetcode.doocs.org/en/lc/2923" }
+  ],
+  "visualizationNotes": "Visualization caps the grid at 10 teams. Difficulty tag not taken from a source.",
+  "requirementsVerified": true
+}

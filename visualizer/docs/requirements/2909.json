@@ -1,0 +1,17 @@
+{
+  "number": 2909,
+  "title": "Minimum Sum of Mountain Triplets II",
+  "source": "https://leetcode.com/problems/minimum-sum-of-mountain-triplets-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "secondary mirror (leetcode.doocs.org/en/lc/2909, paraphrased); official page not retrievable",
+  "sourcesUsed": ["https://leetcode.doocs.org/en/lc/2909/", "https://leetcode.com/problems/minimum-sum-of-mountain-triplets-ii/"],
+  "summary": "Find indices i<j<k with nums[i] < nums[j] and nums[k] < nums[j]; return the minimum nums[i]+nums[j]+nums[k], or -1.",
+  "officialConstraints": "3 <= nums.length <= 10^5; 1 <= nums[i] <= 10^8.",
+  "examples": [
+    { "input": "nums = [8,6,1,5,3]", "output": "9", "origin": "leetcode.doocs.org/en/lc/2909" },
+    { "input": "nums = [5,4,8,7,10,2]", "output": "13", "origin": "leetcode.doocs.org/en/lc/2909" },
+    { "input": "nums = [6,5,4,3,4,5]", "output": "-1", "origin": "leetcode.doocs.org/en/lc/2909" }
+  ],
+  "visualizationNotes": "Visualization caps nums at 50 elements; the Python solution accepts the full constraint range. Difficulty tag not taken from a source.",
+  "requirementsVerified": true
+}
