@@ -1,0 +1,47 @@
+{
+  "number": 3333,
+  "title": "Find the Original Typed String II",
+  "slug": "find-the-original-typed-string-ii",
+  "source": "https://leetcode.com/problems/find-the-original-typed-string-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/find-the-original-typed-string-ii/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3333/"
+  ],
+  "accessAttempt": "Constraints and three examples from the doocs mirror (the third example lacks an explanation on the mirror; its output 8 was checked by hand).",
+  "summary": "Count possible original strings (any number of over-held keys) of length at least k for the typed word, modulo 1e9+7.",
+  "officialConstraints": [
+    "1 <= word.length <= 5 * 10^5",
+    "lowercase English letters only",
+    "1 <= k <= 2000"
+  ],
+  "examples": [
+    {
+      "input": {
+        "word": "aabbccdd",
+        "k": 7
+      },
+      "output": 5,
+      "source": "https://leetcode.doocs.org/en/lc/3333/"
+    },
+    {
+      "input": {
+        "word": "aabbccdd",
+        "k": 8
+      },
+      "output": 1,
+      "source": "https://leetcode.doocs.org/en/lc/3333/"
+    },
+    {
+      "input": {
+        "word": "aaabbb",
+        "k": 3
+      },
+      "output": 8,
+      "source": "https://leetcode.doocs.org/en/lc/3333/"
+    }
+  ],
+  "visualizationNotes": "Visualization caps word length and k at 40 (the DP table is runs by sums); official limits are larger.",
+  "requirementsVerified": true
+}

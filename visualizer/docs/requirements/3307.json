@@ -1,0 +1,49 @@
+{
+  "number": 3307,
+  "title": "Find the K-th Character in String Game II",
+  "slug": "find-the-k-th-character-in-string-game-ii",
+  "source": "https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3307/"
+  ],
+  "accessAttempt": "Constraints and examples from the doocs mirror; the second example's word was checked by hand against the statement's recurrence.",
+  "summary": "Starting from 'a', apply operations (0 appends a copy, 1 appends a shifted copy); return the k-th character of the final word.",
+  "officialConstraints": [
+    "1 <= k <= 10^14",
+    "1 <= operations.length <= 100",
+    "each operation is 0 or 1",
+    "the final word has at least k characters"
+  ],
+  "examples": [
+    {
+      "input": {
+        "k": 5,
+        "operations": [
+          0,
+          0,
+          0
+        ]
+      },
+      "output": "a",
+      "source": "https://leetcode.doocs.org/en/lc/3307/"
+    },
+    {
+      "input": {
+        "k": 10,
+        "operations": [
+          0,
+          1,
+          0,
+          1
+        ]
+      },
+      "output": "b",
+      "source": "https://leetcode.doocs.org/en/lc/3307/"
+    }
+  ],
+  "visualizationNotes": "Visualization shows the operation list and the backward walk; no string is built, so the full k range is supported.",
+  "requirementsVerified": true
+}

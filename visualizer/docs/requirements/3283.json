@@ -1,0 +1,78 @@
+{
+  "number": 3283,
+  "title": "Maximum Number of Moves to Kill All Pawns",
+  "slug": "maximum-number-of-moves-to-kill-all-pawns",
+  "source": "https://leetcode.com/problems/maximum-number-of-moves-to-kill-all-pawns/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/maximum-number-of-moves-to-kill-all-pawns/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3283/"
+  ],
+  "accessAttempt": "Constraints and examples from the doocs mirror; the mirror is a paraphrase of the statement.",
+  "summary": "Alice and Bob alternately capture pawns with a knight by the fewest moves; Alice maximizes the total number of moves, Bob minimizes it.",
+  "officialConstraints": [
+    "0 <= kx, ky <= 49",
+    "1 <= positions.length <= 15",
+    "positions[i] are in [0, 49] and unique",
+    "no pawn starts on the knight square"
+  ],
+  "examples": [
+    {
+      "input": {
+        "kx": 1,
+        "ky": 1,
+        "positions": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "output": 4,
+      "source": "https://leetcode.doocs.org/en/lc/3283/"
+    },
+    {
+      "input": {
+        "kx": 0,
+        "ky": 2,
+        "positions": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ]
+      },
+      "output": 8,
+      "source": "https://leetcode.doocs.org/en/lc/3283/"
+    },
+    {
+      "input": {
+        "kx": 0,
+        "ky": 0,
+        "positions": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            4
+          ]
+        ]
+      },
+      "output": 3,
+      "source": "https://leetcode.doocs.org/en/lc/3283/"
+    }
+  ],
+  "visualizationNotes": "Visualization caps positions at 6 pawns (2^6 masks); solver is the full bitmask DP and supports up to 15.",
+  "requirementsVerified": true
+}

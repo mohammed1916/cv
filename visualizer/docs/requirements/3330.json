@@ -1,0 +1,43 @@
+{
+  "number": 3330,
+  "title": "Find the Original Typed String I",
+  "slug": "find-the-original-typed-string-i",
+  "source": "https://leetcode.com/problems/find-the-original-typed-string-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/find-the-original-typed-string-i/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3330/"
+  ],
+  "accessAttempt": "Constraints and three examples from the doocs mirror.",
+  "summary": "Alice may have held one key too long at most once; count possible original strings for the typed word.",
+  "officialConstraints": [
+    "1 <= word.length <= 100",
+    "lowercase English letters only"
+  ],
+  "examples": [
+    {
+      "input": {
+        "word": "abbcccc"
+      },
+      "output": 5,
+      "source": "https://leetcode.doocs.org/en/lc/3330/"
+    },
+    {
+      "input": {
+        "word": "abcd"
+      },
+      "output": 1,
+      "source": "https://leetcode.doocs.org/en/lc/3330/"
+    },
+    {
+      "input": {
+        "word": "aaaa"
+      },
+      "output": 4,
+      "source": "https://leetcode.doocs.org/en/lc/3330/"
+    }
+  ],
+  "visualizationNotes": "Visualization shows the typed word; word length up to the official 100 is supported.",
+  "requirementsVerified": true
+}

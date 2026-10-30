@@ -1,0 +1,36 @@
+{
+  "number": 3320,
+  "title": "Count The Number of Winning Sequences",
+  "slug": "count-the-number-of-winning-sequences",
+  "source": "https://leetcode.com/problems/count-the-number-of-winning-sequences/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/count-the-number-of-winning-sequences/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3320/"
+  ],
+  "accessAttempt": "Constraints and two examples from the doocs mirror (paraphrased); the mirror's explanation for FFF was checked by hand.",
+  "summary": "Alice's moves are given; count Bob's sequences of F/W/E (no move repeated in consecutive rounds) with strictly more points than Alice, modulo 1e9+7.",
+  "officialConstraints": [
+    "1 <= s.length <= 1000",
+    "s[i] is F, W, or E"
+  ],
+  "examples": [
+    {
+      "input": {
+        "s": "FFF"
+      },
+      "output": 3,
+      "source": "https://leetcode.doocs.org/en/lc/3320/"
+    },
+    {
+      "input": {
+        "s": "FWEFW"
+      },
+      "output": 18,
+      "source": "https://leetcode.doocs.org/en/lc/3320/"
+    }
+  ],
+  "visualizationNotes": "Visualization caps s at 10 characters; solver is O(n^2).",
+  "requirementsVerified": true
+}

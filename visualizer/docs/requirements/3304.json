@@ -1,0 +1,35 @@
+{
+  "number": 3304,
+  "title": "Find the K-th Character in String Game I",
+  "slug": "find-the-k-th-character-in-string-game-i",
+  "source": "https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3304/"
+  ],
+  "accessAttempt": "Constraint and examples from the doocs mirror.",
+  "summary": "Starting from 'a', repeatedly append a copy shifted to the next letter (z wraps to a); return the k-th character.",
+  "officialConstraints": [
+    "1 <= k <= 500"
+  ],
+  "examples": [
+    {
+      "input": {
+        "k": 5
+      },
+      "output": "b",
+      "source": "https://leetcode.doocs.org/en/lc/3304/"
+    },
+    {
+      "input": {
+        "k": 10
+      },
+      "output": "c",
+      "source": "https://leetcode.doocs.org/en/lc/3304/"
+    }
+  ],
+  "visualizationNotes": "Visualization shows the built word with pages of 32 characters; k capped at 500 by the official constraint.",
+  "requirementsVerified": true
+}

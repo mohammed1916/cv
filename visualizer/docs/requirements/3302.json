@@ -1,0 +1,65 @@
+{
+  "number": 3302,
+  "title": "Find the Lexicographically Smallest Valid Sequence",
+  "slug": "find-the-lexicographically-smallest-valid-sequence",
+  "source": "https://leetcode.com/problems/find-the-lexicographically-smallest-valid-sequence/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/find-the-lexicographically-smallest-valid-sequence/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3302/"
+  ],
+  "accessAttempt": "Constraints and four examples from the doocs mirror; search snippet also lists the first three examples.",
+  "summary": "Return the lexicographically smallest strictly increasing index sequence in word1 whose characters are almost equal to word2 (at most one changed character); empty array if none.",
+  "officialConstraints": [
+    "1 <= word2.length < word1.length <= 3 * 10^5",
+    "lowercase English letters only"
+  ],
+  "examples": [
+    {
+      "input": {
+        "word1": "vbcca",
+        "word2": "abc"
+      },
+      "output": [
+        0,
+        1,
+        2
+      ],
+      "source": "https://leetcode.doocs.org/en/lc/3302/"
+    },
+    {
+      "input": {
+        "word1": "bacdc",
+        "word2": "abc"
+      },
+      "output": [
+        1,
+        2,
+        4
+      ],
+      "source": "https://leetcode.doocs.org/en/lc/3302/"
+    },
+    {
+      "input": {
+        "word1": "aaaaaa",
+        "word2": "aaabc"
+      },
+      "output": [],
+      "source": "https://leetcode.doocs.org/en/lc/3302/"
+    },
+    {
+      "input": {
+        "word1": "abc",
+        "word2": "ab"
+      },
+      "output": [
+        0,
+        1
+      ],
+      "source": "https://leetcode.doocs.org/en/lc/3302/"
+    }
+  ],
+  "visualizationNotes": "Visualization caps word1 at 30 characters.",
+  "requirementsVerified": true
+}

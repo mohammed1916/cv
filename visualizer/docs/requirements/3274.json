@@ -1,0 +1,39 @@
+{
+  "number": 3274,
+  "title": "Check if Two Chessboard Squares Have the Same Color",
+  "slug": "check-if-two-chessboard-squares-have-the-same-color",
+  "source": "https://leetcode.com/problems/check-if-two-chessboard-squares-have-the-same-color/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror-paraphrase",
+  "sources": [
+    "https://leetcode.com/problems/check-if-two-chessboard-squares-have-the-same-color/ (official page returns 403 to fetch; link from web search)",
+    "https://leetcode.doocs.org/en/lc/3274/"
+  ],
+  "accessAttempt": "Constraints and both examples taken from the doocs mirror (paraphrased by the mirror).",
+  "summary": "Given two squares (letter a-h, digit 1-8), return true if they have the same color.",
+  "officialConstraints": [
+    "coordinate1 and coordinate2 have length 2",
+    "first character is a letter from a to h",
+    "second character is a digit from 1 to 8"
+  ],
+  "examples": [
+    {
+      "input": {
+        "coordinate1": "a1",
+        "coordinate2": "c3"
+      },
+      "output": true,
+      "source": "https://leetcode.doocs.org/en/lc/3274/"
+    },
+    {
+      "input": {
+        "coordinate1": "a1",
+        "coordinate2": "h3"
+      },
+      "output": false,
+      "source": "https://leetcode.doocs.org/en/lc/3274/"
+    }
+  ],
+  "visualizationNotes": "No cap needed: constant time. Visual shows both squares and their column/row parities.",
+  "requirementsVerified": true
+}
