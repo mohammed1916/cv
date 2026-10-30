@@ -1,0 +1,34 @@
+{
+  "number": 2971,
+  "title": "Find Polygon With the Largest Perimeter",
+  "source": "https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries of the LeetCode statement and mirrors (leetcode.com page cited; not fetched directly, 403 for direct fetch)",
+  "sourceUrls": [
+    "https://leetcode.com/problems/find-polygon-with-the-largest-perimeter/",
+    "https://leetcode.doocs.org/en/lc/2971/",
+    "https://walkccc.me/LeetCode/problems/2971/"
+  ],
+  "summary": "Given positive integers nums, pick at least three of them that form a polygon (longest side strictly less than the sum of the others). Return the largest perimeter, or -1 if none exists.",
+  "officialConstraints": "3 <= nums.length <= 100000; 1 <= nums[i] <= 1000000000.",
+  "examples": [
+    {
+      "input": "nums = [2,3,4]",
+      "output": "9"
+    },
+    {
+      "input": "nums = [1,2,3]",
+      "output": "-1"
+    },
+    {
+      "input": "nums = [3,3,3,20]",
+      "output": "9"
+    },
+    {
+      "input": "nums = [5,5,50]",
+      "output": "-1"
+    }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization accepts 3 to 50 sides; perimeter values stay within JSON number range."
+}

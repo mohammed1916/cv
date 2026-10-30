@@ -1,0 +1,25 @@
+{
+  "number": 3000,
+  "title": "Maximum Area of Longest Diagonal Rectangle",
+  "source": "https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries; per-side constraints not retrieved",
+  "sourceUrls": [
+    "https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/description/",
+    "https://leetcode.doocs.org/en/lc/3000/"
+  ],
+  "summary": "Given dimensions where each entry is [length, width], return the area of the rectangle with the longest diagonal, breaking ties by the larger area.",
+  "officialConstraints": "1 <= dimensions.length <= 100 (only this bound was retrieved); per-side bounds not retrieved.",
+  "examples": [
+    {
+      "input": "dimensions = [[9,3],[8,6]]",
+      "output": "48"
+    },
+    {
+      "input": "dimensions = [[3,4],[4,3]]",
+      "output": "12"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization accepts 1 to 50 rectangles with side values from 1 to 1000 (assumed; side bounds not retrieved)."
+}

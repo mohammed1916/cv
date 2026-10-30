@@ -1,0 +1,25 @@
+{
+  "number": 2982,
+  "title": "Find Longest Special Substring That Occurs Thrice II",
+  "source": "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries of mirrors; statement not fetched",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/en/lc/2982/",
+    "https://walkccc.me/LeetCode/problems/2982/"
+  ],
+  "summary": "Return the length of the longest special substring of s that occurs at least three times, or -1.",
+  "officialConstraints": "3 <= s.length <= 5 * 10^5; lowercase English letters (from search summaries).",
+  "examples": [
+    {
+      "input": "s = \"aaaa\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \"abcdef\"",
+      "output": "-1"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization accepts 3 to 60 characters. Official statement page not fetched; third example not retrieved."
+}

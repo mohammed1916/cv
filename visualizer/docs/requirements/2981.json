@@ -1,0 +1,25 @@
+{
+  "number": 2981,
+  "title": "Find Longest Special Substring That Occurs Thrice I",
+  "source": "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search summaries; third example not retrieved",
+  "sourceUrls": [
+    "https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/description/",
+    "https://leetcode.doocs.org/en/lc/2981"
+  ],
+  "summary": "Return the length of the longest special substring (one repeated letter) that occurs at least three times in s, or -1.",
+  "officialConstraints": "3 <= s.length <= 50; lowercase English letters only (from search summaries).",
+  "examples": [
+    {
+      "input": "s = \"aaaa\"",
+      "output": "2"
+    },
+    {
+      "input": "s = \"abcdef\"",
+      "output": "-1"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization accepts 3 to 60 characters. Third statement example not retrieved, so requirements are not verified."
+}

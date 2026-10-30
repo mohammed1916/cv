@@ -1,0 +1,29 @@
+{
+  "number": 2973,
+  "title": "Find Number of Coins to Place in Tree Nodes",
+  "source": "https://leetcode.com/problems/find-number-of-coins-to-place-in-tree-nodes/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "search results citing the LeetCode statement and a community repository",
+  "sourceUrls": [
+    "https://leetcode.com/problems/find-number-of-coins-to-place-in-tree-nodes/",
+    "https://github.com/kamyu104/LeetCode-Solutions/blob/master/Python/find-number-of-coins-to-place-in-tree-nodes.py"
+  ],
+  "summary": "Each node has a subtree. A subtree with fewer than 3 nodes gets 1 coin. Otherwise the node gets the maximum product of three distinct subtree costs, or 0 if that product is negative.",
+  "officialConstraints": "2 <= n <= 2 * 10^4; 1 <= |cost[i]| <= 10^4.",
+  "examples": [
+    {
+      "input": "edges = [[0,1],[0,2],[0,3],[0,4],[0,5]], cost = [1,2,3,4,5,6]",
+      "output": "[120,1,1,1,1,1]"
+    },
+    {
+      "input": "edges = [[0,1],[0,2],[1,3],[1,4],[1,5],[2,6],[2,7],[2,8]], cost = [1,4,2,3,5,7,8,-4,2]",
+      "output": "[280,140,32,1,1,1,1,1,1]"
+    },
+    {
+      "input": "edges = [[0,1],[0,2]], cost = [1,2,-2]",
+      "output": "[0,1,1]"
+    }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization caps the tree at 50 nodes and cost magnitudes at 10000."
+}

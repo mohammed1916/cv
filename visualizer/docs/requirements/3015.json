@@ -1,0 +1,21 @@
+{
+  "number": 3015,
+  "title": "Count the Number of Houses at a Certain Distance I",
+  "source": "https://leetcode.com/problems/count-the-number-of-houses-at-a-certain-distance-i/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror pages; statement examples incomplete",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/lc/3015/",
+    "https://leetcode.doocs.org/lc/3017/"
+  ],
+  "summary": "Houses 1..n form a line with an extra street between x and y. For each k from 1 to n, count ordered house pairs whose shortest path has length k; return the counts as a 1-indexed array.",
+  "officialConstraints": "2 <= n <= 100; 1 <= x, y <= n (mirror source).",
+  "examples": [
+    {
+      "input": "n = 5, x = 2, y = 4",
+      "output": "[10,8,2,0,0]"
+    }
+  ],
+  "requirementsVerified": false,
+  "visualizationNotes": "Visualization accepts 2 to 30 houses. Only one example was retrieved; the statement examples are incomplete, so requirements are not verified."
+}

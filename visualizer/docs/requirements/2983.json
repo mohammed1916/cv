@@ -1,0 +1,29 @@
+{
+  "number": 2983,
+  "title": "Palindrome Rearrangement Queries",
+  "source": "https://leetcode.com/problems/palindrome-rearrangement-queries/",
+  "checkedOn": "2026-10-30",
+  "sourceKind": "mirror pages and a repository commit (official page not fetched)",
+  "sourceUrls": [
+    "https://leetcode.doocs.org/lc/2983/",
+    "https://github.com/LeetCode-in-Kotlin/LeetCode-in-Kotlin.github.io/commit/29a5ed786a7cb14b7b7e893fd9c01b2a35ef5824"
+  ],
+  "summary": "Given an even-length string s and queries [a,b,c,d]: rearrange s[a..b] (left half) and s[c..d] (right half) for each query independently; report whether s can become a palindrome.",
+  "officialConstraints": "Length up to 10^5, up to 10^5 queries, lowercase letters; left range inside the first half, right range inside the second half (mirror source, not the official page).",
+  "examples": [
+    {
+      "input": "s = \"abcabc\", queries = [[1,1,3,5],[0,2,5,5]]",
+      "output": "[true,true]"
+    },
+    {
+      "input": "s = \"abbcdecbba\", queries = [[0,2,7,9]]",
+      "output": "[false]"
+    },
+    {
+      "input": "s = \"acbcab\", queries = [[1,2,4,5]]",
+      "output": "[true]"
+    }
+  ],
+  "requirementsVerified": true,
+  "visualizationNotes": "Visualization accepts length 2 to 50 and up to 20 queries. Examples and constraints come from a mirror, not from leetcode.com directly."
+}
