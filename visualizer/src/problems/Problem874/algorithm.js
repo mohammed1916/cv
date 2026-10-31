@@ -51,30 +51,30 @@ export function buildTrace({ commands, obstacles }) {
   const trail = [[0, 0]]
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, x, y, d, best, cmd: -1, trail: trail.map((p) => [...p]), blocked: null, ...extra })
-  push('start', L('put all obstacles'), 'Robot starts at (0, 0) facing north. Obstacles go into a set for O(1) lookup.')
+  push('start', L('put all obstacles'), 'Robot starts at (0, 0) facing north. Obstacles go into a set for O(1) lookup.', { pythonLine: 2 })
   commands.forEach((c, ci) => {
     if (c === -2) {
       d = (d + 3) % 4
-      push('turn', L('turn left'), `Command ${c}: turn left 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci })
+      push('turn', L('turn left'), `Command ${c}: turn left 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci, pythonLine: 8 })
     } else if (c === -1) {
       d = (d + 1) % 4
-      push('turn', L('turn right'), `Command ${c}: turn right 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci })
+      push('turn', L('turn right'), `Command ${c}: turn right 90 degrees, now facing ${DIRS[d]}.`, { cmd: ci, pythonLine: 10 })
     } else {
-      push('move', L('repeat c times'), `Command ${c}: try to walk ${c} unit${c > 1 ? 's' : ''} ${DIRS[d]}, one unit at a time.`, { cmd: ci })
+      push('move', L('repeat c times'), `Command ${c}: try to walk ${c} unit${c > 1 ? 's' : ''} ${DIRS[d]}, one unit at a time.`, { cmd: ci, pythonLine: 12 })
       for (let s = 0; s < c; s++) {
         const nx = x + dx[d]; const ny = y + dy[d]
         if (obs.has(`${nx},${ny}`)) {
-          push('blocked', L('is an obstacle, stop'), `(${nx}, ${ny}) is an obstacle, so the robot stays at (${x}, ${y}) and abandons the rest of this command.`, { cmd: ci, blocked: [nx, ny] })
+          push('blocked', L('is an obstacle, stop'), `(${nx}, ${ny}) is an obstacle, so the robot stays at (${x}, ${y}) and abandons the rest of this command.`, { cmd: ci, blocked: [nx, ny], pythonLine: 15 })
           break
         }
         x = nx; y = ny; trail.push([x, y])
         const dist = x * x + y * y
         const improved = dist > best
         best = Math.max(best, dist)
-        push('move', L('move to (nx, ny)'), `Step to (${x}, ${y}): squared distance ${dist}${improved ? ' is a new maximum' : ` does not beat ${best}`}.`, { cmd: ci })
+        push('move', L('move to (nx, ny)'), `Step to (${x}, ${y}): squared distance ${dist}${improved ? ' is a new maximum' : ` does not beat ${best}`}.`, { cmd: ci, pythonLine: 16 })
       }
     }
   })
-  push('done', L('return best'), `Done: the farthest squared distance from the origin was ${best}.`)
+  push('done', L('return best'), `Done: the farthest squared distance from the origin was ${best}.`, { pythonLine: 18 })
   return { input: { commands, obstacles }, result: best, frames }
 }

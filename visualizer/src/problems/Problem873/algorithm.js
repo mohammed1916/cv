@@ -43,23 +43,23 @@ export function buildTrace(arr) {
   let best = 0
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, dp: dp.map((r) => [...r]), best, j: -1, k: -1, i: -1, ...extra })
-  push('start', L('map each value in arr'), 'Every pair is a Fibonacci-like sequence of length 2, so dp starts at 2. dp[j][k] is the longest chain ending with arr[j], arr[k].')
+  push('start', L('map each value in arr'), 'Every pair is a Fibonacci-like sequence of length 2, so dp starts at 2. dp[j][k] is the longest chain ending with arr[j], arr[k].', { pythonLine: 2 })
   for (let k = 0; k < n; k++) {
     for (let j = 0; j < k; j++) {
       const need = arr[k] - arr[j]
       const i = idx.has(need) ? idx.get(need) : -1
-      push('lookup', L('the index of need'), `Chain ends (${arr[j]}, ${arr[k]}): the previous element must be ${arr[k]} - ${arr[j]} = ${need}${i >= 0 ? ` (found at index ${i})` : ' (not in arr)'}.`, { j, k, i })
+      push('lookup', L('the index of need'), `Chain ends (${arr[j]}, ${arr[k]}): the previous element must be ${arr[k]} - ${arr[j]} = ${need}${i >= 0 ? ` (found at index ${i})` : ' (not in arr)'}.`, { j, k, i, pythonLine: 8 })
       if (i >= 0 && i < j) {
         dp[j][k] = dp[i][j] + 1
         best = Math.max(best, dp[j][k])
-        push('extend', L('set dp[j][k]'), `${need} sits at index ${i} before ${j}, so extend the chain ending (${arr[i]}, ${arr[j]}): dp[${j}][${k}] = ${dp[j][k]}. best = ${best}.`, { j, k, i })
+        push('extend', L('set dp[j][k]'), `${need} sits at index ${i} before ${j}, so extend the chain ending (${arr[i]}, ${arr[j]}): dp[${j}][${k}] = ${dp[j][k]}. best = ${best}.`, { j, k, i, pythonLine: 10 })
       } else if (i >= 0) {
-        push('skip', L('is at least 0'), `Index ${i} is not before j=${j}, so ${need} cannot precede ${arr[j]} in an increasing chain; the pair stays at 2.`, { j, k, i })
+        push('skip', L('is at least 0'), `Index ${i} is not before j=${j}, so ${need} cannot precede ${arr[j]} in an increasing chain; the pair stays at 2.`, { j, k, i, pythonLine: 9 })
       } else {
-        push('skip', L('is at least 0'), `No valid predecessor, so the pair stays at length 2.`, { j, k, i })
+        push('skip', L('is at least 0'), `No valid predecessor, so the pair stays at length 2.`, { j, k, i, pythonLine: 9 })
       }
     }
   }
-  push('done', L('return best'), best >= 3 ? `Done: the longest Fibonacci-like subsequence has length ${best}.` : 'Done: no chain of length 3 exists, so the answer is 0.')
+  push('done', L('return best'), best >= 3 ? `Done: the longest Fibonacci-like subsequence has length ${best}.` : 'Done: no chain of length 3 exists, so the answer is 0.', { pythonLine: 12 })
   return { input: arr, result: best, frames }
 }

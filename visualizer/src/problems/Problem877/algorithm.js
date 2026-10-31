@@ -11,10 +11,10 @@ export function buildTrace(piles) {
   const n = piles.length
   const dp = Array.from({ length: n }, () => Array(n).fill(null))
   const snap = () => dp.map(row => row.map(v => (v === null ? '' : v)))
-  const frames = [{ phase: 'start', table: snap(), cell: null, related: [], activeLine: L('let dp be an n by n'), message: 'dp[i][j] will hold the best lead (current mover minus opponent) on piles i..j.' }]
+  const frames = [{ phase: 'start', table: snap(), cell: null, related: [], activeLine: L('let dp be an n by n'), message: 'dp[i][j] will hold the best lead (current mover minus opponent) on piles i..j.', pythonLine: 3 }]
   for (let i = 0; i < n; i++) {
     dp[i][i] = piles[i]
-    frames.push({ phase: 'base', table: snap(), cell: { row: i, column: i }, related: [], activeLine: L('set dp[i][i] to piles[i]'), message: `With only pile ${i} left the mover takes it: dp[${i}][${i}] = ${piles[i]}.` })
+    frames.push({ phase: 'base', table: snap(), cell: { row: i, column: i }, related: [], activeLine: L('set dp[i][i] to piles[i]'), message: `With only pile ${i} left the mover takes it: dp[${i}][${i}] = ${piles[i]}.`, pythonLine: 5 })
   }
   for (let length = 2; length <= n; length++) {
     for (let i = 0; i + length <= n; i++) {
@@ -25,11 +25,12 @@ export function buildTrace(piles) {
       frames.push({
         phase: 'fill', table: snap(), cell: { row: i, column: j }, related: [{ row: i + 1, column: j }, { row: i, column: j - 1 }], activeLine: L('set dp[i][j] to the larger'),
         message: `Piles ${i}..${j}: take left = ${piles[i]} - dp[${i + 1}][${j}] = ${takeLeft}, take right = ${piles[j]} - dp[${i}][${j - 1}] = ${takeRight}. The mover keeps the larger: ${dp[i][j]}.`,
+        pythonLine: 9,
       })
     }
   }
   const result = dp[0][n - 1] > 0
-  frames.push({ phase: 'done', table: snap(), cell: { row: 0, column: n - 1 }, related: [], activeLine: L('return whether dp'), message: `dp[0][${n - 1}] = ${dp[0][n - 1]}, so Alex ${result ? 'can' : 'cannot'} win: ${result}.` })
+  frames.push({ phase: 'done', table: snap(), cell: { row: 0, column: n - 1 }, related: [], activeLine: L('return whether dp'), message: `dp[0][${n - 1}] = ${dp[0][n - 1]}, so Alex ${result ? 'can' : 'cannot'} win: ${result}.`, pythonLine: 10 })
   return { input: [...piles], result, frames }
 }
 

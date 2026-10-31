@@ -16,22 +16,22 @@ export function buildTrace({ nums1, nums2 }) {
   let lo = 0, hi = n - 1
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, i: -1, lo, hi, res: res.slice(), target: null, ...extra })
-  f('start', L('sort nums1 in ascending'), 'Sort nums1 ascending. Also sort nums2\'s indices by value so we know the weakest and strongest opponents.')
-  f('sort', L('sort the indices of nums2'), `Opponent order (indices of nums2, ascending): [${order.join(', ')}] = values [${order.map(i => nums2[i]).join(', ')}].`)
+  f('start', L('sort nums1 in ascending'), 'Sort nums1 ascending. Also sort nums2\'s indices by value so we know the weakest and strongest opponents.', { pythonLine: 2 })
+  f('sort', L('sort the indices of nums2'), `Opponent order (indices of nums2, ascending): [${order.join(', ')}] = values [${order.map(i => nums2[i]).join(', ')}].`, { pythonLine: 3 })
   a.forEach((x, i) => {
     const weakest = nums2[order[lo]]
     const win = x > weakest
-    f('compare', L('let weakest be'), `Card ${x} vs weakest remaining opponent ${weakest} (nums2[${order[lo]}]).`, { i, target: order[lo] })
+    f('compare', L('let weakest be'), `Card ${x} vs weakest remaining opponent ${weakest} (nums2[${order[lo]}]).`, { i, target: order[lo], pythonLine: 7 })
     if (win) {
       res[order[lo]] = x; lo++
-      f('win', L('assign x to position order[lo]'), `${x} beats ${weakest}: assign it to position ${order[lo - 1]} and advance to the next weakest.`, { i, target: order[lo - 1] })
+      f('win', L('assign x to position order[lo]'), `${x} beats ${weakest}: assign it to position ${order[lo - 1]} and advance to the next weakest.`, { i, target: order[lo - 1], pythonLine: 8 })
     } else {
       const t = order[hi], v = nums2[t]
       res[t] = x; hi--
-      f('sacrifice', L('assign x to position order[hi]'), `${x} cannot beat even the weakest (${weakest}), so it is useless; waste it on the strongest remaining opponent ${v} at position ${t}.`, { i, target: t })
+      f('sacrifice', L('assign x to position order[hi]'), `${x} cannot beat even the weakest (${weakest}), so it is useless; waste it on the strongest remaining opponent ${v} at position ${t}.`, { i, target: t, pythonLine: 11 })
     }
   })
-  f('done', L('return res'), `Result: [${res.join(', ')}].`)
+  f('done', L('return res'), `Result: [${res.join(', ')}].`, { pythonLine: 13 })
   return { input: { nums1, nums2 }, sorted: a, order, result: res, frames }
 }
 

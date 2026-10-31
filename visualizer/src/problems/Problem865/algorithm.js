@@ -24,10 +24,10 @@ export function buildTrace(tree) {
   const heights = {}
   const done = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, current: null, candidate: null, heights: { ...heights }, done: done.slice(), subtree: [], ...extra })
-  f('start', L('walk(node) returns'), 'Each call returns (depth of its subtree, lowest node containing all of that subtree\'s deepest nodes).')
+  f('start', L('walk(node) returns'), 'Each call returns (depth of its subtree, lowest node containing all of that subtree\'s deepest nodes).', { pythonLine: 31 })
   const dfs = node => {
     if (!node) return [0, null]
-    f('enter', L('walk the left child'), `Enter ${node.value}; solve the left child first, then the right.`, { current: node.id })
+    f('enter', L('walk the left child'), `Enter ${node.value}; solve the left child first, then the right.`, { current: node.id, pythonLine: 34 })
     const [dl, l] = dfs(node.left)
     const [dr, r] = dfs(node.right)
     let out
@@ -38,12 +38,12 @@ export function buildTrace(tree) {
     heights[node.id] = `h${out[0]}`
     done.push(node.id)
     const line = dl > dr ? L('if left depth is greater') : dr > dl ? L('if right depth is greater') : L('return (left depth + 1, node)')
-    f('combine', line, `Node ${node.value}: ${msg} Return depth ${out[0]}.`, { current: node.id, candidate: out[1].id })
+    f('combine', line, `Node ${node.value}: ${msg} Return depth ${out[0]}.`, { current: node.id, candidate: out[1].id, pythonLine: dl > dr ? 37 : dr > dl ? 39 : 40 })
     return out
   }
   const [, ans] = dfs(root)
   const sub = nodesOf(ans).map(n => n.id)
-  f('done', L('return the answer node'), `The smallest subtree containing every deepest node is rooted at ${ans.value}.`, { candidate: ans.id, subtree: sub })
+  f('done', L('return the answer node'), `The smallest subtree containing every deepest node is rooted at ${ans.value}.`, { candidate: ans.id, subtree: sub, pythonLine: 42 })
   return { input: tree, root, result: ans.value, resultSubtree: levelOrderFromTree(ans), frames }
 }
 

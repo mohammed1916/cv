@@ -13,10 +13,10 @@ function smallestDivisor(x) {
 export function buildTrace(n) {
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, half: null, p: null, prime: null, divisor: null, skipped: 0, ...extra })
-  f('start', L('read n'), `Find the smallest prime palindrome >= ${n}. Palindromes are built from a left half, so they come out in increasing order.`)
+  f('start', L('read n'), `Find the smallest prime palindrome >= ${n}. Palindromes are built from a left half, so they come out in increasing order.`, { pythonLine: 1 })
   if (n >= 8 && n <= 11) {
-    f('special', L('if 8 <= n <= 11'), 'Every even-length palindrome is divisible by 11, so 11 is the only even-length prime palindrome. For 8 <= n <= 11 the answer is 11.')
-    f('done', L('return 11 (every'), 'Answer: 11.', { p: 11, prime: true })
+    f('special', L('if 8 <= n <= 11'), 'Every even-length palindrome is divisible by 11, so 11 is the only even-length prime palindrome. For 8 <= n <= 11 the answer is 11.', { pythonLine: 12 })
+    f('done', L('return 11 (every'), 'Answer: 11.', { p: 11, prime: true, pythonLine: 13 })
     return { input: n, result: 11, frames }
   }
   let skipped = 0, noted = false
@@ -26,14 +26,14 @@ export function buildTrace(n) {
     if (p < n) { skipped++; continue }
     if (!noted) {
       noted = true
-      f('skip', L('if p is less than n'), `${skipped} palindromes (from halves 1..${half - 1}) are below ${n}, so they are skipped without testing.`, { skipped })
+      f('skip', L('if p is less than n'), `${skipped} palindromes (from halves 1..${half - 1}) are below ${n}, so they are skipped without testing.`, { skipped, pythonLine: 17 })
     }
-    f('candidate', L('let p be s followed'), `Half ${half} mirrors to the odd-length palindrome ${p} (the last digit of the half is not repeated).`, { half, p })
+    f('candidate', L('let p be s followed'), `Half ${half} mirrors to the odd-length palindrome ${p} (the last digit of the half is not repeated).`, { half, p, pythonLine: 16 })
     const divisor = smallestDivisor(p)
     const prime = divisor === 0
-    f('test', L('if p is not prime'), prime ? `${p} has no divisor up to its square root, so it is prime.` : p < 2 ? `${p} is below 2, not prime.` : `${p} is divisible by ${divisor}, so it is not prime.`, { half, p, prime, divisor: prime ? null : divisor })
+    f('test', L('if p is not prime'), prime ? `${p} has no divisor up to its square root, so it is prime.` : p < 2 ? `${p} is below 2, not prime.` : `${p} is divisible by ${divisor}, so it is not prime.`, { half, p, prime, divisor: prime ? null : divisor, pythonLine: 19 })
     if (prime) {
-      f('done', L('return p, the first'), `Answer: ${p}, the first prime palindrome >= ${n}.`, { half, p, prime: true })
+      f('done', L('return p, the first'), `Answer: ${p}, the first prime palindrome >= ${n}.`, { half, p, prime: true, pythonLine: 20 })
       return { input: n, result: p, frames }
     }
   }

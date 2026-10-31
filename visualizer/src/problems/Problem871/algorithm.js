@@ -22,27 +22,27 @@ export function buildTrace({ target, startFuel, stations }) {
   let fuel = startFuel, stops = 0, prev = 0
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, heap: [...heap.data], heapState: heapView(heap, { title: "Max-heap of passed stations' fuel (root = largest)" }).heap, fuel, stops, prev, ...extra })
-  f('start', L('let heap be an empty'), `Start with ${startFuel} fuel at position 0. Stations are only "used" later, when we actually run dry.`)
+  f('start', L('let heap be an empty'), `Start with ${startFuel} fuel at position 0. Stations are only "used" later, when we actually run dry.`, { pythonLine: 5 })
   for (let i = 0; i < points.length; i++) {
     const [pos, gas] = points[i]
     fuel -= pos - prev
-    f('drive', L('subtract pos - prev'), `Drive from ${prev} to ${pos} (${pos - prev} units): fuel is now ${fuel}${fuel < 0 ? ', which is negative, so we must have refuelled earlier' : ''}.`, { index: i })
+    f('drive', L('subtract pos - prev'), `Drive from ${prev} to ${pos} (${pos - prev} units): fuel is now ${fuel}${fuel < 0 ? ', which is negative, so we must have refuelled earlier' : ''}.`, { index: i, pythonLine: 8 })
     while (heap.size && fuel < 0) {
       const g = heap.pop()
       fuel += g; stops++
-      f('refuel', L('take the largest fuel'), `Retroactively refuel at the best passed station (${g} fuel). Stops: ${stops}, fuel: ${fuel}.`, { index: i })
+      f('refuel', L('take the largest fuel'), `Retroactively refuel at the best passed station (${g} fuel). Stops: ${stops}, fuel: ${fuel}.`, { index: i, pythonLine: 10 })
     }
     if (fuel < 0) {
-      f('done', L('if fuel is still negative'), `Even using every passed station we cannot reach ${pos}: return -1.`, { index: i })
+      f('done', L('if fuel is still negative'), `Even using every passed station we cannot reach ${pos}: return -1.`, { index: i, pythonLine: 13 })
       return { input: { target, startFuel, stations }, points, result: -1, frames }
     }
     if (i < stations.length) {
       heap.push(gas)
-      f('push', L('push gas into the heap'), `Reached station at ${pos}: remember its ${gas} fuel in the max-heap without stopping yet.`, { index: i })
+      f('push', L('push gas into the heap'), `Reached station at ${pos}: remember its ${gas} fuel in the max-heap without stopping yet.`, { index: i, pythonLine: 14 })
     }
     prev = pos
   }
-  f('done', L('return stops'), `Reached the target ${target} with ${stops} refuelling stop(s).`, { index: points.length - 1 })
+  f('done', L('return stops'), `Reached the target ${target} with ${stops} refuelling stop(s).`, { index: points.length - 1, pythonLine: 16 })
   return { input: { target, startFuel, stations }, points, result: stops, frames }
 }
 

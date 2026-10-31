@@ -33,7 +33,7 @@ export function buildTrace(grid) {
   let queue = [[sr, sc, 0]]
   const seen = new Set([`${sr},${sc},0`])
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, r: sr, c: sc, mask: 0, steps: 0, popped: -1, queueSize: queue.length, seenSize: seen.size, ...extra })
-  f('start', L('find the start cell'), `Start at (${sr}, ${sc}) holding no keys. A state is (row, column, keys held); ${k} keys means full mask ${full.toString(2).padStart(k, '0')}.`)
+  f('start', L('find the start cell'), `Start at (${sr}, ${sc}) holding no keys. A state is (row, column, keys held); ${k} keys means full mask ${full.toString(2).padStart(k, '0')}.`, { pythonLine: 15 })
   let steps = 0
   const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
   while (queue.length) {
@@ -44,10 +44,10 @@ export function buildTrace(grid) {
       pops.push([r, c])
       const rest = level.length - t - 1 + queue.length
       if (mask === full) {
-        f('done', L('if the keys held are full'), `State (${r}, ${c}) holds every key after ${steps} moves: that is the shortest path.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest })
+        f('done', L('if the keys held are full'), `State (${r}, ${c}) holds every key after ${steps} moves: that is the shortest path.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest, pythonLine: 23 })
         return { input: grid, pops, result: steps, frames }
       }
-      f('pop', L('take the next state'), `Pop (${r}, ${c}) with keys ${mask.toString(2).padStart(k, '0')} at distance ${steps}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest })
+      f('pop', L('take the next state'), `Pop (${r}, ${c}) with keys ${mask.toString(2).padStart(k, '0')} at distance ${steps}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest, pythonLine: 21 })
       for (const [dr, dc] of dirs) {
         const nr = r + dr, nc = c + dc
         if (nr < 0 || nc < 0 || nr >= m || nc >= n || grid[nr][nc] === '#') continue
@@ -55,18 +55,18 @@ export function buildTrace(grid) {
         let nmask = mask
         if (ch >= 'a' && ch <= 'f') nmask |= 1 << (ch.charCodeAt(0) - 97)
         if (ch >= 'A' && ch <= 'F' && !((mask >> (ch.charCodeAt(0) - 65)) & 1)) {
-          f('blocked', L('a lock whose key is not held'), `Lock ${ch} at (${nr}, ${nc}) needs key ${ch.toLowerCase()}, which we do not hold. Skip.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest, tr: nr, tc: nc })
+          f('blocked', L('a lock whose key is not held'), `Lock ${ch} at (${nr}, ${nc}) needs key ${ch.toLowerCase()}, which we do not hold. Skip.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest, tr: nr, tc: nc, pythonLine: 35 })
           continue
         }
         const key = `${nr},${nc},${nmask}`
         if (seen.has(key)) continue
         seen.add(key); queue.push([nr, nc, nmask])
-        f('push', L('is not seen, mark it seen'), `Move to (${nr}, ${nc})${nmask !== mask ? ` and pick up key ${ch}` : ''}: new state with keys ${nmask.toString(2).padStart(k, '0')}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest + 1, tr: nr, tc: nc, nmask })
+        f('push', L('is not seen, mark it seen'), `Move to (${nr}, ${nc})${nmask !== mask ? ` and pick up key ${ch}` : ''}: new state with keys ${nmask.toString(2).padStart(k, '0')}.`, { r, c, mask, steps, popped: pops.length - 1, queueSize: rest + 1, tr: nr, tc: nc, nmask, pythonLine: 37 })
       }
     }
     steps++
   }
-  f('done', L('return -1'), 'No reachable state holds all keys, so the answer is -1.', { popped: pops.length - 1 })
+  f('done', L('return -1'), 'No reachable state holds all keys, so the answer is -1.', { popped: pops.length - 1, pythonLine: 40 })
   return { input: grid, pops, result: -1, frames }
 }
 

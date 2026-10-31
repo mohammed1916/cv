@@ -31,12 +31,12 @@ export function buildTrace({ tree, target, k }) {
   const frames = []
   const parentDone = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, current: null, parentDone: parentDone.slice(), seen: [], queue: [], dists: {}, dist: 0, ...extra })
-  f('start', L('let parent be an empty map'), `Tree nodes only point downward, so first record every node's parent. Then distance-k nodes are k BFS steps from ${target}.`)
+  f('start', L('let parent be an empty map'), `Tree nodes only point downward, so first record every node's parent. Then distance-k nodes are k BFS steps from ${target}.`, { pythonLine: 32 })
   const dfs = (node, par) => {
     if (!node) return
     parent.set(node, par)
     parentDone.push(node.id)
-    f('parent', L('set parent of the node'), `Visit ${node.value}: its parent is ${par ? par.value : 'none (root)'}.`, { current: node.id })
+    f('parent', L('set parent of the node'), `Visit ${node.value}: its parent is ${par ? par.value : 'none (root)'}.`, { current: node.id, pythonLine: 36 })
     dfs(node.left, node)
     dfs(node.right, node)
   }
@@ -46,7 +46,7 @@ export function buildTrace({ tree, target, k }) {
   const dists = { [targetNode.id]: 0 }
   let dist = 0
   const snap = (phase, line, message, extra = {}) => f(phase, line, message, { seen: [...seen].map(n => n.id), queue: queue.map(n => n.id), dists: { ...dists }, dist, ...extra })
-  snap('seed', L('let queue hold only the target'), `Start BFS at target ${target} with distance 0.`)
+  snap('seed', L('let queue hold only the target'), `Start BFS at target ${target} with distance 0.`, { pythonLine: 42 })
   while (queue.length && dist < k) {
     const level = queue.length
     const next = []
@@ -59,14 +59,14 @@ export function buildTrace({ tree, target, k }) {
         if (nb && !seen.has(nb)) { seen.add(nb); next.push(nb); dists[nb.id] = dist + 1; added.push(nb.value) }
       }
       queue = [...before.slice(t + 1), ...next]
-      snap('expand', L('if the neighbour exists'), `Expand ${node.value}: ${added.length ? `new neighbours ${added.join(', ')} at distance ${dist + 1}` : 'no unseen neighbours'} (children and parent).`, { current: node.id })
+      snap('expand', L('if the neighbour exists'), `Expand ${node.value}: ${added.length ? `new neighbours ${added.join(', ')} at distance ${dist + 1}` : 'no unseen neighbours'} (children and parent).`, { current: node.id, pythonLine: 49 })
     }
     queue = next
     dist++
-    snap('level', L('increase distance by 1'), `Level complete: ${queue.length} node(s) are exactly ${dist} away from ${target}.`)
+    snap('level', L('increase distance by 1'), `Level complete: ${queue.length} node(s) are exactly ${dist} away from ${target}.`, { pythonLine: 52 })
   }
   const result = queue.map(n => n.value)
-  snap('done', L('return the values left'), `Distance ${k} from ${target}: [${result.join(', ')}].`)
+  snap('done', L('return the values left'), `Distance ${k} from ${target}: [${result.join(', ')}].`, { pythonLine: 53 })
   return { input: { tree, target, k }, root, result, frames }
 }
 
