@@ -66,34 +66,34 @@ export function buildTrace({ richer, quiet }) {
   const path = []
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, ans: [...ans], path: [...path], x: null, cand: null, ...extra })
-  push('start', L('build g'),`Build g so g[b] lists everyone directly richer than b. ans is -1 (unknown) for all ${n} people.`)
+  push('start', L('build g'),`Build g so g[b] lists everyone directly richer than b. ans is -1 (unknown) for all ${n} people.`, { pythonLine: 6 })
   const dfs = (x) => {
     path.push(x)
-    push('visit', L('define dfs'),`dfs(${x}): ask for the quietest person at least as rich as ${x}.`, { x })
+    push('visit', L('define dfs'),`dfs(${x}): ask for the quietest person at least as rich as ${x}.`, { pythonLine: 8, x })
     if (ans[x] !== -1) {
-      push('memo', L('if ans[x]'), `ans[${x}] is already ${ans[x]}, so reuse it without searching again.`, { x, cand: ans[x] })
+      push('memo', L('if ans[x]'), `ans[${x}] is already ${ans[x]}, so reuse it without searching again.`, { pythonLine: 9, x, cand: ans[x] })
       path.pop()
       return ans[x]
     }
     ans[x] = x
-    push('visit', L('set ans[x] to x'),`Person ${x} is at least as rich as themselves, so start with candidate ${x} (quiet ${quiet[x]}).`, { x, cand: x })
+    push('visit', L('set ans[x] to x'),`Person ${x} is at least as rich as themselves, so start with candidate ${x} (quiet ${quiet[x]}).`, { pythonLine: 10, x, cand: x })
     for (const y of g[x]) {
       const c = dfs(y)
       const better = quiet[c] < quiet[ans[x]]
-      push('compare', L('if quiet'), `Richer person ${y} offers ${c} (quiet ${quiet[c]}) versus current ${ans[x]} (quiet ${quiet[ans[x]]}): ${better ? 'quieter, so replace' : 'not quieter, keep'}.`, { x, cand: c })
+      push('compare', L('if quiet'), `Richer person ${y} offers ${c} (quiet ${quiet[c]}) versus current ${ans[x]} (quiet ${quiet[ans[x]]}): ${better ? 'quieter, so replace' : 'not quieter, keep'}.`, { pythonLine: 13, x, cand: c })
       if (better) {
         ans[x] = c
-        push('update', L('set ans[x] to c'),`ans[${x}] becomes ${c}. Everyone richer than ${y} is also richer than ${x}, so the answer is inherited.`, { x, cand: c })
+        push('update', L('set ans[x] to c'),`ans[${x}] becomes ${c}. Everyone richer than ${y} is also richer than ${x}, so the answer is inherited.`, { pythonLine: 14, x, cand: c })
       }
     }
-    push('visit', L('return ans[x]'), `All richer neighbours of ${x} are checked; ans[${x}] = ${ans[x]}.`, { x, cand: ans[x] })
+    push('visit', L('return ans[x]'), `All richer neighbours of ${x} are checked; ans[${x}] = ${ans[x]}.`, { pythonLine: 15, x, cand: ans[x] })
     path.pop()
     return ans[x]
   }
   for (let i = 0; i < n; i++) {
-    push('visit', L('for i from 0'),`Outer loop: make sure person ${i} is resolved.`, { x: i })
+    push('visit', L('for i from 0'),`Outer loop: make sure person ${i} is resolved.`, { pythonLine: 16, x: i })
     dfs(i)
   }
-  push('done', L('return the array ans'),`Done: answer = [${ans.join(', ')}].`)
+  push('done', L('return the array ans'),`Done: answer = [${ans.join(', ')}].`, { pythonLine: 18 })
   return { input: { richer, quiet }, result: [...ans], frames }
 }

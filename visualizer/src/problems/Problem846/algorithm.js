@@ -14,27 +14,27 @@ export function buildTrace({ hand, groupSize }) {
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, counts: snap(), card: null, k: null, run: 0, ...extra })
   if (hand.length % groupSize) {
-    push('start', 2, `${hand.length} cards cannot be split into groups of ${groupSize} (remainder ${hand.length % groupSize}): return False.`)
-    push('done', 2, 'Result: False.')
+    push('start', 2, `${hand.length} cards cannot be split into groups of ${groupSize} (remainder ${hand.length % groupSize}): return False.`, { pythonLine: 4 })
+    push('done', 2, 'Result: False.', { pythonLine: 5 })
     return { input: { hand, groupSize }, keys, result: false, frames }
   }
-  push('start', 3, `${hand.length} cards split evenly into ${hand.length / groupSize} groups of ${groupSize}. Count each distinct card.`)
+  push('start', 3, `${hand.length} cards split evenly into ${hand.length / groupSize} groups of ${groupSize}. Count each distinct card.`, { pythonLine: 6 })
   for (const card of keys) {
     const c = count.get(card)
-    if (c === 0) { push('skip', 6, `Card ${card} has no copies left (they were used by earlier groups): move on.`, { card }); continue }
-    push('run', 7, `The smallest remaining card is ${card} with ${c} cop${c === 1 ? 'y' : 'ies'}. Each must start a straight ${card}..${card + groupSize - 1}, so build ${c} such group${c === 1 ? '' : 's'} at once.`, { card, run: c })
+    if (c === 0) { push('skip', 6, `Card ${card} has no copies left (they were used by earlier groups): move on.`, { card, pythonLine: 9 }); continue }
+    push('run', 7, `The smallest remaining card is ${card} with ${c} cop${c === 1 ? 'y' : 'ies'}. Each must start a straight ${card}..${card + groupSize - 1}, so build ${c} such group${c === 1 ? '' : 's'} at once.`, { pythonLine: 10, card, run: c })
     for (let k = card; k < card + groupSize; k++) {
       const have = count.get(k) || 0
       if (have < c) {
-        push('fail', 8, `Need ${c} copies of ${k} but only ${have} remain: this straight cannot be completed. Return False.`, { card, k, run: c })
-        push('done', 8, 'Result: False.', { card, k })
+        push('fail', 8, `Need ${c} copies of ${k} but only ${have} remain: this straight cannot be completed. Return False.`, { pythonLine: 12, card, k, run: c })
+        push('done', 8, 'Result: False.', { pythonLine: 12, card, k })
         return { input: { hand, groupSize }, keys, result: false, frames }
       }
       count.set(k, have - c)
-      push('take', 9, `Take ${c} cop${c === 1 ? 'y' : 'ies'} of ${k}; ${have - c} left.`, { card, k, run: c })
+      push('take', 9, `Take ${c} cop${c === 1 ? 'y' : 'ies'} of ${k}; ${have - c} left.`, { pythonLine: 13, card, k, run: c })
     }
   }
-  push('done', 10, 'Every card was consumed by complete straights: return True.')
+  push('done', 10, 'Every card was consumed by complete straights: return True.', { pythonLine: 14 })
   return { input: { hand, groupSize }, keys, result: true, frames }
 }
 export const code = `function isNStraightHand(hand, groupSize)

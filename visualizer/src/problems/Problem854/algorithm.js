@@ -14,34 +14,34 @@ export function buildTrace({ s1, s2 }) {
   const seen = new Set([s1])
   let steps = 0
   const snap = () => queue.slice(0, 20)
-  frames.push({ phase: 'start', activeLine: 2, message: `Start BFS from "${s1}". Each level is one more swap; the target is "${s2}".`, cur: s1, next: null, i: -1, j: -1, steps, queue: snap(), queueSize: 1, seenSize: 1 })
+  frames.push({ pythonLine: 6, phase: 'start', activeLine: 2, message: `Start BFS from "${s1}". Each level is one more swap; the target is "${s2}".`, cur: s1, next: null, i: -1, j: -1, steps, queue: snap(), queueSize: 1, seenSize: 1 })
   while (queue.length) {
     const level = queue.length
     for (let t = 0; t < level; t++) {
       const cur = queue.shift()
-      frames.push({ phase: 'pop', activeLine: 6, message: `Pop "${cur}" at distance ${steps}.`, cur, next: null, i: -1, j: -1, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
+      frames.push({ pythonLine: 9, phase: 'pop', activeLine: 6, message: `Pop "${cur}" at distance ${steps}.`, cur, next: null, i: -1, j: -1, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
       if (cur === s2) {
-        frames.push({ phase: 'done', activeLine: 7, message: `"${cur}" equals the target, so the minimum number of swaps is ${steps}.`, cur, next: null, i: -1, j: -1, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
+        frames.push({ pythonLine: 11, phase: 'done', activeLine: 7, message: `"${cur}" equals the target, so the minimum number of swaps is ${steps}.`, cur, next: null, i: -1, j: -1, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
         return { input: { s1, s2 }, result: steps, frames }
       }
       let i = 0
       while (cur[i] === s2[i]) i++
-      frames.push({ phase: 'mismatch', activeLine: 8, message: `First mismatch is index ${i}: need "${s2[i]}" there but have "${cur[i]}". Only swaps that fix this index are worth trying.`, cur, next: null, i, j: -1, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
+      frames.push({ pythonLine: 13, phase: 'mismatch', activeLine: 8, message: `First mismatch is index ${i}: need "${s2[i]}" there but have "${cur[i]}". Only swaps that fix this index are worth trying.`, cur, next: null, i, j: -1, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
       for (let j = i + 1; j < cur.length; j++) {
         if (cur[j] === s2[i] && cur[j] !== s2[j]) {
           const next = cur.slice(0, i) + cur[j] + cur.slice(i + 1, j) + cur[i] + cur.slice(j + 1)
           if (!seen.has(next)) {
             seen.add(next); queue.push(next)
-            frames.push({ phase: 'enqueue', activeLine: 12, message: `Swap indices ${i} and ${j}: "${next}" is new, so enqueue it for distance ${steps + 1}.`, cur, next, i, j, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
+            frames.push({ pythonLine: 20, phase: 'enqueue', activeLine: 12, message: `Swap indices ${i} and ${j}: "${next}" is new, so enqueue it for distance ${steps + 1}.`, cur, next, i, j, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
           } else {
-            frames.push({ phase: 'skip', activeLine: 13, message: `Swap indices ${i} and ${j} gives "${next}", already seen at an equal or shorter distance; skip it.`, cur, next, i, j, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
+            frames.push({ pythonLine: 18, phase: 'skip', activeLine: 13, message: `Swap indices ${i} and ${j} gives "${next}", already seen at an equal or shorter distance; skip it.`, cur, next, i, j, steps, queue: snap(), queueSize: queue.length, seenSize: seen.size })
           }
         }
       }
     }
     steps++
   }
-  frames.push({ phase: 'done', activeLine: 15, message: 'Queue exhausted without reaching the target.', cur: s1, next: null, i: -1, j: -1, steps, queue: [], queueSize: 0, seenSize: seen.size })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: 15, message: 'Queue exhausted without reaching the target.', cur: s1, next: null, i: -1, j: -1, steps, queue: [], queueSize: 0, seenSize: seen.size })
   return { input: { s1, s2 }, result: -1, frames }
 }
 

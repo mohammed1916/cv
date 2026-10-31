@@ -17,23 +17,23 @@ export function buildTrace({ quality, wage, k }) {
   let sumQ = 0, best = Infinity, bestIdx = -1
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, heap: [...heap.data], heapState: heapView(heap, { title: 'Max-heap of qualities in the group (root = largest)' }).heap, sumQ, best: Number.isFinite(best) ? best : null, bestIdx, cost: null, ...extra })
-  f('start', 2, 'Sort workers by wage / quality. When worker i has the highest ratio in the group, everyone is paid at that ratio.')
-  f('sort', 2, `Sorted order (worker id: quality, wage): ${workers.map(x => `${x.id}: ${x.q},${x.w}`).join(' | ')}`)
+  f('start', 2, 'Sort workers by wage / quality. When worker i has the highest ratio in the group, everyone is paid at that ratio.', { pythonLine: 5 })
+  f('sort', 2, `Sorted order (worker id: quality, wage): ${workers.map(x => `${x.id}: ${x.q},${x.w}`).join(' | ')}`, { pythonLine: 5 })
   workers.forEach((x, i) => {
     heap.push(x.q); sumQ += x.q
-    f('add', 5, `Worker ${x.id} (quality ${x.q}, ratio ${(x.w / x.q).toFixed(3)}) joins; it is the highest ratio so far. Quality sum ${sumQ}.`, { index: i })
+    f('add', 5, `Worker ${x.id} (quality ${x.q}, ratio ${(x.w / x.q).toFixed(3)}) joins; it is the highest ratio so far. Quality sum ${sumQ}.`, { pythonLine: 11, index: i })
     if (heap.size > k) {
       const removed = heap.pop(); sumQ -= removed
-      f('evict', 7,`More than ${k} workers: drop the largest quality ${removed}, which is the most expensive to pay at this ratio. Quality sum ${sumQ}.`, { index: i })
+      f('evict', 7,`More than ${k} workers: drop the largest quality ${removed}, which is the most expensive to pay at this ratio. Quality sum ${sumQ}.`, { pythonLine: 13, index: i })
     }
     if (heap.size === k) {
       const cost = sumQ * x.w / x.q
       const improved = cost < best
       if (improved) { best = cost; bestIdx = i }
-      f('cost', 9,`Group of ${k}: cost = ${sumQ} * ${x.w}/${x.q} = ${cost.toFixed(5)}. ${improved ? 'New best.' : 'Not better than the best so far.'}`, { index: i, cost })
+      f('cost', 9,`Group of ${k}: cost = ${sumQ} * ${x.w}/${x.q} = ${cost.toFixed(5)}. ${improved ? 'New best.' : 'Not better than the best so far.'}`, { pythonLine: 15, index: i, cost })
     }
   })
-  f('done', 10,`Minimum cost to hire ${k} workers: ${best.toFixed(5)}.`, { index: workers.length - 1 })
+  f('done', 10,`Minimum cost to hire ${k} workers: ${best.toFixed(5)}.`, { pythonLine: 16, index: workers.length - 1 })
   return { input: { quality, wage, k }, sorted: workers, result: best, frames }
 }
 

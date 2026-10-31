@@ -20,24 +20,24 @@ export function buildTrace(graph) {
   let head = 0
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, mask: 0, node: -1, dist: 0, queueLen: queue.length - head, queueHead: queue.slice(head, head + 6).map(([m, v, d]) => `${bits(m, n)}@${v}:${d}`), seenCount: seen.size, ...extra })
-  push('start', 3, `Every node is a possible start: seed the queue with the ${n} states (mask with only that node, node, distance 0). A state is (set of nodes visited, node we stand on).`)
+  push('start', 3, `Every node is a possible start: seed the queue with the ${n} states (mask with only that node, node, distance 0). A state is (set of nodes visited, node we stand on).`, { pythonLine: 7 })
   while (head < queue.length) {
     const [mask, node, dist] = queue[head++]
     if (mask === full) {
-      push('found', 7, `State mask ${bits(mask, n)} has every node visited after ${dist} edge${dist === 1 ? '' : 's'}. BFS reaches states in order of distance, so ${dist} is the minimum.`, { mask, node, dist })
-      push('done', 7, `Shortest path length: ${dist}.`, { mask, node, dist })
+      push('found', 7, `State mask ${bits(mask, n)} has every node visited after ${dist} edge${dist === 1 ? '' : 's'}. BFS reaches states in order of distance, so ${dist} is the minimum.`, { pythonLine: 11, mask, node, dist })
+      push('done', 7, `Shortest path length: ${dist}.`, { pythonLine: 11, mask, node, dist })
       return { input: graph.map(r => [...r]), result: dist, frames }
     }
-    push('pop', 6, `Pop state (mask ${bits(mask, n)}, node ${node}) at distance ${dist}; ${n - bits(mask, n).replace(/0/g, '').length} node(s) still unvisited.`, { mask, node, dist })
+    push('pop', 6, `Pop state (mask ${bits(mask, n)}, node ${node}) at distance ${dist}; ${n - bits(mask, n).replace(/0/g, '').length} node(s) still unvisited.`, { pythonLine: 9, mask, node, dist })
     for (const nxt of graph[node]) {
       const nm = mask | (1 << nxt)
       if (!seen.has(nm * 8 + nxt)) {
         seen.add(nm * 8 + nxt); queue.push([nm, nxt, dist + 1])
-        push('push', 11, `Move to ${nxt}: new state (mask ${bits(nm, n)}, node ${nxt}) at distance ${dist + 1}; enqueue it.`, { mask: nm, node: nxt, dist: dist + 1, from: node })
-      } else push('skip', 12, `Move to ${nxt} gives state (mask ${bits(nm, n)}, node ${nxt}) which was already seen at an equal or shorter distance: skip.`, { mask, node, dist, from: node })
+        push('push', 11, `Move to ${nxt}: new state (mask ${bits(nm, n)}, node ${nxt}) at distance ${dist + 1}; enqueue it.`, { pythonLine: 16, mask: nm, node: nxt, dist: dist + 1, from: node })
+      } else push('skip', 12, `Move to ${nxt} gives state (mask ${bits(nm, n)}, node ${nxt}) which was already seen at an equal or shorter distance: skip.`, { pythonLine: 14, mask, node, dist, from: node })
     }
   }
-  push('done', 13, 'Queue exhausted (only possible for an empty graph): return 0.')
+  push('done', 13, 'Queue exhausted (only possible for an empty graph): return 0.', { pythonLine: 17 })
   return { input: graph.map(r => [...r]), result: 0, frames }
 }
 export const code = `function shortestPathLength(graph)

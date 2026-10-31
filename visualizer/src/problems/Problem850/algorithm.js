@@ -9,11 +9,11 @@ export function parseInput(text) {
 export function buildTrace(rects) {
   const xs = [...new Set(rects.flatMap(([x1, , x2]) => [x1, x2]))].sort((a, b) => a - b)
   let total = 0n
-  const frames = [{ phase: 'start', activeLine: 2, slab: -1, xs, intervals: [], merged: [], covered: 0, total: '0', message: `The ${rects.length} rectangles have ${xs.length} distinct x edges: ${xs.join(', ')}. Between consecutive edges, every rectangle either spans the whole slab or misses it.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: 2, slab: -1, xs, intervals: [], merged: [], covered: 0, total: '0', message: `The ${rects.length} rectangles have ${xs.length} distinct x edges: ${xs.join(', ')}. Between consecutive edges, every rectangle either spans the whole slab or misses it.` }]
   for (let i = 0; i + 1 < xs.length; i++) {
     const x1 = xs[i], x2 = xs[i + 1]
     const intervals = rects.filter(([a, , b]) => a <= x1 && x2 <= b).map(([, y1, , y2]) => [y1, y2]).sort((p, q) => p[0] - q[0] || p[1] - q[1])
-    frames.push({ phase: 'slab', activeLine: 5, slab: i, xs, intervals, merged: [], covered: 0, total: String(total), message: `Slab x in [${x1}, ${x2}] (width ${x2 - x1}): ${intervals.length} rectangle${intervals.length === 1 ? '' : 's'} span it, with y-intervals ${intervals.length ? intervals.map(([a, b]) => `[${a},${b}]`).join(' ') : 'none'}.` })
+    frames.push({ pythonLine: 6, phase: 'slab', activeLine: 5, slab: i, xs, intervals, merged: [], covered: 0, total: String(total), message: `Slab x in [${x1}, ${x2}] (width ${x2 - x1}): ${intervals.length} rectangle${intervals.length === 1 ? '' : 's'} span it, with y-intervals ${intervals.length ? intervals.map(([a, b]) => `[${a},${b}]`).join(' ') : 'none'}.` })
     let covered = 0, top = 0
     const merged = []
     for (const [a, b] of intervals) {
@@ -21,10 +21,10 @@ export function buildTrace(rects) {
       if (b > lo) { covered += b - lo; top = b; if (merged.length && merged[merged.length - 1][1] === lo) merged[merged.length - 1][1] = b; else merged.push([lo, b]) }
     }
     total += BigInt(covered) * BigInt(x2 - x1)
-    frames.push({ phase: 'cover', activeLine: 11, slab: i, xs, intervals, merged: merged.map(m => [...m]), covered, total: String(total), message: `Sorted by y and clipped against the highest y already counted, the union covers ${covered} of the y-axis. Slab area = ${covered} x ${x2 - x1}; running total ${total}.` })
+    frames.push({ pythonLine: 13, phase: 'cover', activeLine: 11, slab: i, xs, intervals, merged: merged.map(m => [...m]), covered, total: String(total), message: `Sorted by y and clipped against the highest y already counted, the union covers ${covered} of the y-axis. Slab area = ${covered} x ${x2 - x1}; running total ${total}.` })
   }
   const result = Number(total % MOD)
-  frames.push({ phase: 'done', activeLine: 12, slab: -1, xs, intervals: [], merged: [], covered: 0, total: String(total), message: `Total union area ${total}; modulo 1,000,000,007 gives ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: 12, slab: -1, xs, intervals: [], merged: [], covered: 0, total: String(total), message: `Total union area ${total}; modulo 1,000,000,007 gives ${result}.` })
   return { input: rects.map(r => [...r]), result, xs, frames }
 }
 export const code = `function rectangleArea(rectangles)

@@ -47,18 +47,18 @@ export function buildTrace({ target, position, speed }) {
   const fmt = (r) => (r ? Number((r.num / r.den).toFixed(4)) : 0)
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, index: -1, fleets, slowest: fmt(slowest), leaders: leaders.slice(), ...extra })
   const leaders = []
-  push('start', L('sort the cars'),`Sort cars by position from the closest to the target down to the farthest: [${cars.map((c) => `(${c.p},${c.s})`).join(', ')}].`)
+  push('start', L('sort the cars'),`Sort cars by position from the closest to the target down to the farthest: [${cars.map((c) => `(${c.p},${c.s})`).join(', ')}].`, { pythonLine: 4 })
   cars.forEach((c, k) => {
     const t = { num: target - c.p, den: c.s }
-    push('time', L('set t to'),`Car at ${c.p} with speed ${c.s} needs (${target} - ${c.p}) / ${c.s} = ${fmt(t)} hours to reach the target alone.`, { index: k, time: fmt(t) })
+    push('time', L('set t to'),`Car at ${c.p} with speed ${c.s} needs (${target} - ${c.p}) / ${c.s} = ${fmt(t)} hours to reach the target alone.`, { pythonLine: 8, index: k, time: fmt(t) })
     const later = !slowest || t.num * slowest.den > slowest.num * t.den
     if (later) {
       fleets++; slowest = t; leaders.push(k)
-      push('new', L('add one to fleets'),`${fmt(t)} is greater than the slowest fleet ahead, so this car can never catch it: it leads a new fleet. Fleets = ${fleets}.`, { index: k, time: fmt(t) })
+      push('new', L('add one to fleets'),`${fmt(t)} is greater than the slowest fleet ahead, so this car can never catch it: it leads a new fleet. Fleets = ${fleets}.`, { pythonLine: 10, index: k, time: fmt(t) })
     } else {
-      push('merge', L('otherwise the car'),`${fmt(t)} is not greater than ${fmt(slowest)}: it catches the fleet ahead before the target and must slow down to join it.`, { index: k, time: fmt(t) })
+      push('merge', L('otherwise the car'),`${fmt(t)} is not greater than ${fmt(slowest)}: it catches the fleet ahead before the target and must slow down to join it.`, { pythonLine: 9, index: k, time: fmt(t) })
     }
   })
-  push('done', L('return fleets'), `Done: ${fleets} fleet${fleets === 1 ? '' : 's'} arrive at the target.`)
+  push('done', L('return fleets'), `Done: ${fleets} fleet${fleets === 1 ? '' : 's'} arrive at the target.`, { pythonLine: 12 })
   return { input: { target, position, speed }, result: fleets, cars, frames }
 }

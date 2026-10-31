@@ -9,28 +9,28 @@ export function parseInput(text) {
 export function buildTrace({ p, q }) {
   const frames = []
   const f = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, a: null, b: null, g: null, m: null, n: null, ...extra })
-  f('start', L('let a = p'), `Room side p = ${p}, laser hits the east wall at height q = ${q}. Unfold the room: the ray becomes a straight line that climbs q per room width.`)
+  f('start', L('let a = p'), `Room side p = ${p}, laser hits the east wall at height q = ${q}. Unfold the room: the ray becomes a straight line that climbs q per room width.`, { pythonLine: 2 })
   let a = p, b = q
   while (b) {
-    f('gcd', L('set a and b'), `gcd step: (${a}, ${b}) -> (${b}, ${a % b}).`, { a, b })
+    f('gcd', L('set a and b'), `gcd step: (${a}, ${b}) -> (${b}, ${a % b}).`, { pythonLine: 4, a, b })
     ;[a, b] = [b, a % b]
   }
   const g = a
   const m = p / g, n = q / g
-  f('reduce', L('let m = p divided by g'), `gcd = ${g}. The ray first hits a corner after m = p/g = ${m} room widths, by which time it has climbed n = q/g = ${n} room heights (m*q = n*p).`, { g, m, n })
+  f('reduce', L('let m = p divided by g'), `gcd = ${g}. The ray first hits a corner after m = p/g = ${m} room widths, by which time it has climbed n = q/g = ${n} room heights (m*q = n*p).`, { pythonLine: 6, g, m, n })
   let result
   if (n % 2 === 0) {
     result = 0
-    f('parity', L('if n is even'), `n = ${n} is even: an even number of heights means the corner is on the bottom edge, which is receptor 0.`, { g, m, n })
+    f('parity', L('if n is even'), `n = ${n} is even: an even number of heights means the corner is on the bottom edge, which is receptor 0.`, { pythonLine: 8, g, m, n })
   } else if (m % 2 === 1) {
     result = 1
-    f('parity', L('if m is odd'), `n = ${n} is odd (top edge) and m = ${m} is odd (east wall): receptor 1.`, { g, m, n })
+    f('parity', L('if m is odd'), `n = ${n} is odd (top edge) and m = ${m} is odd (east wall): receptor 1.`, { pythonLine: 10, g, m, n })
   } else {
     result = 2
-    f('parity', L('if m is odd'), `n = ${n} is odd (top edge) and m = ${m} is even (west wall): receptor 2.`, { g, m, n })
+    f('parity', L('if m is odd'), `n = ${n} is odd (top edge) and m = ${m} is even (west wall): receptor 2.`, { pythonLine: 11, g, m, n })
   }
   const doneLine = result === 0 ? L('if n is even') : result === 1 ? L('return receptor 1') : L('return receptor 2')
-  f('done', doneLine, `The ray meets receptor ${result} first.`, { g, m, n })
+  f('done', doneLine, `The ray meets receptor ${result} first.`, { pythonLine: result === 0 ? 8 : (result === 1 ? 10 : 11), g, m, n })
   return { input: { p, q }, result, frames }
 }
 
