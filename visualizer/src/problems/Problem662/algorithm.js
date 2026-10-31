@@ -11,14 +11,14 @@ export function parseInput(text) {
 // is last index − first index + 1, counting missing nodes between the outermost present nodes.
 export function buildTrace(values) {
   const root = treeFromLevelOrder(values)
-  const frames = [{ phase: 'start', depth: 0, width: null, best: 0, activeLine: L('set level to the list'), message: 'Assign heap positions to nodes; the width of a level spans its outermost nodes.' }]
+  const frames = [{ phase: 'start', depth: 0, width: null, best: 0, pythonLine: P('level = [(root, 1)]'), activeLine: L('set level to the list'), message: 'Assign heap positions to nodes; the width of a level spans its outermost nodes.' }]
   let best = 0
   let level = root ? [{ node: root, p: 1 }] : []
   let depth = 0
   while (level.length) {
     const width = level[level.length - 1].p - level[0].p + 1
     best = Math.max(best, width)
-    frames.push({ phase: 'level', depth, width, best, first: level[0].p, last: level[level.length - 1].p, activeLine: L('set best to the larger'), message: `Level ${depth}: positions ${level[0].p}…${level[level.length - 1].p}, width ${width}.` })
+    frames.push({ phase: 'level', depth, width, best, first: level[0].p, last: level[level.length - 1].p, pythonLine: P('best = max(best'), activeLine: L('set best to the larger'), message: `Level ${depth}: positions ${level[0].p}…${level[level.length - 1].p}, width ${width}.` })
     const next = []
     for (const { node, p } of level) {
       if (node.left) next.push({ node: node.left, p: 2 * p })
@@ -27,7 +27,7 @@ export function buildTrace(values) {
     level = next
     depth++
   }
-  frames.push({ phase: 'done', depth, width: null, best, result: best, activeLine: L('return best'), message: `Maximum width: ${best}.` })
+  frames.push({ phase: 'done', depth, width: null, best, result: best, pythonLine: P('return best'), activeLine: L('return best'), message: `Maximum width: ${best}.` })
   return { input: values, result: best, frames }
 }
 
@@ -43,6 +43,7 @@ export const code = `function widthOfBinaryTree(root):
     set level to nxt
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):

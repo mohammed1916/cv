@@ -15,18 +15,18 @@ export function buildTrace(values) {
   const rows = height + 1
   const cols = 2 ** (height + 1) - 1
   const matrix = Array.from({ length: rows }, () => Array(cols).fill(''))
-  const frames = [{ phase: 'start', matrix: matrix.map(r => [...r]), current: null, activeLine: L('set rows to'), message: `Height ${height}: a ${rows}×${cols} grid, root in the middle column.` }]
+  const frames = [{ phase: 'start', matrix: matrix.map(r => [...r]), current: null, pythonLine: P('rows, cols = h + 1'), activeLine: L('set rows to'), message: `Height ${height}: a ${rows}×${cols} grid, root in the middle column.` }]
   function place(node, row, lo, hi) {
     if (!node) return
     const col = Math.floor((lo + hi) / 2)
     matrix[row][col] = String(node.value)
-    frames.push({ phase: 'place', matrix: matrix.map(r => [...r]), current: node.id, activeLine: L('set res[r][mid]'), message: `Place ${node.value} at row ${row}, column ${col}.` })
+    frames.push({ phase: 'place', matrix: matrix.map(r => [...r]), current: node.id, pythonLine: P('res[r][mid] = str'), activeLine: L('set res[r][mid]'), message: `Place ${node.value} at row ${row}, column ${col}.` })
     const mid = Math.floor((lo + hi) / 2)
     place(node.left, row + 1, lo, mid - 1)
     place(node.right, row + 1, mid + 1, hi)
   }
   place(root, 0, 0, cols - 1)
-  frames.push({ phase: 'done', matrix: matrix.map(r => [...r]), current: null, activeLine: L('return res'), message: 'Grid complete.' })
+  frames.push({ phase: 'done', matrix: matrix.map(r => [...r]), current: null, pythonLine: P('return res'), activeLine: L('return res'), message: 'Grid complete.' })
   return { input: values, root, result: matrix, frames }
 }
 
@@ -48,6 +48,7 @@ export const code = `function printTree(root):
   place(root, 0, 0, cols - 1)
   return res`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):

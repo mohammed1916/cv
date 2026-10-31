@@ -16,21 +16,21 @@ const hotter = ([a, countA], [b, countB]) => countB - countA || (a < b ? -1 : a 
 export function buildTrace(spec) {
   const counts = new Map(spec.sentences.map((s, i) => [s, spec.times[i]]))
   const suggest = prefix => [...counts].filter(([s]) => s.startsWith(prefix)).sort(hotter).slice(0, LIMIT)
-  const frames = [{ phase: 'start', activeLine: L('counts = map each sentence'), typed: '', char: null, top: [], message: `Store ${counts.size} sentences with their hotness. Nothing is typed yet.` }]
+  const frames = [{ phase: 'start', pythonLine: P('counts = dict(zip'), activeLine: L('counts = map each sentence'), typed: '', char: null, top: [], message: `Store ${counts.size} sentences with their hotness. Nothing is typed yet.` }]
   const result = []
   let typed = ''
   for (const char of spec.typed) {
     if (char === '#') {
       counts.set(typed, (counts.get(typed) ?? 0) + 1)
       result.push([])
-      frames.push({ phase: 'save', activeLine: L('counts[prefix] += 1'), typed, char, top: [], message: `"${typed}" is saved and its hotness rises by one. The next sentence starts empty.` })
+      frames.push({ phase: 'save', pythonLine: P('counts[prefix] = counts.get'), activeLine: L('counts[prefix] += 1'), typed, char, top: [], message: `"${typed}" is saved and its hotness rises by one. The next sentence starts empty.` })
       typed = ''
       continue
     }
     typed += char
     const top = suggest(typed)
     result.push(top.map(([s]) => s))
-    frames.push({ phase: 'input', activeLine: L('sort matches by hotness'), typed, char, top, message: top.length ? `Prefix "${typed}": showing ${top.length} suggestion(s), hottest first.` : `No sentence starts with "${typed}".` })
+    frames.push({ phase: 'input', pythonLine: P('matches.sort('), activeLine: L('sort matches by hotness'), typed, char, top, message: top.length ? `Prefix "${typed}": showing ${top.length} suggestion(s), hottest first.` : `No sentence starts with "${typed}".` })
   }
   return { input: spec, result, frames }
 }
@@ -66,3 +66,4 @@ export const python = `def autocomplete_system(sentences, times, typed):
             result.append(matches[:3])
     return result`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

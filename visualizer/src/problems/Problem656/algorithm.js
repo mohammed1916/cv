@@ -13,15 +13,15 @@ export function buildTrace(spec) {
   const n = coins.length
   // cost[i]: cheapest total coins from index i to the last index; INF when blocked or unreachable.
   const cost = Array(n).fill(INF)
-  const frames = [{ phase: 'start', activeLine: L('for i from n - 1'), index: null, cost: [...cost], path: [], message: `Work backwards from the last index. A blocked coin (-1) can never be visited.` }]
+  const frames = [{ phase: 'start', pythonLine: P('for i in range(n - 1'), activeLine: L('for i from n - 1'), index: null, cost: [...cost], path: [], message: `Work backwards from the last index. A blocked coin (-1) can never be visited.` }]
   for (let i = n - 1; i >= 0; i--) {
     if (coins[i] === -1) {
-      frames.push({ phase: 'fill', activeLine: L('if coins[i] is blocked'), index: i, cost: [...cost], path: [], message: `Index ${i + 1} is blocked: it has no cost.` })
+      frames.push({ phase: 'fill', pythonLine: P('if coins[i] == -1'), activeLine: L('if coins[i] is blocked'), index: i, cost: [...cost], path: [], message: `Index ${i + 1} is blocked: it has no cost.` })
       continue
     }
     if (i === n - 1) cost[i] = coins[i]
     else cost[i] = coins[i] + Math.min(...cost.slice(i + 1, Math.min(n, i + maxJump + 1)))
-    frames.push({ phase: 'fill', activeLine: i === n - 1 ? L('if i is the last index') : L('otherwise set cost[i]'), index: i, cost: [...cost], path: [], message: cost[i] === INF ? `No way to finish from index ${i + 1}.` : `Cheapest total from index ${i + 1} is ${cost[i]}: its coin plus the best reachable continuation.` })
+    frames.push({ phase: 'fill', pythonLine: i === n - 1 ? P('if i == n - 1') : P('cost[i] = coins[i] + min'), activeLine: i === n - 1 ? L('if i is the last index') : L('otherwise set cost[i]'), index: i, cost: [...cost], path: [], message: cost[i] === INF ? `No way to finish from index ${i + 1}.` : `Cheapest total from index ${i + 1} is ${cost[i]}: its coin plus the best reachable continuation.` })
   }
   const path = []
   if (cost[0] !== INF) {
@@ -33,11 +33,11 @@ export function buildTrace(spec) {
       while (cost[next] !== cost[i] - coins[i]) next++
       i = next
       path.push(i)
-      frames.push({ phase: 'walk', activeLine: L('set i to the first j'), index: i, cost: [...cost], path: [...path], message: `Step to index ${i + 1}: the earliest index that keeps the cheapest total ${cost[i]}.` })
+      frames.push({ phase: 'walk', pythonLine: P('i = next(j for'), activeLine: L('set i to the first j'), index: i, cost: [...cost], path: [...path], message: `Step to index ${i + 1}: the earliest index that keeps the cheapest total ${cost[i]}.` })
     }
   }
   const result = path.map(i => i + 1)
-  frames.push({ phase: 'done', activeLine: result.length ? L('return path with') : L('if cost[0] is infinity'), index: null, cost: [...cost], path: [...path], message: result.length ? `Cheapest path with the smallest indices: ${result.join(' → ')}.` : 'No path reaches the last index.' })
+  frames.push({ phase: 'done', pythonLine: result.length ? P('return [j + 1') : P('if cost[0] == INF'), activeLine: result.length ? L('return path with') : L('if cost[0] is infinity'), index: null, cost: [...cost], path: [...path], message: result.length ? `Cheapest path with the smallest indices: ${result.join(' → ')}.` : 'No path reaches the last index.' })
   return { input: spec, coins, result, frames }
 }
 
@@ -55,6 +55,7 @@ export const code = `function cheapestJump(coins, maxJump):
     append i to path
   return path with every index plus 1`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def cheapest_jump(coins, maxJump):
     n = len(coins)

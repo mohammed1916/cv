@@ -24,14 +24,14 @@ function feasible(nums, k, average) {
 export function buildTrace(spec) {
   const { nums, k } = spec
   let lo = Math.min(...nums), hi = Math.max(...nums)
-  const frames = [{ phase: 'start', activeLine: L('lo = smallest value'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between the smallest value ${lo} and the largest ${hi}. Binary search on the average.` }]
+  const frames = [{ phase: 'start', pythonLine: P('lo, hi = min'), activeLine: L('lo = smallest value'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between the smallest value ${lo} and the largest ${hi}. Binary search on the average.` }]
   for (let iteration = 1; iteration <= ITERATIONS; iteration++) {
     const mid = (lo + hi) / 2
     const ok = feasible(nums, k, mid)
     if (ok) lo = mid
     else hi = mid
     frames.push({
-      phase: 'check', activeLine: L(ok ? 'lo = mid' : 'hi = mid'), lo, hi, mid, feasible: ok, iteration,
+      phase: 'check', pythonLine: P(ok ? 'lo = mid' : 'hi = mid'), activeLine: L(ok ? 'lo = mid' : 'hi = mid'), lo, hi, mid, feasible: ok, iteration,
       message: ok
         ? `An average of at least ${mid.toFixed(4)} is reachable with length ≥ ${k}, so the answer is at least that.`
         : `No subarray of length ≥ ${k} averages ${mid.toFixed(4)} or more, so the answer is lower.`,
@@ -77,3 +77,4 @@ export const python = `def find_max_average(nums, k):
             hi = mid
     return lo`
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

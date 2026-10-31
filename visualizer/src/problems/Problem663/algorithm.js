@@ -19,7 +19,7 @@ export function buildTrace(arr) {
     const sum = node.value + visit(node.left) + visit(node.right)
     subtree.set(node.id, sum)
     visited.push(node.id)
-    frames.push({ phase: 'visit', activeLine: L('append s to sums'), node: node.id, sums: Object.fromEntries(subtree), visited: [...visited], total: null, result: null, message: `Subtree of ${node.value} sums to ${sum}.` })
+    frames.push({ phase: 'visit', pythonLine: P('sums.append(s)'), activeLine: L('append s to sums'), node: node.id, sums: Object.fromEntries(subtree), visited: [...visited], total: null, result: null, message: `Subtree of ${node.value} sums to ${sum}.` })
     return sum
   }
   const total = visit(root)
@@ -27,7 +27,7 @@ export function buildTrace(arr) {
   const hit = total % 2 === 0 ? [...subtree].find(([id, sum]) => id !== root.id && sum === half) : undefined
   const result = Boolean(hit)
   frames.push({
-    phase: 'done', activeLine: L('return whether total is even'), node: null, sums: Object.fromEntries(subtree), visited: [...visited], total, result,
+    phase: 'done', pythonLine: P('return total % 2 == 0'), activeLine: L('return whether total is even'), node: null, sums: Object.fromEntries(subtree), visited: [...visited], total, result,
     message: result
       ? `The total is ${total}. Cutting above the subtree that sums to ${half} leaves two halves of equal sum.`
       : total % 2 ? `The total ${total} is odd, so it cannot split into two equal sums.` : `No non-root subtree sums to ${half}, so no cut works.`,
@@ -45,6 +45,7 @@ export const code = `function checkEqualTree(root):
   set total to subtree(root)
   return whether total is even and total / 2 is one of the sums of non-root nodes`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
