@@ -10,7 +10,7 @@ export function buildTrace(source) {
   const out = []
   let current = ''
   let inBlock = false
-  const frames = [{ phase: 'start', line: 0, output: [], inBlock: false, activeLine: 2, message: 'Scan each line, tracking whether a block comment is open.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, line: 0, output: [], inBlock: false, activeLine: 2, message: 'Scan each line, tracking whether a block comment is open.' }]
   source.forEach((line, lineNo) => {
     let i = 0
     while (i < line.length) {
@@ -19,7 +19,7 @@ export function buildTrace(source) {
         else i++
       } else if (line.startsWith('/*', i)) {
         inBlock = true; i += 2
-        frames.push({ phase: 'block', line: lineNo, output: [...out], inBlock, activeLine: 6, message: `Line ${lineNo}: block comment opens.` })
+        frames.push({ phase: 'block', pythonLine: 14, line: lineNo, output: [...out], inBlock, activeLine: 6, message: `Line ${lineNo}: block comment opens.` })
       } else if (line.startsWith('//', i)) {
         break
       } else {
@@ -31,11 +31,11 @@ export function buildTrace(source) {
     if (inBlock) return
     if (current.length) {
       out.push(current)
-      frames.push({ phase: 'emit', line: lineNo, output: [...out], inBlock, activeLine: 10, message: `Line ${lineNo} keeps "${current}".` })
-    } else frames.push({ phase: 'drop', line: lineNo, output: [...out], inBlock, activeLine: 11, message: `Line ${lineNo} is empty after removing comments: drop it.` })
+      frames.push({ phase: 'emit', pythonLine: 24, line: lineNo, output: [...out], inBlock, activeLine: 10, message: `Line ${lineNo} keeps "${current}".` })
+    } else frames.push({ phase: 'drop', pythonLine: 23, line: lineNo, output: [...out], inBlock, activeLine: 11, message: `Line ${lineNo} is empty after removing comments: drop it.` })
     current = ''
   })
-  frames.push({ phase: 'done', line: source.length - 1, output: [...out], inBlock, result: out, activeLine: 13, message: `${out.length} line${out.length === 1 ? '' : 's'} of code remain.` })
+  frames.push({ phase: 'done', pythonLine: 26, line: source.length - 1, output: [...out], inBlock, result: out, activeLine: 13, message: `${out.length} line${out.length === 1 ? '' : 's'} of code remain.` })
   return { input: source, result: out, frames }
 }
 

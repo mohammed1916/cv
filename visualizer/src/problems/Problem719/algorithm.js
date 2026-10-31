@@ -18,15 +18,15 @@ export function buildTrace({ nums, k }) {
     return count
   }
   let lo = 0, hi = a[a.length - 1] - a[0]
-  const frames = [{ phase: 'start', lo, hi, mid: null, count: null, activeLine: 2, message: `Search distances in [0, ${hi}] for the ${k}th smallest pair distance.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, lo, hi, mid: null, count: null, activeLine: 2, message: `Search distances in [0, ${hi}] for the ${k}th smallest pair distance.` }]
   while (lo < hi) {
     const mid = (lo + hi) >> 1
     const count = countUpTo(mid)
-    frames.push({ phase: 'count', lo, hi, mid, count, activeLine: 9, message: `mid ${mid}: ${count} pair${count === 1 ? '' : 's'} within distance ${mid}; ${count >= k ? 'enough, search lower' : 'too few, search higher'}.` })
+    frames.push({ phase: 'count', pythonLine: count >= k ? 12 : 14, lo, hi, mid, count, activeLine: 9, message: `mid ${mid}: ${count} pair${count === 1 ? '' : 's'} within distance ${mid}; ${count >= k ? 'enough, search lower' : 'too few, search higher'}.` })
     if (count >= k) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', lo, hi, mid: null, count: null, result: lo, activeLine: 11, message: `The ${k}th smallest distance is ${lo}.` })
+  frames.push({ phase: 'done', pythonLine: 15, lo, hi, mid: null, count: null, result: lo, activeLine: 11, message: `The ${k}th smallest distance is ${lo}.` })
   return { input: { nums, k }, result: lo, frames }
 }
 

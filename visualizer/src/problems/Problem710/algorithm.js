@@ -19,14 +19,14 @@ export function buildTrace({ n, blacklist, draws }) {
   for (let v = m; v < n; v++) if (!black.has(v)) tail.push(v)
   let t = 0
   for (const b of blacklist) if (b < m) mapping.set(b, tail[t++])
-  const frames = [{ phase: 'start', draw: null, pick: null, mapping: [...mapping.entries()], activeLine: L('m = n minus'), message: `Map ${blacklist.length} blacklisted value(s) below ${m} to whitelisted values in [${m}, ${n}).` }]
+  const frames = [{ phase: 'start', pythonLine: 10, draw: null, pick: null, mapping: [...mapping.entries()], activeLine: L('m = n minus'), message: `Map ${blacklist.length} blacklisted value(s) below ${m} to whitelisted values in [${m}, ${n}).` }]
   const results = []
   draws.forEach((r, i) => {
     const pick = mapping.has(r) ? mapping.get(r) : r
     results.push(pick)
-    frames.push({ phase: 'draw', index: i, draw: r, pick, mapping: [...mapping.entries()], result: results.slice(), activeLine: mapping.has(r) ? L('if r is a key in mapping') : L('otherwise, pick = r'), message: mapping.has(r) ? `Draw ${r} is blacklisted; use ${pick}.` : `Draw ${r} is allowed.` })
+    frames.push({ phase: 'draw', pythonLine: 13, index: i, draw: r, pick, mapping: [...mapping.entries()], result: results.slice(), activeLine: mapping.has(r) ? L('if r is a key in mapping') : L('otherwise, pick = r'), message: mapping.has(r) ? `Draw ${r} is blacklisted; use ${pick}.` : `Draw ${r} is allowed.` })
   })
-  frames.push({ phase: 'done', draw: null, pick: null, mapping: [...mapping.entries()], result: results, activeLine: L('return results'), message: `Picks: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 14, draw: null, pick: null, mapping: [...mapping.entries()], result: results, activeLine: L('return results'), message: `Picks: [${results.join(', ')}].` })
   return { input: { n, blacklist, draws }, result: results, mapping, frames }
 }
 

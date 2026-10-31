@@ -15,7 +15,7 @@ export function buildTrace(spec) {
   const n = values.length
   const frames = []
   if (n === 0) {
-    frames.push({ phase: 'done', activeLine: L('if head is empty'), prev: null, cur: null, nodes: [], result: [insert], message: 'The list is empty: the new node points to itself.' })
+    frames.push({ phase: 'done', pythonLine: 7, activeLine: L('if head is empty'), prev: null, cur: null, nodes: [], result: [insert], message: 'The list is empty: the new node points to itself.' })
     return { input: spec, result: [insert], frames, head: null }
   }
   const nodes = values.map((value, id) => ({ id, value, next: null }))
@@ -32,7 +32,7 @@ export function buildTrace(spec) {
   do {
     const cur = prev.next
     const fits = (prev.value <= insert && insert <= cur.value) || (prev.value > cur.value && (insert >= prev.value || insert <= cur.value))
-    frames.push({ phase: 'scan', activeLine: L('cur = prev.next'), prev: prev.id, cur: cur.id, nodes: order(n), result: null, fits, message: fits ? `${insert} belongs between ${prev.value} and ${cur.value}.` : `${insert} does not belong between ${prev.value} and ${cur.value}; keep walking.` })
+    frames.push({ phase: 'scan', pythonLine: fits ? 18 : 17, activeLine: L('cur = prev.next'), prev: prev.id, cur: cur.id, nodes: order(n), result: null, fits, message: fits ? `${insert} belongs between ${prev.value} and ${cur.value}.` : `${insert} does not belong between ${prev.value} and ${cur.value}; keep walking.` })
     if (fits) { pivot = prev; break }
     prev = cur
   } while (prev !== head)
@@ -40,8 +40,8 @@ export function buildTrace(spec) {
   const at = pivot ?? head
   at.next = { id: n, value: insert, next: at.next }
   const result = order(n + 1).map(item => item.value)
-  frames.push({ phase: 'insert', activeLine: L('link a new node holding insert'), prev: at.id, cur: at.next.id, nodes: order(n + 1), result: null, fits: true, message: `Insert ${insert} after ${at.value}. The head stays where it was.` })
-  frames.push({ phase: 'done', activeLine: L('return head'), prev: null, cur: null, nodes: order(n + 1), result, message: `Read the cycle from the head: ${result.join(', ')}.` })
+  frames.push({ phase: 'insert', pythonLine: 23, activeLine: L('link a new node holding insert'), prev: at.id, cur: at.next.id, nodes: order(n + 1), result: null, fits: true, message: `Insert ${insert} after ${at.value}. The head stays where it was.` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return head'), prev: null, cur: null, nodes: order(n + 1), result, message: `Read the cycle from the head: ${result.join(', ')}.` })
   return { input: spec, result, frames, head: head.id }
 }
 

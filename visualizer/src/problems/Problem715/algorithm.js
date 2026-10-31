@@ -17,7 +17,7 @@ export function buildTrace(ops) {
   const xs = [...new Set(ops.flatMap(([, l, r]) => [l, r]))].sort((a, b) => a - b)
   const seg = new SegTree(Math.max(1, xs.length - 1), 'cover-assign')
   const segView = () => ({ seg: { ...seg.snapshot(), coords: xs, title: 'Segment tree of covered pieces (lazy cover / clear)' } })
-  const frames = [{ phase: 'start', intervals: [], ...segView(), op: null, activeLine: L('intervals = empty sorted list'), message: 'No tracked ranges yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, intervals: [], ...segView(), op: null, activeLine: L('intervals = empty sorted list'), message: 'No tracked ranges yet.' }]
   ops.forEach(([name, l, r], i) => {
     let returned = null
     if (name === 'addRange') {
@@ -47,10 +47,10 @@ export function buildTrace(ops) {
     else seg.update(from, to, name === 'addRange' ? 1 : 0)
     if (segReturned !== null && segReturned !== returned) throw new Error('segment tree disagrees with interval list')
     log.push({ name, args: [l, r], returned })
-    frames.push({ phase: name, op: i, intervals: intervals.map(x => [...x]), log: log.map(x => ({ ...x })), returned, ...segView(), activeLine: name === 'addRange' ? L('if it does not touch merged') : name === 'removeRange' ? L('keep only its parts outside') : L('append whether one interval covers'),
+    frames.push({ phase: name, pythonLine: name === 'addRange' ? 13 : name === 'removeRange' ? 24 : 26, op: i, intervals: intervals.map(x => [...x]), log: log.map(x => ({ ...x })), returned, ...segView(), activeLine: name === 'addRange' ? L('if it does not touch merged') : name === 'removeRange' ? L('keep only its parts outside') : L('append whether one interval covers'),
       message: `${name}[${l}, ${r})${returned === null ? '' : ` → ${returned}`}: ${intervals.length} interval${intervals.length === 1 ? '' : 's'} tracked.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, intervals: intervals.map(x => [...x]), log, ...segView(), activeLine: L('return results'), message: 'All operations complete.' })
+  frames.push({ phase: 'done', pythonLine: 27, op: ops.length - 1, intervals: intervals.map(x => [...x]), log, ...segView(), activeLine: L('return results'), message: 'All operations complete.' })
   return { input: ops, result: log.filter(x => x.name === 'queryRange').map(x => x.returned), log, frames }
 }
 

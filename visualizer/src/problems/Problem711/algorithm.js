@@ -34,7 +34,7 @@ export function buildTrace(rows) {
   const land = (r, c) => r >= 0 && c >= 0 && r < height && c < width && grid[r][c] === 1
   const seen = Array.from({ length: height }, () => Array(width).fill(false))
   const shapes = new Set()
-  const frames = [{ phase: 'start', activeLine: L('shapes = empty set'), cell: null, island: [], shapes: 0, message: 'Scan the grid. Each unseen land cell starts an island.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('shapes = empty set'), cell: null, island: [], shapes: 0, message: 'Scan the grid. Each unseen land cell starts an island.' }]
   for (let r = 0; r < height; r++) {
     for (let c = 0; c < width; c++) {
       if (!land(r, c) || seen[r][c]) continue
@@ -42,7 +42,7 @@ export function buildTrace(rows) {
       const explore = (y, x) => {
         seen[y][x] = true
         island.push([y, x])
-        frames.push({ phase: 'explore', activeLine: L('append (r, c) to island'), cell: [y, x], island: [...island], shapes: shapes.size, message: `Collect (${y + 1}, ${x + 1}) into this island.` })
+        frames.push({ phase: 'explore', pythonLine: 23, activeLine: L('append (r, c) to island'), cell: [y, x], island: [...island], shapes: shapes.size, message: `Collect (${y + 1}, ${x + 1}) into this island.` })
         for (const [dy, dx] of MOVES) {
           if (land(y + dy, x + dx) && !seen[y + dy][x + dx]) explore(y + dy, x + dx)
         }
@@ -51,10 +51,10 @@ export function buildTrace(rows) {
       const key = canonicalShape(island)
       const isNew = !shapes.has(key)
       shapes.add(key)
-      frames.push({ phase: isNew ? 'new' : 'repeat', activeLine: L('shapes.add('), cell: [r, c], island: [...island], shapes: shapes.size, message: isNew ? 'A shape not seen before, once every rotation and reflection of it is considered.' : 'Same shape as an earlier island once rotations and reflections are allowed.' })
+      frames.push({ phase: isNew ? 'new' : 'repeat', pythonLine: 34, activeLine: L('shapes.add('), cell: [r, c], island: [...island], shapes: shapes.size, message: isNew ? 'A shape not seen before, once every rotation and reflection of it is considered.' : 'Same shape as an earlier island once rotations and reflections are allowed.' })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the number of shapes'), cell: null, island: [], shapes: shapes.size, message: `${shapes.size} distinct shape(s) up to rotation and reflection.` })
+  frames.push({ phase: 'done', pythonLine: 35, activeLine: L('return the number of shapes'), cell: null, island: [], shapes: shapes.size, message: `${shapes.size} distinct shape(s) up to rotation and reflection.` })
   return { input: rows, grid, result: shapes.size, frames }
 }
 

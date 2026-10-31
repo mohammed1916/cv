@@ -42,19 +42,19 @@ function gravity(board) {
 
 export function buildTrace(start) {
   let board = copy(start)
-  const frames = [{ phase: 'start', activeLine: L('set crushed to an empty set'), board: copy(board), crushed: [], round: 0, message: 'Look for three or more equal candies in a row or column.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set crushed to an empty set'), board: copy(board), crushed: [], round: 0, message: 'Look for three or more equal candies in a row or column.' }]
   let round = 0
   for (;;) {
     const crushed = crushable(board)
     if (crushed.length === 0) break
     round++
-    frames.push({ phase: 'mark', activeLine: L('add those three cells to crushed'), board: copy(board), crushed, round, message: `Round ${round}: ${crushed.length} candies are part of a run of three and are crushed.` })
+    frames.push({ phase: 'mark', pythonLine: 13, activeLine: L('add those three cells to crushed'), board: copy(board), crushed, round, message: `Round ${round}: ${crushed.length} candies are part of a run of three and are crushed.` })
     for (const [r, c] of crushed) board[r][c] = 0
-    frames.push({ phase: 'clear', activeLine: L('set each cell in crushed to empty'), board: copy(board), crushed: [], round, message: 'Crushed cells become empty.' })
+    frames.push({ phase: 'clear', pythonLine: 16, activeLine: L('set each cell in crushed to empty'), board: copy(board), crushed: [], round, message: 'Crushed cells become empty.' })
     board = gravity(board)
-    frames.push({ phase: 'drop', activeLine: L('stack the non-empty candies'), board: copy(board), crushed: [], round, message: 'Candies above fall into the empty cells below them.' })
+    frames.push({ phase: 'drop', pythonLine: 22, activeLine: L('stack the non-empty candies'), board: copy(board), crushed: [], round, message: 'Candies above fall into the empty cells below them.' })
   }
-  frames.push({ phase: 'done', activeLine: L('return the board'), board: copy(board), crushed: [], round, message: `Stable after ${round} round(s).` })
+  frames.push({ phase: 'done', pythonLine: 14, activeLine: L('return the board'), board: copy(board), crushed: [], round, message: `Stable after ${round} round(s).` })
   return { input: start, result: board, frames }
 }
 

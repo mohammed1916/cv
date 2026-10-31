@@ -8,31 +8,31 @@ export function parseInput(text) {
 // A stack of counts, one frame per open parenthesis. Digits multiply the group they close.
 export function buildTrace(formula) {
   const stack = [new Map()]
-  const frames = [{ phase: 'start', depth: 1, counts: {}, activeLine: 1, message: 'One open group for the whole formula.' }]
+  const frames = [{ phase: 'start', pythonLine: 16, depth: 1, counts: {}, activeLine: 1, message: 'One open group for the whole formula.' }]
   let i = 0
   const readNumber = () => { let s = ''; while (i < formula.length && /\d/.test(formula[i])) s += formula[i++]; return s === '' ? 1 : Number(s) }
   while (i < formula.length) {
     const ch = formula[i]
-    if (ch === '(') { stack.push(new Map()); i++; frames.push({ phase: 'open', depth: stack.length, counts: obj(stack.at(-1)), activeLine: 3, message: 'Open a group.' }) }
+    if (ch === '(') { stack.push(new Map()); i++; frames.push({ phase: 'open', pythonLine: 19, depth: stack.length, counts: obj(stack.at(-1)), activeLine: 3, message: 'Open a group.' }) }
     else if (ch === ')') {
       i++
       const times = readNumber()
       const top = stack.pop()
       for (const [atom, c] of top) stack.at(-1).set(atom, (stack.at(-1).get(atom) ?? 0) + c * times)
-      frames.push({ phase: 'close', depth: stack.length, counts: obj(stack.at(-1)), activeLine: 5, message: `Close a group repeated ${times} time${times === 1 ? '' : 's'}.` })
+      frames.push({ phase: 'close', pythonLine: 26, depth: stack.length, counts: obj(stack.at(-1)), activeLine: 5, message: `Close a group repeated ${times} time${times === 1 ? '' : 's'}.` })
     } else {
       let atom = ch
       i++
       while (i < formula.length && /[a-z]/.test(formula[i])) atom += formula[i++]
       const times = readNumber()
       stack.at(-1).set(atom, (stack.at(-1).get(atom) ?? 0) + times)
-      frames.push({ phase: 'atom', depth: stack.length, counts: obj(stack.at(-1)), activeLine: 7, message: `${atom} × ${times}.` })
+      frames.push({ phase: 'atom', pythonLine: 30, depth: stack.length, counts: obj(stack.at(-1)), activeLine: 7, message: `${atom} × ${times}.` })
     }
   }
   const top = stack[0]
   const names = [...top.keys()].sort()
   const result = names.map(a => (top.get(a) === 1 ? a : `${a}${top.get(a)}`)).join('')
-  frames.push({ phase: 'done', depth: 1, counts: obj(top), result, activeLine: 8, message: `Atoms in sorted order: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 31, depth: 1, counts: obj(top), result, activeLine: 8, message: `Atoms in sorted order: ${result}.` })
   return { input: formula, result, frames }
 }
 

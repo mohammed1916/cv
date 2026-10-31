@@ -33,7 +33,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace(ops) {
   const stack = []
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('stack = empty list'), stack: [], index: null, result: null, message: 'An empty stack. popMax removes the largest value, and the most recent one if values tie.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('stack = empty list'), stack: [], index: null, result: null, message: 'An empty stack. popMax removes the largest value, and the most recent one if values tie.' }]
   for (const [kind, value] of ops) {
     let out = null, index = null, activeLine, message
     if (kind === 'push') {
@@ -60,9 +60,9 @@ export function buildTrace(ops) {
       message = `Remove ${out}: the largest value, and the most recent one if values tie.`
     }
     result.push(out)
-    frames.push({ phase: kind, activeLine, stack: [...stack], index, result: out, message })
+    frames.push({ phase: kind, pythonLine: { push: 7, pop: 10, top: 12, peekMax: 14, popMax: 18 }[kind], activeLine, stack: [...stack], index, result: out, message })
   }
-  frames.push({ phase: 'done', activeLine: L('return results'), stack: [...stack], index: null, result: null, message: `${result.length} operation(s) complete.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return results'), stack: [...stack], index: null, result: null, message: `${result.length} operation(s) complete.` })
   return { input: ops, result, frames }
 }
 
