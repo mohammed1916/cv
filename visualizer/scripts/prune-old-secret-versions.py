@@ -6,7 +6,7 @@ old revisions may require redeployment with the current credential afterward.
 """
 import argparse,json,subprocess,sys
 SCOPES={
- 'teemavenue-e5fb6':('us-central1',{'GMAIL_APP_PASSWORD','RAZORPAY_KEY_SECRET','RAZORPAY_WEBHOOK_SECRET','NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN'}),
+ 'teemavenue-e5fb6':('us-central1',{'GMAIL_APP_PASSWORD','RAZORPAY_KEY_SECRET','RAZORPAY_WEBHOOK_SECRET'}),
  'teemtreat-visualizer':('asia-south1',{'RAZORPAY_KEY_ID','RAZORPAY_KEY_SECRET','RAZORPAY_WEBHOOK_SECRET'})}
 def cloud(project,*args):
  result=subprocess.run(['gcloud',*args,'--project='+project,'--format=json','--quiet'],capture_output=True,text=True)
