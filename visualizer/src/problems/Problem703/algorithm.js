@@ -31,15 +31,15 @@ export function buildTrace({ k, nums, adds }) {
     if (v > top[0]) top = [...top.slice(1), v].sort((a, b) => a - b)
   }
   nums.forEach(offer)
-  const frames = [{ phase: 'start', top: [...top], op: null, activeLine: L('for each value in nums'), message: `Keep the ${k} largest values from [${nums.join(', ')}].` }]
+  const frames = [{ phase: 'start', top: [...top], op: null, activeLine: L('for each value in nums'), pythonLine: 5, message: `Keep the ${k} largest values from [${nums.join(', ')}].` }]
   const results = []
   adds.forEach((v, i) => {
     const before = top.length
     offer(v)
     results.push(top[0])
-    frames.push({ phase: 'add', top: [...top], op: i, value: v, kept: v > (before === k ? top[0] : -Infinity) || top.length > before, result: top[0], activeLine: L('append top[0] to results'), message: `add(${v}): kth largest is ${top[0]}.` })
+    frames.push({ phase: 'add', top: [...top], op: i, value: v, kept: v > (before === k ? top[0] : -Infinity) || top.length > before, result: top[0], activeLine: L('append top[0] to results'), pythonLine: 18, message: `add(${v}): kth largest is ${top[0]}.` })
   })
-  frames.push({ phase: 'done', top: [...top], op: adds.length - 1, result: results, activeLine: L('return results'), message: `Results: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', top: [...top], op: adds.length - 1, result: results, activeLine: L('return results'), pythonLine: 22, message: `Results: [${results.join(', ')}].` })
   return { input: { k, nums, adds }, result: results, frames }
 }
 

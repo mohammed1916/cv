@@ -28,13 +28,13 @@ export function buildTrace(spec) {
   const { arr, target } = spec
   const reads = []
   let left = 0, right = 1
-  const frames = [{ phase: 'start', activeLine: L('left, right = 0, 1'), probe: null, value: null, left, right, reads: [], result: null, message: `The size is unknown, so probe index 1 and keep doubling until the value reaches ${target}.` }]
+  const frames = [{ phase: 'start', activeLine: L('left, right = 0, 1'), pythonLine: 7, probe: null, value: null, left, right, reads: [], result: null, message: `The size is unknown, so probe index 1 and keep doubling until the value reaches ${target}.` }]
   // `why` receives the value read, so the message can say what the reader's answer means.
   const read = (index, phase, line, why) => {
     const value = index < arr.length ? arr[index] : BEYOND
     reads.push(index)
     const shown = value === BEYOND ? 'past the end (the reader returns 2147483647)' : value
-    frames.push({ phase, activeLine: line, probe: index, value, left, right, reads: [...reads], result: null, message: `Read index ${index}: ${shown}. ${why(value)}` })
+    frames.push({ phase, activeLine: line, pythonLine: phase === 'expand' ? 8 : 13, probe: index, value, left, right, reads: [...reads], result: null, message: `Read index ${index}: ${shown}. ${why(value)}` })
     return value
   }
   const expanding = value => (value < target ? 'Still below the target, so double the probe.' : 'At or above the target: the answer lies left of this probe.')
@@ -53,7 +53,7 @@ export function buildTrace(spec) {
     if (value < target) lo = mid + 1
     else hi = mid - 1
   }
-  frames.push({ phase: 'done', activeLine: result === -1 ? L('return -1') : L('return mid'), probe: null, value: null, left: lo, right: hi, reads: [...reads], result, message: result === -1 ? `${target} is not in the array.` : `${target} is at index ${result}.` })
+  frames.push({ phase: 'done', activeLine: result === -1 ? L('return -1') : L('return mid'), pythonLine: result === -1 ? 20 : 15, probe: null, value: null, left: lo, right: hi, reads: [...reads], result, message: result === -1 ? `${target} is not in the array.` : `${target} is at index ${result}.` })
   return { input: spec, arr, result, reads, frames }
 }
 

@@ -16,7 +16,7 @@ export function buildTrace(rows) {
   const land = (r, c) => r >= 0 && c >= 0 && r < height && c < width && grid[r][c] === 1
   const seen = Array.from({ length: height }, () => Array(width).fill(false))
   const shapes = new Set()
-  const frames = [{ phase: 'start', activeLine: L('seen = set of visited cells'), cell: null, island: [], shape: null, shapes: 0, message: 'Scan the grid. Each unseen land cell starts a new island.' }]
+  const frames = [{ phase: 'start', activeLine: L('seen = set of visited cells'), pythonLine: 3, cell: null, island: [], shape: null, shapes: 0, message: 'Scan the grid. Each unseen land cell starts a new island.' }]
   for (let r = 0; r < height; r++) {
     for (let c = 0; c < width; c++) {
       if (!land(r, c) || seen[r][c]) continue
@@ -27,7 +27,7 @@ export function buildTrace(rows) {
         seen[y][x] = true
         island.push([y, x])
         walk += step
-        frames.push({ phase: 'explore', activeLine: L('mark cell seen'), cell: [y, x], island: [...island], shape: walk, shapes: shapes.size, message: `Visit (${y + 1}, ${x + 1}) on the walk from the island’s first cell.` })
+        frames.push({ phase: 'explore', activeLine: L('mark cell seen'), pythonLine: 7, cell: [y, x], island: [...island], shape: walk, shapes: shapes.size, message: `Visit (${y + 1}, ${x + 1}) on the walk from the island’s first cell.` })
         for (const [dy, dx, letter] of MOVES) {
           if (land(y + dy, x + dx) && !seen[y + dy][x + dx]) explore(y + dy, x + dx, letter)
         }
@@ -36,10 +36,10 @@ export function buildTrace(rows) {
       explore(r, c, 'o')
       const isNew = !shapes.has(walk)
       shapes.add(walk)
-      frames.push({ phase: isNew ? 'new' : 'repeat', activeLine: L('add the joined walk'), cell: [r, c], island: [...island], shape: walk, shapes: shapes.size, message: isNew ? `A new shape: the island from (${r + 1}, ${c + 1}) was not seen before.` : `This island repeats a shape already counted.` })
+      frames.push({ phase: isNew ? 'new' : 'repeat', activeLine: L('add the joined walk'), pythonLine: 20, cell: [r, c], island: [...island], shape: walk, shapes: shapes.size, message: isNew ? `A new shape: the island from (${r + 1}, ${c + 1}) was not seen before.` : `This island repeats a shape already counted.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the number of distinct walks'), cell: null, island: [], shape: null, shapes: shapes.size, message: `${shapes.size} distinct shape(s).` })
+  frames.push({ phase: 'done', activeLine: L('return the number of distinct walks'), pythonLine: 21, cell: null, island: [], shape: null, shapes: shapes.size, message: `${shapes.size} distinct shape(s).` })
   return { input: rows, grid, result: shapes.size, frames }
 }
 

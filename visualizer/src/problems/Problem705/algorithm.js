@@ -24,7 +24,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace(ops) {
   const buckets = Array.from({ length: BUCKETS }, () => [])
   const log = []
-  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: L('buckets = ten empty lists'), message: `${BUCKETS} buckets; the bucket index is key mod ${BUCKETS}.` }]
+  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: L('buckets = ten empty lists'), pythonLine: 2, message: `${BUCKETS} buckets; the bucket index is key mod ${BUCKETS}.` }]
   ops.forEach(([name, key], i) => {
     const bucket = key % BUCKETS
     const list = buckets[bucket]
@@ -34,10 +34,10 @@ export function buildTrace(ops) {
     else returned = list.includes(key)
     log.push({ name, args: [key], returned })
     const line = name === 'add' ? L('append key to bucket unless it is already there') : name === 'remove' ? L('delete key from bucket if it is there') : L('append whether key is in bucket to results')
-    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => [...b]), log: log.map(x => ({ ...x })), activeLine: line,
+    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => [...b]), log: log.map(x => ({ ...x })), activeLine: line, pythonLine: name === 'add' ? 7 : name === 'remove' ? 10 : 13,
       message: `${name}(${key}) → bucket ${bucket}${returned === null ? '' : `, returns ${returned}`}.` })
   })
-  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), log, activeLine: L('return results'), message: 'All operations complete.' })
+  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), log, activeLine: L('return results'), pythonLine: 14, message: 'All operations complete.' })
   return { input: ops, result: log.filter(x => x.name === 'contains').map(x => x.returned), log, frames }
 }
 

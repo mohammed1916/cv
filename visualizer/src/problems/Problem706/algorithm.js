@@ -26,7 +26,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace(ops) {
   const buckets = Array.from({ length: BUCKETS }, () => [])
   const log = []
-  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: L('buckets = ten empty lists'), message: `${BUCKETS} buckets of (key, value) pairs.` }]
+  const frames = [{ phase: 'start', buckets: buckets.map(b => [...b]), op: null, activeLine: L('buckets = ten empty lists'), pythonLine: 2, message: `${BUCKETS} buckets of (key, value) pairs.` }]
   ops.forEach(([name, key, value], i) => {
     const bucket = key % BUCKETS
     const list = buckets[bucket]
@@ -37,10 +37,10 @@ export function buildTrace(ops) {
     else returned = at >= 0 ? list[at][1] : -1
     log.push({ name, args: name === 'put' ? [key, value] : [key], returned })
     const line = name === 'put' ? L('update the pair for key in bucket') : name === 'remove' ? L('delete the pair for key from bucket') : L('append the value for key in bucket')
-    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), log: log.map(x => ({ ...x })), activeLine: line,
+    frames.push({ phase: name, bucket, op: i, key, returned, buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), log: log.map(x => ({ ...x })), activeLine: line, pythonLine: name === 'put' ? (at >= 0 ? 11 : 14) : name === 'remove' ? 16 : 22,
       message: `${name}(${key}${name === 'put' ? `, ${value}` : ''}) in bucket ${bucket}${returned === null ? '' : ` → ${returned}`}.` })
   })
-  frames.push({ phase: 'done', buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), op: ops.length - 1, log, activeLine: L('return results'), message: 'All operations complete.' })
+  frames.push({ phase: 'done', buckets: buckets.map(b => b.map(([k, v]) => `${k}:${v}`)), op: ops.length - 1, log, activeLine: L('return results'), pythonLine: 23, message: 'All operations complete.' })
   return { input: ops, result: log.filter(x => x.name === 'get').map(x => x.returned), log, frames }
 }
 

@@ -16,7 +16,7 @@ export function buildTrace({ stickers, target }) {
   const start = need
   const dist = new Map([[key(start), { count: 0, used: [] }]])
   const queue = [start]
-  const frames = [{ phase: 'start', letters, remaining: [...need], used: [], result: null, activeLine: L('start the queue with the full need'), message: `Need ${letters.map((ch, i) => `${ch}×${need[i]}`).join(', ')}.` }]
+  const frames = [{ phase: 'start', letters, remaining: [...need], used: [], result: null, activeLine: L('start the queue with the full need'), pythonLine: 9, message: `Need ${letters.map((ch, i) => `${ch}×${need[i]}`).join(', ')}.` }]
   let answer = null
   for (let q = 0; q < queue.length && answer === null; q++) {
     const state = queue[q]
@@ -26,16 +26,16 @@ export function buildTrace({ stickers, target }) {
       if (next.every((n, j) => n === state[j]) || dist.has(key(next))) continue
       const nextUsed = [...used, stickers[i]]
       dist.set(key(next), { count: count + 1, used: nextUsed })
-      frames.push({ phase: 'apply', letters, remaining: [...next], used: nextUsed, sticker: stickers[i], result: null, activeLine: L('record next with one more sticker'), message: `Apply "${stickers[i]}": remaining ${letters.map((ch, j) => `${ch}×${next[j]}`).join(', ')}.` })
+      frames.push({ phase: 'apply', letters, remaining: [...next], used: nextUsed, sticker: stickers[i], result: null, activeLine: L('record next with one more sticker'), pythonLine: 16, message: `Apply "${stickers[i]}": remaining ${letters.map((ch, j) => `${ch}×${next[j]}`).join(', ')}.` })
       if (next.every(n => n === 0)) {
         answer = count + 1
-        frames.push({ phase: 'done', letters, remaining: [...next], used: nextUsed, result: answer, activeLine: L('if every remaining count is zero'), message: `Spelled with ${answer} stickers: ${nextUsed.join(', ')}.` })
+        frames.push({ phase: 'done', letters, remaining: [...next], used: nextUsed, result: answer, activeLine: L('if every remaining count is zero'), pythonLine: 18, message: `Spelled with ${answer} stickers: ${nextUsed.join(', ')}.` })
         break
       }
       queue.push(next)
     }
   }
-  if (answer === null) frames.push({ phase: 'done', letters, remaining: [...need], used: [], result: -1, activeLine: L('return -1'), message: 'The stickers cannot spell the target.' })
+  if (answer === null) frames.push({ phase: 'done', letters, remaining: [...need], used: [], result: -1, activeLine: L('return -1'), pythonLine: 20, message: 'The stickers cannot spell the target.' })
   return { input: { stickers, target }, result: answer ?? -1, letters, frames }
 }
 

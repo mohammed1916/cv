@@ -27,16 +27,16 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 // Sort descending and place each number into the first bucket that still fits, backtracking on failure.
 export function buildTrace({ nums, k }) {
   const total = nums.reduce((a, b) => a + b, 0)
-  const frames = [{ phase: 'start', buckets: [], sums: [], target: null, activeLine: L('total = sum of nums'), message: 'The total must split evenly into k buckets.' }]
+  const frames = [{ phase: 'start', buckets: [], sums: [], target: null, activeLine: L('total = sum of nums'), pythonLine: 2, message: 'The total must split evenly into k buckets.' }]
   if (total % k !== 0) {
-    frames.push({ phase: 'done', buckets: [], sums: [], target: null, result: false, activeLine: L('if total is not divisible by k'), message: `Total ${total} is not divisible by ${k}.` })
+    frames.push({ phase: 'done', buckets: [], sums: [], target: null, result: false, activeLine: L('if total is not divisible by k'), pythonLine: 4, message: `Total ${total} is not divisible by ${k}.` })
     return { input: { nums, k }, result: false, frames }
   }
   const target = total / k
   const sorted = [...nums].sort((a, b) => b - a)
   const sums = Array(k).fill(0)
   const buckets = Array.from({ length: k }, () => [])
-  const pushFrame = (phase, activeLine, message) => frames.push({ phase, buckets: buckets.map(b => [...b]), sums: [...sums], target, activeLine, message })
+  const pushFrame = (phase, activeLine, message) => frames.push({ phase, buckets: buckets.map(b => [...b]), sums: [...sums], target, activeLine, pythonLine: phase === 'place' ? 20 : 23, message })
   function place(i) {
     if (i === sorted.length) return sums.every(s => s === target)
     const seenEmpty = new Set()
@@ -52,7 +52,7 @@ export function buildTrace({ nums, k }) {
     return false
   }
   const result = place(0)
-  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), sums: [...sums], target, result, activeLine: L('return place(0)'), message: result ? `Each bucket sums to ${target}.` : 'No assignment works.' })
+  frames.push({ phase: 'done', buckets: buckets.map(b => [...b]), sums: [...sums], target, result, activeLine: L('return place(0)'), pythonLine: 26, message: result ? `Each bucket sums to ${target}.` : 'No assignment works.' })
   return { input: { nums, k }, result, frames }
 }
 

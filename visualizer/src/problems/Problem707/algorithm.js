@@ -40,11 +40,11 @@ export function buildTrace(ops) {
   const values = () => { const out = []; for (let id = table.dummy.next; id !== null; id = table[id].next) out.push(table[id].val); return out }
   const log = []
   const frames = []
-  const push = (phase, op, returned, activeLine, message, pointers = [], hot = []) => frames.push({
-    phase, op, returned, activeLine, message, list: values(), size, log: log.map(x => ({ ...x })),
+  const push = (phase, op, returned, activeLine, message, pointers = [], hot = [], pythonLine = 0) => frames.push({
+    phase, op, returned, activeLine, message, pythonLine, list: values(), size, log: log.map(x => ({ ...x })),
     view: tracker.snapshot(table, 'dummy', [{ label: 'dummy', nodeId: 'dummy' }, ...pointers], hot, { title: 'Nodes and next pointers', doubly: false }),
   })
-  push('start', null, null, L('dummy = sentinel node'), 'An empty list: only the dummy sentinel exists, and dummy.next is null.')
+  push('start', null, null, L('dummy = sentinel node'), 'An empty list: only the dummy sentinel exists, and dummy.next is null.', [], [], 8)
   ops.forEach((op, i) => {
     const [name, a, b] = op
     const call = `${name}(${[a, b].filter(x => x !== undefined).join(', ')})`
@@ -56,39 +56,39 @@ export function buildTrace(ops) {
     log.push(entry)
     if (!valid) {
       if (name === 'get') entry.returned = returned
-      push(name === 'get' ? 'get' : 'splice', i, entry.returned, L('if the index is invalid'), `${call}: index ${index} is outside the list (length ${size}), so nothing changes${name === 'get' ? ' and -1 is returned' : ''}.`, [{ label: 'prev', nodeId: 'dummy' }])
+      push(name === 'get' ? 'get' : 'splice', i, entry.returned, L('if the index is invalid'), `${call}: index ${index} is outside the list (length ${size}), so nothing changes${name === 'get' ? ' and -1 is returned' : ''}.`, [{ label: 'prev', nodeId: 'dummy' }], [], name === 'get' ? 13 : name === 'deleteAtIndex' ? 30 : 21)
       return
     }
     // Walk prev to the node just before the target position (for get, cur lands on the target).
     let prev = 'dummy'
-    push('walk', i, null, L('prev = dummy'), `${call}: prev starts at dummy; it must advance ${index} time${index === 1 ? '' : 's'} to stand just before position ${index}.`, [{ label: 'prev', nodeId: prev }])
+    push('walk', i, null, L('prev = dummy'), `${call}: prev starts at dummy; it must advance ${index} time${index === 1 ? '' : 's'} to stand just before position ${index}.`, [{ label: 'prev', nodeId: prev }], [], name === 'get' ? 14 : name === 'deleteAtIndex' ? 31 : 22)
     for (let hop = 0; hop < index; hop++) {
       prev = table[prev].next
-      push('walk', i, null, L('walk prev forward index times'), `prev = prev.next moves to node ${prev} (value ${table[prev].val}), hop ${hop + 1} of ${index}.`, [{ label: 'prev', nodeId: prev }])
+      push('walk', i, null, L('walk prev forward index times'), `prev = prev.next moves to node ${prev} (value ${table[prev].val}), hop ${hop + 1} of ${index}.`, [{ label: 'prev', nodeId: prev }], [], name === 'get' ? 16 : name === 'deleteAtIndex' ? 33 : 24)
     }
     if (name === 'get') {
       const cur = table[prev].next
       entry.returned = table[cur].val
-      push('get', i, entry.returned, L('return cur.value'), `${call}: cur = prev.next is node ${cur}; return its value ${entry.returned}.`, [{ label: 'prev', nodeId: prev }, { label: 'cur', nodeId: cur }], [cur])
+      push('get', i, entry.returned, L('return cur.value'), `${call}: cur = prev.next is node ${cur}; return its value ${entry.returned}.`, [{ label: 'prev', nodeId: prev }, { label: 'cur', nodeId: cur }], [cur], 17)
     } else if (name === 'deleteAtIndex') {
       const doomed = table[prev].next
-      push('splice', i, null, L('doomed = prev.next'), `${call}: doomed = prev.next is node ${doomed} (value ${table[doomed].val}).`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [doomed])
+      push('splice', i, null, L('doomed = prev.next'), `${call}: doomed = prev.next is node ${doomed} (value ${table[doomed].val}).`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [doomed], 34)
       table[prev].next = table[doomed].next
       size -= 1
-      push('splice', i, null, L('then prev.next = doomed.next'), `prev.next = doomed.next: node ${prev === 'dummy' ? 'dummy' : prev} now skips node ${doomed}, which is detached from the list.`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [prev])
+      push('splice', i, null, L('then prev.next = doomed.next'), `prev.next = doomed.next: node ${prev === 'dummy' ? 'dummy' : prev} now skips node ${doomed}, which is detached from the list.`, [{ label: 'prev', nodeId: prev }, { label: 'doomed', nodeId: doomed }], [prev], 34)
     } else {
       const value = name === 'addAtIndex' ? b : a
       const fresh = nextId++
       table[fresh] = { val: value, next: null }
-      push('splice', i, null, L('otherwise, new = node with value'), `${call}: create node ${fresh} (value ${value}); it is not linked yet, so it appears detached with next = null.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
+      push('splice', i, null, L('otherwise, new = node with value'), `${call}: create node ${fresh} (value ${value}); it is not linked yet, so it appears detached with next = null.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh], 25)
       table[fresh].next = table[prev].next
-      push('splice', i, null, L('new.next = prev.next'), `new.next = prev.next: the new node points at what prev used to point at (${table[fresh].next === null ? 'null' : `node ${table[fresh].next}`}).`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
+      push('splice', i, null, L('new.next = prev.next'), `new.next = prev.next: the new node points at what prev used to point at (${table[fresh].next === null ? 'null' : `node ${table[fresh].next}`}).`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh], 25)
       table[prev].next = fresh
       size += 1
-      push('splice', i, null, L('prev.next = new and size += 1'), `prev.next = new: node ${prev} now points at node ${fresh}, completing the splice. Length is ${size}.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh])
+      push('splice', i, null, L('prev.next = new and size += 1'), `prev.next = new: node ${prev} now points at node ${fresh}, completing the splice. Length is ${size}.`, [{ label: 'prev', nodeId: prev }, { label: 'new', nodeId: fresh }], [fresh], 26)
     }
   })
-  push('done', ops.length - 1, null, L('return the list'), `Final list: [${values().join(', ')}].`)
+  push('done', ops.length - 1, null, L('return the list'), `Final list: [${values().join(', ')}].`, [], [], 52)
   const final = frames.at(-1)
   final.log = log
   return { input: ops, result: log.filter(x => x.name === 'get').map(x => x.returned), log, frames }

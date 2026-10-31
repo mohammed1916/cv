@@ -17,18 +17,18 @@ export function buildTrace({ employees, id }) {
   const byId = new Map(employees.map(e => [e[0], { id: e[0], importance: e[1], subs: e[2] }]))
   const visited = []
   let total = 0
-  const frames = [{ phase: 'start', current: id, visited: [], total: 0, activeLine: L('start a stack'), message: `Start at employee ${id}.` }]
+  const frames = [{ phase: 'start', current: id, visited: [], total: 0, activeLine: L('start a stack'), pythonLine: 3, message: `Start at employee ${id}.` }]
   const stack = [id]
   while (stack.length) {
     const cur = stack.pop()
     const e = byId.get(cur)
     visited.push(cur)
     total += e.importance
-    frames.push({ phase: 'visit', current: cur, visited: [...visited], total, activeLine: L('add its importance'), message: `Employee ${cur}: add importance ${e.importance}; running total ${total}.` })
+    frames.push({ phase: 'visit', current: cur, visited: [...visited], total, activeLine: L('add its importance'), pythonLine: 6, message: `Employee ${cur}: add importance ${e.importance}; running total ${total}.` })
     for (let i = e.subs.length - 1; i >= 0; i--) stack.push(e.subs[i])
     frames[frames.length - 1].treeWalk = { kind: 'stack', stack: stack.map(String), order: [...visited], orderLabel: 'Employees visited so far', decision: `Popped employee ${cur}: add ${e.importance} to the total (${total}); ${e.subs.length ? `push its reports ${e.subs.join(', ')} so the first one is popped next` : 'it has no reports, so nothing is pushed'}.` }
   }
-  frames.push({ phase: 'done', current: null, visited: [...visited], total, result: total, activeLine: L('return total'), message: `Total importance: ${total}.` })
+  frames.push({ phase: 'done', current: null, visited: [...visited], total, result: total, activeLine: L('return total'), pythonLine: 8, message: `Total importance: ${total}.` })
   return { input: { employees, id }, result: total, frames }
 }
 
