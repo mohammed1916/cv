@@ -21,8 +21,8 @@ export function buildTrace(words) {
   const dp = Array.from({ length: 1 << n }, () => Array(n).fill(-1))
   const par = Array.from({ length: 1 << n }, () => Array(n).fill(-1))
   const maskText = mask => '{' + words.filter((_, i) => mask >> i & 1).join(', ') + '}'
-  const frames = [{ phase: 'start', activeLine: L('Let n be the number of words'), mask: 0, row: dp[0].slice(), parRow: par[0].slice(), message: `${n} word(s). Visit each exactly once; the shorter the result, the more consecutive words overlap.` }]
-  frames.push({ phase: 'overlap', activeLine: L('if word i ends with'), mask: 0, row: dp[0].slice(), parRow: par[0].slice(), ov: ov.map(r => [...r]), message: 'ov[i][j] = longest suffix of word i that is a prefix of word j: appending j after i adds only len(j) - ov[i][j] letters.' })
+  const frames = [{ phase: 'start', activeLine: L('Let n be the number of words'), pythonLine: 2, mask: 0, row: dp[0].slice(), parRow: par[0].slice(), message: `${n} word(s). Visit each exactly once; the shorter the result, the more consecutive words overlap.` }]
+  frames.push({ phase: 'overlap', activeLine: L('if word i ends with'), pythonLine: 8, mask: 0, row: dp[0].slice(), parRow: par[0].slice(), ov: ov.map(r => [...r]), message: 'ov[i][j] = longest suffix of word i that is a prefix of word j: appending j after i adds only len(j) - ov[i][j] letters.' })
   for (let i = 0; i < n; i++) dp[1 << i][i] = 0
   for (let mask = 1; mask <= full; mask++) {
     let bestHere = -1
@@ -36,30 +36,30 @@ export function buildTrace(words) {
         if (val > dp[nm][nxt]) { dp[nm][nxt] = val; par[nm][nxt] = last }
       }
     }
-    frames.push({ phase: 'dp', activeLine: L('for each mask from 1 to full'), mask, row: dp[mask].slice(), parRow: par[mask].slice(), message: `Subset ${maskText(mask)}: dp[mask][last] is the best total overlap ending at word 'last' (-1 = unreachable). Its values are final here and are relaxed into the supersets with one more word.` })
+    frames.push({ phase: 'dp', activeLine: L('for each mask from 1 to full'), pythonLine: 16, mask, row: dp[mask].slice(), parRow: par[mask].slice(), message: `Subset ${maskText(mask)}: dp[mask][last] is the best total overlap ending at word 'last' (-1 = unreachable). Its values are final here and are relaxed into the supersets with one more word.` })
   }
   let last = 0
   for (let i = 1; i < n; i++) if (dp[full][i] > dp[full][last]) last = i
   const best = dp[full][last]
-  frames.push({ phase: 'pick', activeLine: L('let last be the word with the best'), mask: full, row: dp[full].slice(), parRow: par[full].slice(), last, message: `Full set: the best ending word is "${words[last]}" with total overlap ${best}.` })
+  frames.push({ phase: 'pick', activeLine: L('let last be the word with the best'), pythonLine: 28, mask: full, row: dp[full].slice(), parRow: par[full].slice(), last, message: `Full set: the best ending word is "${words[last]}" with total overlap ${best}.` })
   const order = []
   let mask = full, cur = last
   while (cur !== -1) {
     order.push(cur)
     const next = par[mask][cur]
-    frames.push({ phase: 'backtrack', activeLine: L('backtrack from (full, last)'), mask, row: dp[mask].slice(), parRow: par[mask].slice(), last: cur, order: [...order], message: `Backtrack: "${words[cur]}" came after ${next === -1 ? 'nothing (it is the first word)' : `"${words[next]}"`}.` })
+    frames.push({ phase: 'backtrack', activeLine: L('backtrack from (full, last)'), pythonLine: 31, mask, row: dp[mask].slice(), parRow: par[mask].slice(), last: cur, order: [...order], message: `Backtrack: "${words[cur]}" came after ${next === -1 ? 'nothing (it is the first word)' : `"${words[next]}"`}.` })
     mask ^= 1 << cur
     cur = next
   }
   order.reverse()
   let res = words[order[0]]
-  frames.push({ phase: 'build', activeLine: L('start res with the first word'), mask: full, row: dp[full].slice(), parRow: par[full].slice(), order: [...order], res, message: `Start with "${res}".` })
+  frames.push({ phase: 'build', activeLine: L('start res with the first word'), pythonLine: 34, mask: full, row: dp[full].slice(), parRow: par[full].slice(), order: [...order], res, message: `Start with "${res}".` })
   for (let k = 0; k + 1 < order.length; k++) {
     const a = order[k], b = order[k + 1]
     res += words[b].slice(ov[a][b])
-    frames.push({ phase: 'build', activeLine: L('append word b without'), mask: full, row: dp[full].slice(), parRow: par[full].slice(), order: [...order], res, message: `Append "${words[b].slice(ov[a][b])}" (skip ${ov[a][b]} overlapping letters of "${words[b]}"): ${res}` })
+    frames.push({ phase: 'build', activeLine: L('append word b without'), pythonLine: 36, mask: full, row: dp[full].slice(), parRow: par[full].slice(), order: [...order], res, message: `Append "${words[b].slice(ov[a][b])}" (skip ${ov[a][b]} overlapping letters of "${words[b]}"): ${res}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return res'), mask: full, row: dp[full].slice(), parRow: par[full].slice(), order: [...order], res, message: `Shortest superstring: "${res}" (length ${res.length}).` })
+  frames.push({ phase: 'done', activeLine: L('return res'), pythonLine: 37, mask: full, row: dp[full].slice(), parRow: par[full].slice(), order: [...order], res, message: `Shortest superstring: "${res}" (length ${res.length}).` })
   return { input: [...words], result: res, ov, frames }
 }
 

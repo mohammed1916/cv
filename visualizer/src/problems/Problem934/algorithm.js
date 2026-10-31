@@ -33,13 +33,13 @@ export function buildTrace(input) {
   const rows = input.length, cols = input[0].length
   const grid = input.map(r => [...r])
   const snap = () => grid.map(r => [...r])
-  const frames = [{ phase: 'start', activeLine: L('Scan the grid for the first land cell'), grid: snap(), flips: 0, cell: null, message: 'Two islands exist. Mark the first one, then grow it outward one ring of water at a time.' }]
+  const frames = [{ phase: 'start', activeLine: L('Scan the grid for the first land cell'), pythonLine: 12, grid: snap(), flips: 0, cell: null, message: 'Two islands exist. Mark the first one, then grow it outward one ring of water at a time.' }]
   const frontier = []
   const dfs = (r, c) => {
     if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] !== 1) return
     grid[r][c] = 2
     frontier.push([r, c])
-    frames.push({ phase: 'flood', activeLine: L('mark (r, c) as part of the first island'), grid: snap(), flips: 0, cell: [r, c], message: `DFS marks (${r}, ${c}) as part of the first island and adds it to the BFS frontier.` })
+    frames.push({ phase: 'flood', activeLine: L('mark (r, c) as part of the first island'), pythonLine: 8, grid: snap(), flips: 0, cell: [r, c], message: `DFS marks (${r}, ${c}) as part of the first island and adds it to the BFS frontier.` })
     for (const [dr, dc] of DIRS) dfs(r + dr, c + dc)
   }
   let start = null
@@ -56,20 +56,20 @@ export function buildTrace(input) {
         if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue
         if (grid[nr][nc] === 1) {
           result = flips
-          frames.push({ phase: 'found', activeLine: L('if (nr, nc) is land of the second island'), grid: snap(), flips, cell: [nr, nc], message: `(${nr}, ${nc}) belongs to the second island and touches the frontier at layer ${flips}: ${flips} water cells must be flipped.` })
+          frames.push({ phase: 'found', activeLine: L('if (nr, nc) is land of the second island'), pythonLine: 22, grid: snap(), flips, cell: [nr, nc], message: `(${nr}, ${nc}) belongs to the second island and touches the frontier at layer ${flips}: ${flips} water cells must be flipped.` })
           break outer
         }
         if (grid[nr][nc] === 0) {
           grid[nr][nc] = -(flips + 1)
           nxt.push([nr, nc])
-          frames.push({ phase: 'expand', activeLine: L('if (nr, nc) is unvisited water'), grid: snap(), flips, cell: [nr, nc], message: `Water (${nr}, ${nc}) is adjacent to the island: it would be flipped as bridge cell number ${flips + 1}.` })
+          frames.push({ phase: 'expand', activeLine: L('if (nr, nc) is unvisited water'), pythonLine: 24, grid: snap(), flips, cell: [nr, nc], message: `Water (${nr}, ${nc}) is adjacent to the island: it would be flipped as bridge cell number ${flips + 1}.` })
         }
       }
     }
     current = nxt
     flips++
   }
-  frames.push({ phase: 'done', activeLine: L('return flips'), grid: snap(), flips: result, cell: null, message: `Shortest bridge needs ${result} flipped cell(s). BFS layers give the minimum because every layer extends all frontier cells simultaneously.` })
+  frames.push({ phase: 'done', activeLine: L('return flips'), pythonLine: 22, grid: snap(), flips: result, cell: null, message: `Shortest bridge needs ${result} flipped cell(s). BFS layers give the minimum because every layer extends all frontier cells simultaneously.` })
   return { input: input.map(r => [...r]), result, frames }
 }
 

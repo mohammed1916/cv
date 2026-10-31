@@ -5,19 +5,19 @@ export function parseInput(text) {
 }
 export function buildTrace(n) {
   let res = [1]
-  const frames = [{ phase: 'start', activeLine: L('Start with res = [1]'), res: [...res], round: 0, message: 'Start with [1], which is trivially beautiful.' }]
+  const frames = [{ phase: 'start', activeLine: L('Start with res = [1]'), pythonLine: 2, res: [...res], round: 0, message: 'Start with [1], which is trivially beautiful.' }]
   let round = 0
   while (res.length < n) {
     round++
     const odds = res.map(x => 2 * x - 1), evens = res.map(x => 2 * x)
     res = [...odds, ...evens]
-    frames.push({ phase: 'expand', activeLine: L('set res to odds followed by evens'), res: [...res], round, odds: odds.length,
+    frames.push({ phase: 'expand', activeLine: L('set res to odds followed by evens'), pythonLine: 4, res: [...res], round, odds: odds.length,
       message: `Round ${round}: map the old array to odds (2x-1) and evens (2x). An odd plus an even is odd, so no mean 2*nums[k] (even) can sit between an odd and an even endpoint; each half keeps its own beauty.` })
   }
   const result = res.filter(x => x <= n)
-  frames.push({ phase: 'filter', activeLine: L('return the elements of res'), res: [...res], round, kept: [...result],
+  frames.push({ phase: 'filter', activeLine: L('return the elements of res'), pythonLine: 5, res: [...res], round, kept: [...result],
     message: `Drop values above ${n}. Removing elements from a beautiful array keeps it beautiful.` })
-  frames.push({ phase: 'done', activeLine: L('return the elements of res'), res: [...result], round, kept: [...result], message: `Beautiful array: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the elements of res'), pythonLine: 5, res: [...result], round, kept: [...result], message: `Beautiful array: [${result.join(', ')}].` })
   return { input: n, result, frames }
 }
 export const code = `Start with res = [1], which is trivially beautiful

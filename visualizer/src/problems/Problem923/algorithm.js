@@ -12,17 +12,17 @@ export function buildTrace({ arr: input, target }) {
   const arr = [...input].sort((a, b) => a - b)
   const n = arr.length
   let ans = 0
-  const frames = [{ phase: 'start', activeLine: at('sort arr'), i: -1, j: -1, k: -1, ans, message: `Sorted: [${arr.join(', ')}]. For each first index i, two pointers j and k scan the rest; sorted order tells which pointer to move.` }]
+  const frames = [{ phase: 'start', activeLine: at('sort arr'), pythonLine: 3, i: -1, j: -1, k: -1, ans, message: `Sorted: [${arr.join(', ')}]. For each first index i, two pointers j and k scan the rest; sorted order tells which pointer to move.` }]
   for (let i = 0; i < n; i++) {
     let j = i + 1, k = n - 1
-    frames.push({ phase: 'fix', activeLine: at('set j to i + 1'), i, j, k, ans, message: `Fix arr[${i}] = ${arr[i]}; search the suffix with j = ${j}, k = ${k}.` })
+    frames.push({ phase: 'fix', activeLine: at('set j to i + 1'), pythonLine: 7, i, j, k, ans, message: `Fix arr[${i}] = ${arr[i]}; search the suffix with j = ${j}, k = ${k}.` })
     while (j < k) {
       const s = arr[i] + arr[j] + arr[k]
       if (s < target) {
-        frames.push({ phase: 'move', activeLine: at('increase j by 1'), i, j, k, sum: s, ans, message: `${arr[i]} + ${arr[j]} + ${arr[k]} = ${s} is below ${target}: advance j for a larger sum.` })
+        frames.push({ phase: 'move', activeLine: at('increase j by 1'), pythonLine: 11, i, j, k, sum: s, ans, message: `${arr[i]} + ${arr[j]} + ${arr[k]} = ${s} is below ${target}: advance j for a larger sum.` })
         j++
       } else if (s > target) {
-        frames.push({ phase: 'move', activeLine: at('decrease k by 1'), i, j, k, sum: s, ans, message: `${arr[i]} + ${arr[j]} + ${arr[k]} = ${s} is above ${target}: retreat k for a smaller sum.` })
+        frames.push({ phase: 'move', activeLine: at('decrease k by 1'), pythonLine: 13, i, j, k, sum: s, ans, message: `${arr[i]} + ${arr[j]} + ${arr[k]} = ${s} is above ${target}: retreat k for a smaller sum.` })
         k--
       } else if (arr[j] !== arr[k]) {
         let left = 1, right = 1
@@ -30,18 +30,18 @@ export function buildTrace({ arr: input, target }) {
         while (arr[j] === arr[j + 1]) { left++; j++ }
         while (arr[k] === arr[k - 1]) { right++; k-- }
         ans += left * right
-        frames.push({ phase: 'count', activeLine: at('add left times right to ans'), i, j: j0, k: k0, j2: j, k2: k, sum: s, ans, message: `Sum is ${target}. The value ${arr[j0]} repeats ${left} time(s) on the left and ${arr[k0]} repeats ${right} time(s) on the right: ${left} * ${right} = ${left * right} combinations. Total ${ans}.` })
+        frames.push({ phase: 'count', activeLine: at('add left times right to ans'), pythonLine: 22, i, j: j0, k: k0, j2: j, k2: k, sum: s, ans, message: `Sum is ${target}. The value ${arr[j0]} repeats ${left} time(s) on the left and ${arr[k0]} repeats ${right} time(s) on the right: ${left} * ${right} = ${left * right} combinations. Total ${ans}.` })
         j++; k--
       } else {
         const add = (k - j + 1) * (k - j) / 2
         ans += add
-        frames.push({ phase: 'pairs', activeLine: at('add (k - j + 1) times (k - j)'), i, j, k, sum: s, ans, message: `Sum is ${target} and arr[j] = arr[k] = ${arr[j]}: every pair among the ${k - j + 1} equal values works, C(${k - j + 1}, 2) = ${add}. Total ${ans}; this i is finished.` })
+        frames.push({ phase: 'pairs', activeLine: at('add (k - j + 1) times (k - j)'), pythonLine: 26, i, j, k, sum: s, ans, message: `Sum is ${target} and arr[j] = arr[k] = ${arr[j]}: every pair among the ${k - j + 1} equal values works, C(${k - j + 1}, 2) = ${add}. Total ${ans}; this i is finished.` })
         break
       }
     }
   }
   const result = ans % MOD
-  frames.push({ phase: 'done', activeLine: at('return ans modulo MOD'), i: -1, j: -1, k: -1, ans: result, message: `${result} triples sum to ${target} (modulo 10^9 + 7).` })
+  frames.push({ phase: 'done', activeLine: at('return ans modulo MOD'), pythonLine: 28, i: -1, j: -1, k: -1, ans: result, message: `${result} triples sum to ${target} (modulo 10^9 + 7).` })
   return { input: { arr: input, target }, sorted: arr, result, frames }
 }
 export const code = `Let MOD be 1000000007, sort arr, let n be its length, and set ans to 0

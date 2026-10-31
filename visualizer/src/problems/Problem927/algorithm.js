@@ -6,32 +6,32 @@ export function parseInput(text) {
 const at = (s, nth = 0) => code.map((c, i) => [c, i]).filter(([c]) => c.text.includes(s))[nth][1] + 1
 export function buildTrace(arr) {
   const n = arr.length
-  const frames = [{ phase: 'start', activeLine: at('Let n be the length of arr'), starts: [], t: -1, message: 'Each part must be the same binary number (leading zeros allowed), so each part must contain the same number of ones.' }]
-  const finish = (result, line, message) => {
-    frames.push({ phase: 'done', activeLine: line, starts: [], t: -1, result, message })
+  const frames = [{ phase: 'start', activeLine: at('Let n be the length of arr'), pythonLine: 2, starts: [], t: -1, message: 'Each part must be the same binary number (leading zeros allowed), so each part must contain the same number of ones.' }]
+  const finish = (result, line, py, message) => {
+    frames.push({ phase: 'done', activeLine: line, pythonLine: py, starts: [], t: -1, result, message })
     return { input: [...arr], result, frames }
   }
   const ones = arr.reduce((a, b) => a + b, 0)
-  frames.push({ phase: 'count', activeLine: at('let ones be the number'), ones, starts: [], t: -1, message: `The array has ${ones} one(s).` })
-  if (ones === 0) return finish([0, n - 1], at('return [0, n - 1]'), 'No ones: every part is 0, so cut after index 0 and before index n-1.')
-  if (ones % 3) return finish([-1, -1], at('return [-1, -1]'), `${ones} is not divisible by 3, so the ones cannot be shared equally.`)
+  frames.push({ phase: 'count', activeLine: at('let ones be the number'), pythonLine: 3, ones, starts: [], t: -1, message: `The array has ${ones} one(s).` })
+  if (ones === 0) return finish([0, n - 1], at('return [0, n - 1]'), 5, 'No ones: every part is 0, so cut after index 0 and before index n-1.')
+  if (ones % 3) return finish([-1, -1], at('return [-1, -1]'), 7, `${ones} is not divisible by 3, so the ones cannot be shared equally.`)
   const k = ones / 3
   const idx = []
   arr.forEach((x, i) => { if (x) idx.push(i) })
   const a = idx[0], b = idx[k], c = idx[2 * k]
   const tail = n - c
-  frames.push({ phase: 'locate', activeLine: at('set a, b, c to the first one'), ones, starts: [a, b, c], tail, t: -1, message: `Each part has ${k} one(s). The first one of each part is at ${a}, ${b}, ${c}. Part 3 runs from ${c} to the end, so every part must read ${tail} digits from its first one (that includes the trailing zeros).` })
+  frames.push({ phase: 'locate', activeLine: at('set a, b, c to the first one'), pythonLine: 10, ones, starts: [a, b, c], tail, t: -1, message: `Each part has ${k} one(s). The first one of each part is at ${a}, ${b}, ${c}. Part 3 runs from ${c} to the end, so every part must read ${tail} digits from its first one (that includes the trailing zeros).` })
   for (let t = 0; t < tail; t++) {
     const same = arr[a + t] === arr[b + t] && arr[b + t] === arr[c + t]
-    frames.push({ phase: same ? 'compare' : 'mismatch', activeLine: at('if not (arr[a + t] == arr[b + t] == arr[c + t])'), ones, starts: [a, b, c], tail, t,
+    frames.push({ phase: same ? 'compare' : 'mismatch', activeLine: at('if not (arr[a + t] == arr[b + t] == arr[c + t])'), pythonLine: 13, ones, starts: [a, b, c], tail, t,
       message: same ? `Offset ${t}: arr[${a + t}], arr[${b + t}], arr[${c + t}] are all ${arr[c + t]}.` : `Offset ${t}: arr[${a + t}]=${arr[a + t]}, arr[${b + t}]=${arr[b + t]}, arr[${c + t}]=${arr[c + t]} differ, so no valid split exists.` })
-    if (!same) return finish([-1, -1], at('return [-1, -1]', 1), 'Mismatch found: return [-1, -1].')
+    if (!same) return finish([-1, -1], at('return [-1, -1]', 1), 14, 'Mismatch found: return [-1, -1].')
   }
   const overlap = a + tail > b || b + tail > c
-  frames.push({ phase: 'check', activeLine: at('if a + tail > b or b + tail > c'), ones, starts: [a, b, c], tail, t: tail - 1,
+  frames.push({ phase: 'check', activeLine: at('if a + tail > b or b + tail > c'), pythonLine: 15, ones, starts: [a, b, c], tail, t: tail - 1,
     message: overlap ? `Part 1 would end at ${a + tail - 1} and run into the next part's first one at ${b}, or part 2 would reach ${c}: the parts overlap.` : `The windows [${a}, ${a + tail}), [${b}, ${b + tail}), [${c}, ${n}) are disjoint and equal. Cut after ${a + tail - 1} and before ${b + tail}.` })
-  if (overlap) return finish([-1, -1], at('return [-1, -1]', 2), 'Overlapping parts: return [-1, -1].')
-  return finish([a + tail - 1, b + tail], at('return [a + tail - 1'), `Answer: [${a + tail - 1}, ${b + tail}].`)
+  if (overlap) return finish([-1, -1], at('return [-1, -1]', 2), 16, 'Overlapping parts: return [-1, -1].')
+  return finish([a + tail - 1, b + tail], at('return [a + tail - 1'), 17, `Answer: [${a + tail - 1}, ${b + tail}].`)
 }
 export const code = `Let n be the length of arr
 let ones be the number of ones in arr
