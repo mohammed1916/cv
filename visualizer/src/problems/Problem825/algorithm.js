@@ -9,7 +9,7 @@ export function buildTrace(ages) {
   const present = []
   cnt.forEach((c, a) => { if (c) present.push(a) })
   const entries = present.map(a => ({ age: a, count: cnt[a] }))
-  const frames = [{ phase: 'start', sender: 0, lo: 0, add: 0, total: 0, activeLine: L('set cnt[a]'), message: `Bucket ${ages.length} people into age counts: ${entries.length} distinct age(s). Requests depend only on ages.` }]
+  const frames = [{ phase: 'start', sender: 0, lo: 0, add: 0, total: 0, activeLine: L('set cnt[a]'), message: `Bucket ${ages.length} people into age counts: ${entries.length} distinct age(s). Requests depend only on ages.`, pythonLine: 2 }]
   let total = 0
   for (const a of present) {
     const lo = Math.floor(0.5 * a + 7) + 1
@@ -19,9 +19,9 @@ export function buildTrace(ages) {
     total += add
     frames.push({ phase: 'age', sender: a, lo, add, total, activeLine: L('set receivers to'),
       message: lo > a ? `Age ${a}: receivers must be older than ${0.5 * a + 7} yet not older than ${a}; no valid range, so 0 requests.`
-        : `Age ${a} (x${cnt[a]}) may message ages ${lo}..${a}: ${receivers} people, minus themselves. Adds ${cnt[a]} * ${receivers - 1} = ${add}. Total ${total}.` })
+        : `Age ${a} (x${cnt[a]}) may message ages ${lo}..${a}: ${receivers} people, minus themselves. Adds ${cnt[a]} * ${receivers - 1} = ${add}. Total ${total}.`, pythonLine: lo <= a ? 12 : 10 })
   }
-  frames.push({ phase: 'done', sender: 0, lo: 0, add: 0, total, activeLine: L('return total'), message: `Total friend requests: ${total}.` })
+  frames.push({ phase: 'done', sender: 0, lo: 0, add: 0, total, activeLine: L('return total'), message: `Total friend requests: ${total}.`, pythonLine: 13 })
   return { input: [...ages], entries, result: total, frames }
 }
 export const code = `set cnt[a] to the number of people aged a, for each age a from 1 to 120

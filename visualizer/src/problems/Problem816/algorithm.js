@@ -17,16 +17,16 @@ export function buildTrace(input) {
   const frames = []
   const res = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, digits: s, res: [...res], split: -1, leftOpts: [], rightOpts: [], ...extra })
-  push('start', L('drop the outer'), `Drop the parentheses: digits "${s}". Choose where the comma goes, then optionally a decimal point inside each number.`)
+  push('start', L('drop the outer'), `Drop the parentheses: digits "${s}". Choose where the comma goes, then optionally a decimal point inside each number.`, { pythonLine: 2 })
   for (let i = 1; i < s.length; i++) {
     const a = s.slice(0, i), b = s.slice(i)
-    push('split', L('for each comma position'), `Comma after ${i} digit${i > 1 ? 's' : ''}: left digits "${a}", right digits "${b}".`, { split: i })
+    push('split', L('for each comma position'), `Comma after ${i} digit${i > 1 ? 's' : ''}: left digits "${a}", right digits "${b}".`, { split: i, pythonLine: 11 })
     const lo = makeNumbers(a), ro = makeNumbers(b)
-    push('make', L('set L to make'), `Legal numbers for "${a}": ${lo.length ? lo.join(', ') : 'none'}. For "${b}": ${ro.length ? ro.join(', ') : 'none'}. (No leading zeros like 01; no trailing zeros after the point like 1.0; a lone 0 is fine.)`, { split: i, leftOpts: lo, rightOpts: ro })
+    push('make', L('set L to make'), `Legal numbers for "${a}": ${lo.length ? lo.join(', ') : 'none'}. For "${b}": ${ro.length ? ro.join(', ') : 'none'}. (No leading zeros like 01; no trailing zeros after the point like 1.0; a lone 0 is fine.)`, { split: i, leftOpts: lo, rightOpts: ro, pythonLine: 12 })
     for (const x of lo) for (const y of ro) res.push(`(${x}, ${y})`)
-    push('combine', L('for each x in L'), lo.length && ro.length ? `Pair every left with every right: ${lo.length} x ${ro.length} = ${lo.length * ro.length} coordinates. Total so far: ${res.length}.` : `One side has no legal number, so this split yields nothing. Total so far: ${res.length}.`, { split: i, leftOpts: lo, rightOpts: ro })
+    push('combine', L('for each x in L'), lo.length && ro.length ? `Pair every left with every right: ${lo.length} x ${ro.length} = ${lo.length * ro.length} coordinates. Total so far: ${res.length}.` : `One side has no legal number, so this split yields nothing. Total so far: ${res.length}.`, { split: i, leftOpts: lo, rightOpts: ro, pythonLine: lo.length && ro.length ? 14 : 12 })
   }
-  push('done', L('return res'), `${res.length} possible original coordinates.`)
+  push('done', L('return res'), `${res.length} possible original coordinates.`, { pythonLine: 15 })
   return { input, result: res, frames }
 }
 export const code = `drop the outer parentheses from s to get the digits

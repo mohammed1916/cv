@@ -13,25 +13,25 @@ export function buildTrace({ head, nums }) {
   const frames = []
   let count = 0, inRun = false
   const marks = head.map(() => '')
-  const push = (phase, activeLine, message, index = -1) => frames.push({ phase, activeLine, message, index, count, inRun, marks: [...marks] })
-  push('start', L('set S to'), `Put nums in a set. A component is a maximal run of consecutive list nodes whose values are all in {${nums.join(', ')}}.`)
+  const push = (phase, activeLine, message, index = -1, extra = {}) => frames.push({ phase, activeLine, message, index, count, inRun, marks: [...marks], ...extra })
+  push('start', L('set S to'), `Put nums in a set. A component is a maximal run of consecutive list nodes whose values are all in {${nums.join(', ')}}.`, -1, { pythonLine: 10 })
   head.forEach((v, i) => {
     if (S.has(v)) {
       if (!inRun) {
         count += 1; inRun = true
         marks[i] = 'start'
-        push('open', L('add 1 to count'), `Node ${v} is in nums and the previous node was not: a new component begins. Count = ${count}.`, i)
+        push('open', L('add 1 to count'), `Node ${v} is in nums and the previous node was not: a new component begins. Count = ${count}.`, i, { pythonLine: 17 })
       } else {
         marks[i] = 'inside'
-        push('extend', L('extends the current'), `Node ${v} is in nums and continues the current component. Count stays ${count}.`, i)
+        push('extend', L('extends the current'), `Node ${v} is in nums and continues the current component. Count stays ${count}.`, i, { pythonLine: 16 })
       }
     } else {
       inRun = false
       marks[i] = 'gap'
-      push('close', L('if cur.val is not in S'), `Node ${v} is not in nums, so any component ends here.`, i)
+      push('close', L('if cur.val is not in S'), `Node ${v} is not in nums, so any component ends here.`, i, { pythonLine: 20 })
     }
   })
-  push('done', L('return count'), `${count} component${count === 1 ? '' : 's'}.`)
+  push('done', L('return count'), `${count} component${count === 1 ? '' : 's'}.`, -1, { pythonLine: 22 })
   return { input: { head, nums }, result: count, frames }
 }
 export const code = `set S to the set of values in nums

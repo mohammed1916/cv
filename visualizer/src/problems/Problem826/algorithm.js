@@ -9,19 +9,19 @@ export function buildTrace({ difficulty, profit, worker }) {
   const jobs = difficulty.map((d, i) => [d, profit[i]]).sort((a, b) => a[0] - b[0] || a[1] - b[1])
   const workers = [...worker].sort((a, b) => a - b)
   let best = 0, i = 0, total = 0
-  const frames = [{ phase: 'start', w: -1, i: 0, best: 0, total: 0, activeLine: L('set jobs to'), message: `Sort ${jobs.length} jobs by difficulty and ${workers.length} workers by ability. Weaker workers can only use a prefix of the jobs.` }]
+  const frames = [{ phase: 'start', w: -1, i: 0, best: 0, total: 0, activeLine: L('set jobs to'), message: `Sort ${jobs.length} jobs by difficulty and ${workers.length} workers by ability. Weaker workers can only use a prefix of the jobs.`, pythonLine: 2 }]
   workers.forEach((ability, w) => {
     while (i < jobs.length && jobs[i][0] <= ability) {
       const old = best
       best = Math.max(best, jobs[i][1])
       frames.push({ phase: 'absorb', w, i, best, total, activeLine: L('set best to the larger'),
-        message: `Worker ability ${ability} can do job ${i} (difficulty ${jobs[i][0]}, profit ${jobs[i][1]}). Best profit ${best === old ? 'stays' : 'rises to'} ${best}.` })
+        message: `Worker ability ${ability} can do job ${i} (difficulty ${jobs[i][0]}, profit ${jobs[i][1]}). Best profit ${best === old ? 'stays' : 'rises to'} ${best}.`, pythonLine: 6 })
       i++
     }
     total += best
-    frames.push({ phase: 'pay', w, i, best, total, activeLine: L('add best to total'), message: `Worker ability ${ability} takes the best reachable profit ${best}. Total ${total}.` })
+    frames.push({ phase: 'pay', w, i, best, total, activeLine: L('add best to total'), message: `Worker ability ${ability} takes the best reachable profit ${best}. Total ${total}.`, pythonLine: 8 })
   })
-  frames.push({ phase: 'done', w: workers.length - 1, i, best, total, activeLine: L('return total'), message: `Maximum total profit: ${total}.` })
+  frames.push({ phase: 'done', w: workers.length - 1, i, best, total, activeLine: L('return total'), message: `Maximum total profit: ${total}.`, pythonLine: 9 })
   return { input: { difficulty, profit, worker }, jobs, workers, result: total, frames }
 }
 export const code = `set jobs to the pairs (difficulty[i], profit[i]), sorted by difficulty

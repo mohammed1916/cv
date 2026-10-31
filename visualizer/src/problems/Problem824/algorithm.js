@@ -8,23 +8,23 @@ const VOWELS = 'aeiouAEIOU'
 export function buildTrace(sentence) {
   const words = sentence.split(' ')
   const out = []
-  const frames = [{ phase: 'start', index: -1, out: [], activeLine: L('split sentence'), message: `Split the sentence into ${words.length} word(s); each is rewritten independently.` }]
+  const frames = [{ phase: 'start', index: -1, out: [], activeLine: L('split sentence'), message: `Split the sentence into ${words.length} word(s); each is rewritten independently.`, pythonLine: 3 }]
   words.forEach((w, k) => {
     const i = k + 1
     const vowel = VOWELS.includes(w[0])
     frames.push({ phase: 'classify', index: k, word: w, vowel, current: w, out: [...out], activeLine: L('if the first letter'),
-      message: vowel ? `"${w}" starts with the vowel "${w[0]}", so it stays as is.` : `"${w}" starts with the consonant "${w[0]}", so it moves to the end.` })
+      message: vowel ? `"${w}" starts with the vowel "${w[0]}", so it stays as is.` : `"${w}" starts with the consonant "${w[0]}", so it moves to the end.`, pythonLine: 4 })
     let cur = w
     if (!vowel) {
       cur = w.slice(1) + w[0]
-      frames.push({ phase: 'rotate', index: k, word: w, vowel, current: cur, out: [...out], activeLine: L('otherwise, move'), message: `Move "${w[0]}" to the back: "${cur}".` })
+      frames.push({ phase: 'rotate', index: k, word: w, vowel, current: cur, out: [...out], activeLine: L('otherwise, move'), message: `Move "${w[0]}" to the back: "${cur}".`, pythonLine: 5 })
     }
     const done = cur + 'ma' + 'a'.repeat(i)
     out.push(done)
-    frames.push({ phase: 'append', index: k, word: w, vowel, current: done, out: [...out], activeLine: L('append w +'), message: `Append "ma" and ${i} letter a (the word is number ${i}): "${done}".` })
+    frames.push({ phase: 'append', index: k, word: w, vowel, current: done, out: [...out], activeLine: L('append w +'), message: `Append "ma" and ${i} letter a (the word is number ${i}): "${done}".`, pythonLine: 6 })
   })
   const result = out.join(' ')
-  frames.push({ phase: 'done', index: words.length - 1, current: '', out: [...out], activeLine: L('return the words'), message: `Joined result: ${result}` })
+  frames.push({ phase: 'done', index: words.length - 1, current: '', out: [...out], activeLine: L('return the words'), message: `Joined result: ${result}`, pythonLine: 7 })
   return { input: sentence, words, result, frames }
 }
 export const code = `split sentence into its words, and set out to an empty list

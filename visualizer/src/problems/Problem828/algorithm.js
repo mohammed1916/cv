@@ -6,7 +6,7 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const n = s.length
   let total = 0
-  const frames = [{ phase: 'start', index: -1, left: -1, right: n, add: 0, total: 0, activeLine: L('set n to the length'), message: 'Instead of scanning substrings, count for each character occurrence the substrings where it is the only copy of that letter.' }]
+  const frames = [{ phase: 'start', index: -1, left: -1, right: n, add: 0, total: 0, activeLine: L('set n to the length'), message: 'Instead of scanning substrings, count for each character occurrence the substrings where it is the only copy of that letter.', pythonLine: 2 }]
   const contributions = []
   for (let i = 0; i < n; i++) {
     const left = s.lastIndexOf(s[i], i - 1)
@@ -14,13 +14,13 @@ export function buildTrace(s) {
     if (right === -1) right = n
     const l = i === 0 ? -1 : left
     frames.push({ phase: 'bounds', index: i, left: l, right, add: 0, total, activeLine: L('set left to'),
-      message: `"${s[i]}" at ${i}: previous "${s[i]}" at ${l === -1 ? 'none (-1)' : l}, next at ${right === n ? `none (${n})` : right}. The substring must start in (${l}, ${i}] and end in [${i}, ${right}).` })
+      message: `"${s[i]}" at ${i}: previous "${s[i]}" at ${l === -1 ? 'none (-1)' : l}, next at ${right === n ? `none (${n})` : right}. The substring must start in (${l}, ${i}] and end in [${i}, ${right}).`, pythonLine: right === n ? 8 : 6 })
     const add = (i - l) * (right - i)
     total += add
     contributions.push(add)
-    frames.push({ phase: 'add', index: i, left: l, right, add, total, activeLine: L('set total to total'), message: `Choices: ${i - l} starts x ${right - i} ends = ${add}. Running total ${total}.` })
+    frames.push({ phase: 'add', index: i, left: l, right, add, total, activeLine: L('set total to total'), message: `Choices: ${i - l} starts x ${right - i} ends = ${add}. Running total ${total}.`, pythonLine: 9 })
   }
-  frames.push({ phase: 'done', index: n - 1, left: -1, right: n, add: 0, total, activeLine: L('return total'), message: `Sum of unique-character counts over all substrings: ${total}.` })
+  frames.push({ phase: 'done', index: n - 1, left: -1, right: n, add: 0, total, activeLine: L('return total'), message: `Sum of unique-character counts over all substrings: ${total}.`, pythonLine: 10 })
   return { input: s, contributions, result: total, frames }
 }
 export const code = `set n to the length of s and total to 0

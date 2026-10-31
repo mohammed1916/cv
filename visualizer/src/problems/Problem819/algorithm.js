@@ -13,18 +13,18 @@ export function buildTrace({ paragraph, banned }) {
   const counts = new Map()
   let bestWord = null
   const snap = () => [...counts.entries()]
-  const frames = [{ phase: 'start', index: -1, counts: [], bestWord: null, activeLine: L('set ban to'), message: `Lowercase the paragraph and split it into ${words.length} letter-only words. ${banned.length} word(s) are banned.` }]
+  const frames = [{ phase: 'start', index: -1, counts: [], bestWord: null, activeLine: L('set ban to'), message: `Lowercase the paragraph and split it into ${words.length} letter-only words. ${banned.length} word(s) are banned.`, pythonLine: 4 }]
   words.forEach((word, index) => {
     if (ban.has(word)) {
-      frames.push({ phase: 'skip', index, word, counts: snap(), bestWord, activeLine: L('if word is in ban'), message: `"${word}" is banned, so it is skipped.` })
+      frames.push({ phase: 'skip', index, word, counts: snap(), bestWord, activeLine: L('if word is in ban'), message: `"${word}" is banned, so it is skipped.`, pythonLine: 8 })
       return
     }
     counts.set(word, (counts.get(word) || 0) + 1)
     // Leader = the earliest-inserted word with the largest count, so ties match the final max(count) answer.
     bestWord = [...counts.keys()].reduce((best, w) => (best === null || counts.get(w) > counts.get(best) ? w : best), null)
-    frames.push({ phase: 'count', index, word, counts: snap(), bestWord, activeLine: L('set best to the earliest'), message: `Count "${word}": now ${counts.get(word)}. Most common so far: "${bestWord}" (${counts.get(bestWord)}).` })
+    frames.push({ phase: 'count', index, word, counts: snap(), bestWord, activeLine: L('set best to the earliest'), message: `Count "${word}": now ${counts.get(word)}. Most common so far: "${bestWord}" (${counts.get(bestWord)}).`, pythonLine: 9 })
   })
-  frames.push({ phase: 'done', index: words.length - 1, counts: snap(), bestWord, activeLine: L('return best'), message: `The most common non-banned word is "${bestWord}" with ${counts.get(bestWord)} occurrence(s).` })
+  frames.push({ phase: 'done', index: words.length - 1, counts: snap(), bestWord, activeLine: L('return best'), message: `The most common non-banned word is "${bestWord}" with ${counts.get(bestWord)} occurrence(s).`, pythonLine: 10 })
   return { input: { paragraph, banned }, words, result: bestWord, frames }
 }
 export const code = `set ban to the set of banned words

@@ -6,19 +6,19 @@ export function parseInput(text) {
 export function buildTrace(n) {
   let count = 0
   const hits = []
-  const frames = [{ phase: 'start', k: 0, count: 0, activeLine: 2, message: `A run of k consecutive numbers starting at a sums to k*a + k(k-1)/2 = ${n}. Try each length k while the smallest possible run 1+...+k fits.` }]
+  const frames = [{ phase: 'start', k: 0, count: 0, activeLine: 2, message: `A run of k consecutive numbers starting at a sums to k*a + k(k-1)/2 = ${n}. Try each length k while the smallest possible run 1+...+k fits.`, pythonLine: 2 }]
   for (let k = 1; k * (k + 1) / 2 <= n; k++) {
     const rest = n - k * (k - 1) / 2
     if (rest % k === 0) {
       count++
       const a = rest / k
       hits.push({ k, a })
-      frames.push({ phase: 'hit', k, rest, start: a, count, activeLine: 6, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} divides by ${k}, so start a = ${a}: ${a}..${a + k - 1}. Count ${count}.` })
+      frames.push({ phase: 'hit', k, rest, start: a, count, activeLine: 6, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} divides by ${k}, so start a = ${a}: ${a}..${a + k - 1}. Count ${count}.`, pythonLine: 7 })
     } else {
-      frames.push({ phase: 'miss', k, rest, count, activeLine: 8, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} is not divisible by ${k}; no run of this length.` })
+      frames.push({ phase: 'miss', k, rest, count, activeLine: 8, message: `k = ${k}: ${n} - ${k * (k - 1) / 2} = ${rest} is not divisible by ${k}; no run of this length.`, pythonLine: 6 })
     }
   }
-  frames.push({ phase: 'done', k: hits.length ? hits[hits.length - 1].k : 0, count, activeLine: 9, message: `${n} can be written as a sum of consecutive positive integers in ${count} way(s).` })
+  frames.push({ phase: 'done', k: hits.length ? hits[hits.length - 1].k : 0, count, activeLine: 9, message: `${n} can be written as a sum of consecutive positive integers in ${count} way(s).`, pythonLine: 9 })
   return { input: n, hits, result: count, frames }
 }
 export const code = `function countConsecutiveRuns(n)
