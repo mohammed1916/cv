@@ -14,24 +14,24 @@ export function buildTrace({ n, a, b }) {
   const l = (a / gcd(a, b)) * b
   let lo = 1
   let hi = n * Math.min(a, b)
-  const frames = [{ phase: 'start', lo, hi, mid: null, count: null, activeLine: L('let l be the least common'), message: `lcm(${a}, ${b}) = ${l}. The answer lies in [1, n * min(a, b)] = [${lo}, ${hi}].` }]
+  const frames = [{ phase: 'start', pythonLine: 6, lo, hi, mid: null, count: null, activeLine: L('let l be the least common'), message: `lcm(${a}, ${b}) = ${l}. The answer lies in [1, n * min(a, b)] = [${lo}, ${hi}].` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const count = Math.floor(mid / a) + Math.floor(mid / b) - Math.floor(mid / l)
     frames.push({
-      phase: 'probe', lo, hi, mid, count, activeLine: L('count the magical numbers'),
+      phase: 'probe', pythonLine: 10, lo, hi, mid, count, activeLine: L('count the magical numbers'),
       message: `mid = ${mid}: ${Math.floor(mid / a)} multiples of ${a} + ${Math.floor(mid / b)} multiples of ${b} - ${Math.floor(mid / l)} of lcm ${l} = ${count} magical numbers up to mid.`,
     })
     if (count >= n) {
       hi = mid
-      frames.push({ phase: 'shrink', lo, hi, mid, count, activeLine: L('set hi to mid'), message: `${count} ≥ ${n}: the n-th magical number is at most ${mid}, so hi = ${mid}.` })
+      frames.push({ phase: 'shrink', lo, hi, mid, count, pythonLine: 11, activeLine: L('set hi to mid'), message: `${count} ≥ ${n}: the n-th magical number is at most ${mid}, so hi = ${mid}.` })
     } else {
       lo = mid + 1
-      frames.push({ phase: 'shrink', lo, hi, mid, count, activeLine: L('set lo to mid + 1'), message: `${count} < ${n}: the answer is above ${mid}, so lo = ${lo}.` })
+      frames.push({ phase: 'shrink', lo, hi, mid, count, pythonLine: 13, activeLine: L('set lo to mid + 1'), message: `${count} < ${n}: the answer is above ${mid}, so lo = ${lo}.` })
     }
   }
   const result = lo % MOD
-  frames.push({ phase: 'done', lo, hi, mid: null, count: null, activeLine: L('return lo, taken mod'), message: `lo = hi = ${lo}; return ${lo} mod 1,000,000,007 = ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 14, lo, hi, mid: null, count: null, activeLine: L('return lo, taken mod'), message: `lo = hi = ${lo}; return ${lo} mod 1,000,000,007 = ${result}.` })
   return { input: { n, a, b }, lcm: l, answer: lo, result, frames }
 }
 

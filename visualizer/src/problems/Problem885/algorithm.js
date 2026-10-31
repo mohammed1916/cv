@@ -16,7 +16,7 @@ export function buildTrace({ rows, cols, rStart, cStart }) {
   order[rStart][cStart] = 1
   const snap = () => order.map(row => [...row])
   let r = rStart, c = cStart, d = 0, step = 1
-  const frames = [{ phase: 'start', grid: snap(), pos: [r, c], dir: d, step, count: 1, activeLine: L('let res start as'), message: `Record the start cell (${r}, ${c}) first, then spiral clockwise beginning eastward with legs of length 1, 1, 2, 2, 3, 3, ...` }]
+  const frames = [{ phase: 'start', pythonLine: 3, grid: snap(), pos: [r, c], dir: d, step, count: 1, activeLine: L('let res start as'), message: `Record the start cell (${r}, ${c}) first, then spiral clockwise beginning eastward with legs of length 1, 1, 2, 2, 3, 3, ...` }]
   while (res.length < rows * cols) {
     for (let leg = 0; leg < 2; leg++) {
       for (let s = 0; s < step; s++) {
@@ -26,21 +26,21 @@ export function buildTrace({ rows, cols, rStart, cStart }) {
         if (inside) {
           res.push([r, c])
           order[r][c] = res.length
-          frames.push({ phase: 'record', grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('append (r, c) to res'), message: `Step ${NAMES[d]} to (${r}, ${c}), inside the grid: it is visited number ${res.length}.` })
+          frames.push({ phase: 'record', pythonLine: 11, grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('append (r, c) to res'), message: `Step ${NAMES[d]} to (${r}, ${c}), inside the grid: it is visited number ${res.length}.` })
         } else {
-          frames.push({ phase: 'walk', grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('record nothing'), message: `Step ${NAMES[d]} to (${r}, ${c}), outside the grid: keep walking but record nothing.` })
+          frames.push({ phase: 'walk', pythonLine: 10, grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('record nothing'), message: `Step ${NAMES[d]} to (${r}, ${c}), outside the grid: keep walking but record nothing.` })
         }
         if (res.length === rows * cols) break
       }
       if (res.length === rows * cols) break
       d = (d + 1) % 4
-      frames.push({ phase: 'turn', grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('turn clockwise'), message: `Leg of ${step} finished: turn clockwise to face ${NAMES[d]}.` })
+      frames.push({ phase: 'turn', grid: snap(), pos: [r, c], dir: d, step, count: res.length, pythonLine: 12, activeLine: L('turn clockwise'), message: `Leg of ${step} finished: turn clockwise to face ${NAMES[d]}.` })
     }
     if (res.length === rows * cols) break
     step += 1
-    frames.push({ phase: 'turn', grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('make the next legs one longer'), message: `After two legs the spiral widens: each leg is now ${step} steps long.` })
+    frames.push({ phase: 'turn', grid: snap(), pos: [r, c], dir: d, step, count: res.length, pythonLine: 13, activeLine: L('make the next legs one longer'), message: `After two legs the spiral widens: each leg is now ${step} steps long.` })
   }
-  frames.push({ phase: 'done', grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('return res'), message: `All ${rows * cols} cells visited. Return the coordinates in visiting order.` })
+  frames.push({ phase: 'done', pythonLine: 14, grid: snap(), pos: [r, c], dir: d, step, count: res.length, activeLine: L('return res'), message: `All ${rows * cols} cells visited. Return the coordinates in visiting order.` })
   return { input: { rows, cols, rStart, cStart }, result: res, frames }
 }
 

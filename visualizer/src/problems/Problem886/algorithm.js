@@ -20,35 +20,35 @@ export function buildTrace({ n, dislikes }) {
   for (const [a, b] of dislikes) { graph[a].push(b); graph[b].push(a) }
   const color = Array(n + 1).fill(0)
   const snap = () => color.slice(1)
-  const frames = [{ phase: 'start', colors: snap(), node: null, other: null, queue: [], activeLine: L('let color of every person'), message: 'Everyone starts uncoloured (0). Colours +1 and -1 are the two groups.' }]
+  const frames = [{ phase: 'start', colors: snap(), node: null, other: null, queue: [], pythonLine: 9, activeLine: L('let color of every person'), message: 'Everyone starts uncoloured (0). Colours +1 and -1 are the two groups.' }]
   let result = true
   outer:
   for (let start = 1; start <= n; start++) {
     if (color[start]) continue
     color[start] = 1
     const queue = [start]
-    frames.push({ phase: 'seed', colors: snap(), node: start, other: null, queue: [...queue], activeLine: L('color start as group 1'), message: `Person ${start} is uncoloured: put them in group +1 and start a BFS for their connected component.` })
+    frames.push({ phase: 'seed', colors: snap(), node: start, other: null, queue: [...queue], pythonLine: 13, activeLine: L('color start as group 1'), message: `Person ${start} is uncoloured: put them in group +1 and start a BFS for their connected component.` })
     let head = 0
     while (head < queue.length) {
       const u = queue[head++]
-      frames.push({ phase: 'visit', colors: snap(), node: u, other: null, queue: queue.slice(head), activeLine: L('take the front person'), message: `Dequeue person ${u} (group ${color[u]}). Check everyone they dislike.` })
+      frames.push({ phase: 'visit', colors: snap(), node: u, other: null, queue: queue.slice(head), pythonLine: 16, activeLine: L('take the front person'), message: `Dequeue person ${u} (group ${color[u]}). Check everyone they dislike.` })
       for (const v of graph[u]) {
         if (color[v] === color[u]) {
           result = false
-          frames.push({ phase: 'conflict', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: L('if v has the same group'), message: `Person ${u} dislikes ${v} but both are in group ${color[u]}: an odd cycle exists, so no valid split. Return False.` })
+          frames.push({ phase: 'conflict', colors: snap(), node: u, other: v, queue: queue.slice(head), pythonLine: 19, activeLine: L('if v has the same group'), message: `Person ${u} dislikes ${v} but both are in group ${color[u]}: an odd cycle exists, so no valid split. Return False.` })
           break outer
         }
         if (color[v] === 0) {
           color[v] = -color[u]
           queue.push(v)
-          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: L('if v is uncoloured'), message: `${v} is uncoloured: dislike across an edge means opposite groups, so ${v} gets ${color[v]} and joins the queue.` })
+          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), pythonLine: 22, activeLine: L('if v is uncoloured'), message: `${v} is uncoloured: dislike across an edge means opposite groups, so ${v} gets ${color[v]} and joins the queue.` })
         } else {
-          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), activeLine: L('otherwise, v is already'), message: `${v} is already in group ${color[v]}, opposite to ${u}: consistent.` })
+          frames.push({ phase: 'color', colors: snap(), node: u, other: v, queue: queue.slice(head), pythonLine: 20, activeLine: L('otherwise, v is already'), message: `${v} is already in group ${color[v]}, opposite to ${u}: consistent.` })
         }
       }
     }
   }
-  frames.push({ phase: 'done', colors: snap(), node: null, other: null, queue: [], activeLine: result ? L('return True') : L('if v has the same group'), message: result ? 'Every component was two-coloured: return True.' : 'Conflict found: return False.' })
+  frames.push({ phase: 'done', colors: snap(), node: null, other: null, queue: [], pythonLine: result ? 23 : 19, activeLine: result ? L('return True') : L('if v has the same group'), message: result ? 'Every component was two-coloured: return True.' : 'Conflict found: return False.' })
   return { input: { n, dislikes }, result, frames }
 }
 

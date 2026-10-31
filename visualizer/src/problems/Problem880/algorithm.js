@@ -18,18 +18,18 @@ export function buildTrace({ s, k: k0 }) {
   let k = k0
   let size = 0
   let end = 0
-  const frames = [{ phase: 'start', index: -1, size, k, activeLine: L('set size to 0'), message: `Find the ${k}-th character of the decoded string without expanding it. Track only its length.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, index: -1, size, k, activeLine: L('set size to 0'), message: `Find the ${k}-th character of the decoded string without expanding it. Track only its length.` }]
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
     if (isDigit(c)) size *= Number(c)
     else size += 1
     end = i
     frames.push({
-      phase: 'length', index: i, size, k, activeLine: isDigit(c) ? L('multiply size by') : L('add 1 to size'),
+      phase: 'length', pythonLine: isDigit(c) ? 6 : 8, index: i, size, k, activeLine: isDigit(c) ? L('multiply size by') : L('add 1 to size'),
       message: isDigit(c) ? `'${c}' repeats everything so far ${c} times: size = ${size}.` : `Letter '${c}' adds one character: size = ${size}.`,
     })
     if (size >= k) {
-      frames.push({ phase: 'length', index: i, size, k, activeLine: L('stop the scan'), message: `size ${size} ≥ k ${k}: the answer is inside the prefix s[0..${i}], so stop growing.` })
+      frames.push({ phase: 'length', index: i, size, k, pythonLine: 11, activeLine: L('stop the scan'), message: `size ${size} ≥ k ${k}: the answer is inside the prefix s[0..${i}], so stop growing.` })
       break
     }
   }
@@ -39,18 +39,18 @@ export function buildTrace({ s, k: k0 }) {
     k %= size
     if (k === 0 && !isDigit(c)) {
       result = c
-      frames.push({ phase: 'unwind', index: i, size, k, activeLine: L('set answer to c and stop'), message: `k mod size = 0 and '${c}' is a letter: the k-th character is the last one of this prefix, '${c}'.` })
+      frames.push({ phase: 'unwind', index: i, size, k, pythonLine: 16, activeLine: L('set answer to c and stop'), message: `k mod size = 0 and '${c}' is a letter: the k-th character is the last one of this prefix, '${c}'.` })
       break
     }
     if (isDigit(c)) {
       size = size / Number(c)
-      frames.push({ phase: 'unwind', index: i, size, k, activeLine: L('divide size by'), message: `Undo '${c}': the decoded text is ${c} copies of a block, so k wraps to ${k} within a block of size ${size}.` })
+      frames.push({ phase: 'unwind', index: i, size, k, pythonLine: 18, activeLine: L('divide size by'), message: `Undo '${c}': the decoded text is ${c} copies of a block, so k wraps to ${k} within a block of size ${size}.` })
     } else {
       size -= 1
-      frames.push({ phase: 'unwind', index: i, size, k, activeLine: L('subtract 1 from size'), message: `Undo letter '${c}': it was not the target, so size = ${size} (k = ${k}).` })
+      frames.push({ phase: 'unwind', index: i, size, k, pythonLine: 20, activeLine: L('subtract 1 from size'), message: `Undo letter '${c}': it was not the target, so size = ${size} (k = ${k}).` })
     }
   }
-  frames.push({ phase: 'done', index: end, size, k, activeLine: L('return answer'), message: `The character at position ${k0} is '${result}'.` })
+  frames.push({ phase: 'done', pythonLine: 16, index: end, size, k, activeLine: L('return answer'), message: `The character at position ${k0} is '${result}'.` })
   return { input: { s, k: k0 }, result, frames }
 }
 

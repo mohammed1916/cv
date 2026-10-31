@@ -44,16 +44,16 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ preorder, postorder }) {
-  const frames = [{ phase: 'start', count: 0, active: null, preLo: null, preHi: null, postLo: null, activeLine: L('map each postorder value'), message: 'Preorder visits root, left, right; postorder visits left, right, root. The first preorder value is the root, and the next one is the root of the left subtree.' }]
+  const frames = [{ phase: 'start', count: 0, active: null, preLo: null, preHi: null, postLo: null, pythonLine: 12, activeLine: L('map each postorder value'), message: 'Preorder visits root, left, right; postorder visits left, right, root. The first preorder value is the root, and the next one is the root of the left subtree.' }]
   const { root } = build(preorder, postorder, (kind, info) => {
     if (kind === 'root') {
-      frames.push({ phase: 'root', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, activeLine: L('create a node from preorder'), message: `build(pre ${info.preLo}..${info.preHi}, post from ${info.postLo}): create node ${info.root.value} from preorder[${info.preLo}].` })
+      frames.push({ phase: 'root', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, pythonLine: 17, activeLine: L('create a node from preorder'), message: `build(pre ${info.preLo}..${info.preHi}, post from ${info.postLo}): create node ${info.root.value} from preorder[${info.preLo}].` })
     } else {
-      frames.push({ phase: 'split', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, activeLine: L('let left_size be'), message: `Left subtree root is preorder[${info.preLo + 1}] = ${info.leftRoot}. In postorder it sits at index ${info.postLo + info.leftSize - 1}, so the left subtree has ${info.leftSize} node(s); the rest are the right subtree.` })
+      frames.push({ phase: 'split', count: info.preLo + 1, active: info.root.value, preLo: info.preLo, preHi: info.preHi, postLo: info.postLo, pythonLine: 21, activeLine: L('let left_size be'), message: `Left subtree root is preorder[${info.preLo + 1}] = ${info.leftRoot}. In postorder it sits at index ${info.postLo + info.leftSize - 1}, so the left subtree has ${info.leftSize} node(s); the rest are the right subtree.` })
     }
   })
   const result = levelOrderFromTree(root)
-  frames.push({ phase: 'done', count: preorder.length, active: root.value, preLo: null, preHi: null, postLo: null, activeLine: L('return build(0'), message: `Tree built. Level-order serialization: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', count: preorder.length, active: root.value, preLo: null, preHi: null, postLo: null, pythonLine: 39, activeLine: L('return build(0'), message: `Tree built. Level-order serialization: [${result.join(', ')}].` })
   return { input: { preorder, postorder }, result, tree: root, frames }
 }
 

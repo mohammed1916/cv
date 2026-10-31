@@ -24,12 +24,12 @@ export function buildTrace({ encoding, ops }) {
   let i = 0
   const log = []
   const results = []
-  const frames = [{ phase: 'start', enc: [...enc], i, n: null, current: -1, log: [], activeLine: L('Store the encoding'), message: 'Store the encoding and a pointer i at the first run (count at even index, value at odd index).' }]
+  const frames = [{ phase: 'start', enc: [...enc], i, n: null, current: -1, log: [], pythonLine: 3, activeLine: L('Store the encoding'), message: 'Store the encoding and a pointer i at the first run (count at even index, value at odd index).' }]
   ops.forEach((n0, k) => {
     let n = n0
-    frames.push({ phase: 'next', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: L('To next(n)'), message: `next(${n0}): we must skip ${n0} element(s) and report the last one skipped.` })
+    frames.push({ phase: 'next', pythonLine: 7, enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: L('To next(n)'), message: `next(${n0}): we must skip ${n0} element(s) and report the last one skipped.` })
     while (i < enc.length && enc[i] < n) {
-      frames.push({ phase: 'skip', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), activeLine: L('subtract that run'), message: `Run at ${i} has ${enc[i]} copies of ${enc[i + 1]}, and ${enc[i]} < ${n}, so the whole run is consumed and the target is further on (n becomes ${n - enc[i]}).` })
+      frames.push({ phase: 'skip', enc: [...enc], i, n, current: k, log: log.concat({ name: 'next', args: [n0] }), pythonLine: 8, activeLine: L('subtract that run'), message: `Run at ${i} has ${enc[i]} copies of ${enc[i + 1]}, and ${enc[i]} < ${n}, so the whole run is consumed and the target is further on (n becomes ${n - enc[i]}).` })
       n -= enc[i]
       i += 2
     }
@@ -38,16 +38,16 @@ export function buildTrace({ encoding, ops }) {
       returned = -1
       results.push(-1)
       log.push({ name: 'next', args: [n0], returned })
-      frames.push({ phase: 'exhaust', enc: [...enc], i, n, current: k, log: [...log], activeLine: L('return -1'), message: `Every run is used up before ${n0} elements were skipped: return -1.` })
+      frames.push({ phase: 'exhaust', enc: [...enc], i, n, current: k, log: [...log], pythonLine: 11, activeLine: L('return -1'), message: `Every run is used up before ${n0} elements were skipped: return -1.` })
     } else {
       enc[i] -= n
       returned = enc[i + 1]
       results.push(returned)
       log.push({ name: 'next', args: [n0], returned })
-      frames.push({ phase: 'take', enc: [...enc], i, n, current: k, log: [...log], activeLine: L('remove n copies'), message: `The run at ${i} has at least the remaining ${n}: remove ${n} copies (count becomes ${enc[i]}) and return its value ${returned}.` })
+      frames.push({ phase: 'take', enc: [...enc], i, n, current: k, log: [...log], pythonLine: 12, activeLine: L('remove n copies'), message: `The run at ${i} has at least the remaining ${n}: remove ${n} copies (count becomes ${enc[i]}) and return its value ${returned}.` })
     }
   })
-  frames.push({ phase: 'done', enc: [...enc], i, n: null, current: ops.length - 1, log: [...log], activeLine: L('return the value of the run'), message: `Results: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', enc: [...enc], i, n: null, current: ops.length - 1, log: [...log], pythonLine: 20, activeLine: L('return the value of the run'), message: `Results: [${results.join(', ')}].` })
   return { input: { encoding, ops }, result: results, frames }
 }
 

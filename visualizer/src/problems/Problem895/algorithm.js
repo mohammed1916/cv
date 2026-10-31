@@ -33,32 +33,32 @@ export function buildTrace(ops) {
     groups: [...group.entries()].sort((a, b) => a[0] - b[0]).map(([f, items]) => [f, [...items]]),
     maxfreq,
   })
-  const frames = [{ phase: 'start', current: -1, log: [], ...state(), activeLine: L('set freq and group'), message: 'Track each value\'s frequency, a stack of values per frequency level, and the highest level maxfreq.' }]
+  const frames = [{ phase: 'start', current: -1, log: [], ...state(), pythonLine: 2, activeLine: L('set freq and group'), message: 'Track each value\'s frequency, a stack of values per frequency level, and the highest level maxfreq.' }]
   const results = []
   ops.forEach((op, i) => {
     if (op.name === 'push') {
       const f = (freq.get(op.value) ?? 0) + 1
       freq.set(op.value, f)
       const pre = log.concat({ name: 'push', args: [op.value], returned: null })
-      frames.push({ phase: 'push', current: i, log: pre, ...state(), activeLine: L('let f be freq[val]'), message: `push(${op.value}): its frequency becomes ${f}.` })
+      frames.push({ phase: 'push', current: i, log: pre, ...state(), pythonLine: 9, activeLine: L('let f be freq[val]'), message: `push(${op.value}): its frequency becomes ${f}.` })
       if (f > maxfreq) maxfreq = f
       if (!group.has(f)) group.set(f, [])
       group.get(f).push(op.value)
       log.push({ name: 'push', args: [op.value], returned: null })
       results.push(null)
-      frames.push({ phase: 'place', current: i, log: [...log], ...state(), activeLine: L('append val to group[f]'), message: `Place ${op.value} on top of the level-${f} stack${f === maxfreq ? ' (maxfreq is now ' + maxfreq + ')' : ''}. Level stacks keep recency: later pushes sit higher.` })
+      frames.push({ phase: 'place', current: i, log: [...log], ...state(), pythonLine: 13, activeLine: L('append val to group[f]'), message: `Place ${op.value} on top of the level-${f} stack${f === maxfreq ? ' (maxfreq is now ' + maxfreq + ')' : ''}. Level stacks keep recency: later pushes sit higher.` })
     } else {
       const val = group.get(maxfreq).pop()
-      frames.push({ phase: 'pop', current: i, log: log.concat({ name: 'pop', args: [], returned: val }), ...state(), activeLine: L('take the top of group[maxfreq]'), message: `pop(): the top of level ${maxfreq} is ${val}. That level only holds values reaching that frequency, and its top is the most recent one.` })
+      frames.push({ phase: 'pop', current: i, log: log.concat({ name: 'pop', args: [], returned: val }), ...state(), pythonLine: 16, activeLine: L('take the top of group[maxfreq]'), message: `pop(): the top of level ${maxfreq} is ${val}. That level only holds values reaching that frequency, and its top is the most recent one.` })
       freq.set(val, freq.get(val) - 1)
       let note = ''
       if (group.get(maxfreq).length === 0) { group.delete(maxfreq); maxfreq -= 1; note = ` Level was emptied, so maxfreq drops to ${maxfreq}.` }
       log.push({ name: 'pop', args: [], returned: val })
       results.push(val)
-      frames.push({ phase: 'shrink', current: i, log: [...log], ...state(), activeLine: L('return val'), message: `${val} now has frequency ${freq.get(val)}.${note} Return ${val}.` })
+      frames.push({ phase: 'shrink', current: i, log: [...log], ...state(), pythonLine: 20, activeLine: L('return val'), message: `${val} now has frequency ${freq.get(val)}.${note} Return ${val}.` })
     }
   })
-  frames.push({ phase: 'done', current: ops.length - 1, log: [...log], ...state(), activeLine: L('return all returned'), message: `All operations done. Returned values: [${results.map(r => (r === null ? 'null' : r)).join(', ')}].` })
+  frames.push({ phase: 'done', current: ops.length - 1, log: [...log], ...state(), pythonLine: 21, activeLine: L('return all returned'), message: `All operations done. Returned values: [${results.map(r => (r === null ? 'null' : r)).join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 

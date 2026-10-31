@@ -31,16 +31,16 @@ export function buildTrace({ edges, maxMoves, n }) {
   const settled = []
   let ans = 0
   const base = () => ({ dist: [...dist], settled: [...settled], heap: heap.data.map(h => [...h]), heapState: heapView(heap, { title: 'Priority queue (root = fewest moves; entries are node:moves)' }).heap, ans })
-  const frames = [{ phase: 'start', ...base(), node: 0, edge: null, activeLine: L('build the graph'), message: `Start Dijkstra at node 0 with distance 0. Moving along an edge with cnt new nodes costs cnt + 1 moves; budget maxMoves = ${maxMoves}.` }]
+  const frames = [{ phase: 'start', pythonLine: 11, ...base(), node: 0, edge: null, activeLine: L('build the graph'), message: `Start Dijkstra at node 0 with distance 0. Moving along an edge with cnt new nodes costs cnt + 1 moves; budget maxMoves = ${maxMoves}.` }]
   while (heap.size) {
     const [d, u] = heap.pop()
     if (d > dist[u]) {
-      frames.push({ phase: 'pop', ...base(), ops: [{ type: 'stale', node: u, dist: d, best: dist[u] }], node: u, edge: null, activeLine: L('is more than dist[u]'), message: `Pop stale entry (${d}, node ${u}); a shorter path (${dist[u]}) is already known, so skip.` })
+      frames.push({ phase: 'pop', pythonLine: 16, ...base(), ops: [{ type: 'stale', node: u, dist: d, best: dist[u] }], node: u, edge: null, activeLine: L('is more than dist[u]'), message: `Pop stale entry (${d}, node ${u}); a shorter path (${dist[u]}) is already known, so skip.` })
       continue
     }
     ans += 1
     settled.push(u)
-    frames.push({ phase: 'pop', ...base(), ops: [{ type: 'pop', node: u, dist: d }], node: u, edge: null, activeLine: L('count u as reachable'), message: `Settle node ${u} at distance ${d} (≤ ${maxMoves}? ${d <= maxMoves ? 'yes' : 'no'}). It counts as one reachable original node.` })
+    frames.push({ phase: 'pop', pythonLine: 17, ...base(), ops: [{ type: 'pop', node: u, dist: d }], node: u, edge: null, activeLine: L('count u as reachable'), message: `Settle node ${u} at distance ${d} (≤ ${maxMoves}? ${d <= maxMoves ? 'yes' : 'no'}). It counts as one reachable original node.` })
     for (const [v, cnt] of graph[u]) {
       const reach = Math.min(cnt, Math.max(0, maxMoves - d))
       used.set(`${u},${v}`, reach)
@@ -49,7 +49,7 @@ export function buildTrace({ edges, maxMoves, n }) {
       const old = dist[v] === null ? Infinity : dist[v]
       if (better) { heap.push([d2, v]); dist[v] = d2 }
       frames.push({
-        phase: 'relax', ...base(), ops: [!better && old === Infinity ? { text: `Edge ${u}-${v}: ${d} + ${cnt + 1} = ${d2} exceeds the budget of ${maxMoves} moves, so ${v} is not reachable this way and dist[${v}] stays ∞.` } : { type: 'relax', u, v, w: cnt + 1, base: d, candidate: d2, old, result: better ? 'improved' : 'kept' }], node: u, edge: [u, v], activeLine: better ? L('set dist[v] = d2') : L('otherwise, keep dist[v]'),
+        phase: 'relax', pythonLine: better ? 23 : 22, ...base(), ops: [!better && old === Infinity ? { text: `Edge ${u}-${v}: ${d} + ${cnt + 1} = ${d2} exceeds the budget of ${maxMoves} moves, so ${v} is not reachable this way and dist[${v}] stays ∞.` } : { type: 'relax', u, v, w: cnt + 1, base: d, candidate: d2, old, result: better ? 'improved' : 'kept' }], node: u, edge: [u, v], activeLine: better ? L('set dist[v] = d2') : L('otherwise, keep dist[v]'),
         message: `Edge ${u}-${v} (cnt ${cnt}): from ${u} we can walk ${reach} of its subdivision nodes (min(cnt, maxMoves - ${d})). ` +
           (better ? `Reaching ${v} costs ${d2} ≤ ${maxMoves}, so dist[${v}] = ${d2} and it is queued.` : `Reaching ${v} would cost ${d2}, not an improvement within budget.`),
       })
@@ -61,11 +61,11 @@ export function buildTrace({ edges, maxMoves, n }) {
     const add = Math.min(cnt, fromU + fromV)
     ans += add
     frames.push({
-      phase: 'count', ...base(), node: null, edge: [u, v], activeLine: L('add min(cnt'),
+      phase: 'count', pythonLine: 26, ...base(), node: null, edge: [u, v], activeLine: L('add min(cnt'),
       message: `Edge ${u}-${v}: ${fromU} nodes reachable from ${u} plus ${fromV} from ${v}, capped at cnt ${cnt}: +${add}.`,
     })
   }
-  frames.push({ phase: 'done', ...base(), node: null, edge: null, activeLine: L('return ans'), message: `Total reachable nodes: ${ans}.` })
+  frames.push({ phase: 'done', pythonLine: 27, ...base(), node: null, edge: null, activeLine: L('return ans'), message: `Total reachable nodes: ${ans}.` })
   return { input: { edges, maxMoves, n }, result: ans, frames }
 }
 

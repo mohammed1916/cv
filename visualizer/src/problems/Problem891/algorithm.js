@@ -16,20 +16,20 @@ export function buildTrace(input) {
   const pow2 = Array(n).fill(1)
   for (let i = 1; i < n; i++) pow2[i] = (pow2[i - 1] * 2) % MOD
   let ans = 0
-  const frames = [{ phase: 'start', index: -1, ans, nums: [...input], contributions: [], activeLine: L('a subsequence'), message: 'A subsequence width is max - min, and order does not matter, so sort first.' }]
-  frames.push({ phase: 'sort', index: -1, ans, nums, contributions: [], activeLine: L('sort nums into ascending'), message: `Sorted: [${nums.join(', ')}]. Now element i is the maximum of exactly 2^i subsequences and the minimum of exactly 2^(n-1-i).` })
-  frames.push({ phase: 'powers', index: -1, ans, nums, contributions: [], activeLine: L('precompute pow2'), message: `Precompute powers of two modulo 1e9+7 for 0..${n - 1}.` })
+  const frames = [{ phase: 'start', pythonLine: 3, index: -1, ans, nums: [...input], contributions: [], activeLine: L('a subsequence'), message: 'A subsequence width is max - min, and order does not matter, so sort first.' }]
+  frames.push({ phase: 'sort', pythonLine: 3, index: -1, ans, nums, contributions: [], activeLine: L('sort nums into ascending'), message: `Sorted: [${nums.join(', ')}]. Now element i is the maximum of exactly 2^i subsequences and the minimum of exactly 2^(n-1-i).` })
+  frames.push({ phase: 'powers', pythonLine: 7, index: -1, ans, nums, contributions: [], activeLine: L('precompute pow2'), message: `Precompute powers of two modulo 1e9+7 for 0..${n - 1}.` })
   const contributions = []
   for (let i = 0; i < n; i++) {
     const coef = mod(pow2[i] - pow2[n - 1 - i])
     ans = mod(ans + nums[i] * coef)
     contributions.push(coef)
     frames.push({
-      phase: 'term', index: i, ans, nums, contributions: [...contributions], activeLine: L('add sorted[i] * coef'),
+      phase: 'term', pythonLine: 10, index: i, ans, nums, contributions: [...contributions], activeLine: L('add sorted[i] * coef'),
       message: `nums[${i}] = ${nums[i]} is max of 2^${i} = ${pow2[i]} subsequences and min of 2^${n - 1 - i} = ${pow2[n - 1 - i]}: contributes ${nums[i]} * (${pow2[i]} - ${pow2[n - 1 - i]}) mod p. Running total: ${ans}.`,
     })
   }
-  frames.push({ phase: 'done', index: n - 1, ans, nums, contributions: [...contributions], activeLine: L('return ans'), message: `Return ${ans}.` })
+  frames.push({ phase: 'done', pythonLine: 11, index: n - 1, ans, nums, contributions: [...contributions], activeLine: L('return ans'), message: `Return ${ans}.` })
   return { input: [...input], sorted: nums, pow2, result: ans, frames }
 }
 
