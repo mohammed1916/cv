@@ -6,16 +6,16 @@ export function parseInput(text) {
 }
 export function buildTrace({ sx, sy, tx: tx0, ty: ty0 }) {
   let tx = tx0, ty = ty0
-  const frames = [{ phase: 'start', activeLine: 2, tx, ty, message: `From (x, y) you may go to (x+y, y) or (x, x+y). Work backwards from (${tx}, ${ty}): the larger coordinate must have come from subtracting the smaller one, so the parent is unique.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: 2, tx, ty, message: `From (x, y) you may go to (x+y, y) or (x, x+y). Work backwards from (${tx}, ${ty}): the larger coordinate must have come from subtracting the smaller one, so the parent is unique.` }]
   while (tx > sx && ty > sy && tx !== ty) {
     if (tx > ty) {
       const old = tx
       tx %= ty
-      frames.push({ phase: 'reverse', activeLine: 4, tx, ty, message: `tx = ${old} is larger than ty = ${ty}: undo many (x+y, y) steps at once with ${old} mod ${ty} = ${tx}.` })
+      frames.push({ phase: 'reverse', pythonLine: 4, activeLine: 4, tx, ty, message: `tx = ${old} is larger than ty = ${ty}: undo many (x+y, y) steps at once with ${old} mod ${ty} = ${tx}.` })
     } else {
       const old = ty
       ty %= tx
-      frames.push({ phase: 'reverse', activeLine: 6, tx, ty, message: `ty = ${old} is larger than tx = ${tx}: undo many (x, x+y) steps at once with ${old} mod ${tx} = ${ty}.` })
+      frames.push({ phase: 'reverse', pythonLine: 6, activeLine: 6, tx, ty, message: `ty = ${old} is larger than tx = ${tx}: undo many (x, x+y) steps at once with ${old} mod ${tx} = ${ty}.` })
     }
   }
   let result, message, line
@@ -23,8 +23,8 @@ export function buildTrace({ sx, sy, tx: tx0, ty: ty0 }) {
   else if (tx === sx) { result = ty > sy && (ty - sy) % tx === 0; message = `x matches at ${tx}. Only y can still change, by multiples of x: need ty = ${ty} greater than sy = ${sy} and (${ty} - ${sy}) divisible by ${tx}: ${result}.`; line = 10 }
   else if (ty === sy) { result = tx > sx && (tx - sx) % ty === 0; message = `y matches at ${ty}. Only x can still change, by multiples of y: need tx = ${tx} greater than sx = ${sx} and (${tx} - ${sx}) divisible by ${ty}: ${result}.`; line = 12 }
   else { result = false; message = `Stopped at (${tx}, ${ty}) without matching either start coordinate (or tx = ty, which has no parent): unreachable.`; line = 13 }
-  frames.push({ phase: 'finish', activeLine: line, tx, ty, message })
-  frames.push({ phase: 'done', activeLine: line, tx, ty, message: `Answer: ${result}.` })
+  frames.push({ phase: 'finish', pythonLine: line, activeLine: line, tx, ty, message })
+  frames.push({ phase: 'done', pythonLine: line, activeLine: line, tx, ty, message: `Answer: ${result}.` })
   return { input: { sx, sy, tx: tx0, ty: ty0 }, result, frames }
 }
 export const code = `start with (tx, ty) equal to the target (tx0, ty0)

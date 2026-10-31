@@ -25,13 +25,13 @@ export function parseInput(text) {
 
 export function buildTrace(spec) {
   const roles = {}
-  const frames = [{ phase: 'start', activeLine: L('To split the tree at target'), node: null, roles: {}, message: `Split the tree at ${spec.target}: values at most ${spec.target} go left, larger values go right.` }]
+  const frames = [{ phase: 'start', pythonLine: 42, activeLine: L('To split the tree at target'), node: null, roles: {}, message: `Split the tree at ${spec.target}: values at most ${spec.target} go left, larger values go right.` }]
   // Splits a subtree; returns the roots of the two resulting trees. Pointers are rewired in place.
   const split = node => {
     if (!node) return [null, null]
     const small = node.value <= spec.target
     roles[node.id] = small ? 'small' : 'large'
-    frames.push({ phase: 'visit', activeLine: L(small ? 'if root.value is at most target' : '(left, right) = split root.left'), node: node.id, roles: { ...roles }, message: `${node.value} is ${small ? 'at most' : 'greater than'} ${spec.target}, so it stays in the ${small ? 'left' : 'right'} tree.` })
+    frames.push({ phase: 'visit', pythonLine: 35, activeLine: L(small ? 'if root.value is at most target' : '(left, right) = split root.left'), node: node.id, roles: { ...roles }, message: `${node.value} is ${small ? 'at most' : 'greater than'} ${spec.target}, so it stays in the ${small ? 'left' : 'right'} tree.` })
     if (small) {
       const [smallPart, largePart] = split(node.right)
       node.right = smallPart
@@ -43,7 +43,7 @@ export function buildTrace(spec) {
   }
   const [smallRoot, largeRoot] = split(treeFromLevelOrder(spec.arr))
   const result = [inorder(smallRoot), inorder(largeRoot)]
-  frames.push({ phase: 'done', activeLine: L('To split the tree at target'), node: null, roles: { ...roles }, message: `Left tree: [${result[0].join(', ')}]. Right tree: [${result[1].join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 43, activeLine: L('To split the tree at target'), node: null, roles: { ...roles }, message: `Left tree: [${result[0].join(', ')}]. Right tree: [${result[1].join(', ')}].` })
   return { input: spec, root: treeFromLevelOrder(spec.arr), result, frames }
 }
 

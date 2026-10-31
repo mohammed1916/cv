@@ -17,23 +17,23 @@ export function buildTrace({ arr, k }) {
   const show = () => heap.data.map(([i, j]) => `${arr[i]}/${arr[j]}`)
   const view = () => heapView(heap, { title: 'Min-heap of fractions (root = smallest)' }).heap
   for (let j = 1; j < n; j++) heap.push([0, j])
-  const frames = [{ phase: 'start', activeLine: 2, heap: show(), heapState: view(), popped: [], current: null, round: 0, message: `Seed the heap with ${arr[0]}/arr[j] for every j: each column's smallest fraction. Each push sifts up so the smallest fraction sits at the root.` }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: 2, heap: show(), heapState: view(), popped: [], current: null, round: 0, message: `Seed the heap with ${arr[0]}/arr[j] for every j: each column's smallest fraction. Each push sifts up so the smallest fraction sits at the root.` }]
   const popped = []
   for (let r = 1; r <= k - 1; r++) {
     const top = heap.pop()
     popped.push(`${arr[top[0]]}/${arr[top[1]]}`)
-    frames.push({ phase: 'pop', activeLine: 5, heap: show(), heapState: view(), popped: [...popped], current: top, round: r, message: `Pop #${r}: ${arr[top[0]]}/${arr[top[1]]} is the ${r}${r === 1 ? 'st' : r === 2 ? 'nd' : r === 3 ? 'rd' : 'th'} smallest fraction.` })
+    frames.push({ phase: 'pop', pythonLine: 8, activeLine: 5, heap: show(), heapState: view(), popped: [...popped], current: top, round: r, message: `Pop #${r}: ${arr[top[0]]}/${arr[top[1]]} is the ${r}${r === 1 ? 'st' : r === 2 ? 'nd' : r === 3 ? 'rd' : 'th'} smallest fraction.` })
     const [i, j] = top
     if (i + 1 < j) {
       heap.push([i + 1, j])
-      frames.push({ phase: 'push', activeLine: 7, heap: show(), heapState: view(), popped: [...popped], current: [i + 1, j], round: r, message: `Column ${arr[j]} still has a larger numerator available: push ${arr[i + 1]}/${arr[j]}, the next fraction in that column.` })
+      frames.push({ phase: 'push', pythonLine: 10, activeLine: 7, heap: show(), heapState: view(), popped: [...popped], current: [i + 1, j], round: r, message: `Column ${arr[j]} still has a larger numerator available: push ${arr[i + 1]}/${arr[j]}, the next fraction in that column.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: 8, heap: show(), heapState: view(), popped: [...popped], current: null, round: r, message: `Numerator index ${i + 1} would reach denominator index ${j}, so column ${arr[j]} is exhausted.` })
+      frames.push({ phase: 'skip', pythonLine: 9, activeLine: 8, heap: show(), heapState: view(), popped: [...popped], current: null, round: r, message: `Numerator index ${i + 1} would reach denominator index ${j}, so column ${arr[j]} is exhausted.` })
     }
   }
   const [i, j] = heap.peek()
   const result = [arr[i], arr[j]]
-  frames.push({ phase: 'done', activeLine: 9, heap: show(), heapState: view(), popped, current: heap.peek(), round: k, message: `The heap top ${result[0]}/${result[1]} is the ${k}-th smallest fraction.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: 9, heap: show(), heapState: view(), popped, current: heap.peek(), round: k, message: `The heap top ${result[0]}/${result[1]} is the ${k}-th smallest fraction.` })
   return { input: { arr, k }, result, frames }
 }
 export const code = `set n to the length of arr

@@ -7,31 +7,31 @@ export function parseInput(text) {
 }
 export function buildTrace({ start, end }) {
   const n = start.length
-  const frames = [{ phase: 'start', activeLine: 1, i: 0, j: 0, message: 'An R can only move right and an L only left, and they never cross. So the non-X letters must match in order, with each R no further right in start than in end, and each L no further left.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: 1, i: 0, j: 0, message: 'An R can only move right and an L only left, and they never cross. So the non-X letters must match in order, with each R no further right in start than in end, and each L no further left.' }]
   let i = 0, j = 0
-  const done = (result, message, line) => { frames.push({ phase: 'done', activeLine: line, i, j, message }); return { input: { start, end }, result, frames } }
+  const done = (result, message, line, py) => { frames.push({ phase: 'done', pythonLine: py, activeLine: line, i, j, message }); return { input: { start, end }, result, frames } }
   for (;;) {
     while (i < n && start[i] === 'X') i++
     while (j < n && end[j] === 'X') j++
-    frames.push({ phase: 'skip', activeLine: 4, i, j, message: `Skip X on both strings: pointer i = ${i}${i < n ? ` ('${start[i]}')` : ' (end)'}, j = ${j}${j < n ? ` ('${end[j]}')` : ' (end)'}.` })
+    frames.push({ phase: 'skip', pythonLine: 5, activeLine: 4, i, j, message: `Skip X on both strings: pointer i = ${i}${i < n ? ` ('${start[i]}')` : ' (end)'}, j = ${j}${j < n ? ` ('${end[j]}')` : ' (end)'}.` })
     if (i === n || j === n) {
       const ok = i === n && j === n
-      frames.push({ phase: 'compare', activeLine: 5, i, j, message: ok ? 'Both strings ran out of L/R letters together.' : 'One string has an extra L or R that the other lacks.' })
-      return done(ok, ok ? 'Return True.' : 'Return False: letter counts differ.', 6)
+      frames.push({ phase: 'compare', pythonLine: 9, activeLine: 5, i, j, message: ok ? 'Both strings ran out of L/R letters together.' : 'One string has an extra L or R that the other lacks.' })
+      return done(ok, ok ? 'Return True.' : 'Return False: letter counts differ.', 6, 10)
     }
     if (start[i] !== end[j]) {
-      frames.push({ phase: 'compare', activeLine: 7, i, j, message: `start[${i}] = '${start[i]}' but end[${j}] = '${end[j]}': the letter order differs, and L and R can never pass each other.` })
-      return done(false, 'Return False.', 8)
+      frames.push({ phase: 'compare', pythonLine: 11, activeLine: 7, i, j, message: `start[${i}] = '${start[i]}' but end[${j}] = '${end[j]}': the letter order differs, and L and R can never pass each other.` })
+      return done(false, 'Return False.', 8, 12)
     }
     if (start[i] === 'L' && i < j) {
-      frames.push({ phase: 'compare', activeLine: 9, i, j, message: `This L must go from ${i} to ${j}, which is to the right. L only moves left, so this is impossible.` })
-      return done(false, 'Return False.', 10)
+      frames.push({ phase: 'compare', pythonLine: 13, activeLine: 9, i, j, message: `This L must go from ${i} to ${j}, which is to the right. L only moves left, so this is impossible.` })
+      return done(false, 'Return False.', 10, 14)
     }
     if (start[i] === 'R' && i > j) {
-      frames.push({ phase: 'compare', activeLine: 11, i, j, message: `This R must go from ${i} to ${j}, which is to the left. R only moves right, so this is impossible.` })
-      return done(false, 'Return False.', 12)
+      frames.push({ phase: 'compare', pythonLine: 15, activeLine: 11, i, j, message: `This R must go from ${i} to ${j}, which is to the left. R only moves right, so this is impossible.` })
+      return done(false, 'Return False.', 12, 16)
     }
-    frames.push({ phase: 'match', activeLine: 13, i, j, message: `'${start[i]}' at ${i} can reach ${j} (${start[i] === 'L' ? 'moving left or staying' : 'moving right or staying'}). Advance both pointers.` })
+    frames.push({ phase: 'match', pythonLine: 17, activeLine: 13, i, j, message: `'${start[i]}' at ${i} can reach ${j} (${start[i] === 'L' ? 'moving left or staying' : 'moving right or staying'}). Advance both pointers.` })
     i++
     j++
   }

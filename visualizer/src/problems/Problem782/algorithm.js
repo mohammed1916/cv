@@ -13,8 +13,8 @@ export function buildTrace(board) {
   const rows = board.map(r => r.reduce((m, v, j) => m | (v << j), 0))
   const cols = Array.from({ length: n }, (_, j) => board.reduce((m, r, i) => m | (r[j] << i), 0))
   const frames = []
-  const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, axis: '', index: -1, kinds: [], ...extra })
-  push('start', 2, `Swapping rows never changes which two row patterns exist, and likewise for columns. So treat each row as an ${n}-bit mask (and each column), then solve rows and columns separately.`, { rows: rows.map(m => bits(m, n)), cols: cols.map(m => bits(m, n)) })
+  const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({ phase, activeLine, pythonLine, message, axis: '', index: -1, kinds: [], ...extra })
+  push('start', 2, 5, `Swapping rows never changes which two row patterns exist, and likewise for columns. So treat each row as an ${n}-bit mask (and each column), then solve rows and columns separately.`, { rows: rows.map(m => bits(m, n)), cols: cols.map(m => bits(m, n)) })
 
   function solve(axis, masks) {
     const first = masks[0]
@@ -26,23 +26,23 @@ export function buildTrace(board) {
       else if (m === other) kinds.push('B')
       else {
         kinds.push('X')
-        push('classify', 6, `${axis} ${i} is ${bits(m, n)}: it is neither ${bits(first, n)} nor its complement ${bits(other, n)}. Impossible.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
+        push('classify', 6, 12, `${axis} ${i} is ${bits(m, n)}: it is neither ${bits(first, n)} nor its complement ${bits(other, n)}. Impossible.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
         return -1
       }
-      push('classify', 5, `${axis} ${i} = ${bits(m, n)} is ${kinds[i] === 'A' ? 'the same as' : 'the complement of'} ${axis} 0.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
+      push('classify', 5, 11, `${axis} ${i} = ${bits(m, n)} is ${kinds[i] === 'A' ? 'the same as' : 'the complement of'} ${axis} 0.`, { axis, index: i, kinds: [...kinds], masks: masks.map(x => bits(x, n)) })
     }
     const ones = popcount(first)
     if (Math.abs(ones - (n - ones)) > 1) {
-      push('balance', 8, `${axis} 0 has ${ones} ones and ${n - ones} zeros: in a chessboard they differ by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
+      push('balance', 8, 15, `${axis} 0 has ${ones} ones and ${n - ones} zeros: in a chessboard they differ by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
       return -1
     }
     const lead = kinds.map(k => (k === 'A' ? 1 : 0))
     const cnt = lead.reduce((a, b) => a + b, 0)
     if (Math.abs(cnt - (n - cnt)) > 1) {
-      push('balance', 11, `Only ${cnt} of ${n} ${axis}s equal ${axis} 0 (the rest are complements): the two kinds must differ in count by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
+      push('balance', 11, 19, `Only ${cnt} of ${n} ${axis}s equal ${axis} 0 (the rest are complements): the two kinds must differ in count by at most 1. Impossible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
       return -1
     }
-    push('balance', 11, `${axis} 0 is balanced (${ones} ones) and the two kinds appear ${cnt} and ${n - cnt} times: a chessboard layout is possible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
+    push('balance', 11, 18, `${axis} 0 is balanced (${ones} ones) and the two kinds appear ${cnt} and ${n - cnt} times: a chessboard layout is possible.`, { axis, kinds, masks: masks.map(x => bits(x, n)) })
     let best = -1
     const notes = []
     for (const s of [0, 1]) {
@@ -52,14 +52,14 @@ export function buildTrace(board) {
       notes.push(`pattern ${target.join('')} needs ${d} swap${d === 1 ? '' : 's'}`)
       if (best === -1 || d < best) best = d
     }
-    push('moves', 18, `Kinds in order: ${lead.join('')}. Target alternations: ${notes.join('; ')}. Each swap fixes two misplaced ${axis}s, so ${axis} swaps = ${best}.`, { axis, kinds, masks: masks.map(x => bits(x, n)), moves: best })
+    push('moves', 18, 28, `Kinds in order: ${lead.join('')}. Target alternations: ${notes.join('; ')}. Each swap fixes two misplaced ${axis}s, so ${axis} swaps = ${best}.`, { axis, kinds, masks: masks.map(x => bits(x, n)), moves: best })
     return best
   }
   const r = solve('row', rows)
   let c = -1
   if (r >= 0) c = solve('column', cols)
   const result = r < 0 || c < 0 ? -1 : r + c
-  push('done', 20, result < 0 ? 'A chessboard cannot be formed: return -1.' : `Row swaps ${r} + column swaps ${c} = ${result}.`, { moves: result })
+  push('done', 20, 31, result < 0 ? 'A chessboard cannot be formed: return -1.' : `Row swaps ${r} + column swaps ${c} = ${result}.`, { moves: result })
   return { input: board, result, frames }
 }
 export const code = `let n be the board size, and full the bitmask with n ones

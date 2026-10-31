@@ -23,13 +23,13 @@ export function buildTrace(values) {
   let best = Infinity
   const visited = []
   const order = []
-  const frames = [{ phase: 'start', activeLine: 1, current: null, prev: null, best: null, visited: [], order: [], message: 'In a BST the in-order traversal yields values in increasing order, so the closest pair must be consecutive in that order. Track only the previous value.' }]
+  const frames = [{ phase: 'start', pythonLine: 26, activeLine: 1, current: null, prev: null, best: null, visited: [], order: [], message: 'In a BST the in-order traversal yields values in increasing order, so the closest pair must be consecutive in that order. Track only the previous value.' }]
   const stack = []
-  const snap = (phase, activeLine, current, message, decision) => frames.push({ phase, activeLine, current: current ? current.id : null, prev, best: best === Infinity ? null : best, visited: [...visited], order: [...order], message, treeWalk: { kind: 'recursion', stack: stack.map(v => ({ label: `inorder(${v})` })), order: [...order], orderLabel: 'In-order values so far (sorted)', decision: decision ?? message } })
+  const snap = (phase, activeLine, pythonLine, current, message, decision) => frames.push({ phase, activeLine, pythonLine, current: current ? current.id : null, prev, best: best === Infinity ? null : best, visited: [...visited], order: [...order], message, treeWalk: { kind: 'recursion', stack: stack.map(v => ({ label: `inorder(${v})` })), order: [...order], orderLabel: 'In-order values so far (sorted)', decision: decision ?? message } })
   function inorder(node) {
     if (!node) return
     stack.push(node.value)
-    snap('descend', 4, node, `Visit node ${node.value}: first finish its left subtree${node.left ? ` (root ${node.left.value})` : ' (empty)'}.`)
+    snap('descend', 4, 31, node, `Visit node ${node.value}: first finish its left subtree${node.left ? ` (root ${node.left.value})` : ' (empty)'}.`)
     inorder(node.left)
     visited.push(node.id)
     order.push(node.value)
@@ -37,14 +37,14 @@ export function buildTrace(values) {
       const diff = node.value - prev
       const improved = diff < best
       best = Math.min(best, diff)
-      snap('visit', 6, node, `In-order visit ${node.value}: difference from previous ${prev} is ${diff}${improved ? ', a new minimum' : `, not below ${best}`}. Best so far: ${best}.`)
-    } else snap('visit', 7, node, `In-order visit ${node.value}: the smallest value, nothing to compare with yet.`)
+      snap('visit', 6, 33, node, `In-order visit ${node.value}: difference from previous ${prev} is ${diff}${improved ? ', a new minimum' : `, not below ${best}`}. Best so far: ${best}.`)
+    } else snap('visit', 7, 32, node, `In-order visit ${node.value}: the smallest value, nothing to compare with yet.`)
     prev = node.value
     inorder(node.right)
     stack.pop()
   }
   inorder(root)
-  frames.push({ phase: 'done', activeLine: 10, current: null, prev, best, visited: [...visited], order: [...order], message: `Minimum difference between any two nodes: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 37, activeLine: 10, current: null, prev, best, visited: [...visited], order: [...order], message: `Minimum difference between any two nodes: ${best}.` })
   return { input: [...values], root, result: best, frames }
 }
 export const code = `set prev to none and best to infinity

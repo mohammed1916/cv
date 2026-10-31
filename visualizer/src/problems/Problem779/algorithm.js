@@ -11,21 +11,21 @@ export function buildTrace({ n, k }) {
   let cur = k
   for (let row = n; row >= 1; row--) { chain.push({ row, pos: cur }); cur = Math.ceil(cur / 2) }
   const values = new Array(chain.length).fill(null)
-  const frames = [{ phase: 'start', activeLine: 1, depth: 0, values: [...values], message: `Row ${n} is built from row ${n - 1} by 0 -> 01 and 1 -> 10. Position ${k} is the ${k % 2 ? 'first' : 'second'} child of position ${Math.ceil(k / 2)} in the row above.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: 1, depth: 0, values: [...values], message: `Row ${n} is built from row ${n - 1} by 0 -> 01 and 1 -> 10. Position ${k} is the ${k % 2 ? 'first' : 'second'} child of position ${Math.ceil(k / 2)} in the row above.` }]
   for (let d = 0; d < chain.length - 1; d++) {
     const { row, pos } = chain[d]
-    frames.push({ phase: 'descend', activeLine: 4, depth: d, values: [...values], message: `Row ${row}, position ${pos} comes from row ${row - 1}, position ${Math.ceil(pos / 2)}. Recurse upward.` })
+    frames.push({ phase: 'descend', pythonLine: 4, activeLine: 4, depth: d, values: [...values], message: `Row ${row}, position ${pos} comes from row ${row - 1}, position ${Math.ceil(pos / 2)}. Recurse upward.` })
   }
   values[chain.length - 1] = 0
-  frames.push({ phase: 'base', activeLine: 3, depth: chain.length - 1, values: [...values], message: 'Row 1 is just "0", so the recursion bottoms out with 0.' })
+  frames.push({ phase: 'base', pythonLine: 3, activeLine: 3, depth: chain.length - 1, values: [...values], message: 'Row 1 is just "0", so the recursion bottoms out with 0.' })
   for (let d = chain.length - 2; d >= 0; d--) {
     const parent = values[d + 1]
     const odd = chain[d].pos % 2 === 1
     values[d] = odd ? parent : 1 - parent
-    frames.push({ phase: 'resolve', activeLine: odd ? 6 : 7, depth: d, values: [...values], message: `Position ${chain[d].pos} in row ${chain[d].row} is ${odd ? 'odd (first child): it copies' : 'even (second child): it flips'} its parent ${parent}, giving ${values[d]}.` })
+    frames.push({ phase: 'resolve', pythonLine: (odd ? 6 : 7), activeLine: odd ? 6 : 7, depth: d, values: [...values], message: `Position ${chain[d].pos} in row ${chain[d].row} is ${odd ? 'odd (first child): it copies' : 'even (second child): it flips'} its parent ${parent}, giving ${values[d]}.` })
   }
   const result = values[0]
-  frames.push({ phase: 'done', activeLine: chain.length === 1 ? 3 : chain[0].pos % 2 === 1 ? 6 : 7, depth: 0, values: [...values], message: `The ${k}-th symbol in row ${n} is ${result}.` })
+  frames.push({ phase: 'done', pythonLine: (chain.length === 1 ? 3 : chain[0].pos % 2 === 1 ? 6 : 7), activeLine: chain.length === 1 ? 3 : chain[0].pos % 2 === 1 ? 6 : 7, depth: 0, values: [...values], message: `The ${k}-th symbol in row ${n} is ${result}.` })
   return { input: { n, k }, chain, result, frames }
 }
 export const code = `to find the k-th symbol in row n

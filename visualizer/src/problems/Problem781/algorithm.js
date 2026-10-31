@@ -7,8 +7,8 @@ export function buildTrace(answers) {
   const counts = new Map()
   for (const a of answers) counts.set(a, (counts.get(a) || 0) + 1)
   const entries = [...counts.entries()]
-  const frames = [{ phase: 'start', activeLine: 1, groups: [], total: 0, message: 'A rabbit answering a saw a other rabbits of its colour, so its colour has a+1 rabbits. Rabbits with the same answer can share a colour group of exactly a+1.' }]
-  frames.push({ phase: 'count', activeLine: 2, groups: [], total: 0, message: `Tally answers: ${entries.map(([a, c]) => `${a}x${c}`).join(', ')}.` })
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: 1, groups: [], total: 0, message: 'A rabbit answering a saw a other rabbits of its colour, so its colour has a+1 rabbits. Rabbits with the same answer can share a colour group of exactly a+1.' }]
+  frames.push({ phase: 'count', pythonLine: 5, activeLine: 2, groups: [], total: 0, message: `Tally answers: ${entries.map(([a, c]) => `${a}x${c}`).join(', ')}.` })
   let total = 0
   const groups = []
   for (const [a, c] of entries) {
@@ -17,9 +17,9 @@ export function buildTrace(answers) {
     const added = need * size
     total += added
     groups.push({ answer: a, count: c, size, need, added })
-    frames.push({ phase: 'group', activeLine: 6, groups: groups.map(g => ({ ...g })), total, message: `${c} rabbit${c > 1 ? 's' : ''} answered ${a}. A colour group holds ${size}, so ${c} rabbits need ceil(${c}/${size}) = ${need} group${need > 1 ? 's' : ''}, i.e. ${added} rabbits (counting silent ones). Total: ${total}.` })
+    frames.push({ phase: 'group', pythonLine: 9, activeLine: 6, groups: groups.map(g => ({ ...g })), total, message: `${c} rabbit${c > 1 ? 's' : ''} answered ${a}. A colour group holds ${size}, so ${c} rabbits need ceil(${c}/${size}) = ${need} group${need > 1 ? 's' : ''}, i.e. ${added} rabbits (counting silent ones). Total: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: 7, groups: groups.map(g => ({ ...g })), total, message: `Minimum rabbits in the forest: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: 7, groups: groups.map(g => ({ ...g })), total, message: `Minimum rabbits in the forest: ${total}.` })
   return { input: [...answers], result: total, entries, frames }
 }
 export const code = `set total to 0
