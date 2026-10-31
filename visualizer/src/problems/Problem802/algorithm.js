@@ -13,28 +13,28 @@ export function buildTrace(graph) {
   const frames = []
   let queue = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, outdeg: [...outdeg], safe: [...safe], queue: [...queue], current: -1, parent: -1, ...extra })
-  push('start', L('read the graph'), 'A node is eventually safe if every path from it ends at a terminal node. Reverse the edges and peel off terminals, like Kahn topological sort.')
+  push('start', L('read the graph'), 'A node is eventually safe if every path from it ends at a terminal node. Reverse the edges and peel off terminals, like Kahn topological sort.', { pythonLine: 2 })
   for (let u = 0; u < n; u++) for (const v of graph[u]) rev[v].push(u)
-  push('init', L('build rev'), 'Out-degrees are the number of unresolved out-neighbours; rev[v] lists the nodes that point to v.')
+  push('init', L('build rev'), 'Out-degrees are the number of unresolved out-neighbours; rev[v] lists the nodes that point to v.', { pythonLine: 4 })
   queue = []
   for (let u = 0; u < n; u++) if (outdeg[u] === 0) queue.push(u)
-  push('seed', L('set queue'), `Terminal nodes (out-degree 0) are safe by definition: queue = [${queue.join(', ')}].`)
+  push('seed', L('set queue'), `Terminal nodes (out-degree 0) are safe by definition: queue = [${queue.join(', ')}].`, { pythonLine: 8 })
   while (queue.length) {
     const u = queue.shift()
     safe[u] = true
-    push('pop', L('remove the front'), `Pop node ${u}: all of its out-neighbours are safe, so ${u} is safe.`, { current: u })
+    push('pop', L('remove the front'), `Pop node ${u}: all of its out-neighbours are safe, so ${u} is safe.`, { current: u, pythonLine: 11 })
     for (const p of rev[u]) {
       outdeg[p] -= 1
-      push('relax', L('decrease outdeg'), `Node ${p} points to safe node ${u}: its unresolved out-degree drops to ${outdeg[p]}.`, { current: u, parent: p })
+      push('relax', L('decrease outdeg'), `Node ${p} points to safe node ${u}: its unresolved out-degree drops to ${outdeg[p]}.`, { current: u, parent: p, pythonLine: 14 })
       if (outdeg[p] === 0) {
         queue.push(p)
-        push('enqueue', L('append p'), `Node ${p} has no unresolved out-neighbours left, so it joins the queue.`, { current: u, parent: p })
+        push('enqueue', L('append p'), `Node ${p} has no unresolved out-neighbours left, so it joins the queue.`, { current: u, parent: p, pythonLine: 16 })
       }
     }
   }
   const result = []
   for (let u = 0; u < n; u++) if (safe[u]) result.push(u)
-  push('done', L('return every node'), `Nodes never reaching out-degree 0 lie on or lead into a cycle. Safe nodes: [${result.join(', ')}].`)
+  push('done', L('return every node'), `Nodes never reaching out-degree 0 lie on or lead into a cycle. Safe nodes: [${result.join(', ')}].`, { pythonLine: 17 })
   return { input: graph, result, frames }
 }
 export const code = `read the graph and let n be its number of nodes

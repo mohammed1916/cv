@@ -9,20 +9,20 @@ export function buildTrace(cpdomains) {
   const frames = []
   const snap = () => [...counts.entries()]
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, entries: snap(), index: -1, sub: null, ...extra })
-  push('start', L('set counts to'), 'Every visit to a domain also counts as a visit to each parent domain, so each entry credits all of its dot-suffixes.')
+  push('start', L('set counts to'), 'Every visit to a domain also counts as a visit to each parent domain, so each entry credits all of its dot-suffixes.', { pythonLine: 2 })
   cpdomains.forEach((entry, i) => {
     const [num, domain] = entry.split(' ')
     const n = Number(num)
-    push('parse', L('split entry'), `Split "${entry}" into count ${n} and domain "${domain}".`, { index: i })
+    push('parse', L('split entry'), `Split "${entry}" into count ${n} and domain "${domain}".`, { index: i, pythonLine: 4 })
     const parts = domain.split('.')
     for (let j = 0; j < parts.length; j++) {
       const sub = parts.slice(j).join('.')
       counts.set(sub, (counts.get(sub) || 0) + n)
-      push('credit', L('add n to counts'), `Credit "${sub}" with ${n}: total is now ${counts.get(sub)}.`, { index: i, sub })
+      push('credit', L('add n to counts'), `Credit "${sub}" with ${n}: total is now ${counts.get(sub)}.`, { index: i, sub, pythonLine: 9 })
     }
   })
   const result = [...counts.entries()].map(([d, c]) => `${c} ${d}`)
-  push('done', L('return one'), `${result.length} distinct (sub)domains counted.`)
+  push('done', L('return one'), `${result.length} distinct (sub)domains counted.`, { pythonLine: 10 })
   return { input: cpdomains, result, frames }
 }
 export const code = `set counts to an empty map from domain to count

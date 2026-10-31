@@ -19,31 +19,31 @@ export function buildTrace(arr) {
   const frames = []
   let current = null
   const snapshot = () => ({ roles: { ...roles }, tags: { ...tags } })
-  const push = (phase, activeLine, message) => frames.push({ phase, activeLine, message, current, ...snapshot(), treeShape: levelOrderFromTree(tree) })
+  const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, current, ...snapshot(), treeShape: levelOrderFromTree(tree), ...extra })
   let tree = root
   const markPruned = node => { if (!node) return; roles[node.id] = 'pruned'; markPruned(node.left); markPruned(node.right) }
-  push('start', L('build the tree'), 'Prune bottom-up: a node can only be judged after both its subtrees are known to contain a 1 or not.')
+  push('start', L('build the tree'), 'Prune bottom-up: a node can only be judged after both its subtrees are known to contain a 1 or not.', { pythonLine: 49 })
   function dfs(node) {
     if (!node) return false
     current = node.id
     roles[node.id] = 'active'
-    push('visit', L('enter node'), `Enter node ${node.value}: first resolve its left and right subtrees.`)
+    push('visit', L('enter node'), `Enter node ${node.value}: first resolve its left and right subtrees.`, { pythonLine: 40 })
     const left = dfs(node.left)
     const right = dfs(node.right)
     current = node.id
     roles[node.id] = 'active'
     const hasOne = node.value === 1 || left || right
-    if (!left && node.left) { markPruned(node.left); node.left = null; push('prune', L('cut off node.left'), `Left subtree of node ${node.value} has no 1: cut it off.`) }
-    if (!right && node.right) { markPruned(node.right); node.right = null; push('prune', L('cut off node.right'), `Right subtree of node ${node.value} has no 1: cut it off.`) }
+    if (!left && node.left) { markPruned(node.left); node.left = null; push('prune', L('cut off node.left'), `Left subtree of node ${node.value} has no 1: cut it off.`, { pythonLine: 45 }) }
+    if (!right && node.right) { markPruned(node.right); node.right = null; push('prune', L('cut off node.right'), `Right subtree of node ${node.value} has no 1: cut it off.`, { pythonLine: 47 }) }
     roles[node.id] = 'match'
     tags[node.id] = hasOne ? 'keep' : 'drop'
-    push('decide', L('return node.value is 1'), hasOne ? `Node ${node.value} is 1 or has a 1 below it, so its subtree stays.` : `Node ${node.value} is 0 with nothing useful below, so the parent will cut it.`)
+    push('decide', L('return node.value is 1'), hasOne ? `Node ${node.value} is 1 or has a 1 below it, so its subtree stays.` : `Node ${node.value} is 0 with nothing useful below, so the parent will cut it.`, { pythonLine: 48 })
     return hasOne
   }
   const keep = dfs(root)
   if (!keep) { markPruned(root); tree = null }
   current = null
-  push('done', L('return the level-order'), keep ? 'Root kept: the pruned tree is the result.' : 'No 1 anywhere, so the whole tree disappears.')
+  push('done', L('return the level-order'), keep ? 'Root kept: the pruned tree is the result.' : 'No 1 anywhere, so the whole tree disappears.', { pythonLine: 50 })
   return { input: arr, display, result: tree ? levelOrderFromTree(tree) : [], frames }
 }
 export const code = `build the tree from the level-order list, whose root is the first entry

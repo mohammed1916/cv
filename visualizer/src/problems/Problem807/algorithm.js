@@ -10,9 +10,9 @@ export function buildTrace(grid) {
   const colMax = grid[0].map((_, c) => Math.max(...grid.map(r => r[c])))
   const frames = []
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, rowMax: null, colMax: null, cell: null, total: 0, raised: grid.map(r => r.map(() => null)), ...extra })
-  push('start', L('read the grid'), 'The skyline seen from each side is the row / column maximum. A building can grow until it would change one of them.')
-  push('rows', L('set rowMax'), `Row maxima (skyline from east/west): [${rowMax.join(', ')}].`, { rowMax })
-  push('cols', L('set colMax'), `Column maxima (skyline from north/south): [${colMax.join(', ')}].`, { rowMax, colMax })
+  push('start', L('read the grid'), 'The skyline seen from each side is the row / column maximum. A building can grow until it would change one of them.', { pythonLine: 2 })
+  push('rows', L('set rowMax'), `Row maxima (skyline from east/west): [${rowMax.join(', ')}].`, { rowMax, pythonLine: 2 })
+  push('cols', L('set colMax'), `Column maxima (skyline from north/south): [${colMax.join(', ')}].`, { rowMax, colMax, pythonLine: 3 })
   let total = 0
   const raised = grid.map(r => r.map(() => null))
   for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
@@ -20,9 +20,9 @@ export function buildTrace(grid) {
     const gain = cap - grid[r][c]
     total += gain
     raised[r][c] = cap
-    frames.push({ phase: 'cell', activeLine: L('set cap'), rowMax, colMax, cell: [r, c], total, raised: raised.map(x => [...x]), message: `Cell (${r}, ${c}) = ${grid[r][c]}: cap = min(row ${rowMax[r]}, col ${colMax[c]}) = ${cap}, so add ${gain}. Total ${total}.` })
+    frames.push({ phase: 'cell', activeLine: L('set cap'), pythonLine: 7, rowMax, colMax, cell: [r, c], total, raised: raised.map(x => [...x]), message: `Cell (${r}, ${c}) = ${grid[r][c]}: cap = min(row ${rowMax[r]}, col ${colMax[c]}) = ${cap}, so add ${gain}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), rowMax, colMax, cell: null, total, raised, message: `Maximum total increase: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 8, rowMax, colMax, cell: null, total, raised, message: `Maximum total increase: ${total}.` })
   return { input: grid, result: total, frames }
 }
 export const code = `read the grid and let n be its number of rows

@@ -31,25 +31,25 @@ export function buildTrace({ grid, hits }) {
     phase, activeLine, message, g: g.map(r => [...r]), res: [...res], cell: null, hitIndex: -1,
     attached: g.map((row, r) => row.map((v, c) => v === 1 && find(r * C + c) === find(top))), ...extra,
   })
-  push('start', L('let R and C'), 'Falling bricks are hard to undo, so work backwards: remove every hit brick first, then add them back in reverse order.')
+  push('start', L('let R and C'), 'Falling bricks are hard to undo, so work backwards: remove every hit brick first, then add them back in reverse order.', { pythonLine: 2 })
   for (const [r, c] of hits) g[r][c] -= 1
-  push('remove', L('subtract 1'), 'Subtract 1 from each hit cell. A hit on a real brick becomes 0; a hit on an empty cell becomes -1 so it is not restored later.')
+  push('remove', L('subtract 1'), 'Subtract 1 from each hit cell. A hit on a real brick becomes 0; a hit on an empty cell becomes -1 so it is not restored later.', { pythonLine: 5 })
   for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) {
     if (g[r][c] !== 1) continue
     if (r === 0) union(r * C + c, top)
     if (r > 0 && g[r - 1][c] === 1) union(r * C + c, (r - 1) * C + c)
     if (c > 0 && g[r][c - 1] === 1) union(r * C + c, r * C + c - 1)
   }
-  push('build', L('for each cell (r, c)'), `Union all remaining bricks. Bricks sharing the ceiling node's set (green) are stable: ${size[find(top)] - 1} of them.`)
+  push('build', L('for each cell (r, c)'), `Union all remaining bricks. Bricks sharing the ceiling node's set (green) are stable: ${size[find(top)] - 1} of them.`, { pythonLine: 21 })
   for (let i = hits.length - 1; i >= 0; i--) {
     const [r, c] = hits[i]
     g[r][c] += 1
     if (g[r][c] !== 1) {
-      push('skip', L('set res[i] to 0'), `Hit ${i} at (${r}, ${c}) was an empty cell, so nothing fell: res[${i}] = 0.`, { cell: [r, c], hitIndex: i })
+      push('skip', L('set res[i] to 0'), `Hit ${i} at (${r}, ${c}) was an empty cell, so nothing fell: res[${i}] = 0.`, { cell: [r, c], hitIndex: i, pythonLine: 35 })
       continue
     }
     const before = size[find(top)]
-    push('restore', L('add 1 to g'), `Undo hit ${i}: put the brick back at (${r}, ${c}). Stable bricks before: ${before - 1}.`, { cell: [r, c], hitIndex: i })
+    push('restore', L('add 1 to g'), `Undo hit ${i}: put the brick back at (${r}, ${c}). Stable bricks before: ${before - 1}.`, { cell: [r, c], hitIndex: i, pythonLine: 33 })
     if (r === 0) union(r * C + c, top)
     for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
       const nr = r + dr, nc = c + dc
@@ -57,9 +57,9 @@ export function buildTrace({ grid, hits }) {
     }
     const after = size[find(top)]
     res[i] = Math.max(0, after - before - 1)
-    push('merge', L('set res[i] to max'), `Merge with neighbours: stable bricks now ${after - 1}. The brick itself does not count as fallen, so res[${i}] = max(0, ${after} - ${before} - 1) = ${res[i]}.`, { cell: [r, c], hitIndex: i })
+    push('merge', L('set res[i] to max'), `Merge with neighbours: stable bricks now ${after - 1}. The brick itself does not count as fallen, so res[${i}] = max(0, ${after} - ${before} - 1) = ${res[i]}.`, { cell: [r, c], hitIndex: i, pythonLine: 44 })
   }
-  push('done', L('return res'), `Bricks dropped per hit: [${res.join(', ')}].`)
+  push('done', L('return res'), `Bricks dropped per hit: [${res.join(', ')}].`, { pythonLine: 45 })
   return { input: { grid, hits }, result: res, frames }
 }
 export const code = `let R and C be the number of rows and columns, and top be the ceiling node R * C

@@ -11,24 +11,24 @@ export function buildTrace({ routes, source, target }) {
   const frames = []
   let queue = [], seenStops = [], seenBuses = [], current = null
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, queue: queue.map(q => [...q]), seenStops: [...seenStops], seenBuses: [...seenBuses], current, bus: -1, ...extra })
-  push('start', L('if source equals target'), source === target ? 'Source equals target: zero buses needed.' : `Treat each bus as one hop: BFS over stops from ${source}; the BFS depth is the number of buses taken.`)
+  push('start', L('if source equals target'), source === target ? 'Source equals target: zero buses needed.' : `Treat each bus as one hop: BFS over stops from ${source}; the BFS depth is the number of buses taken.`, { pythonLine: 2 })
   if (source === target) {
-    push('done', L('return 0'), 'Answer: 0.')
+    push('done', L('return 0'), 'Answer: 0.', { pythonLine: 3 })
     return { input: { routes, source, target }, result: 0, frames }
   }
   const stops = new Map()
   routes.forEach((route, i) => route.forEach(s => { if (!stops.has(s)) stops.set(s, []); stops.get(s).push(i) }))
-  push('index', L('set stops[s]'), `Index stops to the buses serving them: ${[...stops.entries()].map(([s, b]) => `${s}: [${b.join(',')}]`).join('; ')}.`)
+  push('index', L('set stops[s]'), `Index stops to the buses serving them: ${[...stops.entries()].map(([s, b]) => `${s}: [${b.join(',')}]`).join('; ')}.`, { pythonLine: 7 })
   queue = [[source, 0]]; seenStops = [source]
-  push('seed', L('set queue to'), `Start at stop ${source} having taken 0 buses.`)
+  push('seed', L('set queue to'), `Start at stop ${source} having taken 0 buses.`, { pythonLine: 8 })
   let result = -1
   outer: while (queue.length) {
     const [stop, buses] = queue.shift()
     current = stop
-    push('pop', L('remove the front pair'), `Pop stop ${stop} (reached with ${buses} bus${buses === 1 ? '' : 'es'}). Try every bus serving it.`)
+    push('pop', L('remove the front pair'), `Pop stop ${stop} (reached with ${buses} bus${buses === 1 ? '' : 'es'}). Try every bus serving it.`, { pythonLine: 11 })
     for (const b of stops.get(stop) || []) {
       if (seenBuses.includes(b)) {
-        push('skip', L('if b is in seen_buses'), `Bus ${b} was already boarded earlier (reaching its stops sooner or equally fast), so skip it.`, { bus: b })
+        push('skip', L('if b is in seen_buses'), `Bus ${b} was already boarded earlier (reaching its stops sooner or equally fast), so skip it.`, { bus: b, pythonLine: 14 })
         continue
       }
       seenBuses.push(b)
@@ -36,16 +36,16 @@ export function buildTrace({ routes, source, target }) {
       for (const nxt of routes[b]) {
         if (nxt === target) {
           result = buses + 1
-          push('found', L('if nxt equals target'), `Bus ${b} passes through target ${target}: ${buses + 1} bus${buses + 1 === 1 ? '' : 'es'}. BFS guarantees this is minimal.`, { bus: b })
+          push('found', L('if nxt equals target'), `Bus ${b} passes through target ${target}: ${buses + 1} bus${buses + 1 === 1 ? '' : 'es'}. BFS guarantees this is minimal.`, { bus: b, pythonLine: 17 })
           break outer
         }
         if (!seenStops.includes(nxt)) { seenStops.push(nxt); queue.push([nxt, buses + 1]); added.push(nxt) }
       }
-      push('board', L('add b to seen_buses'), `Board bus ${b} [${routes[b].join(', ')}]: ${added.length ? `new stops ${added.join(', ')} are reachable with ${buses + 1} buses` : 'it reaches no new stops'}.`, { bus: b })
+      push('board', L('add b to seen_buses'), `Board bus ${b} [${routes[b].join(', ')}]: ${added.length ? `new stops ${added.join(', ')} are reachable with ${buses + 1} buses` : 'it reaches no new stops'}.`, { bus: b, pythonLine: 15 })
     }
   }
   current = null
-  push('done', result === -1 ? L('return -1') : L('return buses + 1'), result === -1 ? 'The queue emptied without touching the target: return -1.' : `Answer: ${result}.`)
+  push('done', result === -1 ? L('return -1') : L('return buses + 1'), result === -1 ? 'The queue emptied without touching the target: return -1.' : `Answer: ${result}.`, { pythonLine: result === -1 ? 22 : 18 })
   return { input: { routes, source, target }, result, frames }
 }
 export const code = `if source equals target, return 0

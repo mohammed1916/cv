@@ -9,14 +9,14 @@ export function buildTrace(points) {
   const frames = []
   let best = 0, bestTriple = null
   const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, best: best / 2, bestTriple: bestTriple && [...bestTriple], triple: null, area: null, ...extra })
-  push('start', L('set best to 0'), 'With at most 10 points we can afford every triple; area comes from the shoelace formula.')
+  push('start', L('set best to 0'), 'With at most 10 points we can afford every triple; area comes from the shoelace formula.', { pythonLine: 2 })
   for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) for (let k = j + 1; k < n; k++) {
     const d = doubleArea(points[i], points[j], points[k])
     const improved = d > best
     if (improved) { best = d; bestTriple = [i, j, k] }
-    push(improved ? 'improve' : 'try', improved ? L('if area is greater') : L('set area to the shoelace'), `Points ${i}, ${j}, ${k}: area = |x1(y2-y3) + x2(y3-y1) + x3(y1-y2)| / 2 = ${d / 2}. ${improved ? 'New best.' : `Not above best ${(best) / 2}.`}`, { triple: [i, j, k], area: d / 2 })
+    push(improved ? 'improve' : 'try', improved ? L('if area is greater') : L('set area to the shoelace'), `Points ${i}, ${j}, ${k}: area = |x1(y2-y3) + x2(y3-y1) + x3(y1-y2)| / 2 = ${d / 2}. ${improved ? 'New best.' : `Not above best ${(best) / 2}.`}`, { triple: [i, j, k], area: d / 2, pythonLine: improved ? 10 : 9 })
   }
-  push('done', L('return best'), `Largest triangle area: ${best / 2}.`)
+  push('done', L('return best'), `Largest triangle area: ${best / 2}.`, { pythonLine: 11 })
   return { input: points, result: best / 2, frames }
 }
 export const code = `set best to 0
