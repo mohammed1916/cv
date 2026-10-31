@@ -24,7 +24,8 @@ export function buildTrace({ n, flights, src, dst, k }) {
   const best = new Array(n).fill(Infinity)
   best[src] = 0
   const fmt = h => h.slice(0, 12).map(([c, s, u]) => `$${c} @${u} (${s})`)
-  const mk = (phase, activeLine, message, extra = {}) => ({ phase, activeLine, message, heap: fmt(heap.data), heapState: heapView(heap, { title: 'Priority queue (root = cheapest; entries are $cost @city (flights used))' }).heap, more: Math.max(0, heap.size - 12), seen: seen.map(x => x === k + 2 ? '-' : x), cur: null, best: [...best], ops: [], ...extra })
+  const PYL = { 3: 8, 7: 12, 8: 14, 10: 10, 11: 17, 12: 18 }
+  const mk = (phase, activeLine, message, extra = {}) => ({ phase, activeLine, pythonLine: PYL[activeLine], message, heap: fmt(heap.data), heapState: heapView(heap, { title: 'Priority queue (root = cheapest; entries are $cost @city (flights used))' }).heap, more: Math.max(0, heap.size - 12), seen: seen.map(x => x === k + 2 ? '-' : x), cur: null, best: [...best], ops: [], ...extra })
   const frames = [mk('start', 3, `Push (cost 0, stops 0, city ${src}). Entries are (cost, edges used, city); the cheapest cost pops first. At most ${k + 1} flights are allowed.`)]
   let result = -1
   while (heap.size) {

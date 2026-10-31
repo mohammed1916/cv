@@ -9,7 +9,7 @@ export function parseInput(text) {
 export function buildTrace({ ghosts, target }) {
   const mine = Math.abs(target[0]) + Math.abs(target[1])
   const dists = []
-  const frames = [{ phase: 'start', activeLine: 1, current: -1, dists: [], mine, message: `You need ${mine} moves to reach [${target}] (|${target[0]}| + |${target[1]}|). A ghost that can arrive in the same time or sooner can simply wait there.` }]
+  const frames = [{ phase: 'start', activeLine: 1, pythonLine: 2, current: -1, dists: [], mine, message: `You need ${mine} moves to reach [${target}] (|${target[0]}| + |${target[1]}|). A ghost that can arrive in the same time or sooner can simply wait there.` }]
   let result = true
   for (let i = 0; i < ghosts.length; i++) {
     const [gx, gy] = ghosts[i]
@@ -17,12 +17,12 @@ export function buildTrace({ ghosts, target }) {
     dists.push(d)
     if (d <= mine) {
       result = false
-      frames.push({ phase: 'caught', activeLine: 4, current: i, dists: [...dists], mine, message: `Ghost ${i} at [${gx},${gy}] is ${d} away, which is at most your ${mine}: it reaches the target first (or at the same time) and blocks you.` })
+      frames.push({ phase: 'caught', activeLine: 4, pythonLine: 5, current: i, dists: [...dists], mine, message: `Ghost ${i} at [${gx},${gy}] is ${d} away, which is at most your ${mine}: it reaches the target first (or at the same time) and blocks you.` })
       break
     }
-    frames.push({ phase: 'safe', activeLine: 5, current: i, dists: [...dists], mine, message: `Ghost ${i} at [${gx},${gy}] needs ${d} moves, strictly more than your ${mine}: it cannot stop you.` })
+    frames.push({ phase: 'safe', activeLine: 5, pythonLine: 4, current: i, dists: [...dists], mine, message: `Ghost ${i} at [${gx},${gy}] needs ${d} moves, strictly more than your ${mine}: it cannot stop you.` })
   }
-  frames.push({ phase: 'done', activeLine: result ? 6 : 4, current: -1, dists: [...dists], mine, message: result ? 'No ghost is close enough: you can escape.' : 'A ghost can intercept: you cannot escape.' })
+  frames.push({ phase: 'done', activeLine: result ? 6 : 4, pythonLine: result ? 6 : 5, current: -1, dists: [...dists], mine, message: result ? 'No ghost is close enough: you can escape.' : 'A ghost can intercept: you cannot escape.' })
   return { input: { ghosts, target }, result, frames }
 }
 export const code = `set mine to |target x| + |target y|, your moves to the target

@@ -8,7 +8,7 @@ const NAMES = ['red', 'green', 'blue']
 
 export function buildTrace(color) {
   const parts = [1, 3, 5].map(i => parseInt(color.slice(i, i + 2), 16))
-  const frames = [{ phase: 'start', activeLine: L('split the color'), channel: null, value: null, digit: null, digits: [], message: `Split ${color} into red, green and blue. Each channel can only be a repeated hex digit, such as 11 or ee.` }]
+  const frames = [{ phase: 'start', activeLine: L('split the color'), pythonLine: 2, channel: null, value: null, digit: null, digits: [], message: `Split ${color} into red, green and blue. Each channel can only be a repeated hex digit, such as 11 or ee.` }]
   const digits = []
   parts.forEach((value, channel) => {
     // Shorthand values are 17 * d for d = 0..15; the nearest one wins (no two are equally close for integer channels).
@@ -17,10 +17,10 @@ export function buildTrace(color) {
       if (Math.abs(value - d * 17) < Math.abs(value - digit * 17)) digit = d
     }
     digits.push(digit)
-    frames.push({ phase: 'channel', activeLine: L('find the digit'), channel, value, digit, digits: [...digits], message: `${NAMES[channel]} ${value} is nearest to ${digit * 17}, written ${digit.toString(16)}${digit.toString(16)}.` })
+    frames.push({ phase: 'channel', activeLine: L('find the digit'), pythonLine: 5, channel, value, digit, digits: [...digits], message: `${NAMES[channel]} ${value} is nearest to ${digit * 17}, written ${digit.toString(16)}${digit.toString(16)}.` })
   })
   const result = '#' + digits.map(d => d.toString(16) + d.toString(16)).join('')
-  frames.push({ phase: 'done', activeLine: L('return'), channel: null, value: null, digit: null, digits: [...digits], message: `Result: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return'), pythonLine: 7, channel: null, value: null, digit: null, digits: [...digits], message: `Result: ${result}.` })
   return { input: color, result, frames }
 }
 

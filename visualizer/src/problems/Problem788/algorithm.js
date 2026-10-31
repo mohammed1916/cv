@@ -5,7 +5,7 @@ export function parseInput(text) {
 }
 export function buildTrace(n) {
   const status = [] // 'good' | 'same' | 'invalid'
-  const frames = [{ phase: 'start', activeLine: 1, x: 0, count: 0, digits: '', message: 'Examine 1..n. A number is good if every digit rotates to a digit and at least one digit changes.' }]
+  const frames = [{ phase: 'start', activeLine: 1, pythonLine: 2, x: 0, count: 0, digits: '', message: 'Examine 1..n. A number is good if every digit rotates to a digit and at least one digit changes.' }]
   let count = 0
   for (let x = 1; x <= n; x++) {
     let valid = true, changed = false
@@ -20,9 +20,9 @@ export function buildTrace(n) {
     const why = kind === 'invalid' ? `it has a digit from 3, 4, 7, which becomes invalid when rotated`
       : kind === 'good' ? `all digits rotate and at least one of 2, 5, 6, 9 changes it`
       : `every digit is 0, 1, or 8, so it rotates to itself`
-    frames.push({ phase: kind, activeLine: kind === 'good' ? 8 : kind === 'invalid' ? 5 : 7, x, count, digits, message: `${x}: ${why}${kind === 'good' ? ' (counted).' : ' (not counted).'}` })
+    frames.push({ phase: kind, activeLine: kind === 'good' ? 8 : kind === 'invalid' ? 5 : 7, pythonLine: kind === 'good' ? 13 : kind === 'invalid' ? 8 : 12, x, count, digits, message: `${x}: ${why}${kind === 'good' ? ' (counted).' : ' (not counted).'}` })
   }
-  frames.push({ phase: 'done', activeLine: 9, x: n, count, digits: '', message: `${count} good numbers in 1..${n}.` })
+  frames.push({ phase: 'done', activeLine: 9, pythonLine: 14, x: n, count, digits: '', message: `${count} good numbers in 1..${n}.` })
   return { input: n, result: count, status, frames }
 }
 export const code = `set count to 0

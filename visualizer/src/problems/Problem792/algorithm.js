@@ -11,23 +11,23 @@ export function buildTrace({ s, words }) {
   const show = () => [...waiting.entries()].filter(([, l]) => l.length).map(([ch, l]) => `${ch}: ${l.map(([w, i]) => `${w}@${i}`).join(' ')}`)
   words.forEach(w => add(w[0], w, 0))
   let count = 0
-  const frames = [{ phase: 'start', activeLine: 2, pos: -1, count, buckets: show(), message: 'Every word waits for its first letter. A bucket maps a letter to the words (with progress index) waiting for it.' }]
+  const frames = [{ phase: 'start', activeLine: 2, pythonLine: 4, pos: -1, count, buckets: show(), message: 'Every word waits for its first letter. A bucket maps a letter to the words (with progress index) waiting for it.' }]
   for (let p = 0; p < s.length; p++) {
     const ch = s[p]
     const bucket = waiting.get(ch) || []
     waiting.delete(ch)
-    frames.push({ phase: 'scan', activeLine: 4, pos: p, count, buckets: [`took ${ch}: ${bucket.map(([w, i]) => `${w}@${i}`).join(' ') || '(none waiting)'}`, ...show()], message: bucket.length ? `Read "${ch}" at index ${p}: ${bucket.length} word(s) were waiting for it.` : `Read "${ch}" at index ${p}: no word is waiting for it, nothing moves.` })
+    frames.push({ phase: 'scan', activeLine: 4, pythonLine: 7, pos: p, count, buckets: [`took ${ch}: ${bucket.map(([w, i]) => `${w}@${i}`).join(' ') || '(none waiting)'}`, ...show()], message: bucket.length ? `Read "${ch}" at index ${p}: ${bucket.length} word(s) were waiting for it.` : `Read "${ch}" at index ${p}: no word is waiting for it, nothing moves.` })
     for (const [w, i] of bucket) {
       if (i + 1 === w.length) {
         count++
-        frames.push({ phase: 'complete', activeLine: 7, pos: p, count, buckets: show(), message: `"${w}" matched its last letter: it is a subsequence. Count = ${count}.` })
+        frames.push({ phase: 'complete', activeLine: 7, pythonLine: 10, pos: p, count, buckets: show(), message: `"${w}" matched its last letter: it is a subsequence. Count = ${count}.` })
       } else {
         add(w[i + 1], w, i + 1)
-        frames.push({ phase: 'advance', activeLine: 8, pos: p, count, buckets: show(), message: `"${w}" matched letter ${i + 1} of ${w.length}; it now waits for "${w[i + 1]}".` })
+        frames.push({ phase: 'advance', activeLine: 8, pythonLine: 12, pos: p, count, buckets: show(), message: `"${w}" matched letter ${i + 1} of ${w.length}; it now waits for "${w[i + 1]}".` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: 9, pos: s.length, count, buckets: show(), message: `${count} word(s) are subsequences of s.` })
+  frames.push({ phase: 'done', activeLine: 9, pythonLine: 13, pos: s.length, count, buckets: show(), message: `${count} word(s) are subsequences of s.` })
   return { input: { s, words }, result: count, frames }
 }
 export const code = `set count to 0
