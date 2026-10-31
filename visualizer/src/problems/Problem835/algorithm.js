@@ -13,17 +13,17 @@ export function buildTrace({ A, B }) {
   const votes = new Map()
   const pairs = []
   let best = 0, bestKey = null
-  const frames = [{ phase: 'start', pair: -1, best: 0, bestKey: null, activeLine: 4, message: `A has ${onesA.length} one(s), B has ${onesB.length}. Sliding A by (dr, dc) overlaps a pair of 1s exactly when their offset equals that shift.` }]
+  const frames = [{ phase: 'start', pair: -1, best: 0, bestKey: null, pythonLine: 5, activeLine: 4, message: `A has ${onesA.length} one(s), B has ${onesB.length}. Sliding A by (dr, dc) overlaps a pair of 1s exactly when their offset equals that shift.` }]
   for (const [ai, aj] of onesA) for (const [bi, bj] of onesB) {
     const key = `${bi - ai},${bj - aj}`
     const c = (votes.get(key) || 0) + 1
     votes.set(key, c)
     pairs.push(key)
     if (c > best) { best = c; bestKey = key }
-    frames.push({ phase: 'vote', pair: pairs.length - 1, a: [ai, aj], b: [bi, bj], key, votesForKey: c, best, bestKey, activeLine: 9,
+    frames.push({ phase: 'vote', pair: pairs.length - 1, a: [ai, aj], b: [bi, bj], key, votesForKey: c, best, bestKey, pythonLine: 9, activeLine: 9,
       message: `A's 1 at (${ai},${aj}) and B's 1 at (${bi},${bj}) agree on shift (${key}). That shift now has ${c} vote(s). Best: ${best}.` })
   }
-  frames.push({ phase: 'done', pair: pairs.length - 1, best, bestKey, activeLine: 10, message: best ? `Largest overlap is ${best}, achieved by shifting A by (${bestKey}).` : 'No pair of 1s exists, so the overlap is 0.' })
+  frames.push({ phase: 'done', pair: pairs.length - 1, best, bestKey, pythonLine: 10, activeLine: 10, message: best ? `Largest overlap is ${best}, achieved by shifting A by (${bestKey}).` : 'No pair of 1s exists, so the overlap is 0.' })
   return { input: { A, B }, pairs, result: best, frames }
 }
 export const code = `function largestOverlap(A, B)

@@ -7,15 +7,15 @@ export function buildTrace(arr) {
   const n = arr.length
   const up = new Array(n).fill(0), down = new Array(n).fill(0)
   const frames = []
-  const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, up: [...up], down: [...down], index: -1, best: extra.best ?? 0, ...extra })
-  push('start', 3, 'up[i] = length of the strictly increasing run ending at i (steps taken uphill); down[i] = steps downhill starting at i.')
+  const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({ phase, activeLine, pythonLine, message, up: [...up], down: [...down], index: -1, best: extra.best ?? 0, ...extra })
+  push('start', 3, 4, 'up[i] = length of the strictly increasing run ending at i (steps taken uphill); down[i] = steps downhill starting at i.')
   for (let i = 1; i < n; i++) {
-    if (arr[i] > arr[i - 1]) { up[i] = up[i - 1] + 1; push('up', 5, `${arr[i - 1]} is below ${arr[i]}: still climbing, up[${i}] = up[${i - 1}] + 1 = ${up[i]}.`, { index: i }) }
-    else push('up', 6, `${arr[i - 1]} is not below ${arr[i]}: the climb breaks, up[${i}] stays 0.`, { index: i })
+    if (arr[i] > arr[i - 1]) { up[i] = up[i - 1] + 1; push('up', 5, 7, `${arr[i - 1]} is below ${arr[i]}: still climbing, up[${i}] = up[${i - 1}] + 1 = ${up[i]}.`, { index: i }) }
+    else push('up', 6, 6, `${arr[i - 1]} is not below ${arr[i]}: the climb breaks, up[${i}] stays 0.`, { index: i })
   }
   for (let i = n - 2; i >= 0; i--) {
-    if (arr[i] > arr[i + 1]) { down[i] = down[i + 1] + 1; push('down', 8, `${arr[i]} is above ${arr[i + 1]}: descending, down[${i}] = down[${i + 1}] + 1 = ${down[i]}.`, { index: i }) }
-    else push('down', 9, `${arr[i]} is not above ${arr[i + 1]}: the descent breaks, down[${i}] stays 0.`, { index: i })
+    if (arr[i] > arr[i + 1]) { down[i] = down[i + 1] + 1; push('down', 8, 10, `${arr[i]} is above ${arr[i + 1]}: descending, down[${i}] = down[${i + 1}] + 1 = ${down[i]}.`, { index: i }) }
+    else push('down', 9, 9, `${arr[i]} is not above ${arr[i + 1]}: the descent breaks, down[${i}] stays 0.`, { index: i })
   }
   let best = 0
   for (let i = 0; i < n; i++) {
@@ -23,10 +23,10 @@ export function buildTrace(arr) {
       const len = up[i] + down[i] + 1
       const improved = len > best
       best = Math.max(best, len)
-      push('peak', 13, `Index ${i} has a climb of ${up[i]} and a descent of ${down[i]}: a mountain of length ${up[i]} + ${down[i]} + 1 = ${len}${improved ? ', a new best' : ''}.`, { index: i, best })
-    } else push('skip', 14, `Index ${i} is not a peak (up = ${up[i]}, down = ${down[i]}): a peak needs both a climb and a descent.`, { index: i, best })
+      push('peak', 13, 14, `Index ${i} has a climb of ${up[i]} and a descent of ${down[i]}: a mountain of length ${up[i]} + ${down[i]} + 1 = ${len}${improved ? ', a new best' : ''}.`, { index: i, best })
+    } else push('skip', 14, 13, `Index ${i} is not a peak (up = ${up[i]}, down = ${down[i]}): a peak needs both a climb and a descent.`, { index: i, best })
   }
-  push('done', 15, `The longest mountain has length ${best}${best ? '' : ' (no mountain exists)'}.`, { best })
+  push('done', 15, 15, `The longest mountain has length ${best}${best ? '' : ' (no mountain exists)'}.`, { best })
   return { input: [...arr], result: best, frames }
 }
 export const code = `function longestMountain(arr)

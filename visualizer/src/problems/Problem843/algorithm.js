@@ -23,25 +23,25 @@ export function worstBucket(word, cand) { return Math.max(...Object.values(bucke
 export function buildTrace({ words, secret, allowed }) {
   let cand = [...words]
   const frames = []
-  const push = (phase, activeLine, message, extra = {}) => frames.push({ phase, activeLine, message, cand: [...cand], guesses: extra.guesses ?? 0, guess: null, ...extra })
-  push('start', 2, `${words.length} candidate words; the hidden secret is one of them. We may ask the master at most ${allowed} times.`)
+  const push = (phase, activeLine, pythonLine, message, extra = {}) => frames.push({ phase, activeLine, pythonLine, message, cand: [...cand], guesses: extra.guesses ?? 0, guess: null, ...extra })
+  push('start', 2, 5, `${words.length} candidate words; the hidden secret is one of them. We may ask the master at most ${allowed} times.`)
   let guesses = 0, solved = false
   while (cand.length && guesses < allowed) {
     let guess = cand[0], best = Infinity, worst = []
     for (const w of cand) { const wb = worstBucket(w, cand); if (wb < best) { best = wb; guess = w } worst.push(wb) }
     guesses++
-    push('choose', 7, `Minimax choice: for each candidate, count how many candidates share each match score with it; "${guess}" has the smallest largest-bucket (${best}), so it splits the list most evenly.`, { guesses, guess, worst })
+    push('choose', 7, 16, `Minimax choice: for each candidate, count how many candidates share each match score with it; "${guess}" has the smallest largest-bucket (${best}), so it splits the list most evenly.`, { guesses, guess, worst })
     const m = matchCount(guess, secret)
     if (m === guess.length) {
       solved = true
-      push('ask', 10, `Master says ${m} of ${guess.length} letters match: "${guess}" is the secret. Solved in ${guesses} guess${guesses === 1 ? '' : 'es'}.`, { guesses, guess, m })
+      push('ask', 10, 20, `Master says ${m} of ${guess.length} letters match: "${guess}" is the secret. Solved in ${guesses} guess${guesses === 1 ? '' : 'es'}.`, { guesses, guess, m })
       break
     }
     const before = cand.length
     cand = cand.filter(w => matchCount(w, guess) === m)
-    push('ask', 11, `Master says ${m} of ${guess.length} match. Keep only words with exactly ${m} matches against "${guess}": ${before} candidates become ${cand.length}.`, { guesses, guess, m, removed: before - cand.length, kept: [...cand] })
+    push('ask', 11, 21, `Master says ${m} of ${guess.length} match. Keep only words with exactly ${m} matches against "${guess}": ${before} candidates become ${cand.length}.`, { guesses, guess, m, removed: before - cand.length, kept: [...cand] })
   }
-  push('done', 12, solved ? `Secret "${secret}" found with ${guesses} of ${allowed} allowed guesses.` : `Out of guesses or candidates after ${guesses} guesses: the secret was not identified.`, { guesses })
+  push('done', 12, solved ? 20 : 22, solved ? `Secret "${secret}" found with ${guesses} of ${allowed} allowed guesses.` : `Out of guesses or candidates after ${guesses} guesses: the secret was not identified.`, { guesses })
   return { input: { words, secret, allowed }, result: solved, frames }
 }
 export const code = `function findSecretWord(words, secret, allowedGuesses)

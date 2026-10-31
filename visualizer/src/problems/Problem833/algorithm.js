@@ -16,18 +16,18 @@ export function parseInput(text) {
 export function buildTrace({ s, indices, sources, targets }) {
   const ops = indices.map((index, id) => ({ id, index, source: sources[id], target: targets[id] })).sort((a, b) => b.index - a.index)
   let cur = s
-  const frames = [{ phase: 'start', cur, op: -1, activeLine: 3, message: `Process ${ops.length} operation(s) from the largest index down; edits to the right never shift positions on the left.` }]
+  const frames = [{ phase: 'start', cur, op: -1, pythonLine: 2, activeLine: 3, message: `Process ${ops.length} operation(s) from the largest index down; edits to the right never shift positions on the left.` }]
   ops.forEach(op => {
     const match = cur.startsWith(op.source, op.index)
     if (match) {
       const before = cur
       cur = cur.slice(0, op.index) + op.target + cur.slice(op.index + op.source.length)
-      frames.push({ phase: 'replace', cur, before, op, match, activeLine: 6, message: `At index ${op.index} the text really is "${op.source}": replace it with "${op.target}" giving "${cur}".` })
+      frames.push({ phase: 'replace', cur, before, op, match, pythonLine: 5, activeLine: 6, message: `At index ${op.index} the text really is "${op.source}": replace it with "${op.target}" giving "${cur}".` })
     } else {
-      frames.push({ phase: 'skip', cur, before: cur, op, match, activeLine: 7, message: `At index ${op.index} the text is "${cur.substr(op.index, op.source.length)}", not "${op.source}": skip this operation.` })
+      frames.push({ phase: 'skip', cur, before: cur, op, match, pythonLine: 4, activeLine: 7, message: `At index ${op.index} the text is "${cur.substr(op.index, op.source.length)}", not "${op.source}": skip this operation.` })
     }
   })
-  frames.push({ phase: 'done', cur, op: -1, activeLine: 8, message: `Final string: "${cur}".` })
+  frames.push({ phase: 'done', cur, op: -1, pythonLine: 6, activeLine: 8, message: `Final string: "${cur}".` })
   return { input: { s, indices, sources, targets }, ops, result: cur, frames }
 }
 export const code = `function findReplaceString(s, indices, sources, targets)

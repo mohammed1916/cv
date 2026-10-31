@@ -7,21 +7,21 @@ export function parseInput(text) {
 }
 export function buildTrace(grid) {
   const R = grid.length, C = grid[0].length
-  const frames = [{ phase: 'start', activeLine: 2, r: -1, c: -1, count: 0, found: [], message: `Grid is ${R}x${C}. Every 3x3 window with top-left (r, c) where r is at most ${R - 3} and c is at most ${C - 3} is a candidate.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: 2, r: -1, c: -1, count: 0, found: [], message: `Grid is ${R}x${C}. Every 3x3 window with top-left (r, c) where r is at most ${R - 3} and c is at most ${C - 3} is a candidate.` }]
   let count = 0
   const found = []
   for (let r = 0; r + 2 < R; r++) for (let c = 0; c + 2 < C; c++) {
     const cells = []
     for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) cells.push(grid[r + i][c + j])
-    const snap = (phase, line, message, ok) => frames.push({ phase, activeLine: line, r, c, count, found: [...found], ok, cells, message })
-    snap('window', 4, `Examine the window with top-left (${r}, ${c}).`)
+    const snap = (phase, line, py, message, ok) => frames.push({ phase, activeLine: line, pythonLine: py, r, c, count, found: [...found], ok, cells, message })
+    snap('window', 4, 5, `Examine the window with top-left (${r}, ${c}).`)
     if (grid[r + 1][c + 1] !== 5) {
-      snap('reject', 5, `Centre is ${grid[r + 1][c + 1]}, not 5. In any 1-9 magic square the centre must be 5 (it lies on 4 lines summing to 15), so reject.`, false)
+      snap('reject', 5, 7, `Centre is ${grid[r + 1][c + 1]}, not 5. In any 1-9 magic square the centre must be 5 (it lies on 4 lines summing to 15), so reject.`, false)
       continue
     }
     const sorted = [...cells].sort((a, b) => a - b)
     if (sorted.some((v, i) => v !== i + 1)) {
-      snap('reject', 7, `Cells sorted are [${sorted.join(', ')}], not exactly 1..9, so reject.`, false)
+      snap('reject', 7, 10, `Cells sorted are [${sorted.join(', ')}], not exactly 1..9, so reject.`, false)
       continue
     }
     const rows = [0, 1, 2].map(i => cells[i * 3] + cells[i * 3 + 1] + cells[i * 3 + 2])
@@ -30,12 +30,12 @@ export function buildTrace(grid) {
     const sums = [...rows, ...cols, ...diags]
     if (sums.every(x => x === 15)) {
       count++; found.push([r, c])
-      snap('accept', 9, `Rows ${rows}, columns ${cols}, diagonals ${diags}: all equal 15. Magic square number ${count}.`, true)
+      snap('accept', 9, 15, `Rows ${rows}, columns ${cols}, diagonals ${diags}: all equal 15. Magic square number ${count}.`, true)
     } else {
-      snap('reject', 9, `Sums rows ${rows}, columns ${cols}, diagonals ${diags} are not all 15, so reject.`, false)
+      snap('reject', 9, 14, `Sums rows ${rows}, columns ${cols}, diagonals ${diags} are not all 15, so reject.`, false)
     }
   }
-  frames.push({ phase: 'done', activeLine: 10, r: -1, c: -1, count, found: [...found], message: `Found ${count} magic square${count === 1 ? '' : 's'}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: 10, r: -1, c: -1, count, found: [...found], message: `Found ${count} magic square${count === 1 ? '' : 's'}.` })
   return { input: grid.map(r => [...r]), result: count, frames }
 }
 export const code = `function numMagicSquaresInside(grid)

@@ -7,24 +7,24 @@ export function parseInput(text) {
   return s
 }
 export function buildTrace(s) {
-  const frames = [{ phase: 'start', activeLine: 2, partial: '', message: `Decide whether "${s}" is an email or a phone number: only emails contain an @.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: 2, partial: '', message: `Decide whether "${s}" is an email or a phone number: only emails contain an @.` }]
   let result
   if (s.includes('@')) {
     const lower = s.toLowerCase()
-    frames.push({ phase: 'email', activeLine: 3, partial: lower, message: `Email: lowercase everything: "${lower}".` })
+    frames.push({ phase: 'email', pythonLine: 3, activeLine: 3, partial: lower, message: `Email: lowercase everything: "${lower}".` })
     const [name, domain] = lower.split('@')
     result = name[0] + '*****' + name[name.length - 1] + '@' + domain
-    frames.push({ phase: 'mask', activeLine: 5, partial: result, message: `Keep the first and last letter of "${name}" around five stars and keep the domain: "${result}".` })
+    frames.push({ phase: 'mask', pythonLine: 5, activeLine: 5, partial: result, message: `Keep the first and last letter of "${name}" around five stars and keep the domain: "${result}".` })
   } else {
     const digits = [...s].filter(c => c >= '0' && c <= '9')
-    frames.push({ phase: 'phone', activeLine: 7, partial: digits.join(''), message: `Phone: drop separators and keep the ${digits.length} digits.` })
+    frames.push({ phase: 'phone', pythonLine: 6, activeLine: 7, partial: digits.join(''), message: `Phone: drop separators and keep the ${digits.length} digits.` })
     const local = '***-***-' + digits.slice(-4).join('')
-    frames.push({ phase: 'mask', activeLine: 8, partial: local, message: `The last four digits stay visible; the rest of the local number becomes "${local}".` })
+    frames.push({ phase: 'mask', pythonLine: 7, activeLine: 8, partial: local, message: `The last four digits stay visible; the rest of the local number becomes "${local}".` })
     result = digits.length === 10 ? local : '+' + '*'.repeat(digits.length - 10) + '-' + local
-    frames.push({ phase: 'country', activeLine: digits.length === 10 ? 9 : 10, partial: result,
+    frames.push({ phase: 'country', pythonLine: digits.length === 10 ? 9 : 10, activeLine: digits.length === 10 ? 9 : 10, partial: result,
       message: digits.length === 10 ? 'Exactly 10 digits means no country code: use the local mask.' : `${digits.length - 10} extra leading digit(s) form the country code: prefix "+${'*'.repeat(digits.length - 10)}-".` })
   }
-  frames.push({ phase: 'done', activeLine: result.startsWith('+') || result.includes('@') ? (result.includes('@') ? 5 : 10) : 9, partial: result, message: `Masked result: ${result}` })
+  frames.push({ phase: 'done', pythonLine: result.includes('@') ? 5 : result.startsWith('+') ? 10 : 9, activeLine: result.startsWith('+') || result.includes('@') ? (result.includes('@') ? 5 : 10) : 9, partial: result, message: `Masked result: ${result}` })
   return { input: s, result, frames }
 }
 export const code = `function maskPII(s)

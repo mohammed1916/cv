@@ -10,24 +10,24 @@ export function buildTrace(rooms) {
   const n = rooms.length
   const visited = new Array(n).fill(false)
   const frames = []
-  const push = (phase, activeLine, message, extra) => frames.push({ phase, activeLine, message, visited: [...visited], stack: [], current: -1, ...extra })
+  const push = (phase, activeLine, pythonLine, message, extra) => frames.push({ phase, activeLine, pythonLine, message, visited: [...visited], stack: [], current: -1, ...extra })
   const stack = [0]
   visited[0] = true
-  push('start', 4, 'Room 0 is always unlocked. Mark it visited and put it on the stack of rooms to explore.', { stack: [...stack] })
+  push('start', 4, 5, 'Room 0 is always unlocked. Mark it visited and put it on the stack of rooms to explore.', { stack: [...stack] })
   while (stack.length) {
     const room = stack.pop()
-    push('visit', 6, `Pop room ${room} and walk in. It holds keys [${rooms[room].join(', ')}].`, { stack: [...stack], current: room })
+    push('visit', 6, 7, `Pop room ${room} and walk in. It holds keys [${rooms[room].join(', ')}].`, { stack: [...stack], current: room })
     for (const key of rooms[room]) {
       if (!visited[key]) {
         visited[key] = true; stack.push(key)
-        push('key', 9, `Key ${key} opens room ${key}, which was still locked: mark it visited and push it.`, { stack: [...stack], current: room, key })
+        push('key', 9, 10, `Key ${key} opens room ${key}, which was still locked: mark it visited and push it.`, { stack: [...stack], current: room, key })
       } else {
-        push('skip', 10, `Key ${key} opens room ${key}, which is already visited: ignore it.`, { stack: [...stack], current: room, key })
+        push('skip', 10, 9, `Key ${key} opens room ${key}, which is already visited: ignore it.`, { stack: [...stack], current: room, key })
       }
     }
   }
   const ok = visited.every(Boolean)
-  push('done', 11, ok ? `All ${n} rooms are visited: return True.` : `Rooms ${visited.map((v, i) => (v ? -1 : i)).filter(i => i >= 0).join(', ')} stay locked: return False.`, {})
+  push('done', 11, 12, ok ? `All ${n} rooms are visited: return True.` : `Rooms ${visited.map((v, i) => (v ? -1 : i)).filter(i => i >= 0).join(', ')} stay locked: return False.`, {})
   return { input: rooms.map(r => [...r]), result: ok, frames }
 }
 export const code = `function canVisitAllRooms(rooms)

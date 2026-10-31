@@ -18,28 +18,28 @@ export function buildTrace({ n, edges }) {
   const build = (u, p) => ({ id: u, children: g[u].filter(v => v !== p).map(v => build(v, u)) })
   const root = build(0, -1)
   const snap = (extra) => ({ count: [...count], res: [...res], ...extra })
-  const frames = [snap({ phase: 'start', u: 0, v: -1, stage: 'up', activeLine: 3, message: 'Root the tree at 0. count[u] is the subtree size; res[u] will first be the sum of distances to nodes inside u\'s subtree.' })]
+  const frames = [snap({ phase: 'start', u: 0, v: -1, stage: 'up', pythonLine: 7, activeLine: 3, message: 'Root the tree at 0. count[u] is the subtree size; res[u] will first be the sum of distances to nodes inside u\'s subtree.' })]
   const post = (u, p) => {
     for (const v of g[u]) {
       if (v === p) continue
       post(v, u)
       count[u] += count[v]
       res[u] += res[v] + count[v]
-      frames.push(snap({ phase: 'up', u, v, stage: 'up', activeLine: 8, message: `Merge child ${v} into ${u}: its ${count[v]} node(s) are each one edge farther, so res[${u}] += res[${v}] + count[${v}]. Now count[${u}] = ${count[u]}, res[${u}] = ${res[u]}.` }))
+      frames.push(snap({ phase: 'up', u, v, stage: 'up', pythonLine: 13, activeLine: 8, message: `Merge child ${v} into ${u}: its ${count[v]} node(s) are each one edge farther, so res[${u}] += res[${v}] + count[${v}]. Now count[${u}] = ${count[u]}, res[${u}] = ${res[u]}.` }))
     }
   }
   post(0, -1)
-  frames.push(snap({ phase: 'root', u: 0, v: -1, stage: 'down', activeLine: 9, message: `The root sees every node inside its subtree, so res[0] = ${res[0]} is already final.` }))
+  frames.push(snap({ phase: 'root', u: 0, v: -1, stage: 'down', pythonLine: 19, activeLine: 9, message: `The root sees every node inside its subtree, so res[0] = ${res[0]} is already final.` }))
   const pre = (u, p) => {
     for (const v of g[u]) {
       if (v === p) continue
       res[v] = res[u] - count[v] + n - count[v]
-      frames.push(snap({ phase: 'down', u, v, stage: 'down', activeLine: 11, message: `Move the root from ${u} to ${v}: the ${count[v]} node(s) under ${v} get 1 closer, the other ${n - count[v]} get 1 farther. res[${v}] = res[${u}] - ${count[v]} + ${n - count[v]} = ${res[v]}.` }))
+      frames.push(snap({ phase: 'down', u, v, stage: 'down', pythonLine: 17, activeLine: 11, message: `Move the root from ${u} to ${v}: the ${count[v]} node(s) under ${v} get 1 closer, the other ${n - count[v]} get 1 farther. res[${v}] = res[${u}] - ${count[v]} + ${n - count[v]} = ${res[v]}.` }))
       pre(v, u)
     }
   }
   pre(0, -1)
-  frames.push(snap({ phase: 'done', u: -1, v: -1, stage: 'down', activeLine: 13, message: `Answer: [${res.join(', ')}].` }))
+  frames.push(snap({ phase: 'done', u: -1, v: -1, stage: 'down', pythonLine: 21, activeLine: 13, message: `Answer: [${res.join(', ')}].` }))
   return { input: { n, edges }, root, result: [...res], frames }
 }
 export const code = `function sumOfDistancesInTree(n, edges)

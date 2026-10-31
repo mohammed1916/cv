@@ -6,7 +6,7 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const n = s.length
   const force = new Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: 3, index: -1, f: 0, force: [...force], message: `Each domino gets a signed force: positive means falling right, negative means falling left. Strength n = ${n} at an initial push, decaying by 1 per cell.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: 3, index: -1, f: 0, force: [...force], message: `Each domino gets a signed force: positive means falling right, negative means falling left. Strength n = ${n} at an initial push, decaying by 1 per cell.` }]
   let f = 0
   for (let i = 0; i < n; i++) {
     let why
@@ -14,7 +14,7 @@ export function buildTrace(s) {
     else if (s[i] === 'L') { f = 0; why = "'L' blocks any rightward force, so it resets to 0." }
     else { f = Math.max(f - 1, 0); why = `Standing domino: the rightward force decays to ${f}.` }
     force[i] += f
-    frames.push({ phase: 'right', activeLine: 9, index: i, f, force: [...force], message: `Left-to-right at ${i}: ${why} Force[${i}] = ${force[i]}.` })
+    frames.push({ phase: 'right', pythonLine: s[i] === 'R' ? 7 : s[i] === 'L' ? 9 : 11, activeLine: 9, index: i, f, force: [...force], message: `Left-to-right at ${i}: ${why} Force[${i}] = ${force[i]}.` })
   }
   f = 0
   for (let i = n - 1; i >= 0; i--) {
@@ -23,10 +23,10 @@ export function buildTrace(s) {
     else if (s[i] === 'R') { f = 0; why = "'R' blocks any leftward force, so it resets to 0." }
     else { f = Math.max(f - 1, 0); why = `Standing domino: the leftward force decays to ${f}.` }
     force[i] -= f
-    frames.push({ phase: 'left', activeLine: 15, index: i, f, force: [...force], message: `Right-to-left at ${i}: ${why} Net force[${i}] = ${force[i]}.` })
+    frames.push({ phase: 'left', pythonLine: s[i] === 'L' ? 16 : s[i] === 'R' ? 18 : 20, activeLine: 15, index: i, f, force: [...force], message: `Right-to-left at ${i}: ${why} Net force[${i}] = ${force[i]}.` })
   }
   const out = force.map(x => (x > 0 ? 'R' : x < 0 ? 'L' : '.')).join('')
-  frames.push({ phase: 'done', activeLine: 16, index: -1, f: 0, force: [...force], message: `Positive force falls R, negative falls L, zero stays upright (balanced or never touched): "${out}".` })
+  frames.push({ phase: 'done', pythonLine: 22, activeLine: 16, index: -1, f: 0, force: [...force], message: `Positive force falls R, negative falls L, zero stays upright (balanced or never touched): "${out}".` })
   return { input: s, result: out, frames }
 }
 export const code = `function pushDominoes(dominoes)
