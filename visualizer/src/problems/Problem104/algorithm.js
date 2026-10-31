@@ -49,8 +49,18 @@ export function buildTrace(input) {
     positions: story.positions,
     edges: story.edges,
     nodes: story.nodes,
+    pythonLine: pythonLineFor(frame),
   }))
   return { input: arr, result: story.steps.at(-1).total, frames }
+}
+
+// Python line (1-based index into `python` above) that each frame executes.
+function pythonLineFor(frame) {
+  // frame.activeLine here is the legacy line: 4 = call left, 5 = call right, 6 = return, 3 = done
+  if (frame.activeLine === 4) return 28   // left = depth(node.left)
+  if (frame.activeLine === 5) return 29   // right = depth(node.right)
+  if (frame.activeLine === 6) return frame.message.startsWith('Maximum depth') ? 31 : 30 // return 1 + max(...) / return depth(build(root))
+  return 31                               // return depth(build(root))
 }
 
 export const code = `maximum depth (node):

@@ -17,7 +17,7 @@ export function buildTrace({ k, ops }) {
   const slots = Array(k).fill(null)
   let head = 0, size = 0
   const results = []
-  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('create a ring'), message: `Create a ring buffer with ${k} slots.` }]
+  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('create a ring'), pythonLine: 2, message: `Create a ring buffer with ${k} slots.` }]
   ops.forEach(([name, value], op) => {
     let returned
     let phase = 'query'
@@ -35,9 +35,10 @@ export function buildTrace({ k, ops }) {
     else returned = size === k
     results.push(returned === undefined ? null : returned)
     frames.push({ phase, op, name, value, slots: [...slots], head, size, k, returned, activeLine: phase === 'write' ? L('write value into slot') : phase === 'read' ? L('move head forward') : L('answer Front'),
+      pythonLine: pythonLineFor(name, returned),
       message: `${name}${name === 'enQueue' ? `(${value})` : '()'} → ${String(returned)}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('return the recorded answers'), message: `${ops.length} operations complete.` })
+  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, returned: undefined, activeLine: L('return the recorded answers'), pythonLine: 31, message: `${ops.length} operations complete.` })
   return { input: { k, ops }, result: results, frames }
 }
 
@@ -53,6 +54,16 @@ for each operation in ops:
   else answer Front, Rear, isEmpty, or isFull from head and size, then record the answer
 return the recorded answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+// Python line (1-based index into `python` below) executed by an operation frame.
+function pythonLineFor(name, returned) {
+  if (name === 'enQueue') return returned === false ? 10 : 12  // answers.append(False) / slots[...] = value
+  if (name === 'deQueue') return returned === false ? 17 : 20  // answers.append(False) / head = (head + 1) % k
+  if (name === 'Front') return 24                              // answers.append(slots[head] ...)
+  if (name === 'Rear') return 26                               // answers.append(slots[(head + size - 1) % k] ...)
+  if (name === 'isEmpty') return 28                            // answers.append(size == 0)
+  return 30                                                    // answers.append(size == k)
+}
 
 export const python = `def circular_queue(k, ops):
     slots = [None] * k

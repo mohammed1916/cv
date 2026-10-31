@@ -17,20 +17,20 @@ export function buildTrace({ n, logs }) {
   const result = Array(n).fill(0)
   const stack = []
   let previous = 0
-  const frames = [{ phase: 'start', stack: [], result: [...result], activeLine: L('result = n zeros'), message: `Keep a stack of running functions; charge elapsed time to the top.` }]
+  const frames = [{ phase: 'start', stack: [], result: [...result], activeLine: L('result = n zeros'), pythonLine: 2, message: `Keep a stack of running functions; charge elapsed time to the top.` }]
   for (const log of logs) {
     if (log.kind === 'start') {
       if (stack.length) result[stack[stack.length - 1]] += log.time - previous
       stack.push(log.id)
-      frames.push({ phase: 'start', stack: [...stack], result: [...result], current: log.id, activeLine: L('push id onto the stack'), message: `Function ${log.id} starts at ${log.time}; it becomes the top.` })
+      frames.push({ phase: 'start', stack: [...stack], result: [...result], current: log.id, activeLine: L('push id onto the stack'), pythonLine: 11, message: `Function ${log.id} starts at ${log.time}; it becomes the top.` })
     } else {
       result[stack[stack.length - 1]] += log.time - previous + 1
       stack.pop()
-      frames.push({ phase: 'end', stack: [...stack], result: [...result], current: log.id, activeLine: L('pop the stack'), message: `Function ${log.id} ends at ${log.time}; it ran through ${log.time}.` })
+      frames.push({ phase: 'end', stack: [...stack], result: [...result], current: log.id, activeLine: L('pop the stack'), pythonLine: 14, message: `Function ${log.id} ends at ${log.time}; it ran through ${log.time}.` })
     }
     previous = log.kind === 'start' ? log.time : log.time + 1
   }
-  frames.push({ phase: 'done', stack: [], result: [...result], activeLine: L('return result'), message: 'Exclusive times are complete.' })
+  frames.push({ phase: 'done', stack: [], result: [...result], activeLine: L('return result'), pythonLine: 16, message: 'Exclusive times are complete.' })
   return { input: { n, logs }, result, frames }
 }
 

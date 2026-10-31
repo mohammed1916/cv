@@ -23,14 +23,15 @@ export function buildTrace(equation) {
   const a = leftSide.coefficient - rightSide.coefficient
   const b = rightSide.constant - leftSide.constant
   const frames = [
-    { phase: 'split', left: leftSide, right: rightSide, a: null, b: null, activeLine: L('split the equation'), message: `Left side: ${leftSide.coefficient}x + ${leftSide.constant}; right side: ${rightSide.coefficient}x + ${rightSide.constant}.` },
-    { phase: 'move', left: leftSide, right: rightSide, a, b, activeLine: L('a = left.coefficient'), message: `Move everything to one side: ${a}x = ${b}.` },
+    { phase: 'split', left: leftSide, right: rightSide, a: null, b: null, activeLine: L('split the equation'), pythonLine: 17, message: `Left side: ${leftSide.coefficient}x + ${leftSide.constant}; right side: ${rightSide.coefficient}x + ${rightSide.constant}.` },
+    { phase: 'move', left: leftSide, right: rightSide, a, b, activeLine: L('a = left.coefficient'), pythonLine: 20, message: `Move everything to one side: ${a}x = ${b}.` },
   ]
   let result
   if (a === 0 && b === 0) result = 'Infinite solutions'
   else if (a === 0) result = 'No solution'
   else result = `x=${b / a}`
-  frames.push({ phase: 'done', left: leftSide, right: rightSide, a, b, result, activeLine: result === 'No solution' ? L('if a is 0: return') : result === 'Infinite solutions' ? L('if a is 0 and b is 0') : L('followed by b / a'), message: `Result: ${result}.` })
+  const pythonLine = result === 'Infinite solutions' || result === 'No solution' ? 22 : 24 // return 'Infinite solutions' if b == 0 else 'No solution' / return 'x=' + ...
+  frames.push({ phase: 'done', left: leftSide, right: rightSide, a, b, result, activeLine: result === 'No solution' ? L('if a is 0: return') : result === 'Infinite solutions' ? L('if a is 0 and b is 0') : L('followed by b / a'), pythonLine, message: `Result: ${result}.` })
   return { input: equation, result, frames }
 }
 

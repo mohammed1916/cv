@@ -9,7 +9,7 @@ export function parseInput(text) {
 export function buildTrace(arrays) {
   let lo = Math.min(...arrays[0]), hi = Math.max(...arrays[0])
   let best = -Infinity
-  const frames = [{ phase: 'start', array: 0, lo, hi, best: null, pair: null, activeLine: L('take the smallest'), message: `Track the smallest (${lo}) and largest (${hi}) from array 0.` }]
+  const frames = [{ phase: 'start', array: 0, lo, hi, best: null, pair: null, activeLine: L('take the smallest'), pythonLine: 2, message: `Track the smallest (${lo}) and largest (${hi}) from array 0.` }]
   for (let i = 1; i < arrays.length; i++) {
     const a = arrays[i]
     const amin = Math.min(...a), amax = Math.max(...a)
@@ -17,11 +17,11 @@ export function buildTrace(arrays) {
     const value = Math.max(...candidates)
     const pair = candidates[0] >= candidates[1] ? [lo, amax] : [hi, amin]
     if (value > best) best = value
-    frames.push({ phase: 'compare', array: i, lo, hi, amin, amax, best, pair, candidate: value, activeLine: L('best = the largest of'), message: `Array ${i}: best distance against earlier values is ${value}.` })
+    frames.push({ phase: 'compare', array: i, lo, hi, amin, amax, best, pair, candidate: value, activeLine: L('best = the largest of'), pythonLine: 5, message: `Array ${i}: best distance against earlier values is ${value}.` })
     lo = Math.min(lo, amin); hi = Math.max(hi, amax)
-    frames.push({ phase: 'update', array: i, lo, hi, amin, amax, best, pair: null, activeLine: L('lo = the smaller of'), message: `Update the earlier range to [${lo}, ${hi}].` })
+    frames.push({ phase: 'update', array: i, lo, hi, amin, amax, best, pair: null, activeLine: L('lo = the smaller of'), pythonLine: 6, message: `Update the earlier range to [${lo}, ${hi}].` })
   }
-  frames.push({ phase: 'done', array: arrays.length - 1, lo, hi, best, result: best, pair: null, activeLine: L('return best'), message: `Maximum distance: ${best}.` })
+  frames.push({ phase: 'done', array: arrays.length - 1, lo, hi, best, result: best, pair: null, activeLine: L('return best'), pythonLine: 7, message: `Maximum distance: ${best}.` })
   return { input: arrays, result: best, frames }
 }
 

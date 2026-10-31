@@ -48,7 +48,7 @@ export function buildTrace(spec) {
   const snapshot = () => cells.map((row, r) => row.map((_, c) => valueAt(r, c)))
   const rowLabels = Array.from({ length: rows }, (_, r) => String(r + 1))
   const columnLabels = [...COLUMNS.slice(0, cols)]
-  const frames = [{ phase: 'start', activeLine: L('create a grid'), cell: null, refs: [], value: null, grid: snapshot(), message: `Create a ${rows} by ${cols} sheet. Every cell starts at 0.` }]
+  const frames = [{ phase: 'start', activeLine: L('create a grid'), pythonLine: 3, cell: null, refs: [], value: null, grid: snapshot(), message: `Create a ${rows} by ${cols} sheet. Every cell starts at 0.` }]
   const result = []
   for (const [kind, row, column, arg] of spec.ops) {
     const r = row - 1, c = COLUMNS.indexOf(column)
@@ -56,21 +56,21 @@ export function buildTrace(spec) {
     if (kind === 'set') {
       cells[r][c] = { value: arg, refs: null }
       result.push(null)
-      frames.push({ phase: 'set', activeLine: L('store arg as the raw'), cell: [r, c], refs: [], value: null, grid: snapshot(), message: `Set ${label} to ${arg}. Any formula that reads it will see the new value.` })
+      frames.push({ phase: 'set', activeLine: L('store arg as the raw'), pythonLine: 27, cell: [r, c], refs: [], value: null, grid: snapshot(), message: `Set ${label} to ${arg}. Any formula that reads it will see the new value.` })
     } else if (kind === 'sum') {
       const refs = arg.flatMap(ref => expandRef(ref, rows, cols))
       if (refs.some(ref => reaches(ref, [r, c]))) throw new Error(`${label} cannot sum a cell that depends on ${label}.`)
       cells[r][c] = { value: 0, refs }
       const value = valueAt(r, c)
       result.push(value)
-      frames.push({ phase: 'sum', activeLine: L('total = value of'), cell: [r, c], refs, value, grid: snapshot(), message: `${label} = ${arg.join(' + ')} = ${value}. The cell stays linked to those references.` })
+      frames.push({ phase: 'sum', activeLine: L('total = value of'), pythonLine: 31, cell: [r, c], refs, value, grid: snapshot(), message: `${label} = ${arg.join(' + ')} = ${value}. The cell stays linked to those references.` })
     } else {
       const value = valueAt(r, c)
       result.push(value)
-      frames.push({ phase: 'get', activeLine: L('append value of (row, column)'), cell: [r, c], refs: [], value, grid: snapshot(), message: `Read ${label}: ${value}. Its formula links are followed, so the value is current.` })
+      frames.push({ phase: 'get', activeLine: L('append value of (row, column)'), pythonLine: 33, cell: [r, c], refs: [], value, grid: snapshot(), message: `Read ${label}: ${value}. Its formula links are followed, so the value is current.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return results'), cell: null, refs: [], value: null, grid: snapshot(), message: `Results in order: ${result.map(v => v ?? '-').join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return results'), pythonLine: 34, cell: null, refs: [], value: null, grid: snapshot(), message: `Results in order: ${result.map(v => v ?? '-').join(', ')}.` })
   return { input: spec, rows, cols, result, frames, rowLabels, columnLabels }
 }
 

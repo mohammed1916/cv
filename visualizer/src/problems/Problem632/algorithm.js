@@ -13,19 +13,19 @@ export function buildTrace(lists) {
   const pointers = lists.map(() => 0)
   const current = () => lists.map((list, i) => list[pointers[i]])
   let best = null
-  const frames = [{ phase: 'start', pointers: [...pointers], values: current(), range: null, best: null, activeLine: L('pointers = a list of 0'), message: 'Start each list at its first value.' }]
+  const frames = [{ phase: 'start', pointers: [...pointers], values: current(), range: null, best: null, activeLine: L('pointers = a list of 0'), pythonLine: 2, message: 'Start each list at its first value.' }]
   for (;;) {
     const values = current()
     const low = Math.min(...values), high = Math.max(...values)
     const range = [low, high]
     if (!best || high - low < best[1] - best[0] || (high - low === best[1] - best[0] && low < best[0])) best = range
-    frames.push({ phase: 'window', pointers: [...pointers], values, range, best: [...best], activeLine: L('if best is nothing'), message: `Window [${low}, ${high}] (width ${high - low}).` })
+    frames.push({ phase: 'window', pointers: [...pointers], values, range, best: [...best], activeLine: L('if best is nothing'), pythonLine: 7, message: `Window [${low}, ${high}] (width ${high - low}).` })
     const minList = values.indexOf(low)
     if (pointers[minList] + 1 >= lists[minList].length) break
     pointers[minList]++
-    frames.push({ phase: 'advance', pointers: [...pointers], values: current(), range: [low, high], best: [...best], activeLine: L('add 1 to pointers[i]'), message: `Advance list ${minList} past ${low}: it was the smallest, so only it can narrow the window.` })
+    frames.push({ phase: 'advance', pointers: [...pointers], values: current(), range: [low, high], best: [...best], activeLine: L('add 1 to pointers[i]'), pythonLine: 12, message: `Advance list ${minList} past ${low}: it was the smallest, so only it can narrow the window.` })
   }
-  frames.push({ phase: 'done', pointers: [...pointers], values: current(), range: best, best: [...best], result: best, activeLine: L('return best'), message: `Smallest range: [${best[0]}, ${best[1]}].` })
+  frames.push({ phase: 'done', pointers: [...pointers], values: current(), range: best, best: [...best], result: best, activeLine: L('return best'), pythonLine: 11, message: `Smallest range: [${best[0]}, ${best[1]}].` })
   return { input: lists, result: best, frames }
 }
 

@@ -25,8 +25,26 @@ export function buildTrace(input) {
     legacyLine: frame.activeLine,
     activeLine: PSEUDO_LINE_FOR_LEGACY[frame.activeLine],
     explanation: frame.message,
+    pythonLine: pythonLineFor(frame),
   }))
   return { input: arr, result: legacy.at(-1).levels, frames }
+}
+
+// Python line (1-based index into `python` above) that each frame executes.
+function pythonLineFor(frame) {
+  const { phase, message = '' } = frame
+  if (phase === 'init') return 26          // queue = [build(root)] ...
+  if (phase === 'level-start') return 28   // row = []
+  if (phase === 'dequeue') return 30       // for node in queue:
+  if (phase === 'visit') return 31         // row.append(node.val)
+  if (phase === 'enqueue') {
+    if (/^No left/.test(message)) return 32    // if node.left is not None: (false)
+    if (/^Append left/.test(message)) return 33 // next_queue.append(node.left)
+    if (/^No right/.test(message)) return 34   // if node.right is not None: (false)
+    return 35                                  // next_queue.append(node.right)
+  }
+  if (phase === 'level-done') return 36    // result.append(row)
+  return 38                                // return result
 }
 
 export const code = `level order (root):

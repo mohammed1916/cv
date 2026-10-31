@@ -16,7 +16,7 @@ export function buildTrace({ k, ops }) {
   const slots = Array(k).fill(null)
   let head = 0, size = 0
   const results = []
-  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, activeLine: L('slots = k empty'), message: `Create a ring of ${k} slots.` }]
+  const frames = [{ phase: 'start', op: -1, slots: [...slots], head, size, k, activeLine: L('slots = k empty'), pythonLine: 2, message: `Create a ring of ${k} slots.` }]
   ops.forEach(([name, value], op) => {
     let returned
     let phase = 'query'
@@ -42,9 +42,10 @@ export function buildTrace({ k, ops }) {
     else returned = size === k
     results.push(returned === undefined ? null : returned)
     frames.push({ phase, op, name, value, slots: [...slots], head, size, k, returned, activeLine: ACTIVE[name],
+      pythonLine: pythonLineFor(name, returned),
       message: `${name}${name.startsWith('insert') ? `(${value})` : '()'} → ${String(returned)}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, activeLine: L('return results'), message: `${ops.length} operations complete.` })
+  frames.push({ phase: 'done', op: ops.length - 1, slots: [...slots], head, size, k, activeLine: L('return results'), pythonLine: 48, message: `${ops.length} operations complete.` })
   return { input: { k, ops }, result: results, frames }
 }
 
@@ -74,6 +75,18 @@ for each operation (name, value) in ops:
   append result to results
 return results`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+// Python line (1-based index into `python` below) executed by an operation frame.
+function pythonLineFor(name, returned) {
+  const failed = returned === false
+  if (name === 'insertFront') return failed ? 11 : 14   // result = False / slots[head] = value
+  if (name === 'insertLast') return failed ? 19 : 21    // result = False / slots[(head + size) % k] = value
+  if (name === 'deleteFront') return failed ? 26 : 28   // result = False / slots[head] = None
+  if (name === 'deleteLast') return failed ? 34 : 36    // result = False / slots[(head + size - 1) % k] = None
+  if (name === 'getFront') return 40
+  if (name === 'getRear') return 42
+  if (name === 'isEmpty') return 44
+  return 46                                             // result = size == k
+}
 const ACTIVE = {
   insertFront: L('move head back one'), insertLast: L('write value after the last element'),
   deleteFront: L('clear slot at head'), deleteLast: L("clear the last element's slot"),
