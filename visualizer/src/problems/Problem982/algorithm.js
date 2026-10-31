@@ -8,14 +8,14 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   // Count every ordered pair (i, j) by the value of nums[i] & nums[j].
   const pairs = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set pairs to an empty count'), pairs: [], value: null, total: 0, message: 'Count the AND of every ordered pair first. A triple is zero when a pair’s AND has no bit in common with the third value.' }]
+  const frames = [{ phase: 'start', activeLine: L('set pairs to an empty count'), pythonLine: 4, pairs: [], value: null, total: 0, message: 'Count the AND of every ordered pair first. A triple is zero when a pair’s AND has no bit in common with the third value.' }]
   for (const a of nums) {
     for (const b of nums) {
       const value = a & b
       pairs.set(value, (pairs.get(value) ?? 0) + 1)
     }
   }
-  frames.push({ phase: 'pairs', activeLine: L('add 1 to pairs[a & b]'), pairs: [...pairs].map(([v, c]) => [v, c]), value: null, total: 0, message: `${pairs.size} distinct pair AND value(s) found.` })
+  frames.push({ phase: 'pairs', activeLine: L('add 1 to pairs[a & b]'), pythonLine: 7, pairs: [...pairs].map(([v, c]) => [v, c]), value: null, total: 0, message: `${pairs.size} distinct pair AND value(s) found.` })
   let total = 0
   for (const c of nums) {
     let added = 0
@@ -23,9 +23,9 @@ export function buildTrace(nums) {
       if ((value & c) === 0) added += count
     }
     total += added
-    frames.push({ phase: 'match', activeLine: L('if p & c is 0'), pairs: [...pairs].map(([v, n]) => [v, n]), value: c, total, message: `The third value ${c} matches ${added} ordered pair(s) with AND zero; running total ${total}.` })
+    frames.push({ phase: 'match', activeLine: L('if p & c is 0'), pythonLine: 11, pairs: [...pairs].map(([v, n]) => [v, n]), value: c, total, message: `The third value ${c} matches ${added} ordered pair(s) with AND zero; running total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), pairs: [], value: null, total, message: `${total} triple(s) have AND equal to 0.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 13, pairs: [], value: null, total, message: `${total} triple(s) have AND equal to 0.` })
   return { input: nums, result: total, frames }
 }
 

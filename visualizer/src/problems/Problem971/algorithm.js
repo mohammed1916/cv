@@ -17,31 +17,31 @@ export function buildTrace(spec) {
   const root = treeFromLevelOrder(spec.arr)
   const { voyage } = spec
   const flipped = []
-  const frames = [{ phase: 'start', activeLine: L('set res to an empty list'), node: null, position: 0, flipped: [], message: `Walk the tree in preorder and match the voyage ${voyage.join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set res to an empty list'), pythonLine: 26, node: null, position: 0, flipped: [], message: `Walk the tree in preorder and match the voyage ${voyage.join(', ')}.` }]
   let position = 0
   let impossible = false
   const visit = node => {
     if (!node || impossible) return
     if (node.value !== voyage[position]) {
       impossible = true
-      frames.push({ phase: 'fail', activeLine: L('return false'), node: node.id, position, flipped: [...flipped], message: `Expected ${voyage[position]} at position ${position}, found ${node.value}. No flips can fix this.` })
+      frames.push({ phase: 'fail', activeLine: L('return false'), pythonLine: 33, node: node.id, position, flipped: [...flipped], message: `Expected ${voyage[position]} at position ${position}, found ${node.value}. No flips can fix this.` })
       return
     }
     position++
     if (node.left && node.left.value !== voyage[position]) {
       flipped.push(node.value)
-      frames.push({ phase: 'flip', activeLine: L('append node.value to res'), node: node.id, position, flipped: [...flipped], message: `${node.value}'s left child is not next in the voyage, so visit its right subtree first.` })
+      frames.push({ phase: 'flip', activeLine: L('append node.value to res'), pythonLine: 36, node: node.id, position, flipped: [...flipped], message: `${node.value}'s left child is not next in the voyage, so visit its right subtree first.` })
       visit(node.right)
       visit(node.left)
     } else {
-      frames.push({ phase: 'visit', activeLine: L('dfs(left) and then dfs(right)'), node: node.id, position, flipped: [...flipped], message: `${node.value} matches the voyage.` })
+      frames.push({ phase: 'visit', activeLine: L('dfs(left) and then dfs(right)'), pythonLine: 38, node: node.id, position, flipped: [...flipped], message: `${node.value} matches the voyage.` })
       visit(node.left)
       visit(node.right)
     }
   }
   visit(root)
-  if (impossible) return { input: spec, root, result: [-1], frames: [...frames, { phase: 'done', activeLine: L('otherwise return [-1]'), node: null, position, flipped: [], message: 'The voyage cannot be matched.' }] }
-  frames.push({ phase: 'done', activeLine: L('return res,'), node: null, position, flipped: [...flipped], message: `Flip ${flipped.length} node(s): ${flipped.join(', ') || 'none'}.` })
+  if (impossible) return { input: spec, root, result: [-1], frames: [...frames, { phase: 'done', activeLine: L('otherwise return [-1]'), pythonLine: 39, node: null, position, flipped: [], message: 'The voyage cannot be matched.' }] }
+  frames.push({ phase: 'done', activeLine: L('return res,'), pythonLine: 39, node: null, position, flipped: [...flipped], message: `Flip ${flipped.length} node(s): ${flipped.join(', ') || 'none'}.` })
   return { input: spec, root, result: flipped, frames }
 }
 

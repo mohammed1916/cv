@@ -22,16 +22,16 @@ export function buildTrace(arr) {
   // canOdd[i]: starting at i, the next jump is odd and the end is reachable. canEven likewise for an even jump.
   const canOdd = Array(n).fill(false), canEven = Array(n).fill(false)
   canOdd[n - 1] = canEven[n - 1] = true
-  const frames = [{ phase: 'start', activeLine: L('set canOdd[last]'), index: n - 1, odd: null, even: null, canOdd: [...canOdd], canEven: [...canEven], message: 'The last index reaches itself. Work backwards and decide each index from the indices after it.' }]
+  const frames = [{ phase: 'start', activeLine: L('set canOdd[last]'), pythonLine: 19, index: n - 1, odd: null, even: null, canOdd: [...canOdd], canEven: [...canEven], message: 'The last index reaches itself. Work backwards and decide each index from the indices after it.' }]
   for (let i = n - 2; i >= 0; i--) {
     const oddTo = jumpTarget(arr, i, true)
     const evenTo = jumpTarget(arr, i, false)
     canOdd[i] = oddTo !== -1 && canEven[oddTo]
     canEven[i] = evenTo !== -1 && canOdd[evenTo]
-    frames.push({ phase: 'fill', activeLine: L('set canEven[i] to'), index: i, odd: oddTo, even: evenTo, canOdd: [...canOdd], canEven: [...canEven], message: `From ${i}: an odd jump goes to ${oddTo === -1 ? 'nowhere' : oddTo} and ${canOdd[i] ? 'can finish' : 'cannot finish'}; an even jump goes to ${evenTo === -1 ? 'nowhere' : evenTo} and ${canEven[i] ? 'can finish' : 'cannot finish'}.` })
+    frames.push({ phase: 'fill', activeLine: L('set canEven[i] to'), pythonLine: 24, index: i, odd: oddTo, even: evenTo, canOdd: [...canOdd], canEven: [...canEven], message: `From ${i}: an odd jump goes to ${oddTo === -1 ? 'nowhere' : oddTo} and ${canOdd[i] ? 'can finish' : 'cannot finish'}; an even jump goes to ${evenTo === -1 ? 'nowhere' : evenTo} and ${canEven[i] ? 'can finish' : 'cannot finish'}.` })
   }
   const result = canOdd.filter(Boolean).length
-  frames.push({ phase: 'done', activeLine: L('return the number of true'), index: null, odd: null, even: null, canOdd: [...canOdd], canEven: [...canEven], message: `${result} starting index(es) reach the end.` })
+  frames.push({ phase: 'done', activeLine: L('return the number of true'), pythonLine: 25, index: null, odd: null, even: null, canOdd: [...canOdd], canEven: [...canEven], message: `${result} starting index(es) reach the end.` })
   return { input: arr, result, frames }
 }
 

@@ -12,18 +12,18 @@ export function parseInput(text) {
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
   let moves = 0
-  const frames = [{ phase: 'start', activeLine: L('set moves to 0'), node: null, excess: null, moves: 0, message: 'Each node should end with exactly one coin. Work up from the leaves and track the surplus below each node.' }]
+  const frames = [{ phase: 'start', activeLine: L('set moves to 0'), pythonLine: 26, node: null, excess: null, moves: 0, message: 'Each node should end with exactly one coin. Work up from the leaves and track the surplus below each node.' }]
   // Returns the surplus of coins in the subtree (coins minus nodes); each edge carries the absolute surplus of its child.
   const visit = node => {
     if (!node) return 0
     const left = visit(node.left), right = visit(node.right)
     moves += Math.abs(left) + Math.abs(right)
     const excess = node.value + left + right - 1
-    frames.push({ phase: 'visit', activeLine: L('add |left| plus |right| to moves'), node: node.id, excess, moves, message: `${node.value} coin(s) at ${node.value}, children carry ${left} and ${right}: ${excess >= 0 ? `${excess} extra coin(s) move up` : `${-excess} coin(s) must come up`}.` })
+    frames.push({ phase: 'visit', activeLine: L('add |left| plus |right| to moves'), pythonLine: 32, node: node.id, excess, moves, message: `${node.value} coin(s) at ${node.value}, children carry ${left} and ${right}: ${excess >= 0 ? `${excess} extra coin(s) move up` : `${-excess} coin(s) must come up`}.` })
     return excess
   }
   visit(root)
-  frames.push({ phase: 'done', activeLine: L('return moves'), node: null, excess: null, moves, message: `${moves} move(s) in total.` })
+  frames.push({ phase: 'done', activeLine: L('return moves'), pythonLine: 35, node: null, excess: null, moves, message: `${moves} move(s) in total.` })
   return { input: arr, root: treeFromLevelOrder(arr), result: moves, frames }
 }
 

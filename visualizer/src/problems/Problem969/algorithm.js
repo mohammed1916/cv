@@ -9,21 +9,21 @@ export function parseInput(text) {
 export function buildTrace(arr) {
   const a = [...arr]
   const flips = []
-  const frames = [{ phase: 'start', activeLine: L('set a to a copy'), array: [...a], flip: null, message: 'Place the largest unsorted value at the end using at most two prefix reversals.' }]
-  const flip = (k, line) => {
+  const frames = [{ phase: 'start', activeLine: L('set a to a copy'), pythonLine: 2, array: [...a], flip: null, message: 'Place the largest unsorted value at the end using at most two prefix reversals.' }]
+  const flip = (k, line, py) => {
     for (let i = 0, j = k - 1; i < j; i++, j--) [a[i], a[j]] = [a[j], a[i]]
     flips.push(k)
-    frames.push({ phase: 'flip', activeLine: line, array: [...a], flip: k, message: `Reverse the first ${k} value(s).` })
+    frames.push({ phase: 'flip', activeLine: line, pythonLine: py, array: [...a], flip: k, message: `Reverse the first ${k} value(s).` })
   }
   for (let size = a.length; size > 1; size--) {
     // The values above `size` are already in place, so the largest remaining value is `size`.
     const at = a.indexOf(size)
-    frames.push({ phase: 'find', activeLine: L('set index to the position'), array: [...a], flip: null, message: `${size} is the largest unsorted value and sits at position ${at + 1}.` })
+    frames.push({ phase: 'find', activeLine: L('set index to the position'), pythonLine: 8, array: [...a], flip: null, message: `${size} is the largest unsorted value and sits at position ${at + 1}.` })
     if (at === size - 1) continue
-    if (at !== 0) flip(at + 1, L('if index is not 0'))
-    flip(size, L('reverse(size)'))
+    if (at !== 0) flip(at + 1, L('if index is not 0'), 12)
+    flip(size, L('reverse(size)'), 13)
   }
-  frames.push({ phase: 'done', activeLine: L('return flips'), array: [...a], flip: null, message: `Sorted with ${flips.length} flip(s).` })
+  frames.push({ phase: 'done', activeLine: L('return flips'), pythonLine: 14, array: [...a], flip: null, message: `Sorted with ${flips.length} flip(s).` })
   return { input: arr, result: flips, sorted: a, frames }
 }
 

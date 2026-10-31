@@ -11,22 +11,22 @@ export function parseInput(text) {
 export function buildTrace(spec) {
   const left = { a: spec.a, b: spec.b, c: spec.c }
   let s = ''
-  const frames = [{ phase: 'start', activeLine: L('set counts to a'), s: '', left: { ...left }, letter: null, message: 'Always add the letter with the most copies left, unless it would make three in a row.' }]
+  const frames = [{ phase: 'start', activeLine: L('set counts to a'), pythonLine: 2, s: '', left: { ...left }, letter: null, message: 'Always add the letter with the most copies left, unless it would make three in a row.' }]
   while (left.a + left.b + left.c > 0) {
     const options = ['a', 'b', 'c']
       .filter(ch => left[ch] > 0)
       .filter(ch => !(s.length >= 2 && s.at(-1) === ch && s.at(-2) === ch))
       .sort((x, y) => left[y] - left[x] || (x < y ? -1 : 1))
     if (options.length === 0) {
-      frames.push({ phase: 'stuck', activeLine: L('return the empty string'), s, left: { ...left }, letter: null, message: 'Every remaining letter would make three in a row, so no string exists.' })
+      frames.push({ phase: 'stuck', activeLine: L('return the empty string'), pythonLine: 14, s, left: { ...left }, letter: null, message: 'Every remaining letter would make three in a row, so no string exists.' })
       return { input: spec, result: '', frames }
     }
     const letter = options[0]
     left[letter]--
     s += letter
-    frames.push({ phase: 'add', activeLine: L('append ch to s'), s, left: { ...left }, letter, message: `Add ${letter}: ${left[letter]} ${letter} left.` })
+    frames.push({ phase: 'add', activeLine: L('append ch to s'), pythonLine: 10, s, left: { ...left }, letter, message: `Add ${letter}: ${left[letter]} ${letter} left.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return s'), s, left: { ...left }, letter: null, message: `Built ${s}.` })
+  frames.push({ phase: 'done', activeLine: L('return s'), pythonLine: 15, s, left: { ...left }, letter: null, message: `Built ${s}.` })
   return { input: spec, result: s, frames }
 }
 

@@ -30,11 +30,11 @@ export function buildTrace(spec) {
   const frames = []
   const fs = [spec.s, spec.t].map(s => {
     const f = toFraction(s)
-    frames.push({ phase: 'convert', activeLine: L('return the fraction'), text: s, num: f.num.toString(), den: f.den.toString(), equal: null, message: `${s} = ${f.num} / ${f.den}.` })
+    frames.push({ phase: 'convert', activeLine: L('return the fraction'), pythonLine: s.includes('(') ? 9 : 8, text: s, num: f.num.toString(), den: f.den.toString(), equal: null, message: `${s} = ${f.num} / ${f.den}.` })
     return f
   })
   const equal = fs[0].num * fs[1].den === fs[1].num * fs[0].den
-  frames.push({ phase: 'compare', activeLine: L('return whether a.num'), text: null, num: null, den: null, equal, message: `Cross-multiply: ${fs[0].num} × ${fs[1].den} ${equal ? '=' : '≠'} ${fs[1].num} × ${fs[0].den}.` })
+  frames.push({ phase: 'compare', activeLine: L('return whether a.num'), pythonLine: 14, text: null, num: null, den: null, equal, message: `Cross-multiply: ${fs[0].num} × ${fs[1].den} ${equal ? '=' : '≠'} ${fs[1].num} × ${fs[0].den}.` })
   return { input: spec, result: equal, frames }
 }
 

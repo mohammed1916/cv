@@ -12,12 +12,12 @@ export function parseInput(text) {
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
   const entries = []
-  const frames = [{ phase: 'start', activeLine: L('start a queue'), node: null, columns: {}, message: 'Breadth-first search gives each node a column and a row. Collect every node, then sort.' }]
+  const frames = [{ phase: 'start', activeLine: L('start a queue'), pythonLine: 29, node: null, columns: {}, message: 'Breadth-first search gives each node a column and a row. Collect every node, then sort.' }]
   const queue = root ? [{ node: root, col: 0, row: 0 }] : []
   while (queue.length) {
     const { node, col, row } = queue.shift()
     entries.push({ col, row, value: node.value })
-    frames.push({ phase: 'visit', activeLine: L('append (col, row, node.value)'), node: node.id, columns: group(entries), message: `${node.value} is at column ${col}, row ${row}.` })
+    frames.push({ phase: 'visit', activeLine: L('append (col, row, node.value)'), pythonLine: 33, node: node.id, columns: group(entries), message: `${node.value} is at column ${col}, row ${row}.` })
     if (node.left) queue.push({ node: node.left, col: col - 1, row: row + 1 })
     if (node.right) queue.push({ node: node.right, col: col + 1, row: row + 1 })
   }
@@ -31,7 +31,7 @@ export function buildTrace(arr) {
     }
     current.values.push(e.value)
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), node: null, columns: group(entries), message: `${result.length} column(s), left to right.` })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: 42, node: null, columns: group(entries), message: `${result.length} column(s), left to right.` })
   return { input: arr, root: treeFromLevelOrder(arr), result, frames }
 }
 

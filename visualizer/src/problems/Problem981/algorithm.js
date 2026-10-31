@@ -22,14 +22,14 @@ export function parseInput(text) {
 export function buildTrace(ops) {
   const store = new Map()
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('start with an empty store'), key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: 'Each key keeps its (timestamp, value) pairs in increasing timestamp order.' }]
+  const frames = [{ phase: 'start', activeLine: L('start with an empty store'), pythonLine: 20, key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: 'Each key keeps its (timestamp, value) pairs in increasing timestamp order.' }]
   for (const op of ops) {
     if (op[0] === 'set') {
       const [, key, value, ts] = op
       if (!store.has(key)) store.set(key, [])
       store.get(key).push([ts, value])
       result.push(null)
-      frames.push({ phase: 'set', activeLine: L('append (time, value) to store'), key, entries: store.get(key).map(e => [...e]), low: null, high: null, mid: null, found: null, result: null, message: `Store ${value} for ${key} at time ${ts}.` })
+      frames.push({ phase: 'set', activeLine: L('append (time, value) to store'), pythonLine: 5, key, entries: store.get(key).map(e => [...e]), low: null, high: null, mid: null, found: null, result: null, message: `Store ${value} for ${key} at time ${ts}.` })
       continue
     }
     const [, key, ts] = op
@@ -37,11 +37,11 @@ export function buildTrace(ops) {
     let low = 0, high = entries.length - 1
     let answer = ''
     let found = -1
-    frames.push({ phase: 'search', activeLine: L('set lo to 0'), key, entries: entries.map(e => [...e]), low, high, mid: null, found: null, result: null, message: `Find the latest ${key} entry at or before time ${ts}.` })
+    frames.push({ phase: 'search', activeLine: L('set lo to 0'), pythonLine: 8, key, entries: entries.map(e => [...e]), low, high, mid: null, found: null, result: null, message: `Find the latest ${key} entry at or before time ${ts}.` })
     while (low <= high) {
       const mid = Math.floor((low + high) / 2)
       const [when, value] = entries[mid]
-      frames.push({ phase: 'search', activeLine: L('set mid to the middle'), key, entries: entries.map(e => [...e]), low, high, mid, found: null, result: null, message: `Check time ${when}: ${when <= ts ? 'not after the query, so the answer is here or later' : 'after the query, so look earlier'}.` })
+      frames.push({ phase: 'search', activeLine: L('set mid to the middle'), pythonLine: 11, key, entries: entries.map(e => [...e]), low, high, mid, found: null, result: null, message: `Check time ${when}: ${when <= ts ? 'not after the query, so the answer is here or later' : 'after the query, so look earlier'}.` })
       if (when <= ts) {
         answer = value
         found = mid
@@ -51,9 +51,9 @@ export function buildTrace(ops) {
       }
     }
     result.push(answer)
-    frames.push({ phase: 'answer', activeLine: L('append ans, or null'), key, entries: entries.map(e => [...e]), low, high, mid: null, found, result: answer, message: answer === '' ? `No ${key} entry at or before ${ts}: answer "".` : `The latest value at or before ${ts} is ${answer}.` })
+    frames.push({ phase: 'answer', activeLine: L('append ans, or null'), pythonLine: 27, key, entries: entries.map(e => [...e]), low, high, mid: null, found, result: answer, message: answer === '' ? `No ${key} entry at or before ${ts}: answer "".` : `The latest value at or before ${ts} is ${answer}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: `${ops.length} operation(s) processed.` })
+  frames.push({ phase: 'done', activeLine: L('return the answers'), pythonLine: 28, key: null, entries: [], low: null, high: null, mid: null, found: null, result: null, message: `${ops.length} operation(s) processed.` })
   return { input: ops, result, frames }
 }
 
