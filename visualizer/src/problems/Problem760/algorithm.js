@@ -19,13 +19,13 @@ export function buildTrace(spec) {
     positions.get(v).push(i)
   })
   const mapping = []
-  const frames = [{ phase: 'index', activeLine: L('positions = empty map'), i: null, value: null, index: null, mapping: [], message: 'Record where each value sits in nums2. A repeated value takes its positions in order.' }]
+  const frames = [{ phase: 'index', activeLine: L('positions = empty map'), pythonLine: 2, i: null, value: null, index: null, mapping: [], message: 'Record where each value sits in nums2. A repeated value takes its positions in order.' }]
   nums1.forEach((v, i) => {
     const index = positions.get(v).shift()
     mapping.push(index)
-    frames.push({ phase: 'map', activeLine: L('append it to mapping'), i, value: v, index, mapping: [...mapping], message: `${v} at position ${i} of nums1 maps to index ${index} of nums2.` })
+    frames.push({ phase: 'map', activeLine: L('append it to mapping'), pythonLine: 7, i, value: v, index, mapping: [...mapping], message: `${v} at position ${i} of nums1 maps to index ${index} of nums2.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return mapping'), i: null, value: null, index: null, mapping: [...mapping], message: `The mapping is ${mapping.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return mapping'), pythonLine: 8, i: null, value: null, index: null, mapping: [...mapping], message: `The mapping is ${mapping.join(', ')}.` })
   return { input: spec, nums1, nums2, result: mapping, frames }
 }
 

@@ -11,15 +11,15 @@ export function parseInput(text) {
 export function buildTrace(ops) {
   const booked = []
   const results = []
-  const frames = [{ phase: 'start', booked: [], op: null, activeLine: 1, message: 'Empty calendar.' }]
+  const frames = [{ phase: 'start', booked: [], op: null, activeLine: 1, pythonLine: 2, message: 'Empty calendar.' }]
   ops.forEach(([s, e], i) => {
     const clash = booked.find(([bs, be]) => s < be && bs < e) ?? null
     if (!clash) booked.push([s, e])
     results.push(clash === null)
-    frames.push({ phase: clash ? 'reject' : 'accept', op: i, booked: booked.map(x => [...x]), attempt: [s, e], clash, result: results.slice(), activeLine: clash ? 4 : 5,
+    frames.push({ phase: clash ? 'reject' : 'accept', op: i, booked: booked.map(x => [...x]), attempt: [s, e], clash, result: results.slice(), activeLine: clash ? 4 : 5, pythonLine: clash ? 5 : 8,
       message: clash ? `[${s}, ${e}) overlaps [${clash[0]}, ${clash[1]}): rejected.` : `[${s}, ${e}) is free: booked.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, booked: booked.map(x => [...x]), result: results, activeLine: 6, message: `Results: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', op: ops.length - 1, booked: booked.map(x => [...x]), result: results, activeLine: 6, pythonLine: 9, message: `Results: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 

@@ -60,31 +60,31 @@ export function buildTrace({ bottom, allowed }) {
   const frames = []
   let overflow = false
   const push = f => { if (frames.length <= MAX_FRAMES) frames.push({ rows: [...rows], failed: failed.size, ...f }); else overflow = true }
-  push({ phase: 'start', activeLine: L('options ='), cur: '', i: -1, message: `Group allowed triples by their two base letters: ${Object.entries(options).map(([k, v]) => `${k}->{${v.join('')}}`).join(' ') || '(none)'}.` })
+  push({ phase: 'start', activeLine: L('options ='), pythonLine: 4, cur: '', i: -1, message: `Group allowed triples by their two base letters: ${Object.entries(options).map(([k, v]) => `${k}->{${v.join('')}}`).join(' ') || '(none)'}.` })
   function build(row) {
     rows.push(row)
     try {
-      if (row.length === 1) { push({ phase: 'top', activeLine: L('has one block'), cur: '', i: -1, message: `Row "${row}" has one block: the pyramid is complete.` }); return true }
-      if (failed.has(row)) { push({ phase: 'memo', activeLine: L('row is in failed'), cur: '', i: -1, message: `Row "${row}" already failed earlier; skip repeating that search.` }); return false }
-      push({ phase: 'row', activeLine: L('define build'), cur: '', i: -1, message: `Build a row above "${row}": each adjacent pair needs an allowed top block.` })
+      if (row.length === 1) { push({ phase: 'top', activeLine: L('has one block'), pythonLine: 10, cur: '', i: -1, message: `Row "${row}" has one block: the pyramid is complete.` }); return true }
+      if (failed.has(row)) { push({ phase: 'memo', activeLine: L('row is in failed'), pythonLine: 12, cur: '', i: -1, message: `Row "${row}" already failed earlier; skip repeating that search.` }); return false }
+      push({ phase: 'row', activeLine: L('define build'), pythonLine: 20, cur: '', i: -1, message: `Build a row above "${row}": each adjacent pair needs an allowed top block.` })
       const place = (i, cur) => {
         if (i === row.length - 1) return build(cur)
         const opts = options[row.slice(i, i + 2)] || []
-        if (!opts.length) push({ phase: 'dead', activeLine: L('for each top letter c'), cur, i, message: `No allowed block above "${row.slice(i, i + 2)}": this partial row is a dead end.` })
+        if (!opts.length) push({ phase: 'dead', activeLine: L('for each top letter c'), pythonLine: 16, cur, i, message: `No allowed block above "${row.slice(i, i + 2)}": this partial row is a dead end.` })
         for (const c of opts) {
-          push({ phase: 'place', activeLine: L('place(i + 1'), cur: cur + c, i, message: `Above "${row.slice(i, i + 2)}" choose ${c}; partial row "${cur + c}".` })
+          push({ phase: 'place', activeLine: L('place(i + 1'), pythonLine: 17, cur: cur + c, i, message: `Above "${row.slice(i, i + 2)}" choose ${c}; partial row "${cur + c}".` })
           if (place(i + 1, cur + c)) return true
         }
         return false
       }
       if (place(0, '')) return true
       failed.add(row)
-      push({ phase: 'fail', activeLine: L('add row to failed'), cur: '', i: -1, message: `Every choice for the row above "${row}" failed: remember it as failed.` })
+      push({ phase: 'fail', activeLine: L('add row to failed'), pythonLine: 22, cur: '', i: -1, message: `Every choice for the row above "${row}" failed: remember it as failed.` })
       return false
     } finally { rows.pop() }
   }
   const result = build(bottom)
-  frames.push({ phase: 'done', activeLine: L('return build'), rows: [], failed: failed.size, cur: '', i: -1, message: result ? 'A full pyramid can be built: true.' : 'No choice of blocks completes a pyramid: false.' })
+  frames.push({ phase: 'done', activeLine: L('return build'), pythonLine: 24, rows: [], failed: failed.size, cur: '', i: -1, message: result ? 'A full pyramid can be built: true.' : 'No choice of blocks completes a pyramid: false.' })
   if (overflow) frames.length = MAX_FRAMES + 2
   return { input: { bottom, allowed }, result, frames }
 }

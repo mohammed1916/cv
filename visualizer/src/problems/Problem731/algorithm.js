@@ -12,12 +12,12 @@ export function buildTrace(ops) {
   const booked = []
   const doubled = []
   const results = []
-  const frames = [{ phase: 'start', booked: [], doubled: [], op: null, activeLine: 1, message: 'No bookings; no double bookings.' }]
+  const frames = [{ phase: 'start', booked: [], doubled: [], op: null, activeLine: 1, pythonLine: 2, message: 'No bookings; no double bookings.' }]
   ops.forEach(([s, e], i) => {
     const clash = doubled.find(([ds, de]) => s < de && ds < e) ?? null
     if (clash) {
       results.push(false)
-      frames.push({ phase: 'reject', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 4, message: `[${s}, ${e}) would make a triple booking inside [${clash[0]}, ${clash[1]}).` })
+      frames.push({ phase: 'reject', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 4, pythonLine: 5, message: `[${s}, ${e}) would make a triple booking inside [${clash[0]}, ${clash[1]}).` })
       return
     }
     for (const [bs, be] of booked) {
@@ -26,9 +26,9 @@ export function buildTrace(ops) {
     }
     booked.push([s, e])
     results.push(true)
-    frames.push({ phase: 'accept', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 6, message: `[${s}, ${e}) accepted; ${doubled.length} double-booked span${doubled.length === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'accept', op: i, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), attempt: [s, e], result: results.slice(), activeLine: 6, pythonLine: 12, message: `[${s}, ${e}) accepted; ${doubled.length} double-booked span${doubled.length === 1 ? '' : 's'}.` })
   })
-  frames.push({ phase: 'done', op: ops.length - 1, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), result: results, activeLine: 7, message: `Results: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', op: ops.length - 1, booked: booked.map(x => [...x]), doubled: doubled.map(x => [...x]), result: results, activeLine: 7, pythonLine: 13, message: `Results: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 

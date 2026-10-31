@@ -37,23 +37,23 @@ export function buildTrace({ n, k }) {
   const total = k ** n
   const seen = new Set()
   const out = []
-  const frames = [{ phase: 'start', activeLine: L('seen ='), node: '0'.repeat(n - 1), edge: null, seen: 0, total, ans: '', depth: 0, message: `Nodes are the ${k ** (n - 1)} strings of length ${n - 1}; each of the ${total} edges is one length-${n} password. An Eulerian cycle visits every edge once.` }]
+  const frames = [{ phase: 'start', activeLine: L('seen ='), pythonLine: 2, node: '0'.repeat(n - 1), edge: null, seen: 0, total, ans: '', depth: 0, message: `Nodes are the ${k ** (n - 1)} strings of length ${n - 1}; each of the ${total} edges is one length-${n} password. An Eulerian cycle visits every edge once.` }]
   function dfs(node, depth) {
     for (let x = 0; x < k; x++) {
       const nei = node + x
       if (!seen.has(nei)) {
         seen.add(nei)
-        frames.push({ phase: 'visit', activeLine: L('mark nei as seen'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Password "${nei}" is unused: mark it and follow it to node "${nei.slice(1) || '(empty)'}".` })
+        frames.push({ phase: 'visit', activeLine: L('mark nei as seen'), pythonLine: 8, node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Password "${nei}" is unused: mark it and follow it to node "${nei.slice(1) || '(empty)'}".` })
         dfs(nei.slice(1), depth + 1)
         out.push(String(x))
-        frames.push({ phase: 'emit', activeLine: L('append x to ans'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Backtracking from "${nei}": append digit ${x} (the answer is built in reverse post-order, which keeps the walk a valid cycle).` })
+        frames.push({ phase: 'emit', activeLine: L('append x to ans'), pythonLine: 10, node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Backtracking from "${nei}": append digit ${x} (the answer is built in reverse post-order, which keeps the walk a valid cycle).` })
       } else if (x === k - 1) {
-        frames.push({ phase: 'skip', activeLine: L('if nei is not seen'), node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Node "${node || '(empty)'}": all its outgoing passwords are used.` })
+        frames.push({ phase: 'skip', activeLine: L('if nei is not seen'), pythonLine: 7, node, edge: nei, seen: seen.size, total, ans: out.join(''), depth, message: `Node "${node || '(empty)'}": all its outgoing passwords are used.` })
       }
     }
   }
   dfs('0'.repeat(n - 1), 0)
   const result = out.join('') + '0'.repeat(n - 1)
-  frames.push({ phase: 'done', activeLine: L('return ans joined'), node: '', edge: null, seen: seen.size, total, ans: result, depth: 0, message: `Answer "${result}" has length ${result.length} = k^n + n - 1, the minimum possible.` })
+  frames.push({ phase: 'done', activeLine: L('return ans joined'), pythonLine: 12, node: '', edge: null, seen: seen.size, total, ans: result, depth: 0, message: `Answer "${result}" has length ${result.length} = k^n + n - 1, the minimum possible.` })
   return { input: { n, k }, result, frames }
 }

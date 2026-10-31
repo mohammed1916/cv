@@ -27,18 +27,18 @@ export function parseInput(text) {
 export function buildTrace(target) {
   const goal = Math.abs(target)
   const sums = [0]
-  const frames = [{ phase: 'start', activeLine: L('goal = absolute'), k: 0, total: 0, goal, message: `Moving left or right is symmetric, so aim for |target| = ${goal}. Step i moves exactly i units.` }]
+  const frames = [{ phase: 'start', activeLine: L('goal = absolute'), pythonLine: 2, k: 0, total: 0, goal, message: `Moving left or right is symmetric, so aim for |target| = ${goal}. Step i moves exactly i units.` }]
   let k = 0, total = 0
   while (true) {
     const diff = total - goal
     const reached = total >= goal
     const parityOk = diff % 2 === 0
-    frames.push({ phase: 'check', activeLine: L('while total'), k, total, goal, reached, parityOk, sums: [...sums],
+    frames.push({ phase: 'check', activeLine: L('while total'), pythonLine: 5, k, total, goal, reached, parityOk, sums: [...sums],
       message: !reached ? `Sum ${total} is still below ${goal}; take another step.` : parityOk ? `Sum ${total} reaches ${goal} and the overshoot ${diff} is even, so some step of size ${diff / 2} can be flipped to go backwards.` : `Sum ${total} overshoots by ${diff}, which is odd: flipping a step changes the sum by an even amount, so it cannot be fixed. Keep going.` })
     if (reached && parityOk) break
     k++; total += k; sums.push(total)
-    frames.push({ phase: 'step', activeLine: L('total = total + k'), k, total, goal, sums: [...sums], message: `Step ${k}: add ${k}. The running sum is ${total}.` })
+    frames.push({ phase: 'step', activeLine: L('total = total + k'), pythonLine: 7, k, total, goal, sums: [...sums], message: `Step ${k}: add ${k}. The running sum is ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return k'), k, total, goal, sums: [...sums], message: `Answer: ${k} moves. Overshoot ${total - goal} is even, so flip the step of size ${(total - goal) / 2 || 'none needed'}.` })
+  frames.push({ phase: 'done', activeLine: L('return k'), pythonLine: 8, k, total, goal, sums: [...sums], message: `Answer: ${k} moves. Overshoot ${total - goal} is even, so flip the step of size ${(total - goal) / 2 || 'none needed'}.` })
   return { input: target, result: k, frames }
 }

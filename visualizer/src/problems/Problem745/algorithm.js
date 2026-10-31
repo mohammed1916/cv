@@ -23,23 +23,23 @@ export function parseInput(text) {
 
 export function buildTrace({ words, queries }) {
   const table = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set table to an empty map'), wordIndex: -1, keys: [], tableSize: 0, queryIndex: -1, key: '', answers: [], message: 'Constructor: for every word store all (suffix, prefix) combinations as keys; later words overwrite earlier ones, so the value is the largest index.' }]
+  const frames = [{ phase: 'start', activeLine: L('set table to an empty map'), pythonLine: 2, wordIndex: -1, keys: [], tableSize: 0, queryIndex: -1, key: '', answers: [], message: 'Constructor: for every word store all (suffix, prefix) combinations as keys; later words overwrite earlier ones, so the value is the largest index.' }]
   words.forEach((word, idx) => {
     const keys = []
     for (let i = 0; i <= word.length; i++) for (let j = 0; j <= word.length; j++) {
       const key = word.slice(i) + '#' + word.slice(0, j)
       keys.push(key); table.set(key, idx)
     }
-    frames.push({ phase: 'insert', activeLine: L('store table[suffix'), wordIndex: idx, keys, tableSize: table.size, queryIndex: -1, key: '', answers: [], message: `Word ${idx} "${word}" contributes ${keys.length} keys (${word.length + 1} suffixes x ${word.length + 1} prefixes), all mapped to index ${idx}. The table now has ${table.size} distinct keys.` })
+    frames.push({ phase: 'insert', activeLine: L('store table[suffix'), pythonLine: 6, wordIndex: idx, keys, tableSize: table.size, queryIndex: -1, key: '', answers: [], message: `Word ${idx} "${word}" contributes ${keys.length} keys (${word.length + 1} suffixes x ${word.length + 1} prefixes), all mapped to index ${idx}. The table now has ${table.size} distinct keys.` })
   })
   const answers = []
   queries.forEach(([pref, suff], q) => {
     const key = suff + '#' + pref
     const ans = table.has(key) ? table.get(key) : -1
     answers.push(ans)
-    frames.push({ phase: 'query', activeLine: L('return the table value for'), wordIndex: ans, keys: [], tableSize: table.size, queryIndex: q, key, answers: [...answers],
+    frames.push({ phase: 'query', activeLine: L('return the table value for'), pythonLine: 7, wordIndex: ans, keys: [], tableSize: table.size, queryIndex: q, key, answers: [...answers],
       message: ans >= 0 ? `f("${pref}", "${suff}") looks up key "${key}": found, largest matching index ${ans} ("${words[ans]}").` : `f("${pref}", "${suff}") looks up key "${key}": absent, so -1.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the table value for'), wordIndex: -1, keys: [], tableSize: table.size, queryIndex: queries.length - 1, key: '', answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the table value for'), pythonLine: 7, wordIndex: -1, keys: [], tableSize: table.size, queryIndex: queries.length - 1, key: '', answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input: { words, queries }, result: answers, frames }
 }

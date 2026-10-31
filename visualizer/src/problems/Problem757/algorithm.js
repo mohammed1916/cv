@@ -36,24 +36,24 @@ export function parseInput(text) {
 
 export function buildTrace(intervals) {
   const sorted = intervals.map(iv => [...iv]).sort((x, y) => x[1] - y[1] || y[0] - x[0])
-  const frames = [{ phase: 'start', activeLine: L('sort intervals'), index: -1, a: null, b: null, chosen: [], message: 'Sort by right end ascending (ties: larger start first), so choosing the rightmost points helps all later intervals the most.' }]
+  const frames = [{ phase: 'start', activeLine: L('sort intervals'), pythonLine: 2, index: -1, a: null, b: null, chosen: [], message: 'Sort by right end ascending (ties: larger start first), so choosing the rightmost points helps all later intervals the most.' }]
   let a = -1, b = -1
   const chosen = []
   sorted.forEach(([s, e], index) => {
-    frames.push({ phase: 'compare', activeLine: L('for each interval [s, e]'), index, a, b, chosen: [...chosen], message: `Interval [${s}, ${e}]: the last two chosen points are ${a < 0 ? 'none' : a} and ${b < 0 ? 'none' : b}.` })
+    frames.push({ phase: 'compare', activeLine: L('for each interval [s, e]'), pythonLine: 6, index, a, b, chosen: [...chosen], message: `Interval [${s}, ${e}]: the last two chosen points are ${a < 0 ? 'none' : a} and ${b < 0 ? 'none' : b}.` })
     if (s > b) {
       chosen.push(e - 1, e); a = e - 1; b = e
-      frames.push({ phase: 'add2', activeLine: L('append e-1 and e'), index, a, b, chosen: [...chosen], message: `Start ${s} is beyond both chosen points, so the interval holds none of them. Add its two rightmost points ${e - 1} and ${e}.` })
+      frames.push({ phase: 'add2', activeLine: L('append e-1 and e'), pythonLine: 7, index, a, b, chosen: [...chosen], message: `Start ${s} is beyond both chosen points, so the interval holds none of them. Add its two rightmost points ${e - 1} and ${e}.` })
     } else if (s > a) {
       const p = b === e ? e - 1 : e
       chosen.push(p)
       const oldB = b
       a = Math.min(p, b); b = Math.max(p, b)
-      frames.push({ phase: 'add1', activeLine: L('append p to chosen'), index, a, b, chosen: [...chosen], message: `Only the chosen point ${oldB} lies inside (start ${s} is above the older point). Add one more: ${p}.` })
+      frames.push({ phase: 'add1', activeLine: L('append p to chosen'), pythonLine: 11, index, a, b, chosen: [...chosen], message: `Only the chosen point ${oldB} lies inside (start ${s} is above the older point). Add one more: ${p}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('else if s is greater than a'), index, a, b, chosen: [...chosen], message: `Both chosen points ${a} and ${b} are already at or after start ${s}: the interval is satisfied.` })
+      frames.push({ phase: 'skip', activeLine: L('else if s is greater than a'), pythonLine: 9, index, a, b, chosen: [...chosen], message: `Both chosen points ${a} and ${b} are already at or after start ${s}: the interval is satisfied.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the size of chosen'), index: sorted.length - 1, a, b, chosen: [...chosen], message: `Minimum containing set size: ${chosen.length}.` })
+  frames.push({ phase: 'done', activeLine: L('return the size of chosen'), pythonLine: 13, index: sorted.length - 1, a, b, chosen: [...chosen], message: `Minimum containing set size: ${chosen.length}.` })
   return { input: intervals, sorted, result: chosen.length, frames }
 }

@@ -14,7 +14,7 @@ export function parseInput(text) {
 export function buildTrace(spec) {
   let start = toInt(spec.ip), remaining = spec.n
   const blocks = []
-  const frames = [{ phase: 'start', activeLine: L('start = first'), start: toIp(start), remaining, blocks: [], message: `Cover ${remaining} addresses from ${spec.ip} with the fewest aligned blocks.` }]
+  const frames = [{ phase: 'start', activeLine: L('start = first'), pythonLine: 2, start: toIp(start), remaining, blocks: [], message: `Cover ${remaining} addresses from ${spec.ip} with the fewest aligned blocks.` }]
   while (remaining > 0) {
     // The largest block that starts here, is aligned to its own size, and fits in the remaining addresses.
     let size = 1
@@ -23,9 +23,9 @@ export function buildTrace(spec) {
     blocks.push(`${toIp(start)}/${prefix}`)
     start += size
     remaining -= size
-    frames.push({ phase: 'block', activeLine: L('append the CIDR block'), start: toIp(start), remaining, blocks: [...blocks], message: `${blocks.at(-1)} covers ${size} address(es) and is aligned.` })
+    frames.push({ phase: 'block', activeLine: L('append the CIDR block'), pythonLine: 8, start: toIp(start), remaining, blocks: [...blocks], message: `${blocks.at(-1)} covers ${size} address(es) and is aligned.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), start: null, remaining: 0, blocks: [...blocks], message: `${blocks.length} block(s) cover the range.` })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: 11, start: null, remaining: 0, blocks: [...blocks], message: `${blocks.length} block(s) cover the range.` })
   return { input: spec, result: blocks, frames }
 }
 

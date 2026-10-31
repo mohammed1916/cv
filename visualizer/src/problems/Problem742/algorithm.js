@@ -42,11 +42,11 @@ export function buildTrace(spec) {
   const neighbours = node => [node.left, node.right, parent.get(node.id)].filter(Boolean)
   const queue = [start]
   const seen = new Set([start.id])
-  const frames = [{ phase: 'start', activeLine: L('set queue to the target'), node: start.id, queue: [start.value], visited: [start.id], message: `Start at ${spec.k} and search outward. Parent links count as edges.` }]
+  const frames = [{ phase: 'start', activeLine: L('set queue to the target'), pythonLine: 40, node: start.id, queue: [start.value], visited: [start.id], message: `Start at ${spec.k} and search outward. Parent links count as edges.` }]
   while (queue.length) {
     const node = queue.shift()
     if (!node.left && !node.right) {
-      frames.push({ phase: 'found', activeLine: L('return its value'), node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is a leaf at the smallest distance from ${spec.k}.` })
+      frames.push({ phase: 'found', activeLine: L('return its value'), pythonLine: 44, node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is a leaf at the smallest distance from ${spec.k}.` })
       return { input: spec, root: treeFromLevelOrder(spec.arr), result: node.value, frames }
     }
     for (const next of neighbours(node)) {
@@ -54,7 +54,7 @@ export function buildTrace(spec) {
       seen.add(next.id)
       queue.push(next)
     }
-    frames.push({ phase: 'expand', activeLine: L('for each neighbour nxt'), node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is not a leaf: queue its unseen neighbours.` })
+    frames.push({ phase: 'expand', activeLine: L('for each neighbour nxt'), pythonLine: 48, node: node.id, queue: queue.map(n => n.value), visited: [...seen], message: `${node.value} is not a leaf: queue its unseen neighbours.` })
   }
   throw new Error('A tree always has a leaf.')
 }

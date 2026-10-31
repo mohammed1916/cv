@@ -71,7 +71,7 @@ export function buildTrace(input) {
   const grid = input.map(r => [...r])
   const m = grid.length, n = grid[0].length
   const snap = () => grid.map(r => [...r])
-  const frames = [{ phase: 'start', activeLine: L('function containVirus'), grid: snap(), regionOf: null, regions: [], chosen: -1, total: 0, day: 0, message: 'Cells: 0 healthy, 1 infected, 2 contained (walled). Each day only the most threatening region is walled.' }]
+  const frames = [{ phase: 'start', activeLine: L('function containVirus'), pythonLine: 22, grid: snap(), regionOf: null, regions: [], chosen: -1, total: 0, day: 0, message: 'Cells: 0 healthy, 1 infected, 2 contained (walled). Each day only the most threatening region is walled.' }]
   let total = 0, day = 0
   const explore = (r, c, seen) => {
     const stack = [[r, c]]; seen.add(r * n + c)
@@ -95,25 +95,25 @@ export function buildTrace(input) {
     regions.forEach((reg, id) => reg.cells.forEach(([x, y]) => { regionOf[x][y] = id }))
     const summary = regions.map((reg, id) => ({ id, size: reg.cells.length, threatened: reg.threatened.size, walls: reg.walls }))
     if (!regions.length) {
-      frames.push({ phase: 'done', activeLine: L('return total'), grid: snap(), regionOf, regions: summary, chosen: -1, total, day, message: `No infected region is left active. Total walls: ${total}.` })
+      frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 31, grid: snap(), regionOf, regions: summary, chosen: -1, total, day, message: `No infected region is left active. Total walls: ${total}.` })
       return { input, result: total, frames }
     }
-    frames.push({ phase: 'scan', activeLine: L('regions.append'), grid: snap(), regionOf, regions: summary, chosen: -1, total, day,
+    frames.push({ phase: 'scan', activeLine: L('regions.append'), pythonLine: 29, grid: snap(), regionOf, regions: summary, chosen: -1, total, day,
       message: `Day ${day}: ${regions.length} infected region${regions.length === 1 ? '' : 's'}. Each lists the healthy cells it threatens and the walls needed to seal it.` })
     let worst = 0
     regions.forEach((reg, i) => { if (reg.threatened.size > regions[worst].threatened.size) worst = i })
     if (!regions[worst].threatened.size) {
-      frames.push({ phase: 'done', activeLine: L('threatens no healthy cell'), grid: snap(), regionOf, regions: summary, chosen: -1, total, day, message: `No region threatens any healthy cell, so nothing more can spread. Total walls: ${total}.` })
+      frames.push({ phase: 'done', activeLine: L('threatens no healthy cell'), pythonLine: 37, grid: snap(), regionOf, regions: summary, chosen: -1, total, day, message: `No region threatens any healthy cell, so nothing more can spread. Total walls: ${total}.` })
       return { input, result: total, frames }
     }
-    frames.push({ phase: 'choose', activeLine: L('worst = region'), grid: snap(), regionOf, regions: summary, chosen: worst, total, day,
+    frames.push({ phase: 'choose', activeLine: L('worst = region'), pythonLine: 38, grid: snap(), regionOf, regions: summary, chosen: worst, total, day,
       message: `Region ${worst} threatens the most cells (${regions[worst].threatened.size}); it is the one to quarantine.` })
     total += regions[worst].walls
     regions[worst].cells.forEach(([x, y]) => { grid[x][y] = 2 })
-    frames.push({ phase: 'wall', activeLine: L('total += walls'), grid: snap(), regionOf, regions: summary, chosen: worst, total, day,
+    frames.push({ phase: 'wall', activeLine: L('total += walls'), pythonLine: 41, grid: snap(), regionOf, regions: summary, chosen: worst, total, day,
       message: `Build ${regions[worst].walls} walls around region ${worst} (one per infected-healthy border). Its cells become contained (2). Total walls: ${total}.` })
     regions.forEach((reg, i) => { if (i !== worst) reg.threatened.forEach(k => { grid[Math.floor(k / n)][k % n] = 1 }) })
-    frames.push({ phase: 'spread', activeLine: L('set each healthy cell it threatens'), grid: snap(), regionOf, regions: summary, chosen: -1, total, day,
+    frames.push({ phase: 'spread', activeLine: L('set each healthy cell it threatens'), pythonLine: 45, grid: snap(), regionOf, regions: summary, chosen: -1, total, day,
       message: `Overnight the other regions infect every cell they threatened.` })
   }
 }

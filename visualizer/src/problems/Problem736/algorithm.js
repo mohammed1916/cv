@@ -96,12 +96,12 @@ function buildFrames(tokens, record) {
       if (/^[a-z]/.test(tok)) {
         if (tok === 'let' || tok === 'add' || tok === 'mult') bail(`"${tok}" is a keyword, not a variable.`)
         const { value: v, level } = lookup(tok)
-        push('lookup', L('return the lookup of the name'), `Variable ${tok}: search scopes from innermost outward; found ${tok} = ${v} in scope ${level}.`, { depth, value: v, token: pos - 1 })
+        push('lookup', L('return the lookup of the name'), `Variable ${tok}: search scopes from innermost outward; found ${tok} = ${v} in scope ${level}.`, { pythonLine: 17, depth, value: v, token: pos - 1 })
         return v
       }
       if (!/^-?[0-9]+$/.test(tok)) bail(`Invalid token "${tok}".`)
       const v = parseInt(tok, 10)
-      push('literal', L('return the integer literal'), `Integer literal ${v}.`, { depth, value: v, token: pos - 1 })
+      push('literal', L('return the integer literal'), `Integer literal ${v}.`, { pythonLine: 18, depth, value: v, token: pos - 1 })
       return v
     }
     pos++
@@ -109,41 +109,41 @@ function buildFrames(tokens, record) {
     pos++
     if (op === 'let') {
       scopes.push({})
-      push('enter', L('if op is let'), 'Enter a let: push a fresh scope. Variables bound here shadow outer ones until the let ends.', { depth, token: pos - 1 })
+      push('enter', L('if op is let'), 'Enter a let: push a fresh scope. Variables bound here shadow outer ones until the let ends.', { pythonLine: 23, depth, token: pos - 1 })
       let result
       for (;;) {
         if (at(pos) === '(' || at(pos + 1) === ')') {
-          push('enter', L('result = value()'), `Next item is the final expression of the let (a lone value or a nested form): evaluate it.`, { depth, token: pos })
+          push('enter', L('result = value()'), `Next item is the final expression of the let (a lone value or a nested form): evaluate it.`, { pythonLine: 26, depth, token: pos })
           result = value(depth + 1)
           break
         }
         const name = at(pos)
         if (!/^[a-z][a-z0-9]*$/.test(name) || ['let', 'add', 'mult'].includes(name)) bail(`"${name}" is not a valid variable name.`)
         pos++
-        push('enter', L('name = tokens[pos]'), `Variable name "${name}": evaluate its value expression next.`, { depth, token: pos - 1 })
+        push('enter', L('name = tokens[pos]'), `Variable name "${name}": evaluate its value expression next.`, { pythonLine: 28, depth, token: pos - 1 })
         const v = value(depth + 1)
         scopes[scopes.length - 1][name] = v
-        push('bind', L('scopes[-1][name]'), `Bind ${name} = ${v} in the innermost scope.`, { depth, token: pos - 1, value: v })
+        push('bind', L('scopes[-1][name]'), `Bind ${name} = ${v} in the innermost scope.`, { pythonLine: 30, depth, token: pos - 1, value: v })
       }
       scopes.pop()
       pos++
-      push('combine', L('pop the scope'), `Close the let: pop its scope (its variables vanish). The let evaluates to ${result}.`, { depth, value: result, token: pos - 1 })
+      push('combine', L('pop the scope'), `Close the let: pop its scope (its variables vanish). The let evaluates to ${result}.`, { pythonLine: 31, depth, value: result, token: pos - 1 })
       return result
     }
     if (op !== 'add' && op !== 'mult') bail(`Unknown operator "${op}".`)
-    push('enter', L('a = value()'), `Enter ${op}: evaluate both operands left to right.`, { depth, token: pos - 1 })
+    push('enter', L('a = value()'), `Enter ${op}: evaluate both operands left to right.`, { pythonLine: 33, depth, token: pos - 1 })
     const a = value(depth + 1)
     const b = value(depth + 1)
     const result = op === 'add' ? a + b : a * b
     pos++
-    push('combine', L('return a + b for add'), `${op}(${a}, ${b}) = ${result}.`, { depth, value: result, token: pos - 1 })
+    push('combine', L('return a + b for add'), `${op}(${a}, ${b}) = ${result}.`, { pythonLine: 35, depth, value: result, token: pos - 1 })
     return result
   }
-  push('start', L('set tokens to'), `Tokenise by padding parentheses with spaces: ${tokens.length} tokens. A stack of scopes starts with one empty scope.`, { token: -1 })
+  push('start', L('set tokens to'), `Tokenise by padding parentheses with spaces: ${tokens.length} tokens. A stack of scopes starts with one empty scope.`, { pythonLine: 4, token: -1 })
   const result = value(0)
   if (pos !== tokens.length) bail('Unexpected tokens after the expression.')
   if (!Number.isSafeInteger(result)) bail('Result is too large.')
-  push('done', L('return value()'), `The expression evaluates to ${result}.`, { value: result, token: -1 })
+  push('done', L('return value()'), `The expression evaluates to ${result}.`, { pythonLine: 39, value: result, token: -1 })
   return { frames, result }
 }
 

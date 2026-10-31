@@ -23,13 +23,13 @@ export function landing(heights, k) {
 
 export function buildTrace(spec) {
   const heights = [...spec.heights]
-  const frames = [{ phase: 'start', activeLine: L('heights = a copy'), heights: [...heights], index: null, side: null, drop: 0, message: `Drop ${spec.volume} unit(s) of water at index ${spec.k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('heights = a copy'), pythonLine: 2, heights: [...heights], index: null, side: null, drop: 0, message: `Drop ${spec.volume} unit(s) of water at index ${spec.k}.` }]
   for (let drop = 1; drop <= spec.volume; drop++) {
     const { index, side } = landing(heights, spec.k)
     heights[index] += 1
-    frames.push({ phase: 'drop', activeLine: L('add one unit of water'), heights: [...heights], index, side, drop, message: `Unit ${drop} settles at index ${index} (${side}).` })
+    frames.push({ phase: 'drop', activeLine: L('add one unit of water'), pythonLine: 16, heights: [...heights], index, side, drop, message: `Unit ${drop} settles at index ${index} (${side}).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return heights'), heights: [...heights], index: null, side: null, drop: spec.volume, message: 'All water has settled.' })
+  frames.push({ phase: 'done', activeLine: L('return heights'), pythonLine: 17, heights: [...heights], index: null, side: null, drop: spec.volume, message: 'All water has settled.' })
   return { input: spec, result: heights, frames }
 }
 

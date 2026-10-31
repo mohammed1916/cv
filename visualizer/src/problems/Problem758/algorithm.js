@@ -21,16 +21,16 @@ function render(s, bold) {
 export function buildTrace(spec) {
   const { s, words } = spec
   const bold = Array(s.length).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('bold = list of False'), at: null, word: null, bold: [...bold], result: null, message: 'Find every occurrence of every word and bold its letters.' }]
+  const frames = [{ phase: 'start', activeLine: L('bold = list of False'), pythonLine: 2, at: null, word: null, bold: [...bold], result: null, message: 'Find every occurrence of every word and bold its letters.' }]
   for (const word of words) {
     for (let i = 0; i + word.length <= s.length; i++) {
       if (!s.startsWith(word, i)) continue
       for (let k = i; k < i + word.length; k++) bold[k] = true
-      frames.push({ phase: 'match', activeLine: L('mark letter k'), at: i, word, bold: [...bold], result: null, message: `"${word}" occurs at index ${i}: its letters become bold.` })
+      frames.push({ phase: 'match', activeLine: L('mark letter k'), pythonLine: 7, at: i, word, bold: [...bold], result: null, message: `"${word}" occurs at index ${i}: its letters become bold.` })
     }
   }
   const result = render(s, bold)
-  frames.push({ phase: 'done', activeLine: L('return out'), at: null, word: null, bold: [...bold], result, message: `Result: ${result}` })
+  frames.push({ phase: 'done', activeLine: L('return out'), pythonLine: 15, at: null, word: null, bold: [...bold], result, message: `Result: ${result}` })
   return { input: spec, s, result, bold, frames }
 }
 
