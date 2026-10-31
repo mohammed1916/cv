@@ -6,7 +6,7 @@ export function parseInput(text) {
 }
 export function buildTrace(s) {
   let dp = [1]
-  const frames = [{ phase: 'start', activeLine: L('start with dp = [1]'), dp: [...dp], i: -1, message: 'With one element there is exactly one arrangement; dp[j] counts arrangements whose last element has rank j among those placed.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('start with dp = [1]'), dp: [...dp], i: -1, message: 'With one element there is exactly one arrangement; dp[j] counts arrangements whose last element has rank j among those placed.' }]
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
     const prefix = [0]
@@ -15,15 +15,15 @@ export function buildTrace(s) {
     for (let j = 0; j <= i + 1; j++) {
       next.push(c === 'I' ? prefix[j] : (prefix[i + 1] - prefix[j] + MOD) % MOD)
     }
-    frames.push({ phase: 'prefix', activeLine: L('build prefix sums'), dp: [...dp], prefix: prefix.slice(1), i, c, message: `Prefix sums of dp let us add ranges in O(1).` })
+    frames.push({ phase: 'prefix', pythonLine: 7, activeLine: L('build prefix sums'), dp: [...dp], prefix: prefix.slice(1), i, c, message: `Prefix sums of dp let us add ranges in O(1).` })
     dp = next
-    frames.push({ phase: c === 'I' ? 'increase' : 'decrease', activeLine: c === 'I' ? L('set dp[j] to prefix[j]') : L('set dp[j] to the sum of old dp[j]'), dp: [...dp], i, c,
+    frames.push({ phase: c === 'I' ? 'increase' : 'decrease', pythonLine: c === 'I' ? 9 : 11, activeLine: c === 'I' ? L('set dp[j] to prefix[j]') : L('set dp[j] to the sum of old dp[j]'), dp: [...dp], i, c,
       message: c === 'I'
         ? `s[${i}] = I: the new last element must exceed the previous one. New rank j can follow any old rank below j, so dp[j] = sum of old dp[0..j-1].`
         : `s[${i}] = D: the new last element must be below the previous one. New rank j can follow any old rank at least j, so dp[j] = sum of old dp[j..${i}].` })
   }
   const result = dp.reduce((a, b) => (a + b) % MOD, 0)
-  frames.push({ phase: 'done', activeLine: L('return the sum of dp'), dp: [...dp], i: s.length - 1, message: `Sum of all ranks of the last element: ${result} valid permutations.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return the sum of dp'), dp: [...dp], i: s.length - 1, message: `Sum of all ranks of the last element: ${result} valid permutations.` })
   return { input: s, result, frames }
 }
 export const code = `Let n be the length of s, and start with dp = [1], the single arrangement of one element

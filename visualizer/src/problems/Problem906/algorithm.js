@@ -8,7 +8,7 @@ export function parseInput(text) {
 }
 export function buildTrace({ left, right }) {
   const lo = Number(left), hi = Number(right)
-  const frames = [{ phase: 'start', activeLine: L('Let L and R'), count: 0, candidates: [], message: `Count x in [${lo}, ${hi}] with x and sqrt(x) both palindromes. Every palindromic root is built from a half, so only those roots are tried.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('Let L and R'), count: 0, candidates: [], message: `Count x in [${lo}, ${hi}] with x and sqrt(x) both palindromes. Every palindromic root is built from a half, so only those roots are tried.` }]
   const candidates = []
   let count = 0
   for (let half = 1; half < 1000; half++) {
@@ -21,11 +21,11 @@ export function buildTrace({ left, right }) {
       const ok = isPal(sq)
       if (ok) count++
       candidates.push({ root, sq, ok })
-      frames.push({ phase: ok ? 'accept' : 'reject', activeLine: ok ? L('increase count by 1') : L('if L <= sq <= R'), count, candidates: candidates.map(c => ({ ...c })).slice(-60), index: candidates.length - 1, half,
+      frames.push({ phase: ok ? 'accept' : 'reject', pythonLine: ok ? 11 : 10, activeLine: ok ? L('increase count by 1') : L('if L <= sq <= R'), count, candidates: candidates.map(c => ({ ...c })).slice(-60), index: candidates.length - 1, half,
         message: ok ? `Root ${root} (from half ${half}): ${root}^2 = ${sq} is a palindrome, so it counts. Total ${count}.` : `Root ${root} (from half ${half}): ${root}^2 = ${sq} is not a palindrome.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), count, candidates: candidates.slice(-60).map(c => ({ ...c })), index: -1, message: `${count} super-palindromes in [${lo}, ${hi}].` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return count'), count, candidates: candidates.slice(-60).map(c => ({ ...c })), index: -1, message: `${count} super-palindromes in [${lo}, ${hi}].` })
   return { input: { left, right }, result: count, frames }
 }
 export const code = `Let L and R be the bounds as integers, and set count to 0

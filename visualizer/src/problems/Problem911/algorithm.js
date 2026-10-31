@@ -12,14 +12,14 @@ export function buildTrace({ persons, times, queries }) {
   const leaders = []
   const counts = {}
   let lead = -1
-  const frames = [{ phase: 'start', activeLine: L('Process the votes'), vote: -1, leaders: [], counts: {}, qDone: 0, answers: [], message: 'Process the votes in time order, recording who leads after each one. Ties go to the most recent vote.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('Process the votes'), vote: -1, leaders: [], counts: {}, qDone: 0, answers: [], message: 'Process the votes in time order, recording who leads after each one. Ties go to the most recent vote.' }]
   for (let i = 0; i < persons.length; i++) {
     const p = persons[i]
     counts[p] = (counts[p] ?? 0) + 1
     const takes = lead === -1 || counts[p] >= counts[lead]
     if (takes) lead = p
     leaders.push(lead)
-    frames.push({ phase: 'vote', activeLine: takes ? L('set lead to p') : L('if lead is -1'), vote: i, leaders: [...leaders], counts: { ...counts }, qDone: 0, answers: [],
+    frames.push({ phase: 'vote', pythonLine: takes ? 10 : 9, activeLine: takes ? L('set lead to p') : L('if lead is -1'), vote: i, leaders: [...leaders], counts: { ...counts }, qDone: 0, answers: [],
       message: `t=${times[i]}: person ${p} now has ${counts[p]} vote(s). ${takes ? `That ties or beats the leader, so ${p} leads.` : `The leader keeps the lead.`}` })
   }
   const answers = []
@@ -28,10 +28,10 @@ export function buildTrace({ persons, times, queries }) {
     while (lo < hi) { const mid = (lo + hi) >> 1; if (times[mid] <= t) lo = mid + 1; else hi = mid }
     const i = lo - 1
     answers.push(leaders[i])
-    frames.push({ phase: 'query', activeLine: L('return the recorded leader'), vote: i, leaders: [...leaders], counts: { ...counts }, qIndex: qi, qDone: qi + 1, answers: [...answers],
+    frames.push({ phase: 'query', pythonLine: 12, activeLine: L('return the recorded leader'), vote: i, leaders: [...leaders], counts: { ...counts }, qIndex: qi, qDone: qi + 1, answers: [...answers],
       message: `q(${t}): binary search finds the last vote at or before ${t}, index ${i} (time ${times[i]}); the leader then was ${leaders[i]}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the recorded leader'), vote: -1, leaders: [...leaders], counts: { ...counts }, qDone: queries.length, qIndex: queries.length - 1, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return the recorded leader'), vote: -1, leaders: [...leaders], counts: { ...counts }, qDone: queries.length, qIndex: queries.length - 1, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input: { persons, times, queries }, leaders, result: answers, frames }
 }
 export const code = `Process the votes in time order, with lead set to -1 and no votes counted

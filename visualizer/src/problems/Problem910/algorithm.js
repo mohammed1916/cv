@@ -10,17 +10,17 @@ export function buildTrace({ nums, k }) {
   const a = [...nums].sort((x, y) => x - y)
   const n = a.length
   let ans = a[n - 1] - a[0]
-  const frames = [{ phase: 'start', activeLine: L('Sort nums into a'), split: -1, ans, message: `Sorted: [${a.join(', ')}]. Adding nothing to everything gives range ${ans}. In an optimal answer, small values get +${k} and large values get -${k}, so only prefix/suffix splits matter.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('Sort nums into a'), split: -1, ans, message: `Sorted: [${a.join(', ')}]. Adding nothing to everything gives range ${ans}. In an optimal answer, small values get +${k} and large values get -${k}, so only prefix/suffix splits matter.` }]
   for (let i = 0; i < n - 1; i++) {
     const high = Math.max(a[n - 1] - k, a[i] + k)
     const low = Math.min(a[0] + k, a[i + 1] - k)
     const range = high - low
     const better = range < ans
     if (better) ans = range
-    frames.push({ phase: better ? 'improve' : 'split', activeLine: L('set ans to the smaller of ans'), split: i, high, low, range, ans,
+    frames.push({ phase: better ? 'improve' : 'split', pythonLine: 8, activeLine: L('set ans to the smaller of ans'), split: i, high, low, range, ans,
       message: `Split after index ${i}: indices 0..${i} get +${k}, the rest get -${k}. Max = max(${a[n - 1]}-${k}, ${a[i]}+${k}) = ${high}; min = min(${a[0]}+${k}, ${a[i + 1]}-${k}) = ${low}. Range ${range}${better ? ', a new best.' : `, not better than ${ans}.`}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return ans'), split: -1, ans, message: `Smallest possible range: ${ans}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return ans'), split: -1, ans, message: `Smallest possible range: ${ans}.` })
   return { input: { nums, k }, sorted: a, result: ans, frames }
 }
 export const code = `Sort nums into a, let n be its length, and set ans to the largest value minus the smallest value

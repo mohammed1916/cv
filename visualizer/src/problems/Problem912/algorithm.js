@@ -6,29 +6,29 @@ export function parseInput(text) {
 const at = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace(input) {
   const nums = [...input]
-  const frames = [{ phase: 'start', activeLine: at('Merge sort the whole array'), nums: [...nums], lo: 0, hi: nums.length, depth: 0, message: 'Merge sort splits the array until single elements, then merges sorted halves.' }]
+  const frames = [{ phase: 'start', pythonLine: 28, activeLine: at('Merge sort the whole array'), nums: [...nums], lo: 0, hi: nums.length, depth: 0, message: 'Merge sort splits the array until single elements, then merges sorted halves.' }]
   function sort(lo, hi, depth) {
     if (hi - lo <= 1) return
     const mid = (lo + hi) >> 1
-    frames.push({ phase: 'split', activeLine: at('let mid be'), nums: [...nums], lo, hi, mid, depth, message: `Split [${lo}, ${hi}) at ${mid}: sort [${lo}, ${mid}) and [${mid}, ${hi}) first.` })
+    frames.push({ phase: 'split', pythonLine: 6, activeLine: at('let mid be'), nums: [...nums], lo, hi, mid, depth, message: `Split [${lo}, ${hi}) at ${mid}: sort [${lo}, ${mid}) and [${mid}, ${hi}) first.` })
     sort(lo, mid, depth + 1)
     sort(mid, hi, depth + 1)
     const left = nums.slice(lo, mid), right = nums.slice(mid, hi)
     let i = 0, j = 0, k = lo
-    const place = (from, v, line, msg) => {
+    const place = (from, v, line, msg, py) => {
       nums[k] = v
-      frames.push({ phase: 'place', activeLine: line, nums: [...nums], lo, hi, mid, k, left, right, i, j, depth, message: msg })
+      frames.push({ phase: 'place', pythonLine: py, activeLine: line, nums: [...nums], lo, hi, mid, k, left, right, i, j, depth, message: msg })
       k++
     }
     while (i < left.length && j < right.length) {
-      if (left[i] <= right[j]) { place('l', left[i], at('write left[i] into nums[k] and move i forward'), `${left[i]} (left) is not larger than ${right[j]} (right): write ${left[i]} at index ${k}.`); i++ }
-      else { place('r', right[j], at('write right[j] into nums[k] and move j forward'), `${right[j]} (right) is smaller than ${left[i]} (left): write ${right[j]} at index ${k}.`); j++ }
+      if (left[i] <= right[j]) { place('l', left[i], at('write left[i] into nums[k] and move i forward'), `${left[i]} (left) is not larger than ${right[j]} (right): write ${left[i]} at index ${k}.`, 14); i++ }
+      else { place('r', right[j], at('write right[j] into nums[k] and move j forward'), `${right[j]} (right) is smaller than ${left[i]} (left): write ${right[j]} at index ${k}.`, 17); j++ }
     }
-    while (i < left.length) { place('l', left[i], at('copy leftover left items'), `Right half is exhausted: copy leftover ${left[i]} to index ${k}.`); i++ }
-    while (j < right.length) { place('r', right[j], at('copy leftover right items'), `Left half is exhausted: copy leftover ${right[j]} to index ${k}.`); j++ }
+    while (i < left.length) { place('l', left[i], at('copy leftover left items'), `Right half is exhausted: copy leftover ${left[i]} to index ${k}.`, 21); i++ }
+    while (j < right.length) { place('r', right[j], at('copy leftover right items'), `Left half is exhausted: copy leftover ${right[j]} to index ${k}.`, 25); j++ }
   }
   sort(0, nums.length, 0)
-  frames.push({ phase: 'done', activeLine: at('return nums'), nums: [...nums], lo: 0, hi: nums.length, depth: 0, message: `Sorted: [${nums.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: at('return nums'), nums: [...nums], lo: 0, hi: nums.length, depth: 0, message: `Sorted: [${nums.join(', ')}].` })
   return { input: [...input], result: nums, frames }
 }
 export const code = `Merge sort the whole array by calling sort(0, length of nums)
