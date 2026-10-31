@@ -56,6 +56,9 @@
       "**/._*",
       "*.test.js",
       "firebase-debug.log"
+    ],
+    "postdeploy": [
+      "python3 \"$PROJECT_DIR/scripts/prune-old-secret-versions.py\" --project \"$GCLOUD_PROJECT\" --apply"
     ]
   },
   "firestore": {

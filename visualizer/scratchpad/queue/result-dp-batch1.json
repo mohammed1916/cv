@@ -1,0 +1,62 @@
+[
+  {
+    "number": 2552,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": false
+  },
+  {
+    "number": 2606,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": true
+  },
+  {
+    "number": 2617,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": false
+  },
+  {
+    "number": 2735,
+    "status": "skipped",
+    "reason": "WebSearch returned only tags and acceptance rate; no statement, constraints or examples could be retrieved.",
+    "requirementsVerified": false
+  },
+  {
+    "number": 2745,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": true
+  },
+  {
+    "number": 2750,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": false
+  },
+  {
+    "number": 2963,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": false
+  },
+  {
+    "number": 3101,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": false
+  },
+  {
+    "number": 3287,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": true
+  },
+  {
+    "number": 3290,
+    "status": "done",
+    "reason": "Folder created; Node and Python checks passed.",
+    "requirementsVerified": false
+  }
+]

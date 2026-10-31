@@ -16,7 +16,16 @@ function uid(request) {
   if (!request.auth || request.auth.token.firebase?.sign_in_provider !== 'google.com') throw new HttpsError('unauthenticated', 'Sign in with Google.');
   return request.auth.uid;
 }
-export const accountStatus = onCall(options, async (request) => status((await db.doc(`accounts/${uid(request)}`).get()).data()));
+const COMPLIMENTARY_EMAILS = new Set(['greenelitesolutions@gmail.com']);
+function complimentary(request) {
+  const token = request.auth?.token;
+  return token?.email_verified === true && COMPLIMENTARY_EMAILS.has(String(token.email || '').toLowerCase());
+}
+function accountPro(request, data, now) {
+  const pro = status(data, now);
+  return complimentary(request) ? { ...pro, pro: true, complimentary: true } : pro;
+}
+export const accountStatus = onCall(options, async (request) => accountPro(request, (await db.doc(`accounts/${uid(request)}`).get()).data(), Date.now()));
 export const startProTrial = onCall(options, async request => {
   const ref = db.doc(`accounts/${uid(request)}`);
   return db.runTransaction(async tx => {
@@ -36,8 +45,8 @@ export const playgroundLease = onCall(options, async (request) => {
     const ref = db.doc(`usage/${user}`);
     const usage = await tx.get(ref);
     const now = Date.now();
-    const pro = status(account.data(), now);
-    if (pro.pro) return { pro: true, trialActive: pro.trialActive, validUntil: Math.min(now + 30000, pro.expiresAt), serverNow: now };
+    const pro = accountPro(request, account.data(), now);
+    if (pro.pro) return { pro: true, trialActive: pro.trialActive, validUntil: Math.min(now + 30000, pro.expiresAt || Infinity), serverNow: now };
     const result = reserve(usage.data(), sessionId, now);
     if (result.record) tx.set(ref, result.record);
     return { ...result.response, pro: false };
