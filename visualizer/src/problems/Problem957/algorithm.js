@@ -13,22 +13,22 @@ export function buildTrace({ cells: start, n: total }) {
   let n = total
   const seen = new Map()
   let day = 0
-  const frames = [{ phase: 'start', activeLine: L('create an empty map'), day, cells: [...cells], n, message: `${total} day(s) requested. Only 2^6 = 64 interior states exist, so the sequence must start repeating long before day ${total}.` }]
+  const frames = [{ phase: 'start', activeLine: L('create an empty map'), pythonLine: 2, day, cells: [...cells], n, message: `${total} day(s) requested. Only 2^6 = 64 interior states exist, so the sequence must start repeating long before day ${total}.` }]
   while (day < n) {
     const key = cells.join('')
     if (seen.has(key)) {
       const cycle = day - seen.get(key)
       const oldN = n
       n = day + (n - day) % cycle
-      frames.push({ phase: 'cycle', activeLine: L('set n to day plus'), day, cells: [...cells], n, cycle, message: `State ${key} was already seen on day ${seen.get(key)}: the cycle length is ${cycle}. Only (${oldN} - ${day}) mod ${cycle} = ${n - day} more day(s) are needed.` })
+      frames.push({ phase: 'cycle', activeLine: L('set n to day plus'), pythonLine: 7, day, cells: [...cells], n, cycle, message: `State ${key} was already seen on day ${seen.get(key)}: the cycle length is ${cycle}. Only (${oldN} - ${day}) mod ${cycle} = ${n - day} more day(s) are needed.` })
       if (day >= n) break
     }
     seen.set(key, day)
     cells = nextDay(cells)
     day++
-    frames.push({ phase: 'step', activeLine: L('set cells to the next'), day, cells: [...cells], n, message: `Day ${day}: each interior cell becomes 1 iff both neighbours were equal; the end cells have only one neighbour so become 0.` })
+    frames.push({ phase: 'step', activeLine: L('set cells to the next'), pythonLine: 11, day, cells: [...cells], n, message: `Day ${day}: each interior cell becomes 1 iff both neighbours were equal; the end cells have only one neighbour so become 0.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return cells'), day, cells: [...cells], n, message: `State after ${total} day(s): [${cells.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return cells'), pythonLine: 13, day, cells: [...cells], n, message: `State after ${total} day(s): [${cells.join(', ')}].` })
   return { input: { cells: [...start], n: total }, result: cells, frames }
 }
 

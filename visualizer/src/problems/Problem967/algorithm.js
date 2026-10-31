@@ -9,23 +9,23 @@ export function buildTrace(spec) {
   const { n, k } = spec
   const results = []
   const digits = []
-  const frames = [{ phase: 'start', activeLine: L('start grow with no digits'), digits: [], results: [], message: `Build ${n}-digit numbers. Consecutive digits must differ by exactly ${k}, and the first digit cannot be 0.` }]
+  const frames = [{ phase: 'start', activeLine: L('start grow with no digits'), pythonLine: 13, digits: [], results: [], message: `Build ${n}-digit numbers. Consecutive digits must differ by exactly ${k}, and the first digit cannot be 0.` }]
   const grow = () => {
     if (digits.length === n) {
       results.push(Number(digits.join('')))
-      frames.push({ phase: 'complete', activeLine: L('append it to results'), digits: [...digits], results: [...results], message: `${digits.join('')} is complete and valid.` })
+      frames.push({ phase: 'complete', activeLine: L('append it to results'), pythonLine: 5, digits: [...digits], results: [...results], message: `${digits.join('')} is complete and valid.` })
       return
     }
     for (let d = digits.length === 0 ? 1 : 0; d <= 9; d++) {
       if (digits.length > 0 && Math.abs(d - digits.at(-1)) !== k) continue
       digits.push(d)
-      frames.push({ phase: 'extend', activeLine: L('append d to digits'), digits: [...digits], results: [...results], message: `Append ${d}: ${digits.length < n ? 'keep building' : 'the number is full'}.` })
+      frames.push({ phase: 'extend', activeLine: L('append d to digits'), pythonLine: 10, digits: [...digits], results: [...results], message: `Append ${d}: ${digits.length < n ? 'keep building' : 'the number is full'}.` })
       grow()
       digits.pop()
     }
   }
   grow()
-  frames.push({ phase: 'done', activeLine: L('return results'), digits: [], results: [...results], message: `${results.length} number(s) found.` })
+  frames.push({ phase: 'done', activeLine: L('return results'), pythonLine: 14, digits: [], results: [...results], message: `${results.length} number(s) found.` })
   return { input: spec, result: results, frames }
 }
 

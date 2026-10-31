@@ -15,7 +15,7 @@ export function buildTrace(points) {
   const present = new Set(points.map(key))
   let best = Infinity
   let bestCorner = null
-  const frames = [{ phase: 'start', activeLine: L('set best to none'), corner: null, arms: null, area: null, best: null, message: 'A rectangle has a right angle at each corner. Try each point as the corner, with two perpendicular arms.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to none'), pythonLine: 5, corner: null, arms: null, area: null, best: null, message: 'A rectangle has a right angle at each corner. Try each point as the corner, with two perpendicular arms.' }]
   for (const p1 of points) {
     for (const p0 of points) {
       for (const p2 of points) {
@@ -29,12 +29,12 @@ export function buildTrace(points) {
           best = area
           bestCorner = p1
         }
-        frames.push({ phase: 'rectangle', activeLine: L('set area to'), corner: p1, arms: [p0, p2], area, best, message: `Corner ${key(p1)} with arms to ${key(p0)} and ${key(p2)} closes at ${key(fourth)}: area ${area.toFixed(3)}.` })
+        frames.push({ phase: 'rectangle', activeLine: L('set area to'), pythonLine: 19, corner: p1, arms: [p0, p2], area, best, message: `Corner ${key(p1)} with arms to ${key(p0)} and ${key(p2)} closes at ${key(fourth)}: area ${area.toFixed(3)}.` })
       }
     }
   }
   const result = best === Infinity ? 0 : best
-  frames.push({ phase: 'done', activeLine: L('return best, or 0'), corner: bestCorner, arms: null, area: null, best: result, message: result ? `Smallest rectangle area: ${result.toFixed(5)}.` : 'No rectangle exists.' })
+  frames.push({ phase: 'done', activeLine: L('return best, or 0'), pythonLine: 20, corner: bestCorner, arms: null, area: null, best: result, message: result ? `Smallest rectangle area: ${result.toFixed(5)}.` : 'No rectangle exists.' })
   return { input: points, result, frames }
 }
 

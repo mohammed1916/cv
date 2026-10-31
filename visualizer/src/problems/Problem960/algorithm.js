@@ -13,7 +13,7 @@ export function buildTrace(strs) {
   // dp[j]: the most columns that can be kept with column j as the last one kept.
   const dp = Array(cols).fill(1)
   const from = Array(cols).fill(-1)
-  const frames = [{ phase: 'start', activeLine: L('for each column j, set dp'), column: null, dp: [...dp], from: null, message: 'Each column alone is a valid choice. Look for longer chains of columns that stay sorted in every row.' }]
+  const frames = [{ phase: 'start', activeLine: L('for each column j, set dp'), pythonLine: 3, column: null, dp: [...dp], from: null, message: 'Each column alone is a valid choice. Look for longer chains of columns that stay sorted in every row.' }]
   for (let j = 0; j < cols; j++) {
     for (let i = 0; i < j; i++) {
       if (strs.every(row => row[i] <= row[j]) && dp[i] + 1 > dp[j]) {
@@ -21,12 +21,12 @@ export function buildTrace(strs) {
         from[j] = i
       }
     }
-    frames.push({ phase: 'fill', activeLine: L('set dp[j] to dp[i] plus 1'), column: j, dp: [...dp], from: from[j], message: from[j] === -1 ? `Column ${j} starts a new chain of length 1.` : `Column ${j} extends the chain ending at column ${from[j]} to length ${dp[j]}.` })
+    frames.push({ phase: 'fill', activeLine: L('set dp[j] to dp[i] plus 1'), pythonLine: from[j] === -1 ? 5 : 7, column: j, dp: [...dp], from: from[j], message: from[j] === -1 ? `Column ${j} starts a new chain of length 1.` : `Column ${j} extends the chain ending at column ${from[j]} to length ${dp[j]}.` })
   }
   let best = 0
   for (let j = 1; j < cols; j++) if (dp[j] > dp[best]) best = j
   const result = cols - dp[best]
-  frames.push({ phase: 'done', activeLine: L('return cols minus'), column: best, dp: [...dp], from: null, message: `Keep ${dp[best]} columns and delete ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return cols minus'), pythonLine: 8, column: best, dp: [...dp], from: null, message: `Keep ${dp[best]} columns and delete ${result}.` })
   return { input: strs, cols, result, frames }
 }
 

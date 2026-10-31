@@ -24,7 +24,7 @@ export function buildTrace(spec) {
     if (!lower.has(w.toLowerCase())) lower.set(w.toLowerCase(), w)
     if (!vowel.has(devowel(w))) vowel.set(devowel(w), w)
   }
-  const frames = [{ phase: 'start', activeLine: L('set exact to'), query: null, stage: null, match: null, result: null, message: 'Build three lookups from the word list. The first word in the list wins ties.' }]
+  const frames = [{ phase: 'start', activeLine: L('set exact to'), pythonLine: 5, query: null, stage: null, match: null, result: null, message: 'Build three lookups from the word list. The first word in the list wins ties.' }]
   const result = []
   for (const q of queries) {
     let out, stage, activeLine
@@ -33,9 +33,9 @@ export function buildTrace(spec) {
     else if (vowel.has(devowel(q))) { out = vowel.get(devowel(q)); stage = 3; activeLine = L('if devowel(q) is in vowel') }
     else { out = ''; stage = 4; activeLine = L('append the empty string') }
     result.push(out)
-    frames.push({ phase: 'query', activeLine, query: q, stage, match: out, result: out, message: stage === 4 ? `${q} matches nothing: answer "".` : `${q} matches ${out} at rule ${stage}.` })
+    frames.push({ phase: 'query', activeLine, query: q, pythonLine: stage === 1 ? 13 : stage === 2 ? 15 : stage === 3 ? 17 : 19, stage, match: out, result: out, message: stage === 4 ? `${q} matches nothing: answer "".` : `${q} matches ${out} at rule ${stage}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), query: null, stage: null, match: null, result: null, message: `Corrected ${queries.length} queries.` })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: 20, query: null, stage: null, match: null, result: null, message: `Corrected ${queries.length} queries.` })
   return { input: spec, result, frames }
 }
 

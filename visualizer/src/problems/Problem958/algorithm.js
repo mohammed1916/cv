@@ -15,25 +15,25 @@ export function buildTrace(arr) {
   const label = n => (n ? String(n.value) : 'null')
   let seenNull = false
   const visited = []
-  const frames = [{ phase: 'start', activeLine: L('start a queue'), queue: queue.map(label), visited: [], node: null, seenNull, message: 'Run BFS from the root, enqueueing missing children as nulls too. In a complete tree all real nodes come before the first null.' }]
+  const frames = [{ phase: 'start', activeLine: L('start a queue'), pythonLine: 27, queue: queue.map(label), visited: [], node: null, seenNull, message: 'Run BFS from the root, enqueueing missing children as nulls too. In a complete tree all real nodes come before the first null.' }]
   let result = true
   while (queue.length) {
     const node = queue.shift()
     if (!node) {
       seenNull = true
-      frames.push({ phase: 'null', activeLine: L('set seenNull to true'), queue: queue.map(label), visited: [...visited], node: null, seenNull, message: 'Dequeued a null: a gap has started. Every later dequeued node must also be null.' })
+      frames.push({ phase: 'null', activeLine: L('set seenNull to true'), pythonLine: 32, queue: queue.map(label), visited: [...visited], node: null, seenNull, message: 'Dequeued a null: a gap has started. Every later dequeued node must also be null.' })
       continue
     }
     if (seenNull) {
       result = false
-      frames.push({ phase: 'fail', activeLine: L('if seenNull is true'), queue: queue.map(label), visited: [...visited], node: node.id, seenNull, message: `Node ${node.value} appears after a null in level order: a gap precedes it, so the tree is not complete.` })
+      frames.push({ phase: 'fail', activeLine: L('if seenNull is true'), pythonLine: 35, queue: queue.map(label), visited: [...visited], node: node.id, seenNull, message: `Node ${node.value} appears after a null in level order: a gap precedes it, so the tree is not complete.` })
       break
     }
     visited.push(node.id)
     queue.push(node.left, node.right)
-    frames.push({ phase: 'visit', activeLine: L('add its left child'), queue: queue.map(label), visited: [...visited], node: node.id, seenNull, message: `Dequeued node ${node.value}; enqueue its left (${label(node.left)}) and right (${label(node.right)}) children.` })
+    frames.push({ phase: 'visit', activeLine: L('add its left child'), pythonLine: 36, queue: queue.map(label), visited: [...visited], node: node.id, seenNull, message: `Dequeued node ${node.value}; enqueue its left (${label(node.left)}) and right (${label(node.right)}) children.` })
   }
-  frames.push({ phase: 'done', activeLine: result ? L('return true') : L('return false'), queue: [], visited: [...visited], node: null, seenNull, message: result ? 'Only nulls remain after the last node: the tree is complete.' : 'The tree is not complete.' })
+  frames.push({ phase: 'done', activeLine: result ? L('return true') : L('return false'), pythonLine: result ? 38 : 35, queue: [], visited: [...visited], node: null, seenNull, message: result ? 'Only nulls remain after the last node: the tree is complete.' : 'The tree is not complete.' })
   return { input: [...arr], root, result, frames }
 }
 

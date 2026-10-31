@@ -17,27 +17,27 @@ export function buildTrace({ x, target }) {
   const digits = []
   for (let rest = target; rest > 0; rest = Math.floor(rest / x)) digits.push(rest % x)
   let pos = 0, neg = 0, rest = target
-  const frames = [{ phase: 'start', activeLine: L('set pos and neg to 0'), position: -1, digit: null, rest, pos, neg, candidates: null, message: `Write ${target} in base ${x}. Digits, least significant first: ${digits.join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set pos and neg to 0'), pythonLine: 2, position: -1, digit: null, rest, pos, neg, candidates: null, message: `Write ${target} in base ${x}. Digits, least significant first: ${digits.join(', ')}.` }]
   digits.forEach((cur, k) => {
     rest = Math.floor(rest / x)
     const oldPos = pos, oldNeg = neg
     if (k === 0) {
       pos = 2 * cur
       neg = 2 * (x - cur)
-      frames.push({ phase: 'digit', activeLine: L('set pos to 2 times cur'), position: k, digit: cur, rest, pos, neg, candidates: null, message: `Position 0, digit ${cur}: plain copies of 1 (x / x) cost ${pos}; borrowing costs ${neg}.` })
+      frames.push({ phase: 'digit', activeLine: L('set pos to 2 times cur'), pythonLine: 8, position: k, digit: cur, rest, pos, neg, candidates: null, message: `Position 0, digit ${cur}: plain copies of 1 (x / x) cost ${pos}; borrowing costs ${neg}.` })
       return
     }
     const posPlain = oldPos + cur * k, posBorrow = oldNeg + (cur + 1) * k
     const negPlain = oldPos + (x - cur) * k, negBorrow = oldNeg + (x - cur - 1) * k
     pos = Math.min(posPlain, posBorrow)
-    frames.push({ phase: 'digit', activeLine: L('set pos to the smaller of'), position: k, digit: cur, rest, pos, neg: oldNeg, candidates: { posPlain, posBorrow, negPlain, negBorrow }, message: `Position ${k}, digit ${cur}: pos becomes the smaller of ${posPlain} (plain) and ${posBorrow} (borrow in) = ${pos}.` })
+    frames.push({ phase: 'digit', activeLine: L('set pos to the smaller of'), pythonLine: 13, position: k, digit: cur, rest, pos, neg: oldNeg, candidates: { posPlain, posBorrow, negPlain, negBorrow }, message: `Position ${k}, digit ${cur}: pos becomes the smaller of ${posPlain} (plain) and ${posBorrow} (borrow in) = ${pos}.` })
     neg = Math.min(negPlain, negBorrow)
-    frames.push({ phase: 'digit', activeLine: L('set neg to the smaller of'), position: k, digit: cur, rest, pos, neg, candidates: { posPlain, posBorrow, negPlain, negBorrow }, message: `Position ${k}: neg becomes the smaller of ${negPlain} (plain) and ${negBorrow} (borrow in) = ${neg}.` })
+    frames.push({ phase: 'digit', activeLine: L('set neg to the smaller of'), pythonLine: 14, position: k, digit: cur, rest, pos, neg, candidates: { posPlain, posBorrow, negPlain, negBorrow }, message: `Position ${k}: neg becomes the smaller of ${negPlain} (plain) and ${negBorrow} (borrow in) = ${neg}.` })
   })
   const k = digits.length
   const result = Math.min(pos, k + neg) - 1
-  frames.push({ phase: 'tail', activeLine: L('return the smaller of'), position: k, digit: null, rest: 0, pos, neg, candidates: null, message: `A pending borrow at the top costs one more x^${k}: the cheaper ending is ${pos} or ${k} + ${neg} = ${k + neg}. Remove the operator that the first term does not need.` })
-  frames.push({ phase: 'done', activeLine: L('return the smaller of'), position: k, digit: null, rest: 0, pos, neg, candidates: null, message: `Least operators: ${result}.` })
+  frames.push({ phase: 'tail', activeLine: L('return the smaller of'), pythonLine: 16, position: k, digit: null, rest: 0, pos, neg, candidates: null, message: `A pending borrow at the top costs one more x^${k}: the cheaper ending is ${pos} or ${k} + ${neg} = ${k + neg}. Remove the operator that the first term does not need.` })
+  frames.push({ phase: 'done', activeLine: L('return the smaller of'), pythonLine: 16, position: k, digit: null, rest: 0, pos, neg, candidates: null, message: `Least operators: ${result}.` })
   return { x, target, digits, result, frames }
 }
 

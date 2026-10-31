@@ -13,7 +13,7 @@ const NEEDS = 0, CAMERA = 1, WATCHED = 2
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
   const states = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set cameras to 0'), node: null, states: {}, cameras: 0, message: 'Work from the leaves upward. Place a camera only when a node cannot be watched otherwise.' }]
+  const frames = [{ phase: 'start', activeLine: L('set cameras to 0'), pythonLine: 27, node: null, states: {}, cameras: 0, message: 'Work from the leaves upward. Place a camera only when a node cannot be watched otherwise.' }]
   let cameras = 0
   // Post-order: children are decided before their parent.
   const visit = node => {
@@ -33,14 +33,14 @@ export function buildTrace(arr) {
       message = `${node.value}'s children are both watched without cameras, so ${node.value} must wait for its parent.`
     }
     states.set(node.id, state)
-    frames.push({ phase: 'visit', activeLine: L(state === CAMERA ? 'add 1 to cameras and return CAMERA' : state === WATCHED ? 'if left or right is CAMERA' : 'return NEEDS'), node: node.id, states: Object.fromEntries(states), cameras, message })
+    frames.push({ phase: 'visit', activeLine: L(state === CAMERA ? 'add 1 to cameras and return CAMERA' : state === WATCHED ? 'if left or right is CAMERA' : 'return NEEDS'), pythonLine: state === CAMERA ? 34 : state === WATCHED ? 37 : 38, node: node.id, states: Object.fromEntries(states), cameras, message })
     return state
   }
   if (visit(root) === NEEDS) {
     cameras++
-    frames.push({ phase: 'root', activeLine: L('if visit(root) is NEEDS'), node: root.id, states: Object.fromEntries(states), cameras, message: 'The root itself is not watched, so it gets a camera.' })
+    frames.push({ phase: 'root', activeLine: L('if visit(root) is NEEDS'), pythonLine: 40, node: root.id, states: Object.fromEntries(states), cameras, message: 'The root itself is not watched, so it gets a camera.' })
   }
-  frames.push({ phase: 'done', activeLine: L('return cameras'), node: null, states: Object.fromEntries(states), cameras, message: `${cameras} camera(s) cover the tree.` })
+  frames.push({ phase: 'done', activeLine: L('return cameras'), pythonLine: 41, node: null, states: Object.fromEntries(states), cameras, message: `${cameras} camera(s) cover the tree.` })
   return { input: arr, root: treeFromLevelOrder(arr), result: cameras, frames }
 }
 

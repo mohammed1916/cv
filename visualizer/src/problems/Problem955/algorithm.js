@@ -10,23 +10,23 @@ export function buildTrace(strs) {
   const n = strs.length, m = strs[0].length
   const settled = Array(Math.max(0, n - 1)).fill(false)
   const deletedCols = []
-  const frames = [{ phase: 'start', activeLine: L('set n to'), col: -1, settled: [...settled], deleted: [], bad: -1, message: 'Rows are compared only through adjacent pairs. A pair is "settled" once an earlier kept column already made the upper row strictly smaller.' }]
+  const frames = [{ phase: 'start', activeLine: L('set n to'), pythonLine: 2, col: -1, settled: [...settled], deleted: [], bad: -1, message: 'Rows are compared only through adjacent pairs. A pair is "settled" once an earlier kept column already made the upper row strictly smaller.' }]
   for (let c = 0; c < m; c++) {
     let bad = -1
     for (let i = 0; i < n - 1; i++) if (!settled[i] && strs[i][c] > strs[i + 1][c]) { bad = i; break }
     if (bad >= 0) {
       deletedCols.push(c)
-      frames.push({ phase: 'delete', activeLine: L('add 1 to deleted'), col: c, settled: [...settled], deleted: [...deletedCols], bad,
+      frames.push({ phase: 'delete', activeLine: L('add 1 to deleted'), pythonLine: 7, col: c, settled: [...settled], deleted: [...deletedCols], bad,
         message: `Column ${c}: rows ${bad} and ${bad + 1} are still tied above it but '${strs[bad][c]}' is greater than '${strs[bad + 1][c]}'. Keeping the column would break the order, so delete it.` })
       continue
     }
     const newly = []
     for (let i = 0; i < n - 1; i++) if (strs[i][c] < strs[i + 1][c] && !settled[i]) { settled[i] = true; newly.push(i) }
-    frames.push({ phase: 'keep', activeLine: L('otherwise keep column c'), col: c, settled: [...settled], deleted: [...deletedCols], bad: -1,
+    frames.push({ phase: 'keep', activeLine: L('otherwise keep column c'), pythonLine: newly.length ? 11 : 10, col: c, settled: [...settled], deleted: [...deletedCols], bad: -1,
       message: `Column ${c} breaks no unsettled pair: keep it.${newly.length ? ` It settles pair(s) ${newly.map(i => `${i}-${i + 1}`).join(', ')}.` : ' No new pair becomes settled.'}` })
   }
   const result = deletedCols.length
-  frames.push({ phase: 'done', activeLine: L('return deleted'), col: -1, settled: [...settled], deleted: [...deletedCols], bad: -1, message: `Minimum deletions: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return deleted'), pythonLine: 12, col: -1, settled: [...settled], deleted: [...deletedCols], bad: -1, message: `Minimum deletions: ${result}.` })
   return { input: [...strs], result, frames }
 }
 
