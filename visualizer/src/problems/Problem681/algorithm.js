@@ -9,7 +9,7 @@ const minutesOf = time => Number(time.slice(0, 2)) * 60 + Number(time.slice(3))
 export function buildTrace(time) {
   const digits = [...new Set(time.replace(':', ''))].sort()
   const start = minutesOf(time)
-  const frames = [{ phase: 'start', activeLine: L('collect the distinct digits'), candidate: null, gap: null, best: null, digits, message: `The clock may only use the digits ${digits.join(', ')}. Try every arrangement of them.` }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('collect the distinct digits'), candidate: null, gap: null, best: null, digits, message: `The clock may only use the digits ${digits.join(', ')}. Try every arrangement of them.` }]
   let best = time, bestGap = 1440
   for (const a of digits) for (const b of digits) for (const c of digits) for (const d of digits) {
     const candidate = `${a}${b}:${c}${d}`
@@ -18,9 +18,9 @@ export function buildTrace(time) {
     const gap = (minutesOf(candidate) - start + 1440) % 1440 || 1440
     const improved = gap < bestGap
     if (improved) { best = candidate; bestGap = gap }
-    frames.push({ phase: 'candidate', activeLine: L('if gap < bestGap'), candidate, gap, best, digits, improved, message: improved ? `${candidate} is ${gap} minutes ahead and the closest so far.` : `${candidate} is ${gap} minutes ahead, not closer than ${best}.` })
+    frames.push({ phase: 'candidate', pythonLine: 14, activeLine: L('if gap < bestGap'), candidate, gap, best, digits, improved, message: improved ? `${candidate} is ${gap} minutes ahead and the closest so far.` : `${candidate} is ${gap} minutes ahead, not closer than ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), candidate: best, gap: bestGap, best, digits, improved: false, message: `The closest valid arrangement is ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return best'), candidate: best, gap: bestGap, best, digits, improved: false, message: `The closest valid arrangement is ${best}.` })
   return { input: time, result: best, frames }
 }
 

@@ -33,22 +33,22 @@ export function buildTrace(items) {
   let total = 0
   const visited = []
   const paths = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), node: null, visited: [], paths: {}, total, message: 'Start at the root. Each step down appends one digit to the number on the path.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set total to 0'), node: null, visited: [], paths: {}, total, message: 'Start at the root. Each step down appends one digit to the number on the path.' }]
   const dfs = (node, prefix) => {
     if (!node) return
     const path = prefix * 10 + node.value
     visited.push(node.id)
     paths.set(node.id, path)
-    frames.push({ phase: 'visit', activeLine: L('set path to prefix times 10'), node: node.id, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Node ${node.value} makes the path number ${path}.` })
+    frames.push({ phase: 'visit', pythonLine: 9, activeLine: L('set path to prefix times 10'), node: node.id, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Node ${node.value} makes the path number ${path}.` })
     if (!node.left && !node.right) {
       total += path
-      frames.push({ phase: 'leaf', activeLine: L('if node has no children'), node: node.id, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Leaf reached: add ${path} to the total, now ${total}.` })
+      frames.push({ phase: 'leaf', pythonLine: 12, activeLine: L('if node has no children'), node: node.id, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Leaf reached: add ${path} to the total, now ${total}.` })
     }
     dfs(node.left, path)
     dfs(node.right, path)
   }
   dfs(root, 0)
-  frames.push({ phase: 'done', activeLine: L('return total'), node: null, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Every root-to-leaf path is counted once. The sum is ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return total'), node: null, visited: [...visited], paths: Object.fromEntries(paths), total, message: `Every root-to-leaf path is counted once. The sum is ${total}.` })
   return { input: items, root, result: total, frames }
 }
 

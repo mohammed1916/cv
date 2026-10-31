@@ -24,15 +24,15 @@ export function buildTrace({ nums, k }) {
     if (cur >= best) { best = cur; idx = i }
     right[i] = idx
   }
-  const frames = [{ phase: 'start', j: null, starts: null, total: null, activeLine: L('precompute left'), message: `Precompute the best window to the left and right of each position (windows of length ${k}).` }]
+  const frames = [{ phase: 'start', pythonLine: 10, j: null, starts: null, total: null, activeLine: L('precompute left'), message: `Precompute the best window to the left and right of each position (windows of length ${k}).` }]
   let bestTotal = -1, bestStarts = null
   for (let j = k; j <= n - 2 * k; j++) {
     const a = left[j - 1], c = right[j + k]
     const total = at(a) + at(j) + at(c)
     if (total > bestTotal) { bestTotal = total; bestStarts = [a, j, c] }
-    frames.push({ phase: 'middle', j, starts: [a, j, c], total, best: bestStarts, activeLine: L('if best is nothing'), message: `Middle window at ${j}: sums ${at(a)} + ${at(j)} + ${at(c)} = ${total}.` })
+    frames.push({ phase: 'middle', pythonLine: 29, j, starts: [a, j, c], total, best: bestStarts, activeLine: L('if best is nothing'), message: `Middle window at ${j}: sums ${at(a)} + ${at(j)} + ${at(c)} = ${total}.` })
   }
-  frames.push({ phase: 'done', j: null, starts: bestStarts, total: bestTotal, result: bestStarts, activeLine: L('return the kept starts'), message: `Best starts: [${bestStarts.join(', ')}] with total ${bestTotal}.` })
+  frames.push({ phase: 'done', pythonLine: 31, j: null, starts: bestStarts, total: bestTotal, result: bestStarts, activeLine: L('return the kept starts'), message: `Best starts: [${bestStarts.join(', ')}] with total ${bestTotal}.` })
   return { input: { nums, k }, result: bestStarts, frames }
 }
 

@@ -9,17 +9,17 @@ export function parseInput(text) {
 // Binary search on the answer: count how many products are ≤ mid, row by row, and narrow toward k.
 export function buildTrace({ m, n, k }) {
   let lo = 1, hi = m * n
-  const frames = [{ phase: 'start', lo, hi, mid: null, count: null, activeLine: L('set lo to 1'), message: `Search the value v in [1, ${m * n}] for which at least ${k} products are ≤ v.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, lo, hi, mid: null, count: null, activeLine: L('set lo to 1'), message: `Search the value v in [1, ${m * n}] for which at least ${k} products are ≤ v.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     let count = 0
     for (let i = 1; i <= m; i++) count += Math.min(n, Math.floor(mid / i))
     const enough = count >= k
-    frames.push({ phase: 'count', lo, hi, mid, count, enough, activeLine: L('if count is at least k'), message: `mid ${mid}: ${count} products ≤ ${mid}; ${enough ? 'at least k, so answer ≤ mid' : 'fewer than k, so answer > mid'}.` })
+    frames.push({ phase: 'count', pythonLine: 6, lo, hi, mid, count, enough, activeLine: L('if count is at least k'), message: `mid ${mid}: ${count} products ≤ ${mid}; ${enough ? 'at least k, so answer ≤ mid' : 'fewer than k, so answer > mid'}.` })
     if (enough) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', lo, hi, mid: null, count: null, result: lo, activeLine: L('return lo'), message: `The ${k}-th smallest product is ${lo}.` })
+  frames.push({ phase: 'done', pythonLine: 10, lo, hi, mid: null, count: null, result: lo, activeLine: L('return lo'), message: `The ${k}-th smallest product is ${lo}.` })
   return { input: { m, n, k }, result: lo, frames }
 }
 

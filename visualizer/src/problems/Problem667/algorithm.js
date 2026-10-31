@@ -10,19 +10,19 @@ export function parseInput(text) {
 export function buildTrace({ n, k }) {
   const out = []
   let lo = 1, hi = k + 1
-  const frames = [{ phase: 'start', perm: [], diffs: [], activeLine: L('set out to an empty list'), message: `Alternate between the low end and the high end of 1…${k + 1}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, perm: [], diffs: [], activeLine: L('set out to an empty list'), message: `Alternate between the low end and the high end of 1…${k + 1}.` }]
   let turnLow = true
   while (out.length < k + 1) {
     out.push(turnLow ? lo++ : hi--)
     turnLow = !turnLow
-    frames.push({ phase: 'place', perm: [...out], diffs: distinctDiffs(out), activeLine: L('append lo if turn'), message: `Place ${out.at(-1)}.` })
+    frames.push({ phase: 'place', pythonLine: 5, perm: [...out], diffs: distinctDiffs(out), activeLine: L('append lo if turn'), message: `Place ${out.at(-1)}.` })
   }
   for (let v = k + 2; v <= n; v++) {
     out.push(v)
-    frames.push({ phase: 'tail', perm: [...out], diffs: distinctDiffs(out), activeLine: L('append k+2 through n'), message: `Append ${v}: consecutive values give difference 1, already counted.` })
+    frames.push({ phase: 'tail', pythonLine: 11, perm: [...out], diffs: distinctDiffs(out), activeLine: L('append k+2 through n'), message: `Append ${v}: consecutive values give difference 1, already counted.` })
   }
   const result = out
-  frames.push({ phase: 'done', perm: [...result], diffs: distinctDiffs(result), result, activeLine: L('return out'), message: `A permutation with ${distinctDiffs(result).length} distinct differences.` })
+  frames.push({ phase: 'done', pythonLine: 12, perm: [...result], diffs: distinctDiffs(result), result, activeLine: L('return out'), message: `A permutation with ${distinctDiffs(result).length} distinct differences.` })
   return { input: { n, k }, result, frames }
 }
 

@@ -13,7 +13,7 @@ export function buildTrace(spec) {
   // on[p] for positions 1..n; the padding at 0 and n + 1 is always dark.
   const on = Array(n + 2).fill(false)
   const lit = () => on.slice(1, n + 1)
-  const frames = [{ phase: 'start', activeLine: L('start with every bulb off'), day: 0, position: null, lit: lit(), hit: null, result: null, message: `Bulbs come on one per day. Look for two lit bulbs with exactly ${k} dark bulbs between them.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('start with every bulb off'), day: 0, position: null, lit: lit(), hit: null, result: null, message: `Bulbs come on one per day. Look for two lit bulbs with exactly ${k} dark bulbs between them.` }]
   let answer = -1
   for (let day = 1; day <= n; day++) {
     const position = bulbs[day - 1]
@@ -24,14 +24,14 @@ export function buildTrace(spec) {
     const leftHit = left >= 1 && on[left] && between(left, position)
     const rightHit = right <= n && on[right] && between(position, right)
     const hit = leftHit || rightHit
-    frames.push({ phase: 'light', activeLine: L('light the bulb'), day, position, lit: lit(), hit: hit ? (leftHit ? left : right) : null, result: null, message: hit ? `Day ${day}: bulb ${position} lights, and bulb ${leftHit ? left : right} has exactly ${k} dark bulbs between them.` : `Day ${day}: bulb ${position} lights. No lit pair fits the gap yet.` })
+    frames.push({ phase: 'light', pythonLine: 5, activeLine: L('light the bulb'), day, position, lit: lit(), hit: hit ? (leftHit ? left : right) : null, result: null, message: hit ? `Day ${day}: bulb ${position} lights, and bulb ${leftHit ? left : right} has exactly ${k} dark bulbs between them.` : `Day ${day}: bulb ${position} lights. No lit pair fits the gap yet.` })
     if (hit) {
       answer = day
-      frames.push({ phase: 'match', activeLine: leftHit ? L('the left bulb is lit') : L('the right bulb is lit'), day, position, lit: lit(), hit: leftHit ? left : right, result: day, message: `The first day with the pattern is day ${day}.` })
+      frames.push({ phase: 'match', pythonLine: leftHit ? 8 : 10, activeLine: leftHit ? L('the left bulb is lit') : L('the right bulb is lit'), day, position, lit: lit(), hit: leftHit ? left : right, result: day, message: `The first day with the pattern is day ${day}.` })
       break
     }
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('return -1'), day: n, position: null, lit: lit(), hit: null, result: -1, message: 'No day produces the pattern.' })
+  if (answer === -1) frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return -1'), day: n, position: null, lit: lit(), hit: null, result: -1, message: 'No day produces the pattern.' })
   return { input: spec, result: answer, frames }
 }
 

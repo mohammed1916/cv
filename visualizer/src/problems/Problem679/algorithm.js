@@ -8,7 +8,7 @@ const EPS = 1e-6
 
 // Repeatedly combine any two numbers with +, −, ×, ÷ (both orders for − and ÷); succeed at one value of 24.
 export function buildTrace(cards) {
-  const frames = [{ phase: 'start', values: cards.map(String), attempt: null, found: null, activeLine: L('start with the four cards'), message: `Combine the four cards ${cards.join(', ')} into 24.` }]
+  const frames = [{ phase: 'start', pythonLine: 18, values: cards.map(String), attempt: null, found: null, activeLine: L('start with the four cards'), message: `Combine the four cards ${cards.join(', ')} into 24.` }]
   let answer = null
   let attempts = 0
   function solve(items) {
@@ -32,13 +32,13 @@ export function buildTrace(cards) {
         if (answer) return
         attempts++
         const next = [...rest, { expr, value }]
-        frames.push({ phase: 'try', values: next.map(x => x.expr), attempt: expr, found: null, activeLine: L('put the result back'), message: `Try ${expr} = ${Number(value.toFixed(4))}.` })
+        frames.push({ phase: 'try', pythonLine: 15, values: next.map(x => x.expr), attempt: expr, found: null, activeLine: L('put the result back'), message: `Try ${expr} = ${Number(value.toFixed(4))}.` })
         solve(next)
       }
     }
   }
   solve(cards.map(v => ({ expr: String(v), value: v })))
-  frames.push({ phase: 'done', values: [], attempt: null, found: answer, attempts, result: answer !== null, activeLine: answer ? L('if that reaches 24') : L('return false'), message: answer ? `Found: ${answer} = 24.` : 'No combination reaches 24.' })
+  frames.push({ phase: 'done', pythonLine: answer ? 16 : 17, values: [], attempt: null, found: answer, attempts, result: answer !== null, activeLine: answer ? L('if that reaches 24') : L('return false'), message: answer ? `Found: ${answer} = 24.` : 'No combination reaches 24.' })
   return { input: cards, result: answer !== null, expression: answer, frames }
 }
 

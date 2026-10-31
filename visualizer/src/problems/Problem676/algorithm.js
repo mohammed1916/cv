@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace({ words, queries }) {
   const dictionary = [...words]
   const ops = []
-  const frames = [{ phase: 'start', query: null, ops: [], activeLine: L('store the dictionary words'), message: `Dictionary: ${dictionary.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, query: null, ops: [], activeLine: L('store the dictionary words'), message: `Dictionary: ${dictionary.join(', ')}.` }]
   for (const query of queries) {
     let matched = false, witness = null
     for (const w of dictionary) {
@@ -21,9 +21,9 @@ export function buildTrace({ words, queries }) {
       if (diff === 1) { matched = true; witness = w; break }
     }
     ops.push({ name: 'search', args: [query], returned: matched })
-    frames.push({ phase: 'search', query, witness, matched, ops: ops.map(o => ({ ...o })), activeLine: L('record whether the query matched'), message: matched ? `${query} matches ${witness} with one change.` : `${query} has no dictionary word one change away.` })
+    frames.push({ phase: 'search', pythonLine: 12, query, witness, matched, ops: ops.map(o => ({ ...o })), activeLine: L('record whether the query matched'), message: matched ? `${query} matches ${witness} with one change.` : `${query} has no dictionary word one change away.` })
   }
-  frames.push({ phase: 'done', query: null, ops: ops.map(o => ({ ...o })), result: ops.map(o => o.returned), activeLine: L('return the recorded results'), message: 'All queries answered.' })
+  frames.push({ phase: 'done', pythonLine: 13, query: null, ops: ops.map(o => ({ ...o })), result: ops.map(o => o.returned), activeLine: L('return the recorded results'), message: 'All queries answered.' })
   return { input: { words, queries }, result: ops.map(o => o.returned), ops, frames }
 }
 

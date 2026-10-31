@@ -30,20 +30,20 @@ export function buildTrace(forest) {
     }
     return -1
   }
-  const frames = [{ phase: 'start', from: [0, 0], to: null, steps: 0, cut: 0, activeLine: L('start at the top-left'), message: 'Start at (0, 0); visit trees from shortest to tallest.' }]
+  const frames = [{ phase: 'start', pythonLine: 24, from: [0, 0], to: null, steps: 0, cut: 0, activeLine: L('start at the top-left'), message: 'Start at (0, 0); visit trees from shortest to tallest.' }]
   let r0 = 0, c0 = 0, total = 0
   for (let k = 0; k < trees.length; k++) {
     const t = trees[k]
     const d = bfs(r0, c0, t.r, t.c)
     if (d < 0) {
-      frames.push({ phase: 'blocked', from: [r0, c0], to: [t.r, t.c], steps: null, cut: k, activeLine: L('if no walk exists'), message: `No route from (${r0}, ${c0}) to the tree at (${t.r}, ${t.c}).` })
+      frames.push({ phase: 'blocked', pythonLine: 27, from: [r0, c0], to: [t.r, t.c], steps: null, cut: k, activeLine: L('if no walk exists'), message: `No route from (${r0}, ${c0}) to the tree at (${t.r}, ${t.c}).` })
       return { input: forest, result: -1, frames }
     }
     total += d
-    frames.push({ phase: 'walk', from: [r0, c0], to: [t.r, t.c], steps: d, cut: k + 1, activeLine: L('add the walk length'), message: `Walk ${d} step${d === 1 ? '' : 's'} to the tree of height ${t.h}; cut it.` })
+    frames.push({ phase: 'walk', pythonLine: 29, from: [r0, c0], to: [t.r, t.c], steps: d, cut: k + 1, activeLine: L('add the walk length'), message: `Walk ${d} step${d === 1 ? '' : 's'} to the tree of height ${t.h}; cut it.` })
     r0 = t.r; c0 = t.c
   }
-  frames.push({ phase: 'done', from: [r0, c0], to: null, steps: total, cut: trees.length, result: total, activeLine: L('return total'), message: `Total steps: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 31, from: [r0, c0], to: null, steps: total, cut: trees.length, result: total, activeLine: L('return total'), message: `Total steps: ${total}.` })
   return { input: forest, result: total, frames }
 }
 

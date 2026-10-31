@@ -18,7 +18,7 @@ const buttons = () => [
 export function buildTrace({ n, presses }) {
   const press = buttons()
   let level = new Map([[Array(n).fill(1).join(''), Array(n).fill(1)]])
-  const frames = [{ phase: 'start', depth: 0, states: [...level.keys()], activeLine: L('set states to the single'), message: `Start with all ${n} bulbs on: one state.` }]
+  const frames = [{ phase: 'start', pythonLine: 15, depth: 0, states: [...level.keys()], activeLine: L('set states to the single'), message: `Start with all ${n} bulbs on: one state.` }]
   for (let d = 1; d <= presses; d++) {
     const next = new Map()
     for (const bits of level.values()) for (const f of press) {
@@ -26,10 +26,10 @@ export function buildTrace({ n, presses }) {
       next.set(after.join(''), after)
     }
     level = next
-    frames.push({ phase: 'press', depth: d, states: [...level.keys()], activeLine: L('set states to nxt'), message: `After ${d} press${d === 1 ? '' : 'es'}: ${level.size} distinct state${level.size === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'press', pythonLine: 21, depth: d, states: [...level.keys()], activeLine: L('set states to nxt'), message: `After ${d} press${d === 1 ? '' : 'es'}: ${level.size} distinct state${level.size === 1 ? '' : 's'}.` })
   }
   const result = level.size
-  frames.push({ phase: 'done', depth: presses, states: [...level.keys()], result, activeLine: L('return the number of states'), message: `${result} distinct states after exactly ${presses} presses.` })
+  frames.push({ phase: 'done', pythonLine: 22, depth: presses, states: [...level.keys()], result, activeLine: L('return the number of states'), message: `${result} distinct states after exactly ${presses} presses.` })
   return { input: { n, presses }, result, frames }
 }
 
