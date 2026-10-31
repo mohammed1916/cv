@@ -19,7 +19,7 @@ const needed = (gaps, distance) => gaps.reduce((total, gap) => total + Math.ceil
 export function buildTrace(spec) {
   const gaps = gapsOf(spec.stations)
   let lo = 0, hi = Math.max(...gaps)
-  const frames = [{ phase: 'start', activeLine: L('lo = 0, hi'), lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between 0 and the largest gap, ${hi}.` }]
+  const frames = [{ phase: 'start', activeLine: L('lo = 0, hi'), pythonLine: 5, lo, hi, mid: null, feasible: null, iteration: 0, message: `The answer lies between 0 and the largest gap, ${hi}.` }]
   for (let iteration = 1; iteration <= ITERATIONS; iteration++) {
     const mid = (lo + hi) / 2
     const count = needed(gaps, mid)
@@ -27,7 +27,7 @@ export function buildTrace(spec) {
     if (ok) hi = mid
     else lo = mid
     frames.push({
-      phase: 'check', activeLine: L(ok ? 'hi = mid' : 'lo = mid'), lo, hi, mid, feasible: ok, iteration,
+      phase: 'check', activeLine: L(ok ? 'hi = mid' : 'lo = mid'), pythonLine: ok ? 10 : 12, lo, hi, mid, feasible: ok, iteration,
       message: ok
         ? `A largest gap of ${mid.toFixed(4)} needs ${count} station(s), within ${spec.k}: try smaller.`
         : `A largest gap of ${mid.toFixed(4)} needs ${count} station(s), more than ${spec.k}: try larger.`,

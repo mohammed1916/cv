@@ -32,20 +32,20 @@ export function buildTrace(s) {
   for (let i = 0; i < s.length; i++) last[s[i]] = i
   const lastList = Object.entries(last).sort()
   const sizes = [], cuts = []
-  const frames = [{ phase: 'start', activeLine: L('last ='), i: -1, start: 0, end: 0, sizes: [], cuts: [], last: lastList, message: `Record the last index of each letter: ${lastList.map(([c, i]) => `${c}@${i}`).join(' ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('last ='), pythonLine: 2, i: -1, start: 0, end: 0, sizes: [], cuts: [], last: lastList, message: `Record the last index of each letter: ${lastList.map(([c, i]) => `${c}@${i}`).join(' ')}.` }]
   let start = 0, end = 0
   for (let i = 0; i < s.length; i++) {
     const prev = end
     end = Math.max(end, last[s[i]])
-    frames.push({ phase: 'extend', activeLine: L('end = the larger'), i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
+    frames.push({ phase: 'extend', activeLine: L('end = the larger'), pythonLine: 6, i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
       message: end > prev ? `'${s[i]}' last appears at ${last[s[i]]}, so the current part must reach at least index ${end}.` : `'${s[i]}' last appears at ${last[s[i]]}, within the current reach ${end}; no change.` })
     if (i === end) {
       sizes.push(end - start + 1); cuts.push(i)
-      frames.push({ phase: 'cut', activeLine: L('append end - start'), i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
+      frames.push({ phase: 'cut', activeLine: L('append end - start'), pythonLine: 8, i, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList,
         message: `Index ${i} equals the reach, so every letter in [${start}..${end}] ends here. Cut a part of size ${end - start + 1}.` })
       start = i + 1
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return sizes'), i: s.length - 1, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList, message: `Part sizes: [${sizes.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return sizes'), pythonLine: 10, i: s.length - 1, start, end, sizes: [...sizes], cuts: [...cuts], last: lastList, message: `Part sizes: [${sizes.join(', ')}].` })
   return { input: s, result: sizes, frames }
 }

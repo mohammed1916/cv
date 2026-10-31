@@ -8,7 +8,7 @@ export function parseInput(text) {
 }
 export function buildTrace(board) {
   const start = board.flat().join('')
-  const frames = [{ phase: 'start', activeLine: L('queue = new queue'), state: start, dist: 0, queueSize: 1, seen: 1, added: [], message: `Encode the board as "${start}". BFS explores boards by number of moves, so the first time we pop "${TARGET}" is the shortest.` }]
+  const frames = [{ phase: 'start', activeLine: L('queue = new queue'), pythonLine: 7, state: start, dist: 0, queueSize: 1, seen: 1, added: [], message: `Encode the board as "${start}". BFS explores boards by number of moves, so the first time we pop "${TARGET}" is the shortest.` }]
   const seen = new Set([start])
   const queue = [[start, 0]]
   let head = 0
@@ -17,7 +17,7 @@ export function buildTrace(board) {
     const [s, d] = queue[head++]
     if (s === TARGET) {
       result = d
-      frames.push({ phase: 'solved', activeLine: L('if s equals target'), state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added: [], message: `Dequeued the solved board after ${d} moves.` })
+      frames.push({ phase: 'solved', activeLine: L('if s equals target'), pythonLine: 12, state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added: [], message: `Dequeued the solved board after ${d} moves.` })
       break
     }
     const z = s.indexOf('0')
@@ -28,10 +28,10 @@ export function buildTrace(board) {
       const key = t.join('')
       if (!seen.has(key)) { seen.add(key); queue.push([key, d + 1]); added.push(key) }
     }
-    frames.push({ phase: 'expand', activeLine: L('for each neighbour j'), state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added, message: `Dequeue "${s}" (${d} moves). Slide the blank from cell ${z} into its neighbours ${NEIGHBORS[z].join(', ')}: ${added.length ? `${added.length} new board${added.length > 1 ? 's' : ''} (${added.join(', ')}) queued at ${d + 1} moves` : 'all already seen'}.` })
+    frames.push({ phase: 'expand', activeLine: L('for each neighbour j'), pythonLine: 14, state: s, dist: d, queueSize: queue.length - head, seen: seen.size, added, message: `Dequeue "${s}" (${d} moves). Slide the blank from cell ${z} into its neighbours ${NEIGHBORS[z].join(', ')}: ${added.length ? `${added.length} new board${added.length > 1 ? 's' : ''} (${added.join(', ')}) queued at ${d + 1} moves` : 'all already seen'}.` })
   }
-  if (result === -1) frames.push({ phase: 'done', activeLine: L('return -1'), state: start, dist: -1, queueSize: 0, seen: seen.size, added: [], message: `Queue exhausted after visiting ${seen.size} boards without reaching "${TARGET}". Unsolvable: return -1.` })
-  else frames.push({ phase: 'done', activeLine: L('then return d'), state: TARGET, dist: result, queueSize: queue.length - head, seen: seen.size, added: [], message: `Minimum number of moves: ${result}.` })
+  if (result === -1) frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: 21, state: start, dist: -1, queueSize: 0, seen: seen.size, added: [], message: `Queue exhausted after visiting ${seen.size} boards without reaching "${TARGET}". Unsolvable: return -1.` })
+  else frames.push({ phase: 'done', activeLine: L('then return d'), pythonLine: 12, state: TARGET, dist: result, queueSize: queue.length - head, seen: seen.size, added: [], message: `Minimum number of moves: ${result}.` })
   return { input: board, result, frames }
 }
 export const code = `function slidingPuzzle(board):

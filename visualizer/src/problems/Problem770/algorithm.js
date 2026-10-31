@@ -55,28 +55,29 @@ export function parseInput(text) {
 export function buildTrace({ expression, evalvars, evalints }) {
   const env = new Map(evalvars.map((v, i) => [v, evalints[i]]))
   const tokens = tokenize(expression)
-  const frames = [{ phase: 'start', activeLine: L('tokens = split'), pos: 0, depth: 0, poly: '', message: `Tokenize "${expression}" into ${tokens.length} tokens. Known variables: ${evalvars.length ? evalvars.map((v, i) => `${v}=${evalints[i]}`).join(', ') : 'none'}.` }]
+  const frames = [{ phase: 'start', activeLine: L('tokens = split'), pythonLine: 5, pos: 0, depth: 0, poly: '', message: `Tokenize "${expression}" into ${tokens.length} tokens. Known variables: ${evalvars.length ? evalvars.map((v, i) => `${v}=${evalints[i]}`).join(', ') : 'none'}.` }]
   let pos = 0
   let depth = 0
-  const push = (phase, activeLine, message, poly) => frames.push({ phase, activeLine, pos, depth, poly: poly ? show(poly) : '', message })
+  const push = (phase, activeLine, message, poly, pythonLine) => frames.push({ phase, activeLine, pythonLine, pos, depth, poly: poly ? show(poly) : '', message })
   function atom() {
     const t = tokens[pos++]
     if (t === '(') {
       depth++
-      push('atom', L('if next token is "("'), 'Open parenthesis: parse the inner expression as its own polynomial.')
+      push('atom', L('if next token is "("'), 'Open parenthesis: parse the inner expression as its own polynomial.', undefined, 41)
       const p = expr()
       pos++
       depth--
-      push('atom', L('skip the closing'), `Close parenthesis: inner polynomial is ${show(p)}.`, p)
+      push('atom', L('skip the closing'), `Close parenthesis: inner polynomial is ${show(p)}.`, p, 42)
       return p
     }
     let p
     let note
     let line = L('token is a number')
+    let pyLine = 44
     if (/^\d+$/.test(t)) { const v = Number(t); p = new Map(v ? [['', v]] : []); note = `Number ${t} is a constant term.` }
-    else if (env.has(t)) { const v = env.get(t); p = new Map(v ? [['', v]] : []); line = L('token is a known variable'); note = `Variable ${t} is known (${v}), so it becomes the constant ${v}.` }
-    else { p = new Map([[t, 1]]); line = L('otherwise return the unknown'); note = `Variable ${t} is unknown, so it stays symbolic as 1*${t}.` }
-    push('atom', line, note, p)
+    else if (env.has(t)) { const v = env.get(t); p = new Map(v ? [['', v]] : []); line = L('token is a known variable'); pyLine = 46; note = `Variable ${t} is known (${v}), so it becomes the constant ${v}.` }
+    else { p = new Map([[t, 1]]); line = L('otherwise return the unknown'); pyLine = 48; note = `Variable ${t} is unknown, so it stays symbolic as 1*${t}.` }
+    push('atom', line, note, p, pyLine)
     return p
   }
   function term() {
@@ -86,7 +87,7 @@ export function buildTrace({ expression, evalvars, evalints }) {
       const q = atom()
       const before = show(p)
       p = mul(p, q)
-      push('combine', L('while the next token is *'), `Multiply (${before}) by (${show(q)}): every term pairs with every term, variable lists are sorted, like terms add. Result: ${show(p)}.`, p)
+      push('combine', L('while the next token is *'), `Multiply (${before}) by (${show(q)}): every term pairs with every term, variable lists are sorted, like terms add. Result: ${show(p)}.`, p, 35)
     }
     return p
   }
@@ -97,13 +98,13 @@ export function buildTrace({ expression, evalvars, evalints }) {
       const q = term()
       const before = show(p)
       p = add(p, q, op === '+' ? 1 : -1)
-      push('combine', L('while the next token is + or -'), `${op === '+' ? 'Add' : 'Subtract'} (${show(q)}) ${op === '+' ? 'to' : 'from'} (${before}); like terms combine and zero terms vanish. Result: ${show(p)}.`, p)
+      push('combine', L('while the next token is + or -'), `${op === '+' ? 'Add' : 'Subtract'} (${show(q)}) ${op === '+' ? 'to' : 'from'} (${before}); like terms combine and zero terms vanish. Result: ${show(p)}.`, p, 27)
     }
     return p
   }
   const poly = expr()
   const result = formatPoly(poly)
-  frames.push({ phase: 'done', activeLine: L('sort terms by degree'), pos: tokens.length, depth: 0, poly: show(poly), message: `Sort terms by degree (descending) then lexicographically: ${JSON.stringify(result)}.` })
+  frames.push({ phase: 'done', activeLine: L('sort terms by degree'), pythonLine: 51, pos: tokens.length, depth: 0, poly: show(poly), message: `Sort terms by degree (descending) then lexicographically: ${JSON.stringify(result)}.` })
   return { input: { expression, evalvars, evalints, tokens }, result, frames }
 }
 export const code = `function basicCalculatorIV(expression, evalvars, evalints):

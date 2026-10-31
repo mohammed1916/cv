@@ -30,18 +30,18 @@ export function parseInput(text) {
 export function buildTrace({ left, right }) {
   const numbers = []
   const bitsOf = []
-  const frames = [{ phase: 'start', activeLine: L('primes ='), count: 0, index: -1, bits: null, isPrime: null, message: 'Numbers below 2^20 have at most 20 set bits, so the primes to recognise are 2, 3, 5, 7, 11, 13, 17, 19.' }]
+  const frames = [{ phase: 'start', activeLine: L('primes ='), pythonLine: 2, count: 0, index: -1, bits: null, isPrime: null, message: 'Numbers below 2^20 have at most 20 set bits, so the primes to recognise are 2, 3, 5, 7, 11, 13, 17, 19.' }]
   let count = 0
   for (let x = left; x <= right; x++) {
     const bits = x.toString(2).split('1').length - 1
     numbers.push(x); bitsOf.push(bits)
     const index = numbers.length - 1
-    frames.push({ phase: 'count', activeLine: L('bits ='), count, index, bits, isPrime: null, binary: x.toString(2), message: `${x} is ${x.toString(2)} in binary, which has ${bits} set bit${bits === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'count', activeLine: L('bits ='), pythonLine: 5, count, index, bits, isPrime: null, binary: x.toString(2), message: `${x} is ${x.toString(2)} in binary, which has ${bits} set bit${bits === 1 ? '' : 's'}.` })
     const isPrime = PRIMES.includes(bits)
     if (isPrime) count++
-    frames.push({ phase: 'test', activeLine: isPrime ? L('count = count + 1') : L('if bits'), count, index, bits, isPrime, binary: x.toString(2),
+    frames.push({ phase: 'test', activeLine: isPrime ? L('count = count + 1') : L('if bits'), pythonLine: isPrime ? 7 : 6, count, index, bits, isPrime, binary: x.toString(2),
       message: isPrime ? `${bits} is prime, so ${x} counts. Total: ${count}.` : `${bits} is not prime (1 and 0 are not prime), so ${x} is skipped.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), count, index: numbers.length - 1, bits: null, isPrime: null, message: `${count} number${count === 1 ? '' : 's'} in [${left}, ${right}] have a prime number of set bits.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 8, count, index: numbers.length - 1, bits: null, isPrime: null, message: `${count} number${count === 1 ? '' : 's'} in [${left}, ${right}] have a prime number of set bits.` })
   return { input: { left, right }, numbers, bitsOf, result: count, frames }
 }

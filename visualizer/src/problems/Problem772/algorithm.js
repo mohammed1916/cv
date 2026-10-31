@@ -11,18 +11,19 @@ const tokenize = expr => expr.match(/\d+|[-+*/()]/g) ?? []
 export function buildTrace(expr) {
   const tokens = tokenize(expr)
   let pos = 0
-  const frames = [{ phase: 'start', activeLine: L('tokens = numbers'), a: null, op: null, b: null, value: null, message: 'Read the expression left to right. * and / are applied before + and -.' }]
+  const frames = [{ phase: 'start', activeLine: L('tokens = numbers'), pythonLine: 4, a: null, op: null, b: null, value: null, message: 'Read the expression left to right. * and / are applied before + and -.' }]
   const apply = (a, op, b) => {
-    let value, activeLine
-    if (op === '+') { value = a + b; activeLine = L('if op is + then') }
-    else if (op === '-') { value = a - b; activeLine = L('otherwise value = value minus') }
-    else if (op === '*') { value = a * b; activeLine = L('if op is * then') }
+    let value, activeLine, pythonLine
+    if (op === '+') { value = a + b; activeLine = L('if op is + then'); pythonLine = 14 }
+    else if (op === '-') { value = a - b; activeLine = L('otherwise value = value minus'); pythonLine = 16 }
+    else if (op === '*') { value = a * b; activeLine = L('if op is * then'); pythonLine = 26 }
     else {
       if (b === 0) throw new Error('Division by zero.')
       value = Math.trunc(a / b)
       activeLine = L('otherwise value = value divided')
+      pythonLine = 28
     }
-    frames.push({ phase: 'apply', activeLine, a, op, b, value, message: `${a} ${op} ${b} = ${value}.` })
+    frames.push({ phase: 'apply', activeLine, pythonLine, a, op, b, value, message: `${a} ${op} ${b} = ${value}.` })
     return value
   }
   const expression = () => {
@@ -55,7 +56,7 @@ export function buildTrace(expr) {
   }
   const result = expression()
   if (pos !== tokens.length) throw new Error('Unexpected token.')
-  frames.push({ phase: 'done', activeLine: L('return expression()'), a: null, op: null, b: null, value: result, message: `The expression evaluates to ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return expression()'), pythonLine: 39, a: null, op: null, b: null, value: result, message: `The expression evaluates to ${result}.` })
   return { input: expr, result, frames }
 }
 

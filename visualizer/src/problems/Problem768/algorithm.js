@@ -5,23 +5,23 @@ export function parseInput(text) {
 }
 export function buildTrace(arr) {
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('stack = empty list'), index: -1, stack: [], message: 'Each stack entry is the maximum of one chunk. Chunks must be sortable independently.' }]
+  const frames = [{ phase: 'start', activeLine: L('stack = empty list'), pythonLine: 2, index: -1, stack: [], message: 'Each stack entry is the maximum of one chunk. Chunks must be sortable independently.' }]
   arr.forEach((x, index) => {
     if (!stack.length || x >= stack[stack.length - 1]) {
       stack.push(x)
-      frames.push({ phase: 'push', activeLine: L('push x onto stack'), index, stack: [...stack], message: `${x} is at least the last chunk maximum${stack.length > 1 ? ` (${stack[stack.length - 2]})` : ''}, so it starts a new chunk.` })
+      frames.push({ phase: 'push', activeLine: L('push x onto stack'), pythonLine: 5, index, stack: [...stack], message: `${x} is at least the last chunk maximum${stack.length > 1 ? ` (${stack[stack.length - 2]})` : ''}, so it starts a new chunk.` })
     } else {
       const top = stack.pop()
-      frames.push({ phase: 'merge', activeLine: L('top = pop'), index, stack: [...stack], held: top, message: `${x} is smaller than chunk maximum ${top}, so it must join that chunk. Hold ${top} as the merged chunk's maximum.` })
+      frames.push({ phase: 'merge', activeLine: L('top = pop'), pythonLine: 7, index, stack: [...stack], held: top, message: `${x} is smaller than chunk maximum ${top}, so it must join that chunk. Hold ${top} as the merged chunk's maximum.` })
       while (stack.length && stack[stack.length - 1] > x) {
         const dropped = stack.pop()
-        frames.push({ phase: 'merge', activeLine: L('pop the stack'), index, stack: [...stack], held: top, message: `Earlier chunk maximum ${dropped} is also greater than ${x}, so that chunk merges in too.` })
+        frames.push({ phase: 'merge', activeLine: L('pop the stack'), pythonLine: 9, index, stack: [...stack], held: top, message: `Earlier chunk maximum ${dropped} is also greater than ${x}, so that chunk merges in too.` })
       }
       stack.push(top)
-      frames.push({ phase: 'merge', activeLine: L('push top back'), index, stack: [...stack], message: `Push the held maximum ${top} back as the single merged chunk.` })
+      frames.push({ phase: 'merge', activeLine: L('push top back'), pythonLine: 10, index, stack: [...stack], message: `Push the held maximum ${top} back as the single merged chunk.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the size'), index: arr.length - 1, stack: [...stack], message: `The stack has ${stack.length} chunk maxima, so the answer is ${stack.length}.` })
+  frames.push({ phase: 'done', activeLine: L('return the size'), pythonLine: 11, index: arr.length - 1, stack: [...stack], message: `The stack has ${stack.length} chunk maxima, so the answer is ${stack.length}.` })
   return { input: [...arr], result: stack.length, frames }
 }
 export const code = `function maxChunksToSorted(arr):
