@@ -8,19 +8,19 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const n = s.length
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), boundary: -1, total, message: `Check each boundary between neighbours in "${s}".` }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: 3, boundary: -1, total, message: `Check each boundary between neighbours in "${s}".` }]
   for (let i = 0; i < n - 1; i++) {
     if (s[i] === s[i + 1]) {
-      frames.push({ phase: 'same', activeLine: L('if the two characters differ'), boundary: i, total, message: `Boundary ${i}: the characters match, so nothing is paid.` })
+      frames.push({ phase: 'same', activeLine: L('if the two characters differ'), pythonLine: 5, boundary: i, total, message: `Boundary ${i}: the characters match, so nothing is paid.` })
       continue
     }
     const prefix = i + 1
     const suffix = n - i - 1
     const cost = Math.min(prefix, suffix)
     total += cost
-    frames.push({ phase: 'differ', activeLine: L('add the cheaper'), boundary: i, total, message: `Boundary ${i} differs. Flipping the prefix costs ${prefix} and the suffix costs ${suffix}, so add ${cost}.` })
+    frames.push({ phase: 'differ', activeLine: L('add the cheaper'), pythonLine: 6, boundary: i, total, message: `Boundary ${i} differs. Flipping the prefix costs ${prefix} and the suffix costs ${suffix}, so add ${cost}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), boundary: -1, total, message: `Minimum cost: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 7, boundary: -1, total, message: `Minimum cost: ${total}.` })
   return { input: s, result: total, frames }
 }
 

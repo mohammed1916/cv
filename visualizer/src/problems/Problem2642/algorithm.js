@@ -31,33 +31,33 @@ export function buildTrace({ n, edges, operations }) {
   const adj = Array.from({ length: n }, () => [])
   for (const [u, v, w] of current) adj[u].push([v, w])
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('build the adjacency lists'), edges: current.map(e => [...e]), dist: null, node: -1, answers: [], message: `Start with ${current.length} edge(s). Edges are directed and can be added later.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('build the adjacency lists'), edges: current.map(e => [...e]), dist: null, node: -1, answers: [], message: `Start with ${current.length} edge(s). Edges are directed and can be added later.` }]
   operations.forEach((op, index) => {
     if (op[0] === 'addEdge') {
       const [u, v, w] = op[1]
       adj[u].push([v, w])
       current.push([u, v, w])
-      frames.push({ phase: 'add', activeLine: L('if it is addEdge'), edges: current.map(e => [...e]), dist: null, node: -1, answers: [...answers], message: `Operation ${index + 1}: add edge ${u} to ${v} with weight ${w}.` })
+      frames.push({ pythonLine: 11, phase: 'add', activeLine: L('if it is addEdge'), edges: current.map(e => [...e]), dist: null, node: -1, answers: [...answers], message: `Operation ${index + 1}: add edge ${u} to ${v} with weight ${w}.` })
       return
     }
     const [, source, target] = op
     const dist = new Array(n).fill(Infinity)
     dist[source] = 0
     const settled = new Array(n).fill(false)
-    frames.push({ phase: 'query', activeLine: L('run Dijkstra from a'), edges: current.map(e => [...e]), dist: [...dist], node: source, answers: [...answers], message: `Operation ${index + 1}: shortest path from ${source} to ${target}. Start Dijkstra at ${source}.` })
+    frames.push({ pythonLine: 16, phase: 'query', activeLine: L('run Dijkstra from a'), edges: current.map(e => [...e]), dist: [...dist], node: source, answers: [...answers], message: `Operation ${index + 1}: shortest path from ${source} to ${target}. Start Dijkstra at ${source}.` })
     for (;;) {
       let u = -1
       for (let x = 0; x < n; x++) if (!settled[x] && dist[x] < Infinity && (u === -1 || dist[x] < dist[u])) u = x
       if (u === -1) break
       settled[u] = true
       for (const [v, w] of adj[u]) if (dist[u] + w < dist[v]) dist[v] = dist[u] + w
-      frames.push({ phase: 'query', activeLine: L('run Dijkstra from a'), edges: current.map(e => [...e]), dist: [...dist], node: u, answers: [...answers], message: `Settle node ${u} at distance ${dist[u]} and relax its outgoing edges.` })
+      frames.push({ pythonLine: 18, phase: 'query', activeLine: L('run Dijkstra from a'), edges: current.map(e => [...e]), dist: [...dist], node: u, answers: [...answers], message: `Settle node ${u} at distance ${dist[u]} and relax its outgoing edges.` })
     }
     const result = dist[target] === Infinity ? -1 : dist[target]
     answers.push(result)
-    frames.push({ phase: 'answer', activeLine: L('add the distance to b'), edges: current.map(e => [...e]), dist: [...dist], node: target, answers: [...answers], message: `Shortest path from ${source} to ${target}: ${result}.` })
+    frames.push({ pythonLine: 25, phase: 'answer', activeLine: L('add the distance to b'), edges: current.map(e => [...e]), dist: [...dist], node: target, answers: [...answers], message: `Shortest path from ${source} to ${target}: ${result}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), edges: current.map(e => [...e]), dist: null, node: -1, answers: [...answers], message: `Answers in order: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 26, phase: 'done', activeLine: L('return answers'), edges: current.map(e => [...e]), dist: null, node: -1, answers: [...answers], message: `Answers in order: [${answers.join(', ')}].` })
   return { input: { n, edges, operations }, result: answers, frames }
 }
 

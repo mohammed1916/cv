@@ -18,29 +18,29 @@ export function buildTrace({ nums }) {
   const values = []
   let previous = 0
   let possible = true
-  frames.push({ phase: 'start', activeLine: L('set previous to 0'), index: -1, previous, value: null, message: 'Start with no previous value.' })
+  frames.push({ phase: 'start', pythonLine: 12, activeLine: L('set previous to 0'), index: -1, previous, value: null, message: 'Start with no previous value.' })
   for (let i = 0; i < nums.length; i++) {
     const limit = nums[i] - previous - 1
-    frames.push({ phase: 'check', activeLine: L('for each index'), index: i, previous, value: null, message: `Index ${i} holds ${nums[i]}; the largest subtraction keeps it above ${previous} only if the prime is at most ${limit}.` })
+    frames.push({ phase: 'check', pythonLine: 14, activeLine: L('for each index'), index: i, previous, value: null, message: `Index ${i} holds ${nums[i]}; the largest subtraction keeps it above ${previous} only if the prime is at most ${limit}.` })
     let value
     if (limit >= 2) {
       let p = limit
       while (!isPrime(p)) p--
       value = nums[i] - p
-      frames.push({ phase: 'subtract', activeLine: L('set value to nums at i minus p'), index: i, previous, value, prime: p, message: `Subtract the prime ${p}: ${nums[i]} becomes ${value}.` })
+      frames.push({ phase: 'subtract', pythonLine: 19, activeLine: L('set value to nums at i minus p'), index: i, previous, value, prime: p, message: `Subtract the prime ${p}: ${nums[i]} becomes ${value}.` })
     } else if (nums[i] > previous) {
       value = nums[i]
-      frames.push({ phase: 'keep', activeLine: L('else if nums at i is greater'), index: i, previous, value, message: `No useful prime; keep ${nums[i]}.` })
+      frames.push({ phase: 'keep', pythonLine: 21, activeLine: L('else if nums at i is greater'), index: i, previous, value, message: `No useful prime; keep ${nums[i]}.` })
     } else {
       possible = false
-      frames.push({ phase: 'fail', activeLine: L('else return false'), index: i, previous, value: null, message: `Index ${i} cannot stay above ${previous}; the answer is false.` })
+      frames.push({ phase: 'fail', pythonLine: 23, activeLine: L('else return false'), index: i, previous, value: null, message: `Index ${i} cannot stay above ${previous}; the answer is false.` })
       break
     }
     values.push(value)
     previous = value
   }
-  if (possible) frames.push({ phase: 'done', activeLine: L('return true'), index: -1, previous, value: null, message: `Strictly increasing: [${values.join(', ')}].` })
-  else frames.push({ phase: 'done', activeLine: L('return false'), index: -1, previous, value: null, message: 'No choice of primes works.' })
+  if (possible) frames.push({ phase: 'done', pythonLine: 25, activeLine: L('return true'), index: -1, previous, value: null, message: `Strictly increasing: [${values.join(', ')}].` })
+  else frames.push({ phase: 'done', pythonLine: 23, activeLine: L('return false'), index: -1, previous, value: null, message: 'No choice of primes works.' })
   return { input: { nums }, result: possible, frames }
 }
 

@@ -20,24 +20,24 @@ export function buildTrace(input) {
   const joined = new Map()
   const frames = []
   const maps = () => [{ name: 'joined', keyLabel: 'id', valueLabel: 'object', isSet: false, entries: [...joined].map(([id, obj]) => [id, JSON.stringify(obj)]) }]
-  frames.push({ phase: 'start', activeLine: L('joined = empty map'), index: -1, maps: maps(), ops: [], result: [], message: 'Start an empty table keyed by id. Objects from arr1 go in first.' })
+  frames.push({ phase: 'start', activeLine: L('joined = empty map'), pythonLine: 2, index: -1, maps: maps(), ops: [], result: [], message: 'Start an empty table keyed by id. Objects from arr1 go in first.' })
   input.arr1.forEach((obj, i) => {
     joined.set(obj.id, { ...obj })
-    frames.push({ phase: 'first', activeLine: L('set joined at its id to a copy'), index: i, maps: maps(), ops: [{ map: 'joined', type: 'insert', key: obj.id, value: JSON.stringify(obj) }], result: [], message: `arr1 object ${JSON.stringify(obj)} is stored under id ${obj.id}.` })
+    frames.push({ phase: 'first', activeLine: L('set joined at its id to a copy'), pythonLine: 4, index: i, maps: maps(), ops: [{ map: 'joined', type: 'insert', key: obj.id, value: JSON.stringify(obj) }], result: [], message: `arr1 object ${JSON.stringify(obj)} is stored under id ${obj.id}.` })
   })
   input.arr2.forEach((obj, i) => {
     const existing = joined.get(obj.id)
     if (existing) {
       const before = JSON.stringify(existing)
       joined.set(obj.id, { ...existing, ...obj })
-      frames.push({ phase: 'merge', activeLine: L('merge the object'), index: i, maps: maps(), ops: [{ map: 'joined', type: 'update', key: obj.id, value: JSON.stringify(joined.get(obj.id)), before }], result: [], message: `Id ${obj.id} exists, so arr2 values overwrite it: ${JSON.stringify(joined.get(obj.id))}.` })
+      frames.push({ phase: 'merge', activeLine: L('merge the object'), pythonLine: 7, index: i, maps: maps(), ops: [{ map: 'joined', type: 'update', key: obj.id, value: JSON.stringify(joined.get(obj.id)), before }], result: [], message: `Id ${obj.id} exists, so arr2 values overwrite it: ${JSON.stringify(joined.get(obj.id))}.` })
     } else {
       joined.set(obj.id, { ...obj })
-      frames.push({ phase: 'merge', activeLine: L('set joined at its id to a copy'), index: i, maps: maps(), ops: [{ map: 'joined', type: 'insert', key: obj.id, value: JSON.stringify(obj) }], result: [], message: `Id ${obj.id} is new, so arr2 object ${JSON.stringify(obj)} is added.` })
+      frames.push({ phase: 'merge', activeLine: L('set joined at its id to a copy'), pythonLine: 9, index: i, maps: maps(), ops: [{ map: 'joined', type: 'insert', key: obj.id, value: JSON.stringify(obj) }], result: [], message: `Id ${obj.id} is new, so arr2 object ${JSON.stringify(obj)} is added.` })
     }
   })
   const result = [...joined.keys()].sort((a, b) => a - b).map(id => joined.get(id))
-  frames.push({ phase: 'done', activeLine: L('return the joined objects'), index: -1, maps: maps(), ops: [], result, message: `Joined ${result.length} object(s), sorted by id.` })
+  frames.push({ phase: 'done', activeLine: L('return the joined objects'), pythonLine: 10, index: -1, maps: maps(), ops: [], result, message: `Joined ${result.length} object(s), sorted by id.` })
   return { input, result, frames }
 }
 

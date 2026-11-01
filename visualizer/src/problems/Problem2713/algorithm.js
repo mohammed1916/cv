@@ -20,7 +20,7 @@ export function buildTrace(mat) {
   const colBest = Array(n).fill(0)
   const dp = Array.from({ length: m }, () => Array(n).fill(0))
   const snapshot = () => dp.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('list every cell'), r: null, c: null, table: snapshot(), message: 'Every cell starts a path of length 1. Cells are processed from smallest value to largest.' }]
+  const frames = [{ phase: 'start', activeLine: L('list every cell'), pythonLine: 4, r: null, c: null, table: snapshot(), message: 'Every cell starts a path of length 1. Cells are processed from smallest value to largest.' }]
   let i = 0
   while (i < cells.length) {
     let j = i
@@ -28,7 +28,7 @@ export function buildTrace(mat) {
     for (let k = i; k < j; k++) {
       const { r, c, v } = cells[k]
       dp[r][c] = 1 + Math.max(rowBest[r], colBest[c])
-      frames.push({ phase: 'cell', activeLine: L('set dp of each cell'), r, c, table: snapshot(), message: `Cell (${r}, ${c}) holds ${v}: 1 plus the best smaller value in its row or column gives ${dp[r][c]}.` })
+      frames.push({ phase: 'cell', activeLine: L('set dp of each cell'), pythonLine: 15, r, c, table: snapshot(), message: `Cell (${r}, ${c}) holds ${v}: 1 plus the best smaller value in its row or column gives ${dp[r][c]}.` })
     }
     // Equal values cannot chain, so the group updates the row and column bests only after every cell in it is set.
     for (let k = i; k < j; k++) {
@@ -36,11 +36,11 @@ export function buildTrace(mat) {
       rowBest[r] = Math.max(rowBest[r], dp[r][c])
       colBest[c] = Math.max(colBest[c], dp[r][c])
     }
-    frames.push({ phase: 'group', activeLine: L('after the group'), r: null, c: null, table: snapshot(), message: `Group of value ${cells[i].v} done; row and column bests are updated.` })
+    frames.push({ phase: 'group', activeLine: L('after the group'), pythonLine: 18, r: null, c: null, table: snapshot(), message: `Group of value ${cells[i].v} done; row and column bests are updated.` })
     i = j
   }
   const result = Math.max(...dp.flat())
-  frames.push({ phase: 'done', activeLine: L('return the largest dp'), r: null, c: null, table: snapshot(), message: `The longest strictly increasing path has ${result} cells.` })
+  frames.push({ phase: 'done', activeLine: L('return the largest dp'), pythonLine: 21, r: null, c: null, table: snapshot(), message: `The longest strictly increasing path has ${result} cells.` })
   return { input: mat, result, frames }
 }
 

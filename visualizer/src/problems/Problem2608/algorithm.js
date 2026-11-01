@@ -22,14 +22,14 @@ export function buildTrace(input) {
     adj[v].push(u)
   }
   let best = Infinity
-  const frames = [{ phase: 'start', activeLine: L('set best to infinity'), source: null, current: null, reached: [], tags: {}, best: null, message: 'No cycle found yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('set best to infinity'), source: null, current: null, reached: [], tags: {}, best: null, message: 'No cycle found yet.' }]
   const tags = {}
   for (let s = 0; s < n; s++) {
     const dist = Array(n).fill(-1)
     const parent = Array(n).fill(-1)
     dist[s] = 0
     const queue = [s]
-    frames.push({ phase: 'source', activeLine: L('run a breadth first search'), source: s, current: s, reached: [s], tags: { ...tags }, best: best === Infinity ? null : best, message: `Search from node ${s}.` })
+    frames.push({ phase: 'source', pythonLine: 11, activeLine: L('run a breadth first search'), source: s, current: s, reached: [s], tags: { ...tags }, best: best === Infinity ? null : best, message: `Search from node ${s}.` })
     for (let head = 0; head < queue.length; head++) {
       const u = queue[head]
       for (const v of adj[u]) {
@@ -41,14 +41,14 @@ export function buildTrace(input) {
           const candidate = dist[u] + dist[v] + 1
           const improved = candidate < best
           if (improved) best = candidate
-          frames.push({ phase: improved ? 'better' : 'edge', activeLine: L(improved ? 'if candidate is less than best' : 'set candidate to'), source: s, current: u, reached: [...queue], tags: { ...tags }, best: best === Infinity ? null : best, message: improved ? `Edge ${u}-${v} closes a cycle of length ${candidate}. Best: ${best}.` : `Edge ${u}-${v} closes a walk of length ${candidate}, which is not shorter.` })
+          frames.push({ phase: improved ? 'better' : 'edge', pythonLine: 22, activeLine: L(improved ? 'if candidate is less than best' : 'set candidate to'), source: s, current: u, reached: [...queue], tags: { ...tags }, best: best === Infinity ? null : best, message: improved ? `Edge ${u}-${v} closes a cycle of length ${candidate}. Best: ${best}.` : `Edge ${u}-${v} closes a walk of length ${candidate}, which is not shorter.` })
         }
       }
     }
-    frames.push({ phase: 'done-source', activeLine: L('for each start node'), source: s, current: null, reached: [...queue], tags: { ...tags }, best: best === Infinity ? null : best, message: `Finished the search from node ${s}.` })
+    frames.push({ phase: 'done-source', pythonLine: 7, activeLine: L('for each start node'), source: s, current: null, reached: [...queue], tags: { ...tags }, best: best === Infinity ? null : best, message: `Finished the search from node ${s}.` })
   }
   const result = best === Infinity ? -1 : best
-  frames.push({ phase: 'done', activeLine: L('best is still infinity'), source: null, current: null, reached: [], tags: {}, best: result, message: `Shortest cycle length: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 23, activeLine: L('best is still infinity'), source: null, current: null, reached: [], tags: {}, best: result, message: `Shortest cycle length: ${result}.` })
   return { input, result, frames }
 }
 

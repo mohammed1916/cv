@@ -10,15 +10,15 @@ export function buildTrace(input) {
   let runningMax = 0
   let score = 0
   const answer = []
-  const frames = [{ phase: 'start', activeLine: L('set running_max to 0'), index: -1, runningMax: 0, conver: null, score: 0, answer: [], message: 'Start with no maximum and a score of 0.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set running_max to 0'), index: -1, runningMax: 0, conver: null, score: 0, answer: [], message: 'Start with no maximum and a score of 0.' }]
   nums.forEach((value, i) => {
     runningMax = Math.max(runningMax, value)
     const conver = value + runningMax
     score += conver
     answer.push(score)
-    frames.push({ phase: 'scan', activeLine: L('set conver to'), index: i, runningMax, conver, score, answer: [...answer], message: `Index ${i}: maximum ${runningMax}, converted value ${conver}, prefix score ${score}.` })
+    frames.push({ pythonLine: 8, phase: 'scan', activeLine: L('set conver to'), index: i, runningMax, conver, score, answer: [...answer], message: `Index ${i}: maximum ${runningMax}, converted value ${conver}, prefix score ${score}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: nums.length, runningMax, conver: null, score, answer: [...answer], message: `Prefix scores: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return answer'), index: nums.length, runningMax, conver: null, score, answer: [...answer], message: `Prefix scores: ${answer.join(', ')}.` })
   return { input, result: answer, frames }
 }
 

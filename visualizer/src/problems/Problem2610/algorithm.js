@@ -9,7 +9,7 @@ export function buildTrace(nums) {
   const rows = []
   const used = new Map()
   const snapshot = () => rows.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('rows = empty list'), value: null, row: -1, rows: [], message: 'Start with no rows.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('rows = empty list'), value: null, row: -1, rows: [], message: 'Start with no rows.' }]
   for (let index = 0; index < nums.length; index++) {
     const x = nums[index]
     const r = used.get(x) ?? 0
@@ -20,9 +20,9 @@ export function buildTrace(nums) {
     }
     rows[r].push(x)
     used.set(x, r + 1)
-    frames.push({ phase: opened ? 'open' : 'place', activeLine: opened ? L('add an empty row') : L('add x to rows[r]'), index, value: x, row: r, rows: snapshot(), message: `${x} is occurrence ${r + 1} of its value, so it goes in row ${r}${opened ? ' (a new row is opened)' : ''}.` })
+    frames.push({ phase: opened ? 'open' : 'place', pythonLine: opened ? 9 : 10, activeLine: opened ? L('add an empty row') : L('add x to rows[r]'), index, value: x, row: r, rows: snapshot(), message: `${x} is occurrence ${r + 1} of its value, so it goes in row ${r}${opened ? ' (a new row is opened)' : ''}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return rows'), value: null, row: -1, rows: snapshot(), message: `${rows.length} row${rows.length === 1 ? '' : 's'}, each with distinct values.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return rows'), value: null, row: -1, rows: snapshot(), message: `${rows.length} row${rows.length === 1 ? '' : 's'}, each with distinct values.` })
   return { input: nums, result: rows, frames }
 }
 

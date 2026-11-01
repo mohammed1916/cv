@@ -45,27 +45,27 @@ export function buildTrace({ n, edges, source, destination, target }) {
   const list = edges.map(e => [...e])
   const modifiable = []
   list.forEach((e, i) => { if (e[2] === -1) { modifiable.push(i); e[2] = INF_WEIGHT } })
-  const snap = (phase, current, d, message, activeLine) => ({ phase, activeLine, current, d, edges: list.map(e => [...e]), message })
+  const snap = (phase, current, d, message, activeLine, pythonLine) => ({ phase, activeLine, pythonLine, current, d, edges: list.map(e => [...e]), message })
   const frames = []
   let d = shortest(n, list, source, destination)
-  frames.push(snap('start', -1, d, `Give every unknown edge a huge weight, so the distance uses only the fixed edges: ${d === Infinity ? 'unreachable' : d}. The target is ${target}.`, L('set the weight of every -1 edge')))
+  frames.push(snap('start', -1, d, `Give every unknown edge a huge weight, so the distance uses only the fixed edges: ${d === Infinity ? 'unreachable' : d}. The target is ${target}.`, L('set the weight of every -1 edge'), 8))
   if (d < target) {
-    frames.push(snap('done', -1, d, `The fixed edges already give ${d}, which is below ${target}, and weights can only grow it: return [].`, L('return []')))
+    frames.push(snap('done', -1, d, `The fixed edges already give ${d}, which is below ${target}, and weights can only grow it: return [].`, L('return []'), 29))
     return { input: { n, edges, source, destination, target }, result: [], frames }
   }
   for (const i of modifiable) {
     list[i][2] = 1
     d = shortest(n, list, source, destination)
-    frames.push(snap('try', i, d, `Set edge ${i} (${list[i][0]}-${list[i][1]}) to 1. The distance is now ${d}.`, L('set its weight to 1')))
+    frames.push(snap('try', i, d, `Set edge ${i} (${list[i][0]}-${list[i][1]}) to 1. The distance is now ${d}.`, L('set its weight to 1'), 31))
     if (d <= target) {
       list[i][2] = 1 + target - d
-      frames.push(snap('raise', i, d, `Raise edge ${i} to ${list[i][2]} so that a route through it is exactly ${target}.`, L('set its weight to 1 + target - d')))
+      frames.push(snap('raise', i, d, `Raise edge ${i} to ${list[i][2]} so that a route through it is exactly ${target}.`, L('set its weight to 1 + target - d'), 34))
       break
     }
   }
   d = shortest(n, list, source, destination)
   const result = d === target ? list : []
-  frames.push(snap('done', -1, d, result.length ? `Shortest distance is ${target}: the modified edges are returned.` : `No assignment gives distance ${target}: return [].`, L('otherwise return []')))
+  frames.push(snap('done', -1, d, result.length ? `Shortest distance is ${target}: the modified edges are returned.` : `No assignment gives distance ${target}: return [].`, L('otherwise return []'), 36))
   return { input: { n, edges, source, destination, target }, result, frames }
 }
 

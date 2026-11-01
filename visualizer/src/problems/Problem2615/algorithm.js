@@ -14,18 +14,18 @@ export function buildTrace(input) {
     groups.get(value).push(i)
   })
   const answer = new Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('group the indices'), index: -1, answer: [...answer], group: [], message: `The numbers form ${groups.size} groups of equal values.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('group the indices'), index: -1, answer: [...answer], group: [], message: `The numbers form ${groups.size} groups of equal values.` }]
   for (const [value, idx] of groups) {
     const total = idx.reduce((sum, p) => sum + p, 0)
     let before = 0
     idx.forEach((p, t) => {
       const after = total - before - p
       answer[p] = p * t - before + after - p * (idx.length - t - 1)
-      frames.push({ phase: 'group', activeLine: L('set answer[p]'), index: p, answer: [...answer], group: [...idx], value, message: `Index ${p} shares value ${value} with ${idx.length - 1} other index(es). Distance total ${answer[p]}.` })
+      frames.push({ pythonLine: 12, phase: 'group', activeLine: L('set answer[p]'), index: p, answer: [...answer], group: [...idx], value, message: `Index ${p} shares value ${value} with ${idx.length - 1} other index(es). Distance total ${answer[p]}.` })
       before += p
     })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: n, answer: [...answer], group: [], message: `Answer: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return answer'), index: n, answer: [...answer], group: [], message: `Answer: ${answer.join(', ')}.` })
   return { input, result: answer, frames }
 }
 

@@ -25,16 +25,16 @@ export function buildTrace({ nums, queries }) {
   for (const value of ordered) prefix.push(prefix[prefix.length - 1] + value)
   const total = prefix[n]
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('sort nums and build prefix sums'), query: null, below: null, cost: null, message: `Sorted numbers ${ordered.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('sort nums and build prefix sums'), query: null, below: null, cost: null, message: `Sorted numbers ${ordered.join(', ')}.` }]
   queries.forEach((target, index) => {
     const k = countBelow(ordered, target)
     const raise = target * k - prefix[k]
     const lower = total - prefix[k] - target * (n - k)
     const cost = raise + lower
     answers.push(cost)
-    frames.push({ phase: 'query', activeLine: L('count the numbers below'), query: index, below: k, cost, message: `Target ${target}: ${k} numbers below it cost ${raise} to raise, the rest ${lower} to lower; total ${cost}.` })
+    frames.push({ phase: 'query', pythonLine: 11, activeLine: L('count the numbers below'), query: index, below: k, cost, message: `Target ${target}: ${k} numbers below it cost ${raise} to raise, the rest ${lower} to lower; total ${cost}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the stored costs'), query: null, below: null, cost: null, message: `Costs: ${answers.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return the stored costs'), query: null, below: null, cost: null, message: `Costs: ${answers.join(', ')}.` })
   return { input: { nums, queries }, result: answers, frames }
 }
 

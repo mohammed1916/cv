@@ -19,22 +19,22 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const frames = []
   let best = 0
-  frames.push({ phase: 'start', activeLine: L('set best to 0'), row: -1, col: -1, best, message: 'Start with no prime found.' })
+  frames.push({ pythonLine: 13, phase: 'start', activeLine: L('set best to 0'), row: -1, col: -1, best, message: 'Start with no prime found.' })
   for (let i = 0; i < n; i++) {
-    frames.push({ phase: 'row', activeLine: L('for each row i'), row: i, col: i, best, message: `Row ${i}: check the diagonal cells.` })
+    frames.push({ pythonLine: 14, phase: 'row', activeLine: L('for each row i'), row: i, col: i, best, message: `Row ${i}: check the diagonal cells.` })
     for (const col of [i, n - 1 - i]) {
       const value = nums[i][col]
       const kind = col === i ? 'main' : 'anti'
       if (isPrime(value) && value > best) {
         best = value
-        frames.push({ phase: 'record', activeLine: L('if its value is prime'), row: i, col, best, message: `${value} on the ${kind} diagonal is prime and the largest so far.` })
+        frames.push({ pythonLine: 17, phase: 'record', activeLine: L('if its value is prime'), row: i, col, best, message: `${value} on the ${kind} diagonal is prime and the largest so far.` })
       } else {
-        frames.push({ phase: 'skip', activeLine: L('if its value is prime'), row: i, col, best, message: `${value} on the ${kind} diagonal does not beat ${best}.` })
+        frames.push({ pythonLine: 16, phase: 'skip', activeLine: L('if its value is prime'), row: i, col, best, message: `${value} on the ${kind} diagonal does not beat ${best}.` })
       }
       if (n - 1 - i === i) break
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), row: -1, col: -1, best, message: `Largest prime on either diagonal: ${best}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return best'), row: -1, col: -1, best, message: `Largest prime on either diagonal: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

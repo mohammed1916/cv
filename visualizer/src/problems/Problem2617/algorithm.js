@@ -32,7 +32,7 @@ export const pythonLineMap = { 1: 1, 2: 4, 3: 5, 4: 6, 5: 7, 6: 8, 7: 9, 8: 12, 
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
   if (write) table[info.row][info.column] = info.value;
-  frames.push({ phase: info.phase, activeLine: info.line, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
+  frames.push({ phase: info.phase, pythonLine: info.pythonLine, activeLine: info.line, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
 }
 
 export function parseInput(text) {
@@ -61,24 +61,24 @@ export function buildTrace(input) {
   const shown = v => (v === Infinity ? null : v);
   dist[0][0] = 1;
   table[0][0] = 1;
-  emit(frames, table, { phase: "setup", line: 3, row: 0, column: 0, value: 1, message: "The start cell is visited once, so dist = 1." });
+  emit(frames, table, { phase: "setup", pythonLine: 5, line: 3, row: 0, column: 0, value: 1, message: "The start cell is visited once, so dist = 1." });
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue;
-      emit(frames, table, { phase: "scan", line: 6, row: r, column: c, value: null, message: `Cell (${r}, ${c}): look at cells that can jump here.` });
+      emit(frames, table, { phase: "scan", pythonLine: 10, line: 6, row: r, column: c, value: null, message: `Cell (${r}, ${c}): look at cells that can jump here.` });
       for (let p = 0; p < c; p++) {
         if (p + grid[r][p] >= c) dist[r][c] = Math.min(dist[r][c], dist[r][p] + 1);
       }
       table[r][c] = shown(dist[r][c]);
-      emit(frames, table, { phase: "compute", line: 7, row: r, column: c, value: shown(dist[r][c]), message: `After the row jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
+      emit(frames, table, { phase: "compute", pythonLine: 12, line: 7, row: r, column: c, value: shown(dist[r][c]), message: `After the row jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
       for (let q = 0; q < r; q++) {
         if (q + grid[q][c] >= r) dist[r][c] = Math.min(dist[r][c], dist[q][c] + 1);
       }
       table[r][c] = shown(dist[r][c]);
-      emit(frames, table, { phase: "compute", line: 8, row: r, column: c, value: shown(dist[r][c]), message: `After the column jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
+      emit(frames, table, { phase: "compute", pythonLine: 15, line: 8, row: r, column: c, value: shown(dist[r][c]), message: `After the column jumps, dist = ${shown(dist[r][c]) ?? "infinity"}.` });
     }
   }
   const answer = dist[m - 1][n - 1] === Infinity ? -1 : dist[m - 1][n - 1];
-  emit(frames, table, { phase: "result", line: 9, row: m - 1, column: n - 1, value: answer, message: `Return ${answer}.` });
+  emit(frames, table, { phase: "result", pythonLine: 16, line: 9, row: m - 1, column: n - 1, value: answer, message: `Return ${answer}.` });
   return { input, result: answer, frames, rowLabels, columnLabels };
 }

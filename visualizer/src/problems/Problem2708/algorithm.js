@@ -12,20 +12,20 @@ export function buildTrace(input) {
   const positives = []
   const negatives = []
   nums.forEach((v, i) => { if (v > 0) positives.push(i); else if (v < 0) negatives.push(i) })
-  const frames = [{ phase: 'start', activeLine: L('set chosen to every positive'), index: -1, marked: [], message: 'Positive values only help, so every positive joins the group.' }]
+  const frames = [{ phase: 'start', activeLine: L('set chosen to every positive'), pythonLine: 2, index: -1, marked: [], message: 'Positive values only help, so every positive joins the group.' }]
   const chosenPositive = positives.slice()
-  frames.push({ phase: 'positive', activeLine: L('set chosen to every positive'), index: -1, marked: chosenPositive.slice(), message: `${chosenPositive.length} positive value(s) are in the group.` })
+  frames.push({ phase: 'positive', activeLine: L('set chosen to every positive'), pythonLine: 2, index: -1, marked: chosenPositive.slice(), message: `${chosenPositive.length} positive value(s) are in the group.` })
   negatives.sort((a, b) => nums[a] - nums[b])
   const pairs = negatives.slice(0, negatives.length - (negatives.length % 2))
-  frames.push({ phase: 'pair', activeLine: L('add the negatives in pairs'), index: -1, marked: [...chosenPositive, ...pairs], message: pairs.length ? `Negatives are paired from the largest magnitude: ${pairs.map(i => nums[i]).join(', ')}.` : 'No pair of negatives is available.' })
+  frames.push({ phase: 'pair', activeLine: L('add the negatives in pairs'), pythonLine: 4, index: -1, marked: [...chosenPositive, ...pairs], message: pairs.length ? `Negatives are paired from the largest magnitude: ${pairs.map(i => nums[i]).join(', ')}.` : 'No pair of negatives is available.' })
   const chosen = [...chosenPositive, ...pairs]
   let result
   if (chosen.length === 0) {
     result = Math.max(...nums)
-    frames.push({ phase: 'done', activeLine: L('return the largest value'), index: -1, marked: [], message: `Nothing positive can be formed, so the answer is the largest value ${result}.` })
+    frames.push({ phase: 'done', activeLine: L('return the largest value'), pythonLine: 7, index: -1, marked: [], message: `Nothing positive can be formed, so the answer is the largest value ${result}.` })
   } else {
     result = chosen.reduce((p, i) => p * nums[i], 1)
-    frames.push({ phase: 'done', activeLine: L('return the product'), index: -1, marked: chosen, message: `Product of the group: ${result}.` })
+    frames.push({ phase: 'done', activeLine: L('return the product'), pythonLine: 11, index: -1, marked: chosen, message: `Product of the group: ${result}.` })
   }
   return { input, result, frames }
 }

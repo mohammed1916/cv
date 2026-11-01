@@ -22,17 +22,17 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ s, dictionary }) {
   const words = new Set(dictionary)
   const best = Array(s.length + 1).fill(0)
-  const frames = [{ phase: 'start', end: 0, best: [...best], activeLine: L('best = array of'), message: 'An empty prefix has no extra characters.' }]
+  const frames = [{ phase: 'start', end: 0, best: [...best], activeLine: L('best = array of'), pythonLine: 3, message: 'An empty prefix has no extra characters.' }]
   for (let end = 1; end <= s.length; end++) {
     best[end] = best[end - 1] + 1
     for (let start = 0; start < end; start++) {
       if (!words.has(s.slice(start, end))) continue
       best[end] = Math.min(best[end], best[start])
     }
-    frames.push({ phase: 'end', end, best: [...best], activeLine: L('for start from 0'), message: `The first ${end} characters need ${best[end]} extra characters.` })
+    frames.push({ phase: 'end', end, best: [...best], activeLine: L('for start from 0'), pythonLine: 6, message: `The first ${end} characters need ${best[end]} extra characters.` })
   }
   const result = best[s.length]
-  frames.push({ phase: 'done', end: s.length, best: [...best], activeLine: L('return best[len(s)]'), message: `Fewest extra characters: ${result}.` })
+  frames.push({ phase: 'done', end: s.length, best: [...best], activeLine: L('return best[len(s)]'), pythonLine: 9, message: `Fewest extra characters: ${result}.` })
   return { input: { s, dictionary }, result, frames }
 }
 

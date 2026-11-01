@@ -12,22 +12,22 @@ export function buildTrace(input) {
   const { word } = input
   let need = 0
   let added = 0
-  const frames = [{ phase: 'start', activeLine: L('set need to 0'), index: -1, need, added, message: 'Scan the word while expecting a, then b, then c, repeating.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set need to 0'), index: -1, need, added, message: 'Scan the word while expecting a, then b, then c, repeating.' }]
   for (let i = 0; i < word.length; i++) {
     const ch = word[i]
     while (ch !== PATTERN[need]) {
       added += 1
-      frames.push({ phase: 'insert', activeLine: L('while ch is not the letter at need'), index: i, need, added, message: `Insert a ${PATTERN[need]} before ${ch} so the block can continue.` })
+      frames.push({ pythonLine: 6, phase: 'insert', activeLine: L('while ch is not the letter at need'), index: i, need, added, message: `Insert a ${PATTERN[need]} before ${ch} so the block can continue.` })
       need = (need + 1) % 3
     }
-    frames.push({ phase: 'match', activeLine: L('for each letter ch'), index: i, need, added, message: `Letter ${ch} matches the expected ${PATTERN[need]}.` })
+    frames.push({ pythonLine: 8, phase: 'match', activeLine: L('for each letter ch'), index: i, need, added, message: `Letter ${ch} matches the expected ${PATTERN[need]}.` })
     need = (need + 1) % 3
   }
   if (need !== 0) {
     added += 3 - need
-    frames.push({ phase: 'tail', activeLine: L('if need is not 0'), index: -1, need, added, message: `The word ends partway through a block, so ${3 - need} letter(s) must be appended.` })
+    frames.push({ pythonLine: 10, phase: 'tail', activeLine: L('if need is not 0'), index: -1, need, added, message: `The word ends partway through a block, so ${3 - need} letter(s) must be appended.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return added'), index: -1, need, added, message: `Minimum insertions: ${added}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return added'), index: -1, need, added, message: `Minimum insertions: ${added}.` })
   return { input, word, result: added, frames }
 }
 

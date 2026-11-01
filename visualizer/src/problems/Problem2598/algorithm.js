@@ -15,12 +15,12 @@ export function buildTrace(input) {
   const count = new Map()
   const frames = []
   const maps = () => [{ name: 'count', keyLabel: 'remainder', valueLabel: 'numbers left', isSet: false, entries: [...count].sort((a, b) => a[0] - b[0]) }]
-  frames.push({ phase: 'start', activeLine: L('count = empty map'), target: null, maps: maps(), ops: [], result: null, message: `Each number can become any number with the same remainder mod ${value}. Count how many numbers have each remainder.` })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('count = empty map'), target: null, maps: maps(), ops: [], result: null, message: `Each number can become any number with the same remainder mod ${value}. Count how many numbers have each remainder.` })
   for (const x of nums) {
     const r = residue(x, value)
     const before = count.get(r)
     count.set(r, (before ?? 0) + 1)
-    frames.push({ phase: 'count', activeLine: L('add one to count at'), target: null, maps: maps(),
+    frames.push({ phase: 'count', pythonLine: 5, activeLine: L('add one to count at'), target: null, maps: maps(),
       ops: [{ map: 'count', type: before === undefined ? 'insert' : 'update', key: r, value: (before ?? 0) + 1, before }],
       result: null, message: `${x} has remainder ${r}. That remainder now has ${count.get(r)} number(s).` })
   }
@@ -29,13 +29,13 @@ export function buildTrace(input) {
     const r = m % value
     const left = count.get(r) ?? 0
     if (left === 0) {
-      frames.push({ phase: 'missing', activeLine: L('return m'), target: m, maps: maps(),
+      frames.push({ phase: 'missing', pythonLine: 10, activeLine: L('return m'), target: m, maps: maps(),
         ops: [{ map: 'count', type: 'lookup', via: 'get', key: r, hit: false, hitNote: '', missNote: `no number is left with remainder ${r}, so ${m} cannot be built` }],
         result: m, message: `${m} needs remainder ${r}, and none is left. The answer is ${m}.` })
       return { input, result: m, frames }
     }
     count.set(r, left - 1)
-    frames.push({ phase: 'use', activeLine: L('subtract one from count'), target: m, maps: maps(),
+    frames.push({ phase: 'use', pythonLine: 11, activeLine: L('subtract one from count'), target: m, maps: maps(),
       ops: [{ map: 'count', type: 'update', key: r, value: left - 1, before: left }],
       result: null, message: `${m} uses a number with remainder ${r}. ${left - 1} of that remainder are left.` })
     m++

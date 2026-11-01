@@ -33,7 +33,7 @@ export function buildTrace(input) {
   const alive = Array(n).fill(true)
   const frames = []
   let current = -1
-  const snap = (phase, activeLine, message) => frames.push({ phase, activeLine, current, alive: [...alive], message })
+  const snap = (phase, activeLine, pythonLine, message) => frames.push({ phase, activeLine, pythonLine, current, alive: [...alive], message })
   const bareLeaf = v => alive[v] && adj[v].size === 1 && coins[v] === 0
   const removeNode = v => {
     alive[v] = false
@@ -41,20 +41,20 @@ export function buildTrace(input) {
     adj[v].clear()
   }
 
-  snap('start', L('build the neighbor set'), 'Each node knows its neighbors. Coins are 1.')
+  snap('start', L('build the neighbor set'), 9, 'Each node knows its neighbors. Coins are 1.')
   const queue = []
   for (let v = 0; v < n; v++) if (bareLeaf(v)) queue.push(v)
-  snap('leaves', L('remove each leaf without a coin'), `${queue.length} leaf node(s) without a coin are queued.`)
+  snap('leaves', L('remove each leaf without a coin'), 20, `${queue.length} leaf node(s) without a coin are queued.`)
   while (queue.length) {
     const v = queue.shift()
     current = v
     if (!bareLeaf(v)) continue
     const [u] = adj[v]
     removeNode(v)
-    snap('prune', L('remove each leaf without a coin'), `Remove leaf ${v}; its neighbor is ${u}.`)
+    snap('prune', L('remove each leaf without a coin'), 26, `Remove leaf ${v}; its neighbor is ${u}.`)
     if (bareLeaf(u)) {
       queue.push(u)
-      snap('leaves', L('and any leaf it exposes'), `Node ${u} is now a leaf without a coin, so it is queued.`)
+      snap('leaves', L('and any leaf it exposes'), 28, `Node ${u} is now a leaf without a coin, so it is queued.`)
     }
   }
   for (let layer = 0; layer < 2; layer++) {
@@ -62,12 +62,12 @@ export function buildTrace(input) {
     for (let v = 0; v < n; v++) if (alive[v] && adj[v].size <= 1) leaves.push(v)
     for (const v of leaves) removeNode(v)
     current = -1
-    snap('layer', L('remove all current leaves'), `Layer ${layer + 1}: removed [${leaves.join(', ')}].`)
+    snap('layer', L('remove all current leaves'), 32, `Layer ${layer + 1}: removed [${leaves.join(', ')}].`)
   }
   const r = alive.filter(Boolean).length
-  snap('count', L('count the nodes left'), `${r} node(s) remain.`)
+  snap('count', L('count the nodes left'), 33, `${r} node(s) remain.`)
   const result = 2 * Math.max(0, r - 1)
-  snap('done', L('return twice'), `Answer: ${result}.`)
+  snap('done', L('return twice'), 34, `Answer: ${result}.`)
   return { input, alive, result, frames }
 }
 

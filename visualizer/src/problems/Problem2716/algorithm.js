@@ -9,13 +9,13 @@ export function parseInput(text) {
 export function buildTrace({ s }) {
   const chars = [...s]
   const seen = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set seen to an empty set'), active: -1, roles: {}, state: { distinct: 0 }, message: 'Each letter that appears can keep exactly one copy, so count the distinct letters.' }]
+  const frames = [{ phase: 'start', activeLine: L('set seen to an empty set'), pythonLine: 2, active: -1, roles: {}, state: { distinct: 0 }, message: 'Each letter that appears can keep exactly one copy, so count the distinct letters.' }]
   chars.forEach((ch, i) => {
     const repeat = seen.has(ch)
     seen.add(ch)
-    frames.push({ phase: 'scan', activeLine: L('add the character to seen'), active: i, roles: { [i]: repeat ? 'repeat' : 'first' }, state: { letter: ch, distinct: seen.size }, message: repeat ? `"${ch}" repeats. Its extra copies pair off and vanish, leaving one.` : `"${ch}" is new, so it survives.` })
+    frames.push({ phase: 'scan', activeLine: L('add the character to seen'), pythonLine: 4, active: i, roles: { [i]: repeat ? 'repeat' : 'first' }, state: { letter: ch, distinct: seen.size }, message: repeat ? `"${ch}" repeats. Its extra copies pair off and vanish, leaving one.` : `"${ch}" is new, so it survives.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), active: -1, roles: {}, state: { distinct: seen.size }, message: `Return ${seen.size}, the number of distinct letters.` })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: 5, active: -1, roles: {}, state: { distinct: seen.size }, message: `Return ${seen.size}, the number of distinct letters.` })
   return { input: { s }, result: seen.size, items: chars, frames }
 }
 

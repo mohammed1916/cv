@@ -25,7 +25,7 @@ export const pythonLineMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
   if (write) table[info.row][info.column] = info.value;
-  frames.push({ phase: info.phase, activeLine: info.line, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
+  frames.push({ phase: info.phase, pythonLine: pythonLineMap[info.line], activeLine: info.line, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
 }
 
 export function parseInput(text) {

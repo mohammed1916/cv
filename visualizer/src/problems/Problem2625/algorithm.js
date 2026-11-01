@@ -31,20 +31,20 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ arr, n }) {
   const output = []
-  const frames = [{ phase: 'start', activeLine: L('set output to an empty list'), output: [], depth: n, message: `Flatten to depth ${n}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set output to an empty list'), output: [], depth: n, message: `Flatten to depth ${n}.` }]
   const walk = (items, depth) => {
     for (const item of items) {
       if (Array.isArray(item) && depth > 0) {
-        frames.push({ phase: 'enter', activeLine: L('walk the item with depth'), output: [...output], depth, message: `Open a nested list; ${depth} level(s) of flattening remain.` })
+        frames.push({ pythonLine: 7, phase: 'enter', activeLine: L('walk the item with depth'), output: [...output], depth, message: `Open a nested list; ${depth} level(s) of flattening remain.` })
         walk(item, depth - 1)
       } else {
         output.push(item)
-        frames.push({ phase: 'emit', activeLine: L('otherwise append item'), output: [...output], depth, message: `Append ${item} to the output.` })
+        frames.push({ pythonLine: 9, phase: 'emit', activeLine: L('otherwise append item'), output: [...output], depth, message: `Append ${item} to the output.` })
       }
     }
   }
   walk(arr, n)
-  frames.push({ phase: 'done', activeLine: L('return output'), output: [...output], depth: n, message: `Flattened: [${output.join(', ')}].` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return output'), output: [...output], depth: n, message: `Flattened: [${output.join(', ')}].` })
   return { input: { arr, n }, result: output, frames }
 }
 

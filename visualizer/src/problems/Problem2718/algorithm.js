@@ -13,7 +13,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ n, m, queries }) {
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), active: -1, roles: {}, state: { total: 0 }, message: 'Process queries from the last one backwards. Only the newest write to each row or column survives.' }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: 2, active: -1, roles: {}, state: { total: 0 }, message: 'Process queries from the last one backwards. Only the newest write to each row or column survives.' }]
   const rows = new Set()
   const cols = new Set()
   let total = 0
@@ -23,16 +23,16 @@ export function buildTrace({ n, m, queries }) {
     if (kind === 0 && !rows.has(index)) {
       rows.add(index)
       total += value * (m - cols.size)
-      frames.push({ phase: 'row', activeLine: L('add value times (m'), active: k, roles: { [k]: 'counted' }, state: { query: label, total }, message: `${label} is set to ${value} and is not overwritten later. Its ${m - cols.size} free cells add ${value * (m - cols.size)}.` })
+      frames.push({ phase: 'row', activeLine: L('add value times (m'), pythonLine: 8, active: k, roles: { [k]: 'counted' }, state: { query: label, total }, message: `${label} is set to ${value} and is not overwritten later. Its ${m - cols.size} free cells add ${value * (m - cols.size)}.` })
     } else if (kind === 1 && !cols.has(index)) {
       cols.add(index)
       total += value * (n - rows.size)
-      frames.push({ phase: 'column', activeLine: L('add value times (n'), active: k, roles: { [k]: 'counted' }, state: { query: label, total }, message: `${label} is set to ${value} and is not overwritten later. Its ${n - rows.size} free cells add ${value * (n - rows.size)}.` })
+      frames.push({ phase: 'column', activeLine: L('add value times (n'), pythonLine: 11, active: k, roles: { [k]: 'counted' }, state: { query: label, total }, message: `${label} is set to ${value} and is not overwritten later. Its ${n - rows.size} free cells add ${value * (n - rows.size)}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('otherwise if the query sets a column'), active: k, roles: { [k]: 'overwritten' }, state: { query: label, total }, message: `${label} is overwritten by a later query, so it contributes nothing.` })
+      frames.push({ phase: 'skip', activeLine: L('otherwise if the query sets a column'), pythonLine: 9, active: k, roles: { [k]: 'overwritten' }, state: { query: label, total }, message: `${label} is overwritten by a later query, so it contributes nothing.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), active: -1, roles: {}, state: { total }, message: `Sum of the final matrix: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 12, active: -1, roles: {}, state: { total }, message: `Sum of the final matrix: ${total}.` })
   return { input: { n, m, queries }, result: total, items: queries.map(([kind, index, value]) => `${kind === 0 ? 'row' : 'col'} ${index} = ${value}`), frames }
 }
 

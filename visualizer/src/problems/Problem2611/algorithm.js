@@ -14,21 +14,21 @@ export function buildTrace(input) {
   const assign = reward1.map(() => null)
   let total = 0
   let taken = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), index: -1, assign: [...assign], total, message: 'Sort cheese types by how much more the first mouse gains than the second mouse.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set total to zero'), index: -1, assign: [...assign], total, message: 'Sort cheese types by how much more the first mouse gains than the second mouse.' }]
   frames[0].message = 'Sort cheese types by how much more the first mouse gains than the second mouse.'
   for (const i of order) {
     if (taken < k) {
       total += reward1[i]
       taken += 1
       assign[i] = 'first'
-      frames.push({ phase: 'first', activeLine: L('give it to the first mouse'), index: i, assign: [...assign], total, message: `Cheese ${i} goes to the first mouse for ${reward1[i]} points. Total ${total}.` })
+      frames.push({ phase: 'first', pythonLine: 7, activeLine: L('give it to the first mouse'), index: i, assign: [...assign], total, message: `Cheese ${i} goes to the first mouse for ${reward1[i]} points. Total ${total}.` })
     } else {
       total += reward2[i]
       assign[i] = 'second'
-      frames.push({ phase: 'second', activeLine: L('give it to the second mouse'), index: i, assign: [...assign], total, message: `Cheese ${i} goes to the second mouse for ${reward2[i]} points. Total ${total}.` })
+      frames.push({ phase: 'second', pythonLine: 10, activeLine: L('give it to the second mouse'), index: i, assign: [...assign], total, message: `Cheese ${i} goes to the second mouse for ${reward2[i]} points. Total ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, assign: [...assign], total, message: `Maximum points: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return total'), index: -1, assign: [...assign], total, message: `Maximum points: ${total}.` })
   return { input, result: total, frames }
 }
 

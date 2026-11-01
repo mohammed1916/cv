@@ -15,10 +15,10 @@ export function buildTrace({ n, p, banned, k }) {
   const dist = Array(n).fill(-1)
   dist[p] = 0
   const queue = [p]
-  const frames = [{ phase: 'start', activeLine: L('set every answer to unset'), pos: p, dist: [...dist], message: `The single 1 starts at position ${p}.` }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set every answer to unset'), pos: p, dist: [...dist], message: `The single 1 starts at position ${p}.` }]
   for (let head = 0; head < queue.length; head++) {
     const i = queue[head]
-    frames.push({ phase: 'visit', activeLine: L('for each window of length k'), pos: i, dist: [...dist], message: `The 1 can be at position ${i} after ${dist[i]} operation(s).` })
+    frames.push({ phase: 'visit', pythonLine: 6, activeLine: L('for each window of length k'), pos: i, dist: [...dist], message: `The 1 can be at position ${i} after ${dist[i]} operation(s).` })
     // A window [s, s+k-1] that holds i sends i to s + (s + k - 1) - i.
     const lo = Math.max(0, i - k + 1), hi = Math.min(i, n - k)
     for (let s = lo; s <= hi; s++) {
@@ -26,10 +26,10 @@ export function buildTrace({ n, p, banned, k }) {
       if (blocked.has(j) || dist[j] !== -1) continue
       dist[j] = dist[i] + 1
       queue.push(j)
-      frames.push({ phase: 'reach', activeLine: L('set its answer to one more'), pos: j, dist: [...dist], message: `Reversing the window at ${s} moves the 1 from ${i} to ${j}.` })
+      frames.push({ phase: 'reach', pythonLine: 12, activeLine: L('set its answer to one more'), pos: j, dist: [...dist], message: `Reversing the window at ${s} moves the 1 from ${i} to ${j}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), pos: null, dist: [...dist], message: 'Every position has its minimum operation count, or -1 when unreachable.' })
+  frames.push({ phase: 'done', pythonLine: 14, activeLine: L('return the answers'), pos: null, dist: [...dist], message: 'Every position has its minimum operation count, or -1 when unreachable.' })
   return { input: { n, p, banned, k }, result: dist, frames }
 }
 

@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const rows = grid.length
   const cols = grid[0].length
   const answer = grid.map(row => row.map(() => ''))
-  const frames = [{ phase: 'start', activeLine: L('set answer to an empty grid'), cell: null, above: null, below: null, answer: answer.map(r => [...r]), message: 'Each cell compares the diagonal above-left with the diagonal below-right.' }]
+  const frames = [{ phase: 'start', activeLine: L('set answer to an empty grid'), pythonLine: 3, cell: null, above: null, below: null, answer: answer.map(r => [...r]), message: 'Each cell compares the diagonal above-left with the diagonal below-right.' }]
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const above = new Set()
@@ -24,10 +24,10 @@ export function buildTrace(input) {
       for (let r = i + 1, c = j + 1; r < rows && c < cols; r++, c++) { below.add(grid[r][c]); cellsBelow.push([r, c]) }
       const gap = Math.abs(above.size - below.size)
       answer[i][j] = gap
-      frames.push({ phase: 'cell', activeLine: L('store the absolute difference'), cell: [i, j], above: cellsAbove, below: cellsBelow, answer: answer.map(r => [...r]), message: `Cell (${i}, ${j}): ${above.size} distinct above-left, ${below.size} below-right, gap ${gap}.` })
+      frames.push({ phase: 'cell', activeLine: L('store the absolute difference'), pythonLine: 18, cell: [i, j], above: cellsAbove, below: cellsBelow, answer: answer.map(r => [...r]), message: `Cell (${i}, ${j}): ${above.size} distinct above-left, ${below.size} below-right, gap ${gap}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), cell: null, above: null, below: null, answer: answer.map(r => [...r]), message: 'Every cell has its gap.' })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: 19, cell: null, above: null, below: null, answer: answer.map(r => [...r]), message: 'Every cell has its gap.' })
   return { input, result: answer, frames }
 }
 

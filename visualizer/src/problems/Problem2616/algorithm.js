@@ -24,16 +24,16 @@ export function buildTrace({ nums, p }) {
   let lo = 0
   let hi = sorted[sorted.length - 1] - sorted[0]
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('sort the numbers'), lo, hi, mid: null, verdict: null, picked: [], message: `Sorted numbers: ${sorted.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
+  const frames = [{ pythonLine: 15, phase: 'start', activeLine: L('sort the numbers'), lo, hi, mid: null, verdict: null, picked: [], message: `Sorted numbers: ${sorted.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const pairs = pairsFor(mid)
     const verdict = pairs.length >= p
-    frames.push({ phase: 'probe', activeLine: L('if the greedy pairs reach p'), lo, hi, mid, verdict, picked: pairs.flat(), message: `Limit ${mid}: greedy finds ${pairs.length} pairs, ${verdict ? 'enough' : 'too few'} for p = ${p}.` })
+    frames.push({ pythonLine: 18, phase: 'probe', activeLine: L('if the greedy pairs reach p'), lo, hi, mid, verdict, picked: pairs.flat(), message: `Limit ${mid}: greedy finds ${pairs.length} pairs, ${verdict ? 'enough' : 'too few'} for p = ${p}.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, picked: pairsFor(lo).flat(), message: `Smallest possible largest difference: ${lo}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, picked: pairsFor(lo).flat(), message: `Smallest possible largest difference: ${lo}.` })
   return { input: { nums, p }, sorted, domain, result: lo, frames }
 }
 

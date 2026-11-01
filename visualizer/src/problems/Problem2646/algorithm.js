@@ -37,7 +37,7 @@ export function buildTrace({ n, edges, price, trips }) {
   const frames = []
   const count = Array(n).fill(0)
   const tree = id => ({ id, children: children[id].map(tree) })
-  frames.push({ phase: 'root', activeLine: L('root the tree at node 0'), node: 0, path: [], keep: null, halve: null, message: 'Root the tree at node 0 and record parents and levels.' })
+  frames.push({ pythonLine: 20, phase: 'root', activeLine: L('root the tree at node 0'), node: 0, path: [], keep: null, halve: null, message: 'Root the tree at node 0 and record parents and levels.' })
   trips.forEach(([s, t], ti) => {
     const path = []
     let a = s, b = t
@@ -45,17 +45,17 @@ export function buildTrace({ n, edges, price, trips }) {
       if (level[a] >= level[b]) { path.push(a); count[a]++; a = parent[a] } else { path.push(b); count[b]++; b = parent[b] }
     }
     path.push(a); count[a]++
-    frames.push({ phase: 'trip', activeLine: L('walk the path from s to t'), node: a, path: [...path], keep: null, halve: null, message: `Trip ${ti} from ${s} to ${t} uses nodes ${path.join(', ')}.` })
+    frames.push({ pythonLine: 31, phase: 'trip', activeLine: L('walk the path from s to t'), node: a, path: [...path], keep: null, halve: null, message: `Trip ${ti} from ${s} to ${t} uses nodes ${path.join(', ')}.` })
   })
   const keep = Array(n).fill(0)
   const halve = Array(n).fill(0)
   for (const v of [...order].reverse()) {
     keep[v] = count[v] * price[v] + children[v].reduce((sum, c) => sum + Math.min(keep[c], halve[c]), 0)
     halve[v] = (count[v] * price[v]) / 2 + children[v].reduce((sum, c) => sum + keep[c], 0)
-    frames.push({ phase: 'dp', activeLine: L('set keep to'), node: v, path: [], keep: keep[v], halve: halve[v], message: `Node ${v}: keep ${keep[v]}, halve ${halve[v]}.` })
+    frames.push({ pythonLine: 36, phase: 'dp', activeLine: L('set keep to'), node: v, path: [], keep: keep[v], halve: halve[v], message: `Node ${v}: keep ${keep[v]}, halve ${halve[v]}.` })
   }
   const result = Math.min(keep[0], halve[0])
-  frames.push({ phase: 'done', activeLine: L('return the smaller'), node: -1, path: [], keep: keep[0], halve: halve[0], message: `Minimum total price: ${result}.` })
+  frames.push({ pythonLine: 37, phase: 'done', activeLine: L('return the smaller'), node: -1, path: [], keep: keep[0], halve: halve[0], message: `Minimum total price: ${result}.` })
   return { input: { n, edges, price, trips }, root: tree(0), result, frames }
 }
 

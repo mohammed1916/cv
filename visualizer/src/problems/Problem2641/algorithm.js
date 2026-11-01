@@ -46,23 +46,23 @@ export function buildTrace(input) {
     }
     current = next
   }
-  const frames = [{ phase: 'start', activeLine: L('set the current level to just the root'), depth: -1, ids: [], total: null, group: null, updated: {}, message: 'Every node will be replaced by the sum of its cousins. The root has no cousins, so it becomes 0.' }]
+  const frames = [{ pythonLine: 21, phase: 'start', activeLine: L('set the current level to just the root'), depth: -1, ids: [], total: null, group: null, updated: {}, message: 'Every node will be replaced by the sum of its cousins. The root has no cousins, so it becomes 0.' }]
   const updated = {}
   const newValue = new Map()
   levels.forEach((nodes, depth) => {
     const total = nodes.reduce((sum, node) => sum + node.value, 0)
-    frames.push({ phase: 'level', activeLine: L('compute the level total'), depth, ids: nodes.map(node => node.id), total, group: null, updated: { ...updated }, message: `Level ${depth} totals ${total}.` })
+    frames.push({ pythonLine: 23, phase: 'level', activeLine: L('compute the level total'), depth, ids: nodes.map(node => node.id), total, group: null, updated: { ...updated }, message: `Level ${depth} totals ${total}.` })
     for (const node of nodes) {
       const up = parent.get(node.id)
       const group = up ? (up.left ? up.left.value : 0) + (up.right ? up.right.value : 0) : node.value
       const value = total - group
       newValue.set(node.id, value)
       updated[node.id] = value
-      frames.push({ phase: 'node', activeLine: L('set the new value'), depth, ids: [node.id], total, group, updated: { ...updated }, message: `Node ${node.value} has sibling group ${group}, so its new value is ${total} minus ${group}, which is ${value}.` })
+      frames.push({ pythonLine: 25, phase: 'node', activeLine: L('set the new value'), depth, ids: [node.id], total, group, updated: { ...updated }, message: `Node ${node.value} has sibling group ${group}, so its new value is ${total} minus ${group}, which is ${value}.` })
     }
   })
   const result = values.map((value, index) => (value === null ? null : newValue.get(index)))
-  frames.push({ phase: 'done', activeLine: L('return the new values'), depth: -1, ids: [], total: null, group: null, updated: { ...updated }, message: 'Every node now holds the sum of its cousins.' })
+  frames.push({ pythonLine: 27, phase: 'done', activeLine: L('return the new values'), depth: -1, ids: [], total: null, group: null, updated: { ...updated }, message: 'Every node now holds the sum of its cousins.' })
   return { input, root: tree, result, frames }
 }
 

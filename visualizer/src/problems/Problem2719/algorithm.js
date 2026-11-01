@@ -22,7 +22,7 @@ export function buildTrace({ num1, num2, min_sum, max_sum }) {
     }
     ways.push(row)
   }
-  const frames = [{ phase: 'start', activeLine: L('ways[k][s]'), bound: '', total: 0, message: `Precompute the digit-sum table for strings of up to ${width} digits.` }]
+  const frames = [{ phase: 'start', activeLine: L('ways[k][s]'), pythonLine: 8, bound: '', total: 0, message: `Precompute the digit-sum table for strings of up to ${width} digits.` }]
   const count = (x, label) => {
     const digits = x.padStart(width, '0').split('').map(Number)
     let total = 0
@@ -38,7 +38,7 @@ export function buildTrace({ num1, num2, min_sum, max_sum }) {
       prefix += d
     })
     if (prefix >= min_sum && prefix <= max_sum) total += 1
-    frames.push({ phase: 'count', activeLine: L('define count'), bound: label, total, message: `Integers from 0 to ${x} with digit sum in range: ${total}.` })
+    frames.push({ phase: 'count', activeLine: L('define count'), pythonLine: 24, bound: label, total, message: `Integers from 0 to ${x} with digit sum in range: ${total}.` })
     return total
   }
   const upper = count(num2, num2)
@@ -46,7 +46,7 @@ export function buildTrace({ num1, num2, min_sum, max_sum }) {
   const fits = [...num1].reduce((a, c) => a + Number(c), 0)
   const inRange = fits >= min_sum && fits <= max_sum ? 1 : 0
   const result = (((upper - lower + inRange) % MOD) + MOD) % MOD
-  frames.push({ phase: 'done', activeLine: L('return count(num2)'), bound: '', total: result, message: `${upper} minus ${lower} plus ${inRange} gives ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return count(num2)'), pythonLine: 27, bound: '', total: result, message: `${upper} minus ${lower} plus ${inRange} gives ${result}.` })
   return { input: { num1, num2, min_sum, max_sum }, result, frames }
 }
 
