@@ -17,14 +17,14 @@ export function buildTrace(input) {
   const n = nums1.length
   const d = nums1.map((v, i) => v - nums2[i])
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set d[i]'), j: null, counted: null, total: 0, d: d.slice(), message: 'Each pair i < j satisfies the inequality when d[i] - d[j] is at most diff, where d[i] = nums1[i] - nums2[i].' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set d[i]'), j: null, counted: null, total: 0, d: d.slice(), message: 'Each pair i < j satisfies the inequality when d[i] - d[j] is at most diff, where d[i] = nums1[i] - nums2[i].' }]
   for (let j = 1; j < n; j++) {
     let counted = 0
     for (let i = 0; i < j; i++) if (d[i] <= d[j] + diff) counted++
     total += counted
-    frames.push({ phase: 'pairs', activeLine: L('count i below j'), j, counted, total, d: d.slice(), message: `For j = ${j}: ${counted} earlier values satisfy d[i] <= ${d[j] + diff}.` })
+    frames.push({ phase: 'pairs', pythonLine: 5, activeLine: L('count i below j'), j, counted, total, d: d.slice(), message: `For j = ${j}: ${counted} earlier values satisfy d[i] <= ${d[j] + diff}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), j: null, counted: null, total, d: d.slice(), message: `Total pairs: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return total'), j: null, counted: null, total, d: d.slice(), message: `Total pairs: ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -20,7 +20,7 @@ export function buildTrace(input) {
   const { grid } = input
   let best = -1
   let bestAt = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), cells: [], sum: 0, best: null, at: null, message: 'Try every 3 by 3 block. Each block gives one hourglass.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set best to nothing'), cells: [], sum: 0, best: null, at: null, message: 'Try every 3 by 3 block. Each block gives one hourglass.' }]
   for (let top = 0; top + 2 < grid.length; top++) {
     for (let left = 0; left + 2 < grid[0].length; left++) {
       const cells = cellsAt(top, left)
@@ -29,10 +29,10 @@ export function buildTrace(input) {
         best = sum
         bestAt = [top, left]
       }
-      frames.push({ phase: 'scan', activeLine: L('add the seven hourglass cells'), cells, sum, best, at: [top, left], message: `Hourglass at (${top}, ${left}) sums to ${sum}. Best so far: ${best}.` })
+      frames.push({ phase: 'scan', pythonLine: 5, activeLine: L('add the seven hourglass cells'), cells, sum, best, at: [top, left], message: `Hourglass at (${top}, ${left}) sums to ${sum}. Best so far: ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), cells: bestAt ? cellsAt(...bestAt) : [], sum: best, best, at: bestAt, message: `Largest hourglass sum: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), cells: bestAt ? cellsAt(...bestAt) : [], sum: best, best, at: bestAt, message: `Largest hourglass sum: ${best}.` })
   return { input, result: best, frames }
 }
 

@@ -13,22 +13,22 @@ export function buildTrace(input) {
   const dec = new Array(n).fill(1)
   // inc[j]: length of the non-decreasing run that starts at index j.
   const inc = new Array(n).fill(1)
-  const frames = [{ phase: 'start', activeLine: L('set dec[j] to 1'), index: -1, dec: [...dec], inc: [...inc], good: [], message: 'Every run has length 1 before it grows.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set dec[j] to 1'), index: -1, dec: [...dec], inc: [...inc], good: [], message: 'Every run has length 1 before it grows.' }]
   for (let j = 1; j < n; j++) {
     dec[j] = nums[j - 1] >= nums[j] ? dec[j - 1] + 1 : 1
-    frames.push({ phase: 'left', activeLine: L('extend dec'), index: j, dec: [...dec], inc: [...inc], good: [], message: `Non-increasing run ending at ${j} has length ${dec[j]}.` })
+    frames.push({ phase: 'left', pythonLine: 5, activeLine: L('extend dec'), index: j, dec: [...dec], inc: [...inc], good: [], message: `Non-increasing run ending at ${j} has length ${dec[j]}.` })
   }
   for (let j = n - 2; j >= 0; j--) {
     inc[j] = nums[j] <= nums[j + 1] ? inc[j + 1] + 1 : 1
-    frames.push({ phase: 'right', activeLine: L('extend inc'), index: j, dec: [...dec], inc: [...inc], good: [], message: `Non-decreasing run starting at ${j} has length ${inc[j]}.` })
+    frames.push({ phase: 'right', pythonLine: 8, activeLine: L('extend inc'), index: j, dec: [...dec], inc: [...inc], good: [], message: `Non-decreasing run starting at ${j} has length ${inc[j]}.` })
   }
   const good = []
   for (let i = k; i <= n - 1 - k; i++) {
     const ok = dec[i - 1] >= k && inc[i + 1] >= k
     if (ok) good.push(i)
-    frames.push({ phase: 'check', activeLine: L('if dec[i - 1]'), index: i, dec: [...dec], inc: [...inc], good: [...good], message: ok ? `Index ${i} is good.` : `Index ${i} fails: left run ${dec[i - 1]}, right run ${inc[i + 1]}, need ${k}.` })
+    frames.push({ phase: 'check', pythonLine: 9, activeLine: L('if dec[i - 1]'), index: i, dec: [...dec], inc: [...inc], good: [...good], message: ok ? `Index ${i} is good.` : `Index ${i} fails: left run ${dec[i - 1]}, right run ${inc[i + 1]}, need ${k}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return good'), index: n, dec: [...dec], inc: [...inc], good: [...good], message: `Good indices: ${good.length ? good.join(', ') : 'none'}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return good'), index: n, dec: [...dec], inc: [...inc], good: [...good], message: `Good indices: ${good.length ? good.join(', ') : 'none'}.` })
   return { input, result: good, frames }
 }
 

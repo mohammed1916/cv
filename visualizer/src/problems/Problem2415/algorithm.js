@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace({ root }) {
   const values = [...root]
   const n = values.length
-  const frames = [{ phase: 'start', activeLine: L('set values to the level order'), depth: -1, first: 0, last: -1, values: [...values], message: 'Each odd depth holds one level of a perfect tree. Reverse those levels in place.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set values to the level order'), depth: -1, first: 0, last: -1, values: [...values], message: 'Each odd depth holds one level of a perfect tree. Reverse those levels in place.' }]
   for (let depth = 1; (1 << depth) - 1 < n; depth += 2) {
     const first = (1 << depth) - 1
     const last = Math.min((1 << (depth + 1)) - 2, n - 1)
@@ -23,9 +23,9 @@ export function buildTrace({ root }) {
       i++
       j--
     }
-    frames.push({ phase: 'level', activeLine: L('swap values at first'), depth, first, last, values: [...values], message: `Depth ${depth} is reversed: indexes ${first} to ${last} now hold ${values.slice(first, last + 1).join(', ')}.` })
+    frames.push({ phase: 'level', pythonLine: 11, activeLine: L('swap values at first'), depth, first, last, values: [...values], message: `Depth ${depth} is reversed: indexes ${first} to ${last} now hold ${values.slice(first, last + 1).join(', ')}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return values'), depth: -1, first: 0, last: -1, values: [...values], message: `Result in level order: ${values.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return values'), depth: -1, first: 0, last: -1, values: [...values], message: `Result in level order: ${values.join(', ')}.` })
   return { input: { root }, root: treeFromLevelOrder(root), result: values, frames }
 }
 

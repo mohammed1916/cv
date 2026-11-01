@@ -15,20 +15,20 @@ export function buildTrace(word) {
   const counts = new Map()
   for (const ch of word) counts.set(ch, (counts.get(ch) ?? 0) + 1)
   const snapshot = () => Object.fromEntries([...counts].filter(([, v]) => v > 0))
-  const frames = [{ phase: 'count', activeLine: L('count how often'), letter: null, counts: snapshot(), message: `Count the letters of "${word}".` }]
+  const frames = [{ phase: 'count', pythonLine: 4, activeLine: L('count how often'), letter: null, counts: snapshot(), message: `Count the letters of "${word}".` }]
   let result = false
   for (const letter of [...counts.keys()]) {
     const before = counts.get(letter)
     counts.set(letter, before - 1)
     const ok = allEqual(counts)
-    frames.push({ phase: 'try', activeLine: L('remove one copy'), letter, counts: snapshot(), message: `Remove one ${letter}: ${ok ? 'the remaining counts are all equal.' : 'the remaining counts still differ.'}` })
+    frames.push({ phase: 'try', pythonLine: 8, activeLine: L('remove one copy'), letter, counts: snapshot(), message: `Remove one ${letter}: ${ok ? 'the remaining counts are all equal.' : 'the remaining counts still differ.'}` })
     if (ok) {
       result = true
       break
     }
     counts.set(letter, before)
   }
-  frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'return false'), letter: null, counts: snapshot(), message: result ? 'Removing that letter equalizes the frequencies.' : 'No single removal equalizes the frequencies.' })
+  frames.push({ phase: 'done', pythonLine: result ? 9 : 11, activeLine: L(result ? 'return true' : 'return false'), letter: null, counts: snapshot(), message: result ? 'Removing that letter equalizes the frequencies.' : 'No single removal equalizes the frequencies.' })
   return { input: word, result, frames }
 }
 

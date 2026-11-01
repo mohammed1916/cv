@@ -11,13 +11,13 @@ export function buildTrace({ a, b }) {
   const limit = Math.min(a, b)
   const factors = []
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), x: 0, factors: [], count: 0, message: `Candidates run from 1 to ${limit}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set count to 0'), x: 0, factors: [], count: 0, message: `Candidates run from 1 to ${limit}.` }]
   for (let x = 1; x <= limit; x++) {
     const common = a % x === 0 && b % x === 0
     if (common) { count++; factors.push(x) }
-    frames.push({ phase: 'scan', activeLine: L('if x divides a'), x, factors: [...factors], count, message: common ? `${x} divides both. Count: ${count}.` : `${x} does not divide both.` })
+    frames.push({ phase: 'scan', pythonLine: common ? 5 : 4, activeLine: L('if x divides a'), x, factors: [...factors], count, message: common ? `${x} divides both. Count: ${count}.` : `${x} does not divide both.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), x: limit, factors: [...factors], count, message: `${count} common factors.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return count'), x: limit, factors: [...factors], count, message: `${count} common factors.` })
   return { input: { a, b }, result: count, limit, frames }
 }
 

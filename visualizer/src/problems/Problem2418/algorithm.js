@@ -13,17 +13,17 @@ export function buildTrace(input) {
   const working = input.names.map((name, index) => ({ name, height: input.heights[index], index }))
   const result = []
   const taken = []
-  const frames = [{ phase: 'start', activeLine: L('set result to an empty list'), picked: null, taken: [], result: [], message: 'Pair each name with its height. Nobody has been placed yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set result to an empty list'), picked: null, taken: [], result: [], message: 'Pair each name with its height. Nobody has been placed yet.' }]
   while (working.length > 0) {
     let best = 0
     for (let i = 1; i < working.length; i++) if (working[i].height > working[best].height) best = i
-    frames.push({ phase: 'find', activeLine: L('find the tallest'), picked: working[best].index, taken: [...taken], result: [...result], message: `${working[best].name} at ${working[best].height} cm is the tallest remaining.` })
+    frames.push({ phase: 'find', pythonLine: 6, activeLine: L('find the tallest'), picked: working[best].index, taken: [...taken], result: [...result], message: `${working[best].name} at ${working[best].height} cm is the tallest remaining.` })
     const [person] = working.splice(best, 1)
     result.push(person.name)
     taken.push(person.index)
-    frames.push({ phase: 'take', activeLine: L('take the name'), picked: person.index, taken: [...taken], result: [...result], message: `Append ${person.name} to the result.` })
+    frames.push({ phase: 'take', pythonLine: 9, activeLine: L('take the name'), picked: person.index, taken: [...taken], result: [...result], message: `Append ${person.name} to the result.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), picked: null, taken: [...taken], result: [...result], message: `Order from tallest to shortest: ${result.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return result'), picked: null, taken: [...taken], result: [...result], message: `Order from tallest to shortest: ${result.join(', ')}.` })
   return { input, result, frames }
 }
 

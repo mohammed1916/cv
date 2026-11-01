@@ -11,22 +11,22 @@ export function parseInput(text) {
 
 export function buildTrace({ nums1, nums2 }) {
   let result = 0
-  const frames = [{ phase: 'start', activeLine: L('set result to 0'), result, message: `Each of the ${nums1.length * nums2.length} pairs contributes one value. Count how many times each value appears.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set result to 0'), result, message: `Each of the ${nums1.length * nums2.length} pairs contributes one value. Count how many times each value appears.` }]
   if (nums2.length % 2 === 1) {
     const part = nums1.reduce((a, b) => a ^ b, 0)
     result ^= part
-    frames.push({ phase: 'nums1', activeLine: L('if the length of nums2 is odd'), result, message: `nums2 has odd length, so each nums1 value is paired an odd number of times. Its xor ${part} is included.` })
+    frames.push({ phase: 'nums1', pythonLine: 5, activeLine: L('if the length of nums2 is odd'), result, message: `nums2 has odd length, so each nums1 value is paired an odd number of times. Its xor ${part} is included.` })
   } else {
-    frames.push({ phase: 'nums1', activeLine: L('if the length of nums2 is odd'), result, message: 'nums2 has even length, so each nums1 value is paired an even number of times and cancels out.' })
+    frames.push({ phase: 'nums1', pythonLine: 3, activeLine: L('if the length of nums2 is odd'), result, message: 'nums2 has even length, so each nums1 value is paired an even number of times and cancels out.' })
   }
   if (nums1.length % 2 === 1) {
     const part = nums2.reduce((a, b) => a ^ b, 0)
     result ^= part
-    frames.push({ phase: 'nums2', activeLine: L('if the length of nums1 is odd'), result, message: `nums1 has odd length, so each nums2 value is paired an odd number of times. Its xor ${part} is included.` })
+    frames.push({ phase: 'nums2', pythonLine: 8, activeLine: L('if the length of nums1 is odd'), result, message: `nums1 has odd length, so each nums2 value is paired an odd number of times. Its xor ${part} is included.` })
   } else {
-    frames.push({ phase: 'nums2', activeLine: L('if the length of nums1 is odd'), result, message: 'nums1 has even length, so each nums2 value cancels out.' })
+    frames.push({ phase: 'nums2', pythonLine: 6, activeLine: L('if the length of nums1 is odd'), result, message: 'nums1 has even length, so each nums2 value cancels out.' })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), result, message: `Bitwise XOR of all pairings: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return result'), result, message: `Bitwise XOR of all pairings: ${result}.` })
   return { input: { nums1, nums2 }, result, frames }
 }
 

@@ -11,24 +11,24 @@ export function parseInput(text) {
 
 export function buildTrace({ words }) {
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set counts to an empty map'), word: null, counts: [], score: null, answer: [], message: 'Start with no prefixes counted.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set counts to an empty map'), word: null, counts: [], score: null, answer: [], message: 'Start with no prefixes counted.' }]
   for (const w of words) {
     for (let i = 1; i <= w.length; i++) {
       const p = w.slice(0, i)
       counts.set(p, (counts.get(p) || 0) + 1)
     }
-    frames.push({ phase: 'count', activeLine: L('add one to counts'), word: w, counts: [...counts.entries()], score: null, answer: [], message: `Counted every prefix of ${w}.` })
+    frames.push({ phase: 'count', pythonLine: 5, activeLine: L('add one to counts'), word: w, counts: [...counts.entries()], score: null, answer: [], message: `Counted every prefix of ${w}.` })
   }
   const answer = []
   for (const w of words) {
     let score = 0
     for (let i = 1; i <= w.length; i++) {
       score += counts.get(w.slice(0, i))
-      frames.push({ phase: 'score', activeLine: L('add counts[p] to score'), word: w, counts: [...counts.entries()], score, answer: [...answer], message: `Prefix ${w.slice(0, i)} adds ${counts.get(w.slice(0, i))}.` })
+      frames.push({ phase: 'score', pythonLine: 10, activeLine: L('add counts[p] to score'), word: w, counts: [...counts.entries()], score, answer: [...answer], message: `Prefix ${w.slice(0, i)} adds ${counts.get(w.slice(0, i))}.` })
     }
     answer.push(score)
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), word: null, counts: [...counts.entries()], score: null, answer: [...answer], message: `Scores: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return answer'), word: null, counts: [...counts.entries()], score: null, answer: [...answer], message: `Scores: ${answer.join(', ')}.` })
   return { input: { words }, result: answer, frames }
 }
 

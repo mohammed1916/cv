@@ -8,12 +8,12 @@ export function parseInput(text) {
 
 export function buildTrace({ n }) {
   let multiple = n
-  const frames = [{ phase: 'start', activeLine: L('set multiple to n'), multiple, message: `Start with ${n} and check whether it is even.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set multiple to n'), multiple, message: `Start with ${n} and check whether it is even.` }]
   while (multiple % 2 !== 0) {
     multiple += n
-    frames.push({ phase: 'step', activeLine: L('add n to multiple'), multiple, message: `${multiple - n} is odd, so try ${multiple}.` })
+    frames.push({ phase: 'step', pythonLine: 4, activeLine: L('add n to multiple'), multiple, message: `${multiple - n} is odd, so try ${multiple}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return multiple'), multiple, message: `${multiple} is the smallest even multiple of ${n}.` })
+  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return multiple'), multiple, message: `${multiple} is the smallest even multiple of ${n}.` })
   return { input: { n }, result: multiple, frames }
 }
 
