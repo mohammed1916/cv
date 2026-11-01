@@ -9,19 +9,19 @@ export function parseInput(text) {
 export function buildTrace({ n }) {
   const total = n * (n + 1) / 2
   let left = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to'), x: 0, left: 0, right: total, message: `The sum of 1 to ${n} is ${total}.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set total to'), x: 0, left: 0, right: total, message: `The sum of 1 to ${n} is ${total}.` }]
   let answer = -1
   for (let x = 1; x <= n; x++) {
     left += x
     const right = total - left + x
     const match = left === right
-    frames.push({ phase: 'check', activeLine: L('if left equals right'), x, left, right, message: `Sum 1 to ${x} is ${left}; sum ${x} to ${n} is ${right}${match ? ', so x is the pivot.' : '.'}` })
+    frames.push({ phase: 'check', pythonLine: 7, activeLine: L('if left equals right'), x, left, right, message: `Sum 1 to ${x} is ${left}; sum ${x} to ${n} is ${right}${match ? ', so x is the pivot.' : '.'}` })
     if (match) {
       answer = x
       break
     }
   }
-  frames.push({ phase: 'done', activeLine: L(answer === -1 ? 'return -1' : 'then return x'), x: answer, left, right: total - left, message: answer === -1 ? 'No pivot exists.' : `The pivot integer is ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: answer === -1 ? 9 : 8, activeLine: L(answer === -1 ? 'return -1' : 'then return x'), x: answer, left, right: total - left, message: answer === -1 ? 'No pivot exists.' : `The pivot integer is ${answer}.` })
   return { input: { n }, result: answer, frames }
 }
 

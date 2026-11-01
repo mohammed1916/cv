@@ -18,10 +18,10 @@ export function buildTrace(input) {
   const n = s.length
   const ways = emptyTable(n + 1, k + 1)
   ways[0][0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0][0]'), end: 0, parts: 0, table: copyTable(ways), total: null, message: 'Zero digits make zero parts: one way.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('set ways[0][0]'), end: 0, parts: 0, table: copyTable(ways), total: null, message: 'Zero digits make zero parts: one way.' }]
   for (let i = 1; i <= n; i++) {
     if (PRIME.has(s[i - 1])) {
-      frames.push({ phase: 'skip', activeLine: L('skip this end position'), end: i, parts: 0, table: copyTable(ways), total: null, message: `The digit ${s[i - 1]} ending at position ${i} is prime, so no part can end here.` })
+      frames.push({ phase: 'skip', pythonLine: 9, activeLine: L('skip this end position'), end: i, parts: 0, table: copyTable(ways), total: null, message: `The digit ${s[i - 1]} ending at position ${i} is prime, so no part can end here.` })
       continue
     }
     for (let j = 1; j <= k; j++) {
@@ -30,11 +30,11 @@ export function buildTrace(input) {
         if (PRIME.has(s[a])) total += ways[a][j - 1]
       }
       ways[i][j] = total % MOD
-      frames.push({ phase: 'cell', activeLine: L('set total to 0'), end: i, parts: j, table: copyTable(ways), total: null, message: `${j} part(s) covering the first ${i} digits: ${ways[i][j]} ways.` })
+      frames.push({ phase: 'cell', pythonLine: 15, activeLine: L('set total to 0'), end: i, parts: j, table: copyTable(ways), total: null, message: `${j} part(s) covering the first ${i} digits: ${ways[i][j]} ways.` })
     }
   }
   const result = ways[n][k]
-  frames.push({ phase: 'done', activeLine: L('return ways[n][k]'), end: n, parts: k, table: copyTable(ways), total: result, message: `${result} beautiful partitions.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return ways[n][k]'), end: n, parts: k, table: copyTable(ways), total: result, message: `${result} beautiful partitions.` })
   return { input, result, frames }
 }
 

@@ -11,7 +11,7 @@ export function buildTrace(s) {
   const digit = ch => ch.charCodeAt(0) - 48
   const grid = () => Array.from({ length: 10 }, () => Array(10).fill(0))
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), m: null, ways: 0, total, message: 'Start with no palindromes counted.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set total to 0'), m: null, ways: 0, total, message: 'Start with no palindromes counted.' }]
   for (let m = 2; m <= n - 3; m++) {
     // left[x][y]: pairs (i, j) left of m with digits x then y. right[y][x]: pairs (k, l) right of m with digits y then x.
     const left = grid()
@@ -21,9 +21,9 @@ export function buildTrace(s) {
     let ways = 0
     for (let x = 0; x < 10; x++) for (let y = 0; y < 10; y++) ways += left[x][y] * right[y][x]
     total = (total + ways) % MOD
-    frames.push({ phase: 'middle', activeLine: L('for each middle position'), m, ways, total, message: `Middle at index ${m} (digit ${s[m]}): ${ways} palindromes of length 5 use it. Running total ${total}.` })
+    frames.push({ phase: 'middle', pythonLine: 18, activeLine: L('for each middle position'), m, ways, total, message: `Middle at index ${m} (digit ${s[m]}): ${ways} palindromes of length 5 use it. Running total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), m: null, ways: 0, total, message: `The count of palindromic subsequences of length 5 is ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return total'), m: null, ways: 0, total, message: `The count of palindromic subsequences of length 5 is ${total}.` })
   return { input: s, result: total, frames }
 }
 

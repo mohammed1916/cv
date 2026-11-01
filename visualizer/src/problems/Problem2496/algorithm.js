@@ -9,15 +9,16 @@ export function parseInput(text) {
 
 export function buildTrace({ strs }) {
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), index: -1, value: 0, best, message: 'Start with a best value of zero.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set best to 0'), index: -1, value: 0, best, message: 'Start with a best value of zero.' }]
   strs.forEach((s, i) => {
     const digitsOnly = /^[0-9]+$/.test(s)
     const value = digitsOnly ? Number(s) : s.length
     const kind = digitsOnly ? `the number ${value}` : `the length ${value}`
-    if (value > best) best = value
-    frames.push({ phase: value === best && value > 0 ? 'better' : 'value', activeLine: L('if value is larger than best'), index: i, value, best, message: `${s} is worth ${kind}. Best so far: ${best}.` })
+    const improved = value > best
+    if (improved) best = value
+    frames.push({ pythonLine: improved ? 9 : 8, phase: value === best && value > 0 ? 'better' : 'value', activeLine: L('if value is larger than best'), index: i, value, best, message: `${s} is worth ${kind}. Best so far: ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, value: 0, best, message: `Maximum value: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), index: -1, value: 0, best, message: `Maximum value: ${best}.` })
   return { input: { strs }, result: best, frames }
 }
 

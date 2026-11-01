@@ -32,14 +32,14 @@ export function buildTrace({ n, edges }) {
     }
     return dist
   }
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), start: null, dist: {}, message: 'Handle each connected piece on its own; the piece values add up.' }]
+  const frames = [{ phase: 'start', pythonLine: 19, activeLine: L('set total to zero'), start: null, dist: {}, message: 'Handle each connected piece on its own; the piece values add up.' }]
   let total = 0
   const placed = new Set()
   for (let s = 0; s < n; s++) {
     if (placed.has(s)) continue
     const base = levels(s)
     if (base === null) {
-      frames.push({ phase: 'conflict', activeLine: L('return -1'), start: s, dist: {}, message: `Node ${s + 1} sits on an odd cycle, so the nodes cannot be divided.` })
+      frames.push({ phase: 'conflict', pythonLine: 26, activeLine: L('return -1'), start: s, dist: {}, message: `Node ${s + 1} sits on an odd cycle, so the nodes cannot be divided.` })
       return { input: { n, edges }, result: -1, frames }
     }
     let best = 0
@@ -48,12 +48,12 @@ export function buildTrace({ n, edges }) {
       const dist = levels(start)
       const depth = Math.max(...dist.values())
       if (depth > best) best = depth
-      frames.push({ phase: 'bfs', activeLine: L('for each start'), start, dist: Object.fromEntries(dist), message: `Starting at node ${start + 1} gives ${depth} group(s).` })
+      frames.push({ phase: 'bfs', pythonLine: 30, activeLine: L('for each start'), start, dist: Object.fromEntries(dist), message: `Starting at node ${start + 1} gives ${depth} group(s).` })
     }
     total += best
-    frames.push({ phase: 'piece', activeLine: L('add the best'), start: null, dist: {}, message: `This piece contributes ${best} group(s); the total is ${total}.` })
+    frames.push({ phase: 'piece', pythonLine: 31, activeLine: L('add the best'), start: null, dist: {}, message: `This piece contributes ${best} group(s); the total is ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), start: null, dist: {}, message: `Maximum number of groups: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 32, activeLine: L('return total'), start: null, dist: {}, message: `Maximum number of groups: ${total}.` })
   return { input: { n, edges }, result: total, frames, shifted }
 }
 

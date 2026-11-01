@@ -11,18 +11,18 @@ export function buildTrace({ skill }) {
   const values = [...skill].sort((a, b) => a - b)
   const total = values[0] + values[values.length - 1]
   let chemistry = 0
-  frames.push({ phase: 'sort', activeLine: L('sort skill'), left: -1, right: -1, values, total: null, chemistry, result: null, message: `Sort the skills to ${values.join(', ')}.` })
-  frames.push({ phase: 'target', activeLine: L('set team total'), left: 0, right: values.length - 1, values, total, chemistry, result: null, message: `The weakest and strongest players must share a team, so every team must total ${total}.` })
+  frames.push({ phase: 'sort', pythonLine: 2, activeLine: L('sort skill'), left: -1, right: -1, values, total: null, chemistry, result: null, message: `Sort the skills to ${values.join(', ')}.` })
+  frames.push({ phase: 'target', pythonLine: 3, activeLine: L('set team total'), left: 0, right: values.length - 1, values, total, chemistry, result: null, message: `The weakest and strongest players must share a team, so every team must total ${total}.` })
   for (let left = 0; left < values.length / 2; left++) {
     const right = values.length - 1 - left
     if (values[left] + values[right] !== total) {
-      frames.push({ phase: 'fail', activeLine: L('return minus one'), left, right, values, total, chemistry, result: -1, message: `${values[left]} + ${values[right]} = ${values[left] + values[right]}, not ${total}. Teams cannot be equal.` })
+      frames.push({ phase: 'fail', pythonLine: 8, activeLine: L('return minus one'), left, right, values, total, chemistry, result: -1, message: `${values[left]} + ${values[right]} = ${values[left] + values[right]}, not ${total}. Teams cannot be equal.` })
       return { input: { skill }, result: -1, frames }
     }
     chemistry += values[left] * values[right]
-    frames.push({ phase: 'pair', activeLine: L('add the product'), left, right, values, total, chemistry, result: null, message: `${values[left]} + ${values[right]} = ${total}. Add the product ${values[left] * values[right]}; chemistry is ${chemistry}.` })
+    frames.push({ phase: 'pair', pythonLine: 9, activeLine: L('add the product'), left, right, values, total, chemistry, result: null, message: `${values[left]} + ${values[right]} = ${total}. Add the product ${values[left] * values[right]}; chemistry is ${chemistry}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return chemistry'), left: -1, right: -1, values, total, chemistry, result: chemistry, message: `All teams match. Total chemistry: ${chemistry}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return chemistry'), left: -1, right: -1, values, total, chemistry, result: chemistry, message: `All teams match. Total chemistry: ${chemistry}.` })
   return { input: { skill }, result: chemistry, frames }
 }
 

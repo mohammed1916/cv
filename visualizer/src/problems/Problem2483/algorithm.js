@@ -12,7 +12,7 @@ export function buildTrace(input) {
   for (const c of customers) if (c === 'Y') penalty++
   let best = penalty
   let bestHour = 0
-  const frames = [{ phase: 'start', activeLine: L('set penalty to the number of Y'), index: -1, hour: 0, penalty, best, bestHour, message: `Closing at hour 0 gives penalty ${penalty}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set penalty to the number of Y'), index: -1, hour: 0, penalty, best, bestHour, message: `Closing at hour 0 gives penalty ${penalty}.` }]
   for (let i = 0; i < n; i++) {
     // Moving the closing hour past customer i: a Y leaves the closed side, an N joins the open side.
     penalty += customers[i] === 'Y' ? -1 : 1
@@ -20,9 +20,9 @@ export function buildTrace(input) {
       best = penalty
       bestHour = i + 1
     }
-    frames.push({ phase: 'hour', activeLine: L('if penalty is less than best'), index: i, hour: i + 1, penalty, best, bestHour, message: `Closing at hour ${i + 1} gives penalty ${penalty}. Best ${best} at hour ${bestHour}.` })
+    frames.push({ phase: 'hour', pythonLine: bestHour === i + 1 ? 9 : 7, activeLine: L('if penalty is less than best'), index: i, hour: i + 1, penalty, best, bestHour, message: `Closing at hour ${i + 1} gives penalty ${penalty}. Best ${best} at hour ${bestHour}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best_hour'), index: n, hour: n, penalty, best, bestHour, message: `Earliest hour with the minimum penalty: ${bestHour}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best_hour'), index: n, hour: n, penalty, best, bestHour, message: `Earliest hour with the minimum penalty: ${bestHour}.` })
   return { input, result: bestHour, frames }
 }
 

@@ -15,16 +15,16 @@ export function buildTrace(input) {
   const onesRow = grid.map(row => row.reduce((sum, v) => sum + v, 0))
   const onesCol = Array.from({ length: cols }, (_, c) => grid.reduce((sum, row) => sum + row[c], 0))
   const result = grid.map(() => Array(cols).fill(0))
-  const frames = [{ phase: 'start', activeLine: L('count the ones in each row'), row: -1, col: -1, onesRow, onesCol, result: result.map(r => [...r]), message: 'Tally the ones in every row and column first.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('count the ones in each row'), row: -1, col: -1, onesRow, onesCol, result: result.map(r => [...r]), message: 'Tally the ones in every row and column first.' }]
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const zerosRow = cols - onesRow[r]
       const zerosCol = rows - onesCol[c]
       result[r][c] = onesRow[r] + onesCol[c] - zerosRow - zerosCol
-      frames.push({ phase: 'cell', activeLine: L('set the value to'), row: r, col: c, onesRow, onesCol, result: result.map(row => [...row]), message: `Cell (${r}, ${c}): ${onesRow[r]} + ${onesCol[c]} - ${zerosRow} - ${zerosCol} = ${result[r][c]}.` })
+      frames.push({ phase: 'cell', pythonLine: 11, activeLine: L('set the value to'), row: r, col: c, onesRow, onesCol, result: result.map(row => [...row]), message: `Cell (${r}, ${c}): ${onesRow[r]} + ${onesCol[c]} - ${zerosRow} - ${zerosCol} = ${result[r][c]}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the result'), row: -1, col: -1, onesRow, onesCol, result: result.map(row => [...row]), message: 'Every cell has its difference.' })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return the result'), row: -1, col: -1, onesRow, onesCol, result: result.map(row => [...row]), message: 'Every cell has its difference.' })
   return { input, result, frames }
 }
 

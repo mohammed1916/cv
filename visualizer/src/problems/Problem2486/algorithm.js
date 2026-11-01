@@ -10,17 +10,17 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { s, t } = input
-  const frames = [{ phase: 'start', activeLine: L('set j to 0'), i: -1, j: 0, message: `Match t = "${t}" greedily inside s = "${s}".` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set j to 0'), i: -1, j: 0, message: `Match t = "${t}" greedily inside s = "${s}".` }]
   let j = 0
   for (let i = 0; i < s.length; i++) {
-    frames.push({ phase: 'scan', activeLine: L('for each character'), i, j, message: `Look at s[${i}] = ${s[i]}.` })
+    frames.push({ phase: 'scan', pythonLine: 3, activeLine: L('for each character'), i, j, message: `Look at s[${i}] = ${s[i]}.` })
     if (j < t.length && s[i] === t[j]) {
       j++
-      frames.push({ phase: 'match', activeLine: L('move j forward'), i, j, message: `${s[i]} matches t[${j - 1}], so j becomes ${j}.` })
+      frames.push({ phase: 'match', pythonLine: 5, activeLine: L('move j forward'), i, j, message: `${s[i]} matches t[${j - 1}], so j becomes ${j}.` })
     }
   }
   const result = t.length - j
-  frames.push({ phase: 'done', activeLine: L('return the length'), i: s.length, j, message: `${j} letters of t were matched in order, so ${result} must be appended.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return the length'), i: s.length, j, message: `${j} letters of t were matched in order, so ${result} must be appended.` })
   return { input, result, frames }
 }
 
