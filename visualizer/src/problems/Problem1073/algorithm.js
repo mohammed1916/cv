@@ -14,7 +14,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ arr1, arr2 }) {
-  const frames = [{ phase: 'start', activeLine: L('set carry to 0'), written: [], carry: 0, message: 'Add from the least significant digit. Carries are base -2, so they can be negative.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set carry to 0'), written: [], carry: 0, message: 'Add from the least significant digit. Carries are base -2, so they can be negative.' }]
   let carry = 0
   let i = arr1.length - 1
   let j = arr2.length - 1
@@ -26,13 +26,13 @@ export function buildTrace({ arr1, arr2 }) {
     const digit = ((total % 2) + 2) % 2
     carry = -((total - digit) / 2)
     written.push(digit)
-    frames.push({ phase: 'digit', activeLine: L('set digit to total'), written: written.slice().reverse(), carry, message: `${a} + ${b} + carry gives ${total}. Write ${digit} and carry ${carry}.` })
+    frames.push({ phase: 'digit', pythonLine: 10, activeLine: L('set digit to total'), written: written.slice().reverse(), carry, message: `${a} + ${b} + carry gives ${total}. Write ${digit} and carry ${carry}.` })
     i -= 1
     j -= 1
   }
   while (written.length > 1 && written[written.length - 1] === 0) written.pop()
   const result = written.reverse()
-  frames.push({ phase: 'done', activeLine: L('return the answer'), written: result, carry: 0, message: `The sum in base -2 is ${result.join('')}.` })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return the answer'), written: result, carry: 0, message: `The sum in base -2 is ${result.join('')}.` })
   return { input: { arr1, arr2 }, result, frames }
 }
 

@@ -13,17 +13,17 @@ export function buildTrace({ s1, s2, baseStr }) {
   const find = x => { while (parent[x] !== x) x = parent[x]; return x }
   const letter = i => String.fromCharCode(97 + i)
   const roots = () => Array.from({ length: 26 }, (_, i) => letter(find(i)))
-  const frames = [{ phase: 'start', activeLine: L('give each letter its own set'), pair: null, roots: roots(), message: 'Every letter starts as its own group.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('give each letter its own set'), pair: null, roots: roots(), message: 'Every letter starts as its own group.' }]
   for (let i = 0; i < s1.length; i++) {
     const a = s1.charCodeAt(i) - 97
     const b = s2.charCodeAt(i) - 97
     const ra = find(a)
     const rb = find(b)
     if (ra !== rb) { if (ra < rb) parent[rb] = ra; else parent[ra] = rb }
-    frames.push({ phase: 'merge', activeLine: L('merge the set of s1'), pair: [s1[i], s2[i]], roots: roots(), message: `Join ${s1[i]} and ${s2[i]}; the smaller letter is the representative.` })
+    frames.push({ phase: 'merge', pythonLine: 10, activeLine: L('merge the set of s1'), pair: [s1[i], s2[i]], roots: roots(), message: `Join ${s1[i]} and ${s2[i]}; the smaller letter is the representative.` })
   }
   const result = [...baseStr].map(c => letter(find(c.charCodeAt(0) - 97))).join('')
-  frames.push({ phase: 'done', activeLine: L('return the new string'), pair: null, roots: roots(), message: `Mapped base string: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return the new string'), pair: null, roots: roots(), message: `Mapped base string: ${result}.` })
   return { input: { s1, s2, baseStr }, result, frames }
 }
 

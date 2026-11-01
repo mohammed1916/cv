@@ -12,8 +12,8 @@ export function buildTrace(input) {
   const s = [...input.stones].sort((a, b) => a - b)
   const n = s.length
   const most = Math.max(s[n - 2] - s[0], s[n - 1] - s[1]) - (n - 2)
-  const frames = [{ phase: 'sort', activeLine: L('sort the stones'), i: -1, j: -1, sorted: s, least: null, most: null, message: `Sorted stones: ${s.join(', ')}.` }]
-  frames.push({ phase: 'most', activeLine: L('set most to'), i: 0, j: n - 1, sorted: s, least: null, most, message: `Most moves: the outer gaps leave ${most} moves when the endpoints step inward.` })
+  const frames = [{ phase: 'sort', pythonLine: 2, activeLine: L('sort the stones'), i: -1, j: -1, sorted: s, least: null, most: null, message: `Sorted stones: ${s.join(', ')}.` }]
+  frames.push({ phase: 'most', pythonLine: 4, activeLine: L('set most to'), i: 0, j: n - 1, sorted: s, least: null, most, message: `Most moves: the outer gaps leave ${most} moves when the endpoints step inward.` })
   let least = n
   let j = 0
   for (let i = 0; i < n; i++) {
@@ -22,9 +22,9 @@ export function buildTrace(input) {
     const count = j - i + 1
     const moves = count === n - 1 && s[j] - s[i] + 1 === n - 1 ? 2 : n - count
     least = Math.min(least, moves)
-    frames.push({ phase: 'window', activeLine: L('for each start index'), i, j, sorted: s, least, most, message: `Window ${s[i]} to ${s[j]} holds ${count} stones and needs ${moves} moves.` })
+    frames.push({ phase: 'window', pythonLine: 12, activeLine: L('for each start index'), i, j, sorted: s, least, most, message: `Window ${s[i]} to ${s[j]} holds ${count} stones and needs ${moves} moves.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return least and most'), i: -1, j: -1, sorted: s, least, most, message: `Fewest moves ${least}, most moves ${most}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return least and most'), i: -1, j: -1, sorted: s, least, most, message: `Fewest moves ${least}, most moves ${most}.` })
   return { input, result: [least, most], frames }
 }
 

@@ -30,7 +30,7 @@ function levelOrder(root) {
 export function buildTrace({ root }) {
   const tree = treeFromLevelOrder(root)
   const work = treeFromLevelOrder(root)
-  const frames = [{ phase: 'start', activeLine: L('set running to zero'), node: null, original: null, running: 0, message: 'Visit the largest values first. Each node receives the running sum of everything visited so far.' }]
+  const frames = [{ phase: 'start', pythonLine: 42, activeLine: L('set running to zero'), node: null, original: null, running: 0, message: 'Visit the largest values first. Each node receives the running sum of everything visited so far.' }]
   let running = 0
   const visit = node => {
     if (!node) return
@@ -38,12 +38,12 @@ export function buildTrace({ root }) {
     const original = node.value
     running += original
     node.value = running
-    frames.push({ phase: 'visit', activeLine: L('add the node value'), node: node.id, original, running, message: `Node ${original} stores ${running}, the sum of values at least ${original}.` })
+    frames.push({ phase: 'visit', pythonLine: 48, activeLine: L('add the node value'), node: node.id, original, running, message: `Node ${original} stores ${running}, the sum of values at least ${original}.` })
     visit(node.left)
   }
   visit(work)
   const result = levelOrder(work)
-  frames.push({ phase: 'done', activeLine: L('return the level order'), node: null, original: null, running, message: `Converted tree in level order: ${result.map(v => v === null ? 'null' : v).join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 52, activeLine: L('return the level order'), node: null, original: null, running, message: `Converted tree in level order: ${result.map(v => v === null ? 'null' : v).join(', ')}.` })
   return { input: { root }, root: tree, result, frames }
 }
 

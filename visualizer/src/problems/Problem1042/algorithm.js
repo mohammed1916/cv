@@ -19,23 +19,23 @@ export function parseInput(text) {
 export function buildTrace({ n, paths }) {
   const neighbours = Array.from({ length: n + 1 }, () => [])
   const flowers = Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('plant flowers so no two linked gardens match'), garden: null, flowers: [...flowers], taken: [], message: 'Gardens are planted in order. Each one must differ from the gardens it is linked to.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('plant flowers so no two linked gardens match'), garden: null, flowers: [...flowers], taken: [], message: 'Gardens are planted in order. Each one must differ from the gardens it is linked to.' }]
 
   for (const [a, b] of paths) {
     neighbours[a].push(b)
     neighbours[b].push(a)
   }
-  frames.push({ phase: 'links', activeLine: L('for each path join its two gardens'), garden: null, flowers: [...flowers], taken: [], message: 'Every path is recorded as a link in both directions.' })
+  frames.push({ phase: 'links', pythonLine: 5, activeLine: L('for each path join its two gardens'), garden: null, flowers: [...flowers], taken: [], message: 'Every path is recorded as a link in both directions.' })
 
   for (let garden = 1; garden <= n; garden++) {
     const taken = [...new Set(neighbours[garden].map(other => flowers[other]).filter(f => f > 0))].sort((x, y) => x - y)
-    frames.push({ phase: 'collect', activeLine: L('collect the flower types'), garden, flowers: [...flowers], taken, message: `Garden ${garden} sees flower types ${taken.length ? taken.join(', ') : 'none'} among its neighbours.` })
+    frames.push({ phase: 'collect', pythonLine: 8, activeLine: L('collect the flower types'), garden, flowers: [...flowers], taken, message: `Garden ${garden} sees flower types ${taken.length ? taken.join(', ') : 'none'} among its neighbours.` })
     let pick = 1
     while (taken.includes(pick)) pick++
     flowers[garden] = pick
-    frames.push({ phase: 'assign', activeLine: L('give it the smallest'), garden, flowers: [...flowers], taken, message: `Garden ${garden} gets flower type ${pick}.` })
+    frames.push({ phase: 'assign', pythonLine: 12, activeLine: L('give it the smallest'), garden, flowers: [...flowers], taken, message: `Garden ${garden} gets flower type ${pick}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the flower types'), garden: null, flowers: [...flowers], taken: [], message: 'Every garden has a flower type and no linked pair matches.' })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return the flower types'), garden: null, flowers: [...flowers], taken: [], message: 'Every garden has a flower type and no linked pair matches.' })
   return { input: { n, paths }, result: flowers.slice(1), frames }
 }
 

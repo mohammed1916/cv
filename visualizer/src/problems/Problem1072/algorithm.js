@@ -12,7 +12,7 @@ const same = (a, b) => a.every((v, i) => v === b[i])
 const complement = row => row.map(v => 1 - v)
 
 export function buildTrace(matrix) {
-  const frames = [{ phase: 'start', activeLine: L('count how many rows'), row: -1, matched: [], best: 0, bestRows: [], message: 'Look at each row as a pattern. Flipping columns can make a row and its complement equal.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('count how many rows'), row: -1, matched: [], best: 0, bestRows: [], message: 'Look at each row as a pattern. Flipping columns can make a row and its complement equal.' }]
   let best = 0
   let bestRows = []
   matrix.forEach((row, r) => {
@@ -25,9 +25,9 @@ export function buildTrace(matrix) {
       best = matched.length
       bestRows = matched
     }
-    frames.push({ phase: 'row', activeLine: L('same = rows'), row: r, matched, best, bestRows, message: `Row ${r} matches ${matched.length} row${matched.length === 1 ? '' : 's'} once the right columns are flipped (rows ${matched.join(', ')}).` })
+    frames.push({ phase: 'row', pythonLine: 8, activeLine: L('same = rows'), row: r, matched, best, bestRows, message: `Row ${r} matches ${matched.length} row${matched.length === 1 ? '' : 's'} once the right columns are flipped (rows ${matched.join(', ')}).` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), row: -1, matched: [], best, bestRows, message: `Most rows that can be equal together: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), row: -1, matched: [], best, bestRows, message: `Most rows that can be equal together: ${best}.` })
   return { input: matrix, result: best, frames }
 }
 

@@ -14,8 +14,9 @@ export function buildTrace(input) {
   const frames = []
   let cell = null
   let apex = -1
+  const PY_LINE = { start: 3, length: 4, try: 8, keep: 7, done: 11 }
   const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, cell, apex, best: best.map(row => [...row]), message,
+    phase, activeLine, pythonLine: PY_LINE[phase], cell, apex, best: best.map(row => [...row]), message,
   })
 
   snap('start', L('start with a table best'), 'Sides of the polygon cost nothing, since they are not triangles yet.')

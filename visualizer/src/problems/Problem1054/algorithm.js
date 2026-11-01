@@ -21,7 +21,7 @@ export function buildTrace({ barcodes }) {
     return heap.splice(at, 1)[0]
   }
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('count how many times each barcode appears'), placed: -1, result: [], message: 'Count each barcode, then place the most frequent one that differs from the last.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('count how many times each barcode appears'), placed: -1, result: [], message: 'Count each barcode, then place the most frequent one that differs from the last.' }]
   while (heap.length) {
     const first = takeTop()
     if (result.length && result[result.length - 1] === first.v) {
@@ -29,14 +29,14 @@ export function buildTrace({ barcodes }) {
       result.push(second.v)
       if (second.c - 1 > 0) heap.push({ c: second.c - 1, v: second.v })
       heap.push(first)
-      frames.push({ phase: 'swap', activeLine: L('take the next entry instead'), placed: second.v, result: [...result], message: `${first.v} would repeat, so ${second.v} is placed instead.` })
+      frames.push({ phase: 'swap', pythonLine: 11, activeLine: L('take the next entry instead'), placed: second.v, result: [...result], message: `${first.v} would repeat, so ${second.v} is placed instead.` })
     } else {
       result.push(first.v)
       if (first.c - 1 > 0) heap.push({ c: first.c - 1, v: first.v })
-      frames.push({ phase: 'place', activeLine: L('append the value'), placed: first.v, result: [...result], message: `Place ${first.v}.` })
+      frames.push({ phase: 'place', pythonLine: 17, activeLine: L('append the value'), placed: first.v, result: [...result], message: `Place ${first.v}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), placed: -1, result: [...result], message: 'No two neighbours match.' })
+  frames.push({ phase: 'done', pythonLine: 20, activeLine: L('return result'), placed: -1, result: [...result], message: 'No two neighbours match.' })
   return { input: { barcodes }, result, frames }
 }
 

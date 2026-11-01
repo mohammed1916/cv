@@ -22,19 +22,19 @@ export function buildTrace({ words }) {
   const unique = [...new Set(words)].sort((a, b) => a.length - b.length)
   const best = new Map()
   const snapshot = () => Object.fromEntries(best)
-  const frames = [{ phase: 'start', word: null, shorter: null, best: snapshot(), activeLine: L('best = empty map'), message: 'Sort the unique words by length so that every shorter word is handled first.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, word: null, shorter: null, best: snapshot(), activeLine: L('best = empty map'), message: 'Sort the unique words by length so that every shorter word is handled first.' }]
   for (const word of unique) {
     best.set(word, 1)
-    frames.push({ phase: 'word', word, shorter: null, best: snapshot(), activeLine: L('best[w] = 1'), message: `${word} starts a chain of length 1.` })
+    frames.push({ phase: 'word', pythonLine: 4, word, shorter: null, best: snapshot(), activeLine: L('best[w] = 1'), message: `${word} starts a chain of length 1.` })
     for (let i = 0; i < word.length; i++) {
       const shorter = word.slice(0, i) + word.slice(i + 1)
       if (!best.has(shorter)) continue
       best.set(word, Math.max(best.get(word), best.get(shorter) + 1))
-      frames.push({ phase: 'predecessor', word, shorter, best: snapshot(), activeLine: L('if shorter is in best'), message: `${shorter} is a predecessor of ${word}; the chain ending at ${word} is now ${best.get(word)}.` })
+      frames.push({ phase: 'predecessor', pythonLine: 8, word, shorter, best: snapshot(), activeLine: L('if shorter is in best'), message: `${shorter} is a predecessor of ${word}; the chain ending at ${word} is now ${best.get(word)}.` })
     }
   }
   const result = Math.max(0, ...best.values())
-  frames.push({ phase: 'done', word: null, shorter: null, best: snapshot(), activeLine: L('return the largest value'), message: `Longest chain: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 9, word: null, shorter: null, best: snapshot(), activeLine: L('return the largest value'), message: `Longest chain: ${result}.` })
   return { input: { words }, result, frames }
 }
 
