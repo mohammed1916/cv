@@ -55,7 +55,7 @@ class Heap {
 export function buildTrace({ orders }) {
   const buy = new Heap((x, y) => x.price > y.price)
   const sell = new Heap((x, y) => x.price < y.price)
-  const frames = [{ phase: 'start', activeLine: L('set buy to an empty max heap'), step: 0, buy: [], sell: [], message: 'Start with empty backlogs of buys and sells.' }]
+  const frames = [{ phase: 'start', activeLine: L('set buy to an empty max heap'), pythonLine: P('buy = []'), step: 0, buy: [], sell: [], message: 'Start with empty backlogs of buys and sells.' }]
   orders.forEach(([price, amount, type], index) => {
     let left = amount
     const kind = type === 0 ? 'buy' : 'sell'
@@ -78,11 +78,11 @@ export function buildTrace({ orders }) {
       }
       if (left > 0) sell.push({ price, amount: left })
     }
-    frames.push({ phase: 'order', activeLine: L(type === 0 ? 'trade against the cheapest sell' : 'trade against the highest buy'), step: index + 1, buy: [...buy.a], sell: [...sell.a], message: `Order ${index + 1}: ${kind} ${amount} at ${price}. ${left > 0 ? `${left} remains in the backlog.` : 'Fully matched.'}` })
+    frames.push({ phase: 'order', activeLine: L(type === 0 ? 'trade against the cheapest sell' : 'trade against the highest buy'), pythonLine: P(left > 0 ? (type === 0 ? 'heapq.heappush(buy' : 'heapq.heappush(sell') : left < amount ? (type === 0 ? 'sell[0][1] -= take' : 'buy[0][1] -= take') : (type === 0 ? 'while left > 0 and sell' : 'while left > 0 and buy')), step: index + 1, buy: [...buy.a], sell: [...sell.a], message: `Order ${index + 1}: ${kind} ${amount} at ${price}. ${left > 0 ? `${left} remains in the backlog.` : 'Fully matched.'}` })
   })
   const total = [...buy.a, ...sell.a].reduce((sum, e) => sum + e.amount, 0)
   const result = total % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum modulo'), step: orders.length, buy: [...buy.a], sell: [...sell.a], message: `Backlog total ${total}, modulo ${MOD} is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum modulo'), pythonLine: P('return total % MOD'), step: orders.length, buy: [...buy.a], sell: [...sell.a], message: `Backlog total ${total}, modulo ${MOD} is ${result}.` })
   return { input: { orders }, result, frames }
 }
 
@@ -103,6 +103,8 @@ export const code = `number of orders left in the backlog modulo 1000000007
   sum the amounts in both heaps
   return the sum modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 export const python = `def count_backlog(orders):
     import heapq

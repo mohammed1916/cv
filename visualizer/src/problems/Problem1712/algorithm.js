@@ -28,14 +28,14 @@ export function buildTrace(input) {
   for (const value of nums) prefix.push(prefix[prefix.length - 1] + value)
   const total = prefix[n]
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('build prefix sums'), i: -1, lo: null, hi: null, count: 0, message: `Prefix sums are ready; the whole array sums to ${total}.` }]
+  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('build prefix sums'), i: -1, lo: null, hi: null, count: 0, message: `Prefix sums are ready; the whole array sums to ${total}.` }]
   for (let i = 1; i <= n - 2; i++) {
     const lo = firstTrue(i + 1, n, j => prefix[j] >= 2 * prefix[i])
     const hi = firstTrue(i + 1, n, j => 2 * prefix[j] > total + prefix[i]) - 1
     if (lo <= hi) count += hi - lo + 1
-    frames.push({ phase: 'scan', activeLine: L('find the first end j'), i, lo, hi, count, message: `Left part ends before ${i} (sum ${prefix[i]}). Valid middle ends run from ${lo} to ${hi}.` })
+    frames.push({ phase: 'scan', pythonLine: lo <= hi ? 23 : 22, activeLine: L('find the first end j'), i, lo, hi, count, message: `Left part ends before ${i} (sum ${prefix[i]}). Valid middle ends run from ${lo} to ${hi}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count modulo'), i: -1, lo: null, hi: null, count: count % MOD, message: `Ways to split: ${count % MOD}.` })
+  frames.push({ phase: 'done', pythonLine: 24, activeLine: L('return count modulo'), i: -1, lo: null, hi: null, count: count % MOD, message: `Ways to split: ${count % MOD}.` })
   return { input, nums, result: count % MOD, frames }
 }
 

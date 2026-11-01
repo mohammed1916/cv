@@ -11,7 +11,7 @@ export function buildTrace(input) {
   const size = 2 * n - 1
   const seq = new Array(size).fill(0)
   const used = new Array(n + 1).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('set every slot to empty'), index: 0, value: 0, seq: [...seq], message: `Fill ${size} slots from left to right, trying the largest value first.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set every slot to empty'), index: 0, value: 0, seq: [...seq], message: `Fill ${size} slots from left to right, trying the largest value first.` }]
   const place = index => {
     if (index === size) return true
     if (seq[index] !== 0) return place(index + 1)
@@ -22,17 +22,17 @@ export function buildTrace(input) {
       seq[index] = k
       seq[second] = k
       used[k] = true
-      frames.push({ phase: 'place', activeLine: L('put the value in both slots'), index, value: k, seq: [...seq], message: `Place ${k} at ${index}${k === 1 ? '' : ` and ${second}`}.` })
+      frames.push({ phase: 'place', pythonLine: 19, activeLine: L('put the value in both slots'), index, value: k, seq: [...seq], message: `Place ${k} at ${index}${k === 1 ? '' : ` and ${second}`}.` })
       if (place(index + 1)) return true
       seq[index] = 0
       seq[second] = 0
       used[k] = false
-      frames.push({ phase: 'undo', activeLine: L('clear both slots'), index, value: k, seq: [...seq], message: `No completion with ${k} at ${index}, so clear it and try a smaller value.` })
+      frames.push({ phase: 'undo', pythonLine: 24, activeLine: L('clear both slots'), index, value: k, seq: [...seq], message: `No completion with ${k} at ${index}, so clear it and try a smaller value.` })
     }
     return false
   }
   place(0)
-  frames.push({ phase: 'done', activeLine: L('return the sequence'), index: size, value: 0, seq: [...seq], message: `Sequence: [${seq.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 28, activeLine: L('return the sequence'), index: size, value: 0, seq: [...seq], message: `Sequence: [${seq.join(', ')}].` })
   return { input, result: seq, frames }
 }
 

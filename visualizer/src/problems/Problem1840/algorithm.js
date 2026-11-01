@@ -21,35 +21,35 @@ export function buildTrace(input) {
   const limit = Array(n + 1).fill(Infinity)
   limit[1] = 0
   for (const [id, cap] of restrictions) limit[id] = cap
-  const frames = [{ phase: 'start', activeLine: L('set the limit of building 1'), building: -1, limit: limit.slice(), best: 0, message: 'Building 1 has height 0; each restricted building has a cap.' }]
+  const frames = [{ phase: 'start', activeLine: L('set the limit of building 1'), pythonLine: P('limit[1] = 0'), building: -1, limit: limit.slice(), best: 0, message: 'Building 1 has height 0; each restricted building has a cap.' }]
   for (let i = 2; i <= n; i++) {
     const v = Math.min(limit[i], limit[i - 1] + 1)
     if (v !== limit[i]) {
       limit[i] = v
-      frames.push({ phase: 'forward', activeLine: L('lower limit i to the limit of building i minus 1'), building: i, limit: limit.slice(), best: 0, message: `Building ${i} can be at most ${v}, one more than building ${i - 1}.` })
+      frames.push({ phase: 'forward', activeLine: L('lower limit i to the limit of building i minus 1'), pythonLine: P('limit[i] = min(limit[i], limit[i - 1] + 1)'), building: i, limit: limit.slice(), best: 0, message: `Building ${i} can be at most ${v}, one more than building ${i - 1}.` })
     }
   }
   for (let i = n - 1; i >= 1; i--) {
     const v = Math.min(limit[i], limit[i + 1] + 1)
     if (v !== limit[i]) {
       limit[i] = v
-      frames.push({ phase: 'backward', activeLine: L('lower limit i to the limit of building i+1'), building: i, limit: limit.slice(), best: 0, message: `Building ${i} can be at most ${v}, because building ${i + 1} caps it.` })
+      frames.push({ phase: 'backward', activeLine: L('lower limit i to the limit of building i+1'), pythonLine: P('limit[i] = min(limit[i], limit[i + 1] + 1)'), building: i, limit: limit.slice(), best: 0, message: `Building ${i} can be at most ${v}, because building ${i + 1} caps it.` })
     }
   }
   const restricted = [1, ...restrictions.map(([id]) => id).sort((a, b) => a - b)]
   let best = Math.max(...restricted.map(i => limit[i]))
-  frames.push({ phase: 'peak', activeLine: L('set best to the tallest'), building: -1, limit: limit.slice(), best, message: `The tallest capped building is ${best}.` })
+  frames.push({ phase: 'peak', activeLine: L('set best to the tallest'), pythonLine: P('best = max(limit[i] for i in restricted)'), building: -1, limit: limit.slice(), best, message: `The tallest capped building is ${best}.` })
   for (let p = 0; p + 1 < restricted.length; p++) {
     const a = restricted[p]
     const b = restricted[p + 1]
     const peak = Math.floor((limit[a] + limit[b] + b - a) / 2)
     best = Math.max(best, peak)
-    frames.push({ phase: 'peak', activeLine: L('divided by 2'), building: a, limit: limit.slice(), best, message: `Between ${a} and ${b} the tallest possible building is ${peak}; best ${best}.` })
+    frames.push({ phase: 'peak', activeLine: L('divided by 2'), pythonLine: P('best = max(best, (limit[a]'), building: a, limit: limit.slice(), best, message: `Between ${a} and ${b} the tallest possible building is ${peak}; best ${best}.` })
   }
   const last = restricted[restricted.length - 1]
   best = Math.max(best, limit[last] + n - last)
-  frames.push({ phase: 'peak', activeLine: L('set best to the larger of best and the limit of the last'), building: last, limit: limit.slice(), best, message: `Growing by one per building after ${last} gives ${limit[last] + n - last}; best ${best}.` })
-  frames.push({ phase: 'done', activeLine: L('return best'), building: -1, limit: limit.slice(), best, message: `Maximum building height: ${best}.` })
+  frames.push({ phase: 'peak', activeLine: L('set best to the larger of best and the limit of the last'), pythonLine: P('best = max(best, limit[last]'), building: last, limit: limit.slice(), best, message: `Growing by one per building after ${last} gives ${limit[last] + n - last}; best ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), building: -1, limit: limit.slice(), best, message: `Maximum building height: ${best}.` })
   return { input, result: best, frames }
 }
 
@@ -65,6 +65,8 @@ export const code = `maximum height of the tallest building:
   set best to the larger of best and the limit of the last restricted building plus n minus that building
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 export const python = `def maximum_building_height(n, restrictions):
     limit = [float('inf')] * (n + 1)

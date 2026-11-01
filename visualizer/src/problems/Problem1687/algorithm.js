@@ -24,9 +24,9 @@ export function buildTrace(data) {
   const boxes = data.boxes
   const n = boxes.length
   const trips = [0, ...Array(n).fill(Infinity)]
-  const frames = [{ phase: 'start', activeLine: L('set trips[0]'), i: 0, j: null, trips: [...trips], message: 'Zero boxes need zero trips. Every other prefix is not reached yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set trips[0]'), i: 0, j: null, trips: [...trips], message: 'Zero boxes need zero trips. Every other prefix is not reached yet.' }]
   for (let i = 1; i <= n; i++) {
-    frames.push({ phase: 'end', activeLine: L('for each end position'), i, j: null, trips: [...trips], message: `Find the cheapest trip whose last box is box ${i}.` })
+    frames.push({ phase: 'end', pythonLine: 4, activeLine: L('for each end position'), i, j: null, trips: [...trips], message: `Find the cheapest trip whose last box is box ${i}.` })
     let changes = 0
     let count = 0
     let weight = 0
@@ -34,16 +34,16 @@ export function buildTrace(data) {
       count++
       weight += boxes[j][1]
       if (count > data.max_boxes || weight > data.max_weight) {
-        frames.push({ phase: 'limit', activeLine: L('stop as soon'), i, j, trips: [...trips], message: `Adding box ${j + 1} breaks a limit (${count} boxes, weight ${weight}). Stop extending this trip.` })
+        frames.push({ phase: 'limit', pythonLine: 12, activeLine: L('stop as soon'), i, j, trips: [...trips], message: `Adding box ${j + 1} breaks a limit (${count} boxes, weight ${weight}). Stop extending this trip.` })
         break
       }
       if (j < i - 1 && boxes[j][0] !== boxes[j + 1][0]) changes++
       const cost = trips[j] + 2 + changes
       if (cost < trips[i]) trips[i] = cost
-      frames.push({ phase: 'trip', activeLine: L('the trip costs'), i, j, trips: [...trips], message: `Trip carrying boxes ${j + 1} to ${i}: ${trips[j]} + 2 + ${changes} port changes = ${cost}. Keep the cheapest, now ${trips[i]}.` })
+      frames.push({ phase: 'trip', pythonLine: 15, activeLine: L('the trip costs'), i, j, trips: [...trips], message: `Trip carrying boxes ${j + 1} to ${i}: ${trips[j]} + 2 + ${changes} port changes = ${cost}. Keep the cheapest, now ${trips[i]}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return trips'), i: n, j: null, trips: [...trips], message: `The fewest trips for all ${n} boxes is ${trips[n]}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return trips'), i: n, j: null, trips: [...trips], message: `The fewest trips for all ${n} boxes is ${trips[n]}.` })
   return { input: data, result: trips[n], frames, trips }
 }
 

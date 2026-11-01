@@ -24,10 +24,10 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const current = input.num.split('')
-  const frames = [{ phase: 'start', activeLine: L('set current to num'), digits: [...current], index: -1, swaps: 0, message: `Start at ${input.num}. Each step moves to the next arrangement of the same digits.` }]
+  const frames = [{ phase: 'start', activeLine: L('set current to num'), pythonLine: P('current = list(num)'), digits: [...current], index: -1, swaps: 0, message: `Start at ${input.num}. Each step moves to the next arrangement of the same digits.` }]
   for (let t = 0; t < input.k; t++) {
     nextArrangement(current)
-    frames.push({ phase: 'advance', activeLine: L('replace current with the next'), digits: [...current], index: -1, swaps: 0, message: `Step ${t + 1}: ${current.join('')} is the next wonderful integer.` })
+    frames.push({ phase: 'advance', activeLine: L('replace current with the next'), pythonLine: P('next_arrangement(current)'), digits: [...current], index: -1, swaps: 0, message: `Step ${t + 1}: ${current.join('')} is the next wonderful integer.` })
   }
   const target = [...current]
   const arr = input.num.split('')
@@ -38,9 +38,9 @@ export function buildTrace(input) {
     const cost = j - i
     for (let p = j; p > i; p--) [arr[p], arr[p - 1]] = [arr[p - 1], arr[p]]
     swaps += cost
-    frames.push({ phase: 'swap', activeLine: L('move that digit to this position'), digits: [...arr], index: i, swaps, message: `Bring ${target[i]} to position ${i} for ${cost} swap${cost === 1 ? '' : 's'}. Total ${swaps}.` })
+    frames.push({ phase: 'swap', activeLine: L('move that digit to this position'), pythonLine: P(cost > 0 ? 'swaps += 1' : 'while j > i:'), digits: [...arr], index: i, swaps, message: `Bring ${target[i]} to position ${i} for ${cost} swap${cost === 1 ? '' : 's'}. Total ${swaps}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return swaps'), digits: [...arr], index: -1, swaps, message: `Minimum adjacent swaps: ${swaps}.` })
+  frames.push({ phase: 'done', activeLine: L('return swaps'), pythonLine: P('return swaps'), digits: [...arr], index: -1, swaps, message: `Minimum adjacent swaps: ${swaps}.` })
   return { input, result: swaps, frames }
 }
 
@@ -55,6 +55,8 @@ export const code = `minimum adjacent swaps to reach the kth smallest wonderful 
     add the number of swaps used to swaps
   return swaps`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 export const python = `def kth_wonderful_swaps(num, k):
     def next_arrangement(a):

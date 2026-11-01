@@ -12,10 +12,10 @@ export function buildTrace({ target, arr }) {
   const position = new Map(target.map((value, index) => [value, index]))
   // tails[k] is the smallest target position that ends a strictly increasing run of length k + 1.
   const tails = []
-  const frames = [{ phase: 'start', activeLine: L('set the position of each target value'), item: -1, tails: [], message: 'Map each target value to its position. No runs yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set the position of each target value'), item: -1, tails: [], message: 'Map each target value to its position. No runs yet.' }]
   arr.forEach((value, item) => {
     if (!position.has(value)) {
-      frames.push({ phase: 'skip', activeLine: L('skip it'), item, tails: [...tails], message: `${value} is not in target, so it cannot help.` })
+      frames.push({ phase: 'skip', pythonLine: 7, activeLine: L('skip it'), item, tails: [...tails], message: `${value} is not in target, so it cannot help.` })
       return
     }
     const p = position.get(value)
@@ -26,11 +26,12 @@ export function buildTrace({ target, arr }) {
       if (tails[mid] < p) lo = mid + 1
       else hi = mid
     }
+    const grew = lo === tails.length
     tails[lo] = p
-    frames.push({ phase: 'place', activeLine: L('replace that run'), item, tails: [...tails], message: `${value} sits at target position ${p}; it ends a run of length ${lo + 1}.` })
+    frames.push({ phase: 'place', pythonLine: grew ? 11 : 13, activeLine: L('replace that run'), item, tails: [...tails], message: `${value} sits at target position ${p}; it ends a run of length ${lo + 1}.` })
   })
   const result = target.length - tails.length
-  frames.push({ phase: 'done', activeLine: L('return the target length'), item: -1, tails: [...tails], message: `${target.length} minus the longest run of ${tails.length} gives ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 14, activeLine: L('return the target length'), item: -1, tails: [...tails], message: `${target.length} minus the longest run of ${tails.length} gives ${result}.` })
   return { input: { target, arr }, result, frames }
 }
 

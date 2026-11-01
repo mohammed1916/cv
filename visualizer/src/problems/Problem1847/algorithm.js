@@ -29,14 +29,14 @@ export function buildTrace({ rooms, queries }) {
   const ids = []
   const answers = Array(queries.length).fill(-1)
   let next = 0
-  const frames = [{ phase: 'start', activeLine: L('sort rooms by size'), query: null, ids: [], answer: null, message: 'Rooms and queries are sorted so the usable set only grows.' }]
+  const frames = [{ phase: 'start', activeLine: L('sort rooms by size'), pythonLine: P('rooms_by_size = sorted('), query: null, ids: [], answer: null, message: 'Rooms and queries are sorted so the usable set only grows.' }]
   for (const index of order) {
     const [preferred, minSize] = queries[index]
     while (next < roomsBySize.length && roomsBySize[next][1] >= minSize) {
       const [id, size] = roomsBySize[next]
       ids.splice(lowerBound(ids, id), 0, id)
       next++
-      frames.push({ phase: 'add', activeLine: L('add every room big enough'), query: index, ids: [...ids], answer: null, message: `Room ${id} (size ${size}) is usable for query ${index}.` })
+      frames.push({ phase: 'add', activeLine: L('add every room big enough'), pythonLine: P('next_room += 1'), query: index, ids: [...ids], answer: null, message: `Room ${id} (size ${size}) is usable for query ${index}.` })
     }
     const i = lowerBound(ids, preferred)
     const options = [ids[i - 1], ids[i]].filter(v => v !== undefined)
@@ -47,9 +47,9 @@ export function buildTrace({ rooms, queries }) {
         return d < bestDistance || (d === bestDistance && id < best) ? id : best
       })
     }
-    frames.push({ phase: 'query', activeLine: L('store that id'), query: index, ids: [...ids], answer: answers[index], message: `Query ${index} prefers room ${preferred}; the answer is ${answers[index]}.` })
+    frames.push({ phase: 'query', activeLine: L('store that id'), pythonLine: P(options.length ? 'answers[index] = min(' : 'options = [ids[k]'), query: index, ids: [...ids], answer: answers[index], message: `Query ${index} prefers room ${preferred}; the answer is ${answers[index]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the stored answers'), query: null, ids: [...ids], answer: null, message: `Answers: ${JSON.stringify(answers)}.` })
+  frames.push({ phase: 'done', activeLine: L('return the stored answers'), pythonLine: P('return answers'), query: null, ids: [...ids], answer: null, message: `Answers: ${JSON.stringify(answers)}.` })
   return { input: { rooms, queries }, roomsBySize, result: answers, frames }
 }
 
@@ -64,6 +64,8 @@ export const code = `closest room for each query
     store that id, or minus one if the set is empty
   return the stored answers in the original order`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 export const python = `def closest_room(rooms, queries):
     import bisect

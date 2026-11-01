@@ -15,16 +15,16 @@ export function buildTrace(input) {
   nums.forEach((v, i) => { if (v === 1) positions.push(i) })
   // q[j] = position of the j-th one minus j, so a block of consecutive ones is a run of equal q values.
   const q = positions.map((p, j) => p - j)
-  const frames = [{ phase: 'start', activeLine: L('set positions'), index: -1, marked: [], best: null, message: `The ones sit at positions ${positions.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set positions'), index: -1, marked: [], best: null, message: `The ones sit at positions ${positions.join(', ')}.` }]
   let best = Infinity
   for (let left = 0; left + k <= positions.length; left++) {
     const median = q[left + (k >> 1)]
     let cost = 0
     for (let j = left; j < left + k; j++) cost += Math.abs(q[j] - median)
     if (cost < best) best = cost
-    frames.push({ phase: 'window', activeLine: L('for each window'), index: positions[left], marked: positions.slice(left, left + k), best, message: `Ones ${left + 1} to ${left + k} cost ${cost} swaps to gather around their median. Best so far: ${best}.` })
+    frames.push({ phase: 'window', pythonLine: 8, activeLine: L('for each window'), index: positions[left], marked: positions.slice(left, left + k), best, message: `Ones ${left + 1} to ${left + k} cost ${cost} swaps to gather around their median. Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, marked: [], best, message: `Minimum swaps: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), index: -1, marked: [], best, message: `Minimum swaps: ${best}.` })
   return { input, result: best, frames }
 }
 

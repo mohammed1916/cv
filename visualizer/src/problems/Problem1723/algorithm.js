@@ -10,13 +10,13 @@ export function buildTrace({ jobs, k }) {
   const sorted = [...jobs].sort((a, b) => b - a)
   const loads = Array(k).fill(0)
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to infinity'), job: null, loads: [...loads], best, message: 'Every worker starts empty. Jobs are tried largest first.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set best to infinity'), job: null, loads: [...loads], best, message: 'Every worker starts empty. Jobs are tried largest first.' }]
   const place = index => {
     if (index === sorted.length) {
       const peak = Math.max(...loads)
       if (best === null || peak < best) {
         best = peak
-        frames.push({ phase: 'improve', activeLine: L('set best to the peak'), job: null, loads: [...loads], best, message: `All jobs placed with peak ${peak}, a new best.` })
+        frames.push({ phase: 'improve', pythonLine: 9, activeLine: L('set best to the peak'), job: null, loads: [...loads], best, message: `All jobs placed with peak ${peak}, a new best.` })
       }
       return
     }
@@ -24,13 +24,13 @@ export function buildTrace({ jobs, k }) {
       if (loads.slice(0, w).includes(loads[w])) continue
       if (best !== null && loads[w] + sorted[index] >= best) continue
       loads[w] += sorted[index]
-      frames.push({ phase: 'assign', activeLine: L('add this job to the worker'), job: index, loads: [...loads], best, message: `Give job ${sorted[index]} to worker ${w + 1}.` })
+      frames.push({ phase: 'assign', pythonLine: 16, activeLine: L('add this job to the worker'), job: index, loads: [...loads], best, message: `Give job ${sorted[index]} to worker ${w + 1}.` })
       place(index + 1)
       loads[w] -= sorted[index]
     }
   }
   place(0)
-  frames.push({ phase: 'done', activeLine: L('return best'), job: null, loads: [...loads], best, message: `Smallest possible peak: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return best'), job: null, loads: [...loads], best, message: `Smallest possible peak: ${best}.` })
   return { input: { jobs, k }, sorted, result: best, frames }
 }
 

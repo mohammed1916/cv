@@ -18,6 +18,8 @@ export const code = `max happy groups(batchSize, groups)
     keep the largest such total, memoized on cnt and cur
   return happy + best(cnt, 0)`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 // Only the remainder of each group's size matters. A group is happy when it starts a fresh batch (the donuts used so far are a multiple of batchSize).
 export function buildTrace({ batchSize: b, groups }) {
@@ -25,7 +27,7 @@ export function buildTrace({ batchSize: b, groups }) {
   const cnt = Array(b).fill(0)
   for (const g of groups) if (g % b !== 0) cnt[g % b]++
   const memo = new Map()
-  const frames = [{ phase: 'start', cnt: [...cnt], cur: 0, value: null, activeLine: L('count the groups whose size'), message: `${happyBase} group(s) are a multiple of ${b} and are always happy.` }]
+  const frames = [{ phase: 'start', cnt: [...cnt], cur: 0, value: null, activeLine: L('count the groups whose size'), pythonLine: P('happy = sum('), message: `${happyBase} group(s) are a multiple of ${b} and are always happy.` }]
   const best = (state, cur) => {
     const key = `${state.join(',')}|${cur}`
     if (memo.has(key)) return memo.get(key)
@@ -38,12 +40,12 @@ export function buildTrace({ batchSize: b, groups }) {
       state[r]++
     }
     memo.set(key, result)
-    frames.push({ phase: 'state', cnt: [...state], cur, value: result, activeLine: L('keep the largest such total'), message: `Remaining ${state.map((c, r) => `${r}:${c}`).join(' ')} with ${cur} donut(s) used in the batch: at most ${result} more happy.` })
+    frames.push({ phase: 'state', cnt: [...state], cur, value: result, activeLine: L('keep the largest such total'), pythonLine: P('memo[key] = result'), message: `Remaining ${state.map((c, r) => `${r}:${c}`).join(' ')} with ${cur} donut(s) used in the batch: at most ${result} more happy.` })
     return result
   }
   const extra = best([...cnt], 0)
   const result = happyBase + extra
-  frames.push({ phase: 'done', cnt: [...cnt], cur: 0, value: result, activeLine: L('return happy'), result, message: `Maximum number of happy groups: ${result}.` })
+  frames.push({ phase: 'done', cnt: [...cnt], cur: 0, value: result, activeLine: L('return happy'), pythonLine: P('return happy + best('), result, message: `Maximum number of happy groups: ${result}.` })
   return { input: { batchSize: b, groups }, result, frames }
 }
 

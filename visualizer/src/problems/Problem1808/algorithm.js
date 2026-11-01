@@ -9,7 +9,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ prime_factors: n }) {
-  const frames = [{ phase: 'start', activeLine: L('if n is at most 3'), parts: [], message: `Split ${n} into parts whose product is as large as possible.` }]
+  const frames = [{ phase: 'start', activeLine: L('if n is at most 3'), pythonLine: P('if n <= 3'), parts: [], message: `Split ${n} into parts whose product is as large as possible.` }]
   const parts = []
   if (n <= 3) {
     parts.push(n)
@@ -18,12 +18,12 @@ export function buildTrace({ prime_factors: n }) {
     while (rest > 4) {
       parts.push(3)
       rest -= 3
-      frames.push({ phase: 'split', activeLine: L('take a part of 3'), parts: parts.slice(), message: `Take a part of 3. ${rest} is left to split.` })
+      frames.push({ phase: 'split', activeLine: L('take a part of 3'), pythonLine: P(n % 3 === 0 ? 'if n % 3 == 0' : 'if n % 3 == 1'), parts: parts.slice(), message: `Take a part of 3. ${rest} is left to split.` })
     }
     parts.push(rest)
   }
   const product = parts.reduce((acc, p) => acc * p, 1) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the product'), parts: parts.slice(), message: `The parts ${parts.join(' x ')} give ${product} nice divisors.` })
+  frames.push({ phase: 'done', activeLine: L('return the product'), pythonLine: P(n <= 3 ? 'return n' : n % 3 === 0 ? 'return pow(3, n // 3' : n % 3 === 1 ? 'return 4 * pow' : 'return 2 * pow'), parts: parts.slice(), message: `The parts ${parts.join(' x ')} give ${product} nice divisors.` })
   return { input: { prime_factors: n }, result: product, parts, frames }
 }
 
@@ -35,6 +35,8 @@ while rest is more than 4 do
 keep rest as the last part, which is 2, 3 or 4
 return the product of the parts modulo 1000000007`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 export const python = `def max_nice_divisors(prime_factors):
     MOD = 10 ** 9 + 7

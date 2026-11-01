@@ -34,16 +34,16 @@ function countBelow(nums, limit, frames, phase, label) {
       node = node.child[bit]
       node.count++
     }
-    if (frames) frames.push({ phase, activeLine: L('for each element'), index, limit, pairs: total, label, message: `Element ${x} at index ${index} adds ${total} pairs below ${limit} so far.` })
+    if (frames) frames.push({ phase, activeLine: L('for each element'), pythonLine: PL('node[2] += 1'), index, limit, pairs: total, label, message: `Element ${x} at index ${index} adds ${total} pairs below ${limit} so far.` })
   })
   return total
 }
 
 export function buildTrace({ nums, low, high }) {
-  const frames = [{ phase: 'start', activeLine: L('count pairs'), index: -1, limit: high + 1, pairs: 0, label: 'high', message: `Count pairs with xor at most ${high}, which is the same as below ${high + 1}.` }]
+  const frames = [{ phase: 'start', activeLine: L('count pairs'), pythonLine: P('root = [None, None, 0]'), index: -1, limit: high + 1, pairs: 0, label: 'high', message: `Count pairs with xor at most ${high}, which is the same as below ${high + 1}.` }]
   const atMost = countBelow(nums, high + 1, frames, 'count', 'high')
   const lowerPart = countBelow(nums, low, frames, 'subtract', 'low')
-  frames.push({ phase: 'subtract', activeLine: L('return below('), index: nums.length, limit: low, pairs: atMost - lowerPart, label: 'done', message: `Pairs with xor from ${low} to ${high}: ${atMost} minus ${lowerPart}.` })
+  frames.push({ phase: 'subtract', activeLine: L('return below('), pythonLine: P('return below(high + 1)'), index: nums.length, limit: low, pairs: atMost - lowerPart, label: 'done', message: `Pairs with xor from ${low} to ${high}: ${atMost} minus ${lowerPart}.` })
   return { input: { nums, low, high }, result: atMost - lowerPart, frames }
 }
 
@@ -54,6 +54,8 @@ for each element x of nums in order do
   insert x into the trie and update the counts
 return below(high + 1) minus below(low)`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+const PL = s => python.split('\n').reduce((last, l, i) => (l.includes(s) ? i + 1 : last), 0)
 
 export const python = `def count_pairs_in_range(nums, low, high):
     BITS = 7

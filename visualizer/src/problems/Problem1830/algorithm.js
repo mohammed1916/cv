@@ -19,6 +19,8 @@ export const code = `min operations to sort(s)
     use up s[i] in counts
   return rank, modulo the prime`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 // The operations walk the sorted order backwards, so the count is the number of distinct arrangements that sort before s.
 export function buildTrace({ s }) {
@@ -29,7 +31,7 @@ export function buildTrace({ s }) {
     return counts.reduce((acc, c) => acc / factorial(c), factorial(total))
   }
   let rank = 0
-  const frames = [{ phase: 'start', index: -1, rank: 0, activeLine: L('set counts'), message: `Count the arrangements of ${s} that come before it.` }]
+  const frames = [{ phase: 'start', index: -1, rank: 0, activeLine: L('set counts'), pythonLine: P('counts = [0] * 26'), message: `Count the arrangements of ${s} that come before it.` }]
   for (let i = 0; i < s.length; i++) {
     const idx = s.charCodeAt(i) - 97
     let added = 0
@@ -42,10 +44,10 @@ export function buildTrace({ s }) {
       rank += ways
     }
     counts[idx]--
-    frames.push({ phase: 'position', index: i, rank, activeLine: L('for each letter c smaller'), message: `Position ${i + 1} (${s[i]}): smaller letters can go first in ${added} more arrangement(s); running total ${rank}.` })
+    frames.push({ phase: 'position', index: i, rank, activeLine: L('for each letter c smaller'), pythonLine: P('counts[idx] -= 1'), message: `Position ${i + 1} (${s[i]}): smaller letters can go first in ${added} more arrangement(s); running total ${rank}.` })
   }
   const result = rank % MOD
-  frames.push({ phase: 'done', index: s.length - 1, rank: result, activeLine: L('return rank'), result, message: `Operations needed to sort ${s}: ${result}.` })
+  frames.push({ phase: 'done', index: s.length - 1, rank: result, activeLine: L('return rank'), pythonLine: P('return rank % MOD'), result, message: `Operations needed to sort ${s}: ${result}.` })
   return { input: { s }, result, frames }
 }
 

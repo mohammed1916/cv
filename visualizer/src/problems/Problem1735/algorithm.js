@@ -51,10 +51,10 @@ export function buildTrace({ queries }) {
   const snap = () => pascal.map(row => [...row])
   for (let i = 0; i < rows; i++) {
     pascal[i][0] = 1
-    frames.push({ phase: 'pascal', cell: [i, 0], table: snap(), query: null, answers: [], activeLine: L('set pascal[i][0]'), message: `C(${i}, 0) = 1.` })
+    frames.push({ phase: 'pascal', pythonLine: 25, cell: [i, 0], table: snap(), query: null, answers: [], activeLine: L('set pascal[i][0]'), message: `C(${i}, 0) = 1.` })
     for (let j = 1; j <= Math.min(i, cols - 1); j++) {
       pascal[i][j] = (pascal[i - 1][j - 1] + pascal[i - 1][j]) % MOD
-      frames.push({ phase: 'pascal', cell: [i, j], table: snap(), query: null, answers: [], activeLine: L('set pascal[i][0]'), message: `C(${i}, ${j}) = ${pascal[i][j]}.` })
+      frames.push({ phase: 'pascal', pythonLine: 27, cell: [i, j], table: snap(), query: null, answers: [], activeLine: L('set pascal[i][0]'), message: `C(${i}, ${j}) = ${pascal[i][j]}.` })
     }
   }
   const answers = []
@@ -63,9 +63,9 @@ export function buildTrace({ queries }) {
     for (const [, e] of factored[index]) ways = (ways * pascal[e + n - 1][n - 1]) % MOD
     answers.push(ways)
     const primes = factored[index].map(([p, e]) => `${p}^${e}`).join(' ') || 'none (k = 1)'
-    frames.push({ phase: 'query', cell: null, table: snap(), query: index, answers: [...answers], activeLine: L('add ways to answers'), message: `Query [${n}, ${k}]: prime powers ${primes}, so ${ways} arrays.` })
+    frames.push({ phase: 'query', pythonLine: 33, cell: null, table: snap(), query: index, answers: [...answers], activeLine: L('add ways to answers'), message: `Query [${n}, ${k}]: prime powers ${primes}, so ${ways} arrays.` })
   })
-  frames.push({ phase: 'done', cell: null, table: snap(), query: null, answers: [...answers], activeLine: L('return answers'), result: answers, message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 34, cell: null, table: snap(), query: null, answers: [...answers], activeLine: L('return answers'), result: answers, message: `Answers: ${answers.join(', ')}.` })
   return { input: { queries }, result: answers, frames }
 }
 

@@ -27,7 +27,7 @@ export function buildTrace({ nums, queries }) {
     }
   }
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('build a binary trie'), q: -1, x: null, m: null, answer: null, chosen: null, answers: [], message: `Insert ${nums.length} numbers into the trie.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('build a binary trie'), q: -1, x: null, m: null, answer: null, chosen: null, answers: [], message: `Insert ${nums.length} numbers into the trie.` }]
   queries.forEach(([x, m], q) => {
     let answer
     let chosen = null
@@ -53,9 +53,9 @@ export function buildTrace({ nums, queries }) {
       activeLine = L('walk the trie')
     }
     answers.push(answer)
-    frames.push({ phase: 'query', activeLine, q, x, m, answer, chosen, answers: [...answers], message: answer === -1 ? `No number is at most ${m}, so the answer is -1.` : `Best partner for ${x} under ${m} is ${chosen}, giving ${answer}.` })
+    frames.push({ phase: 'query', pythonLine: answer === -1 ? 16 : 28, activeLine, q, x, m, answer, chosen, answers: [...answers], message: answer === -1 ? `No number is at most ${m}, so the answer is -1.` : `Best partner for ${x} under ${m} is ${chosen}, giving ${answer}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), q: queries.length, x: null, m: null, answer: null, chosen: null, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return answers'), q: queries.length, x: null, m: null, answer: null, chosen: null, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input: { nums, queries }, result: answers, frames }
 }
 

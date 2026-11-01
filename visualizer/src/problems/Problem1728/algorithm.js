@@ -100,14 +100,14 @@ export function solveGame(grid, catJump, mouseJump) {
 export function buildTrace({ grid, catJump, mouseJump }) {
   const input = { grid, catJump, mouseJump }
   const game = solveGame(grid, catJump, mouseJump)
-  const frames = [{ phase: 'start', activeLine: L('mark finished states'), depth: 0, decided: 0, message: 'Finished states are known: the mouse on food, or the cat on the mouse or on food.' }]
+  const frames = [{ phase: 'start', pythonLine: 45, activeLine: L('mark finished states'), depth: 0, decided: 0, message: 'Finished states are known: the mouse on food, or the cat on the mouse or on food.' }]
   let decided = 0
   for (const layer of game.layers) {
     decided += layer.decided
-    frames.push({ phase: 'layer', activeLine: L('a state where the mouse moves is a mouse win'), depth: layer.depth, decided, message: `${decided} states decided after ${layer.depth} moves.` })
+    frames.push({ phase: 'layer', pythonLine: 46, activeLine: L('a state where the mouse moves is a mouse win'), depth: layer.depth, decided, message: `${decided} states decided after ${layer.depth} moves.` })
   }
   const result = game.mouseWins
-  frames.push({ phase: 'done', activeLine: L('return whether the start state'), depth: game.moves, decided, message: result ? `The mouse wins in ${game.moves} moves.` : 'The mouse cannot force food within 1000 turns, so the cat wins.' })
+  frames.push({ phase: 'done', pythonLine: 78, activeLine: L('return whether the start state'), depth: game.moves, decided, message: result ? `The mouse wins in ${game.moves} moves.` : 'The mouse cannot force food within 1000 turns, so the cat wins.' })
   return { input, result, frames }
 }
 

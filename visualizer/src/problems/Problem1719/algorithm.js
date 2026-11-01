@@ -25,23 +25,23 @@ export function buildTrace({ pairs }) {
   let ways = 1
   let valid = true
   const links = () => [...parent].map(([child, above]) => [child, above])
-  const frames = [{ phase: 'start', activeLine: L('build a related-pairs graph'), group: nodes, universal: [], links: [], ways, result: null, message: `Values in the pairs: ${nodes.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('build a related-pairs graph'), group: nodes, universal: [], links: [], ways, result: null, message: `Values in the pairs: ${nodes.join(', ')}.` }]
   const solve = (group, above) => {
     const members = new Set(group)
     const universal = group.filter(v => [...adj.get(v)].filter(w => members.has(w)).length === group.length - 1)
-    frames.push({ phase: 'group', activeLine: L('find the nodes related to every other node'), group, universal, links: links(), ways, result: null, message: `In ${group.join(', ')}, related to every other member: ${universal.join(', ') || 'none'}.` })
+    frames.push({ phase: 'group', pythonLine: 11, activeLine: L('find the nodes related to every other node'), group, universal, links: links(), ways, result: null, message: `In ${group.join(', ')}, related to every other member: ${universal.join(', ') || 'none'}.` })
     if (universal.length === 0) {
       valid = false
-      frames.push({ phase: 'zero', activeLine: L('if there are none'), group, universal, links: links(), ways, result: null, message: 'No value is related to all the others here, so no tree fits.' })
+      frames.push({ phase: 'zero', pythonLine: 13, activeLine: L('if there are none'), group, universal, links: links(), ways, result: null, message: 'No value is related to all the others here, so no tree fits.' })
       return
     }
     if (universal.length >= 2) {
       ways = 2
-      frames.push({ phase: 'group', activeLine: L('if there are two or more'), group, universal, links: links(), ways, result: null, message: 'Two or more can be stacked in either order, so there is more than one tree.' })
+      frames.push({ phase: 'group', pythonLine: 15, activeLine: L('if there are two or more'), group, universal, links: links(), ways, result: null, message: 'Two or more can be stacked in either order, so there is more than one tree.' })
     }
     let bottom = above
     for (const u of universal) { parent.set(u, bottom); bottom = u }
-    frames.push({ phase: 'chain', activeLine: L('stack these nodes'), group, universal, links: links(), ways, result: null, message: `Stack ${universal.join(', ')} as a chain below ${above === null ? 'the root' : above}.` })
+    frames.push({ phase: 'chain', pythonLine: 19, activeLine: L('stack these nodes'), group, universal, links: links(), ways, result: null, message: `Stack ${universal.join(', ')} as a chain below ${above === null ? 'the root' : above}.` })
     const rest = group.filter(v => !universal.includes(v))
     const restSet = new Set(rest)
     const seen = new Set()
@@ -56,7 +56,7 @@ export function buildTrace({ pairs }) {
         for (const w of adj.get(x)) if (restSet.has(w) && !seen.has(w)) { seen.add(w); stack.push(w) }
       }
       part.sort((a, b) => a - b)
-      frames.push({ phase: 'split', activeLine: L('split the rest of the group'), group: part, universal: [], links: links(), ways, result: null, message: `Unrelated part ${part.join(', ')} hangs below the chain.` })
+      frames.push({ phase: 'split', pythonLine: 30, activeLine: L('split the rest of the group'), group: part, universal: [], links: links(), ways, result: null, message: `Unrelated part ${part.join(', ')} hangs below the chain.` })
       solve(part, bottom)
       if (!valid) return
     }
@@ -72,7 +72,7 @@ export function buildTrace({ pairs }) {
     valid = related.size === wanted.size && [...wanted].every(k => related.has(k))
   }
   const result = valid ? Math.min(ways, 2) : 0
-  frames.push({ phase: 'done', activeLine: L('capped at two'), group: [], universal: [], links: links(), ways, result, message: `Ways to reconstruct: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: valid ? 53 : 52, activeLine: L('capped at two'), group: [], universal: [], links: links(), ways, result, message: `Ways to reconstruct: ${result}.` })
   return { input: { pairs }, result, frames }
 }
 

@@ -16,26 +16,26 @@ export function buildTrace({ m, k, operations }) {
   const stream = []
   const results = []
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('set stream to empty'), stream: [], last: null, results: [], message: `Track the last ${m} values, drop the ${k} smallest and ${k} largest.` })
+  frames.push({ phase: 'start', activeLine: L('set stream to empty'), pythonLine: P('stream = []'), stream: [], last: null, results: [], message: `Track the last ${m} values, drop the ${k} smallest and ${k} largest.` })
   for (const op of operations) {
     if (op[0] === 'add') {
       stream.push(op[1])
       results.push(null)
-      frames.push({ phase: 'add', activeLine: L('if the operation is add'), stream: [...stream], last: null, results: [...results], message: `Add ${op[1]} to the stream.` })
+      frames.push({ phase: 'add', activeLine: L('if the operation is add'), pythonLine: P('results.append(None)'), stream: [...stream], last: null, results: [...results], message: `Add ${op[1]} to the stream.` })
       continue
     }
     if (stream.length < m) {
       results.push(-1)
-      frames.push({ phase: 'calc', activeLine: L('fewer than m values'), stream: [...stream], last: -1, results: [...results], message: `Only ${stream.length} values, fewer than ${m}, so the answer is -1.` })
+      frames.push({ phase: 'calc', activeLine: L('fewer than m values'), pythonLine: P('results.append(-1)'), stream: [...stream], last: -1, results: [...results], message: `Only ${stream.length} values, fewer than ${m}, so the answer is -1.` })
       continue
     }
     const sorted = stream.slice(-m).sort((a, b) => a - b)
     const middle = sorted.slice(k, m - k)
     const average = Math.floor(middle.reduce((a, b) => a + b, 0) / (m - 2 * k))
     results.push(average)
-    frames.push({ phase: 'calc', activeLine: L('record the floor'), stream: [...stream], last: average, results: [...results], message: `Sorted last ${m} values, kept [${middle.join(', ')}]. Average ${average}.` })
+    frames.push({ phase: 'calc', activeLine: L('record the floor'), pythonLine: P('results.append(sum(middle)'), stream: [...stream], last: average, results: [...results], message: `Sorted last ${m} values, kept [${middle.join(', ')}]. Average ${average}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the records'), stream: [...stream], last: null, results: [...results], message: 'All operations are processed.' })
+  frames.push({ phase: 'done', activeLine: L('return the records'), pythonLine: P('return results'), stream: [...stream], last: null, results: [...results], message: 'All operations are processed.' })
   return { input: { m, k, operations }, result: results, frames }
 }
 
@@ -52,6 +52,8 @@ export const code = `finding mk average (m, k, operations):
         record the floor of the sum of the rest divided by m minus 2k
   return the records`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 
 export const python = `def mk_average(m, k, operations):
     stream = []
