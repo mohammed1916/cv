@@ -17,24 +17,24 @@ export function buildTrace(input) {
   let total = 0
   let taken = 0
   const used = {}
-  const frames = [{ phase: 'start', activeLine: L('sort item indexes'), index: -1, total, taken, message: 'Sort the items by value, largest first.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('sort item indexes'), index: -1, total, taken, message: 'Sort the items by value, largest first.' }]
   for (const i of order) {
     if (taken >= num_wanted) {
-      frames.push({ phase: 'stop', activeLine: L('if taken is at least'), index: i, total, taken, message: `${taken} items taken, which is num_wanted; stop.` })
+      frames.push({ phase: 'stop', pythonLine: 8, activeLine: L('if taken is at least'), index: i, total, taken, message: `${taken} items taken, which is num_wanted; stop.` })
       break
     }
     const label = labels[i]
     const count = used[label] ?? 0
     if (count >= use_limit) {
-      frames.push({ phase: 'skip', activeLine: L('if the label of this item'), index: i, total, taken, message: `Skip ${values[i]}: label ${label} already has ${use_limit} items.` })
+      frames.push({ phase: 'skip', pythonLine: 11, activeLine: L('if the label of this item'), index: i, total, taken, message: `Skip ${values[i]}: label ${label} already has ${use_limit} items.` })
       continue
     }
     total += values[i]
     taken += 1
     used[label] = count + 1
-    frames.push({ phase: 'take', activeLine: L('otherwise add its value'), index: i, total, taken, message: `Take ${values[i]} with label ${label}; total is ${total}.` })
+    frames.push({ phase: 'take', pythonLine: 12, activeLine: L('otherwise add its value'), index: i, total, taken, message: `Take ${values[i]} with label ${label}; total is ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, total, taken, message: `Largest total is ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return total'), index: -1, total, taken, message: `Largest total is ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const counts = new Map()
   for (const letter of tiles) counts.set(letter, (counts.get(letter) || 0) + 1)
   const letters = [...counts.keys()].sort()
-  const frames = [{ phase: 'start', activeLine: L('count the tiles of each letter'), letter: null, word: '', total: 0, message: 'Count the tiles of each letter, then build sequences from them.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('count the tiles of each letter'), letter: null, word: '', total: 0, message: 'Count the tiles of each letter, then build sequences from them.' }]
   const word = []
   let total = 0
   const build = () => {
@@ -21,15 +21,15 @@ export function buildTrace(input) {
       counts.set(letter, counts.get(letter) - 1)
       word.push(letter)
       total++
-      frames.push({ phase: 'use', activeLine: L('add one to the count'), letter, word: word.join(''), total, message: `Use ${letter}: "${word.join('')}" is one more sequence.` })
+      frames.push({ phase: 'use', pythonLine: 13, activeLine: L('add one to the count'), letter, word: word.join(''), total, message: `Use ${letter}: "${word.join('')}" is one more sequence.` })
       build()
       word.pop()
       counts.set(letter, counts.get(letter) + 1)
-      frames.push({ phase: 'back', activeLine: L('put the tile back'), letter, word: word.join(''), total, message: `Put ${letter} back and try the next letter.` })
+      frames.push({ phase: 'back', pythonLine: 15, activeLine: L('put the tile back'), letter, word: word.join(''), total, message: `Put ${letter} back and try the next letter.` })
     }
   }
   build()
-  frames.push({ phase: 'done', activeLine: L('return the number of sequences'), letter: null, word: '', total, message: `${total} non-empty sequences can be made.` })
+  frames.push({ phase: 'done', pythonLine: 18, activeLine: L('return the number of sequences'), letter: null, word: '', total, message: `${total} non-empty sequences can be made.` })
   return { input, result: total, frames }
 }
 

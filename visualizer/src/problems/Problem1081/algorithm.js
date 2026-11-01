@@ -13,7 +13,8 @@ export function buildTrace({ s }) {
   const stack = []
   const inStack = new Set()
   const frames = []
-  const frame = (phase, line, index, message, extra = {}) => frames.push({ phase, activeLine: line, index, stack: [...stack], inStack: [...inStack], message, ...extra })
+  const PY = { start: 4, scan: 7, skip: 9, pop: 11, push: 12, done: 14 }
+  const frame = (phase, line, index, message, extra = {}) => frames.push({ phase, pythonLine: PY[phase], activeLine: line, index, stack: [...stack], inStack: [...inStack], message, ...extra })
   frame('start', L('record the last position'), -1, 'Record where each letter last appears in s.')
   for (let i = 0; i < s.length; i++) {
     const c = s[i]

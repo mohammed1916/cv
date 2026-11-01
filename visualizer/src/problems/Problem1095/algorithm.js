@@ -19,21 +19,21 @@ export function buildTrace(input) {
   const frames = []
   let lo = 0
   let hi = arr.length - 1
-  frames.push({ phase: 'start', activeLine: L('binary search for the peak index'), lo, hi, mid: -1, peak: -1, found: -1, message: `Search the whole array of length ${arr.length} for the peak.` })
+  frames.push({ phase: 'start', pythonLine: 3, activeLine: L('binary search for the peak index'), lo, hi, mid: -1, peak: -1, found: -1, message: `Search the whole array of length ${arr.length} for the peak.` })
   while (lo < hi) {
     const mid = (lo + hi) >> 1
-    frames.push({ phase: 'peak', activeLine: L('if the middle value is less'), lo, hi, mid, peak: -1, found: -1, message: `Middle ${mid} has value ${arr[mid]} and its right neighbor ${arr[mid + 1]}.` })
+    frames.push({ phase: 'peak', pythonLine: 6, activeLine: L('if the middle value is less'), lo, hi, mid, peak: -1, found: -1, message: `Middle ${mid} has value ${arr[mid]} and its right neighbor ${arr[mid + 1]}.` })
     if (arr[mid] < arr[mid + 1]) lo = mid + 1
     else hi = mid
   }
   const peak = lo
-  frames.push({ phase: 'peak', activeLine: L('if the middle value is less'), lo, hi, mid: -1, peak, found: -1, message: `The peak is at index ${peak}.` })
+  frames.push({ phase: 'peak', pythonLine: 10, activeLine: L('if the middle value is less'), lo, hi, mid: -1, peak, found: -1, message: `The peak is at index ${peak}.` })
   let found = -1
   lo = 0
   hi = peak
   while (lo <= hi && found === -1) {
     const mid = (lo + hi) >> 1
-    frames.push({ phase: 'ascending', activeLine: L('binary search the ascending part'), lo, hi, mid, peak, found: -1, message: `Ascending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
+    frames.push({ phase: 'ascending', pythonLine: 14, activeLine: L('binary search the ascending part'), lo, hi, mid, peak, found: -1, message: `Ascending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
     if (arr[mid] === target) found = mid
     else if (arr[mid] < target) lo = mid + 1
     else hi = mid - 1
@@ -43,13 +43,13 @@ export function buildTrace(input) {
     hi = arr.length - 1
     while (lo <= hi && found === -1) {
       const mid = (lo + hi) >> 1
-      frames.push({ phase: 'descending', activeLine: L('binary search the descending part'), lo, hi, mid, peak, found: -1, message: `Descending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
+      frames.push({ phase: 'descending', pythonLine: 23, activeLine: L('binary search the descending part'), lo, hi, mid, peak, found: -1, message: `Descending part: compare index ${mid} (value ${arr[mid]}) with ${target}.` })
       if (arr[mid] === target) found = mid
       else if (arr[mid] > target) lo = mid + 1
       else hi = mid - 1
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the index'), lo: -1, hi: -1, mid: -1, peak, found, message: found === -1 ? `${target} is not in the mountain.` : `${target} first appears at index ${found}.` })
+  frames.push({ phase: 'done', pythonLine: found === -1 ? 29 : found <= peak ? 15 : 24, activeLine: L('return the index'), lo: -1, hi: -1, mid: -1, peak, found, message: found === -1 ? `${target} is not in the mountain.` : `${target} first appears at index ${found}.` })
   return { input, result: found, frames }
 }
 

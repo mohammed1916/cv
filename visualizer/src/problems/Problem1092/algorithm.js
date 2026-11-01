@@ -15,7 +15,8 @@ export function buildTrace(input) {
   const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(null))
   const frames = []
   const snapshot = () => dp.map(row => [...row])
-  const frame = (phase, line, cell, answer, message) => frames.push({ phase, activeLine: line, cell, answer, dp: snapshot(), message })
+  const PYL = { [L('set the table to rows')]: 3, [L('if the characters at the cell match')]: 11, [L('otherwise set the cell to one plus')]: 13, [L('set i and j to 0')]: 14, [L('if str1 is used up')]: 18, [L('if str2 is used up')]: 21, [L('if the characters match then')]: 24, [L('if the cell below is no longer')]: 28, [L('otherwise append str2')]: 31, [L('return the built string')]: 33 }
+  const frame = (phase, line, cell, answer, message) => frames.push({ phase, pythonLine: PYL[line], activeLine: line, cell, answer, dp: snapshot(), message })
   frame('start', L('set the table to rows'), null, '', 'Each cell holds the shortest supersequence length for the suffixes starting there.')
   for (let j = 0; j <= m; j++) dp[n][j] = m - j
   for (let i = 0; i <= n; i++) dp[i][m] = n - i

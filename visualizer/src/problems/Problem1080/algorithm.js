@@ -42,31 +42,31 @@ export function buildTrace({ root: arr, limit }) {
   const original = treeFromLevelOrder(arr)
   const working = treeFromLevelOrder(arr)
   const removed = []
-  const frames = [{ phase: 'start', activeLine: L('let pruned be a copy'), node: null, removed: [], message: `Remove every node that only lies on paths with sum below ${limit}.` }]
+  const frames = [{ phase: 'start', pythonLine: 51, activeLine: L('let pruned be a copy'), node: null, removed: [], message: `Remove every node that only lies on paths with sum below ${limit}.` }]
   const keep = (node, sum) => {
     if (!node) return null
     const total = sum + node.value
     if (!node.left && !node.right) {
       if (total >= limit) {
-        frames.push({ phase: 'keep', activeLine: L('if node is a leaf'), node: node.id, removed: [...removed], message: `Leaf ${node.value} has path sum ${total}, which is enough.` })
+        frames.push({ phase: 'keep', pythonLine: 46, activeLine: L('if node is a leaf'), node: node.id, removed: [...removed], message: `Leaf ${node.value} has path sum ${total}, which is enough.` })
         return node
       }
       removed.push(node.id)
-      frames.push({ phase: 'remove', activeLine: L('if node is a leaf'), node: node.id, removed: [...removed], message: `Leaf ${node.value} has path sum ${total}, below ${limit}; remove it.` })
+      frames.push({ phase: 'remove', pythonLine: 46, activeLine: L('if node is a leaf'), node: node.id, removed: [...removed], message: `Leaf ${node.value} has path sum ${total}, below ${limit}; remove it.` })
       return null
     }
     node.left = keep(node.left, total)
     node.right = keep(node.right, total)
     if (!node.left && !node.right) {
       removed.push(node.id)
-      frames.push({ phase: 'remove', activeLine: L('if both children were removed'), node: node.id, removed: [...removed], message: `Both children of ${node.value} were removed, so it goes too.` })
+      frames.push({ phase: 'remove', pythonLine: 49, activeLine: L('if both children were removed'), node: node.id, removed: [...removed], message: `Both children of ${node.value} were removed, so it goes too.` })
       return null
     }
     return node
   }
   const pruned = keep(working, 0)
   const result = serialize(pruned)
-  frames.push({ phase: 'done', activeLine: L('return the level-order list'), node: null, removed: [...removed], message: `Remaining tree: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 38, activeLine: L('return the level-order list'), node: null, removed: [...removed], message: `Remaining tree: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
   return { input: { root: arr, limit }, original, result, frames }
 }
 

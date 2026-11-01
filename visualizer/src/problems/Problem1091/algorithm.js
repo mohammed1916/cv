@@ -15,8 +15,8 @@ export function buildTrace(input) {
   const dist = grid.map(row => row.map(() => 0))
   const frames = []
   if (grid[0][0] === 1 || grid[n - 1][n - 1] === 1) {
-    frames.push({ phase: 'blocked', activeLine: L('if the start or end cell is blocked'), current: null, frontier: [], visited: [], message: 'The start or end cell is blocked, so there is no path.' })
-    frames.push({ phase: 'done', activeLine: L('the queue empties'), current: null, frontier: [], visited: [], message: 'Answer: -1.' })
+    frames.push({ phase: 'blocked', pythonLine: 3, activeLine: L('if the start or end cell is blocked'), current: null, frontier: [], visited: [], message: 'The start or end cell is blocked, so there is no path.' })
+    frames.push({ phase: 'done', pythonLine: 4, activeLine: L('the queue empties'), current: null, frontier: [], visited: [], message: 'Answer: -1.' })
     return { input, result: -1, frames }
   }
   dist[0][0] = 1
@@ -24,15 +24,15 @@ export function buildTrace(input) {
   const reached = [[0, 0]]
   let head = 0
   let answer = -1
-  frames.push({ phase: 'start', activeLine: L('set distance of the start cell'), current: null, frontier: [[0, 0]], visited: [[0, 0]], message: 'Start at the top left cell with distance 1.' })
+  frames.push({ phase: 'start', pythonLine: 6, activeLine: L('set distance of the start cell'), current: null, frontier: [[0, 0]], visited: [[0, 0]], message: 'Start at the top left cell with distance 1.' })
   while (head < queue.length) {
     const [r, c] = queue[head++]
     if (r === n - 1 && c === n - 1) {
       answer = dist[r][c]
-      frames.push({ phase: 'found', activeLine: L('return its distance'), current: [r, c], frontier: queue.slice(head), visited: [...reached], message: `Reached the bottom right cell at distance ${answer}.` })
+      frames.push({ phase: 'found', pythonLine: 13, activeLine: L('return its distance'), current: [r, c], frontier: queue.slice(head), visited: [...reached], message: `Reached the bottom right cell at distance ${answer}.` })
       break
     }
-    frames.push({ phase: 'pop', activeLine: L('take the first cell from the queue'), current: [r, c], frontier: queue.slice(head), visited: [...reached], message: `Process (${r}, ${c}) at distance ${dist[r][c]}.` })
+    frames.push({ phase: 'pop', pythonLine: 10, activeLine: L('take the first cell from the queue'), current: [r, c], frontier: queue.slice(head), visited: [...reached], message: `Process (${r}, ${c}) at distance ${dist[r][c]}.` })
     for (const [dr, dc] of DIRS) {
       const nr = r + dr
       const nc = c + dc
@@ -43,7 +43,7 @@ export function buildTrace(input) {
       }
     }
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('the queue empties'), current: null, frontier: [], visited: [...reached], message: 'The queue emptied before the bottom right cell was reached: -1.' })
+  if (answer === -1) frames.push({ phase: 'done', pythonLine: 20, activeLine: L('the queue empties'), current: null, frontier: [], visited: [...reached], message: 'The queue emptied before the bottom right cell was reached: -1.' })
   return { input, result: answer, frames }
 }
 

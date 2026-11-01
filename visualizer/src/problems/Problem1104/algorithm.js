@@ -9,7 +9,7 @@ export function parseInput(text) {
 export function buildTrace({ label }) {
   let row = 0
   while (2 ** (row + 1) <= label) row += 1
-  const frames = [{ phase: 'start', activeLine: L('set the row'), row, path: [label], message: `Label ${label} sits in row ${row} of the tree.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set the row'), row, path: [label], message: `Label ${label} sits in row ${row} of the tree.` }]
   let current = label
   const up = [label]
   while (row > 0) {
@@ -19,10 +19,10 @@ export function buildTrace({ label }) {
     row -= 1
     current = row % 2 === 1 ? 2 ** row + 2 ** (row + 1) - 1 - parentHeap : parentHeap
     up.push(current)
-    frames.push({ phase: 'climb', activeLine: L('add the parent label'), row, path: up.slice().reverse(), message: `The parent of the previous label is ${current}, in row ${row}.` })
+    frames.push({ phase: 'climb', pythonLine: 18, activeLine: L('add the parent label'), row, path: up.slice().reverse(), message: `The parent of the previous label is ${current}, in row ${row}.` })
   }
   const result = up.reverse()
-  frames.push({ phase: 'done', activeLine: L('return the path'), row: 0, path: result, message: `The path from the root is ${result.join(' to ')}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the path'), row: 0, path: result, message: `The path from the root is ${result.join(' to ')}.` })
   return { input: { label }, result, frames }
 }
 

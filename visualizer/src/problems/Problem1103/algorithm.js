@@ -13,16 +13,16 @@ export function buildTrace(input) {
   let left = candies
   let give = 1
   let person = 0
-  const frames = [{ phase: 'start', activeLine: L('set every person'), person: -1, totals: [...totals], left, message: `${candies} candies and ${numPeople} people. The first gift is 1.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set every person'), person: -1, totals: [...totals], left, message: `${candies} candies and ${numPeople} people. The first gift is 1.` }]
   while (left > 0) {
     const amount = Math.min(give, left)
     totals[person] += amount
     left -= amount
-    frames.push({ phase: 'give', activeLine: L('give the smaller'), person, totals: [...totals], left, message: `Give ${amount} to person ${person}. ${left} candies remain.` })
+    frames.push({ phase: 'give', pythonLine: 7, activeLine: L('give the smaller'), person, totals: [...totals], left, message: `Give ${amount} to person ${person}. ${left} candies remain.` })
     give += 1
     person = (person + 1) % numPeople
   }
-  frames.push({ phase: 'done', activeLine: L('return the totals'), person: -1, totals: [...totals], left, message: `Final totals: ${totals.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the totals'), person: -1, totals: [...totals], left, message: `Final totals: ${totals.join(', ')}.` })
   return { input, result: totals, frames }
 }
 

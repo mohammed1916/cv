@@ -26,7 +26,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ matrix, target }) {
   const rows = matrix.length, cols = matrix[0].length
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), top: -1, bottom: -1, columnSums: [], found: 0, count, message: `Find submatrices whose sum is ${target}. Fix a pair of rows; the columns between them become one array of column sums.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set count to 0'), top: -1, bottom: -1, columnSums: [], found: 0, count, message: `Find submatrices whose sum is ${target}. Fix a pair of rows; the columns between them become one array of column sums.` }]
   for (let top = 0; top < rows; top++) {
     const columnSums = new Array(cols).fill(0)
     for (let bottom = top; bottom < rows; bottom++) {
@@ -40,10 +40,10 @@ export function buildTrace({ matrix, target }) {
         seen.set(running, (seen.get(running) ?? 0) + 1)
       }
       count += found
-      frames.push({ phase: 'band', activeLine: L('found = number of subarrays'), top, bottom, columnSums: [...columnSums], found, count, message: `Rows ${top} to ${bottom} give column sums [${columnSums.join(', ')}]. ${found} subarray(s) add to ${target}, so the count is now ${count}.` })
+      frames.push({ phase: 'band', pythonLine: 14, activeLine: L('found = number of subarrays'), top, bottom, columnSums: [...columnSums], found, count, message: `Rows ${top} to ${bottom} give column sums [${columnSums.join(', ')}]. ${found} subarray(s) add to ${target}, so the count is now ${count}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), top: -1, bottom: -1, columnSums: [], found: 0, count, message: `Total submatrices with sum ${target}: ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return count'), top: -1, bottom: -1, columnSums: [], found: 0, count, message: `Total submatrices with sum ${target}: ${count}.` })
   return { input: { matrix, target }, result: count, frames }
 }
 
