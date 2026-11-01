@@ -29,7 +29,7 @@ export function buildTrace({ stones }) {
   const sum = (i, j) => prefix[j + 1] - prefix[i]
   const best = Array.from({ length: n }, () => Array(n).fill('–'))
   for (let i = 0; i < n; i++) best[i][i] = 0
-  const frames = [{ phase: 'start', cell: null, split: null, table: best.map(r => [...r]), activeLine: L('set best[i][i]'), message: 'A single stone gives Alice no score, since the game ends.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, cell: null, split: null, table: best.map(r => [...r]), activeLine: L('set best[i][i]'), message: 'A single stone gives Alice no score, since the game ends.' }]
   for (let length = 2; length <= n; length++) {
     for (let i = 0; i + length - 1 < n; i++) {
       const j = i + length - 1
@@ -44,14 +44,14 @@ export function buildTrace({ stones }) {
         else if (right < left) { candidate = right + best[k + 1][j]; line = 'if right is smaller'; text = `right ${right} < left ${left}: Bob drops the left part, so Alice scores ${right} and plays on.` }
         else { candidate = Math.max(left + best[i][k], right + best[k + 1][j]); line = 'if they are equal'; text = `left and right tie at ${left}: Alice keeps whichever part scores more.` }
         top = Math.max(top, candidate)
-        frames.push({ phase: 'split', cell: [i, j], split: k, table: best.map(r => [...r]), activeLine: L(line), message: `Stones ${i + 1}-${j + 1}, split after ${k + 1}: ${text}` })
+        frames.push({ phase: 'split', pythonLine: left < right ? 15 : right < left ? 17 : 19, cell: [i, j], split: k, table: best.map(r => [...r]), activeLine: L(line), message: `Stones ${i + 1}-${j + 1}, split after ${k + 1}: ${text}` })
       }
       best[i][j] = top
-      frames.push({ phase: 'interval', cell: [i, j], split: null, table: best.map(r => [...r]), activeLine: L('keep the largest candidate'), message: `Best score from stones ${i + 1} to ${j + 1} is ${top}.` })
+      frames.push({ phase: 'interval', pythonLine: 21, cell: [i, j], split: null, table: best.map(r => [...r]), activeLine: L('keep the largest candidate'), message: `Best score from stones ${i + 1} to ${j + 1} is ${top}.` })
     }
   }
   const result = best[0][n - 1]
-  frames.push({ phase: 'done', cell: [0, n - 1], split: null, table: best.map(r => [...r]), activeLine: L('return best[0][n-1]'), result, message: `Alice's best total score is ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 22, cell: [0, n - 1], split: null, table: best.map(r => [...r]), activeLine: L('return best[0][n-1]'), result, message: `Alice's best total score is ${result}.` })
   return { input: { stones }, result, frames }
 }
 

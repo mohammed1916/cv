@@ -81,34 +81,34 @@ export function buildTrace(input) {
     activeLine, phase, message, bits: [...bits], runEnd: [...runEnd], groupsOfM, last, m, n, active: -1, ...state, ...extra,
   });
 
-  frame(5, "init", `Start with ${n} zeros, no runs, and last = -1.`);
+  frame(5, "init", `Start with ${n} zeros, no runs, and last = -1.`, { pythonLine: 5 });
   for (let step = 1; step <= n; step++) {
     const pos = arr[step - 1];
     bits[pos - 1] = 1;
     state = { step, pos, active: pos - 1 };
-    frame(7, "loop", `Step ${step}: bit ${pos} becomes 1.`);
+    frame(7, "loop", `Step ${step}: bit ${pos} becomes 1.`, { pythonLine: 7 });
     const left = runEnd[pos - 1];
     const right = runEnd[pos + 1];
     state = { step, pos, left, right, active: pos - 1 };
-    frame(8, "merge", `Run ending at ${pos - 1} has length ${left}; run starting at ${pos + 1} has length ${right}.`);
+    frame(8, "merge", `Run ending at ${pos - 1} has length ${left}; run starting at ${pos + 1} has length ${right}.`, { pythonLine: 9 });
     if (left === m) groupsOfM -= 1;
-    frame(9, "count", left === m ? `Left run has length m, so it is no longer a group of exactly m: groups of m = ${groupsOfM}.` : `Left run length ${left} is not m; no change.`);
+    frame(9, "count", left === m ? `Left run has length m, so it is no longer a group of exactly m: groups of m = ${groupsOfM}.` : `Left run length ${left} is not m; no change.`, { pythonLine: left === m ? 11 : 10 });
     if (right === m) groupsOfM -= 1;
-    frame(10, "count", right === m ? `Right run has length m, so it is no longer a group of exactly m: groups of m = ${groupsOfM}.` : `Right run length ${right} is not m; no change.`);
+    frame(10, "count", right === m ? `Right run has length m, so it is no longer a group of exactly m: groups of m = ${groupsOfM}.` : `Right run length ${right} is not m; no change.`, { pythonLine: right === m ? 13 : 12 });
     const total = left + right + 1;
     state = { step, pos, left, right, total, active: pos - 1 };
-    frame(11, "merge", `Merged run length is ${left} + ${right} + 1 = ${total}.`);
+    frame(11, "merge", `Merged run length is ${left} + ${right} + 1 = ${total}.`, { pythonLine: 14 });
     runEnd[pos - left] = total;
-    frame(12, "merge", `Store ${total} at the left endpoint ${pos - left}.`);
+    frame(12, "merge", `Store ${total} at the left endpoint ${pos - left}.`, { pythonLine: 15 });
     runEnd[pos + right] = total;
-    frame(13, "merge", `Store ${total} at the right endpoint ${pos + right}.`);
+    frame(13, "merge", `Store ${total} at the right endpoint ${pos + right}.`, { pythonLine: 16 });
     if (total === m) groupsOfM += 1;
-    frame(14, "count", total === m ? `The merged run has length m: groups of m = ${groupsOfM}.` : `The merged run length ${total} is not m.`);
+    frame(14, "count", total === m ? `The merged run has length m: groups of m = ${groupsOfM}.` : `The merged run length ${total} is not m.`, { pythonLine: total === m ? 18 : 17 });
     if (groupsOfM > 0) last = step;
-    frame(15, "check", groupsOfM > 0 ? `A run of length m exists, so last = ${step}.` : `No run of length m exists yet; last stays ${last}.`);
+    frame(15, "check", groupsOfM > 0 ? `A run of length m exists, so last = ${step}.` : `No run of length m exists yet; last stays ${last}.`, { pythonLine: groupsOfM > 0 ? 20 : 19 });
   }
   state = {};
-  frame(16, "done", `Return ${last}.`, { result: last });
+  frame(16, "done", `Return ${last}.`, { pythonLine: 21, result: last });
 
   return { input: { arr, m }, result: last, frames };
 }

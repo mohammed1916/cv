@@ -29,7 +29,7 @@ export function buildTrace({ nums }) {
     pascal[i][0] = 1
     for (let j = 1; j <= i; j++) pascal[i][j] = (pascal[i - 1][j - 1] + pascal[i - 1][j]) % MOD
   }
-  const frames = [{ phase: 'start', segment: [...nums], root: null, value: null, activeLine: L('set pascal'), message: `Split ${nums.join(', ')} around its first value ${nums[0]}.` }]
+  const frames = [{ phase: 'start', pythonLine: 8, segment: [...nums], root: null, value: null, activeLine: L('set pascal'), message: `Split ${nums.join(', ')} around its first value ${nums[0]}.` }]
   const count = arr => {
     if (arr.length === 0) return 1
     const root = arr[0]
@@ -38,13 +38,13 @@ export function buildTrace({ nums }) {
     const choose = pascal[arr.length - 1][left.length]
     const value = (((choose * count(left)) % MOD) * count(right)) % MOD
     if (arr.length >= 2) {
-      frames.push({ phase: 'combine', segment: [...arr], root, value, activeLine: L('return C(len(arr)-1'), message: `${arr.join(', ')} with root ${root}: C(${arr.length - 1}, ${left.length}) interleavings times the two sides gives ${value}.` })
+      frames.push({ phase: 'combine', pythonLine: 16, segment: [...arr], root, value, activeLine: L('return C(len(arr)-1'), message: `${arr.join(', ')} with root ${root}: C(${arr.length - 1}, ${left.length}) interleavings times the two sides gives ${value}.` })
     }
     return value
   }
   const total = count(nums)
   const result = (total - 1 + MOD) % MOD
-  frames.push({ phase: 'done', segment: [...nums], root: null, value: result, activeLine: L('return count(nums)'), result, message: `Orderings with the same tree, excluding the original: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 18, segment: [...nums], root: null, value: result, activeLine: L('return count(nums)'), result, message: `Orderings with the same tree, excluding the original: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

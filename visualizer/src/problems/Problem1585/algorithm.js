@@ -26,13 +26,13 @@ export function buildTrace({ s, t }) {
   const pos = Array.from({ length: 10 }, () => [])
   ;[...s].forEach((ch, i) => pos[Number(ch)].push(i))
   const consumed = []
-  const frames = [{ phase: 'start', activeLine: L('set pos to'), index: -1, active: -1, consumed: [], message: `Record where each digit sits in s: ${s}.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set pos to'), index: -1, active: -1, consumed: [], message: `Record where each digit sits in s: ${s}.` }]
   let ok = true
   for (let i = 0; i < t.length && ok; i++) {
     const c = Number(t[i])
     if (pos[c].length === 0) {
       ok = false
-      frames.push({ phase: 'missing', activeLine: L('if pos[c] is empty'), index: i, active: -1, consumed: [...consumed], message: `Position ${i} of t needs a ${c}, but none is left in s.` })
+      frames.push({ phase: 'missing', pythonLine: 8, activeLine: L('if pos[c] is empty'), index: i, active: -1, consumed: [...consumed], message: `Position ${i} of t needs a ${c}, but none is left in s.` })
       break
     }
     const first = pos[c][0]
@@ -42,14 +42,14 @@ export function buildTrace({ s, t }) {
     }
     if (blocker !== null) {
       ok = false
-      frames.push({ phase: 'blocked', activeLine: L('if pos[d] starts'), index: i, active: first, consumed: [...consumed], message: `A ${blocker} sits before the ${c} at index ${first} of s, and sorting cannot move it past that ${c}.` })
+      frames.push({ phase: 'blocked', pythonLine: 12, activeLine: L('if pos[d] starts'), index: i, active: first, consumed: [...consumed], message: `A ${blocker} sits before the ${c} at index ${first} of s, and sorting cannot move it past that ${c}.` })
       break
     }
     pos[c].shift()
     consumed.push(first)
-    frames.push({ phase: 'match', activeLine: L('remove first from pos'), index: i, active: first, consumed: [...consumed], message: `Position ${i} of t matches the ${c} at index ${first} of s.` })
+    frames.push({ phase: 'match', pythonLine: 13, activeLine: L('remove first from pos'), index: i, active: first, consumed: [...consumed], message: `Position ${i} of t matches the ${c} at index ${first} of s.` })
   }
-  frames.push({ phase: 'done', activeLine: L(ok ? 'return true' : 'return false'), index: t.length, active: -1, consumed: [...consumed], message: ok ? 'Every digit of t can be matched in order: transformable.' : 'Transformation impossible.' })
+  frames.push({ phase: 'done', pythonLine: ok ? 14 : frames[frames.length - 1].pythonLine, activeLine: L(ok ? 'return true' : 'return false'), index: t.length, active: -1, consumed: [...consumed], message: ok ? 'Every digit of t can be matched in order: transformable.' : 'Transformation impossible.' })
   return { input: { s, t }, s, t, result: ok, frames }
 }
 

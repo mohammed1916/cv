@@ -19,17 +19,17 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', activeLine: L('call routes on start'), city: start, fuel, memo: [], message: `Start at city ${start} with ${fuel} fuel.` }]
+  const frames = [{ phase: 'start', pythonLine: 19, activeLine: L('call routes on start'), city: start, fuel, memo: [], message: `Start at city ${start} with ${fuel} fuel.` }]
 
   const routes = (city, left) => {
     const key = `${city}:${left}`
     if (memo.has(key)) {
       const value = memo.get(key)
-      frames.push({ phase: 'reuse', activeLine: L('if the memo already holds'), city, fuel: left, memo: snapshot(), message: `(${city}, ${left}) is already known to be ${value}.` })
+      frames.push({ phase: 'reuse', pythonLine: 8, activeLine: L('if the memo already holds'), city, fuel: left, memo: snapshot(), message: `(${city}, ${left}) is already known to be ${value}.` })
       return value
     }
     let total = city === finish ? 1 : 0
-    frames.push({ phase: 'visit', activeLine: L('set total to 1'), city, fuel: left, memo: snapshot(), message: `Count routes from city ${city} with ${left} fuel. The route stopping here counts ${total ? 'once' : 'zero times'}.` })
+    frames.push({ phase: 'visit', pythonLine: 9, activeLine: L('set total to 1'), city, fuel: left, memo: snapshot(), message: `Count routes from city ${city} with ${left} fuel. The route stopping here counts ${total ? 'once' : 'zero times'}.` })
     for (let next = 0; next < n; next++) {
       if (next === city) continue
       const cost = Math.abs(locations[city] - locations[next])
@@ -38,12 +38,12 @@ export function buildTrace(input) {
     }
     memo.set(key, total)
     entries.push({ city, fuel: left, value: total })
-    frames.push({ phase: 'store', activeLine: L('store total'), city, fuel: left, memo: snapshot(), message: `Store ${total} for (${city}, ${left}).` })
+    frames.push({ phase: 'store', pythonLine: 16, activeLine: L('store total'), city, fuel: left, memo: snapshot(), message: `Store ${total} for (${city}, ${left}).` })
     return total
   }
 
   const result = routes(start, fuel)
-  frames.push({ phase: 'done', activeLine: L('return the result'), city: null, fuel: null, memo: snapshot(), message: `Routes from ${start} to ${finish}: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the result'), city: null, fuel: null, memo: snapshot(), message: `Routes from ${start} to ${finish}: ${result}.` })
   return { input, result, frames }
 }
 

@@ -17,7 +17,7 @@ export function buildTrace(input) {
   const frames = []
   let ways = 0
   const snapshot = table => [{ name: 'products', keyLabel: 'product', valueLabel: 'pairs', isSet: false, entries: [...table] }]
-  frames.push({ phase: 'start', activeLine: L('ways = 0'), maps: snapshot(new Map()), ops: [], result: 0, message: 'Start with zero ways. Each list takes a turn as the squared side and the other list supplies the pairs.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('ways = 0'), maps: snapshot(new Map()), ops: [], result: 0, message: 'Start with zero ways. Each list takes a turn as the squared side and the other list supplies the pairs.' })
   for (const [squared, pairs, label] of [[nums1, nums2, 'nums2 pairs'], [nums2, nums1, 'nums1 pairs']]) {
     const table = new Map()
     for (let j = 0; j < pairs.length; j++) {
@@ -25,7 +25,7 @@ export function buildTrace(input) {
         const product = pairs[j] * pairs[k]
         const before = table.get(product)
         table.set(product, (before ?? 0) + 1)
-        frames.push({ phase: 'pair', activeLine: L('add one to table'), maps: snapshot(table),
+        frames.push({ phase: 'pair', pythonLine: 8, activeLine: L('add one to table'), maps: snapshot(table),
           ops: [{ map: 'products', type: before === undefined ? 'insert' : 'update', key: product, value: (before ?? 0) + 1, before }],
           result: ways, message: `${label}: ${pairs[j]} times ${pairs[k]} = ${product}. The table counts ${table.get(product)} pair(s) with this product.` })
       }
@@ -35,13 +35,13 @@ export function buildTrace(input) {
       const hit = table.has(target)
       const count = table.get(target) ?? 0
       ways += count
-      frames.push({ phase: 'square', activeLine: L('add table at v times v'), maps: snapshot(table),
+      frames.push({ phase: 'square', pythonLine: 10, activeLine: L('add table at v times v'), maps: snapshot(table),
         ops: [{ map: 'products', type: 'lookup', via: 'get', key: target, hit, value: hit ? count : undefined,
           hitNote: 'the table already counts pairs with this product', missNote: 'no pair on the other side multiplies to this square' }],
         result: ways, message: `${v} squared is ${target}. ${count} pair(s) match, so ways goes up by ${count}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return ways'), maps: snapshot(new Map()), ops: [], result: ways, message: `Total ways: ${ways}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return ways'), maps: snapshot(new Map()), ops: [], result: ways, message: `Total ways: ${ways}.` })
   return { input, result: ways, frames }
 }
 

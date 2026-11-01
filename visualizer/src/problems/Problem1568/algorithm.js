@@ -19,7 +19,7 @@ export function buildTrace(grid) {
   const isLand = (r, c) => r >= 0 && r < R && c >= 0 && c < C && grid[r][c] === 1
   const land = []
   for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) if (grid[r][c] === 1) land.push([r, c])
-  const frames = [{ phase: 'start', activeLine: L('count the islands'), cell: null, cuts: [], message: `The grid has ${land.length} land cells.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('count the islands'), cell: null, cuts: [], message: `The grid has ${land.length} land cells.` }]
   // count the islands with a flood fill
   const seen = new Set()
   let islands = 0
@@ -37,9 +37,9 @@ export function buildTrace(grid) {
       }
     }
   }
-  frames.push({ phase: 'count', activeLine: L('if there is not exactly'), cell: null, cuts: [], message: `Found ${islands} island${islands === 1 ? '' : 's'}.` })
+  frames.push({ phase: 'count', pythonLine: 25, activeLine: L('if there is not exactly'), cell: null, cuts: [], message: `Found ${islands} island${islands === 1 ? '' : 's'}.` })
   if (islands !== 1) {
-    frames.push({ phase: 'done', activeLine: L('if there is not exactly'), cell: null, cuts: [], message: 'The land is already disconnected or empty, so the answer is 0.' })
+    frames.push({ phase: 'done', pythonLine: 26, activeLine: L('if there is not exactly'), cell: null, cuts: [], message: 'The land is already disconnected or empty, so the answer is 0.' })
     return { input: grid, result: 0, frames }
   }
   const disc = new Map()
@@ -52,7 +52,7 @@ export function buildTrace(grid) {
     disc.set(k, timer)
     low.set(k, timer)
     let children = 0
-    frames.push({ phase: 'dfs', activeLine: L('run a DFS'), cell: [r, c], cuts: [...cuts], message: `Visit (${r}, ${c}) with discovery time ${timer}.` })
+    frames.push({ phase: 'dfs', pythonLine: 35, activeLine: L('run a DFS'), cell: [r, c], cuts: [...cuts], message: `Visit (${r}, ${c}) with discovery time ${timer}.` })
     for (const [dr, dc] of DIRS) {
       const nr = r + dr
       const nc = c + dc
@@ -77,7 +77,7 @@ export function buildTrace(grid) {
   else if (landCount === 1) result = 1
   else result = 2
   const activeLine = cuts.size > 0 ? L('if some cell is a cut') : landCount === 1 ? L('if the island has one') : L('return 2')
-  frames.push({ phase: 'done', activeLine, cell: null, cuts: [...cuts], message: `Cut cells: ${cuts.size}. The answer is ${result}.` })
+  frames.push({ phase: 'done', pythonLine: cuts.size > 0 ? 53 : landCount === 1 ? 55 : 56, activeLine, cell: null, cuts: [...cuts], message: `Cut cells: ${cuts.size}. The answer is ${result}.` })
   return { input: grid, result, frames }
 }
 

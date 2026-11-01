@@ -26,29 +26,29 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ nums, requests }) {
   const n = nums.length
   const diff = Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('make a difference array'), index: -1, counts: null, message: 'Count how many requests cover each position using a difference array.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('make a difference array'), index: -1, counts: null, message: 'Count how many requests cover each position using a difference array.' }]
   for (const [s, e] of requests) {
     diff[s] += 1
     diff[e + 1] -= 1
-    frames.push({ phase: 'mark', activeLine: L('for each request'), index: s, counts: null, message: `Request [${s}, ${e}] adds one at ${s} and takes one away after ${e}.` })
+    frames.push({ phase: 'mark', pythonLine: 6, activeLine: L('for each request'), index: s, counts: null, message: `Request [${s}, ${e}] adds one at ${s} and takes one away after ${e}.` })
   }
   const counts = []
   let running = 0
   for (let i = 0; i < n; i++) {
     running += diff[i]
     counts.push(running)
-    frames.push({ phase: 'count', activeLine: L('running sum'), index: i, counts: [...counts], message: `Position ${i} is covered by ${running} request(s).` })
+    frames.push({ phase: 'count', pythonLine: 11, activeLine: L('running sum'), index: i, counts: [...counts], message: `Position ${i} is covered by ${running} request(s).` })
   }
   const values = [...nums].sort((a, b) => b - a)
   const sortedCounts = [...counts].sort((a, b) => b - a)
-  frames.push({ phase: 'sort', activeLine: L('sort the values'), index: -1, counts: sortedCounts, message: 'Largest values will be paired with the most covered positions.' })
+  frames.push({ phase: 'sort', pythonLine: 13, activeLine: L('sort the values'), index: -1, counts: sortedCounts, message: 'Largest values will be paired with the most covered positions.' })
   let total = 0
   for (let i = 0; i < n; i++) {
     total += values[i] * sortedCounts[i]
-    frames.push({ phase: 'pair', activeLine: L('total is the sum'), index: i, counts: sortedCounts, message: `Add ${values[i]} times ${sortedCounts[i]} to the total, now ${total}.` })
+    frames.push({ phase: 'pair', pythonLine: 14, activeLine: L('total is the sum'), index: i, counts: sortedCounts, message: `Add ${values[i]} times ${sortedCounts[i]} to the total, now ${total}.` })
   }
   const result = total % 1000000007
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, counts: sortedCounts, message: `Maximum sum is ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return total'), index: -1, counts: sortedCounts, message: `Maximum sum is ${result}.` })
   return { input: { nums, requests }, nums, counts, result, frames }
 }
 

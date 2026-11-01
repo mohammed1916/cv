@@ -26,7 +26,7 @@ export function buildTrace({ n, edges }) {
   const decisions = Array(edges.length).fill('pending')
   let kept = 0
   const order = edges.map((_, i) => i).sort((a, b) => edges[b][0] - edges[a][0] || a - b)
-  const frames = [{ phase: 'start', activeLine: L('make two union-find structures'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: `Alice and Bob each start with ${n} separate nodes.` }]
+  const frames = [{ phase: 'start', pythonLine: 17, activeLine: L('make two union-find structures'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: `Alice and Bob each start with ${n} separate nodes.` }]
   for (const idx of order) {
     const [t, u, v] = edges[idx]
     let line
@@ -44,11 +44,11 @@ export function buildTrace({ n, edges }) {
       line = 'keep it if it joins two groups in Bob'
       if (unite(pb, u, v)) { groups[1]--; kept++; decisions[idx] = 'kept' } else decisions[idx] = 'removed'
     }
-    frames.push({ phase: 'edge', activeLine: L(line), edge: idx, decisions: [...decisions], groups: [...groups], kept, message: `Edge ${idx} (type ${t}, ${u}-${v}) is ${decisions[idx]}.` })
+    frames.push({ phase: 'edge', pythonLine: t === 3 ? (decisions[idx] === 'kept' ? 28 : 27) : t === 1 ? (decisions[idx] === 'kept' ? 32 : 30) : (decisions[idx] === 'kept' ? 36 : 34), activeLine: L(line), edge: idx, decisions: [...decisions], groups: [...groups], kept, message: `Edge ${idx} (type ${t}, ${u}-${v}) is ${decisions[idx]}.` })
   }
   const ok = groups[0] === 1 && groups[1] === 1
   const result = ok ? edges.length - kept : -1
-  frames.push({ phase: 'done', activeLine: L('return the number of edges minus kept'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: ok ? `Both can reach every node; remove ${result} edges.` : 'Alice or Bob cannot reach every node, so the answer is -1.' })
+  frames.push({ phase: 'done', pythonLine: ok ? 38 : 39, activeLine: L('return the number of edges minus kept'), edge: -1, decisions: [...decisions], groups: [...groups], kept, message: ok ? `Both can reach every node; remove ${result} edges.` : 'Alice or Bob cannot reach every node, so the answer is -1.' })
   return { input: { n, edges }, result, frames }
 }
 
