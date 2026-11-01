@@ -15,12 +15,12 @@ export function buildTrace(input) {
     else groups.push({ value: x, count: 1 })
   }
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('group equal values'), group: -1, total: 0, message: `Group equal values into ${groups.length} runs. A distinct subarray is a sequence of values, so count each shape once.` }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('group equal values'), group: -1, total: 0, message: `Group equal values into ${groups.length} runs. A distinct subarray is a sequence of values, so count each shape once.` }]
   groups.forEach((g, gi) => {
     for (let c = 1; c <= g.count; c++) {
       if ((c * g.value) % k === 0) total += 1
     }
-    frames.push({ phase: 'single', activeLine: L('for each run g'), group: gi, total, message: `Subarrays made only of ${g.value}: counted those whose length times ${g.value} is divisible by ${k}. Total: ${total}.` })
+    frames.push({ pythonLine: 12, phase: 'single', activeLine: L('for each run g'), group: gi, total, message: `Subarrays made only of ${g.value}: counted those whose length times ${g.value} is divisible by ${k}. Total: ${total}.` })
   })
   for (let i = 0; i < groups.length; i++) {
     let middle = 0
@@ -31,11 +31,11 @@ export function buildTrace(input) {
           if ((a * gi.value + middle + b * gj.value) % k === 0) total += 1
         }
       }
-      frames.push({ phase: 'pair', activeLine: L('for each end run j'), group: j, total, message: `Runs ${gi.value} to ${gj.value}: partial ends with full runs between them. Total: ${total}.` })
+      frames.push({ pythonLine: 21, phase: 'pair', activeLine: L('for each end run j'), group: j, total, message: `Runs ${gi.value} to ${gj.value}: partial ends with full runs between them. Total: ${total}.` })
       middle += gj.count * gj.value
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), group: -1, total, message: `Distinct subarrays divisible by ${k}: ${total}.` })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return total'), group: -1, total, message: `Distinct subarrays divisible by ${k}: ${total}.` })
   return { input, result: total, frames }
 }
 

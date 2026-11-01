@@ -20,17 +20,17 @@ export function buildTrace(input) {
     if (!present.has(v)) {
       if (start === null) start = v
       last = v
-      frames.push({ phase: 'missing', activeLine: L('set last to v'), v, ranges: ranges.map(r => r.slice()), message: `${v} is missing.` })
+      frames.push({ pythonLine: 10, phase: 'missing', activeLine: L('set last to v'), v, ranges: ranges.map(r => r.slice()), message: `${v} is missing.` })
     } else if (start !== null) {
       ranges.push([start, last])
       start = null
-      frames.push({ phase: 'close', activeLine: L('append [start, last]'), v, ranges: ranges.map(r => r.slice()), message: `${v} is present, so the missing run ends.` })
+      frames.push({ pythonLine: 12, phase: 'close', activeLine: L('append [start, last]'), v, ranges: ranges.map(r => r.slice()), message: `${v} is present, so the missing run ends.` })
     } else {
-      frames.push({ phase: 'present', activeLine: L('for each value v'), v, ranges: ranges.map(r => r.slice()), message: `${v} is present.` })
+      frames.push({ pythonLine: 11, phase: 'present', activeLine: L('for each value v'), v, ranges: ranges.map(r => r.slice()), message: `${v} is present.` })
     }
   }
   if (start !== null) ranges.push([start, last])
-  frames.push({ phase: 'done', activeLine: L('return ranges'), v: null, ranges: ranges.map(r => r.slice()), message: `Missing ranges: ${ranges.length} found.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return ranges'), v: null, ranges: ranges.map(r => r.slice()), message: `Missing ranges: ${ranges.length} found.` })
   return { input, result: ranges, frames }
 }
 

@@ -10,17 +10,17 @@ export function buildTrace({ n }) {
   const digits = String(n).split('').map(Number)
   let reversed = 0
   let rest = n
-  const frames = [{ phase: 'start', activeLine: L('set reversed to 0'), position: -1, reversed, message: `Reverse the digits of ${n}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set reversed to 0'), position: -1, reversed, message: `Reverse the digits of ${n}.` }]
   let position = digits.length - 1
   while (rest > 0) {
     const digit = rest % 10
     reversed = reversed * 10 + digit
     rest = Math.floor(rest / 10)
-    frames.push({ phase: 'digit', activeLine: L('append the last digit'), position, reversed, message: `Append digit ${digit}. The reversed value is now ${reversed}.` })
+    frames.push({ pythonLine: 5, phase: 'digit', activeLine: L('append the last digit'), position, reversed, message: `Append digit ${digit}. The reversed value is now ${reversed}.` })
     position -= 1
   }
   const result = Math.abs(n - reversed)
-  frames.push({ phase: 'done', activeLine: L('return the absolute'), position: -1, reversed, message: `|${n} - ${reversed}| = ${result}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return the absolute'), position: -1, reversed, message: `|${n} - ${reversed}| = ${result}.` })
   return { input: { n }, result, digits, frames }
 }
 

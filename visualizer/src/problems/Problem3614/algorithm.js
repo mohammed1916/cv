@@ -20,9 +20,9 @@ export function buildTrace(input) {
   const lengths = [0]
   for (const ch of s) lengths.push(lengthAfter(ch, lengths[lengths.length - 1]))
   const total = lengths[s.length]
-  const frames = [{ phase: 'lengths', activeLine: L('set length to 0'), index: -1, pos: k, total, message: `The processed string has length ${total}.` }]
+  const frames = [{ pythonLine: 2, phase: 'lengths', activeLine: L('set length to 0'), index: -1, pos: k, total, message: `The processed string has length ${total}.` }]
   if (k >= total) {
-    frames.push({ phase: 'done', activeLine: L('if k is at least length'), index: -1, pos: k, total, message: `k = ${k} is past the end, so the answer is a dot.` })
+    frames.push({ pythonLine: 14, phase: 'done', activeLine: L('if k is at least length'), index: -1, pos: k, total, message: `k = ${k} is past the end, so the answer is a dot.` })
     return { input, result: '.', frames }
   }
   let pos = k
@@ -31,17 +31,17 @@ export function buildTrace(input) {
     const before = lengths[i]
     if (ch === '#') {
       if (pos >= before) pos -= before
-      frames.push({ phase: 'back', activeLine: L('if the operation is #'), index: i, pos, total, message: `Operation ${i + 1} is a copy, so position ${pos} is read from the part before the copy.` })
+      frames.push({ pythonLine: 19, phase: 'back', activeLine: L('if the operation is #'), index: i, pos, total, message: `Operation ${i + 1} is a copy, so position ${pos} is read from the part before the copy.` })
     } else if (ch === '%') {
       pos = before - 1 - pos
-      frames.push({ phase: 'back', activeLine: L('if the operation is %'), index: i, pos, total, message: `Operation ${i + 1} reverses the string, so the position becomes ${pos}.` })
+      frames.push({ pythonLine: 23, phase: 'back', activeLine: L('if the operation is %'), index: i, pos, total, message: `Operation ${i + 1} reverses the string, so the position becomes ${pos}.` })
     } else if (ch !== '*' && pos === before) {
-      frames.push({ phase: 'found', activeLine: L('if the operation is a letter'), index: i, pos, total, message: `Operation ${i + 1} added ${ch} at the end, and that is position ${pos}.` })
-      frames.push({ phase: 'done', activeLine: L('return that letter'), index: -1, pos, total, message: `The character at position ${k} is ${ch}.` })
+      frames.push({ pythonLine: 24, phase: 'found', activeLine: L('if the operation is a letter'), index: i, pos, total, message: `Operation ${i + 1} added ${ch} at the end, and that is position ${pos}.` })
+      frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return that letter'), index: -1, pos, total, message: `The character at position ${k} is ${ch}.` })
       return { input, result: ch, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('  return dot'), index: -1, pos, total, message: 'No letter was found, so the answer is a dot.' })
+  frames.push({ pythonLine: 26, phase: 'done', activeLine: L('  return dot'), index: -1, pos, total, message: 'No letter was found, so the answer is a dot.' })
   return { input, result: '.', frames }
 }
 

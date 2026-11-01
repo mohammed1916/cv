@@ -10,20 +10,20 @@ export function buildTrace(input) {
   const { nums } = input
   const groups = [0, 1, 2].map(r => nums.filter(x => x % 3 === r).sort((a, b) => b - a))
   let best = 0
-  const frames = [{ phase: 'split', activeLine: L('split the numbers into three groups'), groups, best, message: `Groups by remainder: ${groups.map((g, r) => `remainder ${r} [${g.join(', ')}]`).join('; ')}.` }]
+  const frames = [{ pythonLine: 2, phase: 'split', activeLine: L('split the numbers into three groups'), groups, best, message: `Groups by remainder: ${groups.map((g, r) => `remainder ${r} [${g.join(', ')}]`).join('; ')}.` }]
   if (groups.every(g => g.length > 0)) {
     const sum = groups[0][0] + groups[1][0] + groups[2][0]
     best = Math.max(best, sum)
-    frames.push({ phase: 'pick', activeLine: L('the sum of the top of each group'), groups, best, message: `One number from each remainder class sums to ${sum}.` })
+    frames.push({ pythonLine: 5, phase: 'pick', activeLine: L('the sum of the top of each group'), groups, best, message: `One number from each remainder class sums to ${sum}.` })
   }
   for (let r = 0; r < 3; r++) {
     if (groups[r].length >= 3) {
       const sum = groups[r][0] + groups[r][1] + groups[r][2]
       best = Math.max(best, sum)
-      frames.push({ phase: 'pick', activeLine: L('its top three numbers'), groups, best, message: `The top three of remainder ${r} sum to ${sum}.` })
+      frames.push({ pythonLine: 8, phase: 'pick', activeLine: L('its top three numbers'), groups, best, message: `The top three of remainder ${r} sum to ${sum}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), groups, best, message: `Largest valid sum: ${best}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return best'), groups, best, message: `Largest valid sum: ${best}.` })
   return { input, result: best, frames, groups }
 }
 

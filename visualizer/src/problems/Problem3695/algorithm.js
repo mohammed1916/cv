@@ -26,10 +26,10 @@ export function buildTrace(input) {
     while (parent[at] !== at) { parent[at] = parent[parent[at]]; at = parent[at] }
     return at
   }
-  const frames = [{ phase: 'start', activeLine: L('start with every index in its own group'), group: null, total: null, result: null, message: 'Each index starts in its own group.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('start with every index in its own group'), group: null, total: null, result: null, message: 'Each index starts in its own group.' }]
   for (const [p, q] of swaps) {
     parent[find(p)] = find(q)
-    frames.push({ phase: 'join', activeLine: L('join the groups of p and q'), group: null, total: null, result: null, message: `Swap [${p}, ${q}] joins their groups.` })
+    frames.push({ pythonLine: 12, phase: 'join', activeLine: L('join the groups of p and q'), group: null, total: null, result: null, message: `Swap [${p}, ${q}] joins their groups.` })
   }
   const groups = new Map()
   for (let i = 0; i < n; i++) {
@@ -44,9 +44,9 @@ export function buildTrace(input) {
     const top = values.slice(0, evens).reduce((a, b) => a + b, 0)
     const rest = values.slice(evens).reduce((a, b) => a + b, 0)
     total += top - rest
-    frames.push({ phase: 'group', activeLine: L('put the largest e values on the even indices'), group: indices, total, result: null, message: `Group [${indices.join(', ')}] has ${evens} even index(es). Running total: ${total}.` })
+    frames.push({ pythonLine: 20, phase: 'group', activeLine: L('put the largest e values on the even indices'), group: indices, total, result: null, message: `Group [${indices.join(', ')}] has ${evens} even index(es). Running total: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the even sum minus the odd sum'), group: null, total, result: total, message: `Best alternating sum: ${total}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return the even sum minus the odd sum'), group: null, total, result: total, message: `Best alternating sum: ${total}.` })
   return { input, result: total, frames }
 }
 

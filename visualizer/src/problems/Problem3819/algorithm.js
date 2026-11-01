@@ -12,9 +12,9 @@ export function buildTrace(input) {
   const positions = []
   const values = []
   nums.forEach((x, i) => { if (x >= 0) { positions.push(i); values.push(x) } })
-  const frames = [{ phase: 'collect', activeLine: L('positions = indices'), index: -1, out: [...nums], positions, message: `Non-negative positions: [${positions.join(', ')}].` }]
+  const frames = [{ pythonLine: 2, phase: 'collect', activeLine: L('positions = indices'), index: -1, out: [...nums], positions, message: `Non-negative positions: [${positions.join(', ')}].` }]
   if (values.length === 0) {
-    frames.push({ phase: 'done', activeLine: L('if values is empty then return nums'), index: -1, out: [...nums], positions, message: 'No non-negative values, so nothing moves.' })
+    frames.push({ pythonLine: 5, phase: 'done', activeLine: L('if values is empty then return nums'), index: -1, out: [...nums], positions, message: 'No non-negative values, so nothing moves.' })
     return { input, result: [...nums], frames, positions }
   }
   const shift = k % values.length
@@ -22,9 +22,9 @@ export function buildTrace(input) {
   const out = [...nums]
   positions.forEach((pos, j) => {
     out[pos] = rotated[j]
-    frames.push({ phase: 'write', activeLine: L('write rotated[j] into positions[j]'), index: pos, out: [...out], positions, message: `Write ${rotated[j]} into index ${pos}.` })
+    frames.push({ pythonLine: 10, phase: 'write', activeLine: L('write rotated[j] into positions[j]'), index: pos, out: [...out], positions, message: `Write ${rotated[j]} into index ${pos}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the result'), index: -1, out: [...out], positions, message: `Rotated array: [${out.join(', ')}].` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the result'), index: -1, out: [...out], positions, message: `Rotated array: [${out.join(', ')}].` })
   return { input, result: out, frames, positions }
 }
 

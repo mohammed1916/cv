@@ -26,15 +26,15 @@ export function buildTrace(input) {
   const frames = []
   let score = 0
   let total = 0
-  frames.push({ phase: 'start', activeLine: L('set total to 0'), index: -1, score, counted: 0, total, message: 'The empty prefix has score 0.' })
+  frames.push({ pythonLine: 6, phase: 'start', activeLine: L('set total to 0'), index: -1, score, counted: 0, total, message: 'The empty prefix has score 0.' })
   nums.forEach((x, index) => {
     score += x % 2 === 0 ? b : -a
     const counted = seen.length - lowerBound(seen, score)
     total += counted
     seen.splice(lowerBound(seen, score), 0, score)
-    frames.push({ phase: 'count', activeLine: L('count how many values in seen'), index, score, counted, total, message: `Prefix ${index + 1} has score ${score}; ${counted} earlier prefix${counted === 1 ? '' : 'es'} have a score at least that high.` })
+    frames.push({ pythonLine: 11, phase: 'count', activeLine: L('count how many values in seen'), index, score, counted, total, message: `Prefix ${index + 1} has score ${score}; ${counted} earlier prefix${counted === 1 ? '' : 'es'} have a score at least that high.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, score, counted: 0, total, message: `Valid subarrays: ${total}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return total'), index: -1, score, counted: 0, total, message: `Valid subarrays: ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -18,11 +18,11 @@ export function buildTrace(input) {
     const x = nums[r]
     counts.set(x, (counts.get(x) || 0) + 1)
     if (counts.get(x) === 1) total += x
-    frames.push({ phase: 'expand', activeLine: L('add nums[r] to counts'), left, right: r, total, best, message: `Add ${x} at index ${r}. Distinct sum: ${total}.` })
+    frames.push({ pythonLine: counts.get(x) === 1 ? 9 : 7, phase: 'expand', activeLine: L('add nums[r] to counts'), left, right: r, total, best, message: `Add ${x} at index ${r}. Distinct sum: ${total}.` })
     while (total >= k) {
       const length = r - left + 1
       if (best === null || length < best) best = length
-      frames.push({ phase: 'shrink', activeLine: L('set best to r - left + 1'), left, right: r, total, best, message: `Window [${left}, ${r}] has distinct sum ${total}, which is at least ${k}. Best length: ${best}.` })
+      frames.push({ pythonLine: 12, phase: 'shrink', activeLine: L('set best to r - left + 1'), left, right: r, total, best, message: `Window [${left}, ${r}] has distinct sum ${total}, which is at least ${k}. Best length: ${best}.` })
       const y = nums[left]
       counts.set(y, counts.get(y) - 1)
       if (counts.get(y) === 0) total -= y
@@ -30,7 +30,7 @@ export function buildTrace(input) {
     }
   }
   const result = best === null ? -1 : best
-  frames.push({ phase: 'done', activeLine: best === null ? L('return -1') : L('return best'), left, right: -1, total, best: result, message: result === -1 ? 'No subarray reaches the target.' : `Minimum length: ${result}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: best === null ? L('return -1') : L('return best'), left, right: -1, total, best: result, message: result === -1 ? 'No subarray reaches the target.' : `Minimum length: ${result}.` })
   return { input, result, frames }
 }
 

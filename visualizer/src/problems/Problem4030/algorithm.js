@@ -15,10 +15,10 @@ export function buildTrace(input) {
     const code = s.charCodeAt(i)
     const chunk = code.toString(2).padStart(8, '0')
     bits += chunk
-    frames.push({ phase: 'encode', activeLine: L('append the 8-bit'), index: i, bits, chunk, result: null, message: `${s[i]} has code ${code}, which is ${chunk} in binary.` })
+    frames.push({ pythonLine: 4, phase: 'encode', activeLine: L('append the 8-bit'), index: i, bits, chunk, result: null, message: `${s[i]} has code ${code}, which is ${chunk} in binary.` })
   }
   const result = bits === [...bits].reverse().join('')
-  frames.push({ phase: 'done', activeLine: L('return whether'), index: -1, bits, chunk: null, result, message: `The bit string ${result ? 'is' : 'is not'} a palindrome.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return whether'), index: -1, bits, chunk: null, result, message: `The bit string ${result ? 'is' : 'is not'} a palindrome.` })
   return { input, result, frames }
 }
 

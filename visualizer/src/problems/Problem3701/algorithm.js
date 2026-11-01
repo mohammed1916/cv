@@ -7,16 +7,16 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, total, message: 'Start with a total of 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), index: -1, total, message: 'Start with a total of 0.' }]
   nums.forEach((value, i) => {
     const even = i % 2 === 0
     total = even ? total + value : total - value
     frames.push({
-      phase: 'step', activeLine: L('if index i is even'), index: i, total,
+      pythonLine: even ? 5 : 7, phase: 'step', activeLine: L('if index i is even'), index: i, total,
       message: `Index ${i} is ${even ? 'even, so add' : 'odd, so subtract'} ${value}. Total: ${total}.`,
     })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, total, message: `Alternating sum: ${total}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return total'), index: -1, total, message: `Alternating sum: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

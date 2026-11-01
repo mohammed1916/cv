@@ -17,7 +17,7 @@ export function buildTrace(input) {
   const s = chunks.join('')
   const counts = new Map()
   let current = ''
-  const frames = [{ phase: 'start', activeLine: L('let s be'), i: -1, s, current, counts: [], answers: [], message: `Joined text: "${s}".` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let s be'), i: -1, s, current, counts: [], answers: [], message: `Joined text: "${s}".` }]
   const flush = () => {
     if (current !== '') counts.set(current, (counts.get(current) ?? 0) + 1)
     current = ''
@@ -26,20 +26,20 @@ export function buildTrace(input) {
     const ch = s[i]
     if (isLetter(ch)) {
       current += ch
-      frames.push({ phase: 'letter', activeLine: L('if ch is a lowercase letter'), i, s, current, counts: [...counts], answers: [], message: `Letter ${ch} extends the current word to "${current}".` })
+      frames.push({ pythonLine: 12, phase: 'letter', activeLine: L('if ch is a lowercase letter'), i, s, current, counts: [...counts], answers: [], message: `Letter ${ch} extends the current word to "${current}".` })
     } else if (ch === '-' && isLetter(s[i - 1]) && isLetter(s[i + 1])) {
       current += ch
-      frames.push({ phase: 'joiner', activeLine: L('if ch is a hyphen between'), i, s, current, counts: [...counts], answers: [], message: 'This hyphen sits between two letters, so it joins the word.' })
+      frames.push({ pythonLine: 14, phase: 'joiner', activeLine: L('if ch is a hyphen between'), i, s, current, counts: [...counts], answers: [], message: 'This hyphen sits between two letters, so it joins the word.' })
     } else {
       const finished = current
       flush()
-      frames.push({ phase: 'separator', activeLine: L('add 1 to counts'), i, s, current: '', counts: [...counts], answers: [], message: finished ? `Separator at ${i} ends the word "${finished}".` : `Separator at ${i}; no word to end.` })
+      frames.push({ pythonLine: finished ? 17 : 18, phase: 'separator', activeLine: L('add 1 to counts'), i, s, current: '', counts: [...counts], answers: [], message: finished ? `Separator at ${i} ends the word "${finished}".` : `Separator at ${i}; no word to end.` })
     }
   }
   flush()
   const answers = queries.map(q => counts.get(q) ?? 0)
-  frames.push({ phase: 'answer', activeLine: L('append the count'), i: -1, s, current: '', counts: [...counts], answers, message: `Answers: [${answers.join(', ')}].` })
-  frames.push({ phase: 'done', activeLine: L('return the answers list'), i: -1, s, current: '', counts: [...counts], answers, message: 'Each query has been looked up.' })
+  frames.push({ pythonLine: 21, phase: 'answer', activeLine: L('append the count'), i: -1, s, current: '', counts: [...counts], answers, message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return the answers list'), i: -1, s, current: '', counts: [...counts], answers, message: 'Each query has been looked up.' })
   return { input, result: answers, frames }
 }
 

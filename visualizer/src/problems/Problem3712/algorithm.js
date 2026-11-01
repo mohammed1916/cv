@@ -10,21 +10,21 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, k } = input
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set counts to empty'), index: -1, value: null, count: 0, total: 0, message: `Count how often each value appears. We keep values whose count is a multiple of ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set counts to empty'), index: -1, value: null, count: 0, total: 0, message: `Count how often each value appears. We keep values whose count is a multiple of ${k}.` }]
   for (let i = 0; i < nums.length; i++) {
     counts.set(nums[i], (counts.get(nums[i]) || 0) + 1)
-    frames.push({ phase: 'count', activeLine: L('add 1 to counts'), index: i, value: nums[i], count: counts.get(nums[i]), total: 0, message: `Count ${nums[i]} as ${counts.get(nums[i])}.` })
+    frames.push({ pythonLine: 4, phase: 'count', activeLine: L('add 1 to counts'), index: i, value: nums[i], count: counts.get(nums[i]), total: 0, message: `Count ${nums[i]} as ${counts.get(nums[i])}.` })
   }
   let total = 0
   for (const [value, c] of counts) {
     if (c % k === 0) {
       total += value * c
-      frames.push({ phase: 'add', activeLine: L('add value times c'), index: -1, value, count: c, total, message: `${value} appears ${c} times, a multiple of ${k}. Add ${value * c}.` })
+      frames.push({ pythonLine: 8, phase: 'add', activeLine: L('add value times c'), index: -1, value, count: c, total, message: `${value} appears ${c} times, a multiple of ${k}. Add ${value * c}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if c modulo k'), index: -1, value, count: c, total, message: `${value} appears ${c} times, which is not a multiple of ${k}. Skip it.` })
+      frames.push({ pythonLine: 7, phase: 'skip', activeLine: L('if c modulo k'), index: -1, value, count: c, total, message: `${value} appears ${c} times, which is not a multiple of ${k}. Skip it.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, value: null, count: 0, total, message: `Sum: ${total}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return total'), index: -1, value: null, count: 0, total, message: `Sum: ${total}.` })
   return { input, result: total, frames }
 }
 

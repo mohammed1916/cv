@@ -15,25 +15,25 @@ export function buildTrace({ grid }) {
   const m = grid.length
   const n = grid[0].length
   const reach = Array.from({ length: m }, () => Array.from({ length: n }, () => new Set()))
-  const frames = [{ phase: 'start', activeLine: L('set m to'), cell: null, values: [], result: null, message: `A ${m} by ${n} grid. Track every XOR value that reaches each cell.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set m to'), cell: null, values: [], result: null, message: `A ${m} by ${n} grid. Track every XOR value that reaches each cell.` }]
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       if (i === 0 && j === 0) {
         reach[i][j].add(grid[0][0])
-        frames.push({ phase: 'cell', activeLine: L('add the start'), cell: [i, j], values: [...reach[i][j]], result: null, message: `Start cell: XOR values {${grid[0][0]}}.` })
+        frames.push({ pythonLine: 7, phase: 'cell', activeLine: L('add the start'), cell: [i, j], values: [...reach[i][j]], result: null, message: `Start cell: XOR values {${grid[0][0]}}.` })
         continue
       }
       const prev = new Set()
       if (i > 0) for (const x of reach[i - 1][j]) prev.add(x)
       if (j > 0) for (const x of reach[i][j - 1]) prev.add(x)
       for (const x of prev) reach[i][j].add(x ^ grid[i][j])
-      frames.push({ phase: 'cell', activeLine: L('for each xor value'), cell: [i, j], values: [...reach[i][j]].sort((a, b) => a - b), result: null,
+      frames.push({ pythonLine: 15, phase: 'cell', activeLine: L('for each xor value'), cell: [i, j], values: [...reach[i][j]].sort((a, b) => a - b), result: null,
         message: `Cell (${i}, ${j}) has ${reach[i][j].size} reachable XOR value(s).` })
     }
   }
   const finals = [...reach[m - 1][n - 1]]
   const result = Math.min(...finals)
-  frames.push({ phase: 'done', activeLine: L('return the smallest'), cell: [m - 1, n - 1], values: finals.sort((a, b) => a - b), result, message: `Smallest XOR at the bottom-right cell: ${result}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return the smallest'), cell: [m - 1, n - 1], values: finals.sort((a, b) => a - b), result, message: `Smallest XOR at the bottom-right cell: ${result}.` })
   return { input: { grid }, result, frames }
 }
 

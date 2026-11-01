@@ -12,16 +12,16 @@ export function buildTrace(input) {
   const { nums, k } = input
   const frames = []
   const distinct = [...new Set(nums)]
-  frames.push({ phase: 'start', activeLine: L('collect the distinct values'), chosen: [], message: `There are ${distinct.length} distinct values in nums.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('collect the distinct values'), chosen: [], message: `There are ${distinct.length} distinct values in nums.` })
   const sorted = [...distinct].sort((a, b) => b - a)
-  frames.push({ phase: 'sort', activeLine: L('sort the distinct values'), chosen: [], message: `Sorted from largest: ${sorted.join(', ')}.` })
+  frames.push({ pythonLine: 2, phase: 'sort', activeLine: L('sort the distinct values'), chosen: [], message: `Sorted from largest: ${sorted.join(', ')}.` })
   const result = []
   for (const value of sorted) {
     if (result.length === k) break
     result.push(value)
-    frames.push({ phase: 'take', activeLine: L('add the value to result'), chosen: [...result], message: `Take ${value}. ${result.length} of at most ${k} chosen.` })
+    frames.push({ pythonLine: 7, phase: 'take', activeLine: L('add the value to result'), chosen: [...result], message: `Take ${value}. ${result.length} of at most ${k} chosen.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), chosen: [...result], message: `Result: [${result.join(', ')}], sum ${result.reduce((a, b) => a + b, 0)}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return result'), chosen: [...result], message: `Result: [${result.join(', ')}], sum ${result.reduce((a, b) => a + b, 0)}.` })
   return { input: { nums, k }, result, frames }
 }
 

@@ -17,18 +17,18 @@ export function buildTrace(input) {
   const low = Math.min(n, r)
   const high = Math.max(n, r)
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('let r be'), x: null, total, r: null, message: `Reverse the digits of ${n}.` }]
-  frames.push({ phase: 'range', activeLine: L('let low be'), x: null, total, r, low, high, message: `The reverse is ${r}, so the range is [${low}, ${high}].` })
-  frames.push({ phase: 'range', activeLine: L('let total be 0'), x: null, total, r, low, high, message: 'Start the running total at zero.' })
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let r be'), x: null, total, r: null, message: `Reverse the digits of ${n}.` }]
+  frames.push({ pythonLine: 4, phase: 'range', activeLine: L('let low be'), x: null, total, r, low, high, message: `The reverse is ${r}, so the range is [${low}, ${high}].` })
+  frames.push({ pythonLine: 5, phase: 'range', activeLine: L('let total be 0'), x: null, total, r, low, high, message: 'Start the running total at zero.' })
   for (let x = low; x <= high; x++) {
     if (isPrime(x)) {
       total += x
-      frames.push({ phase: 'prime', activeLine: L('add x to total'), x, total, r, low, high, message: `${x} is prime, so add it. Total ${total}.` })
+      frames.push({ pythonLine: 10, phase: 'prime', activeLine: L('add x to total'), x, total, r, low, high, message: `${x} is prime, so add it. Total ${total}.` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('if x is prime'), x, total, r, low, high, message: `${x} is not prime.` })
+      frames.push({ pythonLine: 9, phase: 'scan', activeLine: L('if x is prime'), x, total, r, low, high, message: `${x} is not prime.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), x: null, total, r, low, high, message: `Sum of primes in [${low}, ${high}] is ${total}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), x: null, total, r, low, high, message: `Sum of primes in [${low}, ${high}] is ${total}.` })
   return { input, result: total, frames }
 }
 

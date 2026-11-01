@@ -18,14 +18,14 @@ export function buildTrace(input) {
     const c = s[i]
     if (c === y) {
       ys.push(c)
-      frames.push({ phase: 'pick', activeLine: L('if c is y'), index: i, letter: c, message: `${c} goes to the front group, ahead of every x.` })
+      frames.push({ pythonLine: 2, phase: 'pick', activeLine: L('if c is y'), index: i, letter: c, message: `${c} goes to the front group, ahead of every x.` })
     } else {
       others.push(c)
-      frames.push({ phase: 'keep', activeLine: L('otherwise append c'), index: i, letter: c, message: `${c} keeps its place in the rest of the string.` })
+      frames.push({ pythonLine: 3, phase: 'keep', activeLine: L('otherwise append c'), index: i, letter: c, message: `${c} keeps its place in the rest of the string.` })
     }
   }
   const result = [...ys, ...others].join('')
-  frames.push({ phase: 'done', activeLine: L('return the result'), index: -1, letter: null, message: `Rearranged string: ${result}.` })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return the result'), index: -1, letter: null, message: `Rearranged string: ${result}.` })
   return { input, result, frames }
 }
 

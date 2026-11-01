@@ -13,14 +13,14 @@ export function buildTrace(input) {
   const frames = []
   let floor = 0
   let time = 0
-  frames.push({ phase: 'start', activeLine: L('set floor to 0'), index: -1, floor, time, message: 'The elevator starts at floor 0.' })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set floor to 0'), index: -1, floor, time, message: 'The elevator starts at floor 0.' })
   requests.forEach((r, index) => {
     const moved = Math.abs(floor - r)
     time += moved
-    frames.push({ phase: 'serve', activeLine: L('add the distance'), index, floor: r, time, moved, message: `Go from floor ${floor} to ${r}: ${moved} second${moved === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: 5, phase: 'serve', activeLine: L('add the distance'), index, floor: r, time, moved, message: `Go from floor ${floor} to ${r}: ${moved} second${moved === 1 ? '' : 's'}.` })
     floor = r
   })
-  frames.push({ phase: 'done', activeLine: L('return time'), index: -1, floor, time, moved: 0, message: `Total time: ${time} seconds.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return time'), index: -1, floor, time, moved: 0, message: `Total time: ${time} seconds.` })
   return { input, result: time, frames }
 }
 

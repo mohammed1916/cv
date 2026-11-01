@@ -23,7 +23,7 @@ export function buildTrace(input) {
     if (label[u] === label[v]) level.set(`${u},${v},${(1 << u) | (1 << v)}`, [u, v, (1 << u) | (1 << v), 2])
   }
   let best = level.size ? Math.max(...[...level.values()].map(s => s[3])) : 0
-  frames.push({ phase: 'start', activeLine: L('start every node alone'), states: level.size, best, message: `Start with ${level.size} palindromes of length 1 or 2 with a common center.` })
+  frames.push({ pythonLine: 13, phase: 'start', activeLine: L('start every node alone'), states: level.size, best, message: `Start with ${level.size} palindromes of length 1 or 2 with a common center.` })
   while (level.size) {
     const next = new Map()
     for (const [u, v, mask, len] of level.values()) {
@@ -40,9 +40,9 @@ export function buildTrace(input) {
     if (next.size === 0) break
     best = Math.max(best, ...[...next.values()].map(s => s[3]))
     level = next
-    frames.push({ phase: 'grow', activeLine: L('add the two new ends'), states: level.size, best, message: `Growing outward: ${level.size} states, best length ${best}.` })
+    frames.push({ pythonLine: 28, phase: 'grow', activeLine: L('add the two new ends'), states: level.size, best, message: `Growing outward: ${level.size} states, best length ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the best length'), states: 0, best, message: `Longest palindromic path: ${best}.` })
+  frames.push({ pythonLine: 30, phase: 'done', activeLine: L('return the best length'), states: 0, best, message: `Longest palindromic path: ${best}.` })
   return { input: { n, edges, label }, result: best, frames }
 }
 

@@ -7,27 +7,27 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   let xor = 0
-  const frames = [{ phase: 'start', activeLine: L('set xor to 0'), index: -1, xor, result: null, message: 'Start with a running XOR of 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set xor to 0'), index: -1, xor, result: null, message: 'Start with a running XOR of 0.' }]
   nums.forEach((value, i) => {
     xor ^= value
-    frames.push({ phase: 'scan', activeLine: L('xor the value into xor'), index: i, xor, result: null, message: `XOR with ${value}: running XOR is ${xor}.` })
+    frames.push({ pythonLine: 4, phase: 'scan', activeLine: L('xor the value into xor'), index: i, xor, result: null, message: `XOR with ${value}: running XOR is ${xor}.` })
   })
   let result
   let branchLine
   if (xor !== 0) {
     result = nums.length
     branchLine = L('return the length of nums')
-    frames.push({ phase: 'keep', activeLine: L('if xor is not 0'), index: -1, xor, result: null, message: `Total XOR ${xor} is non-zero, so the whole array works.` })
+    frames.push({ pythonLine: 6, phase: 'keep', activeLine: L('if xor is not 0'), index: -1, xor, result: null, message: `Total XOR ${xor} is non-zero, so the whole array works.` })
   } else if (nums.some(v => v !== 0)) {
     result = nums.length - 1
     branchLine = L('minus 1')
-    frames.push({ phase: 'drop', activeLine: L('some value in nums is not 0'), index: -1, xor, result: null, message: `Total XOR is 0. Dropping one non-zero value leaves XOR equal to that value.` })
+    frames.push({ pythonLine: 8, phase: 'drop', activeLine: L('some value in nums is not 0'), index: -1, xor, result: null, message: `Total XOR is 0. Dropping one non-zero value leaves XOR equal to that value.` })
   } else {
     result = 0
     branchLine = L('return 0')
-    frames.push({ phase: 'zero', activeLine: L('return 0'), index: -1, xor, result: null, message: 'Every value is 0, so no non-zero XOR exists.' })
+    frames.push({ pythonLine: 9, phase: 'zero', activeLine: L('return 0'), index: -1, xor, result: null, message: 'Every value is 0, so no non-zero XOR exists.' })
   }
-  frames.push({ phase: 'done', activeLine: branchLine, index: -1, xor, result, message: `Longest length: ${result}.` })
+  frames.push({ pythonLine: xor !== 0 ? 6 : nums.some(v => v !== 0) ? 8 : 9, phase: 'done', activeLine: branchLine, index: -1, xor, result, message: `Longest length: ${result}.` })
   return { input: nums, result, frames }
 }
 

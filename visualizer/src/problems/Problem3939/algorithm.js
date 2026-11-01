@@ -23,7 +23,7 @@ export function buildTrace(input) {
   for (let i = 1; i < n; i++) children[parent[i]].push(i)
   const notPicked = Array(n)
   const picked = Array(n)
-  const frames = [{ phase: 'start', activeLine: L('let total be'), node: null, sums: [], result: null, message: `Process nodes from the last index down to the root. Remainders are taken mod ${k}.` }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('let total be'), node: null, sums: [], result: null, message: `Process nodes from the last index down to the root. Remainders are taken mod ${k}.` }]
   for (let v = n - 1; v >= 0; v--) {
     let a = Array(k).fill(0)
     a[0] = 1
@@ -43,10 +43,10 @@ export function buildTrace(input) {
     }
     notPicked[v] = a
     picked[v] = b
-    frames.push({ phase: 'node', activeLine: L('for each node v from'), node: v, sums: [...a], result: null, message: `Node ${v} (value ${nums[v]}): ${a[0]} subset(s) without it and ${b[0]} with it reach remainder 0 in its subtree.` })
+    frames.push({ pythonLine: 25, phase: 'node', activeLine: L('for each node v from'), node: v, sums: [...a], result: null, message: `Node ${v} (value ${nums[v]}): ${a[0]} subset(s) without it and ${b[0]} with it reach remainder 0 in its subtree.` })
   }
   const result = (notPicked[0][0] + picked[0][0] - 1 + MOD) % MOD
-  frames.push({ phase: 'done', activeLine: L('return total'), node: null, sums: [], result, message: `Valid non-empty subsets: ${result}.` })
+  frames.push({ pythonLine: 26, phase: 'done', activeLine: L('return total'), node: null, sums: [], result, message: `Valid non-empty subsets: ${result}.` })
   return { input, result, frames }
 }
 

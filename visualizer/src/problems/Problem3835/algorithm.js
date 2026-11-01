@@ -11,22 +11,22 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const n = nums.length
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), left: -1, right: -1, cost: null, count, message: `Count subarrays whose cost is at most ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count to 0'), left: -1, right: -1, cost: null, count, message: `Count subarrays whose cost is at most ${k}.` }]
   for (let left = 0; left < n; left++) {
     let low = nums[left]
     let high = nums[left]
-    frames.push({ phase: 'left', activeLine: L('set low and high'), left, right: left, cost: null, count, message: `Start subarrays at index ${left}.` })
+    frames.push({ pythonLine: 4, phase: 'left', activeLine: L('set low and high'), left, right: left, cost: null, count, message: `Start subarrays at index ${left}.` })
     for (let right = left; right < n; right++) {
       low = Math.min(low, nums[right])
       high = Math.max(high, nums[right])
       const cost = (high - low) * (right - left + 1)
       const ok = cost <= k
       if (ok) count += 1
-      frames.push({ phase: ok ? 'count' : 'skip', activeLine: L(ok ? 'add one to count' : 'if cost is at most k'), left, right, cost, count,
+      frames.push({ pythonLine: ok ? 10 : 9, phase: ok ? 'count' : 'skip', activeLine: L(ok ? 'add one to count' : 'if cost is at most k'), left, right, cost, count,
         message: `Subarray [${left}..${right}] has cost ${cost}, ${ok ? 'within' : 'over'} the limit ${k}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), left: -1, right: -1, cost: null, count, message: `Total: ${count}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return count'), left: -1, right: -1, cost: null, count, message: `Total: ${count}.` })
   return { input: { nums, k }, result: count, frames }
 }
 

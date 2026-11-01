@@ -9,10 +9,10 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { l, r, k } = input
-  const frames = [{ phase: 'start', activeLine: L('if k is 1'), x: null, power: null, count: 0, result: null, message: `Count the powers x^${k} that fall in [${l}, ${r}].` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('if k is 1'), x: null, power: null, count: 0, result: null, message: `Count the powers x^${k} that fall in [${l}, ${r}].` }]
   if (k === 1) {
     const result = r - l + 1
-    frames.push({ phase: 'one', activeLine: L('return r minus l'), x: null, power: null, count: result, result, message: `With k = 1 every integer is a power, so the answer is ${r} - ${l} + 1 = ${result}.` })
+    frames.push({ pythonLine: 3, phase: 'one', activeLine: L('return r minus l'), x: null, power: null, count: result, result, message: `With k = 1 every integer is a power, so the answer is ${r} - ${l} + 1 = ${result}.` })
     return { input, result, frames }
   }
   let count = 0
@@ -21,13 +21,13 @@ export function buildTrace(input) {
     const power = Math.pow(x, k)
     if (power >= l) {
       count++
-      frames.push({ phase: 'hit', activeLine: L('add 1 to count'), x, power, count, result: null, message: `${x}^${k} = ${power} is in range, so count it. Count ${count}.` })
+      frames.push({ pythonLine: 8, phase: 'hit', activeLine: L('add 1 to count'), x, power, count, result: null, message: `${x}^${k} = ${power} is in range, so count it. Count ${count}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('while x to the power'), x, power, count, result: null, message: `${x}^${k} = ${power} is below ${l}.` })
+      frames.push({ pythonLine: 7, phase: 'skip', activeLine: L('while x to the power'), x, power, count, result: null, message: `${x}^${k} = ${power} is below ${l}.` })
     }
     x++
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), x: null, power: null, count, result: count, message: `Perfect ${k}-th powers in range: ${count}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return count'), x: null, power: null, count, result: count, message: `Perfect ${k}-th powers in range: ${count}.` })
   return { input, result: count, frames }
 }
 

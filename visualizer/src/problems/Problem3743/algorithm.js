@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const n = nums.length
   const NEG = -Infinity
   let best = NEG
-  const frames = [{ phase: 'start', activeLine: L('set best to minus infinity'), start: -1, best: 0, message: `Each cut position in the circle can be the start of a line. Try all ${n} starts and split each line into at most ${k} pieces.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set best to minus infinity'), start: -1, best: 0, message: `Each cut position in the circle can be the start of a line. Try all ${n} starts and split each line into at most ${k} pieces.` }]
   for (let s = 0; s < n; s++) {
     const b = [...nums.slice(s), ...nums.slice(0, s)]
     const dp = Array.from({ length: k + 1 }, () => Array(n + 1).fill(NEG))
@@ -28,9 +28,9 @@ export function buildTrace(input) {
       }
     }
     for (let j = 1; j <= k; j++) best = Math.max(best, dp[j][n])
-    frames.push({ phase: 'start-cut', activeLine: L('for each start position s'), start: s, best, message: `Start at position ${s}: the line is ${b.join(', ')}. Best score so far: ${best}.` })
+    frames.push({ pythonLine: 19, phase: 'start-cut', activeLine: L('for each start position s'), start: s, best, message: `Start at position ${s}: the line is ${b.join(', ')}. Best score so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, best, message: `Maximum cyclic partition score: ${best}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), start: -1, best, message: `Maximum cyclic partition score: ${best}.` })
   return { input, result: best, frames }
 }
 

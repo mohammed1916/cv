@@ -20,10 +20,10 @@ export function buildTrace(input) {
       // (a * b) / g^2 is exactly (a / g) times (b / g), so no overflow-prone product is needed.
       const strength = (nums[i] / g) * (nums[j] / g)
       if (best === null || strength > best) best = strength
-      frames.push({ phase: 'pair', activeLine: L('set strength to'), i, j, g, strength, best, message: `Pair ${nums[i]}, ${nums[j]} has gcd ${g} and strength ${strength}.` })
+      frames.push({ pythonLine: 13, phase: 'pair', activeLine: L('set strength to'), i, j, g, strength, best, message: `Pair ${nums[i]}, ${nums[j]} has gcd ${g} and strength ${strength}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), i: -1, j: -1, g: null, strength: null, best, message: `Maximum pair strength: ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return best'), i: -1, j: -1, g: null, strength: null, best, message: `Maximum pair strength: ${best}.` })
   return { input, result: best, frames }
 }
 

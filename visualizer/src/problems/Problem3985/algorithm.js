@@ -14,20 +14,20 @@ export function buildTrace(input) {
   for (const v of nums) pre.push(pre[pre.length - 1] + v)
   const frames = []
   let best = null
-  frames.push({ phase: 'start', activeLine: L('set best to nothing'), l: -1, r: -1, sum: null, best, message: 'No palindrome has been found yet.' })
+  frames.push({ pythonLine: 6, phase: 'start', activeLine: L('set best to nothing'), l: -1, r: -1, sum: null, best, message: 'No palindrome has been found yet.' })
   for (let c = 0; c < 2 * n - 1; c++) {
     let l = Math.floor(c / 2)
     let r = l + (c % 2)
-    frames.push({ phase: 'center', activeLine: L('for each center'), l, r, sum: null, best, message: `Start at the center with ends ${l} and ${r}.` })
+    frames.push({ pythonLine: 9, phase: 'center', activeLine: L('for each center'), l, r, sum: null, best, message: `Start at the center with ends ${l} and ${r}.` })
     while (l >= 0 && r < n && nums[l] === nums[r]) {
       const sum = pre[r + 1] - pre[l]
       if (best === null || sum > best) best = sum
-      frames.push({ phase: 'match', activeLine: L('record the sum'), l, r, sum, best, message: `nums[${l}..${r}] is a palindrome with sum ${sum}.` })
+      frames.push({ pythonLine: 12, phase: 'match', activeLine: L('record the sum'), l, r, sum, best, message: `nums[${l}..${r}] is a palindrome with sum ${sum}.` })
       l--
       r++
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), l: -1, r: -1, sum: null, best, message: `Largest palindromic subarray sum: ${best}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return best'), l: -1, r: -1, sum: null, best, message: `Largest palindromic subarray sum: ${best}.` })
   return { input, result: best, frames }
 }
 

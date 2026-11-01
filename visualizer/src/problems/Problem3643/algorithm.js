@@ -17,7 +17,7 @@ const copy = grid => grid.map(row => [...row])
 export function buildTrace(input) {
   const { x, y, k } = input
   const grid = copy(input.grid)
-  const frames = [{ phase: 'start', activeLine: L('set top to x'), grid: copy(grid), top: -1, bottom: -1, message: `Flip the ${k} by ${k} square whose top-left corner is (${x}, ${y}).` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set top to x'), grid: copy(grid), top: -1, bottom: -1, message: `Flip the ${k} by ${k} square whose top-left corner is (${x}, ${y}).` }]
   let top = x
   let bottom = x + k - 1
   while (top < bottom) {
@@ -26,11 +26,11 @@ export function buildTrace(input) {
       grid[top][col] = grid[bottom][col]
       grid[bottom][col] = held
     }
-    frames.push({ phase: 'swap', activeLine: L('swap each pair'), grid: copy(grid), top, bottom, message: `Swap rows ${top} and ${bottom} across columns ${y} to ${y + k - 1}.` })
+    frames.push({ pythonLine: 7, phase: 'swap', activeLine: L('swap each pair'), grid: copy(grid), top, bottom, message: `Swap rows ${top} and ${bottom} across columns ${y} to ${y + k - 1}.` })
     top += 1
     bottom -= 1
   }
-  frames.push({ phase: 'done', activeLine: L('return grid'), grid: copy(grid), top: -1, bottom: -1, message: 'Every row of the square now sits at its mirror position.' })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return grid'), grid: copy(grid), top: -1, bottom: -1, message: 'Every row of the square now sits at its mirror position.' })
   return { input, result: grid, frames }
 }
 

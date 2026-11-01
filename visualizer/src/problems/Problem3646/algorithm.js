@@ -15,7 +15,7 @@ export function buildTrace({ n }) {
   const frames = []
   const checked = []
   let candidate = n + 1
-  frames.push({ phase: 'start', activeLine: L('set candidate to n plus one'), candidate, checked: [], message: `Start checking the numbers after ${n}.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set candidate to n plus one'), candidate, checked: [], message: `Start checking the numbers after ${n}.` })
   for (;;) {
     const text = String(candidate)
     if (text === [...text].reverse().join('')) {
@@ -23,11 +23,11 @@ export function buildTrace({ n }) {
       const failing = Object.entries(counts).find(([digit, count]) => Number(digit) !== count)
       if (!failing) {
         checked.push(candidate)
-        frames.push({ phase: 'found', activeLine: L('return candidate'), candidate, checked: [...checked], message: `${candidate} reads the same both ways, and every digit d appears exactly d times.` })
+        frames.push({ pythonLine: 10, phase: 'found', activeLine: L('return candidate'), candidate, checked: [...checked], message: `${candidate} reads the same both ways, and every digit d appears exactly d times.` })
         break
       }
       checked.push(candidate)
-      frames.push({ phase: 'reject', activeLine: L('its count must equal d'), candidate, checked: [...checked], message: `${candidate} is a palindrome, but digit ${failing[0]} appears ${failing[1]} times, not ${failing[0]}.` })
+      frames.push({ pythonLine: 9, phase: 'reject', activeLine: L('its count must equal d'), candidate, checked: [...checked], message: `${candidate} is a palindrome, but digit ${failing[0]} appears ${failing[1]} times, not ${failing[0]}.` })
     }
     candidate += 1
   }

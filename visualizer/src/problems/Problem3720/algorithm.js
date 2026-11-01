@@ -16,7 +16,7 @@ const available = s => {
 export function buildTrace(input) {
   const { s, target } = input
   const n = s.length
-  const frames = [{ phase: 'start', activeLine: L('set need to the letter counts'), prefix: '', pick: '', message: 'Try the longest shared prefix with target first, because a longer shared prefix gives a smaller answer.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set need to the letter counts'), prefix: '', pick: '', message: 'Try the longest shared prefix with target first, because a longer shared prefix gives a smaller answer.' }]
   for (let p = n - 1; p >= 0; p--) {
     const avail = available(s)
     let ok = true
@@ -25,21 +25,21 @@ export function buildTrace(input) {
       avail[target[k]] -= 1
     }
     if (!ok) {
-      frames.push({ phase: 'skip', activeLine: L('if the first p letters'), prefix: target.slice(0, p), pick: '', message: `Keeping ${p} letters of target is not possible with the letters of s.` })
+      frames.push({ pythonLine: 14, phase: 'skip', activeLine: L('if the first p letters'), prefix: target.slice(0, p), pick: '', message: `Keeping ${p} letters of target is not possible with the letters of s.` })
       continue
     }
     const pick = [...'abcdefghijklmnopqrstuvwxyz'].find(c => c > target[p] && avail[c] > 0)
     if (pick === undefined) {
-      frames.push({ phase: 'skip', activeLine: L('find the smallest letter'), prefix: target.slice(0, p), pick: '', message: `After ${p} letters there is no larger letter than ${target[p]} left.` })
+      frames.push({ pythonLine: 22, phase: 'skip', activeLine: L('find the smallest letter'), prefix: target.slice(0, p), pick: '', message: `After ${p} letters there is no larger letter than ${target[p]} left.` })
       continue
     }
     avail[pick] -= 1
     const rest = Object.keys(avail).sort().map(c => c.repeat(avail[c])).join('')
     const answer = target.slice(0, p) + pick + rest
-    frames.push({ phase: 'found', activeLine: L('return the first p letters'), prefix: target.slice(0, p), pick, message: `Keep ${p} letters, raise position ${p} to ${pick}, and sort the rest: ${answer}.` })
+    frames.push({ pythonLine: 25, phase: 'found', activeLine: L('return the first p letters'), prefix: target.slice(0, p), pick, message: `Keep ${p} letters, raise position ${p} to ${pick}, and sort the rest: ${answer}.` })
     return { input, result: answer, frames }
   }
-  frames.push({ phase: 'done', activeLine: L('return an empty string'), prefix: '', pick: '', message: 'No permutation of s is strictly greater than target.' })
+  frames.push({ pythonLine: 26, phase: 'done', activeLine: L('return an empty string'), prefix: '', pick: '', message: 'No permutation of s is strictly greater than target.' })
   return { input, result: '', frames }
 }
 

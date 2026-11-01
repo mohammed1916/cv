@@ -49,15 +49,15 @@ function feasible(n, edges, k, T) {
 export function buildTrace(input) {
   const { n, edges, k } = input
   const candidates = [...new Set(edges.flatMap(([, , s]) => [s, 2 * s]))].sort((a, b) => a - b)
-  const frames = [{ phase: 'start', activeLine: L('set candidates'), T: null, ok: null, best: null, message: 'The answer is one of the strengths, or double a strength. Test each candidate from the largest down.' }]
+  const frames = [{ pythonLine: 32, phase: 'start', activeLine: L('set candidates'), T: null, ok: null, best: null, message: 'The answer is one of the strengths, or double a strength. Test each candidate from the largest down.' }]
   let best = -1
   for (let i = candidates.length - 1; i >= 0; i--) {
     const T = candidates[i]
     const result = feasible(n, edges, k, T)
-    frames.push({ phase: 'try', activeLine: L('for each candidate T from the largest'), T, ok: result.ok, best, message: `Stability ${T}: ${result.ok ? 'a spanning tree reaches it.' : 'no spanning tree reaches it.'}` })
+    frames.push({ pythonLine: 34, phase: 'try', activeLine: L('for each candidate T from the largest'), T, ok: result.ok, best, message: `Stability ${T}: ${result.ok ? 'a spanning tree reaches it.' : 'no spanning tree reaches it.'}` })
     if (result.ok) { best = T; break }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), T: null, ok: null, best, message: best === -1 ? 'No spanning tree exists, so the answer is -1.' : `The largest achievable stability is ${best}.` })
+  frames.push({ pythonLine: best === -1 ? 36 : 35, phase: 'done', activeLine: L('return best'), T: null, ok: null, best, message: best === -1 ? 'No spanning tree exists, so the answer is -1.' : `The largest achievable stability is ${best}.` })
   return { input, result: best, frames }
 }
 

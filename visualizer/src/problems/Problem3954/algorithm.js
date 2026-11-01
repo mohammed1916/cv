@@ -11,13 +11,13 @@ export function buildTrace(input) {
   let total = 0
   const low = Math.max(1, n - k)
   const high = n + k
-  const frames = [{ phase: 'start', activeLine: L('let total be 0'), x: null, total, compatible: null, range: null, message: `Only x from ${low} to ${high} can satisfy |n - x| <= ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let total be 0'), x: null, total, compatible: null, range: null, message: `Only x from ${low} to ${high} can satisfy |n - x| <= ${k}.` }]
   for (let x = low; x <= high; x++) {
     const ok = (n & x) === 0
     if (ok) total += x
-    frames.push({ phase: ok ? 'add' : 'skip', activeLine: L('if n and x have no common set bit'), x, total, compatible: ok, range: [low, high], message: ok ? `${x} shares no set bit with ${n}, so add it. Total ${total}.` : `${x} shares a set bit with ${n}.` })
+    frames.push({ pythonLine: ok ? 7 : 6, phase: ok ? 'add' : 'skip', activeLine: L('if n and x have no common set bit'), x, total, compatible: ok, range: [low, high], message: ok ? `${x} shares no set bit with ${n}, so add it. Total ${total}.` : `${x} shares a set bit with ${n}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), x: null, total, compatible: null, range: [low, high], message: `Sum of compatible numbers: ${total}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return total'), x: null, total, compatible: null, range: [low, high], message: `Sum of compatible numbers: ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -17,7 +17,7 @@ export function buildTrace(input) {
   const NEG = -Infinity
   const best = Array.from({ length: m }, () => Array.from({ length: n }, () => Array(k + 1).fill(NEG)))
   best[0][0][0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set best[r][c][x]'), row: 0, col: 0, reach: 0, message: `Start at the top-left cell with score 0 and cost 0. Budget k = ${k}.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set best[r][c][x]'), row: 0, col: 0, reach: 0, message: `Start at the top-left cell with score 0 and cost 0. Budget k = ${k}.` }]
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue
@@ -32,12 +32,12 @@ export function buildTrace(input) {
         }
       }
       const reach = Math.max(...best[r][c])
-      frames.push({ phase: 'cell', activeLine: L('for each cost x'), row: r, col: c, reach: reach === NEG ? -1 : reach, message: `Cell (${r}, ${c}) holds ${grid[r][c]}. Best score reaching it within budget: ${reach === NEG ? 'none' : reach}.` })
+      frames.push({ pythonLine: 20, phase: 'cell', activeLine: L('for each cost x'), row: r, col: c, reach: reach === NEG ? -1 : reach, message: `Cell (${r}, ${c}) holds ${grid[r][c]}. Best score reaching it within budget: ${reach === NEG ? 'none' : reach}.` })
     }
   }
   const finalBest = Math.max(...best[m - 1][n - 1])
   const result = finalBest === NEG ? -1 : finalBest
-  frames.push({ phase: 'done', activeLine: L('return the best value'), row: m - 1, col: n - 1, reach: result, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return the best value'), row: m - 1, col: n - 1, reach: result, message: `Answer: ${result}.` })
   return { input, result, frames }
 }
 

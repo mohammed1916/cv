@@ -12,16 +12,16 @@ export function buildTrace({ nums }) {
   for (const v of nums) count.set(v, (count.get(v) ?? 0) + 1)
   const byCount = new Map()
   for (const c of count.values()) byCount.set(c, (byCount.get(c) ?? 0) + 1)
-  const frames = [{ phase: 'count', activeLine: L('count how many times'), index: -1, value: null, freq: null, result: null, message: `Counted ${count.size} distinct values and how many share each count.` }]
+  const frames = [{ pythonLine: 7, phase: 'count', activeLine: L('count how many times'), index: -1, value: null, freq: null, result: null, message: `Counted ${count.size} distinct values and how many share each count.` }]
   let result = -1
   for (let i = 0; i < nums.length; i++) {
     const v = nums[i]
     const unique = byCount.get(count.get(v)) === 1
-    frames.push({ phase: unique ? 'found' : 'scan', activeLine: L('if the number of values with that count'), index: i, value: v, freq: count.get(v), result: null,
+    frames.push({ pythonLine: unique ? 10 : 9, phase: unique ? 'found' : 'scan', activeLine: L('if the number of values with that count'), index: i, value: v, freq: count.get(v), result: null,
       message: `${v} appears ${count.get(v)} time(s); ${unique ? 'no other value shares that count' : 'another value shares that count'}.` })
     if (unique) { result = v; break }
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), index: -1, value: result, freq: null, result, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: result === -1 ? 11 : 10, phase: 'done', activeLine: L('return -1'), index: -1, value: result, freq: null, result, message: `Answer: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

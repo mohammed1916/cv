@@ -12,14 +12,14 @@ const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
 export function buildTrace({ n }) {
   let oddSum = 0
   let evenSum = 0
-  const frames = [{ phase: 'start', activeLine: L('set odd_sum to 0'), i: 0, oddSum, evenSum, message: 'Both running sums start at 0.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set odd_sum to 0'), i: 0, oddSum, evenSum, message: 'Both running sums start at 0.' }]
   for (let i = 1; i <= n; i++) {
     oddSum += 2 * i - 1
     evenSum += 2 * i
-    frames.push({ phase: 'sum', activeLine: L('add the i-th odd number'), i, oddSum, evenSum, message: `Add ${2 * i - 1} and ${2 * i}: sums are ${oddSum} and ${evenSum}.` })
+    frames.push({ pythonLine: 7, phase: 'sum', activeLine: L('add the i-th odd number'), i, oddSum, evenSum, message: `Add ${2 * i - 1} and ${2 * i}: sums are ${oddSum} and ${evenSum}.` })
   }
   const result = gcd(oddSum, evenSum)
-  frames.push({ phase: 'done', activeLine: L('return the gcd'), i: n, oddSum, evenSum, message: `gcd(${oddSum}, ${evenSum}) = ${result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the gcd'), i: n, oddSum, evenSum, message: `gcd(${oddSum}, ${evenSum}) = ${result}.` })
   return { input: { n }, result, frames }
 }
 

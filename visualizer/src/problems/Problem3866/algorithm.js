@@ -10,18 +10,18 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const count = new Map()
   for (const v of nums) count.set(v, (count.get(v) ?? 0) + 1)
-  const frames = [{ phase: 'count', activeLine: L('count how many times'), index: -1, value: null, count: null, result: null, message: `Counted the occurrences of ${count.size} distinct values.` }]
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how many times'), index: -1, value: null, count: null, result: null, message: `Counted the occurrences of ${count.size} distinct values.` }]
   let result = -1
   for (let i = 0; i < nums.length; i++) {
     const v = nums[i]
     const even = v % 2 === 0
     const unique = count.get(v) === 1
     const hit = even && unique
-    frames.push({ phase: hit ? 'found' : 'scan', activeLine: L('if v is even'), index: i, value: v, count: count.get(v), result: null,
+    frames.push({ pythonLine: hit ? 7 : 6, phase: hit ? 'found' : 'scan', activeLine: L('if v is even'), index: i, value: v, count: count.get(v), result: null,
       message: `${v} at index ${i} ${hit ? 'is even and appears once, so it is the answer' : even ? 'is even but appears more than once' : 'is odd'}.` })
     if (hit) { result = v; break }
   }
-  frames.push({ phase: 'done', activeLine: L('return v'), index: -1, value: result, count: null, result, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: result === -1 ? 8 : 7, phase: 'done', activeLine: L('return v'), index: -1, value: result, count: null, result, message: `Answer: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

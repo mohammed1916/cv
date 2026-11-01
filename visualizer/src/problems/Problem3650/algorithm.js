@@ -32,7 +32,7 @@ export function buildTrace({ n, edges }) {
   const dist = new Array(n).fill(Infinity)
   dist[0] = 0
   const done = new Array(n).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('dist[0] = 0'), node: 0, dist: [...dist], done: [...done], message: 'Each edge can also be used backwards at twice its cost. Each edge is reversed at most once on a shortest path.' }]
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('dist[0] = 0'), node: 0, dist: [...dist], done: [...done], message: 'Each edge can also be used backwards at twice its cost. Each edge is reversed at most once on a shortest path.' }]
   let result = -1
   for (;;) {
     let u = -1
@@ -44,9 +44,9 @@ export function buildTrace({ n, edges }) {
     for (const { to, cost, reversed } of arcs[u]) {
       if (dist[u] + cost < dist[to]) { dist[to] = dist[u] + cost; notes.push(`${reversed ? 'reversed' : 'forward'} arc to ${to} gives ${dist[to]}`) }
     }
-    frames.push({ phase: 'settle', activeLine: L('pop (d, u)'), node: u, dist: [...dist], done: [...done], message: `Settle node ${u} at cost ${dist[u]}.${notes.length ? ` Relax: ${notes.join('; ')}.` : ''}` })
+    frames.push({ pythonLine: 13, phase: 'settle', activeLine: L('pop (d, u)'), node: u, dist: [...dist], done: [...done], message: `Settle node ${u} at cost ${dist[u]}.${notes.length ? ` Relax: ${notes.join('; ')}.` : ''}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), node: n - 1, dist: [...dist], done: [...done], message: result === -1 ? 'Node n-1 cannot be reached: return -1.' : `Minimum cost to reach node ${n - 1}: ${result}.` })
+  frames.push({ pythonLine: result === -1 ? 22 : 17, phase: 'done', activeLine: L('return -1'), node: n - 1, dist: [...dist], done: [...done], message: result === -1 ? 'Node n-1 cannot be reached: return -1.' : `Minimum cost to reach node ${n - 1}: ${result}.` })
   return { input: { n, edges }, result, frames }
 }
 

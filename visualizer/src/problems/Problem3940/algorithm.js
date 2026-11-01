@@ -12,18 +12,18 @@ export function buildTrace(input) {
   const { nums, k } = input
   const answer = []
   const seen = new Map()
-  const frames = [{ phase: 'start', activeLine: L('let answer be'), index: -1, answer: [], seen: 0, message: `Keep at most ${k} copies of each value.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let answer be'), index: -1, answer: [], seen: 0, message: `Keep at most ${k} copies of each value.` }]
   nums.forEach((x, i) => {
     const before = seen.get(x) ?? 0
     if (before < k) {
       answer.push(x)
-      frames.push({ phase: 'keep', activeLine: L('append x to answer'), index: i, answer: [...answer], seen: before + 1, message: `${x} has been kept ${before} time(s) so far, so keep it.` })
+      frames.push({ pythonLine: 6, phase: 'keep', activeLine: L('append x to answer'), index: i, answer: [...answer], seen: before + 1, message: `${x} has been kept ${before} time(s) so far, so keep it.` })
     } else {
-      frames.push({ phase: 'drop', activeLine: L('if seen count of x'), index: i, answer: [...answer], seen: before, message: `${x} already has ${k} copies, so drop it.` })
+      frames.push({ pythonLine: 5, phase: 'drop', activeLine: L('if seen count of x'), index: i, answer: [...answer], seen: before, message: `${x} already has ${k} copies, so drop it.` })
     }
     seen.set(x, before + 1)
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: -1, answer: [...answer], seen: 0, message: `Answer: [${answer.join(', ')}].` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return answer'), index: -1, answer: [...answer], seen: 0, message: `Answer: [${answer.join(', ')}].` })
   return { input, result: answer, frames }
 }
 

@@ -7,7 +7,7 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const basis = new Array(31).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set basis to 31 zeros'), value: null, best: 0, message: 'The basis is empty.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set basis to 31 zeros'), value: null, best: 0, message: 'The basis is empty.' }]
   for (const x0 of nums) {
     let x = x0
     for (let b = 30; b >= 0; b--) {
@@ -15,11 +15,11 @@ export function buildTrace(nums) {
       if (basis[b] === 0) { basis[b] = x; break }
       x ^= basis[b]
     }
-    frames.push({ phase: 'insert', activeLine: L('reduce the value by the basis'), value: x0, best: null, message: `Insert ${x0}: basis now has ${basis.filter(v => v).length} vectors.` })
+    frames.push({ pythonLine: 10, phase: 'insert', activeLine: L('reduce the value by the basis'), value: x0, best: null, message: `Insert ${x0}: basis now has ${basis.filter(v => v).length} vectors.` })
   }
   let res = 0
   for (let b = 30; b >= 0; b--) if (basis[b] && (res ^ basis[b]) > res) res ^= basis[b]
-  frames.push({ phase: 'done', activeLine: L('return the best value'), value: null, best: res, message: `Largest value in the span: ${res}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return the best value'), value: null, best: res, message: `Largest value in the span: ${res}.` })
   return { input: nums, result: res, frames }
 }
 

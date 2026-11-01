@@ -10,7 +10,7 @@ export function buildTrace(input) {
   const { nums } = input
   const first = new Map([['0|0', 0]])
   let xor = 0, balance = 0, best = 0
-  const frames = [{ phase: 'start', activeLine: L('set first to', ), index: -1, best: 0, key: '0|0', message: 'The empty prefix has XOR 0 and balance 0. Remember where each key first appears.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set first to', ), index: -1, best: 0, key: '0|0', message: 'The empty prefix has XOR 0 and balance 0. Remember where each key first appears.' }]
   for (let i = 0; i < nums.length; i++) {
     xor ^= nums[i]
     balance += nums[i] % 2 === 0 ? 1 : -1
@@ -18,13 +18,13 @@ export function buildTrace(input) {
     const key = `${xor}|${balance}`
     if (first.has(key)) {
       best = Math.max(best, t - first.get(key))
-      frames.push({ phase: 'match', activeLine: L('if the key is in first'), index: i, best, key, message: `Prefix ${t} has the same XOR and balance as prefix ${first.get(key)}. Subarray length ${t - first.get(key)}.` })
+      frames.push({ pythonLine: 12, phase: 'match', activeLine: L('if the key is in first'), index: i, best, key, message: `Prefix ${t} has the same XOR and balance as prefix ${first.get(key)}. Subarray length ${t - first.get(key)}.` })
     } else {
       first.set(key, t)
-      frames.push({ phase: 'record', activeLine: L('otherwise record'), index: i, best, key, message: `New key ${key} at prefix ${t}.` })
+      frames.push({ pythonLine: 14, phase: 'record', activeLine: L('otherwise record'), index: i, best, key, message: `New key ${key} at prefix ${t}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, best, key: '', message: `Longest balanced subarray: ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return best'), index: -1, best, key: '', message: `Longest balanced subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, k } = input
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('set answers to an empty list'), cap: 0, answer: null, message: `Try caps 1 to ${nums.length}. For each cap, check whether a subsequence sums to ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set answers to an empty list'), cap: 0, answer: null, message: `Try caps 1 to ${nums.length}. For each cap, check whether a subsequence sums to ${k}.` }]
   for (let x = 1; x <= nums.length; x++) {
     const reachable = new Array(k + 1).fill(false)
     reachable[0] = true
@@ -20,9 +20,9 @@ export function buildTrace(input) {
       for (let s = k; s >= c; s--) if (reachable[s - c]) reachable[s] = true
     }
     answers.push(reachable[k])
-    frames.push({ phase: 'cap', activeLine: L('for each cap x'), cap: x, answer: reachable[k], message: `Cap ${x}: a subsequence sums to ${k}? ${reachable[k] ? 'yes' : 'no'}.` })
+    frames.push({ pythonLine: 11, phase: 'cap', activeLine: L('for each cap x'), cap: x, answer: reachable[k], message: `Cap ${x}: a subsequence sums to ${k}? ${reachable[k] ? 'yes' : 'no'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), cap: nums.length, answer: null, message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return answers'), cap: nums.length, answer: null, message: `Answers: [${answers.join(', ')}].` })
   return { input: { nums, k }, result: answers, frames }
 }
 

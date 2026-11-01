@@ -27,7 +27,7 @@ export function buildTrace({ nums, k }) {
   const best = Array.from({ length: k + 1 }, () => Array(n + 1).fill(Infinity))
   best[0][0] = 0
   const show = () => best.map(row => row.map(v => (Number.isFinite(v) ? v : '∞')))
-  const frames = [{ phase: 'start', cell: [0, 0], table: show(), activeLine: L('best[0][0] = 0'), message: 'Zero values split into zero pieces at cost zero.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', cell: [0, 0], table: show(), activeLine: L('best[0][0] = 0'), message: 'Zero values split into zero pieces at cost zero.' }]
   for (let parts = 1; parts <= k; parts++) {
     for (let end = 1; end <= n; end++) {
       let xor = 0
@@ -36,11 +36,11 @@ export function buildTrace({ nums, k }) {
         const candidate = best[parts - 1][start] + xor
         if (candidate < best[parts][end]) best[parts][end] = candidate
       }
-      frames.push({ phase: 'cell', cell: [parts, end], table: show(), activeLine: L('for start from end - 1'), message: `${end} values in ${parts} piece${parts === 1 ? '' : 's'}: cheapest total ${best[parts][end]}.` })
+      frames.push({ pythonLine: 11, phase: 'cell', cell: [parts, end], table: show(), activeLine: L('for start from end - 1'), message: `${end} values in ${parts} piece${parts === 1 ? '' : 's'}: cheapest total ${best[parts][end]}.` })
     }
   }
   const result = best[k][n]
-  frames.push({ phase: 'done', cell: [k, n], table: show(), activeLine: L('return best[k][n]'), message: `Minimum total XOR: ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', cell: [k, n], table: show(), activeLine: L('return best[k][n]'), message: `Minimum total XOR: ${result}.` })
   return { input: { nums, k }, result, frames }
 }
 

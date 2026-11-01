@@ -9,19 +9,19 @@ export function parseInput(text) {
 
 export function buildTrace({ nums }) {
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set stack to'), index: -1, stack: [], message: 'Start with an empty stack and read the values left to right.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set stack to'), index: -1, stack: [], message: 'Start with an empty stack and read the values left to right.' }]
   nums.forEach((value, index) => {
     let current = value
-    frames.push({ phase: 'read', activeLine: L('set current to value'), index, stack: [...stack], current, message: `Read ${value}.` })
+    frames.push({ pythonLine: 4, phase: 'read', activeLine: L('set current to value'), index, stack: [...stack], current, message: `Read ${value}.` })
     while (stack.length > 0 && stack[stack.length - 1] === current) {
       const top = stack.pop()
       current = top + current
-      frames.push({ phase: 'merge', activeLine: L('remove the top value'), index, stack: [...stack], current, message: `The top equals ${current / 2}, so they merge into ${current}.` })
+      frames.push({ pythonLine: 6, phase: 'merge', activeLine: L('remove the top value'), index, stack: [...stack], current, message: `The top equals ${current / 2}, so they merge into ${current}.` })
     }
     stack.push(current)
-    frames.push({ phase: 'push', activeLine: L('push current'), index, stack: [...stack], current, message: `Push ${current}.` })
+    frames.push({ pythonLine: 7, phase: 'push', activeLine: L('push current'), index, stack: [...stack], current, message: `Push ${current}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the stack'), index: -1, stack: [...stack], current: null, message: `No adjacent equal elements remain: [${stack.join(', ')}].` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the stack'), index: -1, stack: [...stack], current: null, message: `No adjacent equal elements remain: [${stack.join(', ')}].` })
   return { input: { nums }, result: [...stack], frames }
 }
 

@@ -21,20 +21,20 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const nums = [...input.nums]
-  const frames = [{ phase: 'start', activeLine: L('for each query'), index: -1, nums: [...nums], touched: [], answer: null, message: 'Apply the queries in order, then XOR everything.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('for each query'), index: -1, nums: [...nums], touched: [], answer: null, message: 'Apply the queries in order, then XOR everything.' }]
   const touched = new Set()
   input.queries.forEach((q, qi) => {
     const [l, r, k, v] = q
     for (let idx = l; idx <= r; idx += k) {
       nums[idx] = (nums[idx] * v) % MOD
       touched.add(idx)
-      frames.push({ phase: 'multiply', activeLine: L('set nums[idx]'), index: idx, nums: [...nums], touched: [...touched], answer: null,
+      frames.push({ pythonLine: 6, phase: 'multiply', activeLine: L('set nums[idx]'), index: idx, nums: [...nums], touched: [...touched], answer: null,
         message: `Query ${qi + 1} multiplies index ${idx} by ${v}, giving ${nums[idx]}.` })
     }
   })
   let answer = 0
   for (const value of nums) answer ^= value
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: -1, nums: [...nums], touched: [...touched], answer, message: `The XOR of all values is ${answer}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return answer'), index: -1, nums: [...nums], touched: [...touched], answer, message: `The XOR of all values is ${answer}.` })
   return { input, result: answer, frames }
 }
 

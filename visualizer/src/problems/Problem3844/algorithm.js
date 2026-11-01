@@ -11,15 +11,15 @@ export function buildTrace({ s }) {
   const n = s.length
   let best = 0
   let bestRange = null
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), l: -1, r: -1, best, message: 'Try every substring and keep the longest one that is almost a palindrome.' }]
+  const frames = [{ pythonLine: 21, phase: 'start', activeLine: L('set best to 0'), l: -1, r: -1, best, message: 'Try every substring and keep the longest one that is almost a palindrome.' }]
   for (let l = 0; l < n; l++) {
     for (let r = l; r < n; r++) {
       const ok = almost(s, l, r)
       if (ok && r - l + 1 > best) { best = r - l + 1; bestRange = [l, r] }
-      frames.push({ phase: ok ? 'found' : 'check', activeLine: L('if s from l to r'), l, r, best, message: `${s.slice(l, r + 1)} ${ok ? 'is' : 'is not'} almost a palindrome${ok ? ` (length ${r - l + 1})` : ''}.` })
+      frames.push({ pythonLine: ok ? 25 : 24, phase: ok ? 'found' : 'check', activeLine: L('if s from l to r'), l, r, best, message: `${s.slice(l, r + 1)} ${ok ? 'is' : 'is not'} almost a palindrome${ok ? ` (length ${r - l + 1})` : ''}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), l: bestRange ? bestRange[0] : -1, r: bestRange ? bestRange[1] : -1, best, message: `Longest almost-palindromic substring: ${best}.` })
+  frames.push({ pythonLine: 26, phase: 'done', activeLine: L('return best'), l: bestRange ? bestRange[0] : -1, r: bestRange ? bestRange[1] : -1, best, message: `Longest almost-palindromic substring: ${best}.` })
   return { input: { s }, result: best, frames }
 }
 

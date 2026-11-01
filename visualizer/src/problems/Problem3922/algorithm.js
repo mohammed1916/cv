@@ -11,7 +11,7 @@ const PATTERNS = ['011', '110']
 export function buildTrace(input) {
   const { s } = input
   let best = new Map([['0,0', 0]])
-  const frames = [{ phase: 'start', activeLine: L('let best be'), i: -1, best: [...best], result: null, message: 'Track how much of 011 and of 110 has been matched, as a pair, with the fewest flips so far.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('let best be'), i: -1, best: [...best], result: null, message: 'Track how much of 011 and of 110 has been matched, as a pair, with the fewest flips so far.' }]
   for (let i = 0; i < s.length; i++) {
     const next = new Map()
     for (const [key, cost] of best) {
@@ -26,10 +26,10 @@ export function buildTrace(input) {
       }
     }
     best = next
-    frames.push({ phase: 'scan', activeLine: L('for each character ch'), i, best: [...best], result: null, message: `Position ${i} is ${s[i]}. ${best.size} progress pairs remain, and the cheapest costs ${Math.min(...best.values())}.` })
+    frames.push({ pythonLine: 15, phase: 'scan', activeLine: L('for each character ch'), i, best: [...best], result: null, message: `Position ${i} is ${s[i]}. ${best.size} progress pairs remain, and the cheapest costs ${Math.min(...best.values())}.` })
   }
   const result = Math.min(...best.values())
-  frames.push({ phase: 'done', activeLine: L('return the smallest cost'), i: s.length, best: [...best], result, message: `Fewest flips to make the string coherent: ${result}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return the smallest cost'), i: s.length, best: [...best], result, message: `Fewest flips to make the string coherent: ${result}.` })
   return { input, result, frames }
 }
 

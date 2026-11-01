@@ -24,7 +24,7 @@ const minSuperset = (x, a) => {
 export function buildTrace(input) {
   const { nums, k, m } = input
   let answer = 0
-  const frames = [{ phase: 'start', activeLine: L('answer = 0'), bit: -1, candidate: 0, costs: [], ok: null, answer, message: 'Build the answer one bit at a time, from the highest bit down.' }]
+  const frames = [{ pythonLine: 14, phase: 'start', activeLine: L('answer = 0'), bit: -1, candidate: 0, costs: [], ok: null, answer, message: 'Build the answer one bit at a time, from the highest bit down.' }]
   for (let b = 6; b >= 0; b--) {
     const candidate = answer | (1 << b)
     const costs = nums.map(x => minSuperset(x, candidate) - x)
@@ -32,9 +32,9 @@ export function buildTrace(input) {
     const total = sorted.slice(0, m).reduce((s, c) => s + c, 0)
     const ok = total <= k
     if (ok) answer = candidate
-    frames.push({ phase: 'try', activeLine: L('if the m smallest costs'), bit: b, candidate, costs, ok, answer, message: ok ? `Bit ${b} fits: the ${m} cheapest raises cost ${total} <= ${k}. Answer so far: ${answer}.` : `Bit ${b} does not fit: the ${m} cheapest raises cost ${total} > ${k}.` })
+    frames.push({ pythonLine: ok ? 19 : 18, phase: 'try', activeLine: L('if the m smallest costs'), bit: b, candidate, costs, ok, answer, message: ok ? `Bit ${b} fits: the ${m} cheapest raises cost ${total} <= ${k}. Answer so far: ${answer}.` : `Bit ${b} does not fit: the ${m} cheapest raises cost ${total} > ${k}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), bit: -1, candidate: answer, costs: [], ok: null, answer, message: `Maximum AND: ${answer}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return answer'), bit: -1, candidate: answer, costs: [], ok: null, answer, message: `Maximum AND: ${answer}.` })
   return { input, result: answer, frames }
 }
 

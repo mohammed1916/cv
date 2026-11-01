@@ -13,16 +13,16 @@ export function buildTrace(input) {
   const gains = a.map((x, i) => x - b[i])
   const sorted = [...gains].sort((x, y) => y - x)
   let total = b.reduce((sum, v) => sum + v, 0)
-  const frames = [{ phase: 'start', activeLine: L('total = sum'), index: -1, gain: null, total, sorted, message: `Start with every task on technique 2: ${total} points.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('total = sum'), index: -1, gain: null, total, sorted, message: `Start with every task on technique 2: ${total} points.` }]
   sorted.forEach((g, i) => {
     if (i < k || g > 0) {
       total += g
-      frames.push({ phase: 'take', activeLine: L('if i is less than k'), index: i, gain: g, total, sorted, message: i < k ? `Move a task with gain ${g} to technique 1 (required by k).` : `Move a task with gain ${g} to technique 1 (it adds points).` })
+      frames.push({ pythonLine: 6, phase: 'take', activeLine: L('if i is less than k'), index: i, gain: g, total, sorted, message: i < k ? `Move a task with gain ${g} to technique 1 (required by k).` : `Move a task with gain ${g} to technique 1 (it adds points).` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('otherwise add the gain'), index: i, gain: g, total, sorted, message: `Keep the remaining tasks on technique 2 (gain ${g} does not help).` })
+      frames.push({ pythonLine: 5, phase: 'skip', activeLine: L('otherwise add the gain'), index: i, gain: g, total, sorted, message: `Keep the remaining tasks on technique 2 (gain ${g} does not help).` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, gain: null, total, sorted, message: `Maximum points: ${total}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total'), index: -1, gain: null, total, sorted, message: `Maximum points: ${total}.` })
   return { input, result: total, frames, sorted }
 }
 

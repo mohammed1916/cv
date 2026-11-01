@@ -35,9 +35,9 @@ export function buildTrace(input) {
     if (plain.has(0)) candidates.push(r - plain.get(0) + 1)
     if (negated.has(0)) candidates.push(r - negated.get(0) + 1)
     if (candidates.length) best = Math.max(best, ...candidates)
-    frames.push({ phase: 'extend', activeLine: L('set best to the larger of'), index: r, best, message: `Extend to index ${r}; the best valid length is ${best}.` })
+    frames.push({ pythonLine: 27, phase: 'extend', activeLine: L('set best to the larger of'), index: r, best, message: `Extend to index ${r}; the best valid length is ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, best, message: `Longest valid subarray: ${best}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return best'), index: -1, best, message: `Longest valid subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

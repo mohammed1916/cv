@@ -33,22 +33,22 @@ export function buildTrace(input) {
   const times = []
   const scores = []
   const outputs = []
-  const frames = [{ phase: 'start', activeLine: L('start with no exams'), call: -1, output: null, total: null, outputs: [], message: 'No exams are recorded yet.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('start with no exams'), call: -1, output: null, total: null, outputs: [], message: 'No exams are recorded yet.' }]
   operations.forEach((op, i) => {
     const [a, b] = args[i]
     if (op === 'record') {
       times.push(a)
       scores.push(b)
       outputs.push(null)
-      frames.push({ phase: 'record', activeLine: L('append the time and score'), call: i, output: null, total: null, outputs: [...outputs], message: `Record time ${a} with score ${b}.` })
+      frames.push({ pythonLine: 10, phase: 'record', activeLine: L('append the time and score'), call: i, output: null, total: null, outputs: [...outputs], message: `Record time ${a} with score ${b}.` })
     } else {
       let sum = 0
       for (let k = 0; k < times.length; k++) if (times[k] >= a && times[k] <= b) sum += scores[k]
       outputs.push(sum)
-      frames.push({ phase: 'query', activeLine: L('add the scores whose time is in the range'), call: i, output: sum, total: sum, outputs: [...outputs], message: `Total of exams from time ${a} to ${b}: ${sum}.` })
+      frames.push({ pythonLine: 17, phase: 'query', activeLine: L('add the scores whose time is in the range'), call: i, output: sum, total: sum, outputs: [...outputs], message: `Total of exams from time ${a} to ${b}: ${sum}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the outputs'), call: -1, output: null, total: null, outputs: [...outputs], message: 'All calls are answered.' })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return the outputs'), call: -1, output: null, total: null, outputs: [...outputs], message: 'All calls are answered.' })
   return { input, result: outputs, frames }
 }
 

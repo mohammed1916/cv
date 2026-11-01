@@ -12,17 +12,17 @@ export function buildTrace(input) {
   const { nums } = input
   const last = new Map()
   let best = -1
-  const frames = [{ phase: 'start', activeLine: L('set last to an empty map'), index: -1, best, value: null, message: 'Track the latest index i for each reversed value of an earlier element.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set last to an empty map'), index: -1, best, value: null, message: 'Track the latest index i for each reversed value of an earlier element.' }]
   nums.forEach((x, j) => {
     if (last.has(x)) {
       const gap = j - last.get(x)
       if (best === -1 || gap < best) best = gap
-      frames.push({ phase: 'match', activeLine: L('if x is a key in last'), index: j, best, value: x, message: `${x} equals the reverse of nums[${last.get(x)}]. Gap ${gap}. Best: ${best}.` })
+      frames.push({ pythonLine: 7, phase: 'match', activeLine: L('if x is a key in last'), index: j, best, value: x, message: `${x} equals the reverse of nums[${last.get(x)}]. Gap ${gap}. Best: ${best}.` })
     }
     last.set(reverseDigits(x), j)
-    frames.push({ phase: 'record', activeLine: L('set last[reverse'), index: j, best, value: x, message: `Record reverse(${x}) = ${reverseDigits(x)} at index ${j}.` })
+    frames.push({ pythonLine: 9, phase: 'record', activeLine: L('set last[reverse'), index: j, best, value: x, message: `Record reverse(${x}) = ${reverseDigits(x)} at index ${j}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, best, value: null, message: `Smallest mirror-pair gap: ${best}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return best'), index: -1, best, value: null, message: `Smallest mirror-pair gap: ${best}.` })
   return { input, result: best, frames }
 }
 

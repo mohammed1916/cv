@@ -25,11 +25,11 @@ export function buildTrace(input) {
   const parent = new Map([[key(tx, ty), null]])
   const dist = new Map([[key(tx, ty), 0]])
   const queue = [[tx, ty]]
-  const frames = [{ phase: 'start', activeLine: L('start a queue'), state: [tx, ty], distance: 0, message: `Start at the target (${tx}, ${ty}) and undo moves until reaching (${sx}, ${sy}).` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('start a queue'), state: [tx, ty], distance: 0, message: `Start at the target (${tx}, ${ty}) and undo moves until reaching (${sx}, ${sy}).` }]
   let found = false
   for (let head = 0; head < queue.length; head++) {
     const [x, y] = queue[head]
-    frames.push({ phase: 'visit', activeLine: L('take the next state'), state: [x, y], distance: dist.get(key(x, y)), message: `Visit (${x}, ${y}) at distance ${dist.get(key(x, y))}.` })
+    frames.push({ pythonLine: 8, phase: 'visit', activeLine: L('take the next state'), state: [x, y], distance: dist.get(key(x, y)), message: `Visit (${x}, ${y}) at distance ${dist.get(key(x, y))}.` })
     if (x === sx && y === sy) { found = true; break }
     for (const [a, b] of predecessors(x, y)) {
       if (a < sx || b < sy || parent.has(key(a, b))) continue
@@ -39,7 +39,7 @@ export function buildTrace(input) {
     }
   }
   const result = found ? dist.get(key(sx, sy)) : -1
-  frames.push({ phase: 'done', activeLine: L('return -1'), state: found ? [sx, sy] : null, distance: result, message: found ? `Reached (${sx}, ${sy}) in ${result} moves.` : `No state reaches (${sx}, ${sy}), so the answer is -1.` })
+  frames.push({ pythonLine: found ? 10 : 24, phase: 'done', activeLine: L('return -1'), state: found ? [sx, sy] : null, distance: result, message: found ? `Reached (${sx}, ${sy}) in ${result} moves.` : `No state reaches (${sx}, ${sy}), so the answer is -1.` })
   return { input, result, frames }
 }
 

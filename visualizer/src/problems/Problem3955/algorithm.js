@@ -9,19 +9,19 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { n, k } = input
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('let answers be'), text: '', cost: 0, accepted: null, answers: [], message: `Build strings of length ${n} with no adjacent 1s and cost at most ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let answers be'), text: '', cost: 0, accepted: null, answers: [], message: `Build strings of length ${n} with no adjacent 1s and cost at most ${k}.` }]
   const extend = (pos, previousOne, cost, text) => {
     if (pos === n) {
       const accepted = cost <= k
       if (accepted) answers.push(text)
-      frames.push({ phase: 'leaf', activeLine: L('if pos equals n'), text, cost, accepted, answers: [...answers], message: accepted ? `"${text}" has cost ${cost}, so keep it.` : `"${text}" has cost ${cost}, above ${k}.` })
+      frames.push({ pythonLine: accepted ? 7 : 6, phase: 'leaf', activeLine: L('if pos equals n'), text, cost, accepted, answers: [...answers], message: accepted ? `"${text}" has cost ${cost}, so keep it.` : `"${text}" has cost ${cost}, above ${k}.` })
       return
     }
     extend(pos + 1, false, cost, text + '0')
     if (!previousOne && cost + pos <= k) extend(pos + 1, true, cost + pos, text + '1')
   }
   extend(0, false, 0, '')
-  frames.push({ phase: 'done', activeLine: L('return answers'), text: '', cost: 0, accepted: null, answers: [...answers], message: `${answers.length} valid string(s).` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return answers'), text: '', cost: 0, accepted: null, answers: [...answers], message: `${answers.length} valid string(s).` })
   return { input, result: answers, frames }
 }
 

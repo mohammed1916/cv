@@ -37,17 +37,17 @@ function W(N, frames, label) {
     return res
   }
   const value = go(0, -1, 0, true, false)[1]
-  frames.push({ phase: label, activeLine: L_('set digits to'), bound: N, value, message: `Total waviness of 0 to ${N}: ${value}.` })
+  frames.push({ pythonLine: 37, phase: label, activeLine: L_('set digits to'), bound: N, value, message: `Total waviness of 0 to ${N}: ${value}.` })
   return value
 }
 
 export function buildTrace(input) {
   const { num1, num2 } = input
-  const frames = [{ phase: 'start', activeLine: L_('return W(num2)'), bound: num2, value: 0, message: `Waviness of [${num1}, ${num2}] equals W(${num2}) minus W(${num1 - 1}).` }]
+  const frames = [{ pythonLine: 39, phase: 'start', activeLine: L_('return W(num2)'), bound: num2, value: 0, message: `Waviness of [${num1}, ${num2}] equals W(${num2}) minus W(${num1 - 1}).` }]
   const upper = W(num2, frames, 'upper')
   const lower = W(num1 - 1, frames, 'lower')
   const result = upper - lower
-  frames.push({ phase: 'done', activeLine: L_('return W(num2) minus'), bound: num2, value: result, message: `Total waviness: ${result}.` })
+  frames.push({ pythonLine: 39, phase: 'done', activeLine: L_('return W(num2) minus'), bound: num2, value: result, message: `Total waviness: ${result}.` })
   return { input, result, frames }
 }
 

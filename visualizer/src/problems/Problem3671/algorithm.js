@@ -12,7 +12,7 @@ const gcd = (a, b) => { while (b) { [a, b] = [b, a % b] } return a }
 export function buildTrace(nums) {
   const ends = []
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, total: 0, message: 'No subsequence counted yet.' }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set total to 0'), index: -1, total: 0, message: 'No subsequence counted yet.' }]
   nums.forEach((x, i) => {
     const cur = new Map([[x, 1]])
     for (let j = 0; j < i; j++) {
@@ -24,9 +24,9 @@ export function buildTrace(nums) {
     }
     ends.push(cur)
     for (const [g, c] of cur) total = (total + g * c) % MOD
-    frames.push({ phase: 'end', activeLine: L('for each index i'), index: i, total, message: `Subsequences ending at ${x}: ${cur.size} distinct GCDs. Total ${total}.` })
+    frames.push({ pythonLine: 18, phase: 'end', activeLine: L('for each index i'), index: i, total, message: `Subsequences ending at ${x}: ${cur.size} distinct GCDs. Total ${total}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, total, message: `Answer: ${total}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return total'), index: -1, total, message: `Answer: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

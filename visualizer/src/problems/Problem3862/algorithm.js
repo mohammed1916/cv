@@ -18,17 +18,17 @@ export function buildTrace({ nums }) {
     right[i] = prod
     prod = Math.min(prod * nums[i], cap)
   }
-  const frames = [{ phase: 'start', activeLine: L('set total to'), index: -1, left: 0, right: null, result: null, message: `Total ${total}. Right products above ${total} are capped.` }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('set total to'), index: -1, left: 0, right: null, result: null, message: `Total ${total}. Right products above ${total} are capped.` }]
   let left = 0
   let result = -1
   for (let i = 0; i < n; i++) {
     const match = left === right[i]
-    frames.push({ phase: match ? 'found' : 'check', activeLine: L('if the left sum equals'), index: i, left, right: right[i], result: null,
+    frames.push({ pythonLine: match ? 12 : 13, phase: match ? 'found' : 'check', activeLine: L('if the left sum equals'), index: i, left, right: right[i], result: null,
       message: `Index ${i}: left sum ${left}, right product ${right[i] === cap ? `above ${total}` : right[i]}${match ? ', they match' : ', no match'}.` })
     if (match) { result = i; break }
     left += nums[i]
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), index: result, left: null, right: null, result, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: result === -1 ? 14 : 12, phase: 'done', activeLine: L('return -1'), index: result, left: null, right: null, result, message: `Answer: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

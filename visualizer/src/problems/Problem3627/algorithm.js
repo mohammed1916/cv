@@ -9,16 +9,16 @@ export function buildTrace(nums) {
   const sorted = [...nums].sort((a, b) => a - b)
   const n = sorted.length
   const groups = n / 3
-  const frames = [{ phase: 'start', activeLine: L('sort a copy'), index: -1, chosen: [], total: 0, message: 'Sorted. Each group takes the largest unused value and the value just below it as its top pair.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('sort a copy'), index: -1, chosen: [], total: 0, message: 'Sorted. Each group takes the largest unused value and the value just below it as its top pair.' }]
   let total = 0
   const chosen = []
   for (let g = 0; g < groups; g++) {
     const median = n - 2 - 2 * g
     total += sorted[median]
     chosen.push(median)
-    frames.push({ phase: 'group', activeLine: L('add the value just below'), index: median, chosen: [...chosen], total, message: `Group ${g + 1} has top pair ${sorted[median + 1]} and ${sorted[median]}, so its median is ${sorted[median]}. Sum so far: ${total}.` })
+    frames.push({ pythonLine: 6, phase: 'group', activeLine: L('add the value just below'), index: median, chosen: [...chosen], total, message: `Group ${g + 1} has top pair ${sorted[median + 1]} and ${sorted[median]}, so its median is ${sorted[median]}. Sum so far: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, chosen, total, message: `Maximum median sum: ${total}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total'), index: -1, chosen, total, message: `Maximum median sum: ${total}.` })
   return { input: nums, sorted, result: total, frames }
 }
 

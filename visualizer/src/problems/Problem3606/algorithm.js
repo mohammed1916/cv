@@ -16,15 +16,15 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { code, business_line, is_active } = input
   const kept = []
-  const frames = [{ phase: 'start', activeLine: L('set kept to an empty list'), index: -1, kept: 0, message: 'Check each coupon against the three rules.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set kept to an empty list'), index: -1, kept: 0, message: 'Check each coupon against the three rules.' }]
   code.forEach((c, i) => {
     const ok = c.length > 0 && /^[A-Za-z0-9_]+$/.test(c) && ORDER.includes(business_line[i]) && is_active[i] === true
     if (ok) kept.push({ rank: ORDER.indexOf(business_line[i]), code: c })
-    frames.push({ phase: ok ? 'keep' : 'drop', activeLine: L('if code i is not empty'), index: i, kept: kept.length, message: ok ? `Keep "${c}" (${business_line[i]}).` : `Drop coupon ${i}: it breaks a rule.` })
+    frames.push({ pythonLine: ok ? 6 : 5, phase: ok ? 'keep' : 'drop', activeLine: L('if code i is not empty'), index: i, kept: kept.length, message: ok ? `Keep "${c}" (${business_line[i]}).` : `Drop coupon ${i}: it breaks a rule.` })
   })
   kept.sort((a, b) => a.rank - b.rank || (a.code < b.code ? -1 : a.code > b.code ? 1 : 0))
   const result = kept.map(entry => entry.code)
-  frames.push({ phase: 'done', activeLine: L('return the codes in kept'), index: -1, kept: result.length, message: `${result.length} valid coupons, grouped by business line.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the codes in kept'), index: -1, kept: result.length, message: `${result.length} valid coupons, grouped by business line.` })
   return { input, result, frames }
 }
 

@@ -21,10 +21,10 @@ export function buildTrace(input) {
   let comps = n
   const countAt = new Map()
   const times = [...new Set(edges.map(e => e[2]))].sort((a, b) => b - a)
-  const frames = [{ phase: 'start', activeLine: L('start with every node'), time: null, comps, message: `${n} nodes, each its own component. Need at least ${k}.` }]
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('start with every node'), time: null, comps, message: `${n} nodes, each its own component. Need at least ${k}.` }]
   for (const t of times) {
     countAt.set(t, comps)
-    frames.push({ phase: 'group', activeLine: L('for each time t from the largest'), time: t, comps, message: `Edges with time above ${t} are kept: ${comps} components.` })
+    frames.push({ pythonLine: 16, phase: 'group', activeLine: L('for each time t from the largest'), time: t, comps, message: `Edges with time above ${t} are kept: ${comps} components.` })
     for (const [u, v, w] of edges) {
       if (w !== t) continue
       const ru = find(u)
@@ -38,10 +38,10 @@ export function buildTrace(input) {
     const count = countAt.get(t)
     if (count >= k) {
       answer = t
-      frames.push({ phase: 'answer', activeLine: L('then return t'), time: t, comps: count, message: `Time ${t} leaves ${count} components, at least ${k}.` })
+      frames.push({ pythonLine: 25, phase: 'answer', activeLine: L('then return t'), time: t, comps: count, message: `Time ${t} leaves ${count} components, at least ${k}.` })
       break
     }
-    frames.push({ phase: 'scan', activeLine: L('if the count for t'), time: t, comps: count, message: `Time ${t} leaves ${count} components, short of ${k}.` })
+    frames.push({ pythonLine: 24, phase: 'scan', activeLine: L('if the count for t'), time: t, comps: count, message: `Time ${t} leaves ${count} components, short of ${k}.` })
   }
   return { input: { n, edges, k }, result: answer, frames }
 }

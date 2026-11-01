@@ -18,22 +18,22 @@ export function buildTrace(input) {
   const { occupiedIntervals, freeStart, freeEnd } = input
   const sorted = occupiedIntervals.map(iv => [...iv]).sort((a, b) => a[0] - b[0] || a[1] - b[1])
   const merged = []
-  const frames = [{ phase: 'start', activeLine: L('let sorted be'), block: null, merged: [], answer: [], message: `Free window is [${freeStart}, ${freeEnd}].` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let sorted be'), block: null, merged: [], answer: [], message: `Free window is [${freeStart}, ${freeEnd}].` }]
   for (const [s, e] of sorted) {
     if (merged.length && s <= merged[merged.length - 1][1] + 1) {
       merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], e)
     } else {
       merged.push([s, e])
     }
-    frames.push({ phase: 'merge', activeLine: L('extend the last merged end'), block: [s, e], merged: merged.map(b => [...b]), answer: [], message: `Interval [${s}, ${e}] joins the merged list.` })
+    frames.push({ pythonLine: 4, phase: 'merge', activeLine: L('extend the last merged end'), block: [s, e], merged: merged.map(b => [...b]), answer: [], message: `Interval [${s}, ${e}] joins the merged list.` })
   }
   const answer = []
   for (const [s, e] of merged) {
     if (s < freeStart) answer.push([s, Math.min(e, freeStart - 1)])
     if (e > freeEnd) answer.push([Math.max(s, freeEnd + 1), e])
-    frames.push({ phase: 'trim', activeLine: L('if s is before freeStart'), block: [s, e], merged: merged.map(b => [...b]), answer: answer.map(a => [...a]), message: `Block [${s}, ${e}] keeps its parts outside [${freeStart}, ${freeEnd}].` })
+    frames.push({ pythonLine: e > freeEnd ? 13 : s < freeStart ? 11 : 12, phase: 'trim', activeLine: L('if s is before freeStart'), block: [s, e], merged: merged.map(b => [...b]), answer: answer.map(a => [...a]), message: `Block [${s}, ${e}] keeps its parts outside [${freeStart}, ${freeEnd}].` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), block: null, merged: merged.map(b => [...b]), answer: answer.map(a => [...a]), message: `Remaining occupied intervals: ${answer.length}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return answer'), block: null, merged: merged.map(b => [...b]), answer: answer.map(a => [...a]), message: `Remaining occupied intervals: ${answer.length}.` })
   return { input, result: answer, frames }
 }
 

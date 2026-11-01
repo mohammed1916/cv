@@ -31,12 +31,12 @@ export function buildTrace(input) {
   const { nums1, queries } = input
   const nums2 = [...input.nums2]
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('let answers be'), query: -1, nums2: [...nums2], answers: [], message: 'Process the queries in order. Type 1 adds to nums2, type 2 counts pairs.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('let answers be'), query: -1, nums2: [...nums2], answers: [], message: 'Process the queries in order. Type 1 adds to nums2, type 2 counts pairs.' }]
   queries.forEach((q, qi) => {
     if (q[0] === 1) {
       const [, x, y, val] = q
       for (let k = x; k <= y; k++) nums2[k] += val
-      frames.push({ phase: 'update', activeLine: L('add val to nums2'), query: qi, nums2: [...nums2], answers: [...answers], message: `Add ${val} to nums2[${x}..${y}].` })
+      frames.push({ pythonLine: 9, phase: 'update', activeLine: L('add val to nums2'), query: qi, nums2: [...nums2], answers: [...answers], message: `Add ${val} to nums2[${x}..${y}].` })
     } else {
       const tot = q[1]
       const freq = new Map()
@@ -44,10 +44,10 @@ export function buildTrace(input) {
       let total = 0
       for (const a of nums1) total += freq.get(tot - a) ?? 0
       answers.push(total)
-      frames.push({ phase: 'count', activeLine: L('append total to answers'), query: qi, nums2: [...nums2], answers: [...answers], message: `Pairs summing to ${tot}: ${total}.` })
+      frames.push({ pythonLine: 15, phase: 'count', activeLine: L('append total to answers'), query: qi, nums2: [...nums2], answers: [...answers], message: `Pairs summing to ${tot}: ${total}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), query: -1, nums2: [...nums2], answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return answers'), query: -1, nums2: [...nums2], answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input, result: answers, frames }
 }
 

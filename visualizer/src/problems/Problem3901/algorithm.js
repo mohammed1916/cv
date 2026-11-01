@@ -23,10 +23,10 @@ export function buildTrace(input) {
   const n = nums.length
   const values = [...nums]
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('let count be 0'), values: [...values], best: [], good: null, count, message: `Each query changes one value; after it, look for a subset of size below ${n} with gcd exactly ${p}.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('let count be 0'), values: [...values], best: [], good: null, count, message: `Each query changes one value; after it, look for a subset of size below ${n} with gcd exactly ${p}.` }]
   queries.forEach(([index, value], q) => {
     values[index] = value
-    frames.push({ phase: 'update', activeLine: L('set values at index'), values: [...values], best: [], good: null, count, index, message: `Query ${q + 1} sets position ${index} to ${value}.` })
+    frames.push({ pythonLine: 7, phase: 'update', activeLine: L('set values at index'), values: [...values], best: [], good: null, count, index, message: `Query ${q + 1} sets position ${index} to ${value}.` })
     let best = new Map()
     for (const x of values) {
       if (x % p !== 0) continue
@@ -36,13 +36,13 @@ export function buildTrace(input) {
         if (!updates.has(h) || s + 1 < updates.get(h)) updates.set(h, s + 1)
       }
       for (const [g, s] of updates) if (!best.has(g) || s < best.get(g)) best.set(g, s)
-      frames.push({ phase: 'element', activeLine: L('extend every entry'), values: [...values], best: [...best].map(([g, s]) => [g, s]), good: null, count, index, message: `Element ${x} joins the table. Smallest size for each gcd: ${[...best].map(([g, s]) => `${g}:${s}`).join(', ')}.` })
+      frames.push({ pythonLine: 19, phase: 'element', activeLine: L('extend every entry'), values: [...values], best: [...best].map(([g, s]) => [g, s]), good: null, count, index, message: `Element ${x} joins the table. Smallest size for each gcd: ${[...best].map(([g, s]) => `${g}:${s}`).join(', ')}.` })
     }
     const good = best.has(p) && best.get(p) < n
     if (good) count++
-    frames.push({ phase: 'check', activeLine: L('if best has gcd p'), values: [...values], best: [...best].map(([g, s]) => [g, s]), good, count, index, message: good ? `A good subsequence exists after query ${q + 1}. Count is ${count}.` : `No subset of size below ${n} has gcd ${p} after query ${q + 1}.` })
+    frames.push({ pythonLine: good ? 21 : 20, phase: 'check', activeLine: L('if best has gcd p'), values: [...values], best: [...best].map(([g, s]) => [g, s]), good, count, index, message: good ? `A good subsequence exists after query ${q + 1}. Count is ${count}.` : `No subset of size below ${n} has gcd ${p} after query ${q + 1}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return count'), values: [...values], best: [], good: null, count, message: `Queries with a good subsequence: ${count}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return count'), values: [...values], best: [], good: null, count, message: `Queries with a good subsequence: ${count}.` })
   return { input, result: count, frames }
 }
 

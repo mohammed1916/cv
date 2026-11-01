@@ -12,12 +12,12 @@ export function buildTrace(input) {
   const { nums } = input
   const reflections = nums.map(reflect)
   const frames = []
-  nums.forEach((x, i) => frames.push({ phase: 'key', activeLine: L('reverse the binary digits'), index: i, reflections, message: `${x} reflects to ${reflections[i]}.` }))
+  nums.forEach((x, i) => frames.push({ pythonLine: 3, phase: 'key', activeLine: L('reverse the binary digits'), index: i, reflections, message: `${x} reflects to ${reflections[i]}.` }))
   const pairs = nums.map((x, i) => ({ x, r: reflections[i] }))
   pairs.sort((a, b) => a.r - b.r || a.x - b.x)
   const result = pairs.map(p => p.x)
-  frames.push({ phase: 'sort', activeLine: L('sort the pairs'), index: -1, reflections, sorted: result, message: 'Sort by reflection, breaking ties by the original value.' })
-  frames.push({ phase: 'done', activeLine: L('return the x values'), index: -1, reflections, sorted: result, message: `Sorted order: ${result.join(', ')}.` })
+  frames.push({ pythonLine: 4, phase: 'sort', activeLine: L('sort the pairs'), index: -1, reflections, sorted: result, message: 'Sort by reflection, breaking ties by the original value.' })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return the x values'), index: -1, reflections, sorted: result, message: `Sorted order: ${result.join(', ')}.` })
   return { input, result, frames, reflections }
 }
 

@@ -17,7 +17,7 @@ function optionsFor(running, position) {
 export function buildTrace(n) {
   const digits = String(n).split('').reverse().map(Number)
   let states = new Map([['0,1,1', 1]])
-  const frames = [{ phase: 'start', activeLine: L('start with one state'), position: -1, digit: null, states: 1, total: null, message: `Both addends must have at least one digit. The digits of n from the ones place: ${digits.join(' ')}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('start with one state'), position: -1, digit: null, states: 1, total: null, message: `Both addends must have at least one digit. The digits of n from the ones place: ${digits.join(' ')}.` }]
   digits.forEach((digit, position) => {
     const next = new Map()
     for (const [key, count] of states) {
@@ -32,11 +32,11 @@ export function buildTrace(n) {
       }
     }
     states = next
-    frames.push({ phase: 'digit', activeLine: L('keep the choices where the sum mod 10 equals'), position, digit, states: states.size, total: null, message: `Digit ${digit} at place ${position}: ${states.size} live states remain.` })
+    frames.push({ pythonLine: 16, phase: 'digit', activeLine: L('keep the choices where the sum mod 10 equals'), position, digit, states: states.size, total: null, message: `Digit ${digit} at place ${position}: ${states.size} live states remain.` })
   })
   let total = 0
   for (const [key, count] of states) if (key.startsWith('0,')) total += count
-  frames.push({ phase: 'done', activeLine: L('return the count of states with carry 0'), position: -1, digit: null, states: states.size, total, message: `Pairs with no zero digits: ${total}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return the count of states with carry 0'), position: -1, digit: null, states: states.size, total, message: `Pairs with no zero digits: ${total}.` })
   return { input: n, result: total, frames }
 }
 

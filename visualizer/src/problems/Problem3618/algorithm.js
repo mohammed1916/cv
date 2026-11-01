@@ -14,18 +14,18 @@ const isPrime = i => {
 export function buildTrace(nums) {
   let sumA = 0
   let sumB = 0
-  const frames = [{ phase: 'start', activeLine: L('set sumA and sumB'), index: -1, sumA, sumB, message: 'Both groups start empty.' }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('set sumA and sumB'), index: -1, sumA, sumB, message: 'Both groups start empty.' }]
   nums.forEach((v, i) => {
     if (isPrime(i)) {
       sumA += v
-      frames.push({ phase: 'prime', activeLine: L('add nums at i to sumA'), index: i, sumA, sumB, message: `Index ${i} is prime: ${v} joins A (sum ${sumA}).` })
+      frames.push({ pythonLine: 16, phase: 'prime', activeLine: L('add nums at i to sumA'), index: i, sumA, sumB, message: `Index ${i} is prime: ${v} joins A (sum ${sumA}).` })
     } else {
       sumB += v
-      frames.push({ phase: 'other', activeLine: L('add nums at i to sumB'), index: i, sumA, sumB, message: `Index ${i} is not prime: ${v} joins B (sum ${sumB}).` })
+      frames.push({ pythonLine: 18, phase: 'other', activeLine: L('add nums at i to sumB'), index: i, sumA, sumB, message: `Index ${i} is not prime: ${v} joins B (sum ${sumB}).` })
     }
   })
   const result = Math.abs(sumA - sumB)
-  frames.push({ phase: 'done', activeLine: L('return the absolute'), index: -1, sumA, sumB, message: `|${sumA} - ${sumB}| = ${result}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return the absolute'), index: -1, sumA, sumB, message: `|${sumA} - ${sumB}| = ${result}.` })
   return { input: nums, result, frames }
 }
 

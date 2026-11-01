@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const n = coords.length
   let best = -1
   let bestTriple = null
-  const frames = [{ phase: 'start', activeLine: L('set best to -1'), triple: null, best: -1, message: 'Look for two points on a shared horizontal or vertical line. The third point gives the height.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to -1'), triple: null, best: -1, message: 'Look for two points on a shared horizontal or vertical line. The third point gives the height.' }]
   // Horizontal side: two points with equal y form the base; the third point must be off that line.
   for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
     const [p, q] = [coords[i], coords[j]]
@@ -38,9 +38,9 @@ export function buildTrace(input) {
         if (cand > best) { best = cand; bestTriple = [i, j, r] }
       }
     }
-    frames.push({ phase: 'pair', activeLine: L('for each pair of points'), triple: bestTriple, best, message: `Pair ${i} and ${j} checked. Best twice-area so far: ${best}.` })
+    frames.push({ pythonLine: 6, phase: 'pair', activeLine: L('for each pair of points'), triple: bestTriple, best, message: `Pair ${i} and ${j} checked. Best twice-area so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), triple: bestTriple, best, message: best === -1 ? 'No triangle has a side on an axis line, so the answer is -1.' : `The largest twice-area is ${best}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return best'), triple: bestTriple, best, message: best === -1 ? 'No triangle has a side on an axis line, so the answer is -1.' : `The largest twice-area is ${best}.` })
   return { input, result: best, frames }
 }
 

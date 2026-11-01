@@ -35,9 +35,9 @@ export function buildTrace(input) {
   const { s, target } = input
   const counts = countOf(s)
   const odd = Object.keys(counts).filter(c => counts[c] % 2 === 1)
-  const frames = [{ phase: 'start', activeLine: L('count the letters of s'), half: '', candidate: '', message: 'A palindrome needs at most one letter with an odd count.' }]
+  const frames = [{ pythonLine: 28, phase: 'start', activeLine: L('count the letters of s'), half: '', candidate: '', message: 'A palindrome needs at most one letter with an odd count.' }]
   if (odd.length > 1) {
-    frames.push({ phase: 'done', activeLine: L('return an empty string'), half: '', candidate: '', message: 'Two or more letters have odd counts, so no palindrome exists.' })
+    frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return an empty string'), half: '', candidate: '', message: 'Two or more letters have odd counts, so no palindrome exists.' })
     return { input, result: '', frames }
   }
   const middle = odd[0] || ''
@@ -46,18 +46,18 @@ export function buildTrace(input) {
   const t1 = target.slice(0, h)
   const mirror = x => x.split('').reverse().join('')
   const cand = t1 + middle + mirror(t1)
-  frames.push({ phase: 'check', activeLine: L('if half letters equal'), half, candidate: cand, message: `Half letters: ${half || '(none)'}. Try the palindrome built from the target's first half: ${cand}.` })
+  frames.push({ pythonLine: 37, phase: 'check', activeLine: L('if half letters equal'), half, candidate: cand, message: `Half letters: ${half || '(none)'}. Try the palindrome built from the target's first half: ${cand}.` })
   if ([...half].sort().join('') === [...t1].sort().join('') && cand > target) {
-    frames.push({ phase: 'found', activeLine: L('return the palindrome'), half: t1, candidate: cand, message: `${cand} is a palindrome and is greater than target.` })
+    frames.push({ pythonLine: 38, phase: 'found', activeLine: L('return the palindrome'), half: t1, candidate: cand, message: `${cand} is a palindrome and is greater than target.` })
     return { input, result: cand, frames }
   }
   const next = nextArrangement(half, t1)
   if (next === null) {
-    frames.push({ phase: 'done', activeLine: L('return an empty string'), half, candidate: '', message: 'No arrangement of the half letters is greater than the target half.' })
+    frames.push({ pythonLine: 41, phase: 'done', activeLine: L('return an empty string'), half, candidate: '', message: 'No arrangement of the half letters is greater than the target half.' })
     return { input, result: '', frames }
   }
   const answer = next + middle + mirror(next)
-  frames.push({ phase: 'found', activeLine: L('return the palindrome'), half: next, candidate: answer, message: `The smallest half above the target half is ${next}. The palindrome is ${answer}.` })
+  frames.push({ pythonLine: 42, phase: 'found', activeLine: L('return the palindrome'), half: next, candidate: answer, message: `The smallest half above the target half is ${next}. The palindrome is ${answer}.` })
   return { input, result: answer, frames }
 }
 

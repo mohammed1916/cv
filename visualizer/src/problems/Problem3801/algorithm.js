@@ -28,7 +28,7 @@ export function buildTrace(input) {
     return vals.sort((a, b) => a - b)
   }
   const cost = Array(full + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('cost of a single list is 0'), sub: 0, other: 0, mask: 0, candidate: null, message: 'A single list costs nothing. Merge groups of lists in increasing order.' }]
+  const frames = [{ pythonLine: 15, phase: 'start', activeLine: L('cost of a single list is 0'), sub: 0, other: 0, mask: 0, candidate: null, message: 'A single list costs nothing. Merge groups of lists in increasing order.' }]
   for (let mask = 1; mask <= full; mask++) {
     if ((mask & (mask - 1)) === 0) continue
     let best = Infinity
@@ -39,12 +39,12 @@ export function buildTrace(input) {
       const b = members(other)
       const candidate = cost[sub] + cost[other] + a.length + b.length + Math.abs(median(a) - median(b))
       if (candidate < best) best = candidate
-      frames.push({ phase: 'combine', activeLine: L('candidate = cost(A)'), sub, other, mask, candidate, message: `Merge group ${sub} with group ${other} for a cost of ${candidate}.` })
+      frames.push({ pythonLine: 26, phase: 'combine', activeLine: L('candidate = cost(A)'), sub, other, mask, candidate, message: `Merge group ${sub} with group ${other} for a cost of ${candidate}.` })
     }
     cost[mask] = best
   }
   const result = cost[full]
-  frames.push({ phase: 'done', activeLine: L('return cost of all lists'), sub: 0, other: 0, mask: full, candidate: result, message: `Minimum total cost: ${result}.` })
+  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return cost of all lists'), sub: 0, other: 0, mask: full, candidate: result, message: `Minimum total cost: ${result}.` })
   return { input, result, frames, owner, values: owner.map((_, i) => flatten(lists)[i]) }
 }
 

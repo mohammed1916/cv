@@ -22,17 +22,17 @@ export function buildTrace(input) {
   const limit = Array(n).fill(INF)
   limit[0] = 0
   for (const [idx, maxVal] of restrictions) limit[idx] = maxVal
-  const frames = [{ phase: 'start', activeLine: L('limit = infinity'), index: -1, limit: [...limit], message: 'Start with the caps: a[0] is 0, and restricted positions have their maxVal.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('limit = infinity'), index: -1, limit: [...limit], message: 'Start with the caps: a[0] is 0, and restricted positions have their maxVal.' }]
   for (let i = 1; i < n; i++) {
     limit[i] = Math.min(limit[i], limit[i - 1] + diff[i - 1])
-    frames.push({ phase: 'forward', activeLine: L('limit[i - 1] + diff[i - 1]'), index: i, limit: [...limit], message: `Cap ${i} from the left: at most ${limit[i]}.` })
+    frames.push({ pythonLine: 8, phase: 'forward', activeLine: L('limit[i - 1] + diff[i - 1]'), index: i, limit: [...limit], message: `Cap ${i} from the left: at most ${limit[i]}.` })
   }
   for (let i = n - 2; i >= 0; i--) {
     limit[i] = Math.min(limit[i], limit[i + 1] + diff[i])
-    frames.push({ phase: 'backward', activeLine: L('limit[i + 1] + diff[i]'), index: i, limit: [...limit], message: `Cap ${i} from the right: at most ${limit[i]}.` })
+    frames.push({ pythonLine: 10, phase: 'backward', activeLine: L('limit[i + 1] + diff[i]'), index: i, limit: [...limit], message: `Cap ${i} from the right: at most ${limit[i]}.` })
   }
   const result = Math.max(...limit)
-  frames.push({ phase: 'done', activeLine: L('return the largest value in limit'), index: -1, limit: [...limit], message: `The largest achievable value is ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the largest value in limit'), index: -1, limit: [...limit], message: `The largest achievable value is ${result}.` })
   return { input, result, frames }
 }
 

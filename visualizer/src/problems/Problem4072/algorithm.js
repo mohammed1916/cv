@@ -30,9 +30,9 @@ export function buildTrace(input) {
     plus.push(p)
     minus.push(m)
     best = Math.max(best, p[0], p[1], m[0], m[1])
-    frames.push({ phase: 'index', activeLine: L('set p to x'), index: i, best, plus: p.slice(), minus: m.slice(), message: `Ending at index ${i} (${x}): plus ${p[0]} / ${p[1]}, minus ${m[0]} / ${m[1]}.` })
+    frames.push({ pythonLine: 20, phase: 'index', activeLine: L('set p to x'), index: i, best, plus: p.slice(), minus: m.slice(), message: `Ending at index ${i} (${x}): plus ${p[0]} / ${p[1]}, minus ${m[0]} / ${m[1]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, best, plus: null, minus: null, message: `Largest alternating sum: ${best}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return best'), index: -1, best, plus: null, minus: null, message: `Largest alternating sum: ${best}.` })
   return { input, result: best, frames }
 }
 

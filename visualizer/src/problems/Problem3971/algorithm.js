@@ -17,21 +17,21 @@ export function buildTrace(input) {
   const { value, decay, m } = input
   const gain = [...value]
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('let heap be'), index: -1, gain: [...gain], total, message: `Each index starts with gain value[i]. Pick the largest gain up to ${m} times.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('let heap be'), index: -1, gain: [...gain], total, message: `Each index starts with gain value[i]. Pick the largest gain up to ${m} times.` }]
   for (let step = 0; step < m; step++) {
     let best = 0
     for (let i = 1; i < gain.length; i++) if (gain[i] > gain[best]) best = i
     if (gain[best] <= 0) {
-      frames.push({ phase: 'stop', activeLine: L('if gain is at most 0'), index: best, gain: [...gain], total, message: `The best remaining gain is ${gain[best]}, so stop.` })
+      frames.push({ pythonLine: 13, phase: 'stop', activeLine: L('if gain is at most 0'), index: best, gain: [...gain], total, message: `The best remaining gain is ${gain[best]}, so stop.` })
       break
     }
     total += gain[best]
     const taken = gain[best]
     gain[best] -= decay[best]
-    frames.push({ phase: 'pick', activeLine: L('replace that gain'), index: best, gain: [...gain], total, message: `Pick index ${best} for gain ${taken}. Its next gain is ${gain[best]}. Total ${total}.` })
+    frames.push({ pythonLine: 15, phase: 'pick', activeLine: L('replace that gain'), index: best, gain: [...gain], total, message: `Pick index ${best} for gain ${taken}. Its next gain is ${gain[best]}. Total ${total}.` })
   }
   const result = total % MOD
-  frames.push({ phase: 'done', activeLine: L('return total modulo'), index: -1, gain: [...gain], total, message: `Maximum total value: ${result}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return total modulo'), index: -1, gain: [...gain], total, message: `Maximum total value: ${result}.` })
   return { input, result, frames }
 }
 

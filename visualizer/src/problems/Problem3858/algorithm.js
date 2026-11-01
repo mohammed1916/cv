@@ -18,15 +18,15 @@ export function buildTrace({ grid }) {
   const top = Math.max(...grid.flat()).toString(2).length
   const limit = (2 ** top) - 1
   let answer = limit
-  const frames = [{ phase: 'start', activeLine: L('set limit'), bit: null, candidate: null, answer, message: `Start with all ${top} bits set, which every value fits inside.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set limit'), bit: null, candidate: null, answer, message: `Start with all ${top} bits set, which every value fits inside.` }]
   for (let bit = top - 1; bit >= 0; bit--) {
     const candidate = answer & ~(1 << bit)
     const ok = grid.every(row => row.some(v => fits(v, candidate)))
-    frames.push({ phase: ok ? 'clear' : 'keep', activeLine: L(ok ? 'set answer to candidate' : 'if every row'), bit, candidate, answer, message: `Try clearing bit ${bit}: ${ok ? 'every row still has a value that fits, so keep it cleared' : 'some row has no value that fits, so the bit stays'}.` })
+    frames.push({ pythonLine: ok ? 7 : 6, phase: ok ? 'clear' : 'keep', activeLine: L(ok ? 'set answer to candidate' : 'if every row'), bit, candidate, answer, message: `Try clearing bit ${bit}: ${ok ? 'every row still has a value that fits, so keep it cleared' : 'some row has no value that fits, so the bit stays'}.` })
     if (ok) answer = candidate
     frames[frames.length - 1].answer = answer
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), bit: null, candidate: null, answer, message: `Minimum bitwise OR: ${answer}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return answer'), bit: null, candidate: null, answer, message: `Minimum bitwise OR: ${answer}.` })
   return { input: { grid }, result: answer, frames }
 }
 

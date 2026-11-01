@@ -9,13 +9,13 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { s } = input
   let end = s.length
-  const frames = [{ phase: 'start', activeLine: L('set end to the length of s'), index: end, end, message: `Start at the end of "${s}".` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set end to the length of s'), index: end, end, message: `Start at the end of "${s}".` }]
   while (end > 0 && 'aeiou'.includes(s[end - 1])) {
     end -= 1
-    frames.push({ phase: 'trim', activeLine: L('move end back by one'), index: end, end, message: `"${s[end]}" is a trailing vowel; move the end back.` })
+    frames.push({ pythonLine: 4, phase: 'trim', activeLine: L('move end back by one'), index: end, end, message: `"${s[end]}" is a trailing vowel; move the end back.` })
   }
   const result = s.slice(0, end)
-  frames.push({ phase: 'done', activeLine: L('return the first end characters'), index: end, end, message: `Result: "${result}".` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return the first end characters'), index: end, end, message: `Result: "${result}".` })
   return { input, result, frames }
 }
 

@@ -15,7 +15,7 @@ const digitSum = v => String(v).split('').reduce((a, c) => a + Number(c), 0)
 export function buildTrace({ digit_sum: sums }) {
   let ways = new Array(LIMIT + 1).fill(0)
   for (let v = 0; v <= LIMIT; v++) if (digitSum(v) === sums[0]) ways[v] = 1
-  const frames = [{ phase: 'start', activeLine: L('set limit to'), position: 0, total: null, result: null, message: `Position 0 may hold any value from 0 to ${LIMIT} with digit sum ${sums[0]}.` }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('set limit to'), position: 0, total: null, result: null, message: `Position 0 may hold any value from 0 to ${LIMIT} with digit sum ${sums[0]}.` }]
   for (let p = 1; p < sums.length; p++) {
     let running = 0
     const next = new Array(LIMIT + 1).fill(0)
@@ -25,10 +25,10 @@ export function buildTrace({ digit_sum: sums }) {
     }
     ways = next
     const total = ways.reduce((a, b) => (a + b) % MOD, 0)
-    frames.push({ phase: 'position', activeLine: L('if the digit sum of v equals digit_sum[p]'), position: p, total, result: null, message: `Position ${p} with digit sum ${sums[p]}: ${total} ways so far.` })
+    frames.push({ pythonLine: 16, phase: 'position', activeLine: L('if the digit sum of v equals digit_sum[p]'), position: p, total, result: null, message: `Position ${p} with digit sum ${sums[p]}: ${total} ways so far.` })
   }
   const result = ways.reduce((a, b) => (a + b) % MOD, 0)
-  frames.push({ phase: 'done', activeLine: L('return the sum of ways'), position: sums.length - 1, total: result, result, message: `Total count modulo 1000000007: ${result}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return the sum of ways'), position: sums.length - 1, total: result, result, message: `Total count modulo 1000000007: ${result}.` })
   return { input: { digit_sum: sums }, result, frames }
 }
 

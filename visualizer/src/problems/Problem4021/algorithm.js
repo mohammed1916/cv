@@ -23,9 +23,9 @@ export function buildTrace(input) {
     let cost = r
     for (let i = 0; i < Math.floor(n / 2); i++) cost += pairCost(t[i], t[n - 1 - i])
     if (best === null || cost < best) best = cost
-    frames.push({ phase: 'rotate', activeLine: L('build the rotated string'), r, text: t, cost, best, message: `Rotate ${r} time${r === 1 ? '' : 's'} to get ${t}: total ${cost}.` })
+    frames.push({ pythonLine: 5, phase: 'rotate', activeLine: L('build the rotated string'), r, text: t, cost, best, message: `Rotate ${r} time${r === 1 ? '' : 's'} to get ${t}: total ${cost}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), r: -1, text: s, cost: null, best, message: `Minimum operations: ${best}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return best'), r: -1, text: s, cost: null, best, message: `Minimum operations: ${best}.` })
   return { input, result: best, frames }
 }
 

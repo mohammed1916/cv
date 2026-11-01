@@ -12,14 +12,14 @@ export function buildTrace({ nums }) {
   const first = nums[0]
   const last = nums[n - 1]
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('set first to'), index: 0, first, last, result: null, message: `The first element is ${first}. Each player keeps deleting, so the endpoints are the only candidates.` })
-  frames.push({ phase: 'ends', activeLine: L('set last to'), index: n - 1, first, last, result: null, message: `The last element is ${last}.` })
+  frames.push({ pythonLine: 4, phase: 'start', activeLine: L('set first to'), index: 0, first, last, result: null, message: `The first element is ${first}. Each player keeps deleting, so the endpoints are the only candidates.` })
+  frames.push({ pythonLine: 5, phase: 'ends', activeLine: L('set last to'), index: n - 1, first, last, result: null, message: `The last element is ${last}.` })
   if (n === 1) {
-    frames.push({ phase: 'done', activeLine: L('return that element'), index: 0, first, last, result: first, message: `Only ${first} remains.` })
+    frames.push({ pythonLine: 3, phase: 'done', activeLine: L('return that element'), index: 0, first, last, result: first, message: `Only ${first} remains.` })
     return { input: { nums }, result: first, frames }
   }
   const result = Math.max(first, last)
-  frames.push({ phase: 'done', activeLine: L('return the larger'), index: first >= last ? 0 : n - 1, first, last, result, message: `Alice can keep the larger end, ${result}. Bob cannot remove it.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return the larger'), index: first >= last ? 0 : n - 1, first, last, result, message: `Alice can keep the larger end, ${result}. Bob cannot remove it.` })
   return { input: { nums }, result, frames }
 }
 

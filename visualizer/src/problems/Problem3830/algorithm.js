@@ -28,14 +28,14 @@ export function buildTrace({ nums }) {
   const frames = []
   let best = longestRun(nums)
   let bestAt = -1
-  frames.push({ phase: 'start', activeLine: L('set best to the longest'), index: -1, run: best, best, bestAt, message: `Keeping every element gives a longest alternating run of ${best}.` })
+  frames.push({ pythonLine: 18, phase: 'start', activeLine: L('set best to the longest'), index: -1, run: best, best, bestAt, message: `Keeping every element gives a longest alternating run of ${best}.` })
   for (let i = 0; i < n; i++) {
     const rest = [...nums.slice(0, i), ...nums.slice(i + 1)]
     const run = longestRun(rest)
     if (run > best) { best = run; bestAt = i }
-    frames.push({ phase: 'remove', activeLine: L('remove nums'), index: i, run, best, bestAt, message: `Removing ${nums[i]} at index ${i} leaves a longest alternating run of ${run}.${bestAt === i ? ' New best.' : ''}` })
+    frames.push({ pythonLine: 20, phase: 'remove', activeLine: L('remove nums'), index: i, run, best, bestAt, message: `Removing ${nums[i]} at index ${i} leaves a longest alternating run of ${run}.${bestAt === i ? ' New best.' : ''}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: bestAt, run: best, best, bestAt, message: `Longest alternating subarray after at most one removal: ${best}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return best'), index: bestAt, run: best, best, bestAt, message: `Longest alternating subarray after at most one removal: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

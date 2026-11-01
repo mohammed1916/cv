@@ -11,16 +11,16 @@ export function buildTrace(input) {
   const { nums } = input
   const n = nums.length
   const ans = []
-  const frames = [{ phase: 'start', activeLine: L('create an empty answer list'), index: -1, ans: [], message: `Build an answer of length ${2 * n}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('create an empty answer list'), index: -1, ans: [], message: `Build an answer of length ${2 * n}.` }]
   for (let i = 0; i < n; i++) {
     ans.push(nums[i])
-    frames.push({ phase: 'copy', activeLine: L('from 0 to n minus 1'), index: i, ans: [...ans], message: `Copy ${nums[i]} from position ${i}.` })
+    frames.push({ pythonLine: 4, phase: 'copy', activeLine: L('from 0 to n minus 1'), index: i, ans: [...ans], message: `Copy ${nums[i]} from position ${i}.` })
   }
   for (let i = n - 1; i >= 0; i--) {
     ans.push(nums[i])
-    frames.push({ phase: 'reverse', activeLine: L('down to 0'), index: i, ans: [...ans], message: `Append ${nums[i]} from position ${i} in reverse.` })
+    frames.push({ pythonLine: 6, phase: 'reverse', activeLine: L('down to 0'), index: i, ans: [...ans], message: `Append ${nums[i]} from position ${i} in reverse.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer list'), index: -1, ans: [...ans], message: `Answer: [${ans.join(', ')}].` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return the answer list'), index: -1, ans: [...ans], message: `Answer: [${ans.join(', ')}].` })
   return { input, result: ans, frames }
 }
 

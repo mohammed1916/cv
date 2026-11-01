@@ -17,22 +17,22 @@ export function buildTrace(input) {
   const frames = []
   let best = -1
   let total = 0
-  frames.push({ phase: 'start', activeLine: L('set best to -1'), index: -1, range: null, best, total, message: 'Start with no best range and a total of 0.' })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set best to -1'), index: -1, range: null, best, total, message: 'Start with no best range and a total of 0.' })
   nums.forEach((x, index) => {
     const range = digitRange(x)
-    frames.push({ phase: 'range', activeLine: L('compute the digit range'), index, range, best, total, message: `${x} has digit range ${range}.` })
+    frames.push({ pythonLine: 6, phase: 'range', activeLine: L('compute the digit range'), index, range, best, total, message: `${x} has digit range ${range}.` })
     if (range > best) {
       best = range
       total = x
-      frames.push({ phase: 'reset', activeLine: L('if range is greater than best'), index, range, best, total, message: `${range} is the new maximum, so the total restarts at ${x}.` })
+      frames.push({ pythonLine: 9, phase: 'reset', activeLine: L('if range is greater than best'), index, range, best, total, message: `${range} is the new maximum, so the total restarts at ${x}.` })
     } else if (range === best) {
       total += x
-      frames.push({ phase: 'add', activeLine: L('if range equals best'), index, range, best, total, message: `${x} ties the maximum range ${best}, so it joins the total.` })
+      frames.push({ pythonLine: 11, phase: 'add', activeLine: L('if range equals best'), index, range, best, total, message: `${x} ties the maximum range ${best}, so it joins the total.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('for each number x'), index, range, best, total, message: `${x} has a smaller range than ${best}, so it is skipped.` })
+      frames.push({ pythonLine: 10, phase: 'skip', activeLine: L('for each number x'), index, range, best, total, message: `${x} has a smaller range than ${best}, so it is skipped.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, range: null, best, total, message: `Sum of the numbers with the maximum digit range: ${total}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return total'), index: -1, range: null, best, total, message: `Sum of the numbers with the maximum digit range: ${total}.` })
   return { input, result: total, frames }
 }
 

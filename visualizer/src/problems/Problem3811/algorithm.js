@@ -18,17 +18,17 @@ export function buildTrace(input) {
   const ways1 = Array(n + 1).fill(0)
   const ways2 = Array(n + 1).fill(0)
   ways2[0] = 1
-  const frames = [{ phase: 'start', activeLine: L('ways2[0] = 1'), at: 0, ways1: [...ways1], ways2: [...ways2], message: 'The empty prefix behaves as if target2 came just before, so the first block must be target1.' }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('ways2[0] = 1'), at: 0, ways1: [...ways1], ways2: [...ways2], message: 'The empty prefix behaves as if target2 came just before, so the first block must be target1.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
       const v = pre[i] ^ pre[j]
       if (v === target1) ways1[i] = (ways1[i] + ways2[j]) % MOD
       else if (v === target2) ways2[i] = (ways2[i] + ways1[j]) % MOD
     }
-    frames.push({ phase: 'cut', activeLine: L('for each earlier cut j'), at: i, ways1: [...ways1], ways2: [...ways2], message: `Prefix of length ${i}: ${ways1[i]} partition(s) end with target1, ${ways2[i]} with target2.` })
+    frames.push({ pythonLine: 11, phase: 'cut', activeLine: L('for each earlier cut j'), at: i, ways1: [...ways1], ways2: [...ways2], message: `Prefix of length ${i}: ${ways1[i]} partition(s) end with target1, ${ways2[i]} with target2.` })
   }
   const result = (ways1[n] + ways2[n]) % MOD
-  frames.push({ phase: 'done', activeLine: L('return ways1[n]'), at: n, ways1: [...ways1], ways2: [...ways2], message: `Valid partitions modulo 1000000007: ${result}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return ways1[n]'), at: n, ways1: [...ways1], ways2: [...ways2], message: `Valid partitions modulo 1000000007: ${result}.` })
   return { input, result, frames }
 }
 

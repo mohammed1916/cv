@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const { n, costs } = input
   const dp = Array(n + 1).fill(null)
   dp[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set dp[0] to 0'), step: 0, from: null, dp: [...dp], result: null, message: 'Step 0 costs nothing to reach.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set dp[0] to 0'), step: 0, from: null, dp: [...dp], result: null, message: 'Step 0 costs nothing to reach.' }]
   for (let j = 1; j <= n; j++) {
     let best = Infinity
     let from = -1
@@ -22,9 +22,9 @@ export function buildTrace(input) {
       if (candidate < best) { best = candidate; from = i }
     }
     dp[j] = best
-    frames.push({ phase: 'step', activeLine: L('keep the smallest candidate'), step: j, from, dp: [...dp], result: null, message: `Reach step ${j} from step ${from} for a total of ${best}.` })
+    frames.push({ pythonLine: 9, phase: 'step', activeLine: L('keep the smallest candidate'), step: j, from, dp: [...dp], result: null, message: `Reach step ${j} from step ${from} for a total of ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return dp[n]'), step: n, from: null, dp: [...dp], result: dp[n], message: `Minimum cost to reach step ${n}: ${dp[n]}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return dp[n]'), step: n, from: null, dp: [...dp], result: dp[n], message: `Minimum cost to reach step ${n}: ${dp[n]}.` })
   return { input, result: dp[n], frames }
 }
 

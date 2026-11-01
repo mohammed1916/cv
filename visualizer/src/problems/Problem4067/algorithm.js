@@ -32,15 +32,15 @@ export function buildTrace(input) {
   }
   nums.forEach((x, right) => {
     while (left < right && createsTriple(counts, x)) {
-      frames.push({ phase: 'shrink', activeLine: L('remove nums[left]'), left, right, best, message: `${x} would complete a triple, so drop ${nums[left]} from the left.` })
+      frames.push({ pythonLine: 16, phase: 'shrink', activeLine: L('remove nums[left]'), left, right, best, message: `${x} would complete a triple, so drop ${nums[left]} from the left.` })
       remove(nums[left])
       left++
     }
     counts.set(x, (counts.get(x) ?? 0) + 1)
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'extend', activeLine: L('add nums[right]'), left, right, best, message: `Window [${left}..${right}] is valid; best is ${best}.` })
+    frames.push({ pythonLine: 23, phase: 'extend', activeLine: L('add nums[right]'), left, right, best, message: `Window [${left}..${right}] is valid; best is ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), left, right: nums.length - 1, best, message: `Longest valid subarray: ${best}.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return best'), left, right: nums.length - 1, best, message: `Longest valid subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

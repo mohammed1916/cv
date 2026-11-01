@@ -18,15 +18,15 @@ export function buildTrace(input) {
   const { n, k } = input
   let idx = n - 1
   let value = 0
-  const frames = [{ phase: 'start', activeLine: L('idx = n - 1'), bit: -1, idx, value, message: `Find the ${n}-th smallest integer with ${k} one bit(s), counting from zero.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('idx = n - 1'), bit: -1, idx, value, message: `Find the ${n}-th smallest integer with ${k} one bit(s), counting from zero.` }]
   for (let i = k; i >= 1; i--) {
     let c = i - 1
     while (comb(c + 1, i) <= idx) c++
     value += 2 ** c
     idx -= comb(c, i)
-    frames.push({ phase: 'choose', activeLine: L('c = largest position'), bit: c, idx, value, message: `Place one bit at position ${c}. Remaining rank: ${idx}. Value so far: ${value}.` })
+    frames.push({ pythonLine: 10, phase: 'choose', activeLine: L('c = largest position'), bit: c, idx, value, message: `Place one bit at position ${c}. Remaining rank: ${idx}. Value so far: ${value}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return value'), bit: -1, idx, value, message: `The ${n}-th smallest integer is ${value}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return value'), bit: -1, idx, value, message: `The ${n}-th smallest integer is ${value}.` })
   return { input, result: value, frames }
 }
 

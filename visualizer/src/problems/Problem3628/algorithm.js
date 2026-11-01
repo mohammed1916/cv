@@ -17,7 +17,7 @@ export function buildTrace(s) {
     if (ch === 'L') seenL++
     else if (ch === 'C') seenLC += seenL
     else if (ch === 'T') base += seenLC
-    frames.push({ phase: 'scan', activeLine: L('count the LCT subsequences'), index: i, base, gain: null, message: `Read ${ch} at ${i}. LCT subsequences so far: ${base}.` })
+    frames.push({ pythonLine: ch === "L" ? 15 : ch === "C" ? 17 : 19, phase: 'scan', activeLine: L('count the LCT subsequences'), index: i, base, gain: null, message: `Read ${ch} at ${i}. LCT subsequences so far: ${base}.` })
   }
   let ctPairs = 0
   let seenT = 0
@@ -26,9 +26,9 @@ export function buildTrace(s) {
     else if (s[i] === 'C') ctPairs += seenT
   }
   const gainL = ctPairs
-  frames.push({ phase: 'gain', activeLine: L('count the CT subsequences'), index: 0, base, gain: gainL, message: `Insert L at the front: gains the ${gainL} CT subsequences.` })
+  frames.push({ pythonLine: 9, phase: 'gain', activeLine: L('count the CT subsequences'), index: 0, base, gain: gainL, message: `Insert L at the front: gains the ${gainL} CT subsequences.` })
   const gainT = seenLC
-  frames.push({ phase: 'gain', activeLine: L('count the LC subsequences'), index: n - 1, base, gain: gainT, message: `Insert T at the end: gains the ${gainT} LC subsequences.` })
+  frames.push({ pythonLine: 17, phase: 'gain', activeLine: L('count the LC subsequences'), index: n - 1, base, gain: gainT, message: `Insert T at the end: gains the ${gainT} LC subsequences.` })
   const totalT = [...s].filter(ch => ch === 'T').length
   let lBefore = 0
   let tBefore = 0
@@ -42,9 +42,9 @@ export function buildTrace(s) {
       if (s[p] === 'T') tBefore++
     }
   }
-  frames.push({ phase: 'gain', activeLine: L('find the best position'), index: bestPos, base, gain: gainC, message: `Insert C before index ${bestPos}: gains ${gainC} LT pairs around it.` })
+  frames.push({ pythonLine: 25, phase: 'gain', activeLine: L('find the best position'), index: bestPos, base, gain: gainC, message: `Insert C before index ${bestPos}: gains ${gainC} LT pairs around it.` })
   const result = base + Math.max(0, gainL, gainT, gainC)
-  frames.push({ phase: 'done', activeLine: L('return base plus'), index: -1, base, gain: result - base, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return base plus'), index: -1, base, gain: result - base, message: `Answer: ${result}.` })
   return { input: s, result, frames }
 }
 

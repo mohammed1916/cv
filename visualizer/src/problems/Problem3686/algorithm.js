@@ -12,7 +12,7 @@ export function buildTrace(nums) {
   // run2[p] counts those whose last run has length 2. A run of three is never allowed.
   const run1 = [0, 0]
   const run2 = [0, 0]
-  const frames = [{ phase: 'start', activeLine: L('set run1 and run2'), index: -1, run1: [...run1], run2: [...run2], total: 0, message: 'No subsequences yet.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set run1 and run2'), index: -1, run1: [...run1], run2: [...run2], total: 0, message: 'No subsequences yet.' }]
   nums.forEach((x, i) => {
     const p = x % 2
     const q = 1 - p
@@ -22,12 +22,12 @@ export function buildTrace(nums) {
     run1[p] = (run1[p] + switched) % MOD
     const total = (run1[0] + run1[1] + run2[0] + run2[1]) % MOD
     frames.push({
-      phase: 'add', activeLine: L('add switched to run1 for p'), index: i, run1: [...run1], run2: [...run2], total,
+      pythonLine: 11, phase: 'add', activeLine: L('add switched to run1 for p'), index: i, run1: [...run1], run2: [...run2], total,
       message: `${x} is ${p === 0 ? 'even' : 'odd'}. ${switched} new subsequences start or switch parity here, and ${extended} extend a run of one into a run of two.`,
     })
   })
   const result = (run1[0] + run1[1] + run2[0] + run2[1]) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum of all four counts'), index: -1, run1: [...run1], run2: [...run2], total: result, message: `Stable subsequences: ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return the sum of all four counts'), index: -1, run1: [...run1], run2: [...run2], total: result, message: `Stable subsequences: ${result}.` })
   return { input: nums, result, frames }
 }
 

@@ -41,16 +41,16 @@ export function buildTrace(input) {
       d += 1
       depth[node] = d
     }
-    frames.push({ phase: 'depth', activeLine: L('find the depth of node'), index: i, depth: depth.slice(), height: null, total: 0, message: `Node ${i} has depth ${depth[i]}.` })
+    frames.push({ pythonLine: 14, phase: 'depth', activeLine: L('find the depth of node'), index: i, depth: depth.slice(), height: null, total: 0, message: `Node ${i} has depth ${depth[i]}.` })
   }
   const height = Math.max(...depth)
   let total = 0
   for (let i = 0; i < n; i++) {
     const weight = nums[i] * (height - depth[i] + 1)
     total += weight
-    frames.push({ phase: 'weight', activeLine: L('add nums[i] times'), index: i, depth: depth.slice(), height, total, message: `Node ${i} contributes ${nums[i]} × ${height - depth[i] + 1} = ${weight}.` })
+    frames.push({ pythonLine: 18, phase: 'weight', activeLine: L('add nums[i] times'), index: i, depth: depth.slice(), height, total, message: `Node ${i} contributes ${nums[i]} × ${height - depth[i] + 1} = ${weight}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, depth: depth.slice(), height, total, message: `Weighted sum: ${total}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return total'), index: -1, depth: depth.slice(), height, total, message: `Weighted sum: ${total}.` })
   return { input, result: total, frames }
 }
 

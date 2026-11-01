@@ -15,7 +15,7 @@ export function buildTrace(input) {
   const included = new Set()
   const picks = []
   let p = 0
-  const frames = [{ phase: 'start', activeLine: L('all = the set of letters'), index: -1, picks: [], message: `Every letter in "${s}" must appear at least once in the answer.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('all = the set of letters'), index: -1, picks: [], message: `Every letter in "${s}" must appear at least once in the answer.` }]
   while (included.size < all.size) {
     const letters = [...all].sort()
     for (const c of letters) {
@@ -26,12 +26,12 @@ export function buildTrace(input) {
       picks.push(j)
       included.add(c)
       p = j + 1
-      frames.push({ phase: 'pick', activeLine: L('included plus c plus'), index: j, picks: [...picks], message: `Take ${c} from position ${j}: every remaining letter can still be covered.` })
+      frames.push({ pythonLine: 18, phase: 'pick', activeLine: L('included plus c plus'), index: j, picks: [...picks], message: `Take ${c} from position ${j}: every remaining letter can still be covered.` })
       break
     }
   }
   const result = picks.map(j => s[j]).join('')
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: -1, picks: [...picks], message: `Smallest reachable string: "${result}".` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return answer'), index: -1, picks: [...picks], message: `Smallest reachable string: "${result}".` })
   return { input, result, frames }
 }
 

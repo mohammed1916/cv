@@ -30,17 +30,17 @@ export function buildTrace(input) {
       for (const y of adj[x]) if (d[y] < 0) { d[y] = d[x] + 1; queue.push(y) }
     }
     dist.push(d)
-    frames.push({ phase: 'bfs', activeLine: L('find distance from s'), source: s, pair: null, total: 0, message: `Distances from node ${s} are found by breadth-first search.` })
+    frames.push({ pythonLine: 18, phase: 'bfs', activeLine: L('find distance from s'), source: s, pair: null, total: 0, message: `Distances from node ${s} are found by breadth-first search.` })
   }
   let total = 0
   for (let u = 0; u < n; u++) {
     for (let v = u + 1; v < n; v++) {
       if (group[u] !== group[v]) continue
       total += dist[u][v]
-      frames.push({ phase: 'pair', activeLine: L('add dist(u, v)'), source: -1, pair: [u, v], total, message: `Nodes ${u} and ${v} share group ${group[u]} and are ${dist[u][v]} edge(s) apart. Total: ${total}.` })
+      frames.push({ pythonLine: 23, phase: 'pair', activeLine: L('add dist(u, v)'), source: -1, pair: [u, v], total, message: `Nodes ${u} and ${v} share group ${group[u]} and are ${dist[u][v]} edge(s) apart. Total: ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), source: -1, pair: null, total, message: `Total interaction cost: ${total}.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return total'), source: -1, pair: null, total, message: `Total interaction cost: ${total}.` })
   return { input, result: total, frames, dist }
 }
 

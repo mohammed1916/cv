@@ -10,18 +10,18 @@ const key = s => s.join(',')
 
 export function buildTrace(nums) {
   let states = new Map([[key([0, -1, 0]), [0, -1, 0]]])
-  const frames = [{ phase: 'start', activeLine: L('set states to one'), index: -1, count: states.size, message: 'Start with A, B and C all empty.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set states to one'), index: -1, count: states.size, message: 'Start with A, B and C all empty.' }]
   for (const v of nums) {
     const next = new Map()
     for (const [xa, ab, xc] of states.values()) {
       for (const s of [[xa ^ v, ab, xc], [xa, ab === -1 ? v : ab & v, xc], [xa, ab, xc ^ v]]) next.set(key(s), s)
     }
     states = next
-    frames.push({ phase: 'element', activeLine: L('for each value v'), index: nums.indexOf(v), count: states.size, value: v, message: `Place ${v} in A, B or C. ${states.size} distinct states.` })
+    frames.push({ pythonLine: 9, phase: 'element', activeLine: L('for each value v'), index: nums.indexOf(v), count: states.size, value: v, message: `Place ${v} in A, B or C. ${states.size} distinct states.` })
   }
   let result = 0
   for (const [xa, ab, xc] of states.values()) result = Math.max(result, xa + (ab === -1 ? 0 : ab) + xc)
-  frames.push({ phase: 'done', activeLine: L('return the largest'), index: -1, count: states.size, message: `Best total: ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the largest'), index: -1, count: states.size, message: `Best total: ${result}.` })
   return { input: nums, result, frames }
 }
 

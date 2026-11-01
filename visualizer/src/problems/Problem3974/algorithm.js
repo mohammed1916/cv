@@ -13,14 +13,14 @@ export function buildTrace(input) {
   const { nums, k, mul } = input
   const sorted = [...nums].sort((a, b) => b - a)
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('let sorted be'), step: -1, factor: null, total, message: `Sort the values from largest to smallest and take the first ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let sorted be'), step: -1, factor: null, total, message: `Sort the values from largest to smallest and take the first ${k}.` }]
   for (let i = 0; i < k; i++) {
     const raw = mul - i
     const factor = raw < 1 ? 1 : raw
     total += sorted[i] * factor
-    frames.push({ phase: 'step', activeLine: L('add sorted'), step: i, factor, total, message: `Step ${i + 1}: value ${sorted[i]} with factor ${factor} (mul is ${raw}). Total ${total}.` })
+    frames.push({ pythonLine: 8, phase: 'step', activeLine: L('add sorted'), step: i, factor, total, message: `Step ${i + 1}: value ${sorted[i]} with factor ${factor} (mul is ${raw}). Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), step: -1, factor: null, total, message: `Maximum total: ${total}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return total'), step: -1, factor: null, total, message: `Maximum total: ${total}.` })
   return { input, result: total, frames }
 }
 

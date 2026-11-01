@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace({ nums, target }) {
   // reach maps each XOR value to the largest number of kept elements that produce it.
   let reach = new Map([[0, 0]])
-  const frames = [{ phase: 'start', activeLine: L('set reach to'), value: null, size: 1, kept: null, result: null, message: 'The empty subset has XOR 0 and keeps 0 elements.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set reach to'), value: null, size: 1, kept: null, result: null, message: 'The empty subset has XOR 0 and keeps 0 elements.' }]
   for (const v of nums) {
     const next = new Map(reach)
     for (const [x, c] of [...reach]) {
@@ -19,11 +19,11 @@ export function buildTrace({ nums, target }) {
       if (!next.has(nx) || next.get(nx) < c + 1) next.set(nx, c + 1)
     }
     reach = next
-    frames.push({ phase: 'add', activeLine: L('for each xor value'), value: v, size: reach.size, kept: null, result: null, message: `Adding ${v}: ${reach.size} XOR values are now reachable.` })
+    frames.push({ pythonLine: 7, phase: 'add', activeLine: L('for each xor value'), value: v, size: reach.size, kept: null, result: null, message: `Adding ${v}: ${reach.size} XOR values are now reachable.` })
   }
   const kept = reach.has(target) ? reach.get(target) : null
   const result = kept === null ? -1 : nums.length - kept
-  frames.push({ phase: 'done', activeLine: kept === null ? L('return -1') : L('return the length'), value: null, size: reach.size, kept, result,
+  frames.push({ pythonLine: kept === null ? 10 : 9, phase: 'done', activeLine: kept === null ? L('return -1') : L('return the length'), value: null, size: reach.size, kept, result,
     message: kept === null ? `No subset has XOR ${target}, so the answer is -1.` : `Keep ${kept} elements, so remove ${result}.` })
   return { input: { nums, target }, result, frames }
 }

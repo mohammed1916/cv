@@ -16,23 +16,23 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   let text = ''
-  const frames = [{ phase: 'start', activeLine: L('set result to empty'), index: -1, text, message: 'Start with an empty string.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set result to empty'), index: -1, text, message: 'Start with an empty string.' }]
   input.s.split('').forEach((ch, i) => {
     if (/[a-z]/.test(ch)) {
       text += ch
-      frames.push({ phase: 'add', activeLine: L('if ch is a letter'), index: i, text, message: `Append ${ch}: ${text}.` })
+      frames.push({ pythonLine: 5, phase: 'add', activeLine: L('if ch is a letter'), index: i, text, message: `Append ${ch}: ${text}.` })
     } else if (ch === '*') {
       text = text.slice(0, -1)
-      frames.push({ phase: 'remove', activeLine: L('if ch is *'), index: i, text, message: `Remove the last character: ${text || '(empty)'}.` })
+      frames.push({ pythonLine: 7, phase: 'remove', activeLine: L('if ch is *'), index: i, text, message: `Remove the last character: ${text || '(empty)'}.` })
     } else if (ch === '#') {
       text += text
-      frames.push({ phase: 'copy', activeLine: L('if ch is #'), index: i, text, message: `Append a copy of the string to itself: ${text || '(empty)'}.` })
+      frames.push({ pythonLine: 9, phase: 'copy', activeLine: L('if ch is #'), index: i, text, message: `Append a copy of the string to itself: ${text || '(empty)'}.` })
     } else {
       text = [...text].reverse().join('')
-      frames.push({ phase: 'reverse', activeLine: L('if ch is %'), index: i, text, message: `Reverse the string: ${text || '(empty)'}.` })
+      frames.push({ pythonLine: 11, phase: 'reverse', activeLine: L('if ch is %'), index: i, text, message: `Reverse the string: ${text || '(empty)'}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return result'), index: -1, text, message: `The processed string is ${text || '(empty)'}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return result'), index: -1, text, message: `The processed string is ${text || '(empty)'}.` })
   return { input, result: text, frames }
 }
 

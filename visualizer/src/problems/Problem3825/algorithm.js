@@ -11,7 +11,7 @@ export function buildTrace(input) {
   const n = nums.length
   const tables = []
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('best = 0'), index: -1, best, table: null, message: 'Track, for each ending index, the best length for each bitwise AND value.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('best = 0'), index: -1, best, table: null, message: 'Track, for each ending index, the best length for each bitwise AND value.' }]
   for (let i = 0; i < n; i++) {
     const cur = new Map([[nums[i], 1]])
     for (let j = 0; j < i; j++) {
@@ -23,9 +23,9 @@ export function buildTrace(input) {
     }
     tables.push(cur)
     for (const [a, len] of cur) if (a !== 0 && len > best) best = len
-    frames.push({ phase: 'end', activeLine: L('for each earlier index j'), index: i, best, table: [...cur].map(([a, len]) => `${a}:${len}`), message: `Best increasing subsequence ending at index ${i} with a non-zero AND so far: ${best}.` })
+    frames.push({ pythonLine: 14, phase: 'end', activeLine: L('for each earlier index j'), index: i, best, table: [...cur].map(([a, len]) => `${a}:${len}`), message: `Best increasing subsequence ending at index ${i} with a non-zero AND so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, best, table: null, message: `Longest valid subsequence: ${best}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return best'), index: -1, best, table: null, message: `Longest valid subsequence: ${best}.` })
   return { input, result: best, frames }
 }
 

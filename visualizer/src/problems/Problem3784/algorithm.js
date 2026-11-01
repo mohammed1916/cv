@@ -12,14 +12,14 @@ export function buildTrace(input) {
   const { s, cost } = input
   const total = cost.reduce((sum, c) => sum + c, 0)
   const sums = {}
-  const frames = [{ phase: 'start', activeLine: L('total = sum of all costs'), index: -1, sums: {}, message: 'Sum the deletion cost of every letter group.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('total = sum of all costs'), index: -1, sums: {}, message: 'Sum the deletion cost of every letter group.' }]
   for (let i = 0; i < s.length; i++) {
     sums[s[i]] = (sums[s[i]] || 0) + cost[i]
-    frames.push({ phase: 'add', activeLine: L('add cost[i] to the sum'), index: i, sums: { ...sums }, message: `Letter ${s[i]} gains cost ${cost[i]}, so its keep-cost is ${sums[s[i]]}.` })
+    frames.push({ pythonLine: 4, phase: 'add', activeLine: L('add cost[i] to the sum'), index: i, sums: { ...sums }, message: `Letter ${s[i]} gains cost ${cost[i]}, so its keep-cost is ${sums[s[i]]}.` })
   }
   const best = Math.max(...Object.values(sums))
   const result = total - best
-  frames.push({ phase: 'done', activeLine: L('return total minus best'), index: -1, sums: { ...sums }, message: `Keep the letter with the largest cost ${best}. Delete the rest for ${result}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return total minus best'), index: -1, sums: { ...sums }, message: `Keep the letter with the largest cost ${best}. Delete the rest for ${result}.` })
   return { input, result, frames }
 }
 

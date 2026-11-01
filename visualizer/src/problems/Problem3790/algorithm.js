@@ -9,17 +9,17 @@ export function buildTrace(input) {
   const { k } = input
   let remainder = 0
   const remainders = []
-  const frames = [{ phase: 'start', activeLine: L('remainder = 0'), length: 0, remainder, remainders: [], message: `Track the all-ones numbers 1, 11, 111, ... modulo ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('remainder = 0'), length: 0, remainder, remainders: [], message: `Track the all-ones numbers 1, 11, 111, ... modulo ${k}.` }]
   for (let length = 1; length <= k; length++) {
     remainder = (remainder * 10 + 1) % k
     remainders.push(remainder)
     if (remainder === 0) {
-      frames.push({ phase: 'found', activeLine: L('if remainder is 0 then return the length'), length, remainder, remainders: [...remainders], message: `The ${length}-digit number of ones is divisible by ${k}.` })
+      frames.push({ pythonLine: 6, phase: 'found', activeLine: L('if remainder is 0 then return the length'), length, remainder, remainders: [...remainders], message: `The ${length}-digit number of ones is divisible by ${k}.` })
       return { input, result: length, frames, remainders }
     }
-    frames.push({ phase: 'step', activeLine: L('remainder = (remainder times 10'), length, remainder, remainders: [...remainders], message: `${length} digit(s): remainder ${remainder}.` })
+    frames.push({ pythonLine: 4, phase: 'step', activeLine: L('remainder = (remainder times 10'), length, remainder, remainders: [...remainders], message: `${length} digit(s): remainder ${remainder}.` })
   }
-  frames.push({ phase: 'none', activeLine: L('return -1'), length: k, remainder, remainders: [...remainders], message: `No all-ones number is divisible by ${k}.` })
+  frames.push({ pythonLine: 7, phase: 'none', activeLine: L('return -1'), length: k, remainder, remainders: [...remainders], message: `No all-ones number is divisible by ${k}.` })
   return { input, result: -1, frames, remainders }
 }
 

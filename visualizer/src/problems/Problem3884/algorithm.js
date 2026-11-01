@@ -9,16 +9,16 @@ export function parseInput(text) {
 
 export function buildTrace({ s }) {
   const n = s.length
-  const frames = [{ phase: 'start', activeLine: L('set n to'), index: -1, mirror: -1, result: null, message: `Compare each index with its mirror position in a string of length ${n}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set n to'), index: -1, mirror: -1, result: null, message: `Compare each index with its mirror position in a string of length ${n}.` }]
   let result = -1
   for (let i = 0; i < n; i++) {
     const mirror = n - 1 - i
     const hit = s[i] === s[mirror]
-    frames.push({ phase: hit ? 'found' : 'check', activeLine: L('if s[i] equals'), index: i, mirror, result: null,
+    frames.push({ pythonLine: hit ? 5 : 4, phase: hit ? 'found' : 'check', activeLine: L('if s[i] equals'), index: i, mirror, result: null,
       message: `Compare s[${i}] = ${s[i]} with s[${mirror}] = ${s[mirror]}${hit ? ', they match' : ', no match'}.` })
     if (hit) { result = i; break }
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), index: result, mirror: null, result, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: result === -1 ? 6 : 5, phase: 'done', activeLine: L('return -1'), index: result, mirror: null, result, message: `Answer: ${result}.` })
   return { input: { s }, result, frames }
 }
 

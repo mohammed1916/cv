@@ -17,7 +17,7 @@ export function buildTrace(input) {
   const { words } = input
   const n = words.length
   const results = []
-  const frames = [{ phase: 'start', activeLine: L('results = empty list'), tuple: null, found: false, count: 0, message: `Test every choice of four distinct words from ${n}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('results = empty list'), tuple: null, found: false, count: 0, message: `Test every choice of four distinct words from ${n}.` }]
   for (let t = 0; t < n; t++) {
     for (let l = 0; l < n; l++) {
       for (let r = 0; r < n; r++) {
@@ -29,13 +29,13 @@ export function buildTrace(input) {
           const bottom = words[b]
           const ok = top[0] === left[0] && top[3] === right[0] && bottom[0] === left[3] && bottom[3] === right[3]
           if (ok) results.push([top, left, right, bottom])
-          frames.push({ phase: 'check', activeLine: L('if the corners match'), tuple: [t, l, r, b], found: ok, count: results.length, message: ok ? `${top}, ${left}, ${right}, ${bottom} form a word square.` : `${top}, ${left}, ${right}, ${bottom} do not match at the corners.` })
+          frames.push({ pythonLine: ok ? 12 : 11, phase: 'check', activeLine: L('if the corners match'), tuple: [t, l, r, b], found: ok, count: results.length, message: ok ? `${top}, ${left}, ${right}, ${bottom} form a word square.` : `${top}, ${left}, ${right}, ${bottom} do not match at the corners.` })
         }
       }
     }
   }
   results.sort(sameOrder)
-  frames.push({ phase: 'done', activeLine: L('return results'), tuple: null, found: false, count: results.length, message: `Found ${results.length} word square(s).` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return results'), tuple: null, found: false, count: results.length, message: `Found ${results.length} word square(s).` })
   return { input, result: results, frames }
 }
 

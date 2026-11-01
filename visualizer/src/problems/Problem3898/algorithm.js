@@ -17,13 +17,13 @@ export function buildTrace(input) {
   const { matrix } = input
   const n = matrix.length
   const ans = Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('create an answer list'), row: -1, ans: [...ans], message: `Start with ${n} zero degrees, one per vertex.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('create an answer list'), row: -1, ans: [...ans], message: `Start with ${n} zero degrees, one per vertex.` }]
   for (let i = 0; i < n; i++) {
     const degree = matrix[i].reduce((a, b) => a + b, 0)
     ans[i] = degree
-    frames.push({ phase: 'row', activeLine: L('set the degree'), row: i, ans: [...ans], message: `Row ${i} has ${degree} ones, so vertex ${i} has degree ${degree}.` })
+    frames.push({ pythonLine: 5, phase: 'row', activeLine: L('set the degree'), row: i, ans: [...ans], message: `Row ${i} has ${degree} ones, so vertex ${i} has degree ${degree}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), row: -1, ans: [...ans], message: `Degrees: [${ans.join(', ')}].` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return the answer'), row: -1, ans: [...ans], message: `Degrees: [${ans.join(', ')}].` })
   return { input, result: ans, frames }
 }
 

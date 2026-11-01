@@ -14,14 +14,14 @@ export function buildTrace(input) {
   const d = [...discounts].sort((x, y) => y - x)
   // Work in hundredths so the total stays an integer until the final division.
   let total = 100 * p.reduce((sum, v) => sum + v, 0)
-  const frames = [{ phase: 'start', activeLine: L('set total to 100 times'), index: -1, price: null, discount: null, total, message: 'Start with every price at full value, in hundredths.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set total to 100 times'), index: -1, price: null, discount: null, total, message: 'Start with every price at full value, in hundredths.' }]
   const k = Math.min(p.length, d.length)
   for (let i = 0; i < k; i++) {
     total -= p[i] * d[i]
-    frames.push({ phase: 'apply', activeLine: L('subtract prices[i] times'), index: i, price: p[i], discount: d[i], total, message: `Apply ${d[i]}% to ${p[i]}, saving ${p[i] * d[i] / 100}.` })
+    frames.push({ pythonLine: 6, phase: 'apply', activeLine: L('subtract prices[i] times'), index: i, price: p[i], discount: d[i], total, message: `Apply ${d[i]}% to ${p[i]}, saving ${p[i] * d[i] / 100}.` })
   }
   const result = total / 100
-  frames.push({ phase: 'done', activeLine: L('return total divided by 100'), index: -1, price: null, discount: null, total, message: `Minimum total price: ${result}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total divided by 100'), index: -1, price: null, discount: null, total, message: `Minimum total price: ${result}.` })
   return { input, result, frames }
 }
 

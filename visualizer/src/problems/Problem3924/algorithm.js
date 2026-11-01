@@ -40,16 +40,16 @@ export function buildTrace(input) {
   const adj = Array.from({ length: n }, () => [])
   for (const [u, v, w] of edges) { adj[u].push([v, w]); adj[v].push([u, w]) }
   const candidates = [...new Set([0, ...edges.map(e => e[2])])].sort((a, b) => a - b)
-  const frames = [{ phase: 'start', activeLine: L('let candidates be'), t: null, dist: Array(n).fill(null), candidates, found: null, result: null, message: `Candidate thresholds: ${candidates.join(', ')}. Try them from the smallest.` }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('let candidates be'), t: null, dist: Array(n).fill(null), candidates, found: null, result: null, message: `Candidate thresholds: ${candidates.join(', ')}. Try them from the smallest.` }]
   for (const t of candidates) {
     const dist = fewestHeavy(n, adj, source, t)
-    frames.push({ phase: 'try', activeLine: L('run a 0-1 search'), t, dist, candidates, found: null, result: null, message: `Threshold ${t}: the target needs ${dist[target] === null ? 'no path' : dist[target] + ' heavy edge(s)'}, allowed ${k}.` })
+    frames.push({ pythonLine: 8, phase: 'try', activeLine: L('run a 0-1 search'), t, dist, candidates, found: null, result: null, message: `Threshold ${t}: the target needs ${dist[target] === null ? 'no path' : dist[target] + ' heavy edge(s)'}, allowed ${k}.` })
     if (dist[target] !== null && dist[target] <= k) {
-      frames.push({ phase: 'found', activeLine: L('return t'), t, dist, candidates, found: t, result: t, message: `Threshold ${t} works, so it is the answer.` })
+      frames.push({ pythonLine: 23, phase: 'found', activeLine: L('return t'), t, dist, candidates, found: t, result: t, message: `Threshold ${t} works, so it is the answer.` })
       return { input, result: t, frames }
     }
   }
-  frames.push({ phase: 'none', activeLine: L('return -1'), t: null, dist: Array(n).fill(null), candidates, found: null, result: -1, message: 'No threshold gives a path with at most k heavy edges, so the answer is -1.' })
+  frames.push({ pythonLine: 24, phase: 'none', activeLine: L('return -1'), t: null, dist: Array(n).fill(null), candidates, found: null, result: -1, message: 'No threshold gives a path with at most k heavy edges, so the answer is -1.' })
   return { input, result: -1, frames }
 }
 

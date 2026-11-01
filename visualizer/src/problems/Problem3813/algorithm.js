@@ -10,15 +10,15 @@ export function buildTrace(input) {
   const { s } = input
   let vowels = 0
   let consonants = 0
-  const frames = [{ phase: 'start', activeLine: L('set vowels and consonants to 0'), index: -1, vowels, consonants, score: 0, message: 'Count vowels and consonants; spaces count for neither.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set vowels and consonants to 0'), index: -1, vowels, consonants, score: 0, message: 'Count vowels and consonants; spaces count for neither.' }]
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     if ('aeiou'.includes(ch)) vowels += 1
     else if (/[a-z]/.test(ch)) consonants += 1
-    frames.push({ phase: 'scan', activeLine: L('if the character is a vowel'), index: i, vowels, consonants, score: consonants === 0 ? 0 : Math.floor(vowels / consonants), message: `"${ch === ' ' ? 'space' : ch}" at ${i}: vowels ${vowels}, consonants ${consonants}.` })
+    frames.push({ pythonLine: 'aeiou'.includes(ch) ? 6 : /[a-z]/.test(ch) ? 8 : 5, phase: 'scan', activeLine: L('if the character is a vowel'), index: i, vowels, consonants, score: consonants === 0 ? 0 : Math.floor(vowels / consonants), message: `"${ch === ' ' ? 'space' : ch}" at ${i}: vowels ${vowels}, consonants ${consonants}.` })
   }
   const result = consonants === 0 ? 0 : Math.floor(vowels / consonants)
-  frames.push({ phase: 'done', activeLine: L('return vowels divided by consonants'), index: -1, vowels, consonants, score: result, message: `Score ${result}.` })
+  frames.push({ pythonLine: consonants === 0 ? 10 : 11, phase: 'done', activeLine: L('return vowels divided by consonants'), index: -1, vowels, consonants, score: result, message: `Score ${result}.` })
   return { input, result, frames }
 }
 

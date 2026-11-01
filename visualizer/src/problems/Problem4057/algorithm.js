@@ -28,15 +28,15 @@ export function buildTrace(input) {
   const n = intervals.length
   // Two intervals are disjoint exactly when one ends before the other starts, and each disjoint pair is counted once.
   const starts = intervals.map(([s]) => s).sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort all start values'), index: -1, disjoint: 0, message: 'Sort the start values so each end can be compared quickly.' }]
+  const frames = [{ pythonLine: 6, phase: 'sort', activeLine: L('sort all start values'), index: -1, disjoint: 0, message: 'Sort the start values so each end can be compared quickly.' }]
   let disjoint = 0
   intervals.forEach(([, e], index) => {
     const k = countGreater(starts, e)
     disjoint += k
-    frames.push({ phase: 'count', activeLine: L('count the starts that are greater'), index, disjoint, k, message: `${k} interval${k === 1 ? '' : 's'} start after interval ${index} ends.` })
+    frames.push({ pythonLine: 9, phase: 'count', activeLine: L('count the starts that are greater'), index, disjoint, k, message: `${k} interval${k === 1 ? '' : 's'} start after interval ${index} ends.` })
   })
   const result = (n * (n - 1)) / 2 - disjoint
-  frames.push({ phase: 'done', activeLine: L('return n times'), index: -1, disjoint, k: null, message: `Intersecting pairs: ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return n times'), index: -1, disjoint, k: null, message: `Intersecting pairs: ${result}.` })
   return { input, result, frames }
 }
 

@@ -33,12 +33,12 @@ export function buildTrace(input) {
   for (const v of order.slice(1)) children[parent[v]].push(v)
   const total = Array(n).fill(0)
   let raised = 0
-  const frames = [{ phase: 'start', activeLine: L('for each node v from the bottom'), node: null, raised: 0, message: 'Work from the leaves up. Each node sees the path totals of its children.' }]
+  const frames = [{ pythonLine: 20, phase: 'start', activeLine: L('for each node v from the bottom'), node: null, raised: 0, message: 'Work from the leaves up. Each node sees the path totals of its children.' }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     if (children[v].length === 0) {
       total[v] = cost[v]
-      frames.push({ phase: 'leaf', activeLine: L('if v is a leaf'), node: v, raised, message: `Leaf ${v} has path total ${total[v]}.` })
+      frames.push({ pythonLine: 23, phase: 'leaf', activeLine: L('if v is a leaf'), node: v, raised, message: `Leaf ${v} has path total ${total[v]}.` })
       continue
     }
     const target = Math.max(...children[v].map(c => total[c]))
@@ -46,9 +46,9 @@ export function buildTrace(input) {
     for (const c of children[v]) if (total[c] < target) lifts++
     raised += lifts
     total[v] = target + cost[v]
-    frames.push({ phase: 'node', activeLine: L('count the children'), node: v, raised, message: `Node ${v}: ${lifts} child${lifts === 1 ? '' : 'ren'} must be raised to ${target}. Running count: ${raised}.` })
+    frames.push({ pythonLine: 26, phase: 'node', activeLine: L('count the children'), node: v, raised, message: `Node ${v}: ${lifts} child${lifts === 1 ? '' : 'ren'} must be raised to ${target}. Running count: ${raised}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the count'), node: 0, raised, message: `The minimum number of raised nodes is ${raised}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return the count'), node: 0, raised, message: `The minimum number of raised nodes is ${raised}.` })
   return { input, result: raised, frames }
 }
 

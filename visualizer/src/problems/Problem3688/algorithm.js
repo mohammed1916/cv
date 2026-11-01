@@ -17,16 +17,16 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums }) {
   let result = 0
-  const frames = [{ phase: 'start', activeLine: L('set result to zero'), index: -1, result, message: 'Start with 0, the OR of no numbers.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set result to zero'), index: -1, result, message: 'Start with 0, the OR of no numbers.' }]
   nums.forEach((x, index) => {
     if (x % 2 === 0) {
       result |= x
-      frames.push({ phase: 'take', activeLine: L('set result to result OR x'), index, result, message: `${x} is even, so OR it in: result is ${result}.` })
+      frames.push({ pythonLine: 5, phase: 'take', activeLine: L('set result to result OR x'), index, result, message: `${x} is even, so OR it in: result is ${result}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if x is even'), index, result, message: `${x} is odd, so it is skipped.` })
+      frames.push({ pythonLine: 4, phase: 'skip', activeLine: L('if x is even'), index, result, message: `${x} is odd, so it is skipped.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return result'), index: -1, result, message: result === 0 ? 'No even numbers, so the answer is 0.' : `Bitwise OR of the even numbers: ${result}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return result'), index: -1, result, message: result === 0 ? 'No even numbers, so the answer is 0.' : `Bitwise OR of the even numbers: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

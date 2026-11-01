@@ -9,12 +9,12 @@ export function buildTrace(input) {
   const { n } = input
   let values = Array.from({ length: n }, (_, i) => i + 1)
   let op = 1
-  const frames = [{ phase: 'start', activeLine: L('values = the integers'), op: 0, values, message: `Write the integers 1 through ${n}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('values = the integers'), op: 0, values, message: `Write the integers 1 through ${n}.` }]
   while (values.length > 1) {
     if (op === 1) values = values.filter((_, i) => i % 2 === 0)
     else values = values.filter((_, i, a) => (a.length - 1 - i) % 2 === 0)
     frames.push({
-      phase: op === 1 ? 'left' : 'right',
+      pythonLine: op === 1 ? 6 : 8, phase: op === 1 ? 'left' : 'right',
       activeLine: op === 1 ? L('keep the values at even positions') : L('keep the values at even distances'),
       op, values,
       message: op === 1 ? `Operation 1 from the left leaves ${values.length} value(s).` : `Operation 2 from the right leaves ${values.length} value(s).`,
@@ -22,7 +22,7 @@ export function buildTrace(input) {
     op = op === 1 ? 2 : 1
   }
   const result = values[0]
-  frames.push({ phase: 'done', activeLine: L('return the only remaining value'), op: 0, values, message: `The last remaining integer is ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the only remaining value'), op: 0, values, message: `The last remaining integer is ${result}.` })
   return { input, result, frames }
 }
 

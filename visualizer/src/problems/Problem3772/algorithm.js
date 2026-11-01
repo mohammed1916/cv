@@ -26,12 +26,12 @@ export function buildTrace(input) {
     return total
   }
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('answers is empty'), root: -1, answers: [], message: 'Each node becomes the root in turn, and the best subgraph containing it is grown from there.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('answers is empty'), root: -1, answers: [], message: 'Each node becomes the root in turn, and the best subgraph containing it is grown from there.' }]
   for (let r = 0; r < n; r++) {
     answers.push(best(r, -1))
-    frames.push({ phase: 'root', activeLine: L('call best on r'), root: r, answers: [...answers], message: `The best connected subgraph containing node ${r} scores ${answers[r]}.` })
+    frames.push({ pythonLine: 14, phase: 'root', activeLine: L('call best on r'), root: r, answers: [...answers], message: `The best connected subgraph containing node ${r} scores ${answers[r]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), root: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return answers'), root: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input, result: answers, frames }
 }
 

@@ -12,18 +12,18 @@ export function buildTrace(input) {
   for (const x of nums) prefix.push(prefix[prefix.length - 1] + x)
   const seen = new Map()
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set prefix[0]'), index: -1, total: 0, key: '', message: 'Prefix sums give the sum of any interior in one subtraction.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set prefix[0]'), index: -1, total: 0, key: '', message: 'Prefix sums give the sum of any interior in one subtraction.' }]
   for (let r = 2; r < nums.length; r++) {
     const left = r - 2
     const keyLeft = `${nums[left]}|${prefix[left + 1]}`
     seen.set(keyLeft, (seen.get(keyLeft) || 0) + 1)
-    frames.push({ phase: 'record', activeLine: L('record the left end'), index: left, total, key: keyLeft, message: `Record left end ${left}: its value ${nums[left]} and prefix ${prefix[left + 1]}.` })
+    frames.push({ pythonLine: 9, phase: 'record', activeLine: L('record the left end'), index: left, total, key: keyLeft, message: `Record left end ${left}: its value ${nums[left]} and prefix ${prefix[left + 1]}.` })
     const want = `${nums[r]}|${prefix[r] - nums[r]}`
     const found = seen.get(want) || 0
     total += found
-    frames.push({ phase: 'match', activeLine: L('add the matches'), index: r, total, key: want, message: `Right end ${r} (${nums[r]}) matches ${found} left end(s). Total: ${total}.` })
+    frames.push({ pythonLine: 11, phase: 'match', activeLine: L('add the matches'), index: r, total, key: want, message: `Right end ${r} (${nums[r]}) matches ${found} left end(s). Total: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, total, key: '', message: `Stable subarrays: ${total}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return total'), index: -1, total, key: '', message: `Stable subarrays: ${total}.` })
   return { input, result: total, frames }
 }
 

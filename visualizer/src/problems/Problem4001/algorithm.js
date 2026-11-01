@@ -30,9 +30,9 @@ export function buildTrace(input) {
     const v1 = i < series1.length ? series1[i][1] : 0
     const v2 = j < series2.length ? series2[j][1] : 0
     result.push([t, v1 + v2])
-    frames.push({ phase: 'stamp', activeLine: L('add the values'), t, v1, v2, result: result.map(r => r.slice()), message: `Timestamp ${t}: series 1 gives ${v1} and series 2 gives ${v2}, so the sum is ${v1 + v2}.` })
+    frames.push({ pythonLine: 13, phase: 'stamp', activeLine: L('add the values'), t, v1, v2, result: result.map(r => r.slice()), message: `Timestamp ${t}: series 1 gives ${v1} and series 2 gives ${v2}, so the sum is ${v1 + v2}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), t: null, v1: null, v2: null, result, message: 'The aggregated series is complete.' })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return result'), t: null, v1: null, v2: null, result, message: 'The aggregated series is complete.' })
   return { input, result, frames }
 }
 

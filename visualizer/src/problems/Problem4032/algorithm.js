@@ -32,20 +32,20 @@ export function buildTrace(input) {
     for (const p of primesOf(nums[right])) {
       if ((counts.get(p) ?? 0) === 0) distinct++
       counts.set(p, (counts.get(p) ?? 0) + 1)
-      frames.push({ phase: 'extend', activeLine: L('add 1 to counts[p]'), left, right, distinct, best, message: `Add ${nums[right]}; prime ${p} enters the window. ${distinct} distinct prime${distinct === 1 ? '' : 's'} now.` })
+      frames.push({ pythonLine: 23, phase: 'extend', activeLine: L('add 1 to counts[p]'), left, right, distinct, best, message: `Add ${nums[right]}; prime ${p} enters the window. ${distinct} distinct prime${distinct === 1 ? '' : 's'} now.` })
     }
     while (distinct > k) {
       for (const p of primesOf(nums[left])) {
         counts.set(p, counts.get(p) - 1)
         if (counts.get(p) === 0) distinct--
-        frames.push({ phase: 'shrink', activeLine: L('subtract 1 from counts[p]'), left, right, distinct, best, message: `Drop ${nums[left]}; prime ${p} leaves the window.` })
+        frames.push({ pythonLine: 26, phase: 'shrink', activeLine: L('subtract 1 from counts[p]'), left, right, distinct, best, message: `Drop ${nums[left]}; prime ${p} leaves the window.` })
       }
       left++
     }
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger of'), left, right, distinct, best, message: `Window [${left}..${right}] has at most ${k} distinct primes; best is ${best}.` })
+    frames.push({ pythonLine: 30, phase: 'record', activeLine: L('set best to the larger of'), left, right, distinct, best, message: `Window [${left}..${right}] has at most ${k} distinct primes; best is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), left, right: nums.length - 1, distinct, best, message: `Longest valid subarray: ${best}.` })
+  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return best'), left, right: nums.length - 1, distinct, best, message: `Longest valid subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

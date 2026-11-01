@@ -26,16 +26,16 @@ export function buildTrace(input) {
   runMax = 0
   for (let i = pair.length - 1; i >= 0; i--) { runMax = Math.max(runMax, pair[i]); suffixMax[i] = runMax }
   const answer = []
-  const frames = [{ phase: 'start', activeLine: L('set pair[i] to the shared prefix'), removed: null, answer: [], message: 'Precompute the shared prefix of every neighbouring pair of words.' }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('set pair[i] to the shared prefix'), removed: null, answer: [], message: 'Precompute the shared prefix of every neighbouring pair of words.' }]
   for (let r = 0; r < m; r++) {
     let best = 0
     if (r - 2 >= 0) best = Math.max(best, prefixMax[r - 2])
     if (r + 1 <= m - 2) best = Math.max(best, suffixMax[r + 1])
     if (r - 1 >= 0 && r + 1 <= m - 1) best = Math.max(best, lcp(words[r - 1], words[r + 1]))
     answer.push(best)
-    frames.push({ phase: 'remove', activeLine: L('for each index r'), removed: r, answer: [...answer], message: `Remove index ${r}. The best adjacent prefix left is ${best}.` })
+    frames.push({ pythonLine: 29, phase: 'remove', activeLine: L('for each index r'), removed: r, answer: [...answer], message: `Remove index ${r}. The best adjacent prefix left is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), removed: null, answer, message: `Answers: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: 30, phase: 'done', activeLine: L('return answer'), removed: null, answer, message: `Answers: ${answer.join(', ')}.` })
   return { input, result: answer, frames }
 }
 

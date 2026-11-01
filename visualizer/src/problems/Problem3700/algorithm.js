@@ -17,7 +17,7 @@ export function buildTrace(input) {
   // up[k] and down[k] count arrays whose last step went up or down and that end at values[k].
   let up = values.map(v => v - l)
   let down = values.map(v => r - v)
-  const frames = [{ phase: 'start', activeLine: L('count the arrays of length 2'), length: 2, values, up: [...up], down: [...down], total: null, message: 'Arrays of length 2 are counted by their last value and last step.' }]
+  const frames = [{ pythonLine: 36, phase: 'start', activeLine: L('count the arrays of length 2'), length: 2, values, up: [...up], down: [...down], total: null, message: 'Arrays of length 2 are counted by their last value and last step.' }]
   for (let length = 3; length <= n; length++) {
     const nextUp = []
     let run = 0
@@ -33,10 +33,10 @@ export function buildTrace(input) {
     }
     up = nextUp
     down = nextDown
-    frames.push({ phase: 'extend', activeLine: L('build the transition that turns'), length, values, up: [...up], down: [...down], total: null, message: `Arrays of length ${length} updated for every last value.` })
+    frames.push({ pythonLine: 34, phase: 'extend', activeLine: L('build the transition that turns'), length, values, up: [...up], down: [...down], total: null, message: `Arrays of length ${length} updated for every last value.` })
   }
   const result = (up.reduce((a, b) => (a + b) % MOD, 0) + down.reduce((a, b) => (a + b) % MOD, 0)) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum of all up and down counts'), length: n, values, up: [...up], down: [...down], total: result, message: `Zigzag arrays of length ${n}: ${result}.` })
+  frames.push({ pythonLine: 41, phase: 'done', activeLine: L('return the sum of all up and down counts'), length: n, values, up: [...up], down: [...down], total: result, message: `Zigzag arrays of length ${n}: ${result}.` })
   return { input, result, frames }
 }
 

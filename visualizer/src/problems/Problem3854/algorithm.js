@@ -10,7 +10,7 @@ export function parseInput(text) {
 const parity = x => ((x % 2) + 2) % 2
 
 export function buildTrace({ nums }) {
-  const frames = [{ phase: 'start', activeLine: L('set best ops'), shape: null, ops: null, spread: null, best: null, message: 'Two shapes are possible: even values at even indexes, or odd values at even indexes.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best ops'), shape: null, ops: null, spread: null, best: null, message: 'Two shapes are possible: even values at even indexes, or odd values at even indexes.' }]
   let best = null
   for (const s of [0, 1]) {
     let ops = 0
@@ -30,10 +30,10 @@ export function buildTrace({ nums }) {
     const option = [ops, spread]
     const better = best === null || ops < best[0] || (ops === best[0] && spread < best[1])
     if (better) best = option
-    frames.push({ phase: 'shape', activeLine: L('set ops to the number'), shape: s, ops, spread, best: best ? [...best] : null,
+    frames.push({ pythonLine: 20, phase: 'shape', activeLine: L('set ops to the number'), shape: s, ops, spread, best: best ? [...best] : null,
       message: `Shape ${s === 0 ? 'A (even at even indexes)' : 'B (odd at even indexes)'} needs ${ops} operation(s) and can reach spread ${spread}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return [best ops'), shape: null, ops: best[0], spread: best[1], best: [...best], message: `Answer: [${best.join(', ')}].` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return [best ops'), shape: null, ops: best[0], spread: best[1], best: [...best], message: `Answer: [${best.join(', ')}].` })
   return { input: { nums }, result: best, frames }
 }
 

@@ -7,10 +7,10 @@ export function parseInput(text) {
 
 export function buildTrace(s) {
   const count = {}
-  const frames = [{ phase: 'start', activeLine: L('set count for each letter to 0'), letter: null, k: null, best: null, result: null, message: 'Count how often each letter appears.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count for each letter to 0'), letter: null, k: null, best: null, result: null, message: 'Count how often each letter appears.' }]
   for (const c of s) {
     count[c] = (count[c] || 0) + 1
-    frames.push({ phase: 'count', activeLine: L('add 1 to count[c]'), letter: c, k: null, best: null, result: null, message: `${c} has appeared ${count[c]} time(s).` })
+    frames.push({ pythonLine: 4, phase: 'count', activeLine: L('add 1 to count[c]'), letter: c, k: null, best: null, result: null, message: `${c} has appeared ${count[c]} time(s).` })
   }
   const groups = {}
   for (const [c, k] of Object.entries(count)) {
@@ -21,17 +21,17 @@ export function buildTrace(s) {
   for (const key of Object.keys(groups).map(Number).sort((a, b) => a - b)) {
     const size = groups[key].length
     if (bestK === null || size > groups[bestK].length) {
-      frames.push({ phase: 'group', activeLine: L('if best is nothing or group k is larger than best'), letter: null, k: key, best: bestK, result: null, message: `Frequency ${key} has ${size} letter(s). It becomes the best group.` })
+      frames.push({ pythonLine: 11, phase: 'group', activeLine: L('if best is nothing or group k is larger than best'), letter: null, k: key, best: bestK, result: null, message: `Frequency ${key} has ${size} letter(s). It becomes the best group.` })
       bestK = key
     } else if (size === groups[bestK].length && key > bestK) {
-      frames.push({ phase: 'group', activeLine: L('otherwise if the sizes tie and k is larger than best'), letter: null, k: key, best: bestK, result: null, message: `Frequency ${key} ties on size. The larger frequency wins.` })
+      frames.push({ pythonLine: 13, phase: 'group', activeLine: L('otherwise if the sizes tie and k is larger than best'), letter: null, k: key, best: bestK, result: null, message: `Frequency ${key} ties on size. The larger frequency wins.` })
       bestK = key
     } else {
-      frames.push({ phase: 'group', activeLine: L('if best is nothing or group k is larger than best'), letter: null, k: key, best: bestK, result: null, message: `Frequency ${key} has ${size} letter(s), not more than the best.` })
+      frames.push({ pythonLine: 12, phase: 'group', activeLine: L('if best is nothing or group k is larger than best'), letter: null, k: key, best: bestK, result: null, message: `Frequency ${key} has ${size} letter(s), not more than the best.` })
     }
   }
   const result = groups[bestK].sort().join('')
-  frames.push({ phase: 'done', activeLine: L('return the letters of best'), letter: null, k: bestK, best: bestK, result, message: `Majority group: ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return the letters of best'), letter: null, k: bestK, best: bestK, result, message: `Majority group: ${result}.` })
   return { input: s, result, frames }
 }
 

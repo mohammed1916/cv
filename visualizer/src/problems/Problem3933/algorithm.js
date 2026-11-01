@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const n = matrix.length
   const m = matrix[0].length
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('let count be 0'), cell: null, value: null, count, message: 'Each non-zero cell is tested with its own value as the radius.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('let count be 0'), cell: null, value: null, count, message: 'Each non-zero cell is tested with its own value as the radius.' }]
   for (let r = 0; r < n; r++) {
     for (let c = 0; c < m; c++) {
       const x = matrix[r][c]
@@ -27,10 +27,10 @@ export function buildTrace(input) {
         }
       }
       if (beaten === null) count++
-      frames.push({ phase: beaten === null ? 'local' : 'beaten', activeLine: L('if ok is true'), cell: [r, c], value: x, count, beaten, message: beaten === null ? `Cell (${r}, ${c}) with value ${x} sees nothing larger, so it is a local maximum.` : `Cell (${r}, ${c}) with value ${x} sees a larger value at (${beaten[0]}, ${beaten[1]}).` })
+      frames.push({ pythonLine: beaten === null ? 18 : 16, phase: beaten === null ? 'local' : 'beaten', activeLine: L('if ok is true'), cell: [r, c], value: x, count, beaten, message: beaten === null ? `Cell (${r}, ${c}) with value ${x} sees nothing larger, so it is a local maximum.` : `Cell (${r}, ${c}) with value ${x} sees a larger value at (${beaten[0]}, ${beaten[1]}).` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), cell: null, value: null, count, message: `Local maximums: ${count}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return count'), cell: null, value: null, count, message: `Local maximums: ${count}.` })
   return { input, result: count, frames }
 }
 

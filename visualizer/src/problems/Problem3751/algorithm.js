@@ -9,7 +9,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { num1, num2 } = input
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), number: num1, total: 0, message: `Add up the waviness of every number from ${num1} to ${num2}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), number: num1, total: 0, message: `Add up the waviness of every number from ${num1} to ${num2}.` }]
   for (let x = num1; x <= num2; x++) {
     const d = String(x).split('').map(Number)
     let w = 0
@@ -17,9 +17,9 @@ export function buildTrace(input) {
       if ((d[i] > d[i - 1] && d[i] > d[i + 1]) || (d[i] < d[i - 1] && d[i] < d[i + 1])) w += 1
     }
     total += w
-    if (w > 0) frames.push({ phase: 'number', activeLine: L('if the digit at i is a peak'), number: x, total, message: `${x} has waviness ${w}. Running total: ${total}.` })
+    if (w > 0) frames.push({ pythonLine: 7, phase: 'number', activeLine: L('if the digit at i is a peak'), number: x, total, message: `${x} has waviness ${w}. Running total: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), number: num2, total, message: `Total waviness: ${total}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return total'), number: num2, total, message: `Total waviness: ${total}.` })
   return { input, result: total, frames }
 }
 

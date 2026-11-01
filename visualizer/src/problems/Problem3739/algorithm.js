@@ -13,14 +13,14 @@ export function buildTrace(input) {
   const prefix = [0]
   for (const v of nums) prefix.push(prefix[prefix.length - 1] + (v === target ? 1 : -1))
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set prefix[0] to 0'), index: -1, count: 0, end: null, prefix: [...prefix], message: 'The empty prefix has balance 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set prefix[0] to 0'), index: -1, count: 0, end: null, prefix: [...prefix], message: 'The empty prefix has balance 0.' }]
   for (let j = 1; j <= n; j++) {
     let added = 0
     for (let i = 0; i < j; i++) if (prefix[i] < prefix[j]) added++
     count += added
-    frames.push({ phase: 'end', activeLine: L('count the earlier prefixes'), index: j - 1, count, end: j, added, prefix: [...prefix], message: `Subarrays ending at ${j - 1} with target as majority: ${added}. Total ${count}.` })
+    frames.push({ pythonLine: 7, phase: 'end', activeLine: L('count the earlier prefixes'), index: j - 1, count, end: j, added, prefix: [...prefix], message: `Subarrays ending at ${j - 1} with target as majority: ${added}. Total ${count}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), index: n, count, end: null, added: 0, prefix: [...prefix], message: `Subarrays with target as majority: ${count}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return count'), index: n, count, end: null, added: 0, prefix: [...prefix], message: `Subarrays with target as majority: ${count}.` })
   return { input, result: count, frames }
 }
 

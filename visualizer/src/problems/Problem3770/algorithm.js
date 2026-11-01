@@ -16,20 +16,20 @@ export function buildTrace(input) {
   let total = 0
   let best = 0
   const sums = []
-  const frames = [{ phase: 'start', activeLine: L('best = 0'), prime: null, total, best, sums: [], message: `Add the primes 2, 3, 5, ... in order while the running sum stays at most ${n}.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('best = 0'), prime: null, total, best, sums: [], message: `Add the primes 2, 3, 5, ... in order while the running sum stays at most ${n}.` }]
   for (let p = 2; ; p++) {
     if (!isPrime(p)) continue
     total += p
     if (total > n) {
-      frames.push({ phase: 'stop', activeLine: L('if total is more than n'), prime: p, total, best, sums: [...sums], message: `The running sum ${total} is more than ${n}, so stop.` })
+      frames.push({ pythonLine: 19, phase: 'stop', activeLine: L('if total is more than n'), prime: p, total, best, sums: [...sums], message: `The running sum ${total} is more than ${n}, so stop.` })
       break
     }
     sums.push(total)
     const ok = isPrime(total)
     if (ok) best = total
-    frames.push({ phase: 'sum', activeLine: L('if total is prime'), prime: p, total, best, sums: [...sums], message: ok ? `Running sum ${total} is prime. Best so far: ${best}.` : `Running sum ${total} is not prime.` })
+    frames.push({ pythonLine: ok ? 21 : 20, phase: 'sum', activeLine: L('if total is prime'), prime: p, total, best, sums: [...sums], message: ok ? `Running sum ${total} is prime. Best so far: ${best}.` : `Running sum ${total} is not prime.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), prime: null, total, best, sums: [...sums], message: best === 0 ? 'No prime running sum is at most n.' : `Largest prime running sum at most ${n}: ${best}.` })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return best'), prime: null, total, best, sums: [...sums], message: best === 0 ? 'No prime running sum is at most n.' : `Largest prime running sum at most ${n}: ${best}.` })
   return { input, result: best, frames, sums }
 }
 

@@ -17,7 +17,7 @@ export function buildTrace(nums) {
   dist[0] = 0
   const queue = [0]
   const usedPrime = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set distance of index 0'), index: 0, dist: 0, message: 'Start at index 0 with 0 jumps.' }]
+  const frames = [{ pythonLine: 18, phase: 'start', activeLine: L('set distance of index 0'), index: 0, dist: 0, message: 'Start at index 0 with 0 jumps.' }]
   for (let head = 0; head < queue.length; head++) {
     const i = queue[head]
     if (i === n - 1) break
@@ -36,10 +36,10 @@ export function buildTrace(nums) {
       queue.push(c)
       added.push(c)
     }
-    frames.push({ phase: 'visit', activeLine: L('take the next index i'), index: i, dist: dist[i], message: `Index ${i} (value ${p}) at ${dist[i]} jumps. ${isPrime(p) ? `Prime ${p} teleports to multiples. ` : ''}New indices: [${added.join(', ')}].` })
+    frames.push({ pythonLine: 22, phase: 'visit', activeLine: L('take the next index i'), index: i, dist: dist[i], message: `Index ${i} (value ${p}) at ${dist[i]} jumps. ${isPrime(p) ? `Prime ${p} teleports to multiples. ` : ''}New indices: [${added.join(', ')}].` })
   }
   const result = dist[n - 1]
-  frames.push({ phase: 'done', activeLine: L('return the distance of the last index'), index: n - 1, dist: result, message: `Index ${n - 1} is reached with ${result} jumps.` })
+  frames.push({ pythonLine: 38, phase: 'done', activeLine: L('return the distance of the last index'), index: n - 1, dist: result, message: `Index ${n - 1} is reached with ${result} jumps.` })
   return { input: nums, result, frames }
 }
 

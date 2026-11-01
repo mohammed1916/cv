@@ -6,20 +6,20 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const n = nums.length
-  const frames = [{ phase: 'start', activeLine: L('set p to the end'), p: 0, q: 0, message: 'A trionic array rises, then falls, then rises again, with strict steps.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set p to the end'), p: 0, q: 0, message: 'A trionic array rises, then falls, then rises again, with strict steps.' }]
   let p = 0
   while (p + 1 < n && nums[p] < nums[p + 1]) p++
-  frames.push({ phase: 'rise', activeLine: L('set p to the end'), p, q: p, message: `The first strictly increasing run ends at index ${p}.` })
+  frames.push({ pythonLine: 5, phase: 'rise', activeLine: L('set p to the end'), p, q: p, message: `The first strictly increasing run ends at index ${p}.` })
   let q = p
   while (q + 1 < n && nums[q] > nums[q + 1]) q++
-  frames.push({ phase: 'fall', activeLine: L('set q to the end'), p, q, message: `The strictly decreasing run from ${p} ends at index ${q}.` })
+  frames.push({ pythonLine: 8, phase: 'fall', activeLine: L('set q to the end'), p, q, message: `The strictly decreasing run from ${p} ends at index ${q}.` })
   let answer = false
   if (0 < p && p < q && q < n - 1) {
     answer = true
     for (let i = q; i < n - 1; i++) if (!(nums[i] < nums[i + 1])) { answer = false; break }
   }
-  frames.push({ phase: 'tail', activeLine: L('check the tail'), p, q, message: answer ? 'The tail from q strictly increases, so the array is trionic.' : 'The shape fails: either a boundary is misplaced or the tail does not strictly increase.' })
-  frames.push({ phase: 'done', activeLine: L('return the answer'), p, q, message: `Trionic: ${answer}.` })
+  frames.push({ pythonLine: answer ? 12 : 10, phase: 'tail', activeLine: L('check the tail'), p, q, message: answer ? 'The tail from q strictly increases, so the array is trionic.' : 'The shape fails: either a boundary is misplaced or the tail does not strictly increase.' })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return the answer'), p, q, message: `Trionic: ${answer}.` })
   return { input: nums, result: answer, frames }
 }
 

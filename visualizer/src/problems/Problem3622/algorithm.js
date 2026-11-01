@@ -12,18 +12,18 @@ export function buildTrace({ n }) {
   let product = 1
   let rest = n
   let position = digits.length - 1
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), position: -1, total, product, message: `Read the digits of ${n} from the last one.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), position: -1, total, product, message: `Read the digits of ${n} from the last one.` }]
   while (rest > 0) {
     const digit = rest % 10
     total += digit
     product *= digit
     rest = Math.floor(rest / 10)
-    frames.push({ phase: 'digit', activeLine: L('add the last digit'), position, total, product, message: `Digit ${digit}: sum ${total}, product ${product}.` })
+    frames.push({ pythonLine: 8, phase: 'digit', activeLine: L('add the last digit'), position, total, product, message: `Digit ${digit}: sum ${total}, product ${product}.` })
     position -= 1
   }
   const divisor = total + product
   const result = n % divisor === 0
-  frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'otherwise return false'), position: -1, total, product, divisor, message: `${n} ${result ? 'is' : 'is not'} divisible by ${divisor}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L(result ? 'return true' : 'otherwise return false'), position: -1, total, product, divisor, message: `${n} ${result ? 'is' : 'is not'} divisible by ${divisor}.` })
   return { input: { n }, result, digits, divisor, frames }
 }
 

@@ -17,11 +17,11 @@ export function buildTrace(input) {
   for (let i = 0; i < n; i++) if (s[i] === '1') ones.push(i)
   const frames = []
   if (ones.length === 0) {
-    frames.push({ phase: 'done', activeLine: L('if ones is empty then return 0'), one: -1, position: -1, table: [], best: 0, message: 'There are no ones, so no swap is possible and the score is 0.' })
+    frames.push({ pythonLine: 5, phase: 'done', activeLine: L('if ones is empty then return 0'), one: -1, position: -1, table: [], best: 0, message: 'There are no ones, so no swap is possible and the score is 0.' })
     return { input, result: 0, frames, ones }
   }
   let table = Array.from({ length: n }, (_, q) => (q <= ones[0] ? nums[q] : NEG))
-  frames.push({ phase: 'one', activeLine: L('table = scores for the first one'), one: 0, position: ones[0], table: [...table], best: null, message: `The first one can reach indexes 0 to ${ones[0]}.` })
+  frames.push({ pythonLine: 7, phase: 'one', activeLine: L('table = scores for the first one'), one: 0, position: ones[0], table: [...table], best: null, message: `The first one can reach indexes 0 to ${ones[0]}.` })
   for (let k = 1; k < ones.length; k++) {
     const p = ones[k]
     const next = Array.from({ length: n }, () => NEG)
@@ -31,10 +31,10 @@ export function buildTrace(input) {
       if (prefixBest > NEG) next[q] = nums[q] + prefixBest
     }
     table = next
-    frames.push({ phase: 'one', activeLine: L('for each later one at position p'), one: k, position: p, table: [...table], best: null, message: `The one from index ${p} adds nums[q] to the best earlier score for each target q up to ${p}.` })
+    frames.push({ pythonLine: 16, phase: 'one', activeLine: L('for each later one at position p'), one: k, position: p, table: [...table], best: null, message: `The one from index ${p} adds nums[q] to the best earlier score for each target q up to ${p}.` })
   }
   const result = Math.max(...table)
-  frames.push({ phase: 'done', activeLine: L('return the largest value in table'), one: -1, position: -1, table: [...table], best: result, message: `Best score: ${result}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return the largest value in table'), one: -1, position: -1, table: [...table], best: result, message: `Best score: ${result}.` })
   return { input, result, frames, ones }
 }
 

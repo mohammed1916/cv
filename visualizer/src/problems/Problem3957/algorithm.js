@@ -18,7 +18,7 @@ export function buildTrace(input) {
   for (const x of nums) prefix.push(prefix[prefix.length - 1] + x)
   const best = Array.from({ length: n + 1 }, () => Array(top + 1).fill(-Infinity))
   for (let i = 0; i <= n; i++) best[i][0] = 0
-  const frames = [{ phase: 'start', activeLine: L('let prefix be'), i: 0, row: [...best[0]], message: `Build the table best[i][j]: the most total using j subarrays in the first i values.` }]
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('let prefix be'), i: 0, row: [...best[0]], message: `Build the table best[i][j]: the most total using j subarrays in the first i values.` }]
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= top; j++) {
       let option = best[i - 1][j]
@@ -29,11 +29,11 @@ export function buildTrace(input) {
       }
       best[i][j] = option
     }
-    frames.push({ phase: 'row', activeLine: L('for each end position i'), i, row: [...best[i]], message: `After ${i} value(s): ${best[i].slice(1).map((v, idx) => `${idx + 1} subarray(s) give ${v}`).join(', ')}.` })
+    frames.push({ pythonLine: 19, phase: 'row', activeLine: L('for each end position i'), i, row: [...best[i]], message: `After ${i} value(s): ${best[i].slice(1).map((v, idx) => `${idx + 1} subarray(s) give ${v}`).join(', ')}.` })
   }
   let result = -Infinity
   for (let j = 1; j <= top; j++) if (best[n][j] > result) result = best[n][j]
-  frames.push({ phase: 'done', activeLine: L('return the largest'), i: n, row: [...best[n]], message: `Best total with 1 to ${top} subarrays: ${result}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return the largest'), i: n, row: [...best[n]], message: `Best total with 1 to ${top} subarrays: ${result}.` })
   return { input, result, frames }
 }
 

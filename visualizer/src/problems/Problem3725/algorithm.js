@@ -27,19 +27,19 @@ export function buildTrace(input) {
   const { mat } = input
   const top = Math.max(...mat.flat())
   let answer = 0
-  const frames = [{ phase: 'start', activeLine: L('set answer to 0'), d: 0, mu: 0, ways: 0, answer, message: 'Count picks whose gcd is 1 by removing the picks that share each divisor d, using the Mobius function.' }]
+  const frames = [{ pythonLine: 20, phase: 'start', activeLine: L('set answer to 0'), d: 0, mu: 0, ways: 0, answer, message: 'Count picks whose gcd is 1 by removing the picks that share each divisor d, using the Mobius function.' }]
   for (let d = 1; d <= top; d++) {
     const mu = mobius(d)
     if (mu === 0) {
-      frames.push({ phase: 'skip', activeLine: L('if mu is zero'), d, mu, ways: 0, answer, message: `${d} has a squared prime factor, so its Mobius value is 0. Skip it.` })
+      frames.push({ pythonLine: 24, phase: 'skip', activeLine: L('if mu is zero'), d, mu, ways: 0, answer, message: `${d} has a squared prime factor, so its Mobius value is 0. Skip it.` })
       continue
     }
     let ways = 1
     for (const row of mat) ways = (ways * row.filter(v => v % d === 0).length) % MOD
     answer = (((answer + mu * ways) % MOD) + MOD) % MOD
-    frames.push({ phase: 'add', activeLine: L('add mu times ways'), d, mu, ways, answer, message: `d = ${d}, mu = ${mu}: picks divisible by ${d} contribute ${mu * ways} (ways ${ways}).` })
+    frames.push({ pythonLine: 28, phase: 'add', activeLine: L('add mu times ways'), d, mu, ways, answer, message: `d = ${d}, mu = ${mu}: picks divisible by ${d} contribute ${mu * ways} (ways ${ways}).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer modulo'), d: 0, mu: 0, ways: 0, answer, message: `Coprime choices: ${answer}.` })
+  frames.push({ pythonLine: 29, phase: 'done', activeLine: L('return answer modulo'), d: 0, mu: 0, ways: 0, answer, message: `Coprime choices: ${answer}.` })
   return { input, result: answer, frames }
 }
 

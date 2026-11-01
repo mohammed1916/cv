@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const rows = grid.length
   const cols = grid[0].length
   const seen = grid.map(row => row.map(() => false))
-  const frames = [{ phase: 'start', activeLine: L('set count to zero'), current: null, total: 0, visited: [], count: 0, message: 'Scan the grid in row order. Each unseen non-zero cell starts a new island.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set count to zero'), current: null, total: 0, visited: [], count: 0, message: 'Scan the grid in row order. Each unseen non-zero cell starts a new island.' }]
   const visited = []
   let count = 0
   for (let r = 0; r < rows; r++) {
@@ -28,7 +28,7 @@ export function buildTrace(input) {
         const [y, x] = stack.pop()
         total += grid[y][x]
         cells.push([y, x])
-        frames.push({ phase: 'flood', activeLine: L('pop a cell'), current: [y, x], total, visited: [...visited, ...cells], count, message: `Add ${grid[y][x]} from cell (${y}, ${x}). Island total so far: ${total}.` })
+        frames.push({ pythonLine: 14, phase: 'flood', activeLine: L('pop a cell'), current: [y, x], total, visited: [...visited, ...cells], count, message: `Add ${grid[y][x]} from cell (${y}, ${x}). Island total so far: ${total}.` })
         for (const [ny, nx] of [[y + 1, x], [y - 1, x], [y, x + 1], [y, x - 1]]) {
           if (ny >= 0 && ny < rows && nx >= 0 && nx < cols && grid[ny][nx] !== 0 && !seen[ny][nx]) {
             seen[ny][nx] = true
@@ -39,10 +39,10 @@ export function buildTrace(input) {
       const ok = total % k === 0
       if (ok) count++
       visited.push(...cells)
-      frames.push({ phase: ok ? 'count' : 'reject', activeLine: L('if total is divisible'), current: null, total, visited: [...visited], count, message: ok ? `Island total ${total} is divisible by ${k}. Count: ${count}.` : `Island total ${total} is not divisible by ${k}.` })
+      frames.push({ pythonLine: ok ? 20 : 19, phase: ok ? 'count' : 'reject', activeLine: L('if total is divisible'), current: null, total, visited: [...visited], count, message: ok ? `Island total ${total} is divisible by ${k}. Count: ${count}.` : `Island total ${total} is not divisible by ${k}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), current: null, total: 0, visited: [...visited], count, message: `Islands whose total is divisible by ${k}: ${count}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return count'), current: null, total: 0, visited: [...visited], count, message: `Islands whose total is divisible by ${k}: ${count}.` })
   return { input, result: count, frames }
 }
 

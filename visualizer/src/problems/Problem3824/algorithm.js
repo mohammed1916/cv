@@ -12,16 +12,16 @@ export function buildTrace(input) {
   const { nums } = input
   let low = 1
   let high = Math.max(...nums) + nums.length
-  const frames = [{ phase: 'search', activeLine: L('low = 1, high ='), k: null, operations: null, low, high, message: `Binary search for the smallest k between ${low} and ${high}.` }]
+  const frames = [{ pythonLine: 5, phase: 'search', activeLine: L('low = 1, high ='), k: null, operations: null, low, high, message: `Binary search for the smallest k between ${low} and ${high}.` }]
   while (low < high) {
     const mid = Math.floor((low + high) / 2)
     const count = ops(nums, mid)
     const ok = count <= mid * mid
     if (ok) high = mid
     else low = mid + 1
-    frames.push({ phase: 'probe', activeLine: L('if operations(mid) is at most'), k: mid, operations: count, low, high, ok, message: `k = ${mid} needs ${count} operations, ${ok ? 'within' : 'over'} the limit ${mid * mid}.` })
+    frames.push({ pythonLine: ok ? 9 : 11, phase: 'probe', activeLine: L('if operations(mid) is at most'), k: mid, operations: count, low, high, ok, message: `k = ${mid} needs ${count} operations, ${ok ? 'within' : 'over'} the limit ${mid * mid}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), k: low, operations: ops(nums, low), low, high, message: `Smallest valid k: ${low}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return low'), k: low, operations: ops(nums, low), low, high, message: `Smallest valid k: ${low}.` })
   return { input, result: low, frames }
 }
 

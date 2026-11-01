@@ -8,18 +8,18 @@ export function buildTrace({ n }) {
   const digits = String(n)
   const counts = new Map()
   const sorted = () => [...counts].sort((a, b) => a[0] - b[0])
-  const frames = [{ phase: 'start', activeLine: L('write n as'), index: -1, counts: [], key: null, best: null, message: `Write ${n} as its decimal digits.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('write n as'), index: -1, counts: [], key: null, best: null, message: `Write ${n} as its decimal digits.` }]
   for (let i = 0; i < digits.length; i++) {
     const d = Number(digits[i])
     counts.set(d, (counts.get(d) || 0) + 1)
-    frames.push({ phase: 'count', activeLine: L('count how many times'), index: i, counts: sorted(), key: d, best: null, message: `Digit ${d} has now appeared ${counts.get(d)} time(s).` })
+    frames.push({ pythonLine: 5, phase: 'count', activeLine: L('count how many times'), index: i, counts: sorted(), key: d, best: null, message: `Digit ${d} has now appeared ${counts.get(d)} time(s).` })
   }
   let best = null
   for (const [d, count] of sorted()) {
     if (best === null || count < counts.get(best)) best = d
-    frames.push({ phase: 'compare', activeLine: L('if best is nothing'), index: -1, counts: sorted(), key: d, best, message: `Digit ${d} appears ${count} time(s); the best digit so far is ${best}.` })
+    frames.push({ pythonLine: best === d ? 9 : 8, phase: 'compare', activeLine: L('if best is nothing'), index: -1, counts: sorted(), key: d, best, message: `Digit ${d} appears ${count} time(s); the best digit so far is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, counts: sorted(), key: best, best, result: best, message: `The least frequent digit is ${best}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return best'), index: -1, counts: sorted(), key: best, best, result: best, message: `The least frequent digit is ${best}.` })
   return { input: { n }, result: best, frames }
 }
 

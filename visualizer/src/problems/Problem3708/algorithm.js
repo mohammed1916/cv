@@ -10,19 +10,19 @@ export function buildTrace(input) {
   const { nums } = input
   let best = 2
   let run = 2
-  const frames = [{ phase: 'start', activeLine: L('set best to 2'), index: 1, run, best, message: 'Any two neighbours form a run of length 2, so start with 2.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set best to 2'), index: 1, run, best, message: 'Any two neighbours form a run of length 2, so start with 2.' }]
   for (let i = 2; i < nums.length; i++) {
     if (nums[i] === nums[i - 1] + nums[i - 2]) {
       run += 1
-      frames.push({ phase: 'extend', activeLine: L('add 1 to run'), index: i, run, best: Math.max(best, run), message: `${nums[i]} is ${nums[i - 1]} + ${nums[i - 2]}, so the run grows to ${run}.` })
+      frames.push({ pythonLine: 6, phase: 'extend', activeLine: L('add 1 to run'), index: i, run, best: Math.max(best, run), message: `${nums[i]} is ${nums[i - 1]} + ${nums[i - 2]}, so the run grows to ${run}.` })
     } else {
       run = 2
-      frames.push({ phase: 'reset', activeLine: L('reset run'), index: i, run, best, message: `${nums[i]} is not ${nums[i - 1]} + ${nums[i - 2]}, so the run restarts at 2.` })
+      frames.push({ pythonLine: 8, phase: 'reset', activeLine: L('reset run'), index: i, run, best, message: `${nums[i]} is not ${nums[i - 1]} + ${nums[i - 2]}, so the run restarts at 2.` })
     }
     if (run > best) best = run
-    frames.push({ phase: 'compare', activeLine: L('if run is greater'), index: i, run, best, message: `Best so far: ${best}.` })
+    frames.push({ pythonLine: 9, phase: 'compare', activeLine: L('if run is greater'), index: i, run, best, message: `Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, run, best, message: `Longest Fibonacci subarray: ${best}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return best'), index: -1, run, best, message: `Longest Fibonacci subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

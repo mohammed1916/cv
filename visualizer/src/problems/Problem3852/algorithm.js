@@ -11,19 +11,19 @@ export function buildTrace({ nums }) {
   const freq = new Map()
   for (const v of nums) freq.set(v, (freq.get(v) ?? 0) + 1)
   const values = [...freq.keys()].sort((a, b) => a - b)
-  const frames = [{ phase: 'count', activeLine: L('count how many times'), x: null, y: null, result: null, message: `Counted ${values.length} distinct values.` }]
+  const frames = [{ pythonLine: 5, phase: 'count', activeLine: L('count how many times'), x: null, y: null, result: null, message: `Counted ${values.length} distinct values.` }]
   let result = [-1, -1]
   outer: for (const x of values) {
-    frames.push({ phase: 'x', activeLine: L('for each value x'), x, y: null, result: null, message: `Try x = ${x}, which appears ${freq.get(x)} time(s).` })
+    frames.push({ pythonLine: 6, phase: 'x', activeLine: L('for each value x'), x, y: null, result: null, message: `Try x = ${x}, which appears ${freq.get(x)} time(s).` })
     for (const y of values) {
       if (y <= x) continue
       const differs = freq.get(y) !== freq.get(x)
-      frames.push({ phase: differs ? 'found' : 'check', activeLine: L('if y is larger than x'), x, y, result: null,
+      frames.push({ pythonLine: differs ? 9 : 8, phase: differs ? 'found' : 'check', activeLine: L('if y is larger than x'), x, y, result: null,
         message: `y = ${y} appears ${freq.get(y)} time(s), ${differs ? 'a different count, so the pair is valid' : 'the same count, so keep looking'}.` })
       if (differs) { result = [x, y]; break outer }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return [x, y]'), x: result[0], y: result[1], result, message: `Answer: [${result.join(', ')}].` })
+  frames.push({ pythonLine: result[0] === -1 ? 10 : 9, phase: 'done', activeLine: L('return [x, y]'), x: result[0], y: result[1], result, message: `Answer: [${result.join(', ')}].` })
   return { input: { nums }, result, frames }
 }
 

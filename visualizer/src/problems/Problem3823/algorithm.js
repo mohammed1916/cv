@@ -13,15 +13,15 @@ export function buildTrace({ s }) {
   const chars = [...s]
   const letterPositions = chars.map((ch, i) => (isLetter(ch) ? i : -1)).filter(i => i >= 0)
   const specialPositions = chars.map((ch, i) => (isLetter(ch) ? -1 : i)).filter(i => i >= 0)
-  const frames = [{ phase: 'start', activeLine: L('make a list of the characters'), chars: [...chars], moved: [], message: 'Find the letter positions and the special character positions.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('make a list of the characters'), chars: [...chars], moved: [], message: 'Find the letter positions and the special character positions.' }]
   const letters = letterPositions.map(i => chars[i]).reverse()
   letterPositions.forEach((pos, k) => { chars[pos] = letters[k] })
-  frames.push({ phase: 'letters', activeLine: L('put the letters back'), chars: [...chars], moved: letterPositions, message: `Reverse the ${letters.length} letters among the letter positions.` })
+  frames.push({ pythonLine: 8, phase: 'letters', activeLine: L('put the letters back'), chars: [...chars], moved: letterPositions, message: `Reverse the ${letters.length} letters among the letter positions.` })
   const specials = specialPositions.map(i => s[i]).reverse()
   specialPositions.forEach((pos, k) => { chars[pos] = specials[k] })
-  frames.push({ phase: 'specials', activeLine: L('put the special characters back'), chars: [...chars], moved: specialPositions, message: `Reverse the ${specials.length} special characters among the special positions.` })
+  frames.push({ pythonLine: 10, phase: 'specials', activeLine: L('put the special characters back'), chars: [...chars], moved: specialPositions, message: `Reverse the ${specials.length} special characters among the special positions.` })
   const result = chars.join('')
-  frames.push({ phase: 'done', activeLine: L('return the result'), chars: [...chars], moved: [], message: `Result: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the result'), chars: [...chars], moved: [], message: `Result: ${result}.` })
   return { input: { s }, result, frames }
 }
 

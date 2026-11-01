@@ -13,21 +13,21 @@ export function buildTrace({ nums }) {
   const frames = []
   let prefixMax = 0
   const prefixGcd = []
-  frames.push({ phase: 'start', activeLine: L('set prefixMax to 0'), sorted: [], pair: null, total: null, result: null, message: 'Build prefixGcd: gcd of each value with the largest value so far.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set prefixMax to 0'), sorted: [], pair: null, total: null, result: null, message: 'Build prefixGcd: gcd of each value with the largest value so far.' })
   for (let i = 0; i < nums.length; i++) {
     prefixMax = Math.max(prefixMax, nums[i])
     prefixGcd.push(gcd(nums[i], prefixMax))
-    frames.push({ phase: 'prefix', activeLine: L('append gcd'), sorted: [...prefixGcd], pair: null, total: null, result: null, message: `Index ${i}: gcd(${nums[i]}, max ${prefixMax}) = ${prefixGcd[i]}.` })
+    frames.push({ pythonLine: 9, phase: 'prefix', activeLine: L('append gcd'), sorted: [...prefixGcd], pair: null, total: null, result: null, message: `Index ${i}: gcd(${nums[i]}, max ${prefixMax}) = ${prefixGcd[i]}.` })
   }
   const sorted = [...prefixGcd].sort((a, b) => a - b)
-  frames.push({ phase: 'sort', activeLine: L('sort prefixGcd'), sorted: [...sorted], pair: null, total: 0, result: null, message: `Sorted prefixGcd: [${sorted.join(', ')}].` })
+  frames.push({ pythonLine: 10, phase: 'sort', activeLine: L('sort prefixGcd'), sorted: [...sorted], pair: null, total: 0, result: null, message: `Sorted prefixGcd: [${sorted.join(', ')}].` })
   let total = 0
   for (let i = 0, j = sorted.length - 1; i < j; i++, j--) {
     const g = gcd(sorted[i], sorted[j])
     total += g
-    frames.push({ phase: 'pair', activeLine: L('add gcd'), sorted: [...sorted], pair: [i, j], total, result: null, message: `Pair ${sorted[i]} with ${sorted[j]}: gcd ${g}.` })
+    frames.push({ pythonLine: 17, phase: 'pair', activeLine: L('add gcd'), sorted: [...sorted], pair: [i, j], total, result: null, message: `Pair ${sorted[i]} with ${sorted[j]}: gcd ${g}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), sorted: [...sorted], pair: null, total, result: total, message: `Sum of pair GCDs: ${total}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return total'), sorted: [...sorted], pair: null, total, result: total, message: `Sum of pair GCDs: ${total}.` })
   return { input: { nums }, result: total, frames }
 }
 

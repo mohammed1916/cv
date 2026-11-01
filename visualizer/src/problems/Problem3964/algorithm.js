@@ -23,15 +23,15 @@ export function buildTrace(input) {
   lights.forEach((v, i) => { if (v > 0) bulbs.push([i, v]) })
   const lit = litBy(bulbs, n)
   let extra = 0
-  const frames = [{ phase: 'start', activeLine: L('let lit be'), p: -1, lit: [...lit], extra, message: 'Mark what the existing bulbs already light, then fill the gaps from the left.' }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('let lit be'), p: -1, lit: [...lit], extra, message: 'Mark what the existing bulbs already light, then fill the gaps from the left.' }]
   for (let p = 0; p < n; p++) {
     if (lit[p]) continue
     const j = Math.min(p + 1, n - 1)
     extra++
     for (let q = Math.max(0, j - 1); q <= Math.min(n - 1, j + 1); q++) lit[q] = true
-    frames.push({ phase: 'place', activeLine: L('place a bulb'), p, bulb: j, lit: [...lit], extra, message: `Position ${p} is dark, so place an extra bulb at ${j}, which lights ${Math.max(0, j - 1)} to ${Math.min(n - 1, j + 1)}.` })
+    frames.push({ pythonLine: 15, phase: 'place', activeLine: L('place a bulb'), p, bulb: j, lit: [...lit], extra, message: `Position ${p} is dark, so place an extra bulb at ${j}, which lights ${Math.max(0, j - 1)} to ${Math.min(n - 1, j + 1)}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return extra'), p: -1, lit: [...lit], extra, message: `Extra bulbs needed: ${extra}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return extra'), p: -1, lit: [...lit], extra, message: `Extra bulbs needed: ${extra}.` })
   return { input, result: extra, frames }
 }
 

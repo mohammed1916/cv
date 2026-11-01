@@ -15,7 +15,7 @@ export function buildTrace(input) {
   const n = nums.length
   let best = -Infinity
   let bestAt = null
-  const frames = [{ phase: 'start', activeLine: L('let best be'), index: -1, value: null, cost: null, best: null, message: `Choose an index and a final value up to ${maxVal}. Every other element must end co-prime with it.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('let best be'), index: -1, value: null, cost: null, best: null, message: `Choose an index and a final value up to ${maxVal}. Every other element must end co-prime with it.` }]
   for (let i = 0; i < n; i++) {
     for (const v of [...new Set([nums[i], ...Array.from({ length: maxVal }, (_, k) => k + 1)])]) {
       let cost = v !== nums[i] ? 1 : 0
@@ -27,9 +27,9 @@ export function buildTrace(input) {
         bestAt = [i, v]
       }
     }
-    frames.push({ phase: 'index', activeLine: L('for each index i'), index: i, value: null, cost: null, best, message: `Index ${i} checked. Best score so far: ${best}.` })
+    frames.push({ pythonLine: 11, phase: 'index', activeLine: L('for each index i'), index: i, value: null, cost: null, best, message: `Index ${i} checked. Best score so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: bestAt ? bestAt[0] : -1, value: bestAt ? bestAt[1] : null, cost: null, best, message: `Maximum score: ${best}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return best'), index: bestAt ? bestAt[0] : -1, value: bestAt ? bestAt[1] : null, cost: null, best, message: `Maximum score: ${best}.` })
   return { input, result: best, frames }
 }
 

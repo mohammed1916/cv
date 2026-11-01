@@ -13,20 +13,20 @@ const isPrime = n => {
 
 export function buildTrace({ nums }) {
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('count how many times'), index: -1, counts: [], key: null, message: 'Count how often each value appears, then test each count for primality.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('count how many times'), index: -1, counts: [], key: null, message: 'Count how often each value appears, then test each count for primality.' }]
   for (let i = 0; i < nums.length; i++) {
     counts.set(nums[i], (counts.get(nums[i]) || 0) + 1)
-    frames.push({ phase: 'count', activeLine: L('count how many times'), index: i, counts: [...counts], key: null, message: `Value ${nums[i]} now has frequency ${counts.get(nums[i])}.` })
+    frames.push({ pythonLine: 4, phase: 'count', activeLine: L('count how many times'), index: i, counts: [...counts], key: null, message: `Value ${nums[i]} now has frequency ${counts.get(nums[i])}.` })
   }
   for (const [value, count] of counts) {
     const prime = isPrime(count)
-    frames.push({ phase: 'check', activeLine: L('if the count is prime'), index: -1, counts: [...counts], key: value, prime, message: `Frequency ${count} of ${value} is ${prime ? 'prime' : 'not prime'}.` })
+    frames.push({ pythonLine: 17, phase: 'check', activeLine: L('if the count is prime'), index: -1, counts: [...counts], key: value, prime, message: `Frequency ${count} of ${value} is ${prime ? 'prime' : 'not prime'}.` })
     if (prime) {
-      frames.push({ phase: 'found', activeLine: L('return true'), index: -1, counts: [...counts], key: value, result: true, message: `Frequency ${count} is prime, so the answer is true.` })
+      frames.push({ pythonLine: 18, phase: 'found', activeLine: L('return true'), index: -1, counts: [...counts], key: value, result: true, message: `Frequency ${count} is prime, so the answer is true.` })
       return { input: { nums }, result: true, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), index: -1, counts: [...counts], key: null, result: false, message: 'No frequency is prime, so the answer is false.' })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return false'), index: -1, counts: [...counts], key: null, result: false, message: 'No frequency is prime, so the answer is false.' })
   return { input: { nums }, result: false, frames }
 }
 

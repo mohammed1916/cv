@@ -27,17 +27,17 @@ function goodUpTo(x, k, frames, label) {
     return total
   }
   const result = go(0, -1, true, false)
-  frames.push({ phase: 'bound', activeLine: L('let digits be'), label, bound: x, states: memo.size, count: result, message: `Good integers from 1 to ${x}: ${result}.` })
+  frames.push({ pythonLine: 26, phase: 'bound', activeLine: L('let digits be'), label, bound: x, states: memo.size, count: result, message: `Good integers from 1 to ${x}: ${result}.` })
   return result
 }
 
 export function buildTrace(input) {
   const { l, r, k } = input
-  const frames = [{ phase: 'start', activeLine: L('return good up to r minus'), label: null, bound: null, states: 0, count: null, message: `Count good integers in [${l}, ${r}] with adjacent digit gaps at most ${k}.` }]
+  const frames = [{ pythonLine: 28, phase: 'start', activeLine: L('return good up to r minus'), label: null, bound: null, states: 0, count: null, message: `Count good integers in [${l}, ${r}] with adjacent digit gaps at most ${k}.` }]
   const upR = goodUpTo(r, k, frames, 'r')
   const upL = goodUpTo(l - 1, k, frames, 'l - 1')
   const result = upR - upL
-  frames.push({ phase: 'done', activeLine: L('return total'), label: null, bound: null, states: 0, count: result, message: `Good integers in [${l}, ${r}]: ${result}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return total'), label: null, bound: null, states: 0, count: result, message: `Good integers in [${l}, ${r}]: ${result}.` })
   return { input, result, frames }
 }
 

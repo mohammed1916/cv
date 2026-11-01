@@ -22,10 +22,10 @@ export function buildTrace(input) {
       const [s2, e2] = intervals[j]
       const hit = Math.max(s1, s2) <= Math.min(e1, e2)
       if (hit) count++
-      frames.push({ phase: 'pair', activeLine: L('for each interval j after i'), i, j, hit, count, message: `[${s1}, ${e1}] and [${s2}, ${e2}] ${hit ? 'share a point' : 'do not meet'}.` })
+      frames.push({ pythonLine: hit ? 9 : 8, phase: 'pair', activeLine: L('for each interval j after i'), i, j, hit, count, message: `[${s1}, ${e1}] and [${s2}, ${e2}] ${hit ? 'share a point' : 'do not meet'}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), i: -1, j: -1, hit: null, count, message: `Intersecting pairs: ${count}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return count'), i: -1, j: -1, hit: null, count, message: `Intersecting pairs: ${count}.` })
   return { input, result: count, frames }
 }
 

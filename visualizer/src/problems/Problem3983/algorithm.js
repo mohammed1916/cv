@@ -18,28 +18,28 @@ export function buildTrace(input) {
     let p = prefix[i]
     while (p < m && t[p] !== s[i]) p++
     prefix.push(p < m ? p + 1 : inf)
-    frames.push({ phase: 'prefix', activeLine: L('prefixEnd[i+1]'), i, prefix: prefix.slice(), suffix: null, found: null, message: `Greedy match of s[${i}] = ${s[i]} ends the prefix at ${p < m ? p + 1 : 'never'}.` })
+    frames.push({ pythonLine: 10, phase: 'prefix', activeLine: L('prefixEnd[i+1]'), i, prefix: prefix.slice(), suffix: null, found: null, message: `Greedy match of s[${i}] = ${s[i]} ends the prefix at ${p < m ? p + 1 : 'never'}.` })
   }
   const suffix = Array(n + 1).fill(m)
   for (let j = n - 1; j >= 0; j--) {
     let p = suffix[j + 1] - 1
     while (p >= 0 && t[p] !== s[j]) p--
     suffix[j] = p >= 0 ? p : -1
-    frames.push({ phase: 'suffix', activeLine: L('suffixStart[j]'), i: j, prefix: prefix.slice(), suffix: suffix.slice(), found: null, message: `Suffix from s[${j}] can start no later than ${suffix[j] < 0 ? 'never' : suffix[j]}.` })
+    frames.push({ pythonLine: 16, phase: 'suffix', activeLine: L('suffixStart[j]'), i: j, prefix: prefix.slice(), suffix: suffix.slice(), found: null, message: `Suffix from s[${j}] can start no later than ${suffix[j] < 0 ? 'never' : suffix[j]}.` })
   }
   if (prefix[n] <= m) {
-    frames.push({ phase: 'done', activeLine: L('if prefixEnd[n]'), i: -1, prefix: prefix.slice(), suffix: suffix.slice(), found: true, message: 's already fits in t, so no replacement is needed.' })
+    frames.push({ pythonLine: 18, phase: 'done', activeLine: L('if prefixEnd[n]'), i: -1, prefix: prefix.slice(), suffix: suffix.slice(), found: true, message: 's already fits in t, so no replacement is needed.' })
     return { input, result: true, frames }
   }
   for (let i = 0; i < n; i++) {
     const fits = prefix[i] < suffix[i + 1]
-    frames.push({ phase: 'try', activeLine: L('if prefixEnd[i] is less'), i, prefix: prefix.slice(), suffix: suffix.slice(), found: fits, message: fits ? `Replacing s[${i}] works: some letter of t lies between the two parts.` : `Replacing s[${i}] does not fit.` })
+    frames.push({ pythonLine: fits ? 21 : 20, phase: 'try', activeLine: L('if prefixEnd[i] is less'), i, prefix: prefix.slice(), suffix: suffix.slice(), found: fits, message: fits ? `Replacing s[${i}] works: some letter of t lies between the two parts.` : `Replacing s[${i}] does not fit.` })
     if (fits) {
-      frames.push({ phase: 'done', activeLine: L('return true'), i, prefix: prefix.slice(), suffix: suffix.slice(), found: true, message: 'One replacement makes s a subsequence of t.' })
+      frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return true'), i, prefix: prefix.slice(), suffix: suffix.slice(), found: true, message: 'One replacement makes s a subsequence of t.' })
       return { input, result: true, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), i: -1, prefix: prefix.slice(), suffix: suffix.slice(), found: false, message: 'No single replacement works.' })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return false'), i: -1, prefix: prefix.slice(), suffix: suffix.slice(), found: false, message: 'No single replacement works.' })
   return { input, result: false, frames }
 }
 

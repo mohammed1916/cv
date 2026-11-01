@@ -47,8 +47,8 @@ export function buildTrace(input) {
   const frames = []
   if (k === 0) {
     const result = n >= 1 ? 1 : 0
-    frames.push({ phase: 'zero', activeLine: L('if k is 0'), c: null, depth: 0, count: result, total: result, message: 'Only the number 1 has depth 0.' })
-    frames.push({ phase: 'done', activeLine: L('return total'), c: null, depth: null, count: null, total: result, message: `Answer: ${result}.` })
+    frames.push({ pythonLine: 13, phase: 'zero', activeLine: L('if k is 0'), c: null, depth: 0, count: result, total: result, message: 'Only the number 1 has depth 0.' })
+    frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return total'), c: null, depth: null, count: null, total: result, message: `Answer: ${result}.` })
     return { input: { n, k }, result, frames }
   }
   let total = 0
@@ -58,13 +58,13 @@ export function buildTrace(input) {
     if (dc !== k - 1) continue
     const count = countWithBits(n, c)
     total += count
-    frames.push({ phase: 'class', activeLine: L('add the count of x'), c, depth: dc, count, total, message: `${count} numbers up to ${n} have ${c} set bits and depth ${dc + 1}.` })
+    frames.push({ pythonLine: 31, phase: 'class', activeLine: L('add the count of x'), c, depth: dc, count, total, message: `${count} numbers up to ${n} have ${c} set bits and depth ${dc + 1}.` })
   }
   if (k === 1) {
     total -= 1
-    frames.push({ phase: 'adjust', activeLine: L('subtract 1 for the number 1'), c: 1, depth: 0, count: -1, total, message: 'The number 1 has depth 0, not 1, so it is removed.' })
+    frames.push({ pythonLine: 33, phase: 'adjust', activeLine: L('subtract 1 for the number 1'), c: 1, depth: 0, count: -1, total, message: 'The number 1 has depth 0, not 1, so it is removed.' })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), c: null, depth: null, count: null, total, message: `Answer: ${total}.` })
+  frames.push({ pythonLine: 34, phase: 'done', activeLine: L('return total'), c: null, depth: null, count: null, total, message: `Answer: ${total}.` })
   return { input: { n, k }, result: total, frames }
 }
 

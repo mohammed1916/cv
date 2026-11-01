@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const { nums, k } = input
   const n = nums.length
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), start: null, count: 0, message: 'Count subarrays that contain at least two primes whose largest and smallest differ by at most k.' }]
+  const frames = [{ pythonLine: 13, phase: 'start', activeLine: L('set count to 0'), start: null, count: 0, message: 'Count subarrays that contain at least two primes whose largest and smallest differ by at most k.' }]
   for (let l = 0; l < n; l++) {
     let lo = null
     let hi = null
@@ -31,9 +31,9 @@ export function buildTrace(input) {
       }
       if (primes >= 2 && hi - lo <= k) count++
     }
-    frames.push({ phase: 'start-index', activeLine: L('for each start l'), start: l, count, message: `Subarrays starting at ${l} are counted. Running total: ${count}.` })
+    frames.push({ pythonLine: 14, phase: 'start-index', activeLine: L('for each start l'), start: l, count, message: `Subarrays starting at ${l} are counted. Running total: ${count}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), start: null, count, message: `There are ${count} prime-gap balanced subarrays.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return count'), start: null, count, message: `There are ${count} prime-gap balanced subarrays.` })
   return { input, result: count, frames }
 }
 

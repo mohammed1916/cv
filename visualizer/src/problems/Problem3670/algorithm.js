@@ -9,25 +9,25 @@ export function buildTrace(nums) {
   const frames = []
   let best = 0
   let bestPair = null
-  frames.push({ phase: 'start', activeLine: L('set best to 0'), i: -1, j: -1, best, bestPair, message: 'Start with no qualifying pair. The answer is 0 unless some pair has a zero AND.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set best to 0'), i: -1, j: -1, best, bestPair, message: 'Start with no qualifying pair. The answer is 0 unless some pair has a zero AND.' })
   for (let i = 0; i < nums.length - 1; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       const and = nums[i] & nums[j]
       if (and !== 0) {
-        frames.push({ phase: 'check', activeLine: L('if the AND of'), i, j, best, bestPair, message: `${nums[i]} AND ${nums[j]} = ${and}, so this pair is skipped.` })
+        frames.push({ pythonLine: 6, phase: 'check', activeLine: L('if the AND of'), i, j, best, bestPair, message: `${nums[i]} AND ${nums[j]} = ${and}, so this pair is skipped.` })
         continue
       }
       const product = nums[i] * nums[j]
       if (product > best) {
         best = product
         bestPair = [i, j]
-        frames.push({ phase: 'best', activeLine: L('set best to the product'), i, j, best, bestPair, message: `${nums[i]} AND ${nums[j]} = 0. Product ${product} is the new best.` })
+        frames.push({ pythonLine: 7, phase: 'best', activeLine: L('set best to the product'), i, j, best, bestPair, message: `${nums[i]} AND ${nums[j]} = 0. Product ${product} is the new best.` })
       } else {
-        frames.push({ phase: 'check', activeLine: L('if the AND of'), i, j, best, bestPair, message: `${nums[i]} AND ${nums[j]} = 0, product ${product} does not beat ${best}.` })
+        frames.push({ pythonLine: 7, phase: 'check', activeLine: L('if the AND of'), i, j, best, bestPair, message: `${nums[i]} AND ${nums[j]} = 0, product ${product} does not beat ${best}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), i: -1, j: -1, best, bestPair, message: `Answer: ${best}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return best'), i: -1, j: -1, best, bestPair, message: `Answer: ${best}.` })
   return { input: nums, result: best, frames }
 }
 

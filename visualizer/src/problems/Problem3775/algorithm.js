@@ -12,17 +12,17 @@ const vowelCount = word => [...word].filter(ch => 'aeiou'.includes(ch)).length
 export function buildTrace({ s }) {
   const words = s.split(' ')
   const target = vowelCount(words[0])
-  const frames = [{ phase: 'start', activeLine: L('set target to'), index: -1, target, words: [...words], message: `The first word ${words[0]} has ${target} vowels. It stays as it is.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set target to'), index: -1, target, words: [...words], message: `The first word ${words[0]} has ${target} vowels. It stays as it is.` }]
   const out = [words[0]]
   for (let i = 1; i < words.length; i++) {
     const count = vowelCount(words[i])
     const reverse = count === target
     const piece = reverse ? [...words[i]].reverse().join('') : words[i]
     out.push(piece)
-    frames.push({ phase: reverse ? 'reverse' : 'keep', activeLine: L(reverse ? 'reverse the word' : 'otherwise keep'), index: i, target, words: [...out, ...words.slice(i + 1)], message: reverse ? `${words[i]} has ${count} vowels, the same as the first word, so it becomes ${piece}.` : `${words[i]} has ${count} vowels, which differs, so it is kept.` })
+    frames.push({ pythonLine: reverse ? 8 : 10, phase: reverse ? 'reverse' : 'keep', activeLine: L(reverse ? 'reverse the word' : 'otherwise keep'), index: i, target, words: [...out, ...words.slice(i + 1)], message: reverse ? `${words[i]} has ${count} vowels, the same as the first word, so it becomes ${piece}.` : `${words[i]} has ${count} vowels, which differs, so it is kept.` })
   }
   const result = out.join(' ')
-  frames.push({ phase: 'done', activeLine: L('return the words'), index: -1, target, words: out, message: `Result: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the words'), index: -1, target, words: out, message: `Result: ${result}.` })
   return { input: { s }, result, frames }
 }
 

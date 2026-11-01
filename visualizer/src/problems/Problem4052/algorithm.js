@@ -18,13 +18,13 @@ export function buildTrace(input) {
   for (let i = 0; i < n; i++) {
     const s = rowShift[i]
     rows[i] = grid[i].map((_, j) => grid[i][(j + s) % n])
-    frames.push({ phase: 'row', activeLine: L('rotate row i to the left'), index: i, grid: rows.map(r => r.slice()), message: `Row ${i} moves left by ${s}.` })
+    frames.push({ pythonLine: 3, phase: 'row', activeLine: L('rotate row i to the left'), index: i, grid: rows.map(r => r.slice()), message: `Row ${i} moves left by ${s}.` })
   }
   const out = Array.from({ length: n }, () => Array(n).fill(0))
   for (let j = 0; j < n; j++) {
     const s = colShift[j]
     for (let i = 0; i < n; i++) out[i][j] = rows[(i + s) % n][j]
-    frames.push({ phase: 'column', activeLine: L('rotate column j upward'), index: j, grid: out.map(r => r.slice()), message: `Column ${j} moves up by ${s}.` })
+    frames.push({ pythonLine: 4, phase: 'column', activeLine: L('rotate column j upward'), index: j, grid: out.map(r => r.slice()), message: `Column ${j} moves up by ${s}.` })
   }
   return { input, result: out, frames }
 }

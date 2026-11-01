@@ -10,7 +10,7 @@ export function buildTrace(input) {
   const { nums } = input
   const n = nums.length
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('count = 0'), span: null, centered: null, count, message: 'Try every subarray, growing it to the right from each start.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('count = 0'), span: null, centered: null, count, message: 'Try every subarray, growing it to the right from each start.' }]
   for (let l = 0; l < n; l++) {
     let total = 0
     const seen = new Set()
@@ -19,10 +19,10 @@ export function buildTrace(input) {
       seen.add(nums[r])
       const centered = seen.has(total)
       if (centered) count++
-      frames.push({ phase: 'extend', activeLine: L('if total is in seen'), span: [l, r], centered, count, message: `Subarray [${l}, ${r}] sums to ${total}. ${centered ? 'The sum appears inside it, so it is centered.' : 'The sum does not appear inside it.'}` })
+      frames.push({ pythonLine: centered ? 11 : 10, phase: 'extend', activeLine: L('if total is in seen'), span: [l, r], centered, count, message: `Subarray [${l}, ${r}] sums to ${total}. ${centered ? 'The sum appears inside it, so it is centered.' : 'The sum does not appear inside it.'}` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), span: null, centered: null, count, message: `${count} centered subarray(s).` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return count'), span: null, centered: null, count, message: `${count} centered subarray(s).` })
   return { input, result: count, frames }
 }
 

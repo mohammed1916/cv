@@ -30,14 +30,14 @@ export function buildTrace({ grid, k }) {
   let cur = Array.from({ length: rows }, () => new Array(cols).fill(inf))
   cur[0][0] = 0
   let best = inf
-  const frames = [{ phase: 'start', activeLine: L('cur[r][c] = infinity'), layer: 0, cell: [0, 0], matrix: cur.map(r => [...r]), best, message: `Layer 0 uses no teleports. Start at (0, 0) with cost 0 and find the cheapest right-and-down routes.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('cur[r][c] = infinity'), layer: 0, cell: [0, 0], matrix: cur.map(r => [...r]), best, message: `Layer 0 uses no teleports. Start at (0, 0) with cost 0 and find the cheapest right-and-down routes.` }]
   for (let t = 0; t <= k; t++) {
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
       if (r === 0 && c === 0) continue
       const fromUp = r > 0 ? cur[r - 1][c] + grid[r][c] : inf
       const fromLeft = c > 0 ? cur[r][c - 1] + grid[r][c] : inf
       cur[r][c] = Math.min(cur[r][c], fromUp, fromLeft)
-      frames.push({ phase: 'move', activeLine: L('cur[r][c] = the smallest'), layer: t, cell: [r, c], matrix: cur.map(row => [...row]), best, message: `Layer ${t}: cell (${r}, ${c}) costs ${cur[r][c]} after entering it with value ${grid[r][c]}.` })
+      frames.push({ pythonLine: 15, phase: 'move', activeLine: L('cur[r][c] = the smallest'), layer: t, cell: [r, c], matrix: cur.map(row => [...row]), best, message: `Layer ${t}: cell (${r}, ${c}) costs ${cur[r][c]} after entering it with value ${grid[r][c]}.` })
     }
     best = Math.min(best, cur[rows - 1][cols - 1])
     if (t === k) break
@@ -46,9 +46,9 @@ export function buildTrace({ grid, k }) {
       if (grid[x][y] <= grid[i][j]) next[x][y] = Math.min(next[x][y], cur[i][j])
     }
     cur = next
-    frames.push({ phase: 'teleport', activeLine: L('next[x][y] = smallest'), layer: t + 1, cell: null, matrix: cur.map(r => [...r]), best, message: `Teleport once more (layer ${t + 1}): each cell takes the cheapest arrival from a cell with a value at least as large, at no cost.` })
+    frames.push({ pythonLine: 26, phase: 'teleport', activeLine: L('next[x][y] = smallest'), layer: t + 1, cell: null, matrix: cur.map(r => [...r]), best, message: `Teleport once more (layer ${t + 1}): each cell takes the cheapest arrival from a cell with a value at least as large, at no cost.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), layer: -1, cell: [rows - 1, cols - 1], matrix: cur.map(r => [...r]), best, message: `Minimum cost with at most ${k} teleport(s): ${best}.` })
+  frames.push({ pythonLine: 27, phase: 'done', activeLine: L('return best'), layer: -1, cell: [rows - 1, cols - 1], matrix: cur.map(r => [...r]), best, message: `Minimum cost with at most ${k} teleport(s): ${best}.` })
   return { input: { grid, k }, result: best, frames }
 }
 

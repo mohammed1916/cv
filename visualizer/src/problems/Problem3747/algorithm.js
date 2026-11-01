@@ -10,27 +10,27 @@ export function buildTrace(input) {
   const digits = String(n).split('').map(Number)
   const L = digits.length
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L_('set total to 0'), index: -1, total: 0, message: `Count the zero-free numbers from 1 to ${n}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L_('set total to 0'), index: -1, total: 0, message: `Count the zero-free numbers from 1 to ${n}.` }]
   for (let len = 1; len < L; len++) {
     total += 9 ** len
-    frames.push({ phase: 'shorter', activeLine: L_('for each shorter length'), index: -1, total, message: `All zero-free numbers with ${len} digit(s): 9^${len} = ${9 ** len}.` })
+    frames.push({ pythonLine: 6, phase: 'shorter', activeLine: L_('for each shorter length'), index: -1, total, message: `All zero-free numbers with ${len} digit(s): 9^${len} = ${9 ** len}.` })
   }
   let zeroFree = true
   for (let i = 0; i < L; i++) {
     const d = digits[i]
     if (d === 0) {
       zeroFree = false
-      frames.push({ phase: 'digit', activeLine: L_('if the digit is 0'), index: i, total, message: `Digit ${i + 1} of n is 0, so no number with this prefix is zero-free. Stop.` })
+      frames.push({ pythonLine: 10, phase: 'digit', activeLine: L_('if the digit is 0'), index: i, total, message: `Digit ${i + 1} of n is 0, so no number with this prefix is zero-free. Stop.` })
       break
     }
     total += (d - 1) * 9 ** (L - i - 1)
-    frames.push({ phase: 'digit', activeLine: L_('add (d - 1)'), index: i, total, message: `Digit ${d} allows ${d - 1} smaller nonzero digits, each followed by ${L - i - 1} free digits. Total: ${total}.` })
+    frames.push({ pythonLine: 12, phase: 'digit', activeLine: L_('add (d - 1)'), index: i, total, message: `Digit ${d} allows ${d - 1} smaller nonzero digits, each followed by ${L - i - 1} free digits. Total: ${total}.` })
   }
   if (zeroFree) {
     total += 1
-    frames.push({ phase: 'self', activeLine: L_('add 1 for n'), index: -1, total, message: `n has no zero digit, so n itself counts. Total: ${total}.` })
+    frames.push({ pythonLine: 14, phase: 'self', activeLine: L_('add 1 for n'), index: -1, total, message: `n has no zero digit, so n itself counts. Total: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L_('return total'), index: -1, total, message: `Distinct integers after removing zeros: ${total}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L_('return total'), index: -1, total, message: `Distinct integers after removing zeros: ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -17,23 +17,23 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, queries } = input
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('create an empty answer list'), index: -1, value: null, answers: [], message: 'Each query removes the evens found in its subarray, then asks for the k-th even left.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('create an empty answer list'), index: -1, value: null, answers: [], message: 'Each query removes the evens found in its subarray, then asks for the k-th even left.' }]
   queries.forEach(([l, r, k], q) => {
     let value = 2 * k
-    frames.push({ phase: 'query', activeLine: L('let value be'), index: l, value, answers: [...answers], message: `Query ${q + 1}: subarray ${l}..${r}, k = ${k}. Without removals the answer is ${value}.` })
+    frames.push({ pythonLine: 4, phase: 'query', activeLine: L('let value be'), index: l, value, answers: [...answers], message: `Query ${q + 1}: subarray ${l}..${r}, k = ${k}. Without removals the answer is ${value}.` })
     for (let i = l; i <= r; i++) {
       const x = nums[i]
       if (x % 2 === 0 && x <= value) {
         value += 2
-        frames.push({ phase: 'shift', activeLine: L('add 2 to value'), index: i, value, answers: [...answers], message: `${x} is an even that was removed and is at most the running answer, so move to ${value}.` })
+        frames.push({ pythonLine: 7, phase: 'shift', activeLine: L('add 2 to value'), index: i, value, answers: [...answers], message: `${x} is an even that was removed and is at most the running answer, so move to ${value}.` })
       } else {
-        frames.push({ phase: 'scan', activeLine: L('for each number x'), index: i, value, answers: [...answers], message: x % 2 === 0 ? `${x} is removed but lies above the running answer, so it changes nothing.` : `${x} is odd, so it removes nothing.` })
+        frames.push({ pythonLine: 6, phase: 'scan', activeLine: L('for each number x'), index: i, value, answers: [...answers], message: x % 2 === 0 ? `${x} is removed but lies above the running answer, so it changes nothing.` : `${x} is odd, so it removes nothing.` })
       }
     }
     answers.push(value)
-    frames.push({ phase: 'append', activeLine: L('append value'), index: -1, value, answers: [...answers], message: `Answer ${q + 1} is ${value}.` })
+    frames.push({ pythonLine: 8, phase: 'append', activeLine: L('append value'), index: -1, value, answers: [...answers], message: `Answer ${q + 1} is ${value}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the answer list'), index: -1, value: null, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the answer list'), index: -1, value: null, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input, result: answers, frames }
 }
 

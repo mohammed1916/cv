@@ -41,14 +41,14 @@ const shown = v => (Number.isFinite(v) ? v : null)
 export function buildTrace(input) {
   const { nums } = input
   const { run, rise, fall, climb, best } = scanStates(nums)
-  const frames = [{ phase: 'start', activeLine: L('set best to negative infinity'), index: 0, run: nums[0], rise: null, fall: null, climb: null, best: null, message: 'Begin with the first value as a rising run of length one.' }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('set best to negative infinity'), index: 0, run: nums[0], rise: null, fall: null, climb: null, best: null, message: 'Begin with the first value as a rising run of length one.' }]
   let running = NONE
   for (let i = 1; i < nums.length; i++) {
     running = Math.max(running, climb[i])
     const line = nums[i - 1] < nums[i] ? L('set rise[i]') : nums[i - 1] > nums[i] ? L('set fall[i]') : L('otherwise set run[i]')
-    frames.push({ phase: 'scan', activeLine: line, index: i, run: shown(run[i]), rise: shown(rise[i]), fall: shown(fall[i]), climb: shown(climb[i]), best: shown(running), message: `At index ${i}: rising run ${shown(run[i]) ?? 'none'}, falling ${shown(fall[i]) ?? 'none'}, full trionic ${shown(climb[i]) ?? 'none'}.` })
+    frames.push({ pythonLine: nums[i - 1] < nums[i] ? 12 : nums[i - 1] > nums[i] ? 18 : 16, phase: 'scan', activeLine: line, index: i, run: shown(run[i]), rise: shown(rise[i]), fall: shown(fall[i]), climb: shown(climb[i]), best: shown(running), message: `At index ${i}: rising run ${shown(run[i]) ?? 'none'}, falling ${shown(fall[i]) ?? 'none'}, full trionic ${shown(climb[i]) ?? 'none'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, run: null, rise: null, fall: null, climb: null, best, message: `The largest trionic subarray sum is ${best}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), index: -1, run: null, rise: null, fall: null, climb: null, best, message: `The largest trionic subarray sum is ${best}.` })
   return { input, nums, result: best, frames }
 }
 

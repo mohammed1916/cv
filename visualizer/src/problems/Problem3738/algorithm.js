@@ -29,7 +29,7 @@ export function buildTrace(nums) {
   const right = Array(n).fill(1)
   for (let i = n - 2; i >= 0; i--) if (nums[i] <= nums[i + 1]) right[i] = right[i + 1] + 1
   let best = Math.max(...left)
-  const frames = [{ phase: 'start', index: -1, best, left: [...left], right: [...right], activeLine: L('set left to'), message: `Without any change, the longest non-decreasing subarray is ${best}.` }]
+  const frames = [{ pythonLine: 11, phase: 'start', index: -1, best, left: [...left], right: [...right], activeLine: L('set left to'), message: `Without any change, the longest non-decreasing subarray is ${best}.` }]
   for (let i = 0; i < n; i++) {
     let candidate = 1
     let line = L('for each position i')
@@ -53,9 +53,9 @@ export function buildTrace(nums) {
       }
     }
     best = Math.max(best, candidate)
-    frames.push({ phase: 'scan', index: i, best, left: [...left], right: [...right], activeLine: line, message: `Position ${i}: best run ${candidate}. ${note} Overall best: ${best}.` })
+    frames.push({ pythonLine: (i > 0 && i < n - 1 && nums[i - 1] <= nums[i + 1]) ? 18 : (i < n - 1) ? 16 : (i > 0) ? 14 : 12, phase: 'scan', index: i, best, left: [...left], right: [...right], activeLine: line, message: `Position ${i}: best run ${candidate}. ${note} Overall best: ${best}.` })
   }
-  frames.push({ phase: 'done', index: n, best, left: [...left], right: [...right], activeLine: L('return best'), message: `Longest non-decreasing subarray after at most one change: ${best}.` })
+  frames.push({ pythonLine: 19, phase: 'done', index: n, best, left: [...left], right: [...right], activeLine: L('return best'), message: `Longest non-decreasing subarray after at most one change: ${best}.` })
   return { input: nums, result: best, frames }
 }
 

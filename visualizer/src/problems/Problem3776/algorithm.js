@@ -15,16 +15,16 @@ export function buildTrace(input) {
   const dist = (a, b) => Math.min(Math.abs(a - b), n - Math.abs(a - b))
   const frames = []
   if (total < 0) {
-    frames.push({ phase: 'done', activeLine: L('if total is less than 0'), person: -1, moves: -1, message: 'The total balance is negative, so no moves can fix it.' })
+    frames.push({ pythonLine: 4, phase: 'done', activeLine: L('if total is less than 0'), person: -1, moves: -1, message: 'The total balance is negative, so no moves can fix it.' })
     return { input, result: -1, frames, order: [] }
   }
   const p = balance.findIndex(v => v < 0)
   if (p < 0) {
-    frames.push({ phase: 'done', activeLine: L('if there is no negative balance'), person: -1, moves: 0, message: 'Every balance is already non-negative.' })
+    frames.push({ pythonLine: 7, phase: 'done', activeLine: L('if there is no negative balance'), person: -1, moves: 0, message: 'Every balance is already non-negative.' })
     return { input, result: 0, frames, order: [] }
   }
   let need = -balance[p]
-  frames.push({ phase: 'find', activeLine: L('the position of the negative balance'), person: p, moves: 0, need, message: `Person ${p} is short by ${need} units.` })
+  frames.push({ pythonLine: 8, phase: 'find', activeLine: L('the position of the negative balance'), person: p, moves: 0, need, message: `Person ${p} is short by ${need} units.` })
   const order = Array.from({ length: n }, (_, j) => j).filter(j => j !== p).sort((a, b) => dist(a, p) - dist(b, p))
   let moves = 0
   for (const j of order) {
@@ -32,9 +32,9 @@ export function buildTrace(input) {
     const take = Math.min(need, balance[j])
     moves += take * dist(j, p)
     need -= take
-    frames.push({ phase: 'take', activeLine: L('take = the smaller of need'), person: j, moves, need, message: `Take ${take} unit(s) from person ${j}, ${dist(j, p)} step(s) away. Moves so far: ${moves}.` })
+    frames.push({ pythonLine: 20, phase: 'take', activeLine: L('take = the smaller of need'), person: j, moves, need, message: `Take ${take} unit(s) from person ${j}, ${dist(j, p)} step(s) away. Moves so far: ${moves}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return moves'), person: -1, moves, need, message: `Minimum moves: ${moves}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return moves'), person: -1, moves, need, message: `Minimum moves: ${moves}.` })
   return { input, result: moves, frames, order }
 }
 

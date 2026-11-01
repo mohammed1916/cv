@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const n1 = word1.length
   const n2 = word2.length
   let states = new Map([['0,0', 1]])
-  const frames = [{ phase: 'start', activeLine: L('let states be'), p: -1, ways: 1, message: 'No target characters matched yet; one way with nothing used.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('let states be'), p: -1, ways: 1, message: 'No target characters matched yet; one way with nothing used.' }]
   for (let p = 0; p < target.length; p++) {
     const ch = target[p]
     const next = new Map()
@@ -31,14 +31,14 @@ export function buildTrace(input) {
     states = next
     let total = 0
     for (const c of states.values()) total = (total + c) % MOD
-    frames.push({ phase: 'char', activeLine: L('for each character ch'), p, ways: total, message: `Target character ${p + 1} is "${ch}". ${states.size} state(s) remain.` })
+    frames.push({ pythonLine: 14, phase: 'char', activeLine: L('for each character ch'), p, ways: total, message: `Target character ${p + 1} is "${ch}". ${states.size} state(s) remain.` })
   }
   let result = 0
   for (const [key, c] of states) {
     const [i, j] = key.split(',').map(Number)
     if (i > 0 && j > 0) result = (result + c) % MOD
   }
-  frames.push({ phase: 'done', activeLine: L('return the total'), p: target.length, ways: result, message: `Distinct ways using both words: ${result}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return the total'), p: target.length, ways: result, message: `Distinct ways using both words: ${result}.` })
   return { input, result, frames }
 }
 

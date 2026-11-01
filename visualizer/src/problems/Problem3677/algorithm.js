@@ -17,7 +17,7 @@ export function buildTrace(n) {
   const limit = BigInt(n)
   const frames = []
   let total = 1n
-  frames.push({ phase: 'start', activeLine: L('set total to 1'), length: 0, count: 1, total: 1, message: 'Count 0 first; it is written "0" and is a palindrome.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set total to 1'), length: 0, count: 1, total: 1, message: 'Count 0 first; it is written "0" and is a palindrome.' })
   const bits = n === 0 ? 0 : n.toString(2).length
   for (let length = 1; length <= bits; length++) {
     const h = Math.ceil(length / 2)
@@ -35,9 +35,9 @@ export function buildTrace(n) {
       count = lo - low + 1n
     }
     total += count
-    frames.push({ phase: 'length', activeLine: L('for each bit length'), length, count: Number(count), total: Number(total), message: `Length ${length}: ${count} palindromes not above ${n}. Total ${total}.` })
+    frames.push({ pythonLine: count === 0n ? 13 : 21, phase: 'length', activeLine: L('for each bit length'), length, count: Number(count), total: Number(total), message: `Length ${length}: ${count} palindromes not above ${n}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), length: bits, count: 0, total: Number(total), message: `Answer: ${total}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return total'), length: bits, count: 0, total: Number(total), message: `Answer: ${total}.` })
   return { input: n, result: Number(total), frames }
 }
 

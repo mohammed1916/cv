@@ -10,14 +10,14 @@ export function buildTrace(input) {
   let count = 1
   let value = 1
   const values = [0]
-  const frames = [{ phase: 'start', activeLine: L('count = 1 for the value 0'), value: 0, count, values: [0], message: 'Zero is monobit, so start the count at 1.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('count = 1 for the value 0'), value: 0, count, values: [0], message: 'Zero is monobit, so start the count at 1.' }]
   while (value <= n) {
     count++
     values.push(value)
-    frames.push({ phase: 'add', activeLine: L('value = value times 2 plus 1'), value, count, values: [...values], message: `${value} in binary is all ones, so it counts. Count: ${count}.` })
+    frames.push({ pythonLine: 5, phase: 'add', activeLine: L('value = value times 2 plus 1'), value, count, values: [...values], message: `${value} in binary is all ones, so it counts. Count: ${count}.` })
     value = value * 2 + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), value: null, count, values: [...values], message: `${count} monobit integer(s) in [0, ${n}].` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return count'), value: null, count, values: [...values], message: `${count} monobit integer(s) in [0, ${n}].` })
   return { input, result: count, frames }
 }
 

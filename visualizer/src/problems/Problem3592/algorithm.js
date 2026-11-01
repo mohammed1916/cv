@@ -13,22 +13,22 @@ export function buildTrace(input) {
   const ways = Array(n + 1).fill(0)
   ways[0] = 1
   const coins = []
-  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), amount: 0, coins: [], message: 'With no coins, only the empty amount has one way.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set ways[0] to 1'), amount: 0, coins: [], message: 'With no coins, only the empty amount has one way.' }]
   for (let i = 1; i <= n; i++) {
     const need = numWays[i - 1] - ways[i]
     if (need < 0 || need > 1) {
-      frames.push({ phase: 'done', activeLine: L('return an empty list'), amount: i, coins: [], message: `Amount ${i} needs ${numWays[i - 1]} ways, but the coins so far give ${ways[i]}. No coin can close that gap, so the answer is empty.` })
+      frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return an empty list'), amount: i, coins: [], message: `Amount ${i} needs ${numWays[i - 1]} ways, but the coins so far give ${ways[i]}. No coin can close that gap, so the answer is empty.` })
       return { input, result: [], frames }
     }
     if (need === 1) {
       coins.push(i)
       for (let a = i; a <= n; a++) ways[a] += ways[a - i]
-      frames.push({ phase: 'coin', activeLine: L('add coin i'), amount: i, coins: [...coins], message: `Amount ${i} is short by one way, so coin ${i} is a denomination.` })
+      frames.push({ pythonLine: 11, phase: 'coin', activeLine: L('add coin i'), amount: i, coins: [...coins], message: `Amount ${i} is short by one way, so coin ${i} is a denomination.` })
     } else {
-      frames.push({ phase: 'match', activeLine: L('for each amount i from 1 to n'), amount: i, coins: [...coins], message: `Amount ${i} already has ${ways[i]} ways, so no coin is needed.` })
+      frames.push({ pythonLine: 10, phase: 'match', activeLine: L('for each amount i from 1 to n'), amount: i, coins: [...coins], message: `Amount ${i} already has ${ways[i]} ways, so no coin is needed.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return coins'), amount: n, coins: [...coins], message: `The denominations are ${coins.join(', ') || 'none'}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return coins'), amount: n, coins: [...coins], message: `The denominations are ${coins.join(', ') || 'none'}.` })
   return { input, result: coins, frames }
 }
 

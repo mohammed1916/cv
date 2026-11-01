@@ -33,7 +33,7 @@ export function buildTrace(input) {
   for (let i = 0; i < order.length; i++) {
     for (const c of children[order[i]]) { px[c] = px[order[i]] ^ vals[c]; order.push(c) }
   }
-  const frames = [{ phase: 'start', activeLine: L('set px[0] to vals[0]'), query: null, answer: null, message: `The path XOR of each node is the XOR of values from the root down to it. Root value: ${vals[0]}.` }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set px[0] to vals[0]'), query: null, answer: null, message: `The path XOR of each node is the XOR of values from the root down to it. Root value: ${vals[0]}.` }]
   const answers = []
   for (const [u, k] of queries) {
     // Collect the subtree of u by walking down from u.
@@ -43,9 +43,9 @@ export function buildTrace(input) {
     const distinct = [...new Set(subtree.map(v => px[v]))].sort((a, b) => a - b)
     const answer = k <= distinct.length ? distinct[k - 1] : -1
     answers.push(answer)
-    frames.push({ phase: 'query', activeLine: L('sorted distinct values'), query: [u, k], answer, message: `Subtree of ${u} has ${distinct.length} distinct path XOR values. The ${k}-th smallest is ${answer}.` })
+    frames.push({ pythonLine: 21, phase: 'query', activeLine: L('sorted distinct values'), query: [u, k], answer, message: `Subtree of ${u} has ${distinct.length} distinct path XOR values. The ${k}-th smallest is ${answer}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), query: null, answer: null, message: 'Every query is answered.' })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return the answers'), query: null, answer: null, message: 'Every query is answered.' })
   return { input, result: answers, frames }
 }
 

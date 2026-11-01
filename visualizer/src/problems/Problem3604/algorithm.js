@@ -27,7 +27,7 @@ export function buildTrace({ n, edges }) {
   const best = new Array(n).fill(Infinity)
   best[0] = 0
   const done = new Array(n).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('best[0] = 0'), node: 0, edge: -1, best: [...best], done: [...done], message: 'Leave node 0 at time 0. An edge is usable from time start to time end, so you may need to wait at a node.' }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('best[0] = 0'), node: 0, edge: -1, best: [...best], done: [...done], message: 'Leave node 0 at time 0. An edge is usable from time start to time end, so you may need to wait at a node.' }]
   let result = -1
   for (;;) {
     let u = -1
@@ -35,19 +35,19 @@ export function buildTrace({ n, edges }) {
     if (u === -1) break
     done[u] = true
     if (u === n - 1) { result = best[u]; break }
-    frames.push({ phase: 'settle', activeLine: L('pop (t, u)'), node: u, edge: -1, best: [...best], done: [...done], message: `Reach node ${u} at time ${best[u]}. Try each edge leaving it.` })
+    frames.push({ pythonLine: 12, phase: 'settle', activeLine: L('pop (t, u)'), node: u, edge: -1, best: [...best], done: [...done], message: `Reach node ${u} at time ${best[u]}. Try each edge leaving it.` })
     edges.forEach(([a, b, s, e], i) => {
       if (a !== u) return
       const depart = Math.max(best[u], s)
       if (depart <= e && depart + 1 < best[b]) {
         best[b] = depart + 1
-        frames.push({ phase: 'relax', activeLine: L('if depart <= end'), node: u, edge: i, best: [...best], done: [...done], message: `Edge ${a} to ${b} is open from ${s} to ${e}. Depart at ${depart}, arrive at ${depart + 1}.` })
+        frames.push({ pythonLine: 20, phase: 'relax', activeLine: L('if depart <= end'), node: u, edge: i, best: [...best], done: [...done], message: `Edge ${a} to ${b} is open from ${s} to ${e}. Depart at ${depart}, arrive at ${depart + 1}.` })
       } else if (a === u) {
-        frames.push({ phase: 'relax', activeLine: L('if depart <= end'), node: u, edge: i, best: [...best], done: [...done], message: depart > e ? `Edge ${a} to ${b} closes at ${e}, and it cannot be reached in time from ${best[u]}.` : `Arriving at ${b} at ${depart + 1} is no earlier than its current best.` })
+        frames.push({ pythonLine: 19, phase: 'relax', activeLine: L('if depart <= end'), node: u, edge: i, best: [...best], done: [...done], message: depart > e ? `Edge ${a} to ${b} closes at ${e}, and it cannot be reached in time from ${best[u]}.` : `Arriving at ${b} at ${depart + 1} is no earlier than its current best.` })
       }
     })
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), node: n - 1, edge: -1, best: [...best], done: [...done], message: result === -1 ? `Node ${n - 1} cannot be reached: return -1.` : `Earliest arrival at node ${n - 1}: ${result}.` })
+  frames.push({ pythonLine: result === -1 ? 22 : 16, phase: 'done', activeLine: L('return -1'), node: n - 1, edge: -1, best: [...best], done: [...done], message: result === -1 ? `Node ${n - 1} cannot be reached: return -1.` : `Earliest arrival at node ${n - 1}: ${result}.` })
   return { input: { n, edges }, result, frames }
 }
 

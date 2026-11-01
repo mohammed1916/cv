@@ -27,16 +27,16 @@ export function buildTrace({ nums }) {
   const n = nums.length
   let best = 2
   let bestRange = [0, 1]
-  const frames = [{ phase: 'start', activeLine: L('set best to 2'), a: -1, b: -1, ok: null, best, message: 'Any two neighbours form a run, so the answer is at least 2.' }]
+  const frames = [{ pythonLine: 18, phase: 'start', activeLine: L('set best to 2'), a: -1, b: -1, ok: null, best, message: 'Any two neighbours form a run, so the answer is at least 2.' }]
   for (let a = 0; a < n; a++) {
     for (let b = a + 1; b < n; b++) {
       const ok = fixable(nums, a, b)
       if (ok && b - a + 1 > best) { best = b - a + 1; bestRange = [a, b] }
-      frames.push({ phase: ok ? 'found' : 'check', activeLine: L('can be made arithmetic'), a, b, ok, best,
+      frames.push({ pythonLine: ok ? 22 : 21, phase: ok ? 'found' : 'check', activeLine: L('can be made arithmetic'), a, b, ok, best,
         message: `Window [${a}..${b}] (${nums.slice(a, b + 1).join(', ')}) ${ok ? 'can be made arithmetic with one change' : 'cannot be fixed with one change'}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), a: bestRange[0], b: bestRange[1], ok: true, best, message: `Longest: ${best}.` })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return best'), a: bestRange[0], b: bestRange[1], ok: true, best, message: `Longest: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

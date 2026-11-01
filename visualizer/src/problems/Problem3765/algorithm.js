@@ -13,19 +13,19 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const s = String(input.num)
-  const frames = [{ phase: 'start', activeLine: L('read the decimal digits'), span: null, message: `Check every prefix and suffix of ${s}.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('read the decimal digits'), span: null, message: `Check every prefix and suffix of ${s}.` }]
   let result = true
   for (let k = 1; k <= s.length && result; k++) {
     const prefix = Number(s.slice(0, k))
     const prefixPrime = isPrime(prefix)
-    frames.push({ phase: 'check', activeLine: L('read the first k digits'), span: [0, k], message: `Prefix ${prefix} is ${prefixPrime ? 'prime' : 'not prime'}.` })
+    frames.push({ pythonLine: 14, phase: 'check', activeLine: L('read the first k digits'), span: [0, k], message: `Prefix ${prefix} is ${prefixPrime ? 'prime' : 'not prime'}.` })
     if (!prefixPrime) { result = false; break }
     const suffix = Number(s.slice(s.length - k))
     const suffixPrime = isPrime(suffix)
-    frames.push({ phase: 'check', activeLine: L('read the last k digits'), span: [s.length - k, s.length], message: `Suffix ${suffix} is ${suffixPrime ? 'prime' : 'not prime'}.` })
+    frames.push({ pythonLine: 16, phase: 'check', activeLine: L('read the last k digits'), span: [s.length - k, s.length], message: `Suffix ${suffix} is ${suffixPrime ? 'prime' : 'not prime'}.` })
     if (!suffixPrime) { result = false; break }
   }
-  frames.push({ phase: 'done', activeLine: result ? L('return true') : L('return false'), span: null, message: result ? `Every prefix and suffix of ${s} is prime, so it is complete.` : `${s} is not a Complete Prime Number.` })
+  frames.push({ pythonLine: result ? 18 : (frames[frames.length - 1].message.startsWith("Suffix") ? 17 : 15), phase: 'done', activeLine: result ? L('return true') : L('return false'), span: null, message: result ? `Every prefix and suffix of ${s} is prime, so it is complete.` : `${s} is not a Complete Prime Number.` })
   return { input, result, frames }
 }
 

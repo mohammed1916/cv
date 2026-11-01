@@ -9,20 +9,20 @@ export function buildTrace(input) {
   let m = input.n
   let previous = 0
   let pairs = 0
-  const frames = [{ phase: 'start', activeLine: L('let pairs be 0'), bit: null, pairs, bits: input.n.toString(2), message: `Scan the binary form of ${input.n} from the lowest bit.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let pairs be 0'), bit: null, pairs, bits: input.n.toString(2), message: `Scan the binary form of ${input.n} from the lowest bit.` }]
   while (m > 0) {
     const bit = m % 2
     if (bit === 1 && previous === 1) {
       pairs++
-      frames.push({ phase: 'pair', activeLine: L('if bit and previous'), bit, pairs, bits: input.n.toString(2), message: `Two set bits are adjacent here. Pairs so far: ${pairs}.` })
+      frames.push({ pythonLine: 8, phase: 'pair', activeLine: L('if bit and previous'), bit, pairs, bits: input.n.toString(2), message: `Two set bits are adjacent here. Pairs so far: ${pairs}.` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('if bit and previous'), bit, pairs, bits: input.n.toString(2), message: `Bit ${bit} does not form a new pair.` })
+      frames.push({ pythonLine: 7, phase: 'scan', activeLine: L('if bit and previous'), bit, pairs, bits: input.n.toString(2), message: `Bit ${bit} does not form a new pair.` })
     }
     previous = bit
     m = Math.floor(m / 2)
   }
   const result = pairs === 1
-  frames.push({ phase: 'done', activeLine: L('return pairs equals 1'), bit: null, pairs, bits: input.n.toString(2), message: `${pairs} pair(s), so the answer is ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return pairs equals 1'), bit: null, pairs, bits: input.n.toString(2), message: `${pairs} pair(s), so the answer is ${result}.` })
   return { input, result, frames }
 }
 

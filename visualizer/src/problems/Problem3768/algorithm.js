@@ -18,13 +18,13 @@ const countInversions = w => {
 export function buildTrace(input) {
   const { nums, k } = input
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('best = nothing'), start: -1, count: null, best, message: `Slide a window of length ${k} across the array.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('best = nothing'), start: -1, count: null, best, message: `Slide a window of length ${k} across the array.` }]
   for (let s = 0; s + k <= nums.length; s++) {
     const count = countInversions(nums.slice(s, s + k))
     if (best === null || count < best) best = count
-    frames.push({ phase: 'window', activeLine: L('count = number of pairs'), start: s, count, best, message: `Window starting at index ${s} has ${count} inversions. Best so far: ${best}.` })
+    frames.push({ pythonLine: 10, phase: 'window', activeLine: L('count = number of pairs'), start: s, count, best, message: `Window starting at index ${s} has ${count} inversions. Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, count: null, best, message: `Minimum inversion count: ${best}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return best'), start: -1, count: null, best, message: `Minimum inversion count: ${best}.` })
   return { input, result: best, frames }
 }
 
