@@ -8,7 +8,7 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   const maxQ = [], minQ = []
   let left = 0, total = 0
-  const frames = [{ phase: 'start', right: null, left: 0, maxQ: [], minQ: [], total: 0, activeLine: L('set total to 0'), message: 'A window is continuous when its largest and smallest values differ by at most 2.' }]
+  const frames = [{ phase: 'start', right: null, left: 0, maxQ: [], minQ: [], total: 0, activeLine: L('set total to 0'), pythonLine: 5,message: 'A window is continuous when its largest and smallest values differ by at most 2.' }]
   nums.forEach((v, right) => {
     while (maxQ.length && nums[maxQ[maxQ.length - 1]] <= v) maxQ.pop()
     maxQ.push(right)
@@ -22,9 +22,9 @@ export function buildTrace(nums) {
       if (minQ[0] < left) minQ.shift()
     }
     total += right - left + 1
-    frames.push({ phase: 'extend', right, left, maxQ: maxQ.slice(), minQ: minQ.slice(), total, shrink, activeLine: L('add right minus left plus 1'), message: `Window [${left}, ${right}] is continuous; it adds ${right - left + 1} subarrays ending here (total ${total}).` })
+    frames.push({ phase: 'extend', right, left, maxQ: maxQ.slice(), minQ: minQ.slice(), total, shrink, activeLine: L('add right minus left plus 1'), pythonLine: 20,message: `Window [${left}, ${right}] is continuous; it adds ${right - left + 1} subarrays ending here (total ${total}).` })
   })
-  frames.push({ phase: 'done', right: null, left, maxQ: maxQ.slice(), minQ: minQ.slice(), total, activeLine: L('return total'), message: `Continuous subarrays: ${total}.` })
+  frames.push({ phase: 'done', right: null, left, maxQ: maxQ.slice(), minQ: minQ.slice(), total, activeLine: L('return total'), pythonLine: 21,message: `Continuous subarrays: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

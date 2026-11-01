@@ -23,7 +23,7 @@ export const pythonLineMap = { 1: 1, 2: 3, 3: 5, 4: 6, 5: 7, 6: 8, 7: 9 };
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
   if (write) table[info.row][info.column] = info.value;
-  frames.push({ phase: info.phase, activeLine: info.line, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
+  frames.push({ phase: info.phase, activeLine: info.line, pythonLine: info.pythonLine, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
 }
 
 export function parseInput(text) {
@@ -46,21 +46,21 @@ export function buildTrace(input) {
   const frames = [];
   const ways = Array(n + 1).fill(0);
   ways[0] = 1;
-  emit(frames, table, { phase: "setup", line: 2, row: 0, column: 0, value: 1, message: "One way to split the empty prefix." }, true);
+  emit(frames, table, { phase: "setup", line: 2, pythonLine: 4,row: 0, column: 0, value: 1, message: "One way to split the empty prefix." }, true);
   for (let i = 1; i <= n; i++) {
     ways[i] = 0;
-    emit(frames, table, { phase: "loop", line: 3, row: 0, column: i, value: 0, message: `Count good splits of the prefix of length ${i}.` }, true);
+    emit(frames, table, { phase: "loop", line: 3, pythonLine: 5,row: 0, column: i, value: 0, message: `Count good splits of the prefix of length ${i}.` }, true);
     for (let j = 0; j < i; j++) {
       const ones = nums.slice(j, i).reduce((a, b) => a + b, 0);
       if (ones === 1) {
         ways[i] += ways[j];
-        emit(frames, table, { phase: "check", line: 5, row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has exactly one 1, so add ways[${j}] = ${ways[j]}.` }, true);
+        emit(frames, table, { phase: "check", line: 5, pythonLine: 8,row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has exactly one 1, so add ways[${j}] = ${ways[j]}.` }, true);
       } else {
-        emit(frames, table, { phase: "check", line: 4, row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has ${ones} ones, so skip j = ${j}.` });
+        emit(frames, table, { phase: "check", line: 4, pythonLine: 7,row: 0, column: i, value: ways[i], message: `nums[${j}..${i - 1}] has ${ones} ones, so skip j = ${j}.` });
       }
     }
   }
   const result = ways[n] % 1000000007;
-  emit(frames, table, { phase: "result", line: 7, row: 0, column: n, value: result, message: `Return ${result} (ways for the whole array, mod 1e9+7).` });
+  emit(frames, table, { phase: "result", line: 7, pythonLine: 9,row: 0, column: n, value: result, message: `Return ${result} (ways for the whole array, mod 1e9+7).` });
   return { input, result, frames, rowLabels, columnLabels };
 }

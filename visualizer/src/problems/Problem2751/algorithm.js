@@ -17,11 +17,11 @@ export function buildTrace(input) {
   const n = positions.length
   const order = [...Array(n).keys()].sort((a, b) => positions[a] - positions[b])
   const stack = []
-  const frames = [{ phase: 'sort', activeLine: L('sort the robots by position'), robot: -1, stack: [], healths: [...h], message: `Robots in position order: ${order.map(i => positions[i]).join(', ')}.` }]
+  const frames = [{ phase: 'sort', activeLine: L('sort the robots by position'), pythonLine: 4,robot: -1, stack: [], healths: [...h], message: `Robots in position order: ${order.map(i => positions[i]).join(', ')}.` }]
   for (const i of order) {
     if (directions[i] === 'R') {
       stack.push(i)
-      frames.push({ phase: 'right', activeLine: L('push the robot onto the stack'), robot: i, stack: [...stack], healths: [...h], message: `Robot ${i} moves right and waits on the stack.` })
+      frames.push({ phase: 'right', activeLine: L('push the robot onto the stack'), pythonLine: 8,robot: i, stack: [...stack], healths: [...h], message: `Robot ${i} moves right and waits on the stack.` })
       continue
     }
     while (stack.length && h[i] > 0) {
@@ -29,22 +29,22 @@ export function buildTrace(input) {
       if (h[top] > h[i]) {
         h[top] -= 1
         h[i] = 0
-        frames.push({ phase: 'collide', activeLine: L('if the top robot has more health'), robot: i, stack: [...stack], healths: [...h], message: `Robot ${top} wins with ${h[top]} health; robot ${i} is destroyed.` })
+        frames.push({ phase: 'collide', activeLine: L('if the top robot has more health'), pythonLine: 13,robot: i, stack: [...stack], healths: [...h], message: `Robot ${top} wins with ${h[top]} health; robot ${i} is destroyed.` })
       } else if (h[top] < h[i]) {
         h[top] = 0
         stack.pop()
         h[i] -= 1
-        frames.push({ phase: 'collide', activeLine: L('if the top robot has more health'), robot: i, stack: [...stack], healths: [...h], message: `Robot ${i} wins with ${h[i]} health; the top robot is destroyed.` })
+        frames.push({ phase: 'collide', activeLine: L('if the top robot has more health'), pythonLine: 16, robot: i, stack: [...stack], healths: [...h], message: `Robot ${i} wins with ${h[i]} health; the top robot is destroyed.` })
       } else {
         h[top] = 0
         h[i] = 0
         stack.pop()
-        frames.push({ phase: 'collide', activeLine: L('otherwise remove the top robot'), robot: i, stack: [...stack], healths: [...h], message: 'Both robots have equal health and both are destroyed.' })
+        frames.push({ phase: 'collide', activeLine: L('otherwise remove the top robot'), pythonLine: 20,robot: i, stack: [...stack], healths: [...h], message: 'Both robots have equal health and both are destroyed.' })
       }
     }
   }
   const result = h.filter(x => x > 0)
-  frames.push({ phase: 'done', activeLine: L('return the healths'), robot: -1, stack: [...stack], healths: [...h], message: `Surviving healths: ${result.join(', ') || 'none'}.` })
+  frames.push({ phase: 'done', activeLine: L('return the healths'), pythonLine: 23,robot: -1, stack: [...stack], healths: [...h], message: `Surviving healths: ${result.join(', ') || 'none'}.` })
   return { input, result, frames }
 }
 

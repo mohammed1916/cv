@@ -10,24 +10,24 @@ export function parseInput(text) {
 export function buildTrace({ nums, threshold }) {
   const n = nums.length
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), start: -1, end: -1, best, message: `Find the longest run that starts even, alternates parity, and keeps every value at most ${threshold}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to zero'), pythonLine: 2,start: -1, end: -1, best, message: `Find the longest run that starts even, alternates parity, and keeps every value at most ${threshold}.` }]
   for (let i = 0; i < n; i++) {
     if (nums[i] % 2 !== 0 || nums[i] > threshold) {
-      frames.push({ phase: 'skip', activeLine: L('skip to the next start'), start: i, end: i - 1, best, message: `${nums[i]} cannot start a run.` })
+      frames.push({ phase: 'skip', activeLine: L('skip to the next start'), pythonLine: 5,start: i, end: i - 1, best, message: `${nums[i]} cannot start a run.` })
       continue
     }
     let length = 1
     let j = i + 1
-    frames.push({ phase: 'begin', activeLine: L('set length to one'), start: i, end: i, best, message: `${nums[i]} is even and fits, so a run starts at ${i}.` })
+    frames.push({ phase: 'begin', activeLine: L('set length to one'), pythonLine: 6,start: i, end: i, best, message: `${nums[i]} is even and fits, so a run starts at ${i}.` })
     while (j < n && nums[j] <= threshold && nums[j] % 2 !== nums[j - 1] % 2) {
       length++
       j++
-      frames.push({ phase: 'extend', activeLine: L('extend the run'), start: i, end: j - 1, best, message: `Add ${nums[j - 1]}. The run from ${i} now has length ${length}.` })
+      frames.push({ phase: 'extend', activeLine: L('extend the run'), pythonLine: 9,start: i, end: j - 1, best, message: `Add ${nums[j - 1]}. The run from ${i} now has length ${length}.` })
     }
     best = Math.max(best, length)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), start: i, end: j - 1, best, message: `Best length is ${best}.` })
+    frames.push({ phase: 'record', activeLine: L('set best to the larger'), pythonLine: 11,start: i, end: j - 1, best, message: `Best length is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, end: -1, best, message: `The longest even odd subarray has length ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 12,start: -1, end: -1, best, message: `The longest even odd subarray has length ${best}.` })
   return { input: { nums, threshold }, result: best, frames }
 }
 

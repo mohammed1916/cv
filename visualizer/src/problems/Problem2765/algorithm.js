@@ -11,24 +11,24 @@ export function buildTrace(input) {
   const { nums } = input
   const n = nums.length
   let best = -1
-  const frames = [{ phase: 'start', activeLine: L('set best to -1'), start: -1, end: -1, best, message: 'Look for a start where the next value is one larger.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to -1'), pythonLine: 3,start: -1, end: -1, best, message: 'Look for a start where the next value is one larger.' }]
   for (let a = 0; a <= n - 2; a++) {
     if (nums[a + 1] - nums[a] !== 1) continue
     let length = 2
     let expected = -1
-    frames.push({ phase: 'start', activeLine: L('set length to 2'), start: a, end: a + 1, best, message: `Start at ${a}: ${nums[a]} then ${nums[a + 1]} rises by 1.` })
+    frames.push({ phase: 'start', activeLine: L('set length to 2'), pythonLine: 7,start: a, end: a + 1, best, message: `Start at ${a}: ${nums[a]} then ${nums[a + 1]} rises by 1.` })
     for (let b = a + 2; b < n; b++) {
       if (nums[b] - nums[b - 1] !== expected) {
-        frames.push({ phase: 'stop', activeLine: L('otherwise stop this start'), start: a, end: b, best, message: `The pattern breaks at index ${b}.` })
+        frames.push({ phase: 'stop', activeLine: L('otherwise stop this start'), pythonLine: 11,start: a, end: b, best, message: `The pattern breaks at index ${b}.` })
         break
       }
       length++
       expected = -expected
-      frames.push({ phase: 'extend', activeLine: L('if nums[b] - nums[b-1] equals expected'), start: a, end: b, best: Math.max(best, length), message: `Extend to index ${b}; the run is ${length} long.` })
+      frames.push({ phase: 'extend', activeLine: L('if nums[b] - nums[b-1] equals expected'), pythonLine: 12,start: a, end: b, best: Math.max(best, length), message: `Extend to index ${b}; the run is ${length} long.` })
     }
     best = Math.max(best, length)
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, end: -1, best, message: best === -1 ? 'No alternating subarray of length 2 or more.' : `Longest alternating subarray: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 15,start: -1, end: -1, best, message: best === -1 ? 'No alternating subarray of length 2 or more.' : `Longest alternating subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

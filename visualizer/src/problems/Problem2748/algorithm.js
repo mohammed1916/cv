@@ -14,17 +14,17 @@ const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
 export function buildTrace({ nums }) {
   const seen = Array(10).fill(0)
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set seen to ten zeros'), index: -1, seen: [...seen], gained: 0, total, message: 'No earlier numbers yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('set seen to ten zeros'), pythonLine: 3,index: -1, seen: [...seen], gained: 0, total, message: 'No earlier numbers yet.' }]
   nums.forEach((x, j) => {
     const last = x % 10
     let gained = 0
     for (let d = 1; d <= 9; d++) if (gcd(d, last) === 1) gained += seen[d]
     total += gained
-    frames.push({ phase: 'pair', activeLine: L('if d and last are coprime'), index: j, seen: [...seen], gained, total, message: `${x} (last digit ${last}) forms ${gained} beautiful pair(s) with earlier numbers.` })
+    frames.push({ phase: 'pair', activeLine: L('if d and last are coprime'), pythonLine: 8,index: j, seen: [...seen], gained, total, message: `${x} (last digit ${last}) forms ${gained} beautiful pair(s) with earlier numbers.` })
     seen[Number(String(x)[0])] += 1
-    frames.push({ phase: 'record', activeLine: L('count the first digit'), index: j, seen: [...seen], gained, total, message: `Recorded the first digit of ${x}.` })
+    frames.push({ phase: 'record', activeLine: L('count the first digit'), pythonLine: 10,index: j, seen: [...seen], gained, total, message: `Recorded the first digit of ${x}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, seen: [...seen], gained: 0, total, message: `Beautiful pairs: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 11,index: -1, seen: [...seen], gained: 0, total, message: `Beautiful pairs: ${total}.` })
   return { input: { nums }, result: total, frames }
 }
 

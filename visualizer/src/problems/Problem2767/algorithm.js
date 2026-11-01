@@ -16,17 +16,17 @@ export function buildTrace(input) {
   const dp = Array(n + 1).fill(INF)
   dp[0] = 0
   const shown = () => dp.map(v => (v === INF ? null : v))
-  const frames = [{ phase: 'start', activeLine: L('set dp to'), end: 0, start: -1, dp: shown(), message: 'The empty prefix needs zero pieces.' }]
+  const frames = [{ phase: 'start', activeLine: L('set dp to'), pythonLine: 9,end: 0, start: -1, dp: shown(), message: 'The empty prefix needs zero pieces.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
       if (s[j] === '0') continue
       const value = parseInt(s.slice(j, i), 2)
       if (powers.has(value) && dp[j] + 1 < dp[i]) dp[i] = dp[j] + 1
-      if (powers.has(value)) frames.push({ phase: 'piece', activeLine: L('if the substring from j to i'), end: i, start: j, dp: shown(), message: `${s.slice(j, i)} is ${value}, a power of 5, so piece count ${dp[i] === INF ? 'unset' : dp[i]} is available up to ${i}.` })
+      if (powers.has(value)) frames.push({ phase: 'piece', activeLine: L('if the substring from j to i'), pythonLine: 16,end: i, start: j, dp: shown(), message: `${s.slice(j, i)} is ${value}, a power of 5, so piece count ${dp[i] === INF ? 'unset' : dp[i]} is available up to ${i}.` })
     }
   }
   const result = dp[n] === INF ? -1 : dp[n]
-  frames.push({ phase: 'done', activeLine: L('return dp[n]'), end: n, start: -1, dp: shown(), message: result === -1 ? 'No split into beautiful substrings exists.' : `Minimum pieces: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return dp[n]'), pythonLine: 18,end: n, start: -1, dp: shown(), message: result === -1 ? 'No split into beautiful substrings exists.' : `Minimum pieces: ${result}.` })
   return { input, result, frames }
 }
 

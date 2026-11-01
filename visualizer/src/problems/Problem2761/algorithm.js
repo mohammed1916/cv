@@ -21,17 +21,17 @@ export function buildTrace({ n }) {
     return true
   }
   const pairs = []
-  const frames = [{ phase: 'start', activeLine: L('let pairs be'), index: -1, pairs: [], message: `Find primes x <= y with x + y = ${n}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let pairs be'), pythonLine: 12,index: -1, pairs: [], message: `Find primes x <= y with x + y = ${n}.` }]
   for (let x = 2; x <= Math.floor(n / 2); x++) {
     const y = n - x
     if (isPrime(x) && isPrime(y)) {
       pairs.push([x, y])
-      frames.push({ phase: 'pair', activeLine: L('if x is prime'), index: x, pairs: pairs.map(p => [...p]), message: `${x} and ${y} are both prime.` })
+      frames.push({ phase: 'pair', activeLine: L('if x is prime'), pythonLine: 15,index: x, pairs: pairs.map(p => [...p]), message: `${x} and ${y} are both prime.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('for x from 2'), index: x, pairs: pairs.map(p => [...p]), message: `${x} with ${y} is not a prime pair.` })
+      frames.push({ phase: 'skip', activeLine: L('for x from 2'), pythonLine: 14,index: x, pairs: pairs.map(p => [...p]), message: `${x} with ${y} is not a prime pair.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return pairs'), index: -1, pairs: pairs.map(p => [...p]), message: `${pairs.length} pair(s) found.` })
+  frames.push({ phase: 'done', activeLine: L('return pairs'), pythonLine: 16,index: -1, pairs: pairs.map(p => [...p]), message: `${pairs.length} pair(s) found.` })
   return { input: { n }, result: pairs, frames }
 }
 

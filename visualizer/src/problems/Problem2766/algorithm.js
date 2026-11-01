@@ -19,17 +19,17 @@ export function buildTrace(input) {
   const { nums, moveFrom, moveTo } = input
   const occupied = new Set(nums)
   const setMap = () => [{ name: 'occupied', keyLabel: 'position', valueLabel: '', isSet: true, entries: [...occupied].sort((a, b) => a - b).map(p => [p]) }]
-  const frames = [{ phase: 'start', activeLine: L('occupied = set'), index: -1, maps: setMap(), ops: [], result: null, message: `Start with positions ${[...occupied].sort((a, b) => a - b).join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('occupied = set'), pythonLine: 2,index: -1, maps: setMap(), ops: [], result: null, message: `Start with positions ${[...occupied].sort((a, b) => a - b).join(', ')}.` }]
   moveFrom.forEach((from, i) => {
     const to = moveTo[i]
     occupied.delete(from)
     occupied.add(to)
-    frames.push({ phase: 'move', activeLine: L('remove moveFrom'), index: i, maps: setMap(),
+    frames.push({ phase: 'move', activeLine: L('remove moveFrom'), pythonLine: 4,index: i, maps: setMap(),
       ops: [{ map: 'occupied', type: 'delete', key: from, existed: true, before: from }, { map: 'occupied', type: 'insert', key: to, value: to }],
       result: null, message: `Move ${i + 1}: every marble at ${from} goes to ${to}.` })
   })
   const result = [...occupied].sort((a, b) => a - b)
-  frames.push({ phase: 'done', activeLine: L('return the occupied'), index: -1, maps: setMap(), ops: [], result, message: `Occupied positions: ${result.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return the occupied'), pythonLine: 6,index: -1, maps: setMap(), ops: [], result, message: `Occupied positions: ${result.join(', ')}.` })
   return { input, result, frames }
 }
 
