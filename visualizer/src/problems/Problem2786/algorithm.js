@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const best = Array(n).fill(null)
   best[0] = nums[0]
   const shown = () => [...best]
-  const frames = [{ phase: 'start', activeLine: L('set best[0] to'), index: 0, from: -1, best: shown(), message: `Start at position 0 with score ${nums[0]}.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set best[0] to'), index: 0, from: -1, best: shown(), message: `Start at position 0 with score ${nums[0]}.` }]
   for (let i = 1; i < n; i++) {
     let top = -Infinity
     let from = -1
@@ -24,10 +24,10 @@ export function buildTrace(input) {
       if (score > top) { top = score; from = j }
     }
     best[i] = top
-    frames.push({ phase: 'visit', activeLine: L('set top to the larger'), index: i, from, best: shown(), message: `Reach position ${i} best from ${from}: score ${top}.` })
+    frames.push({ phase: 'visit', pythonLine: 10, activeLine: L('set top to the larger'), index: i, from, best: shown(), message: `Reach position ${i} best from ${from}: score ${top}.` })
   }
   const result = Math.max(...best)
-  frames.push({ phase: 'done', activeLine: L('return the largest'), index: -1, from: -1, best: shown(), message: `Maximum score: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the largest'), index: -1, from: -1, best: shown(), message: `Maximum score: ${result}.` })
   return { input, result, frames }
 }
 

@@ -10,17 +10,17 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const sorted = [...nums].sort((a, b) => a - b)
   const n = sorted.length
-  const frames = [{ phase: 'start', activeLine: L('set sorted to'), sorted, left: 0, right: -1, best: 0, message: `Sort the values. Each value can move by ${k} either way, so a group works when its spread is at most ${2 * k}.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set sorted to'), sorted, left: 0, right: -1, best: 0, message: `Sort the values. Each value can move by ${k} either way, so a group works when its spread is at most ${2 * k}.` }]
   let left = 0, best = 0
   for (let right = 0; right < n; right++) {
     while (sorted[right] - sorted[left] > 2 * k) {
       left++
-      frames.push({ phase: 'shrink', activeLine: L('move left one step'), sorted, left, right, best, message: `Spread from ${sorted[left]} to ${sorted[right]} is still too wide, so move left to ${left}.` })
+      frames.push({ phase: 'shrink', pythonLine: 7, activeLine: L('move left one step'), sorted, left, right, best, message: `Spread from ${sorted[left]} to ${sorted[right]} is still too wide, so move left to ${left}.` })
     }
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), sorted, left, right, best, message: `Window ${left} to ${right} holds ${right - left + 1} values within spread ${2 * k}. Best ${best}.` })
+    frames.push({ phase: 'record', pythonLine: 8, activeLine: L('set best to the larger'), sorted, left, right, best, message: `Window ${left} to ${right} holds ${right - left + 1} values within spread ${2 * k}. Best ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), sorted, left, right: n - 1, best, message: `The maximum beauty is ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return best'), sorted, left, right: n - 1, best, message: `The maximum beauty is ${best}.` })
   return { input: { nums, k }, result: best, sorted, frames }
 }
 

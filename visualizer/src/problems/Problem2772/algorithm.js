@@ -27,29 +27,29 @@ export function buildTrace({ nums, k }) {
   const n = nums.length
   const ended = Array(n + 1).fill(0)
   let active = 0
-  const frames = [{ phase: 'start', activeLine: L('make an array ended'), index: -1, active: 0, message: `Operations cover k = ${k} positions each. Sweep from the left.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('make an array ended'), index: -1, active: 0, message: `Operations cover k = ${k} positions each. Sweep from the left.` }]
   let result = true
   for (let i = 0; i < n; i++) {
     active -= ended[i]
     const need = nums[i] - active
-    frames.push({ phase: 'check', activeLine: L('remove operations that ended'), index: i, active, message: `Position ${i}: ${active} operation(s) already cover it, value ${nums[i]}.` })
+    frames.push({ phase: 'check', pythonLine: 7, activeLine: L('remove operations that ended'), index: i, active, message: `Position ${i}: ${active} operation(s) already cover it, value ${nums[i]}.` })
     if (need < 0) {
-      frames.push({ phase: 'fail', activeLine: L('if need is negative'), index: i, active, message: `Position ${i} was lowered too far earlier, so it cannot be raised back.` })
+      frames.push({ phase: 'fail', pythonLine: 9, activeLine: L('if need is negative'), index: i, active, message: `Position ${i} was lowered too far earlier, so it cannot be raised back.` })
       result = false
       break
     }
     if (need > 0) {
       if (i + k > n) {
-        frames.push({ phase: 'fail', activeLine: L('i plus k is past'), index: i, active, message: `Position ${i} needs ${need} more operation(s), but a size-${k} operation would run past the end.` })
+        frames.push({ phase: 'fail', pythonLine: 12, activeLine: L('i plus k is past'), index: i, active, message: `Position ${i} needs ${need} more operation(s), but a size-${k} operation would run past the end.` })
         result = false
         break
       }
       active += need
       ended[i + k] += need
-      frames.push({ phase: 'start-ops', activeLine: L('start need operations'), index: i, active, message: `Start ${need} operation(s) at ${i}; they end before ${i + k}.` })
+      frames.push({ phase: 'start-ops', pythonLine: 14, activeLine: L('start need operations'), index: i, active, message: `Start ${need} operation(s) at ${i}; they end before ${i + k}.` })
     }
   }
-  if (result) frames.push({ phase: 'done', activeLine: L('the answer is yes'), index: -1, active, message: 'Every position can be made zero.' })
+  if (result) frames.push({ phase: 'done', pythonLine: 15, activeLine: L('the answer is yes'), index: -1, active, message: 'Every position can be made zero.' })
   return { input: { nums, k }, result, frames }
 }
 

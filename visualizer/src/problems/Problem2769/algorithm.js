@@ -9,12 +9,12 @@ export function parseInput(text) {
 
 export function buildTrace({ num, t }) {
   let answer = num
-  const frames = [{ phase: 'start', activeLine: L('set the answer to num'), ops: 0, answer, message: `Start with num = ${num} and no operations used.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set the answer to num'), ops: 0, answer, message: `Start with num = ${num} and no operations used.` }]
   for (let op = 1; op <= t; op++) {
     answer += 2
-    frames.push({ phase: 'step', activeLine: L('add 2 to the answer'), ops: op, answer, message: `Operation ${op}: lower x by 1 and raise num by 1, so the largest reachable x rises by 2 to ${answer}.` })
+    frames.push({ phase: 'step', pythonLine: 4, activeLine: L('add 2 to the answer'), ops: op, answer, message: `Operation ${op}: lower x by 1 and raise num by 1, so the largest reachable x rises by 2 to ${answer}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), ops: t, answer, message: `The largest achievable number is ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return the answer'), ops: t, answer, message: `The largest achievable number is ${answer}.` })
   return { input: { num, t }, result: answer, frames }
 }
 

@@ -17,7 +17,7 @@ export function buildTrace(input) {
   from2[0] = 1
   let best = 1
   const show = () => [[...from1], [...from2]]
-  const frames = [{ phase: 'start', activeLine: L('set from1 and from2'), index: 0, table: show(), best, message: 'At index 0 either array gives a run of length 1.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set from1 and from2'), index: 0, table: show(), best, message: 'At index 0 either array gives a run of length 1.' }]
   for (let i = 1; i < n; i++) {
     let new1 = 1
     let new2 = 1
@@ -28,9 +28,9 @@ export function buildTrace(input) {
     from1[i] = new1
     from2[i] = new2
     best = Math.max(best, new1, new2)
-    frames.push({ phase: 'step', activeLine: L('set best to the largest'), index: i, table: show(), best, message: `Index ${i}: ending with nums1 gives ${new1}, ending with nums2 gives ${new2}.` })
+    frames.push({ phase: 'step', pythonLine: 18, activeLine: L('set best to the largest'), index: i, table: show(), best, message: `Index ${i}: ending with nums1 gives ${new1}, ending with nums2 gives ${new2}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: n - 1, table: show(), best, message: `Longest non-decreasing subarray: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return best'), index: n - 1, table: show(), best, message: `Longest non-decreasing subarray: ${best}.` })
   return { input, result: best, frames }
 }
 

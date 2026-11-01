@@ -10,7 +10,7 @@ export function parseInput(text) {
 
 export function buildTrace({ word, forbidden }) {
   const chars = [...word]
-  const frames = [{ phase: 'start', activeLine: L('set left to 0'), active: -1, roles: {}, state: { left: 0, best: 0 }, message: 'Move right one letter at a time. The window must not contain a forbidden string.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set left to 0'), active: -1, roles: {}, state: { left: 0, best: 0 }, message: 'Move right one letter at a time. The window must not contain a forbidden string.' }]
   let left = 0
   let best = 0
   for (let right = 0; right < chars.length; right++) {
@@ -25,9 +25,9 @@ export function buildTrace({ word, forbidden }) {
     best = Math.max(best, right - left + 1)
     const roles = {}
     for (let k = left; k <= right; k++) roles[k] = 'window'
-    frames.push({ phase: 'extend', activeLine: L('set best to the larger of best'), active: right, roles, state: { right, left, best, forbiddenEndsHere: hits.map(h => h.f).join(', ') || 'none' }, message: hits.length > 0 ? `Forbidden "${hits.map(h => h.f).join('", "')}" ends at ${right}, so the window starts after it at ${left}. Best ${best}.` : `No forbidden string ends at ${right}. Window ${left} to ${right}, best ${best}.` })
+    frames.push({ phase: 'extend', pythonLine: 9, activeLine: L('set best to the larger of best'), active: right, roles, state: { right, left, best, forbiddenEndsHere: hits.map(h => h.f).join(', ') || 'none' }, message: hits.length > 0 ? `Forbidden "${hits.map(h => h.f).join('", "')}" ends at ${right}, so the window starts after it at ${left}. Best ${best}.` : `No forbidden string ends at ${right}. Window ${left} to ${right}, best ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), active: -1, roles: {}, state: { best }, message: `Return ${best}, the longest valid substring.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), active: -1, roles: {}, state: { best }, message: `Return ${best}, the longest valid substring.` })
   return { input: { word, forbidden }, result: best, items: chars, frames }
 }
 

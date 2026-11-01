@@ -16,19 +16,19 @@ export function buildTrace({ nums }) {
   const dominant = [...total].find(([, c]) => 2 * c > n)[0]
   const dominantTotal = total.get(dominant)
   const base = { dominant, dominantTotal, total: dominantTotal }
-  const frames = [{ phase: 'count', activeLine: L('count how many times'), ...base, index: -1, left: 0, right: dominantTotal, found: false, message: `The whole array has dominant value ${dominant}, which appears ${dominantTotal} times.` }]
+  const frames = [{ phase: 'count', pythonLine: 10, activeLine: L('count how many times'), ...base, index: -1, left: 0, right: dominantTotal, found: false, message: `The whole array has dominant value ${dominant}, which appears ${dominantTotal} times.` }]
   let left = 0
   for (let i = 0; i < n - 1; i++) {
     if (nums[i] === dominant) left++
     const right = dominantTotal - left
     const valid = 2 * left > i + 1 && 2 * right > n - i - 1
-    frames.push({ phase: 'scan', activeLine: L('if the left part'), ...base, index: i, left, right, found: valid, message: `Split after index ${i}: ${dominant} is ${left} of ${i + 1} on the left and ${right} of ${n - i - 1} on the right.${valid ? ' Both sides keep a majority.' : ''}` })
+    frames.push({ phase: 'scan', pythonLine: 16, activeLine: L('if the left part'), ...base, index: i, left, right, found: valid, message: `Split after index ${i}: ${dominant} is ${left} of ${i + 1} on the left and ${right} of ${n - i - 1} on the right.${valid ? ' Both sides keep a majority.' : ''}` })
     if (valid) {
-      frames.push({ phase: 'found', activeLine: L('return i'), ...base, index: i, left, right, found: true, result: i, message: `Split ${i} is valid and is the first one.` })
+      frames.push({ phase: 'found', pythonLine: 17, activeLine: L('return i'), ...base, index: i, left, right, found: true, result: i, message: `Split ${i} is valid and is the first one.` })
       return { input: { nums }, result: i, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return minus one'), ...base, index: -1, left, right: dominantTotal - left, found: false, result: -1, message: 'No split keeps the dominant value a majority on both sides.' })
+  frames.push({ phase: 'done', pythonLine: 18, activeLine: L('return minus one'), ...base, index: -1, left, right: dominantTotal - left, found: false, result: -1, message: 'No split keeps the dominant value a majority on both sides.' })
   return { input: { nums }, result: -1, frames }
 }
 

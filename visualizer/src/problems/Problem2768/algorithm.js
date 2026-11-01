@@ -15,7 +15,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ m, n, coordinates }) {
-  const frames = [{ phase: 'start', activeLine: L('set block counts to an empty map'), cell: null, state: { blocks: 0 }, message: 'Each black cell belongs to up to four 2 by 2 blocks. Count how many black cells each block holds.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set block counts to an empty map'), cell: null, state: { blocks: 0 }, message: 'Each black cell belongs to up to four 2 by 2 blocks. Count how many black cells each block holds.' }]
   const counts = new Map()
   coordinates.forEach(([row, col]) => {
     const touched = []
@@ -28,12 +28,12 @@ export function buildTrace({ m, n, coordinates }) {
         }
       }
     }
-    frames.push({ phase: 'cell', activeLine: L('for each 2 by 2 block that contains the cell'), cell: [row, col], state: { cell: `[${row}, ${col}]`, blocksTouched: touched.length, blocks: counts.size }, message: `Black cell [${row}, ${col}] is in ${touched.length} in-grid blocks. ${counts.size} blocks now hold at least one black cell.` })
+    frames.push({ phase: 'cell', pythonLine: row <= m - 2 && col <= n - 2 ? 8 : 6, activeLine: L('for each 2 by 2 block that contains the cell'), cell: [row, col], state: { cell: `[${row}, ${col}]`, blocksTouched: touched.length, blocks: counts.size }, message: `Black cell [${row}, ${col}] is in ${touched.length} in-grid blocks. ${counts.size} blocks now hold at least one black cell.` })
   })
   const answer = [0, 0, 0, 0, 0]
   for (const count of counts.values()) answer[count] += 1
   answer[0] = (m - 1) * (n - 1) - counts.size
-  frames.push({ phase: 'done', activeLine: L('return answer'), cell: null, state: { answer: answer.join(', ') }, message: `Return [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return answer'), cell: null, state: { answer: answer.join(', ') }, message: `Return [${answer.join(', ')}].` })
   const matrix = Array.from({ length: m }, () => Array(n).fill(0))
   for (const [row, col] of coordinates) matrix[row][col] = 1
   return { input: { m, n, coordinates }, result: answer, matrix, frames }

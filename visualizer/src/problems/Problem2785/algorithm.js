@@ -11,15 +11,15 @@ export function buildTrace(input) {
   const chars = [...input.s]
   const positions = []
   chars.forEach((ch, i) => { if (VOWELS.includes(ch)) positions.push(i) })
-  const frames = [{ phase: 'collect', activeLine: L('set vowel positions'), at: null, text: chars.join(''), message: `Vowel positions: ${positions.join(', ') || 'none'}.` }]
+  const frames = [{ phase: 'collect', pythonLine: 3, activeLine: L('set vowel positions'), at: null, text: chars.join(''), message: `Vowel positions: ${positions.join(', ') || 'none'}.` }]
   const letters = positions.map(i => chars[i]).sort()
-  frames.push({ phase: 'sort', activeLine: L('sort vowels by character code'), at: null, text: chars.join(''), sorted: letters.join(''), message: `Sorted vowels by character code: ${letters.join('') || 'none'}.` })
+  frames.push({ phase: 'sort', pythonLine: 4, activeLine: L('sort vowels by character code'), at: null, text: chars.join(''), sorted: letters.join(''), message: `Sorted vowels by character code: ${letters.join('') || 'none'}.` })
   positions.forEach((pos, k) => {
     chars[pos] = letters[k]
-    frames.push({ phase: 'write', activeLine: L('write the sorted vowels back'), at: pos, text: chars.join(''), sorted: letters.join(''), message: `Position ${pos} receives ${letters[k]}.` })
+    frames.push({ phase: 'write', pythonLine: 7, activeLine: L('write the sorted vowels back'), at: pos, text: chars.join(''), sorted: letters.join(''), message: `Position ${pos} receives ${letters[k]}.` })
   })
   const result = chars.join('')
-  frames.push({ phase: 'done', activeLine: L('return the string'), at: null, text: result, sorted: letters.join(''), message: `Result: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return the string'), at: null, text: result, sorted: letters.join(''), message: `Result: ${result}.` })
   return { input, result, frames }
 }
 

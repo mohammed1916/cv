@@ -15,16 +15,17 @@ export function buildTrace(data) {
   const n = nums.length
   const jumps = Array(n).fill(-1)
   jumps[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set jumps[0] to 0'), i: 0, jumps: [...jumps], message: 'Index 0 is reached with 0 jumps. Unreached indices are -1.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set jumps[0] to 0'), i: 0, jumps: [...jumps], message: 'Index 0 is reached with 0 jumps. Unreached indices are -1.' }]
   for (let i = 1; i < n; i++) {
     for (let j = 0; j < i; j++) {
       if (jumps[j] >= 0 && Math.abs(nums[i] - nums[j]) <= target) {
         jumps[i] = Math.max(jumps[i], jumps[j] + 1)
       }
     }
-    frames.push({ phase: 'index', activeLine: L('keep the largest'), i, jumps: [...jumps], message: `Index ${i} (value ${nums[i]}): the most jumps that reach it is ${jumps[i]}.` })
+    const lastHit = jumps[i - 1] >= 0 && Math.abs(nums[i] - nums[i - 1]) <= target
+    frames.push({ phase: 'index', pythonLine: lastHit ? 8 : 7, activeLine: L('keep the largest'), i, jumps: [...jumps], message: `Index ${i} (value ${nums[i]}): the most jumps that reach it is ${jumps[i]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return jumps[n-1]'), i: n - 1, jumps: [...jumps], message: `The most jumps to reach the last index is ${jumps[n - 1]}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return jumps[n-1]'), i: n - 1, jumps: [...jumps], message: `The most jumps to reach the last index is ${jumps[n - 1]}.` })
   return { input: data, result: jumps[n - 1], frames, jumps }
 }
 
