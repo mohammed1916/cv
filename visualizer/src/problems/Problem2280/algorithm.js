@@ -12,18 +12,18 @@ export function parseInput(text) {
 export function buildTrace(points) {
   const sorted = points.map(p => p.slice()).sort((a, b) => a[0] - b[0])
   if (sorted.length === 1) {
-    return { input: points, result: 0, frames: [{ phase: 'single', index: null, lines: 0, activeLine: L('return 0'), message: 'One point needs no line.', sorted }, { phase: 'done', index: null, lines: 0, activeLine: L('return 0'), message: 'Minimum lines: 0.', sorted }] }
+    return { input: points, result: 0, frames: [{ phase: 'single', index: null, lines: 0, pythonLine: 4, activeLine: L('return 0'), message: 'One point needs no line.', sorted }, { phase: 'done', index: null, lines: 0, pythonLine: 4, activeLine: L('return 0'), message: 'Minimum lines: 0.', sorted }] }
   }
   let lines = 1
-  const frames = [{ phase: 'start', index: null, lines, activeLine: L('set lines to 1'), message: 'The first segment needs one line. Each slope change needs another.', sorted }]
+  const frames = [{ phase: 'start', index: null, lines, pythonLine: 5, activeLine: L('set lines to 1'), message: 'The first segment needs one line. Each slope change needs another.', sorted }]
   for (let i = 1; i < sorted.length - 1; i++) {
     const [x0, y0] = sorted[i - 1], [x1, y1] = sorted[i], [x2, y2] = sorted[i + 1]
     // Compare the slopes (y1 - y0) / (x1 - x0) and (y2 - y1) / (x2 - x1) without division.
     const same = (y1 - y0) * (x2 - x1) === (y2 - y1) * (x1 - x0)
     if (!same) lines++
-    frames.push({ phase: 'turn', index: i, same, lines, activeLine: L('are different'), message: same ? `Points ${i - 1}, ${i}, ${i + 1} lie on one line: no new segment.` : `The slope changes at point ${i}: a new line is needed.`, sorted })
+    frames.push({ phase: 'turn', index: i, same, lines, pythonLine: same ? 10 : 11, activeLine: L('are different'), message: same ? `Points ${i - 1}, ${i}, ${i + 1} lie on one line: no new segment.` : `The slope changes at point ${i}: a new line is needed.`, sorted })
   }
-  frames.push({ phase: 'done', index: null, lines, activeLine: L('return lines'), message: `Minimum lines: ${lines}.`, sorted })
+  frames.push({ phase: 'done', index: null, lines, pythonLine: 12, activeLine: L('return lines'), message: `Minimum lines: ${lines}.`, sorted })
   return { input: points, result: lines, frames }
 }
 

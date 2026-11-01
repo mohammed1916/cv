@@ -27,15 +27,15 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ rectangles, points }) {
   const buckets = Array.from({ length: 101 }, () => [])
-  const frames = [{ phase: 'start', activeLine: L('make 101 empty buckets'), rect: -1, point: -1, placed: [], counts: [], message: 'Give each height its own bucket. A rectangle with height h can contain a point only if its height is at least the point’s y.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('make 101 empty buckets'), rect: -1, point: -1, placed: [], counts: [], message: 'Give each height its own bucket. A rectangle with height h can contain a point only if its height is at least the point’s y.' }]
   const placed = []
   rectangles.forEach(([length, height], i) => {
     buckets[height].push(length)
     placed.push([length, height])
-    frames.push({ phase: 'bucket', activeLine: L('add the length to its height bucket'), rect: i, point: -1, placed: [...placed], counts: [], message: `Rectangle ${i} (length ${length}, height ${height}) goes into bucket ${height}.` })
+    frames.push({ phase: 'bucket', pythonLine: 6, activeLine: L('add the length to its height bucket'), rect: i, point: -1, placed: [...placed], counts: [], message: `Rectangle ${i} (length ${length}, height ${height}) goes into bucket ${height}.` })
   })
   for (const bucket of buckets) bucket.sort((a, b) => a - b)
-  frames.push({ phase: 'bucket', activeLine: L('sort every bucket'), rect: -1, point: -1, placed: [...placed], counts: [], message: 'Sort each bucket by length so a binary search can find the first length that reaches a given x.' })
+  frames.push({ phase: 'bucket', pythonLine: 8, activeLine: L('sort every bucket'), rect: -1, point: -1, placed: [...placed], counts: [], message: 'Sort each bucket by length so a binary search can find the first length that reaches a given x.' })
   const counts = []
   points.forEach(([x, y], i) => {
     let total = 0
@@ -44,9 +44,9 @@ export function buildTrace({ rectangles, points }) {
       total += bucket.length - lowerBound(bucket, x)
     }
     counts.push(total)
-    frames.push({ phase: 'point', activeLine: L('record total'), rect: -1, point: i, placed: [...placed], counts: [...counts], message: `Point (${x}, ${y}) lies in ${total} rectangle(s): those with length at least ${x} and height at least ${y}.` })
+    frames.push({ phase: 'point', pythonLine: 15, activeLine: L('record total'), rect: -1, point: i, placed: [...placed], counts: [...counts], message: `Point (${x}, ${y}) lies in ${total} rectangle(s): those with length at least ${x} and height at least ${y}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the recorded totals'), rect: -1, point: -1, placed: [...placed], counts: [...counts], message: `Counts for each point: [${counts.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return the recorded totals'), rect: -1, point: -1, placed: [...placed], counts: [...counts], message: `Counts for each point: [${counts.join(', ')}].` })
   return { input: { rectangles, points }, result: counts, frames }
 }
 

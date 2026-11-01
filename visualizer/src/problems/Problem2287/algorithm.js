@@ -30,13 +30,14 @@ export function buildTrace({ s, target }) {
   const have = tally(s)
   const need = tally(target)
   let best = Infinity
-  const frames = [{ phase: 'start', letter: null, have: 0, need: 0, copies: null, best: null, activeLine: L('set have'), message: 'Count the letters available in s and the letters the target needs.' }]
+  const frames = [{ phase: 'start', letter: null, have: 0, need: 0, copies: null, best: null, pythonLine: 8, activeLine: L('set have'), message: 'Count the letters available in s and the letters the target needs.' }]
   for (const x of Object.keys(need)) {
     const copies = Math.floor((have[x] ?? 0) / need[x])
-    if (copies < best) best = copies
-    frames.push({ phase: 'letter', letter: x, have: have[x] ?? 0, need: need[x], copies, best, activeLine: L('set copies to'), message: `${x}: ${have[x] ?? 0} available, ${need[x]} needed per copy, so at most ${copies} copies.` })
+    const lower = copies < best
+    if (lower) best = copies
+    frames.push({ phase: 'letter', letter: x, have: have[x] ?? 0, need: need[x], copies, best, pythonLine: lower ? 12 : 11, activeLine: L('set copies to'), message: `${x}: ${have[x] ?? 0} available, ${need[x]} needed per copy, so at most ${copies} copies.` })
   }
-  frames.push({ phase: 'done', letter: null, have: 0, need: 0, copies: null, best, activeLine: L('return best'), message: `At most ${best} copies of the target.` })
+  frames.push({ phase: 'done', letter: null, have: 0, need: 0, copies: null, best, pythonLine: 13, activeLine: L('return best'), message: `At most ${best} copies of the target.` })
   return { input: { s, target }, result: best, frames }
 }
 

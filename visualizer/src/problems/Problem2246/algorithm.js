@@ -23,7 +23,7 @@ export function buildTrace({ parent, s }) {
   for (let i = 1; i < n; i++) children[parent[i]].push(i)
   let best = 1
   const chains = {}
-  const frames = [{ phase: 'start', activeLine: L('set best to 1'), node: null, chains: {}, best, message: 'Each node combines its two longest downward chains whose letters differ from its own.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('set best to 1'), node: null, chains: {}, best, message: 'Each node combines its two longest downward chains whose letters differ from its own.' }]
   const down = v => {
     let top1 = 0
     let top2 = 0
@@ -34,11 +34,11 @@ export function buildTrace({ parent, s }) {
     }
     best = Math.max(best, 1 + top1 + top2)
     chains[v] = 1 + top1
-    frames.push({ phase: 'visit', activeLine: L('set best to the larger'), node: v, chains: { ...chains }, best, message: `Node ${v} (${s[v]}) keeps a chain of ${1 + top1} and a best path of ${1 + top1 + top2} through it. Best so far: ${best}.` })
+    frames.push({ phase: 'visit', pythonLine: 20, activeLine: L('set best to the larger'), node: v, chains: { ...chains }, best, message: `Node ${v} (${s[v]}) keeps a chain of ${1 + top1} and a best path of ${1 + top1 + top2} through it. Best so far: ${best}.` })
     return 1 + top1
   }
   down(0)
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, chains: { ...chains }, best, message: `Longest path: ${best} nodes.` })
+  frames.push({ phase: 'done', pythonLine: 23, activeLine: L('return best'), node: null, chains: { ...chains }, best, message: `Longest path: ${best} nodes.` })
   return { input: { parent, s }, result: best, frames }
 }
 

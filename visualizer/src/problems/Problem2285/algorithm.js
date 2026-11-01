@@ -22,17 +22,17 @@ export function buildTrace(input) {
   for (const [a, b] of roads) { degree[a] += 1; degree[b] += 1 }
   const order = degree.map((_, i) => i).sort((a, b) => degree[b] - degree[a] || a - b)
   const value = new Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('sort the cities by road count'), degree: [...degree], value: [...value], index: -1, total: 0, message: 'Count the roads at each city. Busier cities should get larger values.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('sort the cities by road count'), degree: [...degree], value: [...value], index: -1, total: 0, message: 'Count the roads at each city. Busier cities should get larger values.' }]
   order.forEach((city, rank) => {
     value[city] = n - rank
-    frames.push({ phase: 'assign', activeLine: L('give it the value'), degree: [...degree], value: [...value], index: city, total: 0, message: `City ${city} has ${degree[city]} roads and gets value ${value[city]}.` })
+    frames.push({ phase: 'assign', pythonLine: 9, activeLine: L('give it the value'), degree: [...degree], value: [...value], index: city, total: 0, message: `City ${city} has ${degree[city]} roads and gets value ${value[city]}.` })
   })
   let total = 0
   for (const [a, b] of roads) {
     total += value[a] + value[b]
-    frames.push({ phase: 'road', activeLine: L('add the values of both ends'), degree: [...degree], value: [...value], index: a, total, message: `Road ${a}-${b} adds ${value[a]} + ${value[b]}. Total ${total}.` })
+    frames.push({ phase: 'road', pythonLine: 10, activeLine: L('add the values of both ends'), degree: [...degree], value: [...value], index: a, total, message: `Road ${a}-${b} adds ${value[a]} + ${value[b]}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the total'), degree: [...degree], value: [...value], index: -1, total, message: `Maximum total importance: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return the total'), degree: [...degree], value: [...value], index: -1, total, message: `Maximum total importance: ${total}.` })
   return { input, result: total, frames }
 }
 

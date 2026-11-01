@@ -49,29 +49,29 @@ export function buildTrace({ pieces, positions }) {
   const chosen = []
   const picks = pieces.map(() => '-')
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('start the search with no piece placed'), piece: null, dest: null, picks: [...picks], count, message: 'Every piece may move to any square it can reach, including staying put.' }]
+  const frames = [{ phase: 'start', pythonLine: 51, activeLine: L('start the search with no piece placed'), piece: null, dest: null, picks: [...picks], count, message: 'Every piece may move to any square it can reach, including staying put.' }]
   const search = i => {
     if (i === pieces.length) {
       count++
-      frames.push({ phase: 'count', activeLine: L('count one combination'), piece: null, dest: null, picks: [...picks], count, message: `A full valid combination; the count is ${count}.` })
+      frames.push({ phase: 'count', pythonLine: 41, activeLine: L('count one combination'), piece: null, dest: null, picks: [...picks], count, message: `A full valid combination; the count is ${count}.` })
       return
     }
     for (const dest of options[i]) {
       const candidate = { start: positions[i], dest }
       if (chosen.some(other => clash(other, candidate))) {
-        frames.push({ phase: 'reject', activeLine: L('skip this square'), piece: i, dest, picks: [...picks], count, message: `${pieces[i]} to ${dest.join(',')} clashes with an earlier piece at some second.` })
+        frames.push({ phase: 'reject', pythonLine: 46, activeLine: L('skip this square'), piece: i, dest, picks: [...picks], count, message: `${pieces[i]} to ${dest.join(',')} clashes with an earlier piece at some second.` })
         continue
       }
       chosen.push(candidate)
       picks[i] = dest.join(',')
-      frames.push({ phase: 'choose', activeLine: L('choose the square and call search'), piece: i, dest, picks: [...picks], count, message: `${pieces[i]} takes ${dest.join(',')}.` })
+      frames.push({ phase: 'choose', pythonLine: 47, activeLine: L('choose the square and call search'), piece: i, dest, picks: [...picks], count, message: `${pieces[i]} takes ${dest.join(',')}.` })
       search(i + 1)
       chosen.pop()
       picks[i] = '-'
     }
   }
   search(0)
-  frames.push({ phase: 'done', activeLine: L('return the count'), piece: null, dest: null, picks: [...picks], count, message: `Valid move combinations: ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 52, activeLine: L('return the count'), piece: null, dest: null, picks: [...picks], count, message: `Valid move combinations: ${count}.` })
   return { input: { pieces, positions }, result: count, frames }
 }
 

@@ -21,24 +21,24 @@ export function buildTrace(input) {
   let current = -1
   let pairTotal = 0
   let longest = 0
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, current, removed: [...removed], depth: [...depth], pairTotal, longest, message,
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    phase, activeLine, pythonLine, current, removed: [...removed], depth: [...depth], pairTotal, longest, message,
   })
 
-  snap('start', L('count how many'), 'Count how many employees name each person as their favorite.')
+  snap('start', L('count how many'), 'Count how many employees name each person as their favorite.', 7)
   const queue = []
   for (let i = 0; i < n; i++) if (indeg[i] === 0) queue.push(i)
-  snap('start', L('queue up the people'), `${queue.length} people nobody names are queued.`)
+  snap('start', L('queue up the people'), `${queue.length} people nobody names are queued.`, 10)
   while (queue.length) {
     const u = queue.shift()
     current = u
     removed[u] = true
     const f = favorite[u]
     depth[f] = Math.max(depth[f], depth[u] + 1)
-    snap('peel', L('let its favorite f take'), `Person ${u} leaves; their favorite ${f} now has chain depth ${depth[f]}.`)
+    snap('peel', L('let its favorite f take'), `Person ${u} leaves; their favorite ${f} now has chain depth ${depth[f]}.`, 15)
     indeg[f]--
     if (indeg[f] === 0) queue.push(f)
-    snap('peel', L('reduce the count'), `Person ${f} is down to ${indeg[f]} remaining admirer(s).`)
+    snap('peel', L('reduce the count'), `Person ${f} is down to ${indeg[f]} remaining admirer(s).`, 16)
   }
   current = -1
   const visited = Array(n).fill(false)
@@ -52,18 +52,18 @@ export function buildTrace(input) {
       cur = favorite[cur]
     } while (cur !== v)
     current = v
-    snap('cycle', L('walk the favorite links'), `Cycle through [${cycle.join(', ')}] has ${cycle.length} people.`)
+    snap('cycle', L('walk the favorite links'), `Cycle through [${cycle.join(', ')}] has ${cycle.length} people.`, 30)
     if (cycle.length === 2) {
       pairTotal += depth[v] + depth[favorite[v]]
-      snap('pair', L('if the cycle has two'), `Two-person cycle adds ${depth[v]} + ${depth[favorite[v]]} with their chains.`)
+      snap('pair', L('if the cycle has two'), `Two-person cycle adds ${depth[v]} + ${depth[favorite[v]]} with their chains.`, 33)
     } else {
       longest = Math.max(longest, cycle.length)
-      snap('pair', L('otherwise keep the longest'), `Longest cycle so far: ${longest}.`)
+      snap('pair', L('otherwise keep the longest'), `Longest cycle so far: ${longest}.`, 36)
     }
   }
   current = -1
   const result = Math.max(longest, pairTotal)
-  snap('done', L('return the larger'), `Answer: ${result}.`)
+  snap('done', L('return the larger'), `Answer: ${result}.`, 37)
   return { input, result, frames }
 }
 

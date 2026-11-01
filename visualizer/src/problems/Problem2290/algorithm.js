@@ -20,10 +20,10 @@ export function buildTrace(grid) {
   dist[0][0] = 0
   const deque = [[0, 0]]
   const snapshot = () => dist.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('set dist'), cell: [0, 0], matrix: snapshot(), queue: dequeLabels(deque, dist), message: 'Start at the top-left cell with 0 obstacles removed. Stepping onto an empty cell costs 0; stepping onto an obstacle costs 1.' }]
+  const frames = [{ phase: 'start', pythonLine: 8, activeLine: L('set dist'), cell: [0, 0], matrix: snapshot(), queue: dequeLabels(deque, dist), message: 'Start at the top-left cell with 0 obstacles removed. Stepping onto an empty cell costs 0; stepping onto an obstacle costs 1.' }]
   while (deque.length) {
     const [r, c] = deque.shift()
-    frames.push({ phase: 'pop', activeLine: L('remove the front cell'), cell: [r, c], matrix: snapshot(), queue: dequeLabels(deque, dist), message: `Take (${r}, ${c}) from the front; obstacles removed to reach it: ${dist[r][c]}.` })
+    frames.push({ phase: 'pop', pythonLine: 10, activeLine: L('remove the front cell'), cell: [r, c], matrix: snapshot(), queue: dequeLabels(deque, dist), message: `Take (${r}, ${c}) from the front; obstacles removed to reach it: ${dist[r][c]}.` })
     for (const [dr, dc] of DIRS) {
       const nr = r + dr
       const nc = c + dc
@@ -32,12 +32,12 @@ export function buildTrace(grid) {
       if (dist[r][c] + cost < dist[nr][nc]) {
         dist[nr][nc] = dist[r][c] + cost
         if (cost === 0) deque.unshift([nr, nc]); else deque.push([nr, nc])
-        frames.push({ phase: 'relax', activeLine: L(cost === 0 ? 'if cost is 0 then' : 'otherwise put'), cell: [nr, nc], matrix: snapshot(), queue: dequeLabels(deque, dist), message: `Step to (${nr}, ${nc}) ${cost === 0 ? '(empty, cost 0)' : '(obstacle, cost 1)'}: new count ${dist[nr][nc]}, added to the ${cost === 0 ? 'front' : 'back'}.` })
+        frames.push({ phase: 'relax', pythonLine: cost === 0 ? 19 : 21, activeLine: L(cost === 0 ? 'if cost is 0 then' : 'otherwise put'), cell: [nr, nc], matrix: snapshot(), queue: dequeLabels(deque, dist), message: `Step to (${nr}, ${nc}) ${cost === 0 ? '(empty, cost 0)' : '(obstacle, cost 1)'}: new count ${dist[nr][nc]}, added to the ${cost === 0 ? 'front' : 'back'}.` })
       }
     }
   }
   const result = dist[m - 1][n - 1]
-  frames.push({ phase: 'done', activeLine: L('return dist'), cell: [m - 1, n - 1], matrix: snapshot(), queue: [], message: `Fewest obstacles to remove: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 22, activeLine: L('return dist'), cell: [m - 1, n - 1], matrix: snapshot(), queue: [], message: `Fewest obstacles to remove: ${result}.` })
   return { input: grid, result, frames }
 }
 

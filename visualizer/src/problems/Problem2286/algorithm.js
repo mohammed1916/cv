@@ -29,13 +29,13 @@ export function buildTrace({ n, m, ops }) {
   const runTree = new SegTree(n, 'max-assign', Array(n).fill(m))
   const answers = []
   const snap = title => ({ ...runTree.snapshot(), title })
-  const frames = [{ phase: 'start', op: null, result: null, seats: seats.map(r => r.slice()), seg: snap('Longest free run per row'), activeLine: L('set row runs to m'), message: `${n} rows of ${m} empty seats.` }]
+  const frames = [{ phase: 'start', op: null, result: null, seats: seats.map(r => r.slice()), seg: snap('Longest free run per row'), pythonLine: 11, activeLine: L('set row runs to m'), message: `${n} rows of ${m} empty seats.` }]
   ops.forEach((op, i) => {
     const [name, k, maxRow] = op
     if (name === 'gather') {
       if (runTree.query(0, maxRow) < k) {
         answers.push([])
-        frames.push({ phase: 'reject', op: i, result: [], seats: seats.map(r => r.slice()), seg: snap('Gather fails'), activeLine: L('no row up to maxRow'), message: `gather(${k}, ${maxRow}): no row has ${k} seats in a row, so nothing is booked.` })
+        frames.push({ phase: 'reject', op: i, result: [], seats: seats.map(r => r.slice()), seg: snap('Gather fails'), pythonLine: 16, activeLine: L('no row up to maxRow'), message: `gather(${k}, ${maxRow}): no row has ${k} seats in a row, so nothing is booked.` })
         return
       }
       let lo = 0, hi = maxRow
@@ -51,12 +51,12 @@ export function buildTrace({ n, m, ops }) {
       freeTree.update(row, row, -k)
       runTree.update(row, row, longestRun(seats[row]))
       answers.push([row, start])
-      frames.push({ phase: 'gather', op: i, result: [row, start], seats: seats.map(r => r.slice()), seg: snap(`Gather booked row ${row}`), activeLine: L('append [row, start]'), message: `gather(${k}, ${maxRow}): row ${row}, seats ${start} to ${start + k - 1}.` })
+      frames.push({ phase: 'gather', op: i, result: [row, start], seats: seats.map(r => r.slice()), seg: snap(`Gather booked row ${row}`), pythonLine: 21, activeLine: L('append [row, start]'), message: `gather(${k}, ${maxRow}): row ${row}, seats ${start} to ${start + k - 1}.` })
       return
     }
     if (freeTree.query(0, maxRow) < k) {
       answers.push(false)
-      frames.push({ phase: 'reject', op: i, result: false, seats: seats.map(r => r.slice()), seg: snap('Scatter fails'), activeLine: L('append false'), message: `scatter(${k}, ${maxRow}): fewer than ${k} free seats, so nothing is booked.` })
+      frames.push({ phase: 'reject', op: i, result: false, seats: seats.map(r => r.slice()), seg: snap('Scatter fails'), pythonLine: 25, activeLine: L('append false'), message: `scatter(${k}, ${maxRow}): fewer than ${k} free seats, so nothing is booked.` })
       return
     }
     let remaining = k
@@ -71,9 +71,9 @@ export function buildTrace({ n, m, ops }) {
       }
     }
     answers.push(true)
-    frames.push({ phase: 'scatter', op: i, result: true, seats: seats.map(r => r.slice()), seg: snap(`Scatter booked ${k} seats`), activeLine: L('fill from the smallest row'), message: `scatter(${k}, ${maxRow}): the seats are taken from the smallest rows first.` })
+    frames.push({ phase: 'scatter', op: i, result: true, seats: seats.map(r => r.slice()), seg: snap(`Scatter booked ${k} seats`), pythonLine: 35, activeLine: L('fill from the smallest row'), message: `scatter(${k}, ${maxRow}): the seats are taken from the smallest rows first.` })
   })
-  frames.push({ phase: 'done', op: null, result: null, seats: seats.map(r => r.slice()), seg: snap('Final rows'), activeLine: L('return answers'), message: `Answers: ${JSON.stringify(answers)}.` })
+  frames.push({ phase: 'done', op: null, result: null, seats: seats.map(r => r.slice()), seg: snap('Final rows'), pythonLine: 36, activeLine: L('return answers'), message: `Answers: ${JSON.stringify(answers)}.` })
   return { input: { n, m, ops }, result: answers, frames }
 }
 

@@ -9,14 +9,14 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ words, s }) {
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), active: -1, roles: {}, state: { s, count: 0 }, message: `Count the words that are a prefix of "${s}".` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set count to 0'), active: -1, roles: {}, state: { s, count: 0 }, message: `Count the words that are a prefix of "${s}".` }]
   let count = 0
   words.forEach((word, i) => {
     const isPrefix = s.startsWith(word)
     if (isPrefix) count += 1
-    frames.push({ phase: 'check', activeLine: L(isPrefix ? 'add 1 to count' : 'if s starts with word'), active: i, roles: { [i]: isPrefix ? 'prefix' : 'not prefix' }, state: { word, count }, message: `"${word}" ${isPrefix ? 'is' : 'is not'} a prefix of "${s}". Count is ${count}.` })
+    frames.push({ phase: 'check', pythonLine: isPrefix ? 5 : 4, activeLine: L(isPrefix ? 'add 1 to count' : 'if s starts with word'), active: i, roles: { [i]: isPrefix ? 'prefix' : 'not prefix' }, state: { word, count }, message: `"${word}" ${isPrefix ? 'is' : 'is not'} a prefix of "${s}". Count is ${count}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return count'), active: -1, roles: {}, state: { count }, message: `Return ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return count'), active: -1, roles: {}, state: { count }, message: `Return ${count}.` })
   return { input: { words, s }, result: count, items: words, frames }
 }
 

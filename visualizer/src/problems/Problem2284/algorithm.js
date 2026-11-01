@@ -11,18 +11,18 @@ export function parseInput(text) {
 
 export function buildTrace({ messages, senders }) {
   const totals = new Map()
-  const frames = [{ phase: 'start', activeLine: L('totals = empty map'), index: -1, totals: {}, best: null, message: 'Nobody has sent a message yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('totals = empty map'), index: -1, totals: {}, best: null, message: 'Nobody has sent a message yet.' }]
   for (let i = 0; i < messages.length; i++) {
     const words = messages[i].split(' ').length
     totals.set(senders[i], (totals.get(senders[i]) ?? 0) + words)
-    frames.push({ phase: 'message', activeLine: L('totals[senders[i]] = totals'), index: i, totals: Object.fromEntries(totals), best: null, message: `${senders[i]} sends ${words} word${words === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'message', pythonLine: 4, activeLine: L('totals[senders[i]] = totals'), index: i, totals: Object.fromEntries(totals), best: null, message: `${senders[i]} sends ${words} word${words === 1 ? '' : 's'}.` })
   }
   let best = null
   for (const sender of totals.keys()) {
     const better = best === null || totals.get(sender) > totals.get(best) || (totals.get(sender) === totals.get(best) && sender > best)
     if (better) best = sender
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, totals: Object.fromEntries(totals), best, message: `${best} has the largest word count, ${totals.get(best)}. Ties go to the name that sorts last.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return best'), index: -1, totals: Object.fromEntries(totals), best, message: `${best} has the largest word count, ${totals.get(best)}. Ties go to the name that sorts last.` })
   return { input: { messages, senders }, result: best, frames }
 }
 

@@ -12,7 +12,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ left, right }) {
-  const frames = [{ phase: 'start', activeLine: L('set twos and fives'), index: -1, zeros: 0, message: `Multiply every integer from ${left} to ${right}.` }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set twos and fives'), index: -1, zeros: 0, message: `Multiply every integer from ${left} to ${right}.` }]
   let twos = 0
   let fives = 0
   let logSum = 0
@@ -23,7 +23,7 @@ export function buildTrace({ left, right }) {
     while (x % 5 === 0) { x /= 5; fives += 1 }
     stripped = (stripped * BigInt(x)) % TAIL
     logSum += Math.log10(i)
-    frames.push({ phase: 'multiply', activeLine: L('multiply the stripped'), index: i - left, zeros: Math.min(twos, fives), message: `Multiply in ${i}. Factors of 2 and 5 are counted, not multiplied.` })
+    frames.push({ phase: 'multiply', pythonLine: 17, activeLine: L('multiply the stripped'), index: i - left, zeros: Math.min(twos, fives), message: `Multiply in ${i}. Factors of 2 and 5 are counted, not multiplied.` })
   }
   const zeros = Math.min(twos, fives)
   let tail = stripped
@@ -38,7 +38,7 @@ export function buildTrace({ left, right }) {
     const head = Math.floor(10 ** (frac + 4))
     text = `${head}...${String(tail % 100000n).padStart(5, '0')}e${zeros}`
   }
-  frames.push({ phase: 'done', activeLine: L('return the abbreviation'), index: right - left + 1, zeros, message: `The product abbreviates to ${text}.` })
+  frames.push({ phase: 'done', pythonLine: trimmedLog < 10 - 1e-11 ? 23 : 26, activeLine: L('return the abbreviation'), index: right - left + 1, zeros, message: `The product abbreviates to ${text}.` })
   return { input: { left, right }, result: text, frames }
 }
 

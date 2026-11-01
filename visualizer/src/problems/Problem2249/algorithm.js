@@ -30,7 +30,7 @@ export function buildTrace({ circles }) {
   const hiX = Math.max(...xs)
   const loY = Math.min(...ys)
   const hiY = Math.max(...ys)
-  const frames = [{ phase: 'start', index: -1, x: null, y: null, inside: false, count: 0, flags: null, activeLine: L('set lo and hi'), message: `Scan the box x from ${loX} to ${hiX}, y from ${loY} to ${hiY}.` }]
+  const frames = [{ phase: 'start', index: -1, x: null, y: null, inside: false, count: 0, flags: null, pythonLine: 5, activeLine: L('set lo and hi'), message: `Scan the box x from ${loX} to ${hiX}, y from ${loY} to ${hiY}.` }]
   const flags = []
   let count = 0
   let index = 0
@@ -39,11 +39,11 @@ export function buildTrace({ circles }) {
       const inside = circles.some(([cx, cy, r]) => (x - cx) * (x - cx) + (y - cy) * (y - cy) <= r * r)
       if (inside) count++
       flags.push(inside)
-      frames.push({ phase: 'point', index, x, y, inside, count, flags: [...flags], activeLine: L(inside ? 'add 1 to count' : 'if some circle'), message: inside ? `(${x}, ${y}) lies in a circle: count ${count}.` : `(${x}, ${y}) lies in no circle.` })
+      frames.push({ phase: 'point', index, x, y, inside, count, flags: [...flags], pythonLine: inside ? 10 : 9, activeLine: L(inside ? 'add 1 to count' : 'if some circle'), message: inside ? `(${x}, ${y}) lies in a circle: count ${count}.` : `(${x}, ${y}) lies in no circle.` })
       index++
     }
   }
-  frames.push({ phase: 'done', index: -1, x: null, y: null, inside: false, count, flags: [...flags], activeLine: L('return count'), result: count, message: `${count} lattice points lie inside or on at least one circle.` })
+  frames.push({ phase: 'done', index: -1, x: null, y: null, inside: false, count, flags: [...flags], pythonLine: 11, activeLine: L('return count'), result: count, message: `${count} lattice points lie inside or on at least one circle.` })
   return { input: { circles }, result: count, width: hiX - loX + 1, box: { loX, hiX, loY, hiY }, frames }
 }
 

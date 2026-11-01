@@ -6,20 +6,20 @@ export function parseInput(text) {
 }
 
 export function buildTrace(num) {
-  const frames = [{ phase: 'start', activeLine: L('ok = true'), index: -1, count: null, expected: null, ok: true, message: `Check each position of "${num}".` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('ok = true'), index: -1, count: null, expected: null, ok: true, message: `Check each position of "${num}".` }]
   let ok = true
   for (let i = 0; i < num.length; i++) {
     let count = 0
     for (const ch of num) if (ch === String(i)) count++
     const expected = Number(num[i])
     const match = count === expected
-    frames.push({ phase: match ? 'match' : 'mismatch', activeLine: match ? L('for each index i') : L('ok = false'), index: i, count, expected, ok: match, message: `Digit ${i} appears ${count} times; position ${i} says ${expected}. ${match ? 'Match.' : 'Mismatch.'}` })
+    frames.push({ phase: match ? 'match' : 'mismatch', pythonLine: 2, activeLine: match ? L('for each index i') : L('ok = false'), index: i, count, expected, ok: match, message: `Digit ${i} appears ${count} times; position ${i} says ${expected}. ${match ? 'Match.' : 'Mismatch.'}` })
     if (!match) {
       ok = false
       break
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return ok'), index: -1, count: null, expected: null, ok, message: ok ? 'Every position matches.' : 'At least one position does not match.' })
+  frames.push({ phase: 'done', pythonLine: 2, activeLine: L('return ok'), index: -1, count: null, expected: null, ok, message: ok ? 'Every position matches.' : 'At least one position does not match.' })
   return { input: num, result: ok, frames }
 }
 

@@ -11,14 +11,14 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set counts to an empty map'), array: -1, counts: {}, kept: [], message: `Count in how many of the ${nums.length} arrays each value appears.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set counts to an empty map'), array: -1, counts: {}, kept: [], message: `Count in how many of the ${nums.length} arrays each value appears.` }]
   nums.forEach((arr, a) => {
     for (const v of arr) counts.set(v, (counts.get(v) || 0) + 1)
-    frames.push({ phase: 'tally', activeLine: L('add one to its count'), array: a, counts: Object.fromEntries(counts), kept: [], message: `Array ${a} is tallied.` })
+    frames.push({ phase: 'tally', pythonLine: 5, activeLine: L('add one to its count'), array: a, counts: Object.fromEntries(counts), kept: [], message: `Array ${a} is tallied.` })
   })
   const kept = [...counts.keys()].filter(v => counts.get(v) === nums.length).sort((x, y) => x - y)
-  frames.push({ phase: 'select', activeLine: L('keep the values whose count'), array: -1, counts: Object.fromEntries(counts), kept, message: `Values in all ${nums.length} arrays: ${kept.join(', ') || 'none'}.` })
-  frames.push({ phase: 'done', activeLine: L('return the sorted values'), array: -1, counts: Object.fromEntries(counts), kept, message: `Intersection: [${kept.join(', ')}].` })
+  frames.push({ phase: 'select', pythonLine: 6, activeLine: L('keep the values whose count'), array: -1, counts: Object.fromEntries(counts), kept, message: `Values in all ${nums.length} arrays: ${kept.join(', ') || 'none'}.` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return the sorted values'), array: -1, counts: Object.fromEntries(counts), kept, message: `Intersection: [${kept.join(', ')}].` })
   return { input: nums, result: kept, frames }
 }
 

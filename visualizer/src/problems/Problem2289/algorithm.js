@@ -12,7 +12,7 @@ export function buildTrace({ nums }) {
   const stack = []
   let answer = 0
   const frames = []
-  const frame = (phase, line, index, message) => frames.push({ phase, activeLine: line, index, steps: [...steps], stack: stack.map(j => j), answer, message })
+  const frame = (phase, line, index, message) => frames.push({ phase, pythonLine: { start: 4, pop: 9, record: 11, done: 13 }[phase], activeLine: line, index, steps: [...steps], stack: stack.map(j => j), answer, message })
   frame('start', L('set answer to 0'), -1, 'Start with an empty stack of indices.')
   for (let i = 0; i < nums.length; i++) {
     let before = 0

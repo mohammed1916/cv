@@ -14,21 +14,21 @@ export function buildTrace({ sentence, discount }) {
   const words = sentence.split(' ')
   const hundred = BigInt(100)
   const out = []
-  const frames = [{ phase: 'start', activeLine: L('split the sentence'), index: -1, word: '', priced: [...out], message: `Apply a ${discount}% discount to each price.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('split the sentence'), index: -1, word: '', priced: [...out], message: `Apply a ${discount}% discount to each price.` }]
   words.forEach((w, i) => {
     if (isPrice(w)) {
       // A price of P dollars becomes P times (100 minus discount) cents, so integer arithmetic is exact.
       const cents = BigInt(w.slice(1)) * BigInt(100 - discount)
       const text = `$${cents / hundred}.${String(cents % hundred).padStart(2, '0')}`
       out.push(text)
-      frames.push({ phase: 'price', activeLine: L('replace the word'), index: i, word: w, priced: [...out], message: `${w} becomes ${text}.` })
+      frames.push({ phase: 'price', pythonLine: 6, activeLine: L('replace the word'), index: i, word: w, priced: [...out], message: `${w} becomes ${text}.` })
     } else {
       out.push(w)
-      frames.push({ phase: 'keep', activeLine: L('otherwise keep the word'), index: i, word: w, priced: [...out], message: `${w} is not a price, so it stays.` })
+      frames.push({ phase: 'keep', pythonLine: 8, activeLine: L('otherwise keep the word'), index: i, word: w, priced: [...out], message: `${w} is not a price, so it stays.` })
     }
   })
   const result = out.join(' ')
-  frames.push({ phase: 'done', activeLine: L('return the sentence'), index: -1, word: '', priced: [...out], message: `Result: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return the sentence'), index: -1, word: '', priced: [...out], message: `Result: ${result}.` })
   return { input: { sentence, discount }, result, frames }
 }
 

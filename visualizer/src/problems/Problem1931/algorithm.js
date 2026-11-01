@@ -34,14 +34,14 @@ export function buildTrace({ m, n }) {
   const label = p => p.map(c => COLOURS[c]).join('')
   let ways = patterns.map(() => 1)
   const show = () => [ways.slice()]
-  const frames = [{ phase: 'start', column: 0, table: show(), activeLine: L('list every column'), message: `${patterns.length} valid column pattern(s) with ${m} cell(s).` }]
+  const frames = [{ phase: 'start', column: 0, table: show(), pythonLine: 13, activeLine: L('list every column'), message: `${patterns.length} valid column pattern(s) with ${m} cell(s).` }]
   for (let col = 1; col < n; col++) {
     const next = patterns.map(q => patterns.reduce((sum, p, index) => (p.every((c, row) => c !== q[row]) ? (sum + ways[index]) % MOD : sum), 0))
     ways = next
-    frames.push({ phase: 'column', column: col, table: show(), activeLine: L('for each column q'), message: `Column ${col + 1}: each pattern counts the previous columns that differ in every row.` })
+    frames.push({ phase: 'column', column: col, table: show(), pythonLine: 18, activeLine: L('for each column q'), message: `Column ${col + 1}: each pattern counts the previous columns that differ in every row.` })
   }
   const result = ways.reduce((a, b) => (a + b) % MOD, 0)
-  frames.push({ phase: 'done', column: n - 1, table: show(), activeLine: L('return the sum of ways'), result, message: `Colourings of the ${m} by ${n} grid: ${result}.` })
+  frames.push({ phase: 'done', column: n - 1, table: show(), pythonLine: 20, activeLine: L('return the sum of ways'), result, message: `Colourings of the ${m} by ${n} grid: ${result}.` })
   return { input: { m, n }, result, labels: patterns.map(label), frames }
 }
 

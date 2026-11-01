@@ -26,14 +26,14 @@ export function buildTrace({ flowers, people }) {
   const starts = flowers.map(f => f[0]).sort((a, b) => a - b)
   const ends = flowers.map(f => f[1]).sort((a, b) => a - b)
   const answer = []
-  const frames = [{ phase: 'start', activeLine: L('starts = all flower start'), person: -1, started: 0, ended: 0, answer: [], message: `Sort the starts [${starts.join(', ')}] and the ends [${ends.join(', ')}] separately. A flower is in bloom at t when its start is at most t and its end is at least t.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('starts = all flower start'), person: -1, started: 0, ended: 0, answer: [], message: `Sort the starts [${starts.join(', ')}] and the ends [${ends.join(', ')}] separately. A flower is in bloom at t when its start is at most t and its end is at least t.` }]
   people.forEach((t, i) => {
     const started = starts.filter(s => s <= t).length
     const ended = ends.filter(e => e < t).length
     answer.push(started - ended)
-    frames.push({ phase: 'person', activeLine: L('started = number of starts'), person: i, started, ended, answer: [...answer], message: `Arrival at ${t}: ${started} flower(s) have started, ${ended} have already ended, so ${started - ended} are in bloom.` })
+    frames.push({ phase: 'person', pythonLine: 10, activeLine: L('started = number of starts'), person: i, started, ended, answer: [...answer], message: `Arrival at ${t}: ${started} flower(s) have started, ${ended} have already ended, so ${started - ended} are in bloom.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), person: -1, started: 0, ended: 0, answer: [...answer], message: `Flowers in bloom for each person: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return answer'), person: -1, started: 0, ended: 0, answer: [...answer], message: `Flowers in bloom for each person: [${answer.join(', ')}].` })
   return { input: { flowers, people }, result: answer, frames }
 }
 

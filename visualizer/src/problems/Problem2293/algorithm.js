@@ -10,7 +10,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   let current = [...input.nums]
   let round = 0
-  const frames = [{ phase: 'start', activeLine: L('set current to nums'), round, values: [...current], message: `Start with ${current.length} values.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set current to nums'), round, values: [...current], message: `Start with ${current.length} values.` }]
   while (current.length > 1) {
     round += 1
     const next = []
@@ -20,10 +20,10 @@ export function buildTrace(input) {
       next.push(i % 2 === 0 ? Math.min(a, b) : Math.max(a, b))
     }
     current = next
-    frames.push({ phase: 'pass', activeLine: L('if i is even'), round, values: [...current],
+    frames.push({ phase: 'pass', pythonLine: 9, activeLine: L('if i is even'), round, values: [...current],
       message: `Pass ${round}: the new list is ${current.join(', ')}. Even positions take the minimum, odd positions the maximum.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the single value'), round, values: [...current], message: `The single value left is ${current[0]}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return the single value'), round, values: [...current], message: `The single value left is ${current[0]}.` })
   return { input, result: current[0], frames }
 }
 
