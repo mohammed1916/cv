@@ -16,7 +16,7 @@ export function buildTrace({ tree }) {
   const root = treeFromLevelOrder(tree)
   let best = 0
   const marks = {}
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), node: null, marks: {}, best, message: 'An empty subtree is a BST with sum 0, so the answer is at least 0.' }]
+  const frames = [{ phase: 'start', pythonLine: 26, activeLine: L('set best to 0'), node: null, marks: {}, best, message: 'An empty subtree is a BST with sum 0, so the answer is at least 0.' }]
   const walk = node => {
     if (!node) return EMPTY
     const left = walk(node.left)
@@ -25,15 +25,15 @@ export function buildTrace({ tree }) {
       const sum = left.sum + right.sum + node.value
       best = Math.max(best, sum)
       marks[node.id] = `BST sum ${sum}`
-      frames.push({ phase: 'bst', activeLine: L('if both sides are BSTs'), node: node.id, marks: { ...marks }, best, message: `The subtree at ${node.value} is a BST with sum ${sum}. Best so far: ${best}.` })
+      frames.push({ phase: 'bst', pythonLine: 35, activeLine: L('if both sides are BSTs'), node: node.id, marks: { ...marks }, best, message: `The subtree at ${node.value} is a BST with sum ${sum}. Best so far: ${best}.` })
       return { ok: true, lo: Math.min(node.value, left.lo), hi: Math.max(node.value, right.hi), sum }
     }
     marks[node.id] = 'not a BST'
-    frames.push({ phase: 'reject', activeLine: L('otherwise'), node: node.id, marks: { ...marks }, best, message: `The subtree at ${node.value} is not a BST, so no sum is taken from it.` })
+    frames.push({ phase: 'reject', pythonLine: 37, activeLine: L('otherwise'), node: node.id, marks: { ...marks }, best, message: `The subtree at ${node.value} is not a BST, so no sum is taken from it.` })
     return { ok: false, lo: 0, hi: 0, sum: 0 }
   }
   walk(root)
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, marks: { ...marks }, best, message: `Largest BST subtree sum: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 39, activeLine: L('return best'), node: null, marks: { ...marks }, best, message: `Largest BST subtree sum: ${best}.` })
   return { input: { tree }, root, result: best, frames }
 }
 

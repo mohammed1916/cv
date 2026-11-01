@@ -18,7 +18,7 @@ export function buildTrace(input) {
   let next = 0
   let attended = 0
   const attendedIdx = []
-  const frames = [{ phase: 'start', activeLine: L('sort the events by start day'), day, index: -1, attended, attendedIdx: [], message: 'Sort the events by start day. Walk through the days in order.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('sort the events by start day'), day, index: -1, attended, attendedIdx: [], message: 'Sort the events by start day. Walk through the days in order.' }]
   while (next < order.length || waiting.length > 0) {
     if (waiting.length === 0) day = Math.max(day, ev[order[next]][0])
     while (next < order.length && ev[order[next]][0] <= day) {
@@ -31,11 +31,11 @@ export function buildTrace(input) {
       const pick = waiting.shift()
       attended += 1
       attendedIdx.push(pick)
-      frames.push({ phase: 'attend', activeLine: L('attend the one ending soonest'), day, index: pick, attended, attendedIdx: [...attendedIdx], message: `Day ${day}: attend event ${pick} ${JSON.stringify(ev[pick])}, which ends soonest.` })
+      frames.push({ phase: 'attend', pythonLine: 18, activeLine: L('attend the one ending soonest'), day, index: pick, attended, attendedIdx: [...attendedIdx], message: `Day ${day}: attend event ${pick} ${JSON.stringify(ev[pick])}, which ends soonest.` })
     }
     day += 1
   }
-  frames.push({ phase: 'done', activeLine: L('return attended'), day, index: -1, attended, attendedIdx: [...attendedIdx], message: `Maximum events attended: ${attended}.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return attended'), day, index: -1, attended, attendedIdx: [...attendedIdx], message: `Maximum events attended: ${attended}.` })
   return { input, result: attended, frames }
 }
 

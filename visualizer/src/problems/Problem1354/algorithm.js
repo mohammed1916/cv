@@ -11,25 +11,27 @@ export function buildTrace({ target }) {
   let total = values.reduce((a, b) => a + b, 0)
   const frames = []
   let result
+  let exitLine
   if (values.length === 1) {
     result = values[0] === 1
-    frames.push({ phase: 'single', activeLine: L('one value'), values: [...values], picked: 0, message: 'A single value can only come from a start of [1].' })
+    exitLine = 5
+    frames.push({ phase: 'single', pythonLine: 5, activeLine: L('one value'), values: [...values], picked: 0, message: 'A single value can only come from a start of [1].' })
   } else {
     for (;;) {
       let at = 0
       for (let i = 1; i < values.length; i++) if (values[i] > values[at]) at = i
       const x = values[at]
       const rest = total - x
-      frames.push({ phase: 'undo', activeLine: L('take the largest value'), values: [...values], picked: at, message: `Largest ${x}; the other values sum to ${rest}.` })
-      if (x === 1 || rest === 1) { result = true; break }
-      if (x <= rest) { result = false; break }
+      frames.push({ phase: 'undo', pythonLine: 10, activeLine: L('take the largest value'), values: [...values], picked: at, message: `Largest ${x}; the other values sum to ${rest}.` })
+      if (x === 1 || rest === 1) { result = true; exitLine = 13; break }
+      if (x <= rest) { result = false; exitLine = 15; break }
       const next = x % rest
-      if (next === 0) { result = false; break }
+      if (next === 0) { result = false; exitLine = 18; break }
       values[at] = next
       total = rest + next
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), values: [...values], picked: -1, message: `Answer: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: exitLine, activeLine: L('return true'), values: [...values], picked: -1, message: `Answer: ${result}.` })
   return { input: { target }, result, frames }
 }
 

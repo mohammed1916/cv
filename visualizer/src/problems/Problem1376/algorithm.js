@@ -26,15 +26,16 @@ export function buildTrace({ n, headID, manager, informTime }) {
   manager.forEach((m, i) => { if (m !== -1) { children[m].push(i); edges.push([m, i]) } })
   let answer = 0
   const heard = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set answer to zero'), node: null, heard: {}, answer: 0, message: `Employee ${headID} is the head and starts the news at minute 0.` }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('set answer to zero'), node: null, heard: {}, answer: 0, message: `Employee ${headID} is the head and starts the news at minute 0.` }]
   const spread = (employee, time) => {
     heard.set(employee, time)
-    if (time > answer) answer = time
-    frames.push({ phase: 'spread', activeLine: L('if time is greater'), node: employee, heard: Object.fromEntries(heard), answer, message: `Employee ${employee} hears the news at minute ${time}.` })
+    const raised = time > answer
+    if (raised) answer = time
+    frames.push({ phase: 'spread', pythonLine: raised ? 11 : 10, activeLine: L('if time is greater'), node: employee, heard: Object.fromEntries(heard), answer, message: `Employee ${employee} hears the news at minute ${time}.` })
     for (const report of children[employee]) spread(report, time + informTime[employee])
   }
   spread(headID, 0)
-  frames.push({ phase: 'done', activeLine: L('return answer'), node: null, heard: Object.fromEntries(heard), answer, message: `Everyone is informed after ${answer} minute(s).` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return answer'), node: null, heard: Object.fromEntries(heard), answer, message: `Everyone is informed after ${answer} minute(s).` })
   return { input: { n, headID, manager, informTime }, result: answer, frames, edges }
 }
 

@@ -13,19 +13,19 @@ export function buildTrace(input) {
   const teams = [...votes[0]]
   const places = votes[0].length
   const counts = Object.fromEntries(teams.map(t => [t, Array(places).fill(0)]))
-  const frames = [{ phase: 'start', activeLine: L('set team list to the letters'), team: null, counts: snapshot(), order: [], message: `Teams: ${teams.join(', ')}. Each place starts at zero.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set team list to the letters'), team: null, counts: snapshot(), order: [], message: `Teams: ${teams.join(', ')}. Each place starts at zero.` }]
   function snapshot() { return Object.fromEntries(Object.entries(counts).map(([t, c]) => [t, [...c]])) }
   votes.forEach((vote, v) => {
     for (let pos = 0; pos < vote.length; pos++) counts[vote[pos]][pos]++
-    frames.push({ phase: 'tally', activeLine: L('for each vote'), team: null, counts: snapshot(), order: [], message: `Ballot ${v + 1} (${vote}) is counted.` })
+    frames.push({ phase: 'tally', pythonLine: 7, activeLine: L('for each vote'), team: null, counts: snapshot(), order: [], message: `Ballot ${v + 1} (${vote}) is counted.` })
   })
   const order = [...teams].sort((a, b) => {
     for (let pos = 0; pos < places; pos++) if (counts[a][pos] !== counts[b][pos]) return counts[b][pos] - counts[a][pos]
     return a < b ? -1 : a > b ? 1 : 0
   })
-  frames.push({ phase: 'rank', activeLine: L('sort teams by their counts'), team: null, counts: snapshot(), order: [...order], message: `Teams ranked by their place counts: ${order.join(' ')}.` })
+  frames.push({ phase: 'rank', pythonLine: 8, activeLine: L('sort teams by their counts'), team: null, counts: snapshot(), order: [...order], message: `Teams ranked by their place counts: ${order.join(' ')}.` })
   const result = order.join('')
-  frames.push({ phase: 'done', activeLine: L('return the sorted teams'), team: null, counts: snapshot(), order: [...order], message: `Ranking: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return the sorted teams'), team: null, counts: snapshot(), order: [...order], message: `Ranking: ${result}.` })
   return { input, result, frames }
 }
 

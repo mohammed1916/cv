@@ -17,15 +17,15 @@ function closestPair(target) {
 
 export function buildTrace({ num }) {
   const targets = [num + 1, num + 2]
-  const frames = [{ phase: 'start', activeLine: L('set targets'), target: null, pairs: [], message: `Look for the closest factor pair of ${targets[0]} and of ${targets[1]}.` }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set targets'), target: null, pairs: [], message: `Look for the closest factor pair of ${targets[0]} and of ${targets[1]}.` }]
   const pairs = []
   for (const target of targets) {
     const pair = closestPair(target)
     pairs.push(pair)
-    frames.push({ phase: 'search', activeLine: L('search down from the square root'), target, pairs: pairs.slice(), message: `${target} = ${pair[0]} x ${pair[1]}, with a gap of ${pair[1] - pair[0]}.` })
+    frames.push({ phase: 'search', pythonLine: 9, activeLine: L('search down from the square root'), target, pairs: pairs.slice(), message: `${target} = ${pair[0]} x ${pair[1]}, with a gap of ${pair[1] - pair[0]}.` })
   }
   const best = pairs[0][1] - pairs[0][0] <= pairs[1][1] - pairs[1][0] ? pairs[0] : pairs[1]
-  frames.push({ phase: 'done', activeLine: L('return the pair'), target: null, pairs, message: `The closest pair is ${best[0]} and ${best[1]}.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return the pair'), target: null, pairs, message: `The closest pair is ${best[0]} and ${best[1]}.` })
   return { input: { num }, result: best, targets, pairs, frames }
 }
 

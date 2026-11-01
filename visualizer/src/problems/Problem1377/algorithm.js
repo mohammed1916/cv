@@ -34,10 +34,10 @@ export function buildTrace(input) {
   prob[1] = 1
   depth[1] = 0
   const queue = [1]
-  const frames = [{ phase: 'start', activeLine: L('set prob[1] to 1'), vertex: 1, prob: [...prob], message: 'The frog starts at vertex 1 with probability 1.' }]
+  const frames = [{ phase: 'start', pythonLine: 9, activeLine: L('set prob[1] to 1'), vertex: 1, prob: [...prob], message: 'The frog starts at vertex 1 with probability 1.' }]
   for (let head = 0; head < queue.length; head++) {
     const v = queue[head]
-    frames.push({ phase: 'visit', activeLine: L('take vertex v'), vertex: v, prob: [...prob], message: `The frog reaches vertex ${v} at time ${depth[v]} with probability ${prob[v].toFixed(4)}.` })
+    frames.push({ phase: 'visit', pythonLine: 12, activeLine: L('take vertex v'), vertex: v, prob: [...prob], message: `The frog reaches vertex ${v} at time ${depth[v]} with probability ${prob[v].toFixed(4)}.` })
     const children = adj[v].filter(u => u !== parent[v])
     for (const u of children) {
       parent[u] = v
@@ -46,14 +46,14 @@ export function buildTrace(input) {
       queue.push(u)
     }
     if (children.length > 0) {
-      frames.push({ phase: 'split', activeLine: L('each child gets'), vertex: v, prob: [...prob], message: `Vertex ${v} splits its probability over ${children.length} unvisited child(ren).` })
+      frames.push({ phase: 'split', pythonLine: 17, activeLine: L('each child gets'), vertex: v, prob: [...prob], message: `Vertex ${v} splits its probability over ${children.length} unvisited child(ren).` })
     }
   }
   const hasChildren = adj[target].some(u => u !== parent[target])
   const counted = depth[target] === t || (depth[target] < t && !hasChildren)
   const result = counted ? prob[target] : 0
-  frames.push({ phase: 'check', activeLine: L('if depth[target]'), vertex: target, prob: [...prob], message: `Vertex ${target} is reached at time ${depth[target]}, and the question asks about time ${t}.` })
-  frames.push({ phase: 'done', activeLine: L(counted ? 'return prob[target]' : 'return 0'), vertex: target, prob: [...prob], message: `Probability at ${target}: ${result.toFixed(6)}.` })
+  frames.push({ phase: 'check', pythonLine: 20, activeLine: L('if depth[target]'), vertex: target, prob: [...prob], message: `Vertex ${target} is reached at time ${depth[target]}, and the question asks about time ${t}.` })
+  frames.push({ phase: 'done', pythonLine: counted ? 21 : 22, activeLine: L(counted ? 'return prob[target]' : 'return 0'), vertex: target, prob: [...prob], message: `Probability at ${target}: ${result.toFixed(6)}.` })
   return { input, n, edges, t, target, result, frames }
 }
 

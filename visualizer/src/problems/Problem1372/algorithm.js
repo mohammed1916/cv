@@ -22,7 +22,7 @@ export function buildTrace({ tree }) {
   const root = treeFromLevelOrder(tree)
   let best = 0
   const runs = {}
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), current: null, runs: {}, best: 0, message: 'Start with a best length of 0; a single node has no edges.' }]
+  const frames = [{ phase: 'start', pythonLine: 26, activeLine: L('set best to zero'), current: null, runs: {}, best: 0, message: 'Start with a best length of 0; a single node has no edges.' }]
   const walk = node => {
     if (!node) return null
     const leftInfo = walk(node.left)
@@ -31,11 +31,11 @@ export function buildTrace({ tree }) {
     const rightRun = rightInfo ? 1 + rightInfo.leftRun : 0
     runs[node.id] = { leftRun, rightRun }
     best = Math.max(best, leftRun, rightRun)
-    frames.push({ phase: 'measure', activeLine: L('set leftRun of v'), current: node.id, runs: { ...runs }, best, message: `Node ${node.value}: a zigzag starting left has ${leftRun} edges, starting right has ${rightRun}.` })
+    frames.push({ phase: 'measure', pythonLine: 36, activeLine: L('set leftRun of v'), current: node.id, runs: { ...runs }, best, message: `Node ${node.value}: a zigzag starting left has ${leftRun} edges, starting right has ${rightRun}.` })
     return { leftRun, rightRun }
   }
   walk(root)
-  frames.push({ phase: 'done', activeLine: L('return best'), current: null, runs: { ...runs }, best, message: `Longest zigzag path: ${best} edges.` })
+  frames.push({ phase: 'done', pythonLine: 40, activeLine: L('return best'), current: null, runs: { ...runs }, best, message: `Longest zigzag path: ${best} edges.` })
   return { input: { tree }, root, result: best, frames }
 }
 

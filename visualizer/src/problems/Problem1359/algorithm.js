@@ -22,13 +22,13 @@ export function buildTrace({ n }) {
   const values = Array(n + 1).fill('–')
   let ways = 1
   values[0] = 1
-  const frames = [{ phase: 'start', k: 0, dp: [...values], activeLine: L('set ways to 1'), message: 'With no orders there is exactly one (empty) valid sequence.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, k: 0, dp: [...values], activeLine: L('set ways to 1'), message: 'With no orders there is exactly one (empty) valid sequence.' }]
   for (let k = 1; k <= n; k++) {
     ways = (ways * k * (2 * k - 1)) % MOD
     values[k] = ways
-    frames.push({ phase: 'order', k, dp: [...values], activeLine: L('multiply ways by'), message: `Order ${k}: the pickup has ${2 * k - 1} gaps and the delivery has ${k * (2 * k - 1)} placements in total, so the count becomes ${ways}.` })
+    frames.push({ phase: 'order', pythonLine: 5, k, dp: [...values], activeLine: L('multiply ways by'), message: `Order ${k}: the pickup has ${2 * k - 1} gaps and the delivery has ${k * (2 * k - 1)} placements in total, so the count becomes ${ways}.` })
   }
-  frames.push({ phase: 'done', k: n, dp: [...values], activeLine: L('return ways'), result: ways, message: `There are ${ways} valid pickup and delivery orders for ${n} orders.` })
+  frames.push({ phase: 'done', pythonLine: 6, k: n, dp: [...values], activeLine: L('return ways'), result: ways, message: `There are ${ways} valid pickup and delivery orders for ${n} orders.` })
   return { input: { n }, result: ways, frames }
 }
 
