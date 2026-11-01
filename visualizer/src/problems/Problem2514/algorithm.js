@@ -18,7 +18,7 @@ const fact = n => {
 export function buildTrace({ s }) {
   const words = s.split(' ')
   const factors = []
-  const frames = [{ phase: 'start', activeLine: L('set answer to one'), word: -1, total: 1, message: 'Each word is rearranged on its own, and the choices multiply.' }]
+  const frames = [{ phase: 'start', activeLine: L('set answer to one'), pythonLine: P('answer = 1'), word: -1, total: 1, message: 'Each word is rearranged on its own, and the choices multiply.' }]
   let answer = 1n
   words.forEach((word, i) => {
     const counts = {}
@@ -27,10 +27,10 @@ export function buildTrace({ s }) {
     for (const c of Object.values(counts)) ways /= fact(c)
     answer = (answer * ways) % MOD
     factors.push(String(ways))
-    frames.push({ phase: 'word', activeLine: L('multiply answer by ways'), word: i, total: Number(answer), message: `"${word}" has ${ways} distinct arrangements.` })
+    frames.push({ phase: 'word', activeLine: L('multiply answer by ways'), pythonLine: P('answer = answer * ways'), word: i, total: Number(answer), message: `"${word}" has ${ways} distinct arrangements.` })
   })
   const result = Number(answer)
-  frames.push({ phase: 'done', activeLine: L('return answer'), word: words.length - 1, total: result, message: `Distinct anagrams: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), word: words.length - 1, total: result, message: `Distinct anagrams: ${result}.` })
   return { input: { s }, result, frames, words, factors }
 }
 
@@ -60,3 +60,5 @@ def count_anagrams(s):
         answer = answer * ways % MOD
     return answer
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

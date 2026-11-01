@@ -24,15 +24,15 @@ export function buildTrace({ divisor1, divisor2, uniqueCnt1, uniqueCnt2 }) {
   let lo = 1
   let hi = 4 * total + 4
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, counts: counts(hi), message: `The largest value lies between ${lo} and ${hi}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set low to 1'), pythonLine: P('low, high = 1, 4'), lo, hi, mid: null, verdict: null, counts: counts(hi), message: `The largest value lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const verdict = fits(mid)
-    frames.push({ phase: 'probe', activeLine: L('if each set has enough numbers'), lo, hi, mid, verdict, counts: counts(mid), message: `Limit ${mid}: set one can use ${counts(mid).free1}, set two ${counts(mid).free2}, both together ${counts(mid).freeBoth}. ${verdict ? 'Enough.' : 'Not enough.'}` })
+    frames.push({ phase: 'probe', activeLine: L('if each set has enough numbers'), pythonLine: P('if fits(mid)'), lo, hi, mid, verdict, counts: counts(mid), message: `Limit ${mid}: set one can use ${counts(mid).free1}, set two ${counts(mid).free2}, both together ${counts(mid).freeBoth}. ${verdict ? 'Enough.' : 'Not enough.'}` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, counts: counts(lo), message: `Smallest possible maximum: ${lo}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: P('return low'), lo, hi: lo, mid: null, verdict: null, counts: counts(lo), message: `Smallest possible maximum: ${lo}.` })
   return { input: { divisor1, divisor2, uniqueCnt1, uniqueCnt2 }, domain, result: lo, frames }
 }
 
@@ -76,3 +76,5 @@ export const python = `def minimize_set_maximum(divisor1, divisor2, uniqueCnt1, 
             low = mid + 1
     return low
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

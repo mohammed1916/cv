@@ -28,20 +28,20 @@ const factorSum = x => {
 
 export function buildTrace({ n }) {
   const chain = [n]
-  const frames = [{ phase: 'start', activeLine: L('let current be n'), index: 0, chain: [...chain], message: `Start with ${n}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let current be n'), pythonLine: P('current = n'), index: 0, chain: [...chain], message: `Start with ${n}.` }]
   let current = n
   for (;;) {
     const s = factorSum(current)
     if (s === current) {
-      frames.push({ phase: 'fixed', activeLine: L('if s equals current'), index: chain.length - 1, chain: [...chain], message: `${current} is the sum of its own prime factors, so it no longer changes.` })
+      frames.push({ phase: 'fixed', activeLine: L('if s equals current'), pythonLine: P('if s == current'), index: chain.length - 1, chain: [...chain], message: `${current} is the sum of its own prime factors, so it no longer changes.` })
       break
     }
-    frames.push({ phase: 'replace', activeLine: L('let s be the sum'), index: chain.length - 1, chain: [...chain], message: `Replace ${current} with ${s}.` })
+    frames.push({ phase: 'replace', activeLine: L('let s be the sum'), pythonLine: P('s = prime_factor_sum(current)'), index: chain.length - 1, chain: [...chain], message: `Replace ${current} with ${s}.` })
     current = s
     chain.push(current)
-    frames.push({ phase: 'replace', activeLine: L('set current to s'), index: chain.length - 1, chain: [...chain], message: `Now the value is ${current}.` })
+    frames.push({ phase: 'replace', activeLine: L('set current to s'), pythonLine: P('current = s'), index: chain.length - 1, chain: [...chain], message: `Now the value is ${current}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return current'), index: chain.length - 1, chain: [...chain], message: `Smallest value: ${current}.` })
+  frames.push({ phase: 'done', activeLine: L('return current'), pythonLine: P('return current'), index: chain.length - 1, chain: [...chain], message: `Smallest value: ${current}.` })
   return { input: { n }, chain, result: current, frames }
 }
 
@@ -65,3 +65,5 @@ export const python = `def smallest_fixed_value(n):
             return current
         current = s
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

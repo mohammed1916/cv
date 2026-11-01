@@ -12,9 +12,9 @@ export function buildTrace(input) {
   const n = nums1.length
   const conflicts = []
   for (let i = 0; i < n; i++) if (nums1[i] === nums2[i]) conflicts.push(i)
-  const frames = [{ phase: 'start', activeLine: L('collect the indices where'), index: -1, cost: 0, extra: [], message: `${conflicts.length} indices clash (equal values at the same position).` }]
+  const frames = [{ phase: 'start', activeLine: L('collect the indices where'), pythonLine: P('conflicts = [i'), index: -1, cost: 0, extra: [], message: `${conflicts.length} indices clash (equal values at the same position).` }]
   if (conflicts.length === 0) {
-    frames.push({ phase: 'done', activeLine: L('return the total cost'), index: -1, cost: 0, extra: [], message: 'No clashes, so no swaps are needed.' })
+    frames.push({ phase: 'done', activeLine: L('return the total cost'), pythonLine: P('return 0'), index: -1, cost: 0, extra: [], message: 'No clashes, so no swaps are needed.' })
     return { input, result: 0, frames }
   }
   const counts = new Map()
@@ -24,7 +24,7 @@ export function buildTrace(input) {
   const c = conflicts.length
   let cost = conflicts.reduce((a, b) => a + b, 0)
   const extra = []
-  frames.push({ phase: 'cost', activeLine: L('sum of the clashing indices'), index: -1, cost, extra: [], message: `Swapping the clashing indices among themselves costs ${cost}.` })
+  frames.push({ phase: 'cost', activeLine: L('sum of the clashing indices'), pythonLine: P('cost = sum(conflicts)'), index: -1, cost, extra: [], message: `Swapping the clashing indices among themselves costs ${cost}.` })
   let need = 2 * counts.get(majority) - c
   if (need > 0) {
     for (let j = 0; j < n && need > 0; j++) {
@@ -32,15 +32,15 @@ export function buildTrace(input) {
         extra.push(j)
         cost += j
         need -= 1
-        frames.push({ phase: 'borrow', activeLine: L('borrow the smallest index'), index: j, cost, extra: [...extra], message: `Value ${majority} dominates the clashes, so borrow index ${j} for ${j}. Cost ${cost}.` })
+        frames.push({ phase: 'borrow', activeLine: L('borrow the smallest index'), pythonLine: P('cost += j'), index: j, cost, extra: [...extra], message: `Value ${majority} dominates the clashes, so borrow index ${j} for ${j}. Cost ${cost}.` })
       }
     }
     if (need > 0) {
-      frames.push({ phase: 'done', activeLine: L('return minus one'), index: -1, cost, extra: [...extra], message: 'Not enough free indices to break the dominant value, so the answer is -1.' })
+      frames.push({ phase: 'done', activeLine: L('return minus one'), pythonLine: P('return -1'), index: -1, cost, extra: [...extra], message: 'Not enough free indices to break the dominant value, so the answer is -1.' })
       return { input, result: -1, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the total cost'), index: -1, cost, extra: [...extra], message: `Minimum total cost: ${cost}.` })
+  frames.push({ phase: 'done', activeLine: L('return the total cost'), pythonLine: P('return cost'), index: -1, cost, extra: [...extra], message: `Minimum total cost: ${cost}.` })
   return { input, result: cost, frames }
 }
 
@@ -78,3 +78,5 @@ export const python = `def min_unequal_cost(nums1, nums2):
         return -1
     return cost
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

@@ -27,24 +27,24 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ n, queries }) {
   const count = 2 ** n - 1
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('let answers be'), nodes: [], message: `Perfect binary tree with ${count} nodes, labelled 1 at the root.` }]
+  const frames = [{ phase: 'start', activeLine: L('let answers be'), pythonLine: P('answers = []'), nodes: [], message: `Perfect binary tree with ${count} nodes, labelled 1 at the root.` }]
   for (const [a0, b0] of queries) {
     let a = a0
     let b = b0
     let steps = 0
     const path = [a, b]
-    frames.push({ phase: 'query', activeLine: L('for each query'), nodes: [a, b], message: `Connect ${a} and ${b}.` })
+    frames.push({ phase: 'query', activeLine: L('for each query'), pythonLine: P('for a, b in queries'), nodes: [a, b], message: `Connect ${a} and ${b}.` })
     while (a !== b) {
       if (a > b) a = Math.floor(a / 2)
       else b = Math.floor(b / 2)
       steps += 1
       path.push(a, b)
-      frames.push({ phase: 'climb', activeLine: L('move the larger'), nodes: [a, b], message: `Climb to ${a} and ${b}; ${steps} step(s) so far.` })
+      frames.push({ phase: 'climb', activeLine: L('move the larger'), pythonLine: P('if a > b'), nodes: [a, b], message: `Climb to ${a} and ${b}; ${steps} step(s) so far.` })
     }
     answers.push(steps + 1)
-    frames.push({ phase: 'answer', activeLine: L('append steps plus one'), nodes: [a], message: `The cycle has ${steps} + 1 = ${steps + 1} node(s).` })
+    frames.push({ phase: 'answer', activeLine: L('append steps plus one'), pythonLine: P('answers.append(steps + 1)'), nodes: [a], message: `The cycle has ${steps} + 1 = ${steps + 1} node(s).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), nodes: [], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), nodes: [], message: `Answers: [${answers.join(', ')}].` })
   return { input: { n, queries }, count, result: answers, frames }
 }
 
@@ -61,3 +61,5 @@ export const python = `def cycle_length_queries(n, queries):
         answers.append(steps + 1)
     return answers
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

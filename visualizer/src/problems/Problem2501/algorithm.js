@@ -11,27 +11,27 @@ export function buildTrace(input) {
   const { nums } = input
   const present = new Set(nums)
   const setMap = () => [{ name: 'present', keyLabel: 'value', valueLabel: '', isSet: true, entries: [...present].map(v => [v]) }]
-  const frames = [{ phase: 'start', activeLine: L('present = set'), chain: [], maps: setMap(), ops: [], result: -1, message: 'Every value is in the set. From each value, follow squares while they stay in the set.' }]
+  const frames = [{ phase: 'start', activeLine: L('present = set'), pythonLine: P('present = set(nums)'), chain: [], maps: setMap(), ops: [], result: -1, message: 'Every value is in the set. From each value, follow squares while they stay in the set.' }]
   let best = -1
   for (const x of [...present].sort((a, b) => a - b)) {
     let length = 1
     let cur = x
     const chain = [x]
-    frames.push({ phase: 'start', activeLine: L('for each value x'), chain: [...chain], maps: setMap(), ops: [], result: best, message: `Start a chain at ${x}.` })
+    frames.push({ phase: 'start', activeLine: L('for each value x'), pythonLine: P('for x in sorted(present)'), chain: [...chain], maps: setMap(), ops: [], result: best, message: `Start a chain at ${x}.` })
     while (present.has(cur * cur)) {
       cur = cur * cur
       length++
       chain.push(cur)
-      frames.push({ phase: 'extend', activeLine: L('cur = cur times cur'), chain: [...chain], maps: setMap(),
+      frames.push({ phase: 'extend', activeLine: L('cur = cur times cur'), pythonLine: P('cur = cur * cur'), chain: [...chain], maps: setMap(),
         ops: [{ map: 'present', type: 'lookup', via: 'has', key: cur, hit: true, hitNote: `${cur} is in the set, so the chain grows`, missNote: 'not in the set' }],
         result: best, message: `${cur} is in the set. The chain is now ${chain.join(', ')}.` })
     }
     if (length >= 2) {
       best = Math.max(best, length)
-      frames.push({ phase: 'record', activeLine: L('set best to the larger'), chain: [...chain], maps: setMap(), ops: [], result: best, message: `A chain of ${length} starts at ${x}. Best so far: ${best}.` })
+      frames.push({ phase: 'record', activeLine: L('set best to the larger'), pythonLine: P('best = max(best, length)'), chain: [...chain], maps: setMap(), ops: [], result: best, message: `A chain of ${length} starts at ${x}. Best so far: ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), chain: [], maps: setMap(), ops: [], result: best, message: best === -1 ? 'No chain has two or more values, so the answer is -1.' : `Longest square streak: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), chain: [], maps: setMap(), ops: [], result: best, message: best === -1 ? 'No chain has two or more values, so the answer is -1.' : `Longest square streak: ${best}.` })
   return { input, result: best, frames }
 }
 
@@ -62,3 +62,5 @@ export const python = `def longest_square_streak(nums):
             best = max(best, length)
     return best
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

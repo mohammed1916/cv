@@ -16,17 +16,17 @@ export function buildTrace(input) {
   const seen = new Map()
   let pairs = 0
   const maps = () => [{ name: 'signatures', keyLabel: 'letter set', valueLabel: 'words so far', isSet: false, entries: [...seen] }]
-  const frames = [{ phase: 'start', activeLine: L('seen = empty map'), index: -1, maps: maps(), ops: [], result: 0, message: 'Two words are similar when they use the same set of letters, however often each letter repeats.' }]
+  const frames = [{ phase: 'start', activeLine: L('seen = empty map'), pythonLine: P('seen = {}'), index: -1, maps: maps(), ops: [], result: 0, message: 'Two words are similar when they use the same set of letters, however often each letter repeats.' }]
   words.forEach((w, i) => {
     const key = keyOf(w)
     const before = seen.get(key) ?? 0
     pairs += before
     seen.set(key, before + 1)
-    frames.push({ phase: 'word', activeLine: L('add one to seen'), index: i, maps: maps(),
+    frames.push({ phase: 'word', activeLine: L('add one to seen'), pythonLine: P('seen[key] = seen.get(key, 0) + 1'), index: i, maps: maps(),
       ops: [{ map: 'signatures', type: before === 0 ? 'insert' : 'update', key, value: before + 1, before: before === 0 ? undefined : before }],
       result: pairs, message: `${w} has letters {${key}}. ${before} earlier word(s) match, so pairs go up by ${before}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return pairs'), index: -1, maps: maps(), ops: [], result: pairs, message: `Similar pairs: ${pairs}.` })
+  frames.push({ phase: 'done', activeLine: L('return pairs'), pythonLine: P('return pairs'), index: -1, maps: maps(), ops: [], result: pairs, message: `Similar pairs: ${pairs}.` })
   return { input, result: pairs, frames }
 }
 
@@ -49,3 +49,5 @@ export const python = `def similar_pairs(words):
         seen[key] = seen.get(key, 0) + 1
     return pairs
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

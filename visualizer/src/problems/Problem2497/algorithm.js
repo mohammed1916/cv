@@ -23,7 +23,7 @@ export function buildTrace(input) {
   const adj = vals.map(() => [])
   for (const [u, v] of edges) { adj[u].push(v); adj[v].push(u) }
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('build the list of neighbours'), index: -1, marked: [], best, message: 'Every node can be the center of a star.' }]
+  const frames = [{ phase: 'start', activeLine: L('build the list of neighbours'), pythonLine: P('adj = [[] for'), index: -1, marked: [], best, message: 'Every node can be the center of a star.' }]
   vals.forEach((value, c) => {
     const ranked = adj[c].slice().sort((x, y) => vals[y] - vals[x])
     let total = value
@@ -36,9 +36,9 @@ export function buildTrace(input) {
       picked.push(nb)
     }
     if (best === null || total > best) best = total
-    frames.push({ phase: 'center', activeLine: L('for each center'), index: c, marked: picked, best, message: `Center ${c} (value ${value}) with ${picked.length} neighbour(s) gives ${total}. Best so far: ${best}.` })
+    frames.push({ phase: 'center', activeLine: L('for each center'), pythonLine: P('for c, value in enumerate'), index: c, marked: picked, best, message: `Center ${c} (value ${value}) with ${picked.length} neighbour(s) gives ${total}. Best so far: ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, marked: [], best, message: `Maximum star sum: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), index: -1, marked: [], best, message: `Maximum star sum: ${best}.` })
   return { input, result: best, frames }
 }
 
@@ -76,3 +76,5 @@ export const python = `def max_star_sum(vals, edges, k):
             best = total
     return best
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

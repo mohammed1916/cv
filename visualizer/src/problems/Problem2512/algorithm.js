@@ -54,10 +54,10 @@ export function buildTrace(input) {
   const heap = []
   const scores = Array(report.length).fill(null)
   let index = -1
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, index, scores: [...scores], heap: heap.map(item => ({ ...item })), message,
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    phase, activeLine, pythonLine, index, scores: [...scores], heap: heap.map(item => ({ ...item })), message,
   })
-  snap('start', L('mark the positive and negative words'), 'Mark the feedback words. The heap starts empty.')
+  snap('start', L('mark the positive and negative words'), 'Mark the feedback words. The heap starts empty.', P('negative = set(negative_feedback)'))
   for (let i = 0; i < report.length; i++) {
     index = i
     let score = 0
@@ -66,23 +66,23 @@ export function buildTrace(input) {
       else if (negative.has(word)) score -= 1
     }
     scores[i] = score
-    snap('score', L('score the student'), `Student ${ids[i]} scores ${score}.`)
+    snap('score', L('score the student'), `Student ${ids[i]} scores ${score}.`, P('score = 0'))
     heap.push({ id: ids[i], score })
     siftUp(heap, heap.length - 1)
-    snap('push', L('push the student'), `Student ${ids[i]} enters the heap.`)
+    snap('push', L('push the student'), `Student ${ids[i]} enters the heap.`, P('heapq.heappush(heap'))
     if (heap.length > k) {
       const removed = heap[0]
       const last = heap.pop()
       if (heap.length) { heap[0] = last; siftDown(heap, 0) }
-      snap('pop', L('remove the weakest'), `The heap holds more than ${k}, so student ${removed.id} (score ${removed.score}) leaves.`)
+      snap('pop', L('remove the weakest'), `The heap holds more than ${k}, so student ${removed.id} (score ${removed.score}) leaves.`, P('heapq.heappop(heap)'))
     }
   }
   index = -1
   const ranked = [...heap].sort((a, b) => b.score - a.score || a.id - b.id)
   heap.splice(0, heap.length, ...ranked)
-  snap('sort', L('sort the heap'), 'Sort the survivors from best to worst, ties by smaller id.')
+  snap('sort', L('sort the heap'), 'Sort the survivors from best to worst, ties by smaller id.', P('ranked = sorted('))
   const result = ranked.map(item => item.id)
-  snap('done', L('return the first k ids'), `Answer: [${result.join(', ')}].`)
+  snap('done', L('return the first k ids'), `Answer: [${result.join(', ')}].`, P('return [-item'))
   return { input, result, frames }
 }
 
@@ -115,3 +115,5 @@ def top_students(positive_feedback, negative_feedback, report, student_id, k):
     ranked = sorted(heap, key=lambda item: (-item[0], -item[1]))
     return [-item[1] for item in ranked]
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
