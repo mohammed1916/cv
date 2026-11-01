@@ -43,7 +43,7 @@ export function buildTrace({ grid, move_cost }) {
     if (r === done.length && c < partial.length) return partial[c]
     return '·'
   }))
-  const frames = [{ phase: 'start', activeLine: L('set best to the values'), row: 0, col: -1, table: view(), message: `Row 0 starts the path costs: ${grid[0].join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to the values'), pythonLine: 3, row: 0, col: -1, table: view(), message: `Row 0 starts the path costs: ${grid[0].join(', ')}.` }]
   for (let r = 1; r < m; r++) {
     const prev = done[r - 1]
     const next = []
@@ -51,12 +51,12 @@ export function buildTrace({ grid, move_cost }) {
       let smallest = Infinity
       for (let k = 0; k < n; k++) smallest = Math.min(smallest, prev[k] + move_cost[grid[r - 1][k]][c])
       next.push(smallest + grid[r][c])
-      frames.push({ phase: 'cell', activeLine: L('find the smallest'), row: r, col: c, table: view(next), message: `Cell (${r}, ${c}): cheapest arrival ${smallest} plus its value ${grid[r][c]}.` })
+      frames.push({ phase: 'cell', activeLine: L('find the smallest'), pythonLine: 7, row: r, col: c, table: view(next), message: `Cell (${r}, ${c}): cheapest arrival ${smallest} plus its value ${grid[r][c]}.` })
     }
     done.push(next)
   }
   const result = Math.min(...done[m - 1])
-  frames.push({ phase: 'done', activeLine: L('return the smallest value in best'), row: m - 1, col: -1, table: view(), message: `Minimum path cost: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the smallest value in best'), pythonLine: 10, row: m - 1, col: -1, table: view(), message: `Minimum path cost: ${result}.` })
   return { input: { grid, move_cost }, grid, move_cost, result, frames }
 }
 

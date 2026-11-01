@@ -18,16 +18,16 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { brackets, income } = input
-  const frames = [{ phase: 'start', activeLine: L('set tax to 0'), index: -1, taxed: 0, tax: 0, message: `Income ${income} is taxed one bracket at a time.` }]
+  const frames = [{ phase: 'start', activeLine: L('set tax to 0'), pythonLine: 2, index: -1, taxed: 0, tax: 0, message: `Income ${income} is taxed one bracket at a time.` }]
   let tax = 0
   let previous = 0
   brackets.forEach(([upper, percent], index) => {
     const taxed = Math.max(0, Math.min(income, upper) - previous)
     tax += taxed * percent / 100
-    frames.push({ phase: 'bracket', activeLine: L('add taxed times percent'), index, taxed, tax, message: `Bracket ${index} covers income up to ${upper} at ${percent}%. ${taxed} is taxed here, so tax is ${tax}.` })
+    frames.push({ phase: 'bracket', activeLine: L('add taxed times percent'), pythonLine: 6, index, taxed, tax, message: `Bracket ${index} covers income up to ${upper} at ${percent}%. ${taxed} is taxed here, so tax is ${tax}.` })
     previous = upper
   })
-  frames.push({ phase: 'done', activeLine: L('return tax'), index: -1, taxed: 0, tax, message: `Total tax is ${tax}.` })
+  frames.push({ phase: 'done', activeLine: L('return tax'), pythonLine: 8, index: -1, taxed: 0, tax, message: `Total tax is ${tax}.` })
   return { input, result: tax, frames }
 }
 

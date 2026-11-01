@@ -16,13 +16,13 @@ export function buildTrace(input) {
     columns.set(key, (columns.get(key) ?? 0) + 1)
   }
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('build a count of each column'), row: -1, matched: 0, total, message: `Read each column top to bottom and count the copies of each one.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('build a count of each column'), row: -1, matched: 0, total, message: `Read each column top to bottom and count the copies of each one.` }]
   for (let r = 0; r < n; r++) {
     const matched = columns.get(JSON.stringify(grid[r])) ?? 0
     total += matched
-    frames.push({ phase: 'row', activeLine: L('look up how many columns'), row: r, matched, total, message: `Row ${r} equals ${matched} column${matched === 1 ? '' : 's'}. Total: ${total}.` })
+    frames.push({ phase: 'row', pythonLine: 9, activeLine: L('look up how many columns'), row: r, matched, total, message: `Row ${r} equals ${matched} column${matched === 1 ? '' : 's'}. Total: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), row: -1, matched: 0, total, message: `${total} equal row and column pairs.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return total'), row: -1, matched: 0, total, message: `${total} equal row and column pairs.` })
   return { input, result: total, frames }
 }
 

@@ -16,11 +16,11 @@ const setBits = v => {
 export function buildTrace({ nums, k }) {
   const distinct = [...new Set(nums)]
   const tally = Array(32).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('count excellent pairs'), tally: [...tally], pair: null, total: 0, message: `Keep the ${distinct.length} distinct value${distinct.length === 1 ? '' : 's'} of nums.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('count excellent pairs'), tally: [...tally], pair: null, total: 0, message: `Keep the ${distinct.length} distinct value${distinct.length === 1 ? '' : 's'} of nums.` }]
   for (const value of distinct) {
     tally[setBits(value)]++
   }
-  frames.push({ phase: 'tally', activeLine: L('tally how many distinct values'), tally: [...tally], pair: null, total: 0, message: 'Group the distinct values by how many bits are set.' })
+  frames.push({ phase: 'tally', pythonLine: 5, activeLine: L('tally how many distinct values'), tally: [...tally], pair: null, total: 0, message: 'Group the distinct values by how many bits are set.' })
 
   let total = 0
   for (let x = 0; x < 32; x++) {
@@ -28,10 +28,10 @@ export function buildTrace({ nums, k }) {
       if (x + y < k) continue
       if (tally[x] * tally[y] === 0) continue
       total += tally[x] * tally[y]
-      frames.push({ phase: 'pair', activeLine: L('add tally[x] times tally[y]'), tally: [...tally], pair: [x, y], total, message: `${tally[x]} value(s) with ${x} bits paired with ${tally[y]} with ${y} bits add ${tally[x] * tally[y]} ordered pairs.` })
+      frames.push({ phase: 'pair', pythonLine: 10, activeLine: L('add tally[x] times tally[y]'), tally: [...tally], pair: [x, y], total, message: `${tally[x]} value(s) with ${x} bits paired with ${tally[y]} with ${y} bits add ${tally[x] * tally[y]} ordered pairs.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the total'), tally: [...tally], pair: null, total, message: `Excellent pairs: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the total'), tally: [...tally], pair: null, total, message: `Excellent pairs: ${total}.` })
   return { input: { nums, k }, result: total, frames }
 }
 

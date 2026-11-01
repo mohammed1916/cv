@@ -19,34 +19,34 @@ export function buildTrace(input) {
   let right = ''
   const results = []
   const ops = []
-  const frames = [{ phase: 'start', activeLine: L('set left and right to empty'), op: -1, left, right, message: 'The text is empty and the cursor is at the start.' }]
+  const frames = [{ phase: 'start', activeLine: L('set left and right to empty'), pythonLine: 2, op: -1, left, right, message: 'The text is empty and the cursor is at the start.' }]
   operations.forEach(([name, arg], idx) => {
     let returned
     if (name === 'addText') {
       left += arg
-      frames.push({ phase: 'add', activeLine: L('append the text to left'), op: idx, left, right, message: `Insert "${arg}" at the cursor.` })
+      frames.push({ phase: 'add', activeLine: L('append the text to left'), pythonLine: 8, op: idx, left, right, message: `Insert "${arg}" at the cursor.` })
     } else if (name === 'deleteText') {
       const d = Math.min(arg, left.length)
       left = left.slice(0, left.length - d)
       returned = d
-      frames.push({ phase: 'delete', activeLine: L('delete up to k letters'), op: idx, left, right, message: `Delete ${d} letter(s) left of the cursor.` })
+      frames.push({ phase: 'delete', activeLine: L('delete up to k letters'), pythonLine: 12, op: idx, left, right, message: `Delete ${d} letter(s) left of the cursor.` })
     } else if (name === 'cursorLeft') {
       const d = Math.min(arg, left.length)
       right = left.slice(left.length - d) + right
       left = left.slice(0, left.length - d)
       returned = left.slice(-10)
-      frames.push({ phase: 'move', activeLine: L('move up to k letters from left to right'), op: idx, left, right, message: `Move the cursor left ${d} place(s).` })
+      frames.push({ phase: 'move', activeLine: L('move up to k letters from left to right'), pythonLine: 17, op: idx, left, right, message: `Move the cursor left ${d} place(s).` })
     } else {
       const d = Math.min(arg, right.length)
       left += right.slice(0, d)
       right = right.slice(d)
       returned = left.slice(-10)
-      frames.push({ phase: 'move', activeLine: L('move up to k letters from right to left'), op: idx, left, right, message: `Move the cursor right ${d} place(s).` })
+      frames.push({ phase: 'move', activeLine: L('move up to k letters from right to left'), pythonLine: 22, op: idx, left, right, message: `Move the cursor right ${d} place(s).` })
     }
     if (name !== 'addText') results.push(returned)
     ops.push({ name, args: [arg], returned })
   })
-  frames.push({ phase: 'done', activeLine: L('return results'), op: operations.length, left, right, message: `Final text: ${left + right || '(empty)'}.` })
+  frames.push({ phase: 'done', activeLine: L('return results'), pythonLine: 24, op: operations.length, left, right, message: `Final text: ${left + right || '(empty)'}.` })
   return { input, result: results, ops, frames }
 }
 

@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { spells, potions, success } = input
   const ordered = [...potions].sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort a copy of the potions'), spell: -1, need: null, lo: 0, hi: ordered.length, mid: -1, count: null, sorted: ordered, message: 'Sort a copy of the potions so each spell can use binary search.' }]
+  const frames = [{ phase: 'sort', activeLine: L('sort a copy of the potions'), pythonLine: 2, spell: -1, need: null, lo: 0, hi: ordered.length, mid: -1, count: null, sorted: ordered, message: 'Sort a copy of the potions so each spell can use binary search.' }]
   const answer = []
   spells.forEach((spell, index) => {
     const need = Math.floor((success + spell - 1) / spell)
@@ -19,15 +19,15 @@ export function buildTrace(input) {
     let hi = ordered.length
     while (lo < hi) {
       const mid = (lo + hi) >> 1
-      frames.push({ phase: 'search', activeLine: L('binary search the sorted potions'), spell: index, need, lo, hi, mid, count: null, sorted: ordered, message: `Spell ${spell} needs a potion of at least ${need}. Compare with potion ${ordered[mid]}.` })
+      frames.push({ phase: 'search', activeLine: L('binary search the sorted potions'), pythonLine: 10, spell: index, need, lo, hi, mid, count: null, sorted: ordered, message: `Spell ${spell} needs a potion of at least ${need}. Compare with potion ${ordered[mid]}.` })
       if (ordered[mid] >= need) hi = mid
       else lo = mid + 1
     }
     const count = ordered.length - lo
     answer.push(count)
-    frames.push({ phase: 'count', activeLine: L('add the number of potions'), spell: index, need, lo, hi: ordered.length, mid: -1, count, sorted: ordered, message: `Spell ${spell} succeeds with ${count} potion(s).` })
+    frames.push({ phase: 'count', activeLine: L('add the number of potions'), pythonLine: 14, spell: index, need, lo, hi: ordered.length, mid: -1, count, sorted: ordered, message: `Spell ${spell} succeeds with ${count} potion(s).` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the counts'), spell: -1, need: null, lo: 0, hi: 0, mid: -1, count: null, sorted: ordered, message: `Counts: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the counts'), pythonLine: 15, spell: -1, need: null, lo: 0, hi: 0, mid: -1, count: null, sorted: ordered, message: `Counts: [${answer.join(', ')}].` })
   return { input, result: answer, frames }
 }
 

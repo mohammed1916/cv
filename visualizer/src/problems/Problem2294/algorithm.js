@@ -13,18 +13,18 @@ export function buildTrace(input) {
   const sorted = [...nums].sort((a, b) => a - b)
   let groups = 1
   let start = sorted[0]
-  const frames = [{ phase: 'start', activeLine: L('set groups to 1'), value: sorted[0], groups, start, message: `Start the first group at ${start}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set groups to 1'), pythonLine: 3, value: sorted[0], groups, start, message: `Start the first group at ${start}.` }]
   for (let i = 1; i < sorted.length; i++) {
     const value = sorted[i]
     if (value - start > k) {
       groups += 1
       start = value
-      frames.push({ phase: 'open', activeLine: L('open a new group'), value, groups, start, message: `${value} is more than ${k} above the group start; open group ${groups} at ${value}.` })
+      frames.push({ phase: 'open', activeLine: L('open a new group'), pythonLine: 7, value, groups, start, message: `${value} is more than ${k} above the group start; open group ${groups} at ${value}.` })
     } else {
-      frames.push({ phase: 'join', activeLine: L('add value to the current group'), value, groups, start, message: `${value} is within ${k} of ${start}; it joins the current group.` })
+      frames.push({ phase: 'join', activeLine: L('add value to the current group'), pythonLine: 6, value, groups, start, message: `${value} is within ${k} of ${start}; it joins the current group.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return groups'), value: -1, groups, start, message: `${groups} groups are needed.` })
+  frames.push({ phase: 'done', activeLine: L('return groups'), pythonLine: 9, value: -1, groups, start, message: `${groups} groups are needed.` })
   return { input, result: groups, frames }
 }
 

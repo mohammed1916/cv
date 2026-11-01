@@ -10,17 +10,17 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { s } = input
   const seen = new Set()
-  const frames = [{ phase: 'start', activeLine: L('seen = empty set'), index: -1, maps: [], ops: [], result: null, seen: [], message: 'Read the letters from left to right and remember each one.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('seen = empty set'), index: -1, maps: [], ops: [], result: null, seen: [], message: 'Read the letters from left to right and remember each one.' }]
   const setMap = () => [{ name: 'seen', keyLabel: 'letter', valueLabel: '', isSet: true, entries: [...seen].map(c => [c]) }]
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
     if (seen.has(c)) {
-      frames.push({ phase: 'match', activeLine: L('return c'), index: i, maps: setMap(), ops: [{ map: 'seen', type: 'lookup', via: 'has', key: c, hit: true, hitNote: 'this letter was seen earlier, so this is its second copy', missNote: 'first copy' }],
+      frames.push({ phase: 'match', pythonLine: 5, activeLine: L('return c'), index: i, maps: setMap(), ops: [{ map: 'seen', type: 'lookup', via: 'has', key: c, hit: true, hitNote: 'this letter was seen earlier, so this is its second copy', missNote: 'first copy' }],
         result: c, seen: [...seen], message: `${c} at index ${i} is already seen. It is the first letter to appear twice.` })
       return { input, result: c, frames }
     }
     seen.add(c)
-    frames.push({ phase: 'scan', activeLine: L('add c to seen'), index: i, maps: setMap(), ops: [{ map: 'seen', type: 'insert', key: c }], result: null, seen: [...seen], message: `${c} at index ${i} is new. Add it to the seen set.` })
+    frames.push({ phase: 'scan', pythonLine: 6, activeLine: L('add c to seen'), index: i, maps: setMap(), ops: [{ map: 'seen', type: 'insert', key: c }], result: null, seen: [...seen], message: `${c} at index ${i} is new. Add it to the seen set.` })
   }
   throw new Error('No letter appears twice.')
 }

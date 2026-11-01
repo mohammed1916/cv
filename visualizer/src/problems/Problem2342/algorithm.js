@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const best = new Map()
   let answer = -1
   const maps = () => [{ name: 'largest', keyLabel: 'digit sum', valueLabel: 'largest number', isSet: false, entries: [...best] }]
-  const frames = [{ phase: 'start', activeLine: L('best = empty map'), maps: maps(), ops: [], result: answer, message: 'Track the largest number seen for each digit sum. Only the largest one can make the best pair with a later number.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('best = empty map'), maps: maps(), ops: [], result: answer, message: 'Track the largest number seen for each digit sum. Only the largest one can make the best pair with a later number.' }]
   for (const n of nums) {
     const s = digitSum(n)
     if (best.has(s)) {
@@ -23,18 +23,18 @@ export function buildTrace(input) {
       answer = Math.max(answer, candidate)
       const before = partner
       best.set(s, Math.max(partner, n))
-      frames.push({ phase: 'pair', activeLine: L('set answer to the larger'), maps: maps(),
+      frames.push({ phase: 'pair', pythonLine: 7, activeLine: L('set answer to the larger'), maps: maps(),
         ops: [{ map: 'largest', type: 'lookup', via: 'get', key: s, hit: true, value: before, hitNote: 'an earlier number with this digit sum is the best partner', missNote: 'no earlier number has this digit sum' },
           { map: 'largest', type: 'update', key: s, value: best.get(s), before }],
         result: answer, message: `${n} has digit sum ${s}, like ${partner}. The pair sums to ${candidate}. Best pair so far: ${answer}.` })
     } else {
       best.set(s, n)
-      frames.push({ phase: 'scan', activeLine: L('set best of s to n'), maps: maps(),
+      frames.push({ phase: 'scan', pythonLine: 10, activeLine: L('set best of s to n'), maps: maps(),
         ops: [{ map: 'largest', type: 'insert', key: s, value: n }], result: answer,
         message: `${n} is the first number with digit sum ${s}, so it is stored and no pair is formed yet.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), maps: maps(), ops: [], result: answer, message: answer === -1 ? 'No two numbers share a digit sum, so the answer is -1.' : `Largest pair sum: ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return answer'), maps: maps(), ops: [], result: answer, message: answer === -1 ? 'No two numbers share a digit sum, so the answer is -1.' : `Largest pair sum: ${answer}.` })
   return { input, result: answer, frames }
 }
 

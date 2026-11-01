@@ -12,19 +12,19 @@ export function buildTrace(input) {
   const { rolls, k } = input
   let seen = new Set()
   let blocks = 0
-  const frames = [{ phase: 'start', activeLine: L('set blocks to zero'), index: -1, seen: [], blocks, message: `Cut the rolls into blocks. A block ends once every face from 1 to ${k} has appeared.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set blocks to zero'), index: -1, seen: [], blocks, message: `Cut the rolls into blocks. A block ends once every face from 1 to ${k} has appeared.` }]
   rolls.forEach((roll, i) => {
     seen.add(roll)
     if (seen.size === k) {
       blocks += 1
-      frames.push({ phase: 'block', activeLine: L('clear seen'), index: i, seen: [...seen], blocks, message: `Roll ${i}: block ${blocks} is complete, so the next block starts fresh.` })
+      frames.push({ phase: 'block', pythonLine: 8, activeLine: L('clear seen'), index: i, seen: [...seen], blocks, message: `Roll ${i}: block ${blocks} is complete, so the next block starts fresh.` })
       seen = new Set()
     } else {
-      frames.push({ phase: 'roll', activeLine: L('add the roll to seen'), index: i, seen: [...seen], blocks, message: `Roll ${roll} joins the current block. ${seen.size} of ${k} faces seen.` })
+      frames.push({ phase: 'roll', pythonLine: 5, activeLine: L('add the roll to seen'), index: i, seen: [...seen], blocks, message: `Roll ${roll} joins the current block. ${seen.size} of ${k} faces seen.` })
     }
   })
   const result = blocks + 1
-  frames.push({ phase: 'done', activeLine: L('return blocks plus one'), index: -1, seen: [...seen], blocks, message: `Shortest impossible length: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return blocks plus one'), index: -1, seen: [...seen], blocks, message: `Shortest impossible length: ${result}.` })
   return { input, result, frames }
 }
 

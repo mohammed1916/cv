@@ -21,23 +21,23 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ ranks, suits }) {
   const flush = new Set(suits).size === 1
-  const frames = [{ phase: 'start', index: -1, flush: null, most: null, activeLine: L('if every suit is the same'), message: 'Check whether all five cards share a suit.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, index: -1, flush: null, most: null, activeLine: L('if every suit is the same'), message: 'Check whether all five cards share a suit.' }]
   if (flush) {
-    frames.push({ phase: 'flush', index: -1, flush, most: null, activeLine: L('return Flush'), message: 'All five cards share a suit, so the hand is a Flush.' })
-    frames.push({ phase: 'done', index: -1, flush, most: null, activeLine: L('return Flush'), message: 'Result: Flush.' })
+    frames.push({ phase: 'flush', pythonLine: 3, index: -1, flush, most: null, activeLine: L('return Flush'), message: 'All five cards share a suit, so the hand is a Flush.' })
+    frames.push({ phase: 'done', pythonLine: 3, index: -1, flush, most: null, activeLine: L('return Flush'), message: 'Result: Flush.' })
     return { input: { ranks, suits }, result: 'Flush', frames }
   }
-  frames.push({ phase: 'flush', index: -1, flush, most: null, activeLine: L('set most to'), message: 'The suits differ, so the hand cannot be a Flush.' })
+  frames.push({ phase: 'flush', pythonLine: 4, index: -1, flush, most: null, activeLine: L('set most to'), message: 'The suits differ, so the hand cannot be a Flush.' })
   let most = 0
   ranks.forEach((r, i) => {
     most = Math.max(most, ranks.filter(x => x === r).length)
-    frames.push({ phase: 'rank', index: i, flush, most, activeLine: L('set most to'), message: `Card ${i + 1} has rank ${r}; the largest rank group so far is ${most}.` })
+    frames.push({ phase: 'rank', pythonLine: 4, index: i, flush, most, activeLine: L('set most to'), message: `Card ${i + 1} has rank ${r}; the largest rank group so far is ${most}.` })
   })
   let result
   if (most >= 3) result = 'Three of a Kind'
   else if (most === 2) result = 'Pair'
   else result = 'High Card'
-  frames.push({ phase: 'done', index: -1, flush, most, activeLine: L('if most is at least 3'), message: `Largest rank group is ${most}, so the hand is ${result}.` })
+  frames.push({ phase: 'done', pythonLine: (most >= 3 ? 6 : most === 2 ? 8 : 9), index: -1, flush, most, activeLine: L('if most is at least 3'), message: `Largest rank group is ${most}, so the hand is ${result}.` })
   return { input: { ranks, suits }, result, frames }
 }
 

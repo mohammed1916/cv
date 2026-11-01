@@ -15,29 +15,29 @@ export function buildTrace(input) {
   const choice = new Array(n).fill(-1)
   let best = Infinity
   let bestChoice = null
-  const frames = [{ phase: 'start', activeLine: L('set best to infinity'), cookie: -1, child: -1, totals: [...totals], best: null, message: `Share ${n} bags among ${k} children, minimizing the largest total.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to infinity'), pythonLine: 3, cookie: -1, child: -1, totals: [...totals], best: null, message: `Share ${n} bags among ${k} children, minimizing the largest total.` }]
   const give = index => {
     if (index === n) {
       const unfair = Math.max(...totals)
       if (unfair < best) { best = unfair; bestChoice = [...choice] }
-      frames.push({ phase: 'leaf', activeLine: L('keep the smaller unfairness'), cookie: -1, child: -1, totals: [...totals], best, message: `Every bag is handed out. The largest total is ${unfair}.` })
+      frames.push({ phase: 'leaf', activeLine: L('keep the smaller unfairness'), pythonLine: 8, cookie: -1, child: -1, totals: [...totals], best, message: `Every bag is handed out. The largest total is ${unfair}.` })
       return
     }
     for (let child = 0; child < k; child++) {
       if (totals[child] + cookies[index] >= best) {
-        frames.push({ phase: 'prune', activeLine: L('skip this child'), cookie: index, child, totals: [...totals], best, message: `Child ${child} would reach ${totals[child] + cookies[index]}, which cannot beat ${best}.` })
+        frames.push({ phase: 'prune', activeLine: L('skip this child'), pythonLine: 12, cookie: index, child, totals: [...totals], best, message: `Child ${child} would reach ${totals[child] + cookies[index]}, which cannot beat ${best}.` })
         continue
       }
       totals[child] += cookies[index]
       choice[index] = child
-      frames.push({ phase: 'give', activeLine: L('give the cookie to this child'), cookie: index, child, totals: [...totals], best, message: `Bag ${cookies[index]} goes to child ${child}.` })
+      frames.push({ phase: 'give', activeLine: L('give the cookie to this child'), pythonLine: 13, cookie: index, child, totals: [...totals], best, message: `Bag ${cookies[index]} goes to child ${child}.` })
       give(index + 1)
       totals[child] -= cookies[index]
       choice[index] = -1
     }
   }
   give(0)
-  frames.push({ phase: 'done', activeLine: L('return best'), cookie: -1, child: -1, totals: bestChoice ? totals.map(() => 0) : totals, best, message: `The fewest possible largest total is ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 18, cookie: -1, child: -1, totals: bestChoice ? totals.map(() => 0) : totals, best, message: `The fewest possible largest total is ${best}.` })
   return { input, result: best, frames, bestChoice }
 }
 

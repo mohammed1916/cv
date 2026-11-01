@@ -29,7 +29,7 @@ export function buildTrace(data) {
     { name: 'at', keyLabel: 'index', valueLabel: 'number', isSet: false, entries: [...at] },
     { name: 'indices', keyLabel: 'number', valueLabel: 'indices', isSet: false, entries: [...indices].map(([n, set]) => [n, [...set].sort((a, b) => a - b).join(', ')]) },
   ]
-  frames.push({ phase: 'start', activeLine: L('at = empty map'), maps: maps(), ops: [], result: null, message: 'Two tables start empty: one for the number at each index, one for the indices holding each number.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('at = empty map'), maps: maps(), ops: [], result: null, message: 'Two tables start empty: one for the number at each index, one for the indices holding each number.' })
   data.operations.forEach(op => {
     if (op[0] === 'change') {
       const [, index, number] = op
@@ -46,20 +46,20 @@ export function buildTrace(data) {
       indices.set(number, set)
       ops.push({ map: 'at', type: 'update', key: index, value: number, before: undefined })
       results.push(null)
-      frames.push({ phase: 'change', activeLine: L('set at of i to n'), maps: maps(), ops, result: null,
+      frames.push({ phase: 'change', pythonLine: 10, activeLine: L('set at of i to n'), maps: maps(), ops, result: null,
         message: `Index ${index} now holds ${number}. Its set of indices for ${number} now lists ${[...set].sort((a, b) => a - b).join(', ')}.` })
     } else {
       const number = op[1]
       const set = indices.get(number)
       const answer = set && set.size ? Math.min(...set) : -1
       results.push(answer)
-      frames.push({ phase: 'find', activeLine: answer === -1 ? L('return -1') : L('return the smallest index'), maps: maps(),
+      frames.push({ phase: 'find', pythonLine: 16, activeLine: answer === -1 ? L('return -1') : L('return the smallest index'), maps: maps(),
         ops: [{ map: 'indices', type: 'lookup', via: 'get', key: number, hit: answer !== -1, value: set ? [...set].join(', ') : undefined,
           hitNote: 'the set of indices for this number is ready', missNote: 'no index holds this number' }],
         result: answer, message: answer === -1 ? `No index holds ${number}, so the answer is -1.` : `The smallest index holding ${number} is ${answer}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the smallest index'), maps: maps(), ops: [], result: null, message: 'All operations are answered in order.' })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return the smallest index'), maps: maps(), ops: [], result: null, message: 'All operations are answered in order.' })
   return { input: data, result: results, frames }
 }
 

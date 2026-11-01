@@ -36,14 +36,14 @@ export function buildTrace({ foods, cuisines, ratings, operations, arguments: ar
     ;(entries[cuisines[i]] ??= []).push({ r: ratings[i], f })
   })
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('store each food cuisine and rating'), rating: { ...rating }, answer: null, message: 'Each cuisine gets a heap of its foods, keyed by rating.' }]
+  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('store each food cuisine and rating'), rating: { ...rating }, answer: null, message: 'Each cuisine gets a heap of its foods, keyed by rating.' }]
   operations.forEach((op, i) => {
     if (op === 'changeRating') {
       const [food, r] = args[i]
       rating[food] = r
       entries[cuisineOf[food]].push({ r, f: food })
       result.push(null)
-      frames.push({ phase: 'change', activeLine: L('set the rating of that food'), rating: { ...rating }, answer: null, message: `${food} changes to ${r}.` })
+      frames.push({ phase: 'change', pythonLine: 17, activeLine: L('set the rating of that food'), rating: { ...rating }, answer: null, message: `${food} changes to ${r}.` })
     } else {
       const c = args[i][0]
       const live = entries[c].filter(e => rating[e.f] === e.r)
@@ -51,7 +51,7 @@ export function buildTrace({ foods, cuisines, ratings, operations, arguments: ar
       let top = live[0]
       for (const e of live) if (e.r > top.r || (e.r === top.r && e.f < top.f)) top = e
       result.push(top.f)
-      frames.push({ phase: 'query', activeLine: L('answer with the food at the top'), rating: { ...rating }, answer: top.f, message: `Best ${c} food is ${top.f} at ${top.r}.` })
+      frames.push({ phase: 'query', pythonLine: 24, activeLine: L('answer with the food at the top'), rating: { ...rating }, answer: top.f, message: `Best ${c} food is ${top.f} at ${top.r}.` })
     }
   })
   return { input: { foods, cuisines, ratings, operations, arguments: args }, result, frames }

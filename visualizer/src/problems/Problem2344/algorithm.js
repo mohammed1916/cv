@@ -18,17 +18,17 @@ const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
 export function buildTrace({ nums, nums_divide }) {
   const g = nums_divide.reduce((acc, v) => gcd(acc, v), 0)
   const sorted = [...nums].sort((a, b) => a - b)
-  const frames = [{ phase: 'target', activeLine: L('set g to the gcd'), index: -1, g, deletions: 0, message: `The gcd of nums_divide is ${g}.` }]
+  const frames = [{ phase: 'target', pythonLine: 4, activeLine: L('set g to the gcd'), index: -1, g, deletions: 0, message: `The gcd of nums_divide is ${g}.` }]
   let answer = -1
   for (let i = 0; i < sorted.length; i++) {
     if (g % sorted[i] === 0) {
       answer = i
-      frames.push({ phase: 'scan', activeLine: L('if v divides g'), index: i, g, deletions: i, message: `${sorted[i]} divides ${g}. Delete the ${i} smaller value(s).` })
+      frames.push({ phase: 'scan', pythonLine: 8, activeLine: L('if v divides g'), index: i, g, deletions: i, message: `${sorted[i]} divides ${g}. Delete the ${i} smaller value(s).` })
       break
     }
-    frames.push({ phase: 'scan', activeLine: L('add one to deletions'), index: i, g, deletions: i + 1, message: `${sorted[i]} does not divide ${g}. Delete it.` })
+    frames.push({ phase: 'scan', pythonLine: 9, activeLine: L('add one to deletions'), index: i, g, deletions: i + 1, message: `${sorted[i]} does not divide ${g}. Delete it.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), index: -1, g, deletions: answer, message: answer === -1 ? 'No value divides the gcd, so the task is impossible.' : `Minimum deletions: ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: (answer === -1 ? 10 : 8), activeLine: L('return -1'), index: -1, g, deletions: answer, message: answer === -1 ? 'No value divides the gcd, so the task is impossible.' : `Minimum deletions: ${answer}.` })
   return { input: { nums, nums_divide }, result: answer, sorted, frames }
 }
 

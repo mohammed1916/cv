@@ -8,20 +8,20 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   const waiting = new Set()
   let pairs = 0
-  const frames = [{ phase: 'start', activeLine: L('waiting = empty set'), index: -1, waiting: [], pairs: 0, message: 'No values are waiting for a partner yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('waiting = empty set'), index: -1, waiting: [], pairs: 0, message: 'No values are waiting for a partner yet.' }]
   for (let i = 0; i < nums.length; i++) {
     const v = nums[i]
     if (waiting.has(v)) {
       waiting.delete(v)
       pairs += 1
-      frames.push({ phase: 'pair', activeLine: L('pairs = pairs + 1'), index: i, waiting: [...waiting], pairs, message: `${v} finds a waiting partner: one more pair.` })
+      frames.push({ phase: 'pair', pythonLine: 7, activeLine: L('pairs = pairs + 1'), index: i, waiting: [...waiting], pairs, message: `${v} finds a waiting partner: one more pair.` })
     } else {
       waiting.add(v)
-      frames.push({ phase: 'wait', activeLine: L('add v to waiting'), index: i, waiting: [...waiting], pairs, message: `${v} has no partner yet, so it waits.` })
+      frames.push({ phase: 'wait', pythonLine: 9, activeLine: L('add v to waiting'), index: i, waiting: [...waiting], pairs, message: `${v} has no partner yet, so it waits.` })
     }
   }
   const result = [pairs, waiting.size]
-  frames.push({ phase: 'done', activeLine: L('return [pairs'), index: -1, waiting: [...waiting], pairs, message: `Pairs: ${pairs}, leftover: ${waiting.size}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return [pairs'), index: -1, waiting: [...waiting], pairs, message: `Pairs: ${pairs}, leftover: ${waiting.size}.` })
   return { input: nums, result, frames }
 }
 

@@ -12,22 +12,22 @@ export function buildTrace({ s }) {
   const chars = [...s]
   const lowers = new Set()
   const uppers = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set lowers to an empty set'), active: -1, roles: {}, state: {}, message: 'Sort each letter into a lowercase or uppercase set.' }]
+  const frames = [{ phase: 'start', activeLine: L('set lowers to an empty set'), pythonLine: 2, active: -1, roles: {}, state: {}, message: 'Sort each letter into a lowercase or uppercase set.' }]
   chars.forEach((ch, i) => {
     const lower = ch === ch.toLowerCase()
     if (lower) lowers.add(ch)
     else uppers.add(ch)
-    frames.push({ phase: 'collect', activeLine: L('if the character is lowercase'), active: i, roles: { [i]: lower ? 'lowercase' : 'uppercase' }, state: { lowercase: [...lowers].sort().join(''), uppercase: [...uppers].sort().join('') }, message: `"${ch}" is ${lower ? 'lowercase' : 'uppercase'}.` })
+    frames.push({ phase: 'collect', activeLine: L('if the character is lowercase'), pythonLine: 5, active: i, roles: { [i]: lower ? 'lowercase' : 'uppercase' }, state: { lowercase: [...lowers].sort().join(''), uppercase: [...uppers].sort().join('') }, message: `"${ch}" is ${lower ? 'lowercase' : 'uppercase'}.` })
   })
   for (const letter of ALPHABET_DESC) {
     const pair = uppers.has(letter) && lowers.has(letter.toLowerCase())
-    frames.push({ phase: 'check', activeLine: L('if letter is in uppers'), active: -1, roles: {}, state: { letter, both: pair }, message: `Check ${letter}: ${pair ? 'both cases appear, so return it.' : 'not in both cases.'}` })
+    frames.push({ phase: 'check', activeLine: L('if letter is in uppers'), pythonLine: 10, active: -1, roles: {}, state: { letter, both: pair }, message: `Check ${letter}: ${pair ? 'both cases appear, so return it.' : 'not in both cases.'}` })
     if (pair) {
-      frames.push({ phase: 'done', activeLine: L('return letter'), active: -1, roles: {}, state: { result: letter }, message: `Return ${letter}, the greatest letter in both cases.` })
+      frames.push({ phase: 'done', activeLine: L('return letter'), pythonLine: 11, active: -1, roles: {}, state: { result: letter }, message: `Return ${letter}, the greatest letter in both cases.` })
       return { input: { s }, result: letter, items: chars, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return an empty string'), active: -1, roles: {}, state: { result: '' }, message: 'No letter appears in both cases, so return an empty string.' })
+  frames.push({ phase: 'done', activeLine: L('return an empty string'), pythonLine: 12, active: -1, roles: {}, state: { result: '' }, message: 'No letter appears in both cases, so return an empty string.' })
   return { input: { s }, result: '', items: chars, frames }
 }
 

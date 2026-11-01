@@ -15,13 +15,13 @@ export function buildTrace(input) {
   const groups = new Map()
   const frames = []
   const snap = () => [{ name: 'groups', keyLabel: 'first letter', valueLabel: 'suffixes', isSet: false, entries: [...groups].map(([letter, set]) => [letter, [...set].join(', ')]) }]
-  frames.push({ phase: 'start', activeLine: L('count valid ordered pairs'), maps: snap(), ops: [], result: 0, message: 'Only the first letter changes in a swap, so group the names by first letter. The rest of each name decides everything.' })
+  frames.push({ phase: 'start', activeLine: L('count valid ordered pairs'), pythonLine: 2, maps: snap(), ops: [], result: 0, message: 'Only the first letter changes in a swap, so group the names by first letter. The rest of each name decides everything.' })
   for (const idea of ideas) {
     const letter = idea[0]
     if (!groups.has(letter)) groups.set(letter, new Set())
     groups.get(letter).add(idea.slice(1))
   }
-  frames.push({ phase: 'group', activeLine: L('add its suffix'), maps: snap(), ops: [], result: 0, message: `${ideas.length} names are grouped under ${groups.size} first letter(s).` })
+  frames.push({ phase: 'group', activeLine: L('add its suffix'), pythonLine: 4, maps: snap(), ops: [], result: 0, message: `${ideas.length} names are grouped under ${groups.size} first letter(s).` })
   const letters = [...groups.keys()].sort()
   let answer = 0
   for (let i = 0; i < letters.length; i++) {
@@ -30,11 +30,11 @@ export function buildTrace(input) {
       const onlyA = [...a].filter(s => !b.has(s))
       const onlyB = [...b].filter(s => !a.has(s))
       answer += 2 * onlyA.length * onlyB.length
-      frames.push({ phase: 'pair', activeLine: L('add 2 times only_a'), maps: snap(), ops: [], result: answer,
+      frames.push({ phase: 'pair', activeLine: L('add 2 times only_a'), pythonLine: 13, maps: snap(), ops: [], result: answer,
         message: `${letters[i]} and ${letters[j]}: ${onlyA.length} suffix(es) only under ${letters[i]}, ${onlyB.length} only under ${letters[j]}. Both orders add ${2 * onlyA.length * onlyB.length}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), maps: snap(), ops: [], result: answer, message: `Valid ordered pairs: ${answer}.` })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: 14, maps: snap(), ops: [], result: answer, message: `Valid ordered pairs: ${answer}.` })
   return { input, result: answer, frames }
 }
 

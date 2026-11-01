@@ -27,13 +27,13 @@ export function buildTrace(input) {
   const position = new Map()
   nums.forEach((v, i) => position.set(v, i))
   const maps = () => [{ name: 'position', keyLabel: 'value', valueLabel: 'index', isSet: false, entries: [...position] }]
-  const frames = [{ phase: 'start', activeLine: L('position is an empty map'), index: -1, maps: maps(), ops: [], nums: [...nums], result: [...nums], message: 'Record where each starting value sits, so a replacement can jump straight to its slot.' }]
+  const frames = [{ phase: 'start', activeLine: L('position is an empty map'), pythonLine: 3, index: -1, maps: maps(), ops: [], nums: [...nums], result: [...nums], message: 'Record where each starting value sits, so a replacement can jump straight to its slot.' }]
   input.operations.forEach(([oldValue, newValue]) => {
     const i = position.get(oldValue)
     nums[i] = newValue
     position.delete(oldValue)
     position.set(newValue, i)
-    frames.push({ phase: 'replace', activeLine: L('set nums[i] to new'), index: i, maps: maps(),
+    frames.push({ phase: 'replace', activeLine: L('set nums[i] to new'), pythonLine: 7, index: i, maps: maps(),
       ops: [
         { map: 'position', type: 'lookup', via: 'get', key: oldValue, hit: true, value: i, hitNote: 'the table gives the slot of the value to replace', missNote: 'never reached: operations always name a present value' },
         { map: 'position', type: 'delete', key: oldValue, existed: true, before: i },
@@ -41,7 +41,7 @@ export function buildTrace(input) {
       ], nums: [...nums], result: [...nums],
       message: `Replace ${oldValue} with ${newValue} at index ${i}. The table now maps ${newValue} to ${i}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return nums'), index: -1, maps: maps(), ops: [], nums: [...nums], result: [...nums], message: `Final array: [${nums.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return nums'), pythonLine: 10, index: -1, maps: maps(), ops: [], nums: [...nums], result: [...nums], message: `Final array: [${nums.join(', ')}].` })
   return { input, result: [...nums], frames }
 }
 
