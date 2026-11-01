@@ -34,7 +34,7 @@ export function buildTrace({ max_time: maxTime, edges, passing_fees: fees }) {
   const cost = Array.from({ length: maxTime + 1 }, () => Array(n).fill(Infinity))
   cost[0][0] = fees[0]
   const show = () => cost.map(row => row.map(v => (Number.isFinite(v) ? v : '∞')))
-  const frames = [{ phase: 'start', cell: [0, 0], table: show(), activeLine: L('cost[0][0] = passing_fees[0]'), message: `Start in city 0 at time 0 with fee ${fees[0]}.` }]
+  const frames = [{ phase: 'start', cell: [0, 0], table: show(), activeLine: L('cost[0][0] = passing_fees[0]'), pythonLine: 5, message: `Start in city 0 at time 0 with fee ${fees[0]}.` }]
   for (let t = 1; t <= maxTime; t++) {
     for (const [x, y, w] of edges) {
       if (w > t) continue
@@ -43,7 +43,7 @@ export function buildTrace({ max_time: maxTime, edges, passing_fees: fees }) {
         const candidate = cost[t - w][u] + fees[v]
         if (candidate < cost[t][v]) {
           cost[t][v] = candidate
-          frames.push({ phase: 'relax', cell: [t, v], table: show(), activeLine: L('cost[t][v] = min'), message: `Reach city ${v} at time ${t} from city ${u} for a total fee of ${candidate}.` })
+          frames.push({ phase: 'relax', cell: [t, v], table: show(), activeLine: L('cost[t][v] = min'), pythonLine: 12, message: `Reach city ${v} at time ${t} from city ${u} for a total fee of ${candidate}.` })
         }
       }
     }
@@ -51,7 +51,7 @@ export function buildTrace({ max_time: maxTime, edges, passing_fees: fees }) {
   let best = Infinity
   for (let t = 0; t <= maxTime; t++) best = Math.min(best, cost[t][n - 1])
   const result = Number.isFinite(best) ? best : -1
-  frames.push({ phase: 'done', cell: null, table: show(), activeLine: L('return best, or -1'), message: result === -1 ? 'The last city cannot be reached in time.' : `Cheapest arrival at city ${n - 1}: ${result}.` })
+  frames.push({ phase: 'done', cell: null, table: show(), activeLine: L('return best, or -1'), pythonLine: 14, message: result === -1 ? 'The last city cannot be reached in time.' : `Cheapest arrival at city ${n - 1}: ${result}.` })
   return { input: { max_time: maxTime, edges, passing_fees: fees }, result, frames }
 }
 

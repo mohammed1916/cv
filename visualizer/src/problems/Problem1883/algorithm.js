@@ -32,7 +32,7 @@ export function buildTrace({ dist, speed, hours_before: hoursBefore }) {
   let times = Array(n + 1).fill(Infinity)
   times[0] = 0
   const show = list => list.map(t => (Number.isFinite(t) ? t / speed : null))
-  const frames = [{ phase: 'start', road: -1, times: show(times), activeLine: L('times[0] = 0'), message: 'With no roads driven, time is zero and no rests have been skipped.' }]
+  const frames = [{ phase: 'start', road: -1, times: show(times), activeLine: L('times[0] = 0'), pythonLine: 7, message: 'With no roads driven, time is zero and no rests have been skipped.' }]
   dist.forEach((d, i) => {
     const next = Array(n + 1).fill(Infinity)
     for (let j = 0; j <= i; j++) {
@@ -40,13 +40,13 @@ export function buildTrace({ dist, speed, hours_before: hoursBefore }) {
       const arrive = times[j] + d
       if (i === n - 1) {
         next[j] = Math.min(next[j], arrive)
-        frames.push({ phase: 'last', road: i, times: show(next), activeLine: L('if this is the last road'), message: `The last road ends at ${arrive / speed} hours with ${j} skips.` })
+        frames.push({ phase: 'last', road: i, times: show(next), activeLine: L('if this is the last road'), pythonLine: 15, message: `The last road ends at ${arrive / speed} hours with ${j} skips.` })
         continue
       }
       const rounded = Math.ceil(arrive / speed) * speed
       next[j] = Math.min(next[j], rounded)
       next[j + 1] = Math.min(next[j + 1], arrive)
-      frames.push({ phase: 'rest', road: i, times: show(next), activeLine: L('otherwise, resting rounds up'), message: `Road ${i} with ${j} skips: resting rounds to ${rounded / speed} hours; skipping keeps ${arrive / speed}.` })
+      frames.push({ phase: 'rest', road: i, times: show(next), activeLine: L('otherwise, resting rounds up'), pythonLine: 19, message: `Road ${i} with ${j} skips: resting rounds to ${rounded / speed} hours; skipping keeps ${arrive / speed}.` })
     }
     times = next
   })
@@ -54,7 +54,7 @@ export function buildTrace({ dist, speed, hours_before: hoursBefore }) {
   for (let j = 0; j <= n; j++) {
     if (times[j] <= limit) { result = j; break }
   }
-  frames.push({ phase: 'done', road: -1, times: show(times), activeLine: L('return -1'), message: result === -1 ? 'No skip count reaches the meeting in time.' : `Fewest skips: ${result}.` })
+  frames.push({ phase: 'done', road: -1, times: show(times), activeLine: L('return -1'), pythonLine: result === -1 ? 25 : 24, message: result === -1 ? 'No skip count reaches the meeting in time.' : `Fewest skips: ${result}.` })
   return { input: { dist, speed, hours_before: hoursBefore }, result, frames }
 }
 

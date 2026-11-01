@@ -16,7 +16,7 @@ export function buildTrace({ nums }) {
   for (const v of nums) count[v] += 1
   const prefix = Array(top + 1).fill(0)
   for (let v = 1; v <= top; v++) prefix[v] = prefix[v - 1] + count[v]
-  const frames = [{ phase: 'start', activeLine: L('build prefix counts'), index: -1, total: 0, added: 0, message: 'Build prefix counts of the values, so a range of values can be counted at once.' }]
+  const frames = [{ phase: 'start', activeLine: L('build prefix counts'), index: -1, total: 0, added: 0, pythonLine: 3, message: 'Build prefix counts of the values, so a range of values can be counted at once.' }]
   let total = 0
   nums.forEach((d, index) => {
     let added = 0
@@ -26,10 +26,10 @@ export function buildTrace({ nums }) {
       added += k * (prefix[high] - prefix[low - 1])
     }
     total += added
-    frames.push({ phase: 'divide', activeLine: L('add k times'), index, total: total % MOD, added, message: `Divide every number by ${d}. This denominator adds ${added} to the sum.` })
+    frames.push({ phase: 'divide', activeLine: L('add k times'), index, total: total % MOD, added, pythonLine: 18, message: `Divide every number by ${d}. This denominator adds ${added} to the sum.` })
   })
   const result = total % MOD
-  frames.push({ phase: 'done', activeLine: L('return total modulo'), index: -1, total: result, added: 0, message: `The sum of floored pairs is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return total modulo'), index: -1, total: result, added: 0, pythonLine: 20, message: `The sum of floored pairs is ${result}.` })
   return { input: { nums }, result, frames }
 }
 

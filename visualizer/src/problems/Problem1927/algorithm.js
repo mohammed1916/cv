@@ -21,15 +21,15 @@ export function buildTrace({ num }) {
   const odd = (cl + cr) % 2 === 1
   const result = odd ? true : 2 * (sl - sr) !== 9 * (cr - cl)
   const frames = [
-    { phase: 'start', activeLine: L('split num into'), cursor: -1, stats: null, message: `Split ${num} into two halves of ${half} characters.` },
-    { phase: 'count', activeLine: L('count the question marks'), cursor: -1, stats: { cl, cr, sl, sr }, message: `Left: ${cl} question marks, digit sum ${sl}. Right: ${cr} question marks, digit sum ${sr}.` },
+    { phase: 'start', activeLine: L('split num into'), cursor: -1, stats: null, pythonLine: 3, message: `Split ${num} into two halves of ${half} characters.` },
+    { phase: 'count', activeLine: L('count the question marks'), cursor: -1, stats: { cl, cr, sl, sr }, pythonLine: 7, message: `Left: ${cl} question marks, digit sum ${sl}. Right: ${cr} question marks, digit sum ${sr}.` },
   ]
   if (odd) {
-    frames.push({ phase: 'parity', activeLine: L('if cl plus cr is odd'), cursor: -1, stats: { cl, cr, sl, sr }, message: `There are ${cl + cr} question marks, an odd count, so Alice fills the last one and wins.` })
+    frames.push({ phase: 'parity', activeLine: L('if cl plus cr is odd'), cursor: -1, stats: { cl, cr, sl, sr }, pythonLine: 8, message: `There are ${cl + cr} question marks, an odd count, so Alice fills the last one and wins.` })
   } else {
-    frames.push({ phase: 'compare', activeLine: L('if 2 times'), cursor: -1, stats: { cl, cr, sl, sr }, message: `Compare 2 times (${sl} minus ${sr}) with 9 times (${cr} minus ${cl}). They ${result ? 'differ' : 'are equal'}.` })
+    frames.push({ phase: 'compare', activeLine: L('if 2 times'), cursor: -1, stats: { cl, cr, sl, sr }, pythonLine: 10, message: `Compare 2 times (${sl} minus ${sr}) with 9 times (${cr} minus ${cl}). They ${result ? 'differ' : 'are equal'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'return false'), cursor: -1, stats: { cl, cr, sl, sr }, message: `Alice ${result ? 'wins' : 'loses'}.` })
+  frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'return false'), cursor: -1, stats: { cl, cr, sl, sr }, pythonLine: odd ? 9 : 10, message: `Alice ${result ? 'wins' : 'loses'}.` })
   return { input: { num }, result, frames }
 }
 

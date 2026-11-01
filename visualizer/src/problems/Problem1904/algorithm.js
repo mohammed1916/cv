@@ -19,17 +19,17 @@ export function buildTrace({ login_time, logout_time }) {
   const start = toMinutes(login_time)
   let end = toMinutes(logout_time)
   if (end < start) end += 1440
-  const frames = [{ phase: 'start', activeLine: L('convert both times'), slot: null, slots: [], message: `Play from ${login_time} to ${logout_time}.` }]
+  const frames = [{ phase: 'start', activeLine: L('convert both times'), slot: null, slots: [], pythonLine: 3, message: `Play from ${login_time} to ${logout_time}.` }]
   const slots = []
   let round = Math.ceil(start / 15) * 15
   while (round + 15 <= end) {
     const slot = (round % 1440) / 15
     slots.push(slot)
-    frames.push({ phase: 'round', activeLine: L('add one round'), slot, slots: slots.slice(), message: `The round from ${clock(round)} to ${clock(round + 15)} is complete.` })
+    frames.push({ phase: 'round', activeLine: L('add one round'), slot, slots: slots.slice(), pythonLine: 9, message: `The round from ${clock(round)} to ${clock(round + 15)} is complete.` })
     round += 15
   }
   const result = slots.length
-  frames.push({ phase: 'done', activeLine: L('return the count'), slot: null, slots: slots.slice(), message: `${result} full rounds were completed.` })
+  frames.push({ phase: 'done', activeLine: L('return the count'), slot: null, slots: slots.slice(), pythonLine: 11, message: `${result} full rounds were completed.` })
   return { input: { login_time, logout_time }, result, slots, frames }
 }
 

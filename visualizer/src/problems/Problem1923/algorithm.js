@@ -52,14 +52,14 @@ export function buildTrace(paths) {
   let lo = 1
   let hi = minLen
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('longest sequence'), lo, hi, mid: null, best, message: `Search lengths from ${lo} to ${hi}.` }]
+  const frames = [{ phase: 'start', activeLine: L('longest sequence'), lo, hi, mid: null, best, pythonLine: 38, message: `Search lengths from ${lo} to ${hi}.` }]
   while (lo <= hi) {
     const mid = (lo + hi) >> 1
     const ok = check(mid)
     if (ok) { best = mid; lo = mid + 1 } else hi = mid - 1
-    frames.push({ phase: 'search', activeLine: L('check length mid'), lo, hi, mid, best, message: ok ? `A block of length ${mid} is shared by every path. Look longer.` : `No block of length ${mid} is shared. Look shorter.` })
+    frames.push({ phase: 'search', activeLine: L('check length mid'), lo, hi, mid, best, pythonLine: ok ? 43 : 45, message: ok ? `A block of length ${mid} is shared by every path. Look longer.` : `No block of length ${mid} is shared. Look shorter.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), lo, hi, mid: null, best, message: `Longest common subpath: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), lo, hi, mid: null, best, pythonLine: 46, message: `Longest common subpath: ${best}.` })
   return { input: paths, result: best, frames }
 }
 

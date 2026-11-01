@@ -25,11 +25,11 @@ export function buildTrace({ packages, boxes }) {
     return lo
   }
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), supplier: null, box: null, total: null, best, message: 'No supplier has been checked yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), supplier: null, box: null, total: null, best, pythonLine: 8, message: 'No supplier has been checked yet.' }]
   boxes.forEach((supplierBoxes, s) => {
     const sizes = [...supplierBoxes].sort((a, b) => a - b)
     if (sizes[sizes.length - 1] < sorted[n - 1]) {
-      frames.push({ phase: 'skip', activeLine: L('skip the supplier'), supplier: s, box: null, total: null, best, message: `Supplier ${s + 1} has no box big enough for the largest package.` })
+      frames.push({ phase: 'skip', activeLine: L('skip the supplier'), supplier: s, box: null, total: null, best, pythonLine: 12, message: `Supplier ${s + 1} has no box big enough for the largest package.` })
       return
     }
     let total = 0
@@ -39,17 +39,17 @@ export function buildTrace({ packages, boxes }) {
       if (end > start) {
         total += (end - start) * size - (prefix[end] - prefix[start])
         start = end
-        frames.push({ phase: 'box', activeLine: L('use this box for the packages'), supplier: s, box: size, total, best, message: `Box ${size} takes the packages up to ${size}; waste so far ${total}.` })
+        frames.push({ phase: 'box', activeLine: L('use this box for the packages'), supplier: s, box: size, total, best, pythonLine: 18, message: `Box ${size} takes the packages up to ${size}; waste so far ${total}.` })
       }
       if (start === n) break
     }
     if (best === null || total < best) {
       best = total
-      frames.push({ phase: 'improve', activeLine: L('keep the smallest total'), supplier: s, box: null, total, best, message: `Supplier ${s + 1} gives a new smallest total of ${total}.` })
+      frames.push({ phase: 'improve', activeLine: L('keep the smallest total'), supplier: s, box: null, total, best, pythonLine: 23, message: `Supplier ${s + 1} gives a new smallest total of ${total}.` })
     }
   })
   const result = best === null ? -1 : best % 1000000007
-  frames.push({ phase: 'done', activeLine: L('return best modulo'), supplier: null, box: null, total: null, best, message: `Answer: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return best modulo'), supplier: null, box: null, total: null, best, pythonLine: 24, message: `Answer: ${result}.` })
   return { input: { packages, boxes }, result, frames }
 }
 

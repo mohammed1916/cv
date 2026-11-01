@@ -18,12 +18,12 @@ export function buildTrace(input) {
     for (const x of nums) counts.push(counts[counts.length - 1] + (x === v ? 1 : 0))
     prefix[v] = counts
   }
-  const frames = [{ phase: 'start', activeLine: L('build prefix counts'), index: -1, range: null, present: [], best: null, message: `The array has ${values.length} distinct values. Build a running count for each.` }]
+  const frames = [{ phase: 'start', activeLine: L('build prefix counts'), index: -1, range: null, present: [], best: null, pythonLine: 4, message: `The array has ${values.length} distinct values. Build a running count for each.` }]
   const result = queries.map(([l, r], q) => {
     let best = -1
     let previous = null
     const present = []
-    frames.push({ phase: 'query', activeLine: L('set best to -1'), index: r, range: [l, r], present: [], best: -1, query: q, message: `Query [${l}, ${r}]: list the values present in this range in increasing order.` })
+    frames.push({ phase: 'query', activeLine: L('set best to -1'), index: r, range: [l, r], present: [], best: -1, query: q, pythonLine: 11, message: `Query [${l}, ${r}]: list the values present in this range in increasing order.` })
     for (const v of values) {
       if (prefix[v][r + 1] - prefix[v][l] <= 0) continue
       present.push(v)
@@ -32,12 +32,12 @@ export function buildTrace(input) {
         best = best === -1 ? gap : Math.min(best, gap)
       }
       previous = v
-      frames.push({ phase: 'value', activeLine: L('if a previous value exists'), index: r, range: [l, r], present: [...present], best, query: q, message: `Value ${v} is present. Smallest gap between neighbours so far: ${best === -1 ? 'none' : best}.` })
+      frames.push({ phase: 'value', activeLine: L('if a previous value exists'), index: r, range: [l, r], present: [...present], best, query: q, pythonLine: 19, message: `Value ${v} is present. Smallest gap between neighbours so far: ${best === -1 ? 'none' : best}.` })
     }
-    frames.push({ phase: 'answer', activeLine: L('add best to answers'), index: r, range: [l, r], present: [...present], best, query: q, message: `Answer for [${l}, ${r}] is ${best}.` })
+    frames.push({ phase: 'answer', activeLine: L('add best to answers'), index: r, range: [l, r], present: [...present], best, query: q, pythonLine: 20, message: `Answer for [${l}, ${r}] is ${best}.` })
     return best
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, range: null, present: [], best: null, message: `Answers: ${result.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, range: null, present: [], best: null, pythonLine: 21, message: `Answers: ${result.join(', ')}.` })
   return { input, result, frames }
 }
 

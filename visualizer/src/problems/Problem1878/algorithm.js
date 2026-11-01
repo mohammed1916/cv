@@ -26,7 +26,7 @@ export function buildTrace(input) {
   const rows = grid.length
   const cols = grid[0].length
   let top = []
-  const frames = [{ phase: 'start', activeLine: L('set top to an empty list'), cells: [], sum: null, top: [], message: 'Try every center and every radius that fits inside the grid.' }]
+  const frames = [{ phase: 'start', activeLine: L('set top to an empty list'), cells: [], sum: null, top: [], pythonLine: 3, message: 'Try every center and every radius that fits inside the grid.' }]
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       for (let r = 0; i - r >= 0 && i + r < rows && j - r >= 0 && j + r < cols; r++) {
@@ -35,11 +35,11 @@ export function buildTrace(input) {
         if (r === 0) cells.push([i, j])
         else for (let k = 0; k < r; k++) cells.push([i - r + k, j + k], [i + k, j + r - k], [i + r - k, j - k], [i - k, j - r + k])
         if (!top.includes(sum)) top = [...top, sum].sort((a, b) => b - a).slice(0, 3)
-        frames.push({ phase: 'rhombus', activeLine: L('keep the largest three'), cells, sum, top: [...top], message: `Rhombus at (${i}, ${j}) with radius ${r} sums to ${sum}.` })
+        frames.push({ phase: 'rhombus', activeLine: L('keep the largest three'), cells, sum, top: [...top], pythonLine: r === 0 ? 9 : 16, message: `Rhombus at (${i}, ${j}) with radius ${r} sums to ${sum}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return top'), cells: [], sum: null, top: [...top], message: `Biggest distinct sums: ${top.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return top'), cells: [], sum: null, top: [...top], pythonLine: 20, message: `Biggest distinct sums: ${top.join(', ')}.` })
   return { input, result: top, frames }
 }
 
