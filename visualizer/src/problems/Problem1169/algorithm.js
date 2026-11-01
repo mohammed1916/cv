@@ -70,13 +70,13 @@ export function buildTrace(input) {
     phase, activeLine, message, i: -1, j: -1, flagged: [...flagged].sort((a, b) => a - b), ...extra,
   });
 
-  snap("setup", 2, "Start with no flagged transactions.");
+  snap("setup", 2, "Start with no flagged transactions.", { pythonLine: 6 });
   for (let i = 0; i < n; i++) {
     const a = parsed[i];
-    snap("scan", 3, `Check transaction ${i}: ${transactions[i]}.`, { i });
+    snap("scan", 3, `Check transaction ${i}: ${transactions[i]}.`, { i, pythonLine: 7 });
     if (a.amount > 1000) {
       flagged.add(i);
-      snap("check", 4, `Amount ${a.amount} is over 1000, so transaction ${i} is flagged.`, { i });
+      snap("check", 4, `Amount ${a.amount} is over 1000, so transaction ${i} is flagged.`, { i, pythonLine: 9 });
       continue;
     }
     for (let j = 0; j < n; j++) {
@@ -86,7 +86,7 @@ export function buildTrace(input) {
       const matched = a.name === b.name && a.city !== b.city && gap <= 60;
       snap("compare", 6, matched
         ? `Transaction ${j} is ${a.name} in ${b.city} ${gap} minutes away: flag ${i}.`
-        : `Transaction ${j} does not conflict with ${i}.`, { i, j, matched });
+        : `Transaction ${j} does not conflict with ${i}.`, { i, j, matched, pythonLine: matched ? 12 : 11 });
       if (matched) {
         flagged.add(i);
         break;
@@ -94,6 +94,6 @@ export function buildTrace(input) {
     }
   }
   const result = transactions.filter((_, index) => flagged.has(index));
-  snap("done", 7, `Return ${result.length} possibly invalid transaction(s).`, { result });
+  snap("done", 7, `Return ${result.length} possibly invalid transaction(s).`, { result, pythonLine: 14 });
   return { input: transactions, result, frames };
 }

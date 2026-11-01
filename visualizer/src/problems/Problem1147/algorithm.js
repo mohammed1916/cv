@@ -11,7 +11,7 @@ export function buildTrace({ text }) {
   let count = 0
   let left = 0
   let right = text.length
-  frames.push({ phase: 'start', activeLine: L('set count to 0'), left, right, count, result: null, message: `Start with all of ${text}. Each step peels off the shortest equal prefix and suffix.` })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('set count to 0'), left, right, count, result: null, message: `Start with all of ${text}. Each step peels off the shortest equal prefix and suffix.` })
   while (left < right) {
     let size = 0
     for (let candidate = 1; candidate <= Math.floor((right - left) / 2); candidate++) {
@@ -19,15 +19,15 @@ export function buildTrace({ text }) {
     }
     if (size === 0) {
       count += 1
-      frames.push({ phase: 'middle', activeLine: L('add 1 to count'), left, right, count, result: null, message: `No prefix matches a suffix in ${text.slice(left, right)}, so it stays as one chunk.` })
+      frames.push({ phase: 'middle', pythonLine: 12, activeLine: L('add 1 to count'), left, right, count, result: null, message: `No prefix matches a suffix in ${text.slice(left, right)}, so it stays as one chunk.` })
       break
     }
     count += 2
-    frames.push({ phase: 'pair', activeLine: L('add 2 to count'), left, right, count, result: null, message: `Prefix ${text.slice(left, left + size)} matches the suffix. Two chunks added; count is ${count}.` })
+    frames.push({ phase: 'pair', pythonLine: 14, activeLine: L('add 2 to count'), left, right, count, result: null, message: `Prefix ${text.slice(left, left + size)} matches the suffix. Two chunks added; count is ${count}.` })
     left += size
     right -= size
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), left, right, count, result: count, message: `The longest decomposition has ${count} chunks.` })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return count'), left, right, count, result: count, message: `The longest decomposition has ${count} chunks.` })
   return { input: { text }, result: count, frames }
 }
 

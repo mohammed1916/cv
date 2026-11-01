@@ -21,22 +21,23 @@ export function buildTrace({ length, ops }) {
   const log = []
   const results = []
   let snaps = 0
-  const frames = [{ phase: 'start', activeLine: L('start with every index'), op: -1, current: [...current], message: `Array of ${length} zeros with no snapshots yet.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('start with every index'), op: -1, current: [...current], message: `Array of ${length} zeros with no snapshots yet.` }]
   ops.forEach((op, index) => {
     if (op[0] === 'set') {
       const [, at, value] = op
       current[at] = value
       const entries = history[at]
-      if (entries[entries.length - 1].snap === snaps) entries[entries.length - 1].value = value
+      const sameSnap = entries[entries.length - 1].snap === snaps
+      if (sameSnap) entries[entries.length - 1].value = value
       else entries.push({ snap: snaps, value })
       log.push({ name: 'set', args: [at, value], returned: undefined })
-      frames.push({ phase: 'set', activeLine: L('record the value'), op: index, current: [...current], message: `Set index ${at} to ${value}; it belongs to snapshot ${snaps}.` })
+      frames.push({ phase: 'set', pythonLine: sameSnap ? 10 : 12, activeLine: L('record the value'), op: index, current: [...current], message: `Set index ${at} to ${value}; it belongs to snapshot ${snaps}.` })
     } else if (op[0] === 'snap') {
       const id = snaps
       snaps += 1
       results.push(id)
       log.push({ name: 'snap', args: [], returned: id })
-      frames.push({ phase: 'snap', activeLine: L('return the id'), op: index, current: [...current], message: `Snapshot ${id} is saved.` })
+      frames.push({ phase: 'snap', pythonLine: 14, activeLine: L('return the id'), op: index, current: [...current], message: `Snapshot ${id} is saved.` })
     } else {
       const [, at, id] = op
       const entries = history[at]
@@ -50,10 +51,10 @@ export function buildTrace({ length, ops }) {
       const value = entries[lo].value
       results.push(value)
       log.push({ name: 'get', args: [at, id], returned: value })
-      frames.push({ phase: 'get', activeLine: L('find the last entry'), op: index, current: [...current], message: `Index ${at} in snapshot ${id} holds ${value}.` })
+      frames.push({ phase: 'get', pythonLine: 26, activeLine: L('find the last entry'), op: index, current: [...current], message: `Index ${at} in snapshot ${id} holds ${value}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return every returned value'), op: null, current: [...current], message: `Returned values: ${JSON.stringify(results)}.` })
+  frames.push({ phase: 'done', pythonLine: 27, activeLine: L('return every returned value'), op: null, current: [...current], message: `Returned values: ${JSON.stringify(results)}.` })
   return { input: { length, ops }, log, result: results, frames }
 }
 

@@ -24,7 +24,7 @@ export function buildTrace({ capacity, operations, arguments: args }) {
   const stacks = []
   const room = new Set()
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('set stacks to an empty list'), stacks: [], picked: -1, message: `Each stack holds ${capacity}.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set stacks to an empty list'), stacks: [], picked: -1, message: `Each stack holds ${capacity}.` }]
   const lowestRoom = () => {
     for (const i of [...room]) if (i >= stacks.length || stacks[i].length >= capacity) room.delete(i)
     return room.size ? Math.min(...room) : -1
@@ -38,7 +38,7 @@ export function buildTrace({ capacity, operations, arguments: args }) {
       stacks[s].push(args[i][0])
       if (stacks[s].length === capacity) room.delete(s)
       picked = s
-      frames.push({ phase: 'push', activeLine: L('use the lowest index with room'), stacks: stacks.map(x => [...x]), picked, message: `Push ${args[i][0]} onto stack ${s}.` })
+      frames.push({ phase: 'push', pythonLine: 15, activeLine: L('use the lowest index with room'), stacks: stacks.map(x => [...x]), picked, message: `Push ${args[i][0]} onto stack ${s}.` })
     } else if (op === 'pop') {
       while (stacks.length && stacks[stacks.length - 1].length === 0) stacks.pop()
       if (stacks.length === 0) {
@@ -49,7 +49,7 @@ export function buildTrace({ capacity, operations, arguments: args }) {
         room.add(s)
         picked = s
       }
-      frames.push({ phase: 'pop', activeLine: L('pop from the rightmost stack'), stacks: stacks.map(x => [...x]), picked, message: `pop returns ${answer}.` })
+      frames.push({ phase: 'pop', pythonLine: picked === -1 ? 23 : 26, activeLine: L('pop from the rightmost stack'), stacks: stacks.map(x => [...x]), picked, message: `pop returns ${answer}.` })
     } else {
       const s = args[i][0]
       if (s >= stacks.length || stacks[s].length === 0) {
@@ -59,11 +59,11 @@ export function buildTrace({ capacity, operations, arguments: args }) {
         room.add(s)
         picked = s
       }
-      frames.push({ phase: 'popAtStack', activeLine: L('pop from that stack'), stacks: stacks.map(x => [...x]), picked, message: `popAtStack ${s} returns ${answer}.` })
+      frames.push({ phase: 'popAtStack', pythonLine: picked === -1 ? 32 : 34, activeLine: L('pop from that stack'), stacks: stacks.map(x => [...x]), picked, message: `popAtStack ${s} returns ${answer}.` })
     }
     result.push(answer)
   })
-  frames.push({ phase: 'done', activeLine: L('return the results'), stacks: stacks.map(x => [...x]), picked: -1, message: 'All operations are answered.' })
+  frames.push({ phase: 'done', pythonLine: 37, activeLine: L('return the results'), stacks: stacks.map(x => [...x]), picked: -1, message: 'All operations are answered.' })
   return { input: { capacity, operations, arguments: args }, result, frames }
 }
 

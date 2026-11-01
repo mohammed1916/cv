@@ -10,7 +10,7 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const root = treeFromLevelOrder(input.values)
-  const frames = [{ phase: 'start', activeLine: L('put the root in a queue'), level: 0, ids: [], levelSum: null, bestLevel: null, bestSum: null, message: 'Put the root in a queue. Level 1 holds only the root.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('put the root in a queue'), level: 0, ids: [], levelSum: null, bestLevel: null, bestSum: null, message: 'Put the root in a queue. Level 1 holds only the root.' }]
   let frontier = root ? [root] : []
   let level = 1
   let bestLevel = null
@@ -18,18 +18,18 @@ export function buildTrace(input) {
   while (frontier.length > 0) {
     const levelSum = frontier.reduce((sum, n) => sum + n.value, 0)
     const ids = frontier.map(n => n.id)
-    frames.push({ phase: 'level', activeLine: L('set level sum to'), level, ids, levelSum, bestLevel, bestSum, message: `Level ${level} sums to ${levelSum}.` })
+    frames.push({ phase: 'level', pythonLine: 20, activeLine: L('set level sum to'), level, ids, levelSum, bestLevel, bestSum, message: `Level ${level} sums to ${levelSum}.` })
     if (bestSum === null || levelSum > bestSum) {
       bestSum = levelSum
       bestLevel = level
-      frames.push({ phase: 'better', activeLine: L('set best sum to level sum'), level, ids, levelSum, bestLevel, bestSum, message: `${levelSum} is the new best sum, reached at level ${level}.` })
+      frames.push({ phase: 'better', pythonLine: 22, activeLine: L('set best sum to level sum'), level, ids, levelSum, bestLevel, bestSum, message: `${levelSum} is the new best sum, reached at level ${level}.` })
     } else {
-      frames.push({ phase: 'keep', activeLine: L('if best sum is none'), level, ids, levelSum, bestLevel, bestSum, message: `${levelSum} does not beat ${bestSum}, so level ${bestLevel} stays the best.` })
+      frames.push({ phase: 'keep', pythonLine: 21, activeLine: L('if best sum is none'), level, ids, levelSum, bestLevel, bestSum, message: `${levelSum} does not beat ${bestSum}, so level ${bestLevel} stays the best.` })
     }
     frontier = frontier.flatMap(n => [n.left, n.right].filter(Boolean))
     level++
   }
-  frames.push({ phase: 'done', activeLine: L('return best level'), level: 0, ids: [], levelSum: null, bestLevel, bestSum, message: `Smallest level with the maximum sum: ${bestLevel}.` })
+  frames.push({ phase: 'done', pythonLine: 25, activeLine: L('return best level'), level: 0, ids: [], levelSum: null, bestLevel, bestSum, message: `Smallest level with the maximum sum: ${bestLevel}.` })
   return { input, root, result: bestLevel, frames }
 }
 

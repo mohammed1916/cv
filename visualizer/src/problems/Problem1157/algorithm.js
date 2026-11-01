@@ -22,21 +22,21 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { arr, queries } = input
-  const frames = [{ phase: 'start', activeLine: L('for each query'), query: null, range: null, counts: null, answers: [], message: 'Answer the queries in order, counting values inside each range.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('for each query'), query: null, range: null, counts: null, answers: [], message: 'Answer the queries in order, counting values inside each range.' }]
   const answers = []
   queries.forEach((query, qi) => {
     const [left, right, threshold] = query
     const counts = {}
     for (let i = left; i <= right; i++) counts[arr[i]] = (counts[arr[i]] || 0) + 1
-    frames.push({ phase: 'count', activeLine: L('count how many times'), query: qi, range: [left, right], threshold, counts: { ...counts }, answers: answers.slice(), message: `Query ${qi + 1}: count the values in positions ${left} to ${right}.` })
+    frames.push({ phase: 'count', pythonLine: 6, activeLine: L('count how many times'), query: qi, range: [left, right], threshold, counts: { ...counts }, answers: answers.slice(), message: `Query ${qi + 1}: count the values in positions ${left} to ${right}.` })
     let found = -1
     for (const value of Object.keys(counts)) {
       if (counts[value] >= threshold) found = Number(value)
     }
     answers.push(found)
-    frames.push({ phase: 'answer', activeLine: L('if its count'), query: qi, range: [left, right], threshold, counts: { ...counts }, answers: answers.slice(), message: found === -1 ? `No value reaches ${threshold}, so the answer is -1.` : `Value ${found} reaches ${threshold}, so the answer is ${found}.` })
+    frames.push({ phase: 'answer', pythonLine: 11, activeLine: L('if its count'), query: qi, range: [left, right], threshold, counts: { ...counts }, answers: answers.slice(), message: found === -1 ? `No value reaches ${threshold}, so the answer is -1.` : `Value ${found} reaches ${threshold}, so the answer is ${found}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), query: null, range: null, counts: null, answers: answers.slice(), message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return answers'), query: null, range: null, counts: null, answers: answers.slice(), message: `Answers: [${answers.join(', ')}].` })
   return { input, result: answers, frames }
 }
 

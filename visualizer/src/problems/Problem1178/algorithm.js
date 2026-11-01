@@ -37,23 +37,23 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ words, puzzles }) {
   const counts = new Map()
   for (const word of words) counts.set(maskOf(word), (counts.get(maskOf(word)) ?? 0) + 1)
-  const frames = [{ phase: 'start', activeLine: L('set counts'), puzzle: -1, subset: null, total: 0, answer: [], message: `Grouped ${words.length} words into ${counts.size} distinct letter sets.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set counts'), puzzle: -1, subset: null, total: 0, answer: [], message: `Grouped ${words.length} words into ${counts.size} distinct letter sets.` }]
   const answer = []
   puzzles.forEach((puzzle, index) => {
     const first = bit(puzzle[0])
     const rest = [...puzzle.slice(1)].map(bit)
     let total = 0
-    frames.push({ phase: 'puzzle', activeLine: L('for each puzzle'), puzzle: index, subset: null, total: 0, answer: [...answer], message: `Puzzle ${puzzle}: a valid word must contain ${puzzle[0]}.` })
+    frames.push({ phase: 'puzzle', pythonLine: 9, activeLine: L('for each puzzle'), puzzle: index, subset: null, total: 0, answer: [...answer], message: `Puzzle ${puzzle}: a valid word must contain ${puzzle[0]}.` })
     for (let s = 0; s < 1 << rest.length; s++) {
       let mask = first
       rest.forEach((b, i) => { if ((s >> i) & 1) mask |= b })
       const count = counts.get(mask) ?? 0
       total += count
-      frames.push({ phase: 'subset', activeLine: L('add the count stored'), puzzle: index, subset: mask, total, answer: [...answer], message: `Letter set ${lettersOf(mask)}: ${count} word(s) match, total ${total}.` })
+      frames.push({ phase: 'subset', pythonLine: 18, activeLine: L('add the count stored'), puzzle: index, subset: mask, total, answer: [...answer], message: `Letter set ${lettersOf(mask)}: ${count} word(s) match, total ${total}.` })
     }
     answer.push(total)
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), puzzle: -1, subset: null, total: 0, answer: [...answer], message: `Counts for each puzzle: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 20, activeLine: L('return answer'), puzzle: -1, subset: null, total: 0, answer: [...answer], message: `Counts for each puzzle: ${answer.join(', ')}.` })
   return { input: { words, puzzles }, words, puzzles, result: answer, frames }
 }
 

@@ -26,18 +26,18 @@ const find = (node, v) => {
 export function buildTrace({ tree, x }) {
   const root = treeFromLevelOrder(tree)
   const n = collect(root).length
-  const frames = [{ phase: 'start', activeLine: L('count all nodes'), node: null, regions: {}, sizes: null, message: `The tree has ${n} nodes. Player 1 colors node ${x}.` }]
+  const frames = [{ phase: 'start', pythonLine: 36, activeLine: L('count all nodes'), node: null, regions: {}, sizes: null, message: `The tree has ${n} nodes. Player 1 colors node ${x}.` }]
   const target = find(root, x)
   const left = collect(target.left).map(v => v.id)
   const right = collect(target.right).map(v => v.id)
   const parentSide = collect(root).map(v => v.id).filter(id => id !== target.id && !left.includes(id) && !right.includes(id))
   const sizes = { left: left.length, right: right.length, parent: parentSide.length }
   const regions = { left, right, parent: parentSide }
-  frames.push({ phase: 'locate', activeLine: L('find the node whose value is x'), node: target.id, regions, sizes, message: `Node ${x} splits the rest into a left region of ${sizes.left}, a right region of ${sizes.right} and a parent side of ${sizes.parent}.` })
+  frames.push({ phase: 'locate', pythonLine: 40, activeLine: L('find the node whose value is x'), node: target.id, regions, sizes, message: `Node ${x} splits the rest into a left region of ${sizes.left}, a right region of ${sizes.right} and a parent side of ${sizes.parent}.` })
   const biggest = Math.max(sizes.left, sizes.right, sizes.parent)
   const result = biggest * 2 > n
-  frames.push({ phase: 'compare', activeLine: L('if biggest times 2'), node: target.id, regions, sizes, message: `The largest region has ${biggest} nodes, ${result ? 'more than' : 'not more than'} half of ${n}.` })
-  frames.push({ phase: 'done', activeLine: L('return'), node: null, regions, sizes, message: result ? 'Player 2 can win by coloring the largest region.' : 'Player 2 cannot win from any neighbor of x.' })
+  frames.push({ phase: 'compare', pythonLine: 42, activeLine: L('if biggest times 2'), node: target.id, regions, sizes, message: `The largest region has ${biggest} nodes, ${result ? 'more than' : 'not more than'} half of ${n}.` })
+  frames.push({ phase: 'done', pythonLine: 42, activeLine: L('return'), node: null, regions, sizes, message: result ? 'Player 2 can win by coloring the largest region.' : 'Player 2 cannot win from any neighbor of x.' })
   return { input: { tree, x }, root, result, frames }
 }
 

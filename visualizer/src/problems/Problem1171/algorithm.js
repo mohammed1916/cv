@@ -16,22 +16,22 @@ export function buildTrace(input) {
   prefix.forEach((s, k) => last.set(s, k))
   const removed = new Array(n).fill(false)
   const kept = []
-  const frames = [{ phase: 'prefix', activeLine: L('build the running sums'), k: 0, removed: [...removed], kept: [], message: `Running sums: ${prefix.join(', ')}.` }]
+  const frames = [{ phase: 'prefix', pythonLine: 5, activeLine: L('build the running sums'), k: 0, removed: [...removed], kept: [], message: `Running sums: ${prefix.join(', ')}.` }]
   let k = 0
   while (k < n) {
     const target = last.get(prefix[k])
     if (target > k) {
       for (let t = k; t < target; t++) removed[t] = true
-      frames.push({ phase: 'skip', activeLine: L('jump k to last'), k: target, removed: [...removed], kept: [...kept], message: `The sum of nodes ${k} to ${target - 1} is zero, so cut them out.` })
+      frames.push({ phase: 'skip', pythonLine: 12, activeLine: L('jump k to last'), k: target, removed: [...removed], kept: [...kept], message: `The sum of nodes ${k} to ${target - 1} is zero, so cut them out.` })
       k = target
     }
     if (k < n) {
       kept.push(head[k])
-      frames.push({ phase: 'keep', activeLine: L('keep the node'), k, removed: [...removed], kept: [...kept], message: `Node ${k} (value ${head[k]}) stays in the list.` })
+      frames.push({ phase: 'keep', pythonLine: 14, activeLine: L('keep the node'), k, removed: [...removed], kept: [...kept], message: `Node ${k} (value ${head[k]}) stays in the list.` })
       k++
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return kept'), k: n, removed: [...removed], kept: [...kept], message: `Remaining values: ${kept.join(', ') || 'none'}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return kept'), k: n, removed: [...removed], kept: [...kept], message: `Remaining values: ${kept.join(', ') || 'none'}.` })
   return { input, result: kept, frames }
 }
 

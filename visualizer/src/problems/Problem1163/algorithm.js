@@ -12,26 +12,26 @@ export function buildTrace({ s }) {
   let i = 0
   let j = 1
   let k = 0
-  const frames = [{ phase: 'start', activeLine: L('set i to 0'), i, j, k, message: 'Compare the suffix at 0 with the suffix at 1.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set i to 0'), i, j, k, message: 'Compare the suffix at 0 with the suffix at 1.' }]
   while (j + k < n) {
     if (s[i + k] === s[j + k]) {
       k++
-      frames.push({ phase: 'match', activeLine: L('the letter at i plus k equals'), i, j, k, message: `Both suffixes read ${s[i + k - 1]} at offset ${k - 1}. Keep comparing.` })
+      frames.push({ phase: 'match', pythonLine: 6, activeLine: L('the letter at i plus k equals'), i, j, k, message: `Both suffixes read ${s[i + k - 1]} at offset ${k - 1}. Keep comparing.` })
       continue
     }
     if (s[i + k] < s[j + k]) {
       const next = Math.max(i + k + 1, j)
-      frames.push({ phase: 'move-i', activeLine: L('move i to the later'), i, j, k, message: `At offset ${k}, ${s[j + k]} beats ${s[i + k]}, so no start from ${i} through ${i + k} can win. Move i to ${next}.` })
+      frames.push({ phase: 'move-i', pythonLine: 9, activeLine: L('move i to the later'), i, j, k, message: `At offset ${k}, ${s[j + k]} beats ${s[i + k]}, so no start from ${i} through ${i + k} can win. Move i to ${next}.` })
       i = next
       j = i + 1
     } else {
-      frames.push({ phase: 'move-j', activeLine: L('move j past'), i, j, k, message: `At offset ${k}, ${s[i + k]} beats ${s[j + k]}, so the start ${j} through ${j + k} cannot win. Move j to ${j + k + 1}.` })
+      frames.push({ phase: 'move-j', pythonLine: 12, activeLine: L('move j past'), i, j, k, message: `At offset ${k}, ${s[i + k]} beats ${s[j + k]}, so the start ${j} through ${j + k} cannot win. Move j to ${j + k + 1}.` })
       j = j + k + 1
     }
     k = 0
   }
   const result = s.slice(i)
-  frames.push({ phase: 'done', activeLine: L('return the suffix'), i, j, k: 0, message: `The largest substring starts at ${i}: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 14, activeLine: L('return the suffix'), i, j, k: 0, message: `The largest substring starts at ${i}: ${result}.` })
   return { input: { s }, result, frames }
 }
 
