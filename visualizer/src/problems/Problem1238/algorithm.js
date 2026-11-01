@@ -18,14 +18,14 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ n, start }) {
   const size = 2 ** n
   const answer = []
-  const frames = [{ phase: 'size', activeLine: L('set size to'), index: -1, gray: null, answer: [], message: `There are ${size} numbers with ${n} bits.` }]
+  const frames = [{ phase: 'size', activeLine: L('set size to'), pythonLine: PY('size = 1 << n'), index: -1, gray: null, answer: [], message: `There are ${size} numbers with ${n} bits.` }]
   for (let index = 0; index < size; index++) {
     const gray = index ^ (index >> 1)
-    frames.push({ phase: 'gray', activeLine: L('set gray to'), index, gray, answer: [...answer], message: `Gray code of ${index} is ${gray.toString(2).padStart(n, '0')}.` })
+    frames.push({ phase: 'gray', activeLine: L('set gray to'), pythonLine: PY('gray = index ^'), index, gray, answer: [...answer], message: `Gray code of ${index} is ${gray.toString(2).padStart(n, '0')}.` })
     answer.push(start ^ gray)
-    frames.push({ phase: 'append', activeLine: L('append start XOR gray'), index, gray, answer: [...answer], message: `Append ${start} XOR ${gray} = ${start ^ gray}.` })
+    frames.push({ phase: 'append', activeLine: L('append start XOR gray'), pythonLine: PY('answer.append'), index, gray, answer: [...answer], message: `Append ${start} XOR ${gray} = ${start ^ gray}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), index: -1, gray: null, answer: [...answer], message: `Circular order starting at ${start}. Each step, including the wrap-around, changes one bit.` })
+  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: PY('return answer'), index: -1, gray: null, answer: [...answer], message: `Circular order starting at ${start}. Each step, including the wrap-around, changes one bit.` })
   return { input: { n, start }, result: answer, frames }
 }
 
@@ -37,3 +37,10 @@ export const python = `def circular_permutation(n, start):
         answer.append(start ^ gray)
     return answer
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}

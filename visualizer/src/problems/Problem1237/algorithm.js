@@ -14,23 +14,23 @@ export function buildTrace(input) {
   const frames = []
   let x = 1
   let y = z
-  frames.push({ phase: 'start', activeLine: L('set x to 1'), x, y, value: null, pairs: [], message: `Start with x = 1 and y = ${z}.` })
+  frames.push({ phase: 'start', activeLine: L('set x to 1'), pythonLine: PY('x = 1'), x, y, value: null, pairs: [], message: `Start with x = 1 and y = ${z}.` })
   while (x <= z && y >= 1) {
     const value = apply(x, y)
     if (value === z) {
       pairs.push([x, y])
-      frames.push({ phase: 'found', activeLine: L('add the pair'), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} equals z, so (${x}, ${y}) is a solution.` })
+      frames.push({ phase: 'found', activeLine: L('add the pair'), pythonLine: PY('pairs.append'), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} equals z, so (${x}, ${y}) is a solution.` })
       x++
       y--
     } else if (value < z) {
-      frames.push({ phase: 'low', activeLine: L('increase x'), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is below z, so x moves up.` })
+      frames.push({ phase: 'low', activeLine: L('increase x'), pythonLine: PY('x += 1', 1), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is below z, so x moves up.` })
       x++
     } else {
-      frames.push({ phase: 'high', activeLine: L('decrease y'), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is above z, so y moves down.` })
+      frames.push({ phase: 'high', activeLine: L('decrease y'), pythonLine: PY('y -= 1', 1), x, y, value, pairs: pairs.map(p => [...p]), message: `f(${x}, ${y}) = ${value} is above z, so y moves down.` })
       y--
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return pairs'), x, y, value: null, pairs: pairs.map(p => [...p]), message: `Found ${pairs.length} solution pair(s).` })
+  frames.push({ phase: 'done', activeLine: L('return pairs'), pythonLine: PY('return pairs'), x, y, value: null, pairs: pairs.map(p => [...p]), message: `Found ${pairs.length} solution pair(s).` })
   return { input, result: pairs, frames }
 }
 
@@ -66,3 +66,10 @@ export const python = `def find_solutions(z, operation):
             y -= 1
     return pairs
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}

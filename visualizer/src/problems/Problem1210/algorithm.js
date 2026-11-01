@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const dist = new Map([[key(0, 0, 0), 0]])
   const queue = [[0, 0, 0]]
   const reached = [[0, 0]]
-  const frames = [{ phase: 'start', activeLine: L('set the start to the horizontal snake'), tail: [0, 0], head: [0, 1], visited: [[0, 0]], moves: 0, message: 'Start with the snake lying flat across the top left.' }]
+  const frames = [{ phase: 'start', activeLine: L('set the start to the horizontal snake'), pythonLine: PY('start = (0, 0, 0)'), tail: [0, 0], head: [0, 1], visited: [[0, 0]], moves: 0, message: 'Start with the snake lying flat across the top left.' }]
   let answer = -1
   let head = 0
   while (head < queue.length) {
@@ -27,10 +27,10 @@ export function buildTrace(input) {
     const [tail, front] = cells(r, c, o)
     if (r === n - 1 && c === n - 2 && o === 0) {
       answer = moves
-      frames.push({ phase: 'found', activeLine: L('if here is the target position'), tail, head: front, visited: [...reached], moves, message: `The snake lies flat in the bottom right after ${moves} move(s).` })
+      frames.push({ phase: 'found', activeLine: L('if here is the target position'), pythonLine: PY('if state == target'), tail, head: front, visited: [...reached], moves, message: `The snake lies flat in the bottom right after ${moves} move(s).` })
       break
     }
-    frames.push({ phase: 'pop', activeLine: L('take the next snake position'), tail, head: front, visited: [...reached], moves, message: `Snake at tail (${r}, ${c}) ${o === 0 ? 'flat' : 'upright'} after ${moves} move(s).` })
+    frames.push({ phase: 'pop', activeLine: L('take the next snake position'), pythonLine: PY('state = queue[head]'), tail, head: front, visited: [...reached], moves, message: `Snake at tail (${r}, ${c}) ${o === 0 ? 'flat' : 'upright'} after ${moves} move(s).` })
     const next = []
     if (o === 0) {
       if (free(r, c + 2)) next.push([r, c + 1, 0])
@@ -54,8 +54,8 @@ export function buildTrace(input) {
       }
     }
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('the queue empties'), tail: null, head: null, visited: [...reached], moves: null, message: 'The target cannot be reached: -1.' })
-  else frames.push({ phase: 'done', activeLine: L('return its moves'), tail: null, head: null, visited: [...reached], moves: answer, message: `Minimum moves: ${answer}.` })
+  if (answer === -1) frames.push({ phase: 'done', activeLine: L('the queue empties'), pythonLine: PY('return -1'), tail: null, head: null, visited: [...reached], moves: null, message: 'The target cannot be reached: -1.' })
+  else frames.push({ phase: 'done', activeLine: L('return its moves'), pythonLine: PY('return dist[state]'), tail: null, head: null, visited: [...reached], moves: answer, message: `Minimum moves: ${answer}.` })
   return { input, result: answer, frames }
 }
 
@@ -104,3 +104,10 @@ export const python = `def minimum_moves(grid):
                 queue.append(s)
     return -1
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}

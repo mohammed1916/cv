@@ -17,8 +17,8 @@ export function buildTrace(input) {
   const groups = group.map((g, i) => (g === -1 ? m + i : g))
   const frames = []
   let list = []
-  const snap = (phase, activeLine, message, item = null) => frames.push({ phase, activeLine, item, groups, list: [...list], message })
-  const topo = (phase, count, edges, activeLine, label) => {
+  const snap = (phase, activeLine, pythonLine, message, item = null) => frames.push({ phase, activeLine, pythonLine, item, groups, list: [...list], message })
+  const topo = (phase, count, edges, activeLine, pythonLine, label) => {
     const adj = Array.from({ length: count }, () => [])
     const indeg = Array(count).fill(0)
     for (const [from, to] of edges) { adj[from].push(to); indeg[to]++ }
@@ -29,15 +29,15 @@ export function buildTrace(input) {
       ready.sort((x, y) => x - y)
       const v = ready.shift()
       sorted.push(v)
-      frames.push({ phase, activeLine, item: null, groups, list: [...sorted], message: `${label} ${v} has no unmet dependencies, so it comes next.` })
+      frames.push({ phase, activeLine, pythonLine, item: null, groups, list: [...sorted], message: `${label} ${v} has no unmet dependencies, so it comes next.` })
       for (const w of adj[v]) { indeg[w]--; if (indeg[w] === 0) ready.push(w) }
     }
     return sorted.length === count ? sorted : null
   }
-  const fail = (activeLine, message) => { snap('fail', activeLine, message); return { input, groups, result: [], frames } }
+  const fail = (activeLine, pythonLine, message) => { snap('fail', activeLine, pythonLine, message); return { input, groups, result: [], frames } }
 
-  snap('start', L('result is an empty list'), 'Start with an empty answer.')
-  snap('assign', L('give each item without a group'), `Items with no group get private group ids ${m} to ${m + n - 1}, after the real groups.`)
+  snap('start', L('result is an empty list'), PY('def sort_items'), 'Start with an empty answer.')
+  snap('assign', L('give each item without a group'), PY('groups = ['), `Items with no group get private group ids ${m} to ${m + n - 1}, after the real groups.`)
   const itemEdges = []
   const groupEdges = []
   for (let i = 0; i < n; i++) {
@@ -46,19 +46,19 @@ export function buildTrace(input) {
       if (groups[j] !== groups[i]) groupEdges.push([groups[j], groups[i]])
     }
   }
-  snap('graph', L('build a graph of item dependencies'), `${itemEdges.length} item dependencies and ${groupEdges.length} cross-group dependencies found.`)
-  const groupOrder = topo('groups', m + n, groupEdges, L('topologically sort the groups'), 'Group')
-  if (!groupOrder) return fail(L('topologically sort the groups'), 'The groups depend on each other in a cycle, so no order exists. Return empty.')
-  const itemOrder = topo('items', n, itemEdges, L('topologically sort the items'), 'Item')
-  if (!itemOrder) return fail(L('topologically sort the items'), 'The items depend on each other in a cycle, so no order exists. Return empty.')
+  snap('graph', L('build a graph of item dependencies'), PY('group_edges.append'), `${itemEdges.length} item dependencies and ${groupEdges.length} cross-group dependencies found.`)
+  const groupOrder = topo('groups', m + n, groupEdges, L('topologically sort the groups'), PY('order.append(v)'), 'Group')
+  if (!groupOrder) return fail(L('topologically sort the groups'), PY('return []', 0), 'The groups depend on each other in a cycle, so no order exists. Return empty.')
+  const itemOrder = topo('items', n, itemEdges, L('topologically sort the items'), PY('order.append(v)'), 'Item')
+  if (!itemOrder) return fail(L('topologically sort the items'), PY('return []', 1), 'The items depend on each other in a cycle, so no order exists. Return empty.')
   for (const g of groupOrder) {
     for (const item of itemOrder) {
       if (groups[item] !== g) continue
       list.push(item)
-      snap('emit', L('add its items'), `Group ${g} contributes item ${item}.`, item)
+      snap('emit', L('add its items'), PY('result.append(item)'), `Group ${g} contributes item ${item}.`, item)
     }
   }
-  snap('done', L('return the result'), list.length ? `Answer: [${list.join(', ')}].` : 'Answer: empty.')
+  snap('done', L('return the result'), PY('return result'), list.length ? `Answer: [${list.join(', ')}].` : 'Answer: empty.')
   return { input, groups, result: list, frames }
 }
 
@@ -114,3 +114,10 @@ export const python = `def sort_items(n, m, group, before_items):
                 result.append(item)
     return result
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}

@@ -14,14 +14,14 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ day, month, year }) {
-  const frames = [{ phase: 'start', activeLine: L('set days to 0'), days: 0, index: -1, message: `Count the days from 1 January 1971 to ${day}/${month}/${year}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set days to 0'), pythonLine: PY('days = 0'), days: 0, index: -1, message: `Count the days from 1 January 1971 to ${day}/${month}/${year}.` }]
   let days = 0
   for (let y = 1971; y < year; y++) days += isLeap(y) ? 366 : 365
-  frames.push({ phase: 'years', activeLine: L('for each year from 1971'), days, index: -1, message: `Whole years before ${year} add ${days} days.` })
+  frames.push({ phase: 'years', activeLine: L('for each year from 1971'), pythonLine: PY('for y in range(1971, year)'), days, index: -1, message: `Whole years before ${year} add ${days} days.` })
   for (let m = 1; m < month; m++) days += monthLength(m, year)
   days += day - 1
   const index = (5 + days) % 7
-  frames.push({ phase: 'done', activeLine: L('return the weekday name'), days, index, message: `${days} days after a Friday is ${NAMES[index]}.` })
+  frames.push({ phase: 'done', activeLine: L('return the weekday name'), pythonLine: PY('return names['), days, index, message: `${days} days after a Friday is ${NAMES[index]}.` })
   return { input: { day, month, year }, result: NAMES[index], index, frames }
 }
 
@@ -52,3 +52,10 @@ export const python = `def day_of_week(day, month, year):
     days += day - 1
     return names[(5 + days) % 7]
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}

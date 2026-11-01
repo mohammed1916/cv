@@ -18,15 +18,15 @@ export function buildTrace({ n, a, b, c }) {
   // Counts the numbers from 1 to x divisible by a, b or c.
   const foundUpTo = x => Math.floor(x / a) + Math.floor(x / b) + Math.floor(x / c) - Math.floor(x / ab) - Math.floor(x / ac) - Math.floor(x / bc) + Math.floor(x / abc)
   let low = 1, high = n * Math.min(a, b, c)
-  const frames = [{ phase: 'start', activeLine: L('set low to one'), low, high, mid: null, found: null, message: `The answer is at most ${n} times the smallest divisor, ${high}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set low to one'), pythonLine: PY('low = 1'), low, high, mid: null, found: null, message: `The answer is at most ${n} times the smallest divisor, ${high}.` }]
   while (low < high) {
     const mid = Math.floor((low + high) / 2)
     const found = foundUpTo(mid)
     if (found >= n) high = mid
     else low = mid + 1
-    frames.push({ phase: 'probe', activeLine: L('if found is at least'), low, high, mid, found, message: `${found} numbers up to ${mid} are divisible by a, b or c; need ${n}.` })
+    frames.push({ phase: 'probe', activeLine: L('if found is at least'), pythonLine: PY('if found_up_to(mid) >= n'), low, high, mid, found, message: `${found} numbers up to ${mid} are divisible by a, b or c; need ${n}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), low, high, mid: null, found: null, message: `The ${n}th such number is ${low}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: PY('return low'), low, high, mid: null, found: null, message: `The ${n}th such number is ${low}.` })
   return { input: { n, a, b, c }, result: low, frames }
 }
 
@@ -63,3 +63,10 @@ def nth_divisible(n, a, b, c):
             low = mid + 1
     return low
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}

@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const { arr1, arr2 } = input
   const ordered = [...new Set(arr2)].sort((a, b) => a - b)
   let states = new Map([[-Infinity, 0]])
-  const frames = [{ phase: 'start', activeLine: L('set states to one entry'), index: -1, value: null, states: [[-Infinity, 0]], result: null, message: 'Start with no previous value and no replacements.' }]
+  const frames = [{ phase: 'start', activeLine: L('set states to one entry'), pythonLine: PY('states = {float'), index: -1, value: null, states: [[-Infinity, 0]], result: null, message: 'Start with no previous value and no replacements.' }]
   for (let index = 0; index < arr1.length; index++) {
     const value = arr1[index]
     const next = new Map()
@@ -24,14 +24,14 @@ export function buildTrace(input) {
       if (replacement !== undefined) relax(replacement, ops + 1)
     }
     states = next
-    frames.push({ phase: 'step', activeLine: L('keep it'), index, value, states: [...states].map(([last, ops]) => [shown(last), ops]), result: null, message: `Position ${index} (value ${value}) leaves ${states.size} possible last value(s).` })
+    frames.push({ phase: 'step', activeLine: L('keep it'), pythonLine: PY('states = nxt'), index, value, states: [...states].map(([last, ops]) => [shown(last), ops]), result: null, message: `Position ${index} (value ${value}) leaves ${states.size} possible last value(s).` })
     if (states.size === 0) {
-      frames.push({ phase: 'done', activeLine: L('return minus one'), index, value, states: [], result: -1, message: 'No way to make the array strictly increasing.' })
+      frames.push({ phase: 'done', activeLine: L('return minus one'), pythonLine: PY('return -1'), index, value, states: [], result: -1, message: 'No way to make the array strictly increasing.' })
       return { input, result: -1, frames }
     }
   }
   const result = Math.min(...states.values())
-  frames.push({ phase: 'done', activeLine: L('return the smallest'), index: arr1.length, value: null, states: [...states].map(([last, ops]) => [shown(last), ops]), result, message: `The fewest replacements is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the smallest'), pythonLine: PY('return min(states.values())'), index: arr1.length, value: null, states: [...states].map(([last, ops]) => [shown(last), ops]), result, message: `The fewest replacements is ${result}.` })
   return { input, result, frames }
 }
 
@@ -63,3 +63,10 @@ export const python = `def min_operations(arr1, arr2):
             return -1
     return min(states.values())
 `
+
+const PY = (s, nth = 0) => {
+  let hits = -1
+  const i = python.split('\n').findIndex(line => line.includes(s) && ++hits === nth)
+  if (i < 0) throw new Error(`no Python line: ${s}`)
+  return i + 1
+}
