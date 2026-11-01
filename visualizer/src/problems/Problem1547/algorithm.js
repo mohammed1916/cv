@@ -18,8 +18,9 @@ export function buildTrace(input) {
   const frames = []
   let cell = null
   let apex = -1
+  const PY_LINE = { start: 2, length: 5, try: 9, keep: 8, done: 12 }
   const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, cell, apex, pts: [...pts], best: best.map(row => [...row]), message,
+    phase, activeLine, pythonLine: PY_LINE[phase], cell, apex, pts: [...pts], best: best.map(row => [...row]), message,
   })
 
   snap('start', L('sort the cuts'), `Points on the stick: [${pts.join(', ')}]. Pieces between neighbors cost nothing yet.`)

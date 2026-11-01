@@ -15,17 +15,17 @@ export function buildTrace(input) {
   const { s, k } = input
   const n = s.length
   const memo = new Map()
-  const frames = [{ phase: 'start', activeLine: L('return best(0'), i: 0, letter: '', run: 0, left: k, value: null, states: 0, message: `Compress ${s}, deleting at most ${k} characters.` }]
+  const frames = [{ phase: 'start', activeLine: L('return best(0'), pythonLine: 25, i: 0, letter: '', run: 0, left: k, value: null, states: 0, message: `Compress ${s}, deleting at most ${k} characters.` }]
 
   const best = (i, letter, run, left) => {
     if (i >= n) return 0
     const key = `${i}|${letter}|${run}|${left}`
     if (memo.has(key)) {
       const value = memo.get(key)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), i, letter, run, left, value, states: memo.size, message: `Character ${i} with run ${letter || 'none'} x${run} and ${left} deletions left is known.` })
+      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 17, i, letter, run, left, value, states: memo.size, message: `Character ${i} with run ${letter || 'none'} x${run} and ${left} deletions left is known.` })
       return value
     }
-    frames.push({ phase: 'visit', activeLine: L('set delete to infinity'), i, letter, run, left, value: null, states: memo.size, message: `Character ${i} is ${s[i]}. The current run is ${letter || 'empty'} x${run}, with ${left} deletions left.` })
+    frames.push({ phase: 'visit', activeLine: L('set delete to infinity'), pythonLine: 18, i, letter, run, left, value: null, states: memo.size, message: `Character ${i} is ${s[i]}. The current run is ${letter || 'empty'} x${run}, with ${left} deletions left.` })
     let del = Infinity
     if (left > 0) del = best(i + 1, letter, run, left - 1)
     const same = s[i] === letter
@@ -33,12 +33,12 @@ export function buildTrace(input) {
     const keep = extra + best(i + 1, s[i], same ? run + 1 : 1, left)
     const value = Math.min(del, keep)
     memo.set(key, value)
-    frames.push({ phase: 'store', activeLine: L('store the smaller'), i, letter, run, left, value, states: memo.size, message: `Best length from character ${i} is ${value}.` })
+    frames.push({ phase: 'store', activeLine: L('store the smaller'), pythonLine: 22, i, letter, run, left, value, states: memo.size, message: `Best length from character ${i} is ${value}.` })
     return value
   }
 
   const result = best(0, '', 0, k)
-  frames.push({ phase: 'done', activeLine: L('return best(0'), i: n, letter: '', run: 0, left: null, value: result, states: memo.size, message: `Shortest compressed length: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return best(0'), pythonLine: 25, i: n, letter: '', run: 0, left: null, value: result, states: memo.size, message: `Shortest compressed length: ${result}.` })
   return { input, result, frames }
 }
 

@@ -11,30 +11,30 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', activeLine: L('fewest days to eat'), remaining: n, memo: [], message: `Find the fewest days to finish ${n} oranges.` }]
+  const frames = [{ phase: 'start', activeLine: L('fewest days to eat'), pythonLine: 2, remaining: n, memo: [], message: `Find the fewest days to finish ${n} oranges.` }]
 
   const days = remaining => {
     if (remaining <= 1) {
-      frames.push({ phase: 'base', activeLine: L('if remaining is at most 1'), remaining, memo: snapshot(), message: `${remaining} orange${remaining === 1 ? '' : 's'} left takes ${remaining} day${remaining === 1 ? '' : 's'}.` })
+      frames.push({ phase: 'base', activeLine: L('if remaining is at most 1'), pythonLine: 6, remaining, memo: snapshot(), message: `${remaining} orange${remaining === 1 ? '' : 's'} left takes ${remaining} day${remaining === 1 ? '' : 's'}.` })
       return remaining
     }
     if (memo.has(remaining)) {
       const value = memo.get(remaining)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), remaining, memo: snapshot(), message: `${remaining} oranges already need ${value} days.` })
+      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 8, remaining, memo: snapshot(), message: `${remaining} oranges already need ${value} days.` })
       return value
     }
-    frames.push({ phase: 'visit', activeLine: L('set half option'), remaining, memo: snapshot(), message: `Compare eating half or two thirds of ${remaining}. An odd count first loses one orange to a day of eating one.` })
+    frames.push({ phase: 'visit', activeLine: L('set half option'), pythonLine: 9, remaining, memo: snapshot(), message: `Compare eating half or two thirds of ${remaining}. An odd count first loses one orange to a day of eating one.` })
     const half = remaining % 2 + days(Math.floor(remaining / 2))
     const third = remaining % 3 + days(Math.floor(remaining / 3))
     const best = 1 + Math.min(half, third)
     memo.set(remaining, best)
     entries.push({ remaining, days: best })
-    frames.push({ phase: 'store', activeLine: L('store one plus'), remaining, memo: snapshot(), message: `${remaining} oranges need ${best} days.` })
+    frames.push({ phase: 'store', activeLine: L('store one plus'), pythonLine: 11, remaining, memo: snapshot(), message: `${remaining} oranges need ${best} days.` })
     return best
   }
 
   const result = days(n)
-  frames.push({ phase: 'done', activeLine: L('return days for n'), remaining: 0, memo: snapshot(), message: `Fewest days for ${n} oranges: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return days for n'), pythonLine: 14, remaining: 0, memo: snapshot(), message: `Fewest days for ${n} oranges: ${result}.` })
   return { input, result, frames }
 }
 

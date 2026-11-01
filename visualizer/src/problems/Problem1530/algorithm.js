@@ -14,13 +14,13 @@ export function buildTrace({ tree, distance }) {
   const root = treeFromLevelOrder(tree)
   let pairs = 0
   const marks = {}
-  const frames = [{ phase: 'start', activeLine: L('set pairs to 0'), node: null, marks: {}, pairs, message: `Count pairs of leaves whose path has at most ${distance} edges.` }]
+  const frames = [{ phase: 'start', activeLine: L('set pairs to 0'), node: null, marks: {}, pairs, pythonLine: 26, message: `Count pairs of leaves whose path has at most ${distance} edges.` }]
   // counts[d] is the number of leaves exactly d edges below this node.
   const walk = node => {
     if (!node) return []
     if (!node.left && !node.right) {
       marks[node.id] = 'leaf'
-      frames.push({ phase: 'leaf', activeLine: L('if node is a leaf'), node: node.id, marks: { ...marks }, pairs, message: `Leaf ${node.value} has one leaf at depth 0.` })
+      frames.push({ phase: 'leaf', activeLine: L('if node is a leaf'), node: node.id, marks: { ...marks }, pairs, pythonLine: 32, message: `Leaf ${node.value} has one leaf at depth 0.` })
       return [1]
     }
     const left = [0, ...walk(node.left)]
@@ -36,11 +36,11 @@ export function buildTrace({ tree, distance }) {
     left.forEach((count, d) => { merged[d] += count })
     right.forEach((count, d) => { merged[d] += count })
     marks[node.id] = `depths ${merged.map((c, d) => (c ? `${d}:${c}` : '')).filter(Boolean).join(' ') || 'none'}`
-    frames.push({ phase: 'merge', activeLine: L('if a plus b is at most distance'), node: node.id, marks: { ...marks }, pairs, message: `Node ${node.value} adds ${added} good pairs that meet here. Total: ${pairs}.` })
+    frames.push({ phase: 'merge', activeLine: L('if a plus b is at most distance'), node: node.id, marks: { ...marks }, pairs, pythonLine: 38, message: `Node ${node.value} adds ${added} good pairs that meet here. Total: ${pairs}.` })
     return merged
   }
   walk(root)
-  frames.push({ phase: 'done', activeLine: L('return pairs'), node: null, marks: { ...marks }, pairs, message: `Good leaf pairs: ${pairs}.` })
+  frames.push({ phase: 'done', activeLine: L('return pairs'), node: null, marks: { ...marks }, pairs, pythonLine: 46, message: `Good leaf pairs: ${pairs}.` })
   return { input: { tree, distance }, root, result: pairs, frames }
 }
 

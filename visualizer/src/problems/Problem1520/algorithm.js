@@ -16,7 +16,7 @@ export function buildTrace(input) {
   }
   const letters = Object.keys(first).sort((a, b) => first[a] - first[b])
   const cands = []
-  const frames = [{ phase: 'start', activeLine: L('for each letter'), s, picked: [], current: null, message: 'Each letter that must stay together gives one candidate span, grown until it closes.' }]
+  const frames = [{ phase: 'start', activeLine: L('for each letter'), pythonLine: 9, s, picked: [], current: null, message: 'Each letter that must stay together gives one candidate span, grown until it closes.' }]
   for (const c of letters) {
     let l = first[c]
     let r = last[c]
@@ -28,7 +28,7 @@ export function buildTrace(input) {
     }
     if (ok) {
       cands.push({ l, r })
-      frames.push({ phase: 'candidate', activeLine: L('keep the span'), s, picked: [], current: [l, r], message: `Letter ${c}: the closed span ${s.slice(l, r + 1)} is a candidate.` })
+      frames.push({ phase: 'candidate', activeLine: L('keep the span'), pythonLine: 22, s, picked: [], current: [l, r], message: `Letter ${c}: the closed span ${s.slice(l, r + 1)} is a candidate.` })
     }
   }
   cands.sort((a, b) => a.r - b.r || b.l - a.l)
@@ -38,13 +38,13 @@ export function buildTrace(input) {
     if (cand.l > lastEnd) {
       picked.push([cand.l, cand.r])
       lastEnd = cand.r
-      frames.push({ phase: 'take', activeLine: L('take it'), s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Take ${s.slice(cand.l, cand.r + 1)}; it starts after the last taken span.` })
+      frames.push({ phase: 'take', activeLine: L('take it'), pythonLine: 28, s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Take ${s.slice(cand.l, cand.r + 1)}; it starts after the last taken span.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('skip it'), s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Skip ${s.slice(cand.l, cand.r + 1)}; it overlaps a taken span.` })
+      frames.push({ phase: 'skip', activeLine: L('skip it'), pythonLine: 27, s, picked: picked.map(p => [...p]), current: [cand.l, cand.r], message: `Skip ${s.slice(cand.l, cand.r + 1)}; it overlaps a taken span.` })
     }
   }
   const result = picked.map(([l, r]) => s.slice(l, r + 1))
-  frames.push({ phase: 'done', activeLine: L('return the taken substrings'), s, picked: picked.map(p => [...p]), current: null, message: `Maximum count: ${result.length}.` })
+  frames.push({ phase: 'done', activeLine: L('return the taken substrings'), pythonLine: 30, s, picked: picked.map(p => [...p]), current: null, message: `Maximum count: ${result.length}.` })
   return { input, result, frames }
 }
 

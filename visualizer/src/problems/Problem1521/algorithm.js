@@ -13,50 +13,50 @@ export function buildTrace({ arr, target }) {
   const frames = []
   const snap = (phase, line, extra, message) => frames.push({ phase, activeLine: L(line), table: table.map(row => row.slice()), best, message, ...extra })
   let best = Infinity
-  snap('build', 'set n to the length', {}, `Level 0 is the array itself. Each higher level stores the AND of two overlapping blocks of twice the length.`)
+  snap('build', 'set n to the length', { pythonLine: 3 }, `Level 0 is the array itself. Each higher level stores the AND of two overlapping blocks of twice the length.`)
   for (let j = 1; (1 << j) <= n; j++) {
     const half = 1 << (j - 1)
     const row = []
     for (let i = 0; i + (1 << j) <= n; i++) row.push(table[j - 1][i] & table[j - 1][i + half])
     table.push(row)
-    snap('build', 'for level j from 1', { level: j }, `Level ${j}: each entry ANDs two level ${j - 1} blocks of length ${half}.`)
+    snap('build', 'for level j from 1', { level: j, pythonLine: 8 }, `Level ${j}: each entry ANDs two level ${j - 1} blocks of length ${half}.`)
   }
   const range = (l, r) => {
     const k = Math.floor(Math.log2(r - l + 1))
     return table[k][l] & table[k][r - (1 << k) + 1]
   }
-  snap('search', 'set best to infinity', { l: -1 }, `Target is ${target}. The best distance so far is unset.`)
+  snap('search', 'set best to infinity', { l: -1, pythonLine: 15 }, `Target is ${target}. The best distance so far is unset.`)
   for (let l = 0; l < n; l++) {
     let lo = l, hi = n - 1, first = -1
-    snap('search', 'for each left index l', { l, lo, hi }, `Left end ${l}. The AND of [${l}..r] can only drop as r grows, so search for the first r that reaches the target.`)
+    snap('search', 'for each left index l', { l, lo, hi, pythonLine: 16 }, `Left end ${l}. The AND of [${l}..r] can only drop as r grows, so search for the first r that reaches the target.`)
     while (lo <= hi) {
       const mid = (lo + hi) >> 1
       const value = range(l, mid)
       if (value <= target) {
         first = mid
-        snap('search', 'binary search for the smallest r', { l, lo, hi, mid, value, first }, `AND of [${l}..${mid}] is ${value}, at most ${target}. Try a shorter range.`)
+        snap('search', 'binary search for the smallest r', { l, lo, hi, mid, value, first, pythonLine: 21 }, `AND of [${l}..${mid}] is ${value}, at most ${target}. Try a shorter range.`)
         hi = mid - 1
       } else {
-        snap('search', 'binary search for the smallest r', { l, lo, hi, mid, value, first }, `AND of [${l}..${mid}] is ${value}, above ${target}. Try a longer range.`)
+        snap('search', 'binary search for the smallest r', { l, lo, hi, mid, value, first, pythonLine: 24 }, `AND of [${l}..${mid}] is ${value}, above ${target}. Try a longer range.`)
         lo = mid + 1
       }
     }
     if (first === -1) {
       const value = range(l, n - 1)
       best = Math.min(best, Math.abs(value - target))
-      snap('record', 'if there is no such r', { l, first, value }, `Every range from ${l} stays above the target; the closest is [${l}..${n - 1}] with value ${value}.`)
+      snap('record', 'if there is no such r', { l, first, value, pythonLine: 26 }, `Every range from ${l} stays above the target; the closest is [${l}..${n - 1}] with value ${value}.`)
     } else {
       const value = range(l, first)
       best = Math.min(best, Math.abs(value - target))
-      snap('record', 'update best with |range(l, r) - target|', { l, first, value }, `Range [${l}..${first}] gives ${value}, distance ${Math.abs(value - target)}.`)
+      snap('record', 'update best with |range(l, r) - target|', { l, first, value, pythonLine: 28 }, `Range [${l}..${first}] gives ${value}, distance ${Math.abs(value - target)}.`)
       if (first > l) {
         const above = range(l, first - 1)
         best = Math.min(best, Math.abs(above - target))
-        snap('record', 'if r is above l', { l, first, value: above }, `The range one step shorter gives ${above}, above the target, distance ${Math.abs(above - target)}.`)
+        snap('record', 'if r is above l', { l, first, value: above, pythonLine: 30 }, `The range one step shorter gives ${above}, above the target, distance ${Math.abs(above - target)}.`)
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), table: table.map(row => row.slice()), best, l: -1, message: `Smallest distance to ${target}: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), table: table.map(row => row.slice()), best, l: -1, pythonLine: 31, message: `Smallest distance to ${target}: ${best}.` })
   return { input: { arr, target }, result: best, frames }
 }
 

@@ -26,7 +26,7 @@ export function buildTrace({ grid }) {
     return x
   }
   const snap = (pair, found, message) => ({ parent: [...parent], size: [...size], pair, found, message })
-  const frames = [{ phase: 'start', activeLine: L('give every cell its own set'), ...snap(null, false, 'Every cell starts alone. Only neighbours with the same letter may join.') }]
+  const frames = [{ phase: 'start', activeLine: L('give every cell its own set'), pythonLine: 4, ...snap(null, false, 'Every cell starts alone. Only neighbours with the same letter may join.') }]
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
@@ -38,8 +38,8 @@ export function buildTrace({ grid }) {
         const b = find(id(nr, nc))
         const pair = [id(r, c), id(nr, nc)]
         if (a === b) {
-          frames.push({ phase: 'cycle', activeLine: L('if the two cells are already in the same set'), ...snap(pair, true, `Cells ${names[pair[0]]} and ${names[pair[1]]} are already connected, so the loop closes a cycle.`) })
-          frames.push({ phase: 'done', activeLine: L('return true'), ...snap(null, true, 'A cycle of equal letters exists.') })
+          frames.push({ phase: 'cycle', activeLine: L('if the two cells are already in the same set'), pythonLine: 20, ...snap(pair, true, `Cells ${names[pair[0]]} and ${names[pair[1]]} are already connected, so the loop closes a cycle.`) })
+          frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: 21, ...snap(null, true, 'A cycle of equal letters exists.') })
           return { input: { grid }, result: true, frames }
         }
         if (size[a] < size[b]) {
@@ -49,11 +49,11 @@ export function buildTrace({ grid }) {
           parent[b] = a
           size[a] += size[b]
         }
-        frames.push({ phase: 'join', activeLine: L('join the two sets'), ...snap(pair, false, `Join ${names[pair[0]]} and ${names[pair[1]]} (letter ${grid[r][c]}).`) })
+        frames.push({ phase: 'join', activeLine: L('join the two sets'), pythonLine: 22, ...snap(pair, false, `Join ${names[pair[0]]} and ${names[pair[1]]} (letter ${grid[r][c]}).`) })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), ...snap(null, false, 'No join ever closed a loop, so there is no cycle.') })
+  frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: 23, ...snap(null, false, 'No join ever closed a loop, so there is no cycle.') })
   return { input: { grid }, result: false, frames }
 }
 

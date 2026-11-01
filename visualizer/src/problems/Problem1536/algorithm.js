@@ -18,13 +18,13 @@ export function buildTrace(input) {
   })
   let ids = grid.map((_, i) => i)
   let swaps = 0
-  const frames = [{ phase: 'start', activeLine: L('count the trailing zeros'), row: -1, need: 0, order: ids.slice(), swaps, message: `Row i needs at least ${n - 1} - i trailing zeros; count what each row has.` }]
+  const frames = [{ phase: 'start', activeLine: L('count the trailing zeros'), pythonLine: 12, row: -1, need: 0, order: ids.slice(), swaps, message: `Row i needs at least ${n - 1} - i trailing zeros; count what each row has.` }]
   for (let i = 0; i < n; i++) {
     const need = n - 1 - i
     let k = i
     while (k < n && zeros[ids[k]] < need) k++
     if (k === n) {
-      frames.push({ phase: 'stuck', activeLine: L('if no row at or below'), row: i, need, order: ids.slice(), swaps, message: `Position ${i} needs ${need} trailing zeros and no row below has enough, so it is impossible.` })
+      frames.push({ phase: 'stuck', activeLine: L('if no row at or below'), pythonLine: 19, row: i, need, order: ids.slice(), swaps, message: `Position ${i} needs ${need} trailing zeros and no row below has enough, so it is impossible.` })
       return { input, result: -1, frames }
     }
     while (k > i) {
@@ -32,10 +32,10 @@ export function buildTrace(input) {
       k--
       swaps++
     }
-    frames.push({ phase: 'place', activeLine: L('bubble that row up'), row: i, need, order: ids.slice(), swaps, message: `Position ${i} takes row ${ids[i]} with ${zeros[ids[i]]} trailing zeros; ${swaps} swaps so far.` })
+    frames.push({ phase: 'place', activeLine: L('bubble that row up'), pythonLine: 23, row: i, need, order: ids.slice(), swaps, message: `Position ${i} takes row ${ids[i]} with ${zeros[ids[i]]} trailing zeros; ${swaps} swaps so far.` })
   }
   ids = ids.slice()
-  frames.push({ phase: 'done', activeLine: L('return swaps'), row: -1, need: 0, order: ids, swaps, message: `Minimum adjacent swaps: ${swaps}.` })
+  frames.push({ phase: 'done', activeLine: L('return swaps'), pythonLine: 24, row: -1, need: 0, order: ids, swaps, message: `Minimum adjacent swaps: ${swaps}.` })
   return { input, result: swaps, frames }
 }
 
