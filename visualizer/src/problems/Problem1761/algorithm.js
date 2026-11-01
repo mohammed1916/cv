@@ -27,7 +27,7 @@ export function buildTrace({ n, edges }) {
   const frames = []
   let best = null
   let bestTrio = null
-  frames.push({ phase: 'start', activeLine: L('build an adjacency table'), trio: null, degree: null, best, bestTrio, message: 'Count each node degree from the edges.' })
+  frames.push({ phase: 'start', pythonLine: 9, activeLine: L('build an adjacency table'), trio: null, degree: null, best, bestTrio, message: 'Count each node degree from the edges.' })
   for (let a = 1; a <= n; a++) {
     for (let b = a + 1; b <= n; b++) {
       for (let c = b + 1; c <= n; c++) {
@@ -37,14 +37,14 @@ export function buildTrace({ n, edges }) {
             best = degree
             bestTrio = [a, b, c]
           }
-          frames.push({ phase: 'trio', activeLine: L('set degree to'), trio: [a, b, c], degree, best, bestTrio, message: `Trio ${a}, ${b}, ${c} is connected with degree ${degree}.` })
+          frames.push({ phase: 'trio', pythonLine: 14, activeLine: L('set degree to'), trio: [a, b, c], degree, best, bestTrio, message: `Trio ${a}, ${b}, ${c} is connected with degree ${degree}.` })
         } else {
-          frames.push({ phase: 'check', activeLine: L('if a, b and c are all connected'), trio: [a, b, c], degree: null, best, bestTrio, message: `${a}, ${b}, ${c} is not a connected trio.` })
+          frames.push({ phase: 'check', pythonLine: 13, activeLine: L('if a, b and c are all connected'), trio: [a, b, c], degree: null, best, bestTrio, message: `${a}, ${b}, ${c} is not a connected trio.` })
         }
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best, or -1'), trio: null, degree: null, best, bestTrio, message: best === null ? 'No connected trio exists.' : `Minimum degree: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return best, or -1'), trio: null, degree: null, best, bestTrio, message: best === null ? 'No connected trio exists.' : `Minimum degree: ${best}.` })
   return { input: { n, edges }, result: best === null ? -1 : best, frames }
 }
 

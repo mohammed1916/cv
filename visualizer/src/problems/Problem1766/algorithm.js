@@ -26,22 +26,22 @@ export function buildTrace({ nums, edges }) {
   const answer = Array(n).fill(-1)
   const seen = Array(n).fill(false)
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('build the adjacency'), node: 0, target: -1, answer: [...answer], message: 'Build the tree and start a walk at node 0.' })
+  frames.push({ phase: 'start', pythonLine: 23, activeLine: L('build the adjacency'), node: 0, target: -1, answer: [...answer], message: 'Build the tree and start a walk at node 0.' })
   const visit = (v, ancestors) => {
     seen[v] = true
-    frames.push({ phase: 'visit', activeLine: L('visit a node with a stack'), node: v, target: -1, answer: [...answer], message: `Visit node ${v} with value ${nums[v]}.` })
+    frames.push({ phase: 'visit', pythonLine: 12, activeLine: L('visit a node with a stack'), node: v, target: -1, answer: [...answer], message: `Visit node ${v} with value ${nums[v]}.` })
     let found = -1
     for (let k = ancestors.length - 1; k >= 0; k--) {
       const a = ancestors[k]
       const shared = gcd(nums[a], nums[v])
-      frames.push({ phase: 'scan', activeLine: L('for each ancestor from nearest'), node: v, target: a, answer: [...answer], message: `Ancestor ${a} has value ${nums[a]}; gcd with ${nums[v]} is ${shared}.` })
+      frames.push({ phase: 'scan', pythonLine: 14, activeLine: L('for each ancestor from nearest'), node: v, target: a, answer: [...answer], message: `Ancestor ${a} has value ${nums[a]}; gcd with ${nums[v]} is ${shared}.` })
       if (shared === 1) { found = a; break }
     }
     answer[v] = found
     if (found === -1) {
-      frames.push({ phase: 'none', activeLine: L('set answer to -1'), node: v, target: -1, answer: [...answer], message: `No ancestor is coprime with ${nums[v]}; the answer is -1.` })
+      frames.push({ phase: 'none', pythonLine: 14, activeLine: L('set answer to -1'), node: v, target: -1, answer: [...answer], message: `No ancestor is coprime with ${nums[v]}; the answer is -1.` })
     } else {
-      frames.push({ phase: 'found', activeLine: L('shares no factor'), node: v, target: found, answer: [...answer], message: `Nearest coprime ancestor of node ${v} is ${found}.` })
+      frames.push({ phase: 'found', pythonLine: 15, activeLine: L('shares no factor'), node: v, target: found, answer: [...answer], message: `Nearest coprime ancestor of node ${v} is ${found}.` })
     }
     const next = [...ancestors, v]
     for (const w of adjacency[v]) {
@@ -52,7 +52,7 @@ export function buildTrace({ nums, edges }) {
     }
   }
   visit(0, [])
-  frames.push({ phase: 'done', activeLine: L('return the answers'), node: -1, target: -1, answer: [...answer], message: `Answers: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 24, activeLine: L('return the answers'), node: -1, target: -1, answer: [...answer], message: `Answers: [${answer.join(', ')}].` })
   return { input: { nums, edges }, root: tree[0], result: answer, frames }
 }
 

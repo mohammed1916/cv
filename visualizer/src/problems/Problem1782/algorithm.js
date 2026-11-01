@@ -22,8 +22,8 @@ export function buildTrace(input) {
     shared.set(key, (shared.get(key) || 0) + 1)
   }
   const ordered = deg.slice(1).sort((a, b) => a - b)
-  const frames = [{ phase: 'degree', activeLine: L('count the degree'), query: null, sorted: ordered, total: null, message: `Degrees: ${deg.slice(1).join(', ')}.` }]
-  frames.push({ phase: 'sort', activeLine: L('sort the degrees'), query: null, sorted: ordered, total: null, message: `Sorted degrees: ${ordered.join(', ')}.` })
+  const frames = [{ phase: 'degree', pythonLine: 6, activeLine: L('count the degree'), query: null, sorted: ordered, total: null, message: `Degrees: ${deg.slice(1).join(', ')}.` }]
+  frames.push({ phase: 'sort', pythonLine: 9, activeLine: L('sort the degrees'), query: null, sorted: ordered, total: null, message: `Sorted degrees: ${ordered.join(', ')}.` })
   const answers = []
   for (const q of queries) {
     let total = 0
@@ -32,16 +32,16 @@ export function buildTrace(input) {
     while (i < j) {
       if (ordered[i] + ordered[j] > q) { total += j - i; j-- } else i++
     }
-    frames.push({ phase: 'query', activeLine: L('set total to the number of pairs'), query: q, sorted: ordered, total, message: `Query ${q}: ${total} pairs have a degree sum above ${q} before correcting shared edges.` })
+    frames.push({ phase: 'query', pythonLine: 17, activeLine: L('set total to the number of pairs'), query: q, sorted: ordered, total, message: `Query ${q}: ${total} pairs have a degree sum above ${q} before correcting shared edges.` })
     for (const [key, c] of shared) {
       const [a, b] = key.split(',').map(Number)
       const s = deg[a] + deg[b]
       if (s > q && s - c <= q) total--
     }
-    frames.push({ phase: 'correct', activeLine: L('decrease total'), query: q, sorted: ordered, total, message: `Shared edges removed from the count: ${total} pairs for query ${q}.` })
+    frames.push({ phase: 'correct', pythonLine: 24, activeLine: L('decrease total'), query: q, sorted: ordered, total, message: `Shared edges removed from the count: ${total} pairs for query ${q}.` })
     answers.push(total)
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), query: null, sorted: ordered, total: null, message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 26, activeLine: L('return the answers'), query: null, sorted: ordered, total: null, message: `Answers: ${answers.join(', ')}.` })
   return { input, result: answers, frames }
 }
 

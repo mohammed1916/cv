@@ -18,7 +18,7 @@ export function buildTrace(input) {
   for (const ch of a) countA[letterIndex(ch)] += 1
   for (const ch of b) countB[letterIndex(ch)] += 1
   let best = a.length + b.length - Math.max(...countA.map((v, i) => v + countB[i]))
-  const frames = [{ phase: 'count', activeLine: L('count the letters'), boundary: null, best, message: `Making both strings one letter costs ${best} changes.` }]
+  const frames = [{ phase: 'count', pythonLine: 8, activeLine: L('count the letters'), boundary: null, best, message: `Making both strings one letter costs ${best} changes.` }]
   for (let boundary = 1; boundary < 26; boundary++) {
     const aHigh = sumOf(countA.slice(boundary))
     const bLow = sumOf(countB.slice(0, boundary))
@@ -27,9 +27,9 @@ export function buildTrace(input) {
     const costAB = aHigh + bLow
     const costBA = bHigh + aLow
     best = Math.min(best, costAB, costBA)
-    frames.push({ phase: 'boundary', activeLine: L('for each boundary'), boundary, best, message: `Boundary ${String.fromCharCode(97 + boundary)}: a below and b at or above costs ${costAB}; b below and a at or above costs ${costBA}.` })
+    frames.push({ phase: 'boundary', pythonLine: 14, activeLine: L('for each boundary'), boundary, best, message: `Boundary ${String.fromCharCode(97 + boundary)}: a below and b at or above costs ${costAB}; b below and a at or above costs ${costBA}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), boundary: null, best, message: `Fewest changes: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return best'), boundary: null, best, message: `Fewest changes: ${best}.` })
   return { input, result: best, frames }
 }
 

@@ -13,7 +13,7 @@ export function buildTrace({ nums, k }) {
   const domain = 1 << Math.max(3, Math.max(...nums).toString(2).length)
   let best = Array(domain).fill(Infinity)
   best[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set cost of xor 0 to 0'), group: -1, best: best.slice(), message: `Index classes modulo ${k} must each share one value, and those values must xor to 0.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set cost of xor 0 to 0'), group: -1, best: best.slice(), message: `Index classes modulo ${k} must each share one value, and those values must xor to 0.` }]
   for (let r = 0; r < k; r++) {
     const group = nums.filter((_, i) => i % k === r)
     const counts = Array(domain).fill(0)
@@ -27,9 +27,9 @@ export function buildTrace({ nums, k }) {
       }
     }
     best = next
-    frames.push({ phase: 'group', activeLine: L('for each group'), group: r, best: best.slice(), message: `Class ${r} (indices congruent to ${r} mod ${k}) is folded in. The cheapest way to reach xor 0 so far costs ${best[0]}.` })
+    frames.push({ phase: 'group', pythonLine: 18, activeLine: L('for each group'), group: r, best: best.slice(), message: `Class ${r} (indices congruent to ${r} mod ${k}) is folded in. The cheapest way to reach xor 0 so far costs ${best[0]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the cost of xor 0'), group: -1, best: best.slice(), message: `Minimum changes: ${best[0]}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the cost of xor 0'), group: -1, best: best.slice(), message: `Minimum changes: ${best[0]}.` })
   return { input: { nums, k }, result: best[0], frames }
 }
 

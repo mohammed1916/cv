@@ -16,8 +16,8 @@ export function buildTrace(input) {
   const dp = Array.from({ length: total }, () => Array(total).fill(0))
   const frames = []
   const snapshot = () => dp.map(row => [...row])
-  const frame = (phase, line, cell, best, message) => frames.push({ phase, activeLine: line, cell, best, dp: snapshot(), message })
-  frame('start', L('join word1 and word2'), null, 0, `Join the words into ${s}. Indices below ${n} come from word1.`)
+  const frame = (phase, pyLine, line, cell, best, message) => frames.push({ phase, pythonLine: pyLine, activeLine: line, cell, best, dp: snapshot(), message })
+  frame('start', 2, L('join word1 and word2'), null, 0, `Join the words into ${s}. Indices below ${n} come from word1.`)
   for (let i = total - 1; i >= 0; i--) {
     dp[i][i] = 1
     for (let j = i + 1; j < total; j++) {
@@ -26,18 +26,18 @@ export function buildTrace(input) {
         : Math.max(dp[i + 1][j], dp[i][j - 1])
     }
   }
-  frame('fill', L('fill the table of longest palindromic'), null, 0, 'The table holds the longest palindromic subsequence of every span of s.')
+  frame('fill', 12, L('fill the table of longest palindromic'), null, 0, 'The table holds the longest palindromic subsequence of every span of s.')
   let best = 0
   for (let i = 0; i < n; i++) {
     for (let j = n; j < total; j++) {
       if (s[i] === s[j]) {
         const inner = i + 1 <= j - 1 ? dp[i + 1][j - 1] : 0
         best = Math.max(best, inner + 2)
-        frame('pair', L('if s at i equals s at j'), [i, j], best, `Ends ${s[i]} at ${i} and ${s[j]} at ${j} match, so the palindrome is 2 plus ${inner} inside.`)
+        frame('pair', 18, L('if s at i equals s at j'), [i, j], best, `Ends ${s[i]} at ${i} and ${s[j]} at ${j} match, so the palindrome is 2 plus ${inner} inside.`)
       }
     }
   }
-  frame('done', L('return best'), null, best, `The longest palindrome from one subsequence of each word has length ${best}.`)
+  frame('done', 19, L('return best'), null, best, `The longest palindrome from one subsequence of each word has length ${best}.`)
   return { input, result: best, frames }
 }
 

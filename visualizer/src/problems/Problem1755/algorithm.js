@@ -33,8 +33,9 @@ export function buildTrace(input) {
   let candidate = -1
   let lsums = []
   let rsums = []
+  const PY_LINE = { split: 6, left: 14, right: 15, start: 16, search: 18, update: 21, done: 22 }
   const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, a, candidate, lsums: [...lsums], rsums: [...rsums], best: best === Infinity ? null : best, message,
+    phase, pythonLine: PY_LINE[phase], activeLine, a, candidate, lsums: [...lsums], rsums: [...rsums], best: best === Infinity ? null : best, message,
   })
 
   snap('split', L('split the numbers'), `Left half: [${nums.slice(0, half).join(', ')}]. Right half: [${nums.slice(half).join(', ')}].`)

@@ -16,20 +16,20 @@ export function buildTrace({ s }) {
     }
   }
   const frames = []
-  frames.push({ phase: 'table', activeLine: L('mark each substring'), a: null, b: null, found: false, message: 'The palindrome table is filled for every substring.' })
+  frames.push({ phase: 'table', pythonLine: 7, activeLine: L('mark each substring'), a: null, b: null, found: false, message: 'The palindrome table is filled for every substring.' })
   let result = false
   search: for (let a = 1; a <= n - 2; a++) {
     for (let b = a + 1; b <= n - 1; b++) {
       const ok = pal[0][a - 1] && pal[a][b - 1] && pal[b][n - 1]
-      frames.push({ phase: 'cut', activeLine: L('for each second cut'), a, b, found: ok, message: ok ? `Cuts at ${a} and ${b} give three palindromes.` : `Cuts at ${a} and ${b}: at least one piece is not a palindrome.` })
+      frames.push({ phase: 'cut', pythonLine: 10, activeLine: L('for each second cut'), a, b, found: ok, message: ok ? `Cuts at ${a} and ${b} give three palindromes.` : `Cuts at ${a} and ${b}: at least one piece is not a palindrome.` })
       if (ok) {
         result = true
-        frames.push({ phase: 'done', activeLine: L('return true'), a, b, found: true, message: `Partition found: ${s.slice(0, a)} | ${s.slice(a, b)} | ${s.slice(b)}.` })
+        frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return true'), a, b, found: true, message: `Partition found: ${s.slice(0, a)} | ${s.slice(a, b)} | ${s.slice(b)}.` })
         break search
       }
     }
   }
-  if (!result) frames.push({ phase: 'done', activeLine: L('return false'), a: null, b: null, found: false, message: 'Every pair of cuts fails, so no split into three palindromes exists.' })
+  if (!result) frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return false'), a: null, b: null, found: false, message: 'Every pair of cuts fails, so no split into three palindromes exists.' })
   return { input: { s }, result, frames }
 }
 

@@ -28,17 +28,17 @@ export function buildTrace(data) {
   }
   const dp = Array.from({ length: n + 1 }, () => Array(k + 1).fill(0))
   const snapshot = () => dp.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('set dp[0][j]'), i: 0, j: 0, table: snapshot(), prev, events, message: 'With no events the value is 0 for every attendance count.' }]
+  const frames = [{ phase: 'start', pythonLine: 11, activeLine: L('set dp[0][j]'), i: 0, j: 0, table: snapshot(), prev, events, message: 'With no events the value is 0 for every attendance count.' }]
   for (let i = 1; i <= n; i++) {
     const [start, end, value] = events[i - 1]
     for (let j = 1; j <= k; j++) {
       const skip = dp[i - 1][j]
       const attend = value + dp[prev[i]][j - 1]
       dp[i][j] = Math.max(skip, attend)
-      frames.push({ phase: 'cell', activeLine: L('keep the better'), i, j, table: snapshot(), prev, events, message: `Event ${i} (days ${start}-${end}, value ${value}): skip gives ${skip}, attend after ${prev[i]} earlier events gives ${attend}. Keep ${dp[i][j]}.` })
+      frames.push({ phase: 'cell', pythonLine: 15, activeLine: L('keep the better'), i, j, table: snapshot(), prev, events, message: `Event ${i} (days ${start}-${end}, value ${value}): skip gives ${skip}, attend after ${prev[i]} earlier events gives ${attend}. Keep ${dp[i][j]}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return dp[n][k]'), i: n, j: k, table: snapshot(), prev, events, message: `The best total value with at most ${k} events is ${dp[n][k]}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return dp[n][k]'), i: n, j: k, table: snapshot(), prev, events, message: `The best total value with at most ${k} events is ${dp[n][k]}.` })
   return { input: data, result: dp[n][k], frames, events, prev }
 }
 
