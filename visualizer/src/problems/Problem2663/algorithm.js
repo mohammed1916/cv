@@ -22,25 +22,25 @@ export function buildTrace(input) {
   const { s, k } = input
   const a = [...s].map(ch => ch.charCodeAt(0) - 97)
   const n = a.length
-  const frames = [{ phase: 'start', activeLine: L('let a be the letters'), index: -1, text: s, message: `Find the smallest beautiful string of length ${n} above ${s}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let a be the letters'), pythonLine: P('a = [ord(ch) - 97 for ch in s]'), index: -1, text: s, message: `Find the smallest beautiful string of length ${n} above ${s}.` }]
   for (let i = n - 1; i >= 0; i--) {
-    frames.push({ phase: 'scan', activeLine: L('for i from n - 1'), index: i, text: str(a), message: `Try to raise position ${i}.` })
+    frames.push({ phase: 'scan', activeLine: L('for i from n - 1'), pythonLine: P('for i in range(n - 1, -1, -1)'), index: i, text: str(a), message: `Try to raise position ${i}.` })
     for (let c = a[i] + 1; c < k; c++) {
       if ((i >= 1 && c === a[i - 1]) || (i >= 2 && c === a[i - 2])) continue
       a[i] = c
-      frames.push({ phase: 'place', activeLine: L('set a[i] to c'), index: i, text: str(a), message: `Raise position ${i} to ${String.fromCharCode(97 + c)}. It avoids the two letters before it.` })
+      frames.push({ phase: 'place', activeLine: L('set a[i] to c'), pythonLine: P('a[i] = c'), index: i, text: str(a), message: `Raise position ${i} to ${String.fromCharCode(97 + c)}. It avoids the two letters before it.` })
       for (let j = i + 1; j < n; j++) {
         let d = 0
         while ((j >= 1 && d === a[j - 1]) || (j >= 2 && d === a[j - 2])) d++
         a[j] = d
       }
       const result = str(a)
-      frames.push({ phase: 'fill', activeLine: L('fill each later'), index: i, text: result, message: `Fill the later positions with the smallest safe letters.` })
-      frames.push({ phase: 'done', activeLine: L('return the result'), index: -1, text: result, message: `Smallest beautiful string: ${result}.` })
+      frames.push({ phase: 'fill', activeLine: L('fill each later'), pythonLine: P('for j in range(i + 1, n)'), index: i, text: result, message: `Fill the later positions with the smallest safe letters.` })
+      frames.push({ phase: 'done', activeLine: L('return the result'), pythonLine: P("return ''.join("), index: -1, text: result, message: `Smallest beautiful string: ${result}.` })
       return { input, s, k, result, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the empty string'), index: -1, text: '', message: 'No beautiful string is larger than s.' })
+  frames.push({ phase: 'done', activeLine: L('return the empty string'), pythonLine: python.split('\n').findIndex(l => l.trim() === "return ''") + 1, index: -1, text: '', message: 'No beautiful string is larger than s.' })
   return { input, s, k, result: '', frames }
 }
 
@@ -73,3 +73,4 @@ export const python = `def smallest_beautiful(s, k):
             return ''.join(chr(97 + x) for x in a)
     return ''
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

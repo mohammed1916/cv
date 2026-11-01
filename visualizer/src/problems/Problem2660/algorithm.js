@@ -14,18 +14,18 @@ export function buildTrace(input) {
   const { player1, player2 } = input
   let score1 = 0
   let score2 = 0
-  const frames = [{ phase: 'start', activeLine: L('set score1 and score2'), turn: -1, score1, score2, doubled1: [], doubled2: [], message: 'Both scores start at 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('set score1 and score2'), pythonLine: P('score1 = 0'), turn: -1, score1, score2, doubled1: [], doubled2: [], message: 'Both scores start at 0.' }]
   for (let i = 0; i < player1.length; i++) {
     const hitTen = (arr) => (i >= 1 && arr[i - 1] === 10) || (i >= 2 && arr[i - 2] === 10)
     const d1 = hitTen(player1)
     const d2 = hitTen(player2)
     score1 += d1 ? 2 * player1[i] : player1[i]
     score2 += d2 ? 2 * player2[i] : player2[i]
-    frames.push({ phase: 'turn', activeLine: L('for each turn i'), turn: i, score1, score2, doubled1: d1 ? [i] : [], doubled2: d2 ? [i] : [],
+    frames.push({ phase: 'turn', activeLine: L('for each turn i'), pythonLine: P('for i in range(len(player1))'), turn: i, score1, score2, doubled1: d1 ? [i] : [], doubled2: d2 ? [i] : [],
       message: `Turn ${i + 1}: player 1 scores ${d1 ? 2 * player1[i] : player1[i]}${d1 ? ' (doubled)' : ''}, player 2 scores ${d2 ? 2 * player2[i] : player2[i]}${d2 ? ' (doubled)' : ''}.` })
   }
   const result = score1 > score2 ? 1 : score2 > score1 ? 2 : 0
-  frames.push({ phase: 'done', activeLine: L('return 0'), turn: player1.length - 1, score1, score2, doubled1: [], doubled2: [],
+  frames.push({ phase: 'done', activeLine: L('return 0'), pythonLine: P(result === 1 ? 'return 1' : result === 2 ? 'return 2' : 'return 0'), turn: player1.length - 1, score1, score2, doubled1: [], doubled2: [],
     message: result === 0 ? `Tie at ${score1}.` : `Player ${result} wins ${Math.max(score1, score2)} to ${Math.min(score1, score2)}.` })
   return { input, result, frames }
 }
@@ -54,3 +54,4 @@ export const python = `def bowling_winner(player1, player2):
         return 2
     return 0
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

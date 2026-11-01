@@ -7,22 +7,22 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const n = nums.length
-  const frames = [{ phase: 'start', activeLine: L('set suffixCount to'), active: -1, roles: {}, state: {}, message: 'First count distinct values in each suffix, from the right.' }]
+  const frames = [{ phase: 'start', activeLine: L('set suffixCount to'), pythonLine: P('suffix_count = [0] * (n + 1)'), active: -1, roles: {}, state: {}, message: 'First count distinct values in each suffix, from the right.' }]
   const suffixCount = Array(n + 1).fill(0)
   const seenRight = new Set()
   for (let i = n - 1; i >= 0; i--) {
     seenRight.add(nums[i])
     suffixCount[i] = seenRight.size
-    frames.push({ phase: 'suffix', activeLine: L('set suffixCount[i]'), active: i, roles: { [i]: 'suffix' }, state: { suffixDistinct: suffixCount[i] }, message: `Suffix from ${i} has ${suffixCount[i]} distinct values.` })
+    frames.push({ phase: 'suffix', activeLine: L('set suffixCount[i]'), pythonLine: P('suffix_count[i] = len(seen)'), active: i, roles: { [i]: 'suffix' }, state: { suffixDistinct: suffixCount[i] }, message: `Suffix from ${i} has ${suffixCount[i]} distinct values.` })
   }
   const seen = new Set()
   const diff = []
   for (let i = 0; i < n; i++) {
     seen.add(nums[i])
     diff.push(seen.size - suffixCount[i + 1])
-    frames.push({ phase: 'prefix', activeLine: L('set diff[i]'), active: i, roles: { [i]: 'prefix' }, state: { prefixDistinct: seen.size, suffixDistinct: suffixCount[i + 1], difference: diff[i] }, message: `Prefix up to ${i} has ${seen.size} distinct values; the suffix after it has ${suffixCount[i + 1]}. Difference ${diff[i]}.` })
+    frames.push({ phase: 'prefix', activeLine: L('set diff[i]'), pythonLine: P('diff.append('), active: i, roles: { [i]: 'prefix' }, state: { prefixDistinct: seen.size, suffixDistinct: suffixCount[i + 1], difference: diff[i] }, message: `Prefix up to ${i} has ${seen.size} distinct values; the suffix after it has ${suffixCount[i + 1]}. Difference ${diff[i]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return diff'), active: -1, roles: {}, state: { diff: diff.join(', ') }, message: `Return [${diff.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return diff'), pythonLine: P('return diff'), active: -1, roles: {}, state: { diff: diff.join(', ') }, message: `Return [${diff.join(', ')}].` })
   return { input: nums, result: diff, items: nums, frames }
 }
 
@@ -53,3 +53,4 @@ export const python = `def distinct_difference_array(nums):
         diff.append(len(seen) - suffix_count[i + 1])
     return diff
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

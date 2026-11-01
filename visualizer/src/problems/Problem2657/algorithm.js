@@ -21,24 +21,24 @@ export function buildTrace(input) {
     { name: 'A so far', keyLabel: 'value', valueLabel: '', isSet: true, entries: [...seenA].map(v => [v]) },
     { name: 'B so far', keyLabel: 'value', valueLabel: '', isSet: true, entries: [...seenB].map(v => [v]) },
   ]
-  frames.push({ phase: 'start', activeLine: L('seenA = empty set'), index: -1, maps: maps(), ops: [], result: [], message: 'Walk both arrays together. A value counts once it has appeared in both prefixes.' })
+  frames.push({ phase: 'start', activeLine: L('seenA = empty set'), pythonLine: P('seen_a = set()'), index: -1, maps: maps(), ops: [], result: [], message: 'Walk both arrays together. A value counts once it has appeared in both prefixes.' })
   for (let i = 0; i < A.length; i++) {
     seenA.add(A[i])
     const aHit = seenB.has(A[i])
     if (aHit) common++
-    frames.push({ phase: 'a', activeLine: L('if A[i] is in seenB'), index: i, maps: maps(),
+    frames.push({ phase: 'a', activeLine: L('if A[i] is in seenB'), pythonLine: P('if A[i] in seen_b'), index: i, maps: maps(),
       ops: [{ map: 'A so far', type: 'insert', key: A[i] }, { map: 'B so far', type: 'lookup', via: 'has', key: A[i], hit: aHit, hitNote: `${A[i]} already appeared in B`, missNote: `${A[i]} has not appeared in B yet` }],
       result: [...result], message: `A[${i}] = ${A[i]}. ${aHit ? 'B has already shown it, so the common count goes up.' : 'B has not shown it yet.'}` })
     seenB.add(B[i])
     const bHit = seenA.has(B[i])
     if (bHit) common++
-    frames.push({ phase: 'b', activeLine: L('if B[i] is in seenA'), index: i, maps: maps(),
+    frames.push({ phase: 'b', activeLine: L('if B[i] is in seenA'), pythonLine: P('if B[i] in seen_a'), index: i, maps: maps(),
       ops: [{ map: 'B so far', type: 'insert', key: B[i] }, { map: 'A so far', type: 'lookup', via: 'has', key: B[i], hit: bHit, hitNote: `${B[i]} already appeared in A`, missNote: `${B[i]} has not appeared in A yet` }],
       result: [...result], message: `B[${i}] = ${B[i]}. ${bHit ? 'A has already shown it, so the common count goes up.' : 'A has not shown it yet.'}` })
     result.push(common)
-    frames.push({ phase: 'record', activeLine: L('append common'), index: i, maps: maps(), ops: [], result: [...result], message: `Prefix ${i + 1} has ${common} common value(s).` })
+    frames.push({ phase: 'record', activeLine: L('append common'), pythonLine: P('result.append(common)'), index: i, maps: maps(), ops: [], result: [...result], message: `Prefix ${i + 1} has ${common} common value(s).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), index: -1, maps: maps(), ops: [], result: [...result], message: `Prefix common array: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: P('return result'), index: -1, maps: maps(), ops: [], result: [...result], message: `Prefix common array: [${result.join(', ')}].` })
   return { input, result, frames }
 }
 
@@ -69,3 +69,4 @@ export const python = `def find_the_prefix_common_array(A, B):
         result.append(common)
     return result
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

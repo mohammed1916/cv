@@ -40,7 +40,7 @@ export function buildTrace({ start, target, special_roads: roads }) {
   const dist = new Array(points.length).fill(Infinity)
   dist[0] = 0
   const settled = new Array(points.length).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('dist[start] = 0'), point: 0, dist: [...dist], settled: [...settled], message: `${points.length} point(s) to consider: the start, the target and each special road endpoint. Walking between any two points costs their Manhattan distance.` }]
+  const frames = [{ phase: 'start', activeLine: L('dist[start] = 0'), pythonLine: P('dist[0] = 0'), point: 0, dist: [...dist], settled: [...settled], message: `${points.length} point(s) to consider: the start, the target and each special road endpoint. Walking between any two points costs their Manhattan distance.` }]
   let result = null
   for (;;) {
     let i = -1
@@ -52,10 +52,11 @@ export function buildTrace({ start, target, special_roads: roads }) {
     const d = dist[i]
     points.forEach((q, j) => { const step = d + Math.abs(px - q[0]) + Math.abs(py - q[1]); if (step < dist[j]) dist[j] = step })
     for (const [j, cost] of roadsFrom[i]) if (d + cost < dist[j]) dist[j] = d + cost
-    frames.push({ phase: 'settle', activeLine: L('pop (d, p)'), point: i, dist: [...dist], settled: [...settled], message: `Settle point (${px}, ${py}) at cost ${d}. Walks reach each other point, and special roads from here cost their listed price.` })
+    frames.push({ phase: 'settle', activeLine: L('pop (d, p)'), pythonLine: P('heapq.heappop(heap)'), point: i, dist: [...dist], settled: [...settled], message: `Settle point (${px}, ${py}) at cost ${d}. Walks reach each other point, and special roads from here cost their listed price.` })
   }
-  if (result === null) result = dist[goal]
-  frames.push({ phase: 'done', activeLine: L('return dist[target]'), point: goal, dist: [...dist], settled: [...settled], message: `Minimum cost from start to target: ${result}.` })
+  const reachedGoal = result !== null
+  if (!reachedGoal) result = dist[goal]
+  frames.push({ phase: 'done', activeLine: L('return dist[target]'), pythonLine: P(reachedGoal ? 'return d' : 'return dist[goal]'), point: goal, dist: [...dist], settled: [...settled], message: `Minimum cost from start to target: ${result}.` })
   return { input: { start, target, special_roads: roads }, points, result, frames }
 }
 
@@ -93,3 +94,4 @@ def minimum_cost(start, target, special_roads):
                 heapq.heappush(heap, (d + cost, j))
     return dist[goal]
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

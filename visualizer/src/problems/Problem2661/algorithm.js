@@ -23,7 +23,7 @@ export function buildTrace(input) {
   const rowCount = Array(rows).fill(0)
   const colCount = Array(cols).fill(0)
   const painted = []
-  const frames = [{ phase: 'start', activeLine: L('record the row and column of each value'), painted: [], row: -1, col: -1, index: -1, message: 'Find where each value sits in mat, then paint in the order of arr.' }]
+  const frames = [{ phase: 'start', activeLine: L('record the row and column of each value'), pythonLine: P('where[mat[r][c]]'), painted: [], row: -1, col: -1, index: -1, message: 'Find where each value sits in mat, then paint in the order of arr.' }]
   for (let i = 0; i < arr.length; i++) {
     const [r, c] = where.get(arr[i])
     rowCount[r] += 1
@@ -31,12 +31,12 @@ export function buildTrace(input) {
     painted.push({ row: r, col: c })
     const full = rowCount[r] === cols ? 'row' : colCount[c] === rows ? 'column' : null
     if (full) {
-      frames.push({ phase: 'done', activeLine: L('return i'), painted: [...painted], row: r, col: c, index: i, message: `Painting ${arr[i]} at (${r}, ${c}) completes a ${full}. Answer: ${i}.` })
+      frames.push({ phase: 'done', activeLine: L('return i'), pythonLine: P('return i'), painted: [...painted], row: r, col: c, index: i, message: `Painting ${arr[i]} at (${r}, ${c}) completes a ${full}. Answer: ${i}.` })
       return { input, result: i, frames }
     }
-    frames.push({ phase: 'paint', activeLine: L('paint the cell holding'), painted: [...painted], row: r, col: c, index: i, message: `Paint ${arr[i]} at (${r}, ${c}). Row ${r} has ${rowCount[r]} of ${cols}; column ${c} has ${colCount[c]} of ${rows}.` })
+    frames.push({ phase: 'paint', activeLine: L('paint the cell holding'), pythonLine: P('col_count[c] += 1'), painted: [...painted], row: r, col: c, index: i, message: `Paint ${arr[i]} at (${r}, ${c}). Row ${r} has ${rowCount[r]} of ${cols}; column ${c} has ${colCount[c]} of ${rows}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), painted: [...painted], row: -1, col: -1, index: -1, message: 'No line was completed.' })
+  frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: P('return -1'), painted: [...painted], row: -1, col: -1, index: -1, message: 'No line was completed.' })
   return { input, result: -1, frames }
 }
 
@@ -66,3 +66,4 @@ export const python = `def first_painted(arr, mat):
             return i
     return -1
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

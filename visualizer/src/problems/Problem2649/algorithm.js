@@ -23,11 +23,11 @@ export function buildTrace(input) {
   const frames = []
   let depth = 0
   let path = 'arr'
-  const frame = (phase, line, message) => frames.push({ phase, activeLine: line, depth, path, output: [...output], message })
-  frame('start', L('set output to an empty list'), 'Start with the whole array. Values come out in depth-first order.')
+  const frame = (phase, line, message, py) => frames.push({ phase, activeLine: line, pythonLine: P(py), depth, path, output: [...output], message })
+  frame('start', L('set output to an empty list'), 'Start with the whole array. Values come out in depth-first order.', 'output = []')
   const emit = (item, label) => {
     if (Array.isArray(item)) {
-      frame('enter', L('if item is a list then'), `Open the array at ${label}, which holds ${item.length} entries.`)
+      frame('enter', L('if item is a list then'), `Open the array at ${label}, which holds ${item.length} entries.`, 'if isinstance(item, list)')
       item.forEach((child, index) => {
         depth++
         emit(child, `${label}[${index}]`)
@@ -37,10 +37,10 @@ export function buildTrace(input) {
     }
     output.push(item)
     path = label
-    frame('yield', L('add item to output'), `Yield ${item} from ${label}.`)
+    frame('yield', L('add item to output'), `Yield ${item} from ${label}.`, 'output.append(item)')
   }
   emit(arr, 'arr')
-  frame('done', L('return output'), `The generator yields ${output.length} values in order.`)
+  frame('done', L('return output'), `The generator yields ${output.length} values in order.`, 'return output')
   return { input, result: output, frames }
 }
 
@@ -70,3 +70,4 @@ export const python = `def nested_array_values(arr):
     emit(arr)
     return output
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

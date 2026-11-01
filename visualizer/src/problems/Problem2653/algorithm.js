@@ -15,7 +15,7 @@ export function buildTrace({ nums, k, x }) {
     const window = nums.slice(start, start + k)
     const counts = new Array(51).fill(0)
     for (const value of window) if (value < 0) counts[-value]++
-    frames.push({ phase: 'count', activeLine: L('count how many times each negative'), left: start, right: start + k - 1, beauty: null, results: [...results], message: `Window starting at ${start}: count its negative values by magnitude.` })
+    frames.push({ phase: 'count', activeLine: L('count how many times each negative'), pythonLine: P('counts[-value] += 1'), left: start, right: start + k - 1, beauty: null, results: [...results], message: `Window starting at ${start}: count its negative values by magnitude.` })
     let seen = 0
     let beauty = 0
     for (let magnitude = 50; magnitude >= 1; magnitude--) {
@@ -23,9 +23,9 @@ export function buildTrace({ nums, k, x }) {
       if (seen >= x && beauty === 0) beauty = -magnitude
     }
     results.push(beauty)
-    frames.push({ phase: 'pick', activeLine: L('if seen is at least x'), left: start, right: start + k - 1, beauty, results: [...results], message: beauty === 0 ? `Fewer than ${x} negative values, so the beauty is 0.` : `The ${x}-th smallest negative value is ${beauty}.` })
+    frames.push({ phase: 'pick', activeLine: L('if seen is at least x'), pythonLine: P('if seen >= x'), left: start, right: start + k - 1, beauty, results: [...results], message: beauty === 0 ? `Fewer than ${x} negative values, so the beauty is 0.` : `The ${x}-th smallest negative value is ${beauty}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return results'), left: nums.length - k, right: nums.length - 1, beauty: null, results: [...results], message: `Beauty of every window: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return results'), pythonLine: P('return results'), left: nums.length - k, right: nums.length - 1, beauty: null, results: [...results], message: `Beauty of every window: [${results.join(', ')}].` })
   return { input: { nums, k, x }, result: results, frames }
 }
 
@@ -57,3 +57,4 @@ export const python = `def sliding_subarray_beauty(nums, k, x):
         results.append(beauty)
     return results
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

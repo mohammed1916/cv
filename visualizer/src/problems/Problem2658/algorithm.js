@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const cols = grid[0].length
   const seen = grid.map(row => row.map(() => false))
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), members: [], total: 0, best, message: 'Each patch of connected water is one group. Its fish can all be collected.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to 0'), pythonLine: P('best = 0'), members: [], total: 0, best, message: 'Each patch of connected water is one group. Its fish can all be collected.' }]
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (grid[r][c] === 0 || seen[r][c]) continue
@@ -34,10 +34,10 @@ export function buildTrace(input) {
         }
       }
       best = Math.max(best, total)
-      frames.push({ phase: 'patch', activeLine: L('set the larger'), members, total, best, message: `The patch from (${r}, ${c}) holds ${total} fish. Best so far: ${best}.` })
+      frames.push({ phase: 'patch', activeLine: L('set the larger'), pythonLine: P('best = max(best, total)'), members, total, best, message: `The patch from (${r}, ${c}) holds ${total} fish. Best so far: ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), members: [], total: best, best, message: `The richest patch holds ${best} fish.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), members: [], total: best, best, message: `The richest patch holds ${best} fish.` })
   return { input, result: best, frames }
 }
 
@@ -75,3 +75,4 @@ export const python = `def max_fish(grid):
                 best = max(best, total)
     return best
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
