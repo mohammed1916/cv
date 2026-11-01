@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const on = new Array(horizon + 1).fill(false)
   const order = tasks.map((_, i) => i).sort((a, b) => tasks[a][1] - tasks[b][1] || tasks[a][0] - tasks[b][0])
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set on seconds to none'), on: [...on], index: -1, count, message: 'Tasks are handled by deadline. The computer runs one task per on-second.' }]
+  const frames = [{ phase: 'start', activeLine: L('set on seconds to none'), on: [...on], index: -1, count, pythonLine: 3, message: 'Tasks are handled by deadline. The computer runs one task per on-second.' }]
   for (const i of order) {
     const [s, e, d] = tasks[i]
     let already = 0
@@ -29,10 +29,10 @@ export function buildTrace(input) {
       on[t] = true
       need -= 1
       count += 1
-      frames.push({ phase: 'on', activeLine: L('turn the computer on at the latest'), on: [...on], index: t, count, message: `Task ${i} needs ${d} seconds; turn the computer on at second ${t}.` })
+      frames.push({ phase: 'on', activeLine: L('turn the computer on at the latest'), on: [...on], index: t, count, pythonLine: 11, message: `Task ${i} needs ${d} seconds; turn the computer on at second ${t}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the number of on seconds'), on: [...on], index: -1, count, message: `Minimum on-seconds: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return the number of on seconds'), on: [...on], index: -1, count, pythonLine: 14, message: `Minimum on-seconds: ${count}.` })
   return { input, result: count, frames }
 }
 

@@ -19,20 +19,20 @@ export function buildTrace(input) {
   const n = grid.length
   const cell = Array(n * n)
   grid.forEach((row, r) => row.forEach((v, c) => { cell[v] = [r, c] }))
-  const frames = [{ phase: 'start', activeLine: L('if the top-left cell'), k: 0, from: null, to: cell[0], message: 'The move numbers must start at the top-left cell with 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('if the top-left cell'), k: 0, from: null, to: cell[0], pythonLine: 3, message: 'The move numbers must start at the top-left cell with 0.' }]
   if (grid[0][0] !== 0) {
-    frames.push({ phase: 'fail', activeLine: L('if the top-left cell'), k: 0, from: null, to: cell[0], message: 'The top-left cell is not 0, so this is not a tour.' })
+    frames.push({ phase: 'fail', activeLine: L('if the top-left cell'), k: 0, from: null, to: cell[0], pythonLine: 4, message: 'The top-left cell is not 0, so this is not a tour.' })
     return { input, result: false, frames }
   }
   for (let k = 0; k < n * n - 1; k++) {
     const [r1, c1] = cell[k]
     const [r2, c2] = cell[k + 1]
     const ok = KNIGHT.some(([dr, dc]) => r1 + dr === r2 && c1 + dc === c2)
-    frames.push({ phase: ok ? 'check' : 'fail', activeLine: L('if the cells of k'), k, from: [r1, c1], to: [r2, c2],
+    frames.push({ phase: ok ? 'check' : 'fail', activeLine: L('if the cells of k'), k, from: [r1, c1], to: [r2, c2], pythonLine: ok ? 12 : 13,
       message: ok ? `Move ${k} to ${k + 1} is a knight move.` : `Move ${k} to ${k + 1} is not a knight move, so the grid is not a tour.` })
     if (!ok) return { input, result: false, frames }
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), k: n * n - 1, from: null, to: null, message: 'Every consecutive pair of move numbers is a knight move.' })
+  frames.push({ phase: 'done', activeLine: L('return true'), k: n * n - 1, from: null, to: null, pythonLine: 14, message: 'Every consecutive pair of move numbers is a knight move.' })
   return { input, result: true, frames }
 }
 

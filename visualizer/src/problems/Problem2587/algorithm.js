@@ -12,13 +12,13 @@ export function buildTrace(input) {
   const order = nums.map((_, i) => i).sort((a, b) => nums[b] - nums[a] || a - b)
   let total = 0
   let score = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the numbers'), index: -1, total, score, message: 'Sort the numbers from largest to smallest.' }]
+  const frames = [{ phase: 'start', activeLine: L('sort the numbers'), index: -1, total, score, pythonLine: 4, message: 'Sort the numbers from largest to smallest.' }]
   for (const i of order) {
     total += nums[i]
     if (total > 0) score += 1
-    frames.push({ phase: total > 0 ? 'count' : 'add', activeLine: L('add the number to total'), index: i, total, score, message: `Add ${nums[i]}; prefix sum ${total} ${total > 0 ? 'is positive' : 'is not positive'}.` })
+    frames.push({ phase: total > 0 ? 'count' : 'add', activeLine: L('add the number to total'), index: i, total, score, pythonLine: total > 0 ? 7 : 5, message: `Add ${nums[i]}; prefix sum ${total} ${total > 0 ? 'is positive' : 'is not positive'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return score'), index: -1, total, score, message: `${score} prefix sums are positive.` })
+  frames.push({ phase: 'done', activeLine: L('return score'), index: -1, total, score, pythonLine: 8, message: `${score} prefix sums are positive.` })
   return { input, result: score, frames }
 }
 

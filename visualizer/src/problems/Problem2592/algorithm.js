@@ -7,18 +7,18 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const base = [...nums].sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort nums'), base, candidate: null, index: -1, beaten: 0, message: `Sort a copy: [${base.join(', ')}]. The smallest value not yet beaten starts at the first slot.` }]
+  const frames = [{ phase: 'sort', activeLine: L('sort nums'), base, candidate: null, index: -1, beaten: 0, pythonLine: 2, message: `Sort a copy: [${base.join(', ')}]. The smallest value not yet beaten starts at the first slot.` }]
   let beaten = 0
   base.forEach((candidate, j) => {
     const beats = base[beaten] < candidate
     if (beats) {
       beaten++
-      frames.push({ phase: 'beat', activeLine: L('increase beaten'), base, candidate, index: j, beaten, message: `Candidate ${candidate} beats ${base[beaten - 1]}.` })
+      frames.push({ phase: 'beat', activeLine: L('increase beaten'), base, candidate, index: j, beaten, pythonLine: 6, message: `Candidate ${candidate} beats ${base[beaten - 1]}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if the smallest value'), base, candidate, index: j, beaten, message: `Candidate ${candidate} cannot beat ${base[beaten]}, so move on.` })
+      frames.push({ phase: 'skip', activeLine: L('if the smallest value'), base, candidate, index: j, beaten, pythonLine: 5, message: `Candidate ${candidate} cannot beat ${base[beaten]}, so move on.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return beaten'), base, candidate: null, index: -1, beaten, message: `Greatness is ${beaten}.` })
+  frames.push({ phase: 'done', activeLine: L('return beaten'), base, candidate: null, index: -1, beaten, pythonLine: 7, message: `Greatness is ${beaten}.` })
   return { input: nums, result: beaten, frames }
 }
 

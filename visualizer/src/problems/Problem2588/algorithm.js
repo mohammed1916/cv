@@ -12,15 +12,15 @@ export function buildTrace(input) {
   let prefix = 0
   const seen = new Map([[0, 1]])
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set prefix to 0'), index: -1, prefix, count, message: 'Start with prefix 0, seen once at the empty prefix.' }]
+  const frames = [{ phase: 'start', activeLine: L('set prefix to 0'), index: -1, prefix, count, pythonLine: 2, message: 'Start with prefix 0, seen once at the empty prefix.' }]
   nums.forEach((value, index) => {
     prefix ^= value
     const pairs = seen.get(prefix) ?? 0
     count += pairs
     seen.set(prefix, pairs + 1)
-    frames.push({ phase: 'step', activeLine: L('add seen'), index, prefix, count, message: `After value ${value}, prefix is ${prefix}. ${pairs} earlier prefix(es) match, so the count is ${count}.` })
+    frames.push({ phase: 'step', activeLine: L('add seen'), index, prefix, count, pythonLine: 7, message: `After value ${value}, prefix is ${prefix}. ${pairs} earlier prefix(es) match, so the count is ${count}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return count'), index: nums.length, prefix, count, message: `Beautiful subarrays: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), index: nums.length, prefix, count, pythonLine: 9, message: `Beautiful subarrays: ${count}.` })
   return { input, nums, result: count, frames }
 }
 

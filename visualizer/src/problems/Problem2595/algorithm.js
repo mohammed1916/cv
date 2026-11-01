@@ -10,12 +10,12 @@ export function buildTrace({ n }) {
   for (let i = 0; (n >> i) > 0; i++) bits.push((n >> i) & 1)
   let even = 0
   let odd = 0
-  const frames = [{ phase: 'start', activeLine: L('set even count to 0'), bit: -1, even, odd, bits, message: `Bits of ${n} from position 0 upward.` }]
+  const frames = [{ phase: 'start', activeLine: L('set even count to 0'), bit: -1, even, odd, bits, pythonLine: 3, message: `Bits of ${n} from position 0 upward.` }]
   bits.forEach((bit, i) => {
     if (bit) { if (i % 2 === 0) even++; else odd++ }
-    frames.push({ phase: 'bit', activeLine: L('if the bit at position i is set'), bit: i, even, odd, bits, message: bit ? `Position ${i} is set and counts as ${i % 2 === 0 ? 'even' : 'odd'}.` : `Position ${i} is clear.` })
+    frames.push({ phase: 'bit', activeLine: L('if the bit at position i is set'), bit: i, even, odd, bits, pythonLine: bit ? 6 : 5, message: bit ? `Position ${i} is set and counts as ${i % 2 === 0 ? 'even' : 'odd'}.` : `Position ${i} is clear.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return [even count'), bit: -1, even, odd, bits, message: `Even positions: ${even}, odd positions: ${odd}.` })
+  frames.push({ phase: 'done', activeLine: L('return [even count'), bit: -1, even, odd, bits, pythonLine: 8, message: `Even positions: ${even}, odd positions: ${odd}.` })
   return { input: { n }, result: [even, odd], frames }
 }
 

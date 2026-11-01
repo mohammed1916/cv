@@ -13,10 +13,10 @@ export function buildTrace(input) {
   const marked = Array(n).fill(false)
   const markedList = []
   let score = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the positions by value'), at: null, marked: [], score: 0, message: 'Order the positions by value, then by position.' }]
+  const frames = [{ phase: 'start', activeLine: L('sort the positions by value'), at: null, marked: [], score: 0, pythonLine: 3, message: 'Order the positions by value, then by position.' }]
   for (const i of order) {
     if (marked[i]) {
-      frames.push({ phase: 'skip', activeLine: L('if position i is marked'), at: i, marked: [...markedList], score, message: `Position ${i} (value ${nums[i]}) is already marked, so skip it.` })
+      frames.push({ phase: 'skip', activeLine: L('if position i is marked'), at: i, marked: [...markedList], score, pythonLine: 8, message: `Position ${i} (value ${nums[i]}) is already marked, so skip it.` })
       continue
     }
     score += nums[i]
@@ -29,9 +29,9 @@ export function buildTrace(input) {
         markedList.push(j)
       }
     }
-    frames.push({ phase: 'take', activeLine: L('add nums at i to score'), at: i, marked: [...markedList], score, message: `Take ${nums[i]} at position ${i}, then mark it and its neighbours. Score: ${score}.` })
+    frames.push({ phase: 'take', activeLine: L('add nums at i to score'), at: i, marked: [...markedList], score, pythonLine: 9, message: `Take ${nums[i]} at position ${i}, then mark it and its neighbours. Score: ${score}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return score'), at: null, marked: [...markedList], score, message: `Final score: ${score}.` })
+  frames.push({ phase: 'done', activeLine: L('return score'), at: null, marked: [...markedList], score, pythonLine: 15, message: `Final score: ${score}.` })
   return { input, result: score, frames }
 }
 

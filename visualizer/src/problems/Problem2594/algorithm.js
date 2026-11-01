@@ -18,15 +18,15 @@ function carsInTime(rank, t) {
 
 export function buildTrace({ ranks, cars }) {
   let low = 1, high = Math.min(...ranks) * cars * cars
-  const frames = [{ phase: 'start', activeLine: L('set low to one'), low, high, mid: null, repaired: null, message: `The fastest mechanic alone needs ${high} minutes at most.` }]
+  const frames = [{ phase: 'start', activeLine: L('set low to one'), low, high, mid: null, repaired: null, pythonLine: 5, message: `The fastest mechanic alone needs ${high} minutes at most.` }]
   while (low < high) {
     const mid = Math.floor((low + high) / 2)
     const repaired = ranks.reduce((acc, rank) => acc + carsInTime(rank, mid), 0)
     if (repaired >= cars) high = mid
     else low = mid + 1
-    frames.push({ phase: 'probe', activeLine: L('if repaired is at least'), low, high, mid, repaired, message: `In ${mid} minutes the mechanics repair ${repaired} cars, ${repaired >= cars ? 'enough' : 'not enough'} for ${cars}.` })
+    frames.push({ phase: 'probe', activeLine: L('if repaired is at least'), low, high, mid, repaired, pythonLine: repaired >= cars ? 10 : 12, message: `In ${mid} minutes the mechanics repair ${repaired} cars, ${repaired >= cars ? 'enough' : 'not enough'} for ${cars}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), low, high, mid: null, repaired: null, message: `The minimum time is ${low} minutes.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), low, high, mid: null, repaired: null, pythonLine: 13, message: `The minimum time is ${low} minutes.` })
   return { input: { ranks, cars }, result: low, frames }
 }
 

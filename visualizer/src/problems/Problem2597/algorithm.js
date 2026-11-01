@@ -14,29 +14,29 @@ export function buildTrace(input) {
   const present = new Map()
   const picked = []
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set the count to zero'), index: -1, picked: [], blocked: false, count: 0, message: 'Walk the numbers in order, deciding whether each one joins the subset.' }]
+  const frames = [{ phase: 'start', activeLine: L('set the count to zero'), index: -1, picked: [], blocked: false, count: 0, pythonLine: 3, message: 'Walk the numbers in order, deciding whether each one joins the subset.' }]
   const decide = index => {
     if (index === n) {
       if (picked.length > 0) total++
-      frames.push({ phase: 'leaf', activeLine: L('add one if the subset is not empty'), index: n, picked: [...picked], blocked: false, count: total, message: `A complete choice holds ${picked.length} number(s). Count so far: ${total}.` })
+      frames.push({ phase: 'leaf', activeLine: L('add one if the subset is not empty'), index: n, picked: [...picked], blocked: false, count: total, pythonLine: picked.length > 0 ? 9 : 8, message: `A complete choice holds ${picked.length} number(s). Count so far: ${total}.` })
       return
     }
     decide(index + 1)
     const value = nums[index]
     if (present.has(value - k) || present.has(value + k)) {
-      frames.push({ phase: 'blocked', activeLine: L('if neither value is already chosen'), index, picked: [...picked], blocked: true, count: total, message: `${value} is exactly ${k} away from a chosen number, so it cannot join.` })
+      frames.push({ phase: 'blocked', activeLine: L('if neither value is already chosen'), index, picked: [...picked], blocked: true, count: total, pythonLine: 13, message: `${value} is exactly ${k} away from a chosen number, so it cannot join.` })
       return
     }
     present.set(value, (present.get(value) || 0) + 1)
     picked.push(index)
-    frames.push({ phase: 'include', activeLine: L('include this number'), index, picked: [...picked], blocked: false, count: total, message: `Include ${value}.` })
+    frames.push({ phase: 'include', activeLine: L('include this number'), index, picked: [...picked], blocked: false, count: total, pythonLine: 14, message: `Include ${value}.` })
     decide(index + 1)
     picked.pop()
     present.set(value, present.get(value) - 1)
     if (present.get(value) === 0) present.delete(value)
   }
   decide(0)
-  frames.push({ phase: 'done', activeLine: L('return the count'), index: -1, picked: [], blocked: false, count: total, message: `There are ${total} non-empty beautiful subsets.` })
+  frames.push({ phase: 'done', activeLine: L('return the count'), index: -1, picked: [], blocked: false, count: total, pythonLine: 21, message: `There are ${total} non-empty beautiful subsets.` })
   return { input, result: total, frames }
 }
 

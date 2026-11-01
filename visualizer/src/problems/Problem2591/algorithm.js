@@ -12,16 +12,16 @@ export function buildTrace(input) {
   const alloc = Array(children).fill(1)
   let left = money - children
   let eights = 0
-  const frames = [{ phase: 'start', activeLine: L('if money is below children'), index: -1, alloc: [...alloc], left, eights, message: `Everyone gets one dollar first. ${Math.max(left, 0)} dollars remain to hand out.` }]
+  const frames = [{ phase: 'start', activeLine: L('if money is below children'), index: -1, alloc: [...alloc], left, eights, pythonLine: 2, message: `Everyone gets one dollar first. ${Math.max(left, 0)} dollars remain to hand out.` }]
   if (money < children) {
-    frames.push({ phase: 'done', activeLine: L('return -1'), index: -1, alloc: [...alloc], left, eights: -1, message: 'Not every child can receive a dollar, so the answer is -1.' })
+    frames.push({ phase: 'done', activeLine: L('return -1'), index: -1, alloc: [...alloc], left, eights: -1, pythonLine: 3, message: 'Not every child can receive a dollar, so the answer is -1.' })
     return { input, result: -1, frames }
   }
   for (let i = 0; i < children && left >= 7; i++) {
     alloc[i] = 8
     left -= 7
     eights += 1
-    frames.push({ phase: 'eight', activeLine: L('give 7 more dollars'), index: i, alloc: [...alloc], left, eights, message: `Child ${i} now has exactly 8 dollars. ${left} dollars remain.` })
+    frames.push({ phase: 'eight', activeLine: L('give 7 more dollars'), index: i, alloc: [...alloc], left, eights, pythonLine: 9, message: `Child ${i} now has exactly 8 dollars. ${left} dollars remain.` })
   }
   let result = eights
   let fixLine = 'if eights equals children'
@@ -31,8 +31,8 @@ export function buildTrace(input) {
     result -= 1
     fixLine = 'else if children minus eights'
   }
-  frames.push({ phase: 'fix', activeLine: L(fixLine), index: -1, alloc: [...alloc], left, eights: result, message: result === eights ? 'No forbidden ending, so the count stands.' : 'One child would get a forbidden amount, so one fewer child gets 8.' })
-  frames.push({ phase: 'done', activeLine: L('return eights'), index: -1, alloc: [...alloc], left, eights: result, message: `Maximum children with exactly 8 dollars: ${result}.` })
+  frames.push({ phase: 'fix', activeLine: L(fixLine), index: -1, alloc: [...alloc], left, eights: result, pythonLine: result === eights ? 13 : (fixLine === 'if eights equals children' ? 12 : 14), message: result === eights ? 'No forbidden ending, so the count stands.' : 'One child would get a forbidden amount, so one fewer child gets 8.' })
+  frames.push({ phase: 'done', activeLine: L('return eights'), index: -1, alloc: [...alloc], left, eights: result, pythonLine: 15, message: `Maximum children with exactly 8 dollars: ${result}.` })
   return { input, result, frames }
 }
 
