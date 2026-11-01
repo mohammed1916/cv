@@ -16,21 +16,23 @@ function canSplit(digits, start, target) {
   return false
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ n }) {
   let total = 0
   const counted = []
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), i: null, square: null, total, message: `Check every i from 1 to ${n}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: P('total = 0'), i: null, square: null, total, message: `Check every i from 1 to ${n}.` }]
   for (let i = 1; i <= n; i++) {
     const square = i * i
     const ok = canSplit(String(square), 0, i)
-    frames.push({ phase: 'check', activeLine: L('if the digits of square'), i, square, total, message: `${i} squared is ${square}. ${ok ? 'Its pieces can add up to i, so it counts.' : 'No cut of its digits adds up to i.'}` })
+    frames.push({ phase: 'check', activeLine: L('if the digits of square'), pythonLine: P('if can_split(square'), i, square, total, message: `${i} squared is ${square}. ${ok ? 'Its pieces can add up to i, so it counts.' : 'No cut of its digits adds up to i.'}` })
     if (ok) {
       total += square
       counted.push(i)
-      frames.push({ phase: 'add', activeLine: L('add square to total'), i, square, total, message: `Add ${square}; the total is now ${total}.` })
+      frames.push({ phase: 'add', activeLine: L('add square to total'), pythonLine: P('total += i * i'), i, square, total, message: `Add ${square}; the total is now ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), i: null, square: null, total, message: `Punishment number: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), i: null, square: null, total, message: `Punishment number: ${total}.` })
   return { input: { n }, counted, result: total, frames }
 }
 

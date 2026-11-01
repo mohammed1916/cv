@@ -7,17 +7,17 @@ export function parseInput(text) {
 }
 
 export function buildTrace(words) {
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), active: -1, roles: {}, state: { count: 0 }, message: 'Remember each word. A later word pairs with an earlier one when it is the earlier word reversed.' }]
+  const frames = [{ phase: 'start', activeLine: L('set count to 0'), pythonLine: 2, active: -1, roles: {}, state: { count: 0 }, message: 'Remember each word. A later word pairs with an earlier one when it is the earlier word reversed.' }]
   const seen = new Set()
   let count = 0
   words.forEach((word, i) => {
     const reversed = word[1] + word[0]
     const pairs = seen.has(reversed)
     if (pairs) count += 1
-    frames.push({ phase: 'check', activeLine: L(pairs ? 'add 1 to count' : 'if the reverse of word is in seen'), active: i, roles: pairs ? { [i]: 'pair', [words.indexOf(reversed)]: 'partner' } : { [i]: 'checked' }, state: { word, reversed, count }, message: pairs ? `"${word}" reversed is "${reversed}", already seen. Pairs: ${count}.` : `No earlier word is "${reversed}", so "${word}" waits for a partner.` })
+    frames.push({ phase: 'check', activeLine: L(pairs ? 'add 1 to count' : 'if the reverse of word is in seen'), pythonLine: pairs ? 6 : 5, active: i, roles: pairs ? { [i]: 'pair', [words.indexOf(reversed)]: 'partner' } : { [i]: 'checked' }, state: { word, reversed, count }, message: pairs ? `"${word}" reversed is "${reversed}", already seen. Pairs: ${count}.` : `No earlier word is "${reversed}", so "${word}" waits for a partner.` })
     seen.add(word)
   })
-  frames.push({ phase: 'done', activeLine: L('return count'), active: -1, roles: {}, state: { count }, message: `Return ${count} pairs.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 8, active: -1, roles: {}, state: { count }, message: `Return ${count} pairs.` })
   return { input: words, result: count, items: words, frames }
 }
 

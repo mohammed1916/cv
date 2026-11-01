@@ -23,13 +23,15 @@ export const code = `max moves(grid):
   return the largest reached value in the grid`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ grid }) {
   const m = grid.length
   const n = grid[0].length
   const reach = Array.from({ length: m }, () => Array(n).fill(null))
   for (let r = 0; r < m; r++) reach[r][0] = 0
   const view = () => reach.map(row => row.map(v => (v === null ? '·' : v)))
-  const frames = [{ phase: 'start', activeLine: L('set reach to 0'), row: 0, col: 0, table: view(), message: 'Every cell in the first column starts with 0 moves.' }]
+  const frames = [{ phase: 'start', activeLine: L('set reach to 0'), pythonLine: P('reach[r][0] = 0'), row: 0, col: 0, table: view(), message: 'Every cell in the first column starts with 0 moves.' }]
   for (let c = 1; c < n; c++) {
     for (let r = 0; r < m; r++) {
       let best = null
@@ -43,11 +45,11 @@ export function buildTrace({ grid }) {
         }
       }
       reach[r][c] = best
-      frames.push({ phase: 'cell', activeLine: L('look at rows'), row: r, col: c, table: view(), message: best === null ? `Cell (${r}, ${c}) cannot be reached from the column to its left.` : `Cell (${r}, ${c}) is reached in ${best} move(s) from row(s) ${from.join(', ')}.` })
+      frames.push({ phase: 'cell', activeLine: L('look at rows'), pythonLine: P('reach[r][c] = best'), row: r, col: c, table: view(), message: best === null ? `Cell (${r}, ${c}) cannot be reached from the column to its left.` : `Cell (${r}, ${c}) is reached in ${best} move(s) from row(s) ${from.join(', ')}.` })
     }
   }
   const result = Math.max(...reach.flat().filter(v => v !== null))
-  frames.push({ phase: 'done', activeLine: L('return the largest reached'), row: 0, col: 0, table: view(), message: `Maximum number of moves: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the largest reached'), pythonLine: P('return max('), row: 0, col: 0, table: view(), message: `Maximum number of moves: ${result}.` })
   return { input: { grid }, grid, result, frames }
 }
 

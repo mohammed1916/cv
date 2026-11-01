@@ -8,6 +8,8 @@ export function parseInput(text) {
   return { nums, k }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ nums, k }) {
   const n = nums.length
   const prefix = Array(n + 1).fill(0)
@@ -16,16 +18,16 @@ export function buildTrace({ nums, k }) {
   for (let i = n - 1; i >= 0; i--) suffix[i] = suffix[i + 1] | nums[i]
   const frames = []
   let best = 0
-  frames.push({ phase: 'tables', activeLine: L('build prefix OR'), index: -1, candidate: null, best, message: 'Build prefix and suffix OR tables.' })
+  frames.push({ phase: 'tables', activeLine: L('build prefix OR'), pythonLine: P('prefix = [0] * (n + 1)'), index: -1, candidate: null, best, message: 'Build prefix and suffix OR tables.' })
   for (let i = 0; i < n; i++) {
     const candidate = prefix[i] | (nums[i] << k) | suffix[i + 1]
-    frames.push({ phase: 'try', activeLine: L('candidate is'), index: i, candidate, best, message: `Double ${nums[i]} ${k} times: OR with the others gives ${candidate}.` })
+    frames.push({ phase: 'try', activeLine: L('candidate is'), pythonLine: P('best = max(best,'), index: i, candidate, best, message: `Double ${nums[i]} ${k} times: OR with the others gives ${candidate}.` })
     if (candidate > best) {
       best = candidate
-      frames.push({ phase: 'record', activeLine: L('set best to the candidate'), index: i, candidate, best, message: `New best ${best}.` })
+      frames.push({ phase: 'record', activeLine: L('set best to the candidate'), pythonLine: P('best = max(best,'), index: i, candidate, best, message: `New best ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, candidate: null, best, message: `Maximum OR: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), index: -1, candidate: null, best, message: `Maximum OR: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

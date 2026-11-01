@@ -8,17 +8,17 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const sorted = [...input.nums].sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort a copy of nums'), i: -1, gap: null, best: null, sorted, message: `Sorted numbers: ${sorted.join(', ')}.` }]
+  const frames = [{ phase: 'sort', activeLine: L('sort a copy of nums'), pythonLine: 2, i: -1, gap: null, best: null, sorted, message: `Sorted numbers: ${sorted.join(', ')}.` }]
   let best = Infinity
   for (let i = 1; i < sorted.length; i++) {
     const gap = sorted[i] - sorted[i - 1]
-    frames.push({ phase: 'gap', activeLine: L('set gap to'), i, gap, best: best === Infinity ? null : best, sorted, message: `Neighbours ${sorted[i - 1]} and ${sorted[i]} differ by ${gap}.` })
+    frames.push({ phase: 'gap', activeLine: L('set gap to'), pythonLine: 5, i, gap, best: best === Infinity ? null : best, sorted, message: `Neighbours ${sorted[i - 1]} and ${sorted[i]} differ by ${gap}.` })
     if (gap < best) {
       best = gap
-      frames.push({ phase: 'better', activeLine: L('if gap is less than best'), i, gap, best, sorted, message: `${gap} is the smallest gap so far.` })
+      frames.push({ phase: 'better', activeLine: L('if gap is less than best'), pythonLine: 7, i, gap, best, sorted, message: `${gap} is the smallest gap so far.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), i: -1, gap: null, best, sorted, message: `Smallest possible value of the partition: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 8, i: -1, gap: null, best, sorted, message: `Smallest possible value of the partition: ${best}.` })
   return { input, sorted, result: best, frames }
 }
 

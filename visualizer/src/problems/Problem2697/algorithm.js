@@ -6,24 +6,26 @@ export function parseInput(text) {
   return { s: data.s }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ s }) {
   const frames = []
   const chars = [...s]
   const last = chars.length - 1
-  frames.push({ phase: 'start', activeLine: L('set chars to the letters'), index: -1, mirror: -1, chars: [...chars], result: null, message: `Start with ${s}. Each mirrored pair must match, and changing a letter costs one operation.` })
+  frames.push({ phase: 'start', activeLine: L('set chars to the letters'), pythonLine: P('chars = list(s)'), index: -1, mirror: -1, chars: [...chars], result: null, message: `Start with ${s}. Each mirrored pair must match, and changing a letter costs one operation.` })
   for (let i = 0; i < chars.length / 2; i++) {
     const j = last - i
     if (chars[i] !== chars[j]) {
       const smaller = chars[i] < chars[j] ? chars[i] : chars[j]
       chars[i] = smaller
       chars[j] = smaller
-      frames.push({ phase: 'change', activeLine: L('set both chars'), index: i, mirror: j, chars: [...chars], result: null, message: `Positions ${i} and ${j} differ. Change both to ${smaller}, the smaller letter.` })
+      frames.push({ phase: 'change', activeLine: L('set both chars'), pythonLine: P('chars[i] = chars[j] = min'), index: i, mirror: j, chars: [...chars], result: null, message: `Positions ${i} and ${j} differ. Change both to ${smaller}, the smaller letter.` })
     } else {
-      frames.push({ phase: 'match', activeLine: L('if chars at i is not'), index: i, mirror: j, chars: [...chars], result: null, message: `Positions ${i} and ${j} already match.` })
+      frames.push({ phase: 'match', activeLine: L('if chars at i is not'), pythonLine: P('if chars[i] != chars[j]'), index: i, mirror: j, chars: [...chars], result: null, message: `Positions ${i} and ${j} already match.` })
     }
   }
   const result = chars.join('')
-  frames.push({ phase: 'done', activeLine: L('return the chars joined'), index: -1, mirror: -1, chars: [...chars], result, message: `The smallest palindrome is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the chars joined'), pythonLine: P("return ''.join"), index: -1, mirror: -1, chars: [...chars], result, message: `The smallest palindrome is ${result}.` })
   return { input: { s }, result, frames }
 }
 

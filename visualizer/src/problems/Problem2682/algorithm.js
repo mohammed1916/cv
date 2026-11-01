@@ -7,18 +7,20 @@ export function parseInput(text) {
   return { n, k }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { n, k } = input
   const received = Array(n).fill(0)
   received[0] = 1
   let holder = 0
   let turn = 1
-  const frames = [{ phase: 'start', activeLine: L('give friend 1 the ball'), holder, turn: 0, received: [...received], message: `Friend 1 holds the ball in a circle of ${n}.` }]
+  const frames = [{ phase: 'start', activeLine: L('give friend 1 the ball'), pythonLine: P('received[0] = 1'), holder, turn: 0, received: [...received], message: `Friend 1 holds the ball in a circle of ${n}.` }]
   for (;;) {
     holder = (holder + turn * k) % n
     received[holder] += 1
     const repeated = received[holder] === 2
-    frames.push({ phase: repeated ? 'repeat' : 'pass', activeLine: L(repeated ? 'if the new holder' : 'move the holder forward'), holder, turn, received: [...received],
+    frames.push({ phase: repeated ? 'repeat' : 'pass', activeLine: L(repeated ? 'if the new holder' : 'move the holder forward'), pythonLine: P(repeated ? 'if received[holder] == 2' : 'holder = (holder + turn'), holder, turn, received: [...received],
       message: repeated ? `Friend ${holder + 1} gets the ball a second time, so the game ends.`
         : `Pass number ${turn} moves ${turn} times ${k} steps, reaching friend ${holder + 1}.` })
     if (repeated) break
@@ -26,7 +28,7 @@ export function buildTrace(input) {
   }
   const result = []
   received.forEach((count, i) => { if (count === 0) result.push(i + 1) })
-  frames.push({ phase: 'done', activeLine: L('return every friend'), holder, turn, received: [...received], message: `Friends who never got the ball: ${result.join(', ') || 'none'}.` })
+  frames.push({ phase: 'done', activeLine: L('return every friend'), pythonLine: P('return [i + 1'), holder, turn, received: [...received], message: `Friends who never got the ball: ${result.join(', ') || 'none'}.` })
   return { input, result, frames }
 }
 

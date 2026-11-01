@@ -7,15 +7,17 @@ export function parseInput(text) {
   return { derived }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace({ derived }) {
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, total, message: 'Xor every derived bit together. Each original bit appears twice in this sum, so it cancels.' }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: P('total = 0'), index: -1, total, message: 'Xor every derived bit together. Each original bit appears twice in this sum, so it cancels.' }]
   derived.forEach((bit, index) => {
     total ^= bit
-    frames.push({ phase: 'fold', activeLine: L('set total to total xor bit'), index, total, message: `Xor in derived[${index}] = ${bit}. Running total: ${total}.` })
+    frames.push({ phase: 'fold', activeLine: L('set total to total xor bit'), pythonLine: P('total ^= bit'), index, total, message: `Xor in derived[${index}] = ${bit}. Running total: ${total}.` })
   })
   const result = total === 0
-  frames.push({ phase: 'done', activeLine: L('return whether total is 0'), index: -1, total, message: result ? 'The total is 0, so a binary original exists.' : 'The total is 1, so no binary original exists.' })
+  frames.push({ phase: 'done', activeLine: L('return whether total is 0'), pythonLine: P('return total == 0'), index: -1, total, message: result ? 'The total is 0, so a binary original exists.' : 'The total is 1, so no binary original exists.' })
   return { input: { derived }, result, frames }
 }
 

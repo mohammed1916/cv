@@ -44,32 +44,38 @@ function shift(count, freq, value, delta) {
   }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(commands) {
   const count = new Map()
   const freq = new Map()
   const result = []
-  const frames = [{ phase: 'start', index: -1, op: null, value: null, counts: {}, answer: null, activeLine: L('set count'), message: 'Start with no values held.' }]
+  const frames = [{ phase: 'start', index: -1, op: null, value: null, counts: {}, answer: null, activeLine: L('set count'), pythonLine: P('count = {}'), message: 'Start with no values held.' }]
   commands.forEach(([op, value], i) => {
     let answer = null
     let message
     let line
+    let py
     if (op === 'add') {
       shift(count, freq, value, 1)
       line = L('move value up one count')
+      py = P('delta = 1 if')
       message = `Add ${value}; it now has count ${count.get(value)}.`
     } else if (op === 'deleteOne') {
       if ((count.get(value) ?? 0) > 0) shift(count, freq, value, -1)
       line = L('if value has a positive count')
+      py = (count.get(value) ?? 0) > 0 ? P("op == 'add' or") : P("elif op == 'deleteOne'")
       message = `Delete one ${value} if it is held.`
     } else {
       answer = (freq.get(value) ?? 0) > 0
       line = L('append whether freq')
+      py = P('answers.append(freq.get')
       message = `Is there a value held exactly ${value} times? ${answer ? 'Yes' : 'No'}.`
     }
     result.push(op === 'hasFrequency' ? answer : null)
-    frames.push({ phase: op, index: i, op, value, counts: Object.fromEntries(count), answer, activeLine: line, message })
+    frames.push({ phase: op, index: i, op, value, counts: Object.fromEntries(count), answer, activeLine: line, pythonLine: py, message })
   })
-  frames.push({ phase: 'done', index: commands.length - 1, op: null, value: null, counts: Object.fromEntries(count), answer: null, activeLine: L('return answers'), message: 'All commands processed.' })
+  frames.push({ phase: 'done', index: commands.length - 1, op: null, value: null, counts: Object.fromEntries(count), answer: null, activeLine: L('return answers'), pythonLine: P('return answers'), message: 'All commands processed.' })
   return { input: commands, result, frames }
 }
 

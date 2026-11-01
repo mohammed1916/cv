@@ -8,23 +8,23 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const chars = [...s]
   const n = chars.length
-  const frames = [{ phase: 'start', activeLine: L('if every letter is a'), start: -1, end: -1, text: s, message: 'Look for the first letter that is not a. The shift has to begin there.' }]
+  const frames = [{ phase: 'start', activeLine: L('if every letter is a'), pythonLine: 4, start: -1, end: -1, text: s, message: 'Look for the first letter that is not a. The shift has to begin there.' }]
   let start = 0
   while (start < n && chars[start] === 'a') start++
   if (start === n) {
     chars[n - 1] = 'z'
     const text = chars.join('')
-    frames.push({ phase: 'wrap', activeLine: L('change the last letter'), start: n - 1, end: n, text, message: `Every letter is a, so the last one becomes z: ${text}.` })
+    frames.push({ phase: 'wrap', activeLine: L('change the last letter'), pythonLine: 8, start: n - 1, end: n, text, message: `Every letter is a, so the last one becomes z: ${text}.` })
     return { input: s, result: text, frames }
   }
-  frames.push({ phase: 'find', activeLine: L('set start to'), start, end: start, text: s, message: `The first letter that is not a is ${chars[start]} at position ${start}.` })
+  frames.push({ phase: 'find', activeLine: L('set start to'), pythonLine: 7, start, end: start, text: s, message: `The first letter that is not a is ${chars[start]} at position ${start}.` })
   let end = start
   while (end < n && chars[end] !== 'a') end++
-  frames.push({ phase: 'extend', activeLine: L('set end to'), start, end, text: s, message: `Extend the substring up to position ${end - 1}, stopping before the next a.` })
+  frames.push({ phase: 'extend', activeLine: L('set end to'), pythonLine: 11, start, end, text: s, message: `Extend the substring up to position ${end - 1}, stopping before the next a.` })
   for (let k = start; k < end; k++) chars[k] = String.fromCharCode(chars[k].charCodeAt(0) - 1)
   const text = chars.join('')
-  frames.push({ phase: 'shift', activeLine: L('shift each letter'), start, end, text, message: `Shift positions ${start} to ${end - 1} back one letter: ${text}.` })
-  frames.push({ phase: 'done', activeLine: L('return the result'), start, end, text, message: `Smallest string: ${text}.` })
+  frames.push({ phase: 'shift', activeLine: L('shift each letter'), pythonLine: 14, start, end, text, message: `Shift positions ${start} to ${end - 1} back one letter: ${text}.` })
+  frames.push({ phase: 'done', activeLine: L('return the result'), pythonLine: 15, start, end, text, message: `Smallest string: ${text}.` })
   return { input: s, result: text, frames }
 }
 

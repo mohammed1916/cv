@@ -8,18 +8,20 @@ export function parseInput(text) {
   return { nums }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const sorted = [...input.nums].sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort a copy of the strengths'), at: -1, x: null, total: 0, carry: 0, sorted, message: `Sorted strengths: ${sorted.join(', ')}.` }]
+  const frames = [{ phase: 'sort', activeLine: L('sort a copy of the strengths'), pythonLine: P('ordered = sorted(nums)'), at: -1, x: null, total: 0, carry: 0, sorted, message: `Sorted strengths: ${sorted.join(', ')}.` }]
   let total = 0
   let carry = 0
   sorted.forEach((x, i) => {
     total = (total + ((x * x) % MOD) * ((x + carry) % MOD)) % MOD
-    frames.push({ phase: 'add', activeLine: L('add x squared'), at: i, x, total, carry, sorted, message: `${x} as the strongest hero adds ${x}^2 times (${x} + ${carry}) to the total. Total: ${total}.` })
+    frames.push({ phase: 'add', activeLine: L('add x squared'), pythonLine: P('total = (total +'), at: i, x, total, carry, sorted, message: `${x} as the strongest hero adds ${x}^2 times (${x} + ${carry}) to the total. Total: ${total}.` })
     carry = (2 * carry + x) % MOD
-    frames.push({ phase: 'carry', activeLine: L('set carry to twice'), at: i, x, total, carry, sorted, message: `Carry grows to ${carry}: every earlier hero can now also join ${x}.` })
+    frames.push({ phase: 'carry', activeLine: L('set carry to twice'), pythonLine: P('carry = (2 * carry'), at: i, x, total, carry, sorted, message: `Carry grows to ${carry}: every earlier hero can now also join ${x}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), at: -1, x: null, total, carry, sorted, message: `Sum of powers modulo 1000000007: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), at: -1, x: null, total, carry, sorted, message: `Sum of powers modulo 1000000007: ${total}.` })
   return { input, sorted, result: total, frames }
 }
 

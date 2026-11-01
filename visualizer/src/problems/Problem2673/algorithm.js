@@ -7,14 +7,17 @@ export function parseInput(text) {
   return { n, cost }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { n, cost } = input
+  const PY = { start: P('total = 0'), pair: P('left, right = 2 * i'), balance: P('total += abs'), lift: P('path[i] = path[i] +'), done: P('return total') }
   // Path cost of node i (1-based): the cost of the node plus the costliest path below it.
   const path = [0, ...cost]
   const frames = []
   let total = 0
   const frame = (phase, line, node, left, right, message) => frames.push({
-    phase, activeLine: line, node, left, right, total, path: [...path], message,
+    phase, activeLine: line, pythonLine: PY[phase], node, left, right, total, path: [...path], message,
   })
   frame('start', L('set total increments to 0'), null, null, null, 'Leaves start with their own cost. Work upward from the last internal node.')
   for (let i = (n - 1) / 2; i >= 1; i--) {

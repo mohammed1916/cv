@@ -6,22 +6,22 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ s }) {
-  const frames = [{ phase: 'start', activeLine: L('set best to one'), start: 0, end: 0, pair: null, best: 1, message: 'A window is semi-repetitive when it holds at most one equal adjacent pair.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to one'), pythonLine: 2, start: 0, end: 0, pair: null, best: 1, message: 'A window is semi-repetitive when it holds at most one equal adjacent pair.' }]
   let best = 1, start = 0, pair = null
   for (let i = 1; i < s.length; i++) {
     const equal = s[i] === s[i - 1]
-    frames.push({ phase: 'compare', activeLine: L('if s at i equals'), start, end: i, pair, best, message: equal ? `s[${i}] repeats s[${i - 1}].` : `s[${i}] differs from s[${i - 1}].` })
+    frames.push({ phase: 'compare', activeLine: L('if s at i equals'), pythonLine: 6, start, end: i, pair, best, message: equal ? `s[${i}] repeats s[${i - 1}].` : `s[${i}] differs from s[${i - 1}].` })
     if (equal) {
       if (pair !== null) {
         start = pair + 1
-        frames.push({ phase: 'move', activeLine: L('move start just past'), start, end: i, pair, best, message: `Two repeats do not fit, so start moves to ${start}.` })
+        frames.push({ phase: 'move', activeLine: L('move start just past'), pythonLine: 8, start, end: i, pair, best, message: `Two repeats do not fit, so start moves to ${start}.` })
       }
       pair = i - 1
     }
     best = Math.max(best, i - start + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), start, end: i, pair, best, message: `Window ${start} to ${i} has length ${i - start + 1}. Best ${best}.` })
+    frames.push({ phase: 'record', activeLine: L('set best to the larger'), pythonLine: 10, start, end: i, pair, best, message: `Window ${start} to ${i} has length ${i - start + 1}. Best ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start, end: s.length - 1, pair, best, message: `The longest semi-repetitive substring has length ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 11, start, end: s.length - 1, pair, best, message: `The longest semi-repetitive substring has length ${best}.` })
   return { input: { s }, result: best, frames }
 }
 

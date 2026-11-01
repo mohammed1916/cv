@@ -11,7 +11,7 @@ export function buildTrace(input) {
   let main = input.mainTank
   let extra = input.additionalTank
   let distance = 0
-  const frames = [{ phase: 'start', activeLine: L('set distance to 0'), main, extra, distance, message: `Start with ${main} liters in the main tank and ${extra} in the auxiliary tank.` }]
+  const frames = [{ phase: 'start', activeLine: L('set distance to 0'), pythonLine: 2, main, extra, distance, message: `Start with ${main} liters in the main tank and ${extra} in the auxiliary tank.` }]
   while (main >= 5) {
     main -= 5
     distance += 50
@@ -20,11 +20,11 @@ export function buildTrace(input) {
       extra -= 1
       main += 1
     }
-    frames.push({ phase: 'burn', activeLine: L(moved ? 'if the auxiliary tank' : 'while the main tank'), main, extra, distance,
+    frames.push({ phase: 'burn', activeLine: L(moved ? 'if the auxiliary tank' : 'while the main tank'), pythonLine: moved ? 8 : 6, main, extra, distance,
       message: `Burn 5 liters for 50 km. ${moved ? 'One liter moves from the auxiliary tank into the main tank.' : 'The auxiliary tank is empty, so nothing moves.'}` })
   }
   distance += 10 * main
-  frames.push({ phase: 'done', activeLine: L('return distance'), main: 0, extra, distance, message: `The last ${main} liters add ${10 * main} km. Total ${distance} km.` })
+  frames.push({ phase: 'done', activeLine: L('return distance'), pythonLine: 9, main: 0, extra, distance, message: `The last ${main} liters add ${10 * main} km. Total ${distance} km.` })
   return { input, result: distance, frames }
 }
 

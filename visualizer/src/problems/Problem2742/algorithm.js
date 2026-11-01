@@ -18,7 +18,7 @@ export function buildTrace(data) {
   // best[c]: cheapest way, over the walls seen so far, to cover c walls (capped at n).
   let best = Array(n + 1).fill(Infinity)
   best[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set best[0]'), wall: null, best: [...best], message: 'Covering 0 walls costs 0. Every other count is not reachable yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best[0]'), pythonLine: 5, wall: null, best: [...best], message: 'Covering 0 walls costs 0. Every other count is not reachable yet.' }]
   for (let i = 0; i < n; i++) {
     const next = best.slice()
     for (let c = 0; c <= n; c++) {
@@ -27,9 +27,9 @@ export function buildTrace(data) {
       next[covered] = Math.min(next[covered], best[c] + cost[i])
     }
     best = next
-    frames.push({ phase: 'wall', activeLine: L('for each wall i'), wall: i, best: [...best], message: `Wall ${i + 1} costs ${cost[i]} and lets the free painter cover ${time[i] + 1} walls while it is painted.` })
+    frames.push({ phase: 'wall', activeLine: L('for each wall i'), pythonLine: 13, wall: i, best: [...best], message: `Wall ${i + 1} costs ${cost[i]} and lets the free painter cover ${time[i] + 1} walls while it is painted.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best[n]'), wall: null, best: [...best], message: `The cheapest way to cover all ${n} walls costs ${best[n]}.` })
+  frames.push({ phase: 'done', activeLine: L('return best[n]'), pythonLine: 14, wall: null, best: [...best], message: `The cheapest way to cover all ${n} walls costs ${best[n]}.` })
   return { input: data, result: best[n], frames }
 }
 

@@ -7,23 +7,25 @@ export function parseInput(text) {
   return { s }
 }
 
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
 export function buildTrace(input) {
   const { s } = input
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set stack to an empty list'), i: -1, stack: [], message: 'Read the string with an empty stack.' }]
+  const frames = [{ phase: 'start', activeLine: L('set stack to an empty list'), pythonLine: P('stack = []'), i: -1, stack: [], message: 'Read the string with an empty stack.' }]
   for (let i = 0; i < s.length; i++) {
     stack.push(s[i])
-    frames.push({ phase: 'push', activeLine: L('push c onto the stack'), i, stack: [...stack], message: `Push ${s[i]}.` })
+    frames.push({ phase: 'push', activeLine: L('push c onto the stack'), pythonLine: P('stack.append(c)'), i, stack: [...stack], message: `Push ${s[i]}.` })
     const m = stack.length
     if (m >= 2 && ((stack[m - 2] === 'A' && stack[m - 1] === 'B') || (stack[m - 2] === 'C' && stack[m - 1] === 'D'))) {
       const pair = stack[m - 2] + stack[m - 1]
       stack.pop()
       stack.pop()
-      frames.push({ phase: 'remove', activeLine: L('remove both letters'), i, stack: [...stack], message: `The top two letters form ${pair}; remove them.` })
+      frames.push({ phase: 'remove', activeLine: L('remove both letters'), pythonLine: P('stack.pop()'), i, stack: [...stack], message: `The top two letters form ${pair}; remove them.` })
     }
   }
   const result = stack.length
-  frames.push({ phase: 'done', activeLine: L('return the length'), i: s.length, stack: [...stack], message: `${result} letters remain.` })
+  frames.push({ phase: 'done', activeLine: L('return the length'), pythonLine: P('return len(stack)'), i: s.length, stack: [...stack], message: `${result} letters remain.` })
   return { input, result, frames }
 }
 

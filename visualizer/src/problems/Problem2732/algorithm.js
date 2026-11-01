@@ -15,25 +15,25 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { grid } = input
   const m = grid.length
-  const frames = [{ phase: 'start', activeLine: L('good subset of rows'), rows: [], message: 'Look for one all-zero row first, then for two rows with no shared column.' }]
+  const frames = [{ phase: 'start', activeLine: L('good subset of rows'), pythonLine: 2, rows: [], message: 'Look for one all-zero row first, then for two rows with no shared column.' }]
   for (let i = 0; i < m; i++) {
-    frames.push({ phase: 'zero', activeLine: L('if row i is all zeros'), rows: [i], message: `Check row ${i}.` })
+    frames.push({ phase: 'zero', activeLine: L('if row i is all zeros'), pythonLine: 4, rows: [i], message: `Check row ${i}.` })
     if (grid[i].every(v => v === 0)) {
-      frames.push({ phase: 'done', activeLine: L('return [i]'), rows: [i], message: `Row ${i} is all zeros, so [${i}] is good.` })
+      frames.push({ phase: 'done', activeLine: L('return [i]'), pythonLine: 5, rows: [i], message: `Row ${i} is all zeros, so [${i}] is good.` })
       return { input, grid, result: [i], frames }
     }
   }
   for (let i = 0; i < m; i++) {
     for (let j = i + 1; j < m; j++) {
       const disjoint = grid[i].every((v, c) => v * grid[j][c] === 0)
-      frames.push({ phase: 'pair', activeLine: L('if rows i and j have no column'), rows: [i, j], message: `Rows ${i} and ${j} ${disjoint ? 'share no column' : 'share a column'}.` })
+      frames.push({ phase: 'pair', activeLine: L('if rows i and j have no column'), pythonLine: 8, rows: [i, j], message: `Rows ${i} and ${j} ${disjoint ? 'share no column' : 'share a column'}.` })
       if (disjoint) {
-        frames.push({ phase: 'done', activeLine: L('return [i, j]'), rows: [i, j], message: `Rows ${i} and ${j} form a good subset.` })
+        frames.push({ phase: 'done', activeLine: L('return [i, j]'), pythonLine: 9, rows: [i, j], message: `Rows ${i} and ${j} form a good subset.` })
         return { input, grid, result: [i, j], frames }
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return []'), rows: [], message: 'No good subset exists.' })
+  frames.push({ phase: 'done', activeLine: L('return []'), pythonLine: 10, rows: [], message: 'No good subset exists.' })
   return { input, grid, result: [], frames }
 }
 

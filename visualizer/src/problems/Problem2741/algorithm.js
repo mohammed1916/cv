@@ -17,7 +17,7 @@ export function buildTrace({ nums }) {
   const full = (1 << n) - 1
   const ways = Array.from({ length: 1 << n }, () => new Array(n).fill(0))
   for (let i = 0; i < n; i++) ways[1 << i][i] = 1
-  const frames = [{ phase: 'start', activeLine: L('start each number alone'), mask: 0, total: 0, message: 'Each single number is a permutation of length one.' }]
+  const frames = [{ phase: 'start', activeLine: L('start each number alone'), pythonLine: 7, mask: 0, total: 0, message: 'Each single number is a permutation of length one.' }]
   for (let mask = 1; mask <= full; mask++) {
     let here = 0
     for (let last = 0; last < n; last++) {
@@ -29,10 +29,10 @@ export function buildTrace({ nums }) {
         if (linked(nums[last], nums[next])) ways[mask | (1 << next)][next] += count
       }
     }
-    if (here) frames.push({ phase: 'extend', activeLine: L('for each last number'), mask, total: here, message: `Arrangements of subset ${mask} that are valid so far: ${here}.` })
+    if (here) frames.push({ phase: 'extend', activeLine: L('for each last number'), pythonLine: 10, mask, total: here, message: `Arrangements of subset ${mask} that are valid so far: ${here}.` })
   }
   const result = ways[full].reduce((a, b) => a + b, 0) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum'), mask: full, total: result, message: `Special permutations: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: 18, mask: full, total: result, message: `Special permutations: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

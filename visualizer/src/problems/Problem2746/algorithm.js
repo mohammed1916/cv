@@ -20,7 +20,7 @@ export function buildTrace(input) {
   const { words } = input
   let table = new Map()
   put(table, words[0][0], words[0].at(-1), words[0].length)
-  const frames = [{ phase: 'start', activeLine: L('set the table to the first word'), index: 0, word: words[0], entries: summary(table), best: words[0].length, message: `Start with ${words[0]} alone, keyed by its first and last letters.` }]
+  const frames = [{ phase: 'start', activeLine: L('set the table to the first word'), pythonLine: 2, index: 0, word: words[0], entries: summary(table), best: words[0].length, message: `Start with ${words[0]} alone, keyed by its first and last letters.` }]
   for (let i = 1; i < words.length; i++) {
     const w = words[i]
     const next = new Map()
@@ -30,10 +30,10 @@ export function buildTrace(input) {
     }
     table = next
     const best = Math.min(...[...table.values()].map(e => e.length))
-    frames.push({ phase: 'word', activeLine: L('for each later word'), index: i, word: w, entries: summary(table), best, message: `Join ${w} on either side of each stored string. Shortest so far: ${best}.` })
+    frames.push({ phase: 'word', activeLine: L('for each later word'), pythonLine: 13, index: i, word: w, entries: summary(table), best, message: `Join ${w} on either side of each stored string. Shortest so far: ${best}.` })
   }
   const result = Math.min(...[...table.values()].map(e => e.length))
-  frames.push({ phase: 'done', activeLine: L('return the shortest length'), index: words.length - 1, word: '', entries: summary(table), best: result, message: `Shortest decremental concatenation has length ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the shortest length'), pythonLine: 14, index: words.length - 1, word: '', entries: summary(table), best: result, message: `Shortest decremental concatenation has length ${result}.` })
   return { input: { words }, result, frames }
 }
 
