@@ -10,12 +10,12 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const head = input.head
   let value = 0
-  const frames = [{ phase: 'start', activeLine: L('set value to 0'), k: -1, value, message: 'Start with value 0 at the head.' }]
+  const frames = [{ phase: 'start', activeLine: L('set value to 0'), pythonLine: 2, k: -1, value, message: 'Start with value 0 at the head.' }]
   head.forEach((bit, k) => {
     value = value * 2 + bit
-    frames.push({ phase: 'bit', activeLine: L('set value to 2 times'), k, value, message: `Bit ${bit} at node ${k}: value becomes ${value}.` })
+    frames.push({ phase: 'bit', activeLine: L('set value to 2 times'), pythonLine: 4, k, value, message: `Bit ${bit} at node ${k}: value becomes ${value}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return value'), k: head.length, value, message: `The binary number is ${value}.` })
+  frames.push({ phase: 'done', activeLine: L('return value'), pythonLine: 5, k: head.length, value, message: `The binary number is ${value}.` })
   return { input, result: value, frames }
 }
 

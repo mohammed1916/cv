@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const cols = mat[0].length
   const result = mat.map(row => [...row])
   const starts = [...Array.from({ length: cols }, (_, c) => [0, c]), ...Array.from({ length: rows - 1 }, (_, r) => [r + 1, 0])]
-  const frames = [{ phase: 'start', activeLine: L('for each diagonal'), mat: result.map(r => [...r]), cells: [], message: 'Each diagonal is sorted on its own.' }]
+  const frames = [{ phase: 'start', activeLine: L('for each diagonal'), pythonLine: 3, mat: result.map(r => [...r]), cells: [], message: 'Each diagonal is sorted on its own.' }]
   for (const [sr, sc] of starts) {
     const cells = []
     for (let r = sr, c = sc; r < rows && c < cols; r++, c++) cells.push([r, c])
@@ -28,9 +28,9 @@ export function buildTrace(input) {
       }
     }
     cells.forEach(([r, c], i) => { result[r][c] = values[i] })
-    frames.push({ phase: 'diagonal', activeLine: L('sort those values'), mat: result.map(row => [...row]), cells, message: `Diagonal from (${sr}, ${sc}) is now ${values.join(', ')}.` })
+    frames.push({ phase: 'diagonal', activeLine: L('sort those values'), pythonLine: 14, mat: result.map(row => [...row]), cells, message: `Diagonal from (${sr}, ${sc}) is now ${values.join(', ')}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return mat'), mat: result.map(row => [...row]), cells: [], message: 'Every diagonal is sorted.' })
+  frames.push({ phase: 'done', activeLine: L('return mat'), pythonLine: 15, mat: result.map(row => [...row]), cells: [], message: 'Every diagonal is sorted.' })
   return { input, result, frames }
 }
 

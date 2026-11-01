@@ -10,7 +10,7 @@ export function buildTrace(input) {
   const { arr } = input
   const n = arr.length
   if (n === 1) {
-    return { input, result: 0, frames: [{ phase: 'done', activeLine: L('if the array has one element'), current: 0, frontier: [], visited: [0], jumps: 0, message: 'One element: no jump is needed.' }] }
+    return { input, result: 0, frames: [{ phase: 'done', activeLine: L('if the array has one element'), pythonLine: 4, current: 0, frontier: [], visited: [0], jumps: 0, message: 'One element: no jump is needed.' }] }
   }
   const byValue = new Map()
   arr.forEach((v, i) => {
@@ -20,18 +20,18 @@ export function buildTrace(input) {
   const dist = Array(n).fill(-1)
   dist[0] = 0
   const queue = [0]
-  const frames = [{ phase: 'start', activeLine: L('start a queue with index zero'), current: 0, frontier: [0], visited: [0], jumps: 0, message: 'Start at index 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('start a queue with index zero'), pythonLine: 10, current: 0, frontier: [0], visited: [0], jumps: 0, message: 'Start at index 0.' }]
   let answer = -1
   for (let head = 0; head < queue.length; head++) {
     const i = queue[head]
     if (i === n - 1) {
       answer = dist[i]
-      frames.push({ phase: 'found', activeLine: L('if this index is the last index'), current: i, frontier: queue.slice(head + 1), visited: queue.slice(0, head + 1), jumps: answer, message: `Reached the last index after ${answer} jump(s).` })
+      frames.push({ phase: 'found', activeLine: L('if this index is the last index'), pythonLine: 16, current: i, frontier: queue.slice(head + 1), visited: queue.slice(0, head + 1), jumps: answer, message: `Reached the last index after ${answer} jump(s).` })
       break
     }
     const sameValue = byValue.get(arr[i]) ?? []
     const candidates = [i - 1, i + 1, ...sameValue]
-    frames.push({ phase: 'pop', activeLine: L('gather neighbours'), current: i, frontier: queue.slice(head + 1), visited: [...queue.slice(0, head + 1)], jumps: dist[i], message: `At index ${i} (value ${arr[i]}), ${sameValue.length} index(es) share its value.` })
+    frames.push({ phase: 'pop', activeLine: L('gather neighbours'), pythonLine: 17, current: i, frontier: queue.slice(head + 1), visited: [...queue.slice(0, head + 1)], jumps: dist[i], message: `At index ${i} (value ${arr[i]}), ${sameValue.length} index(es) share its value.` })
     for (const j of candidates) {
       if (j >= 0 && j < n && dist[j] === -1) {
         dist[j] = dist[i] + 1
@@ -40,8 +40,8 @@ export function buildTrace(input) {
     }
     byValue.set(arr[i], [])
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('return minus one if the queue empties'), current: null, frontier: [], visited: [...queue], jumps: null, message: 'The last index cannot be reached: -1.' })
-  else frames.push({ phase: 'done', activeLine: L('return its distance'), current: null, frontier: [], visited: [...queue], jumps: answer, message: `Minimum jumps: ${answer}.` })
+  if (answer === -1) frames.push({ phase: 'done', activeLine: L('return minus one if the queue empties'), pythonLine: 22, current: null, frontier: [], visited: [...queue], jumps: null, message: 'The last index cannot be reached: -1.' })
+  else frames.push({ phase: 'done', activeLine: L('return its distance'), pythonLine: 16, current: null, frontier: [], visited: [...queue], jumps: answer, message: `Minimum jumps: ${answer}.` })
   return { input, result: answer, frames }
 }
 

@@ -20,14 +20,14 @@ export function parseInput(text) {
 
 export function buildTrace({ root1, root2 }) {
   const t1 = treeFromLevelOrder(root1), t2 = treeFromLevelOrder(root2)
-  const frames = [{ phase: 'start', activeLine: L('set first to the inorder'), which: 0, node: null, values: [], merged: [], message: 'Read each tree in order. In-order reading of a binary search tree gives a sorted list.' }]
+  const frames = [{ phase: 'start', activeLine: L('set first to the inorder'), pythonLine: 34, which: 0, node: null, values: [], merged: [], message: 'Read each tree in order. In-order reading of a binary search tree gives a sorted list.' }]
   const inorder = (root, which) => {
     const out = []
     const visit = node => {
       if (!node) return
       visit(node.left)
       out.push(node.value)
-      frames.push({ phase: 'walk', activeLine: L('append its value'), which, node: node.id, values: [...out], merged: [], message: `Tree ${which} appends ${node.value}.` })
+      frames.push({ phase: 'walk', activeLine: L('append its value'), pythonLine: 28, which, node: node.id, values: [...out], merged: [], message: `Tree ${which} appends ${node.value}.` })
       visit(node.right)
     }
     visit(root)
@@ -39,11 +39,11 @@ export function buildTrace({ root1, root2 }) {
   while (i < first.length && j < second.length) {
     if (first[i] <= second[j]) merged.push(first[i++])
     else merged.push(second[j++])
-    frames.push({ phase: 'merge', activeLine: L('take the smaller front value'), which: 0, node: null, values: [], merged: [...merged], message: `Take ${merged[merged.length - 1]} from the smaller front value.` })
+    frames.push({ phase: 'merge', activeLine: L('take the smaller front value'), pythonLine: 40, which: 0, node: null, values: [], merged: [...merged], message: `Take ${merged[merged.length - 1]} from the smaller front value.` })
   }
   merged.push(...first.slice(i), ...second.slice(j))
-  frames.push({ phase: 'merge', activeLine: L('append the remaining values'), which: 0, node: null, values: [], merged: [...merged], message: 'Append the values left in the list that still has some.' })
-  frames.push({ phase: 'done', activeLine: L('return merged'), which: 0, node: null, values: [], merged: [...merged], message: `All elements in order: ${merged.join(', ')}.` })
+  frames.push({ phase: 'merge', activeLine: L('append the remaining values'), pythonLine: 46, which: 0, node: null, values: [], merged: [...merged], message: 'Append the values left in the list that still has some.' })
+  frames.push({ phase: 'done', activeLine: L('return merged'), pythonLine: 48, which: 0, node: null, values: [], merged: [...merged], message: `All elements in order: ${merged.join(', ')}.` })
   return { input: { root1, root2 }, root1: t1, root2: t2, result: merged, frames }
 }
 

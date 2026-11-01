@@ -28,23 +28,23 @@ export function buildTrace({ tree }) {
   const total = sumOf(root)
   const sums = {}
   let best = 0
-  const frames = [{ phase: 'total', activeLine: L('set total to the sum'), current: null, sums: {}, best: 0, total, message: `Total of all node values: ${total}.` }]
+  const frames = [{ phase: 'total', activeLine: L('set total to the sum'), pythonLine: 37, current: null, sums: {}, best: 0, total, message: `Total of all node values: ${total}.` }]
   const measure = node => {
     if (!node) return 0
     const subtree = node.value + measure(node.left) + measure(node.right)
     sums[node.id] = subtree
     if (node === root) {
-      frames.push({ phase: 'measure', activeLine: L('set subtree of v'), current: node.id, sums: { ...sums }, best, total, message: `The root's subtree is the whole tree, ${subtree}; it has no edge above it to cut.` })
+      frames.push({ phase: 'measure', activeLine: L('set subtree of v'), pythonLine: 34, current: node.id, sums: { ...sums }, best, total, message: `The root's subtree is the whole tree, ${subtree}; it has no edge above it to cut.` })
     } else {
       const product = subtree * (total - subtree)
       best = Math.max(best, product)
-      frames.push({ phase: 'cut', activeLine: L('set best to the larger'), current: node.id, sums: { ...sums }, best, total, message: `Cut above node ${node.value}: ${subtree} times ${total - subtree} = ${product}.` })
+      frames.push({ phase: 'cut', activeLine: L('set best to the larger'), pythonLine: 40, current: node.id, sums: { ...sums }, best, total, message: `Cut above node ${node.value}: ${subtree} times ${total - subtree} = ${product}.` })
     }
     return subtree
   }
   measure(root)
   const result = best % MOD
-  frames.push({ phase: 'done', activeLine: L('return best modulo'), current: null, sums: { ...sums }, best, total, message: `Largest product ${best}, modulo 1000000007 is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return best modulo'), pythonLine: 41, current: null, sums: { ...sums }, best, total, message: `Largest product ${best}, modulo 1000000007 is ${result}.` })
   return { input: { tree }, root, result, frames }
 }
 

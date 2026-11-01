@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const dist = new Map([[key(0, 0, 0), 0]])
   const queue = [{ r: 0, c: 0, used: 0 }]
   const reached = [[0, 0]]
-  const frames = [{ phase: 'start', activeLine: L('start a queue with the top left cell'), current: null, frontier: [[0, 0]], visited: [[0, 0]], steps: 0, message: `Start at the top left with 0 of ${k} removals used.` }]
+  const frames = [{ phase: 'start', activeLine: L('start a queue with the top left cell'), pythonLine: 5, current: null, frontier: [[0, 0]], visited: [[0, 0]], steps: 0, message: `Start at the top left with 0 of ${k} removals used.` }]
   let answer = -1
   let head = 0
   while (head < queue.length) {
@@ -26,10 +26,10 @@ export function buildTrace(input) {
     const steps = dist.get(key(here.r, here.c, here.used))
     if (here.r === m - 1 && here.c === n - 1) {
       answer = steps
-      frames.push({ phase: 'found', activeLine: L('if this state is the bottom right cell'), current: [here.r, here.c], frontier: queue.slice(head).map(s => [s.r, s.c]), visited: [...reached], steps, message: `Reached the bottom right cell in ${steps} step(s) with ${here.used} removal(s).` })
+      frames.push({ phase: 'found', activeLine: L('if this state is the bottom right cell'), pythonLine: 10, current: [here.r, here.c], frontier: queue.slice(head).map(s => [s.r, s.c]), visited: [...reached], steps, message: `Reached the bottom right cell in ${steps} step(s) with ${here.used} removal(s).` })
       break
     }
-    frames.push({ phase: 'pop', activeLine: L('take the next state'), current: [here.r, here.c], frontier: queue.slice(head).map(s => [s.r, s.c]), visited: [...reached], steps, message: `At (${here.r}, ${here.c}) after ${steps} step(s), with ${here.used} removal(s) used.` })
+    frames.push({ phase: 'pop', activeLine: L('take the next state'), pythonLine: 8, current: [here.r, here.c], frontier: queue.slice(head).map(s => [s.r, s.c]), visited: [...reached], steps, message: `At (${here.r}, ${here.c}) after ${steps} step(s), with ${here.used} removal(s) used.` })
     for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
       const nr = here.r + dr
       const nc = here.c + dc
@@ -43,8 +43,8 @@ export function buildTrace(input) {
       }
     }
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('the queue empties'), current: null, frontier: [], visited: [...reached], steps: null, message: 'No route reaches the bottom right cell within the removal budget: -1.' })
-  else frames.push({ phase: 'done', activeLine: L('return the steps'), current: null, frontier: [], visited: [...reached], steps: answer, message: `Shortest route: ${answer} step(s).` })
+  if (answer === -1) frames.push({ phase: 'done', activeLine: L('the queue empties'), pythonLine: 20, current: null, frontier: [], visited: [...reached], steps: null, message: 'No route reaches the bottom right cell within the removal budget: -1.' })
+  else frames.push({ phase: 'done', activeLine: L('return the steps'), pythonLine: 11, current: null, frontier: [], visited: [...reached], steps: answer, message: `Shortest route: ${answer} step(s).` })
   return { input, result: answer, frames }
 }
 

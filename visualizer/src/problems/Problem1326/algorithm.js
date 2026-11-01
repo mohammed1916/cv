@@ -17,21 +17,21 @@ export function buildTrace(input) {
   let farthest = 0
   let taps = 0
   let k = 0
-  const frames = [{ phase: 'start', activeLine: L('set covered to zero'), covered, taps, farthest, message: 'Nothing is watered yet. The garden runs from 0 to n.' }]
+  const frames = [{ phase: 'start', activeLine: L('set covered to zero'), pythonLine: 3, covered, taps, farthest, message: 'Nothing is watered yet. The garden runs from 0 to n.' }]
   while (covered < n) {
     while (k < spans.length && spans[k].left <= covered) {
       farthest = Math.max(farthest, spans[k].right)
       k += 1
     }
     if (farthest <= covered) {
-      frames.push({ phase: 'stuck', activeLine: L('return minus one'), covered, taps, farthest, message: `No tap reaches past ${covered}, so the garden cannot be watered.` })
+      frames.push({ phase: 'stuck', activeLine: L('return minus one'), pythonLine: 12, covered, taps, farthest, message: `No tap reaches past ${covered}, so the garden cannot be watered.` })
       return { input, result: -1, frames }
     }
     taps += 1
     covered = farthest
-    frames.push({ phase: 'open', activeLine: L('open one more tap'), covered, taps, farthest, message: `Open another tap; the watered range now reaches ${covered}.` })
+    frames.push({ phase: 'open', activeLine: L('open one more tap'), pythonLine: 14, covered, taps, farthest, message: `Open another tap; the watered range now reaches ${covered}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return taps'), covered, taps, farthest, message: `Fewest taps: ${taps}.` })
+  frames.push({ phase: 'done', activeLine: L('return taps'), pythonLine: 15, covered, taps, farthest, message: `Fewest taps: ${taps}.` })
   return { input, result: taps, frames }
 }
 

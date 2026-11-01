@@ -39,7 +39,7 @@ export function buildTrace({ ops }) {
   const times = new Map()
   const log = []
   const results = []
-  const frames = [{ phase: 'start', activeLine: L('start with no recorded times'), op: -1, bucket: null, counts: [], message: 'No tweets are recorded yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('start with no recorded times'), pythonLine: 4, op: -1, bucket: null, counts: [], message: 'No tweets are recorded yet.' }]
   ops.forEach((op, index) => {
     if (op[0] === 'record') {
       const [, name, time] = op
@@ -47,7 +47,7 @@ export function buildTrace({ ops }) {
       list.splice(upperBound(list, time), 0, time)
       times.set(name, list)
       log.push({ name: 'recordTweet', args: [name, time], returned: undefined })
-      frames.push({ phase: 'record', activeLine: L('insert its time'), op: index, bucket: null, counts: [], message: `Insert time ${time} into the sorted times for ${name}.` })
+      frames.push({ phase: 'record', activeLine: L('insert its time'), pythonLine: 8, op: index, bucket: null, counts: [], message: `Insert time ${time} into the sorted times for ${name}.` })
     } else {
       const [, freq, name, start, end] = op
       const delta = DELTA[freq]
@@ -56,14 +56,14 @@ export function buildTrace({ ops }) {
       for (let low = start; low <= end; low += delta) {
         const high = Math.min(low + delta - 1, end)
         counts.push(upperBound(list, high) - lowerBound(list, low))
-        frames.push({ phase: 'bucket', activeLine: L('count the times in the bucket'), op: index, bucket: [low, high], counts: [...counts], message: `Bucket ${low} to ${high} holds ${counts[counts.length - 1]} tweets.` })
+        frames.push({ phase: 'bucket', activeLine: L('count the times in the bucket'), pythonLine: 17, op: index, bucket: [low, high], counts: [...counts], message: `Bucket ${low} to ${high} holds ${counts[counts.length - 1]} tweets.` })
       }
       log.push({ name: 'getTweetCountsPerFrequency', args: [freq, name, start, end], returned: counts })
       results.push(counts)
-      frames.push({ phase: 'query', activeLine: L('add the answer list'), op: index, bucket: null, counts, message: `Query returns ${JSON.stringify(counts)}.` })
+      frames.push({ phase: 'query', activeLine: L('add the answer list'), pythonLine: 19, op: index, bucket: null, counts, message: `Query returns ${JSON.stringify(counts)}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return every result'), op: null, bucket: null, counts: [], message: `Results: ${JSON.stringify(results)}.` })
+  frames.push({ phase: 'done', activeLine: L('return every result'), pythonLine: 20, op: null, bucket: null, counts: [], message: `Results: ${JSON.stringify(results)}.` })
   return { input: { ops }, log, result: results, frames }
 }
 

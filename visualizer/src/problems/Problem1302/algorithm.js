@@ -9,20 +9,20 @@ export function parseInput(text) {
 
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
-  const frames = [{ phase: 'start', activeLine: L('set level to just the root'), ids: [], depth: 0, sum: 0, message: 'Start with the root as the only node on level 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('set level to just the root'), pythonLine: 25, ids: [], depth: 0, sum: 0, message: 'Start with the root as the only node on level 0.' }]
   let level = [root]
   let depth = 0
   let total
   for (;;) {
     total = level.reduce((a, n) => a + n.value, 0)
-    frames.push({ phase: 'level', activeLine: L('set total to the sum'), ids: level.map(n => n.id), depth, sum: total, message: `Level ${depth} has ${level.length} node(s) with sum ${total}.` })
+    frames.push({ phase: 'level', activeLine: L('set total to the sum'), pythonLine: 28, ids: level.map(n => n.id), depth, sum: total, message: `Level ${depth} has ${level.length} node(s) with sum ${total}.` })
     const next = []
     for (const n of level) { if (n.left) next.push(n.left); if (n.right) next.push(n.right) }
     if (next.length === 0) break
     level = next
     depth++
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), ids: [], depth, sum: total, message: `The deepest level is ${depth}, and its sum is ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 38, ids: [], depth, sum: total, message: `The deepest level is ${depth}, and its sum is ${total}.` })
   return { input: arr, root, result: total, frames }
 }
 

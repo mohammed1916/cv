@@ -9,16 +9,16 @@ export function buildTrace(arr) {
   const counts = new Map()
   for (const v of arr) counts.set(v, (counts.get(v) ?? 0) + 1)
   const order = [...counts].sort((a, b) => b[1] - a[1])
-  const frames = [{ phase: 'count', activeLine: L('count how often'), value: null, chosen: [], removed: 0, message: `Count the values. The most frequent value appears ${order[0][1]} times.` }]
+  const frames = [{ phase: 'count', activeLine: L('count how often'), pythonLine: 6, value: null, chosen: [], removed: 0, message: `Count the values. The most frequent value appears ${order[0][1]} times.` }]
   let removed = 0
   const chosen = []
   for (const [value, count] of order) {
     if (removed * 2 >= arr.length) break
     removed += count
     chosen.push(value)
-    frames.push({ phase: 'pick', activeLine: L('removed = removed + count'), value, chosen: [...chosen], removed, message: `Remove every ${value} (${count} copies): ${removed} of ${arr.length} entries are gone.` })
+    frames.push({ phase: 'pick', activeLine: L('removed = removed + count'), pythonLine: 10, value, chosen: [...chosen], removed, message: `Remove every ${value} (${count} copies): ${removed} of ${arr.length} entries are gone.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return chosen'), value: null, chosen: [...chosen], removed, message: `Smallest set size: ${chosen.length}.` })
+  frames.push({ phase: 'done', activeLine: L('return chosen'), pythonLine: 11, value: null, chosen: [...chosen], removed, message: `Smallest set size: ${chosen.length}.` })
   return { input: arr, result: chosen.length, frames }
 }
 

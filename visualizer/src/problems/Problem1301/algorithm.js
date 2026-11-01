@@ -36,12 +36,12 @@ export function buildTrace({ board }) {
   score[n - 1][n - 1] = 0
   ways[n - 1][n - 1] = 1
   const view = () => score.map(row => row.map(v => (v === null ? '·' : v)))
-  const frames = [{ phase: 'start', activeLine: L('set score to unreached'), row: n - 1, col: n - 1, table: view(), message: 'Start at S with score 0 and one path. Paths move up, left, or up-left.' }]
+  const frames = [{ phase: 'start', activeLine: L('set score to unreached'), pythonLine: 6, row: n - 1, col: n - 1, table: view(), message: 'Start at S with score 0 and one path. Paths move up, left, or up-left.' }]
   for (let r = n - 1; r >= 0; r--) {
     for (let c = n - 1; c >= 0; c--) {
       if (r === n - 1 && c === n - 1) continue
       if (board[r][c] === 'X') {
-        frames.push({ phase: 'blocked', activeLine: L('skip the start and obstacles'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}) is an obstacle, so no path enters it.` })
+        frames.push({ phase: 'blocked', activeLine: L('skip the start and obstacles'), pythonLine: 10, row: r, col: c, table: view(), message: `Cell (${r}, ${c}) is an obstacle, so no path enters it.` })
         continue
       }
       let best = null
@@ -51,16 +51,16 @@ export function buildTrace({ board }) {
         if (best === null || score[pr][pc] > best) { best = score[pr][pc]; count = ways[pr][pc] } else if (score[pr][pc] === best) count = (count + ways[pr][pc]) % MOD
       }
       if (best === null) {
-        frames.push({ phase: 'cell', activeLine: L('if none is reached'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}) cannot be reached from S.` })
+        frames.push({ phase: 'cell', activeLine: L('if none is reached'), pythonLine: 21, row: r, col: c, table: view(), message: `Cell (${r}, ${c}) cannot be reached from S.` })
         continue
       }
       score[r][c] = best + digitValue(board[r][c])
       ways[r][c] = count
-      frames.push({ phase: 'cell', activeLine: L('take the largest score'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}): best score ${score[r][c]} with ${count} path(s).` })
+      frames.push({ phase: 'cell', activeLine: L('take the largest score'), pythonLine: 23, row: r, col: c, table: view(), message: `Cell (${r}, ${c}): best score ${score[r][c]} with ${count} path(s).` })
     }
   }
   const result = score[0][0] === null ? [0, 0] : [score[0][0], ways[0][0] % MOD]
-  frames.push({ phase: 'done', activeLine: L('return [score'), row: 0, col: 0, table: view(), message: `Maximum score ${result[0]} with ${result[1]} path(s).` })
+  frames.push({ phase: 'done', activeLine: L('return [score'), pythonLine: score[0][0] === null ? 26 : 27, row: 0, col: 0, table: view(), message: `Maximum score ${result[0]} with ${result[1]} path(s).` })
   return { input: { board }, board, result, frames }
 }
 

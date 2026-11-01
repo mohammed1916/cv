@@ -23,21 +23,21 @@ export function buildTrace(input) {
   // prods holds prefix products of the values since the last zero; prods[0] is 1.
   let prods = [1]
   const outputs = []
-  const frames = [{ phase: 'start', activeLine: L('set prods to [1]'), index: -1, stream: [], outputs: [], message: 'Start with an empty stream and prefix products [1].' }]
+  const frames = [{ phase: 'start', activeLine: L('set prods to [1]'), pythonLine: 2, index: -1, stream: [], outputs: [], message: 'Start with an empty stream and prefix products [1].' }]
   operations.forEach(([name, value]) => {
     if (name === 'add') {
       stream.push(value)
       if (value === 0) prods = [1]
       else prods.push(prods[prods.length - 1] * value)
-      frames.push({ phase: 'add', activeLine: L('if value is 0'), index: stream.length - 1, stream: [...stream], outputs: [...outputs], message: value === 0 ? `Add 0. Every product that reaches back past it is 0.` : `Add ${value}. Prefix product since the last zero is ${prods[prods.length - 1]}.` })
+      frames.push({ phase: 'add', activeLine: L('if value is 0'), pythonLine: value === 0 ? 7 : 9, index: stream.length - 1, stream: [...stream], outputs: [...outputs], message: value === 0 ? `Add 0. Every product that reaches back past it is 0.` : `Add ${value}. Prefix product since the last zero is ${prods[prods.length - 1]}.` })
     } else {
       const since = prods.length - 1
       const answer = value > since ? 0 : prods[prods.length - 1] / prods[prods.length - 1 - value]
       outputs.push(answer)
-      frames.push({ phase: 'query', activeLine: L('if k is more than'), index: stream.length - 1, stream: [...stream], outputs: [...outputs], k: value, answer, message: value > since ? `Last ${value} include a zero, so the product is 0.` : `Last ${value} numbers multiply to ${answer}.` })
+      frames.push({ phase: 'query', activeLine: L('if k is more than'), pythonLine: value > since ? 12 : 14, index: stream.length - 1, stream: [...stream], outputs: [...outputs], k: value, answer, message: value > since ? `Last ${value} include a zero, so the product is 0.` : `Last ${value} numbers multiply to ${answer}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return outputs'), index: stream.length - 1, stream: [...stream], outputs: [...outputs], message: `Outputs: ${outputs.join(', ') || '(none)'}.` })
+  frames.push({ phase: 'done', activeLine: L('return outputs'), pythonLine: 15, index: stream.length - 1, stream: [...stream], outputs: [...outputs], message: `Outputs: ${outputs.join(', ') || '(none)'}.` })
   return { input, result: outputs, frames }
 }
 

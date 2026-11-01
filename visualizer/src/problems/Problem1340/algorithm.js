@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', activeLine: L('set result to 0'), index: null, targets: [], memo: [], message: 'Find the longest chain of jumps from every starting index.' }]
+  const frames = [{ phase: 'start', activeLine: L('set result to 0'), pythonLine: 18, index: null, targets: [], memo: [], message: 'Find the longest chain of jumps from every starting index.' }]
 
   // Indices reachable in one jump: at most d steps away, all values strictly below arr[i] on the way and at the target.
   const targetsOf = i => {
@@ -32,18 +32,18 @@ export function buildTrace(input) {
   const chain = i => {
     if (memo.has(i)) {
       const value = memo.get(i)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), index: i, targets: [], memo: snapshot(), message: `Index ${i} already has a chain of ${value}.` })
+      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 7, index: i, targets: [], memo: snapshot(), message: `Index ${i} already has a chain of ${value}.` })
       return value
     }
     let best = 1
     const targets = targetsOf(i)
-    frames.push({ phase: 'visit', activeLine: L('set best to 1'), index: i, targets, memo: snapshot(), message: `From index ${i} (value ${arr[i]}) the jumps reach ${targets.length ? targets.join(', ') : 'nothing'}.` })
+    frames.push({ phase: 'visit', activeLine: L('set best to 1'), pythonLine: 8, index: i, targets, memo: snapshot(), message: `From index ${i} (value ${arr[i]}) the jumps reach ${targets.length ? targets.join(', ') : 'nothing'}.` })
     for (const j of targets) {
       best = Math.max(best, 1 + chain(j))
     }
     memo.set(i, best)
     entries.push({ index: i, value: best })
-    frames.push({ phase: 'store', activeLine: L('store best for i'), index: i, targets: [], memo: snapshot(), message: `Chain from index ${i} is ${best}.` })
+    frames.push({ phase: 'store', activeLine: L('store best for i'), pythonLine: 15, index: i, targets: [], memo: snapshot(), message: `Chain from index ${i} is ${best}.` })
     return best
   }
 
@@ -51,7 +51,7 @@ export function buildTrace(input) {
   for (let i = 0; i < n; i++) {
     result = Math.max(result, chain(i))
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), index: null, targets: [], memo: snapshot(), message: `Most indices visited in one walk: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: 21, index: null, targets: [], memo: snapshot(), message: `Most indices visited in one walk: ${result}.` })
   return { input, result, frames }
 }
 

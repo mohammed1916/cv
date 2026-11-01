@@ -23,14 +23,14 @@ export function buildTrace({ n, edges, threshold }) {
   const dist = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 0 : Infinity)))
   for (const [a, b, w] of edges) { dist[a][b] = w; dist[b][a] = w }
   const snapshot = () => dist.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('set dist[i][j] to 0'), cell: null, highlighted: [], matrix: snapshot(), queue: [], k: -1, message: `Direct distances only: 0 on the diagonal, the edge weight for each edge, infinity otherwise. Threshold is ${threshold}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set dist[i][j] to 0'), pythonLine: 3, cell: null, highlighted: [], matrix: snapshot(), queue: [], k: -1, message: `Direct distances only: 0 on the diagonal, the edge weight for each edge, infinity otherwise. Threshold is ${threshold}.` }]
   for (let k = 0; k < n; k++) {
-    frames.push({ phase: 'pivot', activeLine: L('for each intermediate city k'), cell: null, highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], k, message: `City ${k} may now be used as a stepping stone: every route i to k to j is checked against the direct distance.` })
+    frames.push({ phase: 'pivot', activeLine: L('for each intermediate city k'), pythonLine: 7, cell: null, highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], k, message: `City ${k} may now be used as a stepping stone: every route i to k to j is checked against the direct distance.` })
     for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
       const via = dist[i][k] + dist[k][j]
       if (via < dist[i][j]) {
         dist[i][j] = via
-        frames.push({ phase: 'relax', activeLine: L('set dist[i][j] to dist[i][k] + dist[k][j]'), cell: null, highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], k, target: [i, j], message: `Through ${k}, city ${i} reaches ${j} in ${via}.` })
+        frames.push({ phase: 'relax', activeLine: L('set dist[i][j] to dist[i][k] + dist[k][j]'), pythonLine: 11, cell: null, highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], k, target: [i, j], message: `Through ${k}, city ${i} reaches ${j} in ${via}.` })
       }
     }
   }
@@ -39,9 +39,9 @@ export function buildTrace({ n, edges, threshold }) {
   let bestCount = Infinity
   for (let i = 0; i < n; i++) {
     if (best < 0 || per[i] <= bestCount) { best = i; bestCount = per[i] }
-    frames.push({ phase: 'count', activeLine: L('count the cities j'), cell: null, highlighted: [], matrix: snapshot(), queue: per.slice(0, i + 1).map((c, x) => `city ${x}: ${c} within ${threshold}`), k: -1, best, message: `City ${i} has ${per[i]} neighbour(s) within ${threshold}. Best so far: city ${best} with ${bestCount}.` })
+    frames.push({ phase: 'count', activeLine: L('count the cities j'), pythonLine: best === i ? 16 : 15, cell: null, highlighted: [], matrix: snapshot(), queue: per.slice(0, i + 1).map((c, x) => `city ${x}: ${c} within ${threshold}`), k: -1, best, message: `City ${i} has ${per[i]} neighbour(s) within ${threshold}. Best so far: city ${best} with ${bestCount}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), cell: null, highlighted: [], matrix: snapshot(), queue: per.map((c, x) => `city ${x}: ${c} within ${threshold}`), k: -1, best, message: `City ${best} has the fewest neighbours within ${threshold}; a tie goes to the larger index.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 17, cell: null, highlighted: [], matrix: snapshot(), queue: per.map((c, x) => `city ${x}: ${c} within ${threshold}`), k: -1, best, message: `City ${best} has the fewest neighbours within ${threshold}; a tie goes to the larger index.` })
   return { input: { n, edges, threshold }, result: best, frames }
 }
 

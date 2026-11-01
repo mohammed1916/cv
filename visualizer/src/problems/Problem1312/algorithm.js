@@ -22,23 +22,23 @@ export function buildTrace({ s }) {
   const best = Array.from({ length: n }, () => Array(n).fill(0))
   const done = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => i === j))
   const show = () => best.map((row, i) => row.map((v, j) => (done[i][j] ? v : '–')))
-  const frames = [{ phase: 'start', cell: null, table: show(), activeLine: L('set best[i][i]'), message: 'A single letter is already a palindrome.' }]
+  const frames = [{ phase: 'start', cell: null, table: show(), activeLine: L('set best[i][i]'), pythonLine: 3, message: 'A single letter is already a palindrome.' }]
   for (let length = 2; length <= n; length++) {
     for (let i = 0; i + length - 1 < n; i++) {
       const j = i + length - 1
       if (s[i] === s[j]) {
         best[i][j] = i + 1 <= j - 1 ? best[i + 1][j - 1] : 0
         done[i][j] = true
-        frames.push({ phase: 'match', cell: [i, j], table: show(), activeLine: L('if s[i] equals'), message: `Ends "${s[i]}" and "${s[j]}" match, so the inside of "${s.slice(i, j + 1)}" decides: ${best[i][j]}.` })
+        frames.push({ phase: 'match', cell: [i, j], table: show(), activeLine: L('if s[i] equals'), pythonLine: 7, message: `Ends "${s[i]}" and "${s[j]}" match, so the inside of "${s.slice(i, j + 1)}" decides: ${best[i][j]}.` })
       } else {
         best[i][j] = 1 + Math.min(best[i + 1][j], best[i][j - 1])
         done[i][j] = true
-        frames.push({ phase: 'differ', cell: [i, j], table: show(), activeLine: L('otherwise best'), message: `Ends "${s[i]}" and "${s[j]}" differ, so one insertion is needed: ${best[i][j]}.` })
+        frames.push({ phase: 'differ', cell: [i, j], table: show(), activeLine: L('otherwise best'), pythonLine: 10, message: `Ends "${s[i]}" and "${s[j]}" differ, so one insertion is needed: ${best[i][j]}.` })
       }
     }
   }
   const result = best[0][n - 1]
-  frames.push({ phase: 'done', cell: [0, n - 1], table: show(), activeLine: L('return best[0][n-1]'), result, message: `Minimum insertions for "${s}": ${result}.` })
+  frames.push({ phase: 'done', cell: [0, n - 1], table: show(), activeLine: L('return best[0][n-1]'), pythonLine: 11, result, message: `Minimum insertions for "${s}": ${result}.` })
   return { input: { s }, result, frames }
 }
 

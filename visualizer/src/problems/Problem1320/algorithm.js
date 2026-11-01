@@ -18,29 +18,29 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', activeLine: L('put the first letter'), index: 1, other: -1, memo: [], message: 'The first letter goes on a free finger at no cost. The other finger is unused.' }]
+  const frames = [{ phase: 'start', activeLine: L('put the first letter'), pythonLine: 22, index: 1, other: -1, memo: [], message: 'The first letter goes on a free finger at no cost. The other finger is unused.' }]
 
   const best = (i, other) => {
     if (i >= n) return 0
     const key = `${i}:${other}`
     if (memo.has(key)) {
       const value = memo.get(key)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), index: i, other, memo: snapshot(), message: `Typing from letter ${i} with the other finger on ${label(other)} is already known to cost ${value}.` })
+      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 15, index: i, other, memo: snapshot(), message: `Typing from letter ${i} with the other finger on ${label(other)} is already known to cost ${value}.` })
       return value
     }
     const previous = letters[i - 1]
-    frames.push({ phase: 'visit', activeLine: L('set one to'), index: i, other, memo: snapshot(), message: `Letter ${i} is ${label(letters[i])}. The finger on ${label(previous)} or the other finger (${label(other)}) types it.` })
+    frames.push({ phase: 'visit', activeLine: L('set one to'), pythonLine: 16, index: i, other, memo: snapshot(), message: `Letter ${i} is ${label(letters[i])}. The finger on ${label(previous)} or the other finger (${label(other)}) types it.` })
     const one = dist(previous, letters[i]) + best(i + 1, other)
     const two = (other < 0 ? 0 : dist(other, letters[i])) + best(i + 1, previous)
     const value = Math.min(one, two)
     memo.set(key, value)
     entries.push({ index: i, other, value })
-    frames.push({ phase: 'store', activeLine: L('store the smaller'), index: i, other, memo: snapshot(), message: `Best cost from letter ${i} is ${value}.` })
+    frames.push({ phase: 'store', activeLine: L('store the smaller'), pythonLine: 19, index: i, other, memo: snapshot(), message: `Best cost from letter ${i} is ${value}.` })
     return value
   }
 
   const result = best(1, -1)
-  frames.push({ phase: 'done', activeLine: L('return the best from'), index: null, other: -1, memo: snapshot(), message: `Minimum distance to type ${word}: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the best from'), pythonLine: 22, index: null, other: -1, memo: snapshot(), message: `Minimum distance to type ${word}: ${result}.` })
   return { input, result, frames }
 }
 

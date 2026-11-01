@@ -31,18 +31,18 @@ export function buildTrace({ root, target }) {
   const display = treeFromLevelOrder(root)
   const work = treeFromLevelOrder(root)
   const pruned = []
-  const frames = [{ phase: 'start', activeLine: L('tree after deleting every leaf'), active: null, pruned: [], message: `Remove leaves that hold ${target}, working from the bottom up.` }]
+  const frames = [{ phase: 'start', activeLine: L('tree after deleting every leaf'), pythonLine: 50, active: null, pruned: [], message: `Remove leaves that hold ${target}, working from the bottom up.` }]
   const prune = node => {
     if (!node) return null
     node.left = prune(node.left)
     node.right = prune(node.right)
     const gone = !node.left && !node.right && node.value === target
     if (gone) pruned.push(node.id)
-    frames.push({ phase: gone ? 'remove' : 'visit', activeLine: L('if this node is a leaf whose value is target'), active: node.id, pruned: [...pruned], message: gone ? `Leaf ${node.value} matches ${target} and is removed.` : `Node ${node.value} stays.` })
+    frames.push({ phase: gone ? 'remove' : 'visit', activeLine: L('if this node is a leaf whose value is target'), pythonLine: gone ? 48 : 49, active: node.id, pruned: [...pruned], message: gone ? `Leaf ${node.value} matches ${target} and is removed.` : `Node ${node.value} stays.` })
     return gone ? null : node
   }
   const result = serialize(prune(work))
-  frames.push({ phase: 'done', activeLine: L('return the tree'), active: null, pruned: [...pruned], message: `Remaining tree in level order: ${JSON.stringify(result)}.` })
+  frames.push({ phase: 'done', activeLine: L('return the tree'), pythonLine: 39, active: null, pruned: [...pruned], message: `Remaining tree in level order: ${JSON.stringify(result)}.` })
   return { input: { root, target }, display, result, frames }
 }
 

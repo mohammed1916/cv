@@ -10,25 +10,25 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const root = treeFromLevelOrder(input.values)
-  const frames = [{ phase: 'start', activeLine: L('call visit on the root'), node: null, grandparent: null, total: 0, counted: [], message: 'Start at the root. It has no parent and no grandparent.' }]
+  const frames = [{ phase: 'start', activeLine: L('call visit on the root'), pythonLine: 19, node: null, grandparent: null, total: 0, counted: [], message: 'Start at the root. It has no parent and no grandparent.' }]
   const counted = []
   let total = 0
   // grand is the grandparent value for this node; parent is the parent value passed down.
   const visit = (node, parent, grand) => {
     if (!node) return
-    frames.push({ phase: 'visit', activeLine: L('if the node is empty'), node: node.id, grandparent: grand, total, counted: [...counted], message: `Visit ${node.value}. Its grandparent is ${grand ?? 'missing'}.` })
+    frames.push({ phase: 'visit', activeLine: L('if the node is empty'), pythonLine: 21, node: node.id, grandparent: grand, total, counted: [...counted], message: `Visit ${node.value}. Its grandparent is ${grand ?? 'missing'}.` })
     if (grand !== null && grand % 2 === 0) {
       total += node.value
       counted.push(node.id)
-      frames.push({ phase: 'add', activeLine: L('add the node value to total'), node: node.id, grandparent: grand, total, counted: [...counted], message: `Grandparent ${grand} is even, so ${node.value} joins the total: ${total}.` })
+      frames.push({ phase: 'add', activeLine: L('add the node value to total'), pythonLine: 23, node: node.id, grandparent: grand, total, counted: [...counted], message: `Grandparent ${grand} is even, so ${node.value} joins the total: ${total}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if the grandparent exists'), node: node.id, grandparent: grand, total, counted: [...counted], message: `Grandparent ${grand ?? 'missing'} is odd or missing, so ${node.value} is not counted.` })
+      frames.push({ phase: 'skip', activeLine: L('if the grandparent exists'), pythonLine: 22, node: node.id, grandparent: grand, total, counted: [...counted], message: `Grandparent ${grand ?? 'missing'} is odd or missing, so ${node.value} is not counted.` })
     }
     visit(node.left, node.value, parent)
     visit(node.right, node.value, parent)
   }
   visit(root, null, null)
-  frames.push({ phase: 'done', activeLine: L('return total'), node: null, grandparent: null, total, counted: [...counted], message: `Sum of nodes with an even-valued grandparent: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 27, node: null, grandparent: null, total, counted: [...counted], message: `Sum of nodes with an even-valued grandparent: ${total}.` })
   return { input, root, result: total, frames }
 }
 

@@ -38,22 +38,22 @@ export function buildTrace({ seats }) {
   const label = mask => mask.toString(2).padStart(cols, '0')
   const table = values => Array.from({ length: size }, (_, m) => (values.has(m) ? values.get(m) : '–'))
   let best = new Map([[0, 0]])
-  const frames = [{ phase: 'start', row: -1, mask: null, dp: table(best), activeLine: L('set best to'), message: 'Begin with an empty row above the hall. It clashes with no seating.' }]
+  const frames = [{ phase: 'start', row: -1, mask: null, dp: table(best), activeLine: L('set best to'), pythonLine: 3, message: 'Begin with an empty row above the hall. It clashes with no seating.' }]
   seats.forEach((_, r) => {
     const next = new Map()
-    frames.push({ phase: 'row', row: r, mask: null, dp: table(next), activeLine: L('for each row of seats'), message: `Row ${r + 1}: try every seating on working seats that has no two students side by side.` })
+    frames.push({ phase: 'row', row: r, mask: null, dp: table(next), activeLine: L('for each row of seats'), pythonLine: 9, message: `Row ${r + 1}: try every seating on working seats that has no two students side by side.` })
     for (let mask = 0; mask < size; mask++) {
       if ((mask & ~usable[r]) !== 0 || !isValid(mask)) continue
       let prior = -1
       for (const [above, value] of best) if (!clashes(mask, above) && value > prior) prior = value
       if (prior < 0) continue
       next.set(mask, prior + bits(mask))
-      frames.push({ phase: 'mask', row: r, mask, dp: table(next), activeLine: L('find the largest best value'), message: `Row ${r + 1}, seating ${label(mask)}: ${bits(mask)} student(s) plus the best compatible total above gives ${next.get(mask)}.` })
+      frames.push({ phase: 'mask', row: r, mask, dp: table(next), activeLine: L('find the largest best value'), pythonLine: 16, message: `Row ${r + 1}, seating ${label(mask)}: ${bits(mask)} student(s) plus the best compatible total above gives ${next.get(mask)}.` })
     }
     best = next
   })
   const result = Math.max(0, ...best.values())
-  frames.push({ phase: 'done', row: seats.length - 1, mask: null, dp: table(best), activeLine: L('return the largest value'), result, message: `Most students that can sit without seeing a neighbour's answer: ${result}.` })
+  frames.push({ phase: 'done', row: seats.length - 1, mask: null, dp: table(best), activeLine: L('return the largest value'), pythonLine: 18, result, message: `Most students that can sit without seeing a neighbour's answer: ${result}.` })
   return { input: { seats }, seats, result, frames }
 }
 
