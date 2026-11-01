@@ -8,16 +8,16 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ letter, s }) {
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), active: -1, roles: {}, state: { letter, count: 0 }, message: `Count the "${letter}" characters in a string of length ${s.length}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set count to 0'), pythonLine: 2, active: -1, roles: {}, state: { letter, count: 0 }, message: `Count the "${letter}" characters in a string of length ${s.length}.` }]
   let count = 0
   const chars = [...s]
   chars.forEach((ch, i) => {
     const match = ch === letter
     if (match) count += 1
-    frames.push({ phase: 'scan', activeLine: L(match ? 'add 1 to count' : 'if the character equals letter'), active: i, roles: { [i]: match ? 'match' : 'other' }, state: { character: ch, count }, message: match ? `Position ${i} is "${letter}". Count is ${count}.` : `Position ${i} is "${ch}", not "${letter}".` })
+    frames.push({ phase: 'scan', activeLine: L(match ? 'add 1 to count' : 'if the character equals letter'), pythonLine: match ? 5 : 4, active: i, roles: { [i]: match ? 'match' : 'other' }, state: { character: ch, count }, message: match ? `Position ${i} is "${letter}". Count is ${count}.` : `Position ${i} is "${ch}", not "${letter}".` })
   })
   const result = Math.floor((count * 100) / s.length)
-  frames.push({ phase: 'done', activeLine: L('return count times 100'), active: -1, roles: {}, state: { count, percent: result }, message: `${count} of ${s.length} characters match, so the rounded-down percentage is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return count times 100'), pythonLine: 6, active: -1, roles: {}, state: { count, percent: result }, message: `${count} of ${s.length} characters match, so the rounded-down percentage is ${result}.` })
   return { input: { letter, s }, result, items: chars, frames }
 }
 

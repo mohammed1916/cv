@@ -14,7 +14,7 @@ export function buildTrace({ tiles, carpet_length: length }) {
   const n = sorted.length
   const prefix = [0]
   for (const [l, r] of sorted) prefix.push(prefix[prefix.length - 1] + r - l + 1)
-  const frames = [{ phase: 'start', activeLine: L('set sorted to'), tiles: sorted, first: 0, last: -1, start: null, end: null, covered: 0, best: 0, message: `Sort the tiles. A carpet of length ${length} starts at the beginning of some tile.` }]
+  const frames = [{ phase: 'start', activeLine: L('set sorted to'), pythonLine: 2, tiles: sorted, first: 0, last: -1, start: null, end: null, covered: 0, best: 0, message: `Sort the tiles. A carpet of length ${length} starts at the beginning of some tile.` }]
   let best = 0, right = 0
   for (let i = 0; i < n; i++) {
     const start = sorted[i][0]
@@ -24,9 +24,9 @@ export function buildTrace({ tiles, carpet_length: length }) {
     let covered = prefix[last + 1] - prefix[i]
     if (sorted[last][1] > end) covered -= sorted[last][1] - end
     best = Math.max(best, covered)
-    frames.push({ phase: 'place', activeLine: L('set covered to whole tiles'), tiles: sorted, first: i, last, start, end, covered, best, message: `Carpet ${start} to ${end} covers ${covered} white tiles. Best ${best}.` })
+    frames.push({ phase: 'place', activeLine: L('set covered to whole tiles'), pythonLine: 15, tiles: sorted, first: i, last, start, end, covered, best, message: `Carpet ${start} to ${end} covers ${covered} white tiles. Best ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), tiles: sorted, first: 0, last: -1, start: null, end: null, covered: best, best, message: `The most white tiles covered is ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 19, tiles: sorted, first: 0, last: -1, start: null, end: null, covered: best, best, message: `The most white tiles covered is ${best}.` })
   return { input: { tiles, carpet_length: length }, result: best, tiles: sorted, frames }
 }
 

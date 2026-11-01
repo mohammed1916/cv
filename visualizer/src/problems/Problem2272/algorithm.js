@@ -11,32 +11,34 @@ export function buildTrace(input) {
   const { s } = input
   const letters = [...new Set(s)]
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), pair: null, index: -1, opened: 0, paired: null, best, message: 'Try every ordered pair of different letters a and b. Count a as +1 and b as -1, and keep only windows that contain b.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to zero'), pythonLine: 3, pair: null, index: -1, opened: 0, paired: null, best, message: 'Try every ordered pair of different letters a and b. Count a as +1 and b as -1, and keep only windows that contain b.' }]
   for (const a of letters) {
     for (const b of letters) {
       if (a === b) continue
       let opened = 0
       let paired = -Infinity
-      frames.push({ phase: 'pair', activeLine: L('set opened to zero'), pair: [a, b], index: -1, opened, paired: null, best, message: `Pair a=${a}, b=${b}: start with no open window.` })
+      frames.push({ phase: 'pair', activeLine: L('set opened to zero'), pythonLine: 9, pair: [a, b], index: -1, opened, paired: null, best, message: `Pair a=${a}, b=${b}: start with no open window.` })
       for (let j = 0; j < s.length; j++) {
         const c = s[j]
         if (c !== a && c !== b) continue
-        let line
+        let line, pyLine
         if (c === a) {
           opened += 1
           paired += 1
           line = L('add one to opened')
+          pyLine = 12
         } else {
           paired = Math.max(paired - 1, opened - 1)
           opened = Math.max(0, opened - 1)
           line = L('paired to the larger')
+          pyLine = 15
         }
         best = Math.max(best, paired)
-        frames.push({ phase: 'scan', activeLine: line, pair: [a, b], index: j, opened, paired: shown(paired), best, message: `${c} at ${j} for pair a=${a}, b=${b}: best variance so far ${best}.` })
+        frames.push({ phase: 'scan', activeLine: line, pythonLine: pyLine, pair: [a, b], index: j, opened, paired: shown(paired), best, message: `${c} at ${j} for pair a=${a}, b=${b}: best variance so far ${best}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), pair: null, index: -1, opened: 0, paired: null, best, message: `Largest variance is ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 18, pair: null, index: -1, opened: 0, paired: null, best, message: `Largest variance is ${best}.` })
   return { input: { s }, result: best, frames }
 }
 

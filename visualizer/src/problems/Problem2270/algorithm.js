@@ -12,15 +12,15 @@ export function buildTrace(input) {
   const total = nums.reduce((a, b) => a + b, 0)
   let left = 0
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set left to 0'), index: -1, left: 0, right: total, count: 0, message: `Total is ${total}. Try each split point.` }]
+  const frames = [{ phase: 'start', activeLine: L('set left to 0'), pythonLine: 2, index: -1, left: 0, right: total, count: 0, message: `Total is ${total}. Try each split point.` }]
   for (let i = 0; i < nums.length - 1; i++) {
     left += nums[i]
     const right = total - left
     const ok = left >= right
     if (ok) count += 1
-    frames.push({ phase: 'split', activeLine: L('if left is at least the right'), index: i, left, right, count, ok, message: `Split after index ${i}: left ${left}, right ${right}. ${ok ? 'Counts.' : 'Too small.'}` })
+    frames.push({ phase: 'split', activeLine: L('if left is at least the right'), pythonLine: ok ? 9 : 8, index: i, left, right, count, ok, message: `Split after index ${i}: left ${left}, right ${right}. ${ok ? 'Counts.' : 'Too small.'}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), index: -1, left: total, right: 0, count, message: `${count} valid splits.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 10, index: -1, left: total, right: 0, count, message: `${count} valid splits.` })
   return { input, result: count, frames }
 }
 

@@ -16,17 +16,17 @@ export function buildTrace(input) {
   const order = need.map((_, i) => i).sort((a, b) => need[a] - need[b] || a - b)
   let left = additional_rocks
   let full = 0
-  const frames = [{ phase: 'start', activeLine: L('work out how many rocks'), bag: -1, left, full, message: `Each bag still needs some rocks; ${left} extra rocks are available.` }]
+  const frames = [{ phase: 'start', activeLine: L('work out how many rocks'), pythonLine: 2, bag: -1, left, full, message: `Each bag still needs some rocks; ${left} extra rocks are available.` }]
   for (const i of order) {
     if (need[i] > left) {
-      frames.push({ phase: 'stop', activeLine: L('if the bag needs more rocks'), bag: i, left, full, message: `Bag ${i} needs ${need[i]} but only ${left} remain; no later bag fits either.` })
+      frames.push({ phase: 'stop', activeLine: L('if the bag needs more rocks'), pythonLine: 7, bag: i, left, full, message: `Bag ${i} needs ${need[i]} but only ${left} remain; no later bag fits either.` })
       break
     }
     left -= need[i]
     full += 1
-    frames.push({ phase: 'fill', activeLine: L('subtract its need from left'), bag: i, left, full, message: `Fill bag ${i} with ${need[i]} rocks; ${left} left.` })
+    frames.push({ phase: 'fill', activeLine: L('subtract its need from left'), pythonLine: 8, bag: i, left, full, message: `Fill bag ${i} with ${need[i]} rocks; ${left} left.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return full'), bag: -1, left, full, message: `${full} bags are full.` })
+  frames.push({ phase: 'done', activeLine: L('return full'), pythonLine: 10, bag: -1, left, full, message: `${full} bags are full.` })
   return { input, result: full, frames }
 }
 

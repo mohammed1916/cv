@@ -18,17 +18,17 @@ export function buildTrace(ops) {
   // Leaf k stands for the integer k + 1; covering a range sets its count to the number of leaves.
   const seg = new SegTree(SPAN, 'cover-assign')
   const results = []
-  const frames = [{ phase: 'start', op: null, count: 0, seg: { ...seg.snapshot(), title: 'Covered integers 1 to 32' }, activeLine: L('set the covered tree'), message: 'No integers are covered yet.' }]
+  const frames = [{ phase: 'start', op: null, count: 0, seg: { ...seg.snapshot(), title: 'Covered integers 1 to 32' }, activeLine: L('set the covered tree'), pythonLine: 2, message: 'No integers are covered yet.' }]
   ops.forEach((op, i) => {
     if (op[0] === 'add') {
       seg.update(op[1] - 1, op[2] - 1, 1)
-      frames.push({ phase: 'add', op: i, count: seg.value[1], seg: { ...seg.snapshot(), title: `After adding [${op[1]}, ${op[2]}]` }, activeLine: L('mark leaves'), message: `Covered integers now: ${seg.value[1]}.` })
+      frames.push({ phase: 'add', op: i, count: seg.value[1], seg: { ...seg.snapshot(), title: `After adding [${op[1]}, ${op[2]}]` }, activeLine: L('mark leaves'), pythonLine: 6, message: `Covered integers now: ${seg.value[1]}.` })
     } else {
       results.push(seg.value[1])
-      frames.push({ phase: 'count', op: i, count: seg.value[1], seg: { ...seg.snapshot(), title: 'Count query' }, activeLine: L('record the number'), message: `count returns ${seg.value[1]}.` })
+      frames.push({ phase: 'count', op: i, count: seg.value[1], seg: { ...seg.snapshot(), title: 'Count query' }, activeLine: L('record the number'), pythonLine: 8, message: `count returns ${seg.value[1]}.` })
     }
   })
-  frames.push({ phase: 'done', op: null, count: null, seg: { ...seg.snapshot(), title: 'Final tree' }, activeLine: L('return the recorded'), message: `Recorded counts: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', op: null, count: null, seg: { ...seg.snapshot(), title: 'Final tree' }, activeLine: L('return the recorded'), pythonLine: 9, message: `Recorded counts: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 

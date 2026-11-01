@@ -11,17 +11,17 @@ const key = w => [...w].sort().join('')
 
 export function buildTrace({ words }) {
   const kept = [words[0]]
-  const frames = [{ phase: 'start', activeLine: L('set kept to'), index: 0, word: words[0], kept: [...kept], message: `Keep ${words[0]}, the first word.` }]
+  const frames = [{ phase: 'start', activeLine: L('set kept to'), pythonLine: 2, index: 0, word: words[0], kept: [...kept], message: `Keep ${words[0]}, the first word.` }]
   for (let i = 1; i < words.length; i++) {
     const w = words[i]
     if (key(w) === key(kept[kept.length - 1])) {
-      frames.push({ phase: 'skip', activeLine: L('skip w'), index: i, word: w, kept: [...kept], message: `${w} is an anagram of ${kept[kept.length - 1]}, so it is removed.` })
+      frames.push({ phase: 'skip', activeLine: L('skip w'), pythonLine: 4, index: i, word: w, kept: [...kept], message: `${w} is an anagram of ${kept[kept.length - 1]}, so it is removed.` })
     } else {
       kept.push(w)
-      frames.push({ phase: 'keep', activeLine: L('add w to kept'), index: i, word: w, kept: [...kept], message: `${w} is not an anagram of the last kept word, so it stays.` })
+      frames.push({ phase: 'keep', activeLine: L('add w to kept'), pythonLine: 5, index: i, word: w, kept: [...kept], message: `${w} is not an anagram of the last kept word, so it stays.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return kept'), index: -1, word: '', kept: [...kept], message: `Resulting array has ${kept.length} words.` })
+  frames.push({ phase: 'done', activeLine: L('return kept'), pythonLine: 6, index: -1, word: '', kept: [...kept], message: `Resulting array has ${kept.length} words.` })
   return { input: { words }, result: kept, frames }
 }
 

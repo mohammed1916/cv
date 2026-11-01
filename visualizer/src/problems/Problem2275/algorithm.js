@@ -11,17 +11,17 @@ export function buildTrace({ candidates }) {
   const frames = []
   let best = 0
   let bestBit = -1
-  frames.push({ phase: 'start', activeLine: L('set best to 0'), bit: -1, count: 0, best, bestBit, message: 'Start with no combination.' })
+  frames.push({ phase: 'start', activeLine: L('set best to 0'), pythonLine: 2, bit: -1, count: 0, best, bestBit, message: 'Start with no combination.' })
   for (let bit = 0; bit < 20; bit++) {
     const count = candidates.filter(v => (v >> bit) & 1).length
-    frames.push({ phase: 'count', activeLine: L('count the candidates'), bit, count, best, bestBit, message: `${count} candidates have bit ${bit} set.` })
+    frames.push({ phase: 'count', activeLine: L('count the candidates'), pythonLine: 4, bit, count, best, bestBit, message: `${count} candidates have bit ${bit} set.` })
     if (count > best) {
       best = count
       bestBit = bit
-      frames.push({ phase: 'record', activeLine: L('set best to the count'), bit, count, best, bestBit, message: `New best: ${count} candidates share bit ${bit}.` })
+      frames.push({ phase: 'record', activeLine: L('set best to the count'), pythonLine: 6, bit, count, best, bestBit, message: `New best: ${count} candidates share bit ${bit}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), bit: bestBit, count: best, best, bestBit, message: `Largest combination size: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 7, bit: bestBit, count: best, best, bestBit, message: `Largest combination size: ${best}.` })
   return { input: { candidates }, result: best, frames }
 }
 

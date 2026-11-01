@@ -10,14 +10,14 @@ export function buildTrace({ num, k }) {
   const digits = String(num)
   const frames = []
   let beauty = 0
-  frames.push({ phase: 'start', activeLine: L('set digits to'), left: 0, right: -1, part: null, divides: null, beauty, message: `The number has ${digits.length} digits. Windows of ${k} digits are checked.` })
+  frames.push({ phase: 'start', activeLine: L('set digits to'), pythonLine: 2, left: 0, right: -1, part: null, divides: null, beauty, message: `The number has ${digits.length} digits. Windows of ${k} digits are checked.` })
   for (let start = 0; start + k <= digits.length; start++) {
     const part = Number(digits.slice(start, start + k))
     const divides = part !== 0 && num % part === 0
     if (divides) beauty++
-    frames.push({ phase: 'window', activeLine: L('if the part is not 0'), left: start, right: start + k - 1, part, divides, beauty, message: part === 0 ? `The window reads ${digits.slice(start, start + k)}, which is 0, so it does not count.` : `The window reads ${part}. ${num} ${divides ? 'is divisible by it' : 'is not divisible by it'}.` })
+    frames.push({ phase: 'window', activeLine: L('if the part is not 0'), pythonLine: divides ? 7 : 6, left: start, right: start + k - 1, part, divides, beauty, message: part === 0 ? `The window reads ${digits.slice(start, start + k)}, which is 0, so it does not count.` : `The window reads ${part}. ${num} ${divides ? 'is divisible by it' : 'is not divisible by it'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return beauty'), left: 0, right: digits.length - 1, part: null, divides: null, beauty, message: `K-beauty: ${beauty}.` })
+  frames.push({ phase: 'done', activeLine: L('return beauty'), pythonLine: 8, left: 0, right: digits.length - 1, part: null, divides: null, beauty, message: `K-beauty: ${beauty}.` })
   return { input: { num, k }, result: beauty, frames }
 }
 

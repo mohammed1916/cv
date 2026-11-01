@@ -12,19 +12,19 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { bottom, top, special } = input
   const marks = [bottom - 1, ...[...special].sort((a, b) => a - b), top + 1]
-  const frames = [{ phase: 'start', activeLine: L('sort the special floors'), from: null, to: null, best: 0, marks, message: `Marks at ${marks.join(', ')}, including sentinels just outside the range.` }]
+  const frames = [{ phase: 'start', activeLine: L('sort the special floors'), pythonLine: 2, from: null, to: null, best: 0, marks, message: `Marks at ${marks.join(', ')}, including sentinels just outside the range.` }]
   let best = 0
   for (let i = 0; i + 1 < marks.length; i++) {
     const left = marks[i]
     const right = marks[i + 1]
     const run = right - left - 1
-    frames.push({ phase: 'gap', activeLine: L('set run length to'), from: left + 1, to: right - 1, run, best, marks, message: run > 0 ? `Floors ${left + 1} to ${right - 1} have no special floor: ${run} floor(s).` : `No floors lie between ${left} and ${right}.` })
+    frames.push({ phase: 'gap', activeLine: L('set run length to'), pythonLine: 5, from: left + 1, to: right - 1, run, best, marks, message: run > 0 ? `Floors ${left + 1} to ${right - 1} have no special floor: ${run} floor(s).` : `No floors lie between ${left} and ${right}.` })
     if (run > best) {
       best = run
-      frames.push({ phase: 'better', activeLine: L('set best to run length'), from: left + 1, to: right - 1, run, best, marks, message: `${run} floor(s) is the longest run so far.` })
+      frames.push({ phase: 'better', activeLine: L('set best to run length'), pythonLine: 7, from: left + 1, to: right - 1, run, best, marks, message: `${run} floor(s) is the longest run so far.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), from: null, to: null, best, marks, message: `Longest run of floors without a special floor: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 8, from: null, to: null, best, marks, message: `Longest run of floors without a special floor: ${best}.` })
   return { input, result: best, frames }
 }
 
