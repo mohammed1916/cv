@@ -53,8 +53,9 @@ export function buildTrace({ arr, val }) {
   let nextId = 1000
   const newId = nextId
   const frames = []
+  const PY = { start: P('def insert_into_max_tree'), attach: P('return TreeNode(val)'), wrap: P('return TreeNode(val, node)'), descend: P('if val > node.val:'), relink: P('node.right = insert(node.right)'), done: P('return level_order(insert(build(arr)))') }
   const record = (phase, activeLine, node, message) => {
-    frames.push({ phase, activeLine, node, newId, tree: snapshot(work), message })
+    frames.push({ phase, activeLine, pythonLine: PY[phase], node, newId, tree: snapshot(work), message })
   }
   record('start', L('def insertIntoMaxTree'), null, `Insert ${val} after [${show(arr)}]. Start at the root ${arr[0]}.`)
   // Attach the returned subtree where it came from: under `parent` on `side`, or as the new root.
@@ -94,6 +95,7 @@ export const code = `insertIntoMaxTree(root, val):
   root.right = insertIntoMaxTree(root.right, val)
   return root`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):

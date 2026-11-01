@@ -12,7 +12,7 @@ const letter = v => String.fromCharCode(97 + v)
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), node: null, path: '', best: null, message: 'Walk down from the root. At each leaf, the string reads from the leaf up to the root.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), pythonLine: P('best = None'), node: null, path: '', best: null, message: 'Walk down from the root. At each leaf, the string reads from the leaf up to the root.' }]
   const visit = (node, path) => {
     if (!node) return
     // path holds the letters from the root down to this node; each leaf reads them in reverse.
@@ -20,15 +20,15 @@ export function buildTrace(arr) {
     if (!node.left && !node.right) {
       const word = [...next].reverse().join('')
       if (best === null || word < best) best = word
-      frames.push({ phase: 'leaf', activeLine: L('if best is unset'), node: node.id, path: next, best, message: `Leaf ${node.value} reads ${word}. Best so far: ${best}.` })
+      frames.push({ phase: 'leaf', activeLine: L('if best is unset'), pythonLine: P('if best is None or word < best'), node: node.id, path: next, best, message: `Leaf ${node.value} reads ${word}. Best so far: ${best}.` })
       return
     }
-    frames.push({ phase: 'visit', activeLine: L('for each child'), node: node.id, path: next, best, message: `Extend the path with ${letter(node.value)}.` })
+    frames.push({ phase: 'visit', activeLine: L('for each child'), pythonLine: P('path = path + chr'), node: node.id, path: next, best, message: `Extend the path with ${letter(node.value)}.` })
     visit(node.left, next)
     visit(node.right, next)
   }
   visit(root, '')
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, path: '', best, message: `Smallest string: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), node: null, path: '', best, message: `Smallest string: ${best}.` })
   return { input: arr, root: treeFromLevelOrder(arr), result: best, frames }
 }
 
@@ -47,6 +47,7 @@ visit(node, path):
   otherwise
     for each child of this node, call visit on that child with path`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):

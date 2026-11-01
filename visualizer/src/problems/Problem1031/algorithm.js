@@ -18,22 +18,22 @@ export function buildTrace(input) {
   const first = windowSums(nums, L1)
   const second = windowSums(nums, L2)
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('compute the sum of each window of first_len'), index: -1, span: null, best: null, message: `First window length ${L1}, second window length ${L2}.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('compute the sum of each window of first_len'), index: -1, span: null, best: null, message: `First window length ${L1}, second window length ${L2}.` }]
   // Sweep the second window; the best first window must end before it starts.
   let bestFirst = null
   for (let s = 0; s < second.length; s++) {
     if (s - L1 >= 0 && (bestFirst === null || first[s - L1] > bestFirst)) bestFirst = first[s - L1]
     if (bestFirst !== null && (best === null || second[s] + bestFirst > best)) best = second[s] + bestFirst
-    frames.push({ phase: 'second', activeLine: L('combine it with the second window'), index: s, span: [s, s + L2 - 1], best, message: bestFirst === null ? `Second window at ${s} has no earlier first window yet.` : `Second window at ${s} pairs with the best earlier first window (${bestFirst}). Best: ${best}.` })
+    frames.push({ phase: 'second', pythonLine: (bestFirst !== null ? 10 : 8), activeLine: L('combine it with the second window'), index: s, span: [s, s + L2 - 1], best, message: bestFirst === null ? `Second window at ${s} has no earlier first window yet.` : `Second window at ${s} pairs with the best earlier first window (${bestFirst}). Best: ${best}.` })
   }
   // Sweep the first window; the best second window must end before it starts.
   let bestSecond = null
   for (let s = 0; s < first.length; s++) {
     if (s - L2 >= 0 && (bestSecond === null || second[s - L2] > bestSecond)) bestSecond = second[s - L2]
     if (bestSecond !== null && (best === null || first[s] + bestSecond > best)) best = first[s] + bestSecond
-    frames.push({ phase: 'first', activeLine: L('combine it with the first window'), index: s, span: [s, s + L1 - 1], best, message: bestSecond === null ? `First window at ${s} has no earlier second window yet.` : `First window at ${s} pairs with the best earlier second window (${bestSecond}). Best: ${best}.` })
+    frames.push({ phase: 'first', pythonLine: (bestSecond !== null ? 16 : 14), activeLine: L('combine it with the first window'), index: s, span: [s, s + L1 - 1], best, message: bestSecond === null ? `First window at ${s} has no earlier second window yet.` : `First window at ${s} pairs with the best earlier second window (${bestSecond}). Best: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, span: null, best, message: `Largest total: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 18, activeLine: L('return best'), index: -1, span: null, best, message: `Largest total: ${best}.` })
   return { input, result: best, frames }
 }
 

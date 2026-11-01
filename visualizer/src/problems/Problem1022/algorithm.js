@@ -14,21 +14,21 @@ export function buildTrace({ root }) {
   const tree = treeFromLevelOrder(root)
   const frames = []
   let total = 0
-  frames.push({ phase: 'start', activeLine: L('set total to 0'), node: null, path: 0, total, message: 'Start at the root with an empty binary number.' })
+  frames.push({ phase: 'start', pythonLine: 32, activeLine: L('set total to 0'), node: null, path: 0, total, message: 'Start at the root with an empty binary number.' })
   const visit = (current, path) => {
     if (!current) return
     const bits = path * 2 + current.value
     if (!current.left && !current.right) {
       total += bits
-      frames.push({ phase: 'leaf', activeLine: L('add the value to total'), node: current.id, path: bits, total, message: `Leaf reads ${bits.toString(2)} = ${bits}. Total is now ${total}.` })
+      frames.push({ phase: 'leaf', pythonLine: 30, activeLine: L('add the value to total'), node: current.id, path: bits, total, message: `Leaf reads ${bits.toString(2)} = ${bits}. Total is now ${total}.` })
       return
     }
-    frames.push({ phase: 'visit', activeLine: L('visit the left child'), node: current.id, path: bits, total, message: `Extend the path with ${current.value}, giving ${bits.toString(2)}.` })
+    frames.push({ phase: 'visit', pythonLine: 28, activeLine: L('visit the left child'), node: current.id, path: bits, total, message: `Extend the path with ${current.value}, giving ${bits.toString(2)}.` })
     visit(current.left, bits)
     visit(current.right, bits)
   }
   visit(tree, 0)
-  frames.push({ phase: 'done', activeLine: L('return total'), node: null, path: 0, total, message: `Sum of all root-to-leaf numbers: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 32, activeLine: L('return total'), node: null, path: 0, total, message: `Sum of all root-to-leaf numbers: ${total}.` })
   return { input: { root }, root: tree, result: total, frames }
 }
 

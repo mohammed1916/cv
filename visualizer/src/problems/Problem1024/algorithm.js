@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const { clips, time } = input
   let covered = 0
   let used = 0
-  const frames = [{ phase: 'start', activeLine: L('set covered to 0'), viaIndex: -1, covered, used, message: `Cover [0, ${time}] starting from 0 with no clips.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set covered to 0'), viaIndex: -1, covered, used, message: `Cover [0, ${time}] starting from 0 with no clips.` }]
   while (covered < time) {
     let reach = covered
     let viaIndex = -1
@@ -20,14 +20,14 @@ export function buildTrace(input) {
       if (start <= covered && end > reach) { reach = end; viaIndex = index }
     })
     if (reach === covered) {
-      frames.push({ phase: 'stuck', activeLine: L('if reach is still covered'), viaIndex: -1, covered, used, message: `No clip starts at or before ${covered} and reaches past it, so the range cannot be covered.` })
+      frames.push({ phase: 'stuck', pythonLine: 10, activeLine: L('if reach is still covered'), viaIndex: -1, covered, used, message: `No clip starts at or before ${covered} and reaches past it, so the range cannot be covered.` })
       return { input, result: -1, frames }
     }
     used += 1
     covered = reach
-    frames.push({ phase: 'pick', activeLine: L('set covered to reach'), viaIndex, covered, used, message: `Take clip [${clips[viaIndex].join(', ')}]; coverage now reaches ${covered}.` })
+    frames.push({ phase: 'pick', pythonLine: 11, activeLine: L('set covered to reach'), viaIndex, covered, used, message: `Take clip [${clips[viaIndex].join(', ')}]; coverage now reaches ${covered}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return used'), viaIndex: -1, covered, used, message: `Coverage reaches ${covered} with ${used} clips.` })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return used'), viaIndex: -1, covered, used, message: `Coverage reaches ${covered} with ${used} clips.` })
   return { input, result: used, frames }
 }
 

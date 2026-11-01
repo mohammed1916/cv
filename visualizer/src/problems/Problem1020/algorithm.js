@@ -20,7 +20,7 @@ export function buildTrace({ grid }) {
     return out
   }
   const queue = []
-  const frames = [{ phase: 'start', activeLine: L('count enclaves in grid'), cell: null, reached: [], count: 0, message: 'Land on the border can never be enclosed, so every border land cell starts a flood.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('count enclaves in grid'), cell: null, reached: [], count: 0, message: 'Land on the border can never be enclosed, so every border land cell starts a flood.' }]
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
@@ -28,7 +28,7 @@ export function buildTrace({ grid }) {
       if (onBorder && grid[r][c] === 1 && !reached[r][c]) {
         reached[r][c] = true
         queue.push([r, c])
-        frames.push({ phase: 'seed', activeLine: L('for each land cell on the border'), cell: [r, c], reached: marks(), count: 0, message: `Border land at (${r},${c}) can reach the outside, so it is marked.` })
+        frames.push({ phase: 'seed', pythonLine: 10, activeLine: L('for each land cell on the border'), cell: [r, c], reached: marks(), count: 0, message: `Border land at (${r},${c}) can reach the outside, so it is marked.` })
       }
     }
   }
@@ -36,21 +36,21 @@ export function buildTrace({ grid }) {
   let head = 0
   while (head < queue.length) {
     const [r, c] = queue[head++]
-    frames.push({ phase: 'expand', activeLine: L('take a cell from the queue'), cell: [r, c], reached: marks(), count: 0, message: `Look at the neighbours of (${r},${c}).` })
+    frames.push({ phase: 'expand', pythonLine: 14, activeLine: L('take a cell from the queue'), cell: [r, c], reached: marks(), count: 0, message: `Look at the neighbours of (${r},${c}).` })
     for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
       const nr = r + dr
       const nc = c + dc
       if (nr < 0 || nc < 0 || nr >= rows || nc >= cols || grid[nr][nc] !== 1 || reached[nr][nc]) continue
       reached[nr][nc] = true
       queue.push([nr, nc])
-      frames.push({ phase: 'expand', activeLine: L('if the neighbour is land'), cell: [nr, nc], reached: marks(), count: 0, message: `Land at (${nr},${nc}) joins the outside region.` })
+      frames.push({ phase: 'expand', pythonLine: 20, activeLine: L('if the neighbour is land'), cell: [nr, nc], reached: marks(), count: 0, message: `Land at (${nr},${nc}) joins the outside region.` })
     }
   }
 
   let count = 0
   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) if (grid[r][c] === 1 && !reached[r][c]) count++
-  frames.push({ phase: 'count', activeLine: L('count land cells that are not reachable'), cell: null, reached: marks(), count, message: `${count} land cells are not marked, so they are enclosed.` })
-  frames.push({ phase: 'done', activeLine: L('return the count'), cell: null, reached: marks(), count, message: `Number of enclaves: ${count}.` })
+  frames.push({ phase: 'count', pythonLine: 26, activeLine: L('count land cells that are not reachable'), cell: null, reached: marks(), count, message: `${count} land cells are not marked, so they are enclosed.` })
+  frames.push({ phase: 'done', pythonLine: 27, activeLine: L('return the count'), cell: null, reached: marks(), count, message: `Number of enclaves: ${count}.` })
   return { input: { grid }, result: count, frames }
 }
 

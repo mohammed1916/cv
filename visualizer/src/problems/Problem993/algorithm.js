@@ -31,7 +31,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { arr, x, y } = input
   const root = treeFromLevelOrder(arr)
-  const frames = [{ phase: 'start', activeLine: L('set queue to hold'), node: null, depths: {}, found: new Map(), result: null, message: `Search for ${x} and ${y} with a breadth-first walk. Each node records its depth and parent.` }]
+  const frames = [{ phase: 'start', activeLine: L('set queue to hold'), pythonLine: P('queue = deque('), node: null, depths: {}, found: new Map(), result: null, message: `Search for ${x} and ${y} with a breadth-first walk. Each node records its depth and parent.` }]
   const queue = [{ node: root, parent: null, depth: 0 }]
   const seen = new Map()
   const depths = {}
@@ -39,10 +39,10 @@ export function buildTrace(input) {
   for (let head = 0; head < queue.length && result === null; head++) {
     const { node, parent, depth } = queue[head]
     depths[node.id] = depth
-    frames.push({ phase: 'visit', activeLine: L('take the front entry'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Dequeue ${node.value} at depth ${depth}${parent === null ? ' (the root has no parent)' : `, child of ${parent}`}.` })
+    frames.push({ phase: 'visit', activeLine: L('take the front entry'), pythonLine: P('node, parent, depth = queue.popleft()'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Dequeue ${node.value} at depth ${depth}${parent === null ? ' (the root has no parent)' : `, child of ${parent}`}.` })
     if (node.value === x || node.value === y) {
       seen.set(node.value, { depth, parent, id: node.id })
-      frames.push({ phase: 'found', activeLine: L('record the depth and parent of node'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Record ${node.value}: depth ${depth}, parent ${parent ?? 'none'}.` })
+      frames.push({ phase: 'found', activeLine: L('record the depth and parent of node'), pythonLine: P('seen[node.val] = (depth, parent)'), node: node.id, depths: { ...depths }, found: new Map(seen), result: null, message: `Record ${node.value}: depth ${depth}, parent ${parent ?? 'none'}.` })
     }
     if (seen.has(x) && seen.has(y)) {
       const a = seen.get(x), b = seen.get(y)
@@ -50,7 +50,7 @@ export function buildTrace(input) {
       const why = result
         ? `${x} and ${y} are cousins: both at depth ${a.depth} with different parents.`
         : a.depth !== b.depth ? `${x} and ${y} are not cousins: depths ${a.depth} and ${b.depth} differ.` : `${x} and ${y} are not cousins: they share parent ${a.parent}.`
-      frames.push({ phase: 'done', activeLine: L('return true when'), node: null, depths: { ...depths }, found: new Map(seen), result, message: why })
+      frames.push({ phase: 'done', activeLine: L('return true when'), pythonLine: P('return dx == dy and px != py'), node: null, depths: { ...depths }, found: new Map(seen), result, message: why })
       break
     }
     if (node.left) queue.push({ node: node.left, parent: node.value, depth: depth + 1 })
@@ -58,7 +58,7 @@ export function buildTrace(input) {
   }
   if (result === null) {
     result = false
-    frames.push({ phase: 'done', activeLine: L('return false'), node: null, depths: { ...depths }, found: new Map(seen), result, message: 'The walk finished without finding both values.' })
+    frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), node: null, depths: { ...depths }, found: new Map(seen), result, message: 'The walk finished without finding both values.' })
   }
   return { input, root, result, frames }
 }
@@ -79,6 +79,7 @@ export const code = `cousins in a binary tree (root, x, y):
       add (right child, node's value, depth + 1) to the back of the queue
   return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from collections import deque
 

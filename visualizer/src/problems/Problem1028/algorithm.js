@@ -40,13 +40,13 @@ export function buildTrace({ traversal }) {
   const tokens = [...traversal.matchAll(/(-*)(\d+)/g)].map(m => ({ depth: m[1].length, value: Number(m[2]) }))
   const stack = []
   let root = null
-  const frames = [{ phase: 'start', activeLine: L('set stack to empty'), index: -1, shape: [], current: null, message: 'Read the values left to right; the dashes give each value its depth.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set stack to empty'), index: -1, shape: [], current: null, message: 'Read the values left to right; the dashes give each value its depth.' }]
   tokens.forEach(({ depth, value }, index) => {
-    frames.push({ phase: 'read', activeLine: L('for each value with its depth'), index, shape: serialize(root), current: null, message: `Next value ${value} has depth ${depth}.` })
+    frames.push({ phase: 'read', pythonLine: 5, activeLine: L('for each value with its depth'), index, shape: serialize(root), current: null, message: `Next value ${value} has depth ${depth}.` })
     const before = stack.length
     while (stack.length > depth) stack.pop()
     if (stack.length < depth) throw new Error(`Value ${value} is ${depth} level(s) deep, but its parent is not that deep.`)
-    if (before > depth) frames.push({ phase: 'pop', activeLine: L('pop the stack while'), index, shape: serialize(root), current: null, message: `Remove ancestors deeper than depth ${depth} from the stack.` })
+    if (before > depth) frames.push({ phase: 'pop', pythonLine: 8, activeLine: L('pop the stack while'), index, shape: serialize(root), current: null, message: `Remove ancestors deeper than depth ${depth} from the stack.` })
     const node = { value, left: null, right: null }
     let parent = null
     if (depth === 0) root = node
@@ -56,11 +56,11 @@ export function buildTrace({ traversal }) {
       else if (!parent.right) parent.right = node
       else throw new Error(`Node ${parent.value} would get a third child.`)
     }
-    frames.push({ phase: 'attach', activeLine: L('attach the new node'), index, shape: serialize(root), current: positionOf(root, node), message: parent ? `${value} becomes a ${parent.left === node ? 'left' : 'right'} child of ${parent.value}.` : `${value} becomes the root.` })
+    frames.push({ phase: 'attach', pythonLine: parent ? (parent.left === node ? 12 : 14) : 10, activeLine: L('attach the new node'), index, shape: serialize(root), current: positionOf(root, node), message: parent ? `${value} becomes a ${parent.left === node ? 'left' : 'right'} child of ${parent.value}.` : `${value} becomes the root.` })
     stack.push(node)
   })
   const result = serialize(root)
-  frames.push({ phase: 'done', activeLine: L('return the root'), index: -1, shape: result, current: null, result, message: `Rebuilt tree in level order: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 27, activeLine: L('return the root'), index: -1, shape: result, current: null, result, message: `Rebuilt tree in level order: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
   return { input: { traversal }, result, frames }
 }
 

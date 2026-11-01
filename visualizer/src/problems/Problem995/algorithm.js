@@ -25,30 +25,30 @@ export function buildTrace(input) {
   const flipped = Array(n).fill(0)
   let active = 0
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set flipped to'), i: -1, flipped: [...flipped], bits: [...nums], active, count, result: null, message: `Scan left to right. A window of ${k} starting at i flips bits i to i+${k - 1}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set flipped to'), pythonLine: P('flipped = [0] * n'), i: -1, flipped: [...flipped], bits: [...nums], active, count, result: null, message: `Scan left to right. A window of ${k} starting at i flips bits i to i+${k - 1}.` }]
   let result = null
   for (let i = 0; i < n; i++) {
     if (i >= k) {
       active ^= flipped[i - k]
-      frames.push({ phase: 'expire', activeLine: L('remove flipped at i - k'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i}: the window that started at ${i - k} no longer covers it, so the flip parity is ${active}.` })
+      frames.push({ phase: 'expire', activeLine: L('remove flipped at i - k'), pythonLine: P('active ^= flipped[i - k]'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i}: the window that started at ${i - k} no longer covers it, so the flip parity is ${active}.` })
     }
     if (nums[i] !== active) {
-      frames.push({ phase: 'scan', activeLine: L('if nums at i equals active'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} reads ${nums[i]} with flip parity ${active}, which is already 1. No flip here.` })
+      frames.push({ phase: 'scan', activeLine: L('if nums at i equals active'), pythonLine: P('if nums[i] == active:'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} reads ${nums[i]} with flip parity ${active}, which is already 1. No flip here.` })
       continue
     }
     if (i + k > n) {
       result = -1
-      frames.push({ phase: 'impossible', activeLine: L('return -1'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result, message: `Index ${i} is 0 but a window of ${k} starting here would run past the end. Return -1.` })
+      frames.push({ phase: 'impossible', activeLine: L('return -1'), pythonLine: P('return -1'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result, message: `Index ${i} is 0 but a window of ${k} starting here would run past the end. Return -1.` })
       break
     }
     flipped[i] = 1
     active ^= 1
     count++
-    frames.push({ phase: 'flip', activeLine: L('toggle active'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} is 0 with no pending flip. Flip the window starting at ${i}; ${count} flip${count === 1 ? '' : 's'} so far.` })
+    frames.push({ phase: 'flip', activeLine: L('toggle active'), pythonLine: P('active ^= 1'), i, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result: null, message: `Index ${i} is 0 with no pending flip. Flip the window starting at ${i}; ${count} flip${count === 1 ? '' : 's'} so far.` })
   }
   if (result === null) {
     result = count
-    frames.push({ phase: 'done', activeLine: L('return count'), i: -1, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result, message: `Every bit is 1. Minimum flips: ${count}.` })
+    frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), i: -1, flipped: [...flipped], bits: effectiveBits(nums, flipped, k), active, count, result, message: `Every bit is 1. Minimum flips: ${count}.` })
   }
   return { input, result, frames }
 }
@@ -67,6 +67,7 @@ export const code = `minimum k-bit flips (nums, k):
       set flipped at i to 1, toggle active, and add 1 to count
   return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def min_k_bit_flips(nums, k):
     n = len(nums)

@@ -22,15 +22,15 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), node: null, best, message: 'Walk down from the root, keeping the smallest and largest ancestor value.' }]
+  const frames = [{ phase: 'start', pythonLine: 25, activeLine: L('set best to zero'), node: null, best, message: 'Walk down from the root, keeping the smallest and largest ancestor value.' }]
   const visit = (node, low, high) => {
     if (!node) return
     if (low !== null) {
       const gap = Math.max(Math.abs(node.value - low), Math.abs(node.value - high))
       best = Math.max(best, gap)
-      frames.push({ phase: 'compare', activeLine: L('if there are ancestors'), node: node.id, best, message: `Node ${node.value} differs from its ancestors by up to ${gap}.` })
+      frames.push({ phase: 'compare', pythonLine: 32, activeLine: L('if there are ancestors'), node: node.id, best, message: `Node ${node.value} differs from its ancestors by up to ${gap}.` })
     } else {
-      frames.push({ phase: 'visit', activeLine: L('if node is empty'), node: node.id, best, message: `Root ${node.value} has no ancestors yet.` })
+      frames.push({ phase: 'visit', pythonLine: 31, activeLine: L('if node is empty'), node: node.id, best, message: `Root ${node.value} has no ancestors yet.` })
     }
     const newLow = low === null ? node.value : Math.min(low, node.value)
     const newHigh = high === null ? node.value : Math.max(high, node.value)
@@ -38,7 +38,7 @@ export function buildTrace(arr) {
     visit(node.right, newLow, newHigh)
   }
   visit(root, null, null)
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, best, message: `Largest difference: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 39, activeLine: L('return best'), node: null, best, message: `Largest difference: ${best}.` })
   return { input: arr, root: treeFromLevelOrder(arr), result: best, frames }
 }
 

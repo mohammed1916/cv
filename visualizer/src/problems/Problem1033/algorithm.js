@@ -13,10 +13,10 @@ export function buildTrace(input) {
   const minimum = z - x === 2 ? 0 : (y - x <= 2 || z - y <= 2 ? 1 : 2)
   const maximum = z - x - 2
   const frames = [
-    { phase: 'start', activeLine: L('sort the three positions'), stones: [x, y, z], minimum: null, maximum: null, message: `Stones sorted: ${x}, ${y}, ${z}.` },
-    { phase: 'minimum', activeLine: L('the minimum is'), stones: [x, y, z], minimum, maximum: null, message: `Minimum moves: ${minimum}.` },
-    { phase: 'maximum', activeLine: L('the maximum is'), stones: [x, y, z], minimum, maximum, message: `Maximum moves: ${maximum}. Each move can shrink the span by exactly one.` },
-    { phase: 'done', activeLine: L('return the minimum'), stones: [x, y, z], minimum, maximum, message: `Answer: [${minimum}, ${maximum}].` },
+    { phase: 'start', pythonLine: 2, activeLine: L('sort the three positions'), stones: [x, y, z], minimum: null, maximum: null, message: `Stones sorted: ${x}, ${y}, ${z}.` },
+    { phase: 'minimum', pythonLine: (minimum === 0 ? 4 : minimum === 1 ? 6 : 8), activeLine: L('the minimum is'), stones: [x, y, z], minimum, maximum: null, message: `Minimum moves: ${minimum}.` },
+    { phase: 'maximum', pythonLine: 9, activeLine: L('the maximum is'), stones: [x, y, z], minimum, maximum, message: `Maximum moves: ${maximum}. Each move can shrink the span by exactly one.` },
+    { phase: 'done', pythonLine: 10, activeLine: L('return the minimum'), stones: [x, y, z], minimum, maximum, message: `Answer: [${minimum}, ${maximum}].` },
   ]
   return { input, result: [minimum, maximum], frames }
 }

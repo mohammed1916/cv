@@ -20,13 +20,13 @@ export function buildTrace(input) {
   const original = grid[row][col]
   const inside = Array.from({ length: R }, () => new Array(C).fill(false))
   const members = []
-  const frames = [{ phase: 'start', activeLine: L('set original to the value'), cell: null, members: [], borders: [], message: `The starting cell holds ${original}.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set original to the value'), cell: null, members: [], borders: [], message: `The starting cell holds ${original}.` }]
   inside[row][col] = true
   const stack = [[row, col]]
   while (stack.length) {
     const [r, c] = stack.pop()
     members.push([r, c])
-    frames.push({ phase: 'flood', activeLine: L('take a cell'), cell: [r, c], members: members.map(m => [...m]), borders: [], message: `Visit (${r}, ${c}) in the component.` })
+    frames.push({ phase: 'flood', pythonLine: 8, activeLine: L('take a cell'), cell: [r, c], members: members.map(m => [...m]), borders: [], message: `Visit (${r}, ${c}) in the component.` })
     for (const [dr, dc] of DIRS) {
       const nr = r + dr
       const nc = c + dc
@@ -47,10 +47,10 @@ export function buildTrace(input) {
     if (onBorder) {
       out[r][c] = color
       borders.push([r, c])
-      frames.push({ phase: 'border', activeLine: L('recolor the cell'), cell: [r, c], members: members.map(m => [...m]), borders: borders.map(b => [...b]), message: `(${r}, ${c}) touches the edge or another value, so it becomes ${color}.` })
+      frames.push({ phase: 'border', pythonLine: 19, activeLine: L('recolor the cell'), cell: [r, c], members: members.map(m => [...m]), borders: borders.map(b => [...b]), message: `(${r}, ${c}) touches the edge or another value, so it becomes ${color}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the grid'), cell: null, members: members.map(m => [...m]), borders: borders.map(b => [...b]), message: `${borders.length} border cells recolored.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return the grid'), cell: null, members: members.map(m => [...m]), borders: borders.map(b => [...b]), message: `${borders.length} border cells recolored.` })
   return { input, result: out, frames }
 }
 

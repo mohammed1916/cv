@@ -15,8 +15,9 @@ export function buildTrace(input) {
   const used = Array(n).fill(false)
   const sequence = []
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('sort nums'), index: null, sequence: [], used: [...used], count, result: null, message: `Sort the values to ${sorted.join(', ')}. Equal values are interchangeable, so each repeated value is tried once per position.` }]
-  const snapshot = (phase, activeLine, index, message, result = null) => frames.push({ phase, activeLine: L(activeLine), index, sequence: [...sequence], used: [...used], count, result, message })
+  const frames = [{ phase: 'start', activeLine: L('sort nums'), pythonLine: P('nums = sorted(nums)'), index: null, sequence: [], used: [...used], count, result: null, message: `Sort the values to ${sorted.join(', ')}. Equal values are interchangeable, so each repeated value is tried once per position.` }]
+  const PY = { complete: P('count += 1'), duplicate: P('if i > 0 and nums[i] == nums[i - 1]'), reject: P('if seq and not is_square'), place: P('used[i] = True') }
+  const snapshot = (phase, activeLine, index, message, result = null) => frames.push({ phase, activeLine: L(activeLine), pythonLine: PY[phase], index, sequence: [...sequence], used: [...used], count, result, message })
   const backtrack = () => {
     if (sequence.length === n) {
       count++
@@ -43,7 +44,7 @@ export function buildTrace(input) {
     }
   }
   backtrack()
-  frames.push({ phase: 'done', activeLine: L('return count'), index: null, sequence: [], used: [...used], count, result: count, message: `Distinct squareful arrangements: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: null, sequence: [], used: [...used], count, result: count, message: `Distinct squareful arrangements: ${count}.` })
   return { input, result: count, frames }
 }
 
@@ -67,6 +68,7 @@ build(arrangement):
     build(arrangement)
     remove the last value from the arrangement and mark index i unused`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from math import isqrt
 

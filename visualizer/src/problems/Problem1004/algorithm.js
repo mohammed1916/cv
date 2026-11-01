@@ -12,19 +12,19 @@ export function buildTrace({ nums, k }) {
   let left = 0
   let zeros = 0
   let best = 0
-  frames.push({ phase: 'start', activeLine: L('set left to 0'), left, right: -1, zeros, best, message: `Start an empty window. It may hold at most ${k} zeros.` })
+  frames.push({ phase: 'start', activeLine: L('set left to 0'), pythonLine: P('left = 0'), left, right: -1, zeros, best, message: `Start an empty window. It may hold at most ${k} zeros.` })
   for (let right = 0; right < nums.length; right++) {
     if (nums[right] === 0) zeros++
-    frames.push({ phase: 'extend', activeLine: L('add one to zeros'), left, right, zeros, best, message: `Extend the window to index ${right}. It holds ${zeros} zero${zeros === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'extend', activeLine: L('add one to zeros'), pythonLine: P('if nums[right] == 0:'), left, right, zeros, best, message: `Extend the window to index ${right}. It holds ${zeros} zero${zeros === 1 ? '' : 's'}.` })
     while (zeros > k) {
       if (nums[left] === 0) zeros--
       left++
-      frames.push({ phase: 'shrink', activeLine: L('move left one step right'), left, right, zeros, best, message: `Too many zeros. Move the left edge to ${left}.` })
+      frames.push({ phase: 'shrink', activeLine: L('move left one step right'), pythonLine: P('left += 1'), left, right, zeros, best, message: `Too many zeros. Move the left edge to ${left}.` })
     }
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), left, right, zeros, best, message: `The window ${left} to ${right} is valid with length ${right - left + 1}. Best is ${best}.` })
+    frames.push({ phase: 'record', activeLine: L('set best to the larger'), pythonLine: P('best = max(best, right - left + 1)'), left, right, zeros, best, message: `The window ${left} to ${right} is valid with length ${right - left + 1}. Best is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), left, right: -1, zeros, best, message: `Longest window with at most ${k} zeros: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), left, right: -1, zeros, best, message: `Longest window with at most ${k} zeros: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 
@@ -38,6 +38,7 @@ export const code = `max consecutive ones III (nums, k)
     set best to the larger of best and right minus left plus one
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 export const python = `def max_consecutive_ones(nums, k):
     left = 0
     zeros = 0

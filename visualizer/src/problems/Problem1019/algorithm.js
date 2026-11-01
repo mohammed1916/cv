@@ -9,17 +9,17 @@ export function parseInput(text) {
 export function buildTrace({ values }) {
   const answer = Array(values.length).fill(0)
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set answer to zeros'), index: -1, stack: [], answer: [...answer], message: 'Every answer starts at 0 until a larger value is found.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set answer to zeros'), index: -1, stack: [], answer: [...answer], message: 'Every answer starts at 0 until a larger value is found.' }]
   values.forEach((v, i) => {
     while (stack.length && values[stack[stack.length - 1]] < v) {
       const p = stack.pop()
       answer[p] = v
-      frames.push({ phase: 'resolve', activeLine: L('answer at that position with the value'), index: i, stack: [...stack], answer: [...answer], message: `Value ${v} is the next greater value for position ${p}.` })
+      frames.push({ phase: 'resolve', pythonLine: 6, activeLine: L('answer at that position with the value'), index: i, stack: [...stack], answer: [...answer], message: `Value ${v} is the next greater value for position ${p}.` })
     }
     stack.push(i)
-    frames.push({ phase: 'push', activeLine: L('push i onto the stack'), index: i, stack: [...stack], answer: [...answer], message: `Position ${i} (value ${v}) waits for a larger value.` })
+    frames.push({ phase: 'push', pythonLine: 7, activeLine: L('push i onto the stack'), index: i, stack: [...stack], answer: [...answer], message: `Position ${i} (value ${v}) waits for a larger value.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: -1, stack: [...stack], answer: [...answer], message: 'Positions left on the stack have no larger value, so they stay 0.' })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return answer'), index: -1, stack: [...stack], answer: [...answer], message: 'Positions left on the stack have no larger value, so they stay 0.' })
   return { input: { values }, result: answer, frames }
 }
 

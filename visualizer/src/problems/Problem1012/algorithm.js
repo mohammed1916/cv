@@ -17,7 +17,7 @@ export function buildTrace(n) {
   const len = digits.length
   let unique = 0
   for (let k = 1; k < len; k++) unique += 9 * perm(9, k - 1)
-  const frames = [{ phase: 'start', activeLine: L('count the positive'), index: -1, unique, message: `Numbers with fewer than ${len} digits: ${unique} have all digits distinct so far.` }]
+  const frames = [{ phase: 'start', activeLine: L('count the positive'), pythonLine: P('unique = sum('), index: -1, unique, message: `Numbers with fewer than ${len} digits: ${unique} have all digits distinct so far.` }]
   const used = []
   let allNew = true
   for (let i = 0; i < len; i++) {
@@ -25,17 +25,17 @@ export function buildTrace(n) {
     for (let x = i === 0 ? 1 : 0; x < d; x++) {
       if (!used.includes(x)) unique += perm(10 - used.length - 1, len - i - 1)
     }
-    frames.push({ phase: 'digit', activeLine: L('for each digit d'), index: i, unique, message: `Position ${i} has digit ${d}. Smaller choices here add to the distinct count.` })
+    frames.push({ phase: 'digit', activeLine: L('for each digit d'), pythonLine: P('for x in range('), index: i, unique, message: `Position ${i} has digit ${d}. Smaller choices here add to the distinct count.` })
     if (used.includes(d)) {
       allNew = false
-      frames.push({ phase: 'digit', activeLine: L('if d is already used'), index: i, unique, message: `Digit ${d} repeats, so no longer prefix can be all distinct.` })
+      frames.push({ phase: 'digit', activeLine: L('if d is already used'), pythonLine: P('if d in used:'), index: i, unique, message: `Digit ${d} repeats, so no longer prefix can be all distinct.` })
       break
     }
     used.push(d)
   }
   if (allNew) unique += 1
   const result = n - unique
-  frames.push({ phase: 'done', activeLine: L('return n minus'), index: len, unique, message: `${n} minus ${unique} distinct numbers gives ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return n minus'), pythonLine: P('return n - unique'), index: len, unique, message: `${n} minus ${unique} distinct numbers gives ${result}.` })
   return { input: n, result, frames }
 }
 
@@ -50,6 +50,7 @@ for each digit d of n at position i do
 if every digit of n was new then count n itself
 return n minus the distinct count`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from math import perm
 

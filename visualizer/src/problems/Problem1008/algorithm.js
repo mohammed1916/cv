@@ -37,14 +37,14 @@ export function buildTrace(input) {
   let index = 0
   let count = 0
   let root = null
-  frames.push({ phase: 'start', activeLine: L('set index to 0'), cursor: 0, consumed: 0, node: null, low: null, high: null, tree: null, message: 'The first preorder value is the root. Each later value goes left or right of its ancestors, inside the bounds they leave.' })
+  frames.push({ phase: 'start', activeLine: L('set index to 0'), pythonLine: P('index = 0'), cursor: 0, consumed: 0, node: null, low: null, high: null, tree: null, message: 'The first preorder value is the root. Each later value goes left or right of its ancestors, inside the bounds they leave.' })
   const build = (low, high, parent, side) => {
     const cursor = index < preorder.length ? index : -1
     if (cursor === -1 || !(low < preorder[index] && preorder[index] < high)) {
       const message = cursor === -1
         ? 'No values are left, so this subtree is empty.'
         : `${preorder[index]} is outside (${show(low)}, ${show(high)}), so this subtree is empty.`
-      frames.push({ phase: 'skip', activeLine: L('return nothing'), cursor, consumed: index, node: null, low: show(low), high: show(high), tree: snapshot(root), message })
+      frames.push({ phase: 'skip', activeLine: L('return nothing'), pythonLine: P('return None'), cursor, consumed: index, node: null, low: show(low), high: show(high), tree: snapshot(root), message })
       return null
     }
     const value = preorder[index]
@@ -53,14 +53,14 @@ export function buildTrace(input) {
     const node = { id: count++, value, left: null, right: null }
     if (parent) parent[side] = node
     else root = node
-    frames.push({ phase: 'place', activeLine: L('create node holding value'), cursor: cursorValue, consumed: index, node: node.id, low: show(low), high: show(high), tree: snapshot(root), message: `Place ${value}. Its subtree must stay between ${show(low)} and ${show(high)}.` })
+    frames.push({ phase: 'place', activeLine: L('create node holding value'), pythonLine: P('node = TreeNode(value)'), cursor: cursorValue, consumed: index, node: node.id, low: show(low), high: show(high), tree: snapshot(root), message: `Place ${value}. Its subtree must stay between ${show(low)} and ${show(high)}.` })
     build(low, value, node, 'left')
     build(value, high, node, 'right')
     return node
   }
   build(-Infinity, Infinity, null, null)
   const result = levelOrder(root)
-  frames.push({ phase: 'done', activeLine: L('return the tree in level order'), cursor: -1, consumed: preorder.length, node: null, low: null, high: null, tree: snapshot(root), message: `The tree is complete. Level order: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the tree in level order'), pythonLine: P('return level_order(root)'), cursor: -1, consumed: preorder.length, node: null, low: null, high: null, tree: snapshot(root), message: `The tree is complete. Level order: [${result.map(v => (v === null ? 'null' : v)).join(', ')}].` })
   return { input, result, frames }
 }
 
@@ -78,6 +78,7 @@ build(low, high):
   set the right child of node to build(value, high)
   return node`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):

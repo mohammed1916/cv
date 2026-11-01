@@ -19,7 +19,7 @@ export function buildTrace({ n, lamps, queries }) {
   const answer = []
   const bump = (map, key, delta) => map.set(key, (map.get(key) ?? 0) + delta)
   const snapshot = () => [...lampSet].map(key => key.split(',').map(Number))
-  const frames = [{ phase: 'start', activeLine: L('set rows, cols'), on: [], query: null, cells: [], answer: [], message: `Grid ${n} by ${n}. Count the lamps on each row, column, diagonal and anti-diagonal.` }]
+  const frames = [{ phase: 'start', activeLine: L('set rows, cols'), pythonLine: P('rows, cols, diag, anti = Counter()'), on: [], query: null, cells: [], answer: [], message: `Grid ${n} by ${n}. Count the lamps on each row, column, diagonal and anti-diagonal.` }]
 
   for (const [r, c] of lamps) {
     lampSet.add(`${r},${c}`)
@@ -27,14 +27,14 @@ export function buildTrace({ n, lamps, queries }) {
     bump(cols, c, 1)
     bump(diag, r - c, 1)
     bump(anti, r + c, 1)
-    frames.push({ phase: 'index', activeLine: L('add (r, c) to the lamp set'), on: snapshot(), query: null, cells: [], answer: [...answer], message: `Lamp (${r},${c}) lights row ${r}, column ${c}, diagonal ${r - c} and anti-diagonal ${r + c}.` })
+    frames.push({ phase: 'index', activeLine: L('add (r, c) to the lamp set'), pythonLine: P('lamp_set.add((r, c))'), on: snapshot(), query: null, cells: [], answer: [...answer], message: `Lamp (${r},${c}) lights row ${r}, column ${c}, diagonal ${r - c} and anti-diagonal ${r + c}.` })
   }
 
   for (const [r, c] of queries) {
     const reasons = [['row', rows.get(r) ?? 0], ['column', cols.get(c) ?? 0], ['diagonal', diag.get(r - c) ?? 0], ['anti-diagonal', anti.get(r + c) ?? 0]]
     const hit = reasons.find(([, count]) => count > 0)
     answer.push(hit ? 1 : 0)
-    frames.push({ phase: 'query', activeLine: L('append 1 if'), on: snapshot(), query: [r, c], cells: [], answer: [...answer], message: hit ? `Query (${r},${c}) is lit by a lamp in its ${hit[0]}, so it records 1.` : `Query (${r},${c}) has no lamp in its row, column, diagonal or anti-diagonal, so it records 0.` })
+    frames.push({ phase: 'query', activeLine: L('append 1 if'), pythonLine: P('ans.append(1 if'), on: snapshot(), query: [r, c], cells: [], answer: [...answer], message: hit ? `Query (${r},${c}) is lit by a lamp in its ${hit[0]}, so it records 1.` : `Query (${r},${c}) has no lamp in its row, column, diagonal or anti-diagonal, so it records 0.` })
 
     for (let dr = -1; dr <= 1; dr++) {
       for (let dc = -1; dc <= 1; dc++) {
@@ -47,12 +47,12 @@ export function buildTrace({ n, lamps, queries }) {
         bump(cols, nc, -1)
         bump(diag, nr - nc, -1)
         bump(anti, nr + nc, -1)
-        frames.push({ phase: 'off', activeLine: L('remove (nr, nc) from the lamp set'), on: snapshot(), query: [r, c], cells: [[nr, nc]], answer: [...answer], message: `Lamp (${nr},${nc}) is in the 3x3 block around (${r},${c}), so it goes off.` })
+        frames.push({ phase: 'off', activeLine: L('remove (nr, nc) from the lamp set'), pythonLine: P('lamp_set.remove((nr, nc))'), on: snapshot(), query: [r, c], cells: [[nr, nc]], answer: [...answer], message: `Lamp (${nr},${nc}) is in the 3x3 block around (${r},${c}), so it goes off.` })
       }
     }
   }
 
-  frames.push({ phase: 'done', activeLine: L('return answers'), on: snapshot(), query: null, cells: [], answer: [...answer], message: `Answers: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return ans'), on: snapshot(), query: null, cells: [], answer: [...answer], message: `Answers: [${answer.join(', ')}].` })
   return { input: { n, lamps, queries }, result: answer, frames }
 }
 
@@ -71,6 +71,7 @@ export const code = `grid illumination (n, lamps, queries):
         subtract 1 from the four counters for that lamp
   return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from collections import Counter
 
