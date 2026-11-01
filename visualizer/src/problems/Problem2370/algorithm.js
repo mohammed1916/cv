@@ -19,17 +19,17 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 // best[x] is the longest ideal subsequence that ends with letter x, so each new letter only reads a window of letters.
 export function buildTrace({ s, k }) {
   const best = Array(26).fill(0)
-  const frames = [{ phase: 'start', position: -1, letter: -1, window: null, best: [...best], activeLine: L('best = list of 26 zeros'), message: 'No letters have been chosen yet.' }]
+  const frames = [{ phase: 'start', position: -1, letter: -1, window: null, best: [...best], pythonLine: 2, activeLine: L('best = list of 26 zeros'), message: 'No letters have been chosen yet.' }]
   for (let position = 0; position < s.length; position++) {
     const index = s.charCodeAt(position) - 97
     const lowest = Math.max(0, index - k)
     const highest = Math.min(25, index + k)
     const reach = Math.max(...best.slice(lowest, highest + 1))
     best[index] = Math.max(best[index], 1 + reach)
-    frames.push({ phase: 'letter', position, letter: index, window: [lowest, highest], best: [...best], activeLine: L('best[index] = max'), message: `${s[position]} extends a chain from a letter within ${k} of it: best ending in ${s[position]} is ${best[index]}.` })
+    frames.push({ phase: 'letter', position, letter: index, window: [lowest, highest], best: [...best], pythonLine: 7, activeLine: L('best[index] = max'), message: `${s[position]} extends a chain from a letter within ${k} of it: best ending in ${s[position]} is ${best[index]}.` })
   }
   const result = Math.max(...best)
-  frames.push({ phase: 'done', position: s.length, letter: -1, window: null, best: [...best], activeLine: L('return the largest value in best'), message: `Longest ideal subsequence: ${result}.` })
+  frames.push({ phase: 'done', position: s.length, letter: -1, window: null, best: [...best], pythonLine: 8, activeLine: L('return the largest value in best'), message: `Longest ideal subsequence: ${result}.` })
   return { input: { s, k }, result, frames }
 }
 

@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, diff } = input
   const seen = new Set(nums)
-  const frames = [{ phase: 'start', activeLine: L('seen = set'), maps: [{ name: 'seen', keyLabel: 'value', valueLabel: '', isSet: true, entries: nums.map(v => [v]) }], ops: [], result: 0, message: `Every value is in the set. A triplet needs x, x + ${diff}, and x + ${2 * diff}.` }]
+  const frames = [{ phase: 'start', activeLine: L('seen = set'), pythonLine: 2, maps: [{ name: 'seen', keyLabel: 'value', valueLabel: '', isSet: true, entries: nums.map(v => [v]) }], ops: [], result: 0, message: `Every value is in the set. A triplet needs x, x + ${diff}, and x + ${2 * diff}.` }]
   let count = 0
   const setMap = () => [{ name: 'seen', keyLabel: 'value', valueLabel: '', isSet: true, entries: nums.map(v => [v]) }]
   for (const x of nums) {
@@ -19,14 +19,14 @@ export function buildTrace(input) {
     const midHit = seen.has(mid)
     const topHit = midHit && seen.has(top)
     if (topHit) count++
-    frames.push({ phase: topHit ? 'match' : 'check', activeLine: topHit ? L('add one to count') : L('if x plus diff'), index: nums.indexOf(x), maps: setMap(), result: count,
+    frames.push({ phase: topHit ? 'match' : 'check', activeLine: topHit ? L('add one to count') : L('if x plus diff'), pythonLine: topHit ? 6 : 5, index: nums.indexOf(x), maps: setMap(), result: count,
       ops: [
         { map: 'seen', type: 'lookup', via: 'has', key: mid, hit: midHit, hitNote: `${mid} is in the set`, missNote: `${mid} is not in the set, so no triplet starts at ${x}` },
         ...(midHit ? [{ map: 'seen', type: 'lookup', via: 'has', key: top, hit: seen.has(top), hitNote: `${top} is in the set`, missNote: `${top} is not in the set` }] : []),
       ],
       message: `${x}: ${mid} ${midHit ? 'is' : 'is not'} present${midHit ? `, and ${top} ${seen.has(top) ? 'is' : 'is not'} present` : ''}. ${topHit ? 'Count this triplet.' : 'No triplet here.'}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), maps: setMap(), ops: [], result: count, message: `Arithmetic triplets: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 7, maps: setMap(), ops: [], result: count, message: `Arithmetic triplets: ${count}.` })
   return { input, result: count, frames }
 }
 

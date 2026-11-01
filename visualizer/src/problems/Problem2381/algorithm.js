@@ -27,12 +27,12 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ s, shifts }) {
   const n = s.length
   const diff = Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('make a difference array'), index: -1, letters: null, nets: null, message: 'Record every shift at its endpoints instead of touching each letter.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('make a difference array'), index: -1, letters: null, nets: null, message: 'Record every shift at its endpoints instead of touching each letter.' }]
   for (const [start, end, direction] of shifts) {
     const delta = direction === 1 ? 1 : -1
     diff[start] += delta
     diff[end + 1] -= delta
-    frames.push({ phase: 'mark', activeLine: L('for each shift'), index: start, letters: null, nets: null, message: `Shift [${start}, ${end}] ${direction === 1 ? 'forward' : 'backward'}: +${delta} at ${start}, ${-delta} after ${end}.` })
+    frames.push({ phase: 'mark', pythonLine: 7, activeLine: L('for each shift'), index: start, letters: null, nets: null, message: `Shift [${start}, ${end}] ${direction === 1 ? 'forward' : 'backward'}: +${delta} at ${start}, ${-delta} after ${end}.` })
   }
   const nets = []
   const letters = []
@@ -42,10 +42,10 @@ export function buildTrace({ s, shifts }) {
     nets.push(net)
     const code0 = s.charCodeAt(i) - 97
     letters.push(String.fromCharCode(97 + (((code0 + net) % 26) + 26) % 26))
-    frames.push({ phase: 'apply', activeLine: L('move each letter'), index: i, letters: [...letters], nets: [...nets], message: `Position ${i}: net shift ${net}, ${s[i]} becomes ${letters[i]}.` })
+    frames.push({ phase: 'apply', pythonLine: 12, activeLine: L('move each letter'), index: i, letters: [...letters], nets: [...nets], message: `Position ${i}: net shift ${net}, ${s[i]} becomes ${letters[i]}.` })
   }
   const result = letters.join('')
-  frames.push({ phase: 'done', activeLine: L('return the new string'), index: -1, letters, nets, message: `Result: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return the new string'), index: -1, letters, nets, message: `Result: ${result}.` })
   return { input: { s, shifts }, nets, result, frames }
 }
 

@@ -20,13 +20,13 @@ export function buildTrace(input) {
   const evenN = nums.filter(v => v % 2 === 0).sort((a, b) => a - b)
   const evenT = target.filter(v => v % 2 === 0).sort((a, b) => a - b)
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('split nums and target into odd values'), total: 0, pair: null, message: 'Operations keep each value’s parity, so odd and even values are matched separately.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('split nums and target into odd values'), total: 0, pair: null, message: 'Operations keep each value’s parity, so odd and even values are matched separately.' }]
   for (const [a, b] of [...oddN.map((v, i) => [v, oddT[i]]), ...evenN.map((v, i) => [v, evenT[i]])]) {
     total += Math.abs(a - b)
-    frames.push({ phase: 'pair', activeLine: L('add the absolute difference'), total, pair: [a, b], message: `Pair ${a} with ${b}: difference ${Math.abs(a - b)}. Total ${total}.` })
+    frames.push({ phase: 'pair', pythonLine: a % 2 === 1 ? 6 : 7, activeLine: L('add the absolute difference'), total, pair: [a, b], message: `Pair ${a} with ${b}: difference ${Math.abs(a - b)}. Total ${total}.` })
   }
   const result = total / 4
-  frames.push({ phase: 'done', activeLine: L('return the total divided by four'), total, pair: null, message: `Each operation reduces the total difference by at most four: ${result} operations.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return the total divided by four'), total, pair: null, message: `Each operation reduces the total difference by at most four: ${result} operations.` })
   return { input, result, frames }
 }
 

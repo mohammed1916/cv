@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const owner = new Array(n).fill(-1)
   const step = new Array(n).fill(-1)
   let best = -1
-  const frames = [{ phase: 'start', activeLine: L('set best to minus one'), node: -1, start: -1, best, message: 'No cycle found yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to minus one'), pythonLine: 5, node: -1, start: -1, best, message: 'No cycle found yet.' }]
   for (let s = 0; s < n; s++) {
     if (owner[s] !== -1) continue
     let node = s
@@ -22,16 +22,16 @@ export function buildTrace(input) {
     while (node !== -1 && owner[node] === -1) {
       owner[node] = s
       step[node] = k++
-      frames.push({ phase: 'walk', activeLine: L('mark node with owner'), node, start: s, best, message: `Walk from ${s}: mark node ${node} as step ${step[node]}.` })
+      frames.push({ phase: 'walk', activeLine: L('mark node with owner'), pythonLine: 12, node, start: s, best, message: `Walk from ${s}: mark node ${node} as step ${step[node]}.` })
       node = edges[node]
     }
     if (node !== -1 && owner[node] === s) {
       const length = k - step[node]
       if (length > best) best = length
-      frames.push({ phase: 'cycle', activeLine: L('the cycle length is'), node, start: s, best, message: `The walk from ${s} returns to node ${node}: a cycle of length ${length}.` })
+      frames.push({ phase: 'cycle', activeLine: L('the cycle length is'), pythonLine: 17, node, start: s, best, message: `The walk from ${s} returns to node ${node}: a cycle of length ${length}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), node: -1, start: -1, best, message: `Longest cycle: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 18, node: -1, start: -1, best, message: `Longest cycle: ${best}.` })
   return { input, result: best, frames }
 }
 

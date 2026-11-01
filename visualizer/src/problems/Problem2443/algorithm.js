@@ -17,18 +17,18 @@ const reverseDigits = x => {
 }
 
 export function buildTrace({ num }) {
-  const frames = [{ phase: 'start', activeLine: L('try x from 0 up to num'), x: -1, checked: 0, message: `Look for x with x plus its reverse equal to ${num}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('try x from 0 up to num'), x: -1, checked: 0, message: `Look for x with x plus its reverse equal to ${num}.` }]
   let found = null
   let checked = 0
   for (let x = 0; x <= num && found === null; x++) {
     const reversed = reverseDigits(x)
     const sum = x + reversed
     checked += 1
-    frames.push({ phase: 'try', activeLine: L('if x plus the reverse'), x, checked, message: `${x} + ${reversed} = ${sum}${sum === num ? ', which matches.' : '.'}` })
+    frames.push({ phase: 'try', pythonLine: 8, activeLine: L('if x plus the reverse'), x, checked, message: `${x} + ${reversed} = ${sum}${sum === num ? ', which matches.' : '.'}` })
     if (sum === num) found = x
   }
   const result = found !== null
-  frames.push({ phase: 'done', activeLine: L(result ? 'return true' : 'return false'), x: found ?? -1, checked, message: result ? `${found} works, so the answer is true.` : `No x works, so the answer is false.` })
+  frames.push({ phase: 'done', pythonLine: result ? 9 : 10, activeLine: L(result ? 'return true' : 'return false'), x: found ?? -1, checked, message: result ? `${found} works, so the answer is true.` : `No x works, so the answer is false.` })
   return { input: { num }, result, checked, frames }
 }
 

@@ -12,20 +12,20 @@ export function buildTrace(input) {
   const n = nums.length
   let prev = nums[n - 1]
   let ops = 0
-  const frames = [{ phase: 'start', activeLine: L('set ops to 0'), index: n - 1, prev, ops, message: `The last value ${prev} is the bound for the value before it.` }]
+  const frames = [{ phase: 'start', activeLine: L('set ops to 0'), pythonLine: 3, index: n - 1, prev, ops, message: `The last value ${prev} is the bound for the value before it.` }]
   for (let i = n - 2; i >= 0; i--) {
     const x = nums[i]
     if (x > prev) {
       const parts = Math.ceil(x / prev)
       ops += parts - 1
       prev = Math.floor(x / parts)
-      frames.push({ phase: 'split', activeLine: L('set parts to'), index: i, parts, prev, ops, message: `${x} is above the bound; split it into ${parts} parts whose smallest is ${prev}.` })
+      frames.push({ phase: 'split', activeLine: L('set parts to'), pythonLine: 6, index: i, parts, prev, ops, message: `${x} is above the bound; split it into ${parts} parts whose smallest is ${prev}.` })
     } else {
       prev = x
-      frames.push({ phase: 'keep', activeLine: L('otherwise set prev to x'), index: i, parts: 1, prev, ops, message: `${x} already fits; it becomes the bound ${prev}.` })
+      frames.push({ phase: 'keep', activeLine: L('otherwise set prev to x'), pythonLine: 10, index: i, parts: 1, prev, ops, message: `${x} already fits; it becomes the bound ${prev}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return ops'), index: -1, parts: 0, prev, ops, message: `Minimum replacements: ${ops}.` })
+  frames.push({ phase: 'done', activeLine: L('return ops'), pythonLine: 11, index: -1, parts: 0, prev, ops, message: `Minimum replacements: ${ops}.` })
   return { input, result: ops, frames }
 }
 

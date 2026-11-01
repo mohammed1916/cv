@@ -58,7 +58,7 @@ export function buildTrace(input) {
   const frames = [];
   let day = 0;
   const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, i: -1, day, space, last: Object.fromEntries(last), ...extra,
+    phase, activeLine, message, i: -1, pythonLine: pythonLineMap[activeLine], day, space, last: Object.fromEntries(last), ...extra,
   });
 
   snap("setup", 2, "Start on day 0 with no task types recorded.");

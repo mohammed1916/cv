@@ -11,18 +11,18 @@ export function buildTrace({ blocks, k }) {
   const frames = []
   let white = [...blocks.slice(0, k)].filter(ch => ch === 'W').length
   let best = white
-  frames.push({ phase: 'start', activeLine: L('set white to the number'), start: 0, white, best, message: `The first window of ${k} blocks has ${white} white blocks.` })
-  frames.push({ phase: 'record', activeLine: L('set best to white'), start: 0, white, best, message: `Best recolors so far: ${best}.` })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('set white to the number'), start: 0, white, best, message: `The first window of ${k} blocks has ${white} white blocks.` })
+  frames.push({ phase: 'record', pythonLine: 3, activeLine: L('set best to white'), start: 0, white, best, message: `Best recolors so far: ${best}.` })
   for (let start = 1; start <= blocks.length - k; start++) {
     if (blocks[start - 1] === 'W') white--
     if (blocks[start + k - 1] === 'W') white++
-    frames.push({ phase: 'slide', activeLine: L('if blocks at start minus 1'), start, white, best, message: `The window moves to start ${start}; it has ${white} white blocks.` })
+    frames.push({ phase: 'slide', pythonLine: 4, activeLine: L('if blocks at start minus 1'), start, white, best, message: `The window moves to start ${start}; it has ${white} white blocks.` })
     if (white < best) {
       best = white
-      frames.push({ phase: 'record', activeLine: L('if white is less than best'), start, white, best, message: `A window with ${white} recolors is better.` })
+      frames.push({ phase: 'record', pythonLine: 9, activeLine: L('if white is less than best'), start, white, best, message: `A window with ${white} recolors is better.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, white, best, message: `Minimum recolors: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), start: -1, white, best, message: `Minimum recolors: ${best}.` })
   return { input: { blocks, k }, result: best, frames }
 }
 

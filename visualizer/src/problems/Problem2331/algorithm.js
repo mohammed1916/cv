@@ -22,23 +22,23 @@ export function parseInput(text) {
 export function buildTrace({ root }) {
   const tree = treeFromLevelOrder(root)
   const values = {}
-  const frames = [{ phase: 'start', activeLine: L('return evaluate of the root'), node: null, values: {}, message: 'Evaluate from the root. A leaf is its own value; an internal node combines its two children.' }]
+  const frames = [{ phase: 'start', activeLine: L('return evaluate of the root'), pythonLine: 33, node: null, values: {}, message: 'Evaluate from the root. A leaf is its own value; an internal node combines its two children.' }]
   const evaluate = node => {
     if (!node.left && !node.right) {
       const result = node.value === 1
       values[node.id] = result
-      frames.push({ phase: 'leaf', activeLine: L('if this node is a leaf'), node: node.id, values: { ...values }, message: `Leaf ${node.value} is ${result}.` })
+      frames.push({ phase: 'leaf', activeLine: L('if this node is a leaf'), pythonLine: 27, node: node.id, values: { ...values }, message: `Leaf ${node.value} is ${result}.` })
       return result
     }
     const left = evaluate(node.left)
     const right = evaluate(node.right)
     const result = node.value === 2 ? left || right : left && right
     values[node.id] = result
-    frames.push({ phase: 'combine', activeLine: L(node.value === 2 ? 'if this node is the OR operation' : 'return left and right'), node: node.id, values: { ...values }, message: `${node.value === 2 ? 'OR' : 'AND'} of ${left} and ${right} is ${result}.` })
+    frames.push({ phase: 'combine', activeLine: L(node.value === 2 ? 'if this node is the OR operation' : 'return left and right'), pythonLine: node.value === 2 ? 31 : 32, node: node.id, values: { ...values }, message: `${node.value === 2 ? 'OR' : 'AND'} of ${left} and ${right} is ${result}.` })
     return result
   }
   const result = evaluate(tree)
-  frames.push({ phase: 'done', activeLine: L('return evaluate of the root'), node: null, values: { ...values }, message: `The root evaluates to ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return evaluate of the root'), pythonLine: 33, node: null, values: { ...values }, message: `The root evaluates to ${result}.` })
   return { input: { root }, display: tree, result, frames }
 }
 

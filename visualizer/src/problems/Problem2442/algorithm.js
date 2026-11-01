@@ -17,18 +17,18 @@ export function buildTrace(input) {
   const { nums } = input
   const seen = new Set()
   const maps = () => [{ name: 'distinct', keyLabel: 'integer', valueLabel: '', isSet: true, entries: [...seen].map(v => [v]) }]
-  const frames = [{ phase: 'start', activeLine: L('seen = empty set'), index: -1, maps: maps(), ops: [], result: 0, message: 'Each number and its reversed digits are both counted. A set keeps only distinct values.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('seen = empty set'), index: -1, maps: maps(), ops: [], result: 0, message: 'Each number and its reversed digits are both counted. A set keeps only distinct values.' }]
   for (const [i, x] of nums.entries()) {
     const rev = reverseDigits(x)
     for (const v of [x, rev]) {
       const isNew = !seen.has(v)
       seen.add(v)
-      frames.push({ phase: 'add', activeLine: v === x ? L('add x to seen') : L('add the reverse of x'), index: i, maps: maps(),
+      frames.push({ phase: 'add', pythonLine: v === x ? 4 : 5, activeLine: v === x ? L('add x to seen') : L('add the reverse of x'), index: i, maps: maps(),
         ops: [isNew ? { map: 'distinct', type: 'insert', key: v } : { map: 'distinct', type: 'lookup', via: 'has', key: v, hit: true, hitNote: 'already counted', missNote: 'new' }],
         result: seen.size, message: `${v === x ? `${x} is added` : `The reverse of ${x} is ${rev}, which is added`}${isNew ? ' as a new integer' : ', but it was already counted'}. Distinct so far: ${seen.size}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the size'), index: -1, maps: maps(), ops: [], result: seen.size, message: `Distinct integers: ${seen.size}.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return the size'), index: -1, maps: maps(), ops: [], result: seen.size, message: `Distinct integers: ${seen.size}.` })
   return { input, result: seen.size, frames }
 }
 

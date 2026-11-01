@@ -48,7 +48,7 @@ export function buildTrace(input) {
   const seen = new Set();
   const frames = [];
   const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, i: -1, seen: [...seen].sort((a, b) => a - b), ...extra,
+    phase, activeLine, message, i: -1, pythonLine: pythonLineMap[activeLine], seen: [...seen].sort((a, b) => a - b), ...extra,
   });
 
   snap("setup", 2, "Start with an empty set of nonzero values.");

@@ -11,16 +11,16 @@ export function buildTrace(input) {
   const { grid } = input
   const size = grid.length - 2
   const answer = Array.from({ length: size }, () => Array(size).fill(''))
-  const frames = [{ phase: 'start', activeLine: L('set size to'), answer: answer.map(r => [...r]), top: -1, left: -1, message: `The answer is ${size} by ${size}, one entry per 3 by 3 window.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set size to'), answer: answer.map(r => [...r]), top: -1, left: -1, message: `The answer is ${size} by ${size}, one entry per 3 by 3 window.` }]
   for (let top = 0; top < size; top++) {
     for (let left = 0; left < size; left++) {
       let best = 0
       for (let dr = 0; dr < 3; dr++) for (let dc = 0; dc < 3; dc++) best = Math.max(best, grid[top + dr][left + dc])
       answer[top][left] = best
-      frames.push({ phase: 'window', activeLine: L('find the largest value'), answer: answer.map(r => [...r]), top, left, message: `The window at (${top}, ${left}) has largest value ${best}.` })
+      frames.push({ phase: 'window', pythonLine: 6, activeLine: L('find the largest value'), answer: answer.map(r => [...r]), top, left, message: `The window at (${top}, ${left}) has largest value ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), answer: answer.map(r => [...r]), top: -1, left: -1, message: 'Every window has been checked.' })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return answer'), answer: answer.map(r => [...r]), top: -1, left: -1, message: 'Every window has been checked.' })
   return { input, result: answer, frames }
 }
 

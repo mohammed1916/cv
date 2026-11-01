@@ -14,12 +14,12 @@ export function buildTrace(input) {
   const table = new Map()
   const frames = []
   const maps = () => [{ name: 'table', keyLabel: 'cipher', valueLabel: 'plain', isSet: false, entries: [...table] }]
-  frames.push({ phase: 'start', activeLine: L('table is an empty map'), maps: maps(), ops: [], text: '', result: '', message: 'The key lists the cipher letters in the order they take the plain letters a, b, c, and so on.' })
+  frames.push({ phase: 'start', activeLine: L('table is an empty map'), pythonLine: 2, maps: maps(), ops: [], text: '', result: '', message: 'The key lists the cipher letters in the order they take the plain letters a, b, c, and so on.' })
   let next = 'a'
   for (const ch of key) {
     if (ch === ' ' || table.has(ch)) continue
     table.set(ch, next)
-    frames.push({ phase: 'map', activeLine: L('set table of the letter to next'), maps: maps(),
+    frames.push({ phase: 'map', activeLine: L('set table of the letter to next'), pythonLine: 6, maps: maps(),
       ops: [{ map: 'table', type: 'insert', key: ch, value: next }], text: '', result: '',
       message: `Key letter ${ch} becomes ${next}.` })
     next = String.fromCharCode(next.charCodeAt(0) + 1)
@@ -28,16 +28,16 @@ export function buildTrace(input) {
   for (const ch of message) {
     if (ch === ' ') {
       decoded += ' '
-      frames.push({ phase: 'decode', activeLine: L('keep the space'), maps: maps(), ops: [], text: decoded, result: decoded, message: 'A space stays a space.' })
+      frames.push({ phase: 'decode', activeLine: L('keep the space'), pythonLine: 11, maps: maps(), ops: [], text: decoded, result: decoded, message: 'A space stays a space.' })
       continue
     }
     const plain = table.get(ch)
     decoded += plain
-    frames.push({ phase: 'decode', activeLine: L('replace it with table'), maps: maps(),
+    frames.push({ phase: 'decode', activeLine: L('replace it with table'), pythonLine: 13, maps: maps(),
       ops: [{ map: 'table', type: 'lookup', via: 'get', key: ch, hit: true, value: plain, hitNote: 'every message letter appears in the key', missNote: 'not reached for valid input' }],
       text: decoded, result: decoded, message: `${ch} decodes to ${plain}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the decoded text'), maps: maps(), ops: [], text: decoded, result: decoded, message: `Decoded message: ${decoded}.` })
+  frames.push({ phase: 'done', activeLine: L('return the decoded text'), pythonLine: 14, maps: maps(), ops: [], text: decoded, result: decoded, message: `Decoded message: ${decoded}.` })
   return { input, result: decoded, frames }
 }
 

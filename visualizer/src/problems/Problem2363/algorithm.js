@@ -21,18 +21,18 @@ export function buildTrace(input) {
   const totals = new Map()
   const frames = []
   const maps = () => [{ name: 'totals', keyLabel: 'value', valueLabel: 'total weight', isSet: false, entries: [...totals] }]
-  frames.push({ phase: 'start', activeLine: L('totals = empty map'), maps: maps(), ops: [], result: [], message: 'Start with empty totals. Every item from both lists adds its weight to its value.' })
+  frames.push({ phase: 'start', activeLine: L('totals = empty map'), pythonLine: 2, maps: maps(), ops: [], result: [], message: 'Start with empty totals. Every item from both lists adds its weight to its value.' })
   for (const [source, items] of [['items1', input.items1], ['items2', input.items2]]) {
     for (const [value, weight] of items) {
       const before = totals.get(value)
       totals.set(value, (before ?? 0) + weight)
-      frames.push({ phase: 'add', activeLine: L('add weight to totals'), maps: maps(),
+      frames.push({ phase: 'add', activeLine: L('add weight to totals'), pythonLine: 4, maps: maps(),
         ops: [{ map: 'totals', type: before === undefined ? 'insert' : 'update', key: value, value: (before ?? 0) + weight, before }],
         result: [], message: `${source}: value ${value} adds weight ${weight}. Its total is now ${totals.get(value)}.` })
     }
   }
   const result = [...totals].sort((a, b) => a[0] - b[0]).map(([value, total]) => [value, total])
-  frames.push({ phase: 'done', activeLine: L('return the list'), maps: maps(), ops: [], result, message: `Merged items in value order: ${result.map(([v, w]) => `[${v}, ${w}]`).join(' ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return the list'), pythonLine: 5, maps: maps(), ops: [], result, message: `Merged items in value order: ${result.map(([v, w]) => `[${v}, ${w}]`).join(' ')}.` })
   return { input, result, frames }
 }
 

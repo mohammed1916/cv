@@ -30,13 +30,13 @@ export function buildTrace(input) {
   const la = dayNumber(leaveAlice)
   const ab = dayNumber(arriveBob)
   const lb = dayNumber(leaveBob)
-  const frames = [{ phase: 'start', activeLine: L('set alice arrival'), days: { aa, la, ab, lb }, latest: null, earliest: null, message: 'Convert each date to its day of the year.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set alice arrival'), days: { aa, la, ab, lb }, latest: null, earliest: null, message: 'Convert each date to its day of the year.' }]
   const latest = Math.max(aa, ab)
-  frames.push({ phase: 'arrival', activeLine: L('set latest arrival'), days: { aa, la, ab, lb }, latest, earliest: null, message: `The later arrival is day ${latest}.` })
+  frames.push({ phase: 'arrival', pythonLine: 8, activeLine: L('set latest arrival'), days: { aa, la, ab, lb }, latest, earliest: null, message: `The later arrival is day ${latest}.` })
   const earliest = Math.min(la, lb)
-  frames.push({ phase: 'departure', activeLine: L('set earliest departure'), days: { aa, la, ab, lb }, latest, earliest, message: `The earlier departure is day ${earliest}.` })
+  frames.push({ phase: 'departure', pythonLine: 9, activeLine: L('set earliest departure'), days: { aa, la, ab, lb }, latest, earliest, message: `The earlier departure is day ${earliest}.` })
   const result = Math.max(0, earliest - latest + 1)
-  frames.push({ phase: 'done', activeLine: L('return the larger of 0'), days: { aa, la, ab, lb }, latest, earliest, message: `Days together: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return the larger of 0'), days: { aa, la, ab, lb }, latest, earliest, message: `Days together: ${result}.` })
   return { input, result, frames }
 }
 

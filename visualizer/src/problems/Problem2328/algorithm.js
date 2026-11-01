@@ -20,17 +20,17 @@ export function buildTrace(input) {
   const memo = new Map()
   const entries = []
   const snapshot = () => entries.map(e => ({ ...e }))
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), cell: null, memo: [], message: 'Count the increasing paths that start at every cell.' }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: 18, cell: null, memo: [], message: 'Count the increasing paths that start at every cell.' }]
 
   const paths = (r, c) => {
     const key = `${r},${c}`
     if (memo.has(key)) {
       const value = memo.get(key)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), cell: { row: r, col: c }, memo: snapshot(), message: `Cell (${r}, ${c}) already has ${value} paths.` })
+      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), pythonLine: 9, cell: { row: r, col: c }, memo: snapshot(), message: `Cell (${r}, ${c}) already has ${value} paths.` })
       return value
     }
     let ways = 1
-    frames.push({ phase: 'visit', activeLine: L('set ways to 1'), cell: { row: r, col: c }, memo: snapshot(), message: `Cell (${r}, ${c}) with value ${grid[r][c]} always counts itself as one path.` })
+    frames.push({ phase: 'visit', activeLine: L('set ways to 1'), pythonLine: 10, cell: { row: r, col: c }, memo: snapshot(), message: `Cell (${r}, ${c}) with value ${grid[r][c]} always counts itself as one path.` })
     for (const [dr, dc] of STEPS) {
       const nr = r + dr
       const nc = c + dc
@@ -39,7 +39,7 @@ export function buildTrace(input) {
     }
     memo.set(key, ways)
     entries.push({ row: r, col: c, value: ways })
-    frames.push({ phase: 'store', activeLine: L('store ways'), cell: { row: r, col: c }, memo: snapshot(), message: `Cell (${r}, ${c}) starts ${ways} paths.` })
+    frames.push({ phase: 'store', activeLine: L('store ways'), pythonLine: 15, cell: { row: r, col: c }, memo: snapshot(), message: `Cell (${r}, ${c}) starts ${ways} paths.` })
     return ways
   }
 
@@ -49,7 +49,7 @@ export function buildTrace(input) {
       total = (total + paths(r, c)) % MOD
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), cell: null, memo: snapshot(), message: `Increasing paths in the grid: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 22, cell: null, memo: snapshot(), message: `Increasing paths in the grid: ${total}.` })
   return { input, result: total, frames }
 }
 

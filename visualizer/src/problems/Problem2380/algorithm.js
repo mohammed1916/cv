@@ -9,14 +9,14 @@ export function parseInput(text) {
 export function buildTrace(input) {
   let s = input.s
   let seconds = 0
-  const frames = [{ phase: 'start', activeLine: L('set seconds to 0'), seconds, s, message: `Start with ${s}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set seconds to 0'), seconds, s, message: `Start with ${s}.` }]
   while (s.includes('01')) {
     // Two 01 pairs never share a character, so replacing them all at once is the same as one pass left to right.
     s = s.replace(/01/g, '10')
     seconds += 1
-    frames.push({ phase: 'swap', activeLine: L('replace every 01'), seconds, s, message: `After second ${seconds}: ${s}.` })
+    frames.push({ phase: 'swap', pythonLine: 5, activeLine: L('replace every 01'), seconds, s, message: `After second ${seconds}: ${s}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return seconds'), seconds, s, message: `The string has no 01 left after ${seconds} seconds.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return seconds'), seconds, s, message: `The string has no 01 left after ${seconds} seconds.` })
   return { input, result: seconds, frames }
 }
 

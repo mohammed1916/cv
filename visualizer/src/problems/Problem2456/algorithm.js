@@ -19,7 +19,7 @@ export function buildTrace(input) {
     { name: 'popularity', keyLabel: 'creator', valueLabel: 'total views', isSet: false, entries: [...popularity] },
     { name: 'top', keyLabel: 'creator', valueLabel: 'best video (views)', isSet: false, entries: [...top].map(([c, t]) => [c, `${t.id} (${t.views})`]) },
   ]
-  const frames = [{ phase: 'start', activeLine: L('popularity = empty map'), index: -1, maps: maps(), ops: [], result: [], message: 'Track each creator’s total views and best video. Ties on views go to the smaller id.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('popularity = empty map'), index: -1, maps: maps(), ops: [], result: [], message: 'Track each creator’s total views and best video. Ties on views go to the smaller id.' }]
   creators.forEach((c, i) => {
     const d = ids[i], v = views[i]
     const before = popularity.get(c)
@@ -27,13 +27,13 @@ export function buildTrace(input) {
     const prev = top.get(c)
     const better = !prev || v > prev.views || (v === prev.views && d < prev.id)
     if (better) top.set(c, { id: d, views: v })
-    frames.push({ phase: 'video', activeLine: L('add v to popularity'), index: i, maps: maps(),
+    frames.push({ phase: 'video', pythonLine: better ? 7 : 5, activeLine: L('add v to popularity'), index: i, maps: maps(),
       ops: [{ map: 'popularity', type: before === undefined ? 'insert' : 'update', key: c, value: (before ?? 0) + v, before }],
       result: [], message: `Video ${d} by ${c} has ${v} views. ${c} now has ${popularity.get(c)} in total${better ? `, and ${d} is the best video so far` : ''}.` })
   })
   const best = Math.max(...popularity.values())
   const result = [...popularity.keys()].sort().filter(c => popularity.get(c) === best).map(c => [c, top.get(c).id])
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: -1, maps: maps(), ops: [], result,
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return answer'), index: -1, maps: maps(), ops: [], result,
     message: `Most popular creators with ${best} views: ${result.map(([c, d]) => `${c} (${d})`).join(', ')}.` })
   return { input, result, frames }
 }

@@ -31,22 +31,22 @@ export function buildTrace({ nums, remove_queries: removeQueries }) {
   }
   const answer = Array(n).fill(0)
   const presentList = () => present.map((on, i) => (on ? i : -1)).filter(i => i >= 0)
-  const frames = [{ phase: 'start', activeLine: L('start with every position removed'), index: null, best: 0, present: [], answers: [...answer], message: 'Start with everything removed. Putting values back in reverse order answers every query.' }]
+  const frames = [{ phase: 'start', pythonLine: 20, activeLine: L('start with every position removed'), index: null, best: 0, present: [], answers: [...answer], message: 'Start with everything removed. Putting values back in reverse order answers every query.' }]
 
   let best = 0
   for (let i = n - 1; i >= 0; i--) {
     answer[i] = best
-    frames.push({ phase: 'record', activeLine: L('record the best sum'), index: null, best, present: presentList(), answers: [...answer], message: `After removals 0 to ${i}, the best segment sum is ${best}.` })
+    frames.push({ phase: 'record', pythonLine: 22, activeLine: L('record the best sum'), index: null, best, present: presentList(), answers: [...answer], message: `After removals 0 to ${i}, the best segment sum is ${best}.` })
     const q = removeQueries[i]
     present[q] = true
     total[q] = nums[q]
-    frames.push({ phase: 'add', activeLine: L('put back the removed value'), index: q, best, present: presentList(), answers: [...answer], message: `Put back index ${q} with value ${nums[q]}.` })
+    frames.push({ phase: 'add', pythonLine: 25, activeLine: L('put back the removed value'), index: q, best, present: presentList(), answers: [...answer], message: `Put back index ${q} with value ${nums[q]}.` })
     if (q > 0 && present[q - 1]) join(q - 1, q)
     if (q + 1 < n && present[q + 1]) join(q, q + 1)
     best = Math.max(best, total[find(q)])
-    frames.push({ phase: 'merge', activeLine: L('update the best sum'), index: q, best, present: presentList(), answers: [...answer], message: `Its segment now sums to ${total[find(q)]}; the best is ${best}.` })
+    frames.push({ phase: 'merge', pythonLine: 30, activeLine: L('update the best sum'), index: q, best, present: presentList(), answers: [...answer], message: `Its segment now sums to ${total[find(q)]}; the best is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), index: null, best, present: presentList(), answers: [...answer], message: `Answers: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 31, activeLine: L('return the answers'), index: null, best, present: presentList(), answers: [...answer], message: `Answers: ${answer.join(', ')}.` })
   return { input: { nums, remove_queries: removeQueries }, result: answer, frames }
 }
 

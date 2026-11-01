@@ -15,24 +15,24 @@ export function buildTrace(input) {
   const first = new Map()
   const frames = []
   const maps = () => [{ name: 'first', keyLabel: 'letter', valueLabel: 'first index', isSet: false, entries: [...first] }]
-  frames.push({ phase: 'start', activeLine: L('first = empty map'), index: -1, maps: maps(), ops: [], result: null, message: 'Each letter appears twice. The gap between its two copies must equal its distance entry.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('first = empty map'), index: -1, maps: maps(), ops: [], result: null, message: 'Each letter appears twice. The gap between its two copies must equal its distance entry.' })
   for (let i = 0; i < s.length; i++) {
     const c = s[i]
     if (first.has(c)) {
       const gap = i - first.get(c) - 1
       const want = distance[c.charCodeAt(0) - 97]
       const ok = gap === want
-      frames.push({ phase: ok ? 'check' : 'fail', activeLine: ok ? L('if distance of c is not gap') : L('return false'), index: i, maps: maps(),
+      frames.push({ phase: ok ? 'check' : 'fail', pythonLine: ok ? 6 : 7, activeLine: ok ? L('if distance of c is not gap') : L('return false'), index: i, maps: maps(),
         ops: [{ map: 'first', type: 'lookup', via: 'get', key: c, hit: true, value: first.get(c), hitNote: 'the first copy of this letter is recorded', missNote: 'first copy' }],
         result: ok, message: `${c}: the copies are ${first.get(c)} and ${i}, a gap of ${gap}. distance[${c}] is ${want}, so ${ok ? 'it matches' : 'it does not match and the answer is false'}.` })
       if (!ok) return { input, result: false, frames }
     } else {
       first.set(c, i)
-      frames.push({ phase: 'scan', activeLine: L('set first of c to i'), index: i, maps: maps(), ops: [{ map: 'first', type: 'insert', key: c, value: i }], result: null,
+      frames.push({ phase: 'scan', pythonLine: 9, activeLine: L('set first of c to i'), index: i, maps: maps(), ops: [{ map: 'first', type: 'insert', key: c, value: i }], result: null,
         message: `${c} at index ${i} is its first copy. Record the index.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), index: -1, maps: maps(), ops: [], result: true, message: 'Every letter’s gap matches its distance, so the answer is true.' })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return true'), index: -1, maps: maps(), ops: [], result: true, message: 'Every letter’s gap matches its distance, so the answer is true.' })
   return { input, result: true, frames }
 }
 

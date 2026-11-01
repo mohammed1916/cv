@@ -14,17 +14,17 @@ export function buildTrace(input) {
   const ts = [...trainers].sort((a, b) => a - b)
   let next = 0
   let matches = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the players'), trainer: -1, next, matches, message: `Players ${ps.join(', ')}; trainers ${ts.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('sort the players'), trainer: -1, next, matches, message: `Players ${ps.join(', ')}; trainers ${ts.join(', ')}.` }]
   for (const trainer of ts) {
     if (next < ps.length && ps[next] <= trainer) {
-      frames.push({ phase: 'match', activeLine: L('match them'), trainer, next, matches: matches + 1, message: `Trainer ${trainer} takes player ${ps[next]}.` })
+      frames.push({ phase: 'match', pythonLine: 8, activeLine: L('match them'), trainer, next, matches: matches + 1, message: `Trainer ${trainer} takes player ${ps[next]}.` })
       next += 1
       matches += 1
     } else {
-      frames.push({ phase: 'skip', activeLine: L('otherwise skip this trainer'), trainer, next, matches, message: `Trainer ${trainer} cannot train the next player; skip.` })
+      frames.push({ phase: 'skip', pythonLine: 7, activeLine: L('otherwise skip this trainer'), trainer, next, matches, message: `Trainer ${trainer} cannot train the next player; skip.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return matches'), trainer: -1, next, matches, message: `${matches} players are matched.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return matches'), trainer: -1, next, matches, message: `${matches} players are matched.` })
   return { input, result: matches, frames }
 }
 

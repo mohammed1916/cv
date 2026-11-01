@@ -23,7 +23,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ intervals }) {
   const sorted = intervals.map(([l, r]) => [l, r]).sort((a, b) => a[0] - b[0] || a[1] - b[1])
   const ends = []
-  const frames = [{ phase: 'start', activeLine: L('sort intervals by start'), index: -1, ends: [], group: -1, message: `Sort by start: ${sorted.map(([l, r]) => `[${l}, ${r}]`).join(' ')}. A group can take an interval only if its last end is before the interval starts.` }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('sort intervals by start'), index: -1, ends: [], group: -1, message: `Sort by start: ${sorted.map(([l, r]) => `[${l}, ${r}]`).join(' ')}. A group can take an interval only if its last end is before the interval starts.` }]
   for (let i = 0; i < sorted.length; i++) {
     const [left, right] = sorted[i]
     let best = -1
@@ -31,13 +31,13 @@ export function buildTrace({ intervals }) {
     if (best === -1) {
       ends.push(right)
       best = ends.length - 1
-      frames.push({ phase: 'assign', activeLine: L('otherwise add a new group'), index: i, ends: [...ends], group: best, message: `[${left}, ${right}] overlaps every open group, so it opens group ${best + 1}.` })
+      frames.push({ phase: 'assign', pythonLine: 9, activeLine: L('otherwise add a new group'), index: i, ends: [...ends], group: best, message: `[${left}, ${right}] overlaps every open group, so it opens group ${best + 1}.` })
     } else {
       ends[best] = right
-      frames.push({ phase: 'assign', activeLine: L('if one exists then set its last end'), index: i, ends: [...ends], group: best, message: `[${left}, ${right}] fits after group ${best + 1}, whose last end was earlier, so the group now ends at ${right}.` })
+      frames.push({ phase: 'assign', pythonLine: 7, activeLine: L('if one exists then set its last end'), index: i, ends: [...ends], group: best, message: `[${left}, ${right}] fits after group ${best + 1}, whose last end was earlier, so the group now ends at ${right}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the number of groups'), index: -1, ends: [...ends], group: -1, message: `${ends.length} group(s) are needed.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return the number of groups'), index: -1, ends: [...ends], group: -1, message: `${ends.length} group(s) are needed.` })
   return { input: { intervals }, sorted, result: ends.length, frames }
 }
 

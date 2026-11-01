@@ -22,18 +22,18 @@ export function buildTrace({ operations, arguments: args }) {
   let fresh = 1
   const back = []
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('set fresh to 1'), fresh, back: [], value: null, message: 'Every positive integer is in the set; the counter starts at 1.' }]
+  const frames = [{ phase: 'start', activeLine: L('set fresh to 1'), pythonLine: 4, fresh, back: [], value: null, message: 'Every positive integer is in the set; the counter starts at 1.' }]
   operations.forEach((op, i) => {
     if (op === 'popSmallest') {
       let value
       if (back.length) {
         back.sort((a, b) => a - b)
         value = back.shift()
-        frames.push({ phase: 'pop', activeLine: L('return and remove its smallest'), fresh, back: [...back], value, message: `Return ${value} from the added-back heap.` })
+        frames.push({ phase: 'pop', activeLine: L('return and remove its smallest'), pythonLine: 10, fresh, back: [...back], value, message: `Return ${value} from the added-back heap.` })
       } else {
         value = fresh
         fresh++
-        frames.push({ phase: 'pop', activeLine: L('return fresh, then add 1'), fresh, back: [...back], value, message: `Return ${value} from the counter.` })
+        frames.push({ phase: 'pop', activeLine: L('return fresh, then add 1'), pythonLine: 12, fresh, back: [...back], value, message: `Return ${value} from the counter.` })
       }
       result.push(value)
     } else {
@@ -41,10 +41,10 @@ export function buildTrace({ operations, arguments: args }) {
       const added = x < fresh && !back.includes(x)
       if (added) back.push(x)
       result.push(null)
-      frames.push({ phase: 'addBack', activeLine: L('push x into the heap'), fresh, back: [...back], value: null, message: added ? `Add ${x} back to the heap.` : `${x} is already in the set, so nothing changes.` })
+      frames.push({ phase: 'addBack', activeLine: L('push x into the heap'), pythonLine: added ? 17 : 16, fresh, back: [...back], value: null, message: added ? `Add ${x} back to the heap.` : `${x} is already in the set, so nothing changes.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the list of results'), fresh, back: [...back], value: null, message: 'Every operation has been answered.' })
+  frames.push({ phase: 'done', activeLine: L('return the list of results'), pythonLine: 19, fresh, back: [...back], value: null, message: 'Every operation has been answered.' })
   return { input: { operations, arguments: args }, result, frames }
 }
 

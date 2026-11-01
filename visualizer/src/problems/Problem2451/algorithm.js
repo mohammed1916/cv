@@ -65,7 +65,7 @@ export function buildTrace(input) {
   const frames = [];
   const groupsView = () => Object.fromEntries([...groups].map(([key, idxs]) => [key, [...idxs]]));
   const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, i: -1, groups: groupsView(), ...extra,
+    phase, activeLine, pythonLine: { setup: 2, scan: 3, diff: 4, group: 5, search: 6, found: 8, done: 9 }[phase], message, i: -1, groups: groupsView(), ...extra,
   });
 
   snap("setup", 2, "Start with no groups of difference arrays.");

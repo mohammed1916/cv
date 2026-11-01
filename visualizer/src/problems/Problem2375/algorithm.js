@@ -8,16 +8,16 @@ export function buildTrace(pattern) {
   const n = pattern.length
   const stack = []
   let result = ''
-  const frames = [{ phase: 'start', activeLine: L('set result'), stack: [], result: '', message: 'Start with an empty answer and an empty stack.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set result'), stack: [], result: '', message: 'Start with an empty answer and an empty stack.' }]
   for (let i = 1; i <= n + 1; i++) {
     stack.push(i)
-    frames.push({ phase: 'push', activeLine: L('push digit i'), stack: [...stack], result, message: `Push ${i} onto the stack.` })
+    frames.push({ phase: 'push', pythonLine: 6, activeLine: L('push digit i'), stack: [...stack], result, message: `Push ${i} onto the stack.` })
     if (i === n + 1 || pattern[i - 1] === 'I') {
       while (stack.length) result += stack.pop()
-      frames.push({ phase: 'flush', activeLine: L('if i is'), stack: [], result, message: i === n + 1 ? `The pattern ends, so pop everything: ${result}.` : `Position ${i} is I, so pop the run: ${result}.` })
+      frames.push({ phase: 'flush', pythonLine: 9, activeLine: L('if i is'), stack: [], result, message: i === n + 1 ? `The pattern ends, so pop everything: ${result}.` : `Position ${i} is I, so pop the run: ${result}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), stack: [], result, message: `Smallest number: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return result'), stack: [], result, message: `Smallest number: ${result}.` })
   return { input: pattern, result, frames }
 }
 

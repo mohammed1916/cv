@@ -58,7 +58,7 @@ export function buildTrace(input) {
   const frames = [];
   let best = Infinity;
   const snap = (phase, activeLine, message, extra = {}) => frames.push({
-    phase, activeLine, message, i: -1, k: -1, target: null, total: 0,
+    phase, activeLine, pythonLine: { setup: 2, candidate: 3, reset: 4, sum: 6, update: 7, done: 8 }[phase], message, i: -1, k: -1, target: null, total: 0,
     best: Number.isFinite(best) ? best : null, ...extra,
   });
 

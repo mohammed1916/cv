@@ -11,19 +11,19 @@ const digitSum = v => String(v).split('').reduce((a, c) => a + Number(c), 0)
 
 export function buildTrace(input) {
   const { n, target } = input
-  const frames = [{ phase: 'start', activeLine: L('if the digit sum of n is at most target'), candidate: n, sum: digitSum(n), index: -1, message: `Digit sum of ${n} is ${digitSum(n)} against target ${target}.` }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('if the digit sum of n is at most target'), candidate: n, sum: digitSum(n), index: -1, message: `Digit sum of ${n} is ${digitSum(n)} against target ${target}.` }]
   if (digitSum(n) <= target) {
-    frames.push({ phase: 'done', activeLine: L('return zero'), candidate: n, sum: digitSum(n), index: -1, message: 'The number is already beautiful, so no addition is needed.' })
+    frames.push({ phase: 'done', activeLine: L('return zero'), pythonLine: 6, candidate: n, sum: digitSum(n), index: -1, message: 'The number is already beautiful, so no addition is needed.' })
     return { input, result: 0, frames }
   }
   let p = 10
   for (;;) {
     const m = Math.ceil(n / p) * p
     const sum = digitSum(m)
-    frames.push({ phase: 'try', activeLine: L('round n up to a multiple of p'), candidate: m, sum, index: -1, message: `Round up to a multiple of ${p}: ${m}, digit sum ${sum}.` })
+    frames.push({ phase: 'try', pythonLine: 9, activeLine: L('round n up to a multiple of p'), candidate: m, sum, index: -1, message: `Round up to a multiple of ${p}: ${m}, digit sum ${sum}.` })
     if (sum <= target) {
       const result = m - n
-      frames.push({ phase: 'done', activeLine: L('return m minus n'), candidate: m, sum, index: -1, message: `Smallest addition: ${result} (${n} becomes ${m}).` })
+      frames.push({ phase: 'done', activeLine: L('return m minus n'), pythonLine: 11, candidate: m, sum, index: -1, message: `Smallest addition: ${result} (${n} becomes ${m}).` })
       return { input, result, frames }
     }
     p *= 10

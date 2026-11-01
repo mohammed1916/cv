@@ -22,17 +22,17 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ nums }) {
   const counts = new Map()
   let good = 0
-  const frames = [{ phase: 'start', activeLine: L('set counts to'), index: -1, key: null, good: 0, message: 'A pair (i, j) is good when nums[j] minus nums[i] equals j minus i.' }]
+  const frames = [{ phase: 'start', activeLine: L('set counts to'), pythonLine: 2, index: -1, key: null, good: 0, message: 'A pair (i, j) is good when nums[j] minus nums[i] equals j minus i.' }]
   nums.forEach((value, i) => {
     const key = value - i
     const before = counts.get(key) ?? 0
     good += before
     counts.set(key, before + 1)
-    frames.push({ phase: 'index', activeLine: L('add counts[key] to good'), index: i, key, good, message: `Index ${i}: key ${key}. ${before} earlier index(es) share it, so good pairs rise to ${good}.` })
+    frames.push({ phase: 'index', activeLine: L('add counts[key] to good'), pythonLine: 6, index: i, key, good, message: `Index ${i}: key ${key}. ${before} earlier index(es) share it, so good pairs rise to ${good}.` })
   })
   const n = nums.length
   const result = (n * (n - 1)) / 2 - good
-  frames.push({ phase: 'done', activeLine: L('return the number of pairs'), index: nums.length, key: null, good, message: `${n * (n - 1) / 2} pairs in total minus ${good} good pairs leaves ${result} bad pairs.` })
+  frames.push({ phase: 'done', activeLine: L('return the number of pairs'), pythonLine: 9, index: nums.length, key: null, good, message: `${n * (n - 1) / 2} pairs in total minus ${good} good pairs leaves ${result} bad pairs.` })
   return { input: { nums }, nums, result, frames }
 }
 

@@ -17,7 +17,7 @@ export function buildTrace(n) {
   const len = digits.length
   let count = 0
   for (let k = 1; k < len; k++) count += 9 * perm(9, k - 1)
-  const frames = [{ phase: 'start', activeLine: L('count the positive'), index: -1, count, message: `Numbers with fewer than ${len} digits and distinct digits: ${count}.` }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('count the positive'), index: -1, count, message: `Numbers with fewer than ${len} digits and distinct digits: ${count}.` }]
   const used = []
   let allNew = true
   for (let i = 0; i < len; i++) {
@@ -25,16 +25,16 @@ export function buildTrace(n) {
     for (let x = i === 0 ? 1 : 0; x < d; x++) {
       if (!used.includes(x)) count += perm(10 - used.length - 1, len - i - 1)
     }
-    frames.push({ phase: 'digit', activeLine: L('for each digit d'), index: i, count, message: `Position ${i} has digit ${d}. Smaller choices here add to the count.` })
+    frames.push({ phase: 'digit', pythonLine: 9, activeLine: L('for each digit d'), index: i, count, message: `Position ${i} has digit ${d}. Smaller choices here add to the count.` })
     if (used.includes(d)) {
       allNew = false
-      frames.push({ phase: 'digit', activeLine: L('if d is already used'), index: i, count, message: `Digit ${d} repeats, so no longer prefix can be all distinct.` })
+      frames.push({ phase: 'digit', pythonLine: 14, activeLine: L('if d is already used'), index: i, count, message: `Digit ${d} repeats, so no longer prefix can be all distinct.` })
       break
     }
     used.push(d)
   }
   if (allNew) count += 1
-  frames.push({ phase: 'done', activeLine: L('return the count'), index: len, count, message: `Special integers up to ${n}: ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the count'), index: len, count, message: `Special integers up to ${n}: ${count}.` })
   return { input: n, result: count, frames }
 }
 

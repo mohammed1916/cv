@@ -14,13 +14,13 @@ export function buildTrace(input) {
   const loss = ([cost, cashback]) => Math.max(0, cost - cashback)
   const totalLoss = transactions.reduce((sum, t) => sum + loss(t), 0)
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set total loss'), index: -1, totalLoss, best, message: `Losses add up to ${totalLoss} if every transaction is paid for.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set total loss'), index: -1, totalLoss, best, message: `Losses add up to ${totalLoss} if every transaction is paid for.` }]
   transactions.forEach(([cost, cashback], i) => {
     const candidate = totalLoss - loss([cost, cashback]) + cost
     best = Math.max(best, candidate)
-    frames.push({ phase: 'candidate', activeLine: L('set best to the larger'), index: i, totalLoss, candidate, best, message: `If transaction ${i} comes last, the money needed is ${candidate}; best ${best}.` })
+    frames.push({ phase: 'candidate', pythonLine: 6, activeLine: L('set best to the larger'), index: i, totalLoss, candidate, best, message: `If transaction ${i} comes last, the money needed is ${candidate}; best ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, totalLoss, best, message: `Minimum money required: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return best'), index: -1, totalLoss, best, message: `Minimum money required: ${best}.` })
   return { input, result: best, frames }
 }
 

@@ -19,7 +19,7 @@ export function buildTrace({ n, meetings }) {
   const count = Array(n).fill(0)
   const free = Array.from({ length: n }, (_, i) => i)
   const busy = []
-  const frames = [{ phase: 'start', activeLine: L('set the count of each room to 0'), room: -1, count: [...count], message: `${n} rooms, all free.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set the count of each room to 0'), room: -1, count: [...count], message: `${n} rooms, all free.` }]
   for (const [start, end] of sorted) {
     for (let j = busy.length - 1; j >= 0; j--) {
       if (busy[j].end <= start) { free.push(busy[j].room); busy.splice(j, 1) }
@@ -43,11 +43,11 @@ export function buildTrace({ n, meetings }) {
     }
     count[room]++
     busy.push({ end: finish, room })
-    frames.push({ phase, activeLine: L(phase === 'use' ? 'use the lowest numbered free room' : 'wait for the room that frees first'), room, count: [...count], message: phase === 'use' ? `Meeting ${start}-${end} takes room ${room}.` : `No room is free, so meeting ${start}-${end} starts at ${finish - duration} in room ${room}.` })
+    frames.push({ phase, pythonLine: phase === 'use' ? 13 : 16, activeLine: L(phase === 'use' ? 'use the lowest numbered free room' : 'wait for the room that frees first'), room, count: [...count], message: phase === 'use' ? `Meeting ${start}-${end} takes room ${room}.` : `No room is free, so meeting ${start}-${end} starts at ${finish - duration} in room ${room}.` })
   }
   const best = Math.max(...count)
   const result = count.indexOf(best)
-  frames.push({ phase: 'done', activeLine: L('return the room with the highest count'), room: result, count: [...count], message: `Room ${result} held the most meetings (${best}).` })
+  frames.push({ phase: 'done', pythonLine: 20, activeLine: L('return the room with the highest count'), room: result, count: [...count], message: `Room ${result} held the most meetings (${best}).` })
   return { input: { n, meetings }, result, frames }
 }
 

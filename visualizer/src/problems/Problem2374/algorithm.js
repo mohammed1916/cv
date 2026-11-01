@@ -9,24 +9,24 @@ export function parseInput(text) {
 export function buildTrace({ edges }) {
   const n = edges.length
   const score = Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('give every node an edge score of zero'), node: null, score: [...score], best: 0, message: 'Every node starts with an edge score of zero.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('give every node an edge score of zero'), node: null, score: [...score], best: 0, message: 'Every node starts with an edge score of zero.' }]
 
   for (let i = 0; i < n; i++) {
     score[edges[i]] += i
-    frames.push({ phase: 'add', activeLine: L('add i to the score of the node'), node: edges[i], score: [...score], best: 0, message: `Node ${i} points to ${edges[i]}, so ${edges[i]} gains ${i} (score ${score[edges[i]]}).` })
+    frames.push({ phase: 'add', pythonLine: 4, activeLine: L('add i to the score of the node'), node: edges[i], score: [...score], best: 0, message: `Node ${i} points to ${edges[i]}, so ${edges[i]} gains ${i} (score ${score[edges[i]]}).` })
   }
 
   let best = 0
-  frames.push({ phase: 'scan', activeLine: L('best is node zero'), node: 0, score: [...score], best, message: 'Start the scan with node 0 as the best.' })
+  frames.push({ phase: 'scan', pythonLine: 5, activeLine: L('best is node zero'), node: 0, score: [...score], best, message: 'Start the scan with node 0 as the best.' })
   for (let node = 1; node < n; node++) {
     if (score[node] > score[best]) {
       best = node
-      frames.push({ phase: 'scan', activeLine: L('best becomes this node'), node, score: [...score], best, message: `Node ${node} has a higher score (${score[node]}).` })
+      frames.push({ phase: 'scan', pythonLine: 8, activeLine: L('best becomes this node'), node, score: [...score], best, message: `Node ${node} has a higher score (${score[node]}).` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('if its score is higher'), node, score: [...score], best, message: `Node ${node} does not beat ${best}.` })
+      frames.push({ phase: 'scan', pythonLine: 7, activeLine: L('if its score is higher'), node, score: [...score], best, message: `Node ${node} does not beat ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, score: [...score], best, message: `Highest edge score: node ${best} with ${score[best]}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return best'), node: null, score: [...score], best, message: `Highest edge score: node ${best} with ${score[best]}.` })
   return { input: { edges }, result: best, frames }
 }
 

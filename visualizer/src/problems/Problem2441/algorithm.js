@@ -12,20 +12,20 @@ export function buildTrace(input) {
   const { nums } = input
   const seen = new Set(nums)
   const setMap = () => [{ name: 'seen', keyLabel: 'value', valueLabel: '', isSet: true, entries: nums.filter(v => seen.has(v)).map(v => [v]) }]
-  const frames = [{ phase: 'start', activeLine: L('seen = set'), index: -1, maps: setMap(), ops: [], result: -1, message: 'Put every number in the set. A positive k pairs with -k exactly when -k is in the set.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('seen = set'), index: -1, maps: setMap(), ops: [], result: -1, message: 'Put every number in the set. A positive k pairs with -k exactly when -k is in the set.' }]
   let best = -1
   nums.forEach((x, i) => {
     if (x > 0) {
       const hit = seen.has(-x)
       if (hit) best = Math.max(best, x)
-      frames.push({ phase: hit ? 'match' : 'check', activeLine: hit ? L('set best to the larger') : L('if x is positive'), index: i, maps: setMap(),
+      frames.push({ phase: hit ? 'match' : 'check', pythonLine: hit ? 6 : 5, activeLine: hit ? L('set best to the larger') : L('if x is positive'), index: i, maps: setMap(),
         ops: [{ map: 'seen', type: 'lookup', via: 'has', key: -x, hit, hitNote: `${-x} is present, so ${x} qualifies`, missNote: `${-x} is absent, so ${x} does not qualify` }],
         result: best, message: hit ? `${x} and ${-x} are both present. Best so far: ${best}.` : `${x} has no ${-x} in the set.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if x is positive'), index: i, maps: setMap(), ops: [], result: best, message: `${x} is not positive, so it is not a candidate.` })
+      frames.push({ phase: 'skip', pythonLine: 5, activeLine: L('if x is positive'), index: i, maps: setMap(), ops: [], result: best, message: `${x} is not positive, so it is not a candidate.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, maps: setMap(), ops: [], result: best, message: best === -1 ? 'No positive number has its negative, so the answer is -1.' : `Largest such positive: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return best'), index: -1, maps: setMap(), ops: [], result: best, message: best === -1 ? 'No positive number has its negative, so the answer is -1.' : `Largest such positive: ${best}.` })
   return { input, result: best, frames }
 }
 

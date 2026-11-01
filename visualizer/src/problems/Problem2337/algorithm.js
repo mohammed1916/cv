@@ -12,7 +12,7 @@ export function buildTrace({ start, target }) {
   const n = start.length
   let i = 0
   let j = 0
-  const frames = [{ phase: 'start', activeLine: L('can start become target by sliding pieces'), i, j, message: 'Walk both strings in order, ignoring blanks, and pair up the pieces.' }]
+  const frames = [{ phase: 'start', activeLine: L('can start become target by sliding pieces'), pythonLine: 3, i, j, message: 'Walk both strings in order, ignoring blanks, and pair up the pieces.' }]
   const skip = () => {
     while (i < n && start[i] === '_') i++
     while (j < n && target[j] === '_') j++
@@ -20,23 +20,23 @@ export function buildTrace({ start, target }) {
   for (;;) {
     skip()
     if (i === n || j === n) {
-      frames.push({ phase: 'stop', activeLine: L('stop the loop when either pointer'), i, j, message: 'One string has no pieces left.' })
+      frames.push({ phase: 'stop', activeLine: L('stop the loop when either pointer'), pythonLine: 11, i, j, message: 'One string has no pieces left.' })
       break
     }
     if (start[i] !== target[j]) {
-      frames.push({ phase: 'fail', activeLine: L('if the pieces under the pointers differ'), i, j, message: `Piece ${start[i]} cannot become ${target[j]}, so the answer is false.` })
+      frames.push({ phase: 'fail', activeLine: L('if the pieces under the pointers differ'), pythonLine: 13, i, j, message: `Piece ${start[i]} cannot become ${target[j]}, so the answer is false.` })
       return { input: { start, target }, result: false, frames }
     }
     if ((start[i] === 'L' && i < j) || (start[i] === 'R' && i > j)) {
-      frames.push({ phase: 'fail', activeLine: L('if a left piece would have to move right'), i, j, message: `That ${start[i]} would have to move the wrong way, so the answer is false.` })
+      frames.push({ phase: 'fail', activeLine: L('if a left piece would have to move right'), pythonLine: start[i] === 'L' ? 15 : 17, i, j, message: `That ${start[i]} would have to move the wrong way, so the answer is false.` })
       return { input: { start, target }, result: false, frames }
     }
-    frames.push({ phase: 'match', activeLine: L('move both pointers forward'), i, j, message: `Piece ${start[i]} at ${i} can slide to ${j}.` })
+    frames.push({ phase: 'match', activeLine: L('move both pointers forward'), pythonLine: 18, i, j, message: `Piece ${start[i]} at ${i} can slide to ${j}.` })
     i++
     j++
   }
   const result = i === n && j === n
-  frames.push({ phase: 'done', activeLine: L('return true only if'), i, j, message: result ? 'Every piece lands in place, so the answer is true.' : 'Pieces are left over on one side, so the answer is false.' })
+  frames.push({ phase: 'done', activeLine: L('return true only if'), pythonLine: 20, i, j, message: result ? 'Every piece lands in place, so the answer is true.' : 'Pieces are left over on one side, so the answer is false.' })
   return { input: { start, target }, result, frames }
 }
 

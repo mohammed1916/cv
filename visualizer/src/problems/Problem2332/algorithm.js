@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const { capacity } = input
   const buses = [...input.buses].sort((a, b) => a - b)
   const passengers = [...input.passengers].sort((a, b) => a - b)
-  const frames = [{ phase: 'start', activeLine: L('sort the buses'), bus: null, boarded: 0, answer: null, message: 'Sort the buses and the passengers by time.' }]
+  const frames = [{ phase: 'start', activeLine: L('sort the buses'), pythonLine: 2, bus: null, boarded: 0, answer: null, message: 'Sort the buses and the passengers by time.' }]
   let next = 0
   let load = 0
   for (const bus of buses) {
@@ -21,27 +21,27 @@ export function buildTrace(input) {
       next++
       load++
     }
-    frames.push({ phase: 'bus', activeLine: L('for each bus in order'), bus, boarded: next, load, answer: null, message: `Bus ${bus} boards ${load} passenger(s) of capacity ${capacity}.` })
+    frames.push({ phase: 'bus', activeLine: L('for each bus in order'), pythonLine: 6, bus, boarded: next, load, answer: null, message: `Bus ${bus} boards ${load} passenger(s) of capacity ${capacity}.` })
   }
   const lastBus = buses[buses.length - 1]
   let answer
   if (load < capacity) {
     answer = lastBus
-    frames.push({ phase: 'answer', activeLine: L('set answer to the last bus time'), bus: lastBus, boarded: next, load, answer, message: `The last bus has a free seat, so the bus time ${answer} is the first candidate.` })
+    frames.push({ phase: 'answer', activeLine: L('set answer to the last bus time'), pythonLine: 12, bus: lastBus, boarded: next, load, answer, message: `The last bus has a free seat, so the bus time ${answer} is the first candidate.` })
   } else {
     answer = passengers[next - 1] - 1
-    frames.push({ phase: 'answer', activeLine: L('set answer to the last boarded'), bus: lastBus, boarded: next, load, answer, message: `The last bus is full, so you must arrive before passenger ${passengers[next - 1]}: first candidate ${answer}.` })
+    frames.push({ phase: 'answer', activeLine: L('set answer to the last boarded'), pythonLine: 14, bus: lastBus, boarded: next, load, answer, message: `The last bus is full, so you must arrive before passenger ${passengers[next - 1]}: first candidate ${answer}.` })
   }
   while (next > 0 && passengers[next - 1] >= answer) {
     if (passengers[next - 1] === answer) {
       answer--
-      frames.push({ phase: 'step', activeLine: L('if that passenger is exactly answer'), bus: lastBus, boarded: next, load, answer, message: `A passenger arrives at that minute, so step back to ${answer}.` })
+      frames.push({ phase: 'step', activeLine: L('if that passenger is exactly answer'), pythonLine: 17, bus: lastBus, boarded: next, load, answer, message: `A passenger arrives at that minute, so step back to ${answer}.` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('while the boarded passenger'), bus: lastBus, boarded: next, load, answer, message: `Passenger ${passengers[next - 1]} arrives after ${answer}, so no clash here.` })
+      frames.push({ phase: 'scan', activeLine: L('while the boarded passenger'), pythonLine: 16, bus: lastBus, boarded: next, load, answer, message: `Passenger ${passengers[next - 1]} arrives after ${answer}, so no clash here.` })
     }
     next--
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), bus: null, boarded: next, load, answer, message: `Latest arrival time that still boards: ${answer}.` })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: 19, bus: null, boarded: next, load, answer, message: `Latest arrival time that still boards: ${answer}.` })
   return { input, sortedPassengers: passengers, result: answer, frames }
 }
 

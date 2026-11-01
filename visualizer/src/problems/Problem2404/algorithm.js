@@ -7,21 +7,21 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('counts = empty map'), value: null, counts: {}, best: -1, message: 'Count only the even values.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('counts = empty map'), value: null, counts: {}, best: -1, message: 'Count only the even values.' }]
   for (const v of nums) {
     if (v % 2 !== 0) continue
     counts.set(v, (counts.get(v) ?? 0) + 1)
-    frames.push({ phase: 'count', activeLine: L('counts[v] = counts[v] + 1'), value: v, counts: Object.fromEntries(counts), best: -1, message: `Even value ${v} now appears ${counts.get(v)} time${counts.get(v) === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'count', pythonLine: 4, activeLine: L('counts[v] = counts[v] + 1'), value: v, counts: Object.fromEntries(counts), best: -1, message: `Even value ${v} now appears ${counts.get(v)} time${counts.get(v) === 1 ? '' : 's'}.` })
   }
   let best = -1
   for (const v of counts.keys()) {
     const better = best === -1 || counts.get(v) > counts.get(best) || (counts.get(v) === counts.get(best) && v < best)
     if (better) {
       best = v
-      frames.push({ phase: 'best', activeLine: L('best = v'), value: v, counts: Object.fromEntries(counts), best, message: `${v} is now the best candidate with ${counts.get(v)} occurrences.` })
+      frames.push({ phase: 'best', pythonLine: 8, activeLine: L('best = v'), value: v, counts: Object.fromEntries(counts), best, message: `${v} is now the best candidate with ${counts.get(v)} occurrences.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), value: null, counts: Object.fromEntries(counts), best, message: best === -1 ? 'There are no even values, so the answer is -1.' : `Most frequent even value: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return best'), value: null, counts: Object.fromEntries(counts), best, message: best === -1 ? 'There are no even values, so the answer is -1.' : `Most frequent even value: ${best}.` })
   return { input: nums, result: best, frames }
 }
 

@@ -11,14 +11,14 @@ export function buildTrace(input) {
   let left = input.grades.length
   let size = 1
   let groups = 0
-  const frames = [{ phase: 'start', activeLine: L('set left to the number of students'), left, size, groups, message: `${left} students. The first group needs at least one student.` }]
+  const frames = [{ phase: 'start', activeLine: L('set left to the number of students'), pythonLine: 2, left, size, groups, message: `${left} students. The first group needs at least one student.` }]
   while (left >= size) {
     left -= size
     groups += 1
-    frames.push({ phase: 'group', activeLine: L('take size students'), left, size, groups, message: `Group ${groups} takes ${size} student${size === 1 ? '' : 's'}; ${left} left.` })
+    frames.push({ phase: 'group', activeLine: L('take size students'), pythonLine: 6, left, size, groups, message: `Group ${groups} takes ${size} student${size === 1 ? '' : 's'}; ${left} left.` })
     size += 1
   }
-  frames.push({ phase: 'done', activeLine: L('return groups'), left, size, groups, message: `Maximum groups: ${groups}.` })
+  frames.push({ phase: 'done', activeLine: L('return groups'), pythonLine: 9, left, size, groups, message: `Maximum groups: ${groups}.` })
   return { input, result: groups, frames }
 }
 

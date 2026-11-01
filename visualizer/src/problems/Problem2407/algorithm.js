@@ -16,7 +16,7 @@ export function buildTrace({ nums, k }) {
   // Leaf v - 1 holds the longest increasing run that ends at value v so far.
   const seg = new SegTree(SPAN, 'max-assign')
   let best = 0
-  const frames = [{ phase: 'start', index: null, x: null, cur: null, best, seg: { ...seg.snapshot(), title: 'Longest run ending at each value' }, activeLine: L('set best to 0'), message: 'No values seen yet.' }]
+  const frames = [{ phase: 'start', index: null, x: null, cur: null, best, seg: { ...seg.snapshot(), title: 'Longest run ending at each value' }, pythonLine: 30, activeLine: L('set best to 0'), message: 'No values seen yet.' }]
   nums.forEach((x, i) => {
     const lo = Math.max(1, x - k), hi = x - 1
     const prior = hi >= lo ? seg.query(lo - 1, hi - 1) : 0
@@ -24,9 +24,9 @@ export function buildTrace({ nums, k }) {
     const stored = seg.query(x - 1, x - 1)
     if (cur > stored) seg.update(x - 1, x - 1, cur)
     best = Math.max(best, cur)
-    frames.push({ phase: 'element', index: i, x, cur, best, range: [lo, hi], seg: { ...seg.snapshot(), title: `After value ${x}` }, activeLine: L('find the best length ending'), message: hi >= lo ? `${x} follows a run of ${prior} ending in ${lo} to ${hi}, so its run is ${cur}.` : `${x} starts a run of 1 because no value in range can precede it.` })
+    frames.push({ phase: 'element', index: i, x, cur, best, range: [lo, hi], seg: { ...seg.snapshot(), title: `After value ${x}` }, pythonLine: 33, activeLine: L('find the best length ending'), message: hi >= lo ? `${x} follows a run of ${prior} ending in ${lo} to ${hi}, so its run is ${cur}.` : `${x} starts a run of 1 because no value in range can precede it.` })
   })
-  frames.push({ phase: 'done', index: null, x: null, cur: null, best, seg: { ...seg.snapshot(), title: 'Final tree' }, activeLine: L('return best'), message: `Longest subsequence: ${best}.` })
+  frames.push({ phase: 'done', index: null, x: null, cur: null, best, seg: { ...seg.snapshot(), title: 'Final tree' }, pythonLine: 37, activeLine: L('return best'), message: `Longest subsequence: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

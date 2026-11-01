@@ -20,19 +20,19 @@ const describe = row => row.slice(1).map((count, i) => (count ? `length ${i + 1}
 
 export function buildTrace({ n, max_value: maxV }) {
   const chains = Array.from({ length: maxV + 1 }, () => new Array(K).fill(0n))
-  const frames = [{ phase: 'start', activeLine: L('set answer to zero'), v: 0, total: 0, message: `Count arrays of length ${n} whose values are at most ${maxV}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set answer to zero'), pythonLine: 13, v: 0, total: 0, message: `Count arrays of length ${n} whose values are at most ${maxV}.` }]
   let answer = 0n
   for (let v = 1; v <= maxV; v++) {
     chains[v][1] = 1n
     for (let u = 1; u < v; u++) if (v % u === 0) for (let k = 1; k < K - 1; k++) chains[v][k + 1] += chains[u][k]
-    frames.push({ phase: 'chains', activeLine: L('count the chains ending at v'), v, total: Number(answer % MOD), message: `Divisor chains ending at ${v}: ${describe(chains[v].map(Number))}.` })
+    frames.push({ phase: 'chains', activeLine: L('count the chains ending at v'), pythonLine: 12, v, total: Number(answer % MOD), message: `Divisor chains ending at ${v}: ${describe(chains[v].map(Number))}.` })
     let contribution = 0n
     for (let k = 1; k < K; k++) contribution += chains[v][k] * binom(n - 1, k - 1)
     answer += contribution
-    frames.push({ phase: 'add', activeLine: L('add chains(v, k)'), v, total: Number(answer % MOD), message: `Adds ${contribution} arrays that end at ${v}.` })
+    frames.push({ phase: 'add', activeLine: L('add chains(v, k)'), pythonLine: 16, v, total: Number(answer % MOD), message: `Adds ${contribution} arrays that end at ${v}.` })
   }
   const result = Number(answer % MOD)
-  frames.push({ phase: 'done', activeLine: L('return answer modulo'), v: maxV, total: result, message: `Ideal arrays: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return answer modulo'), pythonLine: 17, v: maxV, total: result, message: `Ideal arrays: ${result}.` })
   const chainTotals = chains.map(row => Number(row.reduce((a, b) => a + b, 0n)))
   return { input: { n, max_value: maxV }, result, frames, chainTotals }
 }

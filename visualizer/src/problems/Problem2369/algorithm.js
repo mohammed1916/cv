@@ -20,7 +20,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ nums }) {
   const n = nums.length
   const ok = [true, ...Array(n).fill(false)]
-  const frames = [{ phase: 'start', position: 0, ok: [...ok], activeLine: L('ok = array of'), message: 'The empty prefix is a valid partition.' }]
+  const frames = [{ phase: 'start', position: 0, ok: [...ok], pythonLine: 3, activeLine: L('ok = array of'), message: 'The empty prefix is a valid partition.' }]
   for (let i = 1; i <= n; i++) {
     const notes = []
     if (i >= 2 && ok[i - 2] && nums[i - 2] === nums[i - 1]) { ok[i] = true; notes.push('a pair of equal values') }
@@ -30,10 +30,10 @@ export function buildTrace({ nums }) {
       else if (b === a + 1 && c === b + 1) { ok[i] = true; notes.push('three consecutive values') }
     }
     const verdict = ok[i] ? `valid, ending with ${notes.join(' or ')}` : 'not valid'
-    frames.push({ phase: 'position', position: i, ok: [...ok], activeLine: L('for i from 1 to n'), message: `The first ${i} values are ${verdict}.` })
+    frames.push({ phase: 'position', position: i, ok: [...ok], pythonLine: notes.some(t => t.startsWith('three')) ? 10 : notes.length ? 6 : i >= 3 && ok[i - 3] ? 9 : i >= 3 ? 7 : 5, activeLine: L('for i from 1 to n'), message: `The first ${i} values are ${verdict}.` })
   }
   const result = ok[n]
-  frames.push({ phase: 'done', position: n, ok: [...ok], activeLine: L('return ok[n]'), message: `The whole array ${result ? 'can' : 'cannot'} be partitioned.` })
+  frames.push({ phase: 'done', position: n, ok: [...ok], pythonLine: 11, activeLine: L('return ok[n]'), message: `The whole array ${result ? 'can' : 'cannot'} be partitioned.` })
   return { input: { nums }, result, frames }
 }
 

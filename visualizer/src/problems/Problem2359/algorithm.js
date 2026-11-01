@@ -13,7 +13,7 @@ export function parseInput(text) {
 
 export function buildTrace({ edges, first, second }) {
   const n = edges.length
-  const frames = [{ phase: 'start', activeLine: L('closest node reached from both starts'), node: null, fromFirst: Array(n).fill(-1), fromSecond: Array(n).fill(-1), best: -1, message: 'Each node has at most one outgoing edge, so walking from a start gives one distance per node.' }]
+  const frames = [{ phase: 'start', activeLine: L('closest node reached from both starts'), pythonLine: 1, node: null, fromFirst: Array(n).fill(-1), fromSecond: Array(n).fill(-1), best: -1, message: 'Each node has at most one outgoing edge, so walking from a start gives one distance per node.' }]
 
   const fromFirst = Array(n).fill(-1)
   const fromSecond = Array(n).fill(-1)
@@ -22,7 +22,7 @@ export function buildTrace({ edges, first, second }) {
     let steps = 0
     while (cur !== -1 && dist[cur] === -1) {
       dist[cur] = steps
-      frames.push({ phase: 'walk', activeLine: L(label), node: cur, fromFirst: [...fromFirst], fromSecond: [...fromSecond], best: -1, message: `From ${start}, node ${cur} is ${steps} step${steps === 1 ? '' : 's'} away.` })
+      frames.push({ phase: 'walk', activeLine: L(label), pythonLine: 7, node: cur, fromFirst: [...fromFirst], fromSecond: [...fromSecond], best: -1, message: `From ${start}, node ${cur} is ${steps} step${steps === 1 ? '' : 's'} away.` })
       cur = edges[cur]
       steps++
     }
@@ -38,10 +38,10 @@ export function buildTrace({ edges, first, second }) {
     if (bestWorst === null || worst < bestWorst) {
       best = node
       bestWorst = worst
-      frames.push({ phase: 'compare', activeLine: L('best becomes this node'), node, fromFirst, fromSecond, best, message: `Node ${node} is reached by both, with a farther distance of ${worst}.` })
+      frames.push({ phase: 'compare', activeLine: L('best becomes this node'), pythonLine: 21, node, fromFirst, fromSecond, best, message: `Node ${node} is reached by both, with a farther distance of ${worst}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), node: null, fromFirst, fromSecond, best, message: best === -1 ? 'No node is reached from both starts.' : `Closest shared node: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 23, node: null, fromFirst, fromSecond, best, message: best === -1 ? 'No node is reached from both starts.' : `Closest shared node: ${best}.` })
   return { input: { edges, first, second }, result: best, frames }
 }
 

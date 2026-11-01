@@ -25,14 +25,14 @@ export function buildTrace({ root: arr, queries }) {
     return h
   }
   measure(root, 0)
-  const frames = [{ phase: 'start', activeLine: L('compute the height of every subtree'), node: null, tags: {}, removed: [], message: 'Measure every subtree in nodes, from the bottom up.' }]
+  const frames = [{ phase: 'start', pythonLine: 19, activeLine: L('compute the height of every subtree'), node: null, tags: {}, removed: [], message: 'Measure every subtree in nodes, from the bottom up.' }]
   const shown = new Map()
   for (const node of bottomUp) {
     shown.set(node.id, height.get(node.id))
-    frames.push({ phase: 'height', activeLine: L('compute the height of every subtree'), node: node.id, tags: Object.fromEntries(shown), removed: [], message: `The subtree at ${node.value} is ${height.get(node.id)} node(s) tall.` })
+    frames.push({ phase: 'height', pythonLine: 28, activeLine: L('compute the height of every subtree'), node: node.id, tags: Object.fromEntries(shown), removed: [], message: `The subtree at ${node.value} is ${height.get(node.id)} node(s) tall.` })
   }
   answer.set(root.id, 0)
-  frames.push({ phase: 'answer', activeLine: L('set the answer for the root'), node: root.id, tags: Object.fromEntries(answer), removed: [], message: 'Removing the whole tree leaves nothing, so the answer for the root is 0.' })
+  frames.push({ phase: 'answer', activeLine: L('set the answer for the root'), pythonLine: 32, node: root.id, tags: Object.fromEntries(answer), removed: [], message: 'Removing the whole tree leaves nothing, so the answer for the root is 0.' })
   const topDown = []
   const collect = node => { if (node) { topDown.push(node); collect(node.left); collect(node.right) } }
   collect(root)
@@ -42,7 +42,7 @@ export function buildTrace({ root: arr, queries }) {
       const others = kids.filter(s => s !== child).map(s => height.get(s.id))
       const other = others.length ? Math.max(...others) : 0
       answer.set(child.id, Math.max(answer.get(parent.id), depth.get(parent.id) + 1 + other))
-      frames.push({ phase: 'answer', activeLine: L('the answer for c is the larger'), node: child.id, tags: Object.fromEntries(answer), removed: [], message: `Removing ${child.value} leaves height ${answer.get(child.id)}.` })
+      frames.push({ phase: 'answer', activeLine: L('the answer for c is the larger'), pythonLine: 40, node: child.id, tags: Object.fromEntries(answer), removed: [], message: `Removing ${child.value} leaves height ${answer.get(child.id)}.` })
     }
   }
   const subtreeIds = node => (node ? [node.id, ...subtreeIds(node.left), ...subtreeIds(node.right)] : [])
@@ -50,9 +50,9 @@ export function buildTrace({ root: arr, queries }) {
   for (const q of queries) {
     const node = byValue.get(q)
     result.push(answer.get(node.id))
-    frames.push({ phase: 'query', activeLine: L('for each query return'), node: node.id, tags: Object.fromEntries(answer), removed: subtreeIds(node), result: [...result], message: `Remove the subtree at ${q}: the height left is ${answer.get(node.id)}.` })
+    frames.push({ phase: 'query', pythonLine: 42, activeLine: L('for each query return'), node: node.id, tags: Object.fromEntries(answer), removed: subtreeIds(node), result: [...result], message: `Remove the subtree at ${q}: the height left is ${answer.get(node.id)}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('for each query return'), node: null, tags: Object.fromEntries(answer), removed: [], result: [...result], message: `Answers: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 42, activeLine: L('for each query return'), node: null, tags: Object.fromEntries(answer), removed: [], result: [...result], message: `Answers: [${result.join(', ')}].` })
   return { input: { root: arr, queries }, root, result, frames }
 }
 

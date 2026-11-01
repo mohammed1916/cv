@@ -21,13 +21,13 @@ export function buildTrace(input) {
   const end1 = minutes(event1[1])
   const start2 = minutes(event2[0])
   const end2 = minutes(event2[1])
-  const frames = [{ phase: 'start', activeLine: L('convert each time'), minutes: [start1, end1, start2, end2], first: null, second: null, message: 'Convert each time to minutes after midnight.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('convert each time'), minutes: [start1, end1, start2, end2], first: null, second: null, message: 'Convert each time to minutes after midnight.' }]
   const first = start1 <= end2
-  frames.push({ phase: 'compare', activeLine: L('set first overlap check'), minutes: [start1, end1, start2, end2], first, second: null, message: `Event 1 starts at or before event 2 ends: ${first}.` })
+  frames.push({ phase: 'compare', activeLine: L('set first overlap check'), pythonLine: 7, minutes: [start1, end1, start2, end2], first, second: null, message: `Event 1 starts at or before event 2 ends: ${first}.` })
   const second = start2 <= end1
-  frames.push({ phase: 'compare', activeLine: L('set second overlap check'), minutes: [start1, end1, start2, end2], first, second, message: `Event 2 starts at or before event 1 ends: ${second}.` })
+  frames.push({ phase: 'compare', activeLine: L('set second overlap check'), pythonLine: 8, minutes: [start1, end1, start2, end2], first, second, message: `Event 2 starts at or before event 1 ends: ${second}.` })
   const result = first && second
-  frames.push({ phase: 'done', activeLine: L('  return true'), minutes: [start1, end1, start2, end2], first, second, message: result ? 'Both checks hold, so the events share a minute.' : 'A check fails, so the events do not share a minute.' })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('  return true'), minutes: [start1, end1, start2, end2], first, second, message: result ? 'Both checks hold, so the events share a minute.' : 'A check fails, so the events do not share a minute.' })
   return { input, result, frames }
 }
 

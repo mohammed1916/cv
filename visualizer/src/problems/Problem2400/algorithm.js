@@ -14,7 +14,7 @@ export function buildTrace({ start_pos: start, end_pos: end, k }) {
   const width = 2 * k + 1
   let ways = new Array(width).fill(0)
   ways[k] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0] to one'), step: 0, row: ways.slice(), message: 'Before any step, one sequence sits at displacement zero.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set ways[0] to one'), step: 0, row: ways.slice(), message: 'Before any step, one sequence sits at displacement zero.' }]
   for (let s = 1; s <= k; s++) {
     const next = new Array(width).fill(0)
     for (let i = 0; i < width; i++) {
@@ -23,11 +23,11 @@ export function buildTrace({ start_pos: start, end_pos: end, k }) {
       if (i - 1 >= 0) next[i - 1] = (next[i - 1] + ways[i]) % MOD
     }
     ways = next
-    frames.push({ phase: 'step', activeLine: L('for each step from one'), step: s, row: ways.slice(), message: `After step ${s}, every displacement has its count of sequences.` })
+    frames.push({ phase: 'step', pythonLine: 6, activeLine: L('for each step from one'), step: s, row: ways.slice(), message: `After step ${s}, every displacement has its count of sequences.` })
   }
   const d = end - start
   const result = Math.abs(d) > k ? 0 : ways[d + k]
-  frames.push({ phase: 'done', activeLine: L('return ways['), step: k, row: ways.slice(), message: `Ways to be ${d} away after ${k} steps: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: Math.abs(d) > k ? 18 : 19, activeLine: L('return ways['), step: k, row: ways.slice(), message: `Ways to be ${d} away after ${k} steps: ${result}.` })
   return { input: { start_pos: start, end_pos: end, k }, result, frames, width }
 }
 

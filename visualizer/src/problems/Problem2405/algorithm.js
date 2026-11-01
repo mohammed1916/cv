@@ -11,18 +11,18 @@ export function buildTrace(input) {
   let pieces = 1
   let seen = new Set()
   let start = 0
-  const frames = [{ phase: 'start', activeLine: L('set pieces to one'), index: -1, start: 0, pieces, seen: [], message: 'Start the first piece with no letters seen.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set pieces to one'), index: -1, start: 0, pieces, seen: [], message: 'Start the first piece with no letters seen.' }]
   for (let i = 0; i < s.length; i++) {
     if (seen.has(s[i])) {
       pieces += 1
       seen = new Set()
       start = i
-      frames.push({ phase: 'cut', activeLine: L('start a new piece'), index: i, start, pieces, seen: [], message: `${s[i]} repeats, so cut before it and start piece ${pieces}.` })
+      frames.push({ phase: 'cut', pythonLine: 6, activeLine: L('start a new piece'), index: i, start, pieces, seen: [], message: `${s[i]} repeats, so cut before it and start piece ${pieces}.` })
     }
     seen.add(s[i])
-    frames.push({ phase: 'letter', activeLine: L('add the letter to seen'), index: i, start, pieces, seen: [...seen], message: `Add ${s[i]} to the current piece.` })
+    frames.push({ phase: 'letter', pythonLine: 8, activeLine: L('add the letter to seen'), index: i, start, pieces, seen: [...seen], message: `Add ${s[i]} to the current piece.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return pieces'), index: -1, start, pieces, seen: [...seen], message: `Minimum number of pieces: ${pieces}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return pieces'), index: -1, start, pieces, seen: [...seen], message: `Minimum number of pieces: ${pieces}.` })
   return { input, result: pieces, frames }
 }
 

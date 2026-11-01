@@ -18,16 +18,16 @@ export function buildTrace(data) {
   // learned[d]: people who learn the secret on day d (days are 1-based).
   const learned = Array(n + 1).fill(0)
   learned[1] = 1
-  const frames = [{ phase: 'start', activeLine: L('set learned[1]'), day: 1, learned: [...learned], message: 'Day 1: one person knows the secret.' }]
+  const frames = [{ phase: 'start', activeLine: L('set learned[1]'), pythonLine: 4, day: 1, learned: [...learned], message: 'Day 1: one person knows the secret.' }]
   for (let t = 2; t <= n; t++) {
     let sharers = 0
     for (let d = Math.max(1, t - forget + 1); d <= t - delay; d++) sharers = (sharers + learned[d]) % MOD
     learned[t] = sharers
-    frames.push({ phase: 'day', activeLine: L('set learned[t]'), day: t, learned: [...learned], message: `Day ${t}: people who learned between day ${Math.max(1, t - forget + 1)} and day ${t - delay} can share, so ${sharers} new people learn it today.` })
+    frames.push({ phase: 'day', activeLine: L('set learned[t]'), pythonLine: 9, day: t, learned: [...learned], message: `Day ${t}: people who learned between day ${Math.max(1, t - forget + 1)} and day ${t - delay} can share, so ${sharers} new people learn it today.` })
   }
   let result = 0
   for (let d = Math.max(1, n - forget + 1); d <= n; d++) result = (result + learned[d]) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum'), day: n, learned: [...learned], message: `People who still remember the secret on day ${n}: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: 13, day: n, learned: [...learned], message: `People who still remember the secret on day ${n}: ${result}.` })
   return { input: data, result, frames, learned }
 }
 

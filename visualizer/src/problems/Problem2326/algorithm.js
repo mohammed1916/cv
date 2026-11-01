@@ -16,7 +16,7 @@ export function buildTrace({ m, n, head }) {
   let left = 0
   let right = n - 1
   let k = 0
-  const frames = [{ phase: 'start', activeLine: L('start with an m by n matrix'), cell: null, matrix: copy(matrix), message: `An ${m} by ${n} matrix of minus ones; the list is written clockwise from the outside.` }]
+  const frames = [{ phase: 'start', activeLine: L('start with an m by n matrix'), pythonLine: 2, cell: null, matrix: copy(matrix), message: `An ${m} by ${n} matrix of minus ones; the list is written clockwise from the outside.` }]
   while (top <= bottom && left <= right) {
     const cells = []
     for (let c = left; c <= right; c++) cells.push([top, c])
@@ -26,15 +26,15 @@ export function buildTrace({ m, n, head }) {
     for (const [r, c] of cells) {
       matrix[r][c] = k < head.length ? head[k] : -1
       k++
-      frames.push({ phase: 'fill', activeLine: L('write the next head value'), cell: [r, c], matrix: copy(matrix), message: `Write ${matrix[r][c]} at row ${r}, column ${c}.` })
+      frames.push({ phase: 'fill', activeLine: L('write the next head value'), pythonLine: 13, cell: [r, c], matrix: copy(matrix), message: `Write ${matrix[r][c]} at row ${r}, column ${c}.` })
     }
     top++
     bottom--
     left++
     right--
-    frames.push({ phase: 'ring', activeLine: L('move every boundary inward'), cell: null, matrix: copy(matrix), message: 'This ring is finished; move the boundaries inward.' })
+    frames.push({ phase: 'ring', activeLine: L('move every boundary inward'), pythonLine: 15, cell: null, matrix: copy(matrix), message: 'This ring is finished; move the boundaries inward.' })
   }
-  frames.push({ phase: 'done', activeLine: L('return the matrix'), cell: null, matrix: copy(matrix), message: 'The spiral is complete.' })
+  frames.push({ phase: 'done', activeLine: L('return the matrix'), pythonLine: 19, cell: null, matrix: copy(matrix), message: 'The spiral is complete.' })
   return { input: { m, n, head }, result: matrix, frames }
 }
 

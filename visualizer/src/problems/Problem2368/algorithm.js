@@ -22,21 +22,21 @@ export function buildTrace({ n, edges, restricted }) {
   const blocked = new Set(restricted)
   const seen = new Set([0])
   const queue = [0]
-  const frames = [{ phase: 'start', activeLine: L('set blocked to the restricted'), current: null, neighbour: null, visited: [0], frontier: [0], message: 'Start at node 0. Restricted nodes are never entered.' }]
+  const frames = [{ phase: 'start', activeLine: L('set blocked to the restricted'), pythonLine: 6, current: null, neighbour: null, visited: [0], frontier: [0], message: 'Start at node 0. Restricted nodes are never entered.' }]
   for (let head = 0; head < queue.length; head++) {
     const current = queue[head]
-    frames.push({ phase: 'visit', activeLine: L('take the next node'), current, neighbour: null, visited: [...seen], frontier: queue.slice(head + 1), message: `Explore node ${current}.` })
+    frames.push({ phase: 'visit', activeLine: L('take the next node'), pythonLine: 9, current, neighbour: null, visited: [...seen], frontier: queue.slice(head + 1), message: `Explore node ${current}.` })
     for (const neighbour of adj[current]) {
       if (blocked.has(neighbour) || seen.has(neighbour)) {
-        frames.push({ phase: 'skip', activeLine: L('skip it'), current, neighbour, visited: [...seen], frontier: queue.slice(head + 1), message: `Node ${neighbour} is ${blocked.has(neighbour) ? 'restricted' : 'already seen'}, so skip it.` })
+        frames.push({ phase: 'skip', activeLine: L('skip it'), pythonLine: 12, current, neighbour, visited: [...seen], frontier: queue.slice(head + 1), message: `Node ${neighbour} is ${blocked.has(neighbour) ? 'restricted' : 'already seen'}, so skip it.` })
         continue
       }
       seen.add(neighbour)
       queue.push(neighbour)
-      frames.push({ phase: 'reach', activeLine: L('mark neighbour as seen'), current, neighbour, visited: [...seen], frontier: queue.slice(head + 1), message: `Node ${neighbour} is reachable.` })
+      frames.push({ phase: 'reach', activeLine: L('mark neighbour as seen'), pythonLine: 13, current, neighbour, visited: [...seen], frontier: queue.slice(head + 1), message: `Node ${neighbour} is reachable.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the number of seen'), current: null, neighbour: null, visited: [...seen], frontier: [], message: `${seen.size} node(s) are reachable from node 0.` })
+  frames.push({ phase: 'done', activeLine: L('return the number of seen'), pythonLine: 15, current: null, neighbour: null, visited: [...seen], frontier: [], message: `${seen.size} node(s) are reachable from node 0.` })
   return { input: { n, edges, restricted }, result: seen.size, frames }
 }
 
