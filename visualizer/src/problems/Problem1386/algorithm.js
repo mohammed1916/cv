@@ -39,17 +39,17 @@ export function buildTrace({ n, reserved_seats }) {
   for (const [row, seat] of reserved_seats) booked.set(row, (booked.get(row) ?? 0) | (1 << seat))
   const empty = n - booked.size
   let total = 2 * empty
-  const frames = [{ phase: 'start', activeLine: L('set booked'), row: 0, mask: 0, total: 0, message: `${n} rows, ${booked.size} with reservations.` }]
-  frames.push({ phase: 'empty', activeLine: L('set total to 2 times'), row: 0, mask: 0, total, message: `${empty} row(s) with no reservations seat two families each: total ${total}.` })
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set booked'), row: 0, mask: 0, total: 0, message: `${n} rows, ${booked.size} with reservations.` }]
+  frames.push({ phase: 'empty', pythonLine: 8, activeLine: L('set total to 2 times'), row: 0, mask: 0, total, message: `${empty} row(s) with no reservations seat two families each: total ${total}.` })
   for (const [row, mask] of [...booked.entries()].sort((a, b) => a[0] - b[0])) {
     const leftFree = !(mask & LEFT_MASK)
     const rightFree = !(mask & RIGHT_MASK)
     const middleFree = !(mask & MIDDLE_MASK)
     const count = leftFree && rightFree ? 2 : (leftFree || rightFree || middleFree ? 1 : 0)
     total += count
-    frames.push({ phase: 'row', activeLine: L('find how many families fit'), row, mask, total, message: `Row ${row}: ${count} family(ies) fit; total ${total}.` })
+    frames.push({ phase: 'row', pythonLine: count === 2 ? 14 : count === 1 ? 16 : 15, activeLine: L('find how many families fit'), row, mask, total, message: `Row ${row}: ${count} family(ies) fit; total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), row: 0, mask: 0, total, message: `Maximum number of four-person families: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 17, activeLine: L('return total'), row: 0, mask: 0, total, message: `Maximum number of four-person families: ${total}.` })
   return { input: { n, reserved_seats }, n, reserved_seats, result: total, frames }
 }
 

@@ -20,18 +20,18 @@ export function buildTrace(input) {
     return value
   }
 
-  const frames = [{ phase: 'start', activeLine: L('set table to nothing'), x: null, power: null, powers: [], order: [], message: `Find the ${k}th integer from ${lo} to ${hi} when sorted by power value.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set table to nothing'), x: null, power: null, powers: [], order: [], message: `Find the ${k}th integer from ${lo} to ${hi} when sorted by power value.` }]
   const powers = []
   for (let x = lo; x <= hi; x++) {
     const power = steps(x)
     powers.push({ value: x, power })
-    frames.push({ phase: 'visit', activeLine: L('record the number of steps'), x, power, powers: powers.map(e => ({ ...e })), order: [], message: `${x} takes ${power} step${power === 1 ? '' : 's'} to reach 1.` })
+    frames.push({ phase: 'visit', pythonLine: 8, activeLine: L('record the number of steps'), x, power, powers: powers.map(e => ({ ...e })), order: [], message: `${x} takes ${power} step${power === 1 ? '' : 's'} to reach 1.` })
   }
 
   const order = powers.map(e => ({ ...e })).sort((a, b) => a.power - b.power || a.value - b.value)
-  frames.push({ phase: 'sort', activeLine: L('sort the values'), x: null, power: null, powers: [], order, message: 'Sort by power value, with ties going to the smaller integer.' })
+  frames.push({ phase: 'sort', pythonLine: 11, activeLine: L('sort the values'), x: null, power: null, powers: [], order, message: 'Sort by power value, with ties going to the smaller integer.' })
   const result = order[k - 1].value
-  frames.push({ phase: 'done', activeLine: L('return the k-th'), x: null, power: null, powers: [], order, message: `The ${k}th integer in this order is ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return the k-th'), x: null, power: null, powers: [], order, message: `The ${k}th integer in this order is ${result}.` })
   return { input, result, frames }
 }
 

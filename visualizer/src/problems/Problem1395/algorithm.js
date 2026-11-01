@@ -55,7 +55,7 @@ export function buildTrace(input) {
   const frames = [];
   let total = 0;
   const frame = (activeLine, phase, message, extra = {}) => frames.push({
-    activeLine, phase, message, rating: [...rating], total, j: null, counts: null, contribution: 0, ...extra,
+    activeLine, pythonLine: activeLine, phase, message, rating: [...rating], total, j: null, counts: null, contribution: 0, ...extra,
   });
 
   frame(2, "init", "Start with zero teams.");

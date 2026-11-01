@@ -30,7 +30,7 @@ export function buildTrace(input) {
     }
     return out
   }
-  const frames = [{ phase: 'start', activeLine: L('set values and adds to empty lists'), op: -1, stack: [], message: `Create an empty stack that holds at most ${max_size} values.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set values and adds to empty lists'), op: -1, stack: [], message: `Create an empty stack that holds at most ${max_size} values.` }]
   operations.forEach((op, idx) => {
     const [name, a, b] = op
     let returned
@@ -38,29 +38,29 @@ export function buildTrace(input) {
       if (values.length < max_size) {
         values.push(a)
         adds.push(0)
-        frames.push({ phase: 'push', activeLine: L('push the value with an add of 0'), op: idx, stack: snapshot(), message: `push(${a}) puts ${a} on top.` })
+        frames.push({ phase: 'push', pythonLine: 10, activeLine: L('push the value with an add of 0'), op: idx, stack: snapshot(), message: `push(${a}) puts ${a} on top.` })
       } else {
-        frames.push({ phase: 'push', activeLine: L('for each operation'), op: idx, stack: snapshot(), message: `The stack is full, so push(${a}) does nothing.` })
+        frames.push({ phase: 'push', pythonLine: 8, activeLine: L('for each operation'), op: idx, stack: snapshot(), message: `The stack is full, so push(${a}) does nothing.` })
       }
     } else if (name === 'pop') {
       if (values.length === 0) {
         returned = -1
-        frames.push({ phase: 'pop', activeLine: L('append -1 to results'), op: idx, stack: snapshot(), message: 'The stack is empty, so pop returns -1.' })
+        frames.push({ phase: 'pop', pythonLine: 13, activeLine: L('append -1 to results'), op: idx, stack: snapshot(), message: 'The stack is empty, so pop returns -1.' })
       } else {
         const extra = adds.pop()
         if (adds.length) adds[adds.length - 1] += extra
         returned = values.pop() + extra
-        frames.push({ phase: 'pop', activeLine: L('pass its add down'), op: idx, stack: snapshot(), message: `pop returns ${returned}, including its pending increments.` })
+        frames.push({ phase: 'pop', pythonLine: 18, activeLine: L('pass its add down'), op: idx, stack: snapshot(), message: `pop returns ${returned}, including its pending increments.` })
       }
     } else {
       const m = Math.min(a, values.length)
       if (m > 0) adds[m - 1] += b
-      frames.push({ phase: 'increment', activeLine: L('add val to the add'), op: idx, stack: snapshot(), message: m > 0 ? `Add ${b} to the bottom ${m} value(s).` : 'The stack is empty, so nothing changes.' })
+      frames.push({ phase: 'increment', pythonLine: m > 0 ? 22 : 21, activeLine: L('add val to the add'), op: idx, stack: snapshot(), message: m > 0 ? `Add ${b} to the bottom ${m} value(s).` : 'The stack is empty, so nothing changes.' })
     }
     if (name === 'pop') results.push(returned)
     ops.push({ name, args: op.slice(1), returned })
   })
-  frames.push({ phase: 'done', activeLine: L('return results'), op: operations.length, stack: snapshot(), message: `Pop results: ${results.join(', ') || 'none'}.` })
+  frames.push({ phase: 'done', pythonLine: 23, activeLine: L('return results'), op: operations.length, stack: snapshot(), message: `Pop results: ${results.join(', ') || 'none'}.` })
   return { input, result: results, ops, frames }
 }
 

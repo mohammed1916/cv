@@ -18,12 +18,12 @@ export function parseInput(text) {
 export function buildTrace({ root, target }) {
   const original = treeFromLevelOrder(root)
   const clone = treeFromLevelOrder(root)
-  const frames = [{ phase: 'start', activeLine: L('set the answer to the path'), active: null, path: '', message: `Search the original tree for ${target}, recording the path of left and right turns.` }]
+  const frames = [{ phase: 'start', pythonLine: 35, activeLine: L('set the answer to the path'), active: null, path: '', message: `Search the original tree for ${target}, recording the path of left and right turns.` }]
   const search = (node, path) => {
     if (!node) return null
-    frames.push({ phase: 'visit', activeLine: L('if this node has the target value'), active: node.id, path, message: `Visit ${node.value} at path ${path || 'root'}.` })
+    frames.push({ phase: 'visit', pythonLine: 28, activeLine: L('if this node has the target value'), active: node.id, path, message: `Visit ${node.value} at path ${path || 'root'}.` })
     if (node.value === target) {
-      frames.push({ phase: 'found', activeLine: L('return path'), active: node.id, path, message: `Found ${target} at path ${path || 'root'}. The clone has the same path.` })
+      frames.push({ phase: 'found', pythonLine: 29, activeLine: L('return path'), active: node.id, path, message: `Found ${target} at path ${path || 'root'}. The clone has the same path.` })
       return path
     }
     const left = search(node.left, path + 'L')
@@ -36,7 +36,7 @@ export function buildTrace({ root, target }) {
     for (const turn of result) cur = turn === 'L' ? cur.left : cur.right
     return cur
   })()
-  frames.push({ phase: 'done', activeLine: L('return the answer'), active: cloneNode.id, path: result, message: `Corresponding node in the clone: value ${cloneNode.value}, path ${result || 'root'}.` })
+  frames.push({ phase: 'done', pythonLine: 35, activeLine: L('return the answer'), active: cloneNode.id, path: result, message: `Corresponding node in the clone: value ${cloneNode.value}, path ${result || 'root'}.` })
   return { input: { root, target }, display: original, result, frames }
 }
 

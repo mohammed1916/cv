@@ -9,7 +9,8 @@ export function buildTrace(s) {
   const n = s.length
   const pi = Array(n).fill(0)
   const frames = []
-  const snap = (phase, line, i, k, message) => frames.push({ phase, activeLine: L(line), i, k, pi: [...pi], message })
+  const PY_LINE = { 'make an array pi': 3, 'set k to 0': 4, 'for i from 1': 5, 'while k is above 0': 6, 'set k to pi[k - 1]': 7, 'if s[i] equals s[k]': 8, 'add 1 to k': 9, 'set pi[i] to k': 10, 'return the first': 11 }
+  const snap = (phase, line, i, k, message) => frames.push({ phase, pythonLine: PY_LINE[line], activeLine: L(line), i, k, pi: [...pi], message })
   snap('start', 'make an array pi', -1, 0, `The prefix function pi[i] is the length of the longest proper prefix of s[0..i] that is also a suffix.`)
   let k = 0
   snap('start', 'set k to 0', -1, k, 'No border has been found yet, so the matched length k starts at 0.')
@@ -30,7 +31,7 @@ export function buildTrace(s) {
     snap('record', 'set pi[i] to k', i, k, `pi[${i}] = ${k}.`)
   }
   const result = s.slice(0, pi[n - 1])
-  frames.push({ phase: 'done', activeLine: L('return the first'), i: n, k: pi[n - 1], pi: [...pi], message: result ? `The longest happy prefix is "${result}".` : 'No proper prefix is also a suffix, so the answer is the empty string.' })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the first'), i: n, k: pi[n - 1], pi: [...pi], message: result ? `The longest happy prefix is "${result}".` : 'No proper prefix is also a suffix, so the answer is the empty string.' })
   return { input: s, result, frames }
 }
 

@@ -10,7 +10,7 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   let total = 0
   const qualifies = []
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, total, qualifies: [], message: 'Check each number for exactly four divisors.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set total to 0'), index: -1, total, qualifies: [], message: 'Check each number for exactly four divisors.' }]
   nums.forEach((value, index) => {
     const divisors = []
     for (let d = 1; d * d <= value; d++) {
@@ -24,9 +24,9 @@ export function buildTrace({ nums }) {
       total += divisors.reduce((acc, d) => acc + d, 0)
       qualifies.push(index)
     }
-    frames.push({ phase: 'number', activeLine: L('if exactly four'), index, total, qualifies: qualifies.slice(), message: `${value} has ${divisors.length} divisors${ok ? ', so its divisor sum is added.' : ', so it is skipped.'}` })
+    frames.push({ phase: 'number', pythonLine: ok ? 13 : 12, activeLine: L('if exactly four'), index, total, qualifies: qualifies.slice(), message: `${value} has ${divisors.length} divisors${ok ? ', so its divisor sum is added.' : ', so it is skipped.'}` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, total, qualifies: qualifies.slice(), message: `The total is ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 14, activeLine: L('return total'), index: -1, total, qualifies: qualifies.slice(), message: `The total is ${total}.` })
   return { input: { nums }, result: total, qualifies, frames }
 }
 

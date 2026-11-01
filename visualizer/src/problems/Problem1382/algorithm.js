@@ -30,21 +30,21 @@ function levelOrder(root) {
 export function buildTrace({ root }) {
   const tree = treeFromLevelOrder(root)
   const values = []
-  const frames = [{ phase: 'start', activeLine: L('set values to the inorder'), low: 0, high: -1, mid: -1, values: [], message: 'Read the values in order. A sorted list can be split at its middle to form a balanced tree.' }]
+  const frames = [{ phase: 'start', pythonLine: 41, activeLine: L('set values to the inorder'), low: 0, high: -1, mid: -1, values: [], message: 'Read the values in order. A sorted list can be split at its middle to form a balanced tree.' }]
   const visit = node => { if (!node) return; visit(node.left); values.push(node.value); visit(node.right) }
   visit(tree)
-  frames.push({ phase: 'collect', activeLine: L('set balanced to build'), low: 0, high: values.length - 1, mid: -1, values: [...values], message: `Sorted values: ${values.join(', ')}.` })
+  frames.push({ phase: 'collect', pythonLine: 48, activeLine: L('set balanced to build'), low: 0, high: values.length - 1, mid: -1, values: [...values], message: `Sorted values: ${values.join(', ')}.` })
   const build = (low, high) => {
     if (low > high) return null
     const mid = (low + high) >> 1
-    frames.push({ phase: 'pick', activeLine: L('set mid to the middle index'), low, high, mid, values: [...values], message: `Range ${low} to ${high} uses ${values[mid]} as its root.` })
+    frames.push({ phase: 'pick', pythonLine: 52, activeLine: L('set mid to the middle index'), low, high, mid, values: [...values], message: `Range ${low} to ${high} uses ${values[mid]} as its root.` })
     const node = { value: values[mid], left: null, right: null }
     node.left = build(low, mid - 1)
     node.right = build(mid + 1, high)
     return node
   }
   const result = levelOrder(build(0, values.length - 1))
-  frames.push({ phase: 'done', activeLine: L('return the level order'), low: 0, high: values.length - 1, mid: -1, values: [...values], message: `Balanced tree in level order: ${result.map(v => v === null ? 'null' : v).join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 57, activeLine: L('return the level order'), low: 0, high: values.length - 1, mid: -1, values: [...values], message: `Balanced tree in level order: ${result.map(v => v === null ? 'null' : v).join(', ')}.` })
   return { input: { root }, root: tree, values, result, frames }
 }
 

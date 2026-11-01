@@ -46,14 +46,14 @@ export function buildTrace(data) {
     { name: 'open', keyLabel: 'customer', valueLabel: 'check-in', isSet: false, entries: [...open].map(([id, info]) => [id, `${info.station} at ${info.time}`]) },
     { name: 'routes', keyLabel: 'route', valueLabel: 'total / trips', isSet: false, entries: [...totals].map(([key, t]) => [key, `${t.sum} / ${t.count}`]) },
   ]
-  frames.push({ phase: 'start', activeLine: L('underground system keeps'), maps: maps(), ops: [], result: null, message: 'Both tables start empty. Check-ins wait in the open table; finished trips feed the route totals.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('underground system keeps'), maps: maps(), ops: [], result: null, message: 'Both tables start empty. Check-ins wait in the open table; finished trips feed the route totals.' })
   data.operations.forEach(op => {
     const [name, ...args] = op
     if (name === 'checkIn') {
       const [id, station, time] = args
       open.set(id, { station, time })
       results.push(null)
-      frames.push({ phase: 'checkin', activeLine: L('record the station'), maps: maps(),
+      frames.push({ phase: 'checkin', pythonLine: 10, activeLine: L('record the station'), maps: maps(),
         ops: [{ map: 'open', type: 'insert', key: id, value: `${station} at ${time}` }], result: null,
         message: `Customer ${id} checks in at ${station} at time ${time}. The open table holds ${open.size} trip(s).` })
     } else if (name === 'checkOut') {
@@ -67,7 +67,7 @@ export function buildTrace(data) {
       t.count += 1
       totals.set(key, t)
       results.push(null)
-      frames.push({ phase: 'checkout', activeLine: L('add t minus'), maps: maps(),
+      frames.push({ phase: 'checkout', pythonLine: 16, activeLine: L('add t minus'), maps: maps(),
         ops: [
           { map: 'open', type: 'delete', key: id, existed: true, before: `${start.station} at ${start.time}` },
           { map: 'routes', type: before === undefined ? 'insert' : 'update', key, value: `${t.sum} / ${t.count}`, before },
@@ -78,13 +78,13 @@ export function buildTrace(data) {
       const t = totals.get(route(start, end))
       const average = t.sum / t.count
       results.push(average)
-      frames.push({ phase: 'query', activeLine: L('divide the total'), maps: maps(),
+      frames.push({ phase: 'query', pythonLine: 22, activeLine: L('divide the total'), maps: maps(),
         ops: [{ map: 'routes', type: 'lookup', key: route(start, end), hit: true, via: 'get', value: `${t.sum} / ${t.count}`,
           hitNote: 'the route total and trip count are already stored, so the average is one division', missNote: 'no trip finished on this route' }],
         result: average, message: `Average from ${start} to ${end}: ${t.sum} / ${t.count} = ${average}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the quotient'), maps: maps(), ops: [], result: results.at(-1) ?? null, message: 'All operations are answered in order.' })
+  frames.push({ phase: 'done', pythonLine: 23, activeLine: L('return the quotient'), maps: maps(), ops: [], result: results.at(-1) ?? null, message: 'All operations are answered in order.' })
   return { input: data, result: results, frames }
 }
 

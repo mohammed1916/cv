@@ -15,7 +15,7 @@ export function buildTrace({ n, speed, efficiency, k }) {
   const team = []
   let total = 0
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), current: -1, team: [], removed: -1, total, best, message: 'Engineers are visited from the highest efficiency down.' }]
+  const frames = [{ phase: 'start', pythonLine: 8, activeLine: L('set best to 0'), current: -1, team: [], removed: -1, total, best, message: 'Engineers are visited from the highest efficiency down.' }]
   for (const i of order) {
     team.push(i)
     total += speed[i]
@@ -28,10 +28,10 @@ export function buildTrace({ n, speed, efficiency, k }) {
       team.splice(at, 1)
     }
     best = Math.max(best, total * efficiency[i])
-    frames.push({ phase: 'consider', activeLine: L('add the engineer'), current: i, team: [...team], removed, total, best, message: `Engineer ${i} (efficiency ${efficiency[i]}) joins. Team speed sum ${total}, best ${best}.` })
+    frames.push({ phase: 'consider', pythonLine: removed !== -1 ? 13 : 10, activeLine: L('add the engineer'), current: i, team: [...team], removed, total, best, message: `Engineer ${i} (efficiency ${efficiency[i]}) joins. Team speed sum ${total}, best ${best}.` })
   }
   const result = best % MOD
-  frames.push({ phase: 'done', activeLine: L('return best modulo'), current: -1, team: [...team], removed: -1, total, best, message: `Maximum performance: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return best modulo'), current: -1, team: [...team], removed: -1, total, best, message: `Maximum performance: ${result}.` })
   return { input: { n, speed, efficiency, k }, result, frames }
 }
 
