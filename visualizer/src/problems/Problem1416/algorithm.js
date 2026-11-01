@@ -14,19 +14,19 @@ export function buildTrace(input) {
   const n = s.length
   const ways = Array(n + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), end: 0, start: -1, ways: [...ways], total: null, message: 'The empty prefix can be split in one way.' }]
+  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), pythonLine: 5, end: 0, start: -1, ways: [...ways], total: null, message: 'The empty prefix can be split in one way.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
       if (s[j] === '0') continue
       const value = Number(s.slice(j, i))
       if (value <= k) {
         ways[i] = (ways[i] + ways[j]) % MOD
-        frames.push({ phase: 'piece', activeLine: L('if the number from j to i'), end: i, start: j, ways: [...ways], total: null, message: `Piece ${s.slice(j, i)} is at most ${k}, so ways up to ${j} add to ways up to ${i}.` })
+        frames.push({ phase: 'piece', activeLine: L('if the number from j to i'), pythonLine: 11, end: i, start: j, ways: [...ways], total: null, message: `Piece ${s.slice(j, i)} is at most ${k}, so ways up to ${j} add to ways up to ${i}.` })
       }
     }
   }
   const result = ways[n]
-  frames.push({ phase: 'done', activeLine: L('return ways[n]'), end: n, start: -1, ways: [...ways], total: result, message: `${result} ways to restore the array.` })
+  frames.push({ phase: 'done', activeLine: L('return ways[n]'), pythonLine: 12, end: n, start: -1, ways: [...ways], total: result, message: `${result} ways to restore the array.` })
   return { input, result, frames }
 }
 

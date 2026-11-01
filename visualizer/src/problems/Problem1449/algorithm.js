@@ -14,16 +14,16 @@ export function buildTrace(input) {
   const NONE = -1
   const length = Array(target + 1).fill(NONE)
   length[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set length[0]'), total: 0, rem: null, digit: null, length: length.slice(), digits: '', message: 'length[t] is the most digits that cost exactly t, or -1 if no digits do.' }]
+  const frames = [{ phase: 'start', activeLine: L('set length[0]'), pythonLine: 4, total: 0, rem: null, digit: null, length: length.slice(), digits: '', message: 'length[t] is the most digits that cost exactly t, or -1 if no digits do.' }]
   for (let t = 1; t <= target; t++) {
     for (let d = 1; d <= 9; d++) {
       const c = cost[d - 1]
       if (c <= t && length[t - c] !== NONE) length[t] = Math.max(length[t], length[t - c] + 1)
     }
-    frames.push({ phase: 'fill', activeLine: L('for each total t'), total: t, rem: null, digit: null, length: length.slice(), digits: '', message: length[t] === NONE ? `Cost ${t} cannot be made exactly.` : `Cost ${t} can be made with up to ${length[t]} digits.` })
+    frames.push({ phase: 'fill', activeLine: L('for each total t'), pythonLine: length[t] === NONE ? 8 : 9, total: t, rem: null, digit: null, length: length.slice(), digits: '', message: length[t] === NONE ? `Cost ${t} cannot be made exactly.` : `Cost ${t} can be made with up to ${length[t]} digits.` })
   }
   if (length[target] === NONE) {
-    frames.push({ phase: 'done', activeLine: L('if length[target] is unreachable'), total: target, rem: null, digit: null, length: length.slice(), digits: '0', message: 'The target cannot be paid exactly, so the answer is "0".' })
+    frames.push({ phase: 'done', activeLine: L('if length[target] is unreachable'), pythonLine: 11, total: target, rem: null, digit: null, length: length.slice(), digits: '0', message: 'The target cannot be paid exactly, so the answer is "0".' })
     return { input, result: '0', frames }
   }
   let rem = target
@@ -34,12 +34,12 @@ export function buildTrace(input) {
       if (c <= rem && length[rem - c] !== NONE && length[rem - c] === length[rem] - 1) {
         digits += String(d)
         rem -= c
-        frames.push({ phase: 'build', activeLine: L('pick the largest digit'), total: target, rem, digit: d, length: length.slice(), digits, message: `Choose digit ${d} (cost ${c}); ${rem} remains.` })
+        frames.push({ phase: 'build', activeLine: L('pick the largest digit'), pythonLine: 18, total: target, rem, digit: d, length: length.slice(), digits, message: `Choose digit ${d} (cost ${c}); ${rem} remains.` })
         break
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the digits'), total: target, rem: 0, digit: null, length: length.slice(), digits, message: `Largest integer: ${digits}.` })
+  frames.push({ phase: 'done', activeLine: L('return the digits'), pythonLine: 21, total: target, rem: 0, digit: null, length: length.slice(), digits, message: `Largest integer: ${digits}.` })
   return { input, result: digits, frames }
 }
 

@@ -34,7 +34,7 @@ export function buildTrace({ hats }) {
   }))
   let ways = Array(1 << n).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', hat: null, dp: [...ways], activeLine: L('set ways[mask] to 1'), message: 'No one has a hat yet. The empty set of people has exactly one assignment.' }]
+  const frames = [{ phase: 'start', hat: null, dp: [...ways], activeLine: L('set ways[mask] to 1'), pythonLine: 9, message: 'No one has a hat yet. The empty set of people has exactly one assignment.' }]
   const hatsInUse = [...likes.keys()].sort((a, b) => a - b)
   for (const hat of hatsInUse) {
     const people = likes.get(hat)
@@ -48,10 +48,10 @@ export function buildTrace({ hats }) {
       }
     }
     ways = next
-    frames.push({ phase: 'hat', hat, dp: [...ways], activeLine: L('add ways[mask] to next'), message: `Hat ${hat}: people ${people.map(p => p + 1).join(', ')} may take it. Assignments now cover more people.` })
+    frames.push({ phase: 'hat', hat, dp: [...ways], activeLine: L('add ways[mask] to next'), pythonLine: 19, message: `Hat ${hat}: people ${people.map(p => p + 1).join(', ')} may take it. Assignments now cover more people.` })
   }
   const result = ways[full]
-  frames.push({ phase: 'done', hat: null, dp: [...ways], activeLine: L('return ways[everyone]'), result, message: `Ways for everyone to wear a different hat: ${result}.` })
+  frames.push({ phase: 'done', hat: null, dp: [...ways], activeLine: L('return ways[everyone]'), pythonLine: 20, result, message: `Ways for everyone to wear a different hat: ${result}.` })
   return { input: { hats }, result, frames }
 }
 

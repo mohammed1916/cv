@@ -24,26 +24,26 @@ export function buildTrace(input) {
   let total = 0
   const finished = []
   const needs = {}
-  const frame = (phase, line, node, message) => frames.push({ phase, activeLine: line, node, total, finished: [...finished], needs: { ...needs }, message })
-  frame('start', L('set total time to 0'), null, 'Start at vertex 0 with no time spent.')
+  const frame = (phase, line, node, message, pythonLine) => frames.push({ phase, activeLine: line, pythonLine, node, total, finished: [...finished], needs: { ...needs }, message })
+  frame('start', L('set total time to 0'), null, 'Start at vertex 0 with no time spent.', 6)
   const walk = (node, parentNode) => {
     let needed = apples[node]
-    frame('enter', L('set needed to whether'), node, `Enter vertex ${node}. It ${apples[node] ? 'has' : 'has no'} an apple.`)
+    frame('enter', L('set needed to whether'), node, `Enter vertex ${node}. It ${apples[node] ? 'has' : 'has no'} an apple.`, 10)
     for (const next of adj[node]) {
       if (next === parentNode) continue
       if (walk(next, node)) {
         total += 2
         needed = true
         needs[next] = true
-        frame('trip', L('add 2 to total time'), next, `The subtree under ${next} needs a visit, so the edge back to ${node} costs 2 seconds.`)
+        frame('trip', L('add 2 to total time'), next, `The subtree under ${next} needs a visit, so the edge back to ${node} costs 2 seconds.`, 15)
       }
     }
     finished.push(node)
-    frame('return', L('return needed'), node, `Vertex ${node} ${needed ? 'must be visited' : 'can be skipped'}.`)
+    frame('return', L('return needed'), node, `Vertex ${node} ${needed ? 'must be visited' : 'can be skipped'}.`, 17)
     return needed
   }
   walk(0, -1)
-  frame('done', L('return total time'), null, `All apples are collected in ${total} seconds.`)
+  frame('done', L('return total time'), null, `All apples are collected in ${total} seconds.`, 20)
   return { input, result: total, frames }
 }
 

@@ -16,7 +16,7 @@ export function buildTrace(input) {
   const { n, m, k } = input
   let prev = emptyTable(m + 1, k + 1)
   prev[0][0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0][0]'), length: 0, row: -1, column: -1, table: copyTable(prev), total: null, message: 'Start with the empty array: one way, with largest value 0 and cost 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('set ways[0][0]'), pythonLine: 4, length: 0, row: -1, column: -1, table: copyTable(prev), total: null, message: 'Start with the empty array: one way, with largest value 0 and cost 0.' }]
   for (let length = 1; length <= n; length++) {
     const cur = emptyTable(m + 1, k + 1)
     for (let j = 1; j <= m; j++) {
@@ -24,7 +24,7 @@ export function buildTrace(input) {
         let ways = j * prev[j][c]
         if (c >= 1) for (let t = 0; t < j; t++) ways += prev[t][c - 1]
         cur[j][c] = ways % MOD
-        frames.push({ phase: 'cell', activeLine: L('set ways to j times'), length, row: j, column: c, table: copyTable(cur), total: null, message: `Length ${length}, largest value ${j}, cost ${c}: ${cur[j][c]} arrays.` })
+        frames.push({ phase: 'cell', activeLine: L('set ways to j times'), pythonLine: 12, length, row: j, column: c, table: copyTable(cur), total: null, message: `Length ${length}, largest value ${j}, cost ${c}: ${cur[j][c]} arrays.` })
       }
     }
     prev = cur
@@ -32,7 +32,7 @@ export function buildTrace(input) {
   let total = 0
   for (let j = 1; j <= m; j++) total += prev[j][k]
   total %= MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum'), length: n, row: -1, column: -1, table: copyTable(prev), total, message: `${total} arrays of length ${n} have exactly ${k} search costs.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: 14, length: n, row: -1, column: -1, table: copyTable(prev), total, message: `${total} arrays of length ${n} have exactly ${k} search costs.` })
   return { input, result: total, frames }
 }
 

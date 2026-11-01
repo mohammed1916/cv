@@ -18,15 +18,15 @@ export function buildTrace(text) {
   }
   const hashAt = (i, len) => (pref[i + len] - ((pref[i] * pw[len]) % MOD) + MOD) % MOD
   const seen = new Set()
-  const frames = [{ phase: 'start', activeLine: L('build prefix'), len: 0, start: -1, count: 0, message: 'Start with no echoes found.' }]
+  const frames = [{ phase: 'start', activeLine: L('build prefix'), pythonLine: 14, len: 0, start: -1, count: 0, message: 'Start with no echoes found.' }]
   for (let len = 1; len <= Math.floor(n / 2); len++) {
     for (let i = 0; i + 2 * len <= n; i++) {
       const sameHash = hashAt(i, len) === hashAt(i + len, len)
       if (sameHash && text.slice(i, i + len) === text.slice(i + len, i + 2 * len)) seen.add(text.slice(i, i + len))
     }
-    frames.push({ phase: 'length', activeLine: L('for each length'), len, start: -1, count: seen.size, message: `Half-length ${len}: ${seen.size} distinct echoes so far.` })
+    frames.push({ phase: 'length', activeLine: L('for each length'), pythonLine: 15, len, start: -1, count: seen.size, message: `Half-length ${len}: ${seen.size} distinct echoes so far.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the number'), len: Math.floor(n / 2), start: -1, count: seen.size, message: `Distinct echo substrings: ${seen.size}.` })
+  frames.push({ phase: 'done', activeLine: L('return the number'), pythonLine: 19, len: Math.floor(n / 2), start: -1, count: seen.size, message: `Distinct echo substrings: ${seen.size}.` })
   return { input: text, result: seen.size, frames }
 }
 

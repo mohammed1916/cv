@@ -19,7 +19,7 @@ export function parseInput(text) {
 
 export function buildTrace({ mat, k }) {
   let sums = [0]
-  const frames = [{ phase: 'start', row: null, popped: [], heap: null, activeLine: L('set sums to [0]'), message: 'Start with the empty choice, sum 0.' }]
+  const frames = [{ phase: 'start', row: null, popped: [], heap: null, activeLine: L('set sums to [0]'), pythonLine: 4, message: 'Start with the empty choice, sum 0.' }]
   mat.forEach((row, r) => {
     const heap = new TracedHeap((a, b) => a[0] - b[0], { order: 'min', format: v => v[0] })
     sums.forEach((s, i) => heap.push([s + row[0], i, 0]))
@@ -28,12 +28,12 @@ export function buildTrace({ mat, k }) {
       const [value, i, j] = heap.pop()
       next.push(value)
       if (j + 1 < row.length) heap.push([sums[i] + row[j + 1], i, j + 1])
-      frames.push({ phase: 'pop', row: r, popped: next.slice(), heap: heapView(heap, { title: `Heap while merging row ${r}` }).heap ?? null, activeLine: L('pop the smallest entry'), message: `Row ${r}: sum ${value} is the ${next.length}-th smallest so far.` })
+      frames.push({ phase: 'pop', row: r, popped: next.slice(), heap: heapView(heap, { title: `Heap while merging row ${r}` }).heap ?? null, activeLine: L('pop the smallest entry'), pythonLine: 11, message: `Row ${r}: sum ${value} is the ${next.length}-th smallest so far.` })
     }
     sums = next
   })
   const result = sums[k - 1]
-  frames.push({ phase: 'done', row: null, popped: sums.slice(), heap: null, activeLine: L('return sums[k - 1]'), message: `The ${k}-th smallest sum is ${result}.` })
+  frames.push({ phase: 'done', row: null, popped: sums.slice(), heap: null, activeLine: L('return sums[k - 1]'), pythonLine: 15, message: `The ${k}-th smallest sum is ${result}.` })
   return { input: { mat, k }, result, frames }
 }
 

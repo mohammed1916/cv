@@ -29,7 +29,7 @@ export function buildTrace(input) {
   }
   const letters = 'abcdefghijklmnopqrstuvwxyz'
   let ways = new Map([['0|1|1', 1]])
-  const frames = [{ phase: 'start', activeLine: L('build the KMP failure'), position: null, states: ways.size, total: null, message: `Track how much of "${evil}" is matched, and whether the prefix still equals s1 or s2.` }]
+  const frames = [{ phase: 'start', activeLine: L('build the KMP failure'), pythonLine: 20, position: null, states: ways.size, total: null, message: `Track how much of "${evil}" is matched, and whether the prefix still equals s1 or s2.` }]
   for (let i = 0; i < n; i++) {
     const next = new Map()
     for (const [key, count] of ways) {
@@ -44,11 +44,11 @@ export function buildTrace(input) {
       }
     }
     ways = next
-    frames.push({ phase: 'position', activeLine: L('for each position i'), position: i, states: ways.size, total: null, message: `After position ${i + 1}: ${ways.size} live states.` })
+    frames.push({ phase: 'position', activeLine: L('for each position i'), pythonLine: 34, position: i, states: ways.size, total: null, message: `After position ${i + 1}: ${ways.size} live states.` })
   }
   let total = 0
   for (const count of ways.values()) total = (total + count) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum'), position: null, states: ways.size, total, message: `Good strings: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: 35, position: null, states: ways.size, total, message: `Good strings: ${total}.` })
   return { input, result: total, frames }
 }
 

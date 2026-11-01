@@ -13,22 +13,22 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const root = treeFromLevelOrder(input.values)
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), node: null, best: null, count, message: 'Start at the root with nothing above it.' }]
+  const frames = [{ phase: 'start', activeLine: L('set count to 0'), pythonLine: 16, node: null, best: null, count, message: 'Start at the root with nothing above it.' }]
   const visit = (node, best) => {
     if (!node) return
     const good = node.value >= best
     if (good) {
       count++
-      frames.push({ phase: 'good', activeLine: L('increase count by one'), node: node.id, best, count, message: `Node ${node.value} is at least the largest ${best} above it, so it is good.` })
+      frames.push({ phase: 'good', activeLine: L('increase count by one'), pythonLine: 21, node: node.id, best, count, message: `Node ${node.value} is at least the largest ${best} above it, so it is good.` })
     } else {
-      frames.push({ phase: 'visit', activeLine: L('if the value of node is at least best'), node: node.id, best, count, message: `Node ${node.value} is below ${best}; it is not good.` })
+      frames.push({ phase: 'visit', activeLine: L('if the value of node is at least best'), pythonLine: 20, node: node.id, best, count, message: `Node ${node.value} is below ${best}; it is not good.` })
     }
     const nextBest = Math.max(best, node.value)
     visit(node.left, nextBest)
     visit(node.right, nextBest)
   }
   visit(root, -Infinity)
-  frames.push({ phase: 'done', activeLine: L('return count'), node: null, best: null, count, message: `${count} good nodes.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 27, node: null, best: null, count, message: `${count} good nodes.` })
   return { input, result: count, root, frames }
 }
 
