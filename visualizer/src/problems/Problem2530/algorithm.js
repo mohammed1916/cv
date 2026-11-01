@@ -10,16 +10,16 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const values = [...nums]
   let score = 0
-  const frames = [{ phase: 'start', activeLine: L('set score to 0'), values: [...values], picked: -1, score, message: 'Every number starts in the heap. Each operation takes the largest one.' }]
+  const frames = [{ phase: 'start', activeLine: L('set score to 0'), pythonLine: 6, values: [...values], picked: -1, score, message: 'Every number starts in the heap. Each operation takes the largest one.' }]
   for (let round = 0; round < k; round++) {
     let at = 0
     for (let i = 1; i < values.length; i++) if (values[i] > values[at]) at = i
     const x = values[at]
     score += x
     values[at] = Math.ceil(x / 3)
-    frames.push({ phase: 'take', activeLine: L('take the largest'), values: [...values], picked: at, score, message: `Take ${x}, score ${score}, and put back ${values[at]}.` })
+    frames.push({ phase: 'take', activeLine: L('take the largest'), pythonLine: 10, values: [...values], picked: at, score, message: `Take ${x}, score ${score}, and put back ${values[at]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return score'), values: [...values], picked: -1, score, message: `Maximal score: ${score}.` })
+  frames.push({ phase: 'done', activeLine: L('return score'), pythonLine: 11, values: [...values], picked: -1, score, message: `Maximal score: ${score}.` })
   return { input: { nums, k }, result: score, frames }
 }
 

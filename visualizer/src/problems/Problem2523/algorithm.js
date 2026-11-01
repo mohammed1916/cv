@@ -28,19 +28,19 @@ export function buildTrace({ left, right }) {
   let best = Infinity
   let answer = [-1, -1]
   let previous = null
-  const frames = [{ phase: 'start', activeLine: L('let best be unset'), index: -1, answer: [...answer], message: `Look for the closest primes between ${left} and ${right}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let best be unset'), pythonLine: 12, index: -1, answer: [...answer], message: `Look for the closest primes between ${left} and ${right}.` }]
   for (let x = left; x <= right; x++) {
     if (!isPrime(x)) continue
     if (previous !== null && x - previous < best) {
       best = x - previous
       answer = [previous, x]
-      frames.push({ phase: 'record', activeLine: L('if previous is set'), index: x - left, answer: [...answer], message: `Gap ${best} between ${previous} and ${x} is the new best.` })
+      frames.push({ phase: 'record', activeLine: L('if previous is set'), pythonLine: 19, index: x - left, answer: [...answer], message: `Gap ${best} between ${previous} and ${x} is the new best.` })
     } else {
-      frames.push({ phase: 'prime', activeLine: L('if x is not prime'), index: x - left, answer: [...answer], message: `${x} is prime; the best gap is still ${best === Infinity ? 'unset' : best}.` })
+      frames.push({ phase: 'prime', activeLine: L('if x is not prime'), pythonLine: 16, index: x - left, answer: [...answer], message: `${x} is prime; the best gap is still ${best === Infinity ? 'unset' : best}.` })
     }
     previous = x
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer'), index: -1, answer: [...answer], message: `Answer: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: 22, index: -1, answer: [...answer], message: `Answer: [${answer.join(', ')}].` })
   return { input: { left, right }, result: answer, frames }
 }
 

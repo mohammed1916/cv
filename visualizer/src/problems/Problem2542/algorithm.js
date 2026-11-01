@@ -18,8 +18,8 @@ export function buildTrace(input) {
   let total = 0
   let best = 0
   let current = -1
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, current, order: [...order], heap: [...heap], total, best, message,
+  const snap = (phase, activeLine, pythonLine, message) => frames.push({
+    phase, activeLine, pythonLine, current, order: [...order], heap: [...heap], total, best, message,
   })
   const push = value => {
     heap.push(value)
@@ -46,26 +46,26 @@ export function buildTrace(input) {
     return top
   }
 
-  snap('start', L('pair each nums1 value'), 'Pairs are sorted by nums2, largest first.')
+  snap('start', L('pair each nums1 value'), 7, 'Pairs are sorted by nums2, largest first.')
   for (let pos = 0; pos < order.length; pos++) {
     current = pos
     const a = nums1[order[pos]]
     const b = nums2[order[pos]]
     push(a)
     total += a
-    snap('add', L('add a to the heap'), `Add ${a} from pair (${a}, ${b}) to the heap and the total.`)
+    snap('add', L('add a to the heap'), 10, `Add ${a} from pair (${a}, ${b}) to the heap and the total.`)
     if (heap.length > k) {
       const removed = pop()
       total -= removed
-      snap('drop', L('remove its smallest'), `The heap holds more than ${k}, so ${removed} leaves the total.`)
+      snap('drop', L('remove its smallest'), 12, `The heap holds more than ${k}, so ${removed} leaves the total.`)
     }
     if (heap.length === k) {
       best = Math.max(best, total * b)
-      snap('score', L('compare total times b'), `Score ${total} times ${b} is ${total * b}. Best is ${best}.`)
+      snap('score', L('compare total times b'), 14, `Score ${total} times ${b} is ${total * b}. Best is ${best}.`)
     }
   }
   current = -1
-  snap('done', L('return the best score'), `Maximum score: ${best}.`)
+  snap('done', L('return the best score'), 15, `Maximum score: ${best}.`)
   return { input, result: best, frames }
 }
 

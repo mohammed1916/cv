@@ -15,27 +15,27 @@ export function buildTrace({ word1, word2 }) {
   const c1 = countLetters(word1), c2 = countLetters(word2)
   const d1 = c1.size, d2 = c2.size
   const base = { c1: [...c1], c2: [...c2], d1, d2 }
-  const frames = [{ phase: 'count', activeLine: L('count the letters of word1'), ...base, pair: null, n1: d1, n2: d2, message: `word1 has ${d1} distinct letter(s) and word2 has ${d2}.` }]
+  const frames = [{ phase: 'count', activeLine: L('count the letters of word1'), pythonLine: 8, ...base, pair: null, n1: d1, n2: d2, message: `word1 has ${d1} distinct letter(s) and word2 has ${d2}.` }]
   for (const a of c1.keys()) {
     for (const b of c2.keys()) {
       if (a === b) {
-        frames.push({ phase: 'try', activeLine: L('if a and b are the same'), ...base, pair: [a, b], n1: d1, n2: d2, message: `Swapping ${a} with ${b} changes nothing, so the counts stay ${d1} and ${d2}.` })
+        frames.push({ phase: 'try', activeLine: L('if a and b are the same'), pythonLine: 11, ...base, pair: [a, b], n1: d1, n2: d2, message: `Swapping ${a} with ${b} changes nothing, so the counts stay ${d1} and ${d2}.` })
         if (d1 === d2) {
-          frames.push({ phase: 'found', activeLine: L('return true if d1'), ...base, pair: [a, b], n1: d1, n2: d2, result: true, message: 'The counts already match, so one swap keeps them equal.' })
+          frames.push({ phase: 'found', activeLine: L('return true if d1'), pythonLine: 13, ...base, pair: [a, b], n1: d1, n2: d2, result: true, message: 'The counts already match, so one swap keeps them equal.' })
           return { input: { word1, word2 }, result: true, frames }
         }
         continue
       }
       const n1 = d1 - (c1.get(a) === 1 ? 1 : 0) + (c1.has(b) ? 0 : 1)
       const n2 = d2 - (c2.get(b) === 1 ? 1 : 0) + (c2.has(a) ? 0 : 1)
-      frames.push({ phase: 'try', activeLine: L('work out the new distinct'), ...base, pair: [a, b], n1, n2, message: `Swap ${a} from word1 with ${b} from word2: counts become ${n1} and ${n2}.` })
+      frames.push({ phase: 'try', activeLine: L('work out the new distinct'), pythonLine: 16, ...base, pair: [a, b], n1, n2, message: `Swap ${a} from word1 with ${b} from word2: counts become ${n1} and ${n2}.` })
       if (n1 === n2) {
-        frames.push({ phase: 'found', activeLine: L('if the new counts are equal'), ...base, pair: [a, b], n1, n2, result: true, message: `Counts ${n1} and ${n2} match, so the answer is true.` })
+        frames.push({ phase: 'found', activeLine: L('if the new counts are equal'), pythonLine: 18, ...base, pair: [a, b], n1, n2, result: true, message: `Counts ${n1} and ${n2} match, so the answer is true.` })
         return { input: { word1, word2 }, result: true, frames }
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), ...base, pair: null, n1: d1, n2: d2, result: false, message: 'No single swap makes the distinct counts equal.' })
+  frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: 19, ...base, pair: null, n1: d1, n2: d2, result: false, message: 'No single swap makes the distinct counts equal.' })
   return { input: { word1, word2 }, result: false, frames }
 }
 

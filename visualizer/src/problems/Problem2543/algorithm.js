@@ -15,10 +15,10 @@ export function buildTrace(input) {
   const g = gcd(targetX, targetY)
   const result = (g & (g - 1)) === 0
   const frames = [
-    { phase: 'start', activeLine: L('start the walk'), g: null, message: `Start at (1, 1). The target is (${targetX}, ${targetY}).` },
-    { phase: 'gcd', activeLine: L('g = gcd'), g, message: `The gcd of ${targetX} and ${targetY} is ${g}.` },
-    { phase: 'check', activeLine: L('if g is a power of two'), g, message: `${g} is ${result ? '' : 'not '}a power of two.` },
-    { phase: 'done', activeLine: L(result ? 'return true' : 'return false'), g, message: `(${targetX}, ${targetY}) is ${result ? 'reachable' : 'not reachable'}.` },
+    { phase: 'start', activeLine: L('start the walk'), pythonLine: 3, g: null, message: `Start at (1, 1). The target is (${targetX}, ${targetY}).` },
+    { phase: 'gcd', activeLine: L('g = gcd'), pythonLine: 4, g, message: `The gcd of ${targetX} and ${targetY} is ${g}.` },
+    { phase: 'check', activeLine: L('if g is a power of two'), pythonLine: 5, g, message: `${g} is ${result ? '' : 'not '}a power of two.` },
+    { phase: 'done', activeLine: L(result ? 'return true' : 'return false'), pythonLine: 5, g, message: `(${targetX}, ${targetY}) is ${result ? 'reachable' : 'not reachable'}.` },
   ]
   return { input, targetX, targetY, g, result, frames }
 }

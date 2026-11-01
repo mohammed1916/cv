@@ -19,16 +19,16 @@ export function buildTrace({ price, k }) {
   let lo = 0
   let hi = sorted[sorted.length - 1] - sorted[0]
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('sort the prices'), lo, hi, mid: null, verdict: null, picked: [], message: `Sorted prices: ${sorted.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
+  const frames = [{ phase: 'start', activeLine: L('sort the prices'), pythonLine: 2, lo, hi, mid: null, verdict: null, picked: [], message: `Sorted prices: ${sorted.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.ceil((lo + hi) / 2)
     const picked = pick(mid)
     const verdict = picked.length >= k
-    frames.push({ phase: 'probe', activeLine: L('if the greedy count reaches k'), lo, hi, mid, verdict, picked, message: `Gap ${mid}: greedy takes ${picked.length} candies, ${verdict ? 'enough' : 'too few'} for k = ${k}.` })
+    frames.push({ phase: 'probe', activeLine: L('if the greedy count reaches k'), pythonLine: 16, lo, hi, mid, verdict, picked, message: `Gap ${mid}: greedy takes ${picked.length} candies, ${verdict ? 'enough' : 'too few'} for k = ${k}.` })
     if (verdict) lo = mid
     else hi = mid - 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, picked: pick(lo), message: `Largest achievable tastiness: ${lo}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: 20, lo, hi: lo, mid: null, verdict: null, picked: pick(lo), message: `Largest achievable tastiness: ${lo}.` })
   return { input: { price, k }, sorted, domain, result: lo, frames }
 }
 

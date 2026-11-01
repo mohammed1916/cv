@@ -9,12 +9,12 @@ export function parseInput(text) {
 
 export function buildTrace({ nums }) {
   let beauty = 0
-  const frames = [{ phase: 'start', activeLine: L('set beauty to 0'), index: -1, beauty, message: 'The effective value of a triple (i, j, k) is (nums[i] AND nums[j]) OR nums[k]. Build the xor over all triples.' }]
+  const frames = [{ phase: 'start', activeLine: L('set beauty to 0'), pythonLine: 2, index: -1, beauty, message: 'The effective value of a triple (i, j, k) is (nums[i] AND nums[j]) OR nums[k]. Build the xor over all triples.' }]
   nums.forEach((value, index) => {
     beauty ^= value
-    frames.push({ phase: 'fold', activeLine: L('set beauty to beauty xor value'), index, beauty, message: `Xor in ${value}. Running beauty: ${beauty}.` })
+    frames.push({ phase: 'fold', activeLine: L('set beauty to beauty xor value'), pythonLine: 4, index, beauty, message: `Xor in ${value}. Running beauty: ${beauty}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return beauty'), index: -1, beauty, message: `Xor-beauty: ${beauty}.` })
+  frames.push({ phase: 'done', activeLine: L('return beauty'), pythonLine: 5, index: -1, beauty, message: `Xor-beauty: ${beauty}.` })
   return { input: { nums }, result: beauty, frames }
 }
 

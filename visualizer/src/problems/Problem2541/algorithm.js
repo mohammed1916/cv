@@ -11,28 +11,30 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums1, nums2, k } = input
   const diffs = nums1.map((v, i) => v - nums2[i])
-  const frames = [{ phase: 'start', activeLine: L('set diffs to'), index: -1, diffs, total: 0, moves: 0, message: `Each position needs its difference closed in steps of ${k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set diffs to'), pythonLine: 3, index: -1, diffs, total: 0, moves: 0, message: `Each position needs its difference closed in steps of ${k}.` }]
   let total = 0
   let moves = 0
   let feasible = true
+  let brokeOnMod = false
   for (let i = 0; i < diffs.length && feasible; i++) {
     const d = diffs[i]
     if (d % k !== 0) {
       feasible = false
-      frames.push({ phase: 'check', activeLine: L('if diffs[i] is not a multiple'), index: i, diffs, total, moves, message: `Difference ${d} is not a multiple of ${k}, so no sequence works.` })
+      brokeOnMod = true
+      frames.push({ phase: 'check', activeLine: L('if diffs[i] is not a multiple'), pythonLine: 7, index: i, diffs, total, moves, message: `Difference ${d} is not a multiple of ${k}, so no sequence works.` })
       break
     }
     const steps = d / k
     total += steps
     if (steps > 0) moves += steps
-    frames.push({ phase: 'diff', activeLine: L('add steps to total'), index: i, diffs, total, moves, message: `Position ${i} needs ${steps} step(s) of ${k}. Running total ${total}.` })
+    frames.push({ phase: 'diff', activeLine: L('add steps to total'), pythonLine: steps > 0 ? 11 : 10, index: i, diffs, total, moves, message: `Position ${i} needs ${steps} step(s) of ${k}. Running total ${total}.` })
   }
   if (feasible && total !== 0) {
     feasible = false
-    frames.push({ phase: 'check', activeLine: L('if total is not 0'), index: -1, diffs, total, moves, message: 'The increases and decreases do not cancel, so no sequence works.' })
+    frames.push({ phase: 'check', activeLine: L('if total is not 0'), pythonLine: 12, index: -1, diffs, total, moves, message: 'The increases and decreases do not cancel, so no sequence works.' })
   }
   const result = feasible ? moves : -1
-  frames.push({ phase: 'done', activeLine: L(feasible ? 'return moves' : 'return -1'), index: -1, diffs, total, moves, message: feasible ? `Minimum operations: ${moves}.` : 'Answer: -1.' })
+  frames.push({ phase: 'done', activeLine: L(feasible ? 'return moves' : 'return -1'), pythonLine: feasible ? 14 : brokeOnMod ? 7 : 13, index: -1, diffs, total, moves, message: feasible ? `Minimum operations: ${moves}.` : 'Answer: -1.' })
   return { input, diffs, result, frames }
 }
 

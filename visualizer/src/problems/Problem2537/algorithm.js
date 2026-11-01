@@ -9,26 +9,26 @@ export function parseInput(text) {
 
 export function buildTrace({ nums, k }) {
   const freq = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set freq'), left: 0, right: -1, pairs: 0, total: 0, message: `Count subarrays with at least ${k} equal index pairs.` }]
+  const frames = [{ phase: 'start', activeLine: L('set freq'), pythonLine: 5, left: 0, right: -1, pairs: 0, total: 0, message: `Count subarrays with at least ${k} equal index pairs.` }]
   let pairs = 0, left = 0, total = 0
   for (let right = 0; right < nums.length; right++) {
     const v = nums[right]
     pairs += freq.get(v) ?? 0
     freq.set(v, (freq.get(v) ?? 0) + 1)
-    frames.push({ phase: 'extend', activeLine: L('add the pairs made'), left, right, pairs, total, message: `Add nums[${right}] = ${v}. Window ${left} to ${right} has ${pairs} equal pairs.` })
+    frames.push({ phase: 'extend', activeLine: L('add the pairs made'), pythonLine: 8, left, right, pairs, total, message: `Add nums[${right}] = ${v}. Window ${left} to ${right} has ${pairs} equal pairs.` })
     while (left <= right && pairs - ((freq.get(nums[left]) ?? 0) - 1) >= k) {
       const out = nums[left]
       freq.set(out, freq.get(out) - 1)
       pairs -= freq.get(out)
       left++
-      frames.push({ phase: 'shrink', activeLine: L('remove left from the window'), left, right, pairs, total, message: `Removing nums[${left - 1}] keeps at least ${k} pairs, so move the left end to ${left}.` })
+      frames.push({ phase: 'shrink', activeLine: L('remove left from the window'), pythonLine: 12, left, right, pairs, total, message: `Removing nums[${left - 1}] keeps at least ${k} pairs, so move the left end to ${left}.` })
     }
     if (pairs >= k) {
       total += left + 1
-      frames.push({ phase: 'count', activeLine: L('add left plus one'), left, right, pairs, total, message: `Starts 0 to ${left} all work for end ${right}. Total ${total}.` })
+      frames.push({ phase: 'count', activeLine: L('add left plus one'), pythonLine: 14, left, right, pairs, total, message: `Starts 0 to ${left} all work for end ${right}. Total ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), left, right: nums.length - 1, pairs, total, message: `There are ${total} good subarrays.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 15, left, right: nums.length - 1, pairs, total, message: `There are ${total} good subarrays.` })
   return { input: { nums, k }, result: total, frames }
 }
 

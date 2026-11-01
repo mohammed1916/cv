@@ -12,21 +12,21 @@ export function parseInput(text) {
 export function buildTrace({ nums1, nums2 }) {
   let i = 0
   let j = 0
-  const frames = [{ phase: 'start', activeLine: L('minimum common value of two sorted lists'), i, j, message: 'Both pointers start at the smallest values.' }]
+  const frames = [{ phase: 'start', activeLine: L('minimum common value of two sorted lists'), pythonLine: 3, i, j, message: 'Both pointers start at the smallest values.' }]
   while (i < nums1.length && j < nums2.length) {
     if (nums1[i] === nums2[j]) {
-      frames.push({ phase: 'found', activeLine: L('return that value'), i, j, message: `${nums1[i]} is in both lists, and it is the smallest such value.` })
+      frames.push({ phase: 'found', activeLine: L('return that value'), pythonLine: 6, i, j, message: `${nums1[i]} is in both lists, and it is the smallest such value.` })
       return { input: { nums1, nums2 }, result: nums1[i], frames }
     }
     if (nums1[i] < nums2[j]) {
       i++
-      frames.push({ phase: 'advance', activeLine: L('move the first pointer forward'), i, j, message: `${nums1[i - 1]} is smaller than ${nums2[j]}, so it cannot be common.` })
+      frames.push({ phase: 'advance', activeLine: L('move the first pointer forward'), pythonLine: 8, i, j, message: `${nums1[i - 1]} is smaller than ${nums2[j]}, so it cannot be common.` })
     } else {
       j++
-      frames.push({ phase: 'advance', activeLine: L('move the second pointer forward'), i, j, message: `${nums2[j - 1]} is smaller than ${nums1[i]}, so it cannot be common.` })
+      frames.push({ phase: 'advance', activeLine: L('move the second pointer forward'), pythonLine: 10, i, j, message: `${nums2[j - 1]} is smaller than ${nums1[i]}, so it cannot be common.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), i, j, message: 'One list ran out before any value matched.' })
+  frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: 11, i, j, message: 'One list ran out before any value matched.' })
   return { input: { nums1, nums2 }, result: -1, frames }
 }
 

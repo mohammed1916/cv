@@ -25,7 +25,7 @@ export function buildTrace({ n, edges, price }) {
   const input = { n, edges, price }
   const adjacent = Array.from({ length: n }, () => [])
   for (const [a, b] of edges) { adjacent[a].push(b); adjacent[b].push(a) }
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), root: -1, cost: 0, best: 0, message: 'Try every node as the root.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to zero'), pythonLine: 6, root: -1, cost: 0, best: 0, message: 'Try every node as the root.' }]
   let best = 0
   for (let root = 0; root < n; root++) {
     const sums = []
@@ -37,9 +37,9 @@ export function buildTrace({ n, edges, price }) {
     }
     const cost = Math.max(...sums) - Math.min(...sums)
     best = Math.max(best, cost)
-    frames.push({ phase: 'root', activeLine: L('the cost for this root'), root, cost, best, message: `Root ${root}: heaviest path ${Math.max(...sums)}, lightest ${Math.min(...sums)}, cost ${cost}.` })
+    frames.push({ phase: 'root', activeLine: L('the cost for this root'), pythonLine: 16, root, cost, best, message: `Root ${root}: heaviest path ${Math.max(...sums)}, lightest ${Math.min(...sums)}, cost ${cost}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), root: -1, cost: best, best, message: `Largest cost over all roots: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 17, root: -1, cost: best, best, message: `Largest cost over all roots: ${best}.` })
   return { input, result: best, frames }
 }
 

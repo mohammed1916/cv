@@ -17,17 +17,17 @@ export function buildTrace(input) {
   const working = input.score.map((row, index) => ({ row, index }))
   const result = []
   const taken = []
-  const frames = [{ phase: 'start', activeLine: L('set result to an empty list'), picked: null, taken: [], result: [], message: `Sort students by exam ${input.k} score, highest first.` }]
+  const frames = [{ phase: 'start', activeLine: L('set result to an empty list'), pythonLine: 3, picked: null, taken: [], result: [], message: `Sort students by exam ${input.k} score, highest first.` }]
   while (working.length > 0) {
     let best = 0
     for (let i = 1; i < working.length; i++) if (working[i].row[input.k] > working[best].row[input.k]) best = i
-    frames.push({ phase: 'find', activeLine: L('find the row with the largest'), picked: working[best].index, taken: [...taken], result: [...result], message: `Student ${working[best].index} has the best remaining score in exam ${input.k}: ${working[best].row[input.k]}.` })
+    frames.push({ phase: 'find', activeLine: L('find the row with the largest'), pythonLine: 7, picked: working[best].index, taken: [...taken], result: [...result], message: `Student ${working[best].index} has the best remaining score in exam ${input.k}: ${working[best].row[input.k]}.` })
     const [student] = working.splice(best, 1)
     result.push(student.row)
     taken.push(student.index)
-    frames.push({ phase: 'take', activeLine: L('move that row'), picked: student.index, taken: [...taken], result: result.map(r => [...r]), message: `Student ${student.index} moves to the next position in the result.` })
+    frames.push({ phase: 'take', activeLine: L('move that row'), pythonLine: 9, picked: student.index, taken: [...taken], result: result.map(r => [...r]), message: `Student ${student.index} moves to the next position in the result.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), picked: null, taken: [...taken], result: result.map(r => [...r]), message: 'Every student is placed from highest to lowest kth score.' })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: 10, picked: null, taken: [...taken], result: result.map(r => [...r]), message: 'Every student is placed from highest to lowest kth score.' })
   return { input, result, frames }
 }
 

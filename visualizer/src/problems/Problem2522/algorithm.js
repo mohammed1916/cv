@@ -12,23 +12,23 @@ export function buildTrace(input) {
   const n = s.length
   const dp = Array(n + 1).fill(null)
   dp[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set dp[0] to 0'), end: 0, start: -1, dp: [...dp], message: 'The empty prefix needs zero substrings.' }]
+  const frames = [{ phase: 'start', activeLine: L('set dp[0] to 0'), pythonLine: 5, end: 0, start: -1, dp: [...dp], message: 'The empty prefix needs zero substrings.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 0; j < i; j++) {
       if (s[j] === '0') {
-        frames.push({ phase: 'skip', activeLine: L('skip this start'), end: i, start: j, dp: [...dp], message: `Substrings cannot start with 0, so no piece starts at ${j}.` })
+        frames.push({ phase: 'skip', activeLine: L('skip this start'), pythonLine: 9, end: i, start: j, dp: [...dp], message: `Substrings cannot start with 0, so no piece starts at ${j}.` })
         continue
       }
       const value = Number(s.slice(j, i))
       if (value <= k && dp[j] !== null) {
         const candidate = dp[j] + 1
         dp[i] = dp[i] === null ? candidate : Math.min(dp[i], candidate)
-        frames.push({ phase: 'piece', activeLine: L('if the number from j to i'), end: i, start: j, dp: [...dp], message: `${s.slice(j, i)} = ${value} is at most ${k}, so the first ${i} digits can use ${dp[i]} pieces.` })
+        frames.push({ phase: 'piece', activeLine: L('if the number from j to i'), pythonLine: 11, end: i, start: j, dp: [...dp], message: `${s.slice(j, i)} = ${value} is at most ${k}, so the first ${i} digits can use ${dp[i]} pieces.` })
       }
     }
   }
   const result = dp[n] === null ? -1 : dp[n]
-  frames.push({ phase: 'done', activeLine: L('return dp[n]'), end: n, start: -1, dp: [...dp], message: result === -1 ? 'No valid partition exists.' : `Fewest substrings: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return dp[n]'), pythonLine: 12, end: n, start: -1, dp: [...dp], message: result === -1 ? 'No valid partition exists.' : `Fewest substrings: ${result}.` })
   return { input, result, frames }
 }
 

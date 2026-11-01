@@ -18,27 +18,27 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace(arr) {
   const found = new Set()
-  const frames = [{ phase: 'start', activeLine: L('let found be'), index: -1, found: [], message: 'Collect prime factors of every element into one set.' }]
+  const frames = [{ phase: 'start', activeLine: L('let found be'), pythonLine: 2, index: -1, found: [], message: 'Collect prime factors of every element into one set.' }]
   arr.forEach((value, index) => {
     let v = value
-    frames.push({ phase: 'value', activeLine: L('for each value'), index, found: [...found], message: `Factor ${value}.` })
+    frames.push({ phase: 'value', activeLine: L('for each value'), pythonLine: 3, index, found: [...found], message: `Factor ${value}.` })
     for (let d = 2; d * d <= v; ) {
       if (v % d === 0) {
         found.add(d)
         while (v % d === 0) v /= d
-        frames.push({ phase: 'factor', activeLine: L('if d divides v'), index, found: [...found], message: `${d} divides ${value}; it is now in the set.` })
+        frames.push({ phase: 'factor', activeLine: L('if d divides v'), pythonLine: 8, index, found: [...found], message: `${d} divides ${value}; it is now in the set.` })
       } else {
         d += 1
-        frames.push({ phase: 'try', activeLine: L('otherwise increase d'), index, found: [...found], message: `Try the next divisor, ${d}.` })
+        frames.push({ phase: 'try', activeLine: L('otherwise increase d'), pythonLine: 12, index, found: [...found], message: `Try the next divisor, ${d}.` })
       }
     }
     if (v > 1) {
       found.add(v)
-      frames.push({ phase: 'factor', activeLine: L('if v is greater'), index, found: [...found], message: `${v} is a prime factor of ${value}.` })
+      frames.push({ phase: 'factor', activeLine: L('if v is greater'), pythonLine: 14, index, found: [...found], message: `${v} is a prime factor of ${value}.` })
     }
   })
   const result = found.size
-  frames.push({ phase: 'done', activeLine: L('return the size of found'), index: -1, found: [...found].sort((a, b) => a - b), message: `The product has ${result} distinct prime factor(s).` })
+  frames.push({ phase: 'done', activeLine: L('return the size of found'), pythonLine: 15, index: -1, found: [...found].sort((a, b) => a - b), message: `The product has ${result} distinct prime factor(s).` })
   return { input: arr, result, frames }
 }
 

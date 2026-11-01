@@ -15,9 +15,9 @@ export function buildTrace({ s, k }) {
   for (const ch of s) total[ch]++
   const frames = []
   const short = LETTERS.find(ch => total[ch] < k)
-  frames.push({ phase: 'count', activeLine: L('count how many'), left: 0, right: -1, win: { a: 0, b: 0, c: 0 }, longest: 0, message: `Counts: a=${total.a}, b=${total.b}, c=${total.c}. Each needs at least ${k} left.` })
+  frames.push({ phase: 'count', activeLine: L('count how many'), pythonLine: 2, left: 0, right: -1, win: { a: 0, b: 0, c: 0 }, longest: 0, message: `Counts: a=${total.a}, b=${total.b}, c=${total.c}. Each needs at least ${k} left.` })
   if (short) {
-    frames.push({ phase: 'done', activeLine: L('return -1'), left: 0, right: -1, win: { a: 0, b: 0, c: 0 }, longest: 0, result: -1, message: `${short} appears only ${total[short]} times, so the goal is impossible.` })
+    frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: 4, left: 0, right: -1, win: { a: 0, b: 0, c: 0 }, longest: 0, result: -1, message: `${short} appears only ${total[short]} times, so the goal is impossible.` })
     return { input: { s, k }, total, result: -1, frames }
   }
   const win = { a: 0, b: 0, c: 0 }
@@ -26,17 +26,17 @@ export function buildTrace({ s, k }) {
   let longest = 0
   for (let right = 0; right < n; right++) {
     win[s[right]]++
-    frames.push({ phase: 'extend', activeLine: L('add the letter'), left, right, win: { ...win }, longest, message: `Add ${s[right]} at position ${right} to the removed window.` })
+    frames.push({ phase: 'extend', activeLine: L('add the letter'), pythonLine: 9, left, right, win: { ...win }, longest, message: `Add ${s[right]} at position ${right} to the removed window.` })
     while (over()) {
       win[s[left]]--
       left++
-      frames.push({ phase: 'shrink', activeLine: L('while the removed window'), left, right, win: { ...win }, longest, message: `Too many letters are removed, so position ${left - 1} returns to the ends.` })
+      frames.push({ phase: 'shrink', activeLine: L('while the removed window'), pythonLine: 12, left, right, win: { ...win }, longest, message: `Too many letters are removed, so position ${left - 1} returns to the ends.` })
     }
     if (right - left + 1 > longest) longest = right - left + 1
-    frames.push({ phase: 'record', activeLine: L('remember the longest'), left, right, win: { ...win }, longest, message: `Longest removable window so far: ${longest}.` })
+    frames.push({ phase: 'record', activeLine: L('remember the longest'), pythonLine: 13, left, right, win: { ...win }, longest, message: `Longest removable window so far: ${longest}.` })
   }
   const result = n - longest
-  frames.push({ phase: 'done', activeLine: L('return length of s'), left, right: n - 1, win: { ...win }, longest, result, message: `Remove ${n} - ${longest} = ${result} characters from the ends.` })
+  frames.push({ phase: 'done', activeLine: L('return length of s'), pythonLine: 14, left, right: n - 1, win: { ...win }, longest, result, message: `Remove ${n} - ${longest} = ${result} characters from the ends.` })
   return { input: { s, k }, total, result, frames }
 }
 

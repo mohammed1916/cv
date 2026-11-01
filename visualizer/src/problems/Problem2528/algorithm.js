@@ -16,7 +16,7 @@ export function buildTrace({ stations, r, k }) {
     return sum
   })
   let low = Math.min(...power), high = low + k
-  const frames = [{ phase: 'start', activeLine: L('set power to the power'), city: -1, target: null, budget: k, low, high, message: `Each city's power is the stations within ${r} of it. Adding ${k} stations can raise the minimum by at most ${k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set power to the power'), pythonLine: 3, city: -1, target: null, budget: k, low, high, message: `Each city's power is the stations within ${r} of it. Adding ${k} stations can raise the minimum by at most ${k}.` }]
   const canReach = target => {
     const expire = new Array(n + 1).fill(0)
     let current = 0, budget = k
@@ -26,7 +26,7 @@ export function buildTrace({ stations, r, k }) {
       if (have < target) {
         const need = target - have
         if (need > budget) {
-          frames.push({ phase: 'check', activeLine: L('if there are too few stations left'), city: i, target, budget, low, high, message: `City ${i} needs ${need} more but only ${budget} remain.` })
+          frames.push({ phase: 'check', activeLine: L('if there are too few stations left'), pythonLine: 14, city: i, target, budget, low, high, message: `City ${i} needs ${need} more but only ${budget} remain.` })
           return false
         }
         budget -= need
@@ -34,7 +34,7 @@ export function buildTrace({ stations, r, k }) {
         const end = Math.min(place + r, n - 1)
         current += need
         expire[end + 1] += need
-        frames.push({ phase: 'place', activeLine: L('place the missing stations'), city: i, target, budget, low, high, message: `Place ${need} stations at city ${place} to lift city ${i} to ${target}.` })
+        frames.push({ phase: 'place', activeLine: L('place the missing stations'), pythonLine: 19, city: i, target, budget, low, high, message: `Place ${need} stations at city ${place} to lift city ${i} to ${target}.` })
       }
     }
     return true
@@ -44,9 +44,9 @@ export function buildTrace({ stations, r, k }) {
     const ok = canReach(mid)
     if (ok) low = mid
     else high = mid - 1
-    frames.push({ phase: 'probe', activeLine: L('if mid cities'), city: -1, target: mid, budget: k, low, high, message: `Target ${mid} ${ok ? 'is reachable' : 'is not reachable'}.` })
+    frames.push({ phase: 'probe', activeLine: L('if mid cities'), pythonLine: 25, city: -1, target: mid, budget: k, low, high, message: `Target ${mid} ${ok ? 'is reachable' : 'is not reachable'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), city: -1, target: null, budget: k, low, high, message: `The best minimum power is ${low}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: 29, city: -1, target: null, budget: k, low, high, message: `The best minimum power is ${low}.` })
   return { input: { stations, r, k }, result: low, power, frames }
 }
 
