@@ -13,7 +13,7 @@ export function parseInput(text) {
 export function buildTrace({ points, k }) {
   let best = -Infinity
   const queue = []
-  const frames = [{ phase: 'start', j: null, queue: [], best: null, activeLine: L('set best to negative infinity'), message: 'Keep indices i whose value y minus x is larger than every later candidate.' }]
+  const frames = [{ phase: 'start', j: null, queue: [], best: null, activeLine: L('set best to negative infinity'), pythonLine: 5, message: 'Keep indices i whose value y minus x is larger than every later candidate.' }]
   points.forEach(([xj, yj], j) => {
     while (queue.length && xj - points[queue[0]][0] > k) queue.shift()
     if (queue.length) {
@@ -22,9 +22,9 @@ export function buildTrace({ points, k }) {
     }
     while (queue.length && points[queue[queue.length - 1]][1] - points[queue[queue.length - 1]][0] <= yj - xj) queue.pop()
     queue.push(j)
-    frames.push({ phase: 'point', j, queue: queue.slice(), best, activeLine: L('add j to the back'), message: queue.length > 1 || best > -Infinity ? `Point ${j} pairs with the front of the queue; best so far ${best}.` : `Point ${j} has no partner within ${k} yet.` })
+    frames.push({ phase: 'point', j, queue: queue.slice(), best, activeLine: L('add j to the back'), pythonLine: 14, message: queue.length > 1 || best > -Infinity ? `Point ${j} pairs with the front of the queue; best so far ${best}.` : `Point ${j} has no partner within ${k} yet.` })
   })
-  frames.push({ phase: 'done', j: null, queue: queue.slice(), best, activeLine: L('return best'), message: `Maximum value: ${best}.` })
+  frames.push({ phase: 'done', j: null, queue: queue.slice(), best, activeLine: L('return best'), pythonLine: 15, message: `Maximum value: ${best}.` })
   return { input: { points, k }, result: best, frames }
 }
 

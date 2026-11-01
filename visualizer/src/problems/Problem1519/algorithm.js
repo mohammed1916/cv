@@ -45,7 +45,7 @@ export function buildTrace({ n, edges, labels }) {
   const counts = Array.from({ length: n }, () => Array(26).fill(0))
   const answer = Array(n).fill(null)
   const letter = v => labels.charCodeAt(v) - 97
-  const frames = [{ phase: 'start', activeLine: L('root the tree at node 0'), current: null, answer: [...answer], message: 'Root the tree at node 0. Each subtree collects letter counts from its children.' }]
+  const frames = [{ phase: 'start', activeLine: L('root the tree at node 0'), pythonLine: 9, current: null, answer: [...answer], message: 'Root the tree at node 0. Each subtree collects letter counts from its children.' }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     counts[v][letter(v)] += 1
@@ -53,10 +53,10 @@ export function buildTrace({ n, edges, labels }) {
       for (let k = 0; k < 26; k++) counts[v][k] += counts[child][k]
     }
     answer[v] = counts[v][letter(v)]
-    frames.push({ phase: 'climb', activeLine: L('set answer of v'), current: v, answer: [...answer], message: `Node ${v} (label ${labels[v]}): ${answer[v]} nodes in its subtree share that label.` })
+    frames.push({ phase: 'climb', activeLine: L('set answer of v'), pythonLine: 25, current: v, answer: [...answer], message: `Node ${v} (label ${labels[v]}): ${answer[v]} nodes in its subtree share that label.` })
   }
   const toTree = id => ({ id, children: children[id].map(child => toTree(child)) })
-  frames.push({ phase: 'done', activeLine: L('return the answer list'), current: null, answer: [...answer], message: `Answers for nodes 0 to ${n - 1}: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return the answer list'), pythonLine: 26, current: null, answer: [...answer], message: `Answers for nodes 0 to ${n - 1}: ${answer.join(', ')}.` })
   return { input: { n, edges, labels }, tree: toTree(0), labels, result: answer, frames }
 }
 

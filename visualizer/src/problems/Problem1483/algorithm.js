@@ -38,25 +38,25 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ parent, queries }) {
   const LOG = 4
   const up = [parent.slice()]
-  const frames = [{ phase: 'start', activeLine: L('let n be the number'), node: -1, jump: 0, up: up[0], message: 'Build jump tables: 1 step, 2 steps, 4 steps and so on.' }]
+  const frames = [{ phase: 'start', activeLine: L('let n be the number'), pythonLine: 3, node: -1, jump: 0, up: up[0], message: 'Build jump tables: 1 step, 2 steps, 4 steps and so on.' }]
   for (let j = 1; j < LOG; j++) {
     up[j] = up[j - 1].map(p => (p === -1 ? -1 : up[j - 1][p]))
-    frames.push({ phase: 'lift', activeLine: L('up[j][v] is'), node: -1, jump: j, up: up[j], message: `Jump table ${1 << j} steps up.` })
+    frames.push({ phase: 'lift', activeLine: L('up[j][v] is'), pythonLine: 6, node: -1, jump: j, up: up[j], message: `Jump table ${1 << j} steps up.` })
   }
   const answers = []
   for (const [node, k] of queries) {
     let v = node
-    frames.push({ phase: 'query', activeLine: L('for each query'), node, jump: -1, up: null, message: `Find the ${k}th ancestor of ${node}.` })
+    frames.push({ phase: 'query', activeLine: L('for each query'), pythonLine: 9, node, jump: -1, up: null, message: `Find the ${k}th ancestor of ${node}.` })
     for (let j = 0; j < LOG; j++) {
       if (((k >> j) & 1) === 1) {
         v = v === -1 ? -1 : up[j][v]
-        frames.push({ phase: 'jump', activeLine: L('move v to up'), node, jump: j, up: null, message: `Jump ${1 << j} step(s) to reach ${v === -1 ? 'nothing' : v}.` })
+        frames.push({ phase: 'jump', activeLine: L('move v to up'), pythonLine: 12, node, jump: j, up: null, message: `Jump ${1 << j} step(s) to reach ${v === -1 ? 'nothing' : v}.` })
       }
     }
     answers.push(v)
-    frames.push({ phase: 'answer', activeLine: L('record v as the answer'), node, jump: -1, up: null, message: `Answer: ${v}.` })
+    frames.push({ phase: 'answer', activeLine: L('record v as the answer'), pythonLine: 13, node, jump: -1, up: null, message: `Answer: ${v}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the recorded answers'), node: -1, jump: -1, up: null, message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the recorded answers'), pythonLine: 14, node: -1, jump: -1, up: null, message: `Answers: [${answers.join(', ')}].` })
   return { input: { parent, queries }, result: answers, frames }
 }
 

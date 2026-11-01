@@ -50,15 +50,15 @@ export function buildTrace(input) {
     activeLine, phase, message, tokens: [...tokens], active: -1, day: null, month: null, monthNumber: null, year: null, result: null, ...extra,
   });
 
-  frame(2, "init", `Load the month names: ${MONTHS.join(", ")}.`);
+  frame(2, "init", `Load the month names: ${MONTHS.join(", ")}.`, { pythonLine: 2 });
   const [rawDay, month, year] = tokens;
-  frame(3, "split", `Split "${date}" into day ${rawDay}, month ${month} and year ${year}.`, { active: 0 });
+  frame(3, "split", `Split "${date}" into day ${rawDay}, month ${month} and year ${year}.`, { active: 0, pythonLine: 3 });
   const day = rawDay.slice(0, -2).padStart(2, "0");
-  frame(4, "day", `Drop the suffix from ${rawDay} and pad: day becomes ${day}.`, { active: 0, day });
+  frame(4, "day", `Drop the suffix from ${rawDay} and pad: day becomes ${day}.`, { active: 0, day, pythonLine: 4 });
   const monthNumber = MONTHS.indexOf(month) + 1;
-  frame(5, "month", `${month} is month ${monthNumber}, written as ${String(monthNumber).padStart(2, "0")}.`, { active: 1, day, month, monthNumber });
+  frame(5, "month", `${month} is month ${monthNumber}, written as ${String(monthNumber).padStart(2, "0")}.`, { active: 1, day, month, monthNumber, pythonLine: 5 });
   const result = `${year}-${String(monthNumber).padStart(2, "0")}-${day}`;
-  frame(6, "done", `Return ${result}.`, { active: 2, day, month, monthNumber, year, result });
+  frame(6, "done", `Return ${result}.`, { active: 2, day, month, monthNumber, year, result, pythonLine: 6 });
 
   return { input: { date }, result, frames };
 }

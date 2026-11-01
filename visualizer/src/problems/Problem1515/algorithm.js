@@ -16,7 +16,7 @@ export function buildTrace({ positions }) {
   const n = positions.length
   let x = positions.reduce((s, p) => s + p[0], 0) / n
   let y = positions.reduce((s, p) => s + p[1], 0) / n
-  const frames = [{ phase: 'start', activeLine: L('start at the average'), x, y, sum: total(positions, x, y), iter: 0, message: `Start at the average of the points, total distance ${total(positions, x, y).toFixed(4)}.` }]
+  const frames = [{ phase: 'start', activeLine: L('start at the average'), pythonLine: 6, x, y, sum: total(positions, x, y), iter: 0, message: `Start at the average of the points, total distance ${total(positions, x, y).toFixed(4)}.` }]
   for (let it = 1; it <= ITER; it++) {
     let wx = 0
     let wy = 0
@@ -46,10 +46,10 @@ export function buildTrace({ positions }) {
       x = (1 - pull) * tx + pull * x
       y = (1 - pull) * ty + pull * y
     }
-    if (it <= 60 || it === ITER) frames.push({ phase: 'step', activeLine: L('move the current point'), x, y, sum: total(positions, x, y), iter: it, message: `Iteration ${it}: move to (${x.toFixed(4)}, ${y.toFixed(4)}).` })
+    if (it <= 60 || it === ITER) frames.push({ phase: 'step', activeLine: L('move the current point'), pythonLine: w > 0 ? 32 : 24, x, y, sum: total(positions, x, y), iter: it, message: `Iteration ${it}: move to (${x.toFixed(4)}, ${y.toFixed(4)}).` })
   }
   const result = total(positions, x, y)
-  frames.push({ phase: 'done', activeLine: L('return the sum'), x, y, sum: result, iter: ITER, message: `Minimum total distance ${result.toFixed(5)}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: 33, x, y, sum: result, iter: ITER, message: `Minimum total distance ${result.toFixed(5)}.` })
   return { input: { positions }, result, frames }
 }
 

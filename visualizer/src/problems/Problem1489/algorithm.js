@@ -46,7 +46,7 @@ export function buildTrace({ n, edges }) {
   }
   const base = mst(null, null)
   const status = edges.map(() => '')
-  const frames = [{ phase: 'start', activeLine: L('build the minimum'), index: -1, status: [...status], base, message: `The minimum spanning tree weighs ${base}.` }]
+  const frames = [{ phase: 'start', activeLine: L('build the minimum'), pythonLine: 31, index: -1, status: [...status], base, message: `The minimum spanning tree weighs ${base}.` }]
   edges.forEach((_, i) => {
     let activeLine
     if (mst(null, i) > base) {
@@ -56,11 +56,11 @@ export function buildTrace({ n, edges }) {
       activeLine = L('otherwise force')
       if (mst(i, null) === base) status[i] = 'pseudo'
     }
-    frames.push({ phase: 'test', activeLine, index: i, status: [...status], base, message: status[i] === 'critical' ? `Edge ${i} is critical: without it the weight rises.` : status[i] === 'pseudo' ? `Edge ${i} is pseudo-critical: it can always be in a minimum tree.` : `Edge ${i} is in no minimum tree.` })
+    frames.push({ phase: 'test', activeLine, pythonLine: status[i] === 'critical' ? 35 : status[i] === 'pseudo' ? 37 : 36, index: i, status: [...status], base, message: status[i] === 'critical' ? `Edge ${i} is critical: without it the weight rises.` : status[i] === 'pseudo' ? `Edge ${i} is pseudo-critical: it can always be in a minimum tree.` : `Edge ${i} is in no minimum tree.` })
   })
   const critical = edges.map((_, i) => i).filter(i => status[i] === 'critical')
   const pseudo = edges.map((_, i) => i).filter(i => status[i] === 'pseudo')
-  frames.push({ phase: 'done', activeLine: L('return the critical'), index: edges.length, status: [...status], base, message: `Critical: [${critical.join(', ')}]. Pseudo-critical: [${pseudo.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the critical'), pythonLine: 38, index: edges.length, status: [...status], base, message: `Critical: [${critical.join(', ')}]. Pseudo-critical: [${pseudo.join(', ')}].` })
   return { input: { n, edges }, result: [critical, pseudo], frames }
 }
 

@@ -11,7 +11,7 @@ export function buildTrace(input) {
   const digits = input.num.split('')
   const n = digits.length
   let left = input.k
-  const frames = [{ phase: 'start', activeLine: L('set left to k'), digits: [...digits], index: -1, left, message: `Start with ${input.num} and ${left} swaps.` }]
+  const frames = [{ phase: 'start', activeLine: L('set left to k'), pythonLine: 4, digits: [...digits], index: -1, left, message: `Start with ${input.num} and ${left} swaps.` }]
   for (let i = 0; i < n && left > 0; i++) {
     let best = i
     const reach = Math.min(n - 1, i + left)
@@ -20,10 +20,10 @@ export function buildTrace(input) {
     digits.splice(i, 0, moved)
     const cost = best - i
     left -= cost
-    frames.push({ phase: 'move', activeLine: L('move that digit to this position'), digits: [...digits], index: i, left, message: `Bring ${moved} to position ${i} for ${cost} swap${cost === 1 ? '' : 's'}. ${left} left.` })
+    frames.push({ phase: 'move', activeLine: L('move that digit to this position'), pythonLine: 14, digits: [...digits], index: i, left, message: `Bring ${moved} to position ${i} for ${cost} swap${cost === 1 ? '' : 's'}. ${left} left.` })
   }
   const result = digits.join('')
-  frames.push({ phase: 'done', activeLine: L('return the digits'), digits: [...digits], index: -1, left, message: `Smallest reachable number: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the digits'), pythonLine: 16, digits: [...digits], index: -1, left, message: `Smallest reachable number: ${result}.` })
   return { input, result, frames }
 }
 

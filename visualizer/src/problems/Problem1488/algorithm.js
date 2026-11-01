@@ -10,8 +10,9 @@ export function buildTrace({ rains }) {
   const full = new Map()
   const dry = []
   let failed = false
-  const frames = [{ phase: 'start', activeLine: L('set every dry day to 1'), day: null, ans: [...ans], full: [], message: 'Dry days default to 1 until a lake needs one.' }]
-  const snap = (phase, line, day, message) => frames.push({ phase, activeLine: L(line), day, ans: [...ans], full: [...full.keys()], message })
+  const frames = [{ phase: 'start', activeLine: L('set every dry day to 1'), pythonLine: 3, day: null, ans: [...ans], full: [], message: 'Dry days default to 1 until a lake needs one.' }]
+  const PY = { 'remember this dry day': 8, 'stop and return': 13, 'use the earliest dry day': 14, 'mark the lake as full': 16 }
+  const snap = (phase, line, day, message) => frames.push({ phase, activeLine: L(line), pythonLine: PY[line], day, ans: [...ans], full: [...full.keys()], message })
   for (let day = 0; day < rains.length && !failed; day++) {
     const lake = rains[day]
     if (lake === 0) {
@@ -35,7 +36,7 @@ export function buildTrace({ rains }) {
     snap('rain', 'mark the lake as full', day, `Rain on lake ${lake} on day ${day}.`)
   }
   const result = failed ? [] : ans
-  frames.push({ phase: 'done', activeLine: L('return the answer'), day: null, ans: [...ans], full: [...full.keys()], message: failed ? 'No valid plan: a flood cannot be avoided.' : 'Every flood is avoided.' })
+  frames.push({ phase: 'done', activeLine: L('return the answer'), pythonLine: failed ? 13 : 17, day: null, ans: [...ans], full: [...full.keys()], message: failed ? 'No valid plan: a flood cannot be avoided.' : 'Every flood is avoided.' })
   return { input: { rains }, result, frames }
 }
 

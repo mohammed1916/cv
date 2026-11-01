@@ -28,7 +28,7 @@ export function buildTrace({ n, edges, start, end }) {
   const best = new Array(n).fill(0)
   best[start] = 1
   const settled = new Array(n).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('best = 0 for every node'), node: start, best: [...best], settled: [...settled], message: `Start at node ${start} with probability 1. Multiplying along a path can only lower the probability, so the most likely node is expanded first.` }]
+  const frames = [{ phase: 'start', activeLine: L('best = 0 for every node'), pythonLine: 9, node: start, best: [...best], settled: [...settled], message: `Start at node ${start} with probability 1. Multiplying along a path can only lower the probability, so the most likely node is expanded first.` }]
   for (;;) {
     let u = -1
     for (let x = 0; x < n; x++) if (!settled[x] && best[x] > 0 && (u === -1 || best[x] > best[u])) u = x
@@ -40,10 +40,10 @@ export function buildTrace({ n, edges, start, end }) {
       const candidate = best[u] * q
       if (candidate > best[v]) { best[v] = candidate; notes.push(`node ${v} improves to ${candidate}`) }
     }
-    frames.push({ phase: 'settle', activeLine: L('pop (p, u)'), node: u, best: [...best], settled: [...settled], message: `Settle node ${u} with probability ${best[u]}.${notes.length ? ` Neighbours: ${notes.join('; ')}.` : ''}` })
+    frames.push({ phase: 'settle', activeLine: L('pop (p, u)'), pythonLine: 12, node: u, best: [...best], settled: [...settled], message: `Settle node ${u} with probability ${best[u]}.${notes.length ? ` Neighbours: ${notes.join('; ')}.` : ''}` })
   }
   const result = best[end]
-  frames.push({ phase: 'done', activeLine: L('return best[end]'), node: end, best: [...best], settled: [...settled], message: `Maximum probability from ${start} to ${end}: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return best[end]'), pythonLine: 21, node: end, best: [...best], settled: [...settled], message: `Maximum probability from ${start} to ${end}: ${result}.` })
   return { input: { n, edges, start, end }, result, frames }
 }
 

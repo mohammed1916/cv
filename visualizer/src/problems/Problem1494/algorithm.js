@@ -60,10 +60,10 @@ export function buildTrace({ n, relations, k }) {
   let frontier = [0]
   const seen = new Set([0])
   let semester = 0
-  const frames = [{ phase: 'start', mask: 0, roles: rolesFor(0), semester: 0, activeLine: L('set need[i]'), message: 'No course is taken yet. Each semester takes up to k courses whose prerequisites are done.' }]
+  const frames = [{ phase: 'start', mask: 0, roles: rolesFor(0), semester: 0, activeLine: L('set need[i]'), pythonLine: 8, message: 'No course is taken yet. Each semester takes up to k courses whose prerequisites are done.' }]
   while (!frontier.includes(full)) {
     semester++
-    frames.push({ phase: 'semester', mask: null, roles: null, semester, activeLine: L('add 1 to semester'), message: `Semester ${semester}: ${frontier.length} distinct set(s) of finished courses to extend.` })
+    frames.push({ phase: 'semester', mask: null, roles: null, semester, activeLine: L('add 1 to semester'), pythonLine: 12, message: `Semester ${semester}: ${frontier.length} distinct set(s) of finished courses to extend.` })
     const next = []
     for (const taken of frontier) {
       const ready = Array.from({ length: n }, (_, i) => i).filter(i => !(taken & (1 << i)) && (need[i] & taken) === need[i])
@@ -72,12 +72,12 @@ export function buildTrace({ n, relations, k }) {
         const fresh = picks.reduce((mask, i) => mask | (1 << i), taken)
         if (!seen.has(fresh)) { seen.add(fresh); next.push(fresh) }
       }
-      frames.push({ phase: 'expand', mask: taken, roles: rolesFor(taken), semester, activeLine: L('find the courses whose'), message: `Finished set ${taken.toString(2).padStart(n, '0')}: ${ready.length} course(s) are ready, so ${take} are taken this semester.` })
+      frames.push({ phase: 'expand', mask: taken, roles: rolesFor(taken), semester, activeLine: L('find the courses whose'), pythonLine: 17, message: `Finished set ${taken.toString(2).padStart(n, '0')}: ${ready.length} course(s) are ready, so ${take} are taken this semester.` })
     }
     frontier = next
   }
   const result = semester
-  frames.push({ phase: 'done', mask: full, roles: rolesFor(full), semester, activeLine: L('return semester'), result, message: `All ${n} courses are done in ${result} semester(s).` })
+  frames.push({ phase: 'done', mask: full, roles: rolesFor(full), semester, activeLine: L('return semester'), pythonLine: 26, result, message: `All ${n} courses are done in ${result} semester(s).` })
   return { input: { n, relations, k }, result, frames }
 }
 
