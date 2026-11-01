@@ -35,7 +35,7 @@ export function buildTrace({ cost }) {
   dp[0] = 0
   const show = table => table.map(row => row.map(v => (v === INF ? '∞' : v)))
   const table = [dp.slice()]
-  const frames = [{ phase: 'start', row: 0, table: show(table), activeLine: L('set dp[0][0]'), message: 'Nothing is connected yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, row: 0, table: show(table), activeLine: L('set dp[0][0]'), message: 'Nothing is connected yet.' }]
   for (let i = 0; i < m; i++) {
     const next = Array(size).fill(INF)
     for (let mask = 0; mask < size; mask++) {
@@ -48,7 +48,7 @@ export function buildTrace({ cost }) {
     }
     dp = next
     table.push(dp.slice())
-    frames.push({ phase: 'row', row: i + 1, table: show(table), activeLine: L('for each point i in the first group'), message: `First-group point ${i + 1} has taken an edge; the table shows the cheapest totals for each covered set.` })
+    frames.push({ phase: 'row', pythonLine: 15, row: i + 1, table: show(table), activeLine: L('for each point i in the first group'), message: `First-group point ${i + 1} has taken an edge; the table shows the cheapest totals for each covered set.` })
   }
   let result = INF
   for (let mask = 0; mask < size; mask++) {
@@ -60,7 +60,7 @@ export function buildTrace({ cost }) {
     }
     result = Math.min(result, total)
   }
-  frames.push({ phase: 'done', row: m, table: show(table), activeLine: L('return the smallest total'), result, message: `Cheapest way to connect both groups: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 25, row: m, table: show(table), activeLine: L('return the smallest total'), result, message: `Cheapest way to connect both groups: ${result}.` })
   return { input: { cost }, result, frames }
 }
 

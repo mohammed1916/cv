@@ -9,7 +9,7 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { s } = input
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), start: 0, end: 0, piece: null, pieces: [], best: 0, message: 'Try every way to cut the text into pieces.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set best to zero'), start: 0, end: 0, piece: null, pieces: [], best: 0, message: 'Try every way to cut the text into pieces.' }]
   const used = new Set()
   const pieces = []
   let best = 0
@@ -17,26 +17,26 @@ export function buildTrace(input) {
   const split = start => {
     if (start === s.length) {
       if (pieces.length > best) { best = pieces.length; bestPieces = [...pieces] }
-      frames.push({ phase: 'record', activeLine: L('keep the count if it beats best'), start: s.length, end: s.length, piece: null, pieces: [...pieces], best, message: `This split has ${pieces.length} unique piece(s).` })
+      frames.push({ phase: 'record', pythonLine: 8, activeLine: L('keep the count if it beats best'), start: s.length, end: s.length, piece: null, pieces: [...pieces], best, message: `This split has ${pieces.length} unique piece(s).` })
       return
     }
     for (let end = start + 1; end <= s.length; end++) {
       const piece = s.slice(start, end)
       if (used.has(piece)) {
-        frames.push({ phase: 'duplicate', activeLine: L('if the piece is already used'), start, end, piece, pieces: [...pieces], best, message: `"${piece}" is already used, so skip it.` })
+        frames.push({ phase: 'duplicate', pythonLine: 13, activeLine: L('if the piece is already used'), start, end, piece, pieces: [...pieces], best, message: `"${piece}" is already used, so skip it.` })
         continue
       }
       used.add(piece)
       pieces.push(piece)
-      frames.push({ phase: 'choose', activeLine: L('add the piece to the used set'), start, end, piece, pieces: [...pieces], best, message: `Take "${piece}" as piece ${pieces.length}.` })
+      frames.push({ phase: 'choose', pythonLine: 14, activeLine: L('add the piece to the used set'), start, end, piece, pieces: [...pieces], best, message: `Take "${piece}" as piece ${pieces.length}.` })
       split(end)
       pieces.pop()
       used.delete(piece)
-      frames.push({ phase: 'backtrack', activeLine: L('remove the piece from the used set'), start, end, piece, pieces: [...pieces], best, message: `Put "${piece}" back and try a longer piece.` })
+      frames.push({ phase: 'backtrack', pythonLine: 16, activeLine: L('remove the piece from the used set'), start, end, piece, pieces: [...pieces], best, message: `Put "${piece}" back and try a longer piece.` })
     }
   }
   split(0)
-  frames.push({ phase: 'done', activeLine: L('return best'), start: s.length, end: s.length, piece: null, pieces: bestPieces, best, message: `The maximum number of unique pieces is ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return best'), start: s.length, end: s.length, piece: null, pieces: bestPieces, best, message: `The maximum number of unique pieces is ${best}.` })
   return { input, result: best, frames, bestPieces }
 }
 

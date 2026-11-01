@@ -18,7 +18,7 @@ export function buildTrace(input) {
   let bestRotation = -1
   let rotation = 0
   const profits = []
-  const frames = [{ phase: 'start', activeLine: L('set waiting to 0'), rotation: 0, waiting, profit, best, bestRotation, profits: [], message: 'No rotations yet. Profit must beat 0 to count.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set waiting to 0'), rotation: 0, waiting, profit, best, bestRotation, profits: [], message: 'No rotations yet. Profit must beat 0 to count.' }]
   while (next < customers.length || waiting > 0) {
     rotation += 1
     if (next < customers.length) waiting += customers[next++]
@@ -31,11 +31,11 @@ export function buildTrace(input) {
       best = profit
       bestRotation = rotation
     }
-    frames.push({ phase: improved ? 'record' : 'rotate', activeLine: L(improved ? 'if profit is greater than best' : 'board the smaller'), rotation, waiting, profit, best, bestRotation, profits: [...profits],
+    frames.push({ phase: improved ? 'record' : 'rotate', pythonLine: improved ? 18 : 16, activeLine: L(improved ? 'if profit is greater than best' : 'board the smaller'), rotation, waiting, profit, best, bestRotation, profits: [...profits],
       message: `Rotation ${rotation}: ${board} board, profit ${profit}. ${improved ? `New best at rotation ${rotation}.` : `Best stays at ${best} (rotation ${bestRotation}).`}` })
   }
   const result = bestRotation
-  frames.push({ phase: 'done', activeLine: L('return the best rotation'), rotation, waiting, profit, best, bestRotation, profits: [...profits], message: result === -1 ? 'No rotation makes a profit, so the answer is -1.' : `Best rotation count: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return the best rotation'), rotation, waiting, profit, best, bestRotation, profits: [...profits], message: result === -1 ? 'No rotation makes a profit, so the answer is -1.' : `Best rotation count: ${result}.` })
   return { input, result, frames }
 }
 

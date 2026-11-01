@@ -22,30 +22,30 @@ export function buildTrace(input) {
   const frames = []
   const groups = new Map()
   const alerts = []
-  frames.push({ phase: 'start', activeLine: L('group the times'), name: null, times: [], flagged: -1, alerts: [], message: 'Read every swipe. Times become minutes since midnight so that differences are simple subtraction.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('group the times'), name: null, times: [], flagged: -1, alerts: [], message: 'Read every swipe. Times become minutes since midnight so that differences are simple subtraction.' })
   keyName.forEach((name, i) => {
     if (!groups.has(name)) groups.set(name, [])
     groups.get(name).push(toMinutes(keyTime[i]))
   })
-  frames.push({ phase: 'group', activeLine: L('group the times'), name: null, times: [], flagged: -1, alerts: [], message: `Grouped ${keyTime.length} swipes under ${groups.size} name(s).` })
+  frames.push({ phase: 'group', pythonLine: 5, activeLine: L('group the times'), name: null, times: [], flagged: -1, alerts: [], message: `Grouped ${keyTime.length} swipes under ${groups.size} name(s).` })
   for (const [name, raw] of groups) {
     const times = [...raw].sort((a, b) => a - b)
-    frames.push({ phase: 'sort', activeLine: L('sort the times of each name'), name, times, flagged: -1, alerts: [...alerts], message: `${name}: sorted swipes ${times.join(', ')}.` })
+    frames.push({ phase: 'sort', pythonLine: 8, activeLine: L('sort the times of each name'), name, times, flagged: -1, alerts: [...alerts], message: `${name}: sorted swipes ${times.join(', ')}.` })
     let flagged = false
     for (let i = 0; i + 2 < times.length && !flagged; i++) {
       const span = times[i + 2] - times[i]
       const hit = span <= 60
-      frames.push({ phase: 'window', activeLine: L('if the last minus the first'), name, times, flagged: i, alerts: [...alerts], span,
+      frames.push({ phase: 'window', pythonLine: 10, activeLine: L('if the last minus the first'), name, times, flagged: i, alerts: [...alerts], span,
         message: `${name}: swipes ${i + 1} to ${i + 3} span ${span} minutes. ${hit ? 'At most 60, so this is an alert.' : 'More than 60, so keep looking.'}` })
       if (hit) {
         alerts.push(name)
         flagged = true
-        frames.push({ phase: 'alert', activeLine: L('add the name to alerts'), name, times, flagged: i, alerts: [...alerts], span, message: `${name} is added to the alert list.` })
+        frames.push({ phase: 'alert', pythonLine: 11, activeLine: L('add the name to alerts'), name, times, flagged: i, alerts: [...alerts], span, message: `${name} is added to the alert list.` })
       }
     }
   }
   const result = [...alerts].sort()
-  frames.push({ phase: 'done', activeLine: L('return alerts'), name: null, times: [], flagged: -1, alerts: result, message: `Sorted alerts: ${result.length ? result.join(', ') : 'none'}.` })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return alerts'), name: null, times: [], flagged: -1, alerts: result, message: `Sorted alerts: ${result.length ? result.join(', ') : 'none'}.` })
   return { input, result, frames }
 }
 

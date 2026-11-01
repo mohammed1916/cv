@@ -31,7 +31,7 @@ export function buildTrace({ grid }) {
   const small = Array.from({ length: m }, () => Array(n).fill(null))
   big[0][0] = grid[0][0]
   small[0][0] = grid[0][0]
-  const frames = [{ phase: 'start', activeLine: L('set both products'), row: 0, col: 0, big: big.map(r => [...r]), small: small.map(r => [...r]), message: `Top-left cell holds ${grid[0][0]}, so its only product is ${grid[0][0]}.` }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('set both products'), row: 0, col: 0, big: big.map(r => [...r]), small: small.map(r => [...r]), message: `Top-left cell holds ${grid[0][0]}, so its only product is ${grid[0][0]}.` }]
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue
@@ -41,12 +41,12 @@ export function buildTrace({ grid }) {
       if (c > 0) candidates.push(big[r][c - 1] * v, small[r][c - 1] * v)
       big[r][c] = Math.max(...candidates)
       small[r][c] = Math.min(...candidates)
-      frames.push({ phase: 'cell', activeLine: L('collect the products'), row: r, col: c, big: big.map(row => [...row]), small: small.map(row => [...row]), message: `Cell (${r}, ${c}) with value ${v}: largest product ${big[r][c]}, smallest ${small[r][c]}.` })
+      frames.push({ phase: 'cell', pythonLine: 18, activeLine: L('collect the products'), row: r, col: c, big: big.map(row => [...row]), small: small.map(row => [...row]), message: `Cell (${r}, ${c}) with value ${v}: largest product ${big[r][c]}, smallest ${small[r][c]}.` })
     }
   }
   const end = big[m - 1][n - 1]
   const result = end < 0 ? -1 : (end % MOD) + 0
-  frames.push({ phase: 'done', activeLine: L('return big at'), row: m - 1, col: n - 1, big: big.map(r => [...r]), small: small.map(r => [...r]), message: result === -1 ? 'Every path ends with a negative product.' : `Maximum non-negative product: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 20, activeLine: L('return big at'), row: m - 1, col: n - 1, big: big.map(r => [...r]), small: small.map(r => [...r]), message: result === -1 ? 'Every path ends with a negative product.' : `Maximum non-negative product: ${result}.` })
   return { input: { grid }, grid, result, frames }
 }
 

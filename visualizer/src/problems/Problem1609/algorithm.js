@@ -9,7 +9,7 @@ export function parseInput(text) {
 
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
-  const frames = [{ phase: 'start', activeLine: L('set level to the root'), ids: [], depth: 0, values: [], ok: true, message: 'Check each level from the root down. Even depths need odd values that increase; odd depths need even values that decrease.' }]
+  const frames = [{ phase: 'start', pythonLine: 25, activeLine: L('set level to the root'), ids: [], depth: 0, values: [], ok: true, message: 'Check each level from the root down. Even depths need odd values that increase; odd depths need even values that decrease.' }]
   let level = [root]
   let depth = 0
   let ok = true
@@ -18,12 +18,12 @@ export function buildTrace(arr) {
     const parityOk = values.every(v => (depth % 2 === 0 ? v % 2 === 1 : v % 2 === 0))
     const ordered = values.every((v, i) => i === 0 || (depth % 2 === 0 ? values[i - 1] < v : values[i - 1] > v))
     ok = parityOk && ordered
-    frames.push({ phase: 'level', activeLine: L('if depth is even'), ids: level.map(n => n.id), depth, values, ok, message: `Depth ${depth}: ${values.join(', ')} ${ok ? 'follows' : 'breaks'} the rule.` })
+    frames.push({ phase: 'level', pythonLine: depth % 2 === 0 ? 30 : 32, activeLine: L('if depth is even'), ids: level.map(n => n.id), depth, values, ok, message: `Depth ${depth}: ${values.join(', ')} ${ok ? 'follows' : 'breaks'} the rule.` })
     if (!ok) break
     level = level.flatMap(n => [n.left, n.right].filter(Boolean))
     depth++
   }
-  frames.push({ phase: 'done', activeLine: L(ok ? 'return true' : 'return false'), ids: [], depth, values: [], ok, message: ok ? 'Every level follows the rule.' : 'A level breaks the rule.' })
+  frames.push({ phase: 'done', pythonLine: ok ? 37 : 34, activeLine: L(ok ? 'return true' : 'return false'), ids: [], depth, values: [], ok, message: ok ? 'Every level follows the rule.' : 'A level breaks the rule.' })
   return { input: arr, root, result: ok, frames }
 }
 

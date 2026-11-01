@@ -31,29 +31,29 @@ export function buildTrace(input) {
     const build = name => ({ name, alive: alive.has(name), children: children.get(name).map(build) })
     return build(king)
   }
-  const frames = [{ phase: 'start', activeLine: L('track the family tree'), op: null, visit: null, answer: null, family: snapshot(), message: `${king} is the king and is alive.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('track the family tree'), op: null, visit: null, answer: null, family: snapshot(), message: `${king} is the king and is alive.` }]
   for (const op of operations) {
     if (op[0] === 'birth') {
       children.get(op[1]).push(op[2])
       children.set(op[2], [])
       alive.add(op[2])
-      frames.push({ phase: 'birth', activeLine: L('if the operation is birth'), op, visit: null, answer: null, family: snapshot(), message: `${op[2]} is born to ${op[1]} and becomes the youngest child.` })
+      frames.push({ phase: 'birth', pythonLine: 14, activeLine: L('if the operation is birth'), op, visit: null, answer: null, family: snapshot(), message: `${op[2]} is born to ${op[1]} and becomes the youngest child.` })
     } else if (op[0] === 'death') {
       alive.delete(op[1])
-      frames.push({ phase: 'death', activeLine: L('if the operation is death'), op, visit: null, answer: null, family: snapshot(), message: `${op[1]} dies and is skipped in future orders.` })
+      frames.push({ phase: 'death', pythonLine: 16, activeLine: L('if the operation is death'), op, visit: null, answer: null, family: snapshot(), message: `${op[1]} dies and is skipped in future orders.` })
     } else {
       const order = []
       const walk = name => {
         if (alive.has(name)) order.push(name)
-        frames.push({ phase: 'walk', activeLine: L('a walk visits a name'), op, visit: name, answer: null, family: snapshot(), message: `Visit ${name}${alive.has(name) ? ', who is alive, so add the name' : ', who is dead, so skip the name'}.` })
+        frames.push({ phase: 'walk', pythonLine: alive.has(name) ? 7 : 6, activeLine: L('a walk visits a name'), op, visit: name, answer: null, family: snapshot(), message: `Visit ${name}${alive.has(name) ? ', who is alive, so add the name' : ', who is dead, so skip the name'}.` })
         for (const child of children.get(name)) walk(child)
       }
       walk(king)
       answers.push(order)
-      frames.push({ phase: 'order', activeLine: L('if the operation is order'), op, visit: null, answer: order, family: snapshot(), message: `Inheritance order: ${order.join(', ')}.` })
+      frames.push({ phase: 'order', pythonLine: 20, activeLine: L('if the operation is order'), op, visit: null, answer: order, family: snapshot(), message: `Inheritance order: ${order.join(', ')}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return all answers'), op: null, visit: null, answer: null, family: snapshot(), message: `${answers.length} order request(s) answered.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return all answers'), op: null, visit: null, answer: null, family: snapshot(), message: `${answers.length} order request(s) answered.` })
   return { input, result: answers, frames }
 }
 

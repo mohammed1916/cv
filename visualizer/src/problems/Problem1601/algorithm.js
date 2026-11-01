@@ -20,8 +20,9 @@ export function buildTrace(input) {
   let best = 0
   let depthTaken = 0
   let at = -1
+  const PY_LINE = { start: 4, check: 9, take: 14, undo: 17, skip: 18, done: 21 }
   const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, at, taken: depthTaken, balance: [...balance], best, message,
+    phase, activeLine, pythonLine: PY_LINE[phase], at, taken: depthTaken, balance: [...balance], best, message,
   })
 
   const search = (i, taken) => {
