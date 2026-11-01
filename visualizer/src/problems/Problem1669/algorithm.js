@@ -27,21 +27,21 @@ export function buildTrace({ list1, a, b, list2 }) {
     for (let c = head; c; c = c.next) out.push({ id: c.id, value: c.value })
     return out
   }
-  const frames = [{ phase: 'start', activeLine: L('merge list2'), nodes: walk(head1), pointers: [], removed: [], message: `Remove list1 from index ${a} to ${b} and insert list2 there.` }]
+  const frames = [{ phase: 'start', pythonLine: 12, activeLine: L('merge list2'), nodes: walk(head1), pointers: [], removed: [], message: `Remove list1 from index ${a} to ${b} and insert list2 there.` }]
   let left = head1
   for (let i = 1; i < a; i++) left = left.next
   let right = left
   for (let i = 0; i <= b - a; i++) right = right.next
   const removed = []
   for (let c = left.next; c !== right.next; c = c.next) removed.push(c.id)
-  frames.push({ phase: 'locate', activeLine: L('walk to node a - 1'), nodes: walk(head1), pointers: [{ label: 'left', id: left.id }, { label: 'right', id: right.id }], removed, message: `left is index ${a - 1} and right is index ${b}. Nodes ${a} to ${b} will go.` })
+  frames.push({ phase: 'locate', pythonLine: 18, activeLine: L('walk to node a - 1'), nodes: walk(head1), pointers: [{ label: 'left', id: left.id }, { label: 'right', id: right.id }], removed, message: `left is index ${a - 1} and right is index ${b}. Nodes ${a} to ${b} will go.` })
   let tail = head2
   while (tail.next) tail = tail.next
   left.next = head2
   tail.next = right.next
-  frames.push({ phase: 'splice', activeLine: L('set tail.next'), nodes: walk(head1), pointers: [{ label: 'left', id: left.id }], removed: [], message: 'list2 is spliced in after left, and its tail points past the removed nodes.' })
+  frames.push({ phase: 'splice', pythonLine: 23, activeLine: L('set tail.next'), nodes: walk(head1), pointers: [{ label: 'left', id: left.id }], removed: [], message: 'list2 is spliced in after left, and its tail points past the removed nodes.' })
   const result = walk(head1).map(node => node.value)
-  frames.push({ phase: 'done', activeLine: L('return the values'), nodes: walk(head1), pointers: [], removed: [], message: `Merged list: [${result.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return the values'), nodes: walk(head1), pointers: [], removed: [], message: `Merged list: [${result.join(', ')}].` })
   return { input: { list1, a, b, list2 }, result, frames }
 }
 

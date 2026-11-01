@@ -32,7 +32,7 @@ export function buildTrace({ m, n, introverts, extroverts }) {
   const start = { profile: Array(n).fill(0), intro: 0, extro: 0, score: 0 }
   states.set(`${start.profile.join(',')}|0|0`, start)
   const counts = Array(m * n).fill(null)
-  const frames = [{ phase: 'start', cell: null, states: 1, best: 0, counts: [...counts], activeLine: L('set states to'), message: 'The grid starts empty.' }]
+  const frames = [{ phase: 'start', pythonLine: 10, cell: null, states: 1, best: 0, counts: [...counts], activeLine: L('set states to'), message: 'The grid starts empty.' }]
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       const next = new Map()
@@ -60,11 +60,11 @@ export function buildTrace({ m, n, introverts, extroverts }) {
       states = next
       const best = Math.max(...[...states.values()].map(v => v.score))
       counts[r * n + c] = states.size
-      frames.push({ phase: 'cell', cell: [r, c], states: states.size, best, counts: [...counts], activeLine: L('for each state, and each choice'), message: `Cell (${r + 1}, ${c + 1}): ${states.size} profile(s) kept, best running total ${best}.` })
+      frames.push({ phase: 'cell', pythonLine: 33, cell: [r, c], states: states.size, best, counts: [...counts], activeLine: L('for each state, and each choice'), message: `Cell (${r + 1}, ${c + 1}): ${states.size} profile(s) kept, best running total ${best}.` })
     }
   }
   const result = Math.max(...[...states.values()].map(v => v.score))
-  frames.push({ phase: 'done', cell: null, states: states.size, best: result, counts: [...counts], activeLine: L('return the largest total'), result, message: `Maximum grid happiness: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 34, cell: null, states: states.size, best: result, counts: [...counts], activeLine: L('return the largest total'), result, message: `Maximum grid happiness: ${result}.` })
   return { input: { m, n, introverts, extroverts }, result, frames }
 }
 

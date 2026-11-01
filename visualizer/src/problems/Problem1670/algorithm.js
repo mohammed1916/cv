@@ -23,7 +23,7 @@ export function buildTrace(ops) {
     while (front.length < target) front.push(back.shift())
   }
   const results = []
-  const frames = [{ phase: 'start', activeLine: L('design a queue'), front: [], back: [], results: [], message: 'Start with an empty queue. The front half holds floor(n / 2) items.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('design a queue'), front: [], back: [], results: [], message: 'Start with an empty queue. The front half holds floor(n / 2) items.' }]
   for (const [name, value] of ops) {
     let out = null
     let message
@@ -43,9 +43,9 @@ export function buildTrace(ops) {
     }
     if (out !== null && name.startsWith('pop')) results.push(out)
     rebalance()
-    frames.push({ phase: name.startsWith('push') ? 'push' : 'pop', activeLine: L(`${name}:`), front: [...front], back: [...back], results: [...results], message: `${message} Rebalance so the front half holds ${Math.floor(size() / 2)}.` })
+    frames.push({ phase: name.startsWith('push') ? 'push' : 'pop', pythonLine: out === -1 ? 23 : ({ pushFront: 17, pushMiddle: 19, pushBack: 21, popFront: 26, popBack: 28, popMiddle: 30 })[name], activeLine: L(`${name}:`), front: [...front], back: [...back], results: [...results], message: `${message} Rebalance so the front half holds ${Math.floor(size() / 2)}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return results'), front: [...front], back: [...back], results: [...results], message: `Popped values: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 32, activeLine: L('return results'), front: [...front], back: [...back], results: [...results], message: `Popped values: [${results.join(', ')}].` })
   return { input: ops, result: results, frames }
 }
 

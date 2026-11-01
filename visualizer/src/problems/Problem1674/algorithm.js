@@ -24,7 +24,7 @@ export function buildTrace({ nums, limit }) {
   const top = 2 * limit
   const diff = Array(top + 3).fill(0)
   let base = 0
-  const frames = [{ phase: 'start', activeLine: L('make a difference array'), index: -1, costs: null, message: `Try every common sum from 2 to ${top}.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('make a difference array'), index: -1, costs: null, message: `Try every common sum from 2 to ${top}.` }]
   for (let i = 0; i < n / 2; i++) {
     const a = nums[i]
     const b = nums[n - 1 - i]
@@ -35,7 +35,7 @@ export function buildTrace({ nums, limit }) {
     diff[hi + limit + 1] += 1
     diff[a + b] -= 1
     diff[a + b + 1] += 1
-    frames.push({ phase: 'pair', activeLine: L('for each mirrored'), index: a + b, costs: null, message: `Pair (${a}, ${b}) costs 2 by default, 1 for sums ${lo + 1} to ${hi + limit}, and 0 for sum ${a + b}.` })
+    frames.push({ phase: 'pair', pythonLine: 15, activeLine: L('for each mirrored'), index: a + b, costs: null, message: `Pair (${a}, ${b}) costs 2 by default, 1 for sums ${lo + 1} to ${hi + limit}, and 0 for sum ${a + b}.` })
   }
   const costs = []
   let running = 0
@@ -43,13 +43,13 @@ export function buildTrace({ nums, limit }) {
     running += diff[x]
     costs.push(base + running)
   }
-  frames.push({ phase: 'scan', activeLine: L('running sum'), index: -1, costs: [...costs], message: 'Each target sum now has its total number of moves.' })
+  frames.push({ phase: 'scan', pythonLine: 20, activeLine: L('running sum'), index: -1, costs: [...costs], message: 'Each target sum now has its total number of moves.' })
   let best = Infinity
   let bestSum = 2
   for (let x = 2; x <= top; x++) {
     if (costs[x] < best) { best = costs[x]; bestSum = x }
   }
-  frames.push({ phase: 'done', activeLine: L('return the smallest'), index: bestSum, costs, message: `Target sum ${bestSum} needs ${best} move(s).` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return the smallest'), index: bestSum, costs, message: `Target sum ${bestSum} needs ${best} move(s).` })
   return { input: { nums, limit }, costs, result: best, frames }
 }
 

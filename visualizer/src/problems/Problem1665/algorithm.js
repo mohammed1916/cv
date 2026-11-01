@@ -15,16 +15,16 @@ export function buildTrace(input) {
   const order = tasks.map((_, i) => i).sort((a, b) => gap(b) - gap(a) || a - b)
   let spent = 0
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the tasks'), task: -1, spent, best, message: 'Sort the tasks by minimum minus actual, largest gap first.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('sort the tasks'), task: -1, spent, best, message: 'Sort the tasks by minimum minus actual, largest gap first.' }]
   for (const i of order) {
     const [actual, minimum] = tasks[i]
     const need = spent + minimum
     best = Math.max(best, need)
-    frames.push({ phase: 'task', activeLine: L('larger of best'), task: i, spent, need, best, message: `Task [${actual}, ${minimum}] needs ${need} energy at its start; best is ${best}.` })
+    frames.push({ phase: 'task', pythonLine: 6, activeLine: L('larger of best'), task: i, spent, need, best, message: `Task [${actual}, ${minimum}] needs ${need} energy at its start; best is ${best}.` })
     spent += actual
-    frames.push({ phase: 'spend', activeLine: L('add actual to spent'), task: i, spent, need, best, message: `Finishing the task spends ${actual}; ${spent} spent so far.` })
+    frames.push({ phase: 'spend', pythonLine: 7, activeLine: L('add actual to spent'), task: i, spent, need, best, message: `Finishing the task spends ${actual}; ${spent} spent so far.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), task: -1, spent, best, message: `Minimum initial energy: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return best'), task: -1, spent, best, message: `Minimum initial energy: ${best}.` })
   return { input, result: best, frames }
 }
 

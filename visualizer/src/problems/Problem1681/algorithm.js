@@ -37,7 +37,7 @@ export function buildTrace({ nums, k }) {
   const best = Array(full + 1).fill(INF)
   const pick = Array(full + 1).fill(0)
   best[0] = 0
-  const frames = [{ phase: 'start', mask: 0, group: 0, value: 0, activeLine: L('set size to'), message: `Each of the ${k} groups holds ${size} values, and the values in a group must all be different.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, mask: 0, group: 0, value: 0, activeLine: L('set size to'), message: `Each of the ${k} groups holds ${size} values, and the values in a group must all be different.` }]
   for (let mask = 1; mask <= full; mask++) {
     if (bitCount(mask) % size !== 0) continue
     const low = mask & -mask
@@ -46,10 +46,10 @@ export function buildTrace({ nums, k }) {
       const candidate = best[mask ^ sub] + cost.get(sub)
       if (candidate < best[mask]) { best[mask] = candidate; pick[mask] = sub }
     }
-    frames.push({ phase: 'mask', mask, group: best[mask] === INF ? 0 : pick[mask], value: best[mask], activeLine: L('keep the smallest'), message: best[mask] === INF ? `Elements ${bits(mask)} cannot be split into valid groups.` : `Elements ${bits(mask)}: the best split keeps a group ${bits(pick[mask])} at total ${best[mask]}.` })
+    frames.push({ phase: 'mask', pythonLine: 22, mask, group: best[mask] === INF ? 0 : pick[mask], value: best[mask], activeLine: L('keep the smallest'), message: best[mask] === INF ? `Elements ${bits(mask)} cannot be split into valid groups.` : `Elements ${bits(mask)}: the best split keeps a group ${bits(pick[mask])} at total ${best[mask]}.` })
   }
   const result = best[full] === INF ? -1 : best[full]
-  frames.push({ phase: 'done', mask: full, group: 0, value: result, activeLine: L('return best[all]'), result, message: result === -1 ? 'No split into equal groups with distinct values exists.' : `Minimum total incompatibility: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 24, mask: full, group: 0, value: result, activeLine: L('return best[all]'), result, message: result === -1 ? 'No split into equal groups with distinct values exists.' : `Minimum total incompatibility: ${result}.` })
   return { input: { nums, k }, result, frames }
   function bits(mask) { return nums.map((_, i) => i).filter(i => mask & (1 << i)).map(i => nums[i]).join(', ') || 'none' }
 }

@@ -9,19 +9,19 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const values = nums.map(x => (x % 2 ? x * 2 : x))
   let best = Infinity
-  const frames = [{ phase: 'start', activeLine: L('double every odd number'), values: [...values], picked: -1, best, message: 'Double every odd number, so each value can now only be halved.' }]
+  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('double every odd number'), values: [...values], picked: -1, best, message: 'Double every odd number, so each value can now only be halved.' }]
   for (;;) {
     let at = 0
     for (let i = 1; i < values.length; i++) if (values[i] > values[at]) at = i
     const top = values[at]
     const low = Math.min(...values)
     best = Math.min(best, top - low)
-    frames.push({ phase: 'measure', activeLine: L('record the largest minus the smallest'), values: [...values], picked: at, best, message: `Largest ${top}, smallest ${low}, deviation ${top - low}. Best so far ${best}.` })
+    frames.push({ phase: 'measure', pythonLine: 13, activeLine: L('record the largest minus the smallest'), values: [...values], picked: at, best, message: `Largest ${top}, smallest ${low}, deviation ${top - low}. Best so far ${best}.` })
     if (top % 2) break
     values[at] = top / 2
-    frames.push({ phase: 'halve', activeLine: L('halve the largest'), values: [...values], picked: at, best, message: `Halve ${top} to ${top / 2}.` })
+    frames.push({ phase: 'halve', pythonLine: 17, activeLine: L('halve the largest'), values: [...values], picked: at, best, message: `Halve ${top} to ${top / 2}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), values: [...values], picked: -1, best, message: `Minimum deviation: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return best'), values: [...values], picked: -1, best, message: `Minimum deviation: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

@@ -16,16 +16,16 @@ export function buildTrace(input) {
   const seen = new Set([key(0, false)])
   const queue = [{ pos: 0, back: false, steps: 0 }]
   const reached = [0]
-  const frames = [{ phase: 'start', activeLine: L('set the start state'), current: 0, frontier: [0], visited: [0], steps: 0, message: 'Start at position 0 with no backward jump yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set the start state'), current: 0, frontier: [0], visited: [0], steps: 0, message: 'Start at position 0 with no backward jump yet.' }]
   let answer = -1
   for (let head = 0; head < queue.length; head++) {
     const here = queue[head]
     if (here.pos === x) {
       answer = here.steps
-      frames.push({ phase: 'found', activeLine: L('if here is the target position'), current: here.pos, frontier: queue.slice(head + 1).map(s => s.pos), visited: [...reached], steps: here.steps, message: `Reached ${x} after ${answer} jump(s).` })
+      frames.push({ phase: 'found', pythonLine: 11, activeLine: L('if here is the target position'), current: here.pos, frontier: queue.slice(head + 1).map(s => s.pos), visited: [...reached], steps: here.steps, message: `Reached ${x} after ${answer} jump(s).` })
       break
     }
-    frames.push({ phase: 'pop', activeLine: L('take the next state'), current: here.pos, frontier: queue.slice(head + 1).map(s => s.pos), visited: [...reached], steps: here.steps, message: `At ${here.pos} after ${here.steps} jump(s)${here.back ? ', last jump backward' : ''}.` })
+    frames.push({ phase: 'pop', pythonLine: 8, activeLine: L('take the next state'), current: here.pos, frontier: queue.slice(head + 1).map(s => s.pos), visited: [...reached], steps: here.steps, message: `At ${here.pos} after ${here.steps} jump(s)${here.back ? ', last jump backward' : ''}.` })
     const options = [{ pos: here.pos + a, back: false }]
     if (!here.back && here.pos - b >= 0) options.push({ pos: here.pos - b, back: true })
     for (const opt of options) {
@@ -37,8 +37,8 @@ export function buildTrace(input) {
       }
     }
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('return minus one when the queue'), current: null, frontier: [], visited: [...reached], steps: null, message: `${x} cannot be reached: -1.` })
-  else frames.push({ phase: 'done', activeLine: L('return its jump count'), current: null, frontier: [], visited: [...reached], steps: answer, message: `Minimum jumps: ${answer}.` })
+  if (answer === -1) frames.push({ phase: 'done', pythonLine: 19, activeLine: L('return minus one when the queue'), current: null, frontier: [], visited: [...reached], steps: null, message: `${x} cannot be reached: -1.` })
+  else frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return its jump count'), current: null, frontier: [], visited: [...reached], steps: answer, message: `Minimum jumps: ${answer}.` })
   return { input, limit, result: answer, frames }
 }
 

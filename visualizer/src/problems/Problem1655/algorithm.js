@@ -34,7 +34,7 @@ export function buildTrace({ nums, quantity }) {
   let reachable = Array(1 << m).fill(false)
   reachable[0] = true
   const show = r => r.map(b => (b ? '✓' : '·'))
-  const frames = [{ phase: 'start', count: null, value: null, table: [show(reachable)], activeLine: L('set reachable[0]'), message: 'Nobody is served yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 8, count: null, value: null, table: [show(reachable)], activeLine: L('set reachable[0]'), message: 'Nobody is served yet.' }]
   counts.forEach((c, index) => {
     const next = reachable.slice()
     for (let mask = 0; mask <= full; mask++) {
@@ -45,10 +45,10 @@ export function buildTrace({ nums, quantity }) {
       }
     }
     reachable = next
-    frames.push({ phase: 'value', count: c, value: index + 1, table: [show(reachable)], activeLine: L('for each value with count'), message: `Value ${index + 1} appears ${c} time(s). Reachable sets now cover more customers.` })
+    frames.push({ phase: 'value', pythonLine: 20, count: c, value: index + 1, table: [show(reachable)], activeLine: L('for each value with count'), message: `Value ${index + 1} appears ${c} time(s). Reachable sets now cover more customers.` })
   })
   const result = reachable[full]
-  frames.push({ phase: 'done', count: null, value: null, table: [show(reachable)], activeLine: L('return reachable[all'), result, message: result ? 'Every customer can receive a full group of one value.' : 'Some customer cannot be served from the values available.' })
+  frames.push({ phase: 'done', pythonLine: 21, count: null, value: null, table: [show(reachable)], activeLine: L('return reachable[all'), result, message: result ? 'Every customer can receive a full group of one value.' : 'Some customer cannot be served from the values available.' })
   return { input: { nums, quantity }, result, frames }
 }
 
