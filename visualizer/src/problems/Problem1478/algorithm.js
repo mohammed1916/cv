@@ -29,7 +29,7 @@ export function buildTrace({ houses, k }) {
   const n = h.length
   const INF = Infinity
   const cost = Array.from({ length: n }, () => Array(n).fill(0))
-  const frames = [{ phase: 'start', range: null, median: null, cell: null, table: null, activeLine: L('sort houses'), message: 'Sort the houses so that every mailbox serves a run of neighbours.' }]
+  const frames = [{ phase: 'start', range: null, median: null, cell: null, table: null, activeLine: L('sort houses'), pythonLine: 2, message: 'Sort the houses so that every mailbox serves a run of neighbours.' }]
   const show = v => (v === INF ? '∞' : v)
   for (let i = 0; i < n; i++) {
     for (let j = i; j < n; j++) {
@@ -37,13 +37,13 @@ export function buildTrace({ houses, k }) {
       let total = 0
       for (let t = i; t <= j; t++) total += Math.abs(h[t] - median)
       cost[i][j] = total
-      frames.push({ phase: 'cost', range: [i, j], median: (i + j) >> 1, cell: null, table: null, activeLine: L('set cost[i][j]'), message: `Houses ${h[i]} to ${h[j]} share a mailbox at ${median}, a total distance of ${total}.` })
+      frames.push({ phase: 'cost', range: [i, j], median: (i + j) >> 1, cell: null, table: null, activeLine: L('set cost[i][j]'), pythonLine: 8, message: `Houses ${h[i]} to ${h[j]} share a mailbox at ${median}, a total distance of ${total}.` })
     }
   }
   const best = Array.from({ length: k + 1 }, () => Array(n + 1).fill(INF))
   best[0][0] = 0
   const snapshot = () => best.map(row => row.map(show))
-  frames.push({ phase: 'base', range: null, median: null, cell: null, table: snapshot(), activeLine: L('set best[0][0]'), message: 'Zero mailboxes can cover zero houses at no cost.' })
+  frames.push({ phase: 'base', range: null, median: null, cell: null, table: snapshot(), activeLine: L('set best[0][0]'), pythonLine: 11, message: 'Zero mailboxes can cover zero houses at no cost.' })
   for (let m = 1; m <= k; m++) {
     for (let i = m; i <= n; i++) {
       for (let p = m - 1; p < i; p++) {
@@ -51,11 +51,11 @@ export function buildTrace({ houses, k }) {
         const candidate = best[m - 1][p] + cost[p][i - 1]
         if (candidate < best[m][i]) best[m][i] = candidate
       }
-      frames.push({ phase: 'cell', range: null, median: null, cell: [m, i], table: snapshot(), activeLine: L('keep the smallest'), message: `${m} mailbox(es) cover the first ${i} houses at a best cost of ${show(best[m][i])}.` })
+      frames.push({ phase: 'cell', range: null, median: null, cell: [m, i], table: snapshot(), activeLine: L('keep the smallest'), pythonLine: 18, message: `${m} mailbox(es) cover the first ${i} houses at a best cost of ${show(best[m][i])}.` })
     }
   }
   const result = best[k][n]
-  frames.push({ phase: 'done', range: null, median: null, cell: [k, n], table: snapshot(), activeLine: L('return best[k][n]'), result, message: `Minimum total distance with ${k} mailboxes: ${result}.` })
+  frames.push({ phase: 'done', range: null, median: null, cell: [k, n], table: snapshot(), activeLine: L('return best[k][n]'), pythonLine: 19, result, message: `Minimum total distance with ${k} mailboxes: ${result}.` })
   return { input: { houses, k }, sorted: h, result, frames }
 }
 

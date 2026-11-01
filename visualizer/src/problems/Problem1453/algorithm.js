@@ -39,14 +39,14 @@ export function buildTrace({ points, r }) {
   const round = v => Math.round(v * 100) / 100
   let best = 0
   let bestCenter = null
-  const frames = [{ phase: 'start', center: null, covered: points.map(() => false), best, activeLine: L('set best to 0'), message: `Try circles of radius ${r} that pass through a dart or are centred on one.` }]
-  const consider = (phase, cx, cy, text) => {
+  const frames = [{ phase: 'start', center: null, covered: points.map(() => false), best, activeLine: L('set best to 0'), pythonLine: 16, message: `Try circles of radius ${r} that pass through a dart or are centred on one.` }]
+  const consider = (phase, cx, cy, text, pythonLine) => {
     const covered = covers(cx, cy)
     const count = countOf(covered)
     if (count > best) { best = count; bestCenter = [cx, cy] }
-    frames.push({ phase, center: [cx, cy], covered, best, activeLine: L(phase === 'point' ? 'count the points within r of p' : 'count the points within r of its centre'), message: `${text}: centre (${round(cx)}, ${round(cy)}) covers ${count} dart(s). Best so far: ${best}.` })
+    frames.push({ phase, center: [cx, cy], covered, best, activeLine: L(phase === 'point' ? 'count the points within r of p' : 'count the points within r of its centre'), pythonLine, message: `${text}: centre (${round(cx)}, ${round(cy)}) covers ${count} dart(s). Best so far: ${best}.` })
   }
-  points.forEach(([x, y], i) => consider('point', x, y, `Dart ${i + 1} as the centre`))
+  points.forEach(([x, y], i) => consider('point', x, y, `Dart ${i + 1} as the centre`, 18))
   for (let i = 0; i < points.length; i++) {
     for (let j = i + 1; j < points.length; j++) {
       const [x1, y1] = points[i]
@@ -61,11 +61,11 @@ export function buildTrace({ points, r }) {
       const my = (y1 + y2) / 2
       const ux = -dy / d
       const uy = dx / d
-      consider('pair', mx + h * ux, my + h * uy, `Darts ${i + 1} and ${j + 1}, one circle`)
-      consider('pair', mx - h * ux, my - h * uy, `Darts ${i + 1} and ${j + 1}, other circle`)
+      consider('pair', mx + h * ux, my + h * uy, `Darts ${i + 1} and ${j + 1}, one circle`, 34)
+      consider('pair', mx - h * ux, my - h * uy, `Darts ${i + 1} and ${j + 1}, other circle`, 35)
     }
   }
-  frames.push({ phase: 'done', center: bestCenter, covered: bestCenter ? covers(...bestCenter) : points.map(() => false), best, activeLine: L('return best'), result: best, message: `The most darts one board of radius ${r} can cover is ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 36, center: bestCenter, covered: bestCenter ? covers(...bestCenter) : points.map(() => false), best, activeLine: L('return best'), result: best, message: `The most darts one board of radius ${r} can cover is ${best}.` })
   return { input: { points, r }, result: best, frames }
 }
 

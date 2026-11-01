@@ -19,19 +19,19 @@ export function buildTrace({ n, prerequisites, queries }) {
   const reach = Array.from({ length: n }, () => Array(n).fill(0))
   for (const [a, b] of prerequisites) reach[a][b] = 1
   const snapshot = () => yesNo(reach)
-  const frames = [{ phase: 'start', activeLine: L('set reach[a][b] to 1'), cell: null, highlighted: [], matrix: snapshot(), queue: [], message: 'Direct prerequisites only: reach[a][b] = 1 when a must come before b.' }]
+  const frames = [{ phase: 'start', activeLine: L('set reach[a][b] to 1'), pythonLine: 4, cell: null, highlighted: [], matrix: snapshot(), queue: [], message: 'Direct prerequisites only: reach[a][b] = 1 when a must come before b.' }]
   for (let k = 0; k < n; k++) {
-    frames.push({ phase: 'pivot', activeLine: L('for each intermediate course k'), cell: null, highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], message: `Course ${k} is now an intermediate: anything that reaches it reaches whatever it reaches.` })
+    frames.push({ phase: 'pivot', activeLine: L('for each intermediate course k'), pythonLine: 5, cell: null, highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], message: `Course ${k} is now an intermediate: anything that reaches it reaches whatever it reaches.` })
     for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
       if (reach[i][k] && reach[k][j] && !reach[i][j]) {
         reach[i][j] = 1
-        frames.push({ phase: 'relax', activeLine: L('set reach[i][j] to 1'), cell: null, target: [i, j], highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], message: `Through ${k}: course ${i} now reaches ${j}.` })
+        frames.push({ phase: 'relax', activeLine: L('set reach[i][j] to 1'), pythonLine: 9, cell: null, target: [i, j], highlighted: pivotCells(n, k), matrix: snapshot(), queue: [], message: `Through ${k}: course ${i} now reaches ${j}.` })
       }
     }
   }
   const result = queries.map(([u, v]) => reach[u][v] === 1)
   const queue = queries.map(([u, v], q) => `query ${q}: ${u} before ${v}? ${reach[u][v] ? 'yes' : 'no'}`)
-  frames.push({ phase: 'done', activeLine: L('answer each query'), cell: null, highlighted: [], matrix: snapshot(), queue, message: `Answers: ${result.map(String).join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('answer each query'), pythonLine: 10, cell: null, highlighted: [], matrix: snapshot(), queue, message: `Answers: ${result.map(String).join(', ')}.` })
   return { input: { n, prerequisites, queries }, result, frames }
 }
 

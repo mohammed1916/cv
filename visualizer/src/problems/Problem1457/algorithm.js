@@ -10,25 +10,25 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const root = treeFromLevelOrder(input.values)
-  const frames = [{ phase: 'start', activeLine: L('call walk on the root'), node: null, odd: [], count: 0, message: 'Start at the root with no digits seen yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('call walk on the root'), pythonLine: 19, node: null, odd: [], count: 0, message: 'Start at the root with no digits seen yet.' }]
   let count = 0
   // mask has bit d set when digit d has appeared an odd number of times on the path so far.
   const walk = (node, mask) => {
     if (!node) return
     const next = mask ^ (1 << node.value)
     const odd = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(d => next & (1 << d))
-    frames.push({ phase: 'flip', activeLine: L('flip the parity'), node: node.id, odd, count, message: `Flip digit ${node.value}. Odd-count digits now: ${odd.join(', ') || 'none'}.` })
+    frames.push({ phase: 'flip', activeLine: L('flip the parity'), pythonLine: 22, node: node.id, odd, count, message: `Flip digit ${node.value}. Odd-count digits now: ${odd.join(', ') || 'none'}.` })
     if (!node.left && !node.right) {
       const ok = (next & (next - 1)) === 0
       if (ok) count++
-      frames.push({ phase: ok ? 'count' : 'reject', activeLine: L('if odd has at most one set bit'), node: node.id, odd, count, message: ok ? `Leaf path can form a palindrome. Count is now ${count}.` : 'More than one digit has an odd count, so this path is not pseudo-palindromic.' })
+      frames.push({ phase: ok ? 'count' : 'reject', activeLine: L('if odd has at most one set bit'), pythonLine: ok ? 25 : 24, node: node.id, odd, count, message: ok ? `Leaf path can form a palindrome. Count is now ${count}.` : 'More than one digit has an odd count, so this path is not pseudo-palindromic.' })
       return
     }
     walk(node.left, next)
     walk(node.right, next)
   }
   walk(root, 0)
-  frames.push({ phase: 'done', activeLine: L('return count'), node: null, odd: [], count, message: `Pseudo-palindromic root-to-leaf paths: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 29, node: null, odd: [], count, message: `Pseudo-palindromic root-to-leaf paths: ${count}.` })
   return { input, root, result: count, frames }
 }
 

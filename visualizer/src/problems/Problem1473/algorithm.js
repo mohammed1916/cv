@@ -20,7 +20,7 @@ export function buildTrace(input) {
   for (let c = 1; c <= n; c++) {
     if (houses[0] === 0 || houses[0] === c) dp[1][c] = houses[0] === c ? 0 : cost[0][c - 1]
   }
-  const frames = [{ phase: 'start', activeLine: L('set dp[1][c]'), house: 0, color: 0, count: 0, table: shown(dp), total: null, message: 'House 0 opens the first neighbourhood in each colour it may take.' }]
+  const frames = [{ phase: 'start', activeLine: L('set dp[1][c]'), pythonLine: 6, house: 0, color: 0, count: 0, table: shown(dp), total: null, message: 'House 0 opens the first neighbourhood in each colour it may take.' }]
   for (let i = 1; i < m; i++) {
     const next = grid(target + 1, n + 1)
     for (let c = 1; c <= n; c++) {
@@ -30,14 +30,14 @@ export function buildTrace(input) {
         let best = dp[j][c]
         for (let d = 1; d <= n; d++) if (d !== c) best = Math.min(best, dp[j - 1][d])
         next[j][c] = best + paint
-        frames.push({ phase: 'cell', activeLine: L('set next[j][c] to best plus paint'), house: i, color: c, count: j, table: shown(next), total: null, message: `House ${i} in colour ${c} with ${j} neighbourhood(s): ${next[j][c] === INF ? 'not possible' : next[j][c]}.` })
+        frames.push({ phase: 'cell', activeLine: L('set next[j][c] to best plus paint'), pythonLine: 18, house: i, color: c, count: j, table: shown(next), total: null, message: `House ${i} in colour ${c} with ${j} neighbourhood(s): ${next[j][c] === INF ? 'not possible' : next[j][c]}.` })
       }
     }
     dp = next
   }
   const best = Math.min(...dp[target].slice(1))
   const result = best === INF ? -1 : best
-  frames.push({ phase: 'done', activeLine: L('return the smallest'), house: m - 1, color: 0, count: target, table: shown(dp), total: result, message: result === -1 ? 'No painting gives exactly the target neighbourhoods.' : `Minimum cost: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the smallest'), pythonLine: 21, house: m - 1, color: 0, count: target, table: shown(dp), total: result, message: result === -1 ? 'No painting gives exactly the target neighbourhoods.' : `Minimum cost: ${result}.` })
   return { input, result, frames }
 }
 

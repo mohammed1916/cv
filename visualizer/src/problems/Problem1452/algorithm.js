@@ -25,11 +25,11 @@ export function buildTrace(input) {
   const frames = []
   let current = -1
   let beatenBy = -1
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, current, beatenBy, masks: [...masks], kept: [...kept], bits: [...bit.entries()], message,
+  const snap = (phase, activeLine, pythonLine, message) => frames.push({
+    phase, activeLine, pythonLine, current, beatenBy, masks: [...masks], kept: [...kept], bits: [...bit.entries()], message,
   })
 
-  snap('start', L('set the answer to empty'), 'Start with an empty answer.')
+  snap('start', L('set the answer to empty'), 11, 'Start with an empty answer.')
   lists.forEach((companies, i) => {
     let mask = 0
     for (const c of companies) {
@@ -38,24 +38,24 @@ export function buildTrace(input) {
     }
     masks[i] = mask
   })
-  snap('mask', L('turn each person'), 'Each list becomes a bitmask, one bit per company.')
+  snap('mask', L('turn each person'), 10, 'Each list becomes a bitmask, one bit per company.')
   for (let i = 0; i < lists.length; i++) {
     current = i
     beatenBy = -1
     for (let j = 0; j < lists.length; j++) {
       if (j !== i && (masks[i] & masks[j]) === masks[i]) { beatenBy = j; break }
     }
-    snap('scan', L('check whether some other person'), beatenBy === -1
+    snap('scan', L('check whether some other person'), 13, beatenBy === -1
       ? `No other list contains person ${i}'s list.`
       : `Person ${beatenBy}'s list contains person ${i}'s list, so person ${i} is out.`)
     if (beatenBy === -1) {
       kept.push(i)
-      snap('keep', L('if none does'), `Keep person ${i}.`)
+      snap('keep', L('if none does'), 14, `Keep person ${i}.`)
     }
   }
   current = -1
   beatenBy = -1
-  snap('done', L('return the answer'), `Answer: [${kept.join(', ')}].`)
+  snap('done', L('return the answer'), 15, `Answer: [${kept.join(', ')}].`)
   return { input, lists, result: kept, frames }
 }
 

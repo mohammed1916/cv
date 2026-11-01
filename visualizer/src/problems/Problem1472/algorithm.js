@@ -83,8 +83,10 @@ export function buildTrace(input) {
   let cur = 0;
   const results = [];
   const frames = [];
+  // Python line for each pseudocode line used by a frame (see PYTHON_LINES).
+  const PY_LINE = { 2: 2, 5: 5, 7: 7, 8: 8, 10: 10, 12: 12, 13: 13, 15: 15, 16: 16, 17: 17 };
   const frame = (activeLine, phase, message, extra = {}) => frames.push({
-    activeLine, phase, message, history: [...history], cur, results: [...results], ...extra,
+    activeLine, pythonLine: PY_LINE[activeLine], phase, message, history: [...history], cur, results: [...results], ...extra,
   });
 
   frame(2, "init", `Start with homepage ${homepage} as the only page in history.`);

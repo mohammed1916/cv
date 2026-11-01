@@ -16,7 +16,7 @@ export function buildTrace(input) {
   // bestEnd[b] is the shortest target-sum window that ends at or before prefix index b.
   const bestEnd = new Array(n + 1).fill(Infinity)
   let ans = Infinity
-  const frames = [{ phase: 'start', activeLine: L('set bestEnd[0]'), index: -1, window: null, best: null, message: 'No window has been found yet.' }]
+  const frames = [{ phase: 'start', activeLine: L('set bestEnd[0]'), pythonLine: 8, index: -1, window: null, best: null, message: 'No window has been found yet.' }]
   for (let b = 1; b <= n; b++) {
     bestEnd[b] = bestEnd[b - 1]
     const need = prefix[b] - target
@@ -29,10 +29,10 @@ export function buildTrace(input) {
       if (bestEnd[a] !== Infinity) ans = Math.min(ans, length + bestEnd[a])
     }
     last.set(prefix[b], b)
-    frames.push({ phase: 'scan', activeLine: L('if need is in last'), index: b - 1, window, best: ans === Infinity ? null : ans, bestEnd: bestEnd[b], message: window ? `Window ${window[0]} to ${window[1]} sums to ${target}. Best total so far ${ans === Infinity ? 'none' : ans}.` : `No window ends at ${b - 1} with sum ${target}.` })
+    frames.push({ phase: 'scan', activeLine: L('if need is in last'), pythonLine: window ? 15 : 18, index: b - 1, window, best: ans === Infinity ? null : ans, bestEnd: bestEnd[b], message: window ? `Window ${window[0]} to ${window[1]} sums to ${target}. Best total so far ${ans === Infinity ? 'none' : ans}.` : `No window ends at ${b - 1} with sum ${target}.` })
   }
   const result = ans === Infinity ? -1 : ans
-  frames.push({ phase: 'done', activeLine: L('return -1 if'), index: n, window: null, best: result, message: `Smallest total length: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return -1 if'), pythonLine: 19, index: n, window: null, best: result, message: `Smallest total length: ${result}.` })
   return { input, result, frames }
 }
 

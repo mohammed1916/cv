@@ -21,7 +21,7 @@ export function buildTrace(balls) {
   const total = balls.reduce((a, b) => a + b, 0)
   const half = total / 2
   let ways = new Map([[key(0, 0, 0), 1]])
-  const frames = [{ phase: 'start', activeLine: L('let T be'), color: -1, states: ways.size, favorable: 0, message: `There are ${total} balls. Each box must receive ${half}.` }]
+  const frames = [{ phase: 'start', activeLine: L('let T be'), pythonLine: 4, color: -1, states: ways.size, favorable: 0, message: `There are ${total} balls. Each box must receive ${half}.` }]
   balls.forEach((count, color) => {
     const next = new Map()
     for (const [state, w] of ways) {
@@ -33,7 +33,7 @@ export function buildTrace(balls) {
       }
     }
     ways = next
-    frames.push({ phase: 'color', activeLine: L('for each color'), color, states: ways.size, favorable: 0, message: `Colour ${color + 1} has ${count} balls. Split them into the two boxes in every way.` })
+    frames.push({ phase: 'color', activeLine: L('for each color'), pythonLine: 15, color, states: ways.size, favorable: 0, message: `Colour ${color + 1} has ${count} balls. Split them into the two boxes in every way.` })
   })
   let favorable = 0
   for (const [state, w] of ways) {
@@ -41,7 +41,7 @@ export function buildTrace(balls) {
     if (size === half && d1 === d2) favorable += w
   }
   const result = favorable / choose(total, half)
-  frames.push({ phase: 'done', activeLine: L('return favorable'), color: balls.length, states: ways.size, favorable, message: `${favorable} favourable splits out of ${choose(total, half)}, so the probability is ${result.toFixed(5)}.` })
+  frames.push({ phase: 'done', activeLine: L('return favorable'), pythonLine: 17, color: balls.length, states: ways.size, favorable, message: `${favorable} favourable splits out of ${choose(total, half)}, so the probability is ${result.toFixed(5)}.` })
   return { input: balls, result, frames }
 }
 
