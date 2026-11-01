@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const { mat, k } = input
   const n = mat[0].length
   const shift = k % n
-  const frames = [{ phase: 'start', activeLine: L('set shift to'), row: -1, shifted: null, message: `Shift by ${shift} (k modulo the row length ${n}).` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set shift to'), row: -1, shifted: null, message: `Shift by ${shift} (k modulo the row length ${n}).` }]
   for (let r = 0; r < mat.length; r++) {
     const row = mat[r]
     const shifted = []
@@ -24,13 +24,13 @@ export function buildTrace(input) {
     }
     const direction = r % 2 === 0 ? 'right' : 'left'
     const same = shifted.every((v, j) => v === row[j])
-    frames.push({ phase: 'row', activeLine: L(`shift the row ${direction}`), row: r, shifted, message: `Row ${r} shifted ${direction} becomes [${shifted.join(', ')}]${same ? ', which matches.' : ', which differs.'}` })
+    frames.push({ pythonLine: r % 2 === 0 ? 6 : 8, phase: 'row', activeLine: L(`shift the row ${direction}`), row: r, shifted, message: `Row ${r} shifted ${direction} becomes [${shifted.join(', ')}]${same ? ', which matches.' : ', which differs.'}` })
     if (!same) {
-      frames.push({ phase: 'done', activeLine: L('return false'), row: r, shifted, message: 'A row changed, so the matrices are not similar.' })
+      frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return false'), row: r, shifted, message: 'A row changed, so the matrices are not similar.' })
       return { input, result: false, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), row: -1, shifted: null, message: 'Every row returns to itself, so the matrices are similar.' })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return true'), row: -1, shifted: null, message: 'Every row returns to itself, so the matrices are similar.' })
   return { input, result: true, frames }
 }
 

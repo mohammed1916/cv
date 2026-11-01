@@ -14,25 +14,25 @@ export function buildTrace({ a, b, n }) {
   let x = 0
   // Bits at n and above are fixed, because x only has bits below n.
   let gap = ((a >> n) << n) - ((b >> n) << n)
-  const frames = [{ phase: 'start', activeLine: L('set x to 0'), bit: null, x, gap, message: `Bits at position ${n} and above stay fixed, so the gap starts at ${gap}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set x to 0'), bit: null, x, gap, message: `Bits at position ${n} and above stay fixed, so the gap starts at ${gap}.` }]
   for (let i = n - 1; i >= 0; i--) {
     const bit = 1 << i
     const aBit = (a & bit) ? 1 : 0
     const bBit = (b & bit) ? 1 : 0
     if (aBit === bBit) {
       if (aBit === 0) x |= bit
-      frames.push({ phase: 'agree', activeLine: L('if the bits agree'), bit: i, x, gap, message: `Bit ${i}: both values have ${aBit}. Setting both to 1 adds the most, so x ${aBit === 0 ? 'sets' : 'keeps'} this bit ${aBit === 0 ? '1' : '0'}.` })
+      frames.push({ pythonLine: 8, phase: 'agree', activeLine: L('if the bits agree'), bit: i, x, gap, message: `Bit ${i}: both values have ${aBit}. Setting both to 1 adds the most, so x ${aBit === 0 ? 'sets' : 'keeps'} this bit ${aBit === 0 ? '1' : '0'}.` })
     } else {
       const wantAOne = gap <= 0
       if ((aBit === 1) !== wantAOne) x |= bit
       gap += wantAOne ? bit : -bit
-      frames.push({ phase: 'split', activeLine: L('give the one'), bit: i, x, gap, message: `Bit ${i} differs. Give the 1 to the ${wantAOne ? 'first' : 'second'} value to keep the gap small; gap is now ${gap}.` })
+      frames.push({ pythonLine: 15, phase: 'split', activeLine: L('give the one'), bit: i, x, gap, message: `Bit ${i} differs. Give the 1 to the ${wantAOne ? 'first' : 'second'} value to keep the gap small; gap is now ${gap}.` })
     }
   }
   const p = (a ^ x)
   const q = (b ^ x)
   const result = Number((BigInt(p) * BigInt(q)) % MOD)
-  frames.push({ phase: 'done', activeLine: L('return (a xor x)'), bit: null, x, gap, message: `(${p} xor ...) product modulo 1000000007 is ${result}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return (a xor x)'), bit: null, x, gap, message: `(${p} xor ...) product modulo 1000000007 is ${result}.` })
   return { input: { a, b, n }, result, frames }
 }
 

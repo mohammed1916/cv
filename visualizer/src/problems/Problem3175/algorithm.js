@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const queue = skills.map((_, i) => i).slice(1)
   let champion = 0
   let streak = 0
-  const frames = [{ phase: 'start', activeLine: L('put players 1 to n minus 1'), champion, challenger: -1, streak, queue: [...queue], message: `Player 0 starts as champion. The queue holds the other ${queue.length} players.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('put players 1 to n minus 1'), champion, challenger: -1, streak, queue: [...queue], message: `Player 0 starts as champion. The queue holds the other ${queue.length} players.` }]
   while (streak < k) {
     const challenger = queue.shift()
     const championWins = skills[champion] > skills[challenger]
@@ -26,10 +26,10 @@ export function buildTrace(input) {
       champion = challenger
       streak = 1
     }
-    frames.push({ phase: 'game', activeLine: L(championWins ? 'add 1 to streak' : 'make the challenger the champion'), champion, challenger, streak, queue: [...queue],
+    frames.push({ pythonLine: championWins ? 8 : 12, phase: 'game', activeLine: L(championWins ? 'add 1 to streak' : 'make the challenger the champion'), champion, challenger, streak, queue: [...queue],
       message: `Player ${champion} won this game. Streak: ${streak} of ${k}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the champion'), champion, challenger: -1, streak, queue: [...queue], message: `Player ${champion} is the first to win ${k} games in a row.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return the champion'), champion, challenger: -1, streak, queue: [...queue], message: `Player ${champion} is the first to win ${k} games in a row.` })
   return { input, result: champion, frames }
 }
 

@@ -12,7 +12,7 @@ export function buildTrace({ nums, k }) {
   const frames = []
   let total = 0
   let groups = []
-  frames.push({ phase: 'start', activeLine: L('set total to 0'), index: -1, groups: [], total, message: `Count subarrays whose AND is ${k}.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), index: -1, groups: [], total, message: `Count subarrays whose AND is ${k}.` })
   for (let i = 0; i < nums.length; i++) {
     const v = nums[i]
     const merged = new Map([[v, 1]])
@@ -21,14 +21,14 @@ export function buildTrace({ nums, k }) {
       merged.set(key, (merged.get(key) || 0) + count)
     }
     groups = [...merged.entries()]
-    frames.push({ phase: 'extend', activeLine: L('build the new groups'), index: i, groups: groups.map(g => [...g]), total, message: `Subarrays ending at ${i} have AND values ${groups.map(([a, c]) => `${a} (x${c})`).join(', ')}.` })
+    frames.push({ pythonLine: 9, phase: 'extend', activeLine: L('build the new groups'), index: i, groups: groups.map(g => [...g]), total, message: `Subarrays ending at ${i} have AND values ${groups.map(([a, c]) => `${a} (x${c})`).join(', ')}.` })
     const hits = merged.get(k) || 0
     if (hits > 0) {
       total += hits
-      frames.push({ phase: 'count', activeLine: L('add the count to total'), index: i, groups: groups.map(g => [...g]), total, message: `${hits} subarray(s) ending at ${i} have AND ${k}; total is now ${total}.` })
+      frames.push({ pythonLine: 10, phase: 'count', activeLine: L('add the count to total'), index: i, groups: groups.map(g => [...g]), total, message: `${hits} subarray(s) ending at ${i} have AND ${k}; total is now ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, groups: [], total, message: `Subarrays with AND ${k}: ${total}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), index: -1, groups: [], total, message: `Subarrays with AND ${k}: ${total}.` })
   return { input: { nums, k }, result: total, frames }
 }
 

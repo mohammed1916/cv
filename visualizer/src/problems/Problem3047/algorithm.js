@@ -10,7 +10,7 @@ export function parseInput(text) {
 
 export function buildTrace(rects) {
   let best = 0
-  const frames = [{ phase: 'start', pair: null, overlap: null, best, activeLine: L('set best to 0'), message: 'Compare every pair of rectangles. Their overlap is a box; its shorter side limits the square.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', pair: null, overlap: null, best, activeLine: L('set best to 0'), message: 'Compare every pair of rectangles. Their overlap is a box; its shorter side limits the square.' }]
   for (let i = 0; i < rects.length; i++) {
     for (let j = i + 1; j < rects.length; j++) {
       const [ax1, ay1, ax2, ay2] = rects[i]
@@ -25,10 +25,10 @@ export function buildTrace(rects) {
       const message = side > 0
         ? `Rectangles ${i} and ${j} overlap in ${w} by ${h}; the largest square is ${side} by ${side}, area ${side * side}.`
         : `Rectangles ${i} and ${j} do not overlap in both directions, so they share no square.`
-      frames.push({ phase: 'pair', pair: [i, j], overlap: { w, h, side }, best, activeLine: L('take the shorter side'), message })
+      frames.push({ pythonLine: side > 0 ? 11 : 9, phase: 'pair', pair: [i, j], overlap: { w, h, side }, best, activeLine: L('take the shorter side'), message })
     }
   }
-  frames.push({ phase: 'done', pair: null, overlap: null, best, activeLine: L('return best'), message: `Largest square area: ${best}.` })
+  frames.push({ pythonLine: 12, phase: 'done', pair: null, overlap: null, best, activeLine: L('return best'), message: `Largest square area: ${best}.` })
   return { input: rects, result: best, frames }
 }
 

@@ -9,30 +9,30 @@ const sortedLetters = text => [...text].sort().join('')
 
 export function buildTrace(s) {
   const n = s.length
-  const frames = [{ phase: 'start', activeLine: L('n = length'), k: null, from: -1, to: -1, message: `Check lengths that divide ${n}, from shortest to longest.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('n = length'), k: null, from: -1, to: -1, message: `Check lengths that divide ${n}, from shortest to longest.` }]
   let answer = n
   for (let k = 1; k <= n; k++) {
     if (n % k !== 0) continue
     const first = sortedLetters(s.slice(0, k))
-    frames.push({ phase: 'length', activeLine: L('first = sorted'), k, from: 0, to: k, message: `Length ${k} divides ${n}. The first block is "${s.slice(0, k)}".` })
+    frames.push({ pythonLine: 6, phase: 'length', activeLine: L('first = sorted'), k, from: 0, to: k, message: `Length ${k} divides ${n}. The first block is "${s.slice(0, k)}".` })
     let ok = true
     for (let start = 0; start < n; start += k) {
       const block = s.slice(start, start + k)
       const match = sortedLetters(block) === first
-      frames.push({ phase: 'block', activeLine: match ? L('for each block') : L('differ from first'), k, from: start, to: start + k, ok: match, message: match ? `Block "${block}" is an anagram of the first block.` : `Block "${block}" is not an anagram of "${s.slice(0, k)}".` })
+      frames.push({ pythonLine: 9, phase: 'block', activeLine: match ? L('for each block') : L('differ from first'), k, from: start, to: start + k, ok: match, message: match ? `Block "${block}" is an anagram of the first block.` : `Block "${block}" is not an anagram of "${s.slice(0, k)}".` })
       if (!match) {
         ok = false
-        frames.push({ phase: 'block', activeLine: L('ok = false'), k, from: start, to: start + k, ok: false, message: `Length ${k} fails; try the next length.` })
+        frames.push({ pythonLine: 10, phase: 'block', activeLine: L('ok = false'), k, from: start, to: start + k, ok: false, message: `Length ${k} fails; try the next length.` })
         break
       }
     }
     if (ok) {
       answer = k
-      frames.push({ phase: 'found', activeLine: L('return k'), k, from: -1, to: -1, message: `Every block is an anagram of the first, so the answer is ${k}.` })
+      frames.push({ pythonLine: 13, phase: 'found', activeLine: L('return k'), k, from: -1, to: -1, message: `Every block is an anagram of the first, so the answer is ${k}.` })
       break
     }
   }
-  if (answer === n && !frames.some(f => f.phase === 'found')) frames.push({ phase: 'done', activeLine: L('return n'), k: n, from: -1, to: -1, message: `Only the whole string works, so the answer is ${n}.` })
+  if (answer === n && !frames.some(f => f.phase === 'found')) frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return n'), k: n, from: -1, to: -1, message: `Only the whole string works, so the answer is ${n}.` })
   return { input: s, result: answer, frames }
 }
 

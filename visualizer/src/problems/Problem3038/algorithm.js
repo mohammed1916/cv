@@ -7,20 +7,20 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const target = nums[0] + nums[1]
-  const frames = [{ phase: 'start', activeLine: L('set target'), index: 0, used: 0, count: 0, message: `The first two numbers sum to ${target}, so every operation must score ${target}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set target'), index: 0, used: 0, count: 0, message: `The first two numbers sum to ${target}, so every operation must score ${target}.` }]
   let count = 0
   let i = 0
   while (i + 1 < nums.length) {
     const sum = nums[i] + nums[i + 1]
     if (sum !== target) {
-      frames.push({ phase: 'stop', activeLine: L('if their sum'), index: i, used: i, count, message: `The pair ${nums[i]} + ${nums[i + 1]} = ${sum} is not ${target}, so stop.` })
+      frames.push({ pythonLine: 9, phase: 'stop', activeLine: L('if their sum'), index: i, used: i, count, message: `The pair ${nums[i]} + ${nums[i + 1]} = ${sum} is not ${target}, so stop.` })
       break
     }
     count += 1
     i += 2
-    frames.push({ phase: 'pair', activeLine: L('count one'), index: i - 1, used: i, count, message: `This pair sums to ${target}. Operations so far: ${count}.` })
+    frames.push({ pythonLine: 10, phase: 'pair', activeLine: L('count one'), index: i - 1, used: i, count, message: `This pair sums to ${target}. Operations so far: ${count}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), index: -1, used: i, count, message: `Maximum operations with score ${target}: ${count}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return count'), index: -1, used: i, count, message: `Maximum operations with score ${target}: ${count}.` })
   return { input: nums, result: count, frames }
 }
 

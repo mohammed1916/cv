@@ -12,16 +12,16 @@ const sortedOf = chars => chars.slice().sort().join('')
 export function buildTrace({ s1, s2 }) {
   const a = [...s1]
   const b = [...s2]
-  const frames = [{ phase: 'start', activeLine: L('set evenFirst to'), active: -1, roles: {}, state: {}, message: 'A swap exchanges positions that are two apart, so letters never change parity.' }]
+  const frames = [{ pythonLine: 1, phase: 'start', activeLine: L('set evenFirst to'), active: -1, roles: {}, state: {}, message: 'A swap exchanges positions that are two apart, so letters never change parity.' }]
   for (let i = 0; i < a.length; i++) {
-    frames.push({ phase: 'collect', activeLine: L('set evenFirst to'), active: i, roles: { [i]: i % 2 === 0 ? 'even' : 'odd' }, state: { position: i, s1: a[i], s2: b[i] }, message: `Position ${i} (${i % 2 === 0 ? 'even' : 'odd'}) holds "${a[i]}" in s1 and "${b[i]}" in s2.` })
+    frames.push({ pythonLine: i % 2 === 0 ? 2 : 4, phase: 'collect', activeLine: L('set evenFirst to'), active: i, roles: { [i]: i % 2 === 0 ? 'even' : 'odd' }, state: { position: i, s1: a[i], s2: b[i] }, message: `Position ${i} (${i % 2 === 0 ? 'even' : 'odd'}) holds "${a[i]}" in s1 and "${b[i]}" in s2.` })
   }
   const evenFirst = sortedOf(a.filter((_, i) => i % 2 === 0))
   const evenSecond = sortedOf(b.filter((_, i) => i % 2 === 0))
   const oddFirst = sortedOf(a.filter((_, i) => i % 2 === 1))
   const oddSecond = sortedOf(b.filter((_, i) => i % 2 === 1))
   const result = evenFirst === evenSecond && oddFirst === oddSecond
-  frames.push({ phase: 'compare', activeLine: L('return evenFirst'), active: -1, roles: {}, state: { evenFirst, evenSecond, oddFirst, oddSecond, result }, message: result ? 'Each parity class holds the same letters in both strings, so the swaps can match them.' : 'A parity class holds different letters, so no sequence of swaps can make the strings equal.' })
+  frames.push({ pythonLine: 6, phase: 'compare', activeLine: L('return evenFirst'), active: -1, roles: {}, state: { evenFirst, evenSecond, oddFirst, oddSecond, result }, message: result ? 'Each parity class holds the same letters in both strings, so the swaps can match them.' : 'A parity class holds different letters, so no sequence of swaps can make the strings equal.' })
   return { input: { s1, s2 }, result, items: a, frames }
 }
 

@@ -12,15 +12,15 @@ export function buildTrace(power) {
   const vals = [...totals.keys()].sort((a, b) => a - b)
   const m = vals.length
   const best = Array(m + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set best[0] to 0'), i: 0, p: null, best: [...best], vals, message: 'No distinct power used yet, so the best total is 0.' }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set best[0] to 0'), i: 0, p: null, best: [...best], vals, message: 'No distinct power used yet, so the best total is 0.' }]
   for (let i = 1; i <= m; i++) {
     const v = vals[i - 1]
     let p = 0
     while (p < m && vals[p] <= v - 3) p++
     best[i] = Math.max(best[i - 1], totals.get(v) + best[p])
-    frames.push({ phase: 'power', activeLine: L('keep the better'), i, p, best: [...best], vals, message: `Power ${v}: skip it gives ${best[i - 1]}; cast it with the first ${p} distinct powers gives ${totals.get(v) + best[p]}.` })
+    frames.push({ pythonLine: 13, phase: 'power', activeLine: L('keep the better'), i, p, best: [...best], vals, message: `Power ${v}: skip it gives ${best[i - 1]}; cast it with the first ${p} distinct powers gives ${totals.get(v) + best[p]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best[m]'), i: m, p: null, best: [...best], vals, message: `The maximum total damage is ${best[m]}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return best[m]'), i: m, p: null, best: [...best], vals, message: `The maximum total damage is ${best[m]}.` })
   return { input: power, result: best[m], frames, vals }
 }
 

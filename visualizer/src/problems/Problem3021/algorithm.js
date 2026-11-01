@@ -14,9 +14,9 @@ export function buildTrace({ n, m }) {
   const evenM = Math.floor(m / 2)
   const result = oddN * evenM + evenN * oddM
   const frames = [
-    { phase: 'start', activeLine: L('set oddN'), oddN: 0, evenN: 0, message: `Count the fields in each direction: 1 to ${n} and 1 to ${m}.` },
-    { phase: 'count', activeLine: L('add oddN times evenM'), oddN, evenN, oddM, evenM, message: `Fields 1 to ${n} have ${oddN} odd and ${evenN} even. Fields 1 to ${m} have ${oddM} odd and ${evenM} even.` },
-    { phase: 'done', activeLine: L('return the total'), oddN, evenN, oddM, evenM, message: `Winning pairs: ${oddN} x ${evenM} + ${evenN} x ${oddM} = ${result}.` },
+    { pythonLine: 2, phase: 'start', activeLine: L('set oddN'), oddN: 0, evenN: 0, message: `Count the fields in each direction: 1 to ${n} and 1 to ${m}.` },
+    { pythonLine: 5, phase: 'count', activeLine: L('add oddN times evenM'), oddN, evenN, oddM, evenM, message: `Fields 1 to ${n} have ${oddN} odd and ${evenN} even. Fields 1 to ${m} have ${oddM} odd and ${evenM} even.` },
+    { pythonLine: 6, phase: 'done', activeLine: L('return the total'), oddN, evenN, oddM, evenM, message: `Winning pairs: ${oddN} x ${evenM} + ${evenN} x ${oddM} = ${result}.` },
   ]
   return { input: { n, m }, result, frames }
 }

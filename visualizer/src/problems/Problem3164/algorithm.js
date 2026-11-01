@@ -13,7 +13,7 @@ export function parseInput(text) {
 export function buildTrace({ nums1, nums2, k }) {
   const freq = new Map()
   for (const x of nums1) freq.set(x, (freq.get(x) ?? 0) + 1)
-  const frames = [{ phase: 'start', activeLine: L('freq = count'), j: -1, step: null, added: 0, total: 0, message: `Count the values of nums1: ${[...freq].map(([x, c]) => `${x} x${c}`).join(', ')}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('freq = count'), j: -1, step: null, added: 0, total: 0, message: `Count the values of nums1: ${[...freq].map(([x, c]) => `${x} x${c}`).join(', ')}.` }]
   let total = 0
   for (let j = 0; j < nums2.length; j++) {
     const step = nums2[j] * k
@@ -22,9 +22,9 @@ export function buildTrace({ nums1, nums2, k }) {
       if (x % step === 0) added += c
     }
     total += added
-    frames.push({ phase: 'pair', activeLine: L('total = total + freq'), j, step, added, total, message: `nums2[${j}] = ${nums2[j]} gives divisor ${step}: ${added} values of nums1 are divisible, so ${added} good pairs.` })
+    frames.push({ pythonLine: 10, phase: 'pair', activeLine: L('total = total + freq'), j, step, added, total, message: `nums2[${j}] = ${nums2[j]} gives divisor ${step}: ${added} values of nums1 are divisible, so ${added} good pairs.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), j: -1, step: null, added: 0, total, message: `Total good pairs: ${total}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), j: -1, step: null, added: 0, total, message: `Total good pairs: ${total}.` })
   return { input: { nums1, nums2, k }, result: total, frames }
 }
 

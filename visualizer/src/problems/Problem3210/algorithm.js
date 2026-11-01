@@ -11,13 +11,13 @@ export function buildTrace(input) {
   const { s, k } = input
   const n = s.length
   let result = ''
-  const frames = [{ phase: 'start', activeLine: L('set result to an empty string'), index: -1, source: -1, result, message: `Each position takes the character ${k} places ahead, wrapping around.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set result to an empty string'), index: -1, source: -1, result, message: `Each position takes the character ${k} places ahead, wrapping around.` }]
   for (let i = 0; i < n; i++) {
     const source = (i + k) % n
     result += s[source]
-    frames.push({ phase: 'read', activeLine: L('set source to'), index: i, source, result, message: `Position ${i} takes s[${source}] = ${s[source]}.` })
+    frames.push({ pythonLine: 6, phase: 'read', activeLine: L('set source to'), index: i, source, result, message: `Position ${i} takes s[${source}] = ${s[source]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), index: -1, source: -1, result, message: `Encrypted string: ${result}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return result'), index: -1, source: -1, result, message: `Encrypted string: ${result}.` })
   return { input, result, frames }
 }
 

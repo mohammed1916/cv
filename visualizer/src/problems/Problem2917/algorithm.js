@@ -10,14 +10,14 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   let result = 0
   const counts = []
-  const frames = [{ phase: 'start', activeLine: L('set result to 0'), bit: -1, counts: [], result, message: `Need ${k} numbers with a bit set for it to count.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set result to 0'), bit: -1, counts: [], result, message: `Need ${k} numbers with a bit set for it to count.` }]
   for (let bit = 0; bit < 6; bit++) {
     const count = nums.filter(x => (x >> bit) & 1).length
     counts.push(count)
     if (count >= k) result |= 1 << bit
-    frames.push({ phase: 'bit', activeLine: L('count how many numbers have that bit set'), bit, counts: [...counts], result, message: `Bit ${bit} is set in ${count} numbers${count >= k ? ', so it is kept' : ''}.` })
+    frames.push({ pythonLine: 4, phase: 'bit', activeLine: L('count how many numbers have that bit set'), bit, counts: [...counts], result, message: `Bit ${bit} is set in ${count} numbers${count >= k ? ', so it is kept' : ''}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), bit: -1, counts: [...counts], result, message: `K-or: ${result}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return result'), bit: -1, counts: [...counts], result, message: `K-or: ${result}.` })
   return { input: { nums, k }, result, frames }
 }
 

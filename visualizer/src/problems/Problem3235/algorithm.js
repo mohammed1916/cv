@@ -43,29 +43,29 @@ export function buildTrace({ x, y, circles }) {
   const stack = []
   const blockedStart = circles.find(c => inside(c[0], c[1], c[2], 0, 0) || inside(c[0], c[1], c[2], x, y))
   if (blockedStart) {
-    frames.push({ phase: 'corner', circle: circles.indexOf(blockedStart), seen: [...seen], activeLine: L('if the start corner'), message: `${describe(blockedStart)} covers the start or target corner.` })
-    frames.push({ phase: 'done', circle: null, seen: [...seen], activeLine: L('return false'), result: false, message: 'The corner cannot be reached.' })
+    frames.push({ pythonLine: 18, phase: 'corner', circle: circles.indexOf(blockedStart), seen: [...seen], activeLine: L('if the start corner'), message: `${describe(blockedStart)} covers the start or target corner.` })
+    frames.push({ pythonLine: 18, phase: 'done', circle: null, seen: [...seen], activeLine: L('return false'), result: false, message: 'The corner cannot be reached.' })
     return { input: { x, y, circles }, result: false, frames }
   }
-  frames.push({ phase: 'corner', circle: null, seen: [...seen], activeLine: L('if the start corner'), message: 'Neither corner is covered by a circle.' })
+  frames.push({ pythonLine: 19, phase: 'corner', circle: null, seen: [...seen], activeLine: L('if the start corner'), message: 'Neither corner is covered by a circle.' })
   circles.forEach((c, i) => {
     if (touchesTopLeft(c)) { seen[i] = true; stack.push(i) }
   })
-  frames.push({ phase: 'reach', circle: null, seen: [...seen], activeLine: L('set reached to'), message: 'Circles touching the top or left edge start the wall.' })
+  frames.push({ pythonLine: 22, phase: 'reach', circle: null, seen: [...seen], activeLine: L('set reached to'), message: 'Circles touching the top or left edge start the wall.' })
   let result = true
   while (stack.length) {
     const i = stack.pop()
-    frames.push({ phase: 'visit', circle: i, seen: [...seen], activeLine: L('while there is an unvisited'), message: `Visit ${describe(circles[i])}.` })
+    frames.push({ pythonLine: 26, phase: 'visit', circle: i, seen: [...seen], activeLine: L('while there is an unvisited'), message: `Visit ${describe(circles[i])}.` })
     if (touchesBottomRight(circles[i])) {
       result = false
-      frames.push({ phase: 'wall', circle: i, seen: [...seen], activeLine: L('if c touches the bottom'), message: `${describe(circles[i])} also touches the bottom or right edge, closing the wall.` })
+      frames.push({ pythonLine: 29, phase: 'wall', circle: i, seen: [...seen], activeLine: L('if c touches the bottom'), message: `${describe(circles[i])} also touches the bottom or right edge, closing the wall.` })
       break
     }
     circles.forEach((other, j) => {
       if (!seen[j] && overlaps(circles[i], other)) { seen[j] = true; stack.push(j) }
     })
   }
-  frames.push({ phase: 'done', circle: null, seen: [...seen], activeLine: L('return true'), result, message: result ? 'No wall separates the corners, so the target corner is reachable.' : 'A wall separates the corners, so the target corner is unreachable.' })
+  frames.push({ pythonLine: result ? 34 : 29, phase: 'done', circle: null, seen: [...seen], activeLine: L('return true'), result, message: result ? 'No wall separates the corners, so the target corner is reachable.' : 'A wall separates the corners, so the target corner is unreachable.' })
   return { input: { x, y, circles }, result, frames }
 }
 

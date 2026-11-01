@@ -17,7 +17,7 @@ export function parseInput(text) {
 
 export function buildTrace({ nums, freq }) {
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('counts = empty map'), index: -1, before: {}, counts: {}, answer: [], best: 0, message: 'Start with no IDs in the collection.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('counts = empty map'), index: -1, before: {}, counts: {}, answer: [], best: 0, message: 'Start with no IDs in the collection.' }]
   const answer = []
   for (let i = 0; i < nums.length; i++) {
     const before = Object.fromEntries(counts)
@@ -26,9 +26,9 @@ export function buildTrace({ nums, freq }) {
     else counts.set(nums[i], next)
     const best = counts.size ? Math.max(...counts.values()) : 0
     answer.push(best)
-    frames.push({ phase: 'step', activeLine: next === 0 ? L('remove nums[i]') : L('counts[nums[i]] = counts'), index: i, before, counts: Object.fromEntries(counts), answer: [...answer], best, message: `Step ${i}: ID ${nums[i]} ${freq[i] > 0 ? 'gains' : 'loses'} ${Math.abs(freq[i])}. Most frequent count: ${best}.` })
+    frames.push({ pythonLine: next === 0 ? 9 : 7, phase: 'step', activeLine: next === 0 ? L('remove nums[i]') : L('counts[nums[i]] = counts'), index: i, before, counts: Object.fromEntries(counts), answer: [...answer], best, message: `Step ${i}: ID ${nums[i]} ${freq[i] > 0 ? 'gains' : 'loses'} ${Math.abs(freq[i])}. Most frequent count: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: -1, before: {}, counts: Object.fromEntries(counts), answer: [...answer], best: answer[answer.length - 1], message: `Answer: [${answer.join(', ')}].` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return answer'), index: -1, before: {}, counts: Object.fromEntries(counts), answer: [...answer], best: answer[answer.length - 1], message: `Answer: [${answer.join(', ')}].` })
   return { input: { nums, freq }, result: answer, frames }
 }
 

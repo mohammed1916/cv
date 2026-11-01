@@ -41,13 +41,13 @@ export function buildTrace({ nums, queries }) {
   ops = []
   const answers = []
   const snapshot = (phase, extra) => ({ phase, arr: arr.slice(), flags: flags.slice(), tree: cells.slice(1), ops: ops.slice(), answers: answers.slice(), ...extra })
-  const frames = [snapshot('start', { query: null, activeLine: L('set arr to a copy'), message: 'Mark every peak in a Fenwick tree by position.' })]
+  const frames = [snapshot('start', { pythonLine: 3, query: null, activeLine: L('set arr to a copy'), message: 'Mark every peak in a Fenwick tree by position.' })]
   for (const [type, a, b] of queries) {
     ops = []
     if (type === 1) {
       const count = a + 1 > b - 1 ? 0 : prefix(b) - prefix(a + 1)
       answers.push(count)
-      frames.push(snapshot('count', { query: [type, a, b], activeLine: L('answer is the number'), message: `Peaks strictly between ${a} and ${b}: ${count}.` }))
+      frames.push(snapshot('count', { pythonLine: 28, query: [type, a, b], activeLine: L('answer is the number'), message: `Peaks strictly between ${a} and ${b}: ${count}.` }))
     } else {
       arr[a] = b
       const touched = []
@@ -60,10 +60,10 @@ export function buildTrace({ nums, queries }) {
           touched.push(i)
         }
       }
-      frames.push(snapshot('update', { query: [type, a, b], activeLine: L('set arr[index] to val'), message: `nums[${a}] = ${b}; peak status changed at [${touched.join(', ') || 'none'}].` }))
+      frames.push(snapshot('update', { pythonLine: 34, query: [type, a, b], activeLine: L('set arr[index] to val'), message: `nums[${a}] = ${b}; peak status changed at [${touched.join(', ') || 'none'}].` }))
     }
   }
-  frames.push(snapshot('done', { query: null, activeLine: L('return answers'), message: `Answers: [${answers.join(', ')}].` }))
+  frames.push(snapshot('done', { pythonLine: 35, query: null, activeLine: L('return answers'), message: `Answers: [${answers.join(', ')}].` }))
   return { input: { nums, queries }, result: answers, frames }
 }
 

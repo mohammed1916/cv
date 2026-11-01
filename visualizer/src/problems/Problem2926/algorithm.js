@@ -10,15 +10,15 @@ export function buildTrace(nums) {
   // A subsequence is balanced when nums[i] - i never decreases along it, so key[i] = nums[i] - i.
   const key = nums.map((v, i) => v - i)
   const best = nums.slice()
-  const frames = [{ phase: 'start', activeLine: L('set best[i] to nums[i]'), i: 0, j: null, best: [...best], key, message: 'Each index alone is a balanced subsequence, so start each best value at nums[i].' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set best[i] to nums[i]'), i: 0, j: null, best: [...best], key, message: 'Each index alone is a balanced subsequence, so start each best value at nums[i].' }]
   for (let i = 1; i < n; i++) {
     for (let j = 0; j < i; j++) {
       if (key[j] <= key[i]) best[i] = Math.max(best[i], best[j] + nums[i])
     }
-    frames.push({ phase: 'index', activeLine: L('keep the larger'), i, j: null, best: [...best], key, message: `Best balanced sum ending at index ${i} is ${best[i]} (key ${key[i]}).` })
+    frames.push({ pythonLine: 8, phase: 'index', activeLine: L('keep the larger'), i, j: null, best: [...best], key, message: `Best balanced sum ending at index ${i} is ${best[i]} (key ${key[i]}).` })
   }
   const result = Math.max(...best)
-  frames.push({ phase: 'done', activeLine: L('return the largest value'), i: n - 1, j: null, best: [...best], key, message: `The largest balanced subsequence sum is ${result}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the largest value'), i: n - 1, j: null, best: [...best], key, message: `The largest balanced subsequence sum is ${result}.` })
   return { input: nums, result, frames, key }
 }
 

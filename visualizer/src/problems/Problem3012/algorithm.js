@@ -12,18 +12,18 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const smallest = Math.min(...nums)
   const count = nums.filter(v => v === smallest).length
-  const frames = [{ phase: 'min', activeLine: L('set smallest to the minimum'), index: -1, smallest, message: `The smallest value is ${smallest}, found ${count} time(s).` }]
+  const frames = [{ pythonLine: 2, phase: 'min', activeLine: L('set smallest to the minimum'), index: -1, smallest, message: `The smallest value is ${smallest}, found ${count} time(s).` }]
   for (let i = 0; i < nums.length; i++) {
     const remainder = nums[i] % smallest
     if (remainder !== 0) {
-      frames.push({ phase: 'scan', activeLine: L('return 1'), index: i, smallest, message: `${nums[i]} mod ${smallest} = ${remainder}, a smaller value, so the length can reach 1.` })
-      frames.push({ phase: 'done', activeLine: L('return 1'), index: i, smallest, message: 'Minimum length: 1.' })
+      frames.push({ pythonLine: 4, phase: 'scan', activeLine: L('return 1'), index: i, smallest, message: `${nums[i]} mod ${smallest} = ${remainder}, a smaller value, so the length can reach 1.` })
+      frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return 1'), index: i, smallest, message: 'Minimum length: 1.' })
       return { input: { nums }, result: 1, frames }
     }
-    frames.push({ phase: 'scan', activeLine: L('if x modulo smallest is not 0'), index: i, smallest, message: `${nums[i]} mod ${smallest} = 0.` })
+    frames.push({ pythonLine: 3, phase: 'scan', activeLine: L('if x modulo smallest is not 0'), index: i, smallest, message: `${nums[i]} mod ${smallest} = 0.` })
   }
   const result = Math.floor((count + 1) / 2)
-  frames.push({ phase: 'done', activeLine: L('return (count + 1)'), index: -1, smallest, message: `Every value is a multiple of ${smallest}, so the minimum length is ${result}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return (count + 1)'), index: -1, smallest, message: `Every value is a multiple of ${smallest}, so the minimum length is ${result}.` })
   return { input: { nums }, result, frames }
 }
 

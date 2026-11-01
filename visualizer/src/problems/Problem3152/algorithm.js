@@ -13,18 +13,18 @@ export function buildTrace(input) {
   const n = nums.length
   // bad[i] counts the adjacent pairs (j - 1, j) with j <= i that share a parity.
   const bad = new Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set bad[0]'), index: -1, bad: [...bad], range: null, message: 'No adjacent pairs have been checked yet.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set bad[0]'), index: -1, bad: [...bad], range: null, message: 'No adjacent pairs have been checked yet.' }]
   for (let j = 1; j < n; j++) {
     const clash = nums[j] % 2 === nums[j - 1] % 2 ? 1 : 0
     bad[j] = bad[j - 1] + clash
-    frames.push({ phase: 'count', activeLine: L('set bad[j]'), index: j, bad: [...bad], range: null, message: clash ? `Elements ${j - 1} and ${j} share parity.` : `Elements ${j - 1} and ${j} differ in parity.` })
+    frames.push({ pythonLine: 4, phase: 'count', activeLine: L('set bad[j]'), index: j, bad: [...bad], range: null, message: clash ? `Elements ${j - 1} and ${j} share parity.` : `Elements ${j - 1} and ${j} differ in parity.` })
   }
   const result = queries.map(([f, t], q) => {
     const special = bad[t] - bad[f] === 0
-    frames.push({ phase: 'query', activeLine: L('if bad[t] minus bad[f]'), index: t, bad: [...bad], range: [f, t], query: q, special, message: `Query [${f}, ${t}] is ${special ? 'special' : 'not special'}.` })
+    frames.push({ pythonLine: 5, phase: 'query', activeLine: L('if bad[t] minus bad[f]'), index: t, bad: [...bad], range: [f, t], query: q, special, message: `Query [${f}, ${t}] is ${special ? 'special' : 'not special'}.` })
     return special
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, bad: [...bad], range: null, message: `Answers: ${result.join(', ')}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return answers'), index: -1, bad: [...bad], range: null, message: `Answers: ${result.join(', ')}.` })
   return { input, result, frames }
 }
 

@@ -11,15 +11,15 @@ export function buildTrace(s) {
   const top = Math.max(...counts.values())
   const last = new Map()
   for (let i = 0; i < s.length; i++) last.set(s[i], i)
-  const frames = [{ phase: 'count', activeLine: L('count how often'), index: -1, kept: '', message: `Count the letters. The largest count is ${top}.` }]
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how often'), index: -1, kept: '', message: `Count the letters. The largest count is ${top}.` }]
   let kept = ''
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     const keep = counts.get(ch) === top && last.get(ch) === i
     if (keep) kept += ch
-    frames.push({ phase: keep ? 'keep' : 'skip', activeLine: keep ? L('append s[i]') : L('for each position'), index: i, kept, message: keep ? `Keep ${ch} at position ${i}: it is the last copy of a letter that appears ${top} times.` : `Skip ${ch} at position ${i}: it is not the last copy of a letter that appears ${top} times.` })
+    frames.push({ pythonLine: 9, phase: keep ? 'keep' : 'skip', activeLine: keep ? L('append s[i]') : L('for each position'), index: i, kept, message: keep ? `Keep ${ch} at position ${i}: it is the last copy of a letter that appears ${top} times.` : `Skip ${ch} at position ${i}: it is not the last copy of a letter that appears ${top} times.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), index: -1, kept, message: `String just before the last round: ${kept}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return result'), index: -1, kept, message: `String just before the last round: ${kept}.` })
   return { input: s, result: kept, frames }
 }
 

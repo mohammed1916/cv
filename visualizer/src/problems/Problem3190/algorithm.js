@@ -6,18 +6,18 @@ export function parseInput(text) {
 }
 
 export function buildTrace(nums) {
-  const frames = [{ phase: 'start', activeLine: L('set total'), index: -1, total: 0, message: 'Each number is checked on its own, because a step of plus or minus one never affects another number.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total'), index: -1, total: 0, message: 'Each number is checked on its own, because a step of plus or minus one never affects another number.' }]
   let total = 0
   nums.forEach((x, i) => {
     const remainder = x % 3
     if (remainder !== 0) {
       total += 1
-      frames.push({ phase: 'fix', activeLine: L('add 1 to total'), index: i, total, message: `${x} leaves remainder ${remainder}, so one step of plus or minus one fixes it.` })
+      frames.push({ pythonLine: 5, phase: 'fix', activeLine: L('add 1 to total'), index: i, total, message: `${x} leaves remainder ${remainder}, so one step of plus or minus one fixes it.` })
     } else {
-      frames.push({ phase: 'ok', activeLine: L('if the number leaves'), index: i, total, message: `${x} is already divisible by three.` })
+      frames.push({ pythonLine: 4, phase: 'ok', activeLine: L('if the number leaves'), index: i, total, message: `${x} is already divisible by three.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, total, message: `Minimum operations: ${total}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), index: -1, total, message: `Minimum operations: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

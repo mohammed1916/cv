@@ -8,7 +8,7 @@ export function parseInput(text) {
 export function buildTrace(hours) {
   const remainders = new Array(24).fill(0)
   const seen = () => Object.fromEntries(remainders.map((c, r) => [r, c]).filter(([, c]) => c > 0))
-  const frames = [{ phase: 'start', activeLine: L('remainder counts = 24 zeros'), index: -1, need: null, added: 0, total: 0, seen: {}, message: 'No hours have been seen yet. Pairs need remainders that add to 24 (or 0).' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('remainder counts = 24 zeros'), index: -1, need: null, added: 0, total: 0, seen: {}, message: 'No hours have been seen yet. Pairs need remainders that add to 24 (or 0).' }]
   let total = 0
   for (let i = 0; i < hours.length; i++) {
     const h = hours[i]
@@ -16,9 +16,9 @@ export function buildTrace(hours) {
     const added = remainders[need]
     total += added
     remainders[h % 24] += 1
-    frames.push({ phase: 'hour', activeLine: L('total = total + remainder'), index: i, need, added, total, seen: seen(), message: `Hour ${h} has remainder ${h % 24}; it pairs with ${added} earlier hour${added === 1 ? '' : 's'} that have remainder ${need}.` })
+    frames.push({ pythonLine: 5, phase: 'hour', activeLine: L('total = total + remainder'), index: i, need, added, total, seen: seen(), message: `Hour ${h} has remainder ${h % 24}; it pairs with ${added} earlier hour${added === 1 ? '' : 's'} that have remainder ${need}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, need: null, added: 0, total, seen: seen(), message: `Complete pairs: ${total}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total'), index: -1, need: null, added: 0, total, seen: seen(), message: `Complete pairs: ${total}.` })
   return { input: hours, result: total, frames }
 }
 

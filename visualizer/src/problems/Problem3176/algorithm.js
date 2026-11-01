@@ -25,7 +25,7 @@ export function buildTrace({ nums, k }) {
   const n = nums.length
   const dp = Array.from({ length: n }, () => Array(k + 1).fill(null))
   let best = 0
-  const frames = [{ phase: 'start', index: -1, dp: [], activeLine: L('set best to 0'), message: 'No subsequence yet.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', index: -1, dp: [], activeLine: L('set best to 0'), message: 'No subsequence yet.' }]
   for (let i = 0; i < n; i++) {
     dp[i][0] = 1
     for (let c = 0; c <= k; c++) {
@@ -38,9 +38,9 @@ export function buildTrace({ nums, k }) {
     }
     const rowBest = Math.max(...dp[i].filter(v => v !== null))
     if (rowBest > best) best = rowBest
-    frames.push({ phase: 'row', index: i, dp: dp.slice(0, i + 1).map(r => [...r]), activeLine: L('set dp[i][0] to 1'), message: `Ending at ${nums[i]} (index ${i}): best is ${rowBest}; overall ${best}.` })
+    frames.push({ pythonLine: 14, phase: 'row', index: i, dp: dp.slice(0, i + 1).map(r => [...r]), activeLine: L('set dp[i][0] to 1'), message: `Ending at ${nums[i]} (index ${i}): best is ${rowBest}; overall ${best}.` })
   }
-  frames.push({ phase: 'done', index: n - 1, dp: dp.map(r => [...r]), activeLine: L('return best'), message: `Longest good subsequence: ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', index: n - 1, dp: dp.map(r => [...r]), activeLine: L('return best'), message: `Longest good subsequence: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

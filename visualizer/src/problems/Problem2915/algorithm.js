@@ -22,21 +22,21 @@ const show = v => (v === null ? 'unset' : String(v))
 export function buildTrace({ nums, target }) {
   const best = Array(target + 1).fill(null)
   best[0] = 0
-  const frames = [{ phase: 'start', best: [...best], item: null, cell: null, activeLine: L('set best[0] to 0'), message: `Find the longest subsequence whose sum is ${target}. best[s] is the longest length that reaches sum s.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', best: [...best], item: null, cell: null, activeLine: L('set best[0] to 0'), message: `Find the longest subsequence whose sum is ${target}. best[s] is the longest length that reaches sum s.` }]
   nums.forEach((x, i) => {
-    frames.push({ phase: 'item', best: [...best], item: i, cell: null, activeLine: L('for each number x in nums'), message: `Take nums[${i}] = ${x} into account.` })
+    frames.push({ pythonLine: 4, phase: 'item', best: [...best], item: i, cell: null, activeLine: L('for each number x in nums'), message: `Take nums[${i}] = ${x} into account.` })
     for (let s = target; s >= x; s--) {
       const prev = best[s - x]
       if (prev === null) {
-        frames.push({ phase: 'cell', best: [...best], item: i, cell: s, activeLine: L('if best[s - x] is set'), message: `Sum ${s - x} is not reachable yet, so best[${s}] stays ${show(best[s])}.` })
+        frames.push({ pythonLine: 6, phase: 'cell', best: [...best], item: i, cell: s, activeLine: L('if best[s - x] is set'), message: `Sum ${s - x} is not reachable yet, so best[${s}] stays ${show(best[s])}.` })
       } else {
         best[s] = best[s] === null ? prev + 1 : Math.max(best[s], prev + 1)
-        frames.push({ phase: 'cell', best: [...best], item: i, cell: s, activeLine: L('best[s] = the larger'), message: `best[${s}] = ${best[s]}, from sum ${s - x} plus ${x}.` })
+        frames.push({ pythonLine: 7, phase: 'cell', best: [...best], item: i, cell: s, activeLine: L('best[s] = the larger'), message: `best[${s}] = ${best[s]}, from sum ${s - x} plus ${x}.` })
       }
     }
   })
   const result = best[target] === null ? -1 : best[target]
-  frames.push({ phase: 'done', best: [...best], item: null, cell: target, activeLine: result === -1 ? L('return -1') : L('return best[target]'), result, message: result === -1 ? `No subsequence sums to ${target}, so the answer is -1.` : `The longest subsequence summing to ${target} has length ${result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', best: [...best], item: null, cell: target, activeLine: result === -1 ? L('return -1') : L('return best[target]'), result, message: result === -1 ? `No subsequence sums to ${target}, so the answer is -1.` : `The longest subsequence summing to ${target} has length ${result}.` })
   return { input: { nums, target }, result, frames }
 }
 

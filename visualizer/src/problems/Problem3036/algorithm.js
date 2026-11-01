@@ -16,32 +16,32 @@ export function buildTrace({ nums, pattern }) {
   for (let i = 0; i + 1 < nums.length; i++) signs.push(sign(nums[i + 1] - nums[i]))
   const m = pattern.length
   const frames = []
-  frames.push({ phase: 'signs', activeLine: L('build the sign'), index: -1, k: 0, matches: 0, message: `Signs of adjacent differences: [${signs.join(', ')}].` })
+  frames.push({ pythonLine: 4, phase: 'signs', activeLine: L('build the sign'), index: -1, k: 0, matches: 0, message: `Signs of adjacent differences: [${signs.join(', ')}].` })
   const fail = Array(m).fill(0)
   let k = 0
   for (let i = 1; i < m; i++) {
     while (k > 0 && pattern[i] !== pattern[k]) k = fail[k - 1]
     if (pattern[i] === pattern[k]) k++
     fail[i] = k
-    frames.push({ phase: 'fail', activeLine: L('build the failure table'), index: i, k, matches: 0, message: `Failure entry ${i} is ${k}.` })
+    frames.push({ pythonLine: 13, phase: 'fail', activeLine: L('build the failure table'), index: i, k, matches: 0, message: `Failure entry ${i} is ${k}.` })
   }
   let matches = 0
   k = 0
-  frames.push({ phase: 'scan', activeLine: L('set matches to 0'), index: -1, k, matches, message: 'Scan the signs for the pattern.' })
+  frames.push({ pythonLine: 14, phase: 'scan', activeLine: L('set matches to 0'), index: -1, k, matches, message: 'Scan the signs for the pattern.' })
   for (let i = 0; i < signs.length; i++) {
     while (k > 0 && signs[i] !== pattern[k]) {
       k = fail[k - 1]
-      frames.push({ phase: 'scan', activeLine: L('while k is above 0'), index: i, k, matches, message: `Sign ${signs[i]} misses; fall back to pattern position ${k}.` })
+      frames.push({ pythonLine: 18, phase: 'scan', activeLine: L('while k is above 0'), index: i, k, matches, message: `Sign ${signs[i]} misses; fall back to pattern position ${k}.` })
     }
     if (signs[i] === pattern[k]) k++
-    frames.push({ phase: 'scan', activeLine: L('if signs at i equals'), index: i, k, matches, message: `Sign ${signs[i]} matches pattern position ${k - (signs[i] === pattern[k - 1] ? 1 : 0)}.` })
+    frames.push({ pythonLine: 20, phase: 'scan', activeLine: L('if signs at i equals'), index: i, k, matches, message: `Sign ${signs[i]} matches pattern position ${k - (signs[i] === pattern[k - 1] ? 1 : 0)}.` })
     if (k === m) {
       matches++
       k = fail[k - 1]
-      frames.push({ phase: 'match', activeLine: L('if k equals the length'), index: i, k, matches, message: `A full match ends at sign ${i}. Matches: ${matches}.` })
+      frames.push({ pythonLine: 23, phase: 'match', activeLine: L('if k equals the length'), index: i, k, matches, message: `A full match ends at sign ${i}. Matches: ${matches}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return matches'), index: -1, k, matches, message: `Matching subarrays: ${matches}.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return matches'), index: -1, k, matches, message: `Matching subarrays: ${matches}.` })
   return { input: { nums, pattern }, result: matches, frames }
 }
 

@@ -17,24 +17,28 @@ export function buildTrace({ days, meetings }) {
   let covered = 0
   let curStart = null, curEnd = null
   const busy = Array(days).fill(false)
-  const frames = [{ phase: 'start', meeting: null, covered, busy: busy.slice(), activeLine: L('set covered to 0'), message: `${days} days. Merge the meetings to count the busy days.`, sorted }]
+  const frames = [{ pythonLine: 2, phase: 'start', meeting: null, covered, busy: busy.slice(), activeLine: L('set covered to 0'), message: `${days} days. Merge the meetings to count the busy days.`, sorted }]
   const markBusy = (s, e) => { for (let d = s; d <= e; d++) busy[d - 1] = true }
   for (const [s, e] of sorted) {
+    let pyLine
     if (curStart === null) {
+      pyLine = 6
       curStart = s; curEnd = e
     } else if (s > curEnd) {
+      pyLine = 9
       covered += curEnd - curStart + 1
       markBusy(curStart, curEnd)
       curStart = s; curEnd = e
     } else {
+      pyLine = 11
       curEnd = Math.max(curEnd, e)
     }
-    frames.push({ phase: 'merge', meeting: [s, e], covered: covered + (curEnd - curStart + 1), busy: busy.slice(), activeLine: L('extend the current block'), message: `Meeting [${s}, ${e}] is folded into the current busy block [${curStart}, ${curEnd}].`, sorted })
+    frames.push({ pythonLine: pyLine, phase: 'merge', meeting: [s, e], covered: covered + (curEnd - curStart + 1), busy: busy.slice(), activeLine: L('extend the current block'), message: `Meeting [${s}, ${e}] is folded into the current busy block [${curStart}, ${curEnd}].`, sorted })
   }
   covered += curEnd - curStart + 1
   markBusy(curStart, curEnd)
   const result = days - covered
-  frames.push({ phase: 'done', meeting: null, covered, busy: busy.slice(), activeLine: L('return days minus covered'), message: `${covered} busy day(s), so ${result} free.`, sorted })
+  frames.push({ pythonLine: 13, phase: 'done', meeting: null, covered, busy: busy.slice(), activeLine: L('return days minus covered'), message: `${covered} busy day(s), so ${result} free.`, sorted })
   return { input: { days, meetings }, result, frames }
 }
 

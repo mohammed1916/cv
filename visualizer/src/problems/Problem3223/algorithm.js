@@ -8,18 +8,18 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const counts = new Map()
   for (const ch of s) counts.set(ch, (counts.get(ch) ?? 0) + 1)
-  const frames = [{ phase: 'count', activeLine: L('count how often'), letter: null, total: 0, message: `Count the characters of "${s}".` }]
+  const frames = [{ pythonLine: 5, phase: 'count', activeLine: L('count how often'), letter: null, total: 0, message: `Count the characters of "${s}".` }]
   let total = 0
   for (const [letter, count] of counts) {
     if (count % 2 === 1) {
       total += 1
-      frames.push({ phase: 'odd', activeLine: L('total = total + 1'), letter, total, message: `${letter} appears ${count} times (odd): operations can reduce it to 1.` })
+      frames.push({ pythonLine: 6, phase: 'odd', activeLine: L('total = total + 1'), letter, total, message: `${letter} appears ${count} times (odd): operations can reduce it to 1.` })
     } else {
       total += 2
-      frames.push({ phase: 'even', activeLine: L('total = total + 2'), letter, total, message: `${letter} appears ${count} times (even): operations can reduce it to 2.` })
+      frames.push({ pythonLine: 6, phase: 'even', activeLine: L('total = total + 2'), letter, total, message: `${letter} appears ${count} times (even): operations can reduce it to 2.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), letter: null, total, message: `Shortest length after operations: ${total}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total'), letter: null, total, message: `Shortest length after operations: ${total}.` })
   return { input: s, result: total, frames }
 }
 

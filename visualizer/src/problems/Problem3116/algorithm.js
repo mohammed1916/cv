@@ -32,16 +32,16 @@ export function buildTrace({ coins, k }) {
   let lo = 1
   let hi = Math.min(...coins) * k
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, count: null, message: `Coins ${coins.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
+  const frames = [{ pythonLine: 21, phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, count: null, message: `Coins ${coins.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const seen = count(mid)
     const verdict = seen >= k
-    frames.push({ phase: 'probe', activeLine: L('if at least k amounts are at most mid'), lo, hi, mid, verdict, count: seen, message: `Amount ${mid}: ${seen} amounts up to it can be made, ${verdict ? 'at least' : 'fewer than'} k = ${k}.` })
+    frames.push({ pythonLine: verdict ? 25 : 27, phase: 'probe', activeLine: L('if at least k amounts are at most mid'), lo, hi, mid, verdict, count: seen, message: `Amount ${mid}: ${seen} amounts up to it can be made, ${verdict ? 'at least' : 'fewer than'} k = ${k}.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, count: count(lo), message: `The ${k}th smallest amount is ${lo}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, count: count(lo), message: `The ${k}th smallest amount is ${lo}.` })
   return { input: { coins, k }, domain, result: lo, frames }
 }
 

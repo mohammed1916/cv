@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const rows = grid.length
   const cols = grid[0].length
   let previous = Array.from({ length: 10 }, () => 0)
-  const frames = [{ phase: 'start', activeLine: L('set previous to zeros'), column: -1, previous: previous.slice(), result: null, message: 'Before the first column, every colour costs 0, so the first column has no neighbour to clash with.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set previous to zeros'), column: -1, previous: previous.slice(), result: null, message: 'Before the first column, every colour costs 0, so the first column has no neighbour to clash with.' }]
   for (let j = 0; j < cols; j++) {
     const next = Array.from({ length: 10 }, () => 0)
     for (let c = 0; c < 10; c++) {
@@ -25,10 +25,10 @@ export function buildTrace(input) {
       next[c] = cost + cheapestOther
     }
     previous = next
-    frames.push({ phase: 'column', activeLine: L('set previous to next'), column: j, previous: previous.slice(), result: null, message: `Column ${j} costs for each colour: ${previous.join(', ')}.` })
+    frames.push({ pythonLine: 10, phase: 'column', activeLine: L('set previous to next'), column: j, previous: previous.slice(), result: null, message: `Column ${j} costs for each colour: ${previous.join(', ')}.` })
   }
   const result = Math.min(...previous)
-  frames.push({ phase: 'done', activeLine: L('return the smallest value'), column: cols, previous: previous.slice(), result, message: `Fewest operations: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the smallest value'), column: cols, previous: previous.slice(), result, message: `Fewest operations: ${result}.` })
   return { input, result, frames }
 }
 

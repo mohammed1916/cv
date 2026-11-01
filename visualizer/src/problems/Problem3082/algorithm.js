@@ -28,17 +28,17 @@ export function buildTrace({ nums, k }) {
   const n = nums.length
   const ways = Array.from({ length: k + 1 }, () => Array(n + 1).fill(0))
   ways[0][0] = 1
-  const frames = [{ phase: 'start', item: null, table: copy(ways), activeLine: L('ways[0][0] = 1'), message: 'The empty set has sum 0 and no members.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', item: null, table: copy(ways), activeLine: L('ways[0][0] = 1'), message: 'The empty set has sum 0 and no members.' }]
   for (const x of nums) {
     for (let s = k; s >= x; s--) {
       for (let c = n; c >= 1; c--) ways[s][c] = (ways[s][c] + ways[s - x][c - 1]) % MOD
     }
     const atK = ways[k].reduce((a, b) => a + b, 0)
-    frames.push({ phase: 'item', item: x, table: copy(ways), activeLine: L('ways[s][c] = ways[s][c]'), message: `Adding ${x}: ${atK} sets reach sum ${k} so far.` })
+    frames.push({ pythonLine: 9, phase: 'item', item: x, table: copy(ways), activeLine: L('ways[s][c] = ways[s][c]'), message: `Adding ${x}: ${atK} sets reach sum ${k} so far.` })
   }
   let total = 0
   for (let c = 0; c <= n; c++) total = (total + ways[k][c] * 2 ** (n - c)) % MOD
-  frames.push({ phase: 'done', item: null, table: copy(ways), activeLine: L('return total'), message: `Sum of powers: ${total}.` })
+  frames.push({ pythonLine: 13, phase: 'done', item: null, table: copy(ways), activeLine: L('return total'), message: `Sum of powers: ${total}.` })
   return { input: { nums, k }, result: total, frames }
 }
 

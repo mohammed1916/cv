@@ -27,18 +27,18 @@ export function buildTrace({ nums, k }) {
   const top = 32 - Math.clz32(Math.max(...nums))
   let answer = (1 << top) - 1
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('set answer to all ones'), bit: -1, candidate: answer, merges: null, answer, message: `Start with ${answer}, which keeps every bit.` })
+  frames.push({ pythonLine: 17, phase: 'start', activeLine: L('set answer to all ones'), bit: -1, candidate: answer, merges: null, answer, message: `Start with ${answer}, which keeps every bit.` })
   for (let bit = top - 1; bit >= 0; bit--) {
     const candidate = answer & ~(1 << bit)
     const merges = mergesNeeded(nums, candidate)
     if (merges !== null && merges <= k) {
       answer = candidate
-      frames.push({ phase: 'drop', activeLine: L('if fewest merges for candidate'), bit, candidate, merges, answer, message: `Bit ${bit} can be cleared with ${merges} merge(s), within ${k}.` })
+      frames.push({ pythonLine: 22, phase: 'drop', activeLine: L('if fewest merges for candidate'), bit, candidate, merges, answer, message: `Bit ${bit} can be cleared with ${merges} merge(s), within ${k}.` })
     } else {
-      frames.push({ phase: 'keep', activeLine: L('if fewest merges for candidate'), bit, candidate, merges, answer, message: `Bit ${bit} must stay: clearing it needs ${merges === null ? 'an impossible split' : merges + ' merges'}.` })
+      frames.push({ pythonLine: 21, phase: 'keep', activeLine: L('if fewest merges for candidate'), bit, candidate, merges, answer, message: `Bit ${bit} must stay: clearing it needs ${merges === null ? 'an impossible split' : merges + ' merges'}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), bit: -1, candidate: null, merges: null, answer, message: `Minimum OR of the remaining elements: ${answer}.` })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return answer'), bit: -1, candidate: null, merges: null, answer, message: `Minimum OR of the remaining elements: ${answer}.` })
   return { input: { nums, k }, result: answer, frames }
 }
 

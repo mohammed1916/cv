@@ -13,19 +13,19 @@ export function buildTrace({ nums, k }) {
   let left = 0
   let best = 0
   const tally = () => Object.fromEntries([...counts].sort((a, b) => a[0] - b[0]))
-  frames.push({ phase: 'start', activeLine: L('set counts to an empty tally'), left, right: -1, counts: {}, best, message: `Start with an empty tally. A value may appear at most ${k} times in the window.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set counts to an empty tally'), left, right: -1, counts: {}, best, message: `Start with an empty tally. A value may appear at most ${k} times in the window.` })
   for (let right = 0; right < nums.length; right++) {
     counts.set(nums[right], (counts.get(nums[right]) || 0) + 1)
-    frames.push({ phase: 'extend', activeLine: L('add one to the tally'), left, right, counts: tally(), best, message: `Add ${nums[right]} at index ${right}. It now appears ${counts.get(nums[right])} time${counts.get(nums[right]) === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: 6, phase: 'extend', activeLine: L('add one to the tally'), left, right, counts: tally(), best, message: `Add ${nums[right]} at index ${right}. It now appears ${counts.get(nums[right])} time${counts.get(nums[right]) === 1 ? '' : 's'}.` })
     while (counts.get(nums[right]) > k) {
       counts.set(nums[left], counts.get(nums[left]) - 1)
       left++
-      frames.push({ phase: 'shrink', activeLine: L('remove one from the tally'), left, right, counts: tally(), best, message: `${nums[right]} is over the limit. Drop the left value and move the left edge to ${left}.` })
+      frames.push({ pythonLine: 9, phase: 'shrink', activeLine: L('remove one from the tally'), left, right, counts: tally(), best, message: `${nums[right]} is over the limit. Drop the left value and move the left edge to ${left}.` })
     }
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), left, right, counts: tally(), best, message: `Window ${left} to ${right} is valid with length ${right - left + 1}. Best is ${best}.` })
+    frames.push({ pythonLine: 10, phase: 'record', activeLine: L('set best to the larger'), left, right, counts: tally(), best, message: `Window ${left} to ${right} is valid with length ${right - left + 1}. Best is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), left, right: -1, counts: tally(), best, message: `Longest valid subarray: ${best}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return best'), left, right: -1, counts: tally(), best, message: `Longest valid subarray: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

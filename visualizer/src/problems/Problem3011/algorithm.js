@@ -14,7 +14,7 @@ export function buildTrace({ nums }) {
   const frames = []
   let previousMax = 0
   let start = 0
-  frames.push({ phase: 'start', activeLine: L('set previous maximum to 0'), start: 0, end: -1, low: null, high: null, previousMax, message: 'Scan the array in runs of equal set bit counts.' })
+  frames.push({ pythonLine: 6, phase: 'start', activeLine: L('set previous maximum to 0'), start: 0, end: -1, low: null, high: null, previousMax, message: 'Scan the array in runs of equal set bit counts.' })
   while (start < n) {
     const bits = bitCount(nums[start])
     let end = start
@@ -22,15 +22,15 @@ export function buildTrace({ nums }) {
     const group = nums.slice(start, end + 1)
     const low = Math.min(...group)
     const high = Math.max(...group)
-    frames.push({ phase: 'group', activeLine: L('set low to the minimum'), start, end, low, high, previousMax, message: `Run ${start}-${end} has ${bits} set bits, minimum ${low}, maximum ${high}.` })
+    frames.push({ pythonLine: 14, phase: 'group', activeLine: L('set low to the minimum'), start, end, low, high, previousMax, message: `Run ${start}-${end} has ${bits} set bits, minimum ${low}, maximum ${high}.` })
     if (low < previousMax) {
-      frames.push({ phase: 'fail', activeLine: L('return false'), start, end, low, high, previousMax, message: `Minimum ${low} is below the previous run maximum ${previousMax}, so the runs cannot be ordered.` })
+      frames.push({ pythonLine: 15, phase: 'fail', activeLine: L('return false'), start, end, low, high, previousMax, message: `Minimum ${low} is below the previous run maximum ${previousMax}, so the runs cannot be ordered.` })
       return { input: { nums }, result: false, frames }
     }
     previousMax = high
     start = end + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), start: n, end: n - 1, low: null, high: null, previousMax, message: 'Every run starts above the previous run, so the array can be sorted.' })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return true'), start: n, end: n - 1, low: null, high: null, previousMax, message: 'Every run starts above the previous run, so the array can be sorted.' })
   return { input: { nums }, result: true, frames }
 }
 

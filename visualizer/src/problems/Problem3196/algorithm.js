@@ -26,16 +26,16 @@ const alternating = (nums, s, e) => {
 export function buildTrace(nums) {
   const n = nums.length
   const best = [0]
-  const frames = [{ phase: 'start', end: 0, start: null, best: [...best], activeLine: L('set best[0] to 0'), message: 'The empty prefix costs 0.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', end: 0, start: null, best: [...best], activeLine: L('set best[0] to 0'), message: 'The empty prefix costs 0.' }]
   for (let e = 1; e <= n; e++) {
     best[e] = -Infinity
     for (let s = 0; s < e; s++) {
       const cost = alternating(nums, s, e)
       if (best[s] + cost > best[e]) best[e] = best[s] + cost
-      frames.push({ phase: 'piece', end: e, start: s, best: [...best], cost, activeLine: L('set best[e] to the larger'), message: `Piece ${s} to ${e - 1} costs ${cost}; best[${e}] is now ${best[e]}.` })
+      frames.push({ pythonLine: 9, phase: 'piece', end: e, start: s, best: [...best], cost, activeLine: L('set best[e] to the larger'), message: `Piece ${s} to ${e - 1} costs ${cost}; best[${e}] is now ${best[e]}.` })
     }
   }
-  frames.push({ phase: 'done', end: n, start: null, best: [...best], activeLine: L('return best[n]'), message: `Maximum total cost: ${best[n]}.` })
+  frames.push({ pythonLine: 10, phase: 'done', end: n, start: null, best: [...best], activeLine: L('return best[n]'), message: `Maximum total cost: ${best[n]}.` })
   return { input: nums, result: best[n], frames }
 }
 

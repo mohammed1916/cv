@@ -15,16 +15,16 @@ export function buildTrace({ nums1, nums2 }) {
   const only1 = [...set1].filter(v => !set2.has(v))
   const only2 = [...set2].filter(v => !set1.has(v))
   const shared = [...set1].filter(v => set2.has(v))
-  const frames = [{ phase: 'start', activeLine: L('let half be'), keep1: 0, keep2: 0, sharedKept: 0, result: 0, message: `Each array keeps ${half} values after removals.` }]
-  frames.push({ phase: 'classify', activeLine: L('count values only'), keep1: 0, keep2: 0, sharedKept: 0, result: 0, message: `Only in nums1: ${only1.length}. Only in nums2: ${only2.length}. In both: ${shared.length}.` })
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let half be'), keep1: 0, keep2: 0, sharedKept: 0, result: 0, message: `Each array keeps ${half} values after removals.` }]
+  frames.push({ pythonLine: 6, phase: 'classify', activeLine: L('count values only'), keep1: 0, keep2: 0, sharedKept: 0, result: 0, message: `Only in nums1: ${only1.length}. Only in nums2: ${only2.length}. In both: ${shared.length}.` })
   const keep1 = Math.min(only1.length, half)
   const keep2 = Math.min(only2.length, half)
-  frames.push({ phase: 'exclusive', activeLine: L('keep up to half'), keep1, keep2, sharedKept: 0, result: keep1 + keep2, message: `Keep ${keep1} values only in nums1 and ${keep2} only in nums2.` })
+  frames.push({ pythonLine: 9, phase: 'exclusive', activeLine: L('keep up to half'), keep1, keep2, sharedKept: 0, result: keep1 + keep2, message: `Keep ${keep1} values only in nums1 and ${keep2} only in nums2.` })
   const spare = (half - keep1) + (half - keep2)
   const sharedKept = Math.min(shared.length, spare)
   const result = keep1 + keep2 + sharedKept
-  frames.push({ phase: 'shared', activeLine: L('fill the remaining'), keep1, keep2, sharedKept, result, message: `${spare} slots remain, so ${sharedKept} shared values join the set.` })
-  frames.push({ phase: 'done', activeLine: L('return the number'), keep1, keep2, sharedKept, result, message: `Maximum set size: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'shared', activeLine: L('fill the remaining'), keep1, keep2, sharedKept, result, message: `${spare} slots remain, so ${sharedKept} shared values join the set.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the number'), keep1, keep2, sharedKept, result, message: `Maximum set size: ${result}.` })
   return { input: { nums1, nums2 }, result, frames }
 }
 

@@ -10,22 +10,22 @@ export function buildTrace(input) {
   const { nums, k } = input
   const sorted = [...nums].sort((a, b) => a - b)
   const mid = Math.floor(sorted.length / 2)
-  const frames = [{ phase: 'start', activeLine: L('sort a copy'), index: mid, cost: 0, message: `Sorted. The median sits at position ${mid}, which holds ${sorted[mid]}. The target is ${k}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('sort a copy'), index: mid, cost: 0, message: `Sorted. The median sits at position ${mid}, which holds ${sorted[mid]}. The target is ${k}.` }]
   let cost = 0
   if (sorted[mid] === k) {
-    frames.push({ phase: 'match', activeLine: L('already k'), index: mid, cost, message: `The median is already ${k}, so no changes are needed.` })
+    frames.push({ pythonLine: 6, phase: 'match', activeLine: L('already k'), index: mid, cost, message: `The median is already ${k}, so no changes are needed.` })
   } else if (sorted[mid] < k) {
     for (let i = mid; i < sorted.length; i++) {
       cost += Math.max(0, k - sorted[i])
-      frames.push({ phase: 'raise', activeLine: L('raise each'), index: i, cost, message: `Raise ${sorted[i]} to ${k} if it is below k. Cost so far: ${cost}.` })
+      frames.push({ pythonLine: 9, phase: 'raise', activeLine: L('raise each'), index: i, cost, message: `Raise ${sorted[i]} to ${k} if it is below k. Cost so far: ${cost}.` })
     }
   } else {
     for (let i = 0; i <= mid; i++) {
       cost += Math.max(0, sorted[i] - k)
-      frames.push({ phase: 'lower', activeLine: L('lower each'), index: i, cost, message: `Lower ${sorted[i]} to ${k} if it is above k. Cost so far: ${cost}.` })
+      frames.push({ pythonLine: 12, phase: 'lower', activeLine: L('lower each'), index: i, cost, message: `Lower ${sorted[i]} to ${k} if it is above k. Cost so far: ${cost}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return cost'), index: -1, cost, message: `Minimum operations: ${cost}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return cost'), index: -1, cost, message: `Minimum operations: ${cost}.` })
   return { input, sorted, mid, result: cost, frames }
 }
 

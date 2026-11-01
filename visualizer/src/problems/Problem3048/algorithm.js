@@ -31,20 +31,20 @@ export function buildTrace({ nums, changeIndices }) {
   let hi = m
   const domain = [lo, hi]
   const zeros = new Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set low to 1 and high'), lo, hi, mid: null, verdict: null, last: zeros, message: `Search seconds 1 to ${m} for the earliest second that marks every index.` }]
+  const frames = [{ pythonLine: 23, phase: 'start', activeLine: L('set low to 1 and high'), lo, hi, mid: null, verdict: null, last: zeros, message: `Search seconds 1 to ${m} for the earliest second that marks every index.` }]
   const whole = check(m)
   if (!whole.ok) {
-    frames.push({ phase: 'done', activeLine: L('return minus one'), lo, hi, mid: null, verdict: false, last: whole.last, message: 'Even the last second cannot mark every index. Report -1.' })
+    frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return minus one'), lo, hi, mid: null, verdict: false, last: whole.last, message: 'Even the last second cannot mark every index. Report -1.' })
     return { input: { nums, changeIndices }, domain, result: -1, frames }
   }
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const result = check(mid)
-    frames.push({ phase: 'probe', activeLine: L('if a deadline schedule works by second mid'), lo, hi, mid, verdict: result.ok, last: result.last, message: `Second ${mid}: ${result.ok ? 'the decrements fit before their marks' : 'some index cannot be ready in time'}.` })
+    frames.push({ pythonLine: result.ok ? 27 : 29, phase: 'probe', activeLine: L('if a deadline schedule works by second mid'), lo, hi, mid, verdict: result.ok, last: result.last, message: `Second ${mid}: ${result.ok ? 'the decrements fit before their marks' : 'some index cannot be ready in time'}.` })
     if (result.ok) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: true, last: check(lo).last, message: `Earliest second: ${lo}.` })
+  frames.push({ pythonLine: 30, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: true, last: check(lo).last, message: `Earliest second: ${lo}.` })
   return { input: { nums, changeIndices }, domain, result: lo, frames }
 }
 

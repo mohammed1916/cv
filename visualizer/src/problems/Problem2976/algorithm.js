@@ -20,25 +20,25 @@ export function buildTrace({ source, target, original, changed, cost }) {
   const used = [...new Set([...source, ...target, ...original, ...changed].map(letter))].sort((a, b) => a - b)
   const snapshot = () => used.map(i => used.map(j => dist[i][j]))
   const labels = used.map(i => LETTERS[i])
-  frames.push({ phase: 'start', activeLine: L('set dist'), matrix: snapshot(), labels, pivot: -1, message: 'Each letter starts at distance 0 from itself and infinity from the rest.' })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set dist'), matrix: snapshot(), labels, pivot: -1, message: 'Each letter starts at distance 0 from itself and infinity from the rest.' })
   original.forEach((o, i) => {
     const a = letter(o)
     const b = letter(changed[i])
     dist[a][b] = Math.min(dist[a][b], cost[i])
   })
-  frames.push({ phase: 'edges', activeLine: L('for each pair i'), matrix: snapshot(), labels, pivot: -1, message: 'Each rule sets the cheapest direct cost from one letter to another.' })
+  frames.push({ pythonLine: 6, phase: 'edges', activeLine: L('for each pair i'), matrix: snapshot(), labels, pivot: -1, message: 'Each rule sets the cheapest direct cost from one letter to another.' })
   for (let k = 0; k < 26; k++) {
     for (let i = 0; i < 26; i++) {
       for (let j = 0; j < 26; j++) {
         if (dist[i][k] + dist[k][j] < dist[i][j]) dist[i][j] = dist[i][k] + dist[k][j]
       }
     }
-    if (used.includes(k)) frames.push({ phase: 'relax', activeLine: L('relax dist'), matrix: snapshot(), labels, pivot: used.indexOf(k), message: `Route through ${LETTERS[k]} to shorten any pair that benefits.` })
+    if (used.includes(k)) frames.push({ pythonLine: 11, phase: 'relax', activeLine: L('relax dist'), matrix: snapshot(), labels, pivot: used.indexOf(k), message: `Route through ${LETTERS[k]} to shorten any pair that benefits.` })
   }
   let total = 0
   for (let i = 0; i < source.length; i++) total += dist[letter(source[i])][letter(target[i])]
   const result = total === Infinity ? -1 : total
-  frames.push({ phase: 'done', activeLine: L('return -1'), matrix: snapshot(), labels, pivot: -1, message: result === -1 ? 'Some position cannot be converted, so return -1.' : `Total minimum cost: ${result}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return -1'), matrix: snapshot(), labels, pivot: -1, message: result === -1 ? 'Some position cannot be converted, so return -1.' : `Total minimum cost: ${result}.` })
   return { input: { source, target, original, changed, cost }, result, frames }
 }
 

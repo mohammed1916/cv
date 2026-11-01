@@ -22,7 +22,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ nums, k }) {
   const bestByValue = new Map()
   let best = 0
-  const frames = [{ phase: 'start', index: -1, value: null, row: null, best: 0, activeLine: L('set best to 0'), message: 'No subsequence yet.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', index: -1, value: null, row: null, best: 0, activeLine: L('set best to 0'), message: 'No subsequence yet.' }]
   nums.forEach((x, i) => {
     const row = Array(k + 1).fill(null)
     for (let c = 0; c <= k; c++) {
@@ -44,9 +44,9 @@ export function buildTrace({ nums, k }) {
     bestByValue.set(x, own)
     const rowBest = Math.max(...row.filter(v => v !== null))
     if (rowBest > best) best = rowBest
-    frames.push({ phase: 'value', index: i, value: x, row: [...row], best, activeLine: L('add each row entry into best-by-value'), message: `Value ${x} at index ${i}: best chain ending here is ${rowBest}; overall ${best}.` })
+    frames.push({ pythonLine: 23, phase: 'value', index: i, value: x, row: [...row], best, activeLine: L('add each row entry into best-by-value'), message: `Value ${x} at index ${i}: best chain ending here is ${rowBest}; overall ${best}.` })
   })
-  frames.push({ phase: 'done', index: nums.length - 1, value: null, row: null, best, activeLine: L('return best'), message: `Longest good subsequence: ${best}.` })
+  frames.push({ pythonLine: 24, phase: 'done', index: nums.length - 1, value: null, row: null, best, activeLine: L('return best'), message: `Longest good subsequence: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

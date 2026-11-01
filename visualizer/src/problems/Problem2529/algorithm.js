@@ -19,13 +19,13 @@ const countBelow = (list, x) => {
 }
 
 export function buildTrace({ nums }) {
-  const frames = [{ phase: 'start', activeLine: L('find the first index that is not negative'), negative: null, positive: null, message: 'The array is sorted, so the sign boundaries can be searched.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('find the first index that is not negative'), negative: null, positive: null, message: 'The array is sorted, so the sign boundaries can be searched.' }]
   const negative = countBelow(nums, 0)
-  frames.push({ phase: 'negative', activeLine: L('negatives are the values before'), negative, positive: null, message: `${negative} negative value${negative === 1 ? '' : 's'} sit before index ${negative}.` })
+  frames.push({ pythonLine: 3, phase: 'negative', activeLine: L('negatives are the values before'), negative, positive: null, message: `${negative} negative value${negative === 1 ? '' : 's'} sit before index ${negative}.` })
   const positive = nums.length - countBelow(nums.map(v => (v <= 0 ? 0 : 1)), 1)
-  frames.push({ phase: 'positive', activeLine: L('positives are the values from'), negative, positive, message: `${positive} positive value${positive === 1 ? '' : 's'} sit after the zeros.` })
+  frames.push({ pythonLine: 4, phase: 'positive', activeLine: L('positives are the values from'), negative, positive, message: `${positive} positive value${positive === 1 ? '' : 's'} sit after the zeros.` })
   const result = Math.max(negative, positive)
-  frames.push({ phase: 'done', activeLine: L('return the larger count'), negative, positive, message: `The larger count is ${result}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return the larger count'), negative, positive, message: `The larger count is ${result}.` })
   return { input: { nums }, result, frames }
 }
 

@@ -20,17 +20,17 @@ export function buildTrace(nums) {
   const evens = nums.filter(v => v % 2 === 0).length
   const odds = nums.length - evens
   let runs = 1
-  const frames = [{ phase: 'start', index: -1, evens, odds, runs, activeLine: L('set evens to'), message: `There are ${evens} even and ${odds} odd values.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', index: -1, evens, odds, runs, activeLine: L('set evens to'), message: `There are ${evens} even and ${odds} odd values.` }]
   for (let i = 1; i < nums.length; i++) {
     if (nums[i] % 2 !== nums[i - 1] % 2) {
       runs += 1
-      frames.push({ phase: 'switch', index: i, evens, odds, runs, activeLine: L('add one to runs'), message: `${nums[i - 1]} and ${nums[i]} have different parity: runs is ${runs}.` })
+      frames.push({ pythonLine: 7, phase: 'switch', index: i, evens, odds, runs, activeLine: L('add one to runs'), message: `${nums[i - 1]} and ${nums[i]} have different parity: runs is ${runs}.` })
     } else {
-      frames.push({ phase: 'same', index: i, evens, odds, runs, activeLine: L('if nums[i] and nums[i-1]'), message: `${nums[i - 1]} and ${nums[i]} share parity, so the alternating run does not grow.` })
+      frames.push({ pythonLine: 6, phase: 'same', index: i, evens, odds, runs, activeLine: L('if nums[i] and nums[i-1]'), message: `${nums[i - 1]} and ${nums[i]} share parity, so the alternating run does not grow.` })
     }
   }
   const result = Math.max(evens, odds, runs)
-  frames.push({ phase: 'done', index: nums.length - 1, evens, odds, runs, activeLine: L('return the largest of'), message: `Best of ${evens} evens, ${odds} odds, and ${runs} alternating runs: ${result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', index: nums.length - 1, evens, odds, runs, activeLine: L('return the largest of'), message: `Best of ${evens} evens, ${odds} odds, and ${runs} alternating runs: ${result}.` })
   return { input: nums, result, frames }
 }
 

@@ -9,13 +9,13 @@ export function parseInput(text) {
 
 export function buildTrace({ s }) {
   let score = 0
-  const frames = [{ phase: 'start', activeLine: L('set score to 0'), index: -1, gap: 0, score, message: 'Start with a score of zero.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set score to 0'), index: -1, gap: 0, score, message: 'Start with a score of zero.' }]
   for (let i = 0; i + 1 < s.length; i++) {
     const gap = Math.abs(s.charCodeAt(i) - s.charCodeAt(i + 1))
     score += gap
-    frames.push({ phase: 'pair', activeLine: L('add the absolute'), index: i, gap, score, message: `${s[i]} and ${s[i + 1]} differ by ${gap}. Score is now ${score}.` })
+    frames.push({ pythonLine: 4, phase: 'pair', activeLine: L('add the absolute'), index: i, gap, score, message: `${s[i]} and ${s[i + 1]} differ by ${gap}. Score is now ${score}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return score'), index: -1, gap: 0, score, message: `Score: ${score}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return score'), index: -1, gap: 0, score, message: `Score: ${score}.` })
   return { input: { s }, result: score, frames }
 }
 

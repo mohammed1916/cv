@@ -24,12 +24,12 @@ export function buildTrace(grid) {
   const R = grid.length, C = grid[0].length
   let best = Infinity
   let bestBoxes = null
-  const frames = [{ phase: 'start', name: null, boxes: [], total: null, best: null, activeLine: L('set best to infinity'), message: 'Try every way to split the grid with straight cuts into three parts.' }]
+  const frames = [{ pythonLine: 12, phase: 'start', name: null, boxes: [], total: null, best: null, activeLine: L('set best to infinity'), message: 'Try every way to split the grid with straight cuts into three parts.' }]
   const consider = (name, parts) => {
     if (parts.some(p => p === null)) return
     const total = parts.reduce((s, p) => s + p.area, 0)
     if (total < best) { best = total; bestBoxes = parts }
-    frames.push({ phase: 'split', name, boxes: parts, total, best, activeLine: L('if every part has a 1'), message: `${name}: boxes of ${parts.map(p => p.area).join(' + ')} = ${total}.` })
+    frames.push({ pythonLine: name === 'three rows' ? 22 : name === 'top, then bottom split' ? 24 : name === 'bottom, then top split' ? 25 : name === 'three columns' ? 28 : name === 'left, then right split' ? 30 : 31, phase: 'split', name, boxes: parts, total, best, activeLine: L('if every part has a 1'), message: `${name}: boxes of ${parts.map(p => p.area).join(' + ')} = ${total}.` })
   }
   for (let a = 1; a < R; a++) {
     for (let b = a + 1; b < R; b++) consider('three rows', [box(grid, 0, a, 0, C), box(grid, a, b, 0, C), box(grid, b, R, 0, C)])
@@ -45,7 +45,7 @@ export function buildTrace(grid) {
       consider('right, then left split', [box(grid, 0, R, a, C), box(grid, 0, r, 0, a), box(grid, r, R, 0, a)])
     }
   }
-  frames.push({ phase: 'done', name: null, boxes: bestBoxes ?? [], total: best, best, activeLine: L('return best'), message: `Minimum total area: ${best}.` })
+  frames.push({ pythonLine: 32, phase: 'done', name: null, boxes: bestBoxes ?? [], total: best, best, activeLine: L('return best'), message: `Minimum total area: ${best}.` })
   return { input: grid, result: best, frames }
 }
 

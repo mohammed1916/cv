@@ -25,7 +25,7 @@ export function buildTrace(nums) {
   let best = 1
   let up = 1
   let down = 1
-  const frames = [{ phase: 'start', index: 0, up, down, best, activeLine: L('set best to 1'), message: 'A single number is a run of length 1 in both directions.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', index: 0, up, down, best, activeLine: L('set best to 1'), message: 'A single number is a run of length 1 in both directions.' }]
   for (let i = 1; i < nums.length; i++) {
     let line
     let message
@@ -46,9 +46,9 @@ export function buildTrace(nums) {
       message = `${nums[i]} equals ${nums[i - 1]}, so both runs restart.`
     }
     best = Math.max(best, up, down)
-    frames.push({ phase: 'step', index: i, up, down, best, activeLine: line, message })
+    frames.push({ pythonLine: nums[i] > nums[i - 1] ? 7 : nums[i] < nums[i - 1] ? 9 : 11, phase: 'step', index: i, up, down, best, activeLine: line, message })
   }
-  frames.push({ phase: 'done', index: nums.length - 1, up, down, best, activeLine: L('return best'), message: `Longest run: ${best}.` })
+  frames.push({ pythonLine: 13, phase: 'done', index: nums.length - 1, up, down, best, activeLine: L('return best'), message: `Longest run: ${best}.` })
   return { input: nums, result: best, frames }
 }
 

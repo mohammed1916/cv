@@ -8,15 +8,15 @@ export function parseInput(text) {
 export function buildTrace(values) {
   const reach = new Set([0])
   const distinct = [...new Set(values)].sort((a, b) => a - b)
-  const frames = [{ phase: 'start', value: null, reach: [...reach], added: [], total: 0, activeLine: L('set reachable to'), message: 'Start with total 0 reachable. Rewards are taken in increasing order.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', value: null, reach: [...reach], added: [], total: 0, activeLine: L('set reachable to'), message: 'Start with total 0 reachable. Rewards are taken in increasing order.' }]
   for (const v of distinct) {
     // Only totals below v can take v next; read them before adding new totals.
     const added = [...reach].filter(s => s < v).map(s => s + v).filter(t => !reach.has(t))
     for (const t of added) reach.add(t)
-    frames.push({ phase: 'value', value: v, reach: [...reach].sort((a, b) => a - b), added: added.sort((a, b) => a - b), total: Math.max(...reach), activeLine: L('add total s plus v'), message: added.length ? `Reward ${v} extends totals below it: ${added.join(', ')} become reachable.` : `Reward ${v} extends nothing new.` })
+    frames.push({ pythonLine: 4, phase: 'value', value: v, reach: [...reach].sort((a, b) => a - b), added: added.sort((a, b) => a - b), total: Math.max(...reach), activeLine: L('add total s plus v'), message: added.length ? `Reward ${v} extends totals below it: ${added.join(', ')} become reachable.` : `Reward ${v} extends nothing new.` })
   }
   const result = Math.max(...reach)
-  frames.push({ phase: 'done', value: null, reach: [...reach].sort((a, b) => a - b), added: [], total: result, activeLine: L('return the largest'), message: `Largest reachable total: ${result}.` })
+  frames.push({ pythonLine: 5, phase: 'done', value: null, reach: [...reach].sort((a, b) => a - b), added: [], total: result, activeLine: L('return the largest'), message: `Largest reachable total: ${result}.` })
   return { input: values, result, frames }
 }
 

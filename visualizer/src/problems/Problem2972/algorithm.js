@@ -12,15 +12,15 @@ export function buildTrace(input) {
   const n = nums.length
   let p = 0
   while (p + 1 < n && nums[p + 1] > nums[p]) p++
-  const frames = [{ phase: 'prefix', activeLine: L('set p to the end'), i: p, j: -1, message: `The prefix up to index ${p} is strictly increasing.` }]
+  const frames = [{ pythonLine: 5, phase: 'prefix', activeLine: L('set p to the end'), i: p, j: -1, message: `The prefix up to index ${p} is strictly increasing.` }]
   if (p === n - 1) {
     const result = n * (n + 1) / 2
-    frames.push({ phase: 'done', activeLine: L('return total'), i: p, j: -1, message: `The whole array is increasing, so all ${result} subarrays can be removed.` })
+    frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total'), i: p, j: -1, message: `The whole array is increasing, so all ${result} subarrays can be removed.` })
     return { input, result, frames }
   }
   let s = n - 1
   while (s - 1 >= 0 && nums[s - 1] < nums[s]) s--
-  frames.push({ phase: 'suffix', activeLine: L('find the start of the increasing suffix'), i: p, j: s, message: `The suffix from index ${s} is strictly increasing.` })
+  frames.push({ pythonLine: 10, phase: 'suffix', activeLine: L('find the start of the increasing suffix'), i: p, j: s, message: `The suffix from index ${s} is strictly increasing.` })
   let total = 0
   let j = 0
   for (let i = -1; i <= p; i++) {
@@ -28,9 +28,9 @@ export function buildTrace(input) {
     j = Math.max(j, lo)
     while (j < n && i >= 0 && nums[j] <= nums[i]) j++
     total += n - j + 1
-    frames.push({ phase: 'pair', activeLine: L('add the number of valid right starts'), i, j, message: `Keep the prefix ending at ${i}: ${n - j + 1} subarrays can be removed. Total ${total}.` })
+    frames.push({ pythonLine: 18, phase: 'pair', activeLine: L('add the number of valid right starts'), i, j, message: `Keep the prefix ending at ${i}: ${n - j + 1} subarrays can be removed. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), i: p, j: n, message: `Total of ${total} incremovable subarrays.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return total'), i: p, j: n, message: `Total of ${total} incremovable subarrays.` })
   return { input, result: total, frames }
 }
 

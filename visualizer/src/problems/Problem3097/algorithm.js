@@ -17,21 +17,21 @@ export function buildTrace({ nums, k }) {
   const frames = []
   let best = null
   let left = 0
-  const frame = (phase, line, right, message) => frames.push({ phase, activeLine: line, left, right, windowOr: windowOr(counts), best, message })
-  frame('start', L('set the count of each bit'), -1, 'Start with an empty window.')
+  const frame = (phase, line, right, message, pythonLine) => frames.push({ phase, activeLine: line, pythonLine, left, right, windowOr: windowOr(counts), best, message })
+  frame('start', L('set the count of each bit'), -1, 'Start with an empty window.', 2)
   for (let right = 0; right < nums.length; right++) {
     for (let b = 0; b < BITS; b++) if ((nums[right] >> b) & 1) counts[b]++
-    frame('add', L('add nums[right]'), right, `Add ${nums[right]} at ${right}. The window OR is ${windowOr(counts)}.`)
+    frame('add', L('add nums[right]'), right, `Add ${nums[right]} at ${right}. The window OR is ${windowOr(counts)}.`, 16)
     while (left <= right && windowOr(counts) >= k) {
       const length = right - left + 1
       best = best === null ? length : Math.min(best, length)
-      frame('record', L('set best to the smaller'), right, `Window ${left}-${right} has OR ${windowOr(counts)} >= ${k}, length ${length}.`)
+      frame('record', L('set best to the smaller'), right, `Window ${left}-${right} has OR ${windowOr(counts)} >= ${k}, length ${length}.`, 20)
       for (let b = 0; b < BITS; b++) if ((nums[left] >> b) & 1) counts[b]--
       left++
-      frame('shrink', L('remove nums[left]'), right, `Drop ${nums[left - 1]} from the left.`)
+      frame('shrink', L('remove nums[left]'), right, `Drop ${nums[left - 1]} from the left.`, 23)
     }
   }
-  frame('done', L('return best, or -1'), -1, best === null ? 'No subarray reaches k.' : `Shortest length: ${best}.`)
+  frame('done', L('return best, or -1'), -1, best === null ? 'No subarray reaches k.' : `Shortest length: ${best}.`, 25)
   return { input: { nums, k }, result: best === null ? -1 : best, frames }
 }
 

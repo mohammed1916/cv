@@ -70,15 +70,15 @@ function powMod(exp, mod) {
 export function buildTrace({ queries }) {
   const frames = []
   const results = []
-  frames.push({ phase: 'start', activeLine: L('set results to an empty list'), query: -1, total: null, value: null, message: 'Answer each query from exponent sums.' })
+  frames.push({ pythonLine: 39, phase: 'start', activeLine: L('set results to an empty list'), query: -1, total: null, value: null, message: 'Answer each query from exponent sums.' })
   queries.forEach(([from, to, mod], index) => {
     const total = exponentBefore(to + 1) - exponentBefore(from)
-    frames.push({ phase: 'exponent', activeLine: L('set total to exponent before'), query: index, total, value: null, message: `Query ${index}: the range has exponent sum ${total}.` })
+    frames.push({ pythonLine: 41, phase: 'exponent', activeLine: L('set total to exponent before'), query: index, total, value: null, message: `Query ${index}: the range has exponent sum ${total}.` })
     const value = powMod(total, mod)
     results.push(value)
-    frames.push({ phase: 'power', activeLine: L('add 2 raised to total'), query: index, total, value, message: `2 raised to ${total}, modulo ${mod}, is ${value}.` })
+    frames.push({ pythonLine: 42, phase: 'power', activeLine: L('add 2 raised to total'), query: index, total, value, message: `2 raised to ${total}, modulo ${mod}, is ${value}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return results'), query: -1, total: null, value: null, message: `Answers: ${results.join(', ')}.` })
+  frames.push({ pythonLine: 43, phase: 'done', activeLine: L('return results'), query: -1, total: null, value: null, message: `Answers: ${results.join(', ')}.` })
   return { input: { queries }, result: results, frames }
 }
 

@@ -18,13 +18,13 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ energy, k }) {
   const n = energy.length
   const total = Array(n).fill(0)
-  const frames = [{ phase: 'start', index: -1, total: [...total], activeLine: L('set total to an empty'), message: 'Fill the table from the right end, where no jumps remain.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', index: -1, total: [...total], activeLine: L('set total to an empty'), message: 'Fill the table from the right end, where no jumps remain.' }]
   for (let i = n - 1; i >= 0; i--) {
     total[i] = energy[i] + (i + k < n ? total[i + k] : 0)
-    frames.push({ phase: 'fill', index: i, total: [...total], activeLine: L('set total[i] to energy[i]'), message: `Start at ${i}: ${energy[i]} plus ${i + k < n ? `the value at ${i + k}` : 'nothing more'} gives ${total[i]}.` })
+    frames.push({ pythonLine: 5, phase: 'fill', index: i, total: [...total], activeLine: L('set total[i] to energy[i]'), message: `Start at ${i}: ${energy[i]} plus ${i + k < n ? `the value at ${i + k}` : 'nothing more'} gives ${total[i]}.` })
   }
   const result = Math.max(...total)
-  frames.push({ phase: 'done', index: total.indexOf(result), total: [...total], activeLine: L('return the largest entry'), message: `Best start collects ${result}.` })
+  frames.push({ pythonLine: 6, phase: 'done', index: total.indexOf(result), total: [...total], activeLine: L('return the largest entry'), message: `Best start collects ${result}.` })
   return { input: { energy, k }, result, frames }
 }
 

@@ -50,7 +50,7 @@ export function buildTrace({ n, edges, coins, k }) {
     return value
   }
   const result = best(0, 0)
-  const frames = [{ phase: 'start', activeLine: L('set answer to best'), node: -1, halvings: 0, total: 0, message: 'Start at the root with no halvings above it.' }]
+  const frames = [{ pythonLine: 25, phase: 'start', activeLine: L('set answer to best'), node: -1, halvings: 0, total: 0, message: 'Start at the root with no halvings above it.' }]
   // Walk the optimal choices from the root, one frame per node.
   const walk = (v, h) => {
     const cur = Math.floor(coins[v] / 2 ** h)
@@ -60,11 +60,11 @@ export function buildTrace({ n, edges, coins, k }) {
     const keep = cur - k + below
     const halve = Math.floor(cur / 2) + belowHalved
     const halveNow = halve > keep
-    frames.push({ phase: halveNow ? 'halve' : 'keep', activeLine: L('take the better of the two ways'), node: v, halvings: h, total: Math.max(keep, halve), message: halveNow ? `Node ${v} halves: it scores ${Math.floor(cur / 2)} and halves every coin count below it.` : `Node ${v} keeps: it scores ${cur} minus k.` })
+    frames.push({ pythonLine: 23, phase: halveNow ? 'halve' : 'keep', activeLine: L('take the better of the two ways'), node: v, halvings: h, total: Math.max(keep, halve), message: halveNow ? `Node ${v} halves: it scores ${Math.floor(cur / 2)} and halves every coin count below it.` : `Node ${v} keeps: it scores ${cur} minus k.` })
     for (const c of children[v]) walk(c, halveNow ? h + 1 : h)
   }
   walk(0, 0)
-  frames.push({ phase: 'done', activeLine: L('return answer'), node: -1, halvings: 0, total: result, message: `Maximum points: ${result}.` })
+  frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return answer'), node: -1, halvings: 0, total: result, message: `Maximum points: ${result}.` })
   return { input, result, frames }
 }
 

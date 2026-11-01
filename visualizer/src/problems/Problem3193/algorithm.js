@@ -22,9 +22,9 @@ export function buildTrace({ n, requirements }) {
     need.set(end, cnt)
   }
   let ways = [1]
-  const frames = [{ phase: 'start', index: null, row: ways.slice(), need: null, activeLine: L('set ways to [1]'), message: 'An empty prefix has one arrangement with zero inversions.' }]
+  const frames = [{ pythonLine: 8, phase: 'start', index: null, row: ways.slice(), need: null, activeLine: L('set ways to [1]'), message: 'An empty prefix has one arrangement with zero inversions.' }]
   if (conflict) {
-    frames.push({ phase: 'done', index: null, row: [], need: null, activeLine: L('return the sum'), message: 'Two requirements for the same prefix disagree, so no permutation qualifies.' })
+    frames.push({ pythonLine: 6, phase: 'done', index: null, row: [], need: null, activeLine: L('return the sum'), message: 'Two requirements for the same prefix disagree, so no permutation qualifies.' })
     return { input: { n, requirements }, result: 0, frames }
   }
   for (let i = 0; i < n; i++) {
@@ -35,10 +35,10 @@ export function buildTrace({ n, requirements }) {
     const req = need.has(i) ? need.get(i) : null
     if (req !== null) for (let j = 0; j < size; j++) if (j !== req) next[j] = 0
     ways = next
-    frames.push({ phase: 'position', index: i, row: ways.slice(), need: req, activeLine: L('zero every entry'), message: req === null ? `Position ${i} adds 0 to ${i} inversions.` : `Prefix ${i} must have exactly ${req} inversions: every other count is zeroed.` })
+    frames.push({ pythonLine: req === null ? 17 : 16, phase: 'position', index: i, row: ways.slice(), need: req, activeLine: L('zero every entry'), message: req === null ? `Position ${i} adds 0 to ${i} inversions.` : `Prefix ${i} must have exactly ${req} inversions: every other count is zeroed.` })
   }
   const result = ways.reduce((s, w) => (s + w) % MOD, 0)
-  frames.push({ phase: 'done', index: null, row: ways.slice(), need: null, activeLine: L('return the sum'), message: `Total arrangements: ${result}.` })
+  frames.push({ pythonLine: 18, phase: 'done', index: null, row: ways.slice(), need: null, activeLine: L('return the sum'), message: `Total arrangements: ${result}.` })
   return { input: { n, requirements }, result, frames }
 }
 

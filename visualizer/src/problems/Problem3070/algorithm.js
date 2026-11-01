@@ -26,7 +26,7 @@ export function buildTrace({ grid, k }) {
   const rows = grid.length, cols = grid[0].length
   const prefix = Array.from({ length: rows }, () => new Array(cols).fill(0))
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), cell: null, value: null, prefix: prefix.map(r => [...r]), count, message: `A submatrix that contains the top-left cell is fixed by its bottom-right corner. Count the corners whose sum is at most ${k}.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set count to 0'), cell: null, value: null, prefix: prefix.map(r => [...r]), count, message: `A submatrix that contains the top-left cell is fixed by its bottom-right corner. Count the corners whose sum is at most ${k}.` }]
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const above = i > 0 ? prefix[i - 1][j] : 0
@@ -35,10 +35,10 @@ export function buildTrace({ grid, k }) {
       prefix[i][j] = grid[i][j] + above + left - corner
       const counts = prefix[i][j] <= k
       if (counts) count++
-      frames.push({ phase: 'cell', activeLine: L('prefix[i][j] = grid'), cell: [i, j], value: prefix[i][j], prefix: prefix.map(r => [...r]), count, message: `Corner (${i}, ${j}): the rectangle from the top-left has sum ${prefix[i][j]}. ${counts ? `That is at most ${k}, so it counts.` : `That is more than ${k}, so it does not count.`}` })
+      frames.push({ pythonLine: counts ? 13 : 12, phase: 'cell', activeLine: L('prefix[i][j] = grid'), cell: [i, j], value: prefix[i][j], prefix: prefix.map(r => [...r]), count, message: `Corner (${i}, ${j}): the rectangle from the top-left has sum ${prefix[i][j]}. ${counts ? `That is at most ${k}, so it counts.` : `That is more than ${k}, so it does not count.`}` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), cell: null, value: null, prefix: prefix.map(r => [...r]), count, message: `Submatrices with the top-left cell and sum at most ${k}: ${count}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return count'), cell: null, value: null, prefix: prefix.map(r => [...r]), count, message: `Submatrices with the top-left cell and sum at most ${k}: ${count}.` })
   return { input: { grid, k }, result: count, frames }
 }
 

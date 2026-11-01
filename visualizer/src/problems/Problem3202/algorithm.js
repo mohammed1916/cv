@@ -24,7 +24,7 @@ export function buildTrace({ nums, k }) {
   const n = nums.length
   const length = nums.map(() => new Map())
   let best = 1
-  const frames = [{ phase: 'start', index: -1, j: null, r: null, best, activeLine: L('set best to 1'), message: 'Any single number is a valid subsequence of length 1.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', index: -1, j: null, r: null, best, activeLine: L('set best to 1'), message: 'Any single number is a valid subsequence of length 1.' }]
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < i; j++) {
       const r = (nums[j] + nums[i]) % k
@@ -32,10 +32,10 @@ export function buildTrace({ nums, k }) {
       if (length[j].has(r)) candidate = Math.max(candidate, length[j].get(r) + 1)
       if (!length[i].has(r) || candidate > length[i].get(r)) length[i].set(r, candidate)
       if (length[i].get(r) > best) best = length[i].get(r)
-      frames.push({ phase: 'pair', index: i, j, r, best, activeLine: L('set length[i][r] to the larger of length[i][r] and 2'), message: `Pair ${nums[j]}, ${nums[i]} has sum remainder ${r}; chains ending at ${i} with remainder ${r} reach ${length[i].get(r)}.` })
+      frames.push({ pythonLine: 13, phase: 'pair', index: i, j, r, best, activeLine: L('set length[i][r] to the larger of length[i][r] and 2'), message: `Pair ${nums[j]}, ${nums[i]} has sum remainder ${r}; chains ending at ${i} with remainder ${r} reach ${length[i].get(r)}.` })
     }
   }
-  frames.push({ phase: 'done', index: n - 1, j: null, r: null, best, activeLine: L('return best'), message: `Longest valid subsequence: ${best}.` })
+  frames.push({ pythonLine: 14, phase: 'done', index: n - 1, j: null, r: null, best, activeLine: L('return best'), message: `Longest valid subsequence: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

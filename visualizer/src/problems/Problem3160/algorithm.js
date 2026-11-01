@@ -21,7 +21,7 @@ export function buildTrace(input) {
     { name: 'colorOf', keyLabel: 'ball', valueLabel: 'color', isSet: false, entries: [...colorOf] },
     { name: 'countOf', keyLabel: 'color', valueLabel: 'balls', isSet: false, entries: [...countOf] },
   ]
-  frames.push({ phase: 'start', activeLine: L('colorOf = empty map'), index: -1, maps: maps(), ops: [], result: [], message: 'Track each ball’s color and how many balls show each color. The number of colors with a nonzero count is the answer.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('colorOf = empty map'), index: -1, maps: maps(), ops: [], result: [], message: 'Track each ball’s color and how many balls show each color. The number of colors with a nonzero count is the answer.' })
   queries.forEach(([ball, color], i) => {
     const ops = []
     if (colorOf.has(ball)) {
@@ -30,7 +30,7 @@ export function buildTrace(input) {
       if (left === 0) countOf.delete(old)
       else countOf.set(old, left)
       ops.push({ map: 'countOf', type: left === 0 ? 'delete' : 'update', key: old, value: left, before: left + 1, existed: true })
-      frames.push({ phase: 'repaint', activeLine: L('subtract one from countOf'), index: i, maps: maps(), ops: [...ops], result: [...results],
+      frames.push({ pythonLine: 8, phase: 'repaint', activeLine: L('subtract one from countOf'), index: i, maps: maps(), ops: [...ops], result: [...results],
         message: `Ball ${ball} leaves color ${old}, which now has ${left} ball(s).` })
     }
     colorOf.set(ball, color)
@@ -39,10 +39,10 @@ export function buildTrace(input) {
     ops.push({ map: 'colorOf', type: 'update', key: ball, value: color, before: undefined })
     ops.push({ map: 'countOf', type: before === undefined ? 'insert' : 'update', key: color, value: (before ?? 0) + 1, before })
     results.push(countOf.size)
-    frames.push({ phase: 'paint', activeLine: L('add one to countOf of color'), index: i, maps: maps(), ops, result: [...results],
+    frames.push({ pythonLine: 12, phase: 'paint', activeLine: L('add one to countOf of color'), index: i, maps: maps(), ops, result: [...results],
       message: `Ball ${ball} is painted ${color}. Distinct colors now: ${countOf.size}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, maps: maps(), ops: [], result: [...results], message: `Distinct colors after each query: [${results.join(', ')}].` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return answers'), index: -1, maps: maps(), ops: [], result: [...results], message: `Distinct colors after each query: [${results.join(', ')}].` })
   return { input, result: results, frames }
 }
 

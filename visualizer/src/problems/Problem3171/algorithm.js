@@ -12,20 +12,20 @@ export function buildTrace({ nums, k }) {
   const frames = []
   let best = null
   let ors = []
-  frames.push({ phase: 'start', activeLine: L('set best to nothing'), index: -1, ors: [], best, message: `Track the distinct OR values of subarrays ending at each index; target ${k}.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set best to nothing'), index: -1, ors: [], best, message: `Track the distinct OR values of subarrays ending at each index; target ${k}.` })
   for (let i = 0; i < nums.length; i++) {
     const v = nums[i]
     ors = [...new Set([v, ...ors.map(o => o | v)])]
-    frames.push({ phase: 'extend', activeLine: L('build the list'), index: i, ors: [...ors], best, message: `Subarrays ending at ${i} have OR values ${ors.join(', ')}.` })
+    frames.push({ pythonLine: 5, phase: 'extend', activeLine: L('build the list'), index: i, ors: [...ors], best, message: `Subarrays ending at ${i} have OR values ${ors.join(', ')}.` })
     for (const o of ors) {
       const d = Math.abs(o - k)
       if (best === null || d < best) {
         best = d
-        frames.push({ phase: 'best', activeLine: L('set best to |o - k|'), index: i, ors: [...ors], best, message: `OR ${o} is ${d} away from ${k}; best distance is now ${d}.` })
+        frames.push({ pythonLine: 9, phase: 'best', activeLine: L('set best to |o - k|'), index: i, ors: [...ors], best, message: `OR ${o} is ${d} away from ${k}; best distance is now ${d}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, ors: [], best, message: `Smallest distance: ${best}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return best'), index: -1, ors: [], best, message: `Smallest distance: ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

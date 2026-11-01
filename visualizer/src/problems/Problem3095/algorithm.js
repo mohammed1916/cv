@@ -11,23 +11,23 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const frames = []
   let best = null
-  const frame = (phase, line, start, end, or, message) => frames.push({ phase, activeLine: line, start, end, or, best, message })
-  frame('start', L('set best to nothing'), -1, -1, 0, 'No subarray has been checked yet.')
+  const frame = (phase, line, start, end, or, message, pythonLine) => frames.push({ phase, activeLine: line, pythonLine, start, end, or, best, message })
+  frame('start', L('set best to nothing'), -1, -1, 0, 'No subarray has been checked yet.', 2)
   for (let s = 0; s < nums.length; s++) {
     let or = 0
-    frame('start-index', L('set or value to 0'), s, s - 1, or, `Grow subarrays that start at ${s}.`)
+    frame('start-index', L('set or value to 0'), s, s - 1, or, `Grow subarrays that start at ${s}.`, 4)
     for (let e = s; e < nums.length; e++) {
       or |= nums[e]
-      frame('extend', L('set or value to'), s, e, or, `Subarray ${s}-${e} has OR ${or}.`)
+      frame('extend', L('set or value to'), s, e, or, `Subarray ${s}-${e} has OR ${or}.`, 6)
       if (or >= k) {
         const length = e - s + 1
         best = best === null ? length : Math.min(best, length)
-        frame('hit', L('set best to the smaller'), s, e, or, `OR ${or} reaches ${k}; length ${length}.`)
+        frame('hit', L('set best to the smaller'), s, e, or, `OR ${or} reaches ${k}; length ${length}.`, 10)
         break
       }
     }
   }
-  frame('done', L('return best, or -1'), -1, -1, 0, best === null ? 'No subarray reaches k.' : `Shortest length: ${best}.`)
+  frame('done', L('return best, or -1'), -1, -1, 0, best === null ? 'No subarray reaches k.' : `Shortest length: ${best}.`, 12)
   return { input: { nums, k }, result: best === null ? -1 : best, frames }
 }
 

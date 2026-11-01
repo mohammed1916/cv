@@ -12,7 +12,7 @@ export function parseInput(text) {
 
 export function buildTrace(grid) {
   let top = Infinity, bottom = -1, left = Infinity, right = -1
-  const frames = [{ phase: 'start', row: null, box: null, area: null, activeLine: L('set top to'), message: 'Track the smallest and largest row and column that contain a 1.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', row: null, box: null, area: null, activeLine: L('set top to'), message: 'Track the smallest and largest row and column that contain a 1.' }]
   grid.forEach((row, r) => {
     row.forEach((v, c) => {
       if (v !== 1) return
@@ -21,11 +21,11 @@ export function buildTrace(grid) {
     })
     if (row.includes(1)) {
       const area = (bottom - top + 1) * (right - left + 1)
-      frames.push({ phase: 'row', row: r, box: { top, bottom, left, right }, area, activeLine: L('for each cell'), message: `Row ${r} has 1s; the box is rows ${top}-${bottom}, columns ${left}-${right}, area ${area}.` })
+      frames.push({ pythonLine: 10, phase: 'row', row: r, box: { top, bottom, left, right }, area, activeLine: L('for each cell'), message: `Row ${r} has 1s; the box is rows ${top}-${bottom}, columns ${left}-${right}, area ${area}.` })
     }
   })
   const area = (bottom - top + 1) * (right - left + 1)
-  frames.push({ phase: 'done', row: null, box: { top, bottom, left, right }, area, activeLine: L('return the area'), message: `Minimum covering area: ${area}.` })
+  frames.push({ pythonLine: 11, phase: 'done', row: null, box: { top, bottom, left, right }, area, activeLine: L('return the area'), message: `Minimum covering area: ${area}.` })
   return { input: grid, result: area, frames }
 }
 

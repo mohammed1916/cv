@@ -8,7 +8,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ word }) {
-  const frames = [{ phase: 'start', activeLine: L('set result to'), start: -1, length: 0, result: '', message: 'Start at the first letter with an empty result.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set result to'), start: -1, length: 0, result: '', message: 'Start at the first letter with an empty result.' }]
   let result = ''
   let i = 0
   while (i < word.length) {
@@ -16,10 +16,10 @@ export function buildTrace({ word }) {
     let count = 0
     while (i + count < word.length && word[i + count] === ch && count < 9) count++
     result += `${count}${ch}`
-    frames.push({ phase: 'chunk', activeLine: L('append that count'), start: i, length: count, result, message: `The run at position ${i} has ${count} copies of ${ch} (capped at 9). Write ${count}${ch}.` })
+    frames.push({ pythonLine: 9, phase: 'chunk', activeLine: L('append that count'), start: i, length: count, result, message: `The run at position ${i} has ${count} copies of ${ch} (capped at 9). Write ${count}${ch}.` })
     i += count
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), start: -1, length: 0, result, message: `Compressed word: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return result'), start: -1, length: 0, result, message: `Compressed word: ${result}.` })
   return { input: { word }, result, frames }
 }
 

@@ -7,23 +7,23 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const values = [...nums]
-  const frames = [{ phase: 'start', activeLine: L('set operations'), index: 0, from: -1, to: -1, operations: 0, values: [...values], message: 'Scan from the left. A zero at the start of a window forces that window to flip.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set operations'), index: 0, from: -1, to: -1, operations: 0, values: [...values], message: 'Scan from the left. A zero at the start of a window forces that window to flip.' }]
   let operations = 0
   for (let i = 0; i + 2 < values.length; i++) {
     if (values[i] === 0) {
       for (let j = i; j <= i + 2; j++) values[j] ^= 1
       operations += 1
-      frames.push({ phase: 'flip', activeLine: L('flip that value'), index: i, from: i, to: i + 2, operations, values: [...values], message: `Position ${i} is 0, so flip positions ${i} to ${i + 2}.` })
+      frames.push({ pythonLine: 8, phase: 'flip', activeLine: L('flip that value'), index: i, from: i, to: i + 2, operations, values: [...values], message: `Position ${i} is 0, so flip positions ${i} to ${i + 2}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if the value at start'), index: i, from: -1, to: -1, operations, values: [...values], message: `Position ${i} is already 1, so move on.` })
+      frames.push({ pythonLine: 5, phase: 'skip', activeLine: L('if the value at start'), index: i, from: -1, to: -1, operations, values: [...values], message: `Position ${i} is already 1, so move on.` })
     }
   }
   const stuck = values.some(v => v === 0)
   if (stuck) {
-    frames.push({ phase: 'stuck', activeLine: L('if any zero is left'), index: -1, from: -1, to: -1, operations, values: [...values], message: 'A zero is left in the last two positions, and no window fits there. The answer is -1.' })
+    frames.push({ pythonLine: 10, phase: 'stuck', activeLine: L('if any zero is left'), index: -1, from: -1, to: -1, operations, values: [...values], message: 'A zero is left in the last two positions, and no window fits there. The answer is -1.' })
     return { input: nums, result: -1, frames }
   }
-  frames.push({ phase: 'done', activeLine: L('return operations'), index: -1, from: -1, to: -1, operations, values: [...values], message: `Minimum operations: ${operations}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return operations'), index: -1, from: -1, to: -1, operations, values: [...values], message: `Minimum operations: ${operations}.` })
   return { input: nums, result: operations, frames }
 }
 

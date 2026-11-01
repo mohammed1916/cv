@@ -16,30 +16,30 @@ export function parseInput(text) {
 export function buildTrace({ s, sub, mappings }) {
   const allowed = new Set(mappings.map(([from, to]) => `${from}>${to}`))
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('build a set'), start: -1, at: -1, ok: null, message: `Allow ${allowed.size} replacement${allowed.size === 1 ? '' : 's'} on sub.` })
+  frames.push({ pythonLine: 4, phase: 'start', activeLine: L('build a set'), start: -1, at: -1, ok: null, message: `Allow ${allowed.size} replacement${allowed.size === 1 ? '' : 's'} on sub.` })
   let result = false
   for (let i = 0; i + sub.length <= s.length && !result; i++) {
     let ok = true
-    frames.push({ phase: 'window', activeLine: L('for each start index'), start: i, at: -1, ok, message: `Try sub at index ${i}.` })
+    frames.push({ pythonLine: 6, phase: 'window', activeLine: L('for each start index'), start: i, at: -1, ok, message: `Try sub at index ${i}.` })
     for (let j = 0; j < sub.length; j++) {
       if (sub[j] === s[i + j]) {
-        frames.push({ phase: 'match', activeLine: L('if sub at j equals'), start: i, at: i + j, ok, message: `${sub[j]} equals ${s[i + j]} directly.` })
+        frames.push({ pythonLine: 9, phase: 'match', activeLine: L('if sub at j equals'), start: i, at: i + j, ok, message: `${sub[j]} equals ${s[i + j]} directly.` })
         continue
       }
       if (allowed.has(`${sub[j]}>${s[i + j]}`)) {
-        frames.push({ phase: 'replace', activeLine: L('if the replacement'), start: i, at: i + j, ok, message: `${sub[j]} may be replaced by ${s[i + j]}.` })
+        frames.push({ pythonLine: 11, phase: 'replace', activeLine: L('if the replacement'), start: i, at: i + j, ok, message: `${sub[j]} may be replaced by ${s[i + j]}.` })
         continue
       }
       ok = false
-      frames.push({ phase: 'fail', activeLine: L('set ok to false'), start: i, at: i + j, ok, message: `${sub[j]} cannot become ${s[i + j]}; index ${i} fails.` })
+      frames.push({ pythonLine: 12, phase: 'fail', activeLine: L('set ok to false'), start: i, at: i + j, ok, message: `${sub[j]} cannot become ${s[i + j]}; index ${i} fails.` })
       break
     }
     if (ok) {
       result = true
-      frames.push({ phase: 'found', activeLine: L('if ok then return true'), start: i, at: -1, ok, message: `Every position of sub fits at index ${i}.` })
+      frames.push({ pythonLine: 15, phase: 'found', activeLine: L('if ok then return true'), start: i, at: -1, ok, message: `Every position of sub fits at index ${i}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), start: -1, at: -1, ok: result, message: result ? 'A match exists.' : 'No start index works.' })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return false'), start: -1, at: -1, ok: result, message: result ? 'A match exists.' : 'No start index works.' })
   return { input: { s, sub, mappings }, result, frames }
 }
 

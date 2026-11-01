@@ -20,14 +20,14 @@ export function buildTrace(grid) {
   const dist = new Map([[key(box0, player0), 0]])
   // 0-1 BFS: walking goes to the front of the deque, pushing goes to the back.
   const queue = [{ cost: 0, box: box0, player: player0 }]
-  const frames = [{ phase: 'start', activeLine: L('set the start state'), box: box0, player: player0, cost: 0, message: 'The player starts beside the box. Walking costs 0 and each push costs 1.' }]
+  const frames = [{ pythonLine: 19, phase: 'start', activeLine: L('set the start state'), box: box0, player: player0, cost: 0, message: 'The player starts beside the box. Walking costs 0 and each push costs 1.' }]
   let answer = -1
   let last = { box: box0, player: player0 }
   while (queue.length) {
     const { cost, box, player } = queue.shift()
     if (dist.get(key(box, player)) !== cost) continue
     if (same(box, target)) { answer = cost; last = { box, player }; break }
-    frames.push({ phase: 'explore', activeLine: L('for each of the four directions'), box, player, cost, message: `Box at ${box}, player at ${player}, cost ${cost}.` })
+    frames.push({ pythonLine: 27, phase: 'explore', activeLine: L('for each of the four directions'), box, player, cost, message: `Box at ${box}, player at ${player}, cost ${cost}.` })
     for (const [dr, dc] of DIRS) {
       const step = [player[0] + dr, player[1] + dc]
       if (!open(step)) continue
@@ -42,7 +42,7 @@ export function buildTrace(grid) {
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), box: last.box, player: last.player, cost: answer, message: answer === -1 ? 'The box can never reach the target.' : `The box reaches the target after ${answer} push(es).` })
+  frames.push({ pythonLine: answer === -1 ? 41 : 26, phase: 'done', activeLine: L('return -1'), box: last.box, player: last.player, cost: answer, message: answer === -1 ? 'The box can never reach the target.' : `The box reaches the target after ${answer} push(es).` })
   return { input: grid, result: answer, frames }
 }
 

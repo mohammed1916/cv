@@ -17,7 +17,7 @@ export function buildTrace(input) {
   const z2 = nums2.filter(v => v === 0).length
   const low1 = sum(nums1) + z1
   const low2 = sum(nums2) + z2
-  const frames = [{ phase: 'start', activeLine: L('set low1 to'), index: -1, low1, low2, message: `Smallest possible sums: ${low1} for nums1 and ${low2} for nums2.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set low1 to'), index: -1, low1, low2, message: `Smallest possible sums: ${low1} for nums1 and ${low2} for nums2.` }]
   let result
   let line
   if (z1 === 0 && z2 === 0) {
@@ -33,8 +33,8 @@ export function buildTrace(input) {
     result = Math.max(low1, low2)
     line = 'return the larger of low1 and low2'
   }
-  frames.push({ phase: 'branch', activeLine: L(line), index: -1, low1, low2, message: result === -1 ? 'The fixed side is too small to match, so the answer is -1.' : `The equal sum is ${result}.` })
-  frames.push({ phase: 'done', activeLine: L(line), index: -1, low1, low2, message: `Minimum equal sum: ${result}.` })
+  frames.push({ pythonLine: z1 === 0 && z2 === 0 ? 7 : z1 === 0 ? 9 : z2 === 0 ? 11 : 12, phase: 'branch', activeLine: L(line), index: -1, low1, low2, message: result === -1 ? 'The fixed side is too small to match, so the answer is -1.' : `The equal sum is ${result}.` })
+  frames.push({ pythonLine: z1 === 0 && z2 === 0 ? 7 : z1 === 0 ? 9 : z2 === 0 ? 11 : 12, phase: 'done', activeLine: L(line), index: -1, low1, low2, message: `Minimum equal sum: ${result}.` })
   return { input, result, frames }
 }
 

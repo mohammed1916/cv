@@ -30,21 +30,21 @@ export function buildTrace({ s, a, b, k }) {
   const A = starts(s, a)
   const B = starts(s, b)
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('list the sorted starts'), index: -1, found: [], p: 0, message: `Occurrences of "${a}": [${A.join(', ')}]; of "${b}": [${B.join(', ')}].` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('list the sorted starts'), index: -1, found: [], p: 0, message: `Occurrences of "${a}": [${A.join(', ')}]; of "${b}": [${B.join(', ')}].` }]
   let p = 0
   for (const i of A) {
     while (p < B.length && B[p] < i - k) {
       p++
-      frames.push({ phase: 'advance', activeLine: L('move p forward'), index: i, found: [...result], p, message: `The b start is too far left of ${i}; move on.` })
+      frames.push({ pythonLine: 11, phase: 'advance', activeLine: L('move p forward'), index: i, found: [...result], p, message: `The b start is too far left of ${i}; move on.` })
     }
     if (p < B.length && B[p] <= i + k) {
       result.push(i)
-      frames.push({ phase: 'match', activeLine: L('if B at p is at most'), index: i, found: [...result], p, message: `"${b}" at ${B[p]} is within ${k} of ${i}.` })
+      frames.push({ pythonLine: 13, phase: 'match', activeLine: L('if B at p is at most'), index: i, found: [...result], p, message: `"${b}" at ${B[p]} is within ${k} of ${i}.` })
     } else {
-      frames.push({ phase: 'miss', activeLine: L('if B at p is at most'), index: i, found: [...result], p, message: `No "${b}" within ${k} of ${i}.` })
+      frames.push({ pythonLine: 12, phase: 'miss', activeLine: L('if B at p is at most'), index: i, found: [...result], p, message: `No "${b}" within ${k} of ${i}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return beautiful'), index: -1, found: [...result], p, message: `Beautiful indices: [${result.join(', ')}].` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return beautiful'), index: -1, found: [...result], p, message: `Beautiful indices: [${result.join(', ')}].` })
   return { input: { s, a, b, k }, result, frames }
 }
 

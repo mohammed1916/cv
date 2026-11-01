@@ -15,7 +15,7 @@ export function buildTrace(input) {
   const { nums, k, dist } = input
   const n = nums.length
   let best = Infinity
-  const frames = [{ phase: 'start', activeLine: L('set best to infinity'), s: null, window: [], picks: [], best: null, message: 'The first subarray always costs nums[0]. Choose the other k - 1 starts, all within dist of the first chosen one.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to infinity'), s: null, window: [], picks: [], best: null, message: 'The first subarray always costs nums[0]. Choose the other k - 1 starts, all within dist of the first chosen one.' }]
   for (let s = 1; s <= n - 1; s++) {
     const end = Math.min(s + dist, n - 1)
     const window = nums.slice(s + 1, end + 1)
@@ -25,10 +25,10 @@ export function buildTrace(input) {
       const candidate = nums[s] + picks.reduce((a, b) => a + b, 0)
       best = Math.min(best, candidate)
     }
-    frames.push({ phase: 'scan', activeLine: L('for each start s'), s, window: [s + 1, end], picks, best: best === Infinity ? null : best, message: window.length >= k - 2 ? `Start ${s}: cheapest ${k - 2} values after it cost ${picks.reduce((a, b) => a + b, 0)}; best so far ${best}.` : `Start ${s}: not enough positions within dist.` })
+    frames.push({ pythonLine: window.length >= k - 2 ? 7 : 6, phase: 'scan', activeLine: L('for each start s'), s, window: [s + 1, end], picks, best: best === Infinity ? null : best, message: window.length >= k - 2 ? `Start ${s}: cheapest ${k - 2} values after it cost ${picks.reduce((a, b) => a + b, 0)}; best so far ${best}.` : `Start ${s}: not enough positions within dist.` })
   }
   const result = nums[0] + best
-  frames.push({ phase: 'done', activeLine: L('return nums[0] + best'), s: null, window: [], picks: [], best: result, message: `Minimum total cost: ${result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return nums[0] + best'), s: null, window: [], picks: [], best: result, message: `Minimum total cost: ${result}.` })
   return { input, result, frames }
 }
 

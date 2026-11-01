@@ -11,14 +11,14 @@ export function buildTrace(input) {
   const { nums } = input
   const sorted = [...nums].sort((a, b) => a - b)
   const arr = []
-  const frames = [{ phase: 'start', activeLine: L('set sorted to'), index: -1, arr: [], message: 'Sort the values. Each round removes the two smallest that remain.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set sorted to'), index: -1, arr: [], message: 'Sort the values. Each round removes the two smallest that remain.' }]
   for (let i = 0; i < sorted.length; i += 2) {
     const alice = sorted[i]
     const bob = sorted[i + 1]
     arr.push(bob, alice)
-    frames.push({ phase: 'round', activeLine: L('add b to arr'), index: i, arr: [...arr], message: `Alice removes ${alice}, Bob removes ${bob}. Bob appends ${bob}, then Alice appends ${alice}.` })
+    frames.push({ pythonLine: 7, phase: 'round', activeLine: L('add b to arr'), index: i, arr: [...arr], message: `Alice removes ${alice}, Bob removes ${bob}. Bob appends ${bob}, then Alice appends ${alice}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return arr'), index: -1, arr: [...arr], message: `Final array: ${arr.join(', ')}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return arr'), index: -1, arr: [...arr], message: `Final array: ${arr.join(', ')}.` })
   return { input, sorted, result: arr, frames }
 }
 

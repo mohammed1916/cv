@@ -13,19 +13,19 @@ export function buildTrace(input) {
   const banned = new Set()
   const frames = []
   for (const v of nums) banned.add(v)
-  frames.push({ phase: 'set', activeLine: L('put every value'), i: -1, removed: head.map(() => false), kept: [], message: `Forbidden values: ${[...banned].join(', ')}.` })
+  frames.push({ pythonLine: 2, phase: 'set', activeLine: L('put every value'), i: -1, removed: head.map(() => false), kept: [], message: `Forbidden values: ${[...banned].join(', ')}.` })
   const removed = head.map(() => false)
   const kept = []
   head.forEach((v, i) => {
     if (banned.has(v)) {
       removed[i] = true
-      frames.push({ phase: 'skip', activeLine: L('skip the node'), i, removed: [...removed], kept: [...kept], message: `Node ${i} has value ${v}, which is forbidden; delete it.` })
+      frames.push({ pythonLine: 6, phase: 'skip', activeLine: L('skip the node'), i, removed: [...removed], kept: [...kept], message: `Node ${i} has value ${v}, which is forbidden; delete it.` })
     } else {
       kept.push(v)
-      frames.push({ phase: 'keep', activeLine: L('append the node value'), i, removed: [...removed], kept: [...kept], message: `Node ${i} has value ${v}; keep it.` })
+      frames.push({ pythonLine: 7, phase: 'keep', activeLine: L('append the node value'), i, removed: [...removed], kept: [...kept], message: `Node ${i} has value ${v}; keep it.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return kept'), i: head.length, removed: [...removed], kept: [...kept], message: `Remaining values: ${kept.join(', ') || 'none'}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return kept'), i: head.length, removed: [...removed], kept: [...kept], message: `Remaining values: ${kept.join(', ') || 'none'}.` })
   return { input, result: kept, frames }
 }
 

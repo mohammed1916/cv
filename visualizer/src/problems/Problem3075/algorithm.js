@@ -12,13 +12,13 @@ export function buildTrace(input) {
   const ranked = [...input.happiness].sort((a, b) => b - a)
   const { k } = input
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the children'), index: -1, turn: 0, total, message: 'Sort happiness from highest to lowest. Each earlier turn lowers the remaining children by one.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('sort the children'), index: -1, turn: 0, total, message: 'Sort happiness from highest to lowest. Each earlier turn lowers the remaining children by one.' }]
   for (let turn = 0; turn < k; turn++) {
     const gain = Math.max(ranked[turn] - turn, 0)
     total += gain
-    frames.push({ phase: 'pick', activeLine: L('add the happiness'), index: turn, turn: turn + 1, total, message: `Turn ${turn + 1}: pick ${ranked[turn]} minus ${turn} earlier turns, gain ${gain}. Total ${total}.` })
+    frames.push({ pythonLine: 5, phase: 'pick', activeLine: L('add the happiness'), index: turn, turn: turn + 1, total, message: `Turn ${turn + 1}: pick ${ranked[turn]} minus ${turn} earlier turns, gain ${gain}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, turn: k, total, message: `Maximum happiness: ${total}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), index: -1, turn: k, total, message: `Maximum happiness: ${total}.` })
   return { input, result: total, frames }
 }
 

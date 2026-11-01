@@ -40,20 +40,20 @@ export function buildTrace(nums) {
   }
   let best = 0
   let left = 0
-  const frames = [{ phase: 'start', activeLine: L('sort nums'), left: 0, right: -1, pair: null, best, message: 'Sort the numbers. The window starts empty.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('sort nums'), left: 0, right: -1, pair: null, best, message: 'Sort the numbers. The window starts empty.' }]
   sorted.forEach((v, right) => {
     update(v, 1)
-    frames.push({ phase: 'add', activeLine: L('insert nums[r]'), left, right, pair: null, best, message: `Add ${v} to the window.` })
+    frames.push({ pythonLine: 32, phase: 'add', activeLine: L('insert nums[r]'), left, right, pair: null, best, message: `Add ${v} to the window.` })
     while (v > 2 * sorted[left]) {
       update(sorted[left], -1)
-      frames.push({ phase: 'shrink', activeLine: L('remove nums[left]'), left: left + 1, right, pair: null, best, message: `${sorted[left]} is too small to pair with ${v}, so drop it.` })
+      frames.push({ pythonLine: 34, phase: 'shrink', activeLine: L('remove nums[left]'), left: left + 1, right, pair: null, best, message: `${sorted[left]} is too small to pair with ${v}, so drop it.` })
       left++
     }
     const candidate = bestWith(v)
     best = Math.max(best, candidate)
-    frames.push({ phase: 'query', activeLine: L('find the largest xor'), left, right, pair: candidate, best, message: `Best xor for ${v} inside the window is ${candidate}.` })
+    frames.push({ pythonLine: 36, phase: 'query', activeLine: L('find the largest xor'), left, right, pair: candidate, best, message: `Best xor for ${v} inside the window is ${candidate}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), left, right: sorted.length, pair: null, best, message: `Maximum strong pair xor: ${best}.` })
+  frames.push({ pythonLine: 37, phase: 'done', activeLine: L('return best'), left, right: sorted.length, pair: null, best, message: `Maximum strong pair xor: ${best}.` })
   return { input: nums, result: best, frames }
 }
 

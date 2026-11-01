@@ -9,7 +9,7 @@ export function parseInput(text) {
 export function buildTrace({ n, limit }) {
   let total = 0
   const rows = []
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), a: -1, row: 0, total: 0, message: `Split ${n} candies among three children, each at most ${limit}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to zero'), a: -1, row: 0, total: 0, message: `Split ${n} candies among three children, each at most ${limit}.` }]
   for (let a = 0; a <= Math.min(n, limit); a++) {
     let row = 0
     for (let b = 0; b <= Math.min(n - a, limit); b++) {
@@ -20,9 +20,9 @@ export function buildTrace({ n, limit }) {
       }
     }
     rows.push(row)
-    frames.push({ phase: 'first', activeLine: L('for each count a'), a, row, total, message: `First child takes ${a}: ${row} ways to share the rest.` })
+    frames.push({ pythonLine: 3, phase: 'first', activeLine: L('for each count a'), a, row, total, message: `First child takes ${a}: ${row} ways to share the rest.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), a: -1, row: 0, total, message: `Total ways: ${total}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return total'), a: -1, row: 0, total, message: `Total ways: ${total}.` })
   return { input: { n, limit }, result: total, frames, rows }
 }
 

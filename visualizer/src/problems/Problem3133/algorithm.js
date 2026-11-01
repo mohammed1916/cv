@@ -12,19 +12,19 @@ export function buildTrace({ n, x }) {
   let value = x
   let remaining = n - 1
   let position = 0
-  frames.push({ phase: 'start', activeLine: L('set value to x'), position, value, remaining, message: `Start with value ${x}; ${remaining} more bits must be placed.` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set value to x'), position, value, remaining, message: `Start with value ${x}; ${remaining} more bits must be placed.` })
   while (remaining > 0) {
     if (!((x >> position) & 1)) {
       const bit = remaining & 1
       value |= bit << position
       remaining >>= 1
-      frames.push({ phase: 'place', activeLine: L('set that bit of value'), position, value, remaining, message: `Bit ${position} of x is 0, so it takes bit ${bit} of n - 1.` })
+      frames.push({ pythonLine: 7, phase: 'place', activeLine: L('set that bit of value'), position, value, remaining, message: `Bit ${position} of x is 0, so it takes bit ${bit} of n - 1.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if bit position of x is 0'), position, value, remaining, message: `Bit ${position} of x is already 1, so it is kept.` })
+      frames.push({ pythonLine: 6, phase: 'skip', activeLine: L('if bit position of x is 0'), position, value, remaining, message: `Bit ${position} of x is already 1, so it is kept.` })
     }
     position++
   }
-  frames.push({ phase: 'done', activeLine: L('return value'), position, value, remaining, message: `Minimum last element: ${value}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return value'), position, value, remaining, message: `Minimum last element: ${value}.` })
   return { input: { n, x }, result: value, frames }
 }
 

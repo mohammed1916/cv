@@ -38,17 +38,17 @@ function partitions(t, k) {
 
 export function buildTrace({ s, k }) {
   let best = partitions(s, k)
-  const frames = [{ phase: 'start', position: -1, letter: '', candidate: s, count: best, best, activeLine: L('best = partitions(s, k)'), message: `Without a change, ${s} splits into ${best} partitions.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', position: -1, letter: '', candidate: s, count: best, best, activeLine: L('best = partitions(s, k)'), message: `Without a change, ${s} splits into ${best} partitions.` }]
   for (let p = 0; p < s.length; p++) {
     for (const c of 'abcdefghijklmnopqrstuvwxyz') {
       if (c === s[p]) continue
       const candidate = s.slice(0, p) + c + s.slice(p + 1)
       const count = partitions(candidate, k)
       best = Math.max(best, count)
-      frames.push({ phase: 'try', position: p, letter: c, candidate, count, best, activeLine: L('candidate = s with'), message: `Changing position ${p} to ${c} gives ${count} partitions; best so far ${best}.` })
+      frames.push({ pythonLine: 16, phase: 'try', position: p, letter: c, candidate, count, best, activeLine: L('candidate = s with'), message: `Changing position ${p} to ${c} gives ${count} partitions; best so far ${best}.` })
     }
   }
-  frames.push({ phase: 'done', position: -1, letter: '', candidate: s, count: best, best, activeLine: L('return best'), message: `Most partitions: ${best}.` })
+  frames.push({ pythonLine: 17, phase: 'done', position: -1, letter: '', candidate: s, count: best, best, activeLine: L('return best'), message: `Most partitions: ${best}.` })
   return { input: { s, k }, result: best, frames }
 }
 

@@ -45,22 +45,22 @@ export function buildTrace({ edges, values }) {
     }
   }
   const best = Array(n).fill(null)
-  const frames = [{ phase: 'order', activeLine: L('root the tree at node 0'), current: null, best: [...best], message: 'Root the tree at node 0. Handle every node after its children.' }]
+  const frames = [{ pythonLine: 10, phase: 'order', activeLine: L('root the tree at node 0'), current: null, best: [...best], message: 'Root the tree at node 0. Handle every node after its children.' }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     if (children[v].length === 0) {
       best[v] = values[v]
-      frames.push({ phase: 'leaf', activeLine: L('set best of v to the value of v'), current: v, best: [...best], message: `Leaf ${v} must keep its value ${values[v]} to stay healthy.` })
+      frames.push({ pythonLine: 21, phase: 'leaf', activeLine: L('set best of v to the value of v'), current: v, best: [...best], message: `Leaf ${v} must keep its value ${values[v]} to stay healthy.` })
     } else {
       const sum = children[v].reduce((total, c) => total + best[c], 0)
       best[v] = Math.min(values[v], sum)
-      frames.push({ phase: 'choose', activeLine: L('the smaller of'), current: v, best: [...best], message: `Node ${v}: keep it (${values[v]}) or keep its children (${sum}); the smaller cost is ${best[v]}.` })
+      frames.push({ pythonLine: 23, phase: 'choose', activeLine: L('the smaller of'), current: v, best: [...best], message: `Node ${v}: keep it (${values[v]}) or keep its children (${sum}); the smaller cost is ${best[v]}.` })
     }
   }
   const total = values.reduce((a, b) => a + b, 0)
   const result = total - best[0]
   const toTree = id => ({ id, children: children[id].map(child => toTree(child)) })
-  frames.push({ phase: 'done', activeLine: L('return the total of all values'), current: null, best: [...best], message: `Kept value is ${best[0]}, so the score is ${total} minus ${best[0]} = ${result}.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return the total of all values'), current: null, best: [...best], message: `Kept value is ${best[0]}, so the score is ${total} minus ${best[0]} = ${result}.` })
   return { input: { edges, values }, tree: toTree(0), values: [...values], result, frames }
 }
 

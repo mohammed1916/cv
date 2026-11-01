@@ -29,22 +29,22 @@ export function buildTrace({ zero, one, limit }) {
   const ends1 = grid(zero + 1, one + 1)
   ends0[0][0] = 1
   ends1[0][0] = 1
-  const frames = [{ phase: 'start', cell: [0, 0], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('set ends0[0][0]'), message: 'The empty prefix can be followed by either symbol, so both tables start with a 1 at the origin.' }]
+  const frames = [{ pythonLine: 10, phase: 'start', cell: [0, 0], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('set ends0[0][0]'), message: 'The empty prefix can be followed by either symbol, so both tables start with a 1 at the origin.' }]
   for (let i = 0; i <= zero; i++) {
     for (let j = 0; j <= one; j++) {
       if (i === 0 && j === 0) continue
       let sum = 0
       for (let k = 1; k <= Math.min(i, limit); k++) sum += ends1[i - k][j]
       ends0[i][j] = sum
-      frames.push({ phase: 'zeros', cell: [i, j], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('ends0[i][j] = sum'), message: `${i} zeros and ${j} ones, ending in 0: ${sum} arrays.` })
+      frames.push({ pythonLine: 13, phase: 'zeros', cell: [i, j], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('ends0[i][j] = sum'), message: `${i} zeros and ${j} ones, ending in 0: ${sum} arrays.` })
       sum = 0
       for (let k = 1; k <= Math.min(j, limit); k++) sum += ends0[i][j - k]
       ends1[i][j] = sum
-      frames.push({ phase: 'ones', cell: [i, j], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('ends1[i][j] = sum'), message: `${i} zeros and ${j} ones, ending in 1: ${sum} arrays.` })
+      frames.push({ pythonLine: 14, phase: 'ones', cell: [i, j], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('ends1[i][j] = sum'), message: `${i} zeros and ${j} ones, ending in 1: ${sum} arrays.` })
     }
   }
   const result = ends0[zero][one] + ends1[zero][one]
-  frames.push({ phase: 'done', cell: [zero, one], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('return ends0[zero][one]'), message: `Stable arrays with ${zero} zeros and ${one} ones: ${result}.` })
+  frames.push({ pythonLine: 17, phase: 'done', cell: [zero, one], ends0: copy(ends0), ends1: copy(ends1), activeLine: L('return ends0[zero][one]'), message: `Stable arrays with ${zero} zeros and ${one} ones: ${result}.` })
   return { input: { zero, one, limit }, result, frames }
 }
 

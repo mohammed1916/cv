@@ -11,14 +11,14 @@ export function buildTrace(input) {
   const freq = new Map()
   for (const ch of word) freq.set(ch, (freq.get(ch) || 0) + 1)
   const ranked = [...freq.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))
-  const frames = [{ phase: 'count', activeLine: L('count how often'), index: -1, ranked: [], pushes: 0, message: `${freq.size} distinct letter(s) in the word.` }]
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how often'), index: -1, ranked: [], pushes: 0, message: `${freq.size} distinct letter(s) in the word.` }]
   let pushes = 0
   ranked.forEach(([ch, count], rank) => {
     const presses = Math.floor(rank / 8) + 1
     pushes += count * presses
-    frames.push({ phase: 'rank', activeLine: L('add count times presses'), index: rank, ranked: ranked.slice(0, rank + 1).map(([c, k]) => `${c}:${k}`), pushes, message: `${ch} appears ${count} time(s) and takes ${presses} press(es) each. Total so far: ${pushes}.` })
+    frames.push({ pythonLine: 8, phase: 'rank', activeLine: L('add count times presses'), index: rank, ranked: ranked.slice(0, rank + 1).map(([c, k]) => `${c}:${k}`), pushes, message: `${ch} appears ${count} time(s) and takes ${presses} press(es) each. Total so far: ${pushes}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return pushes'), index: -1, ranked: ranked.map(([c, k]) => `${c}:${k}`), pushes, message: `Minimum pushes: ${pushes}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return pushes'), index: -1, ranked: ranked.map(([c, k]) => `${c}:${k}`), pushes, message: `Minimum pushes: ${pushes}.` })
   return { input, ranked: ranked.map(([c, k]) => `${c}:${k}`), result: pushes, frames }
 }
 

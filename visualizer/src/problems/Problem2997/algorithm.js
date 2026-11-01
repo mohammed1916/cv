@@ -11,20 +11,20 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, k } = input
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('total = 0'), total, diff: null, flips: 0, message: 'Start with total XOR 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('total = 0'), total, diff: null, flips: 0, message: 'Start with total XOR 0.' }]
   for (const value of nums) {
     total ^= value
-    frames.push({ phase: 'fold', activeLine: L('total = total xor value'), total, diff: null, flips: 0, message: `XOR in ${value}: total is now ${total}.` })
+    frames.push({ pythonLine: 4, phase: 'fold', activeLine: L('total = total xor value'), total, diff: null, flips: 0, message: `XOR in ${value}: total is now ${total}.` })
   }
   let diff = total ^ k
-  frames.push({ phase: 'diff', activeLine: L('diff = total xor k'), total, diff, flips: 0, message: `${total} xor ${k} = ${diff}. Each set bit needs one flip.` })
+  frames.push({ pythonLine: 5, phase: 'diff', activeLine: L('diff = total xor k'), total, diff, flips: 0, message: `${total} xor ${k} = ${diff}. Each set bit needs one flip.` })
   let flips = 0
   while (diff !== 0) {
     diff &= diff - 1
     flips++
-    frames.push({ phase: 'bit', activeLine: L('remove the lowest set bit'), total, diff, flips, message: `Fixed one bit. Flips so far: ${flips}.` })
+    frames.push({ pythonLine: 8, phase: 'bit', activeLine: L('remove the lowest set bit'), total, diff, flips, message: `Fixed one bit. Flips so far: ${flips}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return flips'), total, diff, flips, message: `Minimum flips: ${flips}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return flips'), total, diff, flips, message: `Minimum flips: ${flips}.` })
   return { input, nums, k, result: flips, frames }
 }
 

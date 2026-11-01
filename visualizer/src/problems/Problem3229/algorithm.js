@@ -15,7 +15,7 @@ export function buildTrace(input) {
   let falls = 0
   let prevUp = 0
   let prevDown = 0
-  const frames = [{ phase: 'start', activeLine: L('set rises to 0'), cursor: -1, diff, rises, falls, message: 'Work with the required change at each index: target minus nums. Positive and negative needs are counted separately.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set rises to 0'), cursor: -1, diff, rises, falls, message: 'Work with the required change at each index: target minus nums. Positive and negative needs are counted separately.' }]
   for (let i = 0; i < diff.length; i++) {
     const d = diff[i]
     const up = Math.max(d, 0)
@@ -26,10 +26,10 @@ export function buildTrace(input) {
     falls += addFall
     prevUp = up
     prevDown = down
-    frames.push({ phase: 'step', activeLine: L('to rises'), cursor: i, diff, rises, falls, message: `Index ${i} needs ${d}. It adds ${addRise} increments and ${addFall} decrements.` })
+    frames.push({ pythonLine: 12, phase: 'step', activeLine: L('to rises'), cursor: i, diff, rises, falls, message: `Index ${i} needs ${d}. It adds ${addRise} increments and ${addFall} decrements.` })
   }
   const result = rises + falls
-  frames.push({ phase: 'done', activeLine: L('return rises plus falls'), cursor: -1, diff, rises, falls, message: `Total operations: ${rises} increments plus ${falls} decrements, which is ${result}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return rises plus falls'), cursor: -1, diff, rises, falls, message: `Total operations: ${rises} increments plus ${falls} decrements, which is ${result}.` })
   return { input, result, frames }
 }
 

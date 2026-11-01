@@ -31,7 +31,7 @@ export function buildTrace(nums) {
     ...extra,
   })
   logs.push({ tree: 0, op: update(0, rank.get(nums[0])) }, { tree: 1, op: update(1, rank.get(nums[1])) })
-  const frames = [snapshot('start', { index: null, value: null, g1: null, g2: null, target: null, activeLine: L('set arr1 to'), message: `arr1 starts with ${nums[0]} and arr2 with ${nums[1]}.` })]
+  const frames = [snapshot('start', { pythonLine: 21, index: null, value: null, g1: null, g2: null, target: null, activeLine: L('set arr1 to'), message: `arr1 starts with ${nums[0]} and arr2 with ${nums[1]}.` })]
   for (let i = 2; i < m; i++) {
     const x = nums[i], r = rank.get(x)
     logs.length = 0
@@ -44,10 +44,10 @@ export function buildTrace(nums) {
     logs.push({ tree: t, op: update(t, r) })
     arrays[t].push(x)
     const why = g1 !== g2 ? `${g1} greater in arr1 vs ${g2} in arr2` : `tie (${g1} each); the shorter array takes it`
-    frames.push(snapshot('place', { index: i, value: x, g1, g2, target: t + 1, activeLine: L('append x to arr1'), message: `${x}: ${why}, so it goes to arr${t + 1}.` }))
+    frames.push(snapshot('place', { pythonLine: toFirst ? 27 : 30, index: i, value: x, g1, g2, target: t + 1, activeLine: L('append x to arr1'), message: `${x}: ${why}, so it goes to arr${t + 1}.` }))
   }
   const result = [...arrays[0], ...arrays[1]]
-  frames.push(snapshot('done', { index: null, value: null, g1: null, g2: null, target: null, activeLine: L('return arr1 followed'), message: `Result: [${result.join(', ')}].`, result }))
+  frames.push(snapshot('done', { pythonLine: 32, index: null, value: null, g1: null, g2: null, target: null, activeLine: L('return arr1 followed'), message: `Result: [${result.join(', ')}].`, result }))
   return { input: nums, result, frames }
 }
 

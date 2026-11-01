@@ -18,23 +18,23 @@ export function buildTrace(input) {
   let hp = 1
   let vp = 1
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the horizontal'), h: 0, v: 0, hp, vp, total, message: 'Sort both cut lists from most expensive to cheapest. Start with one piece.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('sort the horizontal'), h: 0, v: 0, hp, vp, total, message: 'Sort both cut lists from most expensive to cheapest. Start with one piece.' }]
   while (i < h.length || j < v.length) {
     if (j === v.length || (i < h.length && h[i] >= v[j])) {
       const cost = h[i] * vp
       total += cost
       hp += 1
       i += 1
-      frames.push({ phase: 'horizontal', activeLine: L('cut horizontally'), h: i, v: j, hp, vp, total, message: `Horizontal cut costs ${h[i - 1]} times ${vp} vertical pieces, adding ${cost}.` })
+      frames.push({ pythonLine: 11, phase: 'horizontal', activeLine: L('cut horizontally'), h: i, v: j, hp, vp, total, message: `Horizontal cut costs ${h[i - 1]} times ${vp} vertical pieces, adding ${cost}.` })
     } else {
       const cost = v[j] * hp
       total += cost
       vp += 1
       j += 1
-      frames.push({ phase: 'vertical', activeLine: L('cut vertically'), h: i, v: j, hp, vp, total, message: `Vertical cut costs ${v[j - 1]} times ${hp} horizontal pieces, adding ${cost}.` })
+      frames.push({ pythonLine: 15, phase: 'vertical', activeLine: L('cut vertically'), h: i, v: j, hp, vp, total, message: `Vertical cut costs ${v[j - 1]} times ${hp} horizontal pieces, adding ${cost}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), h: i, v: j, hp, vp, total, message: `Minimum total cost: ${total}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return total'), h: i, v: j, hp, vp, total, message: `Minimum total cost: ${total}.` })
   return { input, result: total, frames }
 }
 

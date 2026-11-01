@@ -16,14 +16,14 @@ export function buildTrace(input) {
   const available = new Array(26).fill(0)
   for (const letter of letters) available[codeOf(letter)]++
   const remaining = () => available.map((c, i) => String.fromCharCode(97 + i).repeat(c)).join('')
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), index: -1, chosen: [], total: 0, best: 0, left: remaining(), message: 'Decide for each word in turn whether to use it.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set best to zero'), index: -1, chosen: [], total: 0, best: 0, left: remaining(), message: 'Decide for each word in turn whether to use it.' }]
   let best = 0
   let bestChosen = []
   const chosen = []
   const choose = (index, total) => {
     if (index === words.length) {
       if (total > best) { best = total; bestChosen = [...chosen] }
-      frames.push({ phase: 'record', activeLine: L('keep the score if it beats best'), index, chosen: [...chosen], total, best, left: remaining(), message: `Every word is decided. The score is ${total}.` })
+      frames.push({ pythonLine: 10, phase: 'record', activeLine: L('keep the score if it beats best'), index, chosen: [...chosen], total, best, left: remaining(), message: `Every word is decided. The score is ${total}.` })
       return
     }
     const word = words[index]
@@ -33,16 +33,16 @@ export function buildTrace(input) {
     if (needed.every((n, c) => n <= available[c])) {
       needed.forEach((n, c) => { available[c] -= n })
       chosen.push(index)
-      frames.push({ phase: 'take', activeLine: L('use those letters'), index, chosen: [...chosen], total: total + gain, best, left: remaining(), message: `Use "${word}" for ${gain} points.` })
+      frames.push({ pythonLine: 18, phase: 'take', activeLine: L('use those letters'), index, chosen: [...chosen], total: total + gain, best, left: remaining(), message: `Use "${word}" for ${gain} points.` })
       choose(index + 1, total + gain)
       chosen.pop()
       needed.forEach((n, c) => { available[c] += n })
     }
-    frames.push({ phase: 'skip', activeLine: L('leave this word out'), index, chosen: [...chosen], total, best, left: remaining(), message: `Leave "${word}" out.` })
+    frames.push({ pythonLine: 22, phase: 'skip', activeLine: L('leave this word out'), index, chosen: [...chosen], total, best, left: remaining(), message: `Leave "${word}" out.` })
     choose(index + 1, total)
   }
   choose(0, 0)
-  frames.push({ phase: 'done', activeLine: L('return best'), index: words.length, chosen: bestChosen, total: best, best, left: '', message: `The maximum score is ${best}.` })
+  frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return best'), index: words.length, chosen: bestChosen, total: best, best, left: '', message: `The maximum score is ${best}.` })
   return { input, result: best, frames }
 }
 

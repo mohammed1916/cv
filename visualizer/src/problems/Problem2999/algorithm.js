@@ -28,17 +28,17 @@ export function buildTrace(input) {
     return total + 1
   }
   const countUpTo = x => (x < sValue ? 0 : countPrefixes(Math.floor((x - sValue) / base)))
-  const frames = [{ phase: 'start', activeLine: L('if some digit of s'), bound: null, count: null, message: `Every digit of s must be at most ${limit}, and then each valid number is a prefix followed by s.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('if some digit of s'), bound: null, count: null, message: `Every digit of s must be at most ${limit}, and then each valid number is a prefix followed by s.` }]
   if ([...s].some(ch => Number(ch) > limit)) {
-    frames.push({ phase: 'done', activeLine: L('return 0'), bound: null, count: null, message: 's uses a digit above the limit, so no number can end with it.' })
+    frames.push({ pythonLine: 3, phase: 'done', activeLine: L('return 0'), bound: null, count: null, message: 's uses a digit above the limit, so no number can end with it.' })
     return { input, result: 0, frames }
   }
   const high = countUpTo(Number(finish))
-  frames.push({ phase: 'upper', activeLine: L('set high to'), bound: Number(finish), count: high, message: `Valid numbers up to ${finish}: ${high}.` })
+  frames.push({ pythonLine: 25, phase: 'upper', activeLine: L('set high to'), bound: Number(finish), count: high, message: `Valid numbers up to ${finish}: ${high}.` })
   const low = countUpTo(Number(start) - 1)
-  frames.push({ phase: 'lower', activeLine: L('set low to'), bound: Number(start) - 1, count: low, message: `Valid numbers up to ${Number(start) - 1}: ${low}.` })
+  frames.push({ pythonLine: 25, phase: 'lower', activeLine: L('set low to'), bound: Number(start) - 1, count: low, message: `Valid numbers up to ${Number(start) - 1}: ${low}.` })
   const result = high - low
-  frames.push({ phase: 'done', activeLine: L('return high - low'), bound: null, count: result, message: `Powerful integers in [${start}, ${finish}]: ${result}.` })
+  frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return high - low'), bound: null, count: result, message: `Powerful integers in [${start}, ${finish}]: ${result}.` })
   return { input, result, frames }
 }
 

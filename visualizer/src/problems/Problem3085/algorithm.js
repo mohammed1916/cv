@@ -13,7 +13,7 @@ export function buildTrace({ word, k }) {
   for (const ch of word) counts.set(ch, (counts.get(ch) ?? 0) + 1)
   const top = Math.max(...counts.values())
   const before = Object.fromEntries(counts)
-  const frames = [{ phase: 'count', activeLine: L('count how often'), low: null, before, after: before, best: word.length, message: `Count the letters. The largest count is ${top}.` }]
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how often'), low: null, before, after: before, best: word.length, message: `Count the letters. The largest count is ${top}.` }]
   let best = word.length
   for (let low = 1; low <= top; low++) {
     let cost = 0
@@ -30,9 +30,9 @@ export function buildTrace({ word, k }) {
       }
     }
     best = Math.min(best, cost)
-    frames.push({ phase: 'target', activeLine: L('best = smaller'), low, before, after, best, message: `Target lowest count ${low}: every kept letter must fall between ${low} and ${low + k}. This costs ${cost} deletions.` })
+    frames.push({ pythonLine: 13, phase: 'target', activeLine: L('best = smaller'), low, before, after, best, message: `Target lowest count ${low}: every kept letter must fall between ${low} and ${low + k}. This costs ${cost} deletions.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), low: null, before, after: before, best, message: `Fewest deletions: ${best}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return best'), low: null, before, after: before, best, message: `Fewest deletions: ${best}.` })
   return { input: { word, k }, result: best, frames }
 }
 

@@ -10,19 +10,19 @@ export function buildTrace({ word }) {
   const chars = [...word]
   const lowers = new Set()
   const uppers = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set lowers to the lowercase letters'), active: -1, roles: {}, state: {}, message: 'Collect the lowercase letters and the uppercase letters separately.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set lowers to the lowercase letters'), active: -1, roles: {}, state: {}, message: 'Collect the lowercase letters and the uppercase letters separately.' }]
   chars.forEach((ch, i) => {
     if (ch === ch.toLowerCase()) lowers.add(ch)
     else uppers.add(ch)
-    frames.push({ phase: 'collect', activeLine: L('set uppers to the uppercase letters'), active: i, roles: { [i]: ch === ch.toLowerCase() ? 'lowercase' : 'uppercase' }, state: { lowercase: [...lowers].sort().join(''), uppercase: [...uppers].sort().join('') }, message: `"${ch}" is recorded in its case set.` })
+    frames.push({ pythonLine: ch === ch.toLowerCase() ? 2 : 3, phase: 'collect', activeLine: L('set uppers to the uppercase letters'), active: i, roles: { [i]: ch === ch.toLowerCase() ? 'lowercase' : 'uppercase' }, state: { lowercase: [...lowers].sort().join(''), uppercase: [...uppers].sort().join('') }, message: `"${ch}" is recorded in its case set.` })
   })
   let count = 0
   for (const ch of [...lowers].sort()) {
     const hasPair = uppers.has(ch.toUpperCase())
     if (hasPair) count += 1
-    frames.push({ phase: 'count', activeLine: L(hasPair ? 'add 1 to count' : 'if the uppercase of letter is in uppers'), active: -1, roles: {}, state: { letter: ch, count }, message: `"${ch}" ${hasPair ? 'appears in both cases. Count is ' + count + '.' : 'has no uppercase copy.'}` })
+    frames.push({ pythonLine: hasPair ? 7 : 6, phase: 'count', activeLine: L(hasPair ? 'add 1 to count' : 'if the uppercase of letter is in uppers'), active: -1, roles: {}, state: { letter: ch, count }, message: `"${ch}" ${hasPair ? 'appears in both cases. Count is ' + count + '.' : 'has no uppercase copy.'}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), active: -1, roles: {}, state: { count }, message: `Return ${count}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return count'), active: -1, roles: {}, state: { count }, message: `Return ${count}.` })
   return { input: { word }, result: count, items: chars, frames }
 }
 

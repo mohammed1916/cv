@@ -18,7 +18,7 @@ export function buildTrace(input) {
   for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) diffs.add(a[j] - a[i])
   const thresholds = [...diffs].sort((x, y) => x - y)
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set a to nums'), threshold: null, weight: null, count: null, total, sorted: a.slice(), result: null, message: `Sort the values. Each possible smallest gap is one of the ${thresholds.length} distinct differences.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set a to nums'), threshold: null, weight: null, count: null, total, sorted: a.slice(), result: null, message: `Sort the values. Each possible smallest gap is one of the ${thresholds.length} distinct differences.` }]
   for (let j = 1; j < thresholds.length; j++) {
     const t = thresholds[j]
     const weight = t - thresholds[j - 1]
@@ -33,10 +33,10 @@ export function buildTrace(input) {
     }
     const count = ways[k - 1].reduce((sum, v) => sum + v, 0)
     total += weight * count
-    frames.push({ phase: 'threshold', activeLine: L('add weight times'), threshold: t, weight, count, total, sorted: a.slice(), result: null, message: `Subsequences whose smallest gap is at least ${t}: ${count}. Each adds ${weight} for the range (${thresholds[j - 1]}, ${t}].` })
+    frames.push({ pythonLine: 20, phase: 'threshold', activeLine: L('add weight times'), threshold: t, weight, count, total, sorted: a.slice(), result: null, message: `Subsequences whose smallest gap is at least ${t}: ${count}. Each adds ${weight} for the range (${thresholds[j - 1]}, ${t}].` })
   }
   const result = total % MOD
-  frames.push({ phase: 'done', activeLine: L('return total modulo'), threshold: null, weight: null, count: null, total, sorted: a.slice(), result, message: `Sum of powers modulo 1000000007: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return total modulo'), threshold: null, weight: null, count: null, total, sorted: a.slice(), result, message: `Sum of powers modulo 1000000007: ${result}.` })
   return { input, result, frames }
 }
 

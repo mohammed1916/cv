@@ -14,7 +14,7 @@ export function buildTrace(count) {
   // The sample at sorted position k: walk the counts until more than k samples have been seen.
   const at = k => { let seen = 0; for (let v = 0; v < 256; v++) { seen += count[v]; if (seen > k) return v } return -1 }
   let low = null, high = null, weighted = 0, mode = 0, best = -1
-  const frames = [{ phase: 'start', activeLine: L('set total'), value: null, message: `There are ${total} samples. Scan the values from 0 to 255.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total'), value: null, message: `There are ${total} samples. Scan the values from 0 to 255.` }]
   for (let v = 0; v < 256; v++) {
     const c = count[v]
     if (c === 0) continue
@@ -22,13 +22,13 @@ export function buildTrace(count) {
     high = v
     weighted += v * c
     if (c > best) { best = c; mode = v }
-    frames.push({ phase: 'scan', activeLine: L('add the value times its count'), value: v, message: `${c} sample(s) of ${v}. Running sum ${weighted}, smallest ${low}, largest ${high}, mode ${mode}.` })
+    frames.push({ pythonLine: 15, phase: 'scan', activeLine: L('add the value times its count'), value: v, message: `${c} sample(s) of ${v}. Running sum ${weighted}, smallest ${low}, largest ${high}, mode ${mode}.` })
   }
   const mean = weighted / total
   const median = total % 2 === 1 ? at((total - 1) / 2) : (at(total / 2 - 1) + at(total / 2)) / 2
   const result = [low, high, mean, median, mode]
-  frames.push({ phase: 'median', activeLine: L('median is'), value: null, message: `Mean is ${mean}. The middle sample gives median ${median}.` })
-  frames.push({ phase: 'done', activeLine: L('return low'), value: null, message: `Statistics: [${result.join(', ')}].` })
+  frames.push({ pythonLine: 31, phase: 'median', activeLine: L('median is'), value: null, message: `Mean is ${mean}. The middle sample gives median ${median}.` })
+  frames.push({ pythonLine: 32, phase: 'done', activeLine: L('return low'), value: null, message: `Statistics: [${result.join(', ')}].` })
   return { input: count, result, frames }
 }
 

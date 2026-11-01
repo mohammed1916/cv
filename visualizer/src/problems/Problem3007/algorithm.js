@@ -25,23 +25,23 @@ export function buildTrace({ k, x }) {
   const frames = []
   let low = 0
   let high = 1
-  frames.push({ phase: 'start', activeLine: L('set low to 0 and high to 1'), low, high, mid: null, price: null, message: 'Price is increasing, so search for the largest affordable number.' })
+  frames.push({ pythonLine: 15, phase: 'start', activeLine: L('set low to 0 and high to 1'), low, high, mid: null, price: null, message: 'Price is increasing, so search for the largest affordable number.' })
   while (totalPrice(high, x) <= k) {
     high *= 2
-    frames.push({ phase: 'grow', activeLine: L('double high'), low, high, mid: null, price: totalPrice(high, x), message: `Price of ${high} is still within ${k}; double the upper bound.` })
+    frames.push({ pythonLine: 17, phase: 'grow', activeLine: L('double high'), low, high, mid: null, price: totalPrice(high, x), message: `Price of ${high} is still within ${k}; double the upper bound.` })
   }
   while (high - low > 1) {
     const mid = Math.floor((low + high) / 2)
     const price = totalPrice(mid, x)
     if (price <= k) {
       low = mid
-      frames.push({ phase: 'keep', activeLine: L('set low to mid'), low, high, mid, price, message: `Price of ${mid} is ${price}, within ${k}; search above it.` })
+      frames.push({ pythonLine: 21, phase: 'keep', activeLine: L('set low to mid'), low, high, mid, price, message: `Price of ${mid} is ${price}, within ${k}; search above it.` })
     } else {
       high = mid
-      frames.push({ phase: 'drop', activeLine: L('set high to mid'), low, high, mid, price, message: `Price of ${mid} is ${price}, over ${k}; search below it.` })
+      frames.push({ pythonLine: 23, phase: 'drop', activeLine: L('set high to mid'), low, high, mid, price, message: `Price of ${mid} is ${price}, over ${k}; search below it.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), low, high, mid: null, price: totalPrice(low, x), message: `Largest number: ${low}.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return low'), low, high, mid: null, price: totalPrice(low, x), message: `Largest number: ${low}.` })
   return { input: { k, x }, result: low, frames }
 }
 

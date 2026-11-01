@@ -20,12 +20,12 @@ export function buildTrace(input) {
   const kept = []
   const alive = Array.from(s, () => false)
   const text = () => kept.map(p => s[p]).join('')
-  const frames = [{ phase: 'start', activeLine: L('set letters'), index: -1, alive: [...alive], text: '', message: 'Read left to right. Letters join a list. Each star removes the smallest letter already in the list.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set letters'), index: -1, alive: [...alive], text: '', message: 'Read left to right. Letters join a list. Each star removes the smallest letter already in the list.' }]
   for (let i = 0; i < s.length; i++) {
     if (s[i] !== '*') {
       kept.push(i)
       alive[i] = true
-      frames.push({ phase: 'letter', activeLine: L('if it is a letter'), index: i, alive: [...alive], text: text(), message: `Add ${s[i]} to the list.` })
+      frames.push({ pythonLine: 5, phase: 'letter', activeLine: L('if it is a letter'), index: i, alive: [...alive], text: text(), message: `Add ${s[i]} to the list.` })
       continue
     }
     // Scan from the right so that the rightmost letter wins a tie.
@@ -35,9 +35,9 @@ export function buildTrace(input) {
     }
     kept.splice(kept.indexOf(best), 1)
     alive[best] = false
-    frames.push({ phase: 'star', activeLine: L('remove that letter'), index: i, alive: [...alive], text: text(), message: `The star removes ${s[best]} from position ${best}, the smallest letter to its left.` })
+    frames.push({ pythonLine: 11, phase: 'star', activeLine: L('remove that letter'), index: i, alive: [...alive], text: text(), message: `The star removes ${s[best]} from position ${best}, the smallest letter to its left.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return letters'), index: -1, alive: [...alive], text: text(), message: `Smallest string: ${text() || '(empty)'}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return letters'), index: -1, alive: [...alive], text: text(), message: `Smallest string: ${text() || '(empty)'}.` })
   return { input, result: text(), frames }
 }
 

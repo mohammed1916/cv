@@ -15,14 +15,14 @@ export function buildTrace(rows) {
   const prices = rows.flat().sort((a, b) => a - b)
   let total = 0
   const bought = []
-  const frames = [{ phase: 'start', activeLine: L('gather every price'), day: 0, price: null, bought: [], total: 0, message: `Gather ${prices.length} prices and sort them ascending.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('gather every price'), day: 0, price: null, bought: [], total: 0, message: `Gather ${prices.length} prices and sort them ascending.` }]
   prices.forEach((price, index) => {
     const day = index + 1
     total += price * day
     bought.push(price)
-    frames.push({ phase: 'buy', activeLine: L('buy the cheapest'), day, price, bought: [...bought], total, message: `Day ${day}: buy ${price} for ${price * day}.` })
+    frames.push({ pythonLine: 5, phase: 'buy', activeLine: L('buy the cheapest'), day, price, bought: [...bought], total, message: `Day ${day}: buy ${price} for ${price * day}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), day: prices.length, price: null, bought: [...bought], total, message: `Maximum spending: ${total}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), day: prices.length, price: null, bought: [...bought], total, message: `Maximum spending: ${total}.` })
   return { input: rows, result: total, frames }
 }
 

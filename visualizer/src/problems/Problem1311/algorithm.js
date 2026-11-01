@@ -22,10 +22,10 @@ export function buildTrace({ watchedVideos, friends, id, level }) {
   const dist = new Array(n).fill(-1)
   dist[id] = 0
   const queue = [id]
-  const frames = [{ phase: 'start', activeLine: L('set every distance to unset'), current: null, visited: [id], done: [], frontier: [id], message: `Start at person ${id} with distance 0.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set every distance to unset'), current: null, visited: [id], done: [], frontier: [id], message: `Start at person ${id} with distance 0.` }]
   for (let head = 0; head < queue.length; head++) {
     const current = queue[head]
-    frames.push({ phase: 'visit', activeLine: L('take the first person'), current, visited: queue.slice(), done: queue.slice(0, head), frontier: queue.slice(head + 1), message: `Person ${current} is at distance ${dist[current]}.` })
+    frames.push({ pythonLine: 4, phase: 'visit', activeLine: L('take the first person'), current, visited: queue.slice(), done: queue.slice(0, head), frontier: queue.slice(head + 1), message: `Person ${current} is at distance ${dist[current]}.` })
     for (const friend of friends[current]) {
       if (dist[friend] === -1) { dist[friend] = dist[current] + 1; queue.push(friend) }
     }
@@ -37,9 +37,9 @@ export function buildTrace({ watchedVideos, friends, id, level }) {
     atLevel.push(p)
     for (const v of watchedVideos[p]) counts.set(v, (counts.get(v) || 0) + 1)
   }
-  frames.push({ phase: 'collect', activeLine: L('count the videos'), current: null, visited: queue.slice(), done: queue.slice(), frontier: [], message: `People at distance ${level}: ${atLevel.join(', ') || 'none'}.` })
+  frames.push({ pythonLine: 9, phase: 'collect', activeLine: L('count the videos'), current: null, visited: queue.slice(), done: queue.slice(), frontier: [], message: `People at distance ${level}: ${atLevel.join(', ') || 'none'}.` })
   const result = [...counts.keys()].sort((a, b) => counts.get(a) - counts.get(b) || (a < b ? -1 : a > b ? 1 : 0))
-  frames.push({ phase: 'done', activeLine: L('return the videos'), current: null, visited: queue.slice(), done: queue.slice(), frontier: [], message: `Videos: ${result.join(', ') || 'none'}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return the videos'), current: null, visited: queue.slice(), done: queue.slice(), frontier: [], message: `Videos: ${result.join(', ') || 'none'}.` })
   return { input: { watchedVideos, friends, id, level }, result, frames, edges }
 }
 

@@ -11,19 +11,19 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const sorted = [...nums].sort((a, b) => a - b)
   const groups = []
-  const frames = [{ phase: 'sort', activeLine: L('sort nums'), at: -1, groups: [], message: `Sorted: [${sorted.join(', ')}]. Consecutive triples are the tightest candidates.` }]
+  const frames = [{ pythonLine: 2, phase: 'sort', activeLine: L('sort nums'), at: -1, groups: [], message: `Sorted: [${sorted.join(', ')}]. Consecutive triples are the tightest candidates.` }]
   for (let i = 0; i < sorted.length; i += 3) {
     const group = sorted.slice(i, i + 3)
     const spread = group[2] - group[0]
     if (spread > k) {
-      frames.push({ phase: 'fail', activeLine: L('if the largest minus'), at: i, groups: groups.map(g => [...g]), message: `Group [${group.join(', ')}] spans ${spread}, above k = ${k}. No valid split exists.` })
-      frames.push({ phase: 'done', activeLine: L('return an empty'), at: -1, groups: [], message: 'No valid split, so the answer is an empty array.' })
+      frames.push({ pythonLine: 7, phase: 'fail', activeLine: L('if the largest minus'), at: i, groups: groups.map(g => [...g]), message: `Group [${group.join(', ')}] spans ${spread}, above k = ${k}. No valid split exists.` })
+      frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return an empty'), at: -1, groups: [], message: 'No valid split, so the answer is an empty array.' })
       return { input: { nums, k }, result: [], frames }
     }
     groups.push(group)
-    frames.push({ phase: 'group', activeLine: L('add the group'), at: i, groups: groups.map(g => [...g]), message: `Group [${group.join(', ')}] spans ${spread}, which fits within k.` })
+    frames.push({ pythonLine: 8, phase: 'group', activeLine: L('add the group'), at: i, groups: groups.map(g => [...g]), message: `Group [${group.join(', ')}] spans ${spread}, which fits within k.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return groups'), at: -1, groups: groups.map(g => [...g]), message: `Found ${groups.length} valid groups.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return groups'), at: -1, groups: groups.map(g => [...g]), message: `Found ${groups.length} valid groups.` })
   return { input: { nums, k }, result: groups, frames }
 }
 

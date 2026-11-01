@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const lowest = new Map()
   let prefix = 0
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set lowest to an empty map'), index: -1, prefix: 0, candidate: null, best: null, message: 'No starts have been recorded yet.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set lowest to an empty map'), index: -1, prefix: 0, candidate: null, best: null, message: 'No starts have been recorded yet.' }]
   nums.forEach((value, j) => {
     if (!lowest.has(value) || prefix < lowest.get(value)) lowest.set(value, prefix)
     let candidate = null
@@ -21,11 +21,11 @@ export function buildTrace(input) {
       candidate = prefix + value - lowest.get(target)
       if (best === null || candidate > best) best = candidate
     }
-    frames.push({ phase: 'scan', activeLine: L('if lowest has target'), index: j, prefix, candidate, best, message: candidate === null ? `No earlier start differs from ${value} by ${k}.` : `Best good subarray ending at ${j} sums to ${candidate}. Best so far ${best}.` })
+    frames.push({ pythonLine: candidate === null ? 9 : 12, phase: 'scan', activeLine: L('if lowest has target'), index: j, prefix, candidate, best, message: candidate === null ? `No earlier start differs from ${value} by ${k}.` : `Best good subarray ending at ${j} sums to ${candidate}. Best so far ${best}.` })
     prefix += value
   })
   const result = best === null ? 0 : best
-  frames.push({ phase: 'done', activeLine: L('return 0 if'), index: nums.length, prefix, candidate: null, best: result, message: `Maximum good subarray sum: ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return 0 if'), index: nums.length, prefix, candidate: null, best: result, message: `Maximum good subarray sum: ${result}.` })
   return { input, result, frames }
 }
 

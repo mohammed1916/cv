@@ -20,7 +20,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ s, a, b, k }) {
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('let beautiful'), index: -1, found: [], message: `Look for "${a}" with a "${b}" within ${k} positions.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let beautiful'), index: -1, found: [], message: `Look for "${a}" with a "${b}" within ${k} positions.` }]
   for (let i = 0; i + a.length <= s.length; i++) {
     if (s.slice(i, i + a.length) !== a) continue
     let ok = false
@@ -28,13 +28,13 @@ export function buildTrace({ s, a, b, k }) {
       if (s.slice(j, j + b.length) !== b) continue
       if (Math.abs(i - j) <= k) {
         ok = true
-        frames.push({ phase: 'match', activeLine: L('if the distance between'), index: i, found: [...result, i], message: `"${a}" at ${i} and "${b}" at ${j} are ${Math.abs(i - j)} apart.` })
+        frames.push({ pythonLine: 8, phase: 'match', activeLine: L('if the distance between'), index: i, found: [...result, i], message: `"${a}" at ${i} and "${b}" at ${j} are ${Math.abs(i - j)} apart.` })
       }
     }
     if (ok) result.push(i)
-    else frames.push({ phase: 'miss', activeLine: L('check every start'), index: i, found: [...result], message: `No "${b}" within ${k} of ${i}.` })
+    else frames.push({ pythonLine: 6, phase: 'miss', activeLine: L('check every start'), index: i, found: [...result], message: `No "${b}" within ${k} of ${i}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return beautiful'), index: -1, found: [...result], message: `Beautiful indices: [${result.join(', ')}].` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return beautiful'), index: -1, found: [...result], message: `Beautiful indices: [${result.join(', ')}].` })
   return { input: { s, a, b, k }, result, frames }
 }
 

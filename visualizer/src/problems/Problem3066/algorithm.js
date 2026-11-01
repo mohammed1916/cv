@@ -26,7 +26,7 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const heap = [...nums]
   let ops = 0
-  const frames = [{ phase: 'start', activeLine: L('set operations to 0'), values: [...nums].sort((a, b) => a - b), pair: [], ops, message: `Every number must reach ${k}.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set operations to 0'), values: [...nums].sort((a, b) => a - b), pair: [], ops, message: `Every number must reach ${k}.` }]
   for (;;) {
     heap.sort((a, b) => a - b)
     if (heap[0] >= k) break
@@ -36,11 +36,11 @@ export function buildTrace({ nums, k }) {
     const merged = 2 * x + y
     heap.push(merged)
     ops++
-    frames.push({ phase: 'combine', activeLine: L('put twice x plus y back'), values: [...heap].sort((a, b) => a - b), pair: [x, y], ops, message: `Combine ${x} and ${y} into ${merged}. Operations: ${ops}.` })
+    frames.push({ pythonLine: 12, phase: 'combine', activeLine: L('put twice x plus y back'), values: [...heap].sort((a, b) => a - b), pair: [x, y], ops, message: `Combine ${x} and ${y} into ${merged}. Operations: ${ops}.` })
   }
   heap.sort((a, b) => a - b)
   const result = heap[0] >= k ? ops : -1
-  frames.push({ phase: 'done', activeLine: L('return operations'), values: heap, pair: [], ops, message: result === -1 ? 'Not every number reached the threshold.' : `Smallest number is ${heap[0]}, so ${ops} operations are needed.` })
+  frames.push({ pythonLine: result === -1 ? 9 : 14, phase: 'done', activeLine: L('return operations'), values: heap, pair: [], ops, message: result === -1 ? 'Not every number reached the threshold.' : `Smallest number is ${heap[0]}, so ${ops} operations are needed.` })
   return { input: { nums, k }, result, frames }
 }
 

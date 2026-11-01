@@ -12,22 +12,22 @@ export function buildTrace(input) {
   const { grid } = input
   const rows = grid.length
   const cols = grid[0].length
-  const frames = [{ phase: 'start', activeLine: L('for each row'), cell: null, ok: true, message: 'Each cell must equal the cell below and differ from the cell to its right.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('for each row'), cell: null, ok: true, message: 'Each cell must equal the cell below and differ from the cell to its right.' }]
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const here = grid[r][c]
       if (r + 1 < rows && here !== grid[r + 1][c]) {
-        frames.push({ phase: 'fail', activeLine: L('differs from the cell below'), cell: [r, c], ok: false, message: `(${r}, ${c}) differs from the cell below it.` })
+        frames.push({ pythonLine: 5, phase: 'fail', activeLine: L('differs from the cell below'), cell: [r, c], ok: false, message: `(${r}, ${c}) differs from the cell below it.` })
         return { input, result: false, frames }
       }
       if (c + 1 < cols && here === grid[r][c + 1]) {
-        frames.push({ phase: 'fail', activeLine: L('equals the cell to the right'), cell: [r, c], ok: false, message: `(${r}, ${c}) equals the cell to its right.` })
+        frames.push({ pythonLine: 7, phase: 'fail', activeLine: L('equals the cell to the right'), cell: [r, c], ok: false, message: `(${r}, ${c}) equals the cell to its right.` })
         return { input, result: false, frames }
       }
-      frames.push({ phase: 'check', activeLine: L('differs from the cell below'), cell: [r, c], ok: true, message: `(${r}, ${c}) passes both checks.` })
+      frames.push({ pythonLine: 8, phase: 'check', activeLine: L('differs from the cell below'), cell: [r, c], ok: true, message: `(${r}, ${c}) passes both checks.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), cell: null, ok: true, message: 'Every cell passes both checks.' })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return true'), cell: null, ok: true, message: 'Every cell passes both checks.' })
   return { input, result: true, frames }
 }
 

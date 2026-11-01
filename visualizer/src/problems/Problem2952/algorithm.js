@@ -14,20 +14,20 @@ export function buildTrace(input) {
   let reach = 0
   let next = 0
   const added = []
-  const frames = [{ phase: 'start', activeLine: L('sort the coins'), index: -1, next, reach, added: [], message: 'Every sum from 1 to reach can be made. Start with reach at zero.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('sort the coins'), index: -1, next, reach, added: [], message: 'Every sum from 1 to reach can be made. Start with reach at zero.' }]
   while (reach < target) {
     if (next < coins.length && coins[next] <= reach + 1) {
       reach += coins[next]
       next += 1
-      frames.push({ phase: 'use', activeLine: L('use that coin'), index: next - 1, next, reach, added: [...added], message: `Coin ${coins[next - 1]} fits, so sums up to ${reach} are reachable.` })
+      frames.push({ pythonLine: 8, phase: 'use', activeLine: L('use that coin'), index: next - 1, next, reach, added: [...added], message: `Coin ${coins[next - 1]} fits, so sums up to ${reach} are reachable.` })
     } else {
       const coin = reach + 1
       added.push(coin)
       reach += coin
-      frames.push({ phase: 'add', activeLine: L('add a coin of value'), index: -1, next, reach, added: [...added], message: `No coin fits, so add ${coin}. Sums up to ${reach} are reachable.` })
+      frames.push({ pythonLine: 11, phase: 'add', activeLine: L('add a coin of value'), index: -1, next, reach, added: [...added], message: `No coin fits, so add ${coin}. Sums up to ${reach} are reachable.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return added'), index: -1, next, reach, added: [...added], message: `Coins to add: ${added.length}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return added'), index: -1, next, reach, added: [...added], message: `Coins to add: ${added.length}.` })
   return { input, result: added.length, frames }
 }
 

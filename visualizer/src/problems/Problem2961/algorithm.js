@@ -31,29 +31,29 @@ export function buildTrace(input) {
   let at = -1
   let x = null
   let y = null
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, at, x, y, result: [...result], message,
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    phase, activeLine, pythonLine, at, x, y, result: [...result], message,
   })
 
-  snap('start', L('set the result list'), `Find the indexes where the result equals ${target}.`)
+  snap('start', L('set the result list'), `Find the indexes where the result equals ${target}.`, 2)
   for (let i = 0; i < variables.length; i++) {
     at = i
     const [a, b, c, m] = variables[i]
     x = modpow(a, b, 10)
-    snap('reduce', L('compute x as'), `x = ${a}^${b} mod 10 = ${x}.`)
+    snap('reduce', L('compute x as'), `x = ${a}^${b} mod 10 = ${x}.`, 4)
     y = modpow(x, c, m)
-    snap('power', L('compute y as'), `y = ${x}^${c} mod ${m} = ${y}.`)
+    snap('power', L('compute y as'), `y = ${x}^${c} mod ${m} = ${y}.`, 5)
     if (y === target) {
       result.push(i)
-      snap('keep', L('if y equals target'), `y equals ${target}, so index ${i} is in the answer.`)
+      snap('keep', L('if y equals target'), `y equals ${target}, so index ${i} is in the answer.`, 7)
     } else {
-      snap('skip', L('if y equals target'), `y is ${y}, not ${target}, so index ${i} is out.`)
+      snap('skip', L('if y equals target'), `y is ${y}, not ${target}, so index ${i} is out.`, 6)
     }
   }
   at = -1
   x = null
   y = null
-  snap('done', L('return the result'), `Answer: [${result.join(', ')}].`)
+  snap('done', L('return the result'), `Answer: [${result.join(', ')}].`, 8)
   return { input, result, frames }
 }
 

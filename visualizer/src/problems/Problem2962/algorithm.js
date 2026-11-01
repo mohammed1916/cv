@@ -9,20 +9,20 @@ export function parseInput(text) {
 
 export function buildTrace({ nums, k }) {
   const largest = Math.max(...nums)
-  const frames = [{ phase: 'start', activeLine: L('set largest to'), largest, left: 0, right: -1, count: 0, total: 0, message: `The largest value is ${largest}. Count windows where it appears at least ${k} times.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set largest to'), largest, left: 0, right: -1, count: 0, total: 0, message: `The largest value is ${largest}. Count windows where it appears at least ${k} times.` }]
   let left = 0, count = 0, total = 0
   for (let right = 0; right < nums.length; right++) {
     if (nums[right] === largest) count++
-    frames.push({ phase: 'extend', activeLine: L('add one to count'), largest, left, right, count, total, message: `Add nums[${right}] = ${nums[right]}. The window holds ${count} copies of ${largest}.` })
+    frames.push({ pythonLine: nums[right] === largest ? 8 : 7, phase: 'extend', activeLine: L('add one to count'), largest, left, right, count, total, message: `Add nums[${right}] = ${nums[right]}. The window holds ${count} copies of ${largest}.` })
     while (count >= k) {
       if (nums[left] === largest) count--
       left++
-      frames.push({ phase: 'shrink', activeLine: L('subtract one from count'), largest, left, right, count, total, message: `The window still has at least ${k} copies, so move the left end to ${left}.` })
+      frames.push({ pythonLine: 12, phase: 'shrink', activeLine: L('subtract one from count'), largest, left, right, count, total, message: `The window still has at least ${k} copies, so move the left end to ${left}.` })
     }
     total += left
-    frames.push({ phase: 'count', activeLine: L('add left to total'), largest, left, right, count, total, message: `Starts 0 to ${left - 1} each hold at least ${k} copies for end ${right}. Total ${total}.` })
+    frames.push({ pythonLine: 13, phase: 'count', activeLine: L('add left to total'), largest, left, right, count, total, message: `Starts 0 to ${left - 1} each hold at least ${k} copies for end ${right}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), largest, left, right: nums.length - 1, count, total, message: `There are ${total} qualifying subarrays.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return total'), largest, left, right: nums.length - 1, count, total, message: `There are ${total} qualifying subarrays.` })
   return { input: { nums, k }, result: total, frames }
 }
 

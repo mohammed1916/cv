@@ -16,7 +16,7 @@ export function parseInput(text) {
 export function buildTrace({ words_container, words_query }) {
   const root = { next: new Map(), best: null }
   const better = (index, current) => current === null || words_container[index].length < words_container[current].length
-  const frames = [{ phase: 'start', activeLine: L('set root to an empty trie'), word: null, best: null, answers: [], message: 'Start with an empty reversed-word trie.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set root to an empty trie'), word: null, best: null, answers: [], message: 'Start with an empty reversed-word trie.' }]
   words_container.forEach((w, index) => {
     if (better(index, root.best)) root.best = index
     let node = root
@@ -25,7 +25,7 @@ export function buildTrace({ words_container, words_query }) {
       node = node.next.get(ch)
       if (better(index, node.best)) node.best = index
     }
-    frames.push({ phase: 'build', activeLine: L('walk the reversed w'), word: w, best: root.best, answers: [], message: `Stored ${w} (index ${index}) along its reversed path.` })
+    frames.push({ pythonLine: 12, phase: 'build', activeLine: L('walk the reversed w'), word: w, best: root.best, answers: [], message: `Stored ${w} (index ${index}) along its reversed path.` })
   })
   const answers = []
   for (const q of words_query) {
@@ -35,9 +35,9 @@ export function buildTrace({ words_container, words_query }) {
       node = node.next.get(ch)
     }
     answers.push(node.best)
-    frames.push({ phase: 'query', activeLine: L('add the best index of the last node'), word: q, best: node.best, answers: [...answers], message: `${q} matches its best container word at index ${node.best}.` })
+    frames.push({ pythonLine: 20, phase: 'query', activeLine: L('add the best index of the last node'), word: q, best: node.best, answers: [...answers], message: `${q} matches its best container word at index ${node.best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), word: null, best: null, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return answers'), word: null, best: null, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input: { words_container, words_query }, result: answers, frames }
 }
 

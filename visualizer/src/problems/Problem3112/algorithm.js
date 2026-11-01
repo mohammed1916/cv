@@ -29,7 +29,7 @@ export function buildTrace({ n, edges, disappear }) {
   const arrive = new Array(n).fill(Infinity)
   arrive[0] = 0
   const settled = new Array(n).fill(false)
-  const frames = [{ phase: 'start', activeLine: L('arrive[0] = 0'), node: 0, dist: [...arrive], settled: [...settled], message: `Leave node 0 at time 0. A node can be visited only at a time strictly before it disappears.` }]
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('arrive[0] = 0'), node: 0, dist: [...arrive], settled: [...settled], message: `Leave node 0 at time 0. A node can be visited only at a time strictly before it disappears.` }]
   for (;;) {
     let u = -1
     for (let x = 0; x < n; x++) if (!settled[x] && arrive[x] < Infinity && (u === -1 || arrive[x] < arrive[u])) u = x
@@ -41,10 +41,10 @@ export function buildTrace({ n, edges, disappear }) {
       if (time >= disappear[v]) { notes.push(`node ${v} at ${time} is too late (it disappears at ${disappear[v]})`); continue }
       if (time < arrive[v]) { arrive[v] = time; notes.push(`node ${v} improves to ${time}`) }
     }
-    frames.push({ phase: 'settle', activeLine: L('pop (t, u)'), node: u, dist: [...arrive], settled: [...settled], message: `Visit node ${u} at time ${arrive[u]}.${notes.length ? ` Neighbours: ${notes.join('; ')}.` : ''}` })
+    frames.push({ pythonLine: 13, phase: 'settle', activeLine: L('pop (t, u)'), node: u, dist: [...arrive], settled: [...settled], message: `Visit node ${u} at time ${arrive[u]}.${notes.length ? ` Neighbours: ${notes.join('; ')}.` : ''}` })
   }
   const result = arrive.map(a => (a === Infinity ? -1 : a))
-  frames.push({ phase: 'done', activeLine: L('return arrive'), node: -1, dist: [...arrive], settled: [...settled], message: `Earliest visit times: [${result.join(', ')}].` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return arrive'), node: -1, dist: [...arrive], settled: [...settled], message: `Earliest visit times: [${result.join(', ')}].` })
   return { input: { n, edges, disappear }, result, frames }
 }
 

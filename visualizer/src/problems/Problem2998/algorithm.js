@@ -12,27 +12,27 @@ export function buildTrace(input) {
   const limit = 10 * Math.max(x, y) + 100
   const dist = new Map([[x, 0]])
   const queue = [x]
-  const frames = [{ phase: 'start', activeLine: L('set dist of x to 0'), value: x, distance: 0, queued: 1, message: `Search outward from ${x} until ${y} is reached.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set dist of x to 0'), value: x, distance: 0, queued: 1, message: `Search outward from ${x} until ${y} is reached.` }]
   let result = null
   for (let head = 0; head < queue.length; head++) {
     const v = queue[head]
     const d = dist.get(v)
     if (v === y) {
-      frames.push({ phase: 'found', activeLine: L('if v equals y'), value: v, distance: d, queued: queue.length - head - 1, message: `Reached ${y} after ${d} operations.` })
+      frames.push({ pythonLine: 11, phase: 'found', activeLine: L('if v equals y'), value: v, distance: d, queued: queue.length - head - 1, message: `Reached ${y} after ${d} operations.` })
       result = d
       break
     }
     const moves = [v - 1, v + 1]
     if (v % 11 === 0) moves.push(v / 11)
     if (v % 5 === 0) moves.push(v / 5)
-    frames.push({ phase: 'visit', activeLine: L('for each value w'), value: v, distance: d, queued: queue.length - head - 1, moves, message: `From ${v} (after ${d} operations), the moves reach ${moves.join(', ')}.` })
+    frames.push({ pythonLine: 17, phase: 'visit', activeLine: L('for each value w'), value: v, distance: d, queued: queue.length - head - 1, moves, message: `From ${v} (after ${d} operations), the moves reach ${moves.join(', ')}.` })
     for (const w of moves) {
       if (w < 1 || w > limit || dist.has(w)) continue
       dist.set(w, d + 1)
       queue.push(w)
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the distance'), value: null, distance: result, queued: 0, message: `Fewest operations: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return the distance'), value: null, distance: result, queued: 0, message: `Fewest operations: ${result}.` })
   return { input, result, frames }
 }
 

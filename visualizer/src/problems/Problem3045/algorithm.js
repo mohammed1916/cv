@@ -14,7 +14,7 @@ export function buildTrace({ words }) {
   // the first len(s) pairs of w. So each word is stored as a path of letter pairs.
   const root = { next: new Map(), end: 0 }
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set trie to an empty trie'), word: null, gained: 0, total, message: 'Start with an empty trie.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set trie to an empty trie'), word: null, gained: 0, total, message: 'Start with an empty trie.' }]
   for (const w of words) {
     const m = w.length
     let node = root
@@ -26,7 +26,7 @@ export function buildTrace({ words }) {
       gained += node.end
     }
     total += gained
-    frames.push({ phase: 'check', activeLine: L('add the count at every node'), word: w, gained, total, message: `${w} pairs with ${gained} earlier word(s).` })
+    frames.push({ pythonLine: gained ? 12 : 10, phase: 'check', activeLine: L('add the count at every node'), word: w, gained, total, message: `${w} pairs with ${gained} earlier word(s).` })
     node = root
     for (let k = 0; k < m; k++) {
       const key = w[k] + w[m - 1 - k]
@@ -34,9 +34,9 @@ export function buildTrace({ words }) {
       node = node.next.get(key)
     }
     node.end += 1
-    frames.push({ phase: 'insert', activeLine: L('increase the count'), word: w, gained, total, message: `Stored ${w} as a path of letter pairs.` })
+    frames.push({ pythonLine: 17, phase: 'insert', activeLine: L('increase the count'), word: w, gained, total, message: `Stored ${w} as a path of letter pairs.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), word: null, gained: 0, total, message: `Pairs: ${total}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return total'), word: null, gained: 0, total, message: `Pairs: ${total}.` })
   return { input: { words }, result: total, frames }
 }
 

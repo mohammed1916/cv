@@ -22,19 +22,19 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace(nums) {
   const count = new Map()
-  const frames = [{ phase: 'start', index: -1, counts: {}, top: 0, total: 0, activeLine: L('set count to'), message: 'Tally how often each value appears.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', index: -1, counts: {}, top: 0, total: 0, activeLine: L('set count to'), message: 'Tally how often each value appears.' }]
   nums.forEach((v, i) => {
     count.set(v, (count.get(v) ?? 0) + 1)
-    frames.push({ phase: 'tally', index: i, counts: Object.fromEntries(count), top: 0, total: 0, activeLine: L('add one to count'), message: `Tally ${v}: now ${count.get(v)}.` })
+    frames.push({ pythonLine: 4, phase: 'tally', index: i, counts: Object.fromEntries(count), top: 0, total: 0, activeLine: L('add one to count'), message: `Tally ${v}: now ${count.get(v)}.` })
   })
   const top = Math.max(...count.values())
-  frames.push({ phase: 'top', index: -1, counts: Object.fromEntries(count), top, total: 0, activeLine: L('set top to'), message: `The largest frequency is ${top}.` })
+  frames.push({ pythonLine: 5, phase: 'top', index: -1, counts: Object.fromEntries(count), top, total: 0, activeLine: L('set top to'), message: `The largest frequency is ${top}.` })
   let total = 0
   for (const [v, c] of count) {
     if (c === top) total += c
-    frames.push({ phase: 'sum', index: -1, counts: Object.fromEntries(count), top, total, activeLine: L('if count of value equals top'), message: c === top ? `Value ${v} has frequency ${c}, so add ${c}; total ${total}.` : `Value ${v} has frequency ${c}, which is not the maximum.` })
+    frames.push({ pythonLine: c === top ? 9 : 7, phase: 'sum', index: -1, counts: Object.fromEntries(count), top, total, activeLine: L('if count of value equals top'), message: c === top ? `Value ${v} has frequency ${c}, so add ${c}; total ${total}.` : `Value ${v} has frequency ${c}, which is not the maximum.` })
   }
-  frames.push({ phase: 'done', index: -1, counts: Object.fromEntries(count), top, total, activeLine: L('return total'), message: `Elements with maximum frequency: ${total}.` })
+  frames.push({ pythonLine: 10, phase: 'done', index: -1, counts: Object.fromEntries(count), top, total, activeLine: L('return total'), message: `Elements with maximum frequency: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

@@ -12,7 +12,7 @@ export function buildTrace(input) {
   // Testing device i lowers every later device by one; so device i is still positive when battery[i] minus the tests so far is above zero.
   let tested = 0
   const testedIdx = []
-  const frames = [{ phase: 'start', activeLine: L('set tested to 0'), index: -1, levels: [...battery], testedIdx: [], tested, message: 'No devices have been tested yet.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set tested to 0'), index: -1, levels: [...battery], testedIdx: [], tested, message: 'No devices have been tested yet.' }]
   battery.forEach((value, i) => {
     const current = value - tested
     const live = current > 0
@@ -20,12 +20,12 @@ export function buildTrace(input) {
       tested += 1
       testedIdx.push(i)
     }
-    frames.push({ phase: live ? 'test' : 'skip', activeLine: L('if battery of device i'), index: i,
+    frames.push({ pythonLine: live ? 5 : 4, phase: live ? 'test' : 'skip', activeLine: L('if battery of device i'), index: i,
       levels: battery.map((v, j) => (j <= i ? v : Math.max(0, v - tested))), testedIdx: [...testedIdx], tested,
       message: live ? `Device ${i} still has ${current}% after earlier tests, so it is tested. Tested so far: ${tested}.`
         : `Device ${i} is at ${Math.max(0, current)}% and is skipped.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return tested'), index: -1, levels: battery.map((v, j) => (testedIdx.includes(j) ? v : Math.max(0, v - tested))), testedIdx: [...testedIdx], tested, message: `Devices tested: ${tested}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return tested'), index: -1, levels: battery.map((v, j) => (testedIdx.includes(j) ? v : Math.max(0, v - tested))), testedIdx: [...testedIdx], tested, message: `Devices tested: ${tested}.` })
   return { input, result: tested, frames }
 }
 

@@ -33,9 +33,9 @@ export function buildTrace(input) {
   const vRun = longestRun(v_bars)
   const side = Math.min(hRun, vRun) + 1
   const frames = [
-    { phase: 'horizontal', activeLine: L('set horizontal to'), index: -1, hRun, vRun, side: null, message: `Longest run of consecutive horizontal bars: ${hRun}, so a hole can be ${hRun + 1} rows tall.` },
-    { phase: 'vertical', activeLine: L('set vertical to'), index: -1, hRun, vRun, side: null, message: `Longest run of consecutive vertical bars: ${vRun}, so a hole can be ${vRun + 1} columns wide.` },
-    { phase: 'done', activeLine: L('return area'), index: -1, hRun, vRun, side, message: `The square side is ${side}, so the area is ${side * side}.` },
+    { pythonLine: 11, phase: 'horizontal', activeLine: L('set horizontal to'), index: -1, hRun, vRun, side: null, message: `Longest run of consecutive horizontal bars: ${hRun}, so a hole can be ${hRun + 1} rows tall.` },
+    { pythonLine: 11, phase: 'vertical', activeLine: L('set vertical to'), index: -1, hRun, vRun, side: null, message: `Longest run of consecutive vertical bars: ${vRun}, so a hole can be ${vRun + 1} columns wide.` },
+    { pythonLine: 12, phase: 'done', activeLine: L('return area'), index: -1, hRun, vRun, side, message: `The square side is ${side}, so the area is ${side * side}.` },
   ]
   return { input, n, m, result: side * side, frames }
 }

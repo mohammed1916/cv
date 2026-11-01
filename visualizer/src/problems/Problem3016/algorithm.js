@@ -10,14 +10,14 @@ export function buildTrace(word) {
   for (const ch of word) counts.set(ch, (counts.get(ch) ?? 0) + 1)
   const ranked = [...counts].map(([letter, freq]) => ({ letter, freq })).sort((a, b) => b.freq - a.freq || a.letter.localeCompare(b.letter))
   let total = 0
-  const frames = [{ phase: 'count', activeLine: L('count how often'), rank: -1, ranked: [], total: 0, message: `Count the letters of "${word}".` }]
-  frames.push({ phase: 'sort', activeLine: L('sort the counts'), rank: -1, ranked, total: 0, message: `Letters by frequency: ${ranked.map(r => `${r.letter}:${r.freq}`).join(' ')}.` })
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how often'), rank: -1, ranked: [], total: 0, message: `Count the letters of "${word}".` }]
+  frames.push({ pythonLine: 4, phase: 'sort', activeLine: L('sort the counts'), rank: -1, ranked, total: 0, message: `Letters by frequency: ${ranked.map(r => `${r.letter}:${r.freq}`).join(' ')}.` })
   ranked.forEach((entry, rank) => {
     const presses = Math.floor(rank / 8) + 1
     total += entry.freq * presses
-    frames.push({ phase: 'assign', activeLine: L('add count times presses'), rank, ranked, total, message: `${entry.letter} (${entry.freq} times) uses ${presses} press${presses === 1 ? '' : 'es'} per letter. Total is ${total}.` })
+    frames.push({ pythonLine: 8, phase: 'assign', activeLine: L('add count times presses'), rank, ranked, total, message: `${entry.letter} (${entry.freq} times) uses ${presses} press${presses === 1 ? '' : 'es'} per letter. Total is ${total}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), rank: ranked.length, ranked, total, message: `Minimum pushes: ${total}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return total'), rank: ranked.length, ranked, total, message: `Minimum pushes: ${total}.` })
   return { input: word, result: total, frames }
 }
 

@@ -16,19 +16,19 @@ export function buildTrace({ l, r }) {
   const frames = []
   const found = []
   let special = 0
-  frames.push({ phase: 'start', activeLine: L('set special to 0'), p: 0, found: [], special, message: `Count the numbers from ${l} to ${r} that have exactly three divisors.` })
+  frames.push({ pythonLine: 12, phase: 'start', activeLine: L('set special to 0'), p: 0, found: [], special, message: `Count the numbers from ${l} to ${r} that have exactly three divisors.` })
   for (let p = 2; p * p <= r; p++) {
-    frames.push({ phase: 'candidate', activeLine: L('for each candidate p'), p, found: [...found], special, message: `Candidate ${p}: its square is ${p * p}.` })
+    frames.push({ pythonLine: 14, phase: 'candidate', activeLine: L('for each candidate p'), p, found: [...found], special, message: `Candidate ${p}: its square is ${p * p}.` })
     if (isPrime(p) && p * p >= l) {
       special++
       found.push(p * p)
-      frames.push({ phase: 'special', activeLine: L('if p is prime'), p, found: [...found], special, message: `${p * p} = ${p} squared has exactly three divisors.` })
+      frames.push({ pythonLine: 16, phase: 'special', activeLine: L('if p is prime'), p, found: [...found], special, message: `${p * p} = ${p} squared has exactly three divisors.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if p is prime'), p, found: [...found], special, message: isPrime(p) ? `${p * p} is below ${l}; not in range.` : `${p} is not prime, so ${p * p} is not special.` })
+      frames.push({ pythonLine: 15, phase: 'skip', activeLine: L('if p is prime'), p, found: [...found], special, message: isPrime(p) ? `${p * p} is below ${l}; not in range.` : `${p} is not prime, so ${p * p} is not special.` })
     }
   }
   const result = r - l + 1 - special
-  frames.push({ phase: 'done', activeLine: L('return (r minus l'), p: -1, found: [...found], special, message: `${r - l + 1} numbers, ${special} special: ${result} not special.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return (r minus l'), p: -1, found: [...found], special, message: `${r - l + 1} numbers, ${special} special: ${result} not special.` })
   return { input: { l, r }, result, frames }
 }
 

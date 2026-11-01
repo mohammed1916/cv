@@ -23,17 +23,17 @@ export function buildTrace({ a, b, c, d, e, f }) {
   const queen = [e, f]
   const rookHits = (a === e || b === f) && !blocked(rook, queen, bishop)
   const bishopHits = Math.abs(c - e) === Math.abs(d - f) && !blocked(bishop, queen, rook)
-  const frames = [{ phase: 'rook', activeLine: L('if the rook can reach'), rook, bishop, queen, found: rookHits, message: `Rook at (${a}, ${b}) ${rookHits ? 'can' : 'cannot'} capture the queen at (${e}, ${f}) in one move.` }]
+  const frames = [{ pythonLine: 9, phase: 'rook', activeLine: L('if the rook can reach'), rook, bishop, queen, found: rookHits, message: `Rook at (${a}, ${b}) ${rookHits ? 'can' : 'cannot'} capture the queen at (${e}, ${f}) in one move.` }]
   if (rookHits) {
-    frames.push({ phase: 'done', activeLine: L('return 1'), rook, bishop, queen, found: true, message: 'The rook captures the queen in one move.' })
+    frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return 1'), rook, bishop, queen, found: true, message: 'The rook captures the queen in one move.' })
     return { input: { a, b, c, d, e, f }, result: 1, frames, rook, bishop, queen }
   }
-  frames.push({ phase: 'bishop', activeLine: L('if the bishop can reach'), rook, bishop, queen, found: bishopHits, message: `Bishop at (${c}, ${d}) ${bishopHits ? 'can' : 'cannot'} capture the queen in one move.` })
+  frames.push({ pythonLine: 11, phase: 'bishop', activeLine: L('if the bishop can reach'), rook, bishop, queen, found: bishopHits, message: `Bishop at (${c}, ${d}) ${bishopHits ? 'can' : 'cannot'} capture the queen in one move.` })
   if (bishopHits) {
-    frames.push({ phase: 'done', activeLine: L('return 1'), rook, bishop, queen, found: true, message: 'The bishop captures the queen in one move.' })
+    frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return 1'), rook, bishop, queen, found: true, message: 'The bishop captures the queen in one move.' })
     return { input: { a, b, c, d, e, f }, result: 1, frames, rook, bishop, queen }
   }
-  frames.push({ phase: 'done', activeLine: L('return 2'), rook, bishop, queen, found: false, message: 'Neither piece reaches the queen in one move, so two moves are needed.' })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return 2'), rook, bishop, queen, found: false, message: 'Neither piece reaches the queen in one move, so two moves are needed.' })
   return { input: { a, b, c, d, e, f }, result: 2, frames, rook, bishop, queen }
 }
 

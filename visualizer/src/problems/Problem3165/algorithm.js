@@ -33,23 +33,23 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ nums, queries }) {
   const values = [...nums]
   let total = 0
-  const frames = [{ phase: 'start', index: -1, values: [...values], skipped: 0, taken: null, total, activeLine: L('total = 0'), message: 'Start with a total of zero. Each query changes one value and then re-solves the array.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', index: -1, values: [...values], skipped: 0, taken: null, total, activeLine: L('total = 0'), message: 'Start with a total of zero. Each query changes one value and then re-solves the array.' }]
   for (const [pos, x] of queries) {
     values[pos] = x
-    frames.push({ phase: 'query', index: pos, values: [...values], skipped: null, taken: null, total, activeLine: L('set nums[pos] to x'), message: `Query sets position ${pos} to ${x}.` })
+    frames.push({ pythonLine: 6, phase: 'query', index: pos, values: [...values], skipped: null, taken: null, total, activeLine: L('set nums[pos] to x'), message: `Query sets position ${pos} to ${x}.` })
     let skipped = 0
     let taken = -Infinity
     values.forEach((v, i) => {
       const previous = taken
       taken = skipped + v
       skipped = Math.max(skipped, previous)
-      frames.push({ phase: 'element', index: i, values: [...values], skipped, taken: Number.isFinite(taken) ? taken : null, total, activeLine: L('taken = skipped + v'), message: `Value ${v}: taking it gives ${taken}, skipping it leaves ${skipped}.` })
+      frames.push({ pythonLine: 11, phase: 'element', index: i, values: [...values], skipped, taken: Number.isFinite(taken) ? taken : null, total, activeLine: L('taken = skipped + v'), message: `Value ${v}: taking it gives ${taken}, skipping it leaves ${skipped}.` })
     })
     const best = Math.max(skipped, taken)
     total = (total + best) % MOD
-    frames.push({ phase: 'record', index: -1, values: [...values], skipped, taken: Number.isFinite(taken) ? taken : null, total, activeLine: L('add the larger of skipped'), message: `Best sum for this array is ${best}; running total ${total}.` })
+    frames.push({ pythonLine: 12, phase: 'record', index: -1, values: [...values], skipped, taken: Number.isFinite(taken) ? taken : null, total, activeLine: L('add the larger of skipped'), message: `Best sum for this array is ${best}; running total ${total}.` })
   }
-  frames.push({ phase: 'done', index: -1, values: [...values], skipped: null, taken: null, total, activeLine: L('return total'), message: `Sum of all query answers: ${total}.` })
+  frames.push({ pythonLine: 13, phase: 'done', index: -1, values: [...values], skipped: null, taken: null, total, activeLine: L('return total'), message: `Sum of all query answers: ${total}.` })
   return { input: { nums, queries }, result: total, frames }
 }
 

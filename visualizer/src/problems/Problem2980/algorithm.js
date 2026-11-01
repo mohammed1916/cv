@@ -10,20 +10,20 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const frames = []
   let evens = 0
-  frames.push({ phase: 'start', activeLine: L('set even count to 0'), index: -1, evens, message: 'Start with no even numbers counted.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set even count to 0'), index: -1, evens, message: 'Start with no even numbers counted.' })
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] % 2 === 0) {
       evens++
-      frames.push({ phase: 'even', activeLine: L('add 1 to even count'), index: i, evens, message: `${nums[i]} is even. Even count is now ${evens}.` })
+      frames.push({ pythonLine: 5, phase: 'even', activeLine: L('add 1 to even count'), index: i, evens, message: `${nums[i]} is even. Even count is now ${evens}.` })
       if (evens >= 2) {
-        frames.push({ phase: 'found', activeLine: L('return true'), index: i, evens, message: 'Two even numbers give an OR with a trailing zero.' })
+        frames.push({ pythonLine: 7, phase: 'found', activeLine: L('return true'), index: i, evens, message: 'Two even numbers give an OR with a trailing zero.' })
         return { input: { nums }, result: true, frames }
       }
     } else {
-      frames.push({ phase: 'odd', activeLine: L('if v is even'), index: i, evens, message: `${nums[i]} is odd, so it is skipped.` })
+      frames.push({ pythonLine: 4, phase: 'odd', activeLine: L('if v is even'), index: i, evens, message: `${nums[i]} is odd, so it is skipped.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), index: -1, evens, message: 'Fewer than two even numbers, so no trailing zero is possible.' })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return false'), index: -1, evens, message: 'Fewer than two even numbers, so no trailing zero is possible.' })
   return { input: { nums }, result: false, frames }
 }
 

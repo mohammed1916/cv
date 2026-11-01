@@ -47,21 +47,21 @@ export function buildTrace(queries) {
     return combine(prefix(2 * id, lo, mid, qr), prefix(2 * id + 1, mid + 1, hi, qr))
   }
   const answers = []
-  const frames = [{ phase: 'start', query: null, answer: null, blocked: blocked.slice(), window: null, activeLine: L('set answers to'), message: 'No obstacles yet. Every cell is free.' }]
+  const frames = [{ pythonLine: 46, phase: 'start', query: null, answer: null, blocked: blocked.slice(), window: null, activeLine: L('set answers to'), message: 'No obstacles yet. Every cell is free.' }]
   for (const q of queries) {
     if (q[0] === 1) {
       blocked[q[1]] = true
       set(1, 0, M - 1, q[1], 0)
-      frames.push({ phase: 'obstacle', query: q, answer: null, blocked: blocked.slice(), window: null, activeLine: L('set that cell to blocked'), message: `Obstacle at cell ${q[1]}.` })
+      frames.push({ pythonLine: 49, phase: 'obstacle', query: q, answer: null, blocked: blocked.slice(), window: null, activeLine: L('set that cell to blocked'), message: `Obstacle at cell ${q[1]}.` })
     } else {
       const [, x, size] = q
       const run = prefix(1, 0, M - 1, x).best
       const ok = run >= size
       answers.push(ok)
-      frames.push({ phase: 'check', query: q, answer: ok, longest: run, blocked: blocked.slice(), window: x, activeLine: L('append whether'), message: `Longest free run in [0, ${x}] is ${run}; a block of ${size} ${ok ? 'fits' : 'does not fit'}.` })
+      frames.push({ pythonLine: 51, phase: 'check', query: q, answer: ok, longest: run, blocked: blocked.slice(), window: x, activeLine: L('append whether'), message: `Longest free run in [0, ${x}] is ${run}; a block of ${size} ${ok ? 'fits' : 'does not fit'}.` })
     }
   }
-  frames.push({ phase: 'done', query: null, answer: null, blocked: blocked.slice(), window: null, activeLine: L('return answers'), message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 52, phase: 'done', query: null, answer: null, blocked: blocked.slice(), window: null, activeLine: L('return answers'), message: `Answers: [${answers.join(', ')}].` })
   return { input: queries, result: answers, frames }
 }
 

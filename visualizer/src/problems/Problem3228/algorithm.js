@@ -10,17 +10,17 @@ export function buildTrace(input) {
   const { s } = input
   let ones = 0
   let operations = 0
-  const frames = [{ phase: 'start', activeLine: L('set operations to 0'), cursor: -1, ones, operations, message: 'Scan left to right. Each 1 seen so far can move past the next 0 that follows a 1.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set operations to 0'), cursor: -1, ones, operations, message: 'Scan left to right. Each 1 seen so far can move past the next 0 that follows a 1.' }]
   for (let i = 0; i < s.length; i++) {
     if (s[i] === '1') {
       ones += 1
-      frames.push({ phase: 'count', activeLine: L('add 1 to ones'), cursor: i, ones, operations, message: `Index ${i} is 1, so there are ${ones} ones so far.` })
+      frames.push({ pythonLine: 6, phase: 'count', activeLine: L('add 1 to ones'), cursor: i, ones, operations, message: `Index ${i} is 1, so there are ${ones} ones so far.` })
     } else if (i > 0 && s[i - 1] === '1') {
       operations += ones
-      frames.push({ phase: 'zero', activeLine: L('add ones to operations'), cursor: i, ones, operations, message: `Index ${i} is 0 after a 1. The ${ones} ones before it can each move past it, adding ${ones} operations.` })
+      frames.push({ pythonLine: 8, phase: 'zero', activeLine: L('add ones to operations'), cursor: i, ones, operations, message: `Index ${i} is 0 after a 1. The ${ones} ones before it can each move past it, adding ${ones} operations.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return operations'), cursor: -1, ones, operations, message: `Maximum operations: ${operations}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return operations'), cursor: -1, ones, operations, message: `Maximum operations: ${operations}.` })
   return { input, result: operations, frames }
 }
 

@@ -12,20 +12,20 @@ export function buildTrace(input) {
   let empty = 0
   let cost = input.numExchange
   let drunk = 0
-  const frames = [{ phase: 'start', activeLine: L('set drunk to 0'), full, empty, cost, drunk, message: `Start with ${full} full bottles. An exchange costs ${cost} empty bottles.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set drunk to 0'), full, empty, cost, drunk, message: `Start with ${full} full bottles. An exchange costs ${cost} empty bottles.` }]
   while (full > 0) {
     drunk += full
     empty += full
     full = 0
-    frames.push({ phase: 'drink', activeLine: L('drink all full bottles'), full, empty, cost, drunk, message: `Drink every full bottle. Drunk so far: ${drunk}. Empty bottles: ${empty}.` })
+    frames.push({ pythonLine: 9, phase: 'drink', activeLine: L('drink all full bottles'), full, empty, cost, drunk, message: `Drink every full bottle. Drunk so far: ${drunk}. Empty bottles: ${empty}.` })
     if (empty >= cost) {
       empty -= cost
       full = 1
-      frames.push({ phase: 'exchange', activeLine: L('pay cost empty bottles'), full, empty, cost, drunk, message: `Exchange ${cost} empty bottles for one full bottle. The next exchange costs ${cost + 1}.` })
+      frames.push({ pythonLine: 11, phase: 'exchange', activeLine: L('pay cost empty bottles'), full, empty, cost, drunk, message: `Exchange ${cost} empty bottles for one full bottle. The next exchange costs ${cost + 1}.` })
       cost += 1
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return drunk'), full, empty, cost, drunk, message: `Total bottles drunk: ${drunk}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return drunk'), full, empty, cost, drunk, message: `Total bottles drunk: ${drunk}.` })
   return { input, result: drunk, frames }
 }
 

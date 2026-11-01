@@ -27,7 +27,7 @@ export function buildTrace({ grid }) {
   const cx = Array.from({ length: rows + 1 }, () => new Array(cols + 1).fill(0))
   const cy = Array.from({ length: rows + 1 }, () => new Array(cols + 1).fill(0))
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), cell: null, diff: null, count, message: 'A submatrix containing the top-left cell is fixed by its bottom-right corner. Compare the X and Y counts of each such corner.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set count to 0'), cell: null, diff: null, count, message: 'A submatrix containing the top-left cell is fixed by its bottom-right corner. Compare the X and Y counts of each such corner.' }]
   for (let i = 1; i <= rows; i++) {
     for (let j = 1; j <= cols; j++) {
       const ch = grid[i - 1][j - 1]
@@ -35,10 +35,10 @@ export function buildTrace({ grid }) {
       cy[i][j] = cy[i - 1][j] + cy[i][j - 1] - cy[i - 1][j - 1] + (ch === 'Y' ? 1 : 0)
       const counts = cx[i][j] === cy[i][j] && cx[i][j] >= 1
       if (counts) count++
-      frames.push({ phase: 'cell', activeLine: L('cx[i][j] = X'), cell: [i - 1, j - 1], diff: Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, (_, c) => cx[r + 1][c + 1] - cy[r + 1][c + 1])), count, message: `Rectangle from (0, 0) to (${i - 1}, ${j - 1}): ${cx[i][j]} X and ${cy[i][j]} Y. ${counts ? 'Equal and non-zero, so it counts.' : cx[i][j] === cy[i][j] ? 'Equal but no X, so it does not count.' : 'Not equal, so it does not count.'}` })
+      frames.push({ pythonLine: counts ? 13 : 12, phase: 'cell', activeLine: L('cx[i][j] = X'), cell: [i - 1, j - 1], diff: Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, (_, c) => cx[r + 1][c + 1] - cy[r + 1][c + 1])), count, message: `Rectangle from (0, 0) to (${i - 1}, ${j - 1}): ${cx[i][j]} X and ${cy[i][j]} Y. ${counts ? 'Equal and non-zero, so it counts.' : cx[i][j] === cy[i][j] ? 'Equal but no X, so it does not count.' : 'Not equal, so it does not count.'}` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), cell: null, diff: null, count, message: `Qualifying submatrices: ${count}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return count'), cell: null, diff: null, count, message: `Qualifying submatrices: ${count}.` })
   return { input: { grid }, result: count, frames }
 }
 

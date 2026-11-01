@@ -35,16 +35,16 @@ export function buildTrace({ nums }) {
   let lo = 1
   let hi = new Set(nums).size
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, count: null, target, message: `There are ${total} subarrays; the median needs ${target} of them to have at most the answer in distinct numbers.` }]
+  const frames = [{ pythonLine: 24, phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, count: null, target, message: `There are ${total} subarrays; the median needs ${target} of them to have at most the answer in distinct numbers.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const seen = atMost(mid)
     const verdict = seen >= target
-    frames.push({ phase: 'probe', activeLine: L('if at least target subarrays have at most mid distinct'), lo, hi, mid, verdict, count: seen, target, message: `Limit ${mid}: ${seen} subarrays have at most ${mid} distinct numbers, ${verdict ? 'enough' : 'not enough'} for ${target}.` })
+    frames.push({ pythonLine: verdict ? 28 : 30, phase: 'probe', activeLine: L('if at least target subarrays have at most mid distinct'), lo, hi, mid, verdict, count: seen, target, message: `Limit ${mid}: ${seen} subarrays have at most ${mid} distinct numbers, ${verdict ? 'enough' : 'not enough'} for ${target}.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, count: atMost(lo), target, message: `Median of the uniqueness array: ${lo}.` })
+  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, count: atMost(lo), target, message: `Median of the uniqueness array: ${lo}.` })
   return { input: { nums }, domain, result: lo, frames }
 }
 

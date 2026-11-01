@@ -6,7 +6,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace(nums) {
-  const frames = [{ phase: 'start', activeLine: L('set flipped'), index: 0, from: -1, to: -1, operations: 0, flipped: 0, message: 'Scan from the left. Track whether the suffix is currently flipped.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set flipped'), index: 0, from: -1, to: -1, operations: 0, flipped: 0, message: 'Scan from the left. Track whether the suffix is currently flipped.' }]
   let flipped = 0
   let operations = 0
   nums.forEach((x, i) => {
@@ -14,12 +14,12 @@ export function buildTrace(nums) {
     if (current === 0) {
       operations += 1
       flipped ^= 1
-      frames.push({ phase: 'flip', activeLine: L('flip the suffix'), index: i, from: i, to: nums.length - 1, operations, flipped, message: `Position ${i} reads 0 after earlier flips, so flip the suffix from ${i} onward.` })
+      frames.push({ pythonLine: 7, phase: 'flip', activeLine: L('flip the suffix'), index: i, from: i, to: nums.length - 1, operations, flipped, message: `Position ${i} reads 0 after earlier flips, so flip the suffix from ${i} onward.` })
     } else {
-      frames.push({ phase: 'keep', activeLine: L('if the value there'), index: i, from: -1, to: -1, operations, flipped, message: `Position ${i} reads 1, so no flip is needed.` })
+      frames.push({ pythonLine: 5, phase: 'keep', activeLine: L('if the value there'), index: i, from: -1, to: -1, operations, flipped, message: `Position ${i} reads 1, so no flip is needed.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return operations'), index: -1, from: -1, to: -1, operations, flipped, message: `Minimum suffix flips: ${operations}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return operations'), index: -1, from: -1, to: -1, operations, flipped, message: `Minimum suffix flips: ${operations}.` })
   return { input: nums, result: operations, frames }
 }
 

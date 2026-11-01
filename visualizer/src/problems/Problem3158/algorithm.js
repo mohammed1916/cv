@@ -10,17 +10,17 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const counts = new Map()
   for (const v of nums) counts.set(v, (counts.get(v) ?? 0) + 1)
-  const frames = [{ phase: 'count', activeLine: L('count how often each value appears'), value: null, counts: Object.fromEntries(counts), result: 0, message: `Counted ${counts.size} distinct values.` }]
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how often each value appears'), value: null, counts: Object.fromEntries(counts), result: 0, message: `Counted ${counts.size} distinct values.` }]
   let result = 0
   for (const [value, count] of counts) {
     if (count === 2) {
       result ^= value
-      frames.push({ phase: 'fold', activeLine: L('xor value into result'), value, counts: Object.fromEntries(counts), result, message: `${value} appears twice, so xor it in. Result: ${result}.` })
+      frames.push({ pythonLine: 8, phase: 'fold', activeLine: L('xor value into result'), value, counts: Object.fromEntries(counts), result, message: `${value} appears twice, so xor it in. Result: ${result}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if count equals 2'), value, counts: Object.fromEntries(counts), result, message: `${value} appears ${count} time${count === 1 ? '' : 's'}, so it is skipped.` })
+      frames.push({ pythonLine: 7, phase: 'skip', activeLine: L('if count equals 2'), value, counts: Object.fromEntries(counts), result, message: `${value} appears ${count} time${count === 1 ? '' : 's'}, so it is skipped.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), value: null, counts: Object.fromEntries(counts), result, message: `XOR of values that appear twice: ${result}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return result'), value: null, counts: Object.fromEntries(counts), result, message: `XOR of values that appear twice: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

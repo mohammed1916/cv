@@ -17,22 +17,22 @@ export function buildTrace(input) {
   const cols = matrix[0].length
   const result = matrix.map(row => [...row])
   const colMax = []
-  const frames = [{ phase: 'start', activeLine: L('set colMax'), matrix: result.map(r => [...r]), active: null, message: 'Each -1 becomes the largest value in its column.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set colMax'), matrix: result.map(r => [...r]), active: null, message: 'Each -1 becomes the largest value in its column.' }]
   for (let c = 0; c < cols; c++) {
     let best = -1
     for (let r = 0; r < rows; r++) if (matrix[r][c] !== -1) best = Math.max(best, matrix[r][c])
     colMax[c] = best
-    frames.push({ phase: 'column', activeLine: L('find the largest value in the column'), matrix: result.map(r => [...r]), active: { row: -1, col: c }, message: `Column ${c} has largest non -1 value ${best}.` })
+    frames.push({ pythonLine: 5, phase: 'column', activeLine: L('find the largest value in the column'), matrix: result.map(r => [...r]), active: { row: -1, col: c }, message: `Column ${c} has largest non -1 value ${best}.` })
   }
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (result[r][c] === -1) {
         result[r][c] = colMax[c]
-        frames.push({ phase: 'replace', activeLine: L('replace it with'), matrix: result.map(row => [...row]), active: { row: r, col: c }, message: `Replace the -1 at (${r}, ${c}) with ${colMax[c]}.` })
+        frames.push({ pythonLine: 10, phase: 'replace', activeLine: L('replace it with'), matrix: result.map(row => [...row]), active: { row: r, col: c }, message: `Replace the -1 at (${r}, ${c}) with ${colMax[c]}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return matrix'), matrix: result.map(r => [...r]), active: null, message: 'No -1 remains.' })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return matrix'), matrix: result.map(r => [...r]), active: null, message: 'No -1 remains.' })
   return { input, result, frames }
 }
 

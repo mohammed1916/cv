@@ -14,14 +14,14 @@ export function parseInput(text) {
 export function buildTrace({ arr1, arr2 }) {
   const seen = new Set()
   const prefixes = []
-  const frames = [{ phase: 'start', activeLine: L('set up an empty set'), prefixes: [], current: null, best: 0, message: 'Start with an empty set of prefixes.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set up an empty set'), prefixes: [], current: null, best: 0, message: 'Start with an empty set of prefixes.' }]
   for (const x of arr1) {
     const s = String(x)
     for (let i = 1; i <= s.length; i++) {
       const p = s.slice(0, i)
       if (!seen.has(p)) { seen.add(p); prefixes.push(p) }
     }
-    frames.push({ phase: 'insert', activeLine: L('add every prefix of x'), prefixes: [...prefixes], current: x, best: 0, message: `Added the prefixes of ${x} to the set.` })
+    frames.push({ pythonLine: 6, phase: 'insert', activeLine: L('add every prefix of x'), prefixes: [...prefixes], current: x, best: 0, message: `Added the prefixes of ${x} to the set.` })
   }
   let best = 0
   for (const y of arr2) {
@@ -31,9 +31,9 @@ export function buildTrace({ arr1, arr2 }) {
       if (seen.has(s.slice(0, i))) { found = i; break }
     }
     if (found > best) best = found
-    frames.push({ phase: 'query', activeLine: L('check its prefixes'), prefixes: [...prefixes], current: y, found, best, message: found ? `${y} shares a prefix of length ${found}. Best: ${best}.` : `${y} shares no prefix with arr1.` })
+    frames.push({ pythonLine: found ? 12 : 11, phase: 'query', activeLine: L('check its prefixes'), prefixes: [...prefixes], current: y, found, best, message: found ? `${y} shares a prefix of length ${found}. Best: ${best}.` : `${y} shares no prefix with arr1.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), prefixes: [...prefixes], current: null, best, message: `Longest common prefix length: ${best}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return best'), prefixes: [...prefixes], current: null, best, message: `Longest common prefix length: ${best}.` })
   return { input: { arr1, arr2 }, result: best, frames }
 }
 

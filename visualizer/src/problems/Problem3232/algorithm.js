@@ -12,9 +12,9 @@ export function buildTrace({ nums }) {
   const doubles = nums.filter(v => v >= 10).reduce((a, b) => a + b, 0)
   const result = singles !== doubles
   const frames = [
-    { phase: 'split', activeLine: L('set singles to'), singles, doubles, message: `Single-digit sum ${singles}, double-digit sum ${doubles}.` },
-    { phase: 'compare', activeLine: L('if singles equals doubles'), singles, doubles, message: singles === doubles ? 'The sums are equal, so whichever category Alice takes, Bob gets as much.' : `Alice takes the ${singles > doubles ? 'single-digit' : 'double-digit'} numbers, the larger sum.` },
-    { phase: 'done', activeLine: L(result ? 'return true' : 'return false'), singles, doubles, message: result ? 'Alice can win.' : 'Alice cannot win.' },
+    { pythonLine: 3, phase: 'split', activeLine: L('set singles to'), singles, doubles, message: `Single-digit sum ${singles}, double-digit sum ${doubles}.` },
+    { pythonLine: 4, phase: 'compare', activeLine: L('if singles equals doubles'), singles, doubles, message: singles === doubles ? 'The sums are equal, so whichever category Alice takes, Bob gets as much.' : `Alice takes the ${singles > doubles ? 'single-digit' : 'double-digit'} numbers, the larger sum.` },
+    { pythonLine: 4, phase: 'done', activeLine: L(result ? 'return true' : 'return false'), singles, doubles, message: result ? 'Alice can win.' : 'Alice cannot win.' },
   ]
   return { input: { nums }, result, frames }
 }

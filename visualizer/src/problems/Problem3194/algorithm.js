@@ -8,14 +8,14 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   const sorted = [...nums].sort((a, b) => a - b)
   const n = sorted.length
-  const frames = [{ phase: 'start', activeLine: L('sort a copy'), index: -1, partner: -1, best: null, message: 'Sorted. Each round removes the smallest and largest remaining numbers, so the pairs are mirror positions.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('sort a copy'), index: -1, partner: -1, best: null, message: 'Sorted. Each round removes the smallest and largest remaining numbers, so the pairs are mirror positions.' }]
   let best = null
   for (let i = 0; i < n / 2; i++) {
     const average = (sorted[i] + sorted[n - 1 - i]) / 2
     if (best === null || average < best) best = average
-    frames.push({ phase: 'pair', activeLine: L('set average'), index: i, partner: n - 1 - i, best, message: `Pair ${sorted[i]} with ${sorted[n - 1 - i]}: average ${average}. Best so far: ${best}.` })
+    frames.push({ pythonLine: 6, phase: 'pair', activeLine: L('set average'), index: i, partner: n - 1 - i, best, message: `Pair ${sorted[i]} with ${sorted[n - 1 - i]}: average ${average}. Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, partner: -1, best, message: `Minimum average: ${best}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return best'), index: -1, partner: -1, best, message: `Minimum average: ${best}.` })
   return { input: nums, sorted, result: best, frames }
 }
 

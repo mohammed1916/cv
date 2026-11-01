@@ -13,7 +13,7 @@ export function parseInput(text) {
 export function buildTrace({ points, s }) {
   const dist = i => Math.max(Math.abs(points[i][0]), Math.abs(points[i][1]))
   const order = points.map((_, i) => ({ i, d: dist(i), letter: s[i] })).sort((a, b) => a.d - b.d || a.i - b.i)
-  const frames = [{ phase: 'sort', activeLine: L('compute the distance'), group: [], count: 0, seen: [], message: 'Order the points by their chebyshev distance from the origin.' }]
+  const frames = [{ pythonLine: 4, phase: 'sort', activeLine: L('compute the distance'), group: [], count: 0, seen: [], message: 'Order the points by their chebyshev distance from the origin.' }]
   const seen = new Set()
   let count = 0
   let i = 0
@@ -23,15 +23,15 @@ export function buildTrace({ points, s }) {
     const group = order.slice(i, j)
     const letters = group.map(p => p.letter)
     if (new Set(letters).size !== letters.length || letters.some(l => seen.has(l))) {
-      frames.push({ phase: 'stop', activeLine: L('stop checking'), group: group.map(p => p.i), count, seen: [...seen], message: `Distance ${group[0].d} holds letters ${letters.join(', ')}, which repeat. The square cannot reach this ring.` })
+      frames.push({ pythonLine: 14, phase: 'stop', activeLine: L('stop checking'), group: group.map(p => p.i), count, seen: [...seen], message: `Distance ${group[0].d} holds letters ${letters.join(', ')}, which repeat. The square cannot reach this ring.` })
       break
     }
     letters.forEach(l => seen.add(l))
     count += group.length
-    frames.push({ phase: 'take', activeLine: L('add the group'), group: group.map(p => p.i), count, seen: [...seen], message: `Distance ${group[0].d}: add ${group.length} point${group.length === 1 ? '' : 's'}. Count is ${count}.` })
+    frames.push({ pythonLine: 16, phase: 'take', activeLine: L('add the group'), group: group.map(p => p.i), count, seen: [...seen], message: `Distance ${group[0].d}: add ${group.length} point${group.length === 1 ? '' : 's'}. Count is ${count}.` })
     i = j
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), group: [], count, seen: [...seen], message: `Maximum points inside: ${count}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return count'), group: [], count, seen: [...seen], message: `Maximum points inside: ${count}.` })
   return { input: { points, s }, result: count, frames }
 }
 

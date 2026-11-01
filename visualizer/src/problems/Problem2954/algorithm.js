@@ -35,7 +35,7 @@ export function buildTrace({ n, sick }) {
   for (let i = 0; i + 1 < sick.length; i++) gaps.push({ length: sick[i + 1] - sick[i] - 1, between: true })
   gaps.push({ length: n - 1 - sick[sick.length - 1], between: false })
   let answer = factmod(healthy)
-  const frames = [{ phase: 'start', activeLine: L('set answer to the factorial'), gap: -1, total: Number(answer), message: `${healthy} healthy children can be infected in any interleaving, before the gap correction.` }]
+  const frames = [{ pythonLine: 11, phase: 'start', activeLine: L('set answer to the factorial'), gap: -1, total: Number(answer), message: `${healthy} healthy children can be infected in any interleaving, before the gap correction.` }]
   gaps.forEach((gap, index) => {
     answer = (answer * powmod(factmod(gap.length), MOD - 2n)) % MOD
     let note = `divide by ${gap.length}!`
@@ -43,10 +43,10 @@ export function buildTrace({ n, sick }) {
       answer = (answer * powmod(2n, gap.length - 1)) % MOD
       note += ` and multiply by 2^${gap.length - 1} (infected from either end)`
     }
-    frames.push({ phase: 'gap', activeLine: L('for each gap'), gap: index, total: Number(answer), message: `Gap ${index} of length ${gap.length}: ${note}.` })
+    frames.push({ pythonLine: gap.between && gap.length > 0 ? 18 : 16, phase: 'gap', activeLine: L('for each gap'), gap: index, total: Number(answer), message: `Gap ${index} of length ${gap.length}: ${note}.` })
   })
   const result = Number(answer)
-  frames.push({ phase: 'done', activeLine: L('return answer'), gap: gaps.length - 1, total: result, message: `Infection sequences: ${result}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return answer'), gap: gaps.length - 1, total: result, message: `Infection sequences: ${result}.` })
   return { input: { n, sick }, result, frames, gaps }
 }
 

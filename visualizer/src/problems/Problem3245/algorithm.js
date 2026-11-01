@@ -37,18 +37,18 @@ function countGroups(colors, size) {
 export function buildTrace({ colors, queries }) {
   const cols = colors.slice()
   const answers = []
-  const frames = [{ phase: 'start', query: null, colors: cols.slice(), count: null, runs: [], activeLine: L('set answers to'), message: 'Tiles are on a circle. A group is alternating when neighbouring tiles differ.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', query: null, colors: cols.slice(), count: null, runs: [], activeLine: L('set answers to'), message: 'Tiles are on a circle. A group is alternating when neighbouring tiles differ.' }]
   for (const q of queries) {
     if (q[0] === 1) {
       const { count, runs } = countGroups(cols, q[1])
       answers.push(count)
-      frames.push({ phase: 'count', query: q, colors: cols.slice(), count, runs, activeLine: L('append the count'), message: `Groups of size ${q[1]}: ${count}.` })
+      frames.push({ pythonLine: 21, phase: 'count', query: q, colors: cols.slice(), count, runs, activeLine: L('append the count'), message: `Groups of size ${q[1]}: ${count}.` })
     } else {
       cols[q[1]] = q[2]
-      frames.push({ phase: 'update', query: q, colors: cols.slice(), count: null, runs: [], activeLine: L('set colors[index] to color'), message: `Tile ${q[1]} is now colour ${q[2]}.` })
+      frames.push({ pythonLine: 23, phase: 'update', query: q, colors: cols.slice(), count: null, runs: [], activeLine: L('set colors[index] to color'), message: `Tile ${q[1]} is now colour ${q[2]}.` })
     }
   }
-  frames.push({ phase: 'done', query: null, colors: cols.slice(), count: null, runs: [], activeLine: L('return answers'), message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 24, phase: 'done', query: null, colors: cols.slice(), count: null, runs: [], activeLine: L('return answers'), message: `Answers: [${answers.join(', ')}].` })
   return { input: { colors, queries }, result: answers, frames }
 }
 

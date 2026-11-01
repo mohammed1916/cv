@@ -10,18 +10,18 @@ export function buildTrace({ x }) {
   const digits = String(x).split('').map(Number)
   let total = 0
   let rest = x
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), digit: -1, total: 0, message: `Add the digits of ${x}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), digit: -1, total: 0, message: `Add the digits of ${x}.` }]
   let position = digits.length - 1
   while (rest > 0) {
     const digit = rest % 10
     total += digit
     rest = Math.floor(rest / 10)
-    frames.push({ phase: 'digit', activeLine: L('add the last digit'), digit: position, total, message: `Add digit ${digit}. The digit sum is now ${total}.` })
+    frames.push({ pythonLine: 5, phase: 'digit', activeLine: L('add the last digit'), digit: position, total, message: `Add digit ${digit}. The digit sum is now ${total}.` })
     position -= 1
   }
   const harshad = x % total === 0
   const result = harshad ? total : -1
-  frames.push({ phase: 'done', activeLine: L(harshad ? 'then return total' : 'otherwise return -1'), digit: -1, total, message: harshad ? `${x} is divisible by ${total}, so the answer is ${total}.` : `${x} is not divisible by ${total}, so the answer is -1.` })
+  frames.push({ pythonLine: harshad ? 8 : 9, phase: 'done', activeLine: L(harshad ? 'then return total' : 'otherwise return -1'), digit: -1, total, message: harshad ? `${x} is divisible by ${total}, so the answer is ${total}.` : `${x} is not divisible by ${total}, so the answer is -1.` })
   return { input: { x }, result, digits, frames }
 }
 

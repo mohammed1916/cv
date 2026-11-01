@@ -18,20 +18,20 @@ export function buildTrace({ source, target, original, changed, cost }) {
   original.forEach((o, i) => { addName(o); addName(changed[i]) })
   const n = names.length
   const dist = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 0 : Infinity)))
-  const frames = [{ phase: 'start', activeLine: L('collect every distinct'), names, matrix: dist.map(r => [...r]), dp: [], message: `Collect ${n} distinct strings from the rules as graph nodes.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('collect every distinct'), names, matrix: dist.map(r => [...r]), dp: [], message: `Collect ${n} distinct strings from the rules as graph nodes.` }]
   original.forEach((o, i) => {
     const a = id.get(o)
     const b = id.get(changed[i])
     dist[a][b] = Math.min(dist[a][b], cost[i])
   })
-  frames.push({ phase: 'set', activeLine: L('set dist'), names, matrix: dist.map(r => [...r]), dp: [], message: 'Each rule gives the cheapest direct cost between its two strings.' })
+  frames.push({ pythonLine: 11, phase: 'set', activeLine: L('set dist'), names, matrix: dist.map(r => [...r]), dp: [], message: 'Each rule gives the cheapest direct cost between its two strings.' })
   for (let k = 0; k < n; k++) {
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
         if (dist[i][k] + dist[k][j] < dist[i][j]) dist[i][j] = dist[i][k] + dist[k][j]
       }
     }
-    frames.push({ phase: 'floyd', activeLine: L('run Floyd'), names, matrix: dist.map(r => [...r]), dp: [], message: `Allow ${names[k]} as a stepping stone between rule strings.` })
+    frames.push({ pythonLine: 16, phase: 'floyd', activeLine: L('run Floyd'), names, matrix: dist.map(r => [...r]), dp: [], message: `Allow ${names[k]} as a stepping stone between rule strings.` })
   }
   // cost of turning one piece of source into the matching piece of target
   const pieceCost = (a, b) => {
@@ -42,16 +42,16 @@ export function buildTrace({ source, target, original, changed, cost }) {
   const N = source.length
   const dp = new Array(N + 1).fill(Infinity)
   dp[0] = 0
-  frames.push({ phase: 'dp', activeLine: L('set dp'), names, matrix: dist.map(r => [...r]), dp: [...dp], message: 'dp[0] is 0. Every other prefix starts unreachable.' })
+  frames.push({ pythonLine: 27, phase: 'dp', activeLine: L('set dp'), names, matrix: dist.map(r => [...r]), dp: [...dp], message: 'dp[0] is 0. Every other prefix starts unreachable.' })
   for (let i = 1; i <= N; i++) {
     for (let j = 0; j < i; j++) {
       const c = pieceCost(source.slice(j, i), target.slice(j, i))
       if (dp[j] + c < dp[i]) dp[i] = dp[j] + c
     }
-    frames.push({ phase: 'dp', activeLine: L('for each start j'), names, matrix: dist.map(r => [...r]), dp: [...dp], message: `Cheapest way to convert the first ${i} characters: ${dp[i] === Infinity ? 'unreachable' : dp[i]}.` })
+    frames.push({ pythonLine: 32, phase: 'dp', activeLine: L('for each start j'), names, matrix: dist.map(r => [...r]), dp: [...dp], message: `Cheapest way to convert the first ${i} characters: ${dp[i] === Infinity ? 'unreachable' : dp[i]}.` })
   }
   const result = dp[N] === Infinity ? -1 : dp[N]
-  frames.push({ phase: 'done', activeLine: L('return -1'), names, matrix: dist.map(r => [...r]), dp: [...dp], message: result === -1 ? 'The whole string cannot be converted.' : `Minimum cost: ${result}.` })
+  frames.push({ pythonLine: 33, phase: 'done', activeLine: L('return -1'), names, matrix: dist.map(r => [...r]), dp: [...dp], message: result === -1 ? 'The whole string cannot be converted.' : `Minimum cost: ${result}.` })
   return { input: { source, target, original, changed, cost }, result, frames }
 }
 

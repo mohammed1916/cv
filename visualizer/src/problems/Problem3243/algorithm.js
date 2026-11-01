@@ -20,25 +20,25 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { n, queries } = input
   const adjacency = Array.from({ length: n }, (_, i) => (i + 1 < n ? [i + 1] : []))
-  const frames = [{ phase: 'start', activeLine: L('connect each city'), query: -1, road: null, dist: null, active: -1, answers: [], message: `Start with the chain 0 to ${n - 1}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('connect each city'), query: -1, road: null, dist: null, active: -1, answers: [], message: `Start with the chain 0 to ${n - 1}.` }]
   const answers = []
   queries.forEach(([u, v], query) => {
     adjacency[u].push(v)
-    frames.push({ phase: 'add', activeLine: L('add a one-way road'), query, road: [u, v], dist: null, active: -1, answers: [...answers], message: `Add the one-way road ${u} to ${v}.` })
+    frames.push({ pythonLine: 7, phase: 'add', activeLine: L('add a one-way road'), query, road: [u, v], dist: null, active: -1, answers: [...answers], message: `Add the one-way road ${u} to ${v}.` })
     const dist = new Array(n).fill(-1)
     dist[0] = 0
     const queue = [0]
     for (let head = 0; head < queue.length; head++) {
       const city = queue[head]
-      frames.push({ phase: 'search', activeLine: L('take the next city'), query, road: [u, v], dist: [...dist], active: city, answers: [...answers], message: `Visit city ${city} at distance ${dist[city]}.` })
+      frames.push({ pythonLine: 12, phase: 'search', activeLine: L('take the next city'), query, road: [u, v], dist: [...dist], active: city, answers: [...answers], message: `Visit city ${city} at distance ${dist[city]}.` })
       for (const next of adjacency[city]) {
         if (dist[next] === -1) { dist[next] = dist[city] + 1; queue.push(next) }
       }
     }
     answers.push(dist[n - 1])
-    frames.push({ phase: 'answer', activeLine: L('append the distance'), query, road: [u, v], dist: [...dist], active: n - 1, answers: [...answers], message: `The shortest distance to city ${n - 1} is ${dist[n - 1]}.` })
+    frames.push({ pythonLine: 17, phase: 'answer', activeLine: L('append the distance'), query, road: [u, v], dist: [...dist], active: n - 1, answers: [...answers], message: `The shortest distance to city ${n - 1} is ${dist[n - 1]}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), query: -1, road: null, dist: null, active: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return answers'), query: -1, road: null, dist: null, active: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input, result: answers, frames }
 }
 

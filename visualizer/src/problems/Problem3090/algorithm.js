@@ -14,20 +14,20 @@ export function buildTrace({ s }) {
   let left = 0
   let best = 0
   const tally = () => Object.fromEntries([...counts].sort((a, b) => (a[0] < b[0] ? -1 : 1)))
-  frames.push({ phase: 'start', activeLine: L('set counts to an empty tally'), left, right: -1, counts: {}, best, message: 'Start with an empty tally. No letter may appear more than twice in the window.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set counts to an empty tally'), left, right: -1, counts: {}, best, message: 'Start with an empty tally. No letter may appear more than twice in the window.' })
   for (let right = 0; right < s.length; right++) {
     const ch = s[right]
     counts.set(ch, (counts.get(ch) || 0) + 1)
-    frames.push({ phase: 'extend', activeLine: L('add one to the tally'), left, right, counts: tally(), best, message: `Add ${ch} at index ${right}. It now appears ${counts.get(ch)} time${counts.get(ch) === 1 ? '' : 's'}.` })
+    frames.push({ pythonLine: 6, phase: 'extend', activeLine: L('add one to the tally'), left, right, counts: tally(), best, message: `Add ${ch} at index ${right}. It now appears ${counts.get(ch)} time${counts.get(ch) === 1 ? '' : 's'}.` })
     while (counts.get(ch) > LIMIT) {
       counts.set(s[left], counts.get(s[left]) - 1)
       left++
-      frames.push({ phase: 'shrink', activeLine: L('remove one from the tally'), left, right, counts: tally(), best, message: `${ch} is now a third occurrence. Drop the left letter and move the left edge to ${left}.` })
+      frames.push({ pythonLine: 9, phase: 'shrink', activeLine: L('remove one from the tally'), left, right, counts: tally(), best, message: `${ch} is now a third occurrence. Drop the left letter and move the left edge to ${left}.` })
     }
     best = Math.max(best, right - left + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), left, right, counts: tally(), best, message: `Substring ${left} to ${right} is valid with length ${right - left + 1}. Best is ${best}.` })
+    frames.push({ pythonLine: 10, phase: 'record', activeLine: L('set best to the larger'), left, right, counts: tally(), best, message: `Substring ${left} to ${right} is valid with length ${right - left + 1}. Best is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), left, right: -1, counts: tally(), best, message: `Longest valid substring: ${best}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return best'), left, right: -1, counts: tally(), best, message: `Longest valid substring: ${best}.` })
   return { input: { s }, result: best, frames }
 }
 

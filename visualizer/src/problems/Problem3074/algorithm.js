@@ -13,15 +13,15 @@ export function parseInput(text) {
 export function buildTrace({ apple, capacity }) {
   const need = apple.reduce((sum, v) => sum + v, 0)
   const ranked = [...capacity].sort((a, b) => b - a)
-  const frames = [{ phase: 'start', activeLine: L('set need to the total'), count: 0, held: 0, need, used: [], message: `The apples total ${need}. Boxes are taken largest first.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set need to the total'), count: 0, held: 0, need, used: [], message: `The apples total ${need}. Boxes are taken largest first.` }]
   let held = 0
   let count = 0
   while (held < need) {
     held += ranked[count]
     count++
-    frames.push({ phase: 'take', activeLine: L('add the next box'), count, held, need, used: ranked.slice(0, count), message: `Take a box of capacity ${ranked[count - 1]}. Held ${held} of ${need}.` })
+    frames.push({ pythonLine: 7, phase: 'take', activeLine: L('add the next box'), count, held, need, used: ranked.slice(0, count), message: `Take a box of capacity ${ranked[count - 1]}. Held ${held} of ${need}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), count, held, need, used: ranked.slice(0, count), message: `Minimum boxes: ${count}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return count'), count, held, need, used: ranked.slice(0, count), message: `Minimum boxes: ${count}.` })
   return { input: { apple, capacity }, result: count, frames }
 }
 

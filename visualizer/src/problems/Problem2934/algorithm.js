@@ -11,7 +11,7 @@ export function buildTrace(input) {
   const { nums1, nums2 } = input
   const n = nums1.length
   let answer = null
-  const frames = [{ phase: 'start', activeLine: L('set answer to nothing'), index: -1, choice: null, cost: null, answer, message: 'Try both choices for the last index: swap it or keep it.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set answer to nothing'), index: -1, choice: null, cost: null, answer, message: 'Try both choices for the last index: swap it or keep it.' }]
   for (let flag = 0; flag <= 1; flag++) {
     const last1 = flag ? nums2[n - 1] : nums1[n - 1]
     const last2 = flag ? nums1[n - 1] : nums2[n - 1]
@@ -25,10 +25,10 @@ export function buildTrace(input) {
       else { ok = false; break }
     }
     if (ok && (answer === null || cost < answer)) answer = cost
-    frames.push({ phase: 'choice', activeLine: L('for each choice of swapping'), index: -1, choice: flag ? 'swap last' : 'keep last', cost: ok ? cost : null, answer, message: ok ? `Swapping the last pair ${flag ? 'is' : 'is not'} used: total cost ${cost}.` : `Swapping the last pair ${flag ? 'is' : 'is not'} used, but some index has no valid choice.` })
+    frames.push({ pythonLine: 19, phase: 'choice', activeLine: L('for each choice of swapping'), index: -1, choice: flag ? 'swap last' : 'keep last', cost: ok ? cost : null, answer, message: ok ? `Swapping the last pair ${flag ? 'is' : 'is not'} used: total cost ${cost}.` : `Swapping the last pair ${flag ? 'is' : 'is not'} used, but some index has no valid choice.` })
   }
   const result = answer === null ? -1 : answer
-  frames.push({ phase: 'done', activeLine: L('return -1 if answer'), index: -1, choice: null, cost: null, answer: result, message: `Minimum operations: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return -1 if answer'), index: -1, choice: null, cost: null, answer: result, message: `Minimum operations: ${result}.` })
   return { input, result, frames }
 }
 

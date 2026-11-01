@@ -16,7 +16,7 @@ export function buildTrace(s) {
   const n = s.length
   const best = [0]
   const from = [-1]
-  const frames = [{ phase: 'start', activeLine: L('best[0] = 0'), end: 0, piece: null, best: 0, message: 'The empty prefix needs no pieces.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('best[0] = 0'), end: 0, piece: null, best: 0, message: 'The empty prefix needs no pieces.' }]
   for (let i = 1; i <= n; i++) {
     best[i] = Infinity
     from[i] = -1
@@ -28,9 +28,9 @@ export function buildTrace(s) {
       }
     }
     const piece = from[i] >= 0 ? s.slice(from[i], i) : ''
-    frames.push({ phase: 'end', activeLine: L('best[i] = smaller'), end: i, piece: from[i] >= 0 ? [from[i], i] : null, best: best[i], message: `Prefix of length ${i} needs ${best[i]} piece${best[i] === 1 ? '' : 's'}; the last piece is "${piece}".` })
+    frames.push({ pythonLine: 10, phase: 'end', activeLine: L('best[i] = smaller'), end: i, piece: from[i] >= 0 ? [from[i], i] : null, best: best[i], message: `Prefix of length ${i} needs ${best[i]} piece${best[i] === 1 ? '' : 's'}; the last piece is "${piece}".` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best[n]'), end: n, piece: null, best: best[n], message: `Minimum number of balanced pieces: ${best[n]}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return best[n]'), end: n, piece: null, best: best[n], message: `Minimum number of balanced pieces: ${best[n]}.` })
   return { input: s, result: best[n], frames }
 }
 

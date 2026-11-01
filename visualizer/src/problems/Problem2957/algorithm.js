@@ -11,20 +11,20 @@ export function buildTrace(input) {
   let count = 0
   let last = null
   const changed = []
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), index: -1, changed: [], count, message: 'Two letters are almost equal when they are equal or neighbours in the alphabet.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count to 0'), index: -1, changed: [], count, message: 'Two letters are almost equal when they are equal or neighbours in the alphabet.' }]
   for (let i = 0; i < word.length; i++) {
     const code2 = word.charCodeAt(i) - 97
     if (last !== null && Math.abs(code2 - last) <= 1) {
       count += 1
       changed.push(i)
       last = null
-      frames.push({ phase: 'change', activeLine: L('add 1 to count'), index: i, changed: [...changed], count, message: `${word[i]} is almost equal to the letter before it, so it changes. Changes: ${count}.` })
+      frames.push({ pythonLine: 6, phase: 'change', activeLine: L('add 1 to count'), index: i, changed: [...changed], count, message: `${word[i]} is almost equal to the letter before it, so it changes. Changes: ${count}.` })
     } else {
       last = code2
-      frames.push({ phase: 'keep', activeLine: L('set last to ch'), index: i, changed: [...changed], count, message: `${word[i]} stays as it is.` })
+      frames.push({ pythonLine: 9, phase: 'keep', activeLine: L('set last to ch'), index: i, changed: [...changed], count, message: `${word[i]} stays as it is.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), index: -1, changed: [...changed], count, message: `Minimum changes: ${count}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return count'), index: -1, changed: [...changed], count, message: `Minimum changes: ${count}.` })
   return { input, word, result: count, frames }
 }
 

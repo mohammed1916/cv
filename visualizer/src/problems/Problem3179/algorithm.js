@@ -12,14 +12,14 @@ const MOD = 1000000007
 export function buildTrace(input) {
   const { n, k } = input
   const a = Array(n).fill(1)
-  const frames = [{ phase: 'start', activeLine: L('make a list'), a: [...a], second: 0, index: -1, message: `Every position starts at 1. Apply ${k} seconds.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('make a list'), a: [...a], second: 0, index: -1, message: `Every position starts at 1. Apply ${k} seconds.` }]
   for (let second = 1; second <= k; second++) {
     for (let i = 1; i < n; i++) {
       a[i] = (a[i] + a[i - 1]) % MOD
-      frames.push({ phase: 'update', activeLine: L('add the value before'), a: [...a], second, index: i, message: `Second ${second}: index ${i} becomes ${a[i]}, the running total so far.` })
+      frames.push({ pythonLine: 6, phase: 'update', activeLine: L('add the value before'), a: [...a], second, index: i, message: `Second ${second}: index ${i} becomes ${a[i]}, the running total so far.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the last value'), a: [...a], second: k, index: n - 1, message: `After ${k} seconds the last value is ${a[n - 1]}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return the last value'), a: [...a], second: k, index: n - 1, message: `After ${k} seconds the last value is ${a[n - 1]}.` })
   return { input, result: a[n - 1], frames }
 }
 

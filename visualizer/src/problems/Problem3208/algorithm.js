@@ -12,20 +12,20 @@ export function buildTrace({ colors, k }) {
   const frames = []
   let count = 0
   let run = 1
-  frames.push({ phase: 'start', activeLine: L('set count to 0'), at: 0, run, count, members: [0], message: 'Start at tile 0. A run of one tile alternates trivially.' })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set count to 0'), at: 0, run, count, members: [0], message: 'Start at tile 0. A run of one tile alternates trivially.' })
   for (let i = 1; i <= n + k - 2; i++) {
     const tile = i % n
     const before = (i - 1) % n
     if (colors[tile] !== colors[before]) run++
     else run = 1
-    frames.push({ phase: 'scan', activeLine: L('if the tile at i differs'), at: tile, run, count, members: [], message: colors[tile] !== colors[before] ? `Tile ${tile} differs from its neighbour, so the alternating run grows to ${run}.` : `Tile ${tile} matches its neighbour, so the run restarts at 1.` })
+    frames.push({ pythonLine: colors[tile] !== colors[before] ? 7 : 9, phase: 'scan', activeLine: L('if the tile at i differs'), at: tile, run, count, members: [], message: colors[tile] !== colors[before] ? `Tile ${tile} differs from its neighbour, so the alternating run grows to ${run}.` : `Tile ${tile} matches its neighbour, so the run restarts at 1.` })
     if (i >= k - 1 && run >= k) {
       count++
       const members = Array.from({ length: k }, (_, j) => (i - k + 1 + j) % n)
-      frames.push({ phase: 'count', activeLine: L('add 1 to count'), at: tile, run, count, members, message: `The last ${k} tiles alternate, so this is one more group. Total ${count}.` })
+      frames.push({ pythonLine: 11, phase: 'count', activeLine: L('add 1 to count'), at: tile, run, count, members, message: `The last ${k} tiles alternate, so this is one more group. Total ${count}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), at: -1, run, count, members: [], message: `Alternating groups of size ${k}: ${count}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return count'), at: -1, run, count, members: [], message: `Alternating groups of size ${k}: ${count}.` })
   return { input: { colors, k }, result: count, frames }
 }
 

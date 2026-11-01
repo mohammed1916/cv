@@ -31,14 +31,14 @@ function dijkstra(n, graph, source, frames, label, base) {
     settled[u] = true
     for (const [v, w] of graph[u]) if (dist[u] + w < dist[v]) dist[v] = dist[u] + w
   }
-  frames.push({ phase: 'distances', activeLine: L(label), decisions: base, current: -1, dist: [...dist], message: `Distances from node ${source}: [${dist.map(d => (d === Infinity ? '∞' : d)).join(', ')}].` })
+  frames.push({ pythonLine: 22, phase: 'distances', activeLine: L(label), decisions: base, current: -1, dist: [...dist], message: `Distances from node ${source}: [${dist.map(d => (d === Infinity ? '∞' : d)).join(', ')}].` })
   return dist
 }
 
 export function buildTrace({ n, edges }) {
   const graph = Array.from({ length: n }, () => [])
   for (const [a, b, w] of edges) { graph[a].push([b, w]); graph[b].push([a, w]) }
-  const frames = [{ phase: 'start', activeLine: L('from_start = Dijkstra'), decisions: edges.map(() => null), current: -1, dist: null, message: `Run Dijkstra from node 0 and again from node ${n - 1}. An edge is on a shortest path if the two distances around it add up to the shortest total.` }]
+  const frames = [{ pythonLine: 24, phase: 'start', activeLine: L('from_start = Dijkstra'), decisions: edges.map(() => null), current: -1, dist: null, message: `Run Dijkstra from node 0 and again from node ${n - 1}. An edge is on a shortest path if the two distances around it add up to the shortest total.` }]
   const fromStart = dijkstra(n, graph, 0, frames, 'from_start = Dijkstra', edges.map(() => null))
   const fromEnd = dijkstra(n, graph, n - 1, frames, 'from_end = Dijkstra', edges.map(() => null))
   const total = fromStart[n - 1]
@@ -46,9 +46,9 @@ export function buildTrace({ n, edges }) {
   edges.forEach(([a, b, w], i) => {
     const on = total < Infinity && (fromStart[a] + w + fromEnd[b] === total || fromStart[b] + w + fromEnd[a] === total)
     decisions.push(on)
-    frames.push({ phase: 'check', activeLine: L('on = total is reachable'), decisions: [...decisions, ...edges.slice(i + 1).map(() => null)], current: i, dist: null, message: `Edge ${i} (${a}-${b}, weight ${w}): ${total === Infinity ? 'node n-1 is unreachable' : `${fromStart[a]} + ${w} + ${fromEnd[b]} or ${fromStart[b]} + ${w} + ${fromEnd[a]} ${on ? `equals the shortest total ${total}, so it is on a shortest path` : `does not equal ${total}, so it is not`}`}.` })
+    frames.push({ pythonLine: 30, phase: 'check', activeLine: L('on = total is reachable'), decisions: [...decisions, ...edges.slice(i + 1).map(() => null)], current: i, dist: null, message: `Edge ${i} (${a}-${b}, weight ${w}): ${total === Infinity ? 'node n-1 is unreachable' : `${fromStart[a]} + ${w} + ${fromEnd[b]} or ${fromStart[b]} + ${w} + ${fromEnd[a]} ${on ? `equals the shortest total ${total}, so it is on a shortest path` : `does not equal ${total}, so it is not`}`}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the recorded flags'), decisions: [...decisions], current: -1, dist: null, message: `Edges on some shortest path: ${decisions.filter(Boolean).length} of ${edges.length}.` })
+  frames.push({ pythonLine: total < Infinity ? 29 : 28, phase: 'done', activeLine: L('return the recorded flags'), decisions: [...decisions], current: -1, dist: null, message: `Edges on some shortest path: ${decisions.filter(Boolean).length} of ${edges.length}.` })
   return { input: { n, edges }, result: decisions, frames }
 }
 

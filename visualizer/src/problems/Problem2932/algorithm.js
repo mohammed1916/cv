@@ -20,20 +20,20 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums }) {
   const values = [...nums].sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort the numbers'), values, right: -1, left: 0, best: 0, message: `Sorted: ${values.join(', ')}. In a sorted list, a strong pair is a value and a later value at most twice it.` }]
+  const frames = [{ pythonLine: 2, phase: 'sort', activeLine: L('sort the numbers'), values, right: -1, left: 0, best: 0, message: `Sorted: ${values.join(', ')}. In a sorted list, a strong pair is a value and a later value at most twice it.` }]
   let best = 0
   let left = 0
-  frames.push({ phase: 'window', activeLine: L('set best to zero'), values, right: -1, left, best, message: 'Start with best at 0 and the window at the first value.' })
+  frames.push({ pythonLine: 3, phase: 'window', activeLine: L('set best to zero'), values, right: -1, left, best, message: 'Start with best at 0 and the window at the first value.' })
   for (let right = 0; right < values.length; right++) {
     while (values[right] > 2 * values[left]) left++
-    frames.push({ phase: 'window', activeLine: L('while twice the value'), values, right, left, best, message: `Values ${values[left]} to ${values[right]} form strong pairs with ${values[right]}.` })
+    frames.push({ pythonLine: 6, phase: 'window', activeLine: L('while twice the value'), values, right, left, best, message: `Values ${values[left]} to ${values[right]} form strong pairs with ${values[right]}.` })
     for (let index = left; index <= right; index++) {
       const xor = values[index] ^ values[right]
       best = Math.max(best, xor)
-      frames.push({ phase: 'pair', activeLine: L('set best to the larger'), values, right, left, pairing: index, best, message: `${values[index]} XOR ${values[right]} = ${xor}. Best is ${best}.` })
+      frames.push({ pythonLine: 9, phase: 'pair', activeLine: L('set best to the larger'), values, right, left, pairing: index, best, message: `${values[index]} XOR ${values[right]} = ${xor}. Best is ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), values, right: values.length - 1, left, best, message: `Maximum strong pair XOR: ${best}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return best'), values, right: values.length - 1, left, best, message: `Maximum strong pair XOR: ${best}.` })
   return { input: { nums }, values, result: best, frames }
 }
 

@@ -18,7 +18,7 @@ export function buildTrace(input) {
   const total = nums.reduce((a, b) => a + b, 0)
   let ways = Array(total + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set zeros to'), value: null, copies: null, ways: ways.slice(), answer: null, message: `Zeros add a free factor of ${zeros + 1}. Other values pick how many copies to use.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set zeros to'), value: null, copies: null, ways: ways.slice(), answer: null, message: `Zeros add a free factor of ${zeros + 1}. Other values pick how many copies to use.` }]
   for (const [v, c] of counts) {
     const next = Array(total + 1).fill(0)
     for (let s = 0; s <= total; s++) {
@@ -28,12 +28,12 @@ export function buildTrace(input) {
       }
     }
     ways = next
-    frames.push({ phase: 'value', activeLine: L('set ways to next'), value: v, copies: c, ways: ways.slice(), answer: null, message: `Value ${v} can appear 0 to ${c} times; sums are updated.` })
+    frames.push({ pythonLine: 17, phase: 'value', activeLine: L('set ways to next'), value: v, copies: c, ways: ways.slice(), answer: null, message: `Value ${v} can appear 0 to ${c} times; sums are updated.` })
   }
   let answer = 0
   for (let s = l; s <= Math.min(r, total); s++) answer = (answer + ways[s]) % MOD
   answer = (answer * (zeros + 1)) % MOD
-  frames.push({ phase: 'done', activeLine: L('return answer'), value: null, copies: null, ways: ways.slice(), answer, message: `Sub-multisets with sum in [${l}, ${r}]: ${answer}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return answer'), value: null, copies: null, ways: ways.slice(), answer, message: `Sub-multisets with sum in [${l}, ${r}]: ${answer}.` })
   return { input, result: answer, frames }
 }
 

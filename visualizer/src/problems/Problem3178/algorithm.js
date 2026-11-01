@@ -11,15 +11,15 @@ export function buildTrace(input) {
   const { n, k } = input
   let child = 0
   let direction = 1
-  const frames = [{ phase: 'start', activeLine: L('set child to 0'), child, direction, second: 0, message: `Child 0 starts with the ball, passing toward the right.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set child to 0'), child, direction, second: 0, message: `Child 0 starts with the ball, passing toward the right.` }]
   for (let second = 1; second <= k; second++) {
     child += direction
     const turned = child === 0 || child === n - 1
     if (turned) direction = -direction
-    frames.push({ phase: turned ? 'turn' : 'pass', activeLine: L(turned ? 'reverse the direction' : 'move the ball'), child, direction, second,
+    frames.push({ pythonLine: turned ? 7 : 6, phase: turned ? 'turn' : 'pass', activeLine: L(turned ? 'reverse the direction' : 'move the ball'), child, direction, second,
       message: `Second ${second}: the ball is with child ${child}.${turned ? ' It reached an end, so the direction reverses.' : ''}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return child'), child, direction, second: k, message: `After ${k} seconds, child ${child} holds the ball.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return child'), child, direction, second: k, message: `After ${k} seconds, child ${child} holds the ball.` })
   return { input, result: child, frames }
 }
 

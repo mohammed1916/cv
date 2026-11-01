@@ -9,14 +9,14 @@ export function buildTrace(nums) {
   const order = nums.map((value, index) => ({ value, index })).slice(1).sort((a, b) => a.value - b.value || a.index - b.index)
   const picks = order.slice(0, 2)
   let total = nums[0]
-  const frames = [{ phase: 'first', activeLine: L('set total to the first value'), picked: [0], total, message: `The first subarray always pays ${nums[0]}.` }]
+  const frames = [{ pythonLine: 2, phase: 'first', activeLine: L('set total to the first value'), picked: [0], total, message: `The first subarray always pays ${nums[0]}.` }]
   const picked = [0]
   for (const pick of picks) {
     total += pick.value
     picked.push(pick.index)
-    frames.push({ phase: 'pick', activeLine: L('add the two smallest'), picked: [...picked], total, message: `Start a subarray at position ${pick.index} (value ${pick.value}). Total is ${total}.` })
+    frames.push({ pythonLine: 4, phase: 'pick', activeLine: L('add the two smallest'), picked: [...picked], total, message: `Start a subarray at position ${pick.index} (value ${pick.value}). Total is ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), picked: [...picked], total, message: `Minimum total cost: ${total}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return total'), picked: [...picked], total, message: `Minimum total cost: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

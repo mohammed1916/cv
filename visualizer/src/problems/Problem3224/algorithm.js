@@ -20,18 +20,18 @@ export function buildTrace(input) {
   const { nums, k } = input
   const n = nums.length
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), target: -1, pair: -1, total: 0, best, message: `Pair each position with its mirror. Try every common difference from 0 to ${k}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to nothing'), target: -1, pair: -1, total: 0, best, message: `Pair each position with its mirror. Try every common difference from 0 to ${k}.` }]
   for (let target = 0; target <= k; target++) {
     let total = 0
     for (let i = 0; i < n / 2; i++) {
       const cost = pairCost(nums[i], nums[n - 1 - i], target, k)
       total += cost
-      frames.push({ phase: 'pair', activeLine: L('add the cost of this pair'), target, pair: i, total, best, message: `Pair (${nums[i]}, ${nums[n - 1 - i]}) with difference ${target} costs ${cost}.` })
+      frames.push({ pythonLine: cost === 0 ? 10 : cost === 1 ? 12 : 14, phase: 'pair', activeLine: L('add the cost of this pair'), target, pair: i, total, best, message: `Pair (${nums[i]}, ${nums[n - 1 - i]}) with difference ${target} costs ${cost}.` })
     }
     if (best === null || total < best) best = total
-    frames.push({ phase: 'target', activeLine: L('if best is nothing'), target, pair: -1, total, best, message: `Difference ${target} needs ${total} changes. Best so far: ${best}.` })
+    frames.push({ pythonLine: 16, phase: 'target', activeLine: L('if best is nothing'), target, pair: -1, total, best, message: `Difference ${target} needs ${total} changes. Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), target: -1, pair: -1, total: best, best, message: `Minimum number of changes: ${best}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return best'), target: -1, pair: -1, total: best, best, message: `Minimum number of changes: ${best}.` })
   return { input, result: best, frames }
 }
 

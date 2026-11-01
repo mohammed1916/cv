@@ -8,19 +8,19 @@ export function parseInput(text) {
 export function buildTrace(s) {
   const chars = [...s]
   let swapAt = -1
-  const frames = [{ phase: 'start', activeLine: L('for each adjacent pair'), index: -1, text: s, message: `Scan adjacent pairs in ${s} from the left.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('for each adjacent pair'), index: -1, text: s, message: `Scan adjacent pairs in ${s} from the left.` }]
   for (let i = 0; i < chars.length - 1; i++) {
     const sameParity = Number(chars[i]) % 2 === Number(chars[i + 1]) % 2
     if (sameParity && chars[i] > chars[i + 1]) {
       swapAt = i
-      frames.push({ phase: 'swap', activeLine: L('swap them'), index: i, text: s, message: `Positions ${i} and ${i + 1} have the same parity and ${chars[i]} is larger than ${chars[i + 1]}. Swap them.` })
+      frames.push({ pythonLine: 6, phase: 'swap', activeLine: L('swap them'), index: i, text: s, message: `Positions ${i} and ${i + 1} have the same parity and ${chars[i]} is larger than ${chars[i + 1]}. Swap them.` })
       break
     }
-    frames.push({ phase: 'scan', activeLine: L('if the digits have the same parity'), index: i, text: s, message: `Positions ${i} and ${i + 1} are ${chars[i]} and ${chars[i + 1]}. Keep scanning.` })
+    frames.push({ pythonLine: 5, phase: 'scan', activeLine: L('if the digits have the same parity'), index: i, text: s, message: `Positions ${i} and ${i + 1} are ${chars[i]} and ${chars[i + 1]}. Keep scanning.` })
   }
   if (swapAt >= 0) [chars[swapAt], chars[swapAt + 1]] = [chars[swapAt + 1], chars[swapAt]]
   const result = chars.join('')
-  frames.push({ phase: 'done', activeLine: L('return the resulting string'), index: swapAt, text: result, message: swapAt >= 0 ? `Result: ${result}.` : `No swap helps, so the result is ${result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the resulting string'), index: swapAt, text: result, message: swapAt >= 0 ? `Result: ${result}.` : `No swap helps, so the result is ${result}.` })
   return { input: s, result, frames }
 }
 

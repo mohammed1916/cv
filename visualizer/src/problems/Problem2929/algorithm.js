@@ -18,16 +18,16 @@ const triples = m => (m >= 0 ? choose(m + 2, 2) : 0)
 export function buildTrace({ n, limit }) {
   const terms = []
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), i: -1, total: 0, message: `Count splits of ${n} with each share at most ${limit}, by inclusion-exclusion.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set total to zero'), i: -1, total: 0, message: `Count splits of ${n} with each share at most ${limit}, by inclusion-exclusion.` }]
   for (let i = 0; i <= 3; i++) {
     const m = n - i * (limit + 1)
     const sign = i % 2 ? -1 : 1
     const term = m >= 0 ? sign * choose(3, i) * triples(m) : 0
     total += term
     terms.push({ i, m, term })
-    frames.push({ phase: 'term', activeLine: L('for each number i'), i, total, message: `${i} child(ren) forced over the limit: term ${term} (remaining ${m}).` })
+    frames.push({ pythonLine: 9, phase: 'term', activeLine: L('for each number i'), i, total, message: `${i} child(ren) forced over the limit: term ${term} (remaining ${m}).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), i: 3, total, message: `Total ways: ${total}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return total'), i: 3, total, message: `Total ways: ${total}.` })
   return { input: { n, limit }, result: total, frames, terms }
 }
 

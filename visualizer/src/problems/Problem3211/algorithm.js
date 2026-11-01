@@ -6,24 +6,24 @@ export function parseInput(text) {
 
 export function buildTrace(n) {
   const answer = []
-  const frames = [{ phase: 'start', activeLine: L('start with the empty prefix'), prefix: '', answer: [...answer], message: 'Start with the empty string and try to extend it one bit at a time.' }]
+  const frames = [{ pythonLine: 13, phase: 'start', activeLine: L('start with the empty prefix'), prefix: '', answer: [...answer], message: 'Start with the empty string and try to extend it one bit at a time.' }]
   const extend = prefix => {
     if (prefix.length === n) {
       answer.push(prefix)
-      frames.push({ phase: 'emit', activeLine: L('add it to the answer'), prefix, answer: [...answer], message: `"${prefix}" has length ${n} and no two adjacent zeros, so it joins the answer.` })
+      frames.push({ pythonLine: 6, phase: 'emit', activeLine: L('add it to the answer'), prefix, answer: [...answer], message: `"${prefix}" has length ${n} and no two adjacent zeros, so it joins the answer.` })
       return
     }
     for (const bit of ['0', '1']) {
       if (bit === '0' && prefix.endsWith('0')) {
-        frames.push({ phase: 'skip', activeLine: L('skip a 0'), prefix: prefix + bit, answer: [...answer], message: `Appending 0 to "${prefix}" would make two adjacent zeros, so skip it.` })
+        frames.push({ pythonLine: 10, phase: 'skip', activeLine: L('skip a 0'), prefix: prefix + bit, answer: [...answer], message: `Appending 0 to "${prefix}" would make two adjacent zeros, so skip it.` })
         continue
       }
-      frames.push({ phase: 'extend', activeLine: L('try appending each bit'), prefix: prefix + bit, answer: [...answer], message: `Append ${bit} to "${prefix}".` })
+      frames.push({ pythonLine: 11, phase: 'extend', activeLine: L('try appending each bit'), prefix: prefix + bit, answer: [...answer], message: `Append ${bit} to "${prefix}".` })
       extend(prefix + bit)
     }
   }
   extend('')
-  frames.push({ phase: 'done', activeLine: L('return the answer'), prefix: '', answer: [...answer], message: `${answer.length} strings of length ${n} have no two adjacent zeros.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return the answer'), prefix: '', answer: [...answer], message: `${answer.length} strings of length ${n} have no two adjacent zeros.` })
   return { input: n, result: answer, frames }
 }
 

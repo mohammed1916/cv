@@ -12,17 +12,17 @@ export function buildTrace(grid) {
   const cols = grid[0].length
   const rowOnes = grid.map(row => row.reduce((a, b) => a + b, 0))
   const colOnes = Array.from({ length: cols }, (_, c) => grid.reduce((a, row) => a + row[c], 0))
-  const frames = [{ phase: 'start', activeLine: L('set rowCount to'), cell: null, state: { total: 0 }, message: 'Count the 1s in every row and column. A 1 that is a right-angle corner pairs with another 1 in its row and another in its column.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set rowCount to'), cell: null, state: { total: 0 }, message: 'Count the 1s in every row and column. A 1 that is a right-angle corner pairs with another 1 in its row and another in its column.' }]
   let total = 0
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (grid[r][c] !== 1) continue
       const added = (rowOnes[r] - 1) * (colOnes[c] - 1)
       total += added
-      frames.push({ phase: 'corner', activeLine: L('add (rowCount of its row minus 1)'), cell: [r, c], state: { corner: `[${r}, ${c}]`, row: rowOnes[r], column: colOnes[c], added, total }, message: `Corner [${r}, ${c}] has ${rowOnes[r] - 1} other 1s in its row and ${colOnes[c] - 1} in its column, adding ${added}. Total ${total}.` })
+      frames.push({ pythonLine: 8, phase: 'corner', activeLine: L('add (rowCount of its row minus 1)'), cell: [r, c], state: { corner: `[${r}, ${c}]`, row: rowOnes[r], column: colOnes[c], added, total }, message: `Corner [${r}, ${c}] has ${rowOnes[r] - 1} other 1s in its row and ${colOnes[c] - 1} in its column, adding ${added}. Total ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), cell: null, state: { total }, message: `Return ${total}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return total'), cell: null, state: { total }, message: `Return ${total}.` })
   return { input: grid, result: total, matrix: grid, rowOnes, colOnes, frames }
 }
 

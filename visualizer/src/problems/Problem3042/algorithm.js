@@ -11,15 +11,15 @@ export function parseInput(text) {
 
 export function buildTrace({ words }) {
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), i: -1, j: -1, match: false, count, message: 'Start with no pairs counted.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count to 0'), i: -1, j: -1, match: false, count, message: 'Start with no pairs counted.' }]
   for (let i = 0; i < words.length; i++) {
     for (let j = i + 1; j < words.length; j++) {
       const match = words[j].startsWith(words[i]) && words[j].endsWith(words[i])
       if (match) count++
-      frames.push({ phase: 'pair', activeLine: L('if words[i] is a prefix'), i, j, match, count, message: `${words[i]} ${match ? 'is' : 'is not'} both a prefix and a suffix of ${words[j]}.` })
+      frames.push({ pythonLine: match ? 6 : 5, phase: 'pair', activeLine: L('if words[i] is a prefix'), i, j, match, count, message: `${words[i]} ${match ? 'is' : 'is not'} both a prefix and a suffix of ${words[j]}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), i: -1, j: -1, match: false, count, message: `Pairs: ${count}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return count'), i: -1, j: -1, match: false, count, message: `Pairs: ${count}.` })
   return { input: { words }, result: count, frames }
 }
 

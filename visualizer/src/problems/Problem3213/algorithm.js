@@ -16,16 +16,16 @@ export function buildTrace(input) {
   const best = new Array(n + 1).fill(INF)
   best[0] = 0
   const show = () => best.map(v => (v === INF ? '∞' : v))
-  const frames = [{ phase: 'start', activeLine: L('set the best cost of the empty'), index: 0, best: show(), result: null, message: 'Building the empty prefix costs 0. Every other prefix starts unknown.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set the best cost of the empty'), index: 0, best: show(), result: null, message: 'Building the empty prefix costs 0. Every other prefix starts unknown.' }]
   for (let i = 0; i < n; i++) {
     if (best[i] === INF) continue
     words.forEach((word, k) => {
       if (target.startsWith(word, i)) best[i + word.length] = Math.min(best[i + word.length], best[i] + costs[k])
     })
-    frames.push({ phase: 'position', activeLine: L('for each word and its cost'), index: i, best: show(), result: null, message: `Prefix of length ${i} costs ${best[i]}. Words that match here update the prefixes after them.` })
+    frames.push({ pythonLine: 10, phase: 'position', activeLine: L('for each word and its cost'), index: i, best: show(), result: null, message: `Prefix of length ${i} costs ${best[i]}. Words that match here update the prefixes after them.` })
   }
   const result = best[n] === INF ? -1 : best[n]
-  frames.push({ phase: 'done', activeLine: L('or minus one'), index: n, best: show(), result, message: result === -1 ? 'The whole target cannot be built from these words.' : `Minimum cost to build the target is ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('or minus one'), index: n, best: show(), result, message: result === -1 ? 'The whole target cannot be built from these words.' : `Minimum cost to build the target is ${result}.` })
   return { input: { target, words, costs }, result, frames }
 }
 

@@ -43,21 +43,21 @@ function diameterWithTrace(edges, label, frames, phase, activeLine) {
   }
   const first = farthest(0)
   const second = farthest(first.node)
-  frames.push({ phase, activeLine, label, value: second.dist, message: `${label}: the farthest pair is ${first.node} and ${second.node}, so the diameter is ${second.dist}.` })
+  frames.push({ pythonLine: phase === 'first' ? 28 : 29, phase, activeLine, label, value: second.dist, message: `${label}: the farthest pair is ${first.node} and ${second.node}, so the diameter is ${second.dist}.` })
   return second.dist
 }
 
 export function buildTrace({ edges1, edges2 }) {
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('find the diameter d1'), label: 'Start', value: null, message: 'Find each tree’s diameter with two searches for the farthest node.' })
+  frames.push({ pythonLine: 28, phase: 'start', activeLine: L('find the diameter d1'), label: 'Start', value: null, message: 'Find each tree’s diameter with two searches for the farthest node.' })
   const d1 = diameterWithTrace(edges1, 'Tree 1', frames, 'first', L('find the diameter d1'))
   const d2 = diameterWithTrace(edges2, 'Tree 2', frames, 'second', L('find the diameter d2'))
   const radius1 = Math.ceil(d1 / 2), radius2 = Math.ceil(d2 / 2)
-  frames.push({ phase: 'radius', activeLine: L('set radius'), label: `Radii ${radius1} and ${radius2}`, value: null, message: `Radii are ${radius1} and ${radius2}.` })
+  frames.push({ pythonLine: 30, phase: 'radius', activeLine: L('set radius'), label: `Radii ${radius1} and ${radius2}`, value: null, message: `Radii are ${radius1} and ${radius2}.` })
   const joined = radius1 + radius2 + 1
-  frames.push({ phase: 'join', activeLine: L('set joined'), label: `Joined path ${joined}`, value: joined, message: `Joining centres with one edge gives a path of ${joined}.` })
+  frames.push({ pythonLine: 30, phase: 'join', activeLine: L('set joined'), label: `Joined path ${joined}`, value: joined, message: `Joining centres with one edge gives a path of ${joined}.` })
   const result = Math.max(d1, d2, joined)
-  frames.push({ phase: 'done', activeLine: L('return the largest'), label: `Minimum diameter ${result}`, value: result, message: `Minimum diameter: ${result}.` })
+  frames.push({ pythonLine: 31, phase: 'done', activeLine: L('return the largest'), label: `Minimum diameter ${result}`, value: result, message: `Minimum diameter: ${result}.` })
   return { input: { edges1, edges2 }, result, frames }
 }
 

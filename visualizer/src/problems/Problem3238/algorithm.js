@@ -13,7 +13,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ n, pick }) {
-  const frames = [{ phase: 'start', activeLine: L('set counts to an empty map'), active: -1, roles: {}, state: { winners: 0 }, message: 'Player i wins when they hold at least i + 1 balls of one color.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set counts to an empty map'), active: -1, roles: {}, state: { winners: 0 }, message: 'Player i wins when they hold at least i + 1 balls of one color.' }]
   const counts = new Map()
   const winners = new Set()
   pick.forEach(([player, color], i) => {
@@ -22,9 +22,9 @@ export function buildTrace({ n, pick }) {
     counts.set(key, next)
     const wins = next > player
     if (wins) winners.add(player)
-    frames.push({ phase: 'pick', activeLine: L(wins ? 'add player to winners' : 'if count for (player, color) is more than player'), active: i, roles: { [i]: wins ? 'winner' : 'picked' }, state: { player, color, held: next, needed: player + 1, winners: winners.size }, message: `Player ${player} now holds ${next} of color ${color}; ${wins ? `that reaches ${player + 1}, so player ${player} wins.` : `that is below the ${player + 1} needed.`}` })
+    frames.push({ pythonLine: wins ? 8 : 7, phase: 'pick', activeLine: L(wins ? 'add player to winners' : 'if count for (player, color) is more than player'), active: i, roles: { [i]: wins ? 'winner' : 'picked' }, state: { player, color, held: next, needed: player + 1, winners: winners.size }, message: `Player ${player} now holds ${next} of color ${color}; ${wins ? `that reaches ${player + 1}, so player ${player} wins.` : `that is below the ${player + 1} needed.`}` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the size of winners'), active: -1, roles: {}, state: { winners: winners.size }, message: `${winners.size} player${winners.size === 1 ? '' : 's'} win.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the size of winners'), active: -1, roles: {}, state: { winners: winners.size }, message: `${winners.size} player${winners.size === 1 ? '' : 's'} win.` })
   return { input: { n, pick }, result: winners.size, items: pick.map(([p, c]) => `P${p}:${c}`), frames }
 }
 

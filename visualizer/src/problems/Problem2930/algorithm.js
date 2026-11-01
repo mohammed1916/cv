@@ -11,7 +11,7 @@ export function buildTrace(n) {
   const idx = (l, e, t) => (l * 3 + e) * 2 + t
   let dp = Array(12).fill(0)
   dp[idx(0, 0, 0)] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways'), step: 0, ways: dp[idx(1, 2, 1)], message: 'Nothing placed yet. Track how many of l, e, and t are used, each capped at what leet needs.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set ways'), step: 0, ways: dp[idx(1, 2, 1)], message: 'Nothing placed yet. Track how many of l, e, and t are used, each capped at what leet needs.' }]
   for (let step = 1; step <= n; step++) {
     const next = Array(12).fill(0)
     for (let l = 0; l < 2; l++) for (let e = 0; e < 3; e++) for (let t = 0; t < 2; t++) {
@@ -23,10 +23,10 @@ export function buildTrace(n) {
       next[idx(l, e, t)] += ways * 23
     }
     dp = next.map(v => v % MOD)
-    frames.push({ phase: 'position', activeLine: L('for each position'), step, ways: dp[idx(1, 2, 1)], message: `After ${step} letter${step === 1 ? '' : 's'}, ${dp[idx(1, 2, 1)]} strings already contain l, e, e, and t.` })
+    frames.push({ pythonLine: 17, phase: 'position', activeLine: L('for each position'), step, ways: dp[idx(1, 2, 1)], message: `After ${step} letter${step === 1 ? '' : 's'}, ${dp[idx(1, 2, 1)]} strings already contain l, e, e, and t.` })
   }
   const result = dp[idx(1, 2, 1)]
-  frames.push({ phase: 'done', activeLine: L('return the ways'), step: n, ways: result, message: `Strings of length ${n} that can be rearranged to contain leet: ${result}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return the ways'), step: n, ways: result, message: `Strings of length ${n} that can be rearranged to contain leet: ${result}.` })
   return { input: n, result, frames, dp }
 }
 

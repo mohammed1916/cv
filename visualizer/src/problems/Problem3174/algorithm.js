@@ -14,18 +14,18 @@ export function parseInput(text) {
 
 export function buildTrace(s) {
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set the stack'), stack: [], pos: -1, message: 'Start with an empty stack of letters.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set the stack'), stack: [], pos: -1, message: 'Start with an empty stack of letters.' }]
   ;[...s].forEach((c, pos) => {
     if (/[0-9]/.test(c)) {
       const removed = stack.pop()
-      frames.push({ phase: 'pop', activeLine: L('pop the top letter'), stack: [...stack], pos, message: `Digit ${c} deletes the closest letter to its left, ${removed}.` })
+      frames.push({ pythonLine: 5, phase: 'pop', activeLine: L('pop the top letter'), stack: [...stack], pos, message: `Digit ${c} deletes the closest letter to its left, ${removed}.` })
     } else {
       stack.push(c)
-      frames.push({ phase: 'push', activeLine: L('push c onto'), stack: [...stack], pos, message: `Letter ${c} stays, so push it.` })
+      frames.push({ pythonLine: 7, phase: 'push', activeLine: L('push c onto'), stack: [...stack], pos, message: `Letter ${c} stays, so push it.` })
     }
   })
   const result = stack.join('')
-  frames.push({ phase: 'done', activeLine: L('return the stack'), stack: [...stack], pos: s.length, message: `Remaining string: "${result}".` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the stack'), stack: [...stack], pos: s.length, message: `Remaining string: "${result}".` })
   return { input: s, result, frames }
 }
 

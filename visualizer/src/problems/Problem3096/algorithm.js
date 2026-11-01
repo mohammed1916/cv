@@ -10,20 +10,20 @@ export function buildTrace(input) {
   const n = possible.length
   const points = possible.map(p => (p === 1 ? 1 : -1))
   const total = points.reduce((sum, p) => sum + p, 0)
-  const frames = [{ phase: 'start', activeLine: L('set points[i]'), index: -1, alice: 0, bob: total, result: null, message: `Total points over all levels: ${total}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set points[i]'), index: -1, alice: 0, bob: total, result: null, message: `Total points over all levels: ${total}.` }]
   let alice = 0
   let answer = -1
   for (let k = 1; k <= n - 1; k++) {
     alice += points[k - 1]
     const bob = total - alice
     const enough = alice > bob
-    frames.push({ phase: 'scan', activeLine: L('add points[k - 1]'), index: k - 1, alice, bob, result: null, k, message: `Alice plays levels 0 to ${k - 1} for ${alice} points. Bob has ${bob}.` })
+    frames.push({ pythonLine: 6, phase: 'scan', activeLine: L('add points[k - 1]'), index: k - 1, alice, bob, result: null, k, message: `Alice plays levels 0 to ${k - 1} for ${alice} points. Bob has ${bob}.` })
     if (enough) {
-      frames.push({ phase: 'found', activeLine: L('then return k'), index: k - 1, alice, bob, result: k, k, message: `Alice gains more points with ${k} level(s).` })
+      frames.push({ pythonLine: 8, phase: 'found', activeLine: L('then return k'), index: k - 1, alice, bob, result: k, k, message: `Alice gains more points with ${k} level(s).` })
       return { input, result: k, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), index: n, alice, bob: total - alice, result: answer, message: 'No split lets Alice gain more points.' })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return -1'), index: n, alice, bob: total - alice, result: answer, message: 'No split lets Alice gain more points.' })
   return { input, result: answer, frames }
 }
 

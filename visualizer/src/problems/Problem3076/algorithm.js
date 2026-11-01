@@ -9,7 +9,7 @@ export function parseInput(text) {
 
 export function buildTrace({ arr }) {
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('set answers to an empty list'), index: -1, sub: '', answers: [], message: 'Look at each string in turn.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set answers to an empty list'), index: -1, sub: '', answers: [], message: 'Look at each string in turn.' }]
   arr.forEach((s, i) => {
     const others = arr.filter((_, j) => j !== i)
     let found = ''
@@ -18,13 +18,13 @@ export function buildTrace({ arr }) {
       for (const sub of subs) {
         if (found !== '') break
         const shared = others.some(o => o.includes(sub))
-        frames.push({ phase: shared ? 'shared' : 'uncommon', activeLine: L('if sub appears in no other string'), index: i, sub, answers: [...answers], message: shared ? `${sub} appears in another string, so it does not count.` : `${sub} appears in no other string. It is the answer for ${s}.` })
+        frames.push({ pythonLine: shared ? 11 : 12, phase: shared ? 'shared' : 'uncommon', activeLine: L('if sub appears in no other string'), index: i, sub, answers: [...answers], message: shared ? `${sub} appears in another string, so it does not count.` : `${sub} appears in no other string. It is the answer for ${s}.` })
         if (!shared) found = sub
       }
     }
     answers.push(found)
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, sub: '', answers: [...answers], message: `Answers: ${JSON.stringify(answers)}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return answers'), index: -1, sub: '', answers: [...answers], message: `Answers: ${JSON.stringify(answers)}.` })
   return { input: { arr }, result: answers, frames }
 }
 

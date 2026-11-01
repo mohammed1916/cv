@@ -21,13 +21,13 @@ export function buildTrace({ points }) {
   const es = extremes(s)
   const et = extremes(t)
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), removed: -1, distance: null, best: null, message: 'Rotate each point to s = x + y and t = x - y.' }]
+  const frames = [{ pythonLine: 17, phase: 'start', activeLine: L('set best to nothing'), removed: -1, distance: null, best: null, message: 'Rotate each point to s = x + y and t = x - y.' }]
   for (let i = 0; i < points.length; i++) {
     const distance = Math.max(spreadWithout(s, es, i), spreadWithout(t, et, i))
     if (best === null || distance < best) best = distance
-    frames.push({ phase: 'remove', activeLine: L('for each point i to remove'), removed: i, distance, best, message: `Remove point ${i} (${points[i]}): the largest Manhattan distance left is ${distance}.` })
+    frames.push({ pythonLine: 19, phase: 'remove', activeLine: L('for each point i to remove'), removed: i, distance, best, message: `Remove point ${i} (${points[i]}): the largest Manhattan distance left is ${distance}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), removed: -1, distance: null, best, message: `Smallest possible maximum distance: ${best}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return best'), removed: -1, distance: null, best, message: `Smallest possible maximum distance: ${best}.` })
   return { input: { points }, result: best, frames, s, t }
 }
 

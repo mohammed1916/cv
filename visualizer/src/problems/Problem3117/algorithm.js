@@ -16,7 +16,7 @@ export function buildTrace(input) {
   const m = and_values.length
   const INF = Infinity
   let previous = Array.from({ length: n + 1 }, (_, i) => (i === 0 ? 0 : INF))
-  const frames = [{ phase: 'start', activeLine: L('let m be the length'), piece: 0, costs: previous.slice(), result: null, message: 'Nothing is split yet. Cost 0 covers an empty prefix.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('let m be the length'), piece: 0, costs: previous.slice(), result: null, message: 'Nothing is split yet. Cost 0 covers an empty prefix.' }]
   for (let j = 1; j <= m; j++) {
     const next = Array.from({ length: n + 1 }, () => INF)
     for (let i = 1; i <= n; i++) {
@@ -27,10 +27,10 @@ export function buildTrace(input) {
       }
     }
     previous = next
-    frames.push({ phase: 'piece', activeLine: L('set cost[j][i] to'), piece: j, costs: previous.slice(), result: null, message: `Piece ${j} must have AND ${and_values[j - 1]}. Cheapest costs for each prefix ending: ${previous.map(v => (v === INF ? '-' : v)).join(', ')}.` })
+    frames.push({ pythonLine: 13, phase: 'piece', activeLine: L('set cost[j][i] to'), piece: j, costs: previous.slice(), result: null, message: `Piece ${j} must have AND ${and_values[j - 1]}. Cheapest costs for each prefix ending: ${previous.map(v => (v === INF ? '-' : v)).join(', ')}.` })
   }
   const result = previous[n] === INF ? -1 : previous[n]
-  frames.push({ phase: 'done', activeLine: L('return cost[m][n]'), piece: m, costs: previous.slice(), result, message: `Cheapest split: ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return cost[m][n]'), piece: m, costs: previous.slice(), result, message: `Cheapest split: ${result}.` })
   return { input, result, frames }
 }
 

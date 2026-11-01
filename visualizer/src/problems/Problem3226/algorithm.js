@@ -9,20 +9,20 @@ export function parseInput(text) {
 export function buildTrace({ n, k }) {
   let changes = 0
   let result = null
-  const frames = [{ phase: 'start', activeLine: L('set changes to 0'), bit: -1, changes, message: `Compare ${n} and ${k} bit by bit.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set changes to 0'), bit: -1, changes, message: `Compare ${n} and ${k} bit by bit.` }]
   for (let bit = 0; bit < 8; bit++) {
     const nb = (n >> bit) & 1
     const kb = (k >> bit) & 1
     if (kb && !nb) {
       result = -1
-      frames.push({ phase: 'impossible', activeLine: L('n has a set bit that k lacks'), bit, changes, message: `Bit ${bit} is set in k but not in n, and a change can only clear a bit. The answer is -1.` })
+      frames.push({ pythonLine: 7, phase: 'impossible', activeLine: L('n has a set bit that k lacks'), bit, changes, message: `Bit ${bit} is set in k but not in n, and a change can only clear a bit. The answer is -1.` })
       break
     }
     if (nb && !kb) changes++
-    frames.push({ phase: 'bit', activeLine: L('n has a set bit that k lacks'), bit, changes, message: nb && !kb ? `Bit ${bit} is set in n only: one change clears it.` : `Bit ${bit} already matches.` })
+    frames.push({ pythonLine: nb && !kb ? 9 : 8, phase: 'bit', activeLine: L('n has a set bit that k lacks'), bit, changes, message: nb && !kb ? `Bit ${bit} is set in n only: one change clears it.` : `Bit ${bit} already matches.` })
   }
   if (result === null) result = changes
-  frames.push({ phase: 'done', activeLine: L('return changes'), bit: -1, changes, message: `Answer: ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return changes'), bit: -1, changes, message: `Answer: ${result}.` })
   return { input: { n, k }, result, frames }
 }
 

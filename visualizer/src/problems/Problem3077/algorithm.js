@@ -19,7 +19,7 @@ export function buildTrace(data) {
   let closed = Array(k + 1).fill(-Infinity)
   closed[0] = 0
   let open = Array(k + 1).fill(-Infinity)
-  const frames = [{ phase: 'start', activeLine: L('set closed[0]'), i: -1, closed: [...closed], open: [...open], message: 'Nothing chosen yet: zero subarrays and strength 0.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set closed[0]'), i: -1, closed: [...closed], open: [...open], message: 'Nothing chosen yet: zero subarrays and strength 0.' }]
   for (let i = 0; i < nums.length; i++) {
     const x = nums[i]
     const nextClosed = closed.map((value, j) => Math.max(value, open[j]))
@@ -31,10 +31,10 @@ export function buildTrace(data) {
     }
     closed = nextClosed
     open = nextOpen
-    frames.push({ phase: 'element', activeLine: L('an open count continues'), i, closed: [...closed], open: [...open], message: `Element ${i} is ${x}: each count either keeps its subarray going or starts a new one here.` })
+    frames.push({ pythonLine: 15, phase: 'element', activeLine: L('an open count continues'), i, closed: [...closed], open: [...open], message: `Element ${i} is ${x}: each count either keeps its subarray going or starts a new one here.` })
   }
   const result = Math.max(closed[k], open[k])
-  frames.push({ phase: 'done', activeLine: L('return the better'), i: nums.length - 1, closed: [...closed], open: [...open], message: `The maximum strength of ${k} disjoint subarrays is ${result}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return the better'), i: nums.length - 1, closed: [...closed], open: [...open], message: `The maximum strength of ${k} disjoint subarrays is ${result}.` })
   return { input: data, result, frames }
 }
 

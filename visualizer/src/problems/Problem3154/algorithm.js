@@ -18,11 +18,11 @@ export function buildTrace({ k }) {
     if (canDown && stair > 0) total += ways(stair - 1, jump, false)
     total += ways(stair + 2 ** jump, jump + 1, true)
     memo.set(key, total)
-    frames.push({ phase: 'state', activeLine: L('set total to one'), stair, jump, canDown, ways: total, message: `Stair ${stair}, jump ${jump}${canDown ? ', down allowed' : ''}: ${total} ways from here.` })
+    frames.push({ pythonLine: 9, phase: 'state', activeLine: L('set total to one'), stair, jump, canDown, ways: total, message: `Stair ${stair}, jump ${jump}${canDown ? ', down allowed' : ''}: ${total} ways from here.` })
     return total
   }
   const result = ways(1, 0, true)
-  frames.push({ phase: 'done', activeLine: L('return total'), stair: k, jump: 0, canDown: true, ways: result, message: `Ways to reach stair ${k}: ${result}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return total'), stair: k, jump: 0, canDown: true, ways: result, message: `Ways to reach stair ${k}: ${result}.` })
   return { input: { k }, result, frames, k }
 }
 

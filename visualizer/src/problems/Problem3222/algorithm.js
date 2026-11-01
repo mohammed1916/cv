@@ -8,15 +8,15 @@ export function parseInput(text) {
 export function buildTrace(input) {
   let { x, y } = input
   let turns = 0
-  const frames = [{ phase: 'start', activeLine: L('set turns to 0'), x, y, turns, result: null, message: `Start with ${x} coins of 75 and ${y} coins of 10. A turn takes exactly 115 in coins.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set turns to 0'), x, y, turns, result: null, message: `Start with ${x} coins of 75 and ${y} coins of 10. A turn takes exactly 115 in coins.` }]
   while (x >= 1 && y >= 4) {
     x -= 1
     y -= 4
     turns += 1
-    frames.push({ phase: 'move', activeLine: L('take one 75-coin and four 10-coins'), x, y, turns, result: null, message: `Turn ${turns} takes one 75-coin and four 10-coins. ${x} and ${y} coins remain.` })
+    frames.push({ pythonLine: 6, phase: 'move', activeLine: L('take one 75-coin and four 10-coins'), x, y, turns, result: null, message: `Turn ${turns} takes one 75-coin and four 10-coins. ${x} and ${y} coins remain.` })
   }
   const result = turns % 2 === 1 ? 'Alice' : 'Bob'
-  frames.push({ phase: 'done', activeLine: L('return Alice'), x, y, turns, result, message: `No turn is left after ${turns} turns, so the player to move loses and ${result} wins.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return Alice'), x, y, turns, result, message: `No turn is left after ${turns} turns, so the player to move loses and ${result} wins.` })
   return { input, result, frames }
 }
 

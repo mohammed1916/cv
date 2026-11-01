@@ -13,9 +13,9 @@ export function buildTrace({ n, m }) {
   const multiples = m * k * (k + 1) / 2
   const result = total - 2 * multiples
   const frames = [
-    { phase: 'start', activeLine: L('set total to'), k: 0, multiples: 0, message: `The sum of 1 to ${n} is ${total}.` },
-    { phase: 'count', activeLine: L('set k to'), k, multiples, message: `There are ${k} multiples of ${m} up to ${n}, and they add up to ${multiples}.` },
-    { phase: 'done', activeLine: L('return total'), k, multiples, message: `${total} minus twice ${multiples} gives ${result}.` },
+    { pythonLine: 2, phase: 'start', activeLine: L('set total to'), k: 0, multiples: 0, message: `The sum of 1 to ${n} is ${total}.` },
+    { pythonLine: 4, phase: 'count', activeLine: L('set k to'), k, multiples, message: `There are ${k} multiples of ${m} up to ${n}, and they add up to ${multiples}.` },
+    { pythonLine: 5, phase: 'done', activeLine: L('return total'), k, multiples, message: `${total} minus twice ${multiples} gives ${result}.` },
   ]
   return { input: { n, m }, result, total, frames }
 }

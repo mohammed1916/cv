@@ -13,10 +13,10 @@ export function buildTrace(input) {
     { name: 'nums1', keyLabel: 'digit', valueLabel: '', isSet: true, entries: [...inA].sort((x, y) => x - y).map(d => [d]) },
     { name: 'nums2', keyLabel: 'digit', valueLabel: '', isSet: true, entries: [...inB].sort((x, y) => x - y).map(d => [d]) },
   ]
-  const frames = [{ phase: 'start', activeLine: L('inA = set'), maps: setMap(), ops: [], result: null, message: 'Each list becomes a set of digits. The answer uses at least one digit from each list.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('inA = set'), maps: setMap(), ops: [], result: null, message: 'Each list becomes a set of digits. The answer uses at least one digit from each list.' }]
   for (let d = 1; d <= 9; d++) {
     const both = inA.has(d) && inB.has(d)
-    frames.push({ phase: both ? 'shared' : 'scan', activeLine: both ? L('return d') : L('if d is in both'), maps: setMap(),
+    frames.push({ pythonLine: both ? 4 : 3, phase: both ? 'shared' : 'scan', activeLine: both ? L('return d') : L('if d is in both'), maps: setMap(),
       ops: [{ map: 'nums1', type: 'lookup', via: 'has', key: d, hit: inA.has(d), hitNote: `${d} is in nums1`, missNote: `${d} is not in nums1` },
         { map: 'nums2', type: 'lookup', via: 'has', key: d, hit: inB.has(d), hitNote: `${d} is in nums2`, missNote: `${d} is not in nums2` }],
       result: both ? d : null, message: `${d}: ${both ? 'it is in both lists, so the answer is this single digit.' : 'not in both lists. Try the next digit.'}` })
@@ -24,7 +24,7 @@ export function buildTrace(input) {
   }
   const a = Math.min(...nums1), b = Math.min(...nums2)
   const result = Math.min(a * 10 + b, b * 10 + a)
-  frames.push({ phase: 'pair', activeLine: L('return the smaller of'), maps: setMap(), ops: [], result,
+  frames.push({ pythonLine: 7, phase: 'pair', activeLine: L('return the smaller of'), maps: setMap(), ops: [], result,
     message: `No shared digit. The smallest digits are ${a} and ${b}, so the answer is ${result}.` })
   return { input, result, frames }
 }

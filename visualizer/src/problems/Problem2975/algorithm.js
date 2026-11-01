@@ -26,18 +26,18 @@ export function buildTrace({ m, n, h_fences: hFences, v_fences: vFences }) {
   const hGaps = gapsOf(hLines)
   const vGaps = gapsOf(vLines)
   const candidates = [...hGaps].sort((a, b) => b - a)
-  const frames = [{ phase: 'start', activeLine: L('set horizontal to 1'), active: -1, roles: {}, state: { horizontalGaps: candidates.join(', ') }, message: `Horizontal lines ${[...hLines].sort((a, b) => a - b).join(', ')}. Vertical lines ${[...vLines].sort((a, b) => a - b).join(', ')}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set horizontal to 1'), active: -1, roles: {}, state: { horizontalGaps: candidates.join(', ') }, message: `Horizontal lines ${[...hLines].sort((a, b) => a - b).join(', ')}. Vertical lines ${[...vLines].sort((a, b) => a - b).join(', ')}.` }]
   let best = -1
   candidates.forEach((gap, i) => {
     const inVertical = vGaps.has(gap)
-    frames.push({ phase: 'try', activeLine: L('if gap is in vertGaps'), active: i, roles: { [i]: inVertical ? 'match' : 'no match' }, state: { gap, inVertical }, message: `Side ${gap}: ${inVertical ? 'also a vertical gap, so a square of this side is possible.' : 'not a vertical gap.'}` })
+    frames.push({ pythonLine: 7, phase: 'try', activeLine: L('if gap is in vertGaps'), active: i, roles: { [i]: inVertical ? 'match' : 'no match' }, state: { gap, inVertical }, message: `Side ${gap}: ${inVertical ? 'also a vertical gap, so a square of this side is possible.' : 'not a vertical gap.'}` })
     if (inVertical && best === -1) {
       best = gap
-      frames.push({ phase: 'found', activeLine: L('set best to gap'), active: i, roles: { [i]: 'best' }, state: { side: gap }, message: `The largest common side is ${gap}.` })
+      frames.push({ pythonLine: 9, phase: 'found', activeLine: L('set best to gap'), active: i, roles: { [i]: 'best' }, state: { side: gap }, message: `The largest common side is ${gap}.` })
     }
   })
   const result = best === -1 ? -1 : (best * best) % MOD
-  frames.push({ phase: 'done', activeLine: L('return best times best'), active: -1, roles: {}, state: { result }, message: best === -1 ? 'No common side, so return -1.' : `Area ${best} squared, modulo 1000000007, is ${result}.` })
+  frames.push({ pythonLine: best === -1 ? 8 : 10, phase: 'done', activeLine: L('return best times best'), active: -1, roles: {}, state: { result }, message: best === -1 ? 'No common side, so return -1.' : `Area ${best} squared, modulo 1000000007, is ${result}.` })
   return { input: { m, n, h_fences: hFences, v_fences: vFences }, result, items: candidates, frames }
 }
 

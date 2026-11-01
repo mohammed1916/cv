@@ -26,7 +26,7 @@ export function buildTrace(nums) {
   const ways = Array.from({ length: n + 1 }, () => Array(n + 1).fill(null))
   for (let i = 1; i <= n; i++) ways[i][0] = 1
   const snapshot = () => ways.map(row => [...row])
-  const frames = [{ phase: 'start', end: 0, start: null, ways: snapshot(), activeLine: L('set prefix[i]'), message: 'Each prefix can be one piece, so ways[i][0] is 1.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', end: 0, start: null, ways: snapshot(), activeLine: L('set prefix[i]'), message: 'Each prefix can be one piece, so ways[i][0] is 1.' }]
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j < i; j++) {
       for (let k = 0; k < j; k++) {
@@ -34,7 +34,7 @@ export function buildTrace(nums) {
           const candidate = ways[j][k] + 1
           if (ways[i][j] === null || candidate > ways[i][j]) {
             ways[i][j] = candidate
-            frames.push({ phase: 'extend', end: i, start: j, ways: snapshot(), activeLine: L('set ways[i][j] to the larger'), message: `Last piece nums[${j}..${i}) can follow nums[${k}..${j}); ways[${i}][${j}] is ${candidate}.` })
+            frames.push({ pythonLine: 15, phase: 'extend', end: i, start: j, ways: snapshot(), activeLine: L('set ways[i][j] to the larger'), message: `Last piece nums[${j}..${i}) can follow nums[${k}..${j}); ways[${i}][${j}] is ${candidate}.` })
           }
         }
       }
@@ -42,7 +42,7 @@ export function buildTrace(nums) {
   }
   let result = 0
   for (let j = 0; j < n; j++) if (ways[n][j] !== null && ways[n][j] > result) result = ways[n][j]
-  frames.push({ phase: 'done', end: n, start: null, ways: snapshot(), activeLine: L('return the largest ways'), message: `Longest non-decreasing array: ${result} pieces.` })
+  frames.push({ pythonLine: 16, phase: 'done', end: n, start: null, ways: snapshot(), activeLine: L('return the largest ways'), message: `Longest non-decreasing array: ${result} pieces.` })
   return { input: nums, result, frames }
 }
 

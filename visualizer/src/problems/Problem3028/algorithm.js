@@ -10,15 +10,15 @@ export function parseInput(text) {
 export function buildTrace(input) {
   let position = 0
   let returns = 0
-  const frames = [{ phase: 'start', activeLine: L('set position to 0'), index: -1, position, returns, message: 'The ant starts on the boundary, at position 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set position to 0'), index: -1, position, returns, message: 'The ant starts on the boundary, at position 0.' }]
   input.nums.forEach((step, i) => {
     position += step
     const back = position === 0
     if (back) returns += 1
-    frames.push({ phase: back ? 'return' : 'move', activeLine: L(back ? 'if position equals 0' : 'add the value to position'), index: i, position, returns,
+    frames.push({ pythonLine: back ? 7 : 6, phase: back ? 'return' : 'move', activeLine: L(back ? 'if position equals 0' : 'add the value to position'), index: i, position, returns,
       message: `Move ${step}: the ant is at ${position}. ${back ? 'It is back on the boundary, so the count rises to ' + returns + '.' : 'It is not on the boundary.'}` })
   })
-  frames.push({ phase: 'done', activeLine: L('return returns'), index: -1, position, returns, message: `The ant returned to the boundary ${returns} time${returns === 1 ? '' : 's'}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return returns'), index: -1, position, returns, message: `The ant returned to the boundary ${returns} time${returns === 1 ? '' : 's'}.` })
   return { input, result: returns, frames }
 }
 

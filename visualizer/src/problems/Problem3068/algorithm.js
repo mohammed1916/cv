@@ -11,23 +11,23 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   let total = nums.reduce((sum, v) => sum + v, 0)
   const gains = nums.map(v => (v ^ k) - v)
-  const frames = [{ phase: 'start', activeLine: L('set total to the sum'), index: -1, gains, count: 0, total, message: `Start with the plain sum ${total}. Each flip of a value changes it by its gain.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to the sum'), index: -1, gains, count: 0, total, message: `Start with the plain sum ${total}. Each flip of a value changes it by its gain.` }]
   let count = 0
   gains.forEach((g, i) => {
     if (g > 0) {
       total += g
       count++
-      frames.push({ phase: 'gain', activeLine: L('if the gain is positive'), index: i, gains, count, total, message: `Node ${i}: gain ${g} is positive, so flip it. Total ${total}.` })
+      frames.push({ pythonLine: 7, phase: 'gain', activeLine: L('if the gain is positive'), index: i, gains, count, total, message: `Node ${i}: gain ${g} is positive, so flip it. Total ${total}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if the gain is positive'), index: i, gains, count, total, message: `Node ${i}: gain ${g} is not positive, so leave it.` })
+      frames.push({ pythonLine: 6, phase: 'skip', activeLine: L('if the gain is positive'), index: i, gains, count, total, message: `Node ${i}: gain ${g} is not positive, so leave it.` })
     }
   })
   if (count % 2 === 1) {
     const cheapest = Math.min(...gains.map(g => Math.abs(g)))
     total -= cheapest
-    frames.push({ phase: 'parity', activeLine: L('subtract the smallest'), index: -1, gains, count, total, message: `${count} flips is odd, which is not allowed. Subtract the smallest gain size ${cheapest}.` })
+    frames.push({ pythonLine: 10, phase: 'parity', activeLine: L('subtract the smallest'), index: -1, gains, count, total, message: `${count} flips is odd, which is not allowed. Subtract the smallest gain size ${cheapest}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, gains, count, total, message: `Maximum sum: ${total}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), index: -1, gains, count, total, message: `Maximum sum: ${total}.` })
   return { input: { nums, k }, result: total, frames }
 }
 
