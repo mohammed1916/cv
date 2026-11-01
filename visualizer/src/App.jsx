@@ -33,6 +33,7 @@ import { useAccess } from "./access/useAccess";
 import { isFreeProblem, accessLabel, PLANS } from "./access/policy";
 import {
   AccessDialog,
+  EmailSignIn,
   Plans,
   PlaygroundGate,
 } from "./access/AccessUI";
@@ -1324,6 +1325,7 @@ export default function App() {
                       >
                         Continue with Google
                       </button>
+                      <EmailSignIn access={access} />
                     </>
                   )}
                   <p role="alert">{access.error}</p>

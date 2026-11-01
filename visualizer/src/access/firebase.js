@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 
 // Public web configuration; credentials and payment secrets never go here.
@@ -13,6 +13,7 @@ const functions = getFunctions(app, 'asia-south1');
 export const backendEnabled = import.meta.env.VITE_ACCESS_BACKEND_ENABLED === 'true';
 export const checkoutEnabled = backendEnabled && import.meta.env.VITE_CHECKOUT_ENABLED === 'true';
 export const googleSignIn = () => signInWithPopup(auth, new GoogleAuthProvider());
+export const emailSignIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
 export async function accessCall(name, data = {}) {
   if (!backendEnabled) throw new Error('Account access is being set up. Please try again later.');
   return (await httpsCallable(functions, name)(data)).data;
