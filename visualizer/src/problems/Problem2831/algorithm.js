@@ -10,21 +10,21 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const positions = new Map()
   nums.forEach((v, i) => positions.set(v, [...(positions.get(v) ?? []), i]))
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), value: null, from: 0, to: -1, best: 0, message: `Group the positions of each value. Deleting gaps inside a window costs one per element that is not the value.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to zero'), pythonLine: P('best = 0'), value: null, from: 0, to: -1, best: 0, message: `Group the positions of each value. Deleting gaps inside a window costs one per element that is not the value.` }]
   let best = 0
   for (const [value, places] of positions) {
     let left = 0
-    frames.push({ phase: 'group', activeLine: L('for each distinct value'), value, from: places[0], to: places[0] - 1, best, positions: places, message: `Look at the positions of ${value}: ${places.join(', ')}.` })
+    frames.push({ phase: 'group', activeLine: L('for each distinct value'), pythonLine: P('for places in positions.values()'), value, from: places[0], to: places[0] - 1, best, positions: places, message: `Look at the positions of ${value}: ${places.join(', ')}.` })
     for (let right = 0; right < places.length; right++) {
       while ((places[right] - places[left] + 1) - (right - left + 1) > k) {
         left++
-        frames.push({ phase: 'shrink', activeLine: L('move left to the next position'), value, from: places[left], to: places[right], best, positions: places, message: `Deleting the gaps from ${places[left]} to ${places[right]} costs too much, so move to the next ${value}.` })
+        frames.push({ phase: 'shrink', activeLine: L('move left to the next position'), pythonLine: P('left += 1'), value, from: places[left], to: places[right], best, positions: places, message: `Deleting the gaps from ${places[left]} to ${places[right]} costs too much, so move to the next ${value}.` })
       }
       best = Math.max(best, right - left + 1)
-      frames.push({ phase: 'record', activeLine: L('set best to the larger'), value, from: places[left], to: places[right], best, positions: places, message: `Keeping ${right - left + 1} copies of ${value} from ${places[left]} to ${places[right]} is allowed. Best ${best}.` })
+      frames.push({ phase: 'record', activeLine: L('set best to the larger'), pythonLine: P('best = max(best, right - left + 1)'), value, from: places[left], to: places[right], best, positions: places, message: `Keeping ${right - left + 1} copies of ${value} from ${places[left]} to ${places[right]} is allowed. Best ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), value: null, from: 0, to: -1, best, message: `The longest equal subarray has length ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), value: null, from: 0, to: -1, best, message: `The longest equal subarray has length ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 
@@ -52,3 +52,4 @@ export const python = `def longest_equal_subarray(nums, k):
             best = max(best, right - left + 1)
     return best
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

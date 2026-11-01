@@ -13,19 +13,19 @@ export function buildTrace({ n, target }) {
   const chosen = []
   let sum = 0
   let candidate = 1
-  const frames = [{ phase: 'start', activeLine: L('set chosen to an empty'), candidate: 0, chosen: [], sum: 0, message: `Pick ${n} distinct positive values so that no two of them add up to ${target}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set chosen to an empty'), pythonLine: P('chosen = []'), candidate: 0, chosen: [], sum: 0, message: `Pick ${n} distinct positive values so that no two of them add up to ${target}.` }]
   while (chosen.length < n) {
     if (chosen.includes(target - candidate)) {
-      frames.push({ phase: 'skip', activeLine: L('if the partner'), candidate, chosen: [...chosen], sum, message: `${candidate} pairs with ${target - candidate}, which is already chosen. Skip it.` })
+      frames.push({ phase: 'skip', activeLine: L('if the partner'), pythonLine: P('if (target - candidate) not in chosen'), candidate, chosen: [...chosen], sum, message: `${candidate} pairs with ${target - candidate}, which is already chosen. Skip it.` })
     } else {
       chosen.push(candidate)
       sum += candidate
-      frames.push({ phase: 'take', activeLine: L('add the candidate'), candidate, chosen: [...chosen], sum, message: `Take ${candidate}. Sum is now ${sum}.` })
+      frames.push({ phase: 'take', activeLine: L('add the candidate'), pythonLine: P('chosen.append(candidate)'), candidate, chosen: [...chosen], sum, message: `Take ${candidate}. Sum is now ${sum}.` })
     }
     candidate++
   }
   const result = sum % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum'), candidate, chosen: [...chosen], sum, message: `Minimum sum modulo 1000000007: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: P('return sum(chosen)'), candidate, chosen: [...chosen], sum, message: `Minimum sum modulo 1000000007: ${result}.` })
   return { input: { n, target }, result, frames }
 }
 
@@ -49,3 +49,4 @@ export const python = `def min_possible_sum(n, target):
         candidate += 1
     return sum(chosen) % 1000000007
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

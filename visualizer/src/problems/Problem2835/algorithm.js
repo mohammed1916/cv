@@ -17,11 +17,11 @@ export function buildTrace({ nums, target }) {
   for (const v of nums) cnt[exponentOf(v)]++
   const frames = []
   let ops = 0
-  const frame = (phase, line, bit, message) => frames.push({ phase, activeLine: line, bit, cnt: [...cnt], ops, message })
-  frame('start', L('count the copies'), -1, `Count the copies of each power of two. Target ${target}.`)
+  const frame = (phase, line, bit, message, pythonLine) => frames.push({ phase, activeLine: line, pythonLine, bit, cnt: [...cnt], ops, message })
+  frame('start', L('count the copies'), -1, `Count the copies of each power of two. Target ${target}.`, P('cnt[v.bit_length() - 1] += 1'))
   const total = nums.reduce((a, b) => a + b, 0)
   if (total < target) {
-    frame('fail', L('return -1'), -1, `The sum ${total} is below the target, so no subsequence can reach it.`)
+    frame('fail', L('return -1'), -1, `The sum ${total} is below the target, so no subsequence can reach it.`, P('return -1'))
     return { input: { nums, target }, result: -1, frames }
   }
   for (let b = 0; b <= TOP - 1; b++) {
@@ -30,24 +30,24 @@ export function buildTrace({ nums, target }) {
         let j = b + 1
         while (j <= TOP && cnt[j] === 0) j++
         if (j > TOP) {
-          frame('fail', L('return -1'), b, `No larger power of two is left to split for bit ${b}.`)
+          frame('fail', L('return -1'), b, `No larger power of two is left to split for bit ${b}.`, P('if j == 32') + 1)
           return { input: { nums, target }, result: -1, frames }
         }
         ops += j - b
         cnt[j]--
         for (let p = b; p < j; p++) cnt[p]++
-        frame('split', L('split it'), b, `Split ${2 ** j} down to ${2 ** b}, costing ${j - b} operations.`)
+        frame('split', L('split it'), b, `Split ${2 ** j} down to ${2 ** b}, costing ${j - b} operations.`, P('cnt[p] += 1'))
       }
       cnt[b]--
-      frame('use', L('use one copy'), b, `Target has bit ${b}; one copy of ${2 ** b} is used.`)
+      frame('use', L('use one copy'), b, `Target has bit ${b}; one copy of ${2 ** b} is used.`, P('cnt[b] -= 1'))
     }
     const carry = Math.floor(cnt[b] / 2)
     if (carry > 0) {
       cnt[b + 1] += carry
-      frame('carry', L('pair up the leftover'), b, `${cnt[b]} leftover copies of ${2 ** b} make ${carry} pair(s) worth ${2 ** (b + 1)} for free.`)
+      frame('carry', L('pair up the leftover'), b, `${cnt[b]} leftover copies of ${2 ** b} make ${carry} pair(s) worth ${2 ** (b + 1)} for free.`, P('cnt[b + 1] += cnt[b] // 2'))
     }
   }
-  frame('done', L('return ops'), -1, `Minimum operations: ${ops}.`)
+  frame('done', L('return ops'), -1, `Minimum operations: ${ops}.`, P('return ops'))
   return { input: { nums, target }, result: ops, frames }
 }
 
@@ -88,3 +88,4 @@ export const python = `def min_operations(nums, target):
         cnt[b + 1] += cnt[b] // 2
     return ops
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

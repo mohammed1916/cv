@@ -13,16 +13,16 @@ export function buildTrace(input) {
   freq[0] = 1
   let cur = 0
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set freq[0]'), index: -1, cur, count, freq: [...freq], message: 'The empty prefix has residue 0 and is counted once.' }]
+  const frames = [{ phase: 'start', activeLine: L('set freq[0]'), pythonLine: P('freq[0] = 1'), index: -1, cur, count, freq: [...freq], message: 'The empty prefix has residue 0 and is counted once.' }]
   nums.forEach((value, j) => {
     if (value % modulo === k) cur = (cur + 1) % modulo
     const target = (cur - k + modulo) % modulo
     const add = freq[target]
     count += add
-    frames.push({ phase: 'scan', activeLine: L('add freq[target]'), index: j, cur, target, count, freq: [...freq], message: `Prefix residue ${cur}. ${add} earlier prefixes have residue ${target}, so the count grows by ${add}.` })
+    frames.push({ phase: 'scan', activeLine: L('add freq[target]'), pythonLine: P('count += freq[target]'), index: j, cur, target, count, freq: [...freq], message: `Prefix residue ${cur}. ${add} earlier prefixes have residue ${target}, so the count grows by ${add}.` })
     freq[cur] += 1
   })
-  frames.push({ phase: 'done', activeLine: L('return count'), index: nums.length, cur, count, freq: [...freq], message: `Interesting subarrays: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), index: nums.length, cur, count, freq: [...freq], message: `Interesting subarrays: ${count}.` })
   return { input, result: count, frames }
 }
 
@@ -50,3 +50,4 @@ export const python = `def count_of_interesting_subarrays(nums, modulo, k):
         freq[cur] += 1
     return count
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

@@ -50,7 +50,7 @@ export function buildTrace({ n, edges, queries }) {
       if (depth[w] < 0) { depth[w] = depth[u] + 1; parent[w] = u; parentWeight[w] = weight; order.push(w) }
     }
   }
-  const frames = [{ phase: 'start', activeLine: L('build the tree'), weights: [], cost: null, message: 'Root the tree at node 0 so each query path can be climbed.' }]
+  const frames = [{ phase: 'start', activeLine: L('build the tree'), pythonLine: P('depth[0] = 0'), weights: [], cost: null, message: 'Root the tree at node 0 so each query path can be climbed.' }]
   const answers = []
   for (const [a0, b0] of queries) {
     let x = a0
@@ -64,9 +64,9 @@ export function buildTrace({ n, edges, queries }) {
     const top = Math.max(0, ...counts.values())
     const cost = weights.length - top
     answers.push(cost)
-    frames.push({ phase: 'query', activeLine: L('the path length minus'), weights: [...weights], cost, message: `Path ${a0} to ${b0} has ${weights.length} edge(s); keeping the most common weight leaves ${cost} change(s).` })
+    frames.push({ phase: 'query', activeLine: L('the path length minus'), pythonLine: P('answers.append(len(weights) - top)'), weights: [...weights], cost, message: `Path ${a0} to ${b0} has ${weights.length} edge(s); keeping the most common weight leaves ${cost} change(s).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), weights: [], cost: null, message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), weights: [], cost: null, message: `Answers: [${answers.join(', ')}].` })
   return { input: { n, edges, queries }, result: answers, frames }
 }
 
@@ -105,3 +105,4 @@ export const python = `def equilibrium_queries(n, edges, queries):
         answers.append(len(weights) - top)
     return answers
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

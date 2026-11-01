@@ -29,17 +29,17 @@ export function buildTrace({ n, offers }) {
   const endingAt = Array.from({ length: n }, () => [])
   for (const o of offers) endingAt[o[1]].push(o)
   const best = [0]
-  const frames = [{ phase: 'start', house: -1, best: [...best], offer: null, activeLine: L('set best[0]'), message: 'Before any house, the profit is 0.' }]
+  const frames = [{ phase: 'start', house: -1, best: [...best], offer: null, activeLine: L('set best[0]'), pythonLine: P('best = [0] * (n + 1)'), message: 'Before any house, the profit is 0.' }]
   for (let i = 0; i < n; i++) {
     best[i + 1] = best[i]
-    frames.push({ phase: 'house', house: i, best: [...best], offer: null, activeLine: L('set best[i+1] to best[i]'), message: `House ${i}: skipping it keeps ${best[i + 1]}.` })
+    frames.push({ phase: 'house', house: i, best: [...best], offer: null, activeLine: L('set best[i+1] to best[i]'), pythonLine: P('best[i + 1] = best[i]'), message: `House ${i}: skipping it keeps ${best[i + 1]}.` })
     for (const [s, , g] of endingAt[i]) {
       const candidate = best[s] + g
       if (candidate > best[i + 1]) best[i + 1] = candidate
-      frames.push({ phase: 'offer', house: i, best: [...best], offer: [s, i, g], activeLine: L('set best[i+1] to the larger'), message: `Offer ${s} to ${i} for ${g}: best[${s}] + ${g} = ${candidate}; best[${i + 1}] is ${best[i + 1]}.` })
+      frames.push({ phase: 'offer', house: i, best: [...best], offer: [s, i, g], activeLine: L('set best[i+1] to the larger'), pythonLine: P('best[i + 1] = max('), message: `Offer ${s} to ${i} for ${g}: best[${s}] + ${g} = ${candidate}; best[${i + 1}] is ${best[i + 1]}.` })
     }
   }
-  frames.push({ phase: 'done', house: n - 1, best: [...best], offer: null, activeLine: L('return best[n]'), message: `Maximum gold: ${best[n]}.` })
+  frames.push({ phase: 'done', house: n - 1, best: [...best], offer: null, activeLine: L('return best[n]'), pythonLine: P('return best[n]'), message: `Maximum gold: ${best[n]}.` })
   return { input: { n, offers }, result: best[n], frames }
 }
 
@@ -54,3 +54,4 @@ export const python = `def maximize_the_profit(n, offers):
             best[i + 1] = max(best[i + 1], best[start] + gold)
     return best[n]
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

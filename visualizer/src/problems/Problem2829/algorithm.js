@@ -11,18 +11,18 @@ export function buildTrace({ n, k }) {
   const chosen = []
   let sum = 0
   let candidate = 1
-  const frames = [{ phase: 'start', activeLine: L('set chosen to an empty'), candidate: 0, chosen: [], sum: 0, message: `Pick ${n} distinct positive values so that no two of them add up to ${k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set chosen to an empty'), pythonLine: P('chosen = []'), candidate: 0, chosen: [], sum: 0, message: `Pick ${n} distinct positive values so that no two of them add up to ${k}.` }]
   while (chosen.length < n) {
     if (chosen.includes(k - candidate)) {
-      frames.push({ phase: 'skip', activeLine: L('if the partner'), candidate, chosen: [...chosen], sum, message: `${candidate} pairs with ${k - candidate}, which is already chosen. Skip it.` })
+      frames.push({ phase: 'skip', activeLine: L('if the partner'), pythonLine: P('if (k - candidate) not in chosen'), candidate, chosen: [...chosen], sum, message: `${candidate} pairs with ${k - candidate}, which is already chosen. Skip it.` })
     } else {
       chosen.push(candidate)
       sum += candidate
-      frames.push({ phase: 'take', activeLine: L('add the candidate'), candidate, chosen: [...chosen], sum, message: `Take ${candidate}. Sum is now ${sum}.` })
+      frames.push({ phase: 'take', activeLine: L('add the candidate'), pythonLine: P('chosen.append(candidate)'), candidate, chosen: [...chosen], sum, message: `Take ${candidate}. Sum is now ${sum}.` })
     }
     candidate++
   }
-  frames.push({ phase: 'done', activeLine: L('return the sum'), candidate, chosen: [...chosen], sum, message: `Minimum sum: ${sum}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum'), pythonLine: P('return sum(chosen)'), candidate, chosen: [...chosen], sum, message: `Minimum sum: ${sum}.` })
   return { input: { n, k }, result: sum, frames }
 }
 
@@ -46,3 +46,4 @@ export const python = `def min_sum_k_avoiding(n, k):
         candidate += 1
     return sum(chosen)
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

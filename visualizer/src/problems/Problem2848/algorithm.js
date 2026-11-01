@@ -11,11 +11,11 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums } = input
   const diff = new Array(102).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set diff to zeros'), point: null, running: 0, count: 0, covered: [], message: 'Count the points from 1 to 100 that some car covers.' }]
+  const frames = [{ phase: 'start', activeLine: L('set diff to zeros'), pythonLine: P('diff = [0] * 102'), point: null, running: 0, count: 0, covered: [], message: 'Count the points from 1 to 100 that some car covers.' }]
   for (const [start, end] of nums) {
     diff[start] += 1
     diff[end + 1] -= 1
-    frames.push({ phase: 'mark', activeLine: L('add 1 to diff at start'), point: null, running: 0, count: 0, covered: [], message: `Car [${start}, ${end}] adds 1 at ${start} and removes it after ${end}.` })
+    frames.push({ phase: 'mark', activeLine: L('add 1 to diff at start'), pythonLine: P('diff[end + 1] -= 1'), point: null, running: 0, count: 0, covered: [], message: `Car [${start}, ${end}] adds 1 at ${start} and removes it after ${end}.` })
   }
   let running = 0
   let count = 0
@@ -26,9 +26,9 @@ export function buildTrace(input) {
       count++
       covered.push(p)
     }
-    frames.push({ phase: 'sweep', activeLine: L('if running is above 0'), point: p, running, count, covered: covered.slice(), message: `Point ${p} is covered by ${running} car${running === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'sweep', activeLine: L('if running is above 0'), pythonLine: running > 0 ? P('count += 1') : P('if running > 0'), point: p, running, count, covered: covered.slice(), message: `Point ${p} is covered by ${running} car${running === 1 ? '' : 's'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), point: null, running: 0, count, covered: covered.slice(), message: `Points covered: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), point: null, running: 0, count, covered: covered.slice(), message: `Points covered: ${count}.` })
   return { input, result: count, frames }
 }
 
@@ -57,3 +57,4 @@ export const python = `def number_of_points(nums):
             count += 1
     return count
 `
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
