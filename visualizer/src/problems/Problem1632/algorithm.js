@@ -20,7 +20,7 @@ export function buildTrace({ matrix }) {
   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) cells.push({ v: matrix[r][c], r, c })
   cells.sort((x, y) => x.v - y.v || x.r - y.r || x.c - y.c)
   const snapshot = () => ranks.map(row => [...row])
-  const frames = [{ phase: 'start', activeLine: L('rank transform of matrix'), group: [], ranks: snapshot(), message: 'Sort the cells by value so that smaller values are ranked first.' }]
+  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('rank transform of matrix'), group: [], ranks: snapshot(), message: 'Sort the cells by value so that smaller values are ranked first.' }]
 
   let start = 0
   while (start < cells.length) {
@@ -28,7 +28,7 @@ export function buildTrace({ matrix }) {
     while (end < cells.length && cells[end].v === cells[start].v) end++
     const group = cells.slice(start, end)
     const value = group[0].v
-    frames.push({ phase: 'group', activeLine: L('for each group of cells with equal value'), group: group.map(({ r, c }) => [r, c]), ranks: snapshot(), message: `Value ${value} forms a group of ${group.length} cell${group.length === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'group', pythonLine: 13, activeLine: L('for each group of cells with equal value'), group: group.map(({ r, c }) => [r, c]), ranks: snapshot(), message: `Value ${value} forms a group of ${group.length} cell${group.length === 1 ? '' : 's'}.` })
 
     const parent = Array.from({ length: rows + cols }, (_, k) => k)
     const find = x => {
@@ -43,7 +43,7 @@ export function buildTrace({ matrix }) {
       const b = find(rows + c)
       if (a !== b) parent[a] = b
     }
-    frames.push({ phase: 'join', activeLine: L("join each cell's row and column"), group: group.map(({ r, c }) => [r, c]), ranks: snapshot(), message: 'Cells that share a row or column through the group must get one rank.' })
+    frames.push({ phase: 'join', pythonLine: 26, activeLine: L("join each cell's row and column"), group: group.map(({ r, c }) => [r, c]), ranks: snapshot(), message: 'Cells that share a row or column through the group must get one rank.' })
 
     const best = new Map()
     for (const { r, c } of group) {
@@ -55,10 +55,10 @@ export function buildTrace({ matrix }) {
       rowMax[r] = Math.max(rowMax[r], ranks[r][c])
       colMax[c] = Math.max(colMax[c], ranks[r][c])
     }
-    frames.push({ phase: 'rank', activeLine: L("set each cell's rank"), group: group.map(({ r, c }) => [r, c]), ranks: snapshot(), message: `Value ${value} gets its rank, one more than the largest rank already in its rows and columns.` })
+    frames.push({ phase: 'rank', pythonLine: 32, activeLine: L("set each cell's rank"), group: group.map(({ r, c }) => [r, c]), ranks: snapshot(), message: `Value ${value} gets its rank, one more than the largest rank already in its rows and columns.` })
     start = end
   }
-  frames.push({ phase: 'done', activeLine: L('return the rank matrix'), group: [], ranks: snapshot(), message: 'Every cell has its smallest valid rank.' })
+  frames.push({ phase: 'done', pythonLine: 37, activeLine: L('return the rank matrix'), group: [], ranks: snapshot(), message: 'Every cell has its smallest valid rank.' })
   return { input: { matrix }, result: ranks, frames }
 }
 

@@ -31,21 +31,21 @@ export function buildTrace({ destination, k }) {
   const total = v + h
   let rank = k
   let path = ''
-  const frames = [{ phase: 'start', path, k: rank, activeLine: L('set rows to'), message: `Build the ${k}-th path in dictionary order, with ${v} V and ${h} H moves.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, path, k: rank, activeLine: L('set rows to'), message: `Build the ${k}-th path in dictionary order, with ${v} V and ${h} H moves.` }]
   while (v > 0 || h > 0) {
     const ways = h > 0 ? binomial(h - 1 + v, v) : 0
     if (h > 0 && rank <= ways) {
       path += 'H'
       h--
-      frames.push({ phase: 'H', path, k: rank, ways, activeLine: L('append H'), message: `${ways} paths start with H, and k = ${rank} is within them, so the next move is H.` })
+      frames.push({ phase: 'H', pythonLine: 9, path, k: rank, ways, activeLine: L('append H'), message: `${ways} paths start with H, and k = ${rank} is within them, so the next move is H.` })
     } else {
       rank -= ways
       path += 'V'
       v--
-      frames.push({ phase: 'V', path, k: rank, ways, activeLine: L('subtract that count'), message: `${ways} paths start with H, so k drops to ${rank} and the next move is V.` })
+      frames.push({ phase: 'V', pythonLine: 12, path, k: rank, ways, activeLine: L('subtract that count'), message: `${ways} paths start with H, so k drops to ${rank} and the next move is V.` })
     }
   }
-  frames.push({ phase: 'done', path, k: rank, activeLine: L('return the path'), result: path, message: `The ${k}-th smallest instruction is ${path}.` })
+  frames.push({ phase: 'done', pythonLine: 15, path, k: rank, activeLine: L('return the path'), result: path, message: `The ${k}-th smallest instruction is ${path}.` })
   return { input: { destination, k }, total, result: path, frames }
 }
 

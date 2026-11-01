@@ -16,11 +16,11 @@ export function buildTrace({ s, a, b }) {
   let best = s
   const seen = new Set([s])
   const queue = [s]
-  const frames = [{ phase: 'start', activeLine: L('set best to s'), current: s, best, queued: 1, message: 'Start with s as the best string so far.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set best to s'), current: s, best, queued: 1, message: 'Start with s as the best string so far.' }]
   for (let head = 0; head < queue.length; head++) {
     const cur = queue[head]
     if (cur < best) best = cur
-    frames.push({ phase: 'visit', activeLine: L('take the first string'), current: cur, best, queued: queue.length, message: `Visit ${cur}. Best so far: ${best}.` })
+    frames.push({ phase: 'visit', pythonLine: 8, activeLine: L('take the first string'), current: cur, best, queued: queue.length, message: `Visit ${cur}. Best so far: ${best}.` })
     const added = addToOdd(cur, a)
     const rotated = rotateRight(cur, b)
     for (const next of [added, rotated]) {
@@ -30,7 +30,7 @@ export function buildTrace({ s, a, b }) {
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), current: '', best, queued: 0, message: `Smallest reachable string: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return best'), current: '', best, queued: 0, message: `Smallest reachable string: ${best}.` })
   return { input: { s, a, b }, result: best, frames }
 }
 

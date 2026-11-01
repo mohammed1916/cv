@@ -24,14 +24,14 @@ export function buildTrace({ n, k }) {
   const snap = () => pascal.map(row => [...row])
   for (let i = 0; i < rows; i++) {
     pascal[i][0] = 1
-    frames.push({ phase: 'pascal', cell: [i, 0], table: snap(), activeLine: L('set pascal[i][0]'), message: `C(${i}, 0) = 1.` })
+    frames.push({ phase: 'pascal', pythonLine: 7, cell: [i, 0], table: snap(), activeLine: L('set pascal[i][0]'), message: `C(${i}, 0) = 1.` })
     for (let j = 1; j <= Math.min(i, cols); j++) {
       pascal[i][j] = (pascal[i - 1][j - 1] + pascal[i - 1][j]) % MOD
-      frames.push({ phase: 'pascal', cell: [i, j], table: snap(), activeLine: L('set pascal[i][j]'), message: `C(${i}, ${j}) = ${pascal[i][j]}.` })
+      frames.push({ phase: 'pascal', pythonLine: 9, cell: [i, j], table: snap(), activeLine: L('set pascal[i][j]'), message: `C(${i}, ${j}) = ${pascal[i][j]}.` })
     }
   }
   const result = pascal[n + k - 1][cols]
-  frames.push({ phase: 'done', cell: [n + k - 1, cols], table: snap(), activeLine: L('return pascal'), result, message: `C(${n + k - 1}, ${cols}) = ${result} sets of ${k} segments.` })
+  frames.push({ phase: 'done', pythonLine: 10, cell: [n + k - 1, cols], table: snap(), activeLine: L('return pascal'), result, message: `C(${n + k - 1}, ${cols}) = ${result} sets of ${k} segments.` })
   return { input: { n, k }, result, frames }
 }
 

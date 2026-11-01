@@ -18,20 +18,20 @@ export function buildTrace({ towers, radius }) {
   const maxY = Math.max(...towers.map(t => t[1]))
   const grid = Array.from({ length: maxX + 1 }, () => new Array(maxY + 1).fill(0))
   let best = { x: 0, y: 0, q: quality(towers, radius, 0, 0) }
-  const frames = [{ phase: 'start', activeLine: L('set best to the origin'), x: 0, y: 0, q: best.q, best: [0, 0], message: 'Start with the origin as the best point so far.' }]
+  const frames = [{ phase: 'start', pythonLine: 15, activeLine: L('set best to the origin'), x: 0, y: 0, q: best.q, best: [0, 0], message: 'Start with the origin as the best point so far.' }]
   for (let x = 0; x <= maxX; x++) {
     for (let y = 0; y <= maxY; y++) {
       const q = quality(towers, radius, x, y)
       grid[x][y] = q
-      frames.push({ phase: 'scan', activeLine: L('set total to zero'), x, y, q, best: [best.x, best.y], message: `Point (${x}, ${y}) has network quality ${q}.` })
+      frames.push({ phase: 'scan', pythonLine: 18, activeLine: L('set total to zero'), x, y, q, best: [best.x, best.y], message: `Point (${x}, ${y}) has network quality ${q}.` })
       if (q > best.q) {
         best = { x, y, q }
-        frames.push({ phase: 'improve', activeLine: L('set best to this point'), x, y, q, best: [x, y], message: `New best: (${x}, ${y}) with quality ${q}.` })
+        frames.push({ phase: 'improve', pythonLine: 20, activeLine: L('set best to this point'), x, y, q, best: [x, y], message: `New best: (${x}, ${y}) with quality ${q}.` })
       }
     }
   }
   const result = [best.x, best.y]
-  frames.push({ phase: 'done', activeLine: L('return the best point'), x: best.x, y: best.y, q: best.q, best: result, message: `Best coordinate (${best.x}, ${best.y}) with quality ${best.q}.` })
+  frames.push({ phase: 'done', pythonLine: 21, activeLine: L('return the best point'), x: best.x, y: best.y, q: best.q, best: result, message: `Best coordinate (${best.x}, ${best.y}) with quality ${best.q}.` })
   return { input: { towers, radius }, result, frames, grid }
 }
 

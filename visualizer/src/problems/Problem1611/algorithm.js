@@ -12,15 +12,15 @@ export function buildTrace({ n }) {
   let result = 0
   let rest = n
   let bit = 0
-  frames.push({ phase: 'start', activeLine: L('set result to 0'), bit: -1, rest, result, message: `Start with n = ${n} (${bits(n)}).` })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('set result to 0'), bit: -1, rest, result, message: `Start with n = ${n} (${bits(n)}).` })
   while (rest > 0) {
     result ^= rest
-    frames.push({ phase: 'fold', activeLine: L('xor result with'), bit, rest, result, message: `XOR the current value ${rest} into the result, which is now ${result}.` })
+    frames.push({ phase: 'fold', pythonLine: 5, activeLine: L('xor result with'), bit, rest, result, message: `XOR the current value ${rest} into the result, which is now ${result}.` })
     rest >>= 1
     bit++
-    frames.push({ phase: 'shift', activeLine: L('shift the value right'), bit, rest, result, message: `Shift right. The next value is ${rest}.` })
+    frames.push({ phase: 'shift', pythonLine: 6, activeLine: L('shift the value right'), bit, rest, result, message: `Shift right. The next value is ${rest}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), bit, rest, result, message: `Minimum operations: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return result'), bit, rest, result, message: `Minimum operations: ${result}.` })
   return { input: { n }, result, frames }
 }
 

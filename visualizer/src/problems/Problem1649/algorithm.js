@@ -12,16 +12,16 @@ export function buildTrace(input) {
   const values = input.instructions
   let cost = 0
   const inserted = []
-  const frames = [{ phase: 'start', activeLine: L('set cost to 0'), index: null, less: null, greater: null, cost: 0, inserted: [], message: 'Insert each value into a growing sorted array, paying the cheaper side each time.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set cost to 0'), index: null, less: null, greater: null, cost: 0, inserted: [], message: 'Insert each value into a growing sorted array, paying the cheaper side each time.' }]
   values.forEach((v, i) => {
     const less = inserted.filter(x => x < v).length
     const greater = inserted.filter(x => x > v).length
     cost += Math.min(less, greater)
     inserted.push(v)
-    frames.push({ phase: 'insert', activeLine: L('add the smaller'), index: i, less, greater, cost, inserted: inserted.slice(), message: `Insert ${v}: ${less} smaller and ${greater} larger values are already present, so it costs ${Math.min(less, greater)}.` })
+    frames.push({ phase: 'insert', pythonLine: 9, activeLine: L('add the smaller'), index: i, less, greater, cost, inserted: inserted.slice(), message: `Insert ${v}: ${less} smaller and ${greater} larger values are already present, so it costs ${Math.min(less, greater)}.` })
   })
   const result = cost % MOD
-  frames.push({ phase: 'done', activeLine: L('return cost'), index: null, less: null, greater: null, cost: result, inserted: inserted.slice(), message: `Total cost: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return cost'), index: null, less: null, greater: null, cost: result, inserted: inserted.slice(), message: `Total cost: ${result}.` })
   return { input, result, frames }
 }
 

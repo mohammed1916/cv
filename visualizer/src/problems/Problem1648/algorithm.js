@@ -14,16 +14,16 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const counts = [...input.inventory]
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), counts: [...counts], index: -1, total, message: 'Each sale takes the colour with the most balls left and earns that count.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set total to zero'), counts: [...counts], index: -1, total, message: 'Each sale takes the colour with the most balls left and earns that count.' }]
   for (let sale = 0; sale < input.orders; sale++) {
     let best = 0
     for (let c = 1; c < counts.length; c++) if (counts[c] > counts[best]) best = c
     const value = counts[best]
     total = (total + value) % MOD
     counts[best] -= 1
-    frames.push({ phase: 'sell', activeLine: L('sell one ball'), counts: [...counts], index: best, total, message: `Sale ${sale + 1}: sell a colour ${best} ball for ${value}. Total ${total}.` })
+    frames.push({ phase: 'sell', pythonLine: 8, activeLine: L('sell one ball'), counts: [...counts], index: best, total, message: `Sale ${sale + 1}: sell a colour ${best} ball for ${value}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), counts: [...counts], index: -1, total, message: `Maximum value modulo 1e9+7: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return total'), counts: [...counts], index: -1, total, message: `Maximum value modulo 1e9+7: ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -21,18 +21,18 @@ export function buildTrace({ words, target }) {
   const dp = Array.from({ length: m + 1 }, () => Array(length + 1).fill(0))
   for (let k = 0; k <= length; k++) dp[0][k] = 1
   const snap = () => dp.map(row => [...row])
-  const frames = [{ phase: 'count', activeLine: L('count how many words have each letter'), i: -1, k: -1, dp: snap(), columns: countsAt, message: `Each word has ${length} column(s); count the letters in each column.` }]
-  frames.push({ phase: 'base', activeLine: L('set the empty-prefix row'), i: 0, k: -1, dp: snap(), columns: countsAt, message: 'An empty target can be built in exactly one way, so row 0 is all ones.' })
+  const frames = [{ phase: 'count', pythonLine: 8, activeLine: L('count how many words have each letter'), i: -1, k: -1, dp: snap(), columns: countsAt, message: `Each word has ${length} column(s); count the letters in each column.` }]
+  frames.push({ phase: 'base', pythonLine: 11, activeLine: L('set the empty-prefix row'), i: 0, k: -1, dp: snap(), columns: countsAt, message: 'An empty target can be built in exactly one way, so row 0 is all ones.' })
   for (let i = 1; i <= m; i++) {
     for (let k = 1; k <= length; k++) {
       const skip = dp[i][k - 1]
       const use = dp[i - 1][k - 1] * cnt[k - 1][target.charCodeAt(i - 1) - 97]
       dp[i][k] = (skip + use) % MOD
-      frames.push({ phase: 'fill', activeLine: L('add the ways that use'), i, k, dp: snap(), columns: countsAt, message: `Building ${target.slice(0, i)} from the first ${k} column(s): skip column ${k - 1} gives ${skip}, use it for ${target[i - 1]} gives ${use}.` })
+      frames.push({ phase: 'fill', pythonLine: 15, activeLine: L('add the ways that use'), i, k, dp: snap(), columns: countsAt, message: `Building ${target.slice(0, i)} from the first ${k} column(s): skip column ${k - 1} gives ${skip}, use it for ${target[i - 1]} gives ${use}.` })
     }
   }
   const result = dp[m][length]
-  frames.push({ phase: 'done', activeLine: L('return the ways for the full target'), i: m, k: length, dp: snap(), columns: countsAt, result, message: `Ways to build ${target}: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return the ways for the full target'), i: m, k: length, dp: snap(), columns: countsAt, result, message: `Ways to build ${target}: ${result}.` })
   return { input: { words, target }, result, frames }
 }
 

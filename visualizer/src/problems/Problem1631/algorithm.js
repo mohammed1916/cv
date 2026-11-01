@@ -29,7 +29,7 @@ export function buildTrace({ heights }) {
   const effort = Array.from({ length: rows }, () => new Array(cols).fill(Infinity))
   effort[0][0] = 0
   const heap = [[0, 0, 0]]
-  const frames = [{ phase: 'start', activeLine: L('effort[r][c] = infinity'), cell: [0, 0], value: 0, matrix: effort.map(r => [...r]), message: 'Each move costs the height difference between cells. A path’s effort is its largest single step, so the goal is to keep every step small.' }]
+  const frames = [{ phase: 'start', pythonLine: 7, activeLine: L('effort[r][c] = infinity'), cell: [0, 0], value: 0, matrix: effort.map(r => [...r]), message: 'Each move costs the height difference between cells. A path’s effort is its largest single step, so the goal is to keep every step small.' }]
   let result = 0
   const popSmallest = () => { let k = 0; for (let i = 1; i < heap.length; i++) if (heap[i][0] < heap[k][0]) k = i; return heap.splice(k, 1)[0] }
   while (heap.length) {
@@ -37,17 +37,17 @@ export function buildTrace({ heights }) {
     if (e > effort[r][c]) continue
     if (r === rows - 1 && c === cols - 1) {
       result = e
-      frames.push({ phase: 'done', activeLine: L('if (r, c) is the bottom-right cell'), cell: [r, c], value: e, matrix: effort.map(row => [...row]), message: `Reached the bottom-right cell with effort ${e}.` })
+      frames.push({ phase: 'done', pythonLine: 14, activeLine: L('if (r, c) is the bottom-right cell'), cell: [r, c], value: e, matrix: effort.map(row => [...row]), message: `Reached the bottom-right cell with effort ${e}.` })
       break
     }
-    frames.push({ phase: 'settle', activeLine: L('pop (e, r, c)'), cell: [r, c], value: e, matrix: effort.map(row => [...row]), message: `Expand cell (${r}, ${c}) with effort ${e} so far.` })
+    frames.push({ phase: 'settle', pythonLine: 10, activeLine: L('pop (e, r, c)'), cell: [r, c], value: e, matrix: effort.map(row => [...row]), message: `Expand cell (${r}, ${c}) with effort ${e} so far.` })
     for (const [nr, nc] of [[r + 1, c], [r - 1, c], [r, c + 1], [r, c - 1]]) {
       if (nr < 0 || nc < 0 || nr >= rows || nc >= cols) continue
       const step = Math.max(e, Math.abs(heights[nr][nc] - heights[r][c]))
       if (step < effort[nr][nc]) {
         effort[nr][nc] = step
         heap.push([step, nr, nc])
-        frames.push({ phase: 'relax', activeLine: L('if step < effort[nr][nc]'), cell: [nr, nc], value: step, matrix: effort.map(row => [...row]), message: `Step to (${nr}, ${nc}): height ${heights[r][c]} to ${heights[nr][nc]}, so the path effort becomes ${step}.` })
+        frames.push({ phase: 'relax', pythonLine: 20, activeLine: L('if step < effort[nr][nc]'), cell: [nr, nc], value: step, matrix: effort.map(row => [...row]), message: `Step to (${nr}, ${nc}): height ${heights[r][c]} to ${heights[nr][nc]}, so the path effort becomes ${step}.` })
       }
     }
   }
