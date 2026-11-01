@@ -10,22 +10,22 @@ export function parseInput(text) {
 
 export function buildTrace({ nums, k, p }) {
   const seen = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set seen to an empty set'), start: null, end: null, divisible: 0, distinct: 0, message: `Count distinct subarrays with at most ${k} multiples of ${p}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set seen to an empty set'), start: null, end: null, divisible: 0, distinct: 0, message: `Count distinct subarrays with at most ${k} multiples of ${p}.` }]
   for (let i = 0; i < nums.length; i++) {
     let divisible = 0
     for (let j = i; j < nums.length; j++) {
       if (nums[j] % p === 0) divisible++
       if (divisible > k) {
-        frames.push({ phase: 'stop', activeLine: L('stop this start'), start: i, end: j, divisible, distinct: seen.size, message: `Subarray ${i}..${j} has ${divisible} multiples of ${p}, so stop extending from ${i}.` })
+        frames.push({ phase: 'stop', pythonLine: 9, activeLine: L('stop this start'), start: i, end: j, divisible, distinct: seen.size, message: `Subarray ${i}..${j} has ${divisible} multiples of ${p}, so stop extending from ${i}.` })
         break
       }
       const key = JSON.stringify(nums.slice(i, j + 1))
       const repeat = seen.has(key)
       seen.add(key)
-      frames.push({ phase: 'add', activeLine: L('add the subarray'), start: i, end: j, divisible, distinct: seen.size, message: `Subarray ${i}..${j} ${repeat ? 'repeats an earlier subarray' : 'is new'}.` })
+      frames.push({ phase: 'add', pythonLine: 10, activeLine: L('add the subarray'), start: i, end: j, divisible, distinct: seen.size, message: `Subarray ${i}..${j} ${repeat ? 'repeats an earlier subarray' : 'is new'}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the size of seen'), start: null, end: null, divisible: 0, distinct: seen.size, message: `${seen.size} distinct subarray(s) qualify.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return the size of seen'), start: null, end: null, divisible: 0, distinct: seen.size, message: `${seen.size} distinct subarray(s) qualify.` })
   return { input: { nums, k, p }, result: seen.size, frames }
 }
 

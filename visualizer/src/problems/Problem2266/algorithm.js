@@ -22,7 +22,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 // A run of equal presses splits into groups of one to three presses, or one to four for 7 and 9.
 export function buildTrace({ pressed_keys: keys }) {
   let total = 1
-  const frames = [{ phase: 'start', start: -1, length: 0, ways: [], total, activeLine: L('total = 1'), message: 'With no presses there is exactly one way to write nothing.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, start: -1, length: 0, ways: [], total, activeLine: L('total = 1'), message: 'With no presses there is exactly one way to write nothing.' }]
   let i = 0
   while (i < keys.length) {
     let j = i
@@ -35,12 +35,12 @@ export function buildTrace({ pressed_keys: keys }) {
       for (let k = 1; k <= Math.min(length, limit); k++) sum += ways[length - k]
       ways.push(sum % MOD)
     }
-    frames.push({ phase: 'run', start: i, length: run, ways: [...ways], total, activeLine: L('ways[length] = sum'), message: `A run of ${run} presses of ${keys[i]} splits in ${ways[run]} ways (groups of at most ${limit}).` })
+    frames.push({ phase: 'run', pythonLine: 13, start: i, length: run, ways: [...ways], total, activeLine: L('ways[length] = sum'), message: `A run of ${run} presses of ${keys[i]} splits in ${ways[run]} ways (groups of at most ${limit}).` })
     total = (total * ways[run]) % MOD
-    frames.push({ phase: 'multiply', start: i, length: run, ways: [...ways], total, activeLine: L('total = total * ways'), message: `Running total: ${total}.` })
+    frames.push({ phase: 'multiply', pythonLine: 14, start: i, length: run, ways: [...ways], total, activeLine: L('total = total * ways'), message: `Running total: ${total}.` })
     i = j
   }
-  frames.push({ phase: 'done', start: -1, length: 0, ways: [], total, activeLine: L('return total'), message: `Text messages: ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 16, start: -1, length: 0, ways: [], total, activeLine: L('return total'), message: `Text messages: ${total}.` })
   return { input: { pressed_keys: keys }, result: total, frames }
 }
 

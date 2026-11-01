@@ -11,14 +11,14 @@ export function parseInput(text) {
 
 export function buildTrace({ number, digit }) {
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), position: -1, candidate: '', best: '', message: `Try removing each ${digit} from ${number}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set best to nothing'), position: -1, candidate: '', best: '', message: `Try removing each ${digit} from ${number}.` }]
   for (let i = 0; i < number.length; i++) {
     if (number[i] !== digit) continue
     const candidate = number.slice(0, i) + number.slice(i + 1)
     if (best === null || candidate > best) best = candidate
-    frames.push({ phase: 'candidate', activeLine: L('let candidate be'), position: i, candidate, best, message: `Removing the ${digit} at position ${i} gives ${candidate}. Best so far: ${best}.` })
+    frames.push({ phase: 'candidate', pythonLine: 5, activeLine: L('let candidate be'), position: i, candidate, best, message: `Removing the ${digit} at position ${i} gives ${candidate}. Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), position: -1, candidate: '', best, message: `Largest result: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return best'), position: -1, candidate: '', best, message: `Largest result: ${best}.` })
   return { input: { number, digit }, result: best, frames }
 }
 

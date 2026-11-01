@@ -9,18 +9,18 @@ export function parseInput(text) {
 
 export function buildTrace({ num }) {
   let best = ''
-  const frames = [{ phase: 'start', activeLine: L('set best to empty'), start: -1, piece: '', best, message: 'No good integer has been found yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set best to empty'), start: -1, piece: '', best, message: 'No good integer has been found yet.' }]
   for (let i = 0; i + 3 <= num.length; i++) {
     const piece = num.slice(i, i + 3)
     const same = piece[0] === piece[1] && piece[1] === piece[2]
     if (same && (best === '' || piece > best)) {
       best = piece
-      frames.push({ phase: 'found', activeLine: L('piece is larger than best'), start: i, piece, best, message: `${piece} at position ${i} is all one digit and is the largest so far.` })
+      frames.push({ phase: 'found', pythonLine: 7, activeLine: L('piece is larger than best'), start: i, piece, best, message: `${piece} at position ${i} is all one digit and is the largest so far.` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('if the three digits are the same'), start: i, piece, best, message: same ? `${piece} is all one digit but not larger than ${best}.` : `${piece} is not all one digit.` })
+      frames.push({ phase: 'scan', pythonLine: 5, activeLine: L('if the three digits are the same'), start: i, piece, best, message: same ? `${piece} is all one digit but not larger than ${best}.` : `${piece} is not all one digit.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, piece: '', best, message: best ? `Largest good integer: ${best}.` : 'No three equal digits in a row, so the answer is empty text.' })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return best'), start: -1, piece: '', best, message: best ? `Largest good integer: ${best}.` : 'No three equal digits in a row, so the answer is empty text.' })
   return { input: { num }, result: best, frames }
 }
 

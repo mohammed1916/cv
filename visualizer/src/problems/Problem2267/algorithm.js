@@ -31,15 +31,18 @@ export function buildTrace({ grid }) {
   const view = () => sets.map(row => row.map(s => (s === null ? '·' : s.length ? `{${s.join(',')}}` : '∅')))
   const frames = []
   let result
+  let exitLine = 20
   if (grid[0][0] !== '(' || grid[m - 1][n - 1] !== ')') {
-    frames.push({ phase: 'early', activeLine: L('if the top-left'), row: 0, col: 0, table: view(), message: 'A valid path must start with ( and end with ), so none exists.' })
+    exitLine = 4
+    frames.push({ phase: 'early', pythonLine: 3, activeLine: L('if the top-left'), row: 0, col: 0, table: view(), message: 'A valid path must start with ( and end with ), so none exists.' })
     result = false
   } else if ((m + n - 1) % 2 === 1) {
-    frames.push({ phase: 'early', activeLine: L('if rows + cols'), row: 0, col: 0, table: view(), message: `A path has ${m + n - 1} cells, an odd number, so it cannot balance.` })
+    exitLine = 6
+    frames.push({ phase: 'early', pythonLine: 5, activeLine: L('if rows + cols'), row: 0, col: 0, table: view(), message: `A path has ${m + n - 1} cells, an odd number, so it cannot balance.` })
     result = false
   } else {
     sets[0][0] = [1]
-    frames.push({ phase: 'start', activeLine: L('set the top-left balances'), row: 0, col: 0, table: view(), message: 'The first ( gives balance 1.' })
+    frames.push({ phase: 'start', pythonLine: 8, activeLine: L('set the top-left balances'), row: 0, col: 0, table: view(), message: 'The first ( gives balance 1.' })
     for (let r = 0; r < m; r++) {
       for (let c = 0; c < n; c++) {
         if (r === 0 && c === 0) continue
@@ -48,12 +51,12 @@ export function buildTrace({ grid }) {
         if (c > 0) previous.push(...sets[r][c - 1])
         const delta = grid[r][c] === '(' ? 1 : -1
         sets[r][c] = [...new Set(previous.map(b => b + delta).filter(b => b >= 0))].sort((a, b) => a - b)
-        frames.push({ phase: 'cell', activeLine: L('keep only balances'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}) ${grid[r][c]}: reachable balances ${sets[r][c].length ? sets[r][c].join(', ') : 'none'}.` })
+        frames.push({ phase: 'cell', pythonLine: 19, activeLine: L('keep only balances'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}) ${grid[r][c]}: reachable balances ${sets[r][c].length ? sets[r][c].join(', ') : 'none'}.` })
       }
     }
     result = sets[m - 1][n - 1].includes(0)
   }
-  frames.push({ phase: 'done', activeLine: L('return whether 0'), row: m - 1, col: n - 1, table: view(), message: result ? 'Balance 0 is reachable at the bottom-right: a valid path exists.' : 'Balance 0 is not reachable at the bottom-right.' })
+  frames.push({ phase: 'done', pythonLine: exitLine, activeLine: L('return whether 0'), row: m - 1, col: n - 1, table: view(), message: result ? 'Balance 0 is reachable at the bottom-right: a valid path exists.' : 'Balance 0 is not reachable at the bottom-right.' })
   return { input: { grid }, grid, result, frames }
 }
 

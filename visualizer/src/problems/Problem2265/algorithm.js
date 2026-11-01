@@ -13,7 +13,7 @@ export function buildTrace({ tree }) {
   const root = treeFromLevelOrder(tree)
   let count = 0
   const marks = {}
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), node: null, marks: {}, count, message: 'Walk up from the leaves. Each subtree reports its sum and its size.' }]
+  const frames = [{ phase: 'start', pythonLine: 26, activeLine: L('set count to 0'), node: null, marks: {}, count, message: 'Walk up from the leaves. Each subtree reports its sum and its size.' }]
   const walk = node => {
     if (!node) return { sum: 0, size: 0 }
     const left = walk(node.left)
@@ -23,11 +23,11 @@ export function buildTrace({ tree }) {
     const match = Math.floor(total / size) === node.value
     if (match) count++
     marks[node.id] = `${match ? 'match' : 'no'} ${total}/${size}`
-    frames.push({ phase: 'subtree', activeLine: L('if total divided'), node: node.id, marks: { ...marks }, count, message: `Subtree at ${node.value}: sum ${total}, size ${size}, floored average ${Math.floor(total / size)}. ${match ? 'It matches the node value.' : 'It does not match.'}` })
+    frames.push({ phase: 'subtree', pythonLine: 35, activeLine: L('if total divided'), node: node.id, marks: { ...marks }, count, message: `Subtree at ${node.value}: sum ${total}, size ${size}, floored average ${Math.floor(total / size)}. ${match ? 'It matches the node value.' : 'It does not match.'}` })
     return { sum: total, size }
   }
   walk(root)
-  frames.push({ phase: 'done', activeLine: L('return count'), node: null, marks: { ...marks }, count, message: `Nodes equal to their subtree average: ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 39, activeLine: L('return count'), node: null, marks: { ...marks }, count, message: `Nodes equal to their subtree average: ${count}.` })
   return { input: { tree }, root, result: count, frames }
 }
 

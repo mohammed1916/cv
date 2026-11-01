@@ -12,7 +12,7 @@ export function buildTrace(input) {
   let left = 0
   let best = null
   let bestIndex = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to the sum'), index: -1, left: 0, leftAvg: null, rightAvg: null, diff: null, best: null, bestIndex: 0, message: `Total ${total}. Each split compares two floored averages.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set total to the sum'), index: -1, left: 0, leftAvg: null, rightAvg: null, diff: null, best: null, bestIndex: 0, message: `Total ${total}. Each split compares two floored averages.` }]
   for (let i = 0; i < n; i++) {
     left += nums[i]
     const leftAvg = Math.floor(left / (i + 1))
@@ -23,9 +23,9 @@ export function buildTrace(input) {
       best = diff
       bestIndex = i
     }
-    frames.push({ phase: 'scan', activeLine: L('if best is nothing or diff'), index: i, left, leftAvg, rightAvg, diff, best, bestIndex, message: `Split after index ${i}: left average ${leftAvg}, right average ${rightAvg}, difference ${diff}.` })
+    frames.push({ phase: 'scan', pythonLine: 12, activeLine: L('if best is nothing or diff'), index: i, left, leftAvg, rightAvg, diff, best, bestIndex, message: `Split after index ${i}: left average ${leftAvg}, right average ${rightAvg}, difference ${diff}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best_index'), index: -1, left: total, leftAvg: null, rightAvg: null, diff: null, best, bestIndex, message: `Smallest difference ${best} is at index ${bestIndex}.` })
+  frames.push({ phase: 'done', pythonLine: 16, activeLine: L('return best_index'), index: -1, left: total, leftAvg: null, rightAvg: null, diff: null, best, bestIndex, message: `Smallest difference ${best} is at index ${bestIndex}.` })
   return { input, result: bestIndex, frames }
 }
 

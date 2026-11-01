@@ -10,16 +10,16 @@ export function buildTrace(input) {
   const last = new Map()
   let current = 0
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total and current'), index: -1, letter: '', current, total, message: 'Count substrings by the index where they end. Each index adds the distinct counts of every substring ending there.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('set total and current'), index: -1, letter: '', current, total, message: 'Count substrings by the index where they end. Each index adds the distinct counts of every substring ending there.' }]
   for (let j = 0; j < s.length; j++) {
     const c = s[j]
     const previous = last.has(c) ? last.get(c) : -1
     current += j - previous
     total += current
     last.set(c, j)
-    frames.push({ phase: 'scan', activeLine: L('add j minus'), index: j, letter: c, current, total, message: `Letter ${c} at index ${j}: the substrings ending here add up to ${current} distinct letters. Running total ${total}.` })
+    frames.push({ phase: 'scan', pythonLine: 6, activeLine: L('add j minus'), index: j, letter: c, current, total, message: `Letter ${c} at index ${j}: the substrings ending here add up to ${current} distinct letters. Running total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, letter: '', current, total, message: `Total appeal is ${total}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return total'), index: -1, letter: '', current, total, message: `Total appeal is ${total}.` })
   return { input: { s }, result: total, frames }
 }
 

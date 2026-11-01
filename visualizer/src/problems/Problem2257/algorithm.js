@@ -20,7 +20,7 @@ export function buildTrace({ m, n, guards, walls }) {
   walls.forEach(([r, c]) => { grid[r][c] = WALL })
   guards.forEach(([r, c]) => { grid[r][c] = GUARD })
   const display = () => grid.map(row => row.map(v => SYMBOL[v]))
-  const frames = [{ phase: 'start', activeLine: L('mark every guard and wall'), guard: null, grid: display(), message: 'Guards and walls are marked; every other cell is empty.' }]
+  const frames = [{ phase: 'start', pythonLine: 6, activeLine: L('mark every guard and wall'), guard: null, grid: display(), message: 'Guards and walls are marked; every other cell is empty.' }]
   const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
   for (const [r, c] of guards) {
     for (const [dr, dc] of dirs) {
@@ -32,11 +32,11 @@ export function buildTrace({ m, n, guards, walls }) {
         cc += dc
       }
     }
-    frames.push({ phase: 'sweep', activeLine: L('sweep up, down'), guard: [r, c], grid: display(), message: `Guard at row ${r}, column ${c} sweeps out in four directions.` })
+    frames.push({ phase: 'sweep', pythonLine: 10, activeLine: L('sweep up, down'), guard: [r, c], grid: display(), message: `Guard at row ${r}, column ${c} sweeps out in four directions.` })
   }
   let unguarded = 0
   for (const row of grid) for (const v of row) if (v === EMPTY) unguarded++
-  frames.push({ phase: 'done', activeLine: L('return the number of empty cells'), guard: null, grid: display(), message: `${unguarded} empty cells were never seen by a guard.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return the number of empty cells'), guard: null, grid: display(), message: `${unguarded} empty cells were never seen by a guard.` })
   return { input: { m, n, guards, walls }, result: unguarded, frames }
 }
 

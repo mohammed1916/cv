@@ -11,7 +11,7 @@ export function buildTrace(input) {
   const { cards } = input
   const last = new Map()
   let best = -1
-  const frames = [{ phase: 'start', activeLine: L('last is an empty map'), index: -1, runStart: -1, best, maps: [], ops: [], result: best, message: 'No card has been seen yet, so no pair exists.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('last is an empty map'), index: -1, runStart: -1, best, maps: [], ops: [], result: best, message: 'No card has been seen yet, so no pair exists.' }]
   const maps = () => [{ name: 'lastSeen', keyLabel: 'card', valueLabel: 'latest index', isSet: false, entries: [...last] }]
   cards.forEach((card, i) => {
     const hit = last.has(card)
@@ -22,17 +22,17 @@ export function buildTrace(input) {
     if (hit) {
       const length = i - before + 1
       if (best === -1 || length < best) best = length
-      frames.push({ phase: 'match', activeLine: L('the run from last of c'), index: i, runStart: before, best, maps: maps(), ops, result: best,
+      frames.push({ phase: 'match', pythonLine: 6, activeLine: L('the run from last of c'), index: i, runStart: before, best, maps: maps(), ops, result: best,
         message: `Card ${card} at index ${i} matches index ${before}. The run has ${length} cards. Best so far: ${best}.` })
     } else {
-      frames.push({ phase: 'scan', activeLine: L('if c is in last'), index: i, runStart: -1, best, maps: maps(), ops, result: best,
+      frames.push({ phase: 'scan', pythonLine: 5, activeLine: L('if c is in last'), index: i, runStart: -1, best, maps: maps(), ops, result: best,
         message: `Card ${card} at index ${i} is new, so there is no pair to measure yet.` })
     }
     last.set(card, i)
     ops.push({ map: 'lastSeen', type: hit ? 'update' : 'insert', key: card, value: i, before })
     frames[frames.length - 1].maps = maps()
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, runStart: -1, best, maps: maps(), ops: [], result: best,
+  frames.push({ phase: 'done', pythonLine: 10, activeLine: L('return best'), index: -1, runStart: -1, best, maps: maps(), ops: [], result: best,
     message: best === -1 ? 'No card repeats, so the answer is -1.' : `Shortest run with a pair: ${best} cards.` })
   return { input, result: best, frames }
 }
