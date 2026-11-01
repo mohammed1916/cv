@@ -7,13 +7,13 @@ export function parseInput(text) {
 export function buildTrace(nums) {
   const n = nums.length
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('create an empty result'), index: -1, landing: -1, result: [], message: 'Each value moves its own index around the circle.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('create an empty result'), index: -1, landing: -1, result: [], message: 'Each value moves its own index around the circle.' }]
   for (let i = 0; i < n; i++) {
     const landing = (((i + nums[i]) % n) + n) % n
     result.push(nums[landing])
-    frames.push({ phase: 'move', activeLine: L('move nums[i] steps'), index: i, landing, result: [...result], message: `Index ${i} moves ${nums[i]} step(s) and lands on ${landing}, so the result is ${nums[landing]}.` })
+    frames.push({ pythonLine: 6, phase: 'move', activeLine: L('move nums[i] steps'), index: i, landing, result: [...result], message: `Index ${i} moves ${nums[i]} step(s) and lands on ${landing}, so the result is ${nums[landing]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), index: -1, landing: -1, result: [...result], message: `Result: [${result.join(', ')}].` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return result'), index: -1, landing: -1, result: [...result], message: `Result: [${result.join(', ')}].` })
   return { input: nums, result, frames }
 }
 

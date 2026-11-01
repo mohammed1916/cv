@@ -11,22 +11,22 @@ export function buildTrace({ s, p }) {
   const [prefix, suffix] = p.split('*')
   const frames = []
   let found = false
-  frames.push({ phase: 'start', activeLine: L('split p at its star'), start: -1, at: -1, message: `Prefix "${prefix}", suffix "${suffix}".` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('split p at its star'), start: -1, at: -1, message: `Prefix "${prefix}", suffix "${suffix}".` })
   for (let i = 0; i <= s.length && !found; i++) {
-    frames.push({ phase: 'start', activeLine: L('for each start index'), start: i, at: -1, message: `Try a match beginning at ${i}.` })
+    frames.push({ pythonLine: 3, phase: 'start', activeLine: L('for each start index'), start: i, at: -1, message: `Try a match beginning at ${i}.` })
     if (!s.startsWith(prefix, i)) {
-      frames.push({ phase: 'prefix', activeLine: L('if the prefix does not start'), start: i, at: -1, message: `The prefix does not start at ${i}.` })
+      frames.push({ pythonLine: 4, phase: 'prefix', activeLine: L('if the prefix does not start'), start: i, at: -1, message: `The prefix does not start at ${i}.` })
       continue
     }
     const at = s.indexOf(suffix, i + prefix.length)
     if (at !== -1) {
       found = true
-      frames.push({ phase: 'found', activeLine: L('if the suffix appears'), start: i, at, message: `The suffix appears at ${at}, after the prefix. A match exists.` })
+      frames.push({ pythonLine: 7, phase: 'found', activeLine: L('if the suffix appears'), start: i, at, message: `The suffix appears at ${at}, after the prefix. A match exists.` })
     } else {
-      frames.push({ phase: 'suffix', activeLine: L('if the suffix appears'), start: i, at: -1, message: `No suffix "${suffix}" follows the prefix at ${i}.` })
+      frames.push({ pythonLine: 6, phase: 'suffix', activeLine: L('if the suffix appears'), start: i, at: -1, message: `No suffix "${suffix}" follows the prefix at ${i}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), start: -1, at: -1, message: found ? 'Match found.' : 'No substring matches p.' })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return false'), start: -1, at: -1, message: found ? 'Match found.' : 'No substring matches p.' })
   return { input: { s, p }, result: found, frames }
 }
 

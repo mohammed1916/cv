@@ -47,20 +47,20 @@ export function buildTrace({ squares }) {
   }
   const total = strips.reduce((sum, st) => sum + st.area, 0)
   const half = total / 2
-  const frames = [{ phase: 'start', activeLine: L('collect every bottom'), index: -1, strips, cumulative: 0, message: `Edges: ${edges.join(', ')}. Total union area ${total}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('collect every bottom'), index: -1, strips, cumulative: 0, message: `Edges: ${edges.join(', ')}. Total union area ${total}.` }]
   let cumulative = 0
   let result = null
   for (let i = 0; i < strips.length; i++) {
     const st = strips[i]
-    frames.push({ phase: 'strip', activeLine: L('find the squares that cover'), index: i, strips, cumulative, message: `Strip y ${st.lo} to ${st.hi}: union width ${st.width}, area ${st.area}.` })
+    frames.push({ pythonLine: 5, phase: 'strip', activeLine: L('find the squares that cover'), index: i, strips, cumulative, message: `Strip y ${st.lo} to ${st.hi}: union width ${st.width}, area ${st.area}.` })
     if (result === null && st.area > 0 && cumulative + st.area >= half) {
       result = st.lo + (half - cumulative) / st.width
-      frames.push({ phase: 'walk', activeLine: L('walk the strips'), index: i, strips, cumulative, message: `Half the area is ${half}; it is reached inside this strip.` })
+      frames.push({ pythonLine: 23, phase: 'walk', activeLine: L('walk the strips'), index: i, strips, cumulative, message: `Half the area is ${half}; it is reached inside this strip.` })
       break
     }
     cumulative += st.area
   }
-  frames.push({ phase: 'done', activeLine: L('return the strip'), index: -1, strips, cumulative, message: `Minimum y with equal area above and below: ${result}.` })
+  frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return the strip'), index: -1, strips, cumulative, message: `Minimum y with equal area above and below: ${result}.` })
   return { input: { squares }, squares, result, frames }
 }
 

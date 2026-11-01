@@ -27,11 +27,11 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ nums, queries }) {
   const n = nums.length
   const diff = Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('make a difference array'), index: -1, cover: null, message: 'Each query can lower each of its positions by at most one.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('make a difference array'), index: -1, cover: null, message: 'Each query can lower each of its positions by at most one.' }]
   for (const [l, r] of queries) {
     diff[l] += 1
     diff[r + 1] -= 1
-    frames.push({ phase: 'mark', activeLine: L('for each query'), index: l, cover: null, message: `Query [${l}, ${r}] can lower positions ${l} through ${r} by one each.` })
+    frames.push({ pythonLine: 5, phase: 'mark', activeLine: L('for each query'), index: l, cover: null, message: `Query [${l}, ${r}] can lower positions ${l} through ${r} by one each.` })
   }
   const cover = []
   let running = 0
@@ -40,10 +40,10 @@ export function buildTrace({ nums, queries }) {
     running += diff[i]
     cover.push(running)
     const short = running < nums[i]
-    frames.push({ phase: short ? 'fail' : 'check', activeLine: short ? L('if coverage is short') : L('for each position compare'), index: i, cover: [...cover], message: `Position ${i}: covered ${running} time(s), value ${nums[i]}.` })
+    frames.push({ pythonLine: short ? 11 : 10, phase: short ? 'fail' : 'check', activeLine: short ? L('if coverage is short') : L('for each position compare'), index: i, cover: [...cover], message: `Position ${i}: covered ${running} time(s), value ${nums[i]}.` })
     if (short) { result = false; break }
   }
-  if (result) frames.push({ phase: 'done', activeLine: L('the answer is yes'), index: -1, cover, message: 'Every position has enough coverage.' })
+  if (result) frames.push({ pythonLine: 12, phase: 'done', activeLine: L('the answer is yes'), index: -1, cover, message: 'Every position has enough coverage.' })
   return { input: { nums, queries }, result, frames }
 }
 

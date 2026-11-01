@@ -19,7 +19,7 @@ export function buildTrace({ grid }) {
   const size = 1 << rows
   let best = new Array(size).fill(-Infinity)
   best[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set best[0] to zero'), value: null, best: best.slice(), total: 0, message: `Process the ${values.length} distinct values in increasing order.` }]
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('set best[0] to zero'), value: null, best: best.slice(), total: 0, message: `Process the ${values.length} distinct values in increasing order.` }]
   for (const v of values) {
     const next = best.slice()
     for (let mask = 0; mask < size; mask++) {
@@ -31,10 +31,10 @@ export function buildTrace({ grid }) {
       }
     }
     best = next
-    frames.push({ phase: 'value', activeLine: L('for each distinct value v'), value: v, best: best.slice(), total: Math.max(...best), message: `Value ${v} can be taken from rows ${[...rowsOf.get(v)].join(', ')}.` })
+    frames.push({ pythonLine: 11, phase: 'value', activeLine: L('for each distinct value v'), value: v, best: best.slice(), total: Math.max(...best), message: `Value ${v} can be taken from rows ${[...rowsOf.get(v)].join(', ')}.` })
   }
   const result = Math.max(...best)
-  frames.push({ phase: 'done', activeLine: L('return the largest'), value: null, best: best.slice(), total: result, message: `Maximum score: ${result}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return the largest'), value: null, best: best.slice(), total: result, message: `Maximum score: ${result}.` })
   return { input: { grid }, result, frames }
 }
 

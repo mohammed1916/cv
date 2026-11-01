@@ -15,30 +15,30 @@ export function buildTrace({ s, p }) {
   const [prefix, middle, suffix] = p.split('*')
   const frames = []
   let best = null
-  frames.push({ phase: 'start', activeLine: L('split p at its two stars'), start: -1, middle: -1, end: -1, best, message: `Split p into prefix "${prefix}", middle "${middle}" and suffix "${suffix}".` })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('split p at its two stars'), start: -1, middle: -1, end: -1, best, message: `Split p into prefix "${prefix}", middle "${middle}" and suffix "${suffix}".` })
   for (let i = 0; i <= s.length; i++) {
-    frames.push({ phase: 'start', activeLine: L('for each start index'), start: i, middle: -1, end: -1, best, message: `Try a match that starts at ${i}.` })
+    frames.push({ pythonLine: 4, phase: 'start', activeLine: L('for each start index'), start: i, middle: -1, end: -1, best, message: `Try a match that starts at ${i}.` })
     if (!s.startsWith(prefix, i)) {
-      frames.push({ phase: 'prefix', activeLine: L('if the prefix does not start at i'), start: i, middle: -1, end: -1, best, message: `The prefix "${prefix}" does not start at ${i}; skip it.` })
+      frames.push({ pythonLine: 5, phase: 'prefix', activeLine: L('if the prefix does not start at i'), start: i, middle: -1, end: -1, best, message: `The prefix "${prefix}" does not start at ${i}; skip it.` })
       continue
     }
     const k = s.indexOf(middle, i + prefix.length)
     if (k === -1) {
-      frames.push({ phase: 'middle', activeLine: L('if no middle is found'), start: i, middle: -1, end: -1, best, message: `No middle "${middle}" follows the prefix; skip ${i}.` })
+      frames.push({ pythonLine: 8, phase: 'middle', activeLine: L('if no middle is found'), start: i, middle: -1, end: -1, best, message: `No middle "${middle}" follows the prefix; skip ${i}.` })
       continue
     }
     const q = s.indexOf(suffix, k + middle.length)
     if (q === -1) {
-      frames.push({ phase: 'suffix', activeLine: L('if no suffix is found'), start: i, middle: k, end: -1, best, message: `The middle is at ${k} but no suffix "${suffix}" follows it; skip ${i}.` })
+      frames.push({ pythonLine: 11, phase: 'suffix', activeLine: L('if no suffix is found'), start: i, middle: k, end: -1, best, message: `The middle is at ${k} but no suffix "${suffix}" follows it; skip ${i}.` })
       continue
     }
     const end = q + suffix.length
     const length = end - i
     if (best === null || length < best) best = length
-    frames.push({ phase: 'record', activeLine: L('if best is nothing'), start: i, middle: k, end, best, message: `Match s[${i}..${end - 1}] has length ${length}. Best so far: ${best}.` })
+    frames.push({ pythonLine: 14, phase: 'record', activeLine: L('if best is nothing'), start: i, middle: k, end, best, message: `Match s[${i}..${end - 1}] has length ${length}. Best so far: ${best}.` })
   }
   const result = best === null ? -1 : best
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, middle: -1, end: -1, best: result, message: `Shortest matching substring length: ${result}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return best'), start: -1, middle: -1, end: -1, best: result, message: `Shortest matching substring length: ${result}.` })
   return { input: { s, p }, result, frames }
 }
 

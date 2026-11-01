@@ -16,7 +16,7 @@ export function buildTrace(input) {
   let longOpen = Array(k + 1).fill(NONE)
   let shortOpen = Array(k + 1).fill(NONE)
   free[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set free[0] to 0'), day: -1, best: 0, message: 'Start with no open transaction and no transactions opened.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set free[0] to 0'), day: -1, best: 0, message: 'Start with no open transaction and no transactions opened.' }]
   prices.forEach((p, day) => {
     const f = [...free]
     const lo = [...longOpen]
@@ -33,10 +33,10 @@ export function buildTrace(input) {
     longOpen = lo
     shortOpen = so
     const best = Math.max(...free)
-    frames.push({ phase: 'day', activeLine: L('for each day with price p'), day, best, message: `Day ${day} at price ${p}: the best closed profit so far is ${best}.` })
+    frames.push({ pythonLine: 7, phase: 'day', activeLine: L('for each day with price p'), day, best, message: `Day ${day} at price ${p}: the best closed profit so far is ${best}.` })
   })
   const result = Math.max(...free)
-  frames.push({ phase: 'done', activeLine: L('return the best closed profit'), day: prices.length - 1, best: result, message: `The maximum profit with at most ${k} transactions is ${result}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return the best closed profit'), day: prices.length - 1, best: result, message: `The maximum profit with at most ${k} transactions is ${result}.` })
   return { input, result, frames }
 }
 

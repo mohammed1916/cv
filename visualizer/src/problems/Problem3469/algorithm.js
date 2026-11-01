@@ -33,7 +33,7 @@ export function buildTrace({ nums }) {
     return value
   }
   const total = solve(0, -1)
-  const frames = [{ phase: 'start', activeLine: L('set answer to the cheapest plan'), next: 0, front: -1, cost: 0, message: 'Start with every element in the array and no leftover at the front.' }]
+  const frames = [{ pythonLine: 21, phase: 'start', activeLine: L('set answer to the cheapest plan'), next: 0, front: -1, cost: 0, message: 'Start with every element in the array and no leftover at the front.' }]
   let next = 0
   let front = -1
   let spent = 0
@@ -42,7 +42,7 @@ export function buildTrace({ nums }) {
     if (seq.length <= 2) {
       const last = finish(seq)
       spent += last
-      frames.push({ phase: 'finish', activeLine: L('remove the rest together'), next, front, cost: spent, message: `Fewer than three remain, so remove them for ${last}. Total ${spent}.` })
+      frames.push({ pythonLine: 10, phase: 'finish', activeLine: L('remove the rest together'), next, front, cost: spent, message: `Fewer than three remain, so remove them for ${last}. Total ${spent}.` })
       break
     }
     const three = seq.slice(0, 3)
@@ -55,11 +55,11 @@ export function buildTrace({ nums }) {
     }
     const stepCost = Math.max(nums[pick.removed[0]], nums[pick.removed[1]])
     spent += stepCost
-    frames.push({ phase: 'remove', activeLine: L('take the cheaper pair'), next, front, cost: spent, message: `Remove ${nums[pick.removed[0]]} and ${nums[pick.removed[1]]} for ${stepCost}. ${nums[pick.leftover]} stays at the front.` })
+    frames.push({ pythonLine: 17, phase: 'remove', activeLine: L('take the cheaper pair'), next, front, cost: spent, message: `Remove ${nums[pick.removed[0]]} and ${nums[pick.removed[1]]} for ${stepCost}. ${nums[pick.leftover]} stays at the front.` })
     next = after
     front = pick.leftover
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), next: n, front: -1, cost: total, message: `Minimum total cost: ${total}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return answer'), next: n, front: -1, cost: total, message: `Minimum total cost: ${total}.` })
   return { input, result: total, frames }
 }
 

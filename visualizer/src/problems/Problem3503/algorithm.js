@@ -25,7 +25,7 @@ const isPalindromePair = (x, y) => {
 
 export function buildTrace({ s, t }) {
   const input = { s, t }
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), piece: '', best: 0, message: 'Try every substring of s in front of every substring of t.' }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('set best to zero'), piece: '', best: 0, message: 'Try every substring of s in front of every substring of t.' }]
   let best = 0
   let bestPair = ['', '']
   const starts = substrings(s)
@@ -36,9 +36,9 @@ export function buildTrace({ s, t }) {
         bestPair = [x, y]
       }
     }
-    frames.push({ phase: 'piece', activeLine: L('for each substring y of t'), piece: x, best, message: `Pieces starting with "${x}" checked. Best so far ${best}.` })
+    frames.push({ pythonLine: 11, phase: 'piece', activeLine: L('for each substring y of t'), piece: x, best, message: `Pieces starting with "${x}" checked. Best so far ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), piece: '', best, message: `Longest palindrome: ${bestPair[0]} + ${bestPair[1]} gives length ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return best'), piece: '', best, message: `Longest palindrome: ${bestPair[0]} + ${bestPair[1]} gives length ${best}.` })
   return { input, result: best, frames }
 }
 

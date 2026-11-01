@@ -9,20 +9,20 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   const n = nums.length
   const windows = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set best to minus one'), index: -1, window: [], key: null, counts: [], best: -1, message: `Slide a window of length ${k} across nums.` }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set best to minus one'), index: -1, window: [], key: null, counts: [], best: -1, message: `Slide a window of length ${k} across nums.` }]
   for (let i = 0; i + k <= n; i++) {
     const values = [...new Set(nums.slice(i, i + k))]
     for (const v of values) windows.set(v, (windows.get(v) || 0) + 1)
-    frames.push({ phase: 'window', activeLine: L('add one to the window count'), index: i, window: values, key: null, counts: [...windows].sort((a, b) => a[0] - b[0]), best: -1, message: `Window ${i} to ${i + k - 1} contains ${values.join(', ')}.` })
+    frames.push({ pythonLine: 6, phase: 'window', activeLine: L('add one to the window count'), index: i, window: values, key: null, counts: [...windows].sort((a, b) => a[0] - b[0]), best: -1, message: `Window ${i} to ${i + k - 1} contains ${values.join(', ')}.` })
   }
   let best = -1
   for (const [v, count] of [...windows].sort((a, b) => a[0] - b[0])) {
     if (count === 1 && v > best) {
       best = v
-      frames.push({ phase: 'pick', activeLine: L('set best to v'), index: -1, window: [], key: v, counts: [...windows].sort((a, b) => a[0] - b[0]), best, message: `${v} is in exactly one window and is the largest so far.` })
+      frames.push({ pythonLine: 10, phase: 'pick', activeLine: L('set best to v'), index: -1, window: [], key: v, counts: [...windows].sort((a, b) => a[0] - b[0]), best, message: `${v} is in exactly one window and is the largest so far.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, window: [], key: null, counts: [...windows].sort((a, b) => a[0] - b[0]), best, result: best, message: best === -1 ? 'No value appears in exactly one window.' : `The largest almost missing integer is ${best}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return best'), index: -1, window: [], key: null, counts: [...windows].sort((a, b) => a[0] - b[0]), best, result: best, message: best === -1 ? 'No value appears in exactly one window.' : `The largest almost missing integer is ${best}.` })
   return { input: { nums, k }, result: best, frames }
 }
 

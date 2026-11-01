@@ -10,14 +10,14 @@ export function parseInput(text) {
 
 export function buildTrace({ nums, k, multiplier }) {
   const values = [...nums]
-  const frames = [{ phase: 'start', activeLine: L('repeat k times'), values: [...values], picked: -1, message: 'Each operation multiplies the first smallest number.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('repeat k times'), values: [...values], picked: -1, message: 'Each operation multiplies the first smallest number.' }]
   for (let round = 1; round <= k; round++) {
     let at = 0
     for (let i = 1; i < values.length; i++) if (values[i] < values[at]) at = i
     values[at] *= multiplier
-    frames.push({ phase: 'multiply', activeLine: L('multiply nums'), values: [...values], picked: at, message: `Operation ${round}: index ${at} becomes ${values[at]}.` })
+    frames.push({ pythonLine: 5, phase: 'multiply', activeLine: L('multiply nums'), values: [...values], picked: at, message: `Operation ${round}: index ${at} becomes ${values[at]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return nums'), values: [...values], picked: -1, message: `Final array: [${values.join(', ')}].` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return nums'), values: [...values], picked: -1, message: `Final array: [${values.join(', ')}].` })
   return { input: { nums, k, multiplier }, result: values, frames }
 }
 

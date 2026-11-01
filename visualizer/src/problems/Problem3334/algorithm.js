@@ -24,14 +24,14 @@ function factorScore(values) {
 
 export function buildTrace({ nums }) {
   let best = factorScore(nums)
-  const frames = [{ phase: 'base', activeLine: L('set best to the factor score'), index: -1, score: best, best, message: `Keeping every value gives a factor score of ${best}.` }]
+  const frames = [{ pythonLine: 12, phase: 'base', activeLine: L('set best to the factor score'), index: -1, score: best, best, message: `Keeping every value gives a factor score of ${best}.` }]
   for (let i = 0; i < nums.length; i++) {
     const rest = nums.filter((_, k) => k !== i)
     const score = factorScore(rest)
     if (score > best) best = score
-    frames.push({ phase: 'remove', activeLine: L('if score is more than best'), index: i, score, best, message: `Without ${nums[i]} the factor score is ${score}. Best: ${best}.` })
+    frames.push({ pythonLine: 14, phase: 'remove', activeLine: L('if score is more than best'), index: i, score, best, message: `Without ${nums[i]} the factor score is ${score}. Best: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, score: best, best, message: `Maximum factor score: ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return best'), index: -1, score: best, best, message: `Maximum factor score: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

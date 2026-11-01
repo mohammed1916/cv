@@ -15,7 +15,7 @@ export function buildTrace({ nums, threshold }) {
   const find = x => { while (parent[x] !== x) x = parent[x]; return x }
   const roots = () => nums.map((_, i) => nums[find(i)])
   let groups = nums.length
-  const frames = [{ phase: 'start', activeLine: L('give every number its own group'), pair: null, lcm: null, roots: roots(), groups, message: `${nums.length} numbers, each in its own group.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('give every number its own group'), pair: null, lcm: null, roots: roots(), groups, message: `${nums.length} numbers, each in its own group.` }]
   for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       const a = nums[i]
@@ -27,10 +27,10 @@ export function buildTrace({ nums, threshold }) {
         const rj = find(j)
         if (ri !== rj) { parent[ri] = rj; groups-- }
       }
-      frames.push({ phase: 'pair', activeLine: L('compute the lcm'), pair: [i, j], lcm: l, linked, roots: roots(), groups, message: `lcm(${a}, ${b}) = ${l} ${linked ? 'is within' : 'is above'} ${threshold}.` })
+      frames.push({ pythonLine: 16, phase: 'pair', activeLine: L('compute the lcm'), pair: [i, j], lcm: l, linked, roots: roots(), groups, message: `lcm(${a}, ${b}) = ${l} ${linked ? 'is within' : 'is above'} ${threshold}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return groups'), pair: null, lcm: null, roots: roots(), groups, message: `${groups} connected components.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return groups'), pair: null, lcm: null, roots: roots(), groups, message: `${groups} connected components.` })
   return { input: { nums, threshold }, result: groups, frames }
 }
 

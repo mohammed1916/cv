@@ -6,15 +6,15 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), index: -1, start: -1, sub: 0, total: 0, message: 'Add one variable-length subarray for each index.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to zero'), index: -1, start: -1, sub: 0, total: 0, message: 'Add one variable-length subarray for each index.' }]
   for (let i = 0; i < nums.length; i++) {
     const start = Math.max(0, i - nums[i])
     let sub = 0
     for (let j = start; j <= i; j++) sub += nums[j]
     total += sub
-    frames.push({ phase: 'add', activeLine: L('add the values from start through i'), index: i, start, sub, total, message: `Index ${i} uses positions ${start} to ${i}, sum ${sub}; running total ${total}.` })
+    frames.push({ pythonLine: 5, phase: 'add', activeLine: L('add the values from start through i'), index: i, start, sub, total, message: `Index ${i} uses positions ${start} to ${i}, sum ${sub}; running total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, start: -1, sub: 0, total, message: `Total: ${total}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), index: -1, start: -1, sub: 0, total, message: `Total: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

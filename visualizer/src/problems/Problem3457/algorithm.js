@@ -13,24 +13,24 @@ export function buildTrace(pizzas) {
   let next = odd
   let total = 0
   const gained = []
-  const frames = [{ phase: 'sort', activeLine: L('sort the pizzas'), day: 0, gain: null, partner: null, gained: [], total, ranked, message: `Sorted heaviest first: [${ranked.join(', ')}]. There are ${odd} odd days.` }]
+  const frames = [{ pythonLine: 2, phase: 'sort', activeLine: L('sort the pizzas'), day: 0, gain: null, partner: null, gained: [], total, ranked, message: `Sorted heaviest first: [${ranked.join(', ')}]. There are ${odd} odd days.` }]
   for (let day = 1; day <= days; day++) {
     if (day % 2 === 1) {
       const gain = top
       total += ranked[gain]
       gained.push(gain)
       top += 1
-      frames.push({ phase: 'odd', activeLine: L('gain the pizza at top'), day, gain, partner: null, gained: [...gained], total, ranked, message: `Day ${day} is odd: gain the heaviest unused pizza, ${ranked[gain]}. Total ${total}.` })
+      frames.push({ pythonLine: 9, phase: 'odd', activeLine: L('gain the pizza at top'), day, gain, partner: null, gained: [...gained], total, ranked, message: `Day ${day} is odd: gain the heaviest unused pizza, ${ranked[gain]}. Total ${total}.` })
     } else {
       const partner = next
       const gain = next + 1
       total += ranked[gain]
       gained.push(gain)
       next += 2
-      frames.push({ phase: 'even', activeLine: L('discard the pizza at next'), day, gain, partner, gained: [...gained], total, ranked, message: `Day ${day} is even: discard ${ranked[partner]} and gain ${ranked[gain]}. Total ${total}.` })
+      frames.push({ pythonLine: 12, phase: 'even', activeLine: L('discard the pizza at next'), day, gain, partner, gained: [...gained], total, ranked, message: `Day ${day} is even: discard ${ranked[partner]} and gain ${ranked[gain]}. Total ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), day: days, gain: null, partner: null, gained: [...gained], total, ranked, message: `Maximum weight gained: ${total}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return total'), day: days, gain: null, partner: null, gained: [...gained], total, ranked, message: `Maximum weight gained: ${total}.` })
   return { input: pizzas, result: total, frames }
 }
 

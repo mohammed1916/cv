@@ -28,19 +28,19 @@ export function buildTrace(input) {
   const seen = new Set()
   const flat = (r, c) => r * C + c
   let frontier = [[0, 0, 0]]
-  const frames = [{ phase: 'start', activeLine: L('set the frontier to the start cell'), at: 0, moves: 0, message: 'Start at the top-left cell with no portal letters used.' }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('set the frontier to the start cell'), at: 0, moves: 0, message: 'Start at the top-left cell with no portal letters used.' }]
   let moves = 0
   while (frontier.length) {
     const stack = [...frontier]
     const next = []
-    frames.push({ phase: 'layer', activeLine: L('repeat while the stack is not empty'), at: flat(frontier[0][0], frontier[0][1]), moves, message: `${moves} move${moves === 1 ? '' : 's'}: ${frontier.length} state${frontier.length === 1 ? '' : 's'} to expand. Teleports cost no move.` })
+    frames.push({ pythonLine: 17, phase: 'layer', activeLine: L('repeat while the stack is not empty'), at: flat(frontier[0][0], frontier[0][1]), moves, message: `${moves} move${moves === 1 ? '' : 's'}: ${frontier.length} state${frontier.length === 1 ? '' : 's'} to expand. Teleports cost no move.` })
     while (stack.length) {
       const [r, c, mask] = stack.pop()
       const k = `${r},${c},${mask}`
       if (seen.has(k)) continue
       seen.add(k)
       if (r === R - 1 && c === C - 1) {
-        frames.push({ phase: 'done', activeLine: L('return moves'), at: flat(r, c), moves, message: `Reached the bottom-right cell in ${moves} moves.` })
+        frames.push({ pythonLine: 24, phase: 'done', activeLine: L('return moves'), at: flat(r, c), moves, message: `Reached the bottom-right cell in ${moves} moves.` })
         return { input, result: moves, frames }
       }
       const ch = matrix[r][c]
@@ -49,7 +49,7 @@ export function buildTrace(input) {
           if (r2 === r && c2 === c) continue
           stack.push([r2, c2, mask | bit(ch)])
         }
-        frames.push({ phase: 'teleport', activeLine: L('teleport to every other cell'), at: flat(r, c), moves, message: `Portal ${ch} at row ${r}, column ${c} teleports for free to its matching cells.` })
+        frames.push({ pythonLine: 29, phase: 'teleport', activeLine: L('teleport to every other cell'), at: flat(r, c), moves, message: `Portal ${ch} at row ${r}, column ${c} teleports for free to its matching cells.` })
       }
       for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const r2 = r + dr
@@ -60,7 +60,7 @@ export function buildTrace(input) {
     frontier = next.filter(([r, c, mask]) => !seen.has(`${r},${c},${mask}`))
     moves++
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), at: -1, moves: -1, message: 'The bottom-right cell cannot be reached, so the answer is -1.' })
+  frames.push({ pythonLine: 36, phase: 'done', activeLine: L('return -1'), at: -1, moves: -1, message: 'The bottom-right cell cannot be reached, so the answer is -1.' })
   return { input, result: -1, frames }
 }
 

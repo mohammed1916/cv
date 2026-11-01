@@ -17,7 +17,7 @@ function gcd(a, b) {
 
 export function buildTrace(input) {
   const { nums } = input
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), start: -1, end: -1, product: '1', gcd: '0', lcm: '1', equal: false, best: 0, message: 'Try every subarray, extending it one value at a time.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set best to zero'), start: -1, end: -1, product: '1', gcd: '0', lcm: '1', equal: false, best: 0, message: 'Try every subarray, extending it one value at a time.' }]
   let best = 0
   let bestRange = null
   for (let start = 0; start < nums.length; start++) {
@@ -31,10 +31,10 @@ export function buildTrace(input) {
       l = (l * x) / gcd(l, x)
       const equal = product === g * l
       if (equal && end - start + 1 > best) { best = end - start + 1; bestRange = [start, end] }
-      frames.push({ phase: 'extend', activeLine: L('multiply product by'), start, end, product: product.toString(), gcd: g.toString(), lcm: l.toString(), equal, best, message: `Subarray ${start} to ${end} has product ${product} and gcd times lcm ${g * l}. ${equal ? 'They match.' : 'They differ.'}` })
+      frames.push({ pythonLine: 11, phase: 'extend', activeLine: L('multiply product by'), start, end, product: product.toString(), gcd: g.toString(), lcm: l.toString(), equal, best, message: `Subarray ${start} to ${end} has product ${product} and gcd times lcm ${g * l}. ${equal ? 'They match.' : 'They differ.'}` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: bestRange ? bestRange[0] : -1, end: bestRange ? bestRange[1] : -1, product: '', gcd: '', lcm: '', equal: true, best, message: `The longest subarray with equal products has length ${best}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return best'), start: bestRange ? bestRange[0] : -1, end: bestRange ? bestRange[1] : -1, product: '', gcd: '', lcm: '', equal: true, best, message: `The longest subarray with equal products has length ${best}.` })
   return { input, result: best, frames }
 }
 

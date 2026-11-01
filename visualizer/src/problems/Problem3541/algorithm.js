@@ -20,7 +20,7 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace(s) {
   const count = {}
-  const frames = [{ phase: 'start', letter: null, bestVowel: 0, bestConsonant: 0, activeLine: L('set count to'), message: 'Count how often each letter occurs in s.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', letter: null, bestVowel: 0, bestConsonant: 0, activeLine: L('set count to'), message: 'Count how often each letter occurs in s.' }]
   for (const ch of s) count[ch] = (count[ch] ?? 0) + 1
   let bestVowel = 0
   let bestConsonant = 0
@@ -28,10 +28,10 @@ export function buildTrace(s) {
     const vowel = VOWELS.includes(letter)
     if (vowel) bestVowel = Math.max(bestVowel, c)
     else bestConsonant = Math.max(bestConsonant, c)
-    frames.push({ phase: vowel ? 'vowel' : 'consonant', letter, bestVowel, bestConsonant, activeLine: vowel ? L('set best vowel to') : L('set best consonant to'), message: `${letter} occurs ${c} times and is a ${vowel ? 'vowel' : 'consonant'}.` })
+    frames.push({ pythonLine: vowel ? 9 : 11, phase: vowel ? 'vowel' : 'consonant', letter, bestVowel, bestConsonant, activeLine: vowel ? L('set best vowel to') : L('set best consonant to'), message: `${letter} occurs ${c} times and is a ${vowel ? 'vowel' : 'consonant'}.` })
   }
   const result = bestVowel + bestConsonant
-  frames.push({ phase: 'done', letter: null, bestVowel, bestConsonant, activeLine: L('return best vowel plus'), message: `${bestVowel} + ${bestConsonant} = ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', letter: null, bestVowel, bestConsonant, activeLine: L('return best vowel plus'), message: `${bestVowel} + ${bestConsonant} = ${result}.` })
   return { input: s, result, frames }
 }
 

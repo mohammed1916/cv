@@ -26,19 +26,19 @@ export function buildTrace(input) {
   // best[j] is the fewest target indices a match of pattern[0..j) must keep, so far.
   const best = Array(m + 1).fill(Infinity)
   best[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set best[0] to 0'), index: -1, best: [...best], message: `Matching the empty pattern keeps 0 targets. There are ${targetIndices.length} targets.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set best[0] to 0'), index: -1, best: [...best], message: `Matching the empty pattern keeps 0 targets. There are ${targetIndices.length} targets.` }]
   for (let i = 0; i < source.length; i++) {
     const cost = targets.has(i) ? 1 : 0
     // Scanning the pattern backwards means each source character extends a match at most once.
     for (let j = m - 1; j >= 0; j--) {
       if (source[i] === pattern[j] && best[j] + cost < best[j + 1]) best[j + 1] = best[j] + cost
     }
-    frames.push({ phase: 'read', activeLine: L('for each index i'), index: i, best: [...best],
+    frames.push({ pythonLine: 6, phase: 'read', activeLine: L('for each index i'), index: i, best: [...best],
       message: `Character ${source[i]} at ${i} ${targets.has(i) ? 'is a target, so using it keeps one more' : 'is not a target, so using it is free'}. Fewest kept for the full pattern: ${best[m]}.` })
   }
   const kept = best[m]
   const result = targetIndices.length - kept
-  frames.push({ phase: 'done', activeLine: L('return targets minus'), index: -1, best: [...best], message: `Delete every target the match does not keep: ${targetIndices.length} minus ${kept} gives ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return targets minus'), index: -1, best: [...best], message: `Delete every target the match does not keep: ${targetIndices.length} minus ${kept} gives ${result}.` })
   return { input, result, frames }
 }
 

@@ -17,19 +17,19 @@ export function parseInput(text) {
 
 export function buildTrace({ n, nums, max_diff: maxDiff, queries }) {
   const comp = Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set the piece label of node 0'), comp: [...comp], query: null, answer: null, message: 'Nodes are sorted, so a node joins the piece of its left neighbour when the gap is at most max_diff.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set the piece label of node 0'), comp: [...comp], query: null, answer: null, message: 'Nodes are sorted, so a node joins the piece of its left neighbour when the gap is at most max_diff.' }]
   for (let i = 1; i < n; i++) {
     const gap = nums[i] - nums[i - 1]
     comp[i] = gap <= maxDiff ? comp[i - 1] : comp[i - 1] + 1
-    frames.push({ phase: 'link', activeLine: L('if the gap is at most max_diff'), comp: [...comp], query: [i - 1, i], answer: null, message: gap <= maxDiff ? `Gap ${gap} is within ${maxDiff}: node ${i} joins piece ${comp[i]}.` : `Gap ${gap} is too large: node ${i} starts piece ${comp[i]}.` })
+    frames.push({ pythonLine: 4, phase: 'link', activeLine: L('if the gap is at most max_diff'), comp: [...comp], query: [i - 1, i], answer: null, message: gap <= maxDiff ? `Gap ${gap} is within ${maxDiff}: node ${i} joins piece ${comp[i]}.` : `Gap ${gap} is too large: node ${i} starts piece ${comp[i]}.` })
   }
   const answers = []
   for (const [u, v] of queries) {
     const answer = comp[u] === comp[v]
     answers.push(answer)
-    frames.push({ phase: 'query', activeLine: L('answer is true when'), comp: [...comp], query: [u, v], answer, message: `Nodes ${u} and ${v} are in pieces ${comp[u]} and ${comp[v]}: ${answer ? 'connected' : 'not connected'}.` })
+    frames.push({ pythonLine: 10, phase: 'query', activeLine: L('answer is true when'), comp: [...comp], query: [u, v], answer, message: `Nodes ${u} and ${v} are in pieces ${comp[u]} and ${comp[v]}: ${answer ? 'connected' : 'not connected'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), comp: [...comp], query: null, answer: null, message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return the answers'), comp: [...comp], query: null, answer: null, message: `Answers: ${answers.join(', ')}.` })
   return { input: { n, nums, max_diff: maxDiff, queries }, result: answers, frames }
 }
 

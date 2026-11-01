@@ -6,14 +6,14 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   const replaced = []
-  const frames = [{ phase: 'start', activeLine: L('for each value in nums'), index: -1, values: [], message: 'Replace each value by its parity: even becomes 0, odd becomes 1.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('for each value in nums'), index: -1, values: [], message: 'Replace each value by its parity: even becomes 0, odd becomes 1.' }]
   for (let i = 0; i < nums.length; i++) {
     replaced.push(nums[i] % 2 === 0 ? 0 : 1)
-    frames.push({ phase: 'replace', activeLine: L('replace an even value'), index: i, values: [...replaced], message: `${nums[i]} is ${nums[i] % 2 === 0 ? 'even, so 0' : 'odd, so 1'}.` })
+    frames.push({ pythonLine: 2, phase: 'replace', activeLine: L('replace an even value'), index: i, values: [...replaced], message: `${nums[i]} is ${nums[i] % 2 === 0 ? 'even, so 0' : 'odd, so 1'}.` })
   }
   const sorted = [...replaced].sort((a, b) => a - b)
-  frames.push({ phase: 'sort', activeLine: L('sort the replaced values'), index: -1, values: sorted, message: 'Sort ascending: all zeros first, then all ones.' })
-  frames.push({ phase: 'done', activeLine: L('return the sorted values'), index: -1, values: sorted, message: `Result: [${sorted.join(', ')}].` })
+  frames.push({ pythonLine: 3, phase: 'sort', activeLine: L('sort the replaced values'), index: -1, values: sorted, message: 'Sort ascending: all zeros first, then all ones.' })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return the sorted values'), index: -1, values: sorted, message: `Result: [${sorted.join(', ')}].` })
   return { input: nums, result: sorted, frames }
 }
 

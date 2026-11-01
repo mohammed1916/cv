@@ -26,7 +26,8 @@ export function buildTrace(input) {
   let cover = 0
   let used = 0
   let at = -1
-  const snap = (phase, activeLine, message) => frames.push({
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    pythonLine,
     phase, activeLine, at, cover, used, heap: [...heap], message,
   })
   const push = value => {
@@ -54,28 +55,28 @@ export function buildTrace(input) {
     return top
   }
 
-  snap('start', L('set used to zero'), 'Nothing is used yet. The heap holds right ends of queries that have started.')
+  snap('start', L('set used to zero'), 'Nothing is used yet. The heap holds right ends of queries that have started.', 11)
   for (let i = 0; i < n; i++) {
     at = i
     cover -= end[i]
-    snap('expire', L('remove queries that ended'), `Queries that ended before index ${i} stop covering it.`)
+    snap('expire', L('remove queries that ended'), `Queries that ended before index ${i} stop covering it.`, 13)
     for (const r of byStart[i]) push(r)
-    if (byStart[i].length) snap('push', L('push every query that starts'), `Queries starting at ${i} join the heap by right end.`)
+    if (byStart[i].length) snap('push', L('push every query that starts'), `Queries starting at ${i} join the heap by right end.`, 15)
     while (cover < nums[i] && heap.length && heap[0] >= i) {
       const r = pop()
       cover++
       end[r + 1]++
       used++
-      snap('pick', L('pop the query with the largest'), `Use the query reaching ${r}. Index ${i} is covered ${cover} of ${nums[i]} times.`)
+      snap('pick', L('pop the query with the largest'), `Use the query reaching ${r}. Index ${i} is covered ${cover} of ${nums[i]} times.`, 17)
     }
     if (cover < nums[i]) {
-      snap('fail', L('if cover is still below'), `Index ${i} needs ${nums[i]} but only ${cover} queries reach it. Return -1.`)
+      snap('fail', L('if cover is still below'), `Index ${i} needs ${nums[i]} but only ${cover} queries reach it. Return -1.`, 22)
       return { input, result: -1, frames }
     }
   }
   at = -1
   const result = queries.length - used
-  snap('done', L('return the number of queries'), `Maximum queries removable: ${result}.`)
+  snap('done', L('return the number of queries'), `Maximum queries removable: ${result}.`, 23)
   return { input, result, frames }
 }
 

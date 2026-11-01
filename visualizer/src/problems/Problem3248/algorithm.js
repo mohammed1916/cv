@@ -21,16 +21,16 @@ export function buildTrace(input) {
   const { n, commands } = input
   let row = 0
   let col = 0
-  const frames = [{ phase: 'start', activeLine: L('set row to 0'), row, col, index: -1, message: 'The snake starts in cell 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set row to 0'), row, col, index: -1, message: 'The snake starts in cell 0.' }]
   commands.forEach((cmd, i) => {
     if (cmd === 'UP') row -= 1
     else if (cmd === 'DOWN') row += 1
     else if (cmd === 'LEFT') col -= 1
     else col += 1
-    frames.push({ phase: 'move', activeLine: L(`if command is ${cmd}`), row, col, index: i, message: `Command ${i + 1} ${cmd} moves the snake to row ${row}, column ${col}.` })
+    frames.push({ pythonLine: { UP: 6, DOWN: 8, LEFT: 10, RIGHT: 12 }[cmd], phase: 'move', activeLine: L(`if command is ${cmd}`), row, col, index: i, message: `Command ${i + 1} ${cmd} moves the snake to row ${row}, column ${col}.` })
   })
   const result = row * n + col
-  frames.push({ phase: 'done', activeLine: L('return row times n'), row, col, index: -1, message: `Final cell index: ${row} times ${n} plus ${col} is ${result}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return row times n'), row, col, index: -1, message: `Final cell index: ${row} times ${n} plus ${col} is ${result}.` })
   return { input, result, frames }
 }
 

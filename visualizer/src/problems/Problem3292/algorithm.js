@@ -22,7 +22,7 @@ export function buildTrace({ words, target }) {
   }
   const n = target.length
   const reach = []
-  const frames = [{ phase: 'trie', activeLine: L('build a trie of the words'), p: -1, reach: [], cost: [], message: 'Built a trie of every word.' }]
+  const frames = [{ pythonLine: 6, phase: 'trie', activeLine: L('build a trie of the words'), p: -1, reach: [], cost: [], message: 'Built a trie of every word.' }]
   for (let p = 0; p < n; p++) {
     let node = trie
     let length = 0
@@ -31,7 +31,7 @@ export function buildTrace({ words, target }) {
       length++
     }
     reach.push(length)
-    frames.push({ phase: 'reach', activeLine: L('walk the target from p'), p, reach: [...reach], cost: [], message: `Walking the trie from position ${p} reaches length ${length}.` })
+    frames.push({ pythonLine: 13, phase: 'reach', activeLine: L('walk the target from p'), p, reach: [...reach], cost: [], message: `Walking the trie from position ${p} reaches length ${length}.` })
   }
   const cost = Array(n + 1).fill(Infinity)
   cost[0] = 0
@@ -40,10 +40,10 @@ export function buildTrace({ words, target }) {
     for (let k = 1; k <= reach[p]; k++) {
       if (cost[p] + 1 < cost[p + k]) cost[p + k] = cost[p] + 1
     }
-    frames.push({ phase: 'relax', activeLine: L('set cost[p + k]'), p, reach: [...reach], cost: [...cost], message: `Pieces from ${p} reach up to position ${p + reach[p]}.` })
+    frames.push({ pythonLine: 22, phase: 'relax', activeLine: L('set cost[p + k]'), p, reach: [...reach], cost: [...cost], message: `Pieces from ${p} reach up to position ${p + reach[p]}.` })
   }
   const result = cost[n] === Infinity ? -1 : cost[n]
-  frames.push({ phase: 'done', activeLine: L('return cost[n]'), p: n, reach: [...reach], cost: [...cost], message: result === -1 ? 'The target cannot be formed.' : `Minimum valid strings: ${result}.` })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return cost[n]'), p: n, reach: [...reach], cost: [...cost], message: result === -1 ? 'The target cannot be formed.' : `Minimum valid strings: ${result}.` })
   return { input: { words, target }, result, frames }
 }
 

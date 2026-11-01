@@ -15,7 +15,7 @@ export function buildTrace(input) {
   const n = nums.length
   let best = 0
   let bestRange = null
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), range: null, best: 0, message: 'Try every subarray. For each start, keep the (doublings used, gcd) pairs reachable so far.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set best to 0'), range: null, best: 0, message: 'Try every subarray. For each start, keep the (doublings used, gcd) pairs reachable so far.' }]
   for (let l = 0; l < n; l++) {
     let states = new Set()
     const seenStart = new Map()
@@ -36,9 +36,9 @@ export function buildTrace(input) {
       }
       seenStart.set(r, states.size)
     }
-    frames.push({ phase: 'start-index', activeLine: L('for each start l'), range: [l, n - 1], best, message: `Subarrays starting at ${l} are checked. Best score so far: ${best}.` })
+    frames.push({ pythonLine: 6, phase: 'start-index', activeLine: L('for each start l'), range: [l, n - 1], best, message: `Subarrays starting at ${l} are checked. Best score so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), range: bestRange, best, message: `The maximum score is ${best}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return best'), range: bestRange, best, message: `The maximum score is ${best}.` })
   return { input, result: best, frames }
 }
 

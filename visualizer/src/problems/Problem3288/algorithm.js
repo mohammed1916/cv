@@ -22,7 +22,7 @@ export function buildTrace(input) {
     }
     return rows
   }
-  const frames = [{ phase: 'start', activeLine: L('set rising to rising'), index: k, direction: null, memo: [], message: `Find the longest strictly increasing path through point ${k}, ${coordinates[k]}.` }]
+  const frames = [{ pythonLine: 18, phase: 'start', activeLine: L('set rising to rising'), index: k, direction: null, memo: [], message: `Find the longest strictly increasing path through point ${k}, ${coordinates[k]}.` }]
 
   // sign +1 looks for points that are larger in both coordinates (rising); sign -1 for smaller ones (falling).
   const chain = (i, sign) => {
@@ -30,25 +30,25 @@ export function buildTrace(input) {
     const name = sign === 1 ? 'rising' : 'falling'
     if (memo.has(i)) {
       const value = memo.get(i)
-      frames.push({ phase: 'reuse', activeLine: L('if memo already holds'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is already ${value}.` })
+      frames.push({ pythonLine: 7, phase: 'reuse', activeLine: L('if memo already holds'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is already ${value}.` })
       return value
     }
     let best = 1
-    frames.push({ phase: 'visit', activeLine: L('set best to 1'), index: i, direction: name, memo: snapshot(), message: `Look for points that are ${sign === 1 ? 'larger' : 'smaller'} in both coordinates than point ${i}.` })
+    frames.push({ pythonLine: 9, phase: 'visit', activeLine: L('set best to 1'), index: i, direction: name, memo: snapshot(), message: `Look for points that are ${sign === 1 ? 'larger' : 'smaller'} in both coordinates than point ${i}.` })
     for (let j = 0; j < n; j++) {
       const dx = coordinates[j][0] - coordinates[i][0]
       const dy = coordinates[j][1] - coordinates[i][1]
       if (sign * dx > 0 && sign * dy > 0) best = Math.max(best, 1 + chain(j, sign))
     }
     memo.set(i, best)
-    frames.push({ phase: 'store', activeLine: L('store best for i'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is ${best}.` })
+    frames.push({ pythonLine: 15, phase: 'store', activeLine: L('store best for i'), index: i, direction: name, memo: snapshot(), message: `${name} from point ${i} is ${best}.` })
     return best
   }
 
   const rising = chain(k, 1)
   const falling = chain(k, -1)
   const result = rising + falling - 1
-  frames.push({ phase: 'done', activeLine: L('return rising plus falling'), index: k, direction: null, memo: snapshot(), message: `Longest path through point ${k}: ${rising} + ${falling} - 1 = ${result}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return rising plus falling'), index: k, direction: null, memo: snapshot(), message: `Longest path through point ${k}: ${rising} + ${falling} - 1 = ${result}.` })
   return { input, result, frames }
 }
 

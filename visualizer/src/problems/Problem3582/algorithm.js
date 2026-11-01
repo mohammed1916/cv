@@ -9,16 +9,16 @@ export function parseInput(text) {
 
 export function buildTrace({ caption }) {
   const words = caption.trim().split(/\s+/).filter(Boolean)
-  const frames = [{ phase: 'start', activeLine: L('split caption'), index: -1, piece: '', tag: '', message: `The caption has ${words.length} words.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('split caption'), index: -1, piece: '', tag: '', message: `The caption has ${words.length} words.` }]
   let tag = ''
   words.forEach((word, index) => {
     const piece = index === 0 ? word.toLowerCase() : word[0].toUpperCase() + word.slice(1).toLowerCase()
     tag += piece
-    frames.push({ phase: 'word', activeLine: L(index === 0 ? 'append the word in lowercase' : 'append the word with'), index, piece, tag, message: `Word ${index + 1} "${word}" contributes "${piece}".` })
+    frames.push({ pythonLine: index === 0 ? 6 : 8, phase: 'word', activeLine: L(index === 0 ? 'append the word in lowercase' : 'append the word with'), index, piece, tag, message: `Word ${index + 1} "${word}" contributes "${piece}".` })
   })
   const full = `#${tag}`
   const result = full.slice(0, 100)
-  frames.push({ phase: 'done', activeLine: L('return tag'), index: -1, piece: '', tag: result, message: full.length > 100 ? `The tag is cut to 100 characters: ${result}.` : `Tag: ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return tag'), index: -1, piece: '', tag: result, message: full.length > 100 ? `The tag is cut to 100 characters: ${result}.` : `Tag: ${result}.` })
   return { input: { caption }, result, frames }
 }
 

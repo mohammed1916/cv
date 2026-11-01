@@ -16,14 +16,14 @@ const AXIS = ['x', 'y']
 
 export function buildTrace(input) {
   const { n, rectangles } = input
-  const frames = [{ phase: 'start', activeLine: L('can the grid be cut'), axis: null, spans: [], groups: 0, reach: null, message: `Look for two parallel cuts that split the ${n} by ${n} grid into three sections.` }]
+  const frames = [{ pythonLine: 14, phase: 'start', activeLine: L('can the grid be cut'), axis: null, spans: [], groups: 0, reach: null, message: `Look for two parallel cuts that split the ${n} by ${n} grid into three sections.` }]
 
   // Rectangles are grouped by overlapping spans on one axis; a new group starts where no rectangle crosses the boundary.
   const sections = axis => {
     const spans = rectangles.map(r => ({ start: r[axis], end: r[axis + 2], group: null }))
       .sort((a, b) => a.start - b.start || a.end - b.end)
     const copy = () => spans.map(s => ({ ...s }))
-    frames.push({ phase: 'sort', activeLine: L('sort the rectangles'), axis: AXIS[axis], spans: copy(), groups: 0, reach: -1, message: `Sort the rectangles by their ${AXIS[axis]} start.` })
+    frames.push({ pythonLine: 3, phase: 'sort', activeLine: L('sort the rectangles'), axis: AXIS[axis], spans: copy(), groups: 0, reach: -1, message: `Sort the rectangles by their ${AXIS[axis]} start.` })
     let groups = 0
     let reach = -1
     for (const span of spans) {
@@ -37,16 +37,16 @@ export function buildTrace(input) {
         message = `Span ${span.start} to ${span.end} overlaps the current section.`
       }
       span.group = groups
-      frames.push({ phase: 'group', activeLine: L('if its start is at least reach'), axis: AXIS[axis], spans: copy(), groups, reach, message })
+      frames.push({ pythonLine: 7, phase: 'group', activeLine: L('if its start is at least reach'), axis: AXIS[axis], spans: copy(), groups, reach, message })
     }
-    frames.push({ phase: 'axis', activeLine: L('return true if groups'), axis: AXIS[axis], spans: copy(), groups, reach, message: `${groups} section${groups === 1 ? '' : 's'} along ${AXIS[axis]}.` })
+    frames.push({ pythonLine: 12, phase: 'axis', activeLine: L('return true if groups'), axis: AXIS[axis], spans: copy(), groups, reach, message: `${groups} section${groups === 1 ? '' : 's'} along ${AXIS[axis]}.` })
     return groups >= 3
   }
 
   const byX = sections(0)
   const byY = sections(1)
   const result = byX || byY
-  frames.push({ phase: 'done', activeLine: L('return true if the grid'), axis: null, spans: [], groups: 0, reach: null, message: result ? 'Two parallel cuts give three sections.' : 'No pair of parallel cuts works.' })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return true if the grid'), axis: null, spans: [], groups: 0, reach: null, message: result ? 'Two parallel cuts give three sections.' : 'No pair of parallel cuts works.' })
   return { input, result, frames }
 }
 

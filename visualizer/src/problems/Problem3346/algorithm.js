@@ -15,15 +15,15 @@ export function buildTrace(input) {
   const { nums, k, numOperations } = input
   const candidates = [...new Set(nums.flatMap(x => Array.from({ length: 2 * k + 1 }, (_, i) => x - k + i)))].sort((a, b) => a - b)
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('set candidates to'), value: null, eq: null, near: null, freq: null, best: 0, message: `Candidate targets are the values within ${k} of some number.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set candidates to'), value: null, eq: null, near: null, freq: null, best: 0, message: `Candidate targets are the values within ${k} of some number.` }]
   for (const v of candidates) {
     const eq = nums.filter(x => x === v).length
     const near = nums.filter(x => Math.abs(x - v) <= k).length
     const freq = eq + Math.min(numOperations, near - eq)
     best = Math.max(best, freq)
-    frames.push({ phase: 'candidate', activeLine: L('set freq to'), value: v, eq, near, freq, best, message: `Target ${v}: ${eq} already equal, ${near} within ${k}, so frequency ${freq}.` })
+    frames.push({ pythonLine: 10, phase: 'candidate', activeLine: L('set freq to'), value: v, eq, near, freq, best, message: `Target ${v}: ${eq} already equal, ${near} within ${k}, so frequency ${freq}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), value: null, eq: null, near: null, freq: null, best, message: `Maximum frequency: ${best}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return best'), value: null, eq: null, near: null, freq: null, best, message: `Maximum frequency: ${best}.` })
   return { input, candidates, result: best, frames }
 }
 

@@ -16,15 +16,15 @@ function strictlyIncreasing(nums, from, k) {
 
 export function buildTrace(input) {
   const { nums, k } = input
-  const frames = [{ phase: 'start', activeLine: L('for each start index'), start: -1, first: null, second: null, found: false, message: `Look for two neighboring runs of length ${k} that both strictly increase.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('for each start index'), start: -1, first: null, second: null, found: false, message: `Look for two neighboring runs of length ${k} that both strictly increase.` }]
   let found = false
   for (let start = 0; start + 2 * k <= nums.length && !found; start++) {
     const first = strictlyIncreasing(nums, start, k)
     const second = strictlyIncreasing(nums, start + k, k)
     found = first && second
-    frames.push({ phase: 'check', activeLine: L('if both checks pass'), start, first, second, found, message: `Run at ${start} increases: ${first}. Run at ${start + k} increases: ${second}.` })
+    frames.push({ pythonLine: 5, phase: 'check', activeLine: L('if both checks pass'), start, first, second, found, message: `Run at ${start} increases: ${first}. Run at ${start + k} increases: ${second}.` })
   }
-  frames.push({ phase: 'done', activeLine: L(found ? 'return true' : 'return false'), start: -1, first: null, second: null, found, message: found ? 'Two adjacent increasing runs exist.' : 'No pair of adjacent increasing runs exists.' })
+  frames.push({ pythonLine: found ? 6 : 7, phase: 'done', activeLine: L(found ? 'return true' : 'return false'), start: -1, first: null, second: null, found, message: found ? 'Two adjacent increasing runs exist.' : 'No pair of adjacent increasing runs exists.' })
   return { input, result: found, frames }
 }
 

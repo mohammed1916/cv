@@ -34,7 +34,7 @@ export function buildTrace(input) {
   const best = Array(full + 1).fill(NEG)
   best[0] = 0
   const popcount = m => m.toString(2).split('').filter(c => c === '1').length
-  const frames = [{ phase: 'start', activeLine: L('set best[0]'), mask: 0, value: 0, node: -1, message: 'No nodes are placed yet. Each mask is a set of nodes already placed in the first positions.' }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('set best[0]'), mask: 0, value: 0, node: -1, message: 'No nodes are placed yet. Each mask is a set of nodes already placed in the first positions.' }]
   for (let mask = 0; mask <= full; mask++) {
     if (best[mask] === NEG) continue
     const placed = popcount(mask)
@@ -44,11 +44,11 @@ export function buildTrace(input) {
       const next = mask | (1 << v)
       const candidate = best[mask] + score[v] * (placed + 1)
       if (candidate > best[next]) best[next] = candidate
-      frames.push({ phase: 'extend', activeLine: L('set best[mask | bit'), mask, value: candidate, node: v, message: `Place node ${v} at position ${placed + 1}: adds ${score[v]} x ${placed + 1} = ${score[v] * (placed + 1)}. Best for this set: ${best[next]}.` })
+      frames.push({ pythonLine: 21, phase: 'extend', activeLine: L('set best[mask | bit'), mask, value: candidate, node: v, message: `Place node ${v} at position ${placed + 1}: adds ${score[v]} x ${placed + 1} = ${score[v] * (placed + 1)}. Best for this set: ${best[next]}.` })
     }
   }
   const result = best[full]
-  frames.push({ phase: 'done', activeLine: L('return best[full]'), mask: full, value: result, node: -1, message: `Maximum profit: ${result}.` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return best[full]'), mask: full, value: result, node: -1, message: `Maximum profit: ${result}.` })
   return { input, result, frames }
 }
 

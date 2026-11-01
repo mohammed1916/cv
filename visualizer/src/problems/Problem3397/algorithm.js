@@ -13,19 +13,19 @@ export function buildTrace({ nums, k }) {
   const assigned = nums.map(() => null)
   let previous = -Infinity
   let count = 0
-  const frames = [{ phase: 'sort', activeLine: L('sort the values'), index: -1, assigned: [...assigned], count, message: `Process the values from smallest to largest. Each may move by at most ${k}.` }]
+  const frames = [{ pythonLine: 4, phase: 'sort', activeLine: L('sort the values'), index: -1, assigned: [...assigned], count, message: `Process the values from smallest to largest. Each may move by at most ${k}.` }]
   for (const { value, index } of order) {
     const candidate = Math.max(value - k, previous + 1)
     if (candidate <= value + k) {
       assigned[index] = candidate
       count++
       previous = candidate
-      frames.push({ phase: 'take', activeLine: L('count it and set previous'), index, assigned: [...assigned], count, message: `${value} moves to ${candidate}, a new distinct value. Count ${count}.` })
+      frames.push({ pythonLine: 8, phase: 'take', activeLine: L('count it and set previous'), index, assigned: [...assigned], count, message: `${value} moves to ${candidate}, a new distinct value. Count ${count}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('if such a value exists'), index, assigned: [...assigned], count, message: `${value} cannot reach a value above ${previous} within ${k}. It adds nothing.` })
+      frames.push({ pythonLine: 6, phase: 'skip', activeLine: L('if such a value exists'), index, assigned: [...assigned], count, message: `${value} cannot reach a value above ${previous} within ${k}. It adds nothing.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), index: -1, assigned: [...assigned], count, message: `Maximum distinct elements: ${count}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return count'), index: -1, assigned: [...assigned], count, message: `Maximum distinct elements: ${count}.` })
   return { input: { nums, k }, result: count, frames }
 }
 

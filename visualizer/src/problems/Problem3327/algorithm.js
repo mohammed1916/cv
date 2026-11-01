@@ -24,15 +24,15 @@ export function buildTrace(input) {
   for (const list of children) list.sort((a, b) => a - b)
   const text = Array.from({ length: n }, () => '')
   const answer = Array.from({ length: n }, () => false)
-  const frames = [{ phase: 'start', activeLine: L('call visit on node 0'), node: 0, text: '', palindrome: null, answer: answer.slice(), result: null, message: 'Visit the tree from the root. Each node finishes after its children, so its string is built from theirs.' }]
+  const frames = [{ pythonLine: 17, phase: 'start', activeLine: L('call visit on node 0'), node: 0, text: '', palindrome: null, answer: answer.slice(), result: null, message: 'Visit the tree from the root. Each node finishes after its children, so its string is built from theirs.' }]
   const visit = x => {
     for (const c of children[x]) visit(c)
     text[x] = children[x].map(c => text[c]).join('') + s[x]
     answer[x] = text[x] === [...text[x]].reverse().join('')
-    frames.push({ phase: 'node', activeLine: L('set answer'), node: x, text: text[x], palindrome: answer[x], answer: answer.slice(), result: null, message: `Node ${x} builds ${text[x]}, which ${answer[x] ? 'is' : 'is not'} a palindrome.` })
+    frames.push({ pythonLine: 15, phase: 'node', activeLine: L('set answer'), node: x, text: text[x], palindrome: answer[x], answer: answer.slice(), result: null, message: `Node ${x} builds ${text[x]}, which ${answer[x] ? 'is' : 'is not'} a palindrome.` })
   }
   visit(0)
-  frames.push({ phase: 'done', activeLine: L('return answer'), node: -1, text: '', palindrome: null, answer: answer.slice(), result: answer, message: 'Every node has its palindrome answer.' })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return answer'), node: -1, text: '', palindrome: null, answer: answer.slice(), result: answer, message: 'Every node has its palindrome answer.' })
   return { input, result: answer, frames }
 }
 

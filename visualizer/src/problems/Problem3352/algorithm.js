@@ -27,7 +27,7 @@ const stepsTo1 = v => {
 export function buildTrace({ s, k }) {
   const N = parseInt(s, 2)
   const len = s.length
-  const frames = [{ phase: 'start', activeLine: L('total starts at 0'), popcount: 0, count: 0, message: `Count x in [1, ${N}) that reach 1 within ${k} operations.` }]
+  const frames = [{ pythonLine: 14, phase: 'start', activeLine: L('total starts at 0'), popcount: 0, count: 0, message: `Count x in [1, ${N}) that reach 1 within ${k} operations.` }]
   // Number of x in [0, N) with exactly c ones in binary.
   const countWithOnes = c => {
     let total = 0
@@ -41,15 +41,15 @@ export function buildTrace({ s, k }) {
     return total
   }
   let total = N > 1 ? 1 : 0
-  frames.push({ phase: 'one', activeLine: L('add 1 when'), popcount: 1, count: total, message: N > 1 ? 'x = 1 needs 0 operations, so it always counts.' : 'No x fits below N.' })
+  frames.push({ pythonLine: 14, phase: 'one', activeLine: L('add 1 when'), popcount: 1, count: total, message: N > 1 ? 'x = 1 needs 0 operations, so it always counts.' : 'No x fits below N.' })
   for (let c = 1; c <= len; c++) {
     let cnt = countWithOnes(c)
     if (c === 1 && N > 1) cnt -= 1
     const ok = 1 + stepsTo1(c) <= k
     if (ok) total += cnt
-    frames.push({ phase: 'class', activeLine: L('for each popcount c'), popcount: c, count: total, message: `Numbers with ${c} ones: ${cnt}, ${ok ? 'they reach 1 in time' : 'too many steps'}.` })
+    frames.push({ pythonLine: 15, phase: 'class', activeLine: L('for each popcount c'), popcount: c, count: total, message: `Numbers with ${c} ones: ${cnt}, ${ok ? 'they reach 1 in time' : 'too many steps'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), popcount: len, count: total, message: `k-reducible numbers below ${N}: ${total}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return total'), popcount: len, count: total, message: `k-reducible numbers below ${N}: ${total}.` })
   return { input: { s, k }, result: total, frames }
 }
 

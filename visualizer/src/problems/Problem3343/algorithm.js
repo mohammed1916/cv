@@ -28,9 +28,9 @@ export function buildTrace({ num }) {
   const digits = [...num].map(Number)
   const L_ = digits.length
   const total = digits.reduce((a, b) => a + b, 0)
-  const frames = [{ phase: 'start', activeLine: L('set total to the sum'), digit: -1, reach: 0, message: `Digit sum ${total} of ${num}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set total to the sum'), digit: -1, reach: 0, message: `Digit sum ${total} of ${num}.` }]
   if (total % 2) {
-    frames.push({ phase: 'done', activeLine: L('return zero'), digit: -1, reach: 0, message: 'The digit sum is odd, so no split is balanced.' })
+    frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return zero'), digit: -1, reach: 0, message: 'The digit sum is odd, so no split is balanced.' })
     return { input: { num }, result: 0, frames, digits }
   }
   const half = total / 2
@@ -55,10 +55,10 @@ export function buildTrace({ num }) {
     }
     dp = next
     const reach = dp.reduce((acc, row) => acc + row.filter(v => v !== 0n).length, 0)
-    frames.push({ phase: 'digit', activeLine: L('for each digit d from 0 to 9'), digit: d, reach, message: `Digit ${d} (${cnt[d]} copies): ${reach} reachable (count, sum) states.` })
+    frames.push({ pythonLine: 21, phase: 'digit', activeLine: L('for each digit d from 0 to 9'), digit: d, reach, message: `Digit ${d} (${cnt[d]} copies): ${reach} reachable (count, sum) states.` })
   }
   const result = Number((dp[evenSlots][half] * factmod(evenSlots) % MOD) * factmod(oddSlots) % MOD)
-  frames.push({ phase: 'done', activeLine: L('return dp[even][half]'), digit: 9, reach: 0, message: `Balanced permutations: ${result}.` })
+  frames.push({ pythonLine: 34, phase: 'done', activeLine: L('return dp[even][half]'), digit: 9, reach: 0, message: `Balanced permutations: ${result}.` })
   return { input: { num }, result, frames, digits }
 }
 

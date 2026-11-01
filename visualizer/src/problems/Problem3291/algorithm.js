@@ -16,12 +16,12 @@ export function buildTrace({ words, target }) {
   for (const w of words) for (let i = 1; i <= w.length; i++) prefixes.add(w.slice(0, i))
   const n = target.length
   const reach = []
-  const frames = [{ phase: 'prefixes', activeLine: L('set prefixes to the set'), p: -1, reach: [], cost: [], message: `Stored ${prefixes.size} distinct valid prefixes.` }]
+  const frames = [{ pythonLine: 2, phase: 'prefixes', activeLine: L('set prefixes to the set'), p: -1, reach: [], cost: [], message: `Stored ${prefixes.size} distinct valid prefixes.` }]
   for (let p = 0; p < n; p++) {
     let length = 0
     while (p + length < n && prefixes.has(target.slice(p, p + length + 1))) length++
     reach.push(length)
-    frames.push({ phase: 'reach', activeLine: L('set length to the longest'), p, reach: [...reach], cost: [], message: `From position ${p}, the longest valid piece is ${length}.` })
+    frames.push({ pythonLine: 11, phase: 'reach', activeLine: L('set length to the longest'), p, reach: [...reach], cost: [], message: `From position ${p}, the longest valid piece is ${length}.` })
   }
   const cost = Array(n + 1).fill(Infinity)
   cost[0] = 0
@@ -30,10 +30,10 @@ export function buildTrace({ words, target }) {
     for (let k = 1; k <= reach[p]; k++) {
       if (cost[p] + 1 < cost[p + k]) cost[p + k] = cost[p] + 1
     }
-    frames.push({ phase: 'relax', activeLine: L('set cost[p + k]'), p, reach: [...reach], cost: [...cost], message: `Pieces from ${p} reach up to position ${p + reach[p]}.` })
+    frames.push({ pythonLine: 19, phase: 'relax', activeLine: L('set cost[p + k]'), p, reach: [...reach], cost: [...cost], message: `Pieces from ${p} reach up to position ${p + reach[p]}.` })
   }
   const result = cost[n] === Infinity ? -1 : cost[n]
-  frames.push({ phase: 'done', activeLine: L('return cost[n]'), p: n, reach: [...reach], cost: [...cost], message: result === -1 ? 'The target cannot be formed.' : `Minimum valid strings: ${result}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return cost[n]'), p: n, reach: [...reach], cost: [...cost], message: result === -1 ? 'The target cannot be formed.' : `Minimum valid strings: ${result}.` })
   return { input: { words, target }, result, frames }
 }
 

@@ -45,19 +45,19 @@ export function buildTrace({ s, t, nums }) {
   let power = table
   let remaining = t
   let bit = 0
-  const frames = [{ phase: 'start', bit: null, counts: counts.map(Number), length: Number(sumMod(counts)), activeLine: L('count how many'), message: `Count the letters of ${s}. Each round replaces a letter by the next nums letters.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', bit: null, counts: counts.map(Number), length: Number(sumMod(counts)), activeLine: L('count how many'), message: `Count the letters of ${s}. Each round replaces a letter by the next nums letters.` }]
   while (remaining > 0) {
     if (remaining % 2 === 1) {
       counts = mulVec(counts, power)
-      frames.push({ phase: 'apply', bit, counts: counts.map(Number), length: Number(sumMod(counts)), activeLine: L('multiply the counts'), message: `Bit ${bit} of t is one, so apply the table for ${2 ** bit} rounds. Length: ${sumMod(counts)}.` })
+      frames.push({ pythonLine: 21, phase: 'apply', bit, counts: counts.map(Number), length: Number(sumMod(counts)), activeLine: L('multiply the counts'), message: `Bit ${bit} of t is one, so apply the table for ${2 ** bit} rounds. Length: ${sumMod(counts)}.` })
     }
     power = mulMat(power, power)
     remaining = Math.floor(remaining / 2)
     bit += 1
-    frames.push({ phase: 'square', bit, counts: counts.map(Number), length: Number(sumMod(counts)), activeLine: L('square power'), message: `The table now covers ${2 ** bit} rounds.` })
+    frames.push({ pythonLine: 22, phase: 'square', bit, counts: counts.map(Number), length: Number(sumMod(counts)), activeLine: L('square power'), message: `The table now covers ${2 ** bit} rounds.` })
   }
   const result = Number(sumMod(counts))
-  frames.push({ phase: 'done', bit, counts: counts.map(Number), length: result, activeLine: L('return the sum'), message: `Total length after ${t} rounds: ${result}.` })
+  frames.push({ pythonLine: 24, phase: 'done', bit, counts: counts.map(Number), length: result, activeLine: L('return the sum'), message: `Total length after ${t} rounds: ${result}.` })
   return { input: { s, t, nums }, result, frames }
 }
 

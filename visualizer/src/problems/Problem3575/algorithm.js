@@ -51,7 +51,7 @@ export function buildTrace(input) {
   for (let i = 0; i < order.length; i++) for (const c of children[order[i]]) order.push(c)
   const maps = Array(n).fill(null)
   const maxScore = Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('build the child lists'), node: null, best: null, message: 'Process nodes from the bottom of the tree. Each node keeps the best score for every set of digits its subtree can use.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('build the child lists'), node: null, best: null, message: 'Process nodes from the bottom of the tree. Each node keeps the best score for every set of digits its subtree can use.' }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     let cur = new Map([[0, 0]])
@@ -67,10 +67,10 @@ export function buildTrace(input) {
     }
     maps[v] = withV
     maxScore[v] = Math.max(...withV.values())
-    frames.push({ phase: 'node', activeLine: L('for each child c, merge'), node: v, best: maxScore[v], message: `Node ${v}: the best good subset in its subtree scores ${maxScore[v]}.` })
+    frames.push({ pythonLine: 36, phase: 'node', activeLine: L('for each child c, merge'), node: v, best: maxScore[v], message: `Node ${v}: the best good subset in its subtree scores ${maxScore[v]}.` })
   }
   const result = maxScore.reduce((sum, s) => sum + s, 0) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the sum of maxScore'), node: null, best: result, message: `The sum of all maxScore values, modulo 1000000007, is ${result}.` })
+  frames.push({ pythonLine: 48, phase: 'done', activeLine: L('return the sum of maxScore'), node: null, best: result, message: `The sum of all maxScore values, modulo 1000000007, is ${result}.` })
   return { input, result, frames }
 }
 

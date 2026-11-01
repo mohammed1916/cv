@@ -32,16 +32,16 @@ export function buildTrace({ s, numOps }) {
   let lo = 1
   let hi = n
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, cost: null, message: `Binary string  with ${numOps} operations. The longest run lies between ${lo} and ${hi}.` }]
+  const frames = [{ pythonLine: 20, phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, cost: null, message: `Binary string  with ${numOps} operations. The longest run lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const cost = fewestFlips(mid)
     const verdict = cost <= numOps
-    frames.push({ phase: 'probe', activeLine: L('if the flips needed are at most numOps'), lo, hi, mid, verdict, cost, message: `Longest run ${mid}: ${cost} flips needed, ${verdict ? 'within' : 'over'} the ${numOps} allowed.` })
+    frames.push({ pythonLine: 23, phase: 'probe', activeLine: L('if the flips needed are at most numOps'), lo, hi, mid, verdict, cost, message: `Longest run ${mid}: ${cost} flips needed, ${verdict ? 'within' : 'over'} the ${numOps} allowed.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: true, cost: fewestFlips(lo), message: `Smallest possible longest identical run: ${lo}.` })
+  frames.push({ pythonLine: 27, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: true, cost: fewestFlips(lo), message: `Smallest possible longest identical run: ${lo}.` })
   return { input: { s, numOps }, bits, domain, result: lo, frames }
 }
 

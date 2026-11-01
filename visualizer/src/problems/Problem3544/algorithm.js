@@ -38,7 +38,7 @@ export function buildTrace(input) {
   for (const v of order.slice(1)) children[parent[v]].push(v)
   // table[v][d][p]: best subtree sum when d is the distance to the nearest chosen strict ancestor (k means k or more, or none) and p is the parity of chosen strict ancestors.
   const table = Array(n).fill(null)
-  const frames = [{ phase: 'start', activeLine: L('for each node v, from the bottom of the list'), node: null, best: null, message: 'Process nodes from the bottom of the tree up. Each node records its best sum for every distance and parity above it.' }]
+  const frames = [{ pythonLine: 21, phase: 'start', activeLine: L('for each node v, from the bottom of the list'), node: null, best: null, message: 'Process nodes from the bottom of the tree up. Each node records its best sum for every distance and parity above it.' }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     const here = {}
@@ -57,10 +57,10 @@ export function buildTrace(input) {
       }
     }
     table[v] = here
-    frames.push({ phase: 'node', activeLine: L('for each distance d from 1 to k'), node: v, best: null, message: `Node ${v} is done. Its best sum with no inverted ancestor is ${here[`${k},0`]}.` })
+    frames.push({ pythonLine: 23, phase: 'node', activeLine: L('for each distance d from 1 to k'), node: v, best: null, message: `Node ${v} is done. Its best sum with no inverted ancestor is ${here[`${k},0`]}.` })
   }
   const result = table[0][`${k},0`]
-  frames.push({ phase: 'done', activeLine: L('return the best sum at the root'), node: 0, best: result, message: `The largest achievable sum is ${result}.` })
+  frames.push({ pythonLine: 37, phase: 'done', activeLine: L('return the best sum at the root'), node: 0, best: result, message: `The largest achievable sum is ${result}.` })
   return { input, result, frames }
 }
 

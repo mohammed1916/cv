@@ -16,13 +16,13 @@ export function buildTrace({ grid }) {
     for (const c of cols) order.push([r, c])
   })
   const kept = []
-  const frames = [{ phase: 'start', activeLine: L('set the position counter to zero'), index: null, cell: null, kept: [], message: 'Walk row 0 left to right, then row 1 right to left, and so on.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set the position counter to zero'), index: null, cell: null, kept: [], message: 'Walk row 0 left to right, then row 1 right to left, and so on.' }]
   order.forEach(([r, c], index) => {
     const keep = index % 2 === 0
     if (keep) kept.push(grid[r][c])
-    frames.push({ phase: keep ? 'keep' : 'skip', activeLine: L(keep ? 'keep this cell' : 'skip this cell'), index, cell: [r, c], kept: [...kept], message: `Position ${index} holds ${grid[r][c]} and is ${keep ? 'kept' : 'skipped'}.` })
+    frames.push({ pythonLine: keep ? 8 : 9, phase: keep ? 'keep' : 'skip', activeLine: L(keep ? 'keep this cell' : 'skip this cell'), index, cell: [r, c], kept: [...kept], message: `Position ${index} holds ${grid[r][c]} and is ${keep ? 'kept' : 'skipped'}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the kept values'), index: null, cell: null, kept: [...kept], message: `Kept values: ${kept.join(', ')}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the kept values'), index: null, cell: null, kept: [...kept], message: `Kept values: ${kept.join(', ')}.` })
   return { input: { grid }, order, result: kept, frames }
 }
 

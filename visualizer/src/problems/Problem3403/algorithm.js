@@ -11,21 +11,21 @@ export function parseInput(text) {
 export function buildTrace({ word, numFriends }) {
   if (numFriends === 1) {
     const only = [
-      { phase: 'start', activeLine: L('if numFriends is 1'), start: -1, longest: word.length, piece: '', best: '', message: 'With one friend, the only piece is the whole word.' },
-      { phase: 'done', activeLine: L('return the whole word'), start: -1, longest: word.length, piece: word, best: word, message: `Largest string in the box: ${word}.` },
+      { pythonLine: 2, phase: 'start', activeLine: L('if numFriends is 1'), start: -1, longest: word.length, piece: '', best: '', message: 'With one friend, the only piece is the whole word.' },
+      { pythonLine: 3, phase: 'done', activeLine: L('return the whole word'), start: -1, longest: word.length, piece: word, best: word, message: `Largest string in the box: ${word}.` },
     ]
     return { input: { word, numFriends }, result: word, frames: only }
   }
   const longest = word.length - numFriends + 1
   let best = ''
-  const frames = [{ phase: 'start', activeLine: L('set longest to'), start: -1, longest, piece: '', best, message: `Each piece can be at most ${longest} letters long, because the other ${numFriends - 1} pieces need at least one letter each.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set longest to'), start: -1, longest, piece: '', best, message: `Each piece can be at most ${longest} letters long, because the other ${numFriends - 1} pieces need at least one letter each.` }]
   for (let i = 0; i < word.length; i++) {
     const piece = word.slice(i, i + longest)
     const larger = piece > best
     if (larger) best = piece
-    frames.push({ phase: larger ? 'better' : 'window', activeLine: L('let piece be'), start: i, longest, piece, best, message: larger ? `${piece} from position ${i} is larger than the best so far, so it becomes the best.` : `${piece} from position ${i} is not larger than ${best}.` })
+    frames.push({ pythonLine: larger ? 9 : 8, phase: larger ? 'better' : 'window', activeLine: L('let piece be'), start: i, longest, piece, best, message: larger ? `${piece} from position ${i} is larger than the best so far, so it becomes the best.` : `${piece} from position ${i} is not larger than ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: -1, longest, piece: '', best, message: `Largest string in the box: ${best}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return best'), start: -1, longest, piece: '', best, message: `Largest string in the box: ${best}.` })
   return { input: { word, numFriends }, result: best, frames }
 }
 

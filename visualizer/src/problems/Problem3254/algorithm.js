@@ -16,11 +16,11 @@ export function buildTrace({ nums, k }) {
     for (let j = 0; j + 1 < k; j++) {
       if (window[j + 1] !== window[j] + 1) { run = false; break }
     }
-    frames.push({ phase: 'check', activeLine: L('for each adjacent pair'), left: start, right: start + k - 1, run, results: [...results], message: run ? `Window at ${start} rises by exactly 1 at every step.` : `Window at ${start} breaks the run of consecutive values.` })
+    frames.push({ pythonLine: 5, phase: 'check', activeLine: L('for each adjacent pair'), left: start, right: start + k - 1, run, results: [...results], message: run ? `Window at ${start} rises by exactly 1 at every step.` : `Window at ${start} breaks the run of consecutive values.` })
     results.push(run ? window[k - 1] : -1)
-    frames.push({ phase: 'record', activeLine: L('append'), left: start, right: start + k - 1, run, results: [...results], message: `Power of this window: ${results[results.length - 1]}.` })
+    frames.push({ pythonLine: 6, phase: 'record', activeLine: L('append'), left: start, right: start + k - 1, run, results: [...results], message: `Power of this window: ${results[results.length - 1]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return results'), left: nums.length - k, right: nums.length - 1, run: null, results: [...results], message: `Powers: [${results.join(', ')}].` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return results'), left: nums.length - k, right: nums.length - 1, run: null, results: [...results], message: `Powers: [${results.join(', ')}].` })
   return { input: { nums, k }, result: results, frames }
 }
 

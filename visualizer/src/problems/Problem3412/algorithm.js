@@ -13,7 +13,7 @@ export function buildTrace(input) {
   const unmarked = {}
   const marked = Array(s.length).fill(false)
   let score = 0
-  const frames = [{ phase: 'start', activeLine: L('set score to 0'), index: -1, score, matched: [], message: 'Walk left to right, pairing each letter with the closest earlier unmarked mirror letter.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set score to 0'), index: -1, score, matched: [], message: 'Walk left to right, pairing each letter with the closest earlier unmarked mirror letter.' }]
   for (let i = 0; i < s.length; i++) {
     const mirror = mirrorOf(s[i])
     const list = unmarked[mirror] ?? []
@@ -23,14 +23,14 @@ export function buildTrace(input) {
       marked[i] = true
       marked[j] = true
       score += i - j
-      frames.push({ phase: 'match', activeLine: L('add i minus j to score'), index: i, partner: j, score, matched: marked.slice(), message: `${s[i]} at ${i} pairs with its mirror ${mirror} at ${j}; score gains ${i - j}.` })
+      frames.push({ pythonLine: 9, phase: 'match', activeLine: L('add i minus j to score'), index: i, partner: j, score, matched: marked.slice(), message: `${s[i]} at ${i} pairs with its mirror ${mirror} at ${j}; score gains ${i - j}.` })
     } else {
       if (!unmarked[s[i]]) unmarked[s[i]] = []
       unmarked[s[i]].push(i)
-      frames.push({ phase: 'keep', activeLine: L('add i to the list'), index: i, partner: -1, score, matched: marked.slice(), message: `No unmarked ${mirror} before ${i}; remember ${s[i]} at ${i}.` })
+      frames.push({ pythonLine: 11, phase: 'keep', activeLine: L('add i to the list'), index: i, partner: -1, score, matched: marked.slice(), message: `No unmarked ${mirror} before ${i}; remember ${s[i]} at ${i}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return score'), index: -1, partner: -1, score, matched: marked.slice(), message: `Mirror score: ${score}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return score'), index: -1, partner: -1, score, matched: marked.slice(), message: `Mirror score: ${score}.` })
   return { input, result: score, frames }
 }
 

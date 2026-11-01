@@ -19,8 +19,8 @@ export function buildTrace(input) {
   const answers = []
   let current = -1
   let distance = null
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, current, distance, heap: [...heap], answers: [...answers], message,
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    phase, pythonLine, activeLine, current, distance, heap: [...heap], answers: [...answers], message,
   })
   // A max-heap of distances: the largest distance sits on top.
   const push = value => {
@@ -48,24 +48,24 @@ export function buildTrace(input) {
     return top
   }
 
-  snap('start', L('set the heap to empty'), 'The heap starts empty. Obstacles are added in query order.')
+  snap('start', L('set the heap to empty'), 'The heap starts empty. Obstacles are added in query order.', 4)
   for (let i = 0; i < queries.length; i++) {
     current = i
     const [x, y] = queries[i]
     distance = Math.abs(x) + Math.abs(y)
     push(distance)
-    snap('add', L('add its distance'), `Obstacle ${i + 1} at (${x}, ${y}) is at distance ${distance}.`)
+    snap('add', L('add its distance'), `Obstacle ${i + 1} at (${x}, ${y}) is at distance ${distance}.`, 7)
     if (heap.length > k) {
       const removed = pop()
-      snap('trim', L('remove the largest'), `The heap holds more than ${k}, so distance ${removed} leaves.`)
+      snap('trim', L('remove the largest'), `The heap holds more than ${k}, so distance ${removed} leaves.`, 9)
     }
     answers.push(heap.length === k ? heap[0] : -1)
     snap('answer', heap.length === k ? L('the answer is its largest') : L('otherwise the answer is -1'),
-      heap.length === k ? `The ${k}th nearest distance is ${heap[0]}.` : `Only ${heap.length} obstacle(s), so the answer is -1.`)
+      heap.length === k ? `The ${k}th nearest distance is ${heap[0]}.` : `Only ${heap.length} obstacle(s), so the answer is -1.`, 10)
   }
   current = -1
   distance = null
-  snap('done', L('return the answers'), `Answers: [${answers.join(', ')}].`)
+  snap('done', L('return the answers'), `Answers: [${answers.join(', ')}].`, 11)
   return { input, result: answers, frames }
 }
 

@@ -9,14 +9,14 @@ export function parseInput(text) {
 export function buildTrace(input) {
   let row = [...input.s].map(Number)
   let round = 0
-  const frames = [{ phase: 'start', activeLine: L('set digits to the digits'), row: [...row], round, message: `Start with ${row.join('')}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set digits to the digits'), row: [...row], round, message: `Start with ${row.join('')}.` }]
   while (row.length > 2) {
     row = row.slice(0, -1).map((d, i) => (d + row[i + 1]) % 10)
     round += 1
-    frames.push({ phase: 'round', activeLine: L('make a new list'), row: [...row], round, message: `Round ${round}: each entry is the sum of two neighbors mod 10, giving ${row.join('')}.` })
+    frames.push({ pythonLine: 4, phase: 'round', activeLine: L('make a new list'), row: [...row], round, message: `Round ${round}: each entry is the sum of two neighbors mod 10, giving ${row.join('')}.` })
   }
   const result = row[0] === row[1]
-  frames.push({ phase: 'done', activeLine: L('return whether'), row: [...row], round, message: `The last two digits are ${row[0]} and ${row[1]}, so they ${result ? 'match' : 'do not match'}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return whether'), row: [...row], round, message: `The last two digits are ${row[0]} and ${row[1]}, so they ${result ? 'match' : 'do not match'}.` })
   return { input, result, frames }
 }
 

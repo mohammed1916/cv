@@ -11,15 +11,15 @@ export function buildTrace(input) {
   const { word } = input
   const n = word.length
   const dp = Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('set best[0] to 0'), at: -1, best: 0, message: 'With an empty prefix, no substring fits, so the best count is 0.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best[0] to 0'), at: -1, best: 0, message: 'With an empty prefix, no substring fits, so the best count is 0.' }]
   for (let i = 1; i <= n; i++) {
     dp[i] = dp[i - 1]
     for (let j = 0; j <= i - 4; j++) {
       if (word[j] === word[i - 1]) dp[i] = Math.max(dp[i], dp[j] + 1)
     }
-    frames.push({ phase: 'prefix', activeLine: L('for each start j'), at: i - 1, best: dp[i], message: `Best count for the first ${i} letters is ${dp[i]}.` })
+    frames.push({ pythonLine: 6, phase: 'prefix', activeLine: L('for each start j'), at: i - 1, best: dp[i], message: `Best count for the first ${i} letters is ${dp[i]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best[n]'), at: -1, best: dp[n], message: `The largest number of non-overlapping substrings is ${dp[n]}.` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return best[n]'), at: -1, best: dp[n], message: `The largest number of non-overlapping substrings is ${dp[n]}.` })
   return { input, result: dp[n], frames }
 }
 

@@ -8,14 +8,14 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ s }) {
-  const frames = [{ phase: 'start', activeLine: L('set total to'), position: -1, rank: 0, total: 0, message: 'Start with a total of zero.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to'), position: -1, rank: 0, total: 0, message: 'Start with a total of zero.' }]
   let total = 0
   for (let i = 0; i < s.length; i++) {
     const rank = 26 - (s.charCodeAt(i) - 97)
     total += rank * (i + 1)
-    frames.push({ phase: 'add', activeLine: L('add rank times'), position: i, rank, total, message: `Position ${i + 1} holds ${s[i]}, which ranks ${rank} counted from the end. Add ${rank} times ${i + 1}.` })
+    frames.push({ pythonLine: 5, phase: 'add', activeLine: L('add rank times'), position: i, rank, total, message: `Position ${i + 1} holds ${s[i]}, which ranks ${rank} counted from the end. Add ${rank} times ${i + 1}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), position: -1, rank: 0, total, message: `Reverse degree: ${total}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return total'), position: -1, rank: 0, total, message: `Reverse degree: ${total}.` })
   return { input: { s }, result: total, frames }
 }
 

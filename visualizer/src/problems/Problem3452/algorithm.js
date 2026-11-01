@@ -12,20 +12,20 @@ export function buildTrace(input) {
   const { nums, k } = input
   const n = nums.length
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, good: null, total, message: `Check each index. An index is good when it beats the value k steps to each side that exists.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), index: -1, good: null, total, message: `Check each index. An index is good when it beats the value k steps to each side that exists.` }]
   for (let i = 0; i < n; i++) {
     const left = i - k >= 0 ? nums[i - k] : null
     const right = i + k < n ? nums[i + k] : null
     const beatsLeft = left === null || nums[i] > left
     const beatsRight = right === null || nums[i] > right
     const good = beatsLeft && beatsRight
-    frames.push({ phase: 'check', activeLine: L('if the value beats'), index: i, good, total, message: `Index ${i} (value ${nums[i]}) ${good ? 'is good' : 'is not good'}; its partners are ${left === null ? 'missing' : left} and ${right === null ? 'missing' : right}.` })
+    frames.push({ pythonLine: 8, phase: 'check', activeLine: L('if the value beats'), index: i, good, total, message: `Index ${i} (value ${nums[i]}) ${good ? 'is good' : 'is not good'}; its partners are ${left === null ? 'missing' : left} and ${right === null ? 'missing' : right}.` })
     if (good) {
       total += nums[i]
-      frames.push({ phase: 'add', activeLine: L('add the value'), index: i, good, total, message: `Add ${nums[i]}. Total is now ${total}.` })
+      frames.push({ pythonLine: 9, phase: 'add', activeLine: L('add the value'), index: i, good, total, message: `Add ${nums[i]}. Total is now ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, good: null, total, message: `Sum of good numbers: ${total}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return total'), index: -1, good: null, total, message: `Sum of good numbers: ${total}.` })
   return { input, result: total, frames }
 }
 

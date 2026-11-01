@@ -42,7 +42,7 @@ export function buildTrace(input) {
       order.push(w)
     }
   }
-  const frames = [{ phase: 'start', activeLine: L('root the tree at node 0'), query: null, median: null, message: 'Root the tree at node 0 and record each node distance from the root.' }]
+  const frames = [{ pythonLine: 11, phase: 'start', activeLine: L('root the tree at node 0'), query: null, median: null, message: 'Root the tree at node 0 and record each node distance from the root.' }]
   const answers = []
   for (const [u, v] of queries) {
     // Climb from u and v to their lowest common ancestor, keeping the nodes on each side.
@@ -58,9 +58,9 @@ export function buildTrace(input) {
     const path = [...upA.map(x => [x, dist[u] - dist[x]]), ...upB.slice(0, -1).reverse().map(x => [x, (dist[u] - dist[lca]) + (dist[x] - dist[lca])])]
     const hit = path.find(([, cum]) => 2 * cum >= total)
     answers.push(hit[0])
-    frames.push({ phase: 'query', activeLine: L('take the first node on the path'), query: [u, v], median: hit[0], message: `Path ${u} to ${v} has total weight ${total}. Its weighted median is node ${hit[0]}.` })
+    frames.push({ pythonLine: 38, phase: 'query', activeLine: L('take the first node on the path'), query: [u, v], median: hit[0], message: `Path ${u} to ${v} has total weight ${total}. Its weighted median is node ${hit[0]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), query: null, median: null, message: 'Every query has its weighted median.' })
+  frames.push({ pythonLine: 40, phase: 'done', activeLine: L('return the answers'), query: null, median: null, message: 'Every query has its weighted median.' })
   return { input, result: answers, frames }
 }
 

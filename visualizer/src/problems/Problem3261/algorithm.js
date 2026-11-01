@@ -9,27 +9,27 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ s, k, queries }) {
-  const frames = [{ phase: 'start', activeLine: L('set answers to an empty list'), query: -1, left: 0, right: -1, zeros: 0, ones: 0, total: 0, answers: [], message: 'A substring passes when it has at most k zeros or at most k ones.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set answers to an empty list'), query: -1, left: 0, right: -1, zeros: 0, ones: 0, total: 0, answers: [], message: 'A substring passes when it has at most k zeros or at most k ones.' }]
   const answers = []
   queries.forEach(([queryLeft, queryRight], q) => {
     let left = queryLeft, zeros = 0, ones = 0, total = 0
     for (let right = queryLeft; right <= queryRight; right++) {
       if (s[right] === '0') zeros++
       else ones++
-      frames.push({ phase: 'extend', activeLine: L('add its character'), query: q, left, right, zeros, ones, total, answers: [...answers], message: `Add s[${right}]. Window ${left} to ${right} has ${zeros} zeros and ${ones} ones.` })
+      frames.push({ pythonLine: s[right] === '0' ? 10 : 12, phase: 'extend', activeLine: L('add its character'), query: q, left, right, zeros, ones, total, answers: [...answers], message: `Add s[${right}]. Window ${left} to ${right} has ${zeros} zeros and ${ones} ones.` })
       while (zeros > k && ones > k) {
         if (s[left] === '0') zeros--
         else ones--
         left++
-        frames.push({ phase: 'shrink', activeLine: L('remove the character at left'), query: q, left, right, zeros, ones, total, answers: [...answers], message: `Both counts exceed ${k}, so move the left end to ${left}.` })
+        frames.push({ pythonLine: 13, phase: 'shrink', activeLine: L('remove the character at left'), query: q, left, right, zeros, ones, total, answers: [...answers], message: `Both counts exceed ${k}, so move the left end to ${left}.` })
       }
       total += right - left + 1
-      frames.push({ phase: 'count', activeLine: L('add right minus left plus one'), query: q, left, right, zeros, ones, total, answers: [...answers], message: `Every start from ${left} to ${right} passes for this end. Query total ${total}.` })
+      frames.push({ pythonLine: 19, phase: 'count', activeLine: L('add right minus left plus one'), query: q, left, right, zeros, ones, total, answers: [...answers], message: `Every start from ${left} to ${right} passes for this end. Query total ${total}.` })
     }
     answers.push(total)
-    frames.push({ phase: 'answer', activeLine: L('append total'), query: q, left, right: queryRight, zeros, ones, total, answers: [...answers], message: `Query ${q} answer is ${total}.` })
+    frames.push({ pythonLine: 20, phase: 'answer', activeLine: L('append total'), query: q, left, right: queryRight, zeros, ones, total, answers: [...answers], message: `Query ${q} answer is ${total}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), query: -1, left: 0, right: -1, zeros: 0, ones: 0, total: 0, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return answers'), query: -1, left: 0, right: -1, zeros: 0, ones: 0, total: 0, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input: { s, k, queries }, result: answers, frames }
 }
 

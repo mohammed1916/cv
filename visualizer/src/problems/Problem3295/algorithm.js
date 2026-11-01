@@ -10,15 +10,15 @@ export function parseInput(text) {
 
 export function buildTrace({ message, banned_words: bannedWords }) {
   const banned = new Set(bannedWords)
-  const frames = [{ phase: 'start', activeLine: L('set banned to the set of banned words'), active: -1, roles: {}, state: { count: 0 }, message: `A message is spam when at least two of its words are banned. Banned: ${[...banned].join(', ')}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set banned to the set of banned words'), active: -1, roles: {}, state: { count: 0 }, message: `A message is spam when at least two of its words are banned. Banned: ${[...banned].join(', ')}.` }]
   let count = 0
   message.forEach((word, i) => {
     const hit = banned.has(word)
     if (hit) count += 1
-    frames.push({ phase: 'scan', activeLine: L(hit ? 'add 1 to count' : 'if word is in banned'), active: i, roles: { [i]: hit ? 'banned' : 'allowed' }, state: { word, count }, message: hit ? `"${word}" is banned. Banned words found: ${count}.` : `"${word}" is not banned.` })
+    frames.push({ pythonLine: hit ? 6 : 5, phase: 'scan', activeLine: L(hit ? 'add 1 to count' : 'if word is in banned'), active: i, roles: { [i]: hit ? 'banned' : 'allowed' }, state: { word, count }, message: hit ? `"${word}" is banned. Banned words found: ${count}.` : `"${word}" is not banned.` })
   })
   const result = count >= 2
-  frames.push({ phase: 'done', activeLine: L('return count is at least 2'), active: -1, roles: {}, state: { count, spam: result }, message: result ? `${count} banned words, so this is spam.` : `${count} banned word${count === 1 ? '' : 's'}; at least 2 are needed.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return count is at least 2'), active: -1, roles: {}, state: { count, spam: result }, message: result ? `${count} banned words, so this is spam.` : `${count} banned word${count === 1 ? '' : 's'}; at least 2 are needed.` })
   return { input: { message, banned_words: bannedWords }, result, items: message, frames }
 }
 

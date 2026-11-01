@@ -18,9 +18,9 @@ export function buildTrace(input) {
   const candidates = grid.map(row => [...Array(n).keys()].sort((a, b) => row[b] - row[a]).slice(0, 3))
   let best = null
   let bestCells = []
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), rows: [], cells: [], best: null, message: 'Keep the three largest cells of each row. Then try every set of three rows, using only those candidates.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set best to nothing'), rows: [], cells: [], best: null, message: 'Keep the three largest cells of each row. Then try every set of three rows, using only those candidates.' }]
   for (let r = 0; r < m; r++) {
-    frames.push({ phase: 'top', activeLine: L('keep the three largest'), rows: [r], cells: candidates[r].map(c => [r, c]), best, message: `Row ${r} keeps columns ${candidates[r].join(', ')} as candidates.` })
+    frames.push({ pythonLine: 5, phase: 'top', activeLine: L('keep the three largest'), rows: [r], cells: candidates[r].map(c => [r, c]), best, message: `Row ${r} keeps columns ${candidates[r].join(', ')} as candidates.` })
   }
   for (let r1 = 0; r1 < m; r1++) {
     for (let r2 = r1 + 1; r2 < m; r2++) {
@@ -37,11 +37,11 @@ export function buildTrace(input) {
             }
           }
         }
-        frames.push({ phase: 'rows', activeLine: L('for each choice of three rows'), rows: [r1, r2, r3], cells: bestCells, best, message: `Rows ${r1}, ${r2} and ${r3} checked with their candidates. Best sum so far: ${best}.` })
+        frames.push({ pythonLine: 9, phase: 'rows', activeLine: L('for each choice of three rows'), rows: [r1, r2, r3], cells: bestCells, best, message: `Rows ${r1}, ${r2} and ${r3} checked with their candidates. Best sum so far: ${best}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), rows: [], cells: bestCells, best, message: `Maximum sum with three rooks: ${best}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return best'), rows: [], cells: bestCells, best, message: `Maximum sum with three rooks: ${best}.` })
   return { input, result: best, frames }
 }
 

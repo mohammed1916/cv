@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const n = nums.length
   const frames = []
   const target = [...nums].sort((a, b) => digitSum(a) - digitSum(b) || a - b)
-  frames.push({ phase: 'target', activeLine: L('set target to'), at: -1, cycle: [], swaps: 0, visited: [], target, message: `Target order by digit sum, then value: ${target.join(', ')}.` })
+  frames.push({ pythonLine: 4, phase: 'target', activeLine: L('set target to'), at: -1, cycle: [], swaps: 0, visited: [], target, message: `Target order by digit sum, then value: ${target.join(', ')}.` })
   const where = new Map(target.map((v, i) => [v, i]))
   const perm = nums.map(v => where.get(v))
   const visited = []
@@ -22,7 +22,7 @@ export function buildTrace(input) {
   let swaps = 0
   for (let i = 0; i < n; i++) {
     if (seen[i]) {
-      frames.push({ phase: 'skip', activeLine: L('if position i is visited'), at: i, cycle: [], swaps, visited: [...visited], target, message: `Position ${i} is already in a cycle, so skip it.` })
+      frames.push({ pythonLine: 11, phase: 'skip', activeLine: L('if position i is visited'), at: i, cycle: [], swaps, visited: [...visited], target, message: `Position ${i} is already in a cycle, so skip it.` })
       continue
     }
     const cycle = []
@@ -32,9 +32,9 @@ export function buildTrace(input) {
       visited.push(j)
     }
     swaps += cycle.length - 1
-    frames.push({ phase: 'cycle', activeLine: L('add the cycle length'), at: i, cycle: [...cycle], swaps, visited: [...visited], target, message: `The cycle from position ${i} has ${cycle.length} position(s), so it needs ${cycle.length - 1} swap(s). Total: ${swaps}.` })
+    frames.push({ pythonLine: 18, phase: 'cycle', activeLine: L('add the cycle length'), at: i, cycle: [...cycle], swaps, visited: [...visited], target, message: `The cycle from position ${i} has ${cycle.length} position(s), so it needs ${cycle.length - 1} swap(s). Total: ${swaps}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return swaps'), at: -1, cycle: [], swaps, visited: [...visited], target, message: `Minimum swaps: ${swaps}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return swaps'), at: -1, cycle: [], swaps, visited: [...visited], target, message: `Minimum swaps: ${swaps}.` })
   return { input, target, result: swaps, frames }
 }
 

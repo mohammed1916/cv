@@ -24,7 +24,7 @@ export function buildTrace(input) {
   const dp = new Map()
   const key = (p, a, c) => `${p},${a},${c}`
   dp.set(key(-1, 0, 0), 0)
-  const frames = [{ phase: 'start', activeLine: L('set the start state'), a: 0, best: null, message: 'Start at sign 0 with no merges. A state remembers the previous kept sign, the current kept sign, and how many signs were merged away.' }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set the start state'), a: 0, best: null, message: 'Start at sign 0 with no merges. A state remembers the previous kept sign, the current kept sign, and how many signs were merged away.' }]
   for (let a = 0; a < n - 1; a++) {
     const here = [...dp.entries()].filter(([state]) => state.split(',')[1] === String(a))
     for (const [state, cost] of here) {
@@ -38,14 +38,14 @@ export function buildTrace(input) {
         if (!dp.has(nk) || next < dp.get(nk)) dp.set(nk, next)
       }
     }
-    frames.push({ phase: 'extend', activeLine: L('for each kept sign a'), a, best: null, message: `Sign ${a} is kept. Price the road from it to each later kept sign b; the signs in between are merged away and their time moves forward.` })
+    frames.push({ pythonLine: 8, phase: 'extend', activeLine: L('for each kept sign a'), a, best: null, message: `Sign ${a} is kept. Price the road from it to each later kept sign b; the signs in between are merged away and their time moves forward.` })
   }
   let best = null
   for (const [state, cost] of dp) {
     const [, a, c] = state.split(',').map(Number)
     if (a === n - 1 && c === k && (best === null || cost < best)) best = cost
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), a: n - 1, best, message: `The cheapest travel time with exactly ${k} merges is ${best}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), a: n - 1, best, message: `The cheapest travel time with exactly ${k} merges is ${best}.` })
   return { input, result: best, frames }
 }
 

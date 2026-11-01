@@ -12,21 +12,21 @@ export function buildTrace({ s, k }) {
   let count = 0
   let left = 0
   const window = { zeros: 0, ones: 0 }
-  frames.push({ phase: 'start', activeLine: L('set count to 0'), left, right: -1, window: { ...window }, count, message: 'No substring has been counted yet.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('set count to 0'), left, right: -1, window: { ...window }, count, message: 'No substring has been counted yet.' })
   for (let right = 0; right < s.length; right++) {
     if (s[right] === '0') window.zeros++
     else window.ones++
-    frames.push({ phase: 'extend', activeLine: L('add the character'), left, right, window: { ...window }, count, message: `Add ${s[right]} at position ${right}.` })
+    frames.push({ pythonLine: s[right] === '0' ? 8 : 10, phase: 'extend', activeLine: L('add the character'), left, right, window: { ...window }, count, message: `Add ${s[right]} at position ${right}.` })
     while (window.zeros > k && window.ones > k) {
       if (s[left] === '0') window.zeros--
       else window.ones--
       left++
-      frames.push({ phase: 'shrink', activeLine: L('while the window has more'), left, right, window: { ...window }, count, message: `The window has too many of both characters, so the start moves to ${left}.` })
+      frames.push({ pythonLine: 11, phase: 'shrink', activeLine: L('while the window has more'), left, right, window: { ...window }, count, message: `The window has too many of both characters, so the start moves to ${left}.` })
     }
     count += right - left + 1
-    frames.push({ phase: 'count', activeLine: L('add right minus left plus 1'), left, right, window: { ...window }, count, message: `Substrings ending at ${right} that satisfy the rule: ${right - left + 1}. Total ${count}.` })
+    frames.push({ pythonLine: 17, phase: 'count', activeLine: L('add right minus left plus 1'), left, right, window: { ...window }, count, message: `Substrings ending at ${right} that satisfy the rule: ${right - left + 1}. Total ${count}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), left, right: s.length - 1, window: { ...window }, count, message: `Total valid substrings: ${count}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return count'), left, right: s.length - 1, window: { ...window }, count, message: `Total valid substrings: ${count}.` })
   return { input: { s, k }, result: count, frames }
 }
 

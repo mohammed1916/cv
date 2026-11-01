@@ -20,7 +20,7 @@ export function buildTrace(input) {
   const cols = grid[0].length
   const inside = (r, c) => r >= 0 && r < rows && c >= 0 && c < cols
   const memo = new Map()
-  const frames = [{ phase: 'start', activeLine: L('best = 0'), cell: null, length: 0, message: 'Look for every cell holding 1. Each one can start a segment in four diagonal directions.' }]
+  const frames = [{ pythonLine: 26, phase: 'start', activeLine: L('best = 0'), cell: null, length: 0, message: 'Look for every cell holding 1. Each one can start a segment in four diagonal directions.' }]
   // Length of the part of the segment after (r, c), given the next cell must hold `want`.
   const walk = (r, c, d, canTurn, want) => {
     const key = `${r},${c},${d},${canTurn},${want}`
@@ -49,11 +49,11 @@ export function buildTrace(input) {
       for (let d = 0; d < 4; d++) {
         const length = 1 + walk(r, c, d, true, 2)
         if (length > best) best = length
-        frames.push({ phase: 'extend', activeLine: L('for every diagonal direction'), cell: [r, c], length, best, message: `Cell (${r},${c}) heading direction ${d} reaches length ${length}. Best so far: ${best}.` })
+        frames.push({ pythonLine: 30, phase: 'extend', activeLine: L('for every diagonal direction'), cell: [r, c], length, best, message: `Cell (${r},${c}) heading direction ${d} reaches length ${length}. Best so far: ${best}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), cell: null, length: best, best, message: `Longest V-shaped segment: ${best}.` })
+  frames.push({ pythonLine: 32, phase: 'done', activeLine: L('return best'), cell: null, length: best, best, message: `Longest V-shaped segment: ${best}.` })
   return { input, result: best, frames }
 }
 

@@ -49,11 +49,11 @@ export function bestDifference(s, k, onPair) {
 
 export function buildTrace({ s, k }) {
   const input = { s, k }
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), pair: '-', best: null, message: 'Try each ordered pair of digits as the odd digit a and the even digit b.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to nothing'), pair: '-', best: null, message: 'Try each ordered pair of digits as the odd digit a and the even digit b.' }]
   const result = bestDifference(s, k, (a, b, best) => {
-    frames.push({ phase: 'pair', activeLine: L('for each ordered pair'), pair: `${a}-${b}`, best: Number.isFinite(best) ? best : null, message: `Pair a=${a}, b=${b}: best difference so far ${Number.isFinite(best) ? best : 'none'}.` })
+    frames.push({ pythonLine: 5, phase: 'pair', activeLine: L('for each ordered pair'), pair: `${a}-${b}`, best: Number.isFinite(best) ? best : null, message: `Pair a=${a}, b=${b}: best difference so far ${Number.isFinite(best) ? best : 'none'}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), pair: '-', best: result, message: `Maximum difference: ${result}.` })
+  frames.push({ pythonLine: 33, phase: 'done', activeLine: L('return best'), pair: '-', best: result, message: `Maximum difference: ${result}.` })
   return { input, result, frames }
 }
 

@@ -13,17 +13,17 @@ export function buildTrace(input) {
   const n = nums.length
   let best = null
   let bestPair = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), first: null, last: null, best: null, message: 'Try every first index i. The last index j must leave room for m minus 2 elements between them.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to nothing'), first: null, last: null, best: null, message: 'Try every first index i. The last index j must leave room for m minus 2 elements between them.' }]
   for (let i = 0; i < n; i++) {
     for (let j = i; j < n; j++) {
       if (m === 1 ? j !== i : j - i < m - 1) continue
       const product = nums[i] * nums[j]
       if (best === null || product > best) { best = product; bestPair = [i, j] }
     }
-    frames.push({ phase: 'first', activeLine: L('for each first index i'), first: i, last: null, best, message: `Checked every last index that works with first index ${i}. Best product so far: ${best === null ? 'none' : best}.` })
+    frames.push({ pythonLine: 4, phase: 'first', activeLine: L('for each first index i'), first: i, last: null, best, message: `Checked every last index that works with first index ${i}. Best product so far: ${best === null ? 'none' : best}.` })
   }
   const result = best
-  frames.push({ phase: 'done', activeLine: L('return best'), first: bestPair ? bestPair[0] : null, last: bestPair ? bestPair[1] : null, best: result, message: `The largest product is ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return best'), first: bestPair ? bestPair[0] : null, last: bestPair ? bestPair[1] : null, best: result, message: `The largest product is ${result}.` })
   return { input, result, frames }
 }
 

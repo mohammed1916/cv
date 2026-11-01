@@ -20,7 +20,7 @@ export function buildTrace(input) {
   const at = (i, j, c) => (i > j ? 0 : best[i][j][c])
   const computed = new Set()
   const table = () => best.map((row, i) => row.map((cells, j) => (computed.has(`${i}:${j}`) ? cells[k] : '·')))
-  const frames = [{ phase: 'start', activeLine: L('let best[i][j][c]'), i: -1, j: -1, table: table(), message: `Start with the whole string ${s} and a budget of ${k} operations.` }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('let best[i][j][c]'), i: -1, j: -1, table: table(), message: `Start with the whole string ${s} and a budget of ${k} operations.` }]
   for (let length = 1; length <= n; length++) {
     for (let i = 0; i + length - 1 < n; i++) {
       const j = i + length - 1
@@ -36,13 +36,13 @@ export function buildTrace(input) {
       }
       computed.add(`${i}:${j}`)
       const w = length === 1 ? 0 : cyclic(s[i], s[j])
-      frames.push({ phase: 'cell', activeLine: L('if the interval holds'), i, j, table: table(),
+      frames.push({ pythonLine: 17, phase: 'cell', activeLine: L('if the interval holds'), i, j, table: table(),
         message: length === 1 ? `Interval ${s[i]} holds one letter, so its palindrome has length 1.`
           : `Interval ${s.slice(i, j + 1)} with ends ${s[i]} and ${s[j]} costs ${w} to match. Best with budget ${k}: ${best[i][j][k]}.` })
     }
   }
   const result = best[0][n - 1][k]
-  frames.push({ phase: 'done', activeLine: L('return best of the whole'), i: -1, j: -1, table: table(), message: `The longest palindrome after at most ${k} operations has length ${result}.` })
+  frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return best of the whole'), i: -1, j: -1, table: table(), message: `The longest palindrome after at most ${k} operations has length ${result}.` })
   return { input, result, frames }
 }
 

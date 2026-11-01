@@ -45,31 +45,31 @@ export function buildTrace(input) {
     return s - grid[r][c] === target && connected(rest, true)
   })
   const cutOk = (a, sa, sb) => sa === sb || canDiscount(a, sa, sb) || canDiscount(new Set([...everything].filter(k => !a.has(k))), sb, sa)
-  const frames = [{ phase: 'start', activeLine: L('let total be the sum'), cut: null, verdict: null, message: `Total sum is ${total}. Try each straight cut, then each discount.` }]
-  const check = (label, a, phaseLine) => {
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('let total be the sum'), cut: null, verdict: null, message: `Total sum is ${total}. Try each straight cut, then each discount.` }]
+  const check = (label, a, phaseLine, pyLine) => {
     const sa = sumOf(a)
     const sb = total - sa
     const ok = cutOk(a, sa, sb)
-    frames.push({ phase: 'cut', activeLine: phaseLine, cut: label, verdict: ok, message: `${label}: sections sum to ${sa} and ${sb}. ${ok ? 'A valid discount or equal sums exists.' : 'No valid discount balances this cut.'}` })
+    frames.push({ phase: 'cut', pythonLine: pyLine, activeLine: phaseLine, cut: label, verdict: ok, message: `${label}: sections sum to ${sa} and ${sb}. ${ok ? 'A valid discount or equal sums exists.' : 'No valid discount balances this cut.'}` })
     return ok
   }
   for (let r = 0; r < m - 1; r++) {
     const top = new Set()
     for (let i = 0; i <= r; i++) for (let j = 0; j < n; j++) top.add(key(i, j))
-    if (check(`Horizontal cut after row ${r}`, top, L('for each horizontal cut'))) {
-      frames.push({ phase: 'done', activeLine: L('return true'), cut: null, verdict: true, message: 'Found a cut that works, so the answer is true.' })
+    if (check(`Horizontal cut after row ${r}`, top, L('for each horizontal cut'), 32)) {
+      frames.push({ phase: 'done', pythonLine: 33, activeLine: L('return true'), cut: null, verdict: true, message: 'Found a cut that works, so the answer is true.' })
       return { input, result: true, frames }
     }
   }
   for (let c = 0; c < n - 1; c++) {
     const left = new Set()
     for (let i = 0; i < m; i++) for (let j = 0; j <= c; j++) left.add(key(i, j))
-    if (check(`Vertical cut after column ${c}`, left, L('for each vertical cut'))) {
-      frames.push({ phase: 'done', activeLine: L('return true'), cut: null, verdict: true, message: 'Found a cut that works, so the answer is true.' })
+    if (check(`Vertical cut after column ${c}`, left, L('for each vertical cut'), 36)) {
+      frames.push({ phase: 'done', pythonLine: 37, activeLine: L('return true'), cut: null, verdict: true, message: 'Found a cut that works, so the answer is true.' })
       return { input, result: true, frames }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), cut: null, verdict: false, message: 'No straight cut works, so the answer is false.' })
+  frames.push({ phase: 'done', pythonLine: 38, activeLine: L('return false'), cut: null, verdict: false, message: 'No straight cut works, so the answer is false.' })
   return { input, result: false, frames }
 }
 

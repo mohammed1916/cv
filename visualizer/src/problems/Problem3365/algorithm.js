@@ -13,23 +13,23 @@ export function parseInput(text) {
 export function buildTrace({ s, t, k }) {
   const size = s.length / k
   const bag = new Map()
-  const frames = [{ phase: 'split', activeLine: L('size = length of s'), side: 's', from: -1, to: -1, bag: {}, message: `Split s into ${k} block${k === 1 ? '' : 's'} of length ${size}.` }]
+  const frames = [{ pythonLine: 4, phase: 'split', activeLine: L('size = length of s'), side: 's', from: -1, to: -1, bag: {}, message: `Split s into ${k} block${k === 1 ? '' : 's'} of length ${size}.` }]
   for (let start = 0; start < s.length; start += size) {
     const block = s.slice(start, start + size)
     bag.set(block, (bag.get(block) ?? 0) + 1)
-    frames.push({ phase: 'bag', activeLine: L('add the block to bag'), side: 's', from: start, to: start + size, bag: Object.fromEntries(bag), message: `Put block "${block}" into the bag.` })
+    frames.push({ pythonLine: 5, phase: 'bag', activeLine: L('add the block to bag'), side: 's', from: start, to: start + size, bag: Object.fromEntries(bag), message: `Put block "${block}" into the bag.` })
   }
   for (let start = 0; start < t.length; start += size) {
     const block = t.slice(start, start + size)
     if (!bag.get(block)) {
-      frames.push({ phase: 'missing', activeLine: L('return false'), side: 't', from: start, to: start + size, bag: Object.fromEntries(bag), message: `Block "${block}" of t is not left in the bag, so t cannot be formed.` })
+      frames.push({ pythonLine: 9, phase: 'missing', activeLine: L('return false'), side: 't', from: start, to: start + size, bag: Object.fromEntries(bag), message: `Block "${block}" of t is not left in the bag, so t cannot be formed.` })
       return { input: { s, t, k }, result: false, frames }
     }
     bag.set(block, bag.get(block) - 1)
     if (bag.get(block) === 0) bag.delete(block)
-    frames.push({ phase: 'match', activeLine: L('remove one copy'), side: 't', from: start, to: start + size, bag: Object.fromEntries(bag), message: `Block "${block}" of t takes one copy from the bag.` })
+    frames.push({ pythonLine: 10, phase: 'match', activeLine: L('remove one copy'), side: 't', from: start, to: start + size, bag: Object.fromEntries(bag), message: `Block "${block}" of t takes one copy from the bag.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return true'), side: 't', from: -1, to: -1, bag: Object.fromEntries(bag), message: 'The bag is matched exactly, so t can be formed.' })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return true'), side: 't', from: -1, to: -1, bag: Object.fromEntries(bag), message: 'The bag is matched exactly, so t can be formed.' })
   return { input: { s, t, k }, result: true, frames }
 }
 

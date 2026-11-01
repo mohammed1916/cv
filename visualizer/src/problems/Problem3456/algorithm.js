@@ -10,24 +10,24 @@ export function parseInput(text) {
 
 export function buildTrace({ s, k }) {
   const n = s.length
-  const frames = [{ phase: 'start', activeLine: L('for each start position'), start: -1, k, message: `Look for a block of exactly ${k} equal letters.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('for each start position'), start: -1, k, message: `Look for a block of exactly ${k} equal letters.` }]
   for (let i = 0; i + k <= n; i++) {
     const ch = s[i]
     let uniform = true
     for (let t = i; t < i + k; t++) if (s[t] !== ch) uniform = false
     if (!uniform) {
-      frames.push({ phase: 'scan', activeLine: L('if every letter in the window'), start: i, k, message: `The window at ${i} mixes letters, so it fails.` })
+      frames.push({ pythonLine: 5, phase: 'scan', activeLine: L('if every letter in the window'), start: i, k, message: `The window at ${i} mixes letters, so it fails.` })
       continue
     }
     const before = i === 0 || s[i - 1] !== ch
     const after = i + k === n || s[i + k] !== ch
     if (before && after) {
-      frames.push({ phase: 'found', activeLine: L('return true'), start: i, k, message: `The window at ${i} is ${ch} repeated ${k} times, and its neighbors are not ${ch}. Special substring found.` })
+      frames.push({ pythonLine: 7, phase: 'found', activeLine: L('return true'), start: i, k, message: `The window at ${i} is ${ch} repeated ${k} times, and its neighbors are not ${ch}. Special substring found.` })
       return { input: { s, k }, result: true, frames }
     }
-    frames.push({ phase: 'scan', activeLine: L('if the letter before i'), start: i, k, message: `The window at ${i} is uniform, but it runs on into a longer block, so it does not count.` })
+    frames.push({ pythonLine: 6, phase: 'scan', activeLine: L('if the letter before i'), start: i, k, message: `The window at ${i} is uniform, but it runs on into a longer block, so it does not count.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), start: -1, k, message: 'No block of exactly k equal letters is bounded by different letters.' })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return false'), start: -1, k, message: 'No block of exactly k equal letters is bounded by different letters.' })
   return { input: { s, k }, result: false, frames }
 }
 

@@ -14,16 +14,16 @@ export function buildTrace({ squares }) {
   const below = line => squares.reduce((s, [, y, l]) => s + l * Math.min(l, Math.max(0, line - y)), 0)
   let low = Math.min(...squares.map(q => q[1]))
   let high = Math.max(...squares.map(q => q[1] + q[2]))
-  const frames = [{ phase: 'start', activeLine: L('set low to the lowest'), low, high, mid: null, below: null, message: `Total square area ${total}; the line must leave ${half} on each side.` }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('set low to the lowest'), low, high, mid: null, below: null, message: `Total square area ${total}; the line must leave ${half} on each side.` }]
   for (let it = 0; it < 60; it++) {
     const mid = (low + high) / 2
     const area = below(mid)
     if (area < half) low = mid
     else high = mid
-    if (it < 12 || it === 59) frames.push({ phase: 'probe', activeLine: L('if below is less than half'), low, high, mid, below: area, message: `Line at y = ${mid.toFixed(4)} has ${area.toFixed(4)} area below.` })
+    if (it < 12 || it === 59) frames.push({ pythonLine: 12, phase: 'probe', activeLine: L('if below is less than half'), low, high, mid, below: area, message: `Line at y = ${mid.toFixed(4)} has ${area.toFixed(4)} area below.` })
   }
   const result = high
-  frames.push({ phase: 'done', activeLine: L('return high'), low, high, mid: result, below: half, message: `Separating line at y = ${result.toFixed(5)}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return high'), low, high, mid: result, below: half, message: `Separating line at y = ${result.toFixed(5)}.` })
   return { input: { squares }, result, frames }
 }
 

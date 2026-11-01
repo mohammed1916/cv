@@ -15,27 +15,27 @@ export function buildTrace({ parent, s }) {
   const n = parent.length
   const newParent = [...parent]
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('set new parent of every node'), node: -1, y: -1, sizes: null, message: 'Start with the original parents.' })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set new parent of every node'), node: -1, y: -1, sizes: null, message: 'Start with the original parents.' })
   for (let x = 1; x < n; x++) {
     let y = parent[x]
-    frames.push({ phase: 'climb', activeLine: L('walk up from the original parent'), node: x, y, sizes: null, message: `Node ${x} (letter ${s[x]}) climbs from its parent ${y}.` })
+    frames.push({ pythonLine: 5, phase: 'climb', activeLine: L('walk up from the original parent'), node: x, y, sizes: null, message: `Node ${x} (letter ${s[x]}) climbs from its parent ${y}.` })
     while (y !== -1) {
       if (s[y] === s[x]) {
         newParent[x] = y
-        frames.push({ phase: 'change', activeLine: L('if an ancestor y has the same letter'), node: x, y, sizes: null, message: `Node ${x} moves under ancestor ${y}, which has the same letter.` })
+        frames.push({ pythonLine: 8, phase: 'change', activeLine: L('if an ancestor y has the same letter'), node: x, y, sizes: null, message: `Node ${x} moves under ancestor ${y}, which has the same letter.` })
         break
       }
       y = parent[y]
-      if (y !== -1) frames.push({ phase: 'climb', activeLine: L('walk up from the original parent'), node: x, y, sizes: null, message: `Letter ${s[y === -1 ? 0 : y]} differs; continue upward.` })
+      if (y !== -1) frames.push({ pythonLine: 10, phase: 'climb', activeLine: L('walk up from the original parent'), node: x, y, sizes: null, message: `Letter ${s[y === -1 ? 0 : y]} differs; continue upward.` })
     }
   }
   const size = Array(n).fill(1)
-  frames.push({ phase: 'size', activeLine: L('set size of every node to 1'), node: -1, y: -1, sizes: [...size], message: 'Every node starts with size 1.' })
+  frames.push({ pythonLine: 11, phase: 'size', activeLine: L('set size of every node to 1'), node: -1, y: -1, sizes: [...size], message: 'Every node starts with size 1.' })
   for (let x = n - 1; x >= 1; x--) {
     size[newParent[x]] += size[x]
-    frames.push({ phase: 'size', activeLine: L('add size of x'), node: x, y: newParent[x], sizes: [...size], message: `Add subtree ${x} (size ${size[x]}) to node ${newParent[x]}.` })
+    frames.push({ pythonLine: 13, phase: 'size', activeLine: L('add size of x'), node: x, y: newParent[x], sizes: [...size], message: `Add subtree ${x} (size ${size[x]}) to node ${newParent[x]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return sizes'), node: -1, y: -1, sizes: [...size], message: `Subtree sizes: [${size.join(', ')}].` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return sizes'), node: -1, y: -1, sizes: [...size], message: `Subtree sizes: [${size.join(', ')}].` })
   const children = Array.from({ length: n }, () => [])
   for (let i = 1; i < n; i++) children[parent[i]].push(i)
   const tree = id => ({ id, children: children[id].map(tree) })

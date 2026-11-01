@@ -28,7 +28,7 @@ export function buildTrace(nums) {
   const sums = new Map()
   const get = (map, key) => map.get(key) ?? 0
   let total = 0
-  const frames = [{ phase: 'start', index: -1, value: null, ways: 0, total: 0, activeLine: L('set total to 0'), message: 'No good subsequence has been counted yet.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', index: -1, value: null, ways: 0, total: 0, activeLine: L('set total to 0'), message: 'No good subsequence has been counted yet.' }]
   nums.forEach((x, index) => {
     let ways = 1
     let weight = x
@@ -41,9 +41,9 @@ export function buildTrace(nums) {
     count.set(x, (get(count, x) + ways) % MOD)
     sums.set(x, (get(sums, x) + weight) % MOD)
     total = (total + weight) % MOD
-    frames.push({ phase: 'extend', index, value: x, ways, weight, total, activeLine: L('add ways to the count'), message: `Value ${x} ends ${ways} good subsequences here, with a sum of ${weight}. Total so far: ${total}.` })
+    frames.push({ pythonLine: 10, phase: 'extend', index, value: x, ways, weight, total, activeLine: L('add ways to the count'), message: `Value ${x} ends ${ways} good subsequences here, with a sum of ${weight}. Total so far: ${total}.` })
   })
-  frames.push({ phase: 'done', index: nums.length, value: null, ways: 0, total, activeLine: L('return total'), message: `Sum of all good subsequences: ${total}.` })
+  frames.push({ pythonLine: 15, phase: 'done', index: nums.length, value: null, ways: 0, total, activeLine: L('return total'), message: `Sum of all good subsequences: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

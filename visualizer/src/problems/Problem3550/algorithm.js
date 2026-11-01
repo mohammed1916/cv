@@ -12,10 +12,10 @@ export function buildTrace(nums) {
   for (let i = 0; i < nums.length; i++) {
     const s = digitSum(nums[i])
     const hit = s === i
-    frames.push({ phase: 'check', activeLine: L('set s to the digit sum'), index: i, sum: s, hit, message: `Digit sum of ${nums[i]} is ${s}; the index is ${i}.${hit ? ' They match.' : ''}` })
+    frames.push({ pythonLine: 3, phase: 'check', activeLine: L('set s to the digit sum'), index: i, sum: s, hit, message: `Digit sum of ${nums[i]} is ${s}; the index is ${i}.${hit ? ' They match.' : ''}` })
     if (hit) { answer = i; break }
   }
-  frames.push({ phase: 'done', activeLine: L(answer === -1 ? 'return -1' : 'then return i'), index: answer, sum: answer === -1 ? 0 : digitSum(nums[answer]), hit: answer !== -1, message: answer === -1 ? 'No index matches its digit sum.' : `Index ${answer} is the smallest match.` })
+  frames.push({ pythonLine: answer === -1 ? 6 : 5, phase: 'done', activeLine: L(answer === -1 ? 'return -1' : 'then return i'), index: answer, sum: answer === -1 ? 0 : digitSum(nums[answer]), hit: answer !== -1, message: answer === -1 ? 'No index matches its digit sum.' : `Index ${answer} is the smallest match.` })
   return { input: nums, result: answer, frames }
 }
 

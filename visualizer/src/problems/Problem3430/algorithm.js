@@ -12,7 +12,7 @@ export function buildTrace(input) {
   const { nums, k } = input
   const n = nums.length
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), start: -1, end: -1, total, result: null, message: `Sum the largest plus smallest value over every subarray of length at most ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), start: -1, end: -1, total, result: null, message: `Sum the largest plus smallest value over every subarray of length at most ${k}.` }]
   for (let i = 0; i < n; i++) {
     let low = nums[i]
     let high = nums[i]
@@ -20,10 +20,10 @@ export function buildTrace(input) {
       low = Math.min(low, nums[j])
       high = Math.max(high, nums[j])
       total += low + high
-      frames.push({ phase: 'extend', activeLine: L('add low plus high to total'), start: i, end: j, total, result: null, message: `Subarray [${i}..${j}] has minimum ${low} and maximum ${high}. Running total: ${total}.` })
+      frames.push({ pythonLine: 9, phase: 'extend', activeLine: L('add low plus high to total'), start: i, end: j, total, result: null, message: `Subarray [${i}..${j}] has minimum ${low} and maximum ${high}. Running total: ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), start: -1, end: -1, total, result: total, message: `The sum over all subarrays is ${total}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return total'), start: -1, end: -1, total, result: total, message: `The sum over all subarrays is ${total}.` })
   return { input, result: total, frames }
 }
 

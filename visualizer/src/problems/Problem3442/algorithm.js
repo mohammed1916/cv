@@ -30,14 +30,14 @@ export function buildTrace(s) {
   const count = tally(s)
   let odd = 0
   let even = Infinity
-  const frames = [{ phase: 'start', letter: null, count: 0, odd, even: null, activeLine: L('set count to'), message: 'Count how often each letter occurs in s.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', letter: null, count: 0, odd, even: null, activeLine: L('set count to'), message: 'Count how often each letter occurs in s.' }]
   for (const [letter, c] of Object.entries(count)) {
     if (c % 2 === 1) odd = Math.max(odd, c)
     else even = Math.min(even, c)
-    frames.push({ phase: 'letter', letter, count: c, odd, even: even === Infinity ? null : even, activeLine: c % 2 === 1 ? L('set odd to the larger') : L('set even to the smaller'), message: `${letter} occurs ${c} times (${c % 2 === 1 ? 'odd' : 'even'}).` })
+    frames.push({ pythonLine: c % 2 === 1 ? 9 : 11, phase: 'letter', letter, count: c, odd, even: even === Infinity ? null : even, activeLine: c % 2 === 1 ? L('set odd to the larger') : L('set even to the smaller'), message: `${letter} occurs ${c} times (${c % 2 === 1 ? 'odd' : 'even'}).` })
   }
   const result = odd - even
-  frames.push({ phase: 'done', letter: null, count: 0, odd, even, activeLine: L('return odd minus even'), message: `${odd} minus ${even} is ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', letter: null, count: 0, odd, even, activeLine: L('return odd minus even'), message: `${odd} minus ${even} is ${result}.` })
   return { input: s, result, frames }
 }
 

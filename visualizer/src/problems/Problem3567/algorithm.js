@@ -15,7 +15,7 @@ export function buildTrace(input) {
   const rows = grid.length
   const cols = grid[0].length
   const answer = Array.from({ length: rows - k + 1 }, () => Array(cols - k + 1).fill(0))
-  const frames = [{ phase: 'start', activeLine: L('create an answer'), window: null, answer: answer.map(r => [...r]), best: null, message: `Each ${k} by ${k} window gets one answer.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('create an answer'), window: null, answer: answer.map(r => [...r]), best: null, message: `Each ${k} by ${k} window gets one answer.` }]
   for (let i = 0; i + k <= rows; i++) {
     for (let j = 0; j + k <= cols; j++) {
       const window = []
@@ -29,10 +29,10 @@ export function buildTrace(input) {
       answer[i][j] = best
       const cells = []
       for (let a = i; a < i + k; a++) for (let b = j; b < j + k; b++) cells.push({ row: a, col: b })
-      frames.push({ phase: 'window', activeLine: L('smallest gap between neighbouring values'), window: { row: i, col: j, k, cells }, answer: answer.map(r => [...r]), best, message: `Window at (${i}, ${j}) has distinct values ${values.join(', ')}; smallest gap ${best}.` })
+      frames.push({ pythonLine: 10, phase: 'window', activeLine: L('smallest gap between neighbouring values'), window: { row: i, col: j, k, cells }, answer: answer.map(r => [...r]), best, message: `Window at (${i}, ${j}) has distinct values ${values.join(', ')}; smallest gap ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), window: null, answer: answer.map(r => [...r]), best: null, message: 'Every window has its answer.' })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return answer'), window: null, answer: answer.map(r => [...r]), best: null, message: 'Every window has its answer.' })
   return { input, result: answer, frames }
 }
 

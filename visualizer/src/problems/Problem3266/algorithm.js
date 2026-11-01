@@ -14,15 +14,15 @@ export function buildTrace({ nums, k, multiplier }) {
   // Values are BigInt so the exact products stay correct; the answer is reduced modulo 1000000007 at the end.
   const m = BigInt(multiplier)
   const values = nums.map(v => BigInt(v))
-  const frames = [{ phase: 'start', activeLine: L('set values to nums'), values: values.map(String), picked: -1, message: 'Each operation multiplies the first smallest value.' }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set values to nums'), values: values.map(String), picked: -1, message: 'Each operation multiplies the first smallest value.' }]
   for (let round = 1; round <= k; round++) {
     let at = 0
     for (let i = 1; i < values.length; i++) if (values[i] < values[at]) at = i
     values[at] *= m
-    frames.push({ phase: 'multiply', activeLine: L('multiply the first smallest'), values: values.map(String), picked: at, message: `Operation ${round}: index ${at} becomes ${values[at]}.` })
+    frames.push({ pythonLine: 15, phase: 'multiply', activeLine: L('multiply the first smallest'), values: values.map(String), picked: at, message: `Operation ${round}: index ${at} becomes ${values[at]}.` })
   }
   const result = values.map(v => Number(v % MOD))
-  frames.push({ phase: 'done', activeLine: L('return every value modulo'), values: values.map(String), picked: -1, message: `Final array modulo 1000000007: [${result.join(', ')}].` })
+  frames.push({ pythonLine: 22, phase: 'done', activeLine: L('return every value modulo'), values: values.map(String), picked: -1, message: `Final array modulo 1000000007: [${result.join(', ')}].` })
   return { input: { nums, k, multiplier }, result, frames }
 }
 

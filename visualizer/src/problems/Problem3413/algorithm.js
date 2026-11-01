@@ -19,7 +19,7 @@ export function parseInput(text) {
 
 export function buildTrace({ bags, k }) {
   const starts = [...new Set(bags.flatMap(([l, r]) => [l - k, l - k + 1, l, r - k + 1, r + 1]))].sort((a, b) => a - b)
-  const frames = [{ phase: 'collect', activeLine: L('add start - k'), start: null, end: null, coins: 0, best: 0, message: `Collected ${starts.length} candidate window starts from the bag edges.` }]
+  const frames = [{ pythonLine: 4, phase: 'collect', activeLine: L('add start - k'), start: null, end: null, coins: 0, best: 0, message: `Collected ${starts.length} candidate window starts from the bag edges.` }]
   let best = 0
   for (const s of starts) {
     const end = s + k - 1
@@ -28,9 +28,9 @@ export function buildTrace({ bags, k }) {
       return overlap > 0 ? total + overlap * c : total
     }, 0)
     if (coins > best) best = coins
-    frames.push({ phase: 'candidate', activeLine: L('total the coins'), start: s, end, coins, best, message: `Window ${s} to ${end} holds ${coins} coins. Best so far: ${best}.` })
+    frames.push({ pythonLine: 11, phase: 'candidate', activeLine: L('total the coins'), start: s, end, coins, best, message: `Window ${s} to ${end} holds ${coins} coins. Best so far: ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), start: null, end: null, coins: null, best, message: `Most coins from ${k} consecutive bags: ${best}.` })
+  frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return best'), start: null, end: null, coins: null, best, message: `Most coins from ${k} consecutive bags: ${best}.` })
   return { input: { bags, k }, result: best, starts, frames }
 }
 

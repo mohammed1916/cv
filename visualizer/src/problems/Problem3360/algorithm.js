@@ -10,17 +10,17 @@ export function buildTrace({ n }) {
   let stones = n
   let need = 10
   let aliceTurn = true
-  const frames = [{ phase: 'start', activeLine: L('set stones to n'), turn: null, stones, need, message: `Start with ${n} stones. Alice must remove 10 first.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set stones to n'), turn: null, stones, need, message: `Start with ${n} stones. Alice must remove 10 first.` }]
   while (need > 0 && stones >= need) {
     const player = aliceTurn ? 'Alice' : 'Bob'
     stones -= need
-    frames.push({ phase: 'turn', activeLine: L('subtract need from stones'), turn: player, stones, need, message: `${player} removes ${need} stones. ${stones} remain.` })
+    frames.push({ pythonLine: 6, phase: 'turn', activeLine: L('subtract need from stones'), turn: player, stones, need, message: `${player} removes ${need} stones. ${stones} remain.` })
     need -= 1
     aliceTurn = !aliceTurn
   }
   const loser = aliceTurn ? 'Alice' : 'Bob'
   const result = loser === 'Bob'
-  frames.push({ phase: 'done', activeLine: L('return true when'), turn: loser, stones, need, message: `${loser} needs ${need} stones but only ${stones} remain, so ${loser} loses. ${result ? 'Alice wins.' : 'Bob wins.'}` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return true when'), turn: loser, stones, need, message: `${loser} needs ${need} stones but only ${stones} remain, so ${loser} loses. ${result ? 'Alice wins.' : 'Bob wins.'}` })
   return { input: { n }, result, frames }
 }
 

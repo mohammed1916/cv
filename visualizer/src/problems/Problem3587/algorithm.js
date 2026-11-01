@@ -11,24 +11,24 @@ export function buildTrace(nums) {
   nums.forEach((v, i) => (v % 2 === 0 ? evens : odds).push(i))
   const e = evens.length
   const o = odds.length
-  const frames = [{ phase: 'count', activeLine: L('list the positions'), costs: [], result: null, message: `${e} even and ${o} odd values.` }]
+  const frames = [{ pythonLine: 2, phase: 'count', activeLine: L('list the positions'), costs: [], result: null, message: `${e} even and ${o} odd values.` }]
   if (Math.abs(e - o) > 1) {
-    frames.push({ phase: 'done', activeLine: L('return -1'), costs: [], result: -1, message: 'The counts differ by more than one, so no alternating arrangement exists: return -1.' })
+    frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return -1'), costs: [], result: -1, message: 'The counts differ by more than one, so no alternating arrangement exists: return -1.' })
     return { input: nums, result: -1, frames }
   }
   const costs = []
   if (e >= o) {
     const cost = evens.reduce((s, p, k) => s + Math.abs(p - 2 * k), 0)
     costs.push({ start: 'even', cost })
-    frames.push({ phase: 'even', activeLine: L('cost of even-first'), costs: [...costs], result: null, message: `Even-first pattern: evens move to positions 0, 2, 4 and so on, at total cost ${cost}.` })
+    frames.push({ pythonLine: 9, phase: 'even', activeLine: L('cost of even-first'), costs: [...costs], result: null, message: `Even-first pattern: evens move to positions 0, 2, 4 and so on, at total cost ${cost}.` })
   }
   if (o >= e) {
     const cost = odds.reduce((s, p, k) => s + Math.abs(p - 2 * k), 0)
     costs.push({ start: 'odd', cost })
-    frames.push({ phase: 'odd', activeLine: L('cost of odd-first'), costs: [...costs], result: null, message: `Odd-first pattern: odds move to positions 0, 2, 4 and so on, at total cost ${cost}.` })
+    frames.push({ pythonLine: 11, phase: 'odd', activeLine: L('cost of odd-first'), costs: [...costs], result: null, message: `Odd-first pattern: odds move to positions 0, 2, 4 and so on, at total cost ${cost}.` })
   }
   const result = Math.min(...costs.map(c => c.cost))
-  frames.push({ phase: 'done', activeLine: L('return the smaller cost'), costs: [...costs], result, message: `Minimum adjacent swaps: ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return the smaller cost'), costs: [...costs], result, message: `Minimum adjacent swaps: ${result}.` })
   return { input: nums, result, frames }
 }
 

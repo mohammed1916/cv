@@ -37,7 +37,7 @@ export function buildTrace({ n, k }) {
   let last = 2
   const used = Array(n + 1).fill(false)
   const perm = []
-  const frames = [{ phase: 'start', position: null, candidates: [], chosen: null, prefix: [], rest, activeLine: L('set prefix to'), message: `Find permutation number ${k} among the alternating ones, in lexicographic order.` }]
+  const frames = [{ pythonLine: 21, phase: 'start', position: null, candidates: [], chosen: null, prefix: [], rest, activeLine: L('set prefix to'), message: `Find permutation number ${k} among the alternating ones, in lexicographic order.` }]
   for (let pos = 0; pos < n; pos++) {
     const candidates = []
     let chosen = null
@@ -59,9 +59,9 @@ export function buildTrace({ n, k }) {
     perm.push(chosen)
     if (chosen % 2 === 1) odds--; else evens--
     last = chosen % 2
-    frames.push({ phase: 'place', position: pos, candidates, chosen, prefix: perm.slice(), rest, activeLine: L('place the value'), message: `Position ${pos + 1}: ${chosen} is the next value; its block has ${candidates.find(c => c.chosen).count} completions.` })
+    frames.push({ pythonLine: 34, phase: 'place', position: pos, candidates, chosen, prefix: perm.slice(), rest, activeLine: L('place the value'), message: `Position ${pos + 1}: ${chosen} is the next value; its block has ${candidates.find(c => c.chosen).count} completions.` })
   }
-  frames.push({ phase: 'done', position: null, candidates: [], chosen: null, prefix: perm.slice(), rest, activeLine: L('return the permutation'), message: `Permutation ${k}: [${perm.join(', ')}].` })
+  frames.push({ pythonLine: 40, phase: 'done', position: null, candidates: [], chosen: null, prefix: perm.slice(), rest, activeLine: L('return the permutation'), message: `Permutation ${k}: [${perm.join(', ')}].` })
   return { input: { n, k }, result: perm, frames }
 }
 

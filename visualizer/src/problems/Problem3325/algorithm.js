@@ -7,7 +7,7 @@ export function parseInput(text) {
 
 export function buildTrace({ s, k }) {
   const n = s.length
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), start: 0, end: -1, letter: '', count: 0, total: 0, message: `Count substrings where some letter appears at least ${k} times.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set total to zero'), start: 0, end: -1, letter: '', count: 0, total: 0, message: `Count substrings where some letter appears at least ${k} times.` }]
   let total = 0
   for (let start = 0; start < n; start++) {
     const counts = new Map()
@@ -15,15 +15,15 @@ export function buildTrace({ s, k }) {
       const letter = s[end]
       counts.set(letter, (counts.get(letter) ?? 0) + 1)
       const count = counts.get(letter)
-      frames.push({ phase: 'extend', activeLine: L('add one to the count'), start, end, letter, count, total, message: `Add ${letter}. Its count in ${start} to ${end} is ${count}.` })
+      frames.push({ pythonLine: 7, phase: 'extend', activeLine: L('add one to the count'), start, end, letter, count, total, message: `Add ${letter}. Its count in ${start} to ${end} is ${count}.` })
       if (count >= k) {
         total += n - end
-        frames.push({ phase: 'count', activeLine: L('stop this start'), start, end, letter, count, total, message: `${letter} reaches ${k}, so the ${n - end} substrings from ${start} ending at ${end} or later count. Total ${total}.` })
+        frames.push({ pythonLine: 10, phase: 'count', activeLine: L('stop this start'), start, end, letter, count, total, message: `${letter} reaches ${k}, so the ${n - end} substrings from ${start} ending at ${end} or later count. Total ${total}.` })
         break
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), start: 0, end: n - 1, letter: '', count: 0, total, message: `There are ${total} qualifying substrings.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), start: 0, end: n - 1, letter: '', count: 0, total, message: `There are ${total} qualifying substrings.` })
   return { input: { s, k }, result: total, frames }
 }
 

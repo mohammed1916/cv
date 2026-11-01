@@ -10,20 +10,20 @@ export function buildTrace(maximumHeight) {
   const heights = maximumHeight.map(() => null)
   let previous = Infinity
   let total = 0
-  const frames = [{ phase: 'sort', activeLine: L('sort the towers'), index: -1, heights: [...heights], total, message: 'Process the towers from the highest limit down.' }]
+  const frames = [{ pythonLine: 4, phase: 'sort', activeLine: L('sort the towers'), index: -1, heights: [...heights], total, message: 'Process the towers from the highest limit down.' }]
   for (const { limit, index } of order) {
     const height = Math.min(limit, previous - 1)
     if (height < 1) {
-      frames.push({ phase: 'fail', activeLine: L('if the height is below 1'), index, heights: [...heights], total, message: `Tower ${index} cannot get a height of at least 1 that is unused. The answer is -1.` })
-      frames.push({ phase: 'done', activeLine: L('return -1'), index: -1, heights: [...heights], total: -1, message: 'Impossible: return -1.' })
+      frames.push({ pythonLine: 6, phase: 'fail', activeLine: L('if the height is below 1'), index, heights: [...heights], total, message: `Tower ${index} cannot get a height of at least 1 that is unused. The answer is -1.` })
+      frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return -1'), index: -1, heights: [...heights], total: -1, message: 'Impossible: return -1.' })
       return { input: maximumHeight, result: -1, frames }
     }
     heights[index] = height
     total += height
     previous = height
-    frames.push({ phase: 'assign', activeLine: L('add the height to total'), index, heights: [...heights], total, message: `Tower ${index} (limit ${limit}) gets height ${height}. Total ${total}.` })
+    frames.push({ pythonLine: 8, phase: 'assign', activeLine: L('add the height to total'), index, heights: [...heights], total, message: `Tower ${index} (limit ${limit}) gets height ${height}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, heights: [...heights], total, message: `Maximum total height: ${total}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return total'), index: -1, heights: [...heights], total, message: `Maximum total height: ${total}.` })
   return { input: maximumHeight, result: total, frames }
 }
 

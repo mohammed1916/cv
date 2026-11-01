@@ -13,25 +13,25 @@ export function buildTrace(input) {
   const m = grid.length
   const n = grid[0].length
   const total = grid.reduce((sum, row) => sum + row.reduce((a, b) => a + b, 0), 0)
-  const frames = [{ phase: 'start', activeLine: L('set total to the sum'), cut: null, acc: 0, total, message: `Total of all cells is ${total}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set total to the sum'), cut: null, acc: 0, total, message: `Total of all cells is ${total}.` }]
   let above = 0
   for (let r = 0; r <= m - 2; r++) {
     above += grid[r].reduce((a, b) => a + b, 0)
     const hit = 2 * above === total
-    frames.push({ phase: 'row', activeLine: L('add the sum of row r'), cut: { kind: 'row', index: r }, acc: above, total, message: `Horizontal cut after row ${r}: top ${above}, bottom ${total - above}.` })
+    frames.push({ pythonLine: 6, phase: 'row', activeLine: L('add the sum of row r'), cut: { kind: 'row', index: r }, acc: above, total, message: `Horizontal cut after row ${r}: top ${above}, bottom ${total - above}.` })
     if (hit) return finish(true, { kind: 'row', index: r })
   }
   let left = 0
   for (let c = 0; c <= n - 2; c++) {
     left += grid.reduce((sum, row) => sum + row[c], 0)
     const hit = 2 * left === total
-    frames.push({ phase: 'col', activeLine: L('add the sum of column c'), cut: { kind: 'col', index: c }, acc: left, total, message: `Vertical cut after column ${c}: left ${left}, right ${total - left}.` })
+    frames.push({ pythonLine: 11, phase: 'col', activeLine: L('add the sum of column c'), cut: { kind: 'col', index: c }, acc: left, total, message: `Vertical cut after column ${c}: left ${left}, right ${total - left}.` })
     if (hit) return finish(true, { kind: 'col', index: c })
   }
   return finish(false, null)
 
   function finish(result, cut) {
-    frames.push({ phase: 'done', activeLine: L('return false'), cut, acc: null, total, result, message: result ? 'A straight cut splits the grid into equal sums.' : 'No straight cut gives equal sums.' })
+    frames.push({ pythonLine: result ? 8 : 14, phase: 'done', activeLine: L('return false'), cut, acc: null, total, result, message: result ? 'A straight cut splits the grid into equal sums.' : 'No straight cut gives equal sums.' })
     return { input, result, frames }
   }
 }

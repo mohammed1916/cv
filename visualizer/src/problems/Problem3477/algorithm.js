@@ -13,25 +13,25 @@ export function buildTrace(input) {
   const { fruits, baskets } = input
   const used = baskets.map(() => false)
   let unplaced = 0
-  const frames = [{ phase: 'start', activeLine: L('set unplaced to zero'), fruit: -1, basket: -1, used: [...used], unplaced, message: 'Every basket starts unused and no fruit is unplaced yet.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set unplaced to zero'), fruit: -1, basket: -1, used: [...used], unplaced, message: 'Every basket starts unused and no fruit is unplaced yet.' }]
   fruits.forEach((quantity, fruit) => {
     let placed = false
     for (let basket = 0; basket < baskets.length && !placed; basket++) {
       if (used[basket] || baskets[basket] < quantity) {
         const reason = used[basket] ? 'is already used' : `holds ${baskets[basket]}, too small for ${quantity}`
-        frames.push({ phase: 'scan', activeLine: L('if the basket is used'), fruit, basket, used: [...used], unplaced, message: `Basket ${basket} ${reason}, so skip it.` })
+        frames.push({ pythonLine: 7, phase: 'scan', activeLine: L('if the basket is used'), fruit, basket, used: [...used], unplaced, message: `Basket ${basket} ${reason}, so skip it.` })
         continue
       }
       used[basket] = true
       placed = true
-      frames.push({ phase: 'place', activeLine: L('place the fruit here'), fruit, basket, used: [...used], unplaced, message: `Fruit ${quantity} goes into basket ${basket}, which holds ${baskets[basket]}.` })
+      frames.push({ pythonLine: 9, phase: 'place', activeLine: L('place the fruit here'), fruit, basket, used: [...used], unplaced, message: `Fruit ${quantity} goes into basket ${basket}, which holds ${baskets[basket]}.` })
     }
     if (!placed) {
       unplaced++
-      frames.push({ phase: 'unplaced', activeLine: L('add one to unplaced'), fruit, basket: -1, used: [...used], unplaced, message: `No basket fits fruit ${quantity}.` })
+      frames.push({ pythonLine: 13, phase: 'unplaced', activeLine: L('add one to unplaced'), fruit, basket: -1, used: [...used], unplaced, message: `No basket fits fruit ${quantity}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return unplaced'), fruit: -1, basket: -1, used: [...used], unplaced, message: `${unplaced} fruit(s) could not be placed.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return unplaced'), fruit: -1, basket: -1, used: [...used], unplaced, message: `${unplaced} fruit(s) could not be placed.` })
   return { input, result: unplaced, frames }
 }
 

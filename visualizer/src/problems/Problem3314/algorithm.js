@@ -25,16 +25,16 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums }) {
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('set answers to an empty list'), index: -1, answers: [], message: 'Find the smallest x whose lowest zero bit, once set, produces the prime when OR-ed with x + 1.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set answers to an empty list'), index: -1, answers: [], message: 'Find the smallest x whose lowest zero bit, once set, produces the prime when OR-ed with x + 1.' }]
   nums.forEach((prime, index) => {
     const low = (prime + 1) & ~prime
     const candidate = prime ^ (low >> 1)
-    frames.push({ phase: 'pick', activeLine: L('set candidate'), index, prime, candidate, answers: [...answers], message: `Prime ${prime}: lowest unset bit is ${low}, so the candidate is ${candidate}.` })
+    frames.push({ pythonLine: 5, phase: 'pick', activeLine: L('set candidate'), index, prime, candidate, answers: [...answers], message: `Prime ${prime}: lowest unset bit is ${low}, so the candidate is ${candidate}.` })
     const ok = (candidate | (candidate + 1)) === prime
     answers.push(ok ? candidate : -1)
-    frames.push({ phase: 'check', activeLine: L('if candidate OR'), index, prime, candidate, answers: [...answers], message: ok ? `${candidate} OR ${candidate + 1} = ${prime}, so ${candidate} is the answer.` : `${candidate} OR ${candidate + 1} is not ${prime}, so the answer is -1.` })
+    frames.push({ pythonLine: 6, phase: 'check', activeLine: L('if candidate OR'), index, prime, candidate, answers: [...answers], message: ok ? `${candidate} OR ${candidate + 1} = ${prime}, so ${candidate} is the answer.` : `${candidate} OR ${candidate + 1} is not ${prime}, so the answer is -1.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return answers'), index: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input: { nums }, result: answers, frames }
 }
 

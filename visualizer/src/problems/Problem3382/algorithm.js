@@ -14,27 +14,27 @@ export function parseInput(text) {
 export function buildTrace(points) {
   const at = new Set(points.map(p => p.join(',')))
   let best = -1
-  const frames = [{ phase: 'start', pair: null, corners: null, blocked: null, best, activeLine: L('set best to -1'), message: 'Try each pair of points as opposite corners of a rectangle with sides parallel to the axes.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', pair: null, corners: null, blocked: null, best, activeLine: L('set best to -1'), message: 'Try each pair of points as opposite corners of a rectangle with sides parallel to the axes.' }]
   for (const [px, py] of points) {
     for (const [qx, qy] of points) {
       if (!(px < qx && py < qy)) continue
       const corners = [[px, py], [qx, qy], [px, qy], [qx, py]]
       if (!at.has(`${px},${qy}`) || !at.has(`${qx},${py}`)) {
-        frames.push({ phase: 'pair', pair: [[px, py], [qx, qy]], corners: null, blocked: null, best, activeLine: L('two other corners'), message: `Corners (${px}, ${py}) and (${qx}, ${qy}) need points at (${px}, ${qy}) and (${qx}, ${py}); one is missing.` })
+        frames.push({ pythonLine: 6, phase: 'pair', pair: [[px, py], [qx, qy]], corners: null, blocked: null, best, activeLine: L('two other corners'), message: `Corners (${px}, ${py}) and (${qx}, ${qy}) need points at (${px}, ${qy}) and (${qx}, ${py}); one is missing.` })
         continue
       }
       const cornerKeys = new Set(corners.map(c => c.join(',')))
       const intruder = points.find(([x, y]) => x >= px && x <= qx && y >= py && y <= qy && !cornerKeys.has(`${x},${y}`))
       if (intruder) {
-        frames.push({ phase: 'blocked', pair: [[px, py], [qx, qy]], corners, blocked: intruder, best, activeLine: L('no other point'), message: `Point (${intruder[0]}, ${intruder[1]}) lies on or inside this rectangle, so it is rejected.` })
+        frames.push({ pythonLine: 8, phase: 'blocked', pair: [[px, py], [qx, qy]], corners, blocked: intruder, best, activeLine: L('no other point'), message: `Point (${intruder[0]}, ${intruder[1]}) lies on or inside this rectangle, so it is rejected.` })
         continue
       }
       const area = (qx - px) * (qy - py)
       best = Math.max(best, area)
-      frames.push({ phase: 'accept', pair: [[px, py], [qx, qy]], corners, blocked: null, best, activeLine: L('set best to the larger'), message: `Rectangle with corners (${px}, ${py}) and (${qx}, ${qy}) is empty of other points; area ${area}.` })
+      frames.push({ pythonLine: 10, phase: 'accept', pair: [[px, py], [qx, qy]], corners, blocked: null, best, activeLine: L('set best to the larger'), message: `Rectangle with corners (${px}, ${py}) and (${qx}, ${qy}) is empty of other points; area ${area}.` })
     }
   }
-  frames.push({ phase: 'done', pair: null, corners: null, blocked: null, best, activeLine: L('return best'), message: `Largest empty rectangle area: ${best}.` })
+  frames.push({ pythonLine: 11, phase: 'done', pair: null, corners: null, blocked: null, best, activeLine: L('return best'), message: `Largest empty rectangle area: ${best}.` })
   return { input: points, result: best, frames }
 }
 

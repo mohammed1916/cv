@@ -16,19 +16,19 @@ const consecutive = (x, y) => {
 export function buildTrace(input) {
   const { s } = input
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set the stack to empty'), at: -1, stack: [], message: 'Start with an empty stack. Each letter is pushed unless it cancels the letter on top.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set the stack to empty'), at: -1, stack: [], message: 'Start with an empty stack. Each letter is pushed unless it cancels the letter on top.' }]
   for (let i = 0; i < s.length; i++) {
     const ch = s[i]
     if (stack.length && consecutive(stack[stack.length - 1], ch)) {
       const top = stack.pop()
-      frames.push({ phase: 'remove', activeLine: L('pop the top letter'), at: i, stack: [...stack], message: `${top} and ${ch} are consecutive, so both are removed. Stack is ${stack.join('') || 'empty'}.` })
+      frames.push({ pythonLine: 5, phase: 'remove', activeLine: L('pop the top letter'), at: i, stack: [...stack], message: `${top} and ${ch} are consecutive, so both are removed. Stack is ${stack.join('') || 'empty'}.` })
     } else {
       stack.push(ch)
-      frames.push({ phase: 'push', activeLine: L('push ch onto the stack'), at: i, stack: [...stack], message: `${ch} does not cancel the top letter, so it is pushed. Stack is ${stack.join('')}.` })
+      frames.push({ pythonLine: 7, phase: 'push', activeLine: L('push ch onto the stack'), at: i, stack: [...stack], message: `${ch} does not cancel the top letter, so it is pushed. Stack is ${stack.join('')}.` })
     }
   }
   const result = stack.join('')
-  frames.push({ phase: 'done', activeLine: L('return the stack as a string'), at: -1, stack: [...stack], message: `The resulting string is ${result === '' ? 'empty' : result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the stack as a string'), at: -1, stack: [...stack], message: `The resulting string is ${result === '' ? 'empty' : result}.` })
   return { input, result, frames }
 }
 

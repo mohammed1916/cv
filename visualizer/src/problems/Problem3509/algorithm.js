@@ -17,7 +17,7 @@ export function buildTrace({ nums, k, limit }) {
   const input = { nums, k, limit }
   const over = limit + 1
   const states = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set states to empty'), index: -1, best: -1, message: 'No subsequence has been started yet.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set states to empty'), index: -1, best: -1, message: 'No subsequence has been started yet.' }]
   nums.forEach((v, i) => {
     const additions = [v === 0 ? ['1,0,1', 0] : [`1,${v},0`, Math.min(v, over)]]
     for (const [key, products] of states) {
@@ -30,10 +30,10 @@ export function buildTrace({ nums, k, limit }) {
       if (!states.has(key)) states.set(key, new Set())
       states.get(key).add(product)
     }
-    frames.push({ phase: 'consider', activeLine: L('for each value'), index: i, best: bestFor(states, k, limit), message: `Value ${v} starts or extends subsequences. ${states.size} states are reachable.` })
+    frames.push({ pythonLine: 4, phase: 'consider', activeLine: L('for each value'), index: i, best: bestFor(states, k, limit), message: `Value ${v} starts or extends subsequences. ${states.size} states are reachable.` })
   })
   const result = bestFor(states, k, limit)
-  frames.push({ phase: 'done', activeLine: L('return the largest product'), index: nums.length - 1, best: result, message: `Largest product with alternating sum ${k}: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return the largest product'), index: nums.length - 1, best: result, message: `Largest product with alternating sum ${k}: ${result}.` })
   return { input, result, frames }
 }
 

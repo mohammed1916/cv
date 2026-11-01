@@ -12,21 +12,21 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { x, y } = input
   const bestIndex = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set best to an empty'), index: -1, picked: [], total: 0, message: 'For each x value, only the largest y matters, because each x can be used once.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set best to an empty'), index: -1, picked: [], total: 0, message: 'For each x value, only the largest y matters, because each x can be used once.' }]
   x.forEach((value, i) => {
     const current = bestIndex.get(value)
     if (current === undefined || y[i] > y[current]) bestIndex.set(value, i)
-    frames.push({ phase: 'scan', activeLine: L('keep the largest y'), index: i, picked: [...bestIndex.values()], total: 0, message: `Index ${i} has x ${value} and y ${y[i]}. Best y for x ${value} is ${y[bestIndex.get(value)]}.` })
+    frames.push({ pythonLine: 5, phase: 'scan', activeLine: L('keep the largest y'), index: i, picked: [...bestIndex.values()], total: 0, message: `Index ${i} has x ${value} and y ${y[i]}. Best y for x ${value} is ${y[bestIndex.get(value)]}.` })
   })
   const ranked = [...bestIndex.values()].sort((a, b) => y[b] - y[a] || a - b)
   const picked = ranked.slice(0, 3)
-  frames.push({ phase: 'rank', activeLine: L('sort the best'), index: -1, picked, total: 0, message: 'Rank the best entry for each x from largest y to smallest.' })
+  frames.push({ pythonLine: 6, phase: 'rank', activeLine: L('sort the best'), index: -1, picked, total: 0, message: 'Rank the best entry for each x from largest y to smallest.' })
   let total = 0
   for (let p = 0; p < 3; p++) {
     total += y[picked[p]]
-    frames.push({ phase: 'pick', activeLine: L('add the y values'), index: picked[p], picked: picked.slice(0, p + 1), total, message: `Take index ${picked[p]} with y ${y[picked[p]]}. Sum so far: ${total}.` })
+    frames.push({ pythonLine: 7, phase: 'pick', activeLine: L('add the y values'), index: picked[p], picked: picked.slice(0, p + 1), total, message: `Take index ${picked[p]} with y ${y[picked[p]]}. Sum so far: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the sum'), index: -1, picked, total, message: `Maximum y-sum: ${total}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return the sum'), index: -1, picked, total, message: `Maximum y-sum: ${total}.` })
   return { input, result: total, frames }
 }
 

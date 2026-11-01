@@ -9,20 +9,20 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums } = input
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set stack to empty'), index: -1, stack: [], message: 'Each stack entry is the maximum of one segment that will stay as a single element.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set stack to empty'), index: -1, stack: [], message: 'Each stack entry is the maximum of one segment that will stay as a single element.' }]
   nums.forEach((x, i) => {
-    frames.push({ phase: 'read', activeLine: L('for each value'), index: i, stack: [...stack], message: `Read ${x}.` })
+    frames.push({ pythonLine: 3, phase: 'read', activeLine: L('for each value'), index: i, stack: [...stack], message: `Read ${x}.` })
     let cur = x
     if (stack.length && stack[stack.length - 1] > x) {
       cur = stack.pop()
-      frames.push({ phase: 'merge', activeLine: L('if the stack top'), index: i, stack: [...stack], message: `The top is larger than ${x}, so ${x} joins that segment. Its maximum is ${cur}.` })
+      frames.push({ pythonLine: 5, phase: 'merge', activeLine: L('if the stack top'), index: i, stack: [...stack], message: `The top is larger than ${x}, so ${x} joins that segment. Its maximum is ${cur}.` })
     } else {
-      frames.push({ phase: 'push', activeLine: L('set cur to x'), index: i, stack: [...stack], message: `The top is not larger, so ${x} starts its own segment.` })
+      frames.push({ pythonLine: 4, phase: 'push', activeLine: L('set cur to x'), index: i, stack: [...stack], message: `The top is not larger, so ${x} starts its own segment.` })
     }
     stack.push(cur)
-    frames.push({ phase: 'push', activeLine: L('push cur'), index: i, stack: [...stack], message: `Push ${cur}. The stack now holds ${stack.length} segments.` })
+    frames.push({ pythonLine: 7, phase: 'push', activeLine: L('push cur'), index: i, stack: [...stack], message: `Push ${cur}. The stack now holds ${stack.length} segments.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the number'), index: -1, stack: [...stack], message: `Largest final size: ${stack.length}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return the number'), index: -1, stack: [...stack], message: `Largest final size: ${stack.length}.` })
   return { input, result: stack.length, frames }
 }
 

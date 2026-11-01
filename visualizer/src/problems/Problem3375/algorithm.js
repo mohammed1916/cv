@@ -8,18 +8,18 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { nums, k } = input
-  const frames = [{ phase: 'start', activeLine: L('if some value is below'), index: -1, count: 0, message: `Check whether every value is at least ${k}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('if some value is below'), index: -1, count: 0, message: `Check whether every value is at least ${k}.` }]
   if (nums.some(v => v < k)) {
-    frames.push({ phase: 'stuck', activeLine: L('return -1'), index: -1, count: -1, message: 'A value is below k, and operations only lower values, so k cannot be reached. The answer is -1.' })
+    frames.push({ pythonLine: 3, phase: 'stuck', activeLine: L('return -1'), index: -1, count: -1, message: 'A value is below k, and operations only lower values, so k cannot be reached. The answer is -1.' })
     return { input, result: -1, frames }
   }
   const levels = [...new Set(nums.filter(v => v > k))].sort((a, b) => b - a)
   let operations = 0
   for (const level of levels) {
     operations += 1
-    frames.push({ phase: 'level', activeLine: L('add 1 to operations'), index: nums.indexOf(level), count: operations, level, message: `Level ${level} is above k. One operation lowers the values above it to the next level down.` })
+    frames.push({ pythonLine: 4, phase: 'level', activeLine: L('add 1 to operations'), index: nums.indexOf(level), count: operations, level, message: `Level ${level} is above k. One operation lowers the values above it to the next level down.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return operations'), index: -1, count: operations, message: `Minimum operations: ${operations}.` })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return operations'), index: -1, count: operations, message: `Minimum operations: ${operations}.` })
   return { input, result: operations, frames }
 }
 

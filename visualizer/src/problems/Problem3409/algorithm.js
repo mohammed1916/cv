@@ -27,7 +27,7 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const length = Array.from({ length: n }, () => Array(n).fill(0))
   let best = Math.min(n, 2)
-  const frames = [{ phase: 'start', cell: null, table: copy(length), activeLine: L('best = the smaller'), message: `Pairs of positions form the shortest valid subsequences.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', cell: null, table: copy(length), activeLine: L('best = the smaller'), message: `Pairs of positions form the shortest valid subsequences.` }]
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < i; j++) {
       length[j][i] = 2
@@ -35,10 +35,10 @@ export function buildTrace({ nums }) {
         if (Math.abs(nums[j] - nums[k]) > Math.abs(nums[i] - nums[j])) length[j][i] = Math.max(length[j][i], length[k][j] + 1)
       }
       best = Math.max(best, length[j][i])
-      frames.push({ phase: 'pair', cell: [j, i], table: copy(length), activeLine: L('length[j][i] = 2'), message: `Ending at positions ${j} and ${i}, the longest valid subsequence has length ${length[j][i]}.` })
+      frames.push({ pythonLine: 7, phase: 'pair', cell: [j, i], table: copy(length), activeLine: L('length[j][i] = 2'), message: `Ending at positions ${j} and ${i}, the longest valid subsequence has length ${length[j][i]}.` })
     }
   }
-  frames.push({ phase: 'done', cell: null, table: copy(length), activeLine: L('return best'), message: `Longest subsequence: ${best}.` })
+  frames.push({ pythonLine: 12, phase: 'done', cell: null, table: copy(length), activeLine: L('return best'), message: `Longest subsequence: ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

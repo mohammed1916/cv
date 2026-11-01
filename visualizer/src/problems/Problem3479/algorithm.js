@@ -14,7 +14,7 @@ export function buildTrace({ fruits, baskets }) {
   const m = baskets.length
   const seg = new SegTree(m, 'max-assign', baskets)
   let unplaced = 0
-  const frames = [{ phase: 'start', fruit: null, basket: null, unplaced, seg: { ...seg.snapshot(), title: 'Basket capacities' }, activeLine: L('set unplaced to 0'), message: 'Each basket holds one fruit. Find the leftmost basket with enough capacity.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', fruit: null, basket: null, unplaced, seg: { ...seg.snapshot(), title: 'Basket capacities' }, activeLine: L('set unplaced to 0'), message: 'Each basket holds one fruit. Find the leftmost basket with enough capacity.' }]
   for (const f of fruits) {
     let basket = -1
     if (seg.query(0, m - 1) >= f) {
@@ -30,9 +30,9 @@ export function buildTrace({ fruits, baskets }) {
     } else {
       unplaced++
     }
-    frames.push({ phase: 'fruit', fruit: f, basket: basket < 0 ? null : basket, unplaced, seg: { ...seg.snapshot(), title: `Placing fruit ${f}` }, activeLine: L('find the leftmost basket'), message: basket < 0 ? `Fruit ${f} fits no basket: unplaced.` : `Fruit ${f} goes to basket ${basket}, which is now empty.` })
+    frames.push({ pythonLine: 7, phase: 'fruit', fruit: f, basket: basket < 0 ? null : basket, unplaced, seg: { ...seg.snapshot(), title: `Placing fruit ${f}` }, activeLine: L('find the leftmost basket'), message: basket < 0 ? `Fruit ${f} fits no basket: unplaced.` : `Fruit ${f} goes to basket ${basket}, which is now empty.` })
   }
-  frames.push({ phase: 'done', fruit: null, basket: null, unplaced, seg: { ...seg.snapshot(), title: 'Final baskets' }, activeLine: L('return unplaced'), message: `Unplaced fruits: ${unplaced}.` })
+  frames.push({ pythonLine: 11, phase: 'done', fruit: null, basket: null, unplaced, seg: { ...seg.snapshot(), title: 'Final baskets' }, activeLine: L('return unplaced'), message: `Unplaced fruits: ${unplaced}.` })
   return { input: { fruits, baskets }, result: unplaced, frames }
 }
 

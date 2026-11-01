@@ -16,14 +16,14 @@ function digitSum(value) {
 export function buildTrace(input) {
   const { nums } = input
   const sums = nums.map(digitSum)
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), index: -1, value: null, digitSum: null, best: null, message: 'No number has been replaced yet.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set best to nothing'), index: -1, value: null, digitSum: null, best: null, message: 'No number has been replaced yet.' }]
   let best = null
   nums.forEach((value, index) => {
     const total = sums[index]
     if (best === null || total < best) best = total
-    frames.push({ phase: 'digit', activeLine: L('add up the digits'), index, value, digitSum: total, best, message: `${value} becomes ${total}. The smallest so far is ${best}.` })
+    frames.push({ pythonLine: 7, phase: 'digit', activeLine: L('add up the digits'), index, value, digitSum: total, best, message: `${value} becomes ${total}. The smallest so far is ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, value: null, digitSum: null, best, message: `The minimum element after replacement is ${best}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return best'), index: -1, value: null, digitSum: null, best, message: `The minimum element after replacement is ${best}.` })
   return { input, sums, result: best, frames }
 }
 

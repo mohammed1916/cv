@@ -24,9 +24,9 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace(nums) {
   const n = nums.length
   let total = 0
-  const frames = [{ phase: 'start', middle: -1, picked: [], total: 0, activeLine: L('set total to 0'), message: 'Look for 5-element subsequences whose middle value is the one value that appears most often.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', middle: -1, picked: [], total: 0, activeLine: L('set total to 0'), message: 'Look for 5-element subsequences whose middle value is the one value that appears most often.' }]
   for (let m = 2; m <= n - 3; m++) {
-    frames.push({ phase: 'middle', middle: m, picked: [], total, activeLine: L('for each middle position'), message: `Middle at position ${m} (value ${nums[m]}). Try each pair before it and each pair after it.` })
+    frames.push({ pythonLine: 5, phase: 'middle', middle: m, picked: [], total, activeLine: L('for each middle position'), message: `Middle at position ${m} (value ${nums[m]}). Try each pair before it and each pair after it.` })
     for (let i = 0; i < m; i++) {
       for (let j = i + 1; j < m; j++) {
         for (let k = m + 1; k < n; k++) {
@@ -39,14 +39,14 @@ export function buildTrace(nums) {
             const unique = [...freq].every(([v, c]) => v === mid || c < midCount)
             if (unique) {
               total = (total + 1) % MOD
-              frames.push({ phase: 'count', middle: m, picked: [i, j, m, k, q], total, activeLine: L('if the middle value'), message: `Positions ${i}, ${j}, ${m}, ${k}, ${q} have ${mid} as their unique most frequent value. Total: ${total}.` })
+              frames.push({ pythonLine: 15, phase: 'count', middle: m, picked: [i, j, m, k, q], total, activeLine: L('if the middle value'), message: `Positions ${i}, ${j}, ${m}, ${k}, ${q} have ${mid} as their unique most frequent value. Total: ${total}.` })
             }
           }
         }
       }
     }
   }
-  frames.push({ phase: 'done', middle: -1, picked: [], total, activeLine: L('return total'), message: `Subsequences with a unique middle mode: ${total}.` })
+  frames.push({ pythonLine: 17, phase: 'done', middle: -1, picked: [], total, activeLine: L('return total'), message: `Subsequences with a unique middle mode: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

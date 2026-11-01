@@ -45,8 +45,8 @@ export function buildTrace(input) {
   const frames = []
   const done = []
   const table = {}
-  const frame = (phase, line, node, message) => frames.push({ phase, activeLine: line, node, done: [...done], table: { ...table }, message })
-  frame('start', L('build the list of direct reports'), null, 'Work from the bottom of the hierarchy. Each employee is decided once the people below them are.')
+  const frame = (phase, line, node, message, pythonLine) => frames.push({ phase, pythonLine, activeLine: line, node, done: [...done], table: { ...table }, message })
+  frame('start', L('build the list of direct reports'), null, 'Work from the bottom of the hierarchy. Each employee is decided once the people below them are.', 4)
   const solve = v => {
     let unbought = zeros()
     let bought = zeros()
@@ -61,12 +61,12 @@ export function buildTrace(input) {
     done.push(v)
     table[v] = { noBoss: noBoss[budget], bossBought: bossBought[budget] }
     frame('combine', L('for each budget b, the no-boss value'), v,
-      `Employee ${v + 1} with the full budget: ${noBoss[budget]} if the boss did not buy, ${bossBought[budget]} if the boss bought.`)
+      `Employee ${v + 1} with the full budget: ${noBoss[budget]} if the boss did not buy, ${bossBought[budget]} if the boss bought.`, 21)
     return [noBoss, bossBought]
   }
   const [top] = solve(0)
   const result = top[budget]
-  frame('done', L('return employee 1 no-boss table'), null, `The best profit within the budget is ${result}.`)
+  frame('done', L('return employee 1 no-boss table'), null, `The best profit within the budget is ${result}.`, 24)
   return { input, result, frames, edges }
 }
 

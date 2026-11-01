@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const grid = input.grid.map(row => [...row])
   const rows = grid.length
   const cols = grid[0].length
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), cell: null, total: 0, message: 'Work down each column. Each cell must be strictly larger than the cell above it.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to 0'), cell: null, total: 0, message: 'Work down each column. Each cell must be strictly larger than the cell above it.' }]
   let total = 0
   for (let j = 0; j < cols; j++) {
     let previous = null
@@ -24,10 +24,10 @@ export function buildTrace(input) {
       total += target - value
       grid[i][j] = target
       previous = target
-      frames.push({ phase: 'cell', activeLine: L('set target'), cell: [i, j], total, message: `Cell [${i}, ${j}] holds ${value}, raised to ${target} so it sits above the cell above it.` })
+      frames.push({ pythonLine: 7, phase: 'cell', activeLine: L('set target'), cell: [i, j], total, message: `Cell [${i}, ${j}] holds ${value}, raised to ${target} so it sits above the cell above it.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), cell: null, total, message: `Minimum increments: ${total}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return total'), cell: null, total, message: `Minimum increments: ${total}.` })
   return { input, result: total, frames }
 }
 

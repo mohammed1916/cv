@@ -42,14 +42,14 @@ export function buildTrace(input) {
   for (let v = n % 2 === 0 ? n : n - 1; v >= 2; v -= 2) evens.push(v)
   const z = [...odds, ...evens]
   const value = Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('walk from the start'), at: -1, message: 'Walk along the path or cycle so that the nodes are in a line, then give the values in zigzag order.' }]
+  const frames = [{ pythonLine: 10, phase: 'start', activeLine: L('walk from the start'), at: -1, message: 'Walk along the path or cycle so that the nodes are in a line, then give the values in zigzag order.' }]
   order.forEach((v, i) => {
     value[v] = z[i]
-    frames.push({ phase: 'assign', activeLine: L('give the i-th node'), at: i, message: `Node ${v} on the walk gets the value ${z[i]}.` })
+    frames.push({ pythonLine: 17, phase: 'assign', activeLine: L('give the i-th node'), at: i, message: `Node ${v} on the walk gets the value ${z[i]}.` })
   })
   let result = 0
   for (const [a, b] of edges) result += value[a] * value[b]
-  frames.push({ phase: 'done', activeLine: L('return total'), at: -1, message: `The sum of the edge products is ${result}.` })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return total'), at: -1, message: `The sum of the edge products is ${result}.` })
   return { input, result, frames, z }
 }
 

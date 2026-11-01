@@ -11,15 +11,15 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { s, k } = input
   let result = ''
-  const frames = [{ phase: 'start', activeLine: L('set result to an empty string'), start: -1, total: 0, value: 0, result, message: `Split s into blocks of ${k} characters.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set result to an empty string'), start: -1, total: 0, value: 0, result, message: `Split s into blocks of ${k} characters.` }]
   for (let start = 0; start < s.length; start += k) {
     let total = 0
     for (const ch of s.slice(start, start + k)) total += ch.charCodeAt(0) - 97
     const value = total % 26
     result += String.fromCharCode(97 + value)
-    frames.push({ phase: 'block', activeLine: L('set value to total modulo 26'), start, total, value, result, message: `Block at ${start} sums to ${total}; ${total} mod 26 is ${value}, which is letter ${String.fromCharCode(97 + value)}.` })
+    frames.push({ pythonLine: 5, phase: 'block', activeLine: L('set value to total modulo 26'), start, total, value, result, message: `Block at ${start} sums to ${total}; ${total} mod 26 is ${value}, which is letter ${String.fromCharCode(97 + value)}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), start: -1, total: 0, value: 0, result, message: `Hashed string: ${result}.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return result'), start: -1, total: 0, value: 0, result, message: `Hashed string: ${result}.` })
   return { input, result, frames }
 }
 

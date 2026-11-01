@@ -9,20 +9,20 @@ export function parseInput(text) {
 
 export function buildTrace({ cost }) {
   const input = { cost }
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), index: -1, best: null, message: 'No payment is known yet. Track the cheapest cost seen so far.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to nothing'), index: -1, best: null, message: 'No payment is known yet. Track the cheapest cost seen so far.' }]
   let best = null
   const answer = []
   for (let i = 0; i < cost.length; i++) {
     if (best === null || cost[i] < best) {
       best = cost[i]
-      frames.push({ phase: 'update', activeLine: L('if best is nothing'), index: i, best, message: `Cost ${cost[i]} at position ${i} is the new cheapest.` })
+      frames.push({ pythonLine: 6, phase: 'update', activeLine: L('if best is nothing'), index: i, best, message: `Cost ${cost[i]} at position ${i} is the new cheapest.` })
     } else {
-      frames.push({ phase: 'keep', activeLine: L('if best is nothing'), index: i, best, message: `Cost ${cost[i]} is not cheaper, so the cheapest stays ${best}.` })
+      frames.push({ pythonLine: 5, phase: 'keep', activeLine: L('if best is nothing'), index: i, best, message: `Cost ${cost[i]} is not cheaper, so the cheapest stays ${best}.` })
     }
     answer.push(best)
-    frames.push({ phase: 'record', activeLine: L('add best to the end'), index: i, best, message: `Position ${i} can be reached for ${best}.` })
+    frames.push({ pythonLine: 7, phase: 'record', activeLine: L('add best to the end'), index: i, best, message: `Position ${i} can be reached for ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: cost.length - 1, best, message: `Answers: ${answer.join(', ')}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return answer'), index: cost.length - 1, best, message: `Answers: ${answer.join(', ')}.` })
   return { input, result: answer, frames }
 }
 

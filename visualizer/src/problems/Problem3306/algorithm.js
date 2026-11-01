@@ -9,7 +9,7 @@ export function parseInput(text) {
 
 export function buildTrace({ word, k }) {
   const n = word.length
-  const frames = [{ phase: 'start', activeLine: L('set exact to'), need: k, left: 0, right: 0, total: 0, message: `Count substrings with at least ${k} consonants, then subtract those with at least ${k + 1}.` }]
+  const frames = [{ pythonLine: 27, phase: 'start', activeLine: L('set exact to'), need: k, left: 0, right: 0, total: 0, message: `Count substrings with at least ${k} consonants, then subtract those with at least ${k + 1}.` }]
   // Counts substrings that hold all five vowels and at least `need` consonants.
   const countAtLeast = need => {
     const counts = new Map()
@@ -21,25 +21,25 @@ export function buildTrace({ word, k }) {
         if (VOWELS.includes(letter)) counts.set(letter, (counts.get(letter) ?? 0) + 1)
         else consonants++
         right++
-        frames.push({ phase: 'extend', activeLine: L('while right is inside word'), need, left, right, total, message: `Add ${letter}. The window ${left} to ${right - 1} needs ${need} consonants with all vowels.` })
+        frames.push({ pythonLine: 11, phase: 'extend', activeLine: L('while right is inside word'), need, left, right, total, message: `Add ${letter}. The window ${left} to ${right - 1} needs ${need} consonants with all vowels.` })
       }
       if (complete()) {
         total += n - right + 1
-        frames.push({ phase: 'count', activeLine: L('add word length minus right'), need, left, right, total, message: `Ends ${right - 1} to ${n - 1} complete the substring from ${left} for need ${need}. Running total ${total}.` })
+        frames.push({ pythonLine: 18, phase: 'count', activeLine: L('add word length minus right'), need, left, right, total, message: `Ends ${right - 1} to ${n - 1} complete the substring from ${left} for need ${need}. Running total ${total}.` })
       }
       const letter = word[left]
       if (VOWELS.includes(letter)) {
         counts.set(letter, counts.get(letter) - 1)
         if (counts.get(letter) === 0) counts.delete(letter)
       } else consonants--
-      frames.push({ phase: 'shrink', activeLine: L('remove the letter at left'), need, left: left + 1, right, total, message: `Remove ${letter} from the left. The next start is ${left + 1}.` })
+      frames.push({ pythonLine: 19, phase: 'shrink', activeLine: L('remove the letter at left'), need, left: left + 1, right, total, message: `Remove ${letter} from the left. The next start is ${left + 1}.` })
     }
     return total
   }
   const atLeastK = countAtLeast(k)
   const atLeastK1 = countAtLeast(k + 1)
   const exact = atLeastK - atLeastK1
-  frames.push({ phase: 'done', activeLine: L('return exact'), need: k, left: 0, right: n, total: exact, message: `${atLeastK} substrings have at least ${k} consonants and ${atLeastK1} have at least ${k + 1}, so ${exact} have exactly ${k}.` })
+  frames.push({ pythonLine: 27, phase: 'done', activeLine: L('return exact'), need: k, left: 0, right: n, total: exact, message: `${atLeastK} substrings have at least ${k} consonants and ${atLeastK1} have at least ${k + 1}, so ${exact} have exactly ${k}.` })
   return { input: { word, k }, result: exact, frames }
 }
 

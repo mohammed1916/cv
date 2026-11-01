@@ -16,19 +16,19 @@ function isPrime(x) {
 export function buildTrace(input) {
   const { s } = input
   const found = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set found to an empty set'), value: null, found: [], result: null, message: 'Read every substring as a number. Leading zeros are ignored, and each prime is counted once.' }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('set found to an empty set'), value: null, found: [], result: null, message: 'Read every substring as a number. Leading zeros are ignored, and each prime is counted once.' }]
   for (let i = 0; i < s.length; i++) {
     for (let j = i + 1; j <= s.length; j++) {
       const value = parseInt(s.slice(i, j), 10)
       if (!isPrime(value)) continue
       const fresh = !found.has(value)
       found.add(value)
-      if (fresh) frames.push({ phase: 'prime', activeLine: L('if the value is prime'), value, found: [...found], result: null, message: `Substring ${s.slice(i, j)} reads as the prime ${value}.` })
+      if (fresh) frames.push({ pythonLine: 16, phase: 'prime', activeLine: L('if the value is prime'), value, found: [...found], result: null, message: `Substring ${s.slice(i, j)} reads as the prime ${value}.` })
     }
   }
   const top = [...found].sort((a, b) => b - a).slice(0, 3)
   const result = top.reduce((sum, v) => sum + v, 0)
-  frames.push({ phase: 'done', activeLine: L('return the sum'), value: null, found: top, result, message: `The three largest distinct primes are ${top.join(', ') || 'none'}, summing to ${result}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return the sum'), value: null, found: top, result, message: `The three largest distinct primes are ${top.join(', ') || 'none'}, summing to ${result}.` })
   return { input, result, frames }
 }
 

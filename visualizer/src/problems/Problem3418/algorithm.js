@@ -37,7 +37,7 @@ export function buildTrace({ coins }) {
   }))
   table[0][0][0] = coins[0][0]
   if (coins[0][0] < 0) table[0][0][1] = 0
-  const frames = [{ phase: 'start', activeLine: L('set the top-left cell'), row: 0, col: 0, table: view(), message: `Top-left coin ${coins[0][0]}.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set the top-left cell'), row: 0, col: 0, table: view(), message: `Top-left coin ${coins[0][0]}.` }]
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue
@@ -52,11 +52,11 @@ export function buildTrace({ coins }) {
           if (v < 0 && j < MAX_NEUTRALIZE) table[r][c][j + 1] = best(table[r][c][j + 1], src[j])
         }
       }
-      frames.push({ phase: 'cell', activeLine: L('take the coin'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}) coin ${v}: best money so far ${Math.max(...table[r][c].filter(x => x !== null))}.` })
+      frames.push({ pythonLine: 21, phase: 'cell', activeLine: L('take the coin'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}) coin ${v}: best money so far ${Math.max(...table[r][c].filter(x => x !== null))}.` })
     }
   }
   const result = Math.max(...table[m - 1][n - 1].filter(x => x !== null))
-  frames.push({ phase: 'done', activeLine: L('return the largest money'), row: m - 1, col: n - 1, table: view(), message: `Largest money at the bottom-right: ${result}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return the largest money'), row: m - 1, col: n - 1, table: view(), message: `Largest money at the bottom-right: ${result}.` })
   return { input: { coins }, coins, result, frames }
 }
 

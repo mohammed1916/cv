@@ -25,21 +25,21 @@ export function buildTrace({ nums, edges }) {
   const frames = []
   let bestLength = 0
   let bestNodes = 1
-  frames.push({ phase: 'start', activeLine: L('set best length to 0'), node: -1, length: 0, nodes: 0, best: [bestLength, bestNodes], message: 'Start with the single-node path, length 0 and 1 node.' })
+  frames.push({ pythonLine: 7, phase: 'start', activeLine: L('set best length to 0'), node: -1, length: 0, nodes: 0, best: [bestLength, bestNodes], message: 'Start with the single-node path, length 0 and 1 node.' })
   for (let start = 0; start < n; start++) {
-    frames.push({ phase: 'start', activeLine: L('for each start node'), node: start, length: 0, nodes: 1, best: [bestLength, bestNodes], message: `Walk outward from node ${start}.` })
+    frames.push({ pythonLine: 18, phase: 'start', activeLine: L('for each start node'), node: start, length: 0, nodes: 1, best: [bestLength, bestNodes], message: `Walk outward from node ${start}.` })
     const walk = (v, parent, length, nodes, seen) => {
       if (length > bestLength || (length === bestLength && nodes < bestNodes)) {
         bestLength = length
         bestNodes = nodes
-        frames.push({ phase: 'record', activeLine: L('otherwise record the path'), node: v, length, nodes, best: [bestLength, bestNodes], message: `Path to ${v} has length ${length} and ${nodes} nodes; it is the new best.` })
+        frames.push({ pythonLine: 12, phase: 'record', activeLine: L('otherwise record the path'), node: v, length, nodes, best: [bestLength, bestNodes], message: `Path to ${v} has length ${length} and ${nodes} nodes; it is the new best.` })
       } else {
-        frames.push({ phase: 'visit', activeLine: L('otherwise record the path'), node: v, length, nodes, best: [bestLength, bestNodes], message: `Path to ${v} has length ${length}; not better than the best.` })
+        frames.push({ pythonLine: 16, phase: 'visit', activeLine: L('otherwise record the path'), node: v, length, nodes, best: [bestLength, bestNodes], message: `Path to ${v} has length ${length}; not better than the best.` })
       }
       for (const [w, c] of adjacency[v]) {
         if (w === parent) continue
         if (seen.has(nums[w])) {
-          frames.push({ phase: 'stop', activeLine: L('stop extending if'), node: w, length, nodes, best: [bestLength, bestNodes], message: `Node ${w} repeats value ${nums[w]} already on the path; stop there.` })
+          frames.push({ pythonLine: 14, phase: 'stop', activeLine: L('stop extending if'), node: w, length, nodes, best: [bestLength, bestNodes], message: `Node ${w} repeats value ${nums[w]} already on the path; stop there.` })
           continue
         }
         walk(w, v, length + c, nodes + 1, new Set([...seen, nums[w]]))
@@ -47,7 +47,7 @@ export function buildTrace({ nums, edges }) {
     }
     walk(start, -1, 0, 1, new Set([nums[start]]))
   }
-  frames.push({ phase: 'done', activeLine: L('return best length'), node: -1, length: bestLength, nodes: bestNodes, best: [bestLength, bestNodes], message: `Longest special path: length ${bestLength} with ${bestNodes} nodes.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best length'), node: -1, length: bestLength, nodes: bestNodes, best: [bestLength, bestNodes], message: `Longest special path: length ${bestLength} with ${bestNodes} nodes.` })
   return { input: { nums, edges }, result: [bestLength, bestNodes], frames }
 }
 

@@ -42,18 +42,18 @@ function uptoCount(x, b, part, frames) {
     if (digits[i] < lo) break
     lo = digits[i]
     if (i === len - 1) total = (total + 1) % MOD
-    frames.push({ phase: 'digit', part, position: i, digit: digits[i], total, activeLine: L('for each smaller digit'), message: `${part} in base ${b}: digit ${digits[i]} at position ${i}. Running count ${total}.` })
+    frames.push({ phase: 'digit', pythonLine: 29, part, position: i, digit: digits[i], total, activeLine: L('for each smaller digit'), message: `${part} in base ${b}: digit ${digits[i]} at position ${i}. Running count ${total}.` })
   }
   return total
 }
 
 export function buildTrace({ l, r, b }) {
   const input = { l, r, b }
-  const frames = [{ phase: 'start', part: 'start', position: -1, digit: null, total: 0, activeLine: L('count up to r'), message: `Count the base-${b} numbers up to r, then remove those below l.` }]
+  const frames = [{ phase: 'start', pythonLine: 35, part: 'start', position: -1, digit: null, total: 0, activeLine: L('count up to r'), message: `Count the base-${b} numbers up to r, then remove those below l.` }]
   const upR = uptoCount(BigInt(r), b, 'r', frames)
   const upL = uptoCount(BigInt(l) - 1n, b, 'l-1', frames)
   const result = ((upR - upL) % MOD + MOD) % MOD
-  frames.push({ phase: 'done', part: 'done', position: -1, digit: null, total: result, activeLine: L('return the difference'), message: `Answer: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 35, part: 'done', position: -1, digit: null, total: result, activeLine: L('return the difference'), message: `Answer: ${result}.` })
   return { input, result, frames }
 }
 

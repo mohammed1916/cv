@@ -20,8 +20,8 @@ export function buildTrace({ properties, k }) {
   const size = Array(m).fill(1)
   const find = x => { while (parent[x] !== x) x = parent[x]; return x }
   const frames = []
-  const frame = (phase, line, pair, shared, message) => frames.push({ phase, activeLine: line, pair, shared, parent: [...parent], size: parent.map((_, i) => size[find(i)] ?? 1), message })
-  frame('start', L('make each row its own root'), null, null, `Start with ${m} rows, each in its own component.`)
+  const frame = (phase, line, pair, shared, message, pythonLine) => frames.push({ phase, pythonLine, activeLine: line, pair, shared, parent: [...parent], size: parent.map((_, i) => size[find(i)] ?? 1), message })
+  frame('start', L('make each row its own root'), null, null, `Start with ${m} rows, each in its own component.`, 4)
   for (let i = 0; i < m; i++) {
     for (let j = i + 1; j < m; j++) {
       const shared = [...sets[i]].filter(v => sets[j].has(v)).length
@@ -32,14 +32,14 @@ export function buildTrace({ properties, k }) {
           parent[ri] = rj
           size[rj] += size[ri]
         }
-        frame('join', L('merge their roots'), [i, j], shared, `Rows ${i} and ${j} share ${shared} values, at least ${k}, so they join.`)
+        frame('join', L('merge their roots'), [i, j], shared, `Rows ${i} and ${j} share ${shared} values, at least ${k}, so they join.`, 15)
       } else {
-        frame('apart', L('if the shared count is at least k'), [i, j], shared, `Rows ${i} and ${j} share ${shared} values, which is below ${k}.`)
+        frame('apart', L('if the shared count is at least k'), [i, j], shared, `Rows ${i} and ${j} share ${shared} values, which is below ${k}.`, 14)
       }
     }
   }
   const components = parent.filter((_, i) => find(i) === i).length
-  frame('done', L('return that count'), null, null, `Connected components: ${components}.`)
+  frame('done', L('return that count'), null, null, `Connected components: ${components}.`, 16)
   return { input: { properties, k }, result: components, frames }
 }
 

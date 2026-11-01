@@ -18,7 +18,7 @@ export function buildTrace(data) {
   // ways[i]: partitions of the first i numbers where every part has max - min at most k.
   const ways = Array(n + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0]'), i: 0, j: null, ways: [...ways], message: 'The empty prefix has one partition.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set ways[0]'), i: 0, j: null, ways: [...ways], message: 'The empty prefix has one partition.' }]
   for (let i = 1; i <= n; i++) {
     let hi = -Infinity
     let lo = Infinity
@@ -26,14 +26,14 @@ export function buildTrace(data) {
       hi = Math.max(hi, nums[j])
       lo = Math.min(lo, nums[j])
       if (hi - lo > k) {
-        frames.push({ phase: 'stop', activeLine: L('stop as soon'), i, j, ways: [...ways], message: `The part from ${j} to ${i - 1} has max - min = ${hi - lo} > ${k}. Stop extending it left.` })
+        frames.push({ pythonLine: 13, phase: 'stop', activeLine: L('stop as soon'), i, j, ways: [...ways], message: `The part from ${j} to ${i - 1} has max - min = ${hi - lo} > ${k}. Stop extending it left.` })
         break
       }
       ways[i] = (ways[i] + ways[j]) % MOD
-      frames.push({ phase: 'start-of-part', activeLine: L('add ways[j]'), i, j, ways: [...ways], message: `Part from ${j} to ${i - 1} has max - min = ${hi - lo}, so add ways[${j}] = ${ways[j]}.` })
+      frames.push({ pythonLine: 14, phase: 'start-of-part', activeLine: L('add ways[j]'), i, j, ways: [...ways], message: `Part from ${j} to ${i - 1} has max - min = ${hi - lo}, so add ways[${j}] = ${ways[j]}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return ways[n]'), i: n, j: null, ways: [...ways], message: `Partitions of all ${n} numbers: ${ways[n]}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return ways[n]'), i: n, j: null, ways: [...ways], message: `Partitions of all ${n} numbers: ${ways[n]}.` })
   return { input: data, result: ways[n], frames, ways }
 }
 

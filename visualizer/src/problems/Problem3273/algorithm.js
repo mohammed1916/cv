@@ -16,15 +16,15 @@ export function buildTrace(input) {
   const order = damage.map((_, i) => i).sort((a, b) => attacks[a] * damage[b] - attacks[b] * damage[a])
   let elapsed = 0
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('attacks needed'), index: -1, elapsed, total, order: [], message: 'Each enemy needs ceil(health / power) attacks. Sort by attacks divided by damage.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('attacks needed'), index: -1, elapsed, total, order: [], message: 'Each enemy needs ceil(health / power) attacks. Sort by attacks divided by damage.' }]
   const done = []
   for (const i of order) {
     elapsed += attacks[i]
     total += damage[i] * elapsed
     done.push(i)
-    frames.push({ phase: 'defeat', activeLine: L('add its damage times elapsed'), index: i, elapsed, total, order: [...done], message: `Defeat enemy ${i} at second ${elapsed}; it dealt ${damage[i]} per second until then. Total ${total}.` })
+    frames.push({ pythonLine: 10, phase: 'defeat', activeLine: L('add its damage times elapsed'), index: i, elapsed, total, order: [...done], message: `Defeat enemy ${i} at second ${elapsed}; it dealt ${damage[i]} per second until then. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, elapsed, total, order: [...done], message: `Minimum damage: ${total}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return total'), index: -1, elapsed, total, order: [...done], message: `Minimum damage: ${total}.` })
   return { input, result: total, frames }
 }
 

@@ -30,15 +30,15 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ original, bounds }) {
   let low = bounds[0][0]
   let high = bounds[0][1]
-  const frames = [{ phase: 'start', index: 0, shift: 0, low, high, activeLine: L('set low to the lower bound'), message: `The first copy value can be from ${low} to ${high}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', index: 0, shift: 0, low, high, activeLine: L('set low to the lower bound'), message: `The first copy value can be from ${low} to ${high}.` }]
   for (let i = 1; i < original.length; i++) {
     const shift = original[i] - original[0]
     low = Math.max(low, bounds[i][0] - shift)
     high = Math.min(high, bounds[i][1] - shift)
-    frames.push({ phase: 'narrow', index: i, shift, low, high, activeLine: L('raise low'), message: `Position ${i} is shifted by ${shift}, so the first copy value must stay between ${low} and ${high}.` })
+    frames.push({ pythonLine: 6, phase: 'narrow', index: i, shift, low, high, activeLine: L('raise low'), message: `Position ${i} is shifted by ${shift}, so the first copy value must stay between ${low} and ${high}.` })
   }
   const result = high < low ? 0 : high - low + 1
-  frames.push({ phase: 'done', index: original.length, shift: 0, low, high, activeLine: high < low ? L('return 0') : L('return high minus low'), message: `Number of copy arrays: ${result}.` })
+  frames.push({ pythonLine: high < low ? 9 : 10, phase: 'done', index: original.length, shift: 0, low, high, activeLine: high < low ? L('return 0') : L('return high minus low'), message: `Number of copy arrays: ${result}.` })
   return { input: { original, bounds }, result, frames }
 }
 

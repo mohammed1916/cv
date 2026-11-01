@@ -29,19 +29,19 @@ export function buildTrace(input) {
   const [year, month, day] = input.date.split('-').map(Number)
   const parts = []
   const frames = []
-  const frame = (phase, line, message) => frames.push({ phase, activeLine: line, parts: parts.map(p => ({ ...p })), message })
-  frame('start', L('split the date'), `The date is ${input.date}. Convert the year, month and day separately.`)
+  const frame = (phase, line, message, pythonLine) => frames.push({ phase, pythonLine, activeLine: line, parts: parts.map(p => ({ ...p })), message })
+  frame('start', L('split the date'), `The date is ${input.date}. Convert the year, month and day separately.`, 2)
   const yearBits = binaryDigits(year)
   parts.push({ label: 'year', decimal: year, binary: yearBits })
-  frame('year', L('set year bits'), `${year} is ${yearBits} in binary.`)
+  frame('year', L('set year bits'), `${year} is ${yearBits} in binary.`, 2)
   const monthBits = binaryDigits(month)
   parts.push({ label: 'month', decimal: month, binary: monthBits })
-  frame('month', L('set month bits'), `${month} is ${monthBits} in binary, without a leading zero.`)
+  frame('month', L('set month bits'), `${month} is ${monthBits} in binary, without a leading zero.`, 2)
   const dayBits = binaryDigits(day)
   parts.push({ label: 'day', decimal: day, binary: dayBits })
-  frame('day', L('set day bits'), `${day} is ${dayBits} in binary.`)
+  frame('day', L('set day bits'), `${day} is ${dayBits} in binary.`, 2)
   const result = parts.map(p => p.binary).join('-')
-  frame('done', L('return the three'), `The binary date is ${result}.`)
+  frame('done', L('return the three'), `The binary date is ${result}.`, 3)
   return { input, result, frames }
 }
 

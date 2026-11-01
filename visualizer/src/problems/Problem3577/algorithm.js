@@ -12,19 +12,19 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { complexity } = input
   const n = complexity.length
-  const frames = [{ phase: 'start', activeLine: L('set the answer to 1'), index: 0, message: 'Computer 0 starts unlocked. Every other computer needs an earlier, weaker unlocked computer.' }]
+  const frames = [{ pythonLine: 7, phase: 'start', activeLine: L('set the answer to 1'), index: 0, message: 'Computer 0 starts unlocked. Every other computer needs an earlier, weaker unlocked computer.' }]
   let blocked = -1
   for (let i = 1; i < n; i++) {
     if (complexity[i] <= complexity[0]) { blocked = i; break }
-    frames.push({ phase: 'check', activeLine: L('if complexity[i] is at most complexity[0]'), index: i, message: `Computer ${i} has complexity ${complexity[i]}, above computer 0's ${complexity[0]}, so computer 0 can unlock it.` })
+    frames.push({ pythonLine: 5, phase: 'check', activeLine: L('if complexity[i] is at most complexity[0]'), index: i, message: `Computer ${i} has complexity ${complexity[i]}, above computer 0's ${complexity[0]}, so computer 0 can unlock it.` })
   }
   if (blocked !== -1) {
-    frames.push({ phase: 'done', activeLine: L('return 0'), index: blocked, message: `Computer ${blocked} has complexity ${complexity[blocked]}, which is not above computer 0's ${complexity[0]}, so no order unlocks everything.` })
+    frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return 0'), index: blocked, message: `Computer ${blocked} has complexity ${complexity[blocked]}, which is not above computer 0's ${complexity[0]}, so no order unlocks everything.` })
     return { input, result: 0, frames }
   }
   let result = 1
   for (let k = 2; k < n; k++) result = (result * k) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the answer'), index: n - 1, message: `Every computer after 0 can be unlocked by 0, so each order starting at 0 works. The count is ${n - 1} factorial, which is ${result} modulo 1000000007.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the answer'), index: n - 1, message: `Every computer after 0 can be unlocked by 0, so each order starting at 0 works. The count is ${n - 1} factorial, which is ${result} modulo 1000000007.` })
   return { input, result, frames }
 }
 

@@ -24,21 +24,21 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums }) {
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('set answers to an empty list'), index: -1, answers: [], message: 'Look for the lowest zero bit of each prime; that bit decides the answer.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set answers to an empty list'), index: -1, answers: [], message: 'Look for the lowest zero bit of each prime; that bit decides the answer.' }]
   nums.forEach((prime, index) => {
     let bit = 0
     while ((prime >> bit) & 1) bit++
-    frames.push({ phase: 'bit', activeLine: L('find bit, the index'), index, prime, bit, answers: [...answers], message: `Prime ${prime} has its lowest zero bit at index ${bit}.` })
+    frames.push({ pythonLine: 6, phase: 'bit', activeLine: L('find bit, the index'), index, prime, bit, answers: [...answers], message: `Prime ${prime} has its lowest zero bit at index ${bit}.` })
     if (bit === 0) {
       answers.push(-1)
-      frames.push({ phase: 'candidate', activeLine: L('if bit is zero'), index, prime, bit, answers: [...answers], message: `Bit 0 of ${prime} is zero, so no x works. Answer -1.` })
+      frames.push({ pythonLine: 7, phase: 'candidate', activeLine: L('if bit is zero'), index, prime, bit, answers: [...answers], message: `Bit 0 of ${prime} is zero, so no x works. Answer -1.` })
     } else {
       const candidate = prime ^ (1 << (bit - 1))
       answers.push(candidate)
-      frames.push({ phase: 'candidate', activeLine: L('set candidate to p'), index, prime, bit, candidate, answers: [...answers], message: `Clear bit ${bit - 1} of ${prime} to get ${candidate}.` })
+      frames.push({ pythonLine: 10, phase: 'candidate', activeLine: L('set candidate to p'), index, prime, bit, candidate, answers: [...answers], message: `Clear bit ${bit - 1} of ${prime} to get ${candidate}.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return answers'), index: -1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input: { nums }, result: answers, frames }
 }
 

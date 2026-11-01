@@ -51,23 +51,26 @@ export function buildTrace({ memory_limit, operations }) {
   const queue = []
   const keys = new Set()
   const ops = []
-  const frames = [{ phase: 'start', activeLine: L('set queue to an empty'), op: -1, queue: [], message: `Router with memory for ${memory_limit} packet(s).` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set queue to an empty'), op: -1, queue: [], message: `Router with memory for ${memory_limit} packet(s).` }]
   operations.forEach((op, index) => {
     const [name, ...args] = op
     let returned
     let phase
     let line
+    let pyline
     let message
     if (name === 'addPacket') {
       const [source, destination, timestamp] = args
       const key = `${source},${destination},${timestamp}`
       phase = 'add'
       line = L('if the packet is already in keys')
+      pyline = 9
       if (keys.has(key)) {
         returned = false
         message = `Packet ${key} is already stored: rejected.`
       } else {
         line = L('if the queue is full')
+        pyline = 12
         let evicted = null
         if (queue.length === memory_limit) {
           evicted = queue.shift()
@@ -81,6 +84,7 @@ export function buildTrace({ memory_limit, operations }) {
     } else if (name === 'forwardPacket') {
       phase = 'forward'
       line = L('if the queue is empty')
+      pyline = 19
       if (queue.length === 0) {
         returned = []
         message = 'No packet to forward.'
@@ -94,13 +98,14 @@ export function buildTrace({ memory_limit, operations }) {
       const [destination, start, end] = args
       phase = 'count'
       line = L('return how many packets')
+      pyline = 27
       returned = queue.filter(p => p.destination === destination && p.timestamp >= start && p.timestamp <= end).length
       message = `${returned} stored packet(s) for destination ${destination} with timestamps ${start} to ${end}.`
     }
     ops.push({ name, args, returned })
-    frames.push({ phase, activeLine: line, op: index, queue: queue.map(p => p.key), message })
+    frames.push({ phase, pythonLine: pyline, activeLine: line, op: index, queue: queue.map(p => p.key), message })
   })
-  frames.push({ phase: 'done', activeLine: L('return how many packets'), op: operations.length - 1, queue: queue.map(p => p.key), message: 'Every operation is complete.' })
+  frames.push({ phase: 'done', pythonLine: 28, activeLine: L('return how many packets'), op: operations.length - 1, queue: queue.map(p => p.key), message: 'Every operation is complete.' })
   const result = ops.map(o => o.returned)
   return { input: { memory_limit, operations }, memory_limit, operations, ops, result, frames }
 }

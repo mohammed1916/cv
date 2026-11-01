@@ -22,7 +22,7 @@ export function buildTrace(input) {
   const nums = [...input.nums]
   const n = nums.length
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('for each query [idx, val]'), query: null, best: null, message: 'Each query changes one value, and the change stays for later queries.' }]
+  const frames = [{ pythonLine: 15, phase: 'start', activeLine: L('for each query [idx, val]'), query: null, best: null, message: 'Each query changes one value, and the change stays for later queries.' }]
   for (const [idx, val] of input.queries) {
     nums[idx] = val
     let best = 0
@@ -34,9 +34,9 @@ export function buildTrace(input) {
       if (total > best) { best = total; bestSplit = k }
     }
     answers.push(best)
-    frames.push({ phase: 'query', activeLine: L('for each split k'), query: [idx, val], best, split: bestSplit, message: `After setting nums[${idx}] to ${val}, the best split at ${bestSplit} gives ${best} distinct primes.` })
+    frames.push({ pythonLine: 18, phase: 'query', activeLine: L('for each split k'), query: [idx, val], best, split: bestSplit, message: `After setting nums[${idx}] to ${val}, the best split at ${bestSplit} gives ${best} distinct primes.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), query: null, best: null, message: 'Every query has been answered in order.' })
+  frames.push({ pythonLine: 23, phase: 'done', activeLine: L('return the answers'), query: null, best: null, message: 'Every query has been answered in order.' })
   return { input, result: answers, frames }
 }
 

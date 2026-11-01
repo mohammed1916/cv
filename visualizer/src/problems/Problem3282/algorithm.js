@@ -6,7 +6,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace(nums) {
-  const frames = [{ phase: 'start', activeLine: L('set best to the first'), index: 0, bestIndex: 0, best: nums[0], total: 0, message: 'A jump from i to j scores (j - i) times the value at i, so each position pays for the largest value seen so far.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set best to the first'), index: 0, bestIndex: 0, best: nums[0], total: 0, message: 'A jump from i to j scores (j - i) times the value at i, so each position pays for the largest value seen so far.' }]
   let best = nums[0]
   let bestIndex = 0
   let total = 0
@@ -16,9 +16,9 @@ export function buildTrace(nums) {
       bestIndex = i
     }
     total += best
-    frames.push({ phase: 'step', activeLine: L('add best to total'), index: i, bestIndex, best, total, message: `Position ${i} pays the current largest value ${best}. Score so far: ${total}.` })
+    frames.push({ pythonLine: 6, phase: 'step', activeLine: L('add best to total'), index: i, bestIndex, best, total, message: `Position ${i} pays the current largest value ${best}. Score so far: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, bestIndex, best, total, message: `Maximum score: ${total}.` })
+  frames.push({ pythonLine: 7, phase: 'done', activeLine: L('return total'), index: -1, bestIndex, best, total, message: `Maximum score: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

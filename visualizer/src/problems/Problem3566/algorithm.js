@@ -15,20 +15,20 @@ export function buildTrace(input) {
   const full = (1 << n) - 1
   const productOf = mask => nums.reduce((p, x, i) => ((mask >> i) & 1 ? p * x : p), 1)
   const total = productOf(full)
-  const frames = [{ phase: 'start', activeLine: L('set total to the product of all elements'), mask: null, message: `The product of all elements is ${total}. Each group must multiply to ${target}, so the whole product must be ${target * target}.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('set total to the product of all elements'), mask: null, message: `The product of all elements is ${total}. Each group must multiply to ${target}, so the whole product must be ${target * target}.` }]
   if (total !== target * target) {
-    frames.push({ phase: 'done', activeLine: L('return false'), mask: null, message: `The whole product is ${total}, not ${target * target}, so no split works.` })
+    frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return false'), mask: null, message: `The whole product is ${total}, not ${target * target}, so no split works.` })
     return { input, result: false, frames }
   }
   for (let mask = 1; mask < full; mask++) {
     const p = productOf(mask)
     if (p === target) {
-      frames.push({ phase: 'found', activeLine: L('return true'), mask, message: `The group with mask ${mask.toString(2).padStart(n, '0')} multiplies to ${target}, and its complement does too.` })
+      frames.push({ pythonLine: 17, phase: 'found', activeLine: L('return true'), mask, message: `The group with mask ${mask.toString(2).padStart(n, '0')} multiplies to ${target}, and its complement does too.` })
       return { input, result: true, frames }
     }
-    frames.push({ phase: 'try', activeLine: L('for each non-empty proper subset mask'), mask, message: `Subset ${mask.toString(2).padStart(n, '0')} multiplies to ${p}, not ${target}.` })
+    frames.push({ pythonLine: 16, phase: 'try', activeLine: L('for each non-empty proper subset mask'), mask, message: `Subset ${mask.toString(2).padStart(n, '0')} multiplies to ${p}, not ${target}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), mask: null, message: 'No subset has product equal to the target, so the answer is false.' })
+  frames.push({ pythonLine: 18, phase: 'done', activeLine: L('return false'), mask: null, message: 'No subset has product equal to the target, so the answer is false.' })
   return { input, result: false, frames }
 }
 

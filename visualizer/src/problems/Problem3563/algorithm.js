@@ -19,14 +19,14 @@ export function buildTrace(input) {
   // erasable[i][j] is true when s[i..j-1] can be removed completely.
   const erasable = Array.from({ length: n + 1 }, () => new Array(n + 1).fill(false))
   for (let i = 0; i <= n; i++) erasable[i][i] = true
-  const frames = [{ phase: 'erase', activeLine: L('mark every empty stretch'), i: -1, j: -1, best: '', message: 'Empty stretches can be removed trivially.' }]
+  const frames = [{ pythonLine: 8, phase: 'erase', activeLine: L('mark every empty stretch'), i: -1, j: -1, best: '', message: 'Empty stretches can be removed trivially.' }]
   for (let len = 2; len <= n; len += 2) {
     for (let i = 0; i + len <= n; i++) {
       const j = i + len
       for (let k = i + 1; k < j; k += 2) {
         if (pairs(s[i], s[k]) && erasable[i + 1][k] && erasable[k + 1][j]) {
           erasable[i][j] = true
-          frames.push({ phase: 'erase', activeLine: L('a stretch is erasable'), i, j, best: '', message: `s[${i}..${j - 1}] = ${s.slice(i, j)} can be erased: ${s[i]} pairs with ${s[k]}.` })
+          frames.push({ pythonLine: 16, phase: 'erase', activeLine: L('a stretch is erasable'), i, j, best: '', message: `s[${i}..${j - 1}] = ${s.slice(i, j)} can be erased: ${s[i]} pairs with ${s[k]}.` })
           break
         }
       }
@@ -40,9 +40,9 @@ export function buildTrace(input) {
       if (erasable[i][j] && best[j] < cand) { cand = best[j]; from = j }
     }
     best[i] = cand
-    frames.push({ phase: 'best', activeLine: L('set best[i] to the smaller'), i, j: from, best: cand, message: from === -1 ? `Keep s[${i}]: best from here is ${cand}.` : `Erase s[${i}..${from - 1}] to reach ${cand}.` })
+    frames.push({ pythonLine: 24, phase: 'best', activeLine: L('set best[i] to the smaller'), i, j: from, best: cand, message: from === -1 ? `Keep s[${i}]: best from here is ${cand}.` : `Erase s[${i}..${from - 1}] to reach ${cand}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best[0]'), i: 0, j: -1, best: best[0], message: `Smallest reachable string: ${best[0] === '' ? '(empty)' : best[0]}.` })
+  frames.push({ pythonLine: 25, phase: 'done', activeLine: L('return best[0]'), i: 0, j: -1, best: best[0], message: `Smallest reachable string: ${best[0] === '' ? '(empty)' : best[0]}.` })
   return { input, result: best[0], frames }
 }
 

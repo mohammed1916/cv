@@ -16,7 +16,7 @@ export function buildTrace(input) {
   const n = grid[0].length
   let best = null
   let bestCells = []
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), rows: [], cells: [], best: null, message: 'Try every choice of three rows. For each, try every way to pick one column per row with no column repeated.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set best to nothing'), rows: [], cells: [], best: null, message: 'Try every choice of three rows. For each, try every way to pick one column per row with no column repeated.' }]
   for (let r1 = 0; r1 < m; r1++) {
     for (let r2 = r1 + 1; r2 < m; r2++) {
       for (let r3 = r2 + 1; r3 < m; r3++) {
@@ -32,11 +32,11 @@ export function buildTrace(input) {
             }
           }
         }
-        frames.push({ phase: 'rows', activeLine: L('for each choice of three rows'), rows: [r1, r2, r3], cells: bestCells, best, message: `Rows ${r1}, ${r2} and ${r3} checked. Best sum so far: ${best}.` })
+        frames.push({ pythonLine: 6, phase: 'rows', activeLine: L('for each choice of three rows'), rows: [r1, r2, r3], cells: bestCells, best, message: `Rows ${r1}, ${r2} and ${r3} checked. Best sum so far: ${best}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), rows: [], cells: bestCells, best, message: `Maximum sum with three rooks: ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return best'), rows: [], cells: bestCells, best, message: `Maximum sum with three rooks: ${best}.` })
   return { input, result: best, frames }
 }
 

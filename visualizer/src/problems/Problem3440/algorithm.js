@@ -32,7 +32,7 @@ export function buildTrace(input) {
   const { eventTime, startTime, endTime } = input
   const meetings = startTime.map((s, i) => [s, endTime[i]])
   let best = Math.max(...gapsOf(meetings, eventTime))
-  const frames = [{ phase: 'start', activeLine: L('best = largest gap with no move'), meeting: null, best, message: `Without moving anything the longest free stretch is ${best}.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('best = largest gap with no move'), meeting: null, best, message: `Without moving anything the longest free stretch is ${best}.` }]
   meetings.forEach(([s, e], i) => {
     const dur = e - s
     const rest = meetings.filter((_, k) => k !== i)
@@ -44,9 +44,9 @@ export function buildTrace(input) {
       found = Math.max(found, others, g - dur)
     })
     best = found
-    frames.push({ phase: 'move', activeLine: L('for each meeting i'), meeting: i, best, message: `Move meeting ${i} (length ${dur}) into the best gap. Longest free stretch so far: ${best}.` })
+    frames.push({ pythonLine: 13, phase: 'move', activeLine: L('for each meeting i'), meeting: i, best, message: `Move meeting ${i} (length ${dur}) into the best gap. Longest free stretch so far: ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), meeting: null, best, message: `Longest free stretch after the move: ${best}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return best'), meeting: null, best, message: `Longest free stretch after the move: ${best}.` })
   return { input, result: best, frames }
 }
 

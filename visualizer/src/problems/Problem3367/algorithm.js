@@ -48,7 +48,7 @@ export function buildTrace({ n, edges, k }) {
   }
   const free = Array(n).fill(null)
   const linked = Array(n).fill(null)
-  const frames = [{ phase: 'order', activeLine: L('root the tree at node 0'), current: null, free: [...free], linked: [...linked], message: `Root the tree at node 0. Each node may keep at most ${k} edges to its children.` }]
+  const frames = [{ pythonLine: 14, phase: 'order', activeLine: L('root the tree at node 0'), current: null, free: [...free], linked: [...linked], message: `Root the tree at node 0. Each node may keep at most ${k} edges to its children.` }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     let base = 0
@@ -62,10 +62,10 @@ export function buildTrace({ n, edges, k }) {
     const takeLinked = positive.slice(0, k - 1).reduce((sum, g) => sum + g, 0)
     free[v] = base + takeFree
     linked[v] = base + takeLinked
-    frames.push({ phase: 'combine', activeLine: L('set free of v to base'), current: v, free: [...free], linked: [...linked], message: `Node ${v}: free ${free[v]} (parent edge removed), linked ${linked[v]} (parent edge kept).` })
+    frames.push({ pythonLine: 26, phase: 'combine', activeLine: L('set free of v to base'), current: v, free: [...free], linked: [...linked], message: `Node ${v}: free ${free[v]} (parent edge removed), linked ${linked[v]} (parent edge kept).` })
   }
   const toTree = id => ({ id, children: children[id].map(child => toTree(child.to)) })
-  frames.push({ phase: 'done', activeLine: L('return free of node 0'), current: null, free: [...free], linked: [...linked], message: `Maximum total weight: ${free[0]}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return free of node 0'), current: null, free: [...free], linked: [...linked], message: `Maximum total weight: ${free[0]}.` })
   return { input: { n, edges, k }, tree: toTree(0), result: free[0], frames }
 }
 

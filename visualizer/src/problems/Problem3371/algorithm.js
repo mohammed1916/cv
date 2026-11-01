@@ -11,21 +11,21 @@ export function buildTrace({ nums }) {
   const counts = new Map()
   for (const x of nums) counts.set(x, (counts.get(x) || 0) + 1)
   const sorted = () => [...counts].sort((a, b) => a[0] - b[0])
-  const frames = [{ phase: 'start', activeLine: L('find the total sum'), key: null, best: null, total, counts: sorted(), message: `The total of nums is ${total}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('find the total sum'), key: null, best: null, total, counts: sorted(), message: `The total of nums is ${total}.` }]
   let best = null
   for (const x of [...counts.keys()].sort((a, b) => a - b)) {
     const rest = total - x
     if (rest % 2 !== 0) {
-      frames.push({ phase: 'candidate', activeLine: L('if the rest after removing x is odd'), key: x, best, total, counts: sorted(), message: `Outlier ${x} is skipped: the other values sum to ${rest}, which is odd.` })
+      frames.push({ pythonLine: 9, phase: 'candidate', activeLine: L('if the rest after removing x is odd'), key: x, best, total, counts: sorted(), message: `Outlier ${x} is skipped: the other values sum to ${rest}, which is odd.` })
       continue
     }
     const s = rest / 2
     const left = (counts.get(s) || 0) - (s === x ? 1 : 0)
     const ok = left >= 1
     if (ok && (best === null || x > best)) best = x
-    frames.push({ phase: 'candidate', activeLine: L('if s appears in the rest'), key: x, s, best, total, counts: sorted(), message: ok ? `Outlier ${x}: the sum value would be ${s}, which is present, so ${x} is possible.` : `Outlier ${x}: the sum value would be ${s}, which is not present.` })
+    frames.push({ pythonLine: 12, phase: 'candidate', activeLine: L('if s appears in the rest'), key: x, s, best, total, counts: sorted(), message: ok ? `Outlier ${x}: the sum value would be ${s}, which is present, so ${x} is possible.` : `Outlier ${x}: the sum value would be ${s}, which is not present.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), key: null, best, total, counts: sorted(), result: best, message: best === null ? 'No outlier is possible.' : `The largest possible outlier is ${best}.` })
+  frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return best'), key: null, best, total, counts: sorted(), result: best, message: best === null ? 'No outlier is possible.' : `The largest possible outlier is ${best}.` })
   return { input: { nums }, result: best, frames }
 }
 

@@ -51,7 +51,7 @@ export function buildTrace({ fruits }) {
   const thirdPaths = pathsTo(fruits, [n - 1, 0], [[-1, 1], [0, 1], [1, 1]])
   let best = -1
   let bestCells = []
-  const frames = [{ phase: 'start', activeLine: L('the first child walks'), cells: diagonal, total: 0, best: 0, message: `The first child collects the diagonal, ${diagonal.reduce((s, [r, c]) => s + fruits[r][c], 0)} fruit.` }]
+  const frames = [{ pythonLine: 20, phase: 'start', activeLine: L('the first child walks'), cells: diagonal, total: 0, best: 0, message: `The first child collects the diagonal, ${diagonal.reduce((s, [r, c]) => s + fruits[r][c], 0)} fruit.` }]
   for (const second of secondPaths) {
     for (const third of thirdPaths) {
       const seen = new Map()
@@ -61,11 +61,11 @@ export function buildTrace({ fruits }) {
       if (total > best) {
         best = total
         bestCells = cells
-        frames.push({ phase: 'improve', activeLine: L('if total > best'), cells, total, best, message: `Paths of the second and third children collect ${total} fruit in total.` })
+        frames.push({ pythonLine: 28, phase: 'improve', activeLine: L('if total > best'), cells, total, best, message: `Paths of the second and third children collect ${total} fruit in total.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), cells: bestCells, total: best, best, message: `Maximum fruit collected: ${best}.` })
+  frames.push({ pythonLine: 29, phase: 'done', activeLine: L('return best'), cells: bestCells, total: best, best, message: `Maximum fruit collected: ${best}.` })
   return { input: { fruits }, fruits, result: best, frames }
 }
 

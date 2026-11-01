@@ -16,21 +16,21 @@ const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
 
 export function buildTrace({ nums, queries }) {
   const gcds = []
-  const frames = [{ phase: 'start', activeLine: L('set gcds to an empty list'), values: [], active: -1, message: 'Start with an empty list of pair gcds.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set gcds to an empty list'), values: [], active: -1, message: 'Start with an empty list of pair gcds.' }]
   for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {
       gcds.push(gcd(nums[i], nums[j]))
-      frames.push({ phase: 'pairs', activeLine: L('add gcd of nums[i]'), values: [...gcds], active: gcds.length - 1, message: `gcd(${nums[i]}, ${nums[j]}) = ${gcds[gcds.length - 1]}.` })
+      frames.push({ pythonLine: 3, phase: 'pairs', activeLine: L('add gcd of nums[i]'), values: [...gcds], active: gcds.length - 1, message: `gcd(${nums[i]}, ${nums[j]}) = ${gcds[gcds.length - 1]}.` })
     }
   }
   gcds.sort((a, b) => a - b)
-  frames.push({ phase: 'sort', activeLine: L('sort gcds'), values: [...gcds], active: -1, message: 'Sorted all pair gcds in increasing order.' })
+  frames.push({ pythonLine: 3, phase: 'sort', activeLine: L('sort gcds'), values: [...gcds], active: -1, message: 'Sorted all pair gcds in increasing order.' })
   const answers = []
   for (const q of queries) {
     answers.push(gcds[q])
-    frames.push({ phase: 'query', activeLine: L('add gcds[q]'), values: [...gcds], active: q, message: `Query ${q} reads position ${q}: ${gcds[q]}.` })
+    frames.push({ pythonLine: 4, phase: 'query', activeLine: L('add gcds[q]'), values: [...gcds], active: q, message: `Query ${q} reads position ${q}: ${gcds[q]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), values: [...gcds], active: -1, message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return answers'), values: [...gcds], active: -1, message: `Answers: ${answers.join(', ')}.` })
   return { input: { nums, queries }, result: answers, sorted: gcds, frames }
 }
 

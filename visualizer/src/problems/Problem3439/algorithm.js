@@ -27,16 +27,16 @@ export function buildTrace(input) {
   }
   gaps.push(eventTime - previous)
   let best = Math.max(...gaps)
-  const frames = [{ phase: 'start', activeLine: L('set gaps to'), gaps, from: null, to: null, total: null, best, message: `The largest single gap is ${best}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set gaps to'), gaps, from: null, to: null, total: null, best, message: `The largest single gap is ${best}.` }]
   for (let l = 0; l < n; l++) {
     for (let r = l; r < n && r - l + 1 <= k; r++) {
       let total = 0
       for (let g = l; g <= r + 1; g++) total += gaps[g]
-      frames.push({ phase: 'window', activeLine: L('set total to'), gaps, from: l, to: r, total, best, message: `Moving meetings ${l} to ${r} merges gaps ${l} to ${r + 1} into ${total}.` })
+      frames.push({ pythonLine: 15, phase: 'window', activeLine: L('set total to'), gaps, from: l, to: r, total, best, message: `Moving meetings ${l} to ${r} merges gaps ${l} to ${r + 1} into ${total}.` })
       best = Math.max(best, total)
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), gaps, from: null, to: null, total: null, best, message: `Largest free time: ${best}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return best'), gaps, from: null, to: null, total: null, best, message: `Largest free time: ${best}.` })
   return { input, result: best, frames }
 }
 

@@ -17,10 +17,10 @@ export function buildTrace(input) {
   // best[j][i]: the best total using j subarrays inside the first i elements; null when impossible.
   const best = Array.from({ length: k + 1 }, () => Array(n + 1).fill(null))
   for (let i = 0; i <= n; i++) best[0][i] = 0
-  const frames = [{ phase: 'start', activeLine: L('set best[0][i] to 0'), j: 0, i: 0, value: 0, table: best, message: 'With zero subarrays every prefix totals 0.' }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('set best[0][i] to 0'), j: 0, i: 0, value: 0, table: best, message: 'With zero subarrays every prefix totals 0.' }]
   for (let j = 1; j <= k; j++) {
     best[j][0] = null
-    frames.push({ phase: 'row', activeLine: L('set best[j][0]'), j, i: 0, value: null, table: best, message: `Row ${j}: with no elements no subarray fits.` })
+    frames.push({ pythonLine: 11, phase: 'row', activeLine: L('set best[j][0]'), j, i: 0, value: null, table: best, message: `Row ${j}: with no elements no subarray fits.` })
     for (let i = 1; i <= n; i++) {
       let value = best[j][i - 1]
       for (let s = 0; s <= i - m; s++) {
@@ -28,11 +28,11 @@ export function buildTrace(input) {
         value = Math.max(value ?? -Infinity, best[j - 1][s] + pre[i] - pre[s])
       }
       best[j][i] = value
-      frames.push({ phase: 'cell', activeLine: L('best[j][i] = max'), j, i, value, table: best, message: `Best with ${j} subarray(s) in the first ${i} elements is ${value === null ? 'impossible' : value}.` })
+      frames.push({ pythonLine: 20, phase: 'cell', activeLine: L('best[j][i] = max'), j, i, value, table: best, message: `Best with ${j} subarray(s) in the first ${i} elements is ${value === null ? 'impossible' : value}.` })
     }
   }
   const result = best[k][n]
-  frames.push({ phase: 'done', activeLine: L('return best[k][n]'), j: k, i: n, value: result, table: best, message: `Maximum total: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return best[k][n]'), j: k, i: n, value: result, table: best, message: `Maximum total: ${result}.` })
   return { input, result, frames }
 }
 

@@ -12,19 +12,19 @@ export function buildTrace(input) {
   const { target } = input
   let screen = ''
   const screens = []
-  const frames = [{ phase: 'start', activeLine: L('set screen to an empty string'), char: '', screen, screens: [], message: `Type ${target} using key 1 (append a) and key 2 (advance the last letter).` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set screen to an empty string'), char: '', screen, screens: [], message: `Type ${target} using key 1 (append a) and key 2 (advance the last letter).` }]
   for (const ch of target) {
     screen += 'a'
     screens.push(screen)
-    frames.push({ phase: 'append', activeLine: L('append an a to the screen'), char: ch, screen, screens: screens.slice(), message: `Press key 1: the screen shows ${screen}.` })
+    frames.push({ pythonLine: 6, phase: 'append', activeLine: L('append an a to the screen'), char: ch, screen, screens: screens.slice(), message: `Press key 1: the screen shows ${screen}.` })
     const steps = ch.charCodeAt(0) - 97
     for (let s = 0; s < steps; s++) {
       screen = screen.slice(0, -1) + String.fromCharCode(screen.charCodeAt(screen.length - 1) + 1)
       screens.push(screen)
-      frames.push({ phase: 'advance', activeLine: L('change the last character'), char: ch, screen, screens: screens.slice(), message: `Press key 2: the screen shows ${screen}.` })
+      frames.push({ pythonLine: 8, phase: 'advance', activeLine: L('change the last character'), char: ch, screen, screens: screens.slice(), message: `Press key 2: the screen shows ${screen}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the recorded screens'), char: '', screen, screens: screens.slice(), message: `${screens.length} screens were shown.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the recorded screens'), char: '', screen, screens: screens.slice(), message: `${screens.length} screens were shown.` })
   return { input, result: screens, frames }
 }
 

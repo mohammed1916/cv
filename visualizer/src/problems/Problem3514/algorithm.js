@@ -16,14 +16,14 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums }) {
   const values = [...new Set(nums)].sort((a, b) => a - b)
-  const frames = [{ phase: 'values', activeLine: L('set values to the distinct'), values, pairs: 0, triples: 0, message: `Distinct values: ${values.join(', ')}.` }]
+  const frames = [{ pythonLine: 2, phase: 'values', activeLine: L('set values to the distinct'), values, pairs: 0, triples: 0, message: `Distinct values: ${values.join(', ')}.` }]
   const pairs = new Set()
   for (const a of values) for (const b of values) pairs.add(a ^ b)
-  frames.push({ phase: 'pairs', activeLine: L('set pairs to every XOR'), values, pairs: pairs.size, triples: 0, message: `${pairs.size} distinct XOR values come from two values, including 0.` })
+  frames.push({ pythonLine: 3, phase: 'pairs', activeLine: L('set pairs to every XOR'), values, pairs: pairs.size, triples: 0, message: `${pairs.size} distinct XOR values come from two values, including 0.` })
   const triples = new Set()
   for (const p of pairs) for (const c of values) triples.add(p ^ c)
-  frames.push({ phase: 'triples', activeLine: L('set triples to every XOR'), values, pairs: pairs.size, triples: triples.size, message: `Combining each pair value with each value gives ${triples.size} distinct triple values.` })
-  frames.push({ phase: 'done', activeLine: L('return the number of distinct'), values, pairs: pairs.size, triples: triples.size, message: `Unique XOR triplet values: ${triples.size}.` })
+  frames.push({ pythonLine: 4, phase: 'triples', activeLine: L('set triples to every XOR'), values, pairs: pairs.size, triples: triples.size, message: `Combining each pair value with each value gives ${triples.size} distinct triple values.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return the number of distinct'), values, pairs: pairs.size, triples: triples.size, message: `Unique XOR triplet values: ${triples.size}.` })
   return { input: { nums }, values, result: triples.size, frames }
 }
 

@@ -14,28 +14,28 @@ export function buildTrace(input) {
   const executed = new Set()
   let i = 0
   let score = 0
-  const frames = [{ phase: 'start', activeLine: L('set score to 0'), i, score, executed: [], message: 'Start at instruction 0 with score 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set score to 0'), i, score, executed: [], message: 'Start at instruction 0 with score 0.' }]
   for (;;) {
     if (i < 0 || i >= instructions.length) {
-      frames.push({ phase: 'stop', activeLine: L('if i is outside'), i, score, executed: [...executed], message: `Index ${i} is outside the list, so the process stops.` })
+      frames.push({ pythonLine: 5, phase: 'stop', activeLine: L('if i is outside'), i, score, executed: [...executed], message: `Index ${i} is outside the list, so the process stops.` })
       break
     }
     if (executed.has(i)) {
-      frames.push({ phase: 'stop', activeLine: L('if i is outside'), i, score, executed: [...executed], message: `Instruction ${i} already ran, so the process stops before running it again.` })
+      frames.push({ pythonLine: 5, phase: 'stop', activeLine: L('if i is outside'), i, score, executed: [...executed], message: `Instruction ${i} already ran, so the process stops before running it again.` })
       break
     }
     executed.add(i)
     if (instructions[i] === 'add') {
       score += values[i]
-      frames.push({ phase: 'add', activeLine: L('if instruction i is add'), i, score, executed: [...executed], message: `Add ${values[i]} to the score, then move to instruction ${i + 1}.` })
+      frames.push({ pythonLine: 7, phase: 'add', activeLine: L('if instruction i is add'), i, score, executed: [...executed], message: `Add ${values[i]} to the score, then move to instruction ${i + 1}.` })
       i += 1
     } else {
       const next = i + values[i]
-      frames.push({ phase: 'jump', activeLine: L('otherwise move to i plus'), i, score, executed: [...executed], message: `Jump by ${values[i]} from ${i} to ${next}.` })
+      frames.push({ pythonLine: 11, phase: 'jump', activeLine: L('otherwise move to i plus'), i, score, executed: [...executed], message: `Jump by ${values[i]} from ${i} to ${next}.` })
       i = next
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return score'), i, score, executed: [...executed], message: `The score is ${score}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return score'), i, score, executed: [...executed], message: `The score is ${score}.` })
   return { input, result: score, frames }
 }
 

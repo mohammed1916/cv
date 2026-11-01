@@ -27,19 +27,19 @@ export function buildTrace({ nums }) {
   const top = Math.max(...nums)
   const ways = Array.from({ length: n }, () => Array(top + 1).fill(0))
   for (let v = 0; v <= nums[0]; v++) ways[0][v] = 1
-  const frames = [{ phase: 'start', cell: [0, 0], table: copy(ways), activeLine: L('ways[0][v] = 1'), message: `The first value of arr1 can be any value from 0 to ${nums[0]}.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', cell: [0, 0], table: copy(ways), activeLine: L('ways[0][v] = 1'), message: `The first value of arr1 can be any value from 0 to ${nums[0]}.` }]
   for (let i = 1; i < n; i++) {
     const step = Math.max(0, nums[i] - nums[i - 1])
     for (let w = 0; w <= nums[i]; w++) {
       let sum = 0
       for (let v = 0; v <= Math.min(nums[i - 1], w - step); v++) sum += ways[i - 1][v]
       ways[i][w] = sum % MOD
-      frames.push({ phase: 'cell', cell: [i, w], table: copy(ways), activeLine: L('ways[i][w] = sum'), message: `arr1[${i}] = ${w}: ${ways[i][w]} ways for the prefix.` })
+      frames.push({ pythonLine: 12, phase: 'cell', cell: [i, w], table: copy(ways), activeLine: L('ways[i][w] = sum'), message: `arr1[${i}] = ${w}: ${ways[i][w]} ways for the prefix.` })
     }
   }
   let result = 0
   for (let w = 0; w <= top; w++) result = (result + ways[n - 1][w]) % MOD
-  frames.push({ phase: 'done', cell: null, table: copy(ways), activeLine: L('return sum of ways'), message: `Monotonic pairs: ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', cell: null, table: copy(ways), activeLine: L('return sum of ways'), message: `Monotonic pairs: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

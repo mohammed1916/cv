@@ -23,15 +23,15 @@ export function buildTrace({ start, d }) {
   let lo = 0
   let hi = starts[starts.length - 1] + d - starts[0]
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 0'), lo, hi, mid: null, verdict: null, positions: [], message: `Sorted ranges start at ${starts.join(', ')}, each of length ${d}. The score lies between ${lo} and ${hi}.` }]
+  const frames = [{ pythonLine: 12, phase: 'start', activeLine: L('set low to 0'), lo, hi, mid: null, verdict: null, positions: [], message: `Sorted ranges start at ${starts.join(', ')}, each of length ${d}. The score lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.ceil((lo + hi) / 2)
     const { positions, ok } = place(mid)
-    frames.push({ phase: 'probe', activeLine: L('if every number can be placed with the gap'), lo, hi, mid, verdict: ok, positions, message: `Score ${mid}: ${ok ? 'every number fits in its range' : 'a number has no room left in its range'}.` })
+    frames.push({ pythonLine: 15, phase: 'probe', activeLine: L('if every number can be placed with the gap'), lo, hi, mid, verdict: ok, positions, message: `Score ${mid}: ${ok ? 'every number fits in its range' : 'a number has no room left in its range'}.` })
     if (ok) lo = mid
     else hi = mid - 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, positions: place(lo).positions, message: `Largest achievable score: ${lo}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, positions: place(lo).positions, message: `Largest achievable score: ${lo}.` })
   return { input: { start, d }, sorted: starts, domain, result: lo, frames }
 }
 

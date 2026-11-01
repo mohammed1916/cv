@@ -11,31 +11,31 @@ export function buildTrace(input) {
   const { nums } = input
   const n = nums.length
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to 0'), start: -1, dir: 0, pos: -1, arr: [...nums], count, message: 'Count the valid choices, starting from each zero.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count to 0'), start: -1, dir: 0, pos: -1, arr: [...nums], count, message: 'Count the valid choices, starting from each zero.' }]
   for (let i = 0; i < n; i++) {
     if (nums[i] !== 0) continue
     for (const d of [-1, 1]) {
       const arr = [...nums]
       let pos = i
       let dir = d
-      frames.push({ phase: 'trial', activeLine: L('for each index i where'), start: i, dir, pos, arr: [...arr], count, message: `Start at zero ${i} moving ${d < 0 ? 'left' : 'right'}.` })
+      frames.push({ pythonLine: 7, phase: 'trial', activeLine: L('for each index i where'), start: i, dir, pos, arr: [...arr], count, message: `Start at zero ${i} moving ${d < 0 ? 'left' : 'right'}.` })
       while (pos >= 0 && pos < n) {
         if (arr[pos] === 0) {
           pos += dir
-          frames.push({ phase: 'move', activeLine: L('if arr[pos] equals 0'), start: i, dir, pos: Math.min(Math.max(pos, 0), n - 1), arr: [...arr], count, message: 'The cell is 0, so keep moving.' })
+          frames.push({ pythonLine: 12, phase: 'move', activeLine: L('if arr[pos] equals 0'), start: i, dir, pos: Math.min(Math.max(pos, 0), n - 1), arr: [...arr], count, message: 'The cell is 0, so keep moving.' })
         } else {
           arr[pos] -= 1
           dir = -dir
           pos += dir
-          frames.push({ phase: 'bounce', activeLine: L('otherwise subtract 1'), start: i, dir, pos: Math.min(Math.max(pos, 0), n - 1), arr: [...arr], count, message: 'The cell is nonzero, so it drops by one and the direction reverses.' })
+          frames.push({ pythonLine: 15, phase: 'bounce', activeLine: L('otherwise subtract 1'), start: i, dir, pos: Math.min(Math.max(pos, 0), n - 1), arr: [...arr], count, message: 'The cell is nonzero, so it drops by one and the direction reverses.' })
         }
       }
       const valid = arr.every(v => v === 0)
       if (valid) count += 1
-      frames.push({ phase: valid ? 'valid' : 'invalid', activeLine: L('if every value'), start: i, dir, pos: -1, arr: [...arr], count, message: valid ? `Choice (${i}, ${d < 0 ? 'left' : 'right'}) leaves all zeros. Count: ${count}.` : `Choice (${i}, ${d < 0 ? 'left' : 'right'}) leaves a nonzero value.` })
+      frames.push({ pythonLine: 18, phase: valid ? 'valid' : 'invalid', activeLine: L('if every value'), start: i, dir, pos: -1, arr: [...arr], count, message: valid ? `Choice (${i}, ${d < 0 ? 'left' : 'right'}) leaves all zeros. Count: ${count}.` : `Choice (${i}, ${d < 0 ? 'left' : 'right'}) leaves a nonzero value.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), start: -1, dir: 0, pos: -1, arr: [...nums], count, message: `Valid choices: ${count}.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return count'), start: -1, dir: 0, pos: -1, arr: [...nums], count, message: `Valid choices: ${count}.` })
   return { input, result: count, frames }
 }
 

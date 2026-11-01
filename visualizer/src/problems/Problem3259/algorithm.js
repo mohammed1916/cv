@@ -24,16 +24,16 @@ export function buildTrace({ energy_drink_a: A, energy_drink_b: B }) {
   const b = Array(n).fill(0)
   a[0] = A[0]
   b[0] = B[0]
-  const frames = [{ phase: 'start', hour: 0, a: [...a], b: [...b], activeLine: L('set a[0] to drink A'), message: `Hour 0: drink A gives ${a[0]}, drink B gives ${b[0]}.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', hour: 0, a: [...a], b: [...b], activeLine: L('set a[0] to drink A'), message: `Hour 0: drink A gives ${a[0]}, drink B gives ${b[0]}.` }]
   for (let i = 1; i < n; i++) {
     const a2 = i >= 2 ? a[i - 2] : 0
     const b2 = i >= 2 ? b[i - 2] : 0
     a[i] = A[i] + Math.max(a[i - 1], b2)
     b[i] = B[i] + Math.max(b[i - 1], a2)
-    frames.push({ phase: 'hour', hour: i, a: [...a], b: [...b], activeLine: L('set a[i] to drink A'), message: `Hour ${i}: staying on A gives ${a[i - 1] + A[i]}, switching from B gives ${b2 + A[i]}; best on A is ${a[i]}.` })
+    frames.push({ pythonLine: 10, phase: 'hour', hour: i, a: [...a], b: [...b], activeLine: L('set a[i] to drink A'), message: `Hour ${i}: staying on A gives ${a[i - 1] + A[i]}, switching from B gives ${b2 + A[i]}; best on A is ${a[i]}.` })
   }
   const result = Math.max(a[n - 1], b[n - 1])
-  frames.push({ phase: 'done', hour: n - 1, a: [...a], b: [...b], activeLine: L('return the larger of a[n-1]'), message: `Maximum energy: ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', hour: n - 1, a: [...a], b: [...b], activeLine: L('return the larger of a[n-1]'), message: `Maximum energy: ${result}.` })
   return { input: { energy_drink_a: A, energy_drink_b: B }, result, frames }
 }
 

@@ -13,7 +13,7 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const frames = []
   let count = 0
-  frames.push({ phase: 'start', activeLine: L('set count to 0'), i: -1, j: -1, reason: '', count, message: `Try every split into three non-empty parts of ${n} values.` })
+  frames.push({ pythonLine: 8, phase: 'start', activeLine: L('set count to 0'), i: -1, j: -1, reason: '', count, message: `Try every split into three non-empty parts of ${n} values.` })
   for (let i = 1; i <= n - 2; i++) {
     for (let j = i + 1; j <= n - 1; j++) {
       const a = nums.slice(0, i), b = nums.slice(i, j), c = nums.slice(j)
@@ -21,10 +21,10 @@ export function buildTrace({ nums }) {
       const beautiful = first || second
       if (beautiful) count++
       const reason = first ? 'first part is a prefix of the second' : second ? 'second part is a prefix of the third' : 'neither prefix condition holds'
-      frames.push({ phase: beautiful ? 'beautiful' : 'split', activeLine: L('if a is a prefix of b'), i, j, reason, count, message: `Split at ${i} and ${j}: ${reason}${beautiful ? ', counted' : ''}.` })
+      frames.push({ pythonLine: beautiful ? 15 : 14, phase: beautiful ? 'beautiful' : 'split', activeLine: L('if a is a prefix of b'), i, j, reason, count, message: `Split at ${i} and ${j}: ${reason}${beautiful ? ', counted' : ''}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), i: -1, j: -1, reason: '', count, message: `Beautiful splits: ${count}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return count'), i: -1, j: -1, reason: '', count, message: `Beautiful splits: ${count}.` })
   return { input: { nums }, result: count, frames }
 }
 

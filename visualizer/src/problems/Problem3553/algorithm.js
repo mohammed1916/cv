@@ -30,7 +30,7 @@ export function buildTrace({ n, edges, queries }) {
   seen[0] = true
   const order = [0]
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('root the tree at node 0'), query: -1, label: 'Root the tree at node 0 and record distances.', answers: [], message: 'Root the tree at node 0 and record each node’s distance from the root.' })
+  frames.push({ pythonLine: 11, phase: 'start', activeLine: L('root the tree at node 0'), query: -1, label: 'Root the tree at node 0 and record distances.', answers: [], message: 'Root the tree at node 0 and record each node’s distance from the root.' })
   for (const v of order) {
     for (const [w, c] of adjacency[v]) {
       if (!seen[w]) { seen[w] = true; parent[w] = v; level[w] = level[v] + 1; dist[w] = dist[v] + c; order.push(w) }
@@ -45,14 +45,14 @@ export function buildTrace({ n, edges, queries }) {
   const distance = (a, b) => dist[a] + dist[b] - 2 * dist[lca(a, b)]
   const answers = []
   queries.forEach(([a, b, c], qi) => {
-    frames.push({ phase: 'query', activeLine: L('for each query'), query: qi, label: `Query ${qi}: nodes ${a}, ${b}, ${c}.`, answers: [...answers], message: `Query ${qi} joins nodes ${a}, ${b} and ${c}.` })
+    frames.push({ pythonLine: 35, phase: 'query', activeLine: L('for each query'), query: qi, label: `Query ${qi}: nodes ${a}, ${b}, ${c}.`, answers: [...answers], message: `Query ${qi} joins nodes ${a}, ${b} and ${c}.` })
     const x = distance(a, b), y = distance(b, c), z = distance(a, c)
-    frames.push({ phase: 'pair', activeLine: L('find the three distances'), query: qi, label: `d(${a},${b}) = ${x}, d(${b},${c}) = ${y}, d(${a},${c}) = ${z}`, answers: [...answers], message: `Pairwise distances are ${x}, ${y} and ${z}.` })
+    frames.push({ pythonLine: 36, phase: 'pair', activeLine: L('find the three distances'), query: qi, label: `d(${a},${b}) = ${x}, d(${b},${c}) = ${y}, d(${a},${c}) = ${z}`, answers: [...answers], message: `Pairwise distances are ${x}, ${y} and ${z}.` })
     const total = (x + y + z) / 2
     answers.push(total)
-    frames.push({ phase: 'sum', activeLine: L('add half of'), query: qi, label: `Half the sum is ${total}.`, answers: [...answers], message: `Minimum subgraph weight for query ${qi}: ${total}.` })
+    frames.push({ pythonLine: 36, phase: 'sum', activeLine: L('add half of'), query: qi, label: `Half the sum is ${total}.`, answers: [...answers], message: `Minimum subgraph weight for query ${qi}: ${total}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), query: -1, label: `Answers: [${answers.join(', ')}]`, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 37, phase: 'done', activeLine: L('return answers'), query: -1, label: `Answers: [${answers.join(', ')}]`, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input: { n, edges, queries }, result: answers, frames }
 }
 

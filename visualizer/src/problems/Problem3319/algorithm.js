@@ -26,7 +26,7 @@ export function buildTrace({ tree, k }) {
   const sizes = []
   const perfectIds = []
   const tags = {}
-  const frames = [{ phase: 'start', activeLine: L('set sizes to an empty list'), current: null, perfectIds: [], tags: {}, sizes: [], message: 'Measure every subtree from the leaves up.' }]
+  const frames = [{ pythonLine: 26, phase: 'start', activeLine: L('set sizes to an empty list'), current: null, perfectIds: [], tags: {}, sizes: [], message: 'Measure every subtree from the leaves up.' }]
   const measure = node => {
     if (!node) return null
     const left = measure(node.left)
@@ -44,13 +44,13 @@ export function buildTrace({ tree, k }) {
     if (info.perfect) { sizes.push(info.size); perfectIds.push(node.id) }
     tags[node.id] = `size ${info.size}`
     const activeLine = !left && !right ? L('a node with no children') : info.perfect ? L('if it is perfect then append') : L('it is perfect only when')
-    frames.push({ phase: 'measure', activeLine, current: node.id, perfectIds: [...perfectIds], tags: { ...tags }, sizes: [...sizes], message: info.perfect ? `Node ${node.value} roots a perfect subtree of size ${info.size}.` : `Node ${node.value} does not root a perfect subtree.` })
+    frames.push({ pythonLine: !left && !right ? 34 : info.perfect ? 40 : 41, phase: 'measure', activeLine, current: node.id, perfectIds: [...perfectIds], tags: { ...tags }, sizes: [...sizes], message: info.perfect ? `Node ${node.value} roots a perfect subtree of size ${info.size}.` : `Node ${node.value} does not root a perfect subtree.` })
     return info
   }
   measure(root)
   sizes.sort((a, b) => b - a)
   const result = k <= sizes.length ? sizes[k - 1] : -1
-  frames.push({ phase: 'done', activeLine: L('return the size at position k'), current: null, perfectIds: [...perfectIds], tags: { ...tags }, sizes: [...sizes], message: result === -1 ? `Only ${sizes.length} perfect subtrees, so the answer is -1.` : `Perfect subtree sizes, largest first: ${sizes.join(', ')}. Position ${k} is ${result}.` })
+  frames.push({ pythonLine: 45, phase: 'done', activeLine: L('return the size at position k'), current: null, perfectIds: [...perfectIds], tags: { ...tags }, sizes: [...sizes], message: result === -1 ? `Only ${sizes.length} perfect subtrees, so the answer is -1.` : `Perfect subtree sizes, largest first: ${sizes.join(', ')}. Position ${k} is ${result}.` })
   return { input: { tree, k }, root, result, frames }
 }
 

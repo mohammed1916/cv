@@ -16,7 +16,7 @@ export function buildTrace(input) {
   lowest[0] = 0
   let best = null
   let bestRange = null
-  const frames = [{ phase: 'start', activeLine: L('set prefix[0]'), index: -1, candidate: null, best: null, range: null, message: 'Prefix index 0 is the lowest seen in residue class 0.' }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set prefix[0]'), index: -1, candidate: null, best: null, range: null, message: 'Prefix index 0 is the lowest seen in residue class 0.' }]
   for (let e = 1; e <= n; e++) {
     const r = e % k
     let candidate = null
@@ -27,10 +27,10 @@ export function buildTrace(input) {
         bestRange = [lowest[r], e - 1]
       }
     }
-    frames.push({ phase: 'scan', activeLine: L('look up the lowest'), index: e - 1, candidate, best, range: bestRange, message: candidate === null ? `No earlier prefix has residue ${r}.` : `Subarray from ${lowest[r]} to ${e - 1} has sum ${candidate}. Best so far ${best}.` })
+    frames.push({ pythonLine: 11, phase: 'scan', activeLine: L('look up the lowest'), index: e - 1, candidate, best, range: bestRange, message: candidate === null ? `No earlier prefix has residue ${r}.` : `Subarray from ${lowest[r]} to ${e - 1} has sum ${candidate}. Best so far ${best}.` })
     if (lowest[r] === null || prefix[e] < prefix[lowest[r]]) lowest[r] = e
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: n, candidate: null, best, range: bestRange, message: `Maximum sum: ${best}.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return best'), index: n, candidate: null, best, range: bestRange, message: `Maximum sum: ${best}.` })
   return { input, result: best, frames }
 }
 

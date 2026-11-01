@@ -14,7 +14,7 @@ const ratio = (a, b) => {
 export function buildTrace(nums) {
   const n = nums.length
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), q: null, r: null, matches: 0, total, message: 'Start with no special subsequences counted.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set total to 0'), q: null, r: null, matches: 0, total, message: 'Start with no special subsequences counted.' }]
   for (let q = 0; q < n; q++) {
     for (let r = q + 2; r < n; r++) {
       // left: ratios nums[p] / nums[q] for p at least two before q.
@@ -32,10 +32,10 @@ export function buildTrace(nums) {
       let matches = 0
       for (const [k, count] of left) matches += count * (right.get(k) ?? 0)
       total += matches
-      frames.push({ phase: 'pair', activeLine: L('for each middle pair'), q, r, matches, total, message: `Middle pair q=${q}, r=${r}: ${matches} matching (p, s) choices. Running total ${total}.` })
+      frames.push({ pythonLine: 8, phase: 'pair', activeLine: L('for each middle pair'), q, r, matches, total, message: `Middle pair q=${q}, r=${r}: ${matches} matching (p, s) choices. Running total ${total}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), q: null, r: null, matches: 0, total, message: `Special subsequences: ${total}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return total'), q: null, r: null, matches: 0, total, message: `Special subsequences: ${total}.` })
   return { input: nums, result: total, frames }
 }
 

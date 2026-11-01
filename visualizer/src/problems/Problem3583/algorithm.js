@@ -14,18 +14,18 @@ export function buildTrace({ nums }) {
   const left = new Map()
   const entries = m => [...m].sort((a, b) => a[0] - b[0])
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set the right counts'), index: -1, left: [], right: entries(right), contribution: 0, total: 0, message: 'Start with every value counted on the right and none on the left.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set the right counts'), index: -1, left: [], right: entries(right), contribution: 0, total: 0, message: 'Start with every value counted on the right and none on the left.' }]
   for (let j = 0; j < n; j++) {
     const x = nums[j]
     right.set(x, right.get(x) - 1)
     const target = 2 * x
     const contribution = (left.get(target) || 0) * (right.get(target) || 0)
     total += contribution
-    frames.push({ phase: 'scan', activeLine: L('add the left count of twice'), index: j, left: entries(left), right: entries(right), target, contribution, total, message: `Middle value ${x} needs ${target} on both sides: ${left.get(target) || 0} on the left and ${right.get(target) || 0} on the right, adding ${contribution}.` })
+    frames.push({ pythonLine: 10, phase: 'scan', activeLine: L('add the left count of twice'), index: j, left: entries(left), right: entries(right), target, contribution, total, message: `Middle value ${x} needs ${target} on both sides: ${left.get(target) || 0} on the left and ${right.get(target) || 0} on the right, adding ${contribution}.` })
     left.set(x, (left.get(x) || 0) + 1)
   }
   const result = total % MOD
-  frames.push({ phase: 'done', activeLine: L('return total modulo'), index: -1, left: entries(left), right: entries(right), contribution: 0, total: result, result, message: `Special triplets modulo 1000000007: ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return total modulo'), index: -1, left: entries(left), right: entries(right), contribution: 0, total: result, result, message: `Special triplets modulo 1000000007: ${result}.` })
   return { input: { nums }, result, frames }
 }
 

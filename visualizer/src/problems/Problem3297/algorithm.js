@@ -10,22 +10,22 @@ export function buildTrace({ word1, word2 }) {
   const need = new Map()
   for (const c of word2) need.set(c, (need.get(c) ?? 0) + 1)
   const covers = have => [...need].every(([c, amount]) => (have.get(c) ?? 0) >= amount)
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), start: 0, end: -1, have: '', total: 0, message: `A substring works when it holds every letter of ${word2} at least as often as ${word2} does.` }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set total to zero'), start: 0, end: -1, have: '', total: 0, message: `A substring works when it holds every letter of ${word2} at least as often as ${word2} does.` }]
   let total = 0
   for (let start = 0; start < n; start++) {
     const have = new Map()
     for (let end = start; end < n; end++) {
       have.set(word1[end], (have.get(word1[end]) ?? 0) + 1)
       const ok = covers(have)
-      frames.push({ phase: 'extend', activeLine: L('add the letter at j'), start, end, have: [...have].map(([c, k]) => `${c}${k}`).join(' '), total, message: `Add ${word1[end]}. Substring ${start} to ${end} ${ok ? 'covers' : 'does not yet cover'} ${word2}.` })
+      frames.push({ pythonLine: 10, phase: 'extend', activeLine: L('add the letter at j'), start, end, have: [...have].map(([c, k]) => `${c}${k}`).join(' '), total, message: `Add ${word1[end]}. Substring ${start} to ${end} ${ok ? 'covers' : 'does not yet cover'} ${word2}.` })
       if (ok) {
         total += n - end
-        frames.push({ phase: 'count', activeLine: L('cover every letter'), start, end, have: [...have].map(([c, k]) => `${c}${k}`).join(' '), total, message: `Ends ${end} to ${n - 1} all work for start ${start}. Total ${total}.` })
+        frames.push({ pythonLine: 11, phase: 'count', activeLine: L('cover every letter'), start, end, have: [...have].map(([c, k]) => `${c}${k}`).join(' '), total, message: `Ends ${end} to ${n - 1} all work for start ${start}. Total ${total}.` })
         break
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), start: 0, end: n - 1, have: '', total, message: `There are ${total} qualifying substrings.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return total'), start: 0, end: n - 1, have: '', total, message: `There are ${total} qualifying substrings.` })
   return { input: { word1, word2 }, result: total, frames }
 }
 

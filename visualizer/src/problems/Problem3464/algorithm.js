@@ -50,7 +50,7 @@ export function buildTrace({ side, points, k }) {
   let hi = candidates.length - 1
   let best = candidates[0]
   let bestWitness = []
-  const frames = [{ phase: 'start', distance: null, witness: [], lo, hi, activeLine: L('set candidates to'), message: `${candidates.length} distinct Manhattan distance(s) are possible answers.` }]
+  const frames = [{ pythonLine: 7, phase: 'start', distance: null, witness: [], lo, hi, activeLine: L('set candidates to'), message: `${candidates.length} distinct Manhattan distance(s) are possible answers.` }]
   while (lo <= hi) {
     const mid = (lo + hi) >> 1
     const d = candidates[mid]
@@ -59,13 +59,13 @@ export function buildTrace({ side, points, k }) {
       best = d
       bestWitness = witness
       lo = mid + 1
-      frames.push({ phase: 'check', distance: d, feasible: true, witness, lo, hi, activeLine: L('remember candidates[mid]'), message: `${k} points can all be at least ${d} apart, so try a larger distance.` })
+      frames.push({ pythonLine: 24, phase: 'check', distance: d, feasible: true, witness, lo, hi, activeLine: L('remember candidates[mid]'), message: `${k} points can all be at least ${d} apart, so try a larger distance.` })
     } else {
       hi = mid - 1
-      frames.push({ phase: 'check', distance: d, feasible: false, witness: [], lo, hi, activeLine: L('otherwise set hi'), message: `No ${k} points are all at least ${d} apart, so try a smaller distance.` })
+      frames.push({ pythonLine: 27, phase: 'check', distance: d, feasible: false, witness: [], lo, hi, activeLine: L('otherwise set hi'), message: `No ${k} points are all at least ${d} apart, so try a smaller distance.` })
     }
   }
-  frames.push({ phase: 'done', distance: best, feasible: true, witness: bestWitness, lo, hi, activeLine: L('return the remembered'), result: best, message: `Largest achievable minimum distance: ${best}.` })
+  frames.push({ pythonLine: 28, phase: 'done', distance: best, feasible: true, witness: bestWitness, lo, hi, activeLine: L('return the remembered'), result: best, message: `Largest achievable minimum distance: ${best}.` })
   return { input: { side, points, k }, result: best, frames }
 }
 

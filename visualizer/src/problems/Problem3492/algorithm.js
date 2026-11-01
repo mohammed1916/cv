@@ -12,13 +12,13 @@ export function buildTrace({ n, w, maxWeight }) {
   const capacity = n * n
   let load = 0
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set capacity to'), count: 0, load: 0, message: `The grid holds ${capacity} containers of weight ${w}. The ship limit is ${maxWeight}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set capacity to'), count: 0, load: 0, message: `The grid holds ${capacity} containers of weight ${w}. The ship limit is ${maxWeight}.` }]
   while (count < capacity && load + w <= maxWeight) {
     load += w
     count++
-    frames.push({ phase: 'place', activeLine: L('add a container'), count, load, message: `Place container ${count}. Load is ${load} of ${maxWeight}.` })
+    frames.push({ pythonLine: 6, phase: 'place', activeLine: L('add a container'), count, load, message: `Place container ${count}. Load is ${load} of ${maxWeight}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), count, load, message: `Maximum containers: ${count}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return count'), count, load, message: `Maximum containers: ${count}.` })
   return { input: { n, w, maxWeight }, result: count, frames }
 }
 

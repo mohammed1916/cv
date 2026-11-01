@@ -13,13 +13,13 @@ const better = (x, y) => {
 
 export function buildTrace(nums) {
   const bins = nums.map(v => v.toString(2))
-  const frames = [{ phase: 'convert', activeLine: L('write each number'), ordered: [...bins], joined: '', message: `Write each number in binary: ${bins.join(', ')}.` }]
+  const frames = [{ pythonLine: 4, phase: 'convert', activeLine: L('write each number'), ordered: [...bins], joined: '', message: `Write each number in binary: ${bins.join(', ')}.` }]
   const ordered = [...bins].sort(better)
-  frames.push({ phase: 'order', activeLine: L('sort the binary strings'), ordered: [...ordered], joined: '', message: `Order them so that each pair reads as large as possible: ${ordered.join(' then ')}.` })
+  frames.push({ pythonLine: 11, phase: 'order', activeLine: L('sort the binary strings'), ordered: [...ordered], joined: '', message: `Order them so that each pair reads as large as possible: ${ordered.join(' then ')}.` })
   const joined = ordered.join('')
-  frames.push({ phase: 'join', activeLine: L('join the sorted'), ordered: [...ordered], joined, message: `Joined binary string: ${joined}.` })
+  frames.push({ pythonLine: 11, phase: 'join', activeLine: L('join the sorted'), ordered: [...ordered], joined, message: `Joined binary string: ${joined}.` })
   const result = parseInt(joined, 2)
-  frames.push({ phase: 'done', activeLine: L('return the value'), ordered: [...ordered], joined, message: `Maximum value: ${result}.` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return the value'), ordered: [...ordered], joined, message: `Maximum value: ${result}.` })
   return { input: nums, result, frames }
 }
 

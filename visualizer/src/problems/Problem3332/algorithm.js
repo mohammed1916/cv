@@ -11,7 +11,7 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { n, k, stay_score, travel_score } = input
   let best = Array.from({ length: n }, () => 0)
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), day: -1, best: best.slice(), result: null, message: `Before day 0 the tourist can be in any of the ${n} cities with 0 points.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set best to 0'), day: -1, best: best.slice(), result: null, message: `Before day 0 the tourist can be in any of the ${n} cities with 0 points.` }]
   for (let d = 0; d < k; d++) {
     const next = Array.from({ length: n }, () => 0)
     for (let c = 0; c < n; c++) {
@@ -20,10 +20,10 @@ export function buildTrace(input) {
       next[c] = Math.max(...options)
     }
     best = next
-    frames.push({ phase: 'day', activeLine: L('set next[c]'), day: d, best: best.slice(), result: null, message: `After day ${d}, the best total for each city is ${best.join(', ')}.` })
+    frames.push({ pythonLine: 9, phase: 'day', activeLine: L('set next[c]'), day: d, best: best.slice(), result: null, message: `After day ${d}, the best total for each city is ${best.join(', ')}.` })
   }
   const result = Math.max(...best)
-  frames.push({ phase: 'done', activeLine: L('return the largest'), day: k, best: best.slice(), result, message: `The most points the tourist can earn is ${result}.` })
+  frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return the largest'), day: k, best: best.slice(), result, message: `The most points the tourist can earn is ${result}.` })
   return { input, result, frames }
 }
 

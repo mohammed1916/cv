@@ -19,19 +19,19 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums }) {
   const n = nums.length
-  const frames = [{ phase: 'size', activeLine: L('let n be the length'), n, power: 0, message: `nums has ${n} entries.` }]
+  const frames = [{ pythonLine: 2, phase: 'size', activeLine: L('let n be the length'), n, power: 0, message: `nums has ${n} entries.` }]
   if (n <= 2) {
-    frames.push({ phase: 'done', activeLine: L('if n is at most 2'), n, power: 0, message: `With ${n} entries the count is ${n}.` })
+    frames.push({ pythonLine: 3, phase: 'done', activeLine: L('if n is at most 2'), n, power: 0, message: `With ${n} entries the count is ${n}.` })
     return { input: { nums }, result: n, frames }
   }
   let power = 1
-  frames.push({ phase: 'grow', activeLine: L('set power to 1'), n, power, message: 'The largest power of two at most n is found by doubling.' })
+  frames.push({ pythonLine: 5, phase: 'grow', activeLine: L('set power to 1'), n, power, message: 'The largest power of two at most n is found by doubling.' })
   while (power * 2 <= n) {
     power *= 2
-    frames.push({ phase: 'grow', activeLine: L('double power'), n, power, message: `Doubled to ${power}, which is still at most ${n}.` })
+    frames.push({ pythonLine: 7, phase: 'grow', activeLine: L('double power'), n, power, message: `Doubled to ${power}, which is still at most ${n}.` })
   }
   const result = 2 * power
-  frames.push({ phase: 'done', activeLine: L('return twice power'), n, power, message: `The count is twice ${power}, which is ${result}.` })
+  frames.push({ pythonLine: 8, phase: 'done', activeLine: L('return twice power'), n, power, message: `The count is twice ${power}, which is ${result}.` })
   return { input: { nums }, result, frames }
 }
 

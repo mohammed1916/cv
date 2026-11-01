@@ -26,17 +26,17 @@ const sum = counts => counts.reduce((total, value) => (total + value) % MOD, 0)
 export function buildTrace({ s, t }) {
   let counts = Array(26).fill(0)
   for (const ch of s) counts[ch.charCodeAt(0) - 97] += 1
-  const frames = [{ phase: 'start', step: 0, counts: [...counts], length: sum(counts), activeLine: L('count how many'), message: `Count the letters of ${s}. The string has ${sum(counts)} characters.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', step: 0, counts: [...counts], length: sum(counts), activeLine: L('count how many'), message: `Count the letters of ${s}. The string has ${sum(counts)} characters.` }]
   for (let step = 1; step <= t; step++) {
     const next = Array(26).fill(0)
     for (let c = 0; c < 25; c++) next[c + 1] = (next[c + 1] + counts[c]) % MOD
     next[0] = (next[0] + counts[25]) % MOD
     next[1] = (next[1] + counts[25]) % MOD
     counts = next
-    frames.push({ phase: 'step', step, counts: [...counts], length: sum(counts), activeLine: L('replace the counts'), message: `Round ${step}: every letter moves one place forward and z becomes ab. The length is now ${sum(counts)}.` })
+    frames.push({ pythonLine: 12, phase: 'step', step, counts: [...counts], length: sum(counts), activeLine: L('replace the counts'), message: `Round ${step}: every letter moves one place forward and z becomes ab. The length is now ${sum(counts)}.` })
   }
   const result = sum(counts)
-  frames.push({ phase: 'done', step: t, counts: [...counts], length: result, activeLine: L('return the sum'), message: `Total length after ${t} rounds: ${result}.` })
+  frames.push({ pythonLine: 13, phase: 'done', step: t, counts: [...counts], length: result, activeLine: L('return the sum'), message: `Total length after ${t} rounds: ${result}.` })
   return { input: { s, t }, result, frames }
 }
 

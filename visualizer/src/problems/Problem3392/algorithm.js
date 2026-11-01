@@ -6,14 +6,14 @@ export function parseInput(text) {
 
 export function buildTrace(nums) {
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set count to zero'), start: -1, ok: false, count: 0, message: 'Slide a window of three across the array.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set count to zero'), start: -1, ok: false, count: 0, message: 'Slide a window of three across the array.' }]
   for (let i = 0; i + 2 < nums.length; i++) {
     // The condition is first + third = middle / 2, checked as 2 * (first + third) = middle to stay in integers.
     const ok = 2 * (nums[i] + nums[i + 2]) === nums[i + 1]
     if (ok) count++
-    frames.push({ phase: 'check', activeLine: L('for each start index'), start: i, ok, count, message: `Window ${nums[i]}, ${nums[i + 1]}, ${nums[i + 2]} ${ok ? 'meets' : 'fails'} the condition.` })
+    frames.push({ pythonLine: 3, phase: 'check', activeLine: L('for each start index'), start: i, ok, count, message: `Window ${nums[i]}, ${nums[i + 1]}, ${nums[i + 2]} ${ok ? 'meets' : 'fails'} the condition.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), start: -1, ok: false, count, message: `${count} window(s) meet the condition.` })
+  frames.push({ pythonLine: 6, phase: 'done', activeLine: L('return count'), start: -1, ok: false, count, message: `${count} window(s) meet the condition.` })
   return { input: nums, result: count, frames }
 }
 

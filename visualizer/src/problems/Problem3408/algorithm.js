@@ -37,22 +37,22 @@ export function buildTrace({ operations, arguments: args }) {
   const prio = new Map()
   const heap = []
   const result = []
-  const frames = [{ phase: 'start', activeLine: L('set up an empty map'), tasks: [], answer: null, message: 'No tasks yet.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set up an empty map'), tasks: [], answer: null, message: 'No tasks yet.' }]
   const snapshot = () => [...prio.keys()].sort((a, b) => a - b).map(t => ({ task: t, user: user.get(t), priority: prio.get(t) }))
   operations.forEach((op, i) => {
     const a = args[i]
     if (op === 'add') {
       user.set(a[1], a[0]); prio.set(a[1], a[2]); heap.push({ p: a[2], t: a[1] })
       result.push(null)
-      frames.push({ phase: 'add', activeLine: L('store the task and push its entry'), tasks: snapshot(), answer: null, message: `Task ${a[1]} for user ${a[0]} with priority ${a[2]}.` })
+      frames.push({ pythonLine: 13, phase: 'add', activeLine: L('store the task and push its entry'), tasks: snapshot(), answer: null, message: `Task ${a[1]} for user ${a[0]} with priority ${a[2]}.` })
     } else if (op === 'edit') {
       prio.set(a[0], a[1]); heap.push({ p: a[1], t: a[0] })
       result.push(null)
-      frames.push({ phase: 'edit', activeLine: L('store the new priority'), tasks: snapshot(), answer: null, message: `Task ${a[0]} now has priority ${a[1]}.` })
+      frames.push({ pythonLine: 17, phase: 'edit', activeLine: L('store the new priority'), tasks: snapshot(), answer: null, message: `Task ${a[0]} now has priority ${a[1]}.` })
     } else if (op === 'rmv') {
       user.delete(a[0]); prio.delete(a[0])
       result.push(null)
-      frames.push({ phase: 'rmv', activeLine: L('remove the task from the map'), tasks: snapshot(), answer: null, message: `Task ${a[0]} is removed.` })
+      frames.push({ pythonLine: 22, phase: 'rmv', activeLine: L('remove the task from the map'), tasks: snapshot(), answer: null, message: `Task ${a[0]} is removed.` })
     } else {
       const valid = e => prio.has(e.t) && prio.get(e.t) === e.p
       for (let j = heap.length - 1; j >= 0; j--) if (!valid(heap[j])) heap.splice(j, 1)
@@ -67,10 +67,10 @@ export function buildTrace({ operations, arguments: args }) {
         user.delete(t); prio.delete(t)
       }
       result.push(answer)
-      frames.push({ phase: 'exec', activeLine: L('answer -1 if no task remains'), tasks: snapshot(), answer, message: answer === -1 ? 'No task is left, so the answer is -1.' : `Run the top task; its user ${answer} is the answer.` })
+      frames.push({ pythonLine: answer === -1 ? 29 : 34, phase: 'exec', activeLine: L('answer -1 if no task remains'), tasks: snapshot(), answer, message: answer === -1 ? 'No task is left, so the answer is -1.' : `Run the top task; its user ${answer} is the answer.` })
     }
   })
-  frames.push({ phase: 'done', activeLine: L('return the answers'), tasks: snapshot(), answer: null, message: 'Every operation has been answered.' })
+  frames.push({ pythonLine: 35, phase: 'done', activeLine: L('return the answers'), tasks: snapshot(), answer: null, message: 'Every operation has been answered.' })
   return { input: { operations, arguments: args }, result, frames }
 }
 

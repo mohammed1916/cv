@@ -12,7 +12,7 @@ const copy = matrix => matrix.map(row => [...row])
 export function buildTrace({ grid }) {
   const n = grid.length
   const matrix = copy(grid)
-  const frames = [{ phase: 'start', activeLine: L('for each diagonal from bottom-left'), diagonal: null, cells: [], matrix: copy(matrix), message: 'Each diagonal is sorted on its own.' }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('for each diagonal from bottom-left'), diagonal: null, cells: [], matrix: copy(matrix), message: 'Each diagonal is sorted on its own.' }]
   for (let d = -(n - 1); d <= n - 1; d++) {
     // d = row minus column; d >= 0 is on or below the main diagonal.
     const cells = []
@@ -23,9 +23,9 @@ export function buildTrace({ grid }) {
     const values = cells.map(([r, c]) => matrix[r][c])
     values.sort((a, b) => (d >= 0 ? b - a : a - b))
     cells.forEach(([r, c], i) => { matrix[r][c] = values[i] })
-    frames.push({ phase: 'diagonal', activeLine: L(d >= 0 ? 'sort non-increasing' : 'sort non-decreasing'), diagonal: d, cells, matrix: copy(matrix), message: `Diagonal ${d} is sorted ${d >= 0 ? 'non-increasing' : 'non-decreasing'}.` })
+    frames.push({ pythonLine: 6, phase: 'diagonal', activeLine: L(d >= 0 ? 'sort non-increasing' : 'sort non-decreasing'), diagonal: d, cells, matrix: copy(matrix), message: `Diagonal ${d} is sorted ${d >= 0 ? 'non-increasing' : 'non-decreasing'}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the matrix'), diagonal: null, cells: [], matrix: copy(matrix), message: 'Every diagonal is sorted.' })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the matrix'), diagonal: null, cells: [], matrix: copy(matrix), message: 'Every diagonal is sorted.' })
   return { input: { grid }, result: matrix, frames }
 }
 

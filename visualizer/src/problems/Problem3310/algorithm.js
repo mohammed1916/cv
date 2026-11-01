@@ -13,14 +13,14 @@ export function buildTrace(input) {
   const marked = Array.from({ length: n }, () => false)
   marked[k] = true
   const stack = [k]
-  const frames = [{ phase: 'start', activeLine: L('mark k as suspicious'), marked: marked.slice(), result: null, message: `Method ${k} is suspicious. Every method it can reach through invocations is suspicious too.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('mark k as suspicious'), marked: marked.slice(), result: null, message: `Method ${k} is suspicious. Every method it can reach through invocations is suspicious too.` }]
   while (stack.length > 0) {
     const m = stack.pop()
     for (const [a, b] of invocations) {
       if (a === m && !marked[b]) {
         marked[b] = true
         stack.push(b)
-        frames.push({ phase: 'mark', activeLine: L('mark b as suspicious'), marked: marked.slice(), result: null, message: `Method ${m} invokes ${b}, so ${b} is suspicious too.` })
+        frames.push({ pythonLine: 8, phase: 'mark', activeLine: L('mark b as suspicious'), marked: marked.slice(), result: null, message: `Method ${m} invokes ${b}, so ${b} is suspicious too.` })
       }
     }
   }
@@ -31,10 +31,10 @@ export function buildTrace(input) {
   let result
   if (blocked) {
     result = Array.from({ length: n }, (_, i) => i)
-    frames.push({ phase: 'blocked', activeLine: L('return all methods'), marked: marked.slice(), result, message: `Method ${blocked[0]} outside the set invokes suspicious method ${blocked[1]}, so nothing can be removed.` })
+    frames.push({ pythonLine: 12, phase: 'blocked', activeLine: L('return all methods'), marked: marked.slice(), result, message: `Method ${blocked[0]} outside the set invokes suspicious method ${blocked[1]}, so nothing can be removed.` })
   } else {
     result = Array.from({ length: n }, (_, i) => i).filter(i => !marked[i])
-    frames.push({ phase: 'done', activeLine: L('return the methods'), marked: marked.slice(), result, message: `No outside method calls into the suspicious set, so those methods are removed.` })
+    frames.push({ pythonLine: 13, phase: 'done', activeLine: L('return the methods'), marked: marked.slice(), result, message: `No outside method calls into the suspicious set, so those methods are removed.` })
   }
   return { input, result, frames }
 }

@@ -30,7 +30,7 @@ export function buildTrace({ move_time: moveTime }) {
   const arrive = Array.from({ length: rows }, () => new Array(cols).fill(Infinity))
   arrive[0][0] = 0
   const heap = [[0, 0, 0]]
-  const frames = [{ phase: 'start', activeLine: L('arrive[r][c] = infinity'), cell: [0, 0], time: 0, matrix: arrive.map(r => [...r]), message: 'Start in the top-left room at time 0. Entering a room must wait until its opening time, then costs one second.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('arrive[r][c] = infinity'), cell: [0, 0], time: 0, matrix: arrive.map(r => [...r]), message: 'Start in the top-left room at time 0. Entering a room must wait until its opening time, then costs one second.' }]
   let result = -1
   const popSmallest = () => { let k = 0; for (let i = 1; i < heap.length; i++) if (heap[i][0] < heap[k][0]) k = i; return heap.splice(k, 1)[0] }
   while (heap.length) {
@@ -38,10 +38,10 @@ export function buildTrace({ move_time: moveTime }) {
     if (t > arrive[r][c]) continue
     if (r === rows - 1 && c === cols - 1) {
       result = t
-      frames.push({ phase: 'done', activeLine: L('if (r, c) is the bottom-right room'), cell: [r, c], time: t, matrix: arrive.map(row => [...row]), message: `The bottom-right room is reached at time ${t}.` })
+      frames.push({ pythonLine: 13, phase: 'done', activeLine: L('if (r, c) is the bottom-right room'), cell: [r, c], time: t, matrix: arrive.map(row => [...row]), message: `The bottom-right room is reached at time ${t}.` })
       break
     }
-    frames.push({ phase: 'settle', activeLine: L('pop (t, r, c)'), cell: [r, c], time: t, matrix: arrive.map(row => [...row]), message: `Leave room (${r}, ${c}), reached at time ${t}.` })
+    frames.push({ pythonLine: 10, phase: 'settle', activeLine: L('pop (t, r, c)'), cell: [r, c], time: t, matrix: arrive.map(row => [...row]), message: `Leave room (${r}, ${c}), reached at time ${t}.` })
     for (const [nr, nc] of [[r + 1, c], [r - 1, c], [r, c + 1], [r, c - 1]]) {
       if (nr < 0 || nc < 0 || nr >= rows || nc >= cols) continue
       const start = Math.max(t, moveTime[nr][nc])
@@ -49,7 +49,7 @@ export function buildTrace({ move_time: moveTime }) {
       if (time < arrive[nr][nc]) {
         arrive[nr][nc] = time
         heap.push([time, nr, nc])
-        frames.push({ phase: 'relax', activeLine: L('if time < arrive[nr][nc]'), cell: [nr, nc], time, matrix: arrive.map(row => [...row]), message: `Room (${nr}, ${nc}) opens at ${moveTime[nr][nc]}, so entering starts at ${start} and arrives at ${time}.` })
+        frames.push({ pythonLine: 19, phase: 'relax', activeLine: L('if time < arrive[nr][nc]'), cell: [nr, nc], time, matrix: arrive.map(row => [...row]), message: `Room (${nr}, ${nc}) opens at ${moveTime[nr][nc]}, so entering starts at ${start} and arrives at ${time}.` })
       }
     }
   }

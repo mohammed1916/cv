@@ -33,7 +33,7 @@ export function buildTrace({ grid, k }) {
   const view = () => ways.map((row, r) => row.map((counts, c) => (done[r][c] ? counts[k] : '·')))
   ways[0][0][grid[0][0]] = 1
   done[0][0] = true
-  const frames = [{ phase: 'start', activeLine: L('set the top-left cell'), row: 0, col: 0, table: view(), message: `Top-left starts one path with XOR ${grid[0][0]}.` }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set the top-left cell'), row: 0, col: 0, table: view(), message: `Top-left starts one path with XOR ${grid[0][0]}.` }]
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue
@@ -49,11 +49,11 @@ export function buildTrace({ grid, k }) {
         }
       }
       done[r][c] = true
-      frames.push({ phase: 'cell', activeLine: L('add its count to the cell'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}): ${ways[r][c][k]} path(s) with XOR ${k} so far.` })
+      frames.push({ pythonLine: 20, phase: 'cell', activeLine: L('add its count to the cell'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}): ${ways[r][c][k]} path(s) with XOR ${k} so far.` })
     }
   }
   const result = ways[m - 1][n - 1][k] % MOD
-  frames.push({ phase: 'done', activeLine: L('return the count with XOR value k'), row: m - 1, col: n - 1, table: view(), message: `Paths with XOR ${k}: ${result}.` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return the count with XOR value k'), row: m - 1, col: n - 1, table: view(), message: `Paths with XOR ${k}: ${result}.` })
   return { input: { grid, k }, grid, k, result, frames }
 }
 

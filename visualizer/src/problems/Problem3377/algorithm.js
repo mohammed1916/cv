@@ -34,20 +34,20 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ n, m }) {
   const frames = []
   if (isPrime(n) || isPrime(m)) {
-    frames.push({ phase: 'done', activeLine: L('return -1'), value: n, cost: null, message: `${isPrime(n) ? n : m} is prime, so no transformation can start or finish there: return -1.` })
+    frames.push({ pythonLine: 15, phase: 'done', activeLine: L('return -1'), value: n, cost: null, message: `${isPrime(n) ? n : m} is prime, so no transformation can start or finish there: return -1.` })
     return { input: { n, m }, result: -1, frames }
   }
   const width = String(n).length
   const dist = new Map([[n, n]])
   const heap = [[n, n]]
-  frames.push({ phase: 'start', activeLine: L('dist[n] = n'), value: n, cost: n, message: `Start at ${n} with cost ${n}. Every value on the way adds to the cost, and no visited value may be prime.` })
+  frames.push({ pythonLine: 18, phase: 'start', activeLine: L('dist[n] = n'), value: n, cost: n, message: `Start at ${n} with cost ${n}. Every value on the way adds to the cost, and no visited value may be prime.` })
   let result = -1
   const popSmallest = () => { let k = 0; for (let i = 1; i < heap.length; i++) if (heap[i][0] < heap[k][0]) k = i; return heap.splice(k, 1)[0] }
   while (heap.length) {
     const [d, v] = popSmallest()
     if (d > dist.get(v)) continue
-    if (v === m) { result = d; frames.push({ phase: 'done', activeLine: L('if v = m then return d'), value: v, cost: d, message: `Reached ${m} with total cost ${d}.` }); break }
-    frames.push({ phase: 'settle', activeLine: L('pop (d, v)'), value: v, cost: d, message: `Expand ${v} with cost ${d}.` })
+    if (v === m) { result = d; frames.push({ pythonLine: 25, phase: 'done', activeLine: L('if v = m then return d'), value: v, cost: d, message: `Reached ${m} with total cost ${d}.` }); break }
+    frames.push({ pythonLine: 21, phase: 'settle', activeLine: L('pop (d, v)'), value: v, cost: d, message: `Expand ${v} with cost ${d}.` })
     for (let position = 0; position < width; position++) {
       const place = 10 ** (width - 1 - position)
       const digit = Math.floor(v / place) % 10
@@ -55,17 +55,17 @@ export function buildTrace({ n, m }) {
       if (digit < 9) options.push(v + place)
       if (digit > 0) options.push(v - place)
       for (const w of options) {
-        if (isPrime(w)) { frames.push({ phase: 'relax', activeLine: L('for each allowed w that is not prime'), value: w, cost: null, message: `${w} is prime, so that change is not allowed.` }); continue }
+        if (isPrime(w)) { frames.push({ pythonLine: 36, phase: 'relax', activeLine: L('for each allowed w that is not prime'), value: w, cost: null, message: `${w} is prime, so that change is not allowed.` }); continue }
         const nd = d + w
         if (nd < (dist.get(w) ?? Infinity)) {
           dist.set(w, nd)
           heap.push([nd, w])
-          frames.push({ phase: 'relax', activeLine: L('if d + w < dist[w]'), value: w, cost: nd, message: `Change digit ${position + 1} of ${v} to reach ${w}: cost ${d} + ${w} = ${nd}.` })
+          frames.push({ pythonLine: 38, phase: 'relax', activeLine: L('if d + w < dist[w]'), value: w, cost: nd, message: `Change digit ${position + 1} of ${v} to reach ${w}: cost ${d} + ${w} = ${nd}.` })
         }
       }
     }
   }
-  if (result === -1) frames.push({ phase: 'done', activeLine: L('return -1'), value: m, cost: null, message: `${m} cannot be reached without passing through a prime: return -1.` })
+  if (result === -1) frames.push({ pythonLine: 41, phase: 'done', activeLine: L('return -1'), value: m, cost: null, message: `${m} cannot be reached without passing through a prime: return -1.` })
   return { input: { n, m }, result, frames }
 }
 

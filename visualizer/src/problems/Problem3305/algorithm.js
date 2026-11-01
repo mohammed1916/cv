@@ -8,7 +8,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ word, k }) {
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), start: 0, end: -1, seen: '', consonants: 0, total: 0, message: `Count substrings that contain a, e, i, o and u, with exactly ${k} consonants.` }]
+  const frames = [{ pythonLine: 3, phase: 'start', activeLine: L('set total to zero'), start: 0, end: -1, seen: '', consonants: 0, total: 0, message: `Count substrings that contain a, e, i, o and u, with exactly ${k} consonants.` }]
   let total = 0
   for (let start = 0; start < word.length; start++) {
     const seen = new Set()
@@ -17,18 +17,18 @@ export function buildTrace({ word, k }) {
       const letter = word[end]
       if (VOWELS.includes(letter)) seen.add(letter)
       else consonants++
-      frames.push({ phase: 'extend', activeLine: L('add the letter at j'), start, end, seen: [...seen].sort().join(''), consonants, total, message: `Add ${letter}. The substring ${start} to ${end} has ${consonants} consonants.` })
+      frames.push({ pythonLine: 8, phase: 'extend', activeLine: L('add the letter at j'), start, end, seen: [...seen].sort().join(''), consonants, total, message: `Add ${letter}. The substring ${start} to ${end} has ${consonants} consonants.` })
       if (consonants > k) {
-        frames.push({ phase: 'stop', activeLine: L('stop this start'), start, end, seen: [...seen].sort().join(''), consonants, total, message: `More than ${k} consonants, so later ends from ${start} cannot count.` })
+        frames.push({ pythonLine: 14, phase: 'stop', activeLine: L('stop this start'), start, end, seen: [...seen].sort().join(''), consonants, total, message: `More than ${k} consonants, so later ends from ${start} cannot count.` })
         break
       }
       if (seen.size === 5 && consonants === k) {
         total++
-        frames.push({ phase: 'count', activeLine: L('add one to total'), start, end, seen: [...seen].sort().join(''), consonants, total, message: `Substring ${start} to ${end} has all vowels and ${k} consonants. Total ${total}.` })
+        frames.push({ pythonLine: 16, phase: 'count', activeLine: L('add one to total'), start, end, seen: [...seen].sort().join(''), consonants, total, message: `Substring ${start} to ${end} has all vowels and ${k} consonants. Total ${total}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), start: 0, end: word.length - 1, seen: '', consonants: 0, total, message: `There are ${total} matching substrings.` })
+  frames.push({ pythonLine: 17, phase: 'done', activeLine: L('return total'), start: 0, end: word.length - 1, seen: '', consonants: 0, total, message: `There are ${total} matching substrings.` })
   return { input: { word, k }, result: total, frames }
 }
 

@@ -21,17 +21,17 @@ export function buildTrace({ n, x, y }) {
   const S = stirling(n)
   const terms = []
   let total = 0n
-  const frames = [{ phase: 'start', activeLine: L('set total to zero'), j: 0, total: 0, message: `${n} performers, ${x} stages, scores from 1 to ${y}.` }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('set total to zero'), j: 0, total: 0, message: `${n} performers, ${x} stages, scores from 1 to ${y}.` }]
   for (let j = 1; j <= Math.min(n, x); j++) {
     let perm = 1n
     for (let t = 0; t < j; t++) perm *= BigInt(x - t)
     const term = S[n][j] * perm * BigInt(y) ** BigInt(j)
     total += term
     terms.push({ j, term: Number(term % MOD) })
-    frames.push({ phase: 'term', activeLine: L('for each number of used stages'), j, total: Number(total % MOD), message: `${j} used stage(s): ${S[n][j]} groupings, ${perm} stage choices, ${y}^${j} scores.` })
+    frames.push({ pythonLine: 12, phase: 'term', activeLine: L('for each number of used stages'), j, total: Number(total % MOD), message: `${j} used stage(s): ${S[n][j]} groupings, ${perm} stage choices, ${y}^${j} scores.` })
   }
   const result = Number(total % MOD)
-  frames.push({ phase: 'done', activeLine: L('return total modulo'), j: Math.min(n, x), total: result, message: `Possible ways: ${result}.` })
+  frames.push({ pythonLine: 16, phase: 'done', activeLine: L('return total modulo'), j: Math.min(n, x), total: result, message: `Possible ways: ${result}.` })
   return { input: { n, x, y }, result, frames, terms }
 }
 

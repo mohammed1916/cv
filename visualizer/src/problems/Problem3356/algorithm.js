@@ -25,16 +25,16 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 
 export function buildTrace({ nums, queries }) {
   const n = nums.length
-  const frames = [{ phase: 'start', activeLine: L('let n be'), index: -1, supply: null, k: 0, message: 'Try longer and longer prefixes of the queries.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('let n be'), index: -1, supply: null, k: 0, message: 'Try longer and longer prefixes of the queries.' }]
   let answer = -1
   for (let k = 0; k <= queries.length && answer === -1; k++) {
     const supply = Array(n).fill(0)
     for (const [l, r, val] of queries.slice(0, k)) for (let i = l; i <= r; i++) supply[i] += val
     const short = supply.findIndex((s, i) => s < nums[i])
-    frames.push({ phase: short === -1 ? 'done' : 'check', activeLine: L('if every position'), index: short === -1 ? -1 : short, supply: [...supply], k, message: short === -1 ? `The first ${k} queries supply every position.` : `With ${k} queries, position ${short} gets ${supply[short]} but needs ${nums[short]}.` })
+    frames.push({ pythonLine: short === -1 ? 9 : 8, phase: short === -1 ? 'done' : 'check', activeLine: L('if every position'), index: short === -1 ? -1 : short, supply: [...supply], k, message: short === -1 ? `The first ${k} queries supply every position.` : `With ${k} queries, position ${short} gets ${supply[short]} but needs ${nums[short]}.` })
     if (short === -1) answer = k
   }
-  if (answer === -1) frames.push({ phase: 'done', activeLine: L('return minus one'), index: -1, supply: null, k: queries.length, message: 'No prefix of queries is enough.' })
+  if (answer === -1) frames.push({ pythonLine: 10, phase: 'done', activeLine: L('return minus one'), index: -1, supply: null, k: queries.length, message: 'No prefix of queries is enough.' })
   return { input: { nums, queries }, result: answer, frames }
 }
 

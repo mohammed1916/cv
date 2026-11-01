@@ -27,20 +27,20 @@ export function buildTrace({ n, m, k }) {
   const snap = () => table.map(row => [...row])
   for (let i = 0; i < n; i++) {
     table[i][0] = 1
-    frames.push({ phase: 'pascal', cell: [i, 0], table: snap(), power: null, activeLine: L('set table[i][0]'), message: `C(${i}, 0) = 1.` })
+    frames.push({ pythonLine: 5, phase: 'pascal', cell: [i, 0], table: snap(), power: null, activeLine: L('set table[i][0]'), message: `C(${i}, 0) = 1.` })
     for (let j = 1; j <= Math.min(i, k); j++) {
       table[i][j] = (table[i - 1][j - 1] + table[i - 1][j]) % MOD
-      frames.push({ phase: 'pascal', cell: [i, j], table: snap(), power: null, activeLine: L('set table[i][j]'), message: `C(${i}, ${j}) = ${table[i][j]}, the choose-or-skip sum.` })
+      frames.push({ pythonLine: 7, phase: 'pascal', cell: [i, j], table: snap(), power: null, activeLine: L('set table[i][j]'), message: `C(${i}, ${j}) = ${table[i][j]}, the choose-or-skip sum.` })
     }
   }
   let power = 1
-  frames.push({ phase: 'power', cell: null, table: snap(), power, activeLine: L('set power to 1'), message: `The remaining ${n - 1 - k} pair(s) must change, so the factor is (${m}-1) for each.` })
+  frames.push({ pythonLine: 8, phase: 'power', cell: null, table: snap(), power, activeLine: L('set power to 1'), message: `The remaining ${n - 1 - k} pair(s) must change, so the factor is (${m}-1) for each.` })
   for (let step = 1; step <= n - 1 - k; step++) {
     power = (power * (m - 1)) % MOD
-    frames.push({ phase: 'power', cell: null, table: snap(), power, activeLine: L('multiply power by'), message: `Step ${step}: power becomes ${power}.` })
+    frames.push({ pythonLine: 10, phase: 'power', cell: null, table: snap(), power, activeLine: L('multiply power by'), message: `Step ${step}: power becomes ${power}.` })
   }
   const result = (((m * table[n - 1][k]) % MOD) * power) % MOD
-  frames.push({ phase: 'done', cell: [n - 1, k], table: snap(), power, activeLine: L('return m * table'), result, message: `Number of arrays: ${result}.` })
+  frames.push({ pythonLine: 11, phase: 'done', cell: [n - 1, k], table: snap(), power, activeLine: L('return m * table'), result, message: `Number of arrays: ${result}.` })
   return { input: { n, m, k }, result, frames }
 }
 

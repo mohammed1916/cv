@@ -21,7 +21,7 @@ export function buildTrace({ nums, target }) {
   const subsetLcm = mask => lcmOf(target.filter((_, j) => mask & (1 << j)))
   let dp = new Array(1 << m).fill(Infinity)
   dp[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set cost[0] to zero'), element: -1, dp: dp.slice(), total: Infinity, message: `Cover the ${m} target(s) using the ${nums.length} number(s).` }]
+  const frames = [{ pythonLine: 9, phase: 'start', activeLine: L('set cost[0] to zero'), element: -1, dp: dp.slice(), total: Infinity, message: `Cover the ${m} target(s) using the ${nums.length} number(s).` }]
   nums.forEach((x, index) => {
     const next = dp.slice()
     for (let mask = 0; mask <= full; mask++) {
@@ -34,10 +34,10 @@ export function buildTrace({ nums, target }) {
       }
     }
     dp = next
-    frames.push({ phase: 'element', activeLine: L('for each number x'), element: index, dp: dp.slice(), total: dp[full], message: `Number ${x} can cover any subset of targets; cheapest cost to cover all so far: ${dp[full]}.` })
+    frames.push({ pythonLine: 10, phase: 'element', activeLine: L('for each number x'), element: index, dp: dp.slice(), total: dp[full], message: `Number ${x} can cover any subset of targets; cheapest cost to cover all so far: ${dp[full]}.` })
   })
   const result = dp[full]
-  frames.push({ phase: 'done', activeLine: L('return cost[full set'), element: nums.length - 1, dp: dp.slice(), total: result, message: `Minimum increments: ${result}.` })
+  frames.push({ pythonLine: 27, phase: 'done', activeLine: L('return cost[full set'), element: nums.length - 1, dp: dp.slice(), total: result, message: `Minimum increments: ${result}.` })
   return { input: { nums, target }, result, frames }
 }
 

@@ -18,17 +18,17 @@ export function buildTrace({ mountainHeight, workerTimes }) {
   let lo = 1
   let hi = Math.min(...workerTimes) * ((mountainHeight * (mountainHeight + 1)) / 2)
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, cuts: workerTimes.map(() => 0), message: `The mountain of height ${mountainHeight} needs between ${lo} and ${hi} seconds.` }]
+  const frames = [{ pythonLine: 11, phase: 'start', activeLine: L('set low to 1'), lo, hi, mid: null, verdict: null, cuts: workerTimes.map(() => 0), message: `The mountain of height ${mountainHeight} needs between ${lo} and ${hi} seconds.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const cuts = cutsWithin(mid)
     const total = cuts.reduce((a, b) => a + b, 0)
     const verdict = total >= mountainHeight
-    frames.push({ phase: 'probe', activeLine: L('if the workers can remove the height in mid seconds'), lo, hi, mid, verdict, cuts, message: `${mid} seconds: workers remove ${total} layers, ${verdict ? 'enough' : 'not enough'} for ${mountainHeight}.` })
+    frames.push({ pythonLine: 15, phase: 'probe', activeLine: L('if the workers can remove the height in mid seconds'), lo, hi, mid, verdict, cuts, message: `${mid} seconds: workers remove ${total} layers, ${verdict ? 'enough' : 'not enough'} for ${mountainHeight}.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, cuts: cutsWithin(lo), message: `Minimum time: ${lo} seconds.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, cuts: cutsWithin(lo), message: `Minimum time: ${lo} seconds.` })
   return { input: { mountainHeight, workerTimes }, domain, result: lo, frames }
 }
 

@@ -11,27 +11,27 @@ export function buildTrace({ nums }) {
   const stack = []
   let operations = 0
   const frames = []
-  const frame = (phase, line, index, message) => frames.push({ phase, activeLine: line, index, stack: [...stack], operations, message })
-  frame('start', L('set operations to 0'), -1, 'Start with no operations and an empty stack.')
+  const frame = (phase, line, index, message, pythonLine) => frames.push({ phase, pythonLine, activeLine: line, index, stack: [...stack], operations, message })
+  frame('start', L('set operations to 0'), -1, 'Start with no operations and an empty stack.', 3)
   for (let i = 0; i < nums.length; i++) {
     const x = nums[i]
     while (stack.length && stack[stack.length - 1] > x) {
       const top = stack.pop()
-      frame('pop', L('remove the top'), i, `${top} is larger than ${x}, so it leaves the stack.`)
+      frame('pop', L('remove the top'), i, `${top} is larger than ${x}, so it leaves the stack.`, 6)
     }
     if (x === 0) {
-      frame('zero', L('skip x'), i, `${x} is already zero and needs no operation.`)
+      frame('zero', L('skip x'), i, `${x} is already zero and needs no operation.`, 8)
       continue
     }
     if (!stack.length || stack[stack.length - 1] < x) {
       stack.push(x)
       operations++
-      frame('push', L('add 1 to operations'), i, `${x} needs its own operation. Operations so far: ${operations}.`)
+      frame('push', L('add 1 to operations'), i, `${x} needs its own operation. Operations so far: ${operations}.`, 11)
     } else {
-      frame('same', L('if the stack is empty'), i, `${x} is already on top of the stack, so it shares an operation.`)
+      frame('same', L('if the stack is empty'), i, `${x} is already on top of the stack, so it shares an operation.`, 9)
     }
   }
-  frame('done', L('return operations'), -1, `Minimum operations: ${operations}.`)
+  frame('done', L('return operations'), -1, `Minimum operations: ${operations}.`, 12)
   return { input: { nums }, result: operations, frames }
 }
 

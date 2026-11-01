@@ -12,24 +12,24 @@ export function buildTrace({ word1, word2 }) {
   const have = new Map()
   const covers = () => [...need].every(([c, amount]) => (have.get(c) ?? 0) >= amount)
   const label = () => [...have].map(([c, k]) => `${c}${k}`).join(' ')
-  const frames = [{ phase: 'start', activeLine: L('set need to'), left: 0, right: 0, have: '', total: 0, message: `Grow a window until it covers ${word2}. Every later end then works too.` }]
+  const frames = [{ pythonLine: 4, phase: 'start', activeLine: L('set need to'), left: 0, right: 0, have: '', total: 0, message: `Grow a window until it covers ${word2}. Every later end then works too.` }]
   let right = 0, total = 0
   for (let left = 0; left < n; left++) {
     while (right < n && !covers()) {
       have.set(word1[right], (have.get(word1[right]) ?? 0) + 1)
       right++
-      frames.push({ phase: 'extend', activeLine: L('add the letter at right'), left, right, have: label(), total, message: `Add ${word1[right - 1]}. The window ${left} to ${right - 1} ${covers() ? 'covers' : 'does not yet cover'} ${word2}.` })
+      frames.push({ pythonLine: 13, phase: 'extend', activeLine: L('add the letter at right'), left, right, have: label(), total, message: `Add ${word1[right - 1]}. The window ${left} to ${right - 1} ${covers() ? 'covers' : 'does not yet cover'} ${word2}.` })
     }
     if (covers()) {
       total += n - right + 1
-      frames.push({ phase: 'count', activeLine: L('add word1 length minus right'), left, right, have: label(), total, message: `Ends ${right - 1} to ${n - 1} all work for start ${left}. Total ${total}.` })
+      frames.push({ pythonLine: 16, phase: 'count', activeLine: L('add word1 length minus right'), left, right, have: label(), total, message: `Ends ${right - 1} to ${n - 1} all work for start ${left}. Total ${total}.` })
     }
     const out = word1[left]
     have.set(out, have.get(out) - 1)
     if (have.get(out) === 0) have.delete(out)
-    frames.push({ phase: 'shrink', activeLine: L('remove the letter at left'), left: left + 1, right, have: label(), total, message: `Remove ${out} from the left. The next start is ${left + 1}.` })
+    frames.push({ pythonLine: 17, phase: 'shrink', activeLine: L('remove the letter at left'), left: left + 1, right, have: label(), total, message: `Remove ${out} from the left. The next start is ${left + 1}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), left: n, right, have: '', total, message: `There are ${total} qualifying substrings.` })
+  frames.push({ pythonLine: 20, phase: 'done', activeLine: L('return total'), left: n, right, have: '', total, message: `There are ${total} qualifying substrings.` })
   return { input: { word1, word2 }, result: total, frames }
 }
 

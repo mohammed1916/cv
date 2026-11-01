@@ -17,18 +17,18 @@ export function buildTrace(input) {
   const counts = new Map()
   for (const w of words) for (const p of prefixesOf(w)) counts.set(p, (counts.get(p) ?? 0) + 1)
   const answer = []
-  const frames = [{ phase: 'start', activeLine: L('count how many words'), removed: -1, best: 0, answer: [], message: `Count how many words start with each prefix; k is ${k}.` }]
+  const frames = [{ pythonLine: 8, phase: 'start', activeLine: L('count how many words'), removed: -1, best: 0, answer: [], message: `Count how many words start with each prefix; k is ${k}.` }]
   words.forEach((w, i) => {
     const ps = prefixesOf(w)
     for (const p of ps) counts.set(p, counts.get(p) - 1)
-    frames.push({ phase: 'remove', activeLine: L('take one word out'), removed: i, best: 0, answer: answer.slice(), message: `Remove "${w}" at ${i}; its prefixes lose one word each.` })
+    frames.push({ pythonLine: 13, phase: 'remove', activeLine: L('take one word out'), removed: i, best: 0, answer: answer.slice(), message: `Remove "${w}" at ${i}; its prefixes lose one word each.` })
     let best = 0
     for (const [p, c] of counts) if (c >= k && p.length > best) best = p.length
     answer.push(best)
     for (const p of ps) counts.set(p, counts.get(p) + 1)
-    frames.push({ phase: 'record', activeLine: L('add best to answer'), removed: i, best, answer: answer.slice(), message: `Without "${w}", the longest prefix shared by ${k} words has length ${best}.` })
+    frames.push({ pythonLine: 18, phase: 'record', activeLine: L('add best to answer'), removed: i, best, answer: answer.slice(), message: `Without "${w}", the longest prefix shared by ${k} words has length ${best}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), removed: -1, best: 0, answer: answer.slice(), message: `Answer: [${answer.join(', ')}].` })
+  frames.push({ pythonLine: 21, phase: 'done', activeLine: L('return answer'), removed: -1, best: 0, answer: answer.slice(), message: `Answer: [${answer.join(', ')}].` })
   return { input, result: answer, frames }
 }
 

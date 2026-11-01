@@ -11,10 +11,10 @@ export function parseInput(text) {
 export function buildTrace({ nums, k }) {
   let total = 0
   for (const v of nums) total += v
-  const frames = [{ phase: 'start', activeLine: L('set total to'), total, remainder: null, message: `The array sums to ${total}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set total to'), total, remainder: null, message: `The array sums to ${total}.` }]
   const remainder = total % k
-  frames.push({ phase: 'remainder', activeLine: L('set remainder to'), total, remainder, message: `${total} leaves remainder ${remainder} when divided by ${k}.` })
-  frames.push({ phase: 'done', activeLine: L('return remainder'), total, remainder, message: `Decrease the sum by ${remainder} to make it divisible by ${k}.` })
+  frames.push({ pythonLine: 3, phase: 'remainder', activeLine: L('set remainder to'), total, remainder, message: `${total} leaves remainder ${remainder} when divided by ${k}.` })
+  frames.push({ pythonLine: 4, phase: 'done', activeLine: L('return remainder'), total, remainder, message: `Decrease the sum by ${remainder} to make it divisible by ${k}.` })
   return { input: { nums, k }, result: remainder, total, frames }
 }
 

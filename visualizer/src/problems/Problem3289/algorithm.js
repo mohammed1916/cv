@@ -20,20 +20,20 @@ export function buildTrace(input) {
   const seen = new Set()
   const duplicates = []
   const frames = []
-  const frame = (phase, line, index, message) => frames.push({ phase, activeLine: line, index, duplicates: [...duplicates], message })
-  frame('start', L('set seen to an empty set'), -1, 'Scan the list once and remember every value seen so far.')
+  const frame = (phase, line, index, message, pythonLine) => frames.push({ phase, pythonLine, activeLine: line, index, duplicates: [...duplicates], message })
+  frame('start', L('set seen to an empty set'), -1, 'Scan the list once and remember every value seen so far.', 2)
   nums.forEach((value, index) => {
     if (seen.has(value)) {
       duplicates.push(value)
-      frame('repeat', L('add value to duplicates'), index, `${value} was seen before, so it is one of the sneaky numbers.`)
+      frame('repeat', L('add value to duplicates'), index, `${value} was seen before, so it is one of the sneaky numbers.`, 6)
     } else {
       seen.add(value)
-      frame('scan', L('add value to seen'), index, `${value} is new, so remember it.`)
+      frame('scan', L('add value to seen'), index, `${value} is new, so remember it.`, 8)
     }
   })
   duplicates.sort((a, b) => a - b)
-  frame('sort', L('sort duplicates'), -1, `The two numbers are ${duplicates.join(' and ')}.`)
-  frame('done', L('return duplicates'), -1, 'Report the two duplicates in ascending order.')
+  frame('sort', L('sort duplicates'), -1, `The two numbers are ${duplicates.join(' and ')}.`, 9)
+  frame('done', L('return duplicates'), -1, 'Report the two duplicates in ascending order.', 10)
   return { input, result: duplicates, frames }
 }
 

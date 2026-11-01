@@ -12,7 +12,7 @@ export function buildTrace({ s }) {
   const input = { s }
   const counts = Array(26).fill(0)
   for (const ch of s) counts[ch.charCodeAt(0) - 97] += 1
-  const frames = [{ phase: 'count', activeLine: L('count how many times'), letter: null, left: '', middle: '', message: 'Count the letters. A palindrome has at most one letter with an odd count.' }]
+  const frames = [{ pythonLine: 4, phase: 'count', activeLine: L('count how many times'), letter: null, left: '', middle: '', message: 'Count the letters. A palindrome has at most one letter with an odd count.' }]
   let left = ''
   let middle = ''
   for (let c = 0; c < 26; c++) {
@@ -21,15 +21,15 @@ export function buildTrace({ s }) {
     const half = Math.floor(counts[c] / 2)
     if (half > 0) {
       left += letter.repeat(half)
-      frames.push({ phase: 'place', activeLine: L('add half of its count'), letter, left, middle, message: `Add ${half} ${letter} to the left half.` })
+      frames.push({ pythonLine: 11, phase: 'place', activeLine: L('add half of its count'), letter, left, middle, message: `Add ${half} ${letter} to the left half.` })
     }
     if (counts[c] % 2 === 1) {
       middle = letter
-      frames.push({ phase: 'middle', activeLine: L('the odd letter goes in the middle'), letter, left, middle, message: `${letter} has an odd count, so it goes in the middle.` })
+      frames.push({ pythonLine: 13, phase: 'middle', activeLine: L('the odd letter goes in the middle'), letter, left, middle, message: `${letter} has an odd count, so it goes in the middle.` })
     }
   }
   const result = left + middle + [...left].reverse().join('')
-  frames.push({ phase: 'done', activeLine: L('return left, then middle'), letter: null, left, middle, message: `Smallest palindrome: ${result}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return left, then middle'), letter: null, left, middle, message: `Smallest palindrome: ${result}.` })
   return { input, result, frames }
 }
 

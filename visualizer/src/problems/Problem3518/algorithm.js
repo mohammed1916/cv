@@ -34,9 +34,9 @@ export function buildTrace({ s, k }) {
   const h = counts.map(c => Math.floor(c / 2))
   const middle = counts.map((c, i) => (c % 2 === 1 ? String.fromCharCode(97 + i) : '')).join('')
   let rank = BigInt(k)
-  const frames = [{ phase: 'start', activeLine: L('count the letters'), left: '', rank: Number(rank), message: 'Only the left half matters: the palindrome is fixed by its half and the middle letter.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('count the letters'), left: '', rank: Number(rank), message: 'Only the left half matters: the palindrome is fixed by its half and the middle letter.' }]
   if (arrangements(h) < rank) {
-    frames.push({ phase: 'none', activeLine: L('return the empty string'), left: '', rank: Number(rank), message: `There are fewer than ${k} palindromes, so the answer is empty.` })
+    frames.push({ pythonLine: 17, phase: 'none', activeLine: L('return the empty string'), left: '', rank: Number(rank), message: `There are fewer than ${k} palindromes, so the answer is empty.` })
     return { input, result: '', frames }
   }
   let left = ''
@@ -48,16 +48,16 @@ export function buildTrace({ s, k }) {
       const block = arrangements(h)
       if (rank <= block) {
         left += String.fromCharCode(97 + c)
-        frames.push({ phase: 'place', activeLine: L('append c to left'), left, rank: Number(rank), message: `Choose ${String.fromCharCode(97 + c)} next: its block holds ${block} palindromes and contains the target.` })
+        frames.push({ pythonLine: 27, phase: 'place', activeLine: L('append c to left'), left, rank: Number(rank), message: `Choose ${String.fromCharCode(97 + c)} next: its block holds ${block} palindromes and contains the target.` })
         break
       }
       rank -= block
       h[c] += 1
-      frames.push({ phase: 'skip', activeLine: L('subtract block from k'), left, rank: Number(rank), message: `Skip the ${String.fromCharCode(97 + c)} block of ${block} palindromes. k becomes ${rank}.` })
+      frames.push({ pythonLine: 29, phase: 'skip', activeLine: L('subtract block from k'), left, rank: Number(rank), message: `Skip the ${String.fromCharCode(97 + c)} block of ${block} palindromes. k becomes ${rank}.` })
     }
   }
   const result = left + middle + [...left].reverse().join('')
-  frames.push({ phase: 'done', activeLine: L('return left, then middle'), left, rank: Number(rank), message: `The ${k}-th palindrome is ${result}.` })
+  frames.push({ pythonLine: 32, phase: 'done', activeLine: L('return left, then middle'), left, rank: Number(rank), message: `The ${k}-th palindrome is ${result}.` })
   return { input, result, frames }
 }
 

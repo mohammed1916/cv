@@ -14,15 +14,15 @@ export function buildTrace({ nums, k, x }) {
   for (let start = 0; start + k <= nums.length; start++) {
     const counts = new Map()
     for (const value of nums.slice(start, start + k)) counts.set(value, (counts.get(value) || 0) + 1)
-    frames.push({ phase: 'count', activeLine: L('count how many times each value'), left: start, right: start + k - 1, ranked: [], chosen: [], total: null, answers: [...answers], message: `Window at ${start}: count each value.` })
+    frames.push({ pythonLine: 6, phase: 'count', activeLine: L('count how many times each value'), left: start, right: start + k - 1, ranked: [], chosen: [], total: null, answers: [...answers], message: `Window at ${start}: count each value.` })
     const ranked = [...counts.entries()].map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count || b.value - a.value)
     const chosen = ranked.slice(0, x)
-    frames.push({ phase: 'rank', activeLine: L('sort the values'), left: start, right: start + k - 1, ranked, chosen, total: null, answers: [...answers], message: `Most frequent first, larger value first on ties. The top ${x} are kept.` })
+    frames.push({ pythonLine: 7, phase: 'rank', activeLine: L('sort the values'), left: start, right: start + k - 1, ranked, chosen, total: null, answers: [...answers], message: `Most frequent first, larger value first on ties. The top ${x} are kept.` })
     const total = chosen.reduce((sum, item) => sum + item.value * item.count, 0)
     answers.push(total)
-    frames.push({ phase: 'sum', activeLine: L('add value times count'), left: start, right: start + k - 1, ranked, chosen, total, answers: [...answers], message: `X-sum of this window: ${total}.` })
+    frames.push({ pythonLine: 10, phase: 'sum', activeLine: L('add value times count'), left: start, right: start + k - 1, ranked, chosen, total, answers: [...answers], message: `X-sum of this window: ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), left: nums.length - k, right: nums.length - 1, ranked: [], chosen: [], total: null, answers: [...answers], message: `X-sums: [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 12, phase: 'done', activeLine: L('return answers'), left: nums.length - k, right: nums.length - 1, ranked: [], chosen: [], total: null, answers: [...answers], message: `X-sums: [${answers.join(', ')}].` })
   return { input: { nums, k, x }, result: answers, frames }
 }
 

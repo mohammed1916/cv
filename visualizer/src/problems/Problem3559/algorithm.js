@@ -36,7 +36,7 @@ export function buildTrace(input) {
     const v = order[i]
     for (const w of adj[v]) if (!seen[w]) { seen[w] = true; parent[w] = v; depth[w] = depth[v] + 1; order.push(w) }
   }
-  const frames = [{ phase: 'start', activeLine: L('root the tree at node 1'), query: null, answer: null, message: 'Root the tree at node 1 so every node knows its depth and parent.' }]
+  const frames = [{ pythonLine: 11, phase: 'start', activeLine: L('root the tree at node 1'), query: null, answer: null, message: 'Root the tree at node 1 so every node knows its depth and parent.' }]
   const answers = []
   for (const [u, v] of queries) {
     let a = u
@@ -49,9 +49,9 @@ export function buildTrace(input) {
     }
     const ways = length === 0 ? 0 : 2 ** (length - 1) % MOD
     answers.push(ways)
-    frames.push({ phase: 'query', activeLine: L('climb the deeper node'), query: [u, v], answer: ways, message: `Path ${u} to ${v} has ${length} edge${length === 1 ? '' : 's'}, so it has ${ways} odd assignments.` })
+    frames.push({ pythonLine: 24, phase: 'query', activeLine: L('climb the deeper node'), query: [u, v], answer: ways, message: `Path ${u} to ${v} has ${length} edge${length === 1 ? '' : 's'}, so it has ${ways} odd assignments.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), query: null, answer: null, message: 'Every query has been answered.' })
+  frames.push({ pythonLine: 29, phase: 'done', activeLine: L('return the answers'), query: null, answer: null, message: 'Every query has been answered.' })
   return { input, result: answers, frames }
 }
 

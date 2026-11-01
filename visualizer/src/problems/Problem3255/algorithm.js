@@ -11,17 +11,17 @@ export function buildTrace({ nums, k }) {
   const frames = []
   const results = []
   let run = 0
-  frames.push({ phase: 'start', activeLine: L('set run to 0'), at: -1, run, results: [], message: 'No values scanned yet. The run of consecutive rising values is empty.' })
+  frames.push({ pythonLine: 3, phase: 'start', activeLine: L('set run to 0'), at: -1, run, results: [], message: 'No values scanned yet. The run of consecutive rising values is empty.' })
   for (let i = 0; i < nums.length; i++) {
     if (i > 0 && nums[i] === nums[i - 1] + 1) run++
     else run = 1
-    frames.push({ phase: 'scan', activeLine: L('if the value is exactly one more'), at: i, run, results: [...results], message: `Value ${nums[i]} at ${i}: the run ending here has length ${run}.` })
+    frames.push({ pythonLine: 5, phase: 'scan', activeLine: L('if the value is exactly one more'), at: i, run, results: [...results], message: `Value ${nums[i]} at ${i}: the run ending here has length ${run}.` })
     if (i >= k - 1) {
       results.push(run >= k ? nums[i] : -1)
-      frames.push({ phase: 'record', activeLine: L('if run is at least k'), at: i, run, results: [...results], message: run >= k ? `The window ending at ${i} is a run, so its power is ${nums[i]}.` : `The window ending at ${i} is not a long enough run, so its power is -1.` })
+      frames.push({ pythonLine: 10, phase: 'record', activeLine: L('if run is at least k'), at: i, run, results: [...results], message: run >= k ? `The window ending at ${i} is a run, so its power is ${nums[i]}.` : `The window ending at ${i} is not a long enough run, so its power is -1.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return results'), at: -1, run, results: [...results], message: `Powers: [${results.join(', ')}].` })
+  frames.push({ pythonLine: 11, phase: 'done', activeLine: L('return results'), at: -1, run, results: [...results], message: `Powers: [${results.join(', ')}].` })
   return { input: { nums, k }, result: results, frames }
 }
 

@@ -14,7 +14,7 @@ export function buildTrace(nums) {
   // ways["a,b"]: number of ways, after the numbers so far, that the first sequence has gcd a and the second has gcd b.
   // A gcd of 0 means that sequence is still empty.
   let ways = new Map([[key(0, 0), 1]])
-  const frames = [{ phase: 'start', activeLine: L('set ways[0][0] to 1'), index: -1, value: null, equal: 0, message: 'Both sequences start empty, so there is one way.' }]
+  const frames = [{ pythonLine: 6, phase: 'start', activeLine: L('set ways[0][0] to 1'), index: -1, value: null, equal: 0, message: 'Both sequences start empty, so there is one way.' }]
   nums.forEach((x, index) => {
     const next = new Map(ways)
     for (const [k, count] of ways) {
@@ -30,14 +30,14 @@ export function buildTrace(nums) {
       const [a, b] = k.split(',').map(Number)
       if (a === b && a > 0) equal = (equal + count) % MOD
     }
-    frames.push({ phase: 'element', activeLine: L('for each pair of gcds'), index, value: x, equal, message: `Number ${x}: pairs with equal non-empty gcds so far: ${equal}.` })
+    frames.push({ pythonLine: 9, phase: 'element', activeLine: L('for each pair of gcds'), index, value: x, equal, message: `Number ${x}: pairs with equal non-empty gcds so far: ${equal}.` })
   })
   let result = 0
   for (const [k, count] of ways) {
     const [a, b] = k.split(',').map(Number)
     if (a === b && a > 0) result = (result + count) % MOD
   }
-  frames.push({ phase: 'done', activeLine: L('return the sum'), index: nums.length - 1, value: null, equal: result, message: `Ordered pairs of disjoint non-empty subsequences with equal gcd: ${result}.` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return the sum'), index: nums.length - 1, value: null, equal: result, message: `Ordered pairs of disjoint non-empty subsequences with equal gcd: ${result}.` })
   return { input: nums, result, frames }
 }
 

@@ -30,13 +30,13 @@ export function buildTrace(input) {
   const counts = Array(numberOfUsers).fill(0)
   const backOnline = Array(numberOfUsers).fill(0)
   const order = [...events].sort((a, b) => Number(a[1]) - Number(b[1]) || rank(a[0]) - rank(b[0]))
-  const frames = [{ phase: 'start', activeLine: L('counts = zero'), counts: [...counts], event: null, message: 'Everyone starts online with no mentions.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('counts = zero'), counts: [...counts], event: null, message: 'Everyone starts online with no mentions.' }]
   for (const [kind, text, value] of order) {
     const time = Number(text)
     if (kind === 'OFFLINE') {
       const u = Number(value)
       backOnline[u] = time + OFFLINE_FOR
-      frames.push({ phase: 'offline', activeLine: L('if it is OFFLINE'), counts: [...counts], event: [kind, text, value], message: `User ${u} goes offline at ${time} and is back at ${time + OFFLINE_FOR}.` })
+      frames.push({ pythonLine: 7, phase: 'offline', activeLine: L('if it is OFFLINE'), counts: [...counts], event: [kind, text, value], message: `User ${u} goes offline at ${time} and is back at ${time + OFFLINE_FOR}.` })
     } else {
       let targets
       let reason
@@ -51,10 +51,10 @@ export function buildTrace(input) {
         reason = 'each id is counted, even when offline'
       }
       for (const u of targets) counts[u] += 1
-      frames.push({ phase: 'message', activeLine: L('if the string is ALL'), counts: [...counts], event: [kind, text, value], message: `Message at ${time} (${reason}): ${targets.length} mention(s).` })
+      frames.push({ pythonLine: 9, phase: 'message', activeLine: L('if the string is ALL'), counts: [...counts], event: [kind, text, value], message: `Message at ${time} (${reason}): ${targets.length} mention(s).` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return counts'), counts: [...counts], event: null, message: `Mentions per user: [${counts.join(', ')}].` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return counts'), counts: [...counts], event: null, message: `Mentions per user: [${counts.join(', ')}].` })
   return { input, result: counts, frames }
 }
 

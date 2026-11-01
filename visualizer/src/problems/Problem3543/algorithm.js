@@ -33,17 +33,17 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { n, edges, k, t } = input
   let reach = Array.from({ length: n }, () => new Set([0]))
-  const frames = [{ phase: 'start', activeLine: L('reach[v] to {0}'), layer: 0, best: null, message: 'Every node starts with one path of 0 edges and total weight 0.' }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('reach[v] to {0}'), layer: 0, best: null, message: 'Every node starts with one path of 0 edges and total weight 0.' }]
   for (let e = 1; e <= k; e++) {
     const next = Array.from({ length: n }, () => new Set())
     for (const [u, v, w] of edges) for (const s of reach[u]) if (s + w < t) next[v].add(s + w)
     reach = next
     const pairs = reach.reduce((count, set) => count + set.size, 0)
-    frames.push({ phase: 'layer', activeLine: L('repeat k times'), layer: e, best: null, message: `${e} edge${e === 1 ? '' : 's'} used: ${pairs} (node, total) pairs are reachable with every total below t.` })
+    frames.push({ pythonLine: 3, phase: 'layer', activeLine: L('repeat k times'), layer: e, best: null, message: `${e} edge${e === 1 ? '' : 's'} used: ${pairs} (node, total) pairs are reachable with every total below t.` })
   }
   let best = -1
   for (const set of reach) for (const s of set) if (s > best) best = s
-  frames.push({ phase: 'done', activeLine: L('return best'), layer: k, best, message: best === -1 ? 'No path with exactly k edges has a total below t, so the answer is -1.' : `The largest total below t is ${best}.` })
+  frames.push({ pythonLine: 14, phase: 'done', activeLine: L('return best'), layer: k, best, message: best === -1 ? 'No path with exactly k edges has a total below t, so the answer is -1.' : `The largest total below t is ${best}.` })
   return { input, result: best, frames }
 }
 

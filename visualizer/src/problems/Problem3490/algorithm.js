@@ -7,7 +7,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ l, r }) {
-  const frames = [{ phase: 'start', activeLine: L('count beautiful numbers'), bound: '', total: 0, message: `Count beautiful numbers in [${l}, ${r}].` }]
+  const frames = [{ pythonLine: 28, phase: 'start', activeLine: L('count beautiful numbers'), bound: '', total: 0, message: `Count beautiful numbers in [${l}, ${r}].` }]
   // Counts beautiful numbers from 1 to x. State: position, digit sum, digit product, tight, started.
   const upTo = (x, label) => {
     if (x <= 0) return 0
@@ -29,13 +29,13 @@ export function buildTrace({ l, r }) {
       return total
     }
     const total = go(0, 0, 1, true, false)
-    frames.push({ phase: 'count', activeLine: L('for each digit d'), bound: label, total, message: `Beautiful numbers from 1 to ${x}: ${total}.` })
+    frames.push({ pythonLine: 17, phase: 'count', activeLine: L('for each digit d'), bound: label, total, message: `Beautiful numbers from 1 to ${x}: ${total}.` })
     return total
   }
   const upper = upTo(r, r)
   const lower = upTo(l - 1, l - 1)
   const result = upper - lower
-  frames.push({ phase: 'done', activeLine: L('return count(r)'), bound: '', total: result, message: `${upper} minus ${lower} gives ${result}.` })
+  frames.push({ pythonLine: 28, phase: 'done', activeLine: L('return count(r)'), bound: '', total: result, message: `${upper} minus ${lower} gives ${result}.` })
   return { input: { l, r }, result, frames }
 }
 

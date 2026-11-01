@@ -17,7 +17,7 @@ export function buildTrace({ nums, queries }) {
     positions.get(v).push(i)
   })
   const circular = (a, b) => Math.min(Math.abs(a - b), n - Math.abs(a - b))
-  const frames = [{ phase: 'start', activeLine: L('set positions to a map'), active: -1, roles: {}, state: {}, message: 'Group the indices by value. The nearest equal element is one of the two neighbours in that group, going around the circle.' }]
+  const frames = [{ pythonLine: 5, phase: 'start', activeLine: L('set positions to a map'), active: -1, roles: {}, state: {}, message: 'Group the indices by value. The nearest equal element is one of the two neighbours in that group, going around the circle.' }]
   const answers = []
   for (const q of queries) {
     const occ = positions.get(nums[q])
@@ -26,7 +26,7 @@ export function buildTrace({ nums, queries }) {
     roles[q] = 'query'
     if (occ.length === 1) {
       answers.push(-1)
-      frames.push({ phase: 'query', activeLine: L('if list has only one index'), active: q, roles, state: { query: q, value: nums[q], answer: -1 }, message: `Index ${q} is the only ${nums[q]}, so the answer is -1.` })
+      frames.push({ pythonLine: 9, phase: 'query', activeLine: L('if list has only one index'), active: q, roles, state: { query: q, value: nums[q], answer: -1 }, message: `Index ${q} is the only ${nums[q]}, so the answer is -1.` })
       continue
     }
     const k = occ.indexOf(q)
@@ -34,9 +34,9 @@ export function buildTrace({ nums, queries }) {
     const next = occ[(k + 1) % occ.length]
     const best = Math.min(circular(q, prev), circular(q, next))
     answers.push(best)
-    frames.push({ phase: 'query', activeLine: L('otherwise set prev and next'), active: q, roles, state: { query: q, value: nums[q], prev, next, answer: best }, message: `Neighbours of ${q} among the ${nums[q]}s are ${prev} and ${next}. Nearest circular distance ${best}.` })
+    frames.push({ pythonLine: 15, phase: 'query', activeLine: L('otherwise set prev and next'), active: q, roles, state: { query: q, value: nums[q], prev, next, answer: best }, message: `Neighbours of ${q} among the ${nums[q]}s are ${prev} and ${next}. Nearest circular distance ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), active: -1, roles: {}, state: { answers: answers.join(', ') }, message: `Return [${answers.join(', ')}].` })
+  frames.push({ pythonLine: 19, phase: 'done', activeLine: L('return answers'), active: -1, roles: {}, state: { answers: answers.join(', ') }, message: `Return [${answers.join(', ')}].` })
   return { input: { nums, queries }, result: answers, items: nums, frames }
 }
 

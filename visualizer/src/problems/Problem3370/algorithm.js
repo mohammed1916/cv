@@ -8,12 +8,12 @@ export function parseInput(text) {
 
 export function buildTrace({ n }) {
   let candidate = 1
-  const frames = [{ phase: 'start', activeLine: L('set candidate to 1'), candidate, message: `Find the smallest all-ones number that is at least ${n}.` }]
+  const frames = [{ pythonLine: 2, phase: 'start', activeLine: L('set candidate to 1'), candidate, message: `Find the smallest all-ones number that is at least ${n}.` }]
   while (candidate < n) {
     candidate = candidate * 2 + 1
-    frames.push({ phase: 'grow', activeLine: L('set candidate to candidate times 2 plus 1'), candidate, message: `${candidate - 1 === 0 ? '' : ''}Candidate is now ${candidate} (binary ${candidate.toString(2)}).${candidate < n ? ' Still below n, so grow it again.' : ' It reaches n.'}` })
+    frames.push({ pythonLine: 4, phase: 'grow', activeLine: L('set candidate to candidate times 2 plus 1'), candidate, message: `${candidate - 1 === 0 ? '' : ''}Candidate is now ${candidate} (binary ${candidate.toString(2)}).${candidate < n ? ' Still below n, so grow it again.' : ' It reaches n.'}` })
   }
-  frames.push({ phase: 'done', activeLine: L('return candidate'), candidate, message: `Smallest number with all set bits that is at least ${n}: ${candidate}.` })
+  frames.push({ pythonLine: 5, phase: 'done', activeLine: L('return candidate'), candidate, message: `Smallest number with all set bits that is at least ${n}: ${candidate}.` })
   return { input: { n }, result: candidate, frames }
 }
 
