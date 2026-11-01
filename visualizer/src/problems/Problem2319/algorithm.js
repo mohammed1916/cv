@@ -10,19 +10,19 @@ export function parseInput(text) {
 export function buildTrace({ grid }) {
   const n = grid.length
   let ok = true
-  const frames = [{ phase: 'start', activeLine: L('set ok to yes'), row: null, col: null, message: 'Assume the matrix is an X-matrix until a cell disagrees.' }]
+  const frames = [{ phase: 'start', activeLine: L('set ok to yes'), pythonLine: P('n = len(grid)'), row: null, col: null, message: 'Assume the matrix is an X-matrix until a cell disagrees.' }]
   for (let i = 0; i < n && ok; i++) {
     for (let j = 0; j < n; j++) {
       const diagonal = i === j || i + j === n - 1
       const good = diagonal ? grid[i][j] !== 0 : grid[i][j] === 0
-      frames.push({ phase: good ? 'check' : 'fail', activeLine: L(good ? 'if j is on a diagonal' : 'if the rule breaks'), row: i, col: j, message: `Cell ${grid[i][j]} at row ${i}, column ${j} ${diagonal ? 'is on a diagonal and must be nonzero' : 'is off the diagonals and must be zero'}${good ? '.' : ', so this is not an X-matrix.'}` })
+      frames.push({ phase: good ? 'check' : 'fail', activeLine: L(good ? 'if j is on a diagonal' : 'if the rule breaks'), pythonLine: P(good ? 'if on_diagonal != (grid[i][j] != 0):' : 'return False'), row: i, col: j, message: `Cell ${grid[i][j]} at row ${i}, column ${j} ${diagonal ? 'is on a diagonal and must be nonzero' : 'is off the diagonals and must be zero'}${good ? '.' : ', so this is not an X-matrix.'}` })
       if (!good) {
         ok = false
         break
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return ok'), row: null, col: null, message: ok ? 'Every diagonal cell is nonzero and every other cell is zero.' : 'Not an X-matrix.' })
+  frames.push({ phase: 'done', activeLine: L('return ok'), pythonLine: P(ok ? 'return True' : 'return False'), row: null, col: null, message: ok ? 'Every diagonal cell is nonzero and every other cell is zero.' : 'Not an X-matrix.' })
   return { input: { grid }, result: ok, frames }
 }
 
@@ -38,6 +38,8 @@ export const code = `check whether a square matrix is an X-matrix
         set ok to no and stop
   return ok`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def is_x_matrix(grid):
     n = len(grid)

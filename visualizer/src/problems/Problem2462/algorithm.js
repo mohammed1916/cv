@@ -18,7 +18,7 @@ export function buildTrace({ costs, k, candidates }) {
   const cheapest = pool => pool.reduce((best, i) => (best === null || cheaper(i, best) ? i : best), null)
   const hired = []
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), picked: -1, front: [...front], back: [...back], hired: [], total, message: 'Split the workers into a front pool and a back pool of candidates.' }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: P('total = 0'), picked: -1, front: [...front], back: [...back], hired: [], total, message: 'Split the workers into a front pool and a back pool of candidates.' }]
   for (let round = 0; round < k; round++) {
     const frontBest = cheapest(front)
     const backBest = cheapest(back)
@@ -33,9 +33,9 @@ export function buildTrace({ costs, k, candidates }) {
     }
     hired.push(picked)
     total += costs[picked]
-    frames.push({ phase: 'hire', activeLine: L('hire the cheaper one'), picked, front: [...front], back: [...back], hired: [...hired], total, message: `Hire worker ${picked} from the ${fromFront ? 'front' : 'back'} pool for ${costs[picked]}. Total ${total}.` })
+    frames.push({ phase: 'hire', activeLine: L('hire the cheaper one'), pythonLine: fromFront ? P('cost, _ = heapq.heappop(front)') : P('cost, _ = heapq.heappop(back)'), picked, front: [...front], back: [...back], hired: [...hired], total, message: `Hire worker ${picked} from the ${fromFront ? 'front' : 'back'} pool for ${costs[picked]}. Total ${total}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), picked: -1, front: [...front], back: [...back], hired: [...hired], total, message: `Total cost to hire ${k} workers: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), picked: -1, front: [...front], back: [...back], hired: [...hired], total, message: `Total cost to hire ${k} workers: ${total}.` })
   return { input: { costs, k, candidates }, result: total, frames }
 }
 
@@ -76,3 +76,5 @@ def total_cost(costs, k, candidates):
         total += cost
     return total
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

@@ -9,20 +9,20 @@ export function buildTrace(s) {
   for (const c of s) unread[c.charCodeAt(0) - 97]++
   const t = []
   let paper = ''
-  const frames = [{ phase: 'start', activeLine: L('set t to'), stack: [], paper: '', message: 'Start with an empty stack t and empty paper.' }]
+  const frames = [{ phase: 'start', pythonLine: P('t = []'), activeLine: L('set t to'), stack: [], paper: '', message: 'Start with an empty stack t and empty paper.' }]
   for (const c of s) {
     t.push(c)
     unread[c.charCodeAt(0) - 97]--
-    frames.push({ phase: 'move', activeLine: L('move c onto'), stack: [...t], paper, message: `Move ${c} from s onto t.` })
+    frames.push({ phase: 'move', pythonLine: P('t.append(c)'), activeLine: L('move c onto'), stack: [...t], paper, message: `Move ${c} from s onto t.` })
     const index = unread.findIndex(count => count > 0)
     const smallest = index === -1 ? '{' : String.fromCharCode(97 + index)
-    frames.push({ phase: 'check', activeLine: L('let smallest'), stack: [...t], paper, smallest: index === -1 ? null : smallest, message: index === -1 ? 'No letters are unread, so t can be emptied.' : `The smallest unread letter is ${smallest}.` })
+    frames.push({ phase: 'check', pythonLine: P('smallest = next('), activeLine: L('let smallest'), stack: [...t], paper, smallest: index === -1 ? null : smallest, message: index === -1 ? 'No letters are unread, so t can be emptied.' : `The smallest unread letter is ${smallest}.` })
     while (t.length && t[t.length - 1] <= smallest) {
       paper += t.pop()
-      frames.push({ phase: 'print', activeLine: L('print the top'), stack: [...t], paper, message: `The top of t is no larger than ${smallest}, so print it.` })
+      frames.push({ phase: 'print', pythonLine: P('paper.append(t.pop())'), activeLine: L('print the top'), stack: [...t], paper, message: `The top of t is no larger than ${smallest}, so print it.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return paper'), stack: [], paper, message: `Printed: ${paper}.` })
+  frames.push({ phase: 'done', pythonLine: P("return ''.join(paper)"), activeLine: L('return paper'), stack: [], paper, message: `Printed: ${paper}.` })
   return { input: s, result: paper, frames }
 }
 
@@ -52,3 +52,5 @@ export const python = `def smallest_paper_string(s):
             paper.append(t.pop())
     return ''.join(paper)
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

@@ -12,7 +12,7 @@ export function buildTrace({ nums, queries }) {
   const prefix = [0]
   for (const value of ordered) prefix.push(prefix[prefix.length - 1] + value)
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('sort nums from smallest'), query: null, count: null, message: `Sorted numbers ${ordered.join(', ')}; prefix sums ${prefix.join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('sort nums from smallest'), pythonLine: P(`ordered = sorted(nums)`), query: null, count: null, message: `Sorted numbers ${ordered.join(', ')}; prefix sums ${prefix.join(', ')}.` }]
   queries.forEach((limit, index) => {
     // Largest count k with prefix[k] <= limit; prefix sums only grow.
     let lo = 0
@@ -23,9 +23,9 @@ export function buildTrace({ nums, queries }) {
       else hi = mid - 1
     }
     answers.push(lo)
-    frames.push({ phase: 'query', activeLine: L('find the largest count'), query: index, count: lo, message: `Limit ${limit}: the smallest ${lo} numbers sum to ${prefix[lo]}, within the limit.` })
+    frames.push({ phase: 'query', activeLine: L('find the largest count'), pythonLine: P(`return [bisect.bisect_right`), query: index, count: lo, message: `Limit ${limit}: the smallest ${lo} numbers sum to ${prefix[lo]}, within the limit.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the stored counts'), query: null, count: null, message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return the stored counts'), pythonLine: P(`return [bisect.bisect_right`), query: null, count: null, message: `Answers: ${answers.join(', ')}.` })
   return { input: { nums, queries }, prefix, result: answers, frames }
 }
 
@@ -37,6 +37,7 @@ export const code = `longest subsequence size under each limit
     store that count
   return the stored counts`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def longest_subsequence_sizes(nums, queries):
     import bisect

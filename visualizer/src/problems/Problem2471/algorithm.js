@@ -52,7 +52,7 @@ function minimumSwaps(values) {
 
 export function buildTrace(input) {
   const root = decodeTree(input.root)
-  const frames = [{ phase: 'start', activeLine: L('set total swaps to zero'), depth: -1, ids: [], values: [], swaps: 0, total: 0, message: 'Sort each level of the tree and add up the swaps.' }]
+  const frames = [{ phase: 'start', activeLine: L('set total swaps to zero'), pythonLine: P('total = 0'), depth: -1, ids: [], values: [], swaps: 0, total: 0, message: 'Sort each level of the tree and add up the swaps.' }]
   let total = 0
   let current = [root]
   let depth = 0
@@ -60,11 +60,11 @@ export function buildTrace(input) {
     const values = current.map(node => node.value)
     const swaps = minimumSwaps(values)
     total += swaps
-    frames.push({ phase: 'level', activeLine: L('count the swaps'), depth, ids: current.map(node => node.id), values, swaps, total, message: `Level ${depth} holds [${values.join(', ')}] and needs ${swaps} swap(s).` })
+    frames.push({ phase: 'level', activeLine: L('count the swaps'), pythonLine: P('total += size - 1'), depth, ids: current.map(node => node.id), values, swaps, total, message: `Level ${depth} holds [${values.join(', ')}] and needs ${swaps} swap(s).` })
     current = current.flatMap(node => [node.left, node.right].filter(Boolean))
     depth++
   }
-  frames.push({ phase: 'done', activeLine: L('return the total swaps'), depth: -1, ids: [], values: [], swaps: 0, total, message: `Total operations: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return the total swaps'), pythonLine: P('return total'), depth: -1, ids: [], values: [], swaps: 0, total, message: `Total operations: ${total}.` })
   return { input, root, result: total, frames }
 }
 
@@ -113,3 +113,5 @@ export const python = `def min_operations(root):
         level = [child for i in level for child in children[i]]
     return total
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

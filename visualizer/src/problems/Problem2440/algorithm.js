@@ -34,7 +34,7 @@ export function buildTrace(input) {
   const total = nums.reduce((sum, v) => sum + v, 0)
   const frames = []
   let k = null, target = null, cuts = 0, left = [...nums], cutNodes = [], node = null
-  const frame = (phase, line, message) => frames.push({ phase, activeLine: line, node, k, target, cuts, left: [...left], cutNodes: [...cutNodes], message })
+  const frame = (phase, line, message) => frames.push({ phase, pythonLine: PY[phase], activeLine: line, node, k, target, cuts, left: [...left], cutNodes: [...cutNodes], message })
   frame('start', L('set total to the sum'), `The total value is ${total}. Try splits into k equal parts, from the most parts down.`)
   let answer = 0
   let found = false
@@ -139,3 +139,6 @@ export const python = `def max_deleted_edges(nums, edges):
             return k - 1
     return 0
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }
+const PY = { start: P('total = sum(nums)'), skip: P('continue'), try: P('target = total // k'), cut: P('cuts += 1'), fail: P('ok = False'), found: P('return k - 1'), done: P('return 0') }

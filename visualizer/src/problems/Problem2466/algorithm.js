@@ -26,16 +26,16 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ low, high, zero, one }) {
   const ways = Array(high + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', length: 0, ways: [...ways], activeLine: L('ways = array of'), message: 'There is one way to build the empty string.' }]
+  const frames = [{ phase: 'start', length: 0, ways: [...ways], activeLine: L('ways = array of'), pythonLine: P('ways[0] = 1'), message: 'There is one way to build the empty string.' }]
   for (let length = 1; length <= high; length++) {
     if (length >= zero) ways[length] += ways[length - zero]
     if (length >= one) ways[length] += ways[length - one]
     ways[length] %= MOD
-    frames.push({ phase: 'length', length, ways: [...ways], activeLine: L('ways[length] = ways[length] modulo'), message: `Strings of length ${length}: ${ways[length]}.` })
+    frames.push({ phase: 'length', length, ways: [...ways], activeLine: L('ways[length] = ways[length] modulo'), pythonLine: P('ways[length] %= MOD'), message: `Strings of length ${length}: ${ways[length]}.` })
   }
   let result = 0
   for (let length = low; length <= high; length++) result = (result + ways[length]) % MOD
-  frames.push({ phase: 'done', length: high, ways: [...ways], activeLine: L('return total'), message: `Good strings with length from ${low} to ${high}: ${result}.` })
+  frames.push({ phase: 'done', length: high, ways: [...ways], activeLine: L('return total'), pythonLine: P('return sum(ways[low:high + 1]) % MOD'), message: `Good strings with length from ${low} to ${high}: ${result}.` })
   return { input: { low, high, zero, one }, result, frames }
 }
 
@@ -51,3 +51,5 @@ export const python = `def count_good_strings(low, high, zero, one):
         ways[length] %= MOD
     return sum(ways[low:high + 1]) % MOD
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

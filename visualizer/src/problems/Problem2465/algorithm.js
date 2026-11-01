@@ -12,15 +12,15 @@ export function buildTrace({ nums }) {
   const seen = new Set()
   let left = 0
   let right = values.length - 1
-  frames.push({ phase: 'sort', activeLine: L('sort nums'), left: -1, right: -1, values, seen: [], message: `Sort the values to ${values.join(', ')}.` })
+  frames.push({ phase: 'sort', activeLine: L('sort nums'), pythonLine: P('values = sorted(nums)'), left: -1, right: -1, values, seen: [], message: `Sort the values to ${values.join(', ')}.` })
   while (left < right) {
     const sum = values[left] + values[right]
     seen.add(sum)
-    frames.push({ phase: 'pair', activeLine: L('add the pair sum'), left, right, values, seen: [...seen].map(s => s / 2), message: `Pair ${values[left]} with ${values[right]}. Their average is ${sum / 2}.` })
+    frames.push({ phase: 'pair', activeLine: L('add the pair sum'), pythonLine: P('seen.add(values[left] + values[right])'), left, right, values, seen: [...seen].map(s => s / 2), message: `Pair ${values[left]} with ${values[right]}. Their average is ${sum / 2}.` })
     left += 1
     right -= 1
   }
-  frames.push({ phase: 'done', activeLine: L('return the size'), left: -1, right: -1, values, seen: [...seen].map(s => s / 2), message: `${seen.size} distinct averages were found.` })
+  frames.push({ phase: 'done', activeLine: L('return the size'), pythonLine: P('return len(seen)'), left: -1, right: -1, values, seen: [...seen].map(s => s / 2), message: `${seen.size} distinct averages were found.` })
   return { input: { nums }, result: seen.size, frames }
 }
 
@@ -44,3 +44,5 @@ export const python = `def distinct_averages(nums):
         right -= 1
     return len(seen)
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

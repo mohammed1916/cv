@@ -49,7 +49,7 @@ export function buildTrace(input) {
   walk(root)
   const startNode = [...byId.values()].find(node => node.value === input.start)
   const minutes = new Map([[startNode.id, 0]])
-  const frames = [{ phase: 'start', activeLine: L('mark the start node'), minute: 0, newly: [startNode.id], infected: { [startNode.id]: 0 }, message: `Node ${input.start} is infected at minute 0.` }]
+  const frames = [{ phase: 'start', activeLine: L('mark the start node'), pythonLine: P(`distance = {begin: 0}`), minute: 0, newly: [startNode.id], infected: { [startNode.id]: 0 }, message: `Node ${input.start} is infected at minute 0.` }]
   let frontier = [startNode.id]
   let minute = 0
   for (;;) {
@@ -62,9 +62,9 @@ export function buildTrace(input) {
     if (next.length === 0) break
     minute++
     frontier = next
-    frames.push({ phase: 'spread', activeLine: L('collect each neighbor'), minute, newly: next, infected: Object.fromEntries(minutes), message: `Minute ${minute}: ${next.map(id => byId.get(id).value).join(', ')} become infected.` })
+    frames.push({ phase: 'spread', activeLine: L('collect each neighbor'), pythonLine: P(`frontier = collected`), minute, newly: next, infected: Object.fromEntries(minutes), message: `Minute ${minute}: ${next.map(id => byId.get(id).value).join(', ')} become infected.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the last minute'), minute, newly: [], infected: Object.fromEntries(minutes), message: `The whole tree is infected after ${minute} minute(s).` })
+  frames.push({ phase: 'done', activeLine: L('return the last minute'), pythonLine: P(`return max(distance.values())`), minute, newly: [], infected: Object.fromEntries(minutes), message: `The whole tree is infected after ${minute} minute(s).` })
   return { input, root, result: minute, frames }
 }
 
@@ -78,6 +78,7 @@ export const code = `amount of time for a binary tree to be infected from a star
     set the frontier to the collected nodes
   return the last minute that infected a node`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def amount_of_time(root, start):
     if not root or root[0] is None:

@@ -17,19 +17,19 @@ export function parseInput(text) {
 export function buildTrace({ n, queries }) {
   const powers = []
   for (let bit = 1; bit <= n; bit *= 2) if (n & bit) powers.push(bit)
-  const frames = [{ phase: 'start', activeLine: L('list the powers of two that sum to n'), powers, query: null, k: null, product: 1, answers: [], message: `The powers of two that sum to ${n} are ${powers.join(', ')}.` }]
+  const frames = [{ phase: 'start', pythonLine: P('powers = []'), activeLine: L('list the powers of two that sum to n'), powers, query: null, k: null, product: 1, answers: [], message: `The powers of two that sum to ${n} are ${powers.join(', ')}.` }]
   const answers = []
   queries.forEach(([left, right], qi) => {
     let product = 1n
-    frames.push({ phase: 'query', activeLine: L('for each query'), powers, query: [left, right], k: null, product: 1, answers: [...answers], message: `Query ${qi + 1}: multiply powers ${left} to ${right}.` })
+    frames.push({ phase: 'query', pythonLine: P('for left, right in queries'), activeLine: L('for each query'), powers, query: [left, right], k: null, product: 1, answers: [...answers], message: `Query ${qi + 1}: multiply powers ${left} to ${right}.` })
     for (let k = left; k <= right; k++) {
       product = (product * BigInt(powers[k])) % MOD
-      frames.push({ phase: 'multiply', activeLine: L('multiply the product by that power'), powers, query: [left, right], k, product: Number(product), answers: [...answers], message: `Multiply by ${powers[k]}: product is ${product}.` })
+      frames.push({ phase: 'multiply', pythonLine: P('product = product * powers[k]'), activeLine: L('multiply the product by that power'), powers, query: [left, right], k, product: Number(product), answers: [...answers], message: `Multiply by ${powers[k]}: product is ${product}.` })
     }
     answers.push(Number(product))
-    frames.push({ phase: 'record', activeLine: L('record the product as the answer'), powers, query: [left, right], k: null, product: Number(product), answers: [...answers], message: `Answer for this query: ${product}.` })
+    frames.push({ phase: 'record', pythonLine: P('answer.append(product)'), activeLine: L('record the product as the answer'), powers, query: [left, right], k: null, product: Number(product), answers: [...answers], message: `Answer for this query: ${product}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return the answers'), powers, query: null, k: null, product: 1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: P('return answer'), activeLine: L('return the answers'), powers, query: null, k: null, product: 1, answers: [...answers], message: `Answers: ${answers.join(', ')}.` })
   return { input: { n, queries }, result: answers, frames }
 }
 
@@ -59,3 +59,5 @@ export const python = `def product_of_powers(n, queries):
         answer.append(product)
     return answer
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

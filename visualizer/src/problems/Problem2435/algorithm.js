@@ -34,7 +34,7 @@ export function buildTrace({ grid, k }) {
   const view = () => ways.map((row, r) => row.map((counts, c) => (done[r][c] ? counts[0] : '·')))
   ways[0][0][grid[0][0] % k] = 1
   done[0][0] = true
-  const frames = [{ phase: 'start', activeLine: L('set the top-left cell'), row: 0, col: 0, table: view(), message: `Top-left starts one path with remainder ${grid[0][0] % k}.` }]
+  const frames = [{ phase: 'start', pythonLine: P('ways[0][0][grid[0][0] % k] = 1'), activeLine: L('set the top-left cell'), row: 0, col: 0, table: view(), message: `Top-left starts one path with remainder ${grid[0][0] % k}.` }]
   for (let r = 0; r < m; r++) {
     for (let c = 0; c < n; c++) {
       if (r === 0 && c === 0) continue
@@ -50,11 +50,11 @@ export function buildTrace({ grid, k }) {
         }
       }
       done[r][c] = true
-      frames.push({ phase: 'cell', activeLine: L('add its count to remainder'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}): ${ways[r][c][0]} path(s) with sum divisible by ${k}.` })
+      frames.push({ phase: 'cell', pythonLine: P('ways[r][c][nxt]'), activeLine: L('add its count to remainder'), row: r, col: c, table: view(), message: `Cell (${r}, ${c}): ${ways[r][c][0]} path(s) with sum divisible by ${k}.` })
     }
   }
   const result = ways[m - 1][n - 1][0] % MOD
-  frames.push({ phase: 'done', activeLine: L('return the count with remainder 0'), row: m - 1, col: n - 1, table: view(), message: `Paths whose sum is divisible by ${k}: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: P('return ways[m - 1]'), activeLine: L('return the count with remainder 0'), row: m - 1, col: n - 1, table: view(), message: `Paths whose sum is divisible by ${k}: ${result}.` })
   return { input: { grid, k }, grid, k, result, frames }
 }
 
@@ -80,3 +80,5 @@ export const python = `def count_paths_divisible_by_k(grid, k):
                         ways[r][c][nxt] = (ways[r][c][nxt] + src[rem]) % MOD
     return ways[m - 1][n - 1][0] % MOD
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

@@ -14,18 +14,18 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { s } = input
   const stack = []
-  const frames = [{ phase: 'start', activeLine: L('set stack to an empty list'), i: -1, stack: [], message: 'Read the string left to right with an empty stack.' }]
+  const frames = [{ phase: 'start', activeLine: L('set stack to an empty list'), pythonLine: P(`stack = []`), i: -1, stack: [], message: 'Read the string left to right with an empty stack.' }]
   for (let i = 0; i < s.length; i++) {
     if (s[i] === '*') {
       const top = stack.pop()
-      frames.push({ phase: 'star', activeLine: L('remove the top'), i, stack: [...stack], message: `Star at ${i} removes ${top}.` })
+      frames.push({ phase: 'star', activeLine: L('remove the top'), pythonLine: P(`stack.pop()`), i, stack: [...stack], message: `Star at ${i} removes ${top}.` })
     } else {
       stack.push(s[i])
-      frames.push({ phase: 'letter', activeLine: L('push the character'), i, stack: [...stack], message: `Push ${s[i]} onto the stack.` })
+      frames.push({ phase: 'letter', activeLine: L('push the character'), pythonLine: P(`stack.append(c)`), i, stack: [...stack], message: `Push ${s[i]} onto the stack.` })
     }
   }
   const result = stack.join('')
-  frames.push({ phase: 'done', activeLine: L('return the stack'), i: s.length, stack: [...stack], message: `Remaining string: ${result || '(empty)'}.` })
+  frames.push({ phase: 'done', activeLine: L('return the stack'), pythonLine: P(`return ''.join(stack)`), i: s.length, stack: [...stack], message: `Remaining string: ${result || '(empty)'}.` })
   return { input, result, frames }
 }
 
@@ -37,6 +37,7 @@ export const code = `remove stars and the closest letter to their left
     otherwise push the character c onto the stack
   return the stack as a string`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def remove_stars(s):
     stack = []

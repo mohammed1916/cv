@@ -17,7 +17,7 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { logs } = input
-  const frames = [{ phase: 'start', activeLine: L('set the longest duration'), index: -1, id: null, duration: null, answer: -1, replaced: false, message: 'No task has been considered yet.' }]
+  const frames = [{ phase: 'start', pythonLine: P('best_id = -1'), activeLine: L('set the longest duration'), index: -1, id: null, duration: null, answer: -1, replaced: false, message: 'No task has been considered yet.' }]
   let bestId = -1
   let bestDuration = -1
   let previous = 0
@@ -27,10 +27,10 @@ export function buildTrace(input) {
     durations.push(duration)
     const replaced = duration > bestDuration || (duration === bestDuration && id < bestId)
     if (replaced) { bestId = id; bestDuration = duration }
-    frames.push({ phase: 'task', activeLine: L('the task duration is'), index, id, duration, answer: bestId, replaced, message: `Employee ${id} works ${duration} unit(s), leaving at ${leave}. ${replaced ? 'This is the longest task so far.' : 'This does not beat the longest task.'}` })
+    frames.push({ phase: 'task', pythonLine: P('if duration > best_duration'), activeLine: L('the task duration is'), index, id, duration, answer: bestId, replaced, message: `Employee ${id} works ${duration} unit(s), leaving at ${leave}. ${replaced ? 'This is the longest task so far.' : 'This does not beat the longest task.'}` })
     previous = leave
   })
-  frames.push({ phase: 'done', activeLine: L('return the answer id'), index: -1, id: null, duration: null, answer: bestId, replaced: false, message: `Employee ${bestId} worked the longest task.` })
+  frames.push({ phase: 'done', pythonLine: P('return best_id'), activeLine: L('return the answer id'), index: -1, id: null, duration: null, answer: bestId, replaced: false, message: `Employee ${bestId} worked the longest task.` })
   return { input, durations, result: bestId, frames }
 }
 
@@ -56,3 +56,5 @@ export const python = `def hardest_worker(n, logs):
         previous = leave_time
     return best_id
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

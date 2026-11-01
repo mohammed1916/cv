@@ -20,16 +20,16 @@ export function buildTrace({ nums }) {
   let lo = 0
   let hi = Math.max(...nums)
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 0'), lo, hi, mid: null, verdict: null, broke: -1, message: `Values are ${nums.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
+  const frames = [{ phase: 'start', pythonLine: P('low, high = 0'), activeLine: L('set low to 0'), lo, hi, mid: null, verdict: null, broke: -1, message: `Values are ${nums.join(', ')}. The answer lies between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const broke = firstBreak(mid)
     const verdict = broke === -1
-    frames.push({ phase: 'probe', activeLine: L('if every prefix fits within mid'), lo, hi, mid, verdict, broke, message: verdict ? `Limit ${mid}: every prefix average fits.` : `Limit ${mid}: the prefix ending at index ${broke} is too large.` })
+    frames.push({ phase: 'probe', pythonLine: P('if fits(mid):'), activeLine: L('if every prefix fits within mid'), lo, hi, mid, verdict, broke, message: verdict ? `Limit ${mid}: every prefix average fits.` : `Limit ${mid}: the prefix ending at index ${broke} is too large.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, broke: -1, message: `Smallest possible maximum: ${lo}.` })
+  frames.push({ phase: 'done', pythonLine: P('return low'), activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, broke: -1, message: `Smallest possible maximum: ${lo}.` })
   return { input: { nums }, domain, result: lo, frames }
 }
 
@@ -69,3 +69,5 @@ export const python = `def minimize_maximum(nums):
             low = mid + 1
     return low
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

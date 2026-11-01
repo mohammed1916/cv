@@ -31,19 +31,21 @@ export function buildTrace({ m, n, prices }) {
   const price = grid(m + 1, n + 1)
   for (const [h, w, p] of prices) price[h][w] = Math.max(price[h][w], p)
   const best = grid(m + 1, n + 1)
-  const frames = [{ phase: 'start', cell: null, table: grid(m + 1, n + 1), activeLine: L('price = table'), message: 'Empty boards are worth nothing. Each board is worth its best single piece or its best cut.' }]
+  const frames = [{ phase: 'start', cell: null, table: grid(m + 1, n + 1), activeLine: L('price = table'), pythonLine: P('price = [[0] * (n + 1) for _ in range(m + 1)]'), message: 'Empty boards are worth nothing. Each board is worth its best single piece or its best cut.' }]
   for (let h = 1; h <= m; h++) {
     for (let w = 1; w <= n; w++) {
       best[h][w] = price[h][w]
       for (let k = 1; k < w; k++) best[h][w] = Math.max(best[h][w], best[h][k] + best[h][w - k])
       for (let k = 1; k < h; k++) best[h][w] = Math.max(best[h][w], best[k][w] + best[h - k][w])
-      frames.push({ phase: 'cell', cell: [h, w], table: best.map(row => [...row]), activeLine: L('best[h][w] = price[h][w]'), message: `Board ${h} by ${w} is worth ${best[h][w]}.` })
+      frames.push({ phase: 'cell', cell: [h, w], table: best.map(row => [...row]), activeLine: L('best[h][w] = price[h][w]'), pythonLine: P(h > 1 ? 'best[h][w] = max(best[h][w], best[k][w] + best[h - k][w])' : w > 1 ? 'best[h][w] = max(best[h][w], best[h][k] + best[h][w - k])' : 'best[h][w] = price[h][w]'), message: `Board ${h} by ${w} is worth ${best[h][w]}.` })
     }
   }
   const result = best[m][n]
-  frames.push({ phase: 'done', cell: [m, n], table: best.map(row => [...row]), activeLine: L('return best[m][n]'), message: `Most money for the ${m} by ${n} board: ${result}.` })
+  frames.push({ phase: 'done', cell: [m, n], table: best.map(row => [...row]), activeLine: L('return best[m][n]'), pythonLine: P('return best[m][n]'), message: `Most money for the ${m} by ${n} board: ${result}.` })
   return { input: { m, n, prices }, result, frames }
 }
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def selling_wood(m, n, prices):
     price = [[0] * (n + 1) for _ in range(m + 1)]

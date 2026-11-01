@@ -14,15 +14,15 @@ export function buildTrace(input) {
   const frames = []
   for (let i = n - 1; i >= 0; i--) {
     dp[i] = 1
-    frames.push({ phase: 'rest', activeLine: L('dp[i] = 1'), index: i, dp: [...dp], message: `From position ${i}, deleting the whole rest counts as 1 operation.` })
+    frames.push({ phase: 'rest', pythonLine: P('dp[i] = 1'), activeLine: L('dp[i] = 1'), index: i, dp: [...dp], message: `From position ${i}, deleting the whole rest counts as 1 operation.` })
     for (let len = 1; 2 * len <= n - i; len++) {
       if (s.slice(i, i + len) === s.slice(i + len, i + 2 * len)) {
         dp[i] = Math.max(dp[i], 1 + dp[i + len])
-        frames.push({ phase: 'repeat', activeLine: L('dp[i] = max'), index: i, len, dp: [...dp], message: `Delete ${len} letters at ${i}, since the next ${len} match. Best from ${i}: ${dp[i]}.` })
+        frames.push({ phase: 'repeat', pythonLine: P('dp[i] = max('), activeLine: L('dp[i] = max'), index: i, len, dp: [...dp], message: `Delete ${len} letters at ${i}, since the next ${len} match. Best from ${i}: ${dp[i]}.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return dp[0]'), index: 0, dp: [...dp], message: `Maximum operations: ${dp[0]}.` })
+  frames.push({ phase: 'done', pythonLine: P('return dp[0]'), activeLine: L('return dp[0]'), index: 0, dp: [...dp], message: `Maximum operations: ${dp[0]}.` })
   return { input, s, result: dp[0], frames }
 }
 
@@ -47,3 +47,5 @@ export const python = `def max_deletions(s):
                 dp[i] = max(dp[i], 1 + dp[i + length])
     return dp[0]
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

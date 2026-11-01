@@ -20,8 +20,9 @@ export function buildTrace(input) {
   const rows = []
   const cols = []
   const grid = Array.from({ length: k }, () => Array(k).fill(0))
-  const snap = (phase, activeLine, message, value = null) => frames.push({
-    phase, activeLine, value, rows: [...rows], cols: [...cols], grid: grid.map(r => [...r]), message,
+  const pyFor = { start: P(`grid = [[0] * k`), graph: P(`adj = [[] for`), rows: P(`order.append(v)`), cols: P(`order.append(v)`), place: P(`grid[row_of[v]][col_of[v]] = v`), done: P(`return grid`) }
+  const snap = (phase, activeLine, message, value = null, pythonLine = pyFor[phase]) => frames.push({
+    phase, activeLine, value, pythonLine, rows: [...rows], cols: [...cols], grid: grid.map(r => [...r]), message,
   })
   const topo = (phase, edges, out, activeLine, label) => {
     const adj = Array.from({ length: k + 1 }, () => [])
@@ -38,15 +39,15 @@ export function buildTrace(input) {
     }
     return out.length === k ? out : null
   }
-  const fail = (activeLine, message) => { snap('fail', activeLine, message); return { input, result: [], frames } }
+  const fail = (activeLine, message, pythonLine) => { snap('fail', activeLine, message, null, pythonLine); return { input, result: [], frames } }
 
   snap('start', L('create a k by k grid'), 'Start with a k by k grid of zeros.')
   snap('graph', L('build a graph of row conditions'), `${rowEdges.length} row conditions and ${colEdges.length} column conditions.`)
   if (!topo('rows', rowEdges, rows, L('topologically sort the rows'), 'Row value')) {
-    return fail(L('topologically sort the rows'), 'The row conditions form a cycle, so no matrix exists. Return empty.')
+    return fail(L('topologically sort the rows'), 'The row conditions form a cycle, so no matrix exists. Return empty.', P(`return []`))
   }
   if (!topo('cols', colEdges, cols, L('topologically sort the columns'), 'Column value')) {
-    return fail(L('topologically sort the columns'), 'The column conditions form a cycle, so no matrix exists. Return empty.')
+    return fail(L('topologically sort the columns'), 'The column conditions form a cycle, so no matrix exists. Return empty.', P(`if cols is None:`) + 1)
   }
   for (let v = 1; v <= k; v++) {
     grid[rows.indexOf(v)][cols.indexOf(v)] = v
@@ -66,6 +67,7 @@ for each value v from 1 to k
   and in the column at its place in the column order
 return the grid`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def build_matrix(k, row_conditions, col_conditions):
     def topo(edges):

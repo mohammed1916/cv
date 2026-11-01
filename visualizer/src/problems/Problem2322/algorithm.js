@@ -36,7 +36,7 @@ export function buildTrace({ nums, edges }) {
     for (let x = b; x !== -1; x = parent[x]) if (x === a) return true
     return false
   }
-  const frames = [{ phase: 'start', activeLine: L('root the tree at node'), pair: null, parts: null, score: null, best: null, sub: [...sub], total, message: `Rooted at node 0. The xor of all values is ${total}.` }]
+  const frames = [{ phase: 'start', activeLine: L('root the tree at node'), pythonLine: P('total = sub[0]'), pair: null, parts: null, score: null, best: null, sub: [...sub], total, message: `Rooted at node 0. The xor of all values is ${total}.` }]
   let best = null
   for (let u = 1; u < n; u++) {
     for (let v = u + 1; v < n; v++) {
@@ -47,10 +47,10 @@ export function buildTrace({ nums, edges }) {
       const score = Math.max(...parts) - Math.min(...parts)
       const improved = best === null || score < best
       if (improved) best = score
-      frames.push({ phase: 'pair', activeLine: L(improved ? 'if the score is less than best' : 'score is the largest'), pair: [u, v], parts, score, best, sub: [...sub], total, message: `Cut above ${u} and ${v}: parts ${parts.join(', ')}, score ${score}${improved ? ', the best so far' : ''}.` })
+      frames.push({ phase: 'pair', activeLine: L(improved ? 'if the score is less than best' : 'score is the largest'), pythonLine: P(improved ? 'best = score' : 'if best is None or score < best:'), pair: [u, v], parts, score, best, sub: [...sub], total, message: `Cut above ${u} and ${v}: parts ${parts.join(', ')}, score ${score}${improved ? ', the best so far' : ''}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), pair: null, parts: null, score: null, best, sub: [...sub], total, result: best, message: `Minimum score: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), pair: null, parts: null, score: null, best, sub: [...sub], total, result: best, message: `Minimum score: ${best}.` })
   return { input: { nums, edges }, result: best, frames }
 }
 
@@ -65,6 +65,8 @@ export const code = `minimum score after removing two edges
     if the score is less than best then set best to score
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def minimum_score_after_removals(nums, edges):
     n = len(nums)

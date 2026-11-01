@@ -9,17 +9,17 @@ export function buildTrace(nums) {
   const counts = new Map()
   for (const v of nums) counts.set(v, (counts.get(v) ?? 0) + 1)
   const n = nums.length
-  const frames = [{ phase: 'count', activeLine: L('counts = how many'), value: null, before: 0, group: 0, after: n, total: 0, message: `Count how many times each value appears (${counts.size} distinct values).` }]
+  const frames = [{ phase: 'count', activeLine: L('counts = how many'), pythonLine: P('before = 0'), value: null, before: 0, group: 0, after: n, total: 0, message: `Count how many times each value appears (${counts.size} distinct values).` }]
   let total = 0
   let before = 0
   for (const [value, c] of counts) {
     const after = n - before - c
     const added = before * c * after
     total += added
-    frames.push({ phase: 'group', activeLine: L('total = total + before'), value, before, group: c, after, total, message: `Value ${value} has ${c} copies; ${before} entries come before its group and ${after} after. That gives ${added} triplets with it in the middle.` })
+    frames.push({ phase: 'group', activeLine: L('total = total + before'), pythonLine: P('total += before * c * after'), value, before, group: c, after, total, message: `Value ${value} has ${c} copies; ${before} entries come before its group and ${after} after. That gives ${added} triplets with it in the middle.` })
     before += c
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), value: null, before: n, group: 0, after: 0, total, message: `Unequal triplets: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), value: null, before: n, group: 0, after: 0, total, message: `Unequal triplets: ${total}.` })
   return { input: nums, result: total, frames }
 }
 
@@ -47,3 +47,5 @@ def count_unequal_triplets(nums):
         before += c
     return total
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

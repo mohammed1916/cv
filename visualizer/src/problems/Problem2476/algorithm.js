@@ -23,7 +23,7 @@ export function buildTrace({ root, queries }) {
   const values = ordered.map(n => n.value)
   const frames = []
   const answer = []
-  frames.push({ phase: 'sort', activeLine: L('read the tree values in sorted order'), values, query: null, low: null, high: null, lowIndex: -1, highIndex: -1, roles: {}, answer: [], message: `An in-order walk of the binary search tree gives ${values.join(', ')}.` })
+  frames.push({ phase: 'sort', activeLine: L('read the tree values in sorted order'), pythonLine: P('walk(build(root))'), values, query: null, low: null, high: null, lowIndex: -1, highIndex: -1, roles: {}, answer: [], message: `An in-order walk of the binary search tree gives ${values.join(', ')}.` })
   for (const q of queries) {
     let lowIndex = -1
     let highIndex = -1
@@ -39,9 +39,9 @@ export function buildTrace({ root, queries }) {
     const roles = {}
     if (lowIndex >= 0) roles[ordered[lowIndex].id] = 'active'
     if (highIndex >= 0) roles[ordered[highIndex].id] = 'active'
-    frames.push({ phase: 'query', activeLine: L('set low to the largest'), values, query: q, low, high, lowIndex, highIndex, roles, answer: answer.map(p => [...p]), message: `Query ${q}: largest value at most it is ${low}, smallest value at least it is ${high}.` })
+    frames.push({ phase: 'query', activeLine: L('set low to the largest'), pythonLine: P('answer.append([low, high])'), values, query: q, low, high, lowIndex, highIndex, roles, answer: answer.map(p => [...p]), message: `Query ${q}: largest value at most it is ${low}, smallest value at least it is ${high}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), values, query: null, low: null, high: null, lowIndex: -1, highIndex: -1, roles: {}, answer: answer.map(p => [...p]), message: 'All queries are answered.' })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), values, query: null, low: null, high: null, lowIndex: -1, highIndex: -1, roles: {}, answer: answer.map(p => [...p]), message: 'All queries are answered.' })
   return { input: { root, queries }, result: answer, root: tree, frames }
 }
 
@@ -102,3 +102,5 @@ def closest_nodes_in_bst(root, queries):
         answer.append([low, high])
     return answer
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

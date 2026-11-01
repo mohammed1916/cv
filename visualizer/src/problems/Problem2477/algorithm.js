@@ -24,7 +24,7 @@ export function buildTrace(input) {
   const frames = []
   let total = 0
   const tags = {}
-  const frame = (phase, line, city, people, message) => frames.push({ phase, activeLine: line, node: city, people, total, tags: { ...tags }, message })
+  const frame = (phase, line, city, people, message) => frames.push({ phase, activeLine: line, pythonLine: PY[phase], node: city, people, total, tags: { ...tags }, message })
   frame('start', L('set total fuel to 0'), null, null, `Start at the capital, city 0. Each city sends its people toward the capital.`)
   const count = (city, parentCity) => {
     let people = 1
@@ -82,3 +82,6 @@ export const python = `def min_fuel(roads, seats):
     count(0, -1)
     return total
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+const PY = { start: P('total = 0'), enter: P('people = 1'), charge: P('total += -(-people // seats)'), done: P('return total') }

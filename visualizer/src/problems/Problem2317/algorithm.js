@@ -9,12 +9,12 @@ export function parseInput(text) {
 
 export function buildTrace({ nums }) {
   let result = 0
-  const frames = [{ phase: 'start', activeLine: L('set result to 0'), index: -1, result, message: 'Start with 0. Each operation can only clear bits, so every bit of the answer must already appear in some number.' }]
+  const frames = [{ phase: 'start', activeLine: L('set result to 0'), pythonLine: P('result = 0'), index: -1, result, message: 'Start with 0. Each operation can only clear bits, so every bit of the answer must already appear in some number.' }]
   nums.forEach((value, index) => {
     result |= value
-    frames.push({ phase: 'merge', activeLine: L('set result to result or value'), index, result, message: `Fold in ${value}. The bits kept so far are ${result}.` })
+    frames.push({ phase: 'merge', activeLine: L('set result to result or value'), pythonLine: P('result |= v'), index, result, message: `Fold in ${value}. The bits kept so far are ${result}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return result'), index: -1, result, message: `Maximum XOR: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: P('return result'), index: -1, result, message: `Maximum XOR: ${result}.` })
   return { input: { nums }, result, frames }
 }
 
@@ -25,6 +25,8 @@ export const code = `maximum xor after operations:
   a bit set in any number can be kept, because clearing bits never adds one
   return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def max_xor_after_ops(nums):
     result = 0

@@ -25,6 +25,7 @@ export const code = `max covered rows(matrix, num_select):
     set best to the larger of best and covered
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 const popcount = mask => { let count = 0; for (let x = mask; x; x &= x - 1) count++; return count }
 
@@ -33,15 +34,15 @@ export function buildTrace({ matrix, num_select }) {
   const rowMasks = matrix.map(row => row.reduce((mask, v, c) => mask | (v ? 1 << c : 0), 0))
   let best = 0
   let bestMask = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to 0'), mask: 0, covered: 0, best: 0, message: `Choose ${num_select} of ${n} columns; try every choice.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to 0'), pythonLine: P(`best = 0`), mask: 0, covered: 0, best: 0, message: `Choose ${num_select} of ${n} columns; try every choice.` }]
   for (let mask = 0; mask < 1 << n; mask++) {
     if (popcount(mask) !== num_select) continue
     let covered = 0
     for (const rowMask of rowMasks) if ((rowMask & ~mask) === 0) covered++
     if (covered > best) { best = covered; bestMask = mask }
-    frames.push({ phase: 'choice', activeLine: L('if every column with a 1'), mask, covered, best, message: `Columns ${[...Array(n).keys()].filter(c => (mask >> c) & 1).map(c => c + 1).join(', ')} cover ${covered} row(s); best ${best}.` })
+    frames.push({ phase: 'choice', activeLine: L('if every column with a 1'), pythonLine: P(`best = max(best, covered)`), mask, covered, best, message: `Columns ${[...Array(n).keys()].filter(c => (mask >> c) & 1).map(c => c + 1).join(', ')} cover ${covered} row(s); best ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), mask: bestMask, covered: best, best, message: `Maximum covered rows: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P(`return best`), mask: bestMask, covered: best, best, message: `Maximum covered rows: ${best}.` })
   return { input: { matrix, num_select }, matrix, num_select, result: best, frames }
 }
 

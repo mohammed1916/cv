@@ -15,19 +15,19 @@ export function buildTrace(input) {
   const energyHours = Math.max(0, energy.reduce((sum, v) => sum + v, 0) + 1 - initial_energy)
   let exp = initial_experience
   let expHours = 0
-  const frames = [{ phase: 'energy', activeLine: L('set energy hours to'), opponent: -1, exp, energyHours, expHours, message: `Energy needs ${energyHours} training hours to beat all opponents.` }]
+  const frames = [{ phase: 'energy', activeLine: L('set energy hours to'), pythonLine: P(`energy_hours = max`), opponent: -1, exp, energyHours, expHours, message: `Energy needs ${energyHours} training hours to beat all opponents.` }]
   experience.forEach((opponent, i) => {
     if (exp <= opponent) {
       const added = opponent + 1 - exp
       expHours += added
       exp += added
-      frames.push({ phase: 'train', activeLine: L('train experience until'), opponent: i, exp, energyHours, expHours, message: `Experience ${exp - added} is not above ${opponent}; train ${added} hours first.` })
+      frames.push({ phase: 'train', activeLine: L('train experience until'), pythonLine: P(`added = opponent + 1 - exp`), opponent: i, exp, energyHours, expHours, message: `Experience ${exp - added} is not above ${opponent}; train ${added} hours first.` })
     }
     exp += opponent
-    frames.push({ phase: 'win', activeLine: L('add the opponent experience'), opponent: i, exp, energyHours, expHours, message: `Beat opponent ${i}; experience is now ${exp}.` })
+    frames.push({ phase: 'win', activeLine: L('add the opponent experience'), pythonLine: P(`exp += opponent`), opponent: i, exp, energyHours, expHours, message: `Beat opponent ${i}; experience is now ${exp}.` })
   })
   const result = energyHours + expHours
-  frames.push({ phase: 'done', activeLine: L('return energy hours plus'), opponent: -1, exp, energyHours, expHours, message: `Minimum training hours: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return energy hours plus'), pythonLine: P(`return energy_hours`), opponent: -1, exp, energyHours, expHours, message: `Minimum training hours: ${result}.` })
   return { input, result, frames }
 }
 
@@ -39,6 +39,7 @@ export const code = `minimum training hours to beat every opponent:
     add the opponent experience to exp
   return energy hours plus exp hours`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def minimum_training_hours(initial_energy, initial_experience, energy, experience):
     energy_hours = max(0, sum(energy) + 1 - initial_energy)

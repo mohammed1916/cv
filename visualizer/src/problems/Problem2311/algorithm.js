@@ -11,21 +11,21 @@ export function buildTrace(input) {
   let value = 0
   let length = 0
   let stopped = false
-  const frames = [{ phase: 'start', activeLine: L('set value to zero'), index: -1, bit: '', value, length, kept: 0, message: `Read the bits from the right end. A one is kept only while the value stays at most ${k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set value to zero'), pythonLine: P('value = 0'), index: -1, bit: '', value, length, kept: 0, message: `Read the bits from the right end. A one is kept only while the value stays at most ${k}.` }]
   for (let i = s.length - 1; i >= 0; i--) {
     const bit = s[i]
     if (bit === '1' && value + 2 ** length > k) {
       stopped = true
-      frames.push({ phase: 'stop', activeLine: L('stop the scan'), index: i, bit, value, length, kept: length, message: `The one at ${i} would raise the value to ${value + 2 ** length}, above ${k}. Stop the scan here.` })
+      frames.push({ phase: 'stop', activeLine: L('stop the scan'), pythonLine: P('if value + (1 << length) > k:'), index: i, bit, value, length, kept: length, message: `The one at ${i} would raise the value to ${value + 2 ** length}, above ${k}. Stop the scan here.` })
       break
     }
     if (bit === '1') value += 2 ** length
     length += 1
-    frames.push({ phase: 'scan', activeLine: L('add one to length'), index: i, bit, value, length, kept: length, message: `Keep bit ${bit} at ${i}. Value ${value}, kept length ${length}.` })
+    frames.push({ phase: 'scan', activeLine: L('add one to length'), pythonLine: P(bit === '1' ? 'value += 1 << length' : 'length += 1'), index: i, bit, value, length, kept: length, message: `Keep bit ${bit} at ${i}. Value ${value}, kept length ${length}.` })
   }
   const zeros = stopped ? [...s.slice(0, frames.at(-1).index)].filter(c => c === '0').length : 0
   const result = length + zeros
-  frames.push({ phase: 'done', activeLine: L('return length'), index: -1, bit: '', value, length: result, kept: length, message: `The longest subsequence has length ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return length'), pythonLine: P(stopped ? "return length + s[:i].count('0')" : 'return length'), index: -1, bit: '', value, length: result, kept: length, message: `The longest subsequence has length ${result}.` })
   return { input: { s, k }, result, frames }
 }
 
@@ -39,6 +39,8 @@ scan the bits from the right end toward the left end
 if the scan stopped at a bit then add the zeros to the left of that bit to length
 return length`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def longest_binary_subsequence(s, k):
     value = 0

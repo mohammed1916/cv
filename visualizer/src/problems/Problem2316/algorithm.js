@@ -16,8 +16,8 @@ export function buildTrace({ n, edges }) {
   const size = Array(n).fill(1)
   const find = x => { while (parent[x] !== x) x = parent[x]; return x }
   const frames = []
-  const frame = (phase, line, node, message) => frames.push({ phase, activeLine: line, node, parent: [...parent], size: [...size], message })
-  frame('start', L('give each node its own root'), null, `Start with ${n} separate nodes.`)
+  const frame = (phase, line, node, message, pythonLine) => frames.push({ phase, activeLine: line, pythonLine, node, parent: [...parent], size: [...size], message })
+  frame('start', L('give each node its own root'), null, `Start with ${n} separate nodes.`, P('size = [1] * n'))
   for (const [a, b] of edges) {
     let ra = find(a)
     let rb = find(b)
@@ -25,9 +25,9 @@ export function buildTrace({ n, edges }) {
       if (size[ra] < size[rb]) [ra, rb] = [rb, ra]
       parent[rb] = ra
       size[ra] += size[rb]
-      frame('union', L('merge the smaller root'), a, `Edge ${a}-${b} joins two components; root ${rb} now points to ${ra}.`)
+      frame('union', L('merge the smaller root'), a, `Edge ${a}-${b} joins two components; root ${rb} now points to ${ra}.`, P('size[ra] += size[rb]'))
     } else {
-      frame('same', L('if the roots differ'), a, `Edge ${a}-${b} stays inside one component.`)
+      frame('same', L('if the roots differ'), a, `Edge ${a}-${b} stays inside one component.`, P('if ra != rb:'))
     }
   }
   let remaining = n
@@ -36,9 +36,9 @@ export function buildTrace({ n, edges }) {
     if (find(r) !== r) continue
     remaining -= size[r]
     answer += size[r] * remaining
-    frame('count', L('add size of r'), r, `Component rooted at ${r} has ${size[r]} nodes and adds ${size[r] * remaining} pairs.`)
+    frame('count', L('add size of r'), r, `Component rooted at ${r} has ${size[r]} nodes and adds ${size[r] * remaining} pairs.`, P('answer += size[r] * remaining'))
   }
-  frame('done', L('return answer'), null, `Unreachable pairs: ${answer}.`)
+  frame('done', L('return answer'), null, `Unreachable pairs: ${answer}.`, P('return answer'))
   return { input: { n, edges }, result: answer, frames }
 }
 
@@ -54,6 +54,8 @@ export const code = `count pairs of nodes with no path between them
     add size of r times remaining to answer
   return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => { const i = code.findIndex(c => c.text.includes(s)); if (i < 0) throw new Error('missing code line: ' + s); return i + 1 }
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def count_unreachable_pairs(n, edges):
     parent = list(range(n))

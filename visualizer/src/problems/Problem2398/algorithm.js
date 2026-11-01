@@ -11,24 +11,24 @@ export function parseInput(text) {
 
 export function buildTrace({ charge_times: charge, running_costs: running, budget }) {
   const n = charge.length
-  const frames = [{ phase: 'start', activeLine: L('set best to zero'), l: 0, r: -1, deque: [], best: 0, cost: 0, message: `Find the longest run of robots whose max charge plus length times running total stays within ${budget}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to zero'), pythonLine: P(`best = 0`), l: 0, r: -1, deque: [], best: 0, cost: 0, message: `Find the longest run of robots whose max charge plus length times running total stays within ${budget}.` }]
   const deque = []
   let l = 0, sum = 0, best = 0
   for (let r = 0; r < n; r++) {
     sum += running[r]
     while (deque.length && charge[deque[deque.length - 1]] <= charge[r]) deque.pop()
     deque.push(r)
-    frames.push({ phase: 'extend', activeLine: L('add its running cost'), l, r, deque: [...deque], best, cost: charge[deque[0]] + (r - l + 1) * sum, message: `Add robot ${r}. The window ${l} to ${r} has running total ${sum}.` })
+    frames.push({ phase: 'extend', activeLine: L('add its running cost'), pythonLine: P(`running_total += running_costs[right]`), l, r, deque: [...deque], best, cost: charge[deque[0]] + (r - l + 1) * sum, message: `Add robot ${r}. The window ${l} to ${r} has running total ${sum}.` })
     while (l <= r && charge[deque[0]] + (r - l + 1) * sum > budget) {
       sum -= running[l]
       if (deque[0] === l) deque.shift()
       l++
-      frames.push({ phase: 'shrink', activeLine: L('remove robot left'), l, r, deque: [...deque], best, cost: l <= r ? charge[deque[0]] + (r - l + 1) * sum : 0, message: `Drop robot ${l - 1} from the left. The window is now ${l} to ${r}.` })
+      frames.push({ phase: 'shrink', activeLine: L('remove robot left'), pythonLine: P(`running_total -= running_costs[left]`), l, r, deque: [...deque], best, cost: l <= r ? charge[deque[0]] + (r - l + 1) * sum : 0, message: `Drop robot ${l - 1} from the left. The window is now ${l} to ${r}.` })
     }
     best = Math.max(best, r - l + 1)
-    frames.push({ phase: 'record', activeLine: L('set best to the larger'), l, r, deque: [...deque], best, cost: l <= r ? charge[deque[0]] + (r - l + 1) * sum : 0, message: `Best window size is ${best}.` })
+    frames.push({ phase: 'record', activeLine: L('set best to the larger'), pythonLine: P(`best = max(best, right - left + 1)`), l, r, deque: [...deque], best, cost: l <= r ? charge[deque[0]] + (r - l + 1) * sum : 0, message: `Best window size is ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), l, r: n - 1, deque: [], best, cost: 0, message: `The most robots that fit the budget is ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P(`return best`), l, r: n - 1, deque: [], best, cost: 0, message: `The most robots that fit the budget is ${best}.` })
   return { input: { charge_times: charge, running_costs: running, budget }, result: best, frames }
 }
 
@@ -44,6 +44,7 @@ export const code = `maximum robots within budget (charge, running, budget)
     set best to the larger of best and the window size
   return best`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from collections import deque
 

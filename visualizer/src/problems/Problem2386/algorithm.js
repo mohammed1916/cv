@@ -19,16 +19,16 @@ export function buildTrace({ nums, k }) {
     }
     return heap.splice(at, 1)[0]
   }
-  const frames = [{ phase: 'start', activeLine: L('put the empty choice'), sum: 0, rank: 1, total, message: `Sum of positive numbers is ${total}. The empty choice sums to 0.` }]
+  const frames = [{ phase: 'start', activeLine: L('put the empty choice'), pythonLine: P(`heap = [(0, -1)]`), sum: 0, rank: 1, total, message: `Sum of positive numbers is ${total}. The empty choice sums to 0.` }]
   for (let step = 1; step < k; step++) {
     const { sum, last } = takeSmallest()
     if (last + 1 < n) heap.push({ sum: sum + b[last + 1], last: last + 1 })
     if (last >= 0 && last + 1 < n) heap.push({ sum: sum - b[last] + b[last + 1], last: last + 1 })
-    frames.push({ phase: 'pop', activeLine: L('take the smallest sum'), sum, rank: step + 1, total, message: `Subset sum ${sum} is the ${step + 1}-th smallest of the absolute values.` })
+    frames.push({ phase: 'pop', activeLine: L('take the smallest sum'), pythonLine: P(`s, i = heapq.heappop(heap)`), sum, rank: step + 1, total, message: `Subset sum ${sum} is the ${step + 1}-th smallest of the absolute values.` })
   }
   const top = heap.reduce((a, e) => (e.sum < a.sum ? e : a))
   const result = total - top.sum
-  frames.push({ phase: 'done', activeLine: L('return total minus the sum'), sum: top.sum, rank: k, total, message: `The k-th largest subsequence sum is ${total} minus ${top.sum}, which is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return total minus the sum'), pythonLine: P(`return total - heap`), sum: top.sum, rank: k, total, message: `The k-th largest subsequence sum is ${total} minus ${top.sum}, which is ${result}.` })
   return { input: { nums, k }, result, frames }
 }
 
@@ -42,6 +42,7 @@ export const code = `k-th largest subsequence sum of nums
     if i is not -1 and i plus 1 is in range then push s minus b[i] plus b[i+1] with last index i+1
   return total minus the sum at the top of the heap`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `import heapq
 

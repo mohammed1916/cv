@@ -18,18 +18,18 @@ export function buildTrace({ s, k }) {
   }
   const best = new Array(n + 1).fill(0)
   const frames = []
-  frames.push({ phase: 'table', activeLine: L('mark each substring'), end: 0, start: null, best: [...best], message: 'Palindromes are marked for every substring.' })
+  frames.push({ phase: 'table', activeLine: L('mark each substring'), pythonLine: P('pal[i][j] = s[i] == s[j]'), end: 0, start: null, best: [...best], message: 'Palindromes are marked for every substring.' })
   for (let end = 1; end <= n; end++) {
     best[end] = best[end - 1]
-    frames.push({ phase: 'end', activeLine: L('set best at end to the best value'), end, start: null, best: [...best], message: `Best count for the first ${end} characters starts at ${best[end]}.` })
+    frames.push({ phase: 'end', activeLine: L('set best at end to the best value'), pythonLine: P('best[end] = best[end - 1]'), end, start: null, best: [...best], message: `Best count for the first ${end} characters starts at ${best[end]}.` })
     for (let start = 0; start <= end - k; start++) {
       if (!pal[start][end - 1]) continue
       const candidate = best[start] + 1
       if (candidate > best[end]) best[end] = candidate
-      frames.push({ phase: 'check', activeLine: L('if s from start'), end, start, best: [...best], message: `s[${start}..${end - 1}] is a palindrome of length ${end - start} >= ${k}. Using it gives ${candidate}.` })
+      frames.push({ phase: 'check', activeLine: L('if s from start'), pythonLine: P('best[end] = max(best[end], best[start] + 1)'), end, start, best: [...best], message: `s[${start}..${end - 1}] is a palindrome of length ${end - start} >= ${k}. Using it gives ${candidate}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best at n'), end: n, start: null, best: [...best], message: `Maximum number of non-overlapping palindromes: ${best[n]}.` })
+  frames.push({ phase: 'done', activeLine: L('return best at n'), pythonLine: P('return best[n]'), end: n, start: null, best: [...best], message: `Maximum number of non-overlapping palindromes: ${best[n]}.` })
   return { input: { s, k }, result: best[n], frames }
 }
 
@@ -59,3 +59,5 @@ export const python = `def max_palindromes(s, k):
                 best[end] = max(best[end], best[start] + 1)
     return best[n]
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

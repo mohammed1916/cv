@@ -12,15 +12,15 @@ export function parseInput(text) {
 export function buildTrace({ time }) {
   const hourPattern = time.slice(0, 2)
   const minutePattern = time.slice(3)
-  const frames = [{ phase: 'start', activeLine: L('split the pattern'), hours: [], minutes: [], message: `Split ${time} into hours ${hourPattern} and minutes ${minutePattern}.` }]
+  const frames = [{ phase: 'start', pythonLine: P('def count_valid_times'), activeLine: L('split the pattern'), hours: [], minutes: [], message: `Split ${time} into hours ${hourPattern} and minutes ${minutePattern}.` }]
   const hours = []
   for (let h = 0; h < 24; h++) if (fits(pad(h), hourPattern)) hours.push(h)
-  frames.push({ phase: 'hours', activeLine: L('count the hours'), hours: hours.slice(), minutes: [], message: `${hours.length} hours from 00 to 23 fit ${hourPattern}.` })
+  frames.push({ phase: 'hours', pythonLine: P('hours = sum('), activeLine: L('count the hours'), hours: hours.slice(), minutes: [], message: `${hours.length} hours from 00 to 23 fit ${hourPattern}.` })
   const minutes = []
   for (let m = 0; m < 60; m++) if (fits(pad(m), minutePattern)) minutes.push(m)
-  frames.push({ phase: 'minutes', activeLine: L('count the minutes'), hours: hours.slice(), minutes: minutes.slice(), message: `${minutes.length} minutes from 00 to 59 fit ${minutePattern}.` })
+  frames.push({ phase: 'minutes', pythonLine: P('minutes = sum('), activeLine: L('count the minutes'), hours: hours.slice(), minutes: minutes.slice(), message: `${minutes.length} minutes from 00 to 59 fit ${minutePattern}.` })
   const result = hours.length * minutes.length
-  frames.push({ phase: 'done', activeLine: L('return the product'), hours: hours.slice(), minutes: minutes.slice(), message: `${hours.length} x ${minutes.length} = ${result} valid times.` })
+  frames.push({ phase: 'done', pythonLine: P('return hours * minutes'), activeLine: L('return the product'), hours: hours.slice(), minutes: minutes.slice(), message: `${hours.length} x ${minutes.length} = ${result} valid times.` })
   return { input: { time }, result, hours, frames }
 }
 
@@ -40,3 +40,5 @@ export const python = `def count_valid_times(time):
     minutes = sum(1 for m in range(60) if fits("%02d" % m, time[3:]))
     return hours * minutes
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

@@ -15,22 +15,22 @@ export function buildTrace({ num1, num2 }) {
   const frames = []
   let need = popcount(num2)
   let result = 0
-  frames.push({ phase: 'start', activeLine: L('set result to 0'), bit: -1, need, result, message: `num2 has ${need} set bits, so x needs ${need}.` })
+  frames.push({ phase: 'start', pythonLine: P('need = bin(num2)'), activeLine: L('set result to 0'), bit: -1, need, result, message: `num2 has ${need} set bits, so x needs ${need}.` })
   for (let bit = TOP; bit >= 0; bit--) {
     if (need > 0 && (num1 >> bit) & 1) {
       result |= 1 << bit
       need--
-      frames.push({ phase: 'match', activeLine: L('set this bit in result'), bit, need, result, message: `num1 has bit ${bit}; set it in x. ${need} bits still needed.` })
+      frames.push({ phase: 'match', pythonLine: P('result |= 1 << bit'), activeLine: L('set this bit in result'), bit, need, result, message: `num1 has bit ${bit}; set it in x. ${need} bits still needed.` })
     }
   }
   for (let bit = 0; bit <= TOP; bit++) {
     if (need > 0 && !((result >> bit) & 1)) {
       result |= 1 << bit
       need--
-      frames.push({ phase: 'fill', activeLine: L('fill the lowest'), bit, need, result, message: `Use the lowest free bit ${bit} for x. ${need} bits still needed.` })
+      frames.push({ phase: 'fill', pythonLine: P('result |= 1 << bit', 2), activeLine: L('fill the lowest'), bit, need, result, message: `Use the lowest free bit ${bit} for x. ${need} bits still needed.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return result'), bit: -1, need, result, message: `x = ${result}, and x XOR ${num1} = ${result ^ num1}.` })
+  frames.push({ phase: 'done', pythonLine: P('return result'), activeLine: L('return result'), bit: -1, need, result, message: `x = ${result}, and x XOR ${num1} = ${result ^ num1}.` })
   return { input: { num1, num2 }, result, frames }
 }
 
@@ -59,3 +59,5 @@ export const python = `def minimize_xor(num1, num2):
             need -= 1
     return result
 `
+
+const P = (s, n = 1) => { let c = 0; return python.split('\n').findIndex(l => l.includes(s) && ++c === n) + 1 }

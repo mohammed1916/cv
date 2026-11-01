@@ -15,10 +15,10 @@ export function buildTrace(input) {
   // roadTo[i] is the time for a truck to drive from house 0 to house i.
   const roadTo = [0]
   for (let i = 0; i < n - 1; i++) roadTo.push(roadTo[i] + travel[i])
-  const frames = [{ phase: 'pickup', activeLine: L('add the number of letters'), index: -1, total, truck: null, message: 'Count every piece of garbage. Each piece costs one minute.' }]
+  const frames = [{ phase: 'pickup', activeLine: L('add the number of letters'), pythonLine: P(`total = sum(len(g)`), index: -1, total, truck: null, message: 'Count every piece of garbage. Each piece costs one minute.' }]
   for (let i = 0; i < n; i++) {
     total = frames[frames.length - 1].total
-    frames.push({ phase: 'pickup', activeLine: L('add the number of letters'), index: i, total, truck: null, message: `House ${i} holds ${garbage[i]}.` })
+    frames.push({ phase: 'pickup', activeLine: L('add the number of letters'), pythonLine: P(`total = sum(len(g)`), index: i, total, truck: null, message: `House ${i} holds ${garbage[i]}.` })
   }
   let running = total
   const driving = []
@@ -26,14 +26,14 @@ export function buildTrace(input) {
     let last = -1
     for (let i = 0; i < n; i++) if (garbage[i].includes(type)) last = i
     if (last < 0) {
-      frames.push({ phase: 'truck', activeLine: L('if the last house'), index: -1, total: running, truck: type, message: `No ${type} garbage, so that truck stays home.` })
+      frames.push({ phase: 'truck', activeLine: L('if the last house'), pythonLine: P(`if last >= 0:`), index: -1, total: running, truck: type, message: `No ${type} garbage, so that truck stays home.` })
       continue
     }
     running += roadTo[last]
     driving.push({ type, last, time: roadTo[last] })
-    frames.push({ phase: 'truck', activeLine: L('add roadTo[last]'), index: last, total: running, truck: type, message: `The ${type} truck drives to house ${last} for ${roadTo[last]} minute(s).` })
+    frames.push({ phase: 'truck', activeLine: L('add roadTo[last]'), pythonLine: P(`total += road_to[last]`), index: last, total: running, truck: type, message: `The ${type} truck drives to house ${last} for ${roadTo[last]} minute(s).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), index: n, total: running, truck: null, message: `Total minutes: ${running}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P(`return total`), index: n, total: running, truck: null, message: `Total minutes: ${running}.` })
   return { input, result: running, frames }
 }
 
@@ -47,6 +47,7 @@ export const code = `minimum minutes to collect all garbage with three trucks
     if the last house exists then add roadTo[last] to total
   return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def min_garbage_time(garbage, travel):
     total = sum(len(g) for g in garbage)

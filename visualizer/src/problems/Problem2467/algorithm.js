@@ -46,7 +46,7 @@ export function buildTrace({ edges, bob, amount }) {
   }
   const bobTime = Array(n).fill(Infinity)
   for (let u = bob; u !== -1; u = parent[u]) bobTime[u] = depth[bob] - depth[u]
-  const frames = [{ phase: 'start', activeLine: L('build the tree'), node: -1, bobTime: [...bobTime], best: null, message: `Bob starts at ${bob} and walks toward node 0.` }]
+  const frames = [{ phase: 'start', activeLine: L('build the tree'), pythonLine: P('stack = [(0, -1, 0)]'), node: -1, bobTime: [...bobTime], best: null, message: `Bob starts at ${bob} and walks toward node 0.` }]
   let best = null
   const visit = (u, from, income) => {
     const t = depth[u]
@@ -54,16 +54,16 @@ export function buildTrace({ edges, bob, amount }) {
     let who
     if (t < bobTime[u]) { gain = amount[u]; who = 'Alice first' } else if (t === bobTime[u]) { gain = amount[u] / 2; who = 'together, halved' } else { gain = 0; who = 'Bob first' }
     const total = income + gain
-    frames.push({ phase: 'alice', activeLine: L('gain amount of u'), node: u, bobTime: [...bobTime], best, message: `Node ${u} at time ${t}: ${who}; income ${total}.` })
+    frames.push({ phase: 'alice', activeLine: L('gain amount of u'), pythonLine: t < bobTime[u] ? P('gain = amount[u]') : t === bobTime[u] ? P('gain = amount[u] / 2') : P('gain = 0'), node: u, bobTime: [...bobTime], best, message: `Node ${u} at time ${t}: ${who}; income ${total}.` })
     const kids = adj[u].filter(w => w !== from)
     if (u !== 0 && kids.length === 0) {
       best = best === null ? total : Math.max(best, total)
-      frames.push({ phase: 'leaf', activeLine: L('if u is a leaf'), node: u, bobTime: [...bobTime], best, message: `Leaf ${u} gives total ${total}; best is ${best}.` })
+      frames.push({ phase: 'leaf', activeLine: L('if u is a leaf'), pythonLine: P('best = total if best is None'), node: u, bobTime: [...bobTime], best, message: `Leaf ${u} gives total ${total}; best is ${best}.` })
     }
     for (const w of kids) visit(w, u, total)
   }
   visit(0, -1, 0)
-  frames.push({ phase: 'done', activeLine: L('return the best total'), node: -1, bobTime: [...bobTime], best, message: `Best total: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return the best total'), pythonLine: P('return best'), node: -1, bobTime: [...bobTime], best, message: `Best total: ${best}.` })
   return { input: { edges, bob, amount }, bobTime, result: best, frames }
 }
 
@@ -107,3 +107,5 @@ export const python = `def most_profitable_path(edges, bob, amount):
             stack.append((w, u, total))
     return best
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

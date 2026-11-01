@@ -33,7 +33,7 @@ export function buildTrace({ n }) {
     }
     return grid
   }
-  const frames = [{ phase: 'start', step: 0, table: table(), activeLine: L('ways[(0, 0)] = 1'), message: 'No rolls yet. Row 0 and column 0 stand for "no roll".' }]
+  const frames = [{ phase: 'start', step: 0, table: table(), activeLine: L('ways[(0, 0)] = 1'), pythonLine: P('ways = {(0, 0): 1}'), message: 'No rolls yet. Row 0 and column 0 stand for "no roll".' }]
   for (let step = 1; step <= n; step++) {
     const next = new Map()
     for (const [key, count] of ways) {
@@ -46,12 +46,14 @@ export function buildTrace({ n }) {
       }
     }
     ways = next
-    frames.push({ phase: 'step', step, table: table(), activeLine: L('ways = next'), message: `After ${step} roll${step === 1 ? '' : 's'} there are ${[...ways.values()].reduce((a, b) => (a + b) % MOD, 0)} valid sequences.` })
+    frames.push({ phase: 'step', step, table: table(), activeLine: L('ways = next'), pythonLine: P('ways = nxt'), message: `After ${step} roll${step === 1 ? '' : 's'} there are ${[...ways.values()].reduce((a, b) => (a + b) % MOD, 0)} valid sequences.` })
   }
   const result = [...ways.values()].reduce((a, b) => (a + b) % MOD, 0)
-  frames.push({ phase: 'done', step: n, table: table(), activeLine: L('return the sum of all counts'), message: `Distinct roll sequences: ${result}.` })
+  frames.push({ phase: 'done', step: n, table: table(), activeLine: L('return the sum of all counts'), pythonLine: P('return sum(ways.values()) % MOD'), message: `Distinct roll sequences: ${result}.` })
   return { input: { n }, result, frames }
 }
+
+const P = s => { const i = python.split('\n').findIndex(l => l.trim() === s); if (i < 0) throw new Error('missing python line: ' + s); return i + 1 }
 
 export const python = `def distinct_roll_sequences(n):
     from math import gcd

@@ -41,7 +41,7 @@ export function buildTrace({ robot, factory }) {
   const ways = Array.from({ length: F + 1 }, () => Array(m + 1).fill(Infinity))
   ways[0][0] = 0
   const show = () => ways.map(row => row.map(v => (Number.isFinite(v) ? v : '∞')))
-  const frames = [{ phase: 'start', cell: [0, 0], table: show(), activeLine: L('set ways[0][0] = 0'), message: 'Using no factories, only the empty set of robots can be repaired, at no cost.' }]
+  const frames = [{ phase: 'start', cell: [0, 0], table: show(), activeLine: L('set ways[0][0] = 0'), pythonLine: P('ways[0][0] = 0'), message: 'Using no factories, only the empty set of robots can be repaired, at no cost.' }]
   for (let i = 1; i <= F; i++) {
     const [pos, limit] = factories[i - 1]
     for (let j = 0; j <= m; j++) {
@@ -51,11 +51,11 @@ export function buildTrace({ robot, factory }) {
         cost += Math.abs(robots[j - k] - pos)
         ways[i][j] = Math.min(ways[i][j], ways[i - 1][j - k] + cost)
       }
-      frames.push({ phase: 'cell', cell: [i, j], table: show(), activeLine: L('ways[i][j] = min'), message: `Factory at ${pos} repairs the first ${j} robots for ${ways[i][j]}.` })
+      frames.push({ phase: 'cell', cell: [i, j], table: show(), activeLine: L('ways[i][j] = min'), pythonLine: Math.min(limit, j) >= 1 ? P('ways[i][j] = min(') : P('ways[i][j] = ways[i - 1][j]'), message: `Factory at ${pos} repairs the first ${j} robots for ${ways[i][j]}.` })
     }
   }
   const result = ways[F][m]
-  frames.push({ phase: 'done', cell: [F, m], table: show(), activeLine: L('return ways[factories][robots]'), message: `Minimum total distance: ${result}.` })
+  frames.push({ phase: 'done', cell: [F, m], table: show(), activeLine: L('return ways[factories][robots]'), pythonLine: P('return ways[len(factories)][m]'), message: `Minimum total distance: ${result}.` })
   return { input: { robot, factory }, result, frames }
 }
 
@@ -75,3 +75,5 @@ export const python = `def min_total_distance(robot, factory):
                 ways[i][j] = min(ways[i][j], ways[i - 1][j - k] + cost)
     return ways[len(factories)][m]
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
