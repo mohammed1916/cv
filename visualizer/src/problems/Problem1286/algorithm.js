@@ -17,26 +17,26 @@ export function buildTrace(input) {
   const positions = Array.from({ length: k }, (_, i) => i)
   const out = []
   const frames = []
-  const snap = (phase, activeLine, message, moved = -1) => frames.push({
-    phase, activeLine, positions: [...positions], out: [...out], moved, message,
+  const snap = (phase, activeLine, pythonLine, message, moved = -1) => frames.push({
+    phase, activeLine, pythonLine, positions: [...positions], out: [...out], moved, message,
   })
 
-  snap('start', L('start with the first combination'), 'Start at the first combination, the first k positions.')
+  snap('start', L('start with the first combination'), P('positions = list(range(k))'), 'Start at the first combination, the first k positions.')
   for (;;) {
     out.push(positions.map(p => characters[p]).join(''))
-    snap('emit', L('add the combination'), `next() yields ${out[out.length - 1]}.`)
+    snap('emit', L('add the combination'), P('out.append('), `next() yields ${out[out.length - 1]}.`)
     let i = k - 1
     while (i >= 0 && positions[i] === n - k + i) i--
-    snap('advance', L('find the rightmost position'), i < 0 ? 'No position can move right.' : `Position ${i} can still move right.`)
+    snap('advance', L('find the rightmost position'), P('while i >= 0 and positions[i]'), i < 0 ? 'No position can move right.' : `Position ${i} can still move right.`)
     if (i < 0) {
-      snap('advance', L('if there is none'), 'hasNext() is now false, so the sequence is finished.')
+      snap('advance', L('if there is none'), P('if i < 0:'), 'hasNext() is now false, so the sequence is finished.')
       break
     }
     positions[i]++
     for (let j = i + 1; j < k; j++) positions[j] = positions[j - 1] + 1
-    snap('advance', L('move that position'), `Move position ${i} to ${positions[i]}; later positions follow it.`, i)
+    snap('advance', L('move that position'), P('positions[i] += 1'), `Move position ${i} to ${positions[i]}; later positions follow it.`, i)
   }
-  snap('done', L('return the output'), `${out.length} combinations in order.`)
+  snap('done', L('return the output'), P('return out'), `${out.length} combinations in order.`)
   return { input, characters, result: out, frames }
 }
 
@@ -67,3 +67,5 @@ export const python = `def combination_iterator(characters, combination_length):
             positions[j] = positions[j - 1] + 1
     return out
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

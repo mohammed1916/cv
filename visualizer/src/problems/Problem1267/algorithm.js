@@ -15,7 +15,7 @@ export function buildTrace(input) {
   const rowCount = grid.map(row => row.reduce((sum, v) => sum + v, 0))
   const colCount = Array.from({ length: cols }, (_, c) => grid.reduce((sum, row) => sum + row[c], 0))
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('count the servers in each row'), cell: null, counted: [], total, message: 'Tally servers per row and per column.' }]
+  const frames = [{ phase: 'start', activeLine: L('count the servers in each row'), pythonLine: P('row_count = ['), cell: null, counted: [], total, message: 'Tally servers per row and per column.' }]
   const counted = []
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
@@ -23,13 +23,13 @@ export function buildTrace(input) {
       if (rowCount[r] > 1 || colCount[c] > 1) {
         total += 1
         counted.push({ row: r, col: c })
-        frames.push({ phase: 'count', activeLine: L('add one to total'), cell: [r, c], counted: [...counted], total, message: `Server (${r}, ${c}) shares a line with another server. Total: ${total}.` })
+        frames.push({ phase: 'count', activeLine: L('add one to total'), pythonLine: P('total += 1'), cell: [r, c], counted: [...counted], total, message: `Server (${r}, ${c}) shares a line with another server. Total: ${total}.` })
       } else {
-        frames.push({ phase: 'skip', activeLine: L('if the cell holds a server'), cell: [r, c], counted: [...counted], total, message: `Server (${r}, ${c}) is alone in its row and column.` })
+        frames.push({ phase: 'skip', activeLine: L('if the cell holds a server'), pythonLine: P('if grid[r][c] == 1'), cell: [r, c], counted: [...counted], total, message: `Server (${r}, ${c}) is alone in its row and column.` })
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), cell: null, counted: [...counted], total, message: `${total} servers communicate.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), cell: null, counted: [...counted], total, message: `${total} servers communicate.` })
   return { input, result: total, frames }
 }
 
@@ -54,3 +54,5 @@ export const python = `def count_servers(grid):
                 total += 1
     return total
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

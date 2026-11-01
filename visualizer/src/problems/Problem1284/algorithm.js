@@ -22,19 +22,19 @@ export function buildTrace(mat) {
   }
   const dist = new Map([[start, 0]])
   const queue = [start]
-  const frames = [{ phase: 'start', activeLine: L('encode the matrix'), mask: start, flips: 0, message: `Encode the matrix as bits. The start state is ${start}.` }]
+  const frames = [{ phase: 'start', activeLine: L('encode the matrix'), pythonLine: P('start = 0'), mask: start, flips: 0, message: `Encode the matrix as bits. The start state is ${start}.` }]
   let answer = -1
   for (let head = 0; head < queue.length; head++) {
     const mask = queue[head]
     const flips = dist.get(mask)
     if (mask === 0) { answer = flips; break }
-    frames.push({ phase: 'explore', activeLine: L('for each cell'), mask, flips, message: `State ${mask} is reached with ${flips} flip(s).` })
+    frames.push({ phase: 'explore', activeLine: L('for each cell'), pythonLine: P('for t in toggles'), mask, flips, message: `State ${mask} is reached with ${flips} flip(s).` })
     for (const t of toggles) {
       const next = mask ^ t
       if (!dist.has(next)) { dist.set(next, flips + 1); queue.push(next) }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), mask: answer === -1 ? start : 0, flips: answer, message: answer === -1 ? 'No sequence of flips clears the matrix.' : `The all zero matrix needs ${answer} flip(s).` })
+  frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: P(answer === -1 ? 'return -1' : 'return dist[mask]'), mask: answer === -1 ? start : 0, flips: answer, message: answer === -1 ? 'No sequence of flips clears the matrix.' : `The all zero matrix needs ${answer} flip(s).` })
   return { input: mat, result: answer, frames }
 }
 
@@ -82,3 +82,5 @@ def min_flips(mat):
                 queue.append(nxt)
     return -1
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

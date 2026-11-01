@@ -10,7 +10,7 @@ export function buildTrace({ n, m }) {
   const grid = Array.from({ length: n }, () => Array(m).fill(0))
   let best = n * m
   let placed = 0
-  const frames = [{ phase: 'start', activeLine: L('set best to n times m'), grid: copy(grid), placed, best, message: `Start with ${best} unit squares as the best tiling.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to n times m'), pythonLine: P('best = n * m'), grid: copy(grid), placed, best, message: `Start with ${best} unit squares as the best tiling.` }]
   const fits = (r, c, s) => {
     if (r + s > n || c + s > m) return false
     for (let i = r; i < r + s; i++) for (let j = c; j < c + s; j++) if (grid[i][j] !== 0) return false
@@ -25,7 +25,7 @@ export function buildTrace({ n, m }) {
     if (cell === null) {
       if (placed < best) {
         best = placed
-        frames.push({ phase: 'improve', activeLine: L('set best to the count'), grid: copy(grid), placed, best, message: `Every cell is covered with ${placed} squares, a new best.` })
+        frames.push({ phase: 'improve', activeLine: L('set best to the count'), pythonLine: P('best = min(best, placed)'), grid: copy(grid), placed, best, message: `Every cell is covered with ${placed} squares, a new best.` })
       }
       return
     }
@@ -36,14 +36,14 @@ export function buildTrace({ n, m }) {
       if (placed + 1 >= best) continue
       placed++
       fill(r, c, s, placed)
-      frames.push({ phase: 'place', activeLine: L('place the square and add one'), grid: copy(grid), placed, best, message: `Place a ${s}x${s} square with its corner at row ${r}, column ${c}.` })
+      frames.push({ phase: 'place', activeLine: L('place the square and add one'), pythonLine: P('fill(r, c, s, placed)'), grid: copy(grid), placed, best, message: `Place a ${s}x${s} square with its corner at row ${r}, column ${c}.` })
       search()
       fill(r, c, s, 0)
       placed--
     }
   }
   search()
-  frames.push({ phase: 'done', activeLine: L('return best'), grid: copy(grid), placed, best, message: `Fewest squares: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: P('return best'), grid: copy(grid), placed, best, message: `Fewest squares: ${best}.` })
   return { input: { n, m }, result: best, frames }
 }
 
@@ -102,3 +102,5 @@ export const python = `def fewest_squares(n, m):
     search()
     return best
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

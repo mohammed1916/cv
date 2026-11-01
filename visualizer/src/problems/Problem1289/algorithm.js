@@ -32,7 +32,7 @@ export function buildTrace({ grid }) {
     if (r === done.length && c < partial.length) return partial[c]
     return '·'
   }))
-  const frames = [{ phase: 'start', activeLine: L('set best to a copy'), row: 0, col: -1, table: view(), message: `Row 0 starts the paths: ${grid[0].join(', ')}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set best to a copy'), pythonLine: P('best = list(grid[0])'), row: 0, col: -1, table: view(), message: `Row 0 starts the paths: ${grid[0].join(', ')}.` }]
   for (let r = 1; r < n; r++) {
     const prev = done[r - 1]
     const next = []
@@ -40,12 +40,12 @@ export function buildTrace({ grid }) {
       let smallest = Infinity
       for (let k = 0; k < n; k++) if (k !== c) smallest = Math.min(smallest, prev[k])
       next.push(grid[r][c] + smallest)
-      frames.push({ phase: 'cell', activeLine: L('find the smallest best value'), row: r, col: c, table: view(next), message: `Cell (${r}, ${c}) adds ${grid[r][c]} to ${smallest}, the smallest value above outside column ${c}.` })
+      frames.push({ phase: 'cell', activeLine: L('find the smallest best value'), pythonLine: P('nxt.append('), row: r, col: c, table: view(next), message: `Cell (${r}, ${c}) adds ${grid[r][c]} to ${smallest}, the smallest value above outside column ${c}.` })
     }
     done.push(next)
   }
   const result = Math.min(...done[n - 1])
-  frames.push({ phase: 'done', activeLine: L('return the smallest value'), row: n - 1, col: -1, table: view(), message: `Smallest falling path sum: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the smallest value'), pythonLine: P('return min(best)'), row: n - 1, col: -1, table: view(), message: `Smallest falling path sum: ${result}.` })
   return { input: { grid }, grid, result, frames }
 }
 
@@ -60,3 +60,5 @@ export const python = `def min_falling_path_sum(grid):
         best = nxt
     return min(best)
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

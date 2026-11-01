@@ -10,13 +10,14 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   const { upper, lower, colsum } = input
+  const pyLine = { both: P('bottom.append(1)'), none: P('bottom.append(0)'), top: P('up_remaining -= 1'), bottom: P('low_remaining -= 1') }
   const top = []
   const bottom = []
   const placed = colsum.map(() => '')
   const twos = colsum.filter(v => v === 2).length
   let up = upper - twos
   let low = lower - twos
-  const frames = [{ phase: 'start', activeLine: L('set upRemaining'), index: -1, placed: [...placed], up, low, message: `Columns with sum 2 use one 1 from each row, leaving ${up} for the top row and ${low} for the bottom row.` }]
+  const frames = [{ phase: 'start', activeLine: L('set upRemaining'), pythonLine: P('up_remaining = upper - twos'), index: -1, placed: [...placed], up, low, message: `Columns with sum 2 use one 1 from each row, leaving ${up} for the top row and ${low} for the bottom row.` }]
   colsum.forEach((total, j) => {
     let label
     if (total === 2) { top.push(1); bottom.push(1); label = 'both' }
@@ -26,11 +27,11 @@ export function buildTrace(input) {
     placed[j] = label
     const line = { both: 'put a 1 in both rows', none: 'put a 0 in both rows', top: 'put a 1 in the top row', bottom: 'put a 1 in the bottom row' }[label]
     const text = { both: 'a 1 in both rows', none: 'zeros in both rows', top: 'its 1 in the top row', bottom: 'its 1 in the bottom row' }[label]
-    frames.push({ phase: 'column', activeLine: L(line), index: j, placed: [...placed], up, low, message: `Column ${j} has sum ${total}, so it gets ${text}.` })
+    frames.push({ phase: 'column', activeLine: L(line), pythonLine: pyLine[label], index: j, placed: [...placed], up, low, message: `Column ${j} has sum ${total}, so it gets ${text}.` })
   })
   const ok = up === 0 && low === 0
   const result = ok ? [top, bottom] : []
-  frames.push({ phase: 'done', activeLine: L(ok ? 'return the two rows' : 'return an empty matrix'), index: -1, placed: [...placed], up, low, message: ok ? 'Both row sums and every column sum are met.' : 'A row quota is left unfilled, so no matrix fits.' })
+  frames.push({ phase: 'done', activeLine: L(ok ? 'return the two rows' : 'return an empty matrix'), pythonLine: P(ok ? 'return [top, bottom]' : 'return []'), index: -1, placed: [...placed], up, low, message: ok ? 'Both row sums and every column sum are met.' : 'A row quota is left unfilled, so no matrix fits.' })
   return { input, result, frames }
 }
 
@@ -77,3 +78,5 @@ export const python = `def reconstruct_matrix(upper, lower, colsum):
         return [top, bottom]
     return []
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

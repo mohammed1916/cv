@@ -24,19 +24,19 @@ export function buildTrace({ s, k }) {
   const n = s.length
   const INF = Infinity
   const cost = Array.from({ length: n }, () => Array(n).fill(0))
-  const frames = [{ phase: 'start', range: null, cell: null, table: null, activeLine: L('for each substring'), message: 'Price every substring by the letter changes that make it a palindrome.' }]
+  const frames = [{ phase: 'start', range: null, cell: null, table: null, activeLine: L('for each substring'), pythonLine: P('for i in range(n):'), message: 'Price every substring by the letter changes that make it a palindrome.' }]
   for (let i = 0; i < n; i++) {
     for (let j = i; j < n; j++) {
       let changes = 0
       for (let a = i, b = j; a < b; a++, b--) if (s[a] !== s[b]) changes++
       cost[i][j] = changes
-      frames.push({ phase: 'cost', range: [i, j], cell: null, table: null, activeLine: L('set cost[i][j]'), message: `"${s.slice(i, j + 1)}" needs ${changes} letter change(s) to become a palindrome.` })
+      frames.push({ phase: 'cost', range: [i, j], cell: null, table: null, activeLine: L('set cost[i][j]'), pythonLine: P('cost[i][j] = changes'), message: `"${s.slice(i, j + 1)}" needs ${changes} letter change(s) to become a palindrome.` })
     }
   }
   const best = Array.from({ length: k + 1 }, () => Array(n + 1).fill(INF))
   best[0][0] = 0
   const snapshot = () => best.map(row => row.map(v => (v === INF ? '∞' : v)))
-  frames.push({ phase: 'base', range: null, cell: null, table: snapshot(), activeLine: L('set best[0][0]'), message: 'Zero parts cover zero letters at no cost.' })
+  frames.push({ phase: 'base', range: null, cell: null, table: snapshot(), activeLine: L('set best[0][0]'), pythonLine: P('best[0][0] = 0'), message: 'Zero parts cover zero letters at no cost.' })
   for (let p = 1; p <= k; p++) {
     for (let e = p; e <= n; e++) {
       for (let q = p - 1; q < e; q++) {
@@ -44,11 +44,11 @@ export function buildTrace({ s, k }) {
         const candidate = best[p - 1][q] + cost[q][e - 1]
         if (candidate < best[p][e]) best[p][e] = candidate
       }
-      frames.push({ phase: 'cell', range: null, cell: [p, e], table: snapshot(), activeLine: L('keep the smallest'), message: `${p} part(s) cover the first ${e} letters with at most ${best[p][e] === INF ? '∞' : best[p][e]} change(s).` })
+      frames.push({ phase: 'cell', range: null, cell: [p, e], table: snapshot(), activeLine: L('keep the smallest'), pythonLine: P('if candidate < best[p][e]'), message: `${p} part(s) cover the first ${e} letters with at most ${best[p][e] === INF ? '∞' : best[p][e]} change(s).` })
     }
   }
   const result = best[k][n]
-  frames.push({ phase: 'done', range: null, cell: [k, n], table: snapshot(), activeLine: L('return best[k][n]'), result, message: `Minimum changes with ${k} palindromes: ${result}.` })
+  frames.push({ phase: 'done', range: null, cell: [k, n], table: snapshot(), activeLine: L('return best[k][n]'), pythonLine: P('return best[k][n]'), result, message: `Minimum changes with ${k} palindromes: ${result}.` })
   return { input: { s, k }, result, frames }
 }
 
@@ -77,3 +77,5 @@ export const python = `def min_changes_to_palindromes(s, k):
                         best[p][e] = candidate
     return best[k][n]
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

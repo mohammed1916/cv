@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const { steps, arr_len: arrLen } = input
   const history = [Array(arrLen).fill(0)]
   history[0][0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), step: 0, position: -1, table: copyTable(history), total: null, message: 'Start at index 0: one way.' }]
+  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), pythonLine: P('dp[0] = 1'), step: 0, position: -1, table: copyTable(history), total: null, message: 'Start at index 0: one way.' }]
   for (let t = 1; t <= steps; t++) {
     const row = Array(arrLen).fill(0)
     for (let p = 0; p < arrLen; p++) {
@@ -22,12 +22,12 @@ export function buildTrace(input) {
       if (p > 0) total += history[t - 1][p - 1]
       if (p < arrLen - 1) total += history[t - 1][p + 1]
       row[p] = total % MOD
-      frames.push({ phase: 'cell', activeLine: L('set ways[t][p] to total'), step: t, position: p, table: copyTable([...history, row]), total: null, message: `After ${t} step(s) at index ${p}: ${row[p]} ways.` })
+      frames.push({ phase: 'cell', activeLine: L('set ways[t][p] to total'), pythonLine: P('nxt[p] = total % MOD'), step: t, position: p, table: copyTable([...history, row]), total: null, message: `After ${t} step(s) at index ${p}: ${row[p]} ways.` })
     }
     history.push(row)
   }
   const result = history[steps][0]
-  frames.push({ phase: 'done', activeLine: L('return ways[steps][0]'), step: steps, position: 0, table: copyTable(history), total: result, message: `${result} ways to be at index 0 after ${steps} steps.` })
+  frames.push({ phase: 'done', activeLine: L('return ways[steps][0]'), pythonLine: P('return dp[0]'), step: steps, position: 0, table: copyTable(history), total: result, message: `${result} ways to be at index 0 after ${steps} steps.` })
   return { input, result, frames }
 }
 
@@ -58,3 +58,5 @@ export const python = `def num_ways(steps, arr_len):
         dp = nxt
     return dp[0]
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1

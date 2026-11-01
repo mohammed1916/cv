@@ -13,25 +13,25 @@ export function buildTrace({ tree, targets }) {
   const root = treeFromLevelOrder(tree)
   const tags = {}
   const values = new Set()
-  const frames = [{ phase: 'start', activeLine: L('set the root value to zero'), node: null, tags: {}, found: null, results: [], message: 'Every value is contaminated. Recover them from positions, starting at 0 for the root.' }]
+  const frames = [{ phase: 'start', activeLine: L('set the root value to zero'), pythonLine: P('stack = [(top, 0)]'), node: null, tags: {}, found: null, results: [], message: 'Every value is contaminated. Recover them from positions, starting at 0 for the root.' }]
   const stack = root ? [{ node: root, value: 0, side: null }] : []
   while (stack.length) {
     const { node, value, side } = stack.pop()
     tags[node.id] = String(value)
     values.add(value)
     const line = side === null ? 'set the root value to zero' : side === 'left' ? 'give the left child' : 'give the right child'
-    frames.push({ phase: 'recover', activeLine: L(line), node: node.id, tags: { ...tags }, found: null, results: [], message: `This position is worth ${value}.` })
+    frames.push({ phase: 'recover', activeLine: L(line), pythonLine: P('values.add(value)'), node: node.id, tags: { ...tags }, found: null, results: [], message: `This position is worth ${value}.` })
     if (node.left) stack.push({ node: node.left, value: 2 * value + 1, side: 'left' })
     if (node.right) stack.push({ node: node.right, value: 2 * value + 2, side: 'right' })
   }
-  frames.push({ phase: 'collect', activeLine: L('collect every recovered value'), node: null, tags: { ...tags }, found: null, results: [], message: `Recovered values: ${[...values].sort((a, b) => a - b).join(', ')}.` })
+  frames.push({ phase: 'collect', activeLine: L('collect every recovered value'), pythonLine: P('while stack:'), node: null, tags: { ...tags }, found: null, results: [], message: `Recovered values: ${[...values].sort((a, b) => a - b).join(', ')}.` })
   const results = []
   for (const t of targets) {
     const found = values.has(t)
     results.push(found)
-    frames.push({ phase: 'find', activeLine: L('for each target, record'), node: null, tags: { ...tags }, found, target: t, results: [...results], message: `${t} ${found ? 'is' : 'is not'} in the recovered tree.` })
+    frames.push({ phase: 'find', activeLine: L('for each target, record'), pythonLine: P('return [t in values'), node: null, tags: { ...tags }, found, target: t, results: [...results], message: `${t} ${found ? 'is' : 'is not'} in the recovered tree.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the list of answers'), node: null, tags: { ...tags }, found: null, results: [...results], result: results, message: `Answers: [${results.join(', ')}].` })
+  frames.push({ phase: 'done', activeLine: L('return the list of answers'), pythonLine: P('return [t in values'), node: null, tags: { ...tags }, found: null, results: [...results], result: results, message: `Answers: [${results.join(', ')}].` })
   return { input: { tree, targets }, root, result: results, frames }
 }
 
@@ -77,3 +77,5 @@ export const python = `def find_in_contaminated_tree(tree, targets):
             stack.append((current[1], 2 * value + 2))
     return [t in values for t in targets]
 `
+
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
