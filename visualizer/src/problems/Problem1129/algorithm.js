@@ -20,10 +20,10 @@ export function buildTrace(input) {
   answer[0] = 0
   const seen = new Set(['0:none'])
   const queue = [{ node: 0, last: 'none', dist: 0 }]
-  const frames = [{ phase: 'start', activeLine: L('start a queue with node 0'), current: 0, last: 'none', answers: [...answer], message: 'Start at node 0. Either colour may be taken first.' }]
+  const frames = [{ phase: 'start', activeLine: L('start a queue with node 0'), pythonLine: P('queue = [(0, None, 0)]'), current: 0, last: 'none', answers: [...answer], message: 'Start at node 0. Either colour may be taken first.' }]
   for (let head = 0; head < queue.length; head++) {
     const here = queue[head]
-    frames.push({ phase: 'pop', activeLine: L('take the next node'), current: here.node, last: here.last, answers: [...answer], message: `At node ${here.node} after ${here.dist} edge(s), last colour ${here.last}.` })
+    frames.push({ phase: 'pop', activeLine: L('take the next node'), pythonLine: P('node, last, dist = queue[head]'), current: here.node, last: here.last, answers: [...answer], message: `At node ${here.node} after ${here.dist} edge(s), last colour ${here.last}.` })
     for (const edge of adj[here.node]) {
       if (edge.colour === here.last) continue
       const k2 = `${edge.to}:${edge.colour}`
@@ -32,10 +32,10 @@ export function buildTrace(input) {
       const first = answer[edge.to] === -1
       if (first) answer[edge.to] = here.dist + 1
       queue.push({ node: edge.to, last: edge.colour, dist: here.dist + 1 })
-      frames.push({ phase: first ? 'reach' : 'extend', activeLine: L(first ? 'if the target has no answer yet' : 'add the target with this edge colour'), current: edge.to, last: edge.colour, answers: [...answer], message: first ? `Node ${edge.to} is first reached by a ${edge.colour} edge in ${here.dist + 1} step(s).` : `Node ${edge.to} is reached by a ${edge.colour} edge, but already has an answer.` })
+      frames.push({ phase: first ? 'reach' : 'extend', activeLine: L(first ? 'if the target has no answer yet' : 'add the target with this edge colour'), pythonLine: first ? P('answer[target] = dist + 1') : P('queue.append((target, colour, dist + 1))'), current: edge.to, last: edge.colour, answers: [...answer], message: first ? `Node ${edge.to} is first reached by a ${edge.colour} edge in ${here.dist + 1} step(s).` : `Node ${edge.to} is reached by a ${edge.colour} edge, but already has an answer.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), current: null, last: null, answers: [...answer], message: `Answers by node: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return the answers'), pythonLine: P('return answer'), current: null, last: null, answers: [...answer], message: `Answers by node: ${answer.join(', ')}.` })
   return { input, result: answer, frames }
 }
 
@@ -50,6 +50,7 @@ export const code = `shortest alternating path lengths from node 0 to every node
       add the target with this edge colour to the queue
   return the answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def shortest_alternating_paths(n, red_edges, blue_edges):
     adj = [[] for _ in range(n)]

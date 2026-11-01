@@ -28,7 +28,7 @@ export function buildTrace(input) {
   let col = 0
   let moves = ''
   let typed = ''
-  const frames = [{ phase: 'start', activeLine: L('set row and col'), row, col, moves, typed, message: 'Start on the letter a at row 0, column 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('set row and col'), pythonLine: P('row, col = 0, 0'), row, col, moves, typed, message: 'Start on the letter a at row 0, column 0.' }]
   for (const ch of target) {
     const goal = position(ch)
     const segment = plan(row, col, ch, goal)
@@ -36,9 +36,9 @@ export function buildTrace(input) {
     typed += ch
     row = goal.row
     col = goal.col
-    frames.push({ phase: 'letter', activeLine: L('add the selection'), row, col, moves, typed, message: `${segment ? `Move ${segment}` : 'Stay put'}, then select ${ch}.` })
+    frames.push({ phase: 'letter', activeLine: L('add the selection'), pythonLine: P("moves.append('!')"), row, col, moves, typed, message: `${segment ? `Move ${segment}` : 'Stay put'}, then select ${ch}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return moves'), row, col, moves, typed, message: `The moves spell ${typed}.` })
+  frames.push({ phase: 'done', activeLine: L('return moves'), pythonLine: P("return ''.join(moves)"), row, col, moves, typed, message: `The moves spell ${typed}.` })
   return { input, result: moves, frames }
 }
 
@@ -55,6 +55,7 @@ export const code = `alphabet board path (target):
     set row and col to the letter position
   return moves`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def alphabet_board_path(target):
     row, col = 0, 0

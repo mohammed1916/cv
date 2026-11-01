@@ -1,5 +1,6 @@
 const START_LINE = 14
 const RETURN_LINE = 15
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function parseInput(text) {
   let input
@@ -26,34 +27,34 @@ export function buildTrace(input) {
   let oddPermit = false
   let evenPermit = false
 
-  const snapshot = (phase, activeLine, message, current) => {
-    frames.push({ phase, activeLine, message, current, zeroPermit, oddPermit, evenPermit, printedCount: tokens.length, result: null })
+  const snapshot = (phase, activeLine, message, current, pythonLine) => {
+    frames.push({ phase, activeLine, message, current, zeroPermit, oddPermit, evenPermit, printedCount: tokens.length, result: null, pythonLine })
   }
 
-  snapshot("start", START_LINE, "Start the zero, odd and even threads.", null)
+  snapshot("start", START_LINE, "Start the zero, odd and even threads.", null, P('t.start()'))
   for (let i = 1; i <= n; i++) {
     zeroPermit = false
-    snapshot("zero", 3, `Round ${i}: zero acquires its permit.`, "zero")
+    snapshot("zero", 3, `Round ${i}: zero acquires its permit.`, "zero", P('zero_sem.acquire()'))
     tokens.push("0")
-    snapshot("zero", 4, 'Zero prints "0".', "zero")
+    snapshot("zero", 4, 'Zero prints "0".', "zero", P('out.append("0")'))
     const isOdd = i % 2 === 1
     if (isOdd) {
       oddPermit = true
-      snapshot("odd", 7, `Odd acquires its permit for ${i}.`, "odd")
+      snapshot("odd", 7, `Odd acquires its permit for ${i}.`, "odd", P('odd_sem.acquire()'))
       oddPermit = false
       tokens.push(String(i))
-      snapshot("odd", 8, `Odd prints ${i} and releases zero.`, "odd")
+      snapshot("odd", 8, `Odd prints ${i} and releases zero.`, "odd", P('out.append(str(k))'))
     } else {
       evenPermit = true
-      snapshot("even", 11, `Even acquires its permit for ${i}.`, "even")
+      snapshot("even", 11, `Even acquires its permit for ${i}.`, "even", P('even_sem.acquire()'))
       evenPermit = false
       tokens.push(String(i))
-      snapshot("even", 12, `Even prints ${i} and releases zero.`, "even")
+      snapshot("even", 12, `Even prints ${i} and releases zero.`, "even", P('even_sem.acquire()') + 1)
     }
     zeroPermit = true
   }
   const result = tokens.join("")
-  snapshot("done", RETURN_LINE, `Return "${result}".`, null)
+  snapshot("done", RETURN_LINE, `Return "${result}".`, null, P('return "".join(out)'))
   frames[frames.length - 1].result = result
   return { input, result, frames, tokens }
 }

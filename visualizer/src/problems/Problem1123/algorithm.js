@@ -19,14 +19,15 @@ export const code = `value of the lowest common ancestor of the deepest leaves
   otherwise return the result of the deeper side
   return the value of the common ancestor of the root`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function buildTrace(arr) {
   const root = treeFromLevelOrder(arr)
-  const frames = [{ phase: 'start', activeLine: L('call deepest on the root'), node: null, deepest: [], message: 'Ask every subtree for its deepest depth and common ancestor.' }]
+  const frames = [{ phase: 'start', activeLine: L('call deepest on the root'), pythonLine: P('return deepest(build(arr), 0)'), node: null, deepest: [], message: 'Ask every subtree for its deepest depth and common ancestor.' }]
   const deepest = (node, depth) => {
     if (!node) return { depth: depth - 1, lca: null }
     if (!node.left && !node.right) {
-      frames.push({ phase: 'leaf', activeLine: L('if node is a leaf'), node: node.id, deepest: [], message: `Leaf ${node.value} at depth ${depth}.` })
+      frames.push({ phase: 'leaf', activeLine: L('if node is a leaf'), pythonLine: P('return depth, node'), node: node.id, deepest: [], message: `Leaf ${node.value} at depth ${depth}.` })
       return { depth, lca: node }
     }
     const left = deepest(node.left, depth + 1)
@@ -34,10 +35,10 @@ export function buildTrace(arr) {
     let out
     if (left.depth === right.depth) {
       out = { depth: left.depth, lca: node }
-      frames.push({ phase: 'join', activeLine: L('if the two depths are equal'), node: node.id, deepest: [], message: `Both sides reach depth ${left.depth}, so ${node.value} is the common ancestor.` })
+      frames.push({ phase: 'join', activeLine: L('if the two depths are equal'), pythonLine: P('return left_depth, node'), node: node.id, deepest: [], message: `Both sides reach depth ${left.depth}, so ${node.value} is the common ancestor.` })
     } else {
       out = left.depth > right.depth ? left : right
-      frames.push({ phase: 'pass', activeLine: L('otherwise return'), node: node.id, deepest: [], message: `${node.value} passes up the deeper side at depth ${out.depth}.` })
+      frames.push({ phase: 'pass', activeLine: L('otherwise return'), pythonLine: P('return (left_depth, left_lca)'), node: node.id, deepest: [], message: `${node.value} passes up the deeper side at depth ${out.depth}.` })
     }
     return out
   }
@@ -50,7 +51,7 @@ export function buildTrace(arr) {
     collect(node.right, depth + 1, max)
   }
   collect(root, 0, found.depth)
-  frames.push({ phase: 'done', activeLine: L('return the value'), node: found.lca.id, deepest: deepestIds, message: `Answer: ${found.lca.value}.` })
+  frames.push({ phase: 'done', activeLine: L('return the value'), pythonLine: P('return deepest(build(arr), 0)'), node: found.lca.id, deepest: deepestIds, message: `Answer: ${found.lca.value}.` })
   return { input: arr, root, result: found.lca.value, frames }
 }
 

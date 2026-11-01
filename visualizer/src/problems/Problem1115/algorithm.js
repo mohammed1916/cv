@@ -4,6 +4,7 @@ const BAR_WAIT_LINE = 7
 const BAR_PRINT_LINE = 8
 const START_LINE = 10
 const RETURN_LINE = 11
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function parseInput(text) {
   let input
@@ -29,26 +30,26 @@ export function buildTrace(input) {
   let fooPermit = true
   let barPermit = false
 
-  const snapshot = (phase, activeLine, message, round) => {
-    frames.push({ phase, activeLine, message, round, fooPermit, barPermit, printedCount: tokens.length, result: null })
+  const snapshot = (phase, activeLine, message, round, pythonLine) => {
+    frames.push({ phase, activeLine, message, round, fooPermit, barPermit, printedCount: tokens.length, result: null, pythonLine })
   }
 
-  snapshot("setup", 1, "Set fooPermit to 1 and barPermit to 0.", 0)
-  snapshot("start", START_LINE, "Start the foo thread and the bar thread.", 0)
+  snapshot("setup", 1, "Set fooPermit to 1 and barPermit to 0.", 0, P('foo_sem = threading.Semaphore(1)'))
+  snapshot("start", START_LINE, "Start the foo thread and the bar thread.", 0, P('t.start()'))
   for (let round = 1; round <= n; round++) {
     fooPermit = false
-    snapshot("foo", FOO_WAIT_LINE, `Round ${round}: foo acquires its permit.`, round)
+    snapshot("foo", FOO_WAIT_LINE, `Round ${round}: foo acquires its permit.`, round, P('foo_sem.acquire()'))
     tokens.push("foo")
     barPermit = true
-    snapshot("foo", FOO_PRINT_LINE, `Foo prints "foo" and releases bar.`, round)
+    snapshot("foo", FOO_PRINT_LINE, `Foo prints "foo" and releases bar.`, round, P('out.append("foo")'))
     barPermit = false
-    snapshot("bar", BAR_WAIT_LINE, `Round ${round}: bar acquires its permit.`, round)
+    snapshot("bar", BAR_WAIT_LINE, `Round ${round}: bar acquires its permit.`, round, P('bar_sem.acquire()'))
     tokens.push("bar")
     fooPermit = true
-    snapshot("bar", BAR_PRINT_LINE, `Bar prints "bar" and releases foo.`, round)
+    snapshot("bar", BAR_PRINT_LINE, `Bar prints "bar" and releases foo.`, round, P('out.append("bar")'))
   }
   const result = tokens.join("")
-  snapshot("done", RETURN_LINE, `Return "${result}".`, n)
+  snapshot("done", RETURN_LINE, `Return "${result}".`, n, P('return "".join(out)'))
   frames[frames.length - 1].result = result
   return { input, result, frames, tokens }
 }

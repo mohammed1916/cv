@@ -6,6 +6,7 @@ const O_BARRIER_LINE = 9
 const O_PRINT_LINE = 10
 const START_LINE = 12
 const RETURN_LINE = 13
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function parseInput(text) {
   let input
@@ -57,7 +58,7 @@ export function buildTrace(input) {
       if (member.type === "H") hPermits++
       else oPermits++
       snapshot("release", member.type === "H" ? H_PRINT_LINE : O_PRINT_LINE,
-        `Thread ${member.index + 1} prints "${member.type}" and releases its permit.`, member.index)
+        `Thread ${member.index + 1} prints "${member.type}" and releases its permit.`, member.index, { pythonLine: member.type === "H" ? P('out.append("H")') : P('out.append("O")') })
     }
   }
 
@@ -70,25 +71,25 @@ export function buildTrace(input) {
     barrier.push(member)
     statuses[member.index] = "barrier"
     snapshot("barrier", member.type === "H" ? H_BARRIER_LINE : O_BARRIER_LINE,
-      `Thread ${member.index + 1} holds a ${member.type} permit and waits at the barrier.`, member.index)
+      `Thread ${member.index + 1} holds a ${member.type} permit and waits at the barrier.`, member.index, { pythonLine: member.type === "H" ? P("barrier.wait()") : P("o_sem.acquire()") + 1 })
     if (barrier.length === 3) releaseGroup()
     tryAdmit()
   }
 
   [...water].forEach((type, index) => {
     statuses[index] = "arrived"
-    snapshot("arrive", START_LINE, `Thread ${index + 1} calls ${type === "H" ? "hydrogen" : "oxygen"}().`, index)
+    snapshot("arrive", START_LINE, `Thread ${index + 1} calls ${type === "H" ? "hydrogen" : "oxygen"}().`, index, { pythonLine: P('t.start()') })
     queue.push({ type, index })
     tryAdmit()
     if (statuses[index] !== "barrier" && statuses[index] !== "printed") {
       statuses[index] = "waiting"
       snapshot("wait", type === "H" ? H_WAIT_LINE : O_WAIT_LINE,
-        `No ${type === "H" ? "hydrogen" : "oxygen"} permit is free; thread ${index + 1} waits.`, index)
+        `No ${type === "H" ? "hydrogen" : "oxygen"} permit is free; thread ${index + 1} waits.`, index, { pythonLine: P(type === "H" ? "h_sem.acquire()" : "o_sem.acquire()") })
     }
   })
 
   const result = order.join("")
-  snapshot("done", RETURN_LINE, `Return "${result}".`, null, { result })
+  snapshot("done", RETURN_LINE, `Return "${result}".`, null, { result, pythonLine: P('return "".join(out)') })
   return { input, result, frames, order }
 }
 

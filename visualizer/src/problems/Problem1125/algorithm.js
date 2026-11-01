@@ -23,31 +23,31 @@ export function buildTrace(input) {
   const frames = []
   let person = -1
   let changed = []
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, person, changed: [...changed], teams: [...dp.entries()].map(([m, t]) => [m, t.length]), message,
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    phase, activeLine, person, changed: [...changed], teams: [...dp.entries()].map(([m, t]) => [m, t.length]), message, pythonLine,
   })
 
-  snap('start', L('start with the empty skill set'), 'The empty set of skills is covered by an empty team.')
-  snap('map', L('map each required skill'), `Skills get bits: ${skills.map((s, i) => `${s}=${i}`).join(', ')}.`)
+  snap('start', L('start with the empty skill set'), 'The empty set of skills is covered by an empty team.', P('dp = {0: []}'))
+  snap('map', L('map each required skill'), `Skills get bits: ${skills.map((s, i) => `${s}=${i}`).join(', ')}.`, P('bit = {skill'))
   for (let p = 0; p < people.length; p++) {
     person = p
     changed = []
     let pm = 0
     for (const s of people[p]) pm |= 1 << bit.get(s)
-    snap('person', L('for each person p'), `Person ${p} holds mask ${pm.toString(2).padStart(skills.length, '0')}.`)
+    snap('person', L('for each person p'), `Person ${p} holds mask ${pm.toString(2).padStart(skills.length, '0')}.`, P('pm |= 1 << bit[s]'))
     for (const [mask, team] of [...dp.entries()]) {
       const t = mask | pm
       if (!dp.has(t) || dp.get(t).length > team.length + 1) {
         dp.set(t, [...team, p])
         changed.push(t)
-        snap('update', L('if t is new'), `Covered set ${t.toString(2).padStart(skills.length, '0')} is now reached with ${team.length + 1} people.`)
+        snap('update', L('if t is new'), `Covered set ${t.toString(2).padStart(skills.length, '0')} is now reached with ${team.length + 1} people.`, P('dp[t] = team + [p]'))
       }
     }
   }
   person = -1
   changed = []
   const team = [...dp.get(full)].sort((a, b) => a - b)
-  snap('done', L('return the team'), `Smallest team of ${team.length}: [${team.join(', ')}].`)
+  snap('done', L('return the team'), `Smallest team of ${team.length}: [${team.join(', ')}].`, P('return sorted(dp[full])'))
   return { input, result: team, frames }
 }
 
@@ -60,6 +60,7 @@ for each person p in order
     if t is new, or its team is larger than this team plus p, store this team plus p for t
 return the team that covers every skill, sorted by index`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def smallest_team(req_skills, people):
     bit = {skill: i for i, skill in enumerate(req_skills)}

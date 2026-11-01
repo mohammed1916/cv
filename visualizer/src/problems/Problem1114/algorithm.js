@@ -4,6 +4,7 @@ const PRINT_LINE = { 1: 3, 2: 7, 3: 11 }
 const WAIT_LINE = { 2: 6, 3: 10 }
 const START_LINE = 12
 const RETURN_LINE = 13
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function parseInput(text) {
   let input
@@ -42,7 +43,7 @@ export function buildTrace(input) {
     order.push(WORDS[value])
     done.add(value)
     statuses[index] = "printed"
-    snapshot("print", PRINT_LINE[value], `Thread ${index + 1} prints "${WORDS[value]}".`, index)
+    snapshot("print", PRINT_LINE[value], `Thread ${index + 1} prints "${WORDS[value]}".`, index, { pythonLine: P(`out.append("${WORDS[value]}")`) })
     const next = value + 1
     if (blocked.has(next)) {
       const nextIndex = blocked.get(next)
@@ -53,18 +54,18 @@ export function buildTrace(input) {
 
   nums.forEach((value, index) => {
     statuses[index] = "arrived"
-    snapshot("arrive", START_LINE, `Thread ${index + 1} calls ${METHODS[value]}().`, index)
+    snapshot("arrive", START_LINE, `Thread ${index + 1} calls ${METHODS[value]}().`, index, { pythonLine: P('t.start()') })
     if (value === 1 || done.has(value - 1)) {
       printValue(value, index)
     } else {
       statuses[index] = "waiting"
       blocked.set(value, index)
-      snapshot("wait", WAIT_LINE[value], `${METHODS[value]}() waits until "${WORDS[value - 1]}" has printed.`, index)
+      snapshot("wait", WAIT_LINE[value], `${METHODS[value]}() waits until "${WORDS[value - 1]}" has printed.`, index, { pythonLine: P(value === 2 ? 'first_done.wait()' : 'second_done.wait()') })
     }
   })
 
   const result = order.join("")
-  snapshot("done", RETURN_LINE, `Return "${result}".`, null, { result })
+  snapshot("done", RETURN_LINE, `Return "${result}".`, null, { result, pythonLine: P('return "".join(out)') })
   return { input, result, frames, order }
 }
 

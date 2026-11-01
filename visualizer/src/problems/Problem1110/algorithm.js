@@ -40,15 +40,15 @@ export function buildTrace({ root, to_delete }) {
   }
   mark(display)
   const forest = []
-  const frames = [{ phase: 'start', activeLine: L('set the forest to empty'), active: null, roots: [], deleted, message: `Delete the values ${to_delete.join(', ') || 'none'}. Each node that survives below a deleted parent starts a new tree.` }]
+  const frames = [{ phase: 'start', activeLine: L('set the forest to empty'), pythonLine: P('forest = []'), active: null, roots: [], deleted, message: `Delete the values ${to_delete.join(', ') || 'none'}. Each node that survives below a deleted parent starts a new tree.` }]
   const walk = (node, parentDeleted) => {
     if (!node) return null
     const gone = doomed.has(node.value)
     if (!gone && parentDeleted) {
       forest.push(node)
-      frames.push({ phase: 'root', activeLine: L('add the node to the forest as a new tree'), active: node.id, roots: forest.map(n => n.id), deleted, message: `Node ${node.value} starts a new tree.` })
+      frames.push({ phase: 'root', activeLine: L('add the node to the forest as a new tree'), pythonLine: P('forest.append(current)'), active: node.id, roots: forest.map(n => n.id), deleted, message: `Node ${node.value} starts a new tree.` })
     } else {
-      frames.push({ phase: 'visit', activeLine: L('set gone to whether'), active: node.id, roots: forest.map(n => n.id), deleted, message: gone ? `Node ${node.value} is deleted.` : `Node ${node.value} stays in its tree.` })
+      frames.push({ phase: 'visit', activeLine: L('set gone to whether'), pythonLine: P('gone = current.val in doomed'), active: node.id, roots: forest.map(n => n.id), deleted, message: gone ? `Node ${node.value} is deleted.` : `Node ${node.value} stays in its tree.` })
     }
     node.left = walk(node.left, gone)
     node.right = walk(node.right, gone)
@@ -56,7 +56,7 @@ export function buildTrace({ root, to_delete }) {
   }
   walk(work, true)
   const result = forest.map(serialize)
-  frames.push({ phase: 'done', activeLine: L('return the forest'), active: null, roots: forest.map(n => n.id), deleted, message: `${result.length} trees remain.` })
+  frames.push({ phase: 'done', activeLine: L('return the forest'), pythonLine: P('return [serialize(tree) for tree in forest]'), active: null, roots: forest.map(n => n.id), deleted, message: `${result.length} trees remain.` })
   return { input: { root, to_delete }, display, result, frames }
 }
 
@@ -75,6 +75,7 @@ walk of a node with parent deleted
   walk the right child with parent deleted set to gone
   if gone then return nothing, otherwise return the node`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
