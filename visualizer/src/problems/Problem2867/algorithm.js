@@ -26,26 +26,26 @@ export function buildTrace({ n, edges }) {
   for (const [a, b] of edges) { adjacency[a].push(b); adjacency[b].push(a) }
   const frames = []
   let count = 0
-  frames.push({ phase: 'start', activeLine: L('set count to 0'), u: -1, v: -1, primes: 0, reached: [], count, message: `Walk from every node of the tree labelled 1 to ${n}.` })
+  frames.push({ phase: 'start', activeLine: L('set count to 0'), pythonLine: P('count = 0'), u: -1, v: -1, primes: 0, reached: [], count, message: `Walk from every node of the tree labelled 1 to ${n}.` })
   for (let u = 1; u <= n; u++) {
     const pending = [[u, 0, isPrime(u) ? 1 : 0]]
     const reached = []
-    frames.push({ phase: 'walk', activeLine: L('for each start node'), u, v: u, primes: isPrime(u) ? 1 : 0, reached: [], count, message: `Start a walk at ${u}.` })
+    frames.push({ phase: 'walk', activeLine: L('for each start node'), pythonLine: P('for start in range'), u, v: u, primes: isPrime(u) ? 1 : 0, reached: [], count, message: `Start a walk at ${u}.` })
     while (pending.length) {
       const [v, parent, primes] = pending.pop()
       reached.push(v)
       if (v > u && primes === 1) {
         count++
-        frames.push({ phase: 'pair', activeLine: L('if v is greater than u'), u, v, primes, reached: [...reached], count, message: `Path ${u} to ${v} has exactly one prime. Count is ${count}.` })
+        frames.push({ phase: 'pair', activeLine: L('if v is greater than u'), pythonLine: P('count += 1'), u, v, primes, reached: [...reached], count, message: `Path ${u} to ${v} has exactly one prime. Count is ${count}.` })
       } else if (v > u) {
-        frames.push({ phase: 'skip', activeLine: L('if v is greater than u'), u, v, primes, reached: [...reached], count, message: `Path ${u} to ${v} has ${primes} primes; not counted.` })
+        frames.push({ phase: 'skip', activeLine: L('if v is greater than u'), pythonLine: P('if v > start and primes == 1'), u, v, primes, reached: [...reached], count, message: `Path ${u} to ${v} has ${primes} primes; not counted.` })
       }
       for (const w of adjacency[v]) {
         if (w !== parent) pending.push([w, v, primes + (isPrime(w) ? 1 : 0)])
       }
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), u: -1, v: -1, primes: 0, reached: [], count, message: `Valid pairs: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), u: -1, v: -1, primes: 0, reached: [], count, message: `Valid pairs: ${count}.` })
   return { input: { n, edges }, result: count, frames }
 }
 
@@ -57,6 +57,7 @@ export const code = `count pairs of nodes whose path has exactly one prime label
       if v is greater than u and c equals 1 then add one to count
   return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def count_prime_path_pairs(n, edges):
     def is_prime(x):

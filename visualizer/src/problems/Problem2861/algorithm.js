@@ -23,11 +23,11 @@ function priceOn(machine, alloys, input) {
 export function buildTrace(input) {
   const { n, k, budget, stock } = input
   let low = 0, high = Math.min(...stock) + budget
-  const frames = [{ phase: 'start', activeLine: L('set low to zero'), low, high, mid: null, machine: null, spent: null, message: `Zero alloys always works. The answer cannot exceed the smallest stock plus the budget.` }]
+  const frames = [{ phase: 'start', activeLine: L('set low to zero'), pythonLine: P('low = 0'), low, high, mid: null, machine: null, spent: null, message: `Zero alloys always works. The answer cannot exceed the smallest stock plus the budget.` }]
   const feasible = alloys => {
     for (let machine = 0; machine < k; machine++) {
       const spent = priceOn(machine, alloys, input)
-      frames.push({ phase: 'check', activeLine: L('set spent to zero'), low, high, mid: alloys, machine, spent, message: `Machine ${machine} needs ${spent} for ${alloys} alloys against a budget of ${budget}.` })
+      frames.push({ phase: 'check', activeLine: L('set spent to zero'), pythonLine: P('return spent <= budget'), low, high, mid: alloys, machine, spent, message: `Machine ${machine} needs ${spent} for ${alloys} alloys against a budget of ${budget}.` })
       if (spent <= budget) return true
     }
     return false
@@ -36,9 +36,9 @@ export function buildTrace(input) {
     const mid = Math.floor((low + high + 1) / 2)
     if (feasible(mid)) low = mid
     else high = mid - 1
-    frames.push({ phase: 'probe', activeLine: L('if some machine can afford'), low, high, mid, machine: null, spent: null, message: `${mid} alloys ${low >= mid ? 'can' : 'cannot'} be made, so the range is now ${low} to ${high}.` })
+    frames.push({ phase: 'probe', activeLine: L('if some machine can afford'), pythonLine: P(low >= mid ? 'low = mid' : 'high = mid - 1'), low, high, mid, machine: null, spent: null, message: `${mid} alloys ${low >= mid ? 'can' : 'cannot'} be made, so the range is now ${low} to ${high}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), low, high, mid: null, machine: null, spent: null, message: `The most alloys is ${low}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: P('return low'), low, high, mid: null, machine: null, spent: null, message: `The most alloys is ${low}.` })
   return { input: { n, k, budget, composition: input.composition, stock, cost: input.cost }, result: low, frames }
 }
 
@@ -56,6 +56,7 @@ affordable on a machine (machine, alloys)
     if need is above zero then add need times its cost to spent
   return spent`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def max_number_of_alloys(n, k, budget, composition, stock, cost):
     def affordable(machine, alloys):

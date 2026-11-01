@@ -24,15 +24,15 @@ export function buildTrace({ usageLimits }) {
   let lo = 0
   let hi = up
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to 0'), lo, hi, mid: null, verdict: null, message: `Up to ${hi} groups could have sizes 1 to ${hi} within a total of ${total} uses.` }]
+  const frames = [{ phase: 'start', activeLine: L('set low to 0'), pythonLine: 16, lo, hi, mid: null, verdict: null, message: `Up to ${hi} groups could have sizes 1 to ${hi} within a total of ${total} uses.` }]
   while (lo < hi) {
     const mid = Math.ceil((lo + hi) / 2)
     const verdict = demandsFit(mid)
-    frames.push({ phase: 'probe', activeLine: L('if sizes 1 to mid can be filled'), lo, hi, mid, verdict, message: `Try ${mid} groups of sizes 1 to ${mid}: ${verdict ? 'the uses can cover them' : 'some group sizes need more uses than exist'}.` })
+    frames.push({ phase: 'probe', activeLine: L('if sizes 1 to mid can be filled'), pythonLine: 19, lo, hi, mid, verdict, message: `Try ${mid} groups of sizes 1 to ${mid}: ${verdict ? 'the uses can cover them' : 'some group sizes need more uses than exist'}.` })
     if (verdict) lo = mid
     else hi = mid - 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: true, message: `Maximum number of groups: ${lo}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: 23, lo, hi: lo, mid: null, verdict: true, message: `Maximum number of groups: ${lo}.` })
   return { input: { usageLimits }, domain, result: lo, frames }
 }
 

@@ -10,21 +10,21 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const frames = []
   const counts = new Map()
-  frames.push({ phase: 'start', activeLine: L('set counts to an empty tally'), value: null, counts: {}, most: 0, result: null, message: 'Pairs must have a smaller value on the left and a larger value on the right, so repeated values are the obstacle.' })
+  frames.push({ phase: 'start', activeLine: L('set counts to an empty tally'), pythonLine: P('counts = {}'), value: null, counts: {}, most: 0, result: null, message: 'Pairs must have a smaller value on the left and a larger value on the right, so repeated values are the obstacle.' })
   for (const value of nums) {
     counts.set(value, (counts.get(value) || 0) + 1)
   }
   for (const [value, count] of counts) {
-    frames.push({ phase: 'count', activeLine: L('add one to its count'), value, counts: Object.fromEntries(counts), most: Math.max(...counts.values()), result: null, message: `${value} appears ${count} time${count === 1 ? '' : 's'}.` })
+    frames.push({ phase: 'count', activeLine: L('add one to its count'), pythonLine: P('counts[value] ='), value, counts: Object.fromEntries(counts), most: Math.max(...counts.values()), result: null, message: `${value} appears ${count} time${count === 1 ? '' : 's'}.` })
   }
   const most = Math.max(...counts.values())
   if (most * 2 > nums.length) {
     const result = most * 2 - nums.length
-    frames.push({ phase: 'excess', activeLine: L('return most times 2 minus'), value: null, counts: Object.fromEntries(counts), most, result, message: `${most} copies of one value outnumber the rest, so ${result} cannot be paired.` })
+    frames.push({ phase: 'excess', activeLine: L('return most times 2 minus'), pythonLine: P('return most * 2 - len'), value: null, counts: Object.fromEntries(counts), most, result, message: `${most} copies of one value outnumber the rest, so ${result} cannot be paired.` })
     return { input: { nums }, result, frames }
   }
   const result = nums.length % 2
-  frames.push({ phase: 'balanced', activeLine: L('return the length modulo 2'), value: null, counts: Object.fromEntries(counts), most, result, message: `No value fills more than half, so only the parity of ${nums.length} remains.` })
+  frames.push({ phase: 'balanced', activeLine: L('return the length modulo 2'), pythonLine: P('return len(nums) % 2'), value: null, counts: Object.fromEntries(counts), most, result, message: `No value fills more than half, so only the parity of ${nums.length} remains.` })
   return { input: { nums }, result, frames }
 }
 
@@ -37,6 +37,7 @@ export const code = `minimum array length after pair removals (nums)
     return most times 2 minus the length of nums
   return the length modulo 2`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 export const python = `def min_length_after_removals(nums):
     counts = {}
     for value in nums:

@@ -17,22 +17,22 @@ export function buildTrace(input) {
   const rate = sum(nums2)
   const order = nums1.map((_, i) => i).sort((p, q) => nums2[p] - nums2[q] || p - q)
   const best = new Array(n + 1).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('sort the indexes'), index: -1, time: -1, best: [...best], total: base, message: `Sort the indexes by how fast they grow, slowest first. Without zeroing, the sum at time t is ${base} + t * ${rate}.` }]
+  const frames = [{ phase: 'start', activeLine: L('sort the indexes'), pythonLine: 3, index: -1, time: -1, best: [...best], total: base, message: `Sort the indexes by how fast they grow, slowest first. Without zeroing, the sum at time t is ${base} + t * ${rate}.` }]
   for (const i of order) {
     for (let t = n; t >= 1; t--) best[t] = Math.max(best[t], best[t - 1] + nums1[i] + t * nums2[i])
-    frames.push({ phase: 'item', activeLine: L('for t from n down'), index: i, time: -1, best: [...best], total: base, message: `Index ${i} (growth ${nums2[i]}) can be the t-th zeroing. Best reductions updated.` })
+    frames.push({ phase: 'item', activeLine: L('for t from n down'), pythonLine: 9, index: i, time: -1, best: [...best], total: base, message: `Index ${i} (growth ${nums2[i]}) can be the t-th zeroing. Best reductions updated.` })
   }
   let answer = -1
   for (let t = 0; t <= n; t++) {
     const total = base + t * rate - best[t]
     const ok = total <= x
-    frames.push({ phase: 'check', activeLine: L('if the sum at time t'), index: -1, time: t, best: [...best], total, message: `At time ${t} the sum is ${total}, limit ${x}.${ok ? ' That fits.' : ''}` })
+    frames.push({ phase: 'check', activeLine: L('if the sum at time t'), pythonLine: 11, index: -1, time: t, best: [...best], total, message: `At time ${t} the sum is ${total}, limit ${x}.${ok ? ' That fits.' : ''}` })
     if (ok) {
       answer = t
       break
     }
   }
-  frames.push({ phase: 'done', activeLine: L(answer === -1 ? 'return minus one' : 'return time t'), index: -1, time: answer, best: [...best], total: answer, message: answer === -1 ? 'No time reaches the limit.' : `The sum first fits at time ${answer}.` })
+  frames.push({ phase: 'done', activeLine: L(answer === -1 ? 'return minus one' : 'return time t'), pythonLine: answer === -1 ? 13 : 12, index: -1, time: answer, best: [...best], total: answer, message: answer === -1 ? 'No time reaches the limit.' : `The sum first fits at time ${answer}.` })
   return { input: { nums1, nums2, x }, result: answer, frames }
 }
 

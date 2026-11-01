@@ -8,7 +8,7 @@ export function parseInput(text) {
 const largestDigit = v => Math.max(...String(v).split('').map(Number))
 
 export function buildTrace(nums) {
-  const frames = [{ phase: 'start', activeLine: L('set answer to -1'), active: -1, roles: {}, state: { answer: -1 }, message: 'Pair two numbers only when their largest digits match. Track the largest number seen for each largest digit.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set answer to -1'), active: -1, roles: {}, state: { answer: -1 }, message: 'Pair two numbers only when their largest digits match. Track the largest number seen for each largest digit.' }]
   let answer = -1
   const largest = new Map()
   nums.forEach((num, i) => {
@@ -22,9 +22,9 @@ export function buildTrace(nums) {
     } else {
       largest.set(d, num)
     }
-    frames.push({ phase: 'scan', activeLine: L(candidate === null ? 'otherwise set largest' : 'if largest has d'), active: i, roles: { [i]: candidate === null ? 'first' : 'paired' }, state: { number: num, digit: d, pairSum: candidate ?? 'none', answer }, message: candidate === null ? `${num} has largest digit ${d}, the first with that digit.` : `${num} has largest digit ${d}. Pair with ${prev} gives ${candidate}. Answer ${answer}.` })
+    frames.push({ phase: 'scan', pythonLine: candidate === null ? 10 : 7, activeLine: L(candidate === null ? 'otherwise set largest' : 'if largest has d'), active: i, roles: { [i]: candidate === null ? 'first' : 'paired' }, state: { number: num, digit: d, pairSum: candidate ?? 'none', answer }, message: candidate === null ? `${num} has largest digit ${d}, the first with that digit.` : `${num} has largest digit ${d}. Pair with ${prev} gives ${candidate}. Answer ${answer}.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), active: -1, roles: {}, state: { answer }, message: `Return ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return answer'), active: -1, roles: {}, state: { answer }, message: `Return ${answer}.` })
   return { input: nums, result: answer, items: nums, frames }
 }
 

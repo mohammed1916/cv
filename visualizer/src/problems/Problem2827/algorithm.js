@@ -8,7 +8,7 @@ export function parseInput(text) {
 }
 
 export function buildTrace({ low, high, k }) {
-  const frames = [{ phase: 'start', activeLine: L('count beautiful'), bound: '', total: 0, message: `Count beautiful integers in [${low}, ${high}] that are divisible by ${k}.` }]
+  const frames = [{ phase: 'start', pythonLine: 1, activeLine: L('count beautiful'), bound: '', total: 0, message: `Count beautiful integers in [${low}, ${high}] that are divisible by ${k}.` }]
   // Counts beautiful integers from 1 to x. State: position, even-minus-odd difference, remainder mod k, tight, started.
   const upTo = (x, label) => {
     if (x <= 0) return 0
@@ -30,13 +30,13 @@ export function buildTrace({ low, high, k }) {
       return total
     }
     const total = go(0, 0, 0, true, false)
-    frames.push({ phase: 'count', activeLine: L('for each digit d'), bound: label, total, message: `Beautiful integers from 1 to ${x}: ${total}.` })
+    frames.push({ phase: 'count', pythonLine: 27, activeLine: L('for each digit d'), bound: label, total, message: `Beautiful integers from 1 to ${x}: ${total}.` })
     return total
   }
   const upper = upTo(high, high)
   const lower = upTo(low - 1, low - 1)
   const result = upper - lower
-  frames.push({ phase: 'done', activeLine: L('return count(high)'), bound: '', total: result, message: `${upper} minus ${lower} gives ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 29, activeLine: L('return count(high)'), bound: '', total: result, message: `${upper} minus ${lower} gives ${result}.` })
   return { input: { low, high, k }, result, frames }
 }
 

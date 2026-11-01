@@ -23,6 +23,7 @@ export const code = `minimum edge reversals for every starting node
     set answer of c to answer of p plus 1 minus 2 times x
   return the answer list`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export function buildTrace({ n, edges }) {
   const adj = Array.from({ length: n }, () => [])
@@ -34,7 +35,7 @@ export function buildTrace({ n, edges }) {
   const seen = Array(n).fill(false)
   seen[0] = true
   const order = [0]
-  const frames = [{ phase: 'build', activeLine: L('build a neighbour list'), current: null, answer: Array(n).fill(null), message: 'Record each edge from both ends. Moving along an edge in its direction costs 0; moving against it costs 1.' }]
+  const frames = [{ phase: 'build', activeLine: L('build a neighbour list'), pythonLine: P('adj = [[]'), current: null, answer: Array(n).fill(null), message: 'Record each edge from both ends. Moving along an edge in its direction costs 0; moving against it costs 1.' }]
   let base = 0
   for (let q = 0; q < order.length; q++) {
     const p = order[q]
@@ -44,20 +45,20 @@ export function buildTrace({ n, edges }) {
       children[p].push({ to, cost })
       order.push(to)
       base += cost
-      frames.push({ phase: 'build', activeLine: L('walk the tree'), current: p, answer: Array(n).fill(null), message: `Walking down from ${p} to ${to} costs ${cost}. Running total: ${base}.` })
+      frames.push({ phase: 'build', activeLine: L('walk the tree'), pythonLine: P('base += cost'), current: p, answer: Array(n).fill(null), message: `Walking down from ${p} to ${to} costs ${cost}. Running total: ${base}.` })
     }
   }
   const answer = Array(n).fill(null)
   answer[0] = base
-  frames.push({ phase: 'root', activeLine: L('set answer of node 0'), current: 0, answer: [...answer], message: `With node 0 as the start, ${base} edges point toward it and must be reversed.` })
+  frames.push({ phase: 'root', activeLine: L('set answer of node 0'), pythonLine: P('answer[0] = base'), current: 0, answer: [...answer], message: `With node 0 as the start, ${base} edges point toward it and must be reversed.` })
   for (const p of order) {
     for (const { to: c, cost } of children[p]) {
       answer[c] = answer[p] + 1 - 2 * cost
-      frames.push({ phase: 'reroot', activeLine: L('set answer of c'), current: c, answer: [...answer], message: `Moving the start from ${p} to ${c} gives ${answer[c]} reversals.` })
+      frames.push({ phase: 'reroot', activeLine: L('set answer of c'), pythonLine: P('answer[other] ='), current: c, answer: [...answer], message: `Moving the start from ${p} to ${c} gives ${answer[c]} reversals.` })
     }
   }
   const toTree = id => ({ id, children: children[id].map(child => toTree(child.to)) })
-  frames.push({ phase: 'done', activeLine: L('return the answer list'), current: null, answer: [...answer], message: `Answers for nodes 0 to ${n - 1}: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', activeLine: L('return the answer list'), pythonLine: P('return answer'), current: null, answer: [...answer], message: `Answers for nodes 0 to ${n - 1}: ${answer.join(', ')}.` })
   return { input: { n, edges }, tree: toTree(0), result: answer, frames }
 }
 

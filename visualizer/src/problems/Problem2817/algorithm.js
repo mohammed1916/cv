@@ -23,7 +23,7 @@ const lowerBound = (list, v) => {
 export function buildTrace({ nums, x }) {
   const seen = []
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('start with an empty sorted set'), j: null, best, seen: [], message: `Compare each value with values at least ${x} positions behind it.` }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('start with an empty sorted set'), j: null, best, seen: [], message: `Compare each value with values at least ${x} positions behind it.` }]
   for (let j = x; j < nums.length; j++) {
     const added = nums[j - x]
     seen.splice(lowerBound(seen, added), 0, added)
@@ -34,9 +34,9 @@ export function buildTrace({ nums, x }) {
         if (best === null || gap < best) best = gap
       }
     }
-    frames.push({ phase: 'scan', activeLine: L('add the value at index'), j, best, seen: [...seen], message: `Add ${added} (index ${j - x}); check ${nums[j]} against its neighbours; best gap ${best}.` })
+    frames.push({ phase: 'scan', pythonLine: 6, activeLine: L('add the value at index'), j, best, seen: [...seen], message: `Add ${added} (index ${j - x}); check ${nums[j]} against its neighbours; best gap ${best}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), j: null, best, seen: [...seen], message: `Minimum absolute difference: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 13, activeLine: L('return best'), j: null, best, seen: [...seen], message: `Minimum absolute difference: ${best}.` })
   return { input: { nums, x }, result: best, frames }
 }
 

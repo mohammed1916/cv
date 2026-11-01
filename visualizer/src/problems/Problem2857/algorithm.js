@@ -9,7 +9,7 @@ export function parseInput(text) {
 export function buildTrace({ points, k }) {
   const seen = new Map()
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set seen to'), index: -1, key: null, added: 0, total: 0, seen: [], message: `Look for pairs whose XOR distance is ${k}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set seen to'), pythonLine: P('seen = {}'), index: -1, key: null, added: 0, total: 0, seen: [], message: `Look for pairs whose XOR distance is ${k}.` }]
   points.forEach(([x, y], index) => {
     let added = 0
     for (let a = 0; a <= k; a++) {
@@ -17,12 +17,12 @@ export function buildTrace({ points, k }) {
       added += seen.get(`${x ^ a},${y ^ b}`) || 0
     }
     total += added
-    frames.push({ phase: 'scan', activeLine: L('add the seen count'), index, key: `${x},${y}`, added, total, seen: [...seen], message: `Point (${x}, ${y}) pairs with ${added} earlier point(s).` })
+    frames.push({ phase: 'scan', activeLine: L('add the seen count'), pythonLine: P('total +='), index, key: `${x},${y}`, added, total, seen: [...seen], message: `Point (${x}, ${y}) pairs with ${added} earlier point(s).` })
     const key = `${x},${y}`
     seen.set(key, (seen.get(key) || 0) + 1)
-    frames.push({ phase: 'record', activeLine: L('record this point'), index, key, added, total, seen: [...seen], message: `Record (${x}, ${y}) so later points can pair with it.` })
+    frames.push({ phase: 'record', activeLine: L('record this point'), pythonLine: P('seen[(x, y)] ='), index, key, added, total, seen: [...seen], message: `Record (${x}, ${y}) so later points can pair with it.` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, key: null, added: 0, total, seen: [...seen], result: total, message: `Total pairs: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), index: -1, key: null, added: 0, total, seen: [...seen], result: total, message: `Total pairs: ${total}.` })
   return { input: { points, k }, result: total, frames }
 }
 
@@ -35,6 +35,7 @@ export const code = `count pairs of points at xor distance k
     record this point in seen
   return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def count_pairs_with_distance(points, k):
     seen = {}

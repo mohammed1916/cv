@@ -8,18 +8,18 @@ export function parseInput(text) {
 
 export function buildTrace(input) {
   let text = ''
-  const frames = [{ phase: 'start', activeLine: L('set text to empty'), index: -1, text, message: 'The keyboard starts with an empty screen.' }]
+  const frames = [{ phase: 'start', activeLine: L('set text to empty'), pythonLine: 2, index: -1, text, message: 'The keyboard starts with an empty screen.' }]
   for (let i = 0; i < input.s.length; i++) {
     const ch = input.s[i]
     if (ch === 'i') {
       text = [...text].reverse().join('')
-      frames.push({ phase: 'reverse', activeLine: L('if ch is i'), index: i, text, message: `Typing i reverses the screen to ${text}.` })
+      frames.push({ phase: 'reverse', activeLine: L('if ch is i'), pythonLine: 5, index: i, text, message: `Typing i reverses the screen to ${text}.` })
     } else {
       text += ch
-      frames.push({ phase: 'type', activeLine: L('otherwise add ch'), index: i, text, message: `Typing ${ch} appends it: ${text}.` })
+      frames.push({ phase: 'type', activeLine: L('otherwise add ch'), pythonLine: 7, index: i, text, message: `Typing ${ch} appends it: ${text}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return text'), index: -1, text, message: `The screen shows ${text}.` })
+  frames.push({ phase: 'done', activeLine: L('return text'), pythonLine: 8, index: -1, text, message: `The screen shows ${text}.` })
   return { input, result: text, frames }
 }
 

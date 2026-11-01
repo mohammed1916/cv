@@ -11,14 +11,14 @@ export function buildTrace(input) {
   const { nums } = input
   // best[v] is the longest kept run that ends with a value v.
   const best = [0, 0, 0, 0]
-  const frames = [{ phase: 'start', activeLine: L('set best[1], best[2], best[3]'), value: null, best: [...best], message: 'No values kept yet.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set best[1], best[2], best[3]'), value: null, best: [...best], message: 'No values kept yet.' }]
   for (const v of nums) {
     best[v] = 1 + Math.max(...best.slice(1, v + 1))
-    frames.push({ phase: 'value', activeLine: L('set best[v] to'), value: v, best: [...best], message: `Value ${v} can extend a kept run of length ${best[v] - 1}; the longest ending at ${v} is now ${best[v]}.` })
+    frames.push({ phase: 'value', pythonLine: 4, activeLine: L('set best[v] to'), value: v, best: [...best], message: `Value ${v} can extend a kept run of length ${best[v] - 1}; the longest ending at ${v} is now ${best[v]}.` })
   }
   const kept = Math.max(...best)
   const result = nums.length - kept
-  frames.push({ phase: 'done', activeLine: L('return n minus'), value: null, best: [...best], message: `Keep ${kept} values and delete ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return n minus'), value: null, best: [...best], message: `Keep ${kept} values and delete ${result}.` })
   return { input, result, frames }
 }
 

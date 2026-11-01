@@ -13,22 +13,22 @@ export function buildTrace({ nums, target }) {
   let count = 0
   let left = 0
   let right = sorted.length - 1
-  frames.push({ phase: 'sort', activeLine: L('sort nums'), left: -1, right: -1, count, sorted, message: `Sort the values to ${sorted.join(', ')}. The pair order does not matter for counting.` })
-  frames.push({ phase: 'start', activeLine: L('set left to the first index'), left, right, count, sorted, message: `Put one pointer on the smallest value and one on the largest.` })
+  frames.push({ phase: 'sort', pythonLine: 2, activeLine: L('sort nums'), left: -1, right: -1, count, sorted, message: `Sort the values to ${sorted.join(', ')}. The pair order does not matter for counting.` })
+  frames.push({ phase: 'start', pythonLine: 5, activeLine: L('set left to the first index'), left, right, count, sorted, message: `Put one pointer on the smallest value and one on the largest.` })
   while (left < right) {
     const sum = sorted[left] + sorted[right]
     if (sum < target) {
       const added = right - left
       count += added
-      frames.push({ phase: 'count', activeLine: L('add right minus left'), left, right, count, sorted, message: `${sorted[left]} + ${sorted[right]} = ${sum} is below ${target}, so all ${added} indices from left+1 to right pair with ${sorted[left]}. Count is ${count}.` })
+      frames.push({ phase: 'count', pythonLine: 8, activeLine: L('add right minus left'), left, right, count, sorted, message: `${sorted[left]} + ${sorted[right]} = ${sum} is below ${target}, so all ${added} indices from left+1 to right pair with ${sorted[left]}. Count is ${count}.` })
       left += 1
-      frames.push({ phase: 'move', activeLine: L('move left one step'), left, right, count, sorted, message: `Move the left pointer right.` })
+      frames.push({ phase: 'move', pythonLine: 9, activeLine: L('move left one step'), left, right, count, sorted, message: `Move the left pointer right.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('move right one step'), left, right, count, sorted, message: `${sorted[left]} + ${sorted[right]} = ${sum} is not below ${target}, so the right value is too large for any remaining left value. Move right left.` })
+      frames.push({ phase: 'skip', pythonLine: 11, activeLine: L('move right one step'), left, right, count, sorted, message: `${sorted[left]} + ${sorted[right]} = ${sum} is not below ${target}, so the right value is too large for any remaining left value. Move right left.` })
       right -= 1
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), left: -1, right: -1, count, sorted, message: `All pairs are counted. Answer: ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return count'), left: -1, right: -1, count, sorted, message: `All pairs are counted. Answer: ${count}.` })
   return { input: { nums, target }, result: count, frames }
 }
 

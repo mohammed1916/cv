@@ -11,14 +11,14 @@ export function buildTrace(input) {
   const { n, x } = input
   const ways = Array(n + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), base: null, power: null, ways: ways.slice(), answer: null, message: `Count sets of distinct bases whose ${x}-th powers add up to ${n}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set ways[0] to 1'), pythonLine: 4, base: null, power: null, ways: ways.slice(), answer: null, message: `Count sets of distinct bases whose ${x}-th powers add up to ${n}.` }]
   for (let i = 1; i ** x <= n; i++) {
     const p = i ** x
     for (let s = n; s >= p; s--) ways[s] = (ways[s] + ways[s - p]) % MOD
-    frames.push({ phase: 'base', activeLine: L('add ways[s - p]'), base: i, power: p, ways: ways.slice(), answer: null, message: `Base ${i} contributes ${p}: sums that use it are added to the table.` })
+    frames.push({ phase: 'base', activeLine: L('add ways[s - p]'), pythonLine: 9, base: i, power: p, ways: ways.slice(), answer: null, message: `Base ${i} contributes ${p}: sums that use it are added to the table.` })
   }
   const answer = ways[n] % MOD
-  frames.push({ phase: 'done', activeLine: L('return ways[n]'), base: null, power: null, ways: ways.slice(), answer, message: `Ways to express ${n}: ${answer}.` })
+  frames.push({ phase: 'done', activeLine: L('return ways[n]'), pythonLine: 11, base: null, power: null, ways: ways.slice(), answer, message: `Ways to express ${n}: ${answer}.` })
   return { input, result: answer, frames }
 }
 

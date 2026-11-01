@@ -11,20 +11,20 @@ export function parseInput(text) {
 export function buildTrace(input) {
   const { nums, m } = input
   const n = nums.length
-  const frames = [{ phase: 'start', activeLine: L('if the array has at most two'), index: -1, found: null, message: `The array has ${n} value(s) and the threshold is ${m}.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('if the array has at most two'), index: -1, found: null, message: `The array has ${n} value(s) and the threshold is ${m}.` }]
   let result
   if (n <= 2) {
     result = true
-    frames.push({ phase: 'done', activeLine: L('if the array has at most two'), index: -1, found: true, message: 'Two values always split into two single values.' })
+    frames.push({ phase: 'done', pythonLine: 3, activeLine: L('if the array has at most two'), index: -1, found: true, message: 'Two values always split into two single values.' })
   } else {
     result = false
     for (let i = 0; i + 1 < n; i++) {
       const sum = nums[i] + nums[i + 1]
       const hit = sum >= m
-      frames.push({ phase: 'pair', activeLine: L('for each adjacent pair'), index: i, found: hit ? true : null, sum, message: `Pair ${nums[i]} + ${nums[i + 1]} = ${sum}, ${hit ? 'at least' : 'below'} ${m}.` })
+      frames.push({ phase: 'pair', pythonLine: 5, activeLine: L('for each adjacent pair'), index: i, found: hit ? true : null, sum, message: `Pair ${nums[i]} + ${nums[i + 1]} = ${sum}, ${hit ? 'at least' : 'below'} ${m}.` })
       if (hit) { result = true; break }
     }
-    frames.push({ phase: 'done', activeLine: L(result ? 'if a plus b is at least m' : 'return no'), index: -1, found: result, message: result ? 'Splitting around that pair works.' : 'No adjacent pair reaches the threshold.' })
+    frames.push({ phase: 'done', pythonLine: result ? 6 : 7, activeLine: L(result ? 'if a plus b is at least m' : 'return no'), index: -1, found: result, message: result ? 'Splitting around that pair works.' : 'No adjacent pair reaches the threshold.' })
   }
   return { input, result, frames }
 }

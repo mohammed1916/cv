@@ -11,18 +11,18 @@ const nextLetter = c => String.fromCharCode(((c.charCodeAt(0) - 97 + 1) % 26) + 
 
 export function buildTrace(input) {
   const { str1, str2 } = input
-  const frames = [{ phase: 'start', activeLine: L('set j to 0'), i: -1, j: 0, message: `Try to match str2 = "${str2}" inside str1 = "${str1}", allowing one cyclic step per letter.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set j to 0'), i: -1, j: 0, message: `Try to match str2 = "${str2}" inside str1 = "${str1}", allowing one cyclic step per letter.` }]
   let j = 0
   for (let i = 0; i < str1.length; i++) {
     const c = str1[i]
-    frames.push({ phase: 'scan', activeLine: L('for each character'), i, j, message: `Look at ${c}; it can become ${c} or ${nextLetter(c)}.` })
+    frames.push({ phase: 'scan', pythonLine: 4, activeLine: L('for each character'), i, j, message: `Look at ${c}; it can become ${c} or ${nextLetter(c)}.` })
     if (j < str2.length && (c === str2[j] || nextLetter(c) === str2[j])) {
       j++
-      frames.push({ phase: 'match', activeLine: L('move j forward'), i, j, message: `Use this letter for str2[${j - 1}] = ${str2[j - 1]}.` })
+      frames.push({ phase: 'match', pythonLine: 5, activeLine: L('move j forward'), i, j, message: `Use this letter for str2[${j - 1}] = ${str2[j - 1]}.` })
     }
   }
   const result = j === str2.length
-  frames.push({ phase: 'done', activeLine: L('return true'), i: str1.length, j, message: result ? 'All letters of str2 were matched in order.' : `Only ${j} letters of str2 could be matched.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return true'), i: str1.length, j, message: result ? 'All letters of str2 were matched in order.' : `Only ${j} letters of str2 could be matched.` })
   return { input, result, frames }
 }
 

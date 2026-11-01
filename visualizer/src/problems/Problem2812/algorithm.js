@@ -32,14 +32,14 @@ export function buildTrace({ grid }) {
   const dist = Array.from({ length: n }, () => new Array(n).fill(-1))
   const queue = []
   for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (grid[r][c] === 1) { dist[r][c] = 0; queue.push([r, c]) }
-  const frames = [{ phase: 'bfs', activeLine: L('multi-source BFS'), cell: null, dist: dist.map(row => [...row]), best: null, message: 'Spread outward from every thief at once. Each cell records how many steps it is from the nearest thief.' }]
+  const frames = [{ phase: 'bfs', pythonLine: 12, activeLine: L('multi-source BFS'), cell: null, dist: dist.map(row => [...row]), best: null, message: 'Spread outward from every thief at once. Each cell records how many steps it is from the nearest thief.' }]
   for (let head = 0; head < queue.length; head++) {
     const [r, c] = queue[head]
     for (const [dr, dc] of MOVES) {
       const nr = r + dr, nc = c + dc
       if (nr >= 0 && nc >= 0 && nr < n && nc < n && dist[nr][nc] === -1) { dist[nr][nc] = dist[r][c] + 1; queue.push([nr, nc]) }
     }
-    frames.push({ phase: 'bfs', activeLine: L('multi-source BFS'), cell: [r, c], dist: dist.map(row => [...row]), best: null, message: `BFS reaches cell (${r}, ${c}) and gives its neighbours the next distance.` })
+    frames.push({ phase: 'bfs', pythonLine: 14, activeLine: L('multi-source BFS'), cell: [r, c], dist: dist.map(row => [...row]), best: null, message: `BFS reaches cell (${r}, ${c}) and gives its neighbours the next distance.` })
   }
   const best = Array.from({ length: n }, () => new Array(n).fill(-1))
   best[0][0] = dist[0][0]
@@ -50,11 +50,11 @@ export function buildTrace({ grid }) {
     const [s, r, c] = popLargest()
     if (r === n - 1 && c === n - 1) {
       result = s
-      frames.push({ phase: 'done', activeLine: L('if (r, c) is the bottom-right cell'), cell: [r, c], dist: dist.map(row => [...row]), best: best.map(row => [...row]), message: `The bottom-right cell is reached with safeness ${s}, the largest possible.` })
+      frames.push({ phase: 'done', pythonLine: 26, activeLine: L('if (r, c) is the bottom-right cell'), cell: [r, c], dist: dist.map(row => [...row]), best: best.map(row => [...row]), message: `The bottom-right cell is reached with safeness ${s}, the largest possible.` })
       break
     }
     if (s < best[r][c]) continue
-    frames.push({ phase: 'search', activeLine: L('pop (s, r, c)'), cell: [r, c], dist: dist.map(row => [...row]), best: best.map(row => [...row]), message: `Expand cell (${r}, ${c}) with safeness ${s} so far.` })
+    frames.push({ phase: 'search', pythonLine: 24, activeLine: L('pop (s, r, c)'), cell: [r, c], dist: dist.map(row => [...row]), best: best.map(row => [...row]), message: `Expand cell (${r}, ${c}) with safeness ${s} so far.` })
     for (const [dr, dc] of MOVES) {
       const nr = r + dr, nc = c + dc
       if (nr < 0 || nc < 0 || nr >= n || nc >= n) continue
@@ -62,7 +62,7 @@ export function buildTrace({ grid }) {
       if (candidate > best[nr][nc]) {
         best[nr][nc] = candidate
         heap.push([candidate, nr, nc])
-        frames.push({ phase: 'search', activeLine: L('if candidate > best'), cell: [nr, nc], dist: dist.map(row => [...row]), best: best.map(row => [...row]), message: `Reach (${nr}, ${nc}) with safeness ${candidate}, the smaller of ${s} and its distance ${dist[nr][nc]}.` })
+        frames.push({ phase: 'search', pythonLine: 34, activeLine: L('if candidate > best'), cell: [nr, nc], dist: dist.map(row => [...row]), best: best.map(row => [...row]), message: `Reach (${nr}, ${nc}) with safeness ${candidate}, the smaller of ${s} and its distance ${dist[nr][nc]}.` })
       }
     }
   }

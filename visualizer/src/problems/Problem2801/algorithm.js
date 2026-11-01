@@ -12,7 +12,7 @@ export function parseInput(text) {
 const isStepping = s => [...s].every((c, i) => i === 0 || Math.abs(Number(c) - Number(s[i - 1])) === 1)
 
 export function buildTrace({ low, high }) {
-  const frames = [{ phase: 'start', activeLine: L('count stepping numbers'), bound: '', total: 0, message: 'Start with the two bounds.' }]
+  const frames = [{ phase: 'start', activeLine: L('count stepping numbers'), pythonLine: 2, bound: '', total: 0, message: 'Start with the two bounds.' }]
   // Counts stepping numbers from 1 to x. The state is (position, previous digit, still tight, started).
   const upTo = (x, label) => {
     const digits = [...x].map(Number)
@@ -33,14 +33,14 @@ export function buildTrace({ low, high }) {
       return total
     }
     const total = go(0, -1, true, false)
-    frames.push({ phase: 'count', activeLine: L('for each digit d'), bound: label, total, message: `Stepping numbers from 1 to ${x}: ${total}.` })
+    frames.push({ phase: 'count', activeLine: L('for each digit d'), pythonLine: 26, bound: label, total, message: `Stepping numbers from 1 to ${x}: ${total}.` })
     return total
   }
   const upper = upTo(high, high)
   const lower = upTo(low, low)
   const inclusive = isStepping(low) ? 1 : 0
   const result = (((upper - lower + inclusive) % MOD) + MOD) % MOD
-  frames.push({ phase: 'done', activeLine: L('return the difference'), bound: '', total: result, message: `${upper} minus ${lower} plus ${inclusive} gives ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the difference'), pythonLine: 29, bound: '', total: result, message: `${upper} minus ${lower} plus ${inclusive} gives ${result}.` })
   return { input: { low, high }, result, frames }
 }
 

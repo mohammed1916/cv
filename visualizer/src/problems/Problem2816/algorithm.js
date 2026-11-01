@@ -12,19 +12,19 @@ export function buildTrace(input) {
   const head = input.head
   let carry = 0
   const digits = []
-  const frames = [{ phase: 'start', activeLine: L('set carry to 0'), k: head.length, carry, digits: [], message: 'Start at the tail, the least significant digit.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set carry to 0'), k: head.length, carry, digits: [], message: 'Start at the tail, the least significant digit.' }]
   for (let k = head.length - 1; k >= 0; k--) {
     const total = 2 * head[k] + carry
     digits.push(total % 10)
     carry = Math.floor(total / 10)
-    frames.push({ phase: 'digit', activeLine: L('append total modulo 10'), k, carry, digits: [...digits], message: `2 times ${head[k]} plus carry gives ${total}; write ${total % 10} and carry ${carry}.` })
+    frames.push({ phase: 'digit', pythonLine: 7, activeLine: L('append total modulo 10'), k, carry, digits: [...digits], message: `2 times ${head[k]} plus carry gives ${total}; write ${total % 10} and carry ${carry}.` })
   }
   if (carry > 0) {
     digits.push(carry)
-    frames.push({ phase: 'carry', activeLine: L('if carry is above 0'), k: -1, carry, digits: [...digits], message: `A final carry ${carry} becomes the new most significant digit.` })
+    frames.push({ phase: 'carry', pythonLine: 9, activeLine: L('if carry is above 0'), k: -1, carry, digits: [...digits], message: `A final carry ${carry} becomes the new most significant digit.` })
   }
   digits.reverse()
-  frames.push({ phase: 'done', activeLine: L('return digits'), k: -1, carry: 0, digits: [...digits], message: `The doubled number is ${digits.join('')}.` })
+  frames.push({ phase: 'done', pythonLine: 11, activeLine: L('return digits'), k: -1, carry: 0, digits: [...digits], message: `The doubled number is ${digits.join('')}.` })
   return { input, result: digits, frames }
 }
 

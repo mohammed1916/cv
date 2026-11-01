@@ -10,7 +10,7 @@ export function buildTrace({ nums }) {
   const n = nums.length
   const target = new Set(nums).size
   const counts = new Map()
-  const frames = [{ phase: 'start', activeLine: L('set target to'), target, left: 0, right: 0, distinct: 0, total: 0, message: `A complete subarray has ${target} distinct values, the same as the whole array.` }]
+  const frames = [{ phase: 'start', activeLine: L('set target to'), pythonLine: 2, target, left: 0, right: 0, distinct: 0, total: 0, message: `A complete subarray has ${target} distinct values, the same as the whole array.` }]
   let right = 0, total = 0
   const distinct = () => counts.size
   for (let left = 0; left < n; left++) {
@@ -18,18 +18,18 @@ export function buildTrace({ nums }) {
       const v = nums[right]
       counts.set(v, (counts.get(v) ?? 0) + 1)
       right++
-      frames.push({ phase: 'extend', activeLine: L('add the value at right'), target, left, right, distinct: distinct(), total, message: `Add ${v}. The window ${left} to ${right - 1} has ${distinct()} distinct values.` })
+      frames.push({ phase: 'extend', activeLine: L('add the value at right'), pythonLine: 8, target, left, right, distinct: distinct(), total, message: `Add ${v}. The window ${left} to ${right - 1} has ${distinct()} distinct values.` })
     }
     if (distinct() === target) {
       total += n - right + 1
-      frames.push({ phase: 'count', activeLine: L('add nums length minus right'), target, left, right, distinct: distinct(), total, message: `Ends ${right - 1} to ${n - 1} all complete the subarray starting at ${left}. Total ${total}.` })
+      frames.push({ phase: 'count', activeLine: L('add nums length minus right'), pythonLine: 11, target, left, right, distinct: distinct(), total, message: `Ends ${right - 1} to ${n - 1} all complete the subarray starting at ${left}. Total ${total}.` })
     }
     const v = nums[left]
     counts.set(v, counts.get(v) - 1)
     if (counts.get(v) === 0) counts.delete(v)
-    frames.push({ phase: 'shrink', activeLine: L('remove the value at left'), target, left: left + 1, right, distinct: distinct(), total, message: `Remove ${v} from the left, so the next start is ${left + 1}.` })
+    frames.push({ phase: 'shrink', activeLine: L('remove the value at left'), pythonLine: counts.get(v) === 0 ? 14 : 12, target, left: left + 1, right, distinct: distinct(), total, message: `Remove ${v} from the left, so the next start is ${left + 1}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return total'), target, left: n, right, distinct: 0, total, message: `There are ${total} complete subarrays.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: 15, target, left: n, right, distinct: 0, total, message: `There are ${total} complete subarrays.` })
   return { input: { nums }, result: total, frames }
 }
 

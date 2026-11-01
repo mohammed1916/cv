@@ -17,20 +17,20 @@ export function buildTrace({ s, t, k }) {
   const frames = []
   let p = 0
   for (let l = 0; l < n; l++) if (rotate(s, l) === t) p++
-  frames.push({ phase: 'count', activeLine: L('count how many rotations'), step: 0, ways: null, total: null, message: `${p} of the ${n} rotations of s equal t.` })
+  frames.push({ phase: 'count', activeLine: L('count how many rotations'), pythonLine: P('for l in range(n)'), step: 0, ways: null, total: null, message: `${p} of the ${n} rotations of s equal t.` })
   if (p === 0) {
-    frames.push({ phase: 'done', activeLine: L('if p is 0'), step: 0, ways: 0, total: null, message: 't is not a rotation of s, so no sequence works.' })
+    frames.push({ phase: 'done', activeLine: L('if p is 0'), pythonLine: P('return 0'), step: 0, ways: 0, total: null, message: 't is not a rotation of s, so no sequence works.' })
     return { input: { s, t, k }, result: 0, frames }
   }
   let ways = s === t ? 1 : 0
   let total = 1
-  frames.push({ phase: 'start', activeLine: L('set ways to 1'), step: 0, ways, total, message: `Start: ${ways} way${ways === 1 ? '' : 's'} to be at t, ${total} sequence.` })
+  frames.push({ phase: 'start', activeLine: L('set ways to 1'), pythonLine: P('ways = 1 if s == t'), step: 0, ways, total, message: `Start: ${ways} way${ways === 1 ? '' : 's'} to be at t, ${total} sequence.` })
   for (let step = 1; step <= k; step++) {
     ways = ((p - 1) * ways + p * ((total - ways + MOD) % MOD)) % MOD
     total = ((n - 1) * total) % MOD
-    frames.push({ phase: 'step', activeLine: L('set ways to (p minus 1)'), step, ways, total, message: `After ${step} operation${step === 1 ? '' : 's'}: ${ways} sequences end at t.` })
+    frames.push({ phase: 'step', activeLine: L('set ways to (p minus 1)'), pythonLine: P('ways = ((p - 1)'), step, ways, total, message: `After ${step} operation${step === 1 ? '' : 's'}: ${ways} sequences end at t.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return ways'), step: k, ways, total, message: `Ways in exactly ${k} operations: ${ways}.` })
+  frames.push({ phase: 'done', activeLine: L('return ways'), pythonLine: P('return ways'), step: k, ways, total, message: `Ways in exactly ${k} operations: ${ways}.` })
   return { input: { s, t, k }, result: ways, frames }
 }
 
@@ -45,6 +45,7 @@ export const code = `ways to turn s into t in exactly k operations
     set total to (n minus 1) times total, modulo 1000000007
   return ways`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def count_transformations(s, t, k):
     MOD = 1000000007

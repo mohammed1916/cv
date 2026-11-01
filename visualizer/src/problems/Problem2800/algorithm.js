@@ -23,19 +23,19 @@ export function buildTrace({ a, b, c }) {
   const strings = [a, b, c]
   const orders = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]
   let best = null
-  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), order: '', candidate: '', best: '', message: 'Try each order of the three strings.' }]
+  const frames = [{ phase: 'start', activeLine: L('set best to nothing'), pythonLine: 13, order: '', candidate: '', best: '', message: 'Try each order of the three strings.' }]
   for (const [p, q, r] of orders) {
     const first = merge(strings[p], strings[q])
     const candidate = merge(first, strings[r])
     const label = `${strings[p]}, ${strings[q]}, ${strings[r]}`
     if (best === null || candidate.length < best.length || (candidate.length === best.length && candidate < best)) {
       best = candidate
-      frames.push({ phase: 'better', activeLine: L('set best to candidate'), order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is the best so far.` })
+      frames.push({ phase: 'better', activeLine: L('set best to candidate'), pythonLine: 17, order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is the best so far.` })
     } else {
-      frames.push({ phase: 'try', activeLine: L('let candidate be'), order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is not better than ${best}.` })
+      frames.push({ phase: 'try', activeLine: L('let candidate be'), pythonLine: 16, order: label, candidate, best, message: `Order ${label} gives ${candidate}, which is not better than ${best}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), order: '', candidate: '', best, message: `Shortest string: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 18, order: '', candidate: '', best, message: `Shortest string: ${best}.` })
   return { input: { a, b, c }, result: best, frames }
 }
 

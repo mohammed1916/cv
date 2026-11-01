@@ -23,11 +23,11 @@ export function buildTrace(input) {
   let total = 0
   let best = 0
   let cursor = -1
-  const snap = (phase, activeLine, message) => frames.push({
-    phase, activeLine, cursor, chosen: [...chosen], total, distinct: seen.size, best, message,
+  const snap = (phase, activeLine, message, pythonLine) => frames.push({
+    phase, pythonLine, activeLine, cursor, chosen: [...chosen], total, distinct: seen.size, best, message,
   })
 
-  snap('sort', L('sort the items by profit'), 'Items are sorted by profit, largest first.')
+  snap('sort', L('sort the items by profit'), 'Items are sorted by profit, largest first.', 2)
   for (let i = 0; i < k; i++) {
     cursor = i
     chosen[i] = true
@@ -35,19 +35,19 @@ export function buildTrace(input) {
     if (seen.has(sorted[i].category)) duplicates.push(i)
     else seen.add(sorted[i].category)
   }
-  snap('take', L('take the first k items'), `Take the first ${k} items, with profit ${total}.`)
-  snap('dup', L('note which of them repeat'), `${duplicates.length} chosen item${duplicates.length === 1 ? '' : 's'} repeat a category.`)
+  snap('take', L('take the first k items'), `Take the first ${k} items, with profit ${total}.`, 7)
+  snap('dup', L('note which of them repeat'), `${duplicates.length} chosen item${duplicates.length === 1 ? '' : 's'} repeat a category.`, 9)
   best = total + seen.size ** 2
-  snap('best', L('best is the total'), `Starting elegance: ${total} + ${seen.size}^2 = ${best}.`)
+  snap('best', L('best is the total'), `Starting elegance: ${total} + ${seen.size}^2 = ${best}.`, 12)
   for (let i = k; i < sorted.length; i++) {
     cursor = i
     const item = sorted[i]
     if (seen.has(item.category)) {
-      snap('skip', L('skip it if'), `Category ${item.category} is already taken, so skip profit ${item.profit}.`)
+      snap('skip', L('skip it if'), `Category ${item.category} is already taken, so skip profit ${item.profit}.`, 15)
       continue
     }
     if (duplicates.length === 0) {
-      snap('skip', L('skip it if'), `No duplicate is left to swap out, so profit ${item.profit} is skipped.`)
+      snap('skip', L('skip it if'), `No duplicate is left to swap out, so profit ${item.profit} is skipped.`, 17)
       continue
     }
     const out = duplicates.pop()
@@ -56,11 +56,11 @@ export function buildTrace(input) {
     total += item.profit - sorted[out].profit
     seen.add(item.category)
     best = Math.max(best, total + seen.size ** 2)
-    snap('swap', L('swap out the weakest'), `Swap profit ${sorted[out].profit} out for ${item.profit} (new category ${item.category}).`)
-    snap('update', L('update best'), `Elegance is now ${total + seen.size ** 2}. Best is ${best}.`)
+    snap('swap', L('swap out the weakest'), `Swap profit ${sorted[out].profit} out for ${item.profit} (new category ${item.category}).`, 18)
+    snap('update', L('update best'), `Elegance is now ${total + seen.size ** 2}. Best is ${best}.`, 20)
   }
   cursor = -1
-  snap('done', L('return best'), `Maximum elegance: ${best}.`)
+  snap('done', L('return best'), `Maximum elegance: ${best}.`, 21)
   return { input, sorted, result: best, frames }
 }
 

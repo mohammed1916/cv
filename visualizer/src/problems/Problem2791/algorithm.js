@@ -29,7 +29,7 @@ export function buildTrace({ parent, s }) {
   const tree = id => ({ id, children: children[id].map(tree) })
   const frames = []
   let count = 0
-  frames.push({ phase: 'start', activeLine: L('set count to 0'), u: -1, v: -1, path: [], text: '', ok: null, count, message: 'Check every pair of nodes u less than v.' })
+  frames.push({ phase: 'start', activeLine: L('set count to 0'), pythonLine: 24, u: -1, v: -1, path: [], text: '', ok: null, count, message: 'Check every pair of nodes u less than v.' })
   for (let u = 0; u < n; u++) {
     for (let v = u + 1; v < n; v++) {
       const nodes = pathNodes(u, v)
@@ -39,10 +39,10 @@ export function buildTrace({ parent, s }) {
       const odd = Object.values(letters).filter(c => c % 2 === 1).length
       const ok = odd <= 1
       if (ok) count++
-      frames.push({ phase: 'pair', activeLine: L('if at most one letter'), u, v, path: nodes, text, ok, count, message: `Path ${u} to ${v} reads "${text}" with ${odd} odd letter count${odd === 1 ? '' : 's'}; ${ok ? 'counted' : 'not counted'}.` })
+      frames.push({ phase: 'pair', activeLine: L('if at most one letter'), pythonLine: ok ? 32 : 31, u, v, path: nodes, text, ok, count, message: `Path ${u} to ${v} reads "${text}" with ${odd} odd letter count${odd === 1 ? '' : 's'}; ${ok ? 'counted' : 'not counted'}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), u: -1, v: -1, path: [], text: '', ok: null, count, message: `Palindrome-able paths: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: 33, u: -1, v: -1, path: [], text: '', ok: null, count, message: `Palindrome-able paths: ${count}.` })
   return { input: { parent, s }, root: tree(0), result: count, frames }
 }
 

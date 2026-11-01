@@ -13,17 +13,17 @@ const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b))
 
 export function buildTrace({ head }) {
   const originals = head.map((value, index) => ({ id: `o${index}`, value }))
-  const frames = [{ phase: 'start', activeLine: L('set current to the head'), nodes: originals, active: [], message: 'Start at the head of the list.' }]
+  const frames = [{ phase: 'start', activeLine: L('set current to the head'), pythonLine: 3, nodes: originals, active: [], message: 'Start at the head of the list.' }]
   const list = [originals[0]]
   for (let i = 1; i < originals.length; i++) {
     const current = originals[i - 1]
     const next = originals[i]
     const g = gcd(current.value, next.value)
-    frames.push({ phase: 'pair', activeLine: L('compute the gcd'), nodes: [...list, next], active: [current.id, next.id], message: `gcd(${current.value}, ${next.value}) = ${g}.` })
+    frames.push({ phase: 'pair', activeLine: L('compute the gcd'), pythonLine: 6, nodes: [...list, next], active: [current.id, next.id], message: `gcd(${current.value}, ${next.value}) = ${g}.` })
     list.push({ id: `g${i}`, value: g }, next)
-    frames.push({ phase: 'insert', activeLine: L('insert a new node'), nodes: [...list], active: [`g${i}`], message: `Insert ${g} between ${current.value} and ${next.value}.` })
+    frames.push({ phase: 'insert', activeLine: L('insert a new node'), pythonLine: 6, nodes: [...list], active: [`g${i}`], message: `Insert ${g} between ${current.value} and ${next.value}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the head'), nodes: [...list], active: [], message: `List now has ${list.length} nodes.` })
+  frames.push({ phase: 'done', activeLine: L('return the head'), pythonLine: 8, nodes: [...list], active: [], message: `List now has ${list.length} nodes.` })
   return { input: { head }, result: list.map(node => node.value), frames }
 }
 

@@ -10,10 +10,10 @@ export function buildTrace(input) {
   const { s } = input
   const ones = [...s].filter(ch => ch === '1').length
   const zeros = s.length - ones
-  const frames = [{ phase: 'count', activeLine: L('set ones to the count'), ones, zeros, result: '', message: `The string has ${ones} one(s) and ${zeros} zero(s).` }]
+  const frames = [{ phase: 'count', activeLine: L('set ones to the count'), pythonLine: P('ones = s.count'), ones, zeros, result: '', message: `The string has ${ones} one(s) and ${zeros} zero(s).` }]
   const result = '1'.repeat(ones - 1) + '0'.repeat(zeros) + '1'
-  frames.push({ phase: 'place', activeLine: L('set result to'), ones, zeros, result, message: 'The last digit must be 1 for the number to be odd; the other ones go first to be as large as possible.' })
-  frames.push({ phase: 'done', activeLine: L('return result'), ones, zeros, result, message: `Maximum odd binary number: ${result}.` })
+  frames.push({ phase: 'place', activeLine: L('set result to'), pythonLine: P("return '1'"), ones, zeros, result, message: 'The last digit must be 1 for the number to be odd; the other ones go first to be as large as possible.' })
+  frames.push({ phase: 'done', activeLine: L('return result'), pythonLine: P("return '1'"), ones, zeros, result, message: `Maximum odd binary number: ${result}.` })
   return { input, s, result, frames }
 }
 
@@ -25,6 +25,7 @@ export const code = `maximum odd binary number
   add one 1 to the end of result
   return result`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def maximum_odd_binary(s):
     ones = s.count('1')

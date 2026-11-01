@@ -12,14 +12,14 @@ const setBits = i => i.toString(2).split('').filter(b => b === '1').length
 
 export function buildTrace({ nums, k }) {
   let total = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to 0'), index: -1, bits: null, total, message: `Add nums[i] for each index i with exactly ${k} set bits in binary.` }]
+  const frames = [{ phase: 'start', activeLine: L('set total to 0'), pythonLine: P('total = 0'), index: -1, bits: null, total, message: `Add nums[i] for each index i with exactly ${k} set bits in binary.` }]
   nums.forEach((value, index) => {
     const bits = setBits(index)
     const hit = bits === k
     if (hit) total += value
-    frames.push({ phase: hit ? 'add' : 'skip', activeLine: L(hit ? 'then add nums[i] to total' : 'if bits equals k'), index, bits, total, message: `Index ${index} (${index.toString(2)}) has ${bits} set bits. ${hit ? `Add ${value}.` : 'Skip it.'}` })
+    frames.push({ phase: hit ? 'add' : 'skip', activeLine: L(hit ? 'then add nums[i] to total' : 'if bits equals k'), pythonLine: P(hit ? 'total += nums[i]' : 'if bin(i)'), index, bits, total, message: `Index ${index} (${index.toString(2)}) has ${bits} set bits. ${hit ? `Add ${value}.` : 'Skip it.'}` })
   })
-  frames.push({ phase: 'done', activeLine: L('return total'), index: -1, bits: null, total, message: `Sum: ${total}.` })
+  frames.push({ phase: 'done', activeLine: L('return total'), pythonLine: P('return total'), index: -1, bits: null, total, message: `Sum: ${total}.` })
   return { input: { nums, k }, result: total, frames }
 }
 
@@ -30,6 +30,7 @@ export const code = `sum values at indices with k set bits:
     if bits equals k then add nums[i] to total
   return total`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def sum_by_set_bits(nums, k):
     total = 0

@@ -12,15 +12,15 @@ export function buildTrace(input) {
   const n = nums.length
   let current = nums[n - 1]
   let best = current
-  const frames = [{ phase: 'start', activeLine: L('set current to the last value'), index: n - 1, current, best, message: `Start from the last value ${current}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set current to the last value'), pythonLine: 2, index: n - 1, current, best, message: `Start from the last value ${current}.` }]
   for (let i = n - 2; i >= 0; i--) {
     const merged = nums[i] <= current
     if (merged) current += nums[i]
     else current = nums[i]
     if (current > best) best = current
-    frames.push({ phase: 'scan', activeLine: L('if nums[i] is at most current'), index: i, current, best, merged, message: merged ? `${nums[i]} is at most the block to its right, so it merges in. Block value ${current}.` : `${nums[i]} is larger, so a new block starts here. Block value ${current}.` })
+    frames.push({ phase: 'scan', activeLine: L('if nums[i] is at most current'), pythonLine: merged ? 6 : 8, index: i, current, best, merged, message: merged ? `${nums[i]} is at most the block to its right, so it merges in. Block value ${current}.` : `${nums[i]} is larger, so a new block starts here. Block value ${current}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, current, best, message: `Largest element: ${best}.` })
+  frames.push({ phase: 'done', activeLine: L('return best'), pythonLine: 10, index: -1, current, best, message: `Largest element: ${best}.` })
   return { input, result: best, frames }
 }
 
