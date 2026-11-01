@@ -43,20 +43,20 @@ export function buildTrace(input) {
   }
   const correct = Array(n).fill(0)
   const frames = []
-  const frame = (phase, line, node, message) => frames.push({ phase, activeLine: line, node, k, correct: [...correct], message })
+  const frame = (phase, line, node, message, pythonLine) => frames.push({ phase, activeLine: line, pythonLine, node, k, correct: [...correct], message })
   let base = 0
   for (let v = 1; v < n; v++) if (has(parent[v], v)) base++
   correct[0] = base
-  frame('base', L('set base to'), 0, `Rooted at 0, ${base} of the ${guesses.length} guesses are correct.`)
+  frame('base', L('set base to'), 0, `Rooted at 0, ${base} of the ${guesses.length} guesses are correct.`, 22)
   for (const v of order) {
     if (v === 0) continue
     const p = parent[v]
     correct[v] = correct[p] - (has(p, v) ? 1 : 0) + (has(v, p) ? 1 : 0)
-    frame('reroot', L('set correct of v'), v, `Moving the root to ${v} changes only the edge ${p}-${v}: ${correct[v]} guesses are correct.`)
+    frame('reroot', L('set correct of v'), v, `Moving the root to ${v} changes only the edge ${p}-${v}: ${correct[v]} guesses are correct.`, 27)
   }
   const roots = []
   for (let v = 0; v < n; v++) if (correct[v] >= k) roots.push(v)
-  frame('done', L('return the number'), null, `${roots.length} roots have at least ${k} correct guesses.`)
+  frame('done', L('return the number'), null, `${roots.length} roots have at least ${k} correct guesses.`, 28)
   return { input, result: roots.length, frames }
 }
 

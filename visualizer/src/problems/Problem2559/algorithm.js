@@ -16,18 +16,18 @@ const isGood = w => VOWELS.includes(w[0]) && VOWELS.includes(w[w.length - 1])
 export function buildTrace(input) {
   const { words, queries } = input
   const prefix = [0]
-  const frames = [{ phase: 'start', activeLine: L('build prefix counts'), index: -1, prefix: [0], query: null, answers: [], message: 'Count the words that start and end with a vowel, running total by running total.' }]
+  const frames = [{ phase: 'start', activeLine: L('build prefix counts'), pythonLine: P('prefix = [0]'), index: -1, prefix: [0], query: null, answers: [], message: 'Count the words that start and end with a vowel, running total by running total.' }]
   for (let i = 0; i < words.length; i++) {
     prefix.push(prefix[i] + (isGood(words[i]) ? 1 : 0))
-    frames.push({ phase: 'prefix', activeLine: L('append prefix'), index: i, prefix: [...prefix], query: null, answers: [], message: `${words[i]} ${isGood(words[i]) ? 'counts' : 'does not count'}. Prefix now ${prefix[i + 1]}.` })
+    frames.push({ phase: 'prefix', activeLine: L('append prefix'), pythonLine: P('prefix.append('), index: i, prefix: [...prefix], query: null, answers: [], message: `${words[i]} ${isGood(words[i]) ? 'counts' : 'does not count'}. Prefix now ${prefix[i + 1]}.` })
   }
   const answers = []
   for (const [l, r] of queries) {
     const answer = prefix[r + 1] - prefix[l]
     answers.push(answer)
-    frames.push({ phase: 'query', activeLine: L('append prefix at r plus 1'), index: -1, prefix: [...prefix], query: [l, r], answers: [...answers], message: `Range [${l}, ${r}] holds ${answer} qualifying words.` })
+    frames.push({ phase: 'query', activeLine: L('append prefix at r plus 1'), pythonLine: P('answers.append('), index: -1, prefix: [...prefix], query: [l, r], answers: [...answers], message: `Range [${l}, ${r}] holds ${answer} qualifying words.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, prefix: [...prefix], query: null, answers: [...answers], message: 'Every query is answered.' })
+  frames.push({ phase: 'done', activeLine: L('return answers'), pythonLine: P('return answers'), index: -1, prefix: [...prefix], query: null, answers: [...answers], message: 'Every query is answered.' })
   return { input, result: answers, frames }
 }
 
@@ -38,6 +38,7 @@ export const code = `count vowel strings in ranges (words, queries):
     append prefix at r plus 1 minus prefix at l to answers
   return answers`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def vowel_strings(words, queries):
     vowels = 'aeiou'

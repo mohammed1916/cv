@@ -30,20 +30,20 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ target, types }) {
   let ways = Array(target + 1).fill(0)
   ways[0] = 1
-  const frames = [{ phase: 'start', ways: [...ways], type: null, cell: null, activeLine: L('set ways[0] to 1'), message: `Count the ways to earn exactly ${target} points. Start with one way to earn 0 points.` }]
+  const frames = [{ phase: 'start', ways: [...ways], type: null, cell: null, pythonLine: 4, activeLine: L('set ways[0] to 1'), message: `Count the ways to earn exactly ${target} points. Start with one way to earn 0 points.` }]
   types.forEach(([count, marks], t) => {
     const next = Array(target + 1).fill(0)
-    frames.push({ phase: 'type', ways: [...ways], type: t, cell: null, activeLine: L('for each [count, marks]'), message: `Type ${t + 1}: up to ${count} questions, each worth ${marks} points.` })
+    frames.push({ phase: 'type', ways: [...ways], type: t, cell: null, pythonLine: 5, activeLine: L('for each [count, marks]'), message: `Type ${t + 1}: up to ${count} questions, each worth ${marks} points.` })
     for (let p = 0; p <= target; p++) {
       let sum = 0
       for (let k = 0; k <= count && k * marks <= p; k++) sum = (sum + ways[p - k * marks]) % MOD
       next[p] = sum
-      frames.push({ phase: 'cell', ways: [...next], type: t, cell: p, activeLine: L('add ways[p - k * marks]'), message: `${p} points: sum the ways from 0 to ${Math.min(count, Math.floor(p / marks))} questions of this type, giving ${sum}.` })
+      frames.push({ phase: 'cell', ways: [...next], type: t, cell: p, pythonLine: 10, activeLine: L('add ways[p - k * marks]'), message: `${p} points: sum the ways from 0 to ${Math.min(count, Math.floor(p / marks))} questions of this type, giving ${sum}.` })
     }
     ways = next
   })
   const result = ways[target]
-  frames.push({ phase: 'done', ways: [...ways], type: null, cell: target, activeLine: L('return ways[target]'), result, message: `There are ${result} ways to earn exactly ${target} points.` })
+  frames.push({ phase: 'done', ways: [...ways], type: null, cell: target, pythonLine: 13, activeLine: L('return ways[target]'), result, message: `There are ${result} ways to earn exactly ${target} points.` })
   return { input: { target, types }, result, frames }
 }
 

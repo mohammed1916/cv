@@ -23,16 +23,16 @@ export function buildTrace({ nums, k }) {
   let lo = Math.min(...nums)
   let hi = Math.max(...nums)
   const domain = [lo, hi]
-  const frames = [{ phase: 'start', activeLine: L('set low to the smallest'), lo, hi, mid: null, verdict: null, picked: [], message: `Capability must lie between ${lo} and ${hi}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set low to the smallest'), pythonLine: P('low, high = min(nums)'), lo, hi, mid: null, verdict: null, picked: [], message: `Capability must lie between ${lo} and ${hi}.` }]
   while (lo < hi) {
     const mid = Math.floor((lo + hi) / 2)
     const picked = pick(mid)
     const verdict = picked.length >= k
-    frames.push({ phase: 'probe', activeLine: L('if we can rob at least k houses'), lo, hi, mid, verdict, picked, message: `Capability ${mid}: the greedy walk robs ${picked.length} houses, ${verdict ? 'enough' : 'not enough'} for k = ${k}.` })
+    frames.push({ phase: 'probe', activeLine: L('if we can rob at least k houses'), pythonLine: P('if robbery_count(mid) >= k'), lo, hi, mid, verdict, picked, message: `Capability ${mid}: the greedy walk robs ${picked.length} houses, ${verdict ? 'enough' : 'not enough'} for k = ${k}.` })
     if (verdict) hi = mid
     else lo = mid + 1
   }
-  frames.push({ phase: 'done', activeLine: L('return low'), lo, hi: lo, mid: null, verdict: null, picked: pick(lo), message: `Minimum capability: ${lo}.` })
+  frames.push({ phase: 'done', activeLine: L('return low'), pythonLine: P('return low'), lo, hi: lo, mid: null, verdict: null, picked: pick(lo), message: `Minimum capability: ${lo}.` })
   return { input: { nums, k }, sorted: nums, domain, result: lo, frames }
 }
 
@@ -52,6 +52,7 @@ robbery count for a capability cap
   otherwise move on to the next house
   return the number of houses robbed`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def minimum_capability(nums, k):
     def robbery_count(cap):

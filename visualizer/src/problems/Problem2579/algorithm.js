@@ -8,13 +8,13 @@ export function parseInput(text) {
 
 export function buildTrace({ minutes }) {
   let count = 1
-  const frames = [{ phase: 'start', activeLine: L('set count to 1'), minute: 1, added: 1, count, message: 'After the first minute, one cell is colored.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set count to 1'), minute: 1, added: 1, count, message: 'After the first minute, one cell is colored.' }]
   for (let minute = 2; minute <= minutes; minute++) {
     const added = 4 * (minute - 1)
     count += added
-    frames.push({ phase: 'ring', activeLine: L('set added to 4 times'), minute, added, count, message: `Minute ${minute} colors a new ring of ${added} cells.` })
+    frames.push({ phase: 'ring', pythonLine: 4, activeLine: L('set added to 4 times'), minute, added, count, message: `Minute ${minute} colors a new ring of ${added} cells.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), minute: minutes, added: 0, count, message: `After ${minutes} minutes, ${count} cells are colored.` })
+  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return count'), minute: minutes, added: 0, count, message: `After ${minutes} minutes, ${count} cells are colored.` })
   return { input: { minutes }, result: count, frames }
 }
 

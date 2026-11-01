@@ -11,18 +11,18 @@ export function buildTrace(input) {
   const sorted = [...input.nums].sort((a, b) => a - b)
   const n = sorted.length
   const half = Math.floor(n / 2)
-  const frames = [{ phase: 'sort', activeLine: L('sort nums'), i: -1, j: -1, sorted, count: 0, message: `Sorted values: ${sorted.join(', ')}. The smallest half can be doubled.` }]
+  const frames = [{ phase: 'sort', pythonLine: 2, activeLine: L('sort nums'), i: -1, j: -1, sorted, count: 0, message: `Sorted values: ${sorted.join(', ')}. The smallest half can be doubled.` }]
   let count = 0
   for (let j = half; j < n; j++) {
     if (count < half && 2 * sorted[count] <= sorted[j]) {
       count++
-      frames.push({ phase: 'pair', activeLine: L('increase count'), i: count - 1, j, sorted, count, message: `Mark ${sorted[count - 1]} and ${sorted[j]}, since 2 times ${sorted[count - 1]} is at most ${sorted[j]}.` })
+      frames.push({ phase: 'pair', pythonLine: 7, activeLine: L('increase count'), i: count - 1, j, sorted, count, message: `Mark ${sorted[count - 1]} and ${sorted[j]}, since 2 times ${sorted[count - 1]} is at most ${sorted[j]}.` })
     } else {
-      frames.push({ phase: 'skip', activeLine: L('for each j'), i: count, j, sorted, count, message: `${sorted[j]} is too small to take the next small value ${count < half ? sorted[count] : '(none left)'}; move on.` })
+      frames.push({ phase: 'skip', pythonLine: 6, activeLine: L('for each j'), i: count, j, sorted, count, message: `${sorted[j]} is too small to take the next small value ${count < half ? sorted[count] : '(none left)'}; move on.` })
     }
   }
   const result = 2 * count
-  frames.push({ phase: 'done', activeLine: L('return 2 times count'), i: count, j: n, sorted, count, message: `${count} pairs were found, so ${result} indices are marked.` })
+  frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return 2 times count'), i: count, j: n, sorted, count, message: `${count} pairs were found, so ${result} indices are marked.` })
   return { input, result, frames }
 }
 

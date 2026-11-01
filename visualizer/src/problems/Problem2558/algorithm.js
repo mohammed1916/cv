@@ -9,16 +9,16 @@ export function parseInput(text) {
 
 export function buildTrace({ gifts, k }) {
   const piles = [...gifts]
-  const frames = [{ phase: 'start', activeLine: L('put every pile into a max heap'), piles: [...piles], picked: -1, message: 'Every pile starts in the heap.' }]
+  const frames = [{ phase: 'start', activeLine: L('put every pile into a max heap'), pythonLine: P('heapq.heapify(heap)'), piles: [...piles], picked: -1, message: 'Every pile starts in the heap.' }]
   for (let second = 1; second <= k; second++) {
     let at = 0
     for (let i = 1; i < piles.length; i++) if (piles[i] > piles[at]) at = i
     const before = piles[at]
     piles[at] = Math.floor(Math.sqrt(before))
-    frames.push({ phase: 'take', activeLine: L('take the largest pile'), piles: [...piles], picked: at, message: `Second ${second}: pile ${at} had ${before} and keeps ${piles[at]}.` })
+    frames.push({ phase: 'take', activeLine: L('take the largest pile'), pythonLine: P('x = -heapq.heappop(heap)'), piles: [...piles], picked: at, message: `Second ${second}: pile ${at} had ${before} and keeps ${piles[at]}.` })
   }
   const result = piles.reduce((sum, g) => sum + g, 0)
-  frames.push({ phase: 'done', activeLine: L('return the sum of all piles'), piles: [...piles], picked: -1, message: `Gifts left: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return the sum of all piles'), pythonLine: P('return -sum(heap)'), piles: [...piles], picked: -1, message: `Gifts left: ${result}.` })
   return { input: { gifts, k }, result, frames }
 }
 
@@ -29,6 +29,7 @@ export const code = `sum of gifts left after k seconds, given gifts and k
     put floor of the square root of x back into the heap
   return the sum of all piles left`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `import heapq
 import math

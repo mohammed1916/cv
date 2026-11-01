@@ -13,21 +13,21 @@ export function buildTrace(input) {
   const blocked = new Set(input.banned)
   let sum = 0
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('set sum to zero'), value: 0, sum, count, message: `Choose from 1 to ${n}, skipping banned numbers, staying at or below ${maxSum}.` }]
+  const frames = [{ phase: 'start', activeLine: L('set sum to zero'), pythonLine: P('total = 0'), value: 0, sum, count, message: `Choose from 1 to ${n}, skipping banned numbers, staying at or below ${maxSum}.` }]
   for (let v = 1; v <= n; v++) {
     if (blocked.has(v)) {
-      frames.push({ phase: 'skip', activeLine: L('skip it if it is banned'), value: v, sum, count, message: `${v} is banned, so skip it.` })
+      frames.push({ phase: 'skip', activeLine: L('skip it if it is banned'), pythonLine: P('continue'), value: v, sum, count, message: `${v} is banned, so skip it.` })
       continue
     }
     if (sum + v > maxSum) {
-      frames.push({ phase: 'stop', activeLine: L('stop here'), value: v, sum, count, message: `Taking ${v} would make ${sum + v}, above ${maxSum}. Stop.` })
+      frames.push({ phase: 'stop', activeLine: L('stop here'), pythonLine: P('break'), value: v, sum, count, message: `Taking ${v} would make ${sum + v}, above ${maxSum}. Stop.` })
       break
     }
     sum += v
     count += 1
-    frames.push({ phase: 'take', activeLine: L('take it'), value: v, sum, count, message: `Take ${v}. Sum ${sum}, count ${count}.` })
+    frames.push({ phase: 'take', activeLine: L('take it'), pythonLine: P('total += v'), value: v, sum, count, message: `Take ${v}. Sum ${sum}, count ${count}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return count'), value: null, sum, count, message: `Most integers chosen: ${count}.` })
+  frames.push({ phase: 'done', activeLine: L('return count'), pythonLine: P('return count'), value: null, sum, count, message: `Most integers chosen: ${count}.` })
   return { input, result: count, frames }
 }
 
@@ -40,6 +40,7 @@ export const code = `maximum number of distinct integers chosen from 1 to n:
     take it: add v to sum and add one to count
   return count`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def maximum_integers(banned, n, maxSum):
     blocked = set(banned)

@@ -15,21 +15,21 @@ export function buildTrace(ranges) {
   const sorted = ranges.map((r, index) => ({ index, start: r[0], end: r[1] })).sort((a, b) => a.start - b.start || a.end - b.end)
   const groupOf = Array(ranges.length).fill(0)
   let groups = 0, curEnd = null, curGroup = 0
-  const frames = [{ phase: 'start', index: null, groups: 0, groupOf: groupOf.slice(), sorted, activeLine: L('set groups to 0'), message: 'Sort the ranges by start. Overlapping ranges share a group, so only the number of merged components matters.' }]
+  const frames = [{ phase: 'start', index: null, groups: 0, groupOf: groupOf.slice(), sorted, pythonLine: 3, activeLine: L('set groups to 0'), message: 'Sort the ranges by start. Overlapping ranges share a group, so only the number of merged components matters.' }]
   for (const item of sorted) {
     if (curEnd === null || item.start > curEnd) {
       groups++
       curGroup = groups
       curEnd = item.end
-      frames.push({ phase: 'new', index: item.index, groups, groupOf: groupOf.slice(), sorted, activeLine: L('start a new component'), message: `Range [${item.start}, ${item.end}] starts a new component: ${groups} so far.` })
+      frames.push({ phase: 'new', index: item.index, groups, groupOf: groupOf.slice(), sorted, pythonLine: 7, activeLine: L('start a new component'), message: `Range [${item.start}, ${item.end}] starts a new component: ${groups} so far.` })
     } else {
       curEnd = Math.max(curEnd, item.end)
-      frames.push({ phase: 'join', index: item.index, groups, groupOf: groupOf.slice(), sorted, activeLine: L('extend the component'), message: `Range [${item.start}, ${item.end}] shares a point with the current component, so it joins it.` })
+      frames.push({ phase: 'join', index: item.index, groups, groupOf: groupOf.slice(), sorted, pythonLine: 10, activeLine: L('extend the component'), message: `Range [${item.start}, ${item.end}] shares a point with the current component, so it joins it.` })
     }
     groupOf[item.index] = curGroup
   }
   const result = Number((2n ** BigInt(groups)) % MOD)
-  frames.push({ phase: 'done', index: null, groups, groupOf: groupOf.slice(), sorted, activeLine: L('return 2 to the power'), message: `${groups} component(s), so ${result} ways.`, result })
+  frames.push({ phase: 'done', index: null, groups, groupOf: groupOf.slice(), sorted, pythonLine: 11, activeLine: L('return 2 to the power'), message: `${groups} component(s), so ${result} ways.`, result })
   return { input: ranges, result, frames }
 }
 

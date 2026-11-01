@@ -26,7 +26,7 @@ export const pythonLineMap = { 1: 1, 2: 2, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9
 const snapshot = table => table.map(row => row.map(cell => (Array.isArray(cell) ? [...cell] : cell)));
 function emit(frames, table, info, write = false) {
   if (write) table[info.row][info.column] = info.value;
-  frames.push({ phase: info.phase, activeLine: info.line, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
+  frames.push({ phase: info.phase, activeLine: info.line, pythonLine: info.pythonLine, message: info.message, row: info.row, column: info.column, value: info.value, table: snapshot(table) });
 }
 
 export function parseInput(text) {
@@ -48,22 +48,22 @@ export function buildTrace(input) {
   const columnLabels = nums.map((v, k) => `k=${k} (${v})`);
   const frames = [];
   let total = 0;
-  emit(frames, table, { phase: "setup", line: 2, row: 0, column: 0, value: 0, message: "Start with total = 0. Each cell (j, k) holds the number of quadruplets whose middle pair is j, k." });
+  emit(frames, table, { phase: "setup", line: 2, pythonLine: 3, row: 0, column: 0, value: 0, message: "Start with total = 0. Each cell (j, k) holds the number of quadruplets whose middle pair is j, k." });
   for (let j = 1; j <= n - 3; j++) {
     for (let k = j + 1; k <= n - 2; k++) {
-      emit(frames, table, { phase: "scan", line: 4, row: j, column: k, value: null, message: `Check the middle pair j=${j}, k=${k}.` });
+      emit(frames, table, { phase: "scan", line: 4, pythonLine: 5, row: j, column: k, value: null, message: `Check the middle pair j=${j}, k=${k}.` });
       if (nums[j] > nums[k]) {
         let left = 0, right = 0;
         for (let i = 0; i < j; i++) if (nums[i] < nums[k]) left++;
         for (let l = k + 1; l < n; l++) if (nums[l] > nums[j]) right++;
         const product = left * right;
         total += product;
-        emit(frames, table, { phase: "compute", line: 8, row: j, column: k, value: product, message: `nums[${j}] > nums[${k}]: ${left} choices for i times ${right} choices for l = ${product}.` }, true);
+        emit(frames, table, { phase: "compute", line: 8, pythonLine: 9, row: j, column: k, value: product, message: `nums[${j}] > nums[${k}]: ${left} choices for i times ${right} choices for l = ${product}.` }, true);
       } else {
-        emit(frames, table, { phase: "compute", line: 5, row: j, column: k, value: null, message: `nums[${j}] = ${nums[j]} is not greater than nums[${k}] = ${nums[k]}, so this pair cannot be the middle.` });
+        emit(frames, table, { phase: "compute", line: 5, pythonLine: 6, row: j, column: k, value: null, message: `nums[${j}] = ${nums[j]} is not greater than nums[${k}] = ${nums[k]}, so this pair cannot be the middle.` });
       }
     }
   }
-  emit(frames, table, { phase: "result", line: 9, row: n - 1, column: n - 1, value: total, message: `Return ${total}.` });
+  emit(frames, table, { phase: "result", line: 9, pythonLine: 10, row: n - 1, column: n - 1, value: total, message: `Return ${total}.` });
   return { input, result: total, frames, rowLabels, columnLabels };
 }

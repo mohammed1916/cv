@@ -26,19 +26,19 @@ export function buildTrace({ nums }) {
   const factors = nums.map(primesOf)
   const last = new Map()
   factors.forEach((fs, i) => fs.forEach(p => last.set(p, i)))
-  const frames = [{ phase: 'factor', activeLine: L('for each index i, record'), index: -1, reach: -1, message: 'Recorded the last index at which each prime appears.' }]
+  const frames = [{ phase: 'factor', pythonLine: 17, activeLine: L('for each index i, record'), index: -1, reach: -1, message: 'Recorded the last index at which each prime appears.' }]
   let reach = -1
   let answer = -1
   for (let i = 0; i < nums.length - 1; i++) {
     for (const p of factors[i]) reach = Math.max(reach, last.get(p))
     if (reach <= i) {
       answer = i
-      frames.push({ phase: 'scan', activeLine: L('if reach is at most i'), index: i, reach, message: `Primes of the prefix all end by index ${i}, so the split after ${i} works.` })
+      frames.push({ phase: 'scan', pythonLine: 23, activeLine: L('if reach is at most i'), index: i, reach, message: `Primes of the prefix all end by index ${i}, so the split after ${i} works.` })
       break
     }
-    frames.push({ phase: 'scan', activeLine: L('set reach to the larger'), index: i, reach, message: `Prefix primes last appear at index ${reach}, so split ${i} fails.` })
+    frames.push({ phase: 'scan', pythonLine: 22, activeLine: L('set reach to the larger'), index: i, reach, message: `Prefix primes last appear at index ${reach}, so split ${i} fails.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return -1'), index: answer, reach, message: answer === -1 ? 'No split gives coprime products.' : `First valid split index: ${answer}.` })
+  frames.push({ phase: 'done', pythonLine: answer === -1 ? 24 : 23, activeLine: L('return -1'), index: answer, reach, message: answer === -1 ? 'No split gives coprime products.' : `First valid split index: ${answer}.` })
   return { input: { nums }, result: answer, factors, frames }
 }
 

@@ -14,17 +14,17 @@ export function buildTrace({ prize_positions: pos, k }) {
   const frames = []
   let left = 0
   let answer = 0
-  frames.push({ phase: 'start', activeLine: L('set best to'), left: 0, right: -1, covered: 0, before: 0, answer, message: `Each segment spans positions up to ${k} apart. Prizes are sorted, so windows are contiguous.` })
+  frames.push({ phase: 'start', activeLine: L('set best to'), pythonLine: P('best = [0]'), left: 0, right: -1, covered: 0, before: 0, answer, message: `Each segment spans positions up to ${k} apart. Prizes are sorted, so windows are contiguous.` })
   for (let right = 0; right < n; right++) {
     while (pos[right] - pos[left] > k) left++
-    frames.push({ phase: 'slide', activeLine: L('while the prize at right'), left, right, covered: 0, before: 0, answer, message: `The first segment for prize ${right} starts at prize ${left}.` })
+    frames.push({ phase: 'slide', activeLine: L('while the prize at right'), pythonLine: P('while prize_positions[right]'), left, right, covered: 0, before: 0, answer, message: `The first segment for prize ${right} starts at prize ${left}.` })
     const covered = right - left + 1
     const before = left > 0 ? best[left - 1] : 0
     answer = Math.max(answer, covered + before)
     best[right] = Math.max(right > 0 ? best[right - 1] : 0, covered)
-    frames.push({ phase: 'record', activeLine: L('set answer to the larger'), left, right, covered, before, answer, message: `This segment covers ${covered} prizes. Best segment ending before it covers ${before}. Total ${covered + before}; best answer ${answer}.` })
+    frames.push({ phase: 'record', activeLine: L('set answer to the larger'), pythonLine: P('answer = max(answer'), left, right, covered, before, answer, message: `This segment covers ${covered} prizes. Best segment ending before it covers ${before}. Total ${covered + before}; best answer ${answer}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return answer'), left, right: n - 1, covered: 0, before: 0, answer, message: `Most prizes covered by two segments: ${answer}.` })
+  frames.push({ phase: 'done', activeLine: L('return answer'), pythonLine: P('return answer'), left, right: n - 1, covered: 0, before: 0, answer, message: `Most prizes covered by two segments: ${answer}.` })
   return { input: { prize_positions: pos, k }, result: answer, frames }
 }
 
@@ -39,6 +39,7 @@ export const code = `maximize win from two segments (prize_positions, k):
     set best at right to the larger of the best value before right and covered
   return answer`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def maximize_win(prize_positions, k):
     n = len(prize_positions)

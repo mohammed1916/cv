@@ -16,8 +16,8 @@ export function buildTrace(input) {
   const frames = []
   const heap = []
   const sums = []
-  const snap = (phase, activeLine, message, nodeIds = []) => frames.push({
-    phase, activeLine, nodeIds, sums: [...sums], heap: [...heap], message,
+  const snap = (phase, activeLine, message, nodeIds = [], pythonLine) => frames.push({
+    phase, activeLine, pythonLine, nodeIds, sums: [...sums], heap: [...heap], message,
   })
   const push = value => {
     heap.push(value)
@@ -44,24 +44,24 @@ export function buildTrace(input) {
     return top
   }
 
-  snap('start', L('walk the tree level by level'), 'Walk the tree one level at a time. The heap starts empty.')
+  snap('start', L('walk the tree level by level'), 'Walk the tree one level at a time. The heap starts empty.', [], 29)
   let level = tree ? [tree] : []
   let depth = 0
   while (level.length) {
     depth++
     const total = level.reduce((s, node) => s + node.value, 0)
     sums.push(total)
-    snap('sum', L('add up its values'), `Level ${depth} sums to ${total}.`, level.map(node => node.id))
+    snap('sum', L('add up its values'), `Level ${depth} sums to ${total}.`, level.map(node => node.id), 31)
     push(total)
-    snap('push', L('push the level sum'), `The heap now holds ${heap.length} sum${heap.length === 1 ? '' : 's'}.`, level.map(node => node.id))
+    snap('push', L('push the level sum'), `The heap now holds ${heap.length} sum${heap.length === 1 ? '' : 's'}.`, level.map(node => node.id), 32)
     if (heap.length > k) {
       const removed = pop()
-      snap('pop', L('remove the smallest'), `The heap holds more than ${k}, so the smallest sum ${removed} leaves.`, level.map(node => node.id))
+      snap('pop', L('remove the smallest'), `The heap holds more than ${k}, so the smallest sum ${removed} leaves.`, level.map(node => node.id), 34)
     }
     level = level.flatMap(node => [node.left, node.right].filter(Boolean))
   }
   const result = heap.length < k ? -1 : heap[0]
-  snap('done', L('return the smallest sum'), result === -1 ? `Only ${heap.length} levels, fewer than k. Answer: -1.` : `The ${k}th largest level sum is ${result}.`)
+  snap('done', L('return the smallest sum'), result === -1 ? `Only ${heap.length} levels, fewer than k. Answer: -1.` : `The ${k}th largest level sum is ${result}.`, [], 36)
   return { input, root: tree, result, frames }
 }
 

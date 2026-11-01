@@ -18,17 +18,17 @@ export function buildTrace(input) {
   const n = nums.length
   const dp = Array(n + 1).fill(Infinity)
   dp[0] = 0
-  const frames = [{ phase: 'start', activeLine: L('set dp[0] to 0'), end: 0, start: -1, dp: [...dp], cost: null, message: 'Splitting nothing costs 0.' }]
+  const frames = [{ phase: 'start', activeLine: L('set dp[0] to 0'), pythonLine: P('dp[0] = 0'), end: 0, start: -1, dp: [...dp], cost: null, message: 'Splitting nothing costs 0.' }]
   for (let i = 1; i <= n; i++) {
     dp[i] = Infinity
     for (let j = 0; j < i; j++) {
       const cost = k + trimmedLength(nums.slice(j, i))
       dp[i] = Math.min(dp[i], dp[j] + cost)
-      frames.push({ phase: 'piece', activeLine: L('set dp[i] to the smaller'), end: i, start: j, dp: [...dp], cost, message: `Piece from ${j} to ${i - 1} costs ${cost}; best total for the first ${i} values is ${dp[i]}.` })
+      frames.push({ phase: 'piece', activeLine: L('set dp[i] to the smaller'), pythonLine: P('dp[i] = min(dp[i], dp[j] + cost)'), end: i, start: j, dp: [...dp], cost, message: `Piece from ${j} to ${i - 1} costs ${cost}; best total for the first ${i} values is ${dp[i]}.` })
     }
   }
   const result = dp[n]
-  frames.push({ phase: 'done', activeLine: L('return dp[n]'), end: n, start: -1, dp: [...dp], cost: null, message: `Minimum total cost: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return dp[n]'), pythonLine: P('return dp[n]'), end: n, start: -1, dp: [...dp], cost: null, message: `Minimum total cost: ${result}.` })
   return { input, result, frames }
 }
 
@@ -42,6 +42,7 @@ export const code = `minimum cost to split an array (nums, k):
       set dp[i] to the smaller of dp[i] and dp[j] + cost
   return dp[n]`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `def min_cost_split(nums, k):
     n = len(nums)

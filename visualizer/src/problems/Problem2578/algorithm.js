@@ -10,14 +10,14 @@ export function buildTrace(input) {
   const digits = input.num.split('').sort()
   let first = ''
   let second = ''
-  const frames = [{ phase: 'start', activeLine: L('sort the digits'), digits: [...digits], first, second, message: `Sorted digits: ${digits.join('')}. Deal them out alternately.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('sort the digits'), digits: [...digits], first, second, message: `Sorted digits: ${digits.join('')}. Deal them out alternately.` }]
   digits.forEach((d, i) => {
     if (i % 2 === 0) first += d
     else second += d
-    frames.push({ phase: 'deal', activeLine: L(i % 2 === 0 ? 'add the digit to the first number' : 'add the digit to the second number'), digits: [...digits], index: i, first, second, message: `Digit ${d} goes to ${i % 2 === 0 ? 'the first' : 'the second'} number.` })
+    frames.push({ phase: 'deal', pythonLine: i % 2 === 0 ? 3 : 4, activeLine: L(i % 2 === 0 ? 'add the digit to the first number' : 'add the digit to the second number'), digits: [...digits], index: i, first, second, message: `Digit ${d} goes to ${i % 2 === 0 ? 'the first' : 'the second'} number.` })
   })
   const result = Number(first) + Number(second)
-  frames.push({ phase: 'done', activeLine: L('return the sum'), digits: [...digits], index: -1, first, second, message: `${first} + ${second} = ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 5, activeLine: L('return the sum'), digits: [...digits], index: -1, first, second, message: `${first} + ${second} = ${result}.` })
   return { input, result, frames }
 }
 

@@ -43,24 +43,24 @@ function shortestRoute(grid) {
 
 export function buildTrace(input) {
   const { grid } = input
-  const frames = [{ phase: 'start', activeLine: L('find one shortest route'), route: [], candidate: null, message: 'Look for a route of ones from the top-left to the bottom-right.' }]
+  const frames = [{ phase: 'start', activeLine: L('find one shortest route'), pythonLine: P('route = shortest_route(grid)'), route: [], candidate: null, message: 'Look for a route of ones from the top-left to the bottom-right.' }]
   const route = shortestRoute(grid)
   if (!route) {
-    frames.push({ phase: 'done', activeLine: L('return true'), route: [], candidate: null, message: 'No route exists already, so no flip is needed.' })
+    frames.push({ phase: 'done', activeLine: L('return true'), pythonLine: P('return True'), route: [], candidate: null, message: 'No route exists already, so no flip is needed.' })
     return { input, result: true, frames }
   }
-  frames.push({ phase: 'route', activeLine: L('find one shortest route'), route, candidate: null, message: `Found a route of ${route.length} cells. Any single cut must lie on it.` })
+  frames.push({ phase: 'route', activeLine: L('find one shortest route'), pythonLine: P('if route is None'), route, candidate: null, message: `Found a route of ${route.length} cells. Any single cut must lie on it.` })
   for (const [r, c] of route.slice(1, -1)) {
     const board = copy(grid)
     board[r][c] = 0
-    frames.push({ phase: 'candidate', activeLine: L('set the cell to 0'), route, candidate: [r, c], message: `Flip (${r}, ${c}) to 0 in a copy and look for another route.` })
+    frames.push({ phase: 'candidate', activeLine: L('set the cell to 0'), pythonLine: P('board[r][c] = 0'), route, candidate: [r, c], message: `Flip (${r}, ${c}) to 0 in a copy and look for another route.` })
     if (!shortestRoute(board)) {
-      frames.push({ phase: 'done', activeLine: L('no longer reachable'), route, candidate: [r, c], message: `Flipping (${r}, ${c}) cuts every route. The answer is true.` })
+      frames.push({ phase: 'done', activeLine: L('no longer reachable'), pythonLine: P('if shortest_route(board) is None') + 1, route, candidate: [r, c], message: `Flipping (${r}, ${c}) cuts every route. The answer is true.` })
       return { input, result: true, frames }
     }
-    frames.push({ phase: 'candidate', activeLine: L('no longer reachable'), route, candidate: [r, c], message: `A route still survives without (${r}, ${c}).` })
+    frames.push({ phase: 'candidate', activeLine: L('no longer reachable'), pythonLine: P('if shortest_route(board) is None'), route, candidate: [r, c], message: `A route still survives without (${r}, ${c}).` })
   }
-  frames.push({ phase: 'done', activeLine: L('return false'), route, candidate: null, message: 'No single flip cuts every route. The answer is false.' })
+  frames.push({ phase: 'done', activeLine: L('return false'), pythonLine: P('return False'), route, candidate: null, message: 'No single flip cuts every route. The answer is false.' })
   return { input, result: false, frames }
 }
 
@@ -74,6 +74,7 @@ export const code = `can disconnect (grid):
       return true
   return false`.split('\n').map((text, index) => ({ line: index + 1, text }))
 const L = s => code.findIndex(c => c.text.includes(s)) + 1
+const P = s => python.split('\n').findIndex(l => l.includes(s)) + 1
 
 export const python = `from collections import deque
 

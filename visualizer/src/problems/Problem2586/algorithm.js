@@ -15,19 +15,19 @@ export function buildTrace(input) {
   const { words, queries } = input
   const running = [0]
   const flags = []
-  const frames = [{ phase: 'start', activeLine: L('set running to'), index: -1, running: [0], flags, range: null, message: 'Start a running count at 0 before the first word.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set running to'), index: -1, running: [0], flags, range: null, message: 'Start a running count at 0 before the first word.' }]
   words.forEach((word, i) => {
     const hit = qualifies(word) ? 1 : 0
     flags.push(hit)
     running.push(running[i] + hit)
-    frames.push({ phase: 'count', activeLine: L('add 1 to the running total'), index: i, running: [...running], flags: [...flags], range: null, message: `${word} ${hit ? 'starts and ends with a vowel' : 'does not qualify'}. Running total ${running[i + 1]}.` })
+    frames.push({ phase: 'count', pythonLine: 6, activeLine: L('add 1 to the running total'), index: i, running: [...running], flags: [...flags], range: null, message: `${word} ${hit ? 'starts and ends with a vowel' : 'does not qualify'}. Running total ${running[i + 1]}.` })
   })
   const result = queries.map(([l, r], q) => {
     const count = running[r + 1] - running[l]
-    frames.push({ phase: 'query', activeLine: L('subtract running[l]'), index: r, running: [...running], flags: [...flags], range: [l, r], query: q, count, message: `Query [${l}, ${r}]: ${running[r + 1]} minus ${running[l]} gives ${count}.` })
+    frames.push({ phase: 'query', pythonLine: 7, activeLine: L('subtract running[l]'), index: r, running: [...running], flags: [...flags], range: [l, r], query: q, count, message: `Query [${l}, ${r}]: ${running[r + 1]} minus ${running[l]} gives ${count}.` })
     return count
   })
-  frames.push({ phase: 'done', activeLine: L('return answers'), index: -1, running: [...running], flags: [...flags], range: null, message: `Answers: ${result.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return answers'), index: -1, running: [...running], flags: [...flags], range: null, message: `Answers: ${result.join(', ')}.` })
   return { input, result, frames }
 }
 
