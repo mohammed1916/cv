@@ -31,23 +31,23 @@ export function buildTrace({ words, groups }) {
   const n = words.length
   const dp = Array(n).fill(1)
   const prev = Array(n).fill(-1)
-  const frames = [{ phase: 'start', index: -1, dp: [...dp], from: null, activeLine: L('set dp[i] to 1'), message: 'Every word alone is a chain of length 1.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, index: -1, dp: [...dp], from: null, activeLine: L('set dp[i] to 1'), message: 'Every word alone is a chain of length 1.' }]
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < i; j++) {
       if (groups[j] !== groups[i] && oneApart(words[j], words[i]) && dp[j] + 1 > dp[i]) {
         dp[i] = dp[j] + 1
         prev[i] = j
-        frames.push({ phase: 'link', index: i, dp: [...dp], from: j, activeLine: L('set dp[i] to dp[j] plus 1'), message: `Extend ${words[j]} to ${words[i]}: chain length ${dp[i]}.` })
+        frames.push({ phase: 'link', pythonLine: 9, index: i, dp: [...dp], from: j, activeLine: L('set dp[i] to dp[j] plus 1'), message: `Extend ${words[j]} to ${words[i]}: chain length ${dp[i]}.` })
       }
     }
   }
   let end = 0
   for (let i = 0; i < n; i++) if (dp[i] > dp[end]) end = i
-  frames.push({ phase: 'end', index: end, dp: [...dp], from: null, activeLine: L('set end to the first'), message: `The longest chain ends at ${words[end]}, length ${dp[end]}.` })
+  frames.push({ phase: 'end', pythonLine: 14, index: end, dp: [...dp], from: null, activeLine: L('set end to the first'), message: `The longest chain ends at ${words[end]}, length ${dp[end]}.` })
   const chain = []
   for (let cur = end; cur !== -1; cur = prev[cur]) chain.push(words[cur])
   chain.reverse()
-  frames.push({ phase: 'done', index: end, dp: [...dp], from: null, activeLine: L('return the collected words'), message: `Chain: ${chain.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 20, index: end, dp: [...dp], from: null, activeLine: L('return the collected words'), message: `Chain: ${chain.join(', ')}.` })
   return { input: { words, groups }, result: chain, frames }
 }
 

@@ -13,10 +13,10 @@ export function buildTrace({ nums, target }) {
   const full = Math.floor(target / total)
   const rem = target % total
   const frames = []
-  frames.push({ phase: 'total', activeLine: L('set total to the sum'), left: 0, right: -1, window: 0, best: null, full, rem, message: `One copy sums to ${total}. Target ${target} is ${full} whole copies plus ${rem}.` })
+  frames.push({ phase: 'total', pythonLine: 4, activeLine: L('set total to the sum'), left: 0, right: -1, window: 0, best: null, full, rem, message: `One copy sums to ${total}. Target ${target} is ${full} whole copies plus ${rem}.` })
   if (rem === 0) {
     const result = full * n
-    frames.push({ phase: 'done', activeLine: L('return full times'), left: 0, right: -1, window: 0, best: null, full, rem, result, message: `The target is a whole number of copies, so the answer is ${result}.` })
+    frames.push({ phase: 'done', activeLine: L('return full times'), pythonLine: 6, left: 0, right: -1, window: 0, best: null, full, rem, result, message: `The target is a whole number of copies, so the answer is ${result}.` })
     return { input: { nums, target }, result, frames }
   }
   const doubled = [...nums, ...nums]
@@ -25,19 +25,19 @@ export function buildTrace({ nums, target }) {
   let best = null
   for (let right = 0; right < doubled.length; right++) {
     window += doubled[right]
-    frames.push({ phase: 'extend', activeLine: L('add the value at right'), left, right, window, best, full, rem, message: `Add ${doubled[right]} at position ${right}; the window sums to ${window}.` })
+    frames.push({ phase: 'extend', pythonLine: 12, activeLine: L('add the value at right'), left, right, window, best, full, rem, message: `Add ${doubled[right]} at position ${right}; the window sums to ${window}.` })
     while (window > rem) {
       window -= doubled[left]
       left++
-      frames.push({ phase: 'shrink', activeLine: L('while window is greater'), left, right, window, best, full, rem, message: `The window is above ${rem}, so the start moves to ${left}.` })
+      frames.push({ phase: 'shrink', pythonLine: 15, activeLine: L('while window is greater'), left, right, window, best, full, rem, message: `The window is above ${rem}, so the start moves to ${left}.` })
     }
     if (window === rem && (best === null || right - left + 1 < best)) {
       best = right - left + 1
-      frames.push({ phase: 'record', activeLine: L('the length is smaller'), left, right, window, best, full, rem, message: `The window sums to ${rem} with length ${best}.` })
+      frames.push({ phase: 'record', pythonLine: 17, activeLine: L('the length is smaller'), left, right, window, best, full, rem, message: `The window sums to ${rem} with length ${best}.` })
     }
   }
   const result = best === null ? -1 : best + full * n
-  frames.push({ phase: 'done', activeLine: L('return -1'), left, right: doubled.length - 1, window, best, full, rem, result, message: result === -1 ? 'No window sums to the leftover, so the answer is -1.' : `Shortest window ${best} plus ${full} whole copies of length ${n}: ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('return -1'), pythonLine: result === -1 ? 19 : 20, left, right: doubled.length - 1, window, best, full, rem, result, message: result === -1 ? 'No window sums to the leftover, so the answer is -1.' : `Shortest window ${best} plus ${full} whole copies of length ${n}: ${result}.` })
   return { input: { nums, target }, result, frames }
 }
 

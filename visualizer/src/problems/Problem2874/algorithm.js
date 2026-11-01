@@ -14,15 +14,15 @@ export function buildTrace(input) {
   for (let k = n - 1; k >= 0; k--) after[k] = Math.max(nums[k], after[k + 1])
   let best = 0
   let before = nums[0]
-  const frames = [{ phase: 'start', activeLine: L('set after to the largest value after each index'), index: -1, before, best, message: 'Precompute the largest value to the right of every index.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, activeLine: L('set after to the largest value after each index'), index: -1, before, best, message: 'Precompute the largest value to the right of every index.' }]
   for (let j = 1; j < n - 1; j++) {
     const gap = before - nums[j]
     const value = gap * after[j + 1]
     if (value > best) best = value
-    frames.push({ phase: 'middle', activeLine: L('for each middle index'), index: j, before, best, value, message: `Middle ${j}: (${before} - ${nums[j]}) times ${after[j + 1]} = ${value}. Best so far: ${best}.` })
+    frames.push({ phase: 'middle', pythonLine: 10, activeLine: L('for each middle index'), index: j, before, best, value, message: `Middle ${j}: (${before} - ${nums[j]}) times ${after[j + 1]} = ${value}. Best so far: ${best}.` })
     if (nums[j] > before) before = nums[j]
   }
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, before, best, message: `Maximum triplet value: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return best'), index: -1, before, best, message: `Maximum triplet value: ${best}.` })
   return { input, result: best, frames }
 }
 

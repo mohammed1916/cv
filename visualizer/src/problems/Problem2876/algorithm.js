@@ -13,7 +13,7 @@ export function buildTrace({ edges }) {
   const ans = Array(n).fill(0)
   const state = Array(n).fill(0) // 0 unseen, 1 on the current walk, 2 answered
   const pos = Array(n).fill(0)
-  const frames = [{ phase: 'start', activeLine: L('count visited nodes for every start'), node: null, path: [], ans: [...ans], message: 'Walk from each unanswered node, stopping when the walk meets a node already on it or already answered.' }]
+  const frames = [{ phase: 'start', pythonLine: 4, activeLine: L('count visited nodes for every start'), node: null, path: [], ans: [...ans], message: 'Walk from each unanswered node, stopping when the walk meets a node already on it or already answered.' }]
 
   for (let start = 0; start < n; start++) {
     if (state[start] !== 0) continue
@@ -23,7 +23,7 @@ export function buildTrace({ edges }) {
       state[cur] = 1
       pos[cur] = path.length
       path.push(cur)
-      frames.push({ phase: 'walk', activeLine: L('walk from start along the edges'), node: cur, path: [...path], ans: [...ans], message: `Walk to node ${cur}.` })
+      frames.push({ phase: 'walk', pythonLine: 14, activeLine: L('walk from start along the edges'), node: cur, path: [...path], ans: [...ans], message: `Walk to node ${cur}.` })
       cur = edges[cur]
     }
     let end
@@ -34,7 +34,7 @@ export function buildTrace({ edges }) {
         ans[path[k]] = cycleLength
         state[path[k]] = 2
       }
-      frames.push({ phase: 'cycle', activeLine: L('the walk returned to a node on this walk'), node: cur, path: [...path], ans: [...ans], message: `The walk loops back to node ${cur}: a cycle of ${cycleLength} nodes, each with answer ${cycleLength}.` })
+      frames.push({ phase: 'cycle', pythonLine: 20, activeLine: L('the walk returned to a node on this walk'), node: cur, path: [...path], ans: [...ans], message: `The walk loops back to node ${cur}: a cycle of ${cycleLength} nodes, each with answer ${cycleLength}.` })
       end = cycleStart
     } else {
       end = path.length
@@ -42,10 +42,10 @@ export function buildTrace({ edges }) {
     for (let k = end - 1; k >= 0; k--) {
       ans[path[k]] = ans[edges[path[k]]] + 1
       state[path[k]] = 2
-      frames.push({ phase: 'unwind', activeLine: L('the node before it gets one more'), node: path[k], path: [...path], ans: [...ans], message: `Node ${path[k]} reaches an answered node, so it gets ${ans[path[k]]}.` })
+      frames.push({ phase: 'unwind', pythonLine: 26, activeLine: L('the node before it gets one more'), node: path[k], path: [...path], ans: [...ans], message: `Node ${path[k]} reaches an answered node, so it gets ${ans[path[k]]}.` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the answers'), node: null, path: [], ans: [...ans], message: `Visited counts: ${ans.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 28, activeLine: L('return the answers'), node: null, path: [], ans: [...ans], message: `Visited counts: ${ans.join(', ')}.` })
   return { input: { edges }, result: ans, frames }
 }
 

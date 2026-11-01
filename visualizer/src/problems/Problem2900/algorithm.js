@@ -20,17 +20,17 @@ const L = s => code.findIndex(c => c.text.includes(s)) + 1
 export function buildTrace({ words, groups }) {
   const chain = []
   let last = null
-  const frames = [{ phase: 'start', index: -1, chain: [], activeLine: L('set chain to'), message: 'Start with an empty chain.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, index: -1, chain: [], activeLine: L('set chain to'), message: 'Start with an empty chain.' }]
   words.forEach((w, i) => {
     if (last === null || groups[i] !== last) {
       chain.push(w)
       last = groups[i]
-      frames.push({ phase: 'take', index: i, chain: [...chain], activeLine: L('append words[i]'), message: `Group ${groups[i]} differs from the last taken group, so take ${w}.` })
+      frames.push({ phase: 'take', pythonLine: 6, index: i, chain: [...chain], activeLine: L('append words[i]'), message: `Group ${groups[i]} differs from the last taken group, so take ${w}.` })
     } else {
-      frames.push({ phase: 'skip', index: i, chain: [...chain], activeLine: L('if chain is empty'), message: `${w} is in group ${groups[i]}, the same as the last taken word, so skip it.` })
+      frames.push({ phase: 'skip', pythonLine: 5, index: i, chain: [...chain], activeLine: L('if chain is empty'), message: `${w} is in group ${groups[i]}, the same as the last taken word, so skip it.` })
     }
   })
-  frames.push({ phase: 'done', index: words.length - 1, chain: [...chain], activeLine: L('return chain'), message: `Chain length ${chain.length}.` })
+  frames.push({ phase: 'done', pythonLine: 8, index: words.length - 1, chain: [...chain], activeLine: L('return chain'), message: `Chain length ${chain.length}.` })
   return { input: { words, groups }, result: chain, frames }
 }
 

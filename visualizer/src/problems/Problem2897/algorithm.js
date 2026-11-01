@@ -14,7 +14,7 @@ export function buildTrace(input) {
   const { nums, k } = input
   const count = Array(8).fill(0)
   for (const v of nums) for (let b = 0; b < 8; b++) if ((v >> b) & 1) count[b] += 1
-  const frames = [{ phase: 'count', activeLine: L('set count to'), index: -1, counts: [...count], total: 0, message: `Bit counts across all values: ${count.join(', ')} (bit 0 first).` }]
+  const frames = [{ phase: 'count', pythonLine: 6, activeLine: L('set count to'), index: -1, counts: [...count], total: 0, message: `Bit counts across all values: ${count.join(', ')} (bit 0 first).` }]
   let total = 0
   for (let round = 0; round < k; round++) {
     let value = 0
@@ -22,10 +22,10 @@ export function buildTrace(input) {
       if (count[b] > 0) { value |= 1 << b; count[b] -= 1 }
     }
     total += value * value
-    frames.push({ phase: 'pack', activeLine: L('if count of that bit'), index: round, counts: [...count], total: total % MOD, value, message: `Pack number ${round + 1} with value ${value}, squared adds ${value * value}.` })
+    frames.push({ phase: 'pack', pythonLine: 14, activeLine: L('if count of that bit'), index: round, counts: [...count], total: total % MOD, value, message: `Pack number ${round + 1} with value ${value}, squared adds ${value * value}.` })
   }
   const result = total % MOD
-  frames.push({ phase: 'done', activeLine: L('return total modulo'), index: -1, counts: [...count], total: result, value: null, message: `Maximum sum of squares: ${result}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return total modulo'), index: -1, counts: [...count], total: result, value: null, message: `Maximum sum of squares: ${result}.` })
   return { input, nums, result, frames }
 }
 

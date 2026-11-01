@@ -50,7 +50,7 @@ export function buildTrace({ n, edges, values, k }) {
   const total = [...values]
   const cuts = []
   let count = 0
-  const frames = [{ phase: 'start', activeLine: L('root the tree at node 0'), current: null, total: [...total], cuts: [], count, message: `Root the tree at node 0. Every cut component must sum to a multiple of ${k}.` }]
+  const frames = [{ phase: 'start', pythonLine: 9, activeLine: L('root the tree at node 0'), current: null, total: [...total], cuts: [], count, message: `Root the tree at node 0. Every cut component must sum to a multiple of ${k}.` }]
   for (let i = order.length - 1; i >= 0; i--) {
     const v = order[i]
     const divisible = total[v] % k === 0
@@ -59,14 +59,14 @@ export function buildTrace({ n, edges, values, k }) {
       count++
       cuts.push(v)
       passed = 0
-      frames.push({ phase: 'cut', activeLine: L('add one to the count'), current: v, total: [...total], cuts: [...cuts], count, message: `Subtree of ${v} sums to ${total[v]}, divisible by ${k}. Cut above it; count is ${count}.` })
+      frames.push({ phase: 'cut', pythonLine: 21, activeLine: L('add one to the count'), current: v, total: [...total], cuts: [...cuts], count, message: `Subtree of ${v} sums to ${total[v]}, divisible by ${k}. Cut above it; count is ${count}.` })
     } else {
-      frames.push({ phase: 'climb', activeLine: L('add passed to the total'), current: v, total: [...total], cuts: [...cuts], count, message: `Subtree of ${v} sums to ${total[v]}, not divisible by ${k}. Pass it up.` })
+      frames.push({ phase: 'climb', pythonLine: 24, activeLine: L('add passed to the total'), current: v, total: [...total], cuts: [...cuts], count, message: `Subtree of ${v} sums to ${total[v]}, not divisible by ${k}. Pass it up.` })
     }
     if (parentOf[v] !== -1) total[parentOf[v]] += passed
   }
   const toTree = id => ({ id, children: children[id].map(child => toTree(child)) })
-  frames.push({ phase: 'done', activeLine: L('return the count'), current: null, total: [...total], cuts: [...cuts], count, message: `Maximum number of components: ${count}.` })
+  frames.push({ phase: 'done', pythonLine: 25, activeLine: L('return the count'), current: null, total: [...total], cuts: [...cuts], count, message: `Maximum number of components: ${count}.` })
   return { input: { n, edges, values, k }, tree: toTree(0), result: count, frames }
 }
 

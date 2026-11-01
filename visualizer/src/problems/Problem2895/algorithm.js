@@ -14,15 +14,15 @@ export function buildTrace(input) {
   const ts = [...input.tasks].sort((a, b) => b - a)
   const finish = []
   let best = 0
-  const frames = [{ phase: 'start', activeLine: L('sort the processors'), index: -1, finish: [], best, message: 'Sort processors by availability and tasks from largest to smallest.' }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('sort the processors'), index: -1, finish: [], best, message: 'Sort processors by availability and tasks from largest to smallest.' }]
   procs.forEach((start, i) => {
     const longest = ts[4 * i]
     const done = start + longest
     finish.push(done)
     best = Math.max(best, done)
-    frames.push({ phase: 'assign', activeLine: L('its finish time'), index: i, finish: [...finish], best, message: `Processor ${i} is free at ${start}; its four tasks end at ${done} (longest task ${longest}).` })
+    frames.push({ phase: 'assign', pythonLine: 6, activeLine: L('its finish time'), index: i, finish: [...finish], best, message: `Processor ${i} is free at ${start}; its four tasks end at ${done} (longest task ${longest}).` })
   })
-  frames.push({ phase: 'done', activeLine: L('return best'), index: -1, finish: [...finish], best, message: `Earliest possible finish time: ${best}.` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return best'), index: -1, finish: [...finish], best, message: `Earliest possible finish time: ${best}.` })
   return { input, result: best, frames }
 }
 

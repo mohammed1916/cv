@@ -13,9 +13,9 @@ export function buildTrace(input) {
   const n = s1.length
   const diff = [...s1].map((c, j) => (c !== s2[j] ? 1 : 0))
   const marked = diff.reduce((p, q) => p + q, 0)
-  const frames = [{ phase: 'mark', activeLine: L('mark each position'), index: -1, table: [], result: null, message: `Mark the positions where the strings differ: ${marked} in total.` }]
+  const frames = [{ phase: 'mark', pythonLine: 3, activeLine: L('mark each position'), index: -1, table: [], result: null, message: `Mark the positions where the strings differ: ${marked} in total.` }]
   if (marked % 2 === 1) {
-    frames.push({ phase: 'done', activeLine: L('return minus one'), index: -1, table: [], result: -1, message: 'An odd number of mismatches cannot be fixed by flips in pairs, so the answer is -1.' })
+    frames.push({ phase: 'done', activeLine: L('return minus one'), pythonLine: 5, index: -1, table: [], result: -1, message: 'An odd number of mismatches cannot be fixed by flips in pairs, so the answer is -1.' })
     return { input: { s1, s2, x }, result: -1, frames }
   }
   // table maps "carry out of this position" (0 or 1, meaning a flip is still open) to the cheapest value.
@@ -34,10 +34,10 @@ export function buildTrace(input) {
     }
     table = next
     history.push([next.get(0) ?? null, next.get(1) ?? null])
-    frames.push({ phase: 'position', activeLine: L('for each carry before'), index: j, table: history.map(row => [...row]), result: null, message: `Position ${j} (${diff[j] ? 'differs' : 'matches'}): cheapest values with the carry open or closed are shown.` })
+    frames.push({ phase: 'position', pythonLine: 17, activeLine: L('for each carry before'), index: j, table: history.map(row => [...row]), result: null, message: `Position ${j} (${diff[j] ? 'differs' : 'matches'}): cheapest values with the carry open or closed are shown.` })
   }
   const result = table.get(0) / 2
-  frames.push({ phase: 'done', activeLine: L('divided by two'), index: -1, table: history.map(row => [...row]), result, message: `Cheapest cost is ${result}.` })
+  frames.push({ phase: 'done', activeLine: L('divided by two'), pythonLine: 18, index: -1, table: history.map(row => [...row]), result, message: `Cheapest cost is ${result}.` })
   return { input: { s1, s2, x }, result, frames }
 }
 
