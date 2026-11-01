@@ -16,7 +16,7 @@ export function buildTrace(input) {
   const frames = []
   const best = new Map()
   const frame = (phase, line, extra, message) => frames.push({ phase, activeLine: line, window: null, value: null, recorded: false, query: null, answers: [], message, ...extra })
-  frame('start', L('set best to an empty table'), {}, 'Build a table from every substring value to its shortest, leftmost location.')
+  frame('start', L('set best to an empty table'), { pythonLine: 2 },'Build a table from every substring value to its shortest, leftmost location.')
   for (let i = 0; i < n; i++) {
     for (let j = i; j < Math.min(n, i + 30); j++) {
       if (s[i] === '0' && j > i) break
@@ -24,22 +24,22 @@ export function buildTrace(input) {
       const current = best.get(value)
       const recorded = !current || (j - i) < (current.r - current.l) || ((j - i) === (current.r - current.l) && i < current.l)
       if (recorded) best.set(value, { l: i, r: j })
-      frame('record', L('record i and j'), { window: [i, j], value, recorded },
+      frame('record', L('record i and j'), { window: [i, j], value, recorded, pythonLine: recorded ? 11 : 10 },
         `Substring ${s.slice(i, j + 1)} is ${value}. ${recorded ? 'It becomes the stored location for this value.' : 'A stored location already wins.'}`)
     }
   }
   const answers = []
   queries.forEach(([first, second], index) => {
     const target = first ^ second
-    frame('target', L('set target to'), { query: index, value: target, answers: [...answers] },
+    frame('target', L('set target to'), { query: index, value: target, answers: [...answers], pythonLine: 14 },
       `Query ${index + 1}: ${first} xor ${second} is ${target}.`)
     const stored = best.get(target)
     const pair = stored ? [stored.l, stored.r] : [-1, -1]
     answers.push(pair)
-    frame('answer', L('if target is in best'), { query: index, value: target, window: stored ? pair : null, answers: [...answers] },
+    frame('answer', L('if target is in best'), { query: index, value: target, window: stored ? pair : null, answers: [...answers], pythonLine: stored ? 17 : 19 },
       stored ? `Substring from ${pair[0]} to ${pair[1]} gives ${target}.` : `No substring gives ${target}, so the answer is [-1, -1].`)
   })
-  frame('done', L('return answers'), { answers: [...answers] }, 'All queries are answered.')
+  frame('done', L('return answers'), { answers: [...answers], pythonLine: 20 }, 'All queries are answered.')
   return { input, result: answers, frames }
 }
 

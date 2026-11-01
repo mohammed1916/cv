@@ -8,22 +8,22 @@ export function parseInput(text) {
 export function buildTrace({ n }) {
   let value = n
   let ops = 0
-  const frames = [{ phase: 'start', activeLine: L('set the operation count to zero'), value, ops, message: `Reduce ${n} (binary ${n.toString(2)}) to zero.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set the operation count to zero'), value, ops, message: `Reduce ${n} (binary ${n.toString(2)}) to zero.` }]
   while (value !== 0) {
     if (value % 2 === 0) {
       value /= 2
-      frames.push({ phase: 'shift', activeLine: L('halve the number'), value, ops, message: `${value * 2} is even, so halve it to ${value}.` })
+      frames.push({ phase: 'shift', pythonLine: 5, activeLine: L('halve the number'), value, ops, message: `${value * 2} is even, so halve it to ${value}.` })
     } else if (value % 4 === 3) {
       value += 1
       ops++
-      frames.push({ phase: 'add', activeLine: L('add one to the number'), value, ops, message: `Low bits are 11, so add one to get ${value} (operation ${ops}).` })
+      frames.push({ phase: 'add', pythonLine: 7, activeLine: L('add one to the number'), value, ops, message: `Low bits are 11, so add one to get ${value} (operation ${ops}).` })
     } else {
       value -= 1
       ops++
-      frames.push({ phase: 'subtract', activeLine: L('subtract one from the number'), value, ops, message: `Low bits are 01, so subtract one to get ${value} (operation ${ops}).` })
+      frames.push({ phase: 'subtract', pythonLine: 10, activeLine: L('subtract one from the number'), value, ops, message: `Low bits are 01, so subtract one to get ${value} (operation ${ops}).` })
     }
   }
-  frames.push({ phase: 'done', activeLine: L('return the operation count'), value, ops, message: `Minimum operations: ${ops}.` })
+  frames.push({ phase: 'done', pythonLine: 12, activeLine: L('return the operation count'), value, ops, message: `Minimum operations: ${ops}.` })
   return { input: { n }, result: ops, frames }
 }
 

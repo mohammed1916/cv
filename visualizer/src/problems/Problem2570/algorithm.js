@@ -20,27 +20,27 @@ export function buildTrace(input) {
   let i = 0
   let j = 0
   const merged = []
-  const frames = [{ phase: 'start', activeLine: L('set i and j to 0'), i, j, merged: [], message: 'Both lists are sorted by id, so walk them together.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set i and j to 0'), i, j, merged: [], message: 'Both lists are sorted by id, so walk them together.' }]
   while (i < nums1.length && j < nums2.length) {
     if (nums1[i][0] < nums2[j][0]) {
       merged.push([nums1[i][0], nums1[i][1]])
-      frames.push({ phase: 'take1', activeLine: L('append nums1[i]'), i, j, merged: merged.map(p => [...p]), message: `Id ${nums1[i][0]} appears only in nums1; keep ${nums1[i][1]}.` })
+      frames.push({ phase: 'take1', pythonLine: 7, activeLine: L('append nums1[i]'), i, j, merged: merged.map(p => [...p]), message: `Id ${nums1[i][0]} appears only in nums1; keep ${nums1[i][1]}.` })
       i++
     } else if (nums2[j][0] < nums1[i][0]) {
       merged.push([nums2[j][0], nums2[j][1]])
-      frames.push({ phase: 'take2', activeLine: L('append nums2[j]'), i, j, merged: merged.map(p => [...p]), message: `Id ${nums2[j][0]} appears only in nums2; keep ${nums2[j][1]}.` })
+      frames.push({ phase: 'take2', pythonLine: 10, activeLine: L('append nums2[j]'), i, j, merged: merged.map(p => [...p]), message: `Id ${nums2[j][0]} appears only in nums2; keep ${nums2[j][1]}.` })
       j++
     } else {
       const sum = nums1[i][1] + nums2[j][1]
       merged.push([nums1[i][0], sum])
-      frames.push({ phase: 'sum', activeLine: L('append the shared id'), i, j, merged: merged.map(p => [...p]), message: `Id ${nums1[i][0]} is in both lists: ${nums1[i][1]} + ${nums2[j][1]} = ${sum}.` })
+      frames.push({ phase: 'sum', pythonLine: 13, activeLine: L('append the shared id'), i, j, merged: merged.map(p => [...p]), message: `Id ${nums1[i][0]} is in both lists: ${nums1[i][1]} + ${nums2[j][1]} = ${sum}.` })
       i++
       j++
     }
   }
   while (i < nums1.length) { merged.push([nums1[i][0], nums1[i][1]]); i++ }
   while (j < nums2.length) { merged.push([nums2[j][0], nums2[j][1]]); j++ }
-  frames.push({ phase: 'done', activeLine: L('return merged'), i, j, merged: merged.map(p => [...p]), message: 'Both lists are used up; the merged list is sorted by id.' })
+  frames.push({ phase: 'done', pythonLine: 22, activeLine: L('return merged'), i, j, merged: merged.map(p => [...p]), message: 'Both lists are used up; the merged list is sorted by id.' })
   return { input, result: merged, frames }
 }
 

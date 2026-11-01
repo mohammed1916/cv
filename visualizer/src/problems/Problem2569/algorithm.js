@@ -53,7 +53,7 @@ export function buildTrace({ nums1, nums2, queries }) {
   build(1, 0, n - 1)
   let sum = nums2.reduce((a, b) => a + b, 0)
   const answers = []
-  const frames = [{ phase: 'start', activeLine: L('build a segment tree'), bits: [...bits], ones: cnt[1], sum, answers: [], message: `Build the tree. nums1 has ${cnt[1]} ones and nums2 sums to ${sum}.` }]
+  const frames = [{ phase: 'start', pythonLine: 38, activeLine: L('build a segment tree'), bits: [...bits], ones: cnt[1], sum, answers: [], message: `Build the tree. nums1 has ${cnt[1]} ones and nums2 sums to ${sum}.` }]
   for (const [type, a, b] of queries) {
     let phase, message
     if (type === 1) {
@@ -70,9 +70,9 @@ export function buildTrace({ nums1, nums2, queries }) {
       phase = 'query'
       message = `Answer the sum query with ${sum}.`
     }
-    frames.push({ phase, activeLine: L(type === 1 ? 'flip nums1' : type === 2 ? 'add p times' : 'append sum'), bits: [...bits], ones: cnt[1], sum, answers: [...answers], message })
+    frames.push({ phase, pythonLine: type === 1 ? 43 : type === 2 ? 45 : 47, activeLine: L(type === 1 ? 'flip nums1' : type === 2 ? 'add p times' : 'append sum'), bits: [...bits], ones: cnt[1], sum, answers: [...answers], message })
   }
-  frames.push({ phase: 'done', activeLine: L('return answers'), bits: [...bits], ones: cnt[1], sum, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 48, activeLine: L('return answers'), bits: [...bits], ones: cnt[1], sum, answers: [...answers], message: `Answers: [${answers.join(', ')}].` })
   return { input: { nums1, nums2, queries }, result: answers, frames }
 }
 

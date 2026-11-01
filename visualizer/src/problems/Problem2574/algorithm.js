@@ -10,14 +10,14 @@ export function buildTrace(input) {
   const total = nums.reduce((sum, value) => sum + value, 0)
   const answer = []
   let left = 0
-  const frames = [{ phase: 'start', activeLine: L('set total to the sum'), index: -1, left: 0, right: total, answer: [], message: `Total sum is ${total}. Nothing lies to the left of index 0.` }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('set total to the sum'), index: -1, left: 0, right: total, answer: [], message: `Total sum is ${total}. Nothing lies to the left of index 0.` }]
   nums.forEach((value, i) => {
     const right = total - left - value
     answer.push(Math.abs(left - right))
-    frames.push({ phase: 'scan', activeLine: L('add the difference'), index: i, left, right, answer: [...answer], message: `Index ${i}: left ${left}, right ${right}, difference ${Math.abs(left - right)}.` })
+    frames.push({ phase: 'scan', pythonLine: 7, activeLine: L('add the difference'), index: i, left, right, answer: [...answer], message: `Index ${i}: left ${left}, right ${right}, difference ${Math.abs(left - right)}.` })
     left += value
   })
-  frames.push({ phase: 'done', activeLine: L('return answer'), index: nums.length, left, right: 0, answer: [...answer], message: `Answer: ${answer.join(', ')}.` })
+  frames.push({ phase: 'done', pythonLine: 9, activeLine: L('return answer'), index: nums.length, left, right: 0, answer: [...answer], message: `Answer: ${answer.join(', ')}.` })
   return { input, result: answer, frames }
 }
 

@@ -12,10 +12,10 @@ export function buildTrace(input) {
   const diff = new Map()
   for (const v of basket1) diff.set(v, (diff.get(v) || 0) + 1)
   for (const v of basket2) diff.set(v, (diff.get(v) || 0) - 1)
-  const frames = [{ phase: 'start', activeLine: L('count each fruit cost'), extra: [], cost: 0, message: 'Compare how often each cost appears in the two baskets.' }]
+  const frames = [{ phase: 'start', pythonLine: 2, activeLine: L('count each fruit cost'), extra: [], cost: 0, message: 'Compare how often each cost appears in the two baskets.' }]
   for (const [v, d] of diff) {
     if (d % 2 !== 0) {
-      frames.push({ phase: 'done', activeLine: L('return minus one'), extra: [], cost: -1, message: `Cost ${v} appears an odd number of times more in one basket, so the baskets cannot match.` })
+      frames.push({ phase: 'done', pythonLine: 8, activeLine: L('return minus one'), extra: [], cost: -1, message: `Cost ${v} appears an odd number of times more in one basket, so the baskets cannot match.` })
       return { input, result: -1, frames }
     }
   }
@@ -30,9 +30,9 @@ export function buildTrace(input) {
   for (let i = 0; i < sorted.length / 2; i++) {
     const step = Math.min(sorted[i], 2 * minValue)
     cost += step
-    frames.push({ phase: 'swap', activeLine: L('add the cheaper route'), extra: [...sorted], index: i, cost, message: `Swap ${sorted[i]} directly or via ${minValue} twice, whichever is cheaper: ${step}. Total ${cost}.` })
+    frames.push({ phase: 'swap', pythonLine: 19, activeLine: L('add the cheaper route'), extra: [...sorted], index: i, cost, message: `Swap ${sorted[i]} directly or via ${minValue} twice, whichever is cheaper: ${step}. Total ${cost}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return cost'), extra: [...sorted], cost, message: `Minimum cost: ${cost}.` })
+  frames.push({ phase: 'done', pythonLine: 20, activeLine: L('return cost'), extra: [...sorted], cost, message: `Minimum cost: ${cost}.` })
   return { input, result: cost, frames }
 }
 

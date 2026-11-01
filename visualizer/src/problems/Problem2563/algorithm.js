@@ -16,7 +16,7 @@ function countAtMost(sorted, limit, frames, pass) {
   while (i < j) {
     const sum = sorted[i] + sorted[j]
     const fits = sum <= limit
-    frames.push({ phase: 'step', activeLine: L('if the sum at i and j'), pass, i, j, sum, limit, count, sorted, message: `${pass} pass: ${sorted[i]} + ${sorted[j]} = ${sum} ${fits ? 'is' : 'is not'} at most ${limit}.` })
+    frames.push({ phase: 'step', pythonLine: 8, activeLine: L('if the sum at i and j'), pass, i, j, sum, limit, count, sorted, message: `${pass} pass: ${sorted[i]} + ${sorted[j]} = ${sum} ${fits ? 'is' : 'is not'} at most ${limit}.` })
     if (fits) {
       count += j - i
       i++
@@ -30,11 +30,11 @@ function countAtMost(sorted, limit, frames, pass) {
 export function buildTrace(input) {
   const { nums, lower, upper } = input
   const sorted = [...nums].sort((a, b) => a - b)
-  const frames = [{ phase: 'sort', activeLine: L('sort a copy'), pass: 'start', i: 0, j: sorted.length - 1, sum: null, limit: null, count: 0, sorted, message: 'Sort a copy of the numbers so pairs can be counted with two pointers.' }]
+  const frames = [{ phase: 'sort', pythonLine: 2, activeLine: L('sort a copy'), pass: 'start', i: 0, j: sorted.length - 1, sum: null, limit: null, count: 0, sorted, message: 'Sort a copy of the numbers so pairs can be counted with two pointers.' }]
   const atMostUpper = countAtMost(sorted, upper, frames, 'upper')
   const atMostLower = countAtMost(sorted, lower - 1, frames, 'lower')
   const pairs = atMostUpper - atMostLower
-  frames.push({ phase: 'done', activeLine: L('return pairs'), pass: 'done', i: -1, j: -1, sum: null, limit: null, count: pairs, sorted, message: `Fair pairs: ${pairs}.` })
+  frames.push({ phase: 'done', pythonLine: 15, activeLine: L('return pairs'), pass: 'done', i: -1, j: -1, sum: null, limit: null, count: pairs, sorted, message: `Fair pairs: ${pairs}.` })
   return { input, result: pairs, frames }
 }
 

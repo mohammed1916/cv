@@ -9,13 +9,13 @@ export function parseInput(text) {
 export function buildTrace({ word, m }) {
   const answer = []
   let remainder = 0
-  const frames = [{ phase: 'start', activeLine: L('set remainder to zero'), index: -1, remainder, answer: [], message: `Track the remainder of each prefix of ${word} modulo ${m}.` }]
+  const frames = [{ phase: 'start', pythonLine: 3, activeLine: L('set remainder to zero'), index: -1, remainder, answer: [], message: `Track the remainder of each prefix of ${word} modulo ${m}.` }]
   for (let i = 0; i < word.length; i++) {
     remainder = (remainder * 10 + Number(word[i])) % m
     answer.push(remainder === 0 ? 1 : 0)
-    frames.push({ phase: 'digit', activeLine: L('set remainder to (remainder'), index: i, remainder, answer: [...answer], message: `Prefix ${word.slice(0, i + 1)} leaves remainder ${remainder}, so the entry is ${answer[i]}.` })
+    frames.push({ phase: 'digit', pythonLine: 5, activeLine: L('set remainder to (remainder'), index: i, remainder, answer: [...answer], message: `Prefix ${word.slice(0, i + 1)} leaves remainder ${remainder}, so the entry is ${answer[i]}.` })
   }
-  frames.push({ phase: 'done', activeLine: L('return the answer list'), index: word.length - 1, remainder, answer: [...answer], message: `Divisibility array: [${answer.join(', ')}].` })
+  frames.push({ phase: 'done', pythonLine: 7, activeLine: L('return the answer list'), index: word.length - 1, remainder, answer: [...answer], message: `Divisibility array: [${answer.join(', ')}].` })
   return { input: { word, m }, result: answer, frames }
 }
 

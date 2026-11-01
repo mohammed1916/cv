@@ -25,7 +25,7 @@ export function buildTrace({ nums }) {
   const ways = Array(1 << PRIMES.length).fill(0)
   ways[0] = 1
   const total = () => ways.reduce((a, b) => (a + b) % MOD, 0)
-  const frames = [{ phase: 'start', index: -1, mask: 0, skipped: false, total: total(), activeLine: L('set ways[0] to 1'), message: 'Only the empty subset exists so far.' }]
+  const frames = [{ phase: 'start', pythonLine: 5, index: -1, mask: 0, skipped: false, total: total(), activeLine: L('set ways[0] to 1'), message: 'Only the empty subset exists so far.' }]
   nums.forEach((x, index) => {
     let mask = 0
     let squareFree = true
@@ -34,7 +34,7 @@ export function buildTrace({ nums }) {
       else if (x % p === 0) mask |= 1 << b
     })
     if (!squareFree) {
-      frames.push({ phase: 'skip', index, mask, skipped: true, total: total(), activeLine: L('if x has a repeated'), message: `${x} has a squared prime factor, so no subset containing it is square-free.` })
+      frames.push({ phase: 'skip', pythonLine: 15, index, mask, skipped: true, total: total(), activeLine: L('if x has a repeated'), message: `${x} has a squared prime factor, so no subset containing it is square-free.` })
       return
     }
     const snapshot = [...ways]
@@ -44,10 +44,10 @@ export function buildTrace({ nums }) {
       ways[used | mask] = (ways[used | mask] + snapshot[used]) % MOD
       added++
     }
-    frames.push({ phase: 'number', index, mask, skipped: false, total: total(), activeLine: L('add ways[mask] to'), message: `${x} adds to ${added} earlier prime pattern(s); square-free subsets so far, including empty: ${total()}.` })
+    frames.push({ phase: 'number', pythonLine: 19, index, mask, skipped: false, total: total(), activeLine: L('add ways[mask] to'), message: `${x} adds to ${added} earlier prime pattern(s); square-free subsets so far, including empty: ${total()}.` })
   })
   const result = (total() - 1 + MOD) % MOD
-  frames.push({ phase: 'done', index: nums.length - 1, mask: 0, skipped: false, total: total(), activeLine: L('return the sum of ways'), result, message: `${result} non-empty square-free subsets.` })
+  frames.push({ phase: 'done', pythonLine: 20, index: nums.length - 1, mask: 0, skipped: false, total: total(), activeLine: L('return the sum of ways'), result, message: `${result} non-empty square-free subsets.` })
   return { input: { nums }, result, frames }
 }
 

@@ -10,14 +10,14 @@ export function parseInput(text) {
 export function buildTrace({ nums }) {
   const present = new Set(nums)
   const frames = []
-  frames.push({ phase: 'start', activeLine: L('put every number'), candidate: 1, present: [...present], message: 'Store the numbers in a set for quick lookup.' })
+  frames.push({ phase: 'start', pythonLine: 2, activeLine: L('put every number'), candidate: 1, present: [...present], message: 'Store the numbers in a set for quick lookup.' })
   let candidate = 1
   while (present.has(candidate)) {
-    frames.push({ phase: 'check', activeLine: L('while candidate is in the set'), candidate, present: [...present], message: `${candidate} is in nums, so try the next power of two.` })
+    frames.push({ phase: 'check', pythonLine: 4, activeLine: L('while candidate is in the set'), candidate, present: [...present], message: `${candidate} is in nums, so try the next power of two.` })
     candidate *= 2
   }
-  frames.push({ phase: 'found', activeLine: L('while candidate is in the set'), candidate, present: [...present], message: `${candidate} is not in nums, so no subsequence can produce it.` })
-  frames.push({ phase: 'done', activeLine: L('return candidate'), candidate, present: [...present], message: `Minimum impossible OR: ${candidate}.` })
+  frames.push({ phase: 'found', pythonLine: 4, activeLine: L('while candidate is in the set'), candidate, present: [...present], message: `${candidate} is not in nums, so no subsequence can produce it.` })
+  frames.push({ phase: 'done', pythonLine: 6, activeLine: L('return candidate'), candidate, present: [...present], message: `Minimum impossible OR: ${candidate}.` })
   return { input: { nums }, result: candidate, frames }
 }
 
