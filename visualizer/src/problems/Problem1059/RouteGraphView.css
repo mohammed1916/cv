@@ -1,0 +1,23 @@
+.rgv { margin: 0; padding: 12px; font-size: 14px; color: #1f2937; background: #fff; }
+.rgv__svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 0 auto; }
+.rgv__edge { stroke: #94a3b8; stroke-width: 2; fill: none; }
+.rgv__edge--active { stroke: #b45309; stroke-width: 3.5; }
+.rgv__arrowhead { fill: #94a3b8; }
+.rgv__node circle { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+.rgv__node text { font-size: 13px; font-weight: 700; fill: #1f2937; }
+.rgv__tag { font-size: 10px !important; font-weight: 600 !important; fill: #6b7280 !important; }
+.rgv__node--path circle { fill: #bfdbfe; stroke: #1d4ed8; }
+.rgv__node--good circle { fill: #bbf7d0; stroke: #15803d; }
+.rgv__node--dest circle { stroke-width: 3; stroke: #7c3aed; }
+.rgv__node--now circle { stroke: #b45309; stroke-width: 4; }
+.rgv__node--bad circle { fill: #fecaca; stroke: #b91c1c; }
+.rgv__panel { margin-top: 10px; font-size: 13px; }
+.rgv__panel p { margin: 4px 0; }
+@media (prefers-color-scheme: dark) {
+  .rgv { color: #e5e7eb; background: #111827; }
+  .rgv__node circle { fill: #1e293b; stroke: #94a3b8; }
+  .rgv__node text { fill: #e5e7eb; }
+  .rgv__node--path circle { fill: #1e3a8a; }
+  .rgv__node--good circle { fill: #14532d; }
+  .rgv__node--bad circle { fill: #7f1d1d; }
+}

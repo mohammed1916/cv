@@ -1,0 +1,17 @@
+.eft { margin: 0; padding: 12px; font-size: 14px; color: var(--eft-ink, #1f2937); background: var(--eft-bg, #fff); }
+.eft__axis { position: relative; height: 18px; margin-left: 112px; color: #6b7280; font-size: 11px; }
+.eft__axis span { position: absolute; transform: translateX(-50%); }
+.eft__body { position: relative; }
+.eft__row { display: flex; align-items: center; margin-bottom: 10px; }
+.eft__label { width: 100px; flex: none; font-weight: 600; }
+.eft__track { position: relative; flex: 1; height: 30px; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), #e5e7eb calc(10% - 1px) 10%); border-radius: 6px; }
+.eft__busy { position: absolute; top: 3px; bottom: 3px; background: #2563eb; color: #fff; border-radius: 4px; font-size: 11px; line-height: 24px; text-align: center; overflow: hidden; white-space: nowrap; }
+.eft__busy--done { background: #64748b; }
+.eft__busy--current { background: #f59e0b; color: #111827; outline: 2px solid #b45309; }
+.eft__overlay { position: absolute; top: 0; bottom: 0; left: 112px; right: 0; pointer-events: none; }
+.eft__free { position: absolute; top: 0; bottom: 0; background: rgba(16, 185, 129, 0.28); border: 1px dashed #059669; color: #065f46; font-size: 10px; text-align: center; }
+.eft__reach { position: absolute; top: -4px; bottom: -4px; width: 2px; background: #dc2626; }
+.eft__status { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-weight: 600; }
+@media (prefers-color-scheme: dark) {
+  .eft { --eft-ink: #e5e7eb; --eft-bg: #111827; }
+}
