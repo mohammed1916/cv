@@ -1,0 +1,125 @@
+.jg-view {
+  --jg-ink: #0f172a;
+  --jg-muted: #475569;
+  --jg-line: #cbd5e1;
+  --jg-cell: #f8fafc;
+  --jg-self: #e2e8f0;
+  --jg-match: #facc15;
+  --jg-match-ink: #713f12;
+  --jg-current: #1d4ed8;
+  --jg-new: #15803d;
+  color: var(--jg-ink);
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .jg-view {
+    --jg-ink: #e2e8f0;
+    --jg-muted: #94a3b8;
+    --jg-line: #334155;
+    --jg-cell: #1e293b;
+    --jg-self: #0f172a;
+    --jg-match: #ca8a04;
+    --jg-match-ink: #fef9c3;
+    --jg-current: #60a5fa;
+    --jg-new: #4ade80;
+  }
+}
+
+.jg-grid {
+  display: grid;
+  gap: 3px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.jg-corner,
+.jg-head {
+  display: grid;
+  align-content: center;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  color: var(--jg-muted);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.jg-head b {
+  color: var(--jg-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.jg-head small {
+  font-size: 0.72rem;
+}
+
+.jg-head--active {
+  color: var(--jg-current);
+  font-weight: 700;
+}
+
+.jg-cell {
+  min-height: 34px;
+  border: 1px solid var(--jg-line);
+  border-radius: 5px;
+  background: var(--jg-cell);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--jg-match-ink);
+}
+
+.jg-cell--self {
+  background: var(--jg-self);
+  border-style: dashed;
+}
+
+.jg-cell--match {
+  background: var(--jg-match);
+  border-color: var(--jg-match);
+}
+
+.jg-cell--current {
+  outline: 3px solid var(--jg-current);
+  outline-offset: 1px;
+}
+
+.jg-result {
+  display: grid;
+  gap: 4px;
+}
+
+.jg-title {
+  font-size: 0.85rem;
+  color: var(--jg-muted);
+  font-weight: 600;
+}
+
+.jg-empty {
+  color: var(--jg-muted);
+  font-size: 0.9rem;
+}
+
+.jg-result ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 2px;
+}
+
+.jg-result li {
+  font-variant-numeric: tabular-nums;
+}
+
+.jg-new {
+  color: var(--jg-new);
+  font-weight: 700;
+}
+
+.jg-readout {
+  margin: 0;
+  font-weight: 600;
+}

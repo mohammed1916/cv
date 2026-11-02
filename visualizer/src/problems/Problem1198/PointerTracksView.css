@@ -1,0 +1,134 @@
+.pt-view {
+  --pt-ink: #0f172a;
+  --pt-muted: #475569;
+  --pt-line: #cbd5e1;
+  --pt-cell: #f8fafc;
+  --pt-out: #94a3b8;
+  --pt-pointer: #1d4ed8;
+  --pt-high: #b45309;
+  --pt-common: #15803d;
+  --pt-advance: #fef3c7;
+  color: var(--pt-ink);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .pt-view {
+    --pt-ink: #e2e8f0;
+    --pt-muted: #94a3b8;
+    --pt-line: #334155;
+    --pt-cell: #1e293b;
+    --pt-out: #64748b;
+    --pt-pointer: #60a5fa;
+    --pt-high: #fbbf24;
+    --pt-common: #4ade80;
+    --pt-advance: #78350f;
+  }
+}
+
+.pt-tracks {
+  display: grid;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.pt-track {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 6px;
+  align-items: center;
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+
+.pt-track--advancing {
+  background: var(--pt-advance);
+}
+
+.pt-track__name {
+  font-size: 0.85rem;
+  color: var(--pt-muted);
+  font-weight: 600;
+}
+
+.pt-track__cells {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pt-track__state {
+  display: none;
+}
+
+.pt-cell {
+  position: relative;
+  min-width: 38px;
+  padding: 6px 4px 12px;
+  text-align: center;
+  border: 1px solid var(--pt-line);
+  border-radius: 6px;
+  background: var(--pt-cell);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pt-cell--out {
+  color: var(--pt-out);
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.pt-cell--pointer {
+  border: 2px solid var(--pt-pointer);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pt-pointer) 22%, transparent);
+}
+
+.pt-cell--high {
+  border-style: dashed;
+  border-color: var(--pt-high);
+  color: var(--pt-high);
+}
+
+.pt-cell--common {
+  background: color-mix(in srgb, var(--pt-common) 25%, var(--pt-cell));
+  border-color: var(--pt-common);
+  color: var(--pt-common);
+}
+
+.pt-cell--end {
+  min-width: 0;
+  padding: 6px 8px;
+  border-style: dashed;
+  color: var(--pt-muted);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.pt-cell__tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--pt-pointer);
+}
+
+.pt-cell--high .pt-cell__tag {
+  color: var(--pt-high);
+}
+
+.pt-readout {
+  margin: 0;
+  font-weight: 600;
+}
+
+.pt-view output {
+  font-weight: 700;
+}
