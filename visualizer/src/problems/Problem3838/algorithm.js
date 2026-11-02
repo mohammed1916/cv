@@ -9,25 +9,33 @@ export function parseInput(text) {
   return { words, weights }
 }
 
+// Every frame carries the state the visual needs: the active letter weight, the running total,
+// the modulo residue, the reverse-alphabet letter and a snapshot of the output built so far.
 export function buildTrace({ words, weights }) {
   const frames = []
   const out = []
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start with an empty result'), word: -1, letter: -1, total: 0, message: 'Start with an empty result string.' })
+  let total = 0
+  let value = 0
+  let mapped = ''
+  const snapshot = () => out.join('')
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start with an empty result'), word: -1, letter: -1, total: 0, weight: 0, value: undefined, mapped: '', output: '', message: 'Start with an empty result string.' })
   for (let w = 0; w < words.length; w++) {
     const word = words[w]
-    let total = 0
-    frames.push({ pythonLine: 3, phase: 'word', activeLine: L('for each word'), word: w, letter: -1, total, message: `Word ${w + 1} is "${word}".` })
+    total = 0
+    frames.push({ pythonLine: 3, phase: 'word', activeLine: L('for each word'), word: w, letter: -1, total, weight: 0, value: undefined, mapped: '', output: snapshot(), message: `Word ${w + 1} is "${word}". Reset total to 0.` })
     for (let c = 0; c < word.length; c++) {
-      total += weights[word.charCodeAt(c) - 97]
-      frames.push({ pythonLine: 6, phase: 'sum', activeLine: L('add the weight'), word: w, letter: c, total, message: `Add the weight of ${word[c]} to reach ${total}.` })
+      const weight = weights[word.charCodeAt(c) - 97]
+      total += weight
+      frames.push({ pythonLine: 6, phase: 'sum', activeLine: L('add the weight'), word: w, letter: c, total, weight, value: undefined, mapped: '', output: snapshot(), message: `Add the weight ${weight} of ${word[c]} to reach ${total}.` })
     }
-    const value = total % 26
-    const mapped = String.fromCharCode(122 - value)
+    value = total % 26
+    frames.push({ pythonLine: 7, phase: 'mod', activeLine: L('take the total modulo 26'), word: w, letter: -1, total, weight: 0, value, mapped: '', output: snapshot(), message: `${total} mod 26 = ${value}.` })
+    mapped = String.fromCharCode(122 - value)
     out.push(mapped)
-    frames.push({ pythonLine: 7, phase: 'map', activeLine: L('take the total modulo 26'), word: w, letter: -1, total, value, message: `${total} mod 26 = ${value}, which maps to ${mapped}.` })
+    frames.push({ pythonLine: 8, phase: 'emit', activeLine: L('append the letter at position 122 minus value'), word: w, letter: -1, total, weight: 0, value, mapped, output: snapshot(), message: `Reverse alphabet: 122 - ${value} = ${122 - value}, which is ${mapped}. Append it.` })
   }
   const result = out.join('')
-  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the result'), word: -1, letter: -1, total: 0, message: `The mapped string is "${result}".` })
+  frames.push({ pythonLine: 9, phase: 'done', activeLine: L('return the result'), word: -1, letter: -1, total, weight: 0, value, mapped, output: result, message: `The mapped string is "${result}".` })
   return { input: { words, weights }, result, frames }
 }
 
@@ -40,7 +48,13 @@ export const code = `weighted word mapping
     take the total modulo 26 as value
     append the letter at position 122 minus value to the result
   return the result`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+// Throws when a pseudocode phrase is missing, so a wrong mapping fails in tests instead of silently using line 0.
+function L(phrase) {
+  const index = code.findIndex(c => c.text.includes(phrase))
+  if (index < 0) throw new Error(`Missing pseudocode line: "${phrase}"`)
+  return index + 1
+}
 
 export const python = `def weighted_word_mapping(words, weights):
     result = []
