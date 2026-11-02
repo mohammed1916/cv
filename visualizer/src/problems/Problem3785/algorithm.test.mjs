@@ -67,3 +67,68 @@ test('3785 rejects malformed input', () => {
   assert.throws(() => parseInput('[1]'))
   assert.deepEqual(parseInput('{"nums":[1,2],"forbidden":[2,1]}'), { nums: [1, 2], forbidden: [2, 1] })
 })
+
+const finalFrame = (nums, forbidden) => buildTrace({ nums, forbidden }).frames.at(-1)
+
+test('3785 no conflicts reports zero bounds and chosen none', () => {
+  const done = finalFrame([1, 2], [2, 1])
+  const trace = buildTrace({ nums: [1, 2], forbidden: [2, 1] })
+  assert.equal(trace.result, 0)
+  assert.equal(done.phase, 'done')
+  assert.deepEqual(done.bad, [])
+  assert.equal(done.total, 0)
+  assert.equal(done.chosen, 'none')
+  assert.equal(done.violator, null)
+})
+
+test('3785 impossible capacity names the violating value', () => {
+  const trace = buildTrace({ nums: [7, 7], forbidden: [8, 7] })
+  const done = trace.frames.at(-1)
+  assert.equal(trace.result, -1)
+  assert.equal(done.violator, 7)
+  assert.equal(done.capacity, 2)
+  const counted = done.counts.find(c => c.value === 7)
+  assert.equal(counted.count, 3)
+  assert.equal(done.result, -1)
+})
+
+test('3785 balanced conflicts pick the half bound', () => {
+  const done = finalFrame([1, 2, 3, 4], [1, 2, 3, 4])
+  assert.equal(done.result, 2)
+  assert.equal(done.total, 4)
+  assert.equal(done.most, 1)
+  assert.equal(done.half, 2)
+  assert.equal(done.chosen, 'half')
+  assert.deepEqual(done.bad, [0, 1, 2, 3])
+  assert.deepEqual(done.groups.map(g => g.count), [1, 1, 1, 1])
+})
+
+test('3785 dominant group picks the group bound', () => {
+  const done = finalFrame([1, 1, 2, 3], [1, 1, 4, 5])
+  assert.equal(done.result, 2)
+  assert.equal(done.total, 2)
+  assert.equal(done.most, 2)
+  assert.equal(done.half, 1)
+  assert.equal(done.chosen, 'group')
+  assert.deepEqual(done.bad, [0, 1])
+  assert.deepEqual(done.groups, [{ value: 1, count: 2 }])
+})
+
+test('3785 frames snapshot partial state for the visual', () => {
+  const trace = buildTrace({ nums: [1, 2, 3], forbidden: [3, 2, 1] })
+  const conflictFrames = trace.frames.filter(f => f.phase === 'conflict')
+  assert.deepEqual(conflictFrames.map(f => f.bad), [[], [1], [1]])
+  const tally = trace.frames.find(f => f.phase === 'tally')
+  assert.equal(tally.half, 1)
+  assert.equal(tally.most, 1)
+  assert.equal(trace.frames.at(-1).chosen, 'half')
+})
+
+test('3785 every frame line lookup resolves', () => {
+  for (const [nums, forbidden] of [[[1, 1, 2, 3], [1, 1, 4, 5]], [[7, 7], [8, 7]], [[1, 2], [2, 1]]]) {
+    for (const frame of buildTrace({ nums, forbidden }).frames) {
+      assert.ok(frame.activeLine >= 1 && frame.activeLine <= 9)
+      assert.equal(typeof frame.message, 'string')
+    }
+  }
+})

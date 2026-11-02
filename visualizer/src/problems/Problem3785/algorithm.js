@@ -14,36 +14,53 @@ export function buildTrace({ nums, forbidden }) {
   const n = nums.length
   const frames = []
   const count = new Map()
+  const conflict = new Map()
+  const bad = []
+  let total = 0
+  // Snapshots keep each frame self-contained, so restart, back and seek show the same state.
+  const snapCounts = () => [...count].map(([value, c]) => ({ value, count: c }))
+  const snapGroups = () => [...conflict].map(([value, c]) => ({ value, count: c }))
+  const frame = over => ({
+    capacity: n, counts: snapCounts(), groups: snapGroups(), bad: bad.slice(),
+    at: -1, conflict: false, checking: null, violator: null,
+    total: null, most: null, half: null, chosen: null, result: undefined,
+    ...over,
+  })
+
   for (let i = 0; i < n; i++) {
     count.set(nums[i], (count.get(nums[i]) || 0) + 1)
     count.set(forbidden[i], (count.get(forbidden[i]) || 0) + 1)
-    frames.push({ pythonLine: pyLine('count[nums[i]] = count.get'), phase: 'count', activeLine: L('count each value seen'), at: i, conflict: false, total: null, most: null, message: `Count ${nums[i]} from nums and ${forbidden[i]} from forbidden at index ${i}.` })
+    frames.push(frame({ pythonLine: pyLine('count[nums[i]] = count.get'), phase: 'count', activeLine: L('count each value seen'), at: i, message: `Count ${nums[i]} from nums and ${forbidden[i]} from forbidden at index ${i}.` }))
   }
   for (const [value, c] of count) {
-    frames.push({ pythonLine: pyLine('if count[value] > n'), phase: 'limit', activeLine: L('if a value appears more than n'), at: -1, conflict: false, total: null, most: null, message: `${value} appears ${c} times in both arrays together; n is ${n}.` })
+    frames.push(frame({ pythonLine: pyLine('if count[value] > n'), phase: 'limit', activeLine: L('if a value appears more than n'), checking: value, message: `${value} appears ${c} times across both arrays; capacity is n = ${n}.` }))
     if (c > n) {
-      frames.push({ pythonLine: pyLine('return -1'), phase: 'done', activeLine: L('return -1'), at: -1, conflict: false, total: null, most: null, result: -1, message: `${value} cannot avoid every forbidden position. Result -1.` })
+      frames.push(frame({ pythonLine: pyLine('return -1'), phase: 'done', activeLine: L('return -1'), violator: value, checking: value, result: -1, message: `${value} appears ${c} times, more than n = ${n}, so it cannot avoid every forbidden position. Result -1.` }))
       return { input: { nums, forbidden }, result: -1, frames }
     }
   }
-  const conflict = new Map()
-  let total = 0
   for (let i = 0; i < n; i++) {
     const hit = nums[i] === forbidden[i]
     if (hit) {
       conflict.set(nums[i], (conflict.get(nums[i]) || 0) + 1)
+      bad.push(i)
       total++
     }
-    frames.push({ pythonLine: pyLine('if nums[i] == forbidden[i]'), phase: 'conflict', activeLine: L('nums at i equals forbidden at i'), at: i, conflict: hit, total, most: null, message: hit ? `Index ${i} holds forbidden value ${nums[i]}; conflicts so far: ${total}.` : `Index ${i} is safe.` })
+    frames.push(frame({ pythonLine: pyLine('if nums[i] == forbidden[i]'), phase: 'conflict', activeLine: L('nums at i equals forbidden at i'), at: i, conflict: hit, total, message: hit ? `Index ${i} holds forbidden value ${nums[i]}; conflicts so far: ${total}.` : `Index ${i} is safe.` }))
   }
   if (total === 0) {
-    frames.push({ pythonLine: pyLine('return 0'), phase: 'done', activeLine: L('return 0'), at: -1, conflict: false, total, most: null, result: 0, message: 'No index conflicts. Result 0.' })
+    frames.push(frame({ pythonLine: pyLine('return 0'), phase: 'done', activeLine: L('return 0'), total, most: 0, half: 0, chosen: 'none', result: 0, message: 'No index conflicts. Result 0.' }))
     return { input: { nums, forbidden }, result: 0, frames }
   }
   const most = Math.max(...conflict.values())
-  frames.push({ pythonLine: pyLine('most = max(conflict.values())'), phase: 'tally', activeLine: L('largest conflict count'), at: -1, conflict: false, total, most, message: `Conflicts total ${total}; the largest value group has ${most}.` })
-  const result = Math.max(Math.floor((total + 1) / 2), most)
-  frames.push({ pythonLine: pyLine('return max('), phase: 'done', activeLine: L('return the larger of'), at: -1, conflict: false, total, most, result, message: `max(ceil(${total} / 2), ${most}) = ${result}.` })
+  const half = Math.ceil(total / 2)
+  frames.push(frame({ pythonLine: pyLine('most = max(conflict.values())'), phase: 'tally', activeLine: L('largest conflict count'), total, most, half, message: `Conflicts total ${total}, so ceil(${total} / 2) = ${half}; the largest value group has ${most}.` }))
+  const result = Math.max(half, most)
+  const chosen = most > half ? 'group' : 'half'
+  const why = chosen === 'group'
+    ? `the largest group (${most}) is bigger than half the conflicts`
+    : `half the conflicts (${half}) is at least the largest group (${most})`
+  frames.push(frame({ pythonLine: pyLine('return max((total'), phase: 'done', activeLine: L('return the larger of'), total, most, half, chosen, result, message: `max(${half}, ${most}) = ${result}; ${why}.` }))
   return { input: { nums, forbidden }, result, frames }
 }
 
@@ -56,7 +73,12 @@ export const code = `minimum swaps to avoid forbidden values
   if the total is 0 then return 0
   let most be the largest conflict count of any value
   return the larger of ceil(total / 2) and most`.split('\n').map((text, index) => ({ line: index + 1, text }))
-const L = s => code.findIndex(c => c.text.includes(s)) + 1
+
+function L(s) {
+  const index = code.findIndex(c => c.text.includes(s))
+  if (index < 0) throw new Error(`Missing pseudocode line: ${s}`)
+  return index + 1
+}
 
 export const python = `def minimum_swaps(nums, forbidden):
     n = len(nums)
@@ -82,4 +104,9 @@ export const python = `def minimum_swaps(nums, forbidden):
 if __name__ == "__main__":
     print(minimum_swaps([1, 2, 3], [3, 2, 1]))
 `
-const pyLine = s => python.split('\n').findIndex(l => l.includes(s)) + 1
+
+function pyLine(s) {
+  const index = python.split('\n').findIndex(l => l.includes(s))
+  if (index < 0) throw new Error(`Missing python line: ${s}`)
+  return index + 1
+}

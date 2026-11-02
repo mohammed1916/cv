@@ -1,13 +1,13 @@
 import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
-import IndexedSequence from '../../components/shared/IndexedSequence'
+import ConflictView from './ConflictView'
 import { buildTrace, parseInput, code, python } from './algorithm'
 
 const definition = {
   phases: [
     { id: 'count', label: 'Count', description: 'Tally values from nums and forbidden together.' },
-    { id: 'limit', label: 'Limit', description: 'Check that no value is too crowded to place.' },
+    { id: 'limit', label: 'Capacity', description: 'Check that no value exceeds the capacity n.' },
     { id: 'conflict', label: 'Conflicts', description: 'Find indices where nums matches forbidden.' },
-    { id: 'tally', label: 'Groups', description: 'Find the largest group of conflicts.' },
+    { id: 'tally', label: 'Bounds', description: 'Compute ceil(conflicts / 2) and the largest group.' },
     { id: 'done', label: 'Result', description: 'Report the minimum swaps or -1.' },
   ],
   parse: parseInput, build: buildTrace, code, python,
@@ -23,14 +23,8 @@ const definition = {
 }
 
 export default function MinimumSwapsToAvoidForbiddenValues() {
-  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
-    <IndexedSequence label="nums" length={run.input.nums.length} valueAt={i => run.input.nums[i]} active={step.at}
-      roleAt={i => (step.conflict && i === step.at ? 'conflict' : '')} />
-    <IndexedSequence label="forbidden" length={run.input.forbidden.length} valueAt={i => run.input.forbidden[i]} active={step.at}
-      roleAt={i => (step.conflict && i === step.at ? 'conflict' : '')} />
-    <output aria-label="Swap count state">{`conflicts = ${step.total ?? 'counting'}, largest group = ${step.most ?? 'pending'}, ${step.result !== undefined ? `result = ${step.result}` : 'running'}`}</output>
-  </>} renderReasoning={() => <>
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <ConflictView run={run} step={step} />} renderReasoning={() => <>
     <p>An index conflicts when nums and forbidden hold the same value there. Each swap can fix at most two conflicts, and only when the two conflicts hold different values.</p>
-    <p>If the largest value group is bigger than half the conflicts, the leftover conflicts of that value each need their own swap, so the answer is that group size.</p>
+    <p>The answer is the larger of two bounds: ceil(conflicts / 2), and the size of the largest group of conflicts sharing one value. A value that appears more than n times across both arrays cannot be placed at all, so the answer is -1.</p>
   </>} />
 }
