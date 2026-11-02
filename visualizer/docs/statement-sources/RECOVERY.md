@@ -48,3 +48,7 @@ This requires the historical commit to be present (a shallow clone may need its 
 6. Do not tell the user all statements are stored: 1,089 current catalog entries still lack full text. Do not ask them to paste statements already recovered locally.
 
 This recovery corrects the previous source inventory; it does not certify all statements, solve the remaining problems or complete browser acceptance.
+
+## Manual statement inbox
+
+The user can supply missing full statements in `local-reference/leetcode/manual/<number>.txt`. [Start with the free list](../../local-reference/leetcode/manual/FREE.md), or [read the paste instructions](../../local-reference/leetcode/manual/README.md). There are 304 free and 785 paid targets from this recovery inventory. Setup: `python3 scripts/prepare-manual-statement-inbox.py`; it never overwrites existing text files. Review non-empty pastes before marking requirements complete, and keep them reference-only. A filled file is not automatically a verified statement or an implemented problem.
