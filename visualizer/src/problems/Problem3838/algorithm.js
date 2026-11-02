@@ -12,7 +12,7 @@ export function parseInput(text) {
 export function buildTrace({ words, weights }) {
   const frames = []
   const out = []
-  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start an empty result'), word: -1, letter: -1, total: 0, message: 'Start with an empty result string.' })
+  frames.push({ pythonLine: 2, phase: 'start', activeLine: L('start with an empty result'), word: -1, letter: -1, total: 0, message: 'Start with an empty result string.' })
   for (let w = 0; w < words.length; w++) {
     const word = words[w]
     let total = 0

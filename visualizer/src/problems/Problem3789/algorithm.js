@@ -27,7 +27,7 @@ export function buildTrace({ cost1, cost2, costBoth, need1, need2 }) {
     const only2 = Math.max(0, need2 - both)
     const total = both * costBoth + only1 * cost1 + only2 * cost2
     frames.push({ pythonLine: 3, phase: 'candidate', activeLine: L('for each number both'), both, total: null, best, message: `Try ${both} unit${both === 1 ? '' : 's'} that supply both requirements.` })
-    frames.push({ pythonLine: 5, phase: 'split', activeLine: L('only2 is max'), both, total: null, best, message: `Buy ${only1} unit${only1 === 1 ? '' : 's'} for requirement 1 and ${only2} for requirement 2.` })
+    frames.push({ pythonLine: 5, phase: 'split', activeLine: L('only2 is the larger'), both, total: null, best, message: `Buy ${only1} unit${only1 === 1 ? '' : 's'} for requirement 1 and ${only2} for requirement 2.` })
     frames.push({ pythonLine: 6, phase: 'cost', activeLine: L('total is'), both, total, best, message: `Total cost is ${total}.` })
     const better = best === null || total < best
     frames.push({ pythonLine: 7, phase: 'compare', activeLine: L('if best is unset'), both, total, best, message: better ? `${total} beats ${best === null ? 'no cost yet' : best}.` : `${total} is not below ${best}.` })

@@ -15,7 +15,7 @@ export function buildTrace({ s, t, flipCost, swapCost, crossCost }) {
   const frames = []
   let typeA = 0
   let typeB = 0
-  frames.push({ pythonLine: at('type_a = 0'), phase: 'start', activeLine: L('count the mismatches'), index: -1, mixed: -1, best: null, message: 'Start with no mismatches counted.' })
+  frames.push({ pythonLine: at('type_a = 0'), phase: 'start', activeLine: L('count type A mismatches'), index: -1, mixed: -1, best: null, message: 'Start with no mismatches counted.' })
   for (let i = 0; i < s.length; i++) {
     let kind
     if (s[i] === '0' && t[i] === '1') { typeA++; kind = 'A' }
@@ -28,8 +28,8 @@ export function buildTrace({ s, t, flipCost, swapCost, crossCost }) {
   }
   const mixedCost = Math.min(swapCost, 2 * flipCost)
   const sameCost = Math.min(2 * flipCost, crossCost + swapCost)
-  frames.push({ pythonLine: at('mixed_cost = min'), phase: 'costs', activeLine: L('price a mixed pair'), index: -1, mixed: -1, best: null, typeA, typeB, mixedCost, sameCost, message: `Mixed pair costs ${mixedCost}; same-type pair costs ${sameCost}.` })
-  frames.push({ pythonLine: at('best = None'), phase: 'costs', activeLine: L('start with no best'), index: -1, mixed: -1, best: null, typeA, typeB, mixedCost, sameCost, message: 'No candidate is recorded yet.' })
+  frames.push({ pythonLine: at('mixed_cost = min'), phase: 'costs', activeLine: L('mixed pair cost = min'), index: -1, mixed: -1, best: null, typeA, typeB, mixedCost, sameCost, message: `Mixed pair costs ${mixedCost}; same-type pair costs ${sameCost}.` })
+  frames.push({ pythonLine: at('best = None'), phase: 'costs', activeLine: L('best = nothing'), index: -1, mixed: -1, best: null, typeA, typeB, mixedCost, sameCost, message: 'No candidate is recorded yet.' })
   let best = null
   for (let mixed = 0; mixed <= Math.min(typeA, typeB); mixed++) {
     const a = typeA - mixed
@@ -37,13 +37,13 @@ export function buildTrace({ s, t, flipCost, swapCost, crossCost }) {
     let cost = mixed * mixedCost
     cost += Math.floor(a / 2) * sameCost + (a % 2) * flipCost
     cost += Math.floor(b / 2) * sameCost + (b % 2) * flipCost
-    frames.push({ pythonLine: at('cost = mixed * mixed_cost'), phase: 'try', activeLine: L('pair mixed mismatches first'), index: -1, mixed, best, typeA, typeB, cost, message: `Pair ${mixed} mixed mismatch${mixed === 1 ? '' : 'es'} and price the rest: total ${cost}.` })
+    frames.push({ pythonLine: at('cost = mixed * mixed_cost'), phase: 'try', activeLine: L('cost = m times mixed pair cost'), index: -1, mixed, best, typeA, typeB, cost, message: `Pair ${mixed} mixed mismatch${mixed === 1 ? '' : 'es'} and price the rest: total ${cost}.` })
     if (best === null || cost < best) {
       best = cost
       frames.push({ pythonLine: at('best = cost'), phase: 'best', activeLine: L('keep the cheapest'), index: -1, mixed, best, typeA, typeB, cost, message: `New best is ${best}.` })
     }
   }
-  frames.push({ pythonLine: at('return best'), phase: 'done', activeLine: L('return the cheapest'), index: -1, mixed: -1, best, typeA, typeB, message: `Minimum cost is ${best}.` })
+  frames.push({ pythonLine: at('return best'), phase: 'done', activeLine: L('return best'), index: -1, mixed: -1, best, typeA, typeB, message: `Minimum cost is ${best}.` })
   return { input: { s, t, flipCost, swapCost, crossCost }, result: best, frames }
 }
 
