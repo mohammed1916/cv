@@ -1,0 +1,25 @@
+.ds-view { display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--text, #1f2937); }
+.ds-empty { color: #64748b; }
+.ds-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.ds-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 10px; border: 1px solid #e2e8f0; }
+.ds-row--current { border-color: #0f766e; background: #ecfdf5; }
+.ds-row--done { opacity: 0.6; }
+.ds-code { display: inline-flex; border-radius: 8px; overflow: hidden; font-family: ui-monospace, monospace; font-size: 18px; font-weight: 700; }
+.ds-code span { padding: 4px 8px; }
+.ds-x { background: #dbeafe; color: #1e3a8a; }
+.ds-y { background: #ffedd5; color: #9a3412; }
+.ds-w { background: #ede9fe; color: #5b21b6; }
+.ds-meaning { color: #475569; }
+.ds-legend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px; color: #475569; }
+.ds-key { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; }
+.ds-key--x { background: #dbeafe; }
+.ds-key--y { background: #ffedd5; }
+.ds-key--w { background: #ede9fe; }
+.ds-power h4 { margin: 0 0 6px; font-size: 13px; }
+.ds-ladder { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+.ds-ladder table { border-collapse: collapse; }
+.ds-ladder th, .ds-ladder td { text-align: left; padding: 2px 8px; border-bottom: 1px solid #e2e8f0; font-size: 13px; }
+.ds-bits { display: flex; flex-wrap: wrap; gap: 4px; }
+.ds-bit { min-width: 22px; text-align: center; padding: 2px 4px; border-radius: 4px; background: #f1f5f9; font-family: ui-monospace, monospace; }
+.ds-bit--on { background: #0f766e; color: #fff; }
+.ds-total { margin: 0; }

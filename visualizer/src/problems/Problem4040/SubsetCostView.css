@@ -1,0 +1,17 @@
+.sc-view { display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--text, #1f2937); }
+.sc-empty { color: #64748b; }
+.sc-elements { display: flex; gap: 6px; flex-wrap: wrap; }
+.sc-el { min-width: 36px; text-align: center; padding: 4px 8px; border-radius: 8px; border: 2px solid #cbd5e1; font-weight: 700; background: #f8fafc; }
+.sc-el--now { border-color: #2563eb; background: #dbeafe; }
+.sc-el--used { border-color: #94a3b8; color: #64748b; }
+.sc-options h4 { margin: 0 0 4px; font-size: 13px; }
+.sc-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sc-chip { padding: 2px 8px; border-radius: 999px; background: #ede9fe; font-size: 12px; }
+.sc-table-wrap { overflow-x: auto; }
+.sc-table { border-collapse: collapse; }
+.sc-table th, .sc-table td { border: 1px solid #e2e8f0; padding: 4px 6px; text-align: center; min-width: 30px; font-size: 13px; }
+.sc-table thead th { background: #f1f5f9; }
+.sc-cell--inf { color: #94a3b8; }
+.sc-cell--changed { background: #fef3c7; font-weight: 700; }
+.sc-cell--target { outline: 2px solid #0f766e; }
+.sc-status { margin: 0; }

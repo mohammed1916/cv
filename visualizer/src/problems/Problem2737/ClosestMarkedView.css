@@ -1,0 +1,28 @@
+.cm-view { display: flex; flex-direction: column; gap: 10px; color: var(--text, #1f2937); font-size: 14px; }
+.cm-empty { color: #64748b; }
+.cm-head { display: flex; flex-wrap: wrap; gap: 6px; }
+.cm-chip { border: 1px solid #cbd5e1; border-radius: 999px; padding: 2px 10px; background: #f8fafc; }
+.cm-chip--strong { border-color: #0f766e; background: #ccfbf1; font-weight: 600; }
+.cm-body { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+.cm-graph { width: min(340px, 100%); height: auto; background: #f8fafc; border-radius: 12px; }
+.cm-graph line { stroke: #94a3b8; stroke-width: 1.6; }
+.cm-graph text { font-size: 11px; fill: #475569; }
+.cm-arrowhead { fill: #94a3b8; }
+.cm-arrowhead--hot { fill: #ea580c; }
+.cm-edge--hot line { stroke: #ea580c; stroke-width: 2.6; }
+.cm-edge--hot text { fill: #c2410c; font-weight: 700; }
+.cm-node circle { fill: #e2e8f0; stroke: #64748b; stroke-width: 1.5; }
+.cm-node--settled circle { fill: #bfdbfe; stroke: #1d4ed8; }
+.cm-node--current circle { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
+.cm-node--found circle { fill: #bbf7d0; stroke: #15803d; stroke-width: 3; }
+.cm-node--marked circle { fill: #f5f3ff; stroke: #7c3aed; }
+.cm-node--marked-settled circle { fill: #ddd6fe; stroke: #6d28d9; stroke-width: 2; }
+.cm-ring { fill: none !important; stroke: #7c3aed !important; stroke-dasharray: 4 3; }
+.cm-id { font-weight: 700; text-anchor: middle; font-size: 13px !important; fill: #0f172a !important; }
+.cm-dist { text-anchor: middle; font-size: 11px !important; }
+.cm-table { border-collapse: collapse; min-width: 200px; flex: 1; }
+.cm-table th, .cm-table td { border-bottom: 1px solid #e2e8f0; padding: 4px 8px; text-align: left; }
+.cm-row--current { background: #fef3c7; }
+.cm-relax, .cm-answer { margin: 0; }
+.cm-answer { font-weight: 700; color: #15803d; }
+@media (max-width: 480px) { .cm-body { flex-direction: column; } }
