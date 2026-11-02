@@ -1,0 +1,34 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
+
+const definition = {
+  phases: [
+    { id: 'start', label: 'Start', description: 'Copy the array and count zero operations.' },
+    { id: 'check', label: 'Check', description: 'Look for an adjacent decrease.' },
+    { id: 'pick', label: 'Pick pair', description: 'Track the adjacent pair with the smallest sum.' },
+    { id: 'scan', label: 'Scan', description: 'Compare the next adjacent pair.' },
+    { id: 'merge', label: 'Merge', description: 'Replace the chosen pair with its sum.' },
+    { id: 'done', label: 'Result', description: 'Report the number of merges.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'JSON array of integers (1 to 12 entries)',
+  url: 'https://leetcode.com/problems/minimum-pair-removal-to-sort-array-ii/',
+  complexity: 'O(n^2) time with this direct simulation and O(n) extra space. The official limit is larger, so the visualization caps the input at 12 values.',
+  examples: [
+    { label: 'Example 1', input: '[5,2,3,1]' },
+    { label: 'Example 2', input: '[1,2,2]' },
+    { label: 'Example 3', input: '[2,1,2,0]' },
+  ],
+}
+
+export default function MinimumPairRemovalToSortArrayII() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="array" length={step.arr.length} valueAt={i => step.arr[i]} active={step.at >= 0 ? step.at : -1}
+      roleAt={i => (step.pair && step.pair.includes(i) ? 'pair' : '')} />
+    <output aria-label="Operations">{`operations = ${step.operations}${step.phase === 'done' ? ', sorted' : ''}`}</output>
+  </>} renderReasoning={() => <>
+    <p>Each merge replaces an adjacent pair with its sum. Choosing the smallest sum, leftmost on ties, is the rule the problem asks for, so the simulation follows it exactly.</p>
+    <p>The loop stops as soon as no adjacent pair decreases, which is the non-decreasing condition.</p>
+  </>} />
+}

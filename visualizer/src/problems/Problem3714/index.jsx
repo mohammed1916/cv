@@ -1,0 +1,33 @@
+import AlgorithmWorkspace from '../../components/shared/AlgorithmWorkspace'
+import IndexedSequence from '../../components/shared/IndexedSequence'
+import { buildTrace, parseInput, code, python } from './algorithm'
+
+const definition = {
+  phases: [
+    { id: 'start', label: 'Start', description: 'No balanced substring is known yet.' },
+    { id: 'window', label: 'Start index', description: 'Fix the first index of the substring.' },
+    { id: 'extend', label: 'Extend', description: 'Add the next letter and update its count.' },
+    { id: 'check', label: 'Check', description: 'Test whether every count is equal.' },
+    { id: 'update', label: 'Update', description: 'Keep the longer balanced substring.' },
+    { id: 'done', label: 'Result', description: 'Report the longest balanced length.' },
+  ],
+  parse: parseInput, build: buildTrace, code, python,
+  inputLabel: 'Object with s (lowercase letters)',
+  url: 'https://leetcode.com/problems/longest-balanced-substring-i/',
+  complexity: 'O(n^2) substrings in this trace, each checked from running counts. This trace scans every substring directly, so it is a teaching model rather than the large-input solution.',
+  examples: [
+    { label: 'Whole string', input: '{"s":"abba"}' },
+    { label: 'Prefix wins', input: '{"s":"abbac"}' },
+  ],
+}
+
+export default function LongestBalancedSubstringII() {
+  return <AlgorithmWorkspace definition={definition} renderVisual={({ run, step }) => <>
+    <IndexedSequence label="s" length={run.input.s.length} valueAt={i => run.input.s[i]} active={step.at}
+      roleAt={i => (step.start >= 0 && step.at >= 0 && i >= step.start && i <= step.at ? 'window' : '')} />
+    <output aria-label="Balance state">{`start ${step.start >= 0 ? step.start : 'none'}, best ${step.best}, ${step.ok === false ? 'unbalanced' : step.ok ? 'balanced' : 'scanning'}`}</output>
+  </>} renderReasoning={() => <>
+    <p>Every substring is considered by fixing its start and growing its end, so the letter counts can be updated one letter at a time.</p>
+    <p>A substring is balanced exactly when all letters that appear in it have the same count.</p>
+  </>} />
+}
