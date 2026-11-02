@@ -1,0 +1,8 @@
+.pl-view { margin: 0; color: var(--text, #1f2937); }
+.pl-view table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.pl-view th, .pl-view td { border: 1px solid #cbd5e1; padding: 4px 6px; text-align: center; }
+.pl-view thead th { background: #f1f5f9; }
+.pl-row--copied td:last-child { background: #dcfce7; font-weight: 600; }
+.pl-row--now { background: #fde68a; }
+.pl-row--now th, .pl-row--now td { font-weight: 700; }
+.pl-view figcaption { font-size: 13px; margin-top: 6px; }

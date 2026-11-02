@@ -1,0 +1,11 @@
+.td-view { margin: 0; color: var(--text, #1f2937); }
+.td-view svg { width: 100%; height: auto; display: block; }
+.td-edge { stroke: #94a3b8; stroke-width: 2; }
+.td-node { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; }
+.td-node--current { stroke: #111827; stroke-width: 3; }
+.td-node--zero { fill: #fecaca; stroke: #dc2626; }
+.td-node--removed { fill: #e5e7eb; stroke: #6b7280; opacity: 0.7; }
+.td-text { font-size: 13px; font-weight: 700; fill: #1f2937; }
+.td-sum, .td-tag { font-size: 10px; fill: #4b5563; }
+.td-cross { font-size: 18px; fill: #6b7280; }
+.td-view figcaption { font-size: 13px; margin-top: 6px; }

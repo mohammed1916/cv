@@ -1,0 +1,9 @@
+.lc-view { margin: 0; color: var(--text, #1f2937); overflow-x: auto; }
+.lc-view table { border-collapse: collapse; font-size: 13px; width: 100%; }
+.lc-view th, .lc-view td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: center; }
+.lc-view thead th small, .lc-from { display: block; font-size: 10px; opacity: 0.7; font-weight: 400; }
+.lc-cost { font-size: 16px; font-weight: 700; }
+.lc-cell--now { background: #e0e7ff; }
+.lc-cell--route { outline: 3px solid #ca8a04; outline-offset: -3px; background: #fef9c3; }
+.lc-path { font-size: 13px; margin: 8px 0 0; }
+.lc-view figcaption { font-size: 13px; margin-top: 6px; }

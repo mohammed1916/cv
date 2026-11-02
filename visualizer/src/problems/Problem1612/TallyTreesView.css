@@ -1,0 +1,13 @@
+.tt-view { margin: 0; color: var(--text, #1f2937); }
+.tt-trees { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tt-trees h4 { margin: 0 0 4px; font-size: 13px; }
+.tt-trees svg { width: 100%; height: auto; display: block; }
+.tt-edge { stroke: #94a3b8; stroke-width: 2; }
+.tt-node--plus { fill: #ede9fe; stroke: #6d28d9; stroke-width: 2; }
+.tt-node--letter { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
+.tt-node--now { fill: #fde68a; stroke: #b45309; stroke-width: 3; }
+.tt-text { font-size: 13px; font-weight: 700; fill: #1f2937; }
+.tt-table { margin-top: 10px; border-collapse: collapse; font-size: 13px; }
+.tt-table th, .tt-table td { border: 1px solid #cbd5e1; padding: 3px 10px; text-align: center; }
+.tt-view figcaption { font-size: 13px; margin-top: 6px; }
+@media (max-width: 520px) { .tt-trees { grid-template-columns: 1fr; } }
