@@ -1,0 +1,7 @@
+.budget-view { display: grid; gap: 10px; overflow-x: auto; }
+.budget-table { border-collapse: collapse; font-size: 14px; }
+.budget-table th, .budget-table td { border: 1px solid #cbd5e1; padding: 4px 8px; text-align: center; min-width: 36px; }
+.budget-table td.is-cell { background: #fef9c3; font-weight: 700; }
+.budget-table td.is-from { background: #dbeafe; }
+.budget-table tr.is-stock th { background: #f1f5f9; }
+.budget-caption, .budget-detail { margin: 0; font-size: 14px; }

@@ -1,0 +1,10 @@
+.mirror-view { display: grid; gap: 10px; }
+.mirror-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.mirror-char { width: 32px; height: 36px; display: grid; place-items: center; border-radius: 6px; border: 2px solid #cbd5e1; font-family: ui-monospace, monospace; font-weight: 700; }
+.mirror-char--pair-ok { border-color: #15803d; background: #dcfce7; }
+.mirror-char--pair-bad { border-color: #b91c1c; background: #fee2e2; }
+.mirror-char--active { box-shadow: 0 0 0 3px #fde68a; }
+.mirror-budget { display: flex; gap: 6px; align-items: center; font-size: 14px; }
+.mirror-budget__slot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #94a3b8; display: inline-block; }
+.mirror-budget__slot--used { background: #b91c1c; border-color: #b91c1c; }
+.mirror-caption, .mirror-verdict { margin: 0; font-size: 14px; }

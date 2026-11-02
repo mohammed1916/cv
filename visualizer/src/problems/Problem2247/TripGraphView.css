@@ -1,0 +1,10 @@
+.trip-view { display: grid; gap: 10px; }
+.trip-svg { width: 100%; max-width: 380px; height: auto; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; }
+.trip-edge { stroke: #94a3b8; stroke-width: 2; }
+.trip-edge--best { stroke: #15803d; stroke-width: 4; }
+.trip-edge--current { stroke: #ea580c; stroke-width: 4; }
+.trip-label { font-size: 12px; fill: #334155; }
+.trip-node { fill: #e2e8f0; stroke: #334155; stroke-width: 1.5; }
+.trip-node--visited { fill: #bfdbfe; }
+.trip-node--end { fill: #facc15; }
+.trip-text, .trip-caption { margin: 0; font-size: 14px; }

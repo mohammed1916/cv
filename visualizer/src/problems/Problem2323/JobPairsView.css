@@ -1,0 +1,7 @@
+.jobs-view { display: grid; gap: 10px; }
+.jobs-table { border-collapse: collapse; font-size: 14px; }
+.jobs-table th, .jobs-table td { border: 1px solid #cbd5e1; padding: 4px 10px; text-align: right; }
+.jobs-bar { display: inline-block; height: 12px; background: #fdba74; vertical-align: middle; border-radius: 3px; }
+.jobs-table tr.is-current td { background: #fef9c3; }
+.jobs-table tr.is-max td { font-weight: 700; color: #c2410c; }
+.jobs-caption { margin: 0; font-size: 14px; }

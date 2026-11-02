@@ -1,0 +1,10 @@
+.swap-view { display: grid; gap: 10px; }
+.swap-row { display: flex; gap: 6px; }
+.swap-tile { width: 44px; height: 48px; display: grid; place-items: center; border-radius: 8px; border: 2px solid #cbd5e1; font-weight: 700; font-family: ui-monospace, monospace; background: #f8fafc; }
+.swap-tile--min { background: #dbeafe; border-color: #1d4ed8; }
+.swap-tile--max { background: #fee2e2; border-color: #b91c1c; }
+.swap-tile--moving { box-shadow: 0 0 0 3px #fde68a; }
+.swap-tile--swapped { border-style: dashed; }
+.swap-index { display: flex; gap: 6px; font-size: 12px; color: #64748b; }
+.swap-index span { width: 44px; text-align: center; }
+.swap-caption, .swap-count { margin: 0; font-size: 14px; }

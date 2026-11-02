@@ -1,0 +1,10 @@
+.decomp-view { display: grid; gap: 12px; }
+.decomp-digits { display: flex; flex-wrap: wrap; gap: 6px; }
+.decomp-digit { width: 34px; height: 40px; display: grid; place-items: center; border-radius: 6px; border: 2px solid #cbd5e1; font-weight: 700; }
+.decomp-digit--span { border-color: #7c3aed; background: #ede9fe; }
+.decomp-digit--ok { border-color: #15803d; background: #dcfce7; }
+.decomp-digit--bad { border-color: #b91c1c; background: #fee2e2; }
+.decomp-table { border-collapse: collapse; font-size: 14px; }
+.decomp-table td, .decomp-table th { border: 1px solid #cbd5e1; padding: 4px 10px; text-align: center; }
+.decomp-table tr.is-current td { background: #fef3c7; }
+.decomp-caption { margin: 0; font-size: 14px; }

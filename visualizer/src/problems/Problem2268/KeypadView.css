@@ -1,0 +1,8 @@
+.keypad-view { display: grid; gap: 10px; }
+.keypad { display: grid; grid-template-columns: repeat(3, 84px); gap: 8px; width: max-content; }
+.keypad-key { border: 2px solid #cbd5e1; border-radius: 10px; padding: 6px; min-height: 70px; background: #f8fafc; font-size: 12px; }
+.keypad-key__num { font-weight: 700; font-size: 16px; }
+.keypad-key--active { border-color: #0891b2; box-shadow: 0 0 0 3px #a5f3fc; }
+.keypad-letter { display: block; font-family: ui-monospace, monospace; }
+.keypad-letter--new { font-weight: 700; color: #0e7490; }
+.keypad-caption, .keypad-total { margin: 0; font-size: 14px; }

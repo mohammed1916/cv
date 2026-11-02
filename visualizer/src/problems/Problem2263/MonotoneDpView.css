@@ -1,0 +1,6 @@
+.dp-view { display: grid; gap: 10px; overflow-x: auto; }
+.dp-table { border-collapse: collapse; font-size: 14px; }
+.dp-table th, .dp-table td { border: 1px solid #cbd5e1; padding: 4px 8px; text-align: center; min-width: 44px; }
+.dp-table td.is-min { background: #dcfce7; font-weight: 700; }
+.dp-table tr.is-current td { outline: 2px solid #f59e0b; outline-offset: -2px; }
+.dp-caption, .dp-verdict { margin: 0; font-size: 14px; }

@@ -1,0 +1,8 @@
+.cover-view { display: grid; gap: 10px; }
+.cover-svg { width: 100%; max-width: 420px; height: auto; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; }
+.cover-point { fill: #94a3b8; stroke: #334155; stroke-width: 1; }
+.cover-point--covered { fill: #16a34a; }
+.cover-point--target { fill: #f59e0b; stroke: #92400e; stroke-width: 2; }
+.cover-line { stroke: #db2777; stroke-width: 2.5; stroke-dasharray: 6 4; }
+.cover-line--single { stroke: #64748b; }
+.cover-text, .cover-caption { margin: 0; font-size: 14px; }

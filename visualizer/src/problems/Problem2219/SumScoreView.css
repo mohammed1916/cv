@@ -1,0 +1,11 @@
+.score-view { display: grid; gap: 10px; }
+.score-bars { display: flex; align-items: flex-end; gap: 6px; height: 170px; padding: 6px; border-bottom: 2px solid #334155; }
+.score-col { display: grid; justify-items: center; flex: 1; min-width: 28px; }
+.score-bar { width: 100%; background: #cbd5e1; border-radius: 4px 4px 0 0; }
+.score-bar--current { background: #facc15; }
+.score-value { font-size: 12px; font-family: ui-monospace, monospace; }
+.score-table { border-collapse: collapse; font-size: 14px; }
+.score-table td, .score-table th { border: 1px solid #cbd5e1; padding: 3px 8px; text-align: right; }
+.score-table tr.is-current td { background: #fef9c3; }
+.score-table tr.is-best td { font-weight: 700; color: #15803d; }
+.score-caption { margin: 0; font-size: 14px; }

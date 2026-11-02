@@ -1,0 +1,10 @@
+.tree-path-view { display: grid; gap: 10px; }
+.tree-svg { width: 100%; max-width: 380px; height: auto; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; }
+.tree-edge { stroke: #cbd5e1; stroke-width: 2; }
+.tree-edge--path { stroke: #4f46e5; stroke-width: 4; }
+.tree-node { fill: #fff; stroke: #64748b; stroke-width: 1.5; }
+.tree-node--path { fill: #e0e7ff; stroke: #4f46e5; }
+.tree-node--query { fill: #fde68a; stroke: #b45309; stroke-width: 2.5; }
+.tree-node--pick { fill: #bbf7d0; stroke: #15803d; stroke-width: 3; }
+.tree-label { font-size: 11px; fill: #0f172a; text-anchor: middle; }
+.tree-text, .tree-caption { margin: 0; font-size: 14px; }
